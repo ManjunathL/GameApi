@@ -3,8 +3,9 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'bootstrap',
   'vm'
-], function ($, _, Backbone, Vm) {
+], function ($, _, Backbone, Bootstrap, Vm) {
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Default - catch all

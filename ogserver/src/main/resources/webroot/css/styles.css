@@ -5,6 +5,11 @@
     width: 100%;
 }
 
+.header-thin a {
+    color: #CCC;
+    font-size: 12px;
+}
+
 .navbar-nav > li > a {
     padding-top:20px !important;
     padding-bottom:0 !important;
