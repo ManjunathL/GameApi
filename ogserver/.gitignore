@@ -5,6 +5,8 @@ bin/
 # ignore all target directories
 build/
 
+main/
+
 .vertx/
 
 .gradle/

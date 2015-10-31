@@ -59,7 +59,7 @@ public class ApiServerVerticle extends AbstractVerticle
 
 	private void setupStaticHandler(Router router)
 	{
-		router.route(HttpMethod.GET, "/static/*").handler(StaticHandler.create());
+		router.route(HttpMethod.GET, "/*").handler(StaticHandler.create());
 	}
 	
 	private void setupApiHandler(Router router)
