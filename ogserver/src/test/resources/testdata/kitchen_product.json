@@ -1,0 +1,165 @@
+{
+  "id": "56383ff69951036a2732566f",
+  "code": "SJDH478SJD",
+  "category": "Kitchen",
+  "categoryId": "23847623746",
+  "subCategory": "L Shaped Kitchen",
+  "subCategoryId": "239487283974",
+  "name": "Albatross L-Shaped Kitchen",
+  "designer": "Ram Prasad",
+  "designerId": "12837198237",
+  "width": "8'-2\"",
+  "height": "2'-9\"",
+  "depth": "2'-6\"",
+  "currency": "INR",
+  "description": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
+  "popularityScore": 6.5,
+  "relevanceRank": 2,
+  "shortlisted": 46,
+  "likes": 200,
+  "createdDate": "04-30-2015",
+  "delivery": {
+    "titleText": "45 Days Delivery Guarantee ",
+    "detailsTemplate": "templates/common/standard_delivery_45.html"
+  },
+  "warranty": {
+    "titleText": "5 years warranty",
+    "detailsTemplate": "templates/common/standard_warranty_5.html"
+  },
+  "paymentTerms": {
+    "titleText": "Payment Terms",
+    "detailsTemplate": "templates/common/standard_payment_terms.html"
+  },
+  "comments": [
+    {
+      "userName": "varunk",
+      "profileImageUrl": "http://cdn.xyz.com/1/users/72364.jpeg",
+      "datetime": "05-01-2015 11:00:00",
+      "comment": "Awesome product, love the neat look."
+    }
+  ],
+  "imageUrls": [
+    "http://cdn.shopify.com/s/files/1/0897/8058/products/Albatross_Mapple1_low.jpeg?v=1444393339"
+  ],
+  "accessories": [
+    {
+      "id": "2347627364",
+      "code": "ACC100",
+      "name": "Base Unit For Sink 2 Doors",
+      "quantity": 1,
+      "uom": "mm",
+      "width": "820",
+      "depth": "900",
+      "height": "560",
+      "price": "12,000",
+      "imageUrl": "http://cdn.xyz.com/1/accessories/72364.jpeg",
+      "alternateAccessories": [
+        {
+          "id": "3847583475",
+          "code": "ACC101",
+          "name": "Base Unit 3 Blum Tandem Drawers (Soft Close)",
+          "uom": "mm",
+          "width": "820",
+          "depth": "900",
+          "height": "560",
+          "price": "12,500",
+          "imageUrl": "http://cdn.xyz.com/1/accessories/72364.jpeg"
+        }
+      ]
+    },
+    {
+      "id": "78347854",
+      "code": "ACC102",
+      "name": "Base Unit Blind Corner For Cylinder 1 Door",
+      "quantity": 1,
+      "uom": "mm",
+      "width": "820",
+      "depth": "1100",
+      "height": "560",
+      "price": "10,000",
+      "imageUrl": "http://cdn.xyz.com/1/accessories/72364.jpeg",
+      "alternateAccessories": [
+      ]
+    }
+  ],
+  "appliances": [
+    {
+      "name": "Elica Four Burner",
+      "code": "AP100",
+      "type": "Hobs",
+      "subtype": "Integrated",
+      "imageUrl": "http://cdn.xyz.com/1/appliances/72364.jpeg",
+      "price": "8,900"
+    },
+    {
+      "name": "Elica Three Burner",
+      "code": "AP101",
+      "type": "Hobs",
+      "subtype": "Cooktop",
+      "imageUrl": "http://cdn.xyz.com/1/appliances/72364.jpeg",
+      "price": "9,990"
+    }
+  ],
+  "materialFinishColorPrices": [
+    {
+      "material": "Plywood",
+      "finish": "Laminate",
+      "colors": [
+        {
+          "name": "Cherry Red",
+          "hex": "#CC0202"
+        },
+        {
+          "name": "English Walnut",
+          "hex": "#443028"
+        }
+      ],
+      "price": "221,692.00"
+    },
+    {
+      "material": "Plywood",
+      "finish": "Membrane",
+      "colors": [
+        {
+          "name": "Cherry Red",
+          "hex": "#CC0202"
+        },
+        {
+          "name": "English Walnut",
+          "hex": "#443028"
+        }
+      ],
+      "price": "232,470.00"
+    },
+    {
+      "material": "MDF with Plywood",
+      "finish": "Laminate",
+      "colors": [
+        {
+          "name": "Cherry Red",
+          "hex": "#CC0202"
+        },
+        {
+          "name": "English Walnut",
+          "hex": "#443028"
+        }
+      ],
+      "price": "169,817.00"
+    },
+    {
+      "material": "MDF with Plywood",
+      "finish": "Membrane",
+      "colors": [
+        {
+          "name": "Cherry Red",
+          "hex": "#CC0202"
+        },
+        {
+          "name": "English Walnut",
+          "hex": "#443028"
+        }
+      ],
+      "price": "180,602.00"
+    }
+  ]
+}

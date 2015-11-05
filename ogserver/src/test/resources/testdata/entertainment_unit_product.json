@@ -1,0 +1,90 @@
+{
+  "id": "56383ff69951036a2732566f",
+  "code": "SJDH478SJD",
+  "category": "Living",
+  "categoryId": "23847623746",
+  "subCategory": "Entertainment Unit",
+  "subCategoryId": "239487283974",
+  "name": "Blunt Entertainment Unit",
+  "width": "8'-2\"",
+  "height": "2'-9\"",
+  "depth": "2'-6\"",
+  "currency": "INR",
+  "description": "Give your entertainment space a light wooden finished look with this TV unit design. Shelf and drawer space is unobtrusively woven under your TV unit. The shelves may be manipulated to create a new look each time. The simplicity of the design helps it blend easily to the theme of the room.",
+  "popularityScore": 8.1,
+  "relevanceRank": 12,
+  "shortlisted": 15,
+  "likes": 36,
+  "createdDate": "05-30-2015",
+  "delivery": {
+    "titleText": "45 Days Delivery Guarantee ",
+    "detailsTemplate": "templates/common/standard_delivery_45.html"
+  },
+  "warranty": {
+    "titleText": "5 years warranty",
+    "detailsTemplate": "templates/common/standard_warranty_5.html"
+  },
+  "paymentTerms": {
+    "titleText": "Payment Terms",
+    "detailsTemplate": "templates/common/standard_payment_terms.html"
+  },
+  "comments": [
+    {
+      "userName": "chiragsingh333",
+      "profileImageUrl": "http://cdn.xyz.com/1/users/72364.jpeg",
+      "datetime": "06-01-2015 11:00:00",
+      "comment": "Good!"
+    }
+  ],
+  "imageUrls": [
+    "http://cdn.shopify.com/s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
+    "http://cdn.shopify.com/s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
+  ],
+  "materialFinishColorPrices": [
+    {
+      "material": "MDF",
+      "finish": "Pre Lam",
+      "colors": [
+        {
+          "name": "Cherry Red",
+          "hex": "#CC0202"
+        },
+        {
+          "name": "English Walnut",
+          "hex": "#443028"
+        }
+      ],
+      "price": "16,000.00"
+    },
+    {
+      "material": "MDF",
+      "finish": "Membrane",
+      "colors": [
+        {
+          "name": "Cherry Red",
+          "hex": "#CC0202"
+        },
+        {
+          "name": "English Walnut",
+          "hex": "#443028"
+        }
+      ],
+      "price": "22,000.00"
+    },
+    {
+      "material": "MDF",
+      "finish": "Foil",
+      "colors": [
+        {
+          "name": "Cherry Red",
+          "hex": "#CC0202"
+        },
+        {
+          "name": "English Walnut",
+          "hex": "#443028"
+        }
+      ],
+      "price": "23,000.00"
+    }
+  ]
+}
