@@ -1,44 +1,37 @@
 {
   "id": "56383ff69951036a2732566f",
   "code": "SJDH478SJD",
-  "category": "Living",
-  "categoryId": "23847623746",
-  "subCategory": "Entertainment Unit",
-  "subCategoryId": "239487283974",
+  "categ": "Living",
+  "categId": "23847623746",
+  "subCateg": "Entertainment Unit",
+  "subCategId": "239487283974",
   "name": "Blunt Entertainment Unit",
-  "width": "8'-2\"",
-  "height": "2'-9\"",
-  "depth": "2'-6\"",
-  "currency": "INR",
-  "description": "Give your entertainment space a light wooden finished look with this TV unit design. Shelf and drawer space is unobtrusively woven under your TV unit. The shelves may be manipulated to create a new look each time. The simplicity of the design helps it blend easily to the theme of the room.",
-  "popularityScore": 8.1,
-  "relevanceRank": 12,
+  "w": "8'-2\"",
+  "h": "2'-9\"",
+  "d": "2'-6\"",
+  "curr": "INR",
+  "desc": "Give your entertainment space a light wooden finished look with this TV unit design. Shelf and drawer space is unobtrusively woven under your TV unit. The shelves may be manipulated to create a new look each time. The simplicity of the design helps it blend easily to the theme of the room.",
+  "popularity": 8.1,
+  "relevance": 12,
   "shortlisted": 15,
   "likes": 36,
-  "createdDate": "05-30-2015",
+  "createDt": "05-30-2015",
   "delivery": {
-    "titleText": "45 Days Delivery Guarantee ",
-    "detailsTemplate": "templates/common/standard_delivery_45.html"
+    "title": "45 Days Delivery Guarantee ",
+    "details": "templates/common/standard_delivery_45.html"
   },
   "warranty": {
-    "titleText": "5 years warranty",
-    "detailsTemplate": "templates/common/standard_warranty_5.html"
+    "title": "5 years warranty",
+    "details": "templates/common/standard_warranty_5.html"
   },
   "paymentTerms": {
-    "titleText": "Payment Terms",
-    "detailsTemplate": "templates/common/standard_payment_terms.html"
+    "title": "Payment Terms",
+    "details": "templates/common/standard_payment_terms.html"
   },
-  "comments": [
-    {
-      "userName": "chiragsingh333",
-      "profileImageUrl": "http://cdn.xyz.com/1/users/72364.jpeg",
-      "datetime": "06-01-2015 11:00:00",
-      "comment": "Good!"
-    }
-  ],
+  "commentsUrl": "http://...",
   "imageUrls": [
-    "http://cdn.shopify.com/s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
-    "http://cdn.shopify.com/s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
+    "s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
+    "s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
   ],
   "materialFinishColorPrices": [
     {
@@ -47,11 +40,11 @@
       "colors": [
         {
           "name": "Cherry Red",
-          "hex": "#CC0202"
+          "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "hex": "#443028"
+          "url": "1/c/278364.png"
         }
       ],
       "price": "16,000.00"
@@ -62,11 +55,11 @@
       "colors": [
         {
           "name": "Cherry Red",
-          "hex": "#CC0202"
+          "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "hex": "#443028"
+          "url": "1/c/278364.png"
         }
       ],
       "price": "22,000.00"
@@ -77,11 +70,11 @@
       "colors": [
         {
           "name": "Cherry Red",
-          "hex": "#CC0202"
+          "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "hex": "#443028"
+          "url": "1/c/278364.png"
         }
       ],
       "price": "23,000.00"

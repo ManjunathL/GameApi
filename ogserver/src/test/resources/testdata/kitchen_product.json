@@ -1,85 +1,45 @@
 {
   "id": "56383ff69951036a2732566f",
   "code": "SJDH478SJD",
-  "category": "Kitchen",
-  "categoryId": "23847623746",
-  "subCategory": "L Shaped Kitchen",
-  "subCategoryId": "239487283974",
+  "categ": "Kitchen",
+  "categId": "23847623746",
+  "subCateg": "L Shaped Kitchen",
+  "subCategId": "239487283974",
   "name": "Albatross L-Shaped Kitchen",
   "designer": "Ram Prasad",
   "designerId": "12837198237",
-  "width": "8'-2\"",
-  "height": "2'-9\"",
-  "depth": "2'-6\"",
-  "currency": "INR",
-  "description": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
-  "popularityScore": 6.5,
-  "relevanceRank": 2,
+  "w": "8'-2\"",
+  "h": "2'-9\"",
+  "d": "2'-6\"",
+  "curr": "INR",
+  "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
+  "popularity": 6.5,
+  "relevance": 2,
   "shortlisted": 46,
   "likes": 200,
-  "createdDate": "04-30-2015",
+  "createDt": "04-30-2015",
   "delivery": {
-    "titleText": "45 Days Delivery Guarantee ",
-    "detailsTemplate": "templates/common/standard_delivery_45.html"
+    "title": "45 Days Delivery Guarantee ",
+    "details": "templates/common/standard_delivery_45.html"
   },
   "warranty": {
-    "titleText": "5 years warranty",
-    "detailsTemplate": "templates/common/standard_warranty_5.html"
+    "title": "5 years warranty",
+    "details": "templates/common/standard_warranty_5.html"
   },
   "paymentTerms": {
-    "titleText": "Payment Terms",
-    "detailsTemplate": "templates/common/standard_payment_terms.html"
+    "title": "Payment Terms",
+    "details": "templates/common/standard_payment_terms.html"
   },
-  "comments": [
-    {
-      "userName": "varunk",
-      "profileImageUrl": "http://cdn.xyz.com/1/users/72364.jpeg",
-      "datetime": "05-01-2015 11:00:00",
-      "comment": "Awesome product, love the neat look."
-    }
-  ],
+  "commentsUrl": "http://...",
   "imageUrls": [
-    "http://cdn.shopify.com/s/files/1/0897/8058/products/Albatross_Mapple1_low.jpeg?v=1444393339"
+    "s/files/1/0897/8058/products/Albatross_Mapple1_low.jpeg?v=1444393339"
   ],
   "accessories": [
     {
-      "id": "2347627364",
-      "code": "ACC100",
-      "name": "Base Unit For Sink 2 Doors",
-      "quantity": 1,
-      "uom": "mm",
-      "width": "820",
-      "depth": "900",
-      "height": "560",
-      "price": "12,000",
-      "imageUrl": "http://cdn.xyz.com/1/accessories/72364.jpeg",
-      "alternateAccessories": [
-        {
-          "id": "3847583475",
-          "code": "ACC101",
-          "name": "Base Unit 3 Blum Tandem Drawers (Soft Close)",
-          "uom": "mm",
-          "width": "820",
-          "depth": "900",
-          "height": "560",
-          "price": "12,500",
-          "imageUrl": "http://cdn.xyz.com/1/accessories/72364.jpeg"
-        }
-      ]
+      "id": "23476264"
     },
     {
-      "id": "78347854",
-      "code": "ACC102",
-      "name": "Base Unit Blind Corner For Cylinder 1 Door",
-      "quantity": 1,
-      "uom": "mm",
-      "width": "820",
-      "depth": "1100",
-      "height": "560",
-      "price": "10,000",
-      "imageUrl": "http://cdn.xyz.com/1/accessories/72364.jpeg",
-      "alternateAccessories": [
-      ]
+      "id": "78347854"
     }
   ],
   "appliances": [
@@ -88,7 +48,7 @@
       "code": "AP100",
       "type": "Hobs",
       "subtype": "Integrated",
-      "imageUrl": "http://cdn.xyz.com/1/appliances/72364.jpeg",
+      "imageUrl": "1/appliances/72364.jpeg",
       "price": "8,900"
     },
     {
@@ -96,7 +56,7 @@
       "code": "AP101",
       "type": "Hobs",
       "subtype": "Cooktop",
-      "imageUrl": "http://cdn.xyz.com/1/appliances/72364.jpeg",
+      "imageUrl": "1/appliances/72364.jpeg",
       "price": "9,990"
     }
   ],
@@ -107,11 +67,11 @@
       "colors": [
         {
           "name": "Cherry Red",
-          "hex": "#CC0202"
+          "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "hex": "#443028"
+          "url": "1/c/2723364.png"
         }
       ],
       "price": "221,692.00"
@@ -122,11 +82,11 @@
       "colors": [
         {
           "name": "Cherry Red",
-          "hex": "#CC0202"
+          "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "hex": "#443028"
+          "url": "1/c/274364.png"
         }
       ],
       "price": "232,470.00"
@@ -137,11 +97,11 @@
       "colors": [
         {
           "name": "Cherry Red",
-          "hex": "#CC0202"
+          "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "hex": "#443028"
+          "url": "1/c/278364.png"
         }
       ],
       "price": "169,817.00"
@@ -152,11 +112,11 @@
       "colors": [
         {
           "name": "Cherry Red",
-          "hex": "#CC0202"
+          "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "hex": "#443028"
+          "url": "1/c/278364.png"
         }
       ],
       "price": "180,602.00"
