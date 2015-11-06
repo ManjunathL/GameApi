@@ -1,0 +1,115 @@
+{
+  "id": "389475857",
+  "code": "DG3495845",
+  "categ": "Living",
+  "categId": "23847623746",
+  "name": "Castle Life",
+  "designer": "Ram Prasad",
+  "designerId": "12837198237",
+  "w": "8'-2\"",
+  "h": "2'-9\"",
+  "d": "2'-6\"",
+  "curr": "INR",
+  "desc": "Turn your living into a medieval age castle!",
+  "popularity": 6.5,
+  "relevance": 2,
+  "shortlisted": 46,
+  "likes": 200,
+  "createDt": "04-30-2015",
+  "delivery": {
+    "title": "45 Days Delivery Guarantee ",
+    "details": "templates/common/standard_delivery_45.html"
+  },
+  "warranty": {
+    "title": "5 years warranty",
+    "details": "templates/common/standard_warranty_5.html"
+  },
+  "paymentTerms": {
+    "title": "Payment Terms",
+    "details": "templates/common/standard_payment_terms.html"
+  },
+  "commentsUrl": "http://...",
+  "imageUrls": [
+    "s/files/1/0897/8058/designs/Castle_Blue_low.jpeg?v=1444393339"
+  ],
+  "products": [
+    {
+      "id": "23476264",
+      "code": "P3455",
+      "name": "Casa TV Unit",
+      "desc": "some desc",
+      "w": "8'-2\"",
+      "h": "2'-9\"",
+      "d": "2'-6\"",
+      "material": "Plywood",
+      "finish": "Laminate",
+      "color": {
+        "name": "Cool Blue",
+        "url": "1/c/23847.png"
+      },
+      "price": "20,000",
+      "imageUrls": [
+        "s/files/1/0897/8058/products/Cabinet_Blue_low.jpeg?v=1444393339"
+      ],
+      "altProducts": [
+        {
+          "id": "73476264",
+          "code": "P6455",
+          "name": "Oliver TV Unit",
+          "desc": "some desc",
+          "w": "8'-2\"",
+          "h": "2'-9\"",
+          "d": "2'-6\"",
+          "material": "Solid Wood",
+          "finish": "Veneer",
+          "color": {
+            "name": "Cool Gray",
+            "url": "1/c/23447.png"
+          },
+          "price": "28,000",
+          "imageUrls": [
+            "s/files/1/0897/8058/products/Cabinet_Gray_low.jpeg?v=1444393339"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "53476264",
+      "code": "P9455",
+      "name": "Caroline Sectional Sofa",
+      "desc": "some desc",
+      "w": "8'-2\"",
+      "h": "2'-9\"",
+      "d": "2'-6\"",
+      "material": "Leather",
+      "color": {
+        "name": "Lazy Black",
+        "url": "1/c/28847.png"
+      },
+      "price": "1,20,000",
+      "imageUrls": [
+        "s/files/1/0897/8058/products/Caroline_Sectional_low.jpeg?v=1444393339"
+      ],
+      "altProducts": [
+        {
+          "id": "73476264",
+          "code": "P6455",
+          "name": "Sicilian Chesterfield",
+          "desc": "some desc",
+          "w": "8'-2\"",
+          "h": "2'-9\"",
+          "d": "2'-6\"",
+          "material": "Leather",
+          "color": {
+            "name": "Cherry Brown",
+            "url": "1/c/21447.png"
+          },
+          "price": "2,80,000",
+          "imageUrls": [
+            "s/files/1/0897/8058/products/Sicilian_Chester_low.jpeg?v=1444393339"
+          ]
+        }
+      ]
+    }
+  ]
+}
