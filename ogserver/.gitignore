@@ -1,17 +1,18 @@
 # ignore all bin directories
 # matches "bin" in any subfolder
-bin/
+/bin
+/node_modules
 
 # ignore all target directories
-build/
+/build
 
-main/
+/main
 
-.vertx/
+/.vertx
 
-.gradle/
+/.gradle
 
-.settings/
+/.settings
 
 # ignore all files ending with ~
 *~ 
