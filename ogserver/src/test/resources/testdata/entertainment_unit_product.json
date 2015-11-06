@@ -33,51 +33,5 @@
     "s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
     "s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
   ],
-  "materialFinishColorPrices": [
-    {
-      "material": "MDF",
-      "finish": "Pre Lam",
-      "colors": [
-        {
-          "name": "Cherry Red",
-          "url": "1/c/278364.png"
-        },
-        {
-          "name": "English Walnut",
-          "url": "1/c/278364.png"
-        }
-      ],
-      "price": "16,000.00"
-    },
-    {
-      "material": "MDF",
-      "finish": "Membrane",
-      "colors": [
-        {
-          "name": "Cherry Red",
-          "url": "1/c/278364.png"
-        },
-        {
-          "name": "English Walnut",
-          "url": "1/c/278364.png"
-        }
-      ],
-      "price": "22,000.00"
-    },
-    {
-      "material": "MDF",
-      "finish": "Foil",
-      "colors": [
-        {
-          "name": "Cherry Red",
-          "url": "1/c/278364.png"
-        },
-        {
-          "name": "English Walnut",
-          "url": "1/c/278364.png"
-        }
-      ],
-      "price": "23,000.00"
-    }
-  ]
+  "price": "22,000"
 }
