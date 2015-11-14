@@ -1,0 +1,37 @@
+{
+  "id": "123",
+  "code": "SJDH478SJD",
+  "categ": "Living",
+  "categId": "23847623746",
+  "subCateg": "Entertainment Unit",
+  "subCategId": "239487283974",
+  "name": "Blunt Entertainment Unit",
+  "w": "8'-2\"",
+  "h": "2'-9\"",
+  "d": "2'-6\"",
+  "curr": "INR",
+  "desc": "Give your entertainment space a light wooden finished look with this TV unit design. Shelf and drawer space is unobtrusively woven under your TV unit. The shelves may be manipulated to create a new look each time. The simplicity of the design helps it blend easily to the theme of the room.",
+  "popularity": 8.1,
+  "relevance": 12,
+  "shortlisted": 15,
+  "likes": 36,
+  "createDt": "05-30-2015",
+  "delivery": {
+    "title": "45 Days Delivery Guarantee ",
+    "details": "templates/common/standard_delivery_45.html"
+  },
+  "warranty": {
+    "title": "5 years warranty",
+    "details": "templates/common/standard_warranty_5.html"
+  },
+  "paymentTerms": {
+    "title": "Payment Terms",
+    "details": "templates/common/standard_payment_terms.html"
+  },
+  "commentsUrl": "http://...",
+  "imageUrls": [
+    "s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
+    "s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
+  ],
+  "price": "22,000"
+}

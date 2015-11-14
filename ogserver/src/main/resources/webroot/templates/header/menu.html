@@ -1,64 +1,81 @@
-<div class="container-fluid header-thin hidden-sm hidden-xs">
+<div class="og-navbar">
     <div class="row">
-        <div class="col-lg-4 col-md-6">
-            <div class="row">
-                <div class="col-sm-6">
-                    <span class="text-nowrap">
-                        <a href="mailto:reach@orangegubbi.com">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                            reach@orangegubbi.com
-                        </a>
-                    </span>
-                </div>
-                <div class="col-sm-6">
-                    <span class="text-nowrap">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-phone"></span>
-                            +91-8088 860 860
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4 col-md-6">
-            <div class="row">
-                <div class="col-sm-4">
-                    <p class="seperator"><a href="/blogs/blog">Design Blogs</a></p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="separator"><a href="/pages/how-it-works">How it works</a></p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="separator"><a href="/account/login" id="customer_login_link">Login</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ogNavbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">
-                <img src="img/logo.png" alt="Orange Gubbi"/>
-            </a>
-        </div>
-        <div id="ogNavbar" class="navbar-collapse collapse" aria-expanded="false">
-            <ul class="nav navbar-nav">
-                <li><a href="#">ALL SOLUTIONS</a></li>
-                <li><a href="#">LIVING &amp; DINING</a></li>
-                <li><a href="#">KITCHEN</a></li>
-                <li><a href="#">BEDROOM</a></li>
+        <div class="col-lg-4" align="left">
+            <ul class="header-ul">
+                <li>
+                    <a href="#">
+                        <img src="img/logo.png" align="top" alt="Orange Gubbi"/>
+                    </a>
+                </li>
             </ul>
         </div>
+        <div class="col-lg-4" align="center">
+            <ul class="header-ul">
+                <li><input style="width: 90%; height: 35px;" name="searchNav" type="text"
+                           placeholder="Search Products, Designs, Stories &amp; More..." spellcheck="false">
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            </ul>
+        </div>
+        <div class="col-lg-4" align="right">
+            <ul class="header-ul">
+                <li><a href="#" style="font-size: 18px">
+                    <span style="margin-top: 15px; font-size: 18px" class="fa fa-check-square-o"></span>
+                    Shortlist</a>
+                </li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li>
+                    <a href="#" style="font-size: 18px; margin-right: 30px;"><span
+                            style="margin-top: 10px; font-size: 18px"
+                            class="glyphicon glyphicon-user"></span> User
+                        Profile</a>
 
+                </li>
+            </ul>
+        </div>
     </div>
-</nav>
+    <div class="row">
+        <div class="col-sm-12">&nbsp;</div>
+    </div>
+    <hr class="hr-sm-top"/>
+    <div class="row">
+        <div class="col-lg-6">
+            <ul class="header-ul header-ul-center">
+                <% _.each(categories.data, function(category){ %>
+                    <% if (category.subCategories.length === 0) { %>
+                        <li><a href='#products/<%=category.code%>'><%=category.name%></a></li>
+                    <% } else { %>
+                        <li>
+                            <div class="dropdown">
+                                <button class="btn og-navbar-btn-face dropdown-toggle" type="button" id="dropdownMenu<%=category.code%>"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <%=category.name%>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu<%=category.code%>">
+                                <% _.each(category.subCategories, function(subCategory){ %>
+                                    <li><a href="#products/<%=category.code%>/<%=subCategory.code%>"><%=subCategory.name%></a></li>
+                                <% }); %>
+                                </ul>
+                            </div>
+                        </li>
+                    <% } %>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <% }); %>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <ul class="header-ul header-ul-center">
+                <li><a href="#">DESIGNS</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li><a href="#">PRODUCTS</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li><a href="#">STORIES</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li class="og-action"><a href="#">CONSULT</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr class="hr-sm-bottom"/>
+</div>
+

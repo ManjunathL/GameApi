@@ -1,6 +1,6 @@
 define([
   'jquery',
-  'lodash',
+  'underscore',
   'backbone',
   'text!templates/footer/footer.html'
 ], function($, _, Backbone, footerTemplate){

@@ -1,17 +1,26 @@
 define([
   'jquery',
-  'lodash',
+  'underscore',
   'backbone',
   'bootstrap',
-  'text!templates/header/menu.html'
-], function($, _, Backbone, Bootstrap, headerMenuTemplate){
+  'text!templates/header/menu.html',
+  'collections/categories'
+], function($, _, Backbone, Bootstrap, headerMenuTemplate, Categories){
   var HeaderMenuView = Backbone.View.extend({
     el: '.main-menu-container',
-    initialize: function () {
-    },
     render: function () {
-      $(this.el).html(headerMenuTemplate);
-      $('a[href="' + window.location.hash + '"]').addClass('active');
+        that = this;
+        var categories = new Categories();
+        categories.fetch({
+            success: function() {
+                var compiledTemplate = _.template(headerMenuTemplate);
+                $(that.el).html(compiledTemplate({"categories": categories.models[0].toJSON()}));
+                $('a[href="' + window.location.hash + '"]').addClass('active');
+            },
+            error: function() {
+                console.log("error in fetching categories data");
+            }
+        });
     },
     events: {
       'click a': 'highlightMenuItem'
@@ -21,6 +30,5 @@ define([
       $(ev.currentTarget).addClass('active');
     }
   })
-
   return HeaderMenuView;
 });

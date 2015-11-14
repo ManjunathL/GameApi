@@ -1,6 +1,6 @@
 define([
   'jquery',
-  'lodash',
+  'underscore',
   'backbone',
   'bootstrap',
   'text!templates/dashboard/page.html'
@@ -8,8 +8,7 @@ define([
   var DashboardPage = Backbone.View.extend({
     el: '.page',
     render: function () {
-
-      $(this.el).html(dashboardPageTemplate);
+        $(this.el).html(dashboardPageTemplate);
     }
   });
   return DashboardPage;

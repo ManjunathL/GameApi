@@ -1,14 +1,14 @@
 package com.orangegubbi.common;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class LocalCache
 {
 	private static final LocalCache INSTANCE = new LocalCache();
 	
-	private Map<Integer, Object> cache = new HashMap<Integer, Object>();
+	private Map<Integer, Object> cache = new ConcurrentHashMap<>();
 	private AtomicInteger id = new AtomicInteger();
 	
 	private LocalCache()

@@ -8,9 +8,10 @@
   "name": "Albatross L-Shaped Kitchen",
   "designer": "Ram Prasad",
   "designerId": "12837198237",
-  "w": "8'-2\"",
-  "h": "2'-9\"",
-  "d": "2'-6\"",
+  "uom": "inches",
+  "w": "98",
+  "h": "33",
+  "d": "30",
   "curr": "INR",
   "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
   "popularity": 6.5,
@@ -30,56 +31,86 @@
     "title": "Payment Terms",
     "details": "templates/common/standard_payment_terms.html"
   },
-  "commentsUrl": "http://...",
-  "imageUrls": [
-    "s/files/1/0897/8058/products/Albatross_Mapple1_low.jpeg?v=1444393339"
+  "pageId": "SJDH478SJD",
+  "images": [
+    "Albatross_Mapple1_low_erohcx"
   ],
-  "accessories": [
+  "components": [
     {
-      "id": "23476264"
-    },
-    {
-      "id": "78347854"
-    }
-  ],
-  "appliances": [
-    {
-      "name": "Elica Four Burner",
-      "code": "AP100",
-      "type": "Hobs",
-      "subtype": "Integrated",
-      "imageUrl": "1/appliances/72364.jpeg",
-      "price": "8,900"
-    },
-    {
-      "name": "Elica Three Burner",
-      "code": "AP101",
-      "type": "Hobs",
-      "subtype": "Cooktop",
-      "imageUrl": "1/appliances/72364.jpeg",
-      "price": "9,990"
-    }
-  ],
-  "materialFinishColorPrices": [
-    {
-      "material": "Plywood",
-      "finish": "Laminate",
-      "colors": [
+      "id": "1",
+      "name": "Wall Glass Unit",
+      "desc": "Glass Wall Unit to show your expensive Crockery",
+      "quantity": "1",
+      "defAccessoryId": "1",
+      "defAccessoryCode": "MC37487",
+      "defAccessory": "Moving Corner",
+      "defAccessoryPrice": "7400",
+      "w": "800",
+      "h": "600",
+      "d": "200",
+      "uom": "cm",
+      "mfMapping": [
         {
-          "name": "Cherry Red",
-          "url": "1/c/278364.png"
+          "materialId": "1",
+          "materialCode": "PW",
+          "material": "Plywood",
+          "materialImg": "/img/347856465.jpeg",
+          "finishId": "2",
+          "finishCode": "MM",
+          "finish": "MDF with Membrane",
+          "finishImg": "/img/384758.jpeg",
+          "pricePerUnit": "12000",
+          "componentOptions": [
+            {
+              "id": "2",
+              "pricePerUnit": "12500",
+              "accessoryId": "2",
+              "accessoryCode": "WB3748",
+              "accessory": "Wired Basket",
+              "accessoryPrice": "3800"
+            }
+          ]
         },
         {
-          "name": "English Walnut",
-          "url": "1/c/2723364.png"
+          "materialId": "1",
+          "materialCode": "PW",
+          "material": "Plywood",
+          "materialImg": "/img/347856465.jpeg",
+          "finishId": "3",
+          "finishCode": "PUP",
+          "finish": "PU Paint",
+          "finishImg": "/img/334758.jpeg",
+          "pricePerUnit": "16000",
+          "componentOptions": [
+            {
+              "id": "2",
+              "pricePerUnit": "16500",
+              "accessoryId": "2",
+              "accessoryCode": "WB3748",
+              "accessory": "Wired Basket",
+              "accessoryPrice": "3800"
+            }
+          ]
         }
-      ],
-      "price": "221,692.00"
+      ]
+    }
+  ],
+  "mf": [
+    {
+      "material": "Plywood",
+      "finish": "MDF with Membrane",
+      "aggregatedPrice": "1,85,000"
     },
     {
       "material": "Plywood",
-      "finish": "Membrane",
-      "colors": [
+      "finish": "PU Paint",
+      "aggregatedPrice": "2,20,000"
+    }
+  ],
+  "fc": [
+    {
+      "finish": "MFD with Membrane",
+      "color": [
         {
           "name": "Cherry Red",
           "url": "1/c/278364.png"
@@ -88,38 +119,36 @@
           "name": "English Walnut",
           "url": "1/c/274364.png"
         }
-      ],
-      "price": "232,470.00"
+      ]
     },
     {
-      "material": "MDF with Plywood",
-      "finish": "Laminate",
-      "colors": [
+      "finish": "PU Paint",
+      "color": [
         {
           "name": "Cherry Red",
           "url": "1/c/278364.png"
         },
         {
           "name": "English Walnut",
-          "url": "1/c/278364.png"
+          "url": "1/c/274364.png"
         }
-      ],
-      "price": "169,817.00"
+      ]
+    }
+  ],
+  "appliances": [
+    {
+      "name": "Elica Four Burner",
+      "code": "AP100",
+      "type": "Hobs",
+      "imageUrl": "1/appliances/72364.jpeg",
+      "price": "8,900"
     },
     {
-      "material": "MDF with Plywood",
-      "finish": "Membrane",
-      "colors": [
-        {
-          "name": "Cherry Red",
-          "url": "1/c/278364.png"
-        },
-        {
-          "name": "English Walnut",
-          "url": "1/c/278364.png"
-        }
-      ],
-      "price": "180,602.00"
+      "name": "Elica Three Burner",
+      "code": "AP101",
+      "type": "Hobs",
+      "imageUrl": "1/appliances/72364.jpeg",
+      "price": "9,990"
     }
   ]
 }

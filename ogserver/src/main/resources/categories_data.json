@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "name": "ALL SOLUTIONS",
+      "code": "allsolutions",
+      "subCategories": []
+    },
+    {
+      "name": "LIVING & DINING",
+      "code": "livingndining",
+      "subCategories": [
+        {"name": "Entertainment Unit", "code": "entunit"},
+        {"name": "Shoe Rack", "code": "shoerack"},
+        {"name": "Crockery Unit", "code": "crockunit"}
+      ]
+    },
+    {
+      "name": "KITCHEN",
+      "code": "kitchen",
+      "subCategories": [
+        {"name": "L Shaped Kitchen", "code": "lshapedk"},
+        {"name": "U Shaped Kitchen", "code": "ushapedk"},
+        {"name": "Straight Kitchen", "code": "straightk"},
+        {"name": "Parallel Kitchen", "code": "parallelk"}
+      ]
+    },
+    {
+      "name": "BEDROOM",
+      "code": "bedroom",
+      "subCategories": [
+        {"name": "Wardrobe", "code": "wardrobe"},
+        {"name": "Study Table", "code": "studytable"},
+        {"name": "Side Table", "code": "sidetable"},
+        {"name": "Book Rack", "code": "bookrack"}
+      ]
+    }
+  ]
+}
