@@ -28,48 +28,98 @@
     "title": "Payment Terms",
     "details": "templates/common/standard_payment_terms.html"
   },
-  "commentsUrl": "http://...",
-  "imageUrls": [
-    "s/files/1/0897/8058/designs/Castle_Blue_low.jpeg?v=1444393339"
+  "pageId": "SJDH478SJD",
+  "images": [
+    "Castle_Blue_low.jpeg"
   ],
   "products": [
     {
-      "id": "23476264",
-      "code": "P3455",
-      "name": "Casa TV Unit",
-      "desc": "some desc",
-      "w": "8'-2\"",
-      "h": "2'-9\"",
-      "d": "2'-6\"",
+      "id": "56383ff69951036a2732566f",
+      "code": "SJDH478SJD",
+      "categ": "Living",
+      "categId": "23847623746",
+      "subCateg": "Entertainment Unit",
+      "subCategId": "239487283974",
+      "name": "Blunt Entertainment Unit",
+      "uom": "inches",
+      "w": "86",
+      "h": "33",
+      "d": "18",
+      "curr": "INR",
+      "desc": "Give your entertainment space a light wooden finished look with this TV unit design. Shelf and drawer space is unobtrusively woven under your TV unit. The shelves may be manipulated to create a new look each time. The simplicity of the design helps it blend easily to the theme of the room.",
+      "popularity": 8.1,
+      "relevance": 12,
+      "shortlisted": 15,
+      "likes": 36,
+      "createDt": "05-30-2015",
+      "delivery": {
+        "title": "45 Days Delivery Guarantee ",
+        "details": "templates/common/standard_delivery_45.html"
+      },
+      "warranty": {
+        "title": "5 years warranty",
+        "details": "templates/common/standard_warranty_5.html"
+      },
+      "paymentTerms": {
+        "title": "Payment Terms",
+        "details": "templates/common/standard_payment_terms.html"
+      },
+      "pageId": "SJDH478SJD",
+      "images": [
+        "3.Blunt_Front_White_BrownOak.jpg",
+        "4.Blunt_Side_White_BrownOak.jpg"
+      ],
+      "price": "22,000",
       "material": "Plywood",
       "finish": "Laminate",
       "color": {
         "name": "Cool Blue",
-        "url": "1/c/23847.png"
+        "img": "23847.png"
       },
-      "price": "20,000",
-      "imageUrls": [
-        "s/files/1/0897/8058/products/Cabinet_Blue_low.jpeg?v=1444393339"
-      ],
       "altProducts": [
         {
-          "id": "73476264",
-          "code": "P6455",
-          "name": "Oliver TV Unit",
-          "desc": "some desc",
-          "w": "8'-2\"",
-          "h": "2'-9\"",
-          "d": "2'-6\"",
-          "material": "Solid Wood",
-          "finish": "Veneer",
-          "color": {
-            "name": "Cool Gray",
-            "url": "1/c/23447.png"
+          "id": "345456a2732566f",
+          "code": "SJDH478SJD",
+          "categ": "Living",
+          "categId": "23847623746",
+          "subCateg": "Entertainment Unit",
+          "subCategId": "239487283974",
+          "name": "Oliver Entertainment Unit",
+          "uom": "inches",
+          "w": "86",
+          "h": "33",
+          "d": "18",
+          "curr": "INR",
+          "desc": "Oliver Entertainment Unit",
+          "popularity": 8.1,
+          "relevance": 12,
+          "shortlisted": 15,
+          "likes": 36,
+          "createDt": "05-30-2015",
+          "delivery": {
+            "title": "45 Days Delivery Guarantee ",
+            "details": "templates/common/standard_delivery_45.html"
           },
+          "warranty": {
+            "title": "5 years warranty",
+            "details": "templates/common/standard_warranty_5.html"
+          },
+          "paymentTerms": {
+            "title": "Payment Terms",
+            "details": "templates/common/standard_payment_terms.html"
+          },
+          "pageId": "SJDH478SJD",
+          "images": [
+            "3.Oliver_Front_White_BrownOak.jpg",
+            "4.Oliver_Side_White_BrownOak.jpg"
+          ],
           "price": "28,000",
-          "imageUrls": [
-            "s/files/1/0897/8058/products/Cabinet_Gray_low.jpeg?v=1444393339"
-          ]
+          "material": "Solid Wood",
+          "finish": "Natural",
+          "color": {
+            "name": "Natural Wood",
+            "img": "23847.png"
+          },
         }
       ]
     },

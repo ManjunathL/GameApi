@@ -28,10 +28,16 @@
     "title": "Payment Terms",
     "details": "templates/common/standard_payment_terms.html"
   },
-  "commentsUrl": "http://...",
-  "imageUrls": [
-    "s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
-    "s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
+  "pageId": "SJDH478SJD",
+  "images": [
+    "3.Blunt_Front_White_BrownOak.jpg",
+    "4.Blunt_Side_White_BrownOak.jpg"
   ],
-  "price": "22,000"
+  "price": "22,000",
+  "material": "Plywood",
+  "finish": "Laminate",
+  "color": {
+    "name": "Cool Blue",
+    "img": "23847.png"
+  }
 }

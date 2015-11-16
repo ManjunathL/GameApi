@@ -46,6 +46,7 @@
           "defAccessoryId": "1",
           "defAccessoryCode": "MC37487",
           "defAccessory": "Moving Corner",
+          "defAccessoryImg": "moving_corner.jpg",
           "defAccessoryPrice": "7400",
           "w": "800",
           "h": "600",
@@ -56,11 +57,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "2",
               "finishCode": "MM",
               "finish": "MDF with Membrane",
-              "finishImg": "/img/384758.jpeg",
+              "finishImg": "384758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "12000",
               "componentOptions": [
                 {
@@ -69,6 +72,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -77,11 +81,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "3",
               "finishCode": "PUP",
               "finish": "PU Paint",
-              "finishImg": "/img/334758.jpeg",
+              "finishImg": "334758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "16000",
               "componentOptions": [
                 {
@@ -90,6 +96,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -115,11 +122,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         },
@@ -128,11 +137,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         }
@@ -142,14 +153,14 @@
           "name": "Elica Four Burner",
           "code": "AP100",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "8,900"
         },
         {
           "name": "Elica Three Burner",
           "code": "AP101",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "9,990"
         }
       ]
@@ -200,6 +211,7 @@
           "defAccessoryId": "1",
           "defAccessoryCode": "MC37487",
           "defAccessory": "Moving Corner",
+          "defAccessoryImg": "moving_corner.jpg",
           "defAccessoryPrice": "7400",
           "w": "800",
           "h": "600",
@@ -210,11 +222,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "2",
               "finishCode": "MM",
               "finish": "MDF with Membrane",
-              "finishImg": "/img/384758.jpeg",
+              "finishImg": "384758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "12000",
               "componentOptions": [
                 {
@@ -223,6 +237,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -231,11 +246,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "3",
               "finishCode": "PUP",
               "finish": "PU Paint",
-              "finishImg": "/img/334758.jpeg",
+              "finishImg": "334758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "16000",
               "componentOptions": [
                 {
@@ -244,6 +261,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -269,11 +287,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         },
@@ -282,11 +302,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         }
@@ -296,14 +318,14 @@
           "name": "Elica Four Burner",
           "code": "AP100",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "8,900"
         },
         {
           "name": "Elica Three Burner",
           "code": "AP101",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "9,990"
         }
       ]
@@ -354,6 +376,7 @@
           "defAccessoryId": "1",
           "defAccessoryCode": "MC37487",
           "defAccessory": "Moving Corner",
+          "defAccessoryImg": "moving_corner.jpg",
           "defAccessoryPrice": "7400",
           "w": "800",
           "h": "600",
@@ -364,11 +387,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "2",
               "finishCode": "MM",
               "finish": "MDF with Membrane",
-              "finishImg": "/img/384758.jpeg",
+              "finishImg": "384758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "12000",
               "componentOptions": [
                 {
@@ -377,6 +402,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -385,11 +411,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "3",
               "finishCode": "PUP",
               "finish": "PU Paint",
-              "finishImg": "/img/334758.jpeg",
+              "finishImg": "334758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "16000",
               "componentOptions": [
                 {
@@ -398,6 +426,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -423,11 +452,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         },
@@ -436,11 +467,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         }
@@ -450,14 +483,14 @@
           "name": "Elica Four Burner",
           "code": "AP100",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "8,900"
         },
         {
           "name": "Elica Three Burner",
           "code": "AP101",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "9,990"
         }
       ]
@@ -508,6 +541,7 @@
           "defAccessoryId": "1",
           "defAccessoryCode": "MC37487",
           "defAccessory": "Moving Corner",
+          "defAccessoryImg": "moving_corner.jpg",
           "defAccessoryPrice": "7400",
           "w": "800",
           "h": "600",
@@ -518,11 +552,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "2",
               "finishCode": "MM",
               "finish": "MDF with Membrane",
-              "finishImg": "/img/384758.jpeg",
+              "finishImg": "384758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "12000",
               "componentOptions": [
                 {
@@ -531,6 +567,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -539,11 +576,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "3",
               "finishCode": "PUP",
               "finish": "PU Paint",
-              "finishImg": "/img/334758.jpeg",
+              "finishImg": "334758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "16000",
               "componentOptions": [
                 {
@@ -552,6 +591,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -577,11 +617,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         },
@@ -590,11 +632,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         }
@@ -604,14 +648,14 @@
           "name": "Elica Four Burner",
           "code": "AP100",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "8,900"
         },
         {
           "name": "Elica Three Burner",
           "code": "AP101",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "9,990"
         }
       ]
@@ -662,6 +706,7 @@
           "defAccessoryId": "1",
           "defAccessoryCode": "MC37487",
           "defAccessory": "Moving Corner",
+          "defAccessoryImg": "moving_corner.jpg",
           "defAccessoryPrice": "7400",
           "w": "800",
           "h": "600",
@@ -672,11 +717,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "2",
               "finishCode": "MM",
               "finish": "MDF with Membrane",
-              "finishImg": "/img/384758.jpeg",
+              "finishImg": "384758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "12000",
               "componentOptions": [
                 {
@@ -685,6 +732,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -693,11 +741,13 @@
               "materialId": "1",
               "materialCode": "PW",
               "material": "Plywood",
-              "materialImg": "/img/347856465.jpeg",
+              "materialImg": "347856465.jpeg",
+              "materialMainImgSuffix": "pw",
               "finishId": "3",
               "finishCode": "PUP",
               "finish": "PU Paint",
-              "finishImg": "/img/334758.jpeg",
+              "finishImg": "334758.jpeg",
+              "finishMainImgSuffix": "mm",
               "pricePerUnit": "16000",
               "componentOptions": [
                 {
@@ -706,6 +756,7 @@
                   "accessoryId": "2",
                   "accessoryCode": "WB3748",
                   "accessory": "Wired Basket",
+                  "accessoryImg": "wire_basket.jpg",
                   "accessoryPrice": "3800"
                 }
               ]
@@ -731,11 +782,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         },
@@ -744,11 +797,13 @@
           "color": [
             {
               "name": "Cherry Red",
-              "url": "1/c/278364.png"
+              "img": "278364.png",
+              "mainImgSuffix": "cr"
             },
             {
               "name": "English Walnut",
-              "url": "1/c/274364.png"
+              "img": "274364.png",
+              "mainImgSuffix": "ew"
             }
           ]
         }
@@ -758,14 +813,14 @@
           "name": "Elica Four Burner",
           "code": "AP100",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "8,900"
         },
         {
           "name": "Elica Three Burner",
           "code": "AP101",
           "type": "Hobs",
-          "imageUrl": "1/appliances/72364.jpeg",
+          "image": "72364.jpeg",
           "price": "9,990"
         }
       ]
