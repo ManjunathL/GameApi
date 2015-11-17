@@ -16,8 +16,8 @@
       "d": "30",
       "curr": "INR",
       "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
-      "popularity": 6.5,
-      "relevance": 2,
+      "popularity": 1.5,
+      "relevance": 1,
       "shortlisted": 46,
       "likes": 200,
       "createDt": "04-30-2015",
@@ -108,12 +108,12 @@
         {
           "material": "Plywood",
           "finish": "MDF with Membrane",
-          "aggregatedPrice": "1,85,000"
+          "aggregatedPrice": "3,85,000"
         },
         {
           "material": "Plywood",
           "finish": "PU Paint",
-          "aggregatedPrice": "2,20,000"
+          "aggregatedPrice": "4,20,000"
         }
       ],
       "fc": [

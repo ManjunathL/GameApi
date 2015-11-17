@@ -1,27 +1,63 @@
 <div class="margin-md">
+    <!--<% //debugger %>-->
 </div>
 
 <div class="category-filter row">
     <ul class="list-inline">
         <li class="filter-type">Choose</li>
         <li>CATEGORY</li>
+        <li><span class="caret"></span></li>
         <li>|</li>
         <li>SUB-CATEGORY</li>
+        <li><span class="caret"></span></li>
         <li>&nbsp;</li>
         <li>&nbsp;</li>
         <li class="filter-type">Sort By</li>
-        <li>POPULARITY</li>
-        <li>|</li>
-        <li>RELEVANCE</li>
-        <li>|</li>
-        <li>DATE</li>
-        <li>|</li>
-        <li>PRICE</li>
+        <li>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/spopularity/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">POPULARITY</a>
+            <% if (sortBy === 'popularity') { %>
+                <% if (sortDir === 'desc') { %>
+                    <span class="fa fa-sort-desc fa-md"></span>
+                <% } else if (sortDir === 'asc') { %>
+                    <span class="fa fa-sort-asc fa-md"></span>
+                <% } %>
+            <% } %>
+        </li>
+        <li>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/srelevance/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">RELEVANCE</a>
+            <% if (sortBy === 'relevance') { %>
+                <% if (sortDir === 'desc') { %>
+                    <span class="fa fa-sort-desc fa-md"></span>
+                <% } else if (sortDir === 'asc') { %>
+                    <span class="fa fa-sort-asc fa-md"></span>
+                <% } %>
+            <% } %>
+        </li>
+        <li>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/screateDt/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">DATE</a>
+            <% if (sortBy === 'createDt') { %>
+                <% if (sortDir === 'desc') { %>
+                    <span class="fa fa-sort-desc fa-md"></span>
+                <% } else if (sortDir === 'asc') { %>
+                    <span class="fa fa-sort-asc fa-md"></span>
+                <% } %>
+            <% } %>
+        </li>
+        <li>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/sprice/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">PRICE</a>
+            <% if (sortBy === 'price') { %>
+                <% if (sortDir === 'desc') { %>
+                    <span class="fa fa-sort-desc fa-md"></span>
+                <% } else if (sortDir === 'asc') { %>
+                    <span class="fa fa-sort-asc fa-md"></span>
+                <% } %>
+            <% } %>
+        </li>
         <li>&nbsp;</li>
         <li>&nbsp;</li>
         <li class="filter-type">View In</li>
-        <li><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></li>
-        <li><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></li>
-        <li><span class="glyphicon glyphicon-th" aria-hidden="true"></span></li>
+        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>"><span class="glyphicon glyphicon-th-list <%=!layout ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
+        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>/lsg"><span class="glyphicon glyphicon-th-large <%=layout === 'sg' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
+        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>/llg"><span class="glyphicon glyphicon-th <%=layout === 'lg' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
     </ul>
 </div>

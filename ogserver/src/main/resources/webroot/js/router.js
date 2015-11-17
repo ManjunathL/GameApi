@@ -2,14 +2,12 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'bootstrap',
-  'vm'
-], function ($, _, Backbone, Bootstrap, Vm) {
+  'bootstrap'
+], function ($, _, Backbone, Bootstrap) {
   var AppRouter = Backbone.Router.extend({
     routes: {
       '': 'dashboard',
-      'products/:category': 'products',
-      'products/:category/:subcategory': 'products'
+      'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products'
     }
   });
 
@@ -18,19 +16,27 @@ define([
     var router = new AppRouter(options);
     router.on('route:dashboard', function (actions) {
       require(['views/dashboard/page'], function (DashboardPage) {
-        var dashboardPage = Vm.create(appView, 'DashboardPage', DashboardPage);
-        dashboardPage.render();
+        new DashboardPage().render();
       });
     });
-    router.on('route:products', function (category, subcategory) {
+    router.on('route:products', function (categories, subcategories, searchTerm, sortBy, sortDir, layout) {
       require(['views/product/page'], function (ProductPage) {
-        var productPage = Vm.create(appView, 'ProductPage', ProductPage);
-        productPage.render(category, subcategory);
+        var options = {
+            model: {
+                "selectedCategories": categories,
+                "selectedSubCategories": subcategories,
+                "searchTerm": searchTerm,
+                "sortBy": sortBy,
+                "sortDir": sortDir,
+                "layout": layout
+            }
+        };
+        new ProductPage(options).render();
       });
     });
     Backbone.history.start();
   };
   return {
-    initialize: initialize
+      initialize: initialize
   };
 });

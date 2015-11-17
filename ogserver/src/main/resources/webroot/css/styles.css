@@ -291,3 +291,11 @@ a {
     display: block;
     margin-top: 0;
  }
+
+.fa-md {
+ font-size: 14px;
+}
+
+.glyphicon-grey {
+    color: #999;
+}

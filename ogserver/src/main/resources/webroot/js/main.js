@@ -30,12 +30,11 @@ require.config({
 
 require([
   'views/app',
-  'router',
-  'vm'
-], function(AppView, Router, Vm){
-  var appView = Vm.create({}, 'AppView', AppView);
+  'router'
+], function(AppView, Router){
+  var appView = new AppView();
   appView.render();
-  Router.initialize({appView: appView});
+  Router.initialize({"appView": appView});
 });
 
 var imgBase = "http://res.cloudinary.com/univermal/image/upload/"; //todo: change the collection name
