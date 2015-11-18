@@ -13,11 +13,11 @@ define([
     var ProductPage = Backbone.View.extend({
         el: '.page',
         render: function() {
-            that = this;
+            var that = this;
             var products = new Products();
             var categories = new Categories();
             categories.fetch({
-                success: function(model, responce, options) {
+                success: function() {
 
                     var filter = {
                         "allCategories": categories,
@@ -37,7 +37,7 @@ define([
                             "subCategories": that.model.selectedSubCategories,
                             "searchTerm": that.model.searchTerm
                         },
-                        success: function(model, response, options) {
+                        success: function() {
 
                             if (that.model.sortBy) {
                                 products.sortBy(that.model.sortBy, that.model.sortDir);
