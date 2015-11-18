@@ -1,3 +1,26 @@
+.back-to-top {
+    position: fixed;
+    bottom: 2em;
+    right: 10px;
+    text-decoration: none;
+    color: #555 !important;
+    background-color: rgba(225, 225, 225, 0.8) !important;
+    font-size: 18px;
+    padding: 1em;
+    display: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.63);
+}
+
+.back-to-top:hover {
+    background-color: rgba(200, 200, 200, 0.5) !important;
+    color: #333 !important;
+}
+
+body {
+    font-family: 'PT Sans', serif;
+}
+
 .row {
     margin-left: 0px;
     margin-right: 0px;
@@ -145,10 +168,10 @@ a {
 
 .category-filter {
     margin: auto;
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
     width: 100%;
-    background-color: #EEE;
+    background-color: #FFF;
     text-align: center;
 }
 
@@ -158,7 +181,7 @@ a {
 }
 
 .filter-values {
-    padding-top: 5px;
+    padding-top: 20px;
     margin: auto;
     height: 20px;
     line-height: 20px;

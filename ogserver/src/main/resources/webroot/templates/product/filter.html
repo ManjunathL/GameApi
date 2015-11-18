@@ -1,14 +1,36 @@
-<div class="margin-md">
+<div class="margin-sm">
     <!--<% //debugger %>-->
+</div>
+<% var category = allCategories.getByCode(selectedCategories); %>
+<% var subCategory = allCategories.getSubCategoryBySubCategoryCode(selectedSubCategories); %>
+
+<div class="category-heading row">
+    <div class="col-sm-12">
+        <p><%=category.get('name') + ' > ' + subCategory.get('name')%></p>
+    </div>
 </div>
 
 <div class="category-filter row">
     <ul class="list-inline">
-        <li class="filter-type">Choose</li>
-        <li id="categFilter">CATEGORY<span class="caret"></span></li>
-        <li>SUB-CATEGORY<span class="caret"></span></li>
+<!--        <li id="categFilter" class="filter-type">Choose</li>-->
+        <!--<li>CATEGORY<span class="caret"></span></li>-->
+<!--
+        <li>
+            <div class="dropdown">
+                <button class="btn og-navbar-btn-face dropdown-toggle" type="button" id="dropdownMenuType"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    TYPE<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuType">
+                    <% category.get('subCategories').each(function(subCategory){ %>
+                    <li><a href="#products/<%=category.get('code')%>/<%=subCategory.get('code')%>"><%=subCategory.get('name')%></a></li>
+                    <% }); %>
+                </ul>
+            </div>
+        </li>
         <li>&nbsp;</li>
         <li>&nbsp;</li>
+-->
         <li class="filter-type">Sort By</li>
         <li>
             <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/spopularity/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
@@ -70,13 +92,16 @@
         <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>/llg"><span class="glyphicon glyphicon-th <%=layout === 'lg' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
     </ul>
 </div>
+<!--
 <div class="filter-values row" id="filterVals">
     <ul class="list-inline">
-        <% _.each(selectedCategories.split(","), function(selcateg){
+&lt;!&ndash;
+        <% /*_.each(selectedCategories.split(","), function(selcateg){
                 var category = allCategories.getByCode(selcateg);
         %>
                     <li><%=category.get('name')%>&nbsp;X</li>
-        <% }); %>
+        <% });*/ %>
+&ndash;&gt;
 
         <% _.each(selectedSubCategories.split(","), function(selsubcateg){
                 var subCategory = allCategories.getSubCategoryBySubCategoryCode(selsubcateg);
@@ -97,4 +122,4 @@
         });
     });
 
-</script>
+</script>-->
