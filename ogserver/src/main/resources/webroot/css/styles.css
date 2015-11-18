@@ -152,13 +152,28 @@ a {
     text-align: center;
 }
 
-.category-filter ul {
-    display: inline-block;
-}
-
 .category-filter li {
     font-size: 12px;
     color: #333;
+}
+
+.filter-values {
+    padding-top: 5px;
+    margin: auto;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+}
+
+.filter-values li {
+    font-size: 12px;
+    color: #000;
+    background: #DDD;
+    margin: 0px 10px 0px 0px;
+}
+
+.category-filter ul, .filter-values ul {
+    display: inline-block;
 }
 
 .filter-type {

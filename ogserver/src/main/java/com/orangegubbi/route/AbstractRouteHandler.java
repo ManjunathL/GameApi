@@ -34,11 +34,10 @@ public abstract class AbstractRouteHandler extends RouterImpl {
             vertx.fileSystem().readFile(filePath, asyncResult -> {
                 if (asyncResult.succeeded()) {
                     String json = asyncResult.result().toString();
-                    JsonObject productsJson = new JsonObject(json);
 
                     response.putHeader("Access-Control-Allow-Origin", "*") //todo: this is only for dev for http-server to be able to call vertx
                             .putHeader("content-type", "application/json")
-                            .end(productsJson.encodePrettily());
+                            .end(json);
                 } else {
                     sendError(response, asyncResult.cause().getMessage());
                 }

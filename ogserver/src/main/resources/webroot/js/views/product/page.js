@@ -20,7 +20,7 @@ define([
                 success: function(model, responce, options) {
 
                     var filter = {
-                        "categories": categories.models[0].toJSON(),
+                        "allCategories": categories,
                         "selectedCategories": that.model.selectedCategories,
                         "selectedSubCategories": that.model.selectedSubCategories,
                         "searchTerm": that.model.searchTerm,
@@ -50,7 +50,7 @@ define([
                               compiledTemplate = _.template(productPageTemplate); 
                             }
                             $(that.el).append(compiledTemplate({
-                                "collection": products.models[0].toJSON()
+                                "collection": products.toJSON()
                             }));
                         },
                         error: function(model, response, options) {
@@ -62,7 +62,6 @@ define([
                   console.log("couldn't fetch categories - " + response);
                 }
             });
-
 
         }/*,
         initialize: function() {
