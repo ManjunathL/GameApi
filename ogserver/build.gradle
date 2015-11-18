@@ -31,7 +31,7 @@ task fatJar(type: Jar) {
 	manifest {
         attributes 'Implementation-Title': 'myGubbi Java Server',
         	'Implementation-Version': version,
-        	'Main-Class': 'com.orangegubbi.ServerVerticle'
+        	'Main-Class': 'com.mygubbi.ServerVerticle'
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
