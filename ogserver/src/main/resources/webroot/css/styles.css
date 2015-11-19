@@ -1,20 +1,28 @@
 .back-to-top {
+    font-size: 20px;
     position: fixed;
     bottom: 2em;
+    /*margin: auto;*/
     right: 10px;
     text-decoration: none;
     color: #555 !important;
     background-color: rgba(225, 225, 225, 0.8) !important;
-    font-size: 18px;
-    padding: 1em;
-    display: none;
-    border-radius: 5px;
+    height: 54px;
+    line-height: 54px !important;
+    width: 54px;
+    border-radius: 50%;
+    text-align: center;
     box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.63);
+}
+
+.back-to-top span {
+    line-height: 45px !important;
 }
 
 .back-to-top:hover {
     background-color: rgba(200, 200, 200, 0.5) !important;
     color: #333 !important;
+    text-decoration: none;
 }
 
 body {
