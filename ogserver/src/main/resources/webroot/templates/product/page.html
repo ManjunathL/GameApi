@@ -12,8 +12,11 @@
     <% _.each(collection.data, function(product){ %>
     <div class="row">
         <div class="margin-sm"></div>
-        <div class="col-sm-6"><img width="400" height="250"
-                                   src="<%= imgBase + 'c_fill,h_250,w_400/' + product.images[0] %>"/></div>
+        <div class="col-sm-6">
+            <a href="#/products/details/<%= product.name %>">
+                <img width="400" height="250" src="<%= imgBase + 'c_fill,h_250,w_400/' + product.images[0] %>"/>
+            </a>
+        </div>
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 text-nowrap" style="font-size: 16px;"><%= product.name %></div>

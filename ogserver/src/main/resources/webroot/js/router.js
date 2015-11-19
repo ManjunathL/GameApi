@@ -7,7 +7,8 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       '': 'dashboard',
-      'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products'
+      'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products',
+      'products/details/:productnm': 'product_details'
     }
   });
 
@@ -21,6 +22,7 @@ define([
     });
     router.on('route:products', function (categories, subcategories, searchTerm, sortBy, sortDir, layout) {
       require(['views/product/page'], function (ProductPage) {
+      console.log('smruti111111111111111111111');
         var options = {
             model: {
                 "selectedCategories": categories,
@@ -29,6 +31,18 @@ define([
                 "sortBy": sortBy,
                 "sortDir": sortDir,
                 "layout": layout
+            }
+        };
+        new ProductPage(options).render();
+      });
+    });
+    router.on('route:product_details', function (productnm) {
+      require(['views/product/details'], function (ProductPage) {
+          console.log('smruti');
+
+        var options = {
+            model: {
+                "selectedProduct": productnm
             }
         };
         new ProductPage(options).render();
