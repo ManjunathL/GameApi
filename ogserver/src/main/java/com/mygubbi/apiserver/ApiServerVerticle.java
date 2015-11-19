@@ -1,8 +1,6 @@
 package com.mygubbi.apiserver;
 
-import com.mygubbi.route.CategoryHandler;
-import com.mygubbi.route.ProductHandler;
-import com.mygubbi.route.UserRegistrationHandler;
+import com.mygubbi.route.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
@@ -61,6 +59,8 @@ public class ApiServerVerticle extends AbstractVerticle {
     private void setupApiHandler(Router router) {
         router.mountSubRouter("/api/categories", new CategoryHandler(vertx));
         router.mountSubRouter("/api/products", new ProductHandler(vertx));
+        router.mountSubRouter("/api/user.short", new UserProfileShortHandler(vertx));
+        router.mountSubRouter("/api/shortlist.short", new ShortlistShortHandler(vertx));
         router.mountSubRouter("/api/user.register", new UserRegistrationHandler(vertx));
     }
 

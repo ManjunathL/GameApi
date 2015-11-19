@@ -1,0 +1,29 @@
+[
+  {
+    "type": "product",
+    "id": "87678645",
+    "name": "Albatross L Shaped Kitchen",
+    "category": "KITCHEN",
+    "subCategory": "L Shaped Kitchen",
+    "image": "albat",
+    "price": "260000"
+  },
+  {
+    "type": "product",
+    "id": "876786451",
+    "name": "Albatross L Shaped Kitchen 1",
+    "category": "KITCHEN",
+    "subCategory": "L Shaped Kitchen",
+    "image": "albat",
+    "price": "285000"
+  },
+  {
+    "type": "product",
+    "id": "876786452",
+    "name": "Albatross L Shaped Kitchen 2",
+    "category": "KITCHEN",
+    "subCategory": "L Shaped Kitchen",
+    "image": "albat",
+    "price": "360000"
+  }
+]
