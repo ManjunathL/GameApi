@@ -18,6 +18,7 @@ import com.mygubbi.common.LocalCache;
 public class DatabaseService extends AbstractVerticle
 {
 	private final static Logger LOG = LogManager.getLogger(DatabaseService.class);
+	public static final String DB_QUERY = "db.query";
 	private JDBCClient client; 
 	
 	@Override
@@ -61,7 +62,7 @@ public class DatabaseService extends AbstractVerticle
 	private void setupMessageHandler()
 	{
 		EventBus eb = vertx.eventBus();
-		eb.localConsumer("db.query", (Message<Integer> message) -> {
+		eb.localConsumer(DB_QUERY, (Message<Integer> message) -> {
 			
 			QueryData qData = (QueryData) LocalCache.getInstance().remove(message.body());
 			QueryPrepareService.getInstance().prepareQueryData(qData);

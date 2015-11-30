@@ -6,7 +6,9 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
@@ -30,13 +32,21 @@ public class ApiServerVerticle extends AbstractVerticle {
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
+
         Router router = Router.router(vertx);
 
         this.setupApiHandler(router);
         this.setupEventBusHandler(router);
         this.setupStaticHandler(router);
 
-        vertx.createHttpServer().requestHandler(router::accept).listen(8080);
+        HttpServerOptions options = new HttpServerOptions().setKeyStoreOptions(new JksOptions().
+                setPath("keystore.jks").
+                setPassword("m!gubb!")
+        ).setTrustStoreOptions(new JksOptions().
+                setPath("keystore.jks").
+                setPassword("m!gubb!")).setSsl(true);
+
+        vertx.createHttpServer(options).requestHandler(router::accept).listen(8080);
         startFuture.complete();
     }
 
@@ -51,9 +61,8 @@ public class ApiServerVerticle extends AbstractVerticle {
         router.route("/apibus/*").handler(sockJSHandler);
     }
 
-	private void setupStaticHandler(Router router)
-	{
-		router.route(HttpMethod.GET, "/*").handler(StaticHandler.create());
+    private void setupStaticHandler(Router router) {
+        router.route(HttpMethod.GET, "/*").handler(StaticHandler.create());
     }
 
     private void setupApiHandler(Router router) {
@@ -62,6 +71,7 @@ public class ApiServerVerticle extends AbstractVerticle {
         router.mountSubRouter("/api/user.short", new UserProfileShortHandler(vertx));
         router.mountSubRouter("/api/shortlist.short", new ShortlistShortHandler(vertx));
         router.mountSubRouter("/api/user.register", new UserRegistrationHandler(vertx));
+        router.mountSubRouter("/api/user.login", new UserLoginHandler(vertx));
     }
 
     private void logHeadersHandler(Router router) {

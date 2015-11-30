@@ -37,5 +37,5 @@ require([
   Router.initialize({"appView": appView});
 });
 
-var imgBase = "http://res.cloudinary.com/univermal/image/upload/"; //todo: change the collection name
-var restBase = "http://localhost:8080"; //todo: make this empty for production
+var imgBase = "https://res.cloudinary.com/univermal/image/upload/"; //todo: change the collection name
+var restBase = "https://localhost:8080"; //todo: make this empty for production

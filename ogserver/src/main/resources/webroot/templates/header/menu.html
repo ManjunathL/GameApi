@@ -27,10 +27,25 @@
                 <li>
                     <a href="#" style="font-size: 18px; margin-right: 30px;"><span
                             style="margin-top: 10px; font-size: 18px"
-                            class="glyphicon glyphicon-user"></span> User
-                        Profile</a>
-
+                            class="glyphicon glyphicon-user"></span><%= ' ' + (userLogin.isLoggedIn() ? userLogin.get('name') : 'User Profile') %></a>
                 </li>
+<!--
+                <li>
+                    <div id="g-login-btn" style="visibility: <%= userLogin.isLoggedIn() ? 'hidden' : 'visible' %>">
+                        <span class="icon"></span>
+                    </div>
+                </li>
+                <li>
+                    <button style="visibility: <%= userLogin.isLoggedIn() && userLogin.isProviderGoogle() ? 'visible' : 'hidden' %>" id="g-logout-btn" onclick="gLogout();">Logout</button>
+                </li>
+
+                <li>
+                    <div id="fb-login-btn" style="visibility: <%= userLogin.isLoggedIn() ? 'hidden' : 'visible' %>" class="fb-login-button" data-scope="public_profile,email" data-max-rows="1" data-size="icon" data-show-faces="false" onlogin="checkLoginState();"></div>
+                </li>
+                <li>
+                    <button style="visibility: <%= userLogin.isLoggedIn() && userLogin.isProviderFb() ? 'visible' : 'hidden' %>" id="fb-logout-btn" onclick="fbLogout();">Logout</button>
+                </li>
+-->
             </ul>
         </div>
     </div>
@@ -77,5 +92,106 @@
         </div>
     </div>
     <hr class="hr-sm-bottom"/>
+    <div id="status">
+    </div>
 </div>
 
+<!--
+<script>
+
+/* todo: change google id for production */
+
+var googleUser = {};
+var gInit = function() {
+    gapi.load('auth2', function(){
+      auth2 = gapi.auth2.init({
+        client_id: '614659587896-i8jj7i9cdmkbtt44888egia9r4l03tne.apps.googleusercontent.com',
+        cookiepolicy: 'single_host_origin',
+        // Request scopes in addition to 'profile' and 'email'
+        //scope: 'additional_scope'
+      });
+      attachSignin(document.getElementById('g-login-btn'));
+    });
+};
+
+function attachSignin(element) {
+    auth2.attachClickHandler(element, {}, onGLogin, onGLoginFailure);
+}
+
+function onGLoginFailure(error) {
+    console.log(JSON.stringify(error, undefined, 2));
+}
+
+function onGLogin(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    userLogin.setAndLogin(profile.getName(), profile.getEmail(), profile.getImageUrl(), "google");
+    $("#g-logout-btn").show();
+}
+
+function gLogout() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    var that = this;
+    auth2.signOut().then(function () {
+        that.userLogin.clear();
+        location.reload();
+    });
+}
+
+gInit();
+
+/* Facebook integration starts here */
+
+function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      onFbLogin();
+    } else if (response.status === 'not_authorized') {
+       FB.login();
+    } else {
+      console.log('Please log into Facebook.');
+    }
+}
+
+function onFbLogin() {
+    var that = this;
+    FB.api('/me', function(response) {
+        that.userLogin.setAndLogin(response.name, response.email, "", "facebook");
+        $("#fb-logout-btn").show();
+    });
+}
+
+function fbLogout() {
+    var that = this;
+    FB.logout(function(response) {
+        that.userLogin.clear();
+        location.reload();
+    });
+}
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+}
+
+/* todo: change FB app id for production */
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '931653923587328',
+        status     : true,
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.5'
+    });
+
+    FB.Event.subscribe('auth.login', statusChangeCallback);
+};
+
+(function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+</script>-->

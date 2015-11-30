@@ -36,6 +36,8 @@ public abstract class AbstractRouteHandler extends RouterImpl {
                     String json = asyncResult.result().toString();
 
                     response.putHeader("Access-Control-Allow-Origin", "*") //todo: this is only for dev for http-server to be able to call vertx
+                            .putHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+                            .putHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
                             .putHeader("content-type", "application/json")
                             .end(json);
                 } else {
