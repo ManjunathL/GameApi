@@ -73,5 +73,6 @@
   },
   "_source": "git://github.com/cloudinary/cloudinary_js.git",
   "_target": "~2.0.0",
-  "_originalSource": "cloudinary"
+  "_originalSource": "cloudinary",
+  "_direct": true
 }

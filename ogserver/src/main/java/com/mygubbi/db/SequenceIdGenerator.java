@@ -1,5 +1,6 @@
 package com.mygubbi.db;
 
+import com.hazelcast.nio.serialization.Data;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -63,7 +64,7 @@ public class SequenceIdGenerator extends AbstractVerticle
 			qData.queryDef = qDef;
 			Integer qDataId = LocalCache.getInstance().store(qData);
 			
-			eb.send("db.query", qDataId, (AsyncResult<Message<Integer>> result) -> {
+			eb.send(DatabaseService.DB_QUERY, qDataId, (AsyncResult<Message<Integer>> result) -> {
 				QueryData resultData = (QueryData) LocalCache.getInstance().remove(result.result().body());
 				if (!resultData.errorFlag)
 				{
