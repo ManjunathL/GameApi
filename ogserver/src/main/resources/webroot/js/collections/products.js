@@ -1,7 +1,7 @@
 define([
     'jquery',
     'backbone',
-    'models/products'
+    'models/product'
 ], function($, Backbone, Product) {
     var Products = Backbone.Collection.extend({
         model: Product,

@@ -15,7 +15,7 @@ define([
                 success: function() {
                     var compiledTemplate = _.template(headerMenuTemplate);
                     $(that.el).html(compiledTemplate({
-                        "categories": categories.models[0].toJSON()
+                        "categories": categories
                     }));
                     $('a[href="' + window.location.hash + '"]').addClass('active');
                 },

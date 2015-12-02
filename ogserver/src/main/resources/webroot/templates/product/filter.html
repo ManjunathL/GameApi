@@ -1,63 +1,125 @@
-<div class="margin-md">
+<div class="margin-sm">
     <!--<% //debugger %>-->
+</div>
+<% var category = allCategories.getByCode(selectedCategories); %>
+<% var subCategory = allCategories.getSubCategoryBySubCategoryCode(selectedSubCategories); %>
+
+<div class="category-heading row">
+    <div class="col-sm-12">
+        <p><%=category.get('name') + ' > ' + subCategory.get('name')%></p>
+    </div>
 </div>
 
 <div class="category-filter row">
     <ul class="list-inline">
-        <li class="filter-type">Choose</li>
-        <li>CATEGORY</li>
-        <li><span class="caret"></span></li>
-        <li>|</li>
-        <li>SUB-CATEGORY</li>
-        <li><span class="caret"></span></li>
+<!--        <li id="categFilter" class="filter-type">Choose</li>-->
+        <!--<li>CATEGORY<span class="caret"></span></li>-->
+<!--
+        <li>
+            <div class="dropdown">
+                <button class="btn og-navbar-btn-face dropdown-toggle" type="button" id="dropdownMenuType"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    TYPE<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuType">
+                    <% category.get('subCategories').each(function(subCategory){ %>
+                    <li><a href="#products/<%=category.get('code')%>/<%=subCategory.get('code')%>"><%=subCategory.get('name')%></a></li>
+                    <% }); %>
+                </ul>
+            </div>
+        </li>
         <li>&nbsp;</li>
         <li>&nbsp;</li>
+-->
         <li class="filter-type">Sort By</li>
         <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/spopularity/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">POPULARITY</a>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/spopularity/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
             <% if (sortBy === 'popularity') { %>
+                <b>POPULARITY</b></a>&nbsp;
                 <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-desc fa-md"></span>
+                    <span class="fa fa-sort-amount-desc fa-md"></span>
                 <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-asc fa-md"></span>
+                    <span class="fa fa-sort-amount-asc fa-md"></span>
                 <% } %>
+            <% } else { %>
+                POPULARITY</a>
             <% } %>
         </li>
         <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/srelevance/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">RELEVANCE</a>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/srelevance/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
             <% if (sortBy === 'relevance') { %>
+                <b>RELEVANCE</b></a>&nbsp;
                 <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-desc fa-md"></span>
+                    <span class="fa fa-sort-amount-desc fa-md"></span>
                 <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-asc fa-md"></span>
+                    <span class="fa fa-sort-amount-asc fa-md"></span>
                 <% } %>
+            <% } else { %>
+                RELEVANCE</a>
             <% } %>
         </li>
         <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/screateDt/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">DATE</a>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/screateDt/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
             <% if (sortBy === 'createDt') { %>
+                <b>DATE</b></a>&nbsp;
                 <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-desc fa-md"></span>
+                    <span class="fa fa-sort-amount-desc fa-md"></span>
                 <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-asc fa-md"></span>
+                    <span class="fa fa-sort-amount-asc fa-md"></span>
                 <% } %>
+            <% } else { %>
+                DATE</a>
             <% } %>
         </li>
         <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/sprice/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">PRICE</a>
+            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/sprice/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
             <% if (sortBy === 'price') { %>
+                <b>PRICE</b></a>&nbsp;
                 <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-desc fa-md"></span>
+                    <span class="fa fa-sort-amount-desc fa-md"></span>
                 <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-asc fa-md"></span>
+                    <span class="fa fa-sort-amount-asc fa-md"></span>
                 <% } %>
+            <% } else { %>
+                PRICE</a>
             <% } %>
         </li>
         <li>&nbsp;</li>
         <li>&nbsp;</li>
         <li class="filter-type">View In</li>
-        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>"><span class="glyphicon glyphicon-th-list <%=!layout ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
+        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>"><span class="glyphicon glyphicon-th-list <%=!layout || layout === '_' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
         <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>/lsg"><span class="glyphicon glyphicon-th-large <%=layout === 'sg' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
         <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>/llg"><span class="glyphicon glyphicon-th <%=layout === 'lg' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
     </ul>
 </div>
+<!--
+<div class="filter-values row" id="filterVals">
+    <ul class="list-inline">
+&lt;!&ndash;
+        <% /*_.each(selectedCategories.split(","), function(selcateg){
+                var category = allCategories.getByCode(selcateg);
+        %>
+                    <li><%=category.get('name')%>&nbsp;X</li>
+        <% });*/ %>
+&ndash;&gt;
+
+        <% _.each(selectedSubCategories.split(","), function(selsubcateg){
+                var subCategory = allCategories.getSubCategoryBySubCategoryCode(selsubcateg);
+        %>
+                    <li><%=subCategory.get('name')%>&nbsp;X</li>
+        <% }); %>
+    </ul>
+
+</div>
+<script lang="JavaScript">
+
+    $( document ).ready( function() {
+        var leftp = $("#categFilter").position().left;
+
+        $("#filterVals").css({
+            position: "absolute",
+            left: (leftp) + "px"
+        });
+    });
+
+</script>-->

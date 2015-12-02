@@ -17,10 +17,10 @@ define([
             var products = new Products();
             var categories = new Categories();
             categories.fetch({
-                success: function(model, responce, options) {
+                success: function() {
 
                     var filter = {
-                        "categories": categories.models[0].toJSON(),
+                        "allCategories": categories,
                         "selectedCategories": that.model.selectedCategories,
                         "selectedSubCategories": that.model.selectedSubCategories,
                         "searchTerm": that.model.searchTerm,
@@ -37,7 +37,7 @@ define([
                             "subCategories": that.model.selectedSubCategories,
                             "searchTerm": that.model.searchTerm
                         },
-                        success: function(model, response, options) {
+                        success: function() {
 
                             if (that.model.sortBy) {
                                 products.sortBy(that.model.sortBy, that.model.sortDir);
@@ -50,7 +50,7 @@ define([
                               compiledTemplate = _.template(productPageTemplate); 
                             }
                             $(that.el).append(compiledTemplate({
-                                "collection": products.models[0].toJSON()
+                                "collection": products.toJSON()
                             }));
                         },
                         error: function(model, response, options) {
@@ -62,7 +62,6 @@ define([
                   console.log("couldn't fetch categories - " + response);
                 }
             });
-
 
         }/*,
         initialize: function() {
