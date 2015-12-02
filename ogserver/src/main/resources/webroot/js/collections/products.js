@@ -42,6 +42,9 @@ define([
 			this.sortKey = sortAttribute;
 			this.sortDir = sortDir;
     		this.sort();
+		},
+		getProduct: function (id) {
+		    return _.find(this, function(product){ return product.get('id') === id; });
 		}
     });
     return Products;

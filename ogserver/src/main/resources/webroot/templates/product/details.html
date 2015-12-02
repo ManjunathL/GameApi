@@ -1,41 +1,512 @@
-<div style="width: 60% !important; margin: auto;">
-    <div class="margin-sm"></div>
-    <h1>Welcome Smruti</h1>
+<link href="css/portfolio-base.css" rel="stylesheet">
+<link href="css/portfolio.css" rel="stylesheet">
+<div class="container">
+    <!-- Portfolio Item Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><%= product.name %>
+                <small>(H x W x D : <%= product.h %> x <%= product.w %> x <%= product.d %>)</small>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
 
-    <!--<% _.each(collection.data, function(product){ %>-->
-    <!--<div class="row">-->
-        <!--<div class="margin-sm"></div>-->
-        <!--<div class="col-sm-6"><img width="400" height="250"-->
-                                   <!--src="<%= imgBase + 'c_fill,h_250,w_400/' + product.images[0] %>"/></div>-->
-        <!--<div class="col-sm-6">-->
-            <!--<div class="row">-->
-                <!--<div class="col-sm-12 text-nowrap" style="font-size: 16px;"><%= product.name %></div>-->
-                <!--<div class="col-sm-12 margin-sm"></div>-->
-                <!--<div class="col-sm-12" style="font-size: 12px;"><%= product.desc %></div>-->
-                <!--<div class="col-sm-12 margin-sm"></div>-->
-                <!--<div class="col-sm-12" style="font-size: 12px; font-weight: bold;">Dimensions</div>-->
-                <!--<div class="col-sm-12 margin-xs"></div>-->
-                <!--<div class="col-sm-12" style="font-size: 12px;"><%= "Width " + product.w + "\" x " + "Depth " +-->
-                    <!--product.d + "\" x " + "Height " + product.h + "\"" %>-->
-                <!--</div>-->
-                <!--<div class="col-sm-12 margin-md"></div>-->
-                <!--<div class="col-sm-12 header-ul" align="left">-->
-                    <!--<ul style="-webkit-padding-start: 0px !important;">-->
-                        <!--<li><div title="Comments" class="btn-alpha-black"><span class="fa fa-comments"></span> <span style="font-size: 10px;">(23)</span></div></li>-->
-                        <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                        <!--<li><div title="Know More" class="btn-alpha-black"><span class="fa fa-info"></span></div></li>-->
-                        <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                        <!--<li><div title="Shortlist" class="btn-alpha-black"><span class="fa fa-check-square-o"></span> <span style="font-size: 10px;">(23)</span></div></li>-->
-                        <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                        <!--<li><div title="Share" class="btn-alpha-black"><span class="fa fa-share"></span></div></li>-->
-                    <!--</ul>-->
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <img draggable="false" src="http://res.cloudinary.com/univermal/image/upload/c_fill,h_500,w_700/Brambling_Aurbergene_Low_lrs7hs" alt="Mara Parallel Modular Kitchen " title="Mara Parallel Modular Kitchen ">
+            <!--<img draggable="false" src="http://cdn.shopify.com/s/files/1/1054/3918/products/WIGEON_c6b09b0b-cd82-4cd9-a5ff-2e796731e818.jpeg?v=1447064430" height="500px" width="700px" alt="Mara Parallel Modular Kitchen " title="Mara Parallel Modular Kitchen ">-->
+            <!--<img class="img-responsive" src="<%= imgBase + 'c_fill,h_500,w_700/' + product.images[0] %>" height="500px" width="700px" alt="">-->
+        </div>
+
+        <div class="col-md-4">
+            <h3 style="color:#F15A22">&#x20B9; <%= product.price %></h3>
+            <h3>Product Description</h3>
+            <!--<p><%= JSON.stringify(product) %></p>-->
+            <p><%= product.desc %></p>
+            <h3>Product Details</h3>
+
+            <!-- Material & Finish -->
+
+            <div class="row topspce" style="position:relative;">
+                <div class="w-portfolio style_16 columns_4 align_left ratio_3x2">
+                    <div class="w-portfolio-list">
+                        <div class="w-portfolio-item illustration size_1x1" data-id="330" data-categories="illustration">
+                            <a class="w-portfolio-item-anchor" href="javascript:void(0);"  onclick="showMaterialsubmmenu();" style="background-color: #EC6540;color: #ffffff;">
+                                <div class="w-portfolio-item-image" style="background-image: url(<%= imgBase + 'c_fill/mdf3_t1jmcw.jpg' %>)">
+                                    <img src="<%= imgBase + 'c_fill/mdf3_t1jmcw.jpg' %>" alt="Single Project" height="450" width="600">
+                                </div>
+                                <div class="w-portfolio-item-meta">
+                                    <span class="glyphicon glyphicon-chevron-down drop_downico" title="Click Here"></span>
+                                    <div class="w-portfolio-item-meta-h1">
+                                        <span class="w-portfolio-item-title">Material</span>
+                                        <span class="w-portfolio-item-text">MDF</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="w-portfolio-item illustration size_1x1" data-id="331" data-categories="illustration">
+                            <a class="w-portfolio-item-anchor" href="javascript:void(0);"  onclick="showFinishsubmmenu();" style="background-color: #663200;color: #ffffff;">
+                                <div class="w-portfolio-item-image" style="background-image: url(<%= imgBase + 'c_fill/finish3_e5agvz.jpg' %>)">
+                                    <img src="<%= imgBase + 'c_fill/finish3_e5agvz.jpg' %>" alt="Single Project – Full Slider" height="450" width="600">
+                                </div>
+                                <div class="w-portfolio-item-meta">
+                                    <span class="glyphicon glyphicon-chevron-down drop_downico" title="Click Here"></span>
+                                    <div class="w-portfolio-item-meta-h">
+                                        <span class="w-portfolio-item-title">Finish</span>
+                                        <span class="w-portfolio-item-text">Walnut</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            <div>
+            <div class="row" style="position: absolute;top: 100%;width: 100%;background-color: #FFF;z-index: 99;">
+                <div class="col-md-6 zero-padding" style="width:45%;" id="material-sub-menu">
+                    <div class="row" style="border:1px solid #ccc;">
+                        <div class="col-md-6 zero-padding w-portfolio-item-text">Particle Board</div>
+                        <div class="col-md-6 zero-padding"><img src="<%= imgBase + 'c_fill/particle-board_pijmmi.jpg' %>" alt="Single Project" height="50px" width="60px" class="fr" /></div>
+                    </div>
+                    <div class="row" style="border:1px solid #ccc;">
+                        <div class="col-md-6 zero-padding w-portfolio-item-text">Particle Board</div>
+                        <div class="col-md-6 zero-padding"><img src="<%= imgBase + 'c_fill/particle-board_pijmmi.jpg' %>" alt="Single Project" height="50px" width="60px" class="fr" /></div>
+                    </div>
+                </div>
+                <div class="col-md-6 zero-padding" style="width:45%;"  id="finish-sub-menu">
+                    <div class="row" style="border:1px solid #ccc;">
+                        <div class="col-md-6 zero-padding w-portfolio-item-text" style="border:1px solid #ccc;">Oak</div>
+                        <div class="col-md-6 zero-padding"><img src="<%= imgBase + 'c_fill/oak_wzchzs.jpg' %>" alt="Single Project" height="50px" width="60px" class="fr" /></div>
+                    </div>
+                    <div class="row" style="border:1px solid #ccc;">
+                        <div class="col-md-6 zero-padding w-portfolio-item-text">Oak</div>
+                        <div class="col-md-6 zero-padding"><img src="<%= imgBase + 'c_fill/oak_wzchzs.jpg' %>" alt="Single Project" height="50px" width="60px" class="fr" /></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!--<div class="row" style="margin-left: 5px;">-->
+                <!--<div class="w-portfolio style_16 columns_4 align_left ratio_3x2">-->
+                    <!--<div class="w-portfolio-list">-->
+                        <!--<div class="w-portfolio-item illustration size_1x1" id="material-sub-menu" data-id="3301" data-categories="illustration">-->
+                            <!--<a class="w-portfolio-item-anchor" style="background-color: #EC6540;color: #ffffff;">-->
+                                <!--<div class="w-portfolio-item-image" style="background-image: url(<%= imgBase + 'c_fill/particle-board_pijmmi.jpg' %>)">-->
+                                    <!--<img src="<%= imgBase + 'c_fill/particle-board_pijmmi.jpg' %>" alt="Single Project" height="450" width="600">-->
+                                <!--</div>-->
+                                <!--<div class="w-portfolio-item-meta">-->
+                                    <!--<div class="w-portfolio-item-meta-h1">-->
+                                        <!--<span class="w-portfolio-item-title">Material</span>-->
+                                        <!--<span class="w-portfolio-item-text">Particle Board</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</div>-->
+
+
+                        <!--<div class="w-portfolio-item illustration size_1x1" id="finish-sub-menu" data-id="3311" data-categories="illustration">-->
+                            <!--<a class="w-portfolio-item-anchor" href="#" style="background-color: #8B6236;color: #ffffff;">-->
+                                <!--<div class="w-portfolio-item-image" style="background-image: url(<%= imgBase + 'c_fill/oak_wzchzs.jpg' %>)">-->
+                                    <!--<img src="<%= imgBase + 'c_fill/oak_wzchzs.jpg' %>" alt="Single Project – Full Slider" height="450" width="600">-->
+                                <!--</div>-->
+                                <!--<div class="w-portfolio-item-meta">-->
+                                    <!--<div class="w-portfolio-item-meta-h">-->
+                                        <!--<span class="w-portfolio-item-title">Finish</span>-->
+                                        <!--<span class="w-portfolio-item-text">Oak</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
                 <!--</div>-->
             <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-sm-12">-->
-            <!--<hr class="hr-md-bottom"/>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<% }); %>-->
+
+            <!--&lt;!&ndash; /.Material & Finish &ndash;&gt;-->
+
+            <!-- Color -->
+
+            <div class="color-section">
+                <h5>Colors</h5>
+                <div class="color-rounds round-bk1"></div>
+                <div class="color-rounds round-bk2"></div>
+                <div class="color-rounds round-bk3"></div>
+                <div class="color-rounds round-bk4"></div>
+                <div class="color-rounds round-bk5"></div>
+                <div class="color-rounds round-bk6"><a href="#" class="morelnk" style="">More</a></div>
+                <div class="clear"></div>
+
+            </div>
+
+            <!-- /.Color -->
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+
+    </div>
+
+    <!-- Accessories -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Customize your Product</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Accessories List</h3>
+        </div>
+        <div class="col-lg-12">
+            <div class="col-md-6 accessoryList">
+                <div class="accessoryItem" id="accessoryList1">
+                    <div class="row"><div class="accessory-desc"><strong>Accessories in:</strong> Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)</div></div>
+                    <div class="row grey-border">
+                        <div class="col-md-5 zero-padding">
+                            <div class="accessory-img">
+                                <a href="javaScript:void(0)" class="main-image-link" id="main-image-link">
+                                    <img src="<%= imgBase + 'c_fill,h_200,w_230/rack_qabmsl.jpg' %>" alt="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" title="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" class="main-image">
+                                    <img src="img/loading_overlay-.gif" height="190px" width="210px" alt="loader" id="loader" style="display:none;" />
+                                </a>
+                                <div class="accessory-overlay"><span class="fa fa-rupee"></span> <span class="val amt" id="acc_price">18,953</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 zero-right-padding">
+                            <div class="accessory-details">
+                                <div class="col-md-6 spc">
+                                    <a href="javascript:void(0);" id="acc-1" class="accessoriescls active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/cabinet-with-three-drawers1_vgkbd3.jpg' %>" id="imn1" title="cabinet-with-three-drawers1_vgkbd3.jpg">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt" id="val-amt1">8,953</span></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 spc">
+                                    <a href="javascript:void(0);" id="acc-2" class="accessoriescls active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/cabinet-with-three-drawers1_vgkbd3.jpg' %>" id="imn2" title="cabinet-with-three-drawers1_vgkbd3.jpg">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt" id="val-amt2">5,953</span></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 spc">
+                                    <a href="javascript:void(0);" id="acc-3" class="accessoriescls active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/rack_qabmsl.jpg' %>" id="imn3" title="rack_qabmsl.jpg">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt" id="val-amt3">4,953</span></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 spc">
+                                    <a href="javascript:void(0);" id="acc-4" class="accessoriescls active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/rack_qabmsl.jpg' %>" id="imn4" title="rack_qabmsl.jpg">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt" id="val-amt4">6,953</span></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 spc">
+                                    <a href="javascript:void(0);" id="acc-5" class="accessoriescls active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/rack_qabmsl.jpg' %>" id="imn5" title="rack_qabmsl.jpg">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt" id="val-amt5">7,953</span></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 spc">
+                                    <a href="javascript:void(0);" id="acc-6" class="accessoriescls active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/rack_qabmsl.jpg' %>" id="imn6" title="rack_qabmsl.jpg">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt" id="val-amt6">9,953</span></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accessoryItem" id="accessoryList2">
+                    <div class="row"><div class="accessory-desc"><strong>Accessories in:</strong> Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)</div></div>
+                    <div class="row grey-border">
+                        <div class="col-md-5 zero-padding">
+                            <div class="accessory-img">
+                                <a href="javaScript:void(0)" class="main-image-link">
+                                    <img src="<%= imgBase + 'c_fill,h_200,w_230/cabinet-with-bottle-pull-out111_xu5l9c.jpg' %>" alt="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" title="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" class="main-image">
+                                </a>
+                                <div class="accessory-overlay"><span class="fa fa-rupee"></span> <span class="val amt">18,953</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 zero-right-padding">
+                            <div class="accessory-details">
+                                <div class="col-md-6 spc">
+                                    <a href="#" class="active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/cabinet-with-bottle-pull-out111_xu5l9c.jpg' %>">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt">8,953</span></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 spc">
+                                    <a href="#" class="active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/cabinet-with-bottle-pull-out111_xu5l9c.jpg' %>">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt">8,953</span></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 accessoryList">
+                <div class="accessoryItem" id="accessoryList3">
+                    <div class="row">
+                        <div class="accessory-desc">
+                            <strong>Accessories in:</strong> Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)
+                        </div>
+                    </div>
+                    <div class="row grey-border">
+                        <div class="col-md-5 zero-padding">
+                            <div class="accessory-img">
+                                <a href="javaScript:void(0)" class="main-image-link">
+                                    <img src="<%= imgBase + 'c_fill,h_200,w_230/cabinet-with-three-drawers_elpwu7.jpg' %>" alt="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" title="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" class="main-image">
+                                </a>
+                                <div class="accessory-overlay"><span class="fa fa-rupee"></span> <span class="val amt">18,953</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="accessory-details">
+                                <div class="col-md-6 spc">
+                                    <a href="#" class="active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/cabinet-with-three-drawers_elpwu7.jpg' %>">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt">18,953</span></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accessoryItem" id="accessoryList4">
+                    <div class="row">
+                        <div class="accessory-desc">
+                            <strong>Accessories in:</strong> Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)
+                        </div>
+                    </div>
+                    <div class="row grey-border">
+                        <div class="col-md-5 zero-padding">
+                            <div class="accessory-img">
+                                <a href="javaScript:void(0)" class="main-image-link">
+                                    <img src="<%= imgBase + 'c_fill,h_200,w_230/ctray1_jbqbxm.jpg' %>" alt="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" title="Base Cabinet with Two Shutters &amp; One Adjustable Shelf - 800x560x720 (WxDxH)" class="main-image">
+                                </a>
+                                <div class="accessory-overlay"><span class="fa fa-rupee"></span> <span class="val amt">18,953</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="accessory-details">
+                                <div class="col-md-6 spc">
+                                    <a href="#" class="active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/ctray1_jbqbxm.jpg' %>">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt">8,953</span></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 spc">
+                                    <a href="#" class="active" alt="No Accessories" title="No Accessories">
+                                        <img src="<%= imgBase + 'c_fill/ctray1_jbqbxm.jpg' %>">
+                                        <span class="active-bar"></span>
+                                        <span class="sku-price"><span class="fa fa-rupee"></span> <span class="val amt">8,953</span></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <!-- /.Accessories -->
+
+    <!-- Appliances -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Appliances</h3>
+        </div>
+        <div class="col-lg-12">
+        <div id="thumbcarousel" class="carousel slide" data-interval="false">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="<%= imgBase + 'c_fill/three-burner-cooktop_syaz6y.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="<%= imgBase + 'c_fill/2-burner-non-auto-cooktop2_x6hpz2.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="<%= imgBase + 'c_fill/four-burner-cooktop3_xenwzl.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="<%= imgBase + 'c_fill/alda-hob-bha164_gtplbz.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                </div><!-- /item -->
+                <div class="item">
+                    <div data-target="#carousel" data-slide-to="4" class="thumb"><img src="<%= imgBase + 'c_fill/alda-hob-bha164_gtplbz.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="5" class="thumb"><img src="<%= imgBase + 'c_fill/chimney2_bkcc4z.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="6" class="thumb"><img src="<%= imgBase + 'c_fill/chimney1_hrvmdq.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="7" class="thumb"><img src="<%= imgBase + 'c_fill/chimney_ff0o46.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                </div><!-- /item -->
+                </div><!-- /carousel-inner -->
+                <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div> <!-- /thumbcarousel -->
+            </div>
+    </div>
+    <!-- /.Appliances -->
+
+    <!-- Related Projects Row -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h3 class="page-header">Related Product</h3>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://res.cloudinary.com/univermal/image/upload/c_fill,h_300,w_500/Auklet_low_jkp4hr" alt="">
+            </a>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <!--  accordion -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="accordion-container">
+                <a href="#" class="accordion-toggle"><%= product.delivery.title %><span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                <div class="accordion-content">
+                    <p><%= product.delivery.details %></p>
+                </div>
+                <!--/.accordion-content-->
+            </div>
+        </div>
+        <!--/.accordion-container-->
+        <div class="col-lg-12">
+            <div class="accordion-container">
+                <a href="#" class="accordion-toggle"><%= product.warranty.title %> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                <div class="accordion-content">
+                    <p><%= product.warranty.details %></p>
+                </div>
+                <!--/.accordion-content-->
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <!--/.accordion-container-->
+            <div class="accordion-container">
+                <a href="#" class="accordion-toggle"><%= product.paymentTerms.title %> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                <div class="accordion-content">
+                    <p><%= product.paymentTerms.details %></p>
+                </div>
+                <!--/.accordion-content-->
+            </div>
+        </div>
+        <!--/.accordion-container-->
+    </div>
 </div>
-<div class="margin-sm"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.accordion-toggle').on('click', function(event){
+            event.preventDefault();
+            // create accordion variables
+            var accordion = $(this);
+            var accordionContent = accordion.next('.accordion-content');
+            var accordionToggleIcon = $(this).children('.toggle-icon');
+            // toggle accordion link open class
+            accordion.toggleClass("open");
+            // toggle accordion content
+            accordionContent.slideToggle(250);
+            // change plus/minus icon
+            if (accordion.hasClass("open")) {
+            accordionToggleIcon.html("<i class='fa fa-minus-circle'></i>");
+            } else {
+            accordionToggleIcon.html("<i class='fa fa-plus-circle'></i>");
+            }
+        });
+         $(".nav-tabs a").click(function(){
+            $(this).tab('show');
+        });
+        $('.nav-tabs a').on('shown.bs.tab', function(event){
+            var x = $(event.target).text();         // active tab
+            var y = $(event.relatedTarget).text();  // previous tab
+            $(".act span").text(x);
+            $(".prev span").text(y);
+        });
+
+
+        $('.accessoriescls').click(function(){
+                var id = this.id;
+                $("#loader").show();
+                var idarr = id.split("-");
+                var imgnm = $("#imn"+idarr[1]).attr('title');
+                alert(imgnm);
+                $("#acc_price").html($("#val-amt"+idarr[1]).html());
+                var imgurll = imgBase + "c_fill,h_200,w_230/" + imgnm;
+                //alert(imgurll);
+                $("#main-image-link").html('<img src="'+imgurll+'" class="main-image">');
+                $("#loader").hide();
+        });
+
+    });
+    function showMaterialsubmmenu(){
+        $("#material-sub-menu").toggle();
+    }
+    function showFinishsubmmenu(){
+        $("#finish-sub-menu").toggle();
+
+    }
+</script>
+<script src="js/portfolio.js"></script>
+
+<style>
+    .carousel {
+    margin-top: 20px;
+    }
+    #thumbcarousel{
+    width:80%;
+    margin-left: 10%;
+    }
+    .item .thumb {
+    width: 25%;
+    cursor: pointer;
+    float: left;
+    }
+    .item .thumb img {
+    width: 100%;
+    margin: 2px;
+    }
+    .item img {
+   // width:100%;
+   width: 224px !important;
+    height: 150px;
+    }
+    .btn-sm{
+    margin-left: 30%;
+    }
+
+</style>

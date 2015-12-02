@@ -5,44 +5,23 @@ define([
     'backbone',
     'bootstrap',
     'text!templates/product/details.html',
-    'collections/products',
-    'collections/categories'
-], function($, _, cloudinary, Backbone, Bootstrap, productPageTemplate, Products, Categories) {
+    'models/product',
+    'models/selectedProduct'
+], function($, _, cloudinary, Backbone, Bootstrap, productPageTemplate, ProductModel, SelectedProduct) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         render: function() {
-            that = this;
-            var products = new Products();
-            var categories = new Categories();
-            categories.fetch({
-                success: function(model, responce, options) {
-                    products.fetch({
-                        data: {
-                            "product": that.model.selectedProduct
-                        },
-                        success: function(model, response, options) {
-                        console.log('ssssssssssssssssssssssssss'+response);
-                            var compiledTemplate = _.template(productPageTemplate);
-                            $(that.el).append(compiledTemplate({
-                                "collection": products.models[0].toJSON()
-                            }));
-                        },
-                        error: function(model, response, options) {
-                            console.log("error from products fetch - " + response);
-                        }
-                    });
-                },
-                error: function(model, response, options){
-                  console.log("couldn't fetch categories - " + response);
-                }
-            });
 
+            var product = this.model.products.getProduct(this.model.id);
+            var selectedProduct = new SelectedProduct();
+            selectedProduct.set('originalProduct', product);
 
-        }/*,
-        initialize: function() {
-            _.bindAll(this, 'render');
-        }*/
-
+            var compiledTemplate = _.template(productPageTemplate);
+            $(this.el).html(compiledTemplate({
+                "product": product.toJSON(),
+                "selectedProduct": selectedProduct.toJSON()
+            }));
+        }
     });
     return ProductPage;
 });

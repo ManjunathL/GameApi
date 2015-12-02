@@ -2,11 +2,11 @@ define([
   'jquery',
   'backbone'
 ], function($, Backbone){
-  var Product = Backbone.Model.extend({
-      urlRoot:restBase + '/api/products/',
-      defaults: {
-          id: ''
-      }
+  var SelectedProduct = Backbone.Model.extend({
+    calculatePrice: function() {
+
+        //this.model.originalProduct
+    }
   });
-  return Product;
+  return SelectedProduct;
 });

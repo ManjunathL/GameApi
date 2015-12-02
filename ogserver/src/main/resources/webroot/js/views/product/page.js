@@ -57,6 +57,8 @@ define([
                             console.log("error from products fetch - " + response);
                         }
                     });
+
+                    that.model.global.set('products', products);
                 },
                 error: function(model, response, options){
                   console.log("couldn't fetch categories - " + response);

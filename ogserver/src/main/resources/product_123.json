@@ -29,8 +29,8 @@
     "details": "templates/common/standard_payment_terms.html"
   },
   "commentsUrl": "http://...",
-  "imageUrls": [
-    "s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
+  "images": [
+    "3.Blunt_Front_White_BrownOak.jpg",
     "s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
   ],
   "price": "22,000"

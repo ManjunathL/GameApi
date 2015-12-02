@@ -56,7 +56,7 @@
                 <li><a href='#products/<%=category.code%>'><%=category.get('name')%></a></li>
                 <% } else { %>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=category.name%> <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=category.get('name')%> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <% category.get('subCategories').each(function(subCategory){ %>
                         <li><a href="#products/<%=category.get('code')%>/<%=subCategory.get('code')%>"><%=subCategory.get('name')%></a></li>
