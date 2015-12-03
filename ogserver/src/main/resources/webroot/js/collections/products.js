@@ -1,8 +1,9 @@
 define([
     'jquery',
     'backbone',
-    'models/product'
-], function($, Backbone, Product) {
+    'models/product',
+    'underscore'
+], function($, Backbone, Product, _) {
     var Products = Backbone.Collection.extend({
         model: Product,
         url: restBase + '/api/products',
@@ -44,7 +45,7 @@ define([
     		this.sort();
 		},
 		getProduct: function (id) {
-		    return _.find(this, function(product){ return product.get('id') === id; });
+		    return this.find(function(product){ return product.get('id') === id; });
 		}
     });
     return Products;

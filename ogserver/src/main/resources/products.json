@@ -20,6 +20,7 @@
     "shortlisted": 46,
     "likes": 200,
     "createDt": "04-30-2015",
+    "defaultprice":"1000000",
     "delivery": {
       "title": "45 Days Delivery Guarantee ",
       "details": "templates/common/standard_delivery_45.html"
@@ -97,6 +98,89 @@
                 "accessory": "Wired Basket",
                 "accessoryImg": "wire_basket.jpg",
                 "accessoryPrice": "3800"
+              },
+              {
+                "id": "2",
+                "pricePerUnit": "14500",
+                "accessoryId": "3",
+                "accessoryCode": "WB3748",
+                "accessory": "Wired Basket SS",
+                "accessoryImg": "wire_basket.jpg",
+                "accessoryPrice": "4800"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Wall Glass Unit",
+        "desc": "Glass Wall Unit to show your expensive Crockery",
+        "quantity": "1",
+        "defAccessoryId": "1",
+        "defAccessoryCode": "MC37487",
+        "defAccessory": "Moving Corner",
+        "defAccessoryImg": "moving_corner.jpg",
+        "defAccessoryPrice": "7400",
+        "w": "800",
+        "h": "600",
+        "d": "200",
+        "uom": "cm",
+        "mfMapping": [
+          {
+            "materialId": "1",
+            "materialCode": "PW",
+            "material": "Plywood",
+            "materialImg": "347856465.jpeg",
+            "materialMainImgSuffix": "pw",
+            "finishId": "2",
+            "finishCode": "MM",
+            "finish": "MDF with Membrane",
+            "finishImg": "384758.jpeg",
+            "finishMainImgSuffix": "mm",
+            "pricePerUnit": "12000",
+            "componentOptions": [
+              {
+                "id": "2",
+                "pricePerUnit": "12500",
+                "accessoryId": "2",
+                "accessoryCode": "WB3748",
+                "accessory": "Wired Basket",
+                "accessoryImg": "wire_basket.jpg",
+                "accessoryPrice": "3800"
+              }
+            ]
+          },
+          {
+            "materialId": "1",
+            "materialCode": "PW",
+            "material": "Plywood",
+            "materialImg": "347856465.jpeg",
+            "materialMainImgSuffix": "pw",
+            "finishId": "3",
+            "finishCode": "PUP",
+            "finish": "PU Paint",
+            "finishImg": "334758.jpeg",
+            "finishMainImgSuffix": "mm",
+            "pricePerUnit": "16000",
+            "componentOptions": [
+              {
+                "id": "2",
+                "pricePerUnit": "16500",
+                "accessoryId": "2",
+                "accessoryCode": "WB3748",
+                "accessory": "Wired Basket",
+                "accessoryImg": "wire_basket.jpg",
+                "accessoryPrice": "3800"
+              },
+              {
+                "id": "2",
+                "pricePerUnit": "14500",
+                "accessoryId": "3",
+                "accessoryCode": "WB3748",
+                "accessory": "Wired Basket SS",
+                "accessoryImg": "wire_basket.jpg",
+                "accessoryPrice": "4800"
               }
             ]
           }

@@ -2,16 +2,15 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'bootstrap',
-  'models/global'
-], function ($, _, Backbone, Bootstrap, Global) {
+  'bootstrap'
+], function ($, _, Backbone, Bootstrap) {
   var AppRouter = Backbone.Router.extend({
     routes: {
       '': 'dashboard',
       'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products',
       'products_details/:id': 'product_details'
-    },
-    global: new Global()
+    }
+
   });
 
   var initialize = function(options){
@@ -31,8 +30,7 @@ define([
                 "searchTerm": searchTerm,
                 "sortBy": sortBy,
                 "sortDir": sortDir,
-                "layout": layout,
-                "global": router.global
+                "layout": layout
             }
         };
         new ProductPage(options).render();
@@ -44,7 +42,6 @@ define([
 
         var options = {
             model: {
-                "global": router.global,
                 "id": productId
             }
         };

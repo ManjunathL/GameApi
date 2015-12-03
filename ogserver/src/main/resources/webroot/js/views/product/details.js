@@ -5,22 +5,23 @@ define([
     'backbone',
     'bootstrap',
     'text!templates/product/details.html',
-    'models/product',
-    'models/selectedProduct'
-], function($, _, cloudinary, Backbone, Bootstrap, productPageTemplate, ProductModel, SelectedProduct) {
+    'models/product'
+], function($, _, cloudinary, Backbone, Bootstrap, productPageTemplate, ProductModel) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         render: function() {
+            var that = this;
 
-            var product = this.model.products.getProduct(this.model.id);
-            var selectedProduct = new SelectedProduct();
-            selectedProduct.set('originalProduct', product);
+            var product = new ProductModel({id: that.model.id});
+            product.fetch({
+                success: function (response) {
+                    var compiledTemplate = _.template(productPageTemplate);
+                    $(that.el).html(compiledTemplate({
+                        "product": response.toJSON()
+                    }));
+                }
+            });
 
-            var compiledTemplate = _.template(productPageTemplate);
-            $(this.el).html(compiledTemplate({
-                "product": product.toJSON(),
-                "selectedProduct": selectedProduct.toJSON()
-            }));
         }
     });
     return ProductPage;

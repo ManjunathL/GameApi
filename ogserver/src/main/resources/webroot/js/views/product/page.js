@@ -58,7 +58,8 @@ define([
                         }
                     });
 
-                    that.model.global.set('products', products);
+//                    window.appdata = {};
+//                    window.appdata.products = products;
                 },
                 error: function(model, response, options){
                   console.log("couldn't fetch categories - " + response);
