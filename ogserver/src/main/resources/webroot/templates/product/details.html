@@ -1,32 +1,43 @@
 <link href="css/portfolio-base.css" rel="stylesheet">
 <link href="css/portfolio.css" rel="stylesheet">
-<div class="container">
+<section id="portfolio" class="bg-light-gray top80">
+<div class="container" style="position: relative;">
     <!-- Portfolio Item Heading -->
-    <div class="row">
-        <div class="col-lg-12">
-            <%= product.defaultprice %>
-            <h1 class="page-header"><%= product.name %>
-                <small>(H x W x D : <%= product.h %> x <%= product.w %> x <%= product.d %>)</small>
-            </h1>
+    <div class="row page-header" style="position: fixed; z-index: 999; width: 85%; background-color: #f7f7f7;margin-top: 10px;">
+        <div class="col-md-6">
+            <h2 class="product-title"><%= product.name %></h2>
+            <!--<small>(H x W x D : <%= product.h %> x <%= product.w %> x <%= product.d %>)</small>-->
+        </div>
+        <div class="col-md-6 align-right">
+            <div class="row">
+                <div class="col-md-6 product-title"><h3>&#8377;<%= product.defaultPrice %></h3></div>
+                <div class="col-md-6 shortlist-in-details">
+                    <a href="#" class="button button-orange">
+                        <span class="fa fa-heart-o"></span>
+                        shortlist
+                    </a>
+                    <a href="#" class="button">
+                        <span class="fa fa-share"></span>
+                        share
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.row -->
 
     <!-- Portfolio Item Row -->
-    <div class="row">
+    <div class="row" style="margin-top: 85px;">
 
         <div class="col-md-8">
-            <img draggable="false" src="http://res.cloudinary.com/univermal/image/upload/c_fill,h_500,w_700/Brambling_Aurbergene_Low_lrs7hs" alt="Mara Parallel Modular Kitchen " title="Mara Parallel Modular Kitchen ">
+            <img draggable="false" src="http://res.cloudinary.com/univermal/image/upload/c_fill,h_500,w_800/Brambling_Aurbergene_Low_lrs7hs" alt="Mara Parallel Modular Kitchen " title="Mara Parallel Modular Kitchen ">
             <!--<img draggable="false" src="http://cdn.shopify.com/s/files/1/1054/3918/products/WIGEON_c6b09b0b-cd82-4cd9-a5ff-2e796731e818.jpeg?v=1447064430" height="500px" width="700px" alt="Mara Parallel Modular Kitchen " title="Mara Parallel Modular Kitchen ">-->
             <!--<img class="img-responsive" src="<%= imgBase + 'c_fill,h_500,w_700/' + product.images[0] %>" height="500px" width="700px" alt="">-->
         </div>
 
         <div class="col-md-4">
-            <h3 style="color:#F15A22">&#x20B9; <%= product.price %></h3>
-            <h3>Product Description</h3>
-            <!--<p><%= JSON.stringify(product) %></p>-->
-            <p><%= product.desc %></p>
-            <h3>Product Details</h3>
+
+            <!--<h3>Product Details</h3>-->
 
             <!-- Material & Finish -->
 
@@ -151,6 +162,11 @@
     <!-- /.row -->
 
     <div class="row">
+        <div class="col-lg-12">
+        <h3 class="page-header">Product Description</h3>
+        <!--<p><%= JSON.stringify(product) %></p>-->
+        <p><%= product.desc %></p>
+            </div>
 
     </div>
 
@@ -339,16 +355,16 @@
         <div id="thumbcarousel" class="carousel slide" data-interval="false">
             <div class="carousel-inner">
                 <div class="item active">
-                    <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="<%= imgBase + 'c_fill/three-burner-cooktop_syaz6y.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
-                    <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="<%= imgBase + 'c_fill/2-burner-non-auto-cooktop2_x6hpz2.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
-                    <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="<%= imgBase + 'c_fill/four-burner-cooktop3_xenwzl.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
-                    <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="<%= imgBase + 'c_fill/alda-hob-bha164_gtplbz.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="<%= imgBase + 'c_fill/three-burner-cooktop_syaz6y.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
+                    <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="<%= imgBase + 'c_fill/2-burner-non-auto-cooktop2_x6hpz2.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
+                    <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="<%= imgBase + 'c_fill/four-burner-cooktop3_xenwzl.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
+                    <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="<%= imgBase + 'c_fill/alda-hob-bha164_gtplbz.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
                 </div><!-- /item -->
                 <div class="item">
-                    <div data-target="#carousel" data-slide-to="4" class="thumb"><img src="<%= imgBase + 'c_fill/alda-hob-bha164_gtplbz.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
-                    <div data-target="#carousel" data-slide-to="5" class="thumb"><img src="<%= imgBase + 'c_fill/chimney2_bkcc4z.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
-                    <div data-target="#carousel" data-slide-to="6" class="thumb"><img src="<%= imgBase + 'c_fill/chimney1_hrvmdq.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
-                    <div data-target="#carousel" data-slide-to="7" class="thumb"><img src="<%= imgBase + 'c_fill/chimney_ff0o46.jpg' %>"><button type="button" class="btn-sm btn-info">Add to Cart</button></div>
+                    <div data-target="#carousel" data-slide-to="4" class="thumb"><img src="<%= imgBase + 'c_fill/alda-hob-bha164_gtplbz.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
+                    <div data-target="#carousel" data-slide-to="5" class="thumb"><img src="<%= imgBase + 'c_fill/chimney2_bkcc4z.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
+                    <div data-target="#carousel" data-slide-to="6" class="thumb"><img src="<%= imgBase + 'c_fill/chimney1_hrvmdq.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
+                    <div data-target="#carousel" data-slide-to="7" class="thumb"><img src="<%= imgBase + 'c_fill/chimney_ff0o46.jpg' %>"><button type="button" class="btn-sm btn-info">Add</button></div>
                 </div><!-- /item -->
                 </div><!-- /carousel-inner -->
                 <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
@@ -430,6 +446,7 @@
         <!--/.accordion-container-->
     </div>
 </div>
+</section>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.accordion-toggle').on('click', function(event){

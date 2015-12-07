@@ -12,7 +12,10 @@ define([
         render: function() {
             var that = this;
 
-            var product = new ProductModel({id: that.model.id});
+            var product = new ProductModel({id: '123'});
+           // var product = new ProductModel({id: that.model.id});
+            //var product = this.model.getProduct(that.model.id);
+            console.log(product);
             product.fetch({
                 success: function (response) {
                     var compiledTemplate = _.template(productPageTemplate);
