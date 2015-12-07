@@ -1,11 +1,11 @@
 [
   {
-    "name": "ALL SOLUTIONS",
+    "name": "All Solutions",
     "code": "allsolutions",
     "subCategories": []
   },
   {
-    "name": "LIVING & DINING",
+    "name": "Living & Dining",
     "code": "livingndining",
     "subCategories": [
       {
@@ -23,7 +23,7 @@
     ]
   },
   {
-    "name": "KITCHEN",
+    "name": "Kitchen",
     "code": "kitchen",
     "subCategories": [
       {
@@ -45,7 +45,7 @@
     ]
   },
   {
-    "name": "BEDROOM",
+    "name": "Bedroom",
     "code": "bedroom",
     "subCategories": [
       {

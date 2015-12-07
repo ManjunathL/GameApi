@@ -85,16 +85,14 @@ h6 {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
+.btn-primary.active {
     border-color: #f6bf01;
     color: #fff;
     background-color: #fec503;
 }
 
 .btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
+.btn-primary.active {
     background-image: none;
 }
 
@@ -137,16 +135,14 @@ fieldset[disabled] .btn-primary.active {
 .btn-xl:hover,
 .btn-xl:focus,
 .btn-xl:active,
-.btn-xl.active,
-.open .dropdown-toggle.btn-xl {
+.btn-xl.active {
     border-color: #ff471a;
     color: #fff;
     background-color: #ff3200;
 }
 
 .btn-xl:active,
-.btn-xl.active,
-.open .dropdown-toggle.btn-xl {
+.btn-xl.active {
     background-image: none;
 }
 
@@ -250,7 +246,8 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .nav li a:hover,
-.navbar-default .nav li a:focus {
+.navbar-default .nav li a:focus,
+.navbar-default .nav li a:active {
     outline: 0;
     color: #f1591f;
     text-shadow: 0 1px 2px rgba(255,50,0,0.6);
@@ -277,14 +274,16 @@ fieldset[disabled] .btn-xl.active {
     transform: scaleX(1);
 }
 
-.navbar-default .nav .user {
+.navbar-default .nav .user, .navbar-default .nav .search {
     color: #fff;
     padding: 10px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
 .navbar-default .nav .user:hover,
-.navbar-default .nav .user:focus {
+.navbar-default .nav .user:focus,
+.navbar-default .nav .search:hover,
+.navbar-default .nav .search:focus{
     outline: 0;
     color: #f1591f;
 }
@@ -424,6 +423,10 @@ fieldset[disabled] .btn-xl.active {
     padding-top: 30px;
 }
 
+.padding-bottom10 {
+    padding-bottom: 10px;
+}
+
 .padding0 {
     padding: 0px;
 }
@@ -469,6 +472,13 @@ input[type=checkbox] {
     position: relative;
 }
 
+@media (min-width: 768px) {
+    .carousel-inner {
+        top: 21px;
+    }
+}
+
+
 @media(min-width:768px) {
     .navbar-default {
         padding: 15px 0;
@@ -503,9 +513,11 @@ input[type=checkbox] {
     }
 
     .navbar-default.navbar-shrink .nav li a:hover,
-    .navbar-default.navbar-shrink .nav li a:focus {
+    .navbar-default.navbar-shrink .nav li a:focus,
+    .navbar-default.navbar-shrink .nav li a.active {
         outline: 0;
         color: #f1591f;
+        background: none;
     }
 
     .navbar-default.navbar-shrink .nav li a.selected {
@@ -514,13 +526,15 @@ input[type=checkbox] {
         box-shadow: 0px -2px 0px #f1591f inset;
     }
 
-    .navbar-default.navbar-shrink .nav .user {
+    .navbar-default.navbar-shrink .nav .user, .navbar-default.navbar-shrink .nav .search  {
         color: #000;
         text-shadow: none;
     }
 
     .navbar-default.navbar-shrink .nav .user:hover,
-    .navbar-default.navbar-shrink .nav .user:focus {
+    .navbar-default.navbar-shrink .nav .user:focus,
+    .navbar-default.navbar-shrink .nav .search:hover,
+    .navbar-default.navbar-shrink .nav .search:focus{
         outline: 0;
         color: #f1591f;
     }
@@ -541,6 +555,15 @@ input[type=checkbox] {
         background-color: #ff3200;
     }
 
+}
+
+.available {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.available + .shortlist-remove {
+    margin-top: 30%;
 }
 
 .super-script {
@@ -748,10 +771,12 @@ section h3.section-subheading {
     color: #ffffff;
     background-color: #f1591f;
     border: 2px solid #f1591f;
+    text-transform: uppercase;
 }
 
 .button-orange:hover {
     color: #ffffff;
+    background-color: #ff3200;
 }
 
 .arr {
@@ -787,17 +812,53 @@ section h3.section-subheading {
     display: none;
 }
 
-.userpop h2 {
+.signup {
+    margin: auto;
+    width: 75%;
+    color: #fff;
+    background-color: rgba(0,0,0,0.9);
+    padding: 0 20px 20px 20px;
+}
+
+#notify .signup {
+    margin: 50% auto;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.userpop h2, .signup h2 {
+    text-transform: none;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.userpop h2 img, .userpop h3 img, .signup h2 img {
+    height: 40px;
+}
+
+.userpop h3 {
+    text-transform: none;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.userpop h4 {
     text-transform: none;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
 }
 
-.userpop h2 img {
-    height: 40px;
+.userpop .button-orange {
+    top: 6px;
+    position: absolute;
+    right: 0px;
+    padding: 2%;
 }
 
-.userpop .row {
+.userpop .row, .signup .row {
     margin: 0px;
 }
 
@@ -818,15 +879,29 @@ section h3.section-subheading {
     background-color: rgba(0,0,0,1);
 }
 
-/*.glyph {
-    border: 2px solid #5C6E7B;
-    border-radius: 50%;
-    color: #5C6E7B;
-    height: 24px;
-    padding: 2px;
-    text-align: center;
-    width: 24px;
-}*/
+.shortlist {
+    font-weight: 300;
+}
+
+.shortlist-thumb {
+    width: 100%;
+}
+
+.shortlist-remove {
+    position: absolute;
+    left: 15%;
+    margin-top: 48%;
+}
+
+.close-icon {
+    position: absolute;
+    top: 0;
+    right: 1%;
+}
+
+.close-icon img {
+    height: 15px;
+}
 
 .glyph {
     border-radius: 50%;
@@ -904,10 +979,6 @@ color: #FFF!important;
     display:inline-block;
 }
 
-/*.list-ico + .list-txt{
-    display:inline-block;
-}*/
-
 .footer-txtbox {
     background-color: transparent;
     border: none;
@@ -935,6 +1006,34 @@ color: #FFF!important;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
     color: #000;
+}
+
+.drop {
+    min-width: 200px;
+    position: absolute;
+    padding: 10%;
+    top: 120%;
+}
+
+.drop li {
+    padding: 5%;
+}
+
+.drop li a{
+    font-family: "Open Sans", sans-serif !important;
+    font-weight: 300 !important;
+    color: #000 !important;
+    padding-left: 5% !important;
+    font-size: 14px !important;
+}
+
+.drop li a:hover{
+    outline: 0 !important;
+    color: #f1591f !important;
+}
+
+.drop li a:before {
+    height: 0 !important;
 }
 
 #portfolio .portfolio-item {
@@ -1449,7 +1548,7 @@ footer ul.social-buttons, .userpop ul.social-buttons {
     margin-bottom: 0;
 }
 
-footer ul.social-buttons li a, .userpop ul.social-buttons li a {
+footer ul.social-buttons li a {
     display: block;
     width: 40px;
     height: 40px;
@@ -1460,6 +1559,22 @@ footer ul.social-buttons li a, .userpop ul.social-buttons li a {
     color: #222;
     text-align: center;
     margin-top: 20px;
+    background-color: #fff;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+
+.userpop ul.social-buttons li a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    outline: 0;
+    color: #222;
+    text-align: center;
     background-color: #fff;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
