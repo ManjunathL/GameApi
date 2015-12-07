@@ -10,13 +10,14 @@
   "scripts": {
     "start": "http-server src/main/resources/webroot -a localhost -p 8000 -c-1 -S",
     "prestart": "npm install",
-    "postinstall": "bower install"
+    "postinstall": "bower install --allow-root"
   },
   "main": "build/server",
   "engines": {
     "node": "~0.6.11"
   },
   "dependencies": {
+    "bower": "^1.6.8",
     "express": "~2.5.8"
   },
   "optionalDependencies": {},

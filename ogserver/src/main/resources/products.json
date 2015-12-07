@@ -20,7 +20,6 @@
     "shortlisted": 46,
     "likes": 200,
     "createDt": "04-30-2015",
-    "defaultprice":"1000000",
     "delivery": {
       "title": "45 Days Delivery Guarantee ",
       "details": "templates/common/standard_delivery_45.html"
@@ -37,152 +36,34 @@
     "images": [
       "Albatross_Mapple1_low_erohcx"
     ],
-    "components": [
+    "defaultPrice": "3,85,000",
+    "defaultMaterial": "Plywood",
+    "defaultFinish": "MDF with Membrane",
+    "accessories": [
       {
-        "id": "1",
-        "name": "Wall Glass Unit",
-        "desc": "Glass Wall Unit to show your expensive Crockery",
-        "quantity": "1",
-        "defAccessoryId": "1",
-        "defAccessoryCode": "MC37487",
-        "defAccessory": "Moving Corner",
-        "defAccessoryImg": "moving_corner.jpg",
-        "defAccessoryPrice": "7400",
+        "moduleId": "1",
+        "moduleName": "Wall Glass Unit",
+        "moduleDesc": "Glass Wall Unit to show your expensive Crockery",
+        "accessoryId": "1",
+        "accessoryCode": "MC37487",
+        "accessoryName": "Moving Corner",
+        "accessoryImg": "moving_corner.jpg",
+        "accessoryPrice": "7400",
         "w": "800",
         "h": "600",
         "d": "200",
         "uom": "cm",
-        "mfMapping": [
+        "alternatives": [
           {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "2",
-            "finishCode": "MM",
-            "finish": "MDF with Membrane",
-            "finishImg": "384758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "12000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "12500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
-          },
-          {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "3",
-            "finishCode": "PUP",
-            "finish": "PU Paint",
-            "finishImg": "334758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "16000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "16500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              },
-              {
-                "id": "2",
-                "pricePerUnit": "14500",
-                "accessoryId": "3",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket SS",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "4800"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "2",
-        "name": "Wall Glass Unit",
-        "desc": "Glass Wall Unit to show your expensive Crockery",
-        "quantity": "1",
-        "defAccessoryId": "1",
-        "defAccessoryCode": "MC37487",
-        "defAccessory": "Moving Corner",
-        "defAccessoryImg": "moving_corner.jpg",
-        "defAccessoryPrice": "7400",
-        "w": "800",
-        "h": "600",
-        "d": "200",
-        "uom": "cm",
-        "mfMapping": [
-          {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "2",
-            "finishCode": "MM",
-            "finish": "MDF with Membrane",
-            "finishImg": "384758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "12000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "12500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
-          },
-          {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "3",
-            "finishCode": "PUP",
-            "finish": "PU Paint",
-            "finishImg": "334758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "16000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "16500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              },
-              {
-                "id": "2",
-                "pricePerUnit": "14500",
-                "accessoryId": "3",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket SS",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "4800"
-              }
-            ]
+            "accessoryId": "2",
+            "accessoryCode": "MC37488",
+            "accessoryName": "Moving Corner Slide",
+            "accessoryImg": "moving_corner_slide.jpg",
+            "accessoryPrice": "8200",
+            "w": "800",
+            "h": "600",
+            "d": "200",
+            "uom": "cm"
           }
         ]
       }
@@ -190,26 +71,33 @@
     "mf": [
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "MDF with Membrane",
-        "aggregatedPrice": "3,85,000"
+        "finishId": "MM",
+        "basePrice": "3,85,000"
       },
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "PU Paint",
-        "aggregatedPrice": "4,20,000"
+        "finishId": "PP",
+        "basePrice": "4,20,000"
       }
     ],
     "fc": [
       {
         "finish": "MFD with Membrane",
+        "finishId": "MM",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -217,14 +105,17 @@
       },
       {
         "finish": "PU Paint",
+        "finishId": "PP",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -233,6 +124,7 @@
     ],
     "appliances": [
       {
+        "id": "EFB",
         "name": "Elica Four Burner",
         "code": "AP100",
         "type": "Hobs",
@@ -240,6 +132,7 @@
         "price": "8,900"
       },
       {
+        "id": "ETB",
         "name": "Elica Three Burner",
         "code": "AP101",
         "type": "Hobs",
@@ -285,69 +178,34 @@
     "images": [
       "Auklet_low_jkp4hr"
     ],
-    "components": [
+    "defaultPrice": "3,85,000",
+    "defaultMaterial": "Plywood",
+    "defaultFinish": "MDF with Membrane",
+    "accessories": [
       {
-        "id": "1",
-        "name": "Wall Glass Unit",
-        "desc": "Glass Wall Unit to show your expensive Crockery",
-        "quantity": "1",
-        "defAccessoryId": "1",
-        "defAccessoryCode": "MC37487",
-        "defAccessory": "Moving Corner",
-        "defAccessoryImg": "moving_corner.jpg",
-        "defAccessoryPrice": "7400",
+        "moduleId": "1",
+        "moduleName": "Wall Glass Unit",
+        "moduleDesc": "Glass Wall Unit to show your expensive Crockery",
+        "accessoryId": "1",
+        "accessoryCode": "MC37487",
+        "accessoryName": "Moving Corner",
+        "accessoryImg": "moving_corner.jpg",
+        "accessoryPrice": "7400",
         "w": "800",
         "h": "600",
         "d": "200",
         "uom": "cm",
-        "mfMapping": [
+        "alternatives": [
           {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "2",
-            "finishCode": "MM",
-            "finish": "MDF with Membrane",
-            "finishImg": "384758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "12000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "12500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
-          },
-          {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "3",
-            "finishCode": "PUP",
-            "finish": "PU Paint",
-            "finishImg": "334758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "16000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "16500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
+            "accessoryId": "2",
+            "accessoryCode": "MC37488",
+            "accessoryName": "Moving Corner Slide",
+            "accessoryImg": "moving_corner_slide.jpg",
+            "accessoryPrice": "8200",
+            "w": "800",
+            "h": "600",
+            "d": "200",
+            "uom": "cm"
           }
         ]
       }
@@ -355,26 +213,33 @@
     "mf": [
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "MDF with Membrane",
-        "aggregatedPrice": "1,85,000"
+        "finishId": "MM",
+        "basePrice": "3,85,000"
       },
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "PU Paint",
-        "aggregatedPrice": "2,20,000"
+        "finishId": "PP",
+        "basePrice": "4,20,000"
       }
     ],
     "fc": [
       {
         "finish": "MFD with Membrane",
+        "finishId": "MM",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -382,14 +247,17 @@
       },
       {
         "finish": "PU Paint",
+        "finishId": "PP",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -398,6 +266,7 @@
     ],
     "appliances": [
       {
+        "id": "EFB",
         "name": "Elica Four Burner",
         "code": "AP100",
         "type": "Hobs",
@@ -405,6 +274,7 @@
         "price": "8,900"
       },
       {
+        "id": "ETB",
         "name": "Elica Three Burner",
         "code": "AP101",
         "type": "Hobs",
@@ -450,69 +320,34 @@
     "images": [
       "bart_Lshaped_BrownOak_CreamOak_dvxktq"
     ],
-    "components": [
+    "defaultPrice": "3,85,000",
+    "defaultMaterial": "Plywood",
+    "defaultFinish": "MDF with Membrane",
+    "accessories": [
       {
-        "id": "1",
-        "name": "Wall Glass Unit",
-        "desc": "Glass Wall Unit to show your expensive Crockery",
-        "quantity": "1",
-        "defAccessoryId": "1",
-        "defAccessoryCode": "MC37487",
-        "defAccessory": "Moving Corner",
-        "defAccessoryImg": "moving_corner.jpg",
-        "defAccessoryPrice": "7400",
+        "moduleId": "1",
+        "moduleName": "Wall Glass Unit",
+        "moduleDesc": "Glass Wall Unit to show your expensive Crockery",
+        "accessoryId": "1",
+        "accessoryCode": "MC37487",
+        "accessoryName": "Moving Corner",
+        "accessoryImg": "moving_corner.jpg",
+        "accessoryPrice": "7400",
         "w": "800",
         "h": "600",
         "d": "200",
         "uom": "cm",
-        "mfMapping": [
+        "alternatives": [
           {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "2",
-            "finishCode": "MM",
-            "finish": "MDF with Membrane",
-            "finishImg": "384758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "12000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "12500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
-          },
-          {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "3",
-            "finishCode": "PUP",
-            "finish": "PU Paint",
-            "finishImg": "334758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "16000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "16500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
+            "accessoryId": "2",
+            "accessoryCode": "MC37488",
+            "accessoryName": "Moving Corner Slide",
+            "accessoryImg": "moving_corner_slide.jpg",
+            "accessoryPrice": "8200",
+            "w": "800",
+            "h": "600",
+            "d": "200",
+            "uom": "cm"
           }
         ]
       }
@@ -520,26 +355,33 @@
     "mf": [
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "MDF with Membrane",
-        "aggregatedPrice": "1,85,000"
+        "finishId": "MM",
+        "basePrice": "3,85,000"
       },
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "PU Paint",
-        "aggregatedPrice": "2,20,000"
+        "finishId": "PP",
+        "basePrice": "4,20,000"
       }
     ],
     "fc": [
       {
         "finish": "MFD with Membrane",
+        "finishId": "MM",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -547,14 +389,17 @@
       },
       {
         "finish": "PU Paint",
+        "finishId": "PP",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -563,6 +408,7 @@
     ],
     "appliances": [
       {
+        "id": "EFB",
         "name": "Elica Four Burner",
         "code": "AP100",
         "type": "Hobs",
@@ -570,6 +416,7 @@
         "price": "8,900"
       },
       {
+        "id": "ETB",
         "name": "Elica Three Burner",
         "code": "AP101",
         "type": "Hobs",
@@ -615,69 +462,34 @@
     "images": [
       "Brambling_Aurbergene_Low_lrs7hs"
     ],
-    "components": [
+    "defaultPrice": "3,85,000",
+    "defaultMaterial": "Plywood",
+    "defaultFinish": "MDF with Membrane",
+    "accessories": [
       {
-        "id": "1",
-        "name": "Wall Glass Unit",
-        "desc": "Glass Wall Unit to show your expensive Crockery",
-        "quantity": "1",
-        "defAccessoryId": "1",
-        "defAccessoryCode": "MC37487",
-        "defAccessory": "Moving Corner",
-        "defAccessoryImg": "moving_corner.jpg",
-        "defAccessoryPrice": "7400",
+        "moduleId": "1",
+        "moduleName": "Wall Glass Unit",
+        "moduleDesc": "Glass Wall Unit to show your expensive Crockery",
+        "accessoryId": "1",
+        "accessoryCode": "MC37487",
+        "accessoryName": "Moving Corner",
+        "accessoryImg": "moving_corner.jpg",
+        "accessoryPrice": "7400",
         "w": "800",
         "h": "600",
         "d": "200",
         "uom": "cm",
-        "mfMapping": [
+        "alternatives": [
           {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "2",
-            "finishCode": "MM",
-            "finish": "MDF with Membrane",
-            "finishImg": "384758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "12000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "12500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
-          },
-          {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "3",
-            "finishCode": "PUP",
-            "finish": "PU Paint",
-            "finishImg": "334758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "16000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "16500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
+            "accessoryId": "2",
+            "accessoryCode": "MC37488",
+            "accessoryName": "Moving Corner Slide",
+            "accessoryImg": "moving_corner_slide.jpg",
+            "accessoryPrice": "8200",
+            "w": "800",
+            "h": "600",
+            "d": "200",
+            "uom": "cm"
           }
         ]
       }
@@ -685,26 +497,33 @@
     "mf": [
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "MDF with Membrane",
-        "aggregatedPrice": "1,85,000"
+        "finishId": "MM",
+        "basePrice": "3,85,000"
       },
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "PU Paint",
-        "aggregatedPrice": "2,20,000"
+        "finishId": "PP",
+        "basePrice": "4,20,000"
       }
     ],
     "fc": [
       {
         "finish": "MFD with Membrane",
+        "finishId": "MM",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -712,14 +531,17 @@
       },
       {
         "finish": "PU Paint",
+        "finishId": "PP",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -728,6 +550,7 @@
     ],
     "appliances": [
       {
+        "id": "EFB",
         "name": "Elica Four Burner",
         "code": "AP100",
         "type": "Hobs",
@@ -735,6 +558,7 @@
         "price": "8,900"
       },
       {
+        "id": "ETB",
         "name": "Elica Three Burner",
         "code": "AP101",
         "type": "Hobs",
@@ -780,69 +604,34 @@
     "images": [
       "Bulfinch_white_Low_utphxl"
     ],
-    "components": [
+    "defaultPrice": "3,85,000",
+    "defaultMaterial": "Plywood",
+    "defaultFinish": "MDF with Membrane",
+    "accessories": [
       {
-        "id": "1",
-        "name": "Wall Glass Unit",
-        "desc": "Glass Wall Unit to show your expensive Crockery",
-        "quantity": "1",
-        "defAccessoryId": "1",
-        "defAccessoryCode": "MC37487",
-        "defAccessory": "Moving Corner",
-        "defAccessoryImg": "moving_corner.jpg",
-        "defAccessoryPrice": "7400",
+        "moduleId": "1",
+        "moduleName": "Wall Glass Unit",
+        "moduleDesc": "Glass Wall Unit to show your expensive Crockery",
+        "accessoryId": "1",
+        "accessoryCode": "MC37487",
+        "accessoryName": "Moving Corner",
+        "accessoryImg": "moving_corner.jpg",
+        "accessoryPrice": "7400",
         "w": "800",
         "h": "600",
         "d": "200",
         "uom": "cm",
-        "mfMapping": [
+        "alternatives": [
           {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "2",
-            "finishCode": "MM",
-            "finish": "MDF with Membrane",
-            "finishImg": "384758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "12000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "12500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
-          },
-          {
-            "materialId": "1",
-            "materialCode": "PW",
-            "material": "Plywood",
-            "materialImg": "347856465.jpeg",
-            "materialMainImgSuffix": "pw",
-            "finishId": "3",
-            "finishCode": "PUP",
-            "finish": "PU Paint",
-            "finishImg": "334758.jpeg",
-            "finishMainImgSuffix": "mm",
-            "pricePerUnit": "16000",
-            "componentOptions": [
-              {
-                "id": "2",
-                "pricePerUnit": "16500",
-                "accessoryId": "2",
-                "accessoryCode": "WB3748",
-                "accessory": "Wired Basket",
-                "accessoryImg": "wire_basket.jpg",
-                "accessoryPrice": "3800"
-              }
-            ]
+            "accessoryId": "2",
+            "accessoryCode": "MC37488",
+            "accessoryName": "Moving Corner Slide",
+            "accessoryImg": "moving_corner_slide.jpg",
+            "accessoryPrice": "8200",
+            "w": "800",
+            "h": "600",
+            "d": "200",
+            "uom": "cm"
           }
         ]
       }
@@ -850,26 +639,33 @@
     "mf": [
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "MDF with Membrane",
-        "aggregatedPrice": "1,85,000"
+        "finishId": "MM",
+        "basePrice": "3,85,000"
       },
       {
         "material": "Plywood",
+        "materialId": "PY",
         "finish": "PU Paint",
-        "aggregatedPrice": "2,20,000"
+        "finishId": "PP",
+        "basePrice": "4,20,000"
       }
     ],
     "fc": [
       {
         "finish": "MFD with Membrane",
+        "finishId": "MM",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -877,14 +673,17 @@
       },
       {
         "finish": "PU Paint",
+        "finishId": "PP",
         "color": [
           {
             "name": "Cherry Red",
+            "id": "CR",
             "img": "278364.png",
             "mainImgSuffix": "cr"
           },
           {
             "name": "English Walnut",
+            "id": "EW",
             "img": "274364.png",
             "mainImgSuffix": "ew"
           }
@@ -893,6 +692,7 @@
     ],
     "appliances": [
       {
+        "id": "EFB",
         "name": "Elica Four Burner",
         "code": "AP100",
         "type": "Hobs",
@@ -900,6 +700,7 @@
         "price": "8,900"
       },
       {
+        "id": "ETB",
         "name": "Elica Three Burner",
         "code": "AP101",
         "type": "Hobs",
