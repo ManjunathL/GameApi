@@ -932,7 +932,7 @@ section h3.section-subheading {
 
 .list-heart{
      color: #FFF;
-     font-size: 30px;
+     font-size: 30px!important;
      padding: 10px 5px;
 }
 .list-txt{
@@ -1833,8 +1833,8 @@ hr {
         position: relative;
         display: block;
         padding: 5px;
-        font-size: 1.5em;
-        font-weight: 600;
+        font-size: 20px;
+        font-weight: 400;
         color: #737373;
         text-decoration: none;
         background: none repeat scroll 0% 0% #CCC;
@@ -2119,4 +2119,11 @@ hr {
     .w-portfolio-item-title{
         font-weight:400!important;
         font-size:16px!important;
+    }
+    #product-heading{
+        position: fixed;
+        z-index: 999;
+        width: 85%;
+        background-color: #f7f7f7;
+        margin-top: 40px;
     }
