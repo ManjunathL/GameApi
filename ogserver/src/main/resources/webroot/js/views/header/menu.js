@@ -31,7 +31,7 @@ define([
                         success: function(user) {
                             user_sl.fetch({
                                 success: function(usersl) {
-                                    //console.log(usersl.keys().length);
+                                    console.log(usersl.keys().length);
                                     var compiledTemplate = _.template(headerMenuTemplate);
                                     $(that.el).html(compiledTemplate({
                                         "categories": categories,

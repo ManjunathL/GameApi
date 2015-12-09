@@ -5,7 +5,7 @@
     "name": "Albatross L Shaped Kitchen",
     "category": "KITCHEN",
     "subCategory": "L Shaped Kitchen",
-    "image": "albat",
+    "image": "Bulfinch_white_Low_utphxl.jpg",
     "price": "260000"
   },
   {
@@ -14,8 +14,8 @@
     "name": "Albatross L Shaped Kitchen 1",
     "category": "KITCHEN",
     "subCategory": "L Shaped Kitchen",
-    "image": "albat",
-    "price": "285000"
+    "image": "Brambling_Aurbergene_Low_lrs7hs.jpg",
+    "price": "0"
   },
   {
     "type": "product",
@@ -23,7 +23,7 @@
     "name": "Albatross L Shaped Kitchen 2",
     "category": "KITCHEN",
     "subCategory": "L Shaped Kitchen",
-    "image": "albat",
+    "image": "Bulfinch_white_Low_utphxl.jpg",
     "price": "360000"
   }
 ]
