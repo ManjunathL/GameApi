@@ -1,48 +1,356 @@
-<!--
-<div class="category-heading row">
-    <div class="col-sm-12">
-        <p>KITCHEN</p>
-    </div>
-</div>
--->
-<!--<div class="info"><% //debugger %></div>-->
-<div style="width: 60% !important; margin: auto;">
-    <div class="margin-md"></div>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 
-    <% _.each(collection, function(product){ %>
-    <div class="row">
-        <div class="margin-sm"></div>
-        <div class="col-sm-6"><img width="400" height="250"
-                                   src="<%= imgBase + 'c_fill,h_250,w_400/' + product.images[0] %>"/></div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-sm-12 text-nowrap" style="font-size: 16px;"><%= product.name %></div>
-                <div class="col-sm-12 margin-sm"></div>
-                <div class="col-sm-12" style="font-size: 12px;"><%= product.desc %></div>
-                <div class="col-sm-12 margin-sm"></div>
-                <div class="col-sm-12" style="font-size: 12px; font-weight: bold;">Dimensions</div>
-                <div class="col-sm-12 margin-xs"></div>
-                <div class="col-sm-12" style="font-size: 12px;"><%= "Width " + product.w + "\" x " + "Depth " +
-                    product.d + "\" x " + "Height " + product.h + "\"" %>
+<section id="portfolio" class="bg-light-gray top80">
+    <div class="container">
+        <div class="row padding20-0" id="layout-view">
+            <div class="col-lg-4">
+                <h1 class="design-count margin0"><%= collection.length %> Designs Found</h1>
+            </div>
+            <div class="col-lg-4">
+                <span class="font-size14 border1 margin0">L-shaped Kitchen   X</span>
+            </div>
+            <div class="col-lg-4">
+                <a class="button float-right padding20" data-toggle="collapse" data-target="#filter-inside">Filter / Sort
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+                <!--<div class="row padding-right15">-->
+                <!--<span class="glyphicon glyphicon-th-full view-select float-right">-->
+                    <!--<div class="outerbox">-->
+                        <!--<div class="innerbox">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</span>-->
+                <!--<span class="glyphicon glyphicon-th view-select float-right border-right0"></span>-->
+                <!--<span class="glyphicon glyphicon-th-large view-select float-right border-right0 active"></span>-->
+                <!--<span class="glyphicon glyphicon-th-list view-select float-right border-right0"></span>-->
+                <!--<button class="btn filter-btn float-right" data-toggle="collapse" data-target="#filter-inside">Filter</button>-->
+                    <!--</div>-->
+                <!--<div class="row padding0 align-right font-size12 padding-right15">-->
+                    <!--Sort By:-->
+                    <!--<a href="#">&nbsp;&nbsp;Popular</a>-->
+                    <!--<a href="#">&nbsp;&nbsp;&nbsp;Relevance</a>-->
+                    <!--<a href="#">&nbsp;&nbsp;&nbsp;Price</a>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="row" id="filter-section">
+            <div id="filter-inside" class="collapse col-md-12">
+                <!--<div class="close" title="Close" data-toggle="collapse" data-target="#filter-inside"><i class="glyphicon glyphicon-remove-circle"></i></div>-->
+              <div class="col-md-9">
+                <div class="row filter-group">
+                    <div class="fname col-md-2">Price</div>
+                    <div id="price" class="filter-list col-md-10">
+                        <div class="btn-group">
+                            <button class="btn" data-query="pr1">&lt;&nbsp;&#8377;50K</button>
+                            <button class="btn" data-query="pr2">&#8377;50K - 1L</button>
+                            <button class="btn" data-query="pr3">&#8377;1L - 1.5L</button>
+                            <button class="btn" data-query="pr4">&#8377;1.5K - 2L</button>
+                            <button class="btn" data-query="pr5">&gt;&nbsp;&#8377;2L</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-12 margin-md"></div>
-                <div class="col-sm-12 header-ul" align="left">
-                    <ul style="-webkit-padding-start: 0px !important;">
-                        <li><div title="Comments" class="btn-alpha-black"><span class="fa fa-comments"></span> <span style="font-size: 10px;">(23)</span></div></li>
-                        <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                        <li><div title="Know More" class="btn-alpha-black"><span class="fa fa-info"></span></div></li>
-                        <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                        <li><div title="Shortlist" class="btn-alpha-black"><span class="fa fa-check-square-o"></span> <span style="font-size: 10px;">(23)</span></div></li>
-                        <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                        <li><div title="Share" class="btn-alpha-black"><span class="fa fa-share"></span></div></li>
-                    </ul>
+                <div class="row filter-group">
+                    <div class="col-md-2 fname">Color</div>
+                    <div class="col-md-10 filter-list">
+                        <div class="color-rounds round-bk1">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk2">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk3">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk4">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk5">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk3">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk4">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk5">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk3">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk4">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="color-rounds round-bk5">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                    </div>
+                </div>
+                  </div>
+                <div class="col-md-3">
+                    <div class="filter-right">
+                        <div class="row padding-right15">
+                            <span class="view-in-txt font-size12"> View In:</span>
+                            <span class="glyphicon glyphicon-th-full view-select float-right">
+                                <div class="outerbox">
+                                    <div class="innerbox">
+                                    </div>
+                                </div>
+                            </span>
+                            <span class="glyphicon glyphicon-th view-select float-right border-right0"></span>
+                            <span class="glyphicon glyphicon-th-large view-select float-right border-right0 active"></span>
+                            <span class="glyphicon glyphicon-th-list view-select float-right border-right0"></span>
+                            <!--<button class="btn filter-btn float-right" data-toggle="collapse" data-target="#filter-inside">Filter</button>-->
+                        </div>
+                        <div class="row padding0 align-right font-size12 padding-right15">
+                            Sort By:
+                            <a href="#">&nbsp;&nbsp;Popular</a>
+                            <a href="#">&nbsp;&nbsp;&nbsp;Relevance</a>
+                            <a href="#">&nbsp;&nbsp;&nbsp;Price</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
-            <hr class="hr-md-bottom"/>
+        <div class="row list-view">
+            <% _.each(collection, function(product){ %>
+            <div class="row">
+                <div class="col-md-7 list-img col-7-img">
+                    <a href="#/products_details/<%= product.id %>">
+                        <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
+                    </a>
+                    <div id="list-strip" class="font-size16 list-button-strip">
+                        <div class="listli">
+                            <a href="#/products_details/<%= product.id %>">
+                                <span class="glyph fa fa-info list-ico"></span>
+                                <span class="list-txt">know more</span>
+                            </a>
+                        </div>
+                        <div class="listli li-spc">
+                            <a href="javascript:void(0);">
+                                <span class="fa fa-heart-o list-heart list-ico"></span>
+                                <span class="list-txt">shortlist</span>
+                            </a>
+                        </div>
+                        <div class="listli">
+                            <a href="javascript:void(0);" >
+                                <span class="glyph fa fa-share list-ico"></span>
+                                <span class="list-txt">share</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-5-txt">
+                    <div class="col-md-12 padding0 margin-bottom20">
+                        <span>
+                            <a href="#" class="list-heading-col5">
+                                <h2><%= product.name %></h2>
+                            </a>
+                        </span>
+                        <span class="cost-col5">
+                            &#8377;<%= product.defaultPrice %>
+                        </span>
+                    </div>
+
+                    <div class="font-size18 padding0">
+                        <span class="dim">Description</span>
+                        <p class="justify">
+                            <%= product.desc %>
+                        </p>
+                    </div>
+                    <div class="font-size18 margin-top20 dimsn">
+                        <span class="dim">Dimensions (H x W x D) :</span>
+                        <%= product.h +" x "+ product.w +" x "+ product.d %>
+                    </div>
+
+
+                </div>
+            </div>
+            <% }); %>
+
+
+        </div>
+        <div class="row grid-view">
+            <% _.each(collection, function(product){ %>
+            <div class="col-md-6  portfolio-item">
+                <div class="list-img">
+                    <a href="#/products_details/<%= product.id %>" class="portfolio-link">
+                        <img class="img-responsive shadow-img" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
+                    </a>
+                    <div class="font-size16 list-button-strip">
+                        <div class="listli">
+                            <a href="#/products_details/<%= product.id %>">
+                                <span class="glyph fa fa-info list-ico"></span>
+                                <span class="list-txt">know more</span>
+                            </a>
+                        </div>
+                        <div class="listli li-spc">
+                            <a href="javascript:void(0);">
+                                <span class="fa fa-heart-o list-heart list-ico"></span>
+                                <span class="list-txt">shortlist</span>
+                            </a>
+                        </div>
+                        <div class="listli">
+                            <a href="javascript:void(0);" >
+                                <span class="glyph fa fa-share list-ico"></span>
+                                <div class="list-txt">
+                                    <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
+                                        <span class='st_facebook'></span>
+                                        <span class='st_twitter'></span>
+                                        <span class='st_pinterest'></span>
+                                        <!--<span class='st_linkedin'></span>-->
+                                        <!--<span class='st_sharethis'></span>-->
+                                        <!---->
+                                        <!--<span class='st_email'></span>-->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-8 align-left image-meta-title"><span class="img-titl"><%= product.name %></span></div>
+                    <div class="col-md-4 align-right image-meta-title">&#8377;<%= product.defaultPrice %>/-</div>
+                    <!--<div class="image-meta">-->
+                        <!--<h2><%= product.name %></h2>-->
+                        <!--<p class="image-text">-->
+                            <!--<span class="fa fa-rupee"></span><%= product.defaultPrice %>-->
+
+                        <!--</p>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <% }); %>
         </div>
     </div>
-    <% }); %>
-</div>
-<div class="margin-sm"></div>
+    <a style="display: block;" href="#" class="back-to-top">
+        <span class="fa fa-chevron-up"></span>
+    </a>
+</section>
+<script>
+    $(document).ready(function(){
+
+        var offset = 100;
+        var duration = 500;
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > offset) {
+                $('.back-to-top').fadeIn(duration);
+            } else {
+                $('.back-to-top').fadeOut(duration);
+            }
+        });
+
+        $('.back-to-top').click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, duration);
+            return false;
+        });
+
+        $('.portfolio-link').hover(function(){
+            var over = $(this).find('.image-meta');
+            var h = $(this).find('h2');
+            var txt = $(this).find('.image-text');
+            over.fadeIn('slow');
+            h.animate({bottom: '10%'});
+            txt.animate({bottom: '20%'});
+        }, function(){
+            $('.image-meta').fadeOut('fast');
+            $('h2').css('bottom','0');
+            $('.image-text').css('bottom','0');
+        });
+
+        $("#wish").click(function() {
+            if($(this).hasClass('glyphicon-heart')){
+                $(this).removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
+                $('.super-script').hide();
+            }else{
+                $(this).removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+                $('.super-script').show();
+            }
+        });
+
+
+        $('.glyphicon-th').click(function() {
+            $(this).addClass('active');
+            $('.glyphicon-th-large').removeClass('active');
+            $('.glyphicon-th-list').removeClass('active');
+            $('.glyphicon-th-full').removeClass('active');
+            $('.grid-view').css ('display','block');
+            $('.list-view').css('display','none');
+            $('h2').css('font-size','20px');
+            $('.img-titl').css('font-size','15px');
+            $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');
+            $('.image-meta').css({'padding-top':'14%', 'padding-right':'5%', 'padding-bottom':'5%;'});
+        });
+
+        $('.glyphicon-th-large').click(function() {
+            $(this).addClass('active');
+            $('.glyphicon-th').removeClass('active');
+            $('.glyphicon-th-list').removeClass('active');
+            $('.glyphicon-th-full').removeClass('active');
+            $('.grid-view').css ('display','block');
+            $('.list-view').css('display','none');
+            $('h2').css('font-size','30px');
+            $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
+            $('.image-meta').css({'padding-top':'18%', 'padding-right':'5%', 'padding-bottom':'5%;'});
+        });
+
+        $('.glyphicon-th-list').click(function() {
+            $(this).addClass('active');
+            $('.glyphicon-th-large').removeClass('active');
+            $('.glyphicon-th').removeClass('active');
+            $('.glyphicon-th-full').removeClass('active');
+            $('.grid-view').css ('display','none');
+            $('.list-view').css('display','block');
+            $('.col-7-img').removeClass('col-md-12').addClass('col-md-7');
+            $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5');
+            $('h2').css('font-size','25px');
+            $('.col-5-txt').css('padding-top','0px');
+            $('.dimsn').css('display','block');
+        });
+
+        $('.glyphicon-th-full').click(function() {
+            $(this).addClass('active');
+            $('.glyphicon-th-large').removeClass('active');
+            $('.glyphicon-th').removeClass('active');
+            $('.glyphicon-th-list').removeClass('active');
+            $('.grid-view').css ('display','none');
+            $('.list-view').css('display','block');
+            $('.col-7-img').removeClass('col-md-7').addClass('col-md-12');
+            $('.col-5-txt').removeClass('col-md-5').addClass('col-md-12');
+            $('h2').css('font-size','25px');
+            $('.col-5-txt').css('padding-top','20px');
+            $('.dimsn').css('display','none');
+
+        });
+        $('#close-filter').click(function() {
+            console.log('gffffffffff');
+            $(#filter-inside).hide();
+        });
+    });
+</script>
+
+
+<!--Facebook share code-->
+
+<!--<div id="fb-root"></div>-->
+<!--<script>(function(d, s, id) {-->
+  <!--var js, fjs = d.getElementsByTagName(s)[0];-->
+  <!--if (d.getElementById(id)) return;-->
+  <!--js = d.createElement(s); js.id = id;-->
+  <!--js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1393442277626447";-->
+  <!--fjs.parentNode.insertBefore(js, fjs);-->
+<!--}(document, 'script', 'facebook-jssdk'));</script>-->

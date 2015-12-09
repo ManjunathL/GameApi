@@ -1,21 +1,24 @@
 {
   "id": "123",
   "code": "SJDH478SJD",
-  "categ": "Living",
+  "categ": "Kitchen",
   "categId": "23847623746",
-  "subCateg": "Entertainment Unit",
+  "subCateg": "L Shaped Kitchen",
   "subCategId": "239487283974",
-  "name": "Blunt Entertainment Unit",
-  "w": "8'-2\"",
-  "h": "2'-9\"",
-  "d": "2'-6\"",
+  "name": "Albatross L-Shaped Kitchen",
+  "designer": "Ram Prasad",
+  "designerId": "12837198237",
+  "uom": "inches",
+  "w": "98",
+  "h": "33",
+  "d": "30",
   "curr": "INR",
-  "desc": "Give your entertainment space a light wooden finished look with this TV unit design. Shelf and drawer space is unobtrusively woven under your TV unit. The shelves may be manipulated to create a new look each time. The simplicity of the design helps it blend easily to the theme of the room.",
-  "popularity": 8.1,
-  "relevance": 12,
-  "shortlisted": 15,
-  "likes": 36,
-  "createDt": "05-30-2015",
+  "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
+  "popularity": 1.5,
+  "relevance": 1,
+  "shortlisted": 46,
+  "likes": 200,
+  "createDt": "04-30-2015",
   "delivery": {
     "title": "45 Days Delivery Guarantee ",
     "details": "templates/common/standard_delivery_45.html"
@@ -28,10 +31,112 @@
     "title": "Payment Terms",
     "details": "templates/common/standard_payment_terms.html"
   },
-  "commentsUrl": "http://...",
-  "imageUrls": [
-    "s/files/1/0897/8058/products/3.Blunt_Front_White_BrownOak.jpg?v=1439556161",
-    "s/files/1/0897/8058/products/4.Blunt_Side_White_BrownOak.jpg?v=1439556161"
+  "pageId": "SJDH478SJD",
+  "images": [
+    "Albatross_Mapple1_low_erohcx"
   ],
-  "price": "22,000"
+  "defaultPrice": "3,85,000",
+  "defaultMaterial": "Plywood",
+  "defaultFinish": "MDF with Membrane",
+  "accessories": [
+    {
+      "moduleId": "1",
+      "moduleName": "Wall Glass Unit",
+      "moduleDesc": "Glass Wall Unit to show your expensive Crockery",
+      "accessoryId": "1",
+      "accessoryCode": "MC37487",
+      "accessoryName": "Moving Corner",
+      "accessoryImg": "moving_corner.jpg",
+      "accessoryPrice": "7400",
+      "w": "800",
+      "h": "600",
+      "d": "200",
+      "uom": "cm",
+      "alternatives": [
+        {
+          "accessoryId": "2",
+          "accessoryCode": "MC37488",
+          "accessoryName": "Moving Corner Slide",
+          "accessoryImg": "moving_corner_slide.jpg",
+          "accessoryPrice": "8200",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        }
+      ]
+    }
+  ],
+  "mf": [
+    {
+      "material": "Plywood",
+      "materialId": "PY",
+      "finish": "MDF with Membrane",
+      "finishId": "MM",
+      "basePrice": "3,85,000"
+    },
+    {
+      "material": "Plywood",
+      "materialId": "PY",
+      "finish": "PU Paint",
+      "finishId": "PP",
+      "basePrice": "4,20,000"
+    }
+  ],
+  "fc": [
+    {
+      "finish": "MFD with Membrane",
+      "finishId": "MM",
+      "color": [
+        {
+          "name": "Cherry Red",
+          "id": "CR",
+          "img": "278364.png",
+          "mainImgSuffix": "cr"
+        },
+        {
+          "name": "English Walnut",
+          "id": "EW",
+          "img": "274364.png",
+          "mainImgSuffix": "ew"
+        }
+      ]
+    },
+    {
+      "finish": "PU Paint",
+      "finishId": "PP",
+      "color": [
+        {
+          "name": "Cherry Red",
+          "id": "CR",
+          "img": "278364.png",
+          "mainImgSuffix": "cr"
+        },
+        {
+          "name": "English Walnut",
+          "id": "EW",
+          "img": "274364.png",
+          "mainImgSuffix": "ew"
+        }
+      ]
+    }
+  ],
+  "appliances": [
+    {
+      "id": "EFB",
+      "name": "Elica Four Burner",
+      "code": "AP100",
+      "type": "Hobs",
+      "image": "72364.jpeg",
+      "price": "8,900"
+    },
+    {
+      "id": "ETB",
+      "name": "Elica Three Burner",
+      "code": "AP101",
+      "type": "Hobs",
+      "image": "72364.jpeg",
+      "price": "9,990"
+    }
+  ]
 }

@@ -7,8 +7,10 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       '': 'dashboard',
-      'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products'
+      'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products',
+      'products_details/:id': 'product_details'
     }
+
   });
 
   var initialize = function(options){
@@ -32,6 +34,18 @@ define([
             }
         };
         new ProductPage(options).render();
+      });
+    });
+    router.on('route:product_details', function (productId) {
+      require(['views/product/details'], function (ProductDetailPage) {
+          //console.log('smruti');
+
+        var options = {
+            model: {
+                "id": productId
+            }
+        };
+        new ProductDetailPage(options).render();
       });
     });
     Backbone.history.start();

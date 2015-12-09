@@ -57,6 +57,9 @@ define([
                             console.log("error from products fetch - " + response);
                         }
                     });
+
+//                    window.appdata = {};
+//                    window.appdata.products = products;
                 },
                 error: function(model, response, options){
                   console.log("couldn't fetch categories - " + response);
