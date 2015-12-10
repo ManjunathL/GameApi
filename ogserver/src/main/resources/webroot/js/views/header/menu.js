@@ -16,7 +16,7 @@ define([
             var that = this;
             var categories = new Categories();
             var user = new UserModel({'id':'gaurav345'});
-            var user_sl = new UserSL({'id':'gaurav345'});
+            var user_sl = new UserSL({'id':'gaurav12345345'});
 
             window.userLogin = this.userLogin;
             categories.fetch({
@@ -31,7 +31,7 @@ define([
                         success: function(user) {
                             user_sl.fetch({
                                 success: function(usersl) {
-                                    //console.log(usersl.keys().length);
+                                    console.log(usersl.keys().length);
                                     var compiledTemplate = _.template(headerMenuTemplate);
                                     $(that.el).html(compiledTemplate({
                                         "categories": categories,

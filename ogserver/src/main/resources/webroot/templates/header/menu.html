@@ -196,66 +196,125 @@
 
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-shrink navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top" style="padding: 0">
-                <!--<span style="color: #ffffff">-->
-                <!--my-->
-                <!--</span>Gubbi-->
-                <img src="img/logos/logo.png" style="height: 50px;" alt="">
-            </a>
+            <div class="navbar-brand page-scroll padding0">
+                <a href="#">
+                    <img src="img/logos/logo.png" class="full_logo" alt="">
+                    <img
+                            src="img/logo_icon/48x48.png"
+                            class="small_logo"
+                            data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"
+                            alt="">
+                </a>
+            </div>
+            <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0">
+                <a href="#" class="consult">Consult</a>
+                <span class="padding10 consult_icon">
+                    <a href="#">
+                        <img src="/img/query.png" class="consult_icon_height">
+                    </a>
+                </span>
+                <span class="glyphicon glyphicon-search search"></span>
+
+                <% if(typeof(usersl) !== 'undefined' && ((Object.keys(usersl).length - 1) !== 0)) { %>
+                <span class="glyphicon glyphicon-heart wishlist user" id="wish">
+                    <span class="super-script"><%= Object.keys(usersl).length - 1 %></span>
+                </span>
+                <% } else { %>
+                <span class="glyphicon glyphicon-heart-empty wishlist user"></span>
+                <% } %>
+
+                <span class="glyphicon glyphicon-user user"></span>
+            </div>
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right" style="font-size: 20px; padding: 5px 10px 5px 35px">
+            <ul class="nav navbar-nav menu-right">
                 <li>
-                    <span class="glyphicon glyphicon-search search"></span>
-                        <span class="glyphicon glyphicon-heart user" id="wish">
-                            <% if(typeof(usersl) !== 'undefined') { %>
-                            <span class="super-script"><%= Object.keys(usersl).length - 1 %></span>
-                            <% } %>
-                        </span>
-                    <span class="glyphicon glyphicon-user user"></span>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" class="consult">Consult</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav float-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <% categories.each(function(category){ %>
-                <% if (category.get('subCategories').length === 0) { %>
-                <li><a href='#products/<%=category.code%>'><%=category.get('name')%></a></li>
-                <% } else { %>
-                <li>
-                    <a class="dropdown-toggle" id="dropdownMenu<%=category.code%>"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <%=category.get('name')%>
+                    <a
+                            class="dropdown-toggle"
+                            id="dropdownMenu_livndin"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="true">
+                        Living & Dining
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu drop" aria-labelledby="dropdownMenu<%=category.code%>">
-                        <% category.get('subCategories').each(function(subCategory){ %>
-                        <li><a href="#products/<%=category.get('code')%>/<%=subCategory.get('code')%>"><%=subCategory.get('name')%></a></li>
-                        <% }); %>
+                    <ul class="dropdown-menu drop" aria-labelledby="dropdownMenu">
+
+                        <li><a href="#products/livingndining/entunit">Entertainment Unit</a></li>
+
+                        <li><a href="#products/livingndining/shoerack">Shoe Rack</a></li>
+
+                        <li><a href="#products/livingndining/crockunit">Crockery Unit</a></li>
+
+                        <li class="all">
+                            <hr class="allhr"/>
+                            <a href="#products/livingndining">ALL</a>
+                        </li>
+
                     </ul>
                 </li>
-                <% } %>
-                <% }); %>
                 <li>
-                    <a href="#">Designs</a>
+                    <a
+                            class="dropdown-toggle"
+                            id="dropdownMenu_kitchen"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="true">
+                        Kitchen
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu drop" aria-labelledby="dropdownMenu">
+
+                        <li><a href="#products/kitchen/lshapedk">L Shaped Kitchen</a></li>
+
+                        <li><a href="#products/kitchen/ushapedk">U Shaped Kitchen</a></li>
+
+                        <li><a href="#products/kitchen/straightk">Straight Kitchen</a></li>
+
+                        <li><a href="#products/kitchen/parallelk">Parallel Kitchen</a></li>
+
+                        <li class="all">
+                            <hr class="allhr"/>
+                            <a href="#products/kitchen">ALL</a>
+                        </li>
+
+                    </ul>
                 </li>
+                <li>
+                    <a
+                            class="dropdown-toggle"
+                            id="dropdownMenu_bedroom"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="true">
+                        Bedroom
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu drop" aria-labelledby="dropdownMenu">
+
+                        <li><a href="#products/bedroom/wardrobe">Wardrobe</a></li>
+
+                        <li><a href="#products/bedroom/studytable">Study Table</a></li>
+
+                        <li><a href="#products/bedroom/sidetable">Side Table</a></li>
+
+                        <li><a href="#products/bedroom/bookrack">Book Rack</a></li>
+
+                        <li class="all">
+                            <hr class="allhr"/>
+                            <a href="#products/bedroom">ALL</a>
+                        </li>
+
+                    </ul>
+                </li>
+
                 <li>
                     <a href="#">Stories</a>
                 </li>
@@ -273,23 +332,35 @@
         <% if(typeof(usercln) !== 'undefined') { %>
         <h3>
             <% if((typeof(usercln.image) !== 'undefined') || usercln.image !== NULL) { %>
-            <img src="<%= usercln.image %>">
+            <img src="<%= imgBase + usercln.image %>">
             <% }else { %>
             <img src="img/user.png">
             <% } %>
-            <%= usercln.firstName + " " + usercln.lastName %>
+            <span class="user_name">
+                <%= usercln.firstName %>
+            </span>
+            <span class="fa fa-sign-out signout_icon"
+                  data-toggle="tooltip"
+                  data-placement="left"
+                  title="Sign Out"></span>
+            <!--<img-->
+                    <!--src="img/signout.png"-->
+                    <!--class="signout_icon"-->
+                    <!--data-toggle="tooltip"-->
+                    <!--data-placement="left"-->
+                    <!--title="Sign Out">-->
         </h3>
         <div class="row">
-            <div class="col-md-7 padding0">
+            <div class="col-md-8 col-xs-8 padding0">
                 <h4>Items Shortlisted</h4>
             </div>
-            <div class="col-md-5 padding0 align-right">
+            <div class="col-md-4 col-xs-4 padding0 align-right">
                 <a href="#" class="button-orange">view all</a>
             </div>
         </div>
         <div class="row shortlist">
             <div class="col-md-12 padding0">
-                <% if(typeof(usersl) !== 'undefined'){
+                <% if(typeof(usersl) !== 'undefined' && ((Object.keys(usersl).length - 1) !== 0)) {
                     var count = 0;
                 _.each(usersl, function(sl){
                 if(typeof(sl.name) !== 'undefined'){ %>
@@ -298,7 +369,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-7 padding0">
-                        <img src="<%= imgBase + 'c_fill/' + sl.image%>" class="shortlist-thumb">
+                        <img src="<%= imgBase + 'c_fill/' + sl.image %>" class="shortlist-thumb">
                     </div>
                     <div class="col-md-5">
                         <% if((sl.price > 100) && (sl.price !== 'NULL') && (typeof(sl.price) !== 'undefined')) { %>
@@ -309,7 +380,22 @@
                         <span class="button shortlist-remove">remove</span>
                     </div>
                 </div>
-                <% } }); }  %>
+                <% } }); } else { %>
+                <div class="margin-top20">
+                    <div class="row padding10">
+                        <span>Oops! No items in your wishlist...</span>
+                    </div>
+                    <div class="row padding10">
+                        <span>Explore our wide range of furniture & decor items.</span>
+                    </div>
+                    <div class="row padding10">
+                        <span>And save them for your quick reference in future...</span>
+                    </div>
+                    <div class="row padding10 align-center">
+                        <span class="button">Explore...</span>
+                    </div>
+                </div>
+                <% } %>
             </div>
         </div>
 
@@ -427,7 +513,7 @@
                     </a>
                 </div>
             </div>
-            <div class="close-icon">
+            <div class="close-icon signup-form">
                 <img src="img/close-white.png">
             </div>
         </div>
@@ -456,11 +542,11 @@
 
         $('.close-icon').click(function() {
             var parent = $(this).parent();
-            if(parent.hasClass('modal')){
-                parent.close();
-            }else{
-                parent.hide();
-            }
+            parent.hide();
+        });
+
+        $('.signup-form').click(function() {
+            $('#signup').close();
         });
 
         $('#new_reg').click(function() {
@@ -471,5 +557,7 @@
             $('#signup').modal('toggle');
             $('#notify').show();
         });
+
+        $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
