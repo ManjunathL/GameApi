@@ -36,6 +36,8 @@ a.active {
 
 a {
     color: #f1591f;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 a:hover,
@@ -130,6 +132,8 @@ fieldset[disabled] .btn-primary.active {
     font-weight: 700;
     color: #fff;
     background-color: #f1591f;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .btn-xl:hover,
@@ -188,6 +192,8 @@ fieldset[disabled] .btn-xl.active {
     border-color: #f1591f;
     border-radius: 0px;
     background-color: #f1591f;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .consult:hover {
@@ -215,6 +221,8 @@ fieldset[disabled] .btn-xl.active {
     line-height: 40px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.6);
     word-spacing: -5px;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .navbar-default .navbar-brand:hover,
@@ -253,6 +261,8 @@ fieldset[disabled] .btn-xl.active {
     letter-spacing: 1px;
     color: #000;
     text-shadow: none;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .navbar-default .nav li a:hover,
@@ -288,6 +298,8 @@ fieldset[disabled] .btn-xl.active {
     color: #000;
     padding: 10px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .navbar-default .nav .user:hover,
@@ -303,6 +315,8 @@ fieldset[disabled] .btn-xl.active {
     border-radius: 0;
     color: #000;
     background-color: #f1591f;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .navbar-default .navbar-nav>.active>a:hover,
@@ -387,6 +401,74 @@ fieldset[disabled] .btn-xl.active {
 .section1 {
     margin-top: 0 !important;
 }
+
+.search_overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(241, 89, 31, 0.9);
+    position: fixed;
+    display: none;
+    padding: 4%;
+    z-index: 1100;
+}
+
+.search_close:before {
+    content: '\2715';
+}
+
+.search_close {
+    display: inline-block;
+    color: rgba(255,255,255,0.5);
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.5% 2.5%;
+    font-weight: 700;
+    cursor: pointer;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
+}
+
+.search_close:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.search_info {
+    font-size: 24px;
+    line-height: 1.6;
+    cursor: pointer;
+    color: #ffffff;
+    text-align: center;
+    display: block;
+}
+
+.search_heading {
+    color: #ffffff;
+    font-size: 30px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.search_input {
+    font-size: 50px;
+    line-height: 1.6;
+    text-align: center;
+    height: auto;
+    width: 85%;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none !important;
+    background-color: transparent;
+    color: #ffffff !important;
+}
+
+.search_input:focus, .search_input:active{
+    border: none;
+    outline: none;
+}
+
 
 .view-select.active{
     color: #e6e6e6;
@@ -526,6 +608,10 @@ fieldset[disabled] .btn-xl.active {
     margin-top: 0px;
 }
 
+.margin-top5per {
+    margin-top: 5%;
+}
+
 .margin0 {
     margin: 0px;
 }
@@ -537,7 +623,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 input[type=text] {
-    color: #ccc;
+    color: #000;
 }
 
 input[type=password] {
@@ -705,6 +791,8 @@ input[type=checkbox] {
         color: #000;
         text-shadow: none;
         cursor: pointer;
+        -webkit-transition: color 0.3s,opacity 0.2s;
+        transition: color 0.3s,opacity 0.2s,transform 0.3s;
     }
 
     .navbar-default.navbar-shrink .nav li a:hover,
@@ -724,6 +812,8 @@ input[type=checkbox] {
     .navbar-default.navbar-shrink .nav .user, .navbar-default.navbar-shrink .nav .search  {
         color: #000;
         text-shadow: none;
+        -webkit-transition: color 0.3s,opacity 0.2s;
+        transition: color 0.3s,opacity 0.2s,transform 0.3s;
     }
 
     .navbar-default.navbar-shrink .nav .user:hover,
@@ -737,6 +827,8 @@ input[type=checkbox] {
     .navbar-default.navbar-shrink .navbar-nav>.active>a {
         border-radius: 0;
         color: #f1591f;
+        -webkit-transition: color 0.3s,opacity 0.2s;
+        transition: color 0.3s,opacity 0.2s,transform 0.3s;
         /*background-color: #f1591f;*/
     }
 
@@ -793,6 +885,8 @@ input[type=checkbox] {
     border-radius: 50%;
     text-align: center;
     box-shadow: 1px 1px 5px -1px rgba(0, 0, 0, 0.63);
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .back-to-top:hover {
@@ -906,6 +1000,8 @@ section h3.section-subheading {
     text-transform: none !important;
     display: inline-block;
     margin-top: 0px;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .list-heading h2:hover, .list-heading h2:active {
@@ -964,6 +1060,8 @@ section h3.section-subheading {
     padding: 6px;
     text-transform: uppercase;
     margin-right: 25px;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .button:hover {
@@ -980,6 +1078,8 @@ section h3.section-subheading {
     color: #ffffff;
     background-color: #f1591f;
     text-transform: uppercase;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 a.button-orange, a.button-orange:hover {
@@ -1078,6 +1178,11 @@ a.button-orange, a.button-orange:hover {
 
 .userpop .row, .signup .row {
     margin: 0px;
+}
+
+.userpop .button {
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .userpop .button:hover {
@@ -1250,6 +1355,8 @@ color: #FFF!important;
     color: #000 !important;
     padding-left: 5% !important;
     font-size: 14px !important;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .drop li a:hover{
@@ -1743,6 +1850,8 @@ footer a{
     color: #fff;
     line-height: 32px;
     font-size: 13px;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 footer a:hover, a:active, a:focus{
