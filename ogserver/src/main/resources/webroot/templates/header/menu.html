@@ -464,7 +464,7 @@
         </p>
     </div>
 
-    <div class="close-icon">
+    <div class="close-icon" onclick="closePopup('.userpop');">
         <img src="img/close-white.png">
     </div>
 
@@ -513,7 +513,7 @@
                     </a>
                 </div>
             </div>
-            <div class="close-icon signup-form">
+            <div class="close-icon signup-form" onclick="closeModal('#signup');">
                 <img src="img/close-white.png">
             </div>
         </div>
@@ -534,15 +534,40 @@
 </div>
 <!-- Notification End -->
 
+<!-- Search Overlay -->
+
+<div class="search_overlay" autocomplete="off" action="#">
+    <div class="search_close"></div>
+    <div class="row">
+        <span class="search_info">Just type and press 'enter'</span>
+    </div>
+    <div class="row align-center">
+        <input type="text" class="search_input"/>
+    </div>
+    <div class="row margin-top5per">
+        <div class="col-md-4">
+            <div class="search_heading">Popular Search..</div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="search_heading">Recent Search..</div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="search_heading">My Search..</div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Search Overlay End -->
+
+
 <script>
     $(document).ready(function() {
         $('.user').click(function() {
             $('.userpop').show();
-        });
-
-        $('.close-icon').click(function() {
-            var parent = $(this).parent();
-            parent.hide();
         });
 
         $('.signup-form').click(function() {
@@ -558,6 +583,24 @@
             $('#notify').show();
         });
 
+        $('.search').click(function() {
+            $('.search_overlay').slideDown();
+            $('.search_input').focus();
+        });
+
+        $('.search_close').click(function() {
+            $('.search_overlay').slideUp();
+        });
+
         $('[data-toggle="tooltip"]').tooltip();
     });
+
+    function closeModal(id) {
+        $(id).modal('toggle');
+    }
+
+    function closePopup(id) {
+        $(id).hide();
+    }
+
 </script>
