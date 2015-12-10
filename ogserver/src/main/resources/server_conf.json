@@ -2,9 +2,9 @@
   "version": "0.0.0a",
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/og_fe",
+    "url": "jdbc:mysql://localhost/og",
     "max_pool_size": 4,
     "user": "root",
-    "password": "sakshi24"
+    "password": "password"
   }
 }

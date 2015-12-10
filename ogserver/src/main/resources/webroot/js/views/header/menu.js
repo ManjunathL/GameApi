@@ -16,7 +16,7 @@ define([
             var that = this;
             var categories = new Categories();
             var user = new UserModel({'id':'gaurav345'});
-            var user_sl = new UserSL({'id':'gaurav345'});
+            var user_sl = new UserSL({'id':'gaurav12345345'});
 
             window.userLogin = this.userLogin;
             categories.fetch({
