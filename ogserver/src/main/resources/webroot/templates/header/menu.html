@@ -421,7 +421,12 @@
                     <a href="#" class="button margin-top20 margin-bottom20">sign in</a>
                 </div>
                 <div class="col-md-6 padding0 align-right">
-                    <a href="#">Forgot Password??</a>
+                    <a
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#forgot_password">
+                        Forgot Password??
+                    </a>
                 </div>
             </div>
         </div>
@@ -446,7 +451,12 @@
                     And, if you are new to OrangeGubbi.com
                 </p>
                 <p>
-                    <a href="#" id="new_reg" data-toggle="modal" data-target="#signup">Create a new Account</a> - It’s Free!
+                    <a href="#"
+                       id="new_reg"
+                       data-toggle="modal"
+                       data-target="#signup">
+                        Create a new Account
+                    </a> - It’s Free!
                 </p>
             </div>
         </div>
@@ -470,6 +480,39 @@
 
 </div>
 <!-- User PopUp End -->
+
+<!-- Forgot Password Modal -->
+<div id="forgot_password" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content signup">
+            <h2>Forgot Password</h2>
+            <div class="row">
+                <div class="margin-bottom20">
+                    <p class="margin0">Enter your registered email Id</p>
+                    <input type="text" class="width100" placeholder="abc@xyz.com"/>
+                </div>
+                <div class="padding20-0 align-center" id="reset_password">
+                    <a
+                        href="#"
+                        class="button margin-top20 margin-bottom20">
+                        reset password
+                    </a>
+                </div>
+            </div>
+            <p class="modal_success_msg">We have sent a link to your registered mail id.</p>
+            <p class="modal_success_msg">Please follow the link to change your password.</p>
+            <p class="modal_error_msg">Email Id not registered.</p>
+            <p class="modal_error_msg">Please enter correct email id or try creating a new account.</p>
+            <div class="close-icon signup-form" onclick="closeModal('#forgot_password');">
+                <img src="img/close-white.png">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Forgot Password Modal End -->
 
 <!-- SignUp Modal -->
 <div id="signup" class="modal fade" role="dialog">
@@ -506,9 +549,9 @@
                     <a
                             href="#"
                             id="signup-btn"
-                            class="button margin-top20 margin-bottom20"
-                            data-toggle="modal"
-                            data-target="#notify">
+                            class="button margin-top20 margin-bottom20">
+                            <!--data-toggle="modal"-->
+                            <!--data-target="#notify">-->
                         sign up
                     </a>
                 </div>
@@ -537,6 +580,9 @@
 <!-- Search Overlay -->
 
 <div class="search_overlay" autocomplete="off" action="#">
+    <div class="search_logo">
+        <img src="img/gubbi_white.png" alt="MyGubbi">
+    </div>
     <div class="search_close"></div>
     <div class="row">
         <span class="search_info">Just type and press 'enter'</span>
@@ -544,21 +590,46 @@
     <div class="row align-center">
         <input type="text" class="search_input"/>
     </div>
-    <div class="row margin-top5per">
-        <div class="col-md-4">
-            <div class="search_heading">Popular Search..</div>
-
+    <% if(typeof(a_srch) !== 'undefined' && ((Object.keys(a_srch).length) !== 0)) { %>
+        <div class="row search_suggest">
+            <%  _.each(a_srch, function(as){
+                if(typeof(as.resultName) !== 'undefined'){ %>
+                    <a href="#"><p><%= as.resultName %></p></a>
+            <% } }); %>
         </div>
-        <div class="col-md-4">
-            <div class="search_heading">Recent Search..</div>
-
-        </div>
-        <div class="col-md-4">
-            <div class="search_heading">My Search..</div>
-
-        </div>
-    </div>
-
+    <% } %>
+    <% if(typeof(p_srch) !== 'undefined' && ((Object.keys(p_srch).length) !== 0)) {
+         if(typeof(p_srch.popularSearches) !== 'undefined'){ %>
+        <div class="row margin-top5per">
+                <div class="col-md-4">
+                    <div class="search_heading">Popular Searches..</div>
+                    <div class="search_data" id="pop_search">
+                        <%  _.each(p_srch.popularSearches, function(ps){
+                            if(typeof(ps.name) !== 'undefined'){ %>
+                            <a href="#"><p><%= ps.name %></p></a>
+                        <% } }); %>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="search_heading">Recent Searches..</div>
+                    <div class="search_data" id="rec_search">
+                        <% _.each(p_srch.recentSearches, function(rs){
+                            if(typeof(rs.name) !== 'undefined'){ %>
+                            <a href="#"><p><%= rs.name %></p></a>
+                        <% } }); %>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="search_heading">My Searches..</div>
+                    <div class="search_data" id="my_search">
+                        <% _.each(p_srch.mySearches, function(ms){
+                            if(typeof(ms.name) !== 'undefined'){ %>
+                                <a href="#"><p><%= ms.name %></p></a>
+                        <% } }); %>
+                    </div>
+                </div>
+            </div>
+    <% } } %>
 </div>
 
 <!-- Search Overlay End -->
@@ -580,7 +651,10 @@
 
         $('#signup-btn').click(function() {
             $('#signup').modal('toggle');
-            $('#notify').show();
+        });
+
+        $("#signup").on('hidden.bs.modal', function () {
+            $('#notify').modal('toggle');
         });
 
         $('.search').click(function() {
@@ -590,6 +664,30 @@
 
         $('.search_close').click(function() {
             $('.search_overlay').slideUp();
+        });
+
+        $('.search_input').keyup(function() {
+            var char = $(this).val().length;
+            if(char >= 3){
+                $('.search_suggest').slideDown();
+            } else {
+                $('.search_suggest').slideUp();
+            }
+        });
+
+        $('.search_overlay').click(function() {
+            $('.search_input').focus();
+            $('.search_suggest').slideUp();
+        });
+
+        $('#reset_password').click(function() {
+            $('.modal_success_msg').slideDown();
+            $('.modal_error_msg').slideDown();
+        });
+
+        $("#forgot_password").on('hidden.bs.modal', function () {
+            $('.modal_success_msg').css('display','none');
+            $('.modal_error_msg').css('display','none');
         });
 
         $('[data-toggle="tooltip"]').tooltip();
