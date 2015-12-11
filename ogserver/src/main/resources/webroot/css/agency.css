@@ -410,6 +410,32 @@ fieldset[disabled] .btn-xl.active {
     display: none;
     padding: 4%;
     z-index: 1100;
+    overflow: auto;
+}
+
+.search_overlay a p{
+    font-size: 18px;
+    padding-left: 2%;
+    padding-right: 2%;
+    color: rgba(255,255,255,0.8);
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
+}
+
+.search_overlay a p:hover {
+    color: rgba(255,255,255,1);
+}
+
+.search_overlay p:hover {
+    background-color: rgba(240, 77, 15, 1);
+}
+
+.search_overlay a p:active {
+    color: rgba(255,255,255,1);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8) !important;
+    -webkit-box-shadow: inset 0px 0px 2px 2px rgba(192, 61, 12,0.2);
+    -moz-box-shadow: inset 0px 0px 2px 2px rgba(192, 61, 12,0.2);
+    box-shadow: inset 0px 0px 2px 2px rgba(192, 61, 12,0.2);
 }
 
 .search_close:before {
@@ -434,6 +460,14 @@ fieldset[disabled] .btn-xl.active {
     color: rgba(255, 255, 255, 1);
 }
 
+.search_logo {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1.5% 2.5%;
+}
+
 .search_info {
     font-size: 24px;
     line-height: 1.6;
@@ -447,7 +481,14 @@ fieldset[disabled] .btn-xl.active {
     color: #ffffff;
     font-size: 30px;
     line-height: 1.6;
-    text-align: center;
+    text-align: left;
+}
+
+.search_data {
+    padding: 6%;
+    text-align: left;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
 .search_input {
@@ -469,6 +510,23 @@ fieldset[disabled] .btn-xl.active {
     outline: none;
 }
 
+.search_suggest {
+    color: #ffffff;
+    font-size: 17px;
+    text-align: left;
+    background-color: rgba(242, 114, 64, 1);
+    width: 50%;
+    padding: 2%;
+    margin: auto;
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 24%;
+    z-index: 1101;
+    -webkit-box-shadow: 0px 0px 16px 1px rgba(36,36,36,0.4);
+    -moz-box-shadow: 0px 0px 16px 1px rgba(36,36,36,0.4);
+    box-shadow: 0px 0px 16px 1px rgba(36,36,36,0.4);
+}
 
 .view-select.active{
     color: #e6e6e6;
@@ -732,6 +790,20 @@ input[type=checkbox] {
 
     #layout-view {
         display: none;
+    }
+
+    .search_suggest {
+        width: 90%;
+        left: 5%;
+        top: 30%;
+    }
+
+    .search_input {
+        font-size: 28px;
+    }
+
+    .search_info {
+        margin-top: 15%;
     }
 }
 
@@ -1135,7 +1207,7 @@ a.button-orange, a.button-orange:hover {
     width: 75%;
     color: #fff;
     background-color: rgba(0,0,0,0.9);
-    padding: 0 20px 20px 20px;
+    padding: 20px;
 }
 
 #notify .signup {
@@ -1200,6 +1272,22 @@ a.button-orange, a.button-orange:hover {
     left: 0px;
     right: 0px;
     background-color: rgba(0,0,0,1);
+}
+
+.modal_success_msg {
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff;
+    display: none;
+}
+
+.modal_error_msg {
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+    color: #ff0000;
+    display: none;
 }
 
 .signout_icon {

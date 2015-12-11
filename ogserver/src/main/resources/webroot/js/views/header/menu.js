@@ -7,8 +7,10 @@ define([
     'collections/categories',
     'models/userlogin',
     'models/user',
-    'models/userShortList'
-], function($, _, Backbone, Bootstrap, headerMenuTemplate, Categories, UserLogin, UserModel, UserSL) {
+    'models/userShortList',
+    'models/autoSearch',
+    'models/preSearch'
+], function($, _, Backbone, Bootstrap, headerMenuTemplate, Categories, UserLogin, UserModel, UserSL, AutoSearch, PreSearch) {
     var HeaderMenuView = Backbone.View.extend({
         userLogin: new UserLogin(),
         el: '.main-menu-container',
@@ -16,7 +18,9 @@ define([
             var that = this;
             var categories = new Categories();
             var user = new UserModel({'id':'gaurav345'});
-            var user_sl = new UserSL({'id':'gaurav12345345'});
+            var user_sl = new UserSL({'id':'gaurav345'});
+            var auto_search = new AutoSearch();
+            var pre_search = new PreSearch();
 
             window.userLogin = this.userLogin;
             categories.fetch({
@@ -31,14 +35,31 @@ define([
                         success: function(user) {
                             user_sl.fetch({
                                 success: function(usersl) {
-                                    console.log(usersl.keys().length);
-                                    var compiledTemplate = _.template(headerMenuTemplate);
-                                    $(that.el).html(compiledTemplate({
-                                        "categories": categories,
-                                        "usercln": user.toJSON(),
-                                        "usersl": usersl.toJSON()
-                                    }));
-                                    $('a[href="' + window.location.hash + '"]').addClass('active');
+                                    auto_search.fetch({
+                                        success: function(auto_search) {
+                                            pre_search.fetch({
+                                                success: function(pre_search) {
+                                                        console.log(JSON.stringify(pre_search));
+                                                        var compiledTemplate = _.template(headerMenuTemplate);
+                                                        $(that.el).html(compiledTemplate({
+                                                            "categories": categories,
+                                                            "usercln": user.toJSON(),
+                                                            "usersl": usersl.toJSON(),
+                                                            "a_srch": auto_search.toJSON(),
+                                                            "p_srch": pre_search.toJSON()
+
+                                                        }));
+                                                        $('a[href="' + window.location.hash + '"]').addClass('active');
+                                                    },
+                                                    error: function() {
+                                                        console.log("error in fetching user pre_search data");
+                                                    }
+                                                });
+                                            },
+                                            error: function() {
+                                            console.log("error in fetching user auto_search data");
+                                        }
+                                    });
                                 },
                                 error: function() {
                                     console.log("error in fetching user shortlist data");
