@@ -1,200 +1,3 @@
-<!--<div class="og-navbar">-->
-    <!--<div class="row">-->
-        <!--<div class="col-lg-4" align="left">-->
-            <!--<ul class="header-ul">-->
-                <!--<li>-->
-                    <!--<a href="#">-->
-                        <!--<img src="img/logo.png" align="top" alt="myGubbi"/>-->
-                    <!--</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4" align="center">-->
-            <!--<ul class="header-ul">-->
-                <!--<li><input style="width: 90%; height: 35px;" name="searchNav" type="text"-->
-                           <!--placeholder="Search Products, Designs, Stories &amp; More..." spellcheck="false">-->
-                <!--</li>-->
-                <!--<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4" align="right">-->
-            <!--<ul class="header-ul">-->
-                <!--<li><a href="#" style="font-size: 18px">-->
-                    <!--<span style="margin-top: 15px; font-size: 18px" class="fa fa-check-square-o"></span>-->
-                    <!--Shortlist</a>-->
-                <!--</li>-->
-                <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                <!--<li>-->
-                    <!--<a href="#" style="font-size: 18px; margin-right: 30px;"><span-->
-                            <!--style="margin-top: 10px; font-size: 18px"-->
-                            <!--class="glyphicon glyphicon-user"></span><%= ' ' + (userLogin.isLoggedIn() ? userLogin.get('name') : 'User Profile') %></a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<div id="g-login-btn" style="visibility: <%= userLogin.isLoggedIn() ? 'hidden' : 'visible' %>">-->
-                        <!--<span class="icon"></span>-->
-                    <!--</div>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<button style="visibility: <%= userLogin.isLoggedIn() && userLogin.isProviderGoogle() ? 'visible' : 'hidden' %>" id="g-logout-btn" onclick="gLogout();">Logout</button>-->
-                <!--</li>-->
-
-                <!--<li>-->
-                    <!--<div id="fb-login-btn" style="visibility: <%= userLogin.isLoggedIn() ? 'hidden' : 'visible' %>" class="fb-login-button" data-scope="public_profile,email" data-max-rows="1" data-size="icon" data-show-faces="false" onlogin="checkLoginState();"></div>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<button style="visibility: <%= userLogin.isLoggedIn() && userLogin.isProviderFb() ? 'visible' : 'hidden' %>" id="fb-logout-btn" onclick="fbLogout();">Logout</button>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-        <!--<div class="col-sm-12">&nbsp;</div>-->
-    <!--</div>-->
-    <!--<hr class="hr-sm-top"/>-->
-    <!--<div class="row">-->
-        <!--<div class="col-lg-6">-->
-            <!--<ul class="header-ul header-ul-center">-->
-                <!--<% categories.each(function(category){ %>-->
-                    <!--<% if (category.get('subCategories').length === 0) { %>-->
-                        <!--<li><a href='#products/<%=category.code%>'><%=category.get('name')%></a></li>-->
-                    <!--<% } else { %>-->
-                        <!--<li>-->
-                            <!--<div class="dropdown">-->
-                                <!--<button class="btn og-navbar-btn-face dropdown-toggle" type="button" id="dropdownMenu<%=category.code%>"-->
-                                        <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
-                                    <!--<%=category.get('name')%>-->
-                                    <!--<span class="caret"></span>-->
-                                <!--</button>-->
-                                <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenu<%=category.code%>">-->
-                                <!--<% category.get('subCategories').each(function(subCategory){ %>-->
-                                    <!--<li><a href="#products/<%=category.get('code')%>/<%=subCategory.get('code')%>"><%=subCategory.get('name')%></a></li>-->
-                                <!--<% }); %>-->
-                                <!--</ul>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                    <!--<% } %>-->
-                    <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                <!--<% }); %>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="col-lg-6">-->
-            <!--<ul class="header-ul header-ul-center">-->
-                <!--<li><a href="#">DESIGNS</a></li>-->
-                <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                <!--<li><a href="#">PRODUCTS</a></li>-->
-                <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                <!--<li><a href="#">STORIES</a></li>-->
-                <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>-->
-                <!--<li class="og-action"><a href="#">CONSULT</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<hr class="hr-sm-bottom"/>-->
-    <!--<div id="status">-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<script>-->
-
-<!--/* todo: change google id for production */-->
-
-<!--var googleUser = {};-->
-<!--var gInit = function() {-->
-    <!--gapi.load('auth2', function(){-->
-      <!--auth2 = gapi.auth2.init({-->
-        <!--client_id: '614659587896-i8jj7i9cdmkbtt44888egia9r4l03tne.apps.googleusercontent.com',-->
-        <!--cookiepolicy: 'single_host_origin',-->
-        <!--// Request scopes in addition to 'profile' and 'email'-->
-        <!--//scope: 'additional_scope'-->
-      <!--});-->
-      <!--attachSignin(document.getElementById('g-login-btn'));-->
-    <!--});-->
-<!--};-->
-
-<!--function attachSignin(element) {-->
-    <!--auth2.attachClickHandler(element, {}, onGLogin, onGLoginFailure);-->
-<!--}-->
-
-<!--function onGLoginFailure(error) {-->
-    <!--console.log(JSON.stringify(error, undefined, 2));-->
-<!--}-->
-
-<!--function onGLogin(googleUser) {-->
-    <!--var profile = googleUser.getBasicProfile();-->
-    <!--userLogin.setAndLogin(profile.getName(), profile.getEmail(), profile.getImageUrl(), "google");-->
-    <!--$("#g-logout-btn").show();-->
-<!--}-->
-
-<!--function gLogout() {-->
-    <!--var auth2 = gapi.auth2.getAuthInstance();-->
-    <!--var that = this;-->
-    <!--auth2.signOut().then(function () {-->
-        <!--that.userLogin.clear();-->
-        <!--location.reload();-->
-    <!--});-->
-<!--}-->
-
-<!--gInit();-->
-
-<!--/* Facebook integration starts here */-->
-
-<!--function statusChangeCallback(response) {-->
-    <!--if (response.status === 'connected') {-->
-      <!--onFbLogin();-->
-    <!--} else if (response.status === 'not_authorized') {-->
-       <!--FB.login();-->
-    <!--} else {-->
-      <!--console.log('Please log into Facebook.');-->
-    <!--}-->
-<!--}-->
-
-<!--function onFbLogin() {-->
-    <!--var that = this;-->
-    <!--FB.api('/me', function(response) {-->
-        <!--that.userLogin.setAndLogin(response.name, response.email, "", "facebook");-->
-        <!--$("#fb-logout-btn").show();-->
-    <!--});-->
-<!--}-->
-
-<!--function fbLogout() {-->
-    <!--var that = this;-->
-    <!--FB.logout(function(response) {-->
-        <!--that.userLogin.clear();-->
-        <!--location.reload();-->
-    <!--});-->
-<!--}-->
-
-<!--function checkLoginState() {-->
-    <!--FB.getLoginStatus(function(response) {-->
-      <!--statusChangeCallback(response);-->
-    <!--});-->
-<!--}-->
-
-<!--/* todo: change FB app id for production */-->
-<!--window.fbAsyncInit = function() {-->
-    <!--FB.init({-->
-        <!--appId      : '931653923587328',-->
-        <!--status     : true,-->
-        <!--cookie     : true,-->
-        <!--xfbml      : true,-->
-        <!--version    : 'v2.5'-->
-    <!--});-->
-
-    <!--FB.Event.subscribe('auth.login', statusChangeCallback);-->
-<!--};-->
-
-<!--(function(d, s, id){-->
-     <!--var js, fjs = d.getElementsByTagName(s)[0];-->
-     <!--if (d.getElementById(id)) {return;}-->
-     <!--js = d.createElement(s); js.id = id;-->
-     <!--js.src = "//connect.facebook.net/en_US/sdk.js";-->
-     <!--fjs.parentNode.insertBefore(js, fjs);-->
-<!--}(document, 'script', 'facebook-jssdk'));-->
-
-<!--</script>-->
-
-
-<!-- Navigation -->
 <nav class="navbar navbar-default navbar-shrink navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -227,7 +30,13 @@
                 <span class="glyphicon glyphicon-heart-empty wishlist user"></span>
                 <% } %>
 
-                <span class="glyphicon glyphicon-user user"></span>
+                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+                    <span class="user user-img"
+                          style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                <% }else { %>
+                    <span class="glyphicon glyphicon-user user"></span>
+                <% } %>
+
             </div>
 
         </div>
@@ -329,26 +138,18 @@
 <!-- User PopUp -->
 <div class="userpop">
     <div class="userpop-content">
-        <% if(typeof(usercln) !== 'undefined') { %>
+        <% if (users.length > 0) { %>
         <h3>
-            <% if((typeof(usercln.image) !== 'undefined') || usercln.image !== NULL) { %>
-            <img src="<%= imgBase + usercln.image %>">
+            <% if (users.at(0).get('profileImage')) { %>
+                <img src="<%= users.at(0).get('profileImage') %>">
             <% }else { %>
-            <img src="img/user.png">
+                <img src="img/user.png">
             <% } %>
-            <span class="user_name">
-                <%= usercln.firstName %>
-            </span>
+            <%= users.at(0).get('displayName') %>
             <span class="fa fa-sign-out signout_icon"
                   data-toggle="tooltip"
                   data-placement="left"
-                  title="Sign Out"></span>
-            <!--<img-->
-                    <!--src="img/signout.png"-->
-                    <!--class="signout_icon"-->
-                    <!--data-toggle="tooltip"-->
-                    <!--data-placement="left"-->
-                    <!--title="Sign Out">-->
+                  title="Sign Out" onclick="signOut();"></span>
         </h3>
         <div class="row">
             <div class="col-md-8 col-xs-8 padding0">
@@ -404,40 +205,51 @@
             <img src="img/user.png">
             My Account
         </h2>
-        <div class="row">
-            <div class="margin-bottom20">
-                <p class="margin0">Email ID</p>
-                <input type="text" class="width100" placeholder="abc@xyz.com"/>
+
+        <form id="loginForm" data-toggle="validator" role="form">
+            <div class="row display-none" id="login_error_row">
+                <p class="margin0 error-text align-center" id="login_error"></p>
             </div>
-            <div class="margin-bottom20">
-                <p class="margin0">Password</p>
-                <input type="password" class="width100"/>
-            </div>
-            <div class="margin-bottom20">
-                <input type="checkbox" name="remember" value="1"/> Remember Me
-            </div>
-            <div class="padding20-0">
-                <div class="col-md-6 padding0">
-                    <a href="#" class="button margin-top20 margin-bottom20">sign in</a>
+
+            <div class="row">
+                <div class="margin-bottom20 form-group">
+                    <p class="margin0">Email ID*</p>
+                    <input type="email" class="width100" placeholder="abc@xyz.com" id="emailId" maxlength="100"
+                           style="color: #000;" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
                 </div>
-                <div class="col-md-6 padding0 align-right">
-                    <a href="#">Forgot Password??</a>
+                <div class="margin-bottom20 form-group">
+                    <p class="margin0">Password*</p>
+                    <input type="password" class="width100" id="pwd" required maxlength="100"/>
+                </div>
+                <div class="margin-bottom20">
+                    <input type="checkbox" id="remember" checked/> Remember Me
+                </div>
+                <div class="padding20-0">
+                    <div class="col-md-6 padding0 form-group">
+                        <button id="loginBtn" class="button margin-top20 margin-bottom20" style="background: transparent"
+                                type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign in">sign in
+                        </button>
+                    </div>
+                    <div class="col-md-6 padding0 align-right">
+                        <a href="#">Forgot Password??</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         <div class="row margin-top20 padding-top30 margin-bottom20">
             <p class="align-center">OR</p>
+
             <div class="margin-bottom40">
                 <p>
                     Use your favourite social account
                 </p>
                 <ul class="list-inline social-buttons align-center">
                     <li>
-                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#" onclick="fbLogin()"><i class="fa fa-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-google"></i></a>
+                        <a href="#"><i class="fa fa-google" onclick="googleLogin()"></i></a>
                     </li>
                 </ul>
             </div>
@@ -445,8 +257,9 @@
                 <p class="font-size12">
                     And, if you are new to OrangeGubbi.com
                 </p>
+
                 <p>
-                    <a href="#" id="new_reg" data-toggle="modal" data-target="#signup">Create a new Account</a> - It’s Free!
+                    <a href="#" id="new_reg" data-toggle="modal" >Create a new Account</a> - It’s Free!
                 </p>
             </div>
         </div>
@@ -464,7 +277,7 @@
         </p>
     </div>
 
-    <div class="close-icon">
+    <div class="close-icon" onclick="closePopup('.userpop');">
         <img src="img/close-white.png">
     </div>
 
@@ -481,39 +294,55 @@
                 <img src="img/user.png">
                 Create a new Account
             </h2>
-            <div class="row">
-                <div class="margin-bottom20">
-                    <p class="margin0">Full Name</p>
-                    <input type="text" class="width100" placeholder="John Doe"/>
-                </div>
-                <div class="margin-bottom20">
-                    <p class="margin0">Contact Number</p>
-                    <input type="text" class="width100" placeholder="9876543210"/>
-                </div>
-                <div class="margin-bottom20">
-                    <p class="margin0">Email ID</p>
-                    <input type="text" class="width100" placeholder="abc@xyz.com"/>
-                </div>
-                <div class="margin-bottom20">
-                    <p class="margin0">Password</p>
-                    <input type="password" class="width100"/>
-                </div>
-                <div class="margin-bottom20">
-                    <p class="margin0">Confirm Password</p>
-                    <input type="password" class="width100"/>
-                </div>
-                <div class="padding20-0 align-center">
-                    <a
-                            href="#"
-                            id="signup-btn"
-                            class="button margin-top20 margin-bottom20"
-                            data-toggle="modal"
-                            data-target="#notify">
-                        sign up
-                    </a>
-                </div>
+
+            <div class="row display-none" id="reg_error_row">
+                <p class="margin0 error-text align-center" id="reg_error"></p>
             </div>
-            <div class="close-icon signup-form">
+
+            <form id="registerForm" data-toggle="validator" role="form">
+                <div class="row">
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Full Name*</p>
+                        <input type="text" class="width100 form-control" placeholder="John Doe" id="reg_full_name" required/>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="margin-bottom20 form-group has-feedback">
+                        <p class="margin0">Contact Number</p>
+                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" data-minlength="10" maxlength="10"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Email ID*</p>
+                        <input type="email" class="width100 form-control" placeholder="abc@xyz.com" id="reg_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="margin-bottom20 form-group">
+                            <p class="margin0">Password*</p>
+                            <input type="password" data-minlength="6" class="width100 form-control" id="reg_password" pattern=".{6,}"
+                                   required/>
+                            <span class="help-block">Minimum of 6 characters</span>
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <p class="margin0">Confirm Password*</p>
+                            <input type="password" id="reg_confirm" class="width100 form-control"
+                                   data-match="#reg_password" data-match-error="Whoops, these don't match" required/>
+                            <div id="reg_confirm_error" class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="padding20-0 align-center form-group">
+                        <button
+                                id="signup-btn"
+                                class="button margin-top20 margin-bottom20"
+                                style="background: transparent" type="submit"
+                                data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign up">
+                            sign up
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="close-icon signup-form" onclick="closeModal('#signup');">
                 <img src="img/close-white.png">
             </div>
         </div>
@@ -525,39 +354,284 @@
 <!-- Notification Modal -->
 <div id="notify" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content signup">
-            <p class="margin0">We have sent a verification email to your account. Kindly verify the same</p>
+            <p class="margin0" id="reg_done_message"></p>
         </div>
     </div>
 </div>
 <!-- Notification End -->
 
 <script>
+
+    var ref = new Firebase(firebaseBase);
+
+    function createUser(userId, data, cbk) {
+        ref.child("users").child(userId).set(data, function(error) {
+            if (error) {
+                console.log("Data could not be saved." + error);
+                cbk(false);
+            } else {
+                console.log("Data saved successfully.");
+                cbk(true);
+            }
+        });
+    }
+
+    function setUser(user) {
+        users.add(user, {at: 0});
+    }
+
+    function getUserProfile(uid, authData, handleAuth) {
+        var userProfileRef = new Firebase(firebaseBase + "user-profiles/" + uid);
+        var userProfile = null;
+        userProfileRef.once("value", function(snapshot) {
+            if (snapshot.exists()) {
+                userProfile = snapshot.val();
+            }
+            handleAuth(authData, userProfile);
+        });
+    }
+
+    var onFAuth = function (authData) {
+      if (authData) {
+        if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
+            getUserProfile(authData.uid, authData, handleAuth);
+        }
+      }
+    };
+
+    ref.onAuth(onFAuth);
+
+    function handleAuth(authData, userProfile) {
+
+        var user = {
+            provider: authData.provider,
+            email: getEmail(authData),
+            displayName: getName(authData, userProfile),
+            profileImage: getImage(authData, userProfile),
+            uid: authData.uid
+        };
+
+        if (authData.provider !== 'password') {
+            var userRef = new Firebase(firebaseBase + "users/" + authData.uid);
+            userRef.once("value", function(snapshot) {
+                if (snapshot.exists()) {
+                    setUser(user);
+                    console.log("user already exists in firebase");
+                } else {
+                    console.log("user doesn't exist in firebase, creating..");
+
+                    var cbk = function(result) {
+                        if (result) {
+                            setUser(user);
+                            createProfile(authData, {
+                                displayName : user.displayName,
+                                phone : '',
+                                profileImage: user.profileImage
+                            }, null);
+                        }
+                    };
+
+                    createUser(authData.uid, user, cbk);
+                }
+            });
+        } else {
+            setUser(user);
+        }
+
+    }
+
+
+    function authHandler(error) {
+        if (error) {
+            console.log("Login Failed!", error);
+            $('#login_error').html(error);
+            $('#login_error_row').css("display", "block");
+        } else {
+            console.log("Authenticated successfully with payload:", authData);
+        }
+        debugger;
+        window.loginButton.button('reset');
+    }
+
+    function fbLogin() {
+        ref.authWithOAuthPopup("facebook", authHandler);
+    }
+
+    function googleLogin() {
+        ref.authWithOAuthPopup("google", authHandler, {scope: "email"});
+    }
+
+    function pwdLogin() {
+        ref.authWithPassword({
+            email    : $('#emailId').val(),
+            password : $('#pwd').val()
+        }, authHandler, {remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'});
+    }
+
+    function signOut() {
+        ref.unauth();
+        users.reset();
+    }
+
+    function getName(authData, userProfile) {
+      if (userProfile) {
+        return userProfile.displayName;
+      } else {
+          switch(authData.provider) {
+             case 'password':
+               return authData.password.email.replace(/@.*/, '');
+             case 'google':
+               return authData.google.displayName;
+             case 'facebook':
+               return authData.facebook.displayName;
+          }
+      }
+    }
+
+    function getImage(authData, userProfile) {
+      if (userProfile) {
+        return userProfile.profileImage;
+      } else {
+          switch(authData.provider) {
+             case 'password':
+               return authData.password.profileImageURL;
+             case 'google':
+               return authData.google.profileImageURL;
+             case 'facebook':
+               return authData.facebook.profileImageURL;
+          }
+      }
+    }
+
+    function getEmail(authData) {
+      switch(authData.provider) {
+         case 'password':
+           return authData.password.email;
+         case 'google':
+           return authData.google.email;
+         case 'facebook':
+           return authData.facebook.email;
+      }
+    }
+
+    function closeModal(id) {
+        $(id).modal('toggle');
+    }
+
+    function closePopup(id) {
+        $(id).hide();
+    }
+
     $(document).ready(function() {
         $('.user').click(function() {
             $('.userpop').show();
         });
 
-        $('.close-icon').click(function() {
-            var parent = $(this).parent();
-            parent.hide();
-        });
-
-        $('.signup-form').click(function() {
-            $('#signup').close();
-        });
-
         $('#new_reg').click(function() {
             $('.userpop').hide();
+            $('#signup').modal('toggle');
+            $('#reg_error').html('');
+            $('#reg_error_row').css("display", "none");
+            $('#reg_password').val('');
+            $('#reg_confirm').val('');
+
+        });
+
+        $("#registerForm").submit(function(e) {
+            e.preventDefault();
+            if ($('#reg_confirm').val() !== $('#reg_password').val()) {
+                $('#reg_confirm_error').html("Passwords don't match!");
+            } else {
+                window.signupButton.button('loading');
+                $('#reg_confirm_error').html('');
+                $('#reg_error').html('');
+                $('#reg_error_row').css("display", "none");
+                signUp();
+            }
+        });
+
+        $('#loginBtn').click(function() {
+            window.loginButton = $(this);
         });
 
         $('#signup-btn').click(function() {
-            $('#signup').modal('toggle');
-            $('#notify').show();
+            window.signupButton = $(this);
+        });
+
+        $("#loginForm").submit(function(e) {
+            e.preventDefault(); debugger;
+            window.loginButton.button('loading');
+            $('#login_error').html('');
+            $('#login_error_row').css("display", "none");
+            pwdLogin();
         });
 
         $('[data-toggle="tooltip"]').tooltip();
+
     });
+
+
+    function signUp() {
+
+        ref.createUser({
+            email    : $('#reg_email_id').val(),
+            password : $('#reg_password').val()
+        }, function(error, userData) {
+            if (error) {
+                console.log("Error creating user:", error);
+                $('#reg_error').html(error);
+                $('#reg_error_row').css("display", "block");
+                window.signupButton.button('reset');
+            } else {
+                console.log("Successfully created user account with uid:", userData.uid);
+                ref.offAuth(onFAuth);
+                ref.authWithPassword({
+                    email    : $('#reg_email_id').val(),
+                    password : $('#reg_password').val()
+                }, function(error, authData) {
+
+                    var profileData = {
+                        displayName : $('#reg_full_name').val(),
+                        phone : $('#reg_contact_num').val(),
+                        profileImage: authData.password.profileImageURL
+                    };
+
+                    var callbk = function() {
+                        ref.unauth();
+                        window.signupButton.button('reset');
+                        $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' onclick='gotoLogin();'>Login</a> to proceed.");
+                        $('#signup').modal('toggle');
+                        $('#notify').modal('show');
+                        ref.onAuth(onFAuth);
+                    };
+
+                    createProfile(userData, profileData, callbk);
+
+                });
+            }
+        });
+
+        return false;
+    }
+
+    function gotoLogin() {
+        $('#notify').modal('toggle');
+        $('.userpop').show();
+    }
+
+    function createProfile(userData, profileData, cbk) {
+        ref.child('user-profiles').child(userData.uid).set(
+            profileData
+            , function(error) {
+                if (error) {
+                    console.log("password profile data could not be saved." + error);
+                } else {
+                    console.log("data saved successfully.");
+                }
+                if (cbk) cbk();
+            });
+    }
+
 </script>

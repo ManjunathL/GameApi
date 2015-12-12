@@ -3,35 +3,35 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
+    'bootstrapvalidator',
+    'firebase',
     'text!templates/header/menu.html',
     'collections/categories',
-    'models/userlogin',
-    'models/user',
+    'collections/users',
     'models/userShortList'
-], function($, _, Backbone, Bootstrap, headerMenuTemplate, Categories, UserLogin, UserModel, UserSL) {
+], function($, _, Backbone, Bootstrap, BootstrapValidator, Firebase, headerMenuTemplate, Categories, Users, UserSL) {
     var HeaderMenuView = Backbone.View.extend({
-        userLogin: new UserLogin(),
+        users: new Users(),
         el: '.main-menu-container',
         render: function() {
             var that = this;
             var categories = new Categories();
-            var user = new UserModel({'id':'gaurav345'});
-            var user_sl = new UserSL({'id':'gaurav12345345'});
 
-            window.userLogin = this.userLogin;
+            window.users = this.users;
             categories.fetch({
                 success: function() {
                     var compiledTemplate = _.template(headerMenuTemplate);
                     $(that.el).html(compiledTemplate({
                         "categories": categories,
-                        "userLogin": that.userLogin
+                        "users": that.users
                     }));
                     $('a[href="' + window.location.hash + '"]').addClass('active');
+/*
                     user.fetch({
                         success: function(user) {
                             user_sl.fetch({
                                 success: function(usersl) {
-                                    console.log(usersl.keys().length);
+                                    //console.log(usersl.keys().length);
                                     var compiledTemplate = _.template(headerMenuTemplate);
                                     $(that.el).html(compiledTemplate({
                                         "categories": categories,
@@ -49,6 +49,7 @@ define([
                             console.log("error in fetching user data");
                         }
                     });
+*/
                 },
                 error: function() {
                     console.log("error in fetching categories data");
@@ -63,7 +64,8 @@ define([
             $(ev.currentTarget).addClass('active');
         },
         initialize: function() {
-            this.userLogin.on("change", this.render, this);
+            this.users.on("add", this.render, this);
+            this.users.on("reset", this.render, this);
         }
 
     })

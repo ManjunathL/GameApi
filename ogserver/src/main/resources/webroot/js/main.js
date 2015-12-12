@@ -8,12 +8,18 @@ require.config({
     backbone: 'libs/backbone/backbone-min',
     text: 'libs/text/text',
     bootstrap: 'libs/bootstrap/dist/js/bootstrap.min',
+    bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
+    firebase: 'libs/firebase/firebase',
     templates: '../templates'
   },
   shim: {
     'bootstrap': {
         deps: ['jquery'],
         exports: 'Bootstrap'
+    },
+    'bootstrapvalidator': {
+            deps: ['bootstrap', 'jquery'],
+            exports: 'Bootstrapvalidator'
     },
     'backbone': {
         deps: ['underscore', 'jquery'],
@@ -24,6 +30,10 @@ require.config({
     'cloudinary': {
         deps: ['jquery', 'jqueryui'],
         exports: 'cloudinary'
+    },
+    'firebase': {
+        deps: ['jquery'],
+        exports: 'firebase'
     }
   }
 });
@@ -39,3 +49,4 @@ require([
 
 var imgBase = "https://res.cloudinary.com/univermal/image/upload/"; //todo: change the collection name
 var restBase = "https://localhost:8080"; //todo: make this empty for production
+var firebaseBase = "https://sweltering-fire-6356.firebaseio.com/";
