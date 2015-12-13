@@ -5,6 +5,6 @@
     "url": "jdbc:mysql://localhost/og",
     "max_pool_size": 4,
     "user": "root",
-    "password": "password"
+    "password": "1qazxsw2"
   }
 }
