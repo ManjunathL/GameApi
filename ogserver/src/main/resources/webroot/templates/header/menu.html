@@ -34,7 +34,7 @@
                     <span class="user user-img"
                           style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
                 <% }else { %>
-                    <span class="glyphicon glyphicon-user user"></span>
+                    <span class="glyphicon glyphicon-user user" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
                 <% } %>
 
             </div>
@@ -252,10 +252,10 @@
                 </p>
                 <ul class="list-inline social-buttons align-center">
                     <li>
-                        <a href="#" onclick="fbLogin()"><i class="fa fa-facebook"></i></a>
+                        <a href="#" id="fb-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-google" onclick="googleLogin()"></i></a>
+                        <a href="#" id="google-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-google"></i></a>
                     </li>
                 </ul>
             </div>
@@ -265,7 +265,7 @@
                 </p>
 
                 <p>
-                    <a href="#" id="new_reg" data-toggle="modal" >Create a new Account</a> - It’s Free!
+                    <a href="#" id="new_reg">Create a new Account</a> - It’s Free!
                 </p>
             </div>
         </div>
@@ -417,7 +417,7 @@
     <% if(typeof(a_srch) !== 'undefined' && ((Object.keys(a_srch).length) !== 0)) { %>
         <div class="row search_suggest">
             <%  _.each(a_srch, function(as){
-                if(typeof(as.resultName) !== 'undefined'){ %>
+                if(as && as.resultName){ %>
                     <a href="#"><p><%= as.resultName %></p></a>
             <% } }); %>
         </div>
@@ -487,13 +487,16 @@
                 userProfile = snapshot.val();
             }
             handleAuth(authData, userProfile);
+            console.log("handleAuth done");
         });
     }
 
     var onFAuth = function (authData) {
       if (authData) {
+        $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
         if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
             getUserProfile(authData.uid, authData, handleAuth);
+            console.log("user profile done");
         }
       }
     };
@@ -501,7 +504,6 @@
     ref.onAuth(onFAuth);
 
     function handleAuth(authData, userProfile) {
-
         var user = {
             provider: authData.provider,
             email: getEmail(authData),
@@ -516,6 +518,9 @@
                 if (snapshot.exists()) {
                     setUser(user);
                     console.log("user already exists in firebase");
+                    window.fbButton && window.fbButton.button('reset');
+                    window.googleButton && window.googleButton.button('reset');
+                    $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                 } else {
                     console.log("user doesn't exist in firebase, creating..");
 
@@ -528,36 +533,28 @@
                                 profileImage: user.profileImage
                             }, null);
                         }
+                        window.fbButton && window.fbButton.button('reset');
+                        window.googleButton && window.googleButton.button('reset');
+                        $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     };
-
                     createUser(authData.uid, user, cbk);
                 }
             });
         } else {
             setUser(user);
+            $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
         }
-
     }
 
-
-    function authHandler(error) {
+    function authHandler(error, authData) {
         if (error) {
             console.log("Login Failed!", error);
             $('#login_error').html(error);
             $('#login_error_row').css("display", "block");
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            console.log("Authenticated successfully");
         }
-        debugger;
-        window.loginButton.button('reset');
-    }
-
-    function fbLogin() {
-        ref.authWithOAuthPopup("facebook", authHandler);
-    }
-
-    function googleLogin() {
-        ref.authWithOAuthPopup("google", authHandler, {scope: "email"});
+        window.loginButton && window.loginButton.button('reset');
     }
 
     function pwdLogin() {
@@ -658,7 +655,7 @@
         });
 
         $("#loginForm").submit(function(e) {
-            e.preventDefault(); debugger;
+            e.preventDefault();
             window.loginButton.button('loading');
             $('#login_error').html('');
             $('#login_error_row').css("display", "none");
@@ -701,6 +698,19 @@
             $('.modal_success_msg').css('display','none');
             $('.modal_error_msg').css('display','none');
         });
+
+        $('#fb-btn').click(function() {
+            window.fbButton = $(this);
+            window.fbButton.button('loading');
+            ref.authWithOAuthPopup("facebook", authHandler);
+        });
+
+        $('#google-btn').click(function() {
+            window.googleButton = $(this);
+            window.googleButton.button('loading');
+            ref.authWithOAuthPopup("google", authHandler);
+        });
+
 
         $('[data-toggle="tooltip"]').tooltip();
 

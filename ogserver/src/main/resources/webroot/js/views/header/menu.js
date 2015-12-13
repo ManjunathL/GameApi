@@ -14,81 +14,68 @@ define([
 ], function($, _, Backbone, Bootstrap, BootstrapValidator, Firebase, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch) {
     var HeaderMenuView = Backbone.View.extend({
         users: new Users(),
+        categories: new Categories(),
+        auto_search: new AutoSearch([
+                                      {
+                                        "resultName": "sofa cum bed",
+                                        "query": "/api/products/search/sofa+cum+bed"
+                                      },
+                                      {
+                                        "resultName": "sofas by material",
+                                        "query": "/api/products/search/sofa+cum+bed"
+                                      },
+                                      {
+                                        "resultName": "sofa set",
+                                        "query": "/api/products/search/sofa+cum+bed"
+                                      },
+                                      {
+                                        "resultName": "fabric sofa sets",
+                                        "query": "/api/products/search/sofa+cum+bed"
+                                      },
+                                      {
+                                        "resultName": "sofa cum bed with storage",
+                                        "query": "/api/products/search/sofa+cum+bed"
+                                      },
+                                      {
+                                        "resultName": "sofas by speciality",
+                                        "query": "/api/products/search/sofa+cum+bed"
+                                      },
+                                      {
+                                        "resultName": "sofa cover",
+                                        "query": "/api/products/search/sofa+cum+bed"
+                                      }
+                                    ]),
+        pre_search: new PreSearch(),
         el: '.main-menu-container',
         render: function() {
             var that = this;
-            var categories = new Categories();
-            var auto_search = new AutoSearch();
-            var pre_search = new PreSearch();
-
             window.users = this.users;
-            categories.fetch({
+            this.categories.fetch({
                 success: function() {
-                    var compiledTemplate = _.template(headerMenuTemplate);
-                    $(that.el).html(compiledTemplate({
-                        "categories": categories,
-                        "users": that.users
-                    }));
-                    $('a[href="' + window.location.hash + '"]').addClass('active');
-/*
-                    user.fetch({
-                        success: function(user) {
-                            user_sl.fetch({
-                                success: function(usersl) {
-                                    auto_search.fetch({
-                                        success: function(auto_search) {
-                                            pre_search.fetch({
-                                                success: function(pre_search) {
-                                                        console.log(JSON.stringify(pre_search));
-                                                        var compiledTemplate = _.template(headerMenuTemplate);
-                                                        $(that.el).html(compiledTemplate({
-                                                            "categories": categories,
-                                                            "usercln": user.toJSON(),
-                                                            "usersl": usersl.toJSON(),
-                                                            "a_srch": auto_search.toJSON(),
-                                                            "p_srch": pre_search.toJSON()
-
-                                                        }));
-                                                        $('a[href="' + window.location.hash + '"]').addClass('active');
-                                                    },
-                                                    error: function() {
-                                                        console.log("error in fetching user pre_search data");
-                                                    }
-                                                });
-                                            },
-                                            error: function() {
-                                            console.log("error in fetching user auto_search data");
-                                        }
-                                    });
-                                },
-                                error: function() {
-                                    console.log("error in fetching user shortlist data");
-                                }
-                            });
+                    that.pre_search.fetch({
+                        success: function() {
+                            var compiledTemplate = _.template(headerMenuTemplate);
+                            $(that.el).html(compiledTemplate({
+                                "categories": that.categories,
+                                "users": that.users,
+                                "p_srch": that.pre_search.toJSON(),
+                                "a_srch": that.auto_search.toJSON()
+                            }));
                         },
                         error: function() {
-                            console.log("error in fetching user data");
+                            console.log("error in fetching user pre_search data");
                         }
                     });
-*/
                 },
                 error: function() {
-                    console.log("error in fetching categories data");
+                    console.log("error in fetching user categories data");
                 }
             });
-        },
-        events: {
-            'click a': 'highlightMenuItem'
-        },
-        highlightMenuItem: function(ev) {
-            $('.active').removeClass('active');
-            $(ev.currentTarget).addClass('active');
         },
         initialize: function() {
             this.users.on("add", this.render, this);
             this.users.on("reset", this.render, this);
         }
-
     })
     return HeaderMenuView;
 });
