@@ -1,15 +1,6 @@
 <link href="css/portfolio-base.css" rel="stylesheet">
 <link href="css/portfolio.css" rel="stylesheet">
-<script>
-    $( window ).scroll(function() {
-        var scrollTop = $(window).scrollTop();
-          if ( scrollTop > 0 ) {
-            $( "#product-heading" ).css( "margin-top", "10px" );
-          }else{
-            $( "#product-heading" ).css( "margin-top", "40px" );
-          }
-    });
-</script>
+
 <section id="portfolio" class="bg-light-gray top80">
 <div class="container" style="position: relative;">
     <!-- Portfolio Item Heading -->
@@ -18,15 +9,15 @@
             <h2 class="product-title"><%= product.name %></h2>
             <!--<small>(H x W x D : <%= product.h %> x <%= product.w %> x <%= product.d %>)</small>-->
         </div>
-        <div class="col-md-6 align-right">
+        <div class="col-md-6 paddingleft50">
             <div class="row">
                 <div class="col-md-6 product-title"><h3>&#8377;<%= product.defaultPrice %></h3></div>
                 <div class="col-md-6 shortlist-in-details">
-                    <a href="#" class="button button-orange">
-                        <span class="fa fa-heart-o"></span>
+                    <a href="#" class="button border1 padding6">
+                        <span class="fa fa-heart-o" style="color:#F1591F;"></span>
                         shortlist
                     </a>
-                    <a href="#" class="button">
+                    <a href="#" class="button border1 share-btn">
                         <span class="fa fa-share"></span>
                         share
                     </a>
@@ -112,44 +103,6 @@
             </div>
             </div>
             </div>
-            <!--<div class="row" style="margin-left: 5px;">-->
-                <!--<div class="w-portfolio style_16 columns_4 align_left ratio_3x2">-->
-                    <!--<div class="w-portfolio-list">-->
-                        <!--<div class="w-portfolio-item illustration size_1x1" id="material-sub-menu" data-id="3301" data-categories="illustration">-->
-                            <!--<a class="w-portfolio-item-anchor" style="background-color: #EC6540;color: #ffffff;">-->
-                                <!--<div class="w-portfolio-item-image" style="background-image: url(<%= imgBase + 'c_fill/particle-board_pijmmi.jpg' %>)">-->
-                                    <!--<img src="<%= imgBase + 'c_fill/particle-board_pijmmi.jpg' %>" alt="Single Project" height="450" width="600">-->
-                                <!--</div>-->
-                                <!--<div class="w-portfolio-item-meta">-->
-                                    <!--<div class="w-portfolio-item-meta-h1">-->
-                                        <!--<span class="w-portfolio-item-title">Material</span>-->
-                                        <!--<span class="w-portfolio-item-text">Particle Board</span>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</a>-->
-                        <!--</div>-->
-
-
-                        <!--<div class="w-portfolio-item illustration size_1x1" id="finish-sub-menu" data-id="3311" data-categories="illustration">-->
-                            <!--<a class="w-portfolio-item-anchor" href="#" style="background-color: #8B6236;color: #ffffff;">-->
-                                <!--<div class="w-portfolio-item-image" style="background-image: url(<%= imgBase + 'c_fill/oak_wzchzs.jpg' %>)">-->
-                                    <!--<img src="<%= imgBase + 'c_fill/oak_wzchzs.jpg' %>" alt="Single Project – Full Slider" height="450" width="600">-->
-                                <!--</div>-->
-                                <!--<div class="w-portfolio-item-meta">-->
-                                    <!--<div class="w-portfolio-item-meta-h">-->
-                                        <!--<span class="w-portfolio-item-title">Finish</span>-->
-                                        <!--<span class="w-portfolio-item-text">Oak</span>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</a>-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--&lt;!&ndash; /.Material & Finish &ndash;&gt;-->
-
             <!-- Color -->
 
             <div class="color-section">
@@ -187,6 +140,7 @@
         </div>
     </div>
 
+    <section class="bg-light-gray">
     <div class="row">
         <div class="col-lg-12">
             <h3 class="page-header">Accessories List</h3>
@@ -285,7 +239,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 accessoryList">
+            <div class="col-md-6 accessoryList paddingleft50">
                 <div class="accessoryItem" id="accessoryList3">
                     <div class="row">
                         <div class="accessory-desc">
@@ -355,7 +309,7 @@
 
     <div class="clear"></div>
     <!-- /.Accessories -->
-
+</section>
     <!-- Appliances -->
     <div class="row">
         <div class="col-lg-12">
@@ -492,12 +446,12 @@
                 $("#loader").show();
                 var idarr = id.split("-");
                 var imgnm = $("#imn"+idarr[1]).attr('title');
-                alert(imgnm);
+                //alert(imgnm);
                 $("#acc_price").html($("#val-amt"+idarr[1]).html());
                 var imgurll = imgBase + "c_fill,h_200,w_230/" + imgnm;
                 //alert(imgurll);
                 $("#main-image-link").html('<img src="'+imgurll+'" class="main-image">');
-                $("#loader").hide();
+                //$("#loader").hide();
         });
 
     });
@@ -510,6 +464,16 @@
     }
 </script>
 <script src="js/portfolio.js"></script>
+<script>
+    $( window ).scroll(function() {
+        var scrollTop = $(window).scrollTop();
+          if ( scrollTop > 0 ) {
+            $( "#product-heading" ).css( "margin-top", "10px" );
+          }else{
+            $( "#product-heading" ).css( "margin-top", "40px" );
+          }
+    });
+</script>
 
 <style>
     .carousel {

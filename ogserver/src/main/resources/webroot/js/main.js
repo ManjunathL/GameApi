@@ -1,10 +1,10 @@
 require.config({
+  waitSeconds: 20,
   paths: {
     jquery: 'libs/jquery/dist/jquery.min',
-    jqueryui: 'libs/jquery.ui/ui/widget',
+    jqueryui: 'libs/jquery-ui/jquery-ui',
     underscore: 'libs/underscore/underscore-min',
     lodash: 'libs/lodash/lodash.min',
-    cloudinary: 'libs/cloudinary/js/jquery.cloudinary',
     backbone: 'libs/backbone/backbone-min',
     text: 'libs/text/text',
     bootstrap: 'libs/bootstrap/dist/js/bootstrap.min',
@@ -20,10 +20,6 @@ require.config({
         exports: function() {
             return Backbone.noConflict();
         }
-    },
-    'cloudinary': {
-        deps: ['jquery', 'jqueryui'],
-        exports: 'cloudinary'
     }
   }
 });

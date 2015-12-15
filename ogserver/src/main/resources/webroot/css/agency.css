@@ -422,6 +422,9 @@ fieldset[disabled] .btn-xl.active {
 .padding-top30 {
     padding-top: 30px;
 }
+.padding-top50 {
+    padding-top: 50px;
+}
 
 .padding-bottom10 {
     padding-bottom: 10px;
@@ -2056,18 +2059,22 @@ hr {
         letter-spacing: 1px;
         padding-top: 10px;
         padding-bottom: 6px;
-        color: #FFF !important;
-        border-color: #F1591F;
+        color: #5C6E7B;
         border-radius: 0px;
-        background-color: #F1591F;
-        margin-top: 1px;
+        /*background-color: #F1591F;*/
         margin-right: 10px;
+        margin-top: 1px;
+        border: 1px solid #CCC;
+        padding: 9px;
+    }
+    .filter-btn:active{
+        border: 2px solid #CCC;
     }
     #filter-section{
         padding:0px 10px 20px 20px;
     }
     #filter-section #filter-inside .filter-group {
-       // padding: 20px 0px;
+        padding-left: 15px;
        // border-bottom: 1px solid #ccc;
     }
 
@@ -2126,4 +2133,46 @@ hr {
         width: 85%;
         background-color: #f7f7f7;
         margin-top: 40px;
+    }
+    .paddingleft50{
+        padding-left: 50px;
+    }
+    .padding6{
+        padding:6px;
+    }
+    .border1{
+        border:1px solid #CCC;
+    }
+    .share-btn{
+        padding: 6px 20px;
+    }
+    .sortby{
+        padding-top: 25px;
+        padding-right: 10px;
+    }
+    .paddingtop0{
+        padding-top: 0px;
+    }
+    .paddingtop10{
+        padding-top: 10px;
+    }
+    .more-lnk{
+        color:#4C9ED9;
+        cursor:pointer;
+    }
+    .dot{
+        border-radius: 20%;
+        height: 10px;
+        width: 10px;
+        display: inline-block;
+    }
+    .noclick{
+     pointer-events: none;
+    }
+    .sort-list a{
+        padding-left:2%;
+        color:#000;
+    }
+    .sort-list a:hover, .sort-list a:active, .sort-list a:focus{
+        color:#F1591F;
     }
