@@ -747,6 +747,9 @@ input[type=checkbox] {
         position: absolute;
         padding-top: 1%;
     }
+    .list-img > .list-button-strip{
+        display:block;
+    }
 }
 
 @media (max-width: 768px) {

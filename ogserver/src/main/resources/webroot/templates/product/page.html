@@ -1,6 +1,6 @@
 <section id="portfolio" class="bg-light-gray top80 padding-top50">
     <div class="container">
-        <div class="row padding20-0" id="layout-view">
+        <div class="row padding20-0" id="layout-view111">
             <div class="col-lg-4">
                 <h3 class="design-count margin0"><%= collection.length %> Designs Found</h3>
             </div>
@@ -156,6 +156,12 @@
 </section>
 <script>
     $(document).ready(function(){
+
+        var flg = filter.get('filterflag');
+        if(flg == 1){
+            $('#filter-section').show();
+            $('#filtered-list').hide();
+        }
 
         var offset = 100;
         var duration = 500;
@@ -313,13 +319,18 @@
       values: [ mnprc, mxprc ],
       slide: function( event, ui ) {
         $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-        filter.set('minPrice',ui.values[ 0 ]);
-        filter.set('maxPrice',ui.values[ 1 ]);
       }
     });
 
     $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
      " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
+
+     $( "#slider-range" ).mouseleave(function() {
+            //alert($( "#slider-range" ).slider( "values", 0 ) + '-----------' + $( "#slider-range" ).slider( "values", 1 ));
+
+            filter.set('minPrice',$( "#slider-range" ).slider( "values", 0 ));
+            filter.set('maxPrice',$( "#slider-range" ).slider( "values", 1 ));
+     });
   });
   function removePrice(){
     filter.set('minPrice',filter.get('minPriceLimit'));
@@ -327,9 +338,7 @@
   }
   function showFiltersection(){
     $('#filter-section').slideToggle();
-     $('#filtered-list').toggle();
-
-
+    $('#filtered-list').toggle();
   }
   </script>
 
