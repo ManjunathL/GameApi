@@ -1,12 +1,11 @@
 define([
     'jquery',
     'underscore',
-    'cloudinary',
     'backbone',
     'bootstrap',
     'text!templates/product/details.html',
     'models/product'
-], function($, _, cloudinary, Backbone, Bootstrap, productPageTemplate, ProductModel) {
+], function($, _, Backbone, Bootstrap, productPageTemplate, ProductModel) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         render: function() {

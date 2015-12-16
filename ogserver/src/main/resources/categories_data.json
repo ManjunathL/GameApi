@@ -1,10 +1,5 @@
 [
   {
-    "name": "All Solutions",
-    "code": "allsolutions",
-    "subCategories": []
-  },
-  {
     "name": "Living & Dining",
     "code": "livingndining",
     "subCategories": [
@@ -25,28 +20,36 @@
   {
     "name": "Kitchen",
     "code": "kitchen",
+    "minPriceLimit":0,
+    "maxPriceLimit":500000,
     "subCategories": [
       {
         "name": "L Shaped Kitchen",
-        "code": "lshapedk"
+        "code": "lshapedk",
+        "id": "239487283974"
       },
       {
         "name": "U Shaped Kitchen",
-        "code": "ushapedk"
+        "code": "ushapedk",
+        "id": "239487283975"
       },
       {
         "name": "Straight Kitchen",
-        "code": "straightk"
+        "code": "straightk",
+        "id": "239487283976"
       },
       {
         "name": "Parallel Kitchen",
-        "code": "parallelk"
+        "code": "parallelk",
+        "id": "239487283977"
       }
     ]
   },
   {
     "name": "Bedroom",
     "code": "bedroom",
+    "minPriceLimit":0,
+    "maxPriceLimit":400000,
     "subCategories": [
       {
         "name": "Wardrobe",

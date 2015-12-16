@@ -13,6 +13,7 @@
     "Springy": "springy#~2.7.1",
     "text": "requirejs-text#~2.0.14",
     "cloudinary": "~2.0.0",
+    "jquery-ui": "~1.11.4",
     "firebase": "~2.3.2",
     "bootstrap-validator": "~0.9.0"
   },
