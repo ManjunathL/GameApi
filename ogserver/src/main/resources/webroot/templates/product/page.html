@@ -1,6 +1,3 @@
-<!--<script type="text/javascript">var switchTo5x=true;</script>-->
-<!--<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>-->
-<!--<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>-->
 <section id="portfolio" class="bg-light-gray top80 padding-top50">
     <div class="container">
         <div class="row padding20-0" id="layout-view">
@@ -8,6 +5,7 @@
                 <h3 class="design-count margin0"><%= collection.length %> Designs Found</h3>
             </div>
             <div class="col-lg-5 paddingtop10">
+                <div id="filtered-list">
                 <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
                     <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
                     <span class="font-size14 border1 "><%= subcatname %>   <a href="javascript:void(0);" onclick="removeSubcategories('<%= subcatname %>')">X</a></span>
@@ -20,7 +18,8 @@
                 <span class="font-size14 border1"><span class="round-bk1 dot"></span> X</span>
                 <span class="font-size14 border1"><span class="round-bk2 dot"></span> X</span>
                 <span class="font-size14 border1"><span class="round-bk2 dot"></span> X</span>
-                <span class="font-size14 more-lnk" data-toggle="collapse" data-target="#filter-inside">More</span>
+                <span class="font-size14 more-lnk" onclick="showFiltersection();">More</span>
+                    </div>
             </div>
             <div class="col-lg-3">
                 <div class="row padding-right15">
@@ -33,18 +32,19 @@
                     <span class="glyphicon glyphicon-th view-select float-right border-right0"></span>
                     <span class="glyphicon glyphicon-th-large view-select float-right border-right0 active"></span>
                     <span class="glyphicon glyphicon-th-list view-select float-right border-right0"></span>
-                    <span class="button float-right filter-btn" data-toggle="collapse" data-target="#filter-inside">Filter&nbsp;<span class="fa fa-chevron-down"></span></span>
+                    <span class="button float-right filter-btn" onclick="showFiltersection();">Filter&nbsp;<span class="fa fa-chevron-down"></span></span>
                 </div>
             </div>
         </div>
-        <div class="row" id="filter-section">
-            <div id="filter-inside" class="collapse col-md-12">
+        <div class="row filter-section" id="filter-section">
+            <div id="filter-inside" class="col-md-12">
                 <!--<div class="close" title="Close" data-toggle="collapse" data-target="#filter-inside"><i class="glyphicon glyphicon-remove-circle"></i></div>-->
               <div class="col-md-12">
                 <div class="row filter-group">
                 <div class="fname col-md-2">Sub-Categories</div>
                 <div id="subcategory" class="filter-list col-md-10">
                   <div class="btn-group">
+                      <% if(typeof(subcategoriesList) !== 'undefined'){ %>
                       <% _.each(subcategoriesList, function(subcat){ %>
 
                               <span
@@ -60,6 +60,7 @@
                               </span>
 
                       <% }); %>
+                      <% } %>
                   </div>
                 </div>
                 </div>
@@ -142,111 +143,10 @@
                   </div>
             </div>
         </div>
-
+</div>
     <div class="listing">
 
-        <div class="row list-view">
-            <% _.each(collection, function(product){ %>
-            <div class="row">
-                <div class="col-md-7 list-img col-7-img">
-                    <a href="#/products_details/<%= product.id %>">
-                        <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
-                    </a>
-                    <div id="list-strip" class="font-size16 list-button-strip">
-                        <div class="listli">
-                            <a href="#/products_details/<%= product.id %>">
-                                <span class="glyph fa fa-info list-ico"></span>
-                                <span class="list-txt">know more</span>
-                            </a>
-                        </div>
-                        <div class="listli li-spc">
-                            <a href="javascript:void(0);">
-                                <span class="fa fa-heart-o list-heart list-ico"></span>
-                                <span class="list-txt">shortlist</span>
-                            </a>
-                        </div>
-                        <div class="listli">
-                            <a href="javascript:void(0);" >
-                                <span class="glyph fa fa-share list-ico"></span>
-                                <span class="list-txt">share</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 col-5-txt">
-                    <div class="col-md-12 padding0 margin-bottom20">
-                        <span>
-                            <a href="#" class="list-heading-col5">
-                                <h2><%= product.name %></h2>
-                            </a>
-                        </span>
-                        <span class="cost-col5">
-                            &#8377;<%= product.defaultPrice %>
-                        </span>
-                    </div>
 
-                    <div class="font-size18 padding0">
-                        <span class="dim">Description</span>
-                        <p class="justify">
-                            <%= product.desc %>
-                        </p>
-                    </div>
-                    <div class="font-size18 margin-top20 dimsn">
-                        <span class="dim">Dimensions (H x W x D) :</span>
-                        <%= product.h +" x "+ product.w +" x "+ product.d %>
-                    </div>
-
-
-                </div>
-            </div>
-            <% }); %>
-
-
-        </div>
-        <div class="row grid-view">
-            <% _.each(collection, function(product){ %>
-            <div class="col-md-6  portfolio-item">
-                <div class="list-img">
-                    <a href="#/products_details/<%= product.id %>" class="portfolio-link">
-                        <img class="img-responsive shadow-img" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
-                    </a>
-                    <div class="font-size16 list-button-strip">
-                        <div class="listli">
-                            <a href="#/products_details/<%= product.id %>">
-                                <span class="glyph fa fa-info list-ico"></span>
-                                <span class="list-txt">know more</span>
-                            </a>
-                        </div>
-                        <div class="listli li-spc">
-                            <a href="javascript:void(0);">
-                                <span class="fa fa-heart-o list-heart list-ico"></span>
-                                <span class="list-txt">shortlist</span>
-                            </a>
-                        </div>
-                        <div class="listli">
-                            <a href="javascript:void(0);" >
-                                <span class="glyph fa fa-share list-ico"></span>
-                                <div class="list-txt">
-                                    <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
-                                        <span class='st_facebook'></span>
-                                        <span class='st_twitter'></span>
-                                        <span class='st_pinterest'></span>
-                                        <!--<span class='st_linkedin'></span>-->
-                                        <!--<span class='st_sharethis'></span>-->
-                                        <!---->
-                                        <!--<span class='st_email'></span>-->
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="col-md-8 align-left image-meta-title"><span class="img-titl"><%= product.name %></span></div>
-                    <div class="col-md-4 align-right image-meta-title">&#8377;<%= product.defaultPrice %>/-</div>
-                </div>
-            </div>
-            <% }); %>
-        </div>
     </div>
     <a style="display: block;" href="#" class="back-to-top">
         <span class="fa fa-chevron-up"></span>
@@ -412,9 +312,9 @@
       max: filter.get('maxPriceLimit'),
       values: [ mnprc, mxprc ],
       slide: function( event, ui ) {
-       $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-       filter.set('minPrice',ui.values[ 0 ]);
-       filter.set('maxPrice',ui.values[ 1 ]);
+        $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+        filter.set('minPrice',ui.values[ 0 ]);
+        filter.set('maxPrice',ui.values[ 1 ]);
       }
     });
 
@@ -424,6 +324,12 @@
   function removePrice(){
     filter.set('minPrice',filter.get('minPriceLimit'));
     filter.set('maxPrice',filter.get('maxPriceLimit'));
+  }
+  function showFiltersection(){
+    $('#filter-section').slideToggle();
+     $('#filtered-list').toggle();
+
+
   }
   </script>
 

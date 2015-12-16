@@ -110,24 +110,33 @@ define([
             if(typeof(that.filter.get('sortDir')) !== 'undefined' && typeof(that.filter.get('sortBy')) !== 'undefined'){
                 sortDir = that.filter.get('sortDir');
                 sortBy = that.filter.get('sortBy');
+                that.filter.set({'filterflag':'1'},{silent: true});
             }else{
                 that.filter.set({'sortDir':'desc'},{silent: true});
                 that.filter.set({'sortBy':'relevance'},{silent: true});
                 sortDir = 'desc';
                 sortBy = 'relevance';
             }
-            //console.log("Before Sorting ========== "+sortBy+' ----- '+sortDir);
             if (sortBy && sortDir) {
                 that.products.sortBy(sortBy,sortDir);
-                //console.log("After Sorting ========== "+sortBy+' ----- '+sortDir+' ------- '+JSON.stringify(that.products));
             }
 
             var filteredProducts = that.products.filterByPrice(minPrice,maxPrice,selectedsubCategoryIds);
+            if(Object.keys(filteredProducts).length == 0){
+                 console.log('here');
+                 filteredProducts = that.products.toJSON();
+            }
             var compiledTemplate = _.template(productPageTemplate);
             $(that.el).html(compiledTemplate({
                 "collection": filteredProducts,
                 "filter":that.filter.toJSON(),
                 "subcategoriesList":selectedSubCategoriesList
+            }));
+
+             var filteredTemplate = _.template(filterTemplate);
+
+            $('.listing').append(filteredTemplate({
+                "collection": filteredProducts
             }));
             return that;
         }

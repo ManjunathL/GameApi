@@ -674,7 +674,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .margin-top0 {
-    margin-top: 0px;
+    margin-top: 0px !important;
 }
 
 .margin-top5per {
@@ -830,7 +830,7 @@ input[type=checkbox] {
 
     .carousel-overlay  {
         position: absolute !important;
-        top: 4% !important;
+        top: 4.5% !important;
         bottom: -4.5% !important;
     }
 
@@ -978,6 +978,22 @@ input[type=checkbox] {
     text-decoration: none;
 }
 
+.product_detail_slider{
+    top: 0;
+}
+
+.product_detail_overlay{
+    bottom: 0% !important;
+    top: 0% !important;
+}
+
+.product_detail_arr{
+    margin: 190% 0px !important;
+}
+
+.detail_page_image {
+    min-width: 100%;
+}
 
 /*header {*/
     /*text-align: center;*/
@@ -2627,4 +2643,7 @@ hr {
 
     .error-text {
         color: #FF0000;
+    }
+    .filter-section{
+        display:none;
     }
