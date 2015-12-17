@@ -1,11 +1,9 @@
 define([
   'jquery',
-  'jqueryui',
   'underscore',
-  'cloudinary',
   'backbone',
   'text!templates/layout.html'
-], function($, jqueryui, _, cloudinary, Backbone, layoutTemplate){
+], function($, _, Backbone, layoutTemplate){
     var AppView = Backbone.View.extend({
         el: '.container-fluid',
         render: function () {

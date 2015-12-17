@@ -304,19 +304,24 @@
         <!-- Modal content-->
         <div class="modal-content signup">
             <h2>Forgot Password</h2>
-            <div class="row">
-                <div class="margin-bottom20">
-                    <p class="margin0">Enter your registered email Id</p>
-                    <input type="text" class="width100" placeholder="abc@xyz.com"/>
+            <form id="forgotForm" data-toggle="validator" role="form">
+                <div class="row">
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Enter your registered email Id</p>
+                        <input id="forgotEmail" type="email" class="width100 form-control" placeholder="abc@xyz.com" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                    </div>
+                    <div class="padding20-0 align-center form-group" id="reset_password">
+                        <button
+                                id="forgotBtn"
+                                style="background: transparent;"
+                                class="button margin-top20 margin-bottom20"
+                                type="submit"
+                                data-loading-text="<i class='fa fa-spinner fa-spin'></i> reset password">
+                            reset password
+                        </button>
+                    </div>
                 </div>
-                <div class="padding20-0 align-center" id="reset_password">
-                    <a
-                        href="#"
-                        class="button margin-top20 margin-bottom20">
-                        reset password
-                    </a>
-                </div>
-            </div>
+            </form>
             <p class="modal_success_msg">We have sent a link to your registered mail id.</p>
             <p class="modal_success_msg">Please follow the link to change your password.</p>
             <p class="modal_error_msg">Email Id not registered.</p>
@@ -562,6 +567,8 @@
             console.log("Authenticated successfully");
         }
         window.loginButton && window.loginButton.button('reset');
+        window.googleButton && window.googleButton.button('reset');
+        window.fbButton && window.fbButton.button('reset');
     }
 
     function pwdLogin() {
@@ -569,6 +576,23 @@
             email    : $('#emailId').val(),
             password : $('#pwd').val()
         }, authHandler, {remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'});
+    }
+
+    function resetPassword() {
+        ref.resetPassword({
+            email    : $('#forgotEmail').val()
+        }, function(error) {
+            if (error) {
+                console.log("Reset Failed!", error);
+                $('.modal_error_msg').slideDown();
+            } else {
+                console.log("reset successfully");
+                $('.modal_success_msg').slideDown();
+                $('#forgotBtn').hide();
+                $('#forgotEmail').prop('disabled', true);
+            }
+            window.forgotButton && window.forgotButton.button('reset');
+        });
     }
 
     function signOut() {
@@ -657,6 +681,10 @@
             window.loginButton = $(this);
         });
 
+        $('#forgotBtn').click(function() {
+            window.forgotButton = $(this);
+        });
+
         $('#signup-btn').click(function() {
             window.signupButton = $(this);
         });
@@ -667,6 +695,14 @@
             $('#login_error').html('');
             $('#login_error_row').css("display", "none");
             pwdLogin();
+        });
+
+        $("#forgotForm").submit(function(e) {
+            e.preventDefault();
+            window.forgotButton.button('loading');
+            $('.modal_success_msg').css('display','none');
+            $('.modal_error_msg').css('display','none');
+            resetPassword();
         });
 
         /*$("#signup").on('hidden.bs.modal', function () {
@@ -696,14 +732,17 @@
             $('.search_suggest').slideUp();
         });
 
-        $('#reset_password').click(function() {
-            $('.modal_success_msg').slideDown();
-            $('.modal_error_msg').slideDown();
-        });
-
         $("#forgot_password").on('hidden.bs.modal', function () {
             $('.modal_success_msg').css('display','none');
             $('.modal_error_msg').css('display','none');
+        });
+
+        $("#forgot_pwd_btn").click(function () {
+            $('#forgot_password').modal('show');
+            $('#forgotBtn').show();
+            $('#forgotEmail').val('');
+            $('#forgotEmail').prop('disabled', false);
+
         });
 
         $('#fb-btn').click(function() {

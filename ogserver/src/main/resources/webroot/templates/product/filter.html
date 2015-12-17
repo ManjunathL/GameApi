@@ -1,125 +1,106 @@
-<div class="margin-sm">
-    <!--<% //debugger %>-->
-</div>
-<% var category = allCategories.getByCode(selectedCategories); %>
-<% var subCategory = allCategories.getSubCategoryBySubCategoryCode(selectedSubCategories); %>
-
-<div class="category-heading row">
-    <div class="col-sm-12">
-        <p><%=category.get('name') + ' > ' + subCategory.get('name')%></p>
-    </div>
-</div>
-
-<div class="category-filter row">
-    <ul class="list-inline">
-<!--        <li id="categFilter" class="filter-type">Choose</li>-->
-        <!--<li>CATEGORY<span class="caret"></span></li>-->
-<!--
-        <li>
-            <div class="dropdown">
-                <button class="btn og-navbar-btn-face dropdown-toggle" type="button" id="dropdownMenuType"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    TYPE<span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuType">
-                    <% category.get('subCategories').each(function(subCategory){ %>
-                    <li><a href="#products/<%=category.get('code')%>/<%=subCategory.get('code')%>"><%=subCategory.get('name')%></a></li>
-                    <% }); %>
-                </ul>
+<div class="row list-view">
+    <% if(typeof(collection) !== 'undefined'){ %>
+    <% _.each(collection, function(product){ %>
+    <div class="row">
+        <div class="col-md-7 list-img col-7-img">
+            <a href="#/products_details/<%= product.id %>">
+                <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
+            </a>
+            <div id="list-strip" class="font-size16 list-button-strip">
+                <div class="listli">
+                    <a href="#/products_details/<%= product.id %>">
+                        <span class="glyph fa fa-info list-ico"></span>
+                        <span class="list-txt">know more</span>
+                    </a>
+                </div>
+                <div class="listli li-spc">
+                    <a href="javascript:void(0);">
+                        <span class="fa fa-heart-o list-heart list-ico"></span>
+                        <span class="list-txt">shortlist</span>
+                    </a>
+                </div>
+                <div class="listli">
+                    <a href="javascript:void(0);" >
+                        <span class="glyph fa fa-share list-ico"></span>
+                        <span class="list-txt">share</span>
+                    </a>
+                </div>
             </div>
-        </li>
-        <li>&nbsp;</li>
-        <li>&nbsp;</li>
--->
-        <li class="filter-type">Sort By</li>
-        <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/spopularity/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
-            <% if (sortBy === 'popularity') { %>
-                <b>POPULARITY</b></a>&nbsp;
-                <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-amount-desc fa-md"></span>
-                <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-amount-asc fa-md"></span>
-                <% } %>
-            <% } else { %>
-                POPULARITY</a>
-            <% } %>
-        </li>
-        <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/srelevance/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
-            <% if (sortBy === 'relevance') { %>
-                <b>RELEVANCE</b></a>&nbsp;
-                <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-amount-desc fa-md"></span>
-                <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-amount-asc fa-md"></span>
-                <% } %>
-            <% } else { %>
-                RELEVANCE</a>
-            <% } %>
-        </li>
-        <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/screateDt/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
-            <% if (sortBy === 'createDt') { %>
-                <b>DATE</b></a>&nbsp;
-                <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-amount-desc fa-md"></span>
-                <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-amount-asc fa-md"></span>
-                <% } %>
-            <% } else { %>
-                DATE</a>
-            <% } %>
-        </li>
-        <li>
-            <a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/sprice/d<%=sortDir === 'desc' ? 'asc' : 'desc'%>/l<%=layout||'_'%>">
-            <% if (sortBy === 'price') { %>
-                <b>PRICE</b></a>&nbsp;
-                <% if (sortDir === 'desc') { %>
-                    <span class="fa fa-sort-amount-desc fa-md"></span>
-                <% } else if (sortDir === 'asc') { %>
-                    <span class="fa fa-sort-amount-asc fa-md"></span>
-                <% } %>
-            <% } else { %>
-                PRICE</a>
-            <% } %>
-        </li>
-        <li>&nbsp;</li>
-        <li>&nbsp;</li>
-        <li class="filter-type">View In</li>
-        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>"><span class="glyphicon glyphicon-th-list <%=!layout || layout === '_' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
-        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>/lsg"><span class="glyphicon glyphicon-th-large <%=layout === 'sg' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
-        <li><a href="#/products/<%=selectedCategories%>/<%=selectedSubCategories%>/q<%=searchTerm||'_'%>/s<%=sortBy||'_'%>/d<%=sortDir||'_'%>/llg"><span class="glyphicon glyphicon-th <%=layout === 'lg' ? '' : 'glyphicon-grey'%>" aria-hidden="true"></span></a></li>
-    </ul>
-</div>
-<!--
-<div class="filter-values row" id="filterVals">
-    <ul class="list-inline">
-&lt;!&ndash;
-        <% /*_.each(selectedCategories.split(","), function(selcateg){
-                var category = allCategories.getByCode(selcateg);
-        %>
-                    <li><%=category.get('name')%>&nbsp;X</li>
-        <% });*/ %>
-&ndash;&gt;
+        </div>
+        <div class="col-md-5 col-5-txt">
+            <div class="col-md-12 padding0 margin-bottom20">
+                        <span>
+                            <a href="#" class="list-heading-col5">
+                                <h2><%= product.name %></h2>
+                            </a>
+                        </span>
+                        <span class="cost-col5">
+                            &#8377;<%= product.defaultPrice %>
+                        </span>
+            </div>
 
-        <% _.each(selectedSubCategories.split(","), function(selsubcateg){
-                var subCategory = allCategories.getSubCategoryBySubCategoryCode(selsubcateg);
-        %>
-                    <li><%=subCategory.get('name')%>&nbsp;X</li>
-        <% }); %>
-    </ul>
+            <div class="font-size18 padding0">
+                <span class="dim">Description</span>
+                <p class="justify">
+                    <%= product.desc %>
+                </p>
+            </div>
+            <div class="font-size18 margin-top20 dimsn">
+                <span class="dim">Dimensions (H x W x D) :</span>
+                <%= product.h +" x "+ product.w +" x "+ product.d %>
+            </div>
+
+
+        </div>
+    </div>
+    <% }); %>
+    <% } %>
 
 </div>
-<script lang="JavaScript">
-
-    $( document ).ready( function() {
-        var leftp = $("#categFilter").position().left;
-
-        $("#filterVals").css({
-            position: "absolute",
-            left: (leftp) + "px"
-        });
-    });
-
-</script>-->
+<div class="row grid-view">
+    <% _.each(collection, function(product){ %>
+    <div class="col-md-6  portfolio-item">
+        <div class="list-img">
+            <a href="#/products_details/<%= product.id %>" class="portfolio-link">
+                <img class="img-responsive shadow-img" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
+            </a>
+            <div class="font-size16 list-button-strip">
+                <div class="listli">
+                    <a href="#/products_details/<%= product.id %>">
+                        <span class="glyph fa fa-info list-ico"></span>
+                        <span class="list-txt">know more</span>
+                    </a>
+                </div>
+                <div class="listli li-spc">
+                    <a href="javascript:void(0);">
+                        <span class="fa fa-heart-o list-heart list-ico"></span>
+                        <span class="list-txt">shortlist</span>
+                    </a>
+                </div>
+                <div class="listli">
+                    <a href="javascript:void(0);" >
+                        <span class="glyph fa fa-share list-ico"></span>
+                        <div class="list-txt">
+                            <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
+                            <span class='st_facebook'></span>
+                            <span class='st_twitter'></span>
+                            <span class='st_pinterest'></span>
+                            <!--<span class='st_linkedin'></span>-->
+                            <!--<span class='st_sharethis'></span>-->
+                            <!---->
+                            <!--<span class='st_email'></span>-->
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-8 align-left image-meta-title"><span class="img-titl"><%= product.name %></span></div>
+            <div class="col-md-4 align-right image-meta-title">&#8377;<%= product.defaultPrice %>/-</div>
+        </div>
+    </div>
+    <% }); %>
+</div>
+<!--<script type="text/javascript">var switchTo5x=true;</script>-->
+<!--<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>-->
+<!--<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>-->

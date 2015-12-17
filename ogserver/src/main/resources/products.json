@@ -36,7 +36,7 @@
     "images": [
       "Albatross_Mapple1_low_erohcx"
     ],
-    "defaultPrice": "3,85,000",
+    "defaultPrice": 385000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
@@ -178,7 +178,7 @@
     "images": [
       "Auklet_low_jkp4hr"
     ],
-    "defaultPrice": "3,85,000",
+    "defaultPrice": 385000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
@@ -299,8 +299,8 @@
     "d": "30",
     "curr": "INR",
     "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
-    "popularity": 6.5,
-    "relevance": 2,
+    "popularity": 3.5,
+    "relevance": 3,
     "shortlisted": 46,
     "likes": 200,
     "createDt": "04-30-2015",
@@ -320,7 +320,7 @@
     "images": [
       "bart_Lshaped_BrownOak_CreamOak_dvxktq"
     ],
-    "defaultPrice": "3,85,000",
+    "defaultPrice": 85000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
@@ -430,8 +430,8 @@
     "code": "SJDH478SJD",
     "categ": "Kitchen",
     "categId": "23847623746",
-    "subCateg": "L Shaped Kitchen",
-    "subCategId": "239487283974",
+    "subCateg": "U Shaped Kitchen",
+    "subCategId": "239487283975",
     "name": "Brambling L-Shaped Kitchen",
     "designer": "Ram Prasad",
     "designerId": "12837198237",
@@ -442,7 +442,7 @@
     "curr": "INR",
     "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
     "popularity": 6.5,
-    "relevance": 2,
+    "relevance": 4,
     "shortlisted": 46,
     "likes": 200,
     "createDt": "04-30-2015",
@@ -462,7 +462,7 @@
     "images": [
       "Brambling_Aurbergene_Low_lrs7hs"
     ],
-    "defaultPrice": "3,85,000",
+    "defaultPrice": 5000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
@@ -572,8 +572,8 @@
     "code": "SJDH478SJD",
     "categ": "Kitchen",
     "categId": "23847623746",
-    "subCateg": "L Shaped Kitchen",
-    "subCategId": "239487283974",
+    "subCateg": "Parallel Kitchen",
+    "subCategId": "239487283977",
     "name": "Bulfinch L-Shaped Kitchen",
     "designer": "Ram Prasad",
     "designerId": "12837198237",
@@ -584,7 +584,7 @@
     "curr": "INR",
     "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
     "popularity": 6.5,
-    "relevance": 2,
+    "relevance": 5,
     "shortlisted": 46,
     "likes": 200,
     "createDt": "04-30-2015",
@@ -604,7 +604,7 @@
     "images": [
       "Bulfinch_white_Low_utphxl"
     ],
-    "defaultPrice": "3,85,000",
+    "defaultPrice": 0,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
