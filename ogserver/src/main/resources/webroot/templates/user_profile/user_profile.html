@@ -1,7 +1,3 @@
-<link rel="stylesheet" href="styles/kendo.common.min.css" />
-<link rel="stylesheet" href="styles/kendo.default.min.css" />
-<script src="js/kendo.all.min.js"></script>
-
 <section class="bg-light-gray user_page padding100-0">
     <div class="container">
         <div class="col-md-3 user_profile">
@@ -34,23 +30,27 @@
             <div class="personal_details">
                 <div class="col-md-11">
                     <div class="row">
-                        <p>Date of Birth : <%= users %></p>
+                        <p class="view_mode">Date of Birth : <%= users %></p>
+                        <p class="edit_mode">Date of Birth : <input type="date"></p>
                     </div>
                     <div class="row">
-                        <p>Contact : <%= users %></p>
+                        <p class="view_mode">Contact : <%= users %></p>
+                        <p class="edit_mode">Contact : <input type="number"></p>
                     </div>
                     <div class="row">
-                        <p>Address : <%= users %></p>
+                        <p class="view_mode">Address : <%= users %></p>
+                        <p class="edit_mode">Address : <textarea></textarea></p>
                     </div>
                     <div class="row">
-                        <p>City : <%= users %></p>
-                        <p>State : <%= users %></p>
+                        <p class="view_mode">City : <%= users %></p>
+                        <p class="view_mode">State : <%= users %></p>
+                        <p class="edit_mode">City : <input type="text"></p>
+                        <p class="edit_mode">State : <input type="text"></p>
                     </div>
                     <div class="row">
-                        <p>PIN Code : <%= users %></p>
+                        <p class="view_mode">PIN Code : <%= users %></p>
+                        <p class="edit_mode">PIN Code : <input type="number"></p>
                     </div>
-                    <p>Date: <input type="date"></p>
-
                 </div>
                 <div class="col-md-1">
                     <span class="glyphicon glyphicon-pencil edit_icon"

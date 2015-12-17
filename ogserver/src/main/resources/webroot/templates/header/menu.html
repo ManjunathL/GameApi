@@ -146,7 +146,7 @@
                 <img src="img/user.png">
             <% } %>
             <%= users.at(0).get('displayName') %>
-            <div class="sub-font">
+            <div class="sub-font" id="view_profile">
                 <a href="/#user_profile">
                     View Profile
                 </a>
@@ -222,7 +222,7 @@
                 <div class="margin-bottom20 form-group">
                     <p class="margin0">Email ID*</p>
                     <input type="email" class="width100" placeholder="abc@xyz.com" id="emailId" maxlength="100"
-                           style="color: #000;" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                           required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
                 </div>
                 <div class="margin-bottom20 form-group">
                     <p class="margin0">Password*</p>
@@ -233,18 +233,12 @@
                 </div>
                 <div class="padding20-0">
                     <div class="col-md-6 col-xs-6 padding0 form-group margin0">
-                        <button id="loginBtn" class="button margin-top20 margin-bottom20" style="background: transparent"
+                        <button id="loginBtn" class="button margin-top20 margin-bottom20"
                                 type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign in">sign in
                         </button>
                     </div>
-                    <div class="col-md-6 col-xs-6 padding0 align-right">
-                        <a href="#">Forgot Password??</a>
-                        <!--a
-                                href="#"
-                                data-toggle="modal"
-                                data-target="#forgot_password">
-                            Forgot Password??
-                        </a-->
+                    <div class="col-md-6 padding0 align-right">
+                        <a href="#" id="forgot_pwd_btn">Forgot Password??</a>
                     </div>
                 </div>
             </div>
@@ -313,7 +307,6 @@
                     <div class="padding20-0 align-center form-group" id="reset_password">
                         <button
                                 id="forgotBtn"
-                                style="background: transparent;"
                                 class="button margin-top20 margin-bottom20"
                                 type="submit"
                                 data-loading-text="<i class='fa fa-spinner fa-spin'></i> reset password">
@@ -386,7 +379,7 @@
                         <button
                                 id="signup-btn"
                                 class="button margin-top20 margin-bottom20"
-                                style="background: transparent" type="submit"
+                                type="submit"
                                 data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign up">
                             sign up
                         </button>
@@ -703,6 +696,10 @@
             $('.modal_success_msg').css('display','none');
             $('.modal_error_msg').css('display','none');
             resetPassword();
+        });
+
+        $('#view_profile').click(function() {
+            $('.userpop').hide();
         });
 
         /*$("#signup").on('hidden.bs.modal', function () {
