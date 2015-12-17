@@ -146,10 +146,17 @@
                 <img src="img/user.png">
             <% } %>
             <%= users.at(0).get('displayName') %>
+            <div class="sub-font">
+                <a href="/#user_profile">
+                    View Profile
+                </a>
+            </div>
             <span class="fa fa-sign-out signout_icon"
                   data-toggle="tooltip"
                   data-placement="left"
-                  title="Sign Out" onclick="signOut();"></span>
+                  title="Sign Out" onclick="signOut();">
+
+            </span>
         </h3>
         <div class="row">
             <div class="col-md-8 col-xs-8 padding0">
@@ -221,23 +228,29 @@
                     <p class="margin0">Password*</p>
                     <input type="password" class="width100" id="pwd" required maxlength="100"/>
                 </div>
-                <div class="margin-bottom20">
+                <div>
                     <input type="checkbox" id="remember" checked/> Remember Me
                 </div>
                 <div class="padding20-0">
-                    <div class="col-md-6 padding0 form-group">
+                    <div class="col-md-6 col-xs-6 padding0 form-group margin0">
                         <button id="loginBtn" class="button margin-top20 margin-bottom20" style="background: transparent"
                                 type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign in">sign in
                         </button>
                     </div>
-                    <div class="col-md-6 padding0 align-right">
-                        <a href="#" id="forgot_pwd_btn">Forgot Password??</a>
+                    <div class="col-md-6 col-xs-6 padding0 align-right">
+                        <a href="#">Forgot Password??</a>
+                        <!--a
+                                href="#"
+                                data-toggle="modal"
+                                data-target="#forgot_password">
+                            Forgot Password??
+                        </a-->
                     </div>
                 </div>
             </div>
         </form>
 
-        <div class="row margin-top20 padding-top30 margin-bottom20">
+        <div class="row margin-top20 margin-bottom20">
             <p class="align-center">OR</p>
 
             <div class="margin-bottom40">
@@ -369,7 +382,7 @@
                             <div id="reg_confirm_error" class="help-block with-errors"></div>
                         </div>
                     </div>
-                    <div class="padding20-0 align-center form-group">
+                    <div class="align-center form-group">
                         <button
                                 id="signup-btn"
                                 class="button margin-top20 margin-bottom20"
@@ -743,7 +756,6 @@
             window.googleButton.button('loading');
             ref.authWithOAuthPopup("google", authHandler);
         });
-
 
         $('[data-toggle="tooltip"]').tooltip();
 
