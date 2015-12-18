@@ -31,8 +31,9 @@
                 <% } %>
 
                 <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                    <span class="user user-img"
-                          style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                    <span class="user">
+                        <img src="<%= users.at(0).get('profileImage') %>" class="user-img">
+                    </span>
                 <% }else { %>
                     <span class="glyphicon glyphicon-user user" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
                 <% } %>
@@ -752,6 +753,11 @@
             window.googleButton = $(this);
             window.googleButton.button('loading');
             ref.authWithOAuthPopup("google", authHandler);
+        });
+
+        $('.drop li').click(function() {
+            var menu_parent = $(this).parents().eq(3);
+            menu_parent.removeClass('in');
         });
 
         $('[data-toggle="tooltip"]').tooltip();
