@@ -6,7 +6,7 @@ require.config({
     lodash: 'libs/lodash/lodash.min',
     backbone: 'libs/backbone/backbone-min',
     text: 'libs/text/text',
-    bootstrap: 'libs/bootstrap/dist/js/bootstrap.min',
+    bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
     bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
     firebase: 'libs/firebase/firebase',
     templates: '../templates'

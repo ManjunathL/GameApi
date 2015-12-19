@@ -1,44 +1,16 @@
 <nav class="navbar navbar-default navbar-shrink navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <div class="navbar-brand page-scroll padding0">
-                <a href="#">
-                    <img src="img/logos/logo.png" class="full_logo" alt="">
-                    <img
-                            src="img/logo_icon/48x48.png"
-                            class="small_logo"
-                            data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1"
-                            alt="">
-                </a>
-            </div>
-            <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0">
-                <a href="#" class="consult">Consult</a>
-                <span class="padding10 consult_icon">
-                    <a href="#">
-                        <img src="/img/query.png" class="consult_icon_height">
-                    </a>
-                </span>
-                <span class="glyphicon glyphicon-search search"></span>
-
-                <% if(typeof(usersl) !== 'undefined' && ((Object.keys(usersl).length - 1) !== 0)) { %>
-                <span class="glyphicon glyphicon-heart wishlist user" id="wish">
-                    <span class="super-script"><%= Object.keys(usersl).length - 1 %></span>
-                </span>
-                <% } else { %>
-                <span class="glyphicon glyphicon-heart-empty wishlist user"></span>
-                <% } %>
-
-                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                    <span class="user user-img"
-                          style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
-                <% }else { %>
-                    <span class="glyphicon glyphicon-user user" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
-                <% } %>
-
-            </div>
-
+        <div class="navbar-header">
+            <a href="#" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <img
+                        src="img/logo_icon/48x48.png"
+                        class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg"
+                        alt="">
+            </a>
+            <a href="#" class="pull-left hidden-xs hidden-sm">
+                <img src="img/logos/logo.png" class="full_logo" alt="">
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -127,9 +99,39 @@
                 <li>
                     <a href="#">Stories</a>
                 </li>
+                <li>
+                    <a href="#" class="consult">Consult</a>
+<!--
+                    <a href="#">
+                        <img src="/img/query.png" class="consult_icon_height">
+                    </a>
+-->
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
+        <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0">
+            <span class="pe-7s-help1 header-icon consult_icon pe-fw .visible-xs-block .visible-sm-block hidden-md hidden-lg"></span>
+            <span class="pe-7s-search search header-icon pe-fw"></span>
+
+            <% if(typeof(usersl) !== 'undefined' && ((Object.keys(usersl).length - 1) !== 0)) { %>
+                <span class="glyphicon glyphicon-heart wishlist user header-icon" id="wish">
+                    <span class="super-script"><%= Object.keys(usersl).length - 1 %></span>
+                </span>
+            <% } else { %>
+            <span class="pe-7s-like wishlist user header-icon pe-fw"></span>
+            <% } %>
+
+            <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+            <div style="margin: auto; display: inline-block">
+                    <span class="user user-img"
+                          style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span></div>
+            <% }else { %>
+            <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+            <% } %>
+
+        </div>
+
     </div>
     <!-- /.container-fluid -->
 </nav>
@@ -503,6 +505,19 @@
     ref.onAuth(onFAuth);
 
     function handleAuth(authData, userProfile) {
+        debugger;
+        var email = getEmail(authData);
+
+        if (!email) {
+            console.log("email not provided, please try again and provide email id as it is mandatory.");
+            $('#login_error').html("Please tick email, while providing Facebook access.");
+            $('#login_error_row').css("display", "block");
+            ref.unauth();
+            //$('#fb-btn').trigger('click');
+            return;
+        }
+
+
         var user = {
             provider: authData.provider,
             email: getEmail(authData),
@@ -536,6 +551,7 @@
                         window.googleButton && window.googleButton.button('reset');
                         $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     };
+                    debugger;
                     createUser(authData.uid, user, cbk);
                 }
             });
@@ -638,7 +654,7 @@
 
     $(document).ready(function() {
         $('.user').click(function() {
-            $('.userpop').show();
+            showUserPop();
         });
 
         $('#new_reg').click(function() {
@@ -735,17 +751,21 @@
         $('#fb-btn').click(function() {
             window.fbButton = $(this);
             window.fbButton.button('loading');
-            ref.authWithOAuthPopup("facebook", authHandler);
+            ref.authWithOAuthPopup("facebook", authHandler, {
+                scope: "email"
+            });
         });
 
         $('#google-btn').click(function() {
             window.googleButton = $(this);
             window.googleButton.button('loading');
-            ref.authWithOAuthPopup("google", authHandler);
+            ref.authWithOAuthPopup("google", authHandler, {
+                scope: "email"
+            });
         });
 
 
-        $('[data-toggle="tooltip"]').tooltip();
+        //$('[data-toggle="tooltip"]').tooltip();
 
     });
 
@@ -795,6 +815,12 @@
 
     function gotoLogin() {
         $('#notify').modal('toggle');
+        showUserPop();
+    }
+
+    function showUserPop() {
+        $('#login_error').html('');
+        $('#login_error_row').css("display", "none");
         $('.userpop').show();
     }
 
