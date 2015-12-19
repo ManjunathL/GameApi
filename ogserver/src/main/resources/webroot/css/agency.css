@@ -946,10 +946,11 @@ input[type=checkbox] {
 }
 
 .back-to-top {
+    display: none;
     font-size: 20px;
     position: fixed;
     bottom: 2em;
-    right: 10px;
+    left: 10px;
     text-decoration: none;
     color: #555 !important;
     background-color: rgba(225, 225, 225, 0.8) !important;
