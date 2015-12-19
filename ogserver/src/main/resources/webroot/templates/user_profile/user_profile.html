@@ -1,0 +1,242 @@
+<section class="bg-light-gray user_page padding100-0">
+    <div class="container">
+        <div class="col-md-3 col-sm-3 user_profile">
+            <div class="row">
+                <img src="img/user.png">
+            </div>
+            <div class="row margin-top20" id="personal_details">
+                <span class="bg-white padding10 active">Personal Details</span>
+            </div>
+            <div class="row margin-top20" id="wish_list">
+                <span class="bg-white margin-top20 padding10">WishList</span>
+            </div>
+            <div class="row margin-top20" id="order_history">
+                <span class="bg-white margin-top20 padding10">Order History</span>
+            </div>
+            <div class="row margin-top20" id="change_password">
+                <span class="bg-white margin-top20 padding10">Change Password</span>
+            </div>
+            <div class="row margin-top20" id="deactivate_account">
+                <span class="bg-white margin-top20 padding10">Deactivate Account</span>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-9 user_profile bg-white user_right_col">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="view_mode">Sakshi Kaushik</h2>
+                    <h2 class="edit_mode"><input type="text" maxlength="50" placeholder="Your Name"></h2>
+                </div>
+                <div class="col-md-6">
+                    <div class="user_profile_id">sakshi.k@orangegubbi.com</div>
+                </div>
+            </div>
+
+            <div class="personal_details">
+                <div class="col-md-11 col-sm-11 col-xs-11">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4">
+                            <p>Date of Birth :</p>
+                        </div>
+                        <div class="col-md-9 col-sm-8">
+                            <p class="view_mode"><%= users %></p>
+                            <p class="edit_mode"><input type="date"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4">
+                            <p>Contact :</p>
+                        </div>
+                        <div class="col-md-9 col-sm-8">
+                            <p class="view_mode"><%= users %></p>
+                            <p class="edit_mode">
+                                +91 &nbsp; <input type="number" min="0" max="9999999999">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p>Address :</p>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="view_mode"><%= users %></p>
+                            <p class="edit_mode"><input type="text" maxlength="250"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <p>City :</p>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <p class="view_mode"><%= users %></p>
+                            <p class="edit_mode"><input type="text" maxlength="25"></p>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <p class="float-right">State :</p>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <p class="view_mode"><%= users %></p>
+                            <p class="edit_mode"><input type="text" maxlength="25"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <p>PIN Code :</p>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <p class="view_mode"><%= users %></p>
+                            <p class="edit_mode"><input type="number" min="0" max="999999"></p>
+                        </div>
+                    </div>
+                    <a class="button float-right edit_mode" id="save_details">Save Details</a>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-1">
+                    <span class="glyphicon glyphicon-pencil edit_icon"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="Edit Details">
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="wish_list">
+                    <h4>Wishlist Items</h4>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="order_history">
+                    <h4>Order History</h4>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="change_password">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p>Old Password :</p>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="password" id="old_password">
+                        </div>
+                    </div><div class="row">
+                        <div class="col-md-5">
+                            <p>New Password :</p>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="password" id="new_password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p>Confirm Password :</p>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="password" id="confirm_password">
+                        </div>
+                    </div>
+                    <div class="row margin-top20 float-right">
+                        <a href="#" class="button">Set Password</a>
+                        <a href="#" class="button">Cancel</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="deactivate_account">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <p>If you deactivate your account all your order history and wishlist will be deleted.</p>
+                        </div>
+                        <div class="row">
+                            <p>Still if you want to deactivate your account; please click on Confirm Deactivation.</p>
+                        </div>
+                        <div class="row margin-top20 float-right">
+                            <a href="#" class="button">Confirm Deactivation</a>
+                            <a href="#" class="button">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        $('#personal_details').click(function() {
+            $('#wish_list, #order_history, #change_password, #deactivate_account').children().removeClass('active');
+            $('#personal_details').children().addClass('active');
+            $('.wish_list').css('display','none');
+            $('.order_history').css('display','none');
+            $('.change_password').css('display','none');
+            $('.deactivate_account').css('display','none');
+            $('.personal_details').slideDown(500);
+        });
+        $('#wish_list').click(function() {
+            $('#personal_details, #order_history, #change_password, #deactivate_account').children().removeClass('active');
+            $('#wish_list').children().addClass('active');
+            $('.personal_details').css('display','none');
+            $('.order_history').css('display','none');
+            $('.change_password').css('display','none');
+            $('.deactivate_account').css('display','none');
+            $('.wish_list').slideDown(500);
+            $('.edit_mode').hide();
+            $('.view_mode').show();
+            $('.edit_icon').show();
+        });
+        $('#order_history').click(function() {
+            $('#personal_details, #wish_list, #change_password, #deactivate_account').children().removeClass('active');
+            $('#order_history').children().addClass('active');
+            $('.personal_details').css('display','none');
+            $('.wish_list').css('display','none');
+            $('.change_password').css('display','none');
+            $('.deactivate_account').css('display','none');
+            $('.order_history').slideDown(500);
+            $('.edit_mode').hide();
+            $('.view_mode').show();
+            $('.edit_icon').show();
+        });
+        $('#change_password').click(function() {
+            $('#personal_details, #wish_list, #order_history, #deactivate_account').children().removeClass('active');
+            $('#change_password').children().addClass('active');
+            $('.personal_details').css('display','none');
+            $('.wish_list').css('display','none');
+            $('.order_history').css('display','none');
+            $('.deactivate_account').css('display','none');
+            $('.change_password').slideDown(500);
+            $('.edit_mode').hide();
+            $('.view_mode').show();
+            $('.edit_icon').show();
+        });
+        $('#deactivate_account').click(function() {
+            $('#personal_details, #wish_list, #order_history, #change_password').children().removeClass('active');
+            $('#deactivate_account').children().addClass('active');
+            $('.personal_details').css('display','none');
+            $('.wish_list').css('display','none');
+            $('.order_history').css('display','none');
+            $('.change_password').css('display','none');
+            $('.deactivate_account').slideDown(500);
+            $('.edit_mode').hide();
+            $('.view_mode').show();
+            $('.edit_icon').show();
+        });
+
+        $('.edit_icon').click(function() {
+            $('.view_mode').hide();
+            $('.edit_icon').hide();
+            $('.edit_mode').show();
+        });
+
+        $('#save_details').click(function() {
+            $('.edit_mode').hide();
+            $('.view_mode').show();
+            $('.edit_icon').show();
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+    });
+
+</script>

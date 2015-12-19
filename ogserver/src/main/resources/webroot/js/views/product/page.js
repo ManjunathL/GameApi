@@ -91,6 +91,7 @@ define([
 
             if(typeof(that.filter.get('selectedSubCategoriesList')) !== 'undefined'){
                 var selectedSubCategoriesList = that.filter.get('selectedSubCategoriesList').toJSON();
+                that.filter.set({'filterflag':'1'},{silent: true});
             }
 
             var selectedsubCategoryIds = that.filter.get('subcategoryIds');
@@ -100,9 +101,11 @@ define([
             if(typeof(that.filter.get('minPrice')) !== 'undefined' && typeof(that.filter.get('maxPrice')) !== 'undefined'){
                 minPrice = that.filter.get('minPrice');
                 maxPrice = that.filter.get('maxPrice');
+                that.filter.set({'filterflag':'1'},{silent: true});
             }else{
                 minPrice = that.filter.get('minPriceLimit');
                 maxPrice = that.filter.get('maxPriceLimit');
+                that.filter.set({'filterflag':'0'},{silent: true});
             }
 
             var sortDir = '';
@@ -114,6 +117,7 @@ define([
             }else{
                 that.filter.set({'sortDir':'desc'},{silent: true});
                 that.filter.set({'sortBy':'relevance'},{silent: true});
+                that.filter.set({'filterflag':'0'},{silent: true});
                 sortDir = 'desc';
                 sortBy = 'relevance';
             }

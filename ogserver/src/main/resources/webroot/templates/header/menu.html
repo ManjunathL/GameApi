@@ -148,10 +148,16 @@
                 <img src="img/user.png">
             <% } %>
             <%= users.at(0).get('displayName') %>
+            <div class="sub-font" id="view_profile">
+                <a href="/#user_profile">
+                    View Profile
+                </a>
+            </div>
             <span class="fa fa-sign-out signout_icon"
                   data-toggle="tooltip"
                   data-placement="left"
-                  title="Sign Out" onclick="signOut();"></span>
+                  title="Sign Out" onclick="signOut();">
+            </span>
         </h3>
         <div class="row">
             <div class="col-md-8 col-xs-8 padding0">
@@ -217,18 +223,18 @@
                 <div class="margin-bottom20 form-group">
                     <p class="margin0">Email ID*</p>
                     <input type="email" class="width100" placeholder="abc@xyz.com" id="emailId" maxlength="100"
-                           style="color: #000;" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                           required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
                 </div>
                 <div class="margin-bottom20 form-group">
                     <p class="margin0">Password*</p>
                     <input type="password" class="width100" id="pwd" required maxlength="100"/>
                 </div>
-                <div class="margin-bottom20">
+                <div>
                     <input type="checkbox" id="remember" checked/> Remember Me
                 </div>
                 <div class="padding20-0">
-                    <div class="col-md-6 padding0 form-group">
-                        <button id="loginBtn" class="button margin-top20 margin-bottom20" style="background: transparent"
+                    <div class="col-md-6 col-xs-6 padding0 form-group margin0">
+                        <button id="loginBtn" class="button margin-top20 margin-bottom20"
                                 type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign in">sign in
                         </button>
                     </div>
@@ -239,7 +245,7 @@
             </div>
         </form>
 
-        <div class="row margin-top20 padding-top30 margin-bottom20">
+        <div class="row margin-top20 margin-bottom20">
             <p class="align-center">OR</p>
 
             <div class="margin-bottom40">
@@ -302,7 +308,6 @@
                     <div class="padding20-0 align-center form-group" id="reset_password">
                         <button
                                 id="forgotBtn"
-                                style="background: transparent;"
                                 class="button margin-top20 margin-bottom20"
                                 type="submit"
                                 data-loading-text="<i class='fa fa-spinner fa-spin'></i> reset password">
@@ -371,11 +376,11 @@
                             <div id="reg_confirm_error" class="help-block with-errors"></div>
                         </div>
                     </div>
-                    <div class="padding20-0 align-center form-group">
+                    <div class="align-center form-group">
                         <button
                                 id="signup-btn"
                                 class="button margin-top20 margin-bottom20"
-                                style="background: transparent" type="submit"
+                                type="submit"
                                 data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign up">
                             sign up
                         </button>
@@ -505,7 +510,6 @@
     ref.onAuth(onFAuth);
 
     function handleAuth(authData, userProfile) {
-        debugger;
         var email = getEmail(authData);
 
         if (!email) {
@@ -551,7 +555,6 @@
                         window.googleButton && window.googleButton.button('reset');
                         $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     };
-                    debugger;
                     createUser(authData.uid, user, cbk);
                 }
             });
@@ -708,6 +711,10 @@
             resetPassword();
         });
 
+        $('#view_profile').click(function() {
+            $('.userpop').hide('slow');
+        });
+
         /*$("#signup").on('hidden.bs.modal', function () {
             $('#notify').modal('toggle');
         });*/
@@ -764,6 +771,10 @@
             });
         });
 
+        /*$('.drop li').click(function() {
+            var menu_parent = $(this).parents().eq(3);
+            menu_parent.removeClass('in');
+        });*/
 
         //$('[data-toggle="tooltip"]').tooltip();
 

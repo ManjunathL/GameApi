@@ -8,7 +8,8 @@ define([
     routes: {
       '': 'dashboard',
       'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products',
-      'products_details/:id': 'product_details'
+      'products_details/:id': 'product_details',
+        'user_profile': 'user_profile'
     }
 
   });
@@ -48,6 +49,11 @@ define([
         new ProductDetailPage(options).render();
       });
     });
+      router.on('route:user_profile', function (actions) {
+          require(['views/user_profile/user_profile'], function (UserProfilePage) {
+              new UserProfilePage().render();
+          });
+      });
     Backbone.history.start();
   };
   return {
