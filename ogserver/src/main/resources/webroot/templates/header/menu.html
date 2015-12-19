@@ -649,7 +649,7 @@
     }
 
     function closePopup(id) {
-        $(id).hide();
+        $(id).hide('slow');
     }
 
     $(document).ready(function() {
@@ -658,7 +658,7 @@
         });
 
         $('#new_reg').click(function() {
-            $('.userpop').hide();
+            $('.userpop').hide('slow');
             $('#signup').modal('toggle');
             $('#reg_error').html('');
             $('#reg_error_row').css("display", "none");
@@ -821,7 +821,7 @@
     function showUserPop() {
         $('#login_error').html('');
         $('#login_error_row').css("display", "none");
-        $('.userpop').show();
+        $('.userpop').show('slow');
     }
 
     function createProfile(userData, profileData, cbk) {

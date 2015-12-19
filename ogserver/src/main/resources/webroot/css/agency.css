@@ -1000,6 +1000,13 @@ a.button-orange, a.button-orange:hover {
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
     display: none;
+/*
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+     transition: all 0.5s ease;
+*/
 }
 
 .signup {
