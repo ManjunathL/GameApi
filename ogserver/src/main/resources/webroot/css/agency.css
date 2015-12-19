@@ -1,3 +1,39 @@
+@media (min-width: 992px) {
+    .menu-right {
+        margin-right: 22% !important;
+        float: right;
+    }
+
+    .super-script {
+        display: block !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .menu-icon {
+        left: auto !important;
+        right: 20px;
+    }
+
+    .all {
+        text-align: left !important;
+        margin-left: 10px !important;
+    }
+
+    .allhr {
+        width: 97% !important;
+    }
+
+    .super-script {
+        display: none !important;
+    }
+
+    .shortlist-remove {
+        left: 65% !important;
+        margin-top: 1px !important;
+    }
+}
+
 body {
     overflow-x: hidden;
     font-family: "Open Sans",sans-serif;
@@ -291,23 +327,6 @@ fieldset[disabled] .btn-xl.active {
     min-width: 180px;
 }
 
-@media (max-width: 991px) {
-    .menu-icon {
-        left: auto !important;
-        right: 20px;
-    }
-
-    .all {
-        text-align: left !important;
-        margin-left: 10px !important;
-    }
-
-    .allhr {
-        width: 97% !important;
-    }
-
-}
-
 .navbar-default .navbar-nav>.open>a {
     background-image: none !important;
     background-color: #FCFCFC !important;
@@ -322,13 +341,6 @@ fieldset[disabled] .btn-xl.active {
     color: #000;
 }
 
-
-@media (min-width: 992px) {
-    .menu-right {
-        margin-right: 22% !important;
-        float: right;
-    }
-}
 
 .drop > li {
     padding-top: 15px;
@@ -694,10 +706,6 @@ input[type=checkbox] {
 
 @media (max-width: 767px) {
 
-    .super-script {
-        display: none !important;
-    }
-
     .carousel-inner {
         position: absolute;
         top: -19px;
@@ -707,17 +715,8 @@ input[type=checkbox] {
         font-size: 30px !important;
     }
 
-    .signout_icon {
-        top: 6% !important;
-    }
-
     .user_name {
         top: 30px !important;
-    }
-
-    .shortlist-remove {
-        left: 65% !important;
-        margin-top: 1px !important;
     }
 
     #layout-view {
@@ -851,10 +850,6 @@ section h3.section-subheading {
     section {
         padding: 50px 0;
     }
-
-    .super-script {
-        display: block !important;
-    }
 }
 
 .service-heading {
@@ -987,13 +982,8 @@ a.button-orange, a.button-orange:hover {
 
 @media(min-width:768px){
     .userpop {
-        width: 30% !important;
-    }
-}
-
-@media(min-width:1200px){
-    .userpop {
-        width: 22% !important;
+        width: 40% !important;
+        max-width: 350px !important;
     }
 }
 
