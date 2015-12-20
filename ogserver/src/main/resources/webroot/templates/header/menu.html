@@ -11,6 +11,15 @@
             <a href="#" class="pull-left hidden-xs hidden-sm">
                 <img src="img/logos/logo.png" class="full_logo" alt="">
             </a>
+            <a href="#" class="pull-left hidden-xs hidden-sm" style="display: inline;position: absolute;">
+                <img src="img/home-warli-reading.png" class="full_logo" alt="">
+            </a>
+            <a href="#" class="pull-left hidden-xs hidden-sm" style="display: inline;position: absolute;left: 270px;">
+                <img src="img/home-warli-coffee-table.png" class="full_logo" alt="">
+            </a>
+            <a href="#" class="pull-left hidden-xs hidden-sm" style="display: inline;position: absolute;left: 360px;">
+                <img src="img/home-warli-study-table.png" class="full_logo" alt="">
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -136,6 +145,12 @@
     <!-- /.container-fluid -->
 </nav>
 <!-- Navigation End -->
+
+<div class="contact-us-side">
+    <span class="pe-7s-note"></span>
+    <span class="vertical-line hidden-xs hidden-sm"></span>
+    <span class="hidden-xs hidden-sm">Contact Us</span>
+</div>
 
 <!-- User PopUp -->
 <div class="userpop">
@@ -776,7 +791,18 @@
             menu_parent.removeClass('in');
         });*/
 
-        //$('[data-toggle="tooltip"]').tooltip();
+        /*$('[data-toggle="tooltip"]').tooltip();*/
+
+        $(window).scroll(function() {
+            var duration = 500;
+            if ($(this).scrollTop() > 200) {
+                $('#tawkchat-iframe-container').fadeIn(duration);
+            } else {
+                $('#tawkchat-iframe-container').fadeOut(duration);
+            }
+        });
+
+        $('#tawkchat-iframe-container').hide();;
 
     });
 
