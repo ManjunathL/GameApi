@@ -976,14 +976,14 @@ input[type=checkbox] {
     left: 0px;
     z-index: 200;
     cursor: pointer;
-    background-color: rgb(110, 110, 110);
+    background-color: #f1591f;
     transform: rotate(270deg);
     transform-origin: left top;
     padding: 1px 12px 3px 12px;
     border-radius: 0px 0px 6px 6px;
-    border-right: 1px solid #AAA;
-    border-left: 1px solid #AAA;
-    border-bottom: 1px solid #AAA;
+    border-right: 1px solid #E6A890;
+    border-left: 1px solid #E6A890;
+    border-bottom: 1px solid #E6A890;
 }
 
 .contact-us-side:hover {
@@ -996,7 +996,7 @@ input[type=checkbox] {
 }
 
 .vertical-line {
-    border-right: 1px solid #888;
+    border-right: 1px solid #E6A890;
     margin-right: 6px;
 }
 
