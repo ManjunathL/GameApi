@@ -262,6 +262,14 @@ button {
     background-color: #f1591f;
 }
 
+.consult-inline-icon {
+    font-size: 14px;
+    position: relative;
+    top: 1px;
+    margin-left: -2px !important;
+    margin-right: -2px !important;
+}
+
 .toggle-icon-left {
     float: left;
     margin-left: 20px;
@@ -365,7 +373,7 @@ button {
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-    color: #f1591f;
+    color: #000;
 }
 
 .drop {
@@ -990,9 +998,7 @@ input[type=checkbox] {
 }
 
 .contact-us-side:hover {
-    border-color: #ff471a !important;
-    color: #fff !important;
-    background-color: #ff3200 !important;
+    background-color: #ff3200;
 }
 
 .contact-us-side:active {
@@ -1889,16 +1895,31 @@ section#contact .text-danger {
     color: #e74c3c;
 }
 
+.footer-top {
+    position: absolute;
+    margin-top: -60px;
+    right: 0;
+    width: 100%;
+}
+
+.footer-bg {
+    position: absolute;
+    float: bottom;
+    right: 0;
+    width: 100%;
+}
+
+
 footer {
-    background-color: #474747;
-    color: #fff;
+
+    color: #000;
     font-family: "Open Sans",sans-serif;
     padding: 30px 0 60px 0;
     text-align: center;
 }
 
 footer a{
-    color: #fff;
+    color: #222;
     line-height: 32px;
     font-size: 13px;
     -webkit-transition: color 0.3s,opacity 0.2s;
@@ -1944,7 +1965,7 @@ footer ul.social-buttons li a {
     color: #222;
     text-align: center;
     margin-top: 20px;
-    background-color: #fff;
+    background-color: #DDD;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     transition: all .3s;
