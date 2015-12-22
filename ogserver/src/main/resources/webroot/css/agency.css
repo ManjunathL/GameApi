@@ -252,6 +252,14 @@ button {
     background-color: #f1591f;
 }
 
+.consult-inline-icon {
+    font-size: 14px;
+    position: relative;
+    top: 1px;
+    margin-left: -2px !important;
+    margin-right: -2px !important;
+}
+
 .toggle-icon-left {
     float: left;
     margin-left: 20px;
@@ -987,7 +995,7 @@ input[type=checkbox] {
 }
 
 .contact-us-side:hover {
-    background-color: #DC480F;
+    background-color: #ff3200;
 }
 
 .contact-us-side span {
