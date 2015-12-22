@@ -1887,16 +1887,31 @@ section#contact .text-danger {
     color: #e74c3c;
 }
 
+.footer-top {
+    position: absolute;
+    margin-top: -60px;
+    right: 0;
+    width: 100%;
+}
+
+.footer-bg {
+    position: absolute;
+    float: bottom;
+    right: 0;
+    width: 100%;
+}
+
+
 footer {
-    background-color: #474747;
-    color: #fff;
+
+    color: #000;
     font-family: "Open Sans",sans-serif;
     padding: 30px 0 60px 0;
     text-align: center;
 }
 
 footer a{
-    color: #fff;
+    color: #222;
     line-height: 32px;
     font-size: 13px;
     -webkit-transition: color 0.3s,opacity 0.2s;
@@ -1942,7 +1957,7 @@ footer ul.social-buttons li a {
     color: #222;
     text-align: center;
     margin-top: 20px;
-    background-color: #fff;
+    background-color: #DDD;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     transition: all .3s;
