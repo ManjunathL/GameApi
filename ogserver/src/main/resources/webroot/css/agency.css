@@ -275,7 +275,8 @@ button {
 }
 
 .consult-inline-icon {
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 600 !important;
     position: relative;
     top: 1px;
     margin-left: -2px !important;
@@ -691,6 +692,10 @@ button {
 
 .width100 {
     width: 100%;
+}
+
+.width90 {
+    width: 90%;
 }
 
 .width85 {
@@ -1295,6 +1300,19 @@ a.button-orange, a.button-orange:hover {
     padding: 20px;
 }
 
+.contact-form {
+    font-family: "Open Sans", sans-serif;
+    margin: auto;
+    width: 90%;
+    color: #fff;
+    background-color: rgba(0,0,0,0.9);
+    padding: 20px;
+}
+
+.bg-gray {
+    background-color: #CCC;
+}
+
 #notify .signup {
     margin: 50% auto;
     padding: 20px;
@@ -1374,6 +1392,11 @@ a.button-orange, a.button-orange:hover {
     text-align: center;
     color: #ff0000;
     display: none;
+}
+
+.modal.fade:not(.in).left .modal-dialog {
+    -webkit-transform: translate3d(-25%, 0, 0);
+    transform: translate3d(-25%, 0, 0);
 }
 
 .signout_icon {
@@ -2617,6 +2640,17 @@ hr {
     .share-btn{
         padding: 6px 20px;
     }
+    
+    .paddingtop0{
+        padding-top: 0px;
+    }
+    .paddingtop10{
+        padding-top: 10px;
+    }
+    .paddingtop30{
+        padding-top: 30px;
+    }
+    
 
 
     .dot{
