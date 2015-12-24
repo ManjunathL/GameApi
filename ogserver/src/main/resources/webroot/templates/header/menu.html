@@ -145,7 +145,7 @@
 </nav>
 <!-- Navigation End -->
 
-<div class="contact-us-side">
+<div class="contact-us-side" id="contact-us-side-btn">
     <span class="pe-7s-note"></span>
     <span class="vertical-line hidden-xs hidden-sm"></span>
     <span class="hidden-xs hidden-sm">Contact Us</span>
@@ -410,6 +410,114 @@
 </div>
 <!-- SignUp Modal End -->
 
+<div id="contactuspop" class="modal fade left" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content contact-form">
+            <div class="row">
+                <h2 class="align-center">
+                    <span class="pe-7s-note"></span>
+                    Contact Us
+                </h2>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="paddingtop30 padding10-0">
+                        <div class="row margin_auto">
+                            <div class="col-md-2">
+                                <span class="glyphicon glyphicon-earphone"></span>
+                            </div>
+                            <div class="col-md-10">
+                                +91 80 88 86 0860
+                                <br/>(9 AM to 6 PM, Mon - Sat)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="next-line padding10-0">
+                        <div class="row margin_auto">
+                            <div class="col-md-2">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </div>
+                            <div class="col-md-10">
+                                reach@mygubbi.com
+                            </div>
+                        </div>
+                    </div>
+                    <div class="next-line padding10-0">
+                        <div class="row margin_auto">
+                            <div class="col-md-2">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                            </div>
+                            <div class="col-md-10">
+                                1502, 2nd Floor,
+                                19th Main Road,
+                                Sector 4, HSR Layout,
+                                Bangalore 560 102
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row display-none" id="contact_error_row">
+                        <p class="margin0 error-text align-center" id="contact_error"></p>
+                    </div>
+
+                    <form id="contactForm" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Name*"
+                                       id="contact_full_name" required/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="email" class="width100 form-control" placeholder="Email*"
+                                       id="contact_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group has-feedback">
+                                <input type="text" class="width100 form-control" placeholder="Phone Number*"
+                                       id="contact_contact_num" required pattern="\d{10}" title="e.g. 9876543210"/>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="margin-bottom20 form-group">
+                                    <textarea class="width100 form-control" id="contact_requirement"
+                                              placeholder="Describe your Requirements / Queries"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Property Name"
+                                       id="contact_property_name"/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="align-center form-group">
+                                <button
+                                        id="contactus-submit-btn"
+                                        class="button margin-top20 margin-bottom20"
+                                        type="submit"
+                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
+                                    submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="close-icon signup-form" onclick="closeModal('#contactuspop');">
+                <img src="img/close-white.png">
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <!-- Notification Modal -->
 <div id="notify" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -478,8 +586,27 @@
 
 <!-- Search Overlay End -->
 
-
 <script>
+
+    var tour = {
+      id: "mg-hopscotch",
+      steps: [
+        {
+          title: "My Gubbi",
+          content: "Welcome to My Gubbi, this is short tour of the site ",
+          target: document.querySelector("nav"),
+          placement: "bottom"
+        },
+        {
+          title: "Shortlist",
+          content: "Here is where all your shortisted items would appear.",
+          target: document.querySelector(".wishlist"),
+          placement: "bottom"
+        }
+      ]
+    };
+    // Start the tour!
+    //hopscotch.startTour(tour);
 
     var ref = new Firebase(firebaseBase);
 
@@ -684,6 +811,21 @@
 
         });
 
+        $('#contact-us-side-btn').click(function() {
+            $('#contactuspop').modal('toggle');
+            $('#contact_error').html('');
+            $('#contact_error_row').css("display", 'none');
+        });
+
+        $("#contactForm").submit(function(e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+            window.contactusSubmitButton.button('loading');
+            $('#contact_error').html('');
+            $('#contact_error_row').css("display", "none");
+            contactUsSubmit();
+        });
+
         $("#registerForm").submit(function(e) {
             e.preventDefault();
             if ($('#reg_confirm').val() !== $('#reg_password').val()) {
@@ -707,6 +849,10 @@
 
         $('#signup-btn').click(function() {
             window.signupButton = $(this);
+        });
+
+        $('#contactus-submit-btn').click(function() {
+            window.contactusSubmitButton = $(this);
         });
 
         $("#loginForm").submit(function(e) {
@@ -801,9 +947,14 @@
             }
         });
 
-        $('#tawkchat-iframe-container').hide();;
+        $('#tawkchat-iframe-container').hide();
 
     });
+
+    function contactUsSubmit() {
+        window.contactusSubmitButton && window.contactusSubmitButton.button('reset');
+        closeModal('#contactuspop');
+    }
 
 
     function signUp() {
@@ -872,5 +1023,6 @@
                 if (cbk) cbk();
             });
     }
+
 
 </script>
