@@ -1218,6 +1218,10 @@ a.button-orange, a.button-orange:hover {
     padding: 20px;
 }
 
+.bg-gray {
+    background-color: #CCC;
+}
+
 #notify .signup {
     margin: 50% auto;
     padding: 20px;
