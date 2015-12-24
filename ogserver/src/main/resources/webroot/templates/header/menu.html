@@ -23,7 +23,7 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse padding-top10-bottom-10 menu-right" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse padding10-0 menu-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
                     <a
@@ -858,6 +858,8 @@
         $('#login_error').html('');
         $('#login_error_row').css("display", "none");
         $('.userpop').show('slow');
+//        $('.userpop').animate({width: 'toggle'});
+//        $('.userpop').show('slide', { direction: "right" }, 500);
     }
 
     function createProfile(userData, profileData, cbk) {
@@ -874,3 +876,4 @@
     }
 
 </script>
+

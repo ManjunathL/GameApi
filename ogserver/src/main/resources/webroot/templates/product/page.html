@@ -1,159 +1,152 @@
-<section id="portfolio" class="bg-light-gray top80 padding-top50">
-    <div class="container">
-        <div class="row padding20-0" id="layout-view111">
-            <div class="col-lg-4">
-                <h3 class="design-count margin0"><%= collection.length %> Designs Found</h3>
+<section class="margin-top70 bg-light-gray">
+
+    <div class="container-fluid bg-white">
+        <div class="container">
+
+            <div class="row padding20-0">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-7">
+                    <div class="design-count margin0"><%= collection.length %> Designs Found</div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                    <div id="filtered-list" class="padding8">
+                        <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
+                            <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
+                            <span class="font-size14 tag-card">
+                                <span class="padding-right10"><%= subcatname %></span>
+                                <span
+                                        class="pe-7s-close font-size25 tag-card-close"
+                                        onclick="removeSubcategories('<%= subcatname %>')">
+                                </span >
+                            </span>
+                            <% }); %>
+                        <% } %>
+
+                        <% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>
+                            <span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>
+                        <% } %>
+
+                        <span class="tag-card color-orange" onclick="showFiltersection();">More</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-5 align-right">
+                    <span class="button-filter" onclick="showFiltersection();">Filter&nbsp;<span class="fa fa-chevron-down"></span></span>
+                    <span class="glyphicon glyphicon-th-list view-select border-right0"></span><%
+                    %><span class="glyphicon glyphicon-th-large view-select border-right0 active"></span><%
+                    %><span class="glyphicon glyphicon-th view-select"></span>
+                </div>
             </div>
-            <div class="col-lg-5 paddingtop10">
-                <div id="filtered-list">
-                <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
-                    <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
-                    <span class="font-size14 border1 "><%= subcatname %>   <a href="javascript:void(0);" onclick="removeSubcategories('<%= subcatname %>')">X</a></span>
-                    <% }); %>
-                <% } %>
 
-                <% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>
-                    <span class="font-size14 border1 "><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>
-                <% } %>
-                <span class="font-size14 border1"><span class="round-bk1 dot"></span> X</span>
-                <span class="font-size14 border1"><span class="round-bk2 dot"></span> X</span>
-                <span class="font-size14 border1"><span class="round-bk2 dot"></span> X</span>
-                <span class="font-size14 more-lnk" onclick="showFiltersection();">More</span>
-                    </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="row padding-right15">
-                    <span class="glyphicon glyphicon-th-full view-select float-right">
-                        <div class="outerbox">
-                            <div class="innerbox">
-                            </div>
+            <div class="row filter-section" id="filter-section">
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            Sub-Categories
                         </div>
-                    </span>
-                    <span class="glyphicon glyphicon-th view-select float-right border-right0"></span>
-                    <span class="glyphicon glyphicon-th-large view-select float-right border-right0 active"></span>
-                    <span class="glyphicon glyphicon-th-list view-select float-right border-right0"></span>
-                    <span class="button float-right filter-btn" onclick="showFiltersection();">Filter&nbsp;<span class="fa fa-chevron-down"></span></span>
-                </div>
-            </div>
-        </div>
-        <div class="row filter-section" id="filter-section">
-            <div id="filter-inside" class="col-md-12">
-                <!--<div class="close" title="Close" data-toggle="collapse" data-target="#filter-inside"><i class="glyphicon glyphicon-remove-circle"></i></div>-->
-              <div class="col-md-12">
-                <div class="row filter-group">
-                <div class="fname col-md-2">Sub-Categories</div>
-                <div id="subcategory" class="filter-list col-md-10">
-                  <div class="btn-group">
-                      <% if(typeof(subcategoriesList) !== 'undefined'){ %>
-                      <% _.each(subcategoriesList, function(subcat){ %>
-
-                              <span
-                                      class="subcategorycls font-size14 border1
-                                     <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
-                          <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
-                                      <% if(subcat.name == subcatname){ %> noclick <% } %>
-                                      <% }); %>
-                          <% } %>"
-                                      id="<%= subcat.id %>"
-                                      title="<%= subcat.name %>"
-                                      onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>
-                              </span>
-
-                      <% }); %>
-                      <% } %>
-                  </div>
-                </div>
-                </div>
-                <div class="row filter-group">
-                    <div class="fname col-md-2">Price</div>
-                    <div class="filter-list col-md-10">
-                        <div class="btn-group">
-
-                            <p>
-                                <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
-                            </p>
-                            <div id="slider-range"></div>
-
-                    </div>
-                </div>
-                <div class="row filter-group">
-                    <div class="col-md-2 fname">Color</div>
-                    <div class="col-md-6 filter-list">
-                        <div class="color-rounds round-bk1">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk2">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk3">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk4">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk5">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk3">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk4">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk5">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk3">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk4">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div class="color-rounds round-bk5">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <% if(typeof(subcategoriesList) !== 'undefined'){ var count = 0; %>
+                                <% _.each(subcategoriesList, function(subcat){ %>
+                                    <% if(count == 0) { %>
+                                        <div class="row margin-bottom15">
+                                    <% } %>
+                                        <span
+                                            class="subcategorycls tag-card
+                                            <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
+                                            <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
+                                            <% if(subcat.name == subcatname){ %> noclick <% } %>
+                                            <% }); %>
+                                            <% } %>"
+                                            id="<%= subcat.id %>"
+                                            title="<%= subcat.name %>"
+                                            onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>
+                                        </span>
+                                    <% count ++; if(count == 3) { %></div><% count = 0; } %>
+                                <% }); %>
+                            <% } %>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="row padding0 align-right font-size12 sortby">
-                            Sort By:
-                            <span class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc" onclick="setSorting(this.id,this.rel);">Popular</a></span>
-                            <span class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc" onclick="setSorting(this.id,this.rel);">Relevance</a></span>
-                            <span class="sort-list"><a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>" onclick="setSorting(this.id,this.rel);">
-                                Price
-                                <% if (filter.sortDir === 'desc') { %>
-                                <span class="fa fa-sort-amount-desc fa-md"></span>
-                                <% } else if (filter.sortDir === 'asc') { %>
-                                <span class="fa fa-sort-amount-asc fa-md"></span>
-                                <% } %>
-                            </a></span>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            Price Range
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <span class="tag-card">Standard</span>
+                            <span class="tag-card">Premium</span>
+                            <span class="tag-card">Luxury</span>
                         </div>
                     </div>
                 </div>
-                  </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="row font-size12">
+                        Sort By:
+                        <span class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc" onclick="setSorting(this.id,this.rel);">Popular</a></span>
+                        <span class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc" onclick="setSorting(this.id,this.rel);">Relevance</a></span>
+                                <span class="sort-list">
+                                    <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>" onclick="setSorting(this.id,this.rel);">
+                                    Price
+                                    <% if (filter.sortDir === 'desc') { %>
+                                    <span class="fa fa-sort-amount-desc fa-md"></span>
+                                    <% } else if (filter.sortDir === 'asc') { %>
+                                    <span class="fa fa-sort-amount-asc fa-md"></span>
+                                    <% } %>
+                                    </a>
+                                </span>
+                    </div>
+                </div>
+
             </div>
         </div>
-</div>
-    <div class="listing">
-
-
     </div>
-    <a style="display: block;" href="#" class="back-to-top">
+                <!--<div class="row">-->
+                    <!--<div class="fname col-md-2"></div>-->
+                    <!--<div id="subcategory" class="filter-list col-md-10">-->
+                      <!--<div class="btn-group">-->
+                          <!--<% if(typeof(subcategoriesList) !== 'undefined'){ %>-->
+                          <!--<% _.each(subcategoriesList, function(subcat){ %>-->
+
+                                  <!--<span-->
+                                          <!--class="subcategorycls font-size14 tag-card-->
+                                         <!--<% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>-->
+                              <!--<% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>-->
+                                          <!--<% if(subcat.name == subcatname){ %> noclick <% } %>-->
+                                          <!--<% }); %>-->
+                              <!--<% } %>"-->
+                                          <!--id="<%= subcat.id %>"-->
+                                          <!--title="<%= subcat.name %>"-->
+                                          <!--onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>-->
+                                  <!--</span>-->
+
+                          <!--<% }); %>-->
+                          <!--<% } %>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="row filter-group">-->
+                        <!--<div class="fname col-md-2">Price</div>-->
+                        <!--<div class="filter-list col-md-10">-->
+                            <!--<div class="btn-group">-->
+
+                                <!--<p>-->
+                                    <!--<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">-->
+                                <!--</p>-->
+                                <!--<div id="slider-range"></div>-->
+
+
+    <div class="container-fluid bg-light-gray">
+        <div class="container margin-top40">
+            <div class="listing"></div>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top">
         <span class="fa fa-chevron-up"></span>
     </a>
-</div>
-    </div>
+
 </section>
+
 <script>
     $(document).ready(function(){
 
@@ -270,6 +263,7 @@
         filter.set({'selectedSubCategoriesName':subcatNameArr});
         filter.trigger('change');
     }
+
     function removeSubcategories(subcatnm){
         var subcatnmArr = filter.get('selectedSubCategoriesName');
         var subcatIdArr = filter.get('subcategoryIds');
@@ -285,6 +279,7 @@
             filter.trigger('change');
         }
     }
+
     function setSorting(sortBy,sortDir){
         //alert(sortBy+" ========== "+sortDir);
         if(sortBy && sortDir){

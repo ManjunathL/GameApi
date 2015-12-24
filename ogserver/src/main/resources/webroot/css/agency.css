@@ -1,5 +1,9 @@
 @media (min-width: 992px) {
 
+    .carousel-indicators{
+        bottom: 70px;
+    }
+
     .carousel-inner {
         margin-top: 70px !important;
     }
@@ -41,6 +45,14 @@
     .shortlist-remove {
         left: 65% !important;
         margin-top: 1px !important;
+    }
+
+    .footer-bg {
+        bottom: 0px;
+    }
+
+    .design-count {
+        font-size: 18px !important;
     }
 }
 
@@ -407,8 +419,7 @@ button {
 
 .view-select{
     padding: 10px;
-    margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 16px;
     color: #cccccc;
     border: 1px solid #cccccc;
 }
@@ -674,6 +685,10 @@ button {
     color:#b3b3b3;
 }
 
+.color-orange{
+    color: #f1591f !important;
+}
+
 .width100 {
     width: 100%;
 }
@@ -730,6 +745,10 @@ button {
     font-size: 30px;
 }
 
+.font-size25 {
+    font-size: 25px;
+}
+
 .tab {
     margin-right: 20px;
 }
@@ -749,6 +768,10 @@ button {
     float: left;
 }
 
+.padding10-0 {
+    padding: 10px 0px !important;
+}
+
 .padding15-0 {
     padding: 15px 0px;
 }
@@ -765,12 +788,29 @@ button {
     padding: 100px 0px;
 }
 
+.padding-top0 {
+    padding-top: 0px;
+}
+
+.padding-top10 {
+    padding-top: 10px;
+}
+
 .padding-top30 {
     padding-top: 30px;
 }
 
 .padding-bottom10 {
     padding-bottom: 10px;
+}
+
+
+.padding-right10{
+    padding-right: 10px;
+}
+
+.padding-right15{
+    padding-right: 15px;
 }
 
 .padding5_10_5_35 {
@@ -781,17 +821,20 @@ button {
     padding: 0px;
 }
 
-.padding10 {
-    padding: 10px;
+.padding8 {
+    padding: 8px;
 }
 
-.padding-top10-bottom-10 {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+.padding10 {
+    padding: 10px !important;
 }
 
 .margin_auto {
     margin: auto;
+}
+
+.margin-bottom15 {
+    margin-bottom: 15px;
 }
 
 .margin-bottom20 {
@@ -818,6 +861,10 @@ button {
     margin-top: 40px;
 }
 
+.margin-top70 {
+    margin-top: 70px;
+}
+
 .margin-top0 {
     margin-top: 0px !important;
 }
@@ -831,9 +878,10 @@ button {
 }
 
 .design-count {
-    font-family: "Open Sans",sans-serif;
-    font-weight: 300;
+    /*font-family: "Open Sans",sans-serif;*/
+    /*font-weight: 300;*/
     text-transform: none;
+    font-size: 26px;
 }
 
 .intro-icon {
@@ -850,7 +898,7 @@ button {
 }
 
 .intro-text p {
-    font-size: 18px;
+    font-size: 22px;
 }
 
 input[type=text], input[type=number], input[type=password], input[type=email] {
@@ -910,15 +958,8 @@ input[type=checkbox] {
 }
 
 @media(min-width:768px) {
-
     .logo {
         height: 50px;
-    }
-
-    .carousel-overlay  {
-        position: absolute !important;
-        top: 3.5% !important;
-        bottom: -3.5% !important;
     }
 }
 
@@ -1168,6 +1209,56 @@ a.button-orange, a.button-orange:hover {
     box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
 }
 
+.button-filter, .button-filter:focus {
+    border: 1px solid #CCCCCC;
+    text-align: center;
+    color: #5C6E7B;
+    padding: 11px 10px 9px 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
+}
+
+.button-filter:active {
+    -webkit-box-shadow: inset 0px 0px 2px 2px rgba(204, 204, 204,0.2);
+    -moz-box-shadow: inset 0px 0px 2px 2px rgba(204, 204, 204,0.2);
+    box-shadow: inset 0px 0px 2px 2px rgba(204, 204, 204,0.2);
+}
+
+.tag-card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    outline: 0;
+    padding: 5px 15px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none !important;
+    color: #333;
+    background-color: #fafafa;
+    text-align: center;
+    transition: .2s ease-out;
+    cursor: pointer;
+    margin: 5px;
+    position: relative;
+}
+
+.tag-card-close {
+    position: absolute;
+    right: 5px;
+    color: #f1591f;
+}
+
+.filter-section {
+    font-size: 16px;
+    display: none;
+}
+
+.sortby{
+    padding-top: 25px;
+    padding-right: 10px;
+}
+
+
 .arr {
     height: 10%;
     opacity: 0.2;
@@ -1395,7 +1486,7 @@ color: #FFF!important;
 .footer-txtbox {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #333;
 }
 
 .footer-txtbox:focus, .footer-txtbox:active{
@@ -1907,11 +1998,12 @@ section#contact .text-danger {
     float: bottom;
     right: 0;
     width: 100%;
+    opacity: 0.2;
 }
 
 
 footer {
-
+    position: relative;
     color: #000;
     font-family: "Open Sans",sans-serif;
     padding: 30px 0 60px 0;
@@ -2453,48 +2545,30 @@ hr {
     }
 
     /* Filter section design */
-    .filter-btn{
-        font-family: "Open Sans",sans-serif;
-        font-weight: 400;
-        font-size: 16px;
-        letter-spacing: 1px;
-        padding-top: 10px;
-        padding-bottom: 6px;
-        color: #5C6E7B;
-        border-radius: 0px;
-        /*background-color: #F1591F;*/
-        margin-right: 10px;
-        margin-top: 1px;
-        border: 1px solid #CCC;
-        padding: 9px;
-    }
-    .filter-btn:active{
-        border: 2px solid #CCC;
-    }
 
-    #filter-section{
-        padding:0px 10px 20px 20px;
-    }
-    #filter-section #filter-inside .filter-group {
-        padding-left: 15px;
-       // border-bottom: 1px solid #ccc;
-    }
+    /*#filter-section{*/
+        /*padding:0px 10px 20px 20px;*/
+    /*}*/
+    /*#filter-section #filter-inside .filter-group {*/
+        /*padding-left: 15px;*/
+       /*// border-bottom: 1px solid #ccc;*/
+    /*}*/
 
-    #filter-section #filter-inside .filter-group .filter-list {
-        padding: 15px 0px;
-    }
-    #filter-inside .filter-list .btn:hover {
-        font-weight: 600;
-        color:#000;
-    }
+    /*#filter-section #filter-inside .filter-group .filter-list {*/
+        /*padding: 15px 0px;*/
+    /*}*/
+    /*#filter-inside .filter-list .btn:hover {*/
+        /*font-weight: 600;*/
+        /*color:#000;*/
+    /*}*/
 
-    #filter-section #filter-inside .filter-group .fname {
-        padding: 15px 0px;
-        text-transform: uppercase;
-        color: #777;
-        height: 40px;
-        line-height: 40px;
-    }
+    /*#filter-section #filter-inside .filter-group .fname {*/
+        /*padding: 15px 0px;*/
+        /*text-transform: uppercase;*/
+        /*color: #777;*/
+        /*height: 40px;*/
+        /*line-height: 40px;*/
+    /*}*/
 
 
    .color-rounds > .glyphicon-remove, .glyphicon-ok{
@@ -2507,13 +2581,8 @@ hr {
     .color-rounds:hover > .glyphicon-ok{
         display:block;
     }
-    .padding-right15{
-        padding-right: 15px;
-    }
-    .border1{
-    border:1px solid #ccc;
-    padding:4px;
-    }
+
+
     .filter-right{
         padding: 10px; position: absolute; top: 10px;
     }
@@ -2548,20 +2617,8 @@ hr {
     .share-btn{
         padding: 6px 20px;
     }
-    .sortby{
-        padding-top: 25px;
-        padding-right: 10px;
-    }
-    .paddingtop0{
-        padding-top: 0px;
-    }
-    .paddingtop10{
-        padding-top: 10px;
-    }
-    .more-lnk{
-        color:#4C9ED9;
-        cursor:pointer;
-    }
+
+
     .dot{
         border-radius: 20%;
         height: 10px;
@@ -2585,7 +2642,4 @@ hr {
 
     .error-text {
         color: #FF0000;
-    }
-    .filter-section{
-        display:none;
     }
