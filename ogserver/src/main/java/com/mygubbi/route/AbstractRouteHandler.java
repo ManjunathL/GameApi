@@ -6,7 +6,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.impl.RouterImpl;
 
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by nitinpuri on 09-11-2015.
@@ -27,27 +30,27 @@ public abstract class AbstractRouteHandler extends RouterImpl {
 
     protected void sendJsonResponse(RoutingContext context, String relPath) { //todo: this method will change once ES is integrated
         HttpServerResponse response = context.response();
-        URL resource = getClass().getResource(relPath);
+        response.putHeader("Access-Control-Allow-Origin", "*")
+                .putHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+                .putHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-        if (resource != null) {
-            String filePath = resource.getPath();
-            vertx.fileSystem().readFile(filePath, asyncResult -> {
-                if (asyncResult.succeeded()) {
-                    String json = asyncResult.result().toString();
-
-                    response.putHeader("Access-Control-Allow-Origin", "*") //todo: this is only for dev for http-server to be able to call vertx
-                            .putHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-                            .putHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
-                            .putHeader("content-type", "application/json")
-                            .end(json);
-                } else {
-                    sendError(response, asyncResult.cause().getMessage());
+        InputStream in = getClass().getResourceAsStream(relPath);
+        if (in != null) {
+            try (BufferedReader r = new BufferedReader(new InputStreamReader(in))) {
+                String l;
+                String val = "";
+                while ((l = r.readLine()) != null) {
+                    val = val + l;
                 }
-            });
+                response.putHeader("content-type", "application/json").end(val);
+
+            } catch (IOException e) {
+                sendError(response, e.getMessage());
+            }
+        } else {
+            sendError(response, "File Not Found - " + relPath);
         }
-        else {
-            sendError(response, relPath + " is not valid!");
-        }
+
 
     }
 }

@@ -1,9 +1,5 @@
 @media (min-width: 992px) {
 
-    .carousel-inner {
-        margin-top: 70px !important;
-    }
-
     .menu-right {
         margin-right: 22% !important;
         float: right;
@@ -15,10 +11,6 @@
 }
 
 @media (max-width: 991px) {
-
-    .carousel-inner {
-        margin-top: 84px !important;
-    }
 
     .menu-icon {
         left: auto !important;
@@ -43,6 +35,15 @@
         margin-top: 1px !important;
     }
 }
+
+.carousel-inner {
+    margin-top: 70px !important;
+}
+
+.burger-logo {
+    height: 34px;
+}
+
 
 body {
     overflow-x: hidden;
