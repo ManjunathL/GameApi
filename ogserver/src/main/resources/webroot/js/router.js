@@ -6,10 +6,11 @@ define([
 ], function ($, _, Backbone, Bootstrap) {
   var AppRouter = Backbone.Router.extend({
     routes: {
-      '': 'dashboard',
-      'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products',
-      'products_details/:id': 'product_details',
-        'user_profile': 'user_profile'
+        '': 'dashboard',
+        'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products',
+        'products_details/:id': 'product_details',
+        'user_profile': 'user_profile',
+        'consult': 'consult'
     }
 
   });
@@ -39,7 +40,6 @@ define([
     });
     router.on('route:product_details', function (productId) {
       require(['views/product/details'], function (ProductDetailPage) {
-          //console.log('smruti');
 
         var options = {
             model: {
@@ -49,11 +49,16 @@ define([
         new ProductDetailPage(options).render();
       });
     });
-      router.on('route:user_profile', function (actions) {
-          require(['views/user_profile/user_profile'], function (UserProfilePage) {
-              new UserProfilePage().render();
-          });
+    router.on('route:user_profile', function (actions) {
+      require(['views/user_profile/user_profile'], function (UserProfilePage) {
+          new UserProfilePage().render();
       });
+    });
+    router.on('route:consult', function (actions) {
+      require(['views/consult/consult'], function (ConsultPage) {
+          new ConsultPage().render();
+      });
+    });
     Backbone.history.start();
   };
   return {
