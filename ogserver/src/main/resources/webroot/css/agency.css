@@ -55,6 +55,10 @@
         margin-top: 1px !important;
     }
 
+    .burger-logo {
+        height: 34px;
+    }
+    
     .footer-bg {
         bottom: 0px;
     }
@@ -80,6 +84,15 @@
         width: 30px !important;
     }
 }
+
+.carousel-inner {
+    margin-top: 70px !important;
+}
+
+.burger-logo {
+    height: 34px;
+}
+
 
 body {
     overflow-x: hidden;
