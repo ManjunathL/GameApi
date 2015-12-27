@@ -8,6 +8,10 @@
         margin-top: 70px !important;
     }
 
+    .menu-spacer {
+        margin-top: 70px !important;
+    }
+
     .menu-right {
         margin-right: 22% !important;
         float: right;
@@ -21,6 +25,10 @@
 @media (max-width: 991px) {
 
     .carousel-inner {
+        margin-top: 84px !important;
+    }
+
+    .menu-spacer {
         margin-top: 84px !important;
     }
 
@@ -53,6 +61,23 @@
 
     .design-count {
         font-size: 18px !important;
+    }
+
+    .list-button-strip {
+        font-size: 14px !important;
+    }
+
+    .list-heart {
+        font-size: 22px !important;
+    }
+
+    .listli {
+        padding: 0px !important;
+    }
+
+    .glyph {
+        height: 30px !important;
+        width: 30px !important;
     }
 }
 
@@ -126,8 +151,12 @@ h6 {
     box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
 }
 
+.bg-gray {
+    background-color: #CCC;
+}
+
 .bg-light-gray {
-    background-color: #e9e9e9;
+    background-color: #f2f4f4;
 }
 
 .bg-darkest-gray {
@@ -398,26 +427,6 @@ button {
     padding-top: 15px;
 }
 
-.innerbox{
-    min-height: 11px;
-    width: 12px;
-    display: inline-block;
-    border: 1px solid #CCC;
-    background: #CCC;
-    margin: 3px;
-    position: absolute;
-    top: 12px;
-    right: 10px;
-}
-
-.outerbox {
-    width: 18px;
-    height: 18px;
-    display: inline-block;
-    border: 1px solid #CCC;
-
-}
-
 .view-select{
     padding: 10px;
     font-size: 16px;
@@ -515,6 +524,10 @@ button {
 .wish_list, .order_history, .change_password, .deactivate_account {
     display: none;
     position: absolute;
+}
+
+.form-control {
+    border-radius: 0;
 }
 
 @media screen and (max-width: 1024px) {
@@ -773,6 +786,10 @@ button {
     float: left;
 }
 
+.position-relative {
+    position: relative;
+}
+
 .padding10-0 {
     padding: 10px 0px !important;
 }
@@ -928,7 +945,7 @@ input[type=checkbox] {
 }
 
 @media (max-width: 991px) {
-    .list-img > .list-button-strip{
+    .portfolio-box .list-button-strip{
         display:block;
     }
 }
@@ -1263,12 +1280,28 @@ a.button-orange, a.button-orange:hover {
     padding-right: 10px;
 }
 
-
 .arr {
     height: 10%;
     opacity: 0.2;
     margin: 120% 0px;
 }
+
+.filters {
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+.filters li {
+    display: inline-block;
+    padding: 0px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.filters li ul li {
+    text-transform: none !important;
+}
+
 
 @media(min-width:768px){
     .userpop {
@@ -1307,10 +1340,6 @@ a.button-orange, a.button-orange:hover {
     color: #fff;
     background-color: rgba(0,0,0,0.9);
     padding: 20px;
-}
-
-.bg-gray {
-    background-color: #CCC;
 }
 
 #notify .signup {
@@ -1438,7 +1467,7 @@ a.button-orange, a.button-orange:hover {
     width: 40px;
     border: 2px solid #FFF;
     color: #FFF;
-    font-size: 23px;
+    font-size: 22px;
 }
 
 .listing-button-strip {
@@ -1447,19 +1476,19 @@ a.button-orange, a.button-orange:hover {
 }
 .list-button-strip {
     position: absolute;
-    top: 1px;
-    right:15px;
-    list-style:none;
+    top: 0px;
+    right: 0px;
+    list-style: none;
     padding: 10px;
     background: transparent linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent) repeat scroll 0% 0%;
-    height:90%;
-    width:35%;
+    height: 100%;
     display:none;
+    font-size: 20px;
 }
 
 .list-heart{
      color: #FFF;
-     font-size: 30px!important;
+     font-size: 30px !important;
      padding: 10px 5px;
 }
 .list-txt{
@@ -1491,19 +1520,30 @@ color: #FFF!important;
 .list-button-strip > li{
      padding:5px;
 }
+
 .listli{
    text-align:right;
    padding: 10px;
 }
 
-.list-img:hover > .list-button-strip{
+.listli .glyph:hover{
+    border: 2px solid #f1591f;
+}
+
+.listli .glyph:active{
+    border: 2px solid #ff3200;
+}
+
+.listli .list-heart:hover {
+    color: #f1591f;
+}
+
+.listli .list-heart:active {
+    color: #ff3200;
+}
+
+.portfolio-box:hover .list-button-strip{
     display:block;
-}
-.list-ico:hover + .list-txt{
-    display:inline-block;
-}
-.list-txt:hover{
-    display:inline-block;
 }
 
 .footer-txtbox {
@@ -1590,7 +1630,6 @@ color: #FFF!important;
     margin: 0 auto;
     padding: 25px;
     max-width: 585px;
-    text-align: center;
     background-color: #fff;
 }
 
@@ -1622,16 +1661,6 @@ color: #FFF!important;
 
 }
 
-.image-meta-title{
-    font-family: "Open Sans",sans-serif;
-    font-weight: 300;
-    color: #000;
-    font-size: 18px;
-    padding-top:10px;
-}
-.shadow-img{
-    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.6);
-}
 .image-text {
     color: #fff;
     position: relative;
@@ -1701,13 +1730,13 @@ color: #FFF!important;
 .portfolio .portfolio-item .portfolio-caption h4 {
     margin: 0;
     text-transform: none;
+    font-size: 20px;
 }
 
 .portfolio .portfolio-item .portfolio-caption p {
     margin: 0;
     font-family: "Open Sans",sans-serif;
     font-size: 16px;
-    font-style: italic;
 }
 
 .portfolio * {

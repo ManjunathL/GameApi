@@ -1,4 +1,8 @@
-<section class="margin-top70 bg-light-gray">
+<section class="menu-spacer bg-light-gray">
+
+    <div class="container-fluid category-banner">
+        <img src="img/kitchen-category-banner.jpg" class="img-responsive" alt="">
+    </div>
 
     <div class="container-fluid bg-white">
         <div class="container">
@@ -11,7 +15,7 @@
                 <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
                     <div id="filtered-list" class="padding8">
                         <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
-                            <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
+                        <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
                             <span class="font-size14 tag-card">
                                 <span class="padding-right10"><%= subcatname %></span>
                                 <span
@@ -19,11 +23,11 @@
                                         onclick="removeSubcategories('<%= subcatname %>')">
                                 </span >
                             </span>
-                            <% }); %>
+                        <% }); %>
                         <% } %>
 
                         <% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>
-                            <span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>
+                        <span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>
                         <% } %>
 
                         <span class="tag-card color-orange" onclick="showFiltersection();">More</span>
@@ -46,23 +50,23 @@
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <% if(typeof(subcategoriesList) !== 'undefined'){ var count = 0; %>
-                                <% _.each(subcategoriesList, function(subcat){ %>
-                                    <% if(count == 0) { %>
-                                        <div class="row margin-bottom15">
-                                    <% } %>
+                            <% _.each(subcategoriesList, function(subcat){ %>
+                            <% if(count == 0) { %>
+                            <div class="row margin-bottom15">
+                                <% } %>
                                         <span
-                                            class="subcategorycls tag-card
+                                                class="subcategorycls tag-card
                                             <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
                                             <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
                                             <% if(subcat.name == subcatname){ %> noclick <% } %>
                                             <% }); %>
                                             <% } %>"
-                                            id="<%= subcat.id %>"
-                                            title="<%= subcat.name %>"
-                                            onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>
+                                                id="<%= subcat.id %>"
+                                                title="<%= subcat.name %>"
+                                                onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>
                                         </span>
-                                    <% count ++; if(count == 3) { %></div><% count = 0; } %>
-                                <% }); %>
+                                <% count ++; if(count == 3) { %></div><% count = 0; } %>
+                            <% }); %>
                             <% } %>
                         </div>
                     </div>
@@ -86,12 +90,12 @@
                         <span class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc" onclick="setSorting(this.id,this.rel);">Relevance</a></span>
                                 <span class="sort-list">
                                     <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>" onclick="setSorting(this.id,this.rel);">
-                                    Price
-                                    <% if (filter.sortDir === 'desc') { %>
-                                    <span class="fa fa-sort-amount-desc fa-md"></span>
-                                    <% } else if (filter.sortDir === 'asc') { %>
-                                    <span class="fa fa-sort-amount-asc fa-md"></span>
-                                    <% } %>
+                                        Price
+                                        <% if (filter.sortDir === 'desc') { %>
+                                        <span class="fa fa-sort-amount-desc fa-md"></span>
+                                        <% } else if (filter.sortDir === 'asc') { %>
+                                        <span class="fa fa-sort-amount-asc fa-md"></span>
+                                        <% } %>
                                     </a>
                                 </span>
                     </div>
@@ -100,39 +104,39 @@
             </div>
         </div>
     </div>
-                <!--<div class="row">-->
-                    <!--<div class="fname col-md-2"></div>-->
-                    <!--<div id="subcategory" class="filter-list col-md-10">-->
-                      <!--<div class="btn-group">-->
-                          <!--<% if(typeof(subcategoriesList) !== 'undefined'){ %>-->
-                          <!--<% _.each(subcategoriesList, function(subcat){ %>-->
+    <!--<div class="row">-->
+    <!--<div class="fname col-md-2"></div>-->
+    <!--<div id="subcategory" class="filter-list col-md-10">-->
+    <!--<div class="btn-group">-->
+    <!--<% if(typeof(subcategoriesList) !== 'undefined'){ %>-->
+    <!--<% _.each(subcategoriesList, function(subcat){ %>-->
 
-                                  <!--<span-->
-                                          <!--class="subcategorycls font-size14 tag-card-->
-                                         <!--<% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>-->
-                              <!--<% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>-->
-                                          <!--<% if(subcat.name == subcatname){ %> noclick <% } %>-->
-                                          <!--<% }); %>-->
-                              <!--<% } %>"-->
-                                          <!--id="<%= subcat.id %>"-->
-                                          <!--title="<%= subcat.name %>"-->
-                                          <!--onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>-->
-                                  <!--</span>-->
+    <!--<span-->
+    <!--class="subcategorycls font-size14 tag-card-->
+    <!--<% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>-->
+    <!--<% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>-->
+    <!--<% if(subcat.name == subcatname){ %> noclick <% } %>-->
+    <!--<% }); %>-->
+    <!--<% } %>"-->
+    <!--id="<%= subcat.id %>"-->
+    <!--title="<%= subcat.name %>"-->
+    <!--onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>-->
+    <!--</span>-->
 
-                          <!--<% }); %>-->
-                          <!--<% } %>-->
-                      <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="row filter-group">-->
-                        <!--<div class="fname col-md-2">Price</div>-->
-                        <!--<div class="filter-list col-md-10">-->
-                            <!--<div class="btn-group">-->
+    <!--<% }); %>-->
+    <!--<% } %>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row filter-group">-->
+    <!--<div class="fname col-md-2">Price</div>-->
+    <!--<div class="filter-list col-md-10">-->
+    <!--<div class="btn-group">-->
 
-                                <!--<p>-->
-                                    <!--<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">-->
-                                <!--</p>-->
-                                <!--<div id="slider-range"></div>-->
+    <!--<p>-->
+    <!--<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">-->
+    <!--</p>-->
+    <!--<div id="slider-range"></div>-->
 
 
     <div class="container-fluid bg-light-gray">
@@ -172,18 +176,18 @@
             return false;
         });
 
-        $('.portfolio-link').hover(function(){
-            var over = $(this).find('.image-meta');
-            var h = $(this).find('h2');
-            var txt = $(this).find('.image-text');
-            over.fadeIn('slow');
-            h.animate({bottom: '10%'});
-            txt.animate({bottom: '20%'});
-        }, function(){
-            $('.image-meta').fadeOut('fast');
-            $('h2').css('bottom','0');
-            $('.image-text').css('bottom','0');
-        });
+//        $('.portfolio-link').hover(function(){
+//            var over = $(this).find('.image-meta');
+//            var h = $(this).find('h2');
+//            var txt = $(this).find('.image-text');
+//            over.fadeIn('slow');
+//            h.animate({bottom: '10%'});
+//            txt.animate({bottom: '20%'});
+//        }, function(){
+//            $('.image-meta').fadeOut('fast');
+//            $('h2').css('bottom','0');
+//            $('.image-text').css('bottom','0');
+//        });
 
         $("#wish").click(function() {
             if($(this).hasClass('glyphicon-heart')){
@@ -298,52 +302,52 @@
 </script>
 <script>
     $(function() {
-    //alert(filter.get('minPrice')+" ======== "+filter.get('maxPrice'));
-    if(filter.get('minPrice') || filter.get('maxPrice')){
-        var mnprc = filter.get('minPrice');
-        var mxprc = filter.get('maxPrice');
-    }else{
-        var mnprc = filter.get('minPriceLimit');
-        var mxprc = filter.get('maxPriceLimit');
-    }
+        //alert(filter.get('minPrice')+" ======== "+filter.get('maxPrice'));
+        if(filter.get('minPrice') || filter.get('maxPrice')){
+            var mnprc = filter.get('minPrice');
+            var mxprc = filter.get('maxPrice');
+        }else{
+            var mnprc = filter.get('minPriceLimit');
+            var mxprc = filter.get('maxPriceLimit');
+        }
 
-     $( "#slider-range" ).slider({
-      range: true,
-      min: filter.get('minPriceLimit'),
-      max: filter.get('maxPriceLimit'),
-      values: [ mnprc, mxprc ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-      }
-    });
+        $( "#slider-range" ).slider({
+            range: true,
+            min: filter.get('minPriceLimit'),
+            max: filter.get('maxPriceLimit'),
+            values: [ mnprc, mxprc ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            }
+        });
 
-    $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
-     " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
+        $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
 
-     $( "#slider-range" ).mouseleave(function() {
+        $( "#slider-range" ).mouseleave(function() {
             //alert($( "#slider-range" ).slider( "values", 0 ) + '-----------' + $( "#slider-range" ).slider( "values", 1 ));
 
             filter.set('minPrice',$( "#slider-range" ).slider( "values", 0 ));
             filter.set('maxPrice',$( "#slider-range" ).slider( "values", 1 ));
-     });
-  });
-  function removePrice(){
-    filter.set('minPrice',filter.get('minPriceLimit'));
-    filter.set('maxPrice',filter.get('maxPriceLimit'));
-  }
-  function showFiltersection(){
-    $('#filter-section').slideToggle();
-    $('#filtered-list').toggle();
-  }
-  </script>
+        });
+    });
+    function removePrice(){
+        filter.set('minPrice',filter.get('minPriceLimit'));
+        filter.set('maxPrice',filter.get('maxPriceLimit'));
+    }
+    function showFiltersection(){
+        $('#filter-section').slideToggle();
+        $('#filtered-list').toggle();
+    }
+</script>
 
 <!--Facebook share code-->
 
 <!--<div id="fb-root"></div>-->
 <!--<script>(function(d, s, id) {-->
-  <!--var js, fjs = d.getElementsByTagName(s)[0];-->
-  <!--if (d.getElementById(id)) return;-->
-  <!--js = d.createElement(s); js.id = id;-->
-  <!--js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1393442277626447";-->
-  <!--fjs.parentNode.insertBefore(js, fjs);-->
+<!--var js, fjs = d.getElementsByTagName(s)[0];-->
+<!--if (d.getElementById(id)) return;-->
+<!--js = d.createElement(s); js.id = id;-->
+<!--js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1393442277626447";-->
+<!--fjs.parentNode.insertBefore(js, fjs);-->
 <!--}(document, 'script', 'facebook-jssdk'));</script>-->
