@@ -7,8 +7,8 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
         '': 'dashboard',
-        'products/:categories/:subcategories(/q:searchTerm)(/s:sortBy)(/d:sortDir)(/l:layout)': 'products',
-        'products_details/:id': 'product_details',
+        'products/:categories/:subcategories': 'products',
+        'product/:id': 'product',
         'user_profile': 'user_profile',
         'consult': 'consult'
     }
@@ -38,7 +38,7 @@ define([
         new ProductPage(options).render();
       });
     });
-    router.on('route:product_details', function (productId) {
+    router.on('route:product', function (productId) {
       require(['views/product/details'], function (ProductDetailPage) {
 
         var options = {

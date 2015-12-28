@@ -8,10 +8,8 @@
   "name": "Albatross L-Shaped Kitchen",
   "designer": "Ram Prasad",
   "designerId": "12837198237",
-  "uom": "inches",
-  "w": "98",
-  "h": "33",
-  "d": "30",
+  "l": "8ft",
+  "w": "10ft",
   "curr": "INR",
   "desc": "An L-shaped kitchen that makes complete use of the corners of your space. Overhead closed cabinets as well as a series of drawers and cabinets below offer ample storage space. A chimney-hob and wide working spaces across the legs of the L provide great working space.",
   "popularity": 1.5,
@@ -33,7 +31,7 @@
   },
   "pageId": "SJDH478SJD",
   "images": [
-    "Albatross_Mapple1_low_erohcx"
+    "Albatross_Mapple1_low_erohcx", "Auklet_low_jkp4hr", "bart_Lshaped_BrownOak_CreamOak_dvxktq", "Brambling_Aurbergene_Low_lrs7hs"
   ],
   "defaultPrice": "3,85,000",
   "defaultMaterial": "Plywood",
@@ -41,13 +39,13 @@
   "accessories": [
     {
       "moduleId": "1",
-      "moduleName": "Wall Glass Unit",
-      "moduleDesc": "Glass Wall Unit to show your expensive Crockery",
+      "moduleName": "Base Unit",
+      "moduleDesc": "Base Unit",
       "accessoryId": "1",
       "accessoryCode": "MC37487",
-      "accessoryName": "Moving Corner",
-      "accessoryImg": "moving_corner.jpg",
-      "accessoryPrice": "7400",
+      "accessoryName": "Base Cabinet with Bottle Pull Out",
+      "accessoryImg": "rack_qabmsl.jpg",
+      "accessoryPrice": "11271",
       "w": "800",
       "h": "600",
       "d": "200",
@@ -57,8 +55,79 @@
           "accessoryId": "2",
           "accessoryCode": "MC37488",
           "accessoryName": "Moving Corner Slide",
-          "accessoryImg": "moving_corner_slide.jpg",
+          "accessoryImg": "cabinet-with-three-drawers1_vgkbd3.jpg",
+          "accessoryPrice": "9000",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        },
+        {
+          "accessoryId": "2",
+          "accessoryCode": "MC37488",
+          "accessoryName": "Moving Corner Slide",
+          "accessoryImg": "cabinet-with-three-drawers_fpshz1.jpg",
           "accessoryPrice": "8200",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        },
+        {
+          "accessoryId": "2",
+          "accessoryCode": "MC37488",
+          "accessoryName": "Moving Corner Slide",
+          "accessoryImg": "cabinet-with-bottle-pull-out111_xu5l9c.jpg",
+          "accessoryPrice": "12100",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        }
+      ]
+    },
+    {
+      "moduleId": "1",
+      "moduleName": "Base Unit",
+      "moduleDesc": "Base Unit",
+      "accessoryId": "1",
+      "accessoryCode": "MC37487",
+      "accessoryName": "Base Cabinet with 3 Drawers",
+      "accessoryImg": "cabinet-with-three-drawers_fpshz1.jpg",
+      "accessoryPrice": "7800",
+      "w": "800",
+      "h": "600",
+      "d": "200",
+      "uom": "cm",
+      "alternatives": [
+        {
+          "accessoryId": "2",
+          "accessoryCode": "MC37488",
+          "accessoryName": "Moving Corner Slide",
+          "accessoryImg": "cabinet-with-three-drawers1_vgkbd3.jpg",
+          "accessoryPrice": "8200",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        },
+        {
+          "accessoryId": "2",
+          "accessoryCode": "MC37488",
+          "accessoryName": "Moving Corner Slide",
+          "accessoryImg": "rack_qabmsl.jpg",
+          "accessoryPrice": "11500",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        },
+        {
+          "accessoryId": "2",
+          "accessoryCode": "MC37488",
+          "accessoryName": "Moving Corner Slide",
+          "accessoryImg": "cabinet-with-bottle-pull-out111_xu5l9c.jpg",
+          "accessoryPrice": "7200",
           "w": "800",
           "h": "600",
           "d": "200",
@@ -81,6 +150,20 @@
       "finish": "PU Paint",
       "finishId": "PP",
       "basePrice": "4,20,000"
+    },
+    {
+      "material": "BWR Plywood",
+      "materialId": "PY",
+      "finish": "MDF with Membrane",
+      "finishId": "MM",
+      "basePrice": "3,95,000"
+    },
+    {
+      "material": "BWR Plywood",
+      "materialId": "PY",
+      "finish": "PU Paint",
+      "finishId": "PP",
+      "basePrice": "4,30,000"
     }
   ],
   "fc": [
@@ -124,19 +207,59 @@
   "appliances": [
     {
       "id": "EFB",
-      "name": "Elica Four Burner",
+      "name": "Elica Three Burner",
       "code": "AP100",
       "type": "Hobs",
-      "image": "72364.jpeg",
-      "price": "8,900"
+      "image": "three-burner-cooktop_syaz6y.jpg",
+      "price": "14,900"
     },
     {
       "id": "ETB",
-      "name": "Elica Three Burner",
+      "name": "Elica Auto Two Burner",
       "code": "AP101",
       "type": "Hobs",
-      "image": "72364.jpeg",
+      "image": "2-burner-non-auto-cooktop2_x6hpz2.jpg",
+      "price": "10,990"
+    },
+    {
+      "id": "ETB",
+      "name": "Elica Four Burner",
+      "code": "AP101",
+      "type": "Hobs",
+      "image": "four-burner-cooktop3_xenwzl.jpg",
+      "price": "17,990"
+    },
+    {
+      "id": "ETB",
+      "name": "Alda Hob",
+      "code": "AP101",
+      "type": "Hobs",
+      "image": "alda-hob-bha164_gtplbz.jpg",
+      "price": "14,990"
+    },
+    {
+      "id": "ETB",
+      "name": "Elica 1000",
+      "code": "AP101",
+      "type": "Chimney",
+      "image": "chimney2_bkcc4z.jpg",
       "price": "9,990"
+    },
+    {
+      "id": "ETB",
+      "name": "Elica 1200",
+      "code": "AP101",
+      "type": "Chimney",
+      "image": "chimney1_hrvmdq.jpg",
+      "price": "14,990"
+    },
+    {
+      "id": "ETB",
+      "name": "Elica 1100",
+      "code": "AP101",
+      "type": "Chimney",
+      "image": "chimney_ff0o46.jpg",
+      "price": "12,990"
     }
   ]
 }

@@ -34,6 +34,36 @@
         left: 65% !important;
         margin-top: 1px !important;
     }
+
+}
+
+@media (max-width: 767px) {
+    .heading-price {
+        float: left !important;
+    }
+}
+
+.color-ul {
+    padding-left: 0px;
+}
+
+.color-li-first {
+    margin-left: 0px !important;
+}
+
+.product-heading {
+    z-index: 999;
+    margin: 16px 0px;
+}
+
+.heading-price {
+    float: right;
+    white-space: nowrap;
+}
+
+.absolute-float-left {
+    display: absolute;
+    float: left;
 }
 
 .carousel-inner {
@@ -113,6 +143,10 @@ h6 {
     -webkit-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
+}
+
+.bg-lightest-gray {
+    background-color: #f2f4f4;
 }
 
 .bg-light-gray {
@@ -783,6 +817,10 @@ button {
     padding: 5px 10px 5px 35px;
 }
 
+.padding20_0_10_0 {
+    padding: 20px 0 10px 0;
+}
+
 .padding0 {
     padding: 0px;
 }
@@ -798,6 +836,14 @@ button {
 
 .margin_auto {
     margin: auto;
+}
+
+.margin0-10 {
+    margin: 0 10px;
+}
+
+.margin-left-0 {
+    margin-left: 0px !important;
 }
 
 .margin-bottom20 {
@@ -1142,7 +1188,7 @@ section h3.section-subheading {
 
 .button:hover {
     color: #f1591f;
-    border: 2px solid #f1591f;
+    border-color: #f1591f;
 }
 
 .button:active {
@@ -1854,6 +1900,10 @@ aside.clients img {
     margin: 50px auto;
 }
 
+.top-section {
+    padding-top: 70px;
+}
+
 section#contact {
     background-color: #222;
     background-image: url(../img/map-image.png);
@@ -2155,12 +2205,6 @@ body {
 
 /* Changes done by Smruti */
 
-h1.product-title{
-    font-family: "Open Sans",sans-serif;
-    font-weight:300;
-    text-transform: none;
-}
-
 .portfolio-item {
     margin-bottom: 25px;
 }
@@ -2393,21 +2437,16 @@ hr {
 
 /* color section */
     .color-rounds{
-        float:left;
-        margin-left:2%;
-        border: 0px solid #000;
-        height:35px;
-        width:35px;
-        border-radius:100%;
-        position:relative;
+        margin-left: 10px;
+        height: 35px;
+        width: 35px;
+        border-radius: 20%;
+        list-style: none;
+        display: inline-block;
     }
-    .color-section{
-       margin-top: 10%;
-       margin-left: 1%;
-    }
+
     .round-bk1{
         background-color: #269290;
-        //background-image: url('http://static.capriyo.com/Rose__1444378890_Rose-PPU.jpg');
     }
 
     .round-bk2{
@@ -2521,16 +2560,6 @@ hr {
     }
 
 
-   .color-rounds > .glyphicon-remove, .glyphicon-ok{
-    	color:#eee;
-    	font-size:14px;
-    	display:none;
-    	line-height:33px;
-    	text-align:center
-    }
-    .color-rounds:hover > .glyphicon-ok{
-        display:block;
-    }
     .padding-right15{
         padding-right: 15px;
     }
@@ -2553,13 +2582,6 @@ hr {
         font-weight:400!important;
         font-size:16px!important;
     }
-    #product-heading{
-        position: fixed;
-        z-index: 999;
-        width: 85%;
-        background-color: #f7f7f7;
-        margin-top: 40px;
-    }
     .paddingleft50{
         padding-left: 50px;
     }
@@ -2569,21 +2591,44 @@ hr {
     .border1{
         border:1px solid #CCC;
     }
-    .share-btn{
-        padding: 6px 20px;
-    }
     .sortby{
         padding-top: 25px;
         padding-right: 10px;
     }
+
+    .margintop10{
+        margin-top: 10px;
+    }
+    .margintop20{
+        margin-top: 20px;
+    }
+    .margintop40{
+        margin-top: 40px;
+    }
+
     .paddingtop0{
         padding-top: 0px;
     }
     .paddingtop10{
         padding-top: 10px;
     }
+    .paddingtop20{
+        padding-top: 20px;
+    }
     .paddingtop30{
         padding-top: 30px;
+    }
+    .paddingtop40{
+        padding-top: 40px;
+    }
+    .paddingtop60{
+        padding-top: 60px;
+    }
+    .paddingbottom20{
+        padding-top: 20px;
+    }
+    .paddingbottom40{
+        padding-top: 40px;
     }
     .more-lnk{
         color:#4C9ED9;
@@ -2608,6 +2653,18 @@ hr {
 
     .display-none {
         display: none;
+    }
+
+    .display-block {
+        display: block;
+    }
+
+    .display-inline {
+        display: inline;
+    }
+
+    .display-inline-block {
+        display: inline-block;
     }
 
     .error-text {

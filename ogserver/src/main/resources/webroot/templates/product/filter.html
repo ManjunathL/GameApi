@@ -3,12 +3,12 @@
     <% _.each(collection, function(product){ %>
     <div class="row">
         <div class="col-md-7 list-img col-7-img">
-            <a href="#/products_details/<%= product.id %>">
+            <a href="#product/<%= product.id %>">
                 <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
             </a>
             <div id="list-strip" class="font-size16 list-button-strip">
                 <div class="listli">
-                    <a href="#/products_details/<%= product.id %>">
+                    <a href="#product/<%= product.id %>">
                         <span class="glyph fa fa-info list-ico"></span>
                         <span class="list-txt">know more</span>
                     </a>
@@ -61,12 +61,12 @@
     <% _.each(collection, function(product){ %>
     <div class="col-md-6  portfolio-item">
         <div class="list-img">
-            <a href="#/products_details/<%= product.id %>" class="portfolio-link">
+            <a href="#product/<%= product.id %>" class="portfolio-link">
                 <img class="img-responsive shadow-img" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
             </a>
             <div class="font-size16 list-button-strip">
                 <div class="listli">
-                    <a href="#/products_details/<%= product.id %>">
+                    <a href="#product/<%= product.id %>">
                         <span class="glyph fa fa-info list-ico"></span>
                         <span class="list-txt">know more</span>
                     </a>

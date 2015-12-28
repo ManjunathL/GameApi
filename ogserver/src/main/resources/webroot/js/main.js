@@ -6,6 +6,8 @@ require.config({
     lodash: 'libs/lodash/lodash.min',
     backbone: 'libs/backbone/backbone-min',
     text: 'libs/text/text',
+    jqueryeasing: 'libs/jquery.easing/js/jquery.easing.min',
+    sly: 'libs/sly/dist/sly',
     bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
     bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
     firebase: 'libs/firebase/firebase',
@@ -43,5 +45,5 @@ require([
 });
 
 var imgBase = "https://res.cloudinary.com/univermal/image/upload/"; //todo: change the collection name
-var restBase = "https://localhost:8080"; //todo: make this empty for production
+var restBase = "https://192.168.0.164:8080"; //todo: make this empty for production
 var firebaseBase = "https://sweltering-fire-6356.firebaseio.com/";
