@@ -1,15 +1,15 @@
 <section class="bg-white top-section">
     <div class="container">
-        <div class="row product-heading details-heading">
+        <div class="row product-heading details-heading" id="heading-bar">
             <div class="col-sm-10">
-                <h3><span><%= product.name %></span></h3>
+                <h3><span id="prodName"><%= product.name %></span></h3>
             </div>
             <div class="col-sm-2">
-                <h3><span class="heading-price"><i class="fa fa-inr"></i> <%= product.defaultPrice %></span></h3>
+                <h3><span id="prodPrice" class="heading-price"><i class="fa fa-inr"></i> <%= product.defaultPrice %></span></h3>
             </div>
-            <div class="col-xs-12">
-                <hr>
-            </div>
+        </div>
+        <div class="col-xs-12">
+            <hr>
         </div>
 
         <div class="row">
@@ -117,9 +117,9 @@
                     </div>
 
                     <div class="alt1-wrap padding20-0">
-                        <hr width="98%" class="margin_auto">
                         <p style="margin-left: 10px">Alternate Options</p>
-                        <div class="row">
+                        <hr width="98%" class="margin_auto">
+                        <div class="row margintop10">
                             <div class="controls center col-xs-1">
                                 <button class="btn alt1-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
                                 </button>
@@ -513,10 +513,6 @@
                 </a>
             </div>
 
-            <div class="col-lg-12">
-                <hr>
-            </div>
-
         </div>
         <!-- /.row -->
 
@@ -620,14 +616,41 @@
 <script>
 
 var alt1LastIndex = 0;
+var down = true;
 
 $(window).scroll(function () {
+
     var scrollTop = $(window).scrollTop();
+    var headingBar = $("#heading-bar");
+
     if (scrollTop > 0) {
-        $("#product-heading").css("margin-top", "10px");
+        if (down) {
+            $("#heading-bar").fadeOut(300, function() {
+                $("#heading-bar").css("position", "fixed");
+                $("#heading-bar").css("top", "50px");
+                $("#heading-bar").css("background-color", "#FCC476");
+                $("#heading-bar").css("width", "100%");
+                $("#heading-bar").css("left", "50%");
+                $("#heading-bar").css("margin-left", "-50%");
+                $("#prodName").css("font-size", "18px");
+                $("#prodPrice").css("font-size", "18px");
+                $("#heading-bar").fadeIn(600);
+            });
+            down = false;
+        }
     } else {
-        $("#product-heading").css("margin-top", "40px");
+        down = true;
+        $("#heading-bar").fadeOut(10, function() {
+            $("#heading-bar").css("position", "static");
+            $("#heading-bar").css("background-color", "transparent");
+            $("#heading-bar").css("width", "auto");
+            $("#heading-bar").css("margin-left", "auto");
+            $("#prodName").css("font-size", "24px");
+            $("#prodPrice").css("font-size", "24px");
+            $("#heading-bar").fadeIn(300);
+        });
     }
+
 });
 
     jQuery(function($){
@@ -750,5 +773,6 @@ function toggleColor(element) {
         $(element).css('background', 'rgb(255, 255, 255)');
     }
 }
+
 </script>
 

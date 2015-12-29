@@ -45,5 +45,5 @@ require([
 });
 
 var imgBase = "https://res.cloudinary.com/univermal/image/upload/"; //todo: change the collection name
-var restBase = "https://192.168.0.164:8080"; //todo: make this empty for production
+var restBase = "https://localhost:8080"; //todo: make this empty for production
 var firebaseBase = "https://sweltering-fire-6356.firebaseio.com/";
