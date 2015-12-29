@@ -10,20 +10,16 @@
                 <div class="listli">
                     <a href="#product/<%= product.id %>">
                         <span class="glyph fa fa-info list-ico"></span>
-                        <span class="list-txt">know more</span>
                     </a>
                 </div>
                 <div class="listli li-spc">
                     <a href="javascript:void(0);">
                         <span class="fa fa-heart-o list-heart list-ico"></span>
-                        <span class="list-txt">shortlist</span>
                     </a>
                 </div>
                 <div class="listli">
                     <a href="javascript:void(0);" >
-                        <span class="glyph fa fa-share list-ico"></span>
-                        <span class="list-txt">share</span>
-                    </a>
+                        <span class="glyph fa fa-share list-ico"></span></a>
                 </div>
             </div>
         </div>
@@ -59,46 +55,55 @@
 </div>
 <div class="row grid-view">
     <% _.each(collection, function(product){ %>
-    <div class="col-md-6  portfolio-item">
-        <div class="list-img">
-            <a href="#product/<%= product.id %>" class="portfolio-link">
-                <img class="img-responsive shadow-img" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
-            </a>
-            <div class="font-size16 list-button-strip">
-                <div class="listli">
-                    <a href="#product/<%= product.id %>">
-                        <span class="glyph fa fa-info list-ico"></span>
-                        <span class="list-txt">know more</span>
+
+    <div class="portfolio">
+        <div class="col-md-6 col-sm-6 portfolio-item">
+            <div class="portfolio-box">
+                <div class="row margin0 position-relative">
+                    <a href="#product/<%= product.id %>" class="portfolio-link">
+                        <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
                     </a>
-                </div>
-                <div class="listli li-spc">
-                    <a href="javascript:void(0);">
-                        <span class="fa fa-heart-o list-heart list-ico"></span>
-                        <span class="list-txt">shortlist</span>
-                    </a>
-                </div>
-                <div class="listli">
-                    <a href="javascript:void(0);" >
-                        <span class="glyph fa fa-share list-ico"></span>
-                        <div class="list-txt">
-                            <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
-                            <span class='st_facebook'></span>
-                            <span class='st_twitter'></span>
-                            <span class='st_pinterest'></span>
-                            <!--<span class='st_linkedin'></span>-->
-                            <!--<span class='st_sharethis'></span>-->
-                            <!---->
-                            <!--<span class='st_email'></span>-->
+                    <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
+                        <div class="listli">
+                            <a href="#product/<%= product.id %>">
+                                <span class="glyph fa fa-info"></span>
+                                <!--<span class="list-txt">know more</span>-->
+                            </a>
                         </div>
-                    </a>
+                        <div class="listli">
+                            <a href="javascript:void(0);">
+                                <span class="list-heart fa fa-heart-o"></span>
+                                <span class="list-txt">shortlist</span>
+                            </a>
+                        </div>
+                        <div class="listli">
+                            <a href="javascript:void(0);" >
+                                <span class="glyph fa fa-share"></span>
+                                <div class="list-txt">
+                                    <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
+                                    <span class='st_facebook'></span>
+                                    <span class='st_twitter'></span>
+                                    <span class='st_pinterest'></span>
+                                    <!--<span class='st_linkedin'></span>-->
+                                    <!--<span class='st_sharethis'></span>-->
+                                    <!---->
+                                    <!--<span class='st_email'></span>-->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-caption margin0">
+                    <div class="row">
+                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left"><%= product.name %></h4>
+                        <h4 class="col-md-4 col-sm4 col-xs-4 align-right">&#8377;<%= product.defaultPrice %>/-</h4>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <div class="col-md-8 align-left image-meta-title"><span class="img-titl"><%= product.name %></span></div>
-            <div class="col-md-4 align-right image-meta-title">&#8377;<%= product.defaultPrice %>/-</div>
-        </div>
     </div>
+
     <% }); %>
 </div>
 <!--<script type="text/javascript">var switchTo5x=true;</script>-->
