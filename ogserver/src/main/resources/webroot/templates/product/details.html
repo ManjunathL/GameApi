@@ -19,7 +19,7 @@
                      alt="<%= product.name %>" class="width100">
             </div>
 
-            <div class="col-md-4 bg-lightest-gray">
+            <div class="col-md-4 bg-light-gray">
                 <div class="wrap">
                     <div class="row">
 
@@ -66,7 +66,7 @@
                 <h3 class="details-heading">Customize your Product</h3>
                 <hr>
             </div>
-            <div class="col-sm-6 paddingtop20 bg-lightest-gray margintop10">
+            <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
                 <label id="chooseMaterial">Choose Material:</label>
                 <div class="width100 list-group paddingtop20" aria-labelledby="chooseMaterial">
                     <% _.each (materials, function(material) { %>
@@ -74,7 +74,7 @@
                     <% }); %>
                 </div>
             </div>
-            <div class="col-sm-6 paddingtop20 bg-lightest-gray margintop10">
+            <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
                 <label id="chooseFinish">Choose Finish:</label>
                 <div class="width100 list-group paddingtop20" aria-labelledby="chooseFinish">
                     <% _.each (finishes, function(finish) { %>
@@ -82,7 +82,7 @@
                     <% }); %>
                 </div>
             </div>
-            <div class="col-xs-12 paddingtop20 bg-lightest-gray margintop20">
+            <div class="col-xs-12 paddingtop20 bg-light-gray margintop20">
                 <label id="colors">Available in Colors:</label>
                 <ul class="paddingtop10 color-ul">
                     <li class="color-rounds round-bk1 color-li-first"></li>
@@ -95,12 +95,12 @@
             </div>
         </div>
 
-        <div class="row margin-left-0 bg-lightest-gray margintop20 paddingtop20">
+        <div class="row margin-left-0 bg-light-gray margintop20 paddingtop20">
             <div class="col-xs-12">
                 <label>Included Accessories</label>
             </div>
         </div>
-        <div class="row margin-left-0 bg-lightest-gray paddingtop10">
+        <div class="row margin-left-0 bg-light-gray paddingtop10">
             <% _.each (product.accessories, function(accessory) { %>
             <div class="col-md-6 col-sm-6 portfolio-item">
                 <div class="portfolio-box bg-white width100">
@@ -145,7 +145,7 @@
             <% }); %>
         </div>
 
-        <div class="row margin-left-0 bg-lightest-gray" style="padding-top: 20px; margin-top: 20px;">
+        <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
             <div class="col-xs-12" style="padding-bottom: 10px">
                 <label>Choose Appliances</label>
             </div>
@@ -628,7 +628,8 @@ $(window).scroll(function () {
             $("#heading-bar").fadeOut(300, function() {
                 $("#heading-bar").css("position", "fixed");
                 $("#heading-bar").css("top", "50px");
-                $("#heading-bar").css("background-color", "#FCC476");
+                $("#heading-bar").css("background-color", "#FFFFFF");
+                $("#heading-bar").toggleClass("portfolio-box");
                 $("#heading-bar").css("width", "100%");
                 $("#heading-bar").css("left", "50%");
                 $("#heading-bar").css("margin-left", "-50%");
@@ -647,6 +648,7 @@ $(window).scroll(function () {
             $("#heading-bar").css("margin-left", "auto");
             $("#prodName").css("font-size", "24px");
             $("#prodPrice").css("font-size", "24px");
+            $("#heading-bar").toggleClass("portfolio-box");
             $("#heading-bar").fadeIn(300);
         });
     }
