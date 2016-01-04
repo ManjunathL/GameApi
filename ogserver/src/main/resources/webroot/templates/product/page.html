@@ -4,15 +4,15 @@
         <img src="img/kitchen-category-banner.jpg" class="img-responsive" alt="">
     </div>
 
-    <div class="container-fluid bg-white">
+    <div class="container-fluid bg-white" id="filter-desc-container">
         <div class="container">
 
-            <div class="row padding20-0">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-7">
+            <div class="row padding20-0" id="filter-desc">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="design-count margin0"><%= collection.length %> Designs Found</div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                <div class="col-lg-9 col-md-9 col-sm-6 hidden-xs">
                     <div id="filtered-list" class="padding8">
                         <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
                         <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
@@ -26,108 +26,142 @@
                         <% }); %>
                         <% } %>
 
-                        <% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>
-                        <span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>
+                        <!--<% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>-->
+                        <!--<span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>-->
+                        <!--<% } %>-->
+                        <% if (filter.selectedSubCategoriesName != '' && filter.subcategoryIds != '') {%>
+                        <span class="tag-card color-orange" onclick="removeAllFilters()">Clear All</span>
                         <% } %>
-
-                        <span class="tag-card color-orange" onclick="showFiltersection();">More</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-5 align-right">
-                    <span class="button-filter" onclick="showFiltersection();">Filter&nbsp;<span class="fa fa-chevron-down"></span></span>
+        </div>
+    </div>
+    <div class="container-fluid portfolio-box bg-white" id="filter-choose-container">
+        <div class="container">
+
+            <div class="row padding10-0" id="filter-choose">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
+                    <h4>Filters:</h4>
+                </div>
+                <div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
+                    <ul class="filters">
+
+                        <% if(typeof(subcategoriesList) !== 'undefined'){ %>
+                        <li class="padding0-20">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_subcat"
+                                    data-toggle="dropdown">
+                                Sub Category
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
+                                <% _.each(subcategoriesList, function(subcat){ %>
+
+                                <li class="subcategorycls
+                                <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
+                                <% if(subcat.name == subcatname){ %> noclick <% } %>
+                                <% }); %>
+                                <% } %>"
+                                id="<%= subcat.id %>"
+                                title="<%= subcat.name %>"
+                                onclick="getsubcategoryId(this.id,this.title)">
+                                    <a><%= subcat.name %></a>
+                                </li>
+                                <% }); %>
+                            </ul>
+                        </li>
+                        <% } %>
+
+                        <li class="padding0-20">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_pricerange"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="true">
+                                Price Range
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
+                                <li>
+                                    <a href="#">Standard</a>
+                                </li>
+                                <li>
+                                    <a href="#">Premium</a>
+                                </li>
+                                <li>
+                                    <a href="#">Luxury</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="padding0-20">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_style"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="true">
+                                Style
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
+                                <li>
+                                    <a href="#">Contemporary</a>
+                                </li>
+                                <li>
+                                    <a href="#">Classic</a>
+                                </li>
+                                <li>
+                                    <a href="#">Modern</a>
+                                </li>
+                                <li>
+                                    <a href="#">Eclectic</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs align-right">
+
+                    <span>
+                        <a
+                                class="dropdown-toggle"
+                                id="dropdownMenu_sort"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="true">
+                            Sort By
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
+                            <li class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc" onclick="setSorting(this.id,this.rel);">Popular</a></li>
+                            <li class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc" onclick="setSorting(this.id,this.rel);">Relevance</a></li>
+                                <li class="sort-list">
+                                    <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>" onclick="setSorting(this.id,this.rel);">
+                                        Price
+                                        <% if (filter.sortDir === 'desc') { %>
+                                        <span class="pe-7s-angle-down sort-arrow"></span>
+                                        <% } else if (filter.sortDir === 'asc') { %>
+                                        <span class="pe-7s-angle-up sort-arrow"></span>
+                                        <% } %>
+                                    </a>
+                                </li>
+                        </ul>
+                    </span>
                     <span class="glyphicon glyphicon-th-list view-select border-right0"></span><%
                     %><span class="glyphicon glyphicon-th-large view-select border-right0 active"></span><%
                     %><span class="glyphicon glyphicon-th view-select"></span>
                 </div>
             </div>
 
-            <div class="row filter-section" id="filter-section">
-                <div class="col-lg-8 col-md-8 col-sm-8">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            Sub-Categories
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <% if(typeof(subcategoriesList) !== 'undefined'){ var count = 0; %>
-                            <% _.each(subcategoriesList, function(subcat){ %>
-                            <% if(count == 0) { %>
-                            <div class="row margin-bottom15">
-                                <% } %>
-                                        <span
-                                                class="subcategorycls tag-card
-                                            <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
-                                            <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
-                                            <% if(subcat.name == subcatname){ %> noclick <% } %>
-                                            <% }); %>
-                                            <% } %>"
-                                                id="<%= subcat.id %>"
-                                                title="<%= subcat.name %>"
-                                                onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>
-                                        </span>
-                                <% count ++; if(count == 3) { %></div><% count = 0; } %>
-                            <% }); %>
-                            <% } %>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            Price Range
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <span class="tag-card">Standard</span>
-                            <span class="tag-card">Premium</span>
-                            <span class="tag-card">Luxury</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="row font-size12">
-                        Sort By:
-                        <span class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc" onclick="setSorting(this.id,this.rel);">Popular</a></span>
-                        <span class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc" onclick="setSorting(this.id,this.rel);">Relevance</a></span>
-                                <span class="sort-list">
-                                    <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>" onclick="setSorting(this.id,this.rel);">
-                                        Price
-                                        <% if (filter.sortDir === 'desc') { %>
-                                        <span class="fa fa-sort-amount-desc fa-md"></span>
-                                        <% } else if (filter.sortDir === 'asc') { %>
-                                        <span class="fa fa-sort-amount-asc fa-md"></span>
-                                        <% } %>
-                                    </a>
-                                </span>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
-    <!--<div class="row">-->
-    <!--<div class="fname col-md-2"></div>-->
-    <!--<div id="subcategory" class="filter-list col-md-10">-->
-    <!--<div class="btn-group">-->
-    <!--<% if(typeof(subcategoriesList) !== 'undefined'){ %>-->
-    <!--<% _.each(subcategoriesList, function(subcat){ %>-->
 
-    <!--<span-->
-    <!--class="subcategorycls font-size14 tag-card-->
-    <!--<% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>-->
-    <!--<% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>-->
-    <!--<% if(subcat.name == subcatname){ %> noclick <% } %>-->
-    <!--<% }); %>-->
-    <!--<% } %>"-->
-    <!--id="<%= subcat.id %>"-->
-    <!--title="<%= subcat.name %>"-->
-    <!--onclick="getsubcategoryId(this.id,this.title)"><%= subcat.name %>-->
-    <!--</span>-->
-
-    <!--<% }); %>-->
-    <!--<% } %>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
     <!--<div class="row filter-group">-->
     <!--<div class="fname col-md-2">Price</div>-->
     <!--<div class="filter-list col-md-10">-->
@@ -154,20 +188,21 @@
 <script>
     $(document).ready(function(){
 
-        var flg = filter.get('filterflag');
-        if(flg == 1){
-            $('#filter-section').show();
-            $('#filtered-list').hide();
-        }
-
-        var offset = 100;
+        var offset = 200;
         var duration = 500;
         $(window).scroll(function() {
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
+                $('#filter-desc-container').addClass('stick').css({'top' : '70px'});
+                $('#filter-desc').animate({'padding' : '5px 0px'});
+                $('#filter-choose-container').slideUp();
             } else {
                 $('.back-to-top').fadeOut(duration);
+                $('#filter-desc-container').removeClass('stick');
+                $('#filter-desc').animate({'padding' : '20px 0px'});
+                $('#filter-choose-container').removeClass('stick').slideDown();
             }
+
         });
 
         $('.back-to-top').click(function(event) {
@@ -176,18 +211,17 @@
             return false;
         });
 
-//        $('.portfolio-link').hover(function(){
-//            var over = $(this).find('.image-meta');
-//            var h = $(this).find('h2');
-//            var txt = $(this).find('.image-text');
-//            over.fadeIn('slow');
-//            h.animate({bottom: '10%'});
-//            txt.animate({bottom: '20%'});
-//        }, function(){
-//            $('.image-meta').fadeOut('fast');
-//            $('h2').css('bottom','0');
-//            $('.image-text').css('bottom','0');
-//        });
+        $('#filter-desc-container').hover(function() {
+            $('#filter-choose-container').addClass('stick').css({'top' : '115px'}).slideDown();
+        },function() {
+            $('#filter-choose-container').slideUp();
+        });
+
+        $('#filter-choose-container').hover(function(){
+            $(this).css('display','block');
+        }, function(){
+            $(this).slideUp();
+        });
 
         $("#wish").click(function() {
             if($(this).hasClass('glyphicon-heart')){
@@ -207,6 +241,7 @@
             $('.glyphicon-th-full').removeClass('active');
             $('.grid-view').css ('display','block');
             $('.list-view').css('display','none');
+            $('.listli').css('padding','10px 0px');
             $('h2').css('font-size','20px');
             $('.img-titl').css('font-size','15px');
             $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');
@@ -220,6 +255,7 @@
             $('.glyphicon-th-full').removeClass('active');
             $('.grid-view').css ('display','block');
             $('.list-view').css('display','none');
+            $('.listli').css('padding','10px');
             $('h2').css('font-size','30px');
             $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
             $('.image-meta').css({'padding-top':'18%', 'padding-right':'5%', 'padding-bottom':'5%;'});
@@ -239,20 +275,6 @@
             $('.dimsn').css('display','block');
         });
 
-        $('.glyphicon-th-full').click(function() {
-            $(this).addClass('active');
-            $('.glyphicon-th-large').removeClass('active');
-            $('.glyphicon-th').removeClass('active');
-            $('.glyphicon-th-list').removeClass('active');
-            $('.grid-view').css ('display','none');
-            $('.list-view').css('display','block');
-            $('.col-7-img').removeClass('col-md-7').addClass('col-md-12');
-            $('.col-5-txt').removeClass('col-md-5').addClass('col-md-12');
-            $('h2').css('font-size','25px');
-            $('.col-5-txt').css('padding-top','20px');
-            $('.dimsn').css('display','none');
-
-        });
     });
     /* Subcategory filter */
 
@@ -284,6 +306,19 @@
         }
     }
 
+    function removeAllFilters(){
+        var subcatnmArr = filter.get('selectedSubCategoriesName');
+        var subcatIdArr = filter.get('subcategoryIds');
+
+        subcatnmArr.splice(0,subcatnmArr.length);
+        subcatIdArr.splice(0,subcatIdArr.length);
+
+        //alert(subcatIdArr+' ------ '+subcatnmArr);
+        filter.set({'subcategoryIds':subcatIdArr});
+        filter.set({'selectedSubCategoriesName':subcatnmArr});
+        filter.trigger('change');
+    }
+
     function setSorting(sortBy,sortDir){
         //alert(sortBy+" ========== "+sortDir);
         if(sortBy && sortDir){
@@ -301,44 +336,41 @@
     }
 </script>
 <script>
-    $(function() {
-        //alert(filter.get('minPrice')+" ======== "+filter.get('maxPrice'));
-        if(filter.get('minPrice') || filter.get('maxPrice')){
-            var mnprc = filter.get('minPrice');
-            var mxprc = filter.get('maxPrice');
-        }else{
-            var mnprc = filter.get('minPriceLimit');
-            var mxprc = filter.get('maxPriceLimit');
-        }
+//    $(function() {
+//        //alert(filter.get('minPrice')+" ======== "+filter.get('maxPrice'));
+//        if(filter.get('minPrice') || filter.get('maxPrice')){
+//            var mnprc = filter.get('minPrice');
+//            var mxprc = filter.get('maxPrice');
+//        }else{
+//            var mnprc = filter.get('minPriceLimit');
+//            var mxprc = filter.get('maxPriceLimit');
+//        }
+//
+//        $( "#slider-range" ).slider({
+//            range: true,
+//            min: filter.get('minPriceLimit'),
+//            max: filter.get('maxPriceLimit'),
+//            values: [ mnprc, mxprc ],
+//            slide: function( event, ui ) {
+//                $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+//            }
+//        });
+//
+//        $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
+//                " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
+//
+//        $( "#slider-range" ).mouseleave(function() {
+//            //alert($( "#slider-range" ).slider( "values", 0 ) + '-----------' + $( "#slider-range" ).slider( "values", 1 ));
+//
+//            filter.set('minPrice',$( "#slider-range" ).slider( "values", 0 ));
+//            filter.set('maxPrice',$( "#slider-range" ).slider( "values", 1 ));
+//        });
+//    });
+//    function removePrice(){
+//        filter.set('minPrice',filter.get('minPriceLimit'));
+//        filter.set('maxPrice',filter.get('maxPriceLimit'));
+//    }
 
-        $( "#slider-range" ).slider({
-            range: true,
-            min: filter.get('minPriceLimit'),
-            max: filter.get('maxPriceLimit'),
-            values: [ mnprc, mxprc ],
-            slide: function( event, ui ) {
-                $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-            }
-        });
-
-        $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
-                " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
-
-        $( "#slider-range" ).mouseleave(function() {
-            //alert($( "#slider-range" ).slider( "values", 0 ) + '-----------' + $( "#slider-range" ).slider( "values", 1 ));
-
-            filter.set('minPrice',$( "#slider-range" ).slider( "values", 0 ));
-            filter.set('maxPrice',$( "#slider-range" ).slider( "values", 1 ));
-        });
-    });
-    function removePrice(){
-        filter.set('minPrice',filter.get('minPriceLimit'));
-        filter.set('maxPrice',filter.get('maxPriceLimit'));
-    }
-    function showFiltersection(){
-        $('#filter-section').slideToggle();
-        $('#filtered-list').toggle();
-    }
 </script>
 
 <!--Facebook share code-->
