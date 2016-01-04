@@ -2,9 +2,9 @@
     <% if(typeof(collection) !== 'undefined'){ %>
     <% _.each(collection, function(product){ %>
 
-    <div class="row bg-white margin-bottom40 list-view-box">
+    <div class="row bg-white margin-bottom40 portfolio-box overflow-hidden">
         <div class="col-md-7 list-img col-7-img">
-            <div class="row margin15-0 position-relative">
+            <div class="row margin15-0 position-relative overflow-hidden">
 
                 <a href="#product/<%= product.id %>">
                     <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
@@ -77,7 +77,7 @@
 
     <div class="portfolio">
         <div class="col-md-6 col-sm-6 portfolio-item">
-            <div class="portfolio-box">
+            <div class="portfolio-box overflow-hidden">
                 <div class="row margin0 position-relative">
                     <a href="#product/<%= product.id %>" class="portfolio-link">
                         <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
