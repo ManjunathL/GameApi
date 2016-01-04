@@ -7,7 +7,7 @@
     <div class="container-fluid bg-white" id="filter-desc-container">
         <div class="container">
 
-            <div class="row padding20-0" id="filter-desc">
+            <div class="row padding20-0 filter-desc-col" id="filter-desc">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="design-count margin0"><%= collection.length %> Designs Found</div>
                 </div>
@@ -194,16 +194,19 @@
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
                 $('#filter-desc-container').addClass('stick').css({'top' : '70px'});
-                $('#filter-desc').animate({'padding' : '5px 0px'});
+                $('#filter-desc').css({'padding' : '5px 0px'});
+                $('.filter-desc-col').addClass('stick-tag');
                 $('#filter-choose-container').slideUp();
             } else {
                 $('.back-to-top').fadeOut(duration);
                 $('#filter-desc-container').removeClass('stick');
-                $('#filter-desc').animate({'padding' : '20px 0px'});
+                $('#filter-desc').css({'padding' : '20px 0px'});
+                $('.filter-desc-col').removeClass('stick-tag');
                 $('#filter-choose-container').removeClass('stick').slideDown();
             }
 
         });
+
 
         $('.back-to-top').click(function(event) {
             event.preventDefault();
@@ -211,16 +214,13 @@
             return false;
         });
 
-        $('#filter-desc-container').hover(function() {
-            $('#filter-choose-container').addClass('stick').css({'top' : '115px'}).slideDown();
-        },function() {
-            $('#filter-choose-container').slideUp();
+        $('#filter-desc-container').on('mouseenter','.stick-tag', function() {
+            $('#filter-choose-container').addClass('stick').animate({'top' : '115px'},500);
+            $('#filter-choose-container').css('display','block');
         });
 
         $('#filter-choose-container').hover(function(){
             $(this).css('display','block');
-        }, function(){
-            $(this).slideUp();
         });
 
         $("#wish").click(function() {
@@ -243,6 +243,8 @@
             $('.list-view').css('display','none');
             $('.listli').css('padding','10px 0px');
             $('h2').css('font-size','20px');
+            $('h4').css('font-size','15px');
+            $('.portfolio-caption').css('height','82px');
             $('.img-titl').css('font-size','15px');
             $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');
             $('.image-meta').css({'padding-top':'14%', 'padding-right':'5%', 'padding-bottom':'5%;'});
@@ -257,6 +259,7 @@
             $('.list-view').css('display','none');
             $('.listli').css('padding','10px');
             $('h2').css('font-size','30px');
+            $('h4').css('font-size','20px');
             $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
             $('.image-meta').css({'padding-top':'18%', 'padding-right':'5%', 'padding-bottom':'5%;'});
         });
@@ -269,9 +272,9 @@
             $('.grid-view').css ('display','none');
             $('.list-view').css('display','block');
             $('.col-7-img').removeClass('col-md-12').addClass('col-md-7');
-            $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5');
+            $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5').css('padding-top','0px');
             $('h2').css('font-size','25px');
-            $('.col-5-txt').css('padding-top','0px');
+            $('h4').css('font-size','20px');
             $('.dimsn').css('display','block');
         });
 

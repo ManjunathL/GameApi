@@ -73,6 +73,7 @@
 
     .list-heart {
         font-size: 22px !important;
+        padding: 10px 0px !important;
     }
 
     .listli {
@@ -111,7 +112,7 @@
 }
 
 .absolute-float-left {
-    display: absolute;
+    position: absolute;
     float: left;
 }
 
@@ -728,7 +729,7 @@ button {
 }
 
 .view-select.active{
-    color: #b3b3b3;
+    color: #808080;
     -moz-box-shadow:    inset 0 0 10px #e6e6e6;
     -webkit-box-shadow: inset 0 0 10px #e6e6e6;
     box-shadow:         inset 0 0 10px #e6e6e6;
@@ -739,7 +740,7 @@ button {
     -moz-box-shadow:    inset 0 0 10px #e6e6e6;
     -webkit-box-shadow: inset 0 0 10px #e6e6e6;
     box-shadow:         inset 0 0 10px #e6e6e6;
-    color:#b3b3b3;
+    color: #808080;
 }
 
 .color-orange{
@@ -835,6 +836,10 @@ button {
 
 .left-none {
     left: auto !important;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }
 
 .position-relative {
@@ -971,10 +976,8 @@ button {
 }
 
 .design-count {
-    /*font-family: "Open Sans",sans-serif;*/
-    /*font-weight: 300;*/
     text-transform: none;
-    font-size: 26px;
+    font-size: 25px;
 }
 
 .intro-icon {
@@ -1017,7 +1020,7 @@ input[type=checkbox] {
 
 @media (max-width: 991px) {
     .portfolio-box .list-button-strip{
-        display:block;
+        right: 0px !important;
     }
 }
 
@@ -1094,6 +1097,8 @@ input[type=checkbox] {
     position: fixed;
     z-index: 999;
     width: 100%;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.5s;
 }
 
 .sort-arrow {
@@ -1214,12 +1219,11 @@ section h3.section-subheading {
 
 .list-heading-col5 h2{
     font-size:22px !important;
-    font-family: "Open Sans", sans-serif;
-        font-weight: 400;
-        color: #000;
-        text-transform: none !important;
-        display: inline-block;
-        margin-top: 0px;
+    font-weight: 400;
+    color: #000;
+    text-transform: none !important;
+    display: inline-block;
+    margin-top: 0px;
 }
 
 
@@ -1238,7 +1242,6 @@ section h3.section-subheading {
 }
 
 .cost-col5 {
-    font-family: "Open Sans", sans-serif;
     font-size: 20px;
     font-weight: 400;
     color: #000;
@@ -1394,13 +1397,16 @@ a.button-orange, a.button-orange:hover {
     color: #fff;
     background-color: rgba(0,0,0,0.9);
     position: fixed;
-    right: 0px;
+    right: -800px;
     z-index: 1050;
     overflow: auto;
     padding: 0px 20px;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
-    display: none;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
 }
 
 .signup {
@@ -1555,13 +1561,16 @@ a.button-orange, a.button-orange:hover {
 .list-button-strip {
     position: absolute;
     top: 0px;
-    right: 0px;
+    right: -90px;
     list-style: none;
     padding: 10px;
     background: transparent linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent) repeat scroll 0% 0%;
     height: 100%;
-    display:none;
     font-size: 20px;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
 }
 
 .list-heart{
@@ -1621,11 +1630,8 @@ color: #FFF!important;
 }
 
 .portfolio-box:hover .list-button-strip{
-    display:block;
-}
-
-.list-view-box:hover .list-button-strip{
-    display:block;
+    transition: .5s;
+    right: 0;
 }
 
 .footer-txtbox {
@@ -1652,7 +1658,6 @@ color: #FFF!important;
 }
 
 .dim {
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     color: #000;
 }
@@ -1667,7 +1672,6 @@ color: #FFF!important;
 }
 
 .portfolio .portfolio-item .portfolio-box .portfolio-link {
-    display: block;
     position: relative;
     margin: 0 auto;
     max-width: 585px;
@@ -1709,9 +1713,10 @@ color: #FFF!important;
 }
 
 .portfolio .portfolio-item .portfolio-caption {
-    margin: 0 auto;
+    margin: 0;
     padding: 25px;
-    max-width: 585px;
+    height: 82px;
+    max-width: 100%;
     background-color: #fff;
 }
 
