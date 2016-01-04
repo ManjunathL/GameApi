@@ -728,7 +728,7 @@ button {
 }
 
 .view-select.active{
-    color: #e6e6e6;
+    color: #b3b3b3;
     -moz-box-shadow:    inset 0 0 10px #e6e6e6;
     -webkit-box-shadow: inset 0 0 10px #e6e6e6;
     box-shadow:         inset 0 0 10px #e6e6e6;
@@ -776,6 +776,10 @@ button {
 
 .justify {
     text-align: justify;
+}
+
+.noclick{
+    pointer-events: none;
 }
 
 .font-size9 {
@@ -829,8 +833,16 @@ button {
     float: left;
 }
 
+.left-none {
+    left: auto !important;
+}
+
 .position-relative {
     position: relative;
+}
+
+.padding0-20 {
+    padding: 0px 20px;
 }
 
 .padding10-0 {
@@ -910,6 +922,10 @@ button {
     margin: 0 10px;
 }
 
+.margin15-0 {
+    margin: 15px 0px;
+}
+
 .margin-left-0 {
     margin-left: 0px !important;
 }
@@ -935,7 +951,7 @@ button {
 }
 
 .margin-top40 {
-    margin-top: 40px;
+    margin-top: 40px !important;
 }
 
 .margin-top70 {
@@ -1074,6 +1090,17 @@ input[type=checkbox] {
     right: 0px;
 }
 
+.stick {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+}
+
+.sort-arrow {
+    font-size: 22px;
+    vertical-align: bottom;
+}
+
 .back-to-top {
     display: none;
     font-size: 20px;
@@ -1198,10 +1225,6 @@ section h3.section-subheading {
 
 .list-view {
     display: none;
-}
-
-.list-view.row .row {
-    padding-bottom: 40px;
 }
 
 .cost {
@@ -1348,13 +1371,13 @@ a.button-orange, a.button-orange:hover {
 
 .filters li {
     display: inline-block;
-    padding: 0px 20px;
     text-transform: uppercase;
     cursor: pointer;
 }
 
 .filters li ul li {
     text-transform: none !important;
+    display: block;
 }
 
 
@@ -1598,6 +1621,10 @@ color: #FFF!important;
 }
 
 .portfolio-box:hover .list-button-strip{
+    display:block;
+}
+
+.list-view-box:hover .list-button-strip{
     display:block;
 }
 
@@ -2759,9 +2786,7 @@ hr {
         }
 */
     }
-    .noclick{
-     pointer-events: none;
-    }
+
     .sort-list a{
         padding-left:2%;
         color:#000;
