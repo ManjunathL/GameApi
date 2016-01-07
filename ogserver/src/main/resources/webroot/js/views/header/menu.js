@@ -10,8 +10,9 @@ define([
     'collections/users',
     'models/userShortList',
     'models/autoSearch',
-    'models/preSearch'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, Firebase, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch) {
+    'models/preSearch',
+    'views/header/menu_helper'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, Firebase, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch, menuHelper) {
     var HeaderMenuView = Backbone.View.extend({
         users: new Users(),
         categories: new Categories(),
@@ -61,6 +62,7 @@ define([
                                 "p_srch": that.pre_search.toJSON(),
                                 "a_srch": that.auto_search.toJSON()
                             }));
+                            menuHelper.ready(that);
                         },
                         error: function() {
                             console.log("error in fetching user pre_search data");
@@ -72,6 +74,7 @@ define([
                 }
             });
         },
+        events: {},
         initialize: function() {
             this.users.on("add", this.render, this);
             this.users.on("reset", this.render, this);

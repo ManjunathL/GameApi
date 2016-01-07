@@ -6,8 +6,9 @@ define([
     'sly',
     'jqueryeasing',
     'text!templates/product/details.html',
+    'text!views/product/details_helper.js',
     'models/product'
-], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, ProductModel) {
+], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         product: new ProductModel(),
@@ -33,6 +34,12 @@ define([
                 "finishes": _.uniq(_.pluck(that.product.get('mf'), 'finish')),
                 "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type'))
             }));
+
+            var compiledJsTemplate = _.template(helperJsTemplate);
+            $(this.el).append(compiledJsTemplate({
+                "product": that.product.toJSON()
+            }));
+
         },
         material: function(mf) { return mf.material; },
         finish: function(mf) { return mf.finish; }
