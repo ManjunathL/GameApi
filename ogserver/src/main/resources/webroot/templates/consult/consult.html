@@ -1,156 +1,97 @@
 <section>
     <div class="container">
-        <!--<h1>Consult</h1>-->
-        <!--<img src="img/consult.png"/>-->
+        <div class="row" style="margin-top: 150px; padding-bottom: 100px;">
 
-        <div class="row" style="margin-top: 100px; padding-bottom:100px;">
+            <div class="col-md-6 align-center">
+                <div class="row width85 margin_auto">
+                    <p id="form-heading" class="font-size22">We would love to hear from you. Get in <font color="#F1591F">touch</font> to
+                        discover what we can do for you.</p>
 
-            <div class="col-md-6 margin_auto" style="height: 450px;">
-                <div class="row">
-                    <img src="img/consult/envelope_cover_in.png">
-                    <img class="envelopeIn" src="img/consult/envelope_in.png">
-                    <div class="letterWrapper" style="top: 68px;">
-                        <div class="letter">
-                            <div class="position-absolute">
-                                <img src="img/consult/letter.png">
+                    <div class="row display-none" id="contact_error_row">
+                        <p class="margin0 error-text align-center" id="contact_error"></p>
+                    </div>
 
-                                <div class="shape"></div>
+                    <form id="contactForm1" name="consultData" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Name*"
+                                       id="contact_full_name1" name="fullName" value="<%=userProfile ? userProfile.displayName : ''%>" required/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
                             </div>
-                            <div class="letterContent">
-                                <div class="margin-bottom15">Dear MyGubbi...</div>
-                                <div class="lineWrapper">
-                                    <div class="line">
-                                        <div class="text">My name is&nbsp;</div>
-                                        <div class="text textFillWidth">
-                                            <div class="textContentWrapper">
-                                                <input spellcheck="false" type="text" name="name" value="">
-                                                <div class="underline"></div>
-                                                <div class="exclamationMark" style="display: none;">
-                                                    <img src="img/consult/exclamation_mark.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text">, u can mail</div>
-                                    </div>
-                                </div>
-                                <div class="lineWrapper mailFromContainer handwrittenFont">
-                                    <div class="line">
-                                        <div class="text">me back at&nbsp;</div>
-                                        <div class="text textFillWidth">
-                                            <div class="textContentWrapper">
-                                                <input class="handwrittenFont" spellcheck="false" type="text"
-                                                       name="name" value="">
+                            <div class="margin-bottom20 form-group">
+                                <input type="email" class="width100 form-control" placeholder="Email*"
+                                       id="contact_email_id1" name="email" value="<%=userProfile ? userProfile.email : ''%>" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
 
-                                                <div class="underline"></div>
-                                                <div class="exclamationMark" style="display: none;">
-                                                    <img src="img/consult/exclamation_mark.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text">. I would like to:</div>
-                                    </div>
-                                </div>
-                                <div class="mailContentContainer handwrittenFont">
-                                            <textarea class="handwrittenFont" spellcheck="false"
-                                                      name="content"></textarea>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group has-feedback">
+                                <input type="text" class="width100 form-control" placeholder="Phone Number*"
+                                       id="contact_contact_num1" name="contactNumber" value="<%=userProfile ? userProfile.phone : ''%>" required pattern="\d{10}" title="e.g. 9876543210"/>
 
-                                    <div class="underline"></div>
-                                    <div class="exclamationMark" style="display: none;">
-                                        <img src="img/consult/exclamation_mark.png">
-                                    </div>
-                                    <br>
-
-                                    <div class="underline"></div>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="margin-bottom20 form-group">
+                                    <textarea class="width100 form-control" id="contact_requirement1" name="requirements"
+                                              placeholder="Describe your Requirements / Queries"></textarea>
                                 </div>
                             </div>
-                            <div class="letterForeground">
-                                <div class="mailSendWrapper centerText">
-                                    <div class="mailContainer mailSendContainer">
-                                        <button><span class="text">SEND</span><img
-                                                src="img/consult/arrow_white.png">
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Property Name" name="propertyName" value=""
+                                       id="contact_property_name1"/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
                             </div>
-                            <div class="preWrap"
-                                 style="position: relative; z-index: 100; font-family: Romy; font-size: 21px; letter-spacing: 0px; line-height: 27.3px; width: 339px; visibility: hidden;"></div>
+                            <div class="align-center form-group">
+                                <button
+                                        id="contactus-submit-btn1"
+                                        class="button margin-top20 margin-bottom20"
+                                        type="submit"
+                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
+                                    submit
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <!--
-                                                <div class="letterSending letterStatus centerText">
-                                                   <span class="info handwrittenFont">
-                                                     Sending
-                                                   </span>
-                                                </div>
-                                                <div class="letterSent letterStatus centerText">
-                                                    <span class="info handwrittenFont">
-                                                        You have just made<br>
-                                                        a first step to better future ;)
-                                                    </span>
-                                                    <br>
+                    </form>
 
-                                                    <div class="linkifyForm goBack">
-                                                        <div class="linkLineContainer">
-                                                            <div class="linkLine"></div>
-                                                        </div>
-                                                        <span class="text">Go back</span>
-                                                    </div>
-                                                </div>
-                                                <div class="letterError letterStatus centerText">
-                                   <span class="info handwrittenFont">
-                                     Sorry. World is cruel.<br>
-                                     We could't connect to our server. :(
-                                   </span>
-                                                    <br>
-
-                                                    <div class="linkifyForm goBack">
-                                                        <div class="linkLineContainer">
-                                                            <div class="linkLine"></div>
-                                                        </div>
-                                                        <span class="text">Try again</span>
-                                     <span class="image">
-                                             <img class="out" src="images/page4/go_back_green.png"><img class="over"
-                                                                                                        src="images/page4/go_back_white.png"
-                                                                                                        style="opacity: 0;">
-                                     </span>
-                                                    </div>
-                                                </div>
-                    -->
-                    <div class="envelopeOut">
-                        <img class="envelopeOutTop" src="img/consult/envelope_out_top.png">
-                        <img class="envelopeOutBottom" src="img/consult/envelope_out_bottom.png">
+                    <div id="message-padding" class="display-none margintop100 hidden-xs hidden-sm"></div>
+                    <div id="success-message" class="display-none">
+                        <p class="font-size18">Thank you for contacting My Gubbi. Our team will get back to you as soon as possible.</p>
+                        <p class="font-size16 margintop40">Want to keep Exploring? Click <a href="#products/kitchen/ushapedk">here</a></p>
                     </div>
-                    <!--                 <div class="envelopeCover out"> -->
-                    <!--                   <img src="images/page4/envelope_cover_out.png" /> -->
-                    <!--                 </div> -->
                 </div>
-                <img class="getInTouch" alt="get in touch" src="img/consult/getintouch.png">
             </div>
 
-            <div class="col-md-6 font-size18 paddingtop60">
-                <h2>
+            <div class="col-md-6 font-size18 align-center">
+                <hr>
+                <h3 class="paddingtop10">
                     Contact
-                </h2>
+                </h3>
 
-                <div>
-                    We are open for business. Feel free to drop us a line or send your brief.
-                </div>
                 <div class="paddingtop30">
-                    <a href="mailto:reach@mygubbi.com">
+                    <a href="mailto:reach@mygubbi.com" target="_blank">
                         <div class="fa fa-envelope-o"></div>
                         <span class="text"> reach@mygubbi.com</span>
                     </a>
                 </div>
                 <div class="paddingtop10">
-                    <div class="fa fa-phone"></div>
-                    +91-8088 860 860
+                    <a href="tel:+91-808-886-0860">
+                        <span class="fa fa-phone"></span>
+                        <span class="text">+91-8088-860-860</span>
+                    </a>
                 </div>
+                <div class="padding10-0">
+                    <a href="https://www.google.co.in/maps/place/Orange+Gubbi+technologies/@12.9174948,77.6451492,15z" target="_blank">
+                        <span class="fa fa-map-marker"></span>
+                        <span class="text"> HSR Layout, Bangalore, India</span>
+                    </a>
+                </div>
+                <hr>
                 <div class="paddingtop10">
-                    <div class="fa fa-map-marker"></div>
-                    HSR Layout, Bangalore, India
-                </div>
-                <div class="paddingtop30">
-                    <h2>Social Networks</h2>
+                    <h3>Social Networks</h3>
                 </div>
                 <div class="paddingtop20">
                     <span>

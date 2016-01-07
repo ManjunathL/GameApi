@@ -4,7 +4,6 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'firebase',
     'text!templates/header/menu.html',
     'collections/categories',
     'collections/users',
@@ -12,7 +11,7 @@ define([
     'models/autoSearch',
     'models/preSearch',
     'views/header/menu_helper'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, Firebase, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch, menuHelper) {
+], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch, menuHelper) {
     var HeaderMenuView = Backbone.View.extend({
         users: new Users(),
         categories: new Categories(),

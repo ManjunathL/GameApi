@@ -4,12 +4,10 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'firebase',
-    'baserefs'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, firebase, baseRefs) {
+    'mgfirebase'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF) {
     return {
-        firebaseBase: baseRefs.firebaseBase,
-        ref: new Firebase(baseRefs.firebaseBase),
+        ref: MGF.rootRef,
 
         createUser: function(userId, data, cbk) {
             var that = this;
@@ -31,7 +29,7 @@ define([
         },
 
         getUserProfile: function(uid, authData, handleAuth) {
-            var userProfileRef = new Firebase(this.firebaseBase + "user-profiles/" + uid);
+            var userProfileRef = this.ref.child("user-profiles/" + uid);
             var userProfile = null;
             var that = this;
             userProfileRef.once("value", function(snapshot) {
@@ -44,7 +42,7 @@ define([
         },
 
         onFAuth: function(authData) {
-            if (authData) {
+            if (authData && authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
                 $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                 if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
                     this.getUserProfile(authData.uid, authData, this.handleAuth);
@@ -61,7 +59,6 @@ define([
                 $('#login_error').html("Please tick email, while providing Facebook access.");
                 $('#login_error_row').css("display", "block");
                 this.ref.unauth();
-                //$('#fb-btn').trigger('click');
                 return;
             }
 
@@ -75,7 +72,7 @@ define([
             };
 
             if (authData.provider !== 'password') {
-                var userRef = new Firebase(this.firebaseBase + "users/" + authData.uid);
+                var userRef = this.ref.child("users/" + authData.uid);
                 var that = this;
                 userRef.once("value", function(snapshot) {
                     if (snapshot.exists()) {
@@ -92,6 +89,7 @@ define([
                                 that.setUser(user);
                                 that.createProfile(authData, {
                                     displayName: user.displayName,
+                                    email: user.email,
                                     phone: '',
                                     profileImage: user.profileImage
                                 }, null);
@@ -228,7 +226,7 @@ define([
                     window.signupButton.button('reset');
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
-                    that.ref.offAuth(this.onFAuth);
+                    that.ref.offAuth(that.onFAuth);
                     that.ref.authWithPassword({
                         email: $('#reg_email_id').val(),
                         password: $('#reg_password').val()
@@ -236,6 +234,7 @@ define([
 
                         var profileData = {
                             displayName: $('#reg_full_name').val(),
+                            email: $('#reg_email_id').val(),
                             phone: $('#reg_contact_num').val(),
                             profileImage: authData.password.profileImageURL
                         };
@@ -302,7 +301,6 @@ define([
 
             $(function() {
 
-                //$(document).ready(function() {
                 $('.user').click(function() {
                     that.showUserPop();
                 });

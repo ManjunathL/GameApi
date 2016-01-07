@@ -805,6 +805,9 @@ button {
 .font-size20 {
     font-size: 20px;
 }
+.font-size22 {
+    font-size: 22px;
+}
 
 .font-size30 {
     font-size: 30px;
@@ -2754,9 +2757,15 @@ hr {
     .margintop40{
         margin-top: 40px;
     }
+    .margintop100{
+        margin-top: 100px;
+    }
 
     .paddingtop0{
         padding-top: 0px;
+    }
+    .paddingtop5{
+        padding-top: 5px;
     }
     .paddingtop10{
         padding-top: 10px;
