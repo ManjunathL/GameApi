@@ -32,6 +32,11 @@ require.config({
         deps: ['jquery'],
         exports: 'firebase'
     }
+  },
+  map: {
+    '*': {
+      'css': 'libs/require-css/css'
+    }
   }
 });
 

@@ -3,7 +3,8 @@ define([
   'underscore',
   'backbone',
   'bootstrap',
-  'text!templates/consult/consult.html'
+  'text!templates/consult/consult.html',
+  'css!../../../css/consult'
 ], function($, _, Backbone, Bootstrap, consultTemplate){
   var ConsultView = Backbone.View.extend({
     el: '.page',
