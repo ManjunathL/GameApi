@@ -115,35 +115,3 @@
         <span class="fa fa-chevron-up"></span>
     </a>
 </footer>
-
-<script>
-    $(document).ready(function(){
-
-        var offset = 500;
-        var duration = 500;
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > offset) {
-                $('.back-to-top').fadeIn(duration);
-            } else {
-                $('.back-to-top').fadeOut(duration);
-            }
-        });
-
-        $('.back-to-top').click(function(event) {
-            event.preventDefault();
-            $('html, body').animate({scrollTop: 0}, duration);
-            return false;
-        });
-
-        $("#wish").click(function() {
-            if($(this).hasClass('glyphicon-heart')){
-                $(this).removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
-                $('.super-script').hide();
-            }else{
-                $(this).removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
-                $('.super-script').show();
-            }
-        });
-
-    });
-</script>

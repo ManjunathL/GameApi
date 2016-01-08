@@ -1,6 +1,107 @@
 <section>
     <div class="container">
-        <h1>Consult</h1>
-        <img src="img/consult.png"/>
+        <div class="row" style="margin-top: 150px; padding-bottom: 100px;">
+
+            <div class="col-md-6 align-center">
+                <div class="row width85 margin_auto">
+                    <p id="form-heading" class="font-size22">We would love to hear from you. Get in <font color="#F1591F">touch</font> to
+                        discover what we can do for you.</p>
+
+                    <div class="row display-none" id="contact_error_row">
+                        <p class="margin0 error-text align-center" id="contact_error"></p>
+                    </div>
+
+                    <form id="contactForm1" name="consultData" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Name*"
+                                       id="contact_full_name1" name="fullName" value="<%=userProfile ? userProfile.displayName : ''%>" required/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="email" class="width100 form-control" placeholder="Email*"
+                                       id="contact_email_id1" name="email" value="<%=userProfile ? userProfile.email : ''%>" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group has-feedback">
+                                <input type="text" class="width100 form-control" placeholder="Phone Number*"
+                                       id="contact_contact_num1" name="contactNumber" value="<%=userProfile ? userProfile.phone : ''%>" required pattern="\d{10}" title="e.g. 9876543210"/>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="margin-bottom20 form-group">
+                                    <textarea class="width100 form-control" id="contact_requirement1" name="requirements"
+                                              placeholder="Describe your Requirements / Queries"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Property Name" name="propertyName" value=""
+                                       id="contact_property_name1"/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="align-center form-group">
+                                <button
+                                        id="contactus-submit-btn1"
+                                        class="button margin-top20 margin-bottom20"
+                                        type="submit"
+                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
+                                    submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="message-padding" class="display-none margintop100 hidden-xs hidden-sm"></div>
+                    <div id="success-message" class="display-none">
+                        <p class="font-size18">Thank you for contacting My Gubbi. Our team will get back to you as soon as possible.</p>
+                        <p class="font-size16 margintop40">Want to keep Exploring? Click <a href="#products/kitchen/ushapedk">here</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 font-size18 align-center">
+                <hr>
+                <h3 class="paddingtop10">
+                    Contact
+                </h3>
+
+                <div class="paddingtop30">
+                    <a href="mailto:reach@mygubbi.com" target="_blank">
+                        <div class="fa fa-envelope-o"></div>
+                        <span class="text"> reach@mygubbi.com</span>
+                    </a>
+                </div>
+                <div class="paddingtop10">
+                    <a href="tel:+91-808-886-0860">
+                        <span class="fa fa-phone"></span>
+                        <span class="text">+91-8088-860-860</span>
+                    </a>
+                </div>
+                <div class="padding10-0">
+                    <a href="https://www.google.co.in/maps/place/Orange+Gubbi+technologies/@12.9174948,77.6451492,15z" target="_blank">
+                        <span class="fa fa-map-marker"></span>
+                        <span class="text"> HSR Layout, Bangalore, India</span>
+                    </a>
+                </div>
+                <hr>
+                <div class="paddingtop10">
+                    <h3>Social Networks</h3>
+                </div>
+                <div class="paddingtop20">
+                    <span>
+                        <a href="http://www.facebook.com/mygubbi" target="_blank"><span
+                                class="fa fa-facebook"></span> Facebook</a>
+                        <a href="https://twitter.com/@my_gubbi" target="_blank" class="margin-left-10"><span
+                                class="fa fa-twitter"></span> Twitter</a>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
