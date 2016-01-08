@@ -23,17 +23,19 @@ define([
         },
         render: function() {
 
+            var that = this;
+
             if (!this.filterMaster.get('price_ranges')) {
                 this.filterMaster.fetch({
                     success: function() {
-                        fetchCategoriesAndRender();
+                        that.fetchCategoriesAndRender();
                     },
                     error: function(model, response, options) {
                         console.log("couldn't fetch filter master - " + response);
                     }
                 });
             } else {
-                fetchCategoriesAndRender();
+                this.fetchCategoriesAndRender();
             }
 
 
@@ -47,7 +49,7 @@ define([
 
             var selectedSubCategoriesList = {};
 
-            if (.categories.isEmpty()) {
+            if (that.categories.isEmpty()) {
                 that.categories.fetch({
                     success: function() {
 
