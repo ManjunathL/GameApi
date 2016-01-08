@@ -14,8 +14,9 @@
 
                 <div class="col-lg-9 col-md-9 col-sm-6 hidden-xs">
                     <div id="filtered-list" class="padding8">
-                        <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
+                        <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ var count = 0; %>
                         <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
+                        <% if (count < 4){ %>
                             <span class="font-size14 tag-card">
                                 <span class="padding-right10"><%= subcatname %></span>
                                 <span
@@ -23,14 +24,21 @@
                                         onclick="removeSubcategories('<%= subcatname %>')">
                                 </span >
                             </span>
-                        <% }); %>
+                        <% count = count + 1; } }); %>
                         <% } %>
 
                         <!--<% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>-->
                         <!--<span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>-->
                         <!--<% } %>-->
                         <% if (filter.selectedSubCategoriesName != '' && filter.subcategoryIds != '') {%>
-                        <span class="tag-card color-orange" onclick="removeAllFilters()">Clear All</span>
+                         <span
+                                 class="tag-card"
+                                 id="filter-epllises"
+                                 data-toggle="tooltip"
+                                 data-placement="bottom"
+                                 title="More Filters Applied"
+                                 >...</span>
+                        <span class="tag-card color-orange margin0" id="clear_all" onclick="removeAllFilters()">Clear All</span>
                         <% } %>
                     </div>
                 </div>
@@ -69,7 +77,18 @@
                                 id="<%= subcat.id %>"
                                 title="<%= subcat.name %>"
                                 onclick="getsubcategoryId(this.id,this.title)">
-                                    <a><%= subcat.name %></a>
+                                    <a>
+                                        <input
+                                            type="checkbox"
+                                            class="margin-right-5"
+                                            name="subcat"
+                                            <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
+                                            <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
+                                            <% if(subcat.name == subcatname){ %> checked <% } %>
+                                            <% }); %>
+                                            <% } %>>
+                                        <%= subcat.name %>
+                                    </a>
                                 </li>
                                 <% }); %>
                             </ul>
@@ -88,13 +107,22 @@
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
                                 <li>
-                                    <a href="#">Standard</a>
+                                    <a>
+                                        <input type="checkbox" class="margin-right-5" name="price_range">
+                                        Standard
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Premium</a>
+                                    <a>
+                                        <input type="checkbox" class="margin-right-5" name="price_range">
+                                        Premium
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Luxury</a>
+                                    <a>
+                                        <input type="checkbox" class="margin-right-5" name="price_range">
+                                        Luxury
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -111,16 +139,28 @@
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
                                 <li>
-                                    <a href="#">Contemporary</a>
+                                    <a>
+                                        <input type="checkbox" class="margin-right-5" name="style">
+                                        Contemporary
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Classic</a>
+                                    <a>
+                                        <input type="checkbox" class="margin-right-5" name="style">
+                                        Classic
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Modern</a>
+                                    <a>
+                                        <input type="checkbox" class="margin-right-5" name="style">
+                                        Modern
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Eclectic</a>
+                                    <a>
+                                        <input type="checkbox" class="margin-right-5" name="style">
+                                        Eclectic
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -130,7 +170,7 @@
 
                     <span>
                         <a
-                                class="dropdown-toggle"
+                                class="dropdown-toggle color-333"
                                 id="dropdownMenu_sort"
                                 data-toggle="dropdown"
                                 aria-haspopup="true"
@@ -233,6 +273,23 @@
             }
         });
 
+        $('#filter-epllises').css('display', 'none');
+        $('#filtered-list').css({
+            'white-space': 'nowrap',
+            'overflow': 'hidden'
+        });
+
+        var used_width = 0;
+        $('.tag-card').each(function(){
+            used_width = used_width + $(this).outerWidth();
+        });
+        var full_width = $('#filtered-list').width();
+        var epllipses_width = $('#filter-epllises').outerWidth() + $('#clear_all').outerWidth() + 7;
+        if((epllipses_width + used_width) >= full_width) {
+            $('#filter-epllises').css('display','inline');
+        }
+
+
 
         $('.glyphicon-th').click(function() {
             $(this).addClass('active');
@@ -278,19 +335,25 @@
             $('.dimsn').css('display','block');
         });
 
+        $('[data-toggle="tooltip"]').tooltip();
+
+
     });
     /* Subcategory filter */
 
     var subcatNameArr = new Array();
     function getsubcategoryId(id,title){
-        var subcatArr = filter.get('subcategoryIds');
-        var subcatNameArr = filter.get('selectedSubCategoriesName');
-        subcatArr.push(id);
-        subcatNameArr.push(title);
-        //alert(subcatArr);
-        filter.set({'subcategoryIds':subcatArr});
-        filter.set({'selectedSubCategoriesName':subcatNameArr});
-        filter.trigger('change');
+        if($('#' + id).hasClass('noclick')){
+            return false;
+        }else {
+            var subcatArr = filter.get('subcategoryIds');
+            var subcatNameArr = filter.get('selectedSubCategoriesName');
+            subcatArr.push(id);
+            subcatNameArr.push(title);
+            filter.set({'subcategoryIds':subcatArr});
+            filter.set({'selectedSubCategoriesName':subcatNameArr});
+            filter.trigger('change');
+        }
     }
 
     function removeSubcategories(subcatnm){

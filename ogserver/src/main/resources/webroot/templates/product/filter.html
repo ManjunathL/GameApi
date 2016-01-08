@@ -2,46 +2,46 @@
     <% if(typeof(collection) !== 'undefined'){ %>
     <% _.each(collection, function(product){ %>
 
-    <div class="row bg-white margin-bottom40 portfolio-box overflow-hidden">
+    <div class="row bg-white margin-bottom40 list-view-box">
         <div class="col-md-7 list-img col-7-img">
-            <div class="row margin15-0 position-relative overflow-hidden">
+            <div class="row margin15-0 position-relative">
 
                 <a href="#product/<%= product.id %>">
                     <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
                 </a>
-                <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
-                    <div class="listli">
-                        <a href="#product/<%= product.id %>">
-                            <span class="glyph fa fa-info"></span>
-                            <!--<span class="list-txt">know more</span>-->
-                        </a>
+                    <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
+                        <div class="listli">
+                            <a href="#product/<%= product.id %>">
+                                <span class="glyph fa fa-info"></span>
+                                <!--<span class="list-txt">know more</span>-->
+                            </a>
+                        </div>
+                        <div class="listli">
+                            <a href="javascript:void(0);">
+                                <span class="list-heart fa fa-heart-o"></span>
+                                <span class="list-txt">shortlist</span>
+                            </a>
+                        </div>
+                        <div class="listli">
+                            <a href="javascript:void(0);" >
+                                <span class="glyph fa fa-share"></span>
+                                <div class="list-txt">
+                                    <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
+                                    <span class='st_facebook'></span>
+                                    <span class='st_twitter'></span>
+                                    <span class='st_pinterest'></span>
+                                    <!--<span class='st_linkedin'></span>-->
+                                    <!--<span class='st_sharethis'></span>-->
+                                    <!---->
+                                    <!--<span class='st_email'></span>-->
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="listli">
-                        <a href="javascript:void(0);">
-                            <span class="list-heart fa fa-heart-o"></span>
-                            <span class="list-txt">shortlist</span>
-                        </a>
-                    </div>
-                    <div class="listli">
-                        <a href="javascript:void(0);" >
-                            <span class="glyph fa fa-share"></span>
-                            <div class="list-txt">
-                                <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
-                                <span class='st_facebook'></span>
-                                <span class='st_twitter'></span>
-                                <span class='st_pinterest'></span>
-                                <!--<span class='st_linkedin'></span>-->
-                                <!--<span class='st_sharethis'></span>-->
-                                <!---->
-                                <!--<span class='st_email'></span>-->
-                            </div>
-                        </a>
-                    </div>
-                </div>
 
             </div>
         </div>
-        <div class="col-md-5 col-5-txt margin15-0">
+        <div class="col-md-5 col-5-txt">
             <div class="col-md-12 padding0 margin-bottom20">
                         <span>
                             <a href="#" class="list-heading-col5">
@@ -77,7 +77,7 @@
 
     <div class="portfolio">
         <div class="col-md-6 col-sm-6 portfolio-item">
-            <div class="portfolio-box overflow-hidden">
+            <div class="portfolio-box">
                 <div class="row margin0 position-relative">
                     <a href="#product/<%= product.id %>" class="portfolio-link">
                         <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
