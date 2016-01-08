@@ -1,0 +1,8 @@
+{
+  "price_ranges": [
+    "standard", "premium", "luxury"
+  ],
+  "styles": [
+    "contemporary", "classic", "modern", "eclectic"
+  ]
+}
