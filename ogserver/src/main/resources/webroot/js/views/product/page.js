@@ -23,8 +23,6 @@ define([
             var that = this;
             window.filter = that.filter;
 
-            //debugger
-
             var selectedSubCategories = that.model.selectedSubCategories;
             var subCategory = '';
 

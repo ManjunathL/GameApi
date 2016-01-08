@@ -747,6 +747,10 @@ button {
     color: #f1591f !important;
 }
 
+.color-333{
+    color: #333 !important;
+}
+
 .width100 {
     width: 100%;
 }
@@ -761,6 +765,22 @@ button {
 
 .width75 {
     width: 75%;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.display-inline-block {
+    display: inline-block;
 }
 
 .align-left {
@@ -780,7 +800,7 @@ button {
 }
 
 .noclick{
-    pointer-events: none;
+    cursor: not-allowed !important;
 }
 
 .font-size9 {
@@ -919,9 +939,10 @@ button {
     margin: auto;
 }
 
-.margin-bottom15 {
-    margin-bottom: 15px;
+.margin0 {
+    margin: 0px !important;
 }
+
 
 .margin0-10 {
     margin: 0 10px;
@@ -935,16 +956,8 @@ button {
     margin-left: 0px !important;
 }
 
-.margin-bottom20 {
-    margin-bottom: 20px;
-}
-
-.margin-bottom30 {
-    margin-bottom: 30px;
-}
-
-.margin-bottom40 {
-    margin-bottom: 40px;
+.margin-right-5 {
+    margin-right: 5px !important;
 }
 
 .margin-top20 {
@@ -971,8 +984,20 @@ button {
     margin-top: 5%;
 }
 
-.margin0 {
-    margin: 0px;
+.margin-bottom15 {
+    margin-bottom: 15px;
+}
+
+.margin-bottom20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom30 {
+    margin-bottom: 30px;
+}
+
+.margin-bottom40 {
+    margin-bottom: 40px;
 }
 
 .design-count {
@@ -1341,7 +1366,7 @@ a.button-orange, a.button-orange:hover {
     text-align: center;
     transition: .2s ease-out;
     cursor: pointer;
-    margin: 5px;
+    margin: 3px;
     position: relative;
 }
 
@@ -1376,6 +1401,10 @@ a.button-orange, a.button-orange:hover {
     display: inline-block;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.filters a {
+    color: #333;
 }
 
 .filters li ul li {
@@ -2798,22 +2827,6 @@ hr {
     }
     .sort-list a:hover, .sort-list a:active, .sort-list a:focus{
         color:#F1591F;
-    }
-
-    .display-none {
-        display: none;
-    }
-
-    .display-block {
-        display: block;
-    }
-
-    .display-inline {
-        display: inline;
-    }
-
-    .display-inline-block {
-        display: inline-block;
     }
 
     .error-text {
