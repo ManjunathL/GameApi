@@ -40,7 +40,10 @@ define([
                 console.log("handleAuth done");
             });
         },
-
+        getUserProfileWithCB: function(fx) {
+            var authData = this.ref.getAuth();
+            MGF.getUserProfile(authData, fx);
+        },
         onFAuth: function(authData) {
             if (authData && authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
                 $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
@@ -208,9 +211,37 @@ define([
 
         contactUsSubmit: function() {
             window.contactusSubmitButton && window.contactusSubmitButton.button('reset');
-            this.closeModal('#contactuspop');
+            var formData = {
+                "fullName": $('#contact_full_name').val(),
+                "email": $('#contact_email_id').val(),
+                "contactNumber": $('#contact_contact_num').val(),
+                "requirements": $('#contact_requirement').val(),
+                "propertyName": $('#contact_property_name').val()
+            };
+
+            var authData = this.ref.getAuth();
+            var that = this;
+            if (!authData) {
+                this.ref.authAnonymously(function(error, authData) {
+                    if (error) {
+                        console.log("Login Failed!", error);
+                    } else {
+                        that.setConsultData(authData, formData);
+                    }
+                });
+            } else {
+                this.setConsultData(authData, formData);
+            }
+
+            $('#contactForm').hide('slow');
+            $('#success-msg').show('slow');
+            $('#success-msg-padding').show('slow');
+
         },
 
+        closeContactForm: function(ev) {
+            $('#contactuspop').modal('toggle');
+        },
 
         signUp: function() {
 
@@ -281,17 +312,28 @@ define([
                 }
             );
         },
-
+        setConsultData: function(authData, formData) {
+            this.ref.child("consults/" + authData.uid + "/" + Date.now()).set(formData,
+                function(error) {
+                    if (error) {
+                        console.log("problem in inserting consult data", error);
+                    } else {
+                        console.log("successfully inserted consult data");
+                    }
+                });
+        },
         ready: function(parent) {
 
-            _.bindAll(this, 'createUser', 'setUser', 'getUserProfile', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut', 'getName', 'getImage', 'getEmail', 'closeModal', 'closePopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile');
+            //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
+            _.bindAll(this, 'closeContactForm', 'setConsultData', 'createUser', 'setUser', 'getUserProfile', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut', 'getName', 'getImage', 'getEmail', 'closeModal', 'closePopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile');
 
             var events = {
                 "click .signout_icon": this.signOut,
                 "click #close-user-pop": this.closePopup,
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,
-                "click #close-contactus-pop": this.closeModal
+                "click #close-contactus-pop": this.closeModal,
+                "click #contact-form-explore": this.closeContactForm
             };
 
             parent.delegateEvents(events);
