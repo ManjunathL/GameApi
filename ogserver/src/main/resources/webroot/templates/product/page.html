@@ -8,20 +8,20 @@
         <div class="container">
 
             <div class="row padding20-0 filter-desc-col" id="filter-desc">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-8">
                     <div class="design-count margin0"><%= collection.length %> Designs Found</div>
                 </div>
 
-                <div class="col-lg-9 col-md-9 col-sm-6 hidden-xs">
+                <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
                     <div id="filtered-list" class="padding8">
-                        <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ var count = 0; %>
-                        <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
+                        <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ var count = 0; %>
+                        <% _.each(filter.selectedFiltersName, function(filtername){ %>
                         <% if (count < 4){ %>
                             <span class="font-size14 tag-card">
-                                <span class="padding-right10"><%= subcatname %></span>
+                                <span class="padding-right10"><%= filtername %></span>
                                 <span
                                         class="pe-7s-close font-size25 tag-card-close"
-                                        onclick="removeSubcategories('<%= subcatname %>')">
+                                        onclick="removeFilters('<%= filtername %>')">
                                 </span >
                             </span>
                         <% count = count + 1; } }); %>
@@ -30,7 +30,7 @@
                         <!--<% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>-->
                         <!--<span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>-->
                         <!--<% } %>-->
-                        <% if (filter.selectedSubCategoriesName != '' && filter.subcategoryIds != '') {%>
+                        <% if (filter.selectedFiltersName != '' && filter.fillterIds != '') {%>
                          <span
                                  class="tag-card"
                                  id="filter-epllises"
@@ -42,11 +42,16 @@
                         <% } %>
                     </div>
                 </div>
-            </div>
 
+                <div class="hidden-lg hidden-md col-sm-6 col-xs-4">
+                    <span class="button filter-button">Filter</span>
+                </div>
+
+            </div>
         </div>
     </div>
-    <div class="container-fluid portfolio-box bg-white" id="filter-choose-container">
+
+    <div class="container-fluid portfolio-box bg-white hidden-sm hidden-xs" id="filter-choose-container">
         <div class="container">
 
             <div class="row padding10-0" id="filter-choose">
@@ -69,22 +74,22 @@
                                 <% _.each(subcategoriesList, function(subcat){ %>
 
                                 <li class="subcategorycls
-                                <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
-                                <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
-                                <% if(subcat.name == subcatname){ %> noclick <% } %>
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(subcat.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
                                 id="<%= subcat.id %>"
                                 title="<%= subcat.name %>"
-                                onclick="getsubcategoryId(this.id,this.title)">
+                                onclick="getFilterId(this.id,this.title)">
                                     <a>
                                         <input
                                             type="checkbox"
                                             class="margin-right-5"
                                             name="subcat"
-                                            <% if(typeof(filter.selectedSubCategoriesName) !== 'undefined'){ %>
-                                            <% _.each(filter.selectedSubCategoriesName, function(subcatname){ %>
-                                            <% if(subcat.name == subcatname){ %> checked <% } %>
+                                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                            <% if(subcat.name == filtername){ %> checked <% } %>
                                             <% }); %>
                                             <% } %>>
                                         <%= subcat.name %>
@@ -95,6 +100,7 @@
                         </li>
                         <% } %>
 
+                        <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %>
                         <li class="padding0-20">
                             <a
                                     class="dropdown-toggle"
@@ -106,27 +112,35 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                <li>
+                                <% _.each(filterMaster.price_ranges, function(range){ %>
+                                <li class="
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(range.name == filtername){ %> noclick <% } %>
+                                <% }); %>
+                                <% } %>"
+                                id="<%= range.id %>"
+                                title="<%= range.name %>"
+                                onclick="getFilterId(this.id,this.title)">
                                     <a>
-                                        <input type="checkbox" class="margin-right-5" name="price_range">
-                                        Standard
+                                        <input
+                                                type="checkbox"
+                                                class="margin-right-5"
+                                                name="price_range"
+                                        <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                        <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                        <% if(range.name == filtername){ %> checked <% } %>
+                                        <% }); %>
+                                        <% } %>>
+                                        <%= range.name %>
                                     </a>
                                 </li>
-                                <li>
-                                    <a>
-                                        <input type="checkbox" class="margin-right-5" name="price_range">
-                                        Premium
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <input type="checkbox" class="margin-right-5" name="price_range">
-                                        Luxury
-                                    </a>
-                                </li>
+                                <% }); %>
                             </ul>
                         </li>
+                        <% } %>
 
+                        <% if(typeof(filterMaster.styles) !== 'undefined'){ %>
                         <li class="padding0-20">
                             <a
                                     class="dropdown-toggle"
@@ -138,32 +152,34 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                <li>
+                                <% _.each(filterMaster.styles, function(style){ %>
+                                <li class="
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(style.name == filtername){ %> noclick <% } %>
+                                <% }); %>
+                                <% } %>"
+                                id="<%= style.id %>"
+                                title="<%= style.name %>"
+                                onclick="getFilterId(this.id,this.title)">
                                     <a>
-                                        <input type="checkbox" class="margin-right-5" name="style">
-                                        Contemporary
+                                        <input
+                                                type="checkbox"
+                                                class="margin-right-5"
+                                                name="style"
+                                        <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                        <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                        <% if(style.name == filtername){ %> checked <% } %>
+                                        <% }); %>
+                                        <% } %>>
+                                        <%= style.name %>
                                     </a>
                                 </li>
-                                <li>
-                                    <a>
-                                        <input type="checkbox" class="margin-right-5" name="style">
-                                        Classic
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <input type="checkbox" class="margin-right-5" name="style">
-                                        Modern
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <input type="checkbox" class="margin-right-5" name="style">
-                                        Eclectic
-                                    </a>
-                                </li>
+                                <% }); %>
                             </ul>
                         </li>
+                        <% } %>
+
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-3 hidden-sm hidden-xs align-right">
@@ -223,7 +239,138 @@
         <span class="fa fa-chevron-up"></span>
     </a>
 
+    <!-- Filter Menu Popup -->
+    <div class="filterpop hidden-lg hidden-md">
+        <div class="row margin0">
+            <h4>Filters</h4>
+            <span class="button border1px position-absolute right10per" onclick="removeAllFilters()">Clear All</span>
+        </div>
+
+        <div class="row margin0 padding20-0">
+            <div class="col-sm-4 col-xs-4 separator-vertical">
+                <div class="row padding10_0_30 active" id="subcatFilter">
+                    <% if(typeof(subcategoriesList) !== 'undefined'){ %> Sub Category <% } %>
+                </div>
+                <div class="row padding10_0_30" id="priceFilter">
+                    <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %> Price Range <% } %>
+                </div>
+                <div class="row padding10_0_30" id="styleFilter">
+                    <% if(typeof(filterMaster.styles) !== 'undefined'){ %> Style <% } %>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xs-8 padding-left25">
+                <div id="subcatFilterDesc">
+                    <% _.each(subcategoriesList, function(subcat){ %>
+
+                    <div class="row subcategorycls separator-horizontal
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(subcat.name == filtername){ %> noclick <% } %>
+                                <% }); %>
+                                <% } %>"
+                        id="<%= subcat.id+'fil' %>"
+                        title="<%= subcat.name %>"
+                        onclick="getFil(this.id,this.title)">
+                        <a>
+                            <input
+                                    type="checkbox"
+                                    class="margin-right-5"
+                                    name="subcat"
+                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                            <% if(subcat.name == filtername){ %> checked disabled <% } %>
+                            <% }); %>
+                            <% } %>>
+                            <%= subcat.name %>
+                        </a>
+                    </div>
+                    <% }); %>
+                </div>
+
+                <div id="priceFilterDesc">
+                    <% _.each(filterMaster.price_ranges, function(range){ %>
+                    <div class="row separator-horizontal
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(range.name == filtername){ %> noclick <% } %>
+                                <% }); %>
+                                <% } %>"
+                        id="<%= range.id+'fil' %>"
+                        title="<%= range.name %>"
+                        onclick="getFil(this.id,this.title)">
+                        <a>
+                            <input
+                                    type="checkbox"
+                                    class="margin-right-5"
+                                    name="price_range"
+                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                            <% if(range.name == filtername){ %> checked disabled <% } %>
+                            <% }); %>
+                            <% } %>>
+                            <%= range.name %>
+                        </a>
+                    </div>
+                    <% }); %>
+                </div>
+                <div id="styleFilterDesc">
+                    <% _.each(filterMaster.styles, function(style){ %>
+                    <div class="row separator-horizontal
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(style.name == filtername){ %> noclick <% } %>
+                                <% }); %>
+                                <% } %>"
+                        id="<%= style.id+'fil' %>"
+                        title="<%= style.name %>"
+                        onclick="getFil(this.id,this.title)">
+                        <a>
+                            <input
+                                    type="checkbox"
+                                    class="margin-right-5"
+                                    name="style"
+                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                            <% if(style.name == filtername){ %> checked disabled <% } %>
+                            <% }); %>
+                            <% } %>>
+                            <%= style.name %>
+                        </a>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row margin0">
+            <h5>Filters Applied :</h4>
+        </div>
+
+        <div class="row margin0">
+            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+            <% _.each(filter.selectedFiltersName, function(filtername){ %>
+
+                <div class="font-size14 tag-card">
+                    <span class="padding-right20"><%= filtername %></span>
+                    <span
+                            class="pe-7s-close font-size25 tag-card-close"
+                            onclick="removeFilters('<%= filtername %>')">
+                    </span >
+                </div>
+            <% }); %>
+            <% } %>
+        </div>
+
+        <div class="close-icon2per" onclick="closePop()">
+            <img src="img/close-white.png">
+        </div>
+
+    </div>
+    <!-- Filter Menu Popup End -->
+
 </section>
+
+
 
 <script>
     $(document).ready(function(){
@@ -234,7 +381,7 @@
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
                 $('#filter-desc-container').addClass('stick').css({'top' : '70px'});
-                $('#filter-desc').css({'padding' : '5px 0px'});
+                $('#filter-desc').css({'padding' : '10px 0px'});
                 $('.filter-desc-col').addClass('stick-tag');
                 $('#filter-choose-container').slideUp();
             } else {
@@ -289,7 +436,40 @@
             $('#filter-epllises').css('display','inline');
         }
 
+        $('.filter-button').click(function() {
+            $('.filterpop').css('left','0px');
+        });
 
+        $('#subcatFilterDesc').css('display','block');
+        $('#priceFilterDesc').css('display','none');
+        $('#styleFilterDesc').css('display','none');
+
+        $('#subcatFilter').click(function() {
+            $('#subcatFilter').addClass('active');
+            $('#priceFilter').removeClass('active');
+            $('#styleFilter').removeClass('active');
+            $('#subcatFilterDesc').css('display','block');
+            $('#priceFilterDesc').css('display','none');
+            $('#styleFilterDesc').css('display','none');
+        });
+
+        $('#priceFilter').click(function() {
+            $('#subcatFilter').removeClass('active');
+            $('#priceFilter').addClass('active');
+            $('#styleFilter').removeClass('active');
+            $('#subcatFilterDesc').css('display','none');
+            $('#priceFilterDesc').css('display','block');
+            $('#styleFilterDesc').css('display','none');
+        });
+
+        $('#styleFilter').click(function() {
+            $('#subcatFilter').removeClass('active');
+            $('#priceFilter').removeClass('active');
+            $('#styleFilter').addClass('active');
+            $('#subcatFilterDesc').css('display','none');
+            $('#priceFilterDesc').css('display','none');
+            $('#styleFilterDesc').css('display','block');
+        });
 
         $('.glyphicon-th').click(function() {
             $(this).addClass('active');
@@ -339,49 +519,59 @@
 
 
     });
-    /* Subcategory filter */
 
-    var subcatNameArr = new Array();
-    function getsubcategoryId(id,title){
+    function closePop(){
+        $('.filterpop').css('left', '-1000px');
+    }
+
+    /* Filter */
+
+    var filterNameArr = new Array();
+    function getFilterId(id,title){
         if($('#' + id).hasClass('noclick')){
             return false;
         }else {
-            var subcatArr = filter.get('subcategoryIds');
-            var subcatNameArr = filter.get('selectedSubCategoriesName');
-            subcatArr.push(id);
-            subcatNameArr.push(title);
-            filter.set({'subcategoryIds':subcatArr});
-            filter.set({'selectedSubCategoriesName':subcatNameArr});
+            var filterArr = filter.get('fillterIds');
+            var filterNameArr = filter.get('selectedFiltersName');
+            filterArr.push(id);
+            filterNameArr.push(title);
+            filter.set({'fillterIds':filterArr});
+            filter.set({'selectedFiltersName':filterNameArr});
             filter.trigger('change');
         }
     }
 
-    function removeSubcategories(subcatnm){
-        var subcatnmArr = filter.get('selectedSubCategoriesName');
-        var subcatIdArr = filter.get('subcategoryIds');
+    function getFil(id,title){
+        var new_id = id.substring(0, id.length-3);
+        getFilterId(new_id,title);
+    }
 
-        var index = subcatnmArr.indexOf(subcatnm);
+    function removeFilters(filtername){
+        var filternameArr = filter.get('selectedFiltersName');
+        var filterIdArr = filter.get('fillterIds');
+
+        var index = filternameArr.indexOf(filtername);
 
         if(index > -1){
-            subcatIdArr.splice(index,1);
-            subcatnmArr.splice(index,1);
-            //alert(subcatIdArr+' ------ '+subcatnmArr);
-            filter.set({'subcategoryIds':subcatIdArr});
-            filter.set({'selectedSubCategoriesName':subcatnmArr});
+            filterIdArr.splice(index,1);
+            filternameArr.splice(index,1);
+            //alert(filterIdArr+' ------ '+filternameArr);
+            filter.set({'fillterIds':filterIdArr});
+            filter.set({'selectedFiltersName':filternameArr});
             filter.trigger('change');
         }
     }
 
     function removeAllFilters(){
-        var subcatnmArr = filter.get('selectedSubCategoriesName');
-        var subcatIdArr = filter.get('subcategoryIds');
+        var filternmArr = filter.get('selectedFiltersName');
+        var filterIdArr = filter.get('fillterIds');
 
-        subcatnmArr.splice(0,subcatnmArr.length);
-        subcatIdArr.splice(0,subcatIdArr.length);
+        filternmArr.splice(0,filternmArr.length);
+        filterIdArr.splice(0,filterIdArr.length);
 
-        //alert(subcatIdArr+' ------ '+subcatnmArr);
-        filter.set({'subcategoryIds':subcatIdArr});
-        filter.set({'selectedSubCategoriesName':subcatnmArr});
+//        alert(filterIdArr+' ------ '+filternmArr);
+        filter.set({'fillterIds':filterIdArr});
+        filter.set({'selectedFiltersName':filternmArr});
         filter.trigger('change');
     }
 

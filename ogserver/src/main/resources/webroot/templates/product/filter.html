@@ -2,46 +2,46 @@
     <% if(typeof(collection) !== 'undefined'){ %>
     <% _.each(collection, function(product){ %>
 
-    <div class="row bg-white margin-bottom40 list-view-box">
+    <div class="row bg-white margin-bottom40 portfolio-box overflow-hidden">
         <div class="col-md-7 list-img col-7-img">
-            <div class="row margin15-0 position-relative">
+            <div class="row margin15-0 position-relative overflow-hidden">
 
                 <a href="#product/<%= product.id %>">
                     <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
                 </a>
-                    <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
-                        <div class="listli">
-                            <a href="#product/<%= product.id %>">
-                                <span class="glyph fa fa-info"></span>
-                                <!--<span class="list-txt">know more</span>-->
-                            </a>
-                        </div>
-                        <div class="listli">
-                            <a href="javascript:void(0);">
-                                <span class="list-heart fa fa-heart-o"></span>
-                                <span class="list-txt">shortlist</span>
-                            </a>
-                        </div>
-                        <div class="listli">
-                            <a href="javascript:void(0);" >
-                                <span class="glyph fa fa-share"></span>
-                                <div class="list-txt">
-                                    <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
-                                    <span class='st_facebook'></span>
-                                    <span class='st_twitter'></span>
-                                    <span class='st_pinterest'></span>
-                                    <!--<span class='st_linkedin'></span>-->
-                                    <!--<span class='st_sharethis'></span>-->
-                                    <!---->
-                                    <!--<span class='st_email'></span>-->
-                                </div>
-                            </a>
-                        </div>
+                <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
+                    <div class="listli">
+                        <a href="#product/<%= product.id %>">
+                            <span class="glyph fa fa-info"></span>
+                            <!--<span class="list-txt">know more</span>-->
+                        </a>
                     </div>
+                    <div class="listli">
+                        <a href="javascript:void(0);">
+                            <span class="list-heart fa fa-heart-o"></span>
+                            <span class="list-txt">shortlist</span>
+                        </a>
+                    </div>
+                    <div class="listli">
+                        <a href="javascript:void(0);" >
+                            <span class="glyph fa fa-share"></span>
+                            <div class="list-txt">
+                                <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
+                                <span class='st_facebook'></span>
+                                <span class='st_twitter'></span>
+                                <span class='st_pinterest'></span>
+                                <!--<span class='st_linkedin'></span>-->
+                                <!--<span class='st_sharethis'></span>-->
+                                <!---->
+                                <!--<span class='st_email'></span>-->
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
             </div>
         </div>
-        <div class="col-md-5 col-5-txt">
+        <div class="col-md-5 col-5-txt margin15-0">
             <div class="col-md-12 padding0 margin-bottom20">
                         <span>
                             <a href="#" class="list-heading-col5">
@@ -49,7 +49,8 @@
                             </a>
                         </span>
                         <span class="cost-col5">
-                            &#8377;<%= product.defaultPrice %>
+                            <i class="fa fa-inr"></i>
+                            <%= product.defaultPrice %>
                         </span>
             </div>
 
@@ -77,7 +78,7 @@
 
     <div class="portfolio">
         <div class="col-md-6 col-sm-6 portfolio-item">
-            <div class="portfolio-box">
+            <div class="portfolio-box overflow-hidden">
                 <div class="row margin0 position-relative">
                     <a href="#product/<%= product.id %>" class="portfolio-link">
                         <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
@@ -115,8 +116,11 @@
 
                 <div class="portfolio-caption margin0">
                     <div class="row">
-                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left"><%= product.name %></h4>
-                        <h4 class="col-md-4 col-sm4 col-xs-4 align-right">&#8377;<%= product.defaultPrice %>/-</h4>
+                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0"><%= product.name %></h4>
+                        <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
+                            <i class="fa fa-inr"></i>
+                            <%= product.defaultPrice %>/-
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -128,3 +132,15 @@
 <!--<script type="text/javascript">var switchTo5x=true;</script>-->
 <!--<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>-->
 <!--<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>-->
+
+<script>
+    $(document).ready(function(){
+        $('.fa-inr').click(function() {
+            var fontsize = $('.fa-inr').parent().css('font-size');
+            alert(fontsize);
+            fontsize = fontsize-2;
+            $('.fa-inr').css('font-size',fontsize);
+        });
+
+    });
+</script>

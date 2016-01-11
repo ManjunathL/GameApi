@@ -84,6 +84,14 @@
         height: 30px !important;
         width: 30px !important;
     }
+
+    .portfolio .portfolio-item .portfolio-caption h4 {
+        font-size: 15px !important;
+    }
+
+    #filter-desc {
+        padding: 20px 0px !important;
+    }
 }
 
 @media (max-width: 767px) {
@@ -482,6 +490,10 @@ button {
     padding-top: 15px;
 }
 
+.drop li a {
+    text-transform: capitalize;
+}
+
 .view-select{
     padding: 10px;
     font-size: 16px;
@@ -512,19 +524,10 @@ button {
 }
 
 .user_profile h2, .user_profile h4 {
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
     text-transform: none;
 }
 
 .user_profile p {
-    font-size: 18px;
-}
-
-.user_profile span {
-    display: block;
-    width: 80%;
-    margin: auto;
     font-size: 18px;
 }
 
@@ -533,16 +536,6 @@ button {
     margin: 0px auto;
     border: 8px solid #ffffff;
     display: block;
-    -webkit-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
-    box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
-}
-
-.user_profile .active {
-    -webkit-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.4);
-    -moz-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.4);
-    box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.4);
-    color: rgba(241, 89, 31, 1);
 }
 
 .user_profile input{
@@ -555,8 +548,25 @@ button {
     width: 90%;
 }
 
+.user_profile input[type=password]{
+    width: 100%;
+}
+
+.user_profile input[type=number]{
+    width: 115px;
+}
+
 .user_profile input:focus{
     outline: none;
+}
+
+.user_profile .row {
+    margin: 0px;
+}
+
+.deactivate_account, .change_password {
+    display: none;
+    cursor: pointer;
 }
 
 .edit_mode {
@@ -576,19 +586,11 @@ button {
     min-height: 250px;
 }
 
-.wish_list, .order_history, .change_password, .deactivate_account {
-    display: none;
-    position: absolute;
-}
-
 .form-control {
     border-radius: 0;
 }
 
 @media screen and (max-width: 1024px) {
-    .user_profile span {
-        font-size: 16px;
-    }
 
     .user_right_col {
         min-height: 270px;
@@ -812,6 +814,7 @@ button {
 
 .noclick{
     cursor: not-allowed !important;
+    touch-action: none !important;
 }
 
 .font-size9 {
@@ -872,12 +875,20 @@ button {
     left: auto !important;
 }
 
+.right10per {
+    right: 10%;
+}
+
 .overflow-hidden {
     overflow: hidden;
 }
 
 .position-relative {
     position: relative;
+}
+
+.position-absolute {
+    position: absolute;
 }
 
 .padding0-20 {
@@ -912,6 +923,10 @@ button {
     padding-top: 10px;
 }
 
+.padding-top15 {
+    padding-top: 15px;
+}
+
 .padding-top30 {
     padding-top: 30px;
 }
@@ -920,13 +935,37 @@ button {
     padding-bottom: 10px;
 }
 
+.padding-bottom15 {
+    padding-bottom: 15px;
+}
 
-.padding-right10{
+.padding-left25 {
+    padding-left: 25px;
+}
+
+.padding-right0 {
+    padding-right: 0px;
+}
+
+.padding-right10 {
     padding-right: 10px;
 }
 
-.padding-right15{
+.padding-right15 {
     padding-right: 15px;
+}
+
+.padding-right20 {
+    padding-right: 20px;
+}
+
+.padding0_20_20 {
+    padding: 0px 20px 20px !important;
+
+}
+
+.padding10_0_30 {
+    padding: 10px 0px 30px;
 }
 
 .padding5_10_5_35 {
@@ -950,7 +989,7 @@ button {
 }
 
 .margin_auto {
-    margin: auto;
+    margin: auto !important;
 }
 
 .margin0 {
@@ -959,11 +998,11 @@ button {
 
 
 .margin0-10 {
-    margin: 0 10px;
+    margin: 0 10px !important;
 }
 
 .margin15-0 {
-    margin: 15px 0px;
+    margin: 15px 0px !important;
 }
 
 .margin-left-0 {
@@ -978,11 +1017,11 @@ button {
 }
 
 .margin-top20 {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
 .margin-top10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
 
 .margin-top40 {
@@ -998,23 +1037,36 @@ button {
 }
 
 .margin-top5per {
-    margin-top: 5%;
+    margin-top: 5% !important;
 }
 
 .margin-bottom15 {
-    margin-bottom: 15px;
+    margin-bottom: 15px !important;
 }
 
 .margin-bottom20 {
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 
 .margin-bottom30 {
-    margin-bottom: 30px;
+    margin-bottom: 30px !important;
 }
 
 .margin-bottom40 {
-    margin-bottom: 40px;
+    margin-bottom: 40px !important;
+}
+
+.border1px {
+    border: 1px solid !important;
+}
+
+.separator-horizontal {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.separator-vertical {
+    border-right: 1px solid rgba(255,255,255,0.6);
 }
 
 .design-count {
@@ -1451,6 +1503,46 @@ a.button-orange, a.button-orange:hover {
     display: block;
 }
 
+.filter-button {
+    border: 1px solid !important;
+    position: absolute;
+    right: 10%;
+}
+
+.filterpop {
+    width: 100%;
+    height: 100%;
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(0,0,0,0.9);
+    position: fixed;
+    top: 0px;
+    left: -1000px;
+    z-index: 1045;
+    overflow: auto;
+    padding: 10px 10px;
+    font-family: "Open Sans", sans-serif !important;
+    font-weight: 400;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+}
+
+.filterpop h4, .filterpop h5 {
+    font-family: "Open Sans", sans-serif !important;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.filterpop a, .filterpop a:active, .filterpop a:focus, .filterpop .active {
+    color: rgba(255,255,255,1);
+}
+
+.filterpop .tag-card {
+    color: rgba(255,255,255,1);
+    background-color: rgba(0,0,0,0.9);
+}
+
 
 @media(min-width:768px){
     .userpop {
@@ -1608,6 +1700,16 @@ a.button-orange, a.button-orange:hover {
 }
 
 .close-icon img {
+    height: 15px;
+}
+
+.close-icon2per {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+.close-icon2per img {
     height: 15px;
 }
 
@@ -2881,9 +2983,6 @@ hr {
         color: #FF0000;
     }
 
-.position-absolute {
-    position: absolute;
-}
 .appliance-untick{
     border-radius: 50%; position: relative; top: -150px; right: 10px; float: right; font-size: 20px; color: #CCC;background: none repeat scroll 0% 0% #FFF;
 }
