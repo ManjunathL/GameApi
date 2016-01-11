@@ -5,7 +5,7 @@
                 <h3><span id="prodName"><%= product.name %></span></h3>
             </div>
             <div class="col-sm-2">
-                <h3><span id="prodPrice" class="heading-price"><i class="fa fa-inr"></i> <%= product.defaultPrice %></span></h3>
+                <h3><span id="prodPrice" class="heading-price"><i class="fa fa-inr"></i> <%= custom_product.get('basePrice') %></span></h3>
             </div>
         </div>
         <div class="col-xs-12">
@@ -70,26 +70,27 @@
                 <label id="chooseMaterial">Choose Material:</label>
                 <div class="width100 list-group paddingtop20" aria-labelledby="chooseMaterial">
                     <% _.each (materials, function(material) { %>
-                    <a class="list-group-item <%= product.defaultMaterial === material ? 'active' : ''%> display-inline"><%=material%></a>
+                    <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline" data-material="<%=material%>"><%=material%></a>
                     <% }); %>
                 </div>
             </div>
             <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
                 <label id="chooseFinish">Choose Finish:</label>
                 <div class="width100 list-group paddingtop20" aria-labelledby="chooseFinish">
-                    <% _.each (finishes, function(finish) { %>
-                    <a class="list-group-item <%= product.defaultFinish === finish ? 'active' : ''%> display-inline"><%=finish%></a>
+                    <% _.each (custom_product.get('finishes'), function(finish) { %>
+                    <a class="finish list-group-item <%= custom_product.get('selectedFinish') === finish ? 'active' : ''%> display-inline" data-finish="<%=finish%>"><%=finish%></a>
                     <% }); %>
                 </div>
             </div>
             <div class="col-xs-12 paddingtop20 bg-light-gray margintop20">
                 <label id="colors">Available in Colors:</label>
                 <ul class="paddingtop10 color-ul">
-                    <li class="color-rounds round-bk1 color-li-first"></li>
-                    <li class="color-rounds round-bk2"></li>
-                    <li class="color-rounds round-bk3"></li>
-                    <li class="color-rounds round-bk4"></li>
-                    <li class="color-rounds round-bk5"></li>
+                    <% _.each (custom_product.get('colors'), function(color) { %>
+                    <li class="color-rounds"><img src="<%= imgBase + color.img %>" alt="<%= color.name %>"></li>
+                    <% }); %>
+                    <!--<li class="color-rounds round-bk3"></li>-->
+                    <!--<li class="color-rounds round-bk4"></li>-->
+                    <!--<li class="color-rounds round-bk5"></li>-->
                 </ul>
 
             </div>
@@ -101,45 +102,47 @@
             </div>
         </div>
         <div class="row margin-left-0 bg-light-gray paddingtop10">
-            <% _.each (product.accessories, function(accessory) { %>
-            <div class="col-md-6 col-sm-6 portfolio-item">
+            <% _.each (custom_product.get('selectedAccessories'), function(accessory) { %>
+            <div class="col-md-12 col-sm-12 portfolio-item">
                 <div class="portfolio-box bg-white width100">
                     <div class="row" style="padding: 5px">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <a href="#">
-                                <img id="alt1-image" src="<%= imgBase + 'c_fit,w_206,h_124/' + accessory.accessoryImg %>" alt="">
+                                <img id="alt1-image" src="<%= imgBase + 'c_fit,w_206,h_124/' + accessory.accessoryImg %>" alt="mainimg">
                             </a>
-                        </div>
-                        <div class="col-sm-7">
                             <p><%= accessory.accessoryName%></p>
                             <p>Price: <i class="fa fa-inr"></i> <%= accessory.accessoryPrice%></p>
                         </div>
-                    </div>
-
-                    <div class="alt1-wrap padding20-0">
-                        <p style="margin-left: 10px">Alternate Options</p>
-                        <hr width="98%" class="margin_auto">
-                        <div class="row margintop10">
-                            <div class="controls center col-xs-1">
-                                <button class="btn alt1-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
-                                </button>
-                            </div>
-                            <div class="frame col-xs-10" id="alt1-frame" style="overflow: hidden;">
-                                <ul class="clearfix"
-                                    style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
-                                    <% _.each(accessory.alternatives, function(alternative){ %>
+                        <div class="col-sm-8">
+                            <p style="margin-left: 10px">Alternate Options</p>
+                            <hr width="98%" class="margin_auto">
+                            <div class="row margintop10">
+                                <div class="controls center col-xs-1">
+                                    <button class="btn alt1-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                                    </button>
+                                </div>
+                                <div class="frame col-xs-10" id="alt1-frame" style="overflow: hidden;">
+                                    <ul class="clearfix"
+                                        style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
+                                        <% _.each(accessory.alternatives, function(alternative){ %>
                                         <li style="width: 60px;">
-                                            <span style="display: inline-block; height: 64px;"><img src="<%= imgBase + 'c_fit,w_60,h_64/' + alternative.accessoryImg %>"/></span>
+                                            <span style="height: 64px;"><a class="alt-accessory display-inline active" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img src="<%= imgBase + 'c_fit,w_60,h_64/' + alternative.accessoryImg %>"/></a></span>
+                                            <p><%= alternative.accessoryName%></p>
                                             <p style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></p>
                                         </li>
-                                    <% }); %>
-                                </ul>
-                            </div>
-                            <div class="controls center col-xs-1">
-                                <button class="btn alt1-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                        <% }); %>
+                                    </ul>
+                                </div>
+                                <div class="controls center col-xs-1">
+                                    <button class="btn alt1-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!--<div class="alt1-wrap padding20-0">-->
+
+                    <!--</div>-->
                 </div>
             </div>
             <% }); %>
