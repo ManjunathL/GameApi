@@ -65,6 +65,7 @@ define([
 		            return true;
 		    }
 
+
 		}
     });
     return Products;

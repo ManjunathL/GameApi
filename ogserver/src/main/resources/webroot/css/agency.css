@@ -99,6 +99,14 @@
         float: left !important;
         display: inline-block;
     }
+
+    .overflowHeight {
+        overflow-y: auto;
+        height: 100%
+    }
+}
+
+.overflowHeight {
 }
 
 .color-ul {
@@ -116,6 +124,10 @@
 
 .heading-price {
     float: right;
+    white-space: nowrap;
+}
+
+.nowrap {
     white-space: nowrap;
 }
 
@@ -164,7 +176,7 @@ a.active {
 }
 
 a {
-    color: #000;
+    color: #f1591f;
     -webkit-transition: color 0.3s,opacity 0.2s;
     transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
@@ -1213,27 +1225,49 @@ input[type=checkbox] {
     text-decoration: none;
 }
 
-.contact-us-side {
+.contact-us-pop {
+    width: 100%;
+    max-width: 400px;
+    top: 110px;
     position: fixed;
-    top: 55%;
-    left: 0px;
-    z-index: 200;
+    z-index: 2000;
+    left: -400px;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+}
+
+
+.contact-us-side {
+    position: relative;
+    width: 150px;
+    top: -175px;
+    left: 100%;
+    z-index: 2000;
+    transform: rotate(270deg);
+    transform-origin: left top;
+}
+
+.contact-us-side-inner {
+    position: relative;
+    display: inline-block;
+    top: 0px;
     cursor: pointer;
     color: #ffffff;
     font-size: 16px;
     background-color: #f1591f;
-    transform: rotate(270deg);
-    transform-origin: left top;
     padding: 1px 12px 3px 12px;
     -webkit-transition: color 0.3s,opacity 0.2s;
     transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
 
-.contact-us-side:hover {
+
+.contact-us-side-inner:hover {
     background-color: #ff3200;
 }
 
-.contact-us-side:active {
+.contact-us-side-inner:active {
     -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
     -moz-box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
     box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
@@ -1546,9 +1580,9 @@ a.button-orange, a.button-orange:hover {
 .contact-form {
     font-family: "Open Sans", sans-serif;
     margin: auto;
-    width: 90%;
+    width: 100%;
     color: #fff;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(65,45,45,0.9);
     padding: 20px;
 }
 
@@ -2949,3 +2983,13 @@ hr {
         color: #FF0000;
     }
 
+.appliance-untick{
+    border-radius: 50%; position: relative; top: -150px; right: 10px; float: right; font-size: 20px; color: #CCC;background: none repeat scroll 0% 0% #FFF;
+}
+.appliance-tick{
+    border-radius: 50%; position: relative; top: -150px; right: 10px; float: right; font-size: 20px; color: #000;background: none repeat scroll 0% 0% #F0F0F0;
+}
+
+.position-absolute {
+    position: absolute;
+}

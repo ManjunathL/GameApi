@@ -104,3 +104,11 @@ textarea:focus {
     left: 0px;
     top: 190px;
 }
+
+.override-link-color a {
+    color: #000;
+}
+
+.override-link-color a:hover {
+    color: #f1591f;
+}
