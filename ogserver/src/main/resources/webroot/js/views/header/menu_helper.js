@@ -200,7 +200,7 @@ define([
             $(id).modal('toggle');
         },
 
-        closePopup: function(ev) {
+        closeUserPopup: function(ev) {
             var id = $(ev.currentTarget).data('element');
             if (id == '.userpop') {
                 $('.userpop').css('right', '-800px');
@@ -233,10 +233,25 @@ define([
                 this.setConsultData(authData, formData);
             }
 
-            $('#contactForm').hide('slow');
-            $('#success-msg').show('slow');
-            $('#success-msg-padding').show('slow');
+            var that = this;
+            $('#contactForm').hide(100, function(){$('#success-msg').show(0, function(){$('#success-msg-padding').show(0, function(){that.positionSideContact();});});});
 
+        },
+
+        positionSideContact: function() {
+
+            var windowHeight = $(window).height();
+            var contactUsSideHeight = $('.contact-us-side').height();
+            var contactUsSideWidth = $('.contact-us-side').width();
+            var popHeight = $('#contactuspop').height() - contactUsSideHeight;
+            var popHeightMore = popHeight > windowHeight;
+            $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight/2 - popHeight/2) + 'px');
+            $('.contact-us-side').css('top', ((popHeight/2 > windowHeight) ? (-popHeight*3/4 + contactUsSideWidth/2) : (-popHeight/2 + contactUsSideWidth/2)) + 'px');
+
+            var currLeft = $('.contact-us-pop').position().left;
+            if (currLeft < 0) {
+                $('.contact-us-pop').css('left', -$('.contact-us-pop').width() + 'px');
+            }
         },
 
         closeContactForm: function(ev) {
@@ -293,6 +308,24 @@ define([
             this.showUserPop();
         },
 
+        toggleContactUsPop: function() {
+            var currLeft = $('.contact-us-pop').position().left;
+            if (currLeft < 0) {
+                $('.contact-us-pop').css('left', '0px');
+                $('.contact-us-pop').toggleClass('overflowHeight');
+/*
+                $('.contact-us-pop').css('overflow-y', 'auto');
+                $('.contact-us-pop').css('height', '100%');
+*/
+            } else {
+                $('.contact-us-pop').css('left', -$('.contact-us-pop').width() + 'px');
+                $('.contact-us-pop').toggleClass('overflowHeight');
+/*
+                $('.contact-us-pop').css('overflow-y', '');
+                $('.contact-us-pop').css('height', '');
+*/
+            }
+        },
         showUserPop: function() {
             $('#login_error').html('');
             $('#login_error_row').css("display", "none");
@@ -325,15 +358,18 @@ define([
         ready: function(parent) {
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
-            _.bindAll(this, 'closeContactForm', 'setConsultData', 'createUser', 'setUser', 'getUserProfile', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut', 'getName', 'getImage', 'getEmail', 'closeModal', 'closePopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile');
+            _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'setConsultData', 'createUser',
+            'setUser', 'getUserProfile', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
+            'getName', 'getImage', 'getEmail', 'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin',
+            'showUserPop', 'createProfile');
 
             var events = {
                 "click .signout_icon": this.signOut,
-                "click #close-user-pop": this.closePopup,
+                "click #close-user-pop": this.closeUserPopup,
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,
-                "click #close-contactus-pop": this.closeModal,
-                "click #contact-form-explore": this.closeContactForm
+                "click #close-contactus-pop": this.toggleContactUsPop,
+                "click #contact-form-explore": this.toggleContactUsPop
             };
 
             parent.delegateEvents(events);
@@ -358,7 +394,7 @@ define([
                 });
 
                 $('#contact-us-side-btn').click(function() {
-                    $('#contactuspop').modal('toggle');
+                    that.toggleContactUsPop();
                     $('#contact_error').html('');
                     $('#contact_error_row').css("display", 'none');
                 });
@@ -490,6 +526,10 @@ define([
                         navMain.collapse('hide');
                     });
                 });
+
+                $(window).resize(that.positionSideContact);
+
+                that.positionSideContact();
 
                 $('#tawkchat-iframe-container').hide();
 
