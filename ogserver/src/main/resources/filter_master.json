@@ -1,8 +1,41 @@
 {
   "price_ranges": [
-    "standard", "premium", "luxury"
+    {
+      "name": "Standard",
+      "code": "standard",
+      "id": "price_range1"
+    },
+    {
+      "name": "Premium",
+      "code": "premium",
+      "id": "price_range2"
+    },
+    {
+      "name": "Luxury",
+      "code": "luxury",
+      "id": "price_range3"
+    }
   ],
   "styles": [
-    "contemporary", "classic", "modern", "eclectic"
+    {
+      "name": "Contemporary",
+      "code": "contemporary",
+      "id": "style1"
+    },
+    {
+      "name": "Classic",
+      "code": "classic",
+      "id": "style2"
+    },
+    {
+      "name": "Modern",
+      "code": "modern",
+      "id": "style3"
+    },
+    {
+      "name": "Eclectic",
+      "code": "eclectic",
+      "id": "style4"
+    }
   ]
 }

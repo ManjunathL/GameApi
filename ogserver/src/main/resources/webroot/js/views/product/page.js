@@ -79,14 +79,14 @@ define([
                             var subCategorynames = new Array();
                             subCategorynames.push(subCategory.toJSON().name);
                             that.filter.set({
-                                'selectedSubCategoriesName': subCategorynames
+                                'selectedFiltersName': subCategorynames
                             }, {
                                 silent: true
                             });
-                            var subCategoryIds = new Array();
-                            subCategoryIds.push(subCategory.toJSON().id);
+                            var fillterIds = new Array();
+                            fillterIds.push(subCategory.toJSON().id);
                             that.filter.set({
-                                'subcategoryIds': subCategoryIds
+                                'fillterIds': fillterIds
                             }, {
                                 silent: true
                             });
@@ -131,7 +131,7 @@ define([
                 });
             }
 
-            var selectedsubCategoryIds = that.filter.get('subcategoryIds');
+            var selectedfillterIds = that.filter.get('fillterIds');
 
             var minPrice = '';
             var maxPrice = '';
@@ -186,17 +186,18 @@ define([
                 that.products.sortBy(sortBy, sortDir);
             }
 
-            var filteredProducts = that.products.filterByPrice(minPrice, maxPrice, selectedsubCategoryIds);
+            var filteredProducts = that.products.filterByPrice(minPrice, maxPrice, selectedfillterIds);
             if (Object.keys(filteredProducts).length == 0) {
                 console.log('here');
                 filteredProducts = that.products.toJSON();
             }
             var compiledTemplate = _.template(productPageTemplate);
+            //console.log(that.filter.toJSON());
             $(that.el).html(compiledTemplate({
                 "collection": filteredProducts,
                 "filter": that.filter.toJSON(),
                 "subcategoriesList": selectedSubCategoriesList,
-                "filterMaster": that.filterMaster
+                "filterMaster": that.filterMaster.toJSON()
             }));
 
             var filteredTemplate = _.template(filterTemplate);
