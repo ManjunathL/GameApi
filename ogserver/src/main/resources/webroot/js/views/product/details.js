@@ -9,10 +9,12 @@ define([
     'text!views/product/details_helper.js',
     'models/product',
     'models/custom_product',
-    'text!templates/product/accessory.html'
-], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate) {
+    'text!templates/product/accessory.html',
+    'text!templates/product/appliance.html'
+], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
+        appliancelst: '#applianceList',
         product: new ProductModel(),
         custom_product: new CustomProduct(),
         initialize: function() {
@@ -74,11 +76,15 @@ define([
                  _.each( that.product.get('accessories'), function ( acc ) {
                     accessoryobj[acc.accessoryName] = acc.accessoryPrice;
                  });
-console.log('First Time ---- ');
-console.log(accessoryobj);
+//                    console.log('First Time ---- ');
+//                    console.log(accessoryobj);
 
               that.custom_product.set({'accessoryobj':accessoryobj},{silent: true});
               that.custom_product.set({'selectedAccessories':that.product.get('accessories')},{silent: true});
+           }
+           if(!that.custom_product.get('selectedAppliances')){
+                var appliances = new Array();
+               that.custom_product.set({'selectedAppliances':appliances});
            }
 
             var compiledTemplate = _.template(productPageTemplate);
@@ -94,6 +100,12 @@ console.log(accessoryobj);
                 "product": that.product.toJSON()
             }));
 
+//            var applianceTemplate = _.template(applianceTemplate);
+//            $(this.appliancelst).html(applianceTemplate({
+//                "product": that.product.toJSON(),
+//                "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type'))
+//            }));
+
 //            var AccessoryTemplate = _.template(AccessoryTemplate);
 //
 //            $('#accessoryList').append(AccessoryTemplate({
@@ -106,7 +118,8 @@ console.log(accessoryobj);
         events:{
             "click .material": "changeMaterial",
             "click .finish": "changeFinish",
-            "click .alt-accessory": "changeAccessory"
+            "click .alt-accessory": "changeAccessory",
+            "click .appliance": "changeAppliance"
 
         },
         changeMaterial : function(ev) {
@@ -134,8 +147,6 @@ console.log(accessoryobj);
             if(this.custom_product.get('finishobj') !== 'undefined'){
                 this.custom_product.set({'finishobj':finishobj},{silent: true});
             }
-
-
 
             if(this.custom_product.get('finishes') !== 'undefined'){
                 this.custom_product.set({'finishes':_.uniq(finishes)},{silent: true});
@@ -231,8 +242,54 @@ console.log(accessoryobj);
               //return this;
 
            }
+        },
+       changeAppliance  : function(ev){
+            $('.appliance').removeClass('active');
+            $(ev.currentTarget).addClass('active');
 
-        }
+            var selectedappliance = $(ev.currentTarget).data('appliance');
+            var selectedapplianceType = $(ev.currentTarget).data('appliancetype');
+            var selectedappliancePrice = $(ev.currentTarget).data('applianceprice');
+            console.log(selectedappliance+' ----- '+selectedapplianceType+' ----- '+selectedappliancePrice);
+
+            var appliances = this.custom_product.get('selectedAppliances');
+            _.map( this.product.get('appliances'), function ( model ) {
+                if ( model.name == selectedappliance ){
+                    if($.inArray( selectedappliance, appliances ) == -1){
+                        appliances.push(selectedappliance);
+
+                        if(this.custom_product.get('basePrice') !== 'undefined'){
+                            var defaultBaseprice = this.custom_product.get('basePrice');
+                            if (defaultBaseprice.indexOf(',') > -1) {
+                                defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
+                            }
+                            if(selectedappliancePrice.indexOf(',') > -1){
+                                selectedappliancePrice=selectedappliancePrice.replace(/\,/g,'');
+                            }
+                            var basePrice = parseInt(defaultBaseprice) + parseInt(selectedappliancePrice);
+                            this.custom_product.set({'basePrice':basePrice.toLocaleString()});
+                        }
+                    }else{
+                        appliances.splice( $.inArray(selectedappliance, appliances), 1 );
+                        if(this.custom_product.get('basePrice') !== 'undefined'){
+                            var defaultBaseprice = this.custom_product.get('basePrice');
+                            if (defaultBaseprice.indexOf(',') > -1) {
+                                defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
+                            }
+                            if(selectedappliancePrice.indexOf(',') > -1){
+                                selectedappliancePrice=selectedappliancePrice.replace(/\,/g,'');
+                            }
+                            var basePrice = parseInt(defaultBaseprice) - parseInt(selectedappliancePrice);
+                            this.custom_product.set({'basePrice':basePrice.toLocaleString()});
+                        }
+                    }
+                }
+            });
+            console.log(appliances);
+            if(this.custom_product.get('selectedAppliances') !== 'undefined'){
+                this.custom_product.set({'selectedAppliances':appliances});
+            }
+       }
     });
     return ProductPage;
 });

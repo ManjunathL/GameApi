@@ -2850,3 +2850,9 @@ hr {
 .position-absolute {
     position: absolute;
 }
+.appliance-untick{
+    border-radius: 50%; position: relative; top: -150px; right: 10px; float: right; font-size: 20px; color: #CCC;background: none repeat scroll 0% 0% #FFF;
+}
+.appliance-tick{
+    border-radius: 50%; position: relative; top: -150px; right: 10px; float: right; font-size: 20px; color: #000;background: none repeat scroll 0% 0% #F0F0F0;
+}
