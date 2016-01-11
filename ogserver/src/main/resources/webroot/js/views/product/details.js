@@ -244,8 +244,8 @@ define([
            }
         },
        changeAppliance  : function(ev){
-            $('.appliance').removeClass('active');
-            $(ev.currentTarget).addClass('active');
+           // $('.appliance').removeClass('active');
+           // $(ev.currentTarget).addClass('active');
 
             var selectedappliance = $(ev.currentTarget).data('appliance');
             var selectedapplianceType = $(ev.currentTarget).data('appliancetype');
