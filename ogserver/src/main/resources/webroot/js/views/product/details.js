@@ -8,8 +8,9 @@ define([
     'text!templates/product/details.html',
     'text!views/product/details_helper.js',
     'models/product',
-    'models/custom_product'
-], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct) {
+    'models/custom_product',
+    'text!templates/product/accessory.html'
+], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         product: new ProductModel(),
@@ -93,6 +94,12 @@ console.log(accessoryobj);
                 "product": that.product.toJSON()
             }));
 
+//            var AccessoryTemplate = _.template(AccessoryTemplate);
+//
+//            $('#accessoryList').append(AccessoryTemplate({
+//                "selectedAccessories": that.custom_product.get('selectedAccessories').toJSON()
+//            }));
+
         },
         material: function(mf) { return mf.material; },
         finish: function(mf) { return mf.finish; },
@@ -123,8 +130,6 @@ console.log(accessoryobj);
                     return false;
                 }
             });
-
-            console.log(finishobj);
 
             if(this.custom_product.get('finishobj') !== 'undefined'){
                 this.custom_product.set({'finishobj':finishobj},{silent: true});
@@ -180,8 +185,6 @@ console.log(accessoryobj);
             var selectedAltAccessoryPrice = $(event.currentTarget).data('altaccessoryprice');
             var selectedAltAccessoryImg = $(event.currentTarget).data('altaccessoryimg');
 
-            console.log(selectedDefaultAccessory+' ---------- '+selectedAltAccessory+' ----- '+selectedAltAccessoryPrice);
-
             var defaultAccessoryPrice = 0;
             if(this.custom_product.get('accessoryobj') !== 'undefined'){
                 defaultAccessoryPrice = this.custom_product.get('accessoryobj')[selectedDefaultAccessory];
@@ -189,16 +192,12 @@ console.log(accessoryobj);
 
             var differencePrice = parseInt(selectedAltAccessoryPrice) - parseInt(defaultAccessoryPrice);
 
-             console.log(defaultAccessoryPrice+'*******'+selectedAltAccessoryPrice+'**********'+differencePrice);
-
              if(this.custom_product.get('basePrice') !== 'undefined'){
                 var defaultBaseprice = this.custom_product.get('basePrice');
                 if (defaultBaseprice.indexOf(',') > -1) {
                     defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
                 }
                 var basePrice = parseInt(defaultBaseprice) + parseInt(differencePrice);
-
-                console.log(defaultBaseprice+'--------'+differencePrice+' ---------- '+basePrice);
                 this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
             }
 
@@ -221,6 +220,15 @@ console.log(accessoryobj);
                  });
               this.custom_product.set({'selectedAccessories':accessoryList},{silent: true});
               this.custom_product.set({'accessoryobj':accessoryobj});
+
+             // $('#defaultbaseprice').html(basePrice.toLocaleString());
+
+//              var AccessoryTemplate = _.template(AccessoryTemplate);
+//
+//              $('#accessoryList').html(AccessoryTemplate({
+//                  "selectedAccessories": this.custom_product.get('selectedAccessories')
+//              }));
+              //return this;
 
            }
 
