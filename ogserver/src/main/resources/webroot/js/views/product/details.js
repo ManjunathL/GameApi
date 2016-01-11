@@ -232,7 +232,7 @@ define([
               this.custom_product.set({'selectedAccessories':accessoryList},{silent: true});
               this.custom_product.set({'accessoryobj':accessoryobj});
 
-             // $('#defaultbaseprice').html(basePrice.toLocaleString());
+              //$('#defaultbaseprice').html(basePrice.toLocaleString());
 
 //              var AccessoryTemplate = _.template(AccessoryTemplate);
 //
@@ -267,7 +267,7 @@ define([
                                 selectedappliancePrice=selectedappliancePrice.replace(/\,/g,'');
                             }
                             var basePrice = parseInt(defaultBaseprice) + parseInt(selectedappliancePrice);
-                            this.custom_product.set({'basePrice':basePrice.toLocaleString()});
+                            this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
                         }
                     }else{
                         appliances.splice( $.inArray(selectedappliance, appliances), 1 );
@@ -280,15 +280,18 @@ define([
                                 selectedappliancePrice=selectedappliancePrice.replace(/\,/g,'');
                             }
                             var basePrice = parseInt(defaultBaseprice) - parseInt(selectedappliancePrice);
-                            this.custom_product.set({'basePrice':basePrice.toLocaleString()});
+                            this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
+
                         }
                     }
                 }
             });
+            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
             console.log(appliances);
             if(this.custom_product.get('selectedAppliances') !== 'undefined'){
-                this.custom_product.set({'selectedAppliances':appliances});
+                this.custom_product.set({'selectedAppliances':appliances},{silent: true});
             }
+            return this;
        }
     });
     return ProductPage;
