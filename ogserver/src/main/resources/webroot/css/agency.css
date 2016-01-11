@@ -156,7 +156,7 @@ a.active {
 }
 
 a {
-    color: #f1591f;
+    color: #000;
     -webkit-transition: color 0.3s,opacity 0.2s;
     transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
@@ -413,7 +413,6 @@ button {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    position: absolute;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -747,6 +746,10 @@ button {
     color: #f1591f !important;
 }
 
+.color-333{
+    color: #333 !important;
+}
+
 .width100 {
     width: 100%;
 }
@@ -761,6 +764,22 @@ button {
 
 .width75 {
     width: 75%;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.display-inline-block {
+    display: inline-block;
 }
 
 .align-left {
@@ -780,7 +799,7 @@ button {
 }
 
 .noclick{
-    pointer-events: none;
+    cursor: not-allowed !important;
 }
 
 .font-size9 {
@@ -805,6 +824,9 @@ button {
 
 .font-size20 {
     font-size: 20px;
+}
+.font-size22 {
+    font-size: 22px;
 }
 
 .font-size30 {
@@ -919,9 +941,10 @@ button {
     margin: auto;
 }
 
-.margin-bottom15 {
-    margin-bottom: 15px;
+.margin0 {
+    margin: 0px !important;
 }
+
 
 .margin0-10 {
     margin: 0 10px;
@@ -938,16 +961,8 @@ button {
     margin-left: 10px !important;
 }
 
-.margin-bottom20 {
-    margin-bottom: 20px;
-}
-
-.margin-bottom30 {
-    margin-bottom: 30px;
-}
-
-.margin-bottom40 {
-    margin-bottom: 40px;
+.margin-right-5 {
+    margin-right: 5px !important;
 }
 
 .margin-top20 {
@@ -974,8 +989,20 @@ button {
     margin-top: 5%;
 }
 
-.margin0 {
-    margin: 0px;
+.margin-bottom15 {
+    margin-bottom: 15px;
+}
+
+.margin-bottom20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom30 {
+    margin-bottom: 30px;
+}
+
+.margin-bottom40 {
+    margin-bottom: 40px;
 }
 
 .design-count {
@@ -1344,7 +1371,7 @@ a.button-orange, a.button-orange:hover {
     text-align: center;
     transition: .2s ease-out;
     cursor: pointer;
-    margin: 5px;
+    margin: 3px;
     position: relative;
 }
 
@@ -1379,6 +1406,10 @@ a.button-orange, a.button-orange:hover {
     display: inline-block;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.filters a {
+    color: #333;
 }
 
 .filters li ul li {
@@ -2752,12 +2783,21 @@ hr {
     .margintop20{
         margin-top: 20px;
     }
+    .margintop25{
+        margin-top: 25px;
+    }
     .margintop40{
         margin-top: 40px;
+    }
+    .margintop100{
+        margin-top: 100px;
     }
 
     .paddingtop0{
         padding-top: 0px;
+    }
+    .paddingtop5{
+        padding-top: 5px;
     }
     .paddingtop10{
         padding-top: 10px;
@@ -2803,122 +2843,9 @@ hr {
         color:#F1591F;
     }
 
-    .display-none {
-        display: none;
-    }
-
-    .display-block {
-        display: block;
-    }
-
-    .display-inline {
-        display: inline;
-    }
-
-    .display-inline-block {
-        display: inline-block;
-    }
-
     .error-text {
         color: #FF0000;
     }
-
-.letterWrapper .letter input,
-.letterWrapper .letter textarea {
-  overflow: hidden;
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  background: #000000 transparent;
-  background-color: rgba(255, 255, 255, 0);
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#00000000)";
-  color: #0072be;
-}
-.letterWrapper .letter .text input,
-textarea:focus {
-  outline-width: 0;
-  outline: 0;
-}
-
-.letterWrapper {
-    position: absolute;
-    transition: all 1s ease-in-out;
-    -webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-}
-
-.letterWrapper .letter {
-  width: 100%;
-  position: absolute;
-  left: 39px;
-  top: 0px;
-  color: #464646;
-}
-.letterWrapper .letter .shape {
-  background-color: #fffab5;
-  width: 391px;
-  height: 250px;
-}
-
-.letterWrapper .letter .letterContent {
-  width: 339px;
-  position: relative;
-  left: 25px;
-  top: 28px;
-  font-size: 16px;
-}
-.letterWrapper .letter .letterContent .lineWrapper {
-  display: table;
-}
-.letterWrapper .letter .letterContent .line {
-  display: table-row;
-}
-.letterWrapper .letter .letterContent .line .text {
-  display: table-cell;
-  white-space: nowrap;
-}
-.letterWrapper .letter .letterContent .line .textFillWidth {
-  width: 100%;
-}
-.letterWrapper .letter .letterContent .line .text .textContentWrapper {
-  position: relative;
-  margin-right: 2px;
-}
-.letterWrapper .letter .letterContent .underline {
-  display: inline-block;
-  width: 100%;
-  position: relative;
-  top: 1px;
-  height: 1px;
-  background-color: #ffde16;
-}
-.letterWrapper .letter .letterContent .exclamationMark {
-  display: inline-block;
-  position: relative;
-  top: -2px;
-  left: -10px;
-  width: 0px;
-}
-.letterWrapper .letter .letterContent .mailContentContainer {
-  width: 100%;
-  position: relative;
-  line-height: 1.3;
-
-}
-.letterWrapper .letter .letterContent .mailContentContainer textarea {
-  line-height: 1.3;
-  resize: none;
-}
-
-.envelopeOut {
-  position: absolute;
-  left: 0px;
-  top: 190px;
-}
 
 .position-absolute {
     position: absolute;

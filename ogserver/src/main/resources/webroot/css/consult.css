@@ -1,0 +1,106 @@
+.letterWrapper .letter input,
+.letterWrapper .letter textarea {
+    overflow: hidden;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: #000000 transparent;
+    background-color: rgba(255, 255, 255, 0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#00000000)";
+    color: #0072be;
+}
+
+.letterWrapper .letter .text input,
+textarea:focus {
+    outline-width: 0;
+    outline: 0;
+}
+
+.letterWrapper {
+    position: absolute;
+    transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+}
+
+.letterWrapper .letter {
+    width: 100%;
+    position: absolute;
+    left: 39px;
+    top: 0px;
+    color: #464646;
+}
+
+.letterWrapper .letter .shape {
+    background-color: #fffab5;
+    width: 391px;
+    height: 250px;
+}
+
+.letterWrapper .letter .letterContent {
+    width: 339px;
+    position: relative;
+    left: 25px;
+    top: 28px;
+    font-size: 16px;
+}
+
+.letterWrapper .letter .letterContent .lineWrapper {
+    display: table;
+}
+
+.letterWrapper .letter .letterContent .line {
+    display: table-row;
+}
+
+.letterWrapper .letter .letterContent .line .text {
+    display: table-cell;
+    white-space: nowrap;
+}
+
+.letterWrapper .letter .letterContent .line .textFillWidth {
+    width: 100%;
+}
+
+.letterWrapper .letter .letterContent .line .text .textContentWrapper {
+    position: relative;
+    margin-right: 2px;
+}
+
+.letterWrapper .letter .letterContent .underline {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    top: 1px;
+    height: 1px;
+    background-color: #ffde16;
+}
+
+.letterWrapper .letter .letterContent .exclamationMark {
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    left: -10px;
+    width: 0px;
+}
+
+.letterWrapper .letter .letterContent .mailContentContainer {
+    width: 100%;
+    position: relative;
+    line-height: 1.3;
+}
+
+.letterWrapper .letter .letterContent .mailContentContainer textarea {
+    line-height: 1.3;
+    resize: none;
+}
+
+.envelopeOut {
+    position: absolute;
+    left: 0px;
+    top: 190px;
+}
