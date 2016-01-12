@@ -10,8 +10,10 @@ define([
     'models/product',
     'models/custom_product',
     'text!templates/product/accessory.html',
-    'text!templates/product/appliance.html'
-], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate) {
+    'text!templates/product/appliance.html',
+    'text!templates/product/finish.html',
+    'text!templates/product/colors.html'
+], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         appliancelst: '#applianceList',
@@ -63,28 +65,18 @@ define([
                if(!that.custom_product.get('finishobj')){
                    that.custom_product.set({'finishobj':finishobj},{silent: true});
                }
-
            }
-           if(!that.custom_product.get('colors')){
-            that.changeColor(that.product.get('defaultFinish'));
-           }
-
-           // console.log(that.product.get('accessories'));
-
            if(!that.custom_product.get('selectedAccessories')){
               var accessoryobj = {};
                  _.each( that.product.get('accessories'), function ( acc ) {
                     accessoryobj[acc.accessoryName] = acc.accessoryPrice;
                  });
-//                    console.log('First Time ---- ');
-//                    console.log(accessoryobj);
-
               that.custom_product.set({'accessoryobj':accessoryobj},{silent: true});
               that.custom_product.set({'selectedAccessories':that.product.get('accessories')},{silent: true});
            }
            if(!that.custom_product.get('selectedAppliances')){
                 var appliances = new Array();
-               that.custom_product.set({'selectedAppliances':appliances});
+               that.custom_product.set({'selectedAppliances':appliances},{silent: true});
            }
 
             var compiledTemplate = _.template(productPageTemplate);
@@ -92,13 +84,29 @@ define([
                 "product": that.product.toJSON(),
                 "materials": _.uniq(_.pluck(that.product.get('mf'), 'material')),
                 //"finishes": _.uniq(_.pluck(that.product.get('mf'), 'finish')),
-                "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type'))
+                "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type')),
+                "selectedColor": that.custom_product.get('colors'),
+                "selectedfinishes": that.custom_product.get('finishes'),
+                "selectedFinish": that.custom_product.get('selectedFinish'),
+                "selectedAccessories": that.custom_product.get('selectedAccessories')
             }));
 
             var compiledJsTemplate = _.template(helperJsTemplate);
             $(this.el).append(compiledJsTemplate({
                 "product": that.product.toJSON()
             }));
+
+            if(!that.custom_product.get('colors')){
+                that.changeColor(that.product.get('defaultFinish'),colorsTemplate);
+            }
+
+//            $('#defaultbaseprice').html(that.custom_product.get('basePrice'));
+//            var newfinishTemplate = _.template(finishTemplate);
+//
+//               $('#finishList').html(newfinishTemplate({
+//                   "selectedfinishes": that.custom_product.get('finishes'),
+//                   "selectedFinish": that.custom_product.get('selectedFinish')
+//               }));
 
 //            var applianceTemplate = _.template(applianceTemplate);
 //            $(this.appliancelst).html(applianceTemplate({
@@ -151,13 +159,25 @@ define([
             if(this.custom_product.get('finishes') !== 'undefined'){
                 this.custom_product.set({'finishes':_.uniq(finishes)},{silent: true});
             }
+
+            if(this.custom_product.get('basePrice') !== 'undefined'){
+                this.custom_product.set({'basePrice':basePriceArr[0]},{silent: true});
+            }
+
             if(this.custom_product.get('selectedFinish') !== 'undefined'){
                 this.custom_product.set({'selectedFinish':finishes[0]},{silent: true});
-                this.changeColor(finishes[0]);
             }
-            if(this.custom_product.get('basePrice') !== 'undefined'){
-                this.custom_product.set({'basePrice':basePriceArr[0]});
-            }
+
+            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
+
+            var nwfinishTemplate = _.template(finishTemplate);
+
+             $('#finishList').html(nwfinishTemplate({
+                 "selectedfinishes": _.uniq(this.custom_product.get('finishes')),
+                 "selectedFinish": this.custom_product.get('selectedFinish')
+             }));
+
+            this.changeColor(finishes[0],colorsTemplate);
         },
         changeFinish : function(e) {
             $('.finish').removeClass('active');
@@ -169,12 +189,12 @@ define([
             }
 
             if(this.custom_product.get('basePrice') !== 'undefined'){
-               this.custom_product.set({'basePrice':this.custom_product.get('finishobj')[selectedFinish]});
+               this.custom_product.set({'basePrice':this.custom_product.get('finishobj')[selectedFinish]},{silent: true});
            }
 
-            this.changeColor(selectedFinish);
+            this.changeColor(selectedFinish,colorsTemplate);
         },
-        changeColor : function(selectedFinish){
+        changeColor : function(selectedFinish,colorsTemplate){
             var colors = {};
             _.map( this.product.get('fc'), function ( result ) {
                 if ( result.finish == selectedFinish ){
@@ -184,8 +204,18 @@ define([
                 }
             });
             if(this.custom_product.get('colors') !== 'undefined'){
-                this.custom_product.set({'colors':colors});
+                this.custom_product.set({'colors':colors},{silent: true});
             }
+
+            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
+
+            var colorsTemplate = _.template(colorsTemplate);
+
+             $('#colorList').html(colorsTemplate({
+                 "selectedColor": this.custom_product.get('colors')
+             }));
+
+            return this;
         },
         changeAccessory : function(event){
             $('.alt-accessory').removeClass('active');
@@ -207,6 +237,8 @@ define([
                 var defaultBaseprice = this.custom_product.get('basePrice');
                 if (defaultBaseprice.indexOf(',') > -1) {
                     defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
+                }else{
+                    defaultBaseprice = defaultBaseprice;
                 }
                 var basePrice = parseInt(defaultBaseprice) + parseInt(differencePrice);
                 this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
@@ -230,17 +262,17 @@ define([
                     k++;
                  });
               this.custom_product.set({'selectedAccessories':accessoryList},{silent: true});
-              this.custom_product.set({'accessoryobj':accessoryobj});
+              this.custom_product.set({'accessoryobj':accessoryobj},{silent: true});
 
-              //$('#defaultbaseprice').html(basePrice.toLocaleString());
+             $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
 
-//              var AccessoryTemplate = _.template(AccessoryTemplate);
-//
-//              $('#accessoryList').html(AccessoryTemplate({
-//                  "selectedAccessories": this.custom_product.get('selectedAccessories')
-//              }));
+              var compiledaccessoryTemplate = _.template(AccessoryTemplate);
+
+              $('#accessoryList').html(compiledaccessoryTemplate({
+                  "product": this.product.toJSON(),
+                  "selectedAccessories": this.custom_product.get('selectedAccessories')
+              }));
               //return this;
-
            }
         },
        changeAppliance  : function(ev){
