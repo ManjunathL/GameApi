@@ -47,21 +47,21 @@ define([
 		getProduct: function (id) {
 		    return this.find(function(product){ return product.get('id') === id; });
 		},
-		filterByPrice:function (minPrice,maxPrice,subCategoryIds){
+		filterByPrice:function (minPrice,maxPrice,filterIds){
 		    var that = this;
 		    if(!minPrice && !maxPrice){
                 return this.toJSON();
 		    }else{
 		        return _.map(this.filter(function(product){
 
-                                return product.get('defaultPrice') >= minPrice && product.get('defaultPrice') <= maxPrice && that.productInSubCategs(product, subCategoryIds);
+                                return product.get('defaultPrice') >= minPrice && product.get('defaultPrice') <= maxPrice && that.productInFilters(product, filterIds);
                             }), function (product) {return product.toJSON();});
 		    }
 
 		},
-		productInSubCategs: function (product, subCategoryIds) {
-		    for (var i=0; i < subCategoryIds.length; i++) {
-		        if (product.get("subCategId") == subCategoryIds[i])
+		productInFilters: function (product, filterIds) {
+		    for (var i=0; i < filterIds.length; i++) {
+		        if ((product.get("subCategId") == filterIds[i]) || (product.get("price_range_id") == filterIds[i]) || (product.get("style_id") == filterIds[i]))
 		            return true;
 		    }
 

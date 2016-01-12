@@ -21,7 +21,7 @@
     "name": "Kitchen",
     "code": "kitchen",
     "minPriceLimit":0,
-    "maxPriceLimit":500000,
+    "maxPriceLimit":1000000,
     "subCategories": [
       {
         "name": "L Shaped Kitchen",

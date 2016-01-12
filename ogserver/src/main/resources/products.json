@@ -19,6 +19,10 @@
     "relevance": 1,
     "shortlisted": 46,
     "likes": 200,
+    "price_range": "standard",
+    "price_range_id": "price_range1",
+    "style": "classic",
+    "style_id": "style2",
     "createDt": "04-30-2015",
     "delivery": {
       "title": "45 Days Delivery Guarantee ",
@@ -36,7 +40,7 @@
     "images": [
       "Albatross_Mapple1_low_erohcx"
     ],
-    "defaultPrice": 385000,
+    "defaultPrice": 285000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
@@ -161,6 +165,10 @@
     "relevance": 2,
     "shortlisted": 46,
     "likes": 200,
+    "price_range": "standard",
+    "price_range_id": "price_range1",
+    "style": "contemporary",
+    "style_id": "style1",
     "createDt": "04-30-2015",
     "delivery": {
       "title": "45 Days Delivery Guarantee ",
@@ -303,6 +311,10 @@
     "relevance": 3,
     "shortlisted": 46,
     "likes": 200,
+    "price_range": "premium",
+    "price_range_id": "price_range2",
+    "style": "modern",
+    "style_id": "style3",
     "createDt": "04-30-2015",
     "delivery": {
       "title": "45 Days Delivery Guarantee ",
@@ -320,7 +332,7 @@
     "images": [
       "bart_Lshaped_BrownOak_CreamOak_dvxktq"
     ],
-    "defaultPrice": 85000,
+    "defaultPrice": 485000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
@@ -445,6 +457,10 @@
     "relevance": 4,
     "shortlisted": 46,
     "likes": 200,
+    "price_range": "premium",
+    "price_range_id": "price_range2",
+    "style": "contemporary",
+    "style_id": "style1",
     "createDt": "04-30-2015",
     "delivery": {
       "title": "45 Days Delivery Guarantee ",
@@ -462,7 +478,7 @@
     "images": [
       "Brambling_Aurbergene_Low_lrs7hs"
     ],
-    "defaultPrice": 5000,
+    "defaultPrice": 555000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
@@ -587,6 +603,10 @@
     "relevance": 5,
     "shortlisted": 46,
     "likes": 200,
+    "price_range": "luxury",
+    "price_range_id": "price_range3",
+    "style": "classic",
+    "style_id": "style2",
     "createDt": "04-30-2015",
     "delivery": {
       "title": "45 Days Delivery Guarantee ",
@@ -604,7 +624,7 @@
     "images": [
       "Bulfinch_white_Low_utphxl"
     ],
-    "defaultPrice": 0,
+    "defaultPrice": 855000,
     "defaultMaterial": "Plywood",
     "defaultFinish": "MDF with Membrane",
     "accessories": [
