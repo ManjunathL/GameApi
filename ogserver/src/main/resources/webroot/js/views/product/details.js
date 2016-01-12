@@ -83,12 +83,11 @@ define([
             $(this.el).html(compiledTemplate({
                 "product": that.product.toJSON(),
                 "materials": _.uniq(_.pluck(that.product.get('mf'), 'material')),
-                //"finishes": _.uniq(_.pluck(that.product.get('mf'), 'finish')),
                 "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type')),
                 "selectedColor": that.custom_product.get('colors'),
                 "selectedfinishes": that.custom_product.get('finishes'),
                 "selectedFinish": that.custom_product.get('selectedFinish'),
-                "selectedAccessories": that.custom_product.get('selectedAccessories')
+                "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories'))
             }));
 
             var compiledJsTemplate = _.template(helperJsTemplate);
@@ -99,27 +98,6 @@ define([
             if(!that.custom_product.get('colors')){
                 that.changeColor(that.product.get('defaultFinish'),colorsTemplate);
             }
-
-//            $('#defaultbaseprice').html(that.custom_product.get('basePrice'));
-//            var newfinishTemplate = _.template(finishTemplate);
-//
-//               $('#finishList').html(newfinishTemplate({
-//                   "selectedfinishes": that.custom_product.get('finishes'),
-//                   "selectedFinish": that.custom_product.get('selectedFinish')
-//               }));
-
-//            var applianceTemplate = _.template(applianceTemplate);
-//            $(this.appliancelst).html(applianceTemplate({
-//                "product": that.product.toJSON(),
-//                "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type'))
-//            }));
-
-//            var AccessoryTemplate = _.template(AccessoryTemplate);
-//
-//            $('#accessoryList').append(AccessoryTemplate({
-//                "selectedAccessories": that.custom_product.get('selectedAccessories').toJSON()
-//            }));
-
         },
         material: function(mf) { return mf.material; },
         finish: function(mf) { return mf.finish; },
@@ -218,6 +196,7 @@ define([
             return this;
         },
         changeAccessory : function(event){
+        //debugger;
             $('.alt-accessory').removeClass('active');
             $(event.currentTarget).addClass('active');
 
@@ -254,7 +233,7 @@ define([
                         accessoryList[k]['accessoryName']= selectedAltAccessory;
                         accessoryList[k]['accessoryPrice']= selectedAltAccessoryPrice;
                         accessoryList[k]['accessoryImg']= selectedAltAccessoryImg;
-                        accessoryList[k]['alternatives']= acc.alternatives;
+                        accessoryList[k]['alternatives']= _.uniq(acc.alternatives);
                     }
                     else{
                         accessoryobj[accessoryList[k]['accessoryName']] = accessoryList[k]['accessoryPrice'];
@@ -270,15 +249,12 @@ define([
 
               $('#accessoryList').html(compiledaccessoryTemplate({
                   "product": this.product.toJSON(),
-                  "selectedAccessories": this.custom_product.get('selectedAccessories')
+                  "selectedAccessories": _.uniq(this.custom_product.get('selectedAccessories'))
               }));
-              //return this;
+              return this;
            }
         },
        changeAppliance  : function(ev){
-           // $('.appliance').removeClass('active');
-           // $(ev.currentTarget).addClass('active');
-
             var selectedappliance = $(ev.currentTarget).data('appliance');
             var selectedapplianceType = $(ev.currentTarget).data('appliancetype');
             var selectedappliancePrice = $(ev.currentTarget).data('applianceprice');
@@ -319,7 +295,7 @@ define([
                 }
             });
             $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
-            console.log(appliances);
+            //console.log(appliances);
             if(this.custom_product.get('selectedAppliances') !== 'undefined'){
                 this.custom_product.set({'selectedAppliances':appliances},{silent: true});
             }
