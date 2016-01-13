@@ -2,7 +2,7 @@
 
 .g-html pre{
 	display:block;
-	font-family:Consolas,Lucida Console,monospace;
+	font-family:Roboto,Consolas,Lucida Console,monospace;
 	font-size:12px;
 	line-height:20px;
 	padding:10px 15px;
@@ -15,7 +15,7 @@
 .g-html code{
 	display:inline-block;
 	vertical-align:top;
-	font-family:Consolas,Lucida Console,monospace;
+	font-family:Roboto,Consolas,Lucida Console,monospace;
 	padding:0 5px;
 	background-color:#faf6e1;
 	color:#333;
@@ -8712,7 +8712,7 @@ img#wpstats{
 	z-index:1047;
 	top:0;
 	right:0;
-	font-family:Arial,sans-serif;
+	font-family:Roboto,Arial,sans-serif;
 	font-size:54px;
 	text-align:center;
 	line-height:80px;
@@ -9000,7 +9000,7 @@ img#wpstats{
 
 .rsDefault.rsFullscreen .rsFullscreenBtn:after{
 	content:'\00D7';
-	font-family:Arial,sans-serif;
+	font-family:Roboto,Arial,sans-serif;
 	font-size:46px;
 }
 

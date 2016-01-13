@@ -147,7 +147,7 @@
 
 body {
     overflow-x: hidden;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .text-muted {
@@ -195,7 +195,6 @@ h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: 'Quicksand', sans-serif;
     font-weight: 400;
 }
 
@@ -230,7 +229,6 @@ h6 {
 .btn-primary {
     border-color: #f1591f;
     text-transform: uppercase;
-    font-family: "Open Sans",sans-serif;
     font-weight: 700;
     color: #fff;
     background-color: #f1591f;
@@ -279,7 +277,6 @@ fieldset[disabled] .btn-primary.active {
     border-color: #f1591f;
     border-radius: 0px;
     text-transform: uppercase;
-    font-family: "Open Sans",sans-serif;
     font-size: 18px;
     font-weight: 700;
     color: #fff;
@@ -338,7 +335,6 @@ button {
 .consult:focus,
 .consult.active {
     color: #fff !important;
-    font-family: "Open Sans",sans-serif;
     font-weight: 400;
     font-size: 14px;
     letter-spacing: 1px;
@@ -381,10 +377,6 @@ button {
     margin-left: 20px;
 }
 
-
-.navbar-collapse {
-    font-family: "Open Sans", sans-serif;
-}
 
 .navbar-default .nav li {
     cursor: pointer;
@@ -1305,7 +1297,6 @@ section h2.section-heading {
 section h3.section-subheading {
     margin-bottom: 75px;
     text-transform: none;
-    font-family: "Open Sans",sans-serif;
     font-size: 16px;
     font-style: italic;
     font-weight: 400;
@@ -1317,7 +1308,6 @@ section h3.section-subheading {
 }
 
 .list-heading h2{
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     color: #000;
     text-transform: none !important;
@@ -1348,7 +1338,6 @@ section h3.section-subheading {
 }
 
 .cost {
-    font-family: "Open Sans", sans-serif;
     font-size: 25px;
     font-weight: 400;
     color: #000;
@@ -1520,7 +1509,6 @@ a.button-orange, a.button-orange:hover {
     z-index: 1045;
     overflow: auto;
     padding: 10px 10px;
-    font-family: "Open Sans", sans-serif !important;
     font-weight: 400;
     -webkit-transition: all .5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
@@ -1529,7 +1517,6 @@ a.button-orange, a.button-orange:hover {
 }
 
 .filterpop h4, .filterpop h5 {
-    font-family: "Open Sans", sans-serif !important;
     font-weight: 400;
     display: inline-block;
 }
@@ -1561,7 +1548,6 @@ a.button-orange, a.button-orange:hover {
     z-index: 1050;
     overflow: auto;
     padding: 0px 20px;
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     -webkit-transition: all .5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
@@ -1578,7 +1564,6 @@ a.button-orange, a.button-orange:hover {
 }
 
 .contact-form {
-    font-family: "Open Sans", sans-serif;
     margin: auto;
     width: 100%;
     color: #fff;
@@ -1595,7 +1580,6 @@ a.button-orange, a.button-orange:hover {
 
 .userpop h2, .signup h2 {
     text-transform: none;
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     margin-bottom: 20px;
 }
@@ -1607,14 +1591,12 @@ a.button-orange, a.button-orange:hover {
 
 .userpop h3 {
     text-transform: none;
-    font-family: "Open Sans", sans-serif;
     font-weight: 300;
     margin-bottom: 20px;
 }
 
 .userpop h4 {
     text-transform: none;
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
 }
 
@@ -1906,7 +1888,6 @@ color: #FFF!important;
     color: #fff;
     position: relative;
     opacity: 1;
-    font-family: "Open Sans",sans-serif;
     font-weight: 400;
     text-transform: none;
     margin: 0px;
@@ -1966,7 +1947,6 @@ color: #FFF!important;
     color: #fff;
     padding: 20px;
     margin-bottom: 25px;
-    font-family: "Open Sans",sans-serif;
     font-size: 16px;
     font-style: italic;
     line-height: 22px;
@@ -1978,7 +1958,6 @@ color: #FFF!important;
     text-transform: none;
     padding: 20px;
     font-weight: 400;
-    font-family: "Open Sans",sans-serif;
     line-height: 22px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
@@ -1992,7 +1971,6 @@ color: #FFF!important;
 
 .portfolio .portfolio-item .portfolio-caption p {
     margin: 0;
-    font-family: "Open Sans",sans-serif;
     font-size: 16px;
 }
 
@@ -2269,28 +2247,24 @@ section#contact .form-control:focus {
 
 section#contact::-webkit-input-placeholder {
     text-transform: uppercase;
-    font-family: "Open Sans",sans-serif;
     font-weight: 700;
     color: #bbb;
 }
 
 section#contact:-moz-placeholder {
     text-transform: uppercase;
-    font-family: "Open Sans",sans-serif;
     font-weight: 700;
     color: #bbb;
 }
 
 section#contact::-moz-placeholder {
     text-transform: uppercase;
-    font-family: "Open Sans",sans-serif;
     font-weight: 700;
     color: #bbb;
 }
 
 section#contact:-ms-input-placeholder {
     text-transform: uppercase;
-    font-family: "Open Sans",sans-serif;
     font-weight: 700;
     color: #bbb;
 }
@@ -2318,7 +2292,6 @@ section#contact .text-danger {
 footer {
     position: relative;
     color: #000;
-    font-family: "Open Sans",sans-serif;
     padding: 30px 0 60px 0;
     text-align: center;
 }
@@ -2338,12 +2311,10 @@ footer a:hover, a:active, a:focus{
 
 
 footer span {
-    font-family: "Open Sans",sans-serif;
     line-height: 40px;
 }
 
 footer h5{
-    font-family: "Open Sans",sans-serif;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 40px;
@@ -2351,7 +2322,6 @@ footer h5{
 
 footer ul.quicklinks {
     margin-bottom: 0;
-    font-family: "Open Sans",sans-serif;
     line-height: 40px;
 }
 
@@ -2456,7 +2426,6 @@ ul.social-buttons li a:active {
 
 .portfolio-modal .modal-content p.item-intro {
     margin: 20px 0 30px;
-    font-family: "Open Sans",sans-serif;
     font-size: 16px;
     font-style: italic;
 }
