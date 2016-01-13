@@ -4,6 +4,7 @@ define(['firebase', 'underscore'], function(firebase, _) {
     var rootRef = new Firebase(rootUrl);
     return {
         'rootRef': rootRef,
+        TYPE_CONSULT: "consult",
         getUserProfile: function(authData, someFunc) {
 
             if (authData && authData.provider !== 'anonymous') {
@@ -20,6 +21,30 @@ define(['firebase', 'underscore'], function(firebase, _) {
             } else {
                 someFunc(null);
             }
+        },
+        pushEvent: function(uid, data, type) {
+            var eventData = {
+                "data": data,
+                "type": type
+            };
+            this.rootRef.child("events").push().child(uid).set(eventData, function(error) {
+                if (error) {
+                    console.log("not able to push event data", error);
+                } else {
+                    console.log("successfully pushed event data");
+                }
+            });
+        },
+        addConsultData: function(authData, formData) {
+            this.rootRef.child("consults/" + authData.uid + "/" + Date.now()).set(formData,
+                function(error) {
+                    if (error) {
+                        console.log("problem in inserting consult data", error);
+                    } else {
+                        console.log("successfully inserted consult data");
+                    }
+                });
         }
+
     };
 });
