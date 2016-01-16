@@ -143,17 +143,6 @@
           "h": "600",
           "d": "200",
           "uom": "cm"
-        },
-        {
-          "accessoryId": "23",
-          "accessoryCode": "MC37488",
-          "accessoryName": "Cutlery Tray",
-          "accessoryImg": "cabinet-with-bottle-pull-out111_xu5l9c.jpg",
-          "accessoryPrice": "7200",
-          "w": "800",
-          "h": "600",
-          "d": "200",
-          "uom": "cm"
         }
       ]
     }

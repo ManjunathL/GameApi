@@ -82,6 +82,7 @@ define([
                         that.setUser(user);
                         console.log("user already exists in firebase");
                         window.fbButton && window.fbButton.button('reset');
+//                        window.twitterButton && window.twitterButton.button('reset');
                         window.googleButton && window.googleButton.button('reset');
                         $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     } else {
@@ -98,6 +99,7 @@ define([
                                 }, null);
                             }
                             window.fbButton && window.fbButton.button('reset');
+//                            window.twitterButton && window.twitterButton.button('reset');
                             window.googleButton && window.googleButton.button('reset');
                             $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                         };
@@ -121,6 +123,7 @@ define([
             window.loginButton && window.loginButton.button('reset');
             window.googleButton && window.googleButton.button('reset');
             window.fbButton && window.fbButton.button('reset');
+//            window.twitterButton && window.twitterButton.button('reset');
         },
 
         pwdLogin: function() {
@@ -165,6 +168,8 @@ define([
                         return authData.google.displayName;
                     case 'facebook':
                         return authData.facebook.displayName;
+//                    case 'twitter':
+//                        return authData.twitter.displayName;
                 }
             }
         },
@@ -180,6 +185,8 @@ define([
                         return authData.google.profileImageURL;
                     case 'facebook':
                         return authData.facebook.profileImageURL;
+//                    case 'twitter':
+//                        return authData.twitter.profileImageURL;
                 }
             }
         },
@@ -192,6 +199,8 @@ define([
                     return authData.google.email;
                 case 'facebook':
                     return authData.facebook.email;
+//                case 'twitter':
+//                    return authData.twitter.email;
             }
         },
 
@@ -313,17 +322,10 @@ define([
             if (currLeft < 0) {
                 $('.contact-us-pop').css('left', '0px');
                 $('.contact-us-pop').toggleClass('overflowHeight');
-/*
-                $('.contact-us-pop').css('overflow-y', 'auto');
-                $('.contact-us-pop').css('height', '100%');
-*/
+
             } else {
                 $('.contact-us-pop').css('left', -$('.contact-us-pop').width() + 'px');
                 $('.contact-us-pop').toggleClass('overflowHeight');
-/*
-                $('.contact-us-pop').css('overflow-y', '');
-                $('.contact-us-pop').css('height', '');
-*/
             }
         },
         showUserPop: function() {
@@ -346,14 +348,8 @@ define([
             );
         },
         setConsultData: function(authData, formData) {
-            this.ref.child("consults/" + authData.uid + "/" + Date.now()).set(formData,
-                function(error) {
-                    if (error) {
-                        console.log("problem in inserting consult data", error);
-                    } else {
-                        console.log("successfully inserted consult data");
-                    }
-                });
+            MGF.addConsultData(authData, formData);
+            MGF.pushEvent(authData.uid, formData, MGF.TYPE_CONSULT);
         },
         ready: function(parent) {
 
@@ -500,6 +496,18 @@ define([
                         scope: "email"
                     });
                 });
+
+/*
+
+                $('#twitter-btn').click(function() {
+                    window.twitterButton = $(this);
+                    window.twitterButton.button('loading');
+                    that.ref.authWithOAuthPopup("twitter", that.authHandler, {
+                        scope: "email"
+                    });
+                });
+
+*/
 
                 $('#google-btn').click(function() {
                     window.googleButton = $(this);

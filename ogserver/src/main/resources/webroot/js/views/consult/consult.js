@@ -11,14 +11,16 @@ define([
         el: '.page',
         ref: MGF.rootRef,
         renderWithUserProfCallback: function(userProfData) {
-            $(this.el).html(_.template(consultTemplate)({'userProfile': userProfData}));
+            $(this.el).html(_.template(consultTemplate)({
+                'userProfile': userProfData
+            }));
         },
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
-          _.bindAll(this, 'renderWithUserProfCallback');
+            _.bindAll(this, 'renderWithUserProfCallback');
         },
         submit: function(e) {
             if (e.isDefaultPrevented()) return;
@@ -53,15 +55,9 @@ define([
 
 
         },
-        setConsultData: function (authData, formData) {
-            this.ref.child("consults/" + authData.uid + "/" + Date.now()).set(formData,
-            function(error){
-                if (error) {
-                    console.log("problem in inserting consult data", error);
-                } else {
-                    console.log("successfully inserted consult data");
-                }
-            });
+        setConsultData: function(authData, formData) {
+            MGF.addConsultData(authData, formData);
+            MGF.pushEvent(authData.uid, formData, MGF.TYPE_CONSULT);
         },
         events: {
             "submit": "submit"
