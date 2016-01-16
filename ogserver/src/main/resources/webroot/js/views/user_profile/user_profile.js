@@ -7,21 +7,71 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'firebase',
+    'mgfirebase',
     'text!templates/user_profile/user_profile.html'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, Firebase, UserProfileTemplate ) {
+], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, UserProfileTemplate ) {
     var UserProfileView = Backbone.View.extend({
         users: [],
         el: '.page',
+        ref: MGF.rootRef,
+        renderWithUserProfCallback: function(userProfData) {
+            $(this.el).html(_.template(UserProfileTemplate)({'userProfile': userProfData}));
+            console.log(userProfData);
+        },
         render: function() {
+            var authData = this.ref.getAuth();
+            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            //console.log('simple render' + JSON.stringify(authData));
+        },
+        initialize: function() {
+            _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit', 'setuserProfileData');
+        },
+        submit: function(e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
+            debugger;
+
+            var formData = {
+                "fullName": $('#user_full_name').val(),
+                "dob": $('#user_dob').val(),
+                "phone": $('#user_phone').val(),
+                "address": $('#user_address').val(),
+                "city": $('#user_city').val(),
+                "state": $('#user_state').val(),
+                "pinCode": $('#user_pin_code').val()
+            };
+
+            var authData = this.ref.getAuth();
             var that = this;
-            window.users = this.users;
-            //console.log(this.users);
-            var compiledTemplate = _.template(UserProfileTemplate);
-            $(that.el).html(compiledTemplate({
-                "users": that.users
-            }));
+            if (!authData) {
+                this.ref.authAnonymously(function(error, authData) {
+                    if (error) {
+                        console.log("Login Failed!", error);
+                    } else {
+                        that.setuserProfileData(authData, formData);
+                    }
+                });
+            } else {
+                this.setuserProfileData(authData, formData);
+            }
+
+        },
+        setuserProfileData: function (authData, formData) {
+            this.ref.child('user-profiles').child(userData.uid).set(formData,
+                function(error){
+                    if (error) {
+                        console.log("problem in inserting user data", error);
+                    } else {
+                        console.log("successfully inserted user data");
+                    }
+                });
+        },
+        events: {
+            "submit": "submit"
         }
+
+
         //},
         //initialize: function() {
         //    this.users.on("add", this.render, this);

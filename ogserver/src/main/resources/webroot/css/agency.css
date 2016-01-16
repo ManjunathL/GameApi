@@ -176,7 +176,7 @@ a.active {
 }
 
 a {
-    color: #f1591f;
+    color: #000;
     -webkit-transition: color 0.3s,opacity 0.2s;
     transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
@@ -501,6 +501,11 @@ button {
     border: 1px solid #cccccc;
 }
 
+.slight-up {
+    position: absolute;
+    top: -1px;
+}
+
 .user_name {
     position: absolute;
     top: 4%;
@@ -541,7 +546,7 @@ button {
 .user_profile input{
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ccc !important;
 }
 
 .user_profile input[type=text]{
@@ -562,6 +567,25 @@ button {
 
 .user_profile .row {
     margin: 0px;
+}
+
+.user_profile .form-control {
+    display: initial;
+    width: inherit;
+    height: inherit;
+    padding: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    background-color: inherit;
+    background-image: inherit;
+    border: initial;
+    border-radius: inherit;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
 .deactivate_account, .change_password {
@@ -1543,6 +1567,11 @@ a.button-orange, a.button-orange:hover {
     background-color: rgba(0,0,0,0.9);
 }
 
+.filterpop label {
+    font-family: "Open Sans", sans-serif !important;
+    font-weight: 400;
+}
+
 
 @media(min-width:768px){
     .userpop {
@@ -1602,7 +1631,13 @@ a.button-orange, a.button-orange:hover {
 
 .userpop h2 img, .userpop h3 img, .signup h2 img {
     height: 40px;
+    width: 40px;
+    width: 40px;
     border-radius: 50%;
+}
+
+.userpop a {
+    color: #f1591f;
 }
 
 .userpop h3 {
