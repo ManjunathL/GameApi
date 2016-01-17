@@ -9,15 +9,15 @@ define([
     return {
         ref: MGF.rootRef,
 
-        createUser: function(userId, data, cbk) {
+        createUser: function(userId, data, next) {
             var that = this;
             this.ref.child("users").child(userId).set(data, function(error) {
                 if (error) {
                     console.log("Data could not be saved." + error);
-                    that.cbk(false);
+                    that.next(false);
                 } else {
                     console.log("Data saved successfully.");
-                    that.cbk(true);
+                    that.next(true);
                 }
             });
         },
@@ -28,7 +28,7 @@ define([
             });
         },
 
-        getUserProfile: function(uid, authData, handleAuth) {
+        getUserProfileHandleAuth: function(uid, authData, handleAuth) {
             var userProfileRef = this.ref.child("user-profiles/" + uid);
             var userProfile = null;
             var that = this;
@@ -40,22 +40,22 @@ define([
                 console.log("handleAuth done");
             });
         },
-        getUserProfileWithCB: function(fx) {
+        getUserProfileWithCB: function(next) {
             var authData = this.ref.getAuth();
-            MGF.getUserProfile(authData, fx);
+            MGF.getUserProfile(authData, next);
         },
         onFAuth: function(authData) {
             if (authData && authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
                 $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                 if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
-                    this.getUserProfile(authData.uid, authData, this.handleAuth);
+                    this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
                     console.log("user profile done");
                 }
             }
         },
 
         handleAuth: function(authData, userProfile) {
-            var email = this.getEmail(authData);
+            var email = MGF.getEmail(authData);
 
             if (!email) {
                 console.log("email not provided, please try again and provide email id as it is mandatory.");
@@ -68,9 +68,9 @@ define([
 
             var user = {
                 provider: authData.provider,
-                email: this.getEmail(authData),
-                displayName: this.getName(authData, userProfile),
-                profileImage: this.getImage(authData, userProfile),
+                email: MGF.getEmail(authData),
+                displayName: MGF.getName(authData, userProfile),
+                profileImage: MGF.getImage(authData, userProfile),
                 uid: authData.uid
             };
 
@@ -88,7 +88,7 @@ define([
                     } else {
                         console.log("user doesn't exist in firebase, creating..");
 
-                        var cbk = function(result) {
+                        var setUserAndCreateProfile = function(result) {
                             if (result) {
                                 that.setUser(user);
                                 that.createProfile(authData, {
@@ -103,7 +103,7 @@ define([
                             window.googleButton && window.googleButton.button('reset');
                             $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                         };
-                        that.createUser(authData.uid, user, cbk);
+                        that.createUser(authData.uid, user, setUserAndCreateProfile);
                     }
                 });
             } else {
@@ -155,53 +155,6 @@ define([
         signOut: function(ev) {
             this.ref.unauth();
             users.reset();
-        },
-
-        getName: function(authData, userProfile) {
-            if (userProfile) {
-                return userProfile.displayName;
-            } else {
-                switch (authData.provider) {
-                    case 'password':
-                        return authData.password.email.replace(/@.*/, '');
-                    case 'google':
-                        return authData.google.displayName;
-                    case 'facebook':
-                        return authData.facebook.displayName;
-//                    case 'twitter':
-//                        return authData.twitter.displayName;
-                }
-            }
-        },
-
-        getImage: function(authData, userProfile) {
-            if (userProfile) {
-                return userProfile.profileImage;
-            } else {
-                switch (authData.provider) {
-                    case 'password':
-                        return authData.password.profileImageURL;
-                    case 'google':
-                        return authData.google.profileImageURL;
-                    case 'facebook':
-                        return authData.facebook.profileImageURL;
-//                    case 'twitter':
-//                        return authData.twitter.profileImageURL;
-                }
-            }
-        },
-
-        getEmail: function(authData) {
-            switch (authData.provider) {
-                case 'password':
-                    return authData.password.email;
-                case 'google':
-                    return authData.google.email;
-                case 'facebook':
-                    return authData.facebook.email;
-//                case 'twitter':
-//                    return authData.twitter.email;
-            }
         },
 
         closeModal: function(ev) {
@@ -294,16 +247,7 @@ define([
                             profileImage: authData.password.profileImageURL
                         };
 
-                        var callbk = function() {
-                            that.ref.unauth();
-                            window.signupButton.button('reset');
-                            $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' onclick='gotoLogin();'>Login</a> to proceed.");
-                            $('#signup').modal('toggle');
-                            $('#notify').modal('show');
-                            that.ref.onAuth(that.onFAuth);
-                        };
-
-                        that.createProfile(userData, profileData, callbk);
+                        that.createProfile(userData, profileData, that.unAuthAfterProfile);
 
                     });
                 }
@@ -311,7 +255,14 @@ define([
 
             return false;
         },
-
+        unAuthAfterProfile: function() {
+            this.ref.unauth();
+            window.signupButton.button('reset');
+            $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
+            $('#signup').modal('toggle');
+            $('#notify').modal('show');
+            this.ref.onAuth(this.onFAuth);
+        },
         gotoLogin: function() {
             $('#notify').modal('toggle');
             this.showUserPop();
@@ -334,30 +285,19 @@ define([
             $('.userpop').css('right', '0px');
         },
 
-        createProfile: function(userData, profileData, cbk) {
-            this.ref.child('user-profiles').child(userData.uid).set(
-                profileData,
-                function(error) {
-                    if (error) {
-                        console.log("password profile data could not be saved." + error);
-                    } else {
-                        console.log("data saved successfully.");
-                    }
-                    if (cbk) cbk();
-                }
-            );
+        createProfile: function(userData, profileData, next) {
+            MGF.createProfile(userData, profileData, next);
         },
         setConsultData: function(authData, formData) {
             MGF.addConsultData(authData, formData);
-            MGF.pushEvent(authData.uid, formData, MGF.TYPE_CONSULT);
         },
         ready: function(parent) {
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
             _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'setConsultData', 'createUser',
-            'setUser', 'getUserProfile', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
-            'getName', 'getImage', 'getEmail', 'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin',
-            'showUserPop', 'createProfile');
+            'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
+            'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
+            'unAuthAfterProfile');
 
             var events = {
                 "click .signout_icon": this.signOut,
@@ -365,7 +305,8 @@ define([
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,
                 "click #close-contactus-pop": this.toggleContactUsPop,
-                "click #contact-form-explore": this.toggleContactUsPop
+                "click #contact-form-explore": this.toggleContactUsPop,
+                "click #goto-login": this.gotoLogin
             };
 
             parent.delegateEvents(events);

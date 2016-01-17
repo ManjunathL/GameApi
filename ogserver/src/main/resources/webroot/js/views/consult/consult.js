@@ -57,7 +57,6 @@ define([
         },
         setConsultData: function(authData, formData) {
             MGF.addConsultData(authData, formData);
-            MGF.pushEvent(authData.uid, formData, MGF.TYPE_CONSULT);
         },
         events: {
             "submit": "submit"

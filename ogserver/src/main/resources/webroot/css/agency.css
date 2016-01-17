@@ -1567,7 +1567,7 @@ a.button-orange, a.button-orange:hover {
     margin: auto;
     width: 100%;
     color: #fff;
-    background-color: rgba(65,45,45,0.9);
+    background-color: rgba(0,0,0,0.9);
     padding: 20px;
 }
 
