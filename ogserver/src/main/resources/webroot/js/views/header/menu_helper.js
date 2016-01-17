@@ -14,10 +14,10 @@ define([
             this.ref.child("users").child(userId).set(data, function(error) {
                 if (error) {
                     console.log("Data could not be saved." + error);
-                    that.next(false);
+                    if (next) next(false);
                 } else {
                     console.log("Data saved successfully.");
-                    that.next(true);
+                    if (next) next(true);
                 }
             });
         },
@@ -53,7 +53,16 @@ define([
                 }
             }
         },
+        formUserData: function(authData, userProfile) {
 
+            return {
+                provider: authData.provider,
+                email: MGF.getEmail(authData),
+                displayName: MGF.getName(authData, userProfile),
+                profileImage: MGF.getImage(authData, userProfile),
+                uid: authData.uid
+            };
+        },
         handleAuth: function(authData, userProfile) {
             var email = MGF.getEmail(authData);
 
@@ -65,14 +74,7 @@ define([
                 return;
             }
 
-
-            var user = {
-                provider: authData.provider,
-                email: MGF.getEmail(authData),
-                displayName: MGF.getName(authData, userProfile),
-                profileImage: MGF.getImage(authData, userProfile),
-                uid: authData.uid
-            };
+            var user = this.formUserData(authData, userProfile);
 
             if (authData.provider !== 'password') {
                 var userRef = this.ref.child("users/" + authData.uid);
@@ -82,7 +84,7 @@ define([
                         that.setUser(user);
                         console.log("user already exists in firebase");
                         window.fbButton && window.fbButton.button('reset');
-//                        window.twitterButton && window.twitterButton.button('reset');
+                        //                        window.twitterButton && window.twitterButton.button('reset');
                         window.googleButton && window.googleButton.button('reset');
                         $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     } else {
@@ -99,7 +101,7 @@ define([
                                 }, null);
                             }
                             window.fbButton && window.fbButton.button('reset');
-//                            window.twitterButton && window.twitterButton.button('reset');
+                            //                            window.twitterButton && window.twitterButton.button('reset');
                             window.googleButton && window.googleButton.button('reset');
                             $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                         };
@@ -123,7 +125,7 @@ define([
             window.loginButton && window.loginButton.button('reset');
             window.googleButton && window.googleButton.button('reset');
             window.fbButton && window.fbButton.button('reset');
-//            window.twitterButton && window.twitterButton.button('reset');
+            //            window.twitterButton && window.twitterButton.button('reset');
         },
 
         pwdLogin: function() {
@@ -196,7 +198,13 @@ define([
             }
 
             var that = this;
-            $('#contactForm').hide(100, function(){$('#success-msg').show(0, function(){$('#success-msg-padding').show(0, function(){that.positionSideContact();});});});
+            $('#contactForm').hide(100, function() {
+                $('#success-msg').show(0, function() {
+                    $('#success-msg-padding').show(0, function() {
+                        that.positionSideContact();
+                    });
+                });
+            });
 
         },
 
@@ -207,8 +215,8 @@ define([
             var contactUsSideWidth = $('.contact-us-side').width();
             var popHeight = $('#contactuspop').height() - contactUsSideHeight;
             var popHeightMore = popHeight > windowHeight;
-            $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight/2 - popHeight/2) + 'px');
-            $('.contact-us-side').css('top', ((popHeight/2 > windowHeight) ? (-popHeight*3/4 + contactUsSideWidth/2) : (-popHeight/2 + contactUsSideWidth/2)) + 'px');
+            $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight / 2 - popHeight / 2) + 'px');
+            $('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');
 
             var currLeft = $('.contact-us-pop').position().left;
             if (currLeft < 0) {
@@ -239,6 +247,15 @@ define([
                         email: $('#reg_email_id').val(),
                         password: $('#reg_password').val()
                     }, function(error, authData) {
+
+                        var userData = {
+                            provider: "password",
+                            email: $('#reg_email_id').val(),
+                            displayName: $('#reg_full_name').val(),
+                            profileImage: authData.password.profileImageURL,
+                            uid: authData.uid
+                        };
+                        that.createUser(authData.uid, userData, null);
 
                         var profileData = {
                             displayName: $('#reg_full_name').val(),
@@ -295,9 +312,9 @@ define([
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
             _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'setConsultData', 'createUser',
-            'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
-            'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
-            'unAuthAfterProfile');
+                'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
+                'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
+                'unAuthAfterProfile');
 
             var events = {
                 "click .signout_icon": this.signOut,
@@ -438,17 +455,17 @@ define([
                     });
                 });
 
-/*
+                /*
 
-                $('#twitter-btn').click(function() {
-                    window.twitterButton = $(this);
-                    window.twitterButton.button('loading');
-                    that.ref.authWithOAuthPopup("twitter", that.authHandler, {
-                        scope: "email"
-                    });
-                });
+                                $('#twitter-btn').click(function() {
+                                    window.twitterButton = $(this);
+                                    window.twitterButton.button('loading');
+                                    that.ref.authWithOAuthPopup("twitter", that.authHandler, {
+                                        scope: "email"
+                                    });
+                                });
 
-*/
+                */
 
                 $('#google-btn').click(function() {
                     window.googleButton = $(this);
