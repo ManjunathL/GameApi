@@ -12,13 +12,16 @@ define([
     'text!templates/product/accessory.html',
     'text!templates/product/appliance.html',
     'text!templates/product/finish.html',
-    'text!templates/product/colors.html'
-], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate) {
+    'text!templates/product/colors.html',
+    'collections/products',
+    'text!templates/product/relatedproduct.html'
+], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection,relatedproductTemplate) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         appliancelst: '#applianceList',
         product: new ProductModel(),
         custom_product: new CustomProduct(),
+        Products: new ProductCollection(),
         initialize: function() {
             this.custom_product.on('change',this.render,this);
         },
@@ -40,6 +43,29 @@ define([
         },
         respond: function() {
             var that = this;
+
+       // debugger;
+        var selectedSubCategory = that.product.get('subCategId');
+        console.log('smruti');
+
+            if (that.Products.isEmpty()) {
+                that.Products.fetch({
+                    data: {
+                        "categories": that.product.get('categ'),
+                        "searchTerm": selectedSubCategory
+                    },
+                    success: function(result) {
+                        console.log(result);
+                        if(result){
+                            console.log('donnnnnnne');
+                            that.chkrelatedProducts(selectedSubCategory);
+                        }
+                    },
+                    error: function(model, response, options) {
+                        console.log("error from products fetch - " + response);
+                    }
+                });
+            }
 
            if(!that.custom_product.get('basePrice')){
                 that.custom_product.set({'basePrice':that.product.get('defaultPrice')},{silent: true});
@@ -78,7 +104,6 @@ define([
                 var appliances = new Array();
                that.custom_product.set({'selectedAppliances':appliances},{silent: true});
            }
-
             var compiledTemplate = _.template(productPageTemplate);
             $(this.el).html(compiledTemplate({
                 "product": that.product.toJSON(),
@@ -87,7 +112,8 @@ define([
                 "selectedColor": that.custom_product.get('colors'),
                 "selectedfinishes": that.custom_product.get('finishes'),
                 "selectedFinish": that.custom_product.get('selectedFinish'),
-                "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories'))
+                "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories')),
+                "relatedProducts":that.custom_product.get('relatedProducts')
             }));
 
             var compiledJsTemplate = _.template(helperJsTemplate);
@@ -101,6 +127,20 @@ define([
         },
         material: function(mf) { return mf.material; },
         finish: function(mf) { return mf.finish; },
+        chkrelatedProducts: function(selectedSubCategory) {
+            var subcatarr = new Array();
+            subcatarr.push(selectedSubCategory);
+            var relatedProducts = this.Products.getRelatedProduct(subcatarr);
+            console.log(relatedProducts);
+            this.custom_product.set({'relatedProducts':relatedProducts},{silent: true});
+
+           var nwrelatedproductTemplate = _.template(relatedproductTemplate);
+
+            $('#relatedproduct').html(nwrelatedproductTemplate({
+                "relatedProducts": _.uniq(this.custom_product.get('relatedProducts'))
+            }));
+            return this;
+         },
         events:{
             "click .material": "changeMaterial",
             "click .finish": "changeFinish",
@@ -200,6 +240,7 @@ define([
             $('.alt-accessory').removeClass('active');
             $(event.currentTarget).addClass('active');
 
+            var selectedDefaultAccessoryId = $(event.currentTarget).data('daccessoryid');
             var selectedDefaultAccessory = $(event.currentTarget).data('daccessory');
             var selectedAltAccessory = $(event.currentTarget).data('altaccessory');
             var selectedAltAccessoryPrice = $(event.currentTarget).data('altaccessoryprice');
@@ -251,6 +292,12 @@ define([
                   "product": this.product.toJSON(),
                   "selectedAccessories": _.uniq(this.custom_product.get('selectedAccessories'))
               }));
+
+                $('#accessory-image'+selectedDefaultAccessoryId).fadeOut(600, function() {
+                    $('#accessory-image'+selectedDefaultAccessoryId).attr("src", imgBase + 'c_fit,w_206,h_124/' + selectedAltAccessoryImg);
+                    $('#accessory-image'+selectedDefaultAccessoryId).fadeIn(200);
+                });
+
               return this;
            }
         },
@@ -258,7 +305,6 @@ define([
             var selectedappliance = $(ev.currentTarget).data('appliance');
             var selectedapplianceType = $(ev.currentTarget).data('appliancetype');
             var selectedappliancePrice = $(ev.currentTarget).data('applianceprice');
-            console.log(selectedappliance+' ----- '+selectedapplianceType+' ----- '+selectedappliancePrice);
 
             var appliances = this.custom_product.get('selectedAppliances');
             _.map( this.product.get('appliances'), function ( model ) {
@@ -295,7 +341,7 @@ define([
                 }
             });
             $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
-            //console.log(appliances);
+
             if(this.custom_product.get('selectedAppliances') !== 'undefined'){
                 this.custom_product.set({'selectedAppliances':appliances},{silent: true});
             }

@@ -54,19 +54,23 @@ define([
 		    }else{
 		        return _.map(this.filter(function(product){
 
-                                return product.get('defaultPrice') >= minPrice && product.get('defaultPrice') <= maxPrice && that.productInFilters(product, filterIds);
-                            }), function (product) {return product.toJSON();});
+                    return product.get('defaultPrice') >= minPrice && product.get('defaultPrice') <= maxPrice && that.productInFilters(product, filterIds);
+                }), function (product) {return product.toJSON();});
 		    }
 
 		},
-		productInFilters: function (product, filterIds) {
-		    for (var i=0; i < filterIds.length; i++) {
-		        if ((product.get("subCategId") == filterIds[i]) || (product.get("price_range_id") == filterIds[i]) || (product.get("style_id") == filterIds[i]))
-		            return true;
-		    }
-
-
-		}
+        productInFilters: function (product, filterIds) {
+            for (var i=0; i < filterIds.length; i++) {
+                if ((product.get("subCategId") == filterIds[i]) || (product.get("price_range_id") == filterIds[i]) || (product.get("style_id") == filterIds[i]))
+                    return true;
+            }
+        },
+         getRelatedProduct: function (subcatarr) {
+            var that = this;
+            return _.map(this.filter(function(product){
+                return that.productInFilters(product, subcatarr);
+            }), function (product) {return product.toJSON();});
+         }
     });
     return Products;
 });

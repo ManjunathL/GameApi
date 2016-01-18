@@ -82,11 +82,39 @@ jQuery(function($) {
         active: mainSliderActive
     }).init();
 
-    var $alt1_frame = $('#alt1-frame');
-    var $alt1_wrap = $alt1_frame.parent().parent();
+//    var $alt1_frame = $('#alt1-frame');
+//    var $alt1_wrap = $alt1_frame.parent().parent();
+//
+//    // Call Sly on frame
+//    var alt1_sly = new Sly('#alt1-frame', {
+//        horizontal: 1,
+//        itemNav: 'basic',
+//        smart: 1,
+//        activateMiddle: 0,
+//        activateOn: 'click',
+//        mouseDragging: 1,
+//        touchDragging: 1,
+//        releaseSwing: 1,
+//        startAt: 0,
+//        scrollBy: 1,
+//        speed: 300,
+//        elasticBounds: 1,
+//        easing: 'easeOutExpo',
+//        dragHandle: 1,
+//        dynamicHandle: 1,
+//        clickBar: 1,
+//
+//        // Buttons
+//        prevPage: $alt1_wrap.find('.alt1-prev'),
+//        nextPage: $alt1_wrap.find('.alt1-next')
+//    }).init();
 
-    // Call Sly on frame
-    var alt1_sly = new Sly('#alt1-frame', {
+    var $accessory_frame = $('.accessory-frame');
+    var $accessory_wrap = $accessory_frame.parent().parent();
+
+
+//     Call Sly on frame
+    var alt1_sly = new Sly('.accessory-frame', {
         horizontal: 1,
         itemNav: 'basic',
         smart: 1,
@@ -105,9 +133,30 @@ jQuery(function($) {
         clickBar: 1,
 
         // Buttons
-        prevPage: $alt1_wrap.find('.alt1-prev'),
-        nextPage: $alt1_wrap.find('.alt1-next')
+        prevPage: $accessory_wrap.find('.accessory-prev'),
+        nextPage: $accessory_wrap.find('.accessory-next')
     }).init();
+
+$(".share-popup").click(function(){
+    var window_size = "";
+    var url = this.href;
+    var domain = url.split("/")[2];
+    switch(domain) {
+        case "www.facebook.com":
+            window_size = "width=585,height=368";
+            break;
+        case "www.twitter.com":
+            window_size = "width=585,height=261";
+            break;
+        case "plus.google.com":
+            window_size = "width=517,height=511";
+            break;
+        default:
+            window_size = "width=585,height=511";
+    }
+    window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,' + window_size);
+    return false;
+});
 
 });
 
