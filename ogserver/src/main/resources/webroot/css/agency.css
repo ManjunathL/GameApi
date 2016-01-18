@@ -2964,7 +2964,7 @@ hr {
     color:#fff!important;
 }
 
-.nav-tabs > li.active > a:hover:before {
+/*.nav-tabs > li.active > a:hover:before {
     visibility: hidden;
 }
 
@@ -2987,15 +2987,13 @@ hr {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
-}
+}*/
 
 .nav-tabs > li > a {
     color: #333;
 }
 
-.nav-tabs > li.active > a,
-.nav-tabs > li > a:active,
-.nav-tabs > li > a:focus{
+.nav-tabs > li.active{
     border-bottom: 2px solid #f1591f;
 }
 
@@ -3014,4 +3012,26 @@ hr {
 a.tab-ico{
 text-decoration:underline;
 color:#f1591f;
+}
+
+#alt1-frame ul li{
+width: 325px;
+}
+
+.relcontrol{
+    margin-top:70px!important;
+}
+
+@media (max-width: 991px) {
+    .relcontrol{
+        margin-top:70px!important;
+    }
+}
+@media (max-width: 460px) {
+    .relcontrol{
+        margin-top:70px!important;
+    }
+    .delvimg{
+        width:100%;
+    }
 }

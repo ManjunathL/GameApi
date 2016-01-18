@@ -137,6 +137,7 @@ define([
            var nwrelatedproductTemplate = _.template(relatedproductTemplate);
 
             $('#relatedproduct').html(nwrelatedproductTemplate({
+                "product": this.product.toJSON(),
                 "relatedProducts": _.uniq(this.custom_product.get('relatedProducts'))
             }));
             return this;

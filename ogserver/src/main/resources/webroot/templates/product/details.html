@@ -1,3 +1,13 @@
+<style>
+    .theme-background-color {
+    background-color: #687780!important;
+    }
+
+    button.theme-background-color:hover {
+    background-color: #687780!important;
+    }
+</style>
+
 <section class="bg-white top-section">
     <div class="container">
         <div class="row product-heading details-heading" id="heading-bar">
@@ -28,7 +38,7 @@
                             <ul class="clearfix slidee"
                                 style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
                                 <% _.each(product.images, function(image){ %>
-                                <li><img src="<%= imgBase + image %>" width="100%"/>
+                                <li><img src="<%= imgBase + image %>" width="100%"/></li>
                                     <% }); %>
                             </ul>
                         </div>
@@ -40,12 +50,11 @@
                 </div>
                 <div class="padding20_0_10_0 margin_auto"><%= product.desc %></div>
                 <div class="padding20_0_10_0 margin_auto social-share-buttons">
-                    <div class="col-md-12">
                         <!--<a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%= imgBase + product.images[0] %>&t=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a>-->
                         <!--<a href="javascript:void(0);" onclick="window.open('http://www.twitter.com/intent/tweet?url=<%= imgBase + product.images[0] %>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a>-->
                         <!--<a href="javascript:void(0);" onclick="window.open('http://plus.google.com/share?url=<%= imgBase + product.images[0] %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-google-plus-square"></i></a>-->
 
-                        <div class="col-md-4">
+                        <div class="col-xs-4">
                             <div id="fb-root"></div>
                             <script>(function(d, s, id) {
                                   var js, fjs = d.getElementsByTagName(s)[0];
@@ -60,15 +69,14 @@
                                  data-layout="button">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-xs-4">
                             <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
                             <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<%= imgBase + product.images[0] %>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>" data-pin-color="red"></a>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-xs-4">
                             <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="<%= imgBase + product.images[0] %>" data-text="<%= product.name %>" data-dnt="true">Tweet</a>
                             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                         </div>
-                    </div>
                 </div>
                 <div class="col-xs-6 padding20-0 margin_auto">
                     <a href="#" class="button border1 padding10 display-block margin0-10" style="background-color: #3C82BF;color: #FFFFFF;">
@@ -95,7 +103,7 @@
                 <hr>
             </div>
             <ul id="customproduct" class="nav nav-tabs" style="margin-left: 15px;">
-                <li class="active"><a data-toggle="tab" href="#mfc"><span class="tab-ico">Material/Finish/Color</span></a></li>
+                <li class="active"><a data-toggle="tab" href="#mfc">Material/Finish/Color</a></li>
                 <li class=""><a data-toggle="tab" href="#acctab">Accessories</a></li>
                 <li class=""><a data-toggle="tab" href="#apptab">Appliances</a></li>
             </ul>
@@ -257,8 +265,8 @@
         </div>
 
         <div class="row paddingtop40">
-            <div class="col-lg-12" style="text-align:center;">
-                <img src="img/seals.png" />
+            <div class="col-xs-12" style="text-align:center;">
+                <img src="img/seals.png" class="delvimg" />
             </div>
         </div>
 
