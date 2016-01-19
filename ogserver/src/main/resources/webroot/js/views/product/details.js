@@ -44,9 +44,7 @@ define([
         respond: function() {
             var that = this;
 
-       // debugger;
-        var selectedSubCategory = that.product.get('subCategId');
-        console.log('smruti');
+            var selectedSubCategory = that.product.get('subCategId');
 
             if (that.Products.isEmpty()) {
                 that.Products.fetch({
@@ -55,9 +53,7 @@ define([
                         "searchTerm": selectedSubCategory
                     },
                     success: function(result) {
-                        console.log(result);
                         if(result){
-                            console.log('donnnnnnne');
                             that.chkrelatedProducts(selectedSubCategory);
                         }
                     },
@@ -131,7 +127,6 @@ define([
             var subcatarr = new Array();
             subcatarr.push(selectedSubCategory);
             var relatedProducts = this.Products.getRelatedProduct(subcatarr);
-            console.log(relatedProducts);
             this.custom_product.set({'relatedProducts':relatedProducts},{silent: true});
 
            var nwrelatedproductTemplate = _.template(relatedproductTemplate);

@@ -86,7 +86,7 @@ jQuery(function($) {
     var $alt1_wrap = $alt1_frame.parent().parent();
 
     // Call Sly on frame
-    var alt1_sly = new Sly('#alt1-frame', {
+    var alt1_sly111 = new Sly('#alt1-frame', {
         horizontal: 1,
         itemNav: 'basic',
         smart: 1,
@@ -108,35 +108,6 @@ jQuery(function($) {
         prevPage: $alt1_wrap.find('.alt1-prev'),
         nextPage: $alt1_wrap.find('.alt1-next')
     }).init();
-
-    var $accessory_frame = $('.accessory-frame');
-    var $accessory_wrap = $accessory_frame.parent().parent();
-
-
-//     Call Sly on frame
-    var alt1_sly123 = new Sly('.accessory-frame', {
-        horizontal: 1,
-        itemNav: 'basic',
-        smart: 1,
-        activateMiddle: 0,
-        activateOn: 'click',
-        mouseDragging: 1,
-        touchDragging: 1,
-        releaseSwing: 1,
-        startAt: 0,
-        scrollBy: 1,
-        speed: 300,
-        elasticBounds: 1,
-        easing: 'easeOutExpo',
-        dragHandle: 1,
-        dynamicHandle: 1,
-        clickBar: 1,
-
-        // Buttons
-        prevPage: $accessory_wrap.find('.accessory-prev'),
-        nextPage: $accessory_wrap.find('.accessory-next')
-    }).init();
-
 });
 
 function mainSliderActive(eventName, itemIndex) {
@@ -183,5 +154,4 @@ function toggleColor(element) {
         $(element).css('background', 'rgb(255, 255, 255)');
     }
 }
-
 </script>

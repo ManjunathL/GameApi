@@ -3018,6 +3018,14 @@ color:#f1591f;
 width: 325px;
 }
 
+.accessory-frame > .slidee {
+    width: 3250px!important;
+}
+
+.accessory-frame ul li{
+    width: 135px!important;
+}
+
 .relcontrol{
     margin-top:70px!important;
 }
