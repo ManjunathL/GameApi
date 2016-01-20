@@ -1056,6 +1056,10 @@ button {
     margin-top: 5% !important;
 }
 
+.margin-bottom10 {
+    margin-bottom: 10px !important;
+}
+
 .margin-bottom15 {
     margin-bottom: 15px !important;
 }
@@ -1598,6 +1602,20 @@ a.button-orange, a.button-orange:hover {
     color: #fff;
     background-color: rgba(65,45,45,0.9);
     padding: 20px;
+}
+
+.banner-form-row {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+}
+
+.banner-form {
+    margin: auto;
+    width: 100%;
+    color: #333;
+    background-color: rgba(255,255,255,0.5);
+    padding: 10px;
 }
 
 #notify .signup {

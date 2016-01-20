@@ -21,7 +21,7 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            //console.log('simple render' + JSON.stringify(authData));
+            console.log('simple render' + JSON.stringify(authData));
         },
         initialize: function() {
             _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit', 'setuserProfileData');
@@ -30,10 +30,10 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-            debugger;
-
             var formData = {
-                "fullName": $('#user_full_name').val(),
+                "displayName": $('#user_display_name').val(),
+                "profileImage": $('#user_profile_image').attr('src'),
+                "email": $('#user_email_id').attr('data-value'),
                 "dob": $('#user_dob').val(),
                 "phone": $('#user_phone').val(),
                 "address": $('#user_address').val(),
@@ -58,8 +58,7 @@ define([
 
         },
         setuserProfileData: function (authData, formData) {
-            this.ref.child('user-profiles').child(userData.uid).set(formData,
-                function(error){
+            this.ref.child('user-profiles').child(authData.uid).set(formData, function(error){
                     if (error) {
                         console.log("problem in inserting user data", error);
                     } else {
@@ -68,7 +67,7 @@ define([
                 });
         },
         events: {
-            "submit": "submit"
+            "click #save_details": "submit"
         }
 
 

@@ -8,7 +8,10 @@
                 
                 <div class="col-md-3 col-sm-3">
                     <div class="row margin-top20 align-center">
-                        <img src="<%=userProfile ? userProfile.profileImage : 'img/user.png'%>" class="img-responsive">
+                        <img
+                                src="<%=userProfile ? userProfile.profileImage : 'img/user.png'%>"
+                                class="img-responsive"
+                                id="user_profile_image">
                         <a class="edit_mode">
                             Change Profile Image
                         </a>
@@ -25,10 +28,10 @@
                             <h2 class="edit_mode form-group">
                                 <input
                                         type="text"
-                                        id="user_full_name"
+                                        id="user_display_name"
                                         class="form-control"
                                         maxlength="50"
-                                        name="fullName"
+                                        name="displayName"
                                         value="<%=userProfile ? userProfile.displayName : ''%>"
                                         placeholder="Your Name">
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -36,7 +39,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="user_profile_id col-lg-12 col-md-12 col-sm-12 align-right col-xs-9">
+                                <div
+                                        class="user_profile_id col-lg-12 col-md-12 col-sm-12 align-right col-xs-9"
+                                        id="user_email_id"
+                                        data-value="<%=userProfile ? userProfile.email : ''%>">
                                     <%=userProfile ? userProfile.email : ''%>
                                 </div>
                                 <div class="hidden-lg hidden-md hidden-sm col-xs-1">
@@ -58,7 +64,13 @@
                             <div class="col-md-8 col-sm-7">
                                 <p class="view_mode"><%= userProfile.dob %></p>
                                 <p class="edit_mode form-group">
-                                    <input type="date" id="user_dob" class="form-control" name="dob">
+                                    <input
+                                            type="date"
+                                            id="user_dob"
+                                            class="form-control"
+                                            name="dob"
+                                            value="<%=userProfile ? userProfile.dob : ''%>"
+                                            dateformat="d M y">
                                 </p>
                             </div>
                             <div class="col-md-1 col-sm-1 hidden-xs">
@@ -222,10 +234,10 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-5 col-sm-5">
                                     <p>Confirm Password :</p>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7 col-sm-7">
                                     <input type="password" id="confirm_password">
                                 </div>
                             </div>
