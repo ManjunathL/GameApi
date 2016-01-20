@@ -52,6 +52,8 @@ $(window).scroll(function() {
 jQuery(function($) {
     'use strict';
 
+    //alert('sss');
+
     var $frame = $('#forcecentered');
     var $wrap = $frame.parent().parent();
 
@@ -86,7 +88,7 @@ jQuery(function($) {
     var $alt1_wrap = $alt1_frame.parent().parent();
 
     // Call Sly on frame
-    var alt1_sly111 = new Sly('#alt1-frame', {
+    var alt1_sly = new Sly('#alt1-frame', {
         horizontal: 1,
         itemNav: 'basic',
         smart: 1,
@@ -108,6 +110,49 @@ jQuery(function($) {
         prevPage: $alt1_wrap.find('.alt1-prev'),
         nextPage: $alt1_wrap.find('.alt1-next')
     }).init();
+
+    $('.accessory-frame').each(function () {
+
+        var accessoryid = this.id;
+        var $accessory_frame = $('#'+accessoryid);
+        var $accessory_wrap = $accessory_frame.parent().parent();
+
+        var accessory_sly = new Sly('#'+accessoryid, {
+            horizontal: 1,
+            itemNav: 'basic',
+            smart: 1,
+            activateMiddle: 0,
+            activateOn: 'click',
+            mouseDragging: 1,
+            touchDragging: 1,
+            releaseSwing: 1,
+            startAt: 0,
+            scrollBy: 1,
+            speed: 300,
+            elasticBounds: 1,
+            easing: 'easeOutExpo',
+            dragHandle: 1,
+            dynamicHandle: 1,
+            clickBar: 1,
+
+            // Buttons
+            prevPage: $accessory_wrap.find('.accessory-prev'),
+            nextPage: $accessory_wrap.find('.accessory-next')
+        }).init();
+    });
+
+    $('.dwf').click(function() {
+        if($("#sldown").is(':visible')){
+            $("#sldown").hide();
+            $("#slup").show();
+        }else{
+             $("#slup").hide();
+            $("#sldown").show();
+        }
+
+        $('.dwf-desc').slideToggle();
+    });
+
 });
 
 function mainSliderActive(eventName, itemIndex) {
@@ -154,4 +199,14 @@ function toggleColor(element) {
         $(element).css('background', 'rgb(255, 255, 255)');
     }
 }
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script>

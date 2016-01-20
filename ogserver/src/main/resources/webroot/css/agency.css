@@ -969,7 +969,7 @@ button {
 }
 
 .padding0 {
-    padding: 0px;
+    padding: 0px!important;
 }
 
 .padding8 {
@@ -3015,7 +3015,7 @@ color:#f1591f;
 }
 
 #alt1-frame ul li{
-width: 325px;
+width: 325px!important;
 }
 
 .accessory-frame > .slidee {
@@ -3023,17 +3023,64 @@ width: 325px;
 }
 
 .accessory-frame ul li{
-    width: 135px!important;
+    width: 170px!important;
 }
 
 .relcontrol{
     margin-top:70px!important;
 }
+.consult-pop {
+    width: 100%;
+    max-width: 400px;
+    top: 10px;
+    position: fixed;
+    z-index: 2000;
+    left: -400px;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+}
+#close-consult-pop{
+    cursor:pointer;
+}
+#consult-submit-btn{
+    background-color:#3C82BF!important;
+    color:#FFFFFF!important;
+    border: 2px solid #3C82BF!important;
+}
+#consult-submit-btn:hover{
+    background-color:#316a9b!important;
+}
 
+.dwf{
+    height: 40px;
+    background-color: #F2F4F4;
+    margin-right: 2px;
+    width: 33%;
+    font-size:18px;
+    font-weight:300;
+    text-align:center;
+    padding-top: 5px;
+    cursor:pointer;
+}
+.dwf-desc{
+   text-align: justify;
+   padding: 2%;
+   margin: 2% 1%;
+   border: 1px solid #F2F2F2;
+   display:none;
+}
+#slup{
+    display:none;
+}
 @media (max-width: 991px) {
     .relcontrol{
         margin-top:70px!important;
     }
+    #customproduct > li{
+        width:25%!important;
+     }
 }
 @media (max-width: 460px) {
     .relcontrol{
@@ -3042,4 +3089,11 @@ width: 325px;
     .delvimg{
         width:100%;
     }
+    .dwf{
+        width:100%;
+        margin-top:2%;
+     }
+     #customproduct > li{
+        width:90%!important;
+     }
 }

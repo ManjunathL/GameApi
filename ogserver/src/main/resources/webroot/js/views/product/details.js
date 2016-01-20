@@ -14,10 +14,12 @@ define([
     'text!templates/product/finish.html',
     'text!templates/product/colors.html',
     'collections/products',
-    'text!templates/product/relatedproduct.html'
-], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection,relatedproductTemplate) {
+    'text!templates/product/relatedproduct.html',
+    'mgfirebase'
+], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, MGF) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
+        ref: MGF.rootRef,
         appliancelst: '#applianceList',
         product: new ProductModel(),
         custom_product: new CustomProduct(),
@@ -100,6 +102,10 @@ define([
                 var appliances = new Array();
                that.custom_product.set({'selectedAppliances':appliances},{silent: true});
            }
+           if(!that.custom_product.get('colors')){
+               that.changeColor(that.product.get('defaultFinish'),colorsTemplate);
+           }
+
             var compiledTemplate = _.template(productPageTemplate);
             $(this.el).html(compiledTemplate({
                 "product": that.product.toJSON(),
@@ -117,9 +123,6 @@ define([
                 "product": that.product.toJSON()
             }));
 
-            if(!that.custom_product.get('colors')){
-                that.changeColor(that.product.get('defaultFinish'),colorsTemplate);
-            }
         },
         material: function(mf) { return mf.material; },
         finish: function(mf) { return mf.finish; },
@@ -141,7 +144,12 @@ define([
             "click .material": "changeMaterial",
             "click .finish": "changeFinish",
             "click .alt-accessory": "changeAccessory",
-            "click .appliance": "changeAppliance"
+            "click .appliance": "changeAppliance",
+            "click #prodconsult": "openConsultPopup",
+            "click #close-consult-pop": "closeModal",
+            "click #consult-form-explore": "closeModal",
+            "click #consult-submit-btn": "submitConsultButton",
+            "submit #consultForm":"submitConsultForm"
 
         },
         changeMaterial : function(ev) {
@@ -342,7 +350,62 @@ define([
                 this.custom_product.set({'selectedAppliances':appliances},{silent: true});
             }
             return this;
-       }
+       },
+        closeModal: function(ev) {
+            var id = $(ev.currentTarget).data('element');
+            $(id).modal('toggle');
+        },
+       openConsultPopup: function(){
+            $('#consultpop').modal('show');
+       },
+        submitConsultButton: function(){
+            window.consultSubmitButton = this;
+        },
+        submitConsultForm: function(e){
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+            $('#consult_error').html('');
+            $('#consult_error_row').css("display", "none");
+            this.consultSubmit();
+        },
+        consultSubmit: function(){
+           var formData = {
+               "productName": $('#consult_product_name').val(),
+               "fullName": $('#consult_full_name').val(),
+               "email": $('#consult_email_id').val(),
+               "contactNumber": $('#consult_contact_num').val(),
+               "requirements": $('#consult_product_name').val()+" "+$('#consult_requirement').val(),
+               "propertyName": $('#consult_property_name').val()
+           };
+
+           console.log(formData);
+
+           var authData = this.ref.getAuth();
+           var that = this;
+           if (!authData) {
+               this.ref.authAnonymously(function(error, authData) {
+                   if (error) {
+                       console.log("Login Failed!", error);
+                   } else {
+                       that.setProductConsultData(authData, formData);
+                   }
+               });
+           } else {
+               this.setProductConsultData(authData, formData);
+           }
+
+           var that = this;
+           $('#consultForm').hide(100, function() {
+               $('#consult-success-msg').show(0, function() {
+                   $('#consult-success-msg-padding').show(0, function() {
+                   });
+               });
+           });
+        },
+        setProductConsultData: function(authData, formData) {
+            console.log('inside mfg');
+            MGF.addConsultData(authData, formData);
+        }
     });
     return ProductPage;
 });

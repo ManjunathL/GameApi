@@ -4,11 +4,13 @@
         <div class="row" style="padding: 5px">
             <div class="col-md-3 col-sm-3" style="padding-left: 5%; padding-top: 1.5%;">
                 <div class="accessory-main-img" style="border: 0px solid #F1591F;">
-                    <a href="#">
-                        <img class="accImg" id="accessory-image<%= accessory.accessoryId %>" src="<%= imgBase + 'c_fit,w_206,h_124/' + accessory.accessoryImg %>" alt="">
-                    </a>
-                    <p><%= accessory.accessoryName%></p>
-                    <p>Price: <i class="fa fa-inr"></i> <%= accessory.accessoryPrice%></p>
+                    <div style="height: 180px;">
+                        <a href="#">
+                            <img class="accImg" id="accessory-image<%= accessory.accessoryId %>" width="170px" src="<%= imgBase + 'c_fit,w_170,h_170//' + accessory.accessoryImg %>" alt="">
+                        </a>
+                    </div>
+                    <div><%= accessory.accessoryName%></div>
+                    <div>Price: <i class="fa fa-inr"></i> <%= accessory.accessoryPrice%></div>
                 </div>
             </div>
             <div class="col-md-9 col-sm-9">
@@ -23,12 +25,11 @@
                                 style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
                                 <% _.each(accessory.alternatives, function(alternative){ %>
                                 <li class="<%= accessory.accessoryName === alternative.accessoryName ? 'active' : '' %>">
-                                    <span style="height: 64px;"><a class="alt-accessory display-inline" data-daccessoryid="<%=accessory.accessoryId%>" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img src="<%= imgBase + 'c_fit,w_206,h_124/' + alternative.accessoryImg %>"/></a></span>
-                                    <!--<p><%= alternative.accessoryName%></p>-->
-                                    <p style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></p>
+                                    <div style="height: 180px;"><a class="alt-accessory display-inline" data-daccessoryid="<%=accessory.accessoryId%>" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img width="170px" src="<%= imgBase + 'c_fit,w_170,h_170/' + alternative.accessoryImg %>"/></a></div>
+                                    <div style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></div>
                                 </li>
                                 <% }); %>
-                                <!--<li><img src="http://placehold.it/500x300" width="100%"/></li>-->
+                                <!--<li><img src="https://placehold.it/500x300" width="100%"/></li>-->
                             </ul>
                         </div>
                         <div class="controls center col-xs-1">
