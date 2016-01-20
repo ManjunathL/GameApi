@@ -101,7 +101,7 @@
       "moduleId": "1",
       "moduleName": "Base Unit",
       "moduleDesc": "Base Unit",
-      "accessoryId": "1",
+      "accessoryId": "2",
       "accessoryCode": "MC37487",
       "accessoryName": "Base Cabinet with 3 Drawers",
       "accessoryImg": "cabinet-with-three-drawers_fpshz1.jpg",
@@ -112,7 +112,7 @@
       "uom": "cm",
       "alternatives": [
         {
-          "accessoryId": "1",
+          "accessoryId": "2",
           "accessoryCode": "MC37487",
           "accessoryName": "Base Cabinet with 3 Drawers",
           "accessoryImg": "cabinet-with-three-drawers_fpshz1.jpg",
