@@ -176,7 +176,7 @@ a.active {
 }
 
 a {
-    color: #f1591f;
+    color: #000;
     -webkit-transition: color 0.3s,opacity 0.2s;
     transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
