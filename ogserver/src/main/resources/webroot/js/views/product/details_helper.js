@@ -52,7 +52,7 @@ $(window).scroll(function() {
 jQuery(function($) {
     'use strict';
 
-    alert('hi');
+//    alert('hi');
 
     var $frame = $('#forcecentered');
     var $wrap = $frame.parent().parent();
@@ -84,66 +84,11 @@ jQuery(function($) {
         active: mainSliderActive
     }).init();
 
-    if($('#alt1-frame').length > 0){
-        var $alt1_frame = $('#alt1-frame');
-        var $alt1_wrap = $alt1_frame.parent().parent();
-
-        // Call Sly on frame
-        var alt1_sly = new Sly('#alt1-frame', {
-            horizontal: 1,
-            itemNav: 'basic',
-            smart: 1,
-            activateMiddle: 0,
-            activateOn: 'click',
-            mouseDragging: 1,
-            touchDragging: 1,
-            releaseSwing: 1,
-            startAt: 0,
-            scrollBy: 1,
-            speed: 300,
-            elasticBounds: 1,
-            easing: 'easeOutExpo',
-            dragHandle: 1,
-            dynamicHandle: 1,
-            clickBar: 1,
-
-            // Buttons
-            prevPage: $alt1_wrap.find('.alt1-prev'),
-            nextPage: $alt1_wrap.find('.alt1-next')
-        }).init();
-    }
-    accessorySlide();
+//    accessorySlide();
 });
 
 function accessorySlide(){
-    $('.accessory-frame').each(function () {
-        var accessoryId = this.id;
-        var $accessory_frame = $('#'+accessoryId);
-        var $accessory_wrap = $accessory_frame.parent().parent();
 
-        var accessory_sly = new Sly('#'+accessoryId, {
-            horizontal: 1,
-            itemNav: 'basic',
-            smart: 1,
-            activateMiddle: 0,
-            activateOn: 'click',
-            mouseDragging: 1,
-            touchDragging: 1,
-            releaseSwing: 1,
-            startAt: 0,
-            scrollBy: 1,
-            speed: 300,
-            elasticBounds: 1,
-            easing: 'easeOutExpo',
-            dragHandle: 1,
-            dynamicHandle: 1,
-            clickBar: 1,
-
-            // Buttons
-            prevPage: $accessory_wrap.find('.accessory-prev'),
-            nextPage: $accessory_wrap.find('.accessory-next')
-        }).init();
-    });
 }
 function mainSliderActive(eventName, itemIndex) {
 

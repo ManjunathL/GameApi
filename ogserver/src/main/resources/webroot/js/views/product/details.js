@@ -16,7 +16,7 @@ define([
     'collections/products',
     'text!templates/product/relatedproduct.html',
     'mgfirebase'
-], function($, _, Backbone, Bootstrap, Sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, MGF) {
+], function($, _, Backbone, Bootstrap, sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, MGF) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -141,7 +141,7 @@ define([
                 "product": this.product.toJSON(),
                 "relatedProducts": _.uniq(this.custom_product.get('relatedProducts'))
             }));
-            return this;
+            this.details_helper_ready();
          },
         events:{
             "click .material": "changeMaterial",
@@ -419,6 +419,72 @@ define([
                 $("#sldown").show();
             }
             $('.dwf-desc').slideToggle();
+        },
+        details_helper_ready: function(){
+
+        jQuery(function($) {
+            console.log('helllooooo'+$('#alt1-frame').length);
+
+            if($('#alt1-frame').length > 0){
+                var $alt1_frame = $('#alt1-frame');
+                var $alt1_wrap = $alt1_frame.parent().parent();
+
+                // Call Sly on frame
+                var alt1_sly = new Sly('#alt1-frame', {
+                    horizontal: 1,
+                    itemNav: 'basic',
+                    smart: 1,
+                    activateMiddle: 0,
+                    activateOn: 'click',
+                    mouseDragging: 1,
+                    touchDragging: 1,
+                    releaseSwing: 1,
+                    startAt: 0,
+                    scrollBy: 1,
+                    speed: 300,
+                    elasticBounds: 1,
+                    easing: 'easeOutExpo',
+                    dragHandle: 1,
+                    dynamicHandle: 1,
+                    clickBar: 1,
+
+                    // Buttons
+                    prevPage: $alt1_wrap.find('.alt1-prev'),
+                    nextPage: $alt1_wrap.find('.alt1-next')
+                }).init();
+            }
+
+             $('.accessory-frame').each(function () {
+                console.log('hereeeeeeeeee');
+                    var accessoryId = this.id;
+                    var $accessory_frame = $('#'+accessoryId);
+                    var $accessory_wrap = $accessory_frame.parent().parent();
+
+                    var accessory_sly = new Sly('#'+accessoryId, {
+                        horizontal: 1,
+                        itemNav: 'basic',
+                        smart: 1,
+                        activateMiddle: 0,
+                        activateOn: 'click',
+                        mouseDragging: 1,
+                        touchDragging: 1,
+                        releaseSwing: 1,
+                        startAt: 0,
+                        scrollBy: 1,
+                        speed: 300,
+                        elasticBounds: 1,
+                        easing: 'easeOutExpo',
+                        dragHandle: 1,
+                        dynamicHandle: 1,
+                        clickBar: 1,
+
+                        // Buttons
+                        prevPage: $accessory_wrap.find('.accessory-prev'),
+                        nextPage: $accessory_wrap.find('.accessory-next')
+                    }).init();
+                });
+
+            });
         }
     });
     return ProductPage;

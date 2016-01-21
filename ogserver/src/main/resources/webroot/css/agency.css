@@ -3076,7 +3076,7 @@ width: 325px!important;
 .accessory-frame ul li{
     width: 170px!important;
 }
-.accessory-frame > .slidee{
+.accessory-frame > ul.slidee{
     width: 3280px!important;
 }
 
