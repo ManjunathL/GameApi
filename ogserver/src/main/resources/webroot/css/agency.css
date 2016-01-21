@@ -3076,8 +3076,8 @@ width: 325px!important;
 .accessory-frame ul li{
     width: 170px!important;
 }
-.accessory-frame ul{
-    width: 300px!important;
+.accessory-frame > .slidee{
+    width: 3280px!important;
 }
 
 .relcontrol{
