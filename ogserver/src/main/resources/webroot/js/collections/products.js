@@ -47,30 +47,61 @@ define([
 		getProduct: function (id) {
 		    return this.find(function(product){ return product.get('id') === id; });
 		},
-		filterByPrice:function (minPrice,maxPrice,filterIds){
+		filterByPrice:function (minPrice,maxPrice){
 		    var that = this;
 		    if(!minPrice && !maxPrice){
                 return this.toJSON();
 		    }else{
 		        return _.map(this.filter(function(product){
 
-                    return product.get('defaultPrice') >= minPrice && product.get('defaultPrice') <= maxPrice && that.productInFilters(product, filterIds);
-                }), function (product) {return product.toJSON();});
+					return product.get('defaultPrice') >= minPrice &&
+					product.get('defaultPrice') <= maxPrice;
+				}), function (product) {return product.toJSON();});
 		    }
 
 		},
-        productInFilters: function (product, filterIds) {
-            for (var i=0; i < filterIds.length; i++) {
-                if ((product.get("subCategId") == filterIds[i]) || (product.get("price_range_id") == filterIds[i]) || (product.get("style_id") == filterIds[i]))
-                    return true;
-            }
-        },
-         getRelatedProduct: function (subcatarr) {
-            var that = this;
-            return _.map(this.filter(function(product){
-                return that.productInFilters(product, subcatarr);
-            }), function (product) {return product.toJSON();});
-         }
+
+		filterBySubcat:function (selectedSubcatIds){
+			var that = this;
+			return _.map(this.filter(function(product){
+				return that.productInSubCategs(product, selectedSubcatIds);
+			}), function (product) {return product.toJSON();});
+
+		},
+			filterByPriceRange:function (filteredProducts,selectedPriceRangeIds){
+				var that = this;
+				return _.map(filteredProducts.filter(function(product){
+					return that.productInPriceRanges(product, selectedPriceRangeIds);
+				}), function (product) {return product;});
+		},
+			filterByStyle:function (filteredProducts,selectedStyleIds){
+				var that = this;
+				return _.map(filteredProducts.filter(function(product){
+					return that.productInStyles(product, selectedStyleIds);
+				}), function (product) {return product;});
+		},
+
+		productInSubCategs: function (product, subCategoryIds) {
+			for (var i=0; i < subCategoryIds.length; i++) {
+				if (product.get("subCategId") == subCategoryIds[i])
+					return true;
+			}
+
+		},
+		productInPriceRanges: function (product, priceRangeIds) {
+			for (var i=0; i < priceRangeIds.length; i++) {
+				if (product.price_range_id == priceRangeIds[i])
+					return true;
+			}
+
+		},
+		productInStyles: function (product, styleIds) {
+			for (var i=0; i < styleIds.length; i++) {
+				if (product.style_id == styleIds[i])
+					return true;
+			}
+
+		}
     });
     return Products;
 });
