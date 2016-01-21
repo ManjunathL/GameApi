@@ -176,7 +176,7 @@ a.active {
 }
 
 a {
-    color: #000;
+    color: #f1591f;
     -webkit-transition: color 0.3s,opacity 0.2s;
     transition: color 0.3s,opacity 0.2s,transform 0.3s;
 }
@@ -1633,7 +1633,6 @@ a.button-orange, a.button-orange:hover {
 
 .userpop h2 img, .userpop h3 img, .signup h2 img {
     height: 40px;
-    width: 40px;
     width: 40px;
     border-radius: 50%;
 }
@@ -3127,6 +3126,12 @@ width: 325px!important;
 #slup{
     display:none;
 }
+.pgrightspace{
+    padding-right:20px;
+}
+.pgleftspace{
+    padding-left:40px;
+}
 @media (max-width: 991px) {
     .relcontrol{
         margin-top:70px!important;
@@ -3134,6 +3139,13 @@ width: 325px!important;
     #customproduct > li{
         width:25%!important;
      }
+     .pgrightspace{
+          padding-right:0px;
+      }
+      .pgleftspace{
+          padding-left:0px;
+          padding-top:20px;
+      }
 }
 @media (max-width: 460px) {
     .relcontrol{
@@ -3148,5 +3160,12 @@ width: 325px!important;
      }
      #customproduct > li{
         width:90%!important;
+     }
+     .pgrightspace{
+         padding-right:0px;
+     }
+     .pgleftspace{
+         padding-left:0px;
+         padding-top:20px;
      }
 }
