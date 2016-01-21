@@ -899,6 +899,10 @@ button {
     padding: 20px 0px;
 }
 
+.padding20-20 {
+    padding: 20px 20px;
+}
+
 .padding50-0 {
     padding: 50px 0px;
 }
@@ -3017,13 +3021,11 @@ color:#f1591f;
 #alt1-frame ul li{
 width: 325px!important;
 }
-
-.accessory-frame > .slidee {
-    width: 3250px!important;
-}
-
 .accessory-frame ul li{
     width: 170px!important;
+}
+.accessory-frame ul{
+    width: 300px!important;
 }
 
 .relcontrol{
@@ -3080,6 +3082,34 @@ width: 325px!important;
 .pgleftspace{
     padding-left:40px;
 }
+
+.component-boxes{
+    background: none repeat scroll 0% 0% #FFF;
+    height: 120px;
+    margin-left: 27px;
+    padding: 10px;
+    width: 250px;
+}
+.component-title{
+    font-size: 16px;
+    font-weight: 300;
+    height: 60px;
+ }
+ .component-desc{
+  font-weight: 500; color: rgb(153, 153, 153);
+ }
+.siz-content{
+    width:60%;
+}
+
+.qnt-content{
+    width:40%;
+    text-align:right;
+}
+.txt-light-gray {
+    color: rgb(204, 204, 204);
+}
+
 @media (max-width: 991px) {
     .relcontrol{
         margin-top:70px!important;
@@ -3093,6 +3123,10 @@ width: 325px!important;
       .pgleftspace{
           padding-left:0px;
           padding-top:20px;
+      }
+      .component-boxes{
+      margin-top:20px;
+      padding-top: 10px!important;
       }
 }
 @media (max-width: 460px) {

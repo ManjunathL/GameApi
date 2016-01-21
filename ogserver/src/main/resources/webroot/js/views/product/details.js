@@ -21,10 +21,13 @@ define([
         el: '.page',
         ref: MGF.rootRef,
         appliancelst: '#applianceList',
-        product: new ProductModel(),
-        custom_product: new CustomProduct(),
-        Products: new ProductCollection(),
+        product: null,
+        custom_product: null,
+        Products: null,
         initialize: function() {
+            this.product = new ProductModel();
+            this.custom_product = new CustomProduct();
+            this.Products = new ProductCollection();
             this.custom_product.on('change',this.render,this);
         },
         render: function() {
@@ -149,7 +152,8 @@ define([
             "click #close-consult-pop": "closeModal",
             "click #consult-form-explore": "closeModal",
             "click #consult-submit-btn": "submitConsultButton",
-            "submit #consultForm":"submitConsultForm"
+            "submit #consultForm":"submitConsultForm",
+            "click .dwf":"slideDelivery"
 
         },
         changeMaterial : function(ev) {
@@ -405,6 +409,16 @@ define([
         setProductConsultData: function(authData, formData) {
             console.log('inside mfg');
             MGF.addConsultData(authData, formData);
+        },
+        slideDelivery: function(){
+            if($("#sldown").is(':visible')){
+                $("#sldown").hide();
+                $("#slup").show();
+            }else{
+                 $("#slup").hide();
+                $("#sldown").show();
+            }
+            $('.dwf-desc').slideToggle();
         }
     });
     return ProductPage;

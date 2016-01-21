@@ -52,7 +52,7 @@ $(window).scroll(function() {
 jQuery(function($) {
     'use strict';
 
-    //alert('sss');
+    alert('hi');
 
     var $frame = $('#forcecentered');
     var $wrap = $frame.parent().parent();
@@ -84,40 +84,44 @@ jQuery(function($) {
         active: mainSliderActive
     }).init();
 
-    var $alt1_frame = $('#alt1-frame');
-    var $alt1_wrap = $alt1_frame.parent().parent();
+    if($('#alt1-frame').length > 0){
+        var $alt1_frame = $('#alt1-frame');
+        var $alt1_wrap = $alt1_frame.parent().parent();
 
-    // Call Sly on frame
-    var alt1_sly = new Sly('#alt1-frame', {
-        horizontal: 1,
-        itemNav: 'basic',
-        smart: 1,
-        activateMiddle: 0,
-        activateOn: 'click',
-        mouseDragging: 1,
-        touchDragging: 1,
-        releaseSwing: 1,
-        startAt: 0,
-        scrollBy: 1,
-        speed: 300,
-        elasticBounds: 1,
-        easing: 'easeOutExpo',
-        dragHandle: 1,
-        dynamicHandle: 1,
-        clickBar: 1,
+        // Call Sly on frame
+        var alt1_sly = new Sly('#alt1-frame', {
+            horizontal: 1,
+            itemNav: 'basic',
+            smart: 1,
+            activateMiddle: 0,
+            activateOn: 'click',
+            mouseDragging: 1,
+            touchDragging: 1,
+            releaseSwing: 1,
+            startAt: 0,
+            scrollBy: 1,
+            speed: 300,
+            elasticBounds: 1,
+            easing: 'easeOutExpo',
+            dragHandle: 1,
+            dynamicHandle: 1,
+            clickBar: 1,
 
-        // Buttons
-        prevPage: $alt1_wrap.find('.alt1-prev'),
-        nextPage: $alt1_wrap.find('.alt1-next')
-    }).init();
+            // Buttons
+            prevPage: $alt1_wrap.find('.alt1-prev'),
+            nextPage: $alt1_wrap.find('.alt1-next')
+        }).init();
+    }
+    accessorySlide();
+});
 
+function accessorySlide(){
     $('.accessory-frame').each(function () {
-
-        var accessoryid = this.id;
-        var $accessory_frame = $('#'+accessoryid);
+        var accessoryId = this.id;
+        var $accessory_frame = $('#'+accessoryId);
         var $accessory_wrap = $accessory_frame.parent().parent();
 
-        var accessory_sly = new Sly('#'+accessoryid, {
+        var accessory_sly = new Sly('#'+accessoryId, {
             horizontal: 1,
             itemNav: 'basic',
             smart: 1,
@@ -140,21 +144,7 @@ jQuery(function($) {
             nextPage: $accessory_wrap.find('.accessory-next')
         }).init();
     });
-
-    $('.dwf').click(function() {
-        if($("#sldown").is(':visible')){
-            $("#sldown").hide();
-            $("#slup").show();
-        }else{
-             $("#slup").hide();
-            $("#sldown").show();
-        }
-
-        $('.dwf-desc').slideToggle();
-    });
-
-});
-
+}
 function mainSliderActive(eventName, itemIndex) {
 
     var images = "<%= product.images %>".split(',');
@@ -169,25 +159,7 @@ function mainSliderActive(eventName, itemIndex) {
     }
 }
 
-function alt1SliderActive(eventName, itemIndex) {
 
-    var currentImgEl = document.getElementById('alt1-image');
-    var altImages = "<%=_.pluck(product.accessories[0].alternatives, 'accessoryImg')%>".split(',');
-    var defaultImage = "<%=product.accessories[0].accessoryImg%>";
-
-    var index = itemIndex;
-
-    if (!currentImgEl.src.match(defaultImage) && itemIndex >= alt1LastIndex) {
-        index = itemIndex + 1;
-    }
-
-    alt1LastIndex = itemIndex;
-
-    $('#alt1-image').fadeOut(600, function() {
-        $('#alt1-image').attr("src", imgBase + altImages[index]);
-        $('#altImages').fadeIn(200);
-    });
-}
 
 function toggleColor(element) {
     var currentColor = $(element).css('color');

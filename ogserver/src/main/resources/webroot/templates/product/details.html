@@ -87,6 +87,7 @@
                 <% if(typeof(applianceTypes) !== 'undefined'){ %>
                 <li class="col-xs-2 padding0"><a data-toggle="tab" href="#apptab">Appliances</a></li>
                 <% } %>
+                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Components</a></li>
             </ul>
 
             <div class="tab-content">
@@ -153,16 +154,23 @@
                                                     <button class="btn accessory-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
                                                     </button>
                                                 </div>
-                                                <div class="accessory-frame frame col-xs-10" id="accessory-fram<%= accessory.accessoryId %>" style="overflow: hidden;">
+                                                <div class="accessory-frame frame col-xs-10" id="accessory-fram<%= accessory.accessoryId %>">
                                                     <ul class="clearfix slidee"
-                                                        style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
-                                                        <% _.each(accessory.alternatives, function(alternative){ %>
-                                                        <li class="<%= accessory.accessoryName === alternative.accessoryName ? 'active' : '' %>">
-                                                            <div style="height: 180px;"><a class="alt-accessory display-inline" data-daccessoryid="<%=accessory.accessoryId%>" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img width="170px" src="<%= imgBase + 'c_fit,w_170,h_170/' + alternative.accessoryImg %>"/></a></div>
-                                                            <div style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></div>
-                                                        </li>
-                                                        <% }); %>
-                                                        <!--<li><img src="https://placehold.it/500x300" width="100%"/></li>-->
+                                                        style="transform: translateZ(0px) translateX(0px);width:(((product.images[0].length/3)+1)*3) * 110px;">
+                                                        <div class="row">
+                                                            <% _.each(accessory.alternatives, function(alternative){ %>
+                                                            <li class="<%= accessory.accessoryName === alternative.accessoryName ? 'active' : '' %>">
+                                                                <div style="height: 180px;"><a class="alt-accessory display-inline" data-daccessoryid="<%=accessory.accessoryId%>" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img width="170px" src="<%= imgBase + 'c_fit,w_170,h_170/' + alternative.accessoryImg %>"/></a></div>
+                                                                <div style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></div>
+                                                            </li>
+                                                            <% }); %>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                        </div>
                                                     </ul>
                                                 </div>
                                                 <div class="controls center col-xs-1">
@@ -236,12 +244,170 @@
                     </div>
                 </div>
                 <% } %>
+
+                <!-- Component Tab Start -->
+                <div class="tab-pane fade" id="comptab">
+                    <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
+                        <div class="col-xs-12" style="padding-bottom: 10px">
+                            <label>Components</label>
+                        </div>
+                        <div class="tab-content">
+                            <div class="row padding20-20">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"> Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close)</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X300X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"> Base Unit 3 Blum Tandem Drawers (Soft Close)</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 2
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row padding20-20">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"> Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close)</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X300X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"> Base Unit 3 Blum Tandem Drawers (Soft Close)</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 2
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row padding20-20">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"> Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close)</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X300X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"> Base Unit 3 Blum Tandem Drawers (Soft Close)</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 2
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Component Tab End -->
+
             </div>
 
         </div>
 
         <!-- Related Projects Row -->
         <div class="row paddingtop40" id="relatedproduct">
+
 
         </div>
 
