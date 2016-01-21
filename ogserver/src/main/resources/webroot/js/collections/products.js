@@ -101,7 +101,13 @@ define([
 					return true;
 			}
 
-		}
+		},
+        getRelatedProduct: function (subcatarr) {
+         var that = this;
+         return _.map(this.filter(function(product){
+             return that.productInSubCategs(product, subcatarr);
+         }), function (product) {return product.toJSON();});
+        }
     });
     return Products;
 });
