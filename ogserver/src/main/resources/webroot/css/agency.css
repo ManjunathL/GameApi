@@ -3141,6 +3141,7 @@ width: 325px!important;
     margin-left: 27px;
     padding: 10px;
     width: 250px;
+    margin-bottom:30px;
 }
 .component-title{
     font-size: 16px;
@@ -3177,7 +3178,6 @@ width: 325px!important;
           padding-top:20px;
       }
       .component-boxes{
-      margin-top:20px;
       padding-top: 10px!important;
       }
 }

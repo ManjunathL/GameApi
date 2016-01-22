@@ -382,7 +382,7 @@ define([
                "propertyName": $('#consult_property_name').val()
            };
 
-           console.log(formData);
+           //console.log(formData);
 
            var authData = this.ref.getAuth();
            var that = this;
@@ -423,8 +423,6 @@ define([
         details_helper_ready: function(){
 
         jQuery(function($) {
-            console.log('helllooooo'+$('#alt1-frame').length);
-
             if($('#alt1-frame').length > 0){
                 var $alt1_frame = $('#alt1-frame');
                 var $alt1_wrap = $alt1_frame.parent().parent();
@@ -454,8 +452,8 @@ define([
                 }).init();
             }
 
+            if($('.accessory-frame').length > 0){
              $('.accessory-frame').each(function () {
-                console.log('hereeeeeeeeee');
                     var accessoryId = this.id;
                     var $accessory_frame = $('#'+accessoryId);
                     var $accessory_wrap = $accessory_frame.parent().parent();
@@ -483,8 +481,9 @@ define([
                         nextPage: $accessory_wrap.find('.accessory-next')
                     }).init();
                 });
-
+                }
             });
+
         }
     });
     return ProductPage;

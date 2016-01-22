@@ -297,5 +297,66 @@
       "image": "chimney_ff0o46.jpg",
       "price": "12,990"
     }
-  ]
+  ],
+  "components" : [ {
+    "name" : "Base Unit For Sink 2 Doors",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit 3 Blum Tandem Drawers (Soft Close",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit Blind Corner For Cylinder 1 Door",
+    "qty" : 1,
+    "size" : "820X1100X560"
+  }, {
+    "name" : "Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close",
+    "qty" : 1,
+    "size" : "820X300X560"
+  }, {
+    "name" : "Base Unit 2 Doors + 1 Shelf",
+    "qty" : 1,
+    "size" : "820X1000X560"
+  }, {
+    "name" : "Wall Unit For Dish Drainer 2 Doors",
+    "qty" : 1,
+    "size" : "720X900X330"
+  }, {
+    "name" : "Wall Unit 2 Doors 2 Shelves",
+    "qty" : 3,
+    "size" : "720X900X330"
+  }, {
+    "name" : "Blind Corner Wall Unit 1 Door 400 Mm 2 Shelves",
+    "qty" : 1,
+    "size" : "720X800X330"
+  }, {
+    "name" : "Base Unit 2 Doors + 1 Shelf",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit End Panel",
+    "qty" : 2,
+    "size" : "-"
+  }, {
+    "name" : "Wall Unit End Panel",
+    "qty" : 4,
+    "size" : "-"
+  }, {
+    "name" : "Base Unit Filler From 30 To 150 Mm (With Door",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Detergent Holder",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Pvc Cutlery Tray",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Bin Holder",
+    "qty" : 1,
+    "size" : "-"
+  } ]
 }
