@@ -28,7 +28,7 @@
                             <ul class="clearfix slidee"
                                 style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
                                 <% _.each(product.images, function(image){ %>
-                                <li><img src="<%= imgBase + image %>" width="100%"/>
+                                <li><img src="<%= imgBase + image %>" width="100%"/></li>
                                     <% }); %>
                             </ul>
                         </div>
@@ -39,21 +39,38 @@
                     </div>
                 </div>
                 <div class="padding20_0_10_0 margin_auto"><%= product.desc %></div>
+                <div class="padding20_0_10_0 margin_auto social-share-buttons">
+                        <!--<a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%= imgBase + product.images[0] %>&t=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a>-->
+                        <!--<a href="javascript:void(0);" onclick="window.open('http://www.twitter.com/intent/tweet?url=<%= imgBase + product.images[0] %>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a>-->
+                        <!--<a href="javascript:void(0);" onclick="window.open('http://plus.google.com/share?url=<%= imgBase + product.images[0] %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-google-plus-square"></i></a>-->
+
+                        <div class="col-xs-4 align-center">
+                            <div id="fb-root"></div>
+                            <div class="fb-share-button"
+                                 data-href="<%= imgBase + product.images[0] %>"
+                                 data-layout="button">
+                            </div>
+                        </div>
+                        <div class="col-xs-4 align-center">
+                            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="<%= imgBase + product.images[0] %>" data-text="<%= product.name %>" data-dnt="true">Tweet</a>
+                        </div>
+                        <div class="col-xs-4 align-center">
+                            <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+                            <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<%= imgBase + product.images[0] %>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>" data-pin-color="red"></a>
+                        </div>
+                </div>
                 <div class="col-xs-6 padding20-0 margin_auto">
-                    <a href="#" class="button border1 padding10 display-block margin0-10">
-                        <span class="fa fa-heart-o" style="color:#F1591F;"></span>
+                    <a href="#" class="button border1 padding10 display-block margin0-10" style="background-color: #3C82BF;color: #FFFFFF;">
+                        <span class="fa fa-heart-o" style="color:#FFFFFF;"></span>
                         shortlist
                     </a>
                 </div>
                 <div class="col-xs-6 padding20-0">
-                    <a href="#" class="button border1 padding10 display-block margin0-10">
-                        <span class="fa fa-share"></span>
-                        share
-                    </a>
+                    <a href="javascript:void(0);" id="prodconsult" class="consult button border1 padding10 display-block margin0-10">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a>
                 </div>
-                <div>
-                    <img src="img/seals.png" width="100%">
-                </div>
+                <!--<div>-->
+                    <!--<img src="img/seals.png" width="100%">-->
+                <!--</div>-->
             </div>
         </div>
 
@@ -62,178 +79,373 @@
                 <h3 class="details-heading">Customize your Product</h3>
                 <hr>
             </div>
-            <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
-                <label id="chooseMaterial">Choose Material:</label>
-                <div class="width100 list-group paddingtop20" aria-labelledby="chooseMaterial">
-                    <% _.each (materials, function(material) { %>
-                    <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline" data-material="<%=material%>"><%=material%></a>
-                    <% }); %>
-                </div>
-            </div>
-            <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
-                <label id="chooseFinish">Choose Finish:</label>
-                <div class="width100 list-group paddingtop20" aria-labelledby="chooseFinish" id="finishList">
-                    <% _.each (selectedfinishes, function(finish) { %>
-                    <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline" data-finish="<%=finish%>"><%=finish%></a>
-                    <% }); %>
-                </div>
-            </div>
-            <div class="col-xs-12 paddingtop20 bg-light-gray margintop20">
-                <label id="colors">Available in Colors:</label>
-                <ul class="paddingtop10 color-ul" id="colorList">
-                    <% _.each (selectedColor, function(color) { %>
-                    <li class="color-rounds"><img src="<%= imgBase + color.img %>" alt="<%= color.name %>"></li>
-                    <% }); %>
+            <ul id="customproduct" class="nav nav-tabs" style="margin-left: 15px;width:100%;">
+                <li class="col-xs-2 padding0 active"><a data-toggle="tab" href="#mfc">Material/Finish/Color</a></li>
+                <% if(typeof(selectedAccessories) !== 'undefined'){ %>
+                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#acctab">Accessories</a></li>
+                <% } %>
+                <% if(typeof(applianceTypes) !== 'undefined'){ %>
+                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#apptab">Appliances</a></li>
+                <% } %>
+                <% if(typeof(product.components) !== 'undefined'){ %>
+                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Components</a></li>
+                <% } %>
+            </ul>
 
-                    <!--<li class="color-rounds round-bk3"></li>-->
-                    <!--<li class="color-rounds round-bk4"></li>-->
-                    <!--<li class="color-rounds round-bk5"></li>-->
-                </ul>
-
-            </div>
-        </div>
-
-        <div class="row margin-left-0 bg-light-gray margintop20 paddingtop20">
-            <div class="col-xs-12">
-                <label>Included Accessories</label>
-            </div>
-        </div>
-        <div id="accessoryList" class="row margin-left-0 bg-light-gray paddingtop10">
-            <% _.each (selectedAccessories, function(accessory) { %>
-            <div class="col-md-6 col-sm-6 portfolio-item">
-                <div class="portfolio-box bg-white width100">
-                    <div class="row" style="padding: 5px">
-                        <div class="col-sm-5">
-                            <a href="#">
-                                <img id="alt1-image" src="<%= imgBase + 'c_fit,w_206,h_124/' + accessory.accessoryImg %>" alt="">
-                            </a>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="mfc">
+                    <div class="row margin-left-0 paddingtop40">
+                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
+                            <label id="chooseMaterial">Choose Material:</label>
+                            <div class="width100 list-group paddingtop20" aria-labelledby="chooseMaterial">
+                                <% _.each (materials, function(material) { %>
+                                <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline" data-material="<%=material%>"><%=material%></a>
+                                <% }); %>
+                            </div>
                         </div>
-                        <div class="col-sm-7">
-                            <p><%= accessory.accessoryName%></p>
-                            <p>Price: <i class="fa fa-inr"></i> <%= accessory.accessoryPrice%></p>
+                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
+                            <label id="chooseFinish">Choose Finish:</label>
+                            <div class="width100 list-group paddingtop20" aria-labelledby="chooseFinish" id="finishList">
+                                <% _.each (selectedfinishes, function(finish) { %>
+                                <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline" data-finish="<%=finish%>"><%=finish%></a>
+                                <% }); %>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 paddingtop20 bg-light-gray margintop20">
+                            <label id="colors">Available in Colors:</label>
+                            <ul class="paddingtop10 color-ul" id="colorList">
+                                <% _.each (selectedColor, function(color) { %>
+                                <li class="color-rounds"><img src="<%= imgBase + color.img %>" alt="<%= color.name %>"></li>
+                                <% }); %>
+
+                                <!--<li class="color-rounds round-bk3"></li>-->
+                                <!--<li class="color-rounds round-bk4"></li>-->
+                                <!--<li class="color-rounds round-bk5"></li>-->
+                            </ul>
+
                         </div>
                     </div>
-                    <div class="alt1-wrap padding20-0">
-                            <p style="margin-left: 10px">Alternate Options</p>
-                            <hr width="98%" class="margin_auto">
-                            <div class="row margintop10">
-                                <div class="controls center col-xs-1">
-                                    <button class="btn alt1-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
-                                    </button>
+                </div>
+                <% if(typeof(selectedAccessories) !== 'undefined'){ %>
+                <div class="tab-pane fade" id="acctab">
+                    <div class="row margin-left-0 bg-light-gray margintop20 paddingtop20">
+                        <div class="col-xs-12">
+                            <label>Included Accessories</label>
+                        </div>
+                    </div>
+                    <div id="accessoryList" class="row margin-left-0 bg-light-gray paddingtop10">
+                        <% _.each (selectedAccessories, function(accessory) { %>
+                        <div class="col-md-12 col-sm-12 portfolio-item">
+                            <div class="portfolio-box bg-white width100">
+                                <div class="row" style="padding: 5px">
+                                    <div class="col-md-3 col-sm-3" style="padding-left: 5%; padding-top: 1.5%;">
+                                        <div class="accessory-main-img" style="border: 0px solid #F1591F;">
+                                            <div style="height: 180px;">
+                                                <a href="#">
+                                                    <img class="accImg" id="accessory-image<%= accessory.accessoryId %>" width="170px" src="<%= imgBase + 'c_fit,w_170,h_170//' + accessory.accessoryImg %>" alt="">
+                                                </a>
+                                            </div>
+                                            <div><%= accessory.accessoryName%></div>
+                                            <div>Price: <i class="fa fa-inr"></i> <%= accessory.accessoryPrice%></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9">
+                                        <div class="wrap">
+                                            <div class="row margintop10">
+                                                <div class="controls center col-xs-1">
+                                                    <button class="btn accessory-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="accessory-frame frame col-xs-10" id="accessory-fram<%= accessory.accessoryId %>">
+                                                    <ul class="clearfix slidee"
+                                                        style="transform: translateZ(0px) translateX(0px);width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
+                                                            <% _.each(accessory.alternatives, function(alternative){ %>
+                                                            <li class="<%= accessory.accessoryName === alternative.accessoryName ? 'active' : '' %>">
+                                                                <div style="height: 180px;"><a class="alt-accessory display-inline" data-daccessoryid="<%=accessory.accessoryId%>" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img width="170px" src="<%= imgBase + 'c_fit,w_170,h_170/' + alternative.accessoryImg %>"/></a></div>
+                                                                <div style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></div>
+                                                            </li>
+                                                            <% }); %>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="controls center col-xs-1">
+                                                    <button class="btn accessory-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                                </div>
+                                            </div>
+                                            <hr width="98%" class="margin_auto">
+                                            <p style="margin-left: 10px;margin-top: 10px;text-align: center;">Alternate Options</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="frame col-xs-10" id="alt1-frame" style="overflow: hidden;">
-                                    <ul class="clearfix"
-                                        style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
-                                        <% _.each(accessory.alternatives, function(alternative){ %>
-                                        <li class="<%= accessory.accessoryName === alternative.accessoryName ? 'active' : '' %>" style="width: 60px;">
-                                            <span style="height: 64px;"><a class="alt-accessory display-inline" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img src="<%= imgBase + 'c_fit,w_60,h_64/' + alternative.accessoryImg %>"/></a></span>
-                                            <!--<p><%= alternative.accessoryName%></p>-->
-                                            <p style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></p>
-                                        </li>
-                                        <% }); %>
-                                    </ul>
-                                </div>
-                                <div class="controls center col-xs-1">
-                                    <button class="btn alt1-next"><i class="pe-7s-angle-right font-size30"></i></button>
-                                </div>
+
+                                <!--<div class="alt1-wrap padding20-0">-->
+
+                                <!--</div>-->
                             </div>
                         </div>
-
-
-                    <!--<div class="alt1-wrap padding20-0">-->
-
-                    <!--</div>-->
+                        <% }); %>
+                    </div>
                 </div>
-            </div>
-            <% }); %>
-        </div>
-
-        <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
-            <div class="col-xs-12" style="padding-bottom: 10px">
-                <label>Choose Appliances</label>
-            </div>
-            <ul class="nav nav-tabs" style="margin-left: 15px;">
-                <% var active = true; _.each(applianceTypes, function(applianceType) { %>
-                    <li role="presentation" class="<%= active ? 'active': ''%>"><a  style="color: #333;" data-toggle="tab" href="#<%=applianceType%>"><%=applianceType%></a></li>
-                <% active = false; }); %>
-            </ul>
-            <div class="tab-content" id="applianceList">
-                <%
-                var active = true;
-                var atCount = 0;
-                _.each(applianceTypes, function(applianceType) {
-                var applsForType = _.filter(product.appliances, function(appliance) {return applianceType === appliance.type;});
-                %>
-                <div class="tab-pane fade<%= active ? ' in active': ''%>" id="<%=applianceType%>">
-                    <div class="at<%=atCount%>-wrap padding20-0">
-                        <div class="row">
-                            <div class="controls center col-xs-1" style="margin-top: 110px;">
-                                <button class="btn at<%=atCount%>-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
-                                </button>
-                            </div>
-                            <div class="frame col-xs-10" id="at<%=atCount%>-frame" style="overflow: hidden;">
-                                <ul class="clearfix"
-                                    style="transform: translateZ(0px) translateX(0px); width: <%=(((applsForType.length/3)+1)*3) * 110%>px;">
-                                    <% _.each(applsForType, function(appliance){ %>
-                                    <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceprice="<%=appliance.price%>">
-                                        <p style="font-size: 14px; height: 40px"><%=appliance.name%></p>
+                <% } %>
+                <% if(typeof(applianceTypes) !== 'undefined'){ %>
+                <div class="tab-pane fade" id="apptab">
+                    <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
+                        <div class="col-xs-12" style="padding-bottom: 10px">
+                            <label>Choose Appliances</label>
+                        </div>
+                        <ul class="nav nav-tabs" style="margin-left: 15px;">
+                            <% var active = true; _.each(applianceTypes, function(applianceType) { %>
+                            <li role="presentation" class="<%= active ? 'active': ''%>"><a  style="color: #333;" data-toggle="tab" href="#<%=applianceType%>"><%=applianceType%></a></li>
+                            <% active = false; }); %>
+                        </ul>
+                        <div class="tab-content" id="applianceList">
+                            <%
+                            var active = true;
+                            var atCount = 0;
+                            _.each(applianceTypes, function(applianceType) {
+                            var applsForType = _.filter(product.appliances, function(appliance) {return applianceType === appliance.type;});
+                            %>
+                            <div class="tab-pane fade<%= active ? ' in active': ''%>" id="<%=applianceType%>">
+                                <div class="at<%=atCount%>-wrap padding20-0">
+                                    <div class="row">
+                                        <div class="controls center col-xs-1" style="margin-top: 110px;">
+                                            <button class="btn at<%=atCount%>-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                                            </button>
+                                        </div>
+                                        <div class="frame col-xs-10" id="at<%=atCount%>-frame" style="overflow: hidden;">
+                                            <ul class="clearfix"
+                                                style="transform: translateZ(0px) translateX(0px); width: <%=(((applsForType.length/3)+1)*3) * 110%>px;">
+                                                <% _.each(applsForType, function(appliance){ %>
+                                                <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceprice="<%=appliance.price%>">
+                                                    <p style="font-size: 14px; height: 40px"><%=appliance.name%></p>
                                             <span style="display: inline-block; height: 160px;">
                                                 <img class="portfolio-box" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>" onclick="toggleColor($(this).next());"/>
                                                 <span class="pe-7s-check <%= $.inArray( appliance.name, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"
                                                       onclick="toggleColor($(this));"></span>
                                             </span>
-                                        <p style="font-size: 14px; margin-top: 10px"><i class="fa fa-inr"></i> <%=appliance.price%></p>
-                                    </li>
-                                    <% }); %>
-                                </ul>
+                                                    <p style="font-size: 14px; margin-top: 10px"><i class="fa fa-inr"></i> <%=appliance.price%></p>
+                                                </li>
+                                                <% }); %>
+                                            </ul>
+                                        </div>
+                                        <div class="controls center col-xs-1" style="margin-top: 110px;">
+                                            <button class="btn alt1-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="controls center col-xs-1" style="margin-top: 110px;">
-                                <button class="btn alt1-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                            <% active = false; atCount++; }); %>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+                <!-- Component Tab Start -->
+                <% if(typeof(product.components) !== 'undefined'){ %>
+                <div class="tab-pane fade" id="comptab">
+                    <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
+                        <div class="col-xs-12" style="padding-bottom: 10px">
+                            <label>Components</label>
+                        </div>
+                        <div class="tab-content">
+                            <div class="row padding20-20">
+                                <div class="col-md-12 col-xs-12">
+                                    <% _.each (product.components, function(component) { %>
+                                    <div class="col-md-3 col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"><%= component.name %></div>
+                                        <div class="component-desc">
+                                            <div class="fl siz-content">
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p><%= component.size %></p>
+                                            </div>
+                                            <div class="fl qnt-content">
+                                                <i class="txt-light-gray">Quantity:</i> <%= component.qty %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <% active = false; atCount++; }); %>
-            </div>
-        </div>
-
-
+                <% } %>
+                <!-- Component Tab End -->
         <!-- Related Projects Row -->
-        <div class="row paddingtop40">
+        <div class="row paddingtop40" id="relatedproduct">
 
-            <div class="col-lg-12">
-                <hr>
-                <h3 class="details-heading">Related Products</h3>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item"
-                         src="http://res.cloudinary.com/univermal/image/upload/c_fill,h_300,w_500/Auklet_low_jkp4hr"
-                         alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
 
         </div>
 
+        <div class="row paddingtop40">
+            <div class="col-xs-12">
+                <div class="col-xs-4 dwf"><img src="<%= imgBase %>shipping_om5dso.png" width="32px" height="32px"><span class="margin-left-10">Delivery</span></div>
+                <div class="col-xs-4 dwf"><i class="fa fa-star-o" style="font-weight: bold;"></i><span class="margin-left-10">Warranty</span></div>
+                <div class="col-xs-4 dwf"><i class="fa fa-inr"></i><span class="margin-left-10">Flexible Payment</span></div>
+            </div><div class="col-xs-12">
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4 dwf" style="background:none;font-size:40px;color:#999999;"><i class="fa fa-angle-double-down" id="sldown"></i><i class="fa fa-angle-double-up" id="slup"></i></div>
+                <div class="col-xs-4"></div>
+            </div>
+        </div>
+        <div class="row dwf-desc">
+            <div class="col-md-12">
+                <div class="col-md-6 pgrightspace">
+                    <p><h4>5 years Warranty</h4></p>
+                    <p>
+                    <p> <b>Duration</b>
+                        <p>Product warranty duration is valid for a period of 5 years. Each product warranty is in effect from the date of installation. Please refer to the product details to see the warranty conditions and description for every product.</p>
+                    </p>
+                    <p>
+                        <b>Terms & Conditions</b>
+                    <ol>
+                        <li>Claims are examined to determine warranty coverage of all items purchased from MyGubbi.</li>
+                        <li>The original purchase receipt must be presented as proof of purchase.</li>
+                        <li>Upon approval of warranty claim, the product will be repaired or replaced with the same or comparable product with a value not higher than the price of the original product purchased.</li>
+                        <li>In the event that repair work has been done to a product without any authorisation from MyGubbi, the product's warranty coverage is automatically void.                           </li>
+                        <li>Warranty terms and conditions are fixed, non-negotiable, non-transferable and only benefits the original purchasers of the product.</li>
+                    </ol>
+                    </p>
+                    <p>
+                        <b>Conditions of Non Applicability:</b>
+                    <ol>
+                        <li>This warranty is not applicableto products that have been stored or assembled incorrectly, used inappropriately, abused, misused, altered, or cleaned with wrong cleaning methods or wrong cleaning products</li>
+                        <li>This warranty is not applicableto atypical and unreasonable wear and tear, cuts or scratches, or damage caused by impacts or accidents</li>
+                        <li>This warranty is not applicableif products have been placed outdoors or in a humid environment or if the products have been used for non-domestic purposes (unless otherwise stated)</li>
+                        <li>This warranty is not applicableto consequential or incidental damages</li>
+                    </ol>
+                    For more details, see the warranty conditions and description for every product
+
+                    </p>
+                    </p>
+
+                </div>
+                <div class="col-md-6 pgleftspace">
+                    <p><h4>45 days Delivery Guarantee</h4></p>
+                    <p>
+                        For all confirmed orders to be delivered via standard delivery option, the estimated delivery time is 45 days from the date of design finalization or order confirmation date whichever is later.
+
+                        While we ensure that you receive your orders within the delivery time indicated in our shipping policies, unforeseen and uncontrollable events may cause the delay of your delivery. We will contact you in the event of any disruption.
+
+                        Highly trained members of our team will assemble and install all furniture, interior fittings purchased from MyGubbi.com This is to ensure the best quality of service you deserve for placing your trust in My Gubbi to join you in this celebration of your home.
+
+                    </p>
+                    <p>&nbsp;</p>
+                    <p><h4>Payment Terms</h4></p>
+                    <p>
+                        For the standard designs, we expect 50% in advance to procure and start the manufacturing process. The remaining 50% will be expected once items are completely manufactured in our warehouse.
+
+                        For customized interior orders we follow a 10-40-50 payment policy. We expect 10% of approximate initial budgeted estimate as advance which will subsequently be adjusted against the total cost of the project if you go ahead with our design and execution. The next 40% will be expected on finalization of the design and the last 50% will be paid once material is ready for shipment.
+
+                        All prices are exclusive of VAT/service tax.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:60px;"></div>
     </div>
 </section>
 
+<!-- Consult Modal -->
+<div id="consultpop" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="contact-form">
+            <div class="row">
+                <h2 class="align-center">
+                    <span class="pe-7s-note"></span>
+                    Consult
+                </h2>
+            </div>
+            <div class="row">
+                <!--<div class="col-md-12">-->
+                    <!--<div class="row margin_auto">-->
+                        <!--<div class="align-center nowrap">for</div>-->
+                        <!--<div class="align-center"><h4><%= product.name %></h4></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-12">
+                    <div class="paddingtop30">
+                        <div class="row margin_auto">
+                            <div class="col-xs-6">
+                                <span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 80 88 86 0860</span>
+                            </div>
+                            <div class="col-xs-6 align-right">
+                                <span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row display-none" id="consult_error_row">
+                        <p class="margin0 error-text align-center" id="consult_error"></p>
+                    </div>
+
+                    <form id="consultForm" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type="hidden" class="width100 form-control" placeholder="Product Name*" value="<%= product.name %>"
+                                       id="consult_product_name" required/>
+                                <input type="text" class="width100 form-control" placeholder="Name*" value=""
+                                       id="consult_full_name" required/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="email" class="width100 form-control" placeholder="Email*" value=""
+                                       id="consult_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group has-feedback">
+                                <input type="text" class="width100 form-control" placeholder="Phone Number*" value=""
+                                       id="consult_contact_num" required pattern="\d{10}" title="e.g. 9876543210"/>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="margin-bottom20 form-group">
+                                    <textarea class="width100 form-control" id="consult_requirement"
+                                              placeholder="Describe your Requirements / Queries"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Property Name"
+                                       id="consult_property_name"/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="align-center form-group">
+                                <button
+                                        id="consult-submit-btn"
+                                        class="button margin-top20 margin-bottom20"
+                                        type="submit"
+                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
+                                    submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="consult-success-msg-padding" class="display-none margintop25"></div>
+                    <div id="consult-success-msg" class="display-none">
+                        <p class="justify">Thank you for contacting My Gubbi. Our team will get back to you as soon as possible.</p>
+                        <p class="margintop40">Want to keep Exploring? Click <a id="consult-form-explore" href="#products/kitchen/lshapedk">here</a></p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="close-consult-pop" data-element="#consultpop" class="close-icon signup-form">
+                <img src="img/close-white.png">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- consult Modal End -->

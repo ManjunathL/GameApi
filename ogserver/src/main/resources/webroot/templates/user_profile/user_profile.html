@@ -3,26 +3,77 @@
 
         <div class="row bg-white portfolio-box padding-top15 padding-bottom15">
 
-            <div class="col-md-3 col-sm-3">
-                <div class="row margin-top20 align-center">
-                    <img src="img/user.png">
-                    <a>
-                        Change Profile Image
-                    </a>
-                </div>
-            </div>
 
-            <div class="col-md-9 col-sm-9">
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2 class="view_mode">Sakshi Kaushik</h2>
-                        <h2 class="edit_mode"><input type="text" maxlength="50" placeholder="Your Name"></h2>
+            <form id="userProfileForm" name="userProfileData" data-toggle="validator" role="form">
+                
+                <div class="col-md-3 col-sm-3">
+                    <div class="row margin-top20 align-center">
+                        <img
+                                src="<%=userProfile ? userProfile.profileImage : 'img/user.png'%>"
+                                class="img-responsive"
+                                id="user_profile_image">
+                        <a class="edit_mode">
+                            Change Profile Image
+                        </a>
                     </div>
-                    <div class="col-md-6">
+                </div>
+
+                <div class="col-md-9 col-sm-9">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 class="view_mode">
+                                <%=userProfile ? userProfile.displayName : 'User'%>
+                            </h2>
+                            <h2 class="edit_mode form-group">
+                                <input
+                                        type="text"
+                                        id="user_display_name"
+                                        class="form-control"
+                                        maxlength="50"
+                                        name="displayName"
+                                        value="<%=userProfile ? userProfile.displayName : ''%>"
+                                        placeholder="Your Name">
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            </h2>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div
+                                        class="user_profile_id col-lg-12 col-md-12 col-sm-12 align-right col-xs-9"
+                                        id="user_email_id"
+                                        data-value="<%=userProfile ? userProfile.email : ''%>">
+                                    <%=userProfile ? userProfile.email : ''%>
+                                </div>
+                                <div class="hidden-lg hidden-md hidden-sm col-xs-1">
+                            <span class="glyphicon glyphicon-pencil edit_icon"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="Edit Details">
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
                         <div class="row">
-                            <div class="user_profile_id col-lg-12 col-md-12 col-sm-12 align-right col-xs-9">sakshi.k@orangegubbi.com</div>
-                            <div class="hidden-lg hidden-md hidden-sm col-xs-1">
+                            <div class="col-md-3 col-sm-4">
+                                <p>Date of Birth :</p>
+                            </div>
+                            <div class="col-md-8 col-sm-7">
+                                <p class="view_mode"><%= userProfile.dob %></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="date"
+                                            id="user_dob"
+                                            class="form-control"
+                                            name="dob"
+                                            value="<%=userProfile ? userProfile.dob : ''%>"
+                                            dateformat="d M y">
+                                </p>
+                            </div>
+                            <div class="col-md-1 col-sm-1 hidden-xs">
                             <span class="glyphicon glyphicon-pencil edit_icon"
                                   data-toggle="tooltip"
                                   data-placement="left"
@@ -30,82 +81,123 @@
                             </span>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>Contact :</p>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <p class="view_mode"><%=userProfile ? userProfile.phone : ''%></p>
+                                <p class="edit_mode form-group">
+                                    +91 &nbsp;
+                                    <input
+                                        type="number"
+                                        id="user_phone"
+                                        class="form-control"
+                                        name="phone"
+                                        min="0"
+                                        max="9999999999"
+                                        value="<%=userProfile ? userProfile.phone : ''%>"
+                                        >
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>Address :</p>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <p class="view_mode"><%=userProfile ? userProfile.address : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="text"
+                                            id="user_address"
+                                            class="form-control"
+                                            name="address"
+                                            maxlength="250"
+                                            value="<%=userProfile ? userProfile.address : ''%>"
+                                            >
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>City :</p>
+                            </div>
+                            <div class="col-md-3 col-sm-8">
+                                <p class="view_mode"><%=userProfile ? userProfile.city : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="text"
+                                            id="user_city"
+                                            class="form-control"
+                                            name="city"
+                                            maxlength="25"
+                                            value="<%=userProfile ? userProfile.city : ''%>"
+                                            >
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                </p>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                <p>State :</p>
+                            </div>
+                            <div class="col-md-3 col-sm-8">
+                                <p class="view_mode"><%=userProfile ? userProfile.state : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="text"
+                                            id="user_state"
+                                            class="form-control"
+                                            name="state"
+                                            maxlength="25"
+                                            value="<%=userProfile ? userProfile.state : ''%>"
+                                            >
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                </p>
+                            </div>
+                            <div class="col-md-1 hidden-sm"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>PIN Code :</p>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <p class="view_mode"><%=userProfile ? userProfile.pinCode : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="number"
+                                            id="user_pin_code"
+                                            class="form-control"
+                                            name="pinCode"
+                                            min="0"
+                                            max="999999"
+                                            value="<%=userProfile ? userProfile.pinCode : ''%>">
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <a
+                                    class="button border1px float-right edit_mode"
+                                    id="save_details"
+                                    data-loading-text="<i class='fa fa-spinner fa-spin'></i> Save Details"
+                                    type="submit"
+                                    >
+                                Save Details
+                            </a>
+                        </div>
+
                     </div>
+
                 </div>
-
-                <div class="col-md-12 col-sm-12">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <p>Date of Birth :</p>
-                        </div>
-                        <div class="col-md-8 col-sm-7">
-                            <p class="view_mode"><%= users %></p>
-                            <p class="edit_mode"><input type="date"></p>
-                        </div>
-                        <div class="col-md-1 col-sm-1 hidden-xs">
-                            <span class="glyphicon glyphicon-pencil edit_icon"
-                                  data-toggle="tooltip"
-                                  data-placement="left"
-                                  title="Edit Details">
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <p>Contact :</p>
-                        </div>
-                        <div class="col-md-9 col-sm-8">
-                            <p class="view_mode"><%= users %></p>
-                            <p class="edit_mode">
-                                +91 &nbsp; <input type="number" min="0" max="9999999999">
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <p>Address :</p>
-                        </div>
-                        <div class="col-md-9 col-sm-8">
-                            <p class="view_mode"><%= users %></p>
-                            <p class="edit_mode"><input type="text" maxlength="250"></p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <p>City :</p>
-                        </div>
-                        <div class="col-md-3 col-sm-8">
-                            <p class="view_mode"><%= users %></p>
-                            <p class="edit_mode"><input type="text" maxlength="25"></p>
-                        </div>
-                        <div class="col-md-1 col-sm-4 padding0">
-                            <p>State :</p>
-                        </div>
-                        <div class="col-md-3 col-sm-8">
-                            <p class="view_mode"><%= users %></p>
-                            <p class="edit_mode"><input type="text" maxlength="25"></p>
-                        </div>
-                        <div class="col-md-2 hidden-sm"></div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <p>PIN Code :</p>
-                        </div>
-                        <div class="col-md-9 col-sm-8">
-                            <p class="view_mode"><%= users %></p>
-                            <p class="edit_mode"><input type="number" min="0" max="999999"></p>
-                        </div>
-                    </div>
-
-                    <a class="button float-right edit_mode" id="save_details">Save Details</a>
-
-                </div>
-
-            </div>
+                
+            </form>
+            
 
         </div>
 
@@ -142,17 +234,17 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-5 col-sm-5">
                                     <p>Confirm Password :</p>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7 col-sm-7">
                                     <input type="password" id="confirm_password">
                                 </div>
                             </div>
 
                             <div class="row margin-top20 float-right">
-                                <a  class="button">Set Password</a>
-                                <a  class="button">Cancel</a>
+                                <a class="button border1px">Set Password</a>
+                                <a class="button border1px">Cancel</a>
                             </div>
 
                         </div>
@@ -182,8 +274,8 @@
                         </div>
 
                         <div class="row margin-top20 float-right">
-                            <a  class="button">Confirm Deactivation</a>
-                            <a  class="button">Cancel</a>
+                            <a class="button border1px">Confirm Deactivation</a>
+                            <a class="button border1px">Cancel</a>
                         </div>
 
                     </div>

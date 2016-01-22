@@ -1,4 +1,4 @@
-<section class="menu-spacer bg-light-gray">
+<section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
 
     <div class="container-fluid category-banner">
         <img src="img/kitchen-category-banner.jpg" class="img-responsive" alt="">
@@ -7,7 +7,7 @@
     <div class="container-fluid bg-white" id="filter-desc-container">
         <div class="container">
 
-            <div class="row padding20-0 filter-desc-col" id="filter-desc">
+            <div class="row padding20-0 filter-desc-col position-relative" id="filter-desc">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-8">
                     <div class="design-count margin0"><%= collection.length %> Designs Found</div>
                 </div>
@@ -30,7 +30,7 @@
                         <!--<% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>-->
                         <!--<span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>-->
                         <!--<% } %>-->
-                        <% if (filter.selectedFiltersName != '' && filter.fillterIds != '') {%>
+                        <% if (filter.selectedFiltersName != '' && filter.filterIds != '') {%>
                          <span
                                  class="tag-card"
                                  id="filter-epllises"
@@ -43,8 +43,15 @@
                     </div>
                 </div>
 
-                <div class="hidden-lg hidden-md col-sm-6 col-xs-4">
+                <div class="hidden-lg hidden-md col-sm-4 col-xs-4">
                     <span class="button filter-button">Filter</span>
+                </div>
+
+                <div class="hidden-lg hidden-md col-sm-2 hidden-xs">
+                    <div class="row slight-up">
+                        <span class="glyphicon glyphicon-th-list view-select border-right0"></span><%
+                        %><span class="glyphicon glyphicon-th-large view-select active"></span>
+                    </div>
                 </div>
 
             </div>
@@ -79,9 +86,9 @@
                                 <% if(subcat.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                                id="<%= subcat.id %>"
+                                id="<%= subcat.id + 's_c' %>"
                                 title="<%= subcat.name %>"
-                                onclick="getFilterId(this.id,this.title)">
+                                onclick="getSubcatId(this.id,this.title)">
                                     <a>
                                         <input
                                             type="checkbox"
@@ -119,9 +126,9 @@
                                 <% if(range.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                                id="<%= range.id %>"
+                                id="<%= range.id + 'p_r' %>"
                                 title="<%= range.name %>"
-                                onclick="getFilterId(this.id,this.title)">
+                                onclick="getPriceRangeId(this.id,this.title)">
                                     <a>
                                         <input
                                                 type="checkbox"
@@ -159,9 +166,9 @@
                                 <% if(style.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                                id="<%= style.id %>"
+                                id="<%= style.id + 'sty' %>"
                                 title="<%= style.name %>"
-                                onclick="getFilterId(this.id,this.title)">
+                                onclick="getStyleId(this.id,this.title)">
                                     <a>
                                         <input
                                                 type="checkbox"
@@ -268,21 +275,22 @@
                                 <% if(subcat.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                        id="<%= subcat.id+'fil' %>"
+                        id="<%= subcat.id + 's_c' + 'fil' %>"
                         title="<%= subcat.name %>"
-                        onclick="getFil(this.id,this.title)">
-                        <a>
+                        onclick="getFil(this.id)">
+                        <label>
                             <input
                                     type="checkbox"
                                     class="margin-right-5"
                                     name="subcat"
+                                    value="<%= subcat.name %>"
                             <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                             <% _.each(filter.selectedFiltersName, function(filtername){ %>
                             <% if(subcat.name == filtername){ %> checked disabled <% } %>
                             <% }); %>
                             <% } %>>
                             <%= subcat.name %>
-                        </a>
+                        </label>
                     </div>
                     <% }); %>
                 </div>
@@ -295,21 +303,22 @@
                                 <% if(range.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                        id="<%= range.id+'fil' %>"
+                        id="<%= range.id + 'p_r' + 'fil' %>"
                         title="<%= range.name %>"
-                        onclick="getFil(this.id,this.title)">
-                        <a>
+                        onclick="getFil(this.id)">
+                        <label>
                             <input
                                     type="checkbox"
                                     class="margin-right-5"
                                     name="price_range"
+                                    value="<%= range.name %>"
                             <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                             <% _.each(filter.selectedFiltersName, function(filtername){ %>
                             <% if(range.name == filtername){ %> checked disabled <% } %>
                             <% }); %>
                             <% } %>>
                             <%= range.name %>
-                        </a>
+                        </label>
                     </div>
                     <% }); %>
                 </div>
@@ -321,29 +330,34 @@
                                 <% if(style.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                        id="<%= style.id+'fil' %>"
+                        id="<%= style.id + 'sty' +'fil' %>"
                         title="<%= style.name %>"
-                        onclick="getFil(this.id,this.title)">
-                        <a>
+                        onclick="getFil(this.id)">
+                        <label>
                             <input
                                     type="checkbox"
                                     class="margin-right-5"
                                     name="style"
+                                    value="<%= style.name %>"
                             <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                             <% _.each(filter.selectedFiltersName, function(filtername){ %>
                             <% if(style.name == filtername){ %> checked disabled <% } %>
                             <% }); %>
                             <% } %>>
                             <%= style.name %>
-                        </a>
+                        </label>
                     </div>
                     <% }); %>
                 </div>
             </div>
         </div>
 
+        <div class="row align-center padding10-0">
+            <span class="button border1px" onclick="applyFilters()">Apply</span>
+        </div>
+
         <div class="row margin0">
-            <h5>Filters Applied :</h4>
+            <h5>Filters Applied :</h5>
         </div>
 
         <div class="row margin0">
@@ -526,52 +540,168 @@
 
     /* Filter */
 
+    var loop = 1;
+    var tempArr = new Array();
     var filterNameArr = new Array();
-    function getFilterId(id,title){
+
+    function getSubcatId(id,title){
         if($('#' + id).hasClass('noclick')){
             return false;
         }else {
-            var filterArr = filter.get('fillterIds');
+            var filterArr = filter.get('filterIds');
             var filterNameArr = filter.get('selectedFiltersName');
+            var subcatArr = filter.get('subcatIds');
             filterArr.push(id);
             filterNameArr.push(title);
-            filter.set({'fillterIds':filterArr});
+            id = id.substring(0, id.length-3);
+            subcatArr.push(id);
+            filter.set({'filterIds':filterArr});
             filter.set({'selectedFiltersName':filterNameArr});
+            filter.set({'subcatIds':subcatArr});
             filter.trigger('change');
         }
     }
 
-    function getFil(id,title){
-        var new_id = id.substring(0, id.length-3);
-        getFilterId(new_id,title);
+    function getPriceRangeId(id,title){
+        if($('#' + id).hasClass('noclick')){
+            return false;
+        }else {
+            var filterArr = filter.get('filterIds');
+            var filterNameArr = filter.get('selectedFiltersName');
+            var price_rangeArr = filter.get('priceRangeIds');
+            filterArr.push(id);
+            filterNameArr.push(title);
+            id = id.substring(0, id.length-3);
+            price_rangeArr.push(id);
+            filter.set({'filterIds':filterArr});
+            filter.set({'selectedFiltersName':filterNameArr});
+            filter.set({'priceRangeIds':price_rangeArr});
+            filter.trigger('change');
+        }
+    }
+
+    function getStyleId(id,title){
+        if($('#' + id).hasClass('noclick')){
+            return false;
+        }else {
+            var filterArr = filter.get('filterIds');
+            var filterNameArr = filter.get('selectedFiltersName');
+            var styleArr = filter.get('styleIds');
+            filterArr.push(id);
+            filterNameArr.push(title);
+            id = id.substring(0, id.length-3);
+            styleArr.push(id);
+            filter.set({'filterIds':filterArr});
+            filter.set({'selectedFiltersName':filterNameArr});
+            filter.set({'styleIds':styleArr});
+            filter.trigger('change');
+        }
+    }
+
+    function getFil(id){
+        if(loop == 1){
+            id = id.substring(0, id.length-3);
+            var locate = jQuery.inArray(id,tempArr);
+            if(locate == -1){
+                tempArr.push(id);
+            }else{
+                tempArr = jQuery.grep(tempArr, function(value) {
+                    return value != id;
+                });
+            }
+            loop = 2;
+        }else {
+            loop = 1;
+        }
+    }
+
+    function applyFilters(){
+        $.each(tempArr, function(i, id) {
+
+            var title = $('#' + id).attr('title');
+            var substring = id.substring(id.length-3, id.length);
+            id = id.substring(0, id.length);
+
+            if(substring == 's_c'){
+                getSubcatId(id,title);
+            }else if(substring == 'p_r'){
+                getPriceRangeId(id,title);
+            }else{
+                getStyleId(id,title);
+            }
+        });
     }
 
     function removeFilters(filtername){
         var filternameArr = filter.get('selectedFiltersName');
-        var filterIdArr = filter.get('fillterIds');
+        var filterIdArr = filter.get('filterIds');
 
         var index = filternameArr.indexOf(filtername);
+
+        var removeFilterId = $('[title="' + filtername + '"]').attr('id');
+        var substring = removeFilterId.substring(removeFilterId.length-3, removeFilterId.length);
+        removeFilterId = removeFilterId.substring(0, removeFilterId.length-3);
 
         if(index > -1){
             filterIdArr.splice(index,1);
             filternameArr.splice(index,1);
-            //alert(filterIdArr+' ------ '+filternameArr);
-            filter.set({'fillterIds':filterIdArr});
+            filter.set({'filterIds':filterIdArr});
             filter.set({'selectedFiltersName':filternameArr});
+
+            if(substring == 's_c'){
+
+                var subcatArr = filter.get('subcatIds');
+                var subcatIndex = subcatArr.indexOf(removeFilterId);
+                if(subcatIndex > -1){
+                    subcatArr.splice(subcatIndex,1);
+                }
+                filter.set({'subcatIds':subcatArr});
+
+            }else if(substring == 'p_r'){
+
+                var price_rangeArr = filter.get('priceRangeIds');
+                var price_rangeIndex = price_rangeArr.indexOf(removeFilterId);
+                if(price_rangeIndex > -1){
+                    price_rangeArr.splice(price_rangeIndex,1);
+                }
+                filter.set({'priceRangeIds':price_rangeArr});
+
+            }else {
+
+                var styleArr = filter.get('styleIds');
+                var styleIndex = styleArr.indexOf(removeFilterId);
+                if(styleIndex > -1){
+                    styleArr.splice(styleIndex,1);
+                }
+                filter.set({'styleIds':styleArr});
+
+            }
+
             filter.trigger('change');
         }
     }
 
     function removeAllFilters(){
-        var filternmArr = filter.get('selectedFiltersName');
-        var filterIdArr = filter.get('fillterIds');
+        var filternameArr = filter.get('selectedFiltersName');
+        var filterIdArr = filter.get('filterIds');
+        var subcatArr = filter.get('subcatIds');
+        var price_rangeArr = filter.get('priceRangeIds');
+        var styleArr = filter.get('styleIds');
 
-        filternmArr.splice(0,filternmArr.length);
+        filternameArr.splice(0,filternameArr.length);
         filterIdArr.splice(0,filterIdArr.length);
+        subcatArr.splice(0,subcatArr.length);
+        price_rangeArr.splice(0,price_rangeArr.length);
+        styleArr.splice(0,styleArr.length);
 
-//        alert(filterIdArr+' ------ '+filternmArr);
-        filter.set({'fillterIds':filterIdArr});
-        filter.set({'selectedFiltersName':filternmArr});
+        filter.set({'filterIds':filterIdArr});
+        filter.set({'selectedFiltersName':filternameArr});
+        filter.set({'subcatIds':subcatArr});
+        filter.set({'priceRangeIds':price_rangeArr});
+        filter.set({'styleIds':styleArr});
+
+        filter.set({'noFilterApplied':'1'});
+
         filter.trigger('change');
     }
 

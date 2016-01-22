@@ -45,13 +45,13 @@ define([
                 this.fetchCategoriesAndRender();
             }
 
-
         },
         fetchCategoriesAndRender: function() {
             var that = this;
             window.filter = that.filter;
 
             var selectedSubCategories = that.model.selectedSubCategories;
+
             var subCategory = '';
 
             var selectedSubCategoriesList = {};
@@ -90,13 +90,37 @@ define([
                             }, {
                                 silent: true
                             });
-                            var fillterIds = new Array();
-                            fillterIds.push(subCategory.toJSON().id);
+                            var filterIds = new Array();
+                            filterIds.push(subCategory.toJSON().id);
                             that.filter.set({
-                                'fillterIds': fillterIds
+                                'filterIds': filterIds
                             }, {
                                 silent: true
                             });
+
+                            var subcatIds = new Array();
+                            subcatIds.push(subCategory.toJSON().id);
+                            that.filter.set({
+                                'subcatIds': subcatIds
+                            }, {
+                                silent: true
+                            });
+
+                            var priceRangeIds = new Array();
+                            that.filter.set({
+                                'priceRangeIds': priceRangeIds
+                            }, {
+                                silent: true
+                            });
+
+                            var styleIds = new Array();
+                            that.filter.set({
+                                'styleIds': styleIds
+                            }, {
+                                silent: true
+                            });
+
+
                         }
 
                         if (that.products.isEmpty()) {
@@ -150,7 +174,21 @@ define([
                 });
             }
 
-            var selectedfillterIds = that.filter.get('fillterIds');
+            if(typeof(that.filter.get('noFilterApplied')) == 'undefined') {
+                that.filter.set({
+                    'noFilterApplied': '0'
+                }, {
+                    silent: true
+                });
+            }
+
+            var filterApplied = that.filter.get('noFilterApplied');
+
+            var selectedfilterIds = that.filter.get('filterIds');
+            var selectedSubcatIds = that.filter.get('subcatIds');
+            var selectedPriceRangeIds = that.filter.get('priceRangeIds');
+            var selectedStyleIds = that.filter.get('styleIds');
+
 
             var minPrice = '';
             var maxPrice = '';
@@ -205,11 +243,39 @@ define([
                 that.products.sortBy(sortBy, sortDir);
             }
 
-            var filteredProducts = that.products.filterByPrice(minPrice, maxPrice, selectedfillterIds);
-            if (Object.keys(filteredProducts).length == 0) {
-                console.log('here');
+            if((typeof(selectedSubcatIds) !== 'undefined') && (selectedSubcatIds.length != 0)) {
+                var filteredProducts = that.products.filterBySubcat(selectedSubcatIds);
+            }else {
                 filteredProducts = that.products.toJSON();
             }
+
+            if(selectedPriceRangeIds.length != 0){
+                if(typeof(filteredProducts) == 'undefined'){
+                    filteredProducts = that.products.toJSON();
+                    filteredProducts = that.products.filterByPriceRange(filteredProducts,selectedPriceRangeIds);
+                }else {
+                    filteredProducts = that.products.filterByPriceRange(filteredProducts,selectedPriceRangeIds);
+                }
+            }
+
+            if(selectedStyleIds.length != 0) {
+                if(typeof(filteredProducts) == 'undefined'){
+                    filteredProducts = that.products.toJSON();
+                    filteredProducts = that.products.filterByStyle(filteredProducts, selectedStyleIds);
+                }else {
+                    filteredProducts = that.products.filterByStyle(filteredProducts, selectedStyleIds);
+                }
+            }
+
+            if (filterApplied == '1') {
+                filteredProducts = that.products.toJSON();
+                that.filter.set({
+                    'noFilterApplied': '0'
+                }, {
+                    silent: true
+                });
+            }
+
             var compiledTemplate = _.template(productPageTemplate);
             $(that.el).html(compiledTemplate({
                 "collection": filteredProducts,
