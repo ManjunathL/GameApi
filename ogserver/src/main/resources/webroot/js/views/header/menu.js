@@ -10,34 +10,14 @@ define([
     'models/userShortList',
     'models/autoSearch',
     'models/preSearch',
-    'views/header/menu_helper'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch, menuHelper) {
+    'views/header/menu_helper',
+    'mgfirebase'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch, menuHelper, MGF) {
     var HeaderMenuView = Backbone.View.extend({
-        users: new Users(),
-        categories: new Categories(),
-        auto_search: new AutoSearch([{
-            "resultName": "sofa cum bed",
-            "query": "/api/products/search/sofa+cum+bed"
-        }, {
-            "resultName": "sofas by material",
-            "query": "/api/products/search/sofa+cum+bed"
-        }, {
-            "resultName": "sofa set",
-            "query": "/api/products/search/sofa+cum+bed"
-        }, {
-            "resultName": "fabric sofa sets",
-            "query": "/api/products/search/sofa+cum+bed"
-        }, {
-            "resultName": "sofa cum bed with storage",
-            "query": "/api/products/search/sofa+cum+bed"
-        }, {
-            "resultName": "sofas by speciality",
-            "query": "/api/products/search/sofa+cum+bed"
-        }, {
-            "resultName": "sofa cover",
-            "query": "/api/products/search/sofa+cum+bed"
-        }]),
-        pre_search: new PreSearch(),
+        users: null,
+        categories: null,
+        auto_search: null,
+        pre_search: null,
         el: '.main-menu-container',
         render: function() {
             var that = this;
@@ -71,9 +51,39 @@ define([
         },
         events: {},
         initialize: function() {
+            this.users = new Users();
+            this.categories = new Categories();
+            this.auto_search = new AutoSearch([{
+                "resultName": "sofa cum bed",
+                "query": "/api/products/search/sofa+cum+bed"
+            }, {
+                "resultName": "sofas by material",
+                "query": "/api/products/search/sofa+cum+bed"
+            }, {
+                "resultName": "sofa set",
+                "query": "/api/products/search/sofa+cum+bed"
+            }, {
+                "resultName": "fabric sofa sets",
+                "query": "/api/products/search/sofa+cum+bed"
+            }, {
+                "resultName": "sofa cum bed with storage",
+                "query": "/api/products/search/sofa+cum+bed"
+            }, {
+                "resultName": "sofas by speciality",
+                "query": "/api/products/search/sofa+cum+bed"
+            }, {
+                "resultName": "sofa cover",
+                "query": "/api/products/search/sofa+cum+bed"
+            }]);
+            this.pre_search = new PreSearch();
             this.users.on("add", this.render, this);
             this.users.on("reset", this.render, this);
+            this.listenTo(Backbone, 'shortlist.change', this.handleShortlistChange);
             _.bindAll(this, 'renderSub');
+        },
+        handleShortlistChange: function() {
+            var slItems = MGF.getShortListedItems();
+            $('#shortlistSuperScript').html(slItems ? Object.keys(slItems).length : '');
         }
     })
     return HeaderMenuView;

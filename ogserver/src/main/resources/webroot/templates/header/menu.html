@@ -123,13 +123,9 @@
             <a href="#consult"><span class="pe-7s-help1 header-icon consult_icon pe-fw .visible-xs-block .visible-sm-block hidden-md hidden-lg color-orange"></span></a>
             <span class="pe-7s-search search header-icon pe-fw"></span>
 
-            <% if(typeof(usersl) !== 'undefined' && ((Object.keys(usersl).length - 1) !== 0)) { %>
-                <span class="glyphicon glyphicon-heart wishlist user header-icon" id="wish">
-                    <span class="super-script"><%= Object.keys(usersl).length - 1 %></span>
-                </span>
-            <% } else { %>
-            <span class="pe-7s-like wishlist user header-icon pe-fw"></span>
-            <% } %>
+            <a href="#shortlist">
+                <span class="pe-7s-like wishlist header-icon pe-fw"><span id="shortlistSuperScript" class="super-script"></span></span>
+            </a>
 
             <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
                     <span class="user user-img"

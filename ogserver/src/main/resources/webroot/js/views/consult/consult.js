@@ -9,7 +9,7 @@ define([
 ], function($, _, Backbone, Bootstrap, consultTemplate, MGF) {
     var ConsultView = Backbone.View.extend({
         el: '.page',
-        ref: MGF.rootRef,
+        ref: null,
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(consultTemplate)({
                 'userProfile': userProfData
@@ -20,6 +20,7 @@ define([
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
+            this.ref = MGF.rootRef;
             _.bindAll(this, 'renderWithUserProfCallback');
         },
         submit: function(e) {

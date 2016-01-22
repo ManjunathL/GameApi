@@ -45,12 +45,17 @@ define([
             MGF.getUserProfile(authData, next);
         },
         onFAuth: function(authData) {
-            if (authData && authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
-                $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
-                if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
-                    this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
-                    console.log("user profile done");
+            if (authData) {
+                if (authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
+                    $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
+                    if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
+                        this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
+                        console.log("user profile done");
+                    }
                 }
+                MGF.listenForShortlistChanges();
+            } else {
+                MGF.doAnonymousAuth();//.then(function(){/*do nothing here as onFAuth will get called again automatically*/});
             }
         },
         formUserData: function(authData, userProfile) {
@@ -155,6 +160,7 @@ define([
         },
 
         signOut: function(ev) {
+            MGF.stopListeningForShortlistChanges(this.ref.getAuth().uid);
             this.ref.unauth();
             users.reset();
         },
@@ -213,7 +219,7 @@ define([
             var windowHeight = $(window).height();
             var contactUsSideHeight = $('.contact-us-side').height();
             var contactUsSideWidth = $('.contact-us-side').width();
-            var popHeight = $('#contactuspop').height() - contactUsSideHeight;
+            var popHeight = $('.contact-us-pop').height() - contactUsSideHeight;
             var popHeightMore = popHeight > windowHeight;
             $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight / 2 - popHeight / 2) + 'px');
             $('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');

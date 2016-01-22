@@ -17,9 +17,11 @@ define([
     var ProductPage = Backbone.View.extend({
         el: '.page',
         appliancelst: '#applianceList',
-        product: new ProductModel(),
-        custom_product: new CustomProduct(),
+        product: null,
+        custom_product: null,
         initialize: function() {
+            this.product = new ProductModel();
+            this.custom_product = new CustomProduct();
             this.custom_product.on('change',this.render,this);
         },
         render: function() {

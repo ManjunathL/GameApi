@@ -1,11 +1,15 @@
-define(['firebase', 'underscore'], function(firebase, _) {
+define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
 
     var rootUrl = "https://sweltering-fire-6356.firebaseio.com/";
     var rootRef = new Firebase(rootUrl);
+
     return {
         'rootRef': rootRef,
+        shortlistedItems: null,
         TYPE_CONSULT: "consult",
         TYPE_USER_ADD: "user.add",
+        TYPE_SHORTLIST_PRODUCT_ADD: "shortlist.product.add",
+        TYPE_SHORTLIST_PRODUCT_REMOVE: "shortlist.product.remove",
         getUserProfile: function(authData, someFunc) {
 
             if (authData && authData.provider !== 'anonymous') {
@@ -72,8 +76,8 @@ define(['firebase', 'underscore'], function(firebase, _) {
                         return authData.google.displayName;
                     case 'facebook':
                         return authData.facebook.displayName;
-//                    case 'twitter':
-//                        return authData.twitter.displayName;
+                        //                    case 'twitter':
+                        //                        return authData.twitter.displayName;
                 }
             }
         },
@@ -88,8 +92,8 @@ define(['firebase', 'underscore'], function(firebase, _) {
                         return authData.google.profileImageURL;
                     case 'facebook':
                         return authData.facebook.profileImageURL;
-//                    case 'twitter':
-//                        return authData.twitter.profileImageURL;
+                        //                    case 'twitter':
+                        //                        return authData.twitter.profileImageURL;
                 }
             }
         },
@@ -101,8 +105,91 @@ define(['firebase', 'underscore'], function(firebase, _) {
                     return authData.google.email;
                 case 'facebook':
                     return authData.facebook.email;
-//                case 'twitter':
-//                    return authData.twitter.email;
+                    //                case 'twitter':
+                    //                    return authData.twitter.email;
+            }
+        },
+        removeShortlistProduct: function(productId) {
+            var that = this;
+            var authData = this.rootRef.getAuth();
+            return new Promise(function(resolve, reject) {
+                that.rootRef.child("shortlists").child(authData.uid).child(productId).remove(function(error) {
+                    if (error) {
+                        reject();
+                    } else {
+                        resolve();
+                        that.pushEvent(authData.uid, {
+                            productId: productId
+                        }, that.TYPE_SHORTLIST_PRODUCT_REMOVE);
+                    }
+                });
+            });
+        },
+        addShortlistProduct: function(product) {
+            var that = this;
+            var productId = product.id;
+            var authData = this.rootRef.getAuth();
+            return new Promise(function(resolve, reject) {
+                that.rootRef.child("shortlists").child(authData.uid).child(productId).set(
+                    product,
+                    function(error) {
+                        if (error) {
+                            console.log("not able to add shortlist data", error);
+                            reject();
+                        } else {
+                            console.log("successfully added shortlist data");
+                            resolve();
+                            that.pushEvent(authData.uid, product, that.TYPE_SHORTLIST_PRODUCT_ADD);
+                        }
+                    });
+            });
+        },
+        doAnonymousAuth: function() {
+            var that = this;
+            var existingAuthData = that.rootRef.getAuth();
+            if (!existingAuthData) {
+                that.rootRef.authAnonymously(function(error, authData) {
+                    if (error) {
+                        console.log("error in anonymous auth", error);
+                    }
+                });
+            }
+        },
+        getShortListedItems: function() {
+            return this.shortlistedItems;
+        },
+        stopListeningForShortlistChanges: function(uid) {
+            uid && this.rootRef.child("shortlists").child(uid).off("value");
+        },
+        listenForShortlistChanges: function() {
+            var authData = this.rootRef.getAuth();
+            var that = this;
+            this.stopListeningForShortlistChanges(this.previousUid);
+            this.stopListeningForShortlistChanges(authData.uid);
+            this.previousUid = authData.uid;
+            this.transferShortlistData(authData);
+            var first = true;
+            this.rootRef.child("shortlists").child(authData.uid).on("value", function(snapshot) {
+                if (snapshot.exists()) {
+                    that.shortlistedItems = snapshot.val();
+                } else {
+                    that.shortlistedItems = null;
+                }
+                Backbone.trigger('shortlist.change');
+                if (first) {
+                    first = false;
+                    Backbone.trigger('user.change');
+                }
+            }, function(error) {
+                console.log("couldn't start listening to shortlist changes", error);
+            });
+        },
+        transferShortlistData: function(authData) {
+            if (authData.provider !== 'anonymous') { //don't transfer shortlist when a person is logging out
+                var that = this;
+                _.each(this.shortlistedItems, function(shortlistedItem) {
+                    that.addShortlistProduct(shortlistedItem).then(function() {});
+                });
             }
         }
     };

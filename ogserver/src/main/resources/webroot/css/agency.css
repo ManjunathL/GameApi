@@ -8,10 +8,6 @@
         margin-top: 70px !important;
     }
 
-    .menu-spacer {
-        margin-top: 70px !important;
-    }
-
     .menu-right {
         margin-right: 22% !important;
         float: right;
@@ -20,15 +16,15 @@
     .super-script {
         display: block !important;
     }
+
+    .product-caption {
+        font-size: 22px;
+    }
 }
 
 @media (max-width: 991px) {
 
     .carousel-inner {
-        margin-top: 84px !important;
-    }
-
-    .menu-spacer {
         margin-top: 84px !important;
     }
 
@@ -89,9 +85,18 @@
         font-size: 15px !important;
     }
 
+    .portfolio .portfolio-item .portfolio-caption h3 {
+        font-size: 14px !important;
+    }
+
     #filter-desc {
         padding: 20px 0px !important;
     }
+
+    .product-caption {
+        font-size: 16px;
+    }
+
 }
 
 @media (max-width: 767px) {
@@ -104,6 +109,10 @@
         overflow-y: auto;
         height: 100%
     }
+}
+
+.menu-spacer {
+    margin-top: 70px;
 }
 
 .overflowHeight {
@@ -212,6 +221,17 @@ h6 {
     -webkit-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
+}
+
+.portfolio-bg-gray {
+    background-color: #fcfcfc;
+    -webkit-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.2);
+}
+
+.bg-color-white {
+    background-color: #ffffff;
 }
 
 .bg-gray {
@@ -891,6 +911,10 @@ button {
     padding: 10px 0px !important;
 }
 
+.padding10-0-0 {
+    padding: 10px 0 0 0;
+}
+
 .padding15-0 {
     padding: 15px 0px;
 }
@@ -929,6 +953,10 @@ button {
 
 .padding-bottom15 {
     padding-bottom: 15px;
+}
+
+.padding-left10 {
+    padding-left: 10px;
 }
 
 .padding-left25 {
@@ -1026,6 +1054,14 @@ button {
 
 .margin-top0 {
     margin-top: 0px !important;
+}
+
+.margin-top5 {
+    margin-top: 5px;
+}
+
+.margin-top8 {
+    margin-top: 8px;
 }
 
 .margin-top5per {
@@ -1166,17 +1202,19 @@ input[type=checkbox] {
 }
 
 .super-script {
-    background-color: #f1591f;
-    color: #ffffff;
-    border-radius: 50%;
-    width: 14px;
+    /*background-color: #f1591f;*/
+    color: #555;
+    /*border-radius: 50%;*/
+    /*width: 14px;
     height: 14px;
     padding: 2px;
-    text-align: center;
+    text-align: center;*/
     font-size: 8px;
+
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 8px;
+    right: 78px;
+
 }
 
 .stick {
@@ -1867,9 +1905,15 @@ color: #FFF!important;
 .portfolio .portfolio-item .portfolio-caption {
     margin: 0;
     padding: 25px;
-    height: 82px;
     max-width: 100%;
     background-color: #fff;
+}
+
+.portfolio .portfolio-item .portfolio-caption-bg-gray {
+    margin: 0;
+    padding: 25px;
+    max-width: 100%;
+    background-color: #fcfcfc;
 }
 
 .image-meta {
@@ -1967,6 +2011,11 @@ color: #FFF!important;
     margin: 0;
     text-transform: none;
     font-size: 20px;
+}
+.portfolio .portfolio-item .portfolio-caption h3 {
+    margin: 0;
+    text-transform: none;
+    font-size: 18px;
 }
 
 .portfolio .portfolio-item .portfolio-caption p {
@@ -2920,10 +2969,10 @@ hr {
         padding-top: 60px;
     }
     .paddingbottom20{
-        padding-top: 20px;
+        padding-bottom: 20px;
     }
     .paddingbottom40{
-        padding-top: 40px;
+        padding-bottom: 40px;
     }
     .dot{
         border-radius: 20%;
