@@ -40,7 +40,8 @@ define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
                 }
             });
         },
-        addConsultData: function(authData, formData) {
+        addConsultData: function(formData) {
+            var authData = this.rootRef.getAuth();
             this.rootRef.child("consults/" + authData.uid + "/" + Date.now()).set(formData,
                 function(error) {
                     if (error) {

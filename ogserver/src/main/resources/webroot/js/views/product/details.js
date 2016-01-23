@@ -15,8 +15,9 @@ define([
     'text!templates/product/colors.html',
     'collections/products',
     'text!templates/product/relatedproduct.html',
-    'mgfirebase'
-], function($, _, Backbone, Bootstrap, sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, MGF) {
+    'mgfirebase',
+    'consultutil'
+], function($, _, Backbone, Bootstrap, sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, MGF, ConsultUtil) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -373,42 +374,23 @@ define([
             this.consultSubmit();
         },
         consultSubmit: function(){
-           var formData = {
-               "productName": $('#consult_product_name').val(),
-               "fullName": $('#consult_full_name').val(),
-               "email": $('#consult_email_id').val(),
-               "contactNumber": $('#consult_contact_num').val(),
-               "requirements": $('#consult_product_name').val()+" "+$('#consult_requirement').val(),
-               "propertyName": $('#consult_property_name').val()
-           };
 
-           //console.log(formData);
+           var productName = $('#consult_product_name').val();
+           var name = $('#consult_full_name').val();
+           var email = $('#consult_email_id').val();
+           var phone = $('#consult_contact_num').val();
+           var propertyName = $('#consult_property_name').val();
+           var query = $('#consult_product_name').val() + " :: " + $('#consult_requirement').val();
+           var floorplan = $("#consult_floorplan").prop('files')[0];
 
-           var authData = this.ref.getAuth();
-           var that = this;
-           if (!authData) {
-               this.ref.authAnonymously(function(error, authData) {
-                   if (error) {
-                       console.log("Login Failed!", error);
-                   } else {
-                       that.setProductConsultData(authData, formData);
-                   }
-               });
-           } else {
-               this.setProductConsultData(authData, formData);
-           }
+           ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
-           var that = this;
            $('#consultForm').hide(100, function() {
                $('#consult-success-msg').show(0, function() {
                    $('#consult-success-msg-padding').show(0, function() {
                    });
                });
            });
-        },
-        setProductConsultData: function(authData, formData) {
-            console.log('inside mfg');
-            MGF.addConsultData(authData, formData);
         },
         slideDelivery: function(){
             if($("#sldown").is(':visible')){

@@ -4,8 +4,9 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'mgfirebase'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF) {
+    'mgfirebase',
+    'consultutil'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil) {
     return {
         ref: MGF.rootRef,
 
@@ -181,27 +182,15 @@ define([
 
         contactUsSubmit: function() {
             window.contactusSubmitButton && window.contactusSubmitButton.button('reset');
-            var formData = {
-                "fullName": $('#contact_full_name').val(),
-                "email": $('#contact_email_id').val(),
-                "contactNumber": $('#contact_contact_num').val(),
-                "requirements": $('#contact_requirement').val(),
-                "propertyName": $('#contact_property_name').val()
-            };
 
-            var authData = this.ref.getAuth();
-            var that = this;
-            if (!authData) {
-                this.ref.authAnonymously(function(error, authData) {
-                    if (error) {
-                        console.log("Login Failed!", error);
-                    } else {
-                        that.setConsultData(authData, formData);
-                    }
-                });
-            } else {
-                this.setConsultData(authData, formData);
-            }
+            var name = $('#contact_full_name').val();
+            var email = $('#contact_email_id').val();
+            var phone = $('#contact_contact_num').val();
+            var propertyName = $('#contact_property_name').val();
+            var query = $('#contact_requirement').val();
+            var floorplan = $("#contact_floorplan").prop('files')[0];
+
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
             var that = this;
             $('#contactForm').hide(100, function() {
@@ -311,13 +300,10 @@ define([
         createProfile: function(userData, profileData, next) {
             MGF.createProfile(userData, profileData, next);
         },
-        setConsultData: function(authData, formData) {
-            MGF.addConsultData(authData, formData);
-        },
         ready: function(parent) {
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
-            _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'setConsultData', 'createUser',
+            _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'createUser',
                 'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
                 'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
                 'unAuthAfterProfile');

@@ -5,8 +5,9 @@ define([
     'bootstrap',
     'text!templates/consult/consult.html',
     'mgfirebase',
+    'consultutil',
     'css!../../../css/consult'
-], function($, _, Backbone, Bootstrap, consultTemplate, MGF) {
+], function($, _, Backbone, Bootstrap, consultTemplate, MGF, ConsultUtil) {
     var ConsultView = Backbone.View.extend({
         el: '.page',
         ref: null,
@@ -27,37 +28,19 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-            var formData = {
-                "fullName": $('#contact_full_name1').val(),
-                "email": $('#contact_email_id1').val(),
-                "contactNumber": $('#contact_contact_num1').val(),
-                "requirements": $('#contact_requirement1').val(),
-                "propertyName": $('#contact_property_name1').val()
-            };
+            var name = $('#contact_full_name1').val();
+            var email = $('#contact_email_id1').val();
+            var phone = $('#contact_contact_num1').val();
+            var propertyName = $('#contact_property_name1').val();
+            var query = $('#contact_requirement1').val();
+            var floorplan = $("#contact_floorplan1").prop('files')[0];
 
-            var authData = this.ref.getAuth();
-            var that = this;
-            if (!authData) {
-                this.ref.authAnonymously(function(error, authData) {
-                    if (error) {
-                        console.log("Login Failed!", error);
-                    } else {
-                        that.setConsultData(authData, formData);
-                    }
-                });
-            } else {
-                this.setConsultData(authData, formData);
-            }
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
             $('#form-heading').hide('slow');
             $('#contactForm1').hide('slow');
             $('#success-message').show('slow');
             $('#message-padding').show('slow');
-
-
-        },
-        setConsultData: function(authData, formData) {
-            MGF.addConsultData(authData, formData);
         },
         events: {
             "submit": "submit"
