@@ -30,22 +30,37 @@ define([
             this.custom_product = new CustomProduct();
             this.Products = new ProductCollection();
             this.custom_product.on('change',this.render,this);
+            this.listenTo(Backbone, 'user.change', this.handleUserChange);
+            _.bindAll(this, 'render', 'markShortlisted');
         },
         render: function() {
             var that = this;
             window.custom_product = that.custom_product;
 
-
             if (!this.product.get('id')) {
                 this.product.set('id', this.model.id);
                 this.product.fetch({
                     success: function (response) {
+                        that.markShortlisted();
                         that.respond();
                     }
                 });
             } else {
                 this.respond();
             }
+        },
+        markShortlisted: function() {
+            var shortlisted = MGF.getShortListed(this.product.get('id'));
+            if (shortlisted) {
+                this.product.set({user_shortlisted: true}, {silent: true});
+                this.custom_product = new CustomProduct(shortlisted.custom_selections);
+            } else {
+                this.product.set({user_shortlisted: false}, {silent: true});
+            }
+        },
+        handleUserChange: function() {
+            this.markShortlisted();
+            this.render();
         },
         respond: function() {
             var that = this;
@@ -154,8 +169,32 @@ define([
             "click #consult-form-explore": "closeModal",
             "click #consult-submit-btn": "submitConsultButton",
             "submit #consultForm":"submitConsultForm",
-            "click .dwf":"slideDelivery"
+            "click .dwf":"slideDelivery",
+            "click .shortlistable-product": "toggleShortListProduct"
+        },
+        toggleShortListProduct: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var productId = this.product.get('id');
+            var alreadyShortlisted = this.product.get("user_shortlisted");
+            var that = this;
 
+            currentTarget.children('.product-heart').toggleClass('fa-heart-o');
+            currentTarget.children('.product-heart').toggleClass('fa-heart');
+            currentTarget.children('.product-heart-text').html('shortlist' + (alreadyShortlisted ? '' : 'ed'));
+
+            if (alreadyShortlisted) {
+                MGF.removeShortlistProduct(productId).then(function() {
+                    that.product.set({user_shortlisted: false}, {silent: true});
+                });
+            } else {
+                var productJsonObj = this.product.toJSON();
+                productJsonObj['custom_selections'] = this.custom_product.toJSON();
+
+                MGF.addShortlistProduct(productJsonObj).then(function() {
+                    that.product.set({user_shortlisted: true}, {silent: true});
+                });
+            }
         },
         changeMaterial : function(ev) {
             $('.material').removeClass('active');

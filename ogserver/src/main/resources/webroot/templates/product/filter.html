@@ -93,7 +93,7 @@
                         <div class="listli">
                             <a class="shortlistable-item" data-element="<%=product.id%>" href="#">
                                 <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
-                                <span class="list-txt">shortlist</span>
+                                <span class="list-txt"><%=product.user_shortlisted ? 'shortlisted' : 'shortlist'%></span>
                             </a>
                         </div>
                         <div class="listli">

@@ -60,9 +60,9 @@
                         </div>
                 </div>
                 <div class="col-xs-6 padding20-0 margin_auto">
-                    <a href="#" class="button border1 padding10 display-block margin0-10" style="background-color: #3C82BF;color: #FFFFFF;">
-                        <span class="fa fa-heart-o" style="color:#FFFFFF;"></span>
-                        shortlist
+                    <a href="#" class="button border1 padding10 display-block margin0-10 shortlistable-product" style="background-color: #3C82BF;color: #FFFFFF;">
+                        <span class="product-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>" style="color:#FFFFFF;"></span>
+                        <span class="product-heart-text"><%=product.user_shortlisted ? 'shortlisted' : 'shortlist'%></span>
                     </a>
                 </div>
                 <div class="col-xs-6 padding20-0">

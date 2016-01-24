@@ -159,6 +159,9 @@ define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
         getShortListedItems: function() {
             return this.shortlistedItems;
         },
+        getShortListed: function(id){
+            return _.findWhere(this.shortlistedItems, {id: id});
+        },
         stopListeningForShortlistChanges: function(uid) {
             uid && this.rootRef.child("shortlists").child(uid).off("value");
         },
