@@ -168,48 +168,10 @@
                 <h4>Items Shortlisted</h4>
             </div>
             <div class="col-md-4 col-xs-4 padding0 align-right">
-                <span class="button">view all</span>
+                <a href="#shortlist" id="view-all-shortlist" data-element=".userpop"><span class="button">view all</span></a>
             </div>
         </div>
         <div class="row shortlist">
-            <div class="col-md-12 padding0">
-                <% if(typeof(usersl) !== 'undefined' && ((Object.keys(usersl).length - 1) !== 0)) {
-                    var count = 0;
-                _.each(usersl, function(sl){
-                if(typeof(sl.name) !== 'undefined'){ %>
-                <div class="margin-top20 padding-bottom10">
-                    <%= ++count + ". " + sl.name %>
-                </div>
-                <div class="row">
-                    <div class="col-md-7 padding0">
-                        <img src="<%= imgBase + 'c_fill/' + sl.image %>" class="shortlist-thumb">
-                    </div>
-                    <div class="col-md-5">
-                        <% if((sl.price > 100) && (sl.price !== 'NULL') && (typeof(sl.price) !== 'undefined')) { %>
-                        &#8377; <%= " " + sl.price %>
-                        <% } else {%>
-                        <a href="#" class="font-size12 available">Available for Consultation</a>
-                        <% } %>
-                        <span class="button shortlist-remove">remove</span>
-                    </div>
-                </div>
-                <% } }); } else { %>
-                <div class="margin-top20">
-                    <div class="row padding10">
-                        <span>Oops! No items in your wishlist...</span>
-                    </div>
-                    <div class="row padding10">
-                        <span>Explore our wide range of furniture & decor items.</span>
-                    </div>
-                    <div class="row padding10">
-                        <span>And save them for your quick reference in future...</span>
-                    </div>
-                    <div class="row padding10 align-center">
-                        <span class="button">Explore...</span>
-                    </div>
-                </div>
-                <% } %>
-            </div>
         </div>
 
         <% } else { %>

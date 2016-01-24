@@ -5,14 +5,14 @@ define([
     'bootstrap',
     'bootstrapvalidator',
     'text!templates/header/menu.html',
+    'text!templates/header/shortlist_bar.html',
     'collections/categories',
     'collections/users',
-    'models/userShortList',
     'models/autoSearch',
     'models/preSearch',
     'views/header/menu_helper',
     'mgfirebase'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, Categories, Users, UserSL, AutoSearch, PreSearch, menuHelper, MGF) {
+], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, shortlistTemplate, Categories, Users, AutoSearch, PreSearch, menuHelper, MGF) {
     var HeaderMenuView = Backbone.View.extend({
         users: null,
         categories: null,
@@ -47,6 +47,7 @@ define([
                 "a_srch": this.auto_search.toJSON(),
                 "userProfile": userProfile
             }));
+            this.renderShortlist();
             menuHelper.ready(this);
         },
         events: {},
@@ -84,6 +85,12 @@ define([
         handleShortlistChange: function() {
             var slItems = MGF.getShortListedItems();
             $('#shortlistSuperScript').html(slItems ? Object.keys(slItems).length : '');
+            this.renderShortlist();
+        },
+        renderShortlist: function() {
+            $('.shortlist').html(_.template(shortlistTemplate)({
+                user_shortlist_items: MGF.getShortListedItems()
+            }));
         }
     })
     return HeaderMenuView;

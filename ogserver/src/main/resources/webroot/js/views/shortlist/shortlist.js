@@ -10,6 +10,7 @@ define([
     var ShortlistView = Backbone.View.extend({
         el: '.page',
         initialize: function() {
+            this.listenTo(Backbone, 'user.change', this.render);
             _.bindAll(this, 'render');
         },
         render: function() {

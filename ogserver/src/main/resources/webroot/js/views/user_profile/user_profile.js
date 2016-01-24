@@ -24,7 +24,11 @@ define([
             console.log('simple render' + JSON.stringify(authData));
         },
         initialize: function() {
+            this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit', 'setuserProfileData');
+        },
+        handleUserChange: function() {
+            window.location = '#';
         },
         submit: function(e) {
             if (e.isDefaultPrevented()) return;

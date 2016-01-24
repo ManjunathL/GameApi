@@ -18,10 +18,8 @@ define([
         },
 
         render: function() {
-            $(this.el).html(dashboardPageTemplate);
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            //console.log('simple render' + JSON.stringify(authData));
         },
         initialize: function() {
             _.bindAll(this, 'renderWithUserProfCallback');

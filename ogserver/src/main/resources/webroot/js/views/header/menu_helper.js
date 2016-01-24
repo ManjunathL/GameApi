@@ -311,6 +311,8 @@ define([
             var events = {
                 "click .signout_icon": this.signOut,
                 "click #close-user-pop": this.closeUserPopup,
+                "click #view-all-shortlist": this.closeUserPopup,
+                "click .shortlist-side": this.closeUserPopup,
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,
                 "click #close-contactus-pop": this.toggleContactUsPop,
