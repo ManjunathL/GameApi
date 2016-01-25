@@ -3,8 +3,10 @@ package com.mygubbi.si.data;
 /**
  * Created by Sunil on 07-01-2016.
  */
-public interface DataProcessor<T>
+public interface DataProcessor
 {
-    public abstract void process(T dataObject);
+    public abstract String getName();
+
+    public abstract void process(EventData data);
 
 }

@@ -17,6 +17,6 @@ public class ShortlistShortHandler extends AbstractRouteHandler {
 
     private void getShortShortlist(RoutingContext context) {
         String username = context.request().getParam("username");
-        sendJsonResponse(context, "/shortlisted_items_short_" + username + ".json");
+        sendJsonResponseFromFile(context, "/shortlisted_items_short_" + username + ".json");
     }
 }

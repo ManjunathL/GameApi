@@ -2,27 +2,51 @@ package com.mygubbi.si.firebase;
 
 import com.firebase.client.*;
 import com.mygubbi.si.data.DataProcessor;
+import com.mygubbi.si.data.EventAcknowledger;
+import com.mygubbi.si.data.EventData;
+import org.apache.logging.log4j.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by test on 06-01-2016.
  */
 public class FirebaseEventListener implements ChildEventListener, ValueEventListener
 {
-    private Firebase fbRef;
-    private DataProcessor processor;
+    private final static org.apache.logging.log4j.Logger LOG = LogManager.getLogger(FirebaseEventListener.class);
 
-    public FirebaseEventListener(String url, DataProcessor processor)
+    private Firebase fbRef;
+    private Map<String, DataProcessor> processorMap = new HashMap<>();
+    private EventAcknowledger acknowledger;
+
+    public FirebaseEventListener(Firebase fbRef, EventAcknowledger acknowledger)
     {
-        this.fbRef = new Firebase(url);
-        this.fbRef.addListenerForSingleValueEvent(this);
+        this.fbRef = fbRef;
+        this.acknowledger = acknowledger;
+    }
+
+    public void register(DataProcessor processor)
+    {
+        this.processorMap.put(processor.getName(), processor);
+    }
+
+    public void start()
+    {
+        //this.fbRef.addListenerForSingleValueEvent(this);
         this.fbRef.addChildEventListener(this);
-        this.processor = processor;
+    }
+
+    public void stop()
+    {
+        this.fbRef.removeEventListener((ChildEventListener) this);
+        //this.fbRef.removeEventListener((ValueEventListener) this);
     }
 
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s)
     {
-        dataSnapshot
+        this.processEvent(dataSnapshot);
     }
 
     @Override
@@ -47,12 +71,52 @@ public class FirebaseEventListener implements ChildEventListener, ValueEventList
     @Override
     public void onDataChange(DataSnapshot snapshot)
     {
-        for (DataSnapshot postSnapshot: snapshot.getChildren())
+        for (DataSnapshot nodeData: snapshot.getChildren())
         {
-            BlogPost post = postSnapshot.getValue(BlogPost.class);
-            System.out.println(post.getAuthor() + " - " + post.getTitle());
-
+            this.processEvent(nodeData);
         }
+    }
+
+    private void processEvent(DataSnapshot nodeData)
+    {
+        LOG.info("Node:" + nodeData.toString());
+        EventData data = this.toEventData(nodeData);
+        if (data == null)
+        {
+            this.acknowledger.failed(nodeData.getKey(), nodeData.toString(), "Unable to decipher event data.");
+            return;
+        }
+
+        LOG.info("EventData:" + data.toString());
+
+        if (this.processorMap.containsKey(data.getType()))
+        {
+            this.processorMap.get(data.getType()).process(data);
+        }
+        else
+        {
+            this.acknowledger.failed(data, "Event type not setup. " + data.getType());
+        }
+    }
+
+    private EventData toEventData(DataSnapshot nodeData)
+    {
+        EventData eventData = null;
+        try
+        {
+            for (DataSnapshot level1Data : nodeData.getChildren())
+            {
+                eventData = level1Data.getValue(EventData.class);
+                eventData.setUid(level1Data.getKey());
+                break;
+            }
+            if (eventData != null) eventData.setId(nodeData.getKey());
+        }
+        catch (Exception e)
+        {
+            LOG.error("Unable to extract EventData out of nodeData:" + nodeData.toString() + ". Error message:" + e.getMessage());
+        }
+        return eventData;
     }
 
     @Override

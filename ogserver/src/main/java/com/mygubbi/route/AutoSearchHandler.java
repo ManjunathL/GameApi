@@ -16,7 +16,7 @@ public class AutoSearchHandler extends AbstractRouteHandler {
     }
 
     private void getAll(RoutingContext context) {
-        sendJsonResponse(context, "/auto_search.json");
+        sendJsonResponseFromFile(context, "auto_search.json");
     }
 
 }

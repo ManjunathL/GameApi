@@ -40,10 +40,18 @@ public class QueryData
 		for (String paramKey : this.queryDef.paramList)
 		{
 			Object value = this.paramsObject.getValue(paramKey);
-			if (value instanceof JsonObject)
+			if (value == null)
+			{
+				params.add("");
+			}
+			else if (value instanceof JsonObject)
+			{
 				params.add(value.toString());
+			}
 			else
+			{
 				params.add(value);
+			}
 		}
 		return params;
 	}
@@ -74,7 +82,17 @@ public class QueryData
 		this.startTime = 0;
 		return this;
 	}
-	
+
+	public JsonArray getJsonDataRows(String jsonField)
+	{
+		JsonArray jsonRows = new JsonArray();
+		for (JsonObject record : this.rows)
+		{
+			jsonRows.add(new JsonObject(record.getString(jsonField)));
+		}
+		return jsonRows;
+	}
+
 	public QueryData setResult(List<JsonObject> rows)
 	{
 		this.rows = rows;
