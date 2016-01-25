@@ -3,7 +3,6 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'sly',
     'jqueryeasing',
     'text!templates/product/details.html',
     'text!views/product/details_helper.js',
@@ -15,9 +14,10 @@ define([
     'text!templates/product/colors.html',
     'collections/products',
     'text!templates/product/relatedproduct.html',
+    'slyutil',
     'mgfirebase',
     'consultutil'
-], function($, _, Backbone, Bootstrap, sly, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, MGF, ConsultUtil) {
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -67,99 +67,96 @@ define([
 
             var selectedSubCategory = that.product.get('subCategId');
 
-            if (that.Products.isEmpty()) {
-                that.Products.fetch({
-                    data: {
-                        "categories": that.product.get('categ'),
-                        "searchTerm": selectedSubCategory
-                    },
-                    success: function(result) {
-                        if(result){
-                            that.chkrelatedProducts(selectedSubCategory);
-                        }
-                    },
-                    error: function(model, response, options) {
-                        console.log("error from products fetch - " + response);
-                    }
-                });
-            }
 
-           if(!that.custom_product.get('basePrice')){
-                that.custom_product.set({'basePrice':that.product.get('defaultPrice')},{silent: true});
-           }
-           if(!that.custom_product.get('selectedMaterial')){
-               that.custom_product.set({'selectedMaterial':that.product.get('defaultMaterial')},{silent: true});
-           }
-           if(!that.custom_product.get('selectedFinish')){
-               that.custom_product.set({'selectedFinish':that.product.get('defaultFinish')},{silent: true});
-           }
-           if(!that.custom_product.get('finishes')){
-                   var finishes = new Array();
-                   var finishobj = {};
-                   _.map( that.product.get('mf'), function ( model ) {
-                       if ( model.material == that.product.get('defaultMaterial') ){
-                           finishes.push(model.finish);
-                           finishobj[model.finish] = model.basePrice;
-                       }else{
-                           return false;
-                       }
-                   });
-               that.custom_product.set({'finishes': _.uniq(finishes)},{silent: true});
-               if(!that.custom_product.get('finishobj')){
-                   that.custom_product.set({'finishobj':finishobj},{silent: true});
+            that.getRelatedProducts(selectedSubCategory).then(function() {
+
+               if(!that.custom_product.get('basePrice')){
+                    that.custom_product.set({'basePrice':that.product.get('defaultPrice')},{silent: true});
                }
-           }
-           if(!that.custom_product.get('selectedAccessories')){
-              var accessoryobj = {};
-                 _.each( that.product.get('accessories'), function ( acc ) {
-                    accessoryobj[acc.accessoryName] = acc.accessoryPrice;
-                 });
-              that.custom_product.set({'accessoryobj':accessoryobj},{silent: true});
-              that.custom_product.set({'selectedAccessories':that.product.get('accessories')},{silent: true});
-           }
-           if(!that.custom_product.get('selectedAppliances')){
-                var appliances = new Array();
-               that.custom_product.set({'selectedAppliances':appliances},{silent: true});
-           }
-           if(!that.custom_product.get('colors')){
-               that.changeColor(that.product.get('defaultFinish'),colorsTemplate);
-           }
+               if(!that.custom_product.get('selectedMaterial')){
+                   that.custom_product.set({'selectedMaterial':that.product.get('defaultMaterial')},{silent: true});
+               }
+               if(!that.custom_product.get('selectedFinish')){
+                   that.custom_product.set({'selectedFinish':that.product.get('defaultFinish')},{silent: true});
+               }
+               if(!that.custom_product.get('finishes')){
+                       var finishes = new Array();
+                       var finishobj = {};
+                       _.map( that.product.get('mf'), function ( model ) {
+                           if ( model.material == that.product.get('defaultMaterial') ){
+                               finishes.push(model.finish);
+                               finishobj[model.finish] = model.basePrice;
+                           }else{
+                               return false;
+                           }
+                       });
+                   that.custom_product.set({'finishes': _.uniq(finishes)},{silent: true});
+                   if(!that.custom_product.get('finishobj')){
+                       that.custom_product.set({'finishobj':finishobj},{silent: true});
+                   }
+               }
+               if(!that.custom_product.get('selectedAccessories')){
+                  var accessoryobj = {};
+                     _.each( that.product.get('accessories'), function ( acc ) {
+                        accessoryobj[acc.accessoryName] = acc.accessoryPrice;
+                     });
+                  that.custom_product.set({'accessoryobj':accessoryobj},{silent: true});
+                  that.custom_product.set({'selectedAccessories':that.product.get('accessories')},{silent: true});
+               }
+               if(!that.custom_product.get('selectedAppliances')){
+                    var appliances = new Array();
+                   that.custom_product.set({'selectedAppliances':appliances},{silent: true});
+               }
+               if(!that.custom_product.get('colors')){
+                   that.changeColor(that.product.get('defaultFinish'),colorsTemplate);
+               }
 
-            var compiledTemplate = _.template(productPageTemplate);
-            $(this.el).html(compiledTemplate({
-                "product": that.product.toJSON(),
-                "materials": _.uniq(_.pluck(that.product.get('mf'), 'material')),
-                "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type')),
-                "selectedColor": that.custom_product.get('colors'),
-                "selectedfinishes": that.custom_product.get('finishes'),
-                "selectedFinish": that.custom_product.get('selectedFinish'),
-                "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories')),
-                "relatedProducts":that.custom_product.get('relatedProducts'),
-                "custom_product":that.custom_product
-            }));
+                var compiledTemplate = _.template(productPageTemplate);
+                $(that.el).html(compiledTemplate({
+                    "product": that.product.toJSON(),
+                    "materials": _.uniq(_.pluck(that.product.get('mf'), 'material')),
+                    "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type')),
+                    "selectedColor": that.custom_product.get('colors'),
+                    "selectedfinishes": that.custom_product.get('finishes'),
+                    "selectedFinish": that.custom_product.get('selectedFinish'),
+                    "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories')),
+                    "relatedProducts": _.uniq(that.relatedProducts),
+                    "custom_product":that.custom_product
+                }));
 
-            var compiledJsTemplate = _.template(helperJsTemplate);
-            $(this.el).append(compiledJsTemplate({
-                "product": that.product.toJSON()
-            }));
+                var compiledJsTemplate = _.template(helperJsTemplate);
+                $(that.el).append(compiledJsTemplate({
+                    "product": that.product.toJSON()
+                }));
+
+            });
+
+        },
+        getRelatedProducts: function(selectedSubCategory){
+            var that = this;
+            return new Promise(function(resolve, reject) {
+                if (that.Products.isEmpty()) {
+                    that.Products.fetch({
+                        data: {
+                            "categories": that.product.get('categ'),
+                            "searchTerm": selectedSubCategory
+                        },
+                        success: function() {
+                            that.relatedProducts = that.Products.getRelatedProducts(selectedSubCategory);
+                            resolve();
+                        },
+                        error: function(model, response, options) {
+                            console.log("error from products fetch - " + response);
+                        }
+                    });
+                } else{
+                    resolve();
+                }
+            });
 
         },
         material: function(mf) { return mf.material; },
         finish: function(mf) { return mf.finish; },
-        chkrelatedProducts: function(selectedSubCategory) {
-            var subcatarr = new Array();
-            subcatarr.push(selectedSubCategory);
-            var relatedProducts = this.Products.getRelatedProduct(subcatarr);
-            this.custom_product.set({'relatedProducts':relatedProducts},{silent: true});
-
-           var nwrelatedproductTemplate = _.template(relatedproductTemplate);
-
-            $('#relatedproduct').html(nwrelatedproductTemplate({
-                "product": this.product.toJSON(),
-                "relatedProducts": _.uniq(this.custom_product.get('relatedProducts'))
-            }));
-            this.details_helper_ready();
-         },
         events:{
             "click .material": "changeMaterial",
             "click .finish": "changeFinish",
@@ -441,71 +438,6 @@ define([
                 $("#sldown").show();
             }
             $('.dwf-desc').slideToggle();
-        },
-        details_helper_ready: function(){
-
-        jQuery(function($) {
-            if($('#alt1-frame').length > 0){
-                var $alt1_frame = $('#alt1-frame');
-                var $alt1_wrap = $alt1_frame.parent().parent();
-
-                // Call Sly on frame
-                var alt1_sly = new Sly('#alt1-frame', {
-                    horizontal: 1,
-                    itemNav: 'basic',
-                    smart: 1,
-                    activateMiddle: 0,
-                    activateOn: 'click',
-                    mouseDragging: 1,
-                    touchDragging: 1,
-                    releaseSwing: 1,
-                    startAt: 0,
-                    scrollBy: 1,
-                    speed: 300,
-                    elasticBounds: 1,
-                    easing: 'easeOutExpo',
-                    dragHandle: 1,
-                    dynamicHandle: 1,
-                    clickBar: 1,
-
-                    // Buttons
-                    prevPage: $alt1_wrap.find('.alt1-prev'),
-                    nextPage: $alt1_wrap.find('.alt1-next')
-                }).init();
-            }
-
-            if($('.accessory-frame').length > 0){
-             $('.accessory-frame').each(function () {
-                    var accessoryId = this.id;
-                    var $accessory_frame = $('#'+accessoryId);
-                    var $accessory_wrap = $accessory_frame.parent().parent();
-
-                    var accessory_sly = new Sly('#'+accessoryId, {
-                        horizontal: 1,
-                        itemNav: 'basic',
-                        smart: 1,
-                        activateMiddle: 0,
-                        activateOn: 'click',
-                        mouseDragging: 1,
-                        touchDragging: 1,
-                        releaseSwing: 1,
-                        startAt: 0,
-                        scrollBy: 1,
-                        speed: 300,
-                        elasticBounds: 1,
-                        easing: 'easeOutExpo',
-                        dragHandle: 1,
-                        dynamicHandle: 1,
-                        clickBar: 1,
-
-                        // Buttons
-                        prevPage: $accessory_wrap.find('.accessory-prev'),
-                        nextPage: $accessory_wrap.find('.accessory-next')
-                    }).init();
-                });
-                }
-            });
-
         }
     });
     return ProductPage;
