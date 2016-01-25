@@ -1,10 +1,6 @@
 package com.mygubbi.apiserver;
 
-import com.mygubbi.route.AutoSearchHandler;
-import com.mygubbi.route.CategoryHandler;
-import com.mygubbi.route.PreSearchHandler;
-import com.mygubbi.route.ProductHandler;
-import com.mygubbi.si.catalog.ShopifyDataHandler;
+import com.mygubbi.route.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;

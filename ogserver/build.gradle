@@ -58,7 +58,6 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.38'
     compile 'org.elasticsearch:elasticsearch:1.7.2'
     compile 'org.apache.shiro:shiro-core:1.2.4'
-    compile 'com.hubrick.vertx:vertx-rest-client:2.0.5'
     compile 'com.google.inject:guice-parent:4.0'
     compile 'com.cloudinary:cloudinary-http44:1.2.2'
     compile 'com.sendgrid:sendgrid-java:2.2.1'
