@@ -95,23 +95,23 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="mfc">
                     <div class="row margin-left-0 paddingtop40">
-                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
+                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10 paddingbottom10">
                             <label id="chooseMaterial">Choose Material:</label>
-                            <div class="width100 list-group paddingtop20" aria-labelledby="chooseMaterial">
+                            <div class="width100 list-group padding20-20" aria-labelledby="chooseMaterial">
                                 <% _.each (materials, function(material) { %>
                                 <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline" data-material="<%=material%>"><%=material%></a>
                                 <% }); %>
                             </div>
                         </div>
-                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
+                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10 paddingbottom10">
                             <label id="chooseFinish">Choose Finish:</label>
-                            <div class="width100 list-group paddingtop20" aria-labelledby="chooseFinish" id="finishList">
+                            <div class="width100 list-group padding20-20" aria-labelledby="chooseFinish" id="finishList">
                                 <% _.each (selectedfinishes, function(finish) { %>
                                 <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline" data-finish="<%=finish%>"><%=finish%></a>
                                 <% }); %>
                             </div>
                         </div>
-                        <div class="col-xs-12 paddingtop20 bg-light-gray margintop20">
+                        <div class="col-xs-12 paddingtop20 bg-light-gray margintop20 paddingbottom10">
                             <label id="colors">Available in Colors:</label>
                             <ul class="paddingtop10 color-ul" id="colorList">
                                 <% _.each (selectedColor, function(color) { %>
@@ -412,7 +412,7 @@
                             <div class="form-group">
                                 <div class="margin-bottom20 form-group">
                                     <textarea class="width100 form-control" id="consult_requirement"
-                                              placeholder="Describe your Requirements / Queries"></textarea>
+                                              placeholder="Describe your Requirements / Queries">I'm interested in "<%= product.name %>" . Looking forward to hear from you.</textarea>
                                 </div>
                             </div>
                             <div class="margin-bottom20 form-group">

@@ -134,7 +134,8 @@ define([
                 "selectedfinishes": that.custom_product.get('finishes'),
                 "selectedFinish": that.custom_product.get('selectedFinish'),
                 "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories')),
-                "relatedProducts":that.custom_product.get('relatedProducts')
+                "relatedProducts":that.custom_product.get('relatedProducts'),
+                "custom_product":that.custom_product
             }));
 
             var compiledJsTemplate = _.template(helperJsTemplate);
