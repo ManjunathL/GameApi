@@ -52,6 +52,8 @@ $(window).scroll(function() {
 jQuery(function($) {
     'use strict';
 
+//    alert('hi');
+
     var $frame = $('#forcecentered');
     var $wrap = $frame.parent().parent();
 
@@ -82,35 +84,12 @@ jQuery(function($) {
         active: mainSliderActive
     }).init();
 
-    var $alt1_frame = $('#alt1-frame');
-    var $alt1_wrap = $alt1_frame.parent().parent();
-
-    // Call Sly on frame
-    var alt1_sly = new Sly('#alt1-frame', {
-        horizontal: 1,
-        itemNav: 'basic',
-        smart: 1,
-        activateMiddle: 0,
-        activateOn: 'click',
-        mouseDragging: 1,
-        touchDragging: 1,
-        releaseSwing: 1,
-        startAt: 0,
-        scrollBy: 1,
-        speed: 300,
-        elasticBounds: 1,
-        easing: 'easeOutExpo',
-        dragHandle: 1,
-        dynamicHandle: 1,
-        clickBar: 1,
-
-        // Buttons
-        prevPage: $alt1_wrap.find('.alt1-prev'),
-        nextPage: $alt1_wrap.find('.alt1-next')
-    }).init();
-
+//    accessorySlide();
 });
 
+function accessorySlide(){
+
+}
 function mainSliderActive(eventName, itemIndex) {
 
     var images = "<%= product.images %>".split(',');
@@ -125,25 +104,7 @@ function mainSliderActive(eventName, itemIndex) {
     }
 }
 
-function alt1SliderActive(eventName, itemIndex) {
 
-    var currentImgEl = document.getElementById('alt1-image');
-    var altImages = "<%=_.pluck(product.accessories[0].alternatives, 'accessoryImg')%>".split(',');
-    var defaultImage = "<%=product.accessories[0].accessoryImg%>";
-
-    var index = itemIndex;
-
-    if (!currentImgEl.src.match(defaultImage) && itemIndex >= alt1LastIndex) {
-        index = itemIndex + 1;
-    }
-
-    alt1LastIndex = itemIndex;
-
-    $('#alt1-image').fadeOut(600, function() {
-        $('#alt1-image').attr("src", imgBase + altImages[index]);
-        $('#altImages').fadeIn(200);
-    });
-}
 
 function toggleColor(element) {
     var currentColor = $(element).css('color');
@@ -156,4 +117,13 @@ function toggleColor(element) {
     }
 }
 
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script>

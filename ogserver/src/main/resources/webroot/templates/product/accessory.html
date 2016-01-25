@@ -1,0 +1,50 @@
+<% _.each (selectedAccessories, function(accessory) { %>
+<div class="col-md-12 col-sm-12 portfolio-item">
+    <div class="portfolio-box bg-white width100">
+        <div class="row" style="padding: 5px">
+            <div class="col-md-3 col-sm-3" style="padding-left: 5%; padding-top: 1.5%;">
+                <div class="accessory-main-img" style="border: 0px solid #F1591F;">
+                    <div style="height: 180px;">
+                        <a href="#">
+                            <img class="accImg" id="accessory-image<%= accessory.accessoryId %>" width="170px" src="<%= imgBase + 'c_fit,w_170,h_170//' + accessory.accessoryImg %>" alt="">
+                        </a>
+                    </div>
+                    <div><%= accessory.accessoryName%></div>
+                    <div>Price: <i class="fa fa-inr"></i> <%= accessory.accessoryPrice%></div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9">
+                <div class="wrap">
+                    <div class="row margintop10">
+                        <div class="controls center col-xs-1">
+                            <button class="btn accessory-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                            </button>
+                        </div>
+                        <div class="accessory-frame frame col-xs-10" id="accessory-fram<%= accessory.accessoryId %>" style="overflow: hidden;">
+                            <ul class="clearfix"
+                                style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
+                                <% _.each(accessory.alternatives, function(alternative){ %>
+                                <li class="<%= accessory.accessoryName === alternative.accessoryName ? 'active' : '' %>">
+                                    <div style="height: 180px;"><a class="alt-accessory display-inline" data-daccessoryid="<%=accessory.accessoryId%>" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img width="170px" src="<%= imgBase + 'c_fit,w_170,h_170/' + alternative.accessoryImg %>"/></a></div>
+                                    <div style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></div>
+                                </li>
+                                <% }); %>
+                                <!--<li><img src="https://placehold.it/500x300" width="100%"/></li>-->
+                            </ul>
+                        </div>
+                        <div class="controls center col-xs-1">
+                            <button class="btn accessory-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                        </div>
+                    </div>
+                    <hr width="98%" class="margin_auto">
+                    <p style="margin-left: 10px;margin-top: 10px;text-align: center;">Alternate Options</p>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="alt1-wrap padding20-0">-->
+
+        <!--</div>-->
+    </div>
+</div>
+<% }); %>

@@ -4,20 +4,21 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'mgfirebase'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF) {
+    'mgfirebase',
+    'consultutil'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil) {
     return {
         ref: MGF.rootRef,
 
-        createUser: function(userId, data, cbk) {
+        createUser: function(userId, data, next) {
             var that = this;
             this.ref.child("users").child(userId).set(data, function(error) {
                 if (error) {
                     console.log("Data could not be saved." + error);
-                    that.cbk(false);
+                    if (next) next(false);
                 } else {
                     console.log("Data saved successfully.");
-                    that.cbk(true);
+                    if (next) next(true);
                 }
             });
         },
@@ -28,7 +29,7 @@ define([
             });
         },
 
-        getUserProfile: function(uid, authData, handleAuth) {
+        getUserProfileHandleAuth: function(uid, authData, handleAuth) {
             var userProfileRef = this.ref.child("user-profiles/" + uid);
             var userProfile = null;
             var that = this;
@@ -40,22 +41,36 @@ define([
                 console.log("handleAuth done");
             });
         },
-        getUserProfileWithCB: function(fx) {
+        getUserProfileWithCB: function(next) {
             var authData = this.ref.getAuth();
-            MGF.getUserProfile(authData, fx);
+            MGF.getUserProfile(authData, next);
         },
         onFAuth: function(authData) {
-            if (authData && authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
-                $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
-                if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
-                    this.getUserProfile(authData.uid, authData, this.handleAuth);
-                    console.log("user profile done");
+            if (authData) {
+                if (authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
+                    $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
+                    if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
+                        this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
+                        console.log("user profile done");
+                    }
                 }
+                MGF.listenForShortlistChanges();
+            } else {
+                MGF.doAnonymousAuth();//.then(function(){/*do nothing here as onFAuth will get called again automatically*/});
             }
         },
+        formUserData: function(authData, userProfile) {
 
+            return {
+                provider: authData.provider,
+                email: MGF.getEmail(authData),
+                displayName: MGF.getName(authData, userProfile),
+                profileImage: MGF.getImage(authData, userProfile),
+                uid: authData.uid
+            };
+        },
         handleAuth: function(authData, userProfile) {
-            var email = this.getEmail(authData);
+            var email = MGF.getEmail(authData);
 
             if (!email) {
                 console.log("email not provided, please try again and provide email id as it is mandatory.");
@@ -65,14 +80,7 @@ define([
                 return;
             }
 
-
-            var user = {
-                provider: authData.provider,
-                email: this.getEmail(authData),
-                displayName: this.getName(authData, userProfile),
-                profileImage: this.getImage(authData, userProfile),
-                uid: authData.uid
-            };
+            var user = this.formUserData(authData, userProfile);
 
             if (authData.provider !== 'password') {
                 var userRef = this.ref.child("users/" + authData.uid);
@@ -82,12 +90,13 @@ define([
                         that.setUser(user);
                         console.log("user already exists in firebase");
                         window.fbButton && window.fbButton.button('reset');
+                        //                        window.twitterButton && window.twitterButton.button('reset');
                         window.googleButton && window.googleButton.button('reset');
                         $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     } else {
                         console.log("user doesn't exist in firebase, creating..");
 
-                        var cbk = function(result) {
+                        var setUserAndCreateProfile = function(result) {
                             if (result) {
                                 that.setUser(user);
                                 that.createProfile(authData, {
@@ -98,10 +107,11 @@ define([
                                 }, null);
                             }
                             window.fbButton && window.fbButton.button('reset');
+                            //                            window.twitterButton && window.twitterButton.button('reset');
                             window.googleButton && window.googleButton.button('reset');
                             $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                         };
-                        that.createUser(authData.uid, user, cbk);
+                        that.createUser(authData.uid, user, setUserAndCreateProfile);
                     }
                 });
             } else {
@@ -121,6 +131,7 @@ define([
             window.loginButton && window.loginButton.button('reset');
             window.googleButton && window.googleButton.button('reset');
             window.fbButton && window.fbButton.button('reset');
+            //            window.twitterButton && window.twitterButton.button('reset');
         },
 
         pwdLogin: function() {
@@ -150,49 +161,9 @@ define([
         },
 
         signOut: function(ev) {
+            MGF.stopListeningForShortlistChanges(this.ref.getAuth().uid);
             this.ref.unauth();
             users.reset();
-        },
-
-        getName: function(authData, userProfile) {
-            if (userProfile) {
-                return userProfile.displayName;
-            } else {
-                switch (authData.provider) {
-                    case 'password':
-                        return authData.password.email.replace(/@.*/, '');
-                    case 'google':
-                        return authData.google.displayName;
-                    case 'facebook':
-                        return authData.facebook.displayName;
-                }
-            }
-        },
-
-        getImage: function(authData, userProfile) {
-            if (userProfile) {
-                return userProfile.profileImage;
-            } else {
-                switch (authData.provider) {
-                    case 'password':
-                        return authData.password.profileImageURL;
-                    case 'google':
-                        return authData.google.profileImageURL;
-                    case 'facebook':
-                        return authData.facebook.profileImageURL;
-                }
-            }
-        },
-
-        getEmail: function(authData) {
-            switch (authData.provider) {
-                case 'password':
-                    return authData.password.email;
-                case 'google':
-                    return authData.google.email;
-                case 'facebook':
-                    return authData.facebook.email;
-            }
         },
 
         closeModal: function(ev) {
@@ -200,7 +171,7 @@ define([
             $(id).modal('toggle');
         },
 
-        closePopup: function(ev) {
+        closeUserPopup: function(ev) {
             var id = $(ev.currentTarget).data('element');
             if (id == '.userpop') {
                 $('.userpop').css('right', '-800px');
@@ -211,32 +182,41 @@ define([
 
         contactUsSubmit: function() {
             window.contactusSubmitButton && window.contactusSubmitButton.button('reset');
-            var formData = {
-                "fullName": $('#contact_full_name').val(),
-                "email": $('#contact_email_id').val(),
-                "contactNumber": $('#contact_contact_num').val(),
-                "requirements": $('#contact_requirement').val(),
-                "propertyName": $('#contact_property_name').val()
-            };
 
-            var authData = this.ref.getAuth();
+            var name = $('#contact_full_name').val();
+            var email = $('#contact_email_id').val();
+            var phone = $('#contact_contact_num').val();
+            var propertyName = $('#contact_property_name').val();
+            var query = $('#contact_requirement').val();
+            var floorplan = $("#contact_floorplan").prop('files')[0];
+
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+
             var that = this;
-            if (!authData) {
-                this.ref.authAnonymously(function(error, authData) {
-                    if (error) {
-                        console.log("Login Failed!", error);
-                    } else {
-                        that.setConsultData(authData, formData);
-                    }
+            $('#contactForm').hide(100, function() {
+                $('#success-msg').show(0, function() {
+                    $('#success-msg-padding').show(0, function() {
+                        that.positionSideContact();
+                    });
                 });
-            } else {
-                this.setConsultData(authData, formData);
+            });
+
+        },
+
+        positionSideContact: function() {
+
+            var windowHeight = $(window).height();
+            var contactUsSideHeight = $('.contact-us-side').height();
+            var contactUsSideWidth = $('.contact-us-side').width();
+            var popHeight = $('.contact-us-pop').height() - contactUsSideHeight;
+            var popHeightMore = popHeight > windowHeight;
+            $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight / 2 - popHeight / 2) + 'px');
+            $('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');
+
+            var currLeft = $('.contact-us-pop').position().left;
+            if (currLeft < 0) {
+                $('.contact-us-pop').css('left', -$('.contact-us-pop').width() + 'px');
             }
-
-            $('#contactForm').hide('slow');
-            $('#success-msg').show('slow');
-            $('#success-msg-padding').show('slow');
-
         },
 
         closeContactForm: function(ev) {
@@ -263,6 +243,15 @@ define([
                         password: $('#reg_password').val()
                     }, function(error, authData) {
 
+                        var userData = {
+                            provider: "password",
+                            email: $('#reg_email_id').val(),
+                            displayName: $('#reg_full_name').val(),
+                            profileImage: authData.password.profileImageURL,
+                            uid: authData.uid
+                        };
+                        that.createUser(authData.uid, userData, null);
+
                         var profileData = {
                             displayName: $('#reg_full_name').val(),
                             email: $('#reg_email_id').val(),
@@ -270,16 +259,7 @@ define([
                             profileImage: authData.password.profileImageURL
                         };
 
-                        var callbk = function() {
-                            that.ref.unauth();
-                            window.signupButton.button('reset');
-                            $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' onclick='gotoLogin();'>Login</a> to proceed.");
-                            $('#signup').modal('toggle');
-                            $('#notify').modal('show');
-                            that.ref.onAuth(that.onFAuth);
-                        };
-
-                        that.createProfile(userData, profileData, callbk);
+                        that.createProfile(userData, profileData, that.unAuthAfterProfile);
 
                     });
                 }
@@ -287,53 +267,57 @@ define([
 
             return false;
         },
-
+        unAuthAfterProfile: function() {
+            this.ref.unauth();
+            window.signupButton.button('reset');
+            $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
+            $('#signup').modal('toggle');
+            $('#notify').modal('show');
+            this.ref.onAuth(this.onFAuth);
+        },
         gotoLogin: function() {
             $('#notify').modal('toggle');
             this.showUserPop();
         },
 
+        toggleContactUsPop: function() {
+            var currLeft = $('.contact-us-pop').position().left;
+            if (currLeft < 0) {
+                $('.contact-us-pop').css('left', '0px');
+                $('.contact-us-pop').toggleClass('overflowHeight');
+
+            } else {
+                $('.contact-us-pop').css('left', -$('.contact-us-pop').width() + 'px');
+                $('.contact-us-pop').toggleClass('overflowHeight');
+            }
+        },
         showUserPop: function() {
             $('#login_error').html('');
             $('#login_error_row').css("display", "none");
             $('.userpop').css('right', '0px');
         },
 
-        createProfile: function(userData, profileData, cbk) {
-            this.ref.child('user-profiles').child(userData.uid).set(
-                profileData,
-                function(error) {
-                    if (error) {
-                        console.log("password profile data could not be saved." + error);
-                    } else {
-                        console.log("data saved successfully.");
-                    }
-                    if (cbk) cbk();
-                }
-            );
-        },
-        setConsultData: function(authData, formData) {
-            this.ref.child("consults/" + authData.uid + "/" + Date.now()).set(formData,
-                function(error) {
-                    if (error) {
-                        console.log("problem in inserting consult data", error);
-                    } else {
-                        console.log("successfully inserted consult data");
-                    }
-                });
+        createProfile: function(userData, profileData, next) {
+            MGF.createProfile(userData, profileData, next);
         },
         ready: function(parent) {
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
-            _.bindAll(this, 'closeContactForm', 'setConsultData', 'createUser', 'setUser', 'getUserProfile', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut', 'getName', 'getImage', 'getEmail', 'closeModal', 'closePopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile');
+            _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'createUser',
+                'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
+                'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
+                'unAuthAfterProfile');
 
             var events = {
                 "click .signout_icon": this.signOut,
-                "click #close-user-pop": this.closePopup,
+                "click #close-user-pop": this.closeUserPopup,
+                "click #view-all-shortlist": this.closeUserPopup,
+                "click .shortlist-side": this.closeUserPopup,
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,
-                "click #close-contactus-pop": this.closeModal,
-                "click #contact-form-explore": this.closeContactForm
+                "click #close-contactus-pop": this.toggleContactUsPop,
+                "click #contact-form-explore": this.toggleContactUsPop,
+                "click #goto-login": this.gotoLogin
             };
 
             parent.delegateEvents(events);
@@ -358,7 +342,7 @@ define([
                 });
 
                 $('#contact-us-side-btn').click(function() {
-                    $('#contactuspop').modal('toggle');
+                    that.toggleContactUsPop();
                     $('#contact_error').html('');
                     $('#contact_error_row').css("display", 'none');
                 });
@@ -444,6 +428,35 @@ define([
                     $('.search_suggest').slideUp();
                 });
 
+                /* Search on menu bar Start */
+                 $('.search-ico').click(function() {
+                    var isMobile = window.matchMedia("only screen and (max-width: 920px)");
+                    if (isMobile.matches) {
+                       $('#main-lg-ico').css("position","relative");
+                       $('#sb-search-duplicate').toggle('slide',{ direction: 'Right'},500);
+                    }else{
+                        $('#bs-example-navbar-collapse-1').css("position","relative");
+                        $('#sb-search').toggle('slide',{ direction: 'Right'},500);
+                    }
+                });
+
+                $('.sb-search-input').keyup(function() {
+                    var char = $(this).val().length;
+                    if (char >= 3) {
+                        $('.sb-search_suggest').slideDown();
+                    } else {
+                        $('.sb-search_suggest').slideUp();
+                    }
+                });
+                 $('.sb-search-txt').click(function() {
+                    $('.sb-search-input').val($(this).text());
+                    window.location.href = 'https://localhost:8000/#product_search/'+encodeURIComponent($(this).text());
+                    $('.sb-search_suggest').slideUp();
+                 });
+
+
+                /* Search on menu bar End  */
+
                 $("#forgot_password").on('hidden.bs.modal', function() {
                     $('.modal_success_msg').css('display', 'none');
                     $('.modal_error_msg').css('display', 'none');
@@ -464,6 +477,18 @@ define([
                         scope: "email"
                     });
                 });
+
+                /*
+
+                                $('#twitter-btn').click(function() {
+                                    window.twitterButton = $(this);
+                                    window.twitterButton.button('loading');
+                                    that.ref.authWithOAuthPopup("twitter", that.authHandler, {
+                                        scope: "email"
+                                    });
+                                });
+
+                */
 
                 $('#google-btn').click(function() {
                     window.googleButton = $(this);
@@ -490,6 +515,10 @@ define([
                         navMain.collapse('hide');
                     });
                 });
+
+                $(window).resize(that.positionSideContact);
+
+                that.positionSideContact();
 
                 $('#tawkchat-iframe-container').hide();
 

@@ -2,7 +2,7 @@
     <% if(typeof(collection) !== 'undefined'){ %>
     <% _.each(collection, function(product){ %>
 
-    <div class="row bg-white margin-bottom40 portfolio-box overflow-hidden">
+    <div class="row portfolio-bg-gray margin-bottom40 portfolio-box overflow-hidden">
         <div class="col-md-7 list-img col-7-img">
             <div class="row margin15-0 position-relative overflow-hidden">
 
@@ -17,8 +17,8 @@
                         </a>
                     </div>
                     <div class="listli">
-                        <a href="javascript:void(0);">
-                            <span class="list-heart fa fa-heart-o"></span>
+                        <a class="shortlistable-item" href="#" data-element="<%=product.id%>">
+                            <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
                             <span class="list-txt">shortlist</span>
                         </a>
                     </div>
@@ -49,13 +49,14 @@
                             </a>
                         </span>
                         <span class="cost-col5">
-                            &#8377;<%= product.defaultPrice %>
+                            <i class="fa fa-inr"></i>
+                            <%= product.defaultPrice %>
                         </span>
             </div>
 
             <div class="font-size18 padding0">
                 <span class="dim">Description</span>
-                <p class="justify">
+                <p class="justify margin-top8">
                     <%= product.desc %>
                 </p>
             </div>
@@ -90,9 +91,9 @@
                             </a>
                         </div>
                         <div class="listli">
-                            <a href="javascript:void(0);">
-                                <span class="list-heart fa fa-heart-o"></span>
-                                <span class="list-txt">shortlist</span>
+                            <a class="shortlistable-item" data-element="<%=product.id%>" href="#">
+                                <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
+                                <span class="list-txt"><%=product.user_shortlisted ? 'shortlisted' : 'shortlist'%></span>
                             </a>
                         </div>
                         <div class="listli">
@@ -113,10 +114,13 @@
                     </div>
                 </div>
 
-                <div class="portfolio-caption margin0">
+                <div class="portfolio-caption-bg-gray margin0">
                     <div class="row">
-                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left"><%= product.name %></h4>
-                        <h4 class="col-md-4 col-sm4 col-xs-4 align-right">&#8377;<%= product.defaultPrice %>/-</h4>
+                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0"><%= product.name %></h4>
+                        <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
+                            <i class="fa fa-inr"></i>
+                            <%= product.defaultPrice %>/-
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -128,3 +132,15 @@
 <!--<script type="text/javascript">var switchTo5x=true;</script>-->
 <!--<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>-->
 <!--<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>-->
+
+<script>
+    $(document).ready(function(){
+        $('.fa-inr').click(function() {
+            var fontsize = $('.fa-inr').parent().css('font-size');
+            alert(fontsize);
+            fontsize = fontsize-2;
+            $('.fa-inr').css('font-size',fontsize);
+        });
+
+    });
+</script>

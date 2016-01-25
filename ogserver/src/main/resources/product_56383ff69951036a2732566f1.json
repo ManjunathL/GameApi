@@ -1,5 +1,5 @@
 {
-  "id": "123",
+  "id": "56383ff69951036a2732566f1",
   "code": "SJDH478SJD",
   "categ": "Kitchen",
   "categId": "23847623746",
@@ -40,7 +40,18 @@
       "uom": "cm",
       "alternatives": [
         {
-          "accessoryId": "2",
+          "accessoryId": "1",
+          "accessoryCode": "MC37487",
+          "accessoryName": "Base Cabinet with Bottle Pull Out",
+          "accessoryImg": "rack_qabmsl.jpg",
+          "accessoryPrice": "11271",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        },
+        {
+          "accessoryId": "11",
           "accessoryCode": "MC37488",
           "accessoryName": "Moving Corner Slide",
           "accessoryImg": "cabinet-with-three-drawers1_vgkbd3.jpg",
@@ -51,9 +62,9 @@
           "uom": "cm"
         },
         {
-          "accessoryId": "2",
+          "accessoryId": "12",
           "accessoryCode": "MC37488",
-          "accessoryName": "Moving Corner Slide",
+          "accessoryName": "Cutlery Tray",
           "accessoryImg": "cabinet-with-three-drawers_fpshz1.jpg",
           "accessoryPrice": "8200",
           "w": "800",
@@ -62,9 +73,9 @@
           "uom": "cm"
         },
         {
-          "accessoryId": "2",
+          "accessoryId": "13",
           "accessoryCode": "MC37488",
-          "accessoryName": "Moving Corner Slide",
+          "accessoryName": "dustbin",
           "accessoryImg": "cabinet-with-bottle-pull-out111_xu5l9c.jpg",
           "accessoryPrice": "12100",
           "w": "800",
@@ -78,7 +89,7 @@
       "moduleId": "1",
       "moduleName": "Base Unit",
       "moduleDesc": "Base Unit",
-      "accessoryId": "1",
+      "accessoryId": "2",
       "accessoryCode": "MC37487",
       "accessoryName": "Base Cabinet with 3 Drawers",
       "accessoryImg": "cabinet-with-three-drawers_fpshz1.jpg",
@@ -90,8 +101,19 @@
       "alternatives": [
         {
           "accessoryId": "2",
+          "accessoryCode": "MC37487",
+          "accessoryName": "Base Cabinet with 3 Drawers",
+          "accessoryImg": "cabinet-with-three-drawers_fpshz1.jpg",
+          "accessoryPrice": "7800",
+          "w": "800",
+          "h": "600",
+          "d": "200",
+          "uom": "cm"
+        },
+        {
+          "accessoryId": "21",
           "accessoryCode": "MC37488",
-          "accessoryName": "Moving Corner Slide",
+          "accessoryName": "Base Cabinet with 2 Drawers",
           "accessoryImg": "cabinet-with-three-drawers1_vgkbd3.jpg",
           "accessoryPrice": "8200",
           "w": "800",
@@ -100,22 +122,11 @@
           "uom": "cm"
         },
         {
-          "accessoryId": "2",
+          "accessoryId": "22",
           "accessoryCode": "MC37488",
-          "accessoryName": "Moving Corner Slide",
+          "accessoryName": "wired basket",
           "accessoryImg": "rack_qabmsl.jpg",
           "accessoryPrice": "11500",
-          "w": "800",
-          "h": "600",
-          "d": "200",
-          "uom": "cm"
-        },
-        {
-          "accessoryId": "2",
-          "accessoryCode": "MC37488",
-          "accessoryName": "Moving Corner Slide",
-          "accessoryImg": "cabinet-with-bottle-pull-out111_xu5l9c.jpg",
-          "accessoryPrice": "7200",
           "w": "800",
           "h": "600",
           "d": "200",
@@ -141,34 +152,41 @@
     },
     {
       "material": "BWR Plywood",
-      "materialId": "PY",
-      "finish": "MDF with Membrane",
-      "finishId": "MM",
+      "materialId": "BPY",
+      "finish": "Walnut",
+      "finishId": "WW",
       "basePrice": "3,95,000"
     },
     {
       "material": "BWR Plywood",
-      "materialId": "PY",
-      "finish": "PU Paint",
-      "finishId": "PP",
+      "materialId": "BPY",
+      "finish": "Oak",
+      "finishId": "OO",
       "basePrice": "4,30,000"
+    },
+    {
+      "material": "BWR Plywood",
+      "materialId": "BPY",
+      "finish": "Oak",
+      "finishId": "OO",
+      "basePrice": "4,40,000"
     }
   ],
   "fc": [
     {
-      "finish": "MFD with Membrane",
+      "finish": "MDF with Membrane",
       "finishId": "MM",
       "color": [
         {
           "name": "Cherry Red",
           "id": "CR",
-          "img": "278364.png",
+          "img": "red_e7snsu.png",
           "mainImgSuffix": "cr"
         },
         {
           "name": "English Walnut",
           "id": "EW",
-          "img": "274364.png",
+          "img": "blue_a9axed.png",
           "mainImgSuffix": "ew"
         }
       ]
@@ -180,13 +198,31 @@
         {
           "name": "Cherry Red",
           "id": "CR",
-          "img": "278364.png",
+          "img": "red_e7snsu.png",
           "mainImgSuffix": "cr"
         },
         {
           "name": "English Walnut",
           "id": "EW",
-          "img": "274364.png",
+          "img": "green_yicxew.png",
+          "mainImgSuffix": "ew"
+        }
+      ]
+    },
+    {
+      "finish": "Walnut",
+      "finishId": "WW",
+      "color": [
+        {
+          "name": "Grass Green",
+          "id": "GG",
+          "img": "green_yicxew.png",
+          "mainImgSuffix": "gg"
+        },
+        {
+          "name": "English Walnut",
+          "id": "EW",
+          "img": "blue_a9axed.png",
           "mainImgSuffix": "ew"
         }
       ]
@@ -249,5 +285,66 @@
       "image": "chimney_ff0o46.jpg",
       "price": "12,990"
     }
-  ]
+  ],
+  "components" : [ {
+    "name" : "Base Unit For Sink 2 Doors",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit 3 Blum Tandem Drawers (Soft Close",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit Blind Corner For Cylinder 1 Door",
+    "qty" : 1,
+    "size" : "820X1100X560"
+  }, {
+    "name" : "Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close",
+    "qty" : 1,
+    "size" : "820X300X560"
+  }, {
+    "name" : "Base Unit 2 Doors + 1 Shelf",
+    "qty" : 1,
+    "size" : "820X1000X560"
+  }, {
+    "name" : "Wall Unit For Dish Drainer 2 Doors",
+    "qty" : 1,
+    "size" : "720X900X330"
+  }, {
+    "name" : "Wall Unit 2 Doors 2 Shelves",
+    "qty" : 3,
+    "size" : "720X900X330"
+  }, {
+    "name" : "Blind Corner Wall Unit 1 Door 400 Mm 2 Shelves",
+    "qty" : 1,
+    "size" : "720X800X330"
+  }, {
+    "name" : "Base Unit 2 Doors + 1 Shelf",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit End Panel",
+    "qty" : 2,
+    "size" : "-"
+  }, {
+    "name" : "Wall Unit End Panel",
+    "qty" : 4,
+    "size" : "-"
+  }, {
+    "name" : "Base Unit Filler From 30 To 150 Mm (With Door",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Detergent Holder",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Pvc Cutlery Tray",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Bin Holder",
+    "qty" : 1,
+    "size" : "-"
+  } ]
 }
