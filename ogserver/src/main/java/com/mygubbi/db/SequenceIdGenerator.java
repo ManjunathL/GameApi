@@ -1,6 +1,7 @@
 package com.mygubbi.db;
 
 import com.hazelcast.nio.serialization.Data;
+import com.mygubbi.config.ConfigHolder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,21 +27,11 @@ public class SequenceIdGenerator extends AbstractVerticle
 {
 	private static final Logger LOG = LogManager.getLogger(SequenceIdGenerator.class);
 
-	private static final Map<String, String> sequenceMap = tableSequences(); 
+	private Map<String, String> sequenceMap;
 
 	private final HazelcastInstance client = Hazelcast.newHazelcastInstance();
 			
 	private static SequenceIdGenerator INSTANCE;
-	
-	private static Map<String, String> tableSequences()
-	{
-		Map<String, String> smap = new HashMap<String, String>();
-		for (String table : new String[]{"user_profile", "user_login"})
-		{
-			smap.put(table,  table + ".seq");
-		}
-		return smap;
-	}
 	
 	public static SequenceIdGenerator getInstance()
 	{
@@ -53,7 +46,8 @@ public class SequenceIdGenerator extends AbstractVerticle
 	@Override
 	public void start(Future<Void> startFuture) throws Exception
 	{
-		final Set<String> tables = sequenceMap.keySet();
+		this.sequenceMap = this.tableSequences();
+		final Set<String> tables = this.sequenceMap.keySet();
 		final List<String> errors = new ArrayList<String>();
 		
 		EventBus eb = vertx.eventBus();
@@ -96,4 +90,18 @@ public class SequenceIdGenerator extends AbstractVerticle
 		}
 		return this.client.getAtomicLong(sequenceMap.get(table)).incrementAndGet();
 	}
+
+	private Map<String, String> tableSequences()
+	{
+		Map<String, String> smap = new HashMap<String, String>();
+		JsonArray tables = (JsonArray) ConfigHolder.getInstance().getConfigValue("datatables");
+
+		for (int i=0; i < tables.size(); i++)
+		{
+			String table = tables.getString(i);
+			smap.put(table,  table + ".seq");
+		}
+		return smap;
+	}
+
 }

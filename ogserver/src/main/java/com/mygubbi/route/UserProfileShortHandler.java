@@ -17,6 +17,6 @@ public class UserProfileShortHandler extends AbstractRouteHandler {
 
     private void getShortProfile(RoutingContext context) {
         String username = context.request().getParam("username");
-        sendJsonResponse(context, "/user_profile_short_" + username + ".json");
+        sendJsonResponseFromFile(context, "/user_profile_short_" + username + ".json");
     }
 }

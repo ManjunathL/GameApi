@@ -16,7 +16,7 @@ public class CategoryHandler extends AbstractRouteHandler {
     }
 
     private void getAll(RoutingContext context) {
-        sendJsonResponse(context, "/categories_data.json");
+        sendJsonResponseFromFile(context, "categories_data.json");
     }
 
 }

@@ -123,6 +123,7 @@ public class DatabaseService extends AbstractVerticle
 	
 	private void runUpdateQuery(Message message, QueryData qData, SQLConnection connection)
 	{
+		LOG.info("Query:" + qData.queryDef.query + ". Params:" + qData.getParams());
 		connection.updateWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
 		  if (res2.succeeded()) 
 		  {
