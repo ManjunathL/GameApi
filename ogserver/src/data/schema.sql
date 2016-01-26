@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS user_profile;
 CREATE TABLE user_profile (
   id INTEGER NOT NULL AUTO_INCREMENT,
   fbid varchar(64) NOT NULL,
+  active char(1) NOT NULL DEFAULT 'A',
   email varchar(255) NOT NULL,
   profile TEXT NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -63,11 +64,26 @@ CREATE TABLE product (
   UNIQUE KEY unique_productid (productId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS shortlisted;
+CREATE TABLE shortlisted (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  uid varchar(64) NOT NULL,
+  email varchar(255) NOT NULL,
+  productId varchar(64) NOT NULL,
+  productJson TEXT NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY email (email),
+  KEY uid (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS idsequence;
 CREATE TABLE idsequence (
   sequencename varchar(64) NOT NULL,
   sequenceno INTEGER NOT NULL DEFAULT 1,
   PRIMARY KEY (sequencename)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sequence Generator';
+
 
 

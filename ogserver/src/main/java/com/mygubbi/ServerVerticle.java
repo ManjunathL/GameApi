@@ -8,7 +8,6 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryPrepareService;
 import com.mygubbi.db.SequenceIdGenerator;
 import com.mygubbi.si.firebase.FirebaseService;
-import com.mygubbi.si.knowtify.KnowtifyService;
 import com.mygubbi.support.LogServiceVerticle;
 import io.vertx.core.*;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +20,7 @@ public class ServerVerticle extends AbstractVerticle
     private static final Logger LOG = LogManager.getLogger();
 
     private static final Class[] ALL_SERVICES = new Class[]{LogServiceVerticle.class,
-            QueryPrepareService.class, SequenceIdGenerator.class, ApiServerVerticle.class, KnowtifyService.class, FirebaseService.class,
+            QueryPrepareService.class, SequenceIdGenerator.class, ApiServerVerticle.class, FirebaseService.class,
             ProductManagementService.class};
 
     private static final Class[] DATABASE_SERVICE_ONLY = new Class[]{LogServiceVerticle.class,

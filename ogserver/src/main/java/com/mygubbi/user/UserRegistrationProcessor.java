@@ -7,9 +7,9 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.si.data.DataProcessor;
 import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.data.EventData;
-import com.mygubbi.si.knowtify.KnowtifyService;
+import com.mygubbi.si.email.EmailData;
+import com.mygubbi.si.email.EmailService;
 import io.vertx.core.AsyncResult;
-import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
@@ -32,7 +32,7 @@ public class UserRegistrationProcessor implements DataProcessor
     @Override
     public String getName()
     {
-        return "new.user";
+        return DataProcessor.USER_ADD_EVENT;
     }
 
     @Override
@@ -64,21 +64,22 @@ public class UserRegistrationProcessor implements DataProcessor
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(res.result().body());
                     if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
                     {
-                        this.acknowledger.failed(eventData, "User already registered");
+                        this.acknowledger.failed(eventData, "User could not be recorded in database.");
                     }
                     else
                     {
-                        this.registerWithKnowtify(eventData);
+                        this.sendWelcomeEmail(eventData);
                     }
                 });
     }
 
-    private void registerWithKnowtify(EventData eventData)
+    private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-        JsonObject userJson = new JsonObject().put("name", jsonData.getString("name")).put("email", jsonData.getString("email"));
-        Integer id = LocalCache.getInstance().store(userJson);
-        VertxInstance.get().eventBus().send(KnowtifyService.ADD_CONTACT, id,
+        EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail(jsonData.getString("email"))
+                .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!").setTemplateName("email/welcome.user.vm");
+        Integer id = LocalCache.getInstance().store(emailData);
+        VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     if (result.succeeded())
                     {
@@ -86,7 +87,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     }
                     else
                     {
-                        this.acknowledger.failed(eventData, "Error in sending through Knowtify");
+                        this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
                     }
                 });
     }

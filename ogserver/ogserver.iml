@@ -28,7 +28,6 @@
     <orderEntry type="library" name="Gradle: com.google.inject:guice:4.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.poi:poi:3.12" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.poi:poi-ooxml:3.12" level="project" />
-    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.36" level="project" />
     <orderEntry type="library" name="Gradle: org.elasticsearch:elasticsearch:1.7.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.shiro:shiro-core:1.2.4" level="project" />
     <orderEntry type="library" name="Gradle: log4j:log4j:1.2.17" level="project" />
@@ -75,5 +74,36 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Gradle: commons-fileupload:commons-fileupload:1.3.1" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.2" level="project" />
+    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.38" level="project" />
+    <orderEntry type="library" name="Gradle: com.cloudinary:cloudinary-http44:1.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.sendgrid:sendgrid-java:2.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.velocity:velocity:1.7" level="project" />
+    <orderEntry type="library" name="Gradle: com.cloudinary:cloudinary-core:1.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpmime:4.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.json:json:20140107" level="project" />
+    <orderEntry type="library" name="Gradle: com.sendgrid:smtpapi-java:1.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: firebase-client-jvm-2.5.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/firebase-client-jvm-2.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: opencsv-3.6">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/opencsv-3.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
