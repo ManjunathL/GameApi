@@ -162,7 +162,7 @@ define([
             "click .finish": "changeFinish",
             "click .alt-accessory": "changeAccessory",
             "click .appliance": "changeAppliance",
-            "click #prodconsult": "openConsultPopup",
+            "click #product_consult": "openConsultPopup",
             "click #close-consult-pop": "closeModal",
             "click #consult-form-explore": "closeModal",
             "click #consult-submit-btn": "submitConsultButton",

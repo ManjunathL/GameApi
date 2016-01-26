@@ -56,8 +56,6 @@ jQuery(function($) {
     var $wrap = $frame.parent().parent();
     SlyUtil.create($wrap, '#forcecentered', '.next', '.prev',mainSliderActive).init();
 
-
-
      if($('#alt1-frame').length > 0){
         var $alt1_frame = $('#alt1-frame');
         var $alt1_wrap = $alt1_frame.parent().parent();
