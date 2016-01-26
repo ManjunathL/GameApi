@@ -88,19 +88,19 @@
 		  ]
 	  },
 
-	  {"id" : "shortlist.insert",
+	  {"id" : "shortlist.add",
 		  "type" : "insert",
 		  "table": "shortlisted",
-		  "query": "insert into shortlisted(id, fbid, email, productId, productJson) values (?, ?, ?, ?, ?)",
-		  "params": ["id", "fbid", "email", "productId", "productJson"]
+		  "query": "insert into shortlisted(id, uid, email, productId, product) values (?, ?, ?, ?, ?)",
+		  "params": ["id", "uid", "email", "productId", "product"]
 	  },
 
 	  {
-		  "id": "shortlist.delete",
+		  "id": "shortlist.remove",
 		  "type": "delete",
 		  "table": "shortlisted",
-		  "query": "delete shortlisted where productId = ? and fbid = ?",
-		  "params": ["productId", "fbid"]
+		  "query": "delete shortlisted where productId = ? and uid = ?",
+		  "params": ["productId", "uid"]
 	  }
 
   ]

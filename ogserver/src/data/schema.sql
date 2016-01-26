@@ -70,7 +70,7 @@ CREATE TABLE shortlisted (
   uid varchar(64) NOT NULL,
   email varchar(255) NOT NULL,
   productId varchar(64) NOT NULL,
-  productJson TEXT NOT NULL,
+  product TEXT NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY email (email),
