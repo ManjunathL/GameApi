@@ -4,20 +4,17 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.si.data.EventData;
 import com.mygubbi.si.firebase.FirebaseProductUpdateService;
-import com.mygubbi.si.rest.RequestData;
-import com.mygubbi.si.rest.RestInvoker;
-import com.mygubbi.si.rest.RestResponseHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.jar.Manifest;
 
 /**
  * Created by test on 08-01-2016.
@@ -31,7 +28,7 @@ public class ProductManagementService extends AbstractVerticle
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
-        this.setupContactProcessor();
+        this.setupProductProcessor();
         startFuture.complete();
     }
 
@@ -41,7 +38,7 @@ public class ProductManagementService extends AbstractVerticle
         super.stop();
     }
 
-    private void setupContactProcessor()
+    private void setupProductProcessor()
     {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(CREATE_PRODUCT, (Message<Integer> message) -> {

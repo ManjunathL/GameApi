@@ -145,7 +145,7 @@ public class ShopifyCatalogConverter
         String productsFile = args[0];
         String componentsFile = args[1];
 
-        VertxInstance.get().deployVerticle(new ServerVerticle(true), new DeploymentOptions().setWorker(true), result ->
+        VertxInstance.get().deployVerticle(new ServerVerticle(), new DeploymentOptions().setWorker(true), result ->
         {
             if (result.succeeded())
             {

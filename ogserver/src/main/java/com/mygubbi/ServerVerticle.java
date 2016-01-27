@@ -1,16 +1,12 @@
 package com.mygubbi;
 
 import com.mygubbi.apiserver.ApiServerVerticle;
-import com.mygubbi.catalog.ProductManagementService;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
-import com.mygubbi.db.QueryPrepareService;
-import com.mygubbi.db.SequenceIdGenerator;
-import com.mygubbi.si.firebase.FirebaseService;
 import com.mygubbi.support.LogServiceVerticle;
 import io.vertx.core.*;
-import org.apache.logging.log4j.LogManager;
+import io.vertx.core.json.JsonArray;import io.vertx.core.json.JsonObject;import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
@@ -19,34 +15,29 @@ public class ServerVerticle extends AbstractVerticle
 {
     private static final Logger LOG = LogManager.getLogger();
 
-    private static final Class[] ALL_SERVICES = new Class[]{LogServiceVerticle.class,
-            QueryPrepareService.class, SequenceIdGenerator.class, ApiServerVerticle.class, FirebaseService.class,
-            ProductManagementService.class};
-
-    private static final Class[] DATABASE_SERVICE_ONLY = new Class[]{LogServiceVerticle.class,
-            QueryPrepareService.class, SequenceIdGenerator.class, ProductManagementService.class};
-
-    private Class[] servicesToStart = ALL_SERVICES;
-    private List<Verticle> verticlesToStart = Collections.emptyList();
+    private String siteConfig;
 
     public static void main(String[] args)
     {
-        new ServerVerticle().startServerVerticle();
+        if (args.length == 1)
+        {
+            String siteConfig = args[0];
+            new ServerVerticle(siteConfig).startServerVerticle();
+        }
+        else
+        {
+            new ServerVerticle().startServerVerticle();
+        }
     }
 
     public ServerVerticle()
     {
-        this(false);
+        this(null);
     }
 
-    public ServerVerticle(boolean dbOnly)
+    public ServerVerticle(String siteConfig)
     {
-        this.servicesToStart = dbOnly ? DATABASE_SERVICE_ONLY : ALL_SERVICES;
-        if (dbOnly)
-        {
-            this.verticlesToStart = new ArrayList<>();
-            this.verticlesToStart.add(new FirebaseService(false));
-        }
+        this.siteConfig = siteConfig;
     }
 
     private void startServerVerticle()
@@ -68,59 +59,74 @@ public class ServerVerticle extends AbstractVerticle
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
-        this.startVerticle(startFuture, ConfigHolder.class);
+        this.startConfigService(startFuture);
     }
 
-    private void startVerticle(Future<Void> startFuture, Class serviceClass)
+    private void startConfigService(Future<Void> startFuture)
     {
-        LOG.info(serviceClass.getName() + " starting ...");
-        vertx.deployVerticle(serviceClass.getCanonicalName(), result ->
+        VertxInstance.get().deployVerticle(new ConfigHolder(this.siteConfig), new DeploymentOptions().setWorker(true), result ->
         {
             if (result.succeeded())
             {
-                LOG.info(serviceClass.getName() + " started.");
-                if (serviceClass == DatabaseService.class)
+                LOG.info("Config Service started.");
+                JsonObject services = (JsonObject) ConfigHolder.getInstance().getConfigValue("services");
+                if (services == null)
                 {
-                    this.startTheRest(startFuture);
+                    startFuture.complete();
+                    return;
                 }
-                else
-                {
-                    this.startVerticle(startFuture, DatabaseService.class);
-                }
+                List<Class> parallelServices = this.getClasses(services.getJsonArray("parallel"));
+                Stack<Class> sequentialServices = new Stack<>();
+                sequentialServices.addAll(this.getClasses(services.getJsonArray("sequential")));
+                this.startParallelAfterSequential(startFuture, sequentialServices, parallelServices);
             }
             else
             {
-                startFuture.fail(result.cause());
+                LOG.error("Server did not start. Message:" + result.result(), result.cause());
+                System.exit(1);
             }
         });
     }
 
-    private void startTheRest(Future<Void> startFuture)
+    private void startParallelAfterSequential(Future<Void> startFuture, final Stack<Class> sequentialServices, List<Class> parallelServices)
+    {
+        if (sequentialServices.isEmpty())
+        {
+            this.startInParallel(startFuture, parallelServices);
+        }
+        else
+        {
+            Class serviceClass = sequentialServices.pop();
+            LOG.info(serviceClass.getName() + " starting ...");
+            VertxInstance.get().deployVerticle(serviceClass.getCanonicalName(), result ->
+            {
+                if (result.succeeded())
+                {
+                    LOG.info(serviceClass.getName() + " started.");
+                    this.startParallelAfterSequential(startFuture, sequentialServices, parallelServices);
+                }
+                else
+                {
+                    startFuture.fail(result.cause());
+                }
+            });
+        }
+
+    }
+
+    private void startInParallel(Future<Void> startFuture, List<Class> servicesToStart)
     {
 
         Set<String> serviceNames = new HashSet<String>();
 
-        for (Class serviceClass : this.servicesToStart)
+        for (Class serviceClass : servicesToStart)
         {
             String serviceName = serviceClass.getCanonicalName();
             serviceNames.add(serviceName);
 
             LOG.info(serviceName + " starting ...");
             DeploymentOptions options = this.getDeploymentOptions(serviceClass);
-            vertx.deployVerticle(serviceName, options, result ->
-            {
-                this.handleStartResponse(serviceNames, serviceName, result);
-            });
-        }
-
-        for (Verticle verticle : this.verticlesToStart)
-        {
-            String serviceName = verticle.getClass().getCanonicalName();
-            serviceNames.add(serviceName);
-
-            LOG.info(serviceName + " starting ...");
-            DeploymentOptions options = this.getDeploymentOptions(verticle.getClass());
-            vertx.deployVerticle(verticle, options, result ->
+            VertxInstance.get().deployVerticle(serviceName, options, result ->
             {
                 this.handleStartResponse(serviceNames, serviceName, result);
             });
@@ -171,6 +177,23 @@ public class ServerVerticle extends AbstractVerticle
             options.setWorker(true);
         }
         return options;
+    }
+
+    private List<Class> getClasses(JsonArray classNames)
+    {
+        List<Class> serviceClasses = new ArrayList<>();
+        for (String className : (List<String>) classNames.getList())
+        {
+            try
+            {
+                serviceClasses.add(Class.forName(className));
+            }
+            catch (ClassNotFoundException e)
+            {
+                LOG.error("Class not found for : " + className, e);
+            }
+        }
+        return serviceClasses;
     }
 
     @Override

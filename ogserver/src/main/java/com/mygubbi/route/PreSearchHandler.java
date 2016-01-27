@@ -16,7 +16,7 @@ public class PreSearchHandler extends AbstractRouteHandler {
     }
 
     private void getAll(RoutingContext context) {
-        sendJsonResponseFromFile(context, "pre_search.json");
+        sendJsonResponseFromFile(context, "testdata/pre_search.json");
     }
 
 }
