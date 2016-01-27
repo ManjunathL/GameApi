@@ -140,7 +140,12 @@ define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
                         } else {
                             console.log("successfully added shortlist data");
                             resolve();
-                            that.pushEvent(authData.uid, product, that.TYPE_SHORTLIST_PRODUCT_ADD);
+                            var email = that.getEmail(that.rootRef.getAuth());
+                            var data = {
+                                product: product,
+                                email: email ? email : ''
+                            };
+                            that.pushEvent(authData.uid, data, that.TYPE_SHORTLIST_PRODUCT_ADD);
                         }
                     });
             });
