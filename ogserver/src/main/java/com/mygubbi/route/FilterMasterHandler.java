@@ -16,7 +16,7 @@ public class FilterMasterHandler extends AbstractRouteHandler {
     }
 
     private void getAll(RoutingContext context) {
-        sendJsonResponse(context, "/filter_master.json");
+        sendJsonResponseFromFile(context, "filter_master.json");
     }
 
 }
