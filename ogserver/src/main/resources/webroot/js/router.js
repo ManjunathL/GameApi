@@ -10,7 +10,9 @@ define([
         'products/:categories/:subcategories': 'products',
         'product/:id': 'product',
         'user_profile': 'user_profile',
-        'consult': 'consult'
+        'consult': 'consult',
+        'stories': 'stories',
+        'story/:id': 'story'
     }
 
   });
@@ -59,6 +61,22 @@ define([
           new ConsultPage().render();
       });
     });
+      router.on('route:stories', function (actions) {
+      require(['views/story/stories'], function (StoriesPage) {
+          new StoriesPage().render();
+      });
+    });
+      router.on('route:story', function (storyId) {
+          require(['views/story/full_story'], function (FullStoryPage) {
+
+              var options = {
+                  model: {
+                      "id": storyId
+                  }
+              };
+              new FullStoryPage(options).render();
+          });
+      });
     Backbone.history.start();
   };
   return {

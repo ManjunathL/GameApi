@@ -14,14 +14,15 @@ define([
         users: [],
         el: '.page',
         ref: MGF.rootRef,
-        renderWithUserProfCallback: function(userProfData) {
-            $(this.el).html(_.template(UserProfileTemplate)({'userProfile': userProfData}));
-            console.log(userProfData);
+        renderWithUserProfCallback: function(userProfData,provider) {
+            $(this.el).html(_.template(UserProfileTemplate)({
+                'userProfile': userProfData,
+                'provider': provider
+            }));
         },
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            console.log('simple render' + JSON.stringify(authData));
         },
         initialize: function() {
             _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit', 'setuserProfileData');
@@ -66,16 +67,77 @@ define([
                     }
                 });
         },
+        changeUserPassword: function () {
+            var authData = this.ref.getAuth();
+            var email = MGF.getEmail(authData);
+
+            this.ref.changePassword({
+                email: email,
+                oldPassword: $('#old_password').val(),
+                newPassword: $('#new_password').val()
+            }, function(error) {
+                if (error) {
+                    switch (error.code) {
+                        case "INVALID_PASSWORD":
+                            $('#error').html("The specified user account password is incorrect.");
+                            $('#error_row').css("display", "block");
+                            console.log("The specified user account password is incorrect.");
+                            break;
+                        case "INVALID_USER":
+                            $('#error').html("The specified user account does not exist.");
+                            $('#error_row').css("display", "block");
+                            console.log("The specified user account does not exist.");
+                            break;
+                        default:
+                            $('#error').html("Error changing password:", error);
+                            $('#error_row').css("display", "block");
+                            console.log("Error changing password:", error);
+                    }
+                } else {
+                    $('#success').html("User password changed successfully!");
+                    $('#success_row').css("display", "block");
+                    console.log("User password changed successfully!");
+                }
+            });
+        },
+        deactivateUserAccount: function () {
+            var authData = this.ref.getAuth();
+            var email = MGF.getEmail(authData);
+
+            this.ref.removeUser({
+                email: email,
+                password: $('#deactivate_password').val()
+            }, function(error) {
+                if (error) {
+                    switch (error.code) {
+                        case "INVALID_USER":
+                            $('#deactiate_error').html("The specified user account does not exist.");
+                            $('#deactiate_error_row').css("display", "block");
+                            console.log("The specified user account does not exist.");
+                            break;
+                        case "INVALID_PASSWORD":
+                            $('#deactiate_error').html("The specified user account password is incorrect.");
+                            $('#deactiate_error_row').css("display", "block");
+                            console.log("The specified user account password is incorrect.");
+                            break;
+                        default:
+                            $('#deactiate_error').html("Error removing user:", error);
+                            $('#deactiate_error_row').css("display", "block");
+                            console.log("Error removing user:", error);
+                    }
+                } else {
+                    $('#deactiate_success').html("User account deleted successfully!");
+                    $('#deactiate_success_row').css("display", "block");
+                    console.log("User account deleted successfully!");
+                }
+            });
+        },
         events: {
-            "click #save_details": "submit"
+            "click #save_details": "submit",
+            "click #set_password": "changeUserPassword",
+            "click #confirm_deactivate": "deactivateUserAccount"
         }
 
-
-        //},
-        //initialize: function() {
-        //    this.users.on("add", this.render, this);
-        //    this.users.on("reset", this.render, this);
-        //}
     });
     return UserProfileView;
 });

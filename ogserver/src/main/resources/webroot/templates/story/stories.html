@@ -1,0 +1,78 @@
+<section class="bg-white menu-spacer">
+    <div class="container-fluid category-banner">
+        <img
+                src="http://cdn.livspace.com//img/banners/furniture/living-room-furniture-sofa-couch.jpg"
+                class="img-responsive"
+                alt="">
+    </div>
+    <div class="container blogs">
+        <div class="col-md-12 col-sm-12 padding15">
+
+            <% if(typeof(stories) !== 'undefined'){ var count = 0; %>
+            <% _.each(stories, function(story){ %>
+
+            <% if(typeof(story.id) !== 'undefined'){ %>
+
+            <% if (count % 2 == 0) { %>
+
+            <div class="row margin50-0">
+                <div class="col-md-7 col-sm-7">
+                    <a href="#story/<%= story.id %>">
+                        <img src="<%= story.blog_main_image %>"
+                             class="img-responsive">
+                    </a>
+                </div>
+                <div class="col-md-5 col-sm-5">
+                    <p class="color-333">
+                        <% var cnt = 0; %>
+                        <% _.each(story.blog_categories, function(cat){ %>
+                        <% if(cnt != 0) { %> | <% } %>
+                        <a><%= cat.name %></a>
+                        <% cnt = cnt + 1; }); %>
+                    </p>
+                    <a>
+                        <h2><%= story.blog_heading %></h2>
+                    </a>
+                    <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
+                    <p class="padding-top15 justify">
+                        <%= story.blog_content %>
+                    </p>
+                    <p class="font-size16">
+                        <a class="color-orange">Read Full Story</a>
+                    </p>
+                </div>
+            </div>
+
+            <% count = count + 1; } else { %>
+            <div class="row margin50-0">
+                <div class="col-md-5 col-sm-5">
+                    <p class="color-333">
+                        <% var cnt = 0; %>
+                        <% _.each(story.blog_categories, function(cat){ %>
+                        <% if(cnt != 0) { %> | <% } %>
+                        <a><%= cat.name %></a>
+                        <% cnt = cnt + 1; }); %>
+                    </p>
+                    <a>
+                        <h2><%= story.blog_heading %></h2>
+                    </a>
+                    <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
+                    <p class="padding-top15 justify">
+                        <%= story.blog_content %>
+                    </p>
+                    <p class="font-size16">
+                        <a class="color-orange">Read Full Story</a>
+                    </p>
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <a>
+                        <img src="<%= story.blog_main_image %>"
+                             class="img-responsive">
+                    </a>
+                </div>
+            </div>
+
+            <% count = count + 1; } } }); } %>
+        </div>
+    </div>
+</section>

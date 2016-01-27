@@ -17,7 +17,7 @@ define(['firebase', 'underscore'], function(firebase, _) {
                     if (snapshot.exists()) {
                         that.userProfile = snapshot.val();
                     }
-                    someFunc(that.userProfile);
+                    someFunc(that.userProfile, authData.provider);
                 });
             } else {
                 someFunc(null);
