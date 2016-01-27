@@ -220,9 +220,8 @@
                                                 <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceprice="<%=appliance.price%>">
                                                     <p style="font-size: 14px; height: 40px"><%=appliance.name%></p>
                                             <span style="display: inline-block; height: 160px;">
-                                                <img class="portfolio-box" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>" onclick="toggleColor($(this).next());"/>
-                                                <span class="pe-7s-check <%= $.inArray( appliance.name, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"
-                                                      onclick="toggleColor($(this));"></span>
+                                                <img class="portfolio-box appliance-img" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>"/>
+                                                <span class="pe-7s-check appliance-mark <%= $.inArray( appliance.name, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"></span>
                                             </span>
                                                     <p style="font-size: 14px; margin-top: 10px"><i class="fa fa-inr"></i> <%=appliance.price%></p>
                                                 </li>
