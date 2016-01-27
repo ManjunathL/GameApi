@@ -1,4 +1,4 @@
-define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
+define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebase, _, backbone, LS) {
 
     var rootUrl = "https://sweltering-fire-6356.firebaseio.com/";
     var rootRef = new Firebase(rootUrl);
@@ -40,17 +40,20 @@ define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
                 }
             });
         },
-        addConsultData: function(formData) {
-            var authData = this.rootRef.getAuth();
-            this.rootRef.child("consults/" + authData.uid + "/" + Date.now()).set(formData,
+        addConsultData: function(formData, userId) {
+            var uid = userId ? userId : this.rootRef.getAuth().uid;
+            var that = this;
+            LS.addConsultData(uid, formData); //add to local storage as a backup option
+            this.rootRef.child("consults/" + uid + "/" + Date.now()).set(formData,
                 function(error) {
                     if (error) {
                         console.log("problem in inserting consult data", error);
                     } else {
                         console.log("successfully inserted consult data");
+                        LS.removeConsultData(uid); //cleanup local storage as firebase has already submitted the data
+                        that.pushEvent(uid, formData, that.TYPE_CONSULT);
                     }
                 });
-            this.pushEvent(authData.uid, formData, this.TYPE_CONSULT);
         },
         createProfile: function(userData, profileData, next) {
             this.rootRef.child('user-profiles').child(userData.uid).set(
@@ -164,8 +167,10 @@ define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
         getShortListedItems: function() {
             return this.shortlistedItems;
         },
-        getShortListed: function(id){
-            return _.findWhere(this.shortlistedItems, {id: id});
+        getShortListed: function(id) {
+            return _.findWhere(this.shortlistedItems, {
+                id: id
+            });
         },
         stopListeningForShortlistChanges: function(uid) {
             uid && this.rootRef.child("shortlists").child(uid).off("value");
@@ -187,6 +192,7 @@ define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
                 Backbone.trigger('shortlist.change');
                 if (first) {
                     first = false;
+                    LS.submitAllConsultData(_.bind(that.addConsultData, that));
                     Backbone.trigger('user.change');
                 }
             }, function(error) {
