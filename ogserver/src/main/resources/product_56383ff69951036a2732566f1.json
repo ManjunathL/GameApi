@@ -17,18 +17,6 @@
   "shortlisted": 46,
   "likes": 200,
   "createDt": "04-30-2015",
-  "delivery": {
-    "title": "45 Days Delivery Guarantee ",
-    "details": "templates/common/standard_delivery_45.html"
-  },
-  "warranty": {
-    "title": "5 years warranty",
-    "details": "templates/common/standard_warranty_5.html"
-  },
-  "paymentTerms": {
-    "title": "Payment Terms",
-    "details": "templates/common/standard_payment_terms.html"
-  },
   "pageId": "SJDH478SJD",
   "images": [
     "Albatross_Mapple1_low_erohcx", "Auklet_low_jkp4hr", "bart_Lshaped_BrownOak_CreamOak_dvxktq", "Brambling_Aurbergene_Low_lrs7hs"

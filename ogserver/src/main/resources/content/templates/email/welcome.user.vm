@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to mygubbi!</title>
+</head>
+
+
+<body>
+<center>
+    <h1>Welcome to mugubbi!</h1>
+
+    <br/>
+    Dear $vdata.name,
+    <br/>
+    <br/>
+    We are pleased to welcome you to mygubbi family.
+
+    <br/>
+    <br/>
+    Best wishes<br/>
+    mygubbi team
+</center>
+
+</body>
+</html>

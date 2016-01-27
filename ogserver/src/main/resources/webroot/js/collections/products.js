@@ -102,10 +102,10 @@ define([
 			}
 
 		},
-        getRelatedProduct: function (subcatarr) {
+        getRelatedProducts: function (subcatId) {
          var that = this;
          return _.map(this.filter(function(product){
-             return that.productInSubCategs(product, subcatarr);
+             return product.get("subCategId") == subcatId;
          }), function (product) {return product.toJSON();});
         }
     });

@@ -1,10 +1,30 @@
 {
   "version": "0.0.0a",
+  "jdbc_qa": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
+    "max_pool_size": 4,
+    "user": "admin",
+    "password": "OG$#gubi32"
+  },
+
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/og",
+    "url": "jdbc:mysql://localhost/mg",
     "max_pool_size": 4,
     "user": "root",
-    "password": "1qazxsw2"
+    "password": "root"
+  },
+
+  "datatables":["user_profile", "event_log", "event_errors", "shortlisted", "product", "enquiries"],
+
+  "firebase": {
+    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
+    "loginid": "mygubbi.fbase@gmail.com",
+    "password": "!@#$VGYHasdf435"
+  },
+
+  "cloudinary" :{
+    "url": "cloudinary://492523411154281:Qpr5Vg3klupb-ETRIsj-caLJ5zg@mygubbi"
   }
 }

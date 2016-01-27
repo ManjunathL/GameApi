@@ -9,10 +9,11 @@ define([
     'text!templates/product/filter.html',
     'collections/products',
     'collections/categories',
+    'collections/subcategories',
     'models/filter',
     'models/filterMaster',
     'mgfirebase'
-], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, Filter, FilterMaster, MGF) {
+], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         products: null,
@@ -24,6 +25,7 @@ define([
             this.filter = new Filter();
             this.filterMaster = new FilterMaster();
             this.categories = new Categories();
+            this.subCategories = new subCategories();
             this.filter.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'clearShortlisted', 'markShortlisted', 'render');
@@ -31,18 +33,25 @@ define([
         render: function() {
 
             var that = this;
-
             if (!this.filterMaster.get('price_ranges')) {
                 this.filterMaster.fetch({
                     success: function() {
-                        that.fetchCategoriesAndRender();
+                        if(typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null){
+                            that.fetchProductAndRender();
+                        }else{
+                            that.fetchCategoriesAndRender();
+                        }
                     },
                     error: function(model, response, options) {
                         console.log("couldn't fetch filter master - " + response);
                     }
                 });
             } else {
-                this.fetchCategoriesAndRender();
+                if(typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null){
+                    that.fetchProductAndRender();
+                }else{
+                    this.fetchCategoriesAndRender();
+                }
             }
 
         },
@@ -55,7 +64,6 @@ define([
             var subCategory = '';
 
             var selectedSubCategoriesList = {};
-
             if (that.categories.isEmpty()) {
                 that.categories.fetch({
                     success: function() {
@@ -65,7 +73,7 @@ define([
                         selectedSubCategoriesList = selectedCategory.toJSON().subCategories;
 
                         that.filter.set({
-                            'selectedSubCategoriesList': selectedCategory.toJSON().subCategories
+                            'selectedSubCategoriesList': selectedCategory.toJSON().subCategories.toJSON()
                         }, {
                             silent: true
                         });
@@ -120,25 +128,8 @@ define([
                                 silent: true
                             });
 
-
+                            that.fetchProductAndRender();
                         }
-
-                        if (that.products.isEmpty()) {
-                            that.products.fetch({
-                                data: {
-                                    "categories": that.model.selectedCategories,
-                                    "searchTerm": that.model.searchTerm
-                                },
-                                success: function() {
-                                    that.markShortlisted();
-                                    that.productFilter();
-                                },
-                                error: function(model, response, options) {
-                                    console.log("error from products fetch - " + response);
-                                }
-                            });
-                        }
-
                     },
                     error: function(model, response, options) {
                         console.log("couldn't fetch categories - " + response);
@@ -161,12 +152,87 @@ define([
                 product.set('user_shortlisted', false);
             });
         },
+        fetchProductAndRender: function() {
+            var that = this;
+            if (that.products.isEmpty()) {
+                that.products.fetch({
+                    data: {
+                        "categories": that.model.selectedCategories,
+                        "searchTerm": that.model.searchTerm
+                    },
+                    success: function() {
+                        that.markShortlisted();
+                        if(typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null){
+                            that.getProductSubcategories();
+                        }
+                        that.productFilter();
+                    },
+                    error: function(model, response, options) {
+                        console.log("error from products fetch - " + response);
+                    }
+                });
+            }else{
+                that.productFilter();
+            }
+        },
+        getProductSubcategories: function(){
+            var that = this;
+            window.filter = that.filter;
+
+            var subcatIds = new Array();
+            var filterIds = new Array();
+            var subCategorynames = new Array();
+
+            var selectedSubCategoriesList = {};
+
+            var subcategoryarr = [];
+            that.products.each(function(product){
+                subcategoryarr.push({id: product.get('subCategId'), name: product.get('subCateg')});
+            });
+
+            that.filter.set({
+                'selectedSubCategoriesList': _.uniq(subcategoryarr,false,function(e){ return e.id; })
+            }, {
+                silent: true
+            });
+            that.filter.set({
+                'selectedFiltersName': subCategorynames
+            }, {
+                silent: true
+            });
+
+            that.filter.set({
+                'filterIds': filterIds
+            }, {
+                silent: true
+            });
+
+            that.filter.set({
+                'subcatIds': subcatIds
+            }, {
+                silent: true
+            });
+
+            var priceRangeIds = new Array();
+            that.filter.set({
+                'priceRangeIds': priceRangeIds
+            }, {
+                silent: true
+            });
+
+            var styleIds = new Array();
+            that.filter.set({
+                'styleIds': styleIds
+            }, {
+                silent: true
+            });
+        },
         productFilter: function() {
 
             var that = this;
 
             if (typeof(that.filter.get('selectedSubCategoriesList')) !== 'undefined') {
-                var selectedSubCategoriesList = that.filter.get('selectedSubCategoriesList').toJSON();
+                var selectedSubCategoriesList = that.filter.get('selectedSubCategoriesList');
                 that.filter.set({
                     'filterflag': '1'
                 }, {
@@ -188,7 +254,6 @@ define([
             var selectedSubcatIds = that.filter.get('subcatIds');
             var selectedPriceRangeIds = that.filter.get('priceRangeIds');
             var selectedStyleIds = that.filter.get('styleIds');
-
 
             var minPrice = '';
             var maxPrice = '';
@@ -275,7 +340,6 @@ define([
                     silent: true
                 });
             }
-
             var compiledTemplate = _.template(productPageTemplate);
             $(that.el).html(compiledTemplate({
                 "collection": filteredProducts,

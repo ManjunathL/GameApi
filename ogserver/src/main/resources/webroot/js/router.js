@@ -9,6 +9,7 @@ define([
         routes: {
             '': 'dashboard',
             'products/:categories/:subcategories': 'products',
+            'product_search/:searchTerm': 'products-search',
             'product/:id': 'product',
             'user_profile': 'user_profile',
             'consult': 'consult',
@@ -35,6 +36,16 @@ define([
                         "sortBy": sortBy,
                         "sortDir": sortDir,
                         "layout": layout
+                    }
+                };
+                VM.create("productListing", ProductPage, options).render();
+            });
+        });
+        router.on('route:products-search', function(searchTerm) {
+            require(['views/product/page'], function(ProductPage) {
+                var options = {
+                    model: {
+                        "searchTerm": searchTerm
                     }
                 };
                 VM.create("productListing", ProductPage, options).render();

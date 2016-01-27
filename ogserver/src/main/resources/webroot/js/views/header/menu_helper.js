@@ -428,6 +428,35 @@ define([
                     $('.search_suggest').slideUp();
                 });
 
+                /* Search on menu bar Start */
+                 $('.search-ico').click(function() {
+                    var isMobile = window.matchMedia("only screen and (max-width: 920px)");
+                    if (isMobile.matches) {
+                       $('#main-lg-ico').css("position","relative");
+                       $('#sb-search-duplicate').toggle('slide',{ direction: 'Right'},500);
+                    }else{
+                        $('#bs-example-navbar-collapse-1').css("position","relative");
+                        $('#sb-search').toggle('slide',{ direction: 'Right'},500);
+                    }
+                });
+
+                $('.sb-search-input').keyup(function() {
+                    var char = $(this).val().length;
+                    if (char >= 3) {
+                        $('.sb-search_suggest').slideDown();
+                    } else {
+                        $('.sb-search_suggest').slideUp();
+                    }
+                });
+                 $('.sb-search-txt').click(function() {
+                    $('.sb-search-input').val($(this).text());
+                    window.location.href = 'https://localhost:8000/#product_search/'+encodeURIComponent($(this).text());
+                    $('.sb-search_suggest').slideUp();
+                 });
+
+
+                /* Search on menu bar End  */
+
                 $("#forgot_password").on('hidden.bs.modal', function() {
                     $('.modal_success_msg').css('display', 'none');
                     $('.modal_error_msg').css('display', 'none');
@@ -442,11 +471,17 @@ define([
                 });
 
                 $('#fb-btn').click(function() {
+
                     window.fbButton = $(this);
+                    setTimeout(function () {
                     window.fbButton.button('loading');
+
                     that.ref.authWithOAuthPopup("facebook", that.authHandler, {
                         scope: "email"
                     });
+                    window.close();
+
+                    }, 3000);
                 });
 
                 /*
