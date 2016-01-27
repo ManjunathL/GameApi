@@ -35,7 +35,7 @@ public class ProductHandler extends AbstractRouteHandler
         String subCategory = context.request().getParam("subcategory");
         if (StringUtils.isEmpty(subCategory))
         {
-            JsonObject params = new JsonObject().put("category", context.request().getParam("category"));
+            JsonObject params = new JsonObject().put("category", context.request().getParam("categories"));
             this.fetchProductsAndSend(context, "product.select.category", params);
         }
         else
