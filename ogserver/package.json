@@ -10,7 +10,8 @@
   "scripts": {
     "start": "http-server src/main/resources/webroot -a 0.0.0.0 -p 8000 -c-1 -S",
     "prestart": "npm install",
-    "postinstall": "bower install --allow-root"
+    "install": "bower install --allow-root",
+    "postinstall": "gulp"
   },
   "main": "build/server",
   "engines": {
@@ -22,6 +23,10 @@
   },
   "optionalDependencies": {},
   "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-cssnano": "^2.1.0",
+    "gulp-uglify": "^1.5.1",
     "http-server": "^0.8.5"
   }
 }
