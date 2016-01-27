@@ -29,7 +29,7 @@ if (!JavaVersion.current().java8Compatible) {
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
 	manifest {
-        attributes 'Implementation-Title': 'myGubbi Java Server',
+        attributes 'Implementation-Title': 'mygubbi Java Server',
         	'Implementation-Version': version,
         	'Main-Class': 'com.mygubbi.ServerVerticle'
     }
