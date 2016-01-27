@@ -37,10 +37,11 @@ define([
             var that = this;
             window.custom_product = that.custom_product;
 
-            if (!this.product.get('id')) {
-                this.product.set('id', this.model.id);
+            if (!this.product.get('productId')) {
+                this.product.set('productId', this.model.id);
                 this.product.fetch({
                     success: function (response) {
+                    console.log(response);
                         that.markShortlisted();
                         that.respond();
                     }
@@ -50,7 +51,7 @@ define([
             }
         },
         markShortlisted: function() {
-            var shortlisted = MGF.getShortListed(this.product.get('id'));
+            var shortlisted = MGF.getShortListed(this.product.get('productId'));
             if (shortlisted) {
                 this.product.set({user_shortlisted: true}, {silent: true});
                 this.custom_product = new CustomProduct(shortlisted.custom_selections);
@@ -65,7 +66,7 @@ define([
         respond: function() {
             var that = this;
 
-            var selectedSubCategory = that.product.get('subCategId');
+            var selectedSubCategory = that.product.get('subcategory');
 
 
             that.getRelatedProducts(selectedSubCategory).then(function() {
@@ -123,7 +124,7 @@ define([
                     "relatedProducts": _.uniq(that.relatedProducts),
                     "custom_product":that.custom_product
                 }));
-
+console.log(that.product.toJSON());
                 var compiledJsTemplate = _.template(helperJsTemplate);
                 $(that.el).append(compiledJsTemplate({
                     "product": that.product.toJSON()
@@ -138,7 +139,7 @@ define([
                 if (that.Products.isEmpty()) {
                     that.Products.fetch({
                         data: {
-                            "categories": that.product.get('categ'),
+                            "categories": that.product.get('category'),
                             "searchTerm": selectedSubCategory
                         },
                         success: function() {
@@ -173,7 +174,7 @@ define([
         toggleShortListProduct: function(e) {
             e.preventDefault();
             var currentTarget = $(e.currentTarget);
-            var productId = this.product.get('id');
+            var productId = this.product.get('productId');
             var alreadyShortlisted = this.product.get("user_shortlisted");
             var that = this;
 

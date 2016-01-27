@@ -6,18 +6,18 @@
         <div class="col-md-7 list-img col-7-img">
             <div class="row margin15-0 position-relative overflow-hidden">
 
-                <a href="#product/<%= product.id %>">
+                <a href="#product/<%= product.productId %>">
                     <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
                 </a>
                 <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
                     <div class="listli">
-                        <a href="#product/<%= product.id %>">
+                        <a href="#product/<%= product.productId %>">
                             <span class="glyph fa fa-info"></span>
                             <!--<span class="list-txt">know more</span>-->
                         </a>
                     </div>
                     <div class="listli">
-                        <a class="shortlistable-item" href="#" data-element="<%=product.id%>">
+                        <a class="shortlistable-item" href="#" data-element="<%=product.productId%>">
                             <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
                             <span class="list-txt">shortlist</span>
                         </a>
@@ -61,8 +61,8 @@
                 </p>
             </div>
             <div class="font-size18 margin-top20 dimsn">
-                <span class="dim">Dimensions (H x W x D) :</span>
-                <%= product.h +" x "+ product.w +" x "+ product.d %>
+                <span class="dim">Dimension :</span>
+                <%= product.dimension %>
             </div>
 
 
@@ -80,18 +80,18 @@
         <div class="col-md-6 col-sm-6 portfolio-item">
             <div class="portfolio-box overflow-hidden">
                 <div class="row margin0 position-relative">
-                    <a href="#product/<%= product.id %>" class="portfolio-link">
+                    <a href="#product/<%= product.productId %>" class="portfolio-link">
                         <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
                     </a>
                     <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
                         <div class="listli">
-                            <a href="#product/<%= product.id %>">
+                            <a href="#product/<%= product.productId %>">
                                 <span class="glyph fa fa-info"></span>
                                 <!--<span class="list-txt">know more</span>-->
                             </a>
                         </div>
                         <div class="listli">
-                            <a class="shortlistable-item" data-element="<%=product.id%>" href="#">
+                            <a class="shortlistable-item" data-element="<%=product.productId%>" href="#">
                                 <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
                                 <span class="list-txt"><%=product.user_shortlisted ? 'shortlisted' : 'shortlist'%></span>
                             </a>

@@ -43,6 +43,8 @@ define([
         });
         router.on('route:products-search', function(searchTerm) {
             require(['views/product/page'], function(ProductPage) {
+            console.log('searchTerm');
+            console.log(searchTerm);
                 var options = {
                     model: {
                         "searchTerm": searchTerm
@@ -52,6 +54,7 @@ define([
             });
         });
         router.on('route:product', function(productId) {
+        console.log(productId);
             require(['views/product/details'], function(ProductDetailPage) {
                 var options = {
                     model: {

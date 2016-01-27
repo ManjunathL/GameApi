@@ -128,7 +128,7 @@ define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
         },
         addShortlistProduct: function(product) {
             var that = this;
-            var productId = product.id;
+            var productId = product.productId;
             var authData = this.rootRef.getAuth();
             return new Promise(function(resolve, reject) {
                 that.rootRef.child("shortlists").child(authData.uid).child(productId).set(

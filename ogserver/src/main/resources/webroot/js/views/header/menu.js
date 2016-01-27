@@ -61,6 +61,9 @@ define([
                 "resultName": "sofas by material",
                 "query": "/api/products/search/sofa+cum+bed"
             }, {
+                "resultName": "L Shaped Kitchen",
+                "query": "/api/products/search/L Shaped Kitchen"
+            }, {
                 "resultName": "sofa set",
                 "query": "/api/products/search/sofa+cum+bed"
             }, {
