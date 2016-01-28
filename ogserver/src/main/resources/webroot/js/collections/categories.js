@@ -24,6 +24,16 @@ define([
         });
         return result;
     },
+    getSubCategoryBySubCategoryName: function (name) {
+        var result = null;
+        this.each(function (model) {
+          var subCategory = model.get('subCategories').getBySubcategoryName(name);
+          if (subCategory) {
+              result = subCategory;
+          }
+        });
+        return result;
+    },
     parse: function(response) {
       _.each(response, function(category){
         category.subCategories = new SubCategories(category.subCategories);

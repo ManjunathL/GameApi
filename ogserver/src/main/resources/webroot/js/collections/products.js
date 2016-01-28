@@ -45,7 +45,7 @@ define([
     		this.sort();
 		},
 		getProduct: function (id) {
-		    return this.find(function(product){ return product.get('id') === id; });
+		    return this.find(function(product){ return product.get('productId') === id; });
 		},
 		filterByPrice:function (minPrice,maxPrice){
 		    var that = this;
@@ -83,7 +83,7 @@ define([
 
 		productInSubCategs: function (product, subCategoryIds) {
 			for (var i=0; i < subCategoryIds.length; i++) {
-				if (product.get("subCategId") == subCategoryIds[i])
+				if (product.get("subcategory") == subCategoryIds[i])
 					return true;
 			}
 
@@ -105,7 +105,7 @@ define([
         getRelatedProducts: function (subcatId) {
          var that = this;
          return _.map(this.filter(function(product){
-             return product.get("subCategId") == subcatId;
+             return product.get("subcategory") == subcatId;
          }), function (product) {return product.toJSON();});
         }
     });

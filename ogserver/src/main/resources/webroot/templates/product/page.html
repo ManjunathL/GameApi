@@ -550,16 +550,18 @@
         }else {
             var filterArr = filter.get('filterIds');
             var filterNameArr = filter.get('selectedFiltersName');
-            var subcatArr = filter.get('subcatIds');
+            var subcatArr = filter.get('subcatNames');
 
 
             filterArr.push(id);
             filterNameArr.push(title);
+
             id = id.substring(0, id.length-3);
-            subcatArr.push(id);
+            subcatArr.push(title);
+
             filter.set({'filterIds':filterArr});
             filter.set({'selectedFiltersName':filterNameArr});
-            filter.set({'subcatIds':subcatArr});
+            filter.set({'subcatNames':subcatArr});
             filter.trigger('change');
         }
     }
@@ -641,6 +643,7 @@
         var index = filternameArr.indexOf(filtername);
 
         var removeFilterId = $('[title="' + filtername + '"]').attr('id');
+        var removeFilterTitle = $('[title="' + filtername + '"]').attr('title');
         var substring = removeFilterId.substring(removeFilterId.length-3, removeFilterId.length);
         removeFilterId = removeFilterId.substring(0, removeFilterId.length-3);
 
@@ -652,12 +655,12 @@
 
             if(substring == 's_c'){
 
-                var subcatArr = filter.get('subcatIds');
-                var subcatIndex = subcatArr.indexOf(removeFilterId);
+                var subcatArr = filter.get('subcatNames');
+                var subcatIndex = subcatArr.indexOf(removeFilterTitle);
                 if(subcatIndex > -1){
                     subcatArr.splice(subcatIndex,1);
                 }
-                filter.set({'subcatIds':subcatArr});
+                filter.set({'subcatNames':subcatArr});
 
             }else if(substring == 'p_r'){
 
@@ -686,7 +689,7 @@
     function removeAllFilters(){
         var filternameArr = filter.get('selectedFiltersName');
         var filterIdArr = filter.get('filterIds');
-        var subcatArr = filter.get('subcatIds');
+        var subcatArr = filter.get('subcatNames');
         var price_rangeArr = filter.get('priceRangeIds');
         var styleArr = filter.get('styleIds');
 
@@ -698,7 +701,7 @@
 
         filter.set({'filterIds':filterIdArr});
         filter.set({'selectedFiltersName':filternameArr});
-        filter.set({'subcatIds':subcatArr});
+        filter.set({'subcatNames':subcatArr});
         filter.set({'priceRangeIds':price_rangeArr});
         filter.set({'styleIds':styleArr});
 

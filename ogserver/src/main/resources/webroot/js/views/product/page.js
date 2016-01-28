@@ -88,7 +88,10 @@ define([
                             silent: true
                         });
 
+/*
                         subCategory = that.categories.getSubCategoryBySubCategoryCode(selectedSubCategories);
+*/
+                        subCategory = that.categories.getSubCategoryBySubCategoryName(selectedSubCategories);
 
                         if (subCategory) {
                             var subCategorynames = new Array();
@@ -99,17 +102,17 @@ define([
                                 silent: true
                             });
                             var filterIds = new Array();
-                            filterIds.push(subCategory.toJSON().id);
+                            filterIds.push(subCategory.toJSON().name);
                             that.filter.set({
                                 'filterIds': filterIds
                             }, {
                                 silent: true
                             });
 
-                            var subcatIds = new Array();
-                            subcatIds.push(subCategory.toJSON().id);
+                            var subcatNames = new Array();
+                            subcatNames.push(subCategory.toJSON().name);
                             that.filter.set({
-                                'subcatIds': subcatIds
+                                'subcatNames': subcatNames
                             }, {
                                 silent: true
                             });
@@ -144,7 +147,7 @@ define([
             var shortlistedItems = MGF.getShortListedItems();
             var that = this;
             _.each(shortlistedItems, function(shortlistedProduct) {
-                that.products.getProduct(shortlistedProduct.id).set('user_shortlisted', true);
+                that.products.getProduct(shortlistedProduct.productId).set('user_shortlisted', true);
             });
         },
         clearShortlisted: function() {
@@ -179,7 +182,7 @@ define([
             var that = this;
             window.filter = that.filter;
 
-            var subcatIds = new Array();
+            var subcatNames = new Array();
             var filterIds = new Array();
             var subCategorynames = new Array();
 
@@ -187,11 +190,12 @@ define([
 
             var subcategoryarr = [];
             that.products.each(function(product){
-                subcategoryarr.push({id: product.get('subCategId'), name: product.get('subCateg')});
+                //subcategoryarr.push({id: product.get('subCategId'), name: product.get('subCateg')});
+                subcategoryarr.push({name: product.get('subcategory')});
             });
 
             that.filter.set({
-                'selectedSubCategoriesList': _.uniq(subcategoryarr,false,function(e){ return e.id; })
+                'selectedSubCategoriesList': _.uniq(subcategoryarr,false,function(e){ return e.name; })
             }, {
                 silent: true
             });
@@ -208,7 +212,7 @@ define([
             });
 
             that.filter.set({
-                'subcatIds': subcatIds
+                'subcatNames': subcatNames
             }, {
                 silent: true
             });
@@ -251,7 +255,7 @@ define([
             var filterApplied = that.filter.get('noFilterApplied');
 
             var selectedfilterIds = that.filter.get('filterIds');
-            var selectedSubcatIds = that.filter.get('subcatIds');
+            var selectedSubcatNames = that.filter.get('subcatNames');
             var selectedPriceRangeIds = that.filter.get('priceRangeIds');
             var selectedStyleIds = that.filter.get('styleIds');
 
@@ -308,11 +312,13 @@ define([
                 that.products.sortBy(sortBy, sortDir);
             }
 
-            if((typeof(selectedSubcatIds) !== 'undefined') && (selectedSubcatIds.length != 0)) {
-                var filteredProducts = that.products.filterBySubcat(selectedSubcatIds);
+
+            if((typeof(selectedSubcatNames) !== 'undefined') && (selectedSubcatNames.length != 0)) {
+                var filteredProducts = that.products.filterBySubcat(selectedSubcatNames);
             }else {
                 filteredProducts = that.products.toJSON();
             }
+
 
             if(selectedPriceRangeIds.length != 0){
                 if(typeof(filteredProducts) == 'undefined'){
@@ -340,6 +346,7 @@ define([
                     silent: true
                 });
             }
+
             var compiledTemplate = _.template(productPageTemplate);
             $(that.el).html(compiledTemplate({
                 "collection": filteredProducts,
@@ -377,6 +384,7 @@ define([
                     product.set('user_shortlisted', false);
                 });
             } else {
+            console.log(product.toJSON());
                 MGF.addShortlistProduct(product.toJSON()).then(function() {
                     product.set('user_shortlisted', true);
                 });
