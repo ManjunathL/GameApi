@@ -2,66 +2,80 @@
   {
     "name": "Living & Dining",
     "id": "livingndining",
+    "code": "livingndining",
     "subCategories": [
       {
         "name": "Entertainment Unit",
-        "id": "entunit"
+        "id": "entunit",
+        "code": "entunit"
       },
       {
         "name": "Shoe Rack",
-        "id": "shoerack"
+        "id": "shoerack",
+        "code": "shoerack"
       },
       {
         "name": "Crockery Unit",
-        "id": "crockunit"
+        "id": "crockunit",
+        "code": "crockunit"
       }
     ]
   },
   {
     "name": "Kitchen",
     "id": "kitchen",
+    "code": "kitchen",
     "minPriceLimit":0,
     "maxPriceLimit":1000000,
     "subCategories": [
       {
         "name": "L Shaped Kitchen",
-        "id": "lshapedk"
+        "id": "lshapedk",
+        "code": "lshapedk"
       },
       {
         "name": "U Shaped Kitchen",
-        "id": "ushapedk"
+        "id": "ushapedk",
+        "code": "ushapedk"
       },
       {
         "name": "Straight Kitchen",
-        "id": "straightk"
+        "id": "straightk",
+        "code": "straightk"
       },
       {
         "name": "Parallel Kitchen",
-        "id": "parallelk"
+        "id": "parallelk",
+        "code": "parallelk"
       }
     ]
   },
   {
     "name": "Bedroom",
     "id": "bedroom",
+    "code": "bedroom",
     "minPriceLimit":0,
     "maxPriceLimit":400000,
     "subCategories": [
       {
         "name": "Wardrobe",
-        "id": "wardrobe"
+        "id": "wardrobe",
+        "code": "wardrobe"
       },
       {
         "name": "Study Table",
-        "id": "studytable"
+        "id": "studytable",
+        "code": "studytable"
       },
       {
         "name": "Side Table",
-        "id": "sidetable"
+        "id": "sidetable",
+        "code": "sidetable"
       },
       {
         "name": "Book Rack",
-        "id": "bookrack"
+        "id": "bookrack",
+        "code": "bookrack"
       }
     ]
   }
