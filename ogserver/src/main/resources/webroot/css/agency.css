@@ -600,6 +600,10 @@ button {
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
+.user_profile .portfolio-box {
+    cursor: default;
+}
+
 .deactivate_account, .change_password {
     display: none;
     cursor: pointer;
@@ -607,11 +611,17 @@ button {
 
 .edit_mode {
     display: none;
+    cursor: text;
+}
+
+.view_mode {
+    cursor: default;
 }
 
 .edit_icon {
     position: absolute;
     padding: 0px 20px 20px;
+    cursor: pointer;
 }
 
 .edit_icon:hover {
@@ -792,12 +802,16 @@ button {
     color: #808080;
 }
 
-.color-orange{
+.color-orange {
     color: #f1591f !important;
 }
 
-.color-333{
+.color-333 {
     color: #333 !important;
+}
+
+.error-class {
+    color: #e60000 !important;
 }
 
 .width100 {
@@ -862,7 +876,7 @@ button {
 }
 
 .font-size12 {
-    font-size: 12px;
+    font-size: 12px !important;
 }
 
 .font-size16 {
@@ -927,6 +941,22 @@ button {
     position: absolute;
 }
 
+.padding0 {
+    padding: 0px!important;
+}
+
+.padding8 {
+    padding: 8px;
+}
+
+.padding10 {
+    padding: 10px !important;
+}
+
+.padding15 {
+    padding: 15px !important;
+}
+
 .padding0-20 {
     padding: 0px 20px;
 }
@@ -945,6 +975,10 @@ button {
 
 .padding20-0 {
     padding: 20px 0px;
+}
+
+.padding25-15 {
+    padding: 25px 15px;
 }
 
 .padding20-20 {
@@ -1024,18 +1058,6 @@ button {
     padding: 20px 0 10px 0;
 }
 
-.padding0 {
-    padding: 0px!important;
-}
-
-.padding8 {
-    padding: 8px;
-}
-
-.padding10 {
-    padding: 10px !important;
-}
-
 .margin_auto {
     margin: auto !important;
 }
@@ -1044,13 +1066,20 @@ button {
     margin: 0px !important;
 }
 
-
 .margin0-10 {
     margin: 0 10px !important;
 }
 
 .margin15-0 {
     margin: 15px 0px !important;
+}
+
+.margin50-0 {
+    margin: 50px 0px !important;
+}
+
+.margin25-0-0 {
+    margin: 25px 0px 0px !important;
 }
 
 .margin-left-0 {
@@ -1064,12 +1093,20 @@ button {
     margin-right: 5px !important;
 }
 
-.margin-top20 {
-    margin-top: 20px !important;
+.margin-top0 {
+    margin-top: 0px !important;
 }
 
 .margin-top10 {
     margin-top: 10px !important;
+}
+
+.margin-top20 {
+    margin-top: 20px !important;
+}
+
+.margin-top25 {
+    margin-top: 25px !important;
 }
 
 .margin-top40 {
@@ -1078,10 +1115,6 @@ button {
 
 .margin-top70 {
     margin-top: 70px;
-}
-
-.margin-top0 {
-    margin-top: 0px !important;
 }
 
 .margin-top5 {
@@ -1334,6 +1367,29 @@ input[type=checkbox] {
     -moz-box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
     box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
     background-color: #f1591f;
+}
+
+.blogs h2, .blogs h3{
+    text-transform: none;
+}
+
+.blogs h5{
+    margin: 0px 0px 5px;
+    text-transform: none;
+    line-height: 1.5;
+}
+
+.date {
+    font-style: italic;
+    font-size: 15px;
+    color: #999;
+}
+
+.date_small {
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 300;
+    color: #999;
 }
 
 .vertical-line {

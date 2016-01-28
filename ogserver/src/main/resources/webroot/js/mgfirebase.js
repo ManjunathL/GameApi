@@ -8,6 +8,8 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
         shortlistedItems: null,
         TYPE_CONSULT: "consult",
         TYPE_USER_ADD: "user.add",
+        TYPE_USER_UPDATE: "user.update",
+        TYPE_USER_REMOVE: "user.remove",
         TYPE_SHORTLIST_PRODUCT_ADD: "shortlist.product.add",
         TYPE_SHORTLIST_PRODUCT_REMOVE: "shortlist.product.remove",
         getUserProfile: function(authData, someFunc) {
@@ -21,7 +23,7 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                     if (snapshot.exists()) {
                         that.userProfile = snapshot.val();
                     }
-                    someFunc(that.userProfile);
+                    someFunc(that.userProfile, authData.provider);
                 });
             } else {
                 someFunc(null);
@@ -68,6 +70,26 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                 }
             );
             this.pushEvent(userData.uid, profileData, this.TYPE_USER_ADD);
+        },
+        updateProfile: function(profileData) {
+
+            var that = this;
+            var uid = this.rootRef.getAuth().uid;
+            return new Promise(function(resolve, reject){
+                that.rootRef.child('user-profiles').child(uid).set(
+                    profileData,
+                    function(error) {
+                        if (error) {
+                            console.log("password profile data could not be saved." + error);
+                            reject && reject();
+                        } else {
+                            console.log("data saved successfully.");
+                            that.pushEvent(uid, profileData, that.TYPE_USER_UPDATE);
+                            resolve();
+                        }
+                    }
+                );
+            });
         },
         getName: function(authData, userProfile) {
             if (userProfile) {

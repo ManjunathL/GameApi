@@ -1,0 +1,17 @@
+{
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://localhost/mg",
+    "max_pool_size": 4,
+    "user": "root",
+    "password": "root"
+  },
+
+  "firebase": {
+    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
+    "loginid": "mygubbi.fbase@gmail.com",
+    "password": "!@#$VGYHasdf435",
+    "processEvents": false
+  }
+
+}

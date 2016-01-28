@@ -1,0 +1,30 @@
+{
+  "version": "0.0.0a",
+
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://localhost/mg",
+    "max_pool_size": 4,
+    "user": "root",
+    "password": "root"
+  },
+
+  "services": {
+    "sequential":["com.mygubbi.support.LogServiceVerticle", "com.mygubbi.db.DatabaseService"],
+    "parallel":["com.mygubbi.db.QueryPrepareService", "com.mygubbi.db.SequenceIdGenerator", "com.mygubbi.apiserver.ApiServerVerticle",
+      "com.mygubbi.si.firebase.FirebaseService", "com.mygubbi.catalog.ProductManagementService"]
+  },
+
+  "datatables":["user_profile", "event_log", "event_errors", "shortlisted", "product", "enquiries"],
+
+  "firebase": {
+    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
+    "loginid": "mygubbi.fbase@gmail.com",
+    "password": "!@#$VGYHasdf435",
+    "processEvents": true
+  },
+
+  "cloudinary" :{
+    "url": "cloudinary://492523411154281:Qpr5Vg3klupb-ETRIsj-caLJ5zg@mygubbi"
+  }
+}

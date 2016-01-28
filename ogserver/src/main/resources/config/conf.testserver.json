@@ -1,14 +1,4 @@
 {
-  "version": "0.0.0a",
-
-  "jdbc_local": {
-    "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/og",
-    "max_pool_size": 4,
-    "user": "root",
-    "password": "password"
-  },
-
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
@@ -16,8 +6,6 @@
     "user": "admin",
     "password": "OG$#gubi32"
   },
-
-  "datatables":["user_profile", "event_log", "event_errors"],
 
   "firebase": {
     "fb_url": "https://sweltering-fire-6356.firebaseio.com",

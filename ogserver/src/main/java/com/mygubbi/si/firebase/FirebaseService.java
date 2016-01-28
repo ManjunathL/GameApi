@@ -8,7 +8,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.crm.NewEnquiryProcessor;
 import com.mygubbi.si.data.EventAcknowledger;
-import com.mygubbi.user.UserRegistrationProcessor;
+import com.mygubbi.user.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
@@ -25,16 +25,11 @@ public class FirebaseService extends AbstractVerticle
 
     protected FirebaseEventListener listener;
     protected Firebase fbRef;
-    private boolean startEventListener;
+    private boolean startEventListener = true;
 
     public FirebaseService()
     {
-        this(true);
-    }
 
-    public FirebaseService(boolean startEventListener)
-    {
-        this.startEventListener = startEventListener;
     }
 
     @Override
@@ -66,6 +61,7 @@ public class FirebaseService extends AbstractVerticle
         {
             throw new RuntimeException("Could not find config with key 'firebase'");
         }
+        this.startEventListener = config.getBoolean("processEvents", true);
         this.fbRef = new Firebase(config.getString("fb_url"));
         this.fbRef.authWithPassword(config.getString("loginid"), config.getString("password"), new Firebase.AuthResultHandler()
         {
@@ -87,17 +83,29 @@ public class FirebaseService extends AbstractVerticle
 
     private void setup(Future<Void> startFuture)
     {
-        if (this.startEventListener) this.setupEventListener();
+        if (this.startEventListener)
+        {
+            LOG.info("Setting up event listeners.");
+            this.setupEventListeners();
+        }
+        else
+        {
+            LOG.info("Not setting up event listeners.");
+        }
         this.setupProductUpdateService(startFuture);
     }
 
-    private void setupEventListener()
+    private void setupEventListeners()
     {
         Firebase eventsFbRef = this.fbRef.child("/events");
         EventAcknowledger acknowledger = new FirebaseAcknowledger(eventsFbRef);
         this.listener = new FirebaseEventListener(eventsFbRef, acknowledger);
         this.listener.register(new UserRegistrationProcessor(acknowledger));
+        this.listener.register(new UserProfileUpdateProcessor(acknowledger));
+        this.listener.register(new UserProfileDeleteProcessor(acknowledger));
         this.listener.register(new NewEnquiryProcessor(acknowledger));
+        this.listener.register(new AddToShortlistProcessor(acknowledger));
+        this.listener.register(new RemoveFromShortlistProcessor(acknowledger));
         this.listener.start();
     }
 

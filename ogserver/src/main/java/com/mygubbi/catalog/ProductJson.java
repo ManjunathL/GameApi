@@ -25,7 +25,7 @@ public class ProductJson extends JsonObject
         this.put("category", record.getCategory());
         this.put("subcategory", record.getSubCategory());
         this.put("tags", record.getTags());
-        this.put("designer", "MyGubbi");
+        this.put("designer", "mygubbi");
         this.put("curr", "INR");
         this.put("popularity", 1);
         this.put("relevance", 1);

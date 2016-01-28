@@ -31,7 +31,7 @@ public class QueryPrepareService extends AbstractVerticle
 
 	private void setupQueryMap(Future<Void> startFuture)
 	{
-		vertx.fileSystem().readFile("queries.json", result -> {
+		vertx.fileSystem().readFile("config/queries.json", result -> {
 		    if (result.succeeded()) 
 		    {
 				JsonObject json = new JsonObject(result.result().toString());
