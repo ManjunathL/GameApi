@@ -810,7 +810,7 @@ button {
     color: #333 !important;
 }
 
-.color-red {
+.error-class {
     color: #e60000 !important;
 }
 
@@ -1374,7 +1374,7 @@ input[type=checkbox] {
 }
 
 .blogs h5{
-    margin: 10px 0px 5px;
+    margin: 0px 0px 5px;
     text-transform: none;
     line-height: 1.5;
 }

@@ -15,29 +15,25 @@ define([
 
             var that = this;
 
-            _.map(this.story, function ( res ) {
-                if ( res.id == that.model.id ){
-                    story_obj = res;
-                }else{
-                    return false;
+            this.story.fetch({
+                success: function() {
+                    that.fetchStoryAndRender(that.model.id);
+                },
+                error: function(model, response, options) {
+                    console.log("couldn't fetch story data - " + response);
                 }
             });
 
-            var response = this.story.get(that.model.id);
-            console.log('id : '+ that.model.id);
-            if(response){
-                that.fetchStoryAndRender();
-            }else {
-                console.log("couldn't fetch story data");
-            }
-
         },
-        fetchStoryAndRender: function() {
+        fetchStoryAndRender: function(id) {
             var that = this;
-            var story = that.story;
+            var stories = that.story;
 
-            $(this.el).html(_.template(fullStoryTemplate)({'stories': story.toJSON()}));
-            //console.log('stories : ' + JSON.stringify(stories));
+            $(this.el).html(_.template(fullStoryTemplate)({
+                'stories': stories.toJSON(),
+                'story_id': id
+            }));
+            //console.log('stories : ' + id);
         }
     });
     return FullStoryView;

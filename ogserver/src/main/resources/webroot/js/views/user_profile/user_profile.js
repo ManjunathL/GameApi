@@ -9,29 +9,28 @@ define([
     'bootstrapvalidator',
     'mgfirebase',
     'text!templates/user_profile/user_profile.html'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, UserProfileTemplate ) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, UserProfileTemplate) {
     var UserProfileView = Backbone.View.extend({
-        users: [],
         el: '.page',
         ref: MGF.rootRef,
-        renderWithUserProfCallback: function(userProfData,provider) {
+        renderWithUserProfCallback: function (userProfData, provider) {
             $(this.el).html(_.template(UserProfileTemplate)({
                 'userProfile': userProfData,
                 'provider': provider
             }));
         },
-        render: function() {
+        render: function () {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
-        initialize: function() {
+        initialize: function () {
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
-            _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit', 'setuserProfileData');
+            _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit');
         },
-        handleUserChange: function() {
+        handleUserChange: function () {
             window.location = '#';
         },
-        submit: function(e) {
+        submit: function (e) {
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
@@ -46,32 +45,16 @@ define([
                 "state": $('#user_state').val(),
                 "pinCode": $('#user_pin_code').val()
             };
-
-            var authData = this.ref.getAuth();
             var that = this;
-            if (!authData) {
-                this.ref.authAnonymously(function(error, authData) {
-                    if (error) {
-                        console.log("Login Failed!", error);
-                    } else {
-                        that.setuserProfileData(authData, formData);
-                    }
-                });
-            } else {
-                this.setuserProfileData(authData, formData);
-            }
+            MGF.updateProfile(formData).then(function () {
+                that.render()
+            });
 
         },
-        setuserProfileData: function (authData, formData) {
-            this.ref.child('user-profiles').child(authData.uid).set(formData, function(error){
-                    if (error) {
-                        console.log("problem in inserting user data", error);
-                    } else {
-                        console.log("successfully inserted user data");
-                    }
-                });
-        },
-        changeUserPassword: function () {
+        changeUserPassword: function (e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
             var authData = this.ref.getAuth();
             var email = MGF.getEmail(authData);
 
@@ -79,7 +62,7 @@ define([
                 email: email,
                 oldPassword: $('#old_password').val(),
                 newPassword: $('#new_password').val()
-            }, function(error) {
+            }, function (error) {
                 if (error) {
                     switch (error.code) {
                         case "INVALID_PASSWORD":
@@ -101,17 +84,23 @@ define([
                     $('#success').html("User password changed successfully!");
                     $('#success_row').css("display", "block");
                     console.log("User password changed successfully!");
+                    $('#chng_passwd_form').css("display","none");
                 }
             });
         },
-        deactivateUserAccount: function () {
+        deactivateUserAccount: function (e) {
+
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
             var authData = this.ref.getAuth();
+            var that = this;
             var email = MGF.getEmail(authData);
 
             this.ref.removeUser({
                 email: email,
                 password: $('#deactivate_password').val()
-            }, function(error) {
+            }, function (error) {
                 if (error) {
                     switch (error.code) {
                         case "INVALID_USER":
@@ -132,14 +121,20 @@ define([
                 } else {
                     $('#deactiate_success').html("User account deleted successfully!");
                     $('#deactiate_success_row').css("display", "block");
+                    setTimeout(function () {
+                        that.ref.unauth();
+                        window.location = '#';
+                    }, 3000);
                     console.log("User account deleted successfully!");
+                    $('#dactivate_account_form').css("display","none");
+
                 }
             });
         },
         events: {
             "click #save_details": "submit",
-            "click #set_password": "changeUserPassword",
-            "click #confirm_deactivate": "deactivateUserAccount"
+            "submit #changeUserPasswordForm": "changeUserPassword",
+            "submit #deactivateUserForm": "deactivateUserAccount"
         }
 
     });

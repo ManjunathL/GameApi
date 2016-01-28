@@ -30,7 +30,7 @@ define([
             var stories = that.story;
 
             $(this.el).html(_.template(storiesTemplate)({'stories': stories.toJSON()}));
-            //console.log('stories : ' + JSON.stringify(stories));
+            //console.log('stories : ' + stories.toJSON());
         }
     });
     return StoriesView;

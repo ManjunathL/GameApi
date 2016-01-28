@@ -224,68 +224,70 @@
 
                                     <div id="success_row">
                                         <div class="col-md-12 col-sm-12">
-                                            <p id="success" class="font-size12"></p>
+                                            <p id="success" class="font-size12 align-center"></p>
                                         </div>
                                     </div>
 
                                     <div id="error_row">
                                         <div class="col-md-12 col-sm-12">
-                                            <p id="error" class="color-red font-size12"></p>
+                                            <p id="error" class="error-class font-size12 align-center"></p>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-5 col-sm-5">
-                                            <p>Old Password :</p>
+                                    <div id="chng_passwd_form">
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-5">
+                                                <p>Old Password :</p>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 form-group">
+                                                <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        id="old_password"
+                                                        pattern=".{6,}" required />
+                                            </div>
                                         </div>
-                                        <div class="col-md-7 col-sm-7 form-group">
-                                            <input
-                                                    type="password"
-                                                    class="form-control"
-                                                    id="old_password"
-                                                    pattern=".{6,}" required />
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-md-5 col-sm-5">
-                                            <p>New Password :</p>
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-5">
+                                                <p>New Password :</p>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 form-group">
+                                                <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        id="new_password"
+                                                        pattern=".{6,}" required />
+                                            </div>
                                         </div>
-                                        <div class="col-md-7 col-sm-7 form-group">
-                                            <input
-                                                    type="password"
-                                                    class="form-control"
-                                                    id="new_password"
-                                                    pattern=".{6,}" required />
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-md-5 col-sm-5">
-                                            <p>Confirm Password :</p>
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-5">
+                                                <p>Confirm Password :</p>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 form-group">
+                                                <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        id="confirm_password">
+                                            </div>
                                         </div>
-                                        <div class="col-md-7 col-sm-7 form-group">
-                                            <input
-                                                    type="password"
-                                                    class="form-control"
-                                                    id="confirm_password">
-                                        </div>
-                                    </div>
 
-                                    <div class="row margin-top20 float-right">
-                                        <button
-                                                class="button border1px"
-                                                type="submit"
-                                                id="set_password"
-                                                data-loading-text="<i class='fa fa-spinner fa-spin'></i> Set Password">
-                                            Set Password
-                                        </button>
-                                        <button
-                                                class="button border1px"
-                                                id="cancel_chng_pswd"
-                                                >
-                                            Cancel
-                                        </button>
+                                        <div class="row margin-top20 float-right">
+                                            <button
+                                                    class="button border1px"
+                                                    type="submit"
+                                                    id="set_password"
+                                                    data-loading-text="<i class='fa fa-spinner fa-spin'></i> Set Password">
+                                                Set Password
+                                            </button>
+                                            <button
+                                                    class="button border1px"
+                                                    id="cancel_chng_pswd"
+                                                    >
+                                                Cancel
+                                            </button>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -311,51 +313,58 @@
 
                             <div id="deactiate_success_row">
                                 <div class="col-md-12 col-sm-12">
-                                    <p id="deactiate_success" class="font-size12"></p>
+                                    <p id="deactiate_success" class="font-size12 align-center"></p>
                                 </div>
                             </div>
 
                             <div id="deactiate_error_row">
                                 <div class="col-md-12 col-sm-12">
-                                    <p id="deactiate_error" class="color-red font-size12"></p>
+                                    <p id="deactiate_error" class="error-class font-size12 align-center"></p>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <p>If you deactivate your account all your order history and wishlist will be deleted.</p>
-                            </div>
+                            <div id="dactivate_account_form">
+                                <div class="row">
+                                    <p>If you deactivate your account all your order history and wishlist will be deleted.</p>
+                                </div>
 
-                            <div class="row">
-                                <p>Still if you want to deactivate your account; please click on Confirm Deactivation.</p>
-                            </div>
+                                <div class="row">
+                                    <p>Still if you want to deactivate your account; please click on Confirm Deactivation.</p>
+                                </div>
 
-                            <div class="row" id="dactvate_passwd">
-                                <input
-                                        type="password"
-                                        class="form-control"
-                                        id="deactivate_password"
-                                        placeholder="Please enter your password">
-                            </div>
+                                <form id="deactivateUserForm" name="deactivateUserData" data-toggle="validator" role="form">
 
-                            <div class="row margin-top20 float-right">
-                                <button
-                                        class="button border1px"
-                                        id="deactivate"
-                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> Deactivate Account">
-                                    Deactivate Account
-                                </button>
-                                <button
-                                        class="button border1px"
-                                        id="confirm_deactivate"
-                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> Confirm Deactivation">
-                                    Confirm Deactivation
-                                </button>
-                                <button
-                                        class="button border1px"
-                                        id="cancel_dactvate"
-                                        >
-                                    Cancel
-                                </button>
+                                    <div class="row" id="dactvate_passwd">
+                                        <input
+                                                type="password"
+                                                class="form-control"
+                                                id="deactivate_password"
+                                                placeholder="Please enter your password" required>
+                                    </div>
+
+                                    <div class="row margin-top20 float-right">
+                                        <button
+                                                class="button border1px"
+                                                id="deactivate"
+                                                data-loading-text="<i class='fa fa-spinner fa-spin'></i> Deactivate Account">
+                                            Deactivate Account
+                                        </button>
+                                        <button
+                                                class="button border1px"
+                                                id="confirm_deactivate"
+                                                type="submit"
+                                                data-loading-text="<i class='fa fa-spinner fa-spin'></i> Confirm Deactivation">
+                                            Confirm Deactivation
+                                        </button>
+                                        <button
+                                                class="button border1px"
+                                                id="cancel_dactvate"
+                                                >
+                                            Cancel
+                                        </button>
+                                    </div>
+
+                                </form>
                             </div>
 
                         </div>
