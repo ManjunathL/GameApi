@@ -5,7 +5,7 @@ define([
     'bootstrap',
     'jqueryeasing',
     'text!templates/product/details.html',
-    'text!views/product/details_helper.js',
+    'views/product/details_helper',
     'models/product',
     'models/custom_product',
     'text!templates/product/accessory.html',
@@ -17,7 +17,7 @@ define([
     'slyutil',
     'mgfirebase',
     'consultutil'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, helperJsTemplate, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil) {
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -27,6 +27,7 @@ define([
         Products: null,
         initialize: function() {
             this.product = new ProductModel();
+            window.product = this.product;
             this.custom_product = new CustomProduct();
             this.Products = new ProductCollection();
             this.custom_product.on('change',this.render,this);
@@ -41,7 +42,6 @@ define([
                 this.product.set('productId', this.model.id);
                 this.product.fetch({
                     success: function (response) {
-                    console.log(response);
                         that.markShortlisted();
                         that.respond();
                     }
@@ -124,11 +124,8 @@ define([
                     "relatedProducts": _.uniq(that.relatedProducts),
                     "custom_product":that.custom_product
                 }));
-console.log(that.product.toJSON());
-                var compiledJsTemplate = _.template(helperJsTemplate);
-                $(that.el).append(compiledJsTemplate({
-                    "product": that.product.toJSON()
-                }));
+
+                DetailsHelper.ready(that);
 
             });
 
@@ -169,7 +166,15 @@ console.log(that.product.toJSON());
             "click #consult-submit-btn": "submitConsultButton",
             "submit #consultForm":"submitConsultForm",
             "click .dwf":"slideDelivery",
-            "click .shortlistable-product": "toggleShortListProduct"
+            "click .shortlistable-product": "toggleShortListProduct",
+            "click .appliance-img": 'toggleColorNext',
+            "click .appliance-mark": 'toggleColor'
+        },
+        toggleColorNext: function(e) {
+            DetailsHelper.toggleColorNext(e);
+        },
+        toggleColor: function(e) {
+            DetailsHelper.toggleColor(e);
         },
         toggleShortListProduct: function(e) {
             e.preventDefault();
