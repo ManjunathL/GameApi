@@ -86,7 +86,7 @@
                                 <% if(subcat.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                                id="<%= subcat.id + 's_c' %>"
+                                id="<%= subcat.name + 's_c' %>"
                                 title="<%= subcat.name %>"
                                 onclick="getSubcatId(this.id,this.title)">
                                     <a>
@@ -275,7 +275,7 @@
                                 <% if(subcat.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                        id="<%= subcat.id + 's_c' + 'fil' %>"
+                        id="<%= subcat.name + 's_c' + 'fil' %>"
                         title="<%= subcat.name %>"
                         onclick="getFil(this.id)">
                         <label>

@@ -3322,6 +3322,11 @@ width: 325px!important;
     padding-top:10px;
     padding-bottom:15px;
 }
+
+.share-button{
+    width:57px;
+    height:20px;
+}
 @media (max-width: 991px) {
     .relcontrol{
         margin-top:70px!important;

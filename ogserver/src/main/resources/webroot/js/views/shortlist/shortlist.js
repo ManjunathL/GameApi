@@ -48,7 +48,7 @@ define([
         openConsultPopup: function(e){
             var id = $(e.currentTarget).attr('id');
             var popupid = id.replace('shortlist_consult','');
-            alert(popupid);
+            //alert(popupid);
             $('#consultpop'+popupid).modal('show');
         },
         submitConsultButton: function(){
@@ -74,7 +74,7 @@ define([
             var propertyName = $('#consult_property_name'+formid).val();
             var query = $('#consult_product_name'+formid).val() + " :: " + $('#consult_requirement'+formid).val();
             var floorplan = $("#consult_floorplan"+formid).prop('files')[0];
-console.log(name+' ----- '+email+' ----- '+phone+' ----- '+query+' ----- '+floorplan+' ----- '+propertyName);
+            //console.log(name+' ----- '+email+' ----- '+phone+' ----- '+query+' ----- '+floorplan+' ----- '+propertyName);
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
             $('#consultForm'+formid).hide(100, function() {

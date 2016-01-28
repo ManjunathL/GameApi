@@ -191,7 +191,7 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
         },
         getShortListed: function(id) {
             return _.findWhere(this.shortlistedItems, {
-                id: id
+                productId: id
             });
         },
         stopListeningForShortlistChanges: function(uid) {

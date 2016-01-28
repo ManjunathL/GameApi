@@ -146,6 +146,8 @@ define([
         markShortlisted: function() {
             var shortlistedItems = MGF.getShortListedItems();
             var that = this;
+
+
             _.each(shortlistedItems, function(shortlistedProduct) {
                 that.products.getProduct(shortlistedProduct.productId).set('user_shortlisted', true);
             });

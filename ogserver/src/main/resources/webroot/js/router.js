@@ -56,7 +56,6 @@ define([
             });
         });
         router.on('route:product', function(productId) {
-        console.log(productId);
             require(['views/product/details'], function(ProductDetailPage) {
                 var options = {
                     model: {

@@ -39,9 +39,11 @@ define([
             window.custom_product = that.custom_product;
 
             if (!this.product.get('productId')) {
+                this.product.set('id', this.model.id);
                 this.product.set('productId', this.model.id);
                 this.product.fetch({
                     success: function (response) {
+                    console.log(response);
                         that.markShortlisted();
                         that.respond();
                     }
