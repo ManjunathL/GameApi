@@ -23,7 +23,8 @@ public class ShopifyDataHandler extends AbstractRouteHandler
     {
         String productFile = context.request().getParam("productFile");
         String componentFile = context.request().getParam("componentFile");
-        new ShopifyCatalogConverter(productFile, componentFile).parse();
+        String stylePriceFile = context.request().getParam("stylePriceFile");
+        new ShopifyCatalogConverter(productFile, componentFile, stylePriceFile).parse();
         sendJsonResponseFromFile(context, new JsonObject().put("status" ,"Data loaded").toString());
     }
 }

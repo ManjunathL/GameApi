@@ -1,5 +1,6 @@
 package com.mygubbi.si.catalog;
 
+import com.mygubbi.common.StringUtils;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
@@ -23,37 +24,41 @@ public class ShopifyRecord
     private static final int FINISH = 10;
     private static final int PRICE = 19;
     private static final int IMAGE = 24;
-    private static Map<String, String> categoryMap;
+    private static Map<String, JsonObject> categoryMap;
     private final static Logger LOG = LogManager.getLogger(ShopifyRecord.class);
 
     static
     {
         categoryMap = new HashMap<>();
-        categoryMap.put("L Shaped Kitchen", "Kitchen");
-        categoryMap.put("U Shaped Kitchen", "Kitchen");
-        categoryMap.put("Straight Kitchen", "Kitchen");
-        categoryMap.put("Parallel Kitchen", "Kitchen");
-        categoryMap.put("Wardrobe", "Bedroom");
-        categoryMap.put("Study Table", "Bedroom");
-        categoryMap.put("Side Table", "Bedroom");
-        categoryMap.put("Book Rack", "Bedroom");
-        categoryMap.put("Entertainment Unit", "Living & Dining");
-        categoryMap.put("Shoe Rack", "Living & Dining");
-        categoryMap.put("Crockery Unit", "Living & Dining");
+        categoryMap.put("L Shaped Kitchen", new JsonObject().put("category", "Kitchen").put("categoryId", "kitchen").put("subcategoryId", "lshapedk"));
+        categoryMap.put("U Shaped Kitchen", new JsonObject().put("category", "Kitchen").put("categoryId", "kitchen").put("subcategoryId", "ushapedk"));
+        categoryMap.put("Straight Kitchen", new JsonObject().put("category", "Kitchen").put("categoryId", "kitchen").put("subcategoryId", "straightk"));
+        categoryMap.put("Parallel Kitchen", new JsonObject().put("category", "Kitchen").put("categoryId", "kitchen").put("subcategoryId", "parallelk"));
+
+        categoryMap.put("Wardrobe", new JsonObject().put("category", "Bedroom").put("categoryId", "bedroom").put("subcategoryId", "wardrobe"));
+        categoryMap.put("Study Table", new JsonObject().put("category", "Bedroom").put("categoryId", "bedroom").put("subcategoryId", "studytable"));
+        categoryMap.put("Side Table", new JsonObject().put("category", "Bedroom").put("categoryId", "bedroom").put("subcategoryId", "sidetable"));
+        categoryMap.put("Book Rack", new JsonObject().put("category", "Bedroom").put("categoryId", "bedroom").put("subcategoryId", "bookrack"));
+
+        categoryMap.put("Entertainment Unit", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "entunit"));
+        categoryMap.put("Shoe Rack", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "shoerack"));
+        categoryMap.put("Crockery Unit", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "crockunit"));
     }
 
     private String[] row;
     private JsonArray components;
+    private JsonObject stylePrice;
 
     public ShopifyRecord(String[] row)
     {
-        this(row, null);
+        this(row, null, null);
     }
 
-    public ShopifyRecord(String[] row, ShopifyComponentParser componentParser)
+    public ShopifyRecord(String[] row, ShopifyComponentParser componentParser, ShopifyStylePriceParser stylePriceParser)
     {
         this.row = row;
         if (componentParser != null) this.setComponents(componentParser);
+        if (stylePriceParser != null) this.setStylePrice(stylePriceParser);
     }
 
     public String getId()
@@ -75,14 +80,26 @@ public class ShopifyRecord
     {
         return "WxDxH " + this.row[DIMENSION];
     }
-    public String getSubCategory()
+    public String getSubcategory()
     {
         return this.row[SUBCATEGORY];
     }
+    public String getSubcategoryId()
+    {
+        if (!categoryMap.containsKey(this.getSubcategory())) return null;
+        return categoryMap.get(this.getSubcategory()).getString("subcategoryId");
+    }
     public String getCategory()
     {
-        return categoryMap.get(this.getSubCategory());
+        if (!categoryMap.containsKey(this.getSubcategory())) return null;
+        return categoryMap.get(this.getSubcategory()).getString("category");
     }
+    public String getCategoryId()
+    {
+        if (!categoryMap.containsKey(this.getSubcategory())) return null;
+        return categoryMap.get(this.getSubcategory()).getString("categoryId");
+    }
+
     public String getTags()
     {
         return this.row[TAGS];
@@ -160,5 +177,15 @@ public class ShopifyRecord
             if (components.isEmpty()) LOG.info("components not setup for productid:" + productId);
             this.components = components;
         }
+    }
+
+    private void setStylePrice(ShopifyStylePriceParser stylePriceParser)
+    {
+        this.stylePrice = stylePriceParser.getStylePrice(this.getId(), this.getTitle());
+    }
+
+    public JsonObject getStylePrice()
+    {
+        return this.stylePrice;
     }
 }

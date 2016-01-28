@@ -26,25 +26,30 @@ public class ShopifyCatalogConverter
 
     private String productsFile;
     private String componentsFile;
+    private String stylePriceFile;
     private ShopifyComponentParser componentParser;
+    private ShopifyStylePriceParser stylePriceParser;
 
-    public ShopifyCatalogConverter(String productsFile, String componentsFile)
+    public ShopifyCatalogConverter(String productsFile, String componentsFile, String stylePriceFile)
     {
         this.productsFile = productsFile;
         this.componentsFile = componentsFile;
+        this.stylePriceFile = stylePriceFile;
         this.componentParser = new ShopifyComponentParser(this.componentsFile);
+        this.stylePriceParser = new ShopifyStylePriceParser(this.stylePriceFile);
     }
 
     public void parse()
     {
         this.componentParser.parse();
+        this.stylePriceParser.parse();
 
         CSVReader reader = this.getCsvReader();
         if (reader == null) return;
 
         ProductJson product = null;
 
-        this.getRecord(reader); //Skip the first one
+        this.skipFirstRecord(reader);
         ShopifyRecord record = null;
 
         while((record = this.getRecord(reader)) != null)
@@ -64,6 +69,18 @@ public class ShopifyCatalogConverter
         LOG.info("Products loaded.");
     }
 
+    private void skipFirstRecord(CSVReader reader)
+    {
+        try
+        {
+            reader.readNext(); //Skip the first one
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     private void mergeToProduct(ProductJson product, ShopifyRecord record)
     {
         product.addMFP(record.getMFP());
@@ -72,12 +89,14 @@ public class ShopifyCatalogConverter
 
     private ProductJson createNewProduct(ShopifyRecord record)
     {
+        LOG.info("Record:" + record);
         return new ProductJson(record);
     }
 
     private void storeProduct(ProductJson product)
     {
         if (product == null) return;
+        LOG.info("Storing product:" + product.getString("name"));
         Integer id = LocalCache.getInstance().store(product);
         VertxInstance.get().eventBus().send(ProductManagementService.CREATE_PRODUCT, id,
                 (AsyncResult<Message<String>> result) -> {
@@ -99,7 +118,7 @@ public class ShopifyCatalogConverter
             String[] row = reader.readNext();
             if (row != null)
             {
-                return new ShopifyRecord(row, this.componentParser);
+                return new ShopifyRecord(row, this.componentParser, this.stylePriceParser);
             }
         }
         catch (IOException e)
@@ -137,20 +156,24 @@ public class ShopifyCatalogConverter
 
     public static void main(String[] args)
     {
-        if (args.length != 2)
+        if (args.length != 3)
         {
-            System.out.println("Needs 2 input files - products and components.");
+            System.out.println("Needs 3 input files - products, components and styleprice.");
             return;
         }
         String productsFile = args[0];
         String componentsFile = args[1];
+        String stylePriceFile = args[2];
 
-        VertxInstance.get().deployVerticle(new ServerVerticle(), new DeploymentOptions().setWorker(true), result ->
+//        new ShopifyCatalogConverter(productsFile, componentsFile, stylePriceFile).parse();
+//        if (true) return;
+
+        VertxInstance.get().deployVerticle(new ServerVerticle("config/conf.local.json"), new DeploymentOptions().setWorker(true), result ->
         {
             if (result.succeeded())
             {
                 LOG.info("Server started.");
-                new ShopifyCatalogConverter(productsFile, componentsFile).parse();
+                new ShopifyCatalogConverter(productsFile, componentsFile, stylePriceFile).parse();
             }
             else
             {
