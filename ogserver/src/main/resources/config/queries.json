@@ -1,0 +1,108 @@
+{
+  "queries":
+  [
+	{"id" : "user_profile.insert",
+	 "type" : "insert",
+	 "table": "user_profile",
+	 "query": "insert into user_profile (id, fbid, active, email, profile) values (?, 'A', ?, ?, ?)",
+	 "params": ["id", "fbid", "email", "profile"]
+	 },
+
+	  {"id" : "user_profile.update",
+		  "type" : "update",
+		  "table": "user_profile",
+		  "query": "update user_profile set profile = ? where email = ?",
+		  "params": ["profile", "email"]
+	  },
+
+	  {"id" : "user_profile.remove",
+		  "type" : "update",
+		  "table": "user_profile",
+		  "query": "update user_profile set active = 'I' where email = ?",
+		  "params": ["email"]
+	  },
+
+	{"id" : "user_profile.select.email",
+	 "type" : "select",
+	 "query": "select * from user_profile where email = ?",
+	 "params": ["email"]
+	 },
+
+	{"id" : "event_log.insert",
+	  "type" : "insert",
+	  "table": "event_log",
+	  "query": "insert into event_log (id, fbid, event_type, event_data) values (?, ?, ?, ?)",
+	  "params": ["id", "fbid", "event_type", "event_data"]
+	},
+
+	{"id" : "event_error.insert",
+	  "type" : "insert",
+	  "table": "event_errors",
+	  "query": "insert into event_errors(id, fbid, event_type, event_data, reason) values (?, ?, ?, ?, ?)",
+	  "params": ["id", "fbid", "event_type", "event_data", "reason"]
+	},
+
+	{"id" : "enquiry.insert",
+	  "type" : "insert",
+	  "table": "enquiries",
+	  "query": "insert into enquiries(id, fbid, uid, email, contactNumber, fullName, propertyName, requirements) values (?, ?, ?, ?, ?, ?, ?, ?)",
+	  "params": ["id", "fbid", "uid", "email", "contactNumber", "fullName", "propertyName", "requirements"]
+	},
+
+	  {"id" : "product.select.productid",
+		  "type" : "select",
+		  "query": "select id, productId from product where productId = ?",
+		  "params": ["productId"]
+	  },
+
+	  {"id" : "product.select.category",
+		  "type" : "select",
+		  "query": "select id, productId, productJson from product where category = ?",
+		  "params": ["category"]
+	  },
+
+	  {"id" : "product.select.subcategory",
+		  "type" : "select",
+		  "query": "select id, productId, productJson from product where subcategory = ?",
+		  "params": ["subcategory"]
+	  },
+
+	  {"id" : "product.insert",
+		  "type" : "insert",
+		  "table": "product",
+		  "query": "insert into product(id, productId, name, description, category, subcategory, productJson) values (?, ?, ?, ?, ?, ?, ?)",
+		  "params": ["id", "productId", "name", "description", "category", "subcategory", "productJson"]
+	  },
+	  {
+		  "id": "product.update",
+		  "type": "update",
+		  "table": "product",
+		  "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, productJson = ? where productId = ?",
+		  "params": [
+			  "name",
+			  "description",
+			  "category",
+			  "subcategory",
+			  "productJson",
+			  "productId"
+		  ]
+	  },
+
+	  {"id" : "shortlist.add",
+		  "type" : "insert",
+		  "table": "shortlisted",
+		  "query": "insert into shortlisted(id, uid, email, productId, product) values (?, ?, ?, ?, ?)",
+		  "params": ["id", "uid", "email", "productId", "product"]
+	  },
+
+	  {
+		  "id": "shortlist.remove",
+		  "type": "delete",
+		  "table": "shortlisted",
+		  "query": "delete shortlisted where productId = ? and uid = ?",
+		  "params": ["productId", "uid"]
+	  }
+
+  ]
+}
+

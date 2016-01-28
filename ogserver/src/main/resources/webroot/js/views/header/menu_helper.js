@@ -4,8 +4,9 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'mgfirebase'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF) {
+    'mgfirebase',
+    'consultutil'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil) {
     return {
         ref: MGF.rootRef,
 
@@ -45,12 +46,17 @@ define([
             MGF.getUserProfile(authData, next);
         },
         onFAuth: function(authData) {
-            if (authData && authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
-                $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
-                if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
-                    this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
-                    console.log("user profile done");
+            if (authData) {
+                if (authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
+                    $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
+                    if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
+                        this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
+                        console.log("user profile done");
+                    }
                 }
+                MGF.listenForShortlistChanges();
+            } else {
+                MGF.doAnonymousAuth();//.then(function(){/*do nothing here as onFAuth will get called again automatically*/});
             }
         },
         formUserData: function(authData, userProfile) {
@@ -155,6 +161,7 @@ define([
         },
 
         signOut: function(ev) {
+            MGF.stopListeningForShortlistChanges(this.ref.getAuth().uid);
             this.ref.unauth();
             users.reset();
         },
@@ -175,27 +182,15 @@ define([
 
         contactUsSubmit: function() {
             window.contactusSubmitButton && window.contactusSubmitButton.button('reset');
-            var formData = {
-                "fullName": $('#contact_full_name').val(),
-                "email": $('#contact_email_id').val(),
-                "contactNumber": $('#contact_contact_num').val(),
-                "requirements": $('#contact_requirement').val(),
-                "propertyName": $('#contact_property_name').val()
-            };
 
-            var authData = this.ref.getAuth();
-            var that = this;
-            if (!authData) {
-                this.ref.authAnonymously(function(error, authData) {
-                    if (error) {
-                        console.log("Login Failed!", error);
-                    } else {
-                        that.setConsultData(authData, formData);
-                    }
-                });
-            } else {
-                this.setConsultData(authData, formData);
-            }
+            var name = $('#contact_full_name').val();
+            var email = $('#contact_email_id').val();
+            var phone = $('#contact_contact_num').val();
+            var propertyName = $('#contact_property_name').val();
+            var query = $('#contact_requirement').val();
+            var floorplan = $("#contact_floorplan").prop('files')[0];
+
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
             var that = this;
             $('#contactForm').hide(100, function() {
@@ -213,7 +208,7 @@ define([
             var windowHeight = $(window).height();
             var contactUsSideHeight = $('.contact-us-side').height();
             var contactUsSideWidth = $('.contact-us-side').width();
-            var popHeight = $('#contactuspop').height() - contactUsSideHeight;
+            var popHeight = $('.contact-us-pop').height() - contactUsSideHeight;
             var popHeightMore = popHeight > windowHeight;
             $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight / 2 - popHeight / 2) + 'px');
             $('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');
@@ -305,13 +300,10 @@ define([
         createProfile: function(userData, profileData, next) {
             MGF.createProfile(userData, profileData, next);
         },
-        setConsultData: function(authData, formData) {
-            MGF.addConsultData(authData, formData);
-        },
         ready: function(parent) {
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
-            _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'setConsultData', 'createUser',
+            _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'createUser',
                 'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
                 'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
                 'unAuthAfterProfile');
@@ -319,6 +311,8 @@ define([
             var events = {
                 "click .signout_icon": this.signOut,
                 "click #close-user-pop": this.closeUserPopup,
+                "click #view-all-shortlist": this.closeUserPopup,
+                "click .shortlist-side": this.closeUserPopup,
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,
                 "click #close-contactus-pop": this.toggleContactUsPop,
@@ -434,6 +428,35 @@ define([
                     $('.search_suggest').slideUp();
                 });
 
+                /* Search on menu bar Start */
+                 $('.search-ico').click(function() {
+                    var isMobile = window.matchMedia("only screen and (max-width: 920px)");
+                    if (isMobile.matches) {
+                       $('#main-lg-ico').css("position","relative");
+                       $('#sb-search-duplicate').toggle('slide',{ direction: 'Right'},500);
+                    }else{
+                        $('#bs-example-navbar-collapse-1').css("position","relative");
+                        $('#sb-search').toggle('slide',{ direction: 'Right'},500);
+                    }
+                });
+
+                $('.sb-search-input').keyup(function() {
+                    var char = $(this).val().length;
+                    if (char >= 3) {
+                        $('.sb-search_suggest').slideDown();
+                    } else {
+                        $('.sb-search_suggest').slideUp();
+                    }
+                });
+                 $('.sb-search-txt').click(function() {
+                    $('.sb-search-input').val($(this).text());
+                    window.location.href = 'https://localhost:8000/#product_search/'+encodeURIComponent($(this).text());
+                    $('.sb-search_suggest').slideUp();
+                 });
+
+
+                /* Search on menu bar End  */
+
                 $("#forgot_password").on('hidden.bs.modal', function() {
                     $('.modal_success_msg').css('display', 'none');
                     $('.modal_error_msg').css('display', 'none');
@@ -448,11 +471,17 @@ define([
                 });
 
                 $('#fb-btn').click(function() {
+
                     window.fbButton = $(this);
+                    setTimeout(function () {
                     window.fbButton.button('loading');
+
                     that.ref.authWithOAuthPopup("facebook", that.authHandler, {
                         scope: "email"
                     });
+                    window.close();
+
+                    }, 3000);
                 });
 
                 /*

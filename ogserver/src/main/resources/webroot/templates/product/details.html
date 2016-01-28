@@ -40,10 +40,6 @@
                 </div>
                 <div class="padding20_0_10_0 margin_auto"><%= product.desc %></div>
                 <div class="padding20_0_10_0 margin_auto social-share-buttons">
-                        <!--<a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%= imgBase + product.images[0] %>&t=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a>-->
-                        <!--<a href="javascript:void(0);" onclick="window.open('http://www.twitter.com/intent/tweet?url=<%= imgBase + product.images[0] %>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a>-->
-                        <!--<a href="javascript:void(0);" onclick="window.open('http://plus.google.com/share?url=<%= imgBase + product.images[0] %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-google-plus-square"></i></a>-->
-
                         <div class="col-xs-4 align-center">
                             <div id="fb-root"></div>
                             <div class="fb-share-button"
@@ -60,13 +56,13 @@
                         </div>
                 </div>
                 <div class="col-xs-6 padding20-0 margin_auto">
-                    <a href="#" class="button border1 padding10 display-block margin0-10" style="background-color: #3C82BF;color: #FFFFFF;">
-                        <span class="fa fa-heart-o" style="color:#FFFFFF;"></span>
-                        shortlist
+                    <a href="#" class="button border1 padding10 display-block margin0-10 shortlistable-product" style="background-color: #3C82BF;color: #FFFFFF;">
+                        <span class="product-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>" style="color:#FFFFFF;"></span>
+                        <span class="product-heart-text"><%=product.user_shortlisted ? 'shortlisted' : 'shortlist'%></span>
                     </a>
                 </div>
                 <div class="col-xs-6 padding20-0">
-                    <a href="javascript:void(0);" id="prodconsult" class="consult button border1 padding10 display-block margin0-10">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a>
+                    <a href="javascript:void(0);" id="product_consult" class="consult button border1 padding10 display-block margin0-10">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a>
                 </div>
                 <!--<div>-->
                     <!--<img src="img/seals.png" width="100%">-->
@@ -87,29 +83,31 @@
                 <% if(typeof(applianceTypes) !== 'undefined'){ %>
                 <li class="col-xs-2 padding0"><a data-toggle="tab" href="#apptab">Appliances</a></li>
                 <% } %>
+                <% if(typeof(product.components) !== 'undefined'){ %>
                 <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Components</a></li>
+                <% } %>
             </ul>
 
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="mfc">
                     <div class="row margin-left-0 paddingtop40">
-                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
+                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10 paddingbottom10">
                             <label id="chooseMaterial">Choose Material:</label>
-                            <div class="width100 list-group paddingtop20" aria-labelledby="chooseMaterial">
+                            <div class="width100 list-group padding20-20" aria-labelledby="chooseMaterial">
                                 <% _.each (materials, function(material) { %>
                                 <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline" data-material="<%=material%>"><%=material%></a>
                                 <% }); %>
                             </div>
                         </div>
-                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10">
+                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10 paddingbottom10">
                             <label id="chooseFinish">Choose Finish:</label>
-                            <div class="width100 list-group paddingtop20" aria-labelledby="chooseFinish" id="finishList">
+                            <div class="width100 list-group padding20-20" aria-labelledby="chooseFinish" id="finishList">
                                 <% _.each (selectedfinishes, function(finish) { %>
                                 <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline" data-finish="<%=finish%>"><%=finish%></a>
                                 <% }); %>
                             </div>
                         </div>
-                        <div class="col-xs-12 paddingtop20 bg-light-gray margintop20">
+                        <div class="col-xs-12 paddingtop20 bg-light-gray margintop20 paddingbottom10">
                             <label id="colors">Available in Colors:</label>
                             <ul class="paddingtop10 color-ul" id="colorList">
                                 <% _.each (selectedColor, function(color) { %>
@@ -223,9 +221,8 @@
                                                 <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceprice="<%=appliance.price%>">
                                                     <p style="font-size: 14px; height: 40px"><%=appliance.name%></p>
                                             <span style="display: inline-block; height: 160px;">
-                                                <img class="portfolio-box" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>" onclick="toggleColor($(this).next());"/>
-                                                <span class="pe-7s-check <%= $.inArray( appliance.name, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"
-                                                      onclick="toggleColor($(this));"></span>
+                                                <img class="portfolio-box appliance-img" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>"/>
+                                                <span class="pe-7s-check appliance-mark <%= $.inArray( appliance.name, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"></span>
                                             </span>
                                                     <p style="font-size: 14px; margin-top: 10px"><i class="fa fa-inr"></i> <%=appliance.price%></p>
                                                 </li>
@@ -245,6 +242,7 @@
                 <% } %>
 
                 <!-- Component Tab Start -->
+                <% if(typeof(product.components) !== 'undefined'){ %>
                 <div class="tab-pane fade" id="comptab">
                     <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
                         <div class="col-xs-12" style="padding-bottom: 10px">
@@ -252,162 +250,64 @@
                         </div>
                         <div class="tab-content">
                             <div class="row padding20-20">
-                                <div class="col-xs-12">
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
+                                <div class="col-md-12 col-xs-12">
+                                    <% _.each (product.components, function(component) { %>
+                                    <div class="col-md-3 col-xs-3 component-boxes portfolio-box">
+                                        <div class="component-title"><%= component.name %></div>
                                         <div class="component-desc">
                                             <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
+                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p><%= component.size %></p>
                                             </div>
                                             <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
+                                                <i class="txt-light-gray">Quantity:</i> <%= component.qty %>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title"> Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close)</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X300X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title"> Base Unit 3 Blum Tandem Drawers (Soft Close)</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 2
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row padding20-20">
-                                <div class="col-xs-12">
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title"> Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close)</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X300X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title"> Base Unit 3 Blum Tandem Drawers (Soft Close)</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 2
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row padding20-20">
-                                <div class="col-xs-12">
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title"> Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close)</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X300X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title"> Base Unit 3 Blum Tandem Drawers (Soft Close)</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 2
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3 component-boxes portfolio-box">
-                                        <div class="component-title">Base Unit For Sink 2 Doors</div>
-                                        <div class="component-desc">
-                                            <div class="fl siz-content">
-                                                <i class="txt-light-gray">Size (WxDxH in mm):</i> <p>820X900X560</p>
-                                            </div>
-                                            <div class="fl qnt-content">
-                                                <i class="txt-light-gray">Quantity:</i> 1
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <% }); %>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Component Tab End -->
-
+                <% } %>
             </div>
-
-        </div>
-
+                <!-- Component Tab End -->
         <!-- Related Projects Row -->
         <div class="row paddingtop40" id="relatedproduct">
+            <div class="col-xs-12">
+                <hr>
+                <h3 class="details-heading">Related Products</h3>
+            </div>
 
+            <div class="wrap">
+                <div class="row">
+                    <div class="controls center col-xs-1 relcontrol">
+                        <button class="btn alt1-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                        </button>
+                    </div>
 
+                    <div class="frame col-xs-10" id="alt1-frame" style="overflow: hidden;">
+                        <ul class="clearfix slidee"
+                            style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
+                            <% _.each (relatedProducts, function(prod) { %>
+                            <li><img src="<%= imgBase +'c_fill,h_300,w_500/'+prod.images[0] %>" width="100%"/></li>
+                            <% }); %>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
+                        </ul>
+                    </div>
+                    <div class="controls center col-xs-1 relcontrol">
+                        <button class="btn alt1-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row paddingtop40">
@@ -432,10 +332,10 @@
                     <p>
                         <b>Terms & Conditions</b>
                     <ol>
-                        <li>Claims are examined to determine warranty coverage of all items purchased from MyGubbi.</li>
+                        <li>Claims are examined to determine warranty coverage of all items purchased from mygubbi.</li>
                         <li>The original purchase receipt must be presented as proof of purchase.</li>
                         <li>Upon approval of warranty claim, the product will be repaired or replaced with the same or comparable product with a value not higher than the price of the original product purchased.</li>
-                        <li>In the event that repair work has been done to a product without any authorisation from MyGubbi, the product's warranty coverage is automatically void.                           </li>
+                        <li>In the event that repair work has been done to a product without any authorisation from mygubbi, the product's warranty coverage is automatically void.                           </li>
                         <li>Warranty terms and conditions are fixed, non-negotiable, non-transferable and only benefits the original purchasers of the product.</li>
                     </ol>
                     </p>
@@ -460,7 +360,7 @@
 
                         While we ensure that you receive your orders within the delivery time indicated in our shipping policies, unforeseen and uncontrollable events may cause the delay of your delivery. We will contact you in the event of any disruption.
 
-                        Highly trained members of our team will assemble and install all furniture, interior fittings purchased from MyGubbi.com This is to ensure the best quality of service you deserve for placing your trust in My Gubbi to join you in this celebration of your home.
+                        Highly trained members of our team will assemble and install all furniture, interior fittings purchased from mygubbi.com This is to ensure the best quality of service you deserve for placing your trust in mygubbi to join you in this celebration of your home.
 
                     </p>
                     <p>&nbsp;</p>
@@ -478,6 +378,7 @@
         </div>
         <div class="row" style="padding-bottom:60px;"></div>
     </div>
+    </div>
 </section>
 
 <!-- Consult Modal -->
@@ -493,12 +394,6 @@
                 </h2>
             </div>
             <div class="row">
-                <!--<div class="col-md-12">-->
-                    <!--<div class="row margin_auto">-->
-                        <!--<div class="align-center nowrap">for</div>-->
-                        <!--<div class="align-center"><h4><%= product.name %></h4></div>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="col-md-12">
                     <div class="paddingtop30">
                         <div class="row margin_auto">
@@ -541,12 +436,20 @@
                             <div class="form-group">
                                 <div class="margin-bottom20 form-group">
                                     <textarea class="width100 form-control" id="consult_requirement"
-                                              placeholder="Describe your Requirements / Queries"></textarea>
+                                              placeholder="Describe your Requirements / Queries">I'm interested in "<%= product.name %>" . Looking forward to hear from you.</textarea>
                                 </div>
                             </div>
                             <div class="margin-bottom20 form-group">
                                 <input type="text" class="width100 form-control" placeholder="Property Name"
                                        id="consult_property_name"/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <label for="consult_floorplan">Upload Floorplan</label>
+                                <input type="file" class="width100 form-control" placeholder="Floorplan" name="floorPlan" value=""
+                                       id="consult_floorplan" accept=".pdf,.jpg,.jpeg,.png"/>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
                                 <div class="help-block with-errors"></div>
@@ -564,7 +467,7 @@
                     </form>
                     <div id="consult-success-msg-padding" class="display-none margintop25"></div>
                     <div id="consult-success-msg" class="display-none">
-                        <p class="justify">Thank you for contacting My Gubbi. Our team will get back to you as soon as possible.</p>
+                        <p class="justify">Thank you for contacting mygubbi. Our team will get back to you as soon as possible.</p>
                         <p class="margintop40">Want to keep Exploring? Click <a id="consult-form-explore" href="#products/kitchen/lshapedk">here</a></p>
                     </div>
 

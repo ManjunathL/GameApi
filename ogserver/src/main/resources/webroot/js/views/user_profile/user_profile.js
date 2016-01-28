@@ -25,7 +25,11 @@ define([
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
+            this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit', 'setuserProfileData');
+        },
+        handleUserChange: function() {
+            window.location = '#';
         },
         submit: function(e) {
             if (e.isDefaultPrevented()) return;

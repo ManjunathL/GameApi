@@ -1,0 +1,19 @@
+{
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
+    "max_pool_size": 4,
+    "user": "admin",
+    "password": "OG$#gubi32"
+  },
+
+  "firebase": {
+    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
+    "loginid": "mygubbi.fbase@gmail.com",
+    "password": "!@#$VGYHasdf435"
+  },
+
+  "cloudinary" :{
+    "url": "cloudinary://492523411154281:Qpr5Vg3klupb-ETRIsj-caLJ5zg@mygubbi"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "id": "123",
+  "id": "56383ff69951036a2732566f1",
   "code": "SJDH478SJD",
   "categ": "Kitchen",
   "categId": "23847623746",
@@ -17,18 +17,6 @@
   "shortlisted": 46,
   "likes": 200,
   "createDt": "04-30-2015",
-  "delivery": {
-    "title": "45 Days Delivery Guarantee ",
-    "details": "templates/common/standard_delivery_45.html"
-  },
-  "warranty": {
-    "title": "5 years warranty",
-    "details": "templates/common/standard_warranty_5.html"
-  },
-  "paymentTerms": {
-    "title": "Payment Terms",
-    "details": "templates/common/standard_payment_terms.html"
-  },
   "pageId": "SJDH478SJD",
   "images": [
     "Albatross_Mapple1_low_erohcx", "Auklet_low_jkp4hr", "bart_Lshaped_BrownOak_CreamOak_dvxktq", "Brambling_Aurbergene_Low_lrs7hs"
@@ -297,5 +285,66 @@
       "image": "chimney_ff0o46.jpg",
       "price": "12,990"
     }
-  ]
+  ],
+  "components" : [ {
+    "name" : "Base Unit For Sink 2 Doors",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit 3 Blum Tandem Drawers (Soft Close",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit Blind Corner For Cylinder 1 Door",
+    "qty" : 1,
+    "size" : "820X1100X560"
+  }, {
+    "name" : "Base Unit 1 Door With Pull-Out Chrome Basket (Soft Close",
+    "qty" : 1,
+    "size" : "820X300X560"
+  }, {
+    "name" : "Base Unit 2 Doors + 1 Shelf",
+    "qty" : 1,
+    "size" : "820X1000X560"
+  }, {
+    "name" : "Wall Unit For Dish Drainer 2 Doors",
+    "qty" : 1,
+    "size" : "720X900X330"
+  }, {
+    "name" : "Wall Unit 2 Doors 2 Shelves",
+    "qty" : 3,
+    "size" : "720X900X330"
+  }, {
+    "name" : "Blind Corner Wall Unit 1 Door 400 Mm 2 Shelves",
+    "qty" : 1,
+    "size" : "720X800X330"
+  }, {
+    "name" : "Base Unit 2 Doors + 1 Shelf",
+    "qty" : 1,
+    "size" : "820X900X560"
+  }, {
+    "name" : "Base Unit End Panel",
+    "qty" : 2,
+    "size" : "-"
+  }, {
+    "name" : "Wall Unit End Panel",
+    "qty" : 4,
+    "size" : "-"
+  }, {
+    "name" : "Base Unit Filler From 30 To 150 Mm (With Door",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Detergent Holder",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Pvc Cutlery Tray",
+    "qty" : 1,
+    "size" : "-"
+  }, {
+    "name" : "Bin Holder",
+    "qty" : 1,
+    "size" : "-"
+  } ]
 }
