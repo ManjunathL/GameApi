@@ -51,7 +51,7 @@
 
 	  {"id" : "product.select.productid",
 		  "type" : "select",
-		  "query": "select id, productId from product where productId = ?",
+		  "query": "select id, productId, productJson from product where productId = ?",
 		  "params": ["productId"]
 	  },
 

@@ -59,7 +59,7 @@ public class ProductHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                        sendJsonResponse(context, selectData.rows.get(0).toString());
+                        sendJsonResponse(context, selectData.rows.get(0).getString("productJson").toString());
                     }
                 });
 
