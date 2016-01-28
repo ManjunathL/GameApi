@@ -13,7 +13,9 @@ define([
             'product/:id': 'product',
             'user_profile': 'user_profile',
             'consult': 'consult',
-            'shortlist': 'shortlist'
+            'shortlist': 'shortlist',
+            'stories': 'stories',
+            'story/:id': 'story'
         }
 
     });
@@ -74,6 +76,22 @@ define([
         router.on('route:shortlist', function(actions) {
             require(['views/shortlist/shortlist'], function(ShortlistPage) {
                 VM.create("shortlist", ShortlistPage).render();
+            });
+        });
+        router.on('route:stories', function (actions) {
+            require(['views/story/stories'], function (StoriesPage) {
+                VM.create("stories", StoriesPage).render();
+            });
+        });
+        router.on('route:story', function (storyId) {
+            require(['views/story/full_story'], function (FullStoryPage) {
+
+                var options = {
+                    model: {
+                        "id": storyId
+                    }
+                };
+                VM.create("story", FullStoryPage).render();
             });
         });
         Backbone.history.start();
