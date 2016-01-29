@@ -90,14 +90,14 @@ define([
 		},
 		productInPriceRanges: function (product, priceRangeIds) {
 			for (var i=0; i < priceRangeIds.length; i++) {
-				if (product.price_range_id == priceRangeIds[i])
+				if (product.priceId == priceRangeIds[i])
 					return true;
 			}
 
 		},
 		productInStyles: function (product, styleIds) {
 			for (var i=0; i < styleIds.length; i++) {
-				if (product.style_id == styleIds[i])
+				if (product.styleId == styleIds[i])
 					return true;
 			}
 
