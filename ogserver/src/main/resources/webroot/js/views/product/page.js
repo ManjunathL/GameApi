@@ -367,7 +367,8 @@ define([
             return that;
         },
         events: {
-            "click .shortlistable-item": "toggleShortListItem"
+            "click .shortlistable-item": "toggleShortListItem",
+            "click .fa-share": "toggleShareIcons"
         },
         toggleShortListItem: function(e) {
 
@@ -399,6 +400,14 @@ define([
             this.clearShortlisted();
             this.markShortlisted();
             this.render();
+        },
+        toggleShareIcons: function(e){
+            e.preventDefault();
+
+            var currentTarget = $(e.currentTarget);
+            var shareicoId = currentTarget.attr('id');
+            var productId = shareicoId.replace('share-ico','');
+            $('#list-share-txt'+productId).toggle();
         }
     });
     return ProductPage;

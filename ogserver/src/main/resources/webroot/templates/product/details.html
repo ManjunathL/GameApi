@@ -45,6 +45,7 @@
                 <div class="padding20_0_10_0 margin_auto"><%= product.desc %></div>
                 <div class="padding20_0_10_0 margin_auto social-share-buttons">
                         <div class="col-xs-4 align-center">
+                            <% var share_url = restBase + '/#product/'+ product.productId %>
                             <div id="fb-root"></div>
                             <% if(typeof(product.images) !== 'undefined'){ %>
                             <script>
@@ -58,7 +59,7 @@
                                 }(document, 'script', 'facebook-jssdk'));
                             </script>
                             <div class="fb-share-button share-button"
-                                 data-href="<%= imgBase + product.images[0] %>"
+                                 data-href="<%=share_url%>"
                                  data-layout="button">
                             </div>
                             <% } %>
@@ -77,13 +78,13 @@
                                     }
                                 }(document, 'script', 'twitter-wjs');
                             </script>
-                            <a href="https://twitter.com/share" class="twitter-share-button share-button"{count} data-url="<%= imgBase + product.images[0] %>" data-text="<%= product.name %>" data-dnt="true">Tweet</a>
+                            <a href="https://twitter.com/share" class="twitter-share-button share-button"{count} data-url="<%=share_url%>" data-text="<%= product.name %>" data-dnt="true">Tweet</a>
                             <% } %>
                         </div>
                         <div class="col-xs-4 align-center">
                             <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
                             <% if(typeof(product.images) !== 'undefined'){ %>
-                            <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<%= imgBase + product.images[0] %>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>" data-pin-color="red"></a>
+                            <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>" data-pin-color="red"></a>
                             <% } %>
                         </div>
                 </div>
@@ -327,15 +328,6 @@
                             <% _.each (relatedProducts, function(prod) { %>
                             <li><img src="<%= imgBase +'c_fill,h_300,w_500/'+prod.images[0] %>" width="100%"/></li>
                             <% }); %>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
-                            <li><img src="https://placehold.it/500x300" width="100%"/></li>
                         </ul>
                         <% } %>
                     </div>
