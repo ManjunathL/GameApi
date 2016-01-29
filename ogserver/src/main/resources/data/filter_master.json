@@ -1,8 +1,8 @@
 {
   "price_ranges": [
     {
-      "name": "Standard",
-      "id": "standard"
+      "name": "Base",
+      "id": "base"
     },
     {
       "name": "Premium",
