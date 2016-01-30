@@ -382,7 +382,6 @@ define([
 
             currentTarget.children('.list-heart').toggleClass('fa-heart-o');
             currentTarget.children('.list-heart').toggleClass('fa-heart');
-            currentTarget.children('.list-txt').html('shortlist' + (alreadyShortlisted ? '' : 'ed'));
 
             if (alreadyShortlisted) {
                 MGF.removeShortlistProduct(productId).then(function() {
