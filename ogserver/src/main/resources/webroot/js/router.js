@@ -8,7 +8,7 @@ define([
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'dashboard',
-            'products/:categories/:subcategories': 'products',
+            'products/:categories(/:subcategories)': 'products',
             'product_search/:searchTerm': 'products-search',
             'product/:id': 'product',
             'user_profile': 'user_profile',
