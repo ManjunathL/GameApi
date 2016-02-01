@@ -3342,6 +3342,16 @@ width: 325px!important;
     width:57px;
     height:20px;
 }
+#alt1-frame ul li.active {
+    border-top: 0px solid #F1591F;
+}
+.finish-overlap{
+    float: left !important;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    border-radius:4px;
+}
+
 @media (max-width: 991px) {
     .relcontrol{
         margin-top:70px!important;

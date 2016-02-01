@@ -116,7 +116,7 @@
                 <% if((typeof(applianceTypes) !== 'undefined') && applianceTypes.length != 0){ %>
                 <li class="col-xs-2 padding0"><a data-toggle="tab" href="#apptab">Appliances</a></li>
                 <% } %>
-                <% if(typeof(product.components) !== 'undefined'){ %>
+                <% if(typeof(product.components) !== 'undefined' && product.components.length != 0){ %>
                 <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Components</a></li>
                 <% } %>
             </ul>
@@ -136,10 +136,11 @@
                             <label id="chooseFinish">Choose Finish:</label>
                             <div class="width100 list-group padding20-20" aria-labelledby="chooseFinish" id="finishList">
                                 <% _.each (selectedfinishes, function(finish) { %>
-                                <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline" data-finish="<%=finish%>"><%=finish%></a>
+                                <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline finish-overlap" data-finish="<%=finish%>"><%=finish%></a>
                                 <% }); %>
                             </div>
                         </div>
+                        <% if(typeof(selectedColor) !== 'undefined' && Object.keys(selectedColor).length != 0){ %>
                         <div class="col-xs-12 paddingtop20 bg-light-gray margintop20 paddingbottom10">
                             <label id="colors">Available in Colors:</label>
                             <ul class="paddingtop10 color-ul" id="colorList">
@@ -153,6 +154,7 @@
                             </ul>
 
                         </div>
+                        <%  } %>
                     </div>
                 </div>
                 <% if(typeof(selectedAccessories) !== 'undefined'){ %>
@@ -224,7 +226,7 @@
                     </div>
                 </div>
                 <% } %>
-                <% if(typeof(applianceTypes) !== 'undefined'){ %>
+                <% if(typeof(applianceTypes) !== 'undefined' && typeof(appliances) !== 'undefined'){ %>
                 <div class="tab-pane fade" id="apptab">
                     <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
                         <div class="col-xs-12" style="padding-bottom: 10px">
@@ -240,7 +242,7 @@
                             var active = true;
                             var atCount = 0;
                             _.each(applianceTypes, function(applianceType) {
-                            var applsForType = _.filter(product.appliances, function(appliance) {return applianceType === appliance.type;});
+                            var applsForType = _.filter(appliances, function(appliance) {return applianceType === appliance.type;});
                             %>
                             <div class="tab-pane fade<%= active ? ' in active': ''%>" id="<%=applianceType%>">
                                 <div class="at<%=atCount%>-wrap padding20-0">
@@ -253,11 +255,11 @@
                                             <ul class="clearfix"
                                                 style="transform: translateZ(0px) translateX(0px); width: <%=(((applsForType.length/3)+1)*3) * 110%>px;">
                                                 <% _.each(applsForType, function(appliance){ %>
-                                                <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceprice="<%=appliance.price%>">
+                                                <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceid="<%=appliance.id%>" data-applianceprice="<%=appliance.price%>">
                                                     <p style="font-size: 14px; height: 40px"><%=appliance.name%></p>
                                             <span style="display: inline-block; height: 160px;">
                                                 <img class="portfolio-box appliance-img" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>"/>
-                                                <span class="pe-7s-check appliance-mark <%= $.inArray( appliance.name, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"></span>
+                                                <span class="pe-7s-check appliance-mark <%= $.inArray( appliance.id, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"></span>
                                             </span>
                                                     <p style="font-size: 14px; margin-top: 10px"><i class="fa fa-inr"></i> <%=appliance.price%></p>
                                                 </li>
@@ -326,7 +328,7 @@
                         <ul class="clearfix slidee"
                             style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
                             <% _.each (relatedProducts, function(prod) { %>
-                            <li><img src="<%= imgBase +'c_fill,h_300,w_500/'+prod.images[0] %>" width="100%"/></li>
+                            <li><a href="#product/<%= prod.productId %>"><img src="<%= imgBase +'c_fill,h_300,w_500/'+prod.images[0] %>" width="100%"/></a></li>
                             <% }); %>
                         </ul>
                         <% } %>

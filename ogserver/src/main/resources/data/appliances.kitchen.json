@@ -1,0 +1,34 @@
+[
+  {
+    "id": "Bosch_DKE908PIN",
+    "name": "Bosch Chimney",
+    "type": "Chimney",
+    "image": "Bosch_DKE908PIN",
+    "price": "18,900",
+    "brand":"Bosch"
+  },
+  {
+    "id": "Bosch_DWB06W851I",
+    "name": "Bosch Chimney",
+    "type": "Chimney",
+    "image": "Bosch_DWB06W851I",
+    "price": "19,900",
+    "brand":"Bosch"
+  },
+  {
+    "id": "Bosch_PCH615B8TI",
+    "name": "Bosch 4 Burner",
+    "type": "Hob",
+    "image": "Bosch_PCH615B8TI",
+    "price": "8,900",
+    "brand": "Bosch"
+  },
+  {
+    "id": "Bosch_PPQ716B1TI",
+    "name": "Bosch 5 Burner",
+    "type": "Hob",
+    "image": "Bosch_PPQ716B1TI",
+    "price": "9,900",
+    "brand": "Bosch"
+  }
+]
