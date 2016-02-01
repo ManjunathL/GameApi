@@ -16,8 +16,9 @@ define([
     'text!templates/product/relatedproduct.html',
     'slyutil',
     'mgfirebase',
-    'consultutil'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil) {
+    'consultutil',
+    'collections/appliances'
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil, ApplianceCollection) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -30,6 +31,7 @@ define([
             window.product = this.product;
             this.custom_product = new CustomProduct();
             this.Products = new ProductCollection();
+            this.Appliances = new ApplianceCollection();
             this.custom_product.on('change',this.render,this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'render', 'markShortlisted');
@@ -43,7 +45,6 @@ define([
                 this.product.set('productId', this.model.id);
                 this.product.fetch({
                     success: function (response) {
-                    console.log(response);
                         that.markShortlisted();
                         that.respond();
                     }
@@ -70,6 +71,11 @@ define([
 
             var selectedSubCategory = that.product.get('subcategory');
 
+            var applianceType = new Array();
+            var selectedCategory = that.product.get('categoryId');
+            that.getAppliances(selectedCategory).then(function() {
+                applianceType = that.Appliances.getApplianceType();
+            });
 
             that.getRelatedProducts(selectedSubCategory).then(function() {
 
@@ -118,13 +124,14 @@ define([
                 $(that.el).html(compiledTemplate({
                     "product": that.product.toJSON(),
                     "materials": _.uniq(_.pluck(that.product.get('mf'), 'material')),
-                    "applianceTypes": _.uniq(_.pluck(that.product.get('appliances'), 'type')),
+                    "applianceTypes": _.uniq(applianceType),
                     "selectedColor": that.custom_product.get('colors'),
                     "selectedfinishes": that.custom_product.get('finishes'),
                     "selectedFinish": that.custom_product.get('selectedFinish'),
                     "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories')),
                     "relatedProducts": _.uniq(that.relatedProducts),
-                    "custom_product":that.custom_product
+                    "custom_product":that.custom_product,
+                    "appliances":that.Appliances.toJSON()
                 }));
 
                 DetailsHelper.ready(that);
@@ -145,12 +152,8 @@ define([
                             var selectedCategory = that.product.get('category');
                             var selectedStyleId = that.product.get('styleId');
 
-                            console.log(selectedCategory+ ' --------- '+ selectedStyleId);
-
                             //that.relatedProducts = that.Products.getRelatedProducts(selectedSubCategory);
                             that.relatedProducts = that.Products.getRelatedProducts(selectedCategory,selectedStyleId);
-
-                            console.log(that.relatedProducts);
                             resolve();
                         },
                         error: function(model, response, options) {
@@ -369,12 +372,16 @@ define([
             var selectedappliancePrice = $(ev.currentTarget).data('applianceprice');
 
             var appliances = this.custom_product.get('selectedAppliances');
+
+
+
+
             _.map( this.product.get('appliances'), function ( model ) {
                 if ( model.name == selectedappliance ){
                     if($.inArray( selectedappliance, appliances ) == -1){
                         appliances.push(selectedappliance);
 
-                        if(this.custom_product.get('basePrice') !== 'undefined'){
+                        /*if(this.custom_product.get('basePrice') !== 'undefined'){
                             var defaultBaseprice = this.custom_product.get('basePrice');
                             if (defaultBaseprice.indexOf(',') > -1) {
                                 defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
@@ -384,10 +391,10 @@ define([
                             }
                             var basePrice = parseInt(defaultBaseprice) + parseInt(selectedappliancePrice);
                             this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
-                        }
+                        }*/
                     }else{
                         appliances.splice( $.inArray(selectedappliance, appliances), 1 );
-                        if(this.custom_product.get('basePrice') !== 'undefined'){
+                        /*if(this.custom_product.get('basePrice') !== 'undefined'){
                             var defaultBaseprice = this.custom_product.get('basePrice');
                             if (defaultBaseprice.indexOf(',') > -1) {
                                 defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
@@ -398,11 +405,11 @@ define([
                             var basePrice = parseInt(defaultBaseprice) - parseInt(selectedappliancePrice);
                             this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
 
-                        }
+                        }*/
                     }
                 }
             });
-            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
+//            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
 
             if(this.custom_product.get('selectedAppliances') !== 'undefined'){
                 this.custom_product.set({'selectedAppliances':appliances},{silent: true});
@@ -454,6 +461,30 @@ define([
                 $("#sldown").show();
             }
             $('.dwf-desc').slideToggle();
+        },
+        getAppliances: function(selectedCategoryId){
+            var that = this;
+            return new Promise(function(resolve, reject) {
+                if (that.Appliances.isEmpty()) {
+                    that.Appliances.fetch({
+                        data: {
+                            "category": selectedCategoryId
+                        },
+                        success: function(response) {
+                           console.log("Successfully fetch appliances - ");
+                           that.Appliances = response;
+                           resolve();
+                        },
+                        error: function(model, response, options) {
+                            console.log("error from appliances fetch - " + response);
+                            console.log(response);
+                        }
+                    });
+                }else{
+                    resolve();
+                }
+            });
+
         }
     });
     return ProductPage;
