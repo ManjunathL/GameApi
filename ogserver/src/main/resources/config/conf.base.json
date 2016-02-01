@@ -21,7 +21,7 @@
     "fb_url": "https://sweltering-fire-6356.firebaseio.com",
     "loginid": "mygubbi.fbase@gmail.com",
     "password": "!@#$VGYHasdf435",
-    "processEvents": true
+    "processEvents": false
   },
 
   "cloudinary" :{
