@@ -368,18 +368,18 @@ define([
         },
        changeAppliance  : function(ev){
             var selectedappliance = $(ev.currentTarget).data('appliance');
+            var selectedapplianceId = $(ev.currentTarget).data('applianceid');
             var selectedapplianceType = $(ev.currentTarget).data('appliancetype');
             var selectedappliancePrice = $(ev.currentTarget).data('applianceprice');
 
             var appliances = this.custom_product.get('selectedAppliances');
 
 
+            _.map( this.Appliances.toJSON(), function ( model ) {
 
-
-            _.map( this.product.get('appliances'), function ( model ) {
-                if ( model.name == selectedappliance ){
-                    if($.inArray( selectedappliance, appliances ) == -1){
-                        appliances.push(selectedappliance);
+                if ( model.id == selectedapplianceId ){
+                    if($.inArray( selectedapplianceId, appliances ) == -1){
+                        appliances.push(selectedapplianceId);
 
                         /*if(this.custom_product.get('basePrice') !== 'undefined'){
                             var defaultBaseprice = this.custom_product.get('basePrice');
@@ -393,7 +393,7 @@ define([
                             this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
                         }*/
                     }else{
-                        appliances.splice( $.inArray(selectedappliance, appliances), 1 );
+                        appliances.splice( $.inArray(selectedapplianceId, appliances), 1 );
                         /*if(this.custom_product.get('basePrice') !== 'undefined'){
                             var defaultBaseprice = this.custom_product.get('basePrice');
                             if (defaultBaseprice.indexOf(',') > -1) {
@@ -410,7 +410,6 @@ define([
                 }
             });
 //            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
-
             if(this.custom_product.get('selectedAppliances') !== 'undefined'){
                 this.custom_product.set({'selectedAppliances':appliances},{silent: true});
             }
