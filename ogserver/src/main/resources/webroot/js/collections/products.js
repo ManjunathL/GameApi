@@ -102,10 +102,16 @@ define([
 			}
 
 		},
-        getRelatedProducts: function (subcatId) {
+        /*getRelatedProducts: function (subcatId) {
          var that = this;
          return _.map(this.filter(function(product){
              return product.get("subcategory") == subcatId;
+         }), function (product) {return product.toJSON();});
+        },*/
+        getRelatedProducts: function (selectedCategory,selectedStyle) {
+         var that = this;
+         return _.map(this.filter(function(product){
+             return product.get("category") == selectedCategory && product.get("styleId") == selectedStyle;
          }), function (product) {return product.toJSON();});
         }
     });

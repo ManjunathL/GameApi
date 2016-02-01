@@ -142,7 +142,15 @@ define([
                             "searchTerm": selectedSubCategory
                         },
                         success: function() {
-                            that.relatedProducts = that.Products.getRelatedProducts(selectedSubCategory);
+                            var selectedCategory = that.product.get('category');
+                            var selectedStyleId = that.product.get('styleId');
+
+                            console.log(selectedCategory+ ' --------- '+ selectedStyleId);
+
+                            //that.relatedProducts = that.Products.getRelatedProducts(selectedSubCategory);
+                            that.relatedProducts = that.Products.getRelatedProducts(selectedCategory,selectedStyleId);
+
+                            console.log(that.relatedProducts);
                             resolve();
                         },
                         error: function(model, response, options) {
