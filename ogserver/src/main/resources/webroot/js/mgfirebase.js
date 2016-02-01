@@ -153,7 +153,7 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
         },
         addShortlistProduct: function(product) {
             var that = this;
-            var productId = product.id;
+            var productId = product.productId;
             var authData = this.rootRef.getAuth();
             return new Promise(function(resolve, reject) {
                 that.rootRef.child("shortlists").child(authData.uid).child(productId).set(
@@ -191,7 +191,7 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
         },
         getShortListed: function(id) {
             return _.findWhere(this.shortlistedItems, {
-                id: id
+                productId: id
             });
         },
         stopListeningForShortlistChanges: function(uid) {

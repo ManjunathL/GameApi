@@ -12,6 +12,13 @@ define([
             }
         });
     },
+     getBySubcategoryName: function (name) {
+         return this.find(function (model) {
+             if (model.get('name') === name) {
+                 return model;
+             }
+         });
+     },
     initialize: function(models) {
       _.each(models, function (subcategory){
         subcategory = new SubCategory(subcategory);

@@ -1892,6 +1892,19 @@ a.button-orange, a.button-orange:hover {
     text-transform: uppercase;
     padding-left:10px;
 }
+.share-ico-txt{
+    position:absolute;
+    right:5px;
+    padding-left:0px!important;
+    margin-top:15px;
+}
+.share-ico-txt a{
+    padding-left:2px!important;
+}
+
+.share-ico-txt a:hover{
+    color: #f1591f;
+}
 
 .social-share-box{
     border: 1px solid #FFF;
@@ -3321,6 +3334,11 @@ width: 325px!important;
 .sb-popular-search{
     padding-top:10px;
     padding-bottom:15px;
+}
+
+.share-button{
+    width:57px;
+    height:20px;
 }
 @media (max-width: 991px) {
     .relcontrol{

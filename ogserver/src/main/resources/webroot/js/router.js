@@ -8,7 +8,7 @@ define([
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'dashboard',
-            'products/:categories/:subcategories': 'products',
+            'products/:categories(/:subcategories)': 'products',
             'product_search/:searchTerm': 'products-search',
             'product/:id': 'product',
             'user_profile': 'user_profile',
@@ -45,6 +45,8 @@ define([
         });
         router.on('route:products-search', function(searchTerm) {
             require(['views/product/page'], function(ProductPage) {
+            console.log('searchTerm');
+            console.log(searchTerm);
                 var options = {
                     model: {
                         "searchTerm": searchTerm

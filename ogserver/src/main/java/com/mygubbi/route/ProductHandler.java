@@ -52,6 +52,7 @@ public class ProductHandler extends AbstractRouteHandler
         Integer id = LocalCache.getInstance().store(new QueryData("product.select.productid", new JsonObject().put("productId", productId)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
+                    LOG.info("Executing query:" + "product.select.productid" + " | " + productId);
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
@@ -59,7 +60,7 @@ public class ProductHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                        sendJsonResponse(context, selectData.rows.get(0).toString());
+                        sendJsonResponse(context, selectData.rows.get(0).getString("productJson").toString());
                     }
                 });
 

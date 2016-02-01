@@ -18,12 +18,15 @@ public class ProductJson extends JsonObject
 
     public ProductJson(ShopifyRecord record)
     {
+        this.put("id", record.getId());
         this.put("productId", record.getId());
         this.put("name", record.getTitle());
         this.put("desc", record.getDesc());
         this.put("dimension", record.getDimension());
         this.put("category", record.getCategory());
-        this.put("subcategory", record.getSubCategory());
+        this.put("subcategory", record.getSubcategory());
+        this.put("categoryId", record.getCategoryId());
+        this.put("subcategoryId", record.getSubcategoryId());
         this.put("tags", record.getTags());
         this.put("designer", "mygubbi");
         this.put("curr", "INR");
@@ -33,6 +36,11 @@ public class ProductJson extends JsonObject
         this.put("likes", 1);
         this.put("createDt", "01-02-2015");
         this.put("pageId", record.getId());
+        JsonObject stylePrice = record.getStylePrice();
+        if (stylePrice != null)
+        {
+            this.mergeIn(stylePrice);
+        }
         this.put("images", new JsonArray());
         this.addImage(record.getImage());
         this.put("defaultPrice", record.getPrice());

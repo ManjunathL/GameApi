@@ -473,15 +473,10 @@ define([
                 $('#fb-btn').click(function() {
 
                     window.fbButton = $(this);
-                    setTimeout(function () {
                     window.fbButton.button('loading');
-
                     that.ref.authWithOAuthPopup("facebook", that.authHandler, {
                         scope: "email"
                     });
-                    window.close();
-
-                    }, 3000);
                 });
 
                 /*

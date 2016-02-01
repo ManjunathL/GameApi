@@ -36,9 +36,9 @@ define([
             if (!this.filterMaster.get('price_ranges')) {
                 this.filterMaster.fetch({
                     success: function() {
-                        if(typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null){
+                        if (typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null) {
                             that.fetchProductAndRender();
-                        }else{
+                        } else {
                             that.fetchCategoriesAndRender();
                         }
                     },
@@ -47,9 +47,9 @@ define([
                     }
                 });
             } else {
-                if(typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null){
+                if (typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null) {
                     that.fetchProductAndRender();
-                }else{
+                } else {
                     this.fetchCategoriesAndRender();
                 }
             }
@@ -88,48 +88,49 @@ define([
                             silent: true
                         });
 
-                        subCategory = that.categories.getSubCategoryBySubCategoryCode(selectedSubCategories);
+                        /*
+                                                subCategory = that.categories.getSubCategoryBySubCategoryCode(selectedSubCategories);
+                        */
+                        subCategory = that.categories.getSubCategoryBySubCategoryName(selectedSubCategories);
 
-                        if (subCategory) {
-                            var subCategorynames = new Array();
-                            subCategorynames.push(subCategory.toJSON().name);
-                            that.filter.set({
-                                'selectedFiltersName': subCategorynames
-                            }, {
-                                silent: true
-                            });
-                            var filterIds = new Array();
-                            filterIds.push(subCategory.toJSON().id);
-                            that.filter.set({
-                                'filterIds': filterIds
-                            }, {
-                                silent: true
-                            });
+                        var subCategorynames = new Array();
+                        subCategory && subCategorynames.push(subCategory.toJSON().name);
+                        that.filter.set({
+                            'selectedFiltersName': subCategorynames
+                        }, {
+                            silent: true
+                        });
+                        var filterIds = new Array();
+                        subCategory && filterIds.push(subCategory.toJSON().name);
+                        that.filter.set({
+                            'filterIds': filterIds
+                        }, {
+                            silent: true
+                        });
 
-                            var subcatIds = new Array();
-                            subcatIds.push(subCategory.toJSON().id);
-                            that.filter.set({
-                                'subcatIds': subcatIds
-                            }, {
-                                silent: true
-                            });
+                        var subcatNames = new Array();
+                        subCategory && subcatNames.push(subCategory.toJSON().name);
+                        that.filter.set({
+                            'subcatNames': subcatNames
+                        }, {
+                            silent: true
+                        });
 
-                            var priceRangeIds = new Array();
-                            that.filter.set({
-                                'priceRangeIds': priceRangeIds
-                            }, {
-                                silent: true
-                            });
+                        var priceRangeIds = new Array();
+                        that.filter.set({
+                            'priceRangeIds': priceRangeIds
+                        }, {
+                            silent: true
+                        });
 
-                            var styleIds = new Array();
-                            that.filter.set({
-                                'styleIds': styleIds
-                            }, {
-                                silent: true
-                            });
+                        var styleIds = new Array();
+                        that.filter.set({
+                            'styleIds': styleIds
+                        }, {
+                            silent: true
+                        });
 
-                            that.fetchProductAndRender();
-                        }
+                        that.fetchProductAndRender();
                     },
                     error: function(model, response, options) {
                         console.log("couldn't fetch categories - " + response);
@@ -143,12 +144,14 @@ define([
         markShortlisted: function() {
             var shortlistedItems = MGF.getShortListedItems();
             var that = this;
+
+
             _.each(shortlistedItems, function(shortlistedProduct) {
-                that.products.getProduct(shortlistedProduct.id).set('user_shortlisted', true);
+                that.products.getProduct(shortlistedProduct.productId).set('user_shortlisted', true);
             });
         },
         clearShortlisted: function() {
-            this.products && this.products.each(function(product){
+            this.products && this.products.each(function(product) {
                 product.set('user_shortlisted', false);
             });
         },
@@ -162,7 +165,7 @@ define([
                     },
                     success: function() {
                         that.markShortlisted();
-                        if(typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null){
+                        if (typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null) {
                             that.getProductSubcategories();
                         }
                         that.productFilter();
@@ -171,27 +174,32 @@ define([
                         console.log("error from products fetch - " + response);
                     }
                 });
-            }else{
+            } else {
                 that.productFilter();
             }
         },
-        getProductSubcategories: function(){
+        getProductSubcategories: function() {
             var that = this;
             window.filter = that.filter;
 
-            var subcatIds = new Array();
+            var subcatNames = new Array();
             var filterIds = new Array();
             var subCategorynames = new Array();
 
             var selectedSubCategoriesList = {};
 
             var subcategoryarr = [];
-            that.products.each(function(product){
-                subcategoryarr.push({id: product.get('subCategId'), name: product.get('subCateg')});
+            that.products.each(function(product) {
+                //subcategoryarr.push({id: product.get('subCategId'), name: product.get('subCateg')});
+                subcategoryarr.push({
+                    name: product.get('subcategory')
+                });
             });
 
             that.filter.set({
-                'selectedSubCategoriesList': _.uniq(subcategoryarr,false,function(e){ return e.id; })
+                'selectedSubCategoriesList': _.uniq(subcategoryarr, false, function(e) {
+                    return e.name;
+                })
             }, {
                 silent: true
             });
@@ -208,7 +216,7 @@ define([
             });
 
             that.filter.set({
-                'subcatIds': subcatIds
+                'subcatNames': subcatNames
             }, {
                 silent: true
             });
@@ -240,7 +248,7 @@ define([
                 });
             }
 
-            if(typeof(that.filter.get('noFilterApplied')) == 'undefined') {
+            if (typeof(that.filter.get('noFilterApplied')) == 'undefined') {
                 that.filter.set({
                     'noFilterApplied': '0'
                 }, {
@@ -251,7 +259,7 @@ define([
             var filterApplied = that.filter.get('noFilterApplied');
 
             var selectedfilterIds = that.filter.get('filterIds');
-            var selectedSubcatIds = that.filter.get('subcatIds');
+            var selectedSubcatNames = that.filter.get('subcatNames');
             var selectedPriceRangeIds = that.filter.get('priceRangeIds');
             var selectedStyleIds = that.filter.get('styleIds');
 
@@ -308,26 +316,28 @@ define([
                 that.products.sortBy(sortBy, sortDir);
             }
 
-            if((typeof(selectedSubcatIds) !== 'undefined') && (selectedSubcatIds.length != 0)) {
-                var filteredProducts = that.products.filterBySubcat(selectedSubcatIds);
-            }else {
+
+            if ((typeof(selectedSubcatNames) !== 'undefined') && (selectedSubcatNames.length != 0)) {
+                var filteredProducts = that.products.filterBySubcat(selectedSubcatNames);
+            } else {
                 filteredProducts = that.products.toJSON();
             }
 
-            if(selectedPriceRangeIds.length != 0){
-                if(typeof(filteredProducts) == 'undefined'){
+
+            if (selectedPriceRangeIds.length != 0) {
+                if (typeof(filteredProducts) == 'undefined') {
                     filteredProducts = that.products.toJSON();
-                    filteredProducts = that.products.filterByPriceRange(filteredProducts,selectedPriceRangeIds);
-                }else {
-                    filteredProducts = that.products.filterByPriceRange(filteredProducts,selectedPriceRangeIds);
+                    filteredProducts = that.products.filterByPriceRange(filteredProducts, selectedPriceRangeIds);
+                } else {
+                    filteredProducts = that.products.filterByPriceRange(filteredProducts, selectedPriceRangeIds);
                 }
             }
 
-            if(selectedStyleIds.length != 0) {
-                if(typeof(filteredProducts) == 'undefined'){
+            if (selectedStyleIds.length != 0) {
+                if (typeof(filteredProducts) == 'undefined') {
                     filteredProducts = that.products.toJSON();
                     filteredProducts = that.products.filterByStyle(filteredProducts, selectedStyleIds);
-                }else {
+                } else {
                     filteredProducts = that.products.filterByStyle(filteredProducts, selectedStyleIds);
                 }
             }
@@ -340,6 +350,7 @@ define([
                     silent: true
                 });
             }
+
             var compiledTemplate = _.template(productPageTemplate);
             $(that.el).html(compiledTemplate({
                 "collection": filteredProducts,
@@ -356,7 +367,8 @@ define([
             return that;
         },
         events: {
-            "click .shortlistable-item": "toggleShortListItem"
+            "click .shortlistable-item": "toggleShortListItem",
+            "click .fa-share": "toggleShareIcons"
         },
         toggleShortListItem: function(e) {
 
@@ -377,6 +389,7 @@ define([
                     product.set('user_shortlisted', false);
                 });
             } else {
+                console.log(product.toJSON());
                 MGF.addShortlistProduct(product.toJSON()).then(function() {
                     product.set('user_shortlisted', true);
                 });
@@ -387,6 +400,14 @@ define([
             this.clearShortlisted();
             this.markShortlisted();
             this.render();
+        },
+        toggleShareIcons: function(e){
+            e.preventDefault();
+
+            var currentTarget = $(e.currentTarget);
+            var shareicoId = currentTarget.attr('id');
+            var productId = shareicoId.replace('share-ico','');
+            $('#list-share-txt'+productId).toggle();
         }
     });
     return ProductPage;
