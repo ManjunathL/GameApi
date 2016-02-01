@@ -96,7 +96,7 @@
                                             name="subcat"
                                             <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                             <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                            <% if(subcat.name == filtername){ %> checked <% } %>
+                                            <% if(subcat.name == filtername){ %> checked disabled <% } %>
                                             <% }); %>
                                             <% } %>>
                                         <%= subcat.name %>
@@ -136,7 +136,7 @@
                                                 name="price_range"
                                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                        <% if(range.name == filtername){ %> checked <% } %>
+                                        <% if(range.name == filtername){ %> checked disabled <% } %>
                                         <% }); %>
                                         <% } %>>
                                         <%= range.name %>
@@ -176,7 +176,7 @@
                                                 name="style"
                                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                        <% if(style.name == filtername){ %> checked <% } %>
+                                        <% if(style.name == filtername){ %> checked disabled <% } %>
                                         <% }); %>
                                         <% } %>>
                                         <%= style.name %>
