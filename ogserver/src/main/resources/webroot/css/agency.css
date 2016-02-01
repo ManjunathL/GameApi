@@ -520,11 +520,11 @@ button {
 
 .user_name {
     position: absolute;
-    top: 4%;
     white-space: nowrap;
     display: inline-block;
     max-width: 175px !important;
-    overflow:hidden !important;
+    padding-left: 8px;
+    overflow: hidden !important;
     text-overflow: ellipsis;
 }
 
@@ -1217,10 +1217,6 @@ input[type=checkbox] {
         font-size: 30px !important;
     }
 
-    .user_name {
-        top: 30px !important;
-    }
-
     #layout-view {
         display: none;
     }
@@ -1461,6 +1457,12 @@ section h3.section-subheading {
 
 .list-view {
     display: none;
+}
+
+.product-caption-overflow {
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 
 .cost {
