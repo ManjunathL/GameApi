@@ -136,7 +136,7 @@
                             <label id="chooseFinish">Choose Finish:</label>
                             <div class="width100 list-group padding20-20" aria-labelledby="chooseFinish" id="finishList">
                                 <% _.each (selectedfinishes, function(finish) { %>
-                                <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline" data-finish="<%=finish%>"><%=finish%></a>
+                                <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline finish-overlap" data-finish="<%=finish%>"><%=finish%></a>
                                 <% }); %>
                             </div>
                         </div>
