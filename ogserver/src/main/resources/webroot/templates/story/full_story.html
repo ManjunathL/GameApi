@@ -15,6 +15,14 @@
                     <p>
                         <%= story.blog_content %>
                     </p>
+                    <div class="padding-top15">
+                        <h4>Article posted in : </h4>
+                        <% _.each(story.blog_categories, function(cat){ %>
+                            <span class="tag-card">
+                                <a><%= cat %></a>
+                            </span>
+                        <% }); %>
+                    </div>
                 </div>
 
             <% } }); } %>

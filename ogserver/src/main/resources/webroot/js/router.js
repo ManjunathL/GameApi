@@ -93,7 +93,7 @@ define([
                         "id": storyId
                     }
                 };
-                VM.create("story", FullStoryPage).render();
+                VM.create("story", FullStoryPage, options).render();
             });
         });
         Backbone.history.start();
