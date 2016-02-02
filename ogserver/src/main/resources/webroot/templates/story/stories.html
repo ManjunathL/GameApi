@@ -35,12 +35,17 @@
                     </a>
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <p class="padding-top15 blog_data justify">
-                        <% var n = story.blog_content.indexOf('</p>'); %>
-                        <% if (n > 200){ %>
-                            <% var stry = story.blog_content.slice(3, 250); %>
+                        <% var blg_stry = story.blog_content;
+                        var r = /\\u([\d\w]{4})/gi;
+                        blg_stry = blg_stry.replace(r, function (match, grp) {
+                        return String.fromCharCode(parseInt(grp, 16)); } );
+                        blg_stry = unescape(blg_stry);
+                        var n = blg_stry.indexOf('</p>');
+                        if (n > 200){
+                            var stry = blg_stry.slice(3, 250); %>
                             <%= stry %>...
-                        <% } else { %>
-                            <% var stry = story.blog_content.slice(3, n); %>
+                        <% } else {
+                             var stry = blg_stry.slice(3, n); %>
                             <%= stry %>
                         <% } %>
                     </p>
@@ -65,12 +70,17 @@
                     </a>
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <p class="padding-top15 blog_data justify">
-                        <% var n = story.blog_content.indexOf('</p>'); %>
-                        <% if (n > 200){ %>
-                            <% var stry = story.blog_content.slice(3, 250); %>
+                        <% var blg_stry = story.blog_content;
+                        var r = /\\u([\d\w]{4})/gi;
+                        blg_stry = blg_stry.replace(r, function (match, grp) {
+                        return String.fromCharCode(parseInt(grp, 16)); } );
+                        blg_stry = unescape(blg_stry);
+                        var n = blg_stry.indexOf('</p>');
+                        if (n > 200){
+                            var stry = blg_stry.slice(3, 250); %>
                             <%= stry %>...
-                        <% } else { %>
-                            <% var stry = story.blog_content.slice(3, n); %>
+                        <% } else {
+                            var stry = blg_stry.slice(3, n); %>
                             <%= stry %>
                         <% } %>
                     </p>
