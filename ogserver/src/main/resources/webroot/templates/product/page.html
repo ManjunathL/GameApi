@@ -14,6 +14,7 @@
 
                 <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
                     <div id="filtered-list" class="padding8">
+                        <% var flag = 0; %>
                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ var count = 0; %>
                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
                         <% if (count < 4){ %>
@@ -24,20 +25,22 @@
                                         onclick="removeFilters('<%= filtername %>')">
                                 </span >
                             </span>
-                        <% count = count + 1; } }); %>
+                        <% count = count + 1; }else { flag = 1; } }); %>
                         <% } %>
 
                         <!--<% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>-->
                         <!--<span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>-->
                         <!--<% } %>-->
                         <% if (filter.selectedFiltersName != '' && filter.filterIds != '') {%>
+                        <% if(flag == 1){ %>
                          <span
                                  class="tag-card"
-                                 id="filter-epllises"
+                                 id="filter-ellipses"
                                  data-toggle="tooltip"
                                  data-placement="bottom"
                                  title="More Filters Applied"
                                  >...</span>
+                        <% } %>
                         <span class="tag-card color-orange margin0" id="clear_all" onclick="removeAllFilters()">Clear All</span>
                         <% } %>
                     </div>
@@ -434,21 +437,11 @@
             }
         });
 
-        $('#filter-epllises').css('display', 'none');
         $('#filtered-list').css({
             'white-space': 'nowrap',
             'overflow': 'hidden'
         });
 
-        var used_width = 0;
-        $('.tag-card').each(function(){
-            used_width = used_width + $(this).outerWidth();
-        });
-        var full_width = $('#filtered-list').width();
-        var epllipses_width = $('#filter-epllises').outerWidth() + $('#clear_all').outerWidth() + 7;
-        if((epllipses_width + used_width) >= full_width) {
-            $('#filter-epllises').css('display','inline');
-        }
 
         $('.filter-button').click(function() {
             $('.filterpop').css('left','0px');
@@ -493,12 +486,9 @@
             $('.grid-view').css ('display','block');
             $('.list-view').css('display','none');
             $('.listli').css('padding','10px 0px');
-            $('h2').css('font-size','20px');
-            $('h4').css('font-size','15px');
+            $('h4').css('font-size','15px').addClass('product-caption-overflow');
             $('.portfolio-caption').css('height','82px');
-            $('.img-titl').css('font-size','15px');
             $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');
-            $('.image-meta').css({'padding-top':'14%', 'padding-right':'5%', 'padding-bottom':'5%;'});
         });
 
         $('.glyphicon-th-large').click(function() {
@@ -509,10 +499,8 @@
             $('.grid-view').css ('display','block');
             $('.list-view').css('display','none');
             $('.listli').css('padding','10px');
-            $('h2').css('font-size','30px');
-            $('h4').css('font-size','20px');
+            $('h4').css('font-size','20px').removeClass('product-caption-overflow');
             $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
-            $('.image-meta').css({'padding-top':'18%', 'padding-right':'5%', 'padding-bottom':'5%;'});
         });
 
         $('.glyphicon-th-list').click(function() {
@@ -525,7 +513,7 @@
             $('.col-7-img').removeClass('col-md-12').addClass('col-md-7');
             $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5').css('padding-top','0px');
             $('h2').css('font-size','25px');
-            $('h4').css('font-size','20px');
+            $('h4').css('font-size','20px').removeClass('product-caption-overflow');
             $('.dimsn').css('display','block');
         });
 
