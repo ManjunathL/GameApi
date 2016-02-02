@@ -1,7 +1,7 @@
 <section class="bg-white menu-spacer">
     <div class="container-fluid category-banner">
         <img
-                src="http://cdn.livspace.com//img/banners/furniture/living-room-furniture-sofa-couch.jpg"
+                src="img/story_banner.jpg"
                 class="img-responsive"
                 alt="">
     </div>
@@ -11,7 +11,7 @@
             <% if(typeof(stories) !== 'undefined'){ var count = 0; %>
             <% _.each(stories, function(story){ %>
 
-            <% if(typeof(story.id) !== 'undefined'){ %>
+            <% if((typeof(story.id) !== 'undefined') && (story.blog_main_image != '')){ %>
 
             <% if (count % 2 == 0) { %>
 
@@ -27,15 +27,22 @@
                         <% var cnt = 0; %>
                         <% _.each(story.blog_categories, function(cat){ %>
                         <% if(cnt != 0) { %> | <% } %>
-                        <a><%= cat.name %></a>
+                        <a><%= cat %></a>
                         <% cnt = cnt + 1; }); %>
                     </p>
                     <a href="#story/<%= story.id %>">
                         <h2><%= story.blog_heading %></h2>
                     </a>
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
-                    <p class="padding-top15 justify">
-                        <%= story.blog_content %>
+                    <p class="padding-top15 blog_data justify">
+                        <% var n = story.blog_content.indexOf('</p>'); %>
+                        <% if (n > 200){ %>
+                            <% var stry = story.blog_content.slice(3, 250); %>
+                            <%= stry %>...
+                        <% } else { %>
+                            <% var stry = story.blog_content.slice(3, n); %>
+                            <%= stry %>
+                        <% } %>
                     </p>
                     <p class="font-size16">
                         <a href="#story/<%= story.id %>" class="color-orange">Read Full Story</a>
@@ -43,25 +50,32 @@
                 </div>
             </div>
 
-            <% count = count + 1; } else { %>
+            <% } else { %>
             <div class="row margin50-0">
                 <div class="col-md-5 col-sm-5">
                     <p class="color-333">
                         <% var cnt = 0; %>
                         <% _.each(story.blog_categories, function(cat){ %>
                         <% if(cnt != 0) { %> | <% } %>
-                        <a><%= cat.name %></a>
+                        <a><%= cat %></a>
                         <% cnt = cnt + 1; }); %>
                     </p>
                     <a href="#story/<%= story.id %>">
                         <h2><%= story.blog_heading %></h2>
                     </a>
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
-                    <p class="padding-top15 justify">
-                        <%= story.blog_content %>
+                    <p class="padding-top15 blog_data justify">
+                        <% var n = story.blog_content.indexOf('</p>'); %>
+                        <% if (n > 200){ %>
+                            <% var stry = story.blog_content.slice(3, 250); %>
+                            <%= stry %>...
+                        <% } else { %>
+                            <% var stry = story.blog_content.slice(3, n); %>
+                            <%= stry %>
+                        <% } %>
                     </p>
                     <p class="font-size16">
-                        <a href="#story/<%= story.id %>" class="color-orange">Read Full Story</>
+                        <a href="#story/<%= story.id %>" class="color-orange">Read Full Story</a>
                     </p>
                 </div>
                 <div class="col-md-7 col-sm-7">
@@ -72,7 +86,7 @@
                 </div>
             </div>
 
-            <% count = count + 1; } } }); } %>
+            <% } count = count + 1; } }); } %>
         </div>
     </div>
 </section>
