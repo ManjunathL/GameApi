@@ -213,87 +213,88 @@
                 <a href="/user_profile">
                     View Profile
                 </a>
+                <a class="signout_icon display-inline-block padding-left25">
+                    Sign Out
+                </a>
             </div>
-            <span class="fa fa-sign-out signout_icon"
-                  data-toggle="tooltip"
-                  data-placement="left"
-                  title="Sign Out">
-            </span>
         </h3>
         <div class="row">
             <div class="col-md-8 col-xs-8 padding0">
                 <h4>Items Shortlisted</h4>
             </div>
             <div class="col-md-4 col-xs-4 padding0 align-right">
-                <a href="/shortlist" id="view-all-shortlist" data-element=".userpop"><span class="button">view all</span></a>
-            </div>
+                <a href="/shortlist" id="view-all-shortlist" data-element=".userpop">
+                    <span class="button-blue">view all</span>
+                </a>            </div>
         </div>
-        <div class="row shortlist">
-        </div>
+        <div class="row shortlist"></div>
 
         <% } else { %>
         <h2>
-            <img src="/img/user.png">
+            <img src="/img/user.png" class="display-inline-block">
             My Account
         </h2>
 
-        <form id="loginForm" data-toggle="validator" role="form">
-            <div class="row display-none" id="login_error_row">
-                <p class="margin0 error-text align-center" id="login_error"></p>
-            </div>
-
-            <div class="row">
-                <div class="margin-bottom20 form-group">
-                    <p class="margin0">Email ID*</p>
-                    <input type="email" class="width100" placeholder="abc@xyz.com" id="emailId" maxlength="100"
-                           required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
-                </div>
-                <div class="margin-bottom20 form-group">
-                    <p class="margin0">Password*</p>
-                    <input type="password" class="width100" id="pwd" required maxlength="100"/>
-                </div>
-                <div>
-                    <input type="checkbox" id="remember" checked/> Remember Me
-                </div>
-                <div class="padding20-0">
-                    <div class="col-md-6 col-xs-6 padding0 form-group margin0">
-                        <button id="loginBtn" class="button margin-top20 margin-bottom20"
-                                type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign in">sign in
-                        </button>
-                    </div>
-                    <div class="col-md-6 padding0 align-right">
-                        <a href="#" id="forgot_pwd_btn">Forgot Password??</a>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <div class="margin-bottom20">
+            <p class="align-center">
+                Use your favourite social account
+            </p>
+            <ul class="list-inline social-buttons align-center margin-top20">
+                <li>
+                    <a href="#" id="fb-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#" id="google-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-google"></i></a>
+                </li>
+                <!--                    <li>
+                                        <a href="#" id="twitter-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-twitter"></i></a>
+                                    </li>-->
+            </ul>
+        </div>
 
         <div class="row margin-top20 margin-bottom20">
             <p class="align-center">OR</p>
 
-            <div class="margin-bottom40">
-                <p>
-                    Use your favourite social account
-                </p>
-                <ul class="list-inline social-buttons align-center">
-                    <li>
-                        <a href="#" id="fb-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" id="google-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-google"></i></a>
-                    </li>
-<!--                    <li>
-                        <a href="#" id="twitter-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-twitter"></i></a>
-                    </li>-->
-                </ul>
-            </div>
-            <div class="margin-bottom20">
-                <p class="font-size12">
-                    And, if you are new to mygubbi.com
-                </p>
+            <form id="loginForm" data-toggle="validator" role="form">
+                <div class="row display-none" id="login_error_row">
+                    <p class="margin0 error-text align-center" id="login_error"></p>
+                </div>
+
+                <div class="row">
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Email ID*</p>
+                        <input type="email" class="width100" placeholder="abc@xyz.com" id="emailId" maxlength="100"
+                               required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                    </div>
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Password*</p>
+                        <input type="password" class="width100" id="pwd" required maxlength="100"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <input type="checkbox" id="remember" checked/> Remember Me
+                        </div>
+                        <div class="col-md-6 col-xs-6 align-right">
+                            <a href="#" id="forgot_pwd_btn">Forgot Password??</a>
+                        </div>
+                    </div>
+                    <div class="row padding20 margin20-0">
+                        <div class="col-md-12 col-xs-12 padding0 form-group margin0">
+                            <button id="loginBtn" class="button-blue width100"
+                                    type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign in">sign in
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="margin20-0 align-center">
+                <!--<p class="font-size12">-->
+                    <!--And, if you are new to mygubbi.com-->
+                <!--</p>-->
 
                 <p>
-                    <a href="#" id="new_reg">Create a new Account</a> - It’s Free!
+                    New to mygubbi?<a href="#" id="new_reg">&nbsp;Sign Up</a>
                 </p>
             </div>
         </div>
@@ -301,15 +302,15 @@
 
     </div>
 
-    <div class="userpop-footer align-center">
-        <p class="font-size10">
-            <a href="#">Terms of use</a>|
-            <a href="#">Privacy Policy</a>
-        </p>
-        <p class="font-size9">
-            &copy; 2015 mygubbi.com All rights reserved
-        </p>
-    </div>
+    <!--<div class="userpop-footer align-center">-->
+        <!--<p class="font-size10">-->
+            <!--<a href="#">Terms of use</a>|-->
+            <!--<a href="#">Privacy Policy</a>-->
+        <!--</p>-->
+        <!--<p class="font-size9">-->
+            <!--&copy; 2015 mygubbi.com All rights reserved-->
+        <!--</p>-->
+    <!--</div>-->
 
     <div id="close-user-pop" class="close-icon" data-element=".userpop">
         <img src="/img/close-white.png">
@@ -334,7 +335,7 @@
                     <div class="padding20-0 align-center form-group" id="reset_password">
                         <button
                                 id="forgotBtn"
-                                class="button margin-top20 margin-bottom20"
+                                class="button-blue margin-top20 margin-bottom20"
                                 type="submit"
                                 data-loading-text="<i class='fa fa-spinner fa-spin'></i> reset password">
                             reset password
@@ -405,7 +406,7 @@
                     <div class="align-center form-group">
                         <button
                                 id="signup-btn"
-                                class="button margin-top20 margin-bottom20"
+                                class="button-blue margin-top20 margin-bottom20"
                                 type="submit"
                                 data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign up">
                             sign up
@@ -496,7 +497,7 @@
                             <div class="align-center form-group">
                                 <button
                                         id="contactus-submit-btn"
-                                        class="button margin-top20 margin-bottom20"
+                                        class="button-blue margin-top20 margin-bottom20"
                                         type="submit"
                                         data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
                                     submit

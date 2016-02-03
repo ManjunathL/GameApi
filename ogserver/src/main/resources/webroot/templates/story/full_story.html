@@ -6,7 +6,14 @@
             <% if(story.id == story_id){ %>
 
                 <div class="padding10">
-                    <h2><%= story.blog_heading %></h2>
+                    <h2>
+                        <% var blg_hdng = story.blog_heading;
+                        var r = /\\u([\d\w]{4})/gi;
+                        blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                        return String.fromCharCode(parseInt(grp, 16)); } );
+                        blg_hdng = unescape(blg_hdng); %>
+                        <%= blg_hdng %>
+                    </h2>
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <div class="padding10-0">
                         <img src="<%= story.blog_main_image %>"
@@ -24,7 +31,7 @@
                         <h4>Article posted in : </h4>
                         <% _.each(story.blog_categories, function(cat){ %>
                             <span class="tag-card">
-                                <a><%= cat %></a>
+                                <%= cat %>
                             </span>
                         <% }); %>
                     </div>
@@ -47,7 +54,14 @@
                 </div>
                 <div class="col-md-7 padding-right0">
                     <a href="/story/<%= story.id %>">
-                        <h5><%= story.blog_heading %></h5>
+                        <h5>
+                            <% var blg_hdng = story.blog_heading;
+                            var r = /\\u([\d\w]{4})/gi;
+                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                            return String.fromCharCode(parseInt(grp, 16)); } );
+                            blg_hdng = unescape(blg_hdng); %>
+                            <%= blg_hdng %>
+                        </h5>
                     </a>
                     <div class="date_small"><%= story.date_of_publish %></div>
                 </div>
@@ -61,7 +75,9 @@
     $(document).ready(function () {
         $('img').each(function() {
             if(!($(this).hasClass('img-responsive'))){
-                $(this).addClass('img-responsive');
+                if(!($(this).parent().eq(2).hasClass('userpop-content'))){
+                    $(this).addClass('img-responsive');
+                }
             }
         });
     });
