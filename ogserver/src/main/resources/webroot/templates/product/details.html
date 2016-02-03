@@ -124,20 +124,22 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="mfc">
                     <div class="row margin-left-0 paddingtop40">
-                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10 paddingbottom10">
-                            <label id="chooseMaterial">Choose Material:</label>
-                            <div class="width100 list-group padding20-20" aria-labelledby="chooseMaterial">
-                                <% _.each (materials, function(material) { %>
-                                <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline" data-material="<%=material%>"><%=material%></a>
-                                <% }); %>
+                        <div class="col-sm-12 paddingtop20 bg-light-gray margintop10 paddingbottom10">
+                            <div class="col-sm-6 paddingtop10">
+                                <label id="chooseMaterial">Choose Material:</label>
+                                <div class="width100 portfolio-box bg-light-gray padding10 justify" aria-labelledby="chooseMaterial">
+                                    <% _.each (materials, function(material) { %>
+                                    <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline-block" data-material="<%=material%>"><%=material%></a>
+                                    <% }); %>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 paddingtop20 bg-light-gray margintop10 paddingbottom10">
-                            <label id="chooseFinish">Choose Finish:</label>
-                            <div class="width100 list-group padding20-20" aria-labelledby="chooseFinish" id="finishList">
-                                <% _.each (selectedfinishes, function(finish) { %>
-                                <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline finish-overlap" data-finish="<%=finish%>"><%=finish%></a>
-                                <% }); %>
+                            <div class="col-sm-6 paddingtop10">
+                                <label id="chooseFinish">Choose Finish:</label>
+                                <div class="width100 portfolio-box bg-light-gray padding10 justify" aria-labelledby="chooseFinish" id="finishList">
+                                    <% _.each (selectedfinishes, function(finish) { %>
+                                    <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline-block" data-finish="<%=finish%>"><%=finish%></a>
+                                    <% }); %>
+                                </div>
                             </div>
                         </div>
                         <% if(typeof(selectedColor) !== 'undefined' && Object.keys(selectedColor).length != 0){ %>
@@ -446,19 +448,19 @@
                             <div class="margin-bottom20 form-group">
                                 <input type="hidden" class="width100 form-control" placeholder="Product Name*" value="<%= product.name %>"
                                        id="consult_product_name" required/>
-                                <input type="text" class="width100 form-control" placeholder="Name*" value=""
+                                <input type="text" class="width100 form-control" placeholder="Name*" value="<%=userProfile ? userProfile.displayName : ''%>"
                                        id="consult_full_name" required/>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="margin-bottom20 form-group">
-                                <input type="email" class="width100 form-control" placeholder="Email*" value=""
+                                <input type="email" class="width100 form-control" placeholder="Email*" value="<%=userProfile ? userProfile.email : ''%>"
                                        id="consult_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="margin-bottom20 form-group has-feedback">
-                                <input type="text" class="width100 form-control" placeholder="Phone Number*" value=""
+                                <input type="text" class="width100 form-control" placeholder="Phone Number*" value="<%=userProfile ? userProfile.phone : ''%>"
                                        id="consult_contact_num" required pattern="\d{10}" title="e.g. 9876543210"/>
 
                                 <div class="help-block with-errors"></div>

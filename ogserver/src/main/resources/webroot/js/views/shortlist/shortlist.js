@@ -11,13 +11,23 @@ define([
     var ShortlistView = Backbone.View.extend({
         el: '.page',
         initialize: function() {
+            this.ref = MGF.rootRef;
             this.listenTo(Backbone, 'user.change', this.render);
-            _.bindAll(this, 'render');
+            _.bindAll(this, 'render','renderWithUserProfCallback');
+        },
+        renderWithUserProfCallback: function(userProfData) {
+            $(this.el).html(_.template(shortlistTemplate)({
+                'shortlistedItems': MGF.getShortListedItems(),
+                'userProfile': userProfData
+            }));
         },
         render: function() {
-            $(this.el).html(_.template(shortlistTemplate)({
+            var authData = this.ref.getAuth();
+            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+
+            /*$(this.el).html(_.template(shortlistTemplate)({
                 'shortlistedItems': MGF.getShortListedItems()
-            }));
+            }));*/
         },
         events: {
             "click .shortlistable": "removeShortlistItem",
@@ -60,7 +70,7 @@ define([
 
             var id = $(e.currentTarget).attr('id');
             var formid = id.replace('consultForm','');
-            alert(formid);
+            //alert(formid);
             $('#consult_error'+formid).html('');
             $('#consult_error_row'+formid).css("display", "none");
             this.consultSubmit(formid);

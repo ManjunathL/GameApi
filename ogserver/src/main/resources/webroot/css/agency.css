@@ -3345,11 +3345,32 @@ width: 325px!important;
 #alt1-frame ul li.active {
     border-top: 0px solid #F1591F;
 }
-.finish-overlap{
+/*.finish-overlap{
     float: left !important;
     margin-left: 1%;
     margin-bottom: 1%;
     border-radius:4px;
+}*/
+.display-inline-block{
+    display: inline-block;
+}
+
+.list-group-item {
+    z-index: 2;
+    color: #000;
+    background-color: #fff;
+    border-color: #fff;
+    margin: 5px 5px 5px 0px!important;
+    display: inline-block;
+    border-radius:4px;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    z-index: 2;
+    color: #FFF;
+    background-color: #337AB7;
+    border-color: #337AB7;
+    display: inline-block;
 }
 
 @media (max-width: 991px) {
