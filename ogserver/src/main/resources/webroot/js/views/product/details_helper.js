@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'slyutil',
+    '/js/slyutil.js',
     'jqueryeasing'
 ], function($, SlyUtil, JqueryEasing) {
     return {

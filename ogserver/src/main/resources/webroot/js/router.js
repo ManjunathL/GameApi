@@ -3,19 +3,19 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'views/view_manager'
+    '/js/views/view_manager.js'
 ], function($, _, Backbone, Bootstrap, VM) {
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'dashboard',
-            'products/:categories(/:subcategories)': 'products',
-            'product_search/:searchTerm': 'products-search',
-            'product/:id': 'product',
-            'user_profile': 'user_profile',
-            'consult': 'consult',
-            'shortlist': 'shortlist',
-            'stories': 'stories',
-            'story/:id': 'story'
+            'products/:categories(/:subcategories)(/)': 'products',
+            'product_search/:searchTerm(/)': 'products-search',
+            'product/:id(/)': 'product',
+            'user_profile(/)': 'user_profile',
+            'consult(/)': 'consult',
+            'shortlist(/)': 'shortlist',
+            'stories(/)': 'stories',
+            'story/:id(/)': 'story'
         }
 
     });
@@ -23,13 +23,15 @@ define([
     var initialize = function(options) {
         var appView = options.appView;
         var router = new AppRouter(options);
+        window.App = window.App || {};
+        window.App.router = router;
         router.on('route:dashboard', function(actions) {
-            require(['views/dashboard/page'], function(DashboardPage) {
+            require(['/js/views/dashboard/page.js'], function(DashboardPage) {
                 VM.create("dashboard", DashboardPage).render();
             });
         });
         router.on('route:products', function(categories, subcategories, searchTerm, sortBy, sortDir, layout) {
-            require(['views/product/page'], function(ProductPage) {
+            require(['/js/views/product/page.js'], function(ProductPage) {
                 var options = {
                     model: {
                         "selectedCategories": categories,
@@ -44,9 +46,9 @@ define([
             });
         });
         router.on('route:products-search', function(searchTerm) {
-            require(['views/product/page'], function(ProductPage) {
-            console.log('searchTerm');
-            console.log(searchTerm);
+            require(['/js/views/product/page.js'], function(ProductPage) {
+                console.log('searchTerm');
+                console.log(searchTerm);
                 var options = {
                     model: {
                         "searchTerm": searchTerm
@@ -56,7 +58,7 @@ define([
             });
         });
         router.on('route:product', function(productId) {
-            require(['views/product/details'], function(ProductDetailPage) {
+            require(['/js/views/product/details.js'], function(ProductDetailPage) {
                 var options = {
                     model: {
                         "id": productId
@@ -66,27 +68,27 @@ define([
             });
         });
         router.on('route:user_profile', function(actions) {
-            require(['views/user_profile/user_profile'], function(UserProfilePage) {
+            require(['/js/views/user_profile/user_profile.js'], function(UserProfilePage) {
                 VM.create("userProfile", UserProfilePage).render();
             });
         });
         router.on('route:consult', function(actions) {
-            require(['views/consult/consult'], function(ConsultPage) {
+            require(['/js/views/consult/consult.js'], function(ConsultPage) {
                 VM.create("consult", ConsultPage).render();
             });
         });
         router.on('route:shortlist', function(actions) {
-            require(['views/shortlist/shortlist'], function(ShortlistPage) {
+            require(['/js/views/shortlist/shortlist.js'], function(ShortlistPage) {
                 VM.create("shortlist", ShortlistPage).render();
             });
         });
-        router.on('route:stories', function (actions) {
-            require(['views/story/stories'], function (StoriesPage) {
+        router.on('route:stories', function(actions) {
+            require(['/js/views/story/stories.js'], function(StoriesPage) {
                 VM.create("stories", StoriesPage).render();
             });
         });
-        router.on('route:story', function (storyId) {
-            require(['views/story/full_story'], function (FullStoryPage) {
+        router.on('route:story', function(storyId) {
+            require(['/js/views/story/full_story.js'], function(FullStoryPage) {
 
                 var options = {
                     model: {
@@ -96,7 +98,10 @@ define([
                 VM.create("story", FullStoryPage, options).render();
             });
         });
-        Backbone.history.start();
+        Backbone.history.start({
+            pushState: true,
+            root: "/"
+        });
     };
     return {
         initialize: initialize

@@ -1,7 +1,7 @@
 <section class="menu-spacer bg-light-gray">
 
     <div class="container-fluid category-banner">
-        <img width="100%" src="img/wishlist.png" class="img-responsive" alt="">
+        <img width="100%" src="/img/wishlist.png" class="img-responsive" alt="">
     </div>
     <% var slcount = shortlistedItems ? Object.keys(shortlistedItems).length : 0; %>
     <div class="container-fluid bg-color-white">
@@ -25,12 +25,12 @@
                 <div class="col-md-6 col-sm-6 portfolio-item">
                     <div class="portfolio-box overflow-hidden">
                         <div class="row margin0 position-relative">
-                            <a href="#product/<%= product.productId %>" class="portfolio-link">
+                            <a href="/product/<%= product.productId %>" class="portfolio-link">
                                 <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"/>
                             </a>
                             <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
                                 <div class="listli">
-                                    <a href="#product/<%= product.productId %>">
+                                    <a href="/product/<%= product.productId %>">
                                         <span class="glyph fa fa-info"></span>
                                         <!--<span class="list-txt">know more</span>-->
                                     </a>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                         <div id="close-consult-pop<%= product.productId %>" data-element="#consultpop<%= product.productId %>" class="close-consult-pop close-icon signup-form">
-                            <img src="img/close-white.png">
+                            <img src="/img/close-white.png">
                         </div>
                     </div>
 

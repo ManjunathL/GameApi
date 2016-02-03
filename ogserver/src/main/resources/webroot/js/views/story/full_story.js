@@ -5,8 +5,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'models/story',
-    'text!templates/story/full_story.html'
+    '/js/models/story.js',
+    'text!/templates/story/full_story.html'
 ], function($, _, Backbone, Story, fullStoryTemplate) {
     var FullStoryView = Backbone.View.extend({
         el: '.page',

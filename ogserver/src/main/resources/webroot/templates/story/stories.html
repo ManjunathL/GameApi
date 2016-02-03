@@ -1,7 +1,7 @@
 <section class="bg-white menu-spacer">
     <div class="container-fluid category-banner">
         <img
-                src="img/story_banner.jpg"
+                src="/img/story_banner.jpg"
                 class="img-responsive"
                 alt="">
     </div>
@@ -17,7 +17,7 @@
 
             <div class="row margin50-0">
                 <div class="col-md-7 col-sm-7">
-                    <a href="#story/<%= story.id %>">
+                    <a href="/story/<%= story.id %>">
                         <img src="<%= story.blog_main_image %>"
                              class="img-responsive">
                     </a>
@@ -30,7 +30,7 @@
                         <a><%= cat %></a>
                         <% cnt = cnt + 1; }); %>
                     </p>
-                    <a href="#story/<%= story.id %>">
+                    <a href="/story/<%= story.id %>">
                         <h2><%= story.blog_heading %></h2>
                     </a>
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
@@ -50,7 +50,7 @@
                         <% } %>
                     </p>
                     <p class="font-size16">
-                        <a href="#story/<%= story.id %>" class="color-orange">Read Full Story</a>
+                        <a href="/story/<%= story.id %>" class="color-orange">Read Full Story</a>
                     </p>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                         <a><%= cat %></a>
                         <% cnt = cnt + 1; }); %>
                     </p>
-                    <a href="#story/<%= story.id %>">
+                    <a href="/story/<%= story.id %>">
                         <h2><%= story.blog_heading %></h2>
                     </a>
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
@@ -85,11 +85,11 @@
                         <% } %>
                     </p>
                     <p class="font-size16">
-                        <a href="#story/<%= story.id %>" class="color-orange">Read Full Story</a>
+                        <a href="/story/<%= story.id %>" class="color-orange">Read Full Story</a>
                     </p>
                 </div>
                 <div class="col-md-7 col-sm-7">
-                    <a href="#story/<%= story.id %>">
+                    <a href="/story/<%= story.id %>">
                         <img src="<%= story.blog_main_image %>"
                              class="img-responsive">
                     </a>

@@ -7,8 +7,8 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'mgfirebase',
-    'text!templates/user_profile/user_profile.html'
+    '/js/mgfirebase.js',
+    'text!/templates/user_profile/user_profile.html'
 ], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, UserProfileTemplate) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',

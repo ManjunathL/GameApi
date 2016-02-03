@@ -3,10 +3,10 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'text!templates/consult/consult.html',
-    'mgfirebase',
-    'consultutil',
-    'css!../../../css/consult'
+    'text!/templates/consult/consult.html',
+    '/js/mgfirebase.js',
+    '/js/consultutil.js',
+    'css!/css/consult.css'
 ], function($, _, Backbone, Bootstrap, consultTemplate, MGF, ConsultUtil) {
     var ConsultView = Backbone.View.extend({
         el: '.page',

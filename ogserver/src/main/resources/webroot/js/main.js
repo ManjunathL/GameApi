@@ -6,7 +6,7 @@ require.config({
     backbone: 'libs/backbone/backbone-min',
     text: 'libs/text/text',
     jqueryeasing: 'libs/jquery.easing/js/jquery.easing.min',
-    sly: 'libs/sly/dist/sly.min',
+    sly: 'libs/sly/dist/sly',
     bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
     bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
     firebase: 'libs/firebase/firebase',
@@ -49,6 +49,11 @@ require([
 });
 
 var imgBase = "https://res.cloudinary.com/mygubbi/image/upload/"; //todo: change the collection name
-//var restBase = "https://localhost:8080"; //todo: make this empty for production
-var restBase = "https://52.74.136.198:8080"; //todo: make this empty for production
+var restBase = "https://localhost:8080"; //todo: make this empty for production
+//var restBase = "https://52.74.136.198:8080"; //todo: make this empty for production
 
+/*
+window.App.router.navigate(url, {
+    trigger: true
+});
+*/

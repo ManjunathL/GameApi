@@ -1,7 +1,7 @@
 define([
     'jquery',
     'backbone',
-    'models/product',
+    '/js/models/product.js',
     'underscore'
 ], function($, Backbone, Product, _) {
     var Products = Backbone.Collection.extend({

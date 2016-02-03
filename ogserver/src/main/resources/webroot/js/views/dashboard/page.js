@@ -3,9 +3,9 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'mgfirebase',
-    'consultutil',
-    'text!templates/dashboard/page.html'
+    '/js/mgfirebase.js',
+    '/js/consultutil.js',
+    'text!/templates/dashboard/page.html'
 ], function($, _, Backbone, Bootstrap, MGF, ConsultUtil, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',

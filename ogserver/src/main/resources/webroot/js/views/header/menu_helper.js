@@ -4,8 +4,8 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'mgfirebase',
-    'consultutil'
+    '/js/mgfirebase.js',
+    '/js/consultutil.js'
 ], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil) {
     return {
         ref: MGF.rootRef,
@@ -56,7 +56,7 @@ define([
                 }
                 MGF.listenForShortlistChanges();
             } else {
-                MGF.doAnonymousAuth();//.then(function(){/*do nothing here as onFAuth will get called again automatically*/});
+                MGF.doAnonymousAuth(); //.then(function(){/*do nothing here as onFAuth will get called again automatically*/});
             }
         },
         formUserData: function(authData, userProfile) {
@@ -429,14 +429,18 @@ define([
                 });
 
                 /* Search on menu bar Start */
-                 $('.search-ico').click(function() {
+                $('.search-ico').click(function() {
                     var isMobile = window.matchMedia("only screen and (max-width: 920px)");
                     if (isMobile.matches) {
-                       $('#main-lg-ico').css("position","relative");
-                       $('#sb-search-duplicate').toggle('slide',{ direction: 'Right'},500);
-                    }else{
-                        $('#bs-example-navbar-collapse-1').css("position","relative");
-                        $('#sb-search').toggle('slide',{ direction: 'Right'},500);
+                        $('#main-lg-ico').css("position", "relative");
+                        $('#sb-search-duplicate').toggle('slide', {
+                            direction: 'Right'
+                        }, 500);
+                    } else {
+                        $('#bs-example-navbar-collapse-1').css("position", "relative");
+                        $('#sb-search').toggle('slide', {
+                            direction: 'Right'
+                        }, 500);
                     }
                 });
 
@@ -448,11 +452,11 @@ define([
                         $('.sb-search_suggest').slideUp();
                     }
                 });
-                 $('.sb-search-txt').click(function() {
+                $('.sb-search-txt').click(function() {
                     $('.sb-search-input').val($(this).text());
-                    window.location.href = 'https://localhost:8000/#product_search/'+encodeURIComponent($(this).text());
+                    window.location.href = 'https://localhost:8000/#product_search/' + encodeURIComponent($(this).text());
                     $('.sb-search_suggest').slideUp();
-                 });
+                });
 
 
                 /* Search on menu bar End  */
@@ -512,7 +516,7 @@ define([
                 $(function() {
                     var navMain = $("#bs-example-navbar-collapse-1");
                     var subMenuUL = $(".dropdown-menu");
-                    subMenuUL.on("click", "a", null, function() {
+                    subMenuUL.on("click", "li", null, function() {
                         navMain.collapse('hide');
                     });
                 });
@@ -522,6 +526,17 @@ define([
                 that.positionSideContact();
 
                 $('#tawkchat-iframe-container').hide();
+
+                $(document).on("click", "a[href^='/']", function(event) {
+                    href = $(event.currentTarget).attr('href');
+                    if (!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+                        event.preventDefault();
+                        url = href.replace(/^\//, '').replace('\#\!\/', '');
+                        window.App.router.navigate(url, {
+                            trigger: true
+                        });
+                    }
+                });
 
             });
         }

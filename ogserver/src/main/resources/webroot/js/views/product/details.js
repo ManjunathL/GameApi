@@ -4,20 +4,20 @@ define([
     'backbone',
     'bootstrap',
     'jqueryeasing',
-    'text!templates/product/details.html',
-    'views/product/details_helper',
-    'models/product',
-    'models/custom_product',
-    'text!templates/product/accessory.html',
-    'text!templates/product/appliance.html',
-    'text!templates/product/finish.html',
-    'text!templates/product/colors.html',
-    'collections/products',
-    'text!templates/product/relatedproduct.html',
-    'slyutil',
-    'mgfirebase',
-    'consultutil',
-    'collections/appliances'
+    'text!/templates/product/details.html',
+    '/js/views/product/details_helper.js',
+    '/js/models/product.js',
+    '/js/models/custom_product.js',
+    'text!/templates/product/accessory.html',
+    'text!/templates/product/appliance.html',
+    'text!/templates/product/finish.html',
+    'text!/templates/product/colors.html',
+    '/js/collections/products.js',
+    'text!/templates/product/relatedproduct.html',
+    '/js/slyutil.js',
+    '/js/mgfirebase.js',
+    '/js/consultutil.js',
+    '/js/collections/appliances.js'
 ], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil, ApplianceCollection) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
@@ -158,7 +158,6 @@ define([
                             var selectedCategory = that.product.get('category');
                             var selectedStyleId = that.product.get('styleId');
 
-                            //that.relatedProducts = that.Products.getRelatedProducts(selectedSubCategory);
                             that.relatedProducts = that.Products.getRelatedProducts(selectedCategory,selectedStyleId);
                             resolve();
                         },
@@ -307,7 +306,7 @@ define([
             return this;
         },
         changeAccessory : function(event){
-        //debugger;
+
             $('.alt-accessory').removeClass('active');
             $(event.currentTarget).addClass('active');
 

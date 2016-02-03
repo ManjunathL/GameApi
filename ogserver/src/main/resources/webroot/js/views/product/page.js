@@ -4,15 +4,15 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'text!templates/product/page.html',
-    'text!templates/product/page_small_grid.html',
-    'text!templates/product/filter.html',
-    'collections/products',
-    'collections/categories',
-    'collections/subcategories',
-    'models/filter',
-    'models/filterMaster',
-    'mgfirebase'
+    'text!/templates/product/page.html',
+    'text!/templates/product/page_small_grid.html',
+    'text!/templates/product/filter.html',
+    '/js/collections/products.js',
+    '/js/collections/categories.js',
+    '/js/collections/subcategories.js',
+    '/js/models/filter.js',
+    '/js/models/filterMaster.js',
+    '/js/mgfirebase.js'
 ], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
@@ -387,7 +387,6 @@ define([
                     product.set('user_shortlisted', false);
                 });
             } else {
-                //console.log(product.toJSON());
                 MGF.addShortlistProduct(product.toJSON()).then(function() {
                     product.set('user_shortlisted', true);
                 });
