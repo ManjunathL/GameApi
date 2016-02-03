@@ -144,10 +144,9 @@ define([
         markShortlisted: function() {
             var shortlistedItems = MGF.getShortListedItems();
             var that = this;
-
-
             _.each(shortlistedItems, function(shortlistedProduct) {
-                that.products.getProduct(shortlistedProduct.productId).set('user_shortlisted', true);
+                var shProducts = that.products.getProduct(shortlistedProduct.productId);
+                shProducts && shProducts.set('user_shortlisted', true);
             });
         },
         clearShortlisted: function() {
@@ -388,7 +387,7 @@ define([
                     product.set('user_shortlisted', false);
                 });
             } else {
-                console.log(product.toJSON());
+                //console.log(product.toJSON());
                 MGF.addShortlistProduct(product.toJSON()).then(function() {
                     product.set('user_shortlisted', true);
                 });

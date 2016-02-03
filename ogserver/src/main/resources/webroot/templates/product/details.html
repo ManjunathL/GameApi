@@ -446,19 +446,19 @@
                             <div class="margin-bottom20 form-group">
                                 <input type="hidden" class="width100 form-control" placeholder="Product Name*" value="<%= product.name %>"
                                        id="consult_product_name" required/>
-                                <input type="text" class="width100 form-control" placeholder="Name*" value=""
+                                <input type="text" class="width100 form-control" placeholder="Name*" value="<%=userProfile ? userProfile.displayName : ''%>"
                                        id="consult_full_name" required/>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="margin-bottom20 form-group">
-                                <input type="email" class="width100 form-control" placeholder="Email*" value=""
+                                <input type="email" class="width100 form-control" placeholder="Email*" value="<%=userProfile ? userProfile.email : ''%>"
                                        id="consult_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="margin-bottom20 form-group has-feedback">
-                                <input type="text" class="width100 form-control" placeholder="Phone Number*" value=""
+                                <input type="text" class="width100 form-control" placeholder="Phone Number*" value="<%=userProfile ? userProfile.phone : ''%>"
                                        id="consult_contact_num" required pattern="\d{10}" title="e.g. 9876543210"/>
 
                                 <div class="help-block with-errors"></div>

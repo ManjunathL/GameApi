@@ -34,11 +34,14 @@ define([
             this.Appliances = new ApplianceCollection();
             this.custom_product.on('change',this.render,this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
-            _.bindAll(this, 'render', 'markShortlisted');
+            _.bindAll(this, 'render', 'markShortlisted','respond');
         },
-        render: function() {
+        render: function(userProfData) {
             var that = this;
             window.custom_product = that.custom_product;
+
+            var authData = this.ref.getAuth();
+            MGF.getUserProfile(authData, this.respond);
 
             if (!this.product.get('productId')) {
                 this.product.set('id', this.model.id);
@@ -66,7 +69,7 @@ define([
             this.markShortlisted();
             this.render();
         },
-        respond: function() {
+        respond: function(userProfData) {
             var that = this;
 
             var selectedSubCategory = that.product.get('subcategory');
@@ -131,7 +134,8 @@ define([
                     "selectedAccessories": _.uniq(that.custom_product.get('selectedAccessories')),
                     "relatedProducts": _.uniq(that.relatedProducts),
                     "custom_product":that.custom_product,
-                    "appliances":that.Appliances.toJSON()
+                    "appliances":that.Appliances.toJSON(),
+                    'userProfile': userProfData
                 }));
 
                 DetailsHelper.ready(that);
@@ -476,7 +480,6 @@ define([
                         },
                         error: function(model, response, options) {
                             console.log("error from appliances fetch - " + response);
-                            console.log(response);
                         }
                     });
                 }else{
