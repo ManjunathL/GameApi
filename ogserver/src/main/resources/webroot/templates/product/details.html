@@ -47,7 +47,6 @@
                         <div class="col-xs-4 align-center">
                             <% var share_url = restBase + '/#product/'+ product.productId %>
                             <div id="fb-root"></div>
-                            <% if(typeof(product.images) !== 'undefined'){ %>
                             <script>
                                 $(function(d, s, id) {
                                     var js, fjs = d.getElementsByTagName(s)[0];
@@ -62,10 +61,8 @@
                                  data-href="<%=share_url%>"
                                  data-layout="button">
                             </div>
-                            <% } %>
                         </div>
                         <div class="col-xs-4 align-center">
-                            <% if(typeof(product.images) !== 'undefined'){ %>
                             <script>
                                 ! function(d, s, id) {
                                     var js, fjs = d.getElementsByTagName(s)[0],
@@ -79,13 +76,10 @@
                                 }(document, 'script', 'twitter-wjs');
                             </script>
                             <a href="https://twitter.com/share" class="twitter-share-button share-button"{count} data-url="<%=share_url%>" data-text="<%= product.name %>" data-dnt="true">Tweet</a>
-                            <% } %>
                         </div>
                         <div class="col-xs-4 align-center">
                             <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-                            <% if(typeof(product.images) !== 'undefined'){ %>
                             <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>" data-pin-color="red"></a>
-                            <% } %>
                         </div>
                 </div>
                 <div class="col-xs-6 padding20-0 margin_auto">
