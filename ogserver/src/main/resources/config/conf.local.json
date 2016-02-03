@@ -4,7 +4,7 @@
     "url": "jdbc:mysql://localhost/og",
     "max_pool_size": 4,
     "user": "root",
-    "password": "password"
+    "password": "sakshi24"
   },
 
   "firebase": {

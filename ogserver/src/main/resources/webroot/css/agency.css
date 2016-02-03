@@ -843,7 +843,7 @@ button {
 }
 
 .display-inline-block {
-    display: inline-block;
+    display: inline-block !important;
 }
 
 .align-left {
@@ -1072,6 +1072,10 @@ button {
 
 .margin15-0 {
     margin: 15px 0px !important;
+}
+
+.margin20-0 {
+    margin: 20px 0px !important;
 }
 
 .margin50-0 {
@@ -1375,6 +1379,10 @@ input[type=checkbox] {
     line-height: 1.5;
 }
 
+.read_full:hover {
+    color: #ff3200 !important;
+}
+
 .date {
     font-style: italic;
     font-size: 15px;
@@ -1544,6 +1552,31 @@ a.button-orange, a.button-orange:hover {
     -moz-box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
     box-shadow: inset 0px 0px 2px 2px rgba(0,0,0,0.2);
 }
+
+.button-blue, .button-blue:focus {
+    border: 2px solid #3C82BF;
+    text-align: center;
+    color: #ffffff;
+    background-color: #3C82BF !important;
+    padding: 6px;
+    cursor: pointer;
+    display: inline-block;
+    text-transform: uppercase;
+    -webkit-transition: color 0.3s,opacity 0.2s;
+    transition: color 0.3s,opacity 0.2s,transform 0.3s;
+}
+
+.button-blue:hover {
+    color: #ffffff;
+    background-color: #3777af;
+}
+
+.button-blue:active {
+    -webkit-box-shadow: inset 0px 0px 2px 2px rgba(60, 130, 191,0.2);
+    -moz-box-shadow: inset 0px 0px 2px 2px rgba(60, 130, 191,0.2);
+    box-shadow: inset 0px 0px 2px 2px rgba(241, 89, 31,0.2);
+}
+
 
 .button-filter, .button-filter:focus {
     border: 1px solid #CCCCCC;
@@ -1725,6 +1758,11 @@ a.button-orange, a.button-orange:hover {
     text-align: center;
 }
 
+#forgot_pwd_btn {
+    top: 10px;
+    position: relative;
+}
+
 .userpop h2, .signup h2 {
     text-transform: none;
     font-weight: 400;
@@ -1807,10 +1845,7 @@ a.button-orange, a.button-orange:hover {
 }
 
 .signout_icon {
-    height: 20px !important;
-    position: absolute;
-    top: 4%;
-    right: 6%;
+    cursor: pointer;
 }
 
 .shortlist {
@@ -2041,6 +2076,10 @@ color: #FFF!important;
     padding: 25px;
     max-width: 100%;
     background-color: #fcfcfc;
+}
+
+.portfolio-caption-bg-gray h4 {
+    text-transform: none !important;
 }
 
 .image-meta {

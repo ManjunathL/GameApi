@@ -3,10 +3,10 @@
 
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/mg",
+    "url": "jdbc:mysql://localhost/og",
     "max_pool_size": 4,
     "user": "root",
-    "password": "root"
+    "password": "sakshi24"
   },
 
   "services": {
