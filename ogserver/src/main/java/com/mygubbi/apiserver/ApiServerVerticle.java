@@ -77,6 +77,7 @@ public class ApiServerVerticle extends AbstractVerticle {
         router.mountSubRouter("/api/pre.search", new PreSearchHandler(vertx));
         router.mountSubRouter("/api/auto.search", new AutoSearchHandler(vertx));
         router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
+        router.mountSubRouter("/api/es", new ProductSearchHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
     }
 
     private void logHeadersHandler(Router router) {
