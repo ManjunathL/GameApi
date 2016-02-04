@@ -70,6 +70,10 @@ define([
                 "resultName": "fabric sofa sets",
                 "query": "/api/products/search/sofa+cum+bed"
             }, {
+                "resultName": "Homer L-Shaped Kitchen",
+                "resultId": "homer-l-shaped-kitchen",
+                "query": "/api/products/search/sofa+cum+bed"
+            }, {
                 "resultName": "sofa cum bed with storage",
                 "query": "/api/products/search/sofa+cum+bed"
             }, {
