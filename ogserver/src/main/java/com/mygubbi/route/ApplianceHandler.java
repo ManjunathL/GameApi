@@ -35,7 +35,7 @@ public class ApplianceHandler extends AbstractRouteHandler
         {
             type = context.request().getParam("subcategory");
         }
-        sendJsonResponseFromFile(context, "data/appliances." + type + ".json");
+        sendJsonResponseFromFile(context, "data/appliances." + type + ".json", "[]");
     }
 
 }
