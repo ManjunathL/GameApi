@@ -60,6 +60,8 @@ CREATE TABLE product (
   categoryId varchar(16) NULL,
   subcategory varchar(64) NULL,
   subcategoryId varchar(16) NULL,
+  styleId varchar(24) NULL,
+  productShortJson TEXT NULL,
   productJson TEXT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),

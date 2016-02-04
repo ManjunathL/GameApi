@@ -97,6 +97,9 @@ public class ShopifyCatalogConverter
     {
         if (product == null) return;
         LOG.info("Storing product:" + product.getString("name"));
+//        LOG.info(product.getShortJson().toString());
+//        if (true) return;
+
         Integer id = LocalCache.getInstance().store(product);
         VertxInstance.get().eventBus().send(ProductManagementService.CREATE_PRODUCT, id,
                 (AsyncResult<Message<String>> result) -> {
@@ -165,8 +168,8 @@ public class ShopifyCatalogConverter
         String componentsFile = args[1];
         String stylePriceFile = args[2];
 
-//        new ShopifyCatalogConverter(productsFile, componentsFile, stylePriceFile).parse();
-//        if (true) return;
+        //new ShopifyCatalogConverter(productsFile, componentsFile, stylePriceFile).parse();
+        //if (true) return;
 
         VertxInstance.get().deployVerticle(new ServerVerticle("config/conf.local.json"), new DeploymentOptions().setWorker(true), result ->
         {
