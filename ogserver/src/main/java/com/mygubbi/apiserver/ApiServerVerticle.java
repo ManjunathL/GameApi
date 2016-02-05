@@ -47,7 +47,7 @@ public class ApiServerVerticle extends AbstractVerticle {
                 .setSsl(true)
                 .setCompressionSupported(true);
 
-        vertx.createHttpServer(options).requestHandler(router::accept).listen(80);
+        vertx.createHttpServer(options).requestHandler(router::accept).listen(443);
         startFuture.complete();
     }
 

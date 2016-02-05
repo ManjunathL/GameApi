@@ -56,7 +56,7 @@ public class ConfigHolder extends AbstractVerticle
                 if (this.siteConfigFile != null)
                 {
                     this.loadSiteConfig(startFuture);
-                    this.loadESConfig(startFuture);
+                    //this.loadESConfig(startFuture); todo: this causing problem for the moment
                 }
                 else
                 {
