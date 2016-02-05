@@ -5,7 +5,11 @@
                 <h3><span id="prodName"><%= product.name %></span></h3>
             </div>
             <div class="col-sm-2">
-                <h3><span id="prodPrice" class="heading-price"><i class="fa fa-inr"></i> <span id="defaultbaseprice"><%= custom_product.get('basePrice') %></span></span></h3>
+                <% if (custom_product.get('basePrice') !== 0) { %>
+                    <h3><span id="prodPrice" class="heading-price"><i class="fa fa-inr"></i> <span id="defaultbaseprice"><%= custom_product.get('basePrice') %></span></span></h3>
+                <% } else { %>
+                    <h3><span id="prodPrice" class="heading-price"><span id="defaultbaseprice" style="text-transform: none;">Consult for Price</span></span></h3>
+                <% } %>
             </div>
         </div>
         <div class="row">
