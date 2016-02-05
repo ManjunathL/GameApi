@@ -48,6 +48,7 @@ require([
   Router.initialize({"appView": appView});
 });
 
-var imgBase = "https://res.cloudinary.com/mygubbi/image/upload/"; //todo: change the collection name
-//var restBase = "https://localhost:8080"; //todo: make this empty for production
-var restBase = "https://ec2-52-74-136-198.ap-southeast-1.compute.amazonaws.com:8080"; //todo: make this empty for production
+var imgBase = "https://res.cloudinary.com/mygubbi/image/upload/";
+//var restBase = "https://localhost:8080";
+//var restBase = "https://ec2-52-74-136-198.ap-southeast-1.compute.amazonaws.com:8080";
+var restBase = "https://uat.mygubbi.com";
