@@ -28,9 +28,17 @@ define([
         fetchStoriesAndRender: function() {
             var that = this;
             var stories = that.story;
+            stories = stories.toJSON();
 
-            $(this.el).html(_.template(storiesTemplate)({'stories': stories.toJSON()}));
-            //console.log('stories : ' + stories.toJSON());
+            delete stories.id;
+
+            //console.log(_(stories).pluck('date_of_publish'));
+            stories = _(stories).sortBy(function(story) {
+                return Date.parse(story.date_of_publish);
+            }).reverse();
+            //console.log(_(stories).pluck('date_of_publish'));
+
+            $(this.el).html(_.template(storiesTemplate)({'stories': stories}));
         }
     });
     return StoriesView;

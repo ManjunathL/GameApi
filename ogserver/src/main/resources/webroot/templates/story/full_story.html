@@ -6,7 +6,7 @@
             <% if(story.id == story_id){ %>
 
                 <div class="padding10">
-                    <h2>
+                    <h2 class="justify hidden-xs">
                         <% var blg_hdng = story.blog_heading;
                         var r = /\\u([\d\w]{4})/gi;
                         blg_hdng = blg_hdng.replace(r, function (match, grp) {
@@ -14,6 +14,15 @@
                         blg_hdng = unescape(blg_hdng); %>
                         <%= blg_hdng %>
                     </h2>
+                    <h4 class="justify hidden-lg hidden-md hidden-sm">
+                        <% var blg_hdng = story.blog_heading;
+                        var r = /\\u([\d\w]{4})/gi;
+                        blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                        return String.fromCharCode(parseInt(grp, 16)); } );
+                        blg_hdng = unescape(blg_hdng); %>
+                        <%= blg_hdng %>
+                    </h4>
+
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <div class="padding10-0">
                         <img src="<%= story.blog_main_image %>"
@@ -75,7 +84,7 @@
     $(document).ready(function () {
         $('img').each(function() {
             if(!($(this).hasClass('img-responsive'))){
-                if(!($(this).parent().eq(2).hasClass('userpop-content'))){
+                if(!($(this).hasClass('userpop_user_img'))){
                     $(this).addClass('img-responsive');
                 }
             }
