@@ -210,9 +210,9 @@
         <% if (users.length > 0) { %>
         <h3>
             <% if (users.at(0).get('profileImage')) { %>
-                <img src="<%= users.at(0).get('profileImage') %>">
+                <img src="<%= users.at(0).get('profileImage') %>" class="userpop_user_img">
             <% }else { %>
-                <img src="/img/user.png">
+                <img src="/img/user.png" class="userpop_user_img">
             <% } %>
             <div class="user_name"><%= users.at(0).get('displayName') %></div>
             <div class="sub-font" id="view_profile">

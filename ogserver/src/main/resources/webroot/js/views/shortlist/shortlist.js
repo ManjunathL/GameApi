@@ -20,6 +20,7 @@ define([
                 'shortlistedItems': MGF.getShortListedItems(),
                 'userProfile': userProfData
             }));
+            document.title = userProfData.displayName + '\'s Shortlist | mygubbi';
         },
         render: function() {
             var authData = this.ref.getAuth();

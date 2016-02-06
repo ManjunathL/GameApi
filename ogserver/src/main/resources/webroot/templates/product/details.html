@@ -1,3 +1,5 @@
+<% document.title = product.name + ' | mygubbi' %>
+
 <section class="bg-white top-section">
     <div class="container">
         <div class="row product-heading details-heading" id="heading-bar">
@@ -17,7 +19,7 @@
                 <% if(typeof(product.images) !== 'undefined'){ %>
                 <img draggable="false" id="mainImg"
                      src="<%= imgBase + product.images[0] %>"
-                     alt="<%= product.name %>" class="width100">
+                     alt="<%= product.name %>" title="<%= product.name %>" class="width100">
                 <% } %>
             </div>
 
@@ -35,7 +37,13 @@
                             <ul class="clearfix slidee"
                                 style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
                                 <% _.each(product.images, function(image){ %>
-                                <li><img src="<%= imgBase + image %>" width="100%"/></li>
+                                <li>
+                                    <img
+                                            src="<%= imgBase + image %>"
+                                            width="100%"
+                                            alt="<%= product.name %>"
+                                            title="<%= product.name %>"/>
+                                </li>
                                     <% }); %>
                             </ul>
                             <% } %>
@@ -112,12 +120,10 @@
                             <label id="colors">Available in Colors:</label>
                             <ul class="paddingtop10 color-ul" id="colorList">
                                 <% _.each (selectedColor, function(color) { %>
-                                <li class="color-rounds"><img src="<%= imgBase + color.img %>" alt="<%= color.name %>"></li>
+                                <li class="color-rounds">
+                                    <img src="<%= imgBase + color.img %>" title="<%= color.name %>" alt="<%= color.name %>">
+                                </li>
                                 <% }); %>
-
-                                <!--<li class="color-rounds round-bk3"></li>-->
-                                <!--<li class="color-rounds round-bk4"></li>-->
-                                <!--<li class="color-rounds round-bk5"></li>-->
                             </ul>
 
                         </div>
@@ -140,7 +146,13 @@
                                         <div class="accessory-main-img" style="border: 0px solid #F1591F;">
                                             <div style="height: 180px;">
                                                 <a href="#">
-                                                    <img class="accImg" id="accessory-image<%= accessory.accessoryId %>" width="170px" src="<%= imgBase + 'c_fit,w_170,h_170//' + accessory.accessoryImg %>" alt="">
+                                                    <img
+                                                            class="accImg"
+                                                            id="accessory-image<%= accessory.accessoryId %>"
+                                                            width="170px"
+                                                            src="<%= imgBase + 'c_fit,w_170,h_170//' + accessory.accessoryImg %>"
+                                                            title="<%= accessory.accessoryName%>"
+                                                            alt="<%= accessory.accessoryName%>">
                                                 </a>
                                             </div>
                                             <div><%= accessory.accessoryName%></div>
@@ -161,8 +173,24 @@
                                                         <%= (((product.images[0].length/3)+1)*3) * 110%>px;">
                                                             <% _.each(accessory.alternatives, function(alternative){ %>
                                                             <li class="<%= accessory.accessoryName === alternative.accessoryName ? 'active' : '' %>">
-                                                                <div style="height: 180px;"><a class="alt-accessory display-inline" data-daccessoryid="<%=accessory.accessoryId%>" data-daccessory="<%=accessory.accessoryName%>" data-altaccessory="<%=alternative.accessoryName%>" data-altaccessoryprice="<%=alternative.accessoryPrice%>" data-altaccessoryimg="<%=alternative.accessoryImg%>"><img width="170px" src="<%= imgBase + 'c_fit,w_170,h_170/' + alternative.accessoryImg %>"/></a></div>
-                                                                <div style="font-size: 12px"><i class="fa fa-inr"></i> <%=alternative.accessoryPrice%></div>
+                                                                <div style="height: 180px;">
+                                                                    <a
+                                                                            class="alt-accessory display-inline"
+                                                                            data-daccessoryid="<%=accessory.accessoryId%>"
+                                                                            data-daccessory="<%=accessory.accessoryName%>"
+                                                                            data-altaccessory="<%=alternative.accessoryName%>"
+                                                                            data-altaccessoryprice="<%=alternative.accessoryPrice%>"
+                                                                            data-altaccessoryimg="<%=alternative.accessoryImg%>">
+                                                                        <img
+                                                                                width="170px"
+                                                                                src="<%= imgBase + 'c_fit,w_170,h_170/' + alternative.accessoryImg %>"
+                                                                                title="<%= alternative.accessoryName %>"
+                                                                                alt="<%= alternative.accessoryName %>"/>
+                                                                    </a>
+                                                                </div>
+                                                                <div style="font-size: 12px">
+                                                                    <i class="fa fa-inr"></i> <%=alternative.accessoryPrice%>
+                                                                </div>
                                                             </li>
                                                             <% }); %>
                                                             <li><img src="https://placehold.it/500x300" width="100%"/></li>
@@ -225,8 +253,14 @@
                                                 <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceid="<%=appliance.id%>" data-applianceprice="<%=appliance.price%>">
                                                     <p style="font-size: 14px; height: 40px"><%=appliance.name%></p>
                                             <span style="display: inline-block; height: 160px;">
-                                                <img class="portfolio-box appliance-img" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>"/>
-                                                <span class="pe-7s-check appliance-mark <%= $.inArray( appliance.id, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>"></span>
+                                                <img
+                                                        class="portfolio-box appliance-img"
+                                                        src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>"
+                                                        title="<%=appliance.name%>"
+                                                        alt="<%=appliance.name%>"/>
+                                                <span
+                                                        class="pe-7s-check appliance-mark <%= $.inArray( appliance.id, custom_product.get('selectedAppliances')) != -1 ? 'appliance-tick' : 'appliance-untick'%>">
+                                                </span>
                                             </span>
                                                     <p style="font-size: 14px; margin-top: 10px"><i class="fa fa-inr"></i> <%=appliance.price%></p>
                                                 </li>
@@ -295,7 +329,15 @@
                         <ul class="clearfix slidee"
                             style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
                             <% _.each (relatedProducts, function(prod) { %>
-                            <li><a href="/product/<%= prod.productId %>"><img src="<%= imgBase +'c_fill,h_300,w_500/'+prod.image %>" width="100%"/></a></li>
+                            <li>
+                                <a href="/product/<%= prod.productId %>">
+                                    <img
+                                            src="<%= imgBase +'c_fill,h_300,w_500/'+prod.image %>"
+                                            width="100%"
+                                            title="<%= prod.name %>"
+                                            alt="<%= prod.name %>"/>
+                                </a>
+                            </li>
                             <% }); %>
                         </ul>
                         <% } %>
@@ -309,12 +351,24 @@
 
         <div class="row paddingtop40">
             <div class="col-xs-12">
-                <div class="col-xs-4 dwf"><img src="<%= imgBase %>shipping_om5dso.png" width="32px" height="32px"><span class="margin-left-10">Delivery</span></div>
-                <div class="col-xs-4 dwf"><i class="fa fa-star-o" style="font-weight: bold;"></i><span class="margin-left-10">Warranty</span></div>
-                <div class="col-xs-4 dwf"><i class="fa fa-inr"></i><span class="margin-left-10">Flexible Payment</span></div>
+                <div class="col-xs-4 dwf">
+                    <img src="<%= imgBase %>shipping_om5dso.png" width="32px" height="32px">
+                    <span class="margin-left-10">Delivery</span>
+                </div>
+                <div class="col-xs-4 dwf">
+                    <i class="fa fa-star-o" style="font-weight: bold;"></i>
+                    <span class="margin-left-10">Warranty</span>
+                </div>
+                <div class="col-xs-4 dwf">
+                    <i class="fa fa-inr"></i>
+                    <span class="margin-left-10">Flexible Payment</span>
+                </div>
             </div><div class="col-xs-12">
                 <div class="col-xs-4"></div>
-                <div class="col-xs-4 dwf" style="background:none;font-size:40px;color:#999999;"><i class="fa fa-angle-double-down" id="sldown"></i><i class="fa fa-angle-double-up" id="slup"></i></div>
+                <div class="col-xs-4 dwf" style="background:none;font-size:40px;color:#999999;">
+                    <i class="fa fa-angle-double-down" id="sldown"></i>
+                    <i class="fa fa-angle-double-up" id="slup"></i>
+                </div>
                 <div class="col-xs-4"></div>
             </div>
         </div>
