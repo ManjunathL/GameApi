@@ -43,12 +43,26 @@ public class RouteUtil {
         sendResponseFromFile(context, filePath, "application/json");
     }
 
+    public void sendJsonResponseFromFile(RoutingContext context, String filePath, String defaultContent)
+    {
+        sendResponseFromFile(context, filePath, "application/json", defaultContent);
+    }
+
     public void sendResponseFromFile(RoutingContext context, String filePath, String type)
+    {
+        sendResponseFromFile(context, filePath, type, null);
+    }
+
+    public void sendResponseFromFile(RoutingContext context, String filePath, String type, String defaultContent)
     {
         VertxInstance.get().fileSystem().readFile(filePath, result -> {
             if (result.succeeded())
             {
                 this.sendResponse(context, result.result().toString(), type);
+            }
+            else if (defaultContent != null)
+            {
+                this.sendResponse(context, defaultContent, type);
             }
             else
             {
@@ -70,34 +84,6 @@ public class RouteUtil {
                 .putHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
                 .putHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         response.putHeader("content-type", type).end(text);
-    }
-
-    private void fileRead(HttpServerResponse response, String filePath)
-    {
-        InputStream in = getClass().getResourceAsStream(filePath);
-        if (in != null)
-        {
-            try (BufferedReader r = new BufferedReader(new InputStreamReader(in)))
-            {
-                String l;
-                String val = "";
-                while ((l = r.readLine()) != null)
-                {
-                    val = val + l;
-                }
-                response.putHeader("content-type", "application/json").end(val);
-
-            }
-            catch (IOException e)
-            {
-                sendError(response, e.getMessage());
-            }
-        }
-        else
-        {
-            sendError(response, "File Not Found - " + filePath);
-        }
-
     }
 
 }

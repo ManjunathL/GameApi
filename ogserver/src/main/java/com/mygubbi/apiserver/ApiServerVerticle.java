@@ -47,7 +47,7 @@ public class ApiServerVerticle extends AbstractVerticle {
                 .setSsl(true)
                 .setCompressionSupported(true);
 
-        vertx.createHttpServer(options).requestHandler(router::accept).listen(8080);
+        vertx.createHttpServer(options).requestHandler(router::accept).listen(443);
         startFuture.complete();
     }
 
@@ -71,11 +71,13 @@ public class ApiServerVerticle extends AbstractVerticle {
         router.mountSubRouter("/api/categories", new CategoryHandler(vertx));
         router.mountSubRouter("/api/filter.master", new FilterMasterHandler(vertx));
         router.mountSubRouter("/api/products", new ProductHandler(vertx));
+        router.mountSubRouter("/api/relatedproducts", new RelatedProductHandler(vertx));
         router.mountSubRouter("/api/appliances", new ApplianceHandler(vertx));
         router.mountSubRouter("/api/stories", new StoryHandler(vertx));
         router.mountSubRouter("/api/pre.search", new PreSearchHandler(vertx));
         router.mountSubRouter("/api/auto.search", new AutoSearchHandler(vertx));
         router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
+        router.mountSubRouter("/api/es", new ProductSearchHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
     }
 
     private void logHeadersHandler(Router router) {

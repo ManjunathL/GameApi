@@ -5,7 +5,11 @@
                 <h3><span id="prodName"><%= product.name %></span></h3>
             </div>
             <div class="col-sm-2">
-                <h3><span id="prodPrice" class="heading-price"><i class="fa fa-inr"></i> <span id="defaultbaseprice"><%= custom_product.get('basePrice') %></span></span></h3>
+                <% if (custom_product.get('basePrice') !== 0) { %>
+                    <h3><span id="prodPrice" class="heading-price"><i class="fa fa-inr"></i> <span id="defaultbaseprice"><%= custom_product.get('basePrice') %></span></span></h3>
+                <% } else { %>
+                    <h3><span id="prodPrice" class="heading-price"><span id="defaultbaseprice" style="text-transform: none;">Consult for Price</span></span></h3>
+                <% } %>
             </div>
         </div>
         <div class="row">
@@ -43,44 +47,11 @@
                     </div>
                 </div>
                 <div class="padding20_0_10_0 margin_auto"><%= product.desc %></div>
-                <div class="padding20_0_10_0 margin_auto social-share-buttons">
-                        <div class="col-xs-4 align-center">
-                            <% var share_url = restBase + '/#product/'+ product.productId %>
-                            <div id="fb-root"></div>
-                            <script>
-                                $(function(d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (d.getElementById(id)) return;
-                                    js = d.createElement(s);
-                                    js.id = id;
-                                    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-                                    fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));
-                            </script>
-                            <div class="fb-share-button share-button"
-                                 data-href="<%=share_url%>"
-                                 data-layout="button">
-                            </div>
-                        </div>
-                        <div class="col-xs-4 align-center">
-                            <script>
-                                ! function(d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0],
-                                        p = /^http:/.test(d.location) ? 'http' : 'https';
-                                    if (!d.getElementById(id)) {
-                                        js = d.createElement(s);
-                                        js.id = id;
-                                        js.src = p + '://platform.twitter.com/widgets.js';
-                                        fjs.parentNode.insertBefore(js, fjs);
-                                    }
-                                }(document, 'script', 'twitter-wjs');
-                            </script>
-                            <a href="https://twitter.com/share" class="twitter-share-button share-button"{count} data-url="<%=share_url%>" data-text="<%= product.name %>" data-dnt="true">Tweet</a>
-                        </div>
-                        <div class="col-xs-4 align-center">
-                            <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-                            <a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>" data-pin-color="red"></a>
-                        </div>
+                <div class="padding20_0_10_0 margin_auto social-share-buttons" style="text-align:left; font-size:40px; padding-left:12px;">
+                    <% var share_url = restBase + '/product/'+ product.productId %>
+                            <span><a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square" style="color:#433892"></i></a></span>
+                            <span><a href="javascript:void(0);" onclick="window.open('http://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square" style="color:#3492E2"></i></a></span>
+                            <span><a data-pin-do="buttonPin" href="javascript:void(0);" onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')" data-pin-color="red"><i class="fa fa-pinterest-square" style="color:#C90101"></i></a></span>
                 </div>
                 <div class="col-xs-6 padding20-0 margin_auto">
                     <a href="#" class="button border1 padding10 display-block margin0-10 shortlistable-product" style="background-color: #3C82BF;color: #FFFFFF;">
@@ -324,7 +295,7 @@
                         <ul class="clearfix slidee"
                             style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images[0].length/3)+1)*3) * 110%>px;">
                             <% _.each (relatedProducts, function(prod) { %>
-                            <li><a href="/product/<%= prod.productId %>"><img src="<%= imgBase +'c_fill,h_300,w_500/'+prod.images[0] %>" width="100%"/></a></li>
+                            <li><a href="/product/<%= prod.productId %>"><img src="<%= imgBase +'c_fill,h_300,w_500/'+prod.image %>" width="100%"/></a></li>
                             <% }); %>
                         </ul>
                         <% } %>

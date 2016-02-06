@@ -16,7 +16,7 @@ public class StoryHandler extends AbstractRouteHandler {
     }
 
     private void getAll(RoutingContext context) {
-        sendJsonResponseFromFile(context, "data/stories.json");
+        sendJsonResponseFromFile(context, "data/stories.json", "[]");
     }
 
 }

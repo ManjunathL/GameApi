@@ -26,7 +26,7 @@ public class AssetServerVerticle extends AbstractVerticle
 		Route route = router.route(HttpMethod.GET, "/static/*");
 	    route.handler(StaticHandler.create());
 
-	    vertx.createHttpServer().requestHandler(router::accept).listen(8080);
+	    vertx.createHttpServer().requestHandler(router::accept).listen(80);
 	    System.out.println("Asset Server started.");
 	}
 

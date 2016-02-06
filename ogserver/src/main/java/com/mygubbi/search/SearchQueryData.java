@@ -7,6 +7,13 @@ public class SearchQueryData
 	private String index;
 	private JsonObject query;
 	private String result;
+	private String type;
+
+	public SearchQueryData(String index, JsonObject query, String type) {
+		this.index = index;
+		this.query = query;
+		this.type = type;
+	}
 
 	public String getIndex()
 	{
@@ -30,6 +37,11 @@ public class SearchQueryData
 	{
 		return result;
 	}
+
+	public String getType() {
+		return type;
+	}
+
 	public SearchQueryData setResult(String result)
 	{
 		this.result = result;

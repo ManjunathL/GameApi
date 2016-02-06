@@ -1,10 +1,10 @@
 {
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/og",
+    "url": "jdbc:mysql://localhost/mg",
     "max_pool_size": 4,
     "user": "root",
-    "password": "sakshi24"
+    "password": "root"
   },
 
   "firebase": {
@@ -13,5 +13,4 @@
     "password": "!@#$VGYHasdf435",
     "processEvents": false
   }
-
 }

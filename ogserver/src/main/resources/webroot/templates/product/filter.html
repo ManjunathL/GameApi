@@ -49,8 +49,12 @@
                             </a>
                         </span>
                         <span class="cost-col5">
-                            <i class="fa fa-inr"></i>
-                            <%= product.defaultPrice %>
+                            <% if (product.defaultPrice !== 0) { %>
+                                <i class="fa fa-inr"></i>
+                                <%= product.defaultPrice %>/-
+                            <% } else { %>
+                                Consult for Price
+                            <% } %>
                         </span>
             </div>
 
@@ -100,7 +104,7 @@
                             <a href="javascript:void(0);" >
                                 <span id="share-ico<%=product.productId%>" class="glyph fa fa-share"></span>
                                 <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                    <% var share_url = restBase + '/#product/'+ product.productId %>
+                                    <% var share_url = restBase + '/product/'+ product.productId %>
                                     <span><a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
                                     <span><a href="javascript:void(0);" onclick="window.open('http://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
                                     <span><a href="javascript:void(0);" onclick="window.open('http://plus.google.com/share?url=<%=share_url%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-google-plus-square"></i></a></span>
@@ -114,8 +118,12 @@
                     <div class="row">
                         <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0"><%= product.name %></h4>
                         <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
-                            <i class="fa fa-inr"></i>
-                            <%= product.defaultPrice %>/-
+                            <% if (product.defaultPrice !== 0) { %>
+                                <i class="fa fa-inr"></i>
+                                <%= product.defaultPrice %>/-
+                            <% } else { %>
+                                Consult for Price
+                            <% } %>
                         </h4>
                     </div>
                 </div>

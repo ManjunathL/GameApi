@@ -454,7 +454,6 @@ define([
                 });
                 $('.sb-search-txt').click(function() {
                     $('.sb-search-input').val($(this).text());
-                    window.location.href = 'https://localhost:8000/#product_search/' + encodeURIComponent($(this).text());
                     $('.sb-search_suggest').slideUp();
                 });
 

@@ -19,6 +19,7 @@ public class ConfigHolder extends AbstractVerticle
 	
 	private String baseConfigFile = "config/conf.base.json";
     private String siteConfigFile;
+	private String esConfig = "config/es.json";
 
 	private static ConfigHolder INSTANCE;
 	
@@ -55,6 +56,7 @@ public class ConfigHolder extends AbstractVerticle
                 if (this.siteConfigFile != null)
                 {
                     this.loadSiteConfig(startFuture);
+                    //this.loadESConfig(startFuture); todo: this causing problem for the moment
                 }
                 else
                 {
@@ -74,7 +76,16 @@ public class ConfigHolder extends AbstractVerticle
 
     private void loadSiteConfig(Future<Void> startFuture)
     {
-        VertxInstance.get().fileSystem().readFile(this.siteConfigFile, result -> {
+		loadConfig(startFuture, this.siteConfigFile);
+	}
+
+    private void loadESConfig(Future<Void> startFuture)
+    {
+		loadConfig(startFuture, this.esConfig);
+	}
+
+	private void loadConfig(Future<Void> startFuture, String config) {
+		VertxInstance.get().fileSystem().readFile(config, result -> {
             if (result.succeeded())
             {
                 JsonObject siteConfig = new JsonObject(result.result().toString());
@@ -90,7 +101,7 @@ public class ConfigHolder extends AbstractVerticle
                 startFuture.fail(message);
             }
         });
-    }
+	}
 
 	public String getVersion()
 	{

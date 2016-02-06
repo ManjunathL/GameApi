@@ -38,6 +38,11 @@ public abstract class AbstractRouteHandler extends RouterImpl
         routeUtil.sendJsonResponseFromFile(context, filePath);
     }
 
+    protected void sendJsonResponseFromFile(RoutingContext context, String filePath, String defaultContent)
+    {
+        routeUtil.sendJsonResponseFromFile(context, filePath, defaultContent);
+    }
+
     protected void sendJsonResponse(RoutingContext context, String json)
     {
         routeUtil.sendJsonResponse(context, json);

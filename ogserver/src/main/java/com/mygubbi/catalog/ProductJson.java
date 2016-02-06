@@ -89,6 +89,22 @@ public class ProductJson extends JsonObject
         return this.getString("desc");
     }
 
+    public String getStyleId()
+    {
+        return this.getString("styleId");
+    }
+
+    public String getFirstImage()
+    {
+        return this.getJsonArray("images").getString(0);
+    }
+
+    public JsonObject getShortJson()
+    {
+        return new JsonObject().put("id", this.getProductId()).put("productId", this.getProductId())
+                .put("name", this.getName()).put("image", this.getFirstImage());
+    }
+
     public boolean isKitchen()
     {
         return "Kitchen".equals(this.getCategory());
