@@ -13,20 +13,18 @@
                         return String.fromCharCode(parseInt(grp, 16)); } );
                         blg_hdng = unescape(blg_hdng); %>
                         <%= blg_hdng %>
+                        <% document.title = blg_hdng + ' | mygubbi'; %>
                     </h2>
                     <h4 class="justify hidden-lg hidden-md hidden-sm">
-                        <% var blg_hdng = story.blog_heading;
-                        var r = /\\u([\d\w]{4})/gi;
-                        blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16)); } );
-                        blg_hdng = unescape(blg_hdng); %>
                         <%= blg_hdng %>
                     </h4>
 
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <div class="padding10-0">
                         <img src="<%= story.blog_main_image %>"
-                             class="img-responsive">
+                             class="img-responsive"
+                             title="<%= blg_hdng %>"
+                             alt="<%= blg_hdng %>">
                     </div>
                     <p>
                         <% var blg_stry = story.blog_content;
@@ -55,20 +53,25 @@
             <% _.each(stories, function(story){ %>
             <% if (count < 4) { %>
 
+            <% var blg_hdng = story.blog_heading;
+            var r = /\\u([\d\w]{4})/gi;
+            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+            return String.fromCharCode(parseInt(grp, 16)); } );
+            blg_hdng = unescape(blg_hdng); %>
+
             <div class="row margin25-0-0">
                 <div class="col-md-5 padding0">
                     <a href="/story/<%= story.id %>">
-                        <img src="<%= story.blog_main_image %>" class="img-responsive">
+                        <img
+                                src="<%= story.blog_main_image %>"
+                                class="img-responsive"
+                                title="<%= blg_hdng %>"
+                                alt="<%= blg_hdng %>">
                     </a>
                 </div>
                 <div class="col-md-7 padding-right0">
                     <a href="/story/<%= story.id %>">
                         <h5>
-                            <% var blg_hdng = story.blog_heading;
-                            var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                            return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng); %>
                             <%= blg_hdng %>
                         </h5>
                     </a>

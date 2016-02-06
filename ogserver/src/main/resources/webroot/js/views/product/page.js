@@ -57,6 +57,17 @@ define([
             }).catch(function(err) {
             	console.log('Catch: ', err);
             });
+
+            var title = that.model.selectedCategories;
+            if(title == 'kitchen'){
+                document.title = 'Buy Modular Kitchens Online | mygubbi';
+            }else if(title == 'bedroom') {
+                document.title = 'Buy Bedroom Furniture Online | mygubbi';
+            }else {
+                document.title = 'Buy Living & Dining Furniture Online | mygubbi';
+            }
+
+
         },
         getFilterMaster: function() {
             var that = this;
@@ -86,27 +97,26 @@ define([
                             console.log("categories fetch successfully- ");
                             var selectedCategory = that.categories.getByCode(that.model.selectedCategories);
 
-                            if(typeof(selectedCategory) != 'undefined'){
+                            if(typeof(selectedCategory) !== 'undefined'){
                                 selectedSubCategoriesList = selectedCategory.toJSON().subCategories;
 
+                                that.filter.set({
+                                    'selectedSubCategoriesList':selectedSubCategoriesList.toJSON()
+                                }, {
+                                    silent: true
+                                });
+                                that.filter.set({
+                                    'minPriceLimit': selectedCategory.toJSON().minPriceLimit
+                                }, {
+                                    silent: true
+                                });
+                                that.filter.set({
+                                    'maxPriceLimit': selectedCategory.toJSON().maxPriceLimit
+                                }, {
+                                    silent: true
+                                });
+                            }
 
-
-                            that.filter.set({
-                                'selectedSubCategoriesList':selectedSubCategoriesList.toJSON()
-                            }, {
-                                silent: true
-                            });
-                            that.filter.set({
-                                'minPriceLimit': selectedCategory.toJSON().minPriceLimit
-                            }, {
-                                silent: true
-                            });
-                            that.filter.set({
-                                'maxPriceLimit': selectedCategory.toJSON().maxPriceLimit
-                            }, {
-                                silent: true
-                            });
- }
                             subCategory = that.categories.getSubCategoryBySubCategoryName(selectedSubCategories);
 
                             var subCategorynames = new Array();

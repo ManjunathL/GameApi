@@ -6,14 +6,20 @@
 
         <% if((typeof(story.id) !== 'undefined') && (story.blog_main_image != '') && (count == 0)){ %>
 
+        <% var blg_hdng = story.blog_heading;
+        var r = /\\u([\d\w]{4})/gi;
+        blg_hdng = blg_hdng.replace(r, function (match, grp) {
+        return String.fromCharCode(parseInt(grp, 16)); } );
+        blg_hdng = unescape(blg_hdng); %>
+
         <a href="/story/<%= story.id %>">
-            <img src="<%= story.blog_main_image %>" class="blogs-banner">
+            <img
+                    src="<%= story.blog_main_image %>"
+                    class="blogs-banner"
+                    title="<%= blg_hdng %>"
+                    alt="<%= blg_hdng %>">
+
             <h1 class="blogs-banner-heading">
-                <% var blg_hdng = story.blog_heading;
-                var r = /\\u([\d\w]{4})/gi;
-                blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                return String.fromCharCode(parseInt(grp, 16)); } );
-                blg_hdng = unescape(blg_hdng); %>
                 <%= blg_hdng %>
             </h1>
         </a>
@@ -30,11 +36,20 @@
 
             <% if (count == 0) { %>
 
+            <% var blg_hdng = story.blog_heading;
+            var r = /\\u([\d\w]{4})/gi;
+            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+            return String.fromCharCode(parseInt(grp, 16)); } );
+            blg_hdng = unescape(blg_hdng); %>
+
             <div class="row margin50-0 hidden-lg hidden-md">
                 <div class="col-md-7 col-sm-12 col-xs-12 pull-right">
                     <a href="/story/<%= story.id %>">
-                        <img src="<%= story.blog_main_image %>"
-                             class="img-responsive">
+                        <img
+                                src="<%= story.blog_main_image %>"
+                                class="img-responsive"
+                                title="<%= blg_hdng %>"
+                                alt="<%= blg_hdng %>">
                     </a>
                 </div>
                 <div class="col-md-5 col-sm-12 col-xs-12">
@@ -47,11 +62,6 @@
                     </p>
                     <a href="/story/<%= story.id %>">
                         <h2 class="justify hidden-xs">
-                            <% var blg_hdng = story.blog_heading;
-                            var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                            return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng); %>
                             <%= blg_hdng %>
                         </h2>
                         <h4 class="justify hidden-lg hidden-md hidden-sm">
@@ -63,6 +73,7 @@
                             <%= blg_hdng %>
                         </h4>
                     </a>
+
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <p class="padding-top15 blog_data justify">
                         <% var blg_stry = story.blog_content;
@@ -88,11 +99,20 @@
             <% } else { %>
             <% if (count % 2 != 0) { %>
 
+            <% var blg_hdng = story.blog_heading;
+            var r = /\\u([\d\w]{4})/gi;
+            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+            return String.fromCharCode(parseInt(grp, 16)); } );
+            blg_hdng = unescape(blg_hdng); %>
+
             <div class="row margin50-0">
                 <div class="col-md-7 col-sm-12 col-xs-12">
                     <a href="/story/<%= story.id %>">
-                        <img src="<%= story.blog_main_image %>"
-                             class="img-responsive">
+                        <img
+                                src="<%= story.blog_main_image %>"
+                                class="img-responsive"
+                                title="<%= blg_hdng %>"
+                                alt="<%= blg_hdng %>">
                     </a>
                 </div>
                 <div class="col-md-5 col-sm-12 col-xs-12">
@@ -105,11 +125,6 @@
                     </p>
                     <a href="/story/<%= story.id %>">
                         <h2 class="justify hidden-xs">
-                            <% var blg_hdng = story.blog_heading;
-                            var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                            return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng); %>
                             <%= blg_hdng %>
                         </h2>
                         <h4 class="justify hidden-lg hidden-md hidden-sm">
@@ -121,6 +136,7 @@
                             <%= blg_hdng %>
                         </h4>
                     </a>
+
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <p class="padding-top15 blog_data justify">
                         <% var blg_stry = story.blog_content;
@@ -129,13 +145,13 @@
                         return String.fromCharCode(parseInt(grp, 16)); } );
                         blg_stry = unescape(blg_stry);
                         var n = blg_stry.indexOf('</p>');
-                        if (n > 200){
-                            var stry = blg_stry.slice(3, 180); %>
-                            <%= stry %>...
-                        <% } else {
-                             var stry = blg_stry.slice(3, n); %>
-                            <%= stry %>
-                        <% } %>
+                    if (n > 200){
+                    var stry = blg_stry.slice(3, 180); %>
+                    <%= stry %>...
+                    <% } else {
+                    var stry = blg_stry.slice(3, n); %>
+                    <%= stry %>
+                    <% } %>
                     </p>
                     <p class="font-size16">
                         <a href="/story/<%= story.id %>" class="color-orange read_full">Read Full Story</a>
@@ -144,11 +160,21 @@
             </div>
 
             <% } else { %>
+
+            <% var blg_hdng = story.blog_heading;
+            var r = /\\u([\d\w]{4})/gi;
+            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+            return String.fromCharCode(parseInt(grp, 16)); } );
+            blg_hdng = unescape(blg_hdng); %>
+
             <div class="row margin50-0">
                 <div class="col-xs-12 col-md-7 col-sm-12 pull-right">
                     <a href="/story/<%= story.id %>">
-                        <img src="<%= story.blog_main_image %>"
-                             class="img-responsive">
+                        <img
+                                src="<%= story.blog_main_image %>"
+                                class="img-responsive"
+                                title="<%= blg_hdng %>"
+                                alt="<%= blg_hdng %>">
                     </a>
                 </div>
                 <div class="col-xs-12 col-md-5 col-sm-12">
@@ -161,11 +187,6 @@
                     </p>
                     <a href="/story/<%= story.id %>">
                         <h2 class="justify hidden-xs">
-                            <% var blg_hdng = story.blog_heading;
-                            var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                            return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng); %>
                             <%= blg_hdng %>
                         </h2>
                         <h4 class="justify hidden-lg hidden-md hidden-sm">
@@ -177,6 +198,7 @@
                             <%= blg_hdng %>
                         </h4>
                     </a>
+
                     <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
                     <p class="padding-top15 blog_data justify">
                         <% var blg_stry = story.blog_content;
@@ -185,13 +207,13 @@
                         return String.fromCharCode(parseInt(grp, 16)); } );
                         blg_stry = unescape(blg_stry);
                         var n = blg_stry.indexOf('</p>');
-                        if (n > 200){
-                            var stry = blg_stry.slice(3, 180); %>
-                            <%= stry %>...
-                        <% } else {
-                            var stry = blg_stry.slice(3, n); %>
-                            <%= stry %>
-                        <% } %>
+                    if (n > 200){
+                    var stry = blg_stry.slice(3, 180); %>
+                    <%= stry %>...
+                    <% } else {
+                    var stry = blg_stry.slice(3, n); %>
+                    <%= stry %>
+                    <% } %>
                     </p>
                     <p class="font-size16">
                         <a href="/story/<%= story.id %>" class="color-orange read_full">Read Full Story</a>
@@ -199,7 +221,7 @@
                 </div>
             </div>
 
-            <% } }  count = count + 1; } }); } %>
+            <% } } count = count + 1; } }); } %>
         </div>
     </div>
 </section>

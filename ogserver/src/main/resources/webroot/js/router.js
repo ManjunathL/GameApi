@@ -16,6 +16,18 @@ define([
             'shortlist(/)': 'shortlist',
             'stories(/)': 'stories',
             'story/:id(/)': 'story'
+        },
+        dashboard: function() {
+            document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
+        },
+        consult: function() {
+            document.title = 'Consult our experts | mygubbi';
+        },
+        shortlist: function() {
+            document.title = 'Shortlisted products for easy and fast access | mygubbi';
+        },
+        stories: function() {
+            document.title = 'Latest Tips from our Experts | mygubbi';
         }
 
     });
@@ -97,6 +109,9 @@ define([
                 };
                 VM.create("story", FullStoryPage, options).render();
             });
+        });
+        router.on('route', function () {
+            $("html,body").scrollTop(0);
         });
         Backbone.history.start({
             pushState: true,

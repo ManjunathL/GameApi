@@ -7,8 +7,11 @@
             <div class="row margin15-0 position-relative overflow-hidden">
 
                 <a href="/product/<%= product.productId %>">
-                    <img width="670px" height="402px" class="img-responsive" src="<%= imgBase + 'c_fit,w_670,h_402/' + product.images[0] %>"/>
+                    <img width="670px" height="402px" class="img-responsive"
+                         src="<%= imgBase + 'c_fit,w_670,h_402/' + product.images[0] %>"
+                            title="<%= product.name %>" alt="<%= product.name %>"/>
                 </a>
+
                 <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
                     <div class="listli">
                         <a href="/product/<%= product.productId %>">
@@ -23,8 +26,9 @@
                         </a>
                     </div>
                     <div class="listli">
-                        <a href="javascript:void(0);" >
+                        <a href="javascript:void(0);">
                             <span class="glyph fa fa-share"></span>
+
                             <div class="list-txt">
                                 <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>-->
                                 <span class='st_facebook'></span>
@@ -60,6 +64,7 @@
 
             <div class="font-size18 padding0">
                 <span class="dim">Description</span>
+
                 <p class="justify margin-top8">
                     <%= product.desc %>
                 </p>
@@ -85,8 +90,11 @@
             <div class="portfolio-box overflow-hidden">
                 <div class="row margin0 position-relative">
                     <a href="/product/<%= product.productId %>" class="portfolio-link">
-                        <img width="555px" height="333px" class="img-responsive" src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"/>
+                        <img width="555px" height="333px" class="img-responsive"
+                             src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
+                                title="<%= product.name %>" alt="<%= product.name %>"/>
                     </a>
+
                     <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
                         <div class="listli">
                             <a href="/product/<%= product.productId %>">
@@ -101,13 +109,20 @@
                             </a>
                         </div>
                         <div class="listli">
-                            <a href="javascript:void(0);" >
+                            <a href="javascript:void(0);">
                                 <span id="share-ico<%=product.productId%>" class="glyph fa fa-share"></span>
+
                                 <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
                                     <% var share_url = restBase + '/product/'+ product.productId %>
-                                    <span><a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
-                                    <span><a href="javascript:void(0);" onclick="window.open('http://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
-                                    <span><a href="javascript:void(0);" onclick="window.open('http://plus.google.com/share?url=<%=share_url%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-google-plus-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('http://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('http://plus.google.com/share?url=<%=share_url%>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-google-plus-square"></i></a></span>
                                 </div>
                             </a>
                         </div>
@@ -119,10 +134,10 @@
                         <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0"><%= product.name %></h4>
                         <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
                             <% if (product.defaultPrice !== 0) { %>
-                                <i class="fa fa-inr"></i>
-                                <%= product.defaultPrice %>/-
+                            <i class="fa fa-inr"></i>
+                            <%= product.defaultPrice %>/-
                             <% } else { %>
-                                Consult for Price
+                            Consult for Price
                             <% } %>
                         </h4>
                     </div>
@@ -138,12 +153,12 @@
 <!--<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>-->
 
 <script>
-    $(document).ready(function(){
-        $('.fa-inr').click(function() {
+    $(document).ready(function () {
+        $('.fa-inr').click(function () {
             var fontsize = $('.fa-inr').parent().css('font-size');
             alert(fontsize);
-            fontsize = fontsize-2;
-            $('.fa-inr').css('font-size',fontsize);
+            fontsize = fontsize - 2;
+            $('.fa-inr').css('font-size', fontsize);
         });
 
     });

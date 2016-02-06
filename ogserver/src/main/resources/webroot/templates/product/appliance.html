@@ -18,7 +18,12 @@ var applsForType = _.filter(product.appliances, function(appliance) {return appl
                     <li class="appliance" style="width: 160px;">
                         <p style="font-size: 14px; height: 40px"><%=appliance.name%></p>
                                             <span style="display: inline-block; height: 160px;">
-                                                <img class="portfolio-box" src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>" onclick="toggleColor($(this).next());"/>
+                                                <img
+                                                        class="portfolio-box"
+                                                        src="<%= imgBase + 'c_fit,w_160,h_160/' + appliance.image %>"
+                                                        title="<%=appliance.name%>"
+                                                        alt="<%=appliance.name%>"
+                                                        onclick="toggleColor($(this).next());"/>
                                                 <span class="pe-7s-check"
                                                       style="border-radius: 50%; position: relative; top: -150px; right: 10px; float: right; font-size: 20px; color: #CCC;"
                                                       onclick="toggleColor($(this));"></span>
