@@ -3488,7 +3488,7 @@ width: 325px!important;
 
 .breadcrumb{position:relative; height:30px; width:100%;padding: 0px 0px !important;background-color: #fff!important;margin: 30px 10px 0px 8px !important;text-transform: capitalize;}
 .breadcrumb ul{position:relative; margin:0 5px 0 5px; padding:0; height:30px; background:url('/img/breadcrumbImage.png') 0px -30px repeat-x; }
-.breadcrumb ul li{padding:0; margin:0; list-style:none; float:left; height:30px display:inline;}
+.breadcrumb ul li{padding:0; margin:0; list-style:none; float:left; height:30px; display:inline;}
 .breadcrumb ul li a{font:12px Arial, Helvetica, sans-serif; color:#000; text-decoration:none; line-height:30px; display:block; background:url('/img/breadcrumbImage.png') 100% -60px no-repeat; padding:0 17px 0 15px; }
 .breadcrumb ul li a:hover {text-decoration:underline; color:#FF3200;}
 .breadcrumb ul li a.active{background:none; color:#FF3200;}
