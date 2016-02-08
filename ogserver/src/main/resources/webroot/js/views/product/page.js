@@ -39,6 +39,18 @@ define([
 
             var selectedSubCategories = that.model.selectedSubCategories;
 
+            that.filter.set({
+                'selectedCategoryName':that.model.selectedCategories
+            }, {
+                silent: true
+            });
+
+            that.filter.set({
+                'selectedSubCategoryName':that.model.selectedSubCategories
+            }, {
+                silent: true
+            });
+
             var subCategory = '';
 
             var selectedSubCategoriesList = {};
@@ -396,7 +408,8 @@ define([
         },
         events: {
             "click .shortlistable-item": "toggleShortListItem",
-            "click .fa-share": "toggleShareIcons"
+            "click .listshare": "toggleShareIcons",
+            "click .gridshare": "toggleGridShareIcons"
         },
         toggleShortListItem: function(e) {
 
@@ -436,6 +449,14 @@ define([
             var shareicoId = currentTarget.attr('id');
             var productId = shareicoId.replace('share-ico','');
             $('#list-share-txt'+productId).toggle();
+        },
+        toggleGridShareIcons: function(e){
+            e.preventDefault();
+
+            var currentTarget = $(e.currentTarget);
+            var shareicoId = currentTarget.attr('id');
+            var productId = shareicoId.replace('share-grid-ico','');
+            $('#grid-share-txt'+productId).toggle();
         }
     });
     return ProductPage;
