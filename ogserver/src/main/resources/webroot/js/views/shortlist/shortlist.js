@@ -35,7 +35,8 @@ define([
             "click .close-consult-pop": "closeModal",
             "click .consult-form-explore": "closeModal",
             "click #consult-submit-btn": "submitConsultButton",
-            "submit .consultForm": "submitConsultForm"
+            "submit .consultForm": "submitConsultForm",
+            "click .gridshare": "toggleGridShareIcons"
         },
         removeShortlistItem: function(e) {
             e.preventDefault();
@@ -92,7 +93,15 @@ define([
                     $('#consult-success-msg-padding' + formid).show(0, function() {});
                 });
             });
-        }
+        },
+         toggleGridShareIcons: function(e){
+             e.preventDefault();
+
+             var currentTarget = $(e.currentTarget);
+             var shareicoId = currentTarget.attr('id');
+             var productId = shareicoId.replace('share-grid-ico','');
+             $('#grid-share-txt'+productId).toggle();
+         }
     });
     return ShortlistView;
 });
