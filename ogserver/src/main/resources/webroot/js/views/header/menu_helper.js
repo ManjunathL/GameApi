@@ -312,6 +312,7 @@ define([
                 "click .signout_icon": this.signOut,
                 "click #close-user-pop": this.closeUserPopup,
                 "click #view-all-shortlist": this.closeUserPopup,
+                "click #shortlist-bar-explore": this.closeUserPopup,
                 "click .shortlist-side": this.closeUserPopup,
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,

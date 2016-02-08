@@ -114,7 +114,7 @@
                 <li class="col-xs-2 padding0"><a data-toggle="tab" href="#apptab">Appliances</a></li>
                 <% } %>
                 <% if(typeof(product.components) !== 'undefined' && product.components.length != 0){ %>
-                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Components</a></li>
+                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Configuration</a></li>
                 <% } %>
             </ul>
 
@@ -307,9 +307,11 @@
                 <% if(typeof(product.components) !== 'undefined'){ %>
                 <div class="tab-pane fade" id="comptab">
                     <div class="row margin-left-0 bg-light-gray" style="padding-top: 20px; margin-top: 20px;">
+<!--
                         <div class="col-xs-12" style="padding-bottom: 10px">
                             <label>Components</label>
                         </div>
+-->
                         <div class="tab-content">
                             <div class="row padding20-20">
                                 <div class="col-md-12 col-xs-12">
