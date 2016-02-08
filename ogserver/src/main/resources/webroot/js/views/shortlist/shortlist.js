@@ -36,7 +36,7 @@ define([
             "click .consult-form-explore": "closeModal",
             "click #consult-submit-btn": "submitConsultButton",
             "submit .consultForm": "submitConsultForm",
-            "click .gridshare": "toggleGridShareIcons"
+            "click .shortgridshare": "toggleGridShareIcons"
         },
         removeShortlistItem: function(e) {
             e.preventDefault();
@@ -99,8 +99,8 @@ define([
 
              var currentTarget = $(e.currentTarget);
              var shareicoId = currentTarget.attr('id');
-             var productId = shareicoId.replace('share-grid-ico','');
-             $('#grid-share-txt'+productId).toggle();
+             var productId = shareicoId.replace('shortshare-grid-ico','');
+             $('#shortgrid-share-txt'+productId).toggle();
          }
     });
     return ShortlistView;
