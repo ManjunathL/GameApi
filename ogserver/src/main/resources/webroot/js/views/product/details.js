@@ -17,8 +17,9 @@ define([
     '/js/slyutil.js',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
-    '/js/collections/appliances.js'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, RelatedProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil, ApplianceCollection) {
+    '/js/collections/appliances.js',
+    '/js/views/view_manager.js'
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, RelatedProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil, ApplianceCollection, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -69,8 +70,10 @@ define([
             }
         },
         handleUserChange: function() {
-            this.markShortlisted();
-            this.render();
+            if (VM.activeView === VM.PRODUCT_DETAILS) {
+                this.markShortlisted();
+                this.render();
+            }
         },
         respond: function(userProfData) {
             var that = this;

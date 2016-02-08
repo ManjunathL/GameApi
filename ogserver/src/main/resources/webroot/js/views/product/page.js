@@ -12,8 +12,9 @@ define([
     '/js/collections/subcategories.js',
     '/js/models/filter.js',
     '/js/models/filterMaster.js',
-    '/js/mgfirebase.js'
-], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF) {
+    '/js/mgfirebase.js',
+    '/js/views/view_manager.js'
+], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         products: null,
@@ -422,9 +423,11 @@ define([
             return false;
         },
         handleUserChange: function() {
-            this.clearShortlisted();
-            this.markShortlisted();
-            this.render();
+            if (VM.activeView === VM.PRODUCT_LISTING) {
+                this.clearShortlisted();
+                this.markShortlisted();
+                this.render();
+            }
         },
         toggleShareIcons: function(e){
             e.preventDefault();
