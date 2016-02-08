@@ -83,7 +83,7 @@ define([
 
 		productInSubCategs: function (product, subCategoryIds) {
 			for (var i=0; i < subCategoryIds.length; i++) {
-				if (product.get("subcategory") == subCategoryIds[i])
+				if (product.get("subcategoryId") == subCategoryIds[i])
 					return true;
 			}
 
