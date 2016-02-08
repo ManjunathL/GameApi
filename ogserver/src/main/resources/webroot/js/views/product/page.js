@@ -58,10 +58,15 @@ define([
             	console.log('Catch: ', err);
             });
 
-            if(typeof(selectedSubCategories) !== 'undefined'){
-                document.title = 'Buy ' + selectedSubCategories + 's Online | mygubbi';
+            var title = that.model.selectedCategories;
+            if(title == 'kitchen'){
+                document.title = 'Buy Modular Kitchens Online | mygubbi';
+            }else if(title == 'bedroom') {
+                document.title = 'Buy Bedroom Furniture Online | mygubbi';
+            }else {
+                document.title = 'Buy Living & Dining Furniture Online | mygubbi';
             }
-            
+
 
         },
         getFilterMaster: function() {
@@ -379,6 +384,7 @@ define([
                 "subcategoriesList": selectedSubCategoriesList,
                 "filterMaster": that.filterMaster.toJSON()
             }));
+
 
             var filteredTemplate = _.template(filterTemplate);
 
