@@ -862,11 +862,6 @@ button {
     text-align: justify;
 }
 
-.noclick{
-    cursor: not-allowed !important;
-    touch-action: none !important;
-}
-
 .font-size9 {
     font-size: 9px;
 }

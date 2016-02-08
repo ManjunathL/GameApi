@@ -134,10 +134,11 @@ define([
                                 silent: true
                             });
 
-                            var subcatNames = new Array();
-                            subCategory && subcatNames.push(subCategory.toJSON().name);
+                            var subcatIds = new Array();
+                            subCategory && subcatIds.push(subCategory.toJSON().id);
+
                             that.filter.set({
-                                'subcatNames': subcatNames
+                                'subcatIds': subcatIds
                             }, {
                                 silent: true
                             });
@@ -207,7 +208,7 @@ define([
             var that = this;
             window.filter = that.filter;
 
-            var subcatNames = new Array();
+            var subcatIds = new Array();
             var filterIds = new Array();
             var subCategorynames = new Array();
 
@@ -241,7 +242,7 @@ define([
             });
 
             that.filter.set({
-                'subcatNames': subcatNames
+                'subcatIds': subcatIds
             }, {
                 silent: true
             });
@@ -284,7 +285,7 @@ define([
             var filterApplied = that.filter.get('noFilterApplied');
 
             var selectedfilterIds = that.filter.get('filterIds');
-            var selectedSubcatNames = that.filter.get('subcatNames');
+            var selectedSubcatIds = that.filter.get('subcatIds');
             var selectedPriceRangeIds = that.filter.get('priceRangeIds');
             var selectedStyleIds = that.filter.get('styleIds');
 
@@ -342,8 +343,8 @@ define([
             }
 
 
-            if ((typeof(selectedSubcatNames) !== 'undefined') && (selectedSubcatNames.length != 0)) {
-                var filteredProducts = that.products.filterBySubcat(selectedSubcatNames);
+            if ((typeof(selectedSubcatIds) !== 'undefined') && (selectedSubcatIds.length != 0)) {
+                var filteredProducts = that.products.filterBySubcat(selectedSubcatIds);
             } else {
                 filteredProducts = that.products.toJSON();
             }
@@ -383,6 +384,7 @@ define([
                 "subcategoriesList": selectedSubCategoriesList,
                 "filterMaster": that.filterMaster.toJSON()
             }));
+
 
             var filteredTemplate = _.template(filterTemplate);
 
