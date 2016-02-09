@@ -325,6 +325,8 @@ button {
     margin: 0px;
 }
 
+.nav li
+
 .consult,
 .consult:focus,
 .consult.active {
@@ -344,7 +346,7 @@ button {
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
 
-.consult:hover {
+.consult:hover, .open .consult{
     border-color: #ff471a !important;
     color: #fff !important;
     background-color: #ff3200 !important;

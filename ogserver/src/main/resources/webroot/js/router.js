@@ -15,7 +15,7 @@ define([
             'consult(/)': 'consult',
             'shortlist(/)': 'shortlist',
             'stories(/)': 'stories',
-            'story/:id(/)': 'story'
+            'story/:name(/)': 'story'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -38,7 +38,6 @@ define([
         window.App = window.App || {};
         window.App.router = router;
         router.on('route:dashboard', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/dashboard/page.js'], function(DashboardPage) {
                 VM.create(VM.DASHBOARD, DashboardPage).render();
             });
@@ -107,13 +106,13 @@ define([
                 VM.create(VM.STORIES, StoriesPage).render();
             });
         });
-        router.on('route:story', function(storyId) {
+        router.on('route:story', function(name) {
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/story/full_story.js'], function(FullStoryPage) {
 
                 var options = {
                     model: {
-                        "id": storyId
+                        "name": name
                     }
                 };
                 VM.create(VM.STORY, FullStoryPage, options).render();

@@ -17,7 +17,7 @@ define([
 
             this.story.fetch({
                 success: function() {
-                    that.fetchStoryAndRender(that.model.id);
+                    that.fetchStoryAndRender(that.model.name);
                 },
                 error: function(model, response, options) {
                     console.log("couldn't fetch story data - " + response);
@@ -25,13 +25,20 @@ define([
             });
 
         },
-        fetchStoryAndRender: function(id) {
+        fetchStoryAndRender: function(name) {
 
             var that = this;
             var stories = that.story;
             stories = stories.toJSON();
+            var full_story = {};
 
             delete stories.id;
+
+            _.find(stories, function(item, index) {
+                if (item.blog_heading == name) {
+                    full_story = item;
+                }
+            });
 
             //console.log(_(stories).pluck('date_of_publish'));
             stories = _(stories).sortBy(function(story) {
@@ -41,7 +48,7 @@ define([
 
             $(this.el).html(_.template(fullStoryTemplate)({
                 'stories': stories,
-                'story_id': id
+                'full_story': full_story
             }));
 
         }
