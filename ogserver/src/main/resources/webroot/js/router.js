@@ -15,7 +15,7 @@ define([
             'consult(/)': 'consult',
             'shortlist(/)': 'shortlist',
             'stories(/)': 'stories',
-            'story/:id(/)': 'story'
+            'story/:name(/)': 'story'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -99,12 +99,12 @@ define([
                 VM.create("stories", StoriesPage).render();
             });
         });
-        router.on('route:story', function(storyId) {
+        router.on('route:story', function(name) {
             require(['/js/views/story/full_story.js'], function(FullStoryPage) {
 
                 var options = {
                     model: {
-                        "id": storyId
+                        "name": name
                     }
                 };
                 VM.create("story", FullStoryPage, options).render();
