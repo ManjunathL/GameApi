@@ -12,25 +12,26 @@ define([
     'text!/templates/product/appliance.html',
     'text!/templates/product/finish.html',
     'text!/templates/product/colors.html',
-    '/js/collections/products.js',
+    '/js/collections/relatedproducts.js',
     'text!/templates/product/relatedproduct.html',
     '/js/slyutil.js',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
-    '/js/collections/appliances.js'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, ProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil, ApplianceCollection) {
+    '/js/collections/appliances.js',
+    '/js/views/view_manager.js'
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, RelatedProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil, ApplianceCollection, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         appliancelst: '#applianceList',
         product: null,
         custom_product: null,
-        Products: null,
+        RelatedProducts: null,
         initialize: function() {
             this.product = new ProductModel();
             window.product = this.product;
             this.custom_product = new CustomProduct();
-            this.Products = new ProductCollection();
+            this.RelatedProducts = new RelatedProductCollection();
             this.Appliances = new ApplianceCollection();
             this.custom_product.on('change',this.render,this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
@@ -69,8 +70,10 @@ define([
             }
         },
         handleUserChange: function() {
-            this.markShortlisted();
-            this.render();
+            if (VM.activeView === VM.PRODUCT_DETAILS) {
+                this.markShortlisted();
+                this.render();
+            }
         },
         respond: function(userProfData) {
             var that = this;
@@ -149,16 +152,16 @@ define([
         getRelatedProducts: function(selectedSubCategory){
             var that = this;
             return new Promise(function(resolve, reject) {
-                if (that.Products.isEmpty()) {
-                    that.Products.fetch({
+                var selectedCategory = that.product.get('category');
+                var selectedStyleId = that.product.get('styleId');
+                if (that.RelatedProducts.isEmpty()) {
+                    that.RelatedProducts.fetch({
                         data: {
-                            "categories": that.product.get('category')
+                            "category": selectedCategory,
+                            "styleId": selectedStyleId
                         },
-                        success: function() {
-                            var selectedCategory = that.product.get('category');
-                            var selectedStyleId = that.product.get('styleId');
-
-                            that.relatedProducts = that.Products.getRelatedProducts(selectedCategory,selectedStyleId);
+                        success: function(response) {
+                            that.relatedProducts = response.toJSON();
                             resolve();
                         },
                         error: function(model, response, options) {
