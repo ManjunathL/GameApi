@@ -12,8 +12,9 @@ define([
     '/js/collections/subcategories.js',
     '/js/models/filter.js',
     '/js/models/filterMaster.js',
-    '/js/mgfirebase.js'
-], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF) {
+    '/js/mgfirebase.js',
+    '/js/views/view_manager.js'
+], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         products: null,
@@ -37,6 +38,18 @@ define([
             window.filter = that.filter;
 
             var selectedSubCategories = that.model.selectedSubCategories;
+
+            that.filter.set({
+                'selectedCategoryName':that.model.selectedCategories
+            }, {
+                silent: true
+            });
+
+            that.filter.set({
+                'selectedSubCategoryName':that.model.selectedSubCategories
+            }, {
+                silent: true
+            });
 
             var subCategory = '';
 
@@ -395,7 +408,8 @@ define([
         },
         events: {
             "click .shortlistable-item": "toggleShortListItem",
-            "click .fa-share": "toggleShareIcons"
+            "click .listshare": "toggleShareIcons",
+            "click .gridshare": "toggleGridShareIcons"
         },
         toggleShortListItem: function(e) {
 
@@ -422,9 +436,11 @@ define([
             return false;
         },
         handleUserChange: function() {
-            this.clearShortlisted();
-            this.markShortlisted();
-            this.render();
+            if (VM.activeView === VM.PRODUCT_LISTING) {
+                this.clearShortlisted();
+                this.markShortlisted();
+                this.render();
+            }
         },
         toggleShareIcons: function(e){
             e.preventDefault();
@@ -433,6 +449,14 @@ define([
             var shareicoId = currentTarget.attr('id');
             var productId = shareicoId.replace('share-ico','');
             $('#list-share-txt'+productId).toggle();
+        },
+        toggleGridShareIcons: function(e){
+            e.preventDefault();
+
+            var currentTarget = $(e.currentTarget);
+            var shareicoId = currentTarget.attr('id');
+            var productId = shareicoId.replace('share-grid-ico','');
+            $('#grid-share-txt'+productId).toggle();
         }
     });
     return ProductPage;

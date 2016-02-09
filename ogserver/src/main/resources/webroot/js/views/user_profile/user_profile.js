@@ -8,8 +8,9 @@ define([
     'bootstrap',
     'bootstrapvalidator',
     '/js/mgfirebase.js',
-    'text!/templates/user_profile/user_profile.html'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, UserProfileTemplate) {
+    'text!/templates/user_profile/user_profile.html',
+    '/js/views/view_manager.js'
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, UserProfileTemplate, VM) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -29,7 +30,9 @@ define([
             _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit');
         },
         handleUserChange: function () {
-            window.location = '#';
+            if (VM.activeView === VM.USER_PROFILE) {
+                window.location = '/';
+            }
         },
         submit: function (e) {
             if (e.isDefaultPrevented()) return;

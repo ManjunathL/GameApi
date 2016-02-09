@@ -3,10 +3,24 @@
     <div class="container-fluid category-banner">
         <img src="/img/kitchen-category-banner.jpg" class="img-responsive" alt="">
     </div>
-
-    <div class="container-fluid bg-white" id="filter-desc-container">
+    <div class="container-fluid bg-white">
         <div class="container">
-
+            <div class="row">
+                    <ul class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                        <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a></li>
+                        <% } %>
+                        <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName != null){ %>
+                        <li class="active">
+                            <a href="javascript:void(0);"><%= filter.selectedSubCategoryName %></a></li>
+                        <% } %>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-color-white" id="filter-desc-container">
+        <div class="container">
             <div class="row padding20-0 filter-desc-col position-relative" id="filter-desc">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-8">
                     <div class="design-count margin0"><%= collection.length %> Products Found</div>
@@ -485,7 +499,10 @@
             $('.glyphicon-th-full').removeClass('active');
             $('.grid-view').css ('display','block');
             $('.list-view').css('display','none');
-            $('.listli').css('padding','10px 0px');
+            $('.list-heart').css('font-size','22px');
+            $('.listli').css('padding','0px');
+            $('.share-ico-txt').css('width','85px');
+            $('.share-ico-txt a').css('padding-left','0px!important');
             $('h4').css('font-size','15px').addClass('product-caption-overflow');
             $('.portfolio-caption').css('height','82px');
             $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');

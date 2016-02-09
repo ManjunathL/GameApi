@@ -39,10 +39,11 @@ define([
         window.App.router = router;
         router.on('route:dashboard', function(actions) {
             require(['/js/views/dashboard/page.js'], function(DashboardPage) {
-                VM.create("dashboard", DashboardPage).render();
+                VM.create(VM.DASHBOARD, DashboardPage).render();
             });
         });
         router.on('route:products', function(categories, subcategories, searchTerm, sortBy, sortDir, layout) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/product/page.js'], function(ProductPage) {
                 var options = {
                     model: {
@@ -54,10 +55,11 @@ define([
                         "layout": layout
                     }
                 };
-                VM.create("productListing", ProductPage, options).render();
+                VM.create(VM.PRODUCT_LISTING, ProductPage, options).render();
             });
         });
         router.on('route:products-search', function(searchTerm) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/product/page.js'], function(ProductPage) {
                 console.log('searchTerm');
                 console.log(searchTerm);
@@ -66,40 +68,46 @@ define([
                         "searchTerm": searchTerm
                     }
                 };
-                VM.create("productListing", ProductPage, options).render();
+                VM.create(VM.PRODUCT_LISTING, ProductPage, options).render();
             });
         });
         router.on('route:product', function(productId) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/product/details.js'], function(ProductDetailPage) {
                 var options = {
                     model: {
                         "id": productId
                     }
                 };
-                VM.create("productDetails", ProductDetailPage, options).render();
+                VM.create(VM.PRODUCT_DETAILS, ProductDetailPage, options).render();
             });
         });
         router.on('route:user_profile', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/user_profile/user_profile.js'], function(UserProfilePage) {
-                VM.create("userProfile", UserProfilePage).render();
+                VM.create(VM.USER_PROFILE, UserProfilePage).render();
             });
         });
         router.on('route:consult', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/consult/consult.js'], function(ConsultPage) {
-                VM.create("consult", ConsultPage).render();
+                VM.create(VM.CONSULT, ConsultPage).render();
             });
         });
         router.on('route:shortlist', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/shortlist/shortlist.js'], function(ShortlistPage) {
-                VM.create("shortlist", ShortlistPage).render();
+                VM.create(VM.SHORTLIST, ShortlistPage).render();
             });
         });
         router.on('route:stories', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/story/stories.js'], function(StoriesPage) {
-                VM.create("stories", StoriesPage).render();
+                VM.create(VM.STORIES, StoriesPage).render();
             });
         });
         router.on('route:story', function(name) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/story/full_story.js'], function(FullStoryPage) {
 
                 var options = {
@@ -107,7 +115,7 @@ define([
                         "name": name
                     }
                 };
-                VM.create("story", FullStoryPage, options).render();
+                VM.create(VM.STORY, FullStoryPage, options).render();
             });
         });
         router.on('route', function () {

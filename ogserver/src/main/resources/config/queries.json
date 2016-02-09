@@ -107,10 +107,11 @@
     {
       "id": "product.select.related",
       "type": "select",
-      "query": "select id, productId, productShortJson from product where category = ? and styleId = ?",
+      "query": "select id, productId, productShortJson from product where category = ? and styleId = ? and productId != ?",
       "params": [
         "category",
-        "styleId"
+        "styleId",
+        "productId"
       ]
     },
     {
