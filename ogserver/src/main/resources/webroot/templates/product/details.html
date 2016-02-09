@@ -1,12 +1,10 @@
 <% document.title = product.name + ' | mygubbi' %>
 
 <section class="bg-white top-section">
-<!--
     <div class="container-fluid bg-color-white">
         <div class="container">
             <div class="row">
-                <div class="breadcrumb">
-                    <ul>
+                <ul class="breadcrumb">
                         <li><a href="/">Home</a></li>
                         <% if(typeof(product.category) !== 'undefined' && product.category != null){ %>
                         <li><a href="/products/<%= product.category %>"><%= product.category %></a></li>
@@ -15,14 +13,12 @@
                         <li><a href="/products/<%= product.category %>/<%= product.subcategory %>"><%= product.subcategory %></a></li>
                         <% } %>
                         <% if(typeof(product.name) !== 'undefined'){ %>
-                        <li><a href="javascript:void(0);" class="active"><%= product.name %></a></li>
+                        <li class="active"><a href="javascript:void(0);"><%= product.name %></a></li>
                         <% } %>
                     </ul>
-                </div>
             </div>
         </div>
     </div>
--->
     <div class="container">
         <div class="row product-heading details-heading" id="heading-bar">
             <div class="col-sm-10">

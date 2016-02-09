@@ -3,25 +3,22 @@
     <div class="container-fluid category-banner">
         <img src="/img/kitchen-category-banner.jpg" class="img-responsive" alt="">
     </div>
-<!--
     <div class="container-fluid bg-white">
         <div class="container">
             <div class="row">
-                <div class="breadcrumb">
-                    <ul>
+                    <ul class="breadcrumb">
                         <li><a href="/">Home</a></li>
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                         <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a></li>
                         <% } %>
                         <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName != null){ %>
-                        <li><a href="javascript:void(0);" class="active"><%= filter.selectedSubCategoryName %></a></li>
+                        <li class="active">
+                            <a href="javascript:void(0);"><%= filter.selectedSubCategoryName %></a></li>
                         <% } %>
                     </ul>
-                </div>
             </div>
         </div>
     </div>
--->
     <div class="container-fluid bg-color-white" id="filter-desc-container">
         <div class="container">
             <div class="row padding20-0 filter-desc-col position-relative" id="filter-desc">
