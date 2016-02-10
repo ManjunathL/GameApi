@@ -9,9 +9,6 @@
         margin-right: 22% !important;
         float: right;
     }
-    .super-script {
-        display: block !important;
-    }
     .product-caption {
         font-size: 22px;
     }
@@ -33,7 +30,7 @@
         width: 97% !important;
     }
     .super-script {
-        display: none !important;
+        right: 72px !important;
     }
     .shortlist-remove {
         left: 65% !important;
@@ -325,7 +322,7 @@ button {
     margin: 0px;
 }
 
-.consult,
+.nav li .consult,
 .consult:focus,
 .consult.active {
     color: #fff !important;
@@ -344,7 +341,8 @@ button {
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
 
-.consult:hover {
+.consult:hover,
+.open .consult {
     border-color: #ff471a !important;
     color: #fff !important;
     background-color: #ff3200 !important;
@@ -1238,13 +1236,8 @@ input[type=checkbox] {
 }
 
 .super-script {
-    /*background-color: #f1591f;*/
+    display: block !important;
     color: #555;
-    /*border-radius: 50%;*/
-    /*width: 14px;
-    height: 14px;
-    padding: 2px;
-    text-align: center;*/
     font-size: 8px;
     position: absolute;
     top: 8px;
@@ -3614,86 +3607,178 @@ a.tab-ico {
         right: 4% !important;
         width: 79% !important;
     }
-    .share-ico-txt{
-         width:115px!important;
-     }
-     .share-ico-txt a{
-        padding-left:10px!important;
-     }
+    .share-ico-txt {
+        width: 115px!important;
+    }
+    .share-ico-txt a {
+        padding-left: 10px!important;
+    }
 }
 
 
 /* Breadcrumb */
 
 .breadcrumb {
-    position: relative;
+    padding: 0px;
+    background: #f2f4f4;
+    list-style: none;
+    overflow: hidden;
+    margin-top: 20px;
     height: 30px;
-    width: 100%;
-    padding: 0px 0px !important;
-    background-color: #fff!important;
-    margin: 30px 10px 0px 8px !important;
     text-transform: capitalize;
 }
 
-.breadcrumb ul {
-    position: relative;
-    margin: 0 5px 0 5px;
+.breadcrumb>li+li:before {
     padding: 0;
-    height: 30px;
-    background: url('/img/breadcrumbImage.png') 0px -30px repeat-x;
 }
 
-.breadcrumb ul li {
-    padding: 0;
-    margin: 0;
-    list-style: none;
+.breadcrumb li {
     float: left;
-    height: 30px;
-    display: inline;
 }
 
-.breadcrumb ul li a {
-    font: 12px Arial, Helvetica, sans-serif;
-    color: #000;
-    text-decoration: none;
-    line-height: 30px;
-    display: block;
-    background: url('/img/breadcrumbImage.png') 100% -60px no-repeat;
-    padding: 0 17px 0 15px;
-}
-
-.breadcrumb ul li a:hover {
-    text-decoration: underline;
-    color: #FF3200;
-}
-
-.breadcrumb ul li a.active {
+.breadcrumb li.active a {
     background: none;
     color: #FF3200;
 }
 
-.breadcrumb ul li a.active:hover {
+.breadcrumb li.completed a {
+    background: none;
+    /* fallback color */
+}
+
+.breadcrumb li.active a:after {
+    border-left: 30px solid #f2f4f4;
+    margin-left: 0px;
+}
+
+.breadcrumb li.active a:before {
+    border-left: 30px solid #f2f4f4;
+    margin-left: 0px;
+}
+
+.breadcrumb li.completed a:after {
+    border-left: 30px solid #f2f4f4;
+}
+
+.breadcrumb li a {
+    color: #000;
     text-decoration: none;
+    padding: 5px 0 5px 45px;
+    position: relative;
+    display: block;
+    float: left;
 }
 
-.breadcrumb .left {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 10px;
-    height: 30px;
+.breadcrumb li a:after {
+    content: " ";
     display: block;
-    z-index: 1;
-    background: url('/img/breadcrumbImage.png') 0% 0px no-repeat;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 30px solid #f2f4f4;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    left: 100%;
+    z-index: 2;
 }
 
-.breadcrumb .right {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 10px;
-    height: 30px;
+.breadcrumb li a:before {
+    content: " ";
     display: block;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 30px solid white;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: 4px;
+    left: 100%;
     z-index: 1;
-    background: url('/img/breadcrumbImage.png') 100% -90px no-repeat;
+}
+.breadcrumb li:first-child a {
+	padding-left: 15px;
+}
+.breadcrumb li:last-child a {
+	cursor: default;
+	text-decoration:none!important;
+}
+.breadcrumb li a:hover {
+    text-decoration:underline;
+    color:#FF3200;
+}
+.breadcrumb li a:hover:after {
+    border-left-color: #f2f4f4   !important;
+}
+.page-tran {
+    font-size: 90px !important;
+    color: rgba(0, 0, 0, 0.5);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+
+
+/* The responsive part */
+/*.breadcrumb > *:nth-child(n+2) {
+  display:none;
+}*/
+/*.breadcrumb > * > li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/
+
+.li-txt-wrap{
+    display:inline-block;
+    width:315px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+
+/* === For phones =================================== */
+@media (max-width: 767px) {
+    .breadcrumb > *:nth-last-child(1) {
+        display:block;
+    }
+
+    .breadcrumb{
+        width: 95%;
+        margin-left:10px;
+    }
+}
+
+/* === For tablets ================================== */
+@media (min-width: 768px) and (max-width:991px) {
+    /*.breadcrumb > *:nth-last-child(-n+2) {
+        display:block;
+    }*/
+    .breadcrumb{
+        width: 98%;
+    }
+}
+
+/* === For desktops ================================== */
+@media (min-width: 992px) {
+    .breadcrumb > *:nth-child(n+2) {
+      display:block;
+    }
+    .breadcrumb{
+        width: 100%;
+        margin-left:10px;
+    }
+}
+
+
+.breadcrumb li a:hover {
+    text-decoration: underline;
+    color: #FF3200;
+}
+
+.breadcrumb li a:hover:after {
+    border-left-color: #f2f4f4 !important;
 }

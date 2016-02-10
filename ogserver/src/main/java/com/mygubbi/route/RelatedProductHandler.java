@@ -32,8 +32,9 @@ public class RelatedProductHandler extends AbstractRouteHandler
     {
         String category = context.request().getParam("category");
         String styleId = context.request().getParam("styleId");
+        String productId = context.request().getParam("productId");
 
-        JsonObject params = new JsonObject().put("category", category).put("styleId", styleId);
+        JsonObject params = new JsonObject().put("category", category).put("styleId", styleId).put("productId", productId);
         this.fetchProductsAndSend(context, "product.select.related", params);
     }
 

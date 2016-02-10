@@ -11,7 +11,11 @@
                     <a href="/product/<%= sl.id %>" data-element=".userpop" class="shortlist-side"><img src="<%= imgBase + 'c_fill/' + sl.images[0] %>" class="shortlist-thumb"></a>
                 </div>
                 <div class="col-md-5">
-                    <span class="fa fa-inr"></span><%= " " + sl.defaultPrice %>
+                    <% if (sl.defaultPrice !== 0) { %>
+                    <span class="fa fa-inr"></span><%= " " + sl.defaultPrice %>/-
+                    <% } else { %>
+                    Consult for Price
+                    <% } %>
                 </div>
             </div>
     <% });

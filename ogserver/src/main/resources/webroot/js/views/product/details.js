@@ -154,11 +154,13 @@ define([
             return new Promise(function(resolve, reject) {
                 var selectedCategory = that.product.get('category');
                 var selectedStyleId = that.product.get('styleId');
+                var productId = that.product.get('productId');
                 if (that.RelatedProducts.isEmpty()) {
                     that.RelatedProducts.fetch({
                         data: {
                             "category": selectedCategory,
-                            "styleId": selectedStyleId
+                            "styleId": selectedStyleId,
+                            "productId": productId
                         },
                         success: function(response) {
                             that.relatedProducts = response.toJSON();
