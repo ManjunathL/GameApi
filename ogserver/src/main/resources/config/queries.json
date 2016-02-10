@@ -81,6 +81,12 @@
       ]
     },
     {
+      "id": "product.select.all",
+      "type": "select",
+      "query": "select id, productId, productJson from product",
+      "params": []
+    },
+    {
       "id": "product.select.productid",
       "type": "select",
       "query": "select id, productId, productJson from product where productId = ?",

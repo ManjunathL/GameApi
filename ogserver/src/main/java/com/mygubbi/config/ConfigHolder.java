@@ -56,7 +56,7 @@ public class ConfigHolder extends AbstractVerticle
                 if (this.siteConfigFile != null)
                 {
                     this.loadSiteConfig(startFuture);
-                    //this.loadESConfig(startFuture); todo: this causing problem for the moment
+                    this.loadESConfig(startFuture);
                 }
                 else
                 {
@@ -76,15 +76,15 @@ public class ConfigHolder extends AbstractVerticle
 
     private void loadSiteConfig(Future<Void> startFuture)
     {
-		loadConfig(startFuture, this.siteConfigFile);
+		loadConfig(startFuture, this.siteConfigFile, false);
 	}
 
     private void loadESConfig(Future<Void> startFuture)
     {
-		loadConfig(startFuture, this.esConfig);
+		loadConfig(startFuture, this.esConfig, true);
 	}
 
-	private void loadConfig(Future<Void> startFuture, String config) {
+	private void loadConfig(Future<Void> startFuture, String config, boolean lastFile) {
 		VertxInstance.get().fileSystem().readFile(config, result -> {
             if (result.succeeded())
             {
@@ -92,7 +92,7 @@ public class ConfigHolder extends AbstractVerticle
                 this.serverConfig = this.serverConfig.mergeIn(siteConfig);
                 LOG.info("Site config file : " + this.siteConfigFile + ". Value:" + result.result().toString());
                 LOG.info("Merged config : " + this.serverConfig.toString());
-                startFuture.complete();
+                if (lastFile) startFuture.complete();
             }
             else
             {

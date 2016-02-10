@@ -8,14 +8,25 @@ public class SearchQueryData
 	private JsonObject query;
 	private String result;
 	private String type;
+	private boolean recordsOnly = true;
 
 	public SearchQueryData(String index, JsonObject query, String type) {
+		this(index, query, type, true);
+	}
+
+	public SearchQueryData(String index, JsonObject query, String type, boolean recordsOnly) {
 		this.index = index;
 		this.query = query;
 		this.type = type;
+		this.recordsOnly = recordsOnly;
 	}
 
-	public String getIndex()
+    public boolean isRecordsOnly()
+    {
+        return recordsOnly;
+    }
+
+    public String getIndex()
 	{
 		return index;
 	}

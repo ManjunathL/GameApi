@@ -213,6 +213,7 @@
       "include": [
         "name",
         "id",
+        "productId",
         "desc",
         "category",
         "subcategory",

@@ -12,7 +12,7 @@
   "services": {
     "sequential":["com.mygubbi.support.LogServiceVerticle", "com.mygubbi.db.DatabaseService"],
     "parallel":["com.mygubbi.db.QueryPrepareService", "com.mygubbi.db.SequenceIdGenerator", "com.mygubbi.apiserver.ApiServerVerticle",
-      "com.mygubbi.si.firebase.FirebaseService", "com.mygubbi.catalog.ProductManagementService"]
+      "com.mygubbi.search.SearchService", "com.mygubbi.si.firebase.FirebaseService", "com.mygubbi.catalog.ProductManagementService"]
   },
 
   "datatables":["user_profile", "event_log", "event_errors", "shortlisted", "product", "enquiries"],
