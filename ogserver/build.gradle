@@ -4,13 +4,15 @@
  *
  */
 
-// Apply the java plugin to add support for Java
-apply plugin: 'java'
-//apply plugin: 'eclipse'
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '1.2.2'
+}
 
 version = '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
 
 // In this section you declare where to find the dependencies of your project
 repositories
@@ -41,16 +43,15 @@ task gulp(type: Exec) {
 }
 processResources.finalizedBy gulp
 
-//create a single Jar with all dependencies
-task fatJar(type: Jar) {
+shadowJar {
     manifest {
         attributes 'Implementation-Title': 'mygubbi Java Server',
                 'Implementation-Version': version,
                 'Main-Class': 'com.mygubbi.ServerVerticle'
     }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+    transform(ServiceFileTransformer) {
+        path = 'META-INF/services'
+    }
 }
 
 // In this section you declare the dependencies for your production and test code
