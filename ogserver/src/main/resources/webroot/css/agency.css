@@ -9,9 +9,6 @@
         margin-right: 22% !important;
         float: right;
     }
-    .super-script {
-        display: block !important;
-    }
     .product-caption {
         font-size: 22px;
     }
@@ -33,7 +30,7 @@
         width: 97% !important;
     }
     .super-script {
-        display: none !important;
+        right: 72px !important;
     }
     .shortlist-remove {
         left: 65% !important;
@@ -325,9 +322,7 @@ button {
     margin: 0px;
 }
 
-.nav li
-
-.consult,
+.nav li .consult,
 .consult:focus,
 .consult.active {
     color: #fff !important;
@@ -346,7 +341,8 @@ button {
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
 
-.consult:hover, .open .consult{
+.consult:hover,
+.open .consult {
     border-color: #ff471a !important;
     color: #fff !important;
     background-color: #ff3200 !important;
@@ -1240,13 +1236,8 @@ input[type=checkbox] {
 }
 
 .super-script {
-    /*background-color: #f1591f;*/
+    display: block !important;
     color: #555;
-    /*border-radius: 50%;*/
-    /*width: 14px;
-    height: 14px;
-    padding: 2px;
-    text-align: center;*/
     font-size: 8px;
     position: absolute;
     top: 8px;
@@ -3629,74 +3620,84 @@ a.tab-ico {
 
 .breadcrumb {
     padding: 0px;
-	background: #f2f4f4;
-	list-style: none;
-	overflow: hidden;
+    background: #f2f4f4;
+    list-style: none;
+    overflow: hidden;
     margin-top: 20px;
-    height:30px;
+    height: 30px;
     text-transform: capitalize;
 }
+
 .breadcrumb>li+li:before {
-	padding: 0;
+    padding: 0;
 }
+
 .breadcrumb li {
-	float: left;
+    float: left;
 }
+
 .breadcrumb li.active a {
-	background:none;
-    color:#FF3200;
+    background: none;
+    color: #FF3200;
 }
+
 .breadcrumb li.completed a {
-	background: none;                   /* fallback color */
+    background: none;
+    /* fallback color */
 }
+
 .breadcrumb li.active a:after {
-	border-left: 30px solid #f2f4f4 ;
-	margin-left:0px;
+    border-left: 30px solid #f2f4f4;
+    margin-left: 0px;
 }
+
 .breadcrumb li.active a:before {
-	border-left: 30px solid #f2f4f4 ;
-	margin-left:0px;
+    border-left: 30px solid #f2f4f4;
+    margin-left: 0px;
 }
+
 .breadcrumb li.completed a:after {
-	border-left: 30px solid #f2f4f4;
+    border-left: 30px solid #f2f4f4;
 }
 
 .breadcrumb li a {
-	color: #000;
-	text-decoration: none;
-	padding: 5px 0 5px 45px;
-	position: relative;
-	display: block;
-	float: left;
+    color: #000;
+    text-decoration: none;
+    padding: 5px 0 5px 45px;
+    position: relative;
+    display: block;
+    float: left;
 }
+
 .breadcrumb li a:after {
-	content: " ";
-	display: block;
-	width: 0;
-	height: 0;
-	border-top: 50px solid transparent;
-	border-bottom: 50px solid transparent;
-	border-left: 30px solid #f2f4f4;
-	position: absolute;
-	top: 50%;
-	margin-top: -50px;
-	left: 100%;
-	z-index: 2;
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 30px solid #f2f4f4;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    left: 100%;
+    z-index: 2;
 }
+
 .breadcrumb li a:before {
-	content: " ";
-	display: block;
-	width: 0;
-	height: 0;
-	border-top: 50px solid transparent;
-	border-bottom: 50px solid transparent;
-	border-left: 30px solid white;
-	position: absolute;
-	top: 50%;
-	margin-top: -50px;
-	margin-left: 4px;
-	left: 100%;
-	z-index: 1;
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 30px solid white;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: 4px;
+    left: 100%;
+    z-index: 1;
 }
 .breadcrumb li:first-child a {
 	padding-left: 15px;
@@ -3714,7 +3715,7 @@ a.tab-ico {
 }
 .page-tran {
     font-size: 90px !important;
-    color: rgba(0,0,0,0.5);
+    color: rgba(0, 0, 0, 0.5);
     top: 50%;
     left: 50%;
     position: absolute;
@@ -3772,3 +3773,12 @@ a.tab-ico {
     }
 }
 
+
+.breadcrumb li a:hover {
+    text-decoration: underline;
+    color: #FF3200;
+}
+
+.breadcrumb li a:hover:after {
+    border-left-color: #f2f4f4 !important;
+}
