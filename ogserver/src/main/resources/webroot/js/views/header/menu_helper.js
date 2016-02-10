@@ -521,6 +521,14 @@ define([
                     });
                 });
 
+                $(function() {
+                    var navMain = $("#bs-example-navbar-collapse-1");
+                    var menuLi = $(".menu-li");
+                    menuLi.on("click", "a", null, function() {
+                        navMain.collapse('hide');
+                    });
+                });
+
                 $(window).resize(that.positionSideContact);
 
                 that.positionSideContact();
