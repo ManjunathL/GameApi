@@ -3698,7 +3698,20 @@ a.tab-ico {
 	left: 100%;
 	z-index: 1;
 }
-
+.breadcrumb li:first-child a {
+	padding-left: 15px;
+}
+.breadcrumb li:last-child a {
+	cursor: default;
+	text-decoration:none!important;
+}
+.breadcrumb li a:hover {
+    text-decoration:underline;
+    color:#FF3200;
+}
+.breadcrumb li a:hover:after {
+    border-left-color: #f2f4f4   !important;
+}
 .page-tran {
     font-size: 90px !important;
     color: rgba(0,0,0,0.5);
@@ -3706,9 +3719,56 @@ a.tab-ico {
     left: 50%;
     position: absolute;
 }
-.breadcrumb li:first-child a {
-	padding-left: 15px;
+
+
+/* The responsive part */
+/*.breadcrumb > *:nth-child(n+2) {
+  display:none;
+}*/
+/*.breadcrumb > * > li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/
+
+.li-txt-wrap{
+    display:inline-block;
+    width:315px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
 }
-.breadcrumb li a:hover { text-decoration:underline;
-    color:#FF3200; }
-.breadcrumb li a:hover:after { border-left-color: #f2f4f4   !important; }
+
+/* === For phones =================================== */
+@media (max-width: 767px) {
+    .breadcrumb > *:nth-last-child(1) {
+        display:block;
+    }
+
+    .breadcrumb{
+        width: 95%;
+        margin-left:10px;
+    }
+}
+
+/* === For tablets ================================== */
+@media (min-width: 768px) and (max-width:991px) {
+    /*.breadcrumb > *:nth-last-child(-n+2) {
+        display:block;
+    }*/
+    .breadcrumb{
+        width: 98%;
+    }
+}
+
+/* === For desktops ================================== */
+@media (min-width: 992px) {
+    .breadcrumb > *:nth-child(n+2) {
+      display:block;
+    }
+    .breadcrumb{
+        width: 100%;
+        margin-left:10px;
+    }
+}
+
