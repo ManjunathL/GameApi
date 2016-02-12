@@ -10,30 +10,37 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.*;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 public class ConfigHolder extends AbstractVerticle
 {
 	private static final Logger LOG = LogManager.getLogger(ConfigHolder.class);
-	
-	private String baseConfigFile = "config/conf.base.json";
-    private String siteConfigFile;
-	private String esConfig = "config/es.json";
 
 	private static ConfigHolder INSTANCE;
-	
-	private JsonObject serverConfig = new JsonObject();
+
+	private String baseConfigFile = "config/conf.base.json";
+	private String esConfig = "config/es.json";
+
+	private List<String> configFilesToLoad;
+
+	private JsonObject serverConfig = null;
 
 	public ConfigHolder()
 	{
-        this(null);
+		this(Collections.EMPTY_LIST);
 	}
 
     public ConfigHolder(String siteConfigFile)
     {
-        this.siteConfigFile = siteConfigFile;
+        this(Collections.singletonList(siteConfigFile));
     }
+
+	public ConfigHolder(List<String> configFilesToLoad)
+	{
+		this.configFilesToLoad = configFilesToLoad;
+	}
 
     public static ConfigHolder getInstance()
 	{
@@ -48,59 +55,52 @@ public class ConfigHolder extends AbstractVerticle
 	@Override
 	public void start(Future<Void> startFuture) throws Exception
 	{
-        VertxInstance.get().fileSystem().readFile(this.baseConfigFile, result -> {
-		    if (result.succeeded()) 
-		    {
-		    	this.serverConfig = new JsonObject(result.result().toString());
-		        LOG.info("Base config file : " + this.baseConfigFile + ". Value:" + result.result().toString());
-                if (this.siteConfigFile != null)
-                {
-                    this.loadSiteConfig(startFuture);
-                    this.loadESConfig(startFuture);
-                }
-                else
-                {
-                    startFuture.complete();
-                }
-		    } 
-		    else 
-		    {
-		    	this.serverConfig = new JsonObject();
-		    	String message = "Could not read config file : " + this.baseConfigFile + ". Cause:" + result.cause();
-		        LOG.error(message, result.cause());
-		        startFuture.fail(message);
-		    }
-		});
+		Deque<String> allConfigFiles = new ArrayDeque<>();
+		if (this.configFilesToLoad != null && !this.configFilesToLoad.isEmpty())
+		{
+			int size = this.configFilesToLoad.size();
+			for (int i = (size -1); i>=0; i--)
+			{
+				allConfigFiles.push(this.configFilesToLoad.get(i));
+			}
+		}
+		allConfigFiles.push(this.esConfig);
+		allConfigFiles.push(this.baseConfigFile);
+
+		this.serverConfig = new JsonObject();
+		this.loadConfig(allConfigFiles, startFuture);
 		INSTANCE = this;
 	}
 
-    private void loadSiteConfig(Future<Void> startFuture)
-    {
-		loadConfig(startFuture, this.siteConfigFile, false);
-	}
+	private void loadConfig(Deque<String> configFiles, Future<Void> startFuture)
+	{
+		if (configFiles.isEmpty())
+		{
+			LOG.info("FInal merged config : " + this.serverConfig.encodePrettily());
+			startFuture.complete();
+			return;
+		}
 
-    private void loadESConfig(Future<Void> startFuture)
-    {
-		loadConfig(startFuture, this.esConfig, true);
-	}
+		String configFile = configFiles.pop();
+		VertxInstance.get().fileSystem().readFile(configFile, result -> {
+			if (result.succeeded())
+			{
+				String jsonText = result.result().toString();
+				JsonObject configJson = new JsonObject(jsonText);
+				this.serverConfig = this.serverConfig.mergeIn(configJson);
 
-	private void loadConfig(Future<Void> startFuture, String config, boolean lastFile) {
-		VertxInstance.get().fileSystem().readFile(config, result -> {
-            if (result.succeeded())
-            {
-                JsonObject siteConfig = new JsonObject(result.result().toString());
-                this.serverConfig = this.serverConfig.mergeIn(siteConfig);
-                LOG.info("Site config file : " + this.siteConfigFile + ". Value:" + result.result().toString());
-                LOG.info("Merged config : " + this.serverConfig.toString());
-                if (lastFile) startFuture.complete();
-            }
-            else
-            {
-                String message = "Could not read site config file : " + this.siteConfigFile + ". Cause:" + result.cause();
-                LOG.error(message, result.cause());
-                startFuture.fail(message);
-            }
-        });
+				LOG.info("Config file: " + configFile + ". Value:" + configJson.encodePrettily());
+				loadConfig(configFiles, startFuture);
+			}
+			else
+			{
+				this.serverConfig = new JsonObject();
+				String message = "Could not read config file : " + configFile + ". Cause:" + result.cause();
+				LOG.error(message, result.cause());
+				startFuture.fail(message);
+			}
+		});
+
 	}
 
 	public String getVersion()

@@ -22,14 +22,20 @@ public class EsIndexer
 
     public static void main(String[] args)
     {
-        final EsIndexer esIndexer = new EsIndexer();
-        esIndexer.startServices();
+        if (args.length == 1)
+        {
+            new EsIndexer().startServices(args[0]); //Config files can be passed in as comma delimited set
+        }
+        else
+        {
+            new EsIndexer().startServices("config/conf.es.json");
+        }
     }
 
-    private void startServices()
+    private void startServices(String configFiles)
     {
 
-        VertxInstance.get().deployVerticle(new ServerVerticle("config/conf.es.json"), new DeploymentOptions().setWorker(true), result ->
+        VertxInstance.get().deployVerticle(new ServerVerticle(configFiles), new DeploymentOptions().setWorker(true), result ->
         {
             if (result.succeeded())
             {
