@@ -328,7 +328,8 @@ define([
 
             $(function() {
 
-                $('.user').click(function() {
+                $('.user').click(function(e) {
+                    e.stopPropagation();
                     that.showUserPop();
                 });
 
@@ -338,11 +339,12 @@ define([
                     $('#reg_error').html('');
                     $('#reg_error_row').css("display", "none");
                     $('#reg_password').val('');
-                    $('#reg_confirm').val('');
+                     $('#reg_confirm').val('');
 
                 });
 
-                $('#contact-us-side-btn').click(function() {
+                $('#contact-us-side-btn').click(function(e) {
+                    e.stopPropagation();
                     that.toggleContactUsPop();
                     $('#contact_error').html('');
                     $('#contact_error_row').css("display", 'none');
@@ -519,6 +521,23 @@ define([
                     subMenuUL.on("click", "li", null, function() {
                         navMain.collapse('hide');
                     });
+
+                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li",null, function() {
+                        $(this).parent().hide();
+                    });
+
+                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").hover(function() {
+                            $(this).show();
+                        },
+                           function(){
+                               $('.dropdown-menu').hide();
+                    });
+
+                    $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {
+                        $('.dropdown-menu').hide();
+                        $(this).next('.dropdown-menu').show();
+                    });
+
                 });
 
                 $(function() {
@@ -534,6 +553,17 @@ define([
                 that.positionSideContact();
 
                 $('#tawkchat-iframe-container').hide();
+
+                $(document).on("click",null, function (e) {
+                    var contactpopup = $("#contactuspop");
+                     if (!$('#contact-us-side-btn').is(e.target) && !contactpopup.is(e.target) && contactpopup.has(e.target).length == 0) {
+                         $("#contactuspop").css('left', - $("#contactuspop").width() + 'px');
+                     }
+                     var popup = $(".userpop");
+                     if (!$('#user-icon').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
+                         popup.css('right', '-800px');
+                     }
+                 });
 
                 $(document).on("click", "a[href^='/']", function(event) {
                     href = $(event.currentTarget).attr('href');
