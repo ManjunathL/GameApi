@@ -62,9 +62,6 @@ define([
 
             Promise.all([getFilterMasterPromise, getCategoriesPromise, getProductsPromise]).then(function() {
                 that.markShortlisted();
-                if (typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null) {
-                    that.getProductSubcategories();
-                }
                 that.productFilter();
 
             }).catch(function(err) {
@@ -185,6 +182,9 @@ define([
             var that = this;
             return new Promise(function(resolve, reject) {
                 if (that.products.isEmpty()) {
+                    if (that.model.searchTerm) {
+                        that.products.url = restBase + '/api/es/search';
+                    }
                     that.products.fetch({
                         data: {
                             "category": that.model.selectedCategories,
@@ -192,6 +192,9 @@ define([
                         },
                         success: function() {
                             console.log("products fetch successfully- ");
+                            if (typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null) {
+                                that.getProductSubcategories();
+                            }
                             resolve();
                         },
                         error: function(model, response, options) {
@@ -219,22 +222,19 @@ define([
         },
         getProductSubcategories: function() {
             var that = this;
-            window.filter = that.filter;
 
             var subcatIds = new Array();
             var filterIds = new Array();
             var subCategorynames = new Array();
 
             var selectedSubCategoriesList = {};
-
             var subcategoryarr = [];
             that.products.each(function(product) {
-                //subcategoryarr.push({id: product.get('subCategId'), name: product.get('subCateg')});
-                subcategoryarr.push({
+                subcategoryarr.push({id: product.get('subcategoryId'), name: product.get('subcategory')});
+                /*subcategoryarr.push({
                     name: product.get('subcategory')
-                });
+                });*/
             });
-
             that.filter.set({
                 'selectedSubCategoriesList': _.uniq(subcategoryarr, false, function(e) {
                     return e.name;

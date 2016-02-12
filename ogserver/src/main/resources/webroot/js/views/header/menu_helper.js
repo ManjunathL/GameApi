@@ -5,8 +5,10 @@ define([
     'bootstrap',
     'bootstrapvalidator',
     '/js/mgfirebase.js',
-    '/js/consultutil.js'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil) {
+    '/js/consultutil.js',
+    '/js/collections/autosuggest_products.js',
+    'text!/templates/header/suggest_results.html'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil, AutoSuggestProducts, SuggestResultsPage) {
     return {
         ref: MGF.rootRef,
 
@@ -223,6 +225,24 @@ define([
             $('#contactuspop').modal('toggle');
         },
 
+        getSuggestions: function(term) {
+            return new Promise(function(resolve, reject) {
+                var autoSuggestProducts = new AutoSuggestProducts();
+                autoSuggestProducts.fetch({
+                    data: {
+                        "term": term
+                    },
+                    success: function() {
+                        console.log("suggest fetch successful");
+                        resolve(autoSuggestProducts);
+                    },
+                    error: function(model, response, options) {
+                        console.log("error in suggest fetch - " + response);
+                    }
+                });
+            });
+        },
+
         signUp: function() {
 
             var that = this;
@@ -300,6 +320,43 @@ define([
         createProfile: function(userData, profileData, next) {
             MGF.createProfile(userData, profileData, next);
         },
+        debounce: function(fn, delay) {
+            var timer = null;
+            return function() {
+                var context = this,
+                    args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function() {
+                    fn.apply(context, args);
+                }, delay);
+            };
+        },
+        gotoSearchedProduct: function(ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            var target = $(ev.currentTarget).data('target');
+            $('.sb-search-input').val($(ev.currentTarget).text());
+            $('.sb-search_suggest').slideUp();
+
+            //close the search bar start
+            var isMobile = window.matchMedia("only screen and (max-width: 920px)");
+            if (isMobile.matches) {
+                $('#main-lg-ico').css("position", "relative");
+                $('#sb-search-duplicate').toggle('slide', {
+                    direction: 'Right'
+                }, 0);
+            } else {
+                $('#bs-example-navbar-collapse-1').css("position", "relative");
+                $('#sb-search').toggle('slide', {
+                    direction: 'Right'
+                }, 0);
+            }
+            //close the search bar end
+
+            window.App.router.navigate(target, {
+                trigger: true
+            });
+        },
         ready: function(parent) {
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
@@ -318,7 +375,8 @@ define([
                 "click #close-forgot-pop": this.closeModal,
                 "click #close-contactus-pop": this.toggleContactUsPop,
                 "click #contact-form-explore": this.toggleContactUsPop,
-                "click #goto-login": this.gotoLogin
+                "click #goto-login": this.gotoLogin,
+                "click .sb-search-txt": this.gotoSearchedProduct
             };
 
             parent.delegateEvents(events);
@@ -339,7 +397,7 @@ define([
                     $('#reg_error').html('');
                     $('#reg_error_row').css("display", "none");
                     $('#reg_password').val('');
-                     $('#reg_confirm').val('');
+                    $('#reg_confirm').val('');
 
                 });
 
@@ -370,6 +428,58 @@ define([
                         $('#reg_error_row').css("display", "none");
                         that.signUp();
                     }
+                });
+
+                $("#searchForm1").submit(function(e) {
+                    e.preventDefault();
+                    var term = $('#searchInput1').val();
+                    if (!term) return;
+
+                    //close the search bar start
+                    var isMobile = window.matchMedia("only screen and (max-width: 920px)");
+                    if (isMobile.matches) {
+                        $('#main-lg-ico').css("position", "relative");
+                        $('#sb-search-duplicate').toggle('slide', {
+                            direction: 'Right'
+                        }, 0);
+                    } else {
+                        $('#bs-example-navbar-collapse-1').css("position", "relative");
+                        $('#sb-search').toggle('slide', {
+                            direction: 'Right'
+                        }, 0);
+                    }
+                    //close the search bar end
+
+                    window.App.router.navigate("/product_search/" + term, {
+                        trigger: true
+                    });
+
+                });
+
+                $("#searchForm2").submit(function(e) {
+                    e.preventDefault();
+                    var term = $('#searchInput2').val();
+                    if (!term) return;
+
+                    //close the search bar start
+                    var isMobile = window.matchMedia("only screen and (max-width: 920px)");
+                    if (isMobile.matches) {
+                        $('#main-lg-ico').css("position", "relative");
+                        $('#sb-search-duplicate').toggle('slide', {
+                            direction: 'Right'
+                        }, 0);
+                    } else {
+                        $('#bs-example-navbar-collapse-1').css("position", "relative");
+                        $('#sb-search').toggle('slide', {
+                            direction: 'Right'
+                        }, 0);
+                    }
+                    //close the search bar end
+
+                    window.App.router.navigate("/product_search/" + term, {
+                        trigger: true
+                    });
+
                 });
 
                 $('#loginBtn').click(function() {
@@ -447,18 +557,19 @@ define([
                     }
                 });
 
-                $('.sb-search-input').keyup(function() {
-                    var char = $(this).val().length;
-                    if (char >= 3) {
+                $('.sb-search-input').keyup(that.debounce(function() {
+                    var term = $(this).val();
+                    if (term.length >= 3) {
+                        that.getSuggestions(term).then(function(autoSuggestProducts) {
+                            $('.sb-search_suggest').html(_.template(SuggestResultsPage)({
+                                autoSuggestProducts: autoSuggestProducts.toJSON()
+                            }));
+                        });
                         $('.sb-search_suggest').slideDown();
                     } else {
                         $('.sb-search_suggest').slideUp();
                     }
-                });
-                $('.sb-search-txt').click(function() {
-                    $('.sb-search-input').val($(this).text());
-                    $('.sb-search_suggest').slideUp();
-                });
+                }, 250));
 
 
                 /* Search on menu bar End  */
@@ -522,16 +633,16 @@ define([
                         navMain.collapse('hide');
                     });
 
-                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li",null, function() {
+                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li", null, function() {
                         $(this).parent().hide();
                     });
 
                     $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").hover(function() {
                             $(this).show();
                         },
-                           function(){
-                               $('.dropdown-menu').hide();
-                    });
+                        function() {
+                            $('.dropdown-menu').hide();
+                        });
 
                     $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {
                         $('.dropdown-menu').hide();
@@ -554,16 +665,16 @@ define([
 
                 $('#tawkchat-iframe-container').hide();
 
-                $(document).on("click",null, function (e) {
+                $(document).on("click", null, function(e) {
                     var contactpopup = $("#contactuspop");
-                     if (!$('#contact-us-side-btn').is(e.target) && !contactpopup.is(e.target) && contactpopup.has(e.target).length == 0) {
-                         $("#contactuspop").css('left', - $("#contactuspop").width() + 'px');
-                     }
-                     var popup = $(".userpop");
-                     if (!$('#user-icon').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
-                         popup.css('right', '-800px');
-                     }
-                 });
+                    if (!$('#contact-us-side-btn').is(e.target) && !contactpopup.is(e.target) && contactpopup.has(e.target).length == 0) {
+                        $("#contactuspop").css('left', -$("#contactuspop").width() + 'px');
+                    }
+                    var popup = $(".userpop");
+                    if (!$('#user-icon').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
+                        popup.css('right', '-800px');
+                    }
+                });
 
                 $(document).on("click", "a[href^='/']", function(event) {
                     href = $(event.currentTarget).attr('href');

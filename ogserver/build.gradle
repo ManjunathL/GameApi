@@ -37,7 +37,7 @@ task gulp(type: Exec) {
     ext.output = {
         return standardOutput.toString()
     }
-    doLast{
+    doLast {
         println gulp.output()
     }
 }
