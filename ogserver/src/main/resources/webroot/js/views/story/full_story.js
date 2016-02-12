@@ -46,8 +46,13 @@ define([
             }).reverse();
             //console.log(_(stories).pluck('date_of_publish'));
 
+            var rec_stories = [];
+            $.each(stories.slice(0,4), function(i, data) {
+                rec_stories.push(data);
+            });
+
             $(this.el).html(_.template(fullStoryTemplate)({
-                'stories': stories,
+                'stories': rec_stories,
                 'full_story': full_story
             }));
 

@@ -217,6 +217,11 @@ h6 {
     background-color: #222;
 }
 
+.tiled-view {
+    text-align: center;
+    text-transform: none;
+}
+
 .btn-primary {
     border-color: #f1591f;
     text-transform: uppercase;

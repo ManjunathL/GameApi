@@ -55,13 +55,12 @@
         </div>
         <div class="col-md-4 col-sm-4 padding25-15">
             <h3>Recent Stories</h3>
-            <% if(typeof(stories) !== 'undefined'){ var count = 0; %>
+            <% if(typeof(stories) !== 'undefined'){ %>
             <% _.each(stories, function(story){ %>
-            <% if (count < 4) { %>
 
             <div class="row margin25-0-0">
                 <div class="col-md-5 padding0">
-                    <a href="/story/<%= story.blog_heading %>">
+                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
                         <img
                                 src="<%= story.blog_main_image %>"
                                 class="img-responsive"
@@ -69,7 +68,7 @@
                     </a>
                 </div>
                 <div class="col-md-7 padding-right0">
-                    <a href="/story/<%= story.blog_heading %>">
+                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
                         <h5>
                             <% var blg_hdng = story.blog_heading;
                             var r = /\\u([\d\w]{4})/gi;
@@ -82,7 +81,7 @@
                     <div class="date_small"><%= story.date_of_publish %></div>
                 </div>
             </div>
-            <% count = count + 1; } }); } %>
+            <% }); } %>
         </div>
     </div>
 </section>
