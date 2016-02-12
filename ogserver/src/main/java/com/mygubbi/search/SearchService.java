@@ -19,8 +19,11 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 public class SearchService extends AbstractVerticle {
     private final static Logger LOG = LogManager.getLogger(SearchService.class);
@@ -39,6 +42,7 @@ public class SearchService extends AbstractVerticle {
             this.setupPrepareIndexHandler();
             this.setupIndexHandler();
             this.setupQueryHandler();
+            startFuture.complete();
         } catch (Exception e) {
             LOG.error("Error in starting search service.", e);
             startFuture.fail(e);
@@ -75,7 +79,6 @@ public class SearchService extends AbstractVerticle {
     private void initClient() throws Exception {
         JsonObject elasticSearchConfigObj = (JsonObject) ConfigHolder.getInstance().getConfigValue("elasticsearch");
         String clusterName = elasticSearchConfigObj.getString("cluster_name");
-
         node = new NodeBuilder().clusterName(clusterName)
                 .settings(ImmutableSettings.settingsBuilder().put("http.enabled", false))
                 .client(true).node();
@@ -87,8 +90,8 @@ public class SearchService extends AbstractVerticle {
         eb.localConsumer(INDEX, (Message<Integer> message) -> {
             IndexData iData = (IndexData) LocalCache.getInstance().remove(message.body());
             IndexResponse response = this.client.prepareIndex(iData.getIndex(), iData.getType(), iData.getId())
-                    .setSource(iData.getDocument()).execute().actionGet();
-            message.reply(LocalCache.getInstance().store(iData));
+                    .setSource(iData.getDocumentAsString()).execute().actionGet();
+            message.reply(LocalCache.getInstance().store(response));
 
         });
     }
@@ -97,10 +100,38 @@ public class SearchService extends AbstractVerticle {
         EventBus eb = vertx.eventBus();
         eb.localConsumer(SEARCH, (Message<Integer> message) -> {
             SearchQueryData qData = (SearchQueryData) LocalCache.getInstance().remove(message.body());
-            SearchResponse response = client.prepareSearch(qData.getIndex()).setTypes(qData.getType()).setQuery(qData.getQuery().toString()).execute().actionGet();
-            qData.setResult(this.responseToJson(response));
+            SearchResponse response = client.prepareSearch(qData.getIndex()).setTypes(qData.getType()).setSource(qData.getQuery().toString()).execute().actionGet();
+            if (qData.isRecordsOnly())
+            {
+                qData.setResult(this.getRecordsAsText(response));
+            }
+            else
+            {
+                qData.setResult(this.responseToJson(response));
+            }
+            LOG.info("Search response:" + qData.getResult());
             message.reply(LocalCache.getInstance().store(qData));
         });
+    }
+
+    private String getRecordsAsText(SearchResponse response)
+    {
+        SearchHits hits = response.getHits();
+        if (hits.totalHits() == 0)
+        {
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder(1024 * 64);
+        sb.append("[");
+        Iterator<SearchHit> iterator = hits.iterator();
+        while (iterator.hasNext())
+        {
+            SearchHit hit = iterator.next();
+            sb.append(hit.getSourceAsString());
+            if (iterator.hasNext()) sb.append(',');
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     private String responseToJson(SearchResponse response) {

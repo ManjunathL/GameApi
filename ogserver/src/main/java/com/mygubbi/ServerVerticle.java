@@ -1,6 +1,7 @@
 package com.mygubbi;
 
 import com.mygubbi.apiserver.ApiServerVerticle;
+import com.mygubbi.common.StringUtils;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
@@ -15,14 +16,13 @@ public class ServerVerticle extends AbstractVerticle
 {
     private static final Logger LOG = LogManager.getLogger();
 
-    private String siteConfig;
+    private List<String> configFiles;
 
     public static void main(String[] args)
     {
         if (args.length == 1)
         {
-            String siteConfig = args[0];
-            new ServerVerticle(siteConfig).startServerVerticle();
+            new ServerVerticle(args[0]).startServerVerticle();
         }
         else
         {
@@ -32,12 +32,17 @@ public class ServerVerticle extends AbstractVerticle
 
     public ServerVerticle()
     {
-        this(null);
+        this(Collections.EMPTY_LIST);
     }
 
-    public ServerVerticle(String siteConfig)
+    public ServerVerticle(String configFilesAsText)
     {
-        this.siteConfig = siteConfig;
+        this(StringUtils.fastSplit(configFilesAsText, ','));
+    }
+
+    public ServerVerticle(List<String> configFiles)
+    {
+        this.configFiles = configFiles;
     }
 
     private void startServerVerticle()
@@ -64,7 +69,7 @@ public class ServerVerticle extends AbstractVerticle
 
     private void startConfigService(Future<Void> startFuture)
     {
-        VertxInstance.get().deployVerticle(new ConfigHolder(this.siteConfig), new DeploymentOptions().setWorker(true), result ->
+        VertxInstance.get().deployVerticle(new ConfigHolder(this.configFiles), new DeploymentOptions().setWorker(true), result ->
         {
             if (result.succeeded())
             {

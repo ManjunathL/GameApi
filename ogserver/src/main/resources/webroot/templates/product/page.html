@@ -1,19 +1,29 @@
 <section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
 
     <div class="container-fluid category-banner">
-        <img src="/img/kitchen-category-banner.jpg" class="img-responsive" alt="">
+        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+            <% if(filter.selectedCategoryName == 'kitchen'){ %>
+                <img src="/img/category/KitchenFinal1.jpg" class="img-responsive" alt="Kitchen">
+            <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+                <img src="/img/category/BedroomFinal.jpg" class="img-responsive" alt="Bedroom">
+            <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+                <img src="/img/category/LivingRoomFinal.jpg" class="img-responsive" alt="Living & Dining">
+            <% } %>
+        <% }else{ %>
+            <img src="/img/category/KitchenFinal1.jpg" class="img-responsive" alt="Kitchen">
+        <% } %>
     </div>
-    <div class="container-fluid bg-white">
+    <div class="container-fluid bg-white hidden-xs">
         <div class="container">
             <div class="row">
                     <ul class="breadcrumb">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/"><i class="fa fa-home"></i></a></li>
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                         <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a></li>
                         <% } %>
                         <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName != null){ %>
                         <li class="active">
-                            <a href="javascript:void(0);"><%= filter.selectedSubCategoryName %></a></li>
+                            <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
                         <% } %>
                     </ul>
             </div>
@@ -614,7 +624,7 @@
 
     function getFil(id){
         var chk = $('#' + id).find('input[type=checkbox]').is(':checked');
-        if(chk == true){
+        //if(chk == true){
             id = id.substring(0, id.length-3);
             var locate = jQuery.inArray(id,tempArr);
             if(locate == -1){
@@ -624,7 +634,7 @@
                     return value != id;
                 });
             }
-        }
+       //}
     }
 
     function applyFilters(){

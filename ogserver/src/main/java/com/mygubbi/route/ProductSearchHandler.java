@@ -12,9 +12,12 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ProductSearchHandler extends AbstractRouteHandler {
 
+    private final static Logger LOG = LogManager.getLogger(ProductSearchHandler.class);
     private static final String PRODUCT_TYPE = "product";
 
     public ProductSearchHandler(Vertx vertx) {
@@ -37,7 +40,11 @@ public class ProductSearchHandler extends AbstractRouteHandler {
     }
 
     private void query(RoutingContext context, String queryName, String inputTerm) {
-        String searchQueryJson = ConfigHolder.getInstance().config().getJsonObject(queryName).toString().replaceAll("__TERM", inputTerm);
+        JsonObject jsonObject = (JsonObject) ConfigHolder.getInstance().getConfigValue(queryName);
+        LOG.info("queryJson:" + jsonObject);
+
+        String searchQueryJson = jsonObject.toString().replaceAll("__TERM", inputTerm);
+        LOG.info("queryJson:" + searchQueryJson);
         Integer id = LocalCache.getInstance().store(new SearchQueryData(SearchService.INDEX_NAME, new JsonObject(searchQueryJson), PRODUCT_TYPE));
         VertxInstance.get().eventBus().send(SearchService.SEARCH, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {

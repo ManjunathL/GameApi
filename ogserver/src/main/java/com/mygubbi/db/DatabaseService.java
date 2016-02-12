@@ -63,7 +63,7 @@ public class DatabaseService extends AbstractVerticle
 	{
 		EventBus eb = vertx.eventBus();
 		eb.localConsumer(DB_QUERY, (Message<Integer> message) -> {
-			
+
 			QueryData qData = (QueryData) LocalCache.getInstance().remove(message.body());
 			QueryPrepareService.getInstance().prepareQueryData(qData);
 			if (qData.errorFlag)

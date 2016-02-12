@@ -1,34 +1,323 @@
 [
   {
     "id": "Bosch_DKE908PIN",
-    "name": "Bosch Chimney",
+    "name": "Pyramidal hood",
     "type": "Chimney",
     "image": "Bosch_DKE908PIN",
-    "price": "18,900",
-    "brand":"Bosch"
+    "price": "19,500",
+    "brand":"Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hoods/hoods-range/DWW09W850I.html#tab2",
+    "description":"Extraction rate: at 860 m3/h, it quickly ensures optimal kitchen air quality, with connect pipe;Especially quiet: high performance at just 55 dB(A)(sound pressure level),69 dB(A)(sound power level);High efficency grease filtration system: pyramid filter and oil collector system;Halogen lighting:for optimal, energy-efficient illumination of the hob"
   },
   {
     "id": "Bosch_DWB06W851I",
-    "name": "Bosch Chimney",
+    "name": "Box Type Chimney hood(60cm)",
     "type": "Chimney",
     "image": "Bosch_DWB06W851I",
-    "price": "19,900",
-    "brand":"Bosch"
+    "price": "17,900",
+    "brand":"Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hoods/hoods-range/DWB06W851I.html#tab2",
+    "description":"Ducted/Recirculating operation;Total power of motors: 250 W;Twin channel high performance fan motor;Fan regulation: 3-stage;Extra large, high efficiency Baffle filters;Unique two piece filter for easy cleaning; Dishwasher safe;Control panel having comfortable direct select rocker switches;2 x high volt halog. light E14 30WMax. blower extraction rate 800 m³/h;Noise level : 52 dB"
+  },
+  {
+    "id": "Bosch_DWW09W850I",
+    "name": "Pyramidal Chimney Hood",
+    "type": "Chimney",
+    "image": "Bosch_DWW09W850I",
+    "price": "18,900",
+    "brand":"Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hoods/hoods-range/DWW09W850I.html#tab2",
+    "description":"Halogen lighting: for optimal, energy-efficient illumination of the hob; High efficency grease filtration system: European style baffle filter system; Extraction rate:at 800 m3/h, it quickly ensures optimal kitchen air quality"
+  },
+  {
+    "id": "Bosch_DWB09W851I",
+    "name": "Box Type Chimney hood(90cm)",
+    "type": "Chimney",
+    "image": "Bosch_DWB09W851I",
+    "price": "21,200",
+    "brand":"Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hoods/hoods-range/DWB09W851I.html#tab2",
+    "description":"Total power of motors is 250w.Twin channel high performance fan motor.3 stage Fan Regulation;Has a Back-Pressure flap;Unique two piece filter for easy cleaning; Dishwasher safe;Max. blower extraction rate 800 m³/h;Noise level : 52 dB"
+  },
+  {
+    "id": "Bosch_DWA09D750I",
+    "name": "Stainless steel chimney hood",
+    "type": "Chimney",
+    "image": "Bosch_DWA09D750I",
+    "price": "27,600",
+    "brand":"Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hoods/hoods-range/DWA09D750I.html#tab2",
+    "description":"Suitable for ducted or re-circulated extraction;Total power of motors:340 W;Push button controls for 3-stage;Has Baffle filters.;Back-pressure flap:Yes;Maximum extraction power 760 m³/h;Appliance Dimensions(H x W x D): 63 cm x 89.8 cm x 52 cm;Total Connected load: 420 W;Diameter pipe: 15 cm"
+  },
+  {
+    "id": "Bosch_POH616B1TI",
+    "name": "Hard Glass gas Hob",
+    "type": "Hob",
+    "image": "Bosch_POH616B1TI",
+    "price": "19,200",
+    "brand": "Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hobs/hobs-range/POH616B1TI.html#tab2",
+    "description":"4 burners gas hob;WOK burner at front left side : 4 KW;Standard burner at rear left side : 1.7 kW;Economy burner at front right side: 1 kW;Side; sword knobs;Even flame distribution wok burner at front left side;Single handed ignition via control knobs;Flame failure safety device;Steel single Square cornered pan supports;Appliance Dimensions (H x W x D): 5.6 cm x 59 cm x 52 cm;Connecting cable: 100 cm"
   },
   {
     "id": "Bosch_PCH615B8TI",
-    "name": "Bosch 4 Burner",
+    "name": "Stainless steel design(60cm)",
     "type": "Hob",
     "image": "Bosch_PCH615B8TI",
-    "price": "8,900",
-    "brand": "Bosch"
+    "price": "18,500",
+    "brand": "Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hobs/hobs-range/PCH615B8TI.html#tab2",
+    "description":"4 burners gas hob;WOK burner at front left side : 4 KW;Standard burner at rear left side : 1.7 kW;High-speed burner at rear right side : 3 kW;Economy burner at front right side: 1 kW;Even flame distribution wok burner at front left side;Single handed ignition via control knobs;Flame failure safety device;Steel with rubber feet Square cornered pan supports;Appliance Dimensions (H x W x D): 5.2 cm x 58.2 cm x 52 cm;Connecting cable: 100 cm"
   },
   {
     "id": "Bosch_PPQ716B1TI",
-    "name": "Bosch 5 Burner",
+    "name": "70cm Integrated control Hobs",
     "type": "Hob",
     "image": "Bosch_PPQ716B1TI",
-    "price": "9,900",
-    "brand": "Bosch"
+    "price": "24,600",
+    "brand": "Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hobs/hobs-range/PPQ716B1TI.html#tab2",
+    "description":"Wok burner: powerful cooking at up to 4.0 kW;Surface colour: elegant black tempered-glass design;Individual steel pan supports: for easy handling and cleaning"
+  },
+  {
+    "id":"Bosch_PPS816BITI",
+    "name":"Hard Glass gas Hob(75cm)",
+    "type":"Hob",
+    "image":"Bosch_PPS816BITI",
+    "price":"26,900",
+    "brand":"Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hobs/hobs-range/PPS816B1TI.html#tab2",
+    "description":"5 burners gas hob;WOK burner at left: 4 kW;Economy burner at centre front: 1 kW;Standard burner at centre rear: 1.7 kW;High-speed burner at rear right side : 3 kW;Standard burner at front right side: 1.7 kW;Single handed ignition via control knobs;Flame failure safety device;Steel single Square cornered pan supports;Appliance Dimensions (H x W x D): 5.8 cm x 75.2 cm x 52 cm;Connecting cable: 100 cm"
+
+  },
+  {
+    "id":"Bosch_PCI815B8T",
+    "name":"Stainless steel design",
+    "type":"Hob",
+    "image":"Bosch_PCI815B8T",
+    "price":"23,400",
+    "brand":"Bosch",
+    "product_url":"http://www.bosch-home.com/in/products/cooking-baking/built-in-hobs/hobs-range/PCI815B8TI.html#tab2",
+    "description":"Wok burner: powerful cooking at up to 4.0 kW;Elegant stainless-steel design;Continuous steel pan support: for maximum stability"
+  },
+  {
+    "id":"VERTICA 90",
+    "name":"Aluminium Chimney Hood",
+    "type":"Chimney",
+    "image":"Kaff_VERTICA_90",
+    "price":"39,900",
+    "brand":"Kaff",
+    "product_url":"http://www.kaff.in/ProductDetails.aspx?proid=266",
+    "description":"It has a stylish design that will suit any modern kitchen;It boasts a powerful suction that absorbs all the smoke and fumes produced while cooking. ;This also reduces the heat in the kitchen to some extent.;It has multiple speed levels for your convenience.Suction Capacity:1180 m3/h.Noise Level:62 dba;Filter: Anodised Aluminium;Lamps: LED : 2*1.5W;Finish: Matt Black (Front Panel Black Glass)"
+  },
+  {
+    "id": "OPEC GX 90",
+    "name": "Anodized Aluminium Chimney hood",
+    "type": "Chimney",
+    "image": "Kaff_OPEC_GX_90",
+    "price": "21,990",
+    "brand": "Kaff",
+    "product_url": "http://www.kaff.in/ProductDetails.aspx?proid=28",
+    "description": "Width: 60/ 90 cm;Suction Capacity: 1180 m3/h;Air Outlet : 150 mm;Noise Level: 62 dba ( max);Filter: Anodised Aluminium;Lamps: LED : 2*1.5W;Finish: Matt Black (Front Panel Black Glass);Conveyor: Metallic;Controls: Soft Touch control;Feature: Matt Black (Front Panel Black Glass)"
+  },
+  {
+    "id":"VERONA MX 90",
+    "name":"LED Sensor touch Chimney hood",
+    "type":"Chimney",
+    "image":"Kaff_VERONA_MX_90",
+    "price":"25,990",
+    "brand":"Kaff",
+    "product_url":"http://www.kaff.in/ProductDetails.aspx?proid=30",
+    "description":"Width:90 CM;Suction Capacity: 1180 m3/h;Air Outlet:150 mm;Noise Level:62 db A (Max);Filter:Aluminium filter;Lamps: LED;Finish:S.Steel;Conveyor: PDCA;Controls: 4 speeds electronic LED sensor touch;Feature: Stainless steel body with push control"
+  },
+  {
+    "id":"STONE ART 90",
+    "name":"Black Stone Finish chimney hood",
+    "type":"Chimney",
+    "image":"Kaff_STONE_ART_90",
+    "price":"28,990",
+    "brand":"Kaff",
+    "product_url":"http://www.kaff.in/ProductDetails.aspx?proid=265",
+    "description":" Width: 90 CMM;Suction Capacity: 1180 m3/h;Air Outlet : 150 mm;Noise Level: 62 dba ( max);Filter : Aluminium filter;Lamps: LED light;Finish: Black stone finish;Conveyor: PDCA;Controls: Touch control"
+  },
+  {
+    "id":"RAY PD DX 60",
+    "name":"RAY Chimney Hood",
+    "type":"Chimney",
+    "image":"Kaff_RAY_PD_DX_60",
+    "price":"13,990",
+    "brand":"Kaff",
+    "product_url":"",
+    "description":"Air Outlet : 150 mm;Noise Level : 59 dbA (Max);Filter : Aluminium filters;Lamps : 2x40 watts;Finish : S. Steel;Conveyor : PDCA;Controls : 3 Speed Push Buttons;Feature : Stainless steel with front black glass"
+  },
+  {
+    "id":"Tratoo 60",
+    "name":"Tratto Plus LTW 60",
+    "type":"Chimney",
+    "image":"Faber_Tratoo_60.90",
+    "price":"14,000",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/decorative-series/303/tratto-plus-ltw-60",
+    "description":"Suction :1000 m3/hr;Width : 60 cm;Filters : Baffle;Lights : CFL 2 x 5 W;Control : Electronic;Noise level : 62 dB (A);Warranty : Lifetime;Design : Wall Mounted;Function : 3 Speed"
+  },
+  {
+    "id":"Tratoo 90",
+    "name":"Dishwasher safe Chimney Hood",
+    "type":"Chimney",
+    "image":"Faber_Tratoo_60.90",
+    "price":"15,000",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/decorative-series/304/tratto-plus-ltw-90",
+    "description":"Suction :1000 m3/hr;Width : 90 cm;Filters : Baffle;Lights : CFL 2 x 5 W;Control : Electronic;Noise level : 62 dB (A);Warranty : Lifetime;Design : Wall Mounted;Function : 3 Speed"
+  },
+  {
+    "id":"Glassy 60",
+    "name":"Glassy Chimney Hood(60cm)",
+    "type":"Chimney",
+    "image":"Faber_Glass_60.90",
+    "price":"12,000",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/decorative-series/230/glassy-plus-ltw-60",
+    "description":" Make cooking hassle free and enjoyable with the Faber GLASSY 910 LTW 60 Hood;It has stainless steel and glass finish touch. ;Its baffle filters filters all the smoke and greasy thing as it has a dynamic airflow system.;Now you can cook with a free mind without the fear that smoke would choke you. ;It comes with a suction power of 910 m-cube/hr. ;It works efficiently and saves your electricity bills. ;This electric chimney is 60 cm width and is ideal for every household."
+  },
+  {
+    "id":"Glassy 90",
+    "name":"Glassy Chimney Hood(90cm)",
+    "type":"Chimney",
+    "image":"Faber_Glass_60.90",
+    "price":"13,500",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/decorative-series/232/glassy-plus-ltw-90",
+    "description":"If you want a clean and smokeless kitchen, the Faber Hood GLASSY 910 LTW 90 is what you need.;It comes in stainless steel colour which adds to its elegance. ;It has baffle filters feature and it has a dynamic airflow system.It is fitted with a powerful suction of 910 m-cube/hr;It works efficiently and saves your electricity bills;This electric chimney is 90 cm wide"
+  },
+  {
+    "id":"Stilux 60",
+    "name":"Double LED Chimney Hood",
+    "type":"Chimney",
+    "image":"Faber_Stillux_60",
+    "price":"19,500",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/decorative-series/62/stilux-plus-ltw-60",
+    "description":"Suction : 1000 m3/hr ,Width : 60 cm,Filters : Baffle,Lights : LED 2 x 2 W;Control : Electronic Touch;Noise level : 62 dB (A);Warranty : Lifetime;Design : Wall Mounted;Function : 3 + Intensive Speed"
+  },
+  {
+    "id": "Mars 60",
+    "name": "Mars 910 LTW 60",
+    "type": "Chimney",
+    "image": "Faber_Feel_Plus__SS_90",
+    "price": "11,500",
+    "brand": "Faber",
+    "product_url": "https://faberspa.isobarapps.co.in/products/decorative-series/330/mars-plus-ltw-60",
+    "description": "It comes in stainless steel colour which adds to its elegance;With baffle filters feature you or your mother can enjoy cooking as it filters all the smoke and greasy thing as it has a dynamic airflow system, thus making cooking an enjoyable experience.;It is fitted with a powerful suction of 850 m-cube/hr;It works efficiently and saves your electricity bills;This electric chimney is 60 cm wide."
+  },
+  {
+    "id":"GB 40 MT CIG",
+    "name":"Glass Hobs",
+    "type":"Hob",
+    "image":"Faber_GB_40_MT_CIG",
+    "price":"24,000",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/glass-hobs/96/hob-gas-gb-40-mt-cig",
+    "description":"A gas stove is one of the most essential appliancesin the kitchen that you use on a daily basis.;It is necessary that such a tool must durable, ergonomic and safe to operate.;The Faber GB glass top Hob is one such gas stove designed for efficient cooking saving time and fuel."
+  },
+  {
+    "id":"FH 40 AMD 60cm",
+    "name":"European Satin SS Hobs",
+    "type":"Hob",
+    "image":"Faber_FH_40_AMD_60",
+    "price":"8,000",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/european-satin-ss-hobs/103/hob-gas-fh-40-amd",
+    "description":"Width : 60 cm;Burners : 4 (1 Triple Ring 2.5Kw + 2 Medium 1.7Kw + 1 Small 1Kw);Pan Support : Enameled;Ignition : Auto Electric In-Built under Knob;Dimension : 600 x 500 x 50mm;Design : 4 Burners Knobs;Cutting Dimension : 565 x 475 x 50mm"
+  },
+  {
+    "id":"MDR 724 MTX",
+    "name":"Microdecor Stainless Steel Hobs",
+    "type":"Hob",
+    "image":"Faber_MDR_724_MTX",
+    "price":"NA",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/microdecor-stainless-steel-hobs/101/hob-gas-mdr-724-mtx",
+    "description":"Width : 72 cm;Burners : 4 (1 Triple Ring 3.8Kw + 1 Mini Triple Ring 2.5Kw + 2 Medium 1.7Kw);Pan Support : Enameled;Dimension : Product Dimension (LxWxH) 720 x 500 x 50mm Knobs;Cutting Dimension : 685 x 465 x 50mm"
+  },
+  {
+    "id":"SSR 754XSBRC1",
+    "name":"Brass Burner Hobs",
+    "type":"Hob",
+    "image":"Faber_SSR_754_XSBRC1",
+    "price":"22,000",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/brass-burner-hobs-stainless-steel/317/ssr-754-xs-br-ci",
+    "description":"Width : 75 cm;Burners : 4 ( 2 Multi Flame 3.75Kw + 2 Lotus Medium 2.5Kw );Pan Support : Cast Iron;Ignition : Auto Electric In-Built under Knob;Finish : Stainless Steel;Dimension : 750 x 520 x 50 mm;Cutting Dimension : 670 x 470 x 50 mm"
+  },
+  {
+    "id":"HGG 754 CRR BRE1",
+    "name":"Brass Burner Hobs(glass)",
+    "type":"Hob",
+    "image":"Faber_HGG_754_CRR_BRE1",
+    "price":"17,000",
+    "brand":"Faber",
+    "product_url":"https://faberspa.isobarapps.co.in/products/brass-burner-hobs-glass/155/hgg-754-crr-br-ei",
+    "description":"Dimensions:WxDxH (mm) 600x495x120 Burner:4;Built In hob Ignition Mode ;Auto Electric Body : Glass;Warranty : 1 Year Manufacturer Warranty"
+  },
+  {
+    "id":"N905 BGF",
+    "name":"5 Burner Hobs ",
+    "type":"Hob",
+    "image":"Kaff_N_905_BGF",
+    "price":"22,990",
+    "brand":"Kaff",
+    "product_url":"http://kaff.in/ProductDetails.aspx?proid=81",
+    "description":"No. of Burners: Five burners with one triple flame;Burners Type: SABAF burners;Size: 90 cm (900 mm);Finish : Black Tempered Glass;Ignition : Auto Electric ignition;Grills: Enamelled grills;Feature: Black Tempered glass with 5 burners"
+  },
+  {
+    "id":"NQ 2T 60 BG",
+    "name":"Tripple Flame Burner Hob",
+    "type":"Hob",
+    "image":"Kaff_NQ2T60_GB",
+    "price":"16,990",
+    "brand":"Kaff",
+    "product_url":"http://kaff.in/ProductDetails.aspx?proid=233",
+    "description":"No. of Burners: Four burners with two triple flame burner;Burners Type: SABAF;Size        : 60 cm(600mm);Finish: Black Tempered Glass;Ignition: Auto Electric ignition;Grills : Cast Iron pan support;Feature: Black tempered Glass with Cast iron grills."
+  },
+  {
+    "id":"K 72 4B 2TSM",
+    "name":"2 Tripple Flame Burner Hob",
+    "type":"Hob",
+    "image":"Kaff_K724B2TSM",
+    "price":"19,990",
+    "brand":"Kaff",
+    "product_url":"http://kaff.in/ProductDetails.aspx?proid=260",
+    "description":"No. of Burners: 4 burners with 2 triple flame;Burners Type: SABAF BURERS;Size: 72 CM (720 mm);Finish: Microlinen S. Steel;Ignition: Auto Electric ignition;Grills: Enamelled grills"
+  },
+  {
+    "id":"NE 4B 60 GF",
+    "name":"Auto Ignition Hobs",
+    "type":"Hob",
+    "image":"Kaff_NE4B60",
+    "price":"10,990",
+    "brand":"Kaff",
+    "product_url":"http://kaff.in/ProductDetails.aspx?proid=263",
+    "description":"No. of Burners: 4 burners with 1 triple flame;Size : 60 cm (600mm);Finish: Black tempered glass;Ignition: Auto Electric ignition;Grills: Enemelled grills"
+  },
+  {
+    "id":"KHB 78 BR 4",
+    "name":"Long Time Cooking Hobs",
+    "type":"Hob",
+    "image":"Kaff_KHB78_BR4",
+    "price":"23,990",
+    "brand":"Kaff",
+    "product_url":"http://www.kaff.in/ProductDetails.aspx?proid=258",
+    "description":"No. of Burners: 4 burner;Burners Type : Brass burners;Size: 78 cm (780 mm);Finish: Grey tempered glass (8 mm thickness) Bevelled front;Ignition: Auto Electric ignition;Grills: Heavy duty Cast Iron Grills.;Feature: One Heavy duty triple flame burner (5 K.W.) ;One Mini triple flame ( 3.5 K.W);One Dual flame burner (2.5 K.W.);One Normal Burner (1.0 K.W.);Even fire distribution, High temperature Resistance, long time cooking"
+  },
+  {
+    "id":"NE 4B 60 SS",
+    "name":"Enamel Grill Hobs",
+    "type":"Hob",
+    "image":"Kaff_NE4B60",
+    "price":"9,990",
+    "brand":"Kaff",
+    "product_url":"http://www.kaff.in/ProductDetails.aspx?proid=264",
+    "description":"No. of Burners: 4 burners with 1 triple flame;Size: 60 cm (600mm);Finish: Stainless steel;Ignition: Auto Electric ignition;Grills: Enamelled grills"
   }
 ]

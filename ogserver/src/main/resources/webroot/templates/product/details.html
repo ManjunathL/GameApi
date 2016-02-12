@@ -1,11 +1,11 @@
 <% document.title = product.name + ' | mygubbi' %>
 
 <section class="bg-white top-section">
-    <div class="container-fluid bg-color-white">
+    <div class="container-fluid bg-color-white hidden-xs">
         <div class="container">
             <div class="row">
                 <ul class="breadcrumb">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/"><i class="fa fa-home"></i></a></li>
                         <% if(typeof(product.category) !== 'undefined' && product.category != null){ %>
                         <li><a href="/products/<%= product.category %>"><%= product.category %></a></li>
                         <% } %>
@@ -13,7 +13,7 @@
                         <li><a href="/products/<%= product.category %>/<%= product.subcategory %>"><%= product.subcategory %></a></li>
                         <% } %>
                         <% if(typeof(product.name) !== 'undefined'){ %>
-                        <li class="active"><a href="javascript:void(0);"><%= product.name %></a></li>
+                        <li class="active"><a href="javascript:void(0);"><span class="li-txt-wrap"><%= product.name %></span></a></li>
                         <% } %>
                     </ul>
             </div>
@@ -101,26 +101,27 @@
                 <h3 class="details-heading">Customize your Product</h3>
                 <hr>
             </div>
-            <ul id="customproduct" class="nav nav-tabs" style="margin-left: 15px;width:100%;">
-                <li class="col-xs-2 padding0 active"><a data-toggle="tab" href="#mfc">Material/Finish/Color</a></li>
-                <% if((typeof(selectedAccessories) !== 'undefined') && selectedAccessories.length != 0){ %>
-                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#acctab">Accessories</a></li>
-                <% } %>
-                <% if((typeof(applianceTypes) !== 'undefined') && applianceTypes.length != 0){ %>
-                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#apptab">Appliances</a></li>
-                <% } %>
-                <% if(typeof(product.components) !== 'undefined' && product.components.length != 0){ %>
-                <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Configuration</a></li>
-                <% } %>
-            </ul>
-
-            <div class="tab-content">
+            <div class="col-xs-12">
+                <ul id="customproduct" class="nav nav-tabs" style="margin-left: 15px;width:100%;">
+                    <li class="col-xs-2 padding0 active"><a data-toggle="tab" href="#mfc">Material/Finish/Color</a></li>
+                    <% if((typeof(selectedAccessories) !== 'undefined') && selectedAccessories.length != 0){ %>
+                    <li class="col-xs-2 padding0"><a data-toggle="tab" href="#acctab">Accessories</a></li>
+                    <% } %>
+                    <% if((typeof(applianceTypes) !== 'undefined') && applianceTypes.length != 0){ %>
+                    <li class="col-xs-2 padding0"><a data-toggle="tab" href="#apptab">Appliances</a></li>
+                    <% } %>
+                    <% if(typeof(product.components) !== 'undefined' && product.components.length != 0){ %>
+                    <li class="col-xs-2 padding0"><a data-toggle="tab" href="#comptab">Configuration</a></li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="col-xs-12 tab-content">
                 <div class="tab-pane fade in active" id="mfc">
                     <div class="row margin-left-0 paddingtop40">
                         <div class="col-sm-12 paddingtop20 bg-light-gray margintop10 paddingbottom10">
                             <div class="col-sm-6 paddingtop10">
                                 <label id="chooseMaterial">Choose Material:</label>
-                                <div class="width100 portfolio-box bg-light-gray padding10 justify" aria-labelledby="chooseMaterial">
+                                <div class="width100 portfolio-box bg-light-gray padding10" aria-labelledby="chooseMaterial">
                                     <% _.each (materials, function(material) { %>
                                     <a class="material <%= custom_product.get('selectedMaterial') === material ? 'active' : ''%> list-group-item display-inline-block" data-material="<%=material%>"><%=material%></a>
                                     <% }); %>
@@ -128,7 +129,7 @@
                             </div>
                             <div class="col-sm-6 paddingtop10">
                                 <label id="chooseFinish">Choose Finish:</label>
-                                <div class="width100 portfolio-box bg-light-gray padding10 justify" aria-labelledby="chooseFinish" id="finishList">
+                                <div class="width100 portfolio-box bg-light-gray padding10" aria-labelledby="chooseFinish" id="finishList">
                                     <% _.each (selectedfinishes, function(finish) { %>
                                     <a class="finish list-group-item <%= selectedFinish === finish ? 'active' : ''%> display-inline-block" data-finish="<%=finish%>"><%=finish%></a>
                                     <% }); %>
@@ -332,6 +333,7 @@
                 <% } %>
             </div>
                 <!-- Component Tab End -->
+        </div>
         <!-- Related Projects Row -->
         <div class="row paddingtop40" id="relatedproduct">
             <div class="col-xs-12">
@@ -339,7 +341,7 @@
                 <h3 class="details-heading">Related Products</h3>
             </div>
 
-            <div class="wrap">
+            <div class="wrap col-xs-12">
                 <div class="row">
                     <div class="controls center col-xs-1 relcontrol">
                         <button class="btn alt1-prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
@@ -450,7 +452,7 @@
             </div>
         </div>
         <div class="row" style="padding-bottom:60px;"></div>
-    </div>
+
     </div>
 </section>
 
