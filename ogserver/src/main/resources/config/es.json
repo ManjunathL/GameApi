@@ -219,7 +219,8 @@
         "subcategory",
         "tags",
         "styleName",
-        "priceRange"
+        "priceRange",
+        "defaultPrice"
       ]
     },
     "query": {

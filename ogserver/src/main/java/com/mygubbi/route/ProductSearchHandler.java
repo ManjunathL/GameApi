@@ -23,19 +23,17 @@ public class ProductSearchHandler extends AbstractRouteHandler {
     public ProductSearchHandler(Vertx vertx) {
         super(vertx);
         this.route().handler(BodyHandler.create());
-        this.post("/suggest").handler(this::suggest);
-        this.post("/search").handler(this::search);
+        this.get("/suggest").handler(this::suggest);
+        this.get("/search").handler(this::search);
     }
 
     private void suggest(RoutingContext context) {
-        JsonObject requestJson = context.getBodyAsJson();
-        String inputTerm = requestJson.getString("term");
+        String inputTerm = context.request().getParam("term");
         query(context, "suggestQueryJson", inputTerm);
     }
 
     private void search(RoutingContext context) {
-        JsonObject requestJson = context.getBodyAsJson();
-        String inputTerm = requestJson.getString("term");
+        String inputTerm = context.request().getParam("term");
         query(context, "searchQueryJson", inputTerm);
     }
 

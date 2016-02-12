@@ -185,6 +185,9 @@ define([
             var that = this;
             return new Promise(function(resolve, reject) {
                 if (that.products.isEmpty()) {
+                    if (that.model.searchTerm) {
+                        that.products.url = restBase + '/api/es/search';
+                    }
                     that.products.fetch({
                         data: {
                             "category": that.model.selectedCategories,
