@@ -1,7 +1,17 @@
 <section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
 
     <div class="container-fluid category-banner">
-        <img src="/img/kitchen-category-banner.jpg" class="img-responsive" alt="">
+        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+            <% if(filter.selectedCategoryName == 'kitchen'){ %>
+                <img src="/img/category/KitchenFinal1.jpg" class="img-responsive" alt="Kitchen">
+            <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+                <img src="/img/category/BedroomFinal.jpg" class="img-responsive" alt="Bedroom">
+            <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+                <img src="/img/category/LivingRoomFinal.jpg" class="img-responsive" alt="Living & Dining">
+            <% } %>
+        <% }else{ %>
+            <img src="/img/category/KitchenFinal1.jpg" class="img-responsive" alt="Kitchen">
+        <% } %>
     </div>
     <div class="container-fluid bg-white hidden-xs">
         <div class="container">
