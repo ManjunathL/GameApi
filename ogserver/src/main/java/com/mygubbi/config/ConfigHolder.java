@@ -22,6 +22,7 @@ public class ConfigHolder extends AbstractVerticle
 
 	private String baseConfigFile = "config/conf.base.json";
 	private String esConfig = "config/es.json";
+	private String servicesConfig = "config/all.services.json";
 
 	private List<String> configFilesToLoad;
 
@@ -65,6 +66,7 @@ public class ConfigHolder extends AbstractVerticle
 			}
 		}
 		allConfigFiles.push(this.esConfig);
+		allConfigFiles.push(this.servicesConfig);
 		allConfigFiles.push(this.baseConfigFile);
 
 		this.serverConfig = new JsonObject();
@@ -72,11 +74,16 @@ public class ConfigHolder extends AbstractVerticle
 		INSTANCE = this;
 	}
 
+	public ServicesConfig getServices()
+	{
+		return new ServicesConfig((JsonObject) this.getConfigValue("services"));
+	}
+
 	private void loadConfig(Deque<String> configFiles, Future<Void> startFuture)
 	{
 		if (configFiles.isEmpty())
 		{
-			LOG.info("FInal merged config : " + this.serverConfig.encodePrettily());
+			LOG.info("Final merged config : " + this.serverConfig.encodePrettily());
 			startFuture.complete();
 			return;
 		}

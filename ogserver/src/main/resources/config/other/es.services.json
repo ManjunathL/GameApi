@@ -1,0 +1,24 @@
+{
+  "services": {
+    "sequential": [
+      {
+        "name": "com.mygubbi.support.LogServiceVerticle",
+        "instances": 1
+      },
+      {
+        "name": "com.mygubbi.db.DatabaseService",
+        "instances": 1
+      }
+    ],
+    "parallel": [
+      {
+        "name": "com.mygubbi.db.QueryPrepareService",
+        "instances": 1
+      },
+      {
+        "name": "com.mygubbi.search.SearchService",
+        "instances": 1
+      }
+    ]
+  }
+}
