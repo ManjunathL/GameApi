@@ -18,12 +18,16 @@
             <div class="row">
                     <ul class="breadcrumb">
                         <li><a href="/"><i class="fa fa-home"></i></a></li>
-                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                        <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a></li>
-                        <% } %>
-                        <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName != null){ %>
-                        <li class="active">
-                            <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
+                        <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
+                            <li class="active"><a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
+                        <% }else{ %>
+                            <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                            <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a></li>
+                            <% } %>
+                            <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName != null){ %>
+                            <li class="active">
+                                <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
+                            <% } %>
                         <% } %>
                     </ul>
             </div>

@@ -45,6 +45,14 @@ define([
                 silent: true
             });
 
+            //if (typeof(that.model.searchTerm) !== 'undefined' && that.model.searchTerm != null) {
+                that.filter.set({
+                    'searchTerm':that.model.searchTerm
+                }, {
+                    silent: true
+                });
+            //}
+
             that.filter.set({
                 'selectedSubCategoryName':that.model.selectedSubCategories
             }, {
