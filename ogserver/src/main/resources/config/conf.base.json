@@ -9,6 +9,8 @@
     "password": "root"
   },
 
+  "urlwithssl": "https://www.mygubbi.com",
+
   "datatables":["user_profile", "event_log", "event_errors", "shortlisted", "product", "enquiries"],
 
   "firebase": {

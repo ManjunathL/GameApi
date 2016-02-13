@@ -1,12 +1,16 @@
 package com.mygubbi.apiserver;
 
+import com.mygubbi.common.VertxInstance;
+import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.route.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
@@ -16,6 +20,7 @@ import io.vertx.ext.web.handler.sockjs.PermittedOptions;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.shaded.apache.http.HttpStatus;
 
 
 public class ApiServerVerticle extends AbstractVerticle {
@@ -31,10 +36,42 @@ public class ApiServerVerticle extends AbstractVerticle {
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
-        Router router = Router.router(vertx);
+
+        this.setupHttpSslServer();
+        this.setupHttpRedirectServer();
+        startFuture.complete();
+    }
+
+    private void setupHttpRedirectServer()
+    {
+        String httpsRedirectUrl = ConfigHolder.getInstance().getStringValue("urlwithssl", "https://www.mygubbi.com");
+        HttpServer server = VertxInstance.get().createHttpServer();
+        Router router = Router.router(VertxInstance.get());
+        router.route().handler(routingContext -> {
+            String url = routingContext.request().absoluteURI();
+            System.out.println("Url:" + url);
+            if (url.startsWith("http:"))
+            {
+                url = "https:" + url.substring(5);
+            }
+            else
+            {
+                url = httpsRedirectUrl;
+            }
+            HttpServerResponse response = routingContext.response();
+            response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
+                    .setStatusMessage("Server requires https")
+                    .putHeader("Location", url)
+                    .end();
+        });
+        server.requestHandler(router::accept).listen(80);
+    }
+
+    private void setupHttpSslServer()
+    {
+        Router router = Router.router(VertxInstance.get());
 
         this.setupApiHandler(router);
-        this.setupEventBusHandler(router);
         this.setupStaticHandler(router);
 
         HttpServerOptions options = new HttpServerOptions()
@@ -45,14 +82,14 @@ public class ApiServerVerticle extends AbstractVerticle {
                         setPath("keystore.jks").
                         setPassword("m!gubb!"))
                 .setSsl(true)
-                .setCompressionSupported(true);
+                .setCompressionSupported(true)
+                .setTcpKeepAlive(true);
 
-        vertx.createHttpServer(options).requestHandler(router::accept).listen(443);
-        startFuture.complete();
+        VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(443);
     }
 
     private void setupEventBusHandler(Router router) {
-        SockJSHandler sockJSHandler = SockJSHandler.create(vertx);
+        SockJSHandler sockJSHandler = SockJSHandler.create(VertxInstance.get());
         PermittedOptions inbound = new PermittedOptions().setAddress("*");
         PermittedOptions outbound = new PermittedOptions().setAddress("*");
         BridgeOptions options = new BridgeOptions().addInboundPermitted(inbound).addOutboundPermitted(outbound);
@@ -68,16 +105,18 @@ public class ApiServerVerticle extends AbstractVerticle {
     }
 
     private void setupApiHandler(Router router) {
-        router.mountSubRouter("/api/categories", new CategoryHandler(vertx));
-        router.mountSubRouter("/api/filter.master", new FilterMasterHandler(vertx));
-        router.mountSubRouter("/api/products", new ProductHandler(vertx));
-        router.mountSubRouter("/api/relatedproducts", new RelatedProductHandler(vertx));
-        router.mountSubRouter("/api/appliances", new ApplianceHandler(vertx));
-        router.mountSubRouter("/api/stories", new StoryHandler(vertx));
-        router.mountSubRouter("/api/pre.search", new PreSearchHandler(vertx));
-        router.mountSubRouter("/api/auto.search", new AutoSearchHandler(vertx));
-        router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
-        router.mountSubRouter("/api/es", new ProductSearchHandler(vertx));
+
+        router.mountSubRouter("/api/categories", new CategoryHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/filter.master", new FilterMasterHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/products", new ProductHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/relatedproducts", new RelatedProductHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/appliances", new ApplianceHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/stories", new StoryHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/es", new ProductSearchHandler(VertxInstance.get()));
+
+        //router.mountSubRouter("/api/pre.search", new PreSearchHandler(vertx));
+        //router.mountSubRouter("/api/auto.search", new AutoSearchHandler(vertx));
+        //router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
     }
 
     private void logHeadersHandler(Router router) {

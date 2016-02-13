@@ -52,7 +52,13 @@ public class ConfigHolder extends AbstractVerticle
 	{
 		return this.serverConfig.getValue(key);
 	}
-	
+
+	public String getStringValue(String key, String defaultValue)
+	{
+		if (!this.serverConfig.containsKey(key)) return defaultValue;
+		return (String) this.serverConfig.getValue(key);
+	}
+
 	@Override
 	public void start(Future<Void> startFuture) throws Exception
 	{
