@@ -90,6 +90,25 @@ define([
                     });
                 }
 
+                if ($('.appliance-frame').length > 0) {
+
+                    var $appliance_frame = $('#appliance-Chimney');
+                    var $appliance_wrap = $appliance_frame.parent().parent();
+                    SlyUtil.create($appliance_wrap, '#appliance-Chimney', '.appliance-Chimney-next', '.appliance-Chimney-prev').init();
+
+                    var $appliancehb_frame = $('#appliance-Hob');
+                    var $appliancehb_wrap = $appliancehb_frame.parent().parent();
+                    SlyUtil.create($appliancehb_wrap, '#appliance-Hob', '.appliance-Hob-next', '.appliance-Hob-prev').init();
+
+                    /*$('.appliance-frame').each(function() {
+                        var applianceId = 'appliance-Chimney';
+                        alert(applianceId);
+                        var $appliance_frame = $('#' + applianceId);
+                        var $appliance_wrap = $appliance_frame.parent().parent();
+alert($appliance_wrap);
+                        SlyUtil.create($appliance_wrap, '#' + applianceId, '.appliance-next', '.appliance-prev').init();
+                    });*/
+                }
 
 
             });

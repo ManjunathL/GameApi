@@ -9,13 +9,16 @@ define([
         routes: {
             '': 'dashboard',
             'products/:categories(/:subcategories)(/)': 'products',
+            /*':categories-:subcategories-products(/)': 'products',
+            ':categories-products(/)': 'products',*/
             'product_search/:searchTerm(/)': 'products-search',
             'product/:id(/)': 'product',
             'user_profile(/)': 'user_profile',
             'consult(/)': 'consult',
             'shortlist(/)': 'shortlist',
             'stories(/)': 'stories',
-            'story/:name(/)': 'story'
+            'story/:name(/)': 'story',
+            '*path': 'default'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -117,6 +120,9 @@ define([
                 };
                 VM.create(VM.STORY, FullStoryPage, options).render();
             });
+        });
+        router.on('route:default', function(path) {
+            console.log("default route - " + path);
         });
         router.on('route', function () {
             $("html,body").scrollTop(0);
