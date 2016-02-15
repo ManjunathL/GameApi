@@ -59,6 +59,16 @@ public class ConfigHolder extends AbstractVerticle
 		return (String) this.serverConfig.getValue(key);
 	}
 
+	public int getInteger(String key, int defaultValue)
+	{
+		return this.serverConfig.getInteger(key, defaultValue);
+	}
+
+	public boolean getBoolean(String key, boolean defaultValue)
+	{
+		return this.serverConfig.getBoolean(key, defaultValue);
+	}
+
 	@Override
 	public void start(Future<Void> startFuture) throws Exception
 	{
