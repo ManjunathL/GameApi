@@ -557,7 +557,10 @@ define([
                     }
                 });
 
-                $('.sb-search-input').keyup(that.debounce(function() {
+                $('.sb-search-input').keyup(that.debounce(function(e) {
+
+                    if (e.keyCode == 13) return;
+
                     var term = $(this).val();
                     if (term.length >= 3) {
                         that.getSuggestions(term).then(function(autoSuggestProducts) {
