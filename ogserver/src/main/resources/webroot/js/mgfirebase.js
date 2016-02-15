@@ -7,6 +7,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         'rootRef': rootRef,
         shortlistedItems: null,
         TYPE_CONSULT: "consult",
+        TYPE_SUBSCRIBE: "subscribe",
         TYPE_USER_ADD: "user.add",
         TYPE_USER_UPDATE: "user.update",
         TYPE_USER_REMOVE: "user.remove",
@@ -54,6 +55,22 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                         console.log("successfully inserted consult data");
                         LS.removeConsultData(uid); //cleanup local storage as firebase has already submitted the data
                         that.pushEvent(uid, formData, that.TYPE_CONSULT);
+                    }
+                });
+        },
+        subscribeUser: function(email) {
+            var uid = this.rootRef.getAuth().uid;
+            var that = this;
+            var formData = {
+                email: email
+            };
+            this.rootRef.child("subscriptions/" + uid + "/" + Date.now()).set(formData,
+                function(error) {
+                    if (error) {
+                        console.log("problem in inserting subscription data", error);
+                    } else {
+                        console.log("successfully inserted subscription data");
+                        that.pushEvent(uid, formData, that.TYPE_SUBSCRIBE);
                     }
                 });
         },
