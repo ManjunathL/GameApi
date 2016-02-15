@@ -109,7 +109,7 @@ public class SearchService extends AbstractVerticle {
             {
                 qData.setResult(this.responseToJson(response));
             }
-            LOG.info("Search response:" + qData.getResult());
+            //LOG.info("Search response:" + qData.getResult());
             message.reply(LocalCache.getInstance().store(qData));
         });
     }

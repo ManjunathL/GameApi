@@ -39,8 +39,6 @@ public class ProductSearchHandler extends AbstractRouteHandler {
 
     private void query(RoutingContext context, String queryName, String inputTerm) {
         JsonObject jsonObject = (JsonObject) ConfigHolder.getInstance().getConfigValue(queryName);
-        LOG.info("queryJson:" + jsonObject);
-
         String searchQueryJson = jsonObject.toString().replaceAll("__TERM", inputTerm);
         LOG.info("queryJson:" + searchQueryJson);
         Integer id = LocalCache.getInstance().store(new SearchQueryData(SearchService.INDEX_NAME, new JsonObject(searchQueryJson), PRODUCT_TYPE));
