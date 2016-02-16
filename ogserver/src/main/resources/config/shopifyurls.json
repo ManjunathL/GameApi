@@ -1,0 +1,25 @@
+{
+  "shopifyurls": [
+    {
+      "old": "/collections/all",
+      "new": "/"
+    },
+    {
+      "old": "/collections/living-dining",
+      "new": "/products/living%20%26%20dining"
+    },
+    {
+      "old": "/collections/kitchen",
+      "new": "/products/kitchen"
+    },
+    {
+      "old": "/collections/l-shaped-kitchen",
+      "new": "/products/kitchen/L%20Shaped%20Kitchen"
+    },
+    {
+      "old": "/collections/u-shaped-kitchen",
+      "new": "/products/kitchen/U%20Shaped%20Kitchen"
+    }
+  ]
+}
+

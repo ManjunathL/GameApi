@@ -44,7 +44,7 @@ public class CacheHandler implements Handler<RoutingContext>
         if (response != null)
         {
             RouteUtil.getInstance().sendResponse(context, response.getResponse(), response.getEncodingType());
-            LOG.info("Serving response from cache for uri:" + key.getUrl());
+            //LOG.info("Serving response from cache for uri:" + key.getUrl());
         }
         else
         {
