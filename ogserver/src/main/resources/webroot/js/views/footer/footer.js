@@ -2,8 +2,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/footer/footer.html'
-], function($, _, Backbone, footerTemplate) {
+    'text!/templates/footer/footer.html',
+    '/js/mgfirebase.js'
+], function($, _, Backbone, footerTemplate, MGF) {
     var FooterView = Backbone.View.extend({
         el: '.footer',
         render: function() {
@@ -47,6 +48,18 @@ define([
                 });
 
             });
+        },
+        subscribe: function() {
+            var email = $('#subscribe-email').val();
+            if (email) {
+                MGF.subscribeUser(email);
+                $('#subscribe-msg').show();
+                $('#subscribe-msg').html('<i>Thanks for subscribing.</i>');
+                $('#subscribe-email').val('');
+            }
+        },
+        events: {
+            "click #subscribe-btn": 'subscribe'
         }
     });
     return FooterView;

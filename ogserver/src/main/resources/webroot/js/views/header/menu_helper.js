@@ -557,7 +557,10 @@ define([
                     }
                 });
 
-                $('.sb-search-input').keyup(that.debounce(function() {
+                $('.sb-search-input').keyup(that.debounce(function(e) {
+
+                    if (e.keyCode == 13) return;
+
                     var term = $(this).val();
                     if (term.length >= 3) {
                         that.getSuggestions(term).then(function(autoSuggestProducts) {
@@ -641,12 +644,18 @@ define([
                             $(this).show();
                         },
                         function() {
-                            $('.dropdown-menu').hide();
+                           $(this).hide();
                         });
 
                     $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {
-                        $('.dropdown-menu').hide();
-                        $(this).next('.dropdown-menu').show();
+                       $('.dropdownMenu_lg').hide();
+                       var that = this;
+                       $(this).next('.dropdownMenu_lg').show();
+                    });
+
+                    $("#bs-example-navbar-collapse-1").mouseleave(function(){
+                        var hovered = $("#bs-example-navbar-collapse-1").find(".dropdownMenu_lg").length;
+                        !!hovered && $('.dropdownMenu_lg').hide();
                     });
 
                 });

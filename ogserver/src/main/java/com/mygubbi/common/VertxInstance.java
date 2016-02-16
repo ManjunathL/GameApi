@@ -7,7 +7,7 @@ import io.vertx.core.Vertx;
  */
 public class VertxInstance
 {
-    public static final Vertx vertx = Vertx.vertx();
+    private static final Vertx vertx = Vertx.vertx();
 
     public static Vertx get()
     {

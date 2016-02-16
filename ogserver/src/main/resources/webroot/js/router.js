@@ -14,6 +14,12 @@ define([
             'user_profile(/)': 'user_profile',
             'consult(/)': 'consult',
             'shortlist(/)': 'shortlist',
+            'careers(/)': 'careers',
+            'about-mygubbi(/)': 'about',
+            'faq(/)': 'faq',
+            'terms(/)': 'terms',
+            'privacy-policy(/)': 'privacypolicy',
+            'mygubbi-difference(/)': 'mygubbidiff',
             'stories(/)': 'stories',
             'story/:name(/)': 'story'
         },
@@ -98,6 +104,42 @@ define([
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/shortlist/shortlist.js'], function(ShortlistPage) {
                 VM.create(VM.SHORTLIST, ShortlistPage).render();
+            });
+        });
+        router.on('route:careers', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/footer/careers.js'], function(CareerPage) {
+                VM.create(VM.CAREERS, CareerPage).render();
+            });
+        });
+        router.on('route:about', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/footer/about.js'], function(AboutPage) {
+                VM.create(VM.ABOUT, AboutPage).render();
+            });
+        });
+        router.on('route:faq', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/footer/faq.js'], function(FaqPage) {
+                VM.create(VM.FAQ, FaqPage).render();
+            });
+        });
+        router.on('route:privacypolicy', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/footer/privacypolicy.js'], function(PrivacyPolicyPage) {
+                VM.create(VM.PRIVACY_POLICY, PrivacyPolicyPage).render();
+            });
+        });
+        router.on('route:terms', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/footer/terms.js'], function(TermsPage) {
+                VM.create(VM.TERMS, TermsPage).render();
+            });
+        });
+        router.on('route:mygubbidiff', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/footer/mygubbidiff.js'], function(MyGubbiDiffPage) {
+                VM.create(VM.MGDIFF, MyGubbiDiffPage).render();
             });
         });
         router.on('route:stories', function(actions) {

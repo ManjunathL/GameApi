@@ -5,7 +5,6 @@ import com.mygubbi.catalog.ProductJson;
 import com.mygubbi.catalog.ProductManagementService;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
-import com.mygubbi.si.firebase.FirebaseObjectWriter;
 import com.opencsv.CSVReader;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.DeploymentOptions;
@@ -171,7 +170,7 @@ public class ShopifyCatalogConverter
         //new ShopifyCatalogConverter(productsFile, componentsFile, stylePriceFile).parse();
         //if (true) return;
 
-        VertxInstance.get().deployVerticle(new ServerVerticle("config/conf.local.json"), new DeploymentOptions().setWorker(true), result ->
+        VertxInstance.get().deployVerticle(new ServerVerticle("config/dev/conf.local.json"), new DeploymentOptions().setWorker(true), result ->
         {
             if (result.succeeded())
             {

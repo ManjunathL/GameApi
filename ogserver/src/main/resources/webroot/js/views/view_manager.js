@@ -8,6 +8,12 @@ define(function() {
         SHORTLIST: "shortlist",
         STORIES: "stories",
         STORY: "story",
+        ABOUT: "about",
+        TERMS: "terms",
+        PRIVACY_POLICY: "privacy_policy",
+        CAREERS: "careers",
+        FAQ: "faq",
+        MGDIFF: "mgdiff",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

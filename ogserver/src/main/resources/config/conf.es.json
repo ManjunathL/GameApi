@@ -1,9 +1,0 @@
-{
-  "version": "0.0.0a",
-  "services": {
-    "sequential": [
-      "com.mygubbi.support.LogServiceVerticle", "com.mygubbi.db.DatabaseService", "com.mygubbi.db.QueryPrepareService",
-      "com.mygubbi.search.SearchService"],
-      "parallel":[]
-  }
-}
