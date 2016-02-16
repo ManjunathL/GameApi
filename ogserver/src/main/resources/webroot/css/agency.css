@@ -353,6 +353,19 @@ h6 {
 
 /* ---- Experience Center Carousel ----*/
 
+.exp_center_box {
+    text-align: center;
+    position: relative;
+    left: 8%;
+    top: -42px;
+    background: #fff;
+    width: 85%;
+}
+
+.exp_center_border {
+    border: 1.5px solid #f1591f;
+}
+
 .exp_center {
     max-height: 500px;
     margin-top: 15px !important;
@@ -391,13 +404,18 @@ h6 {
     bottom: 10px;
 }
 
+@media (max-width: 767px) {
+    .exp_center_box {
+        left: 5%;
+        width: 90%;
+    }
+    .exp_center_border {
+        margin: auto 5px !important;
+    }
+}
+
 /* ---- Experience Center Carousel End ----*/
 
-/* ---- Timeline ----*/
-
-
-
-/* ---- Timeline End ----*/
 
 
 .btn-primary {
