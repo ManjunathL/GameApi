@@ -1,5 +1,6 @@
 package com.mygubbi.route;
 
+import com.mygubbi.apiserver.CacheHandler;
 import com.mygubbi.common.VertxInstance;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
@@ -84,6 +85,7 @@ public class RouteUtil {
                 .putHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
                 .putHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         response.putHeader("content-type", type).end(text);
+        CacheHandler.getInstance().cache(context, type, text);
     }
 
 }

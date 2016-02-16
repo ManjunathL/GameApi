@@ -49,7 +49,6 @@ public class ApiServerVerticle extends AbstractVerticle {
         Router router = Router.router(VertxInstance.get());
         router.route().handler(routingContext -> {
             String url = routingContext.request().absoluteURI();
-            System.out.println("Url:" + url);
             if (url.startsWith("http:"))
             {
                 url = "https:" + url.substring(5);
@@ -64,7 +63,8 @@ public class ApiServerVerticle extends AbstractVerticle {
                     .putHeader("Location", url)
                     .end();
         });
-        server.requestHandler(router::accept).listen(80);
+        int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
+        server.requestHandler(router::accept).listen(httpPort);
     }
 
     private void setupHttpSslServer()
@@ -85,7 +85,8 @@ public class ApiServerVerticle extends AbstractVerticle {
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
 
-        VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(443);
+        int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 443);
+        VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
     }
 
     private void setupEventBusHandler(Router router) {
@@ -106,6 +107,12 @@ public class ApiServerVerticle extends AbstractVerticle {
 
     private void setupApiHandler(Router router) {
 
+        boolean cacheOn = ConfigHolder.getInstance().getBoolean("apicache", false);
+        if (cacheOn)
+        {
+            router.get("/api/*").handler(CacheHandler.getInstance());
+            LOG.info("Registered cache handler");
+        }
         router.mountSubRouter("/api/categories", new CategoryHandler(VertxInstance.get()));
         router.mountSubRouter("/api/filter.master", new FilterMasterHandler(VertxInstance.get()));
         router.mountSubRouter("/api/products", new ProductHandler(VertxInstance.get()));
@@ -113,9 +120,9 @@ public class ApiServerVerticle extends AbstractVerticle {
         router.mountSubRouter("/api/appliances", new ApplianceHandler(VertxInstance.get()));
         router.mountSubRouter("/api/stories", new StoryHandler(VertxInstance.get()));
         router.mountSubRouter("/api/es", new ProductSearchHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/pre.search", new PreSearchHandler(vertx));
+        router.mountSubRouter("/api/auto.search", new AutoSearchHandler(vertx));
 
-        //router.mountSubRouter("/api/pre.search", new PreSearchHandler(vertx));
-        //router.mountSubRouter("/api/auto.search", new AutoSearchHandler(vertx));
         //router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
     }
 

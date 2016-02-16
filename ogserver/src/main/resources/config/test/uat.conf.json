@@ -12,5 +12,8 @@
     "loginid": "mygubbi.fbase@gmail.com",
     "password": "!@#$VGYHasdf435",
     "processEvents": false
-  }
+  },
+
+  "apicache" : true
+
 }
