@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.shaded.apache.http.HttpStatus;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,6 +87,16 @@ public class RouteUtil {
                 .putHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         response.putHeader("content-type", type).end(text);
         CacheHandler.getInstance().cache(context, type, text);
+    }
+
+    public void redirect(RoutingContext routingContext, String url)
+    {
+        LOG.info("Redirecting " + routingContext.request().uri() +  " to " + url);
+        HttpServerResponse response = routingContext.response();
+        response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
+                .setStatusMessage("Redirecting to new mygubbi.com site")
+                .putHeader("Location", url)
+                .end();
     }
 
 }
