@@ -90,7 +90,18 @@ define([
                     });
                 }
 
-
+                if ($('#at0-frame').length > 0) {
+                    var sly0 = SlyUtil.create($('.at0-wrap'), '#at0-frame', '.at0-next', '.at0-prev').init();
+                    $('#at0-frame').children('ul.slidee').width("14000px");
+                }
+                if ($('#at1-frame').length > 0) {
+                    var sly1 = SlyUtil.create($('.at1-wrap'), '#at1-frame', '.at1-next', '.at1-prev').init();
+                    $('#at1-frame').children('ul.slidee').width("14000px");
+                }
+                if ($('#at2-frame').length > 0) {
+                    SlyUtil.create($('.at2-wrap'), '#at2-frame', '.at2-next', '.at2-prev').init();
+                    $('#at2-frame').children('ul.slidee').width("14000px");
+                }
 
             });
         },

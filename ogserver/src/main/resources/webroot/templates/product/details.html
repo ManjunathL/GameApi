@@ -103,7 +103,7 @@
             </div>
             <div class="col-xs-12">
                 <ul id="customproduct" class="nav nav-tabs" style="margin-left: 15px;width:100%;">
-                    <li class="col-xs-2 padding0 active"><a data-toggle="tab" href="#mfc">Material/Finish/Color</a></li>
+                    <li class="col-xs-2 padding0 active"><a data-toggle="tab" href="#mfc">Material/Finish</a></li>
                     <% if((typeof(selectedAccessories) !== 'undefined') && selectedAccessories.length != 0){ %>
                     <li class="col-xs-2 padding0"><a data-toggle="tab" href="#acctab">Accessories</a></li>
                     <% } %>
@@ -268,7 +268,7 @@
                                             </button>
                                         </div>
                                         <div class="frame col-xs-10" id="at<%=atCount%>-frame" style="overflow: hidden;">
-                                            <ul class="clearfix"
+                                            <ul class="clearfix slidee"
                                                 style="transform: translateZ(0px) translateX(0px); width: <%=(((applsForType.length/3)+1)*3) * 110%>px;">
                                                 <% _.each(applsForType, function(appliance){ %>
                                                 <li class="appliance" style="width: 160px;" data-appliancetype="<%=applianceType%>" data-appliance="<%=appliance.name%>" data-applianceid="<%=appliance.id%>" data-applianceprice="<%=appliance.price%>">
@@ -289,7 +289,7 @@
                                             </ul>
                                         </div>
                                         <div class="controls center col-xs-1" style="margin-top: 110px;">
-                                            <button class="btn alt1-next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                            <button class="btn at<%=atCount%>-next"><i class="pe-7s-angle-right font-size30"></i></button>
                                         </div>
                                     </div>
                                 </div>
