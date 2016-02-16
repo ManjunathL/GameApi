@@ -11,20 +11,14 @@
             <a href="/" class="pull-left hidden-xs hidden-sm">
                 <img src="/img/logos/logo.png" class="full_logo" alt="">
             </a>
-            <a href="#" class="pull-left hidden-xs hidden-sm" style="display: inline;position: absolute;">
-                <img src="/img/home-warli-reading.png" class="full_logo" alt="">
-            </a>
-            <a href="#" class="pull-left hidden-xs hidden-sm" style="display: inline;position: absolute;left: 270px;">
-                <img src="/img/home-warli-coffee-table.png" class="full_logo" alt="">
-            </a>
-            <a href="#" class="pull-left hidden-xs hidden-sm" style="display: inline;position: absolute;left: 360px;">
-                <img src="/img/home-warli-study-table.png" class="full_logo" alt="">
+            <a href="#" class="pull-left hidden-xs hidden-sm position-absolute">
+                <img src="<%= imgBase + 'home/header_03.png'%>" class="full_logo" alt="">
             </a>
         </div>
 
         <div id="sb-search-duplicate" class="sb-search hidden-md hidden-lg" style="position:absolute;">
-            <form id="searchForm2">
-                <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="searchInput2" autocomplete="off">
+            <form>
+                <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" autocomplete="off">
                 <i class="fa fa-times search-ico search-close-ico" style="font-size:16px;"></i>
                 <!--<span class="pe-7s-search search-ico search-duplicate-ico header-icon pe-fw"></span>-->
             </form>
@@ -232,12 +226,32 @@
                 </li>
             </ul>
             <div id="sb-search" class="sb-search hidden-xs hidden-sm" style="position:absolute;">
-                <form id="searchForm1">
-                    <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="term" id="searchInput1" autocomplete="off">
+                <form>
+                    <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="search" autocomplete="off">
                     <i class="fa fa-times search-ico search-close-ico" style="font-size:16px;"></i>
                     <!--<span class="pe-7s-search search-ico search-duplicate-ico header-icon pe-fw"></span>-->
                 </form>
-                <div class="row sb-search_suggest hidden-xs hidden-sm"></div>
+                <% if(typeof(a_srch) !== 'undefined' && ((Object.keys(a_srch).length) !== 0)) { %>
+                <div class="row sb-search_suggest hidden-xs hidden-sm">
+                    <%  _.each(a_srch, function(as){
+                    if(as && as.resultName){ %>
+                    <a href="#" class="sb-search-txt"><p><%= as.resultName %></p></a>
+                    <% } }); %>
+
+                    <% if(typeof(p_srch) !== 'undefined' && ((Object.keys(p_srch).length) !== 0)) {
+                    if(typeof(p_srch.popularSearches) !== 'undefined'){ %>
+                    <div class="sb-popular-search">Popular Searches..</div>
+                    <div>
+                        <%  _.each(p_srch.popularSearches, function(ps){
+                        if(typeof(ps.name) !== 'undefined'){ %>
+                        <a href="#" class="sb-search-txt"><p><%= ps.name %></p></a>
+                        <% } }); %>
+                    </div>
+
+                    <% } } %>
+
+                </div>
+                <% } %>
             </div>
         </div>
         <!-- /.navbar-collapse -->
@@ -337,10 +351,10 @@
                         <input type="password" class="width100" id="pwd" required maxlength="100"/>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6 padding0">
+                        <div class="col-md-6 col-sm-6">
                             <input type="checkbox" id="remember" checked/> Remember Me
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 padding0 Zalign-right">
+                        <div class="col-md-6 col-xs-6 align-right">
                             <a href="#" id="forgot_pwd_btn">Forgot Password??</a>
                         </div>
                     </div>
