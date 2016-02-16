@@ -12,7 +12,7 @@ define(function() {
             propertyName && formData.append('consult', propertyName);
 
             $.ajax({
-                url: 'http://adjetter.com/lp/orangegubbi-place-an-enquiry.html?auth=bFCAsuGsIdan8f6NdFmv9KGy5W8gW6knGaoNAqt85dU=',
+                url: 'https://adjetter.com/lp/orangegubbi-place-an-enquiry.html?auth=bFCAsuGsIdan8f6NdFmv9KGy5W8gW6knGaoNAqt85dU=',
                 /*url: restBase + '/api/consult',*/
                 data: formData,
                 processData: false,
