@@ -217,11 +217,6 @@ h6 {
     background-color: #222;
 }
 
-.exp_center {
-    max-height: 500px;
-    margin-top: 15px !important;
-}
-
 
 /* ---- Collage ---- */
 .heading-center-notransform {
@@ -358,6 +353,11 @@ h6 {
 
 /* ---- Experience Center Carousel ----*/
 
+.exp_center {
+    max-height: 500px;
+    margin-top: 15px !important;
+}
+
 .car_col20 {
     position:  relative;
     float: left;
@@ -392,6 +392,12 @@ h6 {
 }
 
 /* ---- Experience Center Carousel End ----*/
+
+/* ---- Timeline ----*/
+
+
+
+/* ---- Timeline End ----*/
 
 
 .btn-primary {
@@ -1314,7 +1320,7 @@ button {
 }
 
 .text-transform-none {
-    text-transform: none;
+    text-transform: none !important;
 }
 
 .border1px {
@@ -2504,6 +2510,16 @@ a.button-orange:hover {
 .timeline .timeline-body>p,
 .timeline .timeline-body>ul {
     margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+    .timeline-image {
+        width: 100px;
+    }
+
+    .timeline>li.timeline-inverted>.timeline-panel, .timeline>li .timeline-panel {
+        padding: 0px 20px 0 115px;
+    }
 }
 
 @media(min-width:768px) {
