@@ -8,9 +8,28 @@ define([
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'dashboard',
+
+            'shoe-rack-online(/)': 'shoeRackLD',
+            'crockery-unit-cabinet(/)': 'crockeryUnitLD',
+            'tv-unit-cabinet(/)': 'tvUnitLD',
+            'sideboard(/)': 'sideboardLD',
+            'foyer-design(/)': 'foyerLD',
+            'l-shaped-kitchen-design(/)': 'lshapedK',
+            'u-shaped-kitchen-design(/)': 'ushapedK',
+            'straight-kitchen-design(/)': 'straightK',
+            'parallel-kitchen-design(/)': 'parallelK',
+            'wardrobe-designs-online(/)': 'wardrobeB',
+            'study-table-designs-online(/)': 'studyTableB',
+            'side-table-design-online(/)': 'sideTableB',
+            'book-shelf(/)': 'bookShelfB',
+
+            'kitchen-cabinet-design(/)': 'kitchens',
+            'living-and-dining-room-designs(/)': 'livingDining',
+            'bedroom-interior-design(/)': 'bedroom',
+
             'products/:categories(/:subcategories)(/)': 'products',
-            'product_search/:searchTerm(/)': 'products-search',
-            'product/:id(/)': 'product',
+            'product_search-:searchTerm(/)': 'products-search',
+            'product-:id(/)': 'product',
             'user_profile(/)': 'user_profile',
             'consult(/)': 'consult',
             'shortlist(/)': 'shortlist',
@@ -21,7 +40,7 @@ define([
             'privacy-policy(/)': 'privacypolicy',
             'mygubbi-difference(/)': 'mygubbidiff',
             'stories(/)': 'stories',
-            'story/:name(/)': 'story'
+            'story-:name(/)': 'story'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -34,15 +53,106 @@ define([
         },
         stories: function() {
             document.title = 'Latest Tips from our Experts | mygubbi';
+        },
+        careers: function() {
+            document.title = 'Careers | mygubbi';
+        },
+        about: function() {
+            document.title = 'About | mygubbi';
+        },
+        faq: function() {
+            document.title = 'FAQs | mygubbi';
+        },
+        terms: function() {
+            document.title = 'T&C | mygubbi';
+        },
+        privacypolicy: function() {
+            document.title = 'Privacy Policy | mygubbi';
+        },
+        mygubbidiff: function() {
+            document.title = 'mygubbi difference | mygubbi';
         }
 
     });
+
+    var routeSubCategory = function(subCategory, category) {
+        setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+        require(['/js/views/product/page.js'], function(ProductPage) {
+            var options = {
+                model: {
+                    "selectedCategories": category,
+                    "selectedSubCategories": subCategory
+                }
+            };
+            VM.create(VM.PRODUCT_LISTING, ProductPage, options).render();
+        });
+    };
+
+    var routeCategory = function(category) {
+        setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+        require(['/js/views/product/page.js'], function(ProductPage) {
+            var options = {
+                model: {
+                    "selectedCategories": category
+                }
+            };
+            VM.create(VM.PRODUCT_LISTING, ProductPage, options).render();
+        });
+    };
 
     var initialize = function(options) {
         var appView = options.appView;
         var router = new AppRouter(options);
         window.App = window.App || {};
         window.App.router = router;
+        router.on('shoeRackLD', function(actions){
+            routeSubCategory('Shoe Rack', 'living & dining');
+        });
+        router.on('route:crockeryUnitLD', function(actions){
+            routeSubCategory('Crockery Unit', 'living & dining');
+        });
+        router.on('route:tvUnitLD', function(actions){
+            routeSubCategory('Entertainment Unit', 'living & dining');
+        });
+        router.on('route:sideboardLD', function(actions){
+            routeSubCategory('Sideboard', 'living & dining');
+        });
+        router.on('route:foyerLD', function(actions){
+            routeSubCategory('Foyer', 'living & dining');
+        });
+        router.on('route:lshapedK', function(actions){
+            routeSubCategory('L Shaped Kitchen', 'kitchen');
+        });
+        router.on('route:ushapedK', function(actions){
+            routeSubCategory('U Shaped Kitchen', 'kitchen');
+        });
+        router.on('route:straightK', function(actions){
+            routeSubCategory('Straight Kitchen', 'kitchen');
+        });
+        router.on('route:parallelK', function(actions){
+            routeSubCategory('Parallel Kitchen', 'kitchen');
+        });
+        router.on('route:wardrobeB', function(actions){
+            routeSubCategory('Wardrobe', 'bedroom');
+        });
+        router.on('route:studyTableB', function(actions){
+            routeSubCategory('Study Table', 'bedroom');
+        });
+        router.on('route:sideTableB', function(actions){
+            routeSubCategory('Side Table', 'bedroom');
+        });
+        router.on('route:bookShelfB', function(actions){
+            routeSubCategory('Book Rack', 'bedroom');
+        });
+        router.on('route:kitchens', function(actions){
+            routeCategory('kitchen');
+        });
+        router.on('route:livingDining', function(actions){
+            routeCategory('living & dining');
+        });
+        router.on('route:bedroom', function(actions){
+            routeCategory('bedroom');
+        });
         router.on('route:dashboard', function(actions) {
             require(['/js/views/dashboard/page.js'], function(DashboardPage) {
                 VM.create(VM.DASHBOARD, DashboardPage).render();

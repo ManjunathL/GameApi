@@ -8,7 +8,7 @@
             </div>
             <div class="row">
                 <div class="col-md-7 padding0">
-                    <a href="/product/<%= sl.id %>" data-element=".userpop" class="shortlist-side"><img src="<%= imgBase + 'c_fill/' + sl.images[0] %>" class="shortlist-thumb"></a>
+                    <a href="/product-<%= sl.id %>" data-element=".userpop" class="shortlist-side"><img src="<%= imgBase + 'c_fill/' + sl.images[0] %>" class="shortlist-thumb"></a>
                 </div>
                 <div class="col-md-5">
                     <% if (sl.defaultPrice !== 0) { %>
@@ -31,7 +31,7 @@
                     <span>And save them for your quick reference in future...</span>
                 </div>
                 <div class="row padding10 align-center">
-                    <a href="/products/kitchen/L%20Shaped%20Kitchen" data-element=".userpop" id="shortlist-bar-explore"><span class="button-blue">Explore...</span></a>
+                    <a href="/l-shaped-kitchen-design" data-element=".userpop" id="shortlist-bar-explore"><span class="button-blue">Explore...</span></a>
                 </div>
             </div>
     <% } %>

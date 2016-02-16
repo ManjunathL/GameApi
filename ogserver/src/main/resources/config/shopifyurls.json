@@ -6,19 +6,19 @@
     },
     {
       "old": "/collections/living-dining",
-      "new": "/products/living%20%26%20dining"
+      "new": "/living-and-dining-room-designs"
     },
     {
       "old": "/collections/kitchen",
-      "new": "/products/kitchen"
+      "new": "/kitchen-cabinet-design"
     },
     {
       "old": "/collections/l-shaped-kitchen",
-      "new": "/products/kitchen/L%20Shaped%20Kitchen"
+      "new": "/l-shaped-kitchen-design"
     },
     {
       "old": "/collections/u-shaped-kitchen",
-      "new": "/products/kitchen/U%20Shaped%20Kitchen"
+      "new": "/u-shaped-kitchen-design"
     }
   ]
 }

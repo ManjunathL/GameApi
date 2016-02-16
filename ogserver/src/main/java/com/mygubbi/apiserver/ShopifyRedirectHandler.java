@@ -68,7 +68,7 @@ public class ShopifyRedirectHandler implements Handler<RoutingContext>
             List<String> urlParts = StringUtils.fastSplit(oldUrl.substring(COLLECTIONS_URI_LENGTH), '/');
             if (urlParts != null && urlParts.size() == 3 && urlParts.get(1).equals("products"))
             {
-                newUrl = "/product/" + urlParts.get(2);
+                newUrl = "/product-" + urlParts.get(2);
                 RouteUtil.getInstance().redirect(context, newUrl);
                 this.shopifyUrlsMap.put(oldUrl, newUrl);
                 return;
