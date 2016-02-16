@@ -19,7 +19,7 @@ define([
     '/js/consultutil.js',
     '/js/collections/appliances.js',
     '/js/views/view_manager.js'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, RelatedProductCollection, relatedproductTemplate, Slyutil, MGF, ConsultUtil, ApplianceCollection, VM) {
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, RelatedProductCollection, relatedproductTemplate, SlyUtil, MGF, ConsultUtil, ApplianceCollection, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
