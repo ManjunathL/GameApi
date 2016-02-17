@@ -14,6 +14,7 @@ define([
             'tv-unit-cabinet(/)': 'tvUnitLD',
             'sideboard(/)': 'sideboardLD',
             'foyer-design(/)': 'foyerLD',
+            'products/Living & Dining/Foyer(/)': 'foyerLD',
             'l-shaped-kitchen-design(/)': 'lshapedK',
             'u-shaped-kitchen-design(/)': 'ushapedK',
             'straight-kitchen-design(/)': 'straightK',
@@ -118,7 +119,7 @@ define([
             routeSubCategory('Sideboard', 'living & dining');
         });
         router.on('route:foyerLD', function(actions){
-            routeSubCategory('Foyer', 'living & dining');
+            routeSubCategory('Foyer Unit', 'living & dining');
         });
         router.on('route:lshapedK', function(actions){
             routeSubCategory('L Shaped Kitchen', 'kitchen');
