@@ -4119,8 +4119,8 @@ a.tab-ico {
 
 .flip-cards
 {
-    width:200px;
-    height:291px;
+    width:300px;
+    height:300px;
     position:relative;
     float:left;
     margin-left:5px;
@@ -4141,8 +4141,8 @@ a.tab-ico {
 
 .flip-cards div
 {
-    width:200px;
-    height:291px;
+    width:300px;
+    height:300px;
     position:absolute;
     border-radius:15px;
     backface-visibility: hidden;
