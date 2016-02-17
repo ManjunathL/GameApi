@@ -2,6 +2,7 @@ package com.mygubbi.apiserver;
 
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
+import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
@@ -10,18 +11,15 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
 import io.vertx.ext.web.handler.sockjs.PermittedOptions;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.shaded.apache.http.HttpStatus;
 
 
 public class ApiServerVerticle extends AbstractVerticle
@@ -72,6 +70,7 @@ public class ApiServerVerticle extends AbstractVerticle
 
         this.setupApiHandler(router);
         this.setupRedirectHandlerForShopifyUrls(router);
+        this.setupPrerenderHandler(router);
         this.setupStaticHandler(router);
 
         HttpServerOptions options = new HttpServerOptions()
@@ -99,6 +98,11 @@ public class ApiServerVerticle extends AbstractVerticle
 
         });
         router.route("/apibus/*").handler(sockJSHandler);
+    }
+
+    private void setupPrerenderHandler(Router router)
+    {
+        router.route(HttpMethod.GET, "/*").handler(new PrerenderingHandler());
     }
 
     private void setupStaticHandler(Router router)
