@@ -18,6 +18,9 @@
       {
         "name": "com.mygubbi.db.SequenceIdGenerator",
         "instances": 1
+      },
+      {
+        "name": "com.mygubbi.catalog.ProductManagementService"
       }
     ]
   }

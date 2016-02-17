@@ -83,6 +83,8 @@ public class ShopifyStylePriceParser
 
     public void parse()
     {
+        if (this.stylePriceFile == null) return;
+
         CSVReader reader = this.getCsvReader();
         if (reader == null) return;
 

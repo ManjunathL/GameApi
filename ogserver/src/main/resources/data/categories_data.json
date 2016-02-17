@@ -18,6 +18,16 @@
         "name": "Crockery Unit",
         "id": "crockunit",
         "code": "crockunit"
+      },
+      {
+        "name": "Foyer Unit",
+        "id": "foyerunit",
+        "code": "foyerunit"
+      },
+      {
+        "name": "Sideboard",
+        "id": "sideboard",
+        "code": "sideboard"
       }
     ]
   },
