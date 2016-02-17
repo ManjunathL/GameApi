@@ -30,7 +30,6 @@ public class PrerenderingHandler implements Handler<RoutingContext> {
 
         if ((userAgent.toLowerCase().matches(BOTS) || query.contains(ESCAPED_FRAGMENT)) && !uri.matches(FILE_EXTS)) {
 
-            LOG.debug("Got request from bot - " + userAgent);
             final HttpClient client = VertxInstance.get().createHttpClient();
             client.getNow(3000, "localhost", String.format("%s?%s", uri, query), response -> {
                 response.bodyHandler(buffer -> {
@@ -40,7 +39,6 @@ public class PrerenderingHandler implements Handler<RoutingContext> {
             });
 
         } else {
-            LOG.debug("Request not from bot, passing on - " + userAgent + ", " + query + ", " + uri);
             context.next();
         }
 
