@@ -58,7 +58,7 @@ public class ShopifyRedirectHandler implements Handler<RoutingContext>
 
         if (StringUtils.isNonEmpty(newUrl))
         {
-            RouteUtil.getInstance().redirect(context, newUrl);
+            RouteUtil.getInstance().redirect(context, newUrl, "Redirecting to new mygubbi.com site");
             return;
         }
 
@@ -69,7 +69,7 @@ public class ShopifyRedirectHandler implements Handler<RoutingContext>
             if (urlParts != null && urlParts.size() == 3 && urlParts.get(1).equals("products"))
             {
                 newUrl = "/product-" + urlParts.get(2);
-                RouteUtil.getInstance().redirect(context, newUrl);
+                RouteUtil.getInstance().redirect(context, newUrl, "Redirecting to new mygubbi.com site");
                 this.shopifyUrlsMap.put(oldUrl, newUrl);
                 return;
             }

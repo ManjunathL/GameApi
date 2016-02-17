@@ -1,5 +1,6 @@
 package com.mygubbi.apiserver;
 
+import com.mygubbi.common.StringUtils;
 import com.mygubbi.route.RouteUtil;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
@@ -39,17 +40,24 @@ public class CacheHandler implements Handler<RoutingContext>
     @Override
     public void handle(RoutingContext context)
     {
-        RequestKey key = new RequestKey(context.request().uri(), context.request().params());
-        ApiResponse response = this.dataCache.get(key);
-        if (response != null)
+        String uri = context.request().uri();
+        if (!StringUtils.isNonEmpty(uri))
         {
-            RouteUtil.getInstance().sendResponse(context, response.getResponse(), response.getEncodingType());
-            //LOG.info("Serving response from cache for uri:" + key.getUrl());
+            if (uri.equals("/api/cache.clear"))
+            {
+                this.dataCache.clear();
+                RouteUtil.getInstance().sendResponse(context, "Cache cleared", RouteUtil.TEXT_HTML_TYPE);
+                return;
+            }
+
+            RequestKey key = new RequestKey(uri, context.request().params());
+            ApiResponse response = this.dataCache.get(key);
+            if (response != null)
+            {
+                RouteUtil.getInstance().sendResponse(context, response.getResponse(), response.getEncodingType());
+                return;
+            }
         }
-        else
-        {
-            LOG.info("Did not find a cache entry for uri:" + key.getUrl());
-            context.next();
-        }
+        context.next();
     }
 }

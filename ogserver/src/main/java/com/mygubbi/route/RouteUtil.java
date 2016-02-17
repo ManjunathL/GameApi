@@ -9,11 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.shaded.apache.http.HttpStatus;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 /**
  * Created by nitinpuri on 02-02-2016.
  */
@@ -21,6 +16,8 @@ public class RouteUtil {
 
     private final static Logger LOG = LogManager.getLogger(RouteUtil.class);
     private static final RouteUtil instance = new RouteUtil();
+    public static final String JSON_TYPE = "application/json";
+    public static final String TEXT_HTML_TYPE = "text/html";
 
     private RouteUtil() {
     }
@@ -31,7 +28,7 @@ public class RouteUtil {
 
     public void sendError(HttpServerResponse response, String message)
     {
-        response.putHeader("content-type", "application/json")
+        response.putHeader("content-type", JSON_TYPE)
                 .end(new JsonObject().put("status", "error").put("error", message).encode());
     }
 
@@ -42,12 +39,12 @@ public class RouteUtil {
 
     public void sendJsonResponseFromFile(RoutingContext context, String filePath)
     {
-        sendResponseFromFile(context, filePath, "application/json");
+        sendResponseFromFile(context, filePath, JSON_TYPE);
     }
 
     public void sendJsonResponseFromFile(RoutingContext context, String filePath, String defaultContent)
     {
-        sendResponseFromFile(context, filePath, "application/json", defaultContent);
+        sendResponseFromFile(context, filePath, JSON_TYPE, defaultContent);
     }
 
     public void sendResponseFromFile(RoutingContext context, String filePath, String type)
@@ -76,7 +73,7 @@ public class RouteUtil {
 
     public void sendJsonResponse(RoutingContext context, String json)
     {
-        sendResponse(context, json, "application/json");
+        sendResponse(context, json, JSON_TYPE);
     }
 
     public void sendResponse(RoutingContext context, String text, String type)
@@ -89,12 +86,12 @@ public class RouteUtil {
         CacheHandler.getInstance().cache(context, type, text);
     }
 
-    public void redirect(RoutingContext routingContext, String url)
+    public void redirect(RoutingContext routingContext, String url, String statusMessage)
     {
         LOG.info("Redirecting " + routingContext.request().uri() +  " to " + url);
         HttpServerResponse response = routingContext.response();
         response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
-                .setStatusMessage("Redirecting to new mygubbi.com site")
+                .setStatusMessage(statusMessage)
                 .putHeader("Location", url)
                 .end();
     }
