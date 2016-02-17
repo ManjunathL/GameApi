@@ -73,13 +73,15 @@ public class ApiServerVerticle extends AbstractVerticle
         this.setupPrerenderHandler(router);
         this.setupStaticHandler(router);
 
+        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
+        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
         HttpServerOptions options = new HttpServerOptions()
                 .setKeyStoreOptions(new JksOptions().
-                        setPath("keystore.jks").
-                        setPassword("m!gubb!"))
+                        setPath(ssl_keystore).
+                        setPassword(ssl_password))
                 .setTrustStoreOptions(new JksOptions().
-                        setPath("keystore.jks").
-                        setPassword("m!gubb!"))
+                        setPath(ssl_keystore).
+                        setPassword(ssl_password))
                 .setSsl(true)
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
