@@ -1,7 +1,7 @@
 <% _.each(autoSuggestProducts, function(as) { %>
 <div class="row">
     <div class="col-sm-6 searched-product">
-        <a href="javascript:void(0);" data-target="/product/<%=as.productId%>" class="sb-search-txt"><%= as.name %></a>
+        <a href="javascript:void(0);" data-target="/product-<%=as.productId%>" class="sb-search-txt"><%= as.name %></a>
     </div>
     <div class="col-sm-6 align-right hidden-xs">
         <% if (as.defaultPrice !== 0) { %>
