@@ -450,7 +450,7 @@ define([
                     }
                     //close the search bar end
 
-                    window.App.router.navigate("/product_search/" + term, {
+                    window.App.router.navigate("/product_search-" + term, {
                         trigger: true
                     });
 
@@ -476,7 +476,7 @@ define([
                     }
                     //close the search bar end
 
-                    window.App.router.navigate("/product_search/" + term, {
+                    window.App.router.navigate("/product_search-" + term, {
                         trigger: true
                     });
 

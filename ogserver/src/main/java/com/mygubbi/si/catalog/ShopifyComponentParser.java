@@ -38,6 +38,8 @@ public class ShopifyComponentParser
 
     public void parse()
     {
+        if (this.componentsFile == null) return;
+
         CSVReader reader = this.getCsvReader();
         if (reader == null) return;
 

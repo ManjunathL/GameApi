@@ -12,7 +12,7 @@
         return String.fromCharCode(parseInt(grp, 16)); } );
         blg_hdng = unescape(blg_hdng); %>
 
-        <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
+        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
             <img
                     src="<%= story.blog_main_image %>"
                     class="blogs-banner"
@@ -52,7 +52,7 @@
 
             <div class="row margin50-0 hidden-lg hidden-md">
                 <div class="col-md-7 col-sm-12 col-xs-12 pull-right">
-                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
+                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
                         <img
                                 src="<%= story.blog_main_image %>"
                                 class="img-responsive"
@@ -68,7 +68,7 @@
                         <%= cat %>
                         <% cnt = cnt + 1; }); %>
                     </p>
-                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
+                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
                         <h2 class="justify hidden-xs">
                             <%= blg_hdng %>
                         </h2>
@@ -100,7 +100,7 @@
                     </p>
                     <p class="font-size16">
                     <a
-                            href="/story/<%= encodeURIComponent(story.blog_heading) %>"
+                            href="/story-<%= encodeURIComponent(story.blog_heading) %>"
                             class="color-orange read_full">Read Full Story</a>
                     </p>
                 </div>
@@ -117,7 +117,7 @@
 
             <div class="row margin50-0">
                 <div class="col-md-7 col-sm-12 col-xs-12">
-                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
+                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
                         <img
                                 src="<%= story.blog_main_image %>"
                                 class="img-responsive"
@@ -133,7 +133,7 @@
                         <%= cat %>
                         <% cnt = cnt + 1; }); %>
                     </p>
-                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
+                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
                         <h2 class="justify hidden-xs">
                             <%= blg_hdng %>
                         </h2>
@@ -164,7 +164,7 @@
                     <% } %>
                     </p>
                     <p class="font-size16">
-                        <a href="/story/<%= encodeURIComponent(story.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
+                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
                     </p>
                 </div>
             </div>
@@ -179,7 +179,7 @@
 
             <div class="row margin50-0">
                 <div class="col-xs-12 col-md-7 col-sm-12 pull-right">
-                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
+                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
                         <img
                                 src="<%= story.blog_main_image %>"
                                 class="img-responsive"
@@ -195,7 +195,7 @@
                         <%= cat %>
                         <% cnt = cnt + 1; }); %>
                     </p>
-                    <a href="/story/<%= encodeURIComponent(story.blog_heading) %>">
+                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
                         <h2 class="justify hidden-xs">
                             <%= blg_hdng %>
                         </h2>
@@ -226,7 +226,7 @@
                     <% } %>
                     </p>
                     <p class="font-size16">
-                        <a href="/story/<%= encodeURIComponent(story.blog_heading) %>"
+                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>"
                            class="color-orange read_full">Read Full Story</a>
                     </p>
                 </div>

@@ -21,7 +21,7 @@
       },
       {
         "name": "com.mygubbi.apiserver.ApiServerVerticle",
-        "instances": 10,
+        "instances": 50,
         "worker": false
       },
       {

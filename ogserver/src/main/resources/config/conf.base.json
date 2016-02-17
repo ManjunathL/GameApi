@@ -13,6 +13,9 @@
 
   "datatables":["user_profile", "event_log", "event_errors", "shortlisted", "product", "enquiries"],
 
+  "ssl_keystore": "ssl/keystore.jks",
+  "ssl_password": "m!gubb!",
+
   "firebase": {
     "fb_url": "https://sweltering-fire-6356.firebaseio.com",
     "loginid": "mygubbi.fbase@gmail.com",

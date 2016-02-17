@@ -90,26 +90,18 @@ define([
                     });
                 }
 
-                if ($('.appliance-frame').length > 0) {
-
-                    var $appliance_frame = $('#appliance-Chimney');
-                    var $appliance_wrap = $appliance_frame.parent().parent();
-                    SlyUtil.create($appliance_wrap, '#appliance-Chimney', '.appliance-Chimney-next', '.appliance-Chimney-prev').init();
-
-                    var $appliancehb_frame = $('#appliance-Hob');
-                    var $appliancehb_wrap = $appliancehb_frame.parent().parent();
-                    SlyUtil.create($appliancehb_wrap, '#appliance-Hob', '.appliance-Hob-next', '.appliance-Hob-prev').init();
-
-                    /*$('.appliance-frame').each(function() {
-                        var applianceId = 'appliance-Chimney';
-                        alert(applianceId);
-                        var $appliance_frame = $('#' + applianceId);
-                        var $appliance_wrap = $appliance_frame.parent().parent();
-alert($appliance_wrap);
-                        SlyUtil.create($appliance_wrap, '#' + applianceId, '.appliance-next', '.appliance-prev').init();
-                    });*/
+                if ($('#at0-frame').length > 0) {
+                    var sly0 = SlyUtil.create($('.at0-wrap'), '#at0-frame', '.at0-next', '.at0-prev').init();
+                    $('#at0-frame').children('ul.slidee').width("14000px");
                 }
-
+                if ($('#at1-frame').length > 0) {
+                    var sly1 = SlyUtil.create($('.at1-wrap'), '#at1-frame', '.at1-next', '.at1-prev').init();
+                    $('#at1-frame').children('ul.slidee').width("14000px");
+                }
+                if ($('#at2-frame').length > 0) {
+                    SlyUtil.create($('.at2-wrap'), '#at2-frame', '.at2-next', '.at2-prev').init();
+                    $('#at2-frame').children('ul.slidee').width("14000px");
+                }
 
             });
         },

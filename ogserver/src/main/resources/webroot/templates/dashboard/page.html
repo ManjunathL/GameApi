@@ -67,14 +67,17 @@
                                             </div>
                                             <div class="margin-bottom10 form-group">
                                                 <input type="email" class="width100 form-control"
-                                                       placeholder="Email*" value="<%= userProfile ? userProfile.email : ''%>"
+                                                       placeholder="Email*"
+                                                       value="<%= userProfile ? userProfile.email : ''%>"
                                                        id="banner_contact_email_id" required pattern=".+@.+\..+"
                                                        title="<abc>@<xyz>.<com>"/>
+
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                             <div class="margin-bottom10 form-group has-feedback">
                                                 <input type="text" class="width100 form-control"
-                                                       placeholder="Phone Number*" value="<%= userProfile ? userProfile.phone : ''%>"
+                                                       placeholder="Phone Number*"
+                                                       value="<%= userProfile ? userProfile.phone : ''%>"
                                                        id="banner_contact_contact_num" required pattern="\d{10}"
                                                        title="e.g. 9876543210"/>
 
@@ -85,7 +88,8 @@
                                                           placeholder="Describe your Requirements / Queries"></textarea>
                                             </div>
                                             <div class="margin-bottom10 form-group">
-                                                <input type="text" class="width100 form-control" placeholder="Property Name"
+                                                <input type="text" class="width100 form-control"
+                                                       placeholder="Property Name"
                                                        id="banner_contact_property_name"/>
                                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
@@ -93,7 +97,8 @@
                                             </div>
                                             <div class="margin-bottom20 form-group">
                                                 <label for="banner_contact_floorplan">Upload Floorplan</label>
-                                                <input type="file" class="width100 form-control" placeholder="Floorplan" name="floorPlan" value=""
+                                                <input type="file" class="width100 form-control" placeholder="Floorplan"
+                                                       name="floorPlan" value=""
                                                        id="banner_contact_floorplan" accept=".pdf,.jpg,.jpeg,.png"/>
                                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
@@ -113,11 +118,13 @@
                                     <div id="banner_success-msg-padding" class="display-none margintop25"></div>
                                     <div id="banner_success-msg" class="display-none">
                                         <p class="justify">
-                                            Thank you for contacting mygubbi. Our team will get back to you as soon as possible.
+                                            Thank you for contacting mygubbi. Our team will get back to you as soon as
+                                            possible.
                                         </p>
+
                                         <p class="margintop40">
                                             Want to keep Exploring? Click
-                                            <a id="contact-form-explore" href="/products/kitchen/U%20Shaped%20Kitchen">here</a>
+                                            <a id="contact-form-explore" href="/u-shaped-kitchen-design">here</a>
                                         </p>
                                     </div>
 
@@ -133,10 +140,12 @@
         </div>
 
         <!-- Controls -->
-        <a class="left carousel-control carousel-overlay" href="#carousel-example-generic" role="button" data-slide="prev">
+        <a class="left carousel-control carousel-overlay" href="#carousel-example-generic" role="button"
+           data-slide="prev">
             <img src="/img/arr-left-thick.png" class="arr" alt="...">
         </a>
-        <a class="right carousel-control carousel-overlay" href="#carousel-example-generic" role="button" data-slide="next">
+        <a class="right carousel-control carousel-overlay" href="#carousel-example-generic" role="button"
+           data-slide="next">
             <img src="/img/arr-right-thick.png" class="arr" alt="...">
         </a>
     </div>
@@ -144,242 +153,328 @@
 
 </section>
 
+<!-- Header End -->
 
 <!-- Services Section -->
-<section class="padding50-0">
+<section class="padding50-0 bg-color-white">
     <div class="container align-center">
-        <div class="font-size30">Create the home you've always wanted</div>
+        <div class="font-size30 color-orange">Make a HOME that you admire each day</div>
         <div class="row padding20-0">
-            <div class="col-md-4">
-                <img class="img-responsive" src="/img/intro_img1.png">
+            <div class="col-md-4 col-sm-4">
+                <img class="img-responsive img-centered width85" src="<%= imgBase + 'home/browse_11.png'%>">
                 <!--<span class="pe-7s-photo-gallery intro-icon"></span>-->
                 <div class="intro-text">
-                    <p>Explore new designs</p>
-                    Get inspired by 1000s of designs
+                    <p>Browse new designs</p>
+                    Choose from our range of Posh Designs
                 </div>
             </div>
-            <div class="col-md-4">
-                <img class="img-responsive" src="/img/intro_img2.png">
+            <div class="col-md-4 col-sm-4">
+                <img class="img-responsive img-centered width85" src="<%= imgBase + 'home/consult_11.png'%>">
                 <!--<span class="pe-7s-coffee intro-icon"></span>-->
                 <div class="intro-text">
-                    <p>Consult with professionals</p>
-                    Know about the best solutions possible
+                    <p>Get Expert's Assistance</p>
+                    Let our experts find best designs for your home
                 </div>
             </div>
-            <div class="col-md-4">
-                <img class="img-responsive" src="/img/intro_img3.png">
+            <div class="col-md-4 col-sm-4">
+                <img class="img-responsive img-centered width85" src="<%= imgBase + 'home/relax_11.png'%>">
                 <!--<span class="pe-7s-cart intro-icon"></span>-->
                 <div class="intro-text">
-                    <p>Make them yours</p>
-                    Enjoy best quality installation & services
+                    <p>Order it, and Relax</p>
+                    Leave it on us, we'll deliver and install items FREE
                 </div>
             </div>
         </div>
-        <div class="margin-bottom40">
-            <a class="button font-size18">Get Started</a>
-        </div>
     </div>
 </section>
+<!-- Services Section End -->
 
-<!-- Portfolio Grid Section -->
+
+<!-- Collage Section -->
 <section class="portfolio bg-light-gray padding50-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Living & Dining</h2>
+    <div class="container collage">
+        <h1 class="heading-center-notransform">Don't just <span class="color-orange">crush over</span></h1>
+
+        <h3 class="heading-center-notransform">Get them before others do</h3>
+
+        <div class="row margin-top40">
+            <div class="mycol-left collage-large-col">
+                <a href="/kitchen-cabinet-design">
+                    <div class="img-wrapper">
+                        <img src="<%= imgBase + 'home/kitchen_06.png'%>" width="100%" title="Kitchen Designs"
+                             alt="Kitchen">
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 portfolio-item">
-                <div class="portfolio-box">
-                    <a href="#" class="portfolio-link">
-                        <img src="/img/living1.jpeg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Abcdz Living Room</h4>
-                        <p class="text-muted">Graphic Design</p>
+            <div class="mycol-right collage-small-col margin-small-viewport">
+
+                <div class="row margin-none">
+                    <div class="mycol0">
+                        <img src="<%= imgBase + 'home/Blue_03.png'%>" width="100%">
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-sm-6 portfolio-item">
-                <div class="portfolio-box">
-                    <a href="#" class="portfolio-link">
-                        <img src="/img/living2.jpeg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Xyrsb Living Room</h4>
-                        <p class="text-muted">Website Design</p>
+                <div class="row margin-none margin-collage-top">
+                    <div class="mycol-small-left collage-square-col">
+                        <img src="<%= imgBase + 'home/red_06.png'%>" width="100%">
+                    </div>
+                    <div class="mycol-small-right collage-square-col">
+                        <a href="/product-karl-book-rack">
+                            <div class="img-wrapper">
+                                <img src="<%= imgBase + 'home/for_08.png'%>" width="100%">
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row margin-bottom20 align-center">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <a class="button font-size18" href="/products/living%20%26%20dining">Explore Now</a>
+        <div class="row margin-top-collage-row">
+            <div class="mycol-left collage-small-col margin-small-viewport">
+                <div class="mycol-small-left collage-square-col">
+                    <a href="/book-shelf">
+                        <div class="img-wrapper">
+                            <img src="<%= imgBase + 'c_scale,h_727,w_344/home/side_19.png'%>" class="width100">
+                        </div>
+                    </a>
+                </div>
+                <div class="mycol-small-right collage-square-col">
+                    <div class="row margin-none">
+                        <a href="/product-helma-crockery-unit">
+                            <div class="img-wrapper">
+                                <img src="<%= imgBase + 'c_scale,h_344,w_344/home/g_10.png'%>" class="width100">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="row margin-none margin-collage-top-small">
+                        <img src="<%= imgBase + 'c_scale,h_344,w_344/home/gold_10.png'%>" class="width100">
+                    </div>
+                </div>
+            </div>
+            <div class="mycol-right collage-large-col margin-small-viewport">
+                <a href="/wardrobe-designs-online">
+                    <div class="img-wrapper">
+                        <img src="<%= imgBase + 'home/wardrobe_19.png'%>" class="width100" title="Wardrobe Designs"
+                             alt="Wardrobe">
+                    </div>
+                </a>
             </div>
         </div>
+
+        <div class="row margin-top-collage-row">
+            <div class="mycol-left collage-large-col margin-small-viewport">
+                <a href="/study-table-designs-online">
+                    <div class="img-wrapper">
+                        <img src="<%= imgBase + 'home/study_31.png'%>" class="width100" title="Study Room Designs"
+                             alt="Study Table">
+                    </div>
+                </a>
+            </div>
+            <div class="mycol-right collage-small-col margin-small-viewport">
+
+                <div class="row margin-none">
+                    <div class="mycol0">
+                        <a href="/product-samantha-shoe-rack">
+                            <div class="img-wrapper">
+                                <img src="<%= imgBase + 'home/fresco_13.png'%>" class="width100">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row margin-none margin-collage-top">
+                    <div class="mycol-small-left collage-square-col">
+                        <img src="<%= imgBase + 'home/green_13.png'%>" class="width100">
+                    </div>
+                    <div class="mycol-small-right collage-square-col">
+                        <a href="/product-elli-crockery-unit">
+                            <div class="img-wrapper">
+                                <img src="<%= imgBase + 'home/gourmet_14.png'%>" class="width100">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
+<!-- Collage Section End -->
 
-<section class="portfolio padding50-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Kitchen</h2>
-            </div>
+<!-- Experience Center Section -->
+<section class="padding50-0 bg-color-white">
+    <div class="container align-center exp_center_border">
+        <div class="exp_center_box">
+            <h1 class="text-transform-none">
+                Introducing
+            <span class="color-orange">
+                The Experience Centre
+            </span>
+            </h1>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 portfolio-item">
-                <div class="portfolio-box">
-                    <a href="#" class="portfolio-link">
-                        <img src="/img/kitchen1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Abcdz Kitchen</h4>
-                        <p class="text-muted">Graphic Design</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 portfolio-item">
-                <div class="portfolio-box">
-                    <a href="#" class="portfolio-link">
-                        <img src="/img/kitchen2.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Xyrsb Kitchen</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row margin-bottom20 align-center">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <a class="button font-size18" href="/products/kitchen">Explore Now</a>
-            </div>
+        <h3 class="text-transform-none margin-top10">
+            Meet our designers & Get a refreshing Makeover. Take away the interiors that are distinctively YOU
+        </h3>
+        <div class="row margin0 margin-top40 margin-bottom20">
+            <a
+                    href="/consult"
+                    class="button-orange text-transform-none padding10 font-size20">
+                Book your FREE consultation</a>
         </div>
     </div>
-</section>
+    <div class="container-fluid">
+        <!-- Carousel -->
+        <div id="exp-center-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators bottom_10">
+                <li data-target="#exp-center-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#exp-center-carousel" data-slide-to="1"></li>
+                <li data-target="#exp-center-carousel" data-slide-to="2"></li>
+                <li data-target="#exp-center-carousel" data-slide-to="3"></li>
+                <li data-target="#exp-center-carousel" data-slide-to="4"></li>
+            </ol>
 
-<section class="portfolio bg-light-gray padding50-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Bedroom</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 portfolio-item">
-                <div class="portfolio-box">
-                    <a href="#" class="portfolio-link">
-                        <img src="/img/bedroom1.jpeg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Abcdz Bedroom</h4>
-                        <p class="text-muted">Graphic Design</p>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner exp_center">
+                <div class="item active">
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/6.png'%>" class="car_img_left width293"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col60 padding0-10">
+                        <img src="<%= imgBase + 'home/1.png'%>" class="img-responsive width100"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/2.png'%>" class="car_img_right width293"
+                             alt="Experience Center Image">
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-sm-6 portfolio-item">
-                <div class="portfolio-box">
-                    <a href="#" class="portfolio-link">
-                        <img src="/img/bedroom2.jpeg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Xyrsb Bedroom</h4>
-                        <p class="text-muted">Website Design</p>
+                <div class="item">
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/1.png'%>" class="car_img_left width293"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col60 padding0-10">
+                        <img src="<%= imgBase + 'home/2.png'%>" class="img-responsive width100"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/4.png'%>" class="car_img_right width293"
+                             alt="Experience Center Image">
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="item">
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/2.png'%>" class="car_img_left width293"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col60 padding0-10">
+                        <img src="<%= imgBase + 'home/4.png'%>" class="img-responsive width100"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/5.png'%>" class="car_img_right width293"
+                             alt="Experience Center Image">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/4.png'%>" class="car_img_left width293"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col60 padding0-10">
+                        <img src="<%= imgBase + 'home/5.png'%>" class="img-responsive width100"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/6.png'%>" class="car_img_right width293"
+                             alt="Experience Center Image">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/5.png'%>" class="car_img_left width293"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col60 padding0-10">
+                        <img src="<%= imgBase + 'home/6.png'%>" class="img-responsive width100"
+                             alt="Experience Center Image">
+                    </div>
+                    <div class="car_col20 padding0">
+                        <img src="<%= imgBase + 'home/1.png'%>" class="car_img_right width293"
+                             alt="Experience Center Image">
+                    </div>
+                </div>
 
-        <div class="row margin-bottom20 align-center">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <a class="button font-size18" href="/products/bedroom">Explore Now</a>
             </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control carousel-overlay" href="#exp-center-carousel" role="button"
+               data-slide="prev">
+                <img src="/img/arr-left-thick.png" class="arr_exp" alt="...">
+            </a>
+            <a class="right carousel-control carousel-overlay" href="#exp-center-carousel" role="button"
+               data-slide="next">
+                <img src="/img/arr-right-thick.png" class="arr_exp" alt="...">
+            </a>
         </div>
+        <!-- Carousel -->
     </div>
 </section>
+<!-- Experience Center Section End -->
+
 
 <!-- About Section -->
-<section class="padding50-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Stories</h2>
-            </div>
-        </div>
-
-        <div class="row margin-bottom30">
-            <div class="col-md-12 col-sm-12 story">
-                <img src="/img/designer/kitchen.jpg" class="img-responsive" alt="">
-            </div>
-        </div>
-        <div class="row margin-bottom30">
-            <div class="col-md-12 col-sm-12 story">
-                <img src="/img/designer/bedroom1a.jpg" class="img-responsive" alt="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 story">
-                <img src="/img/designer/Living1.jpg" class="img-responsive" alt="">
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="bg-light-gray padding50-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">We are unique</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="container align-center">
+        <h1 class="heading-center-notransform">Superior Quality. <span class="color-blue"> Unparalled Designs</span>
+        </h1>
+
+        <h3 class="heading-center-notransform">Plenty of Excuses to cherry pick us</h3>
+
+        <div class="row margin-top40">
+            <div class="col-lg-12 padding0">
                 <ul class="timeline">
                     <li>
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="/img/about/1.jpg" alt="">
+                            <img class="img-responsive" src="<%= imgBase + 'home/wish_1_15.png'%>" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>Unique Personalized Designs</h4>
-                                <h4 class="subheading">Designs that match your personality; made exclusively for you.</h4>
+                                <h3 class="text-transform-none">Keep wish-listing</h3>
+                                <h4 class="subheading">Priviledge of Customized Designs</h4>
                             </div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive bg-gray" src="/img/about/2.png" alt="">
+                            <img class="img-responsive" src="<%= imgBase + 'home/delivery_15.png'%>" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>Professional Expertise</h4>
-                                <h4 class="subheading">Name that can be trusted</h4>
+                                <h3 class="text-transform-none">No more hedaches</h3>
+                                <h4 class="subheading">Guaranteed 45 days delivery</h4>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="/img/about/3.jpg" alt="">
+                            <img class="img-responsive" src="<%= imgBase + 'home/guarantee_19.png'%>" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>Flawless Execution</h4>
-                                <h4 class="subheading">Transition to Full Service</h4>
+                                <h3 class="text-transform-none">Have high standards</h3>
+                                <h4 class="subheading">Not ordinary only utmost Quality</h4>
                             </div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="/img/about/4.jpg" alt="">
+                            <img class="img-responsive" src="<%= imgBase + 'home/lst_15.png'%>" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>its not the end...</h4>
-                                <h4 class="subheading">Avail our efficient After Sales Services</h4>
+                                <h3 class="text-transform-none">Never say good-bye</h3>
+                                <h4 class="subheading">Appreciable Post-Sales Services</h4>
                             </div>
                         </div>
                     </li>
@@ -388,3 +483,79 @@
         </div>
     </div>
 </section>
+<!-- About Section End -->
+
+
+<!-- Stories Section -->
+<section class="padding50-0 bg-color-white">
+    <div class="container">
+        <h1 class="text-transform-none align-center">Insights</h1>
+
+        <div class="row margin-bottom30 margin-top40">
+            <div class="col-md-6 col-sm-6">
+                <div class="portfolio-box bg-light-gray">
+                    <div class="row margin0">
+                        <a href="/story-Making%20her%20Room%20Keep%20up%20with%20Her">
+                            <img
+                                    src="https://cdn.shopify.com/s/files/1/1054/3918/files/1_2f78671c-419e-4a68-ac3a-ab5600b943a7.jpg?13528744864047710607"
+                                    class="img-responsive padding15">
+                        </a>
+                    </div>
+                    <div class="row margin0 padding15">
+                        <a href="/story-Making%20her%20Room%20Keep%20up%20with%20Her">
+
+                            <h3 class="text-transform-none margin-top0">Making her Room Keep up with Her</h3>
+                        </a>
+                        <p class="justify">
+                            <b>Expert Speak:</b>
+                            It is easy to transform a little girl’s room to that of a teenager.
+                            All you need to do is focus on bringing out her blossoming personality in the décor.
+                        </p>
+                        <a
+                                href="/story-Making%20her%20Room%20Keep%20up%20with%20Her"
+                                class="margin-top10 color-orange font-size16 justify">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="portfolio-box bg-light-gray">
+                    <div class="row margin0">
+                        <a href="/story-How%20to%20create%20an%20unforgettable%20first%20impression">
+                            <img
+                                    src="https://cdn.shopify.com/s/files/1/1054/3918/files/2_2e87ccdc-7553-4297-9460-54b296c496d7.jpg?9638439805762681496"
+                                    class="img-responsive padding15">
+                        </a>
+                    </div>
+                    <div class="row margin0 padding15">
+                        <a href="/story-How%20to%20create%20an%20unforgettable%20first%20impression">
+                            <h3 class="text-transform-none margin-top0">
+                                How to create an unforgettable first impression
+                            </h3>
+                        </a>
+                        <p class="justify">
+                            <b>Expert Speak:</b>
+                            Everyone wants to own home that makes a lasting impression on visitors.
+                            That home can be yours with these tips.
+                        </p>
+                        <a
+                                href="/story-How%20to%20create%20an%20unforgettable%20first%20impression"
+                                class="margin-top10 color-orange font-size16 justify">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row margin0 align-center">
+            <a href="/stories" class="button border1px text-transform-none font-size20">Browse more Stories</a>
+        </div>
+
+    </div>
+</section>
+<!-- Stories Section End -->
+
+
+

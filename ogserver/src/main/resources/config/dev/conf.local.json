@@ -14,5 +14,6 @@
     "processEvents": false
   },
 
-  "apicache" : true
+  "apicache" : true,
+  "shopifyredirect": true
 }

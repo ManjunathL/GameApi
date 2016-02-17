@@ -4,6 +4,7 @@ import com.mygubbi.ServerVerticle;
 import com.mygubbi.catalog.ProductJson;
 import com.mygubbi.catalog.ProductManagementService;
 import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.StringUtils;
 import com.mygubbi.common.VertxInstance;
 import com.opencsv.CSVReader;
 import io.vertx.core.AsyncResult;
@@ -28,6 +29,11 @@ public class ShopifyCatalogConverter
     private String stylePriceFile;
     private ShopifyComponentParser componentParser;
     private ShopifyStylePriceParser stylePriceParser;
+
+    public ShopifyCatalogConverter(String productsFile)
+    {
+        this(productsFile, null, null);
+    }
 
     public ShopifyCatalogConverter(String productsFile, String componentsFile, String stylePriceFile)
     {
@@ -82,7 +88,10 @@ public class ShopifyCatalogConverter
 
     private void mergeToProduct(ProductJson product, ShopifyRecord record)
     {
-        product.addMFP(record.getMFP());
+        if (StringUtils.isNonEmpty(record.getMaterial()))
+        {
+            product.addMFP(record.getMFP());
+        }
         product.addImage(record.getImage());
     }
 
@@ -158,24 +167,29 @@ public class ShopifyCatalogConverter
 
     public static void main(String[] args)
     {
-        if (args.length != 3)
-        {
-            System.out.println("Needs 3 input files - products, components and styleprice.");
-            return;
-        }
-        String productsFile = args[0];
-        String componentsFile = args[1];
-        String stylePriceFile = args[2];
+        System.out.println("Needs 4 input files typically - config, products, components and styleprice.");
 
         //new ShopifyCatalogConverter(productsFile, componentsFile, stylePriceFile).parse();
         //if (true) return;
 
-        VertxInstance.get().deployVerticle(new ServerVerticle("config/dev/conf.local.json"), new DeploymentOptions().setWorker(true), result ->
+        VertxInstance.get().deployVerticle(new ServerVerticle(args[0]), new DeploymentOptions().setWorker(true), result ->
         {
             if (result.succeeded())
             {
                 LOG.info("Server started.");
-                new ShopifyCatalogConverter(productsFile, componentsFile, stylePriceFile).parse();
+                if (args.length == 4)
+                {
+                    new ShopifyCatalogConverter(args[1], args[2], args[3]).parse();
+                }
+                else if (args.length == 2)
+                {
+                    new ShopifyCatalogConverter(args[1]).parse();
+                }
+                else
+                {
+                    System.out.println("No input files provided");
+                    System.exit(1);
+                }
             }
             else
             {

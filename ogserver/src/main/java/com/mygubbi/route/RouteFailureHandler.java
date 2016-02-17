@@ -17,7 +17,7 @@ public class RouteFailureHandler implements Handler<RoutingContext> {
         String uri = context.request().uri();
 
         if (statusCode == 404 && !uri.contains(".")) {
-            RouteUtil.getInstance().sendResponseFromFile(context, "webroot/index.html", "text/html");
+            RouteUtil.getInstance().sendResponseFromFile(context, "webroot/index.html", RouteUtil.TEXT_HTML_TYPE);
         } else {
             response.setStatusCode(statusCode).end("Sorry we have encountered an Error. Please refresh the page or go to <a href='#'>Home</a> to continue.");
         }
