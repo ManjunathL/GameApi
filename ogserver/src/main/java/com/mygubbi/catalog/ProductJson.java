@@ -16,6 +16,11 @@ public class ProductJson extends JsonObject
 
     }
 
+    public ProductJson(JsonObject json)
+    {
+        super(json.getMap());
+    }
+
     public ProductJson(ShopifyRecord record)
     {
         this.put("id", record.getId());

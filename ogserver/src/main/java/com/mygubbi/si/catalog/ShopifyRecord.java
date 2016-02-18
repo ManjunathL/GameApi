@@ -43,7 +43,7 @@ public class ShopifyRecord
         categoryMap.put("Entertainment Unit", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "entunit"));
         categoryMap.put("Shoe Rack", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "shoerack"));
         categoryMap.put("Crockery Unit", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "crockunit"));
-        categoryMap.put("Foyer", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "foyerunit"));
+        categoryMap.put("Foyer Unit", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "foyerunit"));
         categoryMap.put("Sideboard", new JsonObject().put("category", "Living & Dining").put("categoryId", "livingndining").put("subcategoryId", "sideboard"));
     }
 

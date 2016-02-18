@@ -12,15 +12,16 @@ public class EmailData
     private String fromEmail;
     private String subject;
     private String textMessage;
-    private String templateName;
+    private String bodyTemplate;
+    private String subjectemplate;
     private Object params;
     private boolean isHtmlBody;
 
     public String getMessageBody()
     {
-        if (!StringUtils.isEmpty(this.getTemplateName()))
+        if (this.isHtmlBody() && !StringUtils.isEmpty(this.getBodyTemplate()))
         {
-            return new VelocityTemplateProcessor().process(this.getTemplateName(), this.getParams());
+            return new VelocityTemplateProcessor().process(this.getBodyTemplate(), this.getParams());
         }
         else
         {
@@ -63,6 +64,10 @@ public class EmailData
 
     public String getSubject()
     {
+        if (!StringUtils.isEmpty(this.getSubjectTemplate()))
+        {
+            return new VelocityTemplateProcessor().process(this.getSubjectTemplate(), this.getParams());
+        }
         return subject;
     }
 
@@ -83,14 +88,25 @@ public class EmailData
         return this;
     }
 
-    public String getTemplateName()
+    public String getBodyTemplate()
     {
-        return templateName;
+        return bodyTemplate;
     }
 
-    public EmailData setTemplateName(String templateName)
+    public EmailData setBodyTemplate(String bodyTemplate)
     {
-        this.templateName = templateName;
+        this.bodyTemplate = bodyTemplate;
+        return this;
+    }
+
+    public String getSubjectTemplate()
+    {
+        return subjectemplate;
+    }
+
+    public EmailData setSubjectTemplate(String subjectTemplate)
+    {
+        this.subjectemplate = subjectTemplate;
         return this;
     }
 

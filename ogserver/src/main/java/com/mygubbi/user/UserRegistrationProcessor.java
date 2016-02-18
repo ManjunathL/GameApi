@@ -77,7 +77,8 @@ public class UserRegistrationProcessor implements DataProcessor
     {
         JsonObject jsonData = eventData.getJsonData();
         EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail(jsonData.getString("email"))
-                .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!").setTemplateName("email/welcome.user.vm");
+                .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
+                .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
         Integer id = LocalCache.getInstance().store(emailData);
         VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
                 (AsyncResult<Message<Integer>> result) -> {
