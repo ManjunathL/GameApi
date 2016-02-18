@@ -41,7 +41,7 @@ public class CacheHandler implements Handler<RoutingContext>
     public void handle(RoutingContext context)
     {
         String uri = context.request().uri();
-        if (!StringUtils.isNonEmpty(uri))
+        if (StringUtils.isNonEmpty(uri))
         {
             if (uri.equals("/api/cache.clear"))
             {

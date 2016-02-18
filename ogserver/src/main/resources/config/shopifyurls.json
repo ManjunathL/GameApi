@@ -6,11 +6,31 @@
     },
     {
       "old": "/collections/living-dining",
-      "new": "/living-and-dining-room-designs"
+      "new": "/products/living-and-dining-room-designs"
+    },
+    {
+      "old": "/collections/entertainment-unit",
+      "new": "/tv-unit-cabinet"
+    },
+    {
+      "old": "/collections/shoe-rack",
+      "new": "/shoe-rack-online"
+    },
+    {
+      "old": "/collections/crockery-unit",
+      "new": "/crockery-unit-cabinet"
     },
     {
       "old": "/collections/kitchen",
       "new": "/kitchen-cabinet-design"
+    },
+    {
+      "old": "/collections/foyer",
+      "new": "/foyer-design"
+    },
+    {
+      "old": "/collections/sideboard",
+      "new": "/sideboard"
     },
     {
       "old": "/collections/l-shaped-kitchen",
@@ -19,6 +39,74 @@
     {
       "old": "/collections/u-shaped-kitchen",
       "new": "/u-shaped-kitchen-design"
+    },
+    {
+      "old": "/collections/straight-kitchen",
+      "new": "/straight-kitchen-design"
+    },
+    {
+      "old": "/collections/parallel-kitchen",
+      "new": "/parallel-kitchen-design"
+    },
+    {
+      "old": "/collections/bedroom",
+      "new": "/bedroom-interior-design"
+    },
+    {
+      "old": "/collections/wardrobe",
+      "new": "/wardrobe-designs-online"
+    },
+    {
+      "old": "/collections/study-table",
+      "new": "/study-table-designs-online"
+    },
+    {
+      "old": "/collections/side-table",
+      "new": "/side-table-design-online"
+    },
+    {
+      "old": "/collections/book-rack",
+      "new": "/book-shelf"
+    },
+    {
+      "old": "/blogs/blog",
+      "new": "/stories"
+    },
+    {
+      "old": "/pages/how-mygubbi-works",
+      "new": "/mygubbi-difference"
+    },
+    {
+      "old": "/pages/terms-conditions",
+      "new": "/terms"
+    },
+    {
+      "old": "/pages/about-mygubbi",
+      "new": "/about-mygubbi"
+    },
+    {
+      "old": "/pages/kitchens",
+      "new": "/"
+    },
+    {
+      "old": "/pages/wardrobes",
+      "new": "/"
+    },
+    {
+      "old": "/pages/lp",
+      "new": "/"
+    },
+    {
+      "old": "/pages/oglp",
+      "new": "/"
+    },
+    {
+      "old": "/pages/og",
+      "new": "/"
+    },
+    {
+      "old": "/pages/nri",
+      "new": "/"
     }
   ]
 }

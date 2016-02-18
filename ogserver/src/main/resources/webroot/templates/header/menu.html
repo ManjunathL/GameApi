@@ -4,12 +4,12 @@
         <div class="navbar-header" id="main-lg-ico">
             <a class="navbar-toggle collapsed toggle-icon-left" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <img
-                        src="/img/logo_icon/48x48.png"
+                        src="<%= imgBase + '48x48.png'%>"
                         class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo"
                         alt="">
             </a>
             <a href="/" class="pull-left hidden-xs hidden-sm">
-                <img src="/img/logos/logo.png" class="full_logo" alt="">
+                <img src="<%= imgBase + 'logo.png'%>" class="full_logo" alt="">
             </a>
             <a href="/" class="pull-left hidden-xs hidden-sm position-absolute">
                 <img src="<%= imgBase + 'home/header_03.png'%>" class="full_logo" alt="">
@@ -222,11 +222,6 @@
                 </li>
                 <li class="hidden-xs hidden-sm .visible-md-block .visible-lg-block">
                     <a href="/consult" class="consult">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a>
-<!--
-                    <a href="#">
-                        <img src="/img/query.png" class="consult_icon_height">
-                    </a>
--->
                 </li>
             </ul>
             <div id="sb-search" class="sb-search hidden-xs hidden-sm" style="position:absolute;">
@@ -270,7 +265,7 @@
             <% if (users.at(0).get('profileImage')) { %>
                 <img src="<%= users.at(0).get('profileImage') %>">
             <% }else { %>
-                <img src="/img/user.png" class>
+                <img src="<%= imgBase + 'user.png'%>" class>
             <% } %>
             <div class="user_name"><%= users.at(0).get('displayName') %></div>
             <div class="sub-font" id="view_profile">
@@ -295,7 +290,7 @@
 
         <% } else { %>
         <h2>
-            <img src="/img/user.png" class="display-inline-block">
+            <img src="<%= imgBase + 'user.png'%>" class="display-inline-block">
             My Account
         </h2>
 
@@ -377,7 +372,7 @@
     <!--</div>-->
 
     <div id="close-user-pop" class="close-icon" data-element=".userpop">
-        <img src="/img/close-white.png">
+        <img src="<%= imgBase + 'close-white.png'%>">
     </div>
 
 </div>
@@ -412,7 +407,7 @@
             <p class="modal_error_msg">Email Id not registered.</p>
             <p class="modal_error_msg">Please enter correct email id or try creating a new account.</p>
             <div id="close-forgot-pop" data-element="#forgot_password" class="close-icon signup-form">
-                <img src="/img/close-white.png">
+                <img src="<%= imgBase + 'close-white.png'%>">
             </div>
         </div>
 
@@ -427,7 +422,7 @@
         <!-- Modal content-->
         <div class="modal-content signup">
             <h2>
-                <img src="/img/user.png">
+                <img src="<%= imgBase + 'user.png'%>">
                 Create a new Account
             </h2>
 
@@ -479,7 +474,7 @@
                 </div>
             </form>
             <div id="close-signup-pop" data-element="#signup" class="close-icon signup-form">
-                <img src="/img/close-white.png">
+                <img src="<%= imgBase + 'close-white.png'%>">
             </div>
         </div>
 
@@ -578,7 +573,7 @@
                 </div>
             </div>
             <div id="close-contactus-pop" data-element="#contactuspop" class="close-icon signup-form">
-                <img src="/img/close-white.png">
+                <img src="<%= imgBase + 'close-white.png'%>">
             </div>
         </div>
 
@@ -611,7 +606,7 @@
 
 <div class="search_overlay" autocomplete="off" action="#">
     <div class="search_logo">
-        <img src="/img/gubbi_white.png" alt="mygubbi">
+        <img src="<%= imgBase + 'gubbi_white.png'%>" alt="mygubbi">
     </div>
     <div class="search_close"></div>
     <div class="row">
