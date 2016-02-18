@@ -1,7 +1,7 @@
 <section class="menu-spacer bg-light-gray">
 
     <div class="container-fluid category-banner">
-        <img width="100%" src="/img/wishlist.png" class="img-responsive" alt="Shortlist Page Banner">
+        <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
     </div>
     <% var slcount = shortlistedItems ? Object.keys(shortlistedItems).length : 0; %>
     <div class="container-fluid bg-color-white hidden-xs">
@@ -161,7 +161,7 @@
                                         <div class="align-center form-group">
                                             <button
                                                     id="consult-submit-btn<%= product.productId %>"
-                                                    class="button margin-top20 margin-bottom20"
+                                                    class="button-blue margin-top20 margin-bottom20"
                                                     type="submit"
                                                     data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
                                                 submit
@@ -178,7 +178,7 @@
                             </div>
                         </div>
                         <div id="close-consult-pop<%= product.productId %>" data-element="#consultpop<%= product.productId %>" class="close-consult-pop close-icon signup-form">
-                            <img src="/img/close-white.png" alt="Close" title="Close">
+                            <img src="<%= imgBase + 'close-white.png'%>" alt="Close" title="Close">
                         </div>
                     </div>
 

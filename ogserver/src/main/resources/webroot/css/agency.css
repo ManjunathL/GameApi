@@ -1209,6 +1209,10 @@ button {
     padding-left: 25px;
 }
 
+.padding-left30 {
+    padding-left: 30px;
+}
+
 .padding-right0 {
     padding-right: 0px;
 }
@@ -2644,7 +2648,7 @@ aside.clients img {
 
 section#contact {
     background-color: #222;
-    background-image: url(/img/map-image.png);
+    background-image: url(https://res.cloudinary.com/mygubbi/image/upload/map-image.png);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -3620,7 +3624,7 @@ a.tab-ico {
     height: 40px;
     background-color: #F2F4F4;
     margin-right: 2px;
-    width: 33%;
+    width: 32%;
     font-size: 18px;
     font-weight: 300;
     text-align: center;
@@ -4053,4 +4057,124 @@ a.tab-ico {
     display: block;
     width: 100%;
     margin: 0 auto;
+}
+
+.consult_img_overlay{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    z-index: 900;
+    overflow: hidden;
+    top: 0px;
+}
+.consult-form-maindiv{
+    margin: 10px auto;
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    top: 15%;
+}
+.consult-form-maindiv-xs{
+    margin: 72px auto 10px;
+    width: 90%;
+}
+.consult-content-maindiv{
+    margin: 10px auto;
+    width: 70%;
+    left: 25%;
+    top: 15%;
+}
+.consult-form-heading{
+    padding: 10px;
+    font-size:24px;
+    border-bottom:1px solid #F1591F;
+}
+.consult-submit-orange{
+    width:100%;
+    background-color:#FF3200!important;
+    border:2px solid #FF3200!important;
+}
+.consult-h3{
+    text-transform: capitalize;
+}
+.consult-address-box{
+  border-right:1px solid #ccc;
+}
+.consult-grey-box{
+     background-color: #808080;
+     color: #FFF;
+     padding: 5px;
+     width: 100px;
+     display: inline-block;
+}
+
+/* Flip Container for Consult Page */
+.flip-container
+{
+    position:relative;
+    -webkit-perspective:1000;
+    perspective:1000;
+}
+
+.flip-cards
+{
+    width:300px;
+    height:300px;
+    position:relative;
+    float:left;
+    margin-left:5px;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+
+.flip-cards:hover
+{
+    transform: rotateY( 180deg );
+    -webkit-transform: rotateY(180deg);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.flip-cards div
+{
+    width:300px;
+    height:300px;
+    position:absolute;
+    border-radius:15px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.front-card
+{
+    z-index: 2;
+}
+
+.reverse-card
+{
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY( 180deg );
+}
+
+.shortlist_consult,
+.shortlist_consult:focus,
+.shortlist_consult.active {
+      color: #fff !important;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-top: 5px !important;
+      margin-left: 10px;
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+      border-color: #f1591f;
+      border-radius: 0px;
+      text-transform: uppercase;
+      background-color: #f1591f !important;
+      -webkit-transition: color 0.3s, opacity 0.2s;
+      transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }

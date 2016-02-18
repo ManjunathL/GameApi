@@ -3,14 +3,14 @@
     <div class="container-fluid category-banner">
         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
             <% if(filter.selectedCategoryName == 'kitchen'){ %>
-                <img src="/img/category/KitchenFinal1.jpg" class="img-responsive" alt="Kitchen">
+                <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
             <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                <img src="/img/category/BedroomFinal.jpg" class="img-responsive" alt="Bedroom">
+                <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
             <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-                <img src="/img/category/LivingRoomFinal.jpg" class="img-responsive" alt="Living & Dining">
+                <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
             <% } %>
         <% }else{ %>
-            <img src="/img/category/KitchenFinal1.jpg" class="img-responsive" alt="Kitchen">
+            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
         <% } %>
     </div>
     <div class="container-fluid bg-white hidden-xs">
@@ -407,7 +407,7 @@
         </div>
 
         <div class="close-icon2per" onclick="closePop()">
-            <img src="/img/close-white.png" title="Close" alt="Close">
+            <img src="<%= imgBase + 'close-white.png'%>" title="Close" alt="Close">
         </div>
 
     </div>
