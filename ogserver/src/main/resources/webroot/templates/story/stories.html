@@ -91,10 +91,10 @@
                         blg_stry = unescape(blg_stry);
                         var n = blg_stry.indexOf('</p>');
                     if (n > 200){
-                    var stry = blg_stry.slice(3, 180); %>
+                    var stry = blg_stry.slice(0, 180); %>
                     <%= stry %>...
                     <% } else {
-                    var stry = blg_stry.slice(3, n); %>
+                    var stry = blg_stry.slice(0, n); %>
                     <%= stry %>
                     <% } %>
                     </p>
@@ -196,10 +196,10 @@
                         <% cnt = cnt + 1; }); %>
                     </p>
                     <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-                        <h2 class="justify hidden-xs">
+                        <h2 class="hidden-xs">
                             <%= blg_hdng %>
                         </h2>
-                        <h4 class="justify hidden-lg hidden-md hidden-sm">
+                        <h4 class="hidden-lg hidden-md hidden-sm">
                             <% var blg_hdng = story.blog_heading;
                             var r = /\\u([\d\w]{4})/gi;
                             blg_hdng = blg_hdng.replace(r, function (match, grp) {
