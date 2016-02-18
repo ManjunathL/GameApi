@@ -1,0 +1,20 @@
+{
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://mgprddb1.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mgprod1",
+    "max_pool_size": 20,
+    "user": "MygubbiAdmin",
+    "password": "myGubb!$$"
+  },
+
+  "firebase": {
+    "fb_url": "https://mygubbi.firebaseio.com",
+    "loginid": "mygubbi.fbase@gmail.com",
+    "password": "!@#$VGYHasdf435",
+    "processEvents": true
+  },
+
+  "apicache" : true,
+  "shopifyredirect": true
+
+}
