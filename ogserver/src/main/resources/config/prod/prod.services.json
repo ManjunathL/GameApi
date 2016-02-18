@@ -1,4 +1,7 @@
 {
+  "elasticsearch": {
+    "cluster_name": "elasticsearch_mg_prod"
+  },
   "services": {
     "sequential": [
       {

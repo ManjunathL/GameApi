@@ -1,6 +1,6 @@
 define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(firebase, _, backbone, LS) {
 
-    var rootUrl = "https://sweltering-fire-6356.firebaseio.com/";
+    var rootUrl = fbaseRootUrl;
     var rootRef = new Firebase(rootUrl);
 
     return {
