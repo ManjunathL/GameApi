@@ -359,7 +359,7 @@ a {
 }
 
 #g-login-btn span.icon {
-    background: url('/img/g-normal.png');
+    background: url('https://res.cloudinary.com/mygubbi/image/upload/g-normal.png');
     background-repeat: no-repeat;
     background-size: 100%;
     display: inline-block;
