@@ -6,8 +6,9 @@ define([
     'underscore',
     'backbone',
     '/js/models/story.js',
-    'text!/templates/story/full_story.html'
-], function($, _, Backbone, Story, fullStoryTemplate) {
+    'text!/templates/story/full_story.html',
+    '/js/views/story/full_story_helper.js'
+], function($, _, Backbone, Story, fullStoryTemplate, FullStoryHelper) {
     var FullStoryView = Backbone.View.extend({
         el: '.page',
         story: new Story(),
@@ -55,6 +56,8 @@ define([
                 'stories': rec_stories,
                 'full_story': full_story
             }));
+
+            FullStoryHelper.ready(that);
 
         }
     });
