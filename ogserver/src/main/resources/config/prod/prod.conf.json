@@ -14,6 +14,10 @@
     "processEvents": true
   },
 
+  "elasticsearch": {
+    "cluster_name": "elasticsearch_mg_prod"
+  },
+
   "apicache" : true,
   "shopifyredirect": true
 
