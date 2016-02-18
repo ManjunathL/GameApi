@@ -4159,3 +4159,22 @@ a.tab-ico {
     -webkit-transform: rotateY(180deg);
     transform: rotateY( 180deg );
 }
+
+.shortlist_consult,
+.shortlist_consult:focus,
+.shortlist_consult.active {
+      color: #fff !important;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-top: 5px !important;
+      margin-left: 10px;
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+      border-color: #f1591f;
+      border-radius: 0px;
+      text-transform: uppercase;
+      background-color: #f1591f !important;
+      -webkit-transition: color 0.3s, opacity 0.2s;
+      transition: color 0.3s, opacity 0.2s, transform 0.3s;
+}
