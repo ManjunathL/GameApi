@@ -41,7 +41,8 @@ define([
             'privacy-policy(/)': 'privacypolicy',
             'mygubbi-difference(/)': 'mygubbidiff',
             'stories(/)': 'stories',
-            'story-:name(/)': 'story'
+            'story-:name(/)': 'story',
+            'thankyou(/)':'thankyou'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -54,6 +55,9 @@ define([
         },
         stories: function() {
             document.title = 'Latest Tips from our Experts | mygubbi';
+        },
+        thankyou: function() {
+            document.title = 'Thank you for contacting mygubbi';
         },
         careers: function() {
             document.title = 'Careers | mygubbi';
@@ -72,8 +76,49 @@ define([
         },
         mygubbidiff: function() {
             document.title = 'mygubbi difference | mygubbi';
+        },
+        studyTableB: function () {
+            document.title = 'Study Table Designs - Order Study Table Online from mygubbi';
+        },
+        tvUnitLD: function() {
+            document.title = 'Buy entertainment units online and tv unit designs from mygubbi';
+        },
+        shoeRackLD: function() {
+            document.title = 'Buy Shoe Stands and Shoe Racks Online from mygubbi';
+        },
+        crockeryUnitLD: function() {
+            document.title = 'Crockery unit designs - Kitchen and Dining crockery Unit designs from mygubbi';
+        },
+        lshapedK: function() {
+            document.title = 'L-Shaped Kitchen - L-Shaped Modular Kitchen Designs from mygubbi';
+        },
+        ushapedK: function () {
+            document.title = 'U-Shaped Kitchen Design - U-Shaped Kitchen from mygubbi';
+        },
+        straightK: function () {
+            document.title = 'Straight Kitchen Design - Straight Modular Kitchen Designs from mygubbi';
+        },
+        parallelK: function() {
+            document.title = 'Parallel Kitchen Design - Parallel Kitchen Cabinets from mygubbi';
+        },
+        wardrobeB: function() {
+            document.title = 'Bedroom wardrobe Design -Buy Wardrobes Online from mygubbi';
+        },
+        sideTableB: function() {
+            document.title = 'Side Table - Bedside tables Online from mygubbi';
+        },
+        bookShelfB: function() {
+            document.title = 'Book Rack - Book shelves and Book Organizers from mygubbi';
+        },
+        bedroom: function () {
+            document.title = 'Bedroom Designs - Bedroom Furniture and interiors from mygubbi';
+        },
+        kitchens: function() {
+            document.title = 'Modular Kitchen - Range of modular Kitchen Designs from mygubbi';
+        },
+        livingDining: function () {
+            document.title = 'Living room designs and interiors from mygubbi';
         }
-
     });
 
     var routeSubCategory = function(subCategory, category) {
@@ -269,6 +314,12 @@ define([
                     }
                 };
                 VM.create(VM.STORY, FullStoryPage, options).render();
+            });
+        });
+        router.on('route:thankyou', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/thankyou/thankyou.js'], function(ThankYouPage) {
+                VM.create(VM.THANKYOU, ThankYouPage).render();
             });
         });
         router.on('route', function () {

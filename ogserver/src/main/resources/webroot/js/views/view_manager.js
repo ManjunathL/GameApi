@@ -14,6 +14,7 @@ define(function() {
         CAREERS: "careers",
         FAQ: "faq",
         MGDIFF: "mgdiff",
+        THANKYOU: "thankyou",
         Views: {},
         activeView: "",
         create: function(name, View, options) {
