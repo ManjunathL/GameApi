@@ -25,5 +25,7 @@
 
   "cloudinary" :{
     "url": "cloudinary://492523411154281:Qpr5Vg3klupb-ETRIsj-caLJ5zg@mygubbi"
-  }
+  },
+
+  "staticConfigPath": "webroot/js/config.js"
 }

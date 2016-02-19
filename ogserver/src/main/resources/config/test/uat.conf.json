@@ -15,6 +15,7 @@
   },
 
   "apicache" : true,
-  "shopifyredirect": true
+  "shopifyredirect": true,
 
+  "staticConfigPath": "config/test/uat.config.js"
 }

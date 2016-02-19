@@ -49,8 +49,3 @@ require([
 });
 
 var imgBase = "https://res.cloudinary.com/mygubbi/image/upload/";
-var restBase = "";
-var fbaseRootUrl = "https://sweltering-fire-6356.firebaseio.com/";
-
-//var restBase = "https://uat.mygubbi.com";
-//var restBase = "https://localhost";

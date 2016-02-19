@@ -19,6 +19,8 @@
   },
 
   "apicache" : true,
-  "shopifyredirect": true
+  "shopifyredirect": true,
+
+  "staticConfigPath": "config/prod/prod.config.js"
 
 }

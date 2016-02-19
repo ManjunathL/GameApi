@@ -2,6 +2,7 @@ package com.mygubbi.apiserver;
 
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
+import com.mygubbi.config.StaticConfigHandler;
 import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import io.vertx.core.AbstractVerticle;
@@ -71,6 +72,7 @@ public class ApiServerVerticle extends AbstractVerticle
         this.setupApiHandler(router);
         this.setupRedirectHandlerForShopifyUrls(router);
         this.setupPrerenderHandler(router);
+        this.setupStaticConfigHandler(router);
         this.setupStaticHandler(router);
 
         String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
@@ -88,6 +90,10 @@ public class ApiServerVerticle extends AbstractVerticle
 
         int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 443);
         VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
+    }
+
+    private void setupStaticConfigHandler(Router router) {
+        router.route(HttpMethod.GET, "/*").handler(new StaticConfigHandler());
     }
 
     private void setupEventBusHandler(Router router)
