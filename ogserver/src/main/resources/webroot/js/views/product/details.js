@@ -261,7 +261,12 @@ define([
                 this.custom_product.set({'selectedFinish':finishes[0]},{silent: true});
             }
 
-            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
+            if(this.custom_product.get('basePrice') !== 0){
+                var basePricetxt = this.custom_product.get('basePrice');
+            }else{
+                var basePricetxt = "Consult for Price";
+            }
+            $('#defaultbaseprice').html(basePricetxt);
 
             var nwfinishTemplate = _.template(finishTemplate);
 
@@ -300,7 +305,13 @@ define([
                 this.custom_product.set({'colors':colors},{silent: true});
             }
 
-            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
+
+            if(this.custom_product.get('basePrice') !== 0){
+                var basePricetxt = this.custom_product.get('basePrice');
+            }else{
+                var basePricetxt = "Consult for Price";
+            }
+            $('#defaultbaseprice').html(basePricetxt);
 
             var colorsTemplate = _.template(colorsTemplate);
 
@@ -359,7 +370,13 @@ define([
               this.custom_product.set({'selectedAccessories':accessoryList},{silent: true});
               this.custom_product.set({'accessoryobj':accessoryobj},{silent: true});
 
-             $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
+              if(this.custom_product.get('basePrice') !== 0){
+                  var basePricetxt = this.custom_product.get('basePrice');
+              }else{
+                  var basePricetxt = "Consult for Price";
+              }
+              $('#defaultbaseprice').html(basePricetxt);
+
 
               var compiledaccessoryTemplate = _.template(AccessoryTemplate);
 
