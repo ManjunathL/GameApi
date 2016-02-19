@@ -17,9 +17,10 @@ define([
     '/js/slyutil.js',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
+    '/js/analytics.js',
     '/js/collections/appliances.js',
     '/js/views/view_manager.js'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, RelatedProductCollection, relatedproductTemplate, SlyUtil, MGF, ConsultUtil, ApplianceCollection, VM) {
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, AccessoryTemplate, applianceTemplate, finishTemplate, colorsTemplate, RelatedProductCollection, relatedproductTemplate, SlyUtil, MGF, ConsultUtil, Analytics, ApplianceCollection, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -28,6 +29,7 @@ define([
         custom_product: null,
         RelatedProducts: null,
         initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
             this.product = new ProductModel();
             window.product = this.product;
             this.custom_product = new CustomProduct();

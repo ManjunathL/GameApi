@@ -1,14 +1,15 @@
-/**
- * Created by mygubbi on 17/2/16.
- */
 define([
     'jquery',
     'underscore',
     'backbone',
+    '/js/analytics.js',
     'text!/templates/thankyou/thankyou.html'
-], function($, _, Backbone, thankyouTemplate) {
+], function($, _, Backbone, Analytics, thankyouTemplate) {
     var ThankyouView = Backbone.View.extend({
         el: '.page',
+        initialize: function() {
+            Analytics.apply(Analytics.TYPE_THANKYOU);
+        },
         render: function() {
             $(this.el).html(_.template(thankyouTemplate));
         }

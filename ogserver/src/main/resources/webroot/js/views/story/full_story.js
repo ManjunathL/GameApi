@@ -6,12 +6,16 @@ define([
     'underscore',
     'backbone',
     '/js/models/story.js',
+    '/js/analytics.js',
     'text!/templates/story/full_story.html',
     '/js/views/story/full_story_helper.js'
-], function($, _, Backbone, Story, fullStoryTemplate, FullStoryHelper) {
+], function($, _, Backbone, Story, Analytics, fullStoryTemplate, FullStoryHelper) {
     var FullStoryView = Backbone.View.extend({
         el: '.page',
         story: new Story(),
+        initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
+        },
         render: function() {
 
             var that = this;

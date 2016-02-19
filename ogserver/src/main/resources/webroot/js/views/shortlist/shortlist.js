@@ -6,12 +6,14 @@ define([
     'text!/templates/shortlist/shortlist.html',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
+    '/js/analytics.js',
     '/js/views/view_manager.js',
     'css!/css/shortlist.css'
-], function($, _, Backbone, Bootstrap, shortlistTemplate, MGF, ConsultUtil, VM) {
+], function($, _, Backbone, Bootstrap, shortlistTemplate, MGF, ConsultUtil, Analytics, VM) {
     var ShortlistView = Backbone.View.extend({
         el: '.page',
         initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
             this.ref = MGF.rootRef;
             this.listenTo(Backbone, 'user.change', this.render);
             _.bindAll(this, 'render', 'renderWithUserProfCallback');

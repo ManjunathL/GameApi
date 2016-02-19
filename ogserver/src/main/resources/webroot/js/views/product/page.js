@@ -13,8 +13,9 @@ define([
     '/js/models/filter.js',
     '/js/models/filterMaster.js',
     '/js/mgfirebase.js',
+    '/js/analytics.js',
     '/js/views/view_manager.js'
-], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF, VM) {
+], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF, Analytics, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         products: null,
@@ -22,6 +23,7 @@ define([
         filterMaster: null,
         categories: null,
         initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
             this.products = new Products();
             this.filter = new Filter();
             this.filterMaster = new FilterMaster();

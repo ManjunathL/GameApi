@@ -6,8 +6,9 @@ define([
     'text!/templates/consult/consult.html',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
+    '/js/analytics.js',
     'css!/css/consult.css'
-], function($, _, Backbone, Bootstrap, consultTemplate, MGF, ConsultUtil) {
+], function($, _, Backbone, Bootstrap, consultTemplate, MGF, ConsultUtil, Analytics) {
     var ConsultView = Backbone.View.extend({
         el: '.page',
         ref: null,
@@ -21,6 +22,7 @@ define([
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
             this.ref = MGF.rootRef;
             _.bindAll(this, 'renderWithUserProfCallback');
         },

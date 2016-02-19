@@ -195,12 +195,11 @@ define([
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
             var that = this;
-            $('#contactForm').hide(100, function() {
-                $('#success-msg').show(0, function() {
-                    $('#success-msg-padding').show(0, function() {
-                        that.positionSideContact();
-                    });
-                });
+
+            this.toggleContactUsPop();
+            this.positionSideContact();
+            window.App.router.navigate('/thankyou-quick-contact', {
+                trigger: true
             });
 
         },
