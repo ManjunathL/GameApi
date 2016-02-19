@@ -151,7 +151,7 @@ define([
         var router = new AppRouter(options);
         window.App = window.App || {};
         window.App.router = router;
-        router.on('shoeRackLD', function(actions){
+        router.on('route:shoeRackLD', function(actions){
             routeSubCategory('Shoe Rack', 'living & dining');
         });
         router.on('route:crockeryUnitLD', function(actions){

@@ -50,7 +50,7 @@
         <div class="col-md-5 col-5-txt margin15-0">
             <div class="col-md-12 padding0 margin-bottom20">
                         <span>
-                            <a href="#" class="list-heading-col5">
+                            <a href="/product-<%= product.productId %>" class="list-heading-col5">
                                 <h2><%= product.name %></h2>
                             </a>
                         </span>
@@ -82,6 +82,7 @@
 
     <% }); %>
     <% } %>
+
 </div>
 <div class="row grid-view">
     <% _.each(collection, function(product){ %>
@@ -132,7 +133,11 @@
 
                 <div class="portfolio-caption-bg-gray margin0">
                     <div class="row">
-                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0"><%= product.name %></h4>
+                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0">
+                            <a href="/product-<%= product.productId %>">
+                                <%= product.name %>
+                            </a>
+                        </h4>
                         <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
                             <% if (product.defaultPrice !== 0) { %>
                             <i class="fa fa-inr"></i>
@@ -149,19 +154,3 @@
 
     <% }); %>
 </div>
-
-<!--<script type="text/javascript">var switchTo5x=true;</script>-->
-<!--<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>-->
-<!--<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>-->
-
-<script>
-    $(document).ready(function () {
-        $('.fa-inr').click(function () {
-            var fontsize = $('.fa-inr').parent().css('font-size');
-            alert(fontsize);
-            fontsize = fontsize - 2;
-            $('.fa-inr').css('font-size', fontsize);
-        });
-
-    });
-</script>
