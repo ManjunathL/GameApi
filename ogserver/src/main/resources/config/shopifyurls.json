@@ -74,6 +74,10 @@
     },
     {
       "old": "/pages/how-mygubbi-works",
+      "new": "/"
+    },
+    {
+      "old": "/pages/why-mygubbi",
       "new": "/mygubbi-difference"
     },
     {
