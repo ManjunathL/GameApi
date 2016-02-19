@@ -76,16 +76,6 @@ define([
             	console.log('Catch: ', err);
             });
 
-            var title = that.model.selectedCategories;
-            if(title == 'kitchen'){
-                document.title = 'Buy Modular Kitchens Online | mygubbi';
-            }else if(title == 'bedroom') {
-                document.title = 'Buy Bedroom Furniture Online | mygubbi';
-            }else {
-                document.title = 'Buy Living & Dining Furniture Online | mygubbi';
-            }
-
-
         },
         getFilterMaster: function() {
             var that = this;

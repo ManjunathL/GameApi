@@ -2,34 +2,39 @@
 
     <div class="container-fluid category-banner">
         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-            <% if(filter.selectedCategoryName == 'kitchen'){ %>
-                <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
-            <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
-            <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-                <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
-            <% } %>
+        <% if(filter.selectedCategoryName == 'kitchen'){ %>
+        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+        <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+        <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+        <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+        <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+        <% } %>
         <% }else{ %>
-            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
         <% } %>
     </div>
     <div class="container-fluid bg-white hidden-xs">
         <div class="container">
             <div class="row">
-                    <ul class="breadcrumb">
-                        <li><a href="/"><i class="fa fa-home"></i></a></li>
-                        <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
-                            <li class="active"><a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
-                        <% }else{ %>
-                            <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                            <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a></li>
-                            <% } %>
-                            <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName != null){ %>
-                            <li class="active">
-                                <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
-                            <% } %>
-                        <% } %>
-                    </ul>
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-home"></i></a></li>
+                    <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
+                    <li class="active"><a href="javascript:void(0);"><span
+                            class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
+                    <% }else{ %>
+                    <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){
+                    %>
+                    <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a>
+                    </li>
+                    <% } %>
+                    <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
+                    null){ %>
+                    <li class="active">
+                        <a href="javascript:void(0);"><span
+                                class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
+                    <% } %>
+                    <% } %>
+                </ul>
             </div>
         </div>
     </div>
@@ -51,7 +56,7 @@
                                 <span
                                         class="pe-7s-close font-size25 tag-card-close"
                                         onclick="removeFilters('<%= filtername %>')">
-                                </span >
+                                </span>
                             </span>
                         <% count = count + 1; }else { flag = 1; } }); %>
                         <% } %>
@@ -117,19 +122,19 @@
                                 <% if(subcat.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                                id="<%= subcat.id + 's_c' %>"
-                                title="<%= subcat.name %>"
-                                onclick="getSubcatId(this.id,this.title)">
+                                    id="<%= subcat.id + 's_c' %>"
+                                    title="<%= subcat.name %>"
+                                    onclick="getSubcatId(this.id,this.title)">
                                     <a>
                                         <input
-                                            type="checkbox"
-                                            class="margin-right-5"
-                                            name="subcat"
-                                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                            <% if(subcat.name == filtername){ %> checked <% } %>
-                                            <% }); %>
-                                            <% } %>>
+                                                type="checkbox"
+                                                class="margin-right-5"
+                                                name="subcat"
+                                        <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                        <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                        <% if(subcat.name == filtername){ %> checked <% } %>
+                                        <% }); %>
+                                        <% } %>>
                                         <%= subcat.name %>
                                     </a>
                                 </li>
@@ -157,9 +162,9 @@
                                 <% if(range.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                                id="<%= range.id + 'p_r' %>"
-                                title="<%= range.name %>"
-                                onclick="getPriceRangeId(this.id,this.title)">
+                                    id="<%= range.id + 'p_r' %>"
+                                    title="<%= range.name %>"
+                                    onclick="getPriceRangeId(this.id,this.title)">
                                     <a>
                                         <input
                                                 type="checkbox"
@@ -197,9 +202,9 @@
                                 <% if(style.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                                id="<%= style.id + 'sty' %>"
-                                title="<%= style.name %>"
-                                onclick="getStyleId(this.id,this.title)">
+                                    id="<%= style.id + 'sty' %>"
+                                    title="<%= style.name %>"
+                                    onclick="getStyleId(this.id,this.title)">
                                     <a>
                                         <input
                                                 type="checkbox"
@@ -233,18 +238,21 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                            <li class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc" onclick="setSorting(this.id,this.rel);">Popular</a></li>
-                            <li class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc" onclick="setSorting(this.id,this.rel);">Relevance</a></li>
-                                <li class="sort-list">
-                                    <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>" onclick="setSorting(this.id,this.rel);">
-                                        Price
-                                        <% if (filter.sortDir === 'desc') { %>
-                                        <span class="pe-7s-angle-down sort-arrow"></span>
-                                        <% } else if (filter.sortDir === 'asc') { %>
-                                        <span class="pe-7s-angle-up sort-arrow"></span>
-                                        <% } %>
-                                    </a>
-                                </li>
+                            <li class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc"
+                                                     onclick="setSorting(this.id,this.rel);">Popular</a></li>
+                            <li class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc"
+                                                     onclick="setSorting(this.id,this.rel);">Relevance</a></li>
+                            <li class="sort-list">
+                                <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>"
+                                   onclick="setSorting(this.id,this.rel);">
+                                    Price
+                                    <% if (filter.sortDir === 'desc') { %>
+                                    <span class="pe-7s-angle-down sort-arrow"></span>
+                                    <% } else if (filter.sortDir === 'asc') { %>
+                                    <span class="pe-7s-angle-up sort-arrow"></span>
+                                    <% } %>
+                                </a>
+                            </li>
                         </ul>
                     </span>
                     <span class="glyphicon glyphicon-th-list view-select border-right0"></span><%
@@ -306,8 +314,8 @@
                                 <% if(subcat.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                        id="<%= subcat.id + 's_c' + 'fil' %>"
-                        title="<%= subcat.name %>"
+                         id="<%= subcat.id + 's_c' + 'fil' %>"
+                         title="<%= subcat.name %>"
                          onclick="getFil(this.id)">
                         <label>
                             <input
@@ -334,9 +342,9 @@
                                 <% if(range.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                        id="<%= range.id + 'p_r' + 'fil' %>"
-                        title="<%= range.name %>"
-                        onclick="getFil(this.id)">
+                         id="<%= range.id + 'p_r' + 'fil' %>"
+                         title="<%= range.name %>"
+                         onclick="getFil(this.id)">
                         <label>
                             <input
                                     type="checkbox"
@@ -361,9 +369,9 @@
                                 <% if(style.name == filtername){ %> noclick <% } %>
                                 <% }); %>
                                 <% } %>"
-                        id="<%= style.id + 'sty' +'fil' %>"
-                        title="<%= style.name %>"
-                        onclick="getFil(this.id)">
+                         id="<%= style.id + 'sty' +'fil' %>"
+                         title="<%= style.name %>"
+                         onclick="getFil(this.id)">
                         <label>
                             <input
                                     type="checkbox"
@@ -395,13 +403,13 @@
             <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
             <% _.each(filter.selectedFiltersName, function(filtername){ %>
 
-                <div class="font-size14 tag-card">
-                    <span class="padding-right20"><%= filtername %></span>
+            <div class="font-size14 tag-card">
+                <span class="padding-right20"><%= filtername %></span>
                     <span
                             class="pe-7s-close font-size25 tag-card-close"
                             onclick="removeFilters('<%= filtername %>')">
-                    </span >
-                </div>
+                    </span>
+            </div>
             <% }); %>
             <% } %>
         </div>
@@ -416,23 +424,22 @@
 </section>
 
 
-
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         var offset = 200;
         var duration = 500;
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
-                $('#filter-desc-container').addClass('stick').css({'top' : '70px'});
-                $('#filter-desc').css({'padding' : '10px 0px'});
+                $('#filter-desc-container').addClass('stick').css({'top': '70px'});
+                $('#filter-desc').css({'padding': '10px 0px'});
                 $('.filter-desc-col').addClass('stick-tag');
                 $('#filter-choose-container').slideUp();
             } else {
                 $('.back-to-top').fadeOut(duration);
                 $('#filter-desc-container').removeClass('stick');
-                $('#filter-desc').css({'padding' : '20px 0px'});
+                $('#filter-desc').css({'padding': '20px 0px'});
                 $('.filter-desc-col').removeClass('stick-tag');
                 $('#filter-choose-container').removeClass('stick').slideDown();
             }
@@ -440,26 +447,26 @@
         });
 
 
-        $('.back-to-top').click(function(event) {
+        $('.back-to-top').click(function (event) {
             event.preventDefault();
             $('html, body').animate({scrollTop: 0}, duration);
             return false;
         });
 
-        $('#filter-desc-container').on('mouseenter','.stick-tag', function() {
-            $('#filter-choose-container').addClass('stick').animate({'top' : '115px'},500);
-            $('#filter-choose-container').css('display','block');
+        $('#filter-desc-container').on('mouseenter', '.stick-tag', function () {
+            $('#filter-choose-container').addClass('stick').animate({'top': '115px'}, 500);
+            $('#filter-choose-container').css('display', 'block');
         });
 
-        $('#filter-choose-container').hover(function(){
-            $(this).css('display','block');
+        $('#filter-choose-container').hover(function () {
+            $(this).css('display', 'block');
         });
 
-        $("#wish").click(function() {
-            if($(this).hasClass('glyphicon-heart')){
+        $("#wish").click(function () {
+            if ($(this).hasClass('glyphicon-heart')) {
                 $(this).removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
                 $('.super-script').hide();
-            }else{
+            } else {
                 $(this).removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
                 $('.super-script').show();
             }
@@ -471,89 +478,144 @@
         });
 
 
-        $('.filter-button').click(function() {
-            $('.filterpop').css('left','0px');
+        $('.filter-button').click(function () {
+            $('.filterpop').css('left', '0px');
         });
 
-        $('#subcatFilterDesc').css('display','block');
-        $('#priceFilterDesc').css('display','none');
-        $('#styleFilterDesc').css('display','none');
+        $('#subcatFilterDesc').css('display', 'block');
+        $('#priceFilterDesc').css('display', 'none');
+        $('#styleFilterDesc').css('display', 'none');
 
-        $('#subcatFilter').click(function() {
+        $('#subcatFilter').click(function () {
             $('#subcatFilter').addClass('active');
             $('#priceFilter').removeClass('active');
             $('#styleFilter').removeClass('active');
-            $('#subcatFilterDesc').css('display','block');
-            $('#priceFilterDesc').css('display','none');
-            $('#styleFilterDesc').css('display','none');
+            $('#subcatFilterDesc').css('display', 'block');
+            $('#priceFilterDesc').css('display', 'none');
+            $('#styleFilterDesc').css('display', 'none');
         });
 
-        $('#priceFilter').click(function() {
+        $('#priceFilter').click(function () {
             $('#subcatFilter').removeClass('active');
             $('#priceFilter').addClass('active');
             $('#styleFilter').removeClass('active');
-            $('#subcatFilterDesc').css('display','none');
-            $('#priceFilterDesc').css('display','block');
-            $('#styleFilterDesc').css('display','none');
+            $('#subcatFilterDesc').css('display', 'none');
+            $('#priceFilterDesc').css('display', 'block');
+            $('#styleFilterDesc').css('display', 'none');
         });
 
-        $('#styleFilter').click(function() {
+        $('#styleFilter').click(function () {
             $('#subcatFilter').removeClass('active');
             $('#priceFilter').removeClass('active');
             $('#styleFilter').addClass('active');
-            $('#subcatFilterDesc').css('display','none');
-            $('#priceFilterDesc').css('display','none');
-            $('#styleFilterDesc').css('display','block');
+            $('#subcatFilterDesc').css('display', 'none');
+            $('#priceFilterDesc').css('display', 'none');
+            $('#styleFilterDesc').css('display', 'block');
         });
 
-        $('.glyphicon-th').click(function() {
+        $('.glyphicon-th').click(function () {
             $(this).addClass('active');
             $('.glyphicon-th-large').removeClass('active');
             $('.glyphicon-th-list').removeClass('active');
             $('.glyphicon-th-full').removeClass('active');
-            $('.grid-view').css ('display','block');
-            $('.list-view').css('display','none');
-            $('.list-heart').css('font-size','22px');
-            $('.listli').css('padding','0px');
-            $('.share-ico-txt').css('width','85px');
-            $('.share-ico-txt a').css('padding-left','0px!important');
-            $('h4').css('font-size','15px').addClass('product-caption-overflow');
-            $('.portfolio-caption').css('height','82px');
+            $('.grid-view').css('display', 'block');
+            $('.list-view').css('display', 'none');
+            $('.list-heart').css('font-size', '22px');
+            $('.listli').css('padding', '0px');
+            $('.share-ico-txt').css('width', '85px');
+            $('.share-ico-txt a').css('padding-left', '0px!important');
+            $('h4').css('font-size', '15px').addClass('product-caption-overflow');
+            $('.portfolio-caption').css('height', '82px');
             $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');
         });
 
-        $('.glyphicon-th-large').click(function() {
+        $('.glyphicon-th-large').click(function () {
             $(this).addClass('active');
             $('.glyphicon-th').removeClass('active');
             $('.glyphicon-th-list').removeClass('active');
             $('.glyphicon-th-full').removeClass('active');
-            $('.grid-view').css ('display','block');
-            $('.list-view').css('display','none');
-            $('.listli').css('padding','10px');
-            $('h4').css('font-size','20px').removeClass('product-caption-overflow');
+            $('.grid-view').css('display', 'block');
+            $('.list-view').css('display', 'none');
+            $('.listli').css('padding', '10px');
+            $('h4').css('font-size', '20px').removeClass('product-caption-overflow');
             $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
         });
 
-        $('.glyphicon-th-list').click(function() {
+        $('.glyphicon-th-list').click(function () {
             $(this).addClass('active');
             $('.glyphicon-th-large').removeClass('active');
             $('.glyphicon-th').removeClass('active');
             $('.glyphicon-th-full').removeClass('active');
-            $('.grid-view').css ('display','none');
-            $('.list-view').css('display','block');
+            $('.grid-view').css('display', 'none');
+            $('.list-view').css('display', 'block');
             $('.col-7-img').removeClass('col-md-12').addClass('col-md-7');
-            $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5').css('padding-top','0px');
-            $('h2').css('font-size','25px');
-            $('h4').css('font-size','20px').removeClass('product-caption-overflow');
-            $('.dimsn').css('display','block');
+            $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5').css('padding-top', '0px');
+            $('h2').css('font-size', '25px');
+            $('h4').css('font-size', '20px').removeClass('product-caption-overflow');
+            $('.dimsn').css('display', 'block');
         });
 
         $('[data-toggle="tooltip"]').tooltip();
 
 
+        var meta = 'mygubbi';
+        var url = $(location).attr('href');
+
+        if (url.indexOf('/study-table') != -1) {
+            meta = 'Buy Study Table Online at the best price. Select from our wide range of latest study table designs and get it delivered at your doorstep hassle free';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/tv-unit-cabinet') != -1) {
+            meta = 'Buy customized wall entertainment units at the best possible price. Re-define your living room with our Modern TV entertainment units';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/shoe-rack') != -1) {
+            meta = 'Shop for different designs of shoe shelves and shoe racks online and organize your living space the way you want it';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/crockery-unit') != -1) {
+            meta = 'Take Your Pick from Our wide Collection of kitchen crockery cabinet designs to customize your living space to your taste';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/l-shaped-kitchen') != -1) {
+            meta = 'Choose from Our Range L shaped Kitchen Designs at the best possible price. Give your House a new look with our Customized L shaped Modular Kitchen';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/u-shaped-kitchen') != -1) {
+            meta = 'Choose from Our Range U shaped Modular Kitchen Designs at the best possible price. Add life to your living space with our Customized U shaped Kitchen Designs';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/straight-kitchen') != -1) {
+            meta = 'Take your pick from our wide range of customized kitchen interiors in staright modular kitchen. Add life to your Home with our staraight kitchen designs';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/parallel-kitchen') != -1) {
+            meta = 'Our customized kitchen interiors include a wide range of parallel kitchen cabinets and parallel kitchen designs tailored according to your needs';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/wardrobe') != -1) {
+            meta = 'Take your pick from our exclusive range of bedroom wardrobe designs specially designed to cater your Home Needs';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/side-table') != -1) {
+            meta = 'Buy Side Table Online at the best price. Select from our wide range of bedside table designs and get it delivered at your doorstep hassle free';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/book-shelf') != -1) {
+            meta = 'Buy Book Rack Online at the best price. Select from our wide range of Customized Bookshelves and Book Organizers and add Zest to your life';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/sideboard') != -1) {
+            meta = 'Buy Sideboards Online at the best price. Select from our wide range of Customized Sideboards and add Zest to your life';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/foyer-design') != -1) {
+            meta = 'Shop for different designs of foyer and shoe racks online and organize your living space the way you want it';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/bedroom') != -1) {
+            meta = 'Choose from Our Range of Modern Bedroom Designs at the best possible price. Re-define your living space with our Customized Bedroom Furniture';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/kitchen') != -1) {
+            meta = 'Choose from Our Range of Modular Kitchen Designs  at the best possible price. Re-define your living space with our Customized Kitchen cabinets';
+            $("meta[name='description']").attr("content", meta);
+        }else if (url.indexOf('/living-and-dining-room-designs') != -1) {
+            meta = 'Shop from our exclusive Range of Living Room Furniture. Add life to your living space with our customized living room interior designs';
+            $("meta[name='description']").attr("content", meta);
+        }else {
+            $("meta[name='description']").attr("content", meta);
+        }
+
     });
 
-    function closePop(){
+    function closePop() {
         $('.filterpop').css('left', '-1000px');
     }
 
@@ -563,101 +625,101 @@
     var tempArr = new Array();
     var filterNameArr = new Array();
 
-    function getSubcatId(id,title){
-        if($('#' + id).hasClass('noclick')){
+    function getSubcatId(id, title) {
+        if ($('#' + id).hasClass('noclick')) {
             removeFilters(title);
-        }else {
+        } else {
             var filterArr = filter.get('filterIds');
             var filterNameArr = filter.get('selectedFiltersName');
             var subcatIdArr = filter.get('subcatIds');
             filterArr.push(id);
             filterNameArr.push(title);
 
-            id = id.substring(0, id.length-3);
+            id = id.substring(0, id.length - 3);
             subcatIdArr.push(id);
 
-            filter.set({'filterIds':filterArr});
-            filter.set({'selectedFiltersName':filterNameArr});
-            filter.set({'subcatIds':subcatIdArr});
+            filter.set({'filterIds': filterArr});
+            filter.set({'selectedFiltersName': filterNameArr});
+            filter.set({'subcatIds': subcatIdArr});
             filter.trigger('change');
         }
     }
 
-    function getPriceRangeId(id,title){
+    function getPriceRangeId(id, title) {
 
-        if($('#' + id).hasClass('noclick')){
+        if ($('#' + id).hasClass('noclick')) {
             removeFilters(title);
-        }else {
+        } else {
             var filterArr = filter.get('filterIds');
             var filterNameArr = filter.get('selectedFiltersName');
             var price_rangeArr = filter.get('priceRangeIds');
             filterArr.push(id);
             filterNameArr.push(title);
 
-            id = id.substring(0, id.length-3);
+            id = id.substring(0, id.length - 3);
             price_rangeArr.push(id);
 
-            filter.set({'filterIds':filterArr});
-            filter.set({'selectedFiltersName':filterNameArr});
-            filter.set({'priceRangeIds':price_rangeArr});
+            filter.set({'filterIds': filterArr});
+            filter.set({'selectedFiltersName': filterNameArr});
+            filter.set({'priceRangeIds': price_rangeArr});
             filter.trigger('change');
         }
     }
 
-    function getStyleId(id,title){
+    function getStyleId(id, title) {
 
-        if($('#' + id).hasClass('noclick')){
+        if ($('#' + id).hasClass('noclick')) {
             removeFilters(title);
-        }else {
+        } else {
             var filterArr = filter.get('filterIds');
             var filterNameArr = filter.get('selectedFiltersName');
             var styleArr = filter.get('styleIds');
             filterArr.push(id);
             filterNameArr.push(title);
 
-            id = id.substring(0, id.length-3);
+            id = id.substring(0, id.length - 3);
             styleArr.push(id);
 
-            filter.set({'filterIds':filterArr});
-            filter.set({'selectedFiltersName':filterNameArr});
-            filter.set({'styleIds':styleArr});
+            filter.set({'filterIds': filterArr});
+            filter.set({'selectedFiltersName': filterNameArr});
+            filter.set({'styleIds': styleArr});
             filter.trigger('change');
         }
     }
 
-    function getFil(id){
+    function getFil(id) {
         var chk = $('#' + id).find('input[type=checkbox]').is(':checked');
         //if(chk == true){
-            id = id.substring(0, id.length-3);
-            var locate = jQuery.inArray(id,tempArr);
-            if(locate == -1){
-                tempArr.push(id);
-            }else{
-                tempArr = jQuery.grep(tempArr, function(value) {
-                    return value != id;
-                });
-            }
-       //}
+        id = id.substring(0, id.length - 3);
+        var locate = jQuery.inArray(id, tempArr);
+        if (locate == -1) {
+            tempArr.push(id);
+        } else {
+            tempArr = jQuery.grep(tempArr, function (value) {
+                return value != id;
+            });
+        }
+        //}
     }
 
-    function applyFilters(){
-        $.each(tempArr, function(i, id) {
+    function applyFilters() {
+        $.each(tempArr, function (i, id) {
 
             var title = $('#' + id).attr('title');
-            var substring = id.substring(id.length-3, id.length);
+            var substring = id.substring(id.length - 3, id.length);
             id = id.substring(0, id.length);
 
-            if(substring == 's_c'){
-                getSubcatId(id,title);
-            }else if(substring == 'p_r'){
-                getPriceRangeId(id,title);
-            }else{
-                getStyleId(id,title);
+            if (substring == 's_c') {
+                getSubcatId(id, title);
+            } else if (substring == 'p_r') {
+                getPriceRangeId(id, title);
+            } else {
+                getStyleId(id, title);
             }
         });
     }
 
-    function removeFilters(filtername){
+    function removeFilters(filtername) {
         var filternameArr = filter.get('selectedFiltersName');
         var filterIdArr = filter.get('filterIds');
 
@@ -666,47 +728,47 @@
         var removeFilterId = $('[title="' + filtername + '"]').attr('id');
         var removeFilterTitle = $('[title="' + filtername + '"]').attr('title')
 
-        var substring = removeFilterId.substring(removeFilterId.length-3, removeFilterId.length);
-        removeFilterId = removeFilterId.substring(0, removeFilterId.length-3);
+        var substring = removeFilterId.substring(removeFilterId.length - 3, removeFilterId.length);
+        removeFilterId = removeFilterId.substring(0, removeFilterId.length - 3);
 
-        if(index > -1){
-            filterIdArr.splice(index,1);
-            filternameArr.splice(index,1);
-            filter.set({'filterIds':filterIdArr});
-            filter.set({'selectedFiltersName':filternameArr});
+        if (index > -1) {
+            filterIdArr.splice(index, 1);
+            filternameArr.splice(index, 1);
+            filter.set({'filterIds': filterIdArr});
+            filter.set({'selectedFiltersName': filternameArr});
 
-            if((filterIdArr.length == 0) && (filternameArr.length == 0)){
+            if ((filterIdArr.length == 0) && (filternameArr.length == 0)) {
                 var subcatIdArr = filter.get('subcatIds');
-                subcatIdArr.splice(index,1);
-                filter.set({'subcatIds':subcatIdArr});
+                subcatIdArr.splice(index, 1);
+                filter.set({'subcatIds': subcatIdArr});
             }
 
-            if(substring == 's_c'){
+            if (substring == 's_c') {
 
                 var subcatIdArr = filter.get('subcatIds');
                 var subcatIndex = subcatIdArr.indexOf(removeFilterId);
-                if(subcatIndex > -1){
-                    subcatIdArr.splice(subcatIndex,1);
+                if (subcatIndex > -1) {
+                    subcatIdArr.splice(subcatIndex, 1);
                 }
-                filter.set({'subcatIds':subcatIdArr});
+                filter.set({'subcatIds': subcatIdArr});
 
-            }else if(substring == 'p_r'){
+            } else if (substring == 'p_r') {
 
                 var price_rangeArr = filter.get('priceRangeIds');
                 var price_rangeIndex = price_rangeArr.indexOf(removeFilterId);
-                if(price_rangeIndex > -1){
-                    price_rangeArr.splice(price_rangeIndex,1);
+                if (price_rangeIndex > -1) {
+                    price_rangeArr.splice(price_rangeIndex, 1);
                 }
-                filter.set({'priceRangeIds':price_rangeArr});
+                filter.set({'priceRangeIds': price_rangeArr});
 
-            }else {
+            } else {
 
                 var styleArr = filter.get('styleIds');
                 var styleIndex = styleArr.indexOf(removeFilterId);
-                if(styleIndex > -1){
-                    styleArr.splice(styleIndex,1);
+                if (styleIndex > -1) {
+                    styleArr.splice(styleIndex, 1);
                 }
-                filter.set({'styleIds':styleArr});
+                filter.set({'styleIds': styleArr});
 
             }
 
@@ -714,81 +776,81 @@
         }
     }
 
-    function removeAllFilters(){
+    function removeAllFilters() {
         var filternameArr = filter.get('selectedFiltersName');
         var filterIdArr = filter.get('filterIds');
         var subcatIdArr = filter.get('subcatIds');
         var price_rangeArr = filter.get('priceRangeIds');
         var styleArr = filter.get('styleIds');
 
-        filternameArr.splice(0,filternameArr.length);
-        filterIdArr.splice(0,filterIdArr.length);
-        subcatIdArr.splice(0,subcatIdArr.length);
-        price_rangeArr.splice(0,price_rangeArr.length);
-        styleArr.splice(0,styleArr.length);
+        filternameArr.splice(0, filternameArr.length);
+        filterIdArr.splice(0, filterIdArr.length);
+        subcatIdArr.splice(0, subcatIdArr.length);
+        price_rangeArr.splice(0, price_rangeArr.length);
+        styleArr.splice(0, styleArr.length);
 
-        filter.set({'filterIds':filterIdArr});
-        filter.set({'selectedFiltersName':filternameArr});
-        filter.set({'subcatIds':subcatIdArr});
-        filter.set({'priceRangeIds':price_rangeArr});
-        filter.set({'styleIds':styleArr});
+        filter.set({'filterIds': filterIdArr});
+        filter.set({'selectedFiltersName': filternameArr});
+        filter.set({'subcatIds': subcatIdArr});
+        filter.set({'priceRangeIds': price_rangeArr});
+        filter.set({'styleIds': styleArr});
 
-        filter.set({'noFilterApplied':'1'});
+        filter.set({'noFilterApplied': '1'});
 
         filter.trigger('change');
     }
 
-    function setSorting(sortBy,sortDir){
+    function setSorting(sortBy, sortDir) {
         //alert(sortBy+" ========== "+sortDir);
-        if(sortBy && sortDir){
-            if(sortBy == 'defaultPrice'){
-                if(sortDir == 'desc'){
+        if (sortBy && sortDir) {
+            if (sortBy == 'defaultPrice') {
+                if (sortDir == 'desc') {
                     sortDir = 'asc';
-                }else{
+                } else {
                     sortDir = 'desc';
                 }
             }
-            filter.set({'sortDir':sortDir});
-            filter.set({'sortBy':sortBy});
+            filter.set({'sortDir': sortDir});
+            filter.set({'sortBy': sortBy});
             filter.trigger('change');
         }
     }
 </script>
 <script>
-//    $(function() {
-//        //alert(filter.get('minPrice')+" ======== "+filter.get('maxPrice'));
-//        if(filter.get('minPrice') || filter.get('maxPrice')){
-//            var mnprc = filter.get('minPrice');
-//            var mxprc = filter.get('maxPrice');
-//        }else{
-//            var mnprc = filter.get('minPriceLimit');
-//            var mxprc = filter.get('maxPriceLimit');
-//        }
-//
-//        $( "#slider-range" ).slider({
-//            range: true,
-//            min: filter.get('minPriceLimit'),
-//            max: filter.get('maxPriceLimit'),
-//            values: [ mnprc, mxprc ],
-//            slide: function( event, ui ) {
-//                $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-//            }
-//        });
-//
-//        $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
-//                " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
-//
-//        $( "#slider-range" ).mouseleave(function() {
-//            //alert($( "#slider-range" ).slider( "values", 0 ) + '-----------' + $( "#slider-range" ).slider( "values", 1 ));
-//
-//            filter.set('minPrice',$( "#slider-range" ).slider( "values", 0 ));
-//            filter.set('maxPrice',$( "#slider-range" ).slider( "values", 1 ));
-//        });
-//    });
-//    function removePrice(){
-//        filter.set('minPrice',filter.get('minPriceLimit'));
-//        filter.set('maxPrice',filter.get('maxPriceLimit'));
-//    }
+    //    $(function() {
+    //        //alert(filter.get('minPrice')+" ======== "+filter.get('maxPrice'));
+    //        if(filter.get('minPrice') || filter.get('maxPrice')){
+    //            var mnprc = filter.get('minPrice');
+    //            var mxprc = filter.get('maxPrice');
+    //        }else{
+    //            var mnprc = filter.get('minPriceLimit');
+    //            var mxprc = filter.get('maxPriceLimit');
+    //        }
+    //
+    //        $( "#slider-range" ).slider({
+    //            range: true,
+    //            min: filter.get('minPriceLimit'),
+    //            max: filter.get('maxPriceLimit'),
+    //            values: [ mnprc, mxprc ],
+    //            slide: function( event, ui ) {
+    //                $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+    //            }
+    //        });
+    //
+    //        $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
+    //                " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
+    //
+    //        $( "#slider-range" ).mouseleave(function() {
+    //            //alert($( "#slider-range" ).slider( "values", 0 ) + '-----------' + $( "#slider-range" ).slider( "values", 1 ));
+    //
+    //            filter.set('minPrice',$( "#slider-range" ).slider( "values", 0 ));
+    //            filter.set('maxPrice',$( "#slider-range" ).slider( "values", 1 ));
+    //        });
+    //    });
+    //    function removePrice(){
+    //        filter.set('minPrice',filter.get('minPriceLimit'));
+    //        filter.set('maxPrice',filter.get('maxPriceLimit'));
+    //    }
 
 </script>
 

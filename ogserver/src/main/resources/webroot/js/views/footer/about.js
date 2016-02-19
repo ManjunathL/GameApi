@@ -7,7 +7,7 @@ define([
     var AboutView = Backbone.View.extend({
         el: '.page',
         render: function() {
-            $(this.el).html(aboutTemplate);
+            $(this.el).html(_.template(aboutTemplate));
         }
     });
     return AboutView;

@@ -32,14 +32,14 @@
                             <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
                                 <% var share_url = restBase + '/product-'+ product.productId %>
                                     <span><a href="javascript:void(0);"
-                                             onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
+                                             onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
                                     <span><a href="javascript:void(0);"
-                                             onclick="window.open('http://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
+                                             onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
                                     <span><a href="javascript:void(0);"
-                                             onclick="window.open('http://plus.google.com/share?url=<%=share_url%>', '', 'width=585,height=368')"
-                                             class="share-popup11"><i class="fa fa-google-plus-square"></i></a></span>
+                                             onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
                             </div>
                         </a>
                     </div>
@@ -50,7 +50,7 @@
         <div class="col-md-5 col-5-txt margin15-0">
             <div class="col-md-12 padding0 margin-bottom20">
                         <span>
-                            <a href="#" class="list-heading-col5">
+                            <a href="/product-<%= product.productId %>" class="list-heading-col5">
                                 <h2><%= product.name %></h2>
                             </a>
                         </span>
@@ -117,14 +117,14 @@
                                 <div id="grid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
                                     <% var share_url = restBase + '/product-'+ product.productId %>
                                     <span><a href="javascript:void(0);"
-                                             onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
+                                             onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
                                     <span><a href="javascript:void(0);"
-                                             onclick="window.open('http://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
+                                             onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
                                     <span><a href="javascript:void(0);"
-                                             onclick="window.open('http://plus.google.com/share?url=<%=share_url%>', '', 'width=585,height=368')"
-                                             class="share-popup11"><i class="fa fa-google-plus-square"></i></a></span>
+                                             onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
                                 </div>
                             </a>
                         </div>
@@ -133,7 +133,11 @@
 
                 <div class="portfolio-caption-bg-gray margin0">
                     <div class="row">
-                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0"><%= product.name %></h4>
+                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0">
+                            <a href="/product-<%= product.productId %>">
+                                <%= product.name %>
+                            </a>
+                        </h4>
                         <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
                             <% if (product.defaultPrice !== 0) { %>
                             <i class="fa fa-inr"></i>
@@ -150,18 +154,3 @@
 
     <% }); %>
 </div>
-<!--<script type="text/javascript">var switchTo5x=true;</script>-->
-<!--<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>-->
-<!--<script type="text/javascript">stLight.options({publisher: "aba548ff-354e-46c2-a33a-7d4ed3fba8c0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>-->
-
-<script>
-    $(document).ready(function () {
-        $('.fa-inr').click(function () {
-            var fontsize = $('.fa-inr').parent().css('font-size');
-            alert(fontsize);
-            fontsize = fontsize - 2;
-            $('.fa-inr').css('font-size', fontsize);
-        });
-
-    });
-</script>

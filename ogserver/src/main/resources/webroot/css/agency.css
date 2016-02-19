@@ -187,15 +187,12 @@ h6 {
     margin: 0 auto;
 }
 
-.bg-white {
-    background-color: #ffffff;
-    -webkit-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+.bg-none {
+    background: none !important;
 }
 
-.portfolio-bg-gray {
-    background-color: #fcfcfc;
+.bg-white {
+    background-color: #ffffff;
     -webkit-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
@@ -216,6 +213,15 @@ h6 {
 .bg-darkest-gray {
     background-color: #222;
 }
+
+.portfolio-bg-gray {
+    background-color: #fcfcfc;
+    -webkit-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ---- ThankYou ---- */
 
 .thankyou {
     text-align: center;
@@ -252,6 +258,8 @@ h6 {
         margin-bottom: 20px;
     }
 }
+
+/* ---- ThankYou End ---- */
 
 /* ---- Collage ---- */
 .heading-center-notransform {
@@ -451,6 +459,43 @@ h6 {
 
 /* ---- Experience Center Carousel End ----*/
 
+/* ---- About Us ---- */
+
+.img_overlay_txt {
+    background: rgba(0,0,0,0.2);
+    color: #ffffff;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
+    padding: 4%;
+}
+
+.img_overlay_txt p {
+    font-size: 15px;
+    line-height: 2;
+    text-align: justify;
+}
+
+@media (max-width: 767px) {
+    .img_overlay_txt {
+        background: none;
+        color: #000;
+        position: relative;
+    }
+}
+
+/* ---- About Us End ---- */
+
+/* ---- FAQs ---- */
+
+.ans {
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 10px 0px inset;
+}
+
+/* ---- FAQs End ---- */
 
 
 .btn-primary {
@@ -1048,6 +1093,10 @@ button {
     width: 65%;
 }
 
+.width5 {
+    width: 5%;
+}
+
 .display-none {
     display: none;
 }
@@ -1073,7 +1122,7 @@ button {
 }
 
 .align-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .align-right {
@@ -1142,6 +1191,14 @@ button {
 
 .left-none {
     left: auto !important;
+}
+
+.left1per {
+    left: 1%;
+}
+
+.right1per {
+    right: 1%;
 }
 
 .right10per {
@@ -1555,6 +1612,10 @@ input[type=checkbox] {
     -o-transition: all .5s ease-in-out;
 }
 
+.contact-us-pop a {
+    color: #fff;
+}
+
 .contact-us-side {
     position: relative;
     width: 150px;
@@ -1884,6 +1945,12 @@ a.button-orange:hover {
     height: 10%;
     opacity: 0.2;
     margin: 100% 0px;
+}
+
+.arr_abt {
+    height: 15%;
+    opacity: 0.8;
+    margin: 155% 0px;
 }
 
 .filters {
@@ -2957,22 +3024,6 @@ ul.social-buttons li a:active {
 .portfolio-modal .modal-backdrop {
     display: none;
     opacity: 0;
-}
-
-::-moz-selection {
-    text-shadow: none;
-}
-
-::selection {
-    text-shadow: none;
-}
-
-img::selection {
-    background: 0 0;
-}
-
-img::-moz-selection {
-    background: 0 0;
 }
 
 body {
