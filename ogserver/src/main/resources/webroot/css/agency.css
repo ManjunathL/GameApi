@@ -1603,6 +1603,10 @@ input[type=checkbox] {
     -o-transition: all .5s ease-in-out;
 }
 
+.contact-us-pop a {
+    color: #fff;
+}
+
 .contact-us-side {
     position: relative;
     width: 150px;
