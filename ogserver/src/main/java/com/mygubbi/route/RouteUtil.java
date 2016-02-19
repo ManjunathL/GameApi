@@ -5,9 +5,9 @@ import com.mygubbi.common.VertxInstance;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.shaded.apache.http.HttpStatus;
 
 /**
  * Created by nitinpuri on 02-02-2016.

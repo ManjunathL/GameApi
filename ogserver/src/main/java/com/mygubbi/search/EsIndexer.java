@@ -10,15 +10,21 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Handler;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.index.IndexResponse;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class EsIndexer
 {
     private final static Logger LOG = LogManager.getLogger(EsIndexer.class);
     private static final String PRODUCT_INDEX_TYPE = "product";
+
+    private volatile int recordsToIndex = 0;
+    private volatile int recordsIndexed = 0;
 
     public static void main(String[] args)
     {
@@ -28,7 +34,7 @@ public class EsIndexer
         }
         else
         {
-            new EsIndexer().startServices("config/conf.es.json");
+            new EsIndexer().startServices("config/es.json");
         }
     }
 
@@ -48,22 +54,7 @@ public class EsIndexer
                 System.exit(1);
             }
         });
-/*        VertxInstance.get().setTimer(5000, new Handler<Long>()
-        {
-            @Override
-            public void handle(Long event)
-            {
-                String searchQueryJson = ConfigHolder.getInstance().config().getJsonObject("searchQueryJson").toString().replaceAll("__TERM", "Albatross");
-                Integer id = LocalCache.getInstance().store(new SearchQueryData(SearchService.INDEX_NAME, new JsonObject(searchQueryJson), PRODUCT_INDEX_TYPE));
-                VertxInstance.get().eventBus().send(SearchService.SEARCH, id,
-                        (AsyncResult<Message<Integer>> selectResult) -> {
-                            SearchQueryData selectData = (SearchQueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                            System.out.println(selectData.getResult());
-                        });
-
-            }
-        });
-*/    }
+    }
 
     private void createIndexForProducts()
     {
@@ -96,9 +87,16 @@ public class EsIndexer
                     }
                     else
                     {
-                        for (Object jsonData : selectData.getJsonDataRows("productJson"))
+                        JsonArray jsonDataRows = selectData.getJsonDataRows("productJson");
+                        if (jsonDataRows.isEmpty())
                         {
-                            //LOG.info("Doc :" + jsonData.toString());
+                            LOG.info("No records to index, bringing down server.");
+                            System.exit(-1);
+                        }
+
+                        recordsToIndex = jsonDataRows.size();
+                        for (Object jsonData : jsonDataRows)
+                        {
                             this.indexProduct((JsonObject) jsonData);
                         }
                     }
@@ -120,6 +118,13 @@ public class EsIndexer
                     else
                     {
                         LOG.info("Product indexed:" + indexData.getId());
+                    }
+
+                    recordsIndexed++;
+                    if (recordsToIndex == recordsIndexed)
+                    {
+                        LOG.info("All records processed, bringing down server.");
+                        System.exit(-1);
                     }
                 });
 
