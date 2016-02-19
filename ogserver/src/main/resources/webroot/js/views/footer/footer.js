@@ -52,10 +52,18 @@ define([
         subscribe: function() {
             var email = $('#subscribe-email').val();
             if (email) {
-                MGF.subscribeUser(email);
-                $('#subscribe-msg').show();
-                $('#subscribe-msg').html('<i>Thanks for subscribing.</i>');
-                $('#subscribe-email').val('');
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var check =  emailReg.test( email );
+                if(check){
+                    MGF.subscribeUser(email);
+                    $('#subscribe-msg').show();
+                    $('#subscribe-msg').html('<i>Thanks for subscribing.</i>');
+                    $('#subscribe-email').val('');
+
+                }else {
+                    $('#subscribe-msg').show();
+                    $('#subscribe-msg').html('<i><span class="error-class">Please enter valid email.</span></i>');
+                }
             }
         },
         events: {
