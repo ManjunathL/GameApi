@@ -30,7 +30,7 @@
                             <span id="share-ico<%=product.productId%>" class="glyph fa fa-share listshare"></span>
 
                             <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                <% var share_url = restBase + '/product-'+ product.productId %>
+                                <% var share_url = window.location.protocol + '//' + window.location.host + '/product-' + product.productId %>
                                     <span><a href="javascript:void(0);"
                                              onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
@@ -115,7 +115,7 @@
                                 <span id="share-grid-ico<%=product.productId%>" class="glyph fa fa-share gridshare"></span>
 
                                 <div id="grid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                    <% var share_url = restBase + '/product-'+ product.productId %>
+                                    <% var share_url = window.location.protocol + '//' + window.location.host + '/product-'+ product.productId %>
                                     <span><a href="javascript:void(0);"
                                              onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>

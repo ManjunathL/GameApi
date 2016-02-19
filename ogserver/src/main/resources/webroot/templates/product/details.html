@@ -72,7 +72,7 @@
                 </div>
                 <div class="padding20_0_10_0 margin_auto"><%= product.desc %></div>
                 <div class="padding20_0_10_0 margin_auto social-share-buttons" style="text-align:left; font-size:40px; padding-left:12px;">
-                    <% var share_url = restBase + '/product-'+ product.productId %>
+                    <% var share_url = window.location.protocol + '//' + window.location.host + '/product-'+ product.productId %>
                     <span><a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square" style="color:#433892"></i></a></span>
                     <span><a href="javascript:void(0);" onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square" style="color:#3492E2"></i></a></span>
                     <span><a data-pin-do="buttonPin" href="javascript:void(0);" onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')" data-pin-color="red"><i class="fa fa-pinterest-square" style="color:#C90101"></i></a></span>
