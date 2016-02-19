@@ -25,6 +25,9 @@ public class FileCatalogManager
     private String uploadFile;
     private String configFiles;
 
+    private volatile int recordsToLoad = 0;
+    private volatile int recordsLoaded = 0;
+
     public static void main(String[] args)
     {
         if (args.length == 3)
@@ -108,6 +111,13 @@ public class FileCatalogManager
                 System.exit(1);
             }
             JsonArray productsJson = new JsonArray(fileResult.result().toString());
+            if (productsJson.isEmpty())
+            {
+                LOG.info("No records to load, bringing down server.");
+                System.exit(-1);
+            }
+            recordsToLoad = productsJson.size();
+
             for (Object productText : productsJson)
             {
                 ProductJson productJson = new ProductJson((JsonObject) productText);
@@ -122,6 +132,14 @@ public class FileCatalogManager
                             {
                                 LOG.info(result.result());
                             }
+
+                            recordsLoaded++;
+                            if (recordsToLoad == recordsLoaded)
+                            {
+                                LOG.info("All records processed, bringing down server.");
+                                System.exit(-1);
+                            }
+
                         });
 
             }
