@@ -64,6 +64,9 @@ define([
                     $('#subscribe-msg').show();
                     $('#subscribe-msg').html('<i><span class="error-class">Please enter valid email.</span></i>');
                 }
+            }else {
+                $('#subscribe-msg').show();
+                $('#subscribe-msg').html('<i><span class="error-class">Please enter your email.</span></i>');
             }
         },
         events: {

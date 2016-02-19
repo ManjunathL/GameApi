@@ -9,7 +9,7 @@ define([
         ready: function() {
             $('img').each(function() {
                 if(!($(this).hasClass('img-responsive'))){
-                    if(!($(this).hasClass('userpop_user_img'))){
+                    if(!($(this).hasClass('non_resp_img'))){
                         $(this).addClass('img-responsive');
                     }
                 }
