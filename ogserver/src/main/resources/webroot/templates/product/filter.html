@@ -1,4 +1,6 @@
-<div class="row list-view">
+<div class="row list-view" style="display:block;">
+    <% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == "largelist")){ %>
+
     <% if(typeof(collection) !== 'undefined'){ %>
     <% _.each(collection, function(product){ %>
 
@@ -82,13 +84,16 @@
 
     <% }); %>
     <% } %>
+    <% } %>
 
 </div>
-<div class="row grid-view">
+
+<div class="row grid-view" style="display:block;">
+    <% if(typeof(filter.get('viewtype')) !== 'undefined' && ((filter.get('viewtype') == "largegrid") || (filter.get('viewtype') == "shortgrid"))){ %>
     <% _.each(collection, function(product){ %>
 
     <div class="portfolio">
-        <div class="col-md-6 col-sm-6 portfolio-item">
+        <div class="<% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == 'shortgrid')){ %>col-md-4 col-sm-4<% }else{ %>col-md-6 col-sm-6<% } %> portfolio-item">
             <div class="portfolio-box overflow-hidden">
                 <div class="row margin0 position-relative">
                     <a href="/product-<%= product.productId %>" class="portfolio-link">
@@ -153,4 +158,5 @@
     </div>
 
     <% }); %>
+    <% } %>
 </div>
