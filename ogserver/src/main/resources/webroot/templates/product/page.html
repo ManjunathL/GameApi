@@ -85,8 +85,16 @@
 
                 <div class="hidden-lg hidden-md col-sm-2 hidden-xs">
                     <div class="row slight-up">
-                        <span class="glyphicon glyphicon-th-list view-select border-right0"></span><%
-                        %><span class="glyphicon glyphicon-th-large view-select active"></span>
+                        <span class="glyphicon glyphicon-th-list view-select border-right0
+                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
+                        active
+                        <% } %>"
+                        ></span><%
+                        %><span class="glyphicon glyphicon-th-large view-select
+                        <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
+                        active
+                        <% } %>"
+                        ></span>
                     </div>
                 </div>
 
@@ -255,9 +263,21 @@
                             </li>
                         </ul>
                     </span>
-                    <span class="glyphicon glyphicon-th-list view-select border-right0"></span><%
-                    %><span class="glyphicon glyphicon-th-large view-select border-right0 active"></span><%
-                    %><span class="glyphicon glyphicon-th view-select"></span>
+                    <span class="glyphicon glyphicon-th-list view-select border-right0
+                        <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
+                        active
+                        <% } %>"
+                    ></span><%
+                    %><span class="glyphicon glyphicon-th-large view-select border-right0
+                        <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
+                        active
+                        <% } %>"
+                    ></span><%
+                    %><span class="glyphicon glyphicon-th view-select
+                        <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'shortgrid')){ %>
+                        active
+                        <% } %>"
+                    ></span>
                 </div>
             </div>
 
@@ -513,48 +533,6 @@
             $('#styleFilterDesc').css('display', 'block');
         });
 
-        $('.glyphicon-th').click(function () {
-            $(this).addClass('active');
-            $('.glyphicon-th-large').removeClass('active');
-            $('.glyphicon-th-list').removeClass('active');
-            $('.glyphicon-th-full').removeClass('active');
-            $('.grid-view').css('display', 'block');
-            $('.list-view').css('display', 'none');
-            $('.list-heart').css('font-size', '22px');
-            $('.listli').css('padding', '0px');
-            $('.share-ico-txt').css('width', '85px');
-            $('.share-ico-txt a').css('padding-left', '0px!important');
-            $('h4').css('font-size', '15px').addClass('product-caption-overflow');
-            $('.portfolio-caption').css('height', '82px');
-            $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');
-        });
-
-        $('.glyphicon-th-large').click(function () {
-            $(this).addClass('active');
-            $('.glyphicon-th').removeClass('active');
-            $('.glyphicon-th-list').removeClass('active');
-            $('.glyphicon-th-full').removeClass('active');
-            $('.grid-view').css('display', 'block');
-            $('.list-view').css('display', 'none');
-            $('.listli').css('padding', '10px');
-            $('h4').css('font-size', '20px').removeClass('product-caption-overflow');
-            $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
-        });
-
-        $('.glyphicon-th-list').click(function () {
-            $(this).addClass('active');
-            $('.glyphicon-th-large').removeClass('active');
-            $('.glyphicon-th').removeClass('active');
-            $('.glyphicon-th-full').removeClass('active');
-            $('.grid-view').css('display', 'none');
-            $('.list-view').css('display', 'block');
-            $('.col-7-img').removeClass('col-md-12').addClass('col-md-7');
-            $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5').css('padding-top', '0px');
-            $('h2').css('font-size', '25px');
-            $('h4').css('font-size', '20px').removeClass('product-caption-overflow');
-            $('.dimsn').css('display', 'block');
-        });
-
         $('[data-toggle="tooltip"]').tooltip();
 
 
@@ -801,7 +779,6 @@
     }
 
     function setSorting(sortBy, sortDir) {
-        //alert(sortBy+" ========== "+sortDir);
         if (sortBy && sortDir) {
             if (sortBy == 'defaultPrice') {
                 if (sortDir == 'desc') {
@@ -816,51 +793,3 @@
         }
     }
 </script>
-<script>
-    //    $(function() {
-    //        //alert(filter.get('minPrice')+" ======== "+filter.get('maxPrice'));
-    //        if(filter.get('minPrice') || filter.get('maxPrice')){
-    //            var mnprc = filter.get('minPrice');
-    //            var mxprc = filter.get('maxPrice');
-    //        }else{
-    //            var mnprc = filter.get('minPriceLimit');
-    //            var mxprc = filter.get('maxPriceLimit');
-    //        }
-    //
-    //        $( "#slider-range" ).slider({
-    //            range: true,
-    //            min: filter.get('minPriceLimit'),
-    //            max: filter.get('maxPriceLimit'),
-    //            values: [ mnprc, mxprc ],
-    //            slide: function( event, ui ) {
-    //                $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-    //            }
-    //        });
-    //
-    //        $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
-    //                " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
-    //
-    //        $( "#slider-range" ).mouseleave(function() {
-    //            //alert($( "#slider-range" ).slider( "values", 0 ) + '-----------' + $( "#slider-range" ).slider( "values", 1 ));
-    //
-    //            filter.set('minPrice',$( "#slider-range" ).slider( "values", 0 ));
-    //            filter.set('maxPrice',$( "#slider-range" ).slider( "values", 1 ));
-    //        });
-    //    });
-    //    function removePrice(){
-    //        filter.set('minPrice',filter.get('minPriceLimit'));
-    //        filter.set('maxPrice',filter.get('maxPriceLimit'));
-    //    }
-
-</script>
-
-<!--Facebook share code-->
-
-<!--<div id="fb-root"></div>-->
-<!--<script>(function(d, s, id) {-->
-<!--var js, fjs = d.getElementsByTagName(s)[0];-->
-<!--if (d.getElementById(id)) return;-->
-<!--js = d.createElement(s); js.id = id;-->
-<!--js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1393442277626447";-->
-<!--fjs.parentNode.insertBefore(js, fjs);-->
-<!--}(document, 'script', 'facebook-jssdk'));</script>-->

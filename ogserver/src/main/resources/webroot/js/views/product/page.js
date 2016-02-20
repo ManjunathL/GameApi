@@ -61,6 +61,14 @@ define([
                 silent: true
             });
 
+            if (!(that.filter.get('viewtype'))) {
+                that.filter.set({
+                    'viewtype': 'largegrid'
+                }, {
+                    silent: true
+                });
+            }
+
             var subCategory = '';
 
             var selectedSubCategoriesList = {};
@@ -278,6 +286,13 @@ define([
 
             var that = this;
 
+            if (typeof(that.filter.get('viewtype')) !== 'undefined') {
+                that.filter.set({
+                    'viewtype': that.filter.get('viewtype')
+                }, {
+                    silent: true
+                });
+            }
             if (typeof(that.filter.get('selectedSubCategoriesList')) !== 'undefined') {
                 var selectedSubCategoriesList = that.filter.get('selectedSubCategoriesList');
                 that.filter.set({
@@ -409,7 +424,10 @@ define([
         events: {
             "click .shortlistable-item": "toggleShortListItem",
             "click .listshare": "toggleShareIcons",
-            "click .gridshare": "toggleGridShareIcons"
+            "click .gridshare": "toggleGridShareIcons",
+            "click .glyphicon-th": "viewShortGridItem",
+            "click .glyphicon-th-large": "viewLargeGridItem",
+            "click .glyphicon-th-list": "viewListItem"
         },
         toggleShortListItem: function(e) {
 
@@ -457,7 +475,60 @@ define([
             var shareicoId = currentTarget.attr('id');
             var productId = shareicoId.replace('share-grid-ico','');
             $('#grid-share-txt'+productId).toggle();
+        },
+        viewShortGridItem: function(e){
+            var that = this;
+            if (typeof(that.filter.get('viewtype')) !== 'undefined') {
+                that.filter.set({
+                    'viewtype': 'shortgrid'
+                });
+            }
+            $(e.currentTarget).addClass('active');
+            $('.glyphicon-th-large').removeClass('active');
+            $('.glyphicon-th-list').removeClass('active');
+            $('.glyphicon-th-full').removeClass('active');
+            $('.list-heart').css('font-size', '22px');
+            $('.listli').css('padding', '0px');
+            $('.share-ico-txt').css('width', '85px');
+            $('.share-ico-txt a').css('padding-left', '0px!important');
+            $('h4').css('font-size', '15px').addClass('product-caption-overflow');
+            $('.portfolio-caption').css('height', '82px');
+            $('.portfolio-item').removeClass('col-md-6').addClass('col-md-4');
+        },
+        viewLargeGridItem: function(e){
+            var that = this;
+            if (typeof(that.filter.get('viewtype')) !== 'undefined') {
+                that.filter.set({
+                    'viewtype': 'largegrid'
+                });
+            }
+            $(e.currentTarget).addClass('active');
+            $('.glyphicon-th').removeClass('active');
+            $('.glyphicon-th-list').removeClass('active');
+            $('.glyphicon-th-full').removeClass('active');
+            $('.listli').css('padding', '10px');
+            $('h4').css('font-size', '20px').removeClass('product-caption-overflow');
+            $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
+        },
+        viewListItem: function(e){
+            var that = this;
+            if (typeof(that.filter.get('viewtype')) !== 'undefined') {
+                that.filter.set({
+                    'viewtype': 'largelist'
+                });
+            }
+
+            $(e.currentTarget).addClass('active');
+            $('.glyphicon-th-large').removeClass('active');
+            $('.glyphicon-th').removeClass('active');
+            $('.glyphicon-th-full').removeClass('active');
+            $('.col-7-img').removeClass('col-md-12').addClass('col-md-7');
+            $('.col-5-txt').removeClass('col-md-12').addClass('col-md-5').css('padding-top', '0px');
+            $('h2').css('font-size', '25px');
+            $('h4').css('font-size', '20px').removeClass('product-caption-overflow');
+            $('.dimsn').css('display', 'block');
         }
+
     });
     return ProductPage;
 });
