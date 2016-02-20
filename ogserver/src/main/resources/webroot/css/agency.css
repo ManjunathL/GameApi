@@ -1922,6 +1922,7 @@ a.button-orange:hover {
 .tag-card-close {
     position: absolute;
     right: 5px;
+    top: 1px;
     color: #f1591f;
 }
 
