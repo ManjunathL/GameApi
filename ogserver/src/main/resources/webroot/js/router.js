@@ -42,7 +42,7 @@ define([
             'mygubbi-difference(/)': 'mygubbidiff',
             'stories(/)': 'stories',
             'story-:name(/)': 'story',
-            'thankyou(/)':'thankyou'
+            'thankyou-:page(/)':'thankyou'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';

@@ -21,6 +21,8 @@
   "apicache" : true,
   "shopifyredirect": true,
 
-  "staticConfigPath": "config/prod/prod.config.js"
+  "staticConfigPath": "config/prod/prod.config.js",
+
+  "robots.txt": ""
 
 }

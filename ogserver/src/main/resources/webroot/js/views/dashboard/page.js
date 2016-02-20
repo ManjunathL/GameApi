@@ -5,8 +5,9 @@ define([
     'bootstrap',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
+    '/js/analytics.js',
     'text!/templates/dashboard/page.html'
-], function($, _, Backbone, Bootstrap, MGF, ConsultUtil, dashboardPageTemplate){
+], function($, _, Backbone, Bootstrap, MGF, ConsultUtil, Analytics, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -22,6 +23,7 @@ define([
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
             _.bindAll(this, 'renderWithUserProfCallback');
         },
         submit: function(e) {
@@ -37,9 +39,10 @@ define([
 
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
-            $('#banner_contactForm').hide('slow');
-            $('#banner_success-msg').show('slow');
-            $('#banner_success-msg-padding').show('slow');
+            window.App.router.navigate('/thankyou-contact-banner', {
+                trigger: true
+            });
+
         },
         events: {
             "submit #banner_contactForm": "submit"

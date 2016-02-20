@@ -6,11 +6,15 @@ define([
     'underscore',
     'backbone',
     '/js/models/story.js',
+    '/js/analytics.js',
     'text!/templates/story/stories.html'
-], function($, _, Backbone, Story, storiesTemplate) {
+], function($, _, Backbone, Story, Analytics, storiesTemplate) {
     var StoriesView = Backbone.View.extend({
         el: '.page',
         story: new Story(),
+        initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
+        },
         render: function() {
 
             var that = this;

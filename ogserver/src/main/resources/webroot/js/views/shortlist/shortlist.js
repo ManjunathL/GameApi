@@ -6,12 +6,14 @@ define([
     'text!/templates/shortlist/shortlist.html',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
+    '/js/analytics.js',
     '/js/views/view_manager.js',
     'css!/css/shortlist.css'
-], function($, _, Backbone, Bootstrap, shortlistTemplate, MGF, ConsultUtil, VM) {
+], function($, _, Backbone, Bootstrap, shortlistTemplate, MGF, ConsultUtil, Analytics, VM) {
     var ShortlistView = Backbone.View.extend({
         el: '.page',
         initialize: function() {
+            Analytics.apply(Analytics.TYPE_GENERAL);
             this.ref = MGF.rootRef;
             this.listenTo(Backbone, 'user.change', this.render);
             _.bindAll(this, 'render', 'renderWithUserProfCallback');
@@ -85,14 +87,16 @@ define([
             var propertyName = $('#consult_property_name' + formid).val();
             var query = $('#consult_product_name' + formid).val() + " :: " + $('#consult_requirement' + formid).val();
             var floorplan = $("#consult_floorplan" + formid).prop('files')[0];
-            //console.log(name+' ----- '+email+' ----- '+phone+' ----- '+query+' ----- '+floorplan+' ----- '+propertyName);
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
-            $('#consultForm' + formid).hide(100, function() {
-                $('#consult-success-msg' + formid).show(0, function() {
-                    $('#consult-success-msg-padding' + formid).show(0, function() {});
-                });
+            $('#consultpop' + formid).modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+
+            window.App.router.navigate('/thankyou-shortlist-product', {
+                trigger: true
             });
+
         },
          toggleGridShareIcons: function(e){
              e.preventDefault();

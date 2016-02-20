@@ -17,5 +17,8 @@
   "apicache" : true,
   "shopifyredirect": true,
 
-  "staticConfigPath": "config/test/uat.config.js"
+  "staticConfigPath": "config/test/uat.config.js",
+
+  "robots.txt": "User-agent: *\nDisallow: /"
+
 }

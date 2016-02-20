@@ -8,9 +8,10 @@ define([
     'bootstrap',
     'bootstrapvalidator',
     '/js/mgfirebase.js',
+    '/js/analytics.js',
     'text!/templates/user_profile/user_profile.html',
     '/js/views/view_manager.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, UserProfileTemplate, VM) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, UserProfileTemplate, VM) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -26,6 +27,7 @@ define([
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function () {
+            Analytics.apply(Analytics.TYPE_GENERAL);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit');
         },
