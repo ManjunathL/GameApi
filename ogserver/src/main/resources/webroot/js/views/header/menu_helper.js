@@ -619,15 +619,6 @@ define([
                 });
 
 
-                $(window).scroll(function() {
-                    var duration = 500;
-                    if ($(this).scrollTop() > 200) {
-                        $('#tawkchat-iframe-container').fadeIn(duration);
-                    } else {
-                        $('#tawkchat-iframe-container').fadeOut(duration);
-                    }
-                });
-
                 $(function() {
                     var navMain = $("#bs-example-navbar-collapse-1");
                     var subMenuUL = $(".dropdown-menu");
@@ -670,8 +661,6 @@ define([
                 $(window).resize(that.positionSideContact);
 
                 that.positionSideContact();
-
-                $('#tawkchat-iframe-container').hide();
 
                 $(document).on("click", null, function(e) {
                     var contactpopup = $("#contactuspop");
