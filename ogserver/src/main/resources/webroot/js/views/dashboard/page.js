@@ -3,11 +3,12 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
+    'cloudinary_jquery',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
     '/js/analytics.js',
     'text!/templates/dashboard/page.html'
-], function($, _, Backbone, Bootstrap, MGF, ConsultUtil, Analytics, dashboardPageTemplate){
+], function($, _, Backbone, Bootstrap, CloudinaryJquery, MGF, ConsultUtil, Analytics, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -16,6 +17,7 @@ define([
             $(this.el).html(_.template(dashboardPageTemplate)({
               'userProfile': userProfData
             }));
+            $.cloudinary.responsive();
         },
 
         render: function() {
@@ -24,6 +26,7 @@ define([
         },
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
+            $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
         },
         submit: function(e) {

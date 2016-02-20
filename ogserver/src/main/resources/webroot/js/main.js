@@ -10,6 +10,7 @@ require.config({
     bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
     bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
     firebase: 'libs/firebase/firebase',
+    cloudinary_jquery: 'libs/cloudinary-jquery/cloudinary-jquery.min',
     templates: '../templates'
   },
   shim: {
@@ -30,6 +31,10 @@ require.config({
     'firebase': {
         deps: ['jquery'],
         exports: 'firebase'
+    },
+    'cloudinary_jquery': {
+        deps: ['jquery'],
+        exports: 'cloudinary-jquery'
     }
   },
   map: {
