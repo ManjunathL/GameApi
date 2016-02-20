@@ -505,35 +505,49 @@ define([
                     if ($.inArray(selectedapplianceId, appliances) == -1) {
                         appliances.push(selectedapplianceId);
 
-                        /*if(this.custom_product.get('basePrice') !== 'undefined'){
+                        if(this.custom_product.get('basePrice') !== 'undefined'){
                             var defaultBaseprice = this.custom_product.get('basePrice');
-                            if (defaultBaseprice.indexOf(',') > -1) {
+                            if ((typeof(defaultBaseprice) === 'string') && defaultBaseprice.indexOf(',') > -1) {
                                 defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
+                            }else{
+                                defaultBaseprice=defaultBaseprice;
                             }
-                            if(selectedappliancePrice.indexOf(',') > -1){
+                            if((typeof(selectedappliancePrice) === 'string') && selectedappliancePrice.indexOf(',') > -1){
                                 selectedappliancePrice=selectedappliancePrice.replace(/\,/g,'');
+                            }else{
+                                selectedappliancePrice=selectedappliancePrice;
                             }
                             var basePrice = parseInt(defaultBaseprice) + parseInt(selectedappliancePrice);
                             this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
-                        }*/
+                        }
                     } else {
                         appliances.splice($.inArray(selectedapplianceId, appliances), 1);
-                        /*if(this.custom_product.get('basePrice') !== 'undefined'){
+                        if(this.custom_product.get('basePrice') !== 'undefined'){
                             var defaultBaseprice = this.custom_product.get('basePrice');
-                            if (defaultBaseprice.indexOf(',') > -1) {
+                            if ((typeof(defaultBaseprice) === 'string') && defaultBaseprice.indexOf(',') > -1) {
                                 defaultBaseprice=defaultBaseprice.replace(/\,/g,'');
+                            }else{
+                                defaultBaseprice=defaultBaseprice;
                             }
-                            if(selectedappliancePrice.indexOf(',') > -1){
+                            if((typeof(selectedappliancePrice) === 'string') && selectedappliancePrice.indexOf(',') > -1){
                                 selectedappliancePrice=selectedappliancePrice.replace(/\,/g,'');
+                            }else{
+                                selectedappliancePrice=selectedappliancePrice;
                             }
                             var basePrice = parseInt(defaultBaseprice) - parseInt(selectedappliancePrice);
                             this.custom_product.set({'basePrice':basePrice.toLocaleString()},{silent: true});
 
-                        }*/
+                        }
                     }
                 }
             });
-            //            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
+            if (this.custom_product.get('basePrice') !== 0) {
+                var basePricetxt = this.custom_product.get('basePrice');
+            } else {
+                var basePricetxt = "Consult for Price";
+            }
+            $('#defaultbaseprice').html(basePricetxt);
+//            $('#defaultbaseprice').html(this.custom_product.get('basePrice'));
             if (this.custom_product.get('selectedAppliances') !== 'undefined') {
                 this.custom_product.set({
                     'selectedAppliances': appliances

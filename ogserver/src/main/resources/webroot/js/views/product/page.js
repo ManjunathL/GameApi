@@ -293,7 +293,6 @@ define([
                     silent: true
                 });
             }
-console.log("11111111111111111"+that.filter.get('viewtype'));
             if (typeof(that.filter.get('selectedSubCategoriesList')) !== 'undefined') {
                 var selectedSubCategoriesList = that.filter.get('selectedSubCategoriesList');
                 that.filter.set({
