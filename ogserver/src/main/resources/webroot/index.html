@@ -13,8 +13,6 @@
 
     <title>mygubbi</title>
 
-    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-
     <link rel="icon" type="image/png" href="/img/favicon.ico">
 
     <!-- Bootstrap Core CSS -->
@@ -80,7 +78,15 @@ s.parentNode.insertBefore(con, s);
 <script>
     window.oncontextmenu = function () {
         return false;
+    };
+
+    if (appendRobotsNoFollow) {
+        var meta = document.createElement('meta');
+        meta.name = "ROBOTS";
+        meta.content = "NOINDEX, NOFOLLOW";
+        document.getElementsByTagName('head')[0].appendChild(meta);
     }
+
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion_async.js" charset="utf-8"></script>
 </body>
