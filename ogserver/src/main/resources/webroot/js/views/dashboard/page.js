@@ -39,9 +39,10 @@ define([
 
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
-            $('#banner_contactForm').hide('slow');
-            $('#banner_success-msg').show('slow');
-            $('#banner_success-msg-padding').show('slow');
+            window.App.router.navigate('/thankyou-contact-banner', {
+                trigger: true
+            });
+
         },
         events: {
             "submit #banner_contactForm": "submit"

@@ -39,10 +39,10 @@ define([
 
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
-            $('#form-heading').hide('slow');
-            $('#contactForm1').hide('slow');
-            $('#success-message').show('slow');
-            $('#message-padding').show('slow');
+            window.App.router.navigate('/thankyou-consult-page', {
+                trigger: true
+            });
+
         },
         events: {
             "submit": "submit"
