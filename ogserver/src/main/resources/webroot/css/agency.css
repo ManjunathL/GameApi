@@ -4296,3 +4296,12 @@ a.tab-ico {
       -webkit-transition: color 0.3s, opacity 0.2s;
       transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
+
+.mg-carousel > .item {
+    display: block !important;
+    height: 0 !important;
+}
+
+.mg-carousel > .active {
+    height: auto !important;
+}
