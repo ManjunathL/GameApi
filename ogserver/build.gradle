@@ -13,6 +13,7 @@ version = '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
+import org.apache.tools.ant.taskdefs.condition.Os
 
 // In this section you declare where to find the dependencies of your project
 repositories
@@ -31,8 +32,14 @@ if (!JavaVersion.current().java8Compatible) {
 
 task gulp(type: Exec) {
 
-    executable "cmd"
-    args "/c", "run_gulp.bat"
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        executable "cmd"
+        args "/c", "run_gulp.bat"
+    } else {
+        executable "bash"
+        args "run_gulp"
+    }
+
     standardOutput = new ByteArrayOutputStream()
     ext.output = {
         return standardOutput.toString()
