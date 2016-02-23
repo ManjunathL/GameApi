@@ -15,6 +15,7 @@ define(function() {
         FAQ: "faq",
         MGDIFF: "mgdiff",
         THANKYOU: "thankyou",
+        LANDINGPAGE: "landingpage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

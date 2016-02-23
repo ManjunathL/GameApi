@@ -42,7 +42,8 @@ define([
             'mygubbi-difference(/)': 'mygubbidiff',
             'stories(/)': 'stories',
             'story-:name(/)': 'story',
-            'thankyou-:page(/)':'thankyou'
+            'thankyou-:page(/)':'thankyou',
+            'lp(/)':'landingpage'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -320,6 +321,12 @@ define([
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/thankyou/thankyou.js'], function(ThankYouPage) {
                 VM.create(VM.THANKYOU, ThankYouPage).render();
+            });
+        });
+        router.on('route:landingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/landing_page.js'], function(LandingPage) {
+                VM.create(VM.LANDINGPAGE, LandingPage).render();
             });
         });
         router.on('route', function () {

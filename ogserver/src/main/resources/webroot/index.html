@@ -36,15 +36,14 @@
     <![endif]-->
     <script src="/js/config.js"> </script>
     <script>
-          if (applyAnalytics) {
-              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-              ga('create', 'UA-64197768-1', 'auto');
-              ga('send', 'pageview');
-          }
+        if (applyAnalytics) {
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-64197768-1', 'auto');
+            ga('send', 'pageview');
+        }
     </script>
     <script src="//dmc1acwvwny3.cloudfront.net/atatus.js"> </script>
     <script>
@@ -61,17 +60,15 @@
 <div class="container-fluid"></div>
 
 <script type="text/javascript" async>
-var _TConnecto = _TConnecto || {};
-_TConnecto.licenseKey = 'SN3BTWB1R9WIWCXT';
-
-(function() {
-var con = document.createElement('script'); con.type = 'text/javascript';
-var host = (document.location.protocol === 'http:') ? 'http://cdn' : 'https://server';
-con.src = host + '.connecto.io/javascripts/connect.prod.min.js';
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(con, s);
-})();
-
+    var _TConnecto = _TConnecto || {};
+    _TConnecto.licenseKey = 'SN3BTWB1R9WIWCXT';
+    (function() {
+        var con = document.createElement('script'); con.type = 'text/javascript';
+        var host = (document.location.protocol === 'http:') ? 'http://cdn' : 'https://server';
+        con.src = host + '.connecto.io/javascripts/connect.prod.min.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(con, s);
+    })();
 </script>
 
 
@@ -79,14 +76,12 @@ s.parentNode.insertBefore(con, s);
     window.oncontextmenu = function () {
         return false;
     };
-
     if (appendRobotsNoFollow) {
         var meta = document.createElement('meta');
         meta.name = "ROBOTS";
         meta.content = "NOINDEX, NOFOLLOW";
         document.getElementsByTagName('head')[0].appendChild(meta);
     }
-
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion_async.js" charset="utf-8"></script>
 </body>
