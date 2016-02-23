@@ -14,8 +14,9 @@ define([
     '/js/models/filterMaster.js',
     '/js/mgfirebase.js',
     '/js/analytics.js',
+    '/js/category_content.js',
     '/js/views/view_manager.js'
-], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF, Analytics, VM) {
+], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF, Analytics, CategoryContent, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         products: null,
@@ -40,6 +41,7 @@ define([
             window.filter = that.filter;
 
             var selectedSubCategories = that.model.selectedSubCategories;
+            var selectedCategories = that.model.selectedCategories;
 
             that.filter.set({
                 'selectedCategoryName':that.model.selectedCategories
@@ -81,6 +83,12 @@ define([
             Promise.all([getFilterMasterPromise, getCategoriesPromise, getProductsPromise]).then(function() {
                 that.markShortlisted();
                 that.productFilter();
+
+                var categ = selectedSubCategories;
+                if (categ === undefined || categ === '' || categ === null) {
+                    categ = selectedCategories;
+                }
+                CategoryContent.apply(categ);
 
             }).catch(function(err) {
             	console.log('Catch: ', err);

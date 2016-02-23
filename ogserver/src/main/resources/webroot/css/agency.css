@@ -1232,6 +1232,9 @@ button {
 .padding15 {
     padding: 15px !important;
 }
+.padding30 {
+    padding: 30px !important;
+}
 
 .padding0-10 {
     padding: 0px 10px;
@@ -4304,4 +4307,12 @@ a.tab-ico {
 
 .mg-carousel > .active {
     height: auto !important;
+}
+
+.category-details p{
+    font-size:12px!important;
+}
+
+.category-details{
+    color:#555;
 }
