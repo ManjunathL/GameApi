@@ -23,7 +23,7 @@ define([
                 'shortlistedItems': MGF.getShortListedItems(),
                 'userProfile': userProfData
             }));
-            if(typeof(userProfData) !== 'undefined'){
+            if(typeof(userProfData) !== 'undefined' && typeof(userProfData.displayName) !== 'undefined'){
                 document.title = userProfData.displayName + '\'s Shortlist | mygubbi';
             }else{
                 document.title = 'Shortlisted products for easy and fast access | mygubbi';
