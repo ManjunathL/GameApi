@@ -36,9 +36,9 @@ define([
             var email = $('#contact_email_id1').val();
             var phone = $('#contact_contact_num1').val();
 
-            ConsultUtil.submit(name, email, phone);
+            ConsultUtil.submit(name, email, phone, "", "", null);
 
-            window.App.router.navigate('/thankyou-consult-page', {
+            window.App.router.navigate('/thankyou-lp-page', {
                 trigger: true
             });
 
@@ -56,7 +56,7 @@ define([
 
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
-            window.App.router.navigate('/thankyou-consult-page', {
+            window.App.router.navigate('/thankyou-lp-page', {
                 trigger: true
             });
 
