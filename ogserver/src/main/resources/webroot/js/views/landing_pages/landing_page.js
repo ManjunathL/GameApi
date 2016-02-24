@@ -64,8 +64,8 @@ define([
 
         },
         events: {
-            "submit #contactForm1": "submit_form1",
-            "submit #contactForm2": "submit_form2"
+            "submit #contactLpForm1": "submit_form1",
+            "submit #contactLpForm2": "submit_form2"
 
         }
     });
