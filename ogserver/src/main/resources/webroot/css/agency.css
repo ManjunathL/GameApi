@@ -2,16 +2,13 @@
     .carousel-indicators {
         bottom: 70px;
     }
-
     .carousel-inner {
         margin-top: 70px !important;
     }
-
     .menu-right {
         margin-right: 22% !important;
         float: right;
     }
-
     .product-caption {
         font-size: 22px;
     }
@@ -21,75 +18,63 @@
     .carousel-inner {
         margin-top: 84px !important;
     }
-
     .menu-icon {
         left: auto !important;
         right: 20px;
     }
-
     .all {
         text-align: left !important;
         margin-left: 10px !important;
     }
-
     .allhr {
         width: 97% !important;
     }
-
     .super-script {
         right: 72px !important;
     }
-
     .shortlist-remove {
         left: 65% !important;
         margin-top: 1px !important;
     }
-
     .burger-logo {
         height: 34px;
     }
-
     .footer-bg {
         bottom: 0px;
     }
-
     .design-count {
         font-size: 18px !important;
     }
-
     .list-button-strip {
         font-size: 14px !important;
     }
-
     .list-heart {
         font-size: 22px !important;
         padding: 10px 0px !important;
     }
-
     .listli {
         padding: 0px !important;
     }
-
     .glyph {
         height: 30px !important;
         width: 30px !important;
     }
-
     .portfolio .portfolio-item .portfolio-caption h4 {
         font-size: 15px !important;
     }
-
     .portfolio .portfolio-item .portfolio-caption h3 {
         font-size: 14px !important;
     }
-
     #filter-desc {
         padding: 20px 0px !important;
     }
-
     .product-caption {
         font-size: 16px;
     }
+    .banner-btn {
+        bottom: 80px !important;
+    }
+
 }
 
 @media (max-width: 767px) {
@@ -97,10 +82,15 @@
         float: left !important;
         display: inline-block;
     }
-
     .overflowHeight {
         overflow-y: auto;
         height: 100%
+    }
+    .banner-btn {
+        bottom: 60px !important;
+        width: 100px !important;
+        padding: 8px;
+        font-size: 12px !important;
     }
 }
 
@@ -108,8 +98,7 @@
     margin-top: 70px;
 }
 
-.overflowHeight {
-}
+.overflowHeight {}
 
 .color-ul {
     padding-left: 0px;
@@ -254,6 +243,7 @@ h6 {
     box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
 }
 
+
 /* ---- ThankYou ---- */
 
 .thankyou {
@@ -285,16 +275,18 @@ h6 {
     .thankyou_add {
         margin-bottom: 20px;
     }
-
     .thankyou_sm {
         height: 100px;
         margin-bottom: 20px;
     }
 }
 
+
 /* ---- ThankYou End ---- */
 
+
 /* ---- Collage ---- */
+
 .heading-center-notransform {
     text-align: center;
     text-transform: none;
@@ -303,7 +295,6 @@ h6 {
 .mycol0 {
     position: relative;
     min-height: 1px;
-
 }
 
 .mycol {
@@ -312,7 +303,6 @@ h6 {
     padding-right: 0.90929%;
     padding-left: 0.90929%;
     min-height: 1px;
-
 }
 
 .mycol-left {
@@ -320,7 +310,6 @@ h6 {
     float: left;
     padding-right: 0.90929%;
     min-height: 1px;
-
 }
 
 .mycol-right {
@@ -372,8 +361,7 @@ h6 {
     margin-top: 11%;
 }
 
-.margin-small-viewport {
-}
+.margin-small-viewport {}
 
 .img-wrapper {
     overflow: hidden;
@@ -390,43 +378,43 @@ h6 {
 
 .img-wrapper img:hover {
     transform: scale(1.05);
-    -ms-transform: scale(1.05); /* IE 9 */
-    -moz-transform: scale(1.05); /* Firefox */
-    -webkit-transform: scale(1.05); /* Safari and Chrome */
-    -o-transform: scale(1.05); /* Opera */
+    -ms-transform: scale(1.05);
+    /* IE 9 */
+    -moz-transform: scale(1.05);
+    /* Firefox */
+    -webkit-transform: scale(1.05);
+    /* Safari and Chrome */
+    -o-transform: scale(1.05);
+    /* Opera */
 }
 
 @media (max-width: 767px) {
-
     .margin-small-viewport {
         margin-top: 4.70132%;
     }
-
     .collage-large-col {
         width: 100%;
     }
-
     .collage-small-col {
         width: 100%;
     }
-
     .mycol {
         padding-right: 2%;
         padding-left: 2%;
     }
-
     .mycol-left {
         padding-right: 2%;
         padding-left: 2%;
     }
-
     .mycol-right {
         padding-right: 2%;
         padding-left: 2%;
     }
 }
 
+
 /* ---- Collage End ---- */
+
 
 /* ---- Experience Center Carousel ----*/
 
@@ -486,13 +474,14 @@ h6 {
         left: 5%;
         width: 90%;
     }
-
     .exp_center_border {
         margin: auto 5px !important;
     }
 }
 
+
 /* ---- Experience Center Carousel End ----*/
+
 
 /* ---- About Us ---- */
 
@@ -521,7 +510,9 @@ h6 {
     }
 }
 
+
 /* ---- About Us End ---- */
+
 
 /* ---- FAQs ---- */
 
@@ -530,7 +521,9 @@ h6 {
     box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 10px 0px inset;
 }
 
+
 /* ---- FAQs End ---- */
+
 
 /* ---- Landing Page ---- */
 
@@ -638,10 +631,10 @@ ul.social-links {
     .carousel-form-box {
         position: relative;
         width: 90%;
-        margin-top: 72px;
         left: 4%;
     }
 }
+
 
 /* ---- Landing Page End  ---- */
 
@@ -1044,12 +1037,10 @@ button {
     .user_right_col {
         min-height: 270px;
     }
-
     .edit_icon,
     .edit_icon:active {
         font-size: 16px;
     }
-
     .user_profile p {
         font-size: 16px;
     }
@@ -1059,7 +1050,6 @@ button {
     .user_profile_id {
         position: static;
     }
-
     .user_right_col {
         min-height: 300px;
     }
@@ -1310,8 +1300,12 @@ button {
     font-size: 12px !important;
 }
 
+.font-size14 {
+    font-size: 14px !important;
+}
+
 .font-size16 {
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 .font-size18 {
@@ -1397,6 +1391,7 @@ button {
 .padding15 {
     padding: 15px !important;
 }
+
 .padding30 {
     padding: 30px !important;
 }
@@ -1698,21 +1693,17 @@ input[type=checkbox] {
     section h2.section-heading {
         font-size: 30px !important;
     }
-
     #layout-view {
         display: none;
     }
-
     .search_suggest {
         width: 90%;
         left: 5%;
         top: 30%;
     }
-
     .search_input {
         font-size: 28px;
     }
-
     .search_info {
         margin-top: 15%;
     }
@@ -2837,8 +2828,8 @@ a.button-orange:hover {
     .timeline-image {
         width: 100px;
     }
-
-    .timeline > li.timeline-inverted > .timeline-panel, .timeline > li .timeline-panel {
+    .timeline > li.timeline-inverted > .timeline-panel,
+    .timeline > li .timeline-panel {
         padding: 0px 20px 0 115px;
     }
 }
@@ -2847,32 +2838,27 @@ a.button-orange:hover {
     .timeline:before {
         left: 50%;
     }
-
     .timeline > li {
         margin-bottom: 50px;
         min-height: 100px;
     }
-
     .timeline > li .timeline-panel {
         float: left;
         width: 41%;
         padding: 0 20px 20px 30px;
         text-align: right;
     }
-
     .timeline > li .timeline-image {
         left: 50%;
         width: 100px;
         height: 100px;
         margin-left: -50px;
     }
-
     .timeline > li .timeline-image h4 {
         margin-top: 16px;
         font-size: 13px;
         line-height: 18px;
     }
-
     .timeline > li.timeline-inverted > .timeline-panel {
         float: right;
         padding: 0 30px 20px 20px;
@@ -2884,23 +2870,19 @@ a.button-orange:hover {
     .timeline > li {
         min-height: 150px;
     }
-
     .timeline > li .timeline-panel {
         padding: 0 20px 20px;
     }
-
     .timeline > li .timeline-image {
         width: 150px;
         height: 150px;
         margin-left: -75px;
     }
-
     .timeline > li .timeline-image h4 {
         margin-top: 30px;
         font-size: 18px;
         line-height: 26px;
     }
-
     .timeline > li.timeline-inverted > .timeline-panel {
         padding: 0 20px 20px;
     }
@@ -2910,21 +2892,17 @@ a.button-orange:hover {
     .timeline > li {
         min-height: 170px;
     }
-
     .timeline > li .timeline-panel {
         padding: 48px 20px 20px 100px;
     }
-
     .timeline > li .timeline-image {
         width: 200px;
         height: 200px;
         margin-left: -85px;
     }
-
     .timeline > li .timeline-image h4 {
         margin-top: 40px;
     }
-
     .timeline > li.timeline-inverted > .timeline-panel {
         padding: 48px 100px 20px 20px;
     }
@@ -3240,6 +3218,7 @@ body {
     top: 80px;
 }
 
+
 /* Changes done by Smruti */
 
 .portfolio-item {
@@ -3392,6 +3371,7 @@ hr {
     overflow: auto;
 }
 
+
 /* media query for mobile */
 
 @media (max-width: 767px) {
@@ -3486,7 +3466,7 @@ hr {
 
 .other-accs-options a img {
     max-width: 100%;
-/ / width : 100 %;
+    / / width: 100 %;
     height: auto;
     position: relative;
     z-index: 1;
@@ -3497,6 +3477,7 @@ hr {
     /* margin-top:5%;*/
     margin-left: 1%;
 }
+
 
 /* color section */
 
@@ -3591,47 +3572,69 @@ hr {
     text-align: center;
 }
 
+
 /* Filter section design */
+
 
 /*#filter-section{*/
 
+
 /*padding:0px 10px 20px 20px;*/
 
+
 /*}*/
+
 
 /*#filter-section #filter-inside .filter-group {*/
 
+
 /*padding-left: 15px;*/
+
 
 /*// border-bottom: 1px solid #ccc;*/
 
+
 /*}*/
+
 
 /*#filter-section #filter-inside .filter-group .filter-list {*/
 
+
 /*padding: 15px 0px;*/
 
+
 /*}*/
+
 
 /*#filter-inside .filter-list .btn:hover {*/
 
+
 /*font-weight: 600;*/
+
 
 /*color:#000;*/
 
+
 /*}*/
+
 
 /*#filter-section #filter-inside .filter-group .fname {*/
 
+
 /*padding: 15px 0px;*/
+
 
 /*text-transform: uppercase;*/
 
+
 /*color: #777;*/
+
 
 /*height: 40px;*/
 
+
 /*line-height: 40px;*/
+
 
 /*}*/
 
@@ -3801,6 +3804,7 @@ hr {
     background-color: #F1591F !important;
     color: #fff !important;
 }
+
 
 /*.nav-tabs > li.active > a:hover:before {
     visibility: hidden;
@@ -4034,6 +4038,7 @@ a.tab-ico {
     border-top: 0px solid #F1591F;
 }
 
+
 /*.finish-overlap{
     float: left !important;
     margin-left: 1%;
@@ -4069,24 +4074,19 @@ a.tab-ico {
     .relcontrol {
         margin-top: 70px !important;
     }
-
     #customproduct > li {
         width: 25% !important;
     }
-
     .pgrightspace {
         padding-right: 0px;
     }
-
     .pgleftspace {
         padding-left: 0px;
         padding-top: 20px;
     }
-
     .component-boxes {
         padding-top: 10px !important;
     }
-
     .sb-search {
         right: 4% !important;
         width: 79% !important;
@@ -4097,42 +4097,35 @@ a.tab-ico {
     .relcontrol {
         margin-top: 70px !important;
     }
-
     .delvimg {
         width: 100%;
     }
-
     .dwf {
         width: 100%;
         margin-top: 2%;
     }
-
     #customproduct > li {
         width: 90% !important;
     }
-
     .pgrightspace {
         padding-right: 0px;
     }
-
     .pgleftspace {
         padding-left: 0px;
         padding-top: 20px;
     }
-
     .sb-search {
         right: 4% !important;
         width: 79% !important;
     }
-
     .share-ico-txt {
         width: 115px !important;
     }
-
     .share-ico-txt a {
         padding-left: 10px !important;
     }
 }
+
 
 /* Breadcrumb */
 
@@ -4244,10 +4237,15 @@ a.tab-ico {
     position: absolute;
 }
 
+
 /* The responsive part */
+
+
 /*.breadcrumb > *:nth-child(n+2) {
   display:none;
 }*/
+
+
 /*.breadcrumb > * > li {
     white-space: nowrap;
     overflow: hidden;
@@ -4262,19 +4260,22 @@ a.tab-ico {
     text-overflow: ellipsis;
 }
 
+
 /* === For phones =================================== */
+
 @media (max-width: 767px) {
     .breadcrumb > *:nth-last-child(1) {
         display: block;
     }
-
     .breadcrumb {
         width: 95%;
         margin-left: 10px;
     }
 }
 
+
 /* === For tablets ================================== */
+
 @media (min-width: 768px) and (max-width: 991px) {
     /*.breadcrumb > *:nth-last-child(-n+2) {
         display:block;
@@ -4284,12 +4285,13 @@ a.tab-ico {
     }
 }
 
+
 /* === For desktops ================================== */
+
 @media (min-width: 992px) {
     .breadcrumb > *:nth-child(n+2) {
         display: block;
     }
-
     .breadcrumb {
         width: 100%;
         margin-left: 10px;
@@ -4380,7 +4382,6 @@ a.tab-ico {
         margin: 72px auto 10px;
         width: 90%;
     }
-
     .consult-margin {
         margin-left: -15px !important;
         margin-right: -15px !important;
@@ -4429,7 +4430,9 @@ a.tab-ico {
     display: inline-block;
 }
 
+
 /* Flip Container for Consult Page */
+
 .flip-container {
     -webkit-perspective: 1000;
     perspective: 1000;
@@ -4505,11 +4508,27 @@ a.tab-ico {
     height: auto !important;
 }
 
-
-.category-details p{
-    font-size:12px!important;
+.category-details p {
+    font-size: 12px!important;
 }
 
-.category-details{
-    color:#555;
+.category-details {
+    color: #555;
+}
+
+.banner-btn {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    right: 0;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #f1591f;
+    color: #fff;
+    padding: 8px;
+    font-size: 18px;
+    border-radius: 4%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

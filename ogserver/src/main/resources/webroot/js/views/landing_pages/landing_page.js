@@ -9,7 +9,8 @@ define([
     'cloudinary_jquery',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
-], function($, _, Backbone, landingPageTemplate, CloudinaryJquery, MGF, ConsultUtil) {
+    '/js/analytics.js'
+], function($, _, Backbone, landingPageTemplate, CloudinaryJquery, MGF, ConsultUtil, Analytics) {
     var LandingPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
@@ -25,6 +26,7 @@ define([
         },
         initialize: function() {
             this.ref = MGF.rootRef;
+            Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
         },
@@ -36,9 +38,9 @@ define([
             var email = $('#contact_email_id1').val();
             var phone = $('#contact_contact_num1').val();
 
-            ConsultUtil.submit(name, email, phone);
+            ConsultUtil.submit(name, email, phone, "", "", null);
 
-            window.App.router.navigate('/thankyou-consult-page', {
+            window.App.router.navigate('/thankyou-lp-page', {
                 trigger: true
             });
 
@@ -56,14 +58,14 @@ define([
 
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
 
-            window.App.router.navigate('/thankyou-consult-page', {
+            window.App.router.navigate('/thankyou-lp-page', {
                 trigger: true
             });
 
         },
         events: {
-            "submit #contactForm1": "submit_form1",
-            "submit #contactForm2": "submit_form2"
+            "submit #contactLpForm1": "submit_form1",
+            "submit #contactLpForm2": "submit_form2"
 
         }
     });
