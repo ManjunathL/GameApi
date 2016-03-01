@@ -23,6 +23,30 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            this.ready();
+        },
+        ready: function () {
+            var that = this;
+            (function() {
+                var v = document.getElementsByClassName("youtube-player");
+                for (var n = 0; n < v.length; n++) {
+                    var p = document.createElement("div");
+                    p.innerHTML = that.labnolThumb(v[n].dataset.id);
+                    p.onclick = that.labnolIframe;
+                    v[n].appendChild(p);
+                }
+            })();
+        },
+        labnolThumb: function (id) {
+            return '<img class="youtube-thumb" src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';
+        },
+        labnolIframe: function () {
+            var that = this;
+            var iframe = document.createElement("iframe");
+            iframe.setAttribute("src", "https://www.youtube.com/embed/" + that.parentNode.dataset.id + "?rel=0");
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("id", "youtube-iframe");
+            that.parentNode.replaceChild(iframe, that);
         },
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
