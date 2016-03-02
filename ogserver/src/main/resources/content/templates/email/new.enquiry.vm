@@ -1,0 +1,31 @@
+<html>
+
+<body>
+<h2>Enquiry #$vdata.id</h2>
+<br/><br/>
+
+<h3><u>Details</u></h3>
+<br/><br/>
+
+<b>Name:</b> $vdata.fullName
+<br/><br/>
+
+<b>EMail:</b> $vdata.email
+<br/><br/>
+
+<b>Contact number:</b> $vdata.contactNumber
+<br/><br/>
+
+<b>Property:</b> $vdata.propertyName
+<br/><br/>
+
+<b>Requirements:</b> $vdata.requirements
+<br/><br/>
+
+<b>User id:</b> $vdata.uid
+<br/><br/>
+
+<span> Please contact IT support if there is any issue with this enquiry.</span>
+
+</body>
+</html>
