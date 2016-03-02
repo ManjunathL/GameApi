@@ -1629,6 +1629,10 @@ button {
     margin: auto !important;
 }
 
+.margin35_auto {
+    margin: 35px auto !important;
+}
+
 .margin0 {
     margin: 0px !important;
 }
