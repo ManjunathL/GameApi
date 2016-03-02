@@ -73,7 +73,7 @@ public class EmailService extends AbstractVerticle
             LOG.info("Message sent status: " + response.toString());
             message.reply("Ok");
         }
-        catch (SendGridException e)
+        catch (Exception e)
         {
             LOG.error("Error in sending email : " + emailData.toString(), e);
             message.fail(0, "Could not send email. " + e.getMessage());

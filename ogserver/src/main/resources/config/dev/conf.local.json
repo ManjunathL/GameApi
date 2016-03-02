@@ -15,5 +15,7 @@
   },
 
   "apicache" : true,
-  "shopifyredirect": true
+  "shopifyredirect": true,
+  "enquirymailto" : "noob@nomansland.xyz"
+
 }
