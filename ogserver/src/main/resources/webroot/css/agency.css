@@ -736,6 +736,28 @@ div.play-button {
 
 /* ---- Youtube Video End ---- */
 
+/* ---- Testimonial ---- */
+
+
+.text-sly-content {
+    display: inline-block;
+    width: 250px !important;
+    height: 215px !important;
+    text-align: justify;
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    vertical-align: middle;
+}
+
+.arr_test {
+    height: 35px;
+    opacity: 1;
+}
+
+/* ---- Testimonial End ---- */
+
+
 .btn-primary {
     border-color: #f1591f;
     text-transform: uppercase;
@@ -1673,6 +1695,14 @@ button {
     margin-top: 0px !important;
 }
 
+.margin-top5 {
+    margin-top: 5px;
+}
+
+.margin-top8 {
+    margin-top: 8px;
+}
+
 .margin-top10 {
     margin-top: 10px !important;
 }
@@ -1693,12 +1723,8 @@ button {
     margin-top: 70px;
 }
 
-.margin-top5 {
-    margin-top: 5px;
-}
-
-.margin-top8 {
-    margin-top: 8px;
+.margin-top85 {
+    margin-top: 85px !important;
 }
 
 .margin-top5per {
@@ -2840,7 +2866,6 @@ a.button-orange:hover {
 }
 
 .timeline:before {
-    content: "";
     position: absolute;
     top: 0;
     bottom: 0;

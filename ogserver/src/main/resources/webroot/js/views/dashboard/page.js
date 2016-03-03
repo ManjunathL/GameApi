@@ -4,11 +4,12 @@ define([
     'backbone',
     'bootstrap',
     'cloudinary_jquery',
+    '/js/slyutil.js',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
     '/js/analytics.js',
     'text!/templates/dashboard/page.html'
-], function($, _, Backbone, Bootstrap, CloudinaryJquery, MGF, ConsultUtil, Analytics, dashboardPageTemplate){
+], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -36,6 +37,11 @@ define([
                     v[n].appendChild(p);
                 }
             })();
+            if ($('#hmalt-frame').length > 0) {
+                var $hmalt_frame = $('#hmalt-frame');
+                var $hmalt_wrap = $hmalt_frame.parent().parent();
+                SlyUtil.create($hmalt_wrap, '#hmalt-frame', '.hmalt-next', '.hmalt-prev').init();
+            }
         },
         labnolThumb: function (id) {
             return '<img class="youtube-thumb" src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';
