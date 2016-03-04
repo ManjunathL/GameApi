@@ -7,10 +7,11 @@ define([
     'backbone',
     'text!/templates/landing_pages/landing_page.html',
     'cloudinary_jquery',
+    '/js/slyutil.js',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
     '/js/analytics.js'
-], function($, _, Backbone, landingPageTemplate, CloudinaryJquery, MGF, ConsultUtil, Analytics) {
+], function($, _, Backbone, landingPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var LandingPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
@@ -23,6 +24,14 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            this.ready();
+        },
+        ready: function() {
+            if ($('#lpalt-frame').length > 0) {
+                var $lpalt_frame = $('#lpalt-frame');
+                var $lpalt_wrap = $lpalt_frame.parent().parent();
+                SlyUtil.create($lpalt_wrap, '#lpalt-frame', '.lpalt-next', '.lpalt-prev').init();
+            }
         },
         initialize: function() {
             this.ref = MGF.rootRef;
