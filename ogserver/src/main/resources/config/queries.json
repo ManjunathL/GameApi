@@ -170,7 +170,7 @@
       "id": "shortlist.remove",
       "type": "delete",
       "table": "shortlisted",
-      "query": "delete shortlisted where productId = ? and uid = ?",
+      "query": "delete from shortlisted where productId = ? and uid = ?",
       "params": [
         "productId",
         "uid"
