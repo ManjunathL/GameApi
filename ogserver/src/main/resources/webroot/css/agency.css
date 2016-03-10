@@ -4592,9 +4592,10 @@ a.tab-ico {
 }
 
 .flip-cards {
-    width: 300px;
-    height: 300px;
-    margin-left: 5px;
+    width: 250px;
+    height: 250px;
+    margin-left: 10px;
+    margin-right: 10px;
     -webkit-transition: all 1s ease;
     transition: all 1s ease;
     -webkit-transform-style: preserve-3d;
@@ -4610,8 +4611,8 @@ a.tab-ico {
 }
 
 .flip-cards div {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     border-radius: 15px;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -4623,7 +4624,7 @@ a.tab-ico {
 
 .reverse-card {
     position: relative;
-    top: -300px;
+    top: -250px;
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
