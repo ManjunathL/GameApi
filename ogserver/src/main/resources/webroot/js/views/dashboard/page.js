@@ -8,8 +8,9 @@ define([
     '/js/mgfirebase.js',
     '/js/consultutil.js',
     '/js/analytics.js',
+    'bxslider',
     'text!/templates/dashboard/page.html'
-], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, dashboardPageTemplate){
+], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -42,6 +43,21 @@ define([
                 var $hmalt_wrap = $hmalt_frame.parent().parent();
                 SlyUtil.create($hmalt_wrap, '#hmalt-frame', '.hmalt-next', '.hmalt-prev').init();
             }
+
+            var gallerySlider = $('.bxslider').bxSlider({
+                mode: 'fade',
+                auto: 'true',
+                pause: 8000,
+                speed: 1000,
+                nextSelector: '.slider_right',
+                prevSelector: '.slider_left'
+            });
+            $('.slider-move').click(function (e) {
+                e.preventDefault();
+                var number = $(this).data('number');
+                gallerySlider.goToSlide(number);
+                return false;
+            });
         },
         labnolThumb: function (id) {
             return '<img class="youtube-thumb" src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';

@@ -306,6 +306,97 @@ h6 {
 
 /* ---- ThankYou End ---- */
 
+/* ---- BxSlider ---- */
+
+.bx-wrapper {
+    margin-top: 70px;
+}
+
+.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
+    position: absolute;
+    bottom: 0% !important;
+    width: 100%;
+    display: inline-block;
+    z-index: 300;
+    text-align: center;
+}
+
+.bx-pager-item {
+    display: inline-block;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+    text-indent: -9999px;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background: #f2f4f4 !important;
+    outline: 0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: block;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover, .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background: #f1591f !important;
+}
+
+.arr_left {
+    position: absolute;
+    height: 10%;
+    opacity: 0.2;
+    top: 45%;
+    left: 10%;
+}
+
+.arr_right {
+    position: absolute;
+    height: 10%;
+    opacity: 0.2;
+    top: 45%;
+    right: 10%;
+}
+
+.slider_left {
+    z-index: 300;
+    width: 10%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
+}
+
+.slider_left:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,0.5)), to(rgba(0,0,0,0.0001)));
+    background-image: linear-gradient(to right, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.0001) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+
+.slider_right {
+    z-index: 300;
+    width: 10%;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+}
+
+.slider_right:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.5) 100%);
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.5) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,0.0001)), to(rgba(0,0,0,0.5)));
+    background-image: linear-gradient(to right, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.5) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+
+}
+
+/* ---- BxSlider End ---- */
+
 /* ---- Collage ---- */
 
 .heading-center-notransform {
@@ -4741,3 +4832,4 @@ a.tab-ico {
 .zindex11k {
     z-index: 11000 !important;
 }
+
