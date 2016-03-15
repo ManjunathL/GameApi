@@ -185,23 +185,26 @@ define([
         contactUsSubmit: function() {
             window.contactusSubmitButton && window.contactusSubmitButton.button('reset');
 
-            var name = $('#contact_full_name').val();
-            var email = $('#contact_email_id').val();
-            var phone = $('#contact_contact_num').val();
-            var propertyName = $('#contact_property_name').val();
-            var query = $('#contact_requirement').val();
-            var floorplan = $("#contact_floorplan").prop('files')[0];
+            if($('#contact_full_name').val().trim() != "" && $('#contact_email_id').val().trim() != "" && $('#contact_contact_num').val().trim() != ""){
 
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+                var name = $('#contact_full_name').val();
+                var email = $('#contact_email_id').val();
+                var phone = $('#contact_contact_num').val();
+                var propertyName = $('#contact_property_name').val();
+                var query = $('#contact_requirement').val();
+                var floorplan = $("#contact_floorplan").prop('files')[0];
 
-            var that = this;
+                ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+                var that = this;
 
-            this.toggleContactUsPop();
-            this.positionSideContact();
-            window.App.router.navigate('/thankyou-quick-contact', {
-                trigger: true
-            });
-
+                this.toggleContactUsPop();
+                this.positionSideContact();
+                window.App.router.navigate('/thankyou-quick-contact', {
+                    trigger: true
+                });
+            }else{
+              return false;
+            }
         },
 
         positionSideContact: function() {
@@ -635,6 +638,7 @@ define([
                         },
                         function() {
                            $(this).hide();
+                            $(this).hide();
                         });
 
                     $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {

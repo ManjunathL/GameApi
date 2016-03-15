@@ -306,6 +306,97 @@ h6 {
 
 /* ---- ThankYou End ---- */
 
+/* ---- BxSlider ---- */
+
+.bx-wrapper {
+    margin-top: 70px;
+}
+
+.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
+    position: absolute;
+    bottom: 0% !important;
+    width: 100%;
+    display: inline-block;
+    z-index: 300;
+    text-align: center;
+}
+
+.bx-pager-item {
+    display: inline-block;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+    text-indent: -9999px;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background: #f2f4f4 !important;
+    outline: 0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: block;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover, .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background: #f1591f !important;
+}
+
+.arr_left {
+    position: absolute;
+    height: 10%;
+    opacity: 0.2;
+    top: 45%;
+    left: 10%;
+}
+
+.arr_right {
+    position: absolute;
+    height: 10%;
+    opacity: 0.2;
+    top: 45%;
+    right: 10%;
+}
+
+.slider_left {
+    z-index: 300;
+    width: 10%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
+}
+
+.slider_left:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,0.5)), to(rgba(0,0,0,0.0001)));
+    background-image: linear-gradient(to right, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.0001) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+
+.slider_right {
+    z-index: 300;
+    width: 10%;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+}
+
+.slider_right:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.5) 100%);
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.5) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,0.0001)), to(rgba(0,0,0,0.5)));
+    background-image: linear-gradient(to right, rgba(0,0,0,0.0001) 0, rgba(0,0,0,0.5) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+
+}
+
+/* ---- BxSlider End ---- */
+
 /* ---- Collage ---- */
 
 .heading-center-notransform {
@@ -509,53 +600,91 @@ h6 {
 
 /* ---- About Us ---- */
 
-.img_overlay_txt {
-    background: rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    width: 100%;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    bottom: 0%;
-    padding: 4%;
+.bg-about-red {
+    background-color: rgb(255, 66, 41);
 }
 
-.img_overlay_txt p {
-    font-size: 15px;
-    line-height: 2;
-    text-align: justify;
+.bg-about-black {
+    background-color: rgb(28,28,30);
 }
 
-@media (max-width: 767px) {
-    .img_overlay_txt {
-        background: none;
-        color: #000;
-        position: relative;
-    }
+.bg-about-gray {
+    background-color: #4c4c4c;
+}
+
+.bg-about-light-gray {
+    background-color: rgb(196,198,197);
+}
+
+.bg-4col-blue {
+    background-color: rgb(57,154,199);
+}
+
+.bg-4col-red {
+    background-color: rgb(240,79,54);
+}
+
+.bg-4col-green {
+    background-color: rgb(78,179,75);
+}
+
+.bg-4col-yellow {
+    background-color: rgb(223,161,22);
 }
 
 .social-link {
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 100%;
-    font-size: 20px !important;
-    line-height: 40px !important;
+    font-size: 14px !important;
+    line-height: 32px !important;
     outline: 0;
     color: #222;
     text-align: center;
-    margin-top: 20px;
-    background-color: #ccc;
+    background-color: #fff;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     transition: all .3s;
 }
 
-.social-link:hover,
-.social-link:focus,
-.social-link:active {
+a.button-about-white:hover {
+    color: #fff ;
+}
+
+.button-about-white,
+.button-about-white:focus {
+    border: 1px solid #ffffff;
+    text-align: center;
     color: #fff;
-    background-color: #f1591f;
+    padding: 10px;
+    cursor: pointer;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+}
+
+.button-about-white:active {
+    -webkit-box-shadow: inset 0px 0px 2px 2px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow: inset 0px 0px 2px 2px rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0px 0px 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+.about_banner_txt {
+    position: absolute;
+    top: 20%;
+    left: 32%;
+}
+
+.about_footer_banner {
+    position: absolute;
+    top: 10%;
+    left: 7%;
+}
+
+@media (max-width: 1030px) {
+    .about_footer_banner {
+        left: 3%;
+    }
 }
 
 /* ---- About Us End ---- */
@@ -599,9 +728,7 @@ h6 {
     right: 5%;
 }
 
-.border-bottom-orange {
-    border-bottom: 1px solid #f1591f;
-}
+
 
 .green-box {
     position: absolute;
@@ -1343,6 +1470,10 @@ button {
     color: #2F78A0 !important;
 }
 
+.color-white {
+    color: #ffffff !important;
+}
+
 .error-class {
     color: #e60000 !important;
 }
@@ -1454,13 +1585,21 @@ button {
     font-size: 22px;
 }
 
+.font-size25 {
+    font-size: 25px;
+}
+
 .font-size30 {
     font-size: 30px;
 }
 
-.font-size25 {
-    font-size: 25px;
+.font-size55 {
+    font-size: 55px;
 }
+
+.font-size80 {
+     font-size: 80px;
+ }
 
 .tab {
     margin-right: 20px;
@@ -1468,10 +1607,6 @@ button {
 
 .next-line {
     margin: 10px auto;
-}
-
-.border-right0 {
-    border-right: 0px;
 }
 
 .float-right {
@@ -1774,8 +1909,20 @@ button {
     text-transform: none !important;
 }
 
+.border-right0 {
+    border-right: 0px;
+}
+
 .border1px {
     border: 1px solid !important;
+}
+
+.border-bottom-orange {
+    border-bottom: 1px solid #f1591f;
+}
+
+.border-bottom-white {
+    border-bottom: 1px solid #ffffff;
 }
 
 .separator-horizontal {
@@ -3105,7 +3252,7 @@ aside.clients img {
 
 section#contact {
     background-color: #222;
-    background-image: url(https://res.cloudinary.com/mygubbi/image/upload/map-image.png);
+    background-image: url(https://res.cloudinary.com/mygubbi/image/upload/f_auto/map-image.png);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -4684,4 +4831,29 @@ a.tab-ico {
 
 .zindex11k {
     z-index: 11000 !important;
+}
+.online_media-box{
+    background-color:rgba(243,156,17,0.9);
+    height: 223px;
+    padding-top:85px;
+}
+.press_media-box{
+    background-color:rgba(0,168,133,0.9);
+    height: 223px;
+    padding-top:85px;
+}
+.print_media-box{
+    background-color:rgba(84,172,210,0.9);
+    height: 223px;
+    padding-top:85px;
+}
+.media-tabs-maindiv {
+    margin: 10px auto;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 95%;
+}
+.txt-urstory{
+    color:#DE1920;
 }
