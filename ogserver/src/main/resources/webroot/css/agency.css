@@ -4832,28 +4832,4 @@ a.tab-ico {
 .zindex11k {
     z-index: 11000 !important;
 }
-.online_media-box{
-    background-color:rgba(243,156,17,0.9);
-    height: 223px;
-    padding-top:85px;
-}
-.press_media-box{
-    background-color:rgba(0,168,133,0.9);
-    height: 223px;
-    padding-top:85px;
-}
-.print_media-box{
-    background-color:rgba(84,172,210,0.9);
-    height: 223px;
-    padding-top:85px;
-}
-.media-tabs-maindiv {
-    margin: 10px auto;
-    width: 100%;
-    position: absolute;
-    left: 0px;
-    top: 95%;
-}
-.txt-urstory{
-    color:#DE1920;
-}
+
