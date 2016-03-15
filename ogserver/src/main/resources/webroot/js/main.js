@@ -54,4 +54,4 @@ require([
     Router.initialize({"appView": appView});
 });
 
-var imgBase = "https://res.cloudinary.com/mygubbi/image/upload/";
+var imgBase = "https://res.cloudinary.com/mygubbi/image/upload/f_auto/";
