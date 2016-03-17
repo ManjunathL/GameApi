@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-        xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9
-        https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-    <url>
-        <loc>https://www.mygubbi.com/</loc>
-        <lastmod>2016-03-14T11:04:14+00:00</lastmod>
-    </url>
-    <url>
-        <loc>https://mygubbi.com/living-and-dining-room-designs</loc>
-        <lastmod>2016-03-14T11:04:14+00:00</lastmod>
-    </url>
-    <url>
-        <loc>https://mygubbi.com/kitchen-cabinet-design</loc>
-        <lastmod>2016-03-14T11:04:14+00:00</lastmod>
-    </url>
-    <url>
-        <loc>https://mygubbi.com/bedroom-interior-design</loc>
-        <lastmod>2016-03-14T11:04:14+00:00</lastmod>
-    </url>
-</urlset>
+<sitemapindex
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">
+    <sitemap>
+        <loc>https://mygubbi.com/sitemap/sitemap.xml.gz</loc>
+        <lastmod>2016-03-17T04:50:03Z</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://mygubbi.com/sitemap/sitemap.livingdining.xml.gz</loc>
+        <lastmod>2016-03-17T04:50:03Z</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://mygubbi.com/sitemap/sitemap.kitchen.xml.gz</loc>
+        <lastmod>2016-03-17T04:50:03Z</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://mygubbi.com/sitemap/sitemap.bedroom.xml.gz</loc>
+        <lastmod>2016-03-17T04:50:03Z</lastmod>
+    </sitemap>
+</sitemapindex>
