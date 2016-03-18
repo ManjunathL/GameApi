@@ -16,4 +16,8 @@
         <loc>https://mygubbi.com/sitemap/sitemap.bedroom.xml.gz</loc>
         <lastmod>2016-03-17T04:50:03Z</lastmod>
     </sitemap>
+    <sitemap>
+        <loc>https://mygubbi.com/sitemap/sitemap.stories.xml.gz</loc>
+        <lastmod>2016-03-17T04:50:03Z</lastmod>
+    </sitemap>
 </sitemapindex>
