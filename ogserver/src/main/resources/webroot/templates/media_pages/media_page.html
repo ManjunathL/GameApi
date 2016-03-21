@@ -1,84 +1,158 @@
 <section class="bg-white paddingbottom40">
     <div class="container-fluid position-relative">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
-            <!-- Indicators -->
-            <ol class="carousel-indicators" style="bottom: 265px;">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
+            <img data-src="<%= imgBase + 'w_auto' + '/media_page/online-media-banner-with-text.jpg'%>"
+             class="cld-responsive img-centered" alt="Online Media" id="online-img">
+            <img data-src="<%= imgBase + 'w_auto' + '/media_page/press-media-bannerwith-text.jpg'%>"
+             class="cld-responsive img-centered" alt="Press Media" id="press-release-img" style="display:none;">
+            <img data-src="<%= imgBase + 'w_auto' + '/media_page/print-media-bannerwith-text.jpg'%>"
+             class="cld-responsive img-centered" alt="Print Media" id="print-media-img" style="display:none;">
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner mg-carousel">
-                <div class="item active">
-                    <img data-src="<%= imgBase + 'w_auto' + '/media_page/onlinet-media-banner-with-tex.jpg'%>"
-                         class="cld-responsive img-centered" alt="Online Media">
+        <div class="align-center media-tabs-maindiv">
+            <div class="row padding20-0" style="padding-bottom:0px;">
+                <div id="online-tab" class="col-md-4 col-sm-4 col-xs-4 online_media-box">
+                    <div><img src="https://res-1.cloudinary.com/mygubbi/image/upload/media_page/media_icon_01.png"></div>
+                    <h3 class="media-tabs-title">Online</h3>
                 </div>
-                <div class="item">
-                    <img data-src="<%= imgBase + 'w_auto' + '/media_page/press-media-banner.jpg'%>"
-                         class="cld-responsive img-centered" alt="Press Media">
+                <div id="press-release-tab" class="col-md-4 col-sm-4 col-xs-4 press_media-box">
+                    <div><img src="https://res-1.cloudinary.com/mygubbi/image/upload/media_page/media_icon_02.png"></div>
+                    <h3 class="media-tabs-title">Press Release</h3>
                 </div>
-                <div class="item">
-                    <img data-src="<%= imgBase + 'w_auto' + '/media_page/print-media-bannerwith-text.jpg'%>"
-                         class="cld-responsive img-centered" alt="Print Media">
+                <div id="print-media-tab" class="col-md-4 col-sm-4 col-xs-4 print_media-box">
+                    <div><img src="https://res-1.cloudinary.com/mygubbi/image/upload/media_page/media_icon_03.png"></div>
+                    <h3 class="media-tabs-title">Print Media</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div id="tab-bar" class="col-md-12 col-sm-12 col-xs-12 online_media-box" style="height:22px;padding-top:0px!important;">
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid align-center media-tabs-maindiv">
-        <div class="row padding20-0" style="padding-bottom:0px;">
-            <div class="col-md-4 col-sm-4 online_media-box">
-                <h3>Online</h3>
+    <!--Online Content Start-->
+    <div id="online-content" class="container bg-color-white">
+        <div class="row padding20-0  border-bottom-grey">
+            <div class="col-md-4 col-sm-4 align-center">
+                <h1 class="txt-urstory">YOUR<br>STORY</h1>
             </div>
-            <div class="col-md-4 col-sm-4 press_media-box">
-                <h3>Press Release</h3>
-            </div>
-            <div class="col-md-4 col-sm-4 print_media-box">
-                <h3>Print Media</h3>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">01.09.2015</span>
+                <p class="txt-urstory media-txt-title">These two guys built a start up, solid it to study & work and founded mygubbi</p>
+                <p>
+                    <span class="tag-card">Read More</span>
+                </p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 online_media-box" style="height:22px;padding-top:0px!important;">
+        <div class="row padding20-0  border-bottom-grey">
+            <div class="col-md-4 col-sm-4 align-center">
+                <h1 class="txt-urstory">YOUR<br>STORY</h1>
+            </div>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">01.09.2015</span>
+                <p class="txt-urstory media-txt-title">These two guys built a start up, solid it to study & work and founded mygubbi</p>
+                <p>
+                    <span class="tag-card">Read More</span>
+                </p>
+            </div>
+        </div>
+        <div class="row padding20-0">
+            <div class="col-md-4 col-sm-4 align-center">
+                <h1 class="txt-urstory">YOUR<br>STORY</h1>
+            </div>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">01.09.2015</span>
+                <p class="txt-urstory media-txt-title">These two guys built a start up, solid it to study & work and founded mygubbi</p>
+                <p>
+                    <span class="tag-card">Read More</span>
+                </p>
             </div>
         </div>
     </div>
-    <div class="container bg-color-white">
-        <div class="row padding20-0">
-            <div class="col-md-4 col-sm-4 align-center">
-                <h1 class="txt-urstory">YOUR<br>STORY</h1>
-            </div>
-            <div class="col-md-8 col-sm-8">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory">These two guys built a start up, solid it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>
-        <div class="row padding20-0">
-            <div class="col-md-4 col-sm-4 align-center">
-                <h1 class="txt-urstory">YOUR<br>STORY</h1>
-            </div>
-            <div class="col-md-8 col-sm-8">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory">These two guys built a start up, solid it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>
-        <div class="row padding20-0">
-            <div class="col-md-4 col-sm-4 align-center">
-                <h1 class="txt-urstory">YOUR<br>STORY</h1>
-            </div>
-            <div class="col-md-8 col-sm-8">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory">These two guys built a start up, solid it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>
+    <!--Online Content End-->
 
+    <!--Press Release Content Start-->
+    <div id="press-release-content" class="container bg-color-white" style="display:none;">
+        <div class="row padding20-0 border-bottom-grey">
+            <div class="col-lg-12">
+                <span class="text-muted">01.09.2015</span>
+                <p class="txt-urstory media-txt-title">These two guys built a start up, solid it to study & work and founded mygubbi</p>
+                <p>
+                    <span class="tag-card">Read More</span>
+                </p>
+            </div>
+        </div>
+        <div class="row padding20-0 border-bottom-grey">
+            <div class="col-lg-12">
+                <span class="text-muted">01.09.2015</span>
+                <p class="txt-urstory media-txt-title">These two guys built a start up, solid it to study & work and founded mygubbi</p>
+                <p>
+                    <span class="tag-card">Read More</span>
+                </p>
+            </div>
+        </div>
+        <div class="row padding20-0">
+            <div class="col-lg-12">
+                <span class="text-muted">01.09.2015</span>
+                <p class="txt-urstory media-txt-title">These two guys built a start up, solid it to study & work and founded mygubbi</p>
+                <p>These two guys built a start up, solid it to study & work and founded mygubbi</p>
+                <p>
+                    <span class="tag-card">Read More</span>
+                </p>
+            </div>
+        </div>
     </div>
+    <!--Press Release Content End-->
+
+    <!--Print Media Content Start-->
+    <div id="print-media-content" class="container bg-color-white" style="display:none;">
+        <div class="row margin0">
+                <div class="col-md-6 col-sm-6 padding30 vertline" style="display : table-cell;">
+                    <div class="printmedia-img-cont">
+                        <img data-src="<%= imgBase + '/media_page/The_Hindu_Business_Line.jpg'%>"
+                         class="cld-responsive printmedia-img-cont width100" alt="Print Media">
+                    </div>
+                    <div>
+                        <p class="txt-urstory media-txt-title">The Hindu Business Line</p>
+                        <span class="text-muted">Published on 8th March 2016</span>
+                    </div>
+                    <hr class="media_separator"/>
+                </div>
+            <div class="col-md-6 col-sm-6 padding30" style="display : table-cell;">
+                <div class="printmedia-img-cont">
+                    <img data-src="<%= imgBase + '/media_page/Deccan_herald_09-03-16.jpg'%>"
+                         class="cld-responsive printmedia-img-cont" alt="Print Media">
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">Deccan Herald</p>
+                    <span class="text-muted">Published on 9th March 2016</span>
+                </div>
+                <hr class="media_separator"/>
+
+            </div>
+        </div>
+        <div class="row padding0">
+            <div class="col-md-12 width100">
+                <div class="col-md-6 col-sm-6 padding30 secondvertline"  style="display : table-cell;">
+                    <div>
+                        <img data-src="<%= imgBase + '/media_page/The_New_Indian_Express.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                    </div>
+                    <div>
+                        <p class="txt-urstory media-txt-title">The New Indian Express</p>
+                        <span class="text-muted">Published on 10th March 2016</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 padding30"  style="display : table-cell;">
+                    <div>
+                        <img data-src="<%= imgBase + '/media_page/The_New_Indian_Express.jpg'%>"
+                             class="cld-responsive width100" alt="Print Media">
+                    </div>
+                    <div>
+                        <p class="txt-urstory media-txt-title">The New Indian Express</p>
+                        <span class="text-muted">Published on 10th March 2016</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Print Media Content End-->
 </section>

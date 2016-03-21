@@ -86,7 +86,7 @@ define([
             var query = $('#banner_contact_requirement').val();
             var floorplan = $("#banner_contact_floorplan").prop('files')[0];
 
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, null, null);
 
             window.App.router.navigate('/thankyou-contact-banner', {
                 trigger: true

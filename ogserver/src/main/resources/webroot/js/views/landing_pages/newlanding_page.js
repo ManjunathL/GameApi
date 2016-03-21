@@ -47,7 +47,7 @@ define([
             var email = $('#contact_email_id1').val();
             var phone = $('#contact_contact_num1').val();
 
-            ConsultUtil.submit(name, email, phone, "", "", null);
+            ConsultUtil.submit(name, email, phone, "", "", null, null, null);
 
             window.App.router.navigate('/thankyou-newlp-page', {
                 trigger: true
@@ -64,8 +64,10 @@ define([
             var propertyName = $('#contact_property_name2').val();
             var query = $('#contact_requirement2').val();
             var floorplan = $("#contact_floorplan2").prop('files')[0];
+            var projectName = $('#contact_project_name2').val();
+            var cityName = $('#contact_city_name2').val();
 
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, projectName, cityName);
 
             window.App.router.navigate('/thankyou-newlp-page', {
                 trigger: true

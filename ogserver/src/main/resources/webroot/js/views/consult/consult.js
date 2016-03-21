@@ -40,7 +40,7 @@ define([
             var query = $('#contact_requirement1').val();
             var floorplan = $("#contact_floorplan1").prop('files')[0];
 
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, null, null);
 
             window.App.router.navigate('/thankyou-consult-page', {
                 trigger: true
