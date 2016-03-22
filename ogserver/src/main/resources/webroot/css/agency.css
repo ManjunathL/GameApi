@@ -1805,6 +1805,10 @@ button {
     margin: 35px auto !important;
 }
 
+.margin70_auto {
+    margin: 70px auto !important;
+}
+
 .margin0 {
     margin: 0px !important;
 }
@@ -4843,20 +4847,20 @@ a.tab-ico {
 .online_media-box{
     background-color:rgba(243,156,17,0.9);
     /*height: 223px;
-    padding-top:85px;*/
-    padding:30px;
+    padding-top:85px;
+    padding:30px;*/
 }
 .press_media-box{
     background-color:rgba(0,168,133,0.9);
     /*height: 223px;
-    padding-top:85px;*/
-    padding:30px;
+    padding-top:85px;
+    padding:30px;*/
 }
 .print_media-box{
     background-color:rgba(84,172,210,0.9);
     /*height: 223px;
-    padding-top:85px;*/
-    padding:30px;
+    padding-top:85px;
+    padding:30px;*/
 }
 .media-tabs-title {
     color:#fff;
@@ -4899,9 +4903,28 @@ a.tab-ico {
 .printmedia-img-cont{
     height: 419px!important;
 }
+.media_icon{
+    margin-top:0px!important;
+}
+.media_icon_div{
+   padding: 20px 20px 0px;
+}
 @media (max-width: 767px) {
     .media-tabs-title {
         color:#fff;
-        font-size:16px!important;
+        font-size:10px!important;
+    }
+    .media-tabs-maindiv {
+        width: 100%;
+        position: relative;
+        left: 0px;
+        bottom: 20px;
+    }
+    .printmedia-img-cont {
+        height: auto!important;
+        width: 100%;
+    }
+    .media_icon{
+        height:30px;
     }
 }
