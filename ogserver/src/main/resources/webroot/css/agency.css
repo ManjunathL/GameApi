@@ -4845,19 +4845,19 @@ a.tab-ico {
     z-index: 11000 !important;
 }
 .online_media-box{
-    background-color:rgba(243,156,17,0.9);
+    background-color:rgba(243,156,17,0.7);
     /*height: 223px;
     padding-top:85px;
     padding:30px;*/
 }
 .press_media-box{
-    background-color:rgba(0,168,133,0.9);
+    background-color:rgba(0,168,133,0.7);
     /*height: 223px;
     padding-top:85px;
     padding:30px;*/
 }
 .print_media-box{
-    background-color:rgba(84,172,210,0.9);
+    background-color:rgba(84,172,210,0.7);
     /*height: 223px;
     padding-top:85px;
     padding:30px;*/
@@ -4868,7 +4868,7 @@ a.tab-ico {
 }
 .media-tabs-maindiv {
     width: 100%;
-    position: absolute;
+    /*position: absolute;*/
     left: 0px;
     bottom: 0px;
 }
