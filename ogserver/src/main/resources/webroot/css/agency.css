@@ -4915,6 +4915,14 @@ a.tab-ico {
 .width300 {
     width: 300px;
 }
+.media-modal-content{
+    width:650px!important;
+}
+.media-modal-close{
+    position: absolute;
+    top: 0.5%!important;
+    right: 0.5%!important;
+}
 @media (max-width: 767px) {
     .media-tabs-title {
         color:#fff;
@@ -4924,7 +4932,6 @@ a.tab-ico {
         width: 100%;
         position: relative;
         left: 0px;
-        bottom: 20px;
     }
     .printmedia-img-cont {
         height: auto!important;

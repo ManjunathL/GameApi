@@ -136,25 +136,6 @@
                 </p>
             </div>
         </div>
-        <!--<div class="row padding20-0 border-bottom-grey">
-            <div class="col-lg-12">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory media-txt-title">These two guys built a start up, sold it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>
-        <div class="row padding20-0">
-            <div class="col-lg-12">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory media-txt-title">These two guys built a start up, sold it to study & work and founded mygubbi</p>
-                <p>These two guys built a start up, solid it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>-->
     </div>
     <!--Press Release Content End-->
 
@@ -163,8 +144,8 @@
         <div class="row margin0 hidden-xs">
             <div class="col-md-6 col-sm-6 padding30 vertline" style="display : table-cell;">
                 <div class="printmedia-img-cont">
-                    <img data-src="<%= imgBase + '/media_page/The-Hindu-Business-Line-_2.jpg'%>"
-                     class="cld-responsive printmedia-img-cont width100" alt="Print Media">
+                    <a data-toggle="modal" data-target="#The-Hindu-Business-Line-Modal"><img data-src="<%= imgBase + '/media_page/The-Hindu-Business-Line-_2.jpg'%>"
+                     class="cld-responsive printmedia-img-cont width100" alt="Print Media"></a>
                 </div>
                 <div>
                     <p class="txt-urstory media-txt-title">The Hindu Business Line</p>
@@ -174,8 +155,8 @@
             </div>
             <div class="col-md-6 col-sm-6 padding30" style="display : table-cell;">
                 <div class="printmedia-img-cont">
-                    <img data-src="<%= imgBase + '/media_page/Deccan-herald.jpg'%>"
-                         class="cld-responsive printmedia-img-cont" alt="Print Media">
+                    <a data-toggle="modal" data-target="#Deccan-herald-Modal"><img data-src="<%= imgBase + '/media_page/Deccan-herald.jpg'%>"
+                         class="cld-responsive printmedia-img-cont" alt="Print Media"></a>
                 </div>
                 <div>
                     <p class="txt-urstory media-txt-title">Deccan Herald</p>
@@ -187,8 +168,8 @@
         <div class="row padding0 hidden-xs">
             <div class="col-md-6 col-sm-6 padding30 secondvertline"  style="display : table-cell;">
                 <div>
-                    <img data-src="<%= imgBase + '/media_page/The_New_Indian_Express_2.jpg'%>"
-                     class="cld-responsive width100" alt="Print Media">
+                    <a data-toggle="modal" data-target="#The_New_Indian_Express-Modal"><img data-src="<%= imgBase + '/media_page/The_New_Indian_Express_2.jpg'%>"
+                     class="cld-responsive width100" alt="Print Media"></a>
                 </div>
                 <div>
                     <p class="txt-urstory media-txt-title">The New Indian Express</p>
@@ -242,4 +223,45 @@
         </div>
     </div>
     <!--Print Media Content End-->
+    <!-- Modal content-->
+    <div class="modal fade" id="The-Hindu-Business-Line-Modal" role="dialog">
+        <div class="modal-dialog media-modal-content">
+            <div class="modal-content">
+                <div class="modal-body padding10">
+                    <img data-src="<%= imgBase + '/media_page/The-Hindu-Business-Line-large.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div data-element="The-Hindu-Business-Line-Modal" class="close-media-pop close-icon media-modal-close signup-form">
+                    <img src="<%= imgBase + 'close-black.png'%>">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Deccan-herald-Modal" role="dialog">
+        <div class="modal-dialog media-modal-content">
+            <div class="modal-content">
+                <div class="modal-body padding10">
+                    <img data-src="<%= imgBase + '/media_page/Deccan-herald-large.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div data-element="Deccan-herald-Modal" class="close-media-pop close-icon media-modal-close signup-form">
+                    <img src="<%= imgBase + 'close-black.png'%>">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="The_New_Indian_Express-Modal" role="dialog">
+        <div class="modal-dialog media-modal-content">
+            <div class="modal-content">
+                <div class="modal-body padding10">
+                    <img data-src="<%= imgBase + '/media_page/The-New-Indian-Express-large.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div data-element="The_New_Indian_Express-Modal" class="close-media-pop close-icon media-modal-close signup-form">
+                    <img src="<%= imgBase + 'close-black.png'%>">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+

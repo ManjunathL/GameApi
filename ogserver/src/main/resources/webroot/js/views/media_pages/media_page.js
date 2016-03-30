@@ -27,7 +27,8 @@ define([
         events: {
              "click #online-tab": "toggleOnlineContent",
              "click #press-release-tab": "togglePressReleaseContent",
-             "click #print-media-tab": "togglePrintMediaContent"
+             "click #print-media-tab": "togglePrintMediaContent",
+             "click .close-media-pop": "closeMediaModal"
         },
         toggleOnlineContent: function(e){
             $("#press-release-img").css('display','none');
@@ -70,6 +71,10 @@ define([
             $("#tab-bar").removeClass('online_media-box');
             $("#tab-bar").addClass('print_media-box');
         },
+        closeMediaModal: function(ev) {
+            var id = $(ev.currentTarget).data('element');
+            $("#"+id).modal('toggle');
+        }
     });
     return MediaPageVIew;
 });
