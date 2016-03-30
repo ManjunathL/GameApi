@@ -194,7 +194,7 @@ define([
                 var query = $('#contact_requirement').val();
                 var floorplan = $("#contact_floorplan").prop('files')[0];
 
-                ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+                ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, null, null);
                 var that = this;
 
                 this.toggleContactUsPop();

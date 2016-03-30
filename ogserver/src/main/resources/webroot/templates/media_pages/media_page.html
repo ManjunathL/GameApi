@@ -1,84 +1,267 @@
-<section class="bg-white paddingbottom40">
+<section class="bg-color-white paddingbottom40 margin70_auto">
     <div class="container-fluid position-relative">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
-            <!-- Indicators -->
-            <ol class="carousel-indicators" style="bottom: 265px;">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
+            <img data-src="<%= imgBase + 'w_auto' + '/media_page/online-media-banner.jpg'%>"
+             class="cld-responsive img-centered" alt="Online Media" id="online-img">
+            <img data-src="<%= imgBase + 'w_auto' + '/media_page/press-media-banner.jpg'%>"
+             class="cld-responsive img-centered" alt="Press Media" id="press-release-img" style="display:none;">
+            <img data-src="<%= imgBase + 'w_auto' + '/media_page/print-media-banner.jpg'%>"
+             class="cld-responsive img-centered" alt="Print Media" id="print-media-img" style="display:none;">
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner mg-carousel">
-                <div class="item active">
-                    <img data-src="<%= imgBase + 'w_auto' + '/media_page/onlinet-media-banner-with-tex.jpg'%>"
-                         class="cld-responsive img-centered" alt="Online Media">
+        <div class="align-center media-tabs-maindiv">
+            <div class="row margin0">
+                <div id="online-tab" class="col-md-4 col-sm-4 col-xs-4 online_media-box">
+                    <div class="media_icon_div"><img src="<%= imgBase + '/media_page/media_icon_02.png'%>" class="media_icon"></div>
+                    <h3 class="media-tabs-title">Online</h3>
                 </div>
-                <div class="item">
-                    <img data-src="<%= imgBase + 'w_auto' + '/media_page/press-media-banner.jpg'%>"
-                         class="cld-responsive img-centered" alt="Press Media">
+                <div id="press-release-tab" class="col-md-4 col-sm-4 col-xs-4 press_media-box">
+                    <div class="media_icon_div"><img src="<%= imgBase + '/media_page/media_icon_01.png'%>" class="media_icon"></div>
+                    <h3 class="media-tabs-title">Press Release</h3>
                 </div>
-                <div class="item">
-                    <img data-src="<%= imgBase + 'w_auto' + '/media_page/print-media-bannerwith-text.jpg'%>"
-                         class="cld-responsive img-centered" alt="Print Media">
+                <div id="print-media-tab" class="col-md-4 col-sm-4 col-xs-4 print_media-box">
+                    <div class="media_icon_div"><img src="<%= imgBase + '/media_page/media_icon_03.png'%>" class="media_icon"></div>
+                    <h3 class="media-tabs-title">Print Media</h3>
+                </div>
+            </div>
+            <div class="row margin0">
+                <div id="tab-bar" class="col-md-12 col-sm-12 col-xs-12 online_media-box" style="height:15px;padding-top:0px!important;">
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid align-center media-tabs-maindiv">
-        <div class="row padding20-0" style="padding-bottom:0px;">
-            <div class="col-md-4 col-sm-4 online_media-box">
-                <h3>Online</h3>
+    <!--Online Content Start-->
+    <div id="online-content" class="container bg-color-white">
+        <div class="row padding20-0  border-bottom-grey">
+            <div class="col-md-4 col-sm-4 align-center">
+                <img data-src="<%= imgBase + '/media_page/YourStory1.png'%>"
+                     class="cld-responsive width300" alt="Your Story">
             </div>
-            <div class="col-md-4 col-sm-4 press_media-box">
-                <h3>Press Release</h3>
-            </div>
-            <div class="col-md-4 col-sm-4 print_media-box">
-                <h3>Print Media</h3>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">04.03.2016</span>
+                <p class="txt-urstory media-txt-title">These two guys built a startup, sold it to study & work, and founded mygubbi</p>
+                <p>Every year more than 40,000 to 100,000 apartments are readied for delivery in each of the country’s five major cities. But while real estate may be slowing down as an industry, home </p>
+                <p>
+                    <a href="http://yourstory.com/2016/03/mygubbi/" target="_blank" class="color-orange read_full font-size16">Read More</a>
+                </p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 online_media-box" style="height:22px;padding-top:0px!important;">
+        <div class="row padding20-0 border-bottom-grey">
+            <div class="col-md-4 col-sm-4 align-center">
+                <img data-src="<%= imgBase + '/media_page/Business-standard.png'%>"
+                     class="cld-responsive width200" alt="Business Standard">
+            </div>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">07.03.2016</span>
+                <p class="txt-urstory media-txt-title">mygubbi.com raises $2.5 mn in seed funding</p>
+                <p>mygubbi.com, a fast growing online home interior decor and furnishing company, today announced that it has raised $2.5 million in seed funding from multiple angel investors led by Vipul Parekh, co-founder of Big Basket, Ananda Kallugadde, co-Founder of NeoBytes and Rajesh K Murthy, EVP of Infosys.</p>
+                <p>
+                    <a href="http://www.business-standard.com/article/companies/mygubbi-com-raises-2-5-mn-in-seed-funding-116030700661_1.html" target="_blank" class="color-orange read_full font-size16">Read More</a>
+                </p>
+            </div>
+        </div>
+        <div class="row padding20-0 border-bottom-grey">
+            <div class="col-md-4 col-sm-4 align-center">
+                <img data-src="<%= imgBase + '/media_page/Iam-wire.png'%>"
+                     class="cld-responsive width200" alt="Iam-wire">
+            </div>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">8.03.2016</span>
+                <p class="txt-urstory media-txt-title">mygubbi Raises $2.5M From Founder of BigBasket, NeoBytes & EVO of Infosys</p>
+                <p>mygubbi, online home decor and furnishing company, has raised $2.5 million in a seed fund round. The round was led by Co-Founder of Big Basket Vipul Parekh, Co-Founder of NeoBytes Ananda Kallugadde and Rajesh K Murthy, EVO of Infosys.</p>
+                <p>
+                    <a href="http://www.iamwire.com/2016/03/fundingwire-bigfoot-raises-8m-vcats-invest-vphrase-analytics-raises-500k/133465" target="_blank" class="color-orange read_full font-size16">Read More</a>
+                </p>
+            </div>
+        </div>
+        <div class="row padding20-0 border-bottom-grey">
+            <div class="col-md-4 col-sm-4 align-center">
+                <img data-src="<%= imgBase + '/media_page/techstory.png'%>"
+                     class="cld-responsive width200" alt="Tech Story">
+            </div>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">8.03.2016</span>
+                <p class="txt-urstory media-txt-title">BigBasket Co-Founder And Others Invest In mygubbi</p>
+                <p>mygubbi, a Bangalore based startup has managed to secure a funding of US $2.5 million from its investors.The funding round was headed by Vipul Parekh, Co-Founder of Big Basket, Ananda Kallugadde, Co-Founder of NeoBytes and Rajesh K Murthy, EVP of Infosys.</p>
+                <p>
+                    <a href="http://techstory.in/mygubbi-raises-funding-8032016/" target="_blank" class="color-orange read_full font-size16">Read More</a>
+                </p>
+            </div>
+        </div>
+        <div class="row padding20-0 border-bottom-grey">
+            <div class="col-md-4 col-sm-4 align-center">
+                <img data-src="<%= imgBase + '/media_page/BL.png'%>"
+                     class="cld-responsive width200" alt="The Hindu Business Line">
+            </div>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">9.03.2016</span>
+                <p class="txt-urstory media-txt-title">Home décor start-up mygubbi.com raises $2.5 m</p>
+                <p>Bengaluru-based home décor and furnishing start-up mygubbi.com, which went live last October, has raised $2.5 million in seed funding.
+                    The finance was raised from 20 angel investors led by Vipul Parekh, co-founder of Big Basket; Ananda Kallugadde, co-founder of NeoBytes; and Rajesh K Murthy, EVP of Infosys.</p>
+                <p>
+                    <a href="http://www.thehindubusinessline.com/info-tech/home-dcor-startup-mygubbicom-raises-25-m/article8332187.ece" target="_blank" class="color-orange read_full font-size16">Read More</a>
+                </p>
+            </div>
+        </div>
+        <div class="row padding20-0">
+            <div class="col-md-4 col-sm-4 align-center">
+                <img data-src="<%= imgBase + '/media_page/DH.png'%>"
+                     class="cld-responsive width200" alt="Deccan Herald">
+            </div>
+            <div class="col-md-8 col-sm-8">
+                <span class="text-muted">11.03.2016</span>
+                <p class="txt-urstory media-txt-title">Taking interiors online</p>
+                <p>Shopping for home decor items has now gone virtual. Companies are offering you complete solutions — from customised designs to installation, at the click of a button, discovers Ruth Dsouza Prabhu.</p>
+                <p>
+                    <a href="http://www.deccanherald.com/content/533727/taking-interiors-online.html" target="_blank" class="color-orange read_full font-size16">Read More</a>
+<!--                    <img data-src="<%= imgBase + '/media_page/readmore_buttons.png'%>"
+                         class="cld-responsive" alt="Read More">-->
+                </p>
             </div>
         </div>
     </div>
-    <div class="container bg-color-white">
-        <div class="row padding20-0">
-            <div class="col-md-4 col-sm-4 align-center">
-                <h1 class="txt-urstory">YOUR<br>STORY</h1>
-            </div>
-            <div class="col-md-8 col-sm-8">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory">These two guys built a start up, solid it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>
-        <div class="row padding20-0">
-            <div class="col-md-4 col-sm-4 align-center">
-                <h1 class="txt-urstory">YOUR<br>STORY</h1>
-            </div>
-            <div class="col-md-8 col-sm-8">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory">These two guys built a start up, solid it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>
-        <div class="row padding20-0">
-            <div class="col-md-4 col-sm-4 align-center">
-                <h1 class="txt-urstory">YOUR<br>STORY</h1>
-            </div>
-            <div class="col-md-8 col-sm-8">
-                <span class="text-muted">01.09.2015</span>
-                <p class="txt-urstory">These two guys built a start up, solid it to study & work and founded mygubbi</p>
-                <p>
-                    <span class="tag-card">Read More</span>
-                </p>
-            </div>
-        </div>
+    <!--Online Content End-->
 
+    <!--Press Release Content Start-->
+    <div id="press-release-content" class="container bg-color-white" style="display:none;">
+        <div class="row padding20-0 border-bottom-grey">
+            <div class="col-lg-12">
+                <span class="text-muted">07.03.2016</span>
+                <p class="txt-urstory media-txt-title">mygubbi.com Raises $2.5 Million in Seed Funding</p>
+                <p>mygubbi.com, a fast growing online home interior décor and furnishing company,
+                    today announced that it has raised $2.5 million in seed funding from multiple angel investors led by Vipul Parekh, Co-
+                    founder, Big Basket; Ananda Kallugadde, Co-Founder NeoBytes and Rajesh K Murthy, EVP of Infosys.</p>
+                <p>
+                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final" class="color-orange read_full font-size16">Download</a>
+<!--                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final"><img data-src="<%= imgBase + '/media_page/Download_buttons.png'%>"
+                                                                                                                                                                                                                              class="cld-responsive" alt="Download"></a>-->
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--Press Release Content End-->
+
+    <!--Print Media Content Start-->
+    <div id="print-media-content" class="container bg-color-white" style="display:none;">
+        <div class="row margin0 hidden-xs">
+            <div class="col-md-6 col-sm-6 padding30 vertline" style="display : table-cell;">
+                <div class="printmedia-img-cont">
+                    <a data-toggle="modal" data-target="#The-Hindu-Business-Line-Modal"><img data-src="<%= imgBase + '/media_page/The-Hindu-Business-Line-_2.jpg'%>"
+                     class="cld-responsive printmedia-img-cont width100" alt="Print Media"></a>
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">The Hindu Business Line</p>
+                    <span class="text-muted">Published on 8th March 2016</span>
+                </div>
+                <div class="media_separator"></div>
+            </div>
+            <div class="col-md-6 col-sm-6 padding30" style="display : table-cell;">
+                <div class="printmedia-img-cont">
+                    <a data-toggle="modal" data-target="#Deccan-herald-Modal"><img data-src="<%= imgBase + '/media_page/Deccan-herald.jpg'%>"
+                         class="cld-responsive printmedia-img-cont" alt="Print Media"></a>
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">Deccan Herald</p>
+                    <span class="text-muted">Published on 9th March 2016</span>
+                </div>
+                <div class="media_separator"></div>
+            </div>
+        </div>
+        <div class="row padding0 hidden-xs">
+            <div class="col-md-6 col-sm-6 padding30 secondvertline"  style="display : table-cell;">
+                <div>
+                    <a data-toggle="modal" data-target="#The_New_Indian_Express-Modal"><img data-src="<%= imgBase + '/media_page/The_New_Indian_Express_2.jpg'%>"
+                     class="cld-responsive width100" alt="Print Media"></a>
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">The New Indian Express</p>
+                    <span class="text-muted">Published on 10th March 2016</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 padding30"  style="display : table-cell;">
+                <!--<div>
+                    <img data-src="<%= imgBase + '/media_page/The_New_Indian_Express_2.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">The New Indian Express</p>
+                    <span class="text-muted">Published on 10th March 2016</span>
+                </div>-->
+            </div>
+        </div>
+        <div class="row padding0 hidden-lg hidden-md hidden-sm">
+            <div class="col-xs-12 padding30">
+                <div class="printmedia-img-cont">
+                    <img data-src="<%= imgBase + '/media_page/The-Hindu-Business-Line-_2.jpg'%>"
+                         class="cld-responsive printmedia-img-cont width100" alt="Print Media">
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">The Hindu Business Line</p>
+                    <span class="text-muted">Published on 8th March 2016</span>
+                </div>
+                <div class="media_separator"></div>
+            </div>
+            <div class="col-xs-12 padding30">
+                <div class="printmedia-img-cont">
+                    <img data-src="<%= imgBase + '/media_page/Deccan-herald.jpg'%>"
+                         class="cld-responsive printmedia-img-cont" alt="Print Media">
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">Deccan Herald</p>
+                    <span class="text-muted">Published on 9th March 2016</span>
+                </div>
+                <div class="media_separator"></div>
+            </div>
+            <div class="col-xs-12 padding30">
+                <div class="printmedia-img-cont">
+                    <img data-src="<%= imgBase + '/media_page/The_New_Indian_Express_2.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div>
+                    <p class="txt-urstory media-txt-title">The New Indian Express</p>
+                    <span class="text-muted">Published on 10th March 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Print Media Content End-->
+    <!-- Modal content-->
+    <div class="modal fade" id="The-Hindu-Business-Line-Modal" role="dialog">
+        <div class="modal-dialog media-modal-content">
+            <div class="modal-content">
+                <div class="modal-body padding10">
+                    <img data-src="<%= imgBase + '/media_page/The-Hindu-Business-Line-large.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div data-element="The-Hindu-Business-Line-Modal" class="close-media-pop close-icon media-modal-close signup-form">
+                    <img src="<%= imgBase + 'close-black.png'%>">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Deccan-herald-Modal" role="dialog">
+        <div class="modal-dialog media-modal-content">
+            <div class="modal-content">
+                <div class="modal-body padding10">
+                    <img data-src="<%= imgBase + '/media_page/Deccan-herald-large.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div data-element="Deccan-herald-Modal" class="close-media-pop close-icon media-modal-close signup-form">
+                    <img src="<%= imgBase + 'close-black.png'%>">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="The_New_Indian_Express-Modal" role="dialog">
+        <div class="modal-dialog media-modal-content">
+            <div class="modal-content">
+                <div class="modal-body padding10">
+                    <img data-src="<%= imgBase + '/media_page/The-New-Indian-Express-large.jpg'%>"
+                         class="cld-responsive width100" alt="Print Media">
+                </div>
+                <div data-element="The_New_Indian_Express-Modal" class="close-media-pop close-icon media-modal-close signup-form">
+                    <img src="<%= imgBase + 'close-black.png'%>">
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+

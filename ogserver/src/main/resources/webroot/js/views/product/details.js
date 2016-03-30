@@ -584,7 +584,7 @@ define([
             var query = $('#consult_product_name').val() + " :: " + $('#consult_requirement').val();
             var floorplan = $("#consult_floorplan").prop('files')[0];
 
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, null, null);
 
             $('#consultpop').modal('hide');
             $('body').removeClass('modal-open');
