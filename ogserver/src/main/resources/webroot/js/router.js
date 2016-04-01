@@ -49,6 +49,8 @@ define([
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Buy Customized Home D?cor Interiors online for living room furniture, kitchen furniture, side tables and TV furniture.Get Home d?cor ideas to design your Home");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "home interior décor, home interior design, interior home décor, home interiors, custom made furniture, custom furniture, online customised furniture, modern furniture design, furniture designs");
         },
         consult: function() {
             document.title = 'Consult our experts | mygubbi';
@@ -82,45 +84,73 @@ define([
         },
         studyTableB: function () {
             document.title = 'Study Table Designs - Order Study Table Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Designs of Study Table which complement Your Room and Interiors.Get the latest study table design designed to meet your needs.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "study table, study table designs, study table online ,buy study table online, order study table online, latest study table design");
         },
         tvUnitLD: function() {
             document.title = 'Buy entertainment units online and tv unit designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Deck Your Home With the best of Décor with our range of TV Furniture and TV Cabinet Designs.Pick out luxury Home décor from MyGubbi");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "tv unit, tv stand, tv cabinet, tv units, entertainment unit,entertainment unit designs");
         },
         shoeRackLD: function() {
             document.title = 'Buy Shoe Stands and Shoe Racks Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Give a neater and classy look to your Home by getting Your Shoe Rack Furniture Custom made by our designers who look into the minute details for better living");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "shoe rack, shoe rack online, shoe rack designs, shoe racks, shoe racks online");
         },
         crockeryUnitLD: function() {
             document.title = 'Crockery unit designs - Kitchen and Dining crockery Unit designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Look for Crockery unit designs Online and get to select from a range of exclusive products from MyGubbi.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "crockery, crockery unit, crockery cabinet, crockery unit designs, crockery cabinet online,kitchen crockery cabinet designs, dining crockery unit designs, designs for crockery unit");
         },
         lshapedK: function() {
             document.title = 'L-Shaped Kitchen - L-Shaped Modular Kitchen Designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "L shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "l shaped kitchen design, l shaped kitchen, l shaped kitchen designs");
         },
         ushapedK: function () {
             document.title = 'U-Shaped Kitchen Design - U-Shaped Kitchen from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "U shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "u shaped kitchen, u shaped kitchen design,  u shaped kitchen designs");
         },
         straightK: function () {
             document.title = 'Straight Kitchen Design - Straight Modular Kitchen Designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Straight Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "straight kitchen design, straight modular kitchen designs, straight modular kitchen");
         },
         parallelK: function() {
             document.title = 'Parallel Kitchen Design - Parallel Kitchen Cabinets from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Parallel Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "parallel kitchen design, parallel kitchen, parallel kitchen designs,parallel modular kitchen designs");
         },
         wardrobeB: function() {
             document.title = 'Bedroom wardrobe Design -Buy Wardrobes Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Check out Our Exclusive range of Wardrobe designs which add a classy touch to your Home décor.MyGubbi offers a hassle free installation process and speedy delivery");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "wardrobe, wardrobe designs, wardrobe design,wardrobe online, buy wardrobe online");
         },
         sideTableB: function() {
             document.title = 'Side Table - Bedside tables Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Bedside Table Designs that compliment Your Bedroom décor in ways like no other.Pick Out Luxury Home Décor from MyGubbi");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "side table, side tables,study table designs, designs of study table, buy study table online, order study table online");
         },
         bookShelfB: function() {
             document.title = 'Book Rack - Book shelves and Book Organizers from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Custom Made Bookshelves from MyGubbi add to your range of luxury décor and add a touch of elegance to your living abode");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "book shelf, bookshelf design, book rack, bookshelf designs");
         },
         bedroom: function () {
             document.title = 'Bedroom Designs - Bedroom Furniture and interiors from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "MyGubbi offers an Exclusive collection of bedroom furniture to choose from.Get Your Bedroom interiors custom made to fit your Home and Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "bedroom designs, bedroom furniture, bedroom interior, bedroom interior design");
         },
         kitchens: function() {
             document.title = 'Modular Kitchen - Range of modular Kitchen Designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Check out our Range of Kitchen Cabinets and choose the kitchen cabinet design of Your choice.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "modular kitchen, modular kitchen design, kitchen design, kitchen cabinets, kitchen, kitchen interior, kitchen cabinet, kitchen furniture,kitchen cabinet designs, kitchen cabinets designs");
         },
         livingDining: function () {
             document.title = 'Living room designs and interiors from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Buy Your Living Room furniture online from MyGubbi and jazz up your life with the latest Décor.Get Your Dining Room furniture custom made by picking out from a range of dining room designs");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior");
         }
     });
 
