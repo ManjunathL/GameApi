@@ -1,0 +1,27 @@
+{
+  "services": {
+    "sequential": [
+      {
+        "name": "com.mygubbi.support.LogServiceVerticle"
+      },
+      {
+        "name": "com.mygubbi.db.DatabaseService"
+      }
+    ],
+    "parallel": [
+      {
+        "name": "com.mygubbi.db.QueryPrepareService"
+      },
+      {
+        "name": "com.mygubbi.db.SequenceIdGenerator"
+      },
+      {
+        "name": "com.mygubbi.apiserver.GameApiServerVerticle",
+        "worker": false
+      },
+      {
+        "name": "com.mygubbi.si.email.EmailService"
+      }
+    ]
+  }
+}

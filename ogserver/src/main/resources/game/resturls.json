@@ -1,0 +1,41 @@
+{
+  "resturls": [
+    {
+      "uri": "/game/api/proposal.list",
+      "source": "file",
+      "file":"testdata/proposals.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/game/api/proposal.summary",
+      "source": "file",
+      "file":"testdata/proposal_classes.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/game/api/proposal.detail",
+      "source": "file",
+      "file":"testdata/proposal.json",
+      "default": "{}",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/game/api/proposal.comments",
+      "source": "file",
+      "file":"testdata/proposal_comments.json",
+      "default": "{}",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/game/api/proposal",
+      "source": "db",
+      "query":"product.select.category",
+      "params":["category"],
+      "resultfields":["productJson"],
+      "default": "[]"
+    }
+  ]
+}
+

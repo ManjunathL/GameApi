@@ -175,7 +175,72 @@
         "productId",
         "uid"
       ]
+    },
+
+    {
+      "id": "proposal.list",
+      "type": "select",
+      "table": "proposal",
+      "query": "select proposalid, status, createdon, expectedby, completedon, wfstatus, wfassignedto, wfintime, priority, attention, title, designername, salesperson, budget, projectname, city from proposal where status = ?",
+      "params": ["status"]
+    },
+
+    {
+      "id": "proposal.summary",
+      "type": "select",
+      "table": "proposal_summary",
+      "query": "select type, code, totalcount, totalamount from proposal_summary",
+      "params": []
+    },
+
+    {
+      "id": "proposal.workflow",
+      "type": "select",
+      "table": "proposal_wf_status",
+      "query": "select id, proposalid, status, assignedto, intime, outtime from proposal_wf_status where proposalid = ? order by intime",
+      "params": ["proposalid"]
+    },
+
+    {
+      "id": "proposal.detail",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal where proposalid = ?",
+      "params": ["proposalid"]
+    },
+
+    {
+      "id": "proposal.comment.insert",
+      "type": "insert",
+      "table": "proposal_comments",
+      "query": "insert into proposal_comments (id, proposalid, comment, userid, username, createdon) values (?, ?, ?, ?, ?, ?)",
+      "params": ["id", "proposalid", "comment", "userid", "username", "createdon"]
+    },
+
+    {
+      "id": "proposal.comment.select",
+      "type": "select",
+      "table": "proposal_comments",
+      "query": "select * from proposal_comments where proposalid = ?",
+      "params": ["proposalid"]
+    },
+
+    {
+      "id": "proposal.document.insert",
+      "type": "insert",
+      "table": "proposal_documents",
+      "query": "insert into proposal_documents (id, proposalid, title, description, url, userid, username, uploadedon) values (?, ?, ?, ?, ?, ?, ?, ?)",
+      "params": ["id", "proposalid", "title", "description", "url", "userid", "username", "uploadedon"]
+    },
+
+    {
+      "id": "proposal.document.select",
+      "type": "select",
+      "table": "proposal_documents",
+      "query": "select * from proposal_documents where proposalid = ?",
+      "params": ["proposalid"]
     }
+
   ]
 }
 
