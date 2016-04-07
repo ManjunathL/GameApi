@@ -45,6 +45,7 @@ define([
             'thankyou-:page(/)':'thankyou',
             'lp(/)':'landingpage',
             'oglp(/)':'newlandingpage',
+            'fblp(/)':'fblandingpage',
             'media(/)': 'mediapage'
         },
         dashboard: function() {
@@ -365,6 +366,12 @@ define([
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/landing_pages/newlanding_page.js'], function(NewLandingPage) {
                 VM.create(VM.NEWLANDINGPAGE, NewLandingPage).render();
+            });
+        });
+        router.on('route:fblandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/fblanding_page.js'], function(FbLandingPage) {
+                VM.create(VM.FBLANDINGPAGE, FbLandingPage).render();
             });
         });
         router.on('route:mediapage', function(actions) {

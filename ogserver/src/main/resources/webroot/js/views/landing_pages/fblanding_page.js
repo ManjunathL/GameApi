@@ -5,18 +5,18 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/landing_pages/landing_page.html',
+    'text!/templates/landing_pages/fblanding_page.html',
     'cloudinary_jquery',
     '/js/slyutil.js',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
     '/js/analytics.js'
-], function($, _, Backbone, landingPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
-    var LandingPageVIew = Backbone.View.extend({
+], function($, _, Backbone, fblandingPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+    var FBLandingPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
         renderWithUserProfCallback: function(userProfData) {
-            $(this.el).html(_.template(landingPageTemplate)({
+            $(this.el).html(_.template(fblandingPageTemplate)({
                 'userProfile': userProfData
             }));
             $.cloudinary.responsive();
@@ -49,7 +49,7 @@ define([
 
             ConsultUtil.submit(name, email, phone, "", "", null,null,null);
 
-            window.App.router.navigate('/thankyou-lp-page', {
+            window.App.router.navigate('/thankyou-fblp-page', {
                 trigger: true
             });
 
@@ -67,16 +67,16 @@ define([
 
             ConsultUtil.submit(name, email, phone, query, floorplan, propertyName,null,null);
 
-            window.App.router.navigate('/thankyou-lp-page', {
+            window.App.router.navigate('/thankyou-fblp-page', {
                 trigger: true
             });
 
         },
         events: {
-            "submit #contactLpForm1": "submit_form1",
+            "submit #contactFBLpForm1": "submit_form1",
             "submit #contactLpForm2": "submit_form2"
 
         }
     });
-    return LandingPageVIew;
+    return FBLandingPageVIew;
 });

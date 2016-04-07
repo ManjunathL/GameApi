@@ -16,6 +16,9 @@ define(function() {
         MGDIFF: "mgdiff",
         THANKYOU: "thankyou",
         LANDINGPAGE: "landingpage",
+        NEWLANDINGPAGE: "newlandingpage",
+        FBLANDINGPAGE: "fblandingpage",
+        MEDIAPAGE: "mediapage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {
