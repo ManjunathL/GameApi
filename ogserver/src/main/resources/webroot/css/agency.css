@@ -4941,3 +4941,11 @@ a.tab-ico {
         height:30px;
     }
 }
+
+.grid-heading-col8{
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    max-width:100%;
+}
