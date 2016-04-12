@@ -105,8 +105,8 @@ define([
         },
         lshapedK: function() {
             document.title = 'L-Shaped Kitchen - L-Shaped Modular Kitchen Designs from mygubbi';
-            document.querySelector('meta[name="description"]').setAttribute("content", "11111111111L shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
-            document.querySelector('meta[name="keywords"]').setAttribute("content", "1234l shaped kitchen design, l shaped kitchen, l shaped kitchen designs");
+            document.querySelector('meta[name="description"]').setAttribute("content", "L shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "l shaped kitchen design, l shaped kitchen, l shaped kitchen designs");
         },
         ushapedK: function () {
             document.title = 'U-Shaped Kitchen Design - U-Shaped Kitchen from mygubbi';
