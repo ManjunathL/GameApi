@@ -1,0 +1,21 @@
+{
+  "version": "0.0.0a",
+
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://localhost/mg",
+    "max_pool_size": 4,
+    "user": "root",
+    "password": "root"
+  },
+
+  "urlwithssl": "",
+
+  "firebase": {},
+
+  "cloudinary" :{},
+
+  "staticConfigPath": "",
+
+  "robots.txt": "User-agent: *\nDisallow: /"
+}
