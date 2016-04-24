@@ -19,6 +19,7 @@ define(function() {
         NEWLANDINGPAGE: "newlandingpage",
         FBLANDINGPAGE: "fblandingpage",
         MEDIAPAGE: "mediapage",
+        NRIPAGE: "nripage",
         MANGALORELANDINGPAGE: "MangaloreLandingPage",
         Views: {},
         activeView: "",

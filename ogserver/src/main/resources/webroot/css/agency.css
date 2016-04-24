@@ -819,6 +819,59 @@ ul.social-links {
 
 /* ---- Landing Page End  ---- */
 
+/* ---- NRI Page ---- */
+
+.nri_banner_txt {
+    position: absolute;
+    top: 20%;
+    left: 26%;
+    max-width: 50%;
+}
+
+.nri_banner_form {
+    width: 70%;
+    margin: auto;
+}
+
+.nri_banner_form_input {
+    background-color: rgba(255,255,255,0.7) !important;
+    border-radius: 40px !important;
+}
+
+.nri_banner_form_button, .nri_banner_form_button:focus {
+    color: #ffffff;
+    background-color: #f1591f !important;
+    text-transform: none;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+    padding: 4px 25px !important;
+    border-radius: 40px;
+    border: 1px solid #f1591f;
+}
+
+.nri_banner_form_button:hover, .nri_banner_form_button:active {
+    background-color: #ff3200 !important;
+}
+
+.bg-nri-yellow {
+    background-color: rgba(243, 112, 33, 1);
+}
+
+.bg-nri-gray {
+    background-color: rgba(169, 167, 177, 1);
+}
+
+.color-magenta-nri {
+    color: rgba(215, 11, 54, 1);
+}
+
+.color-purple-nri {
+    color: rgba(37, 29, 61, 1);
+}
+
+/* ---- NRI Page End ---- */
+
+
 /* ---- Youtube Video ---- */
 
 .youtube-container {
@@ -1502,6 +1555,14 @@ button {
     width: 65%;
 }
 
+.width60 {
+    width: 60%;
+}
+
+.width10 {
+    width: 10%;
+}
+
 .width5 {
     width: 5%;
 }
@@ -1701,6 +1762,10 @@ button {
     padding: 20px 0px;
 }
 
+.padding40-0 {
+    padding: 40px 0px;
+}
+
 .padding25-15 {
     padding: 25px 15px;
 }
@@ -1783,6 +1848,10 @@ button {
 
 .padding0_20_20 {
     padding: 0px 20px 20px !important;
+}
+
+.padding10_0_15 {
+    padding: 10px 0px 15px;
 }
 
 .padding10_0_30 {

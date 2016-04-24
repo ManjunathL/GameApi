@@ -46,8 +46,9 @@ define([
             'lp(/)':'landingpage',
             'oglp(/)':'newlandingpage',
             'fblp(/)':'fblandingpage',
-            'mangalore-lp(/)':'mangalorelandingpage',
-            'media(/)': 'mediapage'
+            'media(/)': 'mediapage',
+            'nri(/)' : 'nripage',
+            'mangalore-lp(/)':'mangalorelandingpage'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -387,9 +388,17 @@ define([
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
             });
         });
+        router.on('route:nripage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/nri_pages/nri_page.js'], function(NriPage) {
+                VM.create(VM.NRIPAGE, NriPage).render();
+            });
+        });
+
         router.on('route', function () {
             $("html,body").scrollTop(0);
         });
+
         Backbone.history.start({
             pushState: true,
             root: "/"

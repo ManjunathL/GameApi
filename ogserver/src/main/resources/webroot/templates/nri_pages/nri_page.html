@@ -1,0 +1,452 @@
+<section class="bg-white padding-bottom20 menu-spacer">
+    <div class="container-fluid">
+        <div class="row margin0">
+            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/banner_top.jpg'%>"
+                 class="cld-responsive img-centered" alt="Looking for modular kitchen">
+        </div>
+        <div class="nri_banner_txt hidden-sm hidden-xs">
+            <h1 class="color-white align-center">
+                LOOKING FOR <span class="color-orange"><b>MODULAR KITCHEN</b></span> FOR YOUR NEW FLAT IN
+                <b>BANGALORE?</b>
+            </h1>
+
+            <h3 class="heading-center-notransform color-white margin-top40 width90 margin_auto">
+                Easy buying and FREE consultation of modular furniture sitting anywhere across the globe.
+            </h3>
+
+            <!-- Banner Contact Form -->
+            <div class="row nri_banner_form hidden-sm hidden-xs margin-top40">
+
+                <div class="col-md-12">
+                    <div class="row display-none" id="contact_error_row">
+                        <p class="margin0 error-text align-center" id="contact_error"></p>
+                    </div>
+
+                    <form id="banner_contactForm" data-toggle="validator" role="form"
+                          class="width90 margin_auto padding-top10">
+                        <div class="row">
+                            <div class="margin-bottom10 form-group">
+                                <input type="text" class="width100 form-control nri_banner_form_input"
+                                       placeholder="Your Name"
+                                       value="<%= userProfile ? userProfile.displayName : ''%>"
+                                       id="banner_contact_full_name" required/>
+                                                    <span class="glyphicon form-control-feedback"
+                                                          aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom10 form-group">
+                                <input type="email" class="width100 form-control nri_banner_form_input"
+                                       placeholder="Your Email"
+                                       value="<%= userProfile ? userProfile.email : ''%>"
+                                       id="banner_contact_email_id" required pattern=".+@.+\..+"
+                                       title="<abc>@<xyz>.<com>"/>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom10 form-group has-feedback">
+                                <input type="text" class="width100 form-control nri_banner_form_input"
+                                       placeholder="Your Contact Number"
+                                       value="<%= userProfile ? userProfile.phone : ''%>"
+                                       id="banner_contact_contact_num" required pattern="\d{10}"
+                                       title="e.g. 9876543210"/>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+
+                            <div class="align-center form-group">
+                                <button
+                                        id="contactus-submit-btn"
+                                        class="nri_banner_form_button"
+                                        type="submit"
+                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> Submit">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="banner_success-msg-padding" class="display-none margintop25"></div>
+                    <div id="banner_success-msg" class="display-none">
+                        <p class="justify">
+                            Thank you for contacting mygubbi. Our team will get back to you as soon as possible.
+                        </p>
+
+                        <p class="margintop40">
+                            Want to keep Exploring? Click
+                            <a id="contact-form-explore" href="/u-shaped-kitchen-design">here</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Banner Contact Form End -->
+        </div>
+        <div class="hidden-lg hidden-md">
+            <div class="margin-top20 bg-dark-gray padding10_0_15">
+                <h1 class="color-white align-center">
+                    LOOKING FOR <span class="color-orange"><b>MODULAR KITCHEN</b></span> FOR YOUR NEW FLAT IN
+                    <b>BANGALORE?</b>
+                </h1>
+
+                <h3 class="heading-center-notransform color-white margin-top20">
+                    Easy buying and FREE consultation of modular furniture sitting anywhere across the globe.
+                </h3>
+            </div>
+
+            <div class="margin-top20 bg-dark-gray">
+                <!-- Banner Contact Form -->
+                <div class="row margin_auto width90">
+
+                    <div class="col-md-12">
+                        <div class="row display-none" id="contact_error_row1">
+                            <p class="margin0 error-text align-center" id="contact_error1"></p>
+                        </div>
+
+                        <form id="banner_contactForm1" data-toggle="validator" role="form"
+                              class="width90 margin_auto padding-top10">
+                            <div class="row">
+                                <div class="margin-bottom10 form-group">
+                                    <input type="text" class="width100 form-control nri_banner_form_input"
+                                           placeholder="Your Name"
+                                           value="<%= userProfile ? userProfile.displayName : ''%>"
+                                           id="banner_contact_full_name1" required/>
+                                                    <span class="glyphicon form-control-feedback"
+                                                          aria-hidden="true"></span>
+
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="margin-bottom10 form-group">
+                                    <input type="email" class="width100 form-control nri_banner_form_input"
+                                           placeholder="Your Email"
+                                           value="<%= userProfile ? userProfile.email : ''%>"
+                                           id="banner_contact_email_id1" required pattern=".+@.+\..+"
+                                           title="<abc>@<xyz>.<com>"/>
+
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="margin-bottom10 form-group has-feedback">
+                                    <input type="text" class="width100 form-control nri_banner_form_input"
+                                           placeholder="Your Contact Number"
+                                           value="<%= userProfile ? userProfile.phone : ''%>"
+                                           id="banner_contact_contact_num1" required pattern="\d{10}"
+                                           title="e.g. 9876543210"/>
+
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="align-center form-group">
+                                    <button
+                                            id="contactus-submit-btn1"
+                                            class="nri_banner_form_button"
+                                            type="submit"
+                                            data-loading-text="<i class='fa fa-spinner fa-spin'></i> Submit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="banner_success-msg-padding1" class="display-none margintop25"></div>
+                        <div id="banner_success-msg1" class="display-none">
+                            <p class="justify">
+                                Thank you for contacting mygubbi. Our team will get back to you as soon as possible.
+                            </p>
+
+                            <p class="margintop40">
+                                Want to keep Exploring? Click
+                                <a id="contact-form-explore1" href="/u-shaped-kitchen-design">here</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Banner Contact Form End -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="padding50-0 bg-color-white align-center">
+                <div class="row padding20-0">
+                    <div class="col-md-4 col-sm-4">
+                        <img class="cld-responsive img-responsive img-centered width85"
+                             data-src="<%= imgBase + 'w_auto' + '/nri_page/V1.png'%>" alt="Browse11">
+                        <div class="intro-text">
+                            <p>Browse Designs</p>
+                            Pick your favorite
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <img class="cld-responsive img-responsive img-centered width85"
+                             data-src="<%= imgBase + 'w_auto' + '/nri_page/v2.png'%>" alt="Consult11">
+                        <div class="intro-text">
+                            <p>Talk to Us</p>
+                            Choose Final Design
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <img class="cld-responsive img-responsive img-centered width85"
+                             data-src="<%= imgBase + 'w_auto' + '/nri_page/v3.png'%>" alt="Relax">
+                        <div class="intro-text">
+                            <p>Order and relax</p>
+                            Enjoy FREE Delivery
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-nri-yellow">
+            <div class="container">
+                <div class="row margin0 align-center padding20">
+
+                    <h3 class="color-white margin-top0">
+                        <b>Watch your dream shaping into reality at the comfort of your home</b>
+                    </h3>
+
+                    <p class="color-white margin_auto width80">
+                        We know that distance is a major factor to be considered. Since, you can’t travel to
+                        Bangalore & Pune for each & everything, we will take care of the project on your behalf.
+                        And we offer design solutions using the latest technology to meet your needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container padding40-0">
+            <div class="row margin0 align-center">
+                <h2 class="color-magenta-nri margin-top0">
+                    <img data-src="<%= imgBase + 'w_auto' + '/nri_page/L3_07.jpg'%>"
+                         class="cld-responsive img-centered width10" alt="left line">
+                    <b>NRI Services</b>
+                    <img data-src="<%= imgBase + 'w_auto' + '/nri_page/R3_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="right line">
+                </h2>
+                <h3 class="heading-center-notransform">
+                    What we have in store for you?
+                </h3>
+            </div>
+            <div class="row margin0">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri6.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Ease of selection
+                            </h4>
+                            <p>
+                                Browse through our varied designs, if not satisfied give us a call for personalised
+                                design
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri5.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Active Customer Support
+                            </h4>
+                            <p>
+                                You can connect with us over mail, video or phone call as per your convenience
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri4.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Additional support services
+                            </h4>
+                            <p>
+                                Any additional work at site which is not part of our scope, we will ensure that it gets
+                                done from right partners<br/>
+                                (Eg Electrical or plumbing work)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri3.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Regular Updates
+                            </h4>
+                            <p>
+                                We will continuously update you with the work progress. Be it images or video updates,
+                                we will keep you posted.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri2.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Careful Handover
+                            </h4>
+                            <p>
+                                You don’t have to worry for safety, we will carefully handover the newly decorated home
+                                to you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri1.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Flexible Payments
+                            </h4>
+                            <p>
+                                You have the advantage of doing partial payments. We also have EMI options available.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-nri-gray">
+            <div class="row margin0">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
+                    <img data-src="<%= imgBase + 'w_auto' + '/nri_page/updates.jpg'%>"
+                         class="cld-responsive img-centered" alt="Original Designs">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding20">
+                    <h2 class="text-transform-none">
+                        Original designs and regular updates are covered
+                    </h2>
+                    <p class="justify">
+                        Our team of professionals have confidence in visually appealing values of interior designing. In
+                        terms of novelty and modern designs our team eases in meeting the uppermost thinkable standards.
+                        We also keep our customers updated on work progress by using digital photographs, which are
+                        shared with you via email.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container padding40-0">
+            <div class="row margin0 align-center">
+                <h2 class="color-purple-nri margin-top0">
+                    <img data-src="<%= imgBase + 'w_auto' + '/nri_page/L1_07.jpg'%>"
+                         class="cld-responsive img-centered width10" alt="left line">
+                    <b>Process? We Keep it simple!</b>
+                    <img data-src="<%= imgBase + 'w_auto' + '/nri_page/R1_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="right line">
+                </h2>
+            </div>
+            <div class="row margin0">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri6.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Ease of selection
+                            </h4>
+                            <p>
+                                Browse through our varied designs, if not satisfied give us a call for personalised
+                                design
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri5.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Active Customer Support
+                            </h4>
+                            <p>
+                                You can connect with us over mail, video or phone call as per your convenience
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri4.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Additional support services
+                            </h4>
+                            <p>
+                                Any additional work at site which is not part of our scope, we will ensure that it gets
+                                done from right partners<br/>
+                                (Eg Electrical or plumbing work)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri3.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Regular Updates
+                            </h4>
+                            <p>
+                                We will continuously update you with the work progress. Be it images or video updates,
+                                we will keep you posted.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri2.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Careful Handover
+                            </h4>
+                            <p>
+                                You don’t have to worry for safety, we will carefully handover the newly decorated home
+                                to you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/nri_page/nri1.png'%>"
+                                 class="cld-responsive img-centered width85 float-right" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none">
+                                Flexible Payments
+                            </h4>
+                            <p>
+                                You have the advantage of doing partial payments. We also have EMI options available.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
