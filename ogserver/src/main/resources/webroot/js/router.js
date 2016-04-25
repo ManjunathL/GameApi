@@ -46,6 +46,7 @@ define([
             'lp(/)':'landingpage',
             'oglp(/)':'newlandingpage',
             'fblp(/)':'fblandingpage',
+            'mangalore-lp(/)':'mangalorelandingpage',
             'media(/)': 'mediapage'
         },
         dashboard: function() {
@@ -372,6 +373,12 @@ define([
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/landing_pages/fblanding_page.js'], function(FbLandingPage) {
                 VM.create(VM.FBLANDINGPAGE, FbLandingPage).render();
+            });
+        });
+        router.on('route:mangalorelandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/mangalorelanding_page.js'], function(MangaloreLandingPage) {
+                VM.create(VM.MANGALORELANDINGPAGE, MangaloreLandingPage).render();
             });
         });
         router.on('route:mediapage', function(actions) {

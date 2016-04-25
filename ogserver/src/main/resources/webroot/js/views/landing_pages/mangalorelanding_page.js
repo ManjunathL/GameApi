@@ -1,22 +1,22 @@
 /**
- * Created by mygubbi on 11/3/16.
+ * Created by mygubbi on 15/4/16.
  */
 define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/landing_pages/newlanding_page.html',
+    'text!/templates/landing_pages/mangalorelanding_page.html',
     'cloudinary_jquery',
     '/js/slyutil.js',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
     '/js/analytics.js'
-], function($, _, Backbone, newlandingPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
-    var LandingPageVIew = Backbone.View.extend({
+], function($, _, Backbone, mangalorelandingPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+    var MangaloreLandingPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
         renderWithUserProfCallback: function(userProfData) {
-            $(this.el).html(_.template(newlandingPageTemplate)({
+            $(this.el).html(_.template(mangalorelandingPageTemplate)({
                 'userProfile': userProfData
             }));
             $.cloudinary.responsive();
@@ -47,9 +47,9 @@ define([
             var email = $('#contact_email_id1').val();
             var phone = $('#contact_contact_num1').val();
 
-            ConsultUtil.submit(name, email, phone, "", "", null, null, null);
+            ConsultUtil.submit(name, email, phone, "", "", null,null,null);
 
-            window.App.router.navigate('/thankyou-newlp-page', {
+            window.App.router.navigate('/thankyou-mangalore-lp-page', {
                 trigger: true
             });
 
@@ -64,21 +64,19 @@ define([
             var propertyName = $('#contact_property_name2').val();
             var query = $('#contact_requirement2').val();
             var floorplan = $("#contact_floorplan2").prop('files')[0];
-            var projectName = $('#contact_project_name2').val();
-            var cityName = $('#contact_city_name2').val();
 
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, projectName, cityName);
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName,null,null);
 
-            window.App.router.navigate('/thankyou-newlp-page', {
+            window.App.router.navigate('/thankyou-mangalore-lp-page', {
                 trigger: true
             });
 
         },
         events: {
-            "submit #contactNwLpForm1": "submit_form1",
-            "submit #contactNwLpForm2": "submit_form2"
+            "submit #contactLpForm1": "submit_form1",
+            "submit #contactLpForm2": "submit_form2"
 
         }
     });
-    return LandingPageVIew;
+    return MangaloreLandingPageVIew;
 });
