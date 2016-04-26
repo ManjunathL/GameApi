@@ -2,23 +2,16 @@ package com.mygubbi.apiserver;
 
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
-import com.mygubbi.config.StaticConfigHandler;
-import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
-import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
-import io.vertx.ext.web.handler.sockjs.BridgeOptions;
-import io.vertx.ext.web.handler.sockjs.PermittedOptions;
-import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -89,6 +82,9 @@ public class GameApiServerVerticle extends AbstractVerticle
 
         new ConfiguredRestApiHandler().setup(router);
 
+        router.mountSubRouter("/gapi/user.auth", new GameUserLoginHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/user.reg", new GameUserRegistrationHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/user.change_pwd", new GameUserChangePwdHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
 
     }
