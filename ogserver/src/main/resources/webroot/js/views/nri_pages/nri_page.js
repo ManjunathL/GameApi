@@ -27,9 +27,7 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            this.ready();
         },
-
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
