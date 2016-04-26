@@ -244,10 +244,12 @@
       "id": "game_user.insert",
       "type": "insert",
       "table": "game_user",
-      "query": "insert into game_user (active, email, role, salt, hash) values ('A', ?, ?, ?, ?)",
+      "query": "insert into game_user (active, email, role, name, phone, salt, hash) values ('A', ?, ?, ?, ?, ?, ?)",
       "params": [
         "email",
         "role",
+        "name",
+        "phone",
         "salt",
         "hash"
       ]
@@ -267,7 +269,7 @@
       "id": "game_user.select",
       "type": "select",
       "table": "game_user",
-      "query": "select email, role, salt, hash from game_user where email = ?",
+      "query": "select email, role, name, phone, salt, hash from game_user where email = ?",
       "params": [
         "email"
       ]
