@@ -46,7 +46,7 @@ public class GameUserLoginHandler extends AbstractRouteHandler {
     }
 
     private String formUserData(JsonObject data) {
-        return "{\"email\": \"" + data.getString(USER_ID_KEY) + "\", \"role\": \"" + data.getString("role") + "\"}";
+        return "{\"email\": \"" + data.getString(USER_ID_KEY) + "\", \"role\": \"" + data.getString("role") + "\", \"phone\": \"" + data.getString("phone") + "\", \"name\": \"" + data.getString("name") + "\"}";
     }
 
     private void respond(HttpServerResponse response, String status, String userData, String errorMessage) {
