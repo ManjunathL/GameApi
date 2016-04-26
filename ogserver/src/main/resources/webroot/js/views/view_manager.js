@@ -21,6 +21,7 @@ define(function() {
         MEDIAPAGE: "mediapage",
         NRIPAGE: "nripage",
         MANGALORELANDINGPAGE: "MangaloreLandingPage",
+        EMAILLANDINGPAGE: "EmailLandingPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {
