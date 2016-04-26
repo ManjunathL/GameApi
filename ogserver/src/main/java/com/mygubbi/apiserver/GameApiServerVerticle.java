@@ -50,6 +50,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
         String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
         return new HttpServerOptions()
+/*
                 .setKeyStoreOptions(new JksOptions().
                         setPath(ssl_keystore).
                         setPassword(ssl_password))
@@ -57,6 +58,7 @@ public class GameApiServerVerticle extends AbstractVerticle
                         setPath(ssl_keystore).
                         setPassword(ssl_password))
                 .setSsl(true)
+*/
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
     }
