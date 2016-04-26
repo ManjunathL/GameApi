@@ -46,9 +46,10 @@ define([
             'lp(/)':'landingpage',
             'oglp(/)':'newlandingpage',
             'fblp(/)':'fblandingpage',
-            'media(/)': 'mediapage',
+            'mangalore-lp(/)':'mangalorelandingpage',
+            'email-lp(/)':'emaillandingpage',
             'nri(/)' : 'nripage',
-            'mangalore-lp(/)':'mangalorelandingpage'
+            'media(/)': 'mediapage'
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -382,6 +383,12 @@ define([
                 VM.create(VM.MANGALORELANDINGPAGE, MangaloreLandingPage).render();
             });
         });
+        router.on('route:emaillandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/emaillanding_page.js'], function(EmailLandingPage) {
+                VM.create(VM.EMAILLANDINGPAGE, EmailLandingPage).render();
+            });
+        });
         router.on('route:mediapage', function(actions) {
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/media_pages/media_page.js'], function(MediaPage) {
@@ -398,7 +405,6 @@ define([
         router.on('route', function () {
             $("html,body").scrollTop(0);
         });
-
         Backbone.history.start({
             pushState: true,
             root: "/"
