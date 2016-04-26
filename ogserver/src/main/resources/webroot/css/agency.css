@@ -869,6 +869,65 @@ ul.social-links {
     color: rgba(37, 29, 61, 1);
 }
 
+.color-blue-nri {
+    color: rgba(21, 103, 151, 1);
+}
+
+.min-height120 {
+    min-height: 120px;
+}
+
+.bg-color-blue1 {
+    background-color: rgba(15, 81, 114, 1);
+}
+
+.bg-color-blue2 {
+    background-color: rgba(21, 103, 151, 1);
+}
+
+.bg-color-blue3 {
+    background-color: rgba(47, 125, 163, 1);
+}
+
+.bg-color-blue4 {
+    background-color: rgba(68, 134, 168, 1);
+}
+
+.bg-color-blue5 {
+    background-color: rgba(71, 164, 201, 1);
+}
+
+.bg-color-blue6 {
+    background-color: rgba(90, 178, 220, 1);
+}
+
+.bg-color-red {
+    background-color: rgba(242, 91, 34, 1);
+}
+
+.bg-color-gray {
+    background-color: rgba(225, 226, 226, 1);
+}
+
+.down_arr {
+    float: right;
+    font-size: 40px;
+    position: relative;
+    bottom: 8px;
+}
+
+.w_hover {
+    display: none;
+}
+
+.img_hover:hover .no_hover {
+    display: none;
+}
+
+.img_hover:hover .w_hover {
+    display: block;
+}
+
 /* ---- NRI Page End ---- */
 
 
@@ -1740,6 +1799,14 @@ button {
 
 .padding0-30 {
     padding: 0px 30px;
+}
+
+.padding5per {
+    padding: 5% !important;
+}
+
+.padding-top12p5per {
+    padding-top: 12.5% !important;
 }
 
 .padding0-10per {

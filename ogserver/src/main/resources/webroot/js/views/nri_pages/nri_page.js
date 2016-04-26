@@ -35,57 +35,24 @@ define([
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
         },
-        //events: {
-        //    "click #online-tab": "toggleOnlineContent",
-        //    "click #press-release-tab": "togglePressReleaseContent",
-        //    "click #print-media-tab": "togglePrintMediaContent",
-        //    "click .close-media-pop": "closeMediaModal"
-        //},
-        //toggleOnlineContent: function(e){
-        //    $("#press-release-img").css('display','none');
-        //    $("#print-media-img").css('display','none');
-        //    $("#online-img").css('display','block');
-        //
-        //    $("#press-release-content").css('display','none');
-        //    $("#print-media-content").css('display','none');
-        //    $("#online-content").css('display','block');
-        //
-        //    $("#tab-bar").removeClass('press_media-box');
-        //    $("#tab-bar").removeClass('print_media-box');
-        //    $("#tab-bar").addClass('online_media-box');
-        //},
-        //togglePressReleaseContent: function(e){
-        //    $("#online-img").css('display','none');
-        //    $("#print-media-img").css('display','none');
-        //    $("#press-release-img").css('display','block');
-        //
-        //    $("#online-content").css('display','none');
-        //    $("#print-media-content").css('display','none');
-        //    $("#press-release-content").css('display','block');
-        //
-        //    $("#tab-bar").removeClass('online_media-box');
-        //    $("#tab-bar").removeClass('print_media-box');
-        //    $("#tab-bar").addClass('press_media-box');
-        //},
-        //togglePrintMediaContent: function(e){
-        //
-        //    $("#press-release-img").css('display','none');
-        //    $("#online-img").css('display','none');
-        //    $("#print-media-img").css('display','block');
-        //
-        //
-        //    $("#press-release-content").css('display','none');
-        //    $("#online-content").css('display','none');
-        //    $("#print-media-content").css('display','block');
-        //
-        //    $("#tab-bar").removeClass('press_media-box');
-        //    $("#tab-bar").removeClass('online_media-box');
-        //    $("#tab-bar").addClass('print_media-box');
-        //},
-        //closeMediaModal: function(ev) {
-        //    var id = $(ev.currentTarget).data('element');
-        //    $("#"+id).modal('toggle');
-        //}
+        submit: function(e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
+            var name = $('#nri_contact_full_name').val();
+            var email = $('#nri_contact_email_id').val();
+            var phone = $('#nri_contact_contact_num').val();
+
+            ConsultUtil.submit(name, email, phone, null, null, null, null, null);
+
+            window.App.router.navigate('/thankyou-contact-banner', {
+                trigger: true
+            });
+
+        },
+        events: {
+            "submit #nri_contactForm": "submit"
+        }
     });
     return NriPageVIew;
 });
