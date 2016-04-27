@@ -853,7 +853,7 @@ ul.social-links {
     text-transform: none;
     -webkit-transition: color 0.3s, opacity 0.2s;
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
-    padding: 4px 25px !important;
+    padding: 8px 25px !important;
     border-radius: 40px;
     border: 1px solid #f1591f;
 }
@@ -5109,4 +5109,8 @@ a.tab-ico {
 .whatsin_store{
     text-transform:initial;
     padding-left: 26px;
+}
+
+.bold-text{
+    font-weight: bold;
 }

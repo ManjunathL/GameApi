@@ -39,6 +39,9 @@
                                            title="<abc>@<xyz>.<com>" />
                                 </div>
                                 <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control nri_banner_form_input" id='mx_countrycode' placeholder="Country Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'  />
+                                </div>
+                                <div class="margin-bottom20 form-group">
                                     <input type='text' class="width100 form-control nri_banner_form_input" id='Phone' name='Phone'
                                            placeholder="Phone Number*" maxlength='20' value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off' required='required' pattern="\d{10}"
                                            title="e.g. 9876543210" />
@@ -172,7 +175,7 @@
                         <img class="cld-responsive img-responsive img-centered width85"
                              data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/V1.png'%>" alt="Browse11">
                         <div class="intro-text">
-                            <p>Browse Designs</p>
+                            <p><b>Browse Designs</b></p>
                             Pick your favorite
                         </div>
                     </div>
@@ -180,7 +183,7 @@
                         <img class="cld-responsive img-responsive img-centered width85"
                              data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/v2.png'%>" alt="Consult11">
                         <div class="intro-text">
-                            <p>Talk to Us</p>
+                            <p><b>Talk to Us</b></p>
                             Choose Final Design
                         </div>
                     </div>
@@ -188,7 +191,7 @@
                         <img class="cld-responsive img-responsive img-centered width85"
                              data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/v3.png'%>" alt="Relax">
                         <div class="intro-text">
-                            <p>Order and relax</p>
+                            <p><b>Order and relax</b></p>
                             Enjoy FREE Delivery
                         </div>
                     </div>
@@ -198,7 +201,7 @@
 
         <div class="container-fluid bg-nri-yellow">
             <div class="container">
-                <div class="row margin0 align-center padding20">
+                <div class="row margin0 align-center padding30">
 
                     <h3 class="color-white margin-top0">
                         <b>Watch your dream shaping into reality at the comfort of your home</b>
@@ -214,7 +217,7 @@
         </div>
 
         <div class="container padding40-0">
-            <div class="row margin0 align-center">
+            <div class="row margin0 align-center paddingbottom20">
                 <h2 class="color-magenta-nri margin-top0">
                     <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/L3_07.jpg'%>"
                          class="cld-responsive img-centered width10" alt="left line">
@@ -369,10 +372,10 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 padding-top12p5per img_hover">
                         <div class="row margin0">
-                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/1.png'%>" alt="Browse11">
-                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/8.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover margintop10"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr1.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover margintop10"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr111.png'%>" alt="Browse11">
                         </div>
                         <div class="row margin0 padding15 color-purple-nri">
                             <h5 class="text-transform-none"><b>Site Visit</b></h5>
@@ -382,9 +385,9 @@
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 img_hover">
                         <div class="row margin0">
                             <img class="cld-responsive img-responsive img-centered width85 no_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/2.png'%>" alt="Browse11">
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr2.png'%>" alt="Browse11">
                             <img class="cld-responsive img-responsive img-centered width85 w_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/9.png'%>" alt="Browse11">
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr222.png'%>" alt="Browse11">
                         </div>
                         <div class="row margin0 padding15 color-purple-nri">
                             <h5 class="text-transform-none"><b>Engaging Discussion</b></h5>
@@ -393,10 +396,10 @@
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 padding-top12p5per img_hover">
                         <div class="row margin0">
-                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/3.png'%>" alt="Browse11">
-                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/10.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover margintop10"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr3.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover margintop10"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr333.png'%>" alt="Browse11">
                         </div>
                         <div class="row margin0 padding15 color-purple-nri">
                             <h5 class="text-transform-none"><b>Design Plan</b></h5>
@@ -407,9 +410,9 @@
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 img_hover">
                         <div class="row margin0">
                             <img class="cld-responsive img-responsive img-centered width85 no_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/4.png'%>" alt="Browse11">
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr4.png'%>" alt="Browse11">
                             <img class="cld-responsive img-responsive img-centered width85 w_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/11.png'%>" alt="Browse11">
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr444.png'%>" alt="Browse11">
                         </div>
                         <div class="row margin0 padding15 color-purple-nri">
                             <h5 class="text-transform-none"><b>Finalise your design</b></h5>
@@ -419,10 +422,10 @@
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 padding-top12p5per img_hover">
                         <div class="row margin0">
-                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/6.png'%>" alt="Browse11">
-                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/13.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover margintop10"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr5.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover margintop10"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr555.png'%>" alt="Browse11">
                         </div>
                         <div class="row margin0 padding15 color-purple-nri">
                             <h5 class="text-transform-none"><b>FREE Delivery & Installation</b></h5>
@@ -433,9 +436,9 @@
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 img_hover">
                         <div class="row margin0">
                             <img class="cld-responsive img-responsive img-centered width85 no_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/7.png'%>" alt="Browse11">
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr6.png'%>" alt="Browse11">
                             <img class="cld-responsive img-responsive img-centered width85 w_hover"
-                                 data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/14.png'%>" alt="Browse11">
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr666.png'%>" alt="Browse11">
                         </div>
                         <div class="row margin0 padding15 color-purple-nri">
                             <h5 class="text-transform-none"><b>Avail our efficient after sales & service</b></h5>
@@ -471,7 +474,7 @@
             <div class="row margin0 align-center color-white">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 min-height120 padding0">
                     <div class="row margin0 bg-color-blue1">
-                        <h4 class="text-transform-none">Original Design & Iterations</h4>
+                        <h4 class="text-transform-none bold-text">Original Design & Iterations</h4>
                     </div>
                     <div class="row margin0 padding20 bg-color-blue2">
                         <p>
@@ -481,7 +484,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 min-height120 padding0">
                     <div class="row margin0 bg-color-blue3">
-                        <h4 class="text-transform-none">Personal Engagement</h4>
+                        <h4 class="text-transform-none bold-text">Personal Engagement</h4>
                     </div>
                     <div class="row margin0 padding20 bg-color-blue4">
                         <p>
@@ -491,7 +494,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 min-height120 padding0">
                     <div class="row margin0 bg-color-blue5">
-                        <h4 class="text-transform-none">Photorealistic Renders</h4>
+                        <h4 class="text-transform-none bold-text">Photorealistic Renders</h4>
                     </div>
                     <div class="row margin0 padding20 bg-color-blue6">
                         <p>
