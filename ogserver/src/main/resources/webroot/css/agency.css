@@ -826,9 +826,15 @@ ul.social-links {
 
 .nri_banner_txt {
     position: absolute;
-    top: 20%;
-    left: 26%;
-    max-width: 50%;
+    top: 18%;
+    left: 2%;
+    max-width: 95%;
+}
+
+@media (max-width:1180px){
+    .nri_banner_txt {
+        top: 9%;
+    }
 }
 
 .nri_banner_form {
@@ -919,8 +925,15 @@ ul.social-links {
     bottom: 8px;
 }
 
+.no_hover {
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+}
+
 .w_hover {
     display: none;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
 
 .img_hover:hover .no_hover {
@@ -1838,6 +1851,10 @@ button {
 
 .padding25-15 {
     padding: 25px 15px;
+}
+
+.padding50-15 {
+    padding: 50px 15px;
 }
 
 .padding20-20 {
