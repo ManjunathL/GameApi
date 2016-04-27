@@ -719,6 +719,9 @@ a.button-about-white:hover {
 .height300 {
     height: 300px;
 }
+.height100 {
+    height: 100px;
+}
 
 .carousel-form-box {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -5084,4 +5087,9 @@ a.tab-ico {
     display: inline-block;
     text-overflow: ellipsis;
     max-width:100%;
+}
+
+.whatsin_store{
+    text-transform:initial;
+    padding-left: 26px;
 }
