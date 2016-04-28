@@ -1938,7 +1938,7 @@ button {
 }
 
 .padding-right10 {
-    padding-right: 10px;
+    padding-right: 10px !important;
 }
 
 .padding-right15 {

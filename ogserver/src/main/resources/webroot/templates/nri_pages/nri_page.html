@@ -46,18 +46,20 @@
                                            required='required' pattern=".+@.+\..+"
                                            title="<abc>@<xyz>.<com>"/>
                                 </div>
-                                <div class="margin-bottom20 form-group">
-                                    <input type='text' class="width100 form-control nri_banner_form_input"
-                                           id='mx_countrycode' placeholder="Country Code" name='mx_countrycode'
-                                           maxlength='20' value='' autocomplete='off'/>
-                                </div>
-                                <div class="margin-bottom20 form-group">
-                                    <input type='text' class="width100 form-control nri_banner_form_input" id='Phone'
-                                           name='Phone'
-                                           placeholder="Phone Number*" maxlength='20'
-                                           value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
-                                           required='required' pattern="\d{10}"
-                                           title="e.g. 9876543210"/>
+                                <div class="row margin0">
+                                    <div class="col-lg-5 col-md-5 margin-bottom20 form-group padding0 padding-right10">
+                                        <input type='text' class="width100 form-control nri_banner_form_input"
+                                               id='mx_countrycode' placeholder="Country Code" name='mx_countrycode'
+                                               maxlength='20' value='' autocomplete='off'/>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 margin-bottom20 form-group padding0">
+                                        <input type='text' class="width100 form-control nri_banner_form_input" id='Phone'
+                                               name='Phone'
+                                               placeholder="Phone Number*" maxlength='20'
+                                               value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                               required='required' pattern="\d{10}"
+                                               title="e.g. 9876543210"/>
+                                    </div>
                                 </div>
                                 <div class="margin-bottom20 form-group">
                                     <input type='text' class="width100 form-control nri_banner_form_input" id='mx_City'
