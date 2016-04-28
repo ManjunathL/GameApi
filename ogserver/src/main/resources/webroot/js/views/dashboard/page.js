@@ -43,6 +43,11 @@ define([
                 var $hmalt_wrap = $hmalt_frame.parent().parent();
                 SlyUtil.create($hmalt_wrap, '#hmalt-frame', '.hmalt-next', '.hmalt-prev').init();
             }
+            if ($('#brand-frame').length > 0) {
+                var $brand_frame = $('#brand-frame');
+                var $brand_wrap = $brand_frame.parent().parent();
+                SlyUtil.create($brand_wrap, '#brand-frame', '.brand-next', '.brand-prev').init();
+            }
 
             var gallerySlider = $('.bxslider').bxSlider({
                 mode: 'fade',
