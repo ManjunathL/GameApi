@@ -5114,3 +5114,11 @@ a.tab-ico {
 .bold-text{
     font-weight: bold;
 }
+
+.brand-sly-content{
+    display: inline-block;
+    width: 210px !important;
+    text-align: justify;
+    padding: 15px;
+    vertical-align: middle;
+}
