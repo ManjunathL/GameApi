@@ -49,7 +49,9 @@ define([
             'mangalore-lp(/)':'mangalorelandingpage',
             'email-lp(/)':'emaillandingpage',
             'nri(/)' : 'nripage',
-            'media(/)': 'mediapage'
+            'media(/)': 'mediapage',
+            'shobha-lp(/)': 'shobhalandingpage'
+
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
@@ -387,6 +389,12 @@ define([
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/landing_pages/emaillanding_page.js'], function(EmailLandingPage) {
                 VM.create(VM.EMAILLANDINGPAGE, EmailLandingPage).render();
+            });
+        });
+        router.on('route:shobhalandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/shobhalanding_page.js'], function(ShobhaLandingPage) {
+                VM.create(VM.SHOBHALANDINGPAGE, ShobhaLandingPage).render();
             });
         });
         router.on('route:mediapage', function(actions) {

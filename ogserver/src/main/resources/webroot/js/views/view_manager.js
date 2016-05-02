@@ -22,6 +22,7 @@ define(function() {
         NRIPAGE: "nripage",
         MANGALORELANDINGPAGE: "MangaloreLandingPage",
         EMAILLANDINGPAGE: "EmailLandingPage",
+        SHOBHALANDINGPAGE: "shobhalandingpage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {
