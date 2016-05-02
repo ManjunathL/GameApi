@@ -259,6 +259,10 @@ h6 {
     background-color: #808080;
 }
 
+.bg-dark-darkgreen {
+    background-color: #2F4446;
+}
+
 .portfolio-bg-gray {
     background-color: #fcfcfc;
     -webkit-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
@@ -868,6 +872,10 @@ ul.social-links {
 
 .bg-nri-yellow {
     background-color: rgba(243, 112, 33, 1);
+}
+
+.bg-nri-aquagreen {
+    background-color: rgba(33, 119, 104, 1);
 }
 
 .bg-nri-gray {
@@ -1614,6 +1622,9 @@ button {
     color: #e60000 !important;
 }
 
+.text-heavy-shadow-black{
+    text-shadow: 0px 1px 7px #000;
+}
 .width100 {
     width: 100%;
 }
@@ -1736,6 +1747,9 @@ button {
 .font-size30 {
     font-size: 30px;
 }
+.font-size40 {
+    font-size: 40px;
+}
 
 .font-size55 {
     font-size: 55px;
@@ -1743,6 +1757,10 @@ button {
 
 .font-size80 {
      font-size: 80px;
+ }
+
+ .font-weight-bold {
+     font-weight: bold;
  }
 
 .tab {
@@ -2083,6 +2101,9 @@ button {
 
 .text-transform-none {
     text-transform: none !important;
+}
+.text-transform-capitalize {
+    text-transform: capitalize !important;
 }
 
 .border-right0 {
@@ -5137,4 +5158,77 @@ a.tab-ico {
     text-align: justify;
     padding: 15px;
     vertical-align: middle;
+}
+
+/* ---- Shobha Landing Page ---- */
+
+.shobha_banner_txt {
+   position: absolute;
+   top: 10%;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.shobha_banner_subheading{
+    font-size: 40px;
+    margin-top: 12px !important;
+}
+.shobha_banner_form{
+    width: 30%;
+    margin: auto;
+    padding: 10px;
+}
+
+.shobha_banner_form_button, .shobha_banner_form_button:focus {
+    color: #4cc7b1;
+    background-color: #ffffff !important;
+    text-transform: none;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+    padding: 8px 25px !important;
+    border-radius: 40px;
+    border: 1px solid #ffffff;
+    width: 40%;
+    font-weight: bold;
+}
+
+.shobha_banner_form_button:hover, .shobha_banner_form_button:active {
+    background-color: #4cc7b1 !important;
+     color: #ffffff;
+     border:1px solid #4cc7b1;
+}
+
+.wrong-img{
+    position: absolute;
+    top: 0px;
+    width: 35%;
+    height: 30px;
+}
+
+.shobha-consult-btn{
+    width: 20%!important;
+    background-color: #4CC7B1 !important;
+    color: #000;
+    border: 1px solid #4CC7B1;
+    border-radius: 8px;
+    padding: 15px 25px !important;
+}
+
+.img_hover:hover .color-shobha-hover {
+    color: #2F4446 !important;
+}
+
+@media (max-width:1180px){
+    .shobha_banner_txt {
+        background-color: rgba(169, 167, 177, 1);
+        position: relative;
+        left: 0;
+        max-width: 100%;
+    }
+
+    .shobha_banner_form{
+        width: 100%;
+        margin: auto;
+        padding: 10px;
+    }
 }
