@@ -5204,9 +5204,21 @@ a.tab-ico {
     width: 35%;
     height: 30px;
 }
+.cross-mark-img{
+    position: absolute;
+    top: 0px;
+    width: 50%;
+    height: 30px;
+}
+
+.round-img{
+    position: absolute;
+    top: -10px;
+    left: -30px;
+}
 
 .shobha-consult-btn{
-    width: 20%!important;
+    width: 210px!important;
     background-color: #4CC7B1 !important;
     color: #000;
     border: 1px solid #4CC7B1;
@@ -5215,7 +5227,20 @@ a.tab-ico {
 }
 
 .img_hover:hover .color-shobha-hover {
-    color: #2F4446 !important;
+    color:#4CC7B1 !important;
+}
+
+.shobha-table tr td{
+    padding:20px!important;
+    font-size:16px;
+}
+.shobha-table tr th{
+    text-align:center;
+}
+
+.shobha-list-style{
+    list-style-type: none;
+    padding-left: 15px!important;
 }
 
 @media (max-width:1180px){
