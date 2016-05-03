@@ -58,7 +58,15 @@ define([
 
         },
         events: {
-            "submit #nri_contactForm": "submit"
+            "submit #nri_contactForm": "submit",
+            "click #book_consultation": "openBookConsultPopup",
+            "click #close-bookconsult-pop": "closeBookModal"
+        },
+        openBookConsultPopup: function() {
+            $('#bookconsultpop').modal('show');
+        },
+        closeBookModal: function() {
+            $("#bookconsultpop").modal('toggle');
         }
     });
     return NriPageVIew;
