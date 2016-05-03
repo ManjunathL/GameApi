@@ -449,7 +449,7 @@
         </div>
 
         <div class="container-fluid bg-color-red">
-            <a href="/consult">
+            <a href="javascript:void(0);" id="book_consultation">
                 <h2 class="text-transform-none align-center color-white margin20-0">
                     Book your consultation
                 </h2>
@@ -662,5 +662,22 @@
         </div>
     </div>
 </section>
-<iframe name="leadsquared_landing_page_frame" src="https://mygubbi.viewpage.co/email-lp?ignoremxtracking=mxtrue" width="600" height="800" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-<script type="text/javascript"> var MXLandingPageId = '8d7bb83a-0c47-11e6-b61b-22000aa8e760'; </script>
+
+
+
+<!-- Book Your Consultation Modal -->
+<div id="bookconsultpop" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div>
+            <iframe name="leadsquared_landing_page_frame" src="https://mygubbi.viewpage.co/email-lp?ignoremxtracking=mxtrue" width="600" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+            <script type="text/javascript"> var MXLandingPageId = '8d7bb83a-0c47-11e6-b61b-22000aa8e760'; </script>
+            <div id="close-bookconsult-pop" class="close-icon signup-form">
+                <img src="<%= imgBase + 'close-white.png'%>">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Book Your Consultation Modal End -->
