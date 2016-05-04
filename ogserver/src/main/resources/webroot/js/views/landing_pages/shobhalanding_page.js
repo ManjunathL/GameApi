@@ -40,6 +40,16 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
+        },
+        events: {
+         "click #book_consultation": "openBookConsultPopup",
+         "click #close-bookconsult-pop": "closeBookModal"
+        },
+        openBookConsultPopup: function() {
+         $('#bookconsultpop').modal('show');
+        },
+        closeBookModal: function() {
+         $("#bookconsultpop").modal('toggle');
         }
     });
     return ShobhaLandingPageVIew;
