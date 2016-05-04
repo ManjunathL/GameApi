@@ -1,39 +1,125 @@
 {
   "resturls": [
     {
-      "uri": "/game/api/proposal.list",
-      "source": "file",
-      "file":"testdata/proposals.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/game/api/proposal.summary",
-      "source": "file",
-      "file":"testdata/proposal_classes.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/game/api/proposal.detail",
-      "source": "file",
-      "file":"testdata/proposal.json",
-      "default": "{}",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/game/api/proposal.comments",
-      "source": "file",
-      "file":"testdata/proposal_comments.json",
-      "default": "{}",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/game/api/proposal",
+      "uri": "/gapi/proposal/list",
       "source": "db",
-      "query":"product.select.category",
-      "params":["category"],
-      "resultfields":["productJson"],
+      "query":"proposal.list",
+      "params":["status"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/summary",
+      "source": "db",
+      "query":"proposal.summary",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/detail",
+      "source": "db",
+      "query":"proposal.detail",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/submit",
+      "source": "db",
+      "query":"proposal.submit",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/cancel",
+      "source": "db",
+      "query":"proposal.cancel",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/add.file",
+      "source": "db",
+      "query":"proposal.addfile",
+      "params":["proposalid", "title", "path", "userid", "username"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/remove.file",
+      "source": "db",
+      "query":"proposal.removefile",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/product/add.file",
+      "source": "db",
+      "query":"proposal.product.addfile",
+      "params":["proposalid", "productid", "title", "path", "userid", "username"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/product/remove.file",
+      "source": "db",
+      "query":"proposal.removefile",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/lookup/finish",
+      "source": "file",
+      "file":"game/data/finishes.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/lookup/carcass.material",
+      "source": "file",
+      "file":"game/data/carcass_materials.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/lookup/shutter.material",
+      "source": "file",
+      "file":"game/data/shutter_materials.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/lookup/product.type",
+      "source": "file",
+      "file":"game/data/product_types.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/lookup/product.make",
+      "source": "file",
+      "file":"game/data/productmake.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/lookup/product.color",
+      "source": "file",
+      "file":"game/data/productcolors.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/user/listbyrole",
+      "source": "db",
+      "query":"game_user.byrole",
+      "params":["role"],
+      "resultfields":[],
       "default": "[]"
     }
   ]

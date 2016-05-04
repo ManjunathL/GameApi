@@ -1,0 +1,128 @@
+{
+  "queries": [
+    {
+      "id": "proposal.list",
+      "type": "select",
+      "table": "proposal",
+      "query": "select id, crmid, title, status, salesperson, designername, totalamount, projectname, pcity, touchtime, createdon, createdby, updatedon, updatedby from proposal where status = ?",
+      "params": ["status"]
+    },
+
+    {
+      "id": "proposal.summary",
+      "type": "select",
+      "table": "proposal",
+      "query": "select status, count(*) as proposal_count from proposal group by status",
+      "params": []
+    },
+    {
+      "id": "proposal.detail",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal where proposalid = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.submit",
+      "type": "update",
+      "table": "proposal",
+      "query": "update from proposal set status = 'Submitted' where proposalid = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.cancel",
+      "type": "update",
+      "table": "proposal",
+      "query": "update from proposal set status = 'Cancelled' where proposalid = ?",
+      "params": ["id"]
+    },
+
+    {
+      "id": "proposal.comment.insert",
+      "type": "insert",
+      "table": "proposal_comments",
+      "query": "insert into proposal_comments (id, proposalid, comment, userid, username, createdon) values (?, ?, ?, ?, ?, ?)",
+      "params": ["id", "proposalid", "comment", "userid", "username", "createdon"]
+    },
+
+    {
+      "id": "proposal.comment.select",
+      "type": "select",
+      "table": "proposal_comments",
+      "query": "select * from proposal_comments where proposalid = ?",
+      "params": ["proposalid"]
+    },
+
+    {
+      "id": "proposal.document.add",
+      "type": "insert",
+      "table": "proposal_documents",
+      "query": "insert into proposal_documents (id, proposalid, title, url, userid, username) values (?, ?, ?, ?, ?, ?)",
+      "params": ["id", "proposalid", "title", "url", "userid", "username"]
+    },
+
+    {
+      "id": "proposal.document.remove",
+      "type": "delete",
+      "table": "proposal_documents",
+      "query": "delete from proposal_documents where id = ?",
+      "params": [
+        "id"
+      ]
+    },
+
+    {
+      "id": "proposal.document.select",
+      "type": "select",
+      "table": "proposal_documents",
+      "query": "select * from proposal_documents where proposalid = ?",
+      "params": ["proposalid"]
+    },
+
+    {
+      "id": "kdmax.mg.map",
+      "type": "select",
+      "table": "kdmax_mg_map",
+      "query": "select kdmcode, mgcode, title, imageurl, dimension from kdmax_mg_map where kdmcode = ?",
+      "params": [
+        "kdmaxmodule"
+      ]
+    },
+    {
+      "id": "kdmax.mg.def.map",
+      "type": "select",
+      "table": "kdmax_mg_map",
+      "query": "select kdmcode, mgcode, title, imageurl, dimension from kdmax_mg_map where kdmcode = ?",
+      "params": [
+        "defmodule"
+      ]
+    },
+    {
+      "id": "proposal.product.create",
+      "type": "insert",
+      "table": "proposal_products",
+      "query": "insert into proposal_products (id, proposalid, createdon, createdby) values (?, ?, ?, ?)",
+      "params": [
+        "id",
+        "proposalid",
+        "createdon",
+        "createdby"
+      ]
+    },
+    {
+      "id": "proposal.product.update",
+      "type": "update",
+      "table": "proposal_products",
+      "query": "update proposal_products set title = ?, type = ?, product_type = ?, product_id = ?, product_name = ?, carcass_id = ?, carcass_name = ?, shutter_id = ?, shutter_name = ?,  finish_id = ?, finish_name = ?, color_id = ?, color_name = ?, make = ?, dimension = ?, quantity = ?, amount = ?, notes =  ?, moduleJson = ?, addonJson = ? where id = ?",
+      "params": ["title", "type", "product_type", "product_id", "product_name", "carcass_id", "carcass_name", "shutter_id", "shutter_name",
+        "finish_id", "finish_name", "color_id", "color_name", "make", "dimension", "quantity", "amount", "notes", "moduleJson", "addonJson", "id"]
+    },
+    {
+      "id": "proposal.product.delete",
+      "type": "delete",
+      "table": "proposal_products",
+      "query": "update proposal_products set active = 'N' where id = ?",
+      "params": ["id"]
+    }
+  ]
+}
