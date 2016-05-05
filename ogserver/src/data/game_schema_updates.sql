@@ -56,13 +56,14 @@ CREATE TABLE proposal(
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Master';
 
-DROP TABLE IF EXISTS proposal_products;
-CREATE TABLE proposal_products(
+DROP TABLE IF EXISTS product_lineitem;
+CREATE TABLE product_lineitem(
   id INTEGER NOT NULL AUTO_INCREMENT,
   active char(1) NOT NULL DEFAULT 'A',
   proposalid INTEGER NOT NULL,
   title varchar(255) NOT NULL DEFAULT 'TITLE',
   type char(16) NOT NULL DEFAULT 'Assembled', --Assembled, Bought, Service, Standard
+  kdmax_file varchar(255) NULL,
   product_type varchar(16) NOT NULL DEFAULT 'Kitchen',
   product_id varchar(32) NULL, -- valid only for catalog products
   product_name varchar(128) NULL, -- valid only for catalog products
@@ -83,6 +84,8 @@ CREATE TABLE proposal_products(
   addonJson TEXT NULL,
   createdon timestamp NULL,
   createdby varchar(64) NULL,
+  updatedon timestamp NULL,
+  updatedby varchar(64) NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY proposal_key (proposalid)

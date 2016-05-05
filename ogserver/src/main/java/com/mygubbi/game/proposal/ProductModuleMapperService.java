@@ -19,12 +19,12 @@ import java.util.List;
  * Created by Sunil on 08-01-2016.
  */
 
-public class KDMaxMapperService extends AbstractVerticle
+public class ProductModuleMapperService extends AbstractVerticle
 {
-    private final static Logger LOG = LogManager.getLogger(KDMaxMapperService.class);
+    private final static Logger LOG = LogManager.getLogger(ProductModuleMapperService.class);
 
     public static final String MAP_TO_MG = "kdm.mg.map";
-    public static final String MAP_TO_MG_FROM_FILE = "kdm.mg.map.file";
+    private static final String MAP_TO_MG_FROM_FILE = "kdm.mg.map.file"; //Not ready
 
     @Override
     public void start(Future<Void> startFuture) throws Exception
@@ -44,7 +44,7 @@ public class KDMaxMapperService extends AbstractVerticle
     {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(MAP_TO_MG, (Message<Integer> message) -> {
-            ProductModuleMap productModule = (ProductModuleMap) LocalCache.getInstance().remove(message.body());
+            ProductModule productModule = (ProductModule) LocalCache.getInstance().remove(message.body());
             this.mapModule(productModule, message);
         }).completionHandler(res -> {
             LOG.info("ProductManagementService started." + res.succeeded());
@@ -61,9 +61,9 @@ public class KDMaxMapperService extends AbstractVerticle
         });
     }
 
-    private void mapModule(ProductModuleMap productModule, Message message)
+    private void mapModule(ProductModule productModule, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("kdmax.mg.map", productModule.getKdmModule()));
+        Integer id = LocalCache.getInstance().store(new QueryData("kdmax.mg.map", productModule));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -73,14 +73,14 @@ public class KDMaxMapperService extends AbstractVerticle
                     }
                     else
                     {
-                        this.addMgModules(productModule, message, selectData.rows, ProductModuleMap.MAPPED_AT_MODULE);
+                        this.addMgModules(productModule, message, selectData.rows, ProductLineItem.MAPPED_AT_MODULE);
                     }
                 });
     }
 
-    private void findMgModulesForDefaultModule(ProductModuleMap productModule, Message message)
+    private void findMgModulesForDefaultModule(ProductModule productModule, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("kdmax.default", productModule.getKdmModule()));
+        Integer id = LocalCache.getInstance().store(new QueryData("kdmax.default", productModule));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -95,13 +95,13 @@ public class KDMaxMapperService extends AbstractVerticle
                 });
     }
 
-    private void sendResponseAsNotMapped(ProductModuleMap kdmModule, Message message)
+    private void sendResponseAsNotMapped(ProductModule productModule, Message message)
     {
-        kdmModule.setMappedFlag(ProductModuleMap.NOT_MAPPED);
-        message.reply(LocalCache.getInstance().store(kdmModule));
+        productModule.setMappedFlag(ProductLineItem.NOT_MAPPED);
+        message.reply(LocalCache.getInstance().store(productModule));
     }
 
-    private void mapMgModulesForDefaultModule(ProductModuleMap productModule, Message message, String defaultModule)
+    private void mapMgModulesForDefaultModule(ProductModule productModule, Message message, String defaultModule)
     {
         productModule.setDefaultModule(defaultModule);
         Integer id = LocalCache.getInstance().store(new QueryData("kdmax.mg.def.map", productModule));
@@ -114,18 +114,18 @@ public class KDMaxMapperService extends AbstractVerticle
                     }
                     else
                     {
-                        this.addMgModules(productModule, message, selectData.rows, ProductModuleMap.MAPPED_AT_DEFAULT);
+                        this.addMgModules(productModule, message, selectData.rows, ProductLineItem.MAPPED_AT_DEFAULT);
                     }
                 });
     }
 
-    private void addMgModules(ProductModuleMap kdmModule, Message message, List<JsonObject> mgModules, String mappedFlag)
+    private void addMgModules(ProductModule productModule, Message message, List<JsonObject> mgModules, String mappedFlag)
     {
         for (JsonObject mgModule : mgModules)
         {
-            kdmModule.addMGModule(mgModule);
+            productModule.addMappedModule(mgModule);
         }
-        kdmModule.setMappedFlag(mappedFlag);
-        message.reply(LocalCache.getInstance().store(kdmModule));
+        productModule.setMappedFlag(mappedFlag);
+        message.reply(LocalCache.getInstance().store(productModule));
     }
 }

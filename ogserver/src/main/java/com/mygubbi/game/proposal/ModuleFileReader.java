@@ -1,7 +1,6 @@
-package com.mygubbi.si.excel;
+package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.StringUtils;
-import com.mygubbi.game.proposal.ProductModule;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -18,11 +17,11 @@ import java.util.List;
  * Created by Sunil on 27-04-2016.
  */
 
-public class ExcelReaderService
+public class ModuleFileReader
 {
     private String filename;
 
-    public ExcelReaderService(String filename)
+    public ModuleFileReader(String filename)
     {
         this.filename = filename;
     }
@@ -73,6 +72,8 @@ public class ExcelReaderService
                 String moduleCode = row.getCell(4).getStringCellValue();
                 if (StringUtils.isEmpty(moduleCode)) continue;
 
+                int sequence = this.getInteger(row, 1);
+
                 String name = row.getCell(3).getStringCellValue();
                 int width = this.getInteger(row, 5);
                 int depth = this.getInteger(row, 6);
@@ -84,8 +85,12 @@ public class ExcelReaderService
                 String uom = row.getCell(17).getStringCellValue();
                 String remarks = row.getCell(20).getStringCellValue();
 
-                ProductModule module = new ProductModule().setUnit(unit).setKDMCode(moduleCode).setQuantity(quantity)
-                        .setUom(uom).setRemarks(remarks).setName(name).setWidth(width).setDepth(depth).setHeight(height);
+                ProductModule module = new ProductModule().setUnit(unit).setName(name).setKDMCode(moduleCode)
+                        .setSequence(sequence)
+                        .setFinishId(finish).setFinishName(finish)
+                        .setColorId(color).setColorName(color)
+                        .setQuantity(quantity).setUom(uom).setRemarks(remarks)
+                        .setWidth(width).setDepth(depth).setHeight(height);
                 productModules.add(module);
             }
         }
@@ -127,9 +132,9 @@ public class ExcelReaderService
 
     public static void main(String[] args)
     {
-        new ExcelReaderService("/testdata/Kitchen001-Quote.xlsx").loadModules();
-        new ExcelReaderService("/testdata/Kitchen002-Quote.xlsx").loadModules();
-        new ExcelReaderService("/testdata/Kitchen003-Quote.xlsx").loadModules();
-        new ExcelReaderService("/testdata/Kitchen004-Quote.xlsx").loadModules();
+        new ModuleFileReader("/testdata/Kitchen001-Quote.xlsx").loadModules();
+        new ModuleFileReader("/testdata/Kitchen002-Quote.xlsx").loadModules();
+        new ModuleFileReader("/testdata/Kitchen003-Quote.xlsx").loadModules();
+        new ModuleFileReader("/testdata/Kitchen004-Quote.xlsx").loadModules();
     }
 }

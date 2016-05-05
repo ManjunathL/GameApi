@@ -1,9 +1,8 @@
 package com.mygubbi.si.excel;
 
-import com.mygubbi.game.proposal.KDMaxModule;
+import com.mygubbi.game.proposal.ProductModule;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Sunil on 27-04-2016.
@@ -12,7 +11,7 @@ import java.util.Map;
 public class ExcelDataContainer
 {
     private String excelFile;
-    private List<KDMaxModule> modules;
+    private List<ProductModule> modules;
 
     public ExcelDataContainer(String excelFile)
     {
@@ -24,12 +23,12 @@ public class ExcelDataContainer
         return excelFile;
     }
 
-    public List<KDMaxModule> getModules()
+    public List<ProductModule> getModules()
     {
         return modules;
     }
 
-    public void setModules(List<KDMaxModule> modules)
+    public void setModules(List<ProductModule> modules)
     {
         this.modules = modules;
     }
