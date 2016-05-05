@@ -17,5 +17,9 @@
 
   "staticConfigPath": "",
 
-  "robots.txt": "User-agent: *\nDisallow: /"
+  "robots.txt": "User-agent: *\nDisallow: /",
+
+  "proposal_docs_folder" : "/tmp/",
+
+  "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json"]
 }
