@@ -83,25 +83,25 @@
       "id": "kdmax.mg.map",
       "type": "select",
       "table": "kdmax_mg_map",
-      "query": "select kdmcode, mgcode, title, imageurl, dimension from kdmax_mg_map where kdmcode = ?",
+      "query": "select mgcode, title, imageurl, dimension from kdmax_mg_map where kdmcode = ?",
       "params": [
-        "kdmaxmodule"
+        "kdmcode"
       ]
     },
     {
       "id": "kdmax.mg.def.map",
       "type": "select",
       "table": "kdmax_mg_map",
-      "query": "select kdmcode, mgcode, title, imageurl, dimension from kdmax_mg_map where kdmcode = ?",
+      "query": "select mgcode, title, imageurl, dimension from kdmax_mg_map where kdmcode = ?",
       "params": [
-        "defmodule"
+        "kdmdefcode"
       ]
     },
     {
       "id": "proposal.product.create",
       "type": "insert",
-      "table": "proposal_products",
-      "query": "insert into proposal_products (id, proposalid, createdon, createdby) values (?, ?, ?, ?)",
+      "table": "product_lineitem",
+      "query": "insert into product_lineitem (id, proposalid, createdon, createdby) values (?, ?, ?, ?)",
       "params": [
         "id",
         "proposalid",
@@ -112,16 +112,16 @@
     {
       "id": "proposal.product.update",
       "type": "update",
-      "table": "proposal_products",
-      "query": "update proposal_products set title = ?, type = ?, product_type = ?, product_id = ?, product_name = ?, carcass_id = ?, carcass_name = ?, shutter_id = ?, shutter_name = ?,  finish_id = ?, finish_name = ?, color_id = ?, color_name = ?, make = ?, dimension = ?, quantity = ?, amount = ?, notes =  ?, moduleJson = ?, addonJson = ? where id = ?",
+      "table": "product_lineitem",
+      "query": "update product_lineitem set title = ?, type = ?, product_type = ?, product_id = ?, product_name = ?, carcass_id = ?, carcass_name = ?, shutter_id = ?, shutter_name = ?,  finish_id = ?, finish_name = ?, color_id = ?, color_name = ?, make = ?, dimension = ?, quantity = ?, amount = ?, notes =  ?, moduleJson = ?, addonJson = ? where id = ?",
       "params": ["title", "type", "product_type", "product_id", "product_name", "carcass_id", "carcass_name", "shutter_id", "shutter_name",
         "finish_id", "finish_name", "color_id", "color_name", "make", "dimension", "quantity", "amount", "notes", "moduleJson", "addonJson", "id"]
     },
     {
       "id": "proposal.product.delete",
       "type": "delete",
-      "table": "proposal_products",
-      "query": "update proposal_products set active = 'N' where id = ?",
+      "table": "product_lineitem",
+      "query": "update product_lineitem set active = 'N' where id = ?",
       "params": ["id"]
     }
   ]
