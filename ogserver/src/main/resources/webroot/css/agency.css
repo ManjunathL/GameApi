@@ -1751,8 +1751,17 @@ button {
 .font-size30 {
     font-size: 30px;
 }
+
+.font-size35 {
+    font-size: 35px!important;
+}
+
 .font-size40 {
     font-size: 40px;
+}
+
+.font-size45 {
+    font-size: 45px!important;
 }
 
 .font-size55 {
@@ -5250,7 +5259,7 @@ a.tab-ico {
     font-size:16px;
 }
 .shobha-table tr th{
-    text-align:center;
+    text-align:left;
 }
 
 .shobha-list-style{

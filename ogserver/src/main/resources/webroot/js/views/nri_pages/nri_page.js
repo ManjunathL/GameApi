@@ -20,7 +20,8 @@ define([
 
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(nriPageTemplate)({
-                'userProfile': userProfData
+                'userProfile': userProfData,
+                'cityName': this.model.cityName
             }));
             $.cloudinary.responsive();
         },

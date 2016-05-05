@@ -8,7 +8,13 @@
             <div class="col-lg-7 padding50-15">
                 <h1 class="color-white align-center">
                     LOOKING FOR <span class="color-orange"><b>MODULAR KITCHEN</b></span> FOR YOUR NEW FLAT IN
-                    <b>BANGALORE?</b>
+                    <b>
+                        <% if(typeof(cityName) !== 'undefined'){ %>
+                        <%= cityName %>
+                        <% }else{ %>
+                        BANGALORE
+                        <% } %>
+                    ?</b>
                 </h1>
 
                 <h3 class="heading-center-notransform color-white margin-top40 width90 margin_auto">

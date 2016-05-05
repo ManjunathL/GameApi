@@ -48,7 +48,7 @@ define([
             'fblp(/)':'fblandingpage',
             'mangalore-lp(/)':'mangalorelandingpage',
             'email-lp(/)':'emaillandingpage',
-            'nri(/)' : 'nripage',
+            'nri-:cityName(/)' : 'nripage',
             'media(/)': 'mediapage',
             'shobha-lp(/)': 'shobhalandingpage'
 
@@ -403,10 +403,15 @@ define([
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
             });
         });
-        router.on('route:nripage', function(actions) {
+        router.on('route:nripage', function(cityName) {
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/nri_pages/nri_page.js'], function(NriPage) {
-                VM.create(VM.NRIPAGE, NriPage).render();
+                var options = {
+                    model: {
+                        "cityName": cityName
+                    }
+                };
+                VM.create(VM.NRIPAGE, NriPage, options).render();
             });
         });
 
