@@ -8,7 +8,13 @@
             <div class="col-lg-7 padding50-15">
                 <h1 class="color-white align-center">
                     LOOKING FOR <span class="color-orange"><b>MODULAR KITCHEN</b></span> FOR YOUR NEW FLAT IN
-                    <b>BANGALORE?</b>
+                    <b>
+                        <% if(typeof(cityName) !== 'undefined'){ %>
+                        <%= cityName %>
+                        <% }else{ %>
+                        BANGALORE
+                        <% } %>
+                    ?</b>
                 </h1>
 
                 <h3 class="heading-center-notransform color-white margin-top40 width90 margin_auto">
@@ -673,6 +679,7 @@
         <div>
             <iframe name="leadsquared_landing_page_frame" src="https://mygubbi.viewpage.co/email-lp?ignoremxtracking=mxtrue" width="600" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
             <script type="text/javascript"> var MXLandingPageId = '8d7bb83a-0c47-11e6-b61b-22000aa8e760'; </script>
+
             <div id="close-bookconsult-pop" class="close-icon signup-form">
                 <img src="<%= imgBase + 'close-white.png'%>">
             </div>

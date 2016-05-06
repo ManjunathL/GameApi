@@ -1,16 +1,21 @@
 package com.mygubbi.db;
 
+import com.mygubbi.common.MultiFileReader;
+import com.mygubbi.common.VertxInstance;
+import com.mygubbi.config.ConfigHolder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class QueryPrepareService extends AbstractVerticle
+public class QueryPrepareService extends AbstractVerticle implements MultiFileReader.ResultHandler
 {
 	private final static Logger LOG = LogManager.getLogger(QueryPrepareService.class);
 	private Map<String, QueryDef> queryMap;
@@ -21,36 +26,25 @@ public class QueryPrepareService extends AbstractVerticle
 	{
 		return INSTANCE;
 	}
-	
+
+	private Future<Void> startFuture;
+
 	@Override
 	public void start(Future<Void> startFuture) throws Exception
 	{
-		this.setupQueryMap(startFuture);
+		this.startFuture = startFuture;
+		this.setupQueryMap();
 		INSTANCE = this;
 	}
 
-	private void setupQueryMap(Future<Void> startFuture)
+	private void setupQueryMap()
 	{
-		vertx.fileSystem().readFile("config/queries.json", result -> {
-		    if (result.succeeded()) 
-		    {
-				JsonObject json = new JsonObject(result.result().toString());
-				this.queryMap = new HashMap<String, QueryDef>();
-				for (Object queryObject : json.getJsonArray("queries"))
-				{
-					QueryDef queryDef = new QueryDef((JsonObject) queryObject);
-					this.queryMap.put(queryDef.queryId, queryDef);
-				}
-		        LOG.info("Query map created.");
-		        startFuture.complete();
-		    } 
-		    else 
-		    {
-		        LOG.error("Could not create query map", result.cause());
-		        startFuture.fail(result.cause());
-		    }
-		});
-		
+		JsonArray queryFiles = (JsonArray) ConfigHolder.getInstance().getConfigValue("queryfiles");
+        if (queryFiles == null || queryFiles.isEmpty())
+        {
+            queryFiles = new JsonArray().add("config/queries.json");
+        }
+		new MultiFileReader(queryFiles.getList(), this).read();
 	}
 	
 	public QueryData prepareQueryData(QueryData qData)
@@ -75,9 +69,27 @@ public class QueryPrepareService extends AbstractVerticle
 		return qData;
 	}
 	
-	public static void main(String[] args) throws Exception
+	@Override
+	public void onSuccess(List<String> files, List<String> filesData)
 	{
-		
+		this.queryMap = new HashMap<String, QueryDef>();
+		for (String fileData : filesData)
+		{
+			JsonObject json = new JsonObject(fileData);
+			for (Object queryObject : json.getJsonArray("queries"))
+			{
+				QueryDef queryDef = new QueryDef((JsonObject) queryObject);
+				this.queryMap.put(queryDef.queryId, queryDef);
+			}
+		}
+		LOG.info("Query map created.");
+		this.startFuture.complete();
 	}
-	
+
+	@Override
+	public void onError(String filename, Throwable cause)
+	{
+		LOG.error("Could not create query map due to an error with file: " + filename, cause);
+		this.startFuture.fail(cause);
+	}
 }

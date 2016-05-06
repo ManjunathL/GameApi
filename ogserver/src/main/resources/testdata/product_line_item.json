@@ -1,0 +1,42 @@
+{
+  "title": "Product title",
+  "shutterid": "",
+  "modules":[
+    {
+      "kdmcode": "Imported",
+      "mgcode": "MG code",
+      "image": "url",
+      "title":"",
+      "dimension":"WxDxH",
+      "mgmodules":[
+        {
+          "code":"MG code",
+          "title":"",
+          "image":"",
+          "dimension":"WxDxH"
+        },
+        {
+          "code":"MG code",
+          "title":"",
+          "image":"",
+          "dimension":"WxDxH"
+        }
+      ],
+
+      "addons":[
+        {
+          "title": "Add on",
+          "type": "Add on"
+        },
+        {
+          "title": "Add on",
+          "type": "Add on"
+        },
+        {
+          "title": "Add on",
+          "type": "Add on"
+        }
+      ]
+    }
+  ]
+}

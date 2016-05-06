@@ -1637,6 +1637,10 @@ button {
     width: 85%;
 }
 
+.width45 {
+    width: 45%;
+}
+
 .width80 {
     width: 80%;
 }
@@ -1747,8 +1751,17 @@ button {
 .font-size30 {
     font-size: 30px;
 }
+
+.font-size35 {
+    font-size: 35px!important;
+}
+
 .font-size40 {
     font-size: 40px;
+}
+
+.font-size45 {
+    font-size: 45px!important;
 }
 
 .font-size55 {
@@ -1887,6 +1900,10 @@ button {
     padding: 25px 15px;
 }
 
+.padding21-15 {
+    padding: 21px 15px;
+}
+
 .padding50-15 {
     padding: 50px 15px;
 }
@@ -1905,6 +1922,10 @@ button {
 
 .padding-top0 {
     padding-top: 0px;
+}
+
+.padding-top5 {
+    padding-top: 5px!important;
 }
 
 .padding-top10 {
@@ -1949,6 +1970,10 @@ button {
 
 .padding-left30 {
     padding-left: 30px;
+}
+
+.padding-left40 {
+    padding-left: 40px;
 }
 
 .padding-right0 {
@@ -5178,7 +5203,9 @@ a.tab-ico {
     margin: auto;
     padding: 10px;
 }
-
+.shobha_txt_aquacolor{
+    color: #4cc7b1!important;
+}
 .shobha_banner_form_button, .shobha_banner_form_button:focus {
     color: #4cc7b1;
     background-color: #ffffff !important;
@@ -5192,7 +5219,17 @@ a.tab-ico {
     font-weight: bold;
 }
 
-.shobha_banner_form_button:hover, .shobha_banner_form_button:active {
+.shobha-consult-btn, .shobha-consult-btn:focus {
+    width: 210px!important;
+    background-color: #4CC7B1 !important;
+    color: #000;
+    border: 1px solid #4CC7B1;
+    border-radius: 8px;
+    padding: 15px 25px !important;
+}
+
+.shobha_banner_form_button:hover, .shobha_banner_form_button:active,
+.shobha-consult-btn:hover, .shobha-consult-btn:active {
     background-color: #4cc7b1 !important;
      color: #ffffff;
      border:1px solid #4cc7b1;
@@ -5204,18 +5241,44 @@ a.tab-ico {
     width: 35%;
     height: 30px;
 }
+.cross-mark-img{
+    position: absolute;
+    top: 0px;
+    width: 50%;
+    height: 30px;
+}
 
-.shobha-consult-btn{
-    width: 20%!important;
-    background-color: #4CC7B1 !important;
-    color: #000;
-    border: 1px solid #4CC7B1;
-    border-radius: 8px;
-    padding: 15px 25px !important;
+.round-img{
+    position: absolute;
+    top: -10px;
+    left: -30px;
 }
 
 .img_hover:hover .color-shobha-hover {
-    color: #2F4446 !important;
+    color:#4CC7B1 !important;
+}
+
+.shobha-table tr td{
+    padding:20px!important;
+    font-size:16px;
+}
+.shobha-table tr th{
+    text-align:left;
+}
+
+.shobha-list-style{
+    list-style-type: none;
+    padding-left: 15px!important;
+}
+
+.shobha_slider_banner_txt {
+   position: absolute;
+   top: 0%;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 0.3);
+
+   padding: 150px 15px 200px 15px!important;
+   margin-bottom: 20px;
 }
 
 @media (max-width:1180px){
@@ -5224,6 +5287,15 @@ a.tab-ico {
         position: relative;
         left: 0;
         max-width: 100%;
+    }
+    .shobha_slider_banner_txt {
+        background-color: rgba(169, 167, 177, 1);
+        position: relative;
+        left: 0;
+        top:10%!important;
+        max-width: 100%;
+        padding: 50px 15px 77px 15px!important;
+        margin-bottom:0px!important;
     }
 
     .shobha_banner_form{
