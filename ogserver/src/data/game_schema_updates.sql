@@ -125,7 +125,6 @@ CREATE TABLE kdmax_def_map(
   id INTEGER NOT NULL AUTO_INCREMENT,
   kdmcode varchar(64) NOT NULL,
   kdmdefcode varchar(64) NOT NULL,
-  uploadedon timestamp NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY kdmcode_key (kdmcode)
@@ -137,11 +136,153 @@ CREATE TABLE kdmax_mg_map(
   id INTEGER NOT NULL AUTO_INCREMENT,
   kdmcode varchar(64) NOT NULL,
   mgcode varchar(64) NOT NULL,
-  title varchar(255) NOT NULL,
-  imageurl varchar(255) NOT NULL,
-  dimension varchar(64) NOT NULL,
-  uploadedon timestamp NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY kdmcode_key (kdmcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='KDMax to Mygubbi Module mapping';
+
+DROP TABLE IF EXISTS module_master;
+CREATE TABLE module_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  code varchar(16) NOT NULL,
+  type varchar(16) NOT NULL DEFAULT 'NA',
+  title varchar(255) NOT NULL,
+  imageurl varchar(255) NOT NULL,
+  width INTEGER NOT NULL DEFAULT 0,
+  depth INTEGER NOT NULL DEFAULT 0,
+  height INTEGER NOT NULL DEFAULT 0,
+  dimension varchar(32) NOT NULL,
+  labour_cost DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Module master';
+
+DROP TABLE IF EXISTS module_components;
+CREATE TABLE module_components(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  modulecode varchar(16) NOT NULL,
+  comptype char(1) NOT NULL, -- C - Carcass, S- Shutter, A - Accessory, H- Hardware
+  compcode varchar(32) NOT NULL, -- Component code - Carcass, Shutter, Hardware, Accessory
+  quantity INTEGER NOT NULL DEFAULT 0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY mc_key (modulecode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Module to Component mapping';
+
+DROP TABLE IF EXISTS carcass_master;
+CREATE TABLE carcass_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  code varchar(16) NOT NULL,
+  type varchar(16) NOT NULL DEFAULT 'NA',
+  groupname varchar(16) NOT NULL DEFAULT 'NA',
+  title varchar(255) NOT NULL,
+  plength INTEGER NOT NULL DEFAULT 0,
+  breadth INTEGER NOT NULL DEFAULT 0,
+  thickness INTEGER NOT NULL DEFAULT 0,
+  edgebinding varchar(128) NOT NULL,
+  labour_cost DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  area DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Carcass master';
+
+
+DROP TABLE IF EXISTS carcass_material_xref;
+CREATE TABLE carcass_material_xref(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  carcasscode varchar(16) NOT NULL,
+  mfcode varchar(16) NOT NULL,
+  carcassxcode varchar(16) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (carcasscode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Carcass Material xref';
+
+DROP TABLE IF EXISTS shutter_master;
+CREATE TABLE shutter_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  code varchar(16) NOT NULL,
+  type varchar(16) NOT NULL DEFAULT 'NA',
+  title varchar(255) NOT NULL,
+  plength INTEGER NOT NULL DEFAULT 0,
+  breadth INTEGER NOT NULL DEFAULT 0,
+  height INTEGER NOT NULL DEFAULT 0,
+  edgebinding varchar(128) NOT NULL,
+  quantity INTEGER NOT NULL DEFAULT 0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Shutter master';
+
+
+DROP TABLE IF EXISTS shutter_mf_xref;
+CREATE TABLE shutter_mf_xref(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  shuttercode varchar(16) NOT NULL,
+  mfcode varchar(16) NOT NULL,
+  shutterxcode varchar(16) NOT NULL,
+  cuttingl INTEGER NOT NULL DEFAULT 0,
+  cuttingb INTEGER NOT NULL DEFAULT 0,
+  cuttingt INTEGER NOT NULL DEFAULT 0,
+  cuttingarea DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (shuttercode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Shutter Finish xref';
+
+DROP TABLE IF EXISTS mf_code_master;
+CREATE TABLE mf_code_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  type varchar(2) NOT NULL DEFAULT 'NA', -- M - Material, F- Finish, MF - Material+Finish
+  code varchar(16) NOT NULL,
+  title varchar(64) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Material Finish Code Master';
+
+
+DROP TABLE IF EXISTS mf_rate_master;
+CREATE TABLE mf_code_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  type char(2) NOT NULL DEFAULT 'NA', -- M - Material, F- Finish, MF - Material+Finish
+  mfcode varchar(16) NOT NULL,
+  thickness INTEGER NOT NULL DEFAULT 0,
+  rate DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (shuttercode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Material Finish Rate Master';
+
+
+DROP TABLE IF EXISTS loading_factor;
+CREATE TABLE loading_factor(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  type varchar(16) NOT NULL DEFAULT 'NA',
+  title varchar(64) NOT NULL,
+  factor DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY type (type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Loading factors';
+
+
+DROP TABLE IF EXISTS acs_hw_master;
+CREATE TABLE acs_hw_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  type char(1) NOT NULL DEFAULT 'A', -- A - Accessory, H - Hardware
+  code varchar(16) NOT NULL,
+  catalogcode varchar(16) NOT NULL,
+  title varchar(255) NOT NULL,
+  make varchar(16) NOT NULL,
+  imageurl varchar(255) NOT NULL,
+  uom char(1) NOT NULL DEFAULT 'N', -- N Numbers, S Set
+  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  price DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory and Hardware master';
+
