@@ -3,6 +3,7 @@ package com.mygubbi.apiserver;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.ProposalHandler;
+import com.mygubbi.game.proposal.ProposalModuleHandler;
 import com.mygubbi.game.proposal.ProposalProductHandler;
 import com.mygubbi.route.*;
 import io.vertx.core.AbstractVerticle;
@@ -42,7 +43,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         this.setupApiHandler(router);
         this.setupStaticHandler(router);
 
-        int httpsPort = ConfigHolder.getInstance().getInteger("game_https_port", 80);
+        int httpsPort = ConfigHolder.getInstance().getInteger("game_https_port", 1443);
         HttpServerOptions options = this.getHttpsServerOptions();
         VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
         LOG.info("Starting http server on port : " + httpsPort);
@@ -93,6 +94,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/proposal/product", new ProposalProductHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/proposal/module", new ProposalModuleHandler(VertxInstance.get()));
 
     }
 

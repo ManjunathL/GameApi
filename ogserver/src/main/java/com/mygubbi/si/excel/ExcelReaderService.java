@@ -1,6 +1,5 @@
 package com.mygubbi.si.excel;
 
-import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductModule;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -11,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,15 +19,23 @@ import java.util.List;
 public class ExcelReaderService
 {
     private String filename;
+    private int sheetNumber;
+    private boolean skipFirstRow;
+    private int[] columnsToRead;
+    private ExcelRowHandler rowHandler;
 
-    public ExcelReaderService(String filename)
+    public ExcelReaderService(String filename, int sheetNumber, boolean skipFirstRow, int[] columnsToRead,
+                              ExcelRowHandler rowHandler)
     {
         this.filename = filename;
+        this.sheetNumber = sheetNumber;
+        this.skipFirstRow = skipFirstRow;
+        this.columnsToRead = columnsToRead;
+        this.rowHandler = rowHandler;
     }
 
-    public List<ProductModule> loadModules()
+    public void read()
     {
-        System.out.println("Loading file " + this.filename);
         Workbook wb = null;
         try
         {
@@ -38,57 +44,39 @@ public class ExcelReaderService
         catch (IOException e)
         {
             e.printStackTrace();
-            return Collections.EMPTY_LIST;
+            return;
         }
 
         List<ProductModule> productModules = new ArrayList<>();
 
-        for (int i = 0; i < wb.getNumberOfSheets(); i++)
+        Sheet sheet = wb.getSheetAt(this.sheetNumber);
+        System.out.println("Processing sheet - " + sheet.getSheetName());
+
+        int firstRow = this.skipFirstRow ? 1 : 0;
+
+        int startRow = sheet.getFirstRowNum() + (this.skipFirstRow ? 1 : 0);
+        int endRow = sheet.getLastRowNum();
+        System.out.println("Reading rows from " + startRow + " to " + endRow);
+
+        String[] data = new String[this.columnsToRead.length];
+        for (int rowNum = startRow; rowNum <= endRow; rowNum++)
         {
-            Sheet sheet = wb.getSheetAt(i);
-            String sheetName = wb.getSheetName(i);
-            System.out.println(sheetName);
-            if (!sheetName.equals("Order"))
+            Row row = sheet.getRow(rowNum);
+            for (int cellIndex = 0; cellIndex < this.columnsToRead.length; cellIndex++)
             {
-                continue;
-            }
-            boolean startReading = false;
-            String unit = null;
-            for (Row row : sheet)
-            {
-                if (!startReading)
+                try
                 {
-                    if ("Class".equals(row.getCell(0).getStringCellValue()))
-                    {
-                        startReading = true;
-                    }
-                    continue;
+                    data[cellIndex] = row.getCell(this.columnsToRead[cellIndex]).getStringCellValue();
                 }
-                String firstCell = row.getCell(0).getStringCellValue();
-                if ("Total".equals(firstCell))
+                catch (Exception e)
                 {
-                    break;
+                    System.out.println("Error reading cell (" + rowNum + "," + this.columnsToRead[cellIndex] + "). Error:" + e.getMessage() );
+                    throw e;
                 }
-                if (StringUtils.isNonEmpty(firstCell)) unit = firstCell;
-                String moduleCode = row.getCell(4).getStringCellValue();
-                if (StringUtils.isEmpty(moduleCode)) continue;
-
-                String name = row.getCell(3).getStringCellValue();
-                int width = this.getInteger(row, 5);
-                int depth = this.getInteger(row, 6);
-                int height = this.getInteger(row, 7);
-
-                String finish = row.getCell(8).getStringCellValue();
-                String color = this.getColor(row);
-                int quantity = this.getInteger(row, 16);
-                String uom = row.getCell(17).getStringCellValue();
-                String remarks = row.getCell(20).getStringCellValue();
-
-                ProductModule module = new ProductModule().setUnit(unit).setKDMCode(moduleCode).setQuantity(quantity)
-                        .setUom(uom).setRemarks(remarks).setName(name).setWidth(width).setDepth(depth).setHeight(height);
-                productModules.add(module);
             }
+            this.rowHandler.handle(data);
         }
+
         try
         {
             wb.close();
@@ -97,12 +85,6 @@ public class ExcelReaderService
         {
             //Ignore
         }
-
-        for (ProductModule module : productModules)
-        {
-            System.out.println(module);
-        }
-        return productModules;
     }
 
     private int getInteger(Row row, int index)
@@ -127,9 +109,6 @@ public class ExcelReaderService
 
     public static void main(String[] args)
     {
-        new ExcelReaderService("/testdata/Kitchen001-Quote.xlsx").loadModules();
-        new ExcelReaderService("/testdata/Kitchen002-Quote.xlsx").loadModules();
-        new ExcelReaderService("/testdata/Kitchen003-Quote.xlsx").loadModules();
-        new ExcelReaderService("/testdata/Kitchen004-Quote.xlsx").loadModules();
+        new ExcelReaderService("/testdata/KDMax-ModuleMaster.xlsx", 0, true, new int[]{7,8,9,10,11,12,13}, null).read();
     }
 }
