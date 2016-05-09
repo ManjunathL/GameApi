@@ -45,7 +45,9 @@ public class CatalogProductHandler extends AbstractRouteHandler {
                         sendJsonResponse(context, selectData.rows.toString());
 
 
+/*
                         sendJsonResponse(context, selectData.getJsonDataRows("productJson").toString());
+*/
 
 
                     }
