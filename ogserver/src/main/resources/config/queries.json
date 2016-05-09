@@ -97,7 +97,7 @@
     {
       "id": "product.select.category",
       "type": "select",
-      "query": "select id, productId, productJson from product where category = ?",
+      "query": "select id, productId, productJson from product where category = ? ORDER BY popularity ASC,createDt DESC",
       "params": [
         "category"
       ]
@@ -105,7 +105,7 @@
     {
       "id": "product.select.subcategory",
       "type": "select",
-      "query": "select id, productId, productJson from product where subcategory = ?",
+      "query": "select id, productId, productJson from product where subcategory = ? ORDER BY popularity ASC,createDt DESC",
       "params": [
         "subcategory"
       ]
