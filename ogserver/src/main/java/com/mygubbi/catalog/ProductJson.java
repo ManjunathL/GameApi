@@ -4,6 +4,8 @@ import com.mygubbi.si.catalog.ShopifyRecord;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.util.Date;
+
 /**
  * Created by test on 22-01-2016.
  */
@@ -98,6 +100,15 @@ public class ProductJson extends JsonObject
     {
         return this.getString("styleId");
     }
+
+    public Integer getPopularity()
+    {
+        return this.getInteger("popularity");
+    }
+
+    public Integer getRelevance() {return this.getInteger("relevance");}
+
+    public Date getCreateDt() {return this.getCreateDt();}
 
     public String getFirstImage()
     {
