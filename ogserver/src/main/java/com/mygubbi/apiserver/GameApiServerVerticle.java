@@ -100,11 +100,6 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/products", new CatalogProductHandler(VertxInstance.get()));
 
 
-
-        router.mountSubRouter("/gapi/products", new CatalogProductHandler(VertxInstance.get()));
-
-
-
     }
 
     private void logHeadersHandler(Router router)
