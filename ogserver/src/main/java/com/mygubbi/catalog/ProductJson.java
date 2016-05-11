@@ -105,12 +105,12 @@ public class ProductJson extends JsonObject
         return this.getString("styleId");
     }
 
-    public String getPopularity()
+    public Integer getPopularity()
     {
-        return this.getString("popularity");
+        return this.getInteger("popularity");
     }
 
-    public String getRelevance() {return this.getString("relevance");}
+    public Integer getRelevance() {return this.getInteger("relevance");}
 
 /*
     public Date getCreateDt() {return this.getCreateDt();}
