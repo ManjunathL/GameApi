@@ -85,6 +85,10 @@ public class ProductJson extends JsonObject
     {
         return this.getString("productId");
     }
+    public String getCreateDt()
+    {
+        return this.getString("createDt");
+    }
 
     public String getName()
     {
@@ -101,14 +105,16 @@ public class ProductJson extends JsonObject
         return this.getString("styleId");
     }
 
-    public Integer getPopularity()
+    public String getPopularity()
     {
-        return this.getInteger("popularity");
+        return this.getString("popularity");
     }
 
-    public Integer getRelevance() {return this.getInteger("relevance");}
+    public String getRelevance() {return this.getString("relevance");}
 
+/*
     public Date getCreateDt() {return this.getCreateDt();}
+*/
 
     public String getFirstImage()
     {
