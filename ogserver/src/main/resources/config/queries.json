@@ -97,7 +97,7 @@
     {
       "id": "product.select.category",
       "type": "select",
-      "query": "select id, productId, productJson, createDt, popularity, relevance from product where category = ? ORDER BY STR_TO_DATE(`createDt`,'%Y-%m-%d') DESC, popularity ASC",
+      "query": "select id, productId, productJson from product where category = ?",
       "params": [
         "category"
       ]
@@ -105,7 +105,7 @@
     {
       "id": "product.select.subcategory",
       "type": "select",
-      "query": "select id, productId, productJson, createDt, popularity, relevance from product where subcategory = ? ORDER BY STR_TO_DATE(`createDt`,'%Y-%m-%d') DESC, popularity ASC",
+      "query": "select id, productId, productJson from product where subcategory = ?",
       "params": [
         "subcategory"
       ]
@@ -124,7 +124,7 @@
       "id": "product.insert",
       "type": "insert",
       "table": "product",
-      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, popularity,relevance, productShortJson, productJson) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, productShortJson, productJson) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       "params": [
         "id",
         "productId",
@@ -133,8 +133,6 @@
         "category",
         "subcategory",
         "styleId",
-        "popularity",
-        "relevance",
         "productShortJson",
         "productJson"
       ]
@@ -143,15 +141,13 @@
       "id": "product.update",
       "type": "update",
       "table": "product",
-      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, popularity = ?, relevance = ?, productShortJson = ?, productJson = ? where productId = ?",
+      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ? where productId = ?",
       "params": [
         "name",
         "description",
         "category",
         "subcategory",
         "styleId",
-        "popularity",
-        "relevance",
         "productShortJson",
         "productJson",
         "productId"

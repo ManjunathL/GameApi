@@ -66,18 +66,12 @@ public class ProductManagementService extends AbstractVerticle
 
     private void addOrUpdateProduct(ProductJson productJson, Message message)
     {
-        JsonObject product = new JsonObject().put("productId", productJson.getProductId())
-                .put("id", productJson.getProductId())
+        JsonObject product = new JsonObject().put("productId", productJson.getProductId()).put("id", productJson.getProductId())
                 .put("name", productJson.getName())
-                .put("description", productJson.getDescription())
-                .put("category", productJson.getCategory())
-                .put("subcategory", productJson.getSubCategory())
-                .put("productJson", productJson.toString())
-                .put("styleId", productJson.getStyleId())
-                .put("popularity", productJson.getPopularity())
-                .put("relevance", productJson.getRelevance())
-                .put("createDt", productJson.getCreateDt())
-                .put("productShortJson", productJson.getShortJson().toString());
+                .put("description", productJson.getDescription()).put("category", productJson.getCategory())
+                .put("subcategory", productJson.getSubCategory()).put("productJson", productJson.toString())
+                .put("styleId", productJson.getStyleId()).put("productShortJson", productJson.getShortJson().toString());
+
         Integer id = LocalCache.getInstance().store(new QueryData("product.select.productid", product));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
