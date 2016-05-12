@@ -24,6 +24,7 @@ define(function() {
         EMAILLANDINGPAGE: "EmailLandingPage",
         SHOBHALANDINGPAGE: "shobhalandingpage",
         PUNELANDINGPAGE: "punelandingpage",
+        HOLIDAYLANDINGPAGE: "holidaylandingpage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {
