@@ -1625,6 +1625,9 @@ button {
 .text-heavy-shadow-black{
     text-shadow: 0px 1px 7px #000;
 }
+.text-light-shadow-black{
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
 .width100 {
     width: 100%;
 }
@@ -5281,6 +5284,13 @@ a.tab-ico {
    margin-bottom: 20px;
 }
 
+.product-desc-overflow{
+    text-overflow: ellipsis;
+    max-height: 198px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 @media (max-width:1180px){
     .shobha_banner_txt {
         background-color: rgba(169, 167, 177, 1);
@@ -5304,3 +5314,86 @@ a.tab-ico {
         padding: 10px;
     }
 }
+
+/* Pune landing page start */
+
+.pune_banner_form{
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+.pune-form-box {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(84,102,112,0.9);
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    width: 25%;
+    border-radius: 5px;
+}
+.pune-sliding-text{
+    position: absolute;
+    top: 72%;
+    margin: auto;
+    color: #fff;
+}
+
+.color-pune-hover {
+    color:#999 !important;
+}
+
+.img_hover:hover .color-pune-hover {
+    color:#000 !important;
+}
+
+.pune_banner_form_button, .pune_banner_form_button:focus {
+    color: #fff;
+    background-color: #ffffff !important;
+    text-transform: none;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+    padding: 8px 25px !important;
+    border-radius: 5px;
+    border: 1px solid rgba(37,51,58,0.9);
+    width: 50%;
+    font-weight: bold;
+    background-color: rgba(37,51,58,0.9) !important;
+}
+
+.pune_banner_form_button:hover, .pune_banner_form_button:active,
+.pune_banner_form_button:hover, .pune_banner_form_button:active {
+    background-color: #334a4d !important;
+     color: #ffffff;
+     border:1px solid #334a4d;
+}
+
+.pune_banner_form_input {
+/*
+    background-color: rgba(255,255,255,0.7) !important;
+*/
+    background-color: #ffffff !important;
+    border-radius: 40px !important;
+}
+
+@media (max-width:1180px){
+    .pune-form-box {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #55666F;
+        position: relative;
+        top: 15%;
+        right: 0%;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .pune-sliding-text{
+        position: relative;
+        top: 0%;
+        margin: auto;
+        color: #fff;
+        background-color: rgba(169, 167, 177, 1);
+        padding-top:10px;
+    }
+}
+
+/* Pune landing page end */

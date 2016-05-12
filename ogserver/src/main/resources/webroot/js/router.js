@@ -50,7 +50,8 @@ define([
             'email-lp(/)':'emaillandingpage',
             'nri-:cityName(/)' : 'nripage',
             'media(/)': 'mediapage',
-            'shobha-lp(/)': 'shobhalandingpage'
+            'shobha-lp(/)': 'shobhalandingpage',
+            'pune-lp(/)': 'punelandingpage'
 
         },
         dashboard: function() {
@@ -395,6 +396,13 @@ define([
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/landing_pages/shobhalanding_page.js'], function(ShobhaLandingPage) {
                 VM.create(VM.SHOBHALANDINGPAGE, ShobhaLandingPage).render();
+            });
+        });
+
+        router.on('route:punelandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/punelanding_page.js'], function(PuneLandingPage) {
+                VM.create(VM.PUNELANDINGPAGE, PuneLandingPage).render();
             });
         });
         router.on('route:mediapage', function(actions) {

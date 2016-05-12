@@ -23,6 +23,7 @@ define(function() {
         MANGALORELANDINGPAGE: "MangaloreLandingPage",
         EMAILLANDINGPAGE: "EmailLandingPage",
         SHOBHALANDINGPAGE: "shobhalandingpage",
+        PUNELANDINGPAGE: "punelandingpage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {
