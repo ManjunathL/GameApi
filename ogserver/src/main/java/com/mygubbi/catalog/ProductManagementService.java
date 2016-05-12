@@ -76,6 +76,7 @@ public class ProductManagementService extends AbstractVerticle
                 .put("styleId", productJson.getStyleId())
                 .put("popularity", productJson.getPopularity())
                 .put("relevance", productJson.getRelevance())
+                .put("createDt", productJson.getCreateDt())
                 .put("productShortJson", productJson.getShortJson().toString());
         Integer id = LocalCache.getInstance().store(new QueryData("product.select.productid", product));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,

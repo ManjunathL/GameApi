@@ -85,6 +85,10 @@ public class ProductJson extends JsonObject
     {
         return this.getString("productId");
     }
+    public String getCreateDt()
+    {
+        return this.getString("createDt");
+    }
 
     public String getName()
     {
@@ -108,7 +112,9 @@ public class ProductJson extends JsonObject
 
     public Integer getRelevance() {return this.getInteger("relevance");}
 
+/*
     public Date getCreateDt() {return this.getCreateDt();}
+*/
 
     public String getFirstImage()
     {
