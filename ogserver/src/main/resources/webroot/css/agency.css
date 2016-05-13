@@ -831,7 +831,7 @@ ul.social-links {
 .nri_banner_txt {
     position: absolute;
     top: 18%;
-    left: 2%;
+    left: 20%;
     max-width: 95%;
 }
 
@@ -1617,6 +1617,9 @@ button {
 .color-white {
     color: #ffffff !important;
 }
+.color-mygubbi-namaskara {
+    color: #546670 !important;
+}
 
 .error-class {
     color: #e60000 !important;
@@ -1769,6 +1772,10 @@ button {
 
 .font-size55 {
     font-size: 55px;
+}
+
+.font-size60 {
+    font-size: 60px;
 }
 
 .font-size80 {
@@ -5322,18 +5329,33 @@ a.tab-ico {
     margin: auto;
     padding: 10px;
 }
+
+.pune_banner_txt {
+    position: absolute;
+    top: 18%;
+    left: 20%;
+    max-width: 95%;
+}
+
+.pune-subheading-txt{
+    font-style: italic;
+    color: #999;
+    font-size: 22px;
+}
+
 .pune-form-box {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: rgba(84,102,112,0.9);
-    position: absolute;
-    top: 15%;
-    right: 5%;
-    width: 25%;
+    width: 30%;
     border-radius: 5px;
+    margin-left:10px;
 }
+
+
+
 .pune-sliding-text{
     position: absolute;
-    top: 72%;
+    top: 98%;
     margin: auto;
     color: #fff;
 }
@@ -5376,6 +5398,13 @@ a.tab-ico {
 }
 
 @media (max-width:1180px){
+    .pune_banner_txt {
+        position: relative;
+        top: 18%;
+        left: 0%;
+        max-width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
     .pune-form-box {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         background-color: #55666F;
@@ -5384,6 +5413,7 @@ a.tab-ico {
         right: 0%;
         width: 100%;
         border-radius: 5px;
+        margin-left:0px;
     }
 
     .pune-sliding-text{

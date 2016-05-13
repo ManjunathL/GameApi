@@ -1,11 +1,20 @@
 <section class="bg-color-white padding-bottom20 menu-spacer">
     <div class="container-fluid">
         <div class="row margin0">
-            <img data-src="<%= imgBase + 'w_auto' + '/v1/pune_lp/Banner_without_form.png'%>"
+            <img data-src="<%= imgBase + 'w_auto' + '/v1/pune_lp/Website_Banner_without_text.jpg'%>"
                  class="cld-responsive img-centered width100" alt="Looking for modular kitchen">
         </div>
-        <div class="pune-form-box">
-            <div class="col-lg-12">
+        <div class="pune_banner_txt">
+            <div class="col-lg-7 padding50-15">
+                <h1 class="align-center color-mygubbi-namaskara font-weight-bold font-size60">
+                    Mygubbi Says Namaskara To You!
+                </h1>
+
+                <h3 class="heading-center-notransform margin-top40 width90 margin_auto pune-subheading-txt">
+                    Your Click for Complete Home Interior Solutions
+                </h3>
+            </div>
+            <div class="col-lg-5 pune-form-box">
                 <!-- Banner Contact Form -->
                 <div class="row margin0">
                     <h3 class="heading-center-notransform font-size30 text-color-white">
@@ -45,6 +54,9 @@
                                            value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
                                            required='required' pattern="\d{10}"
                                            title="e.g. 9876543210"/>
+                                </div>
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control pune_banner_form_input" id='mx_City' name='mx_City' placeholder="City*" maxlength='50' value='' autocomplete='off' required='required' />
                                 </div>
                                 <div class="align-center form-group">
                                     <button class="pune_banner_form_button"
