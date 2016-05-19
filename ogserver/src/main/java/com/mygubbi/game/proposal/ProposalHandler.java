@@ -1,6 +1,7 @@
 package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.StringUtils;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
@@ -36,6 +37,12 @@ public class ProposalHandler extends AbstractRouteHandler
     private void createProposal(RoutingContext routingContext)
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
+        if (StringUtils.isEmpty(proposalData.getString("title")) || StringUtils.isEmpty(proposalData.getString("createdon"))
+                || StringUtils.isEmpty(proposalData.getString("createdby")))
+        {
+            sendError(routingContext, "Error in creating proposal as title, createdon or createdby are not set.");
+            return;
+        }
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -50,7 +57,7 @@ public class ProposalHandler extends AbstractRouteHandler
                         String docsFolder = this.proposalDocsFolder + "/" + proposalData.getLong("id");
                         VertxInstance.get().fileSystem().mkdirBlocking(docsFolder);
                         proposalData.put("docsfolder", docsFolder);
-                        this.updateProposal(routingContext, proposalData);
+                        this.updateProposal(routingContext, proposalData, "proposal.docsfolder.update");
                     }
                 });
     }
@@ -58,12 +65,12 @@ public class ProposalHandler extends AbstractRouteHandler
     private void updateProposal(RoutingContext routingContext)
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
-        this.updateProposal(routingContext, proposalData);
+        this.updateProposal(routingContext, proposalData, "proposal.update");
     }
 
-    private void updateProposal(RoutingContext routingContext, JsonObject proposalData)
+    private void updateProposal(RoutingContext routingContext, JsonObject proposalData, String queryId)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.save", proposalData));
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());

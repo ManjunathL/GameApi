@@ -8,29 +8,21 @@ import io.vertx.core.json.JsonObject;
  */
 public class ProductLineItem extends JsonObject
 {
-    public static String MAPPED_AT_MODULE = "m";
-    public static String MAPPED_AT_DEFAULT = "d";
-    public static String NOT_MAPPED = "n";
 
     private static String ID = "id";
     private static String ACTIVE = "active";
     private static String PROPOSALID = "proposalid";
     private static String TITLE = "title";
-    private static String TYPE = "type";
+    private static String TYPE = "type"; //Assembled, Catalogue
     private static String KDMAX_FILE = "kdmax_file";
-    private static String PRODUCT_TYPE = "product_type";
+    private static String ROOM = "room"; //Kitchen, Bedroom 1
+    private static String PRODUCT_TYPE = "product_type"; //Kitchen, Living Room
     private static String PRODUCT_ID = "product_id";
     private static String PRODUCT_NAME = "product_name";
-    private static String CARCASS_ID = "carcass_id";
-    private static String CARCASS_NAME = "carcass_name";
-    private static String SHUTTER_ID = "shutter_id";
-    private static String SHUTTER_NAME = "shutter_name";
-    private static String FINISH_ID = "finish_id";
-    private static String FINISH_NAME = "finish_name";
-    private static String COLOR_ID = "color_id";
-    private static String COLOR_NAME = "color_name";
-    private static String MAKE_ID = "make_id";
-    private static String MAKE_NAME = "make_name";
+    private static String CARCASS_CODE = "carcass_code";
+    private static String FINISH_CODE = "finish_code";
+    private static String FINISH_TYPE = "finish_type";
+    private static String MAKE_TYPE = "make_type";
     private static String DIMENSION = "dimension";
     private static String QUANTITY = "quantity";
     private static String AMOUNT = "amount";
@@ -59,54 +51,24 @@ public class ProductLineItem extends JsonObject
         return this.getString(KDMAX_FILE);
     }
 
-    public String getCarcassId()
+    public String getCarcassCode()
     {
-        return this.getString(CARCASS_ID);
+        return this.getString(CARCASS_CODE);
     }
 
-    public String getCarcassName()
+    public String getFinishCode()
     {
-        return this.getString(CARCASS_NAME);
+        return this.getString(FINISH_CODE);
     }
 
-    public String getShutterId()
+    public String getFinishType()
     {
-        return this.getString(SHUTTER_ID);
+        return this.getString(FINISH_TYPE);
     }
 
-    public String getShutterName()
+    public String getMakeType()
     {
-        return this.getString(SHUTTER_NAME);
-    }
-
-    public String getFinishId()
-    {
-        return this.getString(FINISH_ID);
-    }
-
-    public String getFinishName()
-    {
-        return this.getString(FINISH_NAME);
-    }
-
-    public String getColorId()
-    {
-        return this.getString(COLOR_ID);
-    }
-
-    public String getColorName()
-    {
-        return this.getString(COLOR_NAME);
-    }
-
-    public String getMakeId()
-    {
-        return this.getString(MAKE_ID);
-    }
-
-    public String getMakeName()
-    {
-        return this.getString(MAKE_NAME);
+        return this.getString(MAKE_TYPE);
     }
 
     public ProductLineItem addModule(ProductModule module)
@@ -116,11 +78,8 @@ public class ProductLineItem extends JsonObject
             this.put(MODULES, new JsonArray());
         }
         JsonArray mgModules = this.getJsonArray(MODULES);
-        module.setCarcassId(this.getCarcassId()).setCarcassName(this.getCarcassName())
-                .setShutterId(this.getShutterId()).setShutterName(this.getShutterName())
-                .setFinishId(this.getFinishId()).setFinishName(this.getFinishName())
-                .setMakeId(this.getMakeId()).setMakeName(this.getMakeName())
-                .setColorId(this.getColorId()).setColorName(this.getColorName());
+        module.setCarcassCode(this.getCarcassCode()).setFinishCode(this.getFinishCode())
+                .setFinishType(this.getFinishType()).setMakeType(this.getMakeType());
         mgModules.add(module);
         this.put(MODULES, mgModules);
         return this;
@@ -182,7 +141,7 @@ public class ProductLineItem extends JsonObject
 
     public int getId()
     {
-        return this.getInteger(ID);
+        return this.containsKey(ID) ? this.getInteger(ID) : 0;
     }
 }
 

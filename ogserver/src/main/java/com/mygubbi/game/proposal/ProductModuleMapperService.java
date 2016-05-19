@@ -73,7 +73,7 @@ public class ProductModuleMapperService extends AbstractVerticle
                     }
                     else
                     {
-                        this.addMgModules(productModule, message, selectData.rows, ProductLineItem.MAPPED_AT_MODULE);
+                        this.addMgModules(productModule, message, selectData.rows, ProductModule.MAPPED_AT_MODULE);
                     }
                 });
     }
@@ -97,7 +97,7 @@ public class ProductModuleMapperService extends AbstractVerticle
 
     private void sendResponseAsNotMapped(ProductModule productModule, Message message)
     {
-        productModule.setMappedFlag(ProductLineItem.NOT_MAPPED);
+        productModule.setMappedFlag(ProductModule.NOT_MAPPED);
         message.reply(LocalCache.getInstance().store(productModule));
     }
 
@@ -114,7 +114,7 @@ public class ProductModuleMapperService extends AbstractVerticle
                     }
                     else
                     {
-                        this.addMgModules(productModule, message, selectData.rows, ProductLineItem.MAPPED_AT_DEFAULT);
+                        this.addMgModules(productModule, message, selectData.rows, ProductModule.MAPPED_AT_DEFAULT);
                     }
                 });
     }
@@ -123,7 +123,7 @@ public class ProductModuleMapperService extends AbstractVerticle
     {
         for (JsonObject mgModule : mgModules)
         {
-            productModule.addMappedModule(mgModule);
+            //productModule.addMappedModule(mgModule);
         }
         productModule.setMappedFlag(mappedFlag);
         message.reply(LocalCache.getInstance().store(productModule));

@@ -20,8 +20,20 @@
         "worker": false
       },
       {
+        "name": "com.mygubbi.game.proposal.ModuleDataService"
+      },
+      {
+        "name": "com.mygubbi.game.proposal.RateCardService"
+      },
+
+      {
+        "name": "com.mygubbi.game.proposal.ModulePricingService"
+      },
+
+      {
         "name": "com.mygubbi.si.email.EmailService"
       }
+
     ]
   }
 }

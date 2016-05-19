@@ -1,6 +1,8 @@
 package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -8,6 +10,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +22,8 @@ import java.util.List;
 
 public class ModuleFileReader
 {
+    private final static Logger LOG = LogManager.getLogger(ModuleFileReader.class);
+
     private String filename;
 
     public ModuleFileReader(String filename)
@@ -28,11 +33,11 @@ public class ModuleFileReader
 
     public List<ProductModule> loadModules()
     {
-        System.out.println("Loading file " + this.filename);
+        LOG.info("Loading file " + this.filename);
         Workbook wb = null;
         try
         {
-            wb = new XSSFWorkbook(new BufferedInputStream(getClass().getResourceAsStream(this.filename)));
+            wb = new XSSFWorkbook(new BufferedInputStream(new FileInputStream(this.filename)));
         }
         catch (IOException e)
         {
@@ -87,8 +92,7 @@ public class ModuleFileReader
 
                 ProductModule module = new ProductModule().setUnit(unit).setName(name).setKDMCode(moduleCode)
                         .setSequence(sequence)
-                        .setFinishId(finish).setFinishName(finish)
-                        .setColorId(color).setColorName(color)
+                        .setColorCode(color)
                         .setQuantity(quantity).setUom(uom).setRemarks(remarks)
                         .setWidth(width).setDepth(depth).setHeight(height);
                 productModules.add(module);
@@ -105,7 +109,7 @@ public class ModuleFileReader
 
         for (ProductModule module : productModules)
         {
-            System.out.println(module);
+            LOG.info(module);
         }
         return productModules;
     }

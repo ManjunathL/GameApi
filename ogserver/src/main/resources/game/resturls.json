@@ -17,10 +17,18 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/detail",
+      "uri": "/gapi/proposal/header",
       "source": "db",
-      "query":"proposal.detail",
+      "query":"proposal.header",
       "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/documents",
+      "source": "db",
+      "query":"proposal.document.select",
+      "params":["proposalid"],
       "resultfields":[],
       "default": "[]"
     },
@@ -41,39 +49,102 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/add.file",
+      "uri": "/gapi/proposal/delete",
       "source": "db",
-      "query":"proposal.addfile",
-      "params":["proposalid", "title", "path", "userid", "username"],
-      "resultfields":[],
-      "default": "[]"
-    },
-    {
-      "uri": "/gapi/proposal/remove.file",
-      "source": "db",
-      "query":"proposal.removefile",
+      "query":"proposal.delete",
       "params":["id"],
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/product/add.file",
+      "uri": "/gapi/proposal/add.doc",
       "source": "db",
-      "query":"proposal.product.addfile",
-      "params":["proposalid", "productid", "title", "path", "userid", "username"],
+      "query":"proposal.document.add",
+      "params":["proposalid", "type", "title", "path", "userid"],
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/product/remove.file",
+      "uri": "/gapi/proposal/remove.doc",
       "source": "db",
-      "query":"proposal.removefile",
+      "query":"proposal.document.remove",
       "params":["id"],
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/lookup/finish",
+      "uri": "/gapi/proposal/product/list",
+      "source": "db",
+      "query":"proposal.product.list",
+      "params":["proposalid"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/product/detail",
+      "source": "db",
+      "query":"proposal.product.detail",
+      "params":["proposalid", "productid"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/product/documents",
+      "source": "db",
+      "query":"product.document.select",
+      "params":["proposalid", "productid"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/product/add.doc",
+      "source": "db",
+      "query":"product.document.add",
+      "params":["proposalid", "productid", "type", "title", "path", "userid"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/product/remove.doc",
+      "source": "db",
+      "query":"proposal.document.remove",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/lookup/color.swatch",
+      "source": "db",
+      "query":"color.swatch",
+      "params":["shutterfinish"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/lookup/addon.types",
+      "source": "db",
+      "query":"addon.types",
+      "params":["producttype"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/lookup/addons",
+      "source": "db",
+      "query":"addons.select",
+      "params":["producttype", "addontype"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/lookup/shutter.finish",
+      "source": "file",
+      "file":"game/data/finishes.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/lookup/finish.type",
       "source": "file",
       "file":"game/data/finishes.json",
       "default": "[]",
@@ -87,9 +158,9 @@
       "encoding": "application/json"
     },
     {
-      "uri": "/gapi/lookup/shutter.material",
+      "uri": "/gapi/lookup/module.carcass.material",
       "source": "file",
-      "file":"game/data/shutter_materials.json",
+      "file":"game/data/carcass_materials.json",
       "default": "[]",
       "encoding": "application/json"
     },
@@ -101,16 +172,16 @@
       "encoding": "application/json"
     },
     {
-      "uri": "/gapi/lookup/product.make",
+      "uri": "/gapi/lookup/room.type",
       "source": "file",
-      "file":"game/data/productmake.json",
+      "file":"game/data/room_types.json",
       "default": "[]",
       "encoding": "application/json"
     },
     {
-      "uri": "/gapi/lookup/product.color",
+      "uri": "/gapi/lookup/make.type",
       "source": "file",
-      "file":"game/data/productcolors.json",
+      "file":"game/data/maketypes.json",
       "default": "[]",
       "encoding": "application/json"
     },
