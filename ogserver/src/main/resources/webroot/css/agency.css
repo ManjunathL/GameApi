@@ -5427,3 +5427,19 @@ a.tab-ico {
 }
 
 /* Pune landing page end */
+
+/* SEO design start */
+
+.seo-lnks{
+    font-size:14px!important;
+    text-transform: Capitalize !important;
+    display:inline!important;
+}
+.seo-p{
+    display:inline !important;
+}
+.seo-headings-h2{
+    font-size:12px!important;
+}
+
+/* SEO design end */
