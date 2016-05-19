@@ -1,6 +1,10 @@
 package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.StringUtils;
+import com.mygubbi.common.VertxInstance;
+import com.mygubbi.db.DatabaseService;
+import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
@@ -22,6 +26,7 @@ public class ProposalModuleHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
+        this.post("/getmgmodules").handler(this::getMGModules);
         this.post("/price").handler(this::getPrice);
     }
 
@@ -30,11 +35,42 @@ public class ProposalModuleHandler extends AbstractRouteHandler
         JsonObject moduleJson = routingContext.getBodyAsJson();
         ProductModule module = new ProductModule(moduleJson);
         Integer id = LocalCache.getInstance().store(module);
-        vertx.eventBus().send(ModulePricingService.CALCULATE_PRICE, id,
+        VertxInstance.get().eventBus().send(ModulePricingService.CALCULATE_PRICE, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     JsonObject result = (JsonObject) LocalCache.getInstance().remove(selectResult.result().body());
                     sendJsonResponse(routingContext, result.toString());
                 });
     }
 
+    private void getMGModules(RoutingContext routingContext)
+    {
+        JsonObject moduleJson = routingContext.getBodyAsJson();
+        ProductModule module = new ProductModule(moduleJson);
+        if (module.hasNoMapping())
+        {
+            sendError(routingContext, "No modules mapped for KDMax module " + module.getKDMCode());
+            return;
+        }
+
+        String kdmcode = module.hasMGMapping() ? module.getKDMCode() : module.getKDMDefaultCode();
+        if (StringUtils.isEmpty(kdmcode))
+        {
+            sendError(routingContext, "KDMax module code is not set for this module " + module.getKDMCode());
+            return;
+        }
+
+        Integer id = LocalCache.getInstance().store(new QueryData("kdmax.mg.select", new JsonObject().put("kdmcode", kdmcode)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        sendError(routingContext, "No modules mapped for KDMax module " + module.getKDMCode());
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, selectData.rows.toString());
+                    }
+                });
+    }
 }

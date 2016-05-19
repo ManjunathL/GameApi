@@ -2,11 +2,9 @@ package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
-import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
-import com.mygubbi.si.excel.ExcelReaderService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -17,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -26,8 +23,6 @@ public class ProposalProductHandler extends AbstractRouteHandler
 {
     private final static Logger LOG = LogManager.getLogger(ProposalProductHandler.class);
 
-    private String proposalDocsFolder = null;
-
     public ProposalProductHandler(Vertx vertx)
     {
         super(vertx);
@@ -35,11 +30,11 @@ public class ProposalProductHandler extends AbstractRouteHandler
         this.post("/mapandupdate").handler(this::mapAndUpdate);
         this.post("/update").handler(this::updateProduct);
         this.post("/delete").handler(this::deleteProduct);
-        this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
 
     private void mapAndUpdate(RoutingContext routingContext)
     {
+        LOG.info("Reading product json");
         JsonObject productJson = routingContext.getBodyAsJson();
         ProductLineItem productLineItem = new ProductLineItem(productJson);
         this.mapModules(routingContext, productLineItem);
@@ -56,21 +51,13 @@ public class ProposalProductHandler extends AbstractRouteHandler
         }
 
         int size = modules.size();
-        AtomicInteger doneCounter = new AtomicInteger(0);
         for (int i = 0; i < size; i++)
         {
             ProductModule module = modules.get(i);
+            ModuleDataService.getInstance().setMapping(module);
             productLineItem.addModule(module);
-            Integer id = LocalCache.getInstance().store(module);
-            vertx.eventBus().send(ProductModuleMapperService.MAP_TO_MG, id,
-                    (AsyncResult<Message<Integer>> selectResult) -> {
-                        int counter = doneCounter.incrementAndGet();
-                        if (counter == size)
-                        {
-                            this.updateProductLineItem(routingContext, productLineItem);
-                        }
-                    });
         }
+        this.updateProductLineItem(routingContext, productLineItem);
     }
 
     private void updateProduct(RoutingContext routingContext)
@@ -89,7 +76,7 @@ public class ProposalProductHandler extends AbstractRouteHandler
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
                     {
-                        sendError(routingContext, "Error in updating product line item in the proposal.");
+                        sendError(routingContext, "Error in updating product line item in the proposal. " + resultData.errorMessage);
                         LOG.error("Error in updating product line item in the proposal. " + resultData.errorMessage, resultData.error);
                     }
                     else

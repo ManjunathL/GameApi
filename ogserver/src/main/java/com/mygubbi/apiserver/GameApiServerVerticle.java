@@ -91,15 +91,11 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/user.auth", new GameUserLoginHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/user.reg", new GameUserRegistrationHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/user.change_pwd", new GameUserChangePwdHandler(VertxInstance.get()));
-        router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
-        router.mountSubRouter("/gapi/proposal/product", new ProposalProductHandler(VertxInstance.get()));
-        router.mountSubRouter("/gapi/proposal/module", new ProposalModuleHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/product", new ProposalProductHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/module", new ProposalModuleHandler(VertxInstance.get()));
 
-
-        router.mountSubRouter("/gapi/products", new CatalogProductHandler(VertxInstance.get()));
-
-
+        LOG.info("Routes:" + router.getRoutes().toString());
     }
 
     private void logHeadersHandler(Router router)

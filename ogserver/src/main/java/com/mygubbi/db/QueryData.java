@@ -48,6 +48,10 @@ public class QueryData
 			{
 				params.add(value.toString());
 			}
+			else if (value instanceof JsonArray)
+			{
+				params.add(value.toString());
+			}
 			else
 			{
 				params.add(value);
@@ -102,6 +106,10 @@ public class QueryData
 	public QueryData setResult(UpdateResult updateResult)
 	{
 		this.updateResult = updateResult;
+		if (this.queryDef.isInsertQuery && this.updateResult.getKeys() != null && !this.updateResult.getKeys().isEmpty())
+		{
+			this.paramsObject.put("id", this.updateResult.getKeys().getValue(0));
+		}
 		return this.endQuery();
 	}
 }

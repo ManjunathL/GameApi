@@ -1,6 +1,6 @@
 package com.mygubbi.game.proposal;
 
-import io.vertx.core.json.JsonArray;
+import com.mygubbi.common.StringUtils;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -9,20 +9,19 @@ import io.vertx.core.json.JsonObject;
 
 public class ProductModule extends JsonObject
 {
+    public static String MAPPED_AT_MODULE = "m";
+    public static String MAPPED_AT_DEFAULT = "d";
+    public static String NOT_MAPPED = "n";
+
     private static final String UNIT = "unit";
     private static final String KDMCODE = "kdmcode";
     private static final String KDMDEFCODE = "kdmdefcode";
     private static final String SEQ = "seq";
-    private static final String CARCASS_ID = "carcass_id";
-    private static final String CARCASS_NAME = "carcass_name";
-    private static final String SHUTTER_ID = "shutter_id";
-    private static final String SHUTTER_NAME = "shutter_name";
-    private static final String FINISH_ID = "finish_id";
-    private static final String FINISH_NAME = "finish_name";
-    private static final String COLOR_ID = "color_id";
-    private static final String COLOR_NAME = "color_name";
-    private static final String MAKE_ID = "make_id";
-    private static final String MAKE_NAME = "make_name";
+    private static final String CARCASS_CODE = "carcass_code";
+    private static final String FINISH_CODE = "finish_code";
+    private static final String FINISH_TYPE = "finish_type";
+    private static final String COLOR_CODE = "color_code";
+    private static final String MAKE_TYPE = "make_type";
     private static final String MGCODE = "mgcode";
     private static final String MGNAME = "mgname";
     private static final String MGIMAGE = "mgimage";
@@ -36,7 +35,6 @@ public class ProductModule extends JsonObject
     private static final String REMARKS = "remarks";
     private static final String NAME = "name";
     private static final String MAPPED = "mapped";
-    private static final String MGMODULES = "mgmodules";
 
     public ProductModule()
     {
@@ -63,54 +61,29 @@ public class ProductModule extends JsonObject
         return this.getString(KDMDEFCODE);
     }
 
-    public String getCarcassId()
+    public String getCarcassCode()
     {
-        return this.getString(CARCASS_ID);
+        return this.getString(CARCASS_CODE);
     }
 
-    public String getCarcassName()
+    public String getFinishCode()
     {
-        return this.getString(CARCASS_NAME);
+        return this.getString(FINISH_CODE);
     }
 
-    public String getShutterId()
+    public String getFinishType()
     {
-        return this.getString(SHUTTER_ID);
+        return this.getString(FINISH_TYPE);
     }
 
-    public String getShutterName()
+    public String getColorCode()
     {
-        return this.getString(SHUTTER_NAME);
+        return this.getString(COLOR_CODE);
     }
 
-    public String getFinishId()
+    public String getMakeType()
     {
-        return this.getString(FINISH_ID);
-    }
-
-    public String getFinishName()
-    {
-        return this.getString(FINISH_NAME);
-    }
-
-    public String getColorId()
-    {
-        return this.getString(COLOR_ID);
-    }
-
-    public String getColorName()
-    {
-        return this.getString(COLOR_NAME);
-    }
-
-    public String getMakeId()
-    {
-        return this.getString(MAKE_ID);
-    }
-
-    public String getMakeName()
-    {
-        return this.getString(MAKE_NAME);
+        return this.getString(MAKE_TYPE);
     }
 
     public int getQuantity()
@@ -207,63 +180,33 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule setCarcassId(String id)
+    public ProductModule setCarcassCode(String code)
     {
-        this.put(CARCASS_ID, id);
+        this.put(CARCASS_CODE, code);
         return this;
     }
 
-    public ProductModule setCarcassName(String name)
+    public ProductModule setFinishCode(String code)
     {
-        this.put(CARCASS_NAME, name);
+        this.put(FINISH_CODE, code);
         return this;
     }
 
-    public ProductModule setShutterId(String id)
+    public ProductModule setFinishType(String code)
     {
-        this.put(SHUTTER_ID, id);
+        this.put(FINISH_TYPE, code);
         return this;
     }
 
-    public ProductModule setShutterName(String name)
+    public ProductModule setMakeType(String type)
     {
-        this.put(SHUTTER_NAME, name);
+        this.put(MAKE_TYPE, type);
         return this;
     }
 
-    public ProductModule setFinishId(String finishId)
+    public ProductModule setColorCode(String code)
     {
-        this.put(FINISH_ID, finishId);
-        return this;
-    }
-
-    public ProductModule setFinishName(String finishName)
-    {
-        this.put(FINISH_ID, finishName);
-        return this;
-    }
-
-    public ProductModule setMakeId(String id)
-    {
-        this.put(MAKE_ID, id);
-        return this;
-    }
-
-    public ProductModule setMakeName(String name)
-    {
-        this.put(MAKE_NAME, name);
-        return this;
-    }
-
-    public ProductModule setColorId(String id)
-    {
-        this.put(COLOR_ID, id);
-        return this;
-    }
-
-    public ProductModule setColorName(String name)
-    {
-        this.put(COLOR_NAME, name);
+        this.put(COLOR_CODE, code);
         return this;
     }
 
@@ -345,21 +288,20 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule addMappedModule(String module, String title, String dimension, String image)
+    public boolean hasMGMapping()
     {
-        return this.addMappedModule(new JsonObject().put("code", module).put("title", title).put("dim", dimension).put("image", image));
+        return MAPPED_AT_MODULE.equals(this.getMapped());
     }
 
-    public ProductModule addMappedModule(JsonObject module)
+    public boolean hasDefaultMapping()
     {
-        if (!this.containsKey(MGMODULES))
-        {
-            this.put(MGMODULES, new JsonArray());
-        }
-        JsonArray mgModules = this.getJsonArray(MGMODULES);
-        mgModules.add(module);
-        this.put(MGMODULES, mgModules);
-        return this;
+        return MAPPED_AT_DEFAULT.equals(this.getMapped());
+    }
+
+    public boolean hasNoMapping()
+    {
+        if (StringUtils.isEmpty(this.getMapped())) return true;
+        return NOT_MAPPED.equals(this.getMapped());
     }
 
     @Override
@@ -369,8 +311,8 @@ public class ProductModule extends JsonObject
                 "unit='" + this.getUnit() + '\'' +
                 ", name='" + this.getName() + '\'' +
                 ", code='" + this.getKDMCode() + '\'' +
-                ", finish='" + this.getFinishId() + '\'' +
-                ", color='" + this.getColorId() + '\'' +
+                ", finish='" + this.getFinishCode() + '\'' +
+                ", color='" + this.getColorCode() + '\'' +
                 ", quantity=" + this.getQuantity() +
                 ", uom='" + this.getUom() + '\'' +
                 ", remarks='" + this.getRemarks() + '\'' +
@@ -380,6 +322,5 @@ public class ProductModule extends JsonObject
                 '}';
 
     }
-
 
 }
