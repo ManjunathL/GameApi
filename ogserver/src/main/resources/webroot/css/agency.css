@@ -5379,7 +5379,7 @@ a.tab-ico {
     -webkit-transition: color 0.3s, opacity 0.2s;
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
     padding: 8px 25px !important;
-    border-radius: 5px;
+    border-radius: 40px;
     border: 1px solid rgba(37,51,58,0.9);
     width: 50%;
     font-weight: bold;
