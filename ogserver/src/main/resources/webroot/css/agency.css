@@ -5220,6 +5220,9 @@ a.tab-ico {
 .shobha_txt_aquacolor{
     color: #4cc7b1!important;
 }
+.shobha_txt_darkaquacolor{
+    color: rgba(33, 119, 104, 1)!important;
+}
 .shobha_banner_form_button, .shobha_banner_form_button:focus {
     color: #4cc7b1;
     background-color: #ffffff !important;
