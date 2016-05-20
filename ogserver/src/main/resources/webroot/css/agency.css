@@ -1882,6 +1882,10 @@ button {
     padding: 0 10% !important;
 }
 
+.padding0-5per {
+    padding: 0 5% !important;
+}
+
 .padding10-0 {
     padding: 10px 0px !important;
 }
