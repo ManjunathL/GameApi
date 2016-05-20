@@ -190,7 +190,8 @@
       "type": "select",
       "table": "proposal_product",
       "query": "select * from proposal_product where proposalid = ? and id = ? and active = 'A'",
-      "params": ["proposalid", "productid"]
+      "params": ["proposalid", "productid"],
+      "jsonfields":["modules", "addons"]
     },
 
     // Module costing queries
@@ -240,21 +241,21 @@
       "id": "shutter.select.all",
       "type": "select",
       "table": "shutter_master",
-      "query": "select code, title, plength, breadth, height, edgebinding, quantity from shutter_master",
+      "query": "select code, title, plength, breadth, thickness, edgebinding, quantity from shutter_master",
       "params": []
     },
     {
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, maketype, make, imageurl, price acc_hw_master where type = 'A'",
+      "query": "select code, title, maketype, make, imageurl, price from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, maketype, make, imageurl, price acc_hw_master where type = 'H'",
+      "query": "select code, title, maketype, make, imageurl, price from acc_hw_master where type = 'H'",
       "params": []
     },
     {

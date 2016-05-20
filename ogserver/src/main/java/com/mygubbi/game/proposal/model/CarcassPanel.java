@@ -14,14 +14,14 @@ public class CarcassPanel
     private int breadth;
     private int thickness;
     private String edgebinding;
-    private int area;
+    private double area;
 
     public static CarcassPanel fromJson(JsonObject json)
     {
         return new CarcassPanel().setCode(json.getString("code")).setTitle(json.getString("title"))
                 .setLength(json.getInteger("plength")).setBreadth(json.getInteger("breadth"))
                 .setThickness(json.getInteger("thickness")).setEdgebinding(json.getString("edgebinding"))
-                .setArea(json.getInteger("area"));
+                .setArea(json.getDouble("area"));
     }
 
     public String getCode()
@@ -90,12 +90,12 @@ public class CarcassPanel
         return this;
     }
 
-    public int getArea()
+    public double getArea()
     {
         return area;
     }
 
-    public CarcassPanel setArea(int area)
+    public CarcassPanel setArea(double area)
     {
         this.area = area;
         return this;

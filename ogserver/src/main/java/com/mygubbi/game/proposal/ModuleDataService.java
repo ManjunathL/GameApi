@@ -211,14 +211,13 @@ public class ModuleDataService extends AbstractVerticle
     private synchronized void markResult(String message, boolean success)
     {
         if (this.startFuture == null) return;
-/*        if (!success)
+        if (!success)
         {
             this.startFuture.fail(message);
             this.startFuture = null;
             LOG.error(message);
             return;
         }
-*/ //TODO: Uncomment this block
 
         int counter = this.cachingCounter.decrementAndGet();
         if (counter == 0)

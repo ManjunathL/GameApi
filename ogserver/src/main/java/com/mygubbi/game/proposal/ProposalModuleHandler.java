@@ -46,6 +46,7 @@ public class ProposalModuleHandler extends AbstractRouteHandler
     {
         JsonObject moduleJson = routingContext.getBodyAsJson();
         ProductModule module = new ProductModule(moduleJson);
+        LOG.info("Mapped flag:" + module.getMapped() + " and from json: " + moduleJson.getString("mapped"));
         if (module.hasNoMapping())
         {
             sendError(routingContext, "No modules mapped for KDMax module " + module.getKDMCode());
@@ -58,6 +59,8 @@ public class ProposalModuleHandler extends AbstractRouteHandler
             sendError(routingContext, "KDMax module code is not set for this module " + module.getKDMCode());
             return;
         }
+
+        LOG.info("Getting mapped modules for :" + module.getKDMCode());
 
         Integer id = LocalCache.getInstance().store(new QueryData("kdmax.mg.select", new JsonObject().put("kdmcode", kdmcode)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,

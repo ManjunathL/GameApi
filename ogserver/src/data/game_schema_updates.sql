@@ -163,23 +163,12 @@ CREATE TABLE carcass_master(
   breadth INTEGER NOT NULL DEFAULT 0,
   thickness INTEGER NOT NULL DEFAULT 0,
   edgebinding varchar(128) NOT NULL,
-  area DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  area DECIMAL(10,10) NOT NULL DEFAULT 0.0,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Carcass master';
 
-
-DROP TABLE IF EXISTS carcass_material_xref;
-CREATE TABLE carcass_material_xref(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  carcasscode varchar(16) NOT NULL,
-  mfcode varchar(16) NOT NULL,
-  carcassxcode varchar(16) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (carcasscode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Carcass Material xref';
 
 DROP TABLE IF EXISTS shutter_master;
 CREATE TABLE shutter_master(
@@ -205,7 +194,7 @@ CREATE TABLE code_master(
   groupid varchar(1) NOT NULL DEFAULT 'A', -- P - Product, M - Module, A - All
   code varchar(16) NOT NULL,
   title varchar(64) NOT NULL,
-  finishType varchar(16) NOT NULL,
+  finishType varchar(16) NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (code)

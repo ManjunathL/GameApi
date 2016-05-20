@@ -37,8 +37,8 @@ public class KDMaxMappingHandler implements ExcelRowHandler
 
         System.out.println("kdmaxcode: " + kdmaxCode + " | default: " + defaultCode + " | mgcode: " + mgCodes[0]);
 
-        if (StringUtils.isNonEmpty(defaultCode)) this.makeDefaultMapping(kdmaxCode, defaultCode);
-        if (!blankMGCode) this.makeMGMapping(kdmaxCode, mgCodes);
+        //if (StringUtils.isNonEmpty(defaultCode)) this.makeDefaultMapping(kdmaxCode, defaultCode);
+        //if (!blankMGCode) this.makeMGMapping(kdmaxCode, mgCodes);
     }
 
     private void makeDefaultMapping(String kdmaxCode, String defaultCode)
