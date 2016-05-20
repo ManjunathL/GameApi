@@ -5201,6 +5201,11 @@ a.tab-ico {
 
 /* ---- Shobha Landing Page ---- */
 
+
+.shobha_plan_txt{
+    padding-bottom: 0px!important;
+}
+
 .shobha_banner_txt {
    position: absolute;
    top: 10%;
@@ -5306,6 +5311,10 @@ a.tab-ico {
 }
 
 @media (max-width:1180px){
+
+    .shobha_plan_txt{
+        padding-bottom: 20px!important;
+    }
     .shobha_banner_txt {
         background-color: rgba(169, 167, 177, 1);
         position: relative;
