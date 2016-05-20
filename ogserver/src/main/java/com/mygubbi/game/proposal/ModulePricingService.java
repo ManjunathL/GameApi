@@ -136,7 +136,6 @@ public class ModulePricingService extends AbstractVerticle
             }
         }
         double totalCost = (carcassCost + shutterCost + accessoryCost + hardwareCost) * loadingFactorCard.getRate();
-        totalCost = totalCost * productModule.getQuantity();
         totalCost = round(totalCost, 2);
         this.sendResponse(message, errors, shutterCost, carcassCost, accessoryCost, hardwareCost, labourCost, totalCost, productModule);
     }
