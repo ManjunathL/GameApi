@@ -12,6 +12,8 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 
 /**
@@ -53,24 +55,31 @@ public class ModulePricingService extends AbstractVerticle
         Collection<ModuleComponent> components = ModuleDataService.getInstance().getModuleComponents(productModule.getMGCode());
         JsonArray errors = new JsonArray();
 
-        double shutterCost = 0;
-        double carcassCost = 0;
-        double accessoryCost = 0;
-        double hardwareCost = 0;
-
-        //TODO: labourcost to be included
+        if (components == null || components.isEmpty())
+        {
+            errors.add("Module components not setup for MG code: " + productModule.getKDMCode());
+            this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
+            return;
+        }
 
         RateCard carcassRateCard = RateCardService.getInstance().getRateCard(productModule.getCarcassCode(), RateCard.CARCASS_TYPE);
         RateCard shutterRateCard = RateCardService.getInstance().getRateCard(productModule.getFinishCode(), RateCard.SHUTTER_TYPE);
-        RateCard loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.LOADING_FACTOR_TYPE);
-        RateCard labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.LABOUR_FACTOR_TYPE);
+        RateCard loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE);
+        RateCard labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE);
+        //TODO: labourcost to be included
 
         if (carcassRateCard == null || shutterRateCard == null || loadingFactorCard == null || labourRateCard == null)
         {
             errors.add("Carcass, Shutter, Labour or Loading factor rate cards not setup." + productModule.getCarcassCode() + ":" + productModule.getFinishCode());
-            this.sendResponse(message, errors, shutterCost, carcassCost, accessoryCost, hardwareCost, 0);
+            this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
             return;
         }
+
+        double shutterCost = 0;
+        double carcassCost = 0;
+        double accessoryCost = 0;
+        double hardwareCost = 0;
+        double labourCost = 0;
 
         for (ModuleComponent component : components)
         {
@@ -81,7 +90,8 @@ public class ModulePricingService extends AbstractVerticle
                     double carcassPanelCost = carcassPanel.getCost(carcassRateCard);
                     if (carcassPanelCost == 0)
                     {
-                        errors.add("Carcass panel cost is not available for " + carcassPanel.toString() + carcassRateCard.toString());
+                        LOG.info("Carcass panel area:" + carcassPanel.getArea() + ". Rate:" + carcassRateCard.getRateByThickness(carcassPanel.getThickness()));
+                        errors.add("Carcass panel cost is not available for " + carcassPanel.getCode() + " in rate card " + carcassRateCard.getKey());
                     }
                     carcassCost += carcassPanelCost * component.getQuantity();
                     break;
@@ -91,7 +101,7 @@ public class ModulePricingService extends AbstractVerticle
                     double shutterPanelCost = shutterPanel.getCost(shutterRateCard);
                     if (shutterPanelCost == 0)
                     {
-                        errors.add("Shutter panel cost is not available for " + shutterPanel.toString() + shutterRateCard.toString());
+                        errors.add("Shutter panel cost is not available for " + shutterPanel.getCode() + shutterRateCard.getKey());
                     }
                     shutterCost += shutterPanelCost * component.getQuantity();
                     break;
@@ -100,18 +110,24 @@ public class ModulePricingService extends AbstractVerticle
                     AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(component.getComponentCode(), productModule.getMakeType());
                     if (accessory == null || accessory.getPrice() == 0)
                     {
-                        errors.add("Accessory cost is not available for " + accessory);
+                        errors.add("Accessory cost is not available for " + component.getComponentCode() + " of make " + productModule.getMakeType());
                     }
-                    accessoryCost += accessory.getPrice() * component.getQuantity();
+                    else
+                    {
+                        accessoryCost += accessory.getPrice() * component.getQuantity();
+                    }
                     break;
 
                 case ModuleComponent.HARDWARE_TYPE:
                     AccHwComponent hardware = ModuleDataService.getInstance().getHardware(component.getComponentCode(), productModule.getMakeType());
                     if (hardware == null || hardware.getPrice() == 0)
                     {
-                        errors.add("Hardware cost is not available for " + hardware);
+                        errors.add("Hardware cost is not available for " + component.getComponentCode() + " of make " + productModule.getMakeType());
                     }
-                    hardwareCost += hardware.getPrice() * component.getQuantity();
+                    else
+                    {
+                        hardwareCost += hardware.getPrice() * component.getQuantity();
+                    }
                     break;
 
                 default:
@@ -120,18 +136,26 @@ public class ModulePricingService extends AbstractVerticle
             }
         }
         double totalCost = (carcassCost + shutterCost + accessoryCost + hardwareCost) * loadingFactorCard.getRate();
-
-        this.sendResponse(message, errors, shutterCost, carcassCost, accessoryCost, hardwareCost, totalCost);
+        totalCost = totalCost * productModule.getQuantity();
+        totalCost = round(totalCost, 2);
+        this.sendResponse(message, errors, shutterCost, carcassCost, accessoryCost, hardwareCost, labourCost, totalCost, productModule);
     }
 
     private void sendResponse(Message message, JsonArray errors, double shutterCost, double carcassCost,
-                              double accessoryCost, double hardwareCost, double totalCost)
+                              double accessoryCost, double hardwareCost, double labourCost, double totalCost, ProductModule productModule)
     {
         JsonObject moduleCost = new JsonObject().put("carcasscost", carcassCost).put("shuttercost", shutterCost)
-                .put("accessorycost", accessoryCost).put("hardwarecost", hardwareCost)
-                .put("totalcost", totalCost).put("errors", errors);
+                .put("accessorycost", accessoryCost).put("hardwarecost", hardwareCost).put("labourcost", labourCost)
+                .put("totalcost", totalCost).put("errors", errors).put("mgcode", productModule.getMGCode());
         LOG.info("Sending price calculation result :" + moduleCost.encodePrettily());
         message.reply(LocalCache.getInstance().store(moduleCost));
     }
 
+    private double round(double value, int places)
+    {
+        if (places < 0) throw new IllegalArgumentException();
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 }

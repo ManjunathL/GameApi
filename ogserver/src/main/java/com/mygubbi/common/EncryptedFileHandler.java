@@ -21,6 +21,11 @@ public class EncryptedFileHandler
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES";
 
+    public void encrypt(String key, String inputFile, String outputFile)
+    {
+        doCrypto(Cipher.ENCRYPT_MODE, key, new File(inputFile), new File(outputFile));
+    }
+
     public void encrypt(String key, File inputFile, File outputFile)
     {
         doCrypto(Cipher.ENCRYPT_MODE, key, inputFile, outputFile);
@@ -89,5 +94,11 @@ public class EncryptedFileHandler
         {
             throw new RuntimeException("Error writing to output file", ex);
         }
+    }
+
+    public static void main(String[] args)
+    {
+//        new EncryptedFileHandler().encrypt("my@gubbi2togubbi", "D:/projects/apidevelopment/ogserver/src/test/resources/testdata/ratecard.json", "d:/tmp/ratecard.bin");
+        System.out.println(new EncryptedFileHandler().decrypt("my@gubbi2togubbi", "/tmp/ratecard.bin"));
     }
 }

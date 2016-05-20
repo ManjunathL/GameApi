@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class RateCardService extends AbstractVerticle
@@ -35,13 +36,11 @@ public class RateCardService extends AbstractVerticle
 
 	private void setupRateCards(Future<Void> startFuture)
 	{
-		String ratecardFile = (String) ConfigHolder.getInstance().getStringValue("ratecard_file", null);
-		String ratecardKey = (String) ConfigHolder.getInstance().getStringValue("ratecard_key", null);
+		String ratecardFile = (String) ConfigHolder.getInstance().getStringValue("ratecard_file", "/tmp/ratecard.bin");
+		String ratecardKey = (String) ConfigHolder.getInstance().getStringValue("ratecard_key", "my@gubbi2togubbi");
 		if (ratecardFile == null || ratecardKey == null)
 		{
-			LOG.info("Rate card started.");
-			startFuture.complete();
-			//startFuture.fail("Ratecard file is not setup in config.");
+			startFuture.fail("Ratecard file is not setup in config.");
 			return;
 		}
 		String rateData = new EncryptedFileHandler().decrypt(ratecardKey, ratecardFile);
@@ -50,10 +49,11 @@ public class RateCardService extends AbstractVerticle
 			startFuture.fail("Ratecard file seems to be empty.");
 			return;
 		}
+		this.rateCardMap = new HashMap<>();
 		JsonArray ratesJson = new JsonArray(rateData);
 		for (Object rateJson : ratesJson)
 		{
-			RateCard rateCard = RateCard.fromJson((JsonObject) rateJson);
+			RateCard rateCard = new RateCard((JsonObject) rateJson);
 			this.rateCardMap.put(rateCard.getKey(), rateCard);
 		}
 		LOG.info("Rate card data loaded.");
@@ -63,6 +63,11 @@ public class RateCardService extends AbstractVerticle
 
 	public RateCard getRateCard(String code, String type)
 	{
-		return this.rateCardMap.get(RateCard.makeKey(code, type));
+        RateCard rateCard = this.rateCardMap.get(RateCard.makeKey(code, type));
+        if (rateCard == null)
+        {
+            LOG.info("Rate card not found for " + code + ":" + type);
+        }
+        return rateCard;
 	}
 }

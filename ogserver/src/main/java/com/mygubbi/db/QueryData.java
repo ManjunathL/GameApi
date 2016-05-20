@@ -2,6 +2,8 @@ package com.mygubbi.db;
 
 import java.util.List;
 
+import com.mygubbi.common.StringUtils;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.UpdateResult;
@@ -100,6 +102,20 @@ public class QueryData
 	public QueryData setResult(List<JsonObject> rows)
 	{
 		this.rows = rows;
+		if (this.queryDef.jsonFields != null)
+		{
+			for (JsonObject row : this.rows)
+			{
+				for (String jsonfield : this.queryDef.jsonFields)
+				{
+                    String data = row.getString(jsonfield);
+                    if (StringUtils.isNonEmpty(data))
+                    {
+                        row.put(jsonfield, new JsonArray(data));
+                    }
+				}
+			}
+		}
 		return this.endQuery();
 	}
 

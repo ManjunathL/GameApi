@@ -7,11 +7,12 @@ import io.vertx.core.json.JsonObject;
  */
 public class ShutterPanel
 {
+    public static final double SQMM2SQFT = 0.0000107639;
     private String code;
     private String title;
     private int length;
     private int breadth;
-    private int height;
+    private int thickness;
     private String edgebinding;
     private int quantity;
 
@@ -19,7 +20,7 @@ public class ShutterPanel
     {
         return new ShutterPanel().setCode(json.getString("code")).setTitle(json.getString("title"))
                 .setLength(json.getInteger("plength")).setBreadth(json.getInteger("breadth"))
-                .setHeight(json.getInteger("height")).setEdgebinding(json.getString("edgebinding"))
+                .setThickness(json.getInteger("thickness")).setEdgebinding(json.getString("edgebinding"))
                 .setQuantity(json.getInteger("quantity"));
     }
 
@@ -67,14 +68,14 @@ public class ShutterPanel
         return this;
     }
 
-    public int getHeight()
+    public int getThickness()
     {
-        return height;
+        return thickness;
     }
 
-    public ShutterPanel setHeight(int height)
+    public ShutterPanel setThickness(int thickness)
     {
-        this.height = height;
+        this.thickness = thickness;
         return this;
     }
 
@@ -103,16 +104,11 @@ public class ShutterPanel
     public double getCost(RateCard rateCard)
     {
         if (rateCard == null) return 0;
-        return this.getCuttingArea() * rateCard.getRateByThickness(this.getCuttingThickness());
-    }
-
-    private int getCuttingThickness()
-    {
-        return this.getBreadth() - 2;
+        return this.getCuttingArea() * rateCard.getRateByThickness(this.getThickness());
     }
 
     private double getCuttingArea()
     {
-        return this.getLength() * this.getHeight();
+        return this.getLength() * this.getBreadth() * SQMM2SQFT; //TODO: Reduce the lenght and breadth by the Finish type
     }
 }

@@ -17,6 +17,7 @@ public class QueryDef
 	public boolean isInsertQuery;
 	public String tableForInsert;
 	public String[] paramList;
+	public String[] jsonFields;
 	
 	public QueryDef(JsonObject queryJson)
 	{
@@ -31,6 +32,19 @@ public class QueryDef
 				this.paramList[i] = paramsArray.getString(i);
 			}
 		}
+
+        if (queryJson.containsKey("jsonfields"))
+        {
+            JsonArray jsonfieldsL = queryJson.getJsonArray("jsonfields");
+            if (jsonfieldsL != null && !jsonfieldsL.isEmpty())
+            {
+                this.jsonFields = new String[jsonfieldsL.size()];
+                for (int i=0; i<jsonfieldsL.size(); i++)
+                {
+                    this.jsonFields[i] = jsonfieldsL.getString(i);
+                }
+            }
+        }
 	}
 
 	public QueryDef(String query, String type)

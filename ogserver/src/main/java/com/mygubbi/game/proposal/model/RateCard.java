@@ -9,35 +9,44 @@ import java.util.Map;
 /**
  * Created by test on 17-05-2016.
  */
+
 public class RateCard
 {
     public static final String CARCASS_TYPE = "C";
     public static final String SHUTTER_TYPE = "S";
-    public static final String LOADING_FACTOR_TYPE = "L";
-    public static final String LOADING_FACTOR = "aggregate";
-    public static final String LABOUR_FACTOR_TYPE = "B";
-    public static final String LABOUR_FACTOR = "labour";
+    public static final String FACTOR_TYPE = "F";
+    public static final String LOADING_FACTOR = "L";
+    public static final String LABOUR_FACTOR = "B";
 
     private String type;
     private String code;
     private double rate;
     private Map<Integer, Double> ratesByThickness;
 
+/*
     public static RateCard fromJson(JsonObject json)
     {
         return new RateCard().setCode(json.getString("code")).setType(json.getString("type"))
                 .setRate(json.getDouble("rate")).setRatesByThickness(createRateMap(json.getJsonArray("rates")));
     }
+*/
 
-    private static Map<Integer, Double> createRateMap(JsonArray ratesArray)
+    public RateCard()
     {
-        Map<Integer, Double> rates = new HashMap<>();
-        for (Object rateObject : ratesArray)
+
+    }
+
+    public RateCard(JsonObject json)
+    {
+        this.setCode(json.getString("code")).setType(json.getString("type"));
+        if (json.containsKey("rate"))
         {
-            JsonObject rateJson = (JsonObject) rateObject;
-            rates.put(rateJson.getInteger("thickness"), rateJson.getDouble("rate"));
+            this.setRate(json.getDouble("rate"));
         }
-        return rates;
+        if (json.containsKey("rates"))
+        {
+            this.setRatesByThickness(createRateMap(json.getJsonArray("rates")));
+        }
     }
 
     public String getCode()
@@ -94,4 +103,16 @@ public class RateCard
         return code + ":" + type;
 
     }
+
+    private Map<Integer, Double> createRateMap(JsonArray ratesArray)
+    {
+        Map<Integer, Double> rates = new HashMap<>();
+        for (Object rateObject : ratesArray)
+        {
+            JsonObject rateJson = (JsonObject) rateObject;
+            rates.put(rateJson.getInteger("thickness"), rateJson.getDouble("rate"));
+        }
+        return rates;
+    }
+
 }
