@@ -1,0 +1,63 @@
+        @media (max-width:767px){
+            .slideshow .carousel-caption {
+                right:0% !important;
+                left:0% !important;
+                width: 100% !important;
+            }
+            .features{
+               padding:10px 0 30px;
+            }
+
+            .features .section-header{
+                margin:0 0 90px;
+            }
+
+            .section-title{
+                font-size:1.5em;
+            }
+            .description{
+                font-size:16px;
+            }
+            .features .features-icon{
+                font-size:2.2em;
+            }
+            .features .features-content .title{
+                font-size:1.4em;
+            }
+            .calltoactiona{
+                padding:0;
+            }
+            .section-header{
+                margin:0 0 60px;
+            }
+            .section-subtitle{
+                font-size:1.1em;
+            }
+            .overview {
+                 padding: 10px 0 35px;
+            }
+            .overview .section-header {
+                margin-bottom: 20px;
+            }
+            .mt20 {
+                margin-top: 5%;
+            }
+            .testimonials{
+                padding: 16px 0 55px;
+            }
+            .testimonials .testimonials-info{
+                margin:10px 0;
+            }
+            .testimonials .carousel.fade blockquote{
+                font-size:1.2em;
+            }
+            .go-top {
+                right: 5px;
+                bottom: 45px;
+                z-index: 999;
+            }
+            .copyright{
+                font-size:0.9em;
+            }
+        }
+
