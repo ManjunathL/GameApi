@@ -1,30 +1,6 @@
 <section class="bg-white menu-spacer">
-    <div class="container-fluid blogs-banner-div hidden-xs hidden-sm">
-        <% var count = 0; %>
-        <% if(typeof(stories) !== 'undefined'){ %>
-        <% _.each(stories, function(story){ %>
-
-        <% if((typeof(story.id) !== 'undefined') && (story.blog_main_image != '') && (count == 0)){ %>
-
-        <% var blg_hdng = story.blog_heading;
-        var r = /\\u([\d\w]{4})/gi;
-        blg_hdng = blg_hdng.replace(r, function (match, grp) {
-        return String.fromCharCode(parseInt(grp, 16)); } );
-        blg_hdng = unescape(blg_hdng); %>
-
-        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-            <img
-                    src="<%= story.blog_main_image %>"
-                    class="blogs-banner"
-                    title="<%= blg_hdng %>"
-                    alt="<%= blg_hdng %>">
-
-            <h1 class="blogs-banner-heading">
-                <%= blg_hdng %>
-            </h1>
-        </a>
-
-        <% count = count + 1; } }); } %>
+    <div class="container-fluid category-banner">
+        <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
     </div>
     <div class="container bg-color-white hidden-xs">
         <div class="row">
@@ -37,202 +13,138 @@
     <div class="container blogs">
         <div class="col-md-12 col-sm-12 padding15">
 
-            <% if(typeof(stories) !== 'undefined'){ count = 0; %>
+            <% if(typeof(stories) !== 'undefined'){ count = 1; %>
             <% _.each(stories, function(story){ %>
-
             <% if((typeof(story.id) !== 'undefined') && (story.blog_main_image != '')){ %>
 
-            <% if (count == 0) { %>
+                <% if (count % 2 != 0) { %>
 
-            <% var blg_hdng = story.blog_heading;
-            var r = /\\u([\d\w]{4})/gi;
-            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-            return String.fromCharCode(parseInt(grp, 16)); } );
-            blg_hdng = unescape(blg_hdng); %>
+                <% var blg_hdng = story.blog_heading;
+                var r = /\\u([\d\w]{4})/gi;
+                blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                return String.fromCharCode(parseInt(grp, 16)); } );
+                blg_hdng = unescape(blg_hdng); %>
 
-            <div class="row margin50-0 hidden-lg hidden-md">
-                <div class="col-md-7 col-sm-12 col-xs-12 pull-right">
-                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-                        <img
-                                src="<%= story.blog_main_image %>"
-                                class="img-responsive"
-                                title="<%= blg_hdng %>"
-                                alt="<%= blg_hdng %>">
-                    </a>
-                </div>
-                <div class="col-md-5 col-sm-12 col-xs-12">
-                    <p class="color-333">
-                        <% var cnt = 0; %>
-                        <% _.each(story.blog_categories, function(cat){ %>
-                        <% if(cnt != 0) { %> | <% } %>
-                        <%= cat %>
-                        <% cnt = cnt + 1; }); %>
-                    </p>
-                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-                        <h2 class="hidden-xs">
-                            <%= blg_hdng %>
-                        </h2>
-                        <h4 class="hidden-lg hidden-md hidden-sm">
-                            <% var blg_hdng = story.blog_heading;
+                <div class="row margin50-0">
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
+                            <img
+                                    src="<%= story.blog_main_image %>"
+                                    class="img-responsive"
+                                    title="<%= blg_hdng %>"
+                                    alt="<%= blg_hdng %>">
+                        </a>
+                    </div>
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <p class="color-333">
+                            <% var cnt = 0; %>
+                            <% _.each(story.blog_categories, function(cat){ %>
+                            <% if(cnt != 0) { %> | <% } %>
+                            <%= cat %>
+                            <% cnt = cnt + 1; }); %>
+                        </p>
+                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
+                            <h2 class="hidden-xs">
+                                <%= blg_hdng %>
+                            </h2>
+                            <h4 class="hidden-lg hidden-md hidden-sm">
+                                <% var blg_hdng = story.blog_heading;
+                                var r = /\\u([\d\w]{4})/gi;
+                                blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                                return String.fromCharCode(parseInt(grp, 16)); } );
+                                blg_hdng = unescape(blg_hdng); %>
+                                <%= blg_hdng %>
+                            </h4>
+                        </a>
+
+                        <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
+                        <p class="padding-top15 blog_data justify">
+                            <% var blg_stry = story.blog_content;
                             var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                            blg_stry = blg_stry.replace(r, function (match, grp) {
                             return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng); %>
-                            <%= blg_hdng %>
-                        </h4>
-                    </a>
-
-                    <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
-                    <p class="padding-top15 blog_data justify">
-                        <% var blg_stry = story.blog_content;
-                        var r = /\\u([\d\w]{4})/gi;
-                        blg_stry = blg_stry.replace(r, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16)); } );
-                        blg_stry = unescape(blg_stry);
-                        var n = blg_stry.indexOf('</p>');
-                    if (n > 200){
-                    var stry = blg_stry.slice(0, 180); %>
-                    <%= stry %>...
-                    <% } else {
-                    var stry = blg_stry.slice(0, n); %>
-                    <%= stry %>
-                    <% } %>
-                    </p>
-                    <p class="font-size16">
-                    <a
-                            href="/story-<%= encodeURIComponent(story.blog_heading) %>"
-                            class="color-orange read_full">Read Full Story</a>
-                    </p>
-                </div>
-            </div>
-
-            <% } else { %>
-            <% if (count % 2 != 0) { %>
-
-            <% var blg_hdng = story.blog_heading;
-            var r = /\\u([\d\w]{4})/gi;
-            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-            return String.fromCharCode(parseInt(grp, 16)); } );
-            blg_hdng = unescape(blg_hdng); %>
-
-            <div class="row margin50-0">
-                <div class="col-md-7 col-sm-12 col-xs-12">
-                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-                        <img
-                                src="<%= story.blog_main_image %>"
-                                class="img-responsive"
-                                title="<%= blg_hdng %>"
-                                alt="<%= blg_hdng %>">
-                    </a>
-                </div>
-                <div class="col-md-5 col-sm-12 col-xs-12">
-                    <p class="color-333">
-                        <% var cnt = 0; %>
-                        <% _.each(story.blog_categories, function(cat){ %>
-                        <% if(cnt != 0) { %> | <% } %>
-                        <%= cat %>
-                        <% cnt = cnt + 1; }); %>
-                    </p>
-                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-                        <h2 class="hidden-xs">
-                            <%= blg_hdng %>
-                        </h2>
-                        <h4 class="hidden-lg hidden-md hidden-sm">
-                            <% var blg_hdng = story.blog_heading;
-                            var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                            return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng); %>
-                            <%= blg_hdng %>
-                        </h4>
-                    </a>
-
-                    <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
-                    <p class="padding-top15 blog_data justify">
-                        <% var blg_stry = story.blog_content;
-                        var r = /\\u([\d\w]{4})/gi;
-                        blg_stry = blg_stry.replace(r, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16)); } );
-                        blg_stry = unescape(blg_stry);
-                        var n = blg_stry.indexOf('</p>');
-                        if (n > 200){
-                        var stry = blg_stry.slice(0, 180); %>
-                        <%= stry %>...
-                        <% } else {
-                        var stry = blg_stry.slice(0, n); %>
-                        <%= stry %>
-                    <% } %>
-                    </p>
-                    <p class="font-size16">
-                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
-                    </p>
-                </div>
-            </div>
-
-            <% } else { %>
-
-            <% var blg_hdng = story.blog_heading;
-            var r = /\\u([\d\w]{4})/gi;
-            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-            return String.fromCharCode(parseInt(grp, 16)); } );
-            blg_hdng = unescape(blg_hdng); %>
-
-            <div class="row margin50-0">
-                <div class="col-xs-12 col-md-7 col-sm-12 pull-right">
-                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-                        <img
-                                src="<%= story.blog_main_image %>"
-                                class="img-responsive"
-                                title="<%= blg_hdng %>"
-                                alt="<%= blg_hdng %>">
-                    </a>
-                </div>
-                <div class="col-xs-12 col-md-5 col-sm-12">
-                    <p class="color-333">
-                        <% var cnt = 0; %>
-                        <% _.each(story.blog_categories, function(cat){ %>
-                        <% if(cnt != 0) { %> | <% } %>
-                        <%= cat %>
-                        <% cnt = cnt + 1; }); %>
-                    </p>
-                    <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
-                        <h2 class="hidden-xs">
-                            <%= blg_hdng %>
-                        </h2>
-                        <h4 class="hidden-lg hidden-md hidden-sm">
-                            <% var blg_hdng = story.blog_heading;
-                            var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                            return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng); %>
-                            <%= blg_hdng %>
-                        </h4>
-                    </a>
-
-                    <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
-                    <p class="padding-top15 blog_data justify">
-                        <% var blg_stry = story.blog_content;
-                        var r = /\\u([\d\w]{4})/gi;
-                        blg_stry = blg_stry.replace(r, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16)); } );
-                        blg_stry = unescape(blg_stry);
-                        var n = blg_stry.indexOf('</p>');
-                        if (n > 200){
-                        var stry = blg_stry.slice(0, 180); %>
-                        <%= stry %>...
-                        <% } else {
-                        var stry = blg_stry.slice(0, n); %>
-                        <%= stry %>
+                            blg_stry = unescape(blg_stry);
+                            var n = blg_stry.indexOf('</p>');
+                            if (n > 200){
+                            var stry = blg_stry.slice(0, 180); %>
+                            <%= stry %>...
+                            <% } else {
+                            var stry = blg_stry.slice(0, n); %>
+                            <%= stry %>
                         <% } %>
-                    </p>
-                    <p class="font-size16">
-                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>"
-                           class="color-orange read_full">Read Full Story</a>
-                    </p>
+                        </p>
+                        <p class="font-size16">
+                            <a href="/story-<%= encodeURIComponent(story.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <% } } count = count + 1; } }); } %>
+                <% } else { %>
+                <% var blg_hdng = story.blog_heading;
+                var r = /\\u([\d\w]{4})/gi;
+                blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                return String.fromCharCode(parseInt(grp, 16)); } );
+                blg_hdng = unescape(blg_hdng); %>
+
+                <div class="row margin50-0">
+                    <div class="col-xs-12 col-md-7 col-sm-12 pull-right">
+                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
+                            <img
+                                    src="<%= story.blog_main_image %>"
+                                    class="img-responsive"
+                                    title="<%= blg_hdng %>"
+                                    alt="<%= blg_hdng %>">
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-sm-12">
+                        <p class="color-333">
+                            <% var cnt = 0; %>
+                            <% _.each(story.blog_categories, function(cat){ %>
+                            <% if(cnt != 0) { %> | <% } %>
+                            <%= cat %>
+                            <% cnt = cnt + 1; }); %>
+                        </p>
+                        <a href="/story-<%= encodeURIComponent(story.blog_heading) %>">
+                            <h2 class="hidden-xs">
+                                <%= blg_hdng %>
+                            </h2>
+                            <h4 class="hidden-lg hidden-md hidden-sm">
+                                <% var blg_hdng = story.blog_heading;
+                                var r = /\\u([\d\w]{4})/gi;
+                                blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                                return String.fromCharCode(parseInt(grp, 16)); } );
+                                blg_hdng = unescape(blg_hdng); %>
+                                <%= blg_hdng %>
+                            </h4>
+                        </a>
+
+                        <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
+                        <p class="padding-top15 blog_data justify">
+                            <% var blg_stry = story.blog_content;
+                            var r = /\\u([\d\w]{4})/gi;
+                            blg_stry = blg_stry.replace(r, function (match, grp) {
+                            return String.fromCharCode(parseInt(grp, 16)); } );
+                            blg_stry = unescape(blg_stry);
+                            var n = blg_stry.indexOf('</p>');
+                            if (n > 200){
+                            var stry = blg_stry.slice(0, 180); %>
+                            <%= stry %>...
+                            <% } else {
+                            var stry = blg_stry.slice(0, n); %>
+                            <%= stry %>
+                            <% } %>
+                        </p>
+                        <p class="font-size16">
+                            <a href="/story-<%= encodeURIComponent(story.blog_heading) %>"
+                               class="color-orange read_full">Read Full Story</a>
+                        </p>
+                    </div>
+                </div>
+
+            <% } %>
+            <% count = count + 1; %>
+            <% } %>
+            <% }); } %>
         </div>
     </div>
 </section>

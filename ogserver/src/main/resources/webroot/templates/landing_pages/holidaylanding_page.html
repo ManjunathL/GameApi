@@ -10,7 +10,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner mg-carousel">
                 <div class="item active">
-                    <img data-src="<%= imgBase + 'w_auto' + '/landing_page/mygubbi_Holiday_Package_Website_banner_Revised.jpg'%>"
+                    <img data-src="<%= imgBase + 'w_auto' + '/landing_page/HDR_mdfd.jpg'%>"
                          class="cld-responsive img-centered" alt="mygubbi smart offer">
                 </div>
                 <div class="item">
@@ -24,18 +24,18 @@
     <div class="container-fluid">
         <!-- Contact Form -->
         <div class="row margin0">
-            <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-12 col-xs-12 carousel-form-box">
-                <div class="row margin0">
+            <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-12 col-xs-12 holiday-form-box">
+                <!--<div class="row margin0">
                     <h3 class="heading-center-notransform padding-bottom10 border-bottom-orange">
                         Get your FREE design now!
                     </h3>
-                </div>
+                </div>-->
                 <div class="row margin0">
                     <form id="contactNwLpForm1" name="consultData" data-toggle="validator" role="form"
                           class="width90 margin_auto paddingtop20">
                         <div class="row">
                             <div class="margin-bottom20 form-group">
-                                <input type="text" class="width100 form-control" placeholder="Name*"
+                                <input type="text" class="width100 form-control holiday-txt-input" placeholder="Name*"
                                        id="contact_full_name1" name="fullName"
                                        value="<%=userProfile ? userProfile.displayName : ''%>" required/>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -43,7 +43,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="margin-bottom20 form-group">
-                                <input type="email" class="width100 form-control" placeholder="Email*"
+                                <input type="email" class="width100 form-control holiday-txt-input" placeholder="Email*"
                                        id="contact_email_id1" name="email"
                                        value="<%=userProfile ? userProfile.email : ''%>" required
                                        pattern=".+@.+\..+"
@@ -52,7 +52,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="margin-bottom20 form-group has-feedback">
-                                <input type="text" class="width100 form-control" placeholder="Phone Number*"
+                                <input type="text" class="width100 form-control holiday-txt-input" placeholder="Phone Number*"
                                        id="contact_contact_num1" name="contactNumber"
                                        value="<%=userProfile ? userProfile.phone : ''%>" required
                                        pattern="\d{10}"
@@ -64,7 +64,7 @@
                             <div class="align-center form-group">
                                 <button
                                         id="contactus-submit-btn1"
-                                        class="button-orange consult-submit-orange"
+                                        class="holiday-sbm-btn"
                                         type="submit"
                                         data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
                                     submit
