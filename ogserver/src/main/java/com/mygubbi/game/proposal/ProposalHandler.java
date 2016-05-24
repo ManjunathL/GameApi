@@ -31,6 +31,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.post("/create").handler(this::createProposal);
         this.post("/update").handler(this::updateProposal);
+        this.get("/downloadquote").handler(this::downloadQuote);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
 
@@ -84,5 +85,33 @@ public class ProposalHandler extends AbstractRouteHandler
                         sendJsonResponse(routingContext, proposalData.toString());
                     }
                 });
+    }
+
+    private void downloadQuote(RoutingContext routingContext)
+    {
+        String proposalIdText = routingContext.request().getParam("proposalId");
+        if (StringUtils.isEmpty(proposalIdText))
+        {
+            sendError(routingContext, "proposalId not found in request.");
+            return;
+        }
+        Integer proposalId = null;
+        try
+        {
+            proposalId = Integer.parseInt(proposalIdText);
+        }
+        catch (NumberFormatException e)
+        {
+            sendError(routingContext, "proposalId is not a valid proposal id:" + proposalIdText);
+            return;
+        }
+
+        Integer id = LocalCache.getInstance().store(proposalId);
+        VertxInstance.get().eventBus().send(QuotationCreatorService.CREATE_QUOTE, id,
+                (AsyncResult<Message<Integer>> result) -> {
+                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                    sendJsonResponse(routingContext, response.toString());
+                });
+
     }
 }

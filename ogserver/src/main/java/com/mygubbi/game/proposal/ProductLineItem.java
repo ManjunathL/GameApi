@@ -1,13 +1,18 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.common.StringUtils;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+
+import java.util.List;
 
 /**
  * Created by Sunil on 26-04-2016.
  */
 public class ProductLineItem extends JsonObject
 {
+    public static final String ASSEMBLED_PRODUCT = "A";
+    public static final String CATALOGUE_PRODUCT = "C";
 
     private static String ID = "id";
     private static String ACTIVE = "active";
@@ -25,6 +30,7 @@ public class ProductLineItem extends JsonObject
     private static String MAKE_TYPE = "make_type";
     private static String DIMENSION = "dimension";
     private static String QUANTITY = "quantity";
+    private static String RATE = "rate";
     private static String AMOUNT = "amount";
     private static String NOTES = "notes";
     private static String MODULES = "modules";
@@ -44,6 +50,16 @@ public class ProductLineItem extends JsonObject
         super(data.getMap());
         this.setModules();
         this.setAddons();
+    }
+
+    public String getTitle()
+    {
+        return this.getString(TITLE);
+    }
+
+    public String getType()
+    {
+        return this.getString(TYPE);
     }
 
     public String getKdMaxFile()
@@ -69,6 +85,31 @@ public class ProductLineItem extends JsonObject
     public String getMakeType()
     {
         return this.getString(MAKE_TYPE);
+    }
+
+    public int getQuantity()
+    {
+        return this.getInteger(QUANTITY);
+    }
+
+    public double getRate()
+    {
+        return this.getDouble(RATE);
+    }
+
+    public double getAmount()
+    {
+        return this.getDouble(AMOUNT);
+    }
+
+    public String getDimension()
+    {
+        return this.getString(DIMENSION);
+    }
+
+    public String getName()
+    {
+        return this.getString(PRODUCT_NAME);
     }
 
     public ProductLineItem addModule(ProductModule module)
@@ -127,21 +168,32 @@ public class ProductLineItem extends JsonObject
 
     private void setAddons()
     {
-        if (this.containsKey(ADDONS))
+        JsonArray productAddons = new JsonArray();
+        if (this.containsKey(ADDONS) && (this.getValue(ADDONS) instanceof JsonArray))
         {
             JsonArray addonJsons = this.getJsonArray(ADDONS);
-            JsonArray productAddons = new JsonArray();
             for (int i=0; i < addonJsons.size(); i++)
             {
                 productAddons.add(new ProductAddon(addonJsons.getJsonObject(i)));
             }
-            this.put(ADDONS, productAddons);
         }
+        this.put(ADDONS, productAddons);
+    }
+
+    public List<ProductAddon> getAddons()
+    {
+        return this.getJsonArray(ADDONS).getList();
     }
 
     public int getId()
     {
         return this.containsKey(ID) ? this.getInteger(ID) : 0;
     }
+
+    public List<ProductModule> getModules()
+    {
+        return this.getJsonArray(MODULES).getList();
+    }
+
 }
 
