@@ -6,15 +6,17 @@
       },
       {
         "name": "com.mygubbi.db.DatabaseService"
+      },
+      {
+        "name": "com.mygubbi.db.QueryPrepareService"
       }
     ],
     "parallel": [
-      {
-        "name": "com.mygubbi.db.QueryPrepareService"
-      },
+/*
       {
         "name": "com.mygubbi.db.SequenceIdGenerator"
       },
+*/
       {
         "name": "com.mygubbi.apiserver.GameApiServerVerticle",
         "worker": false
@@ -28,6 +30,10 @@
 
       {
         "name": "com.mygubbi.game.proposal.ModulePricingService"
+      },
+
+      {
+        "name": "com.mygubbi.game.proposal.QuotationCreatorService"
       },
 
       {

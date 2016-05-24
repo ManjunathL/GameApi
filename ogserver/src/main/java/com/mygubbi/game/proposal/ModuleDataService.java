@@ -252,7 +252,6 @@ public class ModuleDataService extends AbstractVerticle
         return this.hardwareMap.get(AccHwComponent.getCodeAndMakeType(code, makeType));
     }
 
-
     public void setMapping(ProductModule module)
     {
         if (this.kdmaxModulesWithMGMapping.contains(module.getKDMCode()))

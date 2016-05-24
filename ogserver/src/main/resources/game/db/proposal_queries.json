@@ -181,8 +181,17 @@
       "id": "proposal.product.list",
       "type": "select",
       "table": "proposal_product",
-      "query": "select title, type, room, product_type, quantity, product_name, carcass_code, finish_code, maketype, quantity, amount from proposal_product where proposalid = ? and active = 'A'",
+      "query": "select title, type, room, product_type, quantity, product_name, carcass_code, finish_code, make_type, quantity, amount from proposal_product where proposalid = ? and active = 'A'",
       "params": ["proposalid"]
+    },
+
+    {
+      "id": "proposal.product.list.detail",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product where proposalid = ? and active = 'A' order by type",
+      "params": ["proposalid"],
+      "jsonfields":["modules", "addons"]
     },
 
     {

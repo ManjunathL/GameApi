@@ -111,7 +111,11 @@ public class QueryData
                     String data = row.getString(jsonfield);
                     if (StringUtils.isNonEmpty(data))
                     {
-                        row.put(jsonfield, new JsonArray(data));
+						if (data.charAt(0) == '[')
+                        	row.put(jsonfield, new JsonArray(data));
+						else
+							row.put(jsonfield, new JsonObject(data));
+
                     }
 				}
 			}
