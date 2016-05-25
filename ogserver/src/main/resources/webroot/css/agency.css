@@ -5457,6 +5457,11 @@ a.tab-ico {
     font-size:12px!important;
 }
 
+.h1-tag-content h1{
+    text-transform: Capitalize !important;
+    font-size: 28px !important;
+}
+
 /* SEO design end */
 
 
@@ -5496,6 +5501,11 @@ a.tab-ico {
         max-width: 100%;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         background-color: #55666F;
+    }
+
+    .h1-tag-content h1{
+        text-transform: Capitalize !important;
+        font-size: 22px !important;
     }
 }
 

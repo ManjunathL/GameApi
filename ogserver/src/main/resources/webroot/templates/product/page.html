@@ -38,14 +38,30 @@
             </div>
         </div>
     </div>
+    <!-- H1 tag heading start -->
+    <div class="h1-tag-content container-fluid bg-color-white align-center">
+        <h1>
+            <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
+            null){ %>
+            <%= filter.selectedSubCategoryName %>
+            <% }else if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+            <%= filter.selectedCategoryName %>
+            <% } %>
+        </h1>
+    </div>
+    <!-- H1 tag heading end -->
     <div class="container-fluid bg-color-white" id="filter-desc-container">
         <div class="container">
             <div class="row padding20-0 filter-desc-col position-relative" id="filter-desc">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-8">
-                    <div class="design-count margin0"><%= collection.length %> Products Found</div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
+                    <div class="design-count margin0">
+                        <%= collection.length %>
+                        Products
+                        Found
+                    </div>
                 </div>
 
-                <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
+                <div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
                     <div id="filtered-list" class="padding8">
                         <% var flag = 0; %>
                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ var count = 0; %>
@@ -554,6 +570,8 @@
             metakeyword = 'home interior décor, home interior design, interior home décor, home interiors, custom made furniture, custom furniture, online customised furniture, modern furniture design, furniture designs';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("Buy Study Table Online");
+
         }else if (url.indexOf('/tv-unit-cabinet') != -1) {
 
             meta = 'Deck Your Home With the best of Décor with our range of TV Furniture and TV Cabinet Designs.Pick out luxury Home décor from mygubbi';
@@ -561,6 +579,8 @@
 
             metakeyword = 'tv unit, tv stand, tv cabinet, tv units, entertainment unit,entertainment unit designs';
             $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy tv unit online");
 
         }else if (url.indexOf('/shoe-rack') != -1) {
 
@@ -570,6 +590,8 @@
             metakeyword = 'shoe rack, shoe rack online, shoe rack designs, shoe racks, shoe racks online';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("shoe rack online");
+
         }else if (url.indexOf('/crockery-unit') != -1) {
 
             meta = 'Look for Crockery unit designs Online and get to select from a range of exclusive products from mygubbi.';
@@ -577,6 +599,8 @@
 
             metakeyword = 'crockery, crockery unit, crockery cabinet, crockery unit designs, crockery cabinet online,kitchen crockery cabinet designs, dining crockery unit designs, designs for crockery unit';
             $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("crockery unit online");
 
         }else if (url.indexOf('/l-shaped-kitchen') != -1) {
 
@@ -586,6 +610,8 @@
             metakeyword = 'l shaped kitchen design, l shaped kitchen, l shaped kitchen designs';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("l shaped kitchen");
+
         }else if (url.indexOf('/u-shaped-kitchen') != -1) {
 
             meta = 'U shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.';
@@ -593,6 +619,8 @@
 
             metakeyword = 'u shaped kitchen, u shaped kitchen design,  u shaped kitchen designs';
             $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("u shaped kitchen");
 
         }else if (url.indexOf('/straight-kitchen') != -1) {
 
@@ -602,6 +630,8 @@
             metakeyword = 'straight kitchen design, straight modular kitchen designs, straight modular kitchen';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("straight kitchen");
+
         }else if (url.indexOf('/parallel-kitchen') != -1) {
 
             meta = 'Parallel Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.';
@@ -609,6 +639,8 @@
 
             metakeyword = 'parallel kitchen design, parallel kitchen, parallel kitchen designs,parallel modular kitchen designs';
             $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("parallel kitchen");
 
         }else if (url.indexOf('/wardrobe') != -1) {
 
@@ -618,6 +650,8 @@
             metakeyword = 'wardrobe, wardrobe designs, wardrobe design,wardrobe online, buy wardrobe online';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("buy wardrobe online");
+
         }else if (url.indexOf('/side-table') != -1) {
 
             meta = 'Bedside Table Designs that compliment Your Bedroom décor in ways like no other.Pick Out Luxury Home Décor from mygubbi';
@@ -626,12 +660,16 @@
             metakeyword = 'side table, side tables,study table designs, designs of study table, buy study table online, order study table online';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("buy side table online");
+
         }else if (url.indexOf('/book-shelf') != -1) {
             meta = 'Custom Made Bookshelves from MyGubbi add to your range of luxury décor and add a touch of elegance to your living abode';
             $("meta[name='description']").attr("content", meta);
 
             metakeyword = 'book shelf, bookshelf design, book rack, bookshelf designs';
             $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy book shelf online");
 
         }else if (url.indexOf('/sideboard') != -1) {
 
@@ -641,6 +679,8 @@
             metakeyword = 'sideboard , sideboard desing, sideboards online, sideboard furniture, ';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("buy sideboard online");
+
         }else if (url.indexOf('/foyer-design') != -1) {
 
             meta = 'Pick from a range of wooden and vintage foyer furniture to add a classy touch to your Home décor.MyGubbi offers a range of foyer designs to pick from.';
@@ -648,6 +688,8 @@
 
             metakeyword = 'foyer furniture, foyer designs, foyer design';
             $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy foyer design online");
 
         }else if (url.indexOf('/bedroom') != -1) {
 
@@ -657,6 +699,8 @@
             metakeyword = 'bedroom designs, bedroom furniture, bedroom interior, bedroom interior design';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("bedroom interior");
+
         }else if (url.indexOf('/kitchen') != -1) {
 
             meta = 'Check out our Range of Kitchen Cabinets and choose the kitchen cabinet design of Your choice.';
@@ -665,6 +709,8 @@
             metakeyword = 'modular kitchen, modular kitchen design, kitchen design, kitchen cabinets, kitchen, kitchen interior, kitchen cabinet, kitchen furniture,kitchen cabinet designs, kitchen cabinets designs';
             $("meta[name='keywords']").attr("content", metakeyword);
 
+            $(".h1-tag-content h1").html("buy kitchen cabinets");
+
         }else if (url.indexOf('/living-and-dining-room-designs') != -1) {
 
             meta = 'Buy Your Living Room furniture online from MyGubbi and jazz up your life with the latest Décor.Get Your Dining Room furniture custom made by picking out from a range of dining room designs';
@@ -672,6 +718,8 @@
 
             metakeyword = 'living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior';
             $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("living and dining room designs");
 
         }else {
             $("meta[name='description']").attr("content", meta);
