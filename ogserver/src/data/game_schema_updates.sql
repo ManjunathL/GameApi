@@ -17,16 +17,15 @@ CREATE TABLE game_user (
 -------------------------
 --Proposal related tables
 -------------------------
-
 DROP TABLE IF EXISTS proposal;
 CREATE TABLE proposal(
   id INTEGER NOT NULL AUTO_INCREMENT,
   status char(10) NOT NULL DEFAULT 'Active', -- Active, Submitted, Cancelled
   title varchar(255) NOT NULL,
   version char(10) NULL,
-  crmid varchar(64) NULL,
-  quoteno varchar(64) NULL,
-  customerid varchar(64) NULL,
+  crmId varchar(64) NULL,
+  quoteNo varchar(64) NULL,
+  customerId varchar(64) NULL,
   cname varchar(64) NULL,
   caddress1 varchar(128) NULL,
   caddress2 varchar(128) NULL,
@@ -35,33 +34,32 @@ CREATE TABLE proposal(
   cemail varchar(128) NULL,
   cphone1 varchar(16) NULL,
   cphone2 varchar(16) NULL,
-  projectname varchar(128) NULL,
-  pmodeltype varchar(64) NULL,
-  pdrawingno varchar(64) NULL,
+  projectName varchar(128) NULL,
   paddress1 varchar(128) NULL,
   paddress2 varchar(128) NULL,
   pcity varchar(64) NULL,
-  salesperson varchar(128) NULL,
-  salesemail varchar(128) NULL,
-  salescontact varchar(16) NULL,
-  designername varchar(128) NULL,
-  designeremail varchar(128) NULL,
-  designercontact varchar(16) NULL,
-  totalamount int NOT NULL DEFAULT 0,
-  docsfolder varchar(255) NULL,
-  createdon timestamp NULL,
-  createdby varchar(64) NULL,
-  updatedon timestamp NULL,
-  updatedby varchar(64) NULL,
+  salesName varchar(128) NULL,
+  salesEmail varchar(128) NULL,
+  salesPhone varchar(16) NULL,
+  designerName varchar(128) NULL,
+  designerEmail varchar(128) NULL,
+  designerPhone varchar(16) NULL,
+  amount int NOT NULL DEFAULT 0,
+  folderPath varchar(255) NULL,
+  createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  createdBy varchar(64) NULL,
+  updatedOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  updatedBy varchar(64) NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Master';
+
 
 DROP TABLE IF EXISTS proposal_product;
 CREATE TABLE proposal_product(
   id INTEGER NOT NULL AUTO_INCREMENT,
   active char(1) NOT NULL DEFAULT 'A',
-  proposalid INTEGER NOT NULL,
+  proposalId INTEGER NOT NULL,
   title varchar(255) NOT NULL DEFAULT 'TITLE',
   type char(16) NOT NULL DEFAULT 'Assembled', -- Assembled, Bought, Service, Standard
   kdmax_file varchar(255) NULL,

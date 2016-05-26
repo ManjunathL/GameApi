@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class ProductLineItem extends JsonObject
 {
-    public static final String ASSEMBLED_PRODUCT = "A";
-    public static final String CATALOGUE_PRODUCT = "C";
+    public static final String ASSEMBLED_PRODUCT = "Assembled";
+    public static final String CATALOGUE_PRODUCT = "Catalogue";
 
     private static String ID = "id";
     private static String ACTIVE = "active";

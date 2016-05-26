@@ -35,6 +35,8 @@ public class CurrencyUtil
 
     private String convert(int number)
     {
+        if (number == 0) return "Zero";
+
         int n = 1;
         int word;
         string = "";

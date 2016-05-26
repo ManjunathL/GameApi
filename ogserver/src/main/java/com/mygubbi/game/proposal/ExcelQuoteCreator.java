@@ -3,6 +3,8 @@ package com.mygubbi.game.proposal;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.model.AssembledProductInQuote;
 import com.mygubbi.game.proposal.model.QuoteData;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -10,8 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ import java.util.List;
  */
 public class ExcelQuoteCreator
 {
+    private final static Logger LOG = LogManager.getLogger(ExcelQuoteCreator.class);
+
     private static final int TITLE_CELL = 1;
     private static final int INDEX_CELL = 0;
     private static final int QUANTITY_CELL = 2;
@@ -47,7 +50,7 @@ public class ExcelQuoteCreator
 
         this.processQuoteSheet();
 
-        this.closeWorkbook(wb);
+        this.closeWorkbook();
     }
 
     private void processQuoteSheet()
@@ -55,26 +58,35 @@ public class ExcelQuoteCreator
         int firstRow = quoteSheet.getFirstRowNum();
         int lastRow = quoteSheet.getLastRowNum();
 
-        for (int rowNum = lastRow; rowNum >= firstRow; rowNum--)
+        int rowNum = 0;
+        int cellNum = 0;
+        String cellValue = null;
+        try
         {
-            Row row = quoteSheet.getRow(rowNum);
-            int lastCell = row.getLastCellNum();
-            for (short cellNum = row.getFirstCellNum(); cellNum < lastCell; cellNum++)
+            for (rowNum = lastRow; rowNum >= firstRow; rowNum--)
             {
-                try
+                Row row = quoteSheet.getRow(rowNum);
+                int lastCell = row.getLastCellNum();
+                for (cellNum = row.getFirstCellNum(); cellNum < lastCell; cellNum++)
                 {
                     Cell cell = row.getCell(cellNum);
+                    if (cell == null) continue;
                     if (cell.getCellType() == Cell.CELL_TYPE_STRING)
                     {
-                        String cellValue = cell.getStringCellValue();
+                        cellValue = cell.getStringCellValue();
                         this.handleCell(cell, cellValue);
+                        cellValue = null;
                     }
                 }
-                catch (Exception e)
-                {
-                    throw new RuntimeException("Error reading cell (" + rowNum + "," + cellNum + ") in sheet ." + quoteSheet.getSheetName() + ". Error:" + e.getMessage(), e);
-                }
             }
+        }
+        catch (Exception e)
+        {
+            String message = "Error processing cell (" + rowNum + "," + cellNum + ") in sheet " + quoteSheet.getSheetName()
+                    + ". Cell value: " + cellValue + " - Error:" + e.getMessage();
+            LOG.error(message, e);
+            this.closeWorkbook();
+            throw new RuntimeException(message, e);
         }
     }
 
@@ -94,6 +106,7 @@ public class ExcelQuoteCreator
 
     private void checkTagAndInsertData(Cell cell, String cellValue)
     {
+//        LOG.info("Processing " + cellValue);
         switch (cellValue)
         {
             case "A.1":
@@ -127,8 +140,7 @@ public class ExcelQuoteCreator
         List<AssembledProductInQuote> assembledProducts = this.quoteData.getAssembledProducts();
         if (assembledProducts.isEmpty())
         {
-            Row dataRow = this.quoteSheet.createRow(startRow);
-            dataRow.getCell(TITLE_CELL).setCellValue("No assembled products.");
+            this.createRowWithMessage(startRow, "No assembled products.");
             return;
         }
 
@@ -139,7 +151,6 @@ public class ExcelQuoteCreator
             startRow++;
             sequenceNumber++;
         }
-
     }
 
     private int fillAssembledProductInfo(int startRow, int sequenceNumber, AssembledProductInQuote product)
@@ -154,7 +165,7 @@ public class ExcelQuoteCreator
         currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
 
         currentRow++;
-        Row dataRow = this.quoteSheet.createRow(currentRow);
+        this.createRow(currentRow);
 
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
@@ -169,18 +180,13 @@ public class ExcelQuoteCreator
             return currentRow;
         }
 
-        Row dataRow = this.quoteSheet.createRow(currentRow);
-        dataRow.getCell(INDEX_CELL).setCellValue(unitSequenceLetter);
-        dataRow.getCell(TITLE_CELL).setCellValue("Accessories");
+        this.createRowAndFillData(currentRow, unitSequenceLetter, "Accessories");
 
         int acSequence = 0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
             currentRow++;
-            dataRow = this.quoteSheet.createRow(currentRow);
-            dataRow.getCell(INDEX_CELL).setCellValue(ROMAN_SEQUENCE[acSequence]);
-            dataRow.getCell(TITLE_CELL).setCellValue(accessory.title);
-            dataRow.getCell(QUANTITY_CELL).setCellValue(accessory.quantity);
+            this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, null, null);
             acSequence++;
             if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
         }
@@ -189,18 +195,14 @@ public class ExcelQuoteCreator
 
     private int fillAssembledProductUnits(AssembledProductInQuote product, int currentRow)
     {
-        Row dataRow;
         int unitSequence = 0;
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
             currentRow++;
-            dataRow = this.quoteSheet.createRow(currentRow);
-            dataRow.getCell(INDEX_CELL).setCellValue(ALPHABET_SEQUENCE[unitSequence]);
-            dataRow.getCell(TITLE_CELL).setCellValue(unit.title + " - " + unit.getDimensions());
+            this.createRowAndFillData(currentRow, ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
 
             currentRow++;
-            dataRow = this.quoteSheet.createRow(currentRow);
-            dataRow.getCell(TITLE_CELL).setCellValue("Unit consists of " + unit.moduleCount + " modules as per design provided.");
+            this.createRowAndFillData(currentRow, null, "Unit consists of " + unit.moduleCount + " modules as per design provided.");
 
             unitSequence++;
             if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
@@ -210,10 +212,7 @@ public class ExcelQuoteCreator
 
     private void fillAssembledProductSummary(int sequenceNumber, AssembledProductInQuote product, int currentRow)
     {
-        Row dataRow = this.quoteSheet.createRow(currentRow);
-        dataRow.getCell(INDEX_CELL).setCellValue(sequenceNumber);
-        dataRow.getCell(TITLE_CELL).setCellValue(product.getTitle());
-        dataRow.getCell(AMOUNT_CELL).setCellValue(product.getAmount());
+        this.createRowAndFillData(currentRow, String.valueOf(sequenceNumber), product.getTitle(), null, null, product.getAmount());
     }
 
     private void fillCatalogProducts(Cell cell)
@@ -222,8 +221,7 @@ public class ExcelQuoteCreator
         List<ProductLineItem> catalogProducts = this.quoteData.getCatalogueProducts();
         if (catalogProducts.isEmpty())
         {
-            Row dataRow = this.quoteSheet.createRow(startRow);
-            dataRow.getCell(TITLE_CELL).setCellValue("No products from catalogue.");
+            this.createRowWithMessage(startRow, "No products from catalogue.");
             return;
         }
 
@@ -240,24 +238,17 @@ public class ExcelQuoteCreator
     {
         int currentRow = startRow;
 
-        Row dataRow = this.quoteSheet.createRow(currentRow);
-        dataRow.getCell(INDEX_CELL).setCellValue(sequenceNumber);
-        dataRow.getCell(TITLE_CELL).setCellValue(product.getTitle());
-        dataRow.getCell(QUANTITY_CELL).setCellValue(product.getQuantity());
-        dataRow.getCell(RATE_CELL).setCellValue(product.getRate());
-        dataRow.getCell(AMOUNT_CELL).setCellValue(product.getAmount());
+        this.createRowAndFillData(currentRow, String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
+                product.getRate(), product.getAmount());
 
         currentRow++;
-        dataRow = this.quoteSheet.createRow(currentRow);
-        dataRow.getCell(INDEX_CELL).setCellValue("a");
-        dataRow.getCell(TITLE_CELL).setCellValue("OVERALL DIMENSION - " + product.getDimension());
+        this.createRowAndFillData(currentRow, "a", "OVERALL DIMENSION - " + product.getDimension());
 
         currentRow++;
-        dataRow = this.quoteSheet.createRow(currentRow);
-        dataRow.getCell(TITLE_CELL).setCellValue(product.getName());
+        this.createRowAndFillData(currentRow, null, product.getName());
 
         currentRow++;
-        dataRow = this.quoteSheet.createRow(currentRow);
+        this.createRow(currentRow);
 
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, QUANTITY_CELL, QUANTITY_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
@@ -268,27 +259,63 @@ public class ExcelQuoteCreator
 
     private void fillAddons(Cell cell, List<ProductAddon> addOns, String emptyMessage)
     {
-        int startRow  = cell.getRow().getRowNum() + 1;
+        int currentRow  = cell.getRow().getRowNum() + 1;
         if (addOns.isEmpty())
         {
-            Row dataRow = this.quoteSheet.createRow(startRow);
-            dataRow.getCell(TITLE_CELL).setCellValue(emptyMessage);
+            this.createRowWithMessage(currentRow, emptyMessage);
             return;
         }
 
         int index = 1;
         for (ProductAddon addon : addOns)
         {
-            Row dataRow = this.quoteSheet.createRow(startRow);
-            dataRow.getCell(INDEX_CELL).setCellValue(index);
-            dataRow.getCell(TITLE_CELL).setCellValue(addon.getTitle());
-            dataRow.getCell(QUANTITY_CELL).setCellValue(addon.getQuantity());
-            dataRow.getCell(RATE_CELL).setCellValue(addon.getRate());
-            dataRow.getCell(AMOUNT_CELL).setCellValue(addon.getAmount());
-            startRow++;
+            this.createRowAndFillData(currentRow, String.valueOf(index), addon.getTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            currentRow++;
             index++;
         }
     }
+
+    private void createRowWithMessage(int row, String message)
+    {
+        this.createRowAndFillData(row, null, message, null, null, null);
+    }
+
+    private void createRowAndFillData(int row, String index, String title)
+    {
+        this.createRowAndFillData(row, index, title, null, null, null);
+    }
+
+    private void createRowAndFillData(int rowNum, String index, String title, Double quantity, Double amount, Double total)
+    {
+        Row dataRow = this.createRow(rowNum);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index);
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount);
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
+    }
+
+    private Row createRow(int currentRow)
+    {
+        this.quoteSheet.shiftRows(currentRow, this.quoteSheet.getLastRowNum(), 1);
+        return this.quoteSheet.createRow(currentRow);
+    }
+
+    private void createCellWithData(Row dataRow, int cellNum, int cellType, Object data)
+    {
+        Cell cell = dataRow.createCell(cellNum, cellType);
+        if (data == null) return;
+
+        if (cellType == Cell.CELL_TYPE_NUMERIC)
+        {
+            cell.setCellValue((Double) data);
+        }
+        else
+        {
+            cell.setCellValue(data.toString());
+        }
+    }
+
 
     private void replaceCellValue(Cell cell, String cellValue)
     {
@@ -314,7 +341,8 @@ public class ExcelQuoteCreator
         Workbook wb = null;
         try
         {
-            wb = new XSSFWorkbook(new BufferedInputStream(getClass().getResourceAsStream(quoteXls)));
+//            wb = new XSSFWorkbook(new BufferedInputStream(getClass().getResourceAsStream(quoteXls)));
+            wb = new XSSFWorkbook(new BufferedInputStream(new FileInputStream(quoteXls)));
         }
         catch (IOException e)
         {
@@ -325,22 +353,23 @@ public class ExcelQuoteCreator
 
     private void openWorkbook()
     {
-        this.wb = this.getWorkbook(quoteXls);
+        this.wb = this.getWorkbook(this.quoteXls);
         this.quoteSheet = wb.getSheet("Quote");
         if (quoteSheet == null) throw new RuntimeException("Quote sheet not found.");
         this.dataSheet = wb.getSheet("Data");
         if (dataSheet == null) throw new RuntimeException("Data sheet not found.");
     }
 
-    private void closeWorkbook(Workbook wb)
+    private void closeWorkbook()
     {
         try
         {
-            wb.close();
+            this.wb.write(new BufferedOutputStream(new FileOutputStream(this.quoteXls)));
+            this.wb.close();
         }
         catch (IOException e)
         {
-            //Ignore
+            LOG.error("Error in wiring out the quote xls file at " + this.quoteXls);
         }
     }
 
