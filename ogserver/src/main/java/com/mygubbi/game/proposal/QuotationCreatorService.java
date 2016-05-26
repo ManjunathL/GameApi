@@ -76,7 +76,7 @@ public class QuotationCreatorService extends AbstractVerticle
 
     private void getProposalProducts(ProposalHeader proposalHeader, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.list.detail", new JsonObject().put("proposalid", proposalHeader.getId())));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.list.detail", new JsonObject().put("proposalId", proposalHeader.getId())));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -117,7 +117,9 @@ public class QuotationCreatorService extends AbstractVerticle
         }
         catch (Exception e)
         {
-            sendResponse(message, new JsonObject().put("error", "Error in preparing quote file for :" + proposalHeader.getId() + ". " + e.getMessage()));
+            String errorMessage = "Error in preparing quote file for :" + proposalHeader.getId() + ". " + e.getMessage();
+            sendResponse(message, new JsonObject().put("error", errorMessage));
+            LOG.error(errorMessage, e);
         }
     }
 

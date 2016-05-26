@@ -156,27 +156,38 @@
       "id": "kdmax.mg.select",
       "type": "select",
       "table": "kdmax_mg_map",
-      "query": "select code, title, imageurl, width, depth, height, dimension from module_master where code in (select mgcode from kdmax_mg_map where kdmcode = ?)",
+      "query": "select code, description, imagePath, width, depth, height from module_master where code in (select mgcode from kdmax_mg_map where kdmcode = ?)",
       "params": ["kdmcode"]
     },
+
+    {
+      "id": "module.select.all",
+      "type": "select",
+      "table": "module_master",
+      "query": "select code, width, depth, height from module_master",
+      "params": []
+    },
+
+    //Proposal product line item queries
 
     {
       "id": "proposal.product.create",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalid, title, type, kdmax_file, room, product_type, product_id, product_name, carcass_code, finish_type, finish_code, make_type, dimension, quantity, amount, notes, modules, addons, createdon, createdby) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      "params": ["proposalid", "title", "type", "kdmax_file", "room", "product_type", "product_id", "product_name", "carcass_code", "finish_type", "finish_code",
-        "make_type", "dimension", "quantity", "amount", "notes", "modules", "addons", "createdon", "createdby"]
+      "query": "insert into proposal_product (proposalId, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?)",
+      "params": ["proposalId", "title", "seq", "type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
+        "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "dimension", "quantity", "amount", "quoteFilePath",
+        "modules", "addons", "createdBy"]
     },
 
     {
       "id": "proposal.product.update",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set title = ?, type = ?, kdmax_file = ?, room = ?, product_type = ?, product_id = ?, product_name = ?, carcass_code = ?, finish_type = ?, finish_code = ?,  make_type = ?, dimension = ?, quantity = ?, amount = ?, notes =  ?, moduleJson = ?, addonJson = ?, updatedon = ?, updatedby = ? where id = ?",
-      "params": ["title", "type", "kdmax_file", "room", "product_type", "product_id", "product_name", "carcass_code", "finish_type", "finish_code", "make_type",
-        "dimension", "quantity", "amount", "notes", "modules", "addons", "updatedon", "updatedby", "id"]
+      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ? where id = ?",
+      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "id"]
     },
+
     {
       "id": "proposal.product.delete",
       "type": "delete",
@@ -189,16 +200,16 @@
       "id": "proposal.product.list",
       "type": "select",
       "table": "proposal_product",
-      "query": "select title, type, room, product_type, quantity, product_name, carcass_code, finish_code, make_type, quantity, amount from proposal_product where proposalid = ? and active = 'A'",
-      "params": ["proposalid"]
+      "query": "select id, title, type, roomCode, productCategoryCode, quantity, catalogueName, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, makeTypeCode, amount from proposal_product where proposalId = ? and active = 'A'",
+      "params": ["proposalId"]
     },
 
     {
       "id": "proposal.product.list.detail",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product where proposalid = ? and active = 'A' order by type",
-      "params": ["proposalid"],
+      "query": "select * from proposal_product where proposalId = ? and active = 'A' order by type",
+      "params": ["proposalId"],
       "jsonfields":["modules", "addons"]
     },
 
@@ -206,10 +217,11 @@
       "id": "proposal.product.detail",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product where proposalid = ? and id = ? and active = 'A'",
-      "params": ["proposalid", "productid"],
+      "query": "select * from proposal_product where proposalId = ? and id = ? and active = 'A'",
+      "params": ["proposalId", "id"],
       "jsonfields":["modules", "addons"]
     },
+
 
     // Module costing queries
     {
@@ -261,26 +273,36 @@
       "query": "select code, title, plength, breadth, thickness, edgebinding, quantity from shutter_master",
       "params": []
     },
+
     {
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, maketype, make, imageurl, price from acc_hw_master where type = 'A'",
+      "query": "select code, title, makeType, make, imagePath, price from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, maketype, make, imageurl, price from acc_hw_master where type = 'H'",
+      "query": "select code, title, makeType, make, imagePath, price from acc_hw_master where type = 'H'",
       "params": []
     },
+
     {
-      "id": "shutter.finish",
+      "id": "module.accessories.select",
+      "type": "select",
+      "table": "acc_hw_master",
+      "query": "select ahm.title, ahm.make, ahm.imagePath from module_components mc, acc_hw_master ahm where mc.modulecode = ? and ahm.makeType = ? and mc.comptype = 'A' and mc.compcode = ahm.code",
+      "params": ["mgCode", "makeType"]
+    },
+
+    {
+      "id": "lookup.codes",
       "type": "select",
       "table": "code_master",
-      "query": "select code, title, attr1 as finishType from code_master where type = 'SF'",
-      "params": []
+      "query": "select code, title, additionalType from code_master where lookupType = ?",
+      "params": ["lookupType"]
     },
     {
       "id": "addons.select",

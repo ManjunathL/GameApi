@@ -34,7 +34,7 @@ public class QuoteData
         this.catalogueProducts = new ArrayList<>();
         for (ProductLineItem product : this.products)
         {
-            if (product.getType().equals(ProductLineItem.ASSEMBLED_PRODUCT))
+            if (product.getType().equals(ProductLineItem.CUSTOMIZED_PRODUCT))
                 this.assembledProducts.add(new AssembledProductInQuote(product));
             else
                 this.catalogueProducts.add(product);

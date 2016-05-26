@@ -57,7 +57,7 @@ public class ModulePricingService extends AbstractVerticle
 
         if (components == null || components.isEmpty())
         {
-            errors.add("Module components not setup for MG code: " + productModule.getKDMCode());
+            errors.add("Module components not setup for MG code: -" + productModule.getMGCode() + "-");
             this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
             return;
         }
@@ -143,11 +143,21 @@ public class ModulePricingService extends AbstractVerticle
     private void sendResponse(Message message, JsonArray errors, double shutterCost, double carcassCost,
                               double accessoryCost, double hardwareCost, double labourCost, double totalCost, ProductModule productModule)
     {
-        JsonObject moduleCost = new JsonObject().put("carcasscost", carcassCost).put("shuttercost", shutterCost)
-                .put("accessorycost", accessoryCost).put("hardwarecost", hardwareCost).put("labourcost", labourCost)
-                .put("totalcost", totalCost).put("errors", errors).put("mgcode", productModule.getMGCode());
-        LOG.info("Sending price calculation result :" + moduleCost.encodePrettily());
-        message.reply(LocalCache.getInstance().store(moduleCost));
+        JsonObject resultJson = null;
+        if (errors != null && !errors.isEmpty())
+        {
+            resultJson = new JsonObject().put("errors", errors).put("mgCode", productModule.getMGCode());
+            LOG.info("Pricing for product module has errors: " + productModule.encodePrettily() + " ::: " + resultJson.encodePrettily());
+        }
+        else
+        {
+            resultJson = new JsonObject().put("carcassCost", carcassCost).put("shutterCost", shutterCost)
+                    .put("accessoryCost", accessoryCost).put("hardwareCost", hardwareCost).put("labourCost", labourCost)
+                    .put("totalCost", totalCost);
+            LOG.info("Sending price calculation result :" + resultJson.encodePrettily());
+        }
+        message.reply(LocalCache.getInstance().store(resultJson));
+
     }
 
     private double round(double value, int places)

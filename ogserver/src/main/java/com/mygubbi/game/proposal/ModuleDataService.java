@@ -9,10 +9,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.db.QueryDef;
-import com.mygubbi.game.proposal.model.AccHwComponent;
-import com.mygubbi.game.proposal.model.CarcassPanel;
-import com.mygubbi.game.proposal.model.ModuleComponent;
-import com.mygubbi.game.proposal.model.ShutterPanel;
+import com.mygubbi.game.proposal.model.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -30,9 +27,10 @@ public class ModuleDataService extends AbstractVerticle
 	private Map<String, QueryDef> queryMap;
 	
 	private static ModuleDataService INSTANCE;
-	private AtomicInteger cachingCounter = new AtomicInteger(7);
+	private AtomicInteger cachingCounter = new AtomicInteger(8);
 
     private Multimap<String, ModuleComponent> moduleComponentsMap;
+    private Map<String, Module> moduleMap = Collections.EMPTY_MAP;
     private Map<String, CarcassPanel> carcassPanelMap = Collections.EMPTY_MAP;
     private Map<String, ShutterPanel> shutterPanelMap = Collections.EMPTY_MAP;
     private Map<String, String> kdmaxDefaultModuleMap = Collections.EMPTY_MAP;
@@ -57,6 +55,7 @@ public class ModuleDataService extends AbstractVerticle
 
 	private void setupData()
 	{
+        this.cacheModules();
         this.cacheModuleComponents();
         this.cacheCarcassPanels();
         this.cacheShutterPanels();
@@ -208,8 +207,33 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
+    private void cacheModules()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("module.select.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Modules master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.moduleMap = new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            Module module = new Module(record);
+                            this.moduleMap.put(module.getCode(), module);
+                            LOG.info("Module is cached:" + module.getCode());
+                        }
+                        markResult("Module master is loaded.", true);
+                    }
+                });
+    }
+
     private synchronized void markResult(String message, boolean success)
     {
+        LOG.info(message);
+
         if (this.startFuture == null) return;
         if (!success)
         {
@@ -230,6 +254,11 @@ public class ModuleDataService extends AbstractVerticle
     public Collection<ModuleComponent> getModuleComponents(String mgCode)
     {
         return this.moduleComponentsMap.get(mgCode);
+    }
+
+    public Module getModule(String code)
+    {
+        return this.moduleMap.get(code);
     }
 
     public CarcassPanel getCarcassPanel(String code)
@@ -269,3 +298,4 @@ public class ModuleDataService extends AbstractVerticle
         }
     }
 }
+

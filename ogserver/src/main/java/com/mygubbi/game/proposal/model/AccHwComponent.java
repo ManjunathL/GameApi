@@ -17,8 +17,8 @@ public class AccHwComponent
     public static AccHwComponent fromJson(JsonObject json)
     {
         return new AccHwComponent().setCode(json.getString("code")).setTitle(json.getString("title"))
-                .setMakeType(json.getString("maketype")).setMake(json.getString("make"))
-                .setImageUrl(json.getString("imageurl")).setPrice(json.getDouble("price"));
+                .setMakeType(json.getString("makeType")).setMake(json.getString("make"))
+                .setImageUrl(json.getString("imagePath")).setPrice(json.getDouble("price"));
     }
 
     public String getMake()

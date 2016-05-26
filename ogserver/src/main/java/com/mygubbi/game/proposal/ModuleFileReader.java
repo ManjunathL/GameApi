@@ -23,6 +23,12 @@ import java.util.List;
 public class ModuleFileReader
 {
     private final static Logger LOG = LogManager.getLogger(ModuleFileReader.class);
+    public static final int NAME_CELL = 3;
+    public static final int WIDTH_CELL = 5;
+    public static final int DEPTH_CELL = 6;
+    public static final int HEIGHT_CELL = 7;
+    public static final int COLOR_CELL = 8;
+    public static final int REMARKS_CELL = 20;
 
     private String filename;
 
@@ -79,22 +85,20 @@ public class ModuleFileReader
 
                 int sequence = this.getInteger(row, 1);
 
-                String name = row.getCell(3).getStringCellValue();
-                int width = this.getInteger(row, 5);
-                int depth = this.getInteger(row, 6);
-                int height = this.getInteger(row, 7);
+                String name = row.getCell(NAME_CELL).getStringCellValue();
+                int width = this.getInteger(row, WIDTH_CELL);
+                int depth = this.getInteger(row, DEPTH_CELL);
+                int height = this.getInteger(row, HEIGHT_CELL);
 
-                String finish = row.getCell(8).getStringCellValue();
                 String color = this.getColor(row);
-                int quantity = this.getInteger(row, 16);
-                String uom = row.getCell(17).getStringCellValue();
-                String remarks = row.getCell(20).getStringCellValue();
+                String remarks = row.getCell(REMARKS_CELL).getStringCellValue();
 
-                ProductModule module = new ProductModule().setUnit(unit).setName(name).setKDMCode(moduleCode)
+                ProductModule module = new ProductModule()
+                        .setUnit(unit)
+                        .setKDMCode(moduleCode)
                         .setSequence(sequence)
                         .setColorCode(color)
-                        .setQuantity(quantity).setUom(uom).setRemarks(remarks)
-                        .setWidth(width).setDepth(depth).setHeight(height);
+                        .setRemarks(remarks);
                 productModules.add(module);
             }
         }
@@ -121,7 +125,7 @@ public class ModuleFileReader
 
     private String getColor(Row row)
     {
-        Cell colorCell = row.getCell(9);
+        Cell colorCell = row.getCell(COLOR_CELL);
         String color = null;
         if (colorCell.getCellType() == Cell.CELL_TYPE_STRING)
         {

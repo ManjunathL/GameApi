@@ -6,9 +6,9 @@ insert into kdmax_mg_map (kdmcode, mgcode) values ('MG-BU600-1760', 'K3DU6072');
 insert into kdmax_mg_map (kdmcode, mgcode) values ('MG-BU600-1760', 'K3DU8072');
 insert into kdmax_mg_map (kdmcode, mgcode) values ('MG-BU900-1778', 'KLUG9072');
 
-insert into module_master(code, title, imageurl, width, depth, height, dimension) values ('K3DU6072', 'Kitchen 3 Drawer unit', 'a.jpg', 600, 575, 720, '600x575x720');
-insert into module_master(code, title, imageurl, width, depth, height, dimension) values ('K3DU8072', 'Kitchen 2 Drawer unit', 'a.jpg', 800, 475, 620, '600x575x720');
-insert into module_master(code, title, imageurl, width, depth, height, dimension) values ('KLUG9072', 'Kitchen Tall unit', 'a.jpg', 750, 575, 720, '600x575x720');
+insert into module_master(code, description, imagePath, width, depth, height, dimension) values ('K3DU6072', 'Kitchen 3 Drawer unit', 'w1530-specs-1.png', 600, 575, 720, '600x575x720');
+insert into module_master(code, description, imagePath, width, depth, height, dimension) values ('K3DU8072', 'Kitchen 2 Drawer unit', 'w1530-specs-1.png', 800, 475, 620, '600x575x720');
+insert into module_master(code, description, imagePath, width, depth, height, dimension) values ('KLUG9072', 'Kitchen Tall unit', 'w1530-specs-1.png', 750, 575, 720, '600x575x720');
 
 
 insert into module_components (modulecode, comptype, compcode, quantity) values ('KLUG9072', 'C', 'WS7129L', 1);
@@ -76,31 +76,30 @@ insert into shutter_master (code, title, plength, breadth, thickness, edgebindin
     values ('3DU600', 'Drawer Facia', 600, 575, 18, '4 edge 0.8mm pvc lipping', 1);
 
 
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('A', 'A1', '1027389', 'Cutlery tray', 'E', 'Hettich', 'accessories/cultery-tray-hauss.jpg', 'N', 100.00, 98.00);
 
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'A1', '1027389', 'Cutlery tray', 'E', 'Hettich', 'a.jpg', 'N', 100.00, 98.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('A', 'A1', '10273891', 'Cutlery tray', 'S', 'Hafele', 'accessories/cultery-tray-hauss.jpg', 'N', 150.00, 148.00);
 
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'A1', '10273891', 'Cutlery tray', 'S', 'Hafele', 'a.jpg', 'N', 150.00, 148.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('A', 'A1', '10273892', 'Cutlery tray', 'P', 'Blum', 'accessories/cultery-tray-hauss.jpg', 'N', 300.00, 298.00);
 
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'A1', '10273892', 'Cutlery tray', 'P', 'Blum', 'a.jpg', 'N', 300.00, 298.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('A', 'A2', '1027389', 'Innotech Drawer with Railing+quardo', 'E', 'Hettich', 'accessories/acsimages.jpg', 'N', 100.00, 98.00);
 
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'A2', '1027389', 'Innotech Drawer with Railing+quardo', 'E', 'Hettich', 'b.jpg', 'N', 100.00, 98.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('A', 'A2', '10273891', 'Innotech Drawer with Railing+quardo', 'S','Hafele', 'accessories/acsimages.jpg', 'N', 150.00, 148.00);
 
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'A2', '10273891', 'Innotech Drawer with Railing+quardo', 'S','Hafele', 'b.jpg', 'N', 150.00, 148.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('A', 'A2', '10273892', 'Innotech Drawer with Railing+quardo', 'P', 'Blum', 'accessories/deutschland.jpg', 'N', 300.00, 298.00);
 
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'A2', '10273892', 'Innotech Drawer with Railing+quardo', 'P', 'Blum', 'b.jpg', 'N', 300.00, 298.00);
-
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'H1', '79724-R', 'Suspension bracker', 'E', 'Hettich', 'h1.jpg', 'N', 20.00, 18.00);
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'H1', '79724-R', 'Suspension bracker', 'S', 'Hafele', 'h1.jpg', 'N', 20.00, 18.00);
-insert into acc_hw_master (type, code, catalogcode, title, maketype, make, imageurl, uom, mrp, price)
-    values ('A', 'H1', '79724-R', 'Suspension bracker', 'P','Blum',  'h1.jpg', 'N', 20.00, 18.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('H', 'H1', '79724-R', 'Suspension bracker', 'E', 'Hettich', 'accessories/drawer-dustbin-mobel.jpg', 'N', 20.00, 18.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('H', 'H1', '79724-R', 'Suspension bracker', 'S', 'Hafele', 'accessories/drawer-dustbin-mobel.jpg', 'N', 20.00, 18.00);
+insert into acc_hw_master (type, code, catalogCode, title, makeType, make, imagePath, uom, mrp, price)
+    values ('H', 'H1', '79724-R', 'Suspension bracker', 'P','Blum',  'accessories/pull-out-basket-hauss.jpg', 'N', 20.00, 18.00);
 
 
 insert into addon_master (producttype, addontype, code, catalogcode, title, make, imageurl, uom, rate)
@@ -119,4 +118,53 @@ insert into addon_master (producttype, addontype, code, catalogcode, title, make
     values ('K', 'S', 'S001', '79724-R', 'Dado', 'Local', 's001.jpg', 'N', 20.00);
 insert into addon_master (producttype, addontype, code, catalogcode, title, make, imageurl, uom, rate)
     values ('K', 'S', 'S002', '79724-R', 'Wall painting', 'Local', 's002.jpg', 'N', 20.00);
+
+
+finishtype, finish
+
+-- insert into code_master (lookupType, levelType, additionalType, code, title) values ('category', '', '');
+
+insert into code_master (lookupType, code, title) values ('category', 'K', 'Kitchen');
+insert into code_master (lookupType, code, title) values ('category', 'W', 'Wardrobe');
+
+insert into code_master (lookupType, code, title) values ('room', 'K', 'Kitchen');
+insert into code_master (lookupType, code, title) values ('room', 'MBR', 'Master Bedroom');
+insert into code_master (lookupType, code, title) values ('room', 'KBR', 'Kids Bedroom');
+insert into code_master (lookupType, code, title) values ('room', 'GBR', 'Guest Bedroom');
+insert into code_master (lookupType, code, title) values ('room', 'LIV', 'Living Room');
+
+insert into code_master (lookupType, code, title) values ('maketype', 'E', 'Economy');
+insert into code_master (lookupType, code, title) values ('maketype', 'S', 'Standard');
+insert into code_master (lookupType, code, title) values ('maketype', 'P', 'Premium');
+
+insert into code_master (lookupType, code, title) values ('carcassmaterial', 'PLY', 'PLY');
+insert into code_master (lookupType, code, title) values ('carcassmaterial', 'MDF', 'MDF');
+insert into code_master (lookupType, code, title) values ('carcassmaterial', 'PLPB', 'PLPB');
+
+insert into code_master (lookupType, code, title) values ('finishtype', 'LAMINATE', 'Laminate');
+insert into code_master (lookupType, code, title) values ('finishtype', 'FOIL', 'Foil');
+insert into code_master (lookupType, code, title) values ('finishtype', 'PAINT', 'Paint');
+insert into code_master (lookupType, code, title) values ('finishtype', 'ACRYLIC', 'Acrylic');
+insert into code_master (lookupType, code, title) values ('finishtype', 'VENEER', 'Veneer');
+insert into code_master (lookupType, code, title) values ('finishtype', 'SOLIDWOOD', 'Solid Wood');
+
+insert into code_master (lookupType, code, title) values ('addontype', 'ACCESSORY', 'Accessory');
+insert into code_master (lookupType, code, title) values ('addontype', 'COUNTERTOP', 'Counter Top');
+insert into code_master (lookupType, code, title) values ('addontype', 'SERVICE', 'Service');
+
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'PAINT', 'M01', 'MDF with PU');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'PAINT', 'M02', 'MDF with PU B/W');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'FOIL', 'M03', 'PVC Foil');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'FOIL', 'M04', 'Glossy Foil');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M10', 'PLY/LAM');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M11', 'Glossy Laminate/PLY');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'ACRYLIC', 'M08', 'Acrylic/MDF');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M07', 'Glossy Laminate/MDF');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M05', 'MDF/ Mat LAM');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'SOLIDWOOD', 'M09', 'Solid Wood');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M06', 'MDF Pre Lam');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M12', 'Ply Pre Lam');
+insert into code_master (lookupType, additionalType, code, title) values ('finish', 'VENEER', 'M13', 'Ply Veneer');
+
+
 

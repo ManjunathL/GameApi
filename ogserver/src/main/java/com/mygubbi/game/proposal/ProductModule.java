@@ -13,28 +13,25 @@ public class ProductModule extends JsonObject
     public static String MAPPED_AT_DEFAULT = "d";
     public static String NOT_MAPPED = "n";
 
-    private static final String UNIT = "unit";
-    private static final String KDMCODE = "kdmcode";
-    private static final String KDMDEFCODE = "kdmdefcode";
+    private static final String UNIT = "unitType";
     private static final String SEQ = "seq";
-    private static final String CARCASS_CODE = "carcass_code";
-    private static final String FINISH_CODE = "finish_code";
-    private static final String FINISH_TYPE = "finish_type";
-    private static final String COLOR_CODE = "color_code";
-    private static final String MAKE_TYPE = "make_type";
-    private static final String MGCODE = "mgcode";
-    private static final String MGNAME = "mgname";
-    private static final String MGIMAGE = "mgimage";
-    private static final String MGDIMENSION = "mgdim";
-    private static final String UOM = "uom";
-    private static final String QUANTITY = "quantity";
+    private static final String EXT_CODE = "extCode";
+    private static final String EXT_DEF_CODE = "extDefCode";
+
+    private static final String MGCODE = "mgCode";
+    private static final String MGTYPE = "mgType";
+    private static final String MGIMAGE = "mgImage";
+    private static final String MGDIMENSION = "mgDimension";
+    private static final String MGDESCRIPTION = "mgDescription";
+
+    private static final String CARCASS_CODE = "carcassCode";
+    private static final String FINISH_CODE = "finishCode";
+    private static final String FINISH_TYPE = "finishTypeCode";
+    private static final String COLOR_CODE = "colorCode";
+    private static final String MAKE_TYPE = "makeTypeCode";
     private static final String AMOUNT = "amount";
-    private static final String WIDTH = "width";
-    private static final String DEPTH = "depth";
-    private static final String HEIGHT = "height";
     private static final String REMARKS = "remarks";
-    private static final String NAME = "name";
-    private static final String MAPPED = "mapped";
+    private static final String MAPPED = "importStatus";
 
     public ProductModule()
     {
@@ -53,12 +50,12 @@ public class ProductModule extends JsonObject
 
     public String getKDMCode()
     {
-        return this.getString(KDMCODE);
+        return this.getString(EXT_CODE);
     }
 
     public String getKDMDefaultCode()
     {
-        return this.getString(KDMDEFCODE);
+        return this.getString(EXT_DEF_CODE);
     }
 
     public String getCarcassCode()
@@ -86,44 +83,14 @@ public class ProductModule extends JsonObject
         return this.getString(MAKE_TYPE);
     }
 
-    public int getQuantity()
-    {
-        return this.getInteger(QUANTITY);
-    }
-
     public int getAmount()
     {
         return this.getInteger(AMOUNT);
     }
 
-    public String getUom()
-    {
-        return this.getString(UOM);
-    }
-
-    public int getWidth()
-    {
-        return this.getInteger(WIDTH);
-    }
-
-    public int getDepth()
-    {
-        return this.getInteger(DEPTH);
-    }
-
-    public int getHeight()
-    {
-        return this.getInteger(HEIGHT);
-    }
-
     public String getRemarks()
     {
         return this.getString(REMARKS);
-    }
-
-    public String getName()
-    {
-        return this.getString(NAME);
     }
 
     public String getMGCode()
@@ -133,7 +100,7 @@ public class ProductModule extends JsonObject
 
     public String getMGName()
     {
-        return this.getString(MGNAME);
+        return this.getString(MGTYPE);
     }
 
     public String getMGImage()
@@ -164,13 +131,13 @@ public class ProductModule extends JsonObject
 
     public ProductModule setKDMCode(String code)
     {
-        this.put(KDMCODE, code);
+        this.put(EXT_CODE, code);
         return this;
     }
 
     public ProductModule setDefaultModule(String module)
     {
-        this.put(KDMDEFCODE, module);
+        this.put(EXT_DEF_CODE, module);
         return this;
     }
 
@@ -218,7 +185,7 @@ public class ProductModule extends JsonObject
 
     public ProductModule setMGName(String value)
     {
-        this.put(MGNAME, value);
+        this.put(MGTYPE, value);
         return this;
     }
 
@@ -234,18 +201,6 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule setUom(String uom)
-    {
-        this.put(UOM, uom);
-        return this;
-    }
-
-    public ProductModule setQuantity(int quantity)
-    {
-        this.put(QUANTITY, quantity);
-        return this;
-    }
-
     public ProductModule setAmount(int amount)
     {
         this.put(AMOUNT, amount);
@@ -255,30 +210,6 @@ public class ProductModule extends JsonObject
     public ProductModule setRemarks(String remarks)
     {
         this.put(REMARKS, remarks);
-        return this;
-    }
-
-    public ProductModule setName(String name)
-    {
-        this.put(NAME, name);
-        return this;
-    }
-
-    public ProductModule setWidth(int width)
-    {
-        this.put(WIDTH, width);
-        return this;
-    }
-
-    public ProductModule setDepth(int depth)
-    {
-        this.put(DEPTH, depth);
-        return this;
-    }
-
-    public ProductModule setHeight(int height)
-    {
-        this.put(HEIGHT, height);
         return this;
     }
 
@@ -309,16 +240,10 @@ public class ProductModule extends JsonObject
     {
         return "ProductModule{" +
                 "unit='" + this.getUnit() + '\'' +
-                ", name='" + this.getName() + '\'' +
                 ", code='" + this.getKDMCode() + '\'' +
                 ", finish='" + this.getFinishCode() + '\'' +
                 ", color='" + this.getColorCode() + '\'' +
-                ", quantity=" + this.getQuantity() +
-                ", uom='" + this.getUom() + '\'' +
                 ", remarks='" + this.getRemarks() + '\'' +
-                ", width=" + this.getWidth() +
-                ", depth=" + this.getDepth()+
-                ", height=" + this.getHeight() +
                 '}';
 
     }
