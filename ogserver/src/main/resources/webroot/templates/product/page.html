@@ -24,7 +24,15 @@
                     <% }else{ %>
                     <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){
                     %>
-                    <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a>
+                    <li>
+                        <% if(filter.selectedCategoryName == 'living & dining'){ %>
+                            <a href="/living-and-dining-room-designs"><%= filter.selectedCategoryName %></a>
+                        <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
+                            <a href="/kitchen-cabinet-design"><%= filter.selectedCategoryName %></a>
+                        <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+                            <a href="/bedroom-interior-design"><%= filter.selectedCategoryName %></a>
+                        <% } %>
+
                     </li>
                     <% } %>
                     <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
