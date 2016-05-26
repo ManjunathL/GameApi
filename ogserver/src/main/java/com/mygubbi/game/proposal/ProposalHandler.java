@@ -38,10 +38,9 @@ public class ProposalHandler extends AbstractRouteHandler
     private void createProposal(RoutingContext routingContext)
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
-        if (StringUtils.isEmpty(proposalData.getString("title")) || StringUtils.isEmpty(proposalData.getString("createdon"))
-                || StringUtils.isEmpty(proposalData.getString("createdby")))
+        if (StringUtils.isEmpty(proposalData.getString("title")) || StringUtils.isEmpty(proposalData.getString("createdBy")))
         {
-            sendError(routingContext, "Error in creating proposal as title, createdon or createdby are not set.");
+            sendError(routingContext, "Error in creating proposal as title or createdBy are not set.");
             return;
         }
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
@@ -56,9 +55,18 @@ public class ProposalHandler extends AbstractRouteHandler
                     else
                     {
                         String docsFolder = this.proposalDocsFolder + "/" + proposalData.getLong("id");
-                        VertxInstance.get().fileSystem().mkdirBlocking(docsFolder);
-                        proposalData.put("docsfolder", docsFolder);
-                        this.updateProposal(routingContext, proposalData, "proposal.docsfolder.update");
+                        try
+                        {
+                            VertxInstance.get().fileSystem().mkdirBlocking(docsFolder);
+                        }
+                        catch (Exception e)
+                        {
+                            sendError(routingContext, "Error in creating folder for proposal at path:" + docsFolder);
+                            LOG.error("Error in creating folder for proposal at path:" + docsFolder + ". Error:" + resultData.errorMessage, resultData.error);
+                            return;
+                        }
+                        proposalData.put("folderPath", docsFolder);
+                        this.updateProposal(routingContext, proposalData, "proposal.folder.update");
                     }
                 });
     }
@@ -66,6 +74,7 @@ public class ProposalHandler extends AbstractRouteHandler
     private void updateProposal(RoutingContext routingContext)
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
+        LOG.info("Proposal:" + proposalData.encodePrettily());
         this.updateProposal(routingContext, proposalData, "proposal.update");
     }
 

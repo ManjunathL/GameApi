@@ -7,11 +7,18 @@
                 <ul class="breadcrumb">
                     <li><a href="/"><i class="fa fa-home"></i></a></li>
                     <% if(typeof(product.category) !== 'undefined' && product.category != null){ %>
-                    <li><a href="/products/<%= product.category %>"><%= product.category %></a></li>
+                    <li>
+                        <% if(product.category == 'Living & Dining'){ %>
+                        <a href="/living-and-dining-room-designs"><%= product.category %></a>
+                        <% }else if(product.category == 'Kitchen'){ %>
+                        <a href="/kitchen-cabinet-design"><%= product.category %></a>
+                        <% }else if(product.category == 'Bedroom'){ %>
+                        <a href="/bedroom-interior-design"><%= product.category %></a>
+                        <% } %>
+                    </li>
                     <% } %>
                     <% if(typeof(product.subcategory) !== 'undefined' && product.subcategory != null){ %>
-                    <li><a href="/products/<%= product.category %>/<%= product.subcategory %>"><%= product.subcategory
-                        %></a></li>
+                    <li><a href="javascript:void(0);"><%= product.subcategory %></a></li>
                     <% } %>
                     <% if(typeof(product.name) !== 'undefined'){ %>
                     <li class="active"><a href="javascript:void(0);"><span

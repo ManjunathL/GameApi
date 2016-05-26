@@ -95,19 +95,19 @@ public class QuoteData
         switch (key)
         {
             case "date":
-                return DateFormatUtils.format(new Date(), "dd-mmm-yyyy");
+                return DateFormatUtils.format(new Date(), "dd-MMM-yyyy");
             case "projectaddress":
-                return this.concatKeys(new String[]{"projectname", "paddress1", "paddress2", "pcity"}, ",");
+                return this.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ",");
             case "salesdesign":
-                return this.concatKeys(new String[]{"salesperson", "designername"}, "/");
+                return this.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/");
             case "totalamountinwords":
-                return new CurrencyUtil().convert(this.proposalHeader.getTotalAmount().toString());
+                return new CurrencyUtil().convert(this.proposalHeader.getAmount().toString());
             default:
                 return null;
         }
     }
 
-    private String concatKeys(String[] keys, String delimiter)
+    private String concatValuesFromKeys(String[] keys, String delimiter)
     {
         int size = keys.length;
         StringBuilder sb = new StringBuilder();

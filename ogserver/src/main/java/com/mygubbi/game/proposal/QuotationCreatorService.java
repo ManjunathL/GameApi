@@ -1,7 +1,6 @@
 package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.LocalCache;
-import com.mygubbi.common.StringUtils;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
@@ -15,16 +14,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,10 +99,18 @@ public class QuotationCreatorService extends AbstractVerticle
 
     private void createQuote(ProposalHeader proposalHeader, List<ProductLineItem> products, Message message)
     {
-        String quoteXls = proposalHeader.docsFolder() + "/quotation.xlsx";
-        VertxInstance.get().fileSystem().copyBlocking(this.quoteTemplate, quoteXls);
+        String quoteXls = proposalHeader.folderPath() + "/quotation.xlsx";
         try
         {
+            VertxInstance.get().fileSystem().deleteBlocking(quoteXls);
+        }
+        catch (Exception e)
+        {
+            //Nothing to do
+        }
+        try
+        {
+            VertxInstance.get().fileSystem().copyBlocking(this.quoteTemplate, quoteXls);
             QuoteData quoteData = new QuoteData(proposalHeader, products);
             new ExcelQuoteCreator(quoteXls, quoteData).prepareQuote();
             sendResponse(message, new JsonObject().put("quoteFile", quoteXls));

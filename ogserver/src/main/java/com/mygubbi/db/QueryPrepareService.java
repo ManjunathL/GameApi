@@ -61,7 +61,7 @@ public class QueryPrepareService extends AbstractVerticle implements MultiFileRe
 			qData.queryDef = qDef;
 		}
 		
-		if (qData.queryDef.isInsertQuery)
+		if (qData.queryDef.isInsertQuery && qData.queryDef.hasIdField())
 		{
 			qData.paramsObject.put("id", SequenceIdGenerator.getInstance().getNextSequence(qData.queryDef.tableForInsert));
 		}

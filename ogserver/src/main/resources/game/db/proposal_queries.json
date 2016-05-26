@@ -1,11 +1,19 @@
 {
   "queries": [
     {
-      "id": "proposal.list",
+      "id": "proposal.list.status",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmid, title, status, salesperson, designername, totalamount, projectname, pcity, touchtime, createdon, createdby, updatedon, updatedby from proposal where status = ?",
+      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status = ?",
       "params": ["status"]
+    },
+
+    {
+      "id": "proposal.list.all",
+      "type": "select",
+      "table": "proposal",
+      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal",
+      "params": []
     },
 
     {
@@ -27,45 +35,45 @@
       "id": "proposal.create",
       "type": "insert",
       "table": "proposal",
-      "query": "insert into proposal(status, title, version, createdby, createdon) values ('Active', ?, '1.0', ?, ?)",
-      "params": ["title", "createdby", "createdon"]
+      "query": "insert into proposal(status, title, version, createdBy) values ('Active', ?, '1.0', ?)",
+      "params": ["title", "createdBy"]
     },
 
     {
       "id": "proposal.update",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmid = ?, quoteno = ?, customerid = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectname = ?, pmodeltype = ?, pdrawingno = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesperson = ?, salesemail = ?, salescontact = ?,  designername = ?, designeremail = ?, designercontact = ?, totalamount = ?, updatedby = ?, updatedon = ? where id = ?",
-      "params": ["title", "crmid", "quoteno", "customerid", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectname", "pmodeltype", "pdrawingno", "paddress1", "paddress2", "pcity", "salesperson", "salesemail", "salescontact", " designername", "designeremail", "designercontact", "totalamount", "updatedby", "updatedon", "id"]
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, customerId = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, amount = ?, updatedBy = ? where id = ?",
+      "params": ["title", "crmId", "quoteNo", "customerId", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "amount", "updatedBy", "id"]
     },
 
     {
-      "id": "proposal.docsfolder.update",
+      "id": "proposal.folder.update",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set docsfolder = ? where id = ?",
-      "params": ["docsfolder", "id"]
+      "query": "update proposal set folderPath = ? where id = ?",
+      "params": ["folderPath", "id"]
     },
 
     {
       "id": "proposal.submit",
       "type": "update",
       "table": "proposal",
-      "query": "update from proposal set status = 'Submitted' where proposalid = ?",
+      "query": "update proposal set status = 'Submitted' where id = ?",
       "params": ["id"]
     },
     {
       "id": "proposal.cancel",
       "type": "update",
       "table": "proposal",
-      "query": "update from proposal set status = 'Cancelled' where proposalid = ?",
+      "query": "update proposal set status = 'Cancelled' where id = ?",
       "params": ["id"]
     },
     {
       "id": "proposal.delete",
       "type": "update",
       "table": "proposal",
-      "query": "update from proposal set status = 'Deleted' where proposalid = ?",
+      "query": "update proposal set status = 'Deleted' where id = ?",
       "params": ["id"]
     },
 
