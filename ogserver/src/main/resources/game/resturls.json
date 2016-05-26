@@ -1,10 +1,18 @@
 {
   "resturls": [
     {
+      "uri": "/gapi/proposal/listbystatus",
+      "source": "db",
+      "query":"proposal.list.status",
+      "params":["status"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
       "uri": "/gapi/proposal/list",
       "source": "db",
-      "query":"proposal.list",
-      "params":["status"],
+      "query":"proposal.list.all",
+      "params":[],
       "resultfields":[],
       "default": "[]"
     },

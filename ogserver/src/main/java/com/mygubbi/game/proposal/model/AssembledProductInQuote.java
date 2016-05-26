@@ -174,7 +174,7 @@ public class AssembledProductInQuote
         public int sequence;
         public String code;
         public String title;
-        public int quantity;
+        public double quantity;
 
         public Accessory(int sequence, String code, String title)
         {
