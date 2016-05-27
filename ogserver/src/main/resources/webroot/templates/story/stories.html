@@ -27,7 +27,12 @@
 
                 <div class="row margin50-0">
                     <div class="col-md-7 col-sm-12 col-xs-12">
-                        <a href="/story-<%= encodeURIComponent(story.blog_url) %>">
+                        <%
+                            var str_url = story.blog_heading;
+                            str_url = str_url.replace(/\s/g,"-");
+                            console.log(str_url);
+                        %>
+                        <a href="/story-<%= encodeURIComponent(str_url) %>">
                             <img
                                     src="<%= story.blog_main_image %>"
                                     class="img-responsive"
