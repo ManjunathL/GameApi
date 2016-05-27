@@ -20,12 +20,9 @@ define([
 
             var that = this;
 
-            console.log(that.model.name);
-
             var blog_name = that.model.name;
             blog_name = blog_name.replace(/-/g, ' ');
 
-            console.log(blog_name);
             this.story.fetch({
                 success: function() {
                     that.fetchStoryAndRender(blog_name);
