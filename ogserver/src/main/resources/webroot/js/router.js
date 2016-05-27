@@ -10,7 +10,7 @@ define([
             '': 'dashboard',
 
             'shoe-rack-online(/)': 'shoeRackLD',
-            'crockery-unit-cabinet(/)': 'crockeryUnitLD',
+            'crockery-unit-designs(/)': 'crockeryUnitLD',
             'tv-unit-cabinet(/)': 'tvUnitLD',
             'sideboard(/)': 'sideboardLD',
             'foyer-design(/)': 'foyerLD',
