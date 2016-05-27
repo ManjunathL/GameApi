@@ -40,7 +40,7 @@ define([
             delete stories.id;
 
             _.find(stories, function(item, index) {
-                if (item.blog_heading == name) {
+                if (item.blog_url == name) {
                     full_story = item;
                 }
             });
