@@ -84,7 +84,7 @@
       "uri": "/gapi/proposal/product/list",
       "source": "db",
       "query":"proposal.product.list",
-      "params":["proposalid"],
+      "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -92,7 +92,7 @@
       "uri": "/gapi/proposal/product/detail",
       "source": "db",
       "query":"proposal.product.detail",
-      "params":["proposalid", "productid"],
+      "params":["proposalId", "id"],
       "resultfields":[],
       "default": "[]"
     },
@@ -100,7 +100,7 @@
       "uri": "/gapi/proposal/product/documents",
       "source": "db",
       "query":"product.document.select",
-      "params":["proposalid", "productid"],
+      "params":["proposalId", "productId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -108,7 +108,7 @@
       "uri": "/gapi/proposal/product/add.doc",
       "source": "db",
       "query":"product.document.add",
-      "params":["proposalid", "productid", "type", "title", "path", "userid"],
+      "params":["proposalId", "productId", "type", "title", "path", "userid"],
       "resultfields":[],
       "default": "[]"
     },
@@ -120,78 +120,37 @@
       "resultfields":[],
       "default": "[]"
     },
+
     {
-      "uri": "/gapi/lookup/color.swatch",
+      "uri": "/gapi/codelookup",
       "source": "db",
-      "query":"color.swatch",
-      "params":["shutterfinish"],
+      "query":"lookup.codes",
+      "params":["lookupType"], //category, room, maketype, carcassmaterial, finishtype, finish
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/lookup/addon.types",
+      "uri": "/gapi/colorlookup",
+      "source": "file",
+      "file":"game/data/finish_type_colors.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+    {
+      "uri": "/gapi/module/accessories",
       "source": "db",
-      "query":"addon.types",
-      "params":["producttype"],
+      "query":"module.accessories.select",
+      "params":["mgCode", "makeType"],
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/lookup/addons",
+      "uri": "/gapi/addons",
       "source": "db",
       "query":"addons.select",
       "params":["producttype", "addontype"],
       "resultfields":[],
       "default": "[]"
-    },
-    {
-      "uri": "/gapi/lookup/shutter.finish",
-      "source": "file",
-      "file":"game/data/finishes.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/gapi/lookup/finish.type",
-      "source": "file",
-      "file":"game/data/finishes.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/gapi/lookup/carcass.material",
-      "source": "file",
-      "file":"game/data/carcass_materials.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/gapi/lookup/module.carcass.material",
-      "source": "file",
-      "file":"game/data/carcass_materials.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/gapi/lookup/product.type",
-      "source": "file",
-      "file":"game/data/product_types.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/gapi/lookup/room.type",
-      "source": "file",
-      "file":"game/data/room_types.json",
-      "default": "[]",
-      "encoding": "application/json"
-    },
-    {
-      "uri": "/gapi/lookup/make.type",
-      "source": "file",
-      "file":"game/data/maketypes.json",
-      "default": "[]",
-      "encoding": "application/json"
     },
     {
       "uri": "/gapi/user/listbyrole",

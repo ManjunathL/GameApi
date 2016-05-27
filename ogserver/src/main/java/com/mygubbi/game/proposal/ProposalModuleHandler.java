@@ -26,7 +26,7 @@ public class ProposalModuleHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
-        this.post("/getmgmodules").handler(this::getMGModules);
+        this.get("/mgmodules").handler(this::getMGModules);
         this.post("/price").handler(this::getPrice);
     }
 
@@ -44,31 +44,23 @@ public class ProposalModuleHandler extends AbstractRouteHandler
 
     private void getMGModules(RoutingContext routingContext)
     {
-        JsonObject moduleJson = routingContext.getBodyAsJson();
-        ProductModule module = new ProductModule(moduleJson);
-        LOG.info("Mapped flag:" + module.getMapped() + " and from json: " + moduleJson.getString("mapped"));
-        if (module.hasNoMapping())
+        String extCode = routingContext.request().getParam("extCode");
+        String extDefCode = routingContext.request().getParam("extDefCode");
+        LOG.info("Ext code:" + extCode + " and Def code: " + extDefCode);
+        if (StringUtils.isEmpty(extCode))
         {
-            sendError(routingContext, "No modules mapped for KDMax module " + module.getKDMCode());
+            sendError(routingContext, "External module code is not set for this module " + extCode);
             return;
         }
 
-        String kdmcode = module.hasMGMapping() ? module.getKDMCode() : module.getKDMDefaultCode();
-        if (StringUtils.isEmpty(kdmcode))
-        {
-            sendError(routingContext, "KDMax module code is not set for this module " + module.getKDMCode());
-            return;
-        }
-
-        LOG.info("Getting mapped modules for :" + module.getKDMCode());
-
-        Integer id = LocalCache.getInstance().store(new QueryData("kdmax.mg.select", new JsonObject().put("kdmcode", kdmcode)));
+        String moduleCode = StringUtils.isNonEmpty(extDefCode) ? extDefCode : extCode;
+        Integer id = LocalCache.getInstance().store(new QueryData("kdmax.mg.select", new JsonObject().put("kdmcode", moduleCode)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        sendError(routingContext, "No modules mapped for KDMax module " + module.getKDMCode());
+                        sendError(routingContext, "No modules mapped for external module " + moduleCode);
                     }
                     else
                     {

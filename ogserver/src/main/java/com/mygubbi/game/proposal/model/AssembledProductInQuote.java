@@ -128,12 +128,18 @@ public class AssembledProductInQuote
 
         public void addModule(ProductModule module)
         {
+            Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
+            if (mgModule == null)
+            {
+                throw new RuntimeException("Module not found in master : " + module.getMGCode());
+            }
+
             this.moduleCount++;
             for (ModuleDimension dimension : this.moduleDimensions)
             {
-                if (dimension.depth == module.getDepth() && dimension.height == module.getHeight())
+                if (dimension.depth == mgModule.getDepth() && dimension.height == mgModule.getHeight())
                 {
-                    dimension.incrementLength(module.getWidth());
+                    dimension.incrementLength(mgModule.getWidth());
                 }
             }
         }

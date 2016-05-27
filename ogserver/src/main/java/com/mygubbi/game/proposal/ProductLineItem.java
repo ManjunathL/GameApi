@@ -1,6 +1,5 @@
 package com.mygubbi.game.proposal;
 
-import com.mygubbi.common.StringUtils;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -11,34 +10,36 @@ import java.util.List;
  */
 public class ProductLineItem extends JsonObject
 {
-    public static final String ASSEMBLED_PRODUCT = "Assembled";
-    public static final String CATALOGUE_PRODUCT = "Catalogue";
+    public static final String CUSTOMIZED_PRODUCT = "CUSTOMIZED";
+    public static final String CATALOGUE_PRODUCT = "CATALOGUE";
 
-    private static String ID = "id";
-    private static String ACTIVE = "active";
-    private static String PROPOSALID = "proposalid";
-    private static String TITLE = "title";
-    private static String TYPE = "type"; //Assembled, Catalogue
-    private static String KDMAX_FILE = "kdmax_file";
-    private static String ROOM = "room"; //Kitchen, Bedroom 1
-    private static String PRODUCT_TYPE = "product_type"; //Kitchen, Living Room
-    private static String PRODUCT_ID = "product_id";
-    private static String PRODUCT_NAME = "product_name";
-    private static String CARCASS_CODE = "carcass_code";
-    private static String FINISH_CODE = "finish_code";
-    private static String FINISH_TYPE = "finish_type";
-    private static String MAKE_TYPE = "make_type";
-    private static String DIMENSION = "dimension";
-    private static String QUANTITY = "quantity";
-    private static String RATE = "rate";
-    private static String AMOUNT = "amount";
-    private static String NOTES = "notes";
-    private static String MODULES = "modules";
-    private static String ADDONS = "addons";
-    private static String CREATED_ON = "createdon";
-    private static String CREATED_BY = "createdby";
-    private static String UPDATED_ON = "updatedon";
-    private static String UPDATED_BY = "updatedby";
+    private static final String ID = "id";
+    private static final String ACTIVE = "active";
+    private static final String PROPOSALID = "proposalId";
+    private static final String TITLE = "title";
+    private static final String SEQ = "seq";
+    private static final String TYPE = "type"; //Customized, Catalogue
+    private static final String ROOM_CODE = "roomCode"; //Kitchen, Bedroom 1
+    private static final String PRODUCT_CATEGORY = "productCategoryCode"; //Kitchen, Living Room
+    private static final String CATALOGUE_ID = "catalogueId";
+    private static final String CATALOGUE_NAME = "catalogueName";
+    private static final String MAKE_TYPE = "makeTypeCode";
+    private static final String BASE_CARCASS_CODE = "baseCarcassCode";
+    private static final String WALL_CARCASS_CODE = "wallCarcassCode";
+    private static final String FINISH_TYPE = "finishTypeCode";
+    private static final String FINISH_CODE = "finishCode";
+    private static final String DIMENSION = "dimension";
+    private static final String QUANTITY = "quantity";
+    private static final String AMOUNT = "amount";
+    private static final String QUOTE_FILE_PATH = "quoteFilePath";
+    private static final String MODULES = "modules";
+    private static final String ADDONS = "addons";
+    private static final String CREATED_ON = "createdOn";
+    private static final String CREATED_BY = "createdBy";
+    private static final String UPDATED_ON = "updatedOn";
+    private static final String UPDATED_BY = "updatedBy";
+
+    public static final String BASE_UNIT_TYPE = "Base unit";
 
     public ProductLineItem()
     {
@@ -64,12 +65,17 @@ public class ProductLineItem extends JsonObject
 
     public String getKdMaxFile()
     {
-        return this.getString(KDMAX_FILE);
+        return this.getString(QUOTE_FILE_PATH);
     }
 
-    public String getCarcassCode()
+    public String getBaseCarcassCode()
     {
-        return this.getString(CARCASS_CODE);
+        return this.getString(BASE_CARCASS_CODE);
+    }
+
+    public String getWallCarcassCode()
+    {
+        return this.getString(WALL_CARCASS_CODE);
     }
 
     public String getFinishCode()
@@ -92,11 +98,6 @@ public class ProductLineItem extends JsonObject
         return this.getInteger(QUANTITY);
     }
 
-    public double getRate()
-    {
-        return this.getDouble(RATE);
-    }
-
     public double getAmount()
     {
         return this.getDouble(AMOUNT);
@@ -109,7 +110,7 @@ public class ProductLineItem extends JsonObject
 
     public String getName()
     {
-        return this.getString(PRODUCT_NAME);
+        return this.getString(CATALOGUE_NAME);
     }
 
     public ProductLineItem addModule(ProductModule module)
@@ -119,8 +120,11 @@ public class ProductLineItem extends JsonObject
             this.put(MODULES, new JsonArray());
         }
         JsonArray mgModules = this.getJsonArray(MODULES);
-        module.setCarcassCode(this.getCarcassCode()).setFinishCode(this.getFinishCode())
-                .setFinishType(this.getFinishType()).setMakeType(this.getMakeType());
+        String carcassCode = BASE_UNIT_TYPE.equals(module.getUnit()) ? this.getBaseCarcassCode() : this.getWallCarcassCode();
+        module.setCarcassCode(carcassCode)
+                .setFinishCode(this.getFinishCode())
+                .setFinishType(this.getFinishType())
+                .setMakeType(this.getMakeType());
         mgModules.add(module);
         this.put(MODULES, mgModules);
         return this;
@@ -195,5 +199,10 @@ public class ProductLineItem extends JsonObject
         return this.getJsonArray(MODULES).getList();
     }
 
+    public Double getRate()
+    {
+        if (this.getQuantity() == 0) return 0.0;
+        return this.getAmount() / this.getQuantity();
+    }
 }
 

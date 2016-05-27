@@ -61,44 +61,45 @@ CREATE TABLE proposal_product(
   active char(1) NOT NULL DEFAULT 'A',
   proposalId INTEGER NOT NULL,
   title varchar(255) NOT NULL DEFAULT 'TITLE',
-  type char(16) NOT NULL DEFAULT 'Assembled', -- Assembled, Bought, Service, Standard
-  kdmax_file varchar(255) NULL,
-  room varchar(16) NOT NULL DEFAULT 'Kitchen',
-  product_type varchar(16) NOT NULL DEFAULT 'Kitchen',
-  product_id varchar(32) NULL, -- valid only for catalog products
-  product_name varchar(128) NULL, -- valid only for catalog products
-  carcass_code varchar(8) NOT NULL DEFAULT 'PLY',
-  finish_type varchar(16) NOT NULL,
-  finish_code varchar(8) NOT NULL,
-  make_type char(1) NOT NULL,
+  seq int NOT NULL DEFAULT 0,
+  type char(16) NOT NULL DEFAULT 'CUSTOMIZED',
+  roomCode varchar(16) NOT NULL DEFAULT 'Kitchen',
+  productCategoryCode varchar(16) NOT NULL DEFAULT 'Kitchen',
+  catalogueId varchar(32) NULL,
+  catalogueName varchar(128) NULL,
+  makeTypeCode char(1) NOT NULL,
+  baseCarcassCode varchar(8) NOT NULL DEFAULT 'PLY',
+  wallCarcassCode varchar(8) NOT NULL DEFAULT 'PLY',
+  finishTypeCode varchar(16) NOT NULL,
+  finishCode varchar(8) NOT NULL,
   dimension varchar(64) NULL,
   quantity INTEGER NOT NULL DEFAULT 1,
-  amount INTEGER NOT NULL DEFAULT 0,
-  notes TEXT NULL,
+  amount DOUBLE NOT NULL DEFAULT 0,
+  quoteFilePath varchar(255) NULL,
   modules TEXT NULL,
   addons TEXT NULL,
-  createdon timestamp NULL,
-  createdby varchar(64) NULL,
-  updatedon timestamp NULL,
-  updatedby varchar(64) NULL,
+  createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  createdBy varchar(64) NULL,
+  updatedOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  updatedBy varchar(64) NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  KEY proposal_key (proposalid)
+  KEY proposal_key (proposalId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Products';
 
 
 DROP TABLE IF EXISTS proposal_documents;
 CREATE TABLE proposal_documents(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  proposalid INTEGER NOT NULL,
-  productid INTEGER NOT NULL DEFAULT 0,
-  type char(16) NOT NULL, -- KDMax, Floor Plan
+  proposalId INTEGER NOT NULL,
+  productId INTEGER NOT NULL DEFAULT 0,
   title varchar(255) NOT NULL,
-  url TEXT NOT NULL,
-  userid varchar(128) NULL,
+  fileName varchar(255) NOT NULL,
+  uploadedBy varchar(64) NULL,
+  uploadedOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  KEY proposalid_key (proposalid)
+  KEY proposalid_key (proposalId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal documents';
 
 DROP TABLE IF EXISTS kdmax_def_map;
@@ -126,9 +127,8 @@ DROP TABLE IF EXISTS module_master;
 CREATE TABLE module_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
   code varchar(16) NOT NULL,
-  type varchar(16) NOT NULL DEFAULT 'NA',
-  title varchar(255) NOT NULL,
-  imageurl varchar(255) NOT NULL,
+  description varchar(255) NOT NULL,
+  imagePath varchar(255) NOT NULL,
   width INTEGER NOT NULL DEFAULT 0,
   depth INTEGER NOT NULL DEFAULT 0,
   height INTEGER NOT NULL DEFAULT 0,
@@ -188,11 +188,11 @@ CREATE TABLE shutter_master(
 DROP TABLE IF EXISTS code_master;
 CREATE TABLE code_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  type varchar(2) NOT NULL DEFAULT 'NA', -- CM - Carcass Material, SF- Shutter Finish, FT - Finish Types
-  groupid varchar(1) NOT NULL DEFAULT 'A', -- P - Product, M - Module, A - All
+  lookupType varchar(16) NOT NULL DEFAULT 'NA', -- CM - Carcass Material, SF- Shutter Finish, FT - Finish Types
+  levelType varchar(1) NOT NULL DEFAULT 'A', -- P - Product, M - Module, A - All
+  additionalType varchar(16) NULL,
   code varchar(16) NOT NULL,
   title varchar(64) NOT NULL,
-  finishType varchar(16) NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (code)
@@ -204,11 +204,11 @@ CREATE TABLE acc_hw_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
   type char(1) NOT NULL DEFAULT 'A', -- A - Accessory, H - Hardware
   code varchar(16) NOT NULL,
-  catalogcode varchar(16) NOT NULL,
+  catalogCode varchar(16) NOT NULL,
   title varchar(255) NOT NULL,
-  maketype char(1) NOT NULL, -- Economy, Standard, Premium
+  makeType char(1) NOT NULL, -- Economy, Standard, Premium
   make varchar(16) NOT NULL,
-  imageurl varchar(255) NOT NULL,
+  imagePath varchar(255) NOT NULL,
   uom char(1) NOT NULL DEFAULT 'N', -- N Numbers, S Set
   mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
   price DECIMAL(10,2) NOT NULL DEFAULT 0.0,

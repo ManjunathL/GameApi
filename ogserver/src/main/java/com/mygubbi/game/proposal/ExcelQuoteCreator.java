@@ -5,10 +5,7 @@ import com.mygubbi.game.proposal.model.AssembledProductInQuote;
 import com.mygubbi.game.proposal.model.QuoteData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -37,6 +34,7 @@ public class ExcelQuoteCreator
     private Sheet quoteSheet;
     private Sheet dataSheet;
     private Workbook wb;
+    private CellStyle boldStyle;
 
     public ExcelQuoteCreator(String quoteXls, QuoteData quoteData)
     {
@@ -48,15 +46,84 @@ public class ExcelQuoteCreator
     {
         this.openWorkbook();
 
+        this.boldStyle = this.createBoldStyle();
+
         this.processQuoteSheet();
+
+        this.processDataSheet();
 
         this.closeWorkbook();
     }
 
+    private CellStyle createBoldStyle()
+    {
+        CellStyle style = this.wb.createCellStyle();
+        Font font = this.wb.createFont();
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        style.setFont(font);
+        return style;
+    }
+
+    private void processDataSheet()
+    {
+        int startRow = 1;
+        int sequenceNumber = 1;
+
+        for (AssembledProductInQuote product : this.quoteData.getAssembledProducts())
+        {
+            startRow = this.fillAssembledProductInDataSheet(startRow, sequenceNumber, product);
+            startRow++;
+            sequenceNumber++;
+        }
+
+    }
+
+    private int fillAssembledProductInDataSheet(int startRow, int sequenceNumber, AssembledProductInQuote product)
+    {
+        int currentRow = startRow;
+
+        this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(sequenceNumber), product.getTitle()});
+
+        currentRow++;
+        this.createTitleRowInDataSheet(currentRow, new String[]{null, "Unit", "Carcass", "Finish"});
+
+        currentRow++;
+//        this.createTitleRowInDataSheet(currentRow, new String[]{null, "Unit", product.getCarcassMaterial(), "Finish"});
+//        currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
+
+        currentRow++;
+        this.createRow(currentRow, this.quoteSheet);
+
+        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
+        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+
+        return currentRow;
+    }
+
+    private int fillAccessoriesInDataSheet(List<AssembledProductInQuote.Accessory> accessories, int currentRow, String unitSequenceLetter)
+    {
+        if (accessories == null || accessories.isEmpty())
+        {
+            return currentRow;
+        }
+
+        this.createRowAndFillData(currentRow, unitSequenceLetter, "Accessories");
+
+        int acSequence = 0;
+        for (AssembledProductInQuote.Accessory accessory : accessories)
+        {
+            currentRow++;
+            this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, null, null);
+            acSequence++;
+            if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
+        }
+        return currentRow;
+    }
+
     private void processQuoteSheet()
     {
-        int firstRow = quoteSheet.getFirstRowNum();
-        int lastRow = quoteSheet.getLastRowNum();
+        int firstRow = this.quoteSheet.getFirstRowNum();
+        int lastRow = this.quoteSheet.getLastRowNum();
 
         int rowNum = 0;
         int cellNum = 0;
@@ -65,7 +132,7 @@ public class ExcelQuoteCreator
         {
             for (rowNum = lastRow; rowNum >= firstRow; rowNum--)
             {
-                Row row = quoteSheet.getRow(rowNum);
+                Row row = this.quoteSheet.getRow(rowNum);
                 int lastCell = row.getLastCellNum();
                 for (cellNum = row.getFirstCellNum(); cellNum < lastCell; cellNum++)
                 {
@@ -165,7 +232,7 @@ public class ExcelQuoteCreator
         currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
 
         currentRow++;
-        this.createRow(currentRow);
+        this.createRow(currentRow, this.quoteSheet);
 
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
@@ -248,7 +315,7 @@ public class ExcelQuoteCreator
         this.createRowAndFillData(currentRow, null, product.getName());
 
         currentRow++;
-        this.createRow(currentRow);
+        this.createRow(currentRow, this.quoteSheet);
 
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, QUANTITY_CELL, QUANTITY_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
@@ -287,7 +354,7 @@ public class ExcelQuoteCreator
 
     private void createRowAndFillData(int rowNum, String index, String title, Double quantity, Double amount, Double total)
     {
-        Row dataRow = this.createRow(rowNum);
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
         this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index);
         this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
         this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
@@ -295,10 +362,10 @@ public class ExcelQuoteCreator
         this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
     }
 
-    private Row createRow(int currentRow)
+    private Row createRow(int currentRow, Sheet sheet)
     {
-        this.quoteSheet.shiftRows(currentRow, this.quoteSheet.getLastRowNum(), 1);
-        return this.quoteSheet.createRow(currentRow);
+        sheet.shiftRows(currentRow, sheet.getLastRowNum(), 1);
+        return sheet.createRow(currentRow);
     }
 
     private void createCellWithData(Row dataRow, int cellNum, int cellType, Object data)
@@ -316,6 +383,35 @@ public class ExcelQuoteCreator
         }
     }
 
+
+    private void createDataRowInDataSheet(int rowNum, String [] data)
+    {
+        this.createRowInDataSheet(rowNum, data, false);
+    }
+
+    private void createTitleRowInDataSheet(int rowNum, String [] data)
+    {
+        this.createRowInDataSheet(rowNum, data, true);
+    }
+
+    private void createRowInDataSheet(int rowNum, String [] data, boolean isTitle)
+    {
+        Row dataRow = this.dataSheet.createRow(rowNum);
+        int lastCell = data.length;
+        for (int cellNum = 0; cellNum < lastCell; cellNum++)
+        {
+            String value = data[cellNum];
+            if (StringUtils.isNonEmpty(value))
+            {
+                Cell cell = dataRow.createCell(cellNum, Cell.CELL_TYPE_STRING);
+                cell.setCellValue(value);
+                if (isTitle)
+                {
+                    cell.setCellStyle(this.boldStyle);
+                }
+            }
+        }
+    }
 
     private void replaceCellValue(Cell cell, String cellValue)
     {
