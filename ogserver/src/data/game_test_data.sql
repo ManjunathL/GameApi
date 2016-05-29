@@ -133,8 +133,8 @@ insert into code_master (lookupType, code, title) values ('room', 'KBR', 'Kids B
 insert into code_master (lookupType, code, title) values ('room', 'GBR', 'Guest Bedroom');
 insert into code_master (lookupType, code, title) values ('room', 'LIV', 'Living Room');
 
-insert into code_master (lookupType, code, title) values ('maketype', 'E', 'Economy');
 insert into code_master (lookupType, code, title) values ('maketype', 'S', 'Standard');
+insert into code_master (lookupType, code, title) values ('maketype', 'E', 'Economy');
 insert into code_master (lookupType, code, title) values ('maketype', 'P', 'Premium');
 
 insert into code_master (lookupType, code, title) values ('carcassmaterial', 'PLY', 'PLY');

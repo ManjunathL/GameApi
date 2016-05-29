@@ -223,7 +223,6 @@ public class ModuleDataService extends AbstractVerticle
                         {
                             Module module = new Module(record);
                             this.moduleMap.put(module.getCode(), module);
-                            LOG.info("Module is cached:" + module.getCode());
                         }
                         markResult("Module master is loaded.", true);
                     }

@@ -5,7 +5,6 @@ import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,9 @@ public class AssembledProductInQuote
 {
     private ProductLineItem product;
     private List<Accessory> accessories;
+    private List<ModuleAccessory> moduleAccessories;
     private List<Unit> units;
+    private List<ModuleAccessory> moduleHardware;
 
     public AssembledProductInQuote(ProductLineItem product)
     {
@@ -39,6 +40,16 @@ public class AssembledProductInQuote
         return this.accessories;
     }
 
+    public List<ModuleAccessory> getModuleAccessories()
+    {
+        return this.moduleAccessories;
+    }
+
+    public ProductLineItem getProduct()
+    {
+        return this.product;
+    }
+
     public List<Unit> getUnits()
     {
         return this.units;
@@ -48,6 +59,8 @@ public class AssembledProductInQuote
     {
         this.units = new ArrayList<>();
         this.accessories = new ArrayList<>();
+        this.moduleAccessories = new ArrayList<>();
+        this.moduleHardware = new ArrayList<>();
         for (ProductModule module : this.product.getModules())
         {
             this.addModuleToUnit(module);
@@ -63,12 +76,31 @@ public class AssembledProductInQuote
             {
                 AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(component.getComponentCode(), module.getMakeType());
                 if (accessory == null) continue;
-                this.addToAccessories(accessory, component.getQuantity());
+                this.addToProductAccessories(accessory, component.getQuantity());
+                this.addToModuleAccessories(accessory, component.getQuantity(), module.getUnit(), module.getSequence());
+            }
+            else if (ModuleComponent.HARDWARE_TYPE.equals(component.getType()))
+            {
+                AccHwComponent hardware = ModuleDataService.getInstance().getHardware(component.getComponentCode(), module.getMakeType());
+                if (hardware == null) continue;
+                this.addToModuleHardware(hardware, component.getQuantity(), module.getUnit(), module.getSequence());
             }
         }
     }
 
-    private void addToAccessories(AccHwComponent accessoryComponent, int quantity)
+    private void addToModuleAccessories(AccHwComponent component, int quantity, String unit, int seq)
+    {
+        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake());
+        this.moduleAccessories.add(accessory);
+    }
+
+    private void addToModuleHardware(AccHwComponent component, int quantity, String unit, int seq)
+    {
+        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake());
+        this.moduleHardware.add(accessory);
+    }
+
+    private void addToProductAccessories(AccHwComponent accessoryComponent, int quantity)
     {
         Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle());
         accessory.incrementQuantity(quantity);
@@ -85,7 +117,7 @@ public class AssembledProductInQuote
             }
         }
 
-        Accessory accessory = new Accessory(this.units.size() + 1, code, title);
+        Accessory accessory = new Accessory(code, title);
         this.accessories.add(accessory);
         return accessory;
     }
@@ -112,6 +144,11 @@ public class AssembledProductInQuote
         return unit;
     }
 
+    public List<ModuleAccessory> getModuleHardware()
+    {
+        return moduleHardware;
+    }
+
     public static class Unit
     {
         public int sequence;
@@ -135,13 +172,27 @@ public class AssembledProductInQuote
             }
 
             this.moduleCount++;
+            ModuleDimension matchingDimension = this.getModuleDimension(mgModule);
+            if (matchingDimension != null)
+            {
+                matchingDimension.incrementLength(mgModule.getWidth());
+            }
+            else
+            {
+                this.moduleDimensions.add(new ModuleDimension(mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight()));
+            }
+        }
+
+        private ModuleDimension getModuleDimension(Module mgModule)
+        {
             for (ModuleDimension dimension : this.moduleDimensions)
             {
                 if (dimension.depth == mgModule.getDepth() && dimension.height == mgModule.getHeight())
                 {
-                    dimension.incrementLength(mgModule.getWidth());
+                    return dimension;
                 }
             }
+            return null;
         }
 
         public String getDimensions()
@@ -158,11 +209,11 @@ public class AssembledProductInQuote
 
     public static class ModuleDimension
     {
-        public short length;
-        public short depth;
-        public short height;
+        public int length;
+        public int depth;
+        public int height;
 
-        public ModuleDimension(short length, short depth, short height)
+        public ModuleDimension(int length, int depth, int height)
         {
             this.length = length;
             this.depth = depth;
@@ -177,14 +228,12 @@ public class AssembledProductInQuote
 
     public static class Accessory
     {
-        public int sequence;
         public String code;
         public String title;
         public double quantity;
 
-        public Accessory(int sequence, String code, String title)
+        public Accessory(String code, String title)
         {
-            this.sequence = sequence;
             this.code = code;
             this.title = title;
         }
@@ -192,6 +241,26 @@ public class AssembledProductInQuote
         public void incrementQuantity(int qty)
         {
             this.quantity += qty;
+        }
+    }
+
+    public static class ModuleAccessory
+    {
+        public String unit;
+        public int seq;
+        public String code;
+        public String title;
+        public double quantity;
+        public String make;
+
+        public ModuleAccessory(String unit, int seq, String code, String title, double quantity, String make)
+        {
+            this.unit = unit;
+            this.seq = seq;
+            this.code = code;
+            this.title = title;
+            this.quantity = quantity;
+            this.make = make;
         }
     }
 }

@@ -24,6 +24,7 @@ public class ModulePricingService extends AbstractVerticle
 {
     private final static Logger LOG = LogManager.getLogger(ModulePricingService.class);
 
+    public static final double SQMM2SQFT = 0.0000107639;
     public static final String CALCULATE_PRICE = "calculate.module.price";
 
     @Override
@@ -52,12 +53,14 @@ public class ModulePricingService extends AbstractVerticle
 
     private void calculatePrice(ProductModule productModule, Message message)
     {
+        Module mgModule = ModuleDataService.getInstance().getModule(productModule.getMGCode());
         Collection<ModuleComponent> components = ModuleDataService.getInstance().getModuleComponents(productModule.getMGCode());
+
         JsonArray errors = new JsonArray();
 
-        if (components == null || components.isEmpty())
+        if (components == null || components.isEmpty() || mgModule == null)
         {
-            errors.add("Module components not setup for MG code: -" + productModule.getMGCode() + "-");
+            errors.add("Module components or module not setup for MG code: -" + productModule.getMGCode() + "-");
             this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
             return;
         }
@@ -135,9 +138,40 @@ public class ModulePricingService extends AbstractVerticle
                     break;
             }
         }
-        double totalCost = (carcassCost + shutterCost + accessoryCost + hardwareCost) * loadingFactorCard.getRate();
+
+        double largestAreaOfModule = this.getLargestAreaOfModule(mgModule);
+        labourCost = largestAreaOfModule * labourRateCard.getRate();
+        double totalCost = (carcassCost + shutterCost + labourCost ) * loadingFactorCard.getRate() + accessoryCost + hardwareCost;
         totalCost = round(totalCost, 2);
         this.sendResponse(message, errors, shutterCost, carcassCost, accessoryCost, hardwareCost, labourCost, totalCost, productModule);
+    }
+
+    private double getLargestAreaOfModule(Module mgModule)
+    {
+        double h = mgModule.getHeight();
+        double w = mgModule.getWidth();
+        double d = mgModule.getDepth();
+
+        double t1 = 0;
+        double t2 = 0;
+
+        if (h > w)
+        {
+            t1 = h;
+            t2 = w;
+        }
+        else
+        {
+            t1 = w;
+            t2 = h;
+        }
+
+        if (d > t2)
+        {
+            t2 = d;
+        }
+
+        return t1 * t2 * SQMM2SQFT;
     }
 
     private void sendResponse(Message message, JsonArray errors, double shutterCost, double carcassCost,

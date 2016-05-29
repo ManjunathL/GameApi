@@ -6,6 +6,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.model.QuoteRequest;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
@@ -32,6 +33,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/create").handler(this::createProposal);
         this.post("/update").handler(this::updateProposal);
         this.get("/downloadquote").handler(this::downloadQuote);
+        this.post("/downloadquote").handler(this::downloadQuoteForSelectProducts);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
 
@@ -104,23 +106,35 @@ public class ProposalHandler extends AbstractRouteHandler
             sendError(routingContext, "proposalId not found in request.");
             return;
         }
-        Integer proposalId = null;
+        Integer proposalId;
         try
         {
             proposalId = Integer.parseInt(proposalIdText);
         }
         catch (NumberFormatException e)
         {
-            sendError(routingContext, "proposalId is not a valid proposal id:" + proposalIdText);
+            sendError(routingContext, "proposalId is not valid:" + proposalIdText);
             return;
         }
 
-        Integer id = LocalCache.getInstance().store(proposalId);
+        this.createQuote(routingContext, new QuoteRequest(proposalId));
+    }
+
+    private void downloadQuoteForSelectProducts(RoutingContext routingContext)
+    {
+        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+        this.createQuote(routingContext, new QuoteRequest(quoteRequestJson));
+
+    }
+
+    private void createQuote(RoutingContext routingContext, QuoteRequest quoteRequest)
+    {
+        Integer id = LocalCache.getInstance().store(quoteRequest);
         VertxInstance.get().eventBus().send(QuotationCreatorService.CREATE_QUOTE, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());
                 });
-
     }
+
 }

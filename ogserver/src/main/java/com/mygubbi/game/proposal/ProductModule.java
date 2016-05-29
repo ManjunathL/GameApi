@@ -247,5 +247,4 @@ public class ProductModule extends JsonObject
                 '}';
 
     }
-
 }

@@ -27,6 +27,7 @@ public class QuotationCreatorService extends AbstractVerticle
     private final static Logger LOG = LogManager.getLogger(QuotationCreatorService.class);
 
     public static final String CREATE_QUOTE = "create.quote";
+
     private String quoteTemplate;
 
     @Override
@@ -47,36 +48,46 @@ public class QuotationCreatorService extends AbstractVerticle
     {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(CREATE_QUOTE, (Message<Integer> message) -> {
-            Integer proposalId = (Integer) LocalCache.getInstance().remove(message.body());
-            this.getProposalHeader(proposalId, message);
+            QuoteRequest quoteRequest = (QuoteRequest) LocalCache.getInstance().remove(message.body());
+            this.getProposalHeader(quoteRequest, message);
         }).completionHandler(res -> {
-            LOG.info("QuotationCreatorService service started." + res.succeeded());
+            LOG.info("Full quote creator service started." + res.succeeded());
         });
     }
 
-    private void getProposalHeader(Integer proposalId, Message message)
+    private void getProposalHeader(QuoteRequest quoteRequest, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id", proposalId)));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id", quoteRequest.getProposalId())));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
                     {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal not found for id:" + proposalId)));
-                        LOG.error("Proposal not found for id:" + proposalId);
+                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal not found for id:" + quoteRequest.getProposalId())));
+                        LOG.error("Proposal not found for id:" + quoteRequest.getProposalId());
                     }
                     else
                     {
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
-                        this.getProposalProducts(proposalHeader, message);
+                        this.getProposalProducts(proposalHeader, quoteRequest, message);
                     }
                 });
 
     }
 
-    private void getProposalProducts(ProposalHeader proposalHeader, Message message)
+    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.list.detail", new JsonObject().put("proposalId", proposalHeader.getId())));
+        QueryData queryData = null;
+        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
+        if (quoteRequest.hasProductIds())
+        {
+            queryData = new QueryData("proposal.product.selected.detail", paramsJson.put("[productIds", quoteRequest.getProductIdsAsText()));
+        }
+        else
+        {
+            queryData = new QueryData("proposal.product.all.detail", paramsJson);
+        }
+        Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
