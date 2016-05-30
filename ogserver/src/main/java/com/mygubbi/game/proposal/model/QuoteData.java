@@ -5,6 +5,8 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,11 +17,16 @@ import java.util.List;
  */
 public class QuoteData
 {
+    private final static Logger LOG = LogManager.getLogger(QuoteData.class);
+
     private ProposalHeader proposalHeader;
     private List<ProductLineItem> products;
 
     private List<AssembledProductInQuote> assembledProducts;
     private List<ProductLineItem> catalogueProducts;
+
+    private double productsCost;
+    private double addonsCost;
 
     public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products)
     {
@@ -34,11 +41,22 @@ public class QuoteData
         this.catalogueProducts = new ArrayList<>();
         for (ProductLineItem product : this.products)
         {
-            if (product.getType().equals(ProductLineItem.CUSTOMIZED_PRODUCT))
-                this.assembledProducts.add(new AssembledProductInQuote(product));
-            else
+            if (product.getType().equals(ProductLineItem.CATALOGUE_PRODUCT))
+            {
                 this.catalogueProducts.add(product);
+            }
+            else
+            {
+                this.assembledProducts.add(new AssembledProductInQuote(product));
+            }
+            this.productsCost += product.getAmount();
+
+            for (ProductAddon addon : product.getAddons())
+            {
+                this.addonsCost += addon.getAmount();
+            }
         }
+        LOG.info("Products cost :" + this.productsCost + ". Addons cost:" + this.addonsCost);
     }
 
     public List<AssembledProductInQuote> getAssembledProducts()
@@ -100,11 +118,22 @@ public class QuoteData
                 return this.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ",");
             case "salesdesign":
                 return this.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/");
+            case "productscost":
+                return this.productsCost;
+            case "addonscost":
+                return this.addonsCost;
+            case "totalamount":
+                return this.getTotalCost();
             case "totalamountinwords":
-                return new CurrencyUtil().convert(this.proposalHeader.getAmount().toString());
+                return new CurrencyUtil().convert(String.valueOf(this.getTotalCost()));
             default:
                 return null;
         }
+    }
+
+    private double getTotalCost()
+    {
+        return this.productsCost + this.addonsCost;
     }
 
     private String concatValuesFromKeys(String[] keys, String delimiter)

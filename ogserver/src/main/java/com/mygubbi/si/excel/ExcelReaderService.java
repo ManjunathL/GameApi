@@ -77,6 +77,7 @@ public class ExcelReaderService
             this.rowHandler.handle(data);
         }
 
+        this.rowHandler.done();
         try
         {
             wb.close();

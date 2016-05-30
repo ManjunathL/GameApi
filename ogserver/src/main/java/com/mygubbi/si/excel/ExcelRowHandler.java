@@ -6,4 +6,6 @@ package com.mygubbi.si.excel;
 public interface ExcelRowHandler
 {
     public void handle(Object[] data);
+
+    public void done();
 }

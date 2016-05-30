@@ -72,7 +72,7 @@ public class ExcelQuoteCreator
         for (AssembledProductInQuote product : this.quoteData.getAssembledProducts())
         {
             startRow = this.fillAssembledProductInDataSheet(startRow, sequenceNumber, product);
-            startRow++;
+            startRow += 2;
             sequenceNumber++;
         }
 
@@ -85,37 +85,53 @@ public class ExcelQuoteCreator
         this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(sequenceNumber), product.getTitle()});
 
         currentRow++;
-        this.createTitleRowInDataSheet(currentRow, new String[]{null, "Unit", "Carcass", "Finish"});
+        this.createTitleRowInDataSheet(currentRow, new String[]{null, "Unit", "Carcass", "Finish", "Finish Type"});
 
         currentRow++;
-//        this.createTitleRowInDataSheet(currentRow, new String[]{null, "Unit", product.getCarcassMaterial(), "Finish"});
-//        currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
+        this.createDataRowInDataSheet(currentRow, new String[]{null, "Base unit", product.getProduct().getBaseCarcassCode(),
+                product.getProduct().getFinishCode(), product.getProduct().getFinishType()});
 
         currentRow++;
-        this.createRow(currentRow, this.quoteSheet);
+        this.createDataRowInDataSheet(currentRow, new String[]{null, "Wall unit", product.getProduct().getWallCarcassCode(),
+                product.getProduct().getFinishCode(), product.getProduct().getFinishType()});
 
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+        currentRow += 2;
+        currentRow = this.fillAccessoriesInDataSheet(product.getModuleAccessories(), currentRow);
+
+        currentRow += 2;
+        currentRow = this.fillHardwareInDataSheet(product.getModuleHardware(), currentRow);
+
+        currentRow++;
 
         return currentRow;
     }
 
-    private int fillAccessoriesInDataSheet(List<AssembledProductInQuote.Accessory> accessories, int currentRow, String unitSequenceLetter)
+    private int fillAccessoriesInDataSheet(List<AssembledProductInQuote.ModuleAccessory> accessories, int currentRow)
     {
-        if (accessories == null || accessories.isEmpty())
+        return this.fillAccHwInDataSheet(accessories, currentRow, "Accessories", "No accessories.");
+    }
+
+    private int fillHardwareInDataSheet(List<AssembledProductInQuote.ModuleAccessory> hardwares, int currentRow)
+    {
+        return this.fillAccHwInDataSheet(hardwares, currentRow, "Hardware", "No hardware.");
+    }
+
+    private int fillAccHwInDataSheet(List<AssembledProductInQuote.ModuleAccessory> components, int currentRow, String type, String defaultMessage)
+    {
+        this.createTitleRowInDataSheet(currentRow, new String[]{type, "Unit", "Module#", "Title", "Code", "Quantity", "Make"});
+
+        if (components == null || components.isEmpty())
         {
+            currentRow++;
+            this.createDataRowInDataSheet(currentRow, new String[]{defaultMessage});
             return currentRow;
         }
 
-        this.createRowAndFillData(currentRow, unitSequenceLetter, "Accessories");
-
-        int acSequence = 0;
-        for (AssembledProductInQuote.Accessory accessory : accessories)
+        for (AssembledProductInQuote.ModuleAccessory component : components)
         {
             currentRow++;
-            this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, null, null);
-            acSequence++;
-            if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
+            this.createDataRowInDataSheet(currentRow, new String[]{null, component.unit, String.valueOf(component.seq),
+                    component.title, component.code, String.valueOf(component.quantity), component.make});
         }
         return currentRow;
     }
@@ -417,6 +433,7 @@ public class ExcelQuoteCreator
     {
         String fieldName = cellValue.substring(1);
         Object value = this.quoteData.getValue(fieldName);
+
         if (value == null) value = "";
         if (value instanceof String)
         {
