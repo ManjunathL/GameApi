@@ -124,7 +124,7 @@
       "id": "product.insert",
       "type": "insert",
       "table": "product",
-      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, popularity, relevance, styleSortSeq, productShortJson, productJson) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, productShortJson, productJson, popularity, relevance, styleSortSeq ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       "params": [
         "id",
         "productId",
@@ -144,19 +144,19 @@
       "id": "product.update",
       "type": "update",
       "table": "product",
-      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, popularity = ?, relevance = ?, styleSortSeq = ?, productShortJson = ?, productJson = ? where productId = ?",
+      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ? popularity = ?, relevance = ?, styleSortSeq = ? where productId = ?",
       "params": [
         "name",
+        "productId",
         "description",
         "category",
         "subcategory",
         "styleId",
-        "popularity",
-        "relevance",
-        "styleSortSeq",
         "productShortJson",
         "productJson",
-        "productId"
+        "popularity",
+        "relevance",
+        "styleSortSeq"
       ]
     },
     {
