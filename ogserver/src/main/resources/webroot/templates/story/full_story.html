@@ -60,7 +60,9 @@
 
             <%
             var blog_url = story.blog_heading;
+            blog_url = blog_url.replace(/-/g,"_");
             blog_url = blog_url.replace(/\s/g,"-");
+
             %>
 
             <div class="row margin25-0-0">

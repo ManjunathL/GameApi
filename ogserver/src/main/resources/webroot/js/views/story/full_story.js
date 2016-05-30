@@ -21,7 +21,9 @@ define([
             var that = this;
 
             var blog_name = that.model.name;
-            blog_name = blog_name.replace(/-/g, ' ');
+
+           blog_name = blog_name.replace(/-/g, ' ');
+           blog_name = blog_name.replace(/_/, '-');
 
             this.story.fetch({
                 success: function() {
