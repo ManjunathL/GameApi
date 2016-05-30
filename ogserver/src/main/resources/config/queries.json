@@ -133,11 +133,11 @@
         "category",
         "subcategory",
         "styleId",
+        "productShortJson",
+        "productJson",
         "popularity",
         "relevance",
-        "styleSortSeq",
-        "productShortJson",
-        "productJson"
+        "styleSortSeq"
       ]
     },
     {
