@@ -335,7 +335,7 @@ define([
                 });
             }
 
-            if (this.custom_product.get('basePrice') !== 0) {
+            if (this.custom_product.get('basePrice') !== '0') {
                 var basePricetxt = this.custom_product.get('basePrice');
             } else {
                 var basePricetxt = "Consult for Price";
@@ -392,7 +392,7 @@ define([
             }
 
 
-            if (this.custom_product.get('basePrice') !== 0) {
+            if (this.custom_product.get('basePrice') !== '0') {
                 var basePricetxt = this.custom_product.get('basePrice');
             } else {
                 var basePricetxt = "Consult for Price";
@@ -467,7 +467,7 @@ define([
                     silent: true
                 });
 
-                if (this.custom_product.get('basePrice') !== 0) {
+                if (this.custom_product.get('basePrice') !== '0') {
                     var basePricetxt = this.custom_product.get('basePrice');
                 } else {
                     var basePricetxt = "Consult for Price";
@@ -541,7 +541,7 @@ define([
                     }
                 }
             });
-            if (this.custom_product.get('basePrice') !== 0) {
+            if (this.custom_product.get('basePrice') !== '0') {
                 var basePricetxt = this.custom_product.get('basePrice');
             } else {
                 var basePricetxt = "Consult for Price";
