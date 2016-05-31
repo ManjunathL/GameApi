@@ -57,7 +57,7 @@
                             </a>
                         </span>
                         <span class="cost-col5">
-                            <% if (product.defaultPrice !== 0) { %>
+                            <% if (product.defaultPrice !== '0') { %>
                                 <i class="fa fa-inr"></i>
                                 <%= product.defaultPrice %>/-
                             <% } else { %>
@@ -144,7 +144,7 @@
                             </a>
                         </h4>
                         <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
-                            <% if (product.defaultPrice !== 0) { %>
+                            <% if (product.defaultPrice !== '0') { %>
                             <i class="fa fa-inr"></i>
                             <%= product.defaultPrice %>/-
                             <% } else { %>

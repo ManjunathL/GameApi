@@ -144,16 +144,16 @@
       "id": "product.update",
       "type": "update",
       "table": "product",
-      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ? popularity = ?, relevance = ?, styleSortSeq = ? where productId = ?",
+      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ?, popularity = ?, relevance = ?, styleSortSeq = ? where productId = ?",
       "params": [
         "name",
-        "productId",
         "description",
         "category",
         "subcategory",
         "styleId",
         "productShortJson",
         "productJson",
+        "productId",
         "popularity",
         "relevance",
         "styleSortSeq"
