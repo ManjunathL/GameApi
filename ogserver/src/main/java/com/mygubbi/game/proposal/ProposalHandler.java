@@ -6,7 +6,8 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.model.QuoteRequest;
+import com.mygubbi.game.proposal.quote.QuotationCreatorService;
+import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
@@ -32,9 +33,9 @@ public class ProposalHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.post("/create").handler(this::createProposal);
         this.post("/update").handler(this::updateProposal);
-        this.get("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadquote").handler(this::downloadQuoteForSelectProducts);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
+        LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
 
     private void createProposal(RoutingContext routingContext)
@@ -96,28 +97,6 @@ public class ProposalHandler extends AbstractRouteHandler
                         sendJsonResponse(routingContext, proposalData.toString());
                     }
                 });
-    }
-
-    private void downloadQuote(RoutingContext routingContext)
-    {
-        String proposalIdText = routingContext.request().getParam("proposalId");
-        if (StringUtils.isEmpty(proposalIdText))
-        {
-            sendError(routingContext, "proposalId not found in request.");
-            return;
-        }
-        Integer proposalId;
-        try
-        {
-            proposalId = Integer.parseInt(proposalIdText);
-        }
-        catch (NumberFormatException e)
-        {
-            sendError(routingContext, "proposalId is not valid:" + proposalIdText);
-            return;
-        }
-
-        this.createQuote(routingContext, new QuoteRequest(proposalId));
     }
 
     private void downloadQuoteForSelectProducts(RoutingContext routingContext)

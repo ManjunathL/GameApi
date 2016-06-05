@@ -1,12 +1,11 @@
 package com.mygubbi.db;
 
-import java.util.List;
-
 import com.mygubbi.common.StringUtils;
-import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.UpdateResult;
+
+import java.util.List;
 
 public class QueryData
 {
@@ -97,6 +96,11 @@ public class QueryData
 			jsonRows.add(new JsonObject(record.getString(jsonField)));
 		}
 		return jsonRows;
+	}
+
+	public JsonObject getJsonDataRow(String jsonField)
+	{
+		return new JsonObject(this.rows.get(0).getString(jsonField));
 	}
 
 	public QueryData setResult(List<JsonObject> rows)

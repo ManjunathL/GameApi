@@ -64,16 +64,17 @@ public class ModulePricingService extends AbstractVerticle
             this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
             return;
         }
+        String finishCostCode = ModuleDataService.getInstance().getFinishCostCode(productModule.getFinishCode());
 
         RateCard carcassRateCard = RateCardService.getInstance().getRateCard(productModule.getCarcassCode(), RateCard.CARCASS_TYPE);
-        RateCard shutterRateCard = RateCardService.getInstance().getRateCard(productModule.getFinishCode(), RateCard.SHUTTER_TYPE);
+        RateCard shutterRateCard = RateCardService.getInstance().getRateCard(finishCostCode, RateCard.SHUTTER_TYPE);
         RateCard loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE);
         RateCard labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE);
         //TODO: labourcost to be included
 
         if (carcassRateCard == null || shutterRateCard == null || loadingFactorCard == null || labourRateCard == null)
         {
-            errors.add("Carcass, Shutter, Labour or Loading factor rate cards not setup." + productModule.getCarcassCode() + ":" + productModule.getFinishCode());
+            errors.add("Carcass, Shutter, Labour or Loading factor rate cards not setup." + productModule.getCarcassCode() + " : " + productModule.getFinishCode() + " : " + finishCostCode);
             this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
             return;
         }
@@ -188,7 +189,9 @@ public class ModulePricingService extends AbstractVerticle
             resultJson = new JsonObject().put("carcassCost", carcassCost).put("shutterCost", shutterCost)
                     .put("accessoryCost", accessoryCost).put("hardwareCost", hardwareCost).put("labourCost", labourCost)
                     .put("totalCost", totalCost);
-            LOG.info("Sending price calculation result :" + resultJson.encodePrettily());
+            JsonObject pm = new JsonObject().put("mg", productModule.getMGCode()).put("carcass", productModule.getCarcassCode())
+                    .put("finish", productModule.getFinishCode()).put("make", productModule.getMakeType());
+            LOG.info("Sending price calculation result :" + pm.encodePrettily() + " :: " + resultJson.encodePrettily());
         }
         message.reply(LocalCache.getInstance().store(resultJson));
 

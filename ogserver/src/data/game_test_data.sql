@@ -147,8 +147,10 @@ insert into code_master (lookupType, code, title) values ('finishtype', 'PAINT',
 insert into code_master (lookupType, code, title) values ('finishtype', 'ACRYLIC', 'Acrylic');
 insert into code_master (lookupType, code, title) values ('finishtype', 'VENEER', 'Veneer');
 insert into code_master (lookupType, code, title) values ('finishtype', 'SOLIDWOOD', 'Solid Wood');
+insert into code_master (lookupType, code, title) values ('finishtype', 'PRELAM', 'Prelam');
 
 insert into code_master (lookupType, code, title) values ('addontype', 'ACCESSORY', 'Accessory');
+insert into code_master (lookupType, code, title) values ('addontype', 'APPLIANCE', 'Appliance');
 insert into code_master (lookupType, code, title) values ('addontype', 'COUNTERTOP', 'Counter Top');
 insert into code_master (lookupType, code, title) values ('addontype', 'SERVICE', 'Service');
 

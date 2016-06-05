@@ -1,9 +1,7 @@
 package com.mygubbi.game.proposal;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
@@ -27,7 +25,7 @@ public class ModuleDataService extends AbstractVerticle
 	private Map<String, QueryDef> queryMap;
 	
 	private static ModuleDataService INSTANCE;
-	private AtomicInteger cachingCounter = new AtomicInteger(8);
+	private AtomicInteger cachingCounter = new AtomicInteger(9);
 
     private Multimap<String, ModuleComponent> moduleComponentsMap;
     private Map<String, Module> moduleMap = Collections.EMPTY_MAP;
@@ -37,6 +35,7 @@ public class ModuleDataService extends AbstractVerticle
     private Set<String> kdmaxModulesWithMGMapping = Collections.EMPTY_SET;
     private Map<String, AccHwComponent> accessoriesMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> hardwareMap = Collections.EMPTY_MAP;
+    private Map<String, String> finishCodeMap = Collections.EMPTY_MAP;
 
 	public static ModuleDataService getInstance()
 	{
@@ -63,6 +62,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheKdmaxDefaultMapping();
         this.cacheAccessories();
         this.cacheHardware();
+        this.cacheFinishCostCodes();
 	}
 
     private void cacheAccessories()
@@ -229,6 +229,28 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
+    private void cacheFinishCostCodes()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("finish.cost.map", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Finish master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.finishCodeMap = new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            this.finishCodeMap.put(record.getString("finishCode"), record.getString("costCode"));
+                        }
+                        markResult("Finish master is loaded.", true);
+                    }
+                });
+    }
+
     private synchronized void markResult(String message, boolean success)
     {
         LOG.info(message);
@@ -258,6 +280,11 @@ public class ModuleDataService extends AbstractVerticle
     public Module getModule(String code)
     {
         return this.moduleMap.get(code);
+    }
+
+    public String getFinishCostCode(String finishCode)
+    {
+        return this.finishCodeMap.get(finishCode);
     }
 
     public CarcassPanel getCarcassPanel(String code)

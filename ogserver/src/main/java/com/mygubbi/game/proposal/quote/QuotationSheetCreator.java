@@ -1,23 +1,24 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
-import com.mygubbi.game.proposal.model.AssembledProductInQuote;
-import com.mygubbi.game.proposal.model.QuoteData;
+import com.mygubbi.game.proposal.ProductAddon;
+import com.mygubbi.game.proposal.ProductLineItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.*;
 import java.util.List;
 
 /**
  * Created by Sunil on 22-05-2016.
  */
-public class ExcelQuoteCreator
+public class QuotationSheetCreator
 {
-    private final static Logger LOG = LogManager.getLogger(ExcelQuoteCreator.class);
+    private final static Logger LOG = LogManager.getLogger(QuotationSheetCreator.class);
 
     private static final int TITLE_CELL = 1;
     private static final int INDEX_CELL = 0;
@@ -28,112 +29,19 @@ public class ExcelQuoteCreator
     private static final String[] ALPHABET_SEQUENCE = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
     private static final String[] ROMAN_SEQUENCE = new String[]{"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv"};
 
-    private String quoteXls;
     private QuoteData quoteData;
-
     private Sheet quoteSheet;
-    private Sheet dataSheet;
-    private Workbook wb;
     private CellStyle boldStyle;
 
-    public ExcelQuoteCreator(String quoteXls, QuoteData quoteData)
+    public QuotationSheetCreator(Sheet quoteSheet, QuoteData quoteData)
     {
-        this.quoteXls = quoteXls;
+        this.quoteSheet = quoteSheet;
         this.quoteData = quoteData;
     }
 
-    public void prepareQuote()
+    public void prepare()
     {
-        this.openWorkbook();
-
-        this.boldStyle = this.createBoldStyle();
-
         this.processQuoteSheet();
-
-        this.processDataSheet();
-
-        this.closeWorkbook();
-    }
-
-    private CellStyle createBoldStyle()
-    {
-        CellStyle style = this.wb.createCellStyle();
-        Font font = this.wb.createFont();
-        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
-        style.setFont(font);
-        return style;
-    }
-
-    private void processDataSheet()
-    {
-        int startRow = 1;
-        int sequenceNumber = 1;
-
-        for (AssembledProductInQuote product : this.quoteData.getAssembledProducts())
-        {
-            startRow = this.fillAssembledProductInDataSheet(startRow, sequenceNumber, product);
-            startRow += 2;
-            sequenceNumber++;
-        }
-
-    }
-
-    private int fillAssembledProductInDataSheet(int startRow, int sequenceNumber, AssembledProductInQuote product)
-    {
-        int currentRow = startRow;
-
-        this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(sequenceNumber), product.getTitle()});
-
-        currentRow++;
-        this.createTitleRowInDataSheet(currentRow, new String[]{null, "Unit", "Carcass", "Finish", "Finish Type"});
-
-        currentRow++;
-        this.createDataRowInDataSheet(currentRow, new String[]{null, "Base unit", product.getProduct().getBaseCarcassCode(),
-                product.getProduct().getFinishCode(), product.getProduct().getFinishType()});
-
-        currentRow++;
-        this.createDataRowInDataSheet(currentRow, new String[]{null, "Wall unit", product.getProduct().getWallCarcassCode(),
-                product.getProduct().getFinishCode(), product.getProduct().getFinishType()});
-
-        currentRow += 2;
-        currentRow = this.fillAccessoriesInDataSheet(product.getModuleAccessories(), currentRow);
-
-        currentRow += 2;
-        currentRow = this.fillHardwareInDataSheet(product.getModuleHardware(), currentRow);
-
-        currentRow++;
-
-        return currentRow;
-    }
-
-    private int fillAccessoriesInDataSheet(List<AssembledProductInQuote.ModuleAccessory> accessories, int currentRow)
-    {
-        return this.fillAccHwInDataSheet(accessories, currentRow, "Accessories", "No accessories.");
-    }
-
-    private int fillHardwareInDataSheet(List<AssembledProductInQuote.ModuleAccessory> hardwares, int currentRow)
-    {
-        return this.fillAccHwInDataSheet(hardwares, currentRow, "Hardware", "No hardware.");
-    }
-
-    private int fillAccHwInDataSheet(List<AssembledProductInQuote.ModuleAccessory> components, int currentRow, String type, String defaultMessage)
-    {
-        this.createTitleRowInDataSheet(currentRow, new String[]{type, "Unit", "Module#", "Title", "Code", "Quantity", "Make"});
-
-        if (components == null || components.isEmpty())
-        {
-            currentRow++;
-            this.createDataRowInDataSheet(currentRow, new String[]{defaultMessage});
-            return currentRow;
-        }
-
-        for (AssembledProductInQuote.ModuleAccessory component : components)
-        {
-            currentRow++;
-            this.createDataRowInDataSheet(currentRow, new String[]{null, component.unit, String.valueOf(component.seq),
-                    component.title, component.code, String.valueOf(component.quantity), component.make});
-        }
-        return currentRow;
     }
 
     private void processQuoteSheet()
@@ -168,7 +76,6 @@ public class ExcelQuoteCreator
             String message = "Error processing cell (" + rowNum + "," + cellNum + ") in sheet " + quoteSheet.getSheetName()
                     + ". Cell value: " + cellValue + " - Error:" + e.getMessage();
             LOG.error(message, e);
-            this.closeWorkbook();
             throw new RuntimeException(message, e);
         }
     }
@@ -400,35 +307,6 @@ public class ExcelQuoteCreator
     }
 
 
-    private void createDataRowInDataSheet(int rowNum, String [] data)
-    {
-        this.createRowInDataSheet(rowNum, data, false);
-    }
-
-    private void createTitleRowInDataSheet(int rowNum, String [] data)
-    {
-        this.createRowInDataSheet(rowNum, data, true);
-    }
-
-    private void createRowInDataSheet(int rowNum, String [] data, boolean isTitle)
-    {
-        Row dataRow = this.dataSheet.createRow(rowNum);
-        int lastCell = data.length;
-        for (int cellNum = 0; cellNum < lastCell; cellNum++)
-        {
-            String value = data[cellNum];
-            if (StringUtils.isNonEmpty(value))
-            {
-                Cell cell = dataRow.createCell(cellNum, Cell.CELL_TYPE_STRING);
-                cell.setCellValue(value);
-                if (isTitle)
-                {
-                    cell.setCellStyle(this.boldStyle);
-                }
-            }
-        }
-    }
-
     private void replaceCellValue(Cell cell, String cellValue)
     {
         String fieldName = cellValue.substring(1);
@@ -446,43 +324,6 @@ public class ExcelQuoteCreator
         else
         {
             cell.setCellValue(value.toString());
-        }
-    }
-
-    private Workbook getWorkbook(String quoteXls)
-    {
-        Workbook wb = null;
-        try
-        {
-//            wb = new XSSFWorkbook(new BufferedInputStream(getClass().getResourceAsStream(quoteXls)));
-            wb = new XSSFWorkbook(new BufferedInputStream(new FileInputStream(quoteXls)));
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(quoteXls + " workbook is not available", e);
-        }
-        return wb;
-    }
-
-    private void openWorkbook()
-    {
-        this.wb = this.getWorkbook(this.quoteXls);
-        this.quoteSheet = wb.getSheet("Quote");
-        if (quoteSheet == null) throw new RuntimeException("Quote sheet not found.");
-        this.dataSheet = wb.getSheet("Data");
-        if (dataSheet == null) throw new RuntimeException("Data sheet not found.");
-    }
-
-    private void closeWorkbook()
-    {
-        try
-        {
-            this.wb.write(new BufferedOutputStream(new FileOutputStream(this.quoteXls)));
-            this.wb.close();
-        }
-        catch (IOException e)
-        {
-            LOG.error("Error in wiring out the quote xls file at " + this.quoteXls);
         }
     }
 

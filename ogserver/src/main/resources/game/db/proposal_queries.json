@@ -35,7 +35,7 @@
       "id": "proposal.create",
       "type": "insert",
       "table": "proposal",
-      "query": "insert into proposal(status, title, version, createdBy) values ('Active', ?, '1.0', ?)",
+      "query": "insert into proposal(status, title, version, createdBy) values ('draft', ?, '1.0', ?)",
       "params": ["title", "createdBy"]
     },
 
@@ -59,21 +59,35 @@
       "id": "proposal.submit",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set status = 'Submitted' where id = ?",
+      "query": "update proposal set status = 'active' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.publish",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set status = 'published' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.revise",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set status = 'draft' where id = ?",
       "params": ["id"]
     },
     {
       "id": "proposal.cancel",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set status = 'Cancelled' where id = ?",
+      "query": "update proposal set status = 'cancelled' where id = ?",
       "params": ["id"]
     },
     {
       "id": "proposal.delete",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set status = 'Deleted' where id = ?",
+      "query": "update proposal set active = 'N' where id = ?",
       "params": ["id"]
     },
 
@@ -89,16 +103,16 @@
       "id": "proposal.comment.select",
       "type": "select",
       "table": "proposal_comments",
-      "query": "select * from proposal_comments where proposalid = ?",
-      "params": ["proposalid"]
+      "query": "select * from proposal_comments where proposalId = ?",
+      "params": ["proposalId"]
     },
 
     {
       "id": "proposal.document.add",
       "type": "insert",
       "table": "proposal_documents",
-      "query": "insert into proposal_documents (proposalid, type, title, url, userid) values (?, ?, ?, ?, ?)",
-      "params": ["proposalid", "type", "title", "url", "userid"]
+      "query": "insert into proposal_documents (proposalId, title, fileName, uploadedBy) values (?, ?, ?, ?)",
+      "params": ["proposalId", "title", "fileName", "uploadedBy"]
     },
 
     {
@@ -115,24 +129,24 @@
       "id": "proposal.document.select",
       "type": "select",
       "table": "proposal_documents",
-      "query": "select * from proposal_documents where proposalid = ?",
-      "params": ["proposalid"]
+      "query": "select * from proposal_documents where proposalId = ?",
+      "params": ["proposalId"]
     },
 
     {
       "id": "product.document.add",
       "type": "insert",
       "table": "proposal_documents",
-      "query": "insert into proposal_documents (proposalid, productid, type, title, url, userid) values (?, ?, ?, ?, ?, ?)",
-      "params": ["proposalid", "productid", "type", "title", "url", "userid"]
+      "query": "insert into proposal_documents (proposalId, productId, title, fileName, uploadedBy) values (?, ?, ?, ?, ?)",
+      "params":["proposalId", "productId", "title", "fileName", "uploadedBy"]
     },
 
     {
       "id": "product.document.select",
       "type": "select",
       "table": "proposal_documents",
-      "query": "select * from proposal_documents where proposalid = ? and productid = ?",
-      "params": ["proposalid", "productid"]
+      "query": "select * from proposal_documents where productId = ?",
+      "params": ["productId"]
     },
 
     {
@@ -156,7 +170,7 @@
       "id": "kdmax.mg.select",
       "type": "select",
       "table": "kdmax_mg_map",
-      "query": "select code, description, imagePath, width, depth, height from module_master where code in (select mgcode from kdmax_mg_map where kdmcode = ?)",
+      "query": "select code, description, imagePath, carcassCode, width, depth, height from module_master where code in (select mgcode from kdmax_mg_map where kdmcode = ?)",
       "params": ["kdmcode"]
     },
 
@@ -200,7 +214,7 @@
       "id": "proposal.product.list",
       "type": "select",
       "table": "proposal_product",
-      "query": "select id, title, type, roomCode, productCategoryCode, quantity, catalogueName, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, makeTypeCode, amount from proposal_product where proposalId = ? and active = 'A'",
+      "query": "select id, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, createdOn, createdBy, updatedOn, updatedBy from proposal_product where proposalId = ? and active = 'A'",
       "params": ["proposalId"]
     },
 
@@ -226,8 +240,8 @@
       "id": "proposal.product.detail",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product where proposalId = ? and id = ? and active = 'A'",
-      "params": ["proposalId", "id"],
+      "query": "select * from proposal_product where id = ?",
+      "params": ["id"],
       "jsonfields":["modules", "addons"]
     },
 
@@ -313,6 +327,22 @@
       "query": "select code, title, additionalType from code_master where lookupType = ?",
       "params": ["lookupType"]
     },
+    {
+      "id": "finish.codes",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select finishMaterial as additionalType, finishCode as code, title from finish_master",
+      "params": []
+    },
+
+    {
+      "id": "finish.cost.map",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select costCode, finishCode from finish_master",
+      "params": []
+    },
+
     {
       "id": "addons.select",
       "type": "select",

@@ -1,11 +1,12 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.model.ProposalHeader;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -81,7 +82,7 @@ public class QuotationCreatorService extends AbstractVerticle
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
         if (quoteRequest.hasProductIds())
         {
-            queryData = new QueryData("proposal.product.selected.detail", paramsJson.put("[productIds", quoteRequest.getProductIdsAsText()));
+            queryData = new QueryData("proposal.product.selected.detail", paramsJson.put("productIds", quoteRequest.getProductIdsAsText()));
         }
         else
         {

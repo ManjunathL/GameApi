@@ -91,6 +91,7 @@ dependencies {
     compile 'com.google.guava:guava:19.0'
 
     compile 'org.apache.poi:poi:3.12'
+    compile group: 'org.jooq', name: 'jool', version: '0.9.11'
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
 

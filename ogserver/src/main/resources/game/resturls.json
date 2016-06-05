@@ -4,7 +4,7 @@
       "uri": "/gapi/proposal/listbystatus",
       "source": "db",
       "query":"proposal.list.status",
-      "params":["status"],
+      "params":["status", "userid"],
       "resultfields":[],
       "default": "[]"
     },
@@ -12,7 +12,7 @@
       "uri": "/gapi/proposal/list",
       "source": "db",
       "query":"proposal.list.all",
-      "params":[],
+      "params":["userid"],
       "resultfields":[],
       "default": "[]"
     },
@@ -30,13 +30,14 @@
       "query":"proposal.header",
       "params":["id"],
       "resultfields":[],
-      "default": "[]"
+      "default": "{}",
+      "singleRecord": true
     },
     {
       "uri": "/gapi/proposal/documents",
       "source": "db",
       "query":"proposal.document.select",
-      "params":["proposalid"],
+      "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -44,6 +45,22 @@
       "uri": "/gapi/proposal/submit",
       "source": "db",
       "query":"proposal.submit",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/publish",
+      "source": "db",
+      "query":"proposal.publish",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/revise",
+      "source": "db",
+      "query":"proposal.revise",
       "params":["id"],
       "resultfields":[],
       "default": "[]"
@@ -68,7 +85,7 @@
       "uri": "/gapi/proposal/add.doc",
       "source": "db",
       "query":"proposal.document.add",
-      "params":["proposalid", "type", "title", "path", "userid"],
+      "params":["proposalId", "title", "fileName", "uploadedBy"],
       "resultfields":[],
       "default": "[]"
     },
@@ -81,7 +98,7 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/product/list",
+      "uri": "/gapi/product/list",
       "source": "db",
       "query":"proposal.product.list",
       "params":["proposalId"],
@@ -89,31 +106,40 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/product/detail",
+      "uri": "/gapi/product/detail",
       "source": "db",
       "query":"proposal.product.detail",
-      "params":["proposalId", "id"],
+      "params":["id"],
+      "resultfields":[],
+      "default": "{}",
+      "singleRecord": true
+    },
+    {
+      "uri": "/gapi/product/delete",
+      "source": "db",
+      "query":"proposal.product.delete",
+      "params":["id"],
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/product/documents",
+      "uri": "/gapi/product/documents",
       "source": "db",
       "query":"product.document.select",
-      "params":["proposalId", "productId"],
+      "params":["productId"],
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/product/add.doc",
+      "uri": "/gapi/product/add.doc",
       "source": "db",
       "query":"product.document.add",
-      "params":["proposalId", "productId", "type", "title", "path", "userid"],
+      "params":["proposalId", "productId", "title", "fileName", "uploadedBy"],
       "resultfields":[],
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/product/remove.doc",
+      "uri": "/gapi/product/remove.doc",
       "source": "db",
       "query":"proposal.document.remove",
       "params":["id"],
@@ -129,6 +155,16 @@
       "resultfields":[],
       "default": "[]"
     },
+
+    {
+      "uri": "/gapi/finishlookup",
+      "source": "db",
+      "query":"finish.codes",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+
     {
       "uri": "/gapi/colorlookup",
       "source": "file",

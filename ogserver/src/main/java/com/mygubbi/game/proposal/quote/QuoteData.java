@@ -1,9 +1,10 @@
-package com.mygubbi.game.proposal.model;
+package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.CurrencyUtil;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -76,32 +77,32 @@ public class QuoteData
 
     public List<ProductAddon> getAccessories()
     {
-        return getAddonsOfType(ProductAddon.ACCESSORY_TYPE);
+        return getAddonsByCategory(ProductAddon.ACCESSORY_TYPE);
     }
 
     public List<ProductAddon> getAppliances()
     {
-        return getAddonsOfType(ProductAddon.APPLIANCE_TYPE);
+        return getAddonsByCategory(ProductAddon.APPLIANCE_TYPE);
     }
 
     public List<ProductAddon> getCounterTops()
     {
-        return getAddonsOfType(ProductAddon.COUNTERTOP_TYPE);
+        return getAddonsByCategory(ProductAddon.COUNTERTOP_TYPE);
     }
 
     public List<ProductAddon> getServices()
     {
-        return getAddonsOfType(ProductAddon.SERVICE_TYPE);
+        return getAddonsByCategory(ProductAddon.SERVICE_TYPE);
     }
 
-    private List<ProductAddon> getAddonsOfType(String type)
+    private List<ProductAddon> getAddonsByCategory(String categoryCode)
     {
         List<ProductAddon> addons = new ArrayList<>();
         for (ProductLineItem product : this.products)
         {
             for (ProductAddon addon : product.getAddons())
             {
-                if (type.equals(addon.getType())) addons.add(addon);
+                if (categoryCode.equals(addon.getCategoryCode())) addons.add(addon);
             }
         }
         return addons;

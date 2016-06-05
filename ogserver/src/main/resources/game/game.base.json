@@ -19,8 +19,8 @@
 
   "robots.txt": "User-agent: *\nDisallow: /",
 
-  "proposal_docs_folder" : "//192.168.1.18/Users/Public/game_files",
-  "quote_template" : "//192.168.1.18/Users/Public/game_files/quote-template.xlsx",
+  "proposal_docs_folder" : "c:/Users/Public/game_files",
+  "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
 
   "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json"]
 }
