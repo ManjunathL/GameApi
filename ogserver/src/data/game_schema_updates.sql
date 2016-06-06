@@ -129,6 +129,7 @@ CREATE TABLE module_master(
   code varchar(16) NOT NULL,
   description varchar(255) NOT NULL,
   imagePath varchar(255) NOT NULL,
+  carcassCode char(8) NULL,
   width INTEGER NOT NULL DEFAULT 0,
   depth INTEGER NOT NULL DEFAULT 0,
   height INTEGER NOT NULL DEFAULT 0,
@@ -196,6 +197,21 @@ CREATE TABLE code_master(
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Code Master';
 
+DROP TABLE IF EXISTS finish_master;
+CREATE TABLE finish_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  costCode char(5) NOT NULL DEFAULT 'NA',
+  finishType varchar(64) NOT NULL DEFAULT 'NA',
+  finishMaterial varchar(16) NOT NULL,
+  design char(1) NOT NULL DEFAULT 'N',
+  shutterMaterial char(5) NOT NULL DEFAULT 'N',
+  finishCode char(5) NOT NULL DEFAULT 'NA',
+  title varchar(64) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (finishCode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Finish Master';
+
 
 DROP TABLE IF EXISTS acc_hw_master;
 CREATE TABLE acc_hw_master(
@@ -218,8 +234,8 @@ CREATE TABLE acc_hw_master(
 DROP TABLE IF EXISTS addon_master;
 CREATE TABLE addon_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  producttype char(1) NOT NULL DEFAULT 'A', -- K - Kitchen, W- Wardrobe
-  addontype char(1) NOT NULL DEFAULT 'A', -- A Accessory, Service etc
+  category varchar(32) NOT NULL DEFAULT 'A',
+  addontype char(1) NOT NULL DEFAULT 'A',
   code varchar(16) NOT NULL,
   catalogcode varchar(16) NOT NULL,
   title varchar(255) NOT NULL,

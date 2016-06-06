@@ -33,7 +33,7 @@
       },
 
       {
-        "name": "com.mygubbi.game.proposal.QuotationCreatorService"
+        "name": "com.mygubbi.game.proposal.quote.QuotationCreatorService"
       },
 
       {

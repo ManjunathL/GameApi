@@ -34,7 +34,7 @@ public class ConfiguredRestApiHandler
             else if (SOURCE_DB.equals(restApi.getString("source")))
             {
                 router.mountSubRouter(restApi.getString("uri"), new ResponseFromDBHandler(restApi.getString("query"),
-                        restApi.getJsonArray("params"), restApi.getJsonArray("resultfields"), restApi.getString("default")));
+                        restApi.getJsonArray("params"), restApi.getJsonArray("resultfields"), restApi.getString("default"), restApi.getBoolean("singleRecord", false)));
             }
             else
             {

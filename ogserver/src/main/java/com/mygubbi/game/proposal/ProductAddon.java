@@ -1,6 +1,5 @@
 package com.mygubbi.game.proposal;
 
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -8,16 +7,19 @@ import io.vertx.core.json.JsonObject;
  */
 public class ProductAddon extends JsonObject
 {
-    public static final String ACCESSORY_TYPE = "A";
-    public static final String APPLIANCE_TYPE = "P";
-    public static final String COUNTERTOP_TYPE = "T";
-    public static final String SERVICE_TYPE = "S";
+    public static final String ACCESSORY_TYPE = "Accessories";
+    public static final String APPLIANCE_TYPE = "Appliances";
+    public static final String COUNTERTOP_TYPE = "Countertop";
+    public static final String SERVICE_TYPE = "Services";
+    public static final String LOOSE_FURNITURE_TYPE = "Loose Furniture";
 
-    private static String SEQ = "seq";
-    private static String TYPE = "type";
-    private static String TITLE = "title";
-    private static String DESCRIPTION = "desc";
-    private static String IMAGE = "image";
+    private static final String SEQ = "seq";
+    private static final String CODE = "code";
+    private static final String ADDON_CATEGORY_CODE = "addonCategoryCode";
+    private static final String PRODUCT_TYPE_CODE = "productTypeCode";
+    private static final String BRAND_CODE = "brandCode";
+    private static final String CATALOGUE_CODE = "catalogueCode";
+    private static final String TITLE = "title";
     private static String QUANTITY = "quantity";
     private static String AMOUNT = "amount";
     private static String RATE = "rate";
@@ -47,34 +49,34 @@ public class ProductAddon extends JsonObject
         return this.getDouble(AMOUNT);
     }
 
-    public String getType()
+    public String getCategoryCode()
     {
-        return this.getString(TYPE);
+        return this.getString(ADDON_CATEGORY_CODE);
     }
 
     public boolean isAccessory()
     {
-        return ACCESSORY_TYPE.equals(this.getString(TYPE));
+        return ACCESSORY_TYPE.equals(this.getCategoryCode());
     }
 
     public boolean isAppliance()
     {
-        return APPLIANCE_TYPE.equals(this.getString(TYPE));
+        return APPLIANCE_TYPE.equals(this.getCategoryCode());
     }
 
     public boolean isCounterTop()
     {
-        return COUNTERTOP_TYPE.equals(this.getString(TYPE));
+        return COUNTERTOP_TYPE.equals(this.getCategoryCode());
     }
 
     public boolean isService()
     {
-        return SERVICE_TYPE.equals(this.getString(TYPE));
+        return SERVICE_TYPE.equals(this.getCategoryCode());
     }
 
     public String getTitle()
     {
-        return this.getString(TITLE);
+        return this.getString(CATALOGUE_CODE);
     }
 }
 

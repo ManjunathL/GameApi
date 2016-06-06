@@ -22,15 +22,17 @@ public class ResponseFromDBHandler extends AbstractRouteHandler
     private final static Logger LOG = LogManager.getLogger(ResponseFromDBHandler.class);
 
     private String query;
+    private boolean singleRecord;
     private String[] params = null;
     private String[] resultFields = null;
     private String defaultContent;
 
-    public ResponseFromDBHandler(String query, JsonArray params, JsonArray resultFields, String defaultContent)
+    public ResponseFromDBHandler(String query, JsonArray params, JsonArray resultFields, String defaultContent, boolean singleRecord)
     {
         super(VertxInstance.get());
         this.route().handler(BodyHandler.create());
         this.query = query;
+        this.singleRecord = singleRecord;
         this.defaultContent = defaultContent;
         this.params = this.getStringArray(params);
         this.resultFields = this.getStringArray(resultFields);
@@ -99,13 +101,27 @@ public class ResponseFromDBHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                        if (this.resultFields == null)
+                        if (this.singleRecord)
                         {
-                            sendJsonResponse(context, queryData.rows.toString());
+                            if (this.resultFields == null)
+                            {
+                                sendJsonResponse(context, queryData.rows.get(0).toString());
+                            }
+                            else
+                            {
+                                sendJsonResponse(context, queryData.getJsonDataRow(this.resultFields[0]).toString());
+                            }
                         }
                         else
                         {
-                            sendJsonResponse(context, queryData.getJsonDataRows(this.resultFields[0]).toString());
+                            if (this.resultFields == null)
+                            {
+                                sendJsonResponse(context, queryData.rows.toString());
+                            }
+                            else
+                            {
+                                sendJsonResponse(context, queryData.getJsonDataRows(this.resultFields[0]).toString());
+                            }
                         }
                     }
                 });

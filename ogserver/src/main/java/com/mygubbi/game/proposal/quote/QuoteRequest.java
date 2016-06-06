@@ -1,4 +1,4 @@
-package com.mygubbi.game.proposal.model;
+package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import io.vertx.core.json.JsonObject;

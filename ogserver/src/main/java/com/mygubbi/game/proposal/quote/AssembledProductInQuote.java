@@ -1,9 +1,12 @@
-package com.mygubbi.game.proposal.model;
+package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.model.AccHwComponent;
+import com.mygubbi.game.proposal.model.Module;
+import com.mygubbi.game.proposal.model.ModuleComponent;
 
 import java.util.ArrayList;
 import java.util.List;
