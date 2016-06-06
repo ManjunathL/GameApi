@@ -153,10 +153,10 @@
         "styleId",
         "productShortJson",
         "productJson",
-        "productId",
         "popularity",
         "relevance",
-        "styleSortSeq"
+        "styleSortSeq",
+        "productId"
       ]
     },
     {
