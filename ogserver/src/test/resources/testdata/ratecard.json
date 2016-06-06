@@ -1,0 +1,184 @@
+[
+  {
+    "type": "F",
+    "code": "L",
+    "rate": 2.15
+  },
+  {
+    "type": "F",
+    "code": "B",
+    "rate": 105
+  },
+  {
+    "type": "C",
+    "code": "MDF",
+    "rates":[
+      {
+        "thickness": 8,
+        "rate": 69
+      },
+      {
+        "thickness": 18,
+        "rate": 129
+      }
+    ]
+  },
+  {
+    "type": "C",
+    "code": "PLPB",
+    "rates":[
+      {
+        "thickness": 8,
+        "rate": 67
+      },
+      {
+        "thickness": 18,
+        "rate": 113
+      }
+    ]
+  },
+  {
+    "type": "C",
+    "code": "PLY",
+    "rates":[
+      {
+        "thickness": 8,
+        "rate": 99
+      },
+      {
+        "thickness": 18,
+        "rate": 165
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M01",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 520
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M02",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 490
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M03",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 240
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M04",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 275
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M05",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 184
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M06",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 129
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M07",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 200
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M08",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 450
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M09",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 711
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M10",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 200
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M11",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 220
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M12",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 165
+      }
+    ]
+  },
+  {
+    "type": "S",
+    "code": "M13",
+    "rates":[
+      {
+        "thickness": 18,
+        "rate": 360
+      }
+    ]
+  }
+]
