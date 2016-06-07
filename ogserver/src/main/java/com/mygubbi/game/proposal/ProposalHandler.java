@@ -33,7 +33,8 @@ public class ProposalHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.post("/create").handler(this::createProposal);
         this.post("/update").handler(this::updateProposal);
-        this.post("/downloadquote").handler(this::downloadQuoteForSelectProducts);
+        this.post("/downloadquote").handler(this::downloadQuote);
+        this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
@@ -99,11 +100,15 @@ public class ProposalHandler extends AbstractRouteHandler
                 });
     }
 
-    private void downloadQuoteForSelectProducts(RoutingContext routingContext)
+    private void downloadQuote(RoutingContext routingContext)
     {
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         this.createQuote(routingContext, new QuoteRequest(quoteRequestJson));
+    }
 
+    private void downloadJobCard(RoutingContext routingContext)
+    {
+        //TODO: Create job card
     }
 
     private void createQuote(RoutingContext routingContext, QuoteRequest quoteRequest)
