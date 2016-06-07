@@ -347,7 +347,7 @@
       "id": "addons.categories",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct addonCategoryCode from addon_master",
+      "query": "select distinct categoryCode from addon_master",
       "params": []
     },
 
@@ -355,39 +355,23 @@
       "id": "addons.product.types",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct productTypeCode from addon_master where addonCategoryCode = ?",
-      "params": ["addonCategoryCode"]
+      "query": "select distinct productTypeCode from addon_master where categoryCode = ?",
+      "params": ["categoryCode"]
+    },
+    {
+      "id": "addons.brands",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct brandCode from addon_master where ProductTypeCode = ?",
+      "params": ["productTypeCode"]
     },
 
     {
-      "id": "addons.select",
+      "id": "addons.products",
       "type": "select",
       "table": "addon_master",
-      "query": "select code, catalogcode, title, make, imageurl, uom, rate from addon_master where producttype = ? and addontype = ?",
-      "params": ["producttype", "addontype"]
+      "query": "select catalogueCode,title,code,rate,imagePath,uom from addon_master where productTypeCode = ? and brandCode = ?",
+      "params": ["productTypeCode", "brandCode"]
     }
-
-
   ]
 }
-
-/*
-{
-"uri": "/gapi/addon/brands",
-"source": "db",
-"query":"addons.brands",
-"params":["addonProductTypeCode"],
-"resultfields":[],
-"default": "[]"
-},
-
-{
-"uri": "/gapi/addon/products",
-"source": "db",
-"query":"addons.products",
-"params":["addonProductTypeCode", "brandCode"],
-"resultfields":[],
-"default": "[]"
-}
-
-*/
