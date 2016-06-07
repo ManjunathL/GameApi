@@ -344,6 +344,22 @@
     },
 
     {
+      "id": "addons.categories",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct addonCategoryCode from addon_master",
+      "params": []
+    },
+
+    {
+      "id": "addons.product.types",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct productTypeCode from addon_master where addonCategoryCode = ?",
+      "params": ["addonCategoryCode"]
+    },
+
+    {
       "id": "addons.select",
       "type": "select",
       "table": "addon_master",
@@ -351,5 +367,27 @@
       "params": ["producttype", "addontype"]
     }
 
+
   ]
 }
+
+/*
+{
+"uri": "/gapi/addon/brands",
+"source": "db",
+"query":"addons.brands",
+"params":["addonProductTypeCode"],
+"resultfields":[],
+"default": "[]"
+},
+
+{
+"uri": "/gapi/addon/products",
+"source": "db",
+"query":"addons.products",
+"params":["addonProductTypeCode", "brandCode"],
+"resultfields":[],
+"default": "[]"
+}
+
+*/
