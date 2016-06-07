@@ -52,7 +52,10 @@ define([
             'media(/)': 'mediapage',
             'shobha-lp(/)': 'shobhalandingpage',
             'pune-lp(/)': 'punelandingpage',
+            '*something': 'errorPage',
             'holiday-lp(/)': 'holidaylandingpage'
+
+
 
         },
         dashboard: function() {
@@ -406,6 +409,12 @@ define([
                 VM.create(VM.PUNELANDINGPAGE, PuneLandingPage).render();
             });
         });
+        router.on('route:errorPage', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/errorPage/errorPage.js'], function(ErrorPage) {
+                        VM.create(VM.ERRORPAGE, ErrorPage).render();
+                    });
+                });
         router.on('route:holidaylandingpage', function(actions) {
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/landing_pages/holidaylanding_page.js'], function(HolidayLandingPage) {
@@ -437,6 +446,11 @@ define([
             pushState: true,
             root: "/"
         });
+     if(Backbone.history.fragment === "*something"){
+     Backbone.history.navigate("pune-lp");
+     ContactManager.ContactsApp.List.Controller.listContacts();
+     }
+
     };
     return {
         initialize: initialize
