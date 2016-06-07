@@ -235,7 +235,7 @@ DROP TABLE IF EXISTS addon_master;
 CREATE TABLE addon_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
   code varchar(16) NOT NULL,
-  addonCategoryCode varchar(32) NOT NULL DEFAULT 'NA',
+  categoryCode varchar(32) NOT NULL DEFAULT 'NA',
   roomCode varchar(32) NOT NULL DEFAULT 'All',
   productTypeCode char(32) NOT NULL DEFAULT 'All',
   brandCode varchar(32) NULL,
