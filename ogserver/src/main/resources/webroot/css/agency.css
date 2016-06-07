@@ -5510,3 +5510,27 @@ a.tab-ico {
 }
 
 /* Holiday LP end */
+
+/*Page Not Found Error Page*/
+   .center {text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;}
+    .ratio4-3 {
+    width: 100%;
+    background-image: url(https://res.cloudinary.com/mygubbi/image/upload/v1465279635/error/error.png);
+    background-size: cover;
+
+    padding: 0; /* reset */
+    padding-bottom: calc(50% * 2/6);
+    }
+    .btn-info{
+     background-image: linear-gradient(to bottom, #FF9800 0, #FF5722 100%);
+    }
+    .btn-info:hover{
+    background-image: linear-gradient(to bottom, #FF5722 0, #FF5722 100%);
+    }
+    .btn-info:hover,.btn-info:focus{
+        background-color: #FF5722;
+        }
+.btn-info:hover,.btn-info:active:focus{
+        background-color: #FF5722;
+        }
+    /*Page Not Found Error Page End*/
