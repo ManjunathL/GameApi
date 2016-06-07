@@ -234,16 +234,19 @@ CREATE TABLE acc_hw_master(
 DROP TABLE IF EXISTS addon_master;
 CREATE TABLE addon_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  category varchar(32) NOT NULL DEFAULT 'A',
-  addontype char(1) NOT NULL DEFAULT 'A',
   code varchar(16) NOT NULL,
-  catalogcode varchar(16) NOT NULL,
+  addonCategoryCode varchar(32) NOT NULL DEFAULT 'NA',
+  roomCode varchar(32) NOT NULL DEFAULT 'All',
+  productTypeCode char(32) NOT NULL DEFAULT 'All',
+  brandCode varchar(32) NULL,
+  catalogueCode varchar(32) NOT NULL,
   title varchar(255) NOT NULL,
-  make varchar(16) NOT NULL,
-  imageurl varchar(255) NOT NULL,
-  uom char(1) NOT NULL DEFAULT 'N', -- N Numbers, S Set
   rate DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  uom char(5) NOT NULL DEFAULT 'N', -- N Numbers, S Set
+  imagePath varchar(255) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Addon Master';
+
