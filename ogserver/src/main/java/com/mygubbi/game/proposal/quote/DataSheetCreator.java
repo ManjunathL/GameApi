@@ -67,8 +67,10 @@ public class DataSheetCreator
         currentRow += 2;
         currentRow = this.fillAccessoriesInDataSheet(product.getModuleAccessories(), currentRow);
 
+/*
         currentRow += 2;
         currentRow = this.fillHardwareInDataSheet(product.getModuleHardware(), currentRow);
+*/
 
         currentRow++;
 
