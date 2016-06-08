@@ -5346,10 +5346,11 @@ a.tab-ico {
 }
 
 .pune_banner_txt {
-    position: absolute;
-    top: 18%;
-    left: 20%;
-    max-width: 95%;
+   position: absolute;
+   top: 20%;
+   right: 0%;
+   margin: auto;
+   color: #fff;
 }
 
 .pune-subheading-txt{
@@ -5361,9 +5362,8 @@ a.tab-ico {
 .pune-form-box {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: rgba(84,102,112,0.9);
-    width: 30%;
     border-radius: 5px;
-    margin-left:10px;
+    width: 28%;
 }
 
 
@@ -5411,14 +5411,15 @@ a.tab-ico {
     background-color: #ffffff !important;
     border-radius: 40px !important;
 }
-
-@media (max-width:1180px){
+@media (max-width:768px){
     .pune_banner_txt {
         position: relative;
-        top: 18%;
-        left: 0%;
+        top: inherit;
+        left: inherit;
         max-width: 100%;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: none;
+        padding: 0px;
+        border-radius: 0px;
     }
     .pune-form-box {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -5427,7 +5428,66 @@ a.tab-ico {
         top: 15%;
         right: 0%;
         width: 100%;
-        border-radius: 5px;
+        border-radius: 0px;
+        margin-left:0px;
+    }
+
+    .pune-sliding-text{
+        position: relative;
+        top: 0%;
+        margin: auto;
+        color: #fff;
+        background-color: rgba(169, 167, 177, 1);
+        padding-top:10px;
+    }
+}
+@media (max-width:1180px){
+    .pune_banner_txt {
+        position: absolute;
+        top: 12%;
+        right: 0%;
+        max-width: 100%;
+        box-shadow: none;
+        padding: 0px;
+        border-radius: 0px;
+    }
+    .pune-form-box {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #55666F;
+        position: relative;
+        top: 15%;
+        right: 0%;
+        border-radius: 0px;
+        margin-left:0px;
+    }
+
+    .pune-sliding-text{
+        position: relative;
+        top: 0%;
+        margin: auto;
+        color: #fff;
+        background-color: rgba(169, 167, 177, 1);
+        padding-top:10px;
+    }
+}
+@media (max-width:992px){
+    .pune_banner_txt {
+        position: relative;
+        top: inherit;
+        left: inherit;
+        max-width: 100%;
+        box-shadow: none;
+        padding: 0px;
+        border-radius: 0px;
+    }
+    .pune-form-box {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #55666F;
+        position: relative;
+        top: 15%;
+        right: 0%;
+        width: 100%;
+        border-radius: 0px;
         margin-left:0px;
     }
 
