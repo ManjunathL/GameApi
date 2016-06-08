@@ -13,12 +13,13 @@ public class AccHwComponent
     private String make;
     private String imageUrl;
     private double price;
+    private String uom;
 
     public static AccHwComponent fromJson(JsonObject json)
     {
         return new AccHwComponent().setCode(json.getString("code")).setTitle(json.getString("title"))
                 .setMakeType(json.getString("makeType")).setMake(json.getString("make"))
-                .setImageUrl(json.getString("imagePath")).setPrice(json.getDouble("price"));
+                .setImageUrl(json.getString("imagePath")).setPrice(json.getDouble("price")).setUom(json.getString("uom"));
     }
 
     public String getMake()
@@ -85,6 +86,17 @@ public class AccHwComponent
     public AccHwComponent setPrice(double price)
     {
         this.price = price;
+        return this;
+    }
+
+    public String getUom()
+    {
+        return uom;
+    }
+
+    public AccHwComponent setUom(String uom)
+    {
+        this.uom = uom;
         return this;
     }
 

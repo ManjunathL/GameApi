@@ -21,6 +21,7 @@
 
   "proposal_docs_folder" : "c:/Users/Public/game_files",
   "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
+  "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
 
   "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json"]
 }

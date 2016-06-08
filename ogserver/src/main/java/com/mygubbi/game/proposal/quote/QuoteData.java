@@ -8,10 +8,15 @@ import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jooq.lambda.Seq;
+import org.jooq.lambda.tuple.Tuple;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.jooq.lambda.tuple.Tuple.tuple;
 
 /**
  * Created by Sunil on 22-05-2016.
@@ -154,4 +159,44 @@ public class QuoteData
     }
 
 
+    public List<AssembledProductInQuote.ModuleAccessory> getAllModuleHardware()
+    {
+        List<AssembledProductInQuote.ModuleAccessory> hwList = new ArrayList<>();
+        for (AssembledProductInQuote product : this.assembledProducts)
+        {
+            hwList.addAll(product.getModuleHardware());
+        }
+
+        return this.aggregateComponentQuantity(hwList);
+    }
+
+    public List<AssembledProductInQuote.ModuleAccessory> getAllModuleAcessories()
+    {
+        List<AssembledProductInQuote.ModuleAccessory> accList = new ArrayList<>();
+        for (AssembledProductInQuote product : this.assembledProducts)
+        {
+            accList.addAll(product.getModuleAccessories());
+        }
+
+        return this.aggregateComponentQuantity(accList);
+    }
+
+    private List<AssembledProductInQuote.ModuleAccessory> aggregateComponentQuantity(List<AssembledProductInQuote.ModuleAccessory> hwList)
+    {
+        List<AssembledProductInQuote.ModuleAccessory> aggregated =
+
+                Seq.ofType(hwList.stream(), AssembledProductInQuote.ModuleAccessory.class)
+                        .groupBy(x -> tuple(x.code, x.make, x.title, x.uom),
+                                Tuple.collectors(
+                                        Collectors.summingDouble(x -> x.quantity)
+                                )
+                        )
+                        .entrySet()
+                        .stream()
+                        .map(e -> new AssembledProductInQuote.ModuleAccessory(e.getKey().v1, e.getKey().v3,
+                                e.getKey().v2, e.getKey().v4, e.getValue().v1))
+                        .collect(Collectors.toList());
+
+        return aggregated;
+    }
 }

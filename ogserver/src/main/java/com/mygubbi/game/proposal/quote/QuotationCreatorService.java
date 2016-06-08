@@ -6,6 +6,7 @@ import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
@@ -28,14 +29,18 @@ public class QuotationCreatorService extends AbstractVerticle
     private final static Logger LOG = LogManager.getLogger(QuotationCreatorService.class);
 
     public static final String CREATE_QUOTE = "create.quote";
+    public static final String CREATE_JOBCARD = "create.jobcard";
 
     private String quoteTemplate;
+    private String jobcardTemplate;
 
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
         this.setupQuoteCreator();
+        this.setupJobcardCreator();
         this.quoteTemplate = ConfigHolder.getInstance().getStringValue("quote_template", "/tmp/quote-template.xlsx");
+        this.jobcardTemplate = ConfigHolder.getInstance().getStringValue("jobcard_template", "/tmp/jobcard-template.xlsx");
         startFuture.complete();
     }
 
@@ -50,13 +55,24 @@ public class QuotationCreatorService extends AbstractVerticle
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(CREATE_QUOTE, (Message<Integer> message) -> {
             QuoteRequest quoteRequest = (QuoteRequest) LocalCache.getInstance().remove(message.body());
-            this.getProposalHeader(quoteRequest, message);
+            this.getProposalHeader(quoteRequest, message, true);
         }).completionHandler(res -> {
             LOG.info("Full quote creator service started." + res.succeeded());
         });
     }
 
-    private void getProposalHeader(QuoteRequest quoteRequest, Message message)
+    private void setupJobcardCreator()
+    {
+        EventBus eb = VertxInstance.get().eventBus();
+        eb.localConsumer(CREATE_JOBCARD, (Message<Integer> message) -> {
+            QuoteRequest quoteRequest = (QuoteRequest) LocalCache.getInstance().remove(message.body());
+            this.getProposalHeader(quoteRequest, message, false);
+        }).completionHandler(res -> {
+            LOG.info("Full quote creator service started." + res.succeeded());
+        });
+    }
+
+    private void getProposalHeader(QuoteRequest quoteRequest, Message message, boolean generateQuote)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id", quoteRequest.getProposalId())));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -70,13 +86,13 @@ public class QuotationCreatorService extends AbstractVerticle
                     else
                     {
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
-                        this.getProposalProducts(proposalHeader, quoteRequest, message);
+                        this.getProposalProducts(proposalHeader, quoteRequest, message, generateQuote);
                     }
                 });
 
     }
 
-    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message)
+    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message, boolean generateQuote)
     {
         QueryData queryData = null;
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
@@ -104,17 +120,17 @@ public class QuotationCreatorService extends AbstractVerticle
                         {
                             products.add(new ProductLineItem(json));
                         }
-                        this.createQuote(proposalHeader, products, message);
+                        this.createQuote(quoteRequest, proposalHeader, products, message, generateQuote);
                     }
                 });
     }
 
-    private void createQuote(ProposalHeader proposalHeader, List<ProductLineItem> products, Message message)
+    private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message, boolean generateQuote)
     {
-        String quoteXls = proposalHeader.folderPath() + "/quotation.xlsx";
+        String targetFile = proposalHeader.folderPath() + (generateQuote ? "/quotation.xlsx" : "/jobcard.xlsx" );
         try
         {
-            VertxInstance.get().fileSystem().deleteBlocking(quoteXls);
+            VertxInstance.get().fileSystem().deleteBlocking(targetFile);
         }
         catch (Exception e)
         {
@@ -122,14 +138,23 @@ public class QuotationCreatorService extends AbstractVerticle
         }
         try
         {
-            VertxInstance.get().fileSystem().copyBlocking(this.quoteTemplate, quoteXls);
+            String templateFile = generateQuote ? this.quoteTemplate : this.jobcardTemplate;
+            VertxInstance.get().fileSystem().copyBlocking(templateFile, targetFile);
             QuoteData quoteData = new QuoteData(proposalHeader, products);
-            new ExcelQuoteCreator(quoteXls, quoteData).prepareQuote();
-            sendResponse(message, new JsonObject().put("quoteFile", quoteXls));
+            if (generateQuote)
+            {
+                new ExcelQuoteCreator(targetFile, quoteData).prepareQuote();
+                sendResponse(message, new JsonObject().put("quoteFile", targetFile));
+            }
+            else
+            {
+                new ExcelJobCardCreator(targetFile, quoteData).prepareJobCard();
+                sendResponse(message, new JsonObject().put("jobcardFile", targetFile));
+            }
         }
         catch (Exception e)
         {
-            String errorMessage = "Error in preparing quote file for :" + proposalHeader.getId() + ". " + e.getMessage();
+            String errorMessage = "Error in preparing excel file for :" + proposalHeader.getId() + ". " + e.getMessage();
             sendResponse(message, new JsonObject().put("error", errorMessage));
             LOG.error(errorMessage, e);
         }

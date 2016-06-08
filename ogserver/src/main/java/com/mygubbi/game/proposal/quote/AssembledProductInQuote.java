@@ -93,13 +93,13 @@ public class AssembledProductInQuote
 
     private void addToModuleAccessories(AccHwComponent component, int quantity, String unit, int seq)
     {
-        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake());
+        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
         this.moduleAccessories.add(accessory);
     }
 
     private void addToModuleHardware(AccHwComponent component, int quantity, String unit, int seq)
     {
-        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake());
+        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
         this.moduleHardware.add(accessory);
     }
 
@@ -255,8 +255,9 @@ public class AssembledProductInQuote
         public String title;
         public double quantity;
         public String make;
+        public String uom;
 
-        public ModuleAccessory(String unit, int seq, String code, String title, double quantity, String make)
+        public ModuleAccessory(String unit, int seq, String code, String title, double quantity, String make, String uom)
         {
             this.unit = unit;
             this.seq = seq;
@@ -264,6 +265,16 @@ public class AssembledProductInQuote
             this.title = title;
             this.quantity = quantity;
             this.make = make;
+            this.uom = uom;
+        }
+
+        public ModuleAccessory(String code, String title, String make, String uom, double quantity)
+        {
+            this.code = code;
+            this.quantity = quantity;
+            this.title = title;
+            this.make = make;
+            this.uom = uom;
         }
     }
 }

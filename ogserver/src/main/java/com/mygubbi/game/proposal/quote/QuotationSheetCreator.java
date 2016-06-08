@@ -3,10 +3,10 @@ package com.mygubbi.game.proposal.quote;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.si.excel.ExcelStyles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -31,15 +31,13 @@ public class QuotationSheetCreator
 
     private QuoteData quoteData;
     private Sheet quoteSheet;
-    private CellStyle boldStyle;
-    private CellStyle titleStyle;
+    private ExcelStyles styles;
 
-    public QuotationSheetCreator(Sheet quoteSheet, QuoteData quoteData, CellStyle boldStyle, CellStyle titleStyle)
+    public QuotationSheetCreator(Sheet quoteSheet, QuoteData quoteData, ExcelStyles styles)
     {
         this.quoteSheet = quoteSheet;
         this.quoteData = quoteData;
-        this.boldStyle = boldStyle;
-        this.titleStyle = titleStyle;
+        this.styles = styles;
     }
 
     public void prepare()
@@ -295,19 +293,19 @@ public class QuotationSheetCreator
     private void createSubHeadingRow(int rowNum, String index, String title)
     {
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
-        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.boldStyle);
-        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.boldStyle);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getBoldStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getBoldStyle());
     }
 
     private void createProductTitleRow(int rowNum, String index, String title)
     {
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
         dataRow.setHeight(new Double(dataRow.getHeight() * 1.5).shortValue());
-        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.titleStyle);
-        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.titleStyle);
-        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.titleStyle);
-        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.titleStyle);
-        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.titleStyle);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
     }
 
     private Row createRow(int currentRow, Sheet sheet)

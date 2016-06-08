@@ -301,14 +301,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, makeType, make, imagePath, price from acc_hw_master where type = 'A'",
+      "query": "select code, title, makeType, make, imagePath, price, uom from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, makeType, make, imagePath, price from acc_hw_master where type = 'H'",
+      "query": "select code, title, makeType, make, imagePath, price, uom from acc_hw_master where type = 'H'",
       "params": []
     },
 
