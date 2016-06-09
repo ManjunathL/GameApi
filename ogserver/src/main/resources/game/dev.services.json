@@ -12,11 +12,6 @@
       }
     ],
     "parallel": [
-/*
-      {
-        "name": "com.mygubbi.db.SequenceIdGenerator"
-      },
-*/
       {
         "name": "com.mygubbi.apiserver.GameApiServerVerticle",
         "worker": false

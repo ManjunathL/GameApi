@@ -347,7 +347,7 @@
       "id": "addons.categories",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct categoryCode from addon_master",
+      "query": "select distinct categoryCode, rateReadOnly from addon_master",
       "params": []
     },
 

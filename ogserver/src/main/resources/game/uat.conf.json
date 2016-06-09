@@ -1,0 +1,27 @@
+{
+  "version": "0.0.0a",
+
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://localhost/game",
+    "max_pool_size": 4,
+    "user": "root",
+    "password": "root"
+  },
+
+  "urlwithssl": "",
+
+  "firebase": {},
+
+  "cloudinary" :{},
+
+  "staticConfigPath": "",
+
+  "robots.txt": "User-agent: *\nDisallow: /",
+
+  "proposal_docs_folder" : "c:/Users/Public/game_files",
+  "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
+  "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
+
+  "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json"]
+}

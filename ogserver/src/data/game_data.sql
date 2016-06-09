@@ -30,25 +30,22 @@ insert into code_master (lookupType, code, title) values ('addontype', 'APPLIANC
 insert into code_master (lookupType, code, title) values ('addontype', 'COUNTERTOP', 'Counter Top');
 insert into code_master (lookupType, code, title) values ('addontype', 'SERVICE', 'Service');
 
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'PAINT', 'M01', 'MDF with PU');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'PAINT', 'M02', 'MDF with PU B/W');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'FOIL', 'M03', 'PVC Foil');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'FOIL', 'M04', 'Glossy Foil');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M10', 'PLY/LAM');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M11', 'Glossy Laminate/PLY');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'ACRYLIC', 'M08', 'Acrylic/MDF');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M07', 'Glossy Laminate/MDF');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M05', 'MDF/ Mat LAM');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'SOLIDWOOD', 'M09', 'Solid Wood');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M06', 'MDF Pre Lam');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'LAMINATE', 'M12', 'Ply Pre Lam');
-insert into code_master (lookupType, additionalType, code, title) values ('finish', 'VENEER', 'M13', 'Ply Veneer');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'MTS', 'Matt Solid');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'MWG', 'Matt Wood grain');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'HGS', 'Highgloss Solid');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'HGW', 'Highgloss Wood grain');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'TXR', 'Texture');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'PUP', 'PU Paint');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'PFL', 'PVC foil');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'MTL', 'Metal Laminate');
+insert into code_master (lookupType, code, title) values ('colorgroup', 'GLS', 'Glass Finish');
+
 
 commit;
 
 begin;
 
-insert addon_master (code, categoryCode, roomCode, productTypeCode, brandCode, catalogueCode, title, rate, mrp, uom, imagePath) values('ADD01','Appliances','Kitchen','Chimney','Faber','RAY60LTW, Silver','Chimney - Faber - RAY60LTW, Silver',20999,20999,'UNIT','');
+insert addon_master (code, categoryCode, roomCode, productTypeCode, brandCode, catalogueCode, rateReadOnly, title, rate, mrp, uom, imagePath) values('ADD01','Appliances','Kitchen','Chimney','Faber','RAY60LTW, Silver',1,'Chimney - Faber - RAY60LTW, Silver',20999,20999,'UNIT','');
 insert addon_master (code, categoryCode, roomCode, productTypeCode, brandCode, catalogueCode, title, rate, mrp, uom, imagePath) values('ADD02','Appliances','Kitchen','Chimney','Faber','CLEO PB SS LTW 60','Chimney - Faber - CLEO PB SS LTW 60',134,134,'UNIT','');
 insert addon_master (code, categoryCode, roomCode, productTypeCode, brandCode, catalogueCode, title, rate, mrp, uom, imagePath) values('ADD03','Appliances','Kitchen','Chimney','Faber','Feel Plus SS TC LTW 90','Chimney - Faber - Feel Plus SS TC LTW 90',134,134,'UNIT','');
 insert addon_master (code, categoryCode, roomCode, productTypeCode, brandCode, catalogueCode, title, rate, mrp, uom, imagePath) values('ADD04','Appliances','Kitchen','Hob','Faber','MDR700MDX','Hob - Faber - MDR700MDX',134,134,'UNIT','');
