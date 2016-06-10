@@ -22,26 +22,33 @@ public class HardwareSheetCreator implements ExcelCellProcessor
 {
     private final static Logger LOG = LogManager.getLogger(HardwareSheetCreator.class);
 
+    private final AssembledProductInQuote product;
     private QuoteData quoteData;
     private Sheet hardwareSheet;
     private ExcelStyles styles;
 
-    public HardwareSheetCreator(Sheet hardwareSheet, QuoteData quoteData, ExcelStyles styles)
+    public HardwareSheetCreator(Sheet hardwareSheet, QuoteData quoteData, AssembledProductInQuote product, ExcelStyles styles)
     {
         this.hardwareSheet = hardwareSheet;
         this.quoteData = quoteData;
         this.styles = styles;
+        this.product = product;
     }
 
     public void prepare()
     {
-        new ExcelSheetProcessor(this.hardwareSheet, this).process();
+        new ExcelSheetProcessor(this.hardwareSheet, this.styles, this).process();
     }
 
     @Override
     public Object getValueForKey(String key)
     {
-        return this.quoteData.getValue(key);
+        Object value = this.quoteData.getValue(key);
+        if (value == null)
+        {
+            return this.product.getValue(key);
+        }
+        return value;
     }
 
     @Override

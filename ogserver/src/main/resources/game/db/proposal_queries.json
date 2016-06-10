@@ -178,7 +178,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select code, width, depth, height from module_master",
+      "query": "select code, width, depth, height, description from module_master",
       "params": []
     },
 
@@ -336,10 +336,10 @@
     },
 
     {
-      "id": "finish.cost.map",
+      "id": "finish.master.all",
       "type": "select",
       "table": "finish_master",
-      "query": "select costCode, finishCode from finish_master",
+      "query": "select costCode, finishCode, finishType, finishMaterial, design, shutterMaterial, colorGroupCode, cuttingOffset, title from finish_master",
       "params": []
     },
 

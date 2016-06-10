@@ -11,8 +11,10 @@ public class Module
     private static final String WIDTH = "width";
     private static final String DEPTH = "depth";
     private static final String HEIGHT = "height";
+    private static final String DESCRIPTION = "description";
 
     private String code;
+    private String description;
     private int height;
     private int depth;
     private int width;
@@ -28,6 +30,7 @@ public class Module
         this.setHeight(json.getInteger(HEIGHT));
         this.setDepth(json.getInteger(DEPTH));
         this.setWidth(json.getInteger(WIDTH));
+        this.setDescription(json.getString(DESCRIPTION));
     }
 
     public String getCode()
@@ -68,6 +71,21 @@ public class Module
     public void setWidth(int width)
     {
         this.width = width;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public String getDimension()
+    {
+        return this.getWidth() + " X " + this.getDepth() + " X " + this.getHeight();
     }
 }
 

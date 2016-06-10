@@ -16,11 +16,13 @@ public class ExcelSheetProcessor
 
     private Sheet sheet;
     private ExcelCellProcessor cellProcessor;
+    private ExcelStyles styles;
 
-    public ExcelSheetProcessor(Sheet sheet, ExcelCellProcessor cellProcessor)
+    public ExcelSheetProcessor(Sheet sheet, ExcelStyles styles, ExcelCellProcessor cellProcessor)
     {
         this.sheet = sheet;
         this.cellProcessor = cellProcessor;
+        this.styles = styles;
     }
 
     public void process()
@@ -91,4 +93,82 @@ public class ExcelSheetProcessor
             cell.setCellValue(value.toString());
         }
     }
+
+    public void createDataRowInDataSheet(int rowNum, Object[] data)
+    {
+        this.createRowInDataSheet(rowNum, data, false);
+    }
+
+    public void createTitleRowInDataSheet(int rowNum, Object[] data)
+    {
+        this.createRowInDataSheet(rowNum, data, true);
+    }
+
+    private void createRowInDataSheet(int rowNum, Object[] data, boolean isTitle)
+    {
+        if (rowNum < this.sheet.getLastRowNum())
+        {
+            this.sheet.shiftRows(rowNum, this.sheet.getLastRowNum(), 1);
+        }
+
+        Row dataRow = this.sheet.createRow(rowNum);
+
+        if (data == null || data.length == 0) return;
+
+        int lastCell = data.length;
+        for (int cellNum = 0; cellNum < lastCell; cellNum++)
+        {
+            Object value = data[cellNum];
+            if (value == null)
+            {
+                continue;
+            }
+            if (value instanceof String)
+            {
+                this.setTextValueInCell(isTitle, dataRow, cellNum, (String) value);
+            }
+            else if (value instanceof Integer)
+            {
+                this.setNumericValueInCell(isTitle, dataRow, cellNum, ((Integer) value).doubleValue());
+            }
+            else if (value instanceof Double)
+            {
+                this.setNumericValueInCell(isTitle, dataRow, cellNum, (Double) value);
+            }
+            else if (value instanceof Long)
+            {
+                this.setNumericValueInCell(isTitle, dataRow, cellNum, ((Long) value).doubleValue());
+            }
+            else
+            {
+                this.setTextValueInCell(isTitle, dataRow, cellNum, value.toString());
+            }
+        }
+    }
+
+    private void setNumericValueInCell(boolean isTitle, Row dataRow, int cellNum, Double numberValue)
+    {
+        Cell cell = dataRow.createCell(cellNum, Cell.CELL_TYPE_NUMERIC);
+        cell.setCellValue(numberValue);
+        if (isTitle)
+        {
+            cell.setCellStyle(this.styles.getBoldStyle());
+        }
+    }
+
+    private void setTextValueInCell(boolean isTitle, Row dataRow, int cellNum, String value)
+    {
+        String textValue = value;
+        if (StringUtils.isNonEmpty(textValue))
+        {
+            Cell cell = dataRow.createCell(cellNum, Cell.CELL_TYPE_STRING);
+            cell.setCellValue(textValue);
+            if (isTitle)
+            {
+                cell.setCellStyle(this.styles.getBoldStyle());
+            }
+        }
+    }
+
+
 }

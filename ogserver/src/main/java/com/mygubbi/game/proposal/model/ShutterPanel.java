@@ -101,14 +101,19 @@ public class ShutterPanel
         return this;
     }
 
-    public double getCost(RateCard rateCard)
+    public double getCost(RateCard rateCard, ShutterFinish finish)
     {
         if (rateCard == null) return 0;
-        return this.getCuttingArea() * rateCard.getRateByThickness(this.getThickness());
+        return this.getCuttingArea(finish) * rateCard.getRateByThickness(this.getThickness());
     }
 
-    private double getCuttingArea()
+    public double getCuttingArea(ShutterFinish finish)
     {
-        return this.getLength() * this.getBreadth() * SQMM2SQFT; //TODO: Reduce the lenght and breadth by the Finish type
+        return (this.getLength() - finish.getCuttingOffset()) * (this.getBreadth() - finish.getCuttingOffset()) * SQMM2SQFT;
+    }
+
+    public String getDimesions()
+    {
+        return this.getBreadth() + " X " + this.getLength() + " X " + this.getThickness();
     }
 }

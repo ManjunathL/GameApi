@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.jobcard;
 
+import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelWorkbookManager;
 import org.apache.logging.log4j.LogManager;
@@ -14,25 +15,28 @@ public class ExcelJobCardCreator
 
     private String jobCardXls;
     private QuoteData quoteData;
-    private ExcelWorkbookManager workbookManager;
 
     public ExcelJobCardCreator(String jobCardXls, QuoteData quoteData)
     {
         this.jobCardXls = jobCardXls;
         this.quoteData = quoteData;
-        this.workbookManager = new ExcelWorkbookManager(this.jobCardXls);
     }
 
     public void prepareJobCard()
     {
-        new HardwareSheetCreator(this.workbookManager.getSheetByName("Hardwares"), this.quoteData, this.workbookManager.getStyles()).prepare();
-        this.closeWorkbook();
-    }
+        if (this.quoteData.getAssembledProducts().isEmpty())
+        {
+            throw new RuntimeException("There is no assembled product in the proposal");
+        }
+        AssembledProductInQuote product = this.quoteData.getAssembledProducts().get(0);
 
-    private void closeWorkbook()
-    {
-        this.workbookManager.closeWorkbook();
+        ExcelWorkbookManager workbookManager = new ExcelWorkbookManager(this.jobCardXls);
+        new JobCardSheetCreator(workbookManager.getSheetByName("JOB Card"), this.quoteData, product, workbookManager.getStyles()).prepare();
+        new HardwareSheetCreator(workbookManager.getSheetByName("Hardwares"), this.quoteData, product, workbookManager.getStyles()).prepare();
+        new AddonsSheetCreator(workbookManager.getSheetByName("Appliances and Services"), this.quoteData, product, workbookManager.getStyles()).prepare();
+        new PanelSheetCreator(workbookManager.getSheetByName("Panel Summary"), this.quoteData, product, workbookManager.getStyles()).prepare();
+        new ModuleSheetCreator(workbookManager.getSheetByName("Module Summary"), this.quoteData, product, workbookManager.getStyles()).prepare();
+        workbookManager.closeWorkbook();
     }
-
 
 }
