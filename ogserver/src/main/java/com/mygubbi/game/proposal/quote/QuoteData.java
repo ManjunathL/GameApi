@@ -45,21 +45,20 @@ public class QuoteData
     {
         this.assembledProducts = new ArrayList<>();
         this.catalogueProducts = new ArrayList<>();
+
         for (ProductLineItem product : this.products)
         {
             if (product.getType().equals(ProductLineItem.CATALOGUE_PRODUCT))
             {
                 this.catalogueProducts.add(product);
+                this.productsCost += product.getAmount();
             }
             else
             {
-                this.assembledProducts.add(new AssembledProductInQuote(product));
-            }
-            this.productsCost += product.getAmount();
-
-            for (ProductAddon addon : product.getAddons())
-            {
-                this.addonsCost += addon.getAmount();
+                AssembledProductInQuote assembledProduct = new AssembledProductInQuote(product);
+                this.assembledProducts.add(assembledProduct);
+                this.productsCost += assembledProduct.getAmountWithoutAddons();
+                this.addonsCost += assembledProduct.getAddonsAmount();
             }
         }
         LOG.info("Products cost :" + this.productsCost + ". Addons cost:" + this.addonsCost);

@@ -158,7 +158,7 @@ public class QuotationSheetCreator
         String unitSequenceLetter = ALPHABET_SEQUENCE[(product.getUnits().size())];
         currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
 
-        this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmount());
+        this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
 
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, RATE_CELL, RATE_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));
@@ -203,11 +203,6 @@ public class QuotationSheetCreator
             if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
         }
         return currentRow;
-    }
-
-    private void fillAssembledProductSummary(int sequenceNumber, AssembledProductInQuote product, int currentRow)
-    {
-        this.createRowAndFillData(currentRow, String.valueOf(sequenceNumber), product.getTitle(), null, null, product.getAmount());
     }
 
     private void fillCatalogProducts(Cell cell)

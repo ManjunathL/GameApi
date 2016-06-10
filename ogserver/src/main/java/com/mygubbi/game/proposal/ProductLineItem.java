@@ -130,7 +130,7 @@ public class ProductLineItem extends JsonObject
         return this;
     }
 
-    public ProductLineItem addAddOn(ProductAddon addon)
+    private ProductLineItem addAddOn(ProductAddon addon)
     {
         if (!this.containsKey(ADDONS))
         {

@@ -3,25 +3,14 @@
 
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/game",
-    "max_pool_size": 4,
-    "user": "root",
-    "password": "root"
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
+    "max_pool_size": 20,
+    "user": "admin",
+    "password": "OG$#gubi32"
   },
 
-  "urlwithssl": "",
-
-  "firebase": {},
-
-  "cloudinary" :{},
-
-  "staticConfigPath": "",
-
-  "robots.txt": "User-agent: *\nDisallow: /",
-
-  "proposal_docs_folder" : "c:/Users/Public/game_files",
-  "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
-  "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
-
-  "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json"]
+  "proposal_docs_folder" : "/mnt/game/proposal/",
+  "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
+  "jobcard_template" : "/mnt/game/proposal/templates/jobcard-template.xlsx",
+  "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin"
 }

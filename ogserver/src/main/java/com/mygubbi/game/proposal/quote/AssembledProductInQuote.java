@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.AccHwComponent;
@@ -21,6 +22,7 @@ public class AssembledProductInQuote
     private List<ModuleAccessory> moduleAccessories;
     private List<Unit> units;
     private List<ModuleAccessory> moduleHardware;
+    private double addonsAmount;
 
     public AssembledProductInQuote(ProductLineItem product)
     {
@@ -33,9 +35,19 @@ public class AssembledProductInQuote
         return this.product.getTitle();
     }
 
-    public double getAmount()
+    public double getTotalAmount()
     {
         return this.product.getAmount();
+    }
+
+    public double getAmountWithoutAddons()
+    {
+        return (this.product.getAmount() - this.getAddonsAmount());
+    }
+
+    public double getAddonsAmount()
+    {
+        return this.addonsAmount;
     }
 
     public List<Accessory> getAccessories()
@@ -68,6 +80,10 @@ public class AssembledProductInQuote
         {
             this.addModuleToUnit(module);
             this.collectAccessories(module);
+        }
+        for (ProductAddon addon : this.product.getAddons())
+        {
+            this.addonsAmount += addon.getAmount();
         }
     }
 
