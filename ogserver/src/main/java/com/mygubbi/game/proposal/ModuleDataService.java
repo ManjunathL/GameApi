@@ -35,7 +35,7 @@ public class ModuleDataService extends AbstractVerticle
     private Set<String> kdmaxModulesWithMGMapping = Collections.EMPTY_SET;
     private Map<String, AccHwComponent> accessoriesMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> hardwareMap = Collections.EMPTY_MAP;
-    private Map<String, String> finishCodeMap = Collections.EMPTY_MAP;
+    private Map<String, ShutterFinish> finishCodeMap = Collections.EMPTY_MAP;
 
 	public static ModuleDataService getInstance()
 	{
@@ -232,7 +232,7 @@ public class ModuleDataService extends AbstractVerticle
     private void cacheFinishCostCodes()
     {
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
-                LocalCache.getInstance().store(new QueryData("finish.cost.map", new JsonObject())),
+                LocalCache.getInstance().store(new QueryData("finish.master.all", new JsonObject())),
                 (AsyncResult<Message<Integer>> dataResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
@@ -244,7 +244,8 @@ public class ModuleDataService extends AbstractVerticle
                         this.finishCodeMap = new HashMap(selectData.rows.size());
                         for (JsonObject record : selectData.rows)
                         {
-                            this.finishCodeMap.put(record.getString("finishCode"), record.getString("costCode"));
+                            ShutterFinish finish = new ShutterFinish(record);
+                            this.finishCodeMap.put(finish.getFinishCode(), finish);
                         }
                         markResult("Finish master is loaded.", true);
                     }
@@ -277,12 +278,44 @@ public class ModuleDataService extends AbstractVerticle
         return this.moduleComponentsMap.get(mgCode);
     }
 
+    public List<CarcassPanel> getCarcassPanelsForModule(String mgCode)
+    {
+        Module mgModule = this.getModule(mgCode);
+        if (mgModule == null) return Collections.EMPTY_LIST;
+
+        List<CarcassPanel> carcassPanels = new ArrayList<>();
+        for (ModuleComponent component : this.getModuleComponents(mgCode))
+        {
+            if (ModuleComponent.CARCASS_TYPE.equals(component.getType()))
+            {
+                carcassPanels.add(this.getCarcassPanel(component.getComponentCode()));
+            }
+        }
+        return carcassPanels;
+    }
+
+    public List<ShutterPanel> getShutterPanelsForModule(String mgCode)
+    {
+        Module mgModule = this.getModule(mgCode);
+        if (mgModule == null) return Collections.EMPTY_LIST;
+
+        List<ShutterPanel> shutterPanels = new ArrayList<>();
+        for (ModuleComponent component : this.getModuleComponents(mgCode))
+        {
+            if (ModuleComponent.SHUTTER_TYPE.equals(component.getType()))
+            {
+                shutterPanels.add(this.getShutterPanel(component.getComponentCode()));
+            }
+        }
+        return shutterPanels;
+    }
+
     public Module getModule(String code)
     {
         return this.moduleMap.get(code);
     }
 
-    public String getFinishCostCode(String finishCode)
+    public ShutterFinish getFinish(String finishCode)
     {
         return this.finishCodeMap.get(finishCode);
     }

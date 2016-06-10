@@ -54,6 +54,21 @@ public class ProductAddon extends JsonObject
         return this.getString(ADDON_CATEGORY_CODE);
     }
 
+    public String getBrandCode()
+    {
+        return this.getString(BRAND_CODE);
+    }
+
+    public String getCatalogueCode()
+    {
+        return this.getString(CATALOGUE_CODE);
+    }
+
+    public String getUom()
+    {
+        return "uom";
+    }
+
     public boolean isAccessory()
     {
         return ACCESSORY_TYPE.equals(this.getCategoryCode());

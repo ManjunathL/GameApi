@@ -106,4 +106,9 @@ public class CarcassPanel
         if (rateCard == null) return 0;
         return this.getArea() * rateCard.getRateByThickness(this.getThickness());
     }
+
+    public String getDimesions()
+    {
+        return this.getLength() + " X " + this.getBreadth() + " X " + this.getThickness();
+    }
 }
