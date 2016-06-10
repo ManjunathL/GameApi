@@ -178,7 +178,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select code, width, depth, height from module_master",
+      "query": "select code, width, depth, height, description from module_master",
       "params": []
     },
 
@@ -301,14 +301,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, makeType, make, imagePath, price from acc_hw_master where type = 'A'",
+      "query": "select code, title, makeType, make, imagePath, price, uom from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, makeType, make, imagePath, price from acc_hw_master where type = 'H'",
+      "query": "select code, title, makeType, make, imagePath, price, uom from acc_hw_master where type = 'H'",
       "params": []
     },
 
@@ -336,20 +336,42 @@
     },
 
     {
-      "id": "finish.cost.map",
+      "id": "finish.master.all",
       "type": "select",
       "table": "finish_master",
-      "query": "select costCode, finishCode from finish_master",
+      "query": "select costCode, finishCode, finishType, finishMaterial, design, shutterMaterial, colorGroupCode, cuttingOffset, title from finish_master",
       "params": []
     },
 
     {
-      "id": "addons.select",
+      "id": "addons.categories",
       "type": "select",
       "table": "addon_master",
-      "query": "select code, catalogcode, title, make, imageurl, uom, rate from addon_master where producttype = ? and addontype = ?",
-      "params": ["producttype", "addontype"]
-    }
+      "query": "select distinct categoryCode, rateReadOnly from addon_master",
+      "params": []
+    },
 
+    {
+      "id": "addons.product.types",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct productTypeCode from addon_master where categoryCode = ?",
+      "params": ["categoryCode"]
+    },
+    {
+      "id": "addons.brands",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct brandCode from addon_master where ProductTypeCode = ?",
+      "params": ["productTypeCode"]
+    },
+
+    {
+      "id": "addons.products",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select catalogueCode,title,code,rate,imagePath,uom from addon_master where productTypeCode = ? and brandCode = ?",
+      "params": ["productTypeCode", "brandCode"]
+    }
   ]
 }

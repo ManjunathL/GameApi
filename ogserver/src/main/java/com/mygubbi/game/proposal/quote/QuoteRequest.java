@@ -53,4 +53,5 @@ public class QuoteRequest
     {
         return StringUtils.listToString(this.productsIds, ',');
     }
+
 }

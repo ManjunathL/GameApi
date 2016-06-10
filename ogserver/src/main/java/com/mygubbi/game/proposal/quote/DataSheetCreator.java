@@ -1,10 +1,10 @@
 package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
+import com.mygubbi.si.excel.ExcelStyles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -19,13 +19,13 @@ public class DataSheetCreator
 
     private QuoteData quoteData;
     private Sheet dataSheet;
-    private CellStyle boldStyle;
+    private ExcelStyles styles;
 
-    public DataSheetCreator(Sheet dataSheet, QuoteData quoteData, CellStyle boldStyle)
+    public DataSheetCreator(Sheet dataSheet, QuoteData quoteData, ExcelStyles styles)
     {
         this.dataSheet = dataSheet;
         this.quoteData = quoteData;
-        this.boldStyle = boldStyle;
+        this.styles = styles;
     }
 
     public void prepare()
@@ -67,8 +67,10 @@ public class DataSheetCreator
         currentRow += 2;
         currentRow = this.fillAccessoriesInDataSheet(product.getModuleAccessories(), currentRow);
 
+/*
         currentRow += 2;
         currentRow = this.fillHardwareInDataSheet(product.getModuleHardware(), currentRow);
+*/
 
         currentRow++;
 
@@ -128,7 +130,7 @@ public class DataSheetCreator
                 cell.setCellValue(value);
                 if (isTitle)
                 {
-                    cell.setCellStyle(this.boldStyle);
+                    cell.setCellStyle(this.styles.getBoldStyle());
                 }
             }
         }

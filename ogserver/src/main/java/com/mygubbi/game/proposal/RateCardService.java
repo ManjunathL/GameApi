@@ -56,7 +56,7 @@ public class RateCardService extends AbstractVerticle
 			RateCard rateCard = new RateCard((JsonObject) rateJson);
 			this.rateCardMap.put(rateCard.getKey(), rateCard);
 		}
-		LOG.info("Rate card data loaded.");
+		LOG.info("Rate card data loaded from " + ratecardFile);
 		startFuture.complete();
 
 	}

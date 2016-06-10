@@ -4,7 +4,7 @@
       "uri": "/gapi/proposal/listbystatus",
       "source": "db",
       "query":"proposal.list.status",
-      "params":["status", "userid"],
+      "params":["status"],
       "resultfields":[],
       "default": "[]"
     },
@@ -188,6 +188,43 @@
       "resultfields":[],
       "default": "[]"
     },
+
+    {
+      "uri": "/gapi/addon/categories",
+      "source": "db",
+      "query":"addons.categories",
+      "params":["roomCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/productTypes",
+      "source": "db",
+      "query":"addons.product.types",
+      "params":["roomCode", "categoryCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/brands",
+      "source": "db",
+      "query":"addons.brands",
+      "params":["productTypeCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/products",
+      "source": "db",
+      "query":"addons.products",
+      "params":["productTypeCode", "brandCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
     {
       "uri": "/gapi/user/listbyrole",
       "source": "db",

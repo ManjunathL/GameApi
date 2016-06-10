@@ -3,10 +3,10 @@ package com.mygubbi.game.proposal.quote;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.si.excel.ExcelStyles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -31,12 +31,13 @@ public class QuotationSheetCreator
 
     private QuoteData quoteData;
     private Sheet quoteSheet;
-    private CellStyle boldStyle;
+    private ExcelStyles styles;
 
-    public QuotationSheetCreator(Sheet quoteSheet, QuoteData quoteData)
+    public QuotationSheetCreator(Sheet quoteSheet, QuoteData quoteData, ExcelStyles styles)
     {
         this.quoteSheet = quoteSheet;
         this.quoteData = quoteData;
+        this.styles = styles;
     }
 
     public void prepare()
@@ -99,8 +100,8 @@ public class QuotationSheetCreator
 //        LOG.info("Processing " + cellValue);
         switch (cellValue)
         {
-            case "A.1":
-                this.fillAssembledProducts(cell);
+            case "Kitchen & Other Units":
+                this.fillAssembledProducts(cell.getRow().getRowNum() + 2);
                 break;
 
             case "A.2":
@@ -116,6 +117,10 @@ public class QuotationSheetCreator
                 break;
 
             case "B.3":
+                this.fillAddons(cell, this.quoteData.getCounterTops(), "No countertops.");
+                break;
+
+            case "B.4":
                 this.fillAddons(cell, this.quoteData.getServices(), "No additional services.");
                 break;
 
@@ -124,42 +129,42 @@ public class QuotationSheetCreator
         }
     }
 
-    private void fillAssembledProducts(Cell cell)
+    private int fillAssembledProducts(int currentRow)
     {
-        int startRow  = cell.getRow().getRowNum() + 1;
         List<AssembledProductInQuote> assembledProducts = this.quoteData.getAssembledProducts();
         if (assembledProducts.isEmpty())
         {
-            this.createRowWithMessage(startRow, "No assembled products.");
-            return;
+            return currentRow;
         }
 
         int sequenceNumber = 1;
         for (AssembledProductInQuote product : assembledProducts)
         {
-            startRow = this.fillAssembledProductInfo(startRow, sequenceNumber, product);
-            startRow++;
+            currentRow = this.fillAssembledProductInfo(currentRow, sequenceNumber, product);
+            currentRow++;
             sequenceNumber++;
         }
+        return currentRow;
     }
 
     private int fillAssembledProductInfo(int startRow, int sequenceNumber, AssembledProductInQuote product)
     {
         int currentRow = startRow;
 
-        this.fillAssembledProductSummary(sequenceNumber, product, currentRow);
+        this.createProductTitleRow(currentRow, "A." + String.valueOf(sequenceNumber), product.getTitle());
         currentRow = this.fillAssembledProductUnits(product, currentRow);
 
         currentRow++;
-        String unitSequenceLetter = ALPHABET_SEQUENCE[(product.getUnits().size() + 1)];
+        String unitSequenceLetter = ALPHABET_SEQUENCE[(product.getUnits().size())];
         currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
+
+        this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
+
+        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, RATE_CELL, RATE_CELL));
+        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));
 
         currentRow++;
         this.createRow(currentRow, this.quoteSheet);
-
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
-
         return currentRow;
     }
 
@@ -170,7 +175,7 @@ public class QuotationSheetCreator
             return currentRow;
         }
 
-        this.createRowAndFillData(currentRow, unitSequenceLetter, "Accessories");
+        this.createSubHeadingRow(currentRow, unitSequenceLetter, "Accessories");
 
         int acSequence = 0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
@@ -189,7 +194,7 @@ public class QuotationSheetCreator
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
             currentRow++;
-            this.createRowAndFillData(currentRow, ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
+            this.createSubHeadingRow(currentRow, ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
 
             currentRow++;
             this.createRowAndFillData(currentRow, null, "Unit consists of " + unit.moduleCount + " modules as per design provided.");
@@ -198,11 +203,6 @@ public class QuotationSheetCreator
             if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
         }
         return currentRow;
-    }
-
-    private void fillAssembledProductSummary(int sequenceNumber, AssembledProductInQuote product, int currentRow)
-    {
-        this.createRowAndFillData(currentRow, String.valueOf(sequenceNumber), product.getTitle(), null, null, product.getAmount());
     }
 
     private void fillCatalogProducts(Cell cell)
@@ -285,16 +285,34 @@ public class QuotationSheetCreator
         this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
     }
 
+    private void createSubHeadingRow(int rowNum, String index, String title)
+    {
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getBoldStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getBoldStyle());
+    }
+
+    private void createProductTitleRow(int rowNum, String index, String title)
+    {
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
+        dataRow.setHeight(new Double(dataRow.getHeight() * 1.5).shortValue());
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+    }
+
     private Row createRow(int currentRow, Sheet sheet)
     {
         sheet.shiftRows(currentRow, sheet.getLastRowNum(), 1);
         return sheet.createRow(currentRow);
     }
 
-    private void createCellWithData(Row dataRow, int cellNum, int cellType, Object data)
+    private Cell createCellWithData(Row dataRow, int cellNum, int cellType, Object data)
     {
         Cell cell = dataRow.createCell(cellNum, cellType);
-        if (data == null) return;
+        if (data == null) return cell;
 
         if (cellType == Cell.CELL_TYPE_NUMERIC)
         {
@@ -304,6 +322,7 @@ public class QuotationSheetCreator
         {
             cell.setCellValue(data.toString());
         }
+        return cell;
     }
 
 

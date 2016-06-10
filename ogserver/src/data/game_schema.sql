@@ -72,6 +72,7 @@ CREATE TABLE proposal_product(
   wallCarcassCode varchar(8) NOT NULL DEFAULT 'PLY',
   finishTypeCode varchar(16) NOT NULL,
   finishCode varchar(8) NOT NULL,
+  designCode varchar(32) NOT NULL,
   dimension varchar(64) NULL,
   quantity INTEGER NOT NULL DEFAULT 1,
   amount DOUBLE NOT NULL DEFAULT 0,
@@ -105,8 +106,8 @@ CREATE TABLE proposal_documents(
 DROP TABLE IF EXISTS kdmax_def_map;
 CREATE TABLE kdmax_def_map(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  kdmcode varchar(16) NOT NULL,
-  kdmdefcode varchar(16) NOT NULL,
+  kdmcode varchar(64) NOT NULL,
+  kdmdefcode varchar(64) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY kdmcode_key (kdmcode)
@@ -116,11 +117,11 @@ CREATE TABLE kdmax_def_map(
 DROP TABLE IF EXISTS kdmax_mg_map;
 CREATE TABLE kdmax_mg_map(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  kdmcode varchar(16) NOT NULL,
-  mgcode varchar(16) NOT NULL,
+  kdmcode varchar(64) NOT NULL,
+  mgcode varchar(32) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  KEY kdmcode_key (kdmcode)
+  UNIQUE KEY kdmcode_key (kdmcode, mgcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='KDMax to Mygubbi Module mapping';
 
 DROP TABLE IF EXISTS module_master;
@@ -206,11 +207,24 @@ CREATE TABLE finish_master(
   design char(1) NOT NULL DEFAULT 'N',
   shutterMaterial char(5) NOT NULL DEFAULT 'N',
   finishCode char(5) NOT NULL DEFAULT 'NA',
+  colorGroupCode char(3) NOT NULL DEFAULT 'NA',
+  cuttingOffset int NOT NULL DEFAULT 0,
   title varchar(64) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (finishCode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Finish Master';
+
+DROP TABLE IF EXISTS color_master;
+CREATE TABLE color_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  colorGroupCode char(3) NOT NULL DEFAULT 'NA',
+  code varchar(64) NOT NULL DEFAULT 'NA',
+  imagePath varchar(255) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Color Master';
 
 
 DROP TABLE IF EXISTS acc_hw_master;
@@ -234,16 +248,20 @@ CREATE TABLE acc_hw_master(
 DROP TABLE IF EXISTS addon_master;
 CREATE TABLE addon_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  category varchar(32) NOT NULL DEFAULT 'A',
-  addontype char(1) NOT NULL DEFAULT 'A',
   code varchar(16) NOT NULL,
-  catalogcode varchar(16) NOT NULL,
+  categoryCode varchar(32) NOT NULL DEFAULT 'NA',
+  roomCode varchar(32) NOT NULL DEFAULT 'All',
+  productTypeCode char(32) NOT NULL DEFAULT 'All',
+  brandCode varchar(32) NULL,
+  catalogueCode varchar(32) NOT NULL,
+  rateReadOnly boolean NOT NULL,
   title varchar(255) NOT NULL,
-  make varchar(16) NOT NULL,
-  imageurl varchar(255) NOT NULL,
-  uom char(1) NOT NULL DEFAULT 'N', -- N Numbers, S Set
   rate DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  uom char(5) NOT NULL DEFAULT 'N', -- N Numbers, S Set
+  imagePath varchar(255) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Addon Master';
+

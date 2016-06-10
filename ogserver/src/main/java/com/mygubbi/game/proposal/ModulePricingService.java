@@ -64,17 +64,17 @@ public class ModulePricingService extends AbstractVerticle
             this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
             return;
         }
-        String finishCostCode = ModuleDataService.getInstance().getFinishCostCode(productModule.getFinishCode());
+        ShutterFinish finish = ModuleDataService.getInstance().getFinish(productModule.getFinishCode());
 
         RateCard carcassRateCard = RateCardService.getInstance().getRateCard(productModule.getCarcassCode(), RateCard.CARCASS_TYPE);
-        RateCard shutterRateCard = RateCardService.getInstance().getRateCard(finishCostCode, RateCard.SHUTTER_TYPE);
+        RateCard shutterRateCard = RateCardService.getInstance().getRateCard(finish.getCostCode(), RateCard.SHUTTER_TYPE);
         RateCard loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE);
         RateCard labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE);
-        //TODO: labourcost to be included
 
         if (carcassRateCard == null || shutterRateCard == null || loadingFactorCard == null || labourRateCard == null)
         {
-            errors.add("Carcass, Shutter, Labour or Loading factor rate cards not setup." + productModule.getCarcassCode() + " : " + productModule.getFinishCode() + " : " + finishCostCode);
+            errors.add("Carcass, Shutter, Labour or Loading factor rate cards not setup." + productModule.getCarcassCode() + " : "
+                    + productModule.getFinishCode() + " : " + finish.getCostCode());
             this.sendResponse(message, errors, 0, 0, 0, 0, 0, 0, productModule);
             return;
         }
@@ -102,7 +102,7 @@ public class ModulePricingService extends AbstractVerticle
 
                 case ModuleComponent.SHUTTER_TYPE:
                     ShutterPanel shutterPanel = ModuleDataService.getInstance().getShutterPanel(component.getComponentCode());
-                    double shutterPanelCost = shutterPanel.getCost(shutterRateCard);
+                    double shutterPanelCost = shutterPanel.getCost(shutterRateCard, finish);
                     if (shutterPanelCost == 0)
                     {
                         errors.add("Shutter panel cost is not available for " + shutterPanel.getCode() + shutterRateCard.getKey());

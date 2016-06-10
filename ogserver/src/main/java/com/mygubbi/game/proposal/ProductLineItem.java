@@ -28,6 +28,7 @@ public class ProductLineItem extends JsonObject
     private static final String WALL_CARCASS_CODE = "wallCarcassCode";
     private static final String FINISH_TYPE = "finishTypeCode";
     private static final String FINISH_CODE = "finishCode";
+    private static final String DESIGN_CODE = "designCode";
     private static final String DIMENSION = "dimension";
     private static final String QUANTITY = "quantity";
     private static final String AMOUNT = "amount";
@@ -93,6 +94,11 @@ public class ProductLineItem extends JsonObject
         return this.getString(MAKE_TYPE);
     }
 
+    public String getDesignCode()
+    {
+        return this.getString(DESIGN_CODE);
+    }
+
     public int getQuantity()
     {
         return this.getInteger(QUANTITY);
@@ -130,7 +136,7 @@ public class ProductLineItem extends JsonObject
         return this;
     }
 
-    public ProductLineItem addAddOn(ProductAddon addon)
+    private ProductLineItem addAddOn(ProductAddon addon)
     {
         if (!this.containsKey(ADDONS))
         {

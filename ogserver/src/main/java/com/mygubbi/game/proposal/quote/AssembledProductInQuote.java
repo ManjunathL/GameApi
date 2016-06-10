@@ -2,14 +2,18 @@ package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.AccHwComponent;
-import com.mygubbi.game.proposal.model.Module;
-import com.mygubbi.game.proposal.model.ModuleComponent;
+import com.mygubbi.game.proposal.model.*;
+import org.jooq.lambda.Seq;
+import org.jooq.lambda.tuple.Tuple;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.jooq.lambda.tuple.Tuple.tuple;
 
 /**
  * Created by Sunil on 22-05-2016.
@@ -21,6 +25,8 @@ public class AssembledProductInQuote
     private List<ModuleAccessory> moduleAccessories;
     private List<Unit> units;
     private List<ModuleAccessory> moduleHardware;
+    private double addonsAmount;
+    private String shutterMaterial;
 
     public AssembledProductInQuote(ProductLineItem product)
     {
@@ -33,9 +39,19 @@ public class AssembledProductInQuote
         return this.product.getTitle();
     }
 
-    public double getAmount()
+    public double getTotalAmount()
     {
         return this.product.getAmount();
+    }
+
+    public double getAmountWithoutAddons()
+    {
+        return (this.product.getAmount() - this.getAddonsAmount());
+    }
+
+    public double getAddonsAmount()
+    {
+        return this.addonsAmount;
     }
 
     public List<Accessory> getAccessories()
@@ -58,6 +74,22 @@ public class AssembledProductInQuote
         return this.units;
     }
 
+    public Object getValue(String key)
+    {
+        if (this.product.containsKey(key)) return this.product.getValue(key);
+        switch (key)
+        {
+            case "carcass.material":
+                return "Base:" + this.product.getBaseCarcassCode() + " | Wall:" + this.product.getWallCarcassCode();
+            case "shutter.material":
+                return this.shutterMaterial;
+            case "design":
+                return this.product.getDesignCode();
+            default:
+                return null;
+        }
+    }
+
     private void prepare()
     {
         this.units = new ArrayList<>();
@@ -69,6 +101,12 @@ public class AssembledProductInQuote
             this.addModuleToUnit(module);
             this.collectAccessories(module);
         }
+        for (ProductAddon addon : this.product.getAddons())
+        {
+            this.addonsAmount += addon.getAmount();
+        }
+        ShutterFinish finish = ModuleDataService.getInstance().getFinish(this.product.getFinishCode());
+        this.shutterMaterial = finish.getTitle() + " | " + finish.getFinishMaterial();
     }
 
     private void collectAccessories(ProductModule module)
@@ -93,13 +131,13 @@ public class AssembledProductInQuote
 
     private void addToModuleAccessories(AccHwComponent component, int quantity, String unit, int seq)
     {
-        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake());
+        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
         this.moduleAccessories.add(accessory);
     }
 
     private void addToModuleHardware(AccHwComponent component, int quantity, String unit, int seq)
     {
-        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake());
+        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
         this.moduleHardware.add(accessory);
     }
 
@@ -150,6 +188,108 @@ public class AssembledProductInQuote
     public List<ModuleAccessory> getModuleHardware()
     {
         return moduleHardware;
+    }
+
+    public List<ProductModule> getModules()
+    {
+        return this.product.getModules();
+    }
+
+    public List<ModuleCarcass> getAggregatedCarcassPanels()
+    {
+        List<ModuleCarcass> aggregated =
+
+                Seq.ofType(this.getCarcassPanels().stream(), ModuleCarcass.class)
+                        .groupBy(x -> tuple(x.code, x.title, x.width, x.depth, x.thickness, x.edgebinding, x.dimension),
+                                Tuple.collectors(
+                                        Collectors.summingInt(x -> x.quantity), Collectors.summingDouble(x -> x.area)
+                                )
+                        )
+                        .entrySet()
+                        .stream()
+                        .map(e -> new ModuleCarcass().setCode(e.getKey().v1).setTitle(e.getKey().v2).setWidth(e.getKey().v3).setDepth(e.getKey().v4)
+                                .setThickness(e.getKey().v5).setEdgebinding(e.getKey().v6).setDimension(e.getKey().v7)
+                                .setQuantity(e.getValue().v1).setArea(e.getValue().v2))
+                        .collect(Collectors.toList());
+
+        return aggregated;
+    }
+
+    public List<ModuleShutter> getAggregatedShutterPanels()
+    {
+        List<ModuleShutter> aggregated =
+
+                Seq.ofType(this.getShutterPanels().stream(), ModuleShutter.class)
+                        .groupBy(x -> tuple(x.code, x.title, x.height, x.width, x.thickness, x.edgebinding, x.design, x.color, x.dimension),
+                                Tuple.collectors(
+                                        Collectors.summingInt(x -> x.quantity), Collectors.summingDouble(x -> x.area)
+                                )
+                        )
+                        .entrySet()
+                        .stream()
+                        .map(e -> new ModuleShutter().setCode(e.getKey().v1).setTitle(e.getKey().v2).setHeight(e.getKey().v3)
+                                .setWidth(e.getKey().v4).setThickness(e.getKey().v5).setEdgebinding(e.getKey().v6)
+                                .setDesign(e.getKey().v7).setColor(e.getKey().v8).setDimension(e.getKey().v9)
+                                .setQuantity(e.getValue().v1).setArea(e.getValue().v2))
+                        .collect(Collectors.toList());
+
+        return aggregated;
+    }
+
+    public List<ModuleCarcass> getCarcassPanels()
+    {
+        List<ModuleCarcass> carcassPanels = new ArrayList<>();
+        for (ProductModule module : this.getModules())
+        {
+            for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(module.getMGCode()))
+            {
+                if (ModuleComponent.CARCASS_TYPE.equals(component.getType()))
+                {
+                    CarcassPanel panel = ModuleDataService.getInstance().getCarcassPanel(component.getComponentCode());
+                    if (panel == null) continue;
+                    carcassPanels.add(new ModuleCarcass(panel, component));
+                }
+            }
+        }
+        return carcassPanels;
+    }
+
+    public List<ModuleShutter> getShutterPanels()
+    {
+        List<ModuleShutter> shutterPanels = new ArrayList<>();
+        for (ProductModule module : this.getModules())
+        {
+            for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(module.getMGCode()))
+            {
+                if (ModuleComponent.SHUTTER_TYPE.equals(component.getType()))
+                {
+                    ShutterPanel panel = ModuleDataService.getInstance().getShutterPanel(component.getComponentCode());
+                    if (panel == null) continue;
+                    shutterPanels.add(new ModuleShutter(panel, component, module, this.product.getDesignCode()));
+                }
+            }
+        }
+        return shutterPanels;
+    }
+
+    public List<ProductAddon> getAddonAccessories()
+    {
+        return Seq.seq(this.product.getAddons()).filter(addon -> addon.isAccessory()).toList();
+    }
+
+    public List<ProductAddon> getServices()
+    {
+        return Seq.seq(this.product.getAddons()).filter(addon -> addon.isService()).toList();
+    }
+
+    public List<ProductAddon> getCounterTops()
+    {
+        return Seq.seq(this.product.getAddons()).filter(addon -> addon.isCounterTop()).toList();
+    }
+
+    public List<ProductAddon> getAppliances()
+    {
+        return Seq.seq(this.product.getAddons()).filter(addon -> addon.isAppliance()).toList();
     }
 
     public static class Unit
@@ -255,8 +395,9 @@ public class AssembledProductInQuote
         public String title;
         public double quantity;
         public String make;
+        public String uom;
 
-        public ModuleAccessory(String unit, int seq, String code, String title, double quantity, String make)
+        public ModuleAccessory(String unit, int seq, String code, String title, double quantity, String make, String uom)
         {
             this.unit = unit;
             this.seq = seq;
@@ -264,6 +405,211 @@ public class AssembledProductInQuote
             this.title = title;
             this.quantity = quantity;
             this.make = make;
+            this.uom = uom;
+        }
+
+        public ModuleAccessory(String code, String title, String make, String uom, double quantity)
+        {
+            this.code = code;
+            this.quantity = quantity;
+            this.title = title;
+            this.make = make;
+            this.uom = uom;
+        }
+    }
+
+    public static class ModuleShutter
+    {
+        public String dimension;
+        public String code;
+        public String title;
+        public int quantity;
+        public int width;
+        public int height;
+        public int thickness;
+        public String edgebinding;
+        public double area;
+        public String design;
+        public String color;
+
+        public ModuleShutter(ShutterPanel panel, ModuleComponent component, ProductModule module, String design)
+        {
+            this.code = panel.getCode();
+            this.title = panel.getTitle();
+            this.quantity = component.getQuantity();
+            this.width = panel.getLength();
+            this.height = panel.getBreadth();
+            this.thickness = panel.getThickness();
+            this.edgebinding = panel.getEdgebinding();
+            this.area = this.quantity * panel.getCuttingArea(ModuleDataService.getInstance().getFinish(module.getFinishCode()));
+            this.dimension = this.getDimesions();
+            this.color = module.getColorCode();
+            this.design = design;
+        }
+
+        public ModuleShutter()
+        {
+
+        }
+
+        public ModuleShutter setCode(String code)
+        {
+            this.code = code;
+            return this;
+        }
+
+        public ModuleShutter setTitle(String title)
+        {
+            this.title = title;
+            return this;
+        }
+
+        public ModuleShutter setQuantity(int quantity)
+        {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public ModuleShutter setWidth(int width)
+        {
+            this.width = width;
+            return this;
+        }
+
+        public ModuleShutter setHeight(int height)
+        {
+            this.height = height;
+            return this;
+        }
+
+        public ModuleShutter setThickness(int thickness)
+        {
+            this.thickness = thickness;
+            return this;
+        }
+
+        public ModuleShutter setEdgebinding(String edgebinding)
+        {
+            this.edgebinding = edgebinding;
+            return this;
+        }
+
+        public ModuleShutter setArea(double area)
+        {
+            this.area = area;
+            return this;
+        }
+
+        public ModuleShutter setDesign(String design)
+        {
+            this.design = design;
+            return this;
+        }
+
+        public ModuleShutter setColor(String color)
+        {
+            this.color = color;
+            return this;
+        }
+
+        public ModuleShutter setDimension(String dimension)
+        {
+            this.dimension = dimension;
+            return this;
+        }
+
+        private String getDimesions()
+        {
+            return this.width + " X " + this.height + " X " + this.thickness;
+        }
+    }
+
+    public static class ModuleCarcass
+    {
+        public String code;
+        public String title;
+        public int quantity;
+        public int width;
+        public int depth;
+        public int thickness;
+        public String edgebinding;
+        public String dimension;
+        public double area;
+
+        public ModuleCarcass()
+        {
+
+        }
+        public ModuleCarcass(CarcassPanel panel, ModuleComponent component)
+        {
+            this.code = panel.getCode();
+            this.title = panel.getTitle();
+            this.quantity = component.getQuantity();
+            this.width = panel.getLength();
+            this.depth = panel.getBreadth();
+            this.thickness = panel.getThickness();
+            this.edgebinding = panel.getEdgebinding();
+            this.area = panel.getArea();
+            this.dimension = this.getDimesions();
+        }
+
+        private String getDimesions()
+        {
+            return this.depth + " X " + this.width + " X " + this.thickness;
+        }
+
+        public ModuleCarcass setCode(String code)
+        {
+            this.code = code;
+            return this;
+        }
+
+        public ModuleCarcass setTitle(String title)
+        {
+            this.title = title;
+            return this;
+        }
+
+        public ModuleCarcass setQuantity(int quantity)
+        {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public ModuleCarcass setWidth(int width)
+        {
+            this.width = width;
+            return this;
+        }
+
+        public ModuleCarcass setDepth(int depth)
+        {
+            this.depth = depth;
+            return this;
+        }
+
+        public ModuleCarcass setThickness(int thickness)
+        {
+            this.thickness = thickness;
+            return this;
+        }
+
+        public ModuleCarcass setEdgebinding(String edgebinding)
+        {
+            this.edgebinding = edgebinding;
+            return this;
+        }
+
+        public ModuleCarcass setDimension(String dimension)
+        {
+            this.dimension = dimension;
+            return this;
+        }
+
+        public ModuleCarcass setArea(double area)
+        {
+            this.area = area;
+            return this;
         }
     }
 }

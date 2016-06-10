@@ -39,6 +39,9 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
 
+    //todo: code doc.remove
+
+
     private void createProposal(RoutingContext routingContext)
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
@@ -102,19 +105,19 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void downloadQuote(RoutingContext routingContext)
     {
-        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        this.createQuote(routingContext, new QuoteRequest(quoteRequestJson));
+        this.createProposalOutput(routingContext, QuotationCreatorService.CREATE_QUOTE);
     }
 
     private void downloadJobCard(RoutingContext routingContext)
     {
-        //TODO: Create job card
+        this.createProposalOutput(routingContext, QuotationCreatorService.CREATE_JOBCARD);
     }
 
-    private void createQuote(RoutingContext routingContext, QuoteRequest quoteRequest)
+    private void createProposalOutput(RoutingContext routingContext, String createType)
     {
-        Integer id = LocalCache.getInstance().store(quoteRequest);
-        VertxInstance.get().eventBus().send(QuotationCreatorService.CREATE_QUOTE, id,
+        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson));
+        VertxInstance.get().eventBus().send(createType, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());
