@@ -372,6 +372,23 @@
       "table": "addon_master",
       "query": "select catalogueCode,title,code,rate,imagePath,uom from addon_master where productTypeCode = ? and brandCode = ?",
       "params": ["productTypeCode", "brandCode"]
+    },
+
+    {
+      "id": "colors.select",
+      "type": "select",
+      "table": "color_master",
+      "query": "select code as code, code as name, imagePath from color_master where colorGroupCode in (?) order by code",
+      "params": ["colorGroupCodes"]
+    },
+
+    {
+      "id": "colors.select.all",
+      "type": "select",
+      "table": "color_master",
+      "query": "select code as code, code as name, imagePath from color_master order by colorGroupCode, code",
+      "params": []
     }
+
   ]
 }

@@ -20,9 +20,9 @@ import java.util.List;
  * Created by Sunil on 27-04-2016.
  */
 
-public class ModuleFileReader
+public class ModuleExcelFileReader
 {
-    private final static Logger LOG = LogManager.getLogger(ModuleFileReader.class);
+    private final static Logger LOG = LogManager.getLogger(ModuleExcelFileReader.class);
     public static final int NAME_CELL = 3;
     public static final int WIDTH_CELL = 5;
     public static final int DEPTH_CELL = 6;
@@ -32,7 +32,7 @@ public class ModuleFileReader
 
     private String filename;
 
-    public ModuleFileReader(String filename)
+    public ModuleExcelFileReader(String filename)
     {
         this.filename = filename;
     }
@@ -140,9 +140,9 @@ public class ModuleFileReader
 
     public static void main(String[] args)
     {
-        new ModuleFileReader("/testdata/Kitchen001-Quote.xlsx").loadModules();
-        new ModuleFileReader("/testdata/Kitchen002-Quote.xlsx").loadModules();
-        new ModuleFileReader("/testdata/Kitchen003-Quote.xlsx").loadModules();
-        new ModuleFileReader("/testdata/Kitchen004-Quote.xlsx").loadModules();
+        new ModuleExcelFileReader("/testdata/Kitchen001-Quote.xlsx").loadModules();
+        new ModuleExcelFileReader("/testdata/Kitchen002-Quote.xlsx").loadModules();
+        new ModuleExcelFileReader("/testdata/Kitchen003-Quote.xlsx").loadModules();
+        new ModuleExcelFileReader("/testdata/Kitchen004-Quote.xlsx").loadModules();
     }
 }

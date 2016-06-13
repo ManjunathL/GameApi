@@ -232,6 +232,24 @@
       "params":["role"],
       "resultfields":[],
       "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/groupcolorlookup",
+      "source": "db",
+      "query":"colors.select",
+      "params":["colorGroupCodes"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/allcolorlookup",
+      "source": "db",
+      "query":"colors.select.all",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }

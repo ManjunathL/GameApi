@@ -184,6 +184,24 @@ CREATE TABLE shutter_master(
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Shutter master';
 
+DROP TABLE IF EXISTS acc_hw_master;
+CREATE TABLE acc_hw_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  type char(1) NOT NULL DEFAULT 'A', -- A - Accessory, H - Hardware
+  code varchar(16) NOT NULL,
+  catalogCode varchar(16) NOT NULL,
+  title varchar(255) NOT NULL,
+  makeType char(1) NOT NULL, -- Standard, Premium, Luxury
+  make varchar(16) NOT NULL,
+  imagePath varchar(255) NOT NULL,
+  uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
+  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  price DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory and Hardware master';
+
 
 DROP TABLE IF EXISTS code_master;
 CREATE TABLE code_master(
@@ -226,24 +244,6 @@ CREATE TABLE color_master(
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Color Master';
 
-
-DROP TABLE IF EXISTS acc_hw_master;
-CREATE TABLE acc_hw_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  type char(1) NOT NULL DEFAULT 'A', -- A - Accessory, H - Hardware
-  code varchar(16) NOT NULL,
-  catalogCode varchar(16) NOT NULL,
-  title varchar(255) NOT NULL,
-  makeType char(1) NOT NULL, -- Economy, Standard, Premium
-  make varchar(16) NOT NULL,
-  imagePath varchar(255) NOT NULL,
-  uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
-  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  price DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory and Hardware master';
 
 DROP TABLE IF EXISTS addon_master;
 CREATE TABLE addon_master(
