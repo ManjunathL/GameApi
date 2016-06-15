@@ -159,7 +159,7 @@
     {
       "uri": "/gapi/finishlookup",
       "source": "db",
-      "query":"finish.codes",
+      "query":"finish.lookup",
       "params":[],
       "resultfields":[],
       "default": "[]"
@@ -259,7 +259,23 @@
       "params":[],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/catalogproduct",
+      "source": "db",
+      "query":"product.select.productid",
+      "params":["productId"],
+      "resultfields":["productJson"],
+      "default": "{}",
+      "singleRecord": true
+    },
+    {
+      "uri": "/gapi/catalog-products",
+      "source": "db",
+      "query":"product.select.subcategory",
+      "params":["subcategory"],
+      "resultfields":["productJson"],
+      "default": "[]"
     }
   ]
 }
-

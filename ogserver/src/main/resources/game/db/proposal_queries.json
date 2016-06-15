@@ -12,7 +12,7 @@
       "id": "proposal.list.all",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal",
+      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
       "params": []
     },
 
@@ -20,7 +20,7 @@
       "id": "proposal.summary",
       "type": "select",
       "table": "proposal",
-      "query": "select status, count(*) as proposal_count from proposal group by status",
+      "query": "select status, count(*) as proposal_count from proposal where status = 'deleted' group by status",
       "params": []
     },
     {
@@ -87,7 +87,7 @@
       "id": "proposal.delete",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set active = 'N' where id = ?",
+      "query": "update proposal set status = 'deleted' where id = ?",
       "params": ["id"]
     },
 
@@ -150,6 +150,14 @@
     },
 
     {
+      "id": "product.document.remove",
+      "type": "delete",
+      "table": "proposal_documents",
+      "query": "delete from proposal_documents where id = ?",
+      "params": ["id"]
+    },
+
+    {
       "id": "kdmax.mapped.modules",
       "type": "select",
       "table": "kdmax_mg_map",
@@ -188,9 +196,9 @@
       "id": "proposal.product.create",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?)",
+      "query": "insert into proposal_product (proposalId, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?)",
       "params": ["proposalId", "title", "seq", "type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
-        "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "dimension", "quantity", "amount", "quoteFilePath",
+        "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
         "modules", "addons", "createdBy"]
     },
 
@@ -198,8 +206,8 @@
       "id": "proposal.product.update",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ? where id = ?",
-      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "id"]
+      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ? where id = ?",
+      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "id"]
     },
 
     {
@@ -395,7 +403,21 @@
       "table": "color_master",
       "query": "select code as code, code as name, imagePath from color_master order by colorGroupCode, code",
       "params": []
-    }
+    },
 
+    {
+      "id": "product.select.productid",
+      "type": "select",
+      "query": "select id, productId, productJson from product where productId = ?",
+      "params": [
+        "productId"
+      ]
+    },
+    {
+      "id": "product.select.subcategory",
+      "type": "select",
+      "query": "select productJson from product where subcategoryId = ? ORDER BY productId",
+      "params": ["subcategory"]
+    }
   ]
 }
