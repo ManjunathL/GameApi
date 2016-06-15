@@ -130,7 +130,7 @@ CREATE TABLE module_master(
   code varchar(16) NOT NULL,
   description varchar(255) NOT NULL,
   imagePath varchar(255) NOT NULL,
-  carcassCode char(8) NULL,
+  carcassCode char(16) NULL,
   width INTEGER NOT NULL DEFAULT 0,
   depth INTEGER NOT NULL DEFAULT 0,
   height INTEGER NOT NULL DEFAULT 0,

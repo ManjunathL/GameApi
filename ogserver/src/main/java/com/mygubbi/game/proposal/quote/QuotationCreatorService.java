@@ -125,7 +125,7 @@ public class QuotationCreatorService extends AbstractVerticle
                 });
     }
 
-    private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message, boolean generateQuote)
+    private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message  message, boolean generateQuote)
     {
         String targetFile = proposalHeader.folderPath() + (generateQuote ? "/quotation.xlsx" : "/jobcard.xlsx" );
         try

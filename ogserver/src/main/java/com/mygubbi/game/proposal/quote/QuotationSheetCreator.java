@@ -229,7 +229,7 @@ public class QuotationSheetCreator
         int currentRow = startRow;
 
         this.createRowAndFillData(currentRow, String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
-                product.getRate(), product.getAmount());
+                product.getRate(), (double) Math.round(product.getAmount()));
 
         currentRow++;
         this.createRowAndFillData(currentRow, "a", "OVERALL DIMENSION - " + product.getDimension());
