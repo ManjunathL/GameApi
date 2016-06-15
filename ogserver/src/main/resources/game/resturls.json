@@ -235,10 +235,19 @@
     },
 
     {
-      "uri": "/gapi/groupcolorlookup",
+      "uri": "/gapi/finishcodes",
       "source": "db",
-      "query":"colors.select",
-      "params":["colorGroupCodes"],
+      "query":"finish.codes",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/colorcodes",
+      "source": "db",
+      "query":"color.codes",
+      "params":["colorGroupCode"],
       "resultfields":[],
       "default": "[]"
     },
