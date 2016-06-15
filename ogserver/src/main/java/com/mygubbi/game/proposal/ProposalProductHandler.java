@@ -43,7 +43,7 @@ public class ProposalProductHandler extends AbstractRouteHandler
     private void mapModules(RoutingContext routingContext, ProductLineItem productLineItem)
     {
         productLineItem.resetModules();
-        List<ProductModule> modules = new ModuleFileReader(productLineItem.getKdMaxFile()).loadModules();
+        List<ProductModule> modules = new ModuleTextFileReader(productLineItem.getKdMaxFile()).loadModules();
         if (modules == null || modules.isEmpty())
         {
             this.updateProductLineItem(routingContext, productLineItem);

@@ -9,7 +9,7 @@ define([
     '/js/consultutil.js',
     '/js/analytics.js'
 ], function($, _, Backbone, errorPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
-    var PuneLandingPageVIew = Backbone.View.extend({
+    var errorPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
         renderWithUserProfCallback: function(userProfData) {
@@ -42,5 +42,5 @@ define([
             _.bindAll(this, 'renderWithUserProfCallback');
         }
     });
-    return PuneLandingPageVIew;
+    return errorPageVIew;
 });

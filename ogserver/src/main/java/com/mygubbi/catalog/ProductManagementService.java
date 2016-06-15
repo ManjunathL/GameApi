@@ -76,6 +76,7 @@ public class ProductManagementService extends AbstractVerticle
                 .put("popularity", productJson.getPopularity())
                 .put("styleSortSeq", productJson.getStyleSortSeq())
                 .put("relevance", productJson.getRelevance())
+                .put("url", productJson.getUrl())
                 .put("productShortJson", productJson.getShortJson().toString());
 
         Integer id = LocalCache.getInstance().store(new QueryData("product.select.productid", product));

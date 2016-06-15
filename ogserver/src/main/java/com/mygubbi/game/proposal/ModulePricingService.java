@@ -91,6 +91,11 @@ public class ModulePricingService extends AbstractVerticle
             {
                 case ModuleComponent.CARCASS_TYPE:
                     CarcassPanel carcassPanel = ModuleDataService.getInstance().getCarcassPanel(component.getComponentCode());
+                    if (carcassPanel == null)
+                    {
+                        errors.add("Carcass panel is not setup for " + component.getComponentCode());
+                        continue;
+                    }
                     double carcassPanelCost = carcassPanel.getCost(carcassRateCard);
                     if (carcassPanelCost == 0)
                     {
@@ -102,6 +107,11 @@ public class ModulePricingService extends AbstractVerticle
 
                 case ModuleComponent.SHUTTER_TYPE:
                     ShutterPanel shutterPanel = ModuleDataService.getInstance().getShutterPanel(component.getComponentCode());
+                    if (shutterPanel == null)
+                    {
+                        errors.add("Shutter panel is not setup for " + component.getComponentCode());
+                        continue;
+                    }
                     double shutterPanelCost = shutterPanel.getCost(shutterRateCard, finish);
                     if (shutterPanelCost == 0)
                     {
