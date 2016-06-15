@@ -53,8 +53,8 @@ define([
             'shobha-lp(/)': 'shobhalandingpage',
             'pune-lp(/)': 'punelandingpage',
             'kitchen-lp(/)': 'litchenlandingpage',
-            'holiday-lp(/)': 'holidaylandingpage'
-             '*something': 'errorPage',
+            'holiday-lp(/)': 'holidaylandingpage',
+             '*something': 'errorPage'
 
 
         },
