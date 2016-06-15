@@ -328,13 +328,12 @@
       "params": ["lookupType"]
     },
     {
-      "id": "finish.codes",
+      "id": "finish.lookup",
       "type": "select",
       "table": "finish_master",
       "query": "select finishMaterial as additionalType, finishCode as code, title from finish_master",
       "params": []
     },
-
     {
       "id": "finish.master.all",
       "type": "select",
@@ -375,11 +374,19 @@
     },
 
     {
-      "id": "colors.select",
+      "id": "finish.codes",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select finishMaterial, finishCode, colorGroupCode, title from finish_master",
+      "params": []
+    },
+
+    {
+      "id": "color.codes",
       "type": "select",
       "table": "color_master",
-      "query": "select code as code, code as name, imagePath from color_master where colorGroupCode in (?) order by code",
-      "params": ["colorGroupCodes"]
+      "query": "select code as code, code as name, imagePath from color_master where colorGroupCode = ? or 'ALL' = ? order by code",
+      "params": ["colorGroupCode", "colorGroupCode"]
     },
 
     {
