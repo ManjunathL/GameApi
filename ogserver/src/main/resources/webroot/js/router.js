@@ -52,9 +52,9 @@ define([
             'media(/)': 'mediapage',
             'shobha-lp(/)': 'shobhalandingpage',
             'pune-lp(/)': 'punelandingpage',
-            '*something': 'errorPage',
+            'kitchen-lp(/)': 'litchenlandingpage',
             'holiday-lp(/)': 'holidaylandingpage'
-
+             '*something': 'errorPage',
 
 
         },
@@ -409,6 +409,14 @@ define([
                 VM.create(VM.PUNELANDINGPAGE, PuneLandingPage).render();
             });
         });
+
+        router.on('route:kitchenlandingpage', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/landing_pages/kitchenlanding_page.js'], function(KitchenLandingPage) {
+                        VM.create(VM.KITCHENLANDINGPAGE, KitchenLandingPage).render();
+                    });
+                });
+
         router.on('route:errorPage', function(actions) {
                     setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
                     require(['/js/views/errorPage/errorPage.js'], function(ErrorPage) {
