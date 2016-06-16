@@ -52,7 +52,7 @@ define([
             'media(/)': 'mediapage',
             'shobha-lp(/)': 'shobhalandingpage',
             'pune-lp(/)': 'punelandingpage',
-            'kitchen-lp(/)': 'litchenlandingpage',
+            'kitchen-lp(/)': 'kitchenlandingpage',
             'holiday-lp(/)': 'holidaylandingpage',
              '*something': 'errorPage'
 
