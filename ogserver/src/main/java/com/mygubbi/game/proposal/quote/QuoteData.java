@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.round;
 import static org.jooq.lambda.tuple.Tuple.tuple;
 
 /**
@@ -124,9 +125,9 @@ public class QuoteData
             case "salesdesign":
                 return this.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/");
             case "productscost":
-                return this.productsCost;
+                return round(this.productsCost);
             case "addonscost":
-                return this.addonsCost;
+                return round(this.addonsCost);
             case "totalamount":
                 return this.getTotalCost();
             case "totalamountinwords":
@@ -138,7 +139,7 @@ public class QuoteData
 
     private double getTotalCost()
     {
-        return this.productsCost + this.addonsCost;
+        return round(this.productsCost + this.addonsCost);
     }
 
     private String concatValuesFromKeys(String[] keys, String delimiter)

@@ -40,5 +40,24 @@ insert into code_master (lookupType, code, title) values ('colorgroup', 'PFL', '
 insert into code_master (lookupType, code, title) values ('colorgroup', 'MTL', 'Metal Laminate');
 insert into code_master (lookupType, code, title) values ('colorgroup', 'GLS', 'Glass Finish');
 
+insert into code_master (lookupType, code, title) values ('pcategory', 'livingndining', 'Living & Dining');
+insert into code_master (lookupType, code, title) values ('pcategory', 'kitchen', 'Kitchen');
+insert into code_master (lookupType, code, title) values ('pcategory', 'bedroom', 'Bedroom');
+
+insert into code_master (lookupType, code, title) values ('psubcategory', 'entunit', 'Entertainment Unit');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'shoerack', 'Shoe Rack');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'crockunit', 'Crockery Unit');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'foyerunit', 'Foyer Unit');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'sideboard', 'Sideboard');
+
+insert into code_master (lookupType, code, title) values ('psubcategory', 'lshapedk', 'L Shaped Kitchen');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'ushapedk', 'U Shaped Kitchen');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'straightk', 'Straight Kitchen');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'parallelk', 'Parallel Kitchen');
+
+insert into code_master (lookupType, code, title) values ('psubcategory', 'wardrobe', 'Wardrobe');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'studytable', 'Study Table');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'sidetable', 'Side Table');
+insert into code_master (lookupType, code, title) values ('psubcategory', 'bookrack', 'Book Rack');
 
 commit;

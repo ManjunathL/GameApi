@@ -12,7 +12,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 import org.apache.logging.log4j.LogManager;
@@ -94,6 +93,8 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/product", new ProposalProductHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/module", new ProposalModuleHandler(VertxInstance.get()));
+//        router.mountSubRouter("/gapi/catalogue", new ProductHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
 
         //LOG.info("Routes:" + router.getRoutes().toString());
     }

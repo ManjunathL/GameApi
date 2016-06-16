@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.round;
 import static org.jooq.lambda.tuple.Tuple.tuple;
 
 /**
@@ -46,7 +47,7 @@ public class AssembledProductInQuote
 
     public double getAmountWithoutAddons()
     {
-        return (this.product.getAmount() - this.getAddonsAmount());
+        return round(this.product.getAmount() - this.getAddonsAmount());
     }
 
     public double getAddonsAmount()
