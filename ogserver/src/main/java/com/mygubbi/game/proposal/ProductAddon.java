@@ -91,7 +91,7 @@ public class ProductAddon extends JsonObject
 
     public String getTitle()
     {
-        return this.getString(CATALOGUE_CODE);
+        return this.getString(TITLE);
     }
 }
 
