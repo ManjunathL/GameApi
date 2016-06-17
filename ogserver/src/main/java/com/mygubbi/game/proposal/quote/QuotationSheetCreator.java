@@ -101,11 +101,8 @@ public class QuotationSheetCreator
         switch (cellValue)
         {
             case "Kitchen & Other Units":
-                this.fillAssembledProducts(cell.getRow().getRowNum() + 2);
-                break;
-
-            case "A.2":
-                this.fillCatalogProducts(cell);
+                int currentRow = this.fillAssembledProducts(cell.getRow().getRowNum() + 2);
+                this.fillCatalogProducts(currentRow);
                 break;
 
             case "B.1":
@@ -194,7 +191,7 @@ public class QuotationSheetCreator
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
             currentRow++;
-            this.createSubHeadingRow(currentRow, ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
+            this.createSubHeadingRow(currentRow,"A."+ ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
 
             currentRow++;
             this.createRowAndFillData(currentRow, null, "Unit consists of " + unit.moduleCount + " modules as per design provided.");
@@ -205,44 +202,44 @@ public class QuotationSheetCreator
         return currentRow;
     }
 
-    private void fillCatalogProducts(Cell cell)
+    private int fillCatalogProducts(int currentRow)
     {
-        int startRow  = cell.getRow().getRowNum() + 1;
         List<ProductLineItem> catalogProducts = this.quoteData.getCatalogueProducts();
         if (catalogProducts.isEmpty())
         {
-            this.createRowWithMessage(startRow, "No products from catalogue.");
-            return;
+            return currentRow;
         }
 
         int sequenceNumber = this.quoteData.getCatalogStartSequence();
         for (ProductLineItem product : catalogProducts)
         {
-            startRow = this.fillCatalogProductInfo(startRow, sequenceNumber, product);
-            startRow++;
+            currentRow = this.fillCatalogProductInfo(currentRow, sequenceNumber, product);
+            currentRow++;
             sequenceNumber++;
         }
+        return currentRow;
     }
 
     private int fillCatalogProductInfo(int startRow, int sequenceNumber, ProductLineItem product)
     {
         int currentRow = startRow;
 
-        this.createRowAndFillData(currentRow, String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
+        this.createSubHeadingRowForCatalog(currentRow, "A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
 
-        currentRow++;
-        this.createRowAndFillData(currentRow, "a", "OVERALL DIMENSION - " + product.getDimension());
+
+    /*    currentRow++;
+        this.createRowAndFillData(currentRow, "",product.getName() );*/
 
         currentRow++;
         this.createRowAndFillData(currentRow, null, product.getName());
 
-        currentRow++;
-        this.createRow(currentRow, this.quoteSheet);
-
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, QUANTITY_CELL, QUANTITY_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+
+        currentRow++;
+        this.createRow(currentRow, this.quoteSheet);
 
         return currentRow;
     }
@@ -284,6 +281,17 @@ public class QuotationSheetCreator
         this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount);
         this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
     }
+
+    private void createSubHeadingRowForCatalog(int rowNum, String index, String title,Double quantity, Double amount, Double total)
+    {
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount);
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
+    }
+
 
     private void createSubHeadingRow(int rowNum, String index, String title)
     {

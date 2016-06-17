@@ -5,7 +5,10 @@ define([
     'bootstrap',
     '/js/views/view_manager.js'
 ], function($, _, Backbone, Bootstrap, VM) {
+/*    var prod = 'products';
+    prod = prod.replace(/\s/g,"-");*/
     var AppRouter = Backbone.Router.extend({
+
         routes: {
             '': 'dashboard',
 
@@ -28,7 +31,9 @@ define([
             'living-and-dining-room-designs(/)': 'livingDining',
             'bedroom-interior-design(/)': 'bedroom',
 
-            'products/:categories(/:subcategories)(/)': 'products',
+/*
+            'products/:categories(/:subcategories)(/)': prod,
+*/
             'product_search-:searchTerm(/)': 'products-search',
             'product-:id(/)': 'product',
             'user_profile(/)': 'user_profile',
