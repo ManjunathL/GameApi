@@ -5594,3 +5594,427 @@ a.tab-ico {
         background-color: #FF5722;
         }
     /*Page Not Found Error Page End*/
+
+/* Kitchen-Landng Page*/
+
+
+    .kitchen-img-wrapper {
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057178/kitchen_lp/Top_banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 60px 0 190px 0;
+    text-align: center;
+    color: #ffffff;
+    }
+    .lshaped{
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057183/kitchen_lp/L-shape.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 45px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+    }
+    .ushaped{
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057184/kitchen_lp/U-shape_03.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 45px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+    }
+    .straight{
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057185/kitchen_lp/straight_03.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 45px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+    }
+    .parallel{
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057184/kitchen_lp/parellel_03.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 45px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+    }
+    .assure-you-with{
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057178/kitchen_lp/bg_for_We_assure_you_with.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 45px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+    }
+    .img-center {
+    margin: 0 auto;
+    }
+    #browse:hover{
+    content: url(http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l2_03.png);
+    }
+    #order:hover{
+    content: url(http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l4_03.png);
+    }
+    #relax:hover{
+    content: url(http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l7_03.png);
+    }
+    .types-of-kitchen{
+    background: #1f2022;
+    color: #ffffff;
+    }
+    .types-of-kitchen h1{
+    text-transform: inherit;
+    }
+    /* Carousel */
+    #quote-carousel {
+    padding: 0 10px 30px 10px;
+    }
+    #quote-carousel .carousel-control {
+    background: none;
+    color: #CACACA;
+    font-size: 2.3em;
+    text-shadow: none;
+    }
+    #quote-carousel .carousel-control.left {
+    left: -60px;
+    }
+    #quote-carousel .carousel-control.right {
+    right: -60px;
+    }
+    #quote-carousel .carousel-indicators {
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-right: -19px;
+    }
+    #quote-carousel .carousel-indicators li {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #CCC;
+    border-radius: 50px;
+    opacity: 0.4;
+    overflow: hidden;
+    transition: all 0.4s;
+    }
+    #quote-carousel .carousel-indicators .active {
+    background: #333333;
+    border-radius: 100px;
+    border-color: #f33;
+    opacity: 1;
+    overflow: hidden;
+    }
+    .carousel-inner {
+    min-height: 160px;
+    margin-top: 30px !important;
+    }
+    .item blockquote {
+    border-left: none;
+    margin: 0;
+    }
+    .item blockquote p:before {
+    content: "\f10d";
+    font-family: 'Fontawesome';
+    float: left;
+    margin-right: 10px;
+    }
+    .kitchen-head h1{
+    color: #ffffff;
+    font-size: 42px;
+    margin: 140px 0px 35px 0px;
+    font-weight: 200;
+    text-transform: inherit;
+    }
+    .btn-kitchen{
+    border-radius: 0px;
+    padding: 11px 20px;
+    text-shadow: 0px 0px 0px #ffff;
+    color: #ffffff;
+    font-weight: 200;
+    }
+    .btn-kitchen:hover,
+    .btn-kitchen:active,
+    .btn-kitchen:focus{
+    text-shadow: 0px 0px 0px #ffff;
+    color: #ffffff;
+    font-weight: 200;
+    }
+    .kitchen-form .form-control{
+    color: #FFFFFF;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0);
+    border-width: 0px 0px 1px 0px;
+    }
+    .kitchen-form select{
+    background-color: rgb(7, 6, 4) !important;
+    }
+    .kitchen-form .form-control:focus{
+    border-color: rgb(255, 83, 13);
+    outline: 0;
+    -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
+    }
+    .kitchen-form .btn-kitchen{
+    border-radius: 0px;
+    padding: 11px 20px;
+    text-shadow: 0 0px 0 rgba(0,0,0,0);
+    color: #ffffff;
+    background: rgba(255, 83, 13, 1) !important;
+    font-weight: 200;
+    margin-top: 20px;
+    border: 0px solid rgba(255, 83, 13, 1);
+
+    }
+    .how-it-work{
+    margin: 40px 0px 70px;
+    }
+    .how-it-work-head h2{
+    margin: 25px 0px 40px;
+    text-transform: inherit;
+    font-size: 34px;
+    font-weight: 300;
+    }
+    .how-it-box{
+    margin: 0px 55px;
+    }
+    .how-it-box h3{
+    margin: 15px 0px 10px;
+    text-transform: inherit;
+    color: rgba(255, 83, 13, 1);
+    }
+    .how-it-box p{
+    font-size: 16px;
+    }
+    .ushaped-box,
+    .straight-box,
+    .parallel-box,
+    .lshaped-box {
+    margin: 105px 0px 160px;
+    }
+    .ushaped-box h2,
+    .straight-box h2,
+    .parallel-box h2,
+    .lshaped-box h2 {
+    font-size: 34px;
+    text-transform: inherit;
+    }
+    .ushaped-box img,
+    .straight-box img,
+    .parallel-box img,
+    .lshaped-box img{
+    margin: 20px auto;
+    }
+    .ushaped-box p,
+    .straight-box p,
+    .parallel-box p,
+    .lshaped-box p{
+    font-size: 16px;
+    line-height: 1.65;
+    font-weight: 200;
+    }
+    .testimonial h2{
+    text-transform: inherit;
+    font-size: 42px;
+    }
+    .testimonial p{
+    font-size: 20px;
+    }
+    .assure-you-with h2{
+    text-transform: inherit;
+    font-size: 42px;
+    margin: 10px 0px 60px;
+    font-weight: 200;
+    }
+    .assure-box h4{
+    text-transform: inherit;
+    font-size:22px;
+    }
+    .assure-bg-img{
+    margin: 25px 0px;
+    width: 100% !important;
+    }
+    .assure-sm-img{
+    margin: 15px 0px;
+    width: 100% !important;
+    }
+    .why-us {
+    padding: 20px;
+    }
+    .why-us-head h2{
+    text-transform: inherit;
+    font-size: 42px;
+    margin: 10px 0px 35px;
+    font-weight: 200;
+    }
+    .why-us img{
+    width: 100% !important;
+    border: 1px solid #222;
+    }
+    .why-us-box{
+    border: 1px solid #222;
+    margin: 10px;
+    min-height: 405px;
+    padding: 15px;
+    }
+    .why-us-box h3{
+    text-transform: inherit;
+    }
+    .why-us-box p{
+    font-size: 16px;
+    margin: 0px;
+    }
+    .assure-sm-img{
+    display: block;
+    }
+    .assure-bg-img{
+    display: none;
+    }
+    .kitchen-form{
+    margin-top: 130px;
+    }
+
+    /* Landscape phones and down */
+    @media (max-width: 480px) {
+    .kitchen-head h1{
+    margin: 25px 0px 35px 0px;
+    }
+    .kitchen-form {
+    margin-top: 70px;
+    }
+    .kitchen-img-wrapper{
+    padding: 60px 0 80px 0;
+    }
+    .ushaped-box, .straight-box, .parallel-box, .lshaped-box{
+    margin: 0px;
+    }
+    .types-of-kitchen h1{
+    font-size: 28px;
+    margin: 20px 0px 20px;
+    font-weight: 200;
+    }
+    .testimonial h2 {
+    font-size: 28px;
+    }
+    .testimonial p {
+    font-size: 16px;
+    }
+    #quote-carousel .carousel-indicators li {
+    width: 40px;
+    height: 40px;
+    margin: 3px;
+    }
+    .assure-you-with h2 {
+    font-size: 28px;
+    margin: 20px 0px 30px;
+    }
+    .how-it-box{
+    margin: 0px 40px;
+    }
+    }
+
+    /* Portrait tablet to landscape and desktop */
+    @media (min-width: 768px) and (max-width: 979px) {
+    .p10{
+    padding: 10px;
+    }
+    .how-it-box{
+    margin: 0px;
+    }
+    .types-of-kitchen h1 {
+    text-transform: inherit;
+    font-weight: 200;
+    margin: 15px 0px 15px;
+    }
+    .ushaped-box,
+    .straight-box,
+    .parallel-box,
+    .lshaped-box{
+    margin: 35px 0px 70px;
+    }
+    #quote-carousel .carousel-indicators li {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    }
+    .testimonial p{
+    font-size: 18px;
+    }
+    }
+
+    /* Medium devices (desktops, 992px and up) */
+    @media (min-width: 992px) {
+    .p10{
+    padding: 10px;
+    }
+    .assure-sm-img{
+    display: none;
+    }
+    .assure-bg-img{
+    display: block;
+    }
+    .kitchen-form{
+    margin-top: 0px;
+    }
+    }
+ /* End Kitchen Landing Page */
