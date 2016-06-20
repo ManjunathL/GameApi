@@ -1,0 +1,402 @@
+<section class="bg-color-white padding-bottom20 menu-spacer">
+    <div class="kitchen-img-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-6 text-left">
+                    <div class="kitchen-head">
+                        <h1>
+                            Functionality is all you ask for… <br/>
+                            We give you more than just that!
+                        </h1>
+                    </div>
+                    <button class="btn btn-default btn-kitchen"> See Our Collection </button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <form id="contactForm1" name="consultData" data-toggle="validator" role="form" class="kitchen-form">
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Name*" id="contact_full_name1" name="fullName" value="<%=userProfile ? userProfile.displayName : ''%>" required/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors text-left"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email*" id="contact_email_id1" name="email" value="<%=userProfile ? userProfile.email : ''%>" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                <div class="help-block with-errors text-left"></div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <input type="text" class="form-control" id="contact_contact_num1" placeholder="Contact Number*" value="<%=userProfile ? userProfile.phone : ''%>" required pattern="\d{10}" title="e.g. 9876543210"/>
+                                <div class="help-block with-errors text-left"></div>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" id="contact_city">
+                                    <option> City </option>
+                                    <option> Bangalore </option>
+                                    <option> Mangalore </option>
+                                    <option> Pune </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button id="contactus-submit-btn1" class="btn btn-default btn-block btn-kitchen" type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
+                                    submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="how-it-work">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                    <div class="how-it-work-head">
+                        <h2>How it works</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                    <div class="how-it-box">
+                        <a href="#">
+                            <img id="browse" class="img-circle img-responsive img-center" src="http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/icons1_03.png" alt="">
+                        </a>
+                        <h3> Browse </h3>
+                        <p> Look through our wide range of kitchen designs </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                    <div class="how-it-box">
+                        <a href="#">
+                            <img id="order" class="img-circle img-responsive img-center" src="http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l3_03.png" alt="">
+                        </a>
+                        <h3> Order </h3>
+                        <p> Choose your favourite design, place the order </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                    <div class="how-it-box">
+                        <a href="#">
+                            <img id="relax" class="img-circle img-responsive img-center" src="http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l6_03.png" alt="">
+                        </a>
+                        <h3> Relax </h3>
+                        <p> Leave it on us, we'll deliver and install items FREE </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="types-of-kitchen">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                    <h1> Types of Kitchen </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lshaped">
+        <div class="container">
+            <div class="lshaped-box">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 text-left">
+                        <h2> L-shaped kitchen </h2>
+                        <p>
+                            The L-shaped kitchen is among the most versatile of modular kitchen layouts
+                            and is popular as well. It works well for most homes, irrespective of the
+                            size of the space you have for your kitchen.  It creates an efficient cooking
+                            space that makes room for appliances, both large and small, as well as spacious
+                            cabinetry. Installed along right angles of walls in a kitchen, it leaves an open
+                            area in the centre that you can use to bring in a cooking island or even a small
+                            dining table and chairs.
+                        </p>
+                        <button class="btn btn-default btn-kitchen"> See Our Collection </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466146556/kitchen_lp/L_SHAPE.png" class="img-responsive img-center" alt="lshaped">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ushaped">
+        <div class="container">
+            <div class="ushaped-box">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 text-left">
+                        <h2> U-shaped kitchen </h2>
+                        <p> Ideal for the medium-sized home, the U-shaped kitchen layout is perfect for efficient
+                            cooking when you manage the kitchen on your own. This layout is spread out across
+                            three walls, with two parallel to each other to bring about the U-shape. The layout
+                            is characterized by the fact that no traffic lanes pass through the entire work area.
+                            The compact size ensures that the perfect kitchen triangle is achieved and you have a
+                            cooking space that you will love to spend time in. </p>
+                        <button class="btn btn-default btn-kitchen"> See Our Collection </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466146557/kitchen_lp/U-SHAPE.png" class="img-responsive img-center" alt="ushaped">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="straight">
+        <div class="container">
+            <div class="straight-box">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 text-left">
+                        <h2> Straight kitchen </h2>
+                        <p> For the small home that aspires to look trendy and completely functional at the same time,
+                            the straight kitchen is the perfect solution. It provides you storage as well as cooking,
+                            prepping and cleaning areas, all the while taking up minimal space across one wall.
+                            This widens the working area of your kitchen, allowing you to do more. This is the
+                            simplest of kitchen layouts and can be easily installed, allowing you easy access
+                            to everything you need. </p>
+                        <button class="btn btn-default btn-kitchen"> See Our Collection </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466146557/kitchen_lp/STRAIGHT.png" class="img-responsive img-center" alt="Straight">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallel">
+        <div class="container">
+            <div class="parallel-box">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 text-left">
+                        <h2> Parallel kitchen </h2>
+                        <p> Also known as the galley kitchen, this layout creates a walkway between two
+                            functional counters placed opposite each other. Each of the counters have dedicated
+                            space for appliances, washing, prepping and cooking. These are ideal for kitchens
+                            that are narrow or if you want to have an extended space for a rectangular kitchen.
+                            No matter what the size of the house, this kitchen layout works well. </p>
+                        <button class="btn btn-default btn-kitchen"> See Our Collection </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466146556/kitchen_lp/PARELELL.png" class="img-responsive img-center" alt="parallel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="testimonial">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                    <h2> Testimonials </h2>
+                </div>
+                <div class="col-md-12" data-wow-delay="0.2s">
+                    <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#quote-carousel" data-slide-to="0" class="testimonial-name active">
+                                <img class="img-responsive " src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
+                                <br/><span class="t-name"> Prasad Naik </span>
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="1" class="testimonial-name">
+                                <img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
+                                <br/><span class="t-name"> Prasad Naik </span>
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="2" class="testimonial-name">
+                                <img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
+                                <br/><span class="t-name"> Prasad Naik </span>
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="3" class="testimonial-name">
+                                <img class="img-responsive" src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="">
+                                <br/><span class="t-name"> Prasad Naik </span>
+                            </li>
+                        </ol>
+                        <div class="carousel-inner text-center">
+                            <div class="item active">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <p>
+                                            My doubts were very well cleared by the design team, they explained functionality
+                                            of each product. That too without losing their calm. Thumbs up from me.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <p>
+                                            My doubts were very well cleared by the design team, they explained functionality
+                                            of each product. That too without losing their calm. Thumbs up from me.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <p>
+                                            My doubts were very well cleared by the design team, they explained functionality
+                                            of each product. That too without losing their calm. Thumbs up from me.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <p>
+                                            My doubts were very well cleared by the design team, they explained functionality
+                                            of each product. That too without losing their calm. Thumbs up from me.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="assure-you-with">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                    <h2> We assure you with: </h2>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                    <div class="assure-box">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466168532/kitchen_lp/01_03.jpg" class="img-responsive img-center" alt="assure-img">
+                        <h4> Maintenance </h4>
+                        <p> Unparalleled 3 Year <br/> Maintenance Support</p>
+                    </div>
+                    <div class="assure-box">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466168532/kitchen_lp/03_03.png" class="img-responsive img-center" alt="assure-img">
+                        <h4> Delivery </h4>
+                        <p> Guaranteed <br/>  45 days delivery </p>
+                    </div>
+                    <div class="assure-box">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466168532/kitchen_lp/05_03.png" class="img-responsive img-center" alt="assure-img">
+                        <h4> Installation </h4>
+                        <p> No charge for <br/> installation. </p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-6 why-us-bg-screen">
+                    <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466170294/kitchen_lp/assure.jpg" class="img-responsive img-center assure-bg-img" alt="assure-img">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                    <div class="assure-box">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466168532/kitchen_lp/02_03.png" class="img-responsive img-center" alt="assure-img">
+                        <h4> Partners </h4>
+                        <p> Alliance partners like  <br/> Hetich & Haffele </p>
+                    </div>
+                    <div class="assure-box">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466168532/kitchen_lp/04_03.png" class="img-responsive img-center" alt="assure-img">
+                        <h4> Maintenance </h4>
+                        <p>Unparalleled 3 Year <br/> Maintenance Support</p>
+                    </div>
+                    <div class="assure-box">
+                        <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466168532/kitchen_lp/06_03.png" class="img-responsive img-center" alt="assure-img">
+                        <h4> EMI </h4>
+                        <p> Easy EMI options via <br/> Bajaj Finserv </p>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 why-us-sm-screen">
+                    <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466170294/kitchen_lp/assure.jpg" class="img-responsive img-center assure-sm-img" alt="assure-img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="why-us">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12  text-center">
+                <div class="why-us-head">
+                    <h2> Why Us? </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 p10">
+                <div class="why-us-box">
+                    <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466058145/kitchen_lp/01_1.jpg" class="img-responsive img-center" alt="why us">
+                    <h3>Choice of Material</h3>
+                    <p> The materials used in the making of the kitchen are durable, economical and perfect for storage solutions. </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 p10">
+                <div class="why-us-box">
+                    <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466058145/kitchen_lp/0615.jpg" class="img-responsive img-center" alt="why us">
+                    <h3>Shutter Finishes</h3>
+                    <p> You can choose from the variety of finishes available which includes Laminate, MDF and more. </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 p10">
+                <div class="why-us-box">
+                    <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466058145/kitchen_lp/02.png" class="img-responsive img-center" alt="why us">
+                    <h3>Appliances</h3>
+                    <p> We are associated with the best companies that sell kitchen appliances, including Bosch, Faber, KAFF, Siemens. </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 p10">
+                <div class="why-us-box">
+                    <img src="http://res.cloudinary.com/mygubbi/image/upload/v1466058145/kitchen_lp/0601.png" class="img-responsive img-center" alt="why us">
+                    <h3>Accessories</h3>
+                    <p> Organizing your kitchen is more important than choosing the right kitchen and we ensure you effectively utilize all that you own. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container-fluid margin-top20">
+    <h1 class="heading-center-notransform text-light-shadow-black">
+        Brands that we are working with
+    </h1>
+    <div class="row margin0 padding-top40">
+        <div class="col-lg-1 col-md-1 col-sm-1 img_hover align-center padding0 margin-bottom10">
+        </div>
+        <div class="col-lg-2 col-md-2 img_hover align-center padding0 margin-bottom10">
+            <div class="row margin0">
+                <img data-src="<%= imgBase + '/v1/shobha_page/brand_icon/Hettich-1.png'%>"
+                     class="cld-responsive img-centered no_hover" alt="...">
+                <img data-src="<%= imgBase + '/v1/shobha_page/brand_icon/Hettich-0.png'%>"
+                     class="cld-responsive img-centered w_hover" alt="...">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 img_hover align-center padding0 margin-bottom10">
+            <div class="row margin0">
+                <img data-src="<%= imgBase + '/v1/shobha_page/brand_icon/Centuryply-1.png'%>"
+                     class="cld-responsive img-centered no_hover" alt="...">
+                <img data-src="<%= imgBase + '/v1/shobha_page/brand_icon/Centuryply-0.png'%>"
+                     class="cld-responsive img-centered w_hover" alt="...">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 img_hover align-center padding0 margin-bottom10">
+            <div class="row margin0">
+                <img data-src="<%= imgBase + '/v1/shobha_page/brand_icon/greenlam-1.png'%>"
+                     class="cld-responsive img-centered no_hover" alt="...">
+                <img data-src="<%= imgBase + '/v1/shobha_page/brand_icon/greenlam-0.png'%>"
+                     class="cld-responsive img-centered w_hover" alt="...">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 img_hover align-center padding0 margin-bottom10">
+            <div class="row margin0">
+                <img data-src="<%= imgBase + 'w_230' + '/v1/shobha_page/brand_icon/Hafele-1.png'%>"
+                     class="cld-responsive img-centered no_hover padding-top40" alt="...">
+                <img data-src="<%= imgBase + 'w_230' + '/v1/shobha_page/brand_icon/Hafele-0.png'%>"
+                     class="cld-responsive img-centered w_hover padding-top40" alt="...">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 img_hover align-center padding0 margin-bottom10">
+            <div class="row margin0">
+                <img data-src="<%= imgBase + 'w_230' + '/v1/shobha_page/brand_icon/Merino-1.png'%>"
+                     class="cld-responsive img-centered no_hover padding-top40 padding-left40" alt="...">
+                <img data-src="<%= imgBase + 'w_230' + '/v1/shobha_page/brand_icon/Merino-0.png'%>"
+                     class="cld-responsive img-centered w_hover padding-top40 padding-left40" alt="...">
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 img_hover align-center padding0 margin-bottom10">
+        </div>
+    </div>
+
+</div>
+
+<!-- Brand Section End -->
+</section>
