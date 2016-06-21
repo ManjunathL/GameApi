@@ -5,17 +5,17 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/landing_pages/kitchenlanding_page.html',
+    'text!/templates/ebook/ebook.html',
     'cloudinary_jquery',
     '/js/mgfirebase.js',
     '/js/consultutil.js',
     '/js/analytics.js'
-], function($, _, Backbone, kitchenlandingPageTemplate, CloudinaryJquery, MGF, ConsultUtil, Analytics) {
-    var KitchenLandingPageVIew = Backbone.View.extend({
+], function($, _, Backbone, ebookPageTemplate, CloudinaryJquery, MGF, ConsultUtil, Analytics) {
+    var EbookPageVIew = Backbone.View.extend({
          el: '.page',
                 ref: null,
                 renderWithUserProfCallback: function(userProfData) {
-                    $(this.el).html(_.template(kitchenlandingPageTemplate)({
+                    $(this.el).html(_.template(ebookPageTemplate)({
                         'userProfile': userProfData
                     }));
                     $.cloudinary.responsive();
@@ -56,5 +56,5 @@ define([
                     "submit": "submit"
                 }
             });
-    return KitchenLandingPageVIew;
+    return EbookPageVIew;
 });
