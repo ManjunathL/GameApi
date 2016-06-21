@@ -59,6 +59,7 @@ define([
             'pune-lp(/)': 'punelandingpage',
             'kitchen-lp(/)': 'kitchenlandingpage',
             'holiday-lp(/)': 'holidaylandingpage',
+            'e-book(/)': 'ebook',
              '*something': 'errorPage'
 
 
@@ -421,6 +422,13 @@ define([
                         VM.create(VM.KITCHENLANDINGPAGE, KitchenLandingPage).render();
                     });
                 });
+
+        router.on('route:ebook', function(actions) {
+                            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                            require(['/js/views/ebook/ebook.js'], function(EbookPage) {
+                                VM.create(VM.EBOOKPAGE, EbookPage).render();
+                            });
+                        });
 
         router.on('route:errorPage', function(actions) {
                     setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
