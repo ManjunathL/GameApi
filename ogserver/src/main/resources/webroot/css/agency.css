@@ -5748,9 +5748,9 @@ a.tab-ico {
     margin-right: -19px;
     }
     #quote-carousel .carousel-indicators li {
-    width: 70px;
-    height: 70px;
-    margin: 5px;
+    width: 60px;
+    height: 60px;
+    margin: 5px 10px;
     cursor: pointer;
     border: 1px solid #CCC;
     border-radius: 50px;
@@ -5789,14 +5789,15 @@ a.tab-ico {
     .btn-kitchen{
     border-radius: 0px;
     padding: 11px 20px;
-    text-shadow: 0px 0px 0px #ffff;
+    text-shadow: 0px 0px 0px #fff;
     color: #ffffff;
     font-weight: 200;
+    text-transform: capitalize;
     }
     .btn-kitchen:hover,
     .btn-kitchen:active,
     .btn-kitchen:focus{
-    text-shadow: 0px 0px 0px #ffff;
+    text-shadow: 0px 0px 0px #fff;
     color: #ffffff;
     font-weight: 200;
     }
