@@ -5702,7 +5702,7 @@ a.tab-ico {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding: 45px 0 15px 0;
+    padding: 30px 0 40px 0;
     text-align: center;
     color: #ffffff;
     }
@@ -5727,7 +5727,7 @@ a.tab-ico {
     }
     /* Carousel */
     #quote-carousel {
-    padding: 0 10px 30px 10px;
+    padding: 0 10px 20px 10px;
     }
     #quote-carousel .carousel-control {
     background: none;
@@ -5746,6 +5746,8 @@ a.tab-ico {
     top: auto;
     bottom: 0px;
     margin-right: -19px;
+    margin-bottom: 20px;
+
     }
     #quote-carousel .carousel-indicators li {
     width: 60px;
@@ -5767,7 +5769,7 @@ a.tab-ico {
     }
     .carousel-inner {
     min-height: 160px;
-    margin-top: 30px !important;
+    margin-top: 15px !important;
     }
     .item blockquote {
     border-left: none;
@@ -5877,6 +5879,7 @@ a.tab-ico {
     .testimonial h2{
     text-transform: inherit;
     font-size: 42px;
+    margin:30px 0px 0px;
     }
     .testimonial p{
     font-size: 20px;
@@ -5884,7 +5887,7 @@ a.tab-ico {
     .assure-you-with h2{
     text-transform: inherit;
     font-size: 42px;
-    margin: 10px 0px 60px;
+    margin: 10px 0px 20px;
     font-weight: 200;
     }
     .assure-box h4{
