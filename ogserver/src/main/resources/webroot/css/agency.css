@@ -5722,70 +5722,71 @@ a.tab-ico {
     color: #ffffff;
     }
     .types-of-kitchen h1{
-    text-transform: inherit;
+        text-transform: inherit;
+        padding-bottom: 10px;
+        font-weight: 400;
     }
     /* Carousel */
     #quote-carousel {
-    padding: 0 10px 20px 10px;
+        padding: 0 10px 20px 10px;
     }
     #quote-carousel .carousel-control {
-    background: none;
-    color: #CACACA;
-    font-size: 2.3em;
-    text-shadow: none;
+        background: none;
+        color: #CACACA;
+        font-size: 2.3em;
+        text-shadow: none;
     }
     #quote-carousel .carousel-control.left {
-    left: -60px;
+        left: -60px;
     }
     #quote-carousel .carousel-control.right {
-    right: -60px;
+        right: -60px;
     }
     #quote-carousel .carousel-indicators {
-    right: 50%;
-    top: auto;
-    bottom: 0px;
-    margin-right: -19px;
-    margin-bottom: 20px;
-
+        right: 50%;
+        top: auto;
+        bottom: 0px;
+        margin-right: -19px;
+        margin-bottom: 20px;
     }
     #quote-carousel .carousel-indicators li {
-    width: 60px;
-    height: 60px;
-    margin: 5px 10px;
-    cursor: pointer;
-    border: 1px solid #CCC;
-    border-radius: 50px;
-    opacity: 0.4;
-    overflow: hidden;
-    transition: all 0.4s;
+        width: 60px;
+        height: 60px;
+        margin: 5px 10px;
+        cursor: pointer;
+        border: 1px solid #CCC;
+        border-radius: 50px;
+        opacity: 0.4;
+        overflow: hidden;
+        transition: all 0.4s;
     }
     #quote-carousel .carousel-indicators .active {
-    background: #333333;
-    border-radius: 100px;
-    border-color: #f33;
-    opacity: 1;
-    overflow: hidden;
+        background: #333333;
+        border-radius: 100px;
+        border-color: #f33;
+        opacity: 1;
+        overflow: hidden;
     }
     .carousel-inner {
-    min-height: 160px;
-    margin-top: 15px !important;
+        min-height: 160px;
+        margin-top: 15px !important;
     }
     .item blockquote {
-    border-left: none;
-    margin: 0;
+        border-left: none;
+        margin: 0;
     }
     .item blockquote p:before {
-    content: "\f10d";
-    font-family: 'Fontawesome';
-    float: left;
-    margin-right: 10px;
+        content: "\f10d";
+        font-family: 'Fontawesome';
+        float: left;
+        margin-right: 10px;
     }
     .kitchen-head h1{
-    color: #ffffff;
-    font-size: 42px;
-    margin: 140px 0px 35px 0px;
-    font-weight: 200;
-    text-transform: inherit;
+        color: #ffffff;
+        font-size: 42px;
+        margin: 140px 0px 35px 0px;
+        font-weight: 200;
+        text-transform: inherit;
     }
     .btn-kitchen{
     border-radius: 0px;
@@ -5829,13 +5830,14 @@ a.tab-ico {
 
     }
     .how-it-work{
-    margin: 40px 0px 70px;
+        margin: 40px 0px 70px;
+        border-top: 1px solid #ddd;
     }
     .how-it-work-head h2{
-    margin: 25px 0px 40px;
-    text-transform: inherit;
-    font-size: 34px;
-    font-weight: 300;
+        margin: 25px 0px 40px;
+        text-transform: inherit;
+        font-size: 34px;
+        font-weight: 400;
     }
     .how-it-box{
     margin: 0px 55px;
@@ -5884,10 +5886,10 @@ a.tab-ico {
     font-size: 20px;
     }
     .assure-you-with h2{
-    text-transform: inherit;
-    font-size: 42px;
-    margin: 10px 0px 20px;
-    font-weight: 200;
+        text-transform: inherit;
+        font-size: 42px;
+        margin: 10px 0px 20px;
+        font-weight: 400;
     }
     .assure-box h4{
     text-transform: inherit;
@@ -5908,7 +5910,7 @@ a.tab-ico {
     text-transform: inherit;
     font-size: 42px;
     margin: 10px 0px 35px;
-    font-weight: 200;
+    font-weight: 400;
     }
     .why-us img{
     width: 100% !important;
@@ -6021,7 +6023,6 @@ a.tab-ico {
     }
     }
  /* End Kitchen Landing Page */
-
 /*lp section css extended */
 
  .lp-project-no{
