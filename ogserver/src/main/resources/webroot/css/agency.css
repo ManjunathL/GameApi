@@ -6021,3 +6021,28 @@ a.tab-ico {
     }
     }
  /* End Kitchen Landing Page */
+
+/*lp section css extended */
+
+ .lp-project-no{
+        margin-bottom: 5px;
+        color: #586872;
+        font-size: 42px;
+        font-weight: 500;
+    }
+    .lp-projects{
+        margin: 0px;
+        color: #f4821f;
+        font-size: 26px;
+    }
+    .lp-projects-dec{
+        text-transform: inherit;
+        color: #586872;
+        font-size: 28px;
+        font-weight: 500;
+    }
+    .project-description{
+        margin:70px 0px;
+    }
+
+  /* end lp extended css */
