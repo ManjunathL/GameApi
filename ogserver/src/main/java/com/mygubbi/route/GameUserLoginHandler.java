@@ -32,7 +32,7 @@ public class GameUserLoginHandler extends AbstractRouteHandler {
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     LOG.info("Check query (ms):" + selectData.responseTimeInMillis);
-                    if (selectData.rows.isEmpty()) {
+                    if (selectData.rows == null || selectData.rows.isEmpty()) {
                         respond(response, "error", null, "Incorrect user or password.");
                     } else {
                         boolean valid = UserHandlerUtil.authenticate(paramsObject, selectData);
