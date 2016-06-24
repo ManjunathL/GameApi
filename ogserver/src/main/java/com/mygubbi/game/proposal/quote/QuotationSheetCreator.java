@@ -352,6 +352,11 @@ public class QuotationSheetCreator
         {
             cell.setCellValue(value.toString());
         }
+
+        if (fieldName.equals("discountamount") && this.quoteData.getDiscountAmount() == 0)
+        {
+            //Remove the discount amount row and the next row which is total - discount amount row
+        }
     }
 
 }

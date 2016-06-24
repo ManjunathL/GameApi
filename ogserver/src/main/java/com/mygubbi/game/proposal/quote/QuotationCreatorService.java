@@ -5,6 +5,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
@@ -112,6 +113,7 @@ public class QuotationCreatorService extends AbstractVerticle
                     {
                         message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
                         LOG.error("Proposal products not found for id:" + proposalHeader.getId());
+                        return;
                     }
                     else
                     {
@@ -120,12 +122,39 @@ public class QuotationCreatorService extends AbstractVerticle
                         {
                             products.add(new ProductLineItem(json));
                         }
-                        this.createQuote(quoteRequest, proposalHeader, products, message, generateQuote);
+                        this.getProposalAddons(quoteRequest, proposalHeader, products, message, generateQuote);
                     }
                 });
     }
 
-    private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message  message, boolean generateQuote)
+    private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message, boolean generateQuote)
+    {
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.addon.list", new JsonObject().put("proposalId", proposalHeader.getId())));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag)
+                    {
+                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Error in fetching Proposal level addons for :" + proposalHeader.getId())));
+                        LOG.error("Proposal level addons not found for id:" + proposalHeader.getId());
+                        return;
+                    }
+
+                    List<ProductAddon> addons = null;
+                    if (resultData.rows != null && !resultData.rows.isEmpty())
+                    {
+                        addons = new ArrayList<ProductAddon>();
+                        for (JsonObject json : resultData.rows)
+                        {
+                            addons.add(new ProductAddon(json));
+                        }
+                    }
+                    this.createQuote(quoteRequest, proposalHeader, products, addons, message, generateQuote);
+                });
+    }
+
+    private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
+                             List<ProductAddon> addons, Message  message, boolean generateQuote)
     {
         String targetFile = proposalHeader.folderPath() + (generateQuote ? "/quotation.xlsx" : "/jobcard.xlsx" );
         try
@@ -140,7 +169,7 @@ public class QuotationCreatorService extends AbstractVerticle
         {
             String templateFile = generateQuote ? this.quoteTemplate : this.jobcardTemplate;
             VertxInstance.get().fileSystem().copyBlocking(templateFile, targetFile);
-            QuoteData quoteData = new QuoteData(proposalHeader, products);
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount());
             if (generateQuote)
             {
                 new ExcelQuoteCreator(targetFile, quoteData).prepareQuote();

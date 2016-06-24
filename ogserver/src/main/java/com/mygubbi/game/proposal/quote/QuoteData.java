@@ -12,6 +12,7 @@ import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,14 +32,19 @@ public class QuoteData
 
     private List<AssembledProductInQuote> assembledProducts;
     private List<ProductLineItem> catalogueProducts;
+    private List<ProductAddon> headerLevelAddons = Collections.emptyList();
 
     private double productsCost;
     private double addonsCost;
 
-    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products)
+    private double discountAmount;
+
+    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount)
     {
         this.proposalHeader = proposalHeader;
         this.products = products;
+        if (addons != null) this.headerLevelAddons = addons;
+        this.discountAmount = discountAmount;
         this.prepare();
     }
 
@@ -110,6 +116,10 @@ public class QuoteData
                 if (categoryCode.equals(addon.getCategoryCode())) addons.add(addon);
             }
         }
+        for (ProductAddon addon : this.headerLevelAddons)
+        {
+            if (categoryCode.equals(addon.getCategoryCode())) addons.add(addon);
+        }
         return addons;
     }
 
@@ -130,11 +140,20 @@ public class QuoteData
                 return round(this.addonsCost);
             case "totalamount":
                 return this.getTotalCost();
+            case "discountamount":
+                return this.discountAmount;
+            case "amountafterdiscount":
+                return this.getTotalCost() - this.discountAmount;
             case "totalamountinwords":
-                return new CurrencyUtil().convert(String.valueOf(this.getTotalCost()));
+                return new CurrencyUtil().convert(String.valueOf(this.getTotalCost() - this.discountAmount));
             default:
                 return null;
         }
+    }
+
+    public double getDiscountAmount()
+    {
+        return discountAmount;
     }
 
     private double getTotalCost()
