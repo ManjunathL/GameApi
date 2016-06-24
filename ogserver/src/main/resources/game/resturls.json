@@ -85,7 +85,7 @@
       "uri": "/gapi/proposal/add.doc",
       "source": "db",
       "query":"proposal.document.add",
-      "params":["proposalId", "title", "fileName", "uploadedBy"],
+      "params":["proposalId", "title", "fileName", "attachmentType", "uploadedBy"],
       "resultfields":[],
       "default": "[]"
     },
@@ -167,7 +167,7 @@
       "uri": "/gapi/product/add.doc",
       "source": "db",
       "query":"product.document.add",
-      "params":["proposalId", "productId", "title", "fileName", "uploadedBy"],
+      "params":["proposalId", "productId", "title", "fileName", "attachmentType", "uploadedBy"],
       "resultfields":[],
       "default": "[]"
     },

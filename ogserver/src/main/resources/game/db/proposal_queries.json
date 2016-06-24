@@ -111,8 +111,8 @@
       "id": "proposal.document.add",
       "type": "insert",
       "table": "proposal_documents",
-      "query": "insert into proposal_documents (proposalId, title, fileName, uploadedBy) values (?, ?, ?, ?)",
-      "params": ["proposalId", "title", "fileName", "uploadedBy"]
+      "query": "insert into proposal_documents (proposalId, title, fileName, attachmentType, uploadedBy) values (?, ?, ?, ?, ?)",
+      "params": ["proposalId", "title", "fileName", "attachmentType", "uploadedBy"]
     },
 
     {
@@ -137,8 +137,8 @@
       "id": "product.document.add",
       "type": "insert",
       "table": "proposal_documents",
-      "query": "insert into proposal_documents (proposalId, productId, title, fileName, uploadedBy) values (?, ?, ?, ?, ?)",
-      "params":["proposalId", "productId", "title", "fileName", "uploadedBy"]
+      "query": "insert into proposal_documents (proposalId, productId, title, fileName, attachmentType, uploadedBy) values (?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "productId", "title", "fileName", "attachmentType", "uploadedBy"]
     },
 
     {
