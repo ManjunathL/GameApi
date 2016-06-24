@@ -106,6 +106,39 @@
       "default": "[]"
     },
     {
+      "uri": "/gapi/proposal/addon.add",
+      "source": "db",
+      "query":"proposal.addon.add",
+      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/addon.update",
+      "source": "db",
+      "query":"proposal.addon.update",
+      "params":["code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy", "id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.remove",
+      "source": "db",
+      "query":"proposal.addon.remove",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.list",
+      "source": "db",
+      "query":"proposal.addon.list",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
       "uri": "/gapi/product/detail",
       "source": "db",
       "query":"proposal.product.detail",

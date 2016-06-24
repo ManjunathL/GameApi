@@ -158,6 +158,41 @@
     },
 
     {
+      "id": "proposal.addon.list",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select * from proposal_addon where proposalId = ?",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "proposal.addon.remove",
+      "type": "delete",
+      "table": "proposal_addon",
+      "query": "delete from proposal_addon where id = ?",
+      "params": ["id"]
+    },
+
+    {
+      "id": "proposal.addon.add",
+      "type": "insert",
+      "table": "proposal_addon",
+      "query": "insert into proposal_addon(proposalId, code, categoryCode, productTypeCode, brandCode, catalogueCode, title, rate, quantity, amount, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy"]
+    },
+
+    {
+      "id": "proposal.addon.update",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, updatedBy = ? where id = ?",
+      "params": [
+        "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount",
+        "updatedBy", "id"
+      ]
+    },
+
+    {
       "id": "kdmax.mapped.modules",
       "type": "select",
       "table": "kdmax_mg_map",

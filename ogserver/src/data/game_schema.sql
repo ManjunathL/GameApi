@@ -96,12 +96,33 @@ CREATE TABLE proposal_documents(
   productId INTEGER NOT NULL DEFAULT 0,
   title varchar(255) NOT NULL,
   fileName varchar(255) NOT NULL,
+  attachmentType varchar(32) NOT NULL,
   uploadedBy varchar(64) NULL,
   uploadedOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY proposalid_key (proposalId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal documents';
+
+
+DROP TABLE IF EXISTS proposal_addon;
+CREATE TABLE proposal_addon(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  proposalId INTEGER NOT NULL,
+  code varchar(16) NOT NULL,
+  categoryCode varchar(32) NOT NULL DEFAULT 'NA',
+  productTypeCode char(32) NOT NULL DEFAULT 'All',
+  brandCode varchar(32) NULL,
+  catalogueCode varchar(32) NOT NULL,
+  title varchar(255) NOT NULL,
+  rate DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  quantity DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  amount DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  updatedBy varchar(64) NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY proposalid_key (proposalId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Addons';
 
 DROP TABLE IF EXISTS kdmax_def_map;
 CREATE TABLE kdmax_def_map(
