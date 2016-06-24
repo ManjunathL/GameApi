@@ -85,7 +85,7 @@
       "uri": "/gapi/proposal/add.doc",
       "source": "db",
       "query":"proposal.document.add",
-      "params":["proposalId", "title", "fileName", "uploadedBy"],
+      "params":["proposalId", "title", "fileName", "attachmentType", "uploadedBy"],
       "resultfields":[],
       "default": "[]"
     },
@@ -101,6 +101,39 @@
       "uri": "/gapi/product/list",
       "source": "db",
       "query":"proposal.product.list",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.add",
+      "source": "db",
+      "query":"proposal.addon.add",
+      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/addon.update",
+      "source": "db",
+      "query":"proposal.addon.update",
+      "params":["code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy", "id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.remove",
+      "source": "db",
+      "query":"proposal.addon.remove",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.list",
+      "source": "db",
+      "query":"proposal.addon.list",
       "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
@@ -134,7 +167,7 @@
       "uri": "/gapi/product/add.doc",
       "source": "db",
       "query":"product.document.add",
-      "params":["proposalId", "productId", "title", "fileName", "uploadedBy"],
+      "params":["proposalId", "productId", "title", "fileName", "attachmentType", "uploadedBy"],
       "resultfields":[],
       "default": "[]"
     },
