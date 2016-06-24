@@ -829,25 +829,47 @@ ul.social-links {
 /* ---- NRI Page ---- */
 
 .nri_banner_txt {
-    position: absolute;
-    top: 18%;
-    left: 20%;
-    max-width: 95%;
-}
-
-
-@media (max-width:1180px){
-    .nri_banner_txt {
-        background-color: rgba(169, 167, 177, 1);
-        position: relative;
-        left: 0;
-        max-width: 100%;
-    }
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1/nri_page/banner_top.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 75px 0 75px 0;
+    text-align: center;
+    color: #ffffff;
 }
 
 .nri_banner_form {
-    width: 70%;
     margin: auto;
+}
+
+.nri_banner_head{
+    margin: 100px 80px;
+}
+
+@media (max-width: 480px) {
+    .nri_banner_txt{
+        padding: 10px 0 10px 0;
+    }
+    .nri_banner_head{
+        margin: 10px 10px;
+    }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+    .nri_banner_txt{
+        padding: 10px 0 10px 0;
+    }
+    .nri_banner_head{
+        margin: 40px 10px;
+    }
 }
 
 .nri_banner_form_input {
@@ -961,7 +983,6 @@ ul.social-links {
 }
 
 /* ---- NRI Page End ---- */
-
 
 /* ---- Youtube Video ---- */
 
@@ -5594,6 +5615,7 @@ a.tab-ico {
         background-color: #FF5722;
         }
     /*Page Not Found Error Page End*/
+
 /* Kitchen-Landng Page*/
 
 
@@ -5750,22 +5772,20 @@ a.tab-ico {
         margin-bottom: 20px;
     }
     #quote-carousel .carousel-indicators li {
+
         width: 60px;
         height: 60px;
         margin: 5px 10px;
         cursor: pointer;
-        border: 1px solid #CCC;
-        border-radius: 50px;
         opacity: 0.4;
-        overflow: hidden;
         transition: all 0.4s;
     }
+    #quote-carousel .carousel-indicators li img{
+        float: left;
+        border: 1px solid #CCC;
+    }
     #quote-carousel .carousel-indicators .active {
-        background: #333333;
-        border-radius: 100px;
-        border-color: #f33;
         opacity: 1;
-        overflow: hidden;
     }
     .carousel-inner {
         min-height: 160px;
@@ -5789,45 +5809,44 @@ a.tab-ico {
         text-transform: inherit;
     }
     .btn-kitchen{
-    border-radius: 0px;
-    padding: 11px 20px;
-    text-shadow: 0px 0px 0px #fff;
-    color: #ffffff;
-    font-weight: 200;
-    text-transform: capitalize;
+        border-radius: 0px;
+        padding: 11px 20px;
+        text-shadow: 0px 0px 0px #fff;
+        color: #ffffff;
+        font-weight: 200;
+        text-transform: capitalize;
     }
     .btn-kitchen:hover,
     .btn-kitchen:active,
     .btn-kitchen:focus{
-    text-shadow: 0px 0px 0px #fff;
-    color: #ffffff;
-    font-weight: 200;
+        text-shadow: 0px 0px 0px #fff;
+        color: #ffffff;
+        font-weight: 200;
     }
     .kitchen-form .form-control{
-    color: #FFFFFF;
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0);
-    border-width: 0px 0px 1px 0px;
+        color: #FFFFFF;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0);
+        border-width: 0px 0px 1px 0px;
     }
     .kitchen-form select{
-    background-color: rgb(7, 6, 4) !important;
+        background-color: rgb(7, 6, 4) !important;
     }
     .kitchen-form .form-control:focus{
-    border-color: rgb(255, 83, 13);
-    outline: 0;
-    -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
-    box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
+        border-color: rgb(255, 83, 13);
+        outline: 0;
+        -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
+        box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
     }
     .kitchen-form .btn-kitchen{
-    border-radius: 0px;
-    padding: 11px 20px;
-    text-shadow: 0 0px 0 rgba(0,0,0,0);
-    color: #ffffff;
-    background: rgba(255, 83, 13, 1) !important;
-    font-weight: 200;
-    margin-top: 20px;
-    border: 0px solid rgba(255, 83, 13, 1);
-
+        border-radius: 0px;
+        padding: 11px 20px;
+        text-shadow: 0 0px 0 rgba(0,0,0,0);
+        color: #ffffff;
+        background: rgba(255, 83, 13, 1) !important;
+        font-weight: 200;
+        margin-top: 20px;
+        border: 0px solid rgba(255, 83, 13, 1);
     }
     .how-it-work{
         margin: 40px 0px 70px;
@@ -5840,50 +5859,50 @@ a.tab-ico {
         font-weight: 400;
     }
     .how-it-box{
-    margin: 0px 55px;
+        margin: 0px 55px;
     }
     .how-it-box h3{
-    margin: 15px 0px 10px;
-    text-transform: inherit;
-    color: rgba(255, 83, 13, 1);
+        margin: 15px 0px 10px;
+        text-transform: inherit;
+        color: rgba(255, 83, 13, 1);
     }
     .how-it-box p{
-    font-size: 16px;
+        font-size: 16px;
     }
     .ushaped-box,
     .straight-box,
     .parallel-box,
     .lshaped-box {
-    margin: 105px 0px 160px;
+        margin: 105px 0px 160px;
     }
     .ushaped-box h2,
     .straight-box h2,
     .parallel-box h2,
     .lshaped-box h2 {
-    font-size: 34px;
-    text-transform: inherit;
+        font-size: 34px;
+        text-transform: inherit;
     }
     .ushaped-box img,
     .straight-box img,
     .parallel-box img,
     .lshaped-box img{
-    margin: 20px auto;
+        margin: 20px auto;
     }
     .ushaped-box p,
     .straight-box p,
     .parallel-box p,
     .lshaped-box p{
-    font-size: 16px;
-    line-height: 1.65;
-    font-weight: 200;
+        font-size: 16px;
+        line-height: 1.65;
+        font-weight: 200;
     }
     .testimonial h2{
-    text-transform: inherit;
-    font-size: 42px;
-    margin:30px 0px 0px;
+        text-transform: inherit;
+        font-size: 42px;
+        margin:30px 0px 0px;
     }
     .testimonial p{
-    font-size: 20px;
+        font-size: 20px;
     }
     .assure-you-with h2{
         text-transform: inherit;
@@ -5892,35 +5911,35 @@ a.tab-ico {
         font-weight: 400;
     }
     .assure-box h4{
-    text-transform: inherit;
-    font-size:22px;
+        text-transform: inherit;
+        font-size:22px;
     }
     .assure-bg-img{
-    margin: 25px 0px;
-    width: 100% !important;
+        margin: 25px 0px;
+        width: 100% !important;
     }
     .assure-sm-img{
-    margin: 15px 0px;
-    width: 100% !important;
+        margin: 15px 0px;
+        width: 100% !important;
     }
     .why-us {
-    padding: 20px;
+        padding: 20px;
     }
     .why-us-head h2{
     text-transform: inherit;
-    font-size: 42px;
-    margin: 10px 0px 35px;
-    font-weight: 400;
+        font-size: 42px;
+        margin: 10px 0px 35px;
+        font-weight: 400;
     }
     .why-us img{
-    width: 100% !important;
-    border: 1px solid #222;
+        width: 100% !important;
+        border: 1px solid #222;
     }
     .why-us-box{
-    border: 1px solid #222;
-    margin: 10px;
-    min-height: 405px;
-    padding: 15px;
+        border: 1px solid #222;
+        margin: 10px;
+        min-height: 405px;
+        padding: 15px;
     }
     .why-us-box h3{
     text-transform: inherit;
@@ -6023,6 +6042,7 @@ a.tab-ico {
     }
     }
  /* End Kitchen Landing Page */
+
 /*lp section css extended */
 
  .lp-project-no{
@@ -6044,6 +6064,28 @@ a.tab-ico {
     }
     .project-description{
         margin:70px 0px;
+    }
+    @media (max-width: 480px) {
+        .lp-projects-dec{
+            font-size: 18px;
+        }
+        .lp-project-no{
+            font-size: 30px;
+        }
+        .lp-projects{
+            font-size: 18px;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+        .lp-projects-dec{
+            font-size: 20px;
+        }
+        .lp-project-no{
+            font-size: 36px;
+        }
+        .lp-projects{
+            font-size: 20px;
+        }
     }
 
   /* end lp extended css */
