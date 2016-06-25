@@ -109,7 +109,7 @@
       "uri": "/gapi/proposal/addon.add",
       "source": "db",
       "query":"proposal.addon.add",
-      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy"],
+      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"],
       "resultfields":[],
       "default": "[]"
     },
@@ -118,7 +118,7 @@
       "uri": "/gapi/proposal/addon.update",
       "source": "db",
       "query":"proposal.addon.update",
-      "params":["code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy", "id"],
+      "params":["code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"],
       "resultfields":[],
       "default": "[]"
     },

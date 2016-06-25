@@ -118,6 +118,7 @@ CREATE TABLE proposal_addon(
   rate DECIMAL(10,2) NOT NULL DEFAULT 0.0,
   quantity DECIMAL(10,2) NOT NULL DEFAULT 0.0,
   amount DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
   updatedBy varchar(64) NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),

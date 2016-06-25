@@ -177,19 +177,17 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, code, categoryCode, productTypeCode, brandCode, catalogueCode, title, rate, quantity, amount, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "updatedBy"]
+      "query": "insert into proposal_addon(proposalId, code, categoryCode, productTypeCode, brandCode, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
     },
 
     {
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, updatedBy = ? where id = ?",
+      "query": "update proposal_addon set code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
       "params": [
-        "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount",
-        "updatedBy", "id"
-      ]
+        "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
     },
 
     {
