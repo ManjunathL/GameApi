@@ -75,6 +75,7 @@ public class QuoteData
         }
 
         LOG.info("Products cost :" + this.productsCost + ". Addons cost:" + this.addonsCost);
+        LOG.info("Discount Amount :" + this.discountAmount);
     }
 
     public List<AssembledProductInQuote> getAssembledProducts()
@@ -149,7 +150,7 @@ public class QuoteData
             case "discountamount":
                 return this.discountAmount;
             case "amountafterdiscount":
-                return this.getAmountafterdiscount();
+                return this.getTotalCost()-getDiscountAmount();
             case "totalamountinwords":
                 return new CurrencyUtil().convert(String.valueOf(this.getTotalCost() - this.discountAmount));
             default:

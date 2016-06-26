@@ -253,6 +253,7 @@ public class QuotationSheetCreator
             return;
         }
 
+
         int index = 1;
         for (ProductAddon addon : addOns)
         {
@@ -260,6 +261,7 @@ public class QuotationSheetCreator
             currentRow++;
             index++;
         }
+        LOG.info("Addons :" + TITLE_CELL);
     }
 
     private void createRowWithMessage(int row, String message)
@@ -361,15 +363,17 @@ public class QuotationSheetCreator
             cell.setCellValue(value.toString());
         }
 
-        if (fieldName.equals("discountamount") && this.quoteData.getDiscountAmount() == 0)
+        if (fieldName.equals("discountamount") && this.quoteData.getDiscountAmount() == 0 )
         {
             quoteSheet.removeRow(cell.getRow());
 
         }
         if (fieldName.equals("amountafterdiscount") && this.quoteData.getAmountafterdiscount()==this.quoteData.getTotalCost())
         {
-            quoteSheet.removeRow(cell.getRow());
+            Row newRow=cell.getRow();
+            quoteSheet.removeRow(newRow);
         }
+
 
     }
 
