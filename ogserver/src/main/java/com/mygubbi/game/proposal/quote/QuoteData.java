@@ -143,7 +143,7 @@ public class QuoteData
             case "discountamount":
                 return this.discountAmount;
             case "amountafterdiscount":
-                return this.getTotalCost() - this.discountAmount;
+                return this.getAmountafterdiscount();
             case "totalamountinwords":
                 return new CurrencyUtil().convert(String.valueOf(this.getTotalCost() - this.discountAmount));
             default:
@@ -151,14 +151,20 @@ public class QuoteData
         }
     }
 
+
     public double getDiscountAmount()
     {
         return discountAmount;
     }
 
-    private double getTotalCost()
+
+    public double getTotalCost()
     {
         return round(this.productsCost + this.addonsCost);
+    }
+    public double getAmountafterdiscount()
+    {
+        return this.getTotalCost()-this.discountAmount;
     }
 
     private String concatValuesFromKeys(String[] keys, String delimiter)

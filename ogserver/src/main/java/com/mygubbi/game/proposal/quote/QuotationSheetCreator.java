@@ -317,6 +317,14 @@ public class QuotationSheetCreator
         return sheet.createRow(currentRow);
     }
 
+    private Row deleteRow(int rownnum, Sheet sheet)
+    {
+        Row dataRow=this.deleteRow(rownnum,this.quoteSheet);
+        sheet.removeRow(dataRow);
+        return dataRow;
+    }
+
+
     private Cell createCellWithData(Row dataRow, int cellNum, int cellType, Object data)
     {
         Cell cell = dataRow.createCell(cellNum, cellType);
@@ -355,8 +363,14 @@ public class QuotationSheetCreator
 
         if (fieldName.equals("discountamount") && this.quoteData.getDiscountAmount() == 0)
         {
-            //Remove the discount amount row and the next row which is total - discount amount row
+            quoteSheet.removeRow(cell.getRow());
+
         }
+        if (fieldName.equals("amountafterdiscount") && this.quoteData.getAmountafterdiscount()==this.quoteData.getTotalCost())
+        {
+            quoteSheet.removeRow(cell.getRow());
+        }
+
     }
 
 }
