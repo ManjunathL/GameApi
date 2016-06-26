@@ -129,7 +129,7 @@
       "id": "proposal.document.select",
       "type": "select",
       "table": "proposal_documents",
-      "query": "select * from proposal_documents where proposalId = ?",
+      "query": "select * from proposal_documents where proposalId = ? and productId = 0",
       "params": ["proposalId"]
     },
 
