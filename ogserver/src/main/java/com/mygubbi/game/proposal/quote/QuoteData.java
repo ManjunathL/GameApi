@@ -68,6 +68,12 @@ public class QuoteData
                 this.addonsCost += assembledProduct.getAddonsAmount();
             }
         }
+
+        for (ProductAddon addon : this.headerLevelAddons)
+        {
+            this.addonsCost += addon.getAmount();
+        }
+
         LOG.info("Products cost :" + this.productsCost + ". Addons cost:" + this.addonsCost);
     }
 
