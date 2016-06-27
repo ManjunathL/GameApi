@@ -34,23 +34,19 @@ define([
                     if (e.isDefaultPrevented()) return;
                     e.preventDefault();
 
-                    var name = $('#contact_full_name1').val();
-                    var email = $('#contact_email_id1').val();
-                    var phone = $('#contact_contact_num1').val();
-/*
-                    var propertyName = $('#contact_property_name1').val();
-*/
-                    var query = $('#contact_city').val();
-/*
-                    var floorplan = $("#contact_floorplan1").prop('files')[0];
-*/
+                    var name = $('#FirstName').val();
+                    var email = $('#EmailAddress').val();
 
-                    ConsultUtil.submit(name, email, phone, query, null, null, null, null);
+                    if((name.trim() != '') && (email.trim() != '')){
+                        var url='http://res.cloudinary.com/mygubbi/raw/upload/v1466509270/E-Book.pdf';
+                        window.open(url,'Download');
 
-                    window.App.router.navigate('/thankyou-consult-page', {
-                        trigger: true
-                    });
-
+                        window.App.router.navigate('/thankyou-ebook-page', {
+                            trigger: true
+                        });
+                    }else{
+                        alert('Please fill required fields!!!');
+                    }
                 },
                 events: {
                     "submit": "submit"
