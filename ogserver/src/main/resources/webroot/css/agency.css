@@ -6045,7 +6045,29 @@ a.tab-ico {
     }
     }
  /* End Kitchen Landing Page */
-
+/* Ebook */
+.img-ebook{
+    width: 100%;
+}
+.btn-orange{
+    border-radius: 0px;
+    padding: 11px 20px;
+    text-shadow: 0 0px 0 rgba(0,0,0,0);
+    color: #ffffff;
+    background: #f1591f !important;
+    border: 0px solid #f1591f;
+    text-transform: uppercase;
+}
+.btn-orange:hover,
+.btn-orange:active,
+.btn-orange:focus,
+.btn-orange.active,
+.btn-orange:active:focus,
+.btn-orange:active:hover {
+    text-shadow: 0px 0px 0px #fff;
+    color: #ffffff;
+}
+/* End of Ebook */
 /*lp section css extended */
 
  .lp-project-no{
