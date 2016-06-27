@@ -15,7 +15,7 @@ public class ProductAddon extends JsonObject
 
     private static final String SEQ = "seq";
     private static final String CODE = "code";
-    private static final String ADDON_CATEGORY_CODE = "addonCategoryCode";
+    private static final String ADDON_CATEGORY_CODE = "categoryCode";
     private static final String PRODUCT_TYPE_CODE = "productTypeCode";
     private static final String BRAND_CODE = "brandCode";
     private static final String CATALOGUE_CODE = "catalogueCode";
