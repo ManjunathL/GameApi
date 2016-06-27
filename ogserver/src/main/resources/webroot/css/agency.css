@@ -854,7 +854,10 @@ ul.social-links {
 .nri_banner_head{
     margin: 100px 80px;
 }
-
+.text-floorplan{
+    text-align: left;
+    display: block;
+}
 @media (max-width: 480px) {
     .nri_banner_txt{
         padding: 10px 0 10px 0;
