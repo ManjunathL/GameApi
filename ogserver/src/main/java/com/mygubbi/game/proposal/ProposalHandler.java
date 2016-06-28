@@ -148,7 +148,7 @@ public class ProposalHandler extends AbstractRouteHandler
                                     }
                                     else
                                     {
-                                        sendJsonResponse(context, selectData.rows.toString());
+                                        sendJsonResponse(context, proposalData.rows.toString());
                                     }
                                 });
                     }
