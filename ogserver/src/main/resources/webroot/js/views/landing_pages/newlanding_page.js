@@ -43,7 +43,7 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
-        },
+        }/*,
         submit_form1: function(e) {
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
@@ -83,7 +83,7 @@ define([
             "submit #contactNwLpForm1": "submit_form1",
             "submit #contactNwLpForm2": "submit_form2"
 
-        }
+        }*/
     });
     return LandingPageVIew;
 });
