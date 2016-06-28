@@ -31,15 +31,17 @@ public class GameUserLoginHandler extends AbstractRouteHandler {
         vertx.eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    LOG.info("Check query (ms):" + selectData.responseTimeInMillis);
+                    LOG.info("User login check query (ms):" + selectData.responseTimeInMillis);
                     if (selectData.rows == null || selectData.rows.isEmpty()) {
-                        respond(response, "error", null, "Incorrect user or password.");
+                        respond(response, "error", null, "User not setup.");
+                        LOG.info("User not setup:" + paramsObject.getString("email"));
                     } else {
                         boolean valid = UserHandlerUtil.authenticate(paramsObject, selectData);
                         if (valid) {
                             respond(response, "success", formUserData(selectData.rows.get(0)), null);
                         } else {
                             respond(response, "error", null, "Incorrect user or password.");
+                            LOG.info("Password not valid for user:" + paramsObject.getString("email"));
                         }
                     }
                 });

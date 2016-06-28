@@ -17,6 +17,14 @@
     },
 
     {
+      "id": "proposal.list.userid",
+      "type": "select",
+      "table": "proposal",
+      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted' and (salesEmail = ? or designerEmail = ?)",
+      "params": ["userId", "userId"]
+    },
+
+    {
       "id": "proposal.summary",
       "type": "select",
       "table": "proposal",

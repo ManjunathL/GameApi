@@ -31,6 +31,7 @@ public class ProposalHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
+        this.get("/list").handler(this::getProposals);
         this.post("/create").handler(this::createProposal);
         this.post("/update").handler(this::updateProposal);
         this.post("/downloadquote").handler(this::downloadQuote);
@@ -122,6 +123,38 @@ public class ProposalHandler extends AbstractRouteHandler
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());
                 });
+    }
+
+    private void getProposals(RoutingContext context)
+    {
+        String userId = context.request().getParam("userid");
+        vertx.eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("game_user.select", new JsonObject().put("email", userId))),
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        sendError(context, "User not valid : " + userId);
+                    }
+                    else
+                    {
+                        String role  = selectData.rows.get(0).getString("role");
+                        String query = ("sales".equals(role) || "designer".equals(role)) ? "proposal.list.userid" : "proposal.list.all";
+                        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData(query, new JsonObject().put("userId", userId))),
+                                (AsyncResult<Message<Integer>> proposalResult) -> {
+                                    QueryData proposalData = (QueryData) LocalCache.getInstance().remove(proposalResult.result().body());
+                                    if (proposalData == null || proposalData.rows == null || proposalData.rows.isEmpty())
+                                    {
+                                        sendJsonResponse(context, "[]");
+                                    }
+                                    else
+                                    {
+                                        sendJsonResponse(context, selectData.rows.toString());
+                                    }
+                                });
+                    }
+                });
+
+
     }
 
 }
