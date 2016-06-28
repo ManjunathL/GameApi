@@ -39,7 +39,7 @@ define([
 
                     if((name.trim() != '') && (email.trim() != '')){
                         //var url='http://res.cloudinary.com/mygubbi/raw/upload/v1466509270/E-Book.pdf';
-                        var url='http://res.cloudinary.com/mygubbi/raw/upload/v1467016930/E-Books.pdf';
+                        var url='http://res.cloudinary.com/mygubbi/raw/upload/v1467111480/E-Book_updated.pdf';
                         window.open(url,'Download');
 
                         window.App.router.navigate('/thankyou-ebook-page', {
