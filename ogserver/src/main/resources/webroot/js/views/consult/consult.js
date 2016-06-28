@@ -28,7 +28,7 @@ define([
             this.ref = MGF.rootRef;
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
-        },
+        }/*,
         submit: function(e) {
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
@@ -49,7 +49,7 @@ define([
         },
         events: {
             "submit": "submit"
-        }
+        }*/
     });
     return ConsultView;
 });
