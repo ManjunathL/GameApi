@@ -60,7 +60,8 @@ define([
             'kitchen-lp(/)': 'kitchenlandingpage',
             'holiday-lp(/)': 'holidaylandingpage',
             'e-book(/)': 'ebook',
-             '*something': 'errorPage'
+            'completed-projects(/)': 'completedprojectspage',
+            '*something': 'errorPage'
 
 
         },
@@ -417,18 +418,18 @@ define([
         });
 
         router.on('route:kitchenlandingpage', function(actions) {
-                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
-                    require(['/js/views/landing_pages/kitchenlanding_page.js'], function(KitchenLandingPage) {
-                        VM.create(VM.KITCHENLANDINGPAGE, KitchenLandingPage).render();
-                    });
-                });
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/kitchenlanding_page.js'], function(KitchenLandingPage) {
+                VM.create(VM.KITCHENLANDINGPAGE, KitchenLandingPage).render();
+            });
+        });
 
         router.on('route:ebook', function(actions) {
-                            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
-                            require(['/js/views/ebook/ebook.js'], function(EbookPage) {
-                                VM.create(VM.EBOOKPAGE, EbookPage).render();
-                            });
-                        });
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/ebook/ebook.js'], function(EbookPage) {
+                VM.create(VM.EBOOKPAGE, EbookPage).render();
+            });
+        });
 
         router.on('route:errorPage', function(actions) {
                     setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
@@ -440,6 +441,12 @@ define([
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/landing_pages/holidaylanding_page.js'], function(HolidayLandingPage) {
                 VM.create(VM.HOLIDAYLANDINGPAGE, HolidayLandingPage).render();
+            });
+        });
+        router.on('route:completedprojectspage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/completedprojects_page.js'], function(CompletedProjectsPage) {
+                VM.create(VM.COMPLETEDPROJECTSPAGE, CompletedProjectsPage).render();
             });
         });
         router.on('route:mediapage', function(actions) {

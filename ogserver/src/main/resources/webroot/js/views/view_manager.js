@@ -25,6 +25,7 @@ define(function() {
         SHOBHALANDINGPAGE: "shobhalandingpage",
         PUNELANDINGPAGE: "punelandingpage",
         HOLIDAYLANDINGPAGE: "holidaylandingpage",
+        COMPLETEDPROJECTSPAGE: "completedprojectspage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {
