@@ -43,23 +43,7 @@ define([
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
         },
-        submit: function(e) {
-            if (e.isDefaultPrevented()) return;
-            e.preventDefault();
-
-            var name = $('#nri_contact_full_name').val();
-            var email = $('#nri_contact_email_id').val();
-            var phone = $('#nri_contact_contact_num').val();
-
-            ConsultUtil.submit(name, email, phone, null, null, null, null, null);
-
-            window.App.router.navigate('/thankyou-contact-banner', {
-                trigger: true
-            });
-
-        },
         events: {
-            "submit #nri_contactForm": "submit",
             "click #book_consultation": "openBookConsultPopup",
             "click #close-bookconsult-pop": "closeBookModal"
         },
