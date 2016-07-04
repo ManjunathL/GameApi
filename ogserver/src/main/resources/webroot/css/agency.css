@@ -2343,7 +2343,8 @@ input[type=checkbox] {
     font-size: 20px;
     position: fixed;
     bottom: 2em;
-    left: 10px;
+    right: 10px;
+    z-index:1999;
     text-decoration: none;
     color: #555 !important;
     background-color: rgba(225, 225, 225, 0.8) !important;
