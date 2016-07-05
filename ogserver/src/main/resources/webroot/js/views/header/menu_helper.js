@@ -182,32 +182,7 @@ define([
             }
         },
 
-        contactUsSubmit: function() {
-            window.contactusSubmitButton && window.contactusSubmitButton.button('reset');
-
-            if($('#contact_full_name').val().trim() != "" && $('#contact_email_id').val().trim() != "" && $('#contact_contact_num').val().trim() != ""){
-
-                var name = $('#contact_full_name').val();
-                var email = $('#contact_email_id').val();
-                var phone = $('#contact_contact_num').val();
-                var propertyName = $('#contact_property_name').val();
-                var query = $('#contact_requirement').val();
-                var floorplan = $("#contact_floorplan").prop('files')[0];
-
-                ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, null, null);
-                var that = this;
-
-                this.toggleContactUsPop();
-                this.positionSideContact();
-                window.App.router.navigate('/thankyou-quick-contact', {
-                    trigger: true
-                });
-            }else{
-              return false;
-            }
-        },
-
-        positionSideContact: function() {
+       positionSideContact: function() {
 
             var windowHeight = $(window).height();
             var contactUsSideHeight = $('.contact-us-side').height();
@@ -364,7 +339,7 @@ define([
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
             _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'createUser',
                 'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
-                'closeModal', 'closeUserPopup', 'contactUsSubmit', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
+                'closeModal', 'closeUserPopup', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
                 'unAuthAfterProfile');
 
             var events = {
@@ -376,7 +351,7 @@ define([
                 "click #close-signup-pop": this.closeModal,
                 "click #close-forgot-pop": this.closeModal,
                 "click #close-contactus-pop": this.toggleContactUsPop,
-                "click #contact-form-explore": this.toggleContactUsPop,
+                //"click #contact-form-explore": this.toggleContactUsPop,
                 "click #goto-login": this.gotoLogin,
                 "click .sb-search-txt": this.gotoSearchedProduct
             };
@@ -408,15 +383,6 @@ define([
                     that.toggleContactUsPop();
                     $('#contact_error').html('');
                     $('#contact_error_row').css("display", 'none');
-                });
-
-                $("#contactForm").submit(function(e) {
-                    if (e.isDefaultPrevented()) return;
-                    e.preventDefault();
-                    window.contactusSubmitButton.button('loading');
-                    $('#contact_error').html('');
-                    $('#contact_error_row').css("display", "none");
-                    that.contactUsSubmit();
                 });
 
                 $("#registerForm").submit(function(e) {
@@ -496,9 +462,13 @@ define([
                     window.signupButton = $(this);
                 });
 
-                $('#contactus-submit-btn').click(function() {
+                /*$('#contactus-submit-btn').click(function() {
                     window.contactusSubmitButton = $(this);
-                });
+                });*/
+
+                /*$('#form-submit-button').click(function() {
+                    window.contactusSubmitButton = $(this);
+                });*/
 
                 $("#loginForm").submit(function(e) {
                     e.preventDefault();
