@@ -231,9 +231,6 @@ define([
             "click .appliance": "changeAppliance",
             "click #product_consult": "openConsultPopup",
             "click #close-consult-pop": "closeModal",
-            "click #consult-form-explore": "closeModal",
-            "click #consult-submit-btn": "submitConsultButton",
-            "submit #consultForm": "submitConsultForm",
             "click .dwf": "slideDelivery",
             "click .shortlistable-product": "toggleShortListProduct",
             "click .appliance-img": 'toggleColorNext',
@@ -563,37 +560,6 @@ define([
         },
         openConsultPopup: function() {
             $('#consultpop').modal('show');
-        },
-        submitConsultButton: function() {
-            window.consultSubmitButton = this;
-        },
-        submitConsultForm: function(e) {
-            if (e.isDefaultPrevented()) return;
-            e.preventDefault();
-            $('#consult_error').html('');
-            $('#consult_error_row').css("display", "none");
-            this.consultSubmit();
-        },
-        consultSubmit: function() {
-
-            var productName = $('#consult_product_name').val();
-            var name = $('#consult_full_name').val();
-            var email = $('#consult_email_id').val();
-            var phone = $('#consult_contact_num').val();
-            var propertyName = $('#consult_property_name').val();
-            var query = $('#consult_product_name').val() + " :: " + $('#consult_requirement').val();
-            var floorplan = $("#consult_floorplan").prop('files')[0];
-
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, null, null);
-
-            $('#consultpop').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
-
-            setTimeout(window.App.router.navigate('/thankyou-product', {
-                trigger: true
-            }), 1000);
-
         },
         slideDelivery: function() {
             if ($("#sldown").is(':visible')) {
