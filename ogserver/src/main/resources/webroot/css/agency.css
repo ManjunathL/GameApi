@@ -829,7 +829,7 @@ ul.social-links {
 /* ---- NRI Page ---- */
 
 .nri_banner_txt {
-    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1/nri_page/banner_top.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1/nri_page/banner_top.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -1029,7 +1029,7 @@ div.play-button {
     margin-left: -36px;
     margin-top: -36px;
     position: absolute;
-    background: url("http://i.imgur.com/TxzC70f.png") no-repeat;
+    background: url("https://i.imgur.com/TxzC70f.png") no-repeat;
 }
 
 #youtube-iframe {
@@ -5636,7 +5636,7 @@ a.tab-ico {
 
 
     .kitchen-img-wrapper {
-    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057178/kitchen_lp/Top_banner.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1466057178/kitchen_lp/Top_banner.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -5654,7 +5654,7 @@ a.tab-ico {
     color: #ffffff;
     }
     .lshaped{
-    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057183/kitchen_lp/L-shape.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1466057183/kitchen_lp/L-shape.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -5672,7 +5672,7 @@ a.tab-ico {
     color: #ffffff;
     }
     .ushaped{
-    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057184/kitchen_lp/U-shape_03.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1466057184/kitchen_lp/U-shape_03.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -5690,7 +5690,7 @@ a.tab-ico {
     color: #ffffff;
     }
     .straight{
-    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057185/kitchen_lp/straight_03.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1466057185/kitchen_lp/straight_03.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -5708,7 +5708,7 @@ a.tab-ico {
     color: #ffffff;
     }
     .parallel{
-    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057184/kitchen_lp/parellel_03.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1466057184/kitchen_lp/parellel_03.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -5726,7 +5726,7 @@ a.tab-ico {
     color: #ffffff;
     }
     .assure-you-with{
-    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1466057178/kitchen_lp/bg_for_We_assure_you_with.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1466057178/kitchen_lp/bg_for_We_assure_you_with.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -5747,13 +5747,13 @@ a.tab-ico {
     margin: 0 auto;
     }
     #browse:hover{
-    content: url(http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l2_03.png);
+    content: url(https://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l2_03.png);
     }
     #order:hover{
-    content: url(http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l4_03.png);
+    content: url(https://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l4_03.png);
     }
     #relax:hover{
-    content: url(http://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l7_03.png);
+    content: url(https://res.cloudinary.com/mygubbi/image/upload/v1466058146/kitchen_lp/l7_03.png);
     }
     .types-of-kitchen{
     background: #1f2022;
