@@ -829,7 +829,7 @@ ul.social-links {
 /* ---- NRI Page ---- */
 
 .nri_banner_txt {
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1/nri_page/banner_top.jpg");
+    background-image: url("http://res.cloudinary.com/mygubbi/image/upload/v1/nri_page/banner_top.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -1029,7 +1029,7 @@ div.play-button {
     margin-left: -36px;
     margin-top: -36px;
     position: absolute;
-    background: url("https://i.imgur.com/TxzC70f.png") no-repeat;
+    background: url("http://i.imgur.com/TxzC70f.png") no-repeat;
 }
 
 #youtube-iframe {
