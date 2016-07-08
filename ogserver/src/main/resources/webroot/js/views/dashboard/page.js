@@ -20,12 +20,12 @@ define([
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
+            this.ready();
         },
 
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            this.ready();
         },
         ready: function () {
             var that = this;
@@ -79,7 +79,7 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
-        },
+        }/*,
         submit: function(e) {
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
@@ -100,7 +100,7 @@ define([
         },
         events: {
             "submit #banner_contactForm": "submit"
-        }
+        }*/
     });
     return DashboardPage;
 });
