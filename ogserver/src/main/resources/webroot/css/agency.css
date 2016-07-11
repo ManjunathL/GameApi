@@ -5236,6 +5236,7 @@ a.tab-ico {
 
 /* ---- Shobha Landing Page ---- */
 
+
 .shobha_plan_txt{
     padding-bottom: 0px!important;
 }
@@ -5344,6 +5345,7 @@ a.tab-ico {
 }
 
 @media (max-width:1180px){
+
     .shobha_plan_txt{
         padding-bottom: 20px!important;
     }
@@ -5362,6 +5364,7 @@ a.tab-ico {
         padding: 50px 15px 77px 15px!important;
         margin-bottom:0px!important;
     }
+
     .shobha_banner_form{
         width: 100%;
         margin: auto;
@@ -5370,11 +5373,13 @@ a.tab-ico {
 }
 
 /* Pune landing page start */
+
 .pune_banner_form{
     width: 100%;
     margin: auto;
     padding: 10px;
 }
+
 .pune_banner_txt {
    position: absolute;
    top: 20%;
@@ -5382,17 +5387,22 @@ a.tab-ico {
    margin: auto;
    color: #fff;
 }
+
 .pune-subheading-txt{
     font-style: italic;
     color: #999;
     font-size: 22px;
 }
+
 .pune-form-box {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: rgba(84,102,112,0.9);
     border-radius: 5px;
     width: 28%;
 }
+
+
+
 .pune-sliding-text{
     position: absolute;
     top: 0%;
@@ -5485,6 +5495,7 @@ a.tab-ico {
         border-radius: 0px;
         margin-left:0px;
     }
+
     .pune-sliding-text{
         position: relative;
         top: 0%;
@@ -5514,6 +5525,7 @@ a.tab-ico {
         border-radius: 0px;
         margin-left:0px;
     }
+
     .pune-sliding-text{
         position: relative;
         top: 0%;
@@ -5525,6 +5537,7 @@ a.tab-ico {
 }
 
 /* Pune landing page end */
+
 /* SEO design start */
 
 .seo-lnks{
@@ -5545,6 +5558,8 @@ a.tab-ico {
 }
 
 /* SEO design end */
+
+
 /* Holiday LP start */
 
 .holiday-txt-input{
@@ -5564,6 +5579,7 @@ a.tab-ico {
     font-size: 18px;
     text-transform: capitalize;
 }
+
 .holiday-form-box {
     box-shadow: none;
     background-color: none;
@@ -5571,6 +5587,7 @@ a.tab-ico {
     top: 16%;
     right: 5%;
 }
+
 @media (max-width:980px){
     .holiday-form-box {
         position: relative;
@@ -5580,6 +5597,7 @@ a.tab-ico {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         background-color: #55666F;
     }
+
     .h1-tag-content h1{
         text-transform: Capitalize !important;
         font-size: 22px !important;
@@ -5587,6 +5605,7 @@ a.tab-ico {
 }
 
 /* Holiday LP end */
+
 /*Page Not Found Error Page*/
 
 .center {
