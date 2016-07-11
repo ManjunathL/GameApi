@@ -80,7 +80,7 @@ public class ProductModule extends JsonObject
 
     public String getMakeType()
     {
-        return this.getString(MAKE_TYPE);
+        return "P";
     }
 
     public int getAmount()
