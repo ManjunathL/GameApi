@@ -26,6 +26,7 @@
   "enquirymailto" : "reach@mygubbi.com",
 
   "staticConfigPath": "config/prod/prod.config.js",
+  "importsPath": "config/prod/prod.imports.css",
 
   "robots.txt": ""
 

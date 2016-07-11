@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 public class StaticConfigHandler implements Handler<RoutingContext> {
 
     private static final String CONFIG_RESOURCE = "/js/config.js";
+    private static final String IMPORTS_RESOURCE = "/imports.css";
     private static final String ROBOTS_RESOURCE = "/robots.txt";
 
     private final static Logger LOG = LogManager.getLogger(StaticConfigHandler.class);
@@ -22,7 +23,12 @@ public class StaticConfigHandler implements Handler<RoutingContext> {
         HttpServerRequest request = context.request();
         String uri = request.uri();
 
-        if (uri.equals(CONFIG_RESOURCE)) {
+        if (uri.equals(IMPORTS_RESOURCE)) {
+
+            String configFilePath = ConfigHolder.getInstance().getConfigValue("importsPath").toString();
+            RouteUtil.getInstance().sendResponseFromFile(context, configFilePath, "application/javascript");
+
+        } else if (uri.equals(CONFIG_RESOURCE)) {
 
             String configFilePath = ConfigHolder.getInstance().getConfigValue("staticConfigPath").toString();
             RouteUtil.getInstance().sendResponseFromFile(context, configFilePath, "application/javascript");
