@@ -30,20 +30,15 @@ define([
                     $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
                     _.bindAll(this, 'renderWithUserProfCallback');
                 },
-                submit: function(e) {
+                /*submit: function(e) {
                     if (e.isDefaultPrevented()) return;
                     e.preventDefault();
 
                     var name = $('#contact_full_name1').val();
                     var email = $('#contact_email_id1').val();
                     var phone = $('#contact_contact_num1').val();
-/*
-                    var propertyName = $('#contact_property_name1').val();
-*/
+
                     var query = $('#contact_city').val();
-/*
-                    var floorplan = $("#contact_floorplan1").prop('files')[0];
-*/
 
                     ConsultUtil.submit(name, email, phone, query, null, null, null, null);
 
@@ -54,7 +49,7 @@ define([
                 },
                 events: {
                     "submit": "submit"
-                }
+                }*/
             });
     return KitchenLandingPageVIew;
 });

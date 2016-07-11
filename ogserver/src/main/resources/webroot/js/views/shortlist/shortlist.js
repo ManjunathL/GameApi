@@ -40,9 +40,9 @@ define([
             "click .shortlistable": "removeShortlistItem",
             "click .shortlist_consult": "openConsultPopup",
             "click .close-consult-pop": "closeModal",
-            "click .consult-form-explore": "closeModal",
+            /*"click .consult-form-explore": "closeModal",
             "click #consult-submit-btn": "submitConsultButton",
-            "submit .consultForm": "submitConsultForm",
+            "submit .consultForm": "submitConsultForm",*/
             "click .shortgridshare": "toggleGridShareIcons"
         },
         removeShortlistItem: function(e) {
@@ -69,7 +69,7 @@ define([
             //alert(popupid);
             $('#consultpop' + popupid).modal('show');
         },
-        submitConsultButton: function() {
+        /*submitConsultButton: function() {
             window.consultSubmitButton = this;
         },
         submitConsultForm: function(e) {
@@ -102,7 +102,7 @@ define([
                 trigger: true
             });
 
-        },
+        },*/
          toggleGridShareIcons: function(e){
              e.preventDefault();
 
