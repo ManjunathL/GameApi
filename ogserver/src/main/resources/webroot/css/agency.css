@@ -4058,6 +4058,7 @@ hr {
 
 .other-accs-options a img {
     max-width: 100%;
+/ / width: 100 %;
     height: auto;
     position: relative;
     z-index: 1;

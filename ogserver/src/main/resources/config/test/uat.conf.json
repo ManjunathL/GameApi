@@ -19,7 +19,6 @@
   "enquirymailto" : "uat@mygubbi.com",
 
   "staticConfigPath": "config/test/uat.config.js",
-  "importsPath": "config/test/uat.imports.css",
 
   "robots.txt": "User-agent: *\nDisallow: /"
 
