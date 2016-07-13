@@ -26,7 +26,7 @@ public class StaticConfigHandler implements Handler<RoutingContext> {
         if (uri.equals(IMPORTS_RESOURCE)) {
 
             String configFilePath = ConfigHolder.getInstance().getConfigValue("importsPath").toString();
-            RouteUtil.getInstance().sendResponseFromFile(context, configFilePath, "text/css");
+            RouteUtil.getInstance().sendResponseFromFile(context, configFilePath, "application/javascript");
 
         } else if (uri.equals(CONFIG_RESOURCE)) {
 
