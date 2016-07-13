@@ -28,6 +28,6 @@
   },
 
   "staticConfigPath": "webroot/js/config.js",
-
+  "importsPath": "webroot/imports.css",
   "robots.txt": "User-agent: *\nDisallow: /"
 }
