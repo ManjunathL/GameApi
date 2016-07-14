@@ -130,7 +130,8 @@
 .color-li-first {
     margin-left: 0px !important;
 }
-/*  product Details page */
+
+/* Start product Details page  */
 
 .product-main-section{
     padding: 20px 0px;
@@ -386,6 +387,9 @@
         bottom: 10px;
     }
 }
+
+
+/* End Product details*/
 
 .carousel-inner {
     margin-top: 70px !important;
