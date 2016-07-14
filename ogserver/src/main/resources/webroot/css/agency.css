@@ -829,7 +829,7 @@ ul.social-links {
 /* ---- NRI Page ---- */
 
 .nri_banner_txt {
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1/nri_page/banner_top.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1468483864/nri_page/optimized_img/Desktop_top_Banner.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -6316,3 +6316,89 @@ a.tab-ico {
 }
 
 /* End Completed Project */
+
+
+/* Start Testimonial design for Home page By Smruti on 14th JUL 2016 */
+
+    .carousel-control.left,.carousel-control.right  {background:none;width:25px;}
+    .carousel-control.left {left:-25px;}
+    .carousel-control.right {right:-25px;}
+    .testmonial-main-cnt {
+    	background-color: #f2f4f4;
+    }
+    .events .entry, .testmonial-sub-cnt {
+        padding: 20px;
+        background-color: #F9F9F9;
+        border-bottom: 3px solid #EEE;
+    }
+
+    .testmonial-sub-cnt {
+        position: relative;
+    }
+
+    .events .testmonial-img-cnt, .testmonial-sub-cnt .testmonial-img-cnt {
+        padding: 5px 0px;
+    }
+    .testmonial-img-cnt {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .testmonial-sub-cnt .testmonial-main-image {
+        width: 100% !important;
+        margin-right: 20px;
+    }
+
+    .testmonial-sub-cnt .testmonial-main-image .entry-date {
+        position: absolute !important;
+        top: initial !important;
+        bottom: 0px !important;
+        left: 120px !important;
+        background-color: transparent !important;
+        color: #FFF !important;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2) !important;
+        width: 70px !important;
+        height: 78px !important;
+        text-align: center !important;
+        padding-top: 7px !important;
+        font-size: 26px !important;
+        line-height: 1 !important;
+    }
+
+    .sidenav li i, .team-desc, .testi-image i {
+        text-align: center;
+    }
+
+    .testmonial-cust-content {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .testimonial_qt {
+        height: 195px !important;
+        overflow: hidden !important;
+    }
+
+    .testmonial-cust-dtls{
+        color: #E94F35;
+        margin-top: -8px;
+    }
+
+    .testmonial-cust-dtls span {
+        padding-left: 3px;
+    }
+    .testmonial-cust-dtls span {
+        display: block;
+        font-weight: 400;
+        color: #999;
+        font-size: 12px;
+        text-transform: none;
+    }
+    .testmonial-cust-content p {
+        margin-bottom: 0px;
+    }
+    .testmonial-cust-content p {
+        font-family: "Crete Round",serif;
+        font-style: italic;
+    }
+/* End Testimonial design for Home page */
