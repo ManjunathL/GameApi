@@ -133,6 +133,7 @@
 
 /* Start product Details page  */
 
+/*
 .product-main-section{
     padding: 20px 0px;
     display: inline-block;
@@ -387,6 +388,7 @@
         bottom: 10px;
     }
 }
+*/
 
 
 /* End Product details*/
@@ -6664,4 +6666,11 @@ a.tab-ico {
         font-family: "Crete Round",serif;
         font-style: italic;
     }
+
+    @media (max-width:768px){
+        .testimonial_qt {
+            height: 318px !important;
+        }
+    }
+
 /* End Testimonial design for Home page */
