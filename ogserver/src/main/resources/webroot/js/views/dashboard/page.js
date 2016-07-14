@@ -29,7 +29,7 @@ define([
         },
         ready: function () {
             var that = this;
-            (function() {
+            /*(function() {
                 var v = document.getElementsByClassName("youtube-player");
                 for (var n = 0; n < v.length; n++) {
                     var p = document.createElement("div");
@@ -37,7 +37,7 @@ define([
                     p.onclick = that.labnolIframe;
                     v[n].appendChild(p);
                 }
-            })();
+            })();*/
             if ($('#hmalt-frame').length > 0) {
                 var $hmalt_frame = $('#hmalt-frame');
                 var $hmalt_wrap = $hmalt_frame.parent().parent();
@@ -64,7 +64,7 @@ define([
                 return false;
             });
         },
-        labnolThumb: function (id) {
+        /*labnolThumb: function (id) {
             return '<img class="youtube-thumb" src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';
         },
         labnolIframe: function () {
@@ -74,7 +74,7 @@ define([
             iframe.setAttribute("frameborder", "0");
             iframe.setAttribute("id", "youtube-iframe");
             that.parentNode.replaceChild(iframe, that);
-        },
+        },*/
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});

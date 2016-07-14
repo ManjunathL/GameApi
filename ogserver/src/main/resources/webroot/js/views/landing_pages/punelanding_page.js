@@ -9,9 +9,8 @@ define([
     'cloudinary_jquery',
     '/js/slyutil.js',
     '/js/mgfirebase.js',
-    '/js/consultutil.js',
     '/js/analytics.js'
-], function($, _, Backbone, punelandingPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+], function($, _, Backbone, punelandingPageTemplate, CloudinaryJquery, SlyUtil, MGF, Analytics) {
     var PuneLandingPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,

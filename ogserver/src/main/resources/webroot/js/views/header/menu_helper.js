@@ -462,14 +462,6 @@ define([
                     window.signupButton = $(this);
                 });
 
-                /*$('#contactus-submit-btn').click(function() {
-                    window.contactusSubmitButton = $(this);
-                });*/
-
-                /*$('#form-submit-button').click(function() {
-                    window.contactusSubmitButton = $(this);
-                });*/
-
                 $("#loginForm").submit(function(e) {
                     e.preventDefault();
                     window.loginButton.button('loading');
@@ -570,18 +562,6 @@ define([
                         scope: "email"
                     });
                 });
-
-                /*
-
-                                $('#twitter-btn').click(function() {
-                                    window.twitterButton = $(this);
-                                    window.twitterButton.button('loading');
-                                    that.ref.authWithOAuthPopup("twitter", that.authHandler, {
-                                        scope: "email"
-                                    });
-                                });
-
-                */
 
                 $('#google-btn').click(function() {
                     window.googleButton = $(this);

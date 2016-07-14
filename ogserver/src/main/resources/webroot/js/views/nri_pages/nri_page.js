@@ -11,9 +11,8 @@ define([
     'cloudinary_jquery',
     '/js/slyutil.js',
     '/js/mgfirebase.js',
-    '/js/consultutil.js',
     '/js/analytics.js'
-], function($, _, Backbone, Bootstrap, nriPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+], function($, _, Backbone, Bootstrap, nriPageTemplate, CloudinaryJquery, SlyUtil, MGF, Analytics) {
     var NriPageVIew = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
