@@ -130,10 +130,31 @@
 .color-li-first {
     margin-left: 0px !important;
 }
+/*  product Details page */
+
+.product-main-section{
+    padding: 20px 0px;
+    display: inline-block;
+}
+
+.full-screen {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 .product-heading {
     z-index: 999;
-    margin: 16px 0px;
+    margin: 20px 0px;
+    font-weight: 600;
+}
+.about-product{
+    margin: 25px 35px 40px;
+}
+
+.product-price h4{
+    text-transform: inherit;
+    margin-bottom: 20px;
 }
 
 .heading-price {
@@ -148,6 +169,222 @@
 .absolute-float-left {
     position: absolute;
     float: left;
+}
+.warranty-card,
+.related-card,
+.design-card{
+    margin: 5px 0px 10px;
+}
+.warranty-card .nav-tabs > li.active,
+.related-card .nav-tabs > li.active,
+.design-card .nav-tabs > li.active{
+    border-bottom: 4px solid #000000;
+}
+.warranty-card .nav-tabs.nav-justified>.active>a,
+.warranty-card .nav-tabs.nav-justified>.active>a:hover,
+.warranty-card .nav-tabs.nav-justified>.active>a:focus,
+.related-card .nav-tabs.nav-justified>.active>a,
+.related-card .nav-tabs.nav-justified>.active>a:hover,
+.related-card .nav-tabs.nav-justified>.active>a:focus,
+.design-card .nav-tabs.nav-justified>.active>a,
+.design-card .nav-tabs.nav-justified>.active>a:hover,
+.design-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+}
+
+@media (min-width: 768px){
+    .warranty-card .nav-tabs.nav-justified>li>a,
+    .related-card .nav-tabs.nav-justified>li>a,
+    .design-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+    }
+    .warranty-card .nav-tabs.nav-justified>li>a,
+    .related-card .nav-tabs.nav-justified>li>a,
+    .design-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 4px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+    }
+    .warranty-card .nav-tabs.nav-justified>li>a:hover,
+    .warranty-card .nav-tabs.nav-justified>li>a:active,
+    .warranty-card .nav-tabs.nav-justified>li>a:focus,
+    .related-card .nav-tabs.nav-justified>li>a:hover,
+    .related-card .nav-tabs.nav-justified>li>a:active,
+    .related-card .nav-tabs.nav-justified>li>a:focus,
+    .design-card .nav-tabs.nav-justified>li>a:hover,
+    .design-card .nav-tabs.nav-justified>li>a:active,
+    .design-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 4px solid #000;
+    }
+}
+.d-item-img{
+    margin-top: 7px;
+}
+.d-style {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 320px;
+    text-align: center;
+}
+.d-style h3{
+    margin: 20px 35px;
+}
+.m-item-img{
+    margin-top: 7px;
+}
+.m-style {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 35%;
+    text-align: center;
+}
+.m-style .nav-tabs{
+    border-bottom: 0px solid #ddd;
+}
+.m-style .card .nav-tabs > li.active {
+    border-bottom: 0px solid #000000;
+}
+.m-style .card .nav-tabs>li>a{
+    border-radius: 0px;
+    color: #000;
+    background-color: transparent;
+    border: 0px solid #ddd;
+    border-bottom-color: transparent;
+    border-right: 1px solid #000;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.m-style .card .nav-tabs>li>a:last-child{
+     border-right: 0px solid #000;
+}
+
+.m-style .card .nav-tabs>li.active>a,
+.m-style .card .nav-tabs>li.active>a:hover,
+.m-style .card .nav-tabs>li.active>a:focus{
+    color: #000;
+    background-color: transparent;
+    border: 0px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: pointer;
+    font-weight: 600;
+}
+.finish-slide-nav .nav,
+.material-slide-nav .nav {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+}
+.finish-slide-nav .nav-tabs,
+.material-slide-nav .nav-tabs {
+    border-bottom: 0px solid #ddd;
+}
+.finish-slide-nav .nav-tabs > li.active,
+.material-slide-nav .nav-tabs > li.active{
+    border-bottom: 0px solid #f1591f;
+    font-weight: 700;
+}
+.finish-slide-nav .nav-tabs>li.active>a,
+.finish-slide-nav .nav-tabs>li.active>a:hover,
+.finish-slide-nav .nav-tabs>li.active>a:focus,
+.material-slide-nav .nav-tabs>li.active>a,
+.material-slide-nav .nav-tabs>li.active>a:hover,
+.material-slide-nav .nav-tabs>li.active>a:focus{
+    color: #333;
+    background-color: transparent;
+    border: 0px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+    padding: 4px 10px 4px;
+}
+.finish-slide-nav .nav-tabs>li>a:hover,
+.material-slide-nav .nav-tabs>li>a:hover{
+      border-color: transparent;
+}
+.finish-slide-nav .nav>li>a,
+.material-slide-nav .nav>li>a{
+    padding: 3px 10px;
+}
+.finish-slide-nav .nav>li>a:hover,
+.finish-slide-nav .nav>li>a:focus,
+.material-slide-nav .nav>li>a:hover,
+.material-slide-nav .nav>li>a:focus{
+    background-color: transparent;
+}
+.finish-slide-nav .nav>li,
+.material-slide-nav .nav>li{
+    border-right: 1px solid #333;
+}
+.finish-slide-nav .nav>li:last-child,
+.material-slide-nav .nav>li:last-child{
+    border-right: 0px solid #333;
+}
+.finishes-wrapper{
+    margin-top: 7px;
+    background:#cfcfcf;
+    min-height:340px;
+}
+.finish-slide-nav {
+    margin: 20% 15%;
+    text-align: center;
+}
+.finishes-foil-box{
+    margin: 10%;
+}
+.finishes-foil{
+    margin: 0px;
+}
+.finishes-foil li{
+    margin: 0px;
+    padding: 0px;
+}
+.finishes-foil li img{
+    width: 80px;
+    margin: 0px;
+    padding: 0px;
+}
+.finishes-label{
+    margin: 10px 0px 20px;
+}
+.related-card .well{
+    margin-top: 7px;
+}
+.related-card .carousel-inner{
+    min-height: 130px;
+    margin-top: 0px !important;
+}
+.related-card .carousel-control {
+    width: 5%;
+    opacity: 1;
+    filter: alpha(opacity=1);
+    font-size: 100px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.29);
+}
+
+@media screen and (min-width: 768px){
+    .accessories-wrapper .carousel-caption {
+        left: auto;
+        right: 5%;
+        padding-bottom: 8%;
+        width: 40%;
+    }
+    .accessories-wrapper .carousel-caption p{
+        text-shadow: none;
+        font-size: 16px;
+    }
+}
+@media screen and (min-width: 992px){
+    .accessories-wrapper .carousel-indicators {
+        bottom: 10px;
+    }
 }
 
 .carousel-inner {
@@ -1062,6 +1299,29 @@ div.play-button {
 
 /* ---- Testimonial End ---- */
 
+.btn-product {
+    border-color: #ccc;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #333;
+    font-size: 20px;
+    background: #ccc !important;
+    border-radius: 0px;
+}
+
+.btn-product:hover,
+.btn-product:focus,
+.btn-product:active,
+.btn-product.active {
+    border-color: #ccc;
+    color: #333;
+    background-color: #ccc !important;
+}
+
+.btn-product:active,
+.btn-product.active {
+    background-image: none;
+}
 
 .btn-primary {
     border-color: #f1591f;
