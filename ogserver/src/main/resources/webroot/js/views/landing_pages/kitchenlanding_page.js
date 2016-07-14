@@ -5,11 +5,11 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/landing_pages/kitchenlanding_page.html',
+    'text!templates/landing_pages/kitchenlanding_page.html',
     'cloudinary_jquery',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js'
+    'mgfirebase',
+    'consultutil',
+    'analytics'
 ], function($, _, Backbone, kitchenlandingPageTemplate, CloudinaryJquery, MGF, ConsultUtil, Analytics) {
     var KitchenLandingPageVIew = Backbone.View.extend({
          el: '.page',

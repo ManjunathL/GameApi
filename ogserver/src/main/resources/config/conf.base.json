@@ -29,5 +29,6 @@
 
   "staticConfigPath": "webroot/js/config.js",
   "importsPath": "webroot/imports.css",
+  "alljs": "webroot/js/main.js",
   "robots.txt": "User-agent: *\nDisallow: /"
 }

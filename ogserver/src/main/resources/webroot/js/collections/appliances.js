@@ -1,7 +1,7 @@
 define([
   'jquery',
   'backbone',
-  '/js/models/appliance.js',
+  'models/appliance',
   'underscore'
 ], function($, Backbone, Appliance, _){
   var Appliances = Backbone.Collection.extend({

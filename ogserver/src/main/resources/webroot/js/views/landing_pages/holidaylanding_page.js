@@ -5,12 +5,12 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/landing_pages/holidaylanding_page.html',
+    'text!templates/landing_pages/holidaylanding_page.html',
     'cloudinary_jquery',
-    '/js/slyutil.js',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js'
+    'slyutil',
+    'mgfirebase',
+    'consultutil',
+    'analytics'
 ], function($, _, Backbone, holidaylandingPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var HolidayLandingPageVIew = Backbone.View.extend({
         el: '.page',

@@ -7,12 +7,12 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'text!/templates/nri_pages/nri_page.html',
+    'text!templates/nri_pages/nri_page.html',
     'cloudinary_jquery',
-    '/js/slyutil.js',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js'
+    'slyutil',
+    'mgfirebase',
+    'consultutil',
+    'analytics'
 ], function($, _, Backbone, Bootstrap, nriPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var NriPageVIew = Backbone.View.extend({
         el: '.page',

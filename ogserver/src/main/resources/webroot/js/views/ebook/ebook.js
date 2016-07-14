@@ -5,11 +5,11 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/ebook/ebook.html',
+    'text!templates/ebook/ebook.html',
     'cloudinary_jquery',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js'
+    'mgfirebase',
+    'consultutil',
+    'analytics'
 ], function($, _, Backbone, ebookPageTemplate, CloudinaryJquery, MGF, ConsultUtil, Analytics) {
     var EbookPageVIew = Backbone.View.extend({
          el: '.page',

@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/footer/faq.html'
+    'text!templates/footer/faq.html'
 ], function($, _, Backbone, faqTemplate) {
     var FaqView = Backbone.View.extend({
         el: '.page',

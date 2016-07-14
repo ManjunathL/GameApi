@@ -1,8 +1,8 @@
 define([
     'jquery',
     'underscore',
-    'text!/templates/analytics/general.html',
-    'text!/templates/analytics/thankyou.html'
+    'text!templates/analytics/general.html',
+    'text!templates/analytics/thankyou.html'
 ], function($, _, General, ThankYou) {
     return {
         TYPE_GENERAL: 'general',

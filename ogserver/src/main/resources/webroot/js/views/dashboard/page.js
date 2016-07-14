@@ -4,12 +4,12 @@ define([
     'backbone',
     'bootstrap',
     'cloudinary_jquery',
-    '/js/slyutil.js',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js',
+    'slyutil',
+    'mgfirebase',
+    'consultutil',
+    'analytics',
     'bxslider',
-    'text!/templates/dashboard/page.html'
+    'text!templates/dashboard/page.html'
 ], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
