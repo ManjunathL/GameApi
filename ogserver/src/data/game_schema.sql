@@ -125,34 +125,12 @@ CREATE TABLE proposal_addon(
   KEY proposalid_key (proposalId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Addons';
 
-DROP TABLE IF EXISTS kdmax_def_map;
-CREATE TABLE kdmax_def_map(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  kdmcode varchar(64) NOT NULL,
-  kdmdefcode varchar(64) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY kdmcode_key (kdmcode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='KDMax to KDMax default Module mapping';
-
-
-DROP TABLE IF EXISTS kdmax_mg_map;
-CREATE TABLE kdmax_mg_map(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  kdmcode varchar(64) NOT NULL,
-  mgcode varchar(32) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  UNIQUE KEY kdmcode_key (kdmcode, mgcode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='KDMax to Mygubbi Module mapping';
-
 DROP TABLE IF EXISTS module_master;
 CREATE TABLE module_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
   code varchar(16) NOT NULL,
   description varchar(255) NOT NULL,
   imagePath varchar(255) NOT NULL,
-  carcassCode char(16) NULL,
   width INTEGER NOT NULL DEFAULT 0,
   depth INTEGER NOT NULL DEFAULT 0,
   height INTEGER NOT NULL DEFAULT 0,
@@ -174,57 +152,6 @@ CREATE TABLE module_components(
   KEY mc_key (modulecode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Module to Component mapping';
 
-DROP TABLE IF EXISTS carcass_master;
-CREATE TABLE carcass_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  code varchar(16) NOT NULL,
-  title varchar(255) NOT NULL,
-  plength INTEGER NOT NULL DEFAULT 0,
-  breadth INTEGER NOT NULL DEFAULT 0,
-  thickness INTEGER NOT NULL DEFAULT 0,
-  edgebinding varchar(128) NOT NULL,
-  area DOUBLE NOT NULL DEFAULT 0.0,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Carcass master';
-
-
-DROP TABLE IF EXISTS shutter_master;
-CREATE TABLE shutter_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  code varchar(16) NOT NULL,
-  type varchar(64) NOT NULL DEFAULT 'NA',
-  title varchar(255) NOT NULL,
-  plength INTEGER NOT NULL DEFAULT 0,
-  breadth INTEGER NOT NULL DEFAULT 0,
-  thickness INTEGER NOT NULL DEFAULT 0,
-  edgebinding varchar(128) NOT NULL,
-  quantity INTEGER NOT NULL DEFAULT 0,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Shutter master';
-
-DROP TABLE IF EXISTS acc_hw_master;
-CREATE TABLE acc_hw_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  type char(1) NOT NULL DEFAULT 'A', -- A - Accessory, H - Hardware
-  code varchar(16) NOT NULL,
-  catalogCode varchar(16) NOT NULL,
-  title varchar(255) NOT NULL,
-  makeType char(1) NOT NULL, -- Standard, Premium, Luxury
-  make varchar(16) NOT NULL,
-  imagePath varchar(255) NOT NULL,
-  uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
-  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  price DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory and Hardware master';
-
-
 DROP TABLE IF EXISTS code_master;
 CREATE TABLE code_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
@@ -237,6 +164,18 @@ CREATE TABLE code_master(
   PRIMARY KEY (id),
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Code Master';
+
+DROP TABLE IF EXISTS color_master;
+CREATE TABLE color_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  colorGroupCode char(3) NOT NULL DEFAULT 'NA',
+  code varchar(64) NOT NULL DEFAULT 'NA',
+  imagePath varchar(255) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Color Master';
+
 
 DROP TABLE IF EXISTS finish_master;
 CREATE TABLE finish_master(
@@ -255,17 +194,63 @@ CREATE TABLE finish_master(
   KEY code_key (finishCode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Finish Master';
 
-DROP TABLE IF EXISTS color_master;
-CREATE TABLE color_master(
+DROP TABLE IF EXISTS shutter_master;
+CREATE TABLE shutter_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  colorGroupCode char(3) NOT NULL DEFAULT 'NA',
-  code varchar(64) NOT NULL DEFAULT 'NA',
-  imagePath varchar(255) NOT NULL,
+  code varchar(16) NOT NULL,
+  type varchar(64) NOT NULL DEFAULT 'NA',
+  title varchar(255) NOT NULL,
+  plength INTEGER NOT NULL DEFAULT 0,
+  breadth INTEGER NOT NULL DEFAULT 0,
+  thickness INTEGER NOT NULL DEFAULT 0,
+  edgebinding varchar(128) NOT NULL,
+  quantity INTEGER NOT NULL DEFAULT 0,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Color Master';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Shutter master';
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+-- $$$$$$$$$$ NEW TABLES $$$$$$$$$$$$$$$$$
+
+DROP TABLE IF EXISTS carcass_master;
+CREATE TABLE carcass_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  code varchar(16) NOT NULL,
+  type char(1) NOT NULL, -- Left, Right, Top, Bottom
+  typedesc varchar(255) NOT NULL,
+  plength INTEGER NOT NULL DEFAULT 0,
+  breadth INTEGER NOT NULL DEFAULT 0,
+  thickness INTEGER NOT NULL DEFAULT 0,
+  edgebinding varchar(128) NOT NULL,
+  area DOUBLE NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Carcass master';
+
+
+---------------------------------------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS acc_hw_master;
+CREATE TABLE acc_hw_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  type char(1) NOT NULL DEFAULT 'A', -- A - Accessory, H - Hardware
+  code varchar(16) NOT NULL,
+  catalogCode varchar(16) NOT NULL,
+  title varchar(255) NOT NULL,
+  make varchar(16) NOT NULL,
+  imagePath varchar(255) NULL,
+  uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
+  cp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  msp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory and Hardware master';
 
 DROP TABLE IF EXISTS addon_master;
 CREATE TABLE addon_master(
@@ -286,4 +271,56 @@ CREATE TABLE addon_master(
   PRIMARY KEY (id),
   KEY code_key (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Addon Master';
+
+
+----------------------------------------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS acc_pack_master;
+CREATE TABLE acc_pack_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  code varchar(16) NOT NULL,
+  title varchar(255) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory pack master';
+
+----------------------------------------------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS acc_pack_components;
+CREATE TABLE acc_pack_components(
+id INTEGER NOT NULL AUTO_INCREMENT,
+apcode varchar(16) NOT NULL,
+type char(1) NOT NULL, --
+code varchar(16) NOT NULL,
+qty DECIMAL(10,2) NOT NULL DEFAULT 0.0,
+touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (apcode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory pack components';
+
+----------------------------------------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS module_acc_pack;
+CREATE TABLE module_acc_pack(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  apcode varchar(16) NOT NULL,
+  kdmcode varchar(16) NOT NULL,
+  mgcode varchar(16) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (mgcode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module accessory pack';
+
+
+DROP TABLE IF EXISTS acc_addon_map;
+CREATE TABLE acc_addon_map(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  accode varchar(16) NOT NULL,
+  addoncode varchar(16) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (accode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module accessory pack';
+
 
