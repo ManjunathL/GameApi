@@ -61,6 +61,7 @@ define([
             'holiday-lp(/)': 'holidaylandingpage',
             'e-book(/)': 'ebook',
             'completed-projects(/)': 'completedprojectspage',
+            'newproduct-details(/)': 'newdetailspage',
             '*something': 'errorPage'
 
 
@@ -455,6 +456,14 @@ define([
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
             });
         });
+
+        router.on('route:newdetailspage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/product/new-details.js'], function(NewProductDetailsPage) {
+                VM.create(VM.NEWPRODUCT_DETAILSPAGE, NewProductDetailsPage).render();
+            });
+        });
+
         router.on('route:nripage', function(cityName) {
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/nri_pages/nri_page.js'], function(NriPage) {
