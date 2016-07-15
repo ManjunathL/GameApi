@@ -22,6 +22,7 @@ public class ExcelReaderService
     private boolean skipFirstRow;
     private int[] columnsToRead;
     private ExcelRowHandler rowHandler;
+    private int rowsToSkip;
 
     public ExcelReaderService(String filename, int sheetNumber, boolean skipFirstRow, int[] columnsToRead,
                               ExcelRowHandler rowHandler)
@@ -77,7 +78,25 @@ public class ExcelReaderService
                 {
                     Cell cell = row.getCell(this.columnsToRead[cellIndex]);
                     if (cell == null) continue;
-                    data[cellIndex] = cell.getStringCellValue();
+                    if (cell.getCellType() == Cell.CELL_TYPE_FORMULA)
+                    {
+                        switch(cell.getCachedFormulaResultType()) {
+                            case Cell.CELL_TYPE_NUMERIC:
+                                data[cellIndex] = new Double(cell.getNumericCellValue()).toString();
+                                break;
+                            case Cell.CELL_TYPE_STRING:
+                                data[cellIndex] = cell.getRichStringCellValue().getString();
+                                break;
+                        }
+                    }
+                    else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
+                    {
+                        data[cellIndex] = new Double(cell.getNumericCellValue()).toString();
+                    }
+                    else
+                    {
+                        data[cellIndex] = cell.getStringCellValue();
+                    }
                 }
                 catch (Exception e)
                 {
