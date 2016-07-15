@@ -288,12 +288,37 @@
         text-shadow: none;
         font-size: 16px;
     }
+
+    .appliances-wrapper .carousel-caption p{
+        text-shadow: none;
+        font-size: 16px;
+    }
+
 }
 @media screen and (min-width: 992px){
     .accessories-wrapper .carousel-indicators {
         bottom: 10px;
     }
+    .appliances-wrapper .carousel-indicators {
+        bottom: 10px;
+    }
 }
 
+@media screen and (max-width: 767px){
+    .m-style, .d-style {
+        top: 50%;
+        width: 80%;
+    }
+    .d-item-img > img,
+    .m-item-img > img{
+        height:350px;
+    }
+
+    #mycarousel-appliances .carousel-caption{
+        left: 5%!important;
+        right: 5%!important;
+        padding-bottom: 25px!important;
+    }
+}
 
 /* End Product details*/
