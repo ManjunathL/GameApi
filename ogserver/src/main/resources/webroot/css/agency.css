@@ -6518,3 +6518,57 @@ a.tab-ico {
     }
 }
 /* Home Page Banner Content End */
+
+/* Home Page Don't just crush over section */
+
+    .crush-over-1x1-card .crush-over-strip{bottom: -33px;}
+
+    .crush-step-1 .crush-over-strip{bottom: -42px;}
+    .crush-step-1:hover .crush-over-strip{bottom:0px;}
+    .crush-step-2 .crush-over-strip{bottom: -70px;}
+    .crush-step-2:hover .crush-over-strip{bottom:0px;}
+
+    .crush-over-strip {
+        width: 98%;
+        position: absolute;
+        bottom: 0px;
+        color: #FFF;
+        background-color: rgba(0, 0, 0, 0.45);
+        padding: 1em;
+        transition: all 0.3s ease 0s;
+    }
+
+    .crush-over-top-strip {
+        width: auto;
+        position: absolute;
+        top: 0px;
+        color: #FFF;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 0px 10px;
+        transition: all 0.3s ease 0s;
+    }
+
+    /*.crush-step-1 .crush-over-top-strip{top:-91px;}
+    .crush-step-1:hover .crush-over-top-strip{top:0px;}*/
+
+    .crush-over-top-strip h1{
+        text-transform:none!important;
+        font-family:Poiret One;
+        line-height: 0.6!important;
+    }
+    .crush-over-strip h4{
+        text-transform:none!important;
+        font-weight:bold;
+        font-family:Poiret One;
+    }
+    .crush-over-1x1-card {
+        position: relative;
+        overflow: hidden;
+    }
+
+    @media (max-width: 768px){
+        .crush-step-1 .crush-over-strip{bottom: 0px;}
+        .crush-step-2 .crush-over-strip{bottom: 0px;}
+    }
+
+/* Home Page Don't just crush over section End */
