@@ -1,7 +1,10 @@
 package com.mygubbi.game.proposal;
 
-import com.mygubbi.common.StringUtils;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Sunil on 27-04-2016.
@@ -9,29 +12,39 @@ import io.vertx.core.json.JsonObject;
 
 public class ProductModule extends JsonObject
 {
-    public static String MAPPED_AT_MODULE = "m";
-    public static String MAPPED_AT_DEFAULT = "d";
-    public static String NOT_MAPPED = "n";
+    public static String MODULE_MAPPED = "m";
+    public static String MODULE_NOT_MAPPED = "n";
 
+    private static final String MAPPED = "importStatus";
     private static final String UNIT = "unitType";
     private static final String SEQ = "seq";
-    private static final String EXT_CODE = "extCode";
-    private static final String EXT_DEF_CODE = "extDefCode";
 
+    private static final String WIDTH = "width";
+    private static final String DEPTH = "depth";
+    private static final String HEIGHT = "height";
+
+    private static final String EXTCODE = "extCode";
     private static final String MGCODE = "mgCode";
     private static final String MGTYPE = "mgType";
     private static final String MGIMAGE = "mgImage";
     private static final String MGDIMENSION = "mgDimension";
-    private static final String MGDESCRIPTION = "mgDescription";
 
     private static final String CARCASS_CODE = "carcassCode";
     private static final String FINISH_CODE = "finishCode";
     private static final String FINISH_TYPE = "finishTypeCode";
     private static final String COLOR_CODE = "colorCode";
-    private static final String MAKE_TYPE = "makeTypeCode";
     private static final String AMOUNT = "amount";
+    private static final String EXPOSED_SIDES = "expSides"; //None, Left, Right, Both
+    private static final String EXPOSED_BOTTOM = "expBottom"; //Boolean Yes or No
+
+    private static final String LEFT_EXPOSED = "Left";
+    private static final String NONE_EXPOSED = "None";
+    private static final String RIGHT_EXPOSED = "Right";
+    private static final String BOTH_EXPOSED = "Both";
+
+
     private static final String REMARKS = "remarks";
-    private static final String MAPPED = "importStatus";
+    private static final String ACCPACKS = "accPacks";
 
     public ProductModule()
     {
@@ -41,6 +54,7 @@ public class ProductModule extends JsonObject
     public ProductModule(JsonObject json)
     {
         super(json.getMap());
+        this.setAccessoryPacks();
     }
 
     public String getUnit()
@@ -48,14 +62,9 @@ public class ProductModule extends JsonObject
         return this.getString(UNIT);
     }
 
-    public String getKDMCode()
+    public String getExternalCode()
     {
-        return this.getString(EXT_CODE);
-    }
-
-    public String getKDMDefaultCode()
-    {
-        return this.getString(EXT_DEF_CODE);
+        return this.getString(EXTCODE);
     }
 
     public String getCarcassCode()
@@ -78,11 +87,6 @@ public class ProductModule extends JsonObject
         return this.getString(COLOR_CODE);
     }
 
-    public String getMakeType()
-    {
-        return "P";
-    }
-
     public int getAmount()
     {
         return this.getInteger(AMOUNT);
@@ -98,7 +102,7 @@ public class ProductModule extends JsonObject
         return this.getString(MGCODE);
     }
 
-    public String getMGName()
+    public String getModuleType()
     {
         return this.getString(MGTYPE);
     }
@@ -118,9 +122,30 @@ public class ProductModule extends JsonObject
         return this.getString(MAPPED);
     }
 
+    public String getExposedSides()
+    {
+        return this.getString(EXPOSED_SIDES);
+    }
+
+    public boolean hasExposedBottom()
+    {
+        if (this.containsKey(EXPOSED_BOTTOM)) return this.getBoolean(EXPOSED_BOTTOM);
+        return false;
+    }
+
     public int getSequence()
     {
         return this.getInteger(SEQ);
+    }
+
+    public boolean isLeftExposed()
+    {
+        return LEFT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
+    }
+
+    public boolean isRightExposed()
+    {
+        return RIGHT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
     }
 
     public ProductModule setUnit(String unit)
@@ -129,21 +154,39 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule setKDMCode(String code)
+    public ProductModule setExternalCode(String code)
     {
-        this.put(EXT_CODE, code);
+        this.put(EXTCODE, code);
         return this;
     }
 
-    public ProductModule setDefaultModule(String module)
+    public ProductModule setMGCode(String code)
     {
-        this.put(EXT_DEF_CODE, module);
+        this.put(MGCODE, code);
         return this;
     }
 
     public ProductModule setSequence(int seq)
     {
         this.put(SEQ, seq);
+        return this;
+    }
+
+    public ProductModule setWidth(int width)
+    {
+        this.put(WIDTH, width);
+        return this;
+    }
+
+    public ProductModule setDepth(int depth)
+    {
+        this.put(DEPTH, depth);
+        return this;
+    }
+
+    public ProductModule setHeight(int height)
+    {
+        this.put(HEIGHT, height);
         return this;
     }
 
@@ -165,39 +208,15 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule setMakeType(String type)
+    public ProductModule setModuleType(String type)
     {
-        this.put(MAKE_TYPE, type);
+        this.put(MGTYPE, type);
         return this;
     }
 
     public ProductModule setColorCode(String code)
     {
         this.put(COLOR_CODE, code);
-        return this;
-    }
-
-    public ProductModule setMGCode(String value)
-    {
-        this.put(MGCODE, value);
-        return this;
-    }
-
-    public ProductModule setMGName(String value)
-    {
-        this.put(MGTYPE, value);
-        return this;
-    }
-
-    public ProductModule setMGImage(String value)
-    {
-        this.put(MGIMAGE, value);
-        return this;
-    }
-
-    public ProductModule setMGDimension(String value)
-    {
-        this.put(MGDIMENSION, value);
         return this;
     }
 
@@ -219,28 +238,34 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public boolean hasMGMapping()
+    private void setAccessoryPacks()
     {
-        return MAPPED_AT_MODULE.equals(this.getMapped());
+        if (this.containsKey(ACCPACKS))
+        {
+            JsonArray accPacksJson = this.getJsonArray(ACCPACKS);
+            JsonArray accPacks = new JsonArray();
+            for (int i=0; i < accPacksJson.size(); i++)
+            {
+                accPacks.add(new ModuleAccessoryPack(accPacksJson.getJsonObject(i)));
+            }
+            this.put(ACCPACKS, accPacks);
+        }
     }
 
-    public boolean hasDefaultMapping()
+    public List<ModuleAccessoryPack> getAccessoryPacks()
     {
-        return MAPPED_AT_DEFAULT.equals(this.getMapped());
+        if (this.containsKey(ACCPACKS)) return this.getJsonArray(ACCPACKS).getList();
+        return Collections.EMPTY_LIST;
     }
 
-    public boolean hasNoMapping()
-    {
-        if (StringUtils.isEmpty(this.getMapped())) return true;
-        return NOT_MAPPED.equals(this.getMapped());
-    }
 
     @Override
     public String toString()
     {
         return "ProductModule{" +
                 "unit='" + this.getUnit() + '\'' +
-                ", code='" + this.getKDMCode() + '\'' +
+                ", extCode='" + this.getExternalCode() + '\'' +
+                ", code='" + this.getMGCode() + '\'' +
                 ", finish='" + this.getFinishCode() + '\'' +
                 ", color='" + this.getColorCode() + '\'' +
                 ", remarks='" + this.getRemarks() + '\'' +

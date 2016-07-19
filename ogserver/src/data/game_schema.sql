@@ -221,7 +221,7 @@ CREATE TABLE carcass_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
   code varchar(16) NOT NULL,
   type char(1) NOT NULL, -- Left, Right, Top, Bottom
-  typedesc varchar(255) NOT NULL,
+  title varchar(255) NOT NULL,
   plength INTEGER NOT NULL DEFAULT 0,
   breadth INTEGER NOT NULL DEFAULT 0,
   thickness INTEGER NOT NULL DEFAULT 0,
@@ -306,7 +306,7 @@ DROP TABLE IF EXISTS module_acc_pack;
 CREATE TABLE module_acc_pack(
   id INTEGER NOT NULL AUTO_INCREMENT,
   apcode varchar(16) NOT NULL,
-  kdmcode varchar(16) NOT NULL,
+  extcode varchar(16) NOT NULL,
   mgcode varchar(16) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
@@ -322,6 +322,6 @@ CREATE TABLE acc_addon_map(
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (accode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module accessory pack';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='addon accessory map';
 
 

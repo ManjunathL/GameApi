@@ -1,12 +1,12 @@
 package com.mygubbi.game.proposal;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.db.QueryDef;
 import com.mygubbi.game.proposal.model.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
@@ -16,26 +16,31 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ModuleDataService extends AbstractVerticle
 {
 	private final static Logger LOG = LogManager.getLogger(ModuleDataService.class);
-	private Map<String, QueryDef> queryMap;
-	
+
 	private static ModuleDataService INSTANCE;
-	private AtomicInteger cachingCounter = new AtomicInteger(9);
+	private AtomicInteger cachingCounter = new AtomicInteger(7);
 
     private Multimap<String, ModuleComponent> moduleComponentsMap;
+    private Multimap<String, AccessoryPackComponent> accessoryPackComponentsMap;
+    private Multimap<String, AccessoryPack> moduleAccessoryPacksMap;
+    private Multimap<String, AccHwComponent> accessoryAddonsMap;
+    private Multimap<String, AccHwComponent> accessoryPackAddonsMap;
     private Map<String, Module> moduleMap = Collections.EMPTY_MAP;
     private Map<String, CarcassPanel> carcassPanelMap = Collections.EMPTY_MAP;
     private Map<String, ShutterPanel> shutterPanelMap = Collections.EMPTY_MAP;
-    private Map<String, String> kdmaxDefaultModuleMap = Collections.EMPTY_MAP;
-    private Set<String> kdmaxModulesWithMGMapping = Collections.EMPTY_SET;
     private Map<String, AccHwComponent> accessoriesMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> hardwareMap = Collections.EMPTY_MAP;
     private Map<String, ShutterFinish> finishCodeMap = Collections.EMPTY_MAP;
+    private Map<String, AccessoryPack> accessoryPackMap = Collections.EMPTY_MAP;
 
 	public static ModuleDataService getInstance()
 	{
@@ -58,8 +63,6 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheModuleComponents();
         this.cacheCarcassPanels();
         this.cacheShutterPanels();
-        this.cacheKdmaxMapping();
-        this.cacheKdmaxDefaultMapping();
         this.cacheAccessories();
         this.cacheHardware();
         this.cacheFinishCostCodes();
@@ -145,7 +148,7 @@ public class ModuleDataService extends AbstractVerticle
 
     private void cacheAccHw(String type, Map<String, AccHwComponent> components)
     {
-        String query = type == "A" ? "accessory.select.all" : "hardware.select.all";
+        String query = ("A".equals(type) ? "accessory.select.all" : "hardware.select.all");
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData(query, new JsonObject())),
                 (AsyncResult<Message<Integer>> dataResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
@@ -158,52 +161,17 @@ public class ModuleDataService extends AbstractVerticle
                         for (JsonObject record : selectData.rows)
                         {
                             AccHwComponent component = AccHwComponent.fromJson(record);
-                            components.put(component.getCodeAndMakeType(), component);
+                            components.put(component.getCode(), component);
                         }
-                        markResult("Accessories or Hardware loaded for type " + type, true);
-                    }
-                });
-    }
-
-    private void cacheKdmaxMapping()
-    {
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("kdmax.mapped.modules", new JsonObject())),
-                (AsyncResult<Message<Integer>> dataResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
-                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        this.kdmaxModulesWithMGMapping = Collections.EMPTY_SET;
-                    }
-                    else
-                    {
-                        this.kdmaxModulesWithMGMapping = new HashSet<String>(selectData.rows.size());
-                        for (JsonObject record : selectData.rows)
+                        if ("A".equals(type))
                         {
-                            this.kdmaxModulesWithMGMapping.add(record.getString("kdmcode"));
+                            this.cacheAccessoryPackMaster();
                         }
-                    }
-                    markResult("KDMax mapping loaded.", true);
-                });
-    }
-
-    private void cacheKdmaxDefaultMapping()
-    {
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("kdmax.default.mapped.modules", new JsonObject())),
-                (AsyncResult<Message<Integer>> dataResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
-                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        this.kdmaxDefaultModuleMap = Collections.EMPTY_MAP;
-                    }
-                    else
-                    {
-                        this.kdmaxDefaultModuleMap = new HashMap(selectData.rows.size());
-                        for (JsonObject record : selectData.rows)
+                        else
                         {
-                            this.kdmaxDefaultModuleMap.put(record.getString("kdmcode"), record.getString("kdmdefcode"));
+                            markResult("Accessories or Hardware loaded for type " + type, true);
                         }
                     }
-                    markResult("KDMax default mapping loaded.", true);
                 });
     }
 
@@ -223,6 +191,7 @@ public class ModuleDataService extends AbstractVerticle
                         {
                             Module module = new Module(record);
                             this.moduleMap.put(module.getCode(), module);
+                            this.moduleMap.put(module.getExtCode(), module);
                         }
                         markResult("Module master is loaded.", true);
                     }
@@ -252,6 +221,127 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
+    private void cacheAccessoryPackMaster()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("acc_pack_master.select", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Accessory pack master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.accessoryPackMap = new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            AccessoryPack pack = new AccessoryPack(record);
+                            this.accessoryPackMap.put(pack.getCode(), pack);
+                        }
+                        this.cacheAccessoryPackComponents();
+                    }
+                });
+    }
+
+    private void cacheAccessoryPackComponents()
+    {
+        this.accessoryPackComponentsMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("acc_pack_components.select", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Accessory pack components table is empty.", false);
+                    }
+                    else
+                    {
+                        for (JsonObject record : selectData.rows)
+                        {
+                            AccessoryPackComponent component = new AccessoryPackComponent(record);
+                            this.accessoryPackComponentsMap.put(component.getAccessoryPackCode(), component);
+                        }
+                        this.cacheModuleAccessoryPacks();
+                    }
+                });
+    }
+
+    private void cacheModuleAccessoryPacks()
+    {
+        this.moduleAccessoryPacksMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("module_acc_pack.select", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Module Accessory packs table is empty.", false);
+                    }
+                    else
+                    {
+                        for (JsonObject record : selectData.rows)
+                        {
+                            String packCode = record.getString("apcode");
+                            AccessoryPack pack = this.accessoryPackMap.get(packCode);
+                            if (pack == null)
+                            {
+                                markResult("Accessory pack not setup for " + packCode, false);
+                                break;
+                            }
+                            this.moduleAccessoryPacksMap.put(record.getString("mgcode"), pack);
+                        }
+                        this.cacheAccessoryAddons();
+                    }
+                });
+    }
+
+    private void cacheAccessoryAddons()
+    {
+        this.accessoryAddonsMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("acc_addon_map.select", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Accessory addons table is empty.", false);
+                    }
+                    else
+                    {
+                        for (JsonObject record : selectData.rows)
+                        {
+                            String addonCode = record.getString("addoncode");
+                            AccHwComponent accessory = this.accessoriesMap.get(addonCode);
+                            if (accessory == null)
+                            {
+                                markResult("Accessory not setup for " + addonCode, false);
+                                break;
+                            }
+                            this.accessoryAddonsMap.put(record.getString("accode"), accessory);
+                        }
+                        this.cacheAccessoryPackAddons();
+                    }
+                });
+    }
+
+    private void cacheAccessoryPackAddons()
+    {
+        this.accessoryPackAddonsMap = HashMultimap.create();
+        for (AccessoryPack pack : this.accessoryPackMap.values())
+        {
+            for (AccessoryPackComponent component : this.getAccessoryPackComponents(pack.getCode()))
+            {
+                if (!component.isAccessory()) continue;
+                for (AccHwComponent accessory : this.getAccessoryAddons(component.getComponentCode()))
+                {
+                    this.accessoryPackAddonsMap.put(pack.getCode(), accessory);
+                }
+            }
+        }
+        markResult("Accessory Pack addons are loaded.", true);
+    }
+
     private synchronized void markResult(String message, boolean success)
     {
         LOG.info(message);
@@ -278,36 +368,24 @@ public class ModuleDataService extends AbstractVerticle
         return this.moduleComponentsMap.get(mgCode);
     }
 
-    public List<CarcassPanel> getCarcassPanelsForModule(String mgCode)
+    public Collection<AccHwComponent> getAccessoryAddons(String accessoryCode)
     {
-        Module mgModule = this.getModule(mgCode);
-        if (mgModule == null) return Collections.EMPTY_LIST;
-
-        List<CarcassPanel> carcassPanels = new ArrayList<>();
-        for (ModuleComponent component : this.getModuleComponents(mgCode))
-        {
-            if (ModuleComponent.CARCASS_TYPE.equals(component.getType()))
-            {
-                carcassPanels.add(this.getCarcassPanel(component.getComponentCode()));
-            }
-        }
-        return carcassPanels;
+        return this.accessoryAddonsMap.get(accessoryCode);
     }
 
-    public List<ShutterPanel> getShutterPanelsForModule(String mgCode)
+    public Collection<AccHwComponent> getAccessoryPackAddons(String accessoryPackCode)
     {
-        Module mgModule = this.getModule(mgCode);
-        if (mgModule == null) return Collections.EMPTY_LIST;
+        return this.accessoryPackAddonsMap.get(accessoryPackCode);
+    }
 
-        List<ShutterPanel> shutterPanels = new ArrayList<>();
-        for (ModuleComponent component : this.getModuleComponents(mgCode))
-        {
-            if (ModuleComponent.SHUTTER_TYPE.equals(component.getType()))
-            {
-                shutterPanels.add(this.getShutterPanel(component.getComponentCode()));
-            }
-        }
-        return shutterPanels;
+    public Collection<AccessoryPack> getAccessoryPacksForModule(String moduleCode)
+    {
+        return this.moduleAccessoryPacksMap.get(moduleCode);
+    }
+
+    public Collection<AccessoryPackComponent> getAccessoryPackComponents(String accessoryPack)
+    {
+        return this.accessoryPackComponentsMap.get(accessoryPack);
     }
 
     public Module getModule(String code)
@@ -320,6 +398,21 @@ public class ModuleDataService extends AbstractVerticle
         return this.finishCodeMap.get(finishCode);
     }
 
+    public ShutterFinish getFinish(String carcassCode, String finishCode)
+    {
+        ShutterFinish shutterFinish = this.getFinish(finishCode);
+        if (shutterFinish == null) return null;
+
+        for (ShutterFinish finish : this.finishCodeMap.values())
+        {
+            if (finish.getFinishType().equals(shutterFinish.getFinishType()) && finish.getShutterMaterial().equals(carcassCode))
+            {
+                return finish;
+            }
+        }
+        return shutterFinish;
+    }
+
     public CarcassPanel getCarcassPanel(String code)
     {
         return this.carcassPanelMap.get(code);
@@ -330,30 +423,28 @@ public class ModuleDataService extends AbstractVerticle
         return this.shutterPanelMap.get(code);
     }
 
-    public AccHwComponent getAccessory(String code, String makeType)
+    public AccHwComponent getAccessory(String code)
     {
-        return this.accessoriesMap.get(AccHwComponent.getCodeAndMakeType(code, makeType));
+        return this.accessoriesMap.get(code);
     }
 
-    public AccHwComponent getHardware(String code, String makeType)
+    public AccHwComponent getHardware(String code)
     {
-        return this.hardwareMap.get(AccHwComponent.getCodeAndMakeType(code, makeType));
+        return this.hardwareMap.get(code);
     }
 
     public void setMapping(ProductModule module)
     {
-        if (this.kdmaxModulesWithMGMapping.contains(module.getKDMCode()))
+        Module mgModule = this.getModule(module.getExternalCode());
+        if (mgModule != null)
         {
-            module.setMappedFlag(ProductModule.MAPPED_AT_MODULE);
-        }
-        else if (this.kdmaxDefaultModuleMap.containsKey(module.getKDMCode()))
-        {
-            module.setMappedFlag(ProductModule.MAPPED_AT_DEFAULT);
-            module.setDefaultModule(this.kdmaxDefaultModuleMap.get(module.getKDMCode()));
+            module.setMappedFlag(ProductModule.MODULE_MAPPED);
+            module.setMGCode(mgModule.getCode());
+            module.setModuleType(mgModule.getDescription());
         }
         else
         {
-            module.setMappedFlag(ProductModule.NOT_MAPPED);
+            module.setMappedFlag(ProductModule.MODULE_NOT_MAPPED);
         }
     }
 }

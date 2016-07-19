@@ -129,8 +129,7 @@ public class ProductLineItem extends JsonObject
         String carcassCode = BASE_UNIT_TYPE.equals(module.getUnit()) ? this.getBaseCarcassCode() : this.getWallCarcassCode();
         module.setCarcassCode(carcassCode)
                 .setFinishCode(this.getFinishCode())
-                .setFinishType(this.getFinishType())
-                .setMakeType(this.getMakeType());
+                .setFinishType(this.getFinishType());
         mgModules.add(module);
         this.put(MODULES, mgModules);
         return this;

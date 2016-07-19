@@ -100,14 +100,4 @@ public class AccHwComponent
         return this;
     }
 
-    public String getCodeAndMakeType()
-    {
-        return getCodeAndMakeType(this.getCode(), this.getMakeType());
-    }
-
-    //Not the best way to make keys, but the overhead of another new Key object is not worth at this time
-    public static String getCodeAndMakeType(String code, String makeType)
-    {
-        return code + ":" + makeType;
-    }
 }
