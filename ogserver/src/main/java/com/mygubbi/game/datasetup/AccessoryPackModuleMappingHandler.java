@@ -31,7 +31,7 @@ public class AccessoryPackModuleMappingHandler implements ExcelRowHandler
 
     private void printRow(String accode, String mgcode, String kdmaxcode)
     {
-        System.out.println(accode + "|" + mgcode + "|" + kdmaxcode);
+        System.out.println("insert module_acc_pack(apcode, extcode, mgcode) values ('" + accode + "','" + kdmaxcode + "','" + mgcode + "');");
     }
 
     @Override

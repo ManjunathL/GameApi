@@ -21,6 +21,9 @@ public class ModuleTextFileReader
     private final static Logger LOG = LogManager.getLogger(ModuleTextFileReader.class);
     public static final int SEQ_CELL = 0;
     public static final int UNIT_CELL = 1;
+    public static final int WIDTH_CELL = 3;
+    public static final int DEPTH_CELL = 4;
+    public static final int HEIGHT_CELL = 5;
     public static final int NAME_CELL = 7;
     public static final int KDMAXCODE_CELL = 8;
     public static final int COLOR_CELL = 16;
@@ -35,7 +38,7 @@ public class ModuleTextFileReader
 
     public List<ProductModule> loadModules()
     {
-        LOG.info("Loading file " + this.filename);
+        LOG.info("Loading kdmax file " + this.filename);
         Workbook wb = null;
 
         List<String[]> records = this.getRecords();
@@ -83,11 +86,18 @@ public class ModuleTextFileReader
 
                 String color = record[COLOR_CELL];
                 String remarks = record[REMARKS_CELL];
+                int width = this.getInteger(record[WIDTH_CELL]);
+                int depth = this.getInteger(record[DEPTH_CELL]);
+                int height = this.getInteger(record[HEIGHT_CELL]);
 
                 ProductModule module = new ProductModule()
                         .setUnit(unit)
-                        .setKDMCode(moduleCode)
+                        .setExternalCode(moduleCode)
+                        .setWidth(width)
+                        .setHeight(height)
+                        .setDepth(depth)
                         .setSequence(sequence)
+                        //.setDescription(name)
                         .setColorCode(color)
                         .setRemarks(remarks);
                 productModules.add(module);

@@ -27,20 +27,19 @@ public class ProposalProductHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
-        this.post("/mapandupdate").handler(this::mapAndUpdate);
+        this.post("/loadandupdate").handler(this::loadAndUpdate);
         this.post("/update").handler(this::updateProduct);
         this.post("/delete").handler(this::deleteProduct);
     }
 
-    private void mapAndUpdate(RoutingContext routingContext)
+    private void loadAndUpdate(RoutingContext routingContext)
     {
-        LOG.info("Reading product json");
         JsonObject productJson = routingContext.getBodyAsJson();
         ProductLineItem productLineItem = new ProductLineItem(productJson);
-        this.mapModules(routingContext, productLineItem);
+        this.loadModules(routingContext, productLineItem);
     }
 
-    private void mapModules(RoutingContext routingContext, ProductLineItem productLineItem)
+    private void loadModules(RoutingContext routingContext, ProductLineItem productLineItem)
     {
         productLineItem.resetModules();
         List<ProductModule> modules = new ModuleTextFileReader(productLineItem.getKdMaxFile()).loadModules();

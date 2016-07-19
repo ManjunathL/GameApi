@@ -116,33 +116,33 @@ public class AssembledProductInQuote
         {
             if (ModuleComponent.ACCESSORY_TYPE.equals(component.getType()))
             {
-                AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(component.getComponentCode(), module.getMakeType());
+                AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(component.getComponentCode());
                 if (accessory == null) continue;
                 this.addToProductAccessories(accessory, component.getQuantity());
                 this.addToModuleAccessories(accessory, component.getQuantity(), module.getUnit(), module.getSequence());
             }
             else if (ModuleComponent.HARDWARE_TYPE.equals(component.getType()))
             {
-                AccHwComponent hardware = ModuleDataService.getInstance().getHardware(component.getComponentCode(), module.getMakeType());
+                AccHwComponent hardware = ModuleDataService.getInstance().getHardware(component.getComponentCode());
                 if (hardware == null) continue;
                 this.addToModuleHardware(hardware, component.getQuantity(), module.getUnit(), module.getSequence());
             }
         }
     }
 
-    private void addToModuleAccessories(AccHwComponent component, int quantity, String unit, int seq)
+    private void addToModuleAccessories(AccHwComponent component, double quantity, String unit, int seq)
     {
         ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
         this.moduleAccessories.add(accessory);
     }
 
-    private void addToModuleHardware(AccHwComponent component, int quantity, String unit, int seq)
+    private void addToModuleHardware(AccHwComponent component, double quantity, String unit, int seq)
     {
         ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
         this.moduleHardware.add(accessory);
     }
 
-    private void addToProductAccessories(AccHwComponent accessoryComponent, int quantity)
+    private void addToProductAccessories(AccHwComponent accessoryComponent, double quantity)
     {
         Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle());
         accessory.incrementQuantity(quantity);
@@ -203,7 +203,7 @@ public class AssembledProductInQuote
                 Seq.ofType(this.getCarcassPanels().stream(), ModuleCarcass.class)
                         .groupBy(x -> tuple(x.code, x.title, x.width, x.depth, x.thickness, x.edgebinding, x.dimension),
                                 Tuple.collectors(
-                                        Collectors.summingInt(x -> x.quantity), Collectors.summingDouble(x -> x.area)
+                                        Collectors.summingDouble(x -> x.quantity), Collectors.summingDouble(x -> x.area)
                                 )
                         )
                         .entrySet()
@@ -223,7 +223,7 @@ public class AssembledProductInQuote
                 Seq.ofType(this.getShutterPanels().stream(), ModuleShutter.class)
                         .groupBy(x -> tuple(x.code, x.title, x.height, x.width, x.thickness, x.edgebinding, x.design, x.color, x.dimension),
                                 Tuple.collectors(
-                                        Collectors.summingInt(x -> x.quantity), Collectors.summingDouble(x -> x.area)
+                                        Collectors.summingDouble(x -> x.quantity), Collectors.summingDouble(x -> x.area)
                                 )
                         )
                         .entrySet()
@@ -382,7 +382,7 @@ public class AssembledProductInQuote
             this.title = title;
         }
 
-        public void incrementQuantity(int qty)
+        public void incrementQuantity(double qty)
         {
             this.quantity += qty;
         }
@@ -424,7 +424,7 @@ public class AssembledProductInQuote
         public String dimension;
         public String code;
         public String title;
-        public int quantity;
+        public double quantity;
         public int width;
         public int height;
         public int thickness;
@@ -465,7 +465,7 @@ public class AssembledProductInQuote
             return this;
         }
 
-        public ModuleShutter setQuantity(int quantity)
+        public ModuleShutter setQuantity(double quantity)
         {
             this.quantity = quantity;
             return this;
@@ -529,7 +529,7 @@ public class AssembledProductInQuote
     {
         public String code;
         public String title;
-        public int quantity;
+        public double quantity;
         public int width;
         public int depth;
         public int thickness;
@@ -571,7 +571,7 @@ public class AssembledProductInQuote
             return this;
         }
 
-        public ModuleCarcass setQuantity(int quantity)
+        public ModuleCarcass setQuantity(double quantity)
         {
             this.quantity = quantity;
             return this;
