@@ -29,24 +29,8 @@ define([
         },
         ready: function () {
             var that = this;
-                  autoPlayYouTubeModal();
+            //that.autoPlayYouTubeModal();
 
-              //FUNCTION TO GET AND AUTO PLAY YOUTUBE VIDEO FROM DATATAG
-              function autoPlayYouTubeModal() {
-                  var trigger = $("body").find('[data-toggle="modal"]');
-                  trigger.click(function () {
-                      var theModal = $(this).data("target"),
-                          videoSRC = $(this).attr("data-theVideo"),
-                          videoSRCauto = videoSRC + "?autoplay=1";
-                      $(theModal + ' iframe').attr('src', videoSRCauto);
-                      $(theModal + ' button.close').click(function () {
-                          $(theModal + ' iframe').attr('src', videoSRC);
-                      });
-                      $('.modal').click(function () {
-                          $(theModal + ' iframe').attr('src', videoSRC);
-                      });
-                  });
-              }
             (function() {
                 var v = document.getElementsByClassName("youtube-player");
                 for (var n = 0; n < v.length; n++) {
@@ -82,6 +66,24 @@ define([
                 return false;
             });
         },
+        autoPlayYouTubeModal: function (ev) {
+          var that = this;
+          var theModal = $(ev.currentTarget).data("target"),
+            videoSRC = $(ev.currentTarget).attr("data-theVideo"),
+
+          videoSRCauto = videoSRC + "?autoplay=1";
+
+          console.log(videoSRC);
+
+          $(theModal + ' iframe').attr('src', videoSRCauto);
+          $(theModal + ' button.close').click(function () {
+              $(theModal + ' iframe').attr('src', videoSRC);
+          });
+          $('.modal').click(function () {
+              $(theModal + ' iframe').attr('src', videoSRC);
+          });
+
+        },
         labnolThumb: function (id) {
             return '<img class="youtube-thumb" src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';
         },
@@ -97,6 +99,9 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
+        },
+        events: {
+            "click #youtubelnk": "autoPlayYouTubeModal"
         }
     });
     return DashboardPage;
