@@ -16,8 +16,14 @@ define([
         ref: MGF.rootRef,
 
         renderWithUserProfCallback: function(userProfData) {
+            var ratio = 2.25140712945591;
+            var width = $(window).width();
+            var height = width / ratio;
+
             $(this.el).html(_.template(dashboardPageTemplate)({
-              'userProfile': userProfData
+              'userProfile': userProfData,
+              'bwidth': width,
+              'bheight': height
             }));
             $.cloudinary.responsive();
             this.ready();
