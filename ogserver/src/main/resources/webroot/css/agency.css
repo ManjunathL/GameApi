@@ -6267,7 +6267,7 @@ a.tab-ico {
 }
 .c-project-item {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .c-project-link {
     display: block;
@@ -6287,14 +6287,15 @@ a.tab-ico {
 }
 .c-project-img {
     padding-top: 62.5%;
-    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
 }
 .c-project-img a img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    border: 5px solid #f9f9f9;
+    border-radius: 3px;
+    box-shadow: 5px 5px 8px 2px #9c9c9c;
 }
 .nivo-none{
     display: none;
@@ -6306,7 +6307,10 @@ a.tab-ico {
 }
 .c-project-description{
     font-size: 20px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
+}
+.c-project-list-title{
+    margin-top: 25px;
 }
 @media (max-width: 480px){
     .c-project-title h2 {
