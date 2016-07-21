@@ -44,7 +44,7 @@ public class ProductModule extends JsonObject
 
     private static final String REMARKS = "remarks";
     private static final String DESCRIPTION = "description";
-    private static final String ACCPACKS = "accPacks";
+    private static final String ACCPACKS = "accessoryPacks";
 
     public ProductModule()
     {
