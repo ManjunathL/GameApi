@@ -71,8 +71,8 @@ public class ModulePriceHolder
     {
         this.moduleArea = mgModule.getLargestAreaOfModuleInSft();
         this.labourCost = this.moduleArea * labourRateCard.getRate();
-        this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate();
-        this.totalCost = this.woodworkCost + this.accessoryCost + this.hardwareCost;
+        this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
+        this.totalCost = this.woodworkCost + this.accessoryCost;
     }
 
     private double round(double value, int places)
