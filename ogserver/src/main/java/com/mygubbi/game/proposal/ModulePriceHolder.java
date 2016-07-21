@@ -19,6 +19,8 @@ public class ModulePriceHolder
     private double hardwareCost = 0;
     private double labourCost = 0;
     private double totalCost = 0;
+    private double woodworkCost = 0;
+    private double moduleArea;
 
     private JsonArray errors = null;
 
@@ -40,9 +42,9 @@ public class ModulePriceHolder
 
     public JsonObject getPriceJson()
     {
-        return new JsonObject().put("carcassCost", carcassCost).put("shutterCost", shutterCost)
-                .put("accessoryCost", accessoryCost).put("hardwareCost", hardwareCost).put("labourCost", labourCost)
-                .put("totalCost", this.round(totalCost, 2));
+        return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
+                .put("moduleArea", this.moduleArea)
+                .put("totalCost", this.round(this.totalCost, 2));
     }
 
     public void addToCarcassCost(double cost)
@@ -67,9 +69,10 @@ public class ModulePriceHolder
 
     public void calculateTotalCost(Module mgModule, RateCard labourRateCard, RateCard loadingFactorCard)
     {
-        double largestAreaOfModule = mgModule.getLargestAreaOfModuleInSft();
-        this.labourCost = largestAreaOfModule * labourRateCard.getRate();
-        this.totalCost = (carcassCost + shutterCost + labourCost ) * loadingFactorCard.getRate() + accessoryCost + hardwareCost;
+        this.moduleArea = mgModule.getLargestAreaOfModuleInSft();
+        this.labourCost = this.moduleArea * labourRateCard.getRate();
+        this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate();
+        this.totalCost = this.woodworkCost + this.accessoryCost + this.hardwareCost;
     }
 
     private double round(double value, int places)
