@@ -261,6 +261,8 @@ public class ModuleDataService extends AbstractVerticle
                         {
                             AccessoryPackComponent component = new AccessoryPackComponent(record);
                             this.accessoryPackComponentsMap.put(component.getAccessoryPackCode(), component);
+                            AccessoryPack accessoryPack = this.accessoryPackMap.get(component.getAccessoryPackCode());
+                            if (accessoryPack != null) accessoryPack.addAccessory(this.getAccessory(component.getComponentCode()));
                         }
                         this.cacheModuleAccessoryPacks();
                     }

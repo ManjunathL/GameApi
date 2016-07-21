@@ -191,15 +191,6 @@
     },
 
     {
-      "uri": "/gapi/module/accpacks",
-      "source": "db",
-      "query":"accpacks.selectymodule",
-      "params":["mgCode"],
-      "resultfields":[],
-      "default": "[]"
-    },
-
-    {
       "uri": "/gapi/module/addonsforaccpack",
       "source": "db",
       "query":"addons.selectbyaccpack",

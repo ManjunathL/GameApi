@@ -124,7 +124,7 @@ public class ProductModule extends JsonObject
 
     public boolean hasExposedBottom()
     {
-        if (this.containsKey(EXPOSED_BOTTOM)) return this.getBoolean(EXPOSED_BOTTOM);
+        if (this.containsKey(EXPOSED_BOTTOM)) return this.getString(EXPOSED_BOTTOM).equals("Yes");
         return false;
     }
 
