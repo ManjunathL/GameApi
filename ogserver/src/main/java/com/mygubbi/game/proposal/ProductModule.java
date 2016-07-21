@@ -22,12 +22,11 @@ public class ProductModule extends JsonObject
     private static final String WIDTH = "width";
     private static final String DEPTH = "depth";
     private static final String HEIGHT = "height";
+    private static final String DIMENSION = "dimension";
 
     private static final String EXTCODE = "extCode";
     private static final String MGCODE = "mgCode";
-    private static final String MGTYPE = "mgType";
-    private static final String MGIMAGE = "mgImage";
-    private static final String MGDIMENSION = "mgDimension";
+    private static final String IMAGE_PATH = "imagePath";
 
     private static final String CARCASS_CODE = "carcassCode";
     private static final String FINISH_CODE = "finishCode";
@@ -44,6 +43,7 @@ public class ProductModule extends JsonObject
 
 
     private static final String REMARKS = "remarks";
+    private static final String DESCRIPTION = "description";
     private static final String ACCPACKS = "accPacks";
 
     public ProductModule()
@@ -102,19 +102,14 @@ public class ProductModule extends JsonObject
         return this.getString(MGCODE);
     }
 
-    public String getModuleType()
+    public String getImagePath()
     {
-        return this.getString(MGTYPE);
+        return this.getString(IMAGE_PATH);
     }
 
-    public String getMGImage()
+    public String getDimension()
     {
-        return this.getString(MGIMAGE);
-    }
-
-    public String getMGDimension()
-    {
-        return this.getString(MGDIMENSION);
+        return this.getString(DIMENSION);
     }
 
     public String getMapped()
@@ -190,6 +185,12 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setDimension(String dimension)
+    {
+        this.put(DIMENSION, dimension);
+        return this;
+    }
+
     public ProductModule setCarcassCode(String code)
     {
         this.put(CARCASS_CODE, code);
@@ -208,9 +209,9 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule setModuleType(String type)
+    public ProductModule setImagePath(String path)
     {
-        this.put(MGTYPE, type);
+        this.put(IMAGE_PATH, path);
         return this;
     }
 
@@ -229,6 +230,12 @@ public class ProductModule extends JsonObject
     public ProductModule setRemarks(String remarks)
     {
         this.put(REMARKS, remarks);
+        return this;
+    }
+
+    public ProductModule setDescription(String description)
+    {
+        this.put(DESCRIPTION, description);
         return this;
     }
 

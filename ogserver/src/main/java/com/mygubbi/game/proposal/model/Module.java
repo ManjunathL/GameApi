@@ -15,10 +15,12 @@ public class Module
     private static final String DEPTH = "depth";
     private static final String HEIGHT = "height";
     private static final String DESCRIPTION = "description";
+    private static final String IMAGE_PATH = "imagePath";
 
     private String code;
     private String extCode;
     private String description;
+    private String imagePath;
     private int height;
     private int depth;
     private int width;
@@ -36,6 +38,7 @@ public class Module
         this.setDepth(json.getInteger(DEPTH));
         this.setWidth(json.getInteger(WIDTH));
         this.setDescription(json.getString(DESCRIPTION));
+        this.setImagePath(json.getString(IMAGE_PATH));
     }
 
     public String getCode()
@@ -101,6 +104,16 @@ public class Module
     public void setExtCode(String extCode)
     {
         this.extCode = extCode;
+    }
+
+    public String getImagePath()
+    {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath)
+    {
+        this.imagePath = imagePath;
     }
 
     public double getLargestAreaOfModuleInSft()

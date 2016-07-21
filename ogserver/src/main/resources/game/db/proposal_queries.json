@@ -202,7 +202,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select extCode, code, width, depth, height, description from module_master",
+      "query": "select extCode, code, width, depth, height, description, imagePath from module_master",
       "params": []
     },
 
