@@ -138,7 +138,7 @@ public class ProposalHandler extends AbstractRouteHandler
                     else
                     {
                         String role  = selectData.rows.get(0).getString("role");
-                        String query = ("sales".equals(role) || "designer".equals(role)) ? "proposal.list.userid" : "proposal.list.all";
+                        String query = ("sales".equals(role) || "designer".equals(role)) ? "proposal.list." + role : "proposal.list.all";
                         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData(query, new JsonObject().put("userId", userId))),
                                 (AsyncResult<Message<Integer>> proposalResult) -> {
                                     QueryData proposalData = (QueryData) LocalCache.getInstance().remove(proposalResult.result().body());

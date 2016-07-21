@@ -12,16 +12,24 @@
       "id": "proposal.list.all",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "query": "select 'W' as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
       "params": []
     },
 
     {
-      "id": "proposal.list.userid",
+      "id": "proposal.list.sales",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted' and (salesEmail = ? or designerEmail = ?)",
-      "params": ["userId", "userId"]
+      "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
+    },
+
+    {
+      "id": "proposal.list.designer",
+      "type": "select",
+      "table": "proposal",
+      "query": "select IF(designerEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
     },
 
     {
