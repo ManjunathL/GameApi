@@ -482,7 +482,7 @@
     {
       "id": "addons.selectbyaccpack",
       "type": "select",
-      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from acc_addon_map where accode in (select code from acc_pack_master where code = ?))",
+      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from acc_addon_map where accode in (select code from acc_pack_components where type = 'A' and apcode = ?))",
       "params": ["apCode"]
     }
 
