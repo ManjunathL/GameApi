@@ -27,7 +27,7 @@
 
   "staticConfigPath": "config/prod/prod.config.js",
   "importsPath": "config/prod/prod.imports.css",
-  "alljs": "webroot/js/all.js",
+  "alljs": "js/all.js",
 
   "robots.txt": ""
 
