@@ -1,14 +1,14 @@
-package com.mygubbi.game.proposal.quote;
+package com.mygubbi.game.proposal.output;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
-import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
-import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.quote.QuoteData;
+import com.mygubbi.game.proposal.quote.QuoteRequest;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -25,23 +25,16 @@ import java.util.List;
  * Created by Sunil on 08-01-2016.
  */
 
-public class QuotationCreatorService extends AbstractVerticle
+public class ProposalOutputService extends AbstractVerticle
 {
-    private final static Logger LOG = LogManager.getLogger(QuotationCreatorService.class);
+    private final static Logger LOG = LogManager.getLogger(ProposalOutputService.class);
 
-    public static final String CREATE_QUOTE = "create.quote";
-    public static final String CREATE_JOBCARD = "create.jobcard";
-
-    private String quoteTemplate;
-    private String jobcardTemplate;
+    public static final String CREATE_PROPOSAL_OUTPUT = "create.proposal.output";
 
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
-        this.setupQuoteCreator();
-        this.setupJobcardCreator();
-        this.quoteTemplate = ConfigHolder.getInstance().getStringValue("quote_template", "/tmp/quote-template.xlsx");
-        this.jobcardTemplate = ConfigHolder.getInstance().getStringValue("jobcard_template", "/tmp/jobcard-template.xlsx");
+        this.setupProposalOutput();
         startFuture.complete();
     }
 
@@ -51,29 +44,18 @@ public class QuotationCreatorService extends AbstractVerticle
         super.stop();
     }
 
-    private void setupQuoteCreator()
+    private void setupProposalOutput()
     {
         EventBus eb = VertxInstance.get().eventBus();
-        eb.localConsumer(CREATE_QUOTE, (Message<Integer> message) -> {
+        eb.localConsumer(CREATE_PROPOSAL_OUTPUT, (Message<Integer> message) -> {
             QuoteRequest quoteRequest = (QuoteRequest) LocalCache.getInstance().remove(message.body());
-            this.getProposalHeader(quoteRequest, message, true);
+            this.getProposalHeader(quoteRequest, message);
         }).completionHandler(res -> {
-            LOG.info("Full quote creator service started." + res.succeeded());
+            LOG.info("Proposal output service started." + res.succeeded());
         });
     }
 
-    private void setupJobcardCreator()
-    {
-        EventBus eb = VertxInstance.get().eventBus();
-        eb.localConsumer(CREATE_JOBCARD, (Message<Integer> message) -> {
-            QuoteRequest quoteRequest = (QuoteRequest) LocalCache.getInstance().remove(message.body());
-            this.getProposalHeader(quoteRequest, message, false);
-        }).completionHandler(res -> {
-            LOG.info("Full quote creator service started." + res.succeeded());
-        });
-    }
-
-    private void getProposalHeader(QuoteRequest quoteRequest, Message message, boolean generateQuote)
+    private void getProposalHeader(QuoteRequest quoteRequest, Message message)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id", quoteRequest.getProposalId())));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -87,13 +69,13 @@ public class QuotationCreatorService extends AbstractVerticle
                     else
                     {
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
-                        this.getProposalProducts(proposalHeader, quoteRequest, message, generateQuote);
+                        this.getProposalProducts(proposalHeader, quoteRequest, message);
                     }
                 });
 
     }
 
-    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message, boolean generateQuote)
+    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message)
     {
         QueryData queryData = null;
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
@@ -122,12 +104,12 @@ public class QuotationCreatorService extends AbstractVerticle
                         {
                             products.add(new ProductLineItem(json));
                         }
-                        this.getProposalAddons(quoteRequest, proposalHeader, products, message, generateQuote);
+                        this.getProposalAddons(quoteRequest, proposalHeader, products, message);
                     }
                 });
     }
 
-    private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message, boolean generateQuote)
+    private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.addon.list", new JsonObject().put("proposalId", proposalHeader.getId())));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -149,37 +131,19 @@ public class QuotationCreatorService extends AbstractVerticle
                             addons.add(new ProductAddon(json));
                         }
                     }
-                    this.createQuote(quoteRequest, proposalHeader, products, addons, message, generateQuote);
+                    this.createQuote(quoteRequest, proposalHeader, products, addons, message);
                 });
     }
 
     private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
-                             List<ProductAddon> addons, Message  message, boolean generateQuote)
+                             List<ProductAddon> addons, Message  message)
     {
-        String targetFile = proposalHeader.folderPath() + (generateQuote ? "/quotation.xlsx" : "/jobcard.xlsx" );
         try
         {
-            VertxInstance.get().fileSystem().deleteBlocking(targetFile);
-        }
-        catch (Exception e)
-        {
-            //Nothing to do
-        }
-        try
-        {
-            String templateFile = generateQuote ? this.quoteTemplate : this.jobcardTemplate;
-            VertxInstance.get().fileSystem().copyBlocking(templateFile, targetFile);
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount());
-            if (generateQuote)
-            {
-                new ExcelQuoteCreator(targetFile, quoteData).prepareQuote();
-                sendResponse(message, new JsonObject().put("quoteFile", targetFile));
-            }
-            else
-            {
-                new ExcelJobCardCreator(targetFile, quoteData).prepareJobCard();
-                sendResponse(message, new JsonObject().put("jobcardFile", targetFile));
-            }
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData);
+            outputCreator.create();
+            sendResponse(message, new JsonObject().put(outputCreator.getOutputKey(), outputCreator.getOutputFile()));
         }
         catch (Exception e)
         {

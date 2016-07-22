@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
  */
 public class ShutterPanel
 {
-    public static final double SQMM2SQFT = 0.0000107639;
+    private static final double SQMM2SQFT = 0.0000107639;
     private String code;
     private String title;
     private int length;

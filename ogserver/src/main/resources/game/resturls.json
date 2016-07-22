@@ -189,14 +189,16 @@
       "default": "[]",
       "encoding": "application/json"
     },
+
     {
-      "uri": "/gapi/module/accessories",
+      "uri": "/gapi/module/addonsforaccpack",
       "source": "db",
-      "query":"module.accessories.select",
-      "params":["mgCode", "makeType"],
+      "query":"addons.selectbyaccpack",
+      "params":["apCode"],
       "resultfields":[],
       "default": "[]"
     },
+
     {
       "uri": "/gapi/addons",
       "source": "db",

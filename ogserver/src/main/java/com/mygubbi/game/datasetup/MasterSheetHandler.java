@@ -15,26 +15,39 @@ public class MasterSheetHandler implements ExcelRowHandler
         if (StringUtils.isEmpty(moduleCode) || "Module Code".equals(moduleCode)) return;
 
         String kdmaxCode = (String) data[2];
+        String description = (String) data[3];
+        int width = Double.valueOf((String) data[4]).intValue();
+        int depth = Double.valueOf((String) data[5]).intValue();
+        int height = Double.valueOf((String) data[6]).intValue();
 
-        this.loopForComponents(data, moduleCode, kdmaxCode, 7, 32, "C");
-        this.loopForComponents(data, moduleCode, kdmaxCode, 33, 60, "H");
-        this.loopForComponents(data, moduleCode, kdmaxCode, 62, 65, "S");
+        this.printModuleRow(kdmaxCode, moduleCode, description, width, depth, height);
+        this.loopForComponents(data, moduleCode, 7, 32, "C");
+        this.loopForComponents(data, moduleCode, 33, 60, "H");
+        this.loopForComponents(data, moduleCode, 62, 65, "S");
     }
 
-    private void loopForComponents(Object[] data, String moduleCode, String kdmaxCode, int startColumn, int endColumn, String compType)
+    private void loopForComponents(Object[] data, String moduleCode, int startColumn, int endColumn, String compType)
     {
         for (int i = startColumn; i <= endColumn; i = i+2)
         {
             String compCode = (String) data[i];
             if (StringUtils.isEmpty(compCode)) continue;
             String quantity = (String) data[i+1];
-            this.printRow(moduleCode, kdmaxCode, compCode, quantity, compType);
+            this.printComponentRow(moduleCode, compCode, quantity, compType);
         }
     }
 
-    private void printRow(String moduleCode, String kdmaxCode, String compCode, String quantity, String compType)
+    private void printModuleRow(String extCode, String code, String description, int width, int depth, int height)
     {
-        System.out.println(moduleCode + "|" + kdmaxCode + "|" + compType + "|" + compCode + "|" + quantity);
+        String dimension = width + "x" + depth + "x" + height;
+        System.out.println("insert module_master(extCode, code, description, imagePath, width, depth, height, dimension) " +
+                "values ('" + extCode + "','" + code + "','" + description + "','" + code + ".jpg" + "'," + width + "," + depth + "," + height + ",'" + dimension + "');");
+    }
+
+    private void printComponentRow(String moduleCode, String compCode, String quantity, String compType)
+    {
+        System.out.println("insert module_components(modulecode, comptype, compcode, quantity) " +
+                "values ('" + moduleCode + "','" + compType + "','" + compCode + "'," + quantity + ");");
     }
 
     @Override

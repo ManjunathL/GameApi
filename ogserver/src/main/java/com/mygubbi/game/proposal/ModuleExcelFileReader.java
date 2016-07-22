@@ -95,7 +95,10 @@ public class ModuleExcelFileReader
 
                 ProductModule module = new ProductModule()
                         .setUnit(unit)
-                        .setKDMCode(moduleCode)
+                        .setExternalCode(moduleCode)
+                        .setWidth(width)
+                        .setHeight(height)
+                        .setDepth(depth)
                         .setSequence(sequence)
                         .setColorCode(color)
                         .setRemarks(remarks);

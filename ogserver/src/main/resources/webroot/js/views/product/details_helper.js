@@ -125,6 +125,7 @@ define([
                     $('#mainImg').fadeIn(200);
                 });
             }
+            $('body').scrollTop(0);
         },
         toggleColor: function(e) {
             this.toggleColorFor($(e.target));

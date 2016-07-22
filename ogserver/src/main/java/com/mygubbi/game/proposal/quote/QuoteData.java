@@ -231,4 +231,9 @@ public class QuoteData
 
         return aggregated;
     }
+
+    public ProposalHeader getProposalHeader()
+    {
+        return proposalHeader;
+    }
 }
