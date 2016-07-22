@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ModuleAccessoryPack extends JsonObject
 {
-    private static final String APCODE = "apcode";
-    private static final String ADDONS = "addons";
+    private static final String APCODE = "code";
+    private static final String ADDONS = "accessories";
 
     public ModuleAccessoryPack()
     {

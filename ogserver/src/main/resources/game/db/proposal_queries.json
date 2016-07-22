@@ -12,16 +12,24 @@
       "id": "proposal.list.all",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "query": "select 'W' as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
       "params": []
     },
 
     {
-      "id": "proposal.list.userid",
+      "id": "proposal.list.sales",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted' and (salesEmail = ? or designerEmail = ?)",
-      "params": ["userId", "userId"]
+      "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
+    },
+
+    {
+      "id": "proposal.list.designer",
+      "type": "select",
+      "table": "proposal",
+      "query": "select IF(designerEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
     },
 
     {
@@ -202,7 +210,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select extCode, code, width, depth, height, description from module_master",
+      "query": "select extCode, code, width, depth, height, description, imagePath from module_master",
       "params": []
     },
 
@@ -474,7 +482,7 @@
     {
       "id": "addons.selectbyaccpack",
       "type": "select",
-      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from acc_addon_map where accode in (select code from acc_pack_master where code = ?))",
+      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from acc_addon_map where accode in (select code from acc_pack_components where type = 'A' and apcode = ?))",
       "params": ["apCode"]
     }
 

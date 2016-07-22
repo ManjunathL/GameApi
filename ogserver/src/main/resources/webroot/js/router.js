@@ -62,6 +62,9 @@ define([
             'e-book(/)': 'ebook',
             'completed-projects(/)': 'completedprojectspage',
             'newproduct-details(/)': 'newdetailspage',
+            'know-your-wardrobe(/)': 'knowyourwardrobe',
+            'know-your-kitchen(/)': 'knowyourkitchen',
+            'remarketing-lp(/)': 'remarketinglp',
             '*something': 'errorPage'
 
 
@@ -450,6 +453,24 @@ define([
                 VM.create(VM.COMPLETEDPROJECTSPAGE, CompletedProjectsPage).render();
             });
         });
+        router.on('route:knowyourwardrobe', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/landing_pages/knowyourwardrobe_page.js'], function(KnowYourWardrobe) {
+                        VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourWardrobe).render();
+                    });
+                });
+        router.on('route:knowyourkitchen', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/landing_pages/knowyourkitchen_page.js'], function(KnowYourKitchen) {
+                        VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourKitchen).render();
+                    });
+                });
+        router.on('route:remarketinglp', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/landing_pages/remarketinglp_page.js'], function(RemarketingLp) {
+                        VM.create(VM.COMPLETEDPROJECTSPAGE, RemarketingLp).render();
+                    });
+                });
         router.on('route:mediapage', function(actions) {
             setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
             require(['/js/views/media_pages/media_page.js'], function(MediaPage) {

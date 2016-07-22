@@ -28,7 +28,7 @@
       },
 
       {
-        "name": "com.mygubbi.game.proposal.quote.QuotationCreatorService"
+        "name": "com.mygubbi.game.proposal.output.ProposalOutputService"
       },
 
       {

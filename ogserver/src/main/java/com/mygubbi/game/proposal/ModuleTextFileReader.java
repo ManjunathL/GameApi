@@ -96,8 +96,9 @@ public class ModuleTextFileReader
                         .setWidth(width)
                         .setHeight(height)
                         .setDepth(depth)
+                        .setDimension(width + "x" + depth + "x" + height)
                         .setSequence(sequence)
-                        //.setDescription(name)
+                        .setDescription(name)
                         .setColorCode(color)
                         .setRemarks(remarks);
                 productModules.add(module);

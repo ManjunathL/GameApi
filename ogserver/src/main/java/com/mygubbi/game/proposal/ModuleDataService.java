@@ -261,6 +261,8 @@ public class ModuleDataService extends AbstractVerticle
                         {
                             AccessoryPackComponent component = new AccessoryPackComponent(record);
                             this.accessoryPackComponentsMap.put(component.getAccessoryPackCode(), component);
+                            AccessoryPack accessoryPack = this.accessoryPackMap.get(component.getAccessoryPackCode());
+                            if (accessoryPack != null) accessoryPack.addAccessory(this.getAccessory(component.getComponentCode()));
                         }
                         this.cacheModuleAccessoryPacks();
                     }
@@ -440,7 +442,7 @@ public class ModuleDataService extends AbstractVerticle
         {
             module.setMappedFlag(ProductModule.MODULE_MAPPED);
             module.setMGCode(mgModule.getCode());
-            module.setModuleType(mgModule.getDescription());
+            module.setImagePath(mgModule.getImagePath());
         }
         else
         {
