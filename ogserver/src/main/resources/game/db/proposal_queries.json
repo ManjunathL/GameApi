@@ -318,7 +318,7 @@
       "id": "carcass.select.all",
       "type": "select",
       "table": "carcass_master",
-      "query": "select code, title, plength, breadth, thickness, edgebinding, area from carcass_master",
+      "query": "select code, title, plength, breadth, thickness, edgebinding, area, type from carcass_master",
       "params": []
     },
     {
