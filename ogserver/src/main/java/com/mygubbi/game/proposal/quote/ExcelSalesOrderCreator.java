@@ -1,41 +1,47 @@
 package com.mygubbi.game.proposal.quote;
 
-import com.mygubbi.si.excel.ExcelWorkbookManager;
+import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
  * Created by Sunil on 22-05-2016.
  */
-public class ExcelSalesOrderCreator
+public class ExcelSalesOrderCreator extends AbstractProposalOutputCreator
 {
     private final static Logger LOG = LogManager.getLogger(ExcelSalesOrderCreator.class);
 
-    private String quoteXls;
-    private QuoteData quoteData;
-    private ExcelWorkbookManager workbookManager;
-
-    public ExcelSalesOrderCreator(String quoteXls, QuoteData quoteData)
+    public ExcelSalesOrderCreator(QuoteData quoteData)
     {
-        this.quoteXls = quoteXls;
-        this.quoteData = quoteData;
-        this.workbookManager = new ExcelWorkbookManager(this.quoteXls);
+        super(quoteData);
     }
 
-    public void prepare()
+    public String getTemplateName()
+    {
+        return "salesorder_template";
+    }
+
+    public String getOutputFilename()
+    {
+        return "salesorder.xlsx";
+    }
+
+    public void create()
     {
         //Modules first followed by panels in accessory packs
         //Hardware from accessory packs
         //Accessories from accessory packs and addon accessories
         //Addons - Appliances
 
+        this.openWorkbook();
+
         this.closeWorkbook();
     }
 
-    private void closeWorkbook()
+    @Override
+    public String getOutputKey()
     {
-        this.workbookManager.closeWorkbook();
+        return "salesorderFile";
     }
-
 
 }

@@ -6,7 +6,8 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.quote.QuotationCreatorService;
+import com.mygubbi.game.proposal.output.ProposalOutputCreator;
+import com.mygubbi.game.proposal.output.ProposalOutputService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
@@ -36,6 +37,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/update").handler(this::updateProposal);
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
+        this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
@@ -106,19 +108,24 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void downloadQuote(RoutingContext routingContext)
     {
-        this.createProposalOutput(routingContext, QuotationCreatorService.CREATE_QUOTE);
+        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION);
     }
 
     private void downloadJobCard(RoutingContext routingContext)
     {
-        this.createProposalOutput(routingContext, QuotationCreatorService.CREATE_JOBCARD);
+        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.JOBCARD);
     }
 
-    private void createProposalOutput(RoutingContext routingContext, String createType)
+    private void downloadSalesOrder(RoutingContext routingContext)
+    {
+        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.SALESORDER);
+    }
+
+    private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type)
     {
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson));
-        VertxInstance.get().eventBus().send(createType, id,
+        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
+        VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());
