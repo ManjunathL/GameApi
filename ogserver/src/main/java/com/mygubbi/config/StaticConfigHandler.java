@@ -22,30 +22,25 @@ public class StaticConfigHandler implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
         HttpServerRequest request = context.request();
-        String uri = request.uri();
+        String path = request.path();
 
-        if (uri.equals(IMPORTS_RESOURCE)) {
-
+        if (path.equals(IMPORTS_RESOURCE)) {
             String configFilePath = ConfigHolder.getInstance().getConfigValue("importsPath").toString();
-            RouteUtil.getInstance().sendResponseFromFile(context, configFilePath, "text/css");
+            context.reroute("/" + configFilePath);
 
-        } else if (uri.equals(MAIN_JS_RESOURCE)) {
-
+        }  else if (path.equals(MAIN_JS_RESOURCE)) {
             String configFilePath = ConfigHolder.getInstance().getConfigValue("alljs").toString();
-            RouteUtil.getInstance().sendResponseFromFile(context, configFilePath, "application/javascript");
+            context.reroute("/" + configFilePath);
 
-        } else if (uri.equals(CONFIG_RESOURCE)) {
-
+        } else if (path.equals(CONFIG_RESOURCE)) {
             String configFilePath = ConfigHolder.getInstance().getConfigValue("staticConfigPath").toString();
-            RouteUtil.getInstance().sendResponseFromFile(context, configFilePath, "application/javascript");
+            context.reroute("/" + configFilePath);
 
-        } else if (uri.equals(ROBOTS_RESOURCE)){
-
+        } else if (path.equals(ROBOTS_RESOURCE)){
             String robotsContent = ConfigHolder.getInstance().getConfigValue("robots.txt").toString();
             RouteUtil.getInstance().sendResponse(context, robotsContent, "text/plain");
 
         } else {
-
             context.next();
         }
 
