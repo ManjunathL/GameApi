@@ -1,0 +1,16 @@
+<%  _.each (finishobj[selectedFinish].finishStyleObj, function(key,fintyp) { %>
+<div class="row">
+    <ul class="list-inline finishes-foil">
+        <% _.each (key, function(fintypimg) { %>
+        <% if(fintyp == "Laminate"){ %>
+        <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/Swatches/Glossy/Laminate/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></a></li>
+        <% }else if(fintyp == "Foil"){ %>
+        <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Foil/BW/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></a></li>
+        <% }else{ %>
+        <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Paint/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></a></li>
+        <% } %>
+        <% }); %>
+    </ul>
+    <label id="finish-type-label" class="finishes-label"> <%= fintyp %> </label>
+</div>
+<% }); %>

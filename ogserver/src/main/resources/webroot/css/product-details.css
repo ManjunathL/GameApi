@@ -1,5 +1,9 @@
 /* Start product Details page  */
 
+.product-details-font{
+    font-family: 'Fira Sans', sans-serif;
+}
+
 .product-main-section{
     padding: 20px 0px;
     display: inline-block;
@@ -14,7 +18,7 @@
 .product-heading {
     z-index: 999;
     margin: 20px 0px;
-    font-weight: 600;
+    font-weight: 600!important;
 }
 .about-product{
     margin: 25px 35px 40px;
@@ -63,6 +67,25 @@
 .design-card .nav-tabs.nav-justified>.active>a:focus{
     border: 0px solid #ddd;
 }
+
+ img.finish-thumbnail {
+     /*max-width:20%;*/
+     max-height:30%;
+     -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
+     /* For Safari 3.1 to 6.0 */
+     transition: width 1s, height 1s, transform 0.5s;
+ }
+ img.finish-thumbnail:hover {
+     -webkit-transform:scale(1.9);
+     /* Safari and Chrome */
+     -moz-transform:scale(1.9);
+     /* Firefox */
+     -ms-transform:scale(1.9);
+     /* IE 9 */
+     -o-transform:scale(1.9);
+     /* Opera */
+     transform:scale(1.9);
+ }
 
 @media (min-width: 768px){
     .warranty-card .nav-tabs.nav-justified>li>a,

@@ -323,59 +323,64 @@ define([
                 }, {
                     silent: true
                 });
+            }
+            var finishes = new Array();
+            var finishobj = {};
 
-                var finishes = new Array();
-                var finishobj = {};
 
+            var finishStyleObj1 = {};
+            var finishStyleObj = {};
 
-                var finishStyleObj1 = {};
-                var finishStyleObj = {};
+            if (!that.custom_product.get('finish')) {
+                _.map(that.product.get('finish'), function(model) {
+                    finishes.push(model.finishName);
+                    if (model.finishName == selectedFinish) {
+                        var finishTypeArr = new Array();
 
-                if (!that.custom_product.get('finish')) {
-                    _.map(that.product.get('finish'), function(model) {
-                        finishes.push(model.finishName);
-                        if (model.finishName == selectedFinish) {
-                            var finishTypeArr = new Array();
+                        _.map(model.finishes, function(finstype) {
+                          var result =  _.filter( finstype.finishStyleType, function ( model ) {
+                                return model.finishStyleId == "cmono";
+                           });
 
-                            _.map(model.finishes, function(finstype) {
-                              var result =  _.filter( finstype.finishStyleType, function ( model ) {
-                                    return model.finishStyleId == "cmono";
-                               });
+                           _.map(result, function (value, key) {
+                             finishStyleObj[finstype.finishType] = result[key].finishImage;
+                             finishStyleObj1 = result[key].finishStyle;
+                           });
 
-                               _.map(result, function (value, key) {
-                                 finishStyleObj = result[key].finishImage;
-                                 finishStyleObj1 = result[key].finishStyle;
-                               });
+                            finishTypeArr.push(finstype.finishType);
 
-                                finishTypeArr.push(finstype.finishType);
+                        });
 
-                            });
+                        finishobj[model.finishName] = {"Desc":model.finishDescription,"FinishType":finishTypeArr,"finishStyleObj":finishStyleObj};
+                    } else {
+                        return false;
+                    }
+                });
 
-                            finishobj[model.finishName] = {"Desc":model.finishDescription,"FinishType":finishTypeArr,"finishStyleObj":finishStyleObj};
-                        } else {
-                            return false;
-                        }
-                    });
-
-console.log(' ===================== ');
-console.log(finishobj);
+                that.custom_product.set({
+                    'finishes': _.uniq(finishes)
+                }, {
+                    silent: true
+                });
+                if (!that.custom_product.get('finishobj')) {
                     that.custom_product.set({
-                        'finishes': _.uniq(finishes)
+                        'finishobj': finishobj
                     }, {
                         silent: true
                     });
-                    if (!that.custom_product.get('finishobj')) {
-                        that.custom_product.set({
-                            'finishobj': finishobj
-                        }, {
-                            silent: true
-                        });
-                    }
                 }
             }
 
             $("#finish-tab-content").html('<div class="choose-active tab-pane active" id="'+selectedFinish+'"><p>'+finishobj[selectedFinish].Desc+'</p></div>');
-            $("#finishList").html(finishobj);
+            //$("#finishList").html('hiiiiiiiiiiiiiiiiiiiiii');
+
+            var nwfinishTemplate = _.template(FinishTemplate);
+
+            $('#finishList').html(nwfinishTemplate({
+                "finishobj": finishobj,
+                "finishStyleObj":finishStyleObj,
+                "selectedFinish": this.custom_product.get('selectedFinish')
+            }));
 
 
             return this;

@@ -1,10 +1,7 @@
-<% console.log(product); %>
 <% document.title = product.name + ' | mygubbi' %>
 <link rel="stylesheet" href="/css/product-details.css">
-<link rel="stylesheet" href="/js/libs/owl.carousel/dist/assets/owl.carousel.min.css">
 
-
-<section class="bg-white top-section">
+<section class="bg-white top-section product-details-font">
     <div class="container-fluid bg-color-white">
         <div class="container">
             <div class="row">
@@ -148,12 +145,12 @@
                                                             <ul class="list-inline finishes-foil">
                                                                 <% _.each (key, function(fintypimg) { %>
                                                                 <% if(fintyp == "Laminate"){ %>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/Swatches/Glossy/Laminate/cmono/<%= fintypimg %>" alt=""></a></li>
+                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/Swatches/Glossy/Laminate/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></a></li>
                                                                 <% }else if(fintyp == "Foil"){ %>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Foil/BW/<%= fintypimg %>" alt=""></a></li>
+                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Foil/BW/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></a></li>
 
                                                                 <% }else{ %>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Paint/cmono/<%= fintypimg %>" alt=""></a></li>
+                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Paint/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></a></li>
                                                                 <% } %>
                                                                 <% }); %>
                                                             </ul>
@@ -474,8 +471,6 @@
 </div>
 <!-- consult Modal End -->
 
-<script src="/js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
-
 <script>
     var items = $('.carousels .items');
 
@@ -527,31 +522,6 @@
         $('.appliance-carousels').carousel({
           interval: 6000,
           pause: "false"
-        });
-
-        var owl = $('.owl-carousel');
-        owl.owlCarousel({
-            items:5,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:3
-                },
-                1000:{
-                    items:5
-                }
-            },
-            margin:10,
-            autoplay:true,
-            dots:false,
-            nav:true,
-            navText:[
-                "<i class='fa fa-angle-left fa-1x'></i>",
-                "<i class='fa fa-angle-right fa-1x'></i>"
-            ]
         });
     });
 
