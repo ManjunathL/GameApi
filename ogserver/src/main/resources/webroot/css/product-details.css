@@ -69,13 +69,14 @@
 }
 
  img.finish-thumbnail {
-     /*max-width:20%;*/
      max-height:30%;
      -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
      /* For Safari 3.1 to 6.0 */
      transition: width 1s, height 1s, transform 0.5s;
  }
  img.finish-thumbnail:hover {
+    width:70px;
+    height:50px;
      -webkit-transform:scale(1.9);
      /* Safari and Chrome */
      -moz-transform:scale(1.9);
@@ -240,9 +241,10 @@
     padding: 0px;
 }
 .finishes-foil li img{
-    width: 80px;
+    width: 110px;
     margin: 0px;
     padding: 0px;
+    height: 50px;
 }
 .finishes-label{
     margin: 10px 0px 20px;
