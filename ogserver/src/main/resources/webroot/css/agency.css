@@ -6328,7 +6328,9 @@ a.tab-ico {
 
 /* Start Testimonial design for Home page By Smruti on 14th JUL 2016 */
 
-    #carousel-reviews > .carousel-control.left,.carousel-control.right  {background:none;width:25px;}
+    #carousel-reviews > .carousel-control.left,
+    #carousel-reviews > .carousel-control.right
+    {background:none;width:25px;}
     #carousel-reviews > .carousel-control.left {left:-10px;}
     #carousel-reviews > .carousel-control.right {right:-10px;}
 
@@ -6527,13 +6529,14 @@ a.tab-ico {
 
     .crush-over-1x1-card .crush-over-strip{bottom: -33px;}
 
-    .crush-step-1 .crush-over-strip{bottom: -42px;}
+    .crush-step-1 .crush-over-strip{bottom: -42px;width: 98.5%;}
     .crush-step-1:hover .crush-over-strip{bottom:0px;}
-    .crush-step-2 .crush-over-strip{bottom: -70px;}
+    .crush-step-2 .crush-over-strip{bottom: -70px;width: 100%;}
     .crush-step-2:hover .crush-over-strip{bottom:0px;}
+    .crush-step-3 .crush-over-strip{bottom: -70px;width: 95%;}
+    .crush-step-3:hover .crush-over-strip{bottom:0px;}
 
     .crush-over-strip {
-        width: 98%;
         position: absolute;
         bottom: 0px;
         color: #FFF;
@@ -6573,6 +6576,8 @@ a.tab-ico {
     @media (max-width: 768px){
         .crush-step-1 .crush-over-strip{bottom: 0px;}
         .crush-step-2 .crush-over-strip{bottom: 0px;}
+        .crush-step-3 .crush-over-strip{bottom: 0px;}
     }
 
 /* Home Page Don't just crush over section End */
+

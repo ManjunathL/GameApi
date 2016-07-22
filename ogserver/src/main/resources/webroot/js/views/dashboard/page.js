@@ -69,11 +69,9 @@ define([
         autoPlayYouTubeModal: function (ev) {
           var that = this;
           var theModal = $(ev.currentTarget).data("target"),
-            videoSRC = $(ev.currentTarget).attr("data-theVideo"),
+          videoSRC = $(ev.currentTarget).attr("data-theVideo"),
 
           videoSRCauto = videoSRC + "?autoplay=1";
-
-          console.log(videoSRC);
 
           $(theModal + ' iframe').attr('src', videoSRCauto);
           $(theModal + ' button.close').click(function () {
