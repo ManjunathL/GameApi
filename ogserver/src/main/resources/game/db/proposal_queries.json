@@ -12,16 +12,24 @@
       "id": "proposal.list.all",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "query": "select 'W' as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
       "params": []
     },
 
     {
-      "id": "proposal.list.userid",
+      "id": "proposal.list.sales",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted' and (salesEmail = ? or designerEmail = ?)",
-      "params": ["userId", "userId"]
+      "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
+    },
+
+    {
+      "id": "proposal.list.designer",
+      "type": "select",
+      "table": "proposal",
+      "query": "select IF(designerEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
     },
 
     {
@@ -199,35 +207,10 @@
     },
 
     {
-      "id": "kdmax.mapped.modules",
-      "type": "select",
-      "table": "kdmax_mg_map",
-      "query": "select distinct kdmcode from kdmax_mg_map",
-      "params": []
-    },
-
-    {
-      "id": "kdmax.default.mapped.modules",
-      "type": "select",
-      "table": "kdmax_def_map",
-      "query": "select kdmcode, kdmdefcode from kdmax_def_map",
-      "params": []
-    },
-
-
-    {
-      "id": "kdmax.mg.select",
-      "type": "select",
-      "table": "kdmax_mg_map",
-      "query": "select code, description, imagePath, carcassCode, width, depth, height from module_master where code in (select mgcode from kdmax_mg_map where kdmcode = ?)",
-      "params": ["kdmcode"]
-    },
-
-    {
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select code, width, depth, height, description from module_master",
+      "query": "select extCode, code, width, depth, height, description, imagePath from module_master",
       "params": []
     },
 
@@ -335,7 +318,7 @@
       "id": "carcass.select.all",
       "type": "select",
       "table": "carcass_master",
-      "query": "select code, title, plength, breadth, thickness, edgebinding, area from carcass_master",
+      "query": "select code, title, plength, breadth, thickness, edgebinding, area, type from carcass_master",
       "params": []
     },
     {
@@ -459,6 +442,49 @@
       "type": "select",
       "query": "select productJson from product where subcategoryId = ? ORDER BY productId",
       "params": ["subcategory"]
+    },
+
+    {
+      "id": "acc_pack_master.select",
+      "type": "select",
+      "query": "select code, title from acc_pack_master",
+      "params": []
+    },
+
+    {
+      "id": "acc_pack_components.select",
+      "type": "select",
+      "query": "select apcode, type, code, qty from acc_pack_components",
+      "params": []
+    },
+
+    {
+      "id": "module_acc_pack.select",
+      "type": "select",
+      "query": "select apcode, extcode, mgcode from module_acc_pack",
+      "params": []
+    },
+
+    {
+      "id": "acc_addon_map.select",
+      "type": "select",
+      "query": "select accode, addoncode from acc_addon_map",
+      "params": []
+    },
+
+    {
+      "id": "accpacks.selectymodule",
+      "type": "select",
+      "query": "select code, title from acc_pack_master where code in (select apcode from module_acc_pack where mgcode = ?)",
+      "params": ["mgCode"]
+    },
+
+    {
+      "id": "addons.selectbyaccpack",
+      "type": "select",
+      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from acc_addon_map where accode in (select code from acc_pack_components where type = 'A' and apcode = ?))",
+      "params": ["apCode"]
     }
+
   ]
 }
