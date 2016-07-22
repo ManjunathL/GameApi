@@ -6529,14 +6529,13 @@ a.tab-ico {
 
     .crush-over-1x1-card .crush-over-strip{bottom: -33px;}
 
-    .crush-step-1 .crush-over-strip{bottom: -42px;width: 98.5%;}
+    .crush-step-1 .crush-over-strip{bottom: -42px;}
     .crush-step-1:hover .crush-over-strip{bottom:0px;}
-    .crush-step-2 .crush-over-strip{bottom: -70px;width: 100%;}
+    .crush-step-2 .crush-over-strip{bottom: -70px;}
     .crush-step-2:hover .crush-over-strip{bottom:0px;}
-    .crush-step-3 .crush-over-strip{bottom: -70px;width: 95%;}
-    .crush-step-3:hover .crush-over-strip{bottom:0px;}
 
     .crush-over-strip {
+        width: 98%;
         position: absolute;
         bottom: 0px;
         color: #FFF;
@@ -6580,4 +6579,101 @@ a.tab-ico {
     }
 
 /* Home Page Don't just crush over section End */
+
+/* Start remarketing Landing page -- Mehbub*/
+
+    .width33 {
+        width: 33%;
+    }
+    .padding-top80{
+            padding-top:80px !important;
+     }
+    .padding-top30{
+        padding-top:30px;
+    }
+    .padding-bottom30{
+        padding-bottom:30px;
+    }
+    .make-orange{
+        color: rgba(255, 83, 13, 1);
+    }
+    .make-grey{
+    color:#999;
+    }
+    .make-height{
+    text-transform:none !important;
+    line-height:0 !important;
+    margin-top:35px !important;
+    }
+    .paragraph-text{
+        font-size: 13px !important;
+        line-height: 1.2 !important;
+     }
+    .text-strip{
+        width: 89.5%;
+        position: absolute;
+        bottom: 21px;
+        color: #FFF;
+        background-color: rgba(0, 0, 0, 0.45);
+        padding: 1em;
+        transition: all 0.3s ease 0s;
+        }
+     .make-center{
+         text-align: center;
+         text-transform:none !important;
+     }
+.remarketing_banner_head {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/banner_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 75px 0 75px 0;
+    text-align: center;
+    color: #ffffff;
+}
+ .form-background{
+ background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
+     border-top-style: ridge;
+     border-bottom-style: ridge;
+     border-top-color: rgb(252, 248, 227);
+     border-bottom-color: rgb(252, 248, 227);
+     width:30% !important;
+ }
+ img.thumbnail {
+     /*max-width:20%;*/
+     max-height:30%;
+     -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
+     /* For Safari 3.1 to 6.0 */
+     transition: width 1s, height 1s, transform 0.5s;
+ }
+ img.thumbnail:hover {
+     -webkit-transform:scale(1.2);
+     /* Safari and Chrome */
+     -moz-transform:scale(1.2);
+     /* Firefox */
+     -ms-transform:scale(1.2);
+     /* IE 9 */
+     -o-transform:scale(1.2);
+     /* Opera */
+     transform:scale(1.2);
+ }
+        #img-zoom{
+         width:100%;
+         padding:7px;
+        }
+ #img-zoom > li{
+ display:inline-block !important;
+ }
+
+
+ /* End remarketing Landing page -- Mehbub*/
 
