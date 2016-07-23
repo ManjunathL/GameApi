@@ -6605,6 +6605,33 @@ a.tab-ico {
     line-height:0 !important;
     margin-top:35px !important;
     }
+    .make-button-align{
+       margin-left: 33% !important;
+           margin-top: 4% !important;
+    }
+    .thumb-border{
+        border-style: solid !important;
+        border: 4px;
+        border-color: white;
+    }
+    .thumb-btn-make-center{
+    padding-left:66px;
+    }
+    .img-border-color{
+        border-style: solid !important;
+        border-color: #f1591f !important;}
+    .make-button-orange{
+    background-color: #F1590F !important;
+
+    }
+    .make-p-align {
+        font-size: 13px !important;
+        }
+    .make-height-why-us{
+        text-transform:none !important;
+        line-height:2 !important;
+        margin-top:17px !important;
+        }
     .paragraph-text{
         font-size: 13px !important;
         line-height: 1.2 !important;
@@ -6621,6 +6648,15 @@ a.tab-ico {
      .make-center{
          text-align: center;
          text-transform:none !important;
+     }
+     .make-navy{
+     color:RGBA(27, 53, 87, 0.8);
+     }
+     .make-text-bigger{
+     font-size:17px;
+     }
+     .why-us-remarket{
+     width: 80% !important;
      }
      .remarketing_banner_txt {
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/banner_02.jpg");
@@ -6669,6 +6705,7 @@ a.tab-ico {
  img.thumbnail {
      /*max-width:20%;*/
      max-height:30%;
+     padding: 0 !important;
      -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
      /* For Safari 3.1 to 6.0 */
      transition: width 1s, height 1s, transform 0.5s;
@@ -6684,6 +6721,7 @@ a.tab-ico {
      /* Opera */
      transform:scale(1.2);
  }
+=
         #img-zoom{
          width:100%;
          padding:7px;
@@ -6709,7 +6747,8 @@ a.tab-ico {
     }
     .carousel-caption {
     margin: 0 auto;
-    width: 40%;
+    width: 51%;
+    padding-top:51px;
     -webkit-box-align: center;
     -moz-box-align: center;
     -ms-flex-align: center;
