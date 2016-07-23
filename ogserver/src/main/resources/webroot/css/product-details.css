@@ -68,26 +68,6 @@
     border: 0px solid #ddd;
 }
 
- img.finish-thumbnail {
-     max-height:30%;
-     -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
-     /* For Safari 3.1 to 6.0 */
-     transition: width 1s, height 1s, transform 0.5s;
- }
- img.finish-thumbnail:hover {
-    width:70px;
-    height:50px;
-     -webkit-transform:scale(1.9);
-     /* Safari and Chrome */
-     -moz-transform:scale(1.9);
-     /* Firefox */
-     -ms-transform:scale(1.9);
-     /* IE 9 */
-     -o-transform:scale(1.9);
-     /* Opera */
-     transform:scale(1.9);
- }
-
 @media (min-width: 768px){
     .warranty-card .nav-tabs.nav-justified>li>a,
     .related-card .nav-tabs.nav-justified>li>a,
@@ -257,7 +237,7 @@
     margin-top: 0px !important;
 }
 .related-card .carousel-control {
-    width: 5%;
+    /*width: 5%;*/
     opacity: 1;
     filter: alpha(opacity=1);
     font-size: 100px;
@@ -290,8 +270,29 @@
     background-image: none;
 }
 
+
+img.finish-thumbnail {
+     max-height:30%;
+     -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
+     /* For Safari 3.1 to 6.0 */
+     transition: width 1s, height 1s, transform 0.5s;
+}
+img.finish-thumbnail:hover {
+    width:70px;
+    height:50px;
+     -webkit-transform:scale(1.9);
+     /* Safari and Chrome */
+     -moz-transform:scale(1.9);
+     /* Firefox */
+     -ms-transform:scale(1.9);
+     /* IE 9 */
+     -o-transform:scale(1.9);
+     /* Opera */
+     transform:scale(1.9);
+}
+
 #mycarousel-appliances .carousel-caption{
-    left: 55%;
+    left: auto;
     right: 5%;
     padding-bottom: 100px;
 }
@@ -309,6 +310,7 @@
 #forcecentered > .frame ul li{
     width:210px!important;
 }
+
 @media screen and (min-width: 768px){
     .accessories-wrapper .carousel-caption {
         left: auto;
