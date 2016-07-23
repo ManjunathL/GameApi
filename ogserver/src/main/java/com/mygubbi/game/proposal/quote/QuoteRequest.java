@@ -1,6 +1,7 @@
 package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
+import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import io.vertx.core.json.JsonObject;
 
 import java.util.List;
@@ -17,15 +18,17 @@ public class QuoteRequest
     private int proposalId;
     private List<Integer> productsIds;
     private double discountAmount = 0.0;
-
+    private ProposalOutputCreator.OutputType outputType;
+    
     public QuoteRequest(int proposalId)
     {
         this.proposalId = proposalId;
     }
 
-    public QuoteRequest(JsonObject jsonData)
+    public QuoteRequest(JsonObject jsonData, ProposalOutputCreator.OutputType outputType)
     {
         this(jsonData.getInteger(PROPOSAL_ID));
+        this.outputType = outputType;
         if (jsonData.containsKey(PRODUCT_IDS))
         {
             this.setProductsIds(jsonData.getJsonArray(PRODUCT_IDS).getList());
@@ -34,6 +37,11 @@ public class QuoteRequest
         {
             this.discountAmount = jsonData.getDouble(DISCOUNT_AMOUNT);
         }
+    }
+
+    public ProposalOutputCreator.OutputType getOutputType()
+    {
+        return outputType;
     }
 
     public int getProposalId()

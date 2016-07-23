@@ -3,11 +3,22 @@ package com.mygubbi.game.proposal.model;
 import io.vertx.core.json.JsonObject;
 
 /**
- * Created by test on 17-05-2016.
+ * Created by Sunil on 17-05-2016.
  */
+
+//TODO: Make an abstract panel with Carcass and Shutter as child classes
+
 public class CarcassPanel
 {
-    //code, title, plength, breadth, thickness, edgebinding, area
+    private static final double SQMM2SQFT = 0.0000107639;
+
+    private static final String TYPE_LEFT = "L";
+    private static final String TYPE_RIGHT = "R";
+    private static final String TYPE_TOP = "T";
+    private static final String TYPE_BOTTOM = "B";
+    private static final String TYPE_BACK = "K";
+    private static final String TYPE_OTHER = "O";
+
     private String code;
     private String title;
     private int length;
@@ -15,13 +26,14 @@ public class CarcassPanel
     private int thickness;
     private String edgebinding;
     private double area;
+    private String type;
 
     public static CarcassPanel fromJson(JsonObject json)
     {
         return new CarcassPanel().setCode(json.getString("code")).setTitle(json.getString("title"))
                 .setLength(json.getInteger("plength")).setBreadth(json.getInteger("breadth"))
                 .setThickness(json.getInteger("thickness")).setEdgebinding(json.getString("edgebinding"))
-                .setArea(json.getDouble("area"));
+                .setArea(json.getDouble("area")).setType(json.getString("type"));
     }
 
     public String getCode()
@@ -32,6 +44,12 @@ public class CarcassPanel
     public CarcassPanel setCode(String code)
     {
         this.code = code;
+        return this;
+    }
+
+    public CarcassPanel setType(String type)
+    {
+        this.type = type;
         return this;
     }
 
@@ -107,8 +125,34 @@ public class CarcassPanel
         return this.getArea() * rateCard.getRateByThickness(this.getThickness());
     }
 
+    public double getCost(RateCard rateCard, ShutterFinish finish)
+    {
+        if (rateCard == null) return 0;
+        return this.getCuttingArea(finish) * rateCard.getRateByThickness(this.getThickness());
+    }
+
+    public double getCuttingArea(ShutterFinish finish)
+    {
+        return (this.getLength() - finish.getCuttingOffset()) * (this.getBreadth() - finish.getCuttingOffset()) * SQMM2SQFT;
+    }
+
     public String getDimesions()
     {
         return this.getLength() + " X " + this.getBreadth() + " X " + this.getThickness();
+    }
+
+    public boolean isLeftPanel()
+    {
+        return TYPE_LEFT.equals(this.type);
+    }
+
+    public boolean isRightPanel()
+    {
+        return TYPE_RIGHT.equals(this.type);
+    }
+
+    public boolean isBottomPanel()
+    {
+        return TYPE_BOTTOM.equals(this.type);
     }
 }

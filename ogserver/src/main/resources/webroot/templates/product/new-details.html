@@ -1,30 +1,32 @@
+<% console.log(product); %>
+<% document.title = product.name + ' | mygubbi' %>
 <link rel="stylesheet" href="/css/product-details.css">
 
-<section class="bg-white top-section">
+<section class="bg-white top-section product-details-font">
     <div class="container-fluid bg-color-white">
         <div class="container">
             <div class="row">
                 <div class="product-main-section">
                     <div class="col-sm-7 col-md-7 col-lg-7">
                         <div class="product-main-img">
-                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468303311/project_details/product_main_img.jpg" alt="Product Main Images">
+                            <% if(typeof(product.images) !== 'undefined'){ %>
+                            <img draggable="false" id="mainImg"
+                                 src="<%= imgBase + product.images[0] %>"
+                                 alt="<%= product.name %>" title="<%= product.name %>" class="width100">
+                            <% } %>
                         </div>
                     </div>
                     <div class="col-sm-5 col-md-5 col-lg-5">
                         <div class="product-main-content text-center">
-                            <h2 class="product-heading"> COMORANT L SHAPE </h2>
+                            <h2 class="product-heading"> <%= product.name %> </h2>
                             <p class="about-product">
-                                An "L-shaped kitchen" meant for a larger space and catering to a big family.
-                                This modular unit makes place for your large appliances to be stowed neatly and accessed easily.
-                                It effectively utilizes two walls of your kitchen to include space for a fridge.
-                                The legs of the L segregate your cooking and prepping areas.
-                                Overhead and lower kitchen cabinets are supplemented with wall mounted open shelves.
+                                <%= product.desc %>
                             </p>
                             <div class="product-price">
-                                <h4> Price starting from : <strong> Rs. 240582 /- </strong></h4>
+                                <h4> Price starting from : <strong> <% if (product.defaultPrice !== '0') { %>Rs. <%= product.defaultPrice %> /- <% } else { %> Consult for Price <% } %></strong></h4>
                             </div>
                             <div class="consult-section">
-                                <button class="btn btn-block btn-product"> Consult </button>
+                                <button id="product_consult" class="btn btn-block btn-product"> Consult </button>
                             </div>
                         </div>
                     </div>
@@ -62,15 +64,13 @@
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="d-item-img">
-                                                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317951/project_details/style_board_monochrome.jpg" alt="designstyle">
+                                                        <img class="img-responsive" src="<%= imgBase + '/project_details/' + product.styleImage %>" alt="designstyle">
                                                     </div>
                                                 </div>
                                                 <div class="d-style">
-                                                    <h3> Black and White the original </h3>
+                                                    <h3> <%= product.styleName %> </h3>
                                                     <p>
-                                                        Bring back the originality of colour - just go all out with black and white !
-                                                        make bold statements which are true to your nature and have it reflected on your designs.
-                                                        Black and white patterns blend beautifully with minimalistic and linear design approach.
+                                                        <%= product.styleDescription %>
                                                     </p>
                                                 </div>
                                             </div>
@@ -84,36 +84,26 @@
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="m-item-img">
-                                                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317950/project_details/mdf.jpg" alt="material">
+                                                        <% mtrl= custom_product.get('selectedMaterial'); %>
+                                                        <% if(typeof(materialobj[mtrl].Img) != 'undefined'){ %>
+                                                        <img id="material-img-content" class="img-responsive" src="<%= imgBase + '/project_details/' + materialobj[mtrl].Img %>" alt="material">
+                                                        <% } %>
                                                     </div>
                                                 </div>
                                                 <div class="m-style">
                                                     <div class="tabbable-line material-slide-nav">
-                                                        <ul class="nav nav-tabs ">
-                                                            <li class="active">
-                                                                <a href="#tab_mdf_1" data-toggle="tab">
-                                                                    MDF </a>
+                                                        <ul class="nav nav-tabs">
+                                                            <% _.each (materials, function(mat) { %>
+                                                            <li class="choose-material <%= custom_product.get('selectedMaterial') === mat ? 'active' : ''%>" data-material="<%=mat%>">
+                                                                <a href="#<%= mat %>" data-toggle="tab">
+                                                                    <%= mat %> </a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#tab_ply_2" data-toggle="tab">
-                                                                    PLY </a>
-                                                            </li>
+                                                            <% }); %>
                                                         </ul>
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="tab_mdf_1">
+                                                        <div id="material-tab-content" class="tab-content">
+                                                            <div class="choose-active tab-pane active" id="<%= custom_product.get('selectedMaterial') %>">
                                                                 <p>
-                                                                    Durable, economical and perfect for practical storage solutions,
-                                                                    MDF can be filed, cut and drilled without damaging the surface.
-                                                                    MDF is made by breaking down hardwood into wood fibres and forming panels
-                                                                    by applying high temperature and pressure.
-                                                                </p>
-                                                            </div>
-                                                            <div class="tab-pane" id="tab_ply_2">
-                                                                <p>
-                                                                    test, economical and perfect for practical storage solutions,
-                                                                    MDF can be filed, cut and drilled without damaging the surface.
-                                                                    MDF is made by breaking down hardwood into wood fibres and forming panels
-                                                                    by applying high temperature and pressure.
+                                                                    <%= materialobj[mtrl].Desc %>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -132,70 +122,42 @@
                                                 <div class="col-sm-5 col-md-5 col-lg-5">
                                                     <div class="tabbable-line finish-slide-nav">
                                                         <ul class="nav nav-tabs ">
-                                                            <li class="active">
+                                                            <% _.each (finishes, function(fin) { %>
+                                                            <li class="choose-finish <%= custom_product.get('selectedFinish') === fin ? 'active' : ''%>" data-finish="<%=fin%>">
                                                                 <a href="#tab_finish_1" data-toggle="tab">
-                                                                    GLOSSY </a>
+                                                                    <%= fin %> </a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#tab_finish_2" data-toggle="tab">
-                                                                    MATT </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#tab_finish_3" data-toggle="tab">
-                                                                    SUEDE </a>
-                                                            </li>
+                                                            <% }); %>
                                                         </ul>
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="tab_finish_1">
+                                                        <div id="finish-tab-content" class="tab-content">
+                                                            <div class="tab-pane active" id="<%= custom_product.get('selectedFinish') %>">
                                                                 <p>
-                                                                    Glossy finish provide a sharp image and are extremely popular as they show vibrant color well.
-                                                                    Glossy finishes go well with paint, foil and laminate material.
-                                                                </p>
-                                                            </div>
-                                                            <div class="tab-pane" id="tab_finish_2">
-                                                                <p>
-                                                                    Matt finish provide a sharp image and are extremely popular as they show vibrant color well.
-                                                                    Glossy finishes go well with paint, foil and laminate material.
-                                                                </p>
-                                                            </div>
-                                                            <div class="tab-pane" id="tab_finish_3">
-                                                                <p>
-                                                                    Matt finish provide a sharp image and are extremely popular as they show vibrant color well.
-                                                                    Glossy finishes go well with paint, foil and laminate material.
+                                                                    <%= finishobj[custom_product.get('selectedFinish')].Desc %>
                                                                 </p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-7 col-md-7 col-lg-7">
-                                                    <div class="finishes-foil-box">
+                                                    <div id="finishList" class="finishes-foil-box">
+                                                        <% _.each (finishobj[custom_product.get('selectedFinish')].FinishStyleObj, function(key,fintyp) {
+                                                        %>
                                                         <div class="row">
                                                             <ul class="list-inline finishes-foil">
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/HG_Wolfram_Grey.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Ivory_Frost_49916_HGL.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/HG_Margherita.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Ivory_Frost_49916_HGL.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/HG_Wolfram_Grey.jpg" alt=""></a></li>
+                                                                <% _.each (key, function(fintypimg) { %>
+                                                                <% if(fintyp == "Laminate"){ %>
+                                                                <li><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/Swatches/Glossy/Laminate/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></li>
+                                                                <% }else if(fintyp == "Foil"){ %>
+                                                                <li><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Foil/BW/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></li>
+
+                                                                <% }else{ %>
+                                                                <li><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Paint/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></li>
+                                                                <% } %>
+                                                                <% }); %>
                                                             </ul>
-                                                            <label class="finishes-label"> Laminate </label>
+                                                            <label id="finish-type-label" class="finishes-label"> <%= fintyp %> </label>
                                                         </div>
-                                                        <div class="row">
-                                                            <ul class="list-inline finishes-foil">
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/HG_Wolfram_Grey.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Ivory_Frost_49916_HGL.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/HG_Margherita.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Ivory_Frost_49916_HGL.jpg" alt=""></a></li>
-                                                            </ul>
-                                                            <label class="finishes-label"> Foil </label>
-                                                        </div>
-                                                        <div class="row">
-                                                            <ul class="list-inline finishes-foil">
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/HG_Wolfram_Grey.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Ivory_Frost_49916_HGL.jpg" alt=""></a></li>
-                                                                <li><a href="#"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/HG_Margherita.jpg" alt=""></a></li>
-                                                            </ul>
-                                                            <label class="finishes-label"> Pu Paint </label>
-                                                        </div>
+                                                        <% }); %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,24 +175,14 @@
                                             </ol>
                                             <!-- Wrapper for slides -->
                                             <div class="carousel-inner" role="listbox">
+                                                <% _.each (product.accessories, function(accessory) { %>
                                                 <div class="item items">
-                                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/acc2.jpg" alt="First Image">
+                                                    <img src="<%= imgBase + '/project_details/' + accessory.image %>" alt="First Image">
                                                     <div class="carousel-caption">
-                                                        <p> We know your cooking style & we design your kitchen with the best possible accessories from the biggest market player like HETTICH, HAFELE </p>
+                                                        <p> <%= accessory.Desc %> </p>
                                                     </div>
                                                 </div>
-                                                <div class="item items">
-                                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/acc3.jpg" data-color="firebrick" alt="Second Image">
-                                                    <div class="carousel-caption">
-                                                        <p> We know your cooking style & we design your kitchen with the best possible accessories from the biggest market player like HETTICH, HAFELE </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item items">
-                                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/acc1.jpg" data-color="violet" alt="Third Image">
-                                                    <div class="carousel-caption">
-                                                        <p> We know your cooking style & we design your kitchen with the best possible accessories from the biggest market player like HETTICH, HAFELE </p>
-                                                    </div>
-                                                </div>
+                                                <% }); %>
                                             </div>
                                         </div>
                                     </div>
@@ -246,24 +198,14 @@
                                             </ol>
                                             <!-- Wrapper for slides -->
                                             <div class="carousel-inner" role="listbox">
+                                                <% _.each (product.appliances, function(appliance) { %>
                                                 <div class="item items">
-                                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app2.jpg" alt="First Image">
+                                                    <img src="<%= imgBase + '/project_details/' + appliance.image %>" alt="First Image">
                                                     <div class="carousel-caption">
-                                                        <p> We know your cooking style & we design your kitchen with the best possible accessories from the biggest market player like HETTICH, HAFELE </p>
+                                                        <p> <%= appliance.Desc %> </p>
                                                     </div>
                                                 </div>
-                                                <div class="item items">
-                                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app3.jpg" data-color="firebrick" alt="Second Image">
-                                                    <div class="carousel-caption">
-                                                        <p> We know your cooking style & we design your kitchen with the best possible accessories from the biggest market player like HETTICH, HAFELE </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item items">
-                                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/app1.jpg" data-color="violet" alt="Third Image">
-                                                    <div class="carousel-caption">
-                                                        <p> We know your cooking style & we design your kitchen with the best possible accessories from the biggest market player like HETTICH, HAFELE </p>
-                                                    </div>
-                                                </div>
+                                                <% }); %>
                                             </div>
                                         </div>
 
@@ -284,75 +226,37 @@
                             <li role="presentation" class="active">
                                 <a href="#related-image" aria-controls="related-image" role="tab" data-toggle="tab"> Related Images </a>
                             </li>
-                            <!--<li role="presentation">
-                                <a href="#related-collection" aria-controls="related-collection" role="tab" data-toggle="tab">  Related Collection </a>
-                            </li>-->
                         </ul>
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="related-image">
-                                <div class="well">
-                                    <div id="relatedCarousel" class="carousel slide">
-                                        <!-- Carousel items -->
-                                        <div class="carousel-inner">
+                                <div class="wrap well">
+                                    <div class="row">
 
-                                            <div class="item active">
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                </div><!--/row-->
-                                            </div><!--/item-->
+                                        <div class="left carousel-control col-xs-1" style="z-index:1999;">
+                                            <button class="btn prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                                            </button>
+                                        </div>
 
-                                            <div class="item">
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                </div><!--/row-->
-                                            </div><!--/item-->
+                                        <div id="forcecentered" class="frame col-xs-10 carousel-inner" style="overflow: hidden;">
+                                            <% if(typeof(product.images) !== 'undefined'){ %>
+                                            <ul class="clearfix slidee"
+                                                style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
+                                                <% _.each(product.images, function(image){ %>
+                                                <li style="width:185px;">
+                                                    <img
+                                                            src="<%= imgBase + 'c_fill,h_200,w_250/' + image %>"
+                                                            width="100%"/>
+                                                </li>
+                                                <% }); %>
+                                            </ul>
+                                            <% } %>
+                                        </div>
 
-                                            <div class="item">
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        <a href="#x"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,h_300,w_500/075_Shag_L_shape.jpg" alt="Image" style="max-width:100%;" /></a>
-                                                    </div>
-                                                </div><!--/row-->
-                                            </div><!--/item-->
-
-                                        </div><!--/carousel-inner-->
-
-                                        <a class="left carousel-control" href="#relatedCarousel" data-slide="prev">‹</a>
-                                        <a class="right carousel-control" href="#relatedCarousel" data-slide="next">›</a>
-                                    </div><!--/relatedCarousel-->
-
-                                </div><!--/well-->
+                                        <div class="right carousel-control col-xs-1">
+                                            <button class="btn next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!--<div role="tabpanel" class="tab-pane active" id="related-collection">
 
@@ -465,6 +369,109 @@
     </div>
 </section>
 
+<!-- Consult Modal -->
+<div id="consultpop" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="contact-form">
+            <div class="row">
+                <h2 class="align-center">
+                    <span class="pe-7s-note"></span>
+                    Consult
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="paddingtop30">
+                        <div class="row margin_auto">
+                            <div class="col-xs-6">
+                                <span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 80 88 86 0860</span>
+                            </div>
+                            <div class="col-xs-6 align-right">
+                                <span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row display-none" id="consult_error_row">
+                        <p class="margin0 error-text align-center" id="consult_error"></p>
+                    </div>
+
+                    <form method="post" enctype="multipart/form-data"
+                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                          class="width90 margin_auto paddingtop20">
+                        <div class="row">
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='FirstName' name='FirstName'
+                                       placeholder="Name*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                       required='required'/>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='EmailAddress'
+                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                       required='required' pattern=".+@.+\..+"
+                                       title="<abc>@<xyz>.<com>"/>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control" id='Phone'
+                                       name='Phone'
+                                       placeholder="Phone Number*" maxlength='20'
+                                       value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                       required='required' pattern="\d{10}"
+                                       title="e.g. 9876543210"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                <textarea class="width100 form-control" id="mx_Requirement"
+                                          name='mx_Requirement' maxlength='150' value='' autocomplete='off'
+                                          placeholder="Describe your Requirements / Queries">I'm interested in "<%= product.name %>" . Looking forward to hear from you.</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="width100 form-control" placeholder="Property Name"
+                                       id='mx_Street2' name='mx_Street2' maxlength='256' value='' autocomplete='off' />
+                            </div>
+                            <div class="form-group">
+                                <label for='exclude_FileUpload_1'>Upload Floorplan</label>
+                                <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
+                                <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
+                            </div>
+                            <div class="align-center form-group">
+                                <button class="button-blue"
+                                        id="form-submit-button"
+                                        type="submit">Submit
+                                </button>
+                                <br/>
+                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                <input type="hidden" name="MXHLandingPageId" value="f7c3e93f-3d1a-11e6-b61b-22000aa8e760" />
+                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-details-page" />
+                                <input type="hidden" name="MXHAsc" value="5" />
+                                <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
+                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript"> var MXLandingPageId = 'f7c3e93f-3d1a-11e6-b61b-22000aa8e760'; </script>
+                </div>
+            </div>
+            <div id="close-consult-pop" data-element="#consultpop" class="close-icon signup-form">
+                <img src="<%= imgBase + 'close-white.png'%>">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- consult Modal End -->
+
 <script>
     var items = $('.carousels .items');
 
@@ -518,7 +525,5 @@
           pause: "false"
         });
     });
-
-
 
 </script>

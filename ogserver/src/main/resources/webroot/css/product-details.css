@@ -1,5 +1,9 @@
 /* Start product Details page  */
 
+.product-details-font{
+    font-family: 'Fira Sans', sans-serif;
+}
+
 .product-main-section{
     padding: 20px 0px;
     display: inline-block;
@@ -14,7 +18,7 @@
 .product-heading {
     z-index: 999;
     margin: 20px 0px;
-    font-weight: 600;
+    font-weight: 600!important;
 }
 .about-product{
     margin: 25px 35px 40px;
@@ -43,6 +47,10 @@
 .design-card{
     margin: 5px 0px 10px;
 }
+.warranty-card h5{
+    font-weight:500!important;
+}
+
 .warranty-card .nav-tabs > li.active,
 .related-card .nav-tabs > li.active,
 .design-card .nav-tabs > li.active{
@@ -59,6 +67,26 @@
 .design-card .nav-tabs.nav-justified>.active>a:focus{
     border: 0px solid #ddd;
 }
+
+ img.finish-thumbnail {
+     max-height:30%;
+     -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
+     /* For Safari 3.1 to 6.0 */
+     transition: width 1s, height 1s, transform 0.5s;
+ }
+ img.finish-thumbnail:hover {
+    width:70px;
+    height:50px;
+     -webkit-transform:scale(1.9);
+     /* Safari and Chrome */
+     -moz-transform:scale(1.9);
+     /* Firefox */
+     -ms-transform:scale(1.9);
+     /* IE 9 */
+     -o-transform:scale(1.9);
+     /* Opera */
+     transform:scale(1.9);
+ }
 
 @media (min-width: 768px){
     .warranty-card .nav-tabs.nav-justified>li>a,
@@ -213,9 +241,10 @@
     padding: 0px;
 }
 .finishes-foil li img{
-    width: 80px;
+    width: 110px;
     margin: 0px;
     padding: 0px;
+    height: 50px;
 }
 .finishes-label{
     margin: 10px 0px 20px;
@@ -277,6 +306,9 @@
     bottom: 10px;
 }
 
+#forcecentered > .frame ul li{
+    width:210px!important;
+}
 @media screen and (min-width: 768px){
     .accessories-wrapper .carousel-caption {
         left: auto;
@@ -310,9 +342,9 @@
         width: 80%;
     }
     .d-item-img > img,
-    .m-item-img > img{
+    /*.m-item-img > img{
         height:350px;
-    }
+    }*/
 
     #mycarousel-appliances .carousel-caption{
         left: 5%!important;

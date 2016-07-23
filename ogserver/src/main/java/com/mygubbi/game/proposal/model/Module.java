@@ -7,14 +7,20 @@ import io.vertx.core.json.JsonObject;
  */
 public class Module
 {
+    private static final double SQMM2SQFT = 0.0000107639;
+
+    private static final String EXTCODE = "extCode";
     private static final String CODE = "code";
     private static final String WIDTH = "width";
     private static final String DEPTH = "depth";
     private static final String HEIGHT = "height";
     private static final String DESCRIPTION = "description";
+    private static final String IMAGE_PATH = "imagePath";
 
     private String code;
+    private String extCode;
     private String description;
+    private String imagePath;
     private int height;
     private int depth;
     private int width;
@@ -26,16 +32,23 @@ public class Module
 
     public Module(JsonObject json)
     {
+        this.setExtCode(json.getString(EXTCODE));
         this.setCode(json.getString(CODE));
         this.setHeight(json.getInteger(HEIGHT));
         this.setDepth(json.getInteger(DEPTH));
         this.setWidth(json.getInteger(WIDTH));
         this.setDescription(json.getString(DESCRIPTION));
+        this.setImagePath(json.getString(IMAGE_PATH));
     }
 
     public String getCode()
     {
         return code;
+    }
+
+    public String getExtCode()
+    {
+        return this.extCode;
     }
 
     public void setCode(String code)
@@ -87,6 +100,51 @@ public class Module
     {
         return this.getWidth() + " X " + this.getDepth() + " X " + this.getHeight();
     }
+
+    public void setExtCode(String extCode)
+    {
+        this.extCode = extCode;
+    }
+
+    public String getImagePath()
+    {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath)
+    {
+        this.imagePath = imagePath;
+    }
+
+    public double getLargestAreaOfModuleInSft()
+    {
+        double h = this.getHeight();
+        double w = this.getWidth();
+        double d = this.getDepth();
+
+        double t1 = 0;
+        double t2 = 0;
+
+        if (h > w)
+        {
+            t1 = h;
+            t2 = w;
+        }
+        else
+        {
+            t1 = w;
+            t2 = h;
+        }
+
+        if (d > t2)
+        {
+            t2 = d;
+        }
+
+        return t1 * t2 * SQMM2SQFT;
+    }
+
+
 }
 
 

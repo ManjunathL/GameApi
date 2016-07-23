@@ -1,0 +1,413 @@
+<section class="bg-color-white padding-bottom20 menu-spacer">
+    <div class="container-fluid">
+        <div class="remarketing_banner_txt">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-8 col-lg-8">
+                        <div class="remarketing_banner_head">
+                            <h1 class="color-white align-center">
+                                LOOKING FOR
+                                <span class="color-orange"><strong>MODULAR KITCHEN</strong></span>
+                                FOR YOUR NEW FLAT IN
+                                <strong>
+                                    <% if(typeof(cityName) !== 'undefined'){ %>
+                                    <%= cityName %>
+                                    <% }else{ %>
+                                    BANGALORE
+                                    <% } %>
+                                    ?</strong>
+                            </h1>
+                            <h3 class="heading-center-notransform color-white margin-top40 width90 margin_auto">
+                                Easy buying and FREE consultation of modular furniture sitting anywhere across the globe.
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4 col-lg-4 form-background">
+                        <!-- Banner Contact Form -->
+                        <div class="row nri_banner_form">
+
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="display-none" id="contact_error_row">
+                                    <p class="margin0 error-text align-center" id="contact_error"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <form method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx" class="width90 margin_auto paddingtop20">
+                                    <div class="margin-bottom20 form-group">
+                                        <input type='text' class="width100 form-control nri_banner_form_input" id='FirstName' name='FirstName' placeholder="Name*" maxlength='100' value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off' required='required'/>
+                                    </div>
+                                    <div class="margin-bottom20 form-group">
+                                        <input type='text' class="width100 form-control nri_banner_form_input" id='EmailAddress' name='EmailAddress' placeholder="Email*" maxlength='100' value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                    </div>
+                                    <div class="row margin0">
+                                        <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom20 form-group padding0 padding-right10">
+                                            <input type='text' class="width100 form-control nri_banner_form_input" id='mx_countrycode' placeholder="Country Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
+                                        </div>
+                                        <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom20 form-group padding0">
+                                            <input type='text' class="width100 form-control nri_banner_form_input" id='Phone' name='Phone' placeholder="Phone Number*" maxlength='20' value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
+                                        </div>
+                                    </div>
+                                    <div class="margin-bottom20 form-group">
+                                        <input type='text' class="width100 form-control nri_banner_form_input" id='mx_City' name='mx_City' placeholder="City*" maxlength='50' value='' autocomplete='off' required='required'/>
+                                    </div>
+                                    <div class="margin-bottom20 form-group">
+                                        <input type='text' class="width100 form-control nri_banner_form_input" id='mx_Street2' name='mx_Street2' placeholder="Property Name" maxlength='256' value='' autocomplete='off'/>
+                                    </div>
+                                    <div class="margin-bottom20 form-group">
+                                        <label for='exclude_FileUpload_1' class="color-white text-floorplan">Upload Floorplan</label>
+                                        <input type='file' class="width100 form-control nri_banner_form_input" id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off'/>
+
+                                        <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan'/>
+                                    </div>
+                                    <div class="align-center form-group">
+                                        <button class="button-orange consult-submit-orange nri_banner_form_button" id="form-submit-button" type="submit"> Submit </button>
+                                        <br/>
+                                        <input type="hidden" name="MXHOrgCode" value="9814"/>
+                                        <input type="hidden" name="MXHLandingPageId" value="8d7bb83a-0c47-11e6-b61b-22000aa8e760"/>
+                                        <input type="hidden" name="MXHFormBehaviour" value="1"/>
+                                        <input type="hidden" name="MXHFormDataTransfer" value="0"/>
+                                        <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page"/>
+                                        <input type="hidden" name="MXHAsc" value="5"/>
+                                        <input type="hidden" name="MXHPageTitle" value="Email"/>
+                                        <input type="hidden" name="MXHOutputMessagePosition" value="0"/>
+                                        <input type="hidden" name="MXHIsExternallyUsed" value="1"/>
+                                    </div>
+                                </form>
+                                <script type="text/javascript"> var MXLandingPageId = '8d7bb83a-0c47-11e6-b61b-22000aa8e760'; </script>
+                            </div>
+                        </div>
+                        <!-- Banner Contact Form End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="project-description">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                    <div class="how-it-box">
+                            <img class="img-circle img-responsive img-center" src="<%= imgBase + 'w_auto' + '/remarketing_lp/01_05.png'%>" alt="">
+
+                        <h4 class="make-height make-grey"> 100+ </h4>
+                        <p class="make-grey"><b> Completed <span class="make-orange">Projects </span> </b></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                    <div class="how-it-box">
+
+                            <img class="img-circle img-responsive img-center" src="<%= imgBase + 'w_auto' + '/remarketing_lp/02_05.png'%>" alt="">
+
+                        <h4 class="make-height make-grey">Our Manufacturing facility with </h4>
+                        <p class="make-orange"><b> International Product standards </b></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                    <div class="how-it-box">
+
+                            <img class="img-circle img-responsive img-center" src="<%= imgBase + 'w_auto' + '/remarketing_lp/03_05.png'%>" alt="">
+
+                        <h4 class="make-height make-grey">500+ </h4>
+                        <p class="make-grey"><b> Personalized <span class="make-orange">Designs</span> </b></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container-fluid bg-light-gray align-center">
+            <div class="row margin0 " style="position:relative;">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg"
+                     class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi cool offer">
+               <!-- <img data-src="<%= imgBase + 'w_auto' + '/v1468479589/pune_lp/optimized_img/mobile_Bottom-banner.jpg'%>"
+                     class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi cool offer">-->
+                <div class="col-lg-12 pune-sliding-text padding-top30">
+                    <h1 class="heading-center-notransform">
+                        WATCH<span class="make-orange"> YOUR DREAM HOME</span> SHAPE INTO REALITY WITH OUR WIDE
+                    </h1>
+                    <h1 class="heading-center-notransform">
+                        RANGE OF <span class="make-orange">MODULAR FURNISHING SOLUTIONS.</span></h1>
+
+                    <div class="row margin0 margin-bottom10 padding0-5per padding-top80">
+                        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                            <div class="how-it-box">
+
+                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1469090252/remarketing_lp/04_09.png" class="img-responsive img-centered width33" alt="relax" />
+
+                                <h4 class="make-height make-orange"> Browse Designs</h4>
+                                <p class="make-grey"><b> You can pick your favorite design <span class="make-orange"> </span> </b></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                            <div class="how-it-box">
+                                    <img  class="img-responsive img-centered width33" src="https://res.cloudinary.com/mygubbi/image/upload/v1469090252/remarketing_lp/05_09.png" alt="relax" />
+
+                                <h4 class="make-height make-orange ">Talk to us </h4>
+                                <p class="make-grey"><b> You can have a one-on-one discussion with our designers </b></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                            <div class="how-it-box">
+                                 <img  class="img-responsive img-centered width33" src="http://res.cloudinary.com/mygubbi/image/upload/v1469090253/remarketing_lp/06_09.png" alt="relax" />
+
+                                <h4 class="make-height make-orange">Order and Relax </h4>
+                                <p class="make-grey"><b> We will take care of it all  </b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container-fluid bg-light-gray ">
+        <div >
+
+            <ul id="img-zoom"><li>
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1469190479/remarketing_lp/01_06.jpg" alt="" class="thumbnail" />
+                <button>Vista</button>
+            </li>
+            <li>
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1469190479/remarketing_lp/02_08.jpg" alt="" class="thumbnail" />
+                </li>
+            <li>
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1469190479/remarketing_lp/main-image_03.jpg" alt="" class="thumbnail" />
+                </li>
+            <li>
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1469190479/remarketing_lp/Remarketing-LP_11.jpg" alt="" class="thumbnail" />
+                </li>
+            <li>
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1469190479/remarketing_lp/Remarketing-LP_13.jpg" alt="" class="thumbnail" />
+        </li></ul>
+                <br />
+        </div>
+            </div>
+        <div class="container-fluid bg-light-gray align-center">
+            <div class="row margin0 " style="position:relative;">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg"
+                     class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi cool offer">
+                <!-- <img data-src="<%= imgBase + 'w_auto' + '/v1468479589/pune_lp/optimized_img/mobile_Bottom-banner.jpg'%>"
+                      class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi cool offer">-->
+                <div class="col-lg-12 pune-sliding-text padding-top30">
+
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators down-carousel">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+<!--
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+-->
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+
+                            <div class="item active">
+                                <img class="img-circle img-responsive img-center" src="http://res.cloudinary.com/mygubbi/image/upload/c_scale,h_105,w_104/v1468488272/testimonial/Arjita_sigh.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <h3>Chania</h3>
+                                    <p >To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                        We will, without hesitation recommend your company
+                                        to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <img class="img-circle img-responsive img-center" src="http://res.cloudinary.com/mygubbi/image/upload/c_scale,h_105,w_104/v1468488272/testimonial/Arjita_sigh.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <h3>Chania</h3>
+                                    <p >To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                        We will, without hesitation recommend your company
+                                        to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <img class="img-circle img-responsive img-center" src="http://res.cloudinary.com/mygubbi/image/upload/c_scale,h_105,w_104/v1468488272/testimonial/Arjita_sigh.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <h3>Chania</h3>
+                                    <p >To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                        We will, without hesitation recommend your company
+                                        to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p>
+                                </div>
+                            </div>
+
+<!--
+                            <div class="item">
+                                <img src="img_flower2.jpg" alt="Flower" width="460" height="345">
+                                <div class="carousel-caption">
+                                    <h3>Flowers</h3>
+                                    <p><
+                                        <blockquote>To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                    We will, without hesitation recommend your company
+                                    to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</blockquote></p>
+                                </div>
+                            </div>
+-->
+
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row margin0 margin-top20">
+                <h1 class="heading-center-notransform text-light-shadow-black make-orange">
+                    Latest Collection
+                </h1>
+            </div>
+            <div class="row margin0">
+                <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1469164755/remarketing_lp/K1_10.jpg"
+                         class="cld-responsive img-centered width100" alt="mygubbi cool offer">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-strip ">
+                        <h4 class="make-center">Kitchen</h4>
+                        <p class="paragraph-text">The modular kitchens at MyGubbi have a tendency to arouse such sentiments. Such are the aesthetics and functionality of all our kitchen options. Our modular are customized to suit your preferences in the kitchen.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1469090256/remarketing_lp/ward02_25.jpg"
+                         class="cld-responsive img-centered width100" alt="mygubbi cool offer">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-strip ">
+                        <h4 class="make-center">Wardrobe</h4>
+                        <p class="paragraph-text">MyGubbi offers you a range of modular cupboard options for single or shared use. Each wardrobe may be designed with a range of shelving space, varying in size to suit your
+                            </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bookrack.jpg"
+                         class="cld-responsive img-centered width100" alt="mygubbi cool offer">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-strip ">
+                    <h4 class="make-center">Other Products</h4>
+                    <p class="paragraph-text">Doing up the interiors of your home is about picking and choosing the right elements that come together as an aesthetic whole. Of course, a good deal of function-</p>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="container-fluid bg-light-gray ">
+        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1469169725/remarketing_lp/Remarketing-LP_Desktop.jpg"
+             class="cld-responsive img-centered width100" alt="mygubbi cool offer">
+    </div>
+
+    <div class="container-fluid bg-remarketing-gray">
+        <div class="container">
+            <div class="row margin0">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_340,w_570/v1469090277/remarketing_lp/asmbly_cntr.jpg"
+                     class="cld-responsive img-centered" alt="Original Designs">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding5per">
+                <h2 class="text-transform-none">
+                    Original designs and regular updates are covered
+                </h2>
+                <p class="justify">
+                    Our team of professionals have confidence in visually appealing values of interior designing. In
+                    terms of novelty and modern designs our team eases in meeting the uppermost thinkable standards.
+                    We also keep our customers updated on work progress by using digital photographs, which are
+                    shared with you via email.
+                </p>
+            </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="container-fluid padding50-15">
+        <div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+            <div class="how-it-box">
+                <img class="img-circle img-responsive img-center" src="<%= imgBase + 'w_auto' + '/remarketing_lp/01_05.png'%>" alt="">
+
+                <h4 class="make-height make-grey"> 100+ </h4>
+                <p class="make-grey"><b> Completed <span class="make-orange">Projects </span> </b></p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+            <div class="how-it-box">
+
+                <img class="img-circle img-responsive img-center" src="<%= imgBase + 'w_auto' + '/remarketing_lp/02_05.png'%>" alt="">
+
+                <h4 class="make-height make-grey">Our Manufacturing facility with </h4>
+                <p class="make-orange"><b> International Product standards </b></p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+            <div class="how-it-box">
+
+                <img class="img-circle img-responsive img-center" src="<%= imgBase + 'w_auto' + '/remarketing_lp/03_05.png'%>" alt="">
+
+                <h4 class="make-height make-grey">500+ </h4>
+                <p class="make-grey"><b> Personalized <span class="make-orange">Designs</span> </b></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Brand Section -->
+
+    <div class="container-fluid margin50-0">
+        <h1 class="heading-center-notransform">
+            Brands that we are working with
+        </h1>
+        <div class="wrap col-xs-12 padding0">
+            <div class="row margin0">
+                <div class="controls center col-xs-1 margin-top40">
+                    <button class="btn brand-prev disabled" disabled="">
+                        <img src="<%= imgBase + '/home/dark_arr_left.png'%>" class="arr_test" alt="...">
+                    </button>
+                </div>
+
+                <div class="frame col-xs-10 overflow-hidden" id="brand-frame">
+                    <ul class="clearfix slidee"
+                        style="transform: translateZ(0px) translateX(0px); width: 3480px;">
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Hettich.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Century_03.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/grenlam.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Haffle.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Merino.png'%>" alt="...">
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="controls center col-xs-1 margin-top40">
+                    <button class="btn brand-next">
+                        <img src="<%= imgBase + '/home/dark_arr_right.png'%>" class="arr_test" alt="...">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Section End -->
+
+    </div>
+</section>
