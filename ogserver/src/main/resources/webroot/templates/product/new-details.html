@@ -62,8 +62,10 @@
                                         <div class="d-item">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <div class="d-item-img">
-                                                        <img class="img-responsive" src="<%= imgBase + '/project_details/' + product.styleImage %>" alt="designstyle">
+                                                    <div class="dstyle-carousels">
+                                                        <div class="d-item-img dstyle-img">
+                                                            <img class="img-responsive" src="<%= imgBase + '/project_details/' + product.styleImage %>" alt="designstyle">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="d-style">
@@ -82,11 +84,13 @@
                                         <div class="m-item">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <div class="m-item-img">
-                                                        <% mtrl= custom_product.get('selectedMaterial'); %>
-                                                        <% if(typeof(materialobj[mtrl].Img) != 'undefined'){ %>
-                                                        <img id="material-img-content" class="img-responsive" src="<%= imgBase + '/project_details/' + materialobj[mtrl].Img %>" alt="material">
-                                                        <% } %>
+                                                    <div class="material-carousels">
+                                                        <div class="m-item-img material-img">
+                                                            <% mtrl= custom_product.get('selectedMaterial'); %>
+                                                            <% if(typeof(materialobj[mtrl].Img) != 'undefined'){ %>
+                                                            <img id="material-img-content" class="img-responsive" src="<%= imgBase + '/project_details/' + materialobj[mtrl].Img %>" alt="material">
+                                                            <% } %>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="m-style">
@@ -251,7 +255,7 @@
                                             <% } %>
                                         </div>
 
-                                        <div class="right carousel-control col-xs-1">
+                                        <div class="right carousel-control col-xs-1" style="padding: 6px 0px;">
                                             <button class="btn next"><i class="pe-7s-angle-right font-size30"></i></button>
                                         </div>
                                     </div>
@@ -471,7 +475,7 @@
 </div>
 <!-- consult Modal End -->
 
-<script>
+<!--<script>
     var items = $('.carousels .items');
 
     var wHeight = $(window).height();
@@ -487,6 +491,15 @@
     apitems.height(nHeight);
     apitems.addClass('full-screen');
 
+
+    var dsitems = $('.dstyle-carousels .dstyle-img');
+    dsitems.height(nHeight);
+    dsitems.addClass('full-screen');
+
+    var mtitems = $('.material-carousels .material-img');
+    mtitems.height(nHeight);
+    mtitems.addClass('full-screen');
+
     $('.carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
@@ -498,6 +511,109 @@
     });
 
     $('.appliance-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.dstyle-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.material-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+
+    $(document).ready(function() {
+        $('#relatedCarousel').carousel({
+            interval: 10000
+        });
+
+        $('.carousels').carousel({
+          interval: 6000,
+          pause: "false"
+        });
+
+        $('.appliance-carousels').carousel({
+          interval: 6000,
+          pause: "false"
+        });
+    });
+
+</script>-->
+
+<script>
+    var items = $('.carousels .items');
+
+    var wHeight = $(window).height();
+    var nHeight = (wHeight/2);
+
+    items.eq(0).addClass('active');
+    items.height(nHeight);
+    items.addClass('full-screen');
+
+
+    var apitems = $('.appliance-carousels .items');
+    apitems.eq(0).addClass('active');
+    apitems.height(nHeight);
+    apitems.addClass('full-screen');
+
+    var dsitems = $('.dstyle-carousels .dstyle-img');
+    dsitems.height(nHeight);
+    dsitems.addClass('full-screen');
+
+    var mtitems = $('.material-carousels .material-img');
+    mtitems.height(nHeight);
+    mtitems.addClass('full-screen');
+
+    $('.carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.appliance-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.dstyle-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.material-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({
@@ -524,5 +640,7 @@
           pause: "false"
         });
     });
+
+
 
 </script>
