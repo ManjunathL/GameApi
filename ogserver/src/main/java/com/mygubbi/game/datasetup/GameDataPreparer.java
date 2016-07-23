@@ -14,7 +14,9 @@ public class GameDataPreparer
     {
         GameDataPreparer dataPreparer = new GameDataPreparer();
         //dataPreparer.processSheet(66, 0, new MasterSheetHandler());
+/*
         dataPreparer.processSheet(19, 1, new AccPackHandler());
+*/
         //dataPreparer.processSheet(22, 2, new AccessoryPackModuleMappingHandler());
     }
 
