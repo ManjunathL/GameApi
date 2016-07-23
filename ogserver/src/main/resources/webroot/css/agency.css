@@ -6756,5 +6756,28 @@ a.tab-ico {
     align-items: center;
 
   }
+@media (max-width: 1170px){
+  .img-bnr-carousel{
+background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg') !important;
+    background-position: center center;
+    background-size: cover;
+    background-size: cover;
+  }
+ }
+ @media (max-width: 1170px){
+ .img-bnr-your-dream-section{
+ background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg') !important;
+     background-position: center center;
+     background-size: cover;
+     background-size: cover;
+   }
+
+ }
+ .make-right-arrow{
+float:right;
+padding-right:32px;
+ color: rgba(255, 83, 13, 1);
+
+ }
  /* End remarketing Landing page -- Mehbub*/
 
