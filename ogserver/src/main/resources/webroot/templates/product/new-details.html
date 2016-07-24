@@ -51,9 +51,11 @@
                                 <li role="presentation">
                                     <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
                                 </li>
+                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <li role="presentation">
                                     <a href="#appliance" aria-controls="appliance" role="tab" data-toggle="tab"> Appliance </a>
                                 </li>
+                                <% } %>
                             </ul>
                             <div class="tab-content">
 
@@ -190,6 +192,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <div role="tabpanel" class="tab-pane" id="appliance">
                                     <div class="appliance-wrapper">
                                         <div id="mycarousel-appliances" class="carousel appliance-carousels slide" data-ride="appliance-carousels">
@@ -201,6 +204,7 @@
                                             </ol>
                                             <!-- Wrapper for slides -->
                                             <div class="carousel-inner" role="listbox">
+                                                <% if(typeof(product.appliances) != 'undefined'){ %>
                                                 <% _.each (product.appliances, function(appliance) { %>
                                                 <div class="item items">
                                                     <img src="<%= imgBase + '/project_details/' + appliance.image %>" alt="First Image">
@@ -209,11 +213,13 @@
                                                     </div>
                                                 </div>
                                                 <% }); %>
+                                                <% } %>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
+                                <% } %>
                             </div>
                         </div>
                     </div>

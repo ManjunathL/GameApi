@@ -6695,7 +6695,7 @@ a.tab-ico {
     color: #ffffff;
 }
  .form-background{
- background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
+     background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
      border-top-style: ridge;
      border-bottom-style: ridge;
      border-top-color: rgb(252, 248, 227);
@@ -6774,10 +6774,14 @@ background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v14690902
 
  }
  .make-right-arrow{
-float:right;
-padding-right:32px;
- color: rgba(255, 83, 13, 1);
-
+    float:right;
+    padding-right:32px;
+    color: rgba(255, 83, 13, 1);
  }
+@media (max-width: 767px){
+ .form-background{
+    width:98%!important;
+  }
+}
  /* End remarketing Landing page -- Mehbub*/
 
