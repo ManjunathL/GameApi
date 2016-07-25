@@ -40,6 +40,23 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
+        },
+        events: {
+         "click .handleslnk": "changeHandletab"
+        },
+        changeHandletab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+
+            $(".handle-img").removeClass('active');
+            $(".handle-cnt").removeClass('active');
+
+            $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
+
+            console.log(id);
+            return this;
         }
     });
     return KnowYourWardrobePageVIew;

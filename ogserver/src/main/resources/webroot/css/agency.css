@@ -6533,6 +6533,9 @@ a.tab-ico {
     .crush-step-1:hover .crush-over-strip{bottom:0px;}
     .crush-step-2 .crush-over-strip{bottom: -70px;}
     .crush-step-2:hover .crush-over-strip{bottom:0px;}
+    .crush-step-3 .crush-over-strip{bottom: -70px!important;}
+    .crush-step-3:hover .crush-over-strip{bottom:0px!important;}
+
 
     .crush-over-strip {
         width: 98%;
@@ -6575,7 +6578,7 @@ a.tab-ico {
     @media (max-width: 768px){
         .crush-step-1 .crush-over-strip{bottom: 0px;}
         .crush-step-2 .crush-over-strip{bottom: 0px;}
-        .crush-step-3 .crush-over-strip{bottom: 0px;}
+        .crush-step-3 .crush-over-strip{bottom: 0px!important;}
     }
 
 /* Home Page Don't just crush over section End */
@@ -6721,7 +6724,7 @@ a.tab-ico {
      /* Opera */
      transform:scale(1.2);
  }
-=
+
         #img-zoom{
          width:100%;
          padding:7px;

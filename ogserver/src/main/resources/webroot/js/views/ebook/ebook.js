@@ -37,17 +37,13 @@ define([
                     var name = $('#FirstName').val();
                     var email = $('#EmailAddress').val();
 
-                    if((name.trim() != '') && (email.trim() != '')){
-                        //var url='http://res.cloudinary.com/mygubbi/raw/upload/v1466509270/E-Book.pdf';
-                        var url='http://res.cloudinary.com/mygubbi/raw/upload/v1467111480/E-Book_updated.pdf';
-                        window.open(url,'Download');
+                    //var url='http://res.cloudinary.com/mygubbi/raw/upload/v1466509270/E-Book.pdf';
+                    var url='http://res.cloudinary.com/mygubbi/raw/upload/v1467111480/E-Book_updated.pdf';
+                    window.open(url,'Download');
 
-                        window.App.router.navigate('/thankyou-ebook-page', {
-                            trigger: true
-                        });
-                    }else{
-                        alert('Please fill required fields!!!');
-                    }
+                    window.App.router.navigate('/thankyou-ebook-page', {
+                        trigger: true
+                    });
                 },
                 events: {
                     "submit": "submit"

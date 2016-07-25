@@ -553,10 +553,21 @@
 <!-- End kyw accessories section  -->
 
 <!-- Start kyw Handles  Sections  -->
-<section class="padding50-10 bg-color-white">
+<section class="kyw-finishes-type-section padding50-10 bg-color-white">
     <div class="handles-section">
         <div class="container-fluid">
-            <div class="row">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane handle-img active" id="straight-img">
+                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1469261000/kyw/PG_14_1_STRAIGHT_HANDLE.jpg" alt="matt">
+                </div>
+                <div role="tabpanel" class="tab-pane handle-img" id="aluminum-img">
+                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1469261000/kyw/PG_14_2_ALUMINUM_HANDLE.jpg" alt="matt">
+                </div>
+                <div role="tabpanel" class="tab-pane handle-img" id="knob-img">
+                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1469261001/kyw/PG_14_3_KNOBS.jpg" alt="matt">
+                </div>
+            </div>
+            <div class="row kyw-finishes-type-content-tab">
                 <div class="col-sm-6 col-md-6 col-lg-6"></div>
                 <div class="col-sm-6 col-md-6 col-lg-6 text-center">
                     <h2 class="handle-heading">
@@ -564,47 +575,47 @@
                     </h2>
                     <div class="card kyw-handle-card">
                         <ul class="nav nav-tabs nav-justified" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#straight" aria-controls="related-image" role="tab" data-toggle="tab"> Straight </a>
+                            <li id="straight" class="handleslnk active" role="presentation">
+                                <a aria-controls="related-image" role="tab" data-toggle="tab"> Straight </a>
                             </li>
-                            <li role="presentation">
-                                <a href="#aluminum" aria-controls="related-collection" role="tab" data-toggle="tab">  ALUMINUM PROFILE </a>
+                            <li id="aluminum" class="handleslnk" role="presentation">
+                                <a aria-controls="related-collection" role="tab" data-toggle="tab">  ALUMINUM PROFILE </a>
                             </li>
-                            <li role="presentation">
-                                <a href="#knob" aria-controls="related-collection" role="tab" data-toggle="tab">  KNOB </a>
+                            <li id="knob" class="handleslnk" role="presentation">
+                                <a aria-controls="related-collection" role="tab" data-toggle="tab">  KNOB </a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="straight">
+                            <div role="tabpanel" class="tab-pane handle-cnt active" id="straight-content">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="kyw-wardrobe-details">
                                             <p>
-                                                Go the classic way with hinge wardrobe in single or double doors.
+                                                Straight Go the classic way with hinge wardrobe in single or double doors.
                                                 Nothing like opening a cupboard to choose an outfit for the day.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="aluminum">
+                            <div role="tabpanel" class="tab-pane handle-cnt" id="aluminum-content">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="kyw-wardrobe-details">
                                             <p>
-                                                Go the classic way with hinge wardrobe in single or double doors.
+                                                Aluminum Go the classic way with hinge wardrobe in single or double doors.
                                                 Nothing like opening a cupboard to choose an outfit for the day.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="knob">
+                            <div role="tabpanel" class="tab-pane handle-cnt" id="knob-content">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="kyw-wardrobe-details">
                                             <p>
-                                                Go the classic way with hinge wardrobe in single or double doors.
+                                                Knob Go the classic way with hinge wardrobe in single or double doors.
                                                 Nothing like opening a cupboard to choose an outfit for the day.
                                             </p>
                                         </div>
@@ -872,7 +883,7 @@
     font-weight: 300;
     color: #333333;
     }
-    .handles-section{
+    /*.handles-section{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261000/kyk/PG_14_1_STRAIGHT_HANDLE.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
@@ -889,7 +900,7 @@
     padding: 20px 0 15px 0;
     text-align: center;
     color: #333333;
-    }
+    }*/
     .handle-heading{
     margin: 40px 10px 20px;
     font-weight: 300;
@@ -1118,12 +1129,15 @@
       $(this).remove();
     });
 
+
+
     $(document).ready(function() {
 
         $('.interior-carousel').carousel({
           interval: 6000,
           pause: "false"
         });
+
     });
 
 </script>
