@@ -11,19 +11,19 @@ public class MasterSheetHandler implements ExcelRowHandler
     @Override
     public void handle(Object[] data)
     {
-        String moduleCode = (String) data[1];
+        String moduleCode = (String) data[0];
         if (StringUtils.isEmpty(moduleCode) || "Module Code".equals(moduleCode)) return;
 
-        String kdmaxCode = (String) data[2];
-        String description = (String) data[3];
-        int width = Double.valueOf((String) data[4]).intValue();
-        int depth = Double.valueOf((String) data[5]).intValue();
-        int height = Double.valueOf((String) data[6]).intValue();
+        String kdmaxCode = (String) data[1];
+        String description = (String) data[2];
+        int width = Double.valueOf((String) data[3]).intValue();
+        int depth = Double.valueOf((String) data[4]).intValue();
+        int height = Double.valueOf((String) data[5]).intValue();
 
         this.printModuleRow(kdmaxCode, moduleCode, description, width, depth, height);
-        this.loopForComponents(data, moduleCode, 7, 32, "C");
-        this.loopForComponents(data, moduleCode, 33, 60, "H");
-        this.loopForComponents(data, moduleCode, 62, 65, "S");
+        this.loopForComponents(data, moduleCode, 6, 31, "C");
+        this.loopForComponents(data, moduleCode, 32, 61, "H");
+        this.loopForComponents(data, moduleCode, 62, 89, "S");
     }
 
     private void loopForComponents(Object[] data, String moduleCode, int startColumn, int endColumn, String compType)

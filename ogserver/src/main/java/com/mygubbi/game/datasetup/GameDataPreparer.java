@@ -8,13 +8,13 @@ import com.mygubbi.si.excel.ExcelRowHandler;
  */
 public class GameDataPreparer
 {
-    public static final String XL_FILE = "D:\\work\\mygubbi\\game-2\\Master Working Sheet_Kitchen_KD Max - R1.xlsx";
+    public static final String XL_FILE = "D:\\work\\mygubbi\\game-2\\Master Working Sheet Wardrobe-KD MAX (1).xlsx";
 
     public static void main(String[] args)
     {
         GameDataPreparer dataPreparer = new GameDataPreparer();
-        //dataPreparer.processSheet(66, 0, new MasterSheetHandler());
-        dataPreparer.processSheet(19, 1, new AccPackHandler());
+        dataPreparer.processSheet(90, 0, new MasterSheetHandler());
+        //dataPreparer.processSheet(19, 1, new AccPackHandler());
         //dataPreparer.processSheet(22, 2, new AccessoryPackModuleMappingHandler());
     }
 
