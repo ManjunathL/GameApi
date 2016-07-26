@@ -43,7 +43,8 @@ define([
         },
         events: {
          "click .handleslnk": "changeHandletab",
-          "click .wardrobe-lnk": "changeWardHandletab"
+         "click .wardrobe-lnk": "changeWardHandletab",
+         "click .material-lnk": "changeMaterialtab"
         },
         changeHandletab: function(e) {
             e.preventDefault();
@@ -58,7 +59,7 @@ define([
             console.log(id);
             return this;
         },
-            changeWardHandletab: function(e) {
+        changeWardHandletab: function(e) {
                         e.preventDefault();
                         var currentTarget = $(e.currentTarget);
                         var id = $(e.currentTarget).attr('id');
@@ -69,7 +70,19 @@ define([
 
                         console.log(id);
                         return this;
-                    }
+        },
+         changeMaterialtab: function(e) {
+                                e.preventDefault();
+                                var currentTarget = $(e.currentTarget);
+                                var id = $(e.currentTarget).attr('id');
+                                $(".material-img").removeClass('active');
+                                 $(".material-cnt").removeClass('active');
+                                    $("#"+id+"-img").addClass('active');
+                                $("#"+id+"-content").addClass('active');
+
+                                console.log(id);
+                                return this;
+         }
     });
 
     return KnowYourWardrobePageVIew;
