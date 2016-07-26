@@ -6589,8 +6589,8 @@ a.tab-ico {
         width: 33%;
     }
     .padding-top80{
-            padding-top:80px !important;
-     }
+        padding-top:80px !important;
+    }
     .padding-top30{
         padding-top:30px;
     }
@@ -6809,23 +6809,34 @@ background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v14690902
 
 }
     .dream-font{
-    font-family: 'Lato', sans-serif;
-
+        font-family: 'Lato', sans-serif;
     }
     .make-strong{
         font-weight: bolder !important;
         font-size: 36px;
     }
     .make-white{
-    color: #fff;
+        color: #fff;
     }
 
     .make-assembly{
         padding-left: 21% !important;
         width:67% !important;
     }
+
+    .remarketing h1,
+    .remarketing h2,
+    .remarketing h3,
+    .remarketing h4,
+    .remarketing h5,
+    .remarketing h6{
+        font-family: 'Lato', sans-serif;
+    }
+    .remarketing p{
+         font-family: 'Raleway', sans-serif;
+    }
     .make-raleway{
-    font-family: 'Raleway', sans-serif !important;
+        font-family: 'Raleway', sans-serif !important;
     }
     .make-background{
     background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
