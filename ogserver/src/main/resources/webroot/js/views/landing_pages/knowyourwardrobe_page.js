@@ -42,13 +42,13 @@ define([
             _.bindAll(this, 'renderWithUserProfCallback');
         },
         events: {
-         "click .handleslnk": "changeHandletab"
+         "click .handleslnk": "changeHandletab",
+          "click .wardrobe-lnk": "changeWardHandletab"
         },
         changeHandletab: function(e) {
             e.preventDefault();
             var currentTarget = $(e.currentTarget);
             var id = $(e.currentTarget).attr('id');
-
             $(".handle-img").removeClass('active');
             $(".handle-cnt").removeClass('active');
 
@@ -57,7 +57,20 @@ define([
 
             console.log(id);
             return this;
-        }
+        },
+            changeWardHandletab: function(e) {
+                        e.preventDefault();
+                        var currentTarget = $(e.currentTarget);
+                        var id = $(e.currentTarget).attr('id');
+                        $(".wardrobe-img").removeClass('active');
+                         $(".wardrobe-cnt").removeClass('active');
+                            $("#"+id+"-img").addClass('active');
+                        $("#"+id+"-content").addClass('active');
+
+                        console.log(id);
+                        return this;
+                    }
     });
+
     return KnowYourWardrobePageVIew;
 });
