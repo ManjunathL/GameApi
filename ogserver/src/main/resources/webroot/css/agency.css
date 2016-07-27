@@ -6589,8 +6589,8 @@ a.tab-ico {
         width: 33%;
     }
     .padding-top80{
-            padding-top:80px !important;
-     }
+        padding-top:80px !important;
+    }
     .padding-top30{
         padding-top:30px;
     }
@@ -6704,6 +6704,7 @@ a.tab-ico {
      border-top-color: rgb(252, 248, 227);
      border-bottom-color: rgb(252, 248, 227);
      width:30% !important;
+    border: 1px solid #fff;
  }
  img.thumbnail {
      /*max-width:20%;*/
@@ -6785,6 +6786,67 @@ background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v14690902
  .form-background{
     width:98%!important;
   }
+  }
+
+  .rem-head{
+	    font-family: Oswald, sans-serif !important;
+        font-weight: 200;
+        font-size: 72px;
+        text-transform: capitalize;
+  }
+ .rem-head1{
+	    font-family: Oswald, sans-serif !important;
+        font-weight: 600;
+        font-size: 72px;
+        float: left;
+  }
+
+  .rem-icons{
+    font-family: 'Lato', sans-serif;
+    font-family:  Lato, !important;
+    font-weight: 600;
+    font-size: 14px;
+
 }
+    .dream-font{
+        font-family: 'Lato', sans-serif;
+    }
+    .make-strong{
+        font-weight: bolder !important;
+        font-size: 36px;
+    }
+    .make-white{
+        color: #fff;
+    }
+
+    .make-assembly{
+        padding-left: 21% !important;
+        width:67% !important;
+    }
+
+    .remarketing h1,
+    .remarketing h2,
+    .remarketing h3,
+    .remarketing h4,
+    .remarketing h5,
+    .remarketing h6{
+        font-family: 'Lato', sans-serif;
+    }
+    .remarketing p{
+         font-family: 'Raleway', sans-serif;
+    }
+    .make-raleway{
+        font-family: 'Raleway', sans-serif !important;
+    }
+    .make-background{
+    background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
+         border-top-style: ridge;
+         border-bottom-style: ridge;
+         border-top-color: rgb(252, 248, 227);
+         border-bottom-color: rgb(252, 248, 227);
+         width:30% !important;
+        border: 1px solid #fff;
+    }
+
  /* End remarketing Landing page -- Mehbub*/
 

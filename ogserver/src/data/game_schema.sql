@@ -315,10 +315,10 @@ CREATE TABLE module_acc_pack(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module accessory pack';
 
 
-DROP TABLE IF EXISTS acc_addon_map;
-CREATE TABLE acc_addon_map(
+DROP TABLE IF EXISTS accpack_addon_map;
+CREATE TABLE accpack_addon_map(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  accode varchar(16) NOT NULL,
+  apcode varchar(16) NOT NULL,
   addoncode varchar(16) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
