@@ -128,7 +128,6 @@ CREATE TABLE proposal_addon(
 DROP TABLE IF EXISTS module_master;
 CREATE TABLE module_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  extCode varchar(16) NOT NULL,
   code varchar(16) NOT NULL,
   description varchar(255) NOT NULL,
   imagePath varchar(255) NOT NULL,
@@ -307,7 +306,6 @@ DROP TABLE IF EXISTS module_acc_pack;
 CREATE TABLE module_acc_pack(
   id INTEGER NOT NULL AUTO_INCREMENT,
   apcode varchar(16) NOT NULL,
-  extcode varchar(16) NOT NULL,
   mgcode varchar(16) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),

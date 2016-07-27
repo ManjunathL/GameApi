@@ -14,7 +14,9 @@ public class AccessoryPackModuleMappingHandler implements ExcelRowHandler
         String accode = (String) data[1];
         if (StringUtils.isEmpty( accode) || "Accessory Pack Code".equals( accode)) return;
 
-        this.loopForComponents(data,  accode, 2, 21);
+        System.out.println("begin;");
+        this.loopForComponents(data,  accode, 3, 21);
+        System.out.println("commit;");
 
     }
 
@@ -25,13 +27,13 @@ public class AccessoryPackModuleMappingHandler implements ExcelRowHandler
             String mgcode = (String) data[i];
             if (StringUtils.isEmpty(mgcode)) continue;
             String kdmaxcode = (String) data[i+1];
-            this.printRow(accode, mgcode, kdmaxcode);
+            this.printRow(accode, kdmaxcode);
         }
     }
 
-    private void printRow(String accode, String mgcode, String kdmaxcode)
+    private void printRow(String accode, String moduleCode)
     {
-        System.out.println("insert module_acc_pack(apcode, extcode, mgcode) values ('" + accode + "','" + kdmaxcode + "','" + mgcode + "');");
+        System.out.println("insert module_acc_pack(apcode, mgcode) values ('" + accode + "','" + moduleCode + "');");
     }
 
     @Override

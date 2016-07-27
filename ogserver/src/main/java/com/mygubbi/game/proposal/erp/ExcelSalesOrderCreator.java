@@ -1,6 +1,8 @@
-package com.mygubbi.game.proposal.quote;
+package com.mygubbi.game.proposal.erp;
 
 import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
+import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
+import com.mygubbi.game.proposal.quote.QuoteData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,13 +30,14 @@ public class ExcelSalesOrderCreator extends AbstractProposalOutputCreator
 
     public void create()
     {
-        //Modules first followed by panels in accessory packs
-        //Hardware from accessory packs
-        //Accessories from accessory packs and addon accessories
-        //Addons - Appliances
+        if (this.quoteData.getAssembledProducts().isEmpty())
+        {
+            throw new RuntimeException("There is no assembled product in the proposal");
+        }
 
+        AssembledProductInQuote product = this.quoteData.getAssembledProducts().get(0);
         this.openWorkbook();
-
+        new SalesOrderSheetCreator(this.workbookManager.getSheetByName("Sales Order"), product, workbookManager.getStyles()).prepare();
         this.closeWorkbook();
     }
 

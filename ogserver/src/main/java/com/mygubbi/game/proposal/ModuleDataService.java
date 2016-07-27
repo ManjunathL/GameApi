@@ -1,7 +1,6 @@
 package com.mygubbi.game.proposal;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
@@ -32,7 +31,7 @@ public class ModuleDataService extends AbstractVerticle
     private Multimap<String, ModuleComponent> moduleComponentsMap;
     private Multimap<String, AccessoryPackComponent> accessoryPackComponentsMap;
     private Multimap<String, AccessoryPack> moduleAccessoryPacksMap;
-    private Multimap<String, AccHwComponent> accessoryAddonsMap;
+    //private Multimap<String, AccHwComponent> accessoryAddonsMap;
     private Multimap<String, AccHwComponent> accessoryPackAddonsMap;
     private Map<String, Module> moduleMap = Collections.EMPTY_MAP;
     private Map<String, CarcassPanel> carcassPanelMap = Collections.EMPTY_MAP;
@@ -191,7 +190,6 @@ public class ModuleDataService extends AbstractVerticle
                         {
                             Module module = new Module(record);
                             this.moduleMap.put(module.getCode(), module);
-                            this.moduleMap.put(module.getExtCode(), module);
                         }
                         markResult("Module master is loaded.", true);
                     }
@@ -300,14 +298,14 @@ public class ModuleDataService extends AbstractVerticle
 
     private void cacheAccessoryAddons()
     {
-        this.accessoryAddonsMap = ArrayListMultimap.create();
+        this.accessoryPackAddonsMap = ArrayListMultimap.create();
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
                 LocalCache.getInstance().store(new QueryData("acc_addon_map.select", new JsonObject())),
                 (AsyncResult<Message<Integer>> dataResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        markResult("Accessory addons table is empty.", false);
+                        markResult("Accessory pack addons table is empty.", false);
                     }
                     else
                     {
@@ -320,13 +318,15 @@ public class ModuleDataService extends AbstractVerticle
                                 markResult("Accessory not setup for " + addonCode, false);
                                 break;
                             }
-                            this.accessoryAddonsMap.put(record.getString("accode"), accessory);
+                            this.accessoryPackAddonsMap.put(record.getString("apcode"), accessory);
                         }
-                        this.cacheAccessoryPackAddons();
+//                        this.cacheAccessoryPackAddons();
+                        markResult("Accessory Pack addons are loaded.", true);
                     }
                 });
     }
 
+/*
     private void cacheAccessoryPackAddons()
     {
         this.accessoryPackAddonsMap = HashMultimap.create();
@@ -343,6 +343,7 @@ public class ModuleDataService extends AbstractVerticle
         }
         markResult("Accessory Pack addons are loaded.", true);
     }
+*/
 
     private synchronized void markResult(String message, boolean success)
     {
@@ -370,10 +371,12 @@ public class ModuleDataService extends AbstractVerticle
         return this.moduleComponentsMap.get(mgCode);
     }
 
+/*
     public Collection<AccHwComponent> getAccessoryAddons(String accessoryCode)
     {
         return this.accessoryAddonsMap.get(accessoryCode);
     }
+*/
 
     public Collection<AccHwComponent> getAccessoryPackAddons(String accessoryPackCode)
     {

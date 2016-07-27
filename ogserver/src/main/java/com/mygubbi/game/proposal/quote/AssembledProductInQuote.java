@@ -1,15 +1,13 @@
 package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
-import com.mygubbi.game.proposal.ModuleDataService;
-import com.mygubbi.game.proposal.ProductAddon;
-import com.mygubbi.game.proposal.ProductLineItem;
-import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +21,15 @@ public class AssembledProductInQuote
 {
     private ProductLineItem product;
     private List<Accessory> accessories;
-    private List<ModuleAccessory> moduleAccessories;
     private List<Unit> units;
-    private List<ModuleAccessory> moduleHardware;
+
+    private List<ModulePart> modules;
+    private List<ModulePart> accessoryPackPanels;
+    private List<ModulePart> moduleAccessories;
+    private List<ModulePart> moduleHardware;
+    private List<ModulePart> addonAccessories;
+    private List<ModulePart> addons;
+
     private double addonsAmount;
     private String shutterMaterial;
 
@@ -60,9 +64,53 @@ public class AssembledProductInQuote
         return this.accessories;
     }
 
-    public List<ModuleAccessory> getModuleAccessories()
+    public List<ModulePart> getModuleAccessories()
     {
         return this.moduleAccessories;
+    }
+
+    public List<ModulePart> getAggregatedModules()
+    {
+        return this.getAggregatedModuleParts(this.modules);
+    }
+
+    public List<ModulePart> getAggregatedAccessoryPackPanels()
+    {
+        return this.getAggregatedModuleParts(this.accessoryPackPanels);
+    }
+
+    public List<ModulePart> getAggregatedAccessoryPackAccessories()
+    {
+        return this.getAggregatedModuleParts(this.moduleAccessories);
+    }
+
+    public List<ModulePart> getAggregatedAccessoryPackHardware()
+    {
+        return this.getAggregatedModuleParts(this.moduleHardware);
+    }
+
+    public List<ModulePart> getAggregatedAccessoryAddons()
+    {
+        return this.getAggregatedModuleParts(this.addonAccessories);
+    }
+
+    public List<ModulePart> getAggregatedAddons()
+    {
+        return this.getAggregatedModuleParts(this.addons);
+    }
+
+    private List<ModulePart> getAggregatedModuleParts(List<ModulePart> parts)
+    {
+        return Seq.ofType(parts.stream(), ModulePart.class)
+                .groupBy(x -> tuple(x.code, x.uom),
+                        Tuple.collectors(
+                                Collectors.summingDouble(x -> x.quantity), Collectors.summingDouble(x -> x.quantity)
+                        )
+                )
+                .entrySet()
+                .stream()
+                .map(e -> new ModulePart(e.getKey().v1, e.getKey().v2, e.getValue().v1))
+                .collect(Collectors.toList());
     }
 
     public ProductLineItem getProduct()
@@ -97,49 +145,100 @@ public class AssembledProductInQuote
         this.accessories = new ArrayList<>();
         this.moduleAccessories = new ArrayList<>();
         this.moduleHardware = new ArrayList<>();
+        this.accessoryPackPanels = new ArrayList<>();
+        this.addonAccessories = new ArrayList<>();
+        this.addons = new ArrayList<>();
+        this.modules = new ArrayList<>();
+
         for (ProductModule module : this.product.getModules())
         {
+            this.modules.add(new ModulePart(module.getMGCode(), "NOS", 1));
             this.addModuleToUnit(module);
-            this.collectAccessories(module);
+            this.collectModuleParts(module);
         }
         for (ProductAddon addon : this.product.getAddons())
         {
             this.addonsAmount += addon.getAmount();
+            this.addToAddons(addon, 1, "NA", 0);
         }
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(this.product.getFinishCode());
         this.shutterMaterial = finish.getTitle() + " | " + finish.getFinishMaterial();
     }
 
-    private void collectAccessories(ProductModule module)
+    private void collectModuleParts(ProductModule module)
     {
-        for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(module.getMGCode()))
+        for (ModuleAccessoryPack modAccessoryPack : module.getAccessoryPacks())
         {
-            if (ModuleComponent.ACCESSORY_TYPE.equals(component.getType()))
+            Collection<AccessoryPackComponent> accessoryPackComponents =
+                    ModuleDataService.getInstance().getAccessoryPackComponents(modAccessoryPack.getAccessoryPackCode());
+            if (accessoryPackComponents == null || accessoryPackComponents.isEmpty()) continue;
+            for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
             {
-                AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(component.getComponentCode());
-                if (accessory == null) continue;
-                this.addToProductAccessories(accessory, component.getQuantity());
-                this.addToModuleAccessories(accessory, component.getQuantity(), module.getUnit(), module.getSequence());
+                if (accessoryPackComponent.isAccessory())
+                {
+                    AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(accessoryPackComponent.getComponentCode());
+                    if (accessory == null) continue;
+                    this.addToProductAccessories(accessory, accessoryPackComponent.getQuantity());
+                    this.addToModuleAccessories(accessory, accessoryPackComponent.getQuantity(), module.getUnit(), module.getSequence());
+                }
+                else if (accessoryPackComponent.isHardware())
+                {
+                    AccHwComponent hardware = ModuleDataService.getInstance().getHardware(accessoryPackComponent.getComponentCode());
+                    if (hardware == null) continue;
+                    this.addToModuleHardware(hardware, accessoryPackComponent.getQuantity(), module.getUnit(), module.getSequence());
+                }
+                else if (accessoryPackComponent.isCarcass())
+                {
+                    CarcassPanel carcassPanel = ModuleDataService.getInstance().getCarcassPanel(accessoryPackComponent.getComponentCode());
+                    if (carcassPanel == null) continue;
+                    this.addToAccessoryPackPanels(carcassPanel, accessoryPackComponent.getQuantity(), module.getUnit(), module.getSequence());
+                }
             }
-            else if (ModuleComponent.HARDWARE_TYPE.equals(component.getType()))
+
+            for (String code : modAccessoryPack.getAddons())
             {
-                AccHwComponent hardware = ModuleDataService.getInstance().getHardware(component.getComponentCode());
-                if (hardware == null) continue;
-                this.addToModuleHardware(hardware, component.getQuantity(), module.getUnit(), module.getSequence());
+                AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(code);
+                if (accessory == null) continue;
+                this.addToProductAccessories(accessory, 1);
+                this.addToAddonAccessories(accessory, 1, module.getUnit(), module.getSequence());
             }
         }
+
+    }
+
+    private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
+    {
+        ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom());
+        this.addons.add(part);
+    }
+
+    private void addToAddonAccessories(AccHwComponent component, double quantity, String unit, int seq)
+    {
+        ModulePart part = this.createModulePart(component, quantity, unit, seq);
+        this.addonAccessories.add(part);
     }
 
     private void addToModuleAccessories(AccHwComponent component, double quantity, String unit, int seq)
     {
-        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
-        this.moduleAccessories.add(accessory);
+        ModulePart part = this.createModulePart(component, quantity, unit, seq);
+        this.moduleAccessories.add(part);
     }
 
     private void addToModuleHardware(AccHwComponent component, double quantity, String unit, int seq)
     {
-        ModuleAccessory accessory = new ModuleAccessory(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
-        this.moduleHardware.add(accessory);
+        ModulePart part = this.createModulePart(component, quantity, unit, seq);
+        this.moduleHardware.add(part);
+    }
+
+    private void addToAccessoryPackPanels(CarcassPanel carcassPanel, double quantity, String unit, int seq)
+    {
+        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS");
+        this.accessoryPackPanels.add(part);
+    }
+
+    private ModulePart createModulePart(AccHwComponent component, double quantity, String unit, int seq)
+    {
+        return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
     }
 
     private void addToProductAccessories(AccHwComponent accessoryComponent, double quantity)
@@ -186,7 +285,7 @@ public class AssembledProductInQuote
         return unit;
     }
 
-    public List<ModuleAccessory> getModuleHardware()
+    public List<ModulePart> getModuleHardware()
     {
         return moduleHardware;
     }
@@ -388,7 +487,7 @@ public class AssembledProductInQuote
         }
     }
 
-    public static class ModuleAccessory
+    public static class ModulePart
     {
         public String unit;
         public int seq;
@@ -398,7 +497,7 @@ public class AssembledProductInQuote
         public String make;
         public String uom;
 
-        public ModuleAccessory(String unit, int seq, String code, String title, double quantity, String make, String uom)
+        public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom)
         {
             this.unit = unit;
             this.seq = seq;
@@ -409,12 +508,19 @@ public class AssembledProductInQuote
             this.uom = uom;
         }
 
-        public ModuleAccessory(String code, String title, String make, String uom, double quantity)
+        public ModulePart(String code, String title, String make, String uom, double quantity)
         {
             this.code = code;
             this.quantity = quantity;
             this.title = title;
             this.make = make;
+            this.uom = uom;
+        }
+
+        public ModulePart(String code, String uom, double quantity)
+        {
+            this.code = code;
+            this.quantity = quantity;
             this.uom = uom;
         }
     }

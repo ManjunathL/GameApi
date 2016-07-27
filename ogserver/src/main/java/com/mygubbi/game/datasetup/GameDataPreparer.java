@@ -8,14 +8,16 @@ import com.mygubbi.si.excel.ExcelRowHandler;
  */
 public class GameDataPreparer
 {
-    public static final String XL_FILE = "D:\\work\\mygubbi\\game-2\\Master Working Sheet Wardrobe-KD MAX (1).xlsx";
+    public static final String XL_FILE = "D:\\work\\mygubbi\\game-2\\27Jul2016\\kitchen.xlsx";
+    //public static final String XL_FILE = "D:\\work\\mygubbi\\game-2\\27Jul2016\\wardrobe.xlsx";
 
     public static void main(String[] args)
     {
         GameDataPreparer dataPreparer = new GameDataPreparer();
-        dataPreparer.processSheet(90, 0, new MasterSheetHandler());
+        //dataPreparer.processSheet(66, 0, new MasterSheetHandler(MasterSheetHandler.kitchen_indices));
+        //dataPreparer.processSheet(89, 0, new MasterSheetHandler(MasterSheetHandler.wardrobe_indices));
         //dataPreparer.processSheet(19, 1, new AccPackHandler());
-        //dataPreparer.processSheet(22, 2, new AccessoryPackModuleMappingHandler());
+        dataPreparer.processSheet(22, 2, new AccessoryPackModuleMappingHandler());
     }
 
     private void processSheet(int maxColumns, int sheetNumber, ExcelRowHandler rowHandler) {

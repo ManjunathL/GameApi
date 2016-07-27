@@ -104,7 +104,20 @@ public class ExcelReaderService
                     throw e;
                 }
             }
-            this.rowHandler.handle(data);
+            try
+            {
+                this.rowHandler.handle(data);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error processing data row " + rowNum +". Error:" + e.getMessage() );
+                for (int i=0; i<data.length; i++)
+                {
+                    System.out.print(data[i] + "|");
+                }
+                e.printStackTrace();
+                break;
+            }
         }
 
         this.rowHandler.done();

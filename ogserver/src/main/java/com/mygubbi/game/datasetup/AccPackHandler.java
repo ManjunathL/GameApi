@@ -15,10 +15,13 @@ public class AccPackHandler implements ExcelRowHandler
         if (StringUtils.isEmpty( accode) || "Accessory Pack".equals( accode)) return;
 
         String title = (String) data[2];
+
+        System.out.println("begin;");
         this.printPackRow(accode, title);
         this.loopForComponents(data,  accode, 3, 6, "C");
         this.loopForComponents(data,  accode, 7, 12, "H");
         this.loopForComponents(data,  accode ,13, 18, "A");
+        System.out.println("commit;");
     }
 
     private void loopForComponents(Object[] data, String accode, int startColumn, int endColumn, String compType)

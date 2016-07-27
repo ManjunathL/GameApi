@@ -191,9 +191,9 @@ public class QuoteData
     }
 
 
-    public List<AssembledProductInQuote.ModuleAccessory> getAllModuleHardware()
+    public List<AssembledProductInQuote.ModulePart> getAllModuleHardware()
     {
-        List<AssembledProductInQuote.ModuleAccessory> hwList = new ArrayList<>();
+        List<AssembledProductInQuote.ModulePart> hwList = new ArrayList<>();
         for (AssembledProductInQuote product : this.assembledProducts)
         {
             hwList.addAll(product.getModuleHardware());
@@ -202,9 +202,9 @@ public class QuoteData
         return this.aggregateComponentQuantity(hwList);
     }
 
-    public List<AssembledProductInQuote.ModuleAccessory> getAllModuleAcessories()
+    public List<AssembledProductInQuote.ModulePart> getAllModuleAcessories()
     {
-        List<AssembledProductInQuote.ModuleAccessory> accList = new ArrayList<>();
+        List<AssembledProductInQuote.ModulePart> accList = new ArrayList<>();
         for (AssembledProductInQuote product : this.assembledProducts)
         {
             accList.addAll(product.getModuleAccessories());
@@ -213,11 +213,11 @@ public class QuoteData
         return this.aggregateComponentQuantity(accList);
     }
 
-    private List<AssembledProductInQuote.ModuleAccessory> aggregateComponentQuantity(List<AssembledProductInQuote.ModuleAccessory> hwList)
+    private List<AssembledProductInQuote.ModulePart> aggregateComponentQuantity(List<AssembledProductInQuote.ModulePart> hwList)
     {
-        List<AssembledProductInQuote.ModuleAccessory> aggregated =
+        List<AssembledProductInQuote.ModulePart> aggregated =
 
-                Seq.ofType(hwList.stream(), AssembledProductInQuote.ModuleAccessory.class)
+                Seq.ofType(hwList.stream(), AssembledProductInQuote.ModulePart.class)
                         .groupBy(x -> tuple(x.code, x.make, x.title, x.uom),
                                 Tuple.collectors(
                                         Collectors.summingDouble(x -> x.quantity)
@@ -225,7 +225,7 @@ public class QuoteData
                         )
                         .entrySet()
                         .stream()
-                        .map(e -> new AssembledProductInQuote.ModuleAccessory(e.getKey().v1, e.getKey().v3,
+                        .map(e -> new AssembledProductInQuote.ModulePart(e.getKey().v1, e.getKey().v3,
                                 e.getKey().v2, e.getKey().v4, e.getValue().v1))
                         .collect(Collectors.toList());
 

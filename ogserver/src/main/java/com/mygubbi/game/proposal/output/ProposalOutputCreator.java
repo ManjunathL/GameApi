@@ -1,8 +1,8 @@
 package com.mygubbi.game.proposal.output;
 
+import com.mygubbi.game.proposal.erp.ExcelSalesOrderCreator;
 import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.quote.ExcelQuoteCreator;
-import com.mygubbi.game.proposal.quote.ExcelSalesOrderCreator;
 import com.mygubbi.game.proposal.quote.QuoteData;
 
 /**
