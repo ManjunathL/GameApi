@@ -6884,6 +6884,12 @@ a.tab-ico {
     border-radius: 0px;
     border-color: #707375;
 }
+.assembly-img{
+    border: 4px solid #f1591f;
+}
+.why-us-heading{
+    padding:15px 0px;
+}
 
  /* End remarketing Landing page -- Mehbub*/
 
