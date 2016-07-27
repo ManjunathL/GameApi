@@ -5891,7 +5891,7 @@ a.tab-ico {
     color: rgba(255, 83, 13, 1);
 }
 .how-it-box p{
-    font-size: 16px;
+    font-size: 18px;
 }
 .ushaped-box,
 .straight-box,
@@ -6583,7 +6583,7 @@ a.tab-ico {
 
 /* Home Page Don't just crush over section End */
 
-/* Start remarketing Landing page -- Mehbub*/
+    /* Start remarketing Landing page -- Mehbub*/
 
     .width33 {
         width: 33%;
@@ -6604,13 +6604,13 @@ a.tab-ico {
     color:#999;
     }
     .make-height{
-    text-transform:none !important;
-    line-height:0 !important;
-    margin-top:35px !important;
+        text-transform:none !important;
+        line-height:0 !important;
+        margin-top:35px !important;
     }
     .make-button-align{
-       margin-left: 33% !important;
-           margin-top: 4% !important;
+        margin-left: 33% !important;
+        margin-top: 4% !important;
     }
     .thumb-border{
         border-style: solid !important;
@@ -6618,23 +6618,23 @@ a.tab-ico {
         border-color: white;
     }
     .thumb-btn-make-center{
-    padding-left:66px;
+        padding-left:66px;
     }
     .img-border-color{
         border-style: solid !important;
-        border-color: #f1591f !important;}
+        border-color: #f1591f !important;
+    }
     .make-button-orange{
-    background-color: #F1590F !important;
-
+        background-color: #F1590F !important;
     }
     .make-p-align {
         font-size: 13px !important;
-        }
+    }
     .make-height-why-us{
         text-transform:none !important;
         line-height:2 !important;
         margin-top:17px !important;
-        }
+    }
     .paragraph-text{
         font-size: 13px !important;
         line-height: 1.2 !important;
@@ -6647,40 +6647,195 @@ a.tab-ico {
         background-color: rgba(0, 0, 0, 0.45);
         padding: 1em;
         transition: all 0.3s ease 0s;
-        }
+    }
      .make-center{
          text-align: center;
          text-transform:none !important;
      }
      .make-navy{
-     color:RGBA(27, 53, 87, 0.8);
+        color:RGBA(27, 53, 87, 0.8);
      }
      .make-text-bigger{
-     font-size:17px;
+        font-size:17px;
      }
      .why-us-remarket{
-     width: 80% !important;
+        width: 80% !important;
      }
      .remarketing_banner_txt {
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/banner_02.jpg");
-         background-repeat: no-repeat;
-         background-position: center 100%;
-         height: auto;
-         width: 100%;
-         -webkit-background-size: 100%;
-         -moz-background-size: 100%;
-         -o-background-size: 100%;
-         background-size: 100%;
-         -webkit-background-size: cover;
-         -moz-background-size: cover;
-         -o-background-size: cover;
-         background-size: cover;
-         padding: 75px 0 75px 0;
-         text-align: center;
-         color: #ffffff;
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/banner_02.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 75px 0 75px 0;
+        text-align: center;
+        color: #ffffff;
      }
 
-.remarketing_banner_head {
+    .remarketing_banner_head {
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 75px 0 75px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .form-background{
+         background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
+         border-top-style: ridge;
+         border-bottom-style: ridge;
+         border-top-color: rgb(252, 248, 227);
+         border-bottom-color: rgb(252, 248, 227);
+         border: 1px solid #fff;
+    }
+    img.thumbnail {
+        /*max-width:20%;*/
+        max-height:30%;
+        padding: 0 !important;
+        -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
+        /* For Safari 3.1 to 6.0 */
+        transition: width 1s, height 1s, transform 0.5s;
+    }
+     img.thumbnail:hover {
+         -webkit-transform:scale(1.2);
+         /* Safari and Chrome */
+         -moz-transform:scale(1.2);
+         /* Firefox */
+         -ms-transform:scale(1.2);
+         /* IE 9 */
+         -o-transform:scale(1.2);
+         /* Opera */
+         transform:scale(1.2);
+     }
+
+    #img-zoom{
+         width: 100%;
+         margin: 0px auto;
+         text-align: center;
+    }
+    #img-zoom > li{
+        display:inline-block !important;
+    }
+
+    .carousel-caption{
+        position: relative;
+        left: auto;
+        right: auto;
+    }
+    .bg-remarketing-gray{
+        background-color: rgba(169, 167, 177, 0.4);
+        padding: 59px
+    }
+    .down-carousel{
+        position:absolute;
+        width: 66px;
+        margin: 0 auto;
+        top: 313px;
+    }
+    .carousel-caption {
+        margin: 0 auto;
+        width: 51%;
+        padding-top:51px;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+
+}
+@media (max-width: 1170px){
+    .img-bnr-carousel{
+        background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg') !important;
+        background-position: center center;
+        background-size: cover;
+        background-size: cover;
+    }
+}
+@media (max-width: 1170px){
+    .img-bnr-your-dream-section{
+        background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg') !important;
+        background-position: center center;
+        background-size: cover;
+        background-size: cover;
+    }
+}
+
+.make-right-arrow{
+    float:right;
+    padding-right:32px;
+    color: rgba(255, 83, 13, 1);
+}
+
+.make-strong{
+    font-weight: bolder !important;
+    font-size: 36px;
+}
+.make-white{
+    color: #fff;
+}
+
+.make-assembly{
+    padding-left: 21% !important;
+    width:67% !important;
+}
+.brand-heading{
+    text-transform: uppercase;
+}
+.remarketing h1,
+.remarketing h2,
+.remarketing h3,
+.remarketing h4,
+.remarketing h5,
+.remarketing h6{
+    font-family: 'Lato', sans-serif;
+}
+.remarketing p{
+     font-family: 'Raleway', sans-serif;
+}
+.make-background{
+    background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
+    border-top-style: ridge;
+    border-bottom-style: ridge;
+    border-top-color: rgb(252, 248, 227);
+    border-bottom-color: rgb(252, 248, 227);
+    width:30% !important;
+    border: 1px solid #fff;
+}
+
+.remarketing_heading {
+    font-size: 46px;
+    text-align: left;
+    line-height: 120%;
+    padding: 10px 0px;
+    text-transform: capitalize;
+}
+.remarketing_heading_span{
+    display: block;
+    font-size: 46px;
+    text-align: left;
+    line-height: 140%;
+    padding: 5px 0px;
+
+}
+.dream-home-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -6693,160 +6848,48 @@ a.tab-ico {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding: 75px 0 75px 0;
+    padding: 60px 0 60px 0;
     text-align: center;
     color: #ffffff;
 }
- .form-background{
-     background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
-     border-top-style: ridge;
-     border-bottom-style: ridge;
-     border-top-color: rgb(252, 248, 227);
-     border-bottom-color: rgb(252, 248, 227);
-     width:30% !important;
-    border: 1px solid #fff;
- }
- img.thumbnail {
-     /*max-width:20%;*/
-     max-height:30%;
-     padding: 0 !important;
-     -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
-     /* For Safari 3.1 to 6.0 */
-     transition: width 1s, height 1s, transform 0.5s;
- }
- img.thumbnail:hover {
-     -webkit-transform:scale(1.2);
-     /* Safari and Chrome */
-     -moz-transform:scale(1.2);
-     /* Firefox */
-     -ms-transform:scale(1.2);
-     /* IE 9 */
-     -o-transform:scale(1.2);
-     /* Opera */
-     transform:scale(1.2);
- }
 
-        #img-zoom{
-         width:100%;
-         padding:7px;
-        }
- #img-zoom > li{
- display:inline-block !important;
- }
-
-    .carousel-caption{
-    position: relative;
-    left: auto;
-    right: auto;
-    }
-    .bg-remarketing-gray{
-    background-color: rgba(169, 167, 177, 0.4);
-    padding: 59px
-    }
-.down-carousel{
-    position:absolute;
-    width: 66px;
-    margin: 0 auto;
-    top: 313px;
-    }
-    .carousel-caption {
-    margin: 0 auto;
-    width: 51%;
-    padding-top:51px;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-
-  }
-@media (max-width: 1170px){
-  .img-bnr-carousel{
-background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg') !important;
-    background-position: center center;
-    background-size: cover;
-    background-size: cover;
-  }
- }
- @media (max-width: 1170px){
- .img-bnr-your-dream-section{
- background-image: url('https://res.cloudinary.com/mygubbi/image/upload/v1469090254/remarketing_lp/bottom-bg-bner_08.jpg') !important;
-     background-position: center center;
-     background-size: cover;
-     background-size: cover;
-   }
-
- }
- .make-right-arrow{
-    float:right;
-    padding-right:32px;
-    color: rgba(255, 83, 13, 1);
- }
-@media (max-width: 767px){
- .form-background{
-    width:98%!important;
-  }
-  }
-
-  .rem-head{
-	    font-family: Oswald, sans-serif !important;
-        font-weight: 200;
-        font-size: 72px;
-        text-transform: capitalize;
-  }
- .rem-head1{
-	    font-family: Oswald, sans-serif !important;
-        font-weight: 600;
-        font-size: 72px;
-        float: left;
-  }
-
-  .rem-icons{
-    font-family: 'Lato', sans-serif;
-    font-family:  Lato, !important;
-    font-weight: 600;
-    font-size: 14px;
+.dream-home-heading{
+    margin: 10px 50px 70px;
+    font-weight: 300;
+    line-height: 135%;
+}
+.dream-box{
+    margin: 0px 25px;
+}
+.dream-box h4{
+    margin-top: 15px;
+}
+.dream-box p{
+    padding: 0px 60px;
+    font-size: 20px;
+    line-height: 130%;
 
 }
-    .dream-font{
-        font-family: 'Lato', sans-serif;
-    }
-    .make-strong{
-        font-weight: bolder !important;
-        font-size: 36px;
-    }
-    .make-white{
-        color: #fff;
-    }
-
-    .make-assembly{
-        padding-left: 21% !important;
-        width:67% !important;
-    }
-
-    .remarketing h1,
-    .remarketing h2,
-    .remarketing h3,
-    .remarketing h4,
-    .remarketing h5,
-    .remarketing h6{
-        font-family: 'Lato', sans-serif;
-    }
-    .remarketing p{
-         font-family: 'Raleway', sans-serif;
-    }
-    .make-raleway{
-        font-family: 'Raleway', sans-serif !important;
-    }
-    .make-background{
-    background: rgba(176, 171, 171, 0.23) none repeat scroll 0% 0% !important;
-         border-top-style: ridge;
-         border-bottom-style: ridge;
-         border-top-color: rgb(252, 248, 227);
-         border-bottom-color: rgb(252, 248, 227);
-         width:30% !important;
-        border: 1px solid #fff;
-    }
+.dream-completed-project{
+    margin: 20px 0px 30px;
+}
+.dream-completed-head-box p{
+    padding: 10px 20px;
+    font-size: 18px;
+    line-height: 150%;
+    font-weight: 400;
+    color: #707375;
+}
+.btn-dream{
+    border-radius: 0px;
+    border-color: #707375;
+}
+.assembly-img{
+    border: 4px solid #f1591f;
+}
+.why-us-heading{
+    padding:15px 0px;
+}
 
  /* End remarketing Landing page -- Mehbub*/
 
