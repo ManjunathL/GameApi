@@ -244,6 +244,11 @@
 	min-height: 500px;
 	width:100%;
 }
+.color-4 .container {
+	background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg") no-repeat 50% 50%;
+	min-height: 500px;
+	width:100%;
+}
 
 .content {
 	padding: 0 1em;
