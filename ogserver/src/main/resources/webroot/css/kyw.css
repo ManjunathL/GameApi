@@ -111,6 +111,10 @@
 .interior-section{
     background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern_color.png");
 }
+.interior-section .interior-para{
+    color: #333333;
+    text-shadow: none;
+}
 .interior-heading{
     margin: 20px 10px 20px;
     font-weight: 300;
@@ -185,7 +189,7 @@
 .kyw-finishes-type-content-tab{
     display: block;
     position: absolute;
-    z-index: 999999;
+    z-index: 999;
     top: 0px;
 }
 
