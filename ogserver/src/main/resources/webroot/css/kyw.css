@@ -111,6 +111,10 @@
 .interior-section{
     background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern_color.png");
 }
+.interior-section .interior-para{
+    color: #333333;
+    text-shadow: none;
+}
 .interior-heading{
     margin: 20px 10px 20px;
     font-weight: 300;
@@ -185,7 +189,7 @@
 .kyw-finishes-type-content-tab{
     display: block;
     position: absolute;
-    z-index: 999999;
+    z-index: 999;
     top: 0px;
 }
 
@@ -240,7 +244,12 @@
 }
 
 .color-3 .container {
-	background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469135703/kyw/PG_3.png") no-repeat 50% 50%;
+	background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469135703/kyk/usp/PG_3.png") no-repeat 50% 50%;
+	min-height: 500px;
+	width:100%;
+}
+.color-4 .container {
+	background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg") no-repeat 50% 50%;
 	min-height: 500px;
 	width:100%;
 }
@@ -282,7 +291,7 @@
 	margin: -15px 0 0 -15px;
 	position: absolute;
 	border-radius: 50%;
-	border: 2px solid rgba(232, 112, 8, 0.95);
+	border: 2px solid #e35583;
 	-webkit-animation: pulse 0.6s infinite alternate;
 	animation: pulse 0.6s infinite alternate;
 }
