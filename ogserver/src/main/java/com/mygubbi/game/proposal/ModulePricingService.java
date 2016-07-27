@@ -92,14 +92,17 @@ public class ModulePricingService extends AbstractVerticle
 
         for (ModuleAccessoryPack moduleAccessoryPack : productModule.getAccessoryPacks())
         {
+            LOG.info("Calculating cost for accessory pack:" + moduleAccessoryPack.getAccessoryPackCode());
             Collection<AccessoryPackComponent> accessoryPackComponents =
                     ModuleDataService.getInstance().getAccessoryPackComponents(moduleAccessoryPack.getAccessoryPackCode());
             for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
             {
+                LOG.info("Calculating cost for ap component :" + accessoryPackComponent.getComponentCode() + " : " + accessoryPackComponent.getType());
                 this.calculateComponentCost(modulePriceHolder, shutterFinish, carcassRateCard, shutterRateCard, accessoryPackComponent);
             }
             for (String addonCode : moduleAccessoryPack.getAddons())
             {
+                LOG.info("Calculating cost for addon accessory :" + addonCode);
                 this.calculateAccessoryCost(modulePriceHolder, addonCode, 1);
             }
         }
@@ -150,15 +153,6 @@ public class ModulePricingService extends AbstractVerticle
     private void calculateAccessoryCost(ModulePriceHolder modulePriceHolder, IModuleComponent component)
     {
         this.calculateAccessoryCost(modulePriceHolder, component.getComponentCode(), component.getQuantity());
-        AccHwComponent accessory = ModuleDataService.getInstance().getAccessory(component.getComponentCode());
-        if (accessory == null || accessory.getPrice() == 0)
-        {
-            modulePriceHolder.addError("Accessory cost is not available for " + component.getComponentCode());
-        }
-        else
-        {
-            modulePriceHolder.addToAccessoryCost(accessory.getPrice() * component.getQuantity());
-        }
     }
 
     private void calculateAccessoryCost(ModulePriceHolder modulePriceHolder, String addonCode, double quantity)

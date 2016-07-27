@@ -4,6 +4,8 @@ import com.mygubbi.game.proposal.model.Module;
 import com.mygubbi.game.proposal.model.RateCard;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,6 +15,8 @@ import java.math.RoundingMode;
  */
 public class ModulePriceHolder
 {
+    private final static Logger LOG = LogManager.getLogger(ModulePriceHolder.class);
+
     private double shutterCost = 0;
     private double carcassCost = 0;
     private double accessoryCost = 0;
@@ -60,6 +64,7 @@ public class ModulePriceHolder
     public void addToAccessoryCost(double cost)
     {
         this.accessoryCost += cost;
+        LOG.info("Accessory cost incremented by :" + cost);
     }
 
     public void addToHardwareCost(double cost)
@@ -73,6 +78,8 @@ public class ModulePriceHolder
         this.labourCost = this.moduleArea * labourRateCard.getRate();
         this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
         this.totalCost = this.woodworkCost + this.accessoryCost;
+
+        LOG.info("Accessory cost:" + this.accessoryCost);
     }
 
     private double round(double value, int places)

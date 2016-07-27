@@ -320,7 +320,7 @@ CREATE TABLE accpack_addon_map(
   addoncode varchar(16) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  KEY code_key (accode)
+  KEY code_key (apcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='addon accessory map';
 
 

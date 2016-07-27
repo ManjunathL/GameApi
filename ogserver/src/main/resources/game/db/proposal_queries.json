@@ -468,7 +468,7 @@
     {
       "id": "acc_addon_map.select",
       "type": "select",
-      "query": "select apcode, addoncode from acc_addon_map",
+      "query": "select apcode, addoncode from accpack_addon_map",
       "params": []
     },
 
