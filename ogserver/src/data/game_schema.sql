@@ -243,6 +243,7 @@ CREATE TABLE acc_hw_master(
   catalogCode varchar(16) NOT NULL,
   title varchar(255) NOT NULL,
   make varchar(16) NOT NULL,
+  category varchar(32) Null,
   imagePath varchar(255) NULL,
   uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
   cp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
