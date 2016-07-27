@@ -128,7 +128,7 @@ CREATE TABLE proposal_addon(
 DROP TABLE IF EXISTS module_master;
 CREATE TABLE module_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  code varchar(16) NOT NULL,
+  code varchar(32) NOT NULL,
   description varchar(255) NOT NULL,
   imagePath varchar(255) NOT NULL,
   width INTEGER NOT NULL DEFAULT 0,
@@ -143,7 +143,7 @@ CREATE TABLE module_master(
 DROP TABLE IF EXISTS module_components;
 CREATE TABLE module_components(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  modulecode varchar(16) NOT NULL,
+  modulecode varchar(32) NOT NULL,
   comptype char(1) NOT NULL, -- C - Carcass, S- Shutter, A - Accessory, H- Hardware
   compcode varchar(32) NOT NULL, -- Component code - Carcass, Shutter, Hardware, Accessory
   quantity DECIMAL(10,2) NOT NULL DEFAULT 0.0,
@@ -306,7 +306,7 @@ DROP TABLE IF EXISTS module_acc_pack;
 CREATE TABLE module_acc_pack(
   id INTEGER NOT NULL AUTO_INCREMENT,
   apcode varchar(16) NOT NULL,
-  mgcode varchar(16) NOT NULL,
+  mgcode varchar(32) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (mgcode)

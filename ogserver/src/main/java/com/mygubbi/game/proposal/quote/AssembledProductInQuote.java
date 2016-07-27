@@ -3,6 +3,8 @@ package com.mygubbi.game.proposal.quote;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple;
 
@@ -19,6 +21,8 @@ import static org.jooq.lambda.tuple.Tuple.tuple;
  */
 public class AssembledProductInQuote
 {
+    private final static Logger LOG = LogManager.getLogger(AssembledProductInQuote.class);
+
     private ProductLineItem product;
     private List<Accessory> accessories;
     private List<Unit> units;

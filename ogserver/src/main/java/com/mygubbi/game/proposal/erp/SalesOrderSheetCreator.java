@@ -1,6 +1,5 @@
 package com.mygubbi.game.proposal.erp;
 
-import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -9,8 +8,6 @@ import com.mygubbi.si.excel.ExcelStyles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import java.util.List;
@@ -63,13 +60,11 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
 
     private int fillSheet(int currentRow)
     {
-        CellStyle style = this.soSheet.getRow(currentRow + 1).getRowStyle();
-
         List<ProductModule> modules = this.product.getModules();
         if (modules == null || modules.isEmpty())
         {
             currentRow++;
-            this.createDataRowInDataSheet(currentRow, new String[]{"No components"}, style);
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new String[]{"No components"});
             return currentRow;
         }
 
@@ -87,12 +82,13 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
     {
         for (AssembledProductInQuote.ModulePart modulePart : parts)
         {
-            currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{currentRow, modulePart.code, modulePart.uom, modulePart.quantity});
+            currentRow++;
         }
         return currentRow;
     }
 
+/*
     private void createDataRowInDataSheet(int rowNum, String [] data, CellStyle style)
     {
         this.createRowInDataSheet(rowNum, data, false, style);
@@ -121,5 +117,6 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
             }
         }
     }
+*/
 
 }
