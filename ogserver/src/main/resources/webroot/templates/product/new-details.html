@@ -15,6 +15,37 @@
                                  alt="<%= product.name %>" title="<%= product.name %>" class="width100">
                             <% } %>
                         </div>
+                        <!-- Product Related Images Start -->
+                        <div class="wrap">
+                            <div class="row">
+
+                                <div class="controls center col-xs-1">
+                                    <button class="btn prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                                    </button>
+                                </div>
+
+                                <div class="frame col-xs-10" id="forcecentered" style="overflow: hidden;">
+                                    <% if(typeof(product.images) !== 'undefined'){ %>
+                                    <ul class="clearfix slidee"
+                                        style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
+                                        <% _.each(product.images, function(image){ %>
+                                        <li>
+                                            <img
+                                                    src="<%= imgBase + image %>"
+                                                    width="100%"/>
+                                        </li>
+                                        <% }); %>
+                                    </ul>
+                                    <% } %>
+                                </div>
+
+                                <div class="controls center col-xs-1">
+                                    <button class="btn next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Related Images End -->
                     </div>
                     <div class="col-sm-5 col-md-5 col-lg-5">
                         <div class="product-main-content text-center">
@@ -22,7 +53,7 @@
                             <p class="about-product">
                                 <%= product.desc %>
                             </p>
-                            <div class="product-price">
+                            <div class="product-price padding-top40">
                                 <h4> Price starting from : <strong> <% if (product.defaultPrice !== '0') { %>Rs. <%= product.defaultPrice %> /- <% } else { %> Consult for Price <% } %></strong></h4>
                             </div>
                             <div class="consult-section">
@@ -80,7 +111,7 @@
                                             </div>-->
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <div class="tab-content design-carousels">
+                                                    <div class="tab-content design-carousels margin-top5">
 
                                                         <div role="tabpanel" class="design-style-img tab-pane active" id="tab_style_1-img">
                                                             <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317953/project_details/style_board_b_w.jpg" alt="b_w">
@@ -200,7 +231,7 @@
                                     </div>
                                 </div>
 
-                                <div role="tabpanel" class="tab-pane" id="finishes">
+                                <!--<div role="tabpanel" class="tab-pane" id="finishes">
                                     <div class="finishes-wrapper">
                                         <div class="f-item">
                                             <div class="row">
@@ -243,6 +274,191 @@
                                                             <label id="finish-type-label" class="finishes-label"> <%= fintyp %> </label>
                                                         </div>
                                                         <% }); %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <div role="tabpanel" class="tab-pane" id="finishes">
+                                    <div class="finishes-wrapper">
+                                        <div class="f-item">
+                                            <div class="row">
+                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                    <div class="tabbable-line finish-slide-nav">
+                                                        <ul class="nav nav-tabs ">
+                                                            <li class="active">
+                                                                <a href="#tab_finish_1" data-toggle="tab">
+                                                                    GLOSSY </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#tab_finish_2" data-toggle="tab">
+                                                                    MATT </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#tab_finish_3" data-toggle="tab">
+                                                                    SUEDE </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane active" id="tab_finish_1">
+                                                                <p>
+                                                                    This finish is available in laminate, foil and
+                                                                    paint. Glossy finish is visually pleasing, and while
+                                                                    the surface looks natural it has a velvet smoothness
+                                                                    to it.
+                                                                </p>
+                                                            </div>
+                                                            <div class="tab-pane" id="tab_finish_2">
+                                                                <p>
+                                                                    While Matt finish is available only on paint, this
+                                                                    finish brings simplicity and a natural tone to the
+                                                                    surface. Not only does it look classy, but it also
+                                                                    gives a finishing touch to the surface.
+                                                                </p>
+                                                            </div>
+                                                            <div class="tab-pane" id="tab_finish_3">
+                                                                <p>
+                                                                    The finish that can be made available in laminate,
+                                                                    foil and paint, and features a smooth texture. This
+                                                                    finish ensures that the interiors look sharp and
+                                                                    classy.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7 col-md-7 col-lg-7">
+                                                    <div class="finishes-foil-box">
+                                                        <div class="row">
+
+                                                            <ul class="list-inline margin0">
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/American_Walnut_14538.jpg' %>" class="finish-thumbnail thumbnail" alt="American_Walnut">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Cardinal_21065_SF.jpg' %>" class="finish-thumbnail thumbnail" alt="Cardinal">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Champagne_21187_MR.jpg' %>" class="finish-thumbnail thumbnail" alt="Champagne">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Emerald__21013.jpg' %>" class="finish-thumbnail thumbnail" alt="Emerald">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Fiesta_Rose_22115.jpg' %>" class="finish-thumbnail thumbnail" alt="Fiesta_Rose">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Hardrock_Maple_10888.jpg' %>" class="finish-thumbnail thumbnail" alt="Hardrock_Maple">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Kingfisher_Blue_21122.jpg' %>" class="finish-thumbnail thumbnail" alt="Kingfisher_Blue">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Mahagony_10699.jpg' %>" class="finish-thumbnail thumbnail" alt="Mahagony">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Parakeet__22017.jpg' %>" class="finish-thumbnail thumbnail" alt="Parakeet">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Pearl_Black_22109.jpg' %>" class="finish-thumbnail thumbnail" alt="Pearl_Black">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Persian_Walnut_14540.jpg' %>" class="finish-thumbnail thumbnail" alt="Persian_Walnut">
+                                                                </li>
+                                                            </ul>
+
+                                                            <label class="finishes-label laminate-top-label"> Laminate </label>
+                                                        </div>
+                                                        <div class="row">
+                                                            <ul class="list-inline margin0">
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Aqua.jpg' %>" class="finish-thumbnail thumbnail" alt="Aqua">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Cafe_Latte.jpg' %>" class="finish-thumbnail thumbnail" alt="Cafe_Latte">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Cerezo_Cherry.jpg' %>" class="finish-thumbnail thumbnail" alt="Cerezo_Cherry">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Copper_Red.jpg' %>" class="finish-thumbnail thumbnail" alt="Copper_Red">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Euro_Wenge1.jpg' %>" class="finish-thumbnail thumbnail" alt="Euro_Wenge1">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Fango.jpg' %>" class="finish-thumbnail thumbnail" alt="Fango">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Gorse.jpg' %>" class="finish-thumbnail thumbnail" alt="Gorse">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/HG_Margherita.jpg' %>" class="finish-thumbnail thumbnail" alt="HG_Margherita">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/HG_Wolfram_Grey.jpg' %>" class="finish-thumbnail thumbnail" alt="HG_Wolfram_Grey">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Italian_Wallnut.jpg' %>" class="finish-thumbnail thumbnail" alt="Italian_Wallnut">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Oceanic_A.jpg' %>" class="finish-thumbnail thumbnail" alt="Oceanic_A">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Poppy.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Oxford_Cherry.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Melanzana_Nat_Trend.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>
+                                                                <!--<li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Tropical_Green.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>-->
+
+                                                            </ul>
+                                                            <label class="finishes-label laminate-label"> Foil </label>
+                                                        </div>
+                                                        <div class="row">
+                                                            <ul class="list-inline margin0">
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/BLACK_OLIVE___RAL6015.jpg' %>" class="finish-thumbnail thumbnail" alt="BLACK_OLIVE">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/LIGHT_IVORY___RAL1015.jpg' %>" class="finish-thumbnail thumbnail" alt="LIGHT_IVORY">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/OPAL_GREEN___RAL_6026.jpg' %>" class="finish-thumbnail thumbnail" alt="OPAL_GREEN">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_1023__mustard.jpg' %>" class="finish-thumbnail thumbnail" alt="mustard">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_3005_Wine_Red.jpg' %>" class="finish-thumbnail thumbnail" alt="Wine_Red">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/Ral_3022.jpg' %>" class="finish-thumbnail thumbnail" alt="Ral">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_5009_Azure_Blue.jpg' %>" class="finish-thumbnail thumbnail" alt="Azure_Blue">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/ral_6000_patina_green.jpg' %>" class="finish-thumbnail thumbnail" alt="patina_green">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_7022_Umbra_Grey.jpg' %>" class="finish-thumbnail thumbnail" alt="Umbra_Grey">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_7044_Silk_Grey.jpg' %>" class="finish-thumbnail thumbnail" alt="Silk_Grey">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/WATER_BLUE___RAL_5021.jpg' %>" class="finish-thumbnail thumbnail" alt="WATER_BLUE">
+                                                            </li>
+                                                        </ul>
+                                                            <label class="finishes-label laminate-label"> Pu Paint </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -307,55 +523,6 @@
             </div>
         </div>
         <!-- Product Quality Details -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="card related-card">
-                        <ul class="nav nav-tabs nav-justified" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#related-image" aria-controls="related-image" role="tab" data-toggle="tab"> Related Images </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="related-image">
-                                <div class="wrap well">
-                                    <div class="row">
-
-                                        <div class="left carousel-control col-xs-1" style="z-index:1999;">
-                                            <button class="btn prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
-                                            </button>
-                                        </div>
-
-                                        <div id="forcecentered" class="frame col-xs-10 carousel-inner" style="overflow: hidden;">
-                                            <% if(typeof(product.images) !== 'undefined'){ %>
-                                            <ul class="clearfix slidee"
-                                                style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
-                                                <% _.each(product.images, function(image){ %>
-                                                <li style="width:185px;">
-                                                    <img
-                                                            src="<%= imgBase + 'c_fill,h_200,w_250/' + image %>"
-                                                            width="100%"/>
-                                                </li>
-                                                <% }); %>
-                                            </ul>
-                                            <% } %>
-                                        </div>
-
-                                        <div class="right carousel-control col-xs-1" style="padding: 6px 0px;">
-                                            <button class="btn next"><i class="pe-7s-angle-right font-size30"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--<div role="tabpanel" class="tab-pane active" id="related-collection">
-
-                            </div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Product Related Images -->
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">

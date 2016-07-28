@@ -29,22 +29,25 @@
     height:750px;
 }
 .open-wardrobe-section p{
-    font-size: 18px;
-    margin: -20px 40px 30px;
+    font-size: 16px;
+    margin: -20px 0px 25px;
+    line-height: 140%;
 }
-
 .ergonomics-heading {
-    margin: 20px 0px 10px;
+    margin: 15px 10px 0px;
     font-weight: 300;
+    color: #707375;
 }
 .ergonomics-wrapper p {
-    font-size: 18px;
-    margin: -20px 40px 30px;
+    font-size: 16px;
+    margin: -20px 10px 30px;
+    line-height: 140%;
 }
 
 .kyw-slider-heading{
     margin: 20px 0px 10px;
     font-weight: 300;
+    color: #000000;
 }
 #kyw-slider-carousel .carousel-inner{
     margin-top: 0px !important;
@@ -53,7 +56,7 @@
     left: auto;
     right: 5%;
     width: 30%;
-    color: #000;
+    color: #333;
     bottom: 100px;
     text-shadow: 0px 0px 0px #fff;
 }
@@ -61,7 +64,7 @@
     left: 25%;
     right: 5%;
     width: 30%;
-    color: #000;
+    color: #333;
     bottom: 100px;
     text-shadow: 0px 0px 0px #fff;
     top: 0%;
@@ -70,7 +73,7 @@
     left: 25%;
     right: 5%;
     width: 30%;
-    color: #000;
+    color: #333;
     bottom: 100px;
     text-shadow: 0px 0px 0px #fff;
     top: 0%;
@@ -90,7 +93,11 @@
     height: 12px;
     background-color: #949494;
 }
-
+.kyw-slider-carousel p{
+    font-size: 16px;
+    line-height: 140%;
+    margin-top: 25px;
+}
 .kyw-wardrobe-type{
     padding: 20px 30px;
 }
@@ -116,16 +123,66 @@
     text-shadow: none;
 }
 .interior-heading{
-    margin: 20px 10px 20px;
+    margin: 25px 10px 15px;
     font-weight: 300;
+    color: #707375;
+}
+#kyw-interior-slider .carousel-inner{
+    margin-top: 0px !important;
+}
+#kyw-interior-slider .carousel-caption {
+    left: auto;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+}
+#kyw-interior-slider .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 0%;
+}
+#kyw-interior-slider .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 0%;
+}
+#kyw-interior-slider .carousel-indicators {
+    bottom: 15px;
+}
+#kyw-interior-slider  .carousel-indicators li{
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #222222;
+}
+#kyw-interior-slider  .carousel-indicators .active {
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: #949494;
+}
+.interior-section .carousel-caption{
+    padding:0px;
+    width: 50%;
 }
 
 .dimensions-head{
-    margin: 20px 10px 20px;
+    margin: 25px 10px 20px;
     font-weight: 300;
+    color: #707375;
 }
 .kyw-dimensions-details{
-    margin: 10px 90px;
+    margin: 10px 0px 10px;
 }
 
 .kyw-material{
@@ -176,6 +233,7 @@
 .finishes-heading {
     margin: 110px 10px 95px;
     font-weight: 300;
+    color: #707375;
 }
 
 .kyw-finishes-type-heading {
@@ -186,11 +244,16 @@
 .kyw-finishes-type-section{
     position: relative;
 }
+.kyw-material-content-tab,
+.kyw-wardrobe-content-tab,
 .kyw-finishes-type-content-tab{
     display: block;
     position: absolute;
     z-index: 999;
     top: 0px;
+}
+.finishes-type-container{
+    width: 100%;
 }
 
 .kyw-finishes-type-section .matte{
@@ -232,18 +295,18 @@
 .accessories-heading{
     margin: 10px 10px 0px;
     font-weight: 300;
-    color: #333333;
+    color: #707375;
 }
 .handle-heading{
     margin: 40px 10px 20px;
     font-weight: 300;
-    color: #333333;
+    color: #707375;
 }
 .kyw-handle-card{
     padding:20px 30px;
 }
 
-.color-3 .container {
+.accessories-container .container {
 	background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469135703/kyk/usp/PG_3.png") no-repeat 50% 50%;
 	min-height: 500px;
 	width:100%;
@@ -253,11 +316,29 @@
 	min-height: 500px;
 	width:100%;
 }
-
+.hardware-section-img{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 700px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
 .content {
 	padding: 0 1em;
 	margin: 0 auto;
 	text-align: center;
+	top: 0px !important;
 }
 
 .dummy-image {
@@ -270,8 +351,9 @@
 	margin: 0 auto;
 	font-weight: 300;
 }
-
-@import url(https://fonts.googleapis.com/css?family=Gochi+Hand);
+.tooltip-content{
+    padding: 0px;
+}
 .tooltip {
 	position: absolute!important;
 	z-index: 999!important;
@@ -281,6 +363,27 @@
 	opacity: 2;
 }
 
+.g-lift{
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
+}
+.t-lift{
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
+}
+.h-lift{
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    height: 60px;
+    font-size: 14px;
+}
 /* Trigger item */
 
 .tooltip-item {
@@ -291,6 +394,7 @@
 	margin: -15px 0 0 -15px;
 	position: absolute;
 	border-radius: 50%;
+	z-index: 999;
 	border: 2px solid #e35583;
 	-webkit-animation: pulse 0.6s infinite alternate;
 	animation: pulse 0.6s infinite alternate;
@@ -334,20 +438,17 @@
 
 .tooltip-content {
 	position: absolute;
-	/*background: #e35583;*/
 	z-index: 9999;
 	width: 200px;
 	bottom: 50%;
 	margin-bottom: -1em;
-	padding: 20px;
-	/*border-radius: 20px;*/
+	padding: 0px;
 	font-size: 1.1em;
 	text-align: center;
 	color: #fff;
 	opacity: 0;
 	cursor: default;
 	pointer-events: none;
-	font-family: 'Gochi Hand', cursive;
 	-webkit-font-smoothing: antialiased;
 	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
 	transition: opacity 0.3s, transform 0.3s;
@@ -355,6 +456,7 @@
 
 .tooltip-west .tooltip-content {
 	left: 4em;
+	z-index: 9999;
 	-webkit-transform-origin: -2em 50%;
 	transform-origin: -2em 50%;
 	-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);
@@ -363,6 +465,7 @@
 
 .tooltip-east .tooltip-content {
 	right: 4em;
+	z-index: 9999;
 	-webkit-transform-origin: calc(100% + 2em) 50%;
 	transform-origin: calc(100% + 2em) 50%;
 	-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,-30deg);
@@ -371,6 +474,7 @@
 
 .tooltip:hover .tooltip-content {
 	opacity: 1;
+	z-index: 9999;
 	-webkit-transform: translate3d(0,50%,0) rotate3d(0,0,0,0);
 	transform: translate3d(0,50%,0) rotate3d(0,0,0,0);
 	pointer-events: auto;
@@ -417,7 +521,7 @@
 .kyw-handle-card,
 .kyw-wardrobe-card,
 .kyw-dimensions-card{
-    margin: 30px 0px 10px;
+    margin: 15px 10px 15px;
 }
 .kyw-finishes-card{
     margin: 60px 0px 40px;
@@ -463,16 +567,19 @@
 .kyw-dimensions-card .nav-tabs.nav-justified>.active>a:hover,
 .kyw-dimensions-card .nav-tabs.nav-justified>.active>a:focus{
     border: 0px solid #ddd;
+    background: transparent;
 }
 .kyw-finishes-card .nav-tabs.nav-justified>.active>a,
 .kyw-finishes-card .nav-tabs.nav-justified>.active>a:hover,
 .kyw-finishes-card .nav-tabs.nav-justified>.active>a:focus{
     border: 0px solid #ddd;
+    background: transparent;
 }
 .kyw-finishes-type-card .nav-tabs.nav-justified>.active>a,
 .kyw-finishes-type-card .nav-tabs.nav-justified>.active>a:hover,
 .kyw-finishes-type-card .nav-tabs.nav-justified>.active>a:focus{
     border: 0px solid #ddd;
+    background: transparent;
 }
 
 
@@ -546,41 +653,55 @@
 /* Media */
 
 @media (max-width: 480px) {
-    .open-wardrobe-section p {
-        font-size: 12px;
-        margin: 0px 10px 15px;
-    }
-    .ergonomics-heading {
-        font-size: 20px;
-        margin: 10px 0px 0px;
-    }
-    .ergonomics-wrapper p {
-    font-size: 12px;
-    margin: 0px 10px 15px;
-    }
     #kyw-slider-carousel .carousel-caption {
         left: auto;
         right: auto;
         width: 90%;
         bottom: 50px;
     }
+    #kyw-interior-slider .carousel-caption {
+         left: auto;
+         right: auto;
+         width: 90%;
+         bottom: 50px;
+    }
     .kyw-dimensions-details{
         margin: 10px 10px;
     }
+    .handle-heading{
+        margin: 10px 0px 0px;
+    }
+    .kyw-handle-card{
+        padding:10px 10px;
+    }
+    .kyw-handle-card,
+    .kyw-wardrobe-card,
+    .kyw-dimensions-card{
+        margin: 15px 0px 10px;
+    }
+    .interior-section .carousel-caption{
+        padding:0px;
+        width: 100%;
+    }
+    .kyw-finishes-type-content-tab{
+        top: 0px;
+        width: 100%;
+        color: #ffffff;
+    }
+    .kyw-finishes-type-heading{
+        margin: 15px 10px;
+    }
+
 }
 
 @media (max-width: 768px) {
-    .open-wardrobe-section p {
-        font-size: 14px;
-        margin: 0px 10px 15px;
+    #kyw-slider-carousel .carousel-caption {
+        bottom: 50px;
     }
-    .ergonomics-heading {
-        font-size: 20px;
-        margin: 10px 0px 0px;
-    }
-    .ergonomics-wrapper p {
-        font-size: 14px;
-        margin: 0px 10px 15px;
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
     }
     #kyw-slider-carousel .carousel-caption {
         bottom: 50px;
@@ -590,13 +711,60 @@
         right: auto;
         width: 90%;
     }
+    #kyw-interior-slider .carousel-caption {
+        bottom: 50px;
+    }
+    #kyw-interior-slider .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+    }
+    #kyw-interior-slider .carousel-caption {
+        bottom: 50px;
+    }
+    #kyw-interior-slider .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+    }
     .kyw-dimensions-details{
         margin: 10px 10px;
+    }
+    .handle-heading{
+        margin: 10px 0px 0px;
+    }
+    .kyw-handle-card{
+        padding:10px 10px;
+    }
+    .kyw-handle-card,
+    .kyw-wardrobe-card,
+    .kyw-dimensions-card{
+        margin: 15px 0px 10px;
+    }
+    .interior-section .carousel-caption{
+        padding:0px;
+        width: 100%;
+    }
+    .kyw-finishes-type-content-tab{
+        top: 0px;
+        width: 100%;
+        color: #ffffff;
+    }
+    .kyw-finishes-type-heading{
+        margin: 15px 10px;
     }
 }
 
 @media screen and (min-width: 768px)
     #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: 5%;
+        padding-bottom: 30px;
+        width: 30%;
+        color: #000;
+        text-shadow: 0px 0px 0px #fff;
+    }
+    #kyw-interior-slider .carousel-caption {
         left: auto;
         right: 5%;
         padding-bottom: 30px;
