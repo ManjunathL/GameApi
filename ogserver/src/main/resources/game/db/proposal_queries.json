@@ -210,7 +210,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select extCode, code, width, depth, height, description, imagePath from module_master",
+      "query": "select code, width, depth, height, description, imagePath from module_master",
       "params": []
     },
 
@@ -333,14 +333,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, makeType, make, imagePath, price, uom from acc_hw_master where type = 'A'",
+      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, makeType, make, imagePath, price, uom from acc_hw_master where type = 'H'",
+      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
       "params": []
     },
 
@@ -461,14 +461,14 @@
     {
       "id": "module_acc_pack.select",
       "type": "select",
-      "query": "select apcode, extcode, mgcode from module_acc_pack",
+      "query": "select apcode, mgcode from module_acc_pack",
       "params": []
     },
 
     {
       "id": "acc_addon_map.select",
       "type": "select",
-      "query": "select accode, addoncode from acc_addon_map",
+      "query": "select apcode, addoncode from accpack_addon_map",
       "params": []
     },
 
@@ -482,7 +482,7 @@
     {
       "id": "addons.selectbyaccpack",
       "type": "select",
-      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from acc_addon_map where accode in (select code from acc_pack_components where type = 'A' and apcode = ?))",
+      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from accpack_addon_map where apcode = ?)",
       "params": ["apCode"]
     }
 

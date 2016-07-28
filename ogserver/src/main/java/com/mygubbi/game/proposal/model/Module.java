@@ -9,7 +9,6 @@ public class Module
 {
     private static final double SQMM2SQFT = 0.0000107639;
 
-    private static final String EXTCODE = "extCode";
     private static final String CODE = "code";
     private static final String WIDTH = "width";
     private static final String DEPTH = "depth";
@@ -18,7 +17,6 @@ public class Module
     private static final String IMAGE_PATH = "imagePath";
 
     private String code;
-    private String extCode;
     private String description;
     private String imagePath;
     private int height;
@@ -32,7 +30,6 @@ public class Module
 
     public Module(JsonObject json)
     {
-        this.setExtCode(json.getString(EXTCODE));
         this.setCode(json.getString(CODE));
         this.setHeight(json.getInteger(HEIGHT));
         this.setDepth(json.getInteger(DEPTH));
@@ -44,11 +41,6 @@ public class Module
     public String getCode()
     {
         return code;
-    }
-
-    public String getExtCode()
-    {
-        return this.extCode;
     }
 
     public void setCode(String code)
@@ -99,11 +91,6 @@ public class Module
     public String getDimension()
     {
         return this.getWidth() + " X " + this.getDepth() + " X " + this.getHeight();
-    }
-
-    public void setExtCode(String extCode)
-    {
-        this.extCode = extCode;
     }
 
     public String getImagePath()

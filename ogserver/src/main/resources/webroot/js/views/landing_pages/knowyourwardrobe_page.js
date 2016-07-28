@@ -40,7 +40,49 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
-        }
+        },
+        events: {
+         "click .handleslnk": "changeHandletab",
+         "click .wardrobe-lnk": "changeWardHandletab",
+         "click .material-lnk": "changeMaterialtab"
+        },
+        changeHandletab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".handle-img").removeClass('active');
+            $(".handle-cnt").removeClass('active');
+
+            $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
+
+            return this;
+        },
+        changeWardHandletab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".wardrobe-img").removeClass('active');
+             $(".wardrobe-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
+
+            console.log(id);
+            return this;
+        },
+         changeMaterialtab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".material-img").removeClass('active');
+             $(".material-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
+
+            console.log(id);
+            return this;
+         }
     });
+
     return KnowYourWardrobePageVIew;
 });

@@ -70,7 +70,7 @@ public class HardwareSheetCreator implements ExcelCellProcessor
 
     }
 
-    private int fillComponents(List<AssembledProductInQuote.ModuleAccessory> components, int currentRow, String defaultMessage)
+    private int fillComponents(List<AssembledProductInQuote.ModulePart> components, int currentRow, String defaultMessage)
     {
         CellStyle style = this.hardwareSheet.getRow(currentRow + 1).getRowStyle();
 
@@ -82,7 +82,7 @@ public class HardwareSheetCreator implements ExcelCellProcessor
         }
 
         int seq = 1;
-        for (AssembledProductInQuote.ModuleAccessory component : components)
+        for (AssembledProductInQuote.ModulePart component : components)
         {
             currentRow++;
             this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(seq), component.title, component.make,

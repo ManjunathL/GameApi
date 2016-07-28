@@ -128,8 +128,7 @@ CREATE TABLE proposal_addon(
 DROP TABLE IF EXISTS module_master;
 CREATE TABLE module_master(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  extCode varchar(16) NOT NULL,
-  code varchar(16) NOT NULL,
+  code varchar(32) NOT NULL,
   description varchar(255) NOT NULL,
   imagePath varchar(255) NOT NULL,
   width INTEGER NOT NULL DEFAULT 0,
@@ -144,7 +143,7 @@ CREATE TABLE module_master(
 DROP TABLE IF EXISTS module_components;
 CREATE TABLE module_components(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  modulecode varchar(16) NOT NULL,
+  modulecode varchar(32) NOT NULL,
   comptype char(1) NOT NULL, -- C - Carcass, S- Shutter, A - Accessory, H- Hardware
   compcode varchar(32) NOT NULL, -- Component code - Carcass, Shutter, Hardware, Accessory
   quantity DECIMAL(10,2) NOT NULL DEFAULT 0.0,
@@ -243,6 +242,7 @@ CREATE TABLE acc_hw_master(
   catalogCode varchar(16) NOT NULL,
   title varchar(255) NOT NULL,
   make varchar(16) NOT NULL,
+  category varchar(32) Null,
   imagePath varchar(255) NULL,
   uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
   cp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
@@ -306,22 +306,21 @@ DROP TABLE IF EXISTS module_acc_pack;
 CREATE TABLE module_acc_pack(
   id INTEGER NOT NULL AUTO_INCREMENT,
   apcode varchar(16) NOT NULL,
-  extcode varchar(16) NOT NULL,
-  mgcode varchar(16) NOT NULL,
+  mgcode varchar(32) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (mgcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module accessory pack';
 
 
-DROP TABLE IF EXISTS acc_addon_map;
-CREATE TABLE acc_addon_map(
+DROP TABLE IF EXISTS accpack_addon_map;
+CREATE TABLE accpack_addon_map(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  accode varchar(16) NOT NULL,
+  apcode varchar(16) NOT NULL,
   addoncode varchar(16) NOT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  KEY code_key (accode)
+  KEY code_key (apcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='addon accessory map';
 
 

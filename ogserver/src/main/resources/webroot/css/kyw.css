@@ -1,0 +1,606 @@
+.full-screen {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.kyw-banner-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469097054/kyw/PG_1.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 360px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
+.open-wardrobe-section{
+    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
+}
+.open-wardrobe-inter-section{
+    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
+    height:750px;
+}
+.open-wardrobe-section p{
+    font-size: 18px;
+    margin: -20px 40px 30px;
+}
+
+.ergonomics-heading {
+    margin: 20px 0px 10px;
+    font-weight: 300;
+}
+.ergonomics-wrapper p {
+    font-size: 18px;
+    margin: -20px 40px 30px;
+}
+
+.kyw-slider-heading{
+    margin: 20px 0px 10px;
+    font-weight: 300;
+}
+#kyw-slider-carousel .carousel-inner{
+    margin-top: 0px !important;
+}
+#kyw-slider-carousel .carousel-caption {
+    left: auto;
+    right: 5%;
+    width: 30%;
+    color: #000;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+}
+#kyw-slider-carousel .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #000;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 0%;
+}
+#kyw-interior-slider .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #000;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 0%;
+}
+#kyw-slider-carousel .carousel-indicators {
+    bottom: 30px;
+}
+#kyw-slider-carousel  .carousel-indicators li{
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #222222;
+}
+#kyw-slider-carousel  .carousel-indicators .active {
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: #949494;
+}
+
+.kyw-wardrobe-type{
+    padding: 20px 30px;
+}
+.wardrobe-head{
+    margin: 70px 10px 20px;
+    font-weight: 300;
+}
+.kyw-wardrobe-details{
+    padding: 20px 0px 10px;
+}
+.kyw-wardrobe-card {
+    margin-top: 60px;
+}
+.kyw-wardrobe-card h5{
+    font-weight:500!important;
+}
+
+.interior-section{
+    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern_color.png");
+}
+.interior-section .interior-para{
+    color: #333333;
+    text-shadow: none;
+}
+.interior-heading{
+    margin: 20px 10px 20px;
+    font-weight: 300;
+}
+
+.dimensions-head{
+    margin: 20px 10px 20px;
+    font-weight: 300;
+}
+.kyw-dimensions-details{
+    margin: 10px 90px;
+}
+
+.kyw-material{
+    background: #beb9b6;
+    min-height: 450px;
+}
+.kyw-material-img{
+    padding: 90px 50px 20px;
+}
+.kyw-material-details{
+    margin: 20px 0px;
+}
+.kyw-dimensions-card-tab{
+    margin: 10px 40px;
+}
+
+.kyw-finishes-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260942/kyw/PG_10_1_BACKGROUND.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 750px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #444444;
+}
+
+.kyw-finishes-section .laminate{
+    border-bottom:7px solid #5a777b;
+}
+.kyw-finishes-section .pupaint{
+    border-bottom:7px solid #abeeeb;
+}
+.kyw-finishes-section .pvcfoil{
+    border-bottom:7px solid #555555;
+}
+.kyw-finishes-details {
+    margin: 20px 40px;
+}
+.finishes-heading {
+    margin: 110px 10px 95px;
+    font-weight: 300;
+}
+
+.kyw-finishes-type-heading {
+    margin: 70px 10px 85px;
+    font-weight: 300;
+    color: #ffffff;
+}
+.kyw-finishes-type-section{
+    position: relative;
+}
+.kyw-finishes-type-content-tab{
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+}
+
+.kyw-finishes-type-section .matte{
+    border-bottom:7px solid #464646;
+}
+.kyw-finishes-type-section .suede{
+    border-bottom:7px solid #a1a1a1;
+}
+.kyw-finishes-type-section .highgloss{
+    border-bottom:7px solid #cccccc;
+}
+.kyw-finishes-type-section .acrylis{
+    border-bottom:7px solid #ffffff;
+}
+
+.shutter-designs-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260919/kyw/PG_12.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
+.shutter-designs-heading{
+    margin: 30px 10px 30px;
+    font-weight: 300;
+    color: #ffffff;
+}
+.accessories-heading{
+    margin: 10px 10px 0px;
+    font-weight: 300;
+    color: #333333;
+}
+.handle-heading{
+    margin: 40px 10px 20px;
+    font-weight: 300;
+    color: #333333;
+}
+.kyw-handle-card{
+    padding:20px 30px;
+}
+
+.color-3 .container {
+	background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469135703/kyk/usp/PG_3.png") no-repeat 50% 50%;
+	min-height: 500px;
+	width:100%;
+}
+.color-4 .container {
+	background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg") no-repeat 50% 50%;
+	min-height: 500px;
+	width:100%;
+}
+
+.content {
+	padding: 0 1em;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.dummy-image {
+	position: relative;
+}
+.dummy {
+	text-align: left;
+	padding: 1em;
+	min-height: 300px;
+	margin: 0 auto;
+	font-weight: 300;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Gochi+Hand);
+.tooltip {
+	position: absolute!important;
+	z-index: 999!important;
+	width: 2.2em!important;
+	height: 2.2em!important;
+	cursor: pointer!important;
+	opacity: 2;
+}
+
+/* Trigger item */
+
+.tooltip-item {
+	width: 30px;
+	height: 30px;
+	left: 50%;
+	top: 50%;
+	margin: -15px 0 0 -15px;
+	position: absolute;
+	border-radius: 50%;
+	border: 2px solid #e35583;
+	-webkit-animation: pulse 0.6s infinite alternate;
+	animation: pulse 0.6s infinite alternate;
+}
+
+@-webkit-keyframes pulse {
+	from { -webkit-transform: scale3d(0.5,0.5,1); }
+	to { -webkit-transform: scale3d(1,1,1); }
+}
+
+@keyframes pulse {
+	from { -webkit-transform: scale3d(0.5,0.5,1); transform: scale3d(0.5,0.5,1); }
+	to { -webkit-transform: scale3d(1,1,1); transform: scale3d(1,1,1); }
+}
+
+.tooltip:hover .tooltip-item {
+	border-color: #fff;
+}
+
+.tooltip:first-child {
+	top: 20%;
+	left: 20%;
+}
+
+.tooltip:nth-child(2) {
+	top: 50%;
+	left: 10%;
+}
+
+.tooltip:nth-child(3) {
+	top: 40%;
+	left: 50%;
+}
+
+.tooltip:nth-child(4) {
+	top: 70%;
+	left: 70%;
+}
+
+/* Tooltip */
+
+.tooltip-content {
+	position: absolute;
+	/*background: #e35583;*/
+	z-index: 9999;
+	width: 200px;
+	bottom: 50%;
+	margin-bottom: -1em;
+	padding: 20px;
+	/*border-radius: 20px;*/
+	font-size: 1.1em;
+	text-align: center;
+	color: #fff;
+	opacity: 0;
+	cursor: default;
+	pointer-events: none;
+	font-family: 'Gochi Hand', cursive;
+	-webkit-font-smoothing: antialiased;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+.tooltip-west .tooltip-content {
+	left: 4em;
+	-webkit-transform-origin: -2em 50%;
+	transform-origin: -2em 50%;
+	-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);
+	transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);
+}
+
+.tooltip-east .tooltip-content {
+	right: 4em;
+	-webkit-transform-origin: calc(100% + 2em) 50%;
+	transform-origin: calc(100% + 2em) 50%;
+	-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,-30deg);
+	transform: translate3d(0,50%,0) rotate3d(1,1,1,-30deg);
+}
+
+.tooltip:hover .tooltip-content {
+	opacity: 1;
+	-webkit-transform: translate3d(0,50%,0) rotate3d(0,0,0,0);
+	transform: translate3d(0,50%,0) rotate3d(0,0,0,0);
+	pointer-events: auto;
+}
+
+/* Gap "bridge" and arrow */
+
+.tooltip-content::before,
+.tooltip-content::after {
+	content: '';
+	position: absolute;
+}
+
+.tooltip-content::before {
+	height: 100%;
+	width: 3em;
+}
+
+.tooltip-content::after {
+	width: 2em;
+	height: 2em;
+	top: 50%;
+	margin: -1em 0 0;
+	background: url(https://res.cloudinary.com/mygubbi/image/upload/v1469370510/kyk/tooltip2.svg) no-repeat center center;
+	background-size: 100%;
+}
+
+.tooltip-west .tooltip-content::before,
+.tooltip-west .tooltip-content::after {
+	right: 99%; /* because of FF, otherwise we have a gap */
+}
+
+.tooltip-east .tooltip-content::before,
+.tooltip-east .tooltip-content::after {
+	left: 99%; /* because of FF, otherwise we have a gap */
+}
+
+.tooltip-east .tooltip-content::after {
+	-webkit-transform: scale3d(-1,1,1);
+	transform: scale3d(-1,1,1);
+}
+
+/* Card View */
+.kyw-handle-card,
+.kyw-wardrobe-card,
+.kyw-dimensions-card{
+    margin: 30px 0px 10px;
+}
+.kyw-finishes-card{
+    margin: 60px 0px 40px;
+}
+.kyw-handle-card .nav-tabs > li.active,
+.kyw-wardrobe-card .nav-tabs > li.active,
+.kyw-dimensions-card .nav-tabs > li.active{
+    border-bottom: 7px solid #000000;
+}
+.kyw-finishes-card .nav-tabs > li.active{
+    border-bottom: 7px solid #000000;
+}
+.kyw-finishes-section .nav-tabs .laminate.active{
+    border-bottom: 7px solid #1c92a2;
+}
+.kyw-finishes-section .nav-tabs .pupaint.active{
+    border-bottom: 7px solid #abeeeb;
+}
+.kyw-finishes-section .nav-tabs .pvcfoil.active{
+    border-bottom: 7px solid #555555;
+}
+
+.kyw-finishes-type-section .nav-tabs .matte.active{
+    border-bottom:7px solid #464646;
+}
+.kyw-finishes-type-section .nav-tabs .suede.active{
+    border-bottom:7px solid #a1a1a1;
+}
+.kyw-finishes-type-section .nav-tabs .highgloss.active{
+    border-bottom:7px solid #cccccc;
+}
+.kyw-finishes-type-section .nav-tabs .acrylis.active{
+    border-bottom:7px solid #ffffff;
+}
+
+.kyw-handle-card .nav-tabs.nav-justified>.active>a,
+.kyw-handle-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-handle-card .nav-tabs.nav-justified>.active>a:focus,
+.kyw-wardrobe-card .nav-tabs.nav-justified>.active>a,
+.kyw-wardrobe-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-wardrobe-card .nav-tabs.nav-justified>.active>a:focus,
+.kyw-dimensions-card .nav-tabs.nav-justified>.active>a,
+.kyw-dimensions-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-dimensions-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+}
+.kyw-finishes-card .nav-tabs.nav-justified>.active>a,
+.kyw-finishes-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-finishes-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+}
+.kyw-finishes-type-card .nav-tabs.nav-justified>.active>a,
+.kyw-finishes-type-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-finishes-type-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+}
+
+
+@media (min-width: 768px){
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 7px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 7px solid #000;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
+    }
+}
+/* Card View */
+
+/* Media */
+
+@media (max-width: 480px) {
+    .open-wardrobe-section p {
+        font-size: 12px;
+        margin: 0px 10px 15px;
+    }
+    .ergonomics-heading {
+        font-size: 20px;
+        margin: 10px 0px 0px;
+    }
+    .ergonomics-wrapper p {
+    font-size: 12px;
+    margin: 0px 10px 15px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+        bottom: 50px;
+    }
+    .kyw-dimensions-details{
+        margin: 10px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .open-wardrobe-section p {
+        font-size: 14px;
+        margin: 0px 10px 15px;
+    }
+    .ergonomics-heading {
+        font-size: 20px;
+        margin: 10px 0px 0px;
+    }
+    .ergonomics-wrapper p {
+        font-size: 14px;
+        margin: 0px 10px 15px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        bottom: 50px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+    }
+    .kyw-dimensions-details{
+        margin: 10px 10px;
+    }
+}
+
+@media screen and (min-width: 768px)
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: 5%;
+        padding-bottom: 30px;
+        width: 30%;
+        color: #000;
+        text-shadow: 0px 0px 0px #fff;
+    }

@@ -77,17 +77,17 @@ public class DataSheetCreator
         return currentRow;
     }
 
-    private int fillAccessoriesInDataSheet(List<AssembledProductInQuote.ModuleAccessory> accessories, int currentRow)
+    private int fillAccessoriesInDataSheet(List<AssembledProductInQuote.ModulePart> accessories, int currentRow)
     {
         return this.fillAccHwInDataSheet(accessories, currentRow, "Accessories", "No accessories.");
     }
 
-    private int fillHardwareInDataSheet(List<AssembledProductInQuote.ModuleAccessory> hardwares, int currentRow)
+    private int fillHardwareInDataSheet(List<AssembledProductInQuote.ModulePart> hardwares, int currentRow)
     {
         return this.fillAccHwInDataSheet(hardwares, currentRow, "Hardware", "No hardware.");
     }
 
-    private int fillAccHwInDataSheet(List<AssembledProductInQuote.ModuleAccessory> components, int currentRow, String type, String defaultMessage)
+    private int fillAccHwInDataSheet(List<AssembledProductInQuote.ModulePart> components, int currentRow, String type, String defaultMessage)
     {
         this.createTitleRowInDataSheet(currentRow, new String[]{type, "Unit", "Module#", "Title", "Code", "Quantity", "Make"});
 
@@ -98,7 +98,7 @@ public class DataSheetCreator
             return currentRow;
         }
 
-        for (AssembledProductInQuote.ModuleAccessory component : components)
+        for (AssembledProductInQuote.ModulePart component : components)
         {
             currentRow++;
             this.createDataRowInDataSheet(currentRow, new String[]{null, component.unit, String.valueOf(component.seq),
