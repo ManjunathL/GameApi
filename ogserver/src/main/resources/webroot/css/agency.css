@@ -6749,10 +6749,11 @@ a.tab-ico {
         margin: 0 auto;
         top: 313px;
     }
+    .remarketing .carousel-caption {
+        width: 51%;
+    }
     .carousel-caption {
         margin: 0 auto;
-        width: 51%;
-        padding-top:51px;
         -webkit-box-align: center;
         -moz-box-align: center;
         -ms-flex-align: center;
