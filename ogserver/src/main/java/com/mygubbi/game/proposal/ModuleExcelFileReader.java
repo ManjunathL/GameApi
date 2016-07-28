@@ -96,6 +96,7 @@ public class ModuleExcelFileReader
                 ProductModule module = new ProductModule()
                         .setUnit(unit)
                         .setExternalCode(moduleCode)
+                        .setMGCode(moduleCode)
                         .setWidth(width)
                         .setHeight(height)
                         .setDepth(depth)
