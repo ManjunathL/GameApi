@@ -45,11 +45,26 @@ public class MasterSheetHandler implements ExcelRowHandler
         int height = getInteger(data[this.indices[HEIGHT]]);
 
         System.out.println("begin;");
-        this.printModuleRow(kdmaxCode, kdmaxCode, description, width, depth, height);
+        kdmaxCode = kdmaxCode.trim();
+        if (kdmaxCode.endsWith("L / R"))
+        {
+            String kdmaxCodeShort = kdmaxCode.substring(0, (kdmaxCode.length() - 5));
+            this.printRecords(data, kdmaxCodeShort + "L", description, width, depth, height);
+            this.printRecords(data, kdmaxCodeShort + "R", description, width, depth, height);
+        }
+        else
+        {
+            this.printRecords(data, kdmaxCode, description, width, depth, height);
+        }
+        System.out.println("commit;");
+    }
+
+    private void printRecords(Object[] data, String kdmaxCode, String description, int width, int depth, int height)
+    {
+        this.printModuleRow(kdmaxCode, description, width, depth, height);
         this.loopForComponents(data, kdmaxCode, this.indices[CARCASS_START], this.indices[CARCASS_END], "C");
         this.loopForComponents(data, kdmaxCode, this.indices[HW_START], this.indices[HW_END], "H");
         this.loopForComponents(data, kdmaxCode, this.indices[FINISH_START], this.indices[FINISH_END], "S");
-        System.out.println("commit;");
     }
 
     private int getInteger(Object value)
@@ -70,7 +85,7 @@ public class MasterSheetHandler implements ExcelRowHandler
         }
     }
 
-    private void printModuleRow(String extCode, String code, String description, int width, int depth, int height)
+    private void printModuleRow(String code, String description, int width, int depth, int height)
     {
         String dimension = width + "x" + depth + "x" + height;
         System.out.println("insert module_master(code, description, imagePath, width, depth, height, dimension) " +

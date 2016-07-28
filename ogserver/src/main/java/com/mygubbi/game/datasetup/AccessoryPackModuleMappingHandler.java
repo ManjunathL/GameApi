@@ -26,8 +26,19 @@ public class AccessoryPackModuleMappingHandler implements ExcelRowHandler
         {
             String mgcode = (String) data[i];
             if (StringUtils.isEmpty(mgcode)) continue;
-            String kdmaxcode = (String) data[i+1];
-            this.printRow(accode, kdmaxcode);
+            String kdmaxCode = (String) data[i+1];
+
+            kdmaxCode = kdmaxCode.trim();
+            if (kdmaxCode.endsWith("L / R"))
+            {
+                String kdmaxCodeShort = kdmaxCode.substring(0, (kdmaxCode.length() - 5));
+                this.printRow(accode, kdmaxCodeShort + "L");
+                this.printRow(accode, kdmaxCodeShort + "R");
+            }
+            else
+            {
+                this.printRow(accode, kdmaxCode);
+            }
         }
     }
 
