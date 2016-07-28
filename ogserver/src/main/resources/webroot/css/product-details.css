@@ -211,7 +211,7 @@
     text-align: center;
 }
 .finishes-foil-box{
-    margin: 10%;
+    margin: 6%;
 }
 .finishes-foil{
     margin: 0px;
@@ -227,7 +227,7 @@
     height: 50px;
 }
 .finishes-label{
-    margin: 10px 0px 20px;
+    margin: 0px 0px 20px;
 }
 .related-card .well{
     margin-top: 7px;
@@ -272,13 +272,14 @@
 
 
 img.finish-thumbnail {
-     max-height:30%;
+     /*max-height:30%;*/
      -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
      /* For Safari 3.1 to 6.0 */
      transition: width 1s, height 1s, transform 0.5s;
+     margin-bottom:10px!important;
 }
 img.finish-thumbnail:hover {
-    width:70px;
+    width:50px;
     height:50px;
      -webkit-transform:scale(1.9);
      /* Safari and Chrome */
@@ -290,10 +291,12 @@ img.finish-thumbnail:hover {
      /* Opera */
      transform:scale(1.9);
 }
-
+.list-inline > li{
+    padding:0px !important;
+}
 #mycarousel-appliances .carousel-caption{
     left: auto;
-    right: 5%;
+    right: 0%;
     padding-bottom: 100px;
 }
 #mycarousel-appliances .carousel-caption p{
@@ -314,7 +317,7 @@ img.finish-thumbnail:hover {
 @media screen and (min-width: 768px){
     .accessories-wrapper .carousel-caption {
         left: auto;
-        right: 5%;
+        right: 0%;
         padding-bottom: 8%;
         width: 40%;
     }
