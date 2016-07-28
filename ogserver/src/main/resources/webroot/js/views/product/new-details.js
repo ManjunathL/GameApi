@@ -100,8 +100,6 @@ define([
                         materials.push(model.material);
                         if (model.material == that.product.get('defaultMaterial')) {
                             materialobj[model.material] = {"Desc":model.materialDescription,"Img":model.materialImage};
-                            console.log("-----------------------");
-                            console.log(materialobj);
                         } else {
                             return false;
                         }
@@ -228,7 +226,8 @@ define([
             "click #product_consult": "openConsultPopup",
             "click #close-consult-pop": "closeModal",
             "click li.choose-material": "changeMaterial",
-            "click li.choose-finish": "changeFinish"
+            "click li.choose-finish": "changeFinish",
+            "click li.design-style": "changeDesignStyle"
         },
         toggleShortListProduct: function(e) {
             e.preventDefault();
@@ -384,6 +383,20 @@ define([
 
 
             return this;
+        },
+        changeDesignStyle: function(e) {
+             e.preventDefault();
+             var currentTarget = $(e.currentTarget);
+             var id = $(e.currentTarget).attr('id');
+             $(".design-style-img").removeClass('active');
+             $(".design-style-cnt").removeClass('active');
+             $(".design-style").removeClass('active');
+
+             $("#"+id+"-img").addClass('active');
+             $("#"+id).addClass('active');
+             $("#"+id+"-cnt").addClass('active');
+
+             return this;
         }
     });
     return ProductPage;

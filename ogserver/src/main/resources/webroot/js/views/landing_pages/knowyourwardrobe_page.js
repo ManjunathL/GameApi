@@ -56,32 +56,31 @@ define([
             $("#"+id+"-img").addClass('active');
             $("#"+id+"-content").addClass('active');
 
-            console.log(id);
             return this;
         },
         changeWardHandletab: function(e) {
-                        e.preventDefault();
-                        var currentTarget = $(e.currentTarget);
-                        var id = $(e.currentTarget).attr('id');
-                        $(".wardrobe-img").removeClass('active');
-                         $(".wardrobe-cnt").removeClass('active');
-                            $("#"+id+"-img").addClass('active');
-                        $("#"+id+"-content").addClass('active');
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".wardrobe-img").removeClass('active');
+             $(".wardrobe-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
 
-                        console.log(id);
-                        return this;
+            console.log(id);
+            return this;
         },
          changeMaterialtab: function(e) {
-                                e.preventDefault();
-                                var currentTarget = $(e.currentTarget);
-                                var id = $(e.currentTarget).attr('id');
-                                $(".material-img").removeClass('active');
-                                 $(".material-cnt").removeClass('active');
-                                    $("#"+id+"-img").addClass('active');
-                                $("#"+id+"-content").addClass('active');
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".material-img").removeClass('active');
+             $(".material-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
 
-                                console.log(id);
-                                return this;
+            console.log(id);
+            return this;
          }
     });
 
