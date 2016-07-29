@@ -4,13 +4,10 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.si.excel.ExcelRowHandler;
 
 /**
- * Created by Sunil on 05-05-2016.
+ * Created by Sunil on 28-07-2016.
  */
-public class MasterSheetHandler implements ExcelRowHandler
+public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
 {
-    public static final int[] kitchen_indices = new int[]{1,2,3,4,5,6,7,32,33,60,62,65};
-    public static final int[] wardrobe_indices = new int[]{0,1,2,3,4,5,6,45,46,81,83,88};
-
     private static int MODULE_CODE = 0;
     private static int KDMAX_CODE = 1;
     private static int TITLE = 2;
@@ -25,10 +22,15 @@ public class MasterSheetHandler implements ExcelRowHandler
     private static int FINISH_END= 11;
 
     private int[] indices;
+    private String leftRightSuffix;
 
-    public MasterSheetHandler(int[] indices)
+    protected abstract String getModuleCode(String moduleCode, String kdmaxCode);
+    protected abstract String getModuleCodeWithSuffix(String moduleCode);
+
+    public AbstractMasterSheetHandler(int[] indices, String leftRightSuffix)
     {
         this.indices = indices;
+        this.leftRightSuffix = leftRightSuffix;
     }
 
     @Override
@@ -36,35 +38,37 @@ public class MasterSheetHandler implements ExcelRowHandler
     {
         String moduleCode = (String) data[this.indices[MODULE_CODE]];
         if (StringUtils.isEmpty(moduleCode) || "Module Code".equals(moduleCode)) return;
-
         String kdmaxCode = (String) data[this.indices[KDMAX_CODE]];
-        if (StringUtils.isEmpty(kdmaxCode)) kdmaxCode = moduleCode;
+
+        String moduleCodeToUse = this.getModuleCode(moduleCode, kdmaxCode);
+        if (StringUtils.isEmpty(moduleCodeToUse)) return;
+
         String description = (String) data[this.indices[TITLE]];
         int width = getInteger(data[this.indices[WIDTH]]);
         int depth = getInteger(data[this.indices[DEPTH]]);
         int height = getInteger(data[this.indices[HEIGHT]]);
 
         System.out.println("begin;");
-        kdmaxCode = kdmaxCode.trim();
-        if (kdmaxCode.endsWith("L / R"))
+        if (moduleCodeToUse.endsWith(this.leftRightSuffix))
         {
-            String kdmaxCodeShort = kdmaxCode.substring(0, (kdmaxCode.length() - 5));
-            this.printRecords(data, kdmaxCodeShort + "L", description, width, depth, height);
-            this.printRecords(data, kdmaxCodeShort + "R", description, width, depth, height);
+            String shortModuleCode = moduleCodeToUse.substring(0, (moduleCodeToUse.length() - this.leftRightSuffix.length()));
+            this.printRecords(data, shortModuleCode + "L", description, width, depth, height);
+            this.printRecords(data, shortModuleCode + "R", description, width, depth, height);
         }
         else
         {
-            this.printRecords(data, kdmaxCode, description, width, depth, height);
+            this.printRecords(data, moduleCodeToUse, description, width, depth, height);
         }
         System.out.println("commit;");
     }
 
-    private void printRecords(Object[] data, String kdmaxCode, String description, int width, int depth, int height)
+    private void printRecords(Object[] data, String moduleCode, String description, int width, int depth, int height)
     {
-        this.printModuleRow(kdmaxCode, description, width, depth, height);
-        this.loopForComponents(data, kdmaxCode, this.indices[CARCASS_START], this.indices[CARCASS_END], "C");
-        this.loopForComponents(data, kdmaxCode, this.indices[HW_START], this.indices[HW_END], "H");
-        this.loopForComponents(data, kdmaxCode, this.indices[FINISH_START], this.indices[FINISH_END], "S");
+        String moduleCodeWithSuffix = this.getModuleCodeWithSuffix(moduleCode);
+        this.printModuleRow(moduleCodeWithSuffix, description, width, depth, height);
+        this.loopForComponents(data, moduleCodeWithSuffix, this.indices[CARCASS_START], this.indices[CARCASS_END], "C");
+        this.loopForComponents(data, moduleCodeWithSuffix, this.indices[HW_START], this.indices[HW_END], "H");
+        this.loopForComponents(data, moduleCodeWithSuffix, this.indices[FINISH_START], this.indices[FINISH_END], "S");
     }
 
     private int getInteger(Object value)
@@ -103,5 +107,4 @@ public class MasterSheetHandler implements ExcelRowHandler
     {
         System.out.println("Done");
     }
-
 }
