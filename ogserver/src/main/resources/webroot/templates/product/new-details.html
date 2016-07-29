@@ -80,10 +80,12 @@
                                 <li role="presentation">
                                     <a href="#finishes" aria-controls="finishes" role="tab" data-toggle="tab">  Finishes </a>
                                 </li>
+                                <% if(typeof(product.accessories) != 'undefined' && product.accessories.length != 0){ %>
                                 <li role="presentation">
                                     <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
                                 </li>
-                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
+                                <% } %>
+                                <% if(typeof(product.appliances) != 'undefined' && typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <li role="presentation">
                                     <a href="#appliance" aria-controls="appliance" role="tab" data-toggle="tab"> Appliance </a>
                                 </li>
@@ -112,7 +114,6 @@
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="tab-content design-carousels margin-top5">
-
                                                         <div role="tabpanel" class="design-style-img tab-pane active" id="tab_style_1-img">
                                                             <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317953/project_details/style_board_b_w.jpg" alt="b_w">
                                                         </div>
@@ -197,29 +198,44 @@
                                         <div class="m-item">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <div class="material-carousels">
-                                                        <div class="m-item-img material-img">
-                                                            <% mtrl= custom_product.get('selectedMaterial'); %>
-                                                            <% if(typeof(materialobj[mtrl].Img) != 'undefined'){ %>
-                                                            <img id="material-img-content" class="img-responsive" src="<%= imgBase + '/project_details/' + materialobj[mtrl].Img %>" alt="material">
-                                                            <% } %>
+                                                    <div class="tab-content material-carousels margin-top5">
+                                                        <div role="tabpanel" class="m-item-img material-img tab-pane active" id="tab_material_1-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317950/project_details/mdf.jpg" alt="material">
+                                                        </div>
+                                                        <div role="tabpanel" class="m-item-img material-img tab-pane" id="tab_material_2-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317950/project_details/mdf.jpg" alt="material">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="m-style">
                                                     <div class="tabbable-line material-slide-nav">
-                                                        <ul class="nav nav-tabs">
-                                                            <% _.each (materials, function(mat) { %>
-                                                            <li class="choose-material <%= custom_product.get('selectedMaterial') === mat ? 'active' : ''%>" data-material="<%=mat%>">
-                                                                <a href="#<%= mat %>" data-toggle="tab">
-                                                                    <%= mat %> </a>
+                                                        <ul class="nav nav-tabs ">
+                                                            <li id="tab_material_1" class="tab_material active">
+                                                                <a>
+                                                                    MDF </a>
                                                             </li>
-                                                            <% }); %>
+                                                            <li id="tab_material_2" class="tab_material">
+                                                                <a>
+                                                                    PLY </a>
+                                                            </li>
                                                         </ul>
-                                                        <div id="material-tab-content" class="tab-content">
-                                                            <div class="choose-active tab-pane active" id="<%= custom_product.get('selectedMaterial') %>">
+                                                        <div class="tab-content">
+                                                            <div class="material-cnt tab-pane active" id="tab_material_1-cnt">
                                                                 <p>
-                                                                    <%= materialobj[mtrl].Desc %>
+                                                                    Durable, economical and perfect for practical
+                                                                    storage solutions, MDF can be field, cut and drilled
+                                                                    without damaging the surface.
+                                                                </p>
+                                                            </div>
+                                                            <div class="material-cnt tab-pane" id="tab_material_2-cnt">
+                                                                <p>
+                                                                    Plywood is a strong material which is extremely
+                                                                    durable and economical. Plywood is sheets of wood
+                                                                    that have been pasted together through strong
+                                                                    chemical treatment, thereby making them extremely
+                                                                    sturdy. Plywood is also more economical than solid
+                                                                    wood and they are easy to maintain, as they are
+                                                                    scratch resistant.
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -230,56 +246,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--<div role="tabpanel" class="tab-pane" id="finishes">
-                                    <div class="finishes-wrapper">
-                                        <div class="f-item">
-                                            <div class="row">
-                                                <div class="col-sm-5 col-md-5 col-lg-5">
-                                                    <div class="tabbable-line finish-slide-nav">
-                                                        <ul class="nav nav-tabs ">
-                                                            <% _.each (finishes, function(fin) { %>
-                                                            <li class="choose-finish <%= custom_product.get('selectedFinish') === fin ? 'active' : ''%>" data-finish="<%=fin%>">
-                                                                <a href="#tab_finish_1" data-toggle="tab">
-                                                                    <%= fin %> </a>
-                                                            </li>
-                                                            <% }); %>
-                                                        </ul>
-                                                        <div id="finish-tab-content" class="tab-content">
-                                                            <div class="tab-pane active" id="<%= custom_product.get('selectedFinish') %>">
-                                                                <p>
-                                                                    <%= finishobj[custom_product.get('selectedFinish')].Desc %>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-7 col-md-7 col-lg-7">
-                                                    <div id="finishList" class="finishes-foil-box">
-                                                        <% _.each (finishobj[custom_product.get('selectedFinish')].FinishStyleObj, function(key,fintyp) {
-                                                        %>
-                                                        <div class="row">
-                                                            <ul class="list-inline finishes-foil">
-                                                                <% _.each (key, function(fintypimg) { %>
-                                                                <% if(fintyp == "Laminate"){ %>
-                                                                <li><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475575/project_details/Swatches/Glossy/Laminate/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></li>
-                                                                <% }else if(fintyp == "Foil"){ %>
-                                                                <li><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Foil/BW/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></li>
-
-                                                                <% }else{ %>
-                                                                <li><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468475576/project_details/Swatches/Glossy/Paint/cmono/<%= fintypimg %>" class="finish-thumbnail thumbnail" alt=""></li>
-                                                                <% } %>
-                                                                <% }); %>
-                                                            </ul>
-                                                            <label id="finish-type-label" class="finishes-label"> <%= fintyp %> </label>
-                                                        </div>
-                                                        <% }); %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>-->
                                 <div role="tabpanel" class="tab-pane" id="finishes">
                                     <div class="finishes-wrapper">
                                         <div class="f-item">
@@ -465,6 +431,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <% if(typeof(product.accessories) != 'undefined' && product.accessories.length != 0){ %>
                                 <div role="tabpanel" class="tab-pane" id="accessories">
                                     <div class="accessories-wrapper">
                                         <div id="mycarousel-accessories" class="carousel carousels slide" data-ride="carousels">
@@ -488,7 +455,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
+                                <% } %>
+                                <% if(typeof(product.appliances) != 'undefined' && typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <div role="tabpanel" class="tab-pane" id="appliance">
                                     <div class="appliance-wrapper">
                                         <div id="mycarousel-appliances" class="carousel appliance-carousels slide" data-ride="appliance-carousels">

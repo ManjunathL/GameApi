@@ -83,7 +83,15 @@ define([
             var selectedSubCategory = that.product.get('subcategory');
             var selectedCategory = that.product.get('categoryId');
 
-            that.getRelatedProducts(selectedSubCategory).then(function() {
+            var compiledTemplate = _.template(productPageTemplate);
+            $(that.el).html(compiledTemplate({
+                "product": that.product.toJSON(),
+                'userProfile': userProfData
+            }));
+
+            DetailsHelper.ready(that);
+
+           /* that.getRelatedProducts(selectedSubCategory).then(function() {
 
                 if (!that.custom_product.get('selectedMaterial')) {
                     that.custom_product.set({
@@ -192,7 +200,7 @@ define([
 
                 DetailsHelper.ready(that);
 
-            });
+            });*/
 
         },
         getRelatedProducts: function(selectedSubCategory) {
@@ -225,9 +233,10 @@ define([
         events: {
             "click #product_consult": "openConsultPopup",
             "click #close-consult-pop": "closeModal",
-            "click li.choose-material": "changeMaterial",
-            "click li.choose-finish": "changeFinish",
-            "click li.design-style": "changeDesignStyle"
+            /*"click li.choose-material": "changeMaterial",
+            "click li.choose-finish": "changeFinish",*/
+            "click li.design-style": "changeDesignStyle",
+            "click li.tab_material": "changeMaterialTab"
         },
         toggleShortListProduct: function(e) {
             e.preventDefault();
@@ -268,7 +277,7 @@ define([
         openConsultPopup: function() {
             $('#consultpop').modal('show');
         },
-        changeMaterial: function(event) {
+        /*changeMaterial: function(event) {
             var that = this;
 
             var selectedMaterial = $(event.currentTarget).data("material");
@@ -383,7 +392,7 @@ define([
 
 
             return this;
-        },
+        },*/
         changeDesignStyle: function(e) {
              e.preventDefault();
              var currentTarget = $(e.currentTarget);
@@ -397,7 +406,21 @@ define([
              $("#"+id+"-cnt").addClass('active');
 
              return this;
-        }
+        },
+         changeMaterialTab: function(ev) {
+              ev.preventDefault();
+              var currentTarget = $(ev.currentTarget);
+              var id = $(ev.currentTarget).attr('id');
+              $(".material-img").removeClass('active');
+              $(".material-cnt").removeClass('active');
+              $(".tab_material").removeClass('active');
+
+              $("#"+id+"-img").addClass('active');
+              $("#"+id).addClass('active');
+              $("#"+id+"-cnt").addClass('active');
+
+              return this;
+         }
     });
     return ProductPage;
 });
