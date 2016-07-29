@@ -85,7 +85,7 @@
                                     <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
                                 </li>
                                 <% } %>
-                                <% if(typeof(product.appliances) != 'undefined' && typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
+                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <li role="presentation">
                                     <a href="#appliance" aria-controls="appliance" role="tab" data-toggle="tab"> Appliance </a>
                                 </li>
@@ -200,10 +200,10 @@
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="tab-content material-carousels margin-top5">
                                                         <div role="tabpanel" class="m-item-img material-img tab-pane active" id="tab_material_1-img">
-                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317950/project_details/mdf.jpg" alt="material">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1469778551/project_details/product-detail-page_mdf.jpg" alt="mdf">
                                                         </div>
                                                         <div role="tabpanel" class="m-item-img material-img tab-pane" id="tab_material_2-img">
-                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317950/project_details/mdf.jpg" alt="material">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1469778551/project_details/product-detail-page_PLY.jpg" alt="ply">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -456,7 +456,7 @@
                                     </div>
                                 </div>
                                 <% } %>
-                                <% if(typeof(product.appliances) != 'undefined' && typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
+                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <div role="tabpanel" class="tab-pane" id="appliance">
                                     <div class="appliance-wrapper">
                                         <div id="mycarousel-appliances" class="carousel appliance-carousels slide" data-ride="appliance-carousels">
@@ -468,7 +468,7 @@
                                             </ol>
                                             <!-- Wrapper for slides -->
                                             <div class="carousel-inner" role="listbox">
-                                                <% if(typeof(product.appliances) != 'undefined'){ %>
+                                                <!--<% if(typeof(product.appliances) != 'undefined'){ %>
                                                 <% _.each (product.appliances, function(appliance) { %>
                                                 <div class="item items">
                                                     <img src="<%= imgBase + '/project_details/' + appliance.image %>" alt="First Image">
@@ -477,7 +477,27 @@
                                                     </div>
                                                 </div>
                                                 <% }); %>
-                                                <% } %>
+                                                <% } %>-->
+                                                <div class="carousel-inner" role="listbox">
+                                                    <div class="item items">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app2.jpg" alt="First Image">
+                                                        <div class="carousel-caption">
+                                                            <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item items">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app3.jpg" data-color="firebrick" alt="Second Image">
+                                                        <div class="carousel-caption">
+                                                            <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item items">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/app1.jpg" data-color="violet" alt="Third Image">
+                                                        <div class="carousel-caption">
+                                                            <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -713,7 +733,7 @@
     apitems.height(nHeight);
     apitems.addClass('full-screen');
 
-    var dsitems = $('.dstyle-carousels .dstyle-img');
+    var dsitems = $('.design-carousels .design-style-img');
     dsitems.height(nHeight);
     dsitems.addClass('full-screen');
 
@@ -741,7 +761,7 @@
       $(this).remove();
     });
 
-    $('.dstyle-carousels img').each(function() {
+    $('.design-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({

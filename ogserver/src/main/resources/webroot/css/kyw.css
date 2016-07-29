@@ -666,6 +666,9 @@
 /* Media */
 
 @media (max-width: 480px) {
+    .kyw-wardrobe-details{
+        padding: 5px 0px 10px;
+    }
     #kyw-slider-carousel .carousel-caption {
         left: auto;
         right: auto;
