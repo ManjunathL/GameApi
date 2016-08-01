@@ -1,0 +1,229 @@
+body {
+    overflow-x: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+p.large {
+    font-size: 16px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    text-decoration: none;
+}
+
+a {
+    color: #000;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: #ff3200;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+.img-centered {
+    margin: 0 auto;
+}
+
+.bg-none {
+    background: none !important;
+}
+
+.bg-white {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+}
+
+.bg-color-white {
+    background-color: #ffffff;
+}
+
+.bg-gray {
+    background-color: #CCC;
+}
+
+.bg-light-gray {
+    background-color: #f2f4f4;
+}
+
+.bg-darkest-gray {
+    background-color: #222;
+}
+
+.bg-blue {
+    background-color: #9FB5BF;
+}
+
+.bg-orange-gray {
+    background-color: #ece9da;
+}
+
+.bg-dark-gray {
+    background-color: #808080;
+}
+
+.bg-dark-darkgreen {
+    background-color: #2F4446;
+}
+
+.portfolio-bg-gray {
+    background-color: #fcfcfc;
+    -webkit-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+}
+
+.border-bottom-grey {
+    border-bottom: 1px solid #CCC;
+}
+
+.separator-horizontal {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+/*.navbar{
+   min-height:100px!important;
+}*/
+.margin-top70{
+    margin-top:70px!important;
+}
+
+.font-size9 {
+    font-size: 9px;
+}
+
+.font-size10 {
+    font-size: 10px;
+}
+
+.font-size12 {
+    font-size: 12px !important;
+}
+
+.font-size14 {
+    font-size: 14px !important;
+}
+
+.font-size16 {
+    font-size: 16px !important;
+}
+
+.font-size18 {
+    font-size: 18px;
+}
+
+.font-size20 {
+    font-size: 20px;
+}
+
+.font-size22 {
+    font-size: 22px;
+}
+
+.font-size25 {
+    font-size: 25px;
+}
+
+.font-size30 {
+    font-size: 30px;
+}
+
+.font-size35 {
+    font-size: 35px!important;
+}
+
+.font-size40 {
+    font-size: 40px;
+}
+
+.font-size45 {
+    font-size: 45px!important;
+}
+
+.font-size55 {
+    font-size: 55px;
+}
+
+.font-size60 {
+    font-size: 60px;
+}
+
+.font-size80 {
+     font-size: 80px;
+ }
+
+ .orange-background{
+    color: rgba(241,90,34,1);
+ }
+ .txt-color-white{
+    color: #ffffff!important;
+ }
+ .txt-color-orange{
+    color: rgba(241,90,34,1);
+ }
+
+ .margin0 {
+     margin: 0px !important;
+ }
+ .margin-bottom0 {
+     margin-bottom: 0px !important;
+ }
+
+/* Menu section */
+#nav>li>a {
+ padding: 5px 5px!important;
+ border-right:1px solid #ddd;
+}
+.last-item{
+ border-right:0px solid #ddd!important;
+}
+
+.menu-mygubbi{
+    width:100%;
+    margin: 0px auto;
+}
+.navbar-center{
+    float:none;
+    position:relative;
+    text-align: center;
+}
+.navbar-center li{
+    float:none;
+    text-rendering: optimizelebility;
+    display:inline-block;
+    margin: 0px auto;
+
+}
+.navbar-center li a{
+
+}
+/* Menu section End */
