@@ -182,6 +182,7 @@
 .finish-slide-nav .nav-tabs>li>a:hover,
 .material-slide-nav .nav-tabs>li>a:hover{
       border-color: transparent;
+      cursor:pointer !important;
 }
 .finish-slide-nav .nav>li>a,
 .material-slide-nav .nav>li>a{
