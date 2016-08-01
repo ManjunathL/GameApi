@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonObject;
 public class ProposalHeader extends JsonObject
 {
 
+    public static final String CRMID = "crmId";
     public static final String PROJECT_NAME = "projectName";
     public static final String PROJECT_ADDRESS1 = "paddress1";
     public static final String PROJECT_ADDRESS2 = "paddress2";
@@ -30,6 +31,11 @@ public class ProposalHeader extends JsonObject
     public String folderPath()
     {
         return this.getString(FOLDER_PATH);
+    }
+
+    public String getCrmId()
+    {
+        return this.getString(CRMID);
     }
 
     public int getId()
