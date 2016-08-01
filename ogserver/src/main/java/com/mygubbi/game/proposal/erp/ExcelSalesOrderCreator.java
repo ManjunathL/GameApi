@@ -25,20 +25,25 @@ public class ExcelSalesOrderCreator extends AbstractProposalOutputCreator
 
     public String getOutputFilename()
     {
-        return "salesorder.xlsx";
+        return "salesorder-" + this.quoteData.getProposalHeader().getCrmId() + "-" + this.getAssembledProductInQuote().getTitle() + ".xlsx";
     }
 
     public void create()
+    {
+        AssembledProductInQuote product = this.getAssembledProductInQuote();
+        this.openWorkbook();
+        new SalesOrderSheetCreator(this.workbookManager.getSheetByName("Sheet1"), product, workbookManager.getStyles()).prepare();
+        this.closeWorkbook();
+    }
+
+    private AssembledProductInQuote getAssembledProductInQuote()
     {
         if (this.quoteData.getAssembledProducts().isEmpty())
         {
             throw new RuntimeException("There is no assembled product in the proposal");
         }
 
-        AssembledProductInQuote product = this.quoteData.getAssembledProducts().get(0);
-        this.openWorkbook();
-        new SalesOrderSheetCreator(this.workbookManager.getSheetByName("Sheet1"), product, workbookManager.getStyles()).prepare();
-        this.closeWorkbook();
+        return this.quoteData.getAssembledProducts().get(0);
     }
 
     @Override
