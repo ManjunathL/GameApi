@@ -296,11 +296,11 @@ img.finish-thumbnail:hover {
     padding:0px !important;
 }
 #mycarousel-appliances .carousel-caption{
-    left: 33%;
+    left: 38%;
     right: 10%;
     padding-bottom: 25px;
-    width: 25%;
-    top: 10%;
+    width: 20%;
+    top: 5%;
 }
 #mycarousel-appliances .carousel-caption p{
     color: rgba(0,0,0,0.6);
