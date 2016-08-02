@@ -296,17 +296,19 @@ img.finish-thumbnail:hover {
     padding:0px !important;
 }
 #mycarousel-appliances .carousel-caption{
-    left: 20%;
+    left: 33%;
     right: 10%;
     padding-bottom: 25px;
-    width: 50%;
-    top: 15%;
+    width: 25%;
+    top: 10%;
 }
 #mycarousel-appliances .carousel-caption p{
-    color: #fff;
+    color: rgba(0,0,0,6);
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     text-shadow:none;
+    font-weight: 400!important;
+    line-height: 1.75;
 }
 
 #mycarousel-appliances .carousel-indicators {
