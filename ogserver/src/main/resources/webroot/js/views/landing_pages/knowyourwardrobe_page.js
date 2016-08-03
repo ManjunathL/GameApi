@@ -44,7 +44,20 @@ define([
         events: {
          "click .handleslnk": "changeHandletab",
          "click .wardrobe-lnk": "changeWardHandletab",
-         "click .material-lnk": "changeMaterialtab"
+         "click .material-lnk": "changeMaterialtab",
+         "click .finishes-swatches": "changeSwatchestab"
+        },
+        changeSwatchestab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".swatches-img").removeClass('active');
+            $(".swatches-cnt").removeClass('active');
+
+            $("#"+id+"-img").addClass('active');
+            $("#"+id+"-cnt").addClass('active');
+
+            return this;
         },
         changeHandletab: function(e) {
             e.preventDefault();
