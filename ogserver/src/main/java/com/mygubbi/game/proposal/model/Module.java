@@ -112,21 +112,8 @@ public class Module
         double t1 = 0;
         double t2 = 0;
 
-        if (h > w)
-        {
-            t1 = h;
-            t2 = w;
-        }
-        else
-        {
-            t1 = w;
-            t2 = h;
-        }
-
-        if (d > t2)
-        {
-            t2 = d;
-        }
+        t1=h;
+        t2=w;
 
         return t1 * t2 * SQMM2SQFT;
     }

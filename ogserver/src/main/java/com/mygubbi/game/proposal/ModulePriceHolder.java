@@ -75,8 +75,16 @@ public class ModulePriceHolder
     public void calculateTotalCost(Module mgModule, RateCard labourRateCard, RateCard loadingFactorCard)
     {
         this.moduleArea = mgModule.getLargestAreaOfModuleInSft();
+        LOG.debug("Module area : " + moduleArea );
         this.labourCost = this.moduleArea * labourRateCard.getRate();
+        LOG.info("Labour cost : " + labourCost);
         this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
+        LOG.debug("Carcass cost :" + this.carcassCost);
+        LOG.debug("Shutter cost :" + this.shutterCost);
+        LOG.debug("Hardware cost :" + this.hardwareCost);
+        LOG.debug("Ratecard cost :" + loadingFactorCard.getRate());
+
+        LOG.debug("Woodwork cost :" + woodworkCost);
         this.totalCost = this.woodworkCost + this.accessoryCost;
 
         LOG.info("Accessory cost:" + this.accessoryCost);
