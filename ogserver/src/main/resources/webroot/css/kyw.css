@@ -703,51 +703,6 @@
 
 /* Media */
 
-@media (max-width: 480px) {
-    .kyw-wardrobe-details{
-        padding: 5px 0px 10px;
-    }
-    #kyw-slider-carousel .carousel-caption {
-        left: auto;
-        right: auto;
-        width: 90%;
-        bottom: 50px;
-    }
-    #kyw-interior-slider .carousel-caption {
-         left: auto;
-         right: auto;
-         width: 90%;
-         bottom: 50px;
-    }
-    .kyw-dimensions-details{
-        margin: 10px 10px;
-    }
-    .handle-heading{
-        margin: 10px 0px 0px;
-    }
-    .kyw-handle-card{
-        padding:10px 10px;
-    }
-    .kyw-handle-card,
-    .kyw-wardrobe-card,
-    .kyw-dimensions-card{
-        margin: 15px 0px 10px;
-    }
-    .interior-section .carousel-caption{
-        padding:0px;
-        width: 100%;
-    }
-    .kyw-finishes-type-content-tab{
-        top: 0px;
-        width: 100%;
-        color: #ffffff;
-    }
-    .kyw-finishes-type-heading{
-        margin: 15px 10px;
-    }
-
-}
-
 @media (max-width: 768px) {
     #kyw-slider-carousel .carousel-caption {
         bottom: 50px;
@@ -823,7 +778,70 @@
     }
 }
 
-@media screen and (min-width: 768px)
+@media (max-width: 480px) {
+    .kyw-wardrobe-details{
+        padding: 5px 0px 0px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+        bottom: 50px;
+    }
+    #kyw-interior-slider .carousel-caption {
+         left: auto;
+         right: auto;
+         width: 90%;
+         bottom: 50px;
+    }
+    .kyw-dimensions-details{
+        margin: 10px 10px;
+    }
+    .handle-heading{
+        margin: 0px;
+    }
+    .kyw-handle-card{
+        padding:10px 10px;
+    }
+    .kyw-handle-card,
+    .kyw-wardrobe-card,
+    .kyw-dimensions-card{
+        margin: 0px;
+    }
+    .interior-section .carousel-caption{
+        padding:0px;
+        width: 100%;
+    }
+    .kyw-finishes-type-content-tab{
+        top: 0px;
+        width: 100%;
+        color: #ffffff;
+    }
+    .kyw-finishes-type-heading{
+        margin: 15px 10px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        top: 5%;
+    }
+    .kyw-material-content-tab,
+    .kyw-wardrobe-content-tab,
+    .kyw-finishes-type-content-tab{
+        top: 5%;
+    }
+    .open-wardrobe-section p{
+        margin: 0px;
+    }
+    .ergonomics-wrapper p{
+        margin: 0px 0px 20px;
+    }
+    .kyw-wardrobe-details p {
+        font-size: 14px;
+        line-height: 130%;
+        color: #444444;
+    }
+}
+
+@media screen and (min-width: 768px){
     #kyw-slider-carousel .carousel-caption {
         left: auto;
         right: 5%;
@@ -840,3 +858,4 @@
         color: #000;
         text-shadow: 0px 0px 0px #fff;
     }
+}
