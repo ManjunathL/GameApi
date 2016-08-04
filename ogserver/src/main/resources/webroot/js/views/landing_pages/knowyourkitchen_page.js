@@ -40,7 +40,60 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
-        }
+        },
+        events: {
+         "click .wardrobe-lnk": "changeWardHandletab",
+        "click .material-lnk": "changeMaterialtab",
+        "click .counter-lnk": "changeCountertab",
+        "click .finishes-swatches": "changeSwatchestab"
+        },
+        changeSwatchestab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".swatches-img").removeClass('active');
+            $(".swatches-cnt").removeClass('active');
+
+            $("#"+id+"-img").addClass('active');
+            $("#"+id+"-cnt").addClass('active');
+
+            return this;
+        },
+        changeCountertab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".counter-img").removeClass('active');
+             $(".counter-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-cnt").addClass('active');
+            console.log(id);
+            return this;
+        },
+        changeWardHandletab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".wardrobe-img").removeClass('active');
+             $(".wardrobe-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
+
+            console.log(id);
+            return this;
+        },
+        changeMaterialtab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".material-img").removeClass('active');
+             $(".material-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-content").addClass('active');
+
+            console.log(id);
+            return this;
+         }
     });
     return KnowYourKitchenPageVIew;
 });

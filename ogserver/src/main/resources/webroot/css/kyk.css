@@ -32,7 +32,7 @@
 }
 .kyk-ergonomics-dec{
     text-align: center;
-    margin-top: 85px;
+    margin-top: 30%;
 }
 .accessories-hardware-dec{
     text-align: center;
@@ -66,6 +66,11 @@
     background: #d7d3ca;
     min-height: 380px;
 }
+
+.kyk-swatches-content{
+    margin-top: 30px;
+}
+
 .kyk-finishes-section .laminate{
     border-bottom:7px solid #5a777b;
 }
@@ -89,6 +94,65 @@
 }
 .kyk-handle-section{
    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #333333;
+}
+.kyk-handle-cont{
+    margin: 5%;
+}
+
+.kyw-counter-details{
+    margin: 10px 0px;
+}
+
+.kyk-counter-content{
+    margin: 5%;
+}
+
+.kyk-shutter-cont{
+    margin: 5%;
+}
+.breakfast-box {
+    margin-top: 265px;
+}
+@media (max-width: 768px) {
+    .breakfast-box {
+        margin-top: 10px;
+    }
+    .kyk-ergonomics-dec{
+        margin-top: 10px;
+    }
+
+}
+@media (max-width: 480px) {
+    .breakfast-box {
+        margin-top: 10px;
+    }
+    .kyk-ergonomics-dec{
+        margin-top: 10px;
+    }
+}
+.kyk-splash-card{
+    margin: 0px !important;
+    padding: 0px !important;
+    text-
+}
+
+.kyk-sink-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137361/kyk/sink-_-faucet-.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: 380px;
