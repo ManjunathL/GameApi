@@ -100,4 +100,14 @@ public class AccHwComponent
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "AccHwComponent{" +
+                "code='" + code + '\'' +
+                ", title='" + title + '\'' +
+                ", makeType='" + makeType + '\'' +
+                ", make='" + make + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

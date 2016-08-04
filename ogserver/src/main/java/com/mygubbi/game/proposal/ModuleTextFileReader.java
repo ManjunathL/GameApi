@@ -63,19 +63,16 @@ public class ModuleTextFileReader
                 }
 
                 if (record.length <= 1) continue;
-                String firstCell = record[UNIT_CELL];
-                if ("Worktop".equals(firstCell) || "Accessory".equals(firstCell))
-                {
-                    break;
-                }
 
-                if ("Base unit".equals(firstCell) || "Wall unit".equals(firstCell))
+                String firstCell = record[UNIT_CELL];
+                if ("Base unit".equals(firstCell) || "Wall unit".equals(firstCell)
+                        || "Worktop".equals(firstCell) || "Accessory".equals(firstCell))
                 {
                     unit = firstCell;
                     continue;
                 }
 
-                if (record.length <= 2) continue;
+                if (record.length <= 2 || "Worktop".equals(unit)) continue;
 
                 String name = record[NAME_CELL];
                 String moduleCode = record[KDMAXCODE_CELL];

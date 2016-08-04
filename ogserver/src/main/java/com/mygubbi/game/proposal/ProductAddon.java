@@ -24,6 +24,7 @@ public class ProductAddon extends JsonObject
     private static String AMOUNT = "amount";
     private static String RATE = "rate";
 
+
     public ProductAddon()
     {
 
@@ -98,5 +99,9 @@ public class ProductAddon extends JsonObject
     {
         return this.getString(TITLE);
     }
+
+    public String getProductTypeCode() { return this.getString(PRODUCT_TYPE_CODE);}
+
+    public String getExtendedTitle() { return this.getProductTypeCode() + "-" +this.getTitle();}
 }
 

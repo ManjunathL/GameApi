@@ -435,7 +435,9 @@ define([
             "click .gridshare": "toggleGridShareIcons",
             "click .glyphicon-th": "viewShortGridItem",
             "click .glyphicon-th-large": "viewLargeGridItem",
-            "click .glyphicon-th-list": "viewListItem"
+            "click .glyphicon-th-list": "viewListItem",
+            "click #youtubelnk": "autoPlayYouTubeModal"
+
         },
         toggleShortListItem: function(e) {
 
@@ -518,6 +520,22 @@ define([
             $('h4').css('font-size', '20px').removeClass('product-caption-overflow');
             $('.portfolio-item').removeClass('col-md-4').addClass('col-md-6');
         },
+        autoPlayYouTubeModal: function (ev) {
+                  var that = this;
+                  var theModal = $(ev.currentTarget).data("target"),
+                  videoSRC = $(ev.currentTarget).attr("data-theVideo"),
+
+                  videoSRCauto = videoSRC + "?autoplay=1";
+
+                  $(theModal + ' iframe').attr('src', videoSRCauto);
+                  $(theModal + ' button.close').click(function () {
+                      $(theModal + ' iframe').attr('src', videoSRC);
+                  });
+                  $('.modal').click(function () {
+                      $(theModal + ' iframe').attr('src', videoSRC);
+                  });
+
+                },
         viewListItem: function(e){
             var that = this;
             if (typeof(that.filter.get('viewtype')) !== 'undefined') {

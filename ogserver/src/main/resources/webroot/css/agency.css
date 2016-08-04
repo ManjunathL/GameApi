@@ -6424,24 +6424,24 @@ a.tab-ico {
 /* End Testimonial design for Home page */
 
 /* youtube mygubbi process */
-    .modalDialog {
-    position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 99999;
-    opacity:0;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-    pointer-events: none;
+    /*.modalDialog {
+    position: fixed !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    z-index: 99999 !important;
+    opacity:0 !important;
+    -webkit-transition: opacity 400ms ease-in !important;
+    -moz-transition: opacity 400ms ease-in !important;
+    transition: opacity 400ms ease-in !important;
+    pointer-events: none !important;
     }
     .modalDialog:target {
     opacity:1;
-    pointer-events: auto;
+    pointer-events: auto !important;
     }
     .modalDialog > div {
     width: 400px;
@@ -6474,7 +6474,7 @@ a.tab-ico {
     }
     .close:hover {
     background: #00d9ff;
-    }
+    }*/
 /*End youtube mygubi process */
 
 

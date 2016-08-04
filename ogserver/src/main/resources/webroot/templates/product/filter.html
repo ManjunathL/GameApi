@@ -4,7 +4,7 @@
     <% if(typeof(collection) !== 'undefined'){ %>
     <% _.each(collection, function(product){ %>
 
-    <div class="row portfolio-bg-gray margin-bottom40 portfolio-box overflow-hidden">
+    <div class="row portfolio-bg-gray margin-bottom40 portfolio-box overflow-hidden img-thumbnail-shadow">
         <div class="col-md-7 list-img col-7-img">
             <div class="row margin15-0 position-relative overflow-hidden">
 
@@ -94,10 +94,10 @@
 
     <div class="portfolio">
         <div class="<% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == 'shortgrid')){ %>col-md-4 col-sm-4<% }else{ %>col-md-6 col-sm-6<% } %> portfolio-item">
-            <div class="portfolio-box overflow-hidden">
+            <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
                 <div class="row margin0 position-relative">
                     <a href="/newproduct-details-<%= product.productId %>" class="portfolio-link">
-                        <img width="555px" height="333px" class="img-responsive"
+                        <img width="555px" height="333px" class="img-responsive  thumbnail-img "
                              src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
                                 title="<%= product.name %>" alt="<%= product.name %>"/>
                     </a>
@@ -136,21 +136,27 @@
                     </div>
                 </div>
 
-                <div class="portfolio-caption-bg-gray margin0">
-                    <div class="row">
-                        <h4 class="col-md-8 col-sm-8 col-xs-8 align-left padding0">
+                <div class="text-upper portfolio margin0 ">
+                    <div class="row product-margin-top">
+                        <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0  ">
                             <a href="/newproduct-details-<%= product.productId %>" title="<%= product.name %>" class="grid-heading-col8">
                                 <%= product.name %>
                             </a>
                         </h4>
-                        <h4 class="col-md-4 col-sm4 col-xs-4 align-right padding0">
+                        <h6 class="col-md-12 col-sm-12 col-xs-12 align-center padding0">Starting From</h6>
+                        <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0 margin0 product-margin-bottom">
                             <% if (product.defaultPrice !== '0') { %>
                             <i class="fa fa-inr"></i>
+
                             <%= product.defaultPrice %>/-
                             <% } else { %>
                             Consult for Price
                             <% } %>
                         </h4>
+                        <div id="content">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470299660/gubbi.png" class="ribbon"/>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -160,3 +166,34 @@
     <% }); %>
     <% } %>
 </div>
+
+<style>
+    .thumbnail-img{
+    border: 39px solid #fff;
+    }
+    .img-thumbnail-shadow{
+    box-shadow: 0px 0px 10px 4px #ccc;
+
+    }
+    .text-upper{
+    text-transform: uppercase !important;
+    }
+    #content {
+    position: relative;
+    }
+    #content img {
+    position: absolute;
+    top: 38px;
+    right: 35px;
+    }
+    .product-margin-bottom{
+    margin-bottom: 20px!important;
+    }
+    .product-margin-top{
+    margin-top: -18px;
+    }
+</style>
+
+
+
+

@@ -58,6 +58,19 @@ public class CarcassPanel
         return title;
     }
 
+    @Override
+    public String toString() {
+        return "CarcassPanel{" +
+                "code='" + code + '\'' +
+                ", title='" + title + '\'' +
+                ", length=" + length +
+                ", breadth=" + breadth +
+                ", thickness=" + thickness +
+                ", area=" + area +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
     public CarcassPanel setTitle(String title)
     {
         this.title = title;

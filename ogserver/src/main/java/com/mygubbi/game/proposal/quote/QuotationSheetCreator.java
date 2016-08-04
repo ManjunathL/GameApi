@@ -257,7 +257,7 @@ public class QuotationSheetCreator
         int index = 1;
         for (ProductAddon addon : addOns)
         {
-            this.createRowAndFillData(currentRow, String.valueOf(index), addon.getTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            this.createRowAndFillData(currentRow, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             currentRow++;
             index++;
         }

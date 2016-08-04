@@ -13,7 +13,8 @@
         <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
         <% } %>
     </div>
-    <div class="container-fluid bg-white hidden-xs">
+
+        <div class="container-fluid bg-white hidden-xs">
         <div class="container">
             <div class="row">
                 <ul class="breadcrumb">
@@ -45,6 +46,69 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="container-fluid ">
+
+                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                <% if(filter.selectedCategoryName == 'kitchen'){ %>
+                <section class="collection-banner bg-color-white">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                            <div class="collection-img-right">
+                                <a href="/know-your-kitchen"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/know_your_kitchen.png" alt="know your kitchen">
+                                <h5>Know Your Kitchen</h5></a>
+                                <div class="go-link">
+                                    <a href="/know-your-kitchen"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                            <div class="collection-design-heading">
+                                <h2> KITCHEN DESIGNS </h2>
+                            </div>
+                            <div class="collection-design-icon">
+                                <a href="#" class="" id="youtubelnk" data-toggle="modal" data-target="#videoModal" data-theVideo="https://www.youtube.com/embed/_txE3dw4DaA"><img class="img-center img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470305038/product_collection/video.png"  alt="Null">
+                                     </a>
+
+                                <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <div>
+                                                    <iframe width="100%" height="350" src=""></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                            <div class="collection-img-left">
+                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/treanding_design.png" alt="know your kitchen">
+                                <h5>Trending Designs</h5>
+                                <div class="go-link">
+                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>                <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+<!--
+                <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+-->
+                <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+<!--
+                <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+-->
+                <% } %>
+                <% }else{ %>
+<!--
+                <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+-->
+                <% } %>
     </div>
     <!-- H1 tag heading start -->
     <div class="h1-tag-content container-fluid bg-color-white align-center">
@@ -109,11 +173,11 @@
 
                 <div class="hidden-lg hidden-md col-sm-2 hidden-xs">
                     <div class="row slight-up">
-                        <span class="glyphicon glyphicon-th-list view-select border-right0
+                      <!--  <span class="glyphicon glyphicon-th-list view-select border-right0
                          <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
                         active
                         <% } %>"
-                        ></span><%
+                        ></span>--><%
                         %><span class="glyphicon glyphicon-th-large view-select
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
                         active
@@ -258,7 +322,10 @@
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-3 hidden-sm hidden-xs align-right">
-
+<!--
+  ========================== Sorting dropdown ==================================
+-->
+<!--
                     <span>
                         <a
                                 class="dropdown-toggle color-333 sortby"
@@ -287,11 +354,12 @@
                             </li>
                         </ul>
                     </span>
-                    <span class="glyphicon glyphicon-th-list view-select border-right0
+-->
+                   <!-- <span class="glyphicon glyphicon-th-list view-select border-right0
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
                         active
                         <% } %>"
-                    ></span><%
+                    ></span>--><%
                     %><span class="glyphicon glyphicon-th-large view-select border-right0
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
                         active
@@ -331,10 +399,10 @@
 
     <!-- Filter Menu Popup -->
     <div class="filterpop hidden-lg hidden-md">
-        <div class="row margin0">
+       <!-- <div class="row margin0">
             <h4>Filters</h4>
             <span class="button border1px position-absolute right10per" onclick="removeAllFilters()">Clear All</span>
-        </div>
+        </div>-->
 
         <div class="row margin0 padding20-0">
             <div class="col-sm-4 col-xs-4 separator-vertical">
@@ -477,7 +545,7 @@
 <script>
     $(document).ready(function () {
 
-        var offset = 200;
+        var offset = 400;
         var duration = 500;
         $(window).scroll(function () {
             if ($(this).scrollTop() > offset) {
@@ -936,3 +1004,48 @@
         }
     }
 </script>
+<style>
+    .collection-img-right{
+    float: right;
+    margin: 10px;
+    }
+    .collection-img-left{
+    float: left;
+    margin: 10px;
+    }
+
+    .collection-design-heading {
+    border-bottom: 1px solid #ddd;
+    margin: 10px auto;
+    padding-bottom: 5px;
+    display: inline-block;
+    color: #415159;
+    }
+    .collection-design-heading h2{
+    font-weight: 100;
+    }
+    .collection-img-right h5{
+    margin-bottom: 3px;
+    font-weight: 100;
+    }
+    .collection-img-left h5{
+    margin-bottom: 3px;
+    font-weight: 100;
+    }
+    @media (max-width: 768px) {
+    .collection-img-right{
+    float: none;
+    }
+    .collection-img-left{
+    float: none;
+    }
+    }
+    @media (max-width: 480px) {
+    .collection-img-right{
+    float: none;
+    }
+    .collection-img-left{
+    float: none;
+    }
+    }
+</style>
