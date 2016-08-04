@@ -843,7 +843,6 @@
 
 @media screen and (min-width: 768px){
     #kyw-slider-carousel .carousel-caption {
-        left: auto;
         right: 5%;
         padding-bottom: 30px;
         width: 30%;
