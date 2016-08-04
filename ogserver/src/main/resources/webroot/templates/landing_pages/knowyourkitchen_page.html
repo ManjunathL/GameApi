@@ -730,10 +730,10 @@ interiorItem1.eq(0).addClass('active');
 interiorItem1.height(nHeight);
 interiorItem1.addClass('full-screen');
 
-var materialItem = $('.material-content .material-img');
+//var materialItem = $('.material-content .material-img');
 
-materialItem.height(nHeight);
-materialItem.addClass('full-screen');
+//materialItem.height(nHeight);
+//materialItem.addClass('full-screen');
 
 $('.ward img').each(function() {
     var $src = $(this).attr('src');
@@ -745,14 +745,14 @@ $('.ward img').each(function() {
         $(this).remove();
 });
 
-$('.material-content img').each(function() {
-  var $src = $(this).attr('src');
-  var $color = $(this).attr('data-color');
-  $(this).parent().css({
-    'background-image' : 'url(' + $src + ')',
-    'background-color' : $color
-  });
-  $(this).remove();
-});
+//$('.material-content img').each(function() {
+ // var $src = $(this).attr('src');
+ // var $color = $(this).attr('data-color');
+ // $(this).parent().css({
+  //  'background-image' : 'url(' + $src + ')',
+ //   'background-color' : $color
+ // });
+ // $(this).remove();
+//});
 
 </script>
