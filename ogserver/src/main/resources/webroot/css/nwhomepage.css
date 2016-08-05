@@ -47,6 +47,10 @@ h6 {
     margin: 0;
 }
 
+#bs-example-navbar-collapse-1 .nav li .dropdown-menu li a:hover:before {
+    visibility: hidden;
+}
+
 .img-centered {
     margin: 0 auto;
 }
@@ -380,27 +384,59 @@ h6 {
     left: 35%;
     width: 50%;
 }
-.thought-txt h1{
+.thought-txt h1,
+.premium-home-txt h1{
     text-transform: none!important;
     font-weight: 300!important;
     font-size: 65px!important;
 }
+
+.premium-home-txt {
+    position: absolute;
+    bottom: 0%;
+    text-align: left;
+    color: #fff;
+    /* color: rgb(183, 11, 11); */
+    /* color: rgb(241, 90, 34); */
+    left: 35%;
+    width: 50%;
+    background: rgba(0,0,0,0.6);
+    padding-left: 5%;
+}
+
 /* Service Section End */
 /* Experience Center Section Start */
+
+.experience-section-txt {
+    position: absolute;
+    top: 34%;
+    text-align: left;
+    color: #fff;
+    /* color: rgb(183, 11, 11); */
+    /* color: rgb(241, 90, 34); */
+    left: 25%;
+    width: 50%;
+}
+.experience-section-txt h1{
+    text-transform: none!important;
+    font-weight: 300!important;
+    font-size: 65px!important;
+}
 .address_right_section{
     position:absolute;
     right:0;
     top:0;
     height:100%;
     width:20%;
-    background-color:rgb(241, 90, 34);
+    /*background-color:rgb(241, 90, 34);*/
+    background-color: rgba(241, 90, 34,0.5);
 }
 .address_right_section p{
     padding: 20px;
     color: #fff;
 }
 .location_add{
-    padding: 20px 5px;
+    padding: 15px 5px;
     border-top: 1px solid #ccc;
 }
 .location_icon{
