@@ -136,7 +136,7 @@
 }
 
 .kyk-sink-section{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104483/kyk/Scene_2.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137361/kyk/sink-_-faucet-.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: 380px;
@@ -275,7 +275,7 @@
         display: block;
     }
     .kyk-handle-section{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470396311/kyk/10.jpg");
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
         background-repeat: no-repeat;
         background-position: inherit;
         height: auto;
@@ -294,7 +294,7 @@
         display: block;
     }
     .kyk-handle-section h2{
-        margin-top: 55%;
+        margin-top: 70px;
     }
     .kyk-sink-section{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470395676/kyk/16.jpg");
@@ -316,7 +316,7 @@
         display: block;
     }
     .kyk-sink-section h2{
-        margin-top: 65%;
+        margin-top: 160px;
     }
 }
 
@@ -331,3 +331,4 @@
    display: none !important;
  }
 }
+
