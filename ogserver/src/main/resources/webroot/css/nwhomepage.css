@@ -310,6 +310,9 @@ h6 {
 .padding-bottom15{
     padding-bottom:15px!important;
 }
+.padding-bottom50{
+    padding-bottom:50px!important;
+}
 /* padding section End */
 .position-relative{
     position:relative;
@@ -605,5 +608,8 @@ h6 {
     }
     .font-size35 {
         font-size: 22px!important;
+    }
+    .contact-section {
+        height: 618px!important;
     }
 }
