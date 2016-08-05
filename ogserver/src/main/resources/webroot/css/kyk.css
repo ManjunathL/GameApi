@@ -3,7 +3,7 @@
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470043776/kyk/main_bg.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: 550px;
+    height: 380px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -128,7 +128,44 @@
 .breakfast-box {
     margin-top: 265px;
 }
+
+.kyk-splash-card{
+    margin: 0px !important;
+    padding: 0px !important;
+
+}
+
+.kyk-sink-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137361/kyk/sink-_-faucet-.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #333333;
+}
+/*.desk-img{
+    display: block;
+}
+.mob-img{
+    display: none;
+}*/
 @media (max-width: 768px) {
+    .desk-img{
+        display: none;
+    }
+    .mob-img{
+        display: block;
+    }
     .kyk-box {
         padding: 10px;
     }
@@ -170,6 +207,12 @@
 
 }
 @media (max-width: 480px) {
+    .desk-img{
+        display: none;
+    }
+    .mob-img{
+        display: block;
+    }
     .kyk-box {
         padding: 10px;
     }
@@ -181,20 +224,24 @@
     }
     .accessories-hardware-dec {
         text-align: center;
-        margin-top: 110%;
+        margin-top: auto;
         color: #333333;
     }
+    .accessories-hardware-section-img h2{
+        margin-top: 150px;
+    }
     .kyk-appliances-cont h2{
-        color: #ffffff;
+        color: #333333;
+        text-align: center;
     }
     .kyk-appliances-dec p{
-        color: #ffffff;
+        color: #333333;
     }
     .kyk-banner-bg{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470043776/kyk/main_bg.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
-        height: 320px;
+        height: 160px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
@@ -208,28 +255,79 @@
         text-align: center;
         color: #ffffff;
     }
+    .kyk-appliances-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104463/kyk/1.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 15px 0 15px 0;
+        text-align: center;
+        color: #333333;
+        display: block;
+    }
+    .kyk-handle-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 15px 0 15px 0;
+        text-align: center;
+        color: #333333;
+        display: block;
+    }
+    .kyk-handle-section h2{
+        margin-top: 70px;
+    }
+    .kyk-sink-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470395676/kyk/16.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 15px 0 15px 0;
+        text-align: center;
+        color: #333333;
+        display: block;
+    }
+    .kyk-sink-section h2{
+        margin-top: 160px;
+    }
 }
-.kyk-splash-card{
-    margin: 0px !important;
-    padding: 0px !important;
 
+@media all and (min-width: 768px) {
+ .hidden-desktop {
+   display: none !important;
+ }
 }
 
-.kyk-sink-section{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137361/kyk/sink-_-faucet-.jpg");
-    background-repeat: no-repeat;
-    background-position: center 100%;
-    height: 380px;
-    width: 100%;
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-size: 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    padding: 20px 0 15px 0;
-    text-align: center;
-    color: #333333;
+@media all and (max-width: 767px) {
+ .hidden-mobile {
+   display: none !important;
+ }
 }
