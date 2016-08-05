@@ -162,11 +162,11 @@
         margin-top: 10px;
     }
     .kyk-ergonomics-dec{
-        margin-top: 10px;
+        margin-top: 25%;
     }
     .accessories-hardware-dec {
         text-align: center;
-        margin-top: 110%;
+        margin-top: 100%;
         color: #333333;
     }
     .kyk-appliances-cont h2{
@@ -220,6 +220,9 @@
     .kyk-appliances-dec p{
         color: #333333;
     }
+    .kyk-ergonomics-dec{
+        margin-top: 10px;
+    }
     .kyk-banner-bg{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470043776/kyk/main_bg.jpg");
         background-repeat: no-repeat;
@@ -258,7 +261,7 @@
         display: block;
     }
     .kyk-handle-section{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470396311/kyk/10.jpg");
         background-repeat: no-repeat;
         background-position: inherit;
         height: auto;
@@ -277,7 +280,7 @@
         display: block;
     }
     .kyk-handle-section h2{
-        margin-top: 70px;
+        margin-top: 55%;
     }
     .kyk-sink-section{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470395676/kyk/16.jpg");
@@ -300,6 +303,11 @@
     }
     .kyk-sink-section h2{
         margin-top: 160px;
+    }
+    .accessories-hardware-dec {
+        text-align: center;
+        margin-top: 0;
+        color: #333333;
     }
 }
 
