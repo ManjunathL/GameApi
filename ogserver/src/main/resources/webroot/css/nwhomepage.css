@@ -600,4 +600,10 @@ h6 {
     .menu-sec-height{
         min-height:120px!important;
     }
+    .width40 {
+        width: 100%!important;
+    }
+    .font-size35 {
+        font-size: 22px!important;
+    }
 }
