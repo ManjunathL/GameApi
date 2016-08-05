@@ -153,19 +153,8 @@
     text-align: center;
     color: #333333;
 }
-/*.desk-img{
-    display: block;
-}
-.mob-img{
-    display: none;
-}*/
+
 @media (max-width: 768px) {
-    .desk-img{
-        display: none;
-    }
-    .mob-img{
-        display: block;
-    }
     .kyk-box {
         padding: 10px;
     }
@@ -207,12 +196,6 @@
 
 }
 @media (max-width: 480px) {
-    .desk-img{
-        display: none;
-    }
-    .mob-img{
-        display: block;
-    }
     .kyk-box {
         padding: 10px;
     }
