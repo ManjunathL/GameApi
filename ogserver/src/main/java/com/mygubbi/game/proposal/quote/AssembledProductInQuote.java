@@ -402,6 +402,7 @@ public class AssembledProductInQuote
         public short moduleCount;
         public String title;
         public List<ModuleDimension> moduleDimensions;
+        public double amount=0;
 
         public Unit(int sequence, String title)
         {
@@ -428,6 +429,7 @@ public class AssembledProductInQuote
             {
                 this.moduleDimensions.add(new ModuleDimension(mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight()));
             }
+            this.amount += module.getAmount();
         }
 
         private ModuleDimension getModuleDimension(Module mgModule)

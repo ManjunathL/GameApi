@@ -83,6 +83,7 @@ CREATE TABLE proposal_product(
   createdBy varchar(64) NULL,
   updatedOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   updatedBy varchar(64) NULL,
+  costWoAccessories DOUBLE NULL DEFAULT NULL,
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY proposal_key (proposalId)

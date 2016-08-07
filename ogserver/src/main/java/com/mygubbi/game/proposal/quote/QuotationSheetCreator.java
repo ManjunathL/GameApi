@@ -157,7 +157,6 @@ public class QuotationSheetCreator
 
         this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
 
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, RATE_CELL, RATE_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));
 
         currentRow++;
@@ -194,7 +193,7 @@ public class QuotationSheetCreator
             this.createSubHeadingRow(currentRow,"A."+ ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
 
             currentRow++;
-            this.createRowAndFillData(currentRow, null, "Unit consists of " + unit.moduleCount + " modules as per design provided.");
+            this.createRowAndFillData(currentRow, null, "Unit consists of " + unit.moduleCount + " modules as per design provided.",1.0,unit.amount,0.0);
 
             unitSequence++;
             if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
@@ -234,8 +233,6 @@ public class QuotationSheetCreator
         currentRow++;
         this.createRowAndFillData(currentRow, null, product.getName());
 
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, QUANTITY_CELL, QUANTITY_CELL));
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, RATE_CELL, RATE_CELL));
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
 
         currentRow++;
@@ -261,7 +258,6 @@ public class QuotationSheetCreator
             currentRow++;
             index++;
         }
-        LOG.info("Addons :" + TITLE_CELL);
     }
 
     private void createRowWithMessage(int row, String message)
