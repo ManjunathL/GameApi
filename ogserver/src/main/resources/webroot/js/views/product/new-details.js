@@ -236,6 +236,7 @@ define([
             /*"click li.choose-material": "changeMaterial",
             "click li.choose-finish": "changeFinish",*/
             "click li.design-style": "changeDesignStyle",
+            "click li.acc-img-cnt": "changeAccessory",
             "click li.tab_material": "changeMaterialTab"
         },
         toggleShortListProduct: function(e) {
@@ -393,6 +394,20 @@ define([
 
             return this;
         },*/
+        changeAccessory: function(e) {
+                                    e.preventDefault();
+                                    var currentTarget = $(e.currentTarget);
+                                    var id = $(e.currentTarget).attr('id');
+                                    $(".acc-img").removeClass('active');
+                                    $(".acc-cnt").removeClass('active');
+                                    $(".acc-img-cnt").removeClass('active');
+
+                                    $("#"+id+"-img").addClass('active');
+                                    $("#"+id).addClass('active');
+                                    $("#"+id+"-cnt").addClass('active');
+
+                                    return this;
+          },
         changeDesignStyle: function(e) {
              e.preventDefault();
              var currentTarget = $(e.currentTarget);

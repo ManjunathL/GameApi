@@ -87,9 +87,9 @@ public class ProductModule extends JsonObject
         return this.getString(COLOR_CODE);
     }
 
-    public int getAmount()
+    public double getAmount()
     {
-        return this.getInteger(AMOUNT);
+        return this.getDouble(AMOUNT);
     }
 
     public String getRemarks()
@@ -218,12 +218,6 @@ public class ProductModule extends JsonObject
     public ProductModule setColorCode(String code)
     {
         this.put(COLOR_CODE, code);
-        return this;
-    }
-
-    public ProductModule setAmount(int amount)
-    {
-        this.put(AMOUNT, amount);
         return this;
     }
 

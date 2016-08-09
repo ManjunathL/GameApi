@@ -111,14 +111,27 @@ public class ProposalOutputService extends AbstractVerticle
 
     private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.addon.list", new JsonObject().put("proposalId", proposalHeader.getId())));
+
+        QueryData queryData = null;
+        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
+        LOG.debug("Proposal product :" + paramsJson.toString());
+        if (quoteRequest.hasProductIds())
+        {
+            queryData = new QueryData("proposal.addon.selected.detail", paramsJson.put("addonIds", quoteRequest.getAddonIdsAsText()));
+        }
+        else
+        {
+            queryData = new QueryData("proposal.addon.list", paramsJson);
+        }
+        LOG.debug("Proposal product :" + paramsJson.toString());
+        Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag)
                     {
                         message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Error in fetching Proposal level addons for :" + proposalHeader.getId())));
-                        LOG.error("Proposal level addons not found for id:" + proposalHeader.getId());
+                        LOG.error("Proposal level addons not found for id:" + proposalHeader.getId() + resultData.errorMessage);
                         return;
                     }
 

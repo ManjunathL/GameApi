@@ -3,6 +3,10 @@ package com.mygubbi.game.datasetup;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.si.excel.ExcelRowHandler;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 /**
  * Created by Sunil on 28-07-2016.
  */
@@ -24,13 +28,26 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
     private int[] indices;
     private String leftRightSuffix;
 
+    private PrintStream out;
+
     protected abstract String getModuleCode(String moduleCode, String kdmaxCode);
     protected abstract String getModuleCodeWithSuffix(String moduleCode);
 
     public AbstractMasterSheetHandler(int[] indices, String leftRightSuffix)
     {
+        this(indices, leftRightSuffix, System.out);
+    }
+
+    public AbstractMasterSheetHandler(int[] indices, String leftRightSuffix, String filename) throws Exception
+    {
+        this(indices, leftRightSuffix, new PrintStream(new FileOutputStream(filename)));
+    }
+
+    public AbstractMasterSheetHandler(int[] indices, String leftRightSuffix, PrintStream out)
+    {
         this.indices = indices;
         this.leftRightSuffix = leftRightSuffix;
+        this.out = out;
     }
 
     @Override
@@ -48,7 +65,7 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
         int depth = getInteger(data[this.indices[DEPTH]]);
         int height = getInteger(data[this.indices[HEIGHT]]);
 
-        System.out.println("begin;");
+        this.out.println("begin;");
         if (moduleCodeToUse.endsWith(this.leftRightSuffix))
         {
             String shortModuleCode = moduleCodeToUse.substring(0, (moduleCodeToUse.length() - this.leftRightSuffix.length()));
@@ -59,7 +76,7 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
         {
             this.printRecords(data, moduleCodeToUse, description, width, depth, height);
         }
-        System.out.println("commit;");
+        this.out.println("commit;");
     }
 
     private void printRecords(Object[] data, String moduleCode, String description, int width, int depth, int height)
@@ -92,13 +109,13 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
     private void printModuleRow(String code, String description, int width, int depth, int height)
     {
         String dimension = width + "x" + depth + "x" + height;
-        System.out.println("insert module_master(code, description, imagePath, width, depth, height, dimension) " +
+        this.out.println("insert module_master(code, description, imagePath, width, depth, height, dimension) " +
                 "values ('" + code + "','" + description + "','" + code + ".jpg" + "'," + width + "," + depth + "," + height + ",'" + dimension + "');");
     }
 
     private void printComponentRow(String moduleCode, String compCode, String quantity, String compType)
     {
-        System.out.println("insert module_components(modulecode, comptype, compcode, quantity) " +
+        this.out.println("insert module_components(modulecode, comptype, compcode, quantity) " +
                 "values ('" + moduleCode + "','" + compType + "','" + compCode + "'," + quantity + ");");
     }
 
@@ -106,5 +123,6 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
     public void done()
     {
         System.out.println("Done");
+        this.out.close();
     }
 }
