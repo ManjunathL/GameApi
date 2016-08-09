@@ -5,7 +5,7 @@
 }
 
 .kyk-banner-bg{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470043776/kyk/main_bg.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470743518/kyk/main_bg.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: 420px;
@@ -205,7 +205,7 @@
 
 @media (min-width: 1900px) {
     .kyk-banner-bg{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470043776/kyk/main_bg.jpg");
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470743518/kyk/main_bg.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
         height: 570px;
@@ -312,7 +312,7 @@
         color: #ffffff;
     }
     .kyk-banner-bg{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470043776/kyk/main_bg.jpg");
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470743518/kyk/main_bg.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
         height: 320px;
@@ -375,7 +375,7 @@
         margin-top: 10px;
     }
     .kyk-banner-bg{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470043776/kyk/main_bg.jpg");
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470743518/kyk/main_bg.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
         height: 160px;
