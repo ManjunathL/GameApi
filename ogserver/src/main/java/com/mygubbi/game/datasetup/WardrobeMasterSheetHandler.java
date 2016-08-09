@@ -14,6 +14,11 @@ public class WardrobeMasterSheetHandler extends AbstractMasterSheetHandler
         super(wardrobe_indices, "L/R");
     }
 
+    public WardrobeMasterSheetHandler(String filename) throws Exception
+    {
+        super(wardrobe_indices, "L/R", filename);
+    }
+
 
     @Override
     protected String getModuleCode(String moduleCode, String kdmaxCode)
@@ -25,6 +30,12 @@ public class WardrobeMasterSheetHandler extends AbstractMasterSheetHandler
     @Override
     protected String getModuleCodeWithSuffix(String moduleCode)
     {
-        return moduleCode + "-EXT";
+       /* if (moduleCode.endsWith("L"))
+            return moduleCode.substring(0, moduleCode.length() - 1) + "-EXTL";
+        else if (moduleCode.endsWith("R"))
+            return moduleCode.substring(0, moduleCode.length() - 1) + "-EXTR";
+        else
+            return moduleCode + "-EXT"; */
+        return moduleCode;
     }
 }
