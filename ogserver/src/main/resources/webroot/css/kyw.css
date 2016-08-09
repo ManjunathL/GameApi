@@ -1153,6 +1153,15 @@ h6{
     #kyw-slider-carousel .carousel-indicators {
         bottom: 5px;
     }
+    .kyw-finishes-section {
+        height: 550px;
+    }
+    .kyw-finishes-card {
+        margin: 30px 0px 40px;
+    }
+    .finishes-heading {
+        margin: 30px 10px 40px;
+    }
     .accessories-hardware-section-img{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470394482/kyk/Ergo-without-human.jpg");
         background-repeat: no-repeat;
