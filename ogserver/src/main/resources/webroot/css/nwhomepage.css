@@ -116,6 +116,9 @@ h6 {
 /*.navbar{
    min-height:100px!important;
 }*/
+.margin-top10{
+    margin-top:10px!important;
+}
 .margin-top70{
     margin-top:70px!important;
 }
@@ -262,6 +265,12 @@ h6 {
 .width100{
     width: 100%;
 }
+.width90{
+    width: 90%!important;
+}
+.width80{
+    width: 80%!important;
+}
 .width60{
     width: 60%!important;
 }
@@ -289,6 +298,9 @@ h6 {
 .padding0 {
     padding: 0px!important;
 }
+.padding5 {
+    padding: 5px!important;
+}
 .padding50-15 {
     padding: 50px 15px;
 }
@@ -300,6 +312,9 @@ h6 {
 }
 .padding-left15{
     padding-left:15px!important;
+}
+.padding-right35{
+    padding-right:35px!important;
 }
 .padding-top10{
     padding-top:10px;
@@ -507,8 +522,14 @@ h6 {
     background: rgba(241,90,34,1);
     min-height: 420px;
  }
+
+ .contact-form-bg{
+    background-color: rgba(0,0,0,0.6);
+    margin: 0px!important;
+ }
+
  .contact-form-mg{
-    padding: 20px;
+    padding: 10px;
  }
 
 .contact-form-mg .form-control{
@@ -524,7 +545,7 @@ h6 {
 }
 
 .flip-div {
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     display: table;
 }
 
@@ -574,6 +595,16 @@ h6 {
 
 .menu-sec-height{
     min-height:30px!important;
+}
+.brand-container{
+    width:45%;
+    margin: 0px auto;
+}
+.search-ico{
+    font-size: 30px!important;
+    color: rgba(0,0,0,0.4);
+    padding-top: 15px;
+    font-weight: 400!important;
 }
 
 /* Mobile Responsiveness */
