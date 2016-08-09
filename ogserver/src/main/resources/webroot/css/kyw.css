@@ -1,4 +1,14 @@
-
+body{
+    font-family: 'Raleway', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    font-family: 'Lato', sans-serif;
+}
 .full-screen {
     background-size: cover;
     background-position: center;
@@ -32,7 +42,7 @@
 .open-wardrobe-section p{
     font-size: 16px;
     margin: -20px 0px 25px;
-    line-height: 120%;
+    line-height: 150%;
 }
 .ergonomics-heading {
     margin: 10px 0px 0px;
@@ -42,7 +52,7 @@
 .ergonomics-wrapper p {
     font-size: 16px;
     margin: -20px 10px 30px;
-    line-height: 120%;
+    line-height: 150%;
 }
 
 .kyw-slider-heading{
@@ -99,7 +109,7 @@
 }
 .kyw-slider-carousel p{
     font-size: 16px;
-    line-height: 120%;
+    line-height: 150%;
     margin-top: 25px;
 }
 .kyw-wardrobe-type{
@@ -114,7 +124,7 @@
 }
 .kyw-wardrobe-details p{
     font-size: 16px;
-    line-height: 120%;
+    line-height: 150%;
     color: #444444;
 }
 .kyw-wardrobe-card {
@@ -131,7 +141,7 @@
     color: #333333;
     text-shadow: none;
     font-size: 16px;
-    line-height: 120%;
+    line-height: 150%;
 }
 .interior-heading{
     margin: 20px 0px 0px;
@@ -197,7 +207,7 @@
 }
 .kyw-dimensions-details p{
     font-size: 16px;
-    line-height: 120%;
+    line-height: 150%;
 }
 
 .kyw-material{
@@ -247,7 +257,7 @@
 }
 .kyw-finishes-details p{
     font-size: 16px;
-    line-height: 120%;
+    line-height: 150%;
 }
 .finishes-heading {
     margin: 110px 10px 95px;
@@ -287,25 +297,25 @@
 .kyw-finishes-type-section .acrylis{
     border-bottom:7px solid #ffffff;
 }
-
 .shutter-designs-section{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104501/kyk/Scene_Shutter.jpg");
-    background-repeat: no-repeat;
-    background-position: center 100%;
-    height: 380px;
-    width: 100%;
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-size: 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    padding: 20px 0 15px 0;
-    text-align: center;
-    color: #ffffff;
-}
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104501/kyk/Scene_Shutter.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 380px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+
 .shutter-designs-heading{
     margin: 30px 10px 30px;
     font-weight: 300;
@@ -323,7 +333,7 @@
 }
 .shutter-designs-section p{
     font-size: 16px;
-    line-height: 120%;
+    line-height: 150%;
 }
 .kyw-handle-card{
     padding:20px 30px;
@@ -414,7 +424,7 @@
 /* Trigger item */
 
 .content {
-	padding: 0 1em;
+	padding: 0 10px;
 	margin: 0 auto;
 	text-align: center;
 	top: 0px !important;
@@ -710,6 +720,87 @@
 
 /* Media */
 
+@media (min-width: 1900px) {
+    .shutter-designs-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104501/kyk/Scene_Shutter.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 570px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .hardware-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 960px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .content {
+    	padding: 45px 10px;
+    }
+    .accessories-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260988/kyw/PG_13_1_MAIN_BACKGROUND_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 920px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .accessories-hardware-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137366/kyk/accessories.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 800px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .accessories-hardware-section-img .content {
+        padding: 50px 230px;
+    }
+}
+
 @media (max-width: 768px) {
     .kyw-banner-bg {
         background-image: url(https://res.cloudinary.com/mygubbi/image/upload/v1469097054/kyw/PG_1.jpg);
@@ -753,6 +844,9 @@
         right: auto;
         width: 90%;
     }
+    .kyk-shutter-cont {
+        margin: 1% 0%;
+    }
     .kyw-dimensions-details{
         margin: 10px 10px;
     }
@@ -760,12 +854,12 @@
         margin: 10px 0px 0px;
     }
     .kyw-handle-card{
-        padding:10px 10px;
+        padding: 0px;
     }
     .kyw-handle-card,
     .kyw-wardrobe-card,
     .kyw-dimensions-card{
-        margin: 15px 0px 10px;
+        margin: 0px 0px 10px;
     }
     .interior-section .carousel-caption{
         padding:0px;
@@ -789,7 +883,7 @@
         top: 0;
     }
     .kyw-wardrobe-content-tab {
-        top: 30%;
+        position: relative;
     }
     .open-wardrobe-section p{
         margin: -10px 0px 25px;
@@ -837,7 +931,7 @@
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260919/kyw/PG_12.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
-        height: 210px;
+        height: 240px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
@@ -847,12 +941,12 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        padding: 20px 0 15px 0;
+        padding: 5px;
         text-align: center;
         color: #ffffff;
     }
     .shutter-designs-heading{
-        margin: 0px 10px 10px;
+        margin: 10px 0px 10px;
     }
 }
 
@@ -917,15 +1011,20 @@
     }
     .open-wardrobe-section p{
         margin: 0px;
-        font-size: 14px;
+        font-size: 16px;
+        line-height: 150%;
     }
     .ergonomics-wrapper p{
         margin: 0px 0px 20px;
-        font-size: 14px;
+        font-size: 16px;
+        line-height: 150%;
+    }
+    .kyw-dimensions-details p{
+        font-size: 16px;
     }
     .kyw-wardrobe-details p {
-        font-size: 14px;
-        line-height: 130%;
+        font-size: 16px;
+        line-height: 150%;
         color: #444444;
     }
     .accessories-section-img{
@@ -984,7 +1083,7 @@
     }
     .shutter-designs-section p {
         color: #333333;
-        font-size: 14px;
+        font-size: 16px;
     }
     .finishes-type-container{
         margin-bottom: 10px;
@@ -994,7 +1093,7 @@
     }
     .kyw-slider-carousel p{
         font-size: 16px;
-        line-height: 120%;
+        line-height: 150%;
         margin-top: 25px;
         font-weight: 300;
         padding: 10px;
@@ -1003,6 +1102,9 @@
     .shutter-designs-heading{
         margin-top: 55%;
         color:#333333;
+    }
+    #kyw-slider-carousel .carousel-indicators {
+        bottom: 5px;
     }
     .accessories-hardware-section-img{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470394482/kyk/Ergo-without-human.jpg");
@@ -1021,5 +1123,17 @@
         padding: 15px 0 15px 0;
         text-align: center;
         color: #333333;
+    }
+}
+
+@media all and (min-width: 768px) {
+    .hidden-desktop {
+        display: none !important;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .hidden-mobile{
+        display: none !important;
     }
 }
