@@ -844,6 +844,9 @@ h6{
         right: auto;
         width: 90%;
     }
+    .kyw-wardrobe-details p {
+        font-size: 12px;
+    }
     .kyk-shutter-cont {
         margin: 1% 0%;
     }
@@ -950,6 +953,50 @@ h6{
     }
 }
 
+@media (max-width: 767px){
+    .kyw-banner-bg {
+        height: 230px;
+    }
+    .kyw-material-content-tab,
+    .kyw-finishes-type-content-tab {
+        position: relative;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        margin: 0px;
+    }
+    .kyw-slider-heading{
+        margin: 0px;
+    }
+    .kyw-slider-carousel p {
+        font-size: 14px;
+        line-height: 150%;
+        margin-top: 10px;
+        font-weight: 300;
+        padding: 10px;
+        background: rgba(234, 234, 234, 0.92);
+    }
+    #kyw-slider-carousel .carousel-indicators {
+        bottom: 0px;
+    }
+    .kyw-finishes-type-heading {
+        color: #333333;
+        margin: 15px 10px;
+    }
+    .kyk-ergonomics-dec {
+        margin-top: 5%;
+    }
+    .kyk-handle-cont {
+        margin: 5% 0%;
+         width: 50%;
+        float: right;
+    }
+
+}
+
 @media (max-width: 480px) {
     .kyw-banner-bg {
         background-image: url(https://res.cloudinary.com/mygubbi/image/upload/v1469097054/kyw/PG_1.jpg);
@@ -967,13 +1014,13 @@ h6{
     #kyw-slider-carousel .carousel-caption {
         left: auto;
         right: auto;
-        width: 90%;
+        width: 100%;
         bottom: 50px;
     }
     #kyw-interior-slider .carousel-caption {
          left: auto;
          right: auto;
-         width: 90%;
+         width: 100%;
          bottom: 50px;
     }
     .kyw-dimensions-details{
@@ -1123,6 +1170,11 @@ h6{
         padding: 15px 0 15px 0;
         text-align: center;
         color: #333333;
+    }
+    .kyk-handle-cont {
+        margin: 5% 0%;
+        width: 100%;
+        float: right;
     }
 }
 
