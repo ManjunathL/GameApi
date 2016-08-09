@@ -108,6 +108,13 @@
 .d-style h3{
     margin: 20px 35px;
 }
+.acc-style {
+    position: absolute;
+    top: 30%;
+    left: 5% !important;
+    width: 45%;
+    text-align: center;
+}
 .m-item-img{
     margin-top: 7px;
 }

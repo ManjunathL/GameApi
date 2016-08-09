@@ -80,11 +80,18 @@
                                 <li role="presentation">
                                     <a href="#finishes" aria-controls="finishes" role="tab" data-toggle="tab">  Finishes </a>
                                 </li>
-                                <% if(typeof(product.accessories) != 'undefined' && product.accessories.length != 0){ %>
                                 <li role="presentation">
                                     <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
                                 </li>
+<!--
+                                <% if(typeof(product.accessories) != 'undefined' && product.accessories.length != 0){ %>
+
+                                <li role="presentation">
+                                    <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
+                                </li>
+
                                 <% } %>
+-->
                                 <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <li role="presentation">
                                     <a href="#appliance" aria-controls="appliance" role="tab" data-toggle="tab"> Appliance </a>
@@ -431,31 +438,73 @@
                                         </div>
                                     </div>
                                 </div>
-                                <% if(typeof(product.accessories) != 'undefined' && product.accessories.length != 0){ %>
+
                                 <div role="tabpanel" class="tab-pane" id="accessories">
                                     <div class="accessories-wrapper">
-                                        <div id="mycarousel-accessories" class="carousel carousels slide" data-ride="carousels">
-                                            <!-- Indicators -->
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#mycarousel-accessories" data-slide-to="0" class="active"></li>
-                                                <li data-target="#mycarousel-accessories" data-slide-to="1"></li>
-                                                <li data-target="#mycarousel-accessories" data-slide-to="2"></li>
-                                            </ol>
-                                            <!-- Wrapper for slides -->
-                                            <div class="carousel-inner" role="listbox">
-                                                <% _.each (product.accessories, function(accessory) { %>
-                                                <div class="item items">
-                                                    <img src="<%= imgBase + '/project_details/' + accessory.image %>" alt="First Image">
-                                                    <div class="carousel-caption">
-                                                        <p> <%= accessory.Desc %> </p>
-                                                    </div>
+                                        <div class="d-item">
+                                        <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="tab-content acc-carousels margin-top5">
+                                                <div role="tabpanel" class="acc-img tab-pane active" id="tab_style_5-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724124/project_details/accs1.jpg" alt="undersink">
                                                 </div>
-                                                <% }); %>
+                                                <div role="tabpanel" class="acc-img tab-pane" id="tab_style_6-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724127/project_details/accs2.jpg" alt="pullout">
+                                                </div>
+                                                <div role="tabpanel" class="acc-img tab-pane" id="tab_style_7-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724131/project_details/accs3.jpg" alt="drawer">
+                                                </div>
+                                                <div role="tabpanel" class="acc-img tab-pane" id="tab_style_8-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724128/project_details/accs4.jpg" alt="dish">
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="d-style acc-style">
+                                            <div class="tabbable-line material-slide-nav">
+                                                <ul class="nav nav-tabs ">
+                                                    <li id="tab_style_5" class="acc-img-cnt active">
+                                                        <a>Under Sink <br/>Solutions</a>
+                                                    </li>
+                                                    <li id="tab_style_6" class="acc-img-cnt">
+                                                        <a>Pull Out <br/> Drawers </a>
+                                                    </li>
+                                                    <li id="tab_style_7" class="acc-img-cnt">
+                                                        <a>Drawer <br/> Organizers</a>
+                                                    </li>
+                                                    <li id="tab_style_8" class="acc-img-cnt">
+                                                        <a>Dish  <br/>Drainers</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content padding-top15">
+                                                    <div class="acc-cnt tab-pane active" id="tab_style_5-cnt">
+                                                        <p>
+                                                            Organizing the space below your sink ensures a clutter-free setup for all your cleaning essentials.
+                                                            Maintaining those stains on your precious dining plates, is now easy!
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_6-cnt">
+                                                        <p>
+                                                            Our range of pullout modular drawers stores kitchen essentials that are of varying sizes and shapes giving you ample room to make the most of your kitchen.
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_7-cnt">
+                                                        <p>
+                                                            These smart little creations ensure that your drawers are organized based on your usage. No more rummaging through seemingly bottomless drawers again!
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_8-cnt">
+                                                        <p>
+                                                            Stylish dish drainers for platforms and for cupboards make sure that your dishes don't have unsightly water stains, and are neatly stacked away once clean.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                         </div>
                                     </div>
                                 </div>
-                                <% } %>
+
                                 <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <div role="tabpanel" class="tab-pane" id="appliance">
                                     <div class="appliance-wrapper">
@@ -694,6 +743,10 @@
     dsitems.height(nHeight);
     dsitems.addClass('full-screen');
 
+    var dsitems = $('.acc-carousels .acc-img');
+    dsitems.height(nHeight);
+    dsitems.addClass('full-screen');
+
     var mtitems = $('.material-carousels .material-img');
     mtitems.height(nHeight);
     mtitems.addClass('full-screen');
@@ -719,6 +772,16 @@
     });
 
     $('.design-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.acc-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({
