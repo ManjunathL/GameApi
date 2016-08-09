@@ -524,8 +524,10 @@ h6{
 	z-index: 9999;
 	-webkit-transform-origin: -2em 50%;
 	transform-origin: -2em 50%;
-	-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);
-	transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);
+	-webkit-transform: translate3d(0,50%,0);
+    transform: translate3d(0,50%,0) ;
+	/*-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);
+	transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);*/
 }
 
 .tooltip-east .tooltip-content {
