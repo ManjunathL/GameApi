@@ -127,7 +127,7 @@
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="true">
-                                    Storage Solution
+                                    Storage Solutions
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
@@ -186,10 +186,17 @@
                                 <a class="page-scroll last-item" href="#contact">Contact</a>
                             </li>
                             <li class="padding-left10">
-                                <span class="pe-7s-like wishlist header-icon pe-fw"><span id="shortlistSuperScript" class="super-script"></span></span>
+                                <a href="/shortlist">
+                                    <span class="pe-7s-like wishlist header-icon pe-fw"><span id="shortlistSuperScript" class="super-script"></span></span>
+                                </a>
                             </li>
                             <li class="padding-left10">
+                                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+                                <span class="user user-img"
+                                      style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                                <% }else { %>
                                 <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+                                <% } %>
                             </li>
                         </ul>
                     </div>
@@ -303,16 +310,6 @@
         <% } %>
 
     </div>
-
-    <!--<div class="userpop-footer align-center">-->
-    <!--<p class="font-size10">-->
-    <!--<a href="#">Terms of use</a>|-->
-    <!--<a href="#">Privacy Policy</a>-->
-    <!--</p>-->
-    <!--<p class="font-size9">-->
-    <!--&copy; 2015 mygubbi.com All rights reserved-->
-    <!--</p>-->
-    <!--</div>-->
 
     <div id="close-user-pop" class="close-icon" data-element=".userpop">
         <img src="<%= imgBase + 'close-white.png'%>">
@@ -518,68 +515,6 @@
                         </div>
                     </form>
                     <script type="text/javascript"> var MXLandingPageId = '173efb36-4270-11e6-b61b-22000aa8e760'; </script>
-
-
-
-                    <!--<form id="contactForm" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
-                        <div class="row">
-                            <div class="margin-bottom20 form-group">
-                                <input type="text" class="width100 form-control" placeholder="Name*" value="<%=userProfile ? userProfile.displayName : ''%>"
-                                       id="contact_full_name" required/>
-                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="margin-bottom20 form-group">
-                                <input type="email" class="width100 form-control" placeholder="Email*" value="<%=userProfile ? userProfile.email : ''%>"
-                                       id="contact_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="margin-bottom20 form-group has-feedback">
-                                <input type="text" class="width100 form-control" placeholder="Phone Number*" value="<%=userProfile ? userProfile.phone : ''%>"
-                                       id="contact_contact_num" required pattern="\d{10}" title="e.g. 9876543210"/>
-
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="margin-bottom20 form-group">
-                                    <textarea class="width100 form-control" id="contact_requirement"
-                                              placeholder="Describe your Requirements / Queries"></textarea>
-                                </div>
-                            </div>
-                            <div class="margin-bottom20 form-group">
-                                <input type="text" class="width100 form-control" placeholder="Property Name"
-                                       id="contact_property_name"/>
-                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="margin-bottom20 form-group">
-                                <label for="contact_floorplan">Upload Floorplan</label>
-                                <input type="file" class="width100 form-control" placeholder="Floorplan" name="floorPlan" value=""
-                                       id="contact_floorplan" accept=".pdf,.jpg,.jpeg,.png"/>
-                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="align-center form-group">
-                                <button
-                                        id="contactus-submit-btn"
-                                        class="button-blue margin-top20 margin-bottom20"
-                                        type="submit"
-                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
-                                    submit
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <div id="success-msg-padding" class="display-none margintop25"></div>
-                    <div id="success-msg" class="display-none">
-                        <p class="justify">Thank you for contacting mygubbi. Our team will get back to you as soon as possible.</p>
-                        <p class="margintop40">Want to keep Exploring? Click
-                            <a id="contact-form-explore" class="color-orange" href="/u-shaped-kitchen-design">here</a>
-                        </p>
-                    </div>-->
 
                 </div>
             </div>

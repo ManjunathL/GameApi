@@ -799,9 +799,9 @@ h6 {
 
 /* ---- BxSlider ---- */
 
-.bx-wrapper {
+/*.bx-wrapper {
     margin-top: 70px;
-}
+}*/
 
 .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
     position: absolute;
@@ -2350,10 +2350,6 @@ button {
     position: absolute;
 }
 
-.padding0 {
-    padding: 0px !important;
-}
-
 .padding8 {
     padding: 8px;
 }
@@ -2818,7 +2814,7 @@ input[type=checkbox] {
     font-size: 8px;
     position: absolute;
     top: 8px;
-    right: 78px;
+    right: 15px;
 }
 
 .stick {
