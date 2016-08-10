@@ -1,3 +1,20 @@
+
+/* Global Class By Nagmani Bhushan*/
+
+body{
+    font-family: 'Raleway', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    font-family: 'Lato', sans-serif;
+}
+
+/* Know Your Kitchen */
+
 .kyk-box p{
     font-size: 16px;
     line-height: 150%;
@@ -202,6 +219,8 @@
     text-align: center;
     color: #333333;
 }
+
+/* Media Query */
 
 @media (min-width: 1900px) {
     .kyk-banner-bg{
@@ -466,6 +485,10 @@
     }
 }
 
+/* End Media Query */
+
+/* Global Media Query */
+
 @media all and (min-width: 768px) {
     .hidden-desktop {
         display: none !important;
@@ -477,3 +500,5 @@
         display: none !important;
     }
 }
+
+/* End Global Media Query */

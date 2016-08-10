@@ -1,3 +1,6 @@
+
+/* Global Class By Nagmani Bhushan*/
+
 body{
     font-family: 'Raleway', sans-serif;
 }
@@ -14,6 +17,9 @@ h6{
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/* Know Your Wardrobe */
+
 .kyw-banner-bg{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469097054/kyw/PG_1.jpg");
     background-repeat: no-repeat;
@@ -54,7 +60,6 @@ h6{
     margin: -20px 10px 30px;
     line-height: 150%;
 }
-
 .kyw-slider-heading{
     margin: 20px 0px 10px;
     font-weight: 300;
@@ -133,7 +138,6 @@ h6{
 .kyw-wardrobe-card h5{
     font-weight:500!important;
 }
-
 .interior-section{
     background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern_color.png");
 }
@@ -223,7 +227,6 @@ h6{
 .kyw-dimensions-card-tab{
     margin: 10px 40px;
 }
-
 .kyw-finishes-section{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260942/kyw/PG_10_1_BACKGROUND.jpg");
     background-repeat: no-repeat;
@@ -242,7 +245,6 @@ h6{
     text-align: center;
     color: #444444;
 }
-
 .kyw-finishes-section .laminate{
     border-bottom:7px solid #5a777b;
 }
@@ -299,23 +301,23 @@ h6{
     border-bottom:7px solid #ffffff;
 }
 .shutter-designs-section{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104501/kyk/Scene_Shutter.jpg");
-        background-repeat: no-repeat;
-        background-position: center 100%;
-        height: 380px;
-        width: 100%;
-        -webkit-background-size: 100%;
-        -moz-background-size: 100%;
-        -o-background-size: 100%;
-        background-size: 100%;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        padding: 20px 0 15px 0;
-        text-align: center;
-        color: #ffffff;
-    }
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104501/kyk/Scene_Shutter.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
 
 .shutter-designs-heading{
     margin: 30px 10px 30px;
@@ -586,6 +588,7 @@ h6{
 }
 
 /* Card View */
+
 .kyw-handle-card,
 .kyw-wardrobe-card,
 .kyw-dimensions-card{
@@ -650,78 +653,7 @@ h6{
     background: transparent;
 }
 
-
-@media (min-width: 768px){
-    .kyw-handle-card .nav-tabs.nav-justified>li>a,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
-        border: 0px solid #ddd;
-        cursor: pointer;
-    }
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
-        border: 0px solid #ddd;
-        cursor: pointer;
-    }
-    .kyw-finishes-type-card{
-        margin-top: 30px;
-    }
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
-        border: 0px solid #ddd;
-        cursor: pointer;
-    }
-    .kyw-handle-card .nav-tabs.nav-justified>li>a,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 7px solid #ddd;
-        border-radius: 0px;
-        background: transparent;
-        margin:0px 1px;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 0px solid #ddd;
-        border-radius: 0px;
-        background: transparent;
-        margin:0px 1px;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 0px solid #ddd;
-        border-radius: 0px;
-        background: transparent;
-        margin:0px 1px;
-        text-transform: uppercase;
-        color: #ffffff;
-        cursor: pointer;
-    }
-
-    .kyw-handle-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-handle-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-handle-card .nav-tabs.nav-justified>li>a:focus,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:focus,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 7px solid rgba(0, 0, 0, 0.6);
-    }
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 0px solid #000;
-    }
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 0px solid #000;
-    }
-}
-/* Card View */
-
-/* Media */
+/* Media Query */
 
 @media (min-width: 1900px) {
     .shutter-designs-section{
@@ -804,6 +736,18 @@ h6{
     }
 }
 
+@media (min-width: 1024px) and (max-width: 1100px) {
+    .accessories-section-img{
+        height: 640px;
+    }
+    .content {
+        padding: 0px 35px 10px 10px;
+    }
+    .hardware-section-img {
+        height: 620px;
+    }
+}
+
 @media (max-width: 768px) {
     .kyw-banner-bg {
         background-image: url(https://res.cloudinary.com/mygubbi/image/upload/v1469097054/kyw/PG_1.jpg);
@@ -814,6 +758,72 @@ h6{
         padding: 0;
         text-align: center;
         color: #fff;
+    }
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card{
+        margin-top: 30px;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 7px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 7px solid rgba(0, 0, 0, 0.6);
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
     }
     #kyw-slider-carousel .carousel-caption {
         bottom: 50px;
@@ -954,6 +964,7 @@ h6{
     .shutter-designs-heading{
         margin: 10px 0px 10px;
     }
+
 }
 
 @media (max-width: 767px){
@@ -1190,17 +1201,9 @@ h6{
     }
 }
 
-@media (min-width: 1024px) and (max-width: 1100px) {
-    .accessories-section-img{
-        height: 640px;
-    }
-    .content {
-        padding: 0px 35px 10px 10px;
-    }
-    .hardware-section-img {
-        height: 620px;
-    }
-}
+/* End Media Query */
+
+/* Global Media Query */
 
 @media all and (min-width: 768px) {
     .hidden-desktop {
@@ -1213,3 +1216,5 @@ h6{
         display: none !important;
     }
 }
+
+/* End Global Media Query */
