@@ -114,7 +114,7 @@
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="true">
-                                    Single Units
+                                    Storage Solution
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
@@ -185,3 +185,474 @@
         </div>
     </div>
 </nav>
+
+
+<!-- User PopUp -->
+<div class="userpop" style="top:0px;">
+    <div class="userpop-content">
+        <% if (users.length > 0) { %>
+        <h3>
+            <% if (users.at(0).get('profileImage')) { %>
+            <img src="<%= users.at(0).get('profileImage') %>" class="non_resp_img">
+            <% }else { %>
+            <img src="<%= imgBase + 'user.png'%>" class="non_resp_img">
+            <% } %>
+            <div class="user_name"><%= users.at(0).get('displayName') %></div>
+            <div class="sub-font" id="view_profile">
+                <a href="/user_profile">
+                    View Profile
+                </a>
+                <a class="signout_icon display-inline-block padding-left25">
+                    Sign Out
+                </a>
+            </div>
+        </h3>
+        <div class="row">
+            <div class="col-md-8 col-xs-8 padding0">
+                <h4>Items Shortlisted</h4>
+            </div>
+            <div class="col-md-4 col-xs-4 padding0 align-right">
+                <a href="/shortlist" id="view-all-shortlist" data-element=".userpop">
+                    <span class="button-blue">view all</span>
+                </a>            </div>
+        </div>
+        <div class="row shortlist"></div>
+
+        <% } else { %>
+        <h2>
+            <img src="<%= imgBase + 'user.png'%>" class="display-inline-block">
+            My Account
+        </h2>
+
+        <div class="margin-bottom20">
+            <p class="align-center">
+                Use your favourite social account
+            </p>
+            <ul class="list-inline social-buttons align-center margin-top20">
+                <li>
+                    <a href="#" id="fb-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#" id="google-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-google"></i></a>
+                </li>
+                <!--                    <li>
+                                        <a href="#" id="twitter-btn" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"><i class="fa fa-twitter"></i></a>
+                                    </li>-->
+            </ul>
+        </div>
+
+        <div class="row margin-top20 margin-bottom20">
+            <p class="align-center">OR</p>
+
+            <form id="loginForm" data-toggle="validator" role="form">
+                <div class="row display-none" id="login_error_row">
+                    <p class="margin0 error-text align-center" id="login_error"></p>
+                </div>
+
+                <div class="row">
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Email ID*</p>
+                        <input type="email" class="width100" placeholder="abc@xyz.com" id="emailId" maxlength="100"
+                               required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                    </div>
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Password*</p>
+                        <input type="password" class="width100" id="pwd" required maxlength="100"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <input type="checkbox" id="remember" checked/> Remember Me
+                        </div>
+                        <div class="col-md-6 col-xs-6 align-right">
+                            <a href="#" id="forgot_pwd_btn">Forgot Password??</a>
+                        </div>
+                    </div>
+                    <div class="row padding20 margin20-0">
+                        <div class="col-md-12 col-xs-12 padding0 form-group margin0">
+                            <button id="loginBtn" class="button-blue width100"
+                                    type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign in">sign in
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="margin20-0 align-center">
+                <!--<p class="font-size12">-->
+                <!--And, if you are new to mygubbi.com-->
+                <!--</p>-->
+
+                <p>
+                    New to mygubbi?<a href="#" id="new_reg">&nbsp;Sign Up</a>
+                </p>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+
+    <!--<div class="userpop-footer align-center">-->
+    <!--<p class="font-size10">-->
+    <!--<a href="#">Terms of use</a>|-->
+    <!--<a href="#">Privacy Policy</a>-->
+    <!--</p>-->
+    <!--<p class="font-size9">-->
+    <!--&copy; 2015 mygubbi.com All rights reserved-->
+    <!--</p>-->
+    <!--</div>-->
+
+    <div id="close-user-pop" class="close-icon" data-element=".userpop">
+        <img src="<%= imgBase + 'close-white.png'%>">
+    </div>
+
+</div>
+<!-- User PopUp End -->
+
+<!-- Forgot Password Modal -->
+<div id="forgot_password" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content signup">
+            <h2>Forgot Password</h2>
+            <form id="forgotForm" data-toggle="validator" role="form">
+                <div class="row">
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Enter your registered email Id</p>
+                        <input id="forgotEmail" type="email" class="width100 form-control" placeholder="abc@xyz.com" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                    </div>
+                    <div class="padding20-0 align-center form-group" id="reset_password">
+                        <button
+                                id="forgotBtn"
+                                class="button-blue margin-top20 margin-bottom20"
+                                type="submit"
+                                data-loading-text="<i class='fa fa-spinner fa-spin'></i> reset password">
+                            reset password
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <p class="modal_success_msg">We have sent a link to your registered mail id.</p>
+            <p class="modal_success_msg">Please follow the link to change your password.</p>
+            <p class="modal_error_msg">Email Id not registered.</p>
+            <p class="modal_error_msg">Please enter correct email id or try creating a new account.</p>
+            <div id="close-forgot-pop" data-element="#forgot_password" class="close-icon signup-form">
+                <img src="<%= imgBase + 'close-white.png'%>">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Forgot Password Modal End -->
+
+<!-- SignUp Modal -->
+<div id="signup" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content signup">
+            <h2>
+                <img src="<%= imgBase + 'user.png'%>">
+                Create a new Account
+            </h2>
+
+            <div class="row display-none" id="reg_error_row">
+                <p class="margin0 error-text align-center" id="reg_error"></p>
+            </div>
+
+            <form id="registerForm" data-toggle="validator" role="form">
+                <div class="row">
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Full Name*</p>
+                        <input type="text" class="width100 form-control" placeholder="John Doe" id="reg_full_name" required/>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="margin-bottom20 form-group has-feedback">
+                        <p class="margin0">Contact Number</p>
+                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" pattern="\d{10}"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="margin-bottom20 form-group">
+                        <p class="margin0">Email ID*</p>
+                        <input type="email" class="width100 form-control" placeholder="abc@xyz.com" id="reg_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="margin-bottom20 form-group">
+                            <p class="margin0">Password*</p>
+                            <input type="password" data-minlength="6" class="width100 form-control" id="reg_password" pattern=".{6,}"
+                                   required/>
+                            <span class="help-block">Minimum of 6 characters</span>
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <p class="margin0">Confirm Password*</p>
+                            <input type="password" id="reg_confirm" class="width100 form-control"
+                                   data-match="#reg_password" data-match-error="Whoops, these don't match" required/>
+                            <div id="reg_confirm_error" class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="align-center form-group">
+                        <button
+                                id="signup-btn"
+                                class="button-blue margin-top20 margin-bottom20"
+                                type="submit"
+                                data-loading-text="<i class='fa fa-spinner fa-spin'></i> sign up">
+                            sign up
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div id="close-signup-pop" data-element="#signup" class="close-icon signup-form">
+                <img src="<%= imgBase + 'close-white.png'%>">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- SignUp Modal End -->
+
+<div id="contactuspop" class="contact-us-pop">
+    <div>
+
+        <!-- Modal content-->
+        <div class="contact-form">
+            <div class="row">
+                <h2 class="align-center">
+                    <span class="pe-7s-note"></span>
+                    Contact Us
+                </h2>
+            </div>
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="paddingtop30">
+                        <div class="row margin_auto">
+                            <div class="col-xs-6">
+                                <a href="tel:+91-808-886-0860"><span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 80 88 86 0860</span></a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="mailto:reach@mygubbi.com" target="_blank"><span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row display-none" id="contact_error_row">
+                        <p class="margin0 error-text align-center" id="contact_error"></p>
+                    </div>
+
+
+                    <form method="post" enctype="multipart/form-data"
+                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                          id="contactForm" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
+                        <div class="row">
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='FirstName' name='FirstName'
+                                       placeholder="Name*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                       required='required'/>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='EmailAddress'
+                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                       required='required' pattern=".+@.+\..+"
+                                       title="<abc>@<xyz>.<com>"/>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control" id='Phone'
+                                       name='Phone'
+                                       placeholder="Phone Number*" maxlength='20'
+                                       value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                       required='required' pattern="\d{10}"
+                                       title="e.g. 9876543210"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                <textarea class="width100 form-control" id="mx_Requirement"
+                                          name='mx_Requirement' maxlength='150' value='' autocomplete='off'
+                                          placeholder="Describe your Requirements / Queries"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' id='mx_Property_Name' name='mx_Property_Name' class="width100 form-control"
+                                       placeholder="Property Name" maxlength='50' value='' autocomplete='off'  />
+                            </div>
+                            <div class="form-group">
+                                <label for='exclude_FileUpload_1'>Upload Floorplan</label>
+                                <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
+                                <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
+                            </div>
+                            <div class="align-center form-group">
+                                <button class="button-blue"
+                                        id="form-submit-button"
+                                        type="submit">Submit
+                                </button>
+                                <br/>
+                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                <input type="hidden" name="MXHLandingPageId" value="173efb36-4270-11e6-b61b-22000aa8e760" />
+                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-quick-contact-page" />
+                                <input type="hidden" name="MXHAsc" value="10" />
+                                <input type="hidden" name="MXHPageTitle" value="contact_us" />
+                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript"> var MXLandingPageId = '173efb36-4270-11e6-b61b-22000aa8e760'; </script>
+
+
+
+                    <!--<form id="contactForm" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Name*" value="<%=userProfile ? userProfile.displayName : ''%>"
+                                       id="contact_full_name" required/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="email" class="width100 form-control" placeholder="Email*" value="<%=userProfile ? userProfile.email : ''%>"
+                                       id="contact_email_id" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group has-feedback">
+                                <input type="text" class="width100 form-control" placeholder="Phone Number*" value="<%=userProfile ? userProfile.phone : ''%>"
+                                       id="contact_contact_num" required pattern="\d{10}" title="e.g. 9876543210"/>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="margin-bottom20 form-group">
+                                    <textarea class="width100 form-control" id="contact_requirement"
+                                              placeholder="Describe your Requirements / Queries"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type="text" class="width100 form-control" placeholder="Property Name"
+                                       id="contact_property_name"/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <label for="contact_floorplan">Upload Floorplan</label>
+                                <input type="file" class="width100 form-control" placeholder="Floorplan" name="floorPlan" value=""
+                                       id="contact_floorplan" accept=".pdf,.jpg,.jpeg,.png"/>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="align-center form-group">
+                                <button
+                                        id="contactus-submit-btn"
+                                        class="button-blue margin-top20 margin-bottom20"
+                                        type="submit"
+                                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
+                                    submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="success-msg-padding" class="display-none margintop25"></div>
+                    <div id="success-msg" class="display-none">
+                        <p class="justify">Thank you for contacting mygubbi. Our team will get back to you as soon as possible.</p>
+                        <p class="margintop40">Want to keep Exploring? Click
+                            <a id="contact-form-explore" class="color-orange" href="/u-shaped-kitchen-design">here</a>
+                        </p>
+                    </div>-->
+
+                </div>
+            </div>
+            <div id="close-contactus-pop" data-element="#contactuspop" class="close-icon signup-form">
+                <img src="<%= imgBase + 'close-white.png'%>">
+            </div>
+        </div>
+
+    </div>
+    <div class="contact-us-side" id="contact-us-side-btn">
+        <span class="contact-us-side-inner .visible-xs-block .visible-sm-block hidden-md hidden-lg">
+            <span class="pe-7s-note"></span>
+        </span>
+        <span class="contact-us-side-inner hidden-xs hidden-sm">
+            <span class="pe-7s-note"></span>
+            <span class="vertical-line"></span>
+            <span>Contact Us</span>
+        </span>
+    </div>
+</div>
+
+
+<!-- Notification Modal -->
+<div id="notify" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content signup">
+            <p class="margin0" id="reg_done_message"></p>
+        </div>
+    </div>
+</div>
+<!-- Notification End -->
+
+<!-- Search Overlay -->
+
+<div class="search_overlay" autocomplete="off" action="#">
+    <div class="search_logo">
+        <img src="<%= imgBase + 'gubbi_white.png'%>" alt="mygubbi">
+    </div>
+    <div class="search_close"></div>
+    <div class="row">
+        <span class="search_info">Just type and press 'enter'</span>
+    </div>
+    <div class="row align-center">
+        <input type="text" class="search_input"/>
+    </div>
+    <% if(typeof(a_srch) !== 'undefined' && ((Object.keys(a_srch).length) !== 0)) { %>
+    <div class="row search_suggest">
+        <%  _.each(a_srch, function(as){
+        if(as && as.resultName){ %>
+        <a href="#"><p><%= as.resultName %></p></a>
+        <% } }); %>
+    </div>
+    <% } %>
+    <% if(typeof(p_srch) !== 'undefined' && ((Object.keys(p_srch).length) !== 0)) {
+    if(typeof(p_srch.popularSearches) !== 'undefined'){ %>
+    <div class="row margin-top5per">
+        <div class="col-md-4">
+            <div class="search_heading">Popular Searches..</div>
+            <div class="search_data" id="pop_search">
+                <%  _.each(p_srch.popularSearches, function(ps){
+                if(typeof(ps.name) !== 'undefined'){ %>
+                <a href="#"><p><%= ps.name %></p></a>
+                <% } }); %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="search_heading">Recent Searches..</div>
+            <div class="search_data" id="rec_search">
+                <% _.each(p_srch.recentSearches, function(rs){
+                if(typeof(rs.name) !== 'undefined'){ %>
+                <a href="#"><p><%= rs.name %></p></a>
+                <% } }); %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="search_heading">My Searches..</div>
+            <div class="search_data" id="my_search">
+                <% _.each(p_srch.mySearches, function(ms){
+                if(typeof(ms.name) !== 'undefined'){ %>
+                <a href="#"><p><%= ms.name %></p></a>
+                <% } }); %>
+            </div>
+        </div>
+    </div>
+    <% } } %>
+</div>
+
+<!-- Search Overlay End -->
