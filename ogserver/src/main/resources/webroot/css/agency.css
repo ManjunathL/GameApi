@@ -5036,12 +5036,13 @@ a.tab-ico {
 }
 
 .sb-search {
-    display: none;
-    position: absolute;
-    z-index: 10;
-    top: 10px;
-    right: 0;
-    width: 100%;
+        display: none;
+        position: absolute;
+        z-index: 10;
+        top: 15px;
+        right: 431px;
+        width: 47%;
+
 }
 
 .sb-search-input {
@@ -5064,11 +5065,11 @@ a.tab-ico {
 }
 
 .search-close-ico {
-    position: absolute;
-    top: 32%;
-    right: 2%;
-    cursor: pointer;
-    color: #5C6E7B;
+        position: absolute;
+        top: -8%;
+        right: 1%;
+        cursor: pointer;
+        color: #5C6E7B;
 }
 
 .sb-search_suggest {
