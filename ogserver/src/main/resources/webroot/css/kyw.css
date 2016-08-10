@@ -1,17 +1,6 @@
 
 /* Global Class By Nagmani Bhushan*/
 
-body{
-    font-family: 'Raleway', sans-serif;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6{
-    font-family: 'Lato', sans-serif;
-}
 .full-screen {
     background-size: cover;
     background-position: center;
@@ -453,6 +442,7 @@ h6{
 	height: 2.2em!important;
 	cursor: pointer!important;
 	opacity: 2;
+	font-family: 'Lato', sans-serif;
 }
 .tooltip-item {
 	width: 30px;
@@ -653,6 +643,75 @@ h6{
     background: transparent;
 }
 
+@media (min-width:768px) {
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card{
+        margin-top: 30px;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 7px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 7px solid rgba(0, 0, 0, 0.6);
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
+    }
+}
+
 /* Media Query */
 
 @media (min-width: 1900px) {
@@ -758,72 +817,6 @@ h6{
         padding: 0;
         text-align: center;
         color: #fff;
-    }
-    .kyw-handle-card .nav-tabs.nav-justified>li>a,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
-        border: 0px solid #ddd;
-        cursor: pointer;
-    }
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
-        border: 0px solid #ddd;
-        cursor: pointer;
-    }
-    .kyw-finishes-type-card{
-        margin-top: 30px;
-    }
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
-        border: 0px solid #ddd;
-        cursor: pointer;
-    }
-    .kyw-handle-card .nav-tabs.nav-justified>li>a,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 7px solid #ddd;
-        border-radius: 0px;
-        background: transparent;
-        margin:0px 1px;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 0px solid #ddd;
-        border-radius: 0px;
-        background: transparent;
-        margin:0px 1px;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 0px solid #ddd;
-        border-radius: 0px;
-        background: transparent;
-        margin:0px 1px;
-        text-transform: uppercase;
-        color: #ffffff;
-        cursor: pointer;
-    }
-
-    .kyw-handle-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-handle-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-handle-card .nav-tabs.nav-justified>li>a:focus,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:focus,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 7px solid rgba(0, 0, 0, 0.6);
-    }
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-finishes-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 0px solid #000;
-    }
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:hover,
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:active,
-    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 0px solid #000;
     }
     #kyw-slider-carousel .carousel-caption {
         bottom: 50px;
