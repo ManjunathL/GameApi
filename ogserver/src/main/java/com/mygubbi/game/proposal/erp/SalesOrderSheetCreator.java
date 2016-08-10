@@ -1,7 +1,9 @@
 package com.mygubbi.game.proposal.erp;
 
+import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
+import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
 import com.mygubbi.si.excel.ExcelSheetProcessor;
 import com.mygubbi.si.excel.ExcelStyles;
@@ -23,12 +25,14 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
     private Sheet soSheet;
     private ExcelStyles styles;
     private ExcelSheetProcessor sheetProcessor;
+    private QuoteData quoteData;
 
-    public SalesOrderSheetCreator(Sheet soSheet, AssembledProductInQuote product, ExcelStyles styles)
+    public SalesOrderSheetCreator(Sheet soSheet, QuoteData quoteData, ExcelStyles styles)
     {
         this.soSheet = soSheet;
         this.styles = styles;
-        this.product = product;
+        this.product = quoteData.getAssembledProducts().get(0);
+        this.quoteData = quoteData;
     }
 
     public void prepare()
@@ -74,7 +78,18 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryPackAccessories());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryAddons());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAddons());
+        currentRow = this.writeAddonRecords(currentRow, this.quoteData.getHeaderLevelAddons());
 
+        return currentRow;
+    }
+
+    private int writeAddonRecords(int currentRow, List<ProductAddon> parts)
+    {
+        for (ProductAddon productAddon : parts)
+        {
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{currentRow, productAddon.getCode(), productAddon.getUom(), productAddon.getQuantity()});
+            currentRow++;
+        }
         return currentRow;
     }
 
@@ -87,36 +102,5 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
         }
         return currentRow;
     }
-
-/*
-    private void createDataRowInDataSheet(int rowNum, String [] data, CellStyle style)
-    {
-        this.createRowInDataSheet(rowNum, data, false, style);
-    }
-
-    private void createRowInDataSheet(int rowNum, String [] data, boolean isTitle, CellStyle style)
-    {
-        if (rowNum < this.soSheet.getLastRowNum())
-        {
-            this.soSheet.shiftRows(rowNum, this.soSheet.getLastRowNum(), 1);
-        }
-        Row dataRow = this.soSheet.createRow(rowNum);
-        dataRow.setRowStyle(style);
-        int lastCell = data.length;
-        for (int cellNum = 0; cellNum < lastCell; cellNum++)
-        {
-            String value = data[cellNum];
-            if (StringUtils.isNonEmpty(value))
-            {
-                Cell cell = dataRow.createCell(cellNum, Cell.CELL_TYPE_STRING);
-                cell.setCellValue(value);
-                if (isTitle)
-                {
-                    cell.setCellStyle(this.styles.getBoldStyle());
-                }
-            }
-        }
-    }
-*/
 
 }

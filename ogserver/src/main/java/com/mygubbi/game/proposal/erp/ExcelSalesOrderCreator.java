@@ -32,7 +32,7 @@ public class ExcelSalesOrderCreator extends AbstractProposalOutputCreator
     {
         AssembledProductInQuote product = this.getAssembledProductInQuote();
         this.openWorkbook();
-        new SalesOrderSheetCreator(this.workbookManager.getSheetByName("Sheet1"), product, workbookManager.getStyles()).prepare();
+        new SalesOrderSheetCreator(this.workbookManager.getSheetByName("Sheet1"), quoteData, workbookManager.getStyles()).prepare();
         this.closeWorkbook();
     }
 
