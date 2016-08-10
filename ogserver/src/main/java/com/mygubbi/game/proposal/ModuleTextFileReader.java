@@ -78,6 +78,7 @@ public class ModuleTextFileReader
                 String moduleCode = record[KDMAXCODE_CELL];
                 if (StringUtils.isEmpty(moduleCode) || "Handle".equals(name)) continue;
 
+                moduleCode = moduleCode.trim();
                 int sequence = this.getInteger(record[SEQ_CELL]);
                 if (sequence == 0) continue;
 

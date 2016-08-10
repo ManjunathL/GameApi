@@ -78,20 +78,10 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryPackAccessories());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryAddons());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAddons());
-        currentRow = this.writeAddonRecords(currentRow, this.quoteData.getHeaderLevelAddons());
 
         return currentRow;
     }
 
-    private int writeAddonRecords(int currentRow, List<ProductAddon> parts)
-    {
-        for (ProductAddon productAddon : parts)
-        {
-            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{currentRow, productAddon.getCode(), productAddon.getUom(), productAddon.getQuantity()});
-            currentRow++;
-        }
-        return currentRow;
-    }
 
     private int writeRecords(int currentRow, List<AssembledProductInQuote.ModulePart> parts)
     {

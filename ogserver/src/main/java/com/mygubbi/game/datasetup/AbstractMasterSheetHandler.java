@@ -30,6 +30,8 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
 
     private PrintStream out;
 
+    private int totalRows = 0;
+    private int skipRows = 0;
     protected abstract String getModuleCode(String moduleCode, String kdmaxCode);
     protected abstract String getModuleCodeWithSuffix(String moduleCode);
 
@@ -53,12 +55,16 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
     @Override
     public void handle(Object[] data)
     {
+        totalRows++;
         String moduleCode = (String) data[this.indices[MODULE_CODE]];
         if (StringUtils.isEmpty(moduleCode) || "Module Code".equals(moduleCode)) return;
         String kdmaxCode = (String) data[this.indices[KDMAX_CODE]];
 
         String moduleCodeToUse = this.getModuleCode(moduleCode, kdmaxCode);
-        if (StringUtils.isEmpty(moduleCodeToUse)) return;
+        if (StringUtils.isEmpty(moduleCodeToUse)){
+            skipRows++;
+            return;
+        }
 
         String description = (String) data[this.indices[TITLE]];
         int width = getInteger(data[this.indices[WIDTH]]);
@@ -122,7 +128,7 @@ public abstract class AbstractMasterSheetHandler implements ExcelRowHandler
     @Override
     public void done()
     {
-        System.out.println("Done");
+        System.out.println("Done"+ "Totalrows" +  totalRows + "Skiprows" + skipRows);
         this.out.close();
     }
 }

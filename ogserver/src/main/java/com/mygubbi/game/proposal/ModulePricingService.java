@@ -171,12 +171,17 @@ public class ModulePricingService extends AbstractVerticle
     private void calculateShutterCost(ModulePriceHolder modulePriceHolder, ShutterFinish shutterFinish, RateCard shutterRateCard, IModuleComponent component)
     {
         ShutterPanel shutterPanel = ModuleDataService.getInstance().getShutterPanel(component.getComponentCode());
+        LOG.debug(" Shutter : " + shutterPanel.getDimesions() );
         if (shutterPanel == null)
         {
             modulePriceHolder.addError("Shutter panel is not setup for " + component.getComponentCode());
             return;
         }
         double shutterPanelCost = shutterPanel.getCost(shutterRateCard, shutterFinish);
+
+        LOG.debug("Shutter Panel Area : " + shutterPanel.getCuttingArea(shutterFinish));
+        LOG.debug("Shutter Panel Cost : " + shutterPanel.getCost(shutterRateCard,shutterFinish));
+
         if (shutterPanelCost == 0)
         {
             modulePriceHolder.addError("Shutter panel cost is not available for " + shutterPanel.getCode() + shutterRateCard.getKey());
