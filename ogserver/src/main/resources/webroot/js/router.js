@@ -254,8 +254,13 @@ define([
         router.on('route:bedroom', function(actions){
             routeCategory('bedroom');
         });
-        router.on('route:dashboard', function(actions) {
+        /*router.on('route:dashboard', function(actions) {
             require(['/js/views/dashboard/page.js'], function(DashboardPage) {
+                VM.create(VM.DASHBOARD, DashboardPage).render();
+            });
+        });*/
+        router.on('route:dashboard', function(actions) {
+            require(['/js/views/dashboard/new-page.js'], function(DashboardPage) {
                 VM.create(VM.DASHBOARD, DashboardPage).render();
             });
         });
