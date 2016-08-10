@@ -130,6 +130,10 @@ public class QuoteData
         return addons;
     }
 
+    public List<ProductAddon> getHeaderLevelAddons()
+    {
+        return  this.headerLevelAddons;
+    }
     public Object getValue(String key)
     {
         if (this.proposalHeader.containsKey(key)) return this.proposalHeader.getValue(key);

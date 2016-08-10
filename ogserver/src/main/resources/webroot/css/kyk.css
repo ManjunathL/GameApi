@@ -1,3 +1,8 @@
+
+/* Global Class By Nagmani Bhushan*/
+
+/* Know Your Kitchen */
+
 .kyk-box p{
     font-size: 16px;
     line-height: 150%;
@@ -202,6 +207,8 @@
     text-align: center;
     color: #333333;
 }
+
+/* Media Query */
 
 @media (min-width: 1900px) {
     .kyk-banner-bg{
@@ -466,6 +473,10 @@
     }
 }
 
+/* End Media Query */
+
+/* Global Media Query */
+
 @media all and (min-width: 768px) {
     .hidden-desktop {
         display: none !important;
@@ -477,3 +488,5 @@
         display: none !important;
     }
 }
+
+/* End Global Media Query */

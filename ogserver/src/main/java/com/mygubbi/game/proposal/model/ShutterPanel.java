@@ -1,12 +1,17 @@
 package com.mygubbi.game.proposal.model;
 
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by test on 17-05-2016.
  */
 public class ShutterPanel
 {
+
+    private final static Logger LOG = LogManager.getLogger(ShutterPanel.class);
+
     private static final double SQMM2SQFT = 0.0000107639;
     private String code;
     private String title;
@@ -105,7 +110,9 @@ public class ShutterPanel
     {
         if (rateCard == null) return 0;
         return this.getCuttingArea(finish) * rateCard.getRateByThickness(this.getThickness());
+
     }
+
 
     public double getCuttingArea(ShutterFinish finish)
     {
