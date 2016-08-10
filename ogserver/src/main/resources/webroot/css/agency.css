@@ -7389,3 +7389,24 @@ a.tab-ico {
 
  /* End remarketing Landing page -- Mehbub*/
 
+.width14{
+width:14% !important;
+}
+.three-links{
+    top: 53%;
+        position: absolute;
+        width: 32% !important;
+     }
+.kitchen-icon{
+    width: 26% !important;
+    border-right: solid 2px #ccc;
+
+}
+.wardrobe-icon{
+width: 23% !important;
+border-right: solid 2px #ccc;
+}
+.otherunit-icon{
+width: 25% !important;
+
+}
