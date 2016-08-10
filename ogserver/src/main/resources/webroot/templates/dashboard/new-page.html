@@ -1,12 +1,13 @@
+
 <section class="bg-color-white">
     <div class="container-fluid">
         <div class="slider_container position-relative">
             <ul class="bxslider padding0">
                 <li>
                     <a class="slider-move" href="#" data-number="0">
-                        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470830622/home/new_design/Final.jpg"
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470830622/home/new_design/Final.jpg"
                              class="cld-responsive img-centered width100 hidden-xs hidden-sm" alt="mygubbi bedroom design">
-                        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470830622/home/new_design/Final.jpg"
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470830622/home/new_design/Final.jpg"
                              class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design">
                     </a>
                     <!--<div class="txt-over-image hidden-xs hidden-sm">
@@ -43,9 +44,9 @@
                 </li>
                 <li>
                     <a class="slider-move" href="#" data-number="1">
-                        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470830623/home/new_design/Final_2.jpg"
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470830623/home/new_design/Final_2.jpg"
                              class="cld-responsive img-centered width100 hidden-xs hidden-sm" alt="mygubbi living room design">
-                        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470830623/home/new_design/Final_2.jpg"
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470830623/home/new_design/Final_2.jpg"
                              class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design">
                     </a>
                 </li>
@@ -317,20 +318,58 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <h2 class="section-heading text-muted">Testimonials</h2>
-                <div class="testimonial-bx">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/c_fill,h_320,w_550/testimonial/Arjita_sigh.jpg"
-                         class="img-centered hidden-xs hidden-sm" alt="Experience Center" />
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/c_fill,h_320,w_315/testimonial/Arjita_sigh.jpg"
-                         class="img-centered hidden-lg hidden-md" alt="Experience Center" />
-                </div>
-                <div class="padding-top10">
-                    <p>"To say we are satisfied with the new kitchen you designed, understates how we feel.
-                        We will, without hesitation recommend your company
-                        to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen."
-                    </p>
-                </div>
-                <div>
-                    <button class="btn btn-explore">MORE</button>
+                <div class="testimonials-wrapper">
+                    <div id="testimonials-carousel" class="testimonials-carousel carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#testimonials-carousel" data-slide-to="1"></li>
+                            <li data-target="#testimonials-carousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item">
+                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470828103/home/new_design/testimonial_01.jpg" alt="First Image">
+                                <div class="carousel-caption">
+                                    <p class="text-center">
+                                        To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                        We will, without hesitation recommend your company to anyone who asks us about our new kitchen.
+                                        Thanks a lot for a beautiful kitchen.
+                                    </p>
+                                    <div class="text-right">
+                                        <p> Arjita Singh <i> - Shobha Forest View, Bangalore</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470828103/home/new_design/testimonial_02.jpg" data-color="firebrick" alt="Second Image">
+                                <div class="carousel-caption">
+                                    <p class="text-center">
+                                        I love the wide range of kitchen and wardrobe solutions that mygubbi team has.
+                                        The designers are well aware of the requirement and will only suggest what suits the budget.
+                                        Thank you mygubbi for this.
+                                    </p>
+                                    <div class="text-right">
+                                        <p> Abha Shukla <i> - Aspira, Bangalore</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470828103/home/new_design/testimonial_03.jpg" data-color="violet" alt="Third Image">
+                                <div class="carousel-caption">
+                                    <p class="text-center">
+                                        Varun and his team from myubbi has provided excellent interior design service;
+                                        this is all inclusive from architectural design, wood work based on room layout,
+                                        color selection, comprehensive and complete from idea to implementation.
+                                        I am proud to recommend myubbi for all interior design needs.
+                                    </p>
+                                    <div class="text-right">
+                                        <p> Dilip Seshadri <i> - Vista Space, Bangalore</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -474,7 +513,45 @@
     </div>
 </section>
 
+<style>
+    .testimonials-carousel .carousel-caption{
+        position: absolute;
+        bottom: 12px;
+        color: #333;
+        text-shadow: none;
+        font-weight: 500;
+        padding: 0px;
+        margin: 0px;
+        width: 70%;
+        line-height: 12px;
+        left: 7%;
+    }
+    .testimonials-carousel .carousel-inner p{
+        font-size: 10px;
+        line-height: 150%;
+        font-family: 'Raleway', sans-serif;
+        margin: 0px;
+    }
+    .testimonials-carousel .carousel-indicators{
+        bottom: 85px;
+    }
+    .carousel-inner{
+        margin: 0px !important;
+    }
+
+</style>
+
 <script>
+
+    var item = $('.testimonials-carousel .item');
+    item.eq(0).addClass('active');
+    $(document).ready(function() {
+        $('.testimonials-carousel').carousel({
+          interval: 60000,
+          pause: "false"
+        });
+    });
+
     $(function() {
         var navMain = $("#bs-example-navbar-collapse-1");
         var subMenuUL = $(".dropdown-menu");
