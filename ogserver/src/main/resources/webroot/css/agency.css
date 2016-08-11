@@ -7452,7 +7452,7 @@ padding: 50px 94px;
 
 .testimonials-carousel .carousel-caption{
     position: absolute;
-    bottom: 12px;
+    bottom: 15px;
     color: #333;
     text-shadow: none;
     font-weight: 500;
@@ -7469,7 +7469,7 @@ padding: 50px 94px;
     margin: 0px;
 }
 .testimonials-carousel .carousel-indicators{
-    bottom: 85px;
+    bottom: 90px;
 }
 .carousel-inner{
     margin: 0px !important;
