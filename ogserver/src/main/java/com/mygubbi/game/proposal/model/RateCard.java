@@ -3,6 +3,7 @@ package com.mygubbi.game.proposal.model;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class RateCard
     private String type;
     private String code;
     private double rate;
-    private Map<Integer, Double> ratesByThickness;
+    private Map<Integer, Double> ratesByThickness = Collections.EMPTY_MAP;
 
 /*
     public static RateCard fromJson(JsonObject json)
@@ -84,6 +85,7 @@ public class RateCard
 
     public double getRateByThickness(int thickness)
     {
+        if (!this.ratesByThickness.containsKey(thickness)) return 0;
         return this.ratesByThickness.get(thickness);
     }
 

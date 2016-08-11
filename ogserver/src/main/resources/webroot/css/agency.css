@@ -276,6 +276,25 @@ h6 {
 /* Global Class End*/
 
 /* CSS for New Home Page design by Smruti */
+.txt-over-banner-image{
+    position: absolute;
+    width: 46%;
+    height: 215px;
+    background: rgba(0,0,0,0.7);
+    top: 45%;
+    right: 0%;
+    padding: 30px;
+}
+.txt-over-banner-image p{
+    font-size:50px;
+    font-weight:300;
+    line-height:1.45;
+    color:#fff;
+    font-family: 'Lato', sans-serif;
+}
+.apke-liye{
+    font-size:35px!important;
+}
 
 #bs-example-navbar-collapse-1 .nav li .dropdown-menu li a:hover:before {
     visibility: hidden;
@@ -1218,7 +1237,7 @@ a.button-about-white:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.8);
     position: absolute;
-    top: 15%;
+    top: 25%;
     right: 5%;
 }
 
@@ -1745,9 +1764,15 @@ button {
     font-weight: 600 !important;
 }*/
 
-.header-icon {
+/*.header-icon {
     margin: 5px 10px 5px 10px !important;
     font-size: 20px !important;
+    font-weight: 600 !important;
+}*/
+
+.header-icon {
+    margin: 0px 10px 0px 10px !important;
+    font-size: 25px !important;
     font-weight: 600 !important;
 }
 
@@ -1785,7 +1810,7 @@ button {
 .menu-icon {
     position: absolute;
     left: 80%;
-    top: 10px;
+    top: 8px;
     padding: 2px;
     min-width: 180px;
 }
@@ -2288,6 +2313,10 @@ button {
 
 .font-size45 {
     font-size: 45px!important;
+}
+
+.font-size50 {
+    font-size: 50px;
 }
 
 .font-size55 {
@@ -2813,8 +2842,16 @@ input[type=checkbox] {
     color: #555;
     font-size: 8px;
     position: absolute;
-    top: 8px;
-    right: 15px;
+    top: 0px;
+    right: 19px;
+}
+.super-script1 {
+    display: block !important;
+    color: #555;
+    font-size: 8px;
+    position: absolute;
+    top: 12px;
+    right: 70px;
 }
 
 .stick {
@@ -5739,7 +5776,7 @@ a.tab-ico {
 
 .shobha_banner_txt {
    position: absolute;
-   top: 10%;
+   top: 19%;
    width: 100%;
    background-color: rgba(0, 0, 0, 0.3);
 }
@@ -5878,7 +5915,7 @@ a.tab-ico {
 
 .pune_banner_txt {
    position: absolute;
-   top: 20%;
+   top: 30%;
    right: 0%;
    margin: auto;
    color: #fff;
@@ -6080,7 +6117,7 @@ a.tab-ico {
     box-shadow: none;
     background-color: none;
     position: absolute;
-    top: 16%;
+    top: 30%;
     right: 5%;
 }
 
@@ -7394,15 +7431,46 @@ width:14% !important;
         width: 32% !important;
      }
 .kitchen-icon{
-    width: 26% !important;
+    width: 32% !important;
     border-right: solid 2px #ccc;
 
 }
 .wardrobe-icon{
-width: 23% !important;
+width: 29% !important;
 border-right: solid 2px #ccc;
 }
 .otherunit-icon{
-width: 25% !important;
+width: 32% !important;
 
+}
+.font-weight600{
+ font-weight: 600 !important;
+}
+.padding50-94{
+padding: 50px 94px;
+}
+
+.testimonials-carousel .carousel-caption{
+    position: absolute;
+    bottom: 12px;
+    color: #333;
+    text-shadow: none;
+    font-weight: 500;
+    padding: 0px;
+    margin: 0px;
+    width: 70%;
+    line-height: 12px;
+    left: 7%;
+}
+.testimonials-carousel .carousel-inner p{
+    font-size: 10px;
+    line-height: 150%;
+    font-family: 'Raleway', sans-serif;
+    margin: 0px;
+}
+.testimonials-carousel .carousel-indicators{
+    bottom: 85px;
+}
+.carousel-inner{
+    margin: 0px !important;
 }

@@ -30,7 +30,7 @@ public class AccPackHandler implements ExcelRowHandler
         {
             String compCode = (String) data[i];
             if (StringUtils.isEmpty(compCode)) continue;
-            int quantity = Double.valueOf((String) data[i+1]).intValue();
+            double quantity = Double.valueOf((String) data[i+1]).doubleValue();
             this.printComponentRow(accode, compCode, quantity, compType);
         }
     }
@@ -40,7 +40,7 @@ public class AccPackHandler implements ExcelRowHandler
         System.out.println("insert acc_pack_master(code, title) values ('" + accode + "','" + title + "');");
     }
 
-    private void printComponentRow(String apCode, String compCode, int quantity, String compType)
+    private void printComponentRow(String apCode, String compCode, double quantity, String compType)
     {
         System.out.println("insert acc_pack_components(apcode, type, code, qty) " +
                 "values ('" + apCode + "','" + compType + "','" + compCode + "'," + quantity + ");");
