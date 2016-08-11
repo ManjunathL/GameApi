@@ -769,6 +769,14 @@ h6 {
       .contact-section {
           height: 618px!important;
       }
+      .brand-container{
+            width:100%;
+            margin: 0px auto;
+      }
+      .flip-div {
+            padding: 0px 10px;
+      }
+
   }
 
 
@@ -7452,7 +7460,7 @@ padding: 50px 94px;
 
 .testimonials-carousel .carousel-caption{
     position: absolute;
-    bottom: 12px;
+    bottom: 15px;
     color: #333;
     text-shadow: none;
     font-weight: 500;
@@ -7469,8 +7477,16 @@ padding: 50px 94px;
     margin: 0px;
 }
 .testimonials-carousel .carousel-indicators{
-    bottom: 85px;
+    bottom: 90px;
 }
 .carousel-inner{
     margin: 0px !important;
+}
+.banner-icon-height{
+    min-height: 200px;
+    line-height: 150%;
+}
+.process-icon-height{
+    min-height: 170px;
+    line-height: 150%;
 }
