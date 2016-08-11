@@ -1,0 +1,1213 @@
+
+/* Global Class By Nagmani Bhushan*/
+
+.full-screen {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Know Your Wardrobe */
+
+.kyw-banner-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470916467/kyw/knw_banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 360px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
+.open-wardrobe-section{
+    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
+}
+.open-wardrobe-inter-section{
+    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
+    height:750px;
+}
+.open-wardrobe-section p{
+    font-size: 16px;
+    margin: -20px 0px 25px;
+    line-height: 150%;
+}
+.ergonomics-heading {
+    margin: 10px 0px 0px;
+    font-weight: 300;
+    color: #707375;
+}
+.ergonomics-wrapper p {
+    font-size: 16px;
+    margin: -20px 10px 30px;
+    line-height: 150%;
+}
+.kyw-slider-heading{
+    margin: 20px 0px 10px;
+    font-weight: 300;
+    color: #000000;
+}
+.kyw-slider-carousel .carousel-inner img{
+    min-height: 380px;
+}
+#kyw-slider-carousel .carousel-inner{
+    margin-top: 0px !important;
+}
+#kyw-slider-carousel .carousel-caption {
+    left: auto;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+}
+#kyw-slider-carousel .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 15%;
+}
+#kyw-interior-slider .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 0%;
+}
+#kyw-slider-carousel .carousel-indicators {
+    bottom: 30px;
+}
+#kyw-slider-carousel  .carousel-indicators li{
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #222222;
+}
+#kyw-slider-carousel  .carousel-indicators .active {
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: #949494;
+}
+.kyw-slider-carousel p{
+    font-size: 16px;
+    line-height: 150%;
+    margin-top: 25px;
+}
+.kyw-wardrobe-type{
+    padding: 20px 30px;
+}
+.wardrobe-head{
+    margin: 70px 10px 20px;
+    font-weight: 300;
+}
+.kyw-wardrobe-details{
+    padding: 20px 0px 10px;
+}
+.kyw-wardrobe-details p{
+    font-size: 16px;
+    line-height: 150%;
+    color: #444444;
+}
+.kyw-wardrobe-card {
+    margin-top: 60px;
+}
+.kyw-wardrobe-card h5{
+    font-weight:500!important;
+}
+.interior-section{
+    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern_color.png");
+}
+.interior-section .interior-para{
+    color: #333333;
+    text-shadow: none;
+    font-size: 16px;
+    line-height: 150%;
+}
+.interior-heading{
+    margin: 20px 0px 0px;
+    font-weight: 300;
+    color: #707375;
+}
+#kyw-interior-slider .carousel-inner{
+    margin-top: 0px !important;
+}
+#kyw-interior-slider .carousel-caption {
+    left: auto;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+}
+#kyw-interior-slider .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 0%;
+}
+#kyw-interior-slider .carousel-caption {
+    left: 25%;
+    right: 5%;
+    width: 30%;
+    color: #333;
+    bottom: 100px;
+    text-shadow: 0px 0px 0px #fff;
+    top: 0%;
+}
+#kyw-interior-slider .carousel-indicators {
+    bottom: 15px;
+}
+#kyw-interior-slider  .carousel-indicators li{
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #222222;
+}
+#kyw-interior-slider  .carousel-indicators .active {
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: #949494;
+}
+.interior-section .carousel-caption{
+    padding:0px;
+    width: 50%;
+}
+
+.dimensions-head{
+    margin: 25px 10px 20px;
+    font-weight: 300;
+    color: #707375;
+}
+.kyw-dimensions-details{
+    margin: 10px 0px 10px;
+}
+.kyw-dimensions-details p{
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.kyw-material{
+    background: #beb9b6;
+    min-height: 450px;
+}
+.kyw-material-img{
+    padding: 90px 50px 20px;
+}
+.kyw-material-details{
+    margin: 20px 0px;
+}
+.kyw-dimensions-card-tab{
+    margin: 10px 40px;
+}
+.kyw-finishes-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260942/kyw/PG_10_1_BACKGROUND.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 750px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #444444;
+}
+.kyw-finishes-section .laminate{
+    border-bottom:7px solid #5a777b;
+}
+.kyw-finishes-section .pupaint{
+    border-bottom:7px solid #abeeeb;
+}
+.kyw-finishes-section .pvcfoil{
+    border-bottom:7px solid #555555;
+}
+.kyw-finishes-details {
+    margin: 20px 40px;
+}
+.kyw-finishes-details p{
+    font-size: 16px;
+    line-height: 150%;
+}
+.finishes-heading {
+    margin: 110px 10px 95px;
+    font-weight: 300;
+    color: #707375;
+}
+
+.kyw-finishes-type-heading {
+    margin: 70px 10px 85px;
+    font-weight: 300;
+    color: #ffffff;
+}
+.kyw-finishes-type-section{
+    position: relative;
+}
+.kyw-material-content-tab,
+.kyw-wardrobe-content-tab,
+.kyw-finishes-type-content-tab{
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    width: 100%;
+}
+.finishes-type-container{
+    width: 100%;
+}
+
+.kyw-finishes-type-section .matte{
+    border-bottom:7px solid #464646;
+}
+.kyw-finishes-type-section .suede{
+    border-bottom:7px solid #a1a1a1;
+}
+.kyw-finishes-type-section .highgloss{
+    border-bottom:7px solid #cccccc;
+}
+.kyw-finishes-type-section .acrylis{
+    border-bottom:7px solid #ffffff;
+}
+.shutter-designs-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104501/kyk/Scene_Shutter.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.shutter-designs-heading{
+    margin: 30px 10px 30px;
+    font-weight: 300;
+    color: #ffffff;
+}
+.accessories-heading{
+    margin: 10px 10px 0px;
+    font-weight: 300;
+    color: #707375;
+}
+.handle-heading{
+    margin: 40px 10px 20px;
+    font-weight: 300;
+    color: #333333;
+}
+.shutter-designs-section p{
+    font-size: 16px;
+    line-height: 150%;
+}
+.kyw-handle-card{
+    padding:20px 30px;
+}
+
+.accessories-section-img{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260988/kyw/PG_13_1_MAIN_BACKGROUND_IMAGE.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 700px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.hardware-section-img{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 700px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.accessories-hardware-section-img{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137366/kyk/accessories.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 700px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.g-lift{
+    position: absolute;
+    bottom: 20px;
+    width: 250px;
+    height: auto;
+    font-size: 20px;
+    left: 0px;
+}
+.t-lift{
+    position: absolute;
+    top: 20px;
+    width: 250px;
+    height: auto;
+    font-size: 20px;
+    left: 0px;
+}
+.h-lift{
+    position: absolute;
+    bottom: 5px;
+    width: 240px;
+    height: auto;
+    font-size: 12px;
+    left: 5px;
+    right: 5px;
+}
+/* Trigger item */
+
+.content {
+	padding: 0 10px;
+	margin: 0 auto;
+	text-align: center;
+	top: 0px !important;
+}
+
+.dummy-image {
+	position: relative;
+}
+.dummy {
+	text-align: left;
+	padding: 1em;
+	min-height: 300px;
+	margin: 0 auto;
+	font-weight: 300;
+}
+.tooltip-content{
+    padding: 0px;
+}
+.tooltip {
+	position: absolute!important;
+	z-index: 999!important;
+	width: 2.2em!important;
+	height: 2.2em!important;
+	cursor: pointer!important;
+	opacity: 2;
+	font-family: 'Lato', sans-serif;
+}
+.tooltip-item {
+	width: 30px;
+	height: 30px;
+	left: 50%;
+	top: 50%;
+	margin: -15px 0 0 -15px;
+	position: absolute;
+	border-radius: 50%;
+	z-index: 999;
+	border: 2px solid #333333;
+	-webkit-animation: pulse 0.6s infinite alternate;
+	animation: pulse 0.6s infinite alternate;
+}
+
+@-webkit-keyframes pulse {
+	from { -webkit-transform: scale3d(0.5,0.5,1); }
+	to { -webkit-transform: scale3d(1,1,1); }
+}
+
+@keyframes pulse {
+	from { -webkit-transform: scale3d(0.5,0.5,1); transform: scale3d(0.5,0.5,1); }
+	to { -webkit-transform: scale3d(1,1,1); transform: scale3d(1,1,1); }
+}
+
+.tooltip:hover .tooltip-item {
+	border-color: #fff;
+}
+
+.tooltip:first-child {
+	top: 20%;
+	left: 20%;
+}
+
+.tooltip:nth-child(2) {
+	top: 50%;
+	left: 10%;
+}
+
+.tooltip:nth-child(3) {
+	top: 40%;
+	left: 50%;
+}
+
+.tooltip:nth-child(4) {
+	top: 70%;
+	left: 70%;
+}
+
+/* Tooltip */
+
+.tooltip-content {
+	position: absolute;
+	z-index: 9999;
+	width: 200px;
+	bottom: 50%;
+	margin-bottom: -1em;
+	padding: 0px;
+	font-size: 1.1em;
+	text-align: center;
+	color: #fff;
+	opacity: 0;
+	cursor: default;
+	pointer-events: none;
+	-webkit-font-smoothing: antialiased;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+.tooltip-west .tooltip-content {
+	left: 4em;
+	z-index: 9999;
+	-webkit-transform-origin: -2em 50%;
+	transform-origin: -2em 50%;
+	-webkit-transform: translate3d(0,50%,0);
+    transform: translate3d(0,50%,0) ;
+	/*-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);
+	transform: translate3d(0,50%,0) rotate3d(1,1,1,30deg);*/
+}
+
+.tooltip-east .tooltip-content {
+	right: 4em;
+	z-index: 9999;
+	-webkit-transform-origin: calc(100% + 2em) 50%;
+	transform-origin: calc(100% + 2em) 50%;
+	-webkit-transform: translate3d(0,50%,0) rotate3d(1,1,1,-30deg);
+	transform: translate3d(0,50%,0) rotate3d(1,1,1,-30deg);
+}
+
+.tooltip:hover .tooltip-content {
+	opacity: 1;
+	z-index: 9999;
+	-webkit-transform: translate3d(0,50%,0) rotate3d(0,0,0,0);
+	transform: translate3d(0,50%,0) rotate3d(0,0,0,0);
+	pointer-events: auto;
+}
+
+/* Gap "bridge" and arrow */
+
+.tooltip-content::before,
+.tooltip-content::after {
+	content: '';
+	position: absolute;
+}
+
+.tooltip-content::before {
+	height: 100%;
+	width: 3em;
+}
+
+.tooltip-content::after {
+	width: 2em;
+	height: 2em;
+	top: 50%;
+	margin: -1em 0 0;
+	background: url(https://res.cloudinary.com/mygubbi/image/upload/v1470187709/kyw/tooltip2.svg) no-repeat center center;
+	background-size: 100%;
+}
+
+.tooltip-west .tooltip-content::before,
+.tooltip-west .tooltip-content::after {
+	right: 99%; /* because of FF, otherwise we have a gap */
+}
+
+.tooltip-east .tooltip-content::before,
+.tooltip-east .tooltip-content::after {
+	left: 99%; /* because of FF, otherwise we have a gap */
+}
+
+.tooltip-east .tooltip-content::after {
+	-webkit-transform: scale3d(-1,1,1);
+	transform: scale3d(-1,1,1);
+}
+
+/* Card View */
+
+.kyw-handle-card,
+.kyw-wardrobe-card,
+.kyw-dimensions-card{
+    margin: 15px 10px 15px;
+}
+.kyw-finishes-card{
+    margin: 60px 0px 40px;
+}
+.kyw-handle-card .nav-tabs > li.active,
+.kyw-wardrobe-card .nav-tabs > li.active,
+.kyw-dimensions-card .nav-tabs > li.active{
+    border-bottom: 7px solid #000000;
+}
+.kyw-finishes-card .nav-tabs > li.active{
+    border-bottom: 7px solid #000000;
+}
+.kyw-finishes-section .nav-tabs .laminate.active{
+    border-bottom: 7px solid #5a777b;
+}
+.kyw-finishes-section .nav-tabs .pupaint.active{
+    border-bottom: 7px solid #abeeeb;
+}
+.kyw-finishes-section .nav-tabs .pvcfoil.active{
+    border-bottom: 7px solid #555555;
+}
+
+.kyw-finishes-type-section .nav-tabs .matte.active{
+    border-bottom:7px solid #464646;
+}
+.kyw-finishes-type-section .nav-tabs .suede.active{
+    border-bottom:7px solid #a1a1a1;
+}
+.kyw-finishes-type-section .nav-tabs .highgloss.active{
+    border-bottom:7px solid #cccccc;
+}
+.kyw-finishes-type-section .nav-tabs .acrylis.active{
+    border-bottom:7px solid #ffffff;
+}
+
+.kyw-handle-card .nav-tabs.nav-justified>.active>a,
+.kyw-handle-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-handle-card .nav-tabs.nav-justified>.active>a:focus,
+.kyw-wardrobe-card .nav-tabs.nav-justified>.active>a,
+.kyw-wardrobe-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-wardrobe-card .nav-tabs.nav-justified>.active>a:focus,
+.kyw-dimensions-card .nav-tabs.nav-justified>.active>a,
+.kyw-dimensions-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-dimensions-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+    background: transparent;
+}
+.kyw-finishes-card .nav-tabs.nav-justified>.active>a,
+.kyw-finishes-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-finishes-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+    background: transparent;
+}
+.kyw-finishes-type-card .nav-tabs.nav-justified>.active>a,
+.kyw-finishes-type-card .nav-tabs.nav-justified>.active>a:hover,
+.kyw-finishes-type-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+    background: transparent;
+}
+
+@media (min-width:768px) {
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card{
+        margin-top: 30px;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kyw-handle-card .nav-tabs.nav-justified>li>a,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 7px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 0px solid #ddd;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-handle-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-wardrobe-card .nav-tabs.nav-justified>li>a:focus,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-dimensions-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 7px solid rgba(0, 0, 0, 0.6);
+    }
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
+    }
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:hover,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:active,
+    .kyw-finishes-type-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 0px solid #000;
+    }
+}
+
+/* Media Query */
+
+@media (min-width: 1900px) {
+    .shutter-designs-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104501/kyk/Scene_Shutter.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 570px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .hardware-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 960px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .content {
+    	padding: 45px 10px;
+    }
+    .accessories-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260988/kyw/PG_13_1_MAIN_BACKGROUND_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 920px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .accessories-hardware-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137366/kyk/accessories.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 800px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .accessories-hardware-section-img .content {
+        padding: 50px 230px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1100px) {
+    .accessories-section-img{
+        height: 640px;
+    }
+    .content {
+        padding: 0px 35px 10px 10px;
+    }
+    .hardware-section-img {
+        height: 620px;
+    }
+}
+
+@media (max-width: 768px) {
+    .kyw-banner-bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470916467/kyw/knw_banner.jpg");
+        background-position: center 100%;
+        height: 260px;
+        width: 100%;
+        background-size: 100%;
+        padding: 0;
+        text-align: center;
+        color: #fff;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        bottom: 50px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        bottom: 50px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+    }
+    #kyw-interior-slider .carousel-caption {
+        bottom: 50px;
+    }
+    #kyw-interior-slider .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+    }
+    #kyw-interior-slider .carousel-caption {
+        bottom: 50px;
+    }
+    #kyw-interior-slider .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 90%;
+    }
+    .kyw-wardrobe-details p {
+        font-size: 12px;
+    }
+    .kyk-shutter-cont {
+        margin: 1% 0%;
+    }
+    .kyw-dimensions-details{
+        margin: 10px 10px;
+    }
+    .handle-heading{
+        margin: 10px 0px 0px;
+    }
+    .kyw-handle-card{
+        padding: 0px;
+    }
+    .kyw-handle-card,
+    .kyw-wardrobe-card,
+    .kyw-dimensions-card{
+        margin: 0px 0px 10px;
+    }
+    .interior-section .carousel-caption{
+        padding:0px;
+        width: 100%;
+    }
+    .kyw-finishes-type-content-tab{
+        top: 0px;
+        width: 100%;
+        color: #ffffff;
+    }
+    .kyw-finishes-type-heading{
+        margin: 15px 10px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        top: 30%;
+        left: 25%;
+        width: 45%;
+    }
+    .kyw-material-content-tab,
+    .kyw-finishes-type-content-tab{
+        top: 0;
+    }
+    .kyw-wardrobe-content-tab {
+        position: relative;
+    }
+    .open-wardrobe-section p{
+        margin: -10px 0px 25px;
+    }
+    .ergonomics-wrapper p{
+        margin: -10px 0px 25px;
+    }
+    .accessories-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260988/kyw/PG_13_1_MAIN_BACKGROUND_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 420px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .hardware-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 400px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .shutter-designs-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260919/kyw/PG_12.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 240px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 5px;
+        text-align: center;
+        color: #ffffff;
+    }
+    .shutter-designs-heading{
+        margin: 10px 0px 10px;
+    }
+
+}
+
+@media (max-width: 767px){
+    .kyw-banner-bg {
+        height: 230px;
+    }
+    .kyw-material-content-tab,
+    .kyw-finishes-type-content-tab {
+        position: relative;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        margin: 0px;
+    }
+    .kyw-slider-heading{
+        margin: 0px;
+    }
+    .kyw-slider-carousel p {
+        font-size: 14px;
+        line-height: 150%;
+        margin-top: 10px;
+        font-weight: 300;
+        padding: 10px;
+        background: rgba(234, 234, 234, 0.92);
+    }
+    #kyw-slider-carousel .carousel-indicators {
+        bottom: 0px;
+    }
+    .kyw-finishes-type-heading {
+        color: #333333;
+        margin: 15px 10px;
+    }
+    .kyk-ergonomics-dec {
+        margin-top: 5%;
+    }
+    .kyk-handle-cont {
+        margin: 5% 0%;
+         width: 50%;
+        float: right;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .kyw-banner-bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470916467/kyw/knw_banner.jpg");
+        background-position: center 100%;
+        height: 105px;
+        width: 100%;
+        background-size: 100%;
+        padding: 0;
+        text-align: center;
+        color: #fff;
+    }
+    .kyw-wardrobe-details{
+        padding: 5px 0px 0px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        left: auto;
+        right: auto;
+        width: 100%;
+        bottom: 50px;
+    }
+    #kyw-interior-slider .carousel-caption {
+         left: auto;
+         right: auto;
+         width: 100%;
+         bottom: 50px;
+    }
+    .kyw-dimensions-details{
+        margin: 10px 10px;
+    }
+    .kyw-handle-card{
+        padding:10px 10px;
+    }
+    .kyw-handle-card,
+    .kyw-wardrobe-card,
+    .kyw-dimensions-card{
+        margin: 0px;
+    }
+    .interior-section .carousel-caption{
+        padding:0px;
+        width: 100%;
+    }
+    .kyw-finishes-type-content-tab{
+        top: 0px;
+        width: 100%;
+        color: #ffffff;
+    }
+    .kyw-finishes-type-heading{
+        color:#333333;
+        margin: 15px 10px;
+    }
+    #kyw-slider-carousel .carousel-caption {
+        top: 5%;
+    }
+    .kyw-material-content-tab,
+    .kyw-wardrobe-content-tab,
+    .kyw-finishes-type-content-tab{
+        top: 5%;
+        position: relative;
+    }
+    .open-wardrobe-section p{
+        margin: 0px;
+        font-size: 16px;
+        line-height: 150%;
+    }
+    .ergonomics-wrapper p{
+        margin: 0px 0px 20px;
+        font-size: 16px;
+        line-height: 150%;
+    }
+    .kyw-dimensions-details p{
+        font-size: 16px;
+    }
+    .kyw-wardrobe-details p {
+        font-size: 16px;
+        line-height: 150%;
+        color: #444444;
+    }
+    .accessories-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469260988/kyw/PG_13_1_MAIN_BACKGROUND_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 280px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .hardware-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1469261008/kyw/PG_15__1_MAIN_BASE_IMAGE.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 400px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .shutter-designs-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470396368/kyk/09.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #333333;
+    }
+    .shutter-designs-section p {
+        color: #333333;
+        font-size: 16px;
+    }
+    .finishes-type-container{
+        margin-bottom: 10px;
+    }
+    .kyw-finishes-details{
+        margin: 10px 10px;
+    }
+    .kyw-slider-carousel p{
+        font-size: 16px;
+        line-height: 150%;
+        margin-top: 25px;
+        font-weight: 300;
+        padding: 10px;
+        background: rgba(234, 234, 234, 0.92);
+    }
+    .shutter-designs-heading{
+        margin-top: 55%;
+        color:#333333;
+    }
+    #kyw-slider-carousel .carousel-indicators {
+        bottom: 5px;
+    }
+    .kyw-finishes-section {
+        height: 550px;
+    }
+    .kyw-finishes-card {
+        margin: 30px 0px 40px;
+    }
+    .finishes-heading {
+        margin: 30px 10px 40px;
+    }
+    .accessories-hardware-section-img{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470394482/kyk/Ergo-without-human.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 15px 0 15px 0;
+        text-align: center;
+        color: #333333;
+    }
+    .kyk-handle-cont {
+        margin: 5% 0%;
+        width: 100%;
+        float: right;
+    }
+}
+
+/* End Media Query */
+
+/* Global Media Query */
+
+@media all and (min-width: 768px) {
+    .hidden-desktop {
+        display: none !important;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .hidden-mobile{
+        display: none !important;
+    }
+}
+
+/* End Global Media Query */

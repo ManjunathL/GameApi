@@ -2,7 +2,7 @@
 <div class="row margin0 margin-top20">
     <a
             href="javascript:void(0);"
-            data-target="/product-<%=as.productId%>"
+            data-target="/newproduct-details-<%=as.productId%>"
             class="sb-search-txt">
         <div class="col-sm-6 searched-product">
             <%= as.name %>
@@ -10,7 +10,7 @@
 
         </div>
         <div class="col-sm-6 align-right hidden-xs">
-            <% if (as.defaultPrice !== 0) { %>
+            <% if (as.defaultPrice !== '0') { %>
             <i class="fa fa-inr"></i>
             <%= as.defaultPrice %>/-
             <% } else { %>

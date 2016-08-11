@@ -1,0 +1,823 @@
+<% document.title = product.name + ' | mygubbi' %>
+<link rel="stylesheet" href="/css/product-details.css">
+
+<section class="bg-white product-details-font">
+    <div class="container-fluid bg-color-white">
+        <div class="container">
+            <div class="row">
+                <div class="product-main-section">
+                    <div class="col-sm-7 col-md-7 col-lg-7">
+                        <div class="product-main-img">
+                            <% if(typeof(product.images) !== 'undefined'){ %>
+                            <img draggable="false" id="mainImg"
+                                 src="<%= imgBase + product.images[0] %>"
+                                 alt="<%= product.name %>" title="<%= product.name %>" class="width100">
+                            <% } %>
+                        </div>
+                        <!-- Product Related Images Start -->
+                        <div class="wrap">
+                            <div class="row">
+
+                                <div class="controls center col-xs-1">
+                                    <button class="btn prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
+                                    </button>
+                                </div>
+
+                                <div class="frame col-xs-10" id="forcecentered" style="overflow: hidden;">
+                                    <% if(typeof(product.images) !== 'undefined'){ %>
+                                    <ul class="clearfix slidee"
+                                        style="transform: translateZ(0px) translateX(0px); width: <%=(((product.images.length/3)+1)*3) * 110%>px;">
+                                        <% _.each(product.images, function(image){ %>
+                                        <li>
+                                            <img
+                                                    src="<%= imgBase + image %>"
+                                                    width="100%"/>
+                                        </li>
+                                        <% }); %>
+                                    </ul>
+                                    <% } %>
+                                </div>
+
+                                <div class="controls center col-xs-1">
+                                    <button class="btn next"><i class="pe-7s-angle-right font-size30"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Related Images End -->
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <div class="product-main-content text-center">
+                            <h2 class="product-heading"> <%= product.name %> </h2>
+                            <p class="about-product">
+                                <%= product.desc %>
+                            </p>
+                            <div class="product-price padding-top40">
+                                <h4> Price starting from : <strong> <% if (product.defaultPrice !== '0') { %>Rs. <%= product.defaultPrice %> /- <% } else { %> Consult for Price <% } %></strong></h4>
+                            </div>
+                            <div class="consult-section">
+                                <button id="product_consult" class="btn btn-block btn-product"> Consult </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Detail and Main Image -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="design-card">
+                        <div class="card">
+                            <ul class="nav nav-tabs nav-justified" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#designstyle" aria-controls="designstyle" role="tab" data-toggle="tab"> Design Style </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#material" aria-controls="material" role="tab" data-toggle="tab">  Material </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#finishes" aria-controls="finishes" role="tab" data-toggle="tab">  Finishes </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
+                                </li>
+<!--
+                                <% if(typeof(product.accessories) != 'undefined' && product.accessories.length != 0){ %>
+
+                                <li role="presentation">
+                                    <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
+                                </li>
+
+                                <% } %>
+-->
+                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
+                                <li role="presentation">
+                                    <a href="#appliance" aria-controls="appliance" role="tab" data-toggle="tab"> Appliance </a>
+                                </li>
+                                <% } %>
+                            </ul>
+                            <div class="tab-content">
+
+                                <div role="tabpanel" class="tab-pane active" id="designstyle">
+                                    <div class="designstyle-wrapper">
+                                        <div class="d-item">
+                                            <!--<div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="dstyle-carousels">
+                                                        <div class="d-item-img dstyle-img">
+                                                            <img class="img-responsive" src="<%= imgBase + '/project_details/' + product.styleImage %>" alt="designstyle">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-style">
+                                                    <h3> <%= product.styleName %> </h3>
+                                                    <p>
+                                                        <%= product.styleDescription %>
+                                                    </p>
+                                                </div>
+                                            </div>-->
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="tab-content design-carousels margin-top5">
+                                                        <div role="tabpanel" class="design-style-img tab-pane active" id="tab_style_1-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317953/project_details/style_board_b_w.jpg" alt="b_w">
+                                                        </div>
+                                                        <div role="tabpanel" class="design-style-img tab-pane" id="tab_style_2-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317951/project_details/style_board_monochrome.jpg" alt="monochrome">
+                                                        </div>
+                                                        <div role="tabpanel" class="design-style-img tab-pane" id="tab_style_3-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317952/project_details/style_board_bold.jpg" alt="bold">
+                                                        </div>
+                                                        <div role="tabpanel" class="design-style-img tab-pane" id="tab_style_4-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317951/project_details/style_board_fresh.jpg" alt="fresh">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-style">
+                                                    <div class="tabbable-line material-slide-nav">
+                                                        <ul class="nav nav-tabs ">
+                                                            <li id="tab_style_1" class="design-style active">
+                                                                    <a>Black and White, <br/> The Original</a>
+                                                            </li>
+                                                            <li id="tab_style_2" class="design-style">
+                                                                    <a>Monochrome, <br/> The Glorious Embrace</a>
+                                                            </li>
+                                                            <li id="tab_style_3" class="design-style">
+                                                                    <a>Bold & Vibrant, <br/> Renaissance</a>
+                                                            </li>
+                                                            <li id="tab_style_4" class="design-style">
+                                                                    <a>Fresh, <br/> Dolce Vita</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content padding-top15">
+                                                            <div class="design-style-cnt tab-pane active" id="tab_style_1-cnt">
+                                                                <p>
+                                                                    Bring back the originality of colour - just go all
+                                                                    out with black and white! Make bold statements which
+                                                                    are true to your nature and have it reflected on
+                                                                    your designs. Black and white patterns blend
+                                                                    beautifully with minimalistic and linear design
+                                                                    approach.
+                                                                </p>
+                                                            </div>
+                                                            <div class="design-style-cnt tab-pane" id="tab_style_2-cnt">
+                                                                <p>
+                                                                    Monochrome designs redefine patterns which are
+                                                                    appealing, attractive and on par with the latest
+                                                                    trends. Once it blends in with your thoughts, we are
+                                                                    sure it would marry you through your entire design
+                                                                    process. Mix these patterns with your contemporary
+                                                                    designs, you’re sure to recreate magic!
+                                                                </p>
+                                                            </div>
+                                                            <div class="design-style-cnt tab-pane" id="tab_style_3-cnt">
+                                                                <p>
+                                                                    For those who ooze out vibrancy, these designs are
+                                                                    about feeling warm with organized clutter around!
+                                                                    Blend these patterns with subtle colours and be rest
+                                                                    assured that bold energies are bound to reflect from
+                                                                    your home! These designs pick inspiration from
+                                                                    Jodhpur style furniture and Persian style pattern.
+                                                                </p>
+                                                            </div>
+                                                            <div class="design-style-cnt tab-pane" id="tab_style_4-cnt">
+                                                                <p>
+                                                                    Ever longed for houses with blue and white finishes
+                                                                    along with sand color imprints? If yes, then these
+                                                                    designs are just for you! Extremely warm, relaxing
+                                                                    and positive, they are for those who love to live
+                                                                    among the blue waters hitting against the white
+                                                                    windows.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear clearfix"></div>
+                                <div role="tabpanel" class="tab-pane" id="material">
+                                    <div class="material-wrapper">
+                                        <div class="m-item">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="tab-content material-carousels margin-top5">
+                                                        <div role="tabpanel" class="m-item-img material-img tab-pane active" id="tab_material_1-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1469778551/project_details/product-detail-page_mdf.jpg" alt="mdf">
+                                                        </div>
+                                                        <div role="tabpanel" class="m-item-img material-img tab-pane" id="tab_material_2-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1469778551/project_details/product-detail-page_PLY.jpg" alt="ply">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-style">
+                                                    <div class="tabbable-line material-slide-nav">
+                                                        <ul class="nav nav-tabs ">
+                                                            <li id="tab_material_1" class="tab_material active">
+                                                                <a>
+                                                                    MDF </a>
+                                                            </li>
+                                                            <li id="tab_material_2" class="tab_material">
+                                                                <a>
+                                                                    PLY </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="material-cnt tab-pane active" id="tab_material_1-cnt">
+                                                                <p>
+                                                                    Durable, economical and perfect for practical
+                                                                    storage solutions, MDF can be field, cut and drilled
+                                                                    without damaging the surface.
+                                                                </p>
+                                                            </div>
+                                                            <div class="material-cnt tab-pane" id="tab_material_2-cnt">
+                                                                <p>
+                                                                    Plywood is a strong material which is extremely
+                                                                    durable and economical. Plywood is sheets of wood
+                                                                    that have been pasted together through strong
+                                                                    chemical treatment, thereby making them extremely
+                                                                    sturdy. Plywood is also more economical than solid
+                                                                    wood and they are easy to maintain, as they are
+                                                                    scratch resistant.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="finishes">
+                                    <div class="finishes-wrapper">
+                                        <div class="f-item">
+                                            <div class="row">
+                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                    <div class="tabbable-line finish-slide-nav">
+                                                        <ul class="nav nav-tabs ">
+                                                            <li class="active">
+                                                                <a href="#tab_finish_1" data-toggle="tab">
+                                                                    GLOSSY </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#tab_finish_2" data-toggle="tab">
+                                                                    MATT </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#tab_finish_3" data-toggle="tab">
+                                                                    SUEDE </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane active" id="tab_finish_1">
+                                                                <p>
+                                                                    This finish is available in laminate, foil and
+                                                                    paint. Glossy finish is visually pleasing, and while
+                                                                    the surface looks natural it has a velvet smoothness
+                                                                    to it.
+                                                                </p>
+                                                            </div>
+                                                            <div class="tab-pane" id="tab_finish_2">
+                                                                <p>
+                                                                    While Matt finish is available only on paint, this
+                                                                    finish brings simplicity and a natural tone to the
+                                                                    surface. Not only does it look classy, but it also
+                                                                    gives a finishing touch to the surface.
+                                                                </p>
+                                                            </div>
+                                                            <div class="tab-pane" id="tab_finish_3">
+                                                                <p>
+                                                                    The finish that can be made available in laminate,
+                                                                    foil and paint, and features a smooth texture. This
+                                                                    finish ensures that the interiors look sharp and
+                                                                    classy.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7 col-md-7 col-lg-7">
+                                                    <div class="finishes-foil-box">
+                                                        <div class="row">
+
+                                                            <ul class="list-inline margin0">
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/American_Walnut_14538.jpg' %>" class="finish-thumbnail thumbnail" alt="American_Walnut">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Cardinal_21065_SF.jpg' %>" class="finish-thumbnail thumbnail" alt="Cardinal">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Champagne_21187_MR.jpg' %>" class="finish-thumbnail thumbnail" alt="Champagne">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Emerald__21013.jpg' %>" class="finish-thumbnail thumbnail" alt="Emerald">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Fiesta_Rose_22115.jpg' %>" class="finish-thumbnail thumbnail" alt="Fiesta_Rose">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Hardrock_Maple_10888.jpg' %>" class="finish-thumbnail thumbnail" alt="Hardrock_Maple">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Kingfisher_Blue_21122.jpg' %>" class="finish-thumbnail thumbnail" alt="Kingfisher_Blue">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Mahagony_10699.jpg' %>" class="finish-thumbnail thumbnail" alt="Mahagony">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Parakeet__22017.jpg' %>" class="finish-thumbnail thumbnail" alt="Parakeet">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Pearl_Black_22109.jpg' %>" class="finish-thumbnail thumbnail" alt="Pearl_Black">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Laminate/Persian_Walnut_14540.jpg' %>" class="finish-thumbnail thumbnail" alt="Persian_Walnut">
+                                                                </li>
+                                                            </ul>
+
+                                                            <label class="finishes-label laminate-top-label"> Laminate </label>
+                                                        </div>
+                                                        <div class="row">
+                                                            <ul class="list-inline margin0">
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Aqua.jpg' %>" class="finish-thumbnail thumbnail" alt="Aqua">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Cafe_Latte.jpg' %>" class="finish-thumbnail thumbnail" alt="Cafe_Latte">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Cerezo_Cherry.jpg' %>" class="finish-thumbnail thumbnail" alt="Cerezo_Cherry">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Copper_Red.jpg' %>" class="finish-thumbnail thumbnail" alt="Copper_Red">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Euro_Wenge1.jpg' %>" class="finish-thumbnail thumbnail" alt="Euro_Wenge1">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Fango.jpg' %>" class="finish-thumbnail thumbnail" alt="Fango">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Gorse.jpg' %>" class="finish-thumbnail thumbnail" alt="Gorse">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/HG_Margherita.jpg' %>" class="finish-thumbnail thumbnail" alt="HG_Margherita">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/HG_Wolfram_Grey.jpg' %>" class="finish-thumbnail thumbnail" alt="HG_Wolfram_Grey">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Italian_Wallnut.jpg' %>" class="finish-thumbnail thumbnail" alt="Italian_Wallnut">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Oceanic_A.jpg' %>" class="finish-thumbnail thumbnail" alt="Oceanic_A">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Poppy.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Oxford_Cherry.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Melanzana_Nat_Trend.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>
+                                                                <!--<li>
+                                                                    <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/Foil/Tropical_Green.jpg' %>" class="finish-thumbnail thumbnail" alt="Poppy">
+                                                                </li>-->
+
+                                                            </ul>
+                                                            <label class="finishes-label laminate-label"> Foil </label>
+                                                        </div>
+                                                        <div class="row">
+                                                            <ul class="list-inline margin0">
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/BLACK_OLIVE___RAL6015.jpg' %>" class="finish-thumbnail thumbnail" alt="BLACK_OLIVE">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/LIGHT_IVORY___RAL1015.jpg' %>" class="finish-thumbnail thumbnail" alt="LIGHT_IVORY">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/OPAL_GREEN___RAL_6026.jpg' %>" class="finish-thumbnail thumbnail" alt="OPAL_GREEN">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_1023__mustard.jpg' %>" class="finish-thumbnail thumbnail" alt="mustard">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_3005_Wine_Red.jpg' %>" class="finish-thumbnail thumbnail" alt="Wine_Red">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/Ral_3022.jpg' %>" class="finish-thumbnail thumbnail" alt="Ral">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_5009_Azure_Blue.jpg' %>" class="finish-thumbnail thumbnail" alt="Azure_Blue">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/ral_6000_patina_green.jpg' %>" class="finish-thumbnail thumbnail" alt="patina_green">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_7022_Umbra_Grey.jpg' %>" class="finish-thumbnail thumbnail" alt="Umbra_Grey">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/RAL_7044_Silk_Grey.jpg' %>" class="finish-thumbnail thumbnail" alt="Silk_Grey">
+                                                            </li>
+                                                            <li>
+                                                                <img src="<%= imgBase + 'c_fit,h_32,w_32' + '/project_details/PUPaint/WATER_BLUE___RAL_5021.jpg' %>" class="finish-thumbnail thumbnail" alt="WATER_BLUE">
+                                                            </li>
+                                                        </ul>
+                                                            <label class="finishes-label laminate-label"> Pu Paint </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="accessories">
+                                    <div class="accessories-wrapper">
+                                        <div class="d-item">
+                                        <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="tab-content acc-carousels margin-top5">
+                                                <div role="tabpanel" class="acc-img tab-pane active" id="tab_style_5-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724124/project_details/accs1.jpg" alt="undersink">
+                                                </div>
+                                                <div role="tabpanel" class="acc-img tab-pane" id="tab_style_6-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724127/project_details/accs2.jpg" alt="pullout">
+                                                </div>
+                                                <div role="tabpanel" class="acc-img tab-pane" id="tab_style_7-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724131/project_details/accs3.jpg" alt="drawer">
+                                                </div>
+                                                <div role="tabpanel" class="acc-img tab-pane" id="tab_style_8-img">
+                                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470724128/project_details/accs4.jpg" alt="dish">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-style acc-style">
+                                            <div class="tabbable-line material-slide-nav">
+                                                <ul class="nav nav-tabs ">
+                                                    <li id="tab_style_5" class="acc-img-cnt active">
+                                                        <a>Under Sink <br/>Solutions</a>
+                                                    </li>
+                                                    <li id="tab_style_6" class="acc-img-cnt">
+                                                        <a>Pull Out <br/> Drawers </a>
+                                                    </li>
+                                                    <li id="tab_style_7" class="acc-img-cnt">
+                                                        <a>Drawer <br/> Organizers</a>
+                                                    </li>
+                                                    <li id="tab_style_8" class="acc-img-cnt">
+                                                        <a>Dish  <br/>Drainers</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content padding-top15">
+                                                    <div class="acc-cnt tab-pane active" id="tab_style_5-cnt">
+                                                        <p>
+                                                            Organizing the space below your sink ensures a clutter-free setup for all your cleaning essentials.
+                                                            Maintaining those stains on your precious dining plates, is now easy!
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_6-cnt">
+                                                        <p>
+                                                            Our range of pullout modular drawers stores kitchen essentials that are of varying sizes and shapes giving you ample room to make the most of your kitchen.
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_7-cnt">
+                                                        <p>
+                                                            These smart little creations ensure that your drawers are organized based on your usage. No more rummaging through seemingly bottomless drawers again!
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_8-cnt">
+                                                        <p>
+                                                            Stylish dish drainers for platforms and for cupboards make sure that your dishes don't have unsightly water stains, and are neatly stacked away once clean.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                         </div>
+                                    </div>
+                                </div>
+
+                                <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
+                                <div role="tabpanel" class="tab-pane" id="appliance">
+                                    <div class="appliance-wrapper">
+                                        <div id="mycarousel-appliances" class="carousel appliance-carousels slide" data-ride="appliance-carousels">
+                                            <!-- Indicators -->
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#mycarousel-appliances" data-slide-to="0" class="active"></li>
+                                                <li data-target="#mycarousel-appliances" data-slide-to="1"></li>
+                                                <li data-target="#mycarousel-appliances" data-slide-to="2"></li>
+                                            </ol>
+                                            <!-- Wrapper for slides -->
+                                            <div class="carousel-inner" role="listbox">
+                                                <!--<% if(typeof(product.appliances) != 'undefined'){ %>
+                                                <% _.each (product.appliances, function(appliance) { %>
+                                                <div class="item items">
+                                                    <img src="<%= imgBase + '/project_details/' + appliance.image %>" alt="First Image">
+                                                    <div class="carousel-caption">
+                                                        <p> <%= appliance.Desc %> </p>
+                                                    </div>
+                                                </div>
+                                                <% }); %>
+                                                <% } %>-->
+                                                <div class="carousel-inner" role="listbox">
+                                                    <div class="item items">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app2.jpg" alt="First Image">
+                                                        <div class="carousel-caption">
+                                                            <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item items">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app3.jpg" data-color="firebrick" alt="Second Image">
+                                                        <div class="carousel-caption">
+                                                            <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item items">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/app1.jpg" data-color="violet" alt="Third Image">
+                                                        <div class="carousel-caption">
+                                                            <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Quality Details -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card warranty-card">
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#warranty" aria-controls="related-image" role="tab" data-toggle="tab"> Warranty </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#delivery" aria-controls="related-collection" role="tab" data-toggle="tab">  Delivery </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#payments" aria-controls="related-collection" role="tab" data-toggle="tab">  Payments </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="warranty">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <h5>5 YEAR WARRANTY PLAN</h5>
+                                        <p>
+                                            Mygubbi products are made from high-quality, hand-crafted items which are designed  and made from superior and standardized raw materials. We follow rigid quality protocols from the design process until the delivery of the order.
+                                        </p>
+                                        <p>
+                                            All mygubbi products come with a 5-year warranty against any manufacturing defects. With mygubbi 5-year warranty plan, you are insured from the day of installation, without any hidden charged or fee.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="delivery">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <h5>45 DAYS DELIVERY GUARANTEE</h5>
+                                        <p> For all confirmed orders to be delivered via standard delivery option, the estimated delivery time is 45 days from the date of design finalization or order confirmation date whichever is later.</p>
+                                        <p> While we ensure that you receive your orders within the delivery time indicated in our shipping policies, unforeseen and uncontrollable events may cause the delay of your delivery. We will contact you in the event of any disruption. </p>
+                                        <p> Highly trained members of our team will assemble and install all furniture, interior fittings purchased from mygubbi.com This is to ensure the best quality of service you deserve for placing your trust in mygubbi to join you in this celebration of your home. </p>
+                                        <p> We will safely assemble and deliver the products at your doorstep. If you want installation then we will do that right in front of you. Moreover, we don’t charge for installation of any product. Our experts will ensure that your home is refurbished safely and aesthetically </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="payments">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <h5>OUR PAYMENT PROCESS</h5>
+                                        <p>For the standard designs, we expect 50% in advance to procure and start the manufacturing process. The remaining 50% will be expected once items are completely manufactured in our warehouse.</p>
+                                        <p>For customized interior orders we follow a 10-40-50 payment policy. We expect 10% of approximate initial budgeted estimate as advance which will subsequently be adjusted against the total cost of the project if you go ahead with our design and execution. The next 40% will be expected on finalization of the design and the last 50% will be paid once material is ready for shipment.</p>
+                                        <p>All prices are inclusive of VAT/service tax. You can always reap in the benefits of easy EMI options via Bajaj Finserv.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Terms Images -->
+    </div>
+</section>
+
+<!-- Consult Modal -->
+<div id="consultpop" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="contact-form">
+            <div class="row">
+                <h2 class="align-center">
+                    <span class="pe-7s-note"></span>
+                    Consult
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="paddingtop30">
+                        <div class="row margin_auto">
+                            <div class="col-xs-6">
+                                <span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 80 88 86 0860</span>
+                            </div>
+                            <div class="col-xs-6 align-right">
+                                <span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row display-none" id="consult_error_row">
+                        <p class="margin0 error-text align-center" id="consult_error"></p>
+                    </div>
+
+                    <form method="post" enctype="multipart/form-data"
+                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                          class="width90 margin_auto paddingtop20">
+                        <div class="row">
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='FirstName' name='FirstName'
+                                       placeholder="Name*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                       required='required'/>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='EmailAddress'
+                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                       required='required' pattern=".+@.+\..+"
+                                       title="<abc>@<xyz>.<com>"/>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' class="width100 form-control" id='Phone'
+                                       name='Phone'
+                                       placeholder="Phone Number*" maxlength='20'
+                                       value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                       required='required' pattern="\d{10}"
+                                       title="e.g. 9876543210"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                <textarea class="width100 form-control" id="mx_Requirement"
+                                          name='mx_Requirement' maxlength='150' value='' autocomplete='off'
+                                          placeholder="Describe your Requirements / Queries">I'm interested in "<%= product.name %>" . Looking forward to hear from you.</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="width100 form-control" placeholder="Property Name"
+                                       id='mx_Street2' name='mx_Street2' maxlength='256' value='' autocomplete='off' />
+                            </div>
+                            <div class="form-group">
+                                <label for='exclude_FileUpload_1'>Upload Floorplan</label>
+                                <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
+                                <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
+                            </div>
+                            <div class="align-center form-group">
+                                <button class="button-blue"
+                                        id="form-submit-button"
+                                        type="submit">Submit
+                                </button>
+                                <br/>
+                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                <input type="hidden" name="MXHLandingPageId" value="f7c3e93f-3d1a-11e6-b61b-22000aa8e760" />
+                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-details-page" />
+                                <input type="hidden" name="MXHAsc" value="5" />
+                                <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
+                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript"> var MXLandingPageId = 'f7c3e93f-3d1a-11e6-b61b-22000aa8e760'; </script>
+                </div>
+            </div>
+            <div id="close-consult-pop" data-element="#consultpop" class="close-icon signup-form">
+                <img src="<%= imgBase + 'close-white.png'%>">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- consult Modal End -->
+
+
+<script>
+    var items = $('.carousels .items');
+
+    var wHeight = $(window).height();
+    var nHeight = (wHeight/2);
+
+    items.eq(0).addClass('active');
+    items.height(nHeight);
+    items.addClass('full-screen');
+
+
+    var apitems = $('.appliance-carousels .items');
+    apitems.eq(0).addClass('active');
+    apitems.height(nHeight);
+    apitems.addClass('full-screen');
+
+    var dsitems = $('.design-carousels .design-style-img');
+    dsitems.height(nHeight);
+    dsitems.addClass('full-screen');
+
+    var dsitems = $('.acc-carousels .acc-img');
+    dsitems.height(nHeight);
+    dsitems.addClass('full-screen');
+
+    var mtitems = $('.material-carousels .material-img');
+    mtitems.height(nHeight);
+    mtitems.addClass('full-screen');
+
+    $('.carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.appliance-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.design-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.acc-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+    $('.material-carousels img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
+    });
+
+
+
+    $(document).ready(function() {
+        $('#relatedCarousel').carousel({
+            interval: 10000
+        });
+
+        $('.carousels').carousel({
+          interval: 6000,
+          pause: "false"
+        });
+
+        $('.appliance-carousels').carousel({
+          interval: 6000,
+          pause: "false"
+        });
+    });
+
+
+
+</script>

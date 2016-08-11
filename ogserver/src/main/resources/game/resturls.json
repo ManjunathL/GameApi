@@ -1,0 +1,300 @@
+{
+  "resturls": [
+    {
+      "uri": "/gapi/proposal/summary",
+      "source": "db",
+      "query":"proposal.summary",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/header",
+      "source": "db",
+      "query":"proposal.header",
+      "params":["id"],
+      "resultfields":[],
+      "default": "{}",
+      "singleRecord": true
+    },
+    {
+      "uri": "/gapi/proposal/documents",
+      "source": "db",
+      "query":"proposal.document.select",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/submit",
+      "source": "db",
+      "query":"proposal.submit",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/publish",
+      "source": "db",
+      "query":"proposal.publish",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/revise",
+      "source": "db",
+      "query":"proposal.revise",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/cancel",
+      "source": "db",
+      "query":"proposal.cancel",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/delete",
+      "source": "db",
+      "query":"proposal.delete",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/add.doc",
+      "source": "db",
+      "query":"proposal.document.add",
+      "params":["proposalId", "title", "fileName", "attachmentType", "uploadedBy"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/remove.doc",
+      "source": "db",
+      "query":"proposal.document.remove",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/product/list",
+      "source": "db",
+      "query":"proposal.product.list",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.add",
+      "source": "db",
+      "query":"proposal.addon.add",
+      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/addon.update",
+      "source": "db",
+      "query":"proposal.addon.update",
+      "params":["code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.remove",
+      "source": "db",
+      "query":"proposal.addon.remove",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/addon.list",
+      "source": "db",
+      "query":"proposal.addon.list",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/product/detail",
+      "source": "db",
+      "query":"proposal.product.detail",
+      "params":["id"],
+      "resultfields":[],
+      "default": "{}",
+      "singleRecord": true
+    },
+    {
+      "uri": "/gapi/product/delete",
+      "source": "db",
+      "query":"proposal.product.delete",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/product/documents",
+      "source": "db",
+      "query":"product.document.select",
+      "params":["productId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/product/add.doc",
+      "source": "db",
+      "query":"product.document.add",
+      "params":["proposalId", "productId", "title", "fileName", "attachmentType", "uploadedBy"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/product/remove.doc",
+      "source": "db",
+      "query":"proposal.document.remove",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/codelookup",
+      "source": "db",
+      "query":"lookup.codes",
+      "params":["lookupType"], //category, room, maketype, carcassmaterial, finishtype, finish
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/finishlookup",
+      "source": "db",
+      "query":"finish.lookup",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/colorlookup",
+      "source": "file",
+      "file":"game/data/finish_type_colors.json",
+      "default": "[]",
+      "encoding": "application/json"
+    },
+
+    {
+      "uri": "/gapi/module/addonsforaccpack",
+      "source": "db",
+      "query":"addons.selectbyaccpack",
+      "params":["apCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addons",
+      "source": "db",
+      "query":"addons.select",
+      "params":["producttype", "addontype"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/categories",
+      "source": "db",
+      "query":"addons.categories",
+      "params":["roomCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/productTypes",
+      "source": "db",
+      "query":"addons.product.types",
+      "params":["roomCode", "categoryCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/brands",
+      "source": "db",
+      "query":"addons.brands",
+      "params":["productTypeCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/products",
+      "source": "db",
+      "query":"addons.products",
+      "params":["productTypeCode", "brandCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/user/listbyrole",
+      "source": "db",
+      "query":"game_user.byrole",
+      "params":["role"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/finishcodes",
+      "source": "db",
+      "query":"finish.codes",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/colorcodes",
+      "source": "db",
+      "query":"color.codes",
+      "params":["colorGroupCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/allcolorlookup",
+      "source": "db",
+      "query":"colors.select.all",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/catalogproduct",
+      "source": "db",
+      "query":"product.select.productid",
+      "params":["productId"],
+      "resultfields":["productJson"],
+      "default": "{}",
+      "singleRecord": true
+    },
+    {
+      "uri": "/gapi/catalog-products",
+      "source": "db",
+      "query":"product.select.subcategory",
+      "params":["subcategory"],
+      "resultfields":["productJson"],
+      "default": "[]"
+    }
+  ]
+}

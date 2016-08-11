@@ -1,0 +1,492 @@
+
+/* Global Class By Nagmani Bhushan*/
+
+/* Know Your Kitchen */
+
+.kyk-box p{
+    font-size: 16px;
+    line-height: 150%;
+    text-align: justify;
+}
+
+.kyk-banner-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470916460/kyk/knk_banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 420px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 30px 0 30px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.kyk-heading{
+    margin: 15px 0px 15px;
+    font-weight: 300;
+    color: #707375;
+}
+
+.kyk-heading-gray{
+    margin: 15px 0px 10px;
+    font-weight: 300;
+    color: #333333;
+}
+.kyk-heading-splash{
+    margin: 15px 0px 10px;
+    font-weight: 300;
+    color: #333333;
+}
+
+.kyk-box{
+    padding: 40px;
+}
+
+.kyk-ergonomics-dec{
+    text-align: center;
+    margin-top: 30%;
+}
+.kyk-ergonomics-dec p{
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.accessories-hardware-dec{
+    text-align: center;
+    margin-top: 135px;
+    color: #333333;
+}
+
+.accessories-hardware-dec p{
+    font-size: 16px;
+}
+
+.kyk-appliances-section{
+   background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104463/kyk/1.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #333333;
+}
+
+.kyk-appliances-cont{
+    margin-top: 18%;
+}
+
+.kyk-appliances-dec p{
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.kyk-finishes-section{
+    background: #d7d3ca;
+    min-height: 380px;
+}
+
+.kyk-swatches-content{
+    margin-top: 30px;
+}
+
+.kyk-finishes-section .laminate{
+    border-bottom:7px solid #5a777b;
+}
+
+.kyk-finishes-section .pupaint{
+    border-bottom:7px solid #abeeeb;
+}
+
+.kyk-finishes-section .pvcfoil{
+    border-bottom:7px solid #555555;
+}
+
+.kyk-finishes-section .nav-tabs .laminate.active{
+    border-bottom: 7px solid #5a777b;
+}
+
+.kyk-finishes-section .nav-tabs .pupaint.active{
+    border-bottom: 7px solid #abeeeb;
+}
+
+.kyk-finishes-section .nav-tabs .pvcfoil.active{
+    border-bottom: 7px solid #555555;
+}
+
+.kyk-finishes-card{
+    margin-top: 60px;
+}
+
+.kyk-handle-section{
+   background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #333333;
+}
+
+.kyk-handle-cont {
+    margin: 6% 0%;
+}
+.kyk-sink-cont{
+    margin: 3% 0%;
+}
+
+.kyk-sink-cont p,
+.kyk-handle-cont p{
+    font-size: 16px;
+}
+
+.kyw-counter-details{
+    margin: 10px 0px;
+}
+
+.kyw-counter-details p{
+    font-size: 16px;
+}
+
+.kyk-counter-content{
+    margin: 5% 2%;
+}
+
+.kyk-shutter-cont{
+    margin: 5% 0%;
+}
+
+.breakfast-box {
+    margin-top: 250px;
+}
+
+.kyk-splash-card{
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.kyk-sink-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470644384/kyk/sink___faucet.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 380px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    color: #333333;
+}
+
+/* Media Query */
+
+@media (min-width: 1900px) {
+    .kyk-banner-bg{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470916460/kyk/knk_banner.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 570px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 30px 0 30px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .kyk-appliances-section{
+       background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104463/kyk/1.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 570px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #333333;
+    }
+    .kyk-appliances-cont{
+        margin-top: 35%;
+    }
+    .kyk-handle-section{
+       background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 570px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #333333;
+    }
+    .kyk-sink-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470644384/kyk/sink___faucet.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 570px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 20px 0 15px 0;
+        text-align: center;
+        color: #333333;
+    }
+    .kyk-handle-cont {
+        margin: 15% 0%;
+    }
+    .kyk-sink-cont{
+        margin: 7% 2%;
+    }
+    .kyk-shutter-cont{
+        margin: 5% 0%;
+    }
+}
+
+@media (max-width: 768px) {
+    .kyk-box {
+        padding: 10px;
+    }
+    .breakfast-box {
+        margin-top: 10px;
+    }
+    .kyk-ergonomics-dec{
+        margin-top: 25%;
+    }
+    .accessories-hardware-dec {
+        text-align: center;
+        margin-top: 78%;
+        color: #333333;
+    }
+    .kyk-appliances-cont h2{
+        color: #ffffff;
+    }
+    .kyk-appliances-dec p{
+        color: #ffffff;
+    }
+    .kyk-banner-bg{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470916460/kyk/knk_banner.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 320px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 30px 0 30px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .kyk-counter-content{
+        margin: 1% 0%;
+    }
+    .kyk-heading-splash{
+        margin: 5px 0px;
+        font-weight: 300;
+        color: #333333;
+        font-size:21px;
+    }
+    .kyk-splash-card .nav li a{
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .kyk-box {
+        padding: 15px 0px;
+    }
+    .breakfast-box {
+        margin-top: 10px;
+    }
+    .kyk-ergonomics-dec{
+        margin-top: 10px;
+    }
+    .accessories-hardware-dec {
+        text-align: center;
+        margin-top: auto;
+        color: #333333;
+    }
+    .kyk-appliances-cont{
+        margin-top: 30%;
+    }
+    .accessories-hardware-section-img h2{
+        margin-top: 55%;
+    }
+    .kyk-appliances-cont h2{
+        color: #333333;
+        text-align: center;
+    }
+    .kyk-appliances-dec p{
+        color: #333333;
+    }
+    .kyk-ergonomics-dec{
+        margin-top: 10px;
+    }
+    .kyk-banner-bg{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470916460/kyk/knk_banner.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 160px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 30px 0 30px 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .kyk-appliances-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470104463/kyk/1.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 15px 0 15px 0;
+        text-align: center;
+        color: #333333;
+        display: block;
+    }
+    .kyk-handle-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470396311/kyk/10.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 15px 0 15px 0;
+        text-align: center;
+        color: #333333;
+        display: block;
+    }
+
+    .kyk-handle-section h2{
+        margin-top: 55%;
+    }
+
+    .kyk-sink-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470395676/kyk/16.jpg");
+        background-repeat: no-repeat;
+        background-position: inherit;
+        height: auto;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        padding: 15px 0 15px 0;
+        text-align: center;
+        color: #333333;
+        display: block;
+    }
+
+    .kyk-sink-section h2{
+        margin-top: 55%;
+    }
+
+    .accessories-hardware-dec {
+        text-align: center;
+        margin-top: 0;
+        color: #333333;
+    }
+}
+
+/* End Media Query */
+
+/* Global Media Query */
+
+@media all and (min-width: 768px) {
+    .hidden-desktop {
+        display: none !important;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .hidden-mobile{
+        display: none !important;
+    }
+}
+
+/* End Global Media Query */

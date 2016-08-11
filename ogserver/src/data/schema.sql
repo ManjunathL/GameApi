@@ -89,5 +89,3 @@ CREATE TABLE idsequence (
   PRIMARY KEY (sequencename)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sequence Generator';
 
-
-

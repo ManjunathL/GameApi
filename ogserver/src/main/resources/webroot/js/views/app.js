@@ -9,11 +9,11 @@ define([
         render: function () {
           var that = this;
           $(this.el).html(layoutTemplate);
-          require(['views/header/menu'], function (HeaderMenuView) {
+          require(['views/header/new-menu'], function (HeaderMenuView) {
             var headerMenuView = new HeaderMenuView();
             headerMenuView.render();
           });
-          require(['views/footer/footer'], function (FooterView) {
+          require(['views/footer/new-footer'], function (FooterView) {
             var footerView = new FooterView({appView: that});
             footerView.render();
           });

@@ -5,12 +5,15 @@ define([
     'bootstrap',
     '/js/views/view_manager.js'
 ], function($, _, Backbone, Bootstrap, VM) {
+/*    var prod = 'products';
+    prod = prod.replace(/\s/g,"-");*/
     var AppRouter = Backbone.Router.extend({
+
         routes: {
             '': 'dashboard',
 
             'shoe-rack-online(/)': 'shoeRackLD',
-            'crockery-unit-cabinet(/)': 'crockeryUnitLD',
+            'crockery-unit-designs(/)': 'crockeryUnitLD',
             'tv-unit-cabinet(/)': 'tvUnitLD',
             'sideboard(/)': 'sideboardLD',
             'foyer-design(/)': 'foyerLD',
@@ -28,7 +31,9 @@ define([
             'living-and-dining-room-designs(/)': 'livingDining',
             'bedroom-interior-design(/)': 'bedroom',
 
-            'products/:categories(/:subcategories)(/)': 'products',
+/*
+            'products/:categories(/:subcategories)(/)': prod,
+*/
             'product_search-:searchTerm(/)': 'products-search',
             'product-:id(/)': 'product',
             'user_profile(/)': 'user_profile',
@@ -43,10 +48,31 @@ define([
             'stories(/)': 'stories',
             'story-:name(/)': 'story',
             'thankyou-:page(/)':'thankyou',
-            'lp(/)':'landingpage'
+            'lp(/)':'landingpage',
+            'oglp(/)':'newlandingpage',
+            'fblp(/)':'fblandingpage',
+            'mangalore-lp(/)':'mangalorelandingpage',
+            'email-lp(/)':'emaillandingpage',
+            'nri-:cityName(/)' : 'nripage',
+            'media(/)': 'mediapage',
+            'shobha-lp(/)': 'shobhalandingpage',
+            'pune-lp(/)': 'punelandingpage',
+            'kitchen-lp(/)': 'kitchenlandingpage',
+            'holiday-lp(/)': 'holidaylandingpage',
+            'e-book(/)': 'ebook',
+            'completed-projects(/)': 'completedprojectspage',
+            'newproduct-details-:id(/)': 'newdetailspage',
+            'know-your-wardrobe(/)': 'knowyourwardrobe',
+            'know-your-kitchen(/)': 'knowyourkitchen',
+            'remarketing-lp(/)': 'remarketinglp',
+            '*something': 'errorPage'
+
+
         },
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Buy Customized Home D?cor Interiors online for living room furniture, kitchen furniture, side tables and TV furniture.Get Home d?cor ideas to design your Home");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "home interior décor, home interior design, interior home décor, home interiors, custom made furniture, custom furniture, online customised furniture, modern furniture design, furniture designs");
         },
         consult: function() {
             document.title = 'Consult our experts | mygubbi';
@@ -80,45 +106,73 @@ define([
         },
         studyTableB: function () {
             document.title = 'Study Table Designs - Order Study Table Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Designs of Study Table which complement Your Room and Interiors.Get the latest study table design designed to meet your needs.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "study table, study table designs, study table online ,buy study table online, order study table online, latest study table design");
         },
         tvUnitLD: function() {
             document.title = 'Buy entertainment units online and tv unit designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Deck Your Home With the best of Décor with our range of TV Furniture and TV Cabinet Designs.Pick out luxury Home décor from MyGubbi");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "tv unit, tv stand, tv cabinet, tv units, entertainment unit,entertainment unit designs");
         },
         shoeRackLD: function() {
             document.title = 'Buy Shoe Stands and Shoe Racks Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Give a neater and classy look to your Home by getting Your Shoe Rack Furniture Custom made by our designers who look into the minute details for better living");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "shoe rack, shoe rack online, shoe rack designs, shoe racks, shoe racks online");
         },
         crockeryUnitLD: function() {
             document.title = 'Crockery unit designs - Kitchen and Dining crockery Unit designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Look for Crockery unit designs Online and get to select from a range of exclusive products from MyGubbi.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "crockery, crockery unit, crockery cabinet, crockery unit designs, crockery cabinet online,kitchen crockery cabinet designs, dining crockery unit designs, designs for crockery unit");
         },
         lshapedK: function() {
             document.title = 'L-Shaped Kitchen - L-Shaped Modular Kitchen Designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "L shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "l shaped kitchen design, l shaped kitchen, l shaped kitchen designs");
         },
         ushapedK: function () {
             document.title = 'U-Shaped Kitchen Design - U-Shaped Kitchen from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "U shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "u shaped kitchen, u shaped kitchen design,  u shaped kitchen designs");
         },
         straightK: function () {
             document.title = 'Straight Kitchen Design - Straight Modular Kitchen Designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Straight Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "straight kitchen design, straight modular kitchen designs, straight modular kitchen");
         },
         parallelK: function() {
             document.title = 'Parallel Kitchen Design - Parallel Kitchen Cabinets from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Parallel Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "parallel kitchen design, parallel kitchen, parallel kitchen designs,parallel modular kitchen designs");
         },
         wardrobeB: function() {
             document.title = 'Bedroom wardrobe Design -Buy Wardrobes Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Check out Our Exclusive range of Wardrobe designs which add a classy touch to your Home décor.MyGubbi offers a hassle free installation process and speedy delivery");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "wardrobe, wardrobe designs, wardrobe design,wardrobe online, buy wardrobe online");
         },
         sideTableB: function() {
             document.title = 'Side Table - Bedside tables Online from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Bedside Table Designs that compliment Your Bedroom décor in ways like no other.Pick Out Luxury Home Décor from MyGubbi");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "side table, side tables,study table designs, designs of study table, buy study table online, order study table online");
         },
         bookShelfB: function() {
             document.title = 'Book Rack - Book shelves and Book Organizers from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Custom Made Bookshelves from MyGubbi add to your range of luxury décor and add a touch of elegance to your living abode");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "book shelf, bookshelf design, book rack, bookshelf designs");
         },
         bedroom: function () {
             document.title = 'Bedroom Designs - Bedroom Furniture and interiors from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "MyGubbi offers an Exclusive collection of bedroom furniture to choose from.Get Your Bedroom interiors custom made to fit your Home and Décor.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "bedroom designs, bedroom furniture, bedroom interior, bedroom interior design");
         },
         kitchens: function() {
             document.title = 'Modular Kitchen - Range of modular Kitchen Designs from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Check out our Range of Kitchen Cabinets and choose the kitchen cabinet design of Your choice.");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "modular kitchen, modular kitchen design, kitchen design, kitchen cabinets, kitchen, kitchen interior, kitchen cabinet, kitchen furniture,kitchen cabinet designs, kitchen cabinets designs");
         },
         livingDining: function () {
             document.title = 'Living room designs and interiors from mygubbi';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Buy Your Living Room furniture online from MyGubbi and jazz up your life with the latest Décor.Get Your Dining Room furniture custom made by picking out from a range of dining room designs");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior");
         }
     });
 
@@ -200,8 +254,13 @@ define([
         router.on('route:bedroom', function(actions){
             routeCategory('bedroom');
         });
-        router.on('route:dashboard', function(actions) {
+        /*router.on('route:dashboard', function(actions) {
             require(['/js/views/dashboard/page.js'], function(DashboardPage) {
+                VM.create(VM.DASHBOARD, DashboardPage).render();
+            });
+        });*/
+        router.on('route:dashboard', function(actions) {
+            require(['/js/views/dashboard/new-page.js'], function(DashboardPage) {
                 VM.create(VM.DASHBOARD, DashboardPage).render();
             });
         });
@@ -329,6 +388,126 @@ define([
                 VM.create(VM.LANDINGPAGE, LandingPage).render();
             });
         });
+        router.on('route:newlandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/newlanding_page.js'], function(NewLandingPage) {
+                VM.create(VM.NEWLANDINGPAGE, NewLandingPage).render();
+            });
+        });
+        router.on('route:fblandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/fblanding_page.js'], function(FbLandingPage) {
+                VM.create(VM.FBLANDINGPAGE, FbLandingPage).render();
+            });
+        });
+        router.on('route:mangalorelandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/mangalorelanding_page.js'], function(MangaloreLandingPage) {
+                VM.create(VM.MANGALORELANDINGPAGE, MangaloreLandingPage).render();
+            });
+        });
+        router.on('route:emaillandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/emaillanding_page.js'], function(EmailLandingPage) {
+                VM.create(VM.EMAILLANDINGPAGE, EmailLandingPage).render();
+            });
+        });
+        router.on('route:shobhalandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/shobhalanding_page.js'], function(ShobhaLandingPage) {
+                VM.create(VM.SHOBHALANDINGPAGE, ShobhaLandingPage).render();
+            });
+        });
+
+        router.on('route:punelandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/punelanding_page.js'], function(PuneLandingPage) {
+                VM.create(VM.PUNELANDINGPAGE, PuneLandingPage).render();
+            });
+        });
+
+        router.on('route:kitchenlandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/kitchenlanding_page.js'], function(KitchenLandingPage) {
+                VM.create(VM.KITCHENLANDINGPAGE, KitchenLandingPage).render();
+            });
+        });
+
+        router.on('route:ebook', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/ebook/ebook.js'], function(EbookPage) {
+                VM.create(VM.EBOOKPAGE, EbookPage).render();
+            });
+        });
+
+        router.on('route:errorPage', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/errorPage/errorPage.js'], function(ErrorPage) {
+                        VM.create(VM.ERRORPAGE, ErrorPage).render();
+                    });
+                });
+        router.on('route:holidaylandingpage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/holidaylanding_page.js'], function(HolidayLandingPage) {
+                VM.create(VM.HOLIDAYLANDINGPAGE, HolidayLandingPage).render();
+            });
+        });
+        router.on('route:completedprojectspage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/landing_pages/completedprojects_page.js'], function(CompletedProjectsPage) {
+                VM.create(VM.COMPLETEDPROJECTSPAGE, CompletedProjectsPage).render();
+            });
+        });
+        router.on('route:knowyourwardrobe', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/landing_pages/knowyourwardrobe_page.js'], function(KnowYourWardrobe) {
+                        VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourWardrobe).render();
+                    });
+                });
+        router.on('route:knowyourkitchen', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/landing_pages/knowyourkitchen_page.js'], function(KnowYourKitchen) {
+                        VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourKitchen).render();
+                    });
+                });
+        router.on('route:remarketinglp', function(actions) {
+                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    require(['/js/views/landing_pages/remarketinglp_page.js'], function(RemarketingLp) {
+                        VM.create(VM.COMPLETEDPROJECTSPAGE, RemarketingLp).render();
+                    });
+                });
+        router.on('route:mediapage', function(actions) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/media_pages/media_page.js'], function(MediaPage) {
+                VM.create(VM.MEDIAPAGE, MediaPage).render();
+            });
+        });
+
+        router.on('route:newdetailspage', function(productId) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/product/new-details.js'], function(NewProductDetailsPage) {
+                var options = {
+                    model: {
+                        "id": productId
+                    }
+                };
+
+                VM.create(VM.NEWPRODUCT_DETAILSPAGE, NewProductDetailsPage, options).render();
+            });
+        });
+
+        router.on('route:nripage', function(cityName) {
+            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            require(['/js/views/nri_pages/nri_page.js'], function(NriPage) {
+                var options = {
+                    model: {
+                        "cityName": cityName
+                    }
+                };
+                VM.create(VM.NRIPAGE, NriPage, options).render();
+            });
+        });
+
         router.on('route', function () {
             $("html,body").scrollTop(0);
         });
@@ -336,6 +515,11 @@ define([
             pushState: true,
             root: "/"
         });
+     if(Backbone.history.fragment === "*something"){
+     Backbone.history.navigate("pune-lp");
+     ContactManager.ContactsApp.List.Controller.listContacts();
+     }
+
     };
     return {
         initialize: initialize

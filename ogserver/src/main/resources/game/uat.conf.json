@@ -1,0 +1,17 @@
+{
+  "version": "0.0.0a",
+
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
+    "max_pool_size": 20,
+    "user": "admin",
+    "password": "OG$#gubi32"
+  },
+
+  "proposal_docs_folder" : "/mnt/game/proposal/",
+  "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
+  "jobcard_template" : "/mnt/game/proposal/templates/jobcard-template.xlsx",
+  "salesorder_template" : "/mnt/game/proposal/templates/salesorder-template.xlsx",
+  "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin"
+}

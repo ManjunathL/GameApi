@@ -1,6 +1,5 @@
 package com.mygubbi.config;
 
-import com.mygubbi.apiserver.ApiServerVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
@@ -52,4 +51,9 @@ public class ServiceDef
         return options;
     }
 
+    @Override
+    public String toString()
+    {
+        return "ServiceDef - " + config.encodePrettily();
+    }
 }

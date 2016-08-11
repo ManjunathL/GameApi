@@ -1,0 +1,831 @@
+<section class="bg-white padding-bottom20">
+    <div class="container-fluid">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner mg-carousel">
+                <div class="item active">
+                    <img data-src="<%= imgBase + 'w_auto' + '/landing_page/Banner_Final.jpg'%>"
+                         class="cld-responsive img-centered" alt="mygubbi smart offer">
+                </div>
+                <div class="item">
+                    <img data-src="<%= imgBase + 'w_auto' + '/banner_last.jpg'%>"
+                         class="cld-responsive img-centered" alt="mygubbi cool offer">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <!-- Contact Form -->
+        <div class="row margin0">
+            <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-12 col-xs-12 carousel-form-box">
+                <div class="row margin0">
+                    <h3 class="heading-center-notransform padding-bottom10 border-bottom-orange">
+                        Get your FREE design now!
+                    </h3>
+                </div>
+                <div class="row margin0">
+                    <form method="post" enctype="multipart/form-data"
+                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                          class="width90 margin_auto paddingtop20">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='FirstName' name='FirstName'
+                                       placeholder="Name*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                       required='required'/>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='EmailAddress'
+                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                       required='required' pattern=".+@.+\..+"
+                                       title="<abc>@<xyz>.<com>"/>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control" id='Phone'
+                                       name='Phone'
+                                       placeholder="Phone Number*" maxlength='20'
+                                       value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                       required='required' pattern="\d{10}"
+                                       title="e.g. 9876543210"/>
+                            </div>
+                            <div class="align-center form-group">
+                                <button class="button-orange consult-submit-orange"
+                                        id="form-submit-button"
+                                        type="submit">Submit
+                                </button>
+                                <br/>
+                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                <input type="hidden" name="MXHLandingPageId" value="5779bc96-3c62-11e6-b61b-22000aa8e760" />
+                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
+                                <input type="hidden" name="MXHAsc" value="5" />
+                                <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
+                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript"> var MXLandingPageId = '5779bc96-3c62-11e6-b61b-22000aa8e760'; </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="project-description">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-4 col-md-4 text-center">
+                    <img class="img-responsive img-center" src="https://res.cloudinary.com/mygubbi/image/upload/v1466676547/landing_page/IC_01_160X160.png" alt="lp">
+                    <h2 class="lp-project-no"> 100+</h2>
+                    <h3 class="lp-projects"> Projects </h3>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-md-4 text-center">
+                    <img class="img-responsive img-center" src="https://res.cloudinary.com/mygubbi/image/upload/v1466676547/landing_page/IC_02_160X160.png" alt="lp">
+                    <h3 class="lp-projects-dec"> Our Manufacturing facility <br/> Follows international <br/> Product standards </h3>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-md-4 text-center">
+                    <img class="img-responsive img-center" src="https://res.cloudinary.com/mygubbi/image/upload/v1466676547/landing_page/IC_03_160X160.png" alt="lp">
+                    <h2 class="lp-project-no"> 500+ </h2>
+                    <h3 class="lp-projects"> Personalized <br/> Designs </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row margin0 margin-bottom20 margin-top20">
+            <h1 class="heading-center-notransform">
+                Our Featured Collection
+            </h1>
+            <!--<h3 class="heading-center-notransform">
+                Currently operating in Bangalore and Mangalore
+            </h3>-->
+        </div>
+        <div class="row margin0">
+            <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
+                <img data-src="<%= imgBase + 'w_auto' + '/landing_page/lg1.jpg'%>"
+                     class="cld-responsive img-centered width100" alt="mygubbi cool offer">
+                <h3 class="heading-center-notransform">
+                    Kitchen
+                </h3>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
+                <img data-src="<%= imgBase + 'w_auto' + '/landing_page/lg3.jpg'%>"
+                     class="cld-responsive img-centered width100" alt="mygubbi cool offer">
+                <h3 class="heading-center-notransform">
+                    Wardrobe
+                </h3>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
+                <img data-src="<%= imgBase + 'w_auto' + '/landing_page/lg2.jpg'%>"
+                     class="cld-responsive img-centered width100" alt="mygubbi cool offer">
+                <h3 class="heading-center-notransform">
+                    Study Table
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-light-green align-center padding0-10per">
+        <h1 class="heading-center-notransform margin-top40">
+            Customized Home Interiors for your Dream Home
+        </h1>
+
+        <!--<h3 class="heading-center-notransform">
+            And your amazing chance to grab gift vouchers on the first visit.
+        </h3>-->
+
+        <!--<div class="row margin0 margin-bottom20">
+            <h3 class="heading_with_border">Glimpse upon our Introductory Offers</h3>
+        </div>-->
+
+        <div class="row margin0 margin-bottom20">
+            <p class="font-size16">
+                mygubbi, India’s leading online interior design solution experts work on bringing your personal design philosophy to life. Our individually-focused design approach ensures that you have a seamlessly, wonderful experience – from the drawing board to enjoying a home of your creation.
+            </p>
+        </div>
+
+        <div class="row margin0 margin-bottom20">
+            <p class="font-size16">You can browse through a comprehensive range of services and products from a gallery of designs, based on your preferences. myGubbi designers work on understanding your expectations and give you expert opinions on creating your dream home.</p>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <h1 class="heading-center-notransform margin-top40">
+            Superior Quality. Unparalled Designs
+        </h1>
+
+        <h3 class="heading-center-notransform">
+            Plenty of Excuses to cherry pick us
+        </h3>
+
+        <div class="row margin0 margin-top20 margin-bottom20">
+
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="row margin0 margin-bottom15">
+                    <div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">
+                        <img data-src="<%= imgBase + 'w_auto' + '/landing_page/01_03.png'%>"
+                             class="cld-responsive"
+                             alt="5 years warranty">
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">
+                        <h4 class="text-transform-none color-orange">
+                            5 Year Warranty
+                        </h4>
+                        <span class="font-size14">
+                            on every product
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row margin0 margin-bottom15">
+                    <div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">
+                        <img data-src="<%= imgBase + 'w_auto' + '/landing_page/02_03.png'%>"
+                             class="cld-responsive"
+                             alt="45 days delivery">
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">
+                        <h4 class="text-transform-none color-orange">
+                            45 days delivery
+                        </h4>
+                        <span class="font-size14">
+                            Guaranteed
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row margin0 margin-bottom15">
+                    <div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">
+                        <img data-src="<%= imgBase + 'w_auto' + '/landing_page/03_03.png'%>"
+                             class="cld-responsive"
+                             alt="Free Maintenance">
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">
+                        <h4 class="text-transform-none color-orange">
+                            Free Maintenance
+                        </h4>
+                        <span class="font-size14">
+                            for 3 year
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row margin0 margin-bottom15">
+                    <div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">
+                        <img data-src="<%= imgBase + 'w_auto' + '/landing_page/05_03.png'%>"
+                             class="cld-responsive"
+                             alt="Easy EMI Options">
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">
+                        <h4 class="text-transform-none color-orange">
+                            Easy EMI options
+                        </h4>
+                        <span class="font-size14">
+                            via Bajaj Finserv
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row margin0 margin-bottom15">
+                    <div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">
+                        <img data-src="<%= imgBase + 'w_auto' + '/landing_page/6_03.png'%>"
+                             class="cld-responsive"
+                             alt="Alliance Partners">
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">
+                        <h4 class="text-transform-none color-orange">
+                            Hettich & Hafele
+                        </h4>
+                        <span class="font-size14">
+                            are our alliance partners
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-5 col-md-5 col-sm-5 bg-orange-gray">
+                <p id="form-heading" class="consult-form-heading">
+                    Design Your my<span class="color-orange">gubbi</span>
+                    Home</p>
+
+                <div class="row display-none" id="contact_error_row">
+                    <p class="margin0 error-text align-center" id="contact_error"></p>
+                </div>
+
+                <form method="post" enctype="multipart/form-data"
+                      action="https://web.mxradon.com/t/FormTracker.aspx"
+                      class="width90 margin_auto paddingtop20">
+                    <div class="row">
+                        <div class="margin-bottom20 form-group">
+                            <input type='text' class="width100 form-control"
+                                   id='FirstName' name='FirstName'
+                                   placeholder="Name*" maxlength='100'
+                                   value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                   required='required'/>
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <input type='text' class="width100 form-control"
+                                   id='EmailAddress'
+                                   name='EmailAddress' placeholder="Email*" maxlength='100'
+                                   value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                   required='required' pattern=".+@.+\..+"
+                                   title="<abc>@<xyz>.<com>"/>
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <input type='text' class="width100 form-control" id='Phone'
+                                   name='Phone'
+                                   placeholder="Phone Number*" maxlength='20'
+                                   value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                   required='required' pattern="\d{10}"
+                                   title="e.g. 9876543210"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="margin-bottom20 form-group">
+                                <textarea class="width100 form-control" id="mx_Requirement"
+                                          name='mx_Requirement' maxlength='150' value='' autocomplete='off'
+                                          placeholder="Describe your Requirements / Queries"></textarea>
+                            </div>
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <input type="text" class="width100 form-control" placeholder="Property Name"
+                                   id='mx_Street2' name='mx_Street2' maxlength='256' value='' autocomplete='off' />
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <input type="text" class="width100 form-control" placeholder="Project Name"
+                                   name="projectName" value=""
+                                   id="contact_project_name2" />
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <input type="text" class="width100 form-control" placeholder="City Name"
+                                   id='mx_City' name='mx_City' maxlength='50' value='' autocomplete='off' />
+                        </div>
+                        <div class="margin-bottom20 form-group">
+                            <label for='exclude_FileUpload_1'>Upload Floorplan</label>
+                            <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
+                            <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
+                        </div>
+                        <div class="align-center form-group">
+                            <button class="button-orange consult-submit-orange"
+                                    id="form-submit-button"
+                                    type="submit">Submit
+                            </button>
+                            <br/>
+                            <input type="hidden" name="MXHOrgCode" value="9814" />
+                            <input type="hidden" name="MXHLandingPageId" value="f7c3e93f-3d1a-11e6-b61b-22000aa8e760" />
+                            <input type="hidden" name="MXHFormBehaviour" value="1" />
+                            <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                            <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-lp-page" />
+                            <input type="hidden" name="MXHAsc" value="5" />
+                            <input type="hidden" name="MXHPageTitle" value="Email" />
+                            <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                            <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript"> var MXLandingPageId = 'f7c3e93f-3d1a-11e6-b61b-22000aa8e760'; </script>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h3 class="heading-center-notransform margin-top40">
+            Introducing
+        </h3>
+
+        <h1 class="heading-center-notransform">
+                        <span class="color-orange">
+                            The Experience Centre</span>
+            @ mygubbi
+            </span>
+        </h1>
+
+        <div class="row margin0 margin-top25">
+
+            <div class="width80 div-align-center">
+                <div class="row margin0 justify font-size16">
+                    A day visit to The Experience Centre will put all our creativity and imagination at your fingertips.
+                    We at The Experience Centre offer complete Interior Design & Decor Services to renovate, decorate
+                    and furnish each property
+                </div>
+
+                <div class="row margin0 margin-top20">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <img
+                                data-src="<%= imgBase + 'w_auto' + '/landing_page/img1_11.png'%>"
+                                class="cld-responsive">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <h3 class="text-transform-none">
+                            What's in <span class="color-orange">store</span> for you?
+                        </h3>
+                        <ul class="justify font-size16">
+                            <li>You can actually see, touch and feel materials & finishing</li>
+                            <li>A friendly encounter with talented designers & stylists</li>
+                            <li>A know-how of relevant interior designs</li>
+                            <li>Designs which are personalized as per requisites</li>
+                            <li>You would be one step closer to the home of your dreams</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row margin0 margin-top20">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <img
+                                data-src="<%= imgBase + 'w_auto' + '/landing_page/img2_11.png'%>"
+                                class="cld-responsive">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <h3 class="text-transform-none">
+                                <span class="color-orange">Don't confuse
+                                this</span> with a furniture store.
+                        </h3>
+
+                        <p class="font-size16">
+                            It’s in a different class altogether, because it provides expert help in discovering
+                            optimum design layouts.It’s more than hiring an interior designer! This is about
+                            visualizing your inspirational abode , stimulating inspirations, enlivening dynamic shot
+                            of ideas, and making practical progress towards dream home.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row margin0 margin-top40 align-center">
+                    <a href="/consult">
+                        <h3 class="heading_with_border">
+                            Book your consultation
+                        </h3>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container-fluid  hidden-sm hidden-xs flip-container bg-orange-gray margin-top40">
+        <div class="col-lg-12 text-center margin-top25 margin-bottom20">
+            <h2 class="consult-h3" style="text-transform:initial;">What do we offer at
+                <span class="color-orange">The Experience Centre ?</span>
+            </h2>
+        </div>
+        <div class="flip-div">
+            <div class="flip-cards">
+                <div class="front-card">
+                    <img class="width100" src="<%= imgBase %>consult/1a.png" alt="Consultation & Planning">
+                </div>
+                <div class="reverse-card">
+                    <img class="width100" src="<%= imgBase %>consult/1b.png" alt="Consultation & Planning">
+                </div>
+            </div>
+            <div class="flip-cards">
+                <div class="front-card">
+                    <img class="width100" src="<%= imgBase %>consult/2a.png" alt="Consultation & Planning">
+                </div>
+                <div class="reverse-card">
+                    <img class="width100" src="<%= imgBase %>consult/2b.png" alt="Consultation & Planning">
+                </div>
+            </div>
+            <div class="flip-cards">
+                <div class="front-card">
+                    <img class="width100" src="<%= imgBase %>consult/3a.png" alt="Consultation & Planning">
+                </div>
+                <div class="reverse-card">
+                    <img class="width100" src="<%= imgBase %>consult/3b.png" alt="Consultation & Planning">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Testimonial Section -->
+
+    <section class="bg-color-white padding50-0">
+        <div class="container align-center">
+            <h1 class="heading-center-notransform">
+                Testimonials
+            </h1>
+            <div class="row margin0 align-center">
+                <div id="carousel-reviews" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/01.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/01.png'%>" alt="Inventore voluptates velit totam ipsa">
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt"><blockquote><p>To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                                        We will, without hesitation recommend your company
+                                                        to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p></blockquote></div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Arjita Singh
+                                                        <span><b>Soobha Forest View</b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 hidden-xs">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/03.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/02.png'%>" alt="Inventore voluptates velit totam ipsa">
+
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt">
+                                                        <blockquote>
+                                                            <p>
+                                                                Building my dream house with mygubbi was extremely smooth,
+                                                                with a lot of professional ideas given to me by them.
+                                                                All I can say about them is they are - professional,
+                                                                they know their business. Leave your home to them and they will build you your dream house.
+                                                            </p>
+                                                        </blockquote>
+                                                    </div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Jheel Parekh
+                                                        <span><b> Aspira </b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/05-single_03.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/05-single_03.png'%>" alt="Inventore voluptates velit totam ipsa">
+
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt"><blockquote><p>Varun and his team from myubbi has provided excellent interior design service;
+                                                        this is all inclusive from architectural design, wood work based on room layout,
+                                                        color selection, comprehensive and complete from idea to implementation.
+                                                        I am proud to recommend myubbi for all interior design needs.</p></blockquote></div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Dilip Seshadri
+                                                        <span><b>Vista Space</b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-md-4 col-sm-6 hidden-xs">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/01.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/01.png'%>" alt="Inventore voluptates velit totam ipsa">
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt"><blockquote><p>To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                                        We will, without hesitation recommend your company
+                                                        to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p></blockquote></div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Arjita Singh
+                                                        <span><b>Soobha Forest View</b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 ">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/03.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/02.png'%>" alt="Inventore voluptates velit totam ipsa">
+
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt">
+                                                        <blockquote>
+                                                            <p>
+                                                                Building my dream house with mygubbi was extremely smooth,
+                                                                with a lot of professional ideas given to me by them.
+                                                                All I can say about them is they are - professional,
+                                                                they know their business. Leave your home to them and they will build you your dream house.
+                                                            </p>
+                                                        </blockquote>
+                                                    </div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Jheel Parekh
+                                                        <span><b> Aspira </b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/05-single_03.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/05-single_03.png'%>" alt="Habitech">
+
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt"><blockquote><p>
+                                                        Varun and his team from myubbi has provided excellent interior design service;
+                                                        this is all inclusive from architectural design, wood work based on room layout,
+                                                        color selection, comprehensive and complete from idea to implementation.
+                                                        I am proud to recommend myubbi for all interior design needs.
+                                                    </p></blockquote></div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Dilip Seshadri
+                                                        <span><b>Vista Space</b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-md-4 col-sm-6 hidden-xs">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/01.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/01.png'%>" alt="Inventore voluptates velit totam ipsa">
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt"><blockquote><p>To say we are satisfied with the new kitchen you designed, understates how we feel.
+                                                        We will, without hesitation recommend your company
+                                                        to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p></blockquote></div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Arjita Singh
+                                                        <span><b>Sobha Forest View</b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/03.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/02.png'%>" alt="Inventore voluptates velit totam ipsa">
+
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt">
+                                                        <blockquote>
+                                                            <p>
+                                                                Building my dream house with mygubbi was extremely smooth,
+                                                                with a lot of professional ideas given to me by them.
+                                                                All I can say about them is they are - professional,
+                                                                they know their business. Leave your home to them and they will build you your dream house.
+                                                            </p>
+                                                        </blockquote>
+                                                    </div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Jheel Parekh
+                                                        <span><b> Aspira </b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="testmonial-main-cnt">
+                                    <div class="testmonial-sub-cnt clearfix">
+                                        <div class="testmonial-main-image">
+                                            <img class="display-block width85" src="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/05-single_03.png'%>" data-original="<%= imgBase + 'w_auto' + '/v1468494495/testimonial/05-single_03.png'%>" alt="Habitech">
+
+                                        </div>
+                                        <div class="testmonial-img-cnt col-md-12 padding0">
+                                            <div class="align-center">
+                                                <div class="testmonial-cust-content">
+                                                    <div class="testimonial_qt"><blockquote><p>
+                                                        Varun and his team from myubbi has provided excellent interior design service;
+                                                        this is all inclusive from architectural design, wood work based on room layout,
+                                                        color selection, comprehensive and complete from idea to implementation.
+                                                        I am proud to recommend myubbi for all interior design needs.
+                                                    </p></blockquote></div>
+                                                    <div class="testmonial-cust-dtls">
+                                                        Dilip Seshadri
+                                                        <span><b>Vista Space</b></span>
+                                                        <span>Bangalore</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section End -->
+
+    <!-- Brand Section -->
+
+    <div class="container-fluid margin-top40">
+        <h1 class="heading-center-notransform">
+            Brands that we are working with
+        </h1>
+        <div class="wrap col-xs-12 padding0">
+            <div class="row margin0">
+                <div class="controls center col-xs-1 margin-top40">
+                    <button class="btn brand-prev disabled" disabled="">
+                        <img src="<%= imgBase + '/home/dark_arr_left.png'%>" class="arr_test" alt="...">
+                    </button>
+                </div>
+
+                <div class="frame col-xs-10 overflow-hidden" id="brand-frame">
+                    <ul class="clearfix slidee"
+                        style="transform: translateZ(0px) translateX(0px); width: 3480px;">
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Hettich.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Century_03.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/grenlam.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Haffle.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content">
+                            <img src="<%= imgBase + '/brand/Merino.png'%>" alt="...">
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="controls center col-xs-1 margin-top40">
+                    <button class="btn brand-next">
+                        <img src="<%= imgBase + '/home/dark_arr_right.png'%>" class="arr_test" alt="...">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Section End -->
+
+    <div class="container margin-top40 margin-bottom40">
+        <div class="row margin0">
+
+            <div class="col-lg-3 col-md-3 col-sm-6 padding0-30 margin-top10 consult-address-box">
+                <div class="font-size18 bg-dark-gray text-color-white padding0-10">
+                    <img src="<%= imgBase %>landing_page/1_06.png" alt="address-icon">
+                    &nbsp;
+                    Address
+                </div>
+                <div class="font-size14 margin-top20">
+                    1502, 2nd Floor,
+                    19th Main Road,
+                    Sector 4, HSR Layout,
+                    Bangalore 560102
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 padding0-30 margin-top10 consult-address-box">
+                <div class="font-size18 bg-dark-gray text-color-white padding0-10">
+                    <img src="<%= imgBase %>landing_page/2_06.png" alt="time-icon">
+                    &nbsp;
+                    Timing
+                </div>
+                <div class="font-size14 margin-top20">
+                    9am - 6pm, Mon - Sat
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 padding0-30 margin-top10 consult-address-box">
+                <div class="font-size18 bg-dark-gray text-color-white padding0-10">
+                    <img src="<%= imgBase %>landing_page/3_06.png" alt="mail-icon">
+                    &nbsp;
+                    Email
+                </div>
+                <div class="font-size14 margin-top20">
+                    reach@mygubbi.com
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 padding0-30">
+                <div class="font-size18 bg-dark-gray text-color-white margin-top10 padding0-10">
+                    <img src="<%= imgBase %>landing_page/4_06.png" alt="phone-icon">
+                    &nbsp;
+                    Phone
+                </div>
+                <div class="font-size16 color-orange margin-top20">
+                    <b>8088860860</b>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

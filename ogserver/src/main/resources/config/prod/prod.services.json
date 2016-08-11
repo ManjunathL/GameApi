@@ -35,6 +35,10 @@
       {
         "name": "com.mygubbi.catalog.ProductManagementService",
         "instances": 1
+      },
+      {
+        "name": "com.mygubbi.si.email.EmailService",
+        "instances": 4
       }
     ]
   }

@@ -40,9 +40,9 @@ define([
             "click .shortlistable": "removeShortlistItem",
             "click .shortlist_consult": "openConsultPopup",
             "click .close-consult-pop": "closeModal",
-            "click .consult-form-explore": "closeModal",
+            /*"click .consult-form-explore": "closeModal",
             "click #consult-submit-btn": "submitConsultButton",
-            "submit .consultForm": "submitConsultForm",
+            "submit .consultForm": "submitConsultForm",*/
             "click .shortgridshare": "toggleGridShareIcons"
         },
         removeShortlistItem: function(e) {
@@ -69,7 +69,7 @@ define([
             //alert(popupid);
             $('#consultpop' + popupid).modal('show');
         },
-        submitConsultButton: function() {
+        /*submitConsultButton: function() {
             window.consultSubmitButton = this;
         },
         submitConsultForm: function(e) {
@@ -92,7 +92,7 @@ define([
             var propertyName = $('#consult_property_name' + formid).val();
             var query = $('#consult_product_name' + formid).val() + " :: " + $('#consult_requirement' + formid).val();
             var floorplan = $("#consult_floorplan" + formid).prop('files')[0];
-            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName);
+            ConsultUtil.submit(name, email, phone, query, floorplan, propertyName, null, null);
 
             $('#consultpop' + formid).modal('hide');
             $('body').removeClass('modal-open');
@@ -102,7 +102,7 @@ define([
                 trigger: true
             });
 
-        },
+        },*/
          toggleGridShareIcons: function(e){
              e.preventDefault();
 

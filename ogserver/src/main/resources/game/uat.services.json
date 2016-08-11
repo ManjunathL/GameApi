@@ -1,0 +1,42 @@
+{
+  "services": {
+    "sequential": [
+      {
+        "name": "com.mygubbi.support.LogServiceVerticle",
+        "instances": 1
+      },
+      {
+        "name": "com.mygubbi.db.DatabaseService",
+        "instances": 10
+      },
+      {
+        "name": "com.mygubbi.db.QueryPrepareService"
+      }
+    ],
+    "parallel": [
+      {
+        "name": "com.mygubbi.apiserver.GameApiServerVerticle",
+        "instances": 20,
+        "worker": false
+      },
+      {
+        "name": "com.mygubbi.game.proposal.ModuleDataService"
+      },
+      {
+        "name": "com.mygubbi.game.proposal.RateCardService"
+      },
+      {
+        "name": "com.mygubbi.game.proposal.ModulePricingService",
+        "instances": 5
+      },
+
+      {
+        "name": "com.mygubbi.game.proposal.output.ProposalOutputService",
+        "instances": 2
+      },
+      {
+        "name": "com.mygubbi.si.email.EmailService"
+      }
+    ]
+  }
+}

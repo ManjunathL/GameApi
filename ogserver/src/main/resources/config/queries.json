@@ -97,7 +97,7 @@
     {
       "id": "product.select.category",
       "type": "select",
-      "query": "select id, productId, productJson from product where category = ?",
+      "query": "select id, productId, popularity,styleSortSeq, productJson from product where category = ? ORDER BY popularity ASC, styleSortSeq DESC",
       "params": [
         "category"
       ]
@@ -105,7 +105,7 @@
     {
       "id": "product.select.subcategory",
       "type": "select",
-      "query": "select id, productId, productJson from product where subcategory = ?",
+      "query": "select id, productId, popularity,styleSortSeq, productJson from product where subcategory = ? ORDER BY popularity ASC, styleSortSeq DESC",
       "params": [
         "subcategory"
       ]
@@ -124,7 +124,7 @@
       "id": "product.insert",
       "type": "insert",
       "table": "product",
-      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, productShortJson, productJson) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, productShortJson, productJson, popularity, relevance, styleSortSeq, url ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       "params": [
         "id",
         "productId",
@@ -134,14 +134,18 @@
         "subcategory",
         "styleId",
         "productShortJson",
-        "productJson"
+        "productJson",
+        "popularity",
+        "relevance",
+        "styleSortSeq",
+        "url"
       ]
     },
     {
       "id": "product.update",
       "type": "update",
       "table": "product",
-      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ? where productId = ?",
+      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ?, popularity = ?, relevance = ?, styleSortSeq = ?, url = ? where productId = ?",
       "params": [
         "name",
         "description",
@@ -150,6 +154,10 @@
         "styleId",
         "productShortJson",
         "productJson",
+        "popularity",
+        "relevance",
+        "styleSortSeq",
+        "url",
         "productId"
       ]
     },
@@ -170,7 +178,7 @@
       "id": "shortlist.remove",
       "type": "delete",
       "table": "shortlisted",
-      "query": "delete shortlisted where productId = ? and uid = ?",
+      "query": "delete from shortlisted where productId = ? and uid = ?",
       "params": [
         "productId",
         "uid"
@@ -178,4 +186,3 @@
     }
   ]
 }
-

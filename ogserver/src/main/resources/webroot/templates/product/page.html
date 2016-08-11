@@ -13,7 +13,8 @@
         <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
         <% } %>
     </div>
-    <div class="container-fluid bg-white hidden-xs">
+
+        <div class="container-fluid bg-white hidden-xs">
         <div class="container">
             <div class="row">
                 <ul class="breadcrumb">
@@ -24,7 +25,15 @@
                     <% }else{ %>
                     <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){
                     %>
-                    <li><a href="/products/<%= filter.selectedCategoryName %>"><%= filter.selectedCategoryName %></a>
+                    <li>
+                        <% if(filter.selectedCategoryName == 'living & dining'){ %>
+                            <a href="/living-and-dining-room-designs"><%= filter.selectedCategoryName %></a>
+                        <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
+                            <a href="/kitchen-cabinet-design"><%= filter.selectedCategoryName %></a>
+                        <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+                            <a href="/bedroom-interior-design"><%= filter.selectedCategoryName %></a>
+                        <% } %>
+
                     </li>
                     <% } %>
                     <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
@@ -38,14 +47,93 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid ">
+
+                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                <% if(filter.selectedCategoryName == 'kitchen'){ %>
+               <!-- <section class="collection-banner bg-color-white">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                            <div class="collection-img-right">
+                                <a href="/know-your-kitchen"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/know_your_kitchen.png" alt="know your kitchen">
+                                <h5>Know Your Kitchen</h5></a>
+                                <div class="go-link">
+                                    <a href="/know-your-kitchen"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                            <div class="collection-design-heading">
+                                <h2> KITCHEN DESIGNS </h2>
+                            </div>
+                            <div class="collection-design-icon">
+                                <a href="#" class="" id="youtubelnk" data-toggle="modal" data-target="#videoModal" data-theVideo="https://www.youtube.com/embed/_txE3dw4DaA"><img class="img-center img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470305038/product_collection/video.png"  alt="Null">
+                                     </a>
+
+                                <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <div>
+                                                    <iframe width="100%" height="350" src=""></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                            <div class="collection-img-left">
+                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/treanding_design.png" alt="know your kitchen">
+                                <h5>Trending Designs</h5>
+                                <div class="go-link">
+                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>                --><% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+<!--
+                <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+-->
+                <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+<!--
+                <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+-->
+                <% } %>
+                <% }else{ %>
+<!--
+                <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+-->
+                <% } %>
+    </div>
+    <!-- H1 tag heading start -->
+    <div class="h1-tag-content container-fluid bg-color-white align-center">
+        <h1>
+            <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
+            null){ %>
+            <%= filter.selectedSubCategoryName %>
+            <% }else if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+            <%= filter.selectedCategoryName %>
+            <% } %>
+        </h1>
+    </div>
+    <!-- H1 tag heading end -->
     <div class="container-fluid bg-color-white" id="filter-desc-container">
         <div class="container">
             <div class="row padding20-0 filter-desc-col position-relative" id="filter-desc">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-8">
-                    <div class="design-count margin0"><%= collection.length %> Products Found</div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
+                    <div class="design-count margin0">
+                        <%= collection.length %>
+                        Products
+                        Found
+                    </div>
                 </div>
 
-                <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
+                <div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
                     <div id="filtered-list" class="padding8">
                         <% var flag = 0; %>
                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ var count = 0; %>
@@ -85,11 +173,11 @@
 
                 <div class="hidden-lg hidden-md col-sm-2 hidden-xs">
                     <div class="row slight-up">
-                        <span class="glyphicon glyphicon-th-list view-select border-right0
+                      <!--  <span class="glyphicon glyphicon-th-list view-select border-right0
                          <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
                         active
                         <% } %>"
-                        ></span><%
+                        ></span>--><%
                         %><span class="glyphicon glyphicon-th-large view-select
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
                         active
@@ -234,7 +322,10 @@
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-3 hidden-sm hidden-xs align-right">
-
+<!--
+  ========================== Sorting dropdown ==================================
+-->
+<!--
                     <span>
                         <a
                                 class="dropdown-toggle color-333 sortby"
@@ -263,7 +354,8 @@
                             </li>
                         </ul>
                     </span>
-                    <span class="glyphicon glyphicon-th-list view-select border-right0
+-->
+                  <span class="glyphicon glyphicon-th-list view-select border-right0
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
                         active
                         <% } %>"
@@ -307,10 +399,10 @@
 
     <!-- Filter Menu Popup -->
     <div class="filterpop hidden-lg hidden-md">
-        <div class="row margin0">
+       <!-- <div class="row margin0">
             <h4>Filters</h4>
             <span class="button border1px position-absolute right10per" onclick="removeAllFilters()">Clear All</span>
-        </div>
+        </div>-->
 
         <div class="row margin0 padding20-0">
             <div class="col-sm-4 col-xs-4 separator-vertical">
@@ -453,12 +545,12 @@
 <script>
     $(document).ready(function () {
 
-        var offset = 200;
+        var offset = 400;
         var duration = 500;
         $(window).scroll(function () {
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
-                $('#filter-desc-container').addClass('stick').css({'top': '70px'});
+                $('#filter-desc-container').addClass('stick').css({'top': '0px'});
                 $('#filter-desc').css({'padding': '10px 0px'});
                 $('.filter-desc-col').addClass('stick-tag');
                 $('#filter-choose-container').slideUp();
@@ -480,7 +572,7 @@
         });
 
         $('#filter-desc-container').on('mouseenter', '.stick-tag', function () {
-            $('#filter-choose-container').addClass('stick').animate({'top': '115px'}, 500);
+            $('#filter-choose-container').addClass('stick').animate({'top': '45px'}, 500);
             $('#filter-choose-container').css('display', 'block');
         });
 
@@ -543,58 +635,171 @@
 
 
         var meta = 'mygubbi';
+        var metakeyword = 'mygubbi';
         var url = $(location).attr('href');
 
         if (url.indexOf('/study-table') != -1) {
-            meta = 'Buy Study Table Online at the best price. Select from our wide range of latest study table designs and get it delivered at your doorstep hassle free';
+
+            meta = 'Designs of Study Table which complement Your Room and Interiors.Get the latest study table design designed to meet your needs.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'home interior décor, home interior design, interior home décor, home interiors, custom made furniture, custom furniture, online customised furniture, modern furniture design, furniture designs';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("Buy Study Table Online");
+
         }else if (url.indexOf('/tv-unit-cabinet') != -1) {
-            meta = 'Buy customized wall entertainment units at the best possible price. Re-define your living room with our Modern TV entertainment units';
+
+            meta = 'Deck Your Home With the best of Décor with our range of TV Furniture and TV Cabinet Designs.Pick out luxury Home décor from mygubbi';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'tv unit, tv stand, tv cabinet, tv units, entertainment unit,entertainment unit designs';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy tv unit online");
+
         }else if (url.indexOf('/shoe-rack') != -1) {
-            meta = 'Shop for different designs of shoe shelves and shoe racks online and organize your living space the way you want it';
+
+            meta = 'Give a neater and classy look to your Home by getting Your Shoe Rack Furniture Custom made by our designers who look into the minute details for better living';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'shoe rack, shoe rack online, shoe rack designs, shoe racks, shoe racks online';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("shoe rack online");
+
         }else if (url.indexOf('/crockery-unit') != -1) {
-            meta = 'Take Your Pick from Our wide Collection of kitchen crockery cabinet designs to customize your living space to your taste';
+
+            meta = 'Look for Crockery unit designs Online and get to select from a range of exclusive products from mygubbi.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'crockery, crockery unit, crockery cabinet, crockery unit designs, crockery cabinet online,kitchen crockery cabinet designs, dining crockery unit designs, designs for crockery unit';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("crockery unit online");
+
         }else if (url.indexOf('/l-shaped-kitchen') != -1) {
-            meta = 'Choose from Our Range L shaped Kitchen Designs at the best possible price. Give your House a new look with our Customized L shaped Modular Kitchen';
+
+            meta = 'L shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'l shaped kitchen design, l shaped kitchen, l shaped kitchen designs';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("l shaped kitchen");
+
         }else if (url.indexOf('/u-shaped-kitchen') != -1) {
-            meta = 'Choose from Our Range U shaped Modular Kitchen Designs at the best possible price. Add life to your living space with our Customized U shaped Kitchen Designs';
+
+            meta = 'U shaped Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'u shaped kitchen, u shaped kitchen design,  u shaped kitchen designs';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("u shaped kitchen");
+
         }else if (url.indexOf('/straight-kitchen') != -1) {
-            meta = 'Take your pick from our wide range of customized kitchen interiors in staright modular kitchen. Add life to your Home with our staraight kitchen designs';
+
+            meta = 'Straight Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'straight kitchen design, straight modular kitchen designs, straight modular kitchen';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("straight kitchen");
+
         }else if (url.indexOf('/parallel-kitchen') != -1) {
-            meta = 'Our customized kitchen interiors include a wide range of parallel kitchen cabinets and parallel kitchen designs tailored according to your needs';
+
+            meta = 'Parallel Kitchen Designs for Your Dream Modular Kitchen.Get a more spacious and modern kitchen which match up to the latest Décor.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'parallel kitchen design, parallel kitchen, parallel kitchen designs,parallel modular kitchen designs';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("parallel kitchen");
+
         }else if (url.indexOf('/wardrobe') != -1) {
-            meta = 'Take your pick from our exclusive range of bedroom wardrobe designs specially designed to cater your Home Needs';
+
+            meta = 'Check out Our Exclusive range of Wardrobe designs which add a classy touch to your Home décor.MyGubbi offers a hassle free installation process and speedy delivery';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'wardrobe, wardrobe designs, wardrobe design,wardrobe online, buy wardrobe online';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy wardrobe online");
+
         }else if (url.indexOf('/side-table') != -1) {
-            meta = 'Buy Side Table Online at the best price. Select from our wide range of bedside table designs and get it delivered at your doorstep hassle free';
+
+            meta = 'Bedside Table Designs that compliment Your Bedroom décor in ways like no other.Pick Out Luxury Home Décor from mygubbi';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'side table, side tables,study table designs, designs of study table, buy study table online, order study table online';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy side table online");
+
         }else if (url.indexOf('/book-shelf') != -1) {
-            meta = 'Buy Book Rack Online at the best price. Select from our wide range of Customized Bookshelves and Book Organizers and add Zest to your life';
+            meta = 'Custom Made Bookshelves from MyGubbi add to your range of luxury décor and add a touch of elegance to your living abode';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'book shelf, bookshelf design, book rack, bookshelf designs';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy book shelf online");
+
         }else if (url.indexOf('/sideboard') != -1) {
-            meta = 'Buy Sideboards Online at the best price. Select from our wide range of Customized Sideboards and add Zest to your life';
+
+            meta = 'Design Your Home with our range of custom made sideboard furniture.Sideboards are among the really useful but neglected furniture pieces in a Home. MyGubbi offers a range of custom designs';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'sideboard , sideboard desing, sideboards online, sideboard furniture, ';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy sideboard online");
+
         }else if (url.indexOf('/foyer-design') != -1) {
-            meta = 'Shop for different designs of foyer and shoe racks online and organize your living space the way you want it';
+
+            meta = 'Pick from a range of wooden and vintage foyer furniture to add a classy touch to your Home décor.MyGubbi offers a range of foyer designs to pick from.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'foyer furniture, foyer designs, foyer design';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy foyer design online");
+
         }else if (url.indexOf('/bedroom') != -1) {
-            meta = 'Choose from Our Range of Modern Bedroom Designs at the best possible price. Re-define your living space with our Customized Bedroom Furniture';
+
+            meta = 'MyGubbi offers an Exclusive collection of bedroom furniture to choose from.Get Your Bedroom interiors custom made to fit your Home and Décor.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'bedroom designs, bedroom furniture, bedroom interior, bedroom interior design';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("bedroom interior");
+
         }else if (url.indexOf('/kitchen') != -1) {
-            meta = 'Choose from Our Range of Modular Kitchen Designs  at the best possible price. Re-define your living space with our Customized Kitchen cabinets';
+
+            meta = 'Check out our Range of Kitchen Cabinets and choose the kitchen cabinet design of Your choice.';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'modular kitchen, modular kitchen design, kitchen design, kitchen cabinets, kitchen, kitchen interior, kitchen cabinet, kitchen furniture,kitchen cabinet designs, kitchen cabinets designs';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("buy kitchen cabinets");
+
         }else if (url.indexOf('/living-and-dining-room-designs') != -1) {
-            meta = 'Shop from our exclusive Range of Living Room Furniture. Add life to your living space with our customized living room interior designs';
+
+            meta = 'Buy Your Living Room furniture online from MyGubbi and jazz up your life with the latest Décor.Get Your Dining Room furniture custom made by picking out from a range of dining room designs';
             $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("living and dining room designs");
+
         }else {
             $("meta[name='description']").attr("content", meta);
+            $("meta[name='keywords']").attr("content", metakeyword);
         }
 
     });
@@ -799,3 +1004,48 @@
         }
     }
 </script>
+<style>
+    .collection-img-right{
+    float: right;
+    margin: 10px;
+    }
+    .collection-img-left{
+    float: left;
+    margin: 10px;
+    }
+
+    .collection-design-heading {
+    border-bottom: 1px solid #ddd;
+    margin: 10px auto;
+    padding-bottom: 5px;
+    display: inline-block;
+    color: #415159;
+    }
+    .collection-design-heading h2{
+    font-weight: 100;
+    }
+    .collection-img-right h5{
+    margin-bottom: 3px;
+    font-weight: 100;
+    }
+    .collection-img-left h5{
+    margin-bottom: 3px;
+    font-weight: 100;
+    }
+    @media (max-width: 768px) {
+    .collection-img-right{
+    float: none;
+    }
+    .collection-img-left{
+    float: none;
+    }
+    }
+    @media (max-width: 480px) {
+    .collection-img-right{
+    float: none;
+    }
+    .collection-img-left{
+    float: none;
+    }
+    }
+</style>

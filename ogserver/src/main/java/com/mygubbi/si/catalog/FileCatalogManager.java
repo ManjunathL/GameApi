@@ -14,8 +14,13 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.*;
 
 public class FileCatalogManager
 {
@@ -110,12 +115,24 @@ public class FileCatalogManager
                 LOG.error("Not able to read file: " + uploadFile, fileResult.cause());
                 System.exit(1);
             }
-            JsonArray productsJson = new JsonArray(fileResult.result().toString());
+            String jsonText = this.sanitizeBuffer(fileResult.result());
+            LOG.info("Json Data: " + jsonText);
+            if (jsonText == null)
+            {
+                LOG.info("Could not read data from file, bringing down server.");
+                System.exit(-1);
+            }
+            JsonArray productsJson = new JsonArray(jsonText);
             if (productsJson.isEmpty())
             {
                 LOG.info("No records to load, bringing down server.");
                 System.exit(-1);
             }
+            else
+            {
+                LOG.info("Records to load: " + productsJson.size());
+            }
+
             recordsToLoad = productsJson.size();
 
             for (Object productText : productsJson)
@@ -145,6 +162,34 @@ public class FileCatalogManager
             }
         });
 
+    }
+
+    private String sanitizeBuffer(Buffer buffer)
+    {
+        String defaultEncoding = "UTF-8";
+        InputStream inputStream = new ByteArrayInputStream(buffer.getBytes());
+        try {
+            BOMInputStream bOMInputStream = new BOMInputStream(inputStream);
+            ByteOrderMark bom = bOMInputStream.getBOM();
+            String charsetName = bom == null ? defaultEncoding : bom.getCharsetName();
+            return IOUtils.toString(new BufferedInputStream(bOMInputStream), charsetName);
+        }
+        catch (Exception ex)
+        {
+            LOG.error("Error in the input stream. " + buffer.toString(), ex);
+            return null;
+        }
+        finally
+        {
+            try
+            {
+                inputStream.close();
+            }
+            catch (IOException e)
+            {
+                //Ignore
+            }
+        }
     }
 
 }

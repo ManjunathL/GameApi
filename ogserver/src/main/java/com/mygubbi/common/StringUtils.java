@@ -109,6 +109,28 @@ public class StringUtils {
 	    return sbuf.toString();
 	 }
 
+	public static String arrayToString(int[] numbers, char delim) {
+		if (numbers == null || numbers.length == 0) { return ""; }
+		StringBuffer sbuf = new StringBuffer();
+		sbuf.append(numbers[0]);
+		for (int idx = 1; idx < numbers.length; idx++) {
+			sbuf.append(delim);
+			sbuf.append(numbers[idx]);
+		}
+		return sbuf.toString();
+	}
+
+	public static String listToString(List<Integer> numbers, char delim) {
+		if (numbers == null || numbers.size() == 0) { return ""; }
+		StringBuffer sbuf = new StringBuffer();
+		sbuf.append(numbers.get(0));
+		for (int idx = 1; idx < numbers.size(); idx++) {
+			sbuf.append(delim);
+			sbuf.append(numbers.get(idx));
+		}
+		return sbuf.toString();
+	}
+
 	  /**
 	   * returns an arraylist of strings  
 	   * @param str the comma seperated string values
@@ -451,12 +473,7 @@ public class StringUtils {
 	  }
 	  
 	  /**
-	   * from \/ to .
-	   * c:\\\abhinash//karan/haha..ram.to
-	   * c:...abinash..karan.haha..ram.to
 	   * @param str
-	   * @param from
-	   * @param to
 	   * @return
 	   */
 	  public static String replaceMultipleCharsToAnotherChar(String str, char[] replacables, char replaceBy) {

@@ -13,27 +13,10 @@ public class SecurityServiceTest {
     @Test
     public void testAuthentication() {
 
-        JsonObject registrationParams = new JsonObject();
-        registrationParams.put("user_id", "somename");
-        registrationParams.put("pswd", "somepassword");
-
-        SecurityService.getInstance().secureCredentials(registrationParams);
-
-        Assert.assertFalse(registrationParams.containsKey(SecurityService.PASSWORD_KEY));
-        Assert.assertTrue(registrationParams.containsKey(SecurityService.HASH_KEY));
-        Assert.assertTrue(registrationParams.containsKey(SecurityService.SALT_KEY));
-        Assert.assertNotEquals("somepassword", registrationParams.getString(SecurityService.HASH_KEY));
-
-        JsonObject userObject = new JsonObject();
-        userObject.put("user_id", "somename");
-        userObject.put("hash", registrationParams.getString("hash"));
-        userObject.put("salt", registrationParams.getString("salt"));
-
-        JsonObject loginParams = new JsonObject();
-        loginParams.put("user_id", "somename");
-        loginParams.put("pswd", "somepassword");
-
-        boolean valid = SecurityService.getInstance().authenticate(loginParams, userObject);
+        String username = "somename";
+        String password = "somepassword";
+        SecurityService.HashedCredentials hashedCredentials = SecurityService.getInstance().getHashedCredentials(password);
+        boolean valid = SecurityService.getInstance().authenticate(username, password, hashedCredentials.getSalt(), hashedCredentials.getHashedPassword());
 
         Assert.assertTrue(valid);
 

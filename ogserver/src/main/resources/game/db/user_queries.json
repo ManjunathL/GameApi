@@ -1,0 +1,47 @@
+{
+  "queries": [
+    {
+      "id": "game_user.insert",
+      "type": "insert",
+      "table": "game_user",
+      "query": "insert into game_user (active, email, role, name, phone, salt, hash) values ('A', ?, ?, ?, ?, ?, ?)",
+      "params": [
+        "email",
+        "role",
+        "name",
+        "phone",
+        "salt",
+        "hash"
+      ]
+    },
+    {
+      "id": "game_user.update_password",
+      "type": "update",
+      "table": "game_user",
+      "query": "update game_user set salt = ?, hash = ? where email = ?",
+      "params": [
+        "salt",
+        "hash",
+        "email"
+      ]
+    },
+    {
+      "id": "game_user.select",
+      "type": "select",
+      "table": "game_user",
+      "query": "select email, role, name, phone, salt, hash from game_user where email = ?",
+      "params": [
+        "email"
+      ]
+    },
+    {
+      "id": "game_user.byrole",
+      "type": "select",
+      "table": "game_user",
+      "query": "select email, role, name, phone from game_user where role = ?",
+      "params": [
+        "role"
+      ]
+    }
+  ]
+}

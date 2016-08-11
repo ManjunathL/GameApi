@@ -16,6 +16,7 @@
 
   "apicache" : true,
   "shopifyredirect": true,
+  "enquirymailto" : "uat@mygubbi.com",
 
   "staticConfigPath": "config/test/uat.config.js",
 

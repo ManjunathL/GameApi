@@ -20,9 +20,14 @@ define([
 
             var that = this;
 
+            var blog_name = that.model.name;
+
+           blog_name = blog_name.replace(/-/g, ' ');
+           blog_name = blog_name.replace(/_/, '-');
+
             this.story.fetch({
                 success: function() {
-                    that.fetchStoryAndRender(that.model.name);
+                    that.fetchStoryAndRender(blog_name);
                 },
                 error: function(model, response, options) {
                     console.log("couldn't fetch story data - " + response);

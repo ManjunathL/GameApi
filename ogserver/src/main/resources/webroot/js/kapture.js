@@ -11,8 +11,11 @@ define(function() {
             floorplan && formData.append('floorplan', floorplan);
             propertyName && formData.append('consult', propertyName);
 
+            formData.append('primary_source', 'Digital');
+            formData.append('secondary_source', 'Enquiry Form');
+
             $.ajax({
-                url: 'https://adjetter.com/lp/orangegubbi-place-an-enquiry.html?auth=bFCAsuGsIdan8f6NdFmv9KGy5W8gW6knGaoNAqt85dU=',
+                url: 'https://adjetter.com/lp/orangegubbi-place-an-enquiry.html?auth=bFCAsuGsIdan8f6NdFmv9IDlVhxPjxWe2Xy4MP3NU5E=',
                 /*url: restBase + '/api/consult',*/
                 data: formData,
                 processData: false,

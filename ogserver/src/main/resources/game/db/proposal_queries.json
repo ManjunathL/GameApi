@@ -1,0 +1,498 @@
+{
+  "queries": [
+    {
+      "id": "proposal.list.status",
+      "type": "select",
+      "table": "proposal",
+      "query": "select id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status = ?",
+      "params": ["status"]
+    },
+
+    {
+      "id": "proposal.list.all",
+      "type": "select",
+      "table": "proposal",
+      "query": "select 'W' as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": []
+    },
+
+    {
+      "id": "proposal.list.sales",
+      "type": "select",
+      "table": "proposal",
+      "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
+    },
+
+    {
+      "id": "proposal.list.designer",
+      "type": "select",
+      "table": "proposal",
+      "query": "select IF(designerEmail = ?, 'W', 'R') as editFlag, id, crmId, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
+    },
+
+    {
+      "id": "proposal.summary",
+      "type": "select",
+      "table": "proposal",
+      "query": "select status, count(*) as proposal_count from proposal where status = 'deleted' group by status",
+      "params": []
+    },
+    {
+      "id": "proposal.header",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal where id = ?",
+      "params": ["id"]
+    },
+
+    {
+      "id": "proposal.create",
+      "type": "insert",
+      "table": "proposal",
+      "query": "insert into proposal(status, title, version, createdBy) values ('draft', ?, '1.0', ?)",
+      "params": ["title", "createdBy"]
+    },
+
+    {
+      "id": "proposal.update",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, customerId = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, amount = ?, updatedBy = ? where id = ?",
+      "params": ["title", "crmId", "quoteNo", "customerId", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "amount", "updatedBy", "id"]
+    },
+
+    {
+      "id": "proposal.folder.update",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set folderPath = ? where id = ?",
+      "params": ["folderPath", "id"]
+    },
+
+    {
+      "id": "proposal.submit",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set status = 'active' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.publish",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set status = 'published' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.revise",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set status = 'draft' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.cancel",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set status = 'cancelled' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.delete",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set status = 'deleted' where id = ?",
+      "params": ["id"]
+    },
+
+    {
+      "id": "proposal.comment.insert",
+      "type": "insert",
+      "table": "proposal_comments",
+      "query": "insert into proposal_comments (id, proposalid, comment, userid, username, createdon) values (?, ?, ?, ?, ?, ?)",
+      "params": ["id", "proposalid", "comment", "userid", "username", "createdon"]
+    },
+
+    {
+      "id": "proposal.comment.select",
+      "type": "select",
+      "table": "proposal_comments",
+      "query": "select * from proposal_comments where proposalId = ?",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "proposal.document.add",
+      "type": "insert",
+      "table": "proposal_documents",
+      "query": "insert into proposal_documents (proposalId, title, fileName, attachmentType, uploadedBy) values (?, ?, ?, ?, ?)",
+      "params": ["proposalId", "title", "fileName", "attachmentType", "uploadedBy"]
+    },
+
+    {
+      "id": "proposal.document.remove",
+      "type": "delete",
+      "table": "proposal_documents",
+      "query": "delete from proposal_documents where id = ?",
+      "params": [
+        "id"
+      ]
+    },
+
+    {
+      "id": "proposal.document.select",
+      "type": "select",
+      "table": "proposal_documents",
+      "query": "select * from proposal_documents where proposalId = ? and productId = 0",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "product.document.add",
+      "type": "insert",
+      "table": "proposal_documents",
+      "query": "insert into proposal_documents (proposalId, productId, title, fileName, attachmentType, uploadedBy) values (?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "productId", "title", "fileName", "attachmentType", "uploadedBy"]
+    },
+
+    {
+      "id": "product.document.select",
+      "type": "select",
+      "table": "proposal_documents",
+      "query": "select * from proposal_documents where productId = ?",
+      "params": ["productId"]
+    },
+
+    {
+      "id": "product.document.remove",
+      "type": "delete",
+      "table": "proposal_documents",
+      "query": "delete from proposal_documents where id = ?",
+      "params": ["id"]
+    },
+
+    {
+      "id": "proposal.addon.list",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select * from proposal_addon where proposalId = ?",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "proposal.addon.selected.detail",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select * from proposal_addon where proposalId = ? and id in (?)",
+      "params": ["proposalId", "addonIds"]
+    },
+
+    {
+      "id": "proposal.addon.remove",
+      "type": "delete",
+      "table": "proposal_addon",
+      "query": "delete from proposal_addon where id = ?",
+      "params": ["id"]
+    },
+
+    {
+      "id": "proposal.addon.add",
+      "type": "insert",
+      "table": "proposal_addon",
+      "query": "insert into proposal_addon(proposalId, code, categoryCode, productTypeCode, brandCode, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
+    },
+
+    {
+      "id": "proposal.addon.update",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
+      "params": [
+        "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
+    },
+
+    {
+      "id": "module.select.all",
+      "type": "select",
+      "table": "module_master",
+      "query": "select code, width, depth, height, description, imagePath from module_master",
+      "params": []
+    },
+
+    //Proposal product line item queries
+
+    {
+      "id": "proposal.product.create",
+      "type": "insert",
+      "table": "proposal_product",
+      "query": "insert into proposal_product (proposalId, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)",
+      "params": ["proposalId", "title", "seq", "type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
+        "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
+        "modules", "addons", "createdBy", "costWoAccessories"]
+    },
+
+    {
+      "id": "proposal.product.update",
+      "type": "update",
+      "table": "proposal_product",
+      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ? where id = ?",
+      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories", "id"]
+    },
+
+    {
+      "id": "proposal.product.delete",
+      "type": "delete",
+      "table": "proposal_product",
+      "query": "update proposal_product set active = 'N' where id = ?",
+      "params": ["id"]
+    },
+
+    {
+      "id": "proposal.product.list",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select id, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, createdOn, createdBy, updatedOn, updatedBy, costWoAccessories from proposal_product where proposalId = ? and active = 'A'",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "proposal.product.all.detail",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product where proposalId = ? and active = 'A' order by type",
+      "params": ["proposalId"],
+      "jsonfields":["modules", "addons"]
+    },
+
+    {
+      "id": "proposal.product.selected.detail",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product where proposalId = ? and active = 'A' and id in (?) order by type",
+      "params": ["proposalId", "productIds"],
+      "jsonfields":["modules", "addons"]
+    },
+
+    {
+      "id": "proposal.product.detail",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product where id = ?",
+      "params": ["id"],
+      "jsonfields":["modules", "addons"]
+    },
+
+
+    // Module costing queries
+    {
+      "id": "module.components.select",
+      "type": "select",
+      "table": "module_components",
+      "query": "select comptype, compcode, quantity from module_components where modulecode = ?",
+      "params": ["modulecode"]
+    },
+    {
+      "id": "module.components.select.all",
+      "type": "select",
+      "table": "module_components",
+      "query": "select modulecode, comptype, compcode, quantity from module_components ",
+      "params": []
+    },
+    {
+      "id": "module.carcass.cost",
+      "type": "select",
+      "table": "module_components",
+      "query": "select sum(cm.area * mr.rate * mc.quantity) as cost from module_components mc, carcass_master cm, mf_rate_master mr where mc.modulecode = ? and mc.comptype = 'C' and mc.compcode = cm.code and mr.type = 'C' and mr.mfcode = ? and mr.thickness = cm.thickness",
+      "params": ["modulecode", "material"]
+    },
+    {
+      "id": "module.shutter.cost",
+      "type": "select",
+      "table": "module_components",
+      "query": "select sum(sfx.cuttingarea * mr.rate * mc.quantity) as cost from module_components mc, shutter_finish_xref sfx, mf_rate_master mr where mc.modulecode = ? and mc.comptype = 'S' and mc.compcode = sfx.shuttercode and mr.type = 'S' and mr.mfcode = ? and mr.thickness = sfx.cuttingt",
+      "params": ["modulecode", "finishtype"]
+    },
+    {
+      "id": "module.acshw.cost",
+      "type": "select",
+      "table": "module_components",
+      "query": "select sum(ahm.price * mc.quantity) as cost from module_components mc, acs_hw_master ahm where mc.modulecode = ? and mc.comptype in ('A', 'H') and mc.compcode = ahm.code",
+      "params": ["modulecode"]
+    },
+    {
+      "id": "carcass.select.all",
+      "type": "select",
+      "table": "carcass_master",
+      "query": "select code, title, plength, breadth, thickness, edgebinding, area, type from carcass_master",
+      "params": []
+    },
+    {
+      "id": "shutter.select.all",
+      "type": "select",
+      "table": "shutter_master",
+      "query": "select code, title, plength, breadth, thickness, edgebinding, quantity from shutter_master",
+      "params": []
+    },
+
+    {
+      "id": "accessory.select.all",
+      "type": "select",
+      "table": "acc_hw_master",
+      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
+      "params": []
+    },
+    {
+      "id": "hardware.select.all",
+      "type": "select",
+      "table": "acc_hw_master",
+      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
+      "params": []
+    },
+
+    {
+      "id": "module.accessories.select",
+      "type": "select",
+      "table": "acc_hw_master",
+      "query": "select ahm.title, ahm.make, ahm.imagePath from module_components mc, acc_hw_master ahm where mc.modulecode = ? and ahm.makeType = ? and mc.comptype = 'A' and mc.compcode = ahm.code",
+      "params": ["mgCode", "makeType"]
+    },
+
+    {
+      "id": "lookup.codes",
+      "type": "select",
+      "table": "code_master",
+      "query": "select code, title, additionalType from code_master where lookupType = ?",
+      "params": ["lookupType"]
+    },
+    {
+      "id": "finish.lookup",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select finishMaterial as additionalType, finishCode as code, title from finish_master",
+      "params": []
+    },
+    {
+      "id": "finish.master.all",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select costCode, finishCode, finishType, finishMaterial, design, shutterMaterial, colorGroupCode, cuttingOffset, title from finish_master",
+      "params": []
+    },
+
+    {
+      "id": "addons.categories",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct categoryCode, rateReadOnly from addon_master",
+      "params": []
+    },
+
+    {
+      "id": "addons.product.types",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct productTypeCode from addon_master where categoryCode = ?",
+      "params": ["categoryCode"]
+    },
+    {
+      "id": "addons.brands",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select distinct brandCode from addon_master where ProductTypeCode = ?",
+      "params": ["productTypeCode"]
+    },
+
+    {
+      "id": "addons.products",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select catalogueCode,title,code,rate,imagePath,uom from addon_master where productTypeCode = ? and brandCode = ?",
+      "params": ["productTypeCode", "brandCode"]
+    },
+
+    {
+      "id": "finish.codes",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select finishMaterial, finishCode, colorGroupCode, title from finish_master",
+      "params": []
+    },
+
+    {
+      "id": "color.codes",
+      "type": "select",
+      "table": "color_master",
+      "query": "select code as code, code as name, imagePath from color_master where colorGroupCode = ? or 'ALL' = ? order by code",
+      "params": ["colorGroupCode", "colorGroupCode"]
+    },
+
+    {
+      "id": "colors.select.all",
+      "type": "select",
+      "table": "color_master",
+      "query": "select code as code, code as name, imagePath from color_master order by colorGroupCode, code",
+      "params": []
+    },
+
+    {
+      "id": "product.select.productid",
+      "type": "select",
+      "query": "select id, productId, productJson from product where productId = ?",
+      "params": [
+        "productId"
+      ]
+    },
+    {
+      "id": "product.select.subcategory",
+      "type": "select",
+      "query": "select productJson from product where subcategoryId = ? ORDER BY productId",
+      "params": ["subcategory"]
+    },
+
+    {
+      "id": "acc_pack_master.select",
+      "type": "select",
+      "query": "select code, title from acc_pack_master",
+      "params": []
+    },
+
+    {
+      "id": "acc_pack_components.select",
+      "type": "select",
+      "query": "select apcode, type, code, qty from acc_pack_components",
+      "params": []
+    },
+
+    {
+      "id": "module_acc_pack.select",
+      "type": "select",
+      "query": "select apcode, mgcode from module_acc_pack",
+      "params": []
+    },
+
+    {
+      "id": "acc_addon_map.select",
+      "type": "select",
+      "query": "select apcode, addoncode from accpack_addon_map",
+      "params": []
+    },
+
+    {
+      "id": "accpacks.selectymodule",
+      "type": "select",
+      "query": "select code, title from acc_pack_master where code in (select apcode from module_acc_pack where mgcode = ?)",
+      "params": ["mgCode"]
+    },
+
+    {
+      "id": "addons.selectbyaccpack",
+      "type": "select",
+      "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from accpack_addon_map where apcode = ?)",
+      "params": ["apCode"]
+    }
+
+  ]
+}

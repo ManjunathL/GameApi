@@ -1,0 +1,676 @@
+<section class="bg-white padding-bottom20 menu-spacer">
+    <div class="nri_banner_txt">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-8 col-lg-8">
+                    <div class="nri_banner_head">
+                        <h1 class="color-white align-center">
+                            LOOKING FOR
+                            <span class="color-orange"><strong>MODULAR KITCHEN</strong></span>
+                            FOR YOUR NEW FLAT IN
+                            <strong>
+                                <% if(typeof(cityName) !== 'undefined'){ %>
+                                <%= cityName %>
+                                <% }else{ %>
+                                BANGALORE
+                                <% } %>
+                                ?</strong>
+                        </h1>
+                        <h3 class="heading-center-notransform color-white margin-top40 width90 margin_auto">
+                            Easy buying and FREE consultation of modular furniture sitting anywhere across the globe.
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <!-- Banner Contact Form -->
+                    <div class="row nri_banner_form">
+
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="display-none" id="contact_error_row">
+                                <p class="margin0 error-text align-center" id="contact_error"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <form method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx" class="width90 margin_auto paddingtop20">
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control nri_banner_form_input" id='FirstName' name='FirstName' placeholder="Name*" maxlength='100' value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off' required='required'/>
+                                </div>
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control nri_banner_form_input" id='EmailAddress' name='EmailAddress' placeholder="Email*" maxlength='100' value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                </div>
+                                <div class="row margin0">
+                                    <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom20 form-group padding0 padding-right10">
+                                        <input type='text' class="width100 form-control nri_banner_form_input" id='mx_countrycode' placeholder="Country Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
+                                    </div>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom20 form-group padding0">
+                                        <input type='text' class="width100 form-control nri_banner_form_input" id='Phone' name='Phone' placeholder="Phone Number*" maxlength='20' value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
+                                    </div>
+                                </div>
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control nri_banner_form_input" id='mx_City' name='mx_City' placeholder="City*" maxlength='50' value='' autocomplete='off' required='required'/>
+                                </div>
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control nri_banner_form_input" id='mx_Street2' name='mx_Street2' placeholder="Property Name" maxlength='256' value='' autocomplete='off'/>
+                                </div>
+                                <div class="margin-bottom20 form-group">
+                                    <label for='exclude_FileUpload_1' class="color-white text-floorplan">Upload Floorplan</label>
+                                    <input type='file' class="width100 form-control nri_banner_form_input" id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off'/>
+
+                                    <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan'/>
+                                </div>
+                                <div class="align-center form-group">
+                                    <button class="button-orange consult-submit-orange nri_banner_form_button" id="form-submit-button" type="submit"> Submit </button>
+                                    <br/>
+                                    <input type="hidden" name="MXHOrgCode" value="9814"/>
+                                    <input type="hidden" name="MXHLandingPageId" value="8d7bb83a-0c47-11e6-b61b-22000aa8e760"/>
+                                    <input type="hidden" name="MXHFormBehaviour" value="1"/>
+                                    <input type="hidden" name="MXHFormDataTransfer" value="0"/>
+                                    <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page"/>
+                                    <input type="hidden" name="MXHAsc" value="5"/>
+                                    <input type="hidden" name="MXHPageTitle" value="Email"/>
+                                    <input type="hidden" name="MXHOutputMessagePosition" value="0"/>
+                                    <input type="hidden" name="MXHIsExternallyUsed" value="1"/>
+                                </div>
+                            </form>
+                            <script type="text/javascript"> var MXLandingPageId = '8d7bb83a-0c47-11e6-b61b-22000aa8e760'; </script>
+                        </div>
+                    </div>
+                    <!-- Banner Contact Form End -->
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+            <div class="padding50-0 bg-color-white align-center">
+                <div class="row padding20-0">
+                    <div class="col-md-4 col-sm-4">
+                        <img class="cld-responsive img-responsive img-centered width85"
+                             data-src="<%= imgBase + 'w_auto' + '/v1468483867/nri_page/optimized_img/browse.jpg'%>" alt="Browse11">
+                        <div class="intro-text">
+                            <p><b>Browse Designs</b></p>
+                            Pick your favorite
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <img class="cld-responsive img-responsive img-centered width85"
+                             data-src="<%= imgBase + 'w_auto' + '/v1468483868/nri_page/optimized_img/meet.jpg'%>" alt="Consult11">
+                        <div class="intro-text">
+                            <p><b>Talk to Us</b></p>
+                            Choose Final Design
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <img class="cld-responsive img-responsive img-centered width85"
+                             data-src="<%= imgBase + 'w_auto' + '/v1468483867/nri_page/optimized_img/relax_03.jpg'%>" alt="Relax">
+                        <div class="intro-text">
+                            <p><b>Order and relax</b></p>
+                            Enjoy FREE Delivery
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-nri-yellow">
+            <div class="container">
+                <div class="row margin0 align-center padding40">
+
+                    <h3 class="color-white margin-top0">
+                        <b>Watch your dream shaping into reality at the comfort of your home</b>
+                    </h3>
+
+                    <p class="color-white margin_auto width80">
+                        We know that distance is a major factor to be considered. Since, you can’t travel to
+                        Bangalore & Pune for each & everything, we will take care of the project on your behalf.
+                        And we offer design solutions using the latest technology to meet your needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <section class="project-description">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-4 col-md-4 text-center">
+                        <img class="img-responsive img-center" src="<%= imgBase + 'w_auto' + '/landing_page/IC_01_160X160.png' %>" alt="lp">
+                        <h2 class="lp-project-no"> 100+</h2>
+                        <h3 class="lp-projects"> Projects </h3>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 text-center">
+                        <img class="img-responsive img-center" src="<%= imgBase + 'w_auto' + '/landing_page/IC_02_160X160.png' %>" alt="lp">
+                        <h3 class="lp-projects-dec"> Our Manufacturing facility <br/> Follows international <br/> Product standards </h3>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 text-center">
+                        <img class="img-responsive img-center" src="<%= imgBase + 'w_auto' + '/landing_page/IC_03_160X160.png' %>" alt="lp">
+                        <h2 class="lp-project-no"> 500+ </h2>
+                        <h3 class="lp-projects"> Personalized <br/> Designs </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container padding40-0">
+            <div class="row margin0 align-center paddingbottom20">
+                <h2 class="color-magenta-nri margin-top0">
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/L3_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="left line">
+                    <b>NRI Services</b>
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/R3_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="right line">
+                </h2>
+                <h3 class="heading-center-notransform">
+                    What we have in store for you?
+                </h3>
+            </div>
+            <div class="row margin0">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row margin0 img_hover">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nri6.png'%>"
+                                 class="cld-responsive img-centered width85 float-right no_hover" alt="...">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nrirev1.png'%>"
+                                 class="cld-responsive img-centered width85 float-right w_hover" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none color-hover">
+                                Ease of selection
+                            </h4>
+                            <p>
+                                Browse through our varied designs, if not satisfied give us a call for personalised
+                                design
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0 img_hover">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nri5.png'%>"
+                                 class="cld-responsive img-centered width85 float-right no_hover" alt="...">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nrirev2.png'%>"
+                                 class="cld-responsive img-centered width85 float-right w_hover" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none color-hover">
+                                Active Customer Support
+                            </h4>
+                            <p>
+                                You can connect with us over mail, video or phone call as per your convenience
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0 img_hover">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nri4.png'%>"
+                                 class="cld-responsive img-centered width85 float-right no_hover" alt="...">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nrirev3.png'%>"
+                                 class="cld-responsive img-centered width85 float-right w_hover" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none color-hover">
+                                Additional support services
+                            </h4>
+                            <p>
+                                Any additional work at site which is not part of our scope, we will ensure that it gets
+                                done from right partners<br/>
+                                (Eg Electrical or plumbing work)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row margin0 img_hover">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nri3.png'%>"
+                                 class="cld-responsive img-centered width85 float-right no_hover" alt="...">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nrirev4.png'%>"
+                                 class="cld-responsive img-centered width85 float-right w_hover" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none color-hover">
+                                Regular Updates
+                            </h4>
+                            <p>
+                                We will continuously update you with the work progress. Be it images or video updates,
+                                we will keep you posted.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0 img_hover">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nri2.png'%>"
+                                 class="cld-responsive img-centered width85 float-right no_hover" alt="...">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nrirev5.png'%>"
+                                 class="cld-responsive img-centered width85 float-right w_hover" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none color-hover">
+                                Careful Handover
+                            </h4>
+                            <p>
+                                You don’t have to worry for safety, we will carefully handover the newly decorated home
+                                to you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row margin0 img_hover">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nri1.png'%>"
+                                 class="cld-responsive img-centered width85 float-right no_hover" alt="...">
+                            <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/nrirev6.png'%>"
+                                 class="cld-responsive img-centered width85 float-right w_hover" alt="...">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <h4 class="text-transform-none color-hover">
+                                Flexible Payments
+                            </h4>
+                            <p>
+                                You have the advantage of doing partial payments. We also have EMI options available.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-nri-gray">
+            <div class="row margin0">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/optimized_img/middle.jpg'%>"
+                         class="cld-responsive img-centered" alt="Original Designs">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding5per">
+                    <h2 class="text-transform-none">
+                        Original designs and regular updates are covered
+                    </h2>
+                    <p class="justify">
+                        Our team of professionals have confidence in visually appealing values of interior designing. In
+                        terms of novelty and modern designs our team eases in meeting the uppermost thinkable standards.
+                        We also keep our customers updated on work progress by using digital photographs, which are
+                        shared with you via email.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container padding40-0">
+            <div class="row margin0 align-center">
+                <h2 class="color-purple-nri margin-bottom40">
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/L1_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="left line">
+                    <b>Process? We Keep it simple!</b>
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/R1_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="right line">
+                </h2>
+            </div>
+            <div class="row margin0">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 padding-top13p4per img_hover">
+                        <div class="row margin0">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr1.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr111.png'%>" alt="Browse11">
+                        </div>
+                        <div class="row margin0 padding15 color-purple-nri">
+                            <h5 class="text-transform-none"><b>Site Visit</b></h5>
+                            <p>Our representative will visit your home to take appropriate measurements.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 img_hover">
+                        <div class="row margin0">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr2.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr222.png'%>" alt="Browse11">
+                        </div>
+                        <div class="row margin0 padding15 color-purple-nri">
+                            <h5 class="text-transform-none"><b>Engaging Discussion</b></h5>
+                            <p>Design team will discuss about your necessities over a Video or conference call.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 padding-top13p4per img_hover">
+                        <div class="row margin0">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr3.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr333.png'%>" alt="Browse11">
+                        </div>
+                        <div class="row margin0 padding15 color-purple-nri">
+                            <h5 class="text-transform-none"><b>Design Plan</b></h5>
+                            <p>Technical consultants will create the reference drawings and 3D renderings and explain to
+                                you over web meeting at your convenience.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 img_hover">
+                        <div class="row margin0">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr4.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr444.png'%>" alt="Browse11">
+                        </div>
+                        <div class="row margin0 padding15 color-purple-nri">
+                            <h5 class="text-transform-none"><b>Finalise your design</b></h5>
+                            <p>If you need any then you can convey it to the designer. If you are happy with the design
+                                then designer will develop the final 3-D design of the project.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 padding-top13p4per img_hover">
+                        <div class="row margin0">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr5.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr555.png'%>" alt="Browse11">
+                        </div>
+                        <div class="row margin0 padding15 color-purple-nri">
+                            <h5 class="text-transform-none"><b>FREE Delivery & Installation</b></h5>
+                            <p>We will deliver and Install products with utmost care. You can contact us for any
+                                interior or service related issue post-hand over</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0 img_hover">
+                        <div class="row margin0">
+                            <img class="cld-responsive img-responsive img-centered width85 no_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr6.png'%>" alt="Browse11">
+                            <img class="cld-responsive img-responsive img-centered width85 w_hover"
+                                 data-src="<%= imgBase + 'w_auto' + '/v1/pr666.png'%>" alt="Browse11">
+                        </div>
+                        <div class="row margin0 padding15 color-purple-nri">
+                            <h5 class="text-transform-none"><b>Avail our efficient after sales & service</b></h5>
+                            <p>We do interior health check up every six months to ensure that our products are working
+                                fine and address any issues if found</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid">
+            <div class="row margin0">
+                <a href="/kitchen-cabinet-design">
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1468483864/nri_page/optimized_img/Desktop_Bottom-banner.jpg'%>"
+                         class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="Mystique Designs">
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1468483867/nri_page/optimized_img/Mobile-bottom_Banner.jpg'%>"
+                         class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="Mystique Designs">
+                </a>
+            </div>
+        </div>
+
+        <div class="container padding40-0">
+            <div class="row margin0 align-center">
+                <h2 class="color-blue-nri text-transform-none margin-bottom40">
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/L2_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="left line">
+                    <b>Why Us?</b>
+                    <img data-src="<%= imgBase + 'w_auto' + '/v1/nri_page/R2_07.png'%>"
+                         class="cld-responsive img-centered width10" alt="right line">
+                </h2>
+            </div>
+            <div class="row margin0 align-center color-white">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding0">
+                    <div class="row margin0 bg-color-blue1">
+                        <h4 class="text-transform-none bold-text">Original Design & Iterations</h4>
+                    </div>
+                    <div class="row margin0 padding20 bg-color-blue2 min-height122">
+                        <p>
+                            We are patient and will wait till the time you give us a head on any design layout.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding0">
+                    <div class="row margin0 bg-color-blue3">
+                        <h4 class="text-transform-none bold-text">Personal Engagement</h4>
+                    </div>
+                    <div class="row margin0 padding20 bg-color-blue4 min-height122">
+                        <p>
+                            We like to talk to clients about their likes, dislikes, requisites, and other things.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding0">
+                    <div class="row margin0 bg-color-blue5">
+                        <h4 class="text-transform-none bold-text">Photorealistic Renders</h4>
+                    </div>
+                    <div class="row margin0 padding20 bg-color-blue6 min-height122">
+                        <p>
+                            We provide such realistic renders that you’ll get a fair idea about how the design will turn
+                            out to be.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-color-red">
+            <a href="javascript:void(0);" id="book_consultation">
+                <h2 class="text-transform-none align-center color-white margin20-0">
+                    Book your consultation
+                </h2>
+            </a>
+        </div>
+
+        <!-- Brand Section -->
+
+        <div class="container-fluid margin50-0">
+            <h1 class="heading-center-notransform">
+                Brands that we are working with
+            </h1>
+            <div class="wrap col-xs-12 padding0">
+                <div class="row margin0">
+                    <div class="controls center col-xs-1 margin-top40">
+                        <button class="btn brand-prev disabled" disabled="">
+                            <img src="<%= imgBase + '/home/dark_arr_left.png'%>" class="arr_test" alt="...">
+                        </button>
+                    </div>
+
+                    <div class="frame col-xs-10 overflow-hidden" id="brand-frame">
+                        <ul class="clearfix slidee"
+                            style="transform: translateZ(0px) translateX(0px); width: 3480px;">
+
+                            <li class="brand-sly-content">
+                                <img src="<%= imgBase + '/brand/Hettich.png'%>" alt="...">
+                            </li>
+
+                            <li class="brand-sly-content">
+                                <img src="<%= imgBase + '/brand/Century_03.png'%>" alt="...">
+                            </li>
+
+                            <li class="brand-sly-content">
+                                <img src="<%= imgBase + '/brand/grenlam.png'%>" alt="...">
+                            </li>
+
+                            <li class="brand-sly-content">
+                                <img src="<%= imgBase + '/brand/Haffle.png'%>" alt="...">
+                            </li>
+
+                            <li class="brand-sly-content">
+                                <img src="<%= imgBase + '/brand/Merino.png'%>" alt="...">
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="controls center col-xs-1 margin-top40">
+                        <button class="btn brand-next">
+                            <img src="<%= imgBase + '/home/dark_arr_right.png'%>" class="arr_test" alt="...">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand Section End -->
+
+        <div class="container-fluid bg-color-gray padding20">
+            <div class="container">
+                <h2 class="text-transform-none"><b>FAQs</b></h2>
+                <div class="row margin0">
+                    <p>
+                        Now most of NRI clients have one question or the other regarding who will be suitable for the
+                        job to
+                        have a “great design”, which will suit his needs with all the modern services and concepts. So,
+                        we
+                        are here to solve your issues and meet your needs.
+                    </p>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q1"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                        Do I need to be present at Premises?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q1" class="collapse">
+                        <p class="padding20">
+                            No, you don’t have to spend extra on travelling and accommodation. Just a simple mail or a
+                            call
+                            will do and we’ll reach you to explore your thoughts of your dream home to turn to reality.
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q2"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                        How can I get in touch with designers?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q2" class="collapse">
+                        <p class="padding20">
+                            Now most of NRI clients have one question or the other regarding who will be suitable for
+                            the
+                            job to have a “great design”, which will suit his needs with all the modern services and
+                            concepts. So, we are here to solve your issues and meet your needs.
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q3"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                        How can I communicate with the designers for discussion?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q3" class="collapse">
+                        <p class="padding20">
+                            You can enjoy our hassle free processes and communicate with designers over web or even face
+                            to
+                            face via video conferencing.
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q4"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                        How to handover the flat for designing?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q4" class="collapse">
+                        <p class="padding20">
+                            You can hand-over the keys to any of your friend or relative, we will co-ordinate
+                            efficiently
+                            and will get the project completed on time with safety.
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q5"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                        How to convey and finalize the designs?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q5" class="collapse">
+                        <p class="padding20">
+                            After providing the basic layout and deciding the service you avail, we follow you up for
+                            any
+                            amendments or changes till you are satisfied with the views via email and voice
+                            communications.
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q6"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                       How will I get knowledge of quality compliance?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q6" class="collapse">
+                        <p class="padding20">
+                            We do provide a QC assurance certificate, 5 year warranty and declaration with related
+                            helpful
+                            documents to guarantee you that we have used the stated materials for your site execution.
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q7"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                        How to trace the progress of work?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q7" class="collapse">
+                        <p class="padding20">
+                            We will be sharing images of work progress on weekly basis. If you want to have a virtual
+                            tour
+                            then we could share the video updates as well. So, even if you are 1000 kms away, you will
+                            always be aware of what is going on with your expectations.
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin0 margin-top10">
+                    <a data-toggle="collapse" data-target="#q8"
+                       class="text-transform-none display-block bg-color-white font-size16 padding10">
+                    <span class="color-orange font-size22">
+                        How does finalization of finishing products happen?
+                    </span>
+                        <span class="pe-7s-angle-down down_arr"></span>
+                    </a>
+
+                    <div id="q8" class="collapse">
+                        <p class="padding20">
+                            Finishing materials can effortlessly be confirmed by you sitting at your place, we offer you
+                            a
+                            mood board presentation with reference images and 3D views which are easy to understand.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</section>
+
+
+
+<!-- Book Your Consultation Modal -->
+<div id="bookconsultpop" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div>
+            <iframe name="leadsquared_landing_page_frame" src="https://mygubbi.viewpage.co/email-lp?ignoremxtracking=mxtrue" width="600" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+            <script type="text/javascript"> var MXLandingPageId = '8d7bb83a-0c47-11e6-b61b-22000aa8e760'; </script>
+
+            <div id="close-bookconsult-pop" class="close-icon signup-form">
+                <img src="<%= imgBase + 'close-white.png'%>">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Book Your Consultation Modal End -->
