@@ -7394,15 +7394,21 @@ width:14% !important;
         width: 32% !important;
      }
 .kitchen-icon{
-    width: 26% !important;
+    width: 32% !important;
     border-right: solid 2px #ccc;
 
 }
 .wardrobe-icon{
-width: 23% !important;
+width: 29% !important;
 border-right: solid 2px #ccc;
 }
 .otherunit-icon{
-width: 25% !important;
+width: 27% !important;
 
+}
+.font-weight600{
+ font-weight: 600 !important;
+}
+.padding50-94{
+padding: 50px 94px;
 }
