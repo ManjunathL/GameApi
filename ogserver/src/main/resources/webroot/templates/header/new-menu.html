@@ -24,6 +24,35 @@
             </form>
             <div class="row sb-search_suggest hidden-xs hidden-sm"></div>
         </div>
+
+        <div id="sb-search-duplicate" class="sb-search hidden-md hidden-lg" style="position:absolute;">
+            <form id="searchForm2">
+                <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="searchInput2" autocomplete="off">
+                <i class="fa fa-times search-ico search-close-ico" style="font-size:16px;"></i>
+                <!--<span class="pe-7s-search search-ico search-duplicate-ico header-icon pe-fw"></span>-->
+            </form>
+            <% if(typeof(a_srch) !== 'undefined' && ((Object.keys(a_srch).length) !== 0)) { %>
+            <div class="row sb-search_suggest hidden-md hidden-lg">
+                <%  _.each(a_srch, function(as){
+                if(as && as.resultName){ %>
+                <a href="#" class="sb-search-txt"><p><%= as.resultName %></p></a>
+                <% } }); %>
+
+                <% if(typeof(p_srch) !== 'undefined' && ((Object.keys(p_srch).length) !== 0)) {
+                if(typeof(p_srch.popularSearches) !== 'undefined'){ %>
+                <div class="sb-popular-search">Popular Searches..</div>
+                <div>
+                    <%  _.each(p_srch.popularSearches, function(ps){
+                    if(typeof(ps.name) !== 'undefined'){ %>
+                    <a href="#" class="sb-search-txt"><p><%= ps.name %></p></a>
+                    <% } }); %>
+                </div>
+
+                <% } } %>
+            </div>
+            <% } %>
+        </div>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
 
         <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0 .visible-xs-block .visible-sm-block hidden-md hidden-lg">
