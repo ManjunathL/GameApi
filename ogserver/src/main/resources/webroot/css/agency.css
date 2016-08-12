@@ -5227,6 +5227,10 @@ a.tab-ico {
         right: 4% !important;
         width: 79% !important;
     }
+
+    .sb-search-input {
+        font-size:14px!important;
+    }
 }
 
 @media (max-width: 460px) {
