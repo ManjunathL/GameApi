@@ -347,9 +347,11 @@ h6 {
       padding:10px 10px!important;
   }
   #nav>li>a {
-   padding: 5px 5px!important;
-   border-right:1px solid #ddd;
-   cursor:pointer;
+    padding: 5px 11px !important;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    background-color: #fff;
+    font-size: 15px;
   }
   .last-item{
    border-right:0px solid #ddd!important;
@@ -360,25 +362,46 @@ h6 {
       margin: 0px auto;
   }
   .navbar-center{
-      float:none;
-      position:relative;
+      float: none;
+      position: relative;
       text-align: center;
+      margin: 5px auto 8px;
   }
   .navbar-center li{
       float:none;
-      text-rendering: optimizelebility;
+      text-rendering: optimizeLegibility;
       display:inline-block;
       margin: 0px auto;
 
   }
-  .navbar-center li a{
-
+  @media (max-width: 767px) {
+        #nav>li>a{
+            padding: 5px 5px!important;
+            border-right: 0px solid #ddd;
+            cursor: pointer;
+            background-color: #fff;
+            width: 100%;
+        }
   }
+  @media (max-width: 992px) {
+      .mob-container{
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+      }
+      .gubbi-list-mob {
+          width: 100%;
+          text-align: left;
+          padding: 5px 0px;
+      }
+  }
+
   .social-menu-lnk{
       color: rgba(0,0,0,0.6);
       font-size:16px;
       margin-top: 5px;
   }
+  .
   /* Menu section End */
 
   /* Main Image Section */
@@ -1779,20 +1802,20 @@ button {
 }*/
 
 .header-icon {
-    margin: 0px 10px 0px 10px !important;
-    font-size: 25px !important;
+    margin: 0px 5px !important;
+    font-size: 24px;
     font-weight: 600 !important;
 }
 
 .user-img {
     display: inline-block;
-    width: 38px;
-    height: 38px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .full_logo {
@@ -1846,6 +1869,7 @@ button {
 
 .drop > li {
     padding-top: 15px;
+    width: 100%;
 }
 
 .drop li a {
