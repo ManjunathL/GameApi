@@ -1,12 +1,18 @@
 <!--Navigation-->
 <nav id="mainNav" class="navbar navbar-shrink border-bottom-grey margin-bottom0 bg-color-white" style="min-height:75px;">
-    <div class="container">
+    <div class="container mob-container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <div class="navbar-header page-scroll pull-left">
+            <a class="navbar-toggle collapsed toggle-icon-left" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <img
+                        src="<%= imgBase + '48x48.png'%>"
+                        class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo"
+                        alt="mygubbi">
+            </a>
+            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <i class="fa fa-bars"></i>
-            </button>
-            <a href="/" class="navbar-brand page-scroll padding0">
+            </button>-->
+            <a href="/" class="navbar-brand page-scroll padding0 hidden-xs hidden-sm">
                 <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/logo.png" class="full_logo width80" alt="mygubbi">
             </a>
         </div>
@@ -18,14 +24,56 @@
             </form>
             <div class="row sb-search_suggest hidden-xs hidden-sm"></div>
         </div>
+        <div id="sb-search-duplicate" class="sb-search hidden-md hidden-lg" style="position:absolute;">
+            <form id="searchForm2">
+                <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="searchInput2" autocomplete="off">
+                <i class="fa fa-times search-ico search-close-ico" style="font-size:16px;"></i>
+                <!--<span class="pe-7s-search search-ico search-duplicate-ico header-icon pe-fw"></span>-->
+            </form>
+            <% if(typeof(a_srch) !== 'undefined' && ((Object.keys(a_srch).length) !== 0)) { %>
+            <div class="row sb-search_suggest hidden-md hidden-lg">
+                <%  _.each(a_srch, function(as){
+                if(as && as.resultName){ %>
+                <a href="#" class="sb-search-txt"><p><%= as.resultName %></p></a>
+                <% } }); %>
+
+                <% if(typeof(p_srch) !== 'undefined' && ((Object.keys(p_srch).length) !== 0)) {
+                if(typeof(p_srch.popularSearches) !== 'undefined'){ %>
+                <div class="sb-popular-search">Popular Searches..</div>
+                <div>
+                    <%  _.each(p_srch.popularSearches, function(ps){
+                    if(typeof(ps.name) !== 'undefined'){ %>
+                    <a href="#" class="sb-search-txt"><p><%= ps.name %></p></a>
+                    <% } }); %>
+                </div>
+
+                <% } } %>
+            </div>
+            <% } %>
+        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0 .visible-xs-block .visible-sm-block hidden-md hidden-lg">
+            <a href="/consult"><span class="pe-7s-help1 header-icon consult_icon pe-fw color-orange"></span></a>
+
+            <span class="pe-7s-search search-ico header-icon pe-fw"></span>
+
+            <a href="/shortlist">
+                <span class="pe-7s-like wishlist header-icon pe-fw"><span id="shortlistSuperScript1" class="super-script1"></span></span>
+            </a>
+
+            <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+            <span class="user user-img"
+                  style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+            <% }else { %>
+            <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+            <% } %>
+
+        </div>
         <div class="nav navbar-nav navbar-right hidden-xs hidden-sm margin-top10">
 
             <ul class="nav navbar-nav navbar-right">
                 <li><!--<i class="fa fa-search search-ico" aria-hidden="true"></i>-->
                     <span class="pe-7s-search search-ico header-icon pe-fw"></span>
-
-
                 </li>
                 <li>
                     <a href="tel:+91-808-886-0860" class="page-scroll font-size18 txt-color-orange" >
@@ -58,148 +106,140 @@
                 </li>
             </ul>
         </div>
-
-
     </div>
     <!-- /.container-fluid -->
 </nav>
 <!-- Navigation End -->
 
-<nav class="navbar collapse navbar-collapse border-bottom-grey margin0 menu-sec-height bg-color-white" id="bs-example-navbar-collapse-1">
-    <div class="">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="menu-mygubbi">
-                        <ul id="nav" class="nav navbar-center navbar-nav padding5">
-                            <li class="hidden">
-                                <a href="#page-top"></a>
-                            </li>
-                            <li class="">
-                                <a
-                                        class="dropdown-toggle"
-                                        id="dropdownMenu_lg_kitchen"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="true">
-                                    Kitchen
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
+<nav class="navbar collapse navbar-collapse border-bottom-grey menu-sec-height bg-color-white" id="bs-example-navbar-collapse-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="menu-mygubbi">
+                    <ul id="nav" class="nav navbar-center navbar-nav">
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_lg_kitchen"
+                                    data-toggle="dropdown">
+                                Kitchen
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
 
-                                    <li><a href="/l-shaped-kitchen-design">L Shaped Kitchen</a></li>
+                                <li><a href="/l-shaped-kitchen-design">L Shaped Kitchen</a></li>
 
-                                    <li><a href="/u-shaped-kitchen-design">U Shaped Kitchen</a></li>
+                                <li><a href="/u-shaped-kitchen-design">U Shaped Kitchen</a></li>
 
-                                    <li><a href="/parallel-kitchen-design">Parallel Kitchen</a></li>
+                                <li><a href="/parallel-kitchen-design">Parallel Kitchen</a></li>
 
-                                    <li><a href="/straight-kitchen-design">Straight Kitchen</a></li>
+                                <li><a href="/straight-kitchen-design">Straight Kitchen</a></li>
 
-                                    <li><a href="/stories">Trends and Style</a></li>
+                                <li><a href="/stories">Trends and Style</a></li>
 
-                                    <li><a href="/know-your-kitchen">Know Your Kitchen</a></li>
-                                </ul>
-                            </li>
-                            <li class="">
-                                <a
-                                        class="dropdown-toggle"
-                                        id="dropdownMenu_lg_bedroom"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="true">
-                                    Wardrobe
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
+                                <li><a href="/know-your-kitchen">Know Your Kitchen</a></li>
+                            </ul>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_lg_bedroom"
+                                    data-toggle="dropdown">
+                                Wardrobe
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
 
-                                    <li><a href="/wardrobe-designs-online">Wardrobe Collection</a></li>
+                                <li><a href="/wardrobe-designs-online">Wardrobe Collection</a></li>
 
-                                    <li><a href="/stories">Trends and Style</a></li>
+                                <li><a href="/stories">Trends and Style</a></li>
 
-                                    <li><a href="/know-your-wardrobe">Know Your Wardrobe</a></li>
-                                </ul>
-                            </li>
+                                <li><a href="/know-your-wardrobe">Know Your Wardrobe</a></li>
+                            </ul>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_lg_livndin"
+                                    data-toggle="dropdown">
+                                Storage Solutions
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
 
-                            <li class="padding-left10">
-                                <a
-                                        class="dropdown-toggle"
-                                        id="dropdownMenu_lg_livndin"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="true">
-                                    Storage Solutions
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
+                                <li><a href="/tv-unit-cabinet">Entertainment Unit</a></li>
 
-                                    <li><a href="/tv-unit-cabinet">Entertainment Unit</a></li>
+                                <li><a href="/crockery-unit-designs">Crockery Unit</a></li>
 
-                                    <li><a href="/crockery-unit-designs">Crockery Unit</a></li>
+                                <li><a href="/foyer-design">Foyer Unit</a></li>
 
-                                    <li><a href="/foyer-design">Foyer Unit</a></li>
+                                <li><a href="/sideboard">Side Board</a></li>
 
-                                    <li><a href="/sideboard">Side Board</a></li>
+                                <li><a href="/side-table-design-online">Side Table</a></li>
 
-                                    <li><a href="/side-table-design-online">Side Table</a></li>
+                                <li><a href="/study-table-designs-online">Study Table</a></li>
 
-                                    <li><a href="/study-table-designs-online">Study Table</a></li>
+                                <li><a href="/book-shelf">Book Rack</a></li>
 
-                                    <li><a href="/book-shelf">Book Rack</a></li>
+                                <li><a href="/shoe-rack-online">Shoe Rack</a></li>
 
-                                    <li><a href="/shoe-rack-online">Shoe Rack</a></li>
+                            </ul>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob menu-li">
+                            <a class="page-scroll" href="/completed-projects">Completed Projects</a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob menu-li">
+                            <a class="page-scroll" href="/consult">Experience Center</a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob menu-li">
+                            <a class="page-scroll" href="/nri-bangalore">NRI Zone</a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_lg_blogpost"
+                                    data-toggle="dropdown">
+                                Stories
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
 
-                                </ul>
-                            </li>
-                            <li class="padding-left10 menu-li">
-                                <a class="page-scroll" href="/completed-projects">Completed Projects</a>
-                            </li>
-                            <li class="padding-left10 menu-li">
-                                <a class="page-scroll" href="/consult">Experience Center</a>
-                            </li>
-                            <li class="padding-left10 menu-li">
-                                <a class="page-scroll" href="/nri-bangalore">NRI Zone</a>
-                            </li>
-                            <li class="padding-left10">
-                                <a
-                                        class="dropdown-toggle"
-                                        id="dropdownMenu_lg_blogpost"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="true">
-                                    Stories
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
+                                <li><a href="/stories">Trends & Styles</a></li>
 
-                                    <li><a href="/stories">Trends & Styles</a></li>
+                                <li><a href="/stories">Interiors</a></li>
 
-                                    <li><a href="/stories">Interiors</a></li>
+                                <li><a href="/stories">Architecture</a></li>
 
-                                    <li><a href="/stories">Architecture</a></li>
+                                <li><a href="/stories">Design</a></li>
 
-                                    <li><a href="/stories">Design</a></li>
-
-                                    <li><a href="/stories">Outdoors</a></li>
-                                </ul>
-                            </li>
-                            <li class="padding-left10">
-                                <a class="page-scroll last-item" href="#contact">Contact</a>
-                            </li>
-                            <li class="padding-left10">
-                                <a href="/shortlist">
-                                    <span class="pe-7s-like wishlist header-icon pe-fw"><span id="shortlistSuperScript" class="super-script"></span></span>
-                                </a>
-                            </li>
-                            <li class="padding-left10">
-                                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                                <span class="user user-img"
-                                      style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
-                                <% }else { %>
-                                <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
-                                <% } %>
-                            </li>
-                        </ul>
-                    </div>
+                                <li><a href="/stories">Outdoors</a></li>
+                            </ul>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob">
+                            <a class="page-scroll last-item" href="/consult">Contact</a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob hidden-lg hidden-md">
+                            <a class="page-scroll last-item" href="/">Home</a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
+                            <a class="last-item" href="/shortlist">
+                                <span class="pe-7s-like wishlist header-icon pe-fw">
+                                    <span id="shortlistSuperScript" class="super-script"></span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
+                            <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+                            <span class="user user-img"
+                                  style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                            <% }else { %>
+                            <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+                            <% } %>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

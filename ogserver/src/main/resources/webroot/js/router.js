@@ -65,10 +65,15 @@ define([
             'know-your-wardrobe(/)': 'knowyourwardrobe',
             'know-your-kitchen(/)': 'knowyourkitchen',
             'remarketing-lp(/)': 'remarketinglp',
+            'about-us(/)': 'aboutus',
             '*something': 'errorPage'
 
 
         },
+
+
+
+
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
             document.querySelector('meta[name="description"]').setAttribute("content", "Buy Customized Home D?cor Interiors online for living room furniture, kitchen furniture, side tables and TV furniture.Get Home d?cor ideas to design your Home");
@@ -175,9 +180,8 @@ define([
             document.querySelector('meta[name="keywords"]').setAttribute("content", "living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior");
         }
     });
-
     var routeSubCategory = function(subCategory, category) {
-        setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
         require(['/js/views/product/page.js'], function(ProductPage) {
             var options = {
                 model: {
@@ -190,7 +194,7 @@ define([
     };
 
     var routeCategory = function(category) {
-        setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
         require(['/js/views/product/page.js'], function(ProductPage) {
             var options = {
                 model: {
@@ -265,7 +269,7 @@ define([
             });
         });
         router.on('route:products', function(categories, subcategories, searchTerm, sortBy, sortDir, layout) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/product/page.js'], function(ProductPage) {
                 var options = {
                     model: {
@@ -281,7 +285,7 @@ define([
             });
         });
         router.on('route:products-search', function(searchTerm) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/product/page.js'], function(ProductPage) {
                 console.log('searchTerm');
                 console.log(searchTerm);
@@ -294,7 +298,7 @@ define([
             });
         });
         router.on('route:product', function(productId) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/product/details.js'], function(ProductDetailPage) {
                 var options = {
                     model: {
@@ -305,67 +309,67 @@ define([
             });
         });
         router.on('route:user_profile', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/user_profile/user_profile.js'], function(UserProfilePage) {
                 VM.create(VM.USER_PROFILE, UserProfilePage).render();
             });
         });
         router.on('route:consult', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/consult/consult.js'], function(ConsultPage) {
                 VM.create(VM.CONSULT, ConsultPage).render();
             });
         });
         router.on('route:shortlist', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/shortlist/shortlist.js'], function(ShortlistPage) {
                 VM.create(VM.SHORTLIST, ShortlistPage).render();
             });
         });
         router.on('route:careers', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/footer/careers.js'], function(CareerPage) {
                 VM.create(VM.CAREERS, CareerPage).render();
             });
         });
         router.on('route:about', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/footer/about.js'], function(AboutPage) {
                 VM.create(VM.ABOUT, AboutPage).render();
             });
         });
         router.on('route:faq', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/footer/faq.js'], function(FaqPage) {
                 VM.create(VM.FAQ, FaqPage).render();
             });
         });
         router.on('route:privacypolicy', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/footer/privacypolicy.js'], function(PrivacyPolicyPage) {
                 VM.create(VM.PRIVACY_POLICY, PrivacyPolicyPage).render();
             });
         });
         router.on('route:terms', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/footer/terms.js'], function(TermsPage) {
                 VM.create(VM.TERMS, TermsPage).render();
             });
         });
         router.on('route:mygubbidiff', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/footer/mygubbidiff.js'], function(MyGubbiDiffPage) {
                 VM.create(VM.MGDIFF, MyGubbiDiffPage).render();
             });
         });
         router.on('route:stories', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/story/stories.js'], function(StoriesPage) {
                 VM.create(VM.STORIES, StoriesPage).render();
             });
         });
         router.on('route:story', function(name) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/story/full_story.js'], function(FullStoryPage) {
 
                 var options = {
@@ -377,114 +381,114 @@ define([
             });
         });
         router.on('route:thankyou', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/thankyou/thankyou.js'], function(ThankYouPage) {
                 VM.create(VM.THANKYOU, ThankYouPage).render();
             });
         });
         router.on('route:landingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/landing_page.js'], function(LandingPage) {
                 VM.create(VM.LANDINGPAGE, LandingPage).render();
             });
         });
         router.on('route:newlandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/newlanding_page.js'], function(NewLandingPage) {
                 VM.create(VM.NEWLANDINGPAGE, NewLandingPage).render();
             });
         });
         router.on('route:fblandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/fblanding_page.js'], function(FbLandingPage) {
                 VM.create(VM.FBLANDINGPAGE, FbLandingPage).render();
             });
         });
         router.on('route:mangalorelandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/mangalorelanding_page.js'], function(MangaloreLandingPage) {
                 VM.create(VM.MANGALORELANDINGPAGE, MangaloreLandingPage).render();
             });
         });
         router.on('route:emaillandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/emaillanding_page.js'], function(EmailLandingPage) {
                 VM.create(VM.EMAILLANDINGPAGE, EmailLandingPage).render();
             });
         });
         router.on('route:shobhalandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/shobhalanding_page.js'], function(ShobhaLandingPage) {
                 VM.create(VM.SHOBHALANDINGPAGE, ShobhaLandingPage).render();
             });
         });
 
         router.on('route:punelandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/punelanding_page.js'], function(PuneLandingPage) {
                 VM.create(VM.PUNELANDINGPAGE, PuneLandingPage).render();
             });
         });
 
         router.on('route:kitchenlandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/kitchenlanding_page.js'], function(KitchenLandingPage) {
                 VM.create(VM.KITCHENLANDINGPAGE, KitchenLandingPage).render();
             });
         });
 
         router.on('route:ebook', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/ebook/ebook.js'], function(EbookPage) {
                 VM.create(VM.EBOOKPAGE, EbookPage).render();
             });
         });
 
         router.on('route:errorPage', function(actions) {
-                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
                     require(['/js/views/errorPage/errorPage.js'], function(ErrorPage) {
                         VM.create(VM.ERRORPAGE, ErrorPage).render();
                     });
                 });
         router.on('route:holidaylandingpage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/holidaylanding_page.js'], function(HolidayLandingPage) {
                 VM.create(VM.HOLIDAYLANDINGPAGE, HolidayLandingPage).render();
             });
         });
         router.on('route:completedprojectspage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/landing_pages/completedprojects_page.js'], function(CompletedProjectsPage) {
                 VM.create(VM.COMPLETEDPROJECTSPAGE, CompletedProjectsPage).render();
             });
         });
         router.on('route:knowyourwardrobe', function(actions) {
-                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
                     require(['/js/views/landing_pages/knowyourwardrobe_page.js'], function(KnowYourWardrobe) {
                         VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourWardrobe).render();
                     });
                 });
         router.on('route:knowyourkitchen', function(actions) {
-                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
                     require(['/js/views/landing_pages/knowyourkitchen_page.js'], function(KnowYourKitchen) {
                         VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourKitchen).render();
                     });
                 });
         router.on('route:remarketinglp', function(actions) {
-                    setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
                     require(['/js/views/landing_pages/remarketinglp_page.js'], function(RemarketingLp) {
                         VM.create(VM.COMPLETEDPROJECTSPAGE, RemarketingLp).render();
                     });
                 });
         router.on('route:mediapage', function(actions) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/media_pages/media_page.js'], function(MediaPage) {
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
             });
         });
 
         router.on('route:newdetailspage', function(productId) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/product/new-details.js'], function(NewProductDetailsPage) {
                 var options = {
                     model: {
@@ -497,7 +501,7 @@ define([
         });
 
         router.on('route:nripage', function(cityName) {
-            setTimeout($('.page').append("<i class='page-tran fa fa-spinner fa-spin'></i>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/nri_pages/nri_page.js'], function(NriPage) {
                 var options = {
                     model: {
@@ -507,6 +511,13 @@ define([
                 VM.create(VM.NRIPAGE, NriPage, options).render();
             });
         });
+
+        router.on('route:aboutus', function(actions) {
+                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
+                    require(['/js/views/footer/aboutus.js'], function(AboutUsPage) {
+                        VM.create(VM.ABOUTUS, AboutUsPage).render();
+                    });
+                });
 
         router.on('route', function () {
             $("html,body").scrollTop(0);

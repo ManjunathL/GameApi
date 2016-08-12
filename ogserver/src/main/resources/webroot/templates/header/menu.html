@@ -255,10 +255,10 @@
             </a>
 
             <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                    <span class="user user-img"
+                <span class="user user-img"
                           style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
             <% }else { %>
-            <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+                <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
             <% } %>
 
         </div>
