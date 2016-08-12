@@ -21,6 +21,7 @@ public class ModuleTextFileReader
     private final static Logger LOG = LogManager.getLogger(ModuleTextFileReader.class);
     public static final int SEQ_CELL = 0;
     public static final int UNIT_CELL = 1;
+    public static final int QUANTITY_CELL = 1;
     public static final int WIDTH_CELL = 3;
     public static final int DEPTH_CELL = 4;
     public static final int HEIGHT_CELL = 5;
@@ -87,20 +88,12 @@ public class ModuleTextFileReader
                 int width = this.getInteger(record[WIDTH_CELL]);
                 int depth = this.getInteger(record[DEPTH_CELL]);
                 int height = this.getInteger(record[HEIGHT_CELL]);
+                int quantity = this.getInteger(record[QUANTITY_CELL]);
 
-                ProductModule module = new ProductModule()
-                        .setUnit(unit)
-                        .setExternalCode(moduleCode)
-                        .setMGCode(moduleCode)
-                        .setWidth(width)
-                        .setHeight(height)
-                        .setDepth(depth)
-                        .setDimension(width + "x" + depth + "x" + height)
-                        .setSequence(sequence)
-                        .setDescription(name)
-                        .setColorCode(color)
-                        .setRemarks(remarks);
-                productModules.add(module);
+                for (int i=0;i<quantity;i++){
+                    getNewProductModule(productModules, unit, name, moduleCode, sequence, color, remarks, width, depth, height);
+                }
+
             }
             catch (Exception e)
             {
@@ -118,6 +111,22 @@ public class ModuleTextFileReader
             LOG.debug(module);
         }
         return productModules;
+    }
+
+    private void getNewProductModule(List<ProductModule> productModules, String unit, String name, String moduleCode, int sequence, String color, String remarks, int width, int depth, int height) {
+        ProductModule module = new ProductModule()
+                .setUnit(unit)
+                .setExternalCode(moduleCode)
+                .setMGCode(moduleCode)
+                .setWidth(width)
+                .setHeight(height)
+                .setDepth(depth)
+                .setDimension(width + "x" + depth + "x" + height)
+                .setSequence(sequence)
+                .setDescription(name)
+                .setColorCode(color)
+                .setRemarks(remarks);
+        productModules.add(module);
     }
 
     private List<String[]> getRecords()
