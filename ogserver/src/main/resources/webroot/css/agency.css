@@ -348,6 +348,10 @@ h6 {
      margin:20px 0px;
   }
 
+/*#nav>li>a:active{
+    color:#f15a22;
+}*/
+
 .right-side-menu .nav>li>a:hover,
 .right-side-menu .nav>li>a:focus {
     text-decoration: none;
@@ -2883,18 +2887,18 @@ input[type=checkbox] {
 .super-script {
     display: block !important;
     color: #555;
-    font-size: 8px;
+    font-size: 12px;
     position: absolute;
     top: 0px;
-    right: 19px;
+    right: 12px;
 }
 .super-script1 {
     display: block !important;
     color: #555;
-    font-size: 8px;
+    font-size: 12px;
     position: absolute;
     top: 12px;
-    right: 70px;
+    right: 55px;
 }
 
 .stick {

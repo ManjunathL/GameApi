@@ -363,6 +363,14 @@ define([
 
             $(function() {
 
+
+                $('#nav').find('li a').click(function () {
+                    $('#nav').find('li a').removeClass('active');
+                    $(this).addClass('active');
+                    $($(this).closest('li.gubbi-list-desk').children()[0]).addClass('active');
+                });
+
+
                 $('.user').click(function(e) {
                     e.stopPropagation();
                     that.showUserPop();
