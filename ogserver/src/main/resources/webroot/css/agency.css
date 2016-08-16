@@ -5553,7 +5553,7 @@ a.tab-ico {
 @media (max-width: 991px) {
     .consult-form-maindiv {
         position: static;
-        margin: 72px auto 10px;
+        margin: 10px auto 10px;
         width: 90%;
     }
 
@@ -5565,7 +5565,7 @@ a.tab-ico {
 }
 
 .consult-form-maindiv-xs {
-    margin: 72px auto 10px;
+    margin: 10px auto 10px;
     width: 90%;
 }
 
