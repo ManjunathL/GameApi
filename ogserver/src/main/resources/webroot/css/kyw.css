@@ -27,6 +27,19 @@
     text-align: center;
     color: #ffffff;
 }
+
+.kyk-heading{
+    margin: 15px 0px 15px;
+    font-weight: 300;
+    color: #707375;
+}
+
+.kyk-heading-gray{
+    margin: 15px 0px 10px;
+    font-weight: 300;
+    color: #333333;
+}
+
 .open-wardrobe-section{
     background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
 }
