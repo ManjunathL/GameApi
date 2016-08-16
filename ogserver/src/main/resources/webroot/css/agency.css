@@ -348,7 +348,11 @@ h6 {
      margin:20px 0px;
   }
 
-
+.right-side-menu .nav>li>a:hover,
+.right-side-menu .nav>li>a:focus {
+    text-decoration: none;
+    background-color: #fff;
+}
   .nav>li>a{
       padding:10px 10px!important;
   }
@@ -760,6 +764,7 @@ h6 {
       color: rgba(0,0,0,0.4);
       padding-top: 15px;
       font-weight: 400!important;
+      cursor:pointer;
   }
 
   /* Mobile Responsiveness */
