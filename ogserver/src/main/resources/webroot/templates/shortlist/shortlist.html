@@ -33,15 +33,15 @@
             <% _.each(shortlistedItems, function(product){ %>
             <div class="portfolio">
                 <div class="col-md-6 col-sm-6 portfolio-item">
-                    <div class="portfolio-box overflow-hidden">
+                    <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
                         <div class="row margin0 position-relative">
-                            <a href="/product-<%= product.productId %>" class="portfolio-link">
-                                <img class="img-responsive" src="<%= imgBase + 'c_fill/' + product.images[0] %>"
+                            <a href="/newproduct-details-<%= product.productId %>" class="portfolio-link">
+                                <img width="555px" height="333px" class="img-responsive thumbnail-img" src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
                                         title="<%= product.name %>" alt="<%= product.name %>"/>
                             </a>
                             <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
                                 <div class="listli">
-                                    <a href="/product-<%= product.productId %>">
+                                    <a href="/newproduct-details-<%= product.productId %>">
                                         <span class="glyph fa fa-info"></span>
                                         <!--<span class="list-txt">know more</span>-->
                                     </a>
@@ -56,7 +56,7 @@
                                     <a href="javascript:void(0);" >
                                         <span id="shortshare-grid-ico<%=product.productId%>" class="glyph fa fa-share shortgridshare"></span>
                                         <div id="shortgrid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                            <% var share_url = window.location.protocol + '//' + window.location.host + '/product-'+ product.productId %>
+                                            <% var share_url = window.location.protocol + '//' + window.location.host + '/newproduct-details-'+ product.productId %>
                                             <span><a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
                                             <span><a href="javascript:void(0);" onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
                                             <span><a href="javascript:void(0);"
@@ -69,17 +69,18 @@
                         </div>
 
                         <div class="portfolio-caption margin0">
-                            <div class="row">
-                                <h4 class="col-xs-7 align-left padding0"><%= product.name %></h4>
-                                <div class="    align-right margin-top5"><a href="javascript:void(0);" id="shortlist_consult<%= product.productId %>" class="shortlist_consult consult padding-left10 padding-right10">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a></div>
-                                <h3 class="col-xs-12 align-left padding10-0-0">
+                            <div class="row position-relative">
+                                <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0"><%= product.name %></h4>
+                                <h6 class="col-md-12 col-sm-12 col-xs-12 align-center padding0">Starting From</h6>
+                                <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0 margin0 margin-bottom20">
                                     <% if (product.defaultPrice !== 0) { %>
                                     <i class="fa fa-inr"></i>
                                     <%= product.defaultPrice %>/-
                                     <% } else { %>
                                     Consult for Price
                                     <% } %>
-                                </h3>
+                                </h4>
+                                <div class="shortlist-consult-sec"><a href="javascript:void(0);" id="shortlist_consult<%= product.productId %>" class="shortlist_consult consult padding-left10 padding-right10">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a></div>
                             </div>
                         </div>
                     </div>
@@ -179,67 +180,6 @@
                                     </div>
                                 </form>
                                 <script type="text/javascript"> var MXLandingPageId = 'f7c3e93f-3d1a-11e6-b61b-22000aa8e760'; </script>
-
-
-                                <!--<form id="consultForm<%= product.productId %>" data-toggle="validator" role="form" class="consultForm width90 margin_auto paddingtop30">
-                                    <div class="row">
-                                        <div class="margin-bottom20 form-group">
-                                            <input type="hidden" class="width100 form-control" placeholder="Product Name*" value="<%= product.name %>"
-                                                   id="consult_product_name<%= product.productId %>" required/>
-                                            <input type="text" class="width100 form-control" placeholder="Name*" value="<%=userProfile ? userProfile.displayName : ''%>"
-                                                   id="consult_full_name<%= product.productId %>" required/>
-                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        <div class="margin-bottom20 form-group">
-                                            <input type="email" class="width100 form-control" placeholder="Email*" value="<%=userProfile ? userProfile.email : ''%>"
-                                                   id="consult_email_id<%= product.productId %>" required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        <div class="margin-bottom20 form-group has-feedback">
-                                            <input type="text" class="width100 form-control" placeholder="Phone Number*" value="<%=userProfile ? userProfile.phone : ''%>"
-                                                   id="consult_contact_num<%= product.productId %>" required pattern="\d{10}" title="e.g. 9876543210"/>
-
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="margin-bottom20 form-group">
-                                <textarea class="width100 form-control" id="consult_requirement<%= product.productId %>"
-                                          placeholder="Describe your Requirements / Queries">I'm interested in "<%= product.name %>" . Looking forward to hear from you.</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="margin-bottom20 form-group">
-                                            <input type="text" class="width100 form-control" placeholder="Property Name"
-                                                   id="consult_property_name<%= product.productId %>"/>
-                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        <div class="margin-bottom20 form-group">
-                                            <label for="consult_floorplan<%= product.productId %>">Upload Floorplan</label>
-                                            <input type="file" class="width100 form-control" placeholder="Floorplan" name="floorPlan" value=""
-                                                   id="consult_floorplan<%= product.productId %>" accept=".pdf,.jpg,.jpeg,.png"/>
-                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        <div class="align-center form-group">
-                                            <button
-                                                    id="consult-submit-btn<%= product.productId %>"
-                                                    class="button-blue margin-top20 margin-bottom20"
-                                                    type="submit"
-                                                    data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
-                                                submit
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div id="consult-success-msg-padding<%= product.productId %>" class="display-none margintop25"></div>
-                                <div id="consult-success-msg<%= product.productId %>" class="display-none">
-                                    <p class="justify">Thank you for contacting mygubbi. Our team will get back to you as soon as possible.</p>
-                                    <p class="margintop40">Want to keep Exploring? Click <a id="consult-form-explore<%= product.productId %>" data-element="#consultpop<%= product.productId %>" class="consult-form-explore" href="/l-shaped-kitchen-design" style="color:#f1591f;">here</a></p>
-                                </div>-->
 
                             </div>
                         </div>
