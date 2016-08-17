@@ -12,12 +12,15 @@ import java.util.List;
 
 public class ProductModule extends JsonObject
 {
+    private static final String ACCESSORY_UNIT = "Accessory";
+
     public static String MODULE_MAPPED = "m";
     public static String MODULE_NOT_MAPPED = "n";
 
     private static final String MAPPED = "importStatus";
     private static final String UNIT = "unitType";
     private static final String SEQ = "seq";
+    private static final String MODULE_SEQUENCE = "moduleSequence";
 
     private static final String WIDTH = "width";
     private static final String DEPTH = "depth";
@@ -55,6 +58,10 @@ public class ProductModule extends JsonObject
     {
         super(json.getMap());
         this.setAccessoryPacks();
+    }
+
+    public int getModuleSequence() {
+        return this.getInteger(MODULE_SEQUENCE);
     }
 
     public String getUnit()
@@ -167,6 +174,12 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setModuleSequence(int moduleSequence)
+    {
+        this.put(MODULE_SEQUENCE, moduleSequence);
+        return this;
+    }
+
     public ProductModule setWidth(int width)
     {
         this.put(WIDTH, width);
@@ -259,11 +272,26 @@ public class ProductModule extends JsonObject
         return Collections.EMPTY_LIST;
     }
 
+    public int getWidth()
+    {
+        return this.getInteger(WIDTH);
+    }
+
+    public int getDepth()
+    {
+        return this.getInteger(DEPTH);
+    }
+
+    public int getHeight()
+    {
+        return this.getInteger(HEIGHT);
+    }
 
     @Override
     public String toString()
     {
         return "ProductModule{" +
+                "seq='" + this.getSequence() + '\'' +
                 "unit='" + this.getUnit() + '\'' +
                 ", extCode='" + this.getExternalCode() + '\'' +
                 ", code='" + this.getMGCode() + '\'' +
@@ -272,5 +300,10 @@ public class ProductModule extends JsonObject
                 ", remarks='" + this.getRemarks() + '\'' +
                 '}';
 
+    }
+
+    public boolean isAccessoryUnit()
+    {
+        return ACCESSORY_UNIT.equals(this.getUnit());
     }
 }

@@ -378,7 +378,7 @@
       "id": "finish.master.all",
       "type": "select",
       "table": "finish_master",
-      "query": "select costCode, finishCode, finishType, finishMaterial, design, shutterMaterial, colorGroupCode, cuttingOffset, title from finish_master",
+      "query": "select costCode, finishCode, finishType, finishMaterial, design, shutterMaterial, colorGroupCode, cuttingOffset, title, edgeBinding from finish_master",
       "params": []
     },
 

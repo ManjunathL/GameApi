@@ -121,6 +121,6 @@ public class ShutterPanel
 
     public String getDimesions()
     {
-        return this.getBreadth() + " X " + this.getLength() + " X " + this.getThickness();
+        return this.getLength() + " X "  + this.getBreadth() +  " X " + this.getThickness();
     }
 }

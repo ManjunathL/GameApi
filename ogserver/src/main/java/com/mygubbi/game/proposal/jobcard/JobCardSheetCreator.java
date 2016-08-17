@@ -2,10 +2,7 @@ package com.mygubbi.game.proposal.jobcard;
 
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.CarcassPanel;
-import com.mygubbi.game.proposal.model.Module;
-import com.mygubbi.game.proposal.model.ModuleComponent;
-import com.mygubbi.game.proposal.model.ShutterPanel;
+import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -129,6 +126,8 @@ public class JobCardSheetCreator implements ExcelCellProcessor
         this.sheetProcessor.createTitleRowInDataSheet(currentRow, new Object[]{"Shutter", "Description", "Height", "Width", "Thickness",
                 "Qty", "Remarks & Edge Binding", "Design", "Color", "Dimension",	"Box"});
 
+        String edgeBinding = this.getEdgeBinding(module.getFinishCode());
+
         for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(mgModule.getCode()))
         {
             if (ModuleComponent.SHUTTER_TYPE.equals(component.getType()))
@@ -139,7 +138,7 @@ public class JobCardSheetCreator implements ExcelCellProcessor
                 if (seq == ALPHABET_SEQUENCE.length) seq = 0;
                 currentRow++;
                 this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(), panel.getBreadth(), panel.getLength(),
-                        panel.getThickness(), component.getQuantity(), panel.getEdgebinding(), product.getProduct().getDesignCode(),
+                        panel.getThickness(), component.getQuantity(), edgeBinding, product.getProduct().getDesignCode(),
                         module.getColorCode(), panel.getDimesions()});
                 seq++;
             }
@@ -147,6 +146,12 @@ public class JobCardSheetCreator implements ExcelCellProcessor
 
         currentRow++;
         return currentRow;
+    }
+
+    private String getEdgeBinding(String finishCode)
+    {
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+        return (shutterFinish != null) ? shutterFinish.getEdgeBinding() : "NA";
     }
 
 }
