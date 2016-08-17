@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ProductModule extends JsonObject
 {
+    private static final String ACCESSORY_UNIT = "Accessory";
+
     public static String MODULE_MAPPED = "m";
     public static String MODULE_NOT_MAPPED = "n";
 
@@ -270,11 +272,26 @@ public class ProductModule extends JsonObject
         return Collections.EMPTY_LIST;
     }
 
+    public int getWidth()
+    {
+        return this.getInteger(WIDTH);
+    }
+
+    public int getDepth()
+    {
+        return this.getInteger(DEPTH);
+    }
+
+    public int getHeight()
+    {
+        return this.getInteger(HEIGHT);
+    }
 
     @Override
     public String toString()
     {
         return "ProductModule{" +
+                "seq='" + this.getSequence() + '\'' +
                 "unit='" + this.getUnit() + '\'' +
                 ", extCode='" + this.getExternalCode() + '\'' +
                 ", code='" + this.getMGCode() + '\'' +
@@ -283,5 +300,10 @@ public class ProductModule extends JsonObject
                 ", remarks='" + this.getRemarks() + '\'' +
                 '}';
 
+    }
+
+    public boolean isAccessoryUnit()
+    {
+        return ACCESSORY_UNIT.equals(this.getUnit());
     }
 }

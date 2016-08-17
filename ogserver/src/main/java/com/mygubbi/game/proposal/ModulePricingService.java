@@ -21,6 +21,7 @@ public class ModulePricingService extends AbstractVerticle
 {
     private final static Logger LOG = LogManager.getLogger(ModulePricingService.class);
     public static final String CALCULATE_PRICE = "calculate.module.price";
+    private static final double SQMM2SQFT = 0.0000107639;
 
     @Override
     public void start(Future<Void> startFuture) throws Exception
@@ -86,7 +87,7 @@ public class ModulePricingService extends AbstractVerticle
             }
             else
             {
-                this.calculateComponentCost(modulePriceHolder, shutterFinish, carcassRateCard, shutterRateCard, component);
+                this.calculateComponentCost(productModule, modulePriceHolder, shutterFinish, carcassRateCard, shutterRateCard, component);
             }
         }
 
@@ -98,7 +99,7 @@ public class ModulePricingService extends AbstractVerticle
             for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
             {
                 LOG.info("Calculating cost for ap component :" + accessoryPackComponent.getComponentCode() + " : " + accessoryPackComponent.getType());
-                this.calculateComponentCost(modulePriceHolder, shutterFinish, carcassRateCard, shutterRateCard, accessoryPackComponent);
+                this.calculateComponentCost(productModule, modulePriceHolder, shutterFinish, carcassRateCard, shutterRateCard, accessoryPackComponent);
             }
             for (String addonCode : moduleAccessoryPack.getAddons())
             {
@@ -110,7 +111,7 @@ public class ModulePricingService extends AbstractVerticle
         this.sendResponse(message, modulePriceHolder, productModule);
     }
 
-    private void calculateComponentCost(ModulePriceHolder modulePriceHolder, ShutterFinish shutterFinish, RateCard carcassRateCard,
+    private void calculateComponentCost(ProductModule productModule, ModulePriceHolder modulePriceHolder, ShutterFinish shutterFinish, RateCard carcassRateCard,
                                         RateCard shutterRateCard, IModuleComponent component)
     {
         switch (component.getType())
@@ -120,7 +121,14 @@ public class ModulePricingService extends AbstractVerticle
                 break;
 
             case IModuleComponent.SHUTTER_TYPE:
-                this.calculateShutterCost(modulePriceHolder, shutterFinish, shutterRateCard, component);
+                if (productModule.isAccessoryUnit())
+                {
+                    this.calculateShutterCostFromModuleDimensions(modulePriceHolder, productModule.getWidth(), productModule.getDepth(), shutterRateCard, component);
+                }
+                else
+                {
+                    this.calculateShutterCost(modulePriceHolder, shutterFinish, shutterRateCard, component);
+                }
                 break;
 
             case IModuleComponent.ACCESSORY_TYPE:
@@ -185,6 +193,19 @@ public class ModulePricingService extends AbstractVerticle
         if (shutterPanelCost == 0)
         {
             modulePriceHolder.addError("Shutter panel cost is not available for " + shutterPanel.getCode() + shutterRateCard.getKey());
+        }
+        modulePriceHolder.addToShutterCost(shutterPanelCost * component.getQuantity());
+    }
+
+    private void calculateShutterCostFromModuleDimensions(ModulePriceHolder modulePriceHolder, int width, int depth,
+                                                          RateCard shutterRateCard, IModuleComponent component)
+    {
+        double shutterPanelCost = 0;
+        if (shutterRateCard != null) shutterPanelCost = width * depth * SQMM2SQFT * shutterRateCard.getRateByThickness(18);
+
+        if (shutterPanelCost == 0)
+        {
+            modulePriceHolder.addError("Shutter panel cost is not available for " + component.getComponentCode() + ":" + shutterRateCard.getKey());
         }
         modulePriceHolder.addToShutterCost(shutterPanelCost * component.getQuantity());
     }
