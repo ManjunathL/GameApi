@@ -55,6 +55,7 @@ public class ProposalModuleHandler extends AbstractRouteHandler
     private void getPrice(RoutingContext routingContext)
     {
         JsonObject moduleJson = routingContext.getBodyAsJson();
+        LOG.debug("Module Json : " + moduleJson.encodePrettily());
         ProductModule module = new ProductModule(moduleJson);
         Integer id = LocalCache.getInstance().store(module);
         VertxInstance.get().eventBus().send(ModulePricingService.CALCULATE_PRICE, id,
