@@ -17,6 +17,7 @@ public class ShutterFinish
     private static final String COLOR_GROUP_CODE = "colorGroupCode";
     private static final String CUTTING_OFFSET = "cuttingOffset";
     private static final String TITLE = "title";
+    private static final String EDGE_BINDING = "edgeBinding";
 
     private String costCode;
     private String finishCode;
@@ -27,6 +28,7 @@ public class ShutterFinish
     private String colorGroupCode;
     private String title;
     private int cuttingOffset;
+    private String edgeBinding;
 
     public ShutterFinish()
     {
@@ -37,7 +39,7 @@ public class ShutterFinish
     {
         this.setFinishCode(json.getString(FINISH_CODE)).setCostCode(json.getString(COST_CODE)).setFinishType(json.getString(FINISH_TYPE))
                 .setFinishMaterial(json.getString(FINISH_MATERIAL)).setDesign(json.getString(DESIGN)).setShutterMaterial(json.getString(SHUTTER_MATERIAL))
-                .setColorGroupCode(json.getString(COLOR_GROUP_CODE)).setTitle(json.getString(TITLE)).setCuttingOffset(json.getInteger(CUTTING_OFFSET));
+                .setColorGroupCode(json.getString(COLOR_GROUP_CODE)).setTitle(json.getString(TITLE)).setCuttingOffset(json.getInteger(CUTTING_OFFSET)).setEdgeBinding(json.getString(EDGE_BINDING));
     }
 
     public String getCostCode()
@@ -59,6 +61,15 @@ public class ShutterFinish
     public ShutterFinish setFinishCode(String finishCode)
     {
         this.finishCode = finishCode;
+        return this;
+    }
+
+    public String getEdgeBinding() {
+        return edgeBinding;
+    }
+
+    public ShutterFinish setEdgeBinding(String edgeBinding) {
+        this.edgeBinding = edgeBinding;
         return this;
     }
 

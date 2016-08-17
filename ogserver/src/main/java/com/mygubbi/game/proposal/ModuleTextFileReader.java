@@ -49,6 +49,8 @@ public class ModuleTextFileReader
 
         boolean startReading = false;
         String unit = null;
+
+        int moduleSequence = 1;
         for (String[] record : records)
         {
             if (record.length == 0) continue;
@@ -91,7 +93,8 @@ public class ModuleTextFileReader
                 int quantity = this.getInteger(record[QUANTITY_CELL]);
 
                 for (int i=0;i<quantity;i++){
-                    getNewProductModule(productModules, unit, name, moduleCode, sequence, color, remarks, width, depth, height);
+                    getNewProductModule(productModules, unit, name, moduleCode, sequence, color, remarks, width, depth, height, moduleSequence);
+                    moduleSequence++;
                 }
 
             }
@@ -113,7 +116,7 @@ public class ModuleTextFileReader
         return productModules;
     }
 
-    private void getNewProductModule(List<ProductModule> productModules, String unit, String name, String moduleCode, int sequence, String color, String remarks, int width, int depth, int height) {
+    private void getNewProductModule(List<ProductModule> productModules, String unit, String name, String moduleCode, int sequence, String color, String remarks, int width, int depth, int height, int moduleSequence) {
         ProductModule module = new ProductModule()
                 .setUnit(unit)
                 .setExternalCode(moduleCode)
@@ -125,7 +128,8 @@ public class ModuleTextFileReader
                 .setSequence(sequence)
                 .setDescription(name)
                 .setColorCode(color)
-                .setRemarks(remarks);
+                .setRemarks(remarks)
+                .setModuleSequence(moduleSequence);
         productModules.add(module);
     }
 
@@ -164,7 +168,7 @@ public class ModuleTextFileReader
         catch (NumberFormatException e)
         {
             LOG.error("Error in parsing " + number + " to integer.");
-            return 0;
+            return 1;
         }
     }
 

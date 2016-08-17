@@ -18,6 +18,7 @@ public class ProductModule extends JsonObject
     private static final String MAPPED = "importStatus";
     private static final String UNIT = "unitType";
     private static final String SEQ = "seq";
+    private static final String MODULE_SEQUENCE = "moduleSequence";
 
     private static final String WIDTH = "width";
     private static final String DEPTH = "depth";
@@ -55,6 +56,10 @@ public class ProductModule extends JsonObject
     {
         super(json.getMap());
         this.setAccessoryPacks();
+    }
+
+    public int getModuleSequence() {
+        return this.getInteger(MODULE_SEQUENCE);
     }
 
     public String getUnit()
@@ -164,6 +169,12 @@ public class ProductModule extends JsonObject
     public ProductModule setSequence(int seq)
     {
         this.put(SEQ, seq);
+        return this;
+    }
+
+    public ProductModule setModuleSequence(int moduleSequence)
+    {
+        this.put(MODULE_SEQUENCE, moduleSequence);
         return this;
     }
 
