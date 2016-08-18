@@ -3,7 +3,7 @@ package com.mygubbi.game.proposal.model;
 import io.vertx.core.json.JsonObject;
 
 /**
- * Created by test on 26-05-2016.
+ * Created by Sunil on 26-05-2016.
  */
 public class Module
 {
