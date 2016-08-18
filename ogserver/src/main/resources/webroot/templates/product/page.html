@@ -1,3 +1,4 @@
+<%= console.log(filter.selectedCategoryName) %>
 <section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
 
     <div class="container-fluid category-banner">
@@ -27,11 +28,11 @@
                     %>
                     <li>
                         <% if(filter.selectedCategoryName == 'living & dining'){ %>
-                            <a href="/living-and-dining-room-designs"><%= filter.selectedCategoryName %></a>
+                            <a href="/living-and-dining-room-designs">Storage Solutions</a>
                         <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
                             <a href="/kitchen-cabinet-design"><%= filter.selectedCategoryName %></a>
                         <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                            <a href="/bedroom-interior-design"><%= filter.selectedCategoryName %></a>
+                            <a href="/bedroom-interior-design">Wardrobe</a>
                         <% } %>
 
                     </li>
@@ -39,8 +40,11 @@
                     <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
                     null){ %>
                     <li class="active">
-                        <a href="javascript:void(0);"><span
-                                class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
+                        <% if(filter.selectedSubCategoryName == 'Wardrobe'){ %>
+                            <a href="javascript:void(0);"><span class="li-txt-wrap">Wardrobe Collection</span></a></li>
+                        <% }else { %>
+                            <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
+                        <% } %>
                     <% } %>
                     <% } %>
                 </ul>
@@ -534,40 +538,102 @@
     <!-- Filter Menu Popup End -->
 
     <!-- start menu switch -->
-    <!--<div class="bg-color-white">
+    <div class="bg-color-white">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <div class="page-pre-tab">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <a href="#">
-                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471346442/product_collection/tab_kitchen.png" alt="tab-img">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <h2><a href="#"> Single Unit </a></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <div class="page-next-tab">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <h2><a href="#"> Wardrobe </a></h2>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <a href="#">
-                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471346442/product_collection/tab_kitchen.png" alt="tab-img">
-                                </a>
+                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                    <% if(filter.selectedCategoryName == 'kitchen'){ %>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="page-pre-tab">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <a href="/living-and-dining-room-designs">
+                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="page-next-tab">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h2><a href="/wardrobe-designs-online"> Wardrobe </a></h2>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <a href="/wardrobe-designs-online">
+                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/wardrobe1.jpg" alt="tab-img">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="page-pre-tab">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <a href="/living-and-dining-room-designs">
+                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="page-next-tab">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h2><a href="/kitchen-cabinet-design"> Kitchen </a></h2>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <a href="/kitchen-cabinet-design">
+                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/kitchen1.jpg" alt="tab-img">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="page-next-tab">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <a href="/wardrobe-designs-online">
+                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/wardrobe1.jpg" alt="tab-img">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h2><a href="/wardrobe-designs-online"> Wardrobe </a></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="page-next-tab">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h2><a href="/kitchen-cabinet-design"> Kitchen </a></h2>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <a href="/kitchen-cabinet-design">
+                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/kitchen1.jpg" alt="tab-img">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
             </div>
         </div>
-    </div>-->
+    </div>
     <!-- end menu switch -->
 
     <div class="container-fluid bg-color-white">

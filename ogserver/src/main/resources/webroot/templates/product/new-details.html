@@ -3,6 +3,35 @@
 
 <section class="bg-white product-details-font">
     <div class="container-fluid bg-color-white">
+        <div class="container hidden-xs">
+            <div class="row">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-home"></i></a></li>
+                    <% if(typeof(product.category) !== 'undefined' && product.category != null){ %>
+                    <li>
+                        <% if(product.category == 'Living & Dining'){ %>
+                        <a href="/living-and-dining-room-designs">Storage Solutions</a>
+                        <% }else if(product.category == 'Kitchen'){ %>
+                        <a href="/kitchen-cabinet-design"><%= product.category %></a>
+                        <% }else if(product.category == 'Bedroom'){ %>
+                        <a href="/bedroom-interior-design">Wardrobe</a>
+                        <% } %>
+                    </li>
+                    <% } %>
+                    <% if(typeof(product.subcategory) !== 'undefined' && product.subcategory != null){ %>
+                        <% if(product.subcategory == 'Wardrobe'){ %>
+                            <li><a href="<%= product.url %>">Wardrobe Collection</a></li>
+                        <% }else { %>
+                            <li><a href="<%= product.url %>"><%= product.subcategory %></a></li>
+                        <% } %>
+                    <% } %>
+                    <% if(typeof(product.name) !== 'undefined'){ %>
+                    <li class="active"><a href="javascript:void(0);"><span
+                            class="li-txt-wrap"><%= product.name %></span></a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="product-main-section">
