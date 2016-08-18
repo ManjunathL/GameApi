@@ -126,7 +126,8 @@ public class JobCardSheetCreator implements ExcelCellProcessor
         this.sheetProcessor.createTitleRowInDataSheet(currentRow, new Object[]{"Shutter", "Description", "Height", "Width", "Thickness",
                 "Qty", "Remarks & Edge Binding", "Design", "Color", "Dimension",	"Box"});
 
-        String edgeBinding = this.getEdgeBinding(module.getFinishCode());
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
+
 
         for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(mgModule.getCode()))
         {
@@ -137,6 +138,8 @@ public class JobCardSheetCreator implements ExcelCellProcessor
 
                 if (seq == ALPHABET_SEQUENCE.length) seq = 0;
                 currentRow++;
+
+                String edgeBinding = this.getEdgeBinding(shutterFinish, panel);
                 this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(), panel.getBreadth(), panel.getLength(),
                         panel.getThickness(), component.getQuantity(), edgeBinding, product.getProduct().getDesignCode(),
                         module.getColorCode(), panel.getDimesions()});
@@ -148,10 +151,17 @@ public class JobCardSheetCreator implements ExcelCellProcessor
         return currentRow;
     }
 
-    private String getEdgeBinding(String finishCode)
-    {
-        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
-        return (shutterFinish != null) ? shutterFinish.getEdgeBinding() : "NA";
+    private String getEdgeBinding(ShutterFinish shutterFinish, ShutterPanel panel) {
+
+        if ("Y".equals(shutterFinish.getEdgeBinding()))
+        {
+            return panel.getEdgebinding();
+        }
+        else
+        {
+            return shutterFinish.getEdgeBinding();
+        }
     }
+
 
 }
