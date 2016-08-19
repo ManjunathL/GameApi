@@ -140,7 +140,7 @@ public class JobCardSheetCreator implements ExcelCellProcessor
                 currentRow++;
 
                 String edgeBinding = this.getEdgeBinding(shutterFinish, panel);
-                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(), panel.getBreadth(), panel.getLength(),
+                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(),  panel.getLength(), panel.getBreadth(),
                         panel.getThickness(), component.getQuantity(), edgeBinding, product.getProduct().getDesignCode(),
                         module.getColorCode(), panel.getDimesions()});
                 seq++;
