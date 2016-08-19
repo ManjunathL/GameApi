@@ -98,7 +98,7 @@ public class EncryptedFileHandler
 
     public static void main(String[] args)
     {
-        //new EncryptedFileHandler().encrypt("my@gubbi2togubbi", "d:/tmp/ratecard.json", "d:/tmp/ratecard.bin");
-        System.out.println(new EncryptedFileHandler().decrypt("my@gubbi2togubbi", "/tmp/ratecard.bin"));
+//        new EncryptedFileHandler().encrypt("my@gubbi2togubbi", "d:/tmp/ratecard.json", "d:/tmp/ratecard.bin");
+        System.out.println(new EncryptedFileHandler().decrypt("my@gubbi2togubbi", "d:/tmp/ratecard.bin"));
     }
 }
