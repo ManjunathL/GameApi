@@ -7731,3 +7731,7 @@ padding: 50px 94px;
 .open-contact-section{
     background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
 }
+
+a#goto-login{
+    color:#f1591f!important;
+}
