@@ -61,8 +61,18 @@ public class ProposalModuleHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(ModulePricingService.CALCULATE_PRICE, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     JsonObject result = (JsonObject) LocalCache.getInstance().remove(selectResult.result().body());
+                    LOG.debug("result :" + result.encodePrettily());
                     sendJsonResponse(routingContext, result.toString());
                 });
+    }
+
+    private void getPriceRecorder(RoutingContext routingContext)
+    {
+        JsonObject moduleJson = routingContext.getBodyAsJson();
+        LOG.debug("Module Json : " + moduleJson.encodePrettily());
+        ProductModule module = new ProductModule(moduleJson);
+        Integer id = LocalCache.getInstance().store(module);
+        VertxInstance.get().eventBus().send(ModulePricingService.CALCULATE_PRICE, id);
     }
 
 }

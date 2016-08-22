@@ -11,6 +11,10 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Collection;
 
 /**
@@ -47,15 +51,13 @@ public class ModulePricingService extends AbstractVerticle
         });
     }
 
-    private void calculatePrice(ProductModule productModule, Message message)
-    {
+    private void calculatePrice(ProductModule productModule, Message message) {
         Module mgModule = ModuleDataService.getInstance().getModule(productModule.getMGCode());
         Collection<ModuleComponent> components = ModuleDataService.getInstance().getModuleComponents(productModule.getMGCode());
 
         ModulePriceHolder modulePriceHolder = new ModulePriceHolder();
 
-        if (components == null || components.isEmpty() || mgModule == null)
-        {
+        if (components == null || components.isEmpty() || mgModule == null) {
             modulePriceHolder.addError("Module components or module not setup for MG code: -" + productModule.getMGCode() + "-");
             this.sendResponse(message, modulePriceHolder, productModule);
             return;
@@ -70,44 +72,44 @@ public class ModulePricingService extends AbstractVerticle
         RateCard labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE);
 
         if (carcassRateCard == null || carcassFinishRateCard == null || shutterRateCard == null
-                || loadingFactorCard == null || labourRateCard == null)
-        {
+                || loadingFactorCard == null || labourRateCard == null) {
             modulePriceHolder.addError("Carcass, Carcass Finish, Shutter, Labour or Loading factor rate cards not setup." + productModule.getCarcassCode() + " : "
                     + productModule.getFinishCode() + " : " + shutterFinish.getCostCode());
             this.sendResponse(message, modulePriceHolder, productModule);
             return;
         }
 
-        for (IModuleComponent component : components)
-        {
-            if (component.isCarcass())
-            {
+        for (IModuleComponent component : components) {
+            if (component.isCarcass()) {
                 this.calculateExposedCarcassPanelCost(productModule, modulePriceHolder, carcassFinish, carcassRateCard,
                         carcassFinishRateCard, component);
-            }
-            else
-            {
+            } else {
                 this.calculateComponentCost(productModule, modulePriceHolder, shutterFinish, carcassRateCard, shutterRateCard, component);
             }
         }
 
-        for (ModuleAccessoryPack moduleAccessoryPack : productModule.getAccessoryPacks())
-        {
+        for (ModuleAccessoryPack moduleAccessoryPack : productModule.getAccessoryPacks()) {
             LOG.info("Calculating cost for accessory pack:" + moduleAccessoryPack.getAccessoryPackCode());
             Collection<AccessoryPackComponent> accessoryPackComponents =
                     ModuleDataService.getInstance().getAccessoryPackComponents(moduleAccessoryPack.getAccessoryPackCode());
-            for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
-            {
+            for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents) {
                 LOG.info("Calculating cost for ap component :" + accessoryPackComponent.getComponentCode() + " : " + accessoryPackComponent.getType());
                 this.calculateComponentCost(productModule, modulePriceHolder, shutterFinish, carcassRateCard, shutterRateCard, accessoryPackComponent);
             }
-            for (String addonCode : moduleAccessoryPack.getAddons())
-            {
+            for (String addonCode : moduleAccessoryPack.getAddons()) {
                 LOG.info("Calculating cost for addon accessory :" + addonCode);
                 this.calculateAccessoryCost(modulePriceHolder, addonCode, 1);
             }
         }
-        modulePriceHolder.calculateTotalCost(mgModule, labourRateCard, loadingFactorCard);
+
+        if (productModule.isAccessoryUnit())
+        {
+            modulePriceHolder.calculateTotalCost(productModule.getMGCode(), productModule.getWidth(), productModule.getDepth(), labourRateCard, loadingFactorCard);
+        }
+        else
+        {
+            modulePriceHolder.calculateTotalCost(mgModule, labourRateCard, loadingFactorCard);
+        }
         this.sendResponse(message, modulePriceHolder, productModule);
     }
 
@@ -155,12 +157,14 @@ public class ModulePricingService extends AbstractVerticle
         else
         {
             modulePriceHolder.addToHardwareCost(hardware.getPrice() * component.getQuantity());
+            System.out.println("null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + component.getType() + "," + component.getComponentCode() + "," + component.getQuantity() + "," + "null" + "," + "null" + "," + "null" + "," + hardware.getPrice() + "," + (hardware.getPrice() * component.getQuantity()));
         }
     }
 
     private void calculateAccessoryCost(ModulePriceHolder modulePriceHolder, IModuleComponent component)
     {
         this.calculateAccessoryCost(modulePriceHolder, component.getComponentCode(), component.getQuantity());
+        System.out.print("null" +  "," + "null" +  "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + component.getType() +","+ component.getComponentCode() + "," + component.getQuantity()  + "," + "null" + "," + "null" + "," + "null" + ","  );
     }
 
     private void calculateAccessoryCost(ModulePriceHolder modulePriceHolder, String addonCode, double quantity)
@@ -174,6 +178,7 @@ public class ModulePricingService extends AbstractVerticle
         {
             modulePriceHolder.addToAccessoryCost(accessory.getPrice() * quantity);
         }
+        System.out.println((accessory.getPrice() * quantity));
     }
 
     private void calculateShutterCost(ModulePriceHolder modulePriceHolder, ShutterFinish shutterFinish, RateCard shutterRateCard, IModuleComponent component)
@@ -195,6 +200,9 @@ public class ModulePricingService extends AbstractVerticle
             modulePriceHolder.addError("Shutter panel cost is not available for " + shutterPanel.getCode() + shutterRateCard.getKey());
         }
         modulePriceHolder.addToShutterCost(shutterPanelCost * component.getQuantity());
+
+        System.out.println("null" + "," + "null" +  "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + component.getType() + "," + component.getComponentCode() + "," + component.getQuantity()  + "," + shutterPanel.getDimesions() + "," + "null" + "," + "null" + "," + shutterPanelCost +  "," + (shutterPanelCost * component.getQuantity()));
+
     }
 
     private void calculateShutterCostFromModuleDimensions(ModulePriceHolder modulePriceHolder, int width, int depth,
@@ -208,6 +216,9 @@ public class ModulePricingService extends AbstractVerticle
             modulePriceHolder.addError("Shutter panel cost is not available for " + component.getComponentCode() + ":" + shutterRateCard.getKey());
         }
         modulePriceHolder.addToShutterCost(shutterPanelCost * component.getQuantity());
+
+        System.out.println("null" + "," + "null" +  "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + component.getType() + "," + component.getComponentCode() + "," + component.getQuantity() + "," + "null" + "," + width + "," + depth +","+ shutterPanelCost +  "," + (shutterPanelCost * component.getQuantity()));
+
     }
 
     private void calculateExposedCarcassPanelCost(ProductModule productModule, ModulePriceHolder modulePriceHolder,
@@ -238,6 +249,9 @@ public class ModulePricingService extends AbstractVerticle
             modulePriceHolder.addError("Carcass panel cost is not available for " + carcassPanel.getCode() + " in rate card " + carcassRateCard.getKey());
         }
         modulePriceHolder.addToCarcassCost(carcassPanelCost * component.getQuantity());
+
+        System.out.println("null" + "," + "null" +  "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + component.getType() +","+ component.getComponentCode() + "," + component.getQuantity() + ","+ carcassPanel.getDimesions() + "," + "null" + "," + "null" + "," + carcassPanelCost + "," + (carcassPanelCost * component.getQuantity()));
+
     }
 
     private void calculateCarcassPanelCost(ModulePriceHolder modulePriceHolder, RateCard carcassRateCard, IModuleComponent component)
@@ -256,6 +270,9 @@ public class ModulePricingService extends AbstractVerticle
             modulePriceHolder.addError("Carcass panel cost is not available for " + carcassPanel.getCode() + " in rate card " + carcassRateCard.getKey());
         }
         modulePriceHolder.addToCarcassCost(carcassPanelCost * component.getQuantity());
+
+        System.out.println("null" + "," + "null" +  "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + component.getType() +","+ component.getComponentCode() + "," + component.getQuantity() + ","+ carcassPanel.getDimesions() + "," + "null" + "," + "null" + "," + carcassPanelCost + "," + (carcassPanelCost * component.getQuantity()));
+
     }
 
     private void sendResponse(Message message, ModulePriceHolder modulePriceHolder, ProductModule productModule)

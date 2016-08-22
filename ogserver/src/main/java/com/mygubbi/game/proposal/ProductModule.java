@@ -44,7 +44,6 @@ public class ProductModule extends JsonObject
     private static final String RIGHT_EXPOSED = "Right";
     private static final String BOTH_EXPOSED = "Both";
 
-
     private static final String REMARKS = "remarks";
     private static final String DESCRIPTION = "description";
     private static final String ACCPACKS = "accessoryPacks";

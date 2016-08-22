@@ -103,7 +103,7 @@ public class Module
         this.imagePath = imagePath;
     }
 
-    public double getLargestAreaOfModuleInSft()
+    public double getAreaOfModuleInSft()
     {
         double h = this.getHeight();
         double w = this.getWidth();

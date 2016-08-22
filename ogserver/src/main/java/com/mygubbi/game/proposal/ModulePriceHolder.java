@@ -17,6 +17,9 @@ public class ModulePriceHolder
 {
     private final static Logger LOG = LogManager.getLogger(ModulePriceHolder.class);
 
+    private static final double SQMM2SQFT = 0.0000107639;
+
+
     private double shutterCost = 0;
     private double carcassCost = 0;
     private double accessoryCost = 0;
@@ -27,6 +30,10 @@ public class ModulePriceHolder
     private double moduleArea;
 
     private JsonArray errors = null;
+
+    public ModulePriceHolder()
+    {
+    }
 
     public void addError(String error)
     {
@@ -64,7 +71,6 @@ public class ModulePriceHolder
     public void addToAccessoryCost(double cost)
     {
         this.accessoryCost += cost;
-        LOG.info("Accessory cost incremented by :" + cost);
     }
 
     public void addToHardwareCost(double cost)
@@ -74,20 +80,22 @@ public class ModulePriceHolder
 
     public void calculateTotalCost(Module mgModule, RateCard labourRateCard, RateCard loadingFactorCard)
     {
-        this.moduleArea = mgModule.getLargestAreaOfModuleInSft();
-        LOG.debug("Module area : " + moduleArea );
-        this.labourCost = this.moduleArea * labourRateCard.getRate();
-        LOG.info("Labour cost : " + labourCost);
-        this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
-        LOG.debug("Carcass cost :" + this.carcassCost);
-        LOG.debug("Shutter cost :" + this.shutterCost);
-        LOG.debug("Hardware cost :" + this.hardwareCost);
-        LOG.debug("Ratecard cost :" + loadingFactorCard.getRate());
+        this.moduleArea = mgModule.getAreaOfModuleInSft();
+        this.calculateTotalCost(labourRateCard, loadingFactorCard, mgModule.getCode());
+    }
 
-        LOG.debug("Woodwork cost :" + woodworkCost);
+    public void calculateTotalCost(String moduleCode, int width,int depth, RateCard labourRateCard, RateCard loadingFactorCard)
+    {
+        this.moduleArea = width * depth * SQMM2SQFT ;
+        this.calculateTotalCost(labourRateCard, loadingFactorCard, moduleCode);
+    }
+
+    private void calculateTotalCost(RateCard labourRateCard, RateCard loadingFactorCard, String code) {
+        this.labourCost = this.moduleArea * labourRateCard.getRate();
+        this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
         this.totalCost = this.woodworkCost + this.accessoryCost;
 
-        LOG.info("Accessory cost:" + this.accessoryCost);
+        System.out.println(code + "," + moduleArea + "," + labourCost + "," + carcassCost + "," + shutterCost + "," + hardwareCost + "," + accessoryCost + "," + woodworkCost + "," + totalCost + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" );
     }
 
     private double round(double value, int places)
