@@ -364,12 +364,20 @@ define([
             $(function() {
 
 
-                $('#nav').find('li a').click(function () {
-                    $('#nav').find('li a').removeClass('active');
+                $('#nav').find('li.gubbi-list-desk a').click(function () {
+                    $('#nav').find('li.gubbi-list-desk a').removeClass('active');
                     $(this).addClass('active');
                     $($(this).closest('li.gubbi-list-desk').children()[0]).addClass('active');
                 });
 
+                /* Menu onhover code by Smruti */
+                $( ".dropdown-submenu a" )
+                .mouseenter(function() {
+                    $(this).next('ul').addClass('viewMenuCls');
+                })
+                .mouseleave(function() {
+                    $(this).next('ul').removeClass('viewMenuCls');
+                });
 
                 $('.user').click(function(e) {
                     e.stopPropagation();
@@ -580,7 +588,7 @@ define([
                 });
 
 
-                $(function() {
+                /*$(function() {
                     var navMain = $("#bs-example-navbar-collapse-1");
                     var subMenuUL = $(".dropdown-menu");
                     subMenuUL.on("click", "li", null, function() {
@@ -590,6 +598,7 @@ define([
                     $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li", null, function() {
                         $(this).parent().hide();
                     });
+
 
                     $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").hover(function() {
                             $(this).show();
@@ -610,15 +619,14 @@ define([
                         !!hovered && $('.dropdownMenu_lg').hide();
                     });
 
-                });
-
-                $(function() {
+                });*/
+                /*$(function() {
                     var navMain = $("#bs-example-navbar-collapse-1");
                     var menuLi = $(".menu-li");
                     menuLi.on("click", "a", null, function() {
                         navMain.collapse('hide');
                     });
-                });
+                });*/
 
                 $(window).resize(that.positionSideContact);
 
