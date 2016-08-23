@@ -837,11 +837,11 @@ h6 {
       margin: 0px auto;
   }
   .search-ico{
-      font-size: 30px!important;
+      font-size: 28px!important;
       color: rgba(0,0,0,0.4);
-      padding-top: 15px;
+      padding-top: 10px;
       font-weight: 400!important;
-      cursor:pointer;
+      cursor: pointer;
   }
 
   /* Mobile Responsiveness */
@@ -5894,7 +5894,7 @@ a.tab-ico {
 }
 
 .grid-heading-col8{
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
     display: inline-block;
     text-overflow: ellipsis;
