@@ -193,7 +193,7 @@
 .finish-slide-nav .nav>li>a,
 .material-slide-nav .nav>li>a{
     padding: 3px 10px;
-    font-size: 12px;
+    font-size: 14px;
 }
 .finish-slide-nav .nav>li>a:hover,
 .finish-slide-nav .nav>li>a:focus,
@@ -342,7 +342,7 @@ img.finish-thumbnail:hover {
         text-shadow: none;
         font-size: 16px;
     }
-    .finish-slide-nav .nav>li>a,
+    /*.finish-slide-nav .nav>li>a,
     .material-slide-nav .nav>li>a{
         font-size: 12px;
     }
@@ -354,7 +354,7 @@ img.finish-thumbnail:hover {
     .design-style-cnt p{
         font-size: 12px;
         text-align: center;
-    }
+    }*/
 
 }
 @media screen and (min-width: 992px){
