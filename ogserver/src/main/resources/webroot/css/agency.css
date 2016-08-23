@@ -274,6 +274,14 @@ h6 {
 }
 
 /* Global Class End*/
+ul, ol{
+    font-family: 'Raleway', sans-serif;
+}
+
+.menu-mygubbi ul,
+.menu-mygubbi ol{
+     font-family: 'Lato', sans-serif;
+}
 
 /* CSS for New Home Page design by Smruti */
 .txt-over-banner-image{

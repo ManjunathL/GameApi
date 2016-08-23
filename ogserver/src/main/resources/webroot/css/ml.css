@@ -1,0 +1,251 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Raleway', sans-serif;
+}
+h1, h2, h3, h4, h5, h6{
+     font-family: 'Lato', sans-serif;
+}
+
+p, ul, ol{
+    font-family: 'Raleway', sans-serif;
+}
+
+.ml_pn{
+    padding:0px
+}
+.img-centered {
+  margin: 0 auto;
+}
+.ml_heading{
+    text-transform: uppercase;
+    color: #3c4e58;
+    padding: 20px 0px;
+    font-weight: 300;
+    margin: 0px;
+}
+.ml_main_banner img{
+    width: 100%;
+}
+.ml_detail_section{
+    background: #ecedef;
+    padding: 40px 10px;
+}
+.ml_details_img {
+    min-height: 160px;
+}
+.ml_details_heading{
+    font-weight: 600;
+    font-size: 22px;
+    color: #f1591f;
+    margin: 5px 0px 0px;
+}
+.ml_details_des{
+    font-weight: 600;
+    font-size: 16px;
+    color: #4f646d;
+    margin-bottom: 35px;
+    margin-top: 10px;
+}
+.ml_service_section img{
+    width: 100%;
+}
+.ml_service_box{
+    position: relative;
+    margin-bottom: 30px;
+}
+.ml_service_cnt{
+    position: absolute;
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    width: 100%;
+}
+.ml_service_cnt p{
+    padding: 0px 10%;
+}
+.ml_other_service_section{
+    margin-bottom: 30px;
+}
+.ml_other_service_img {
+    min-height: 160px;
+}
+.ml_experience_center .ml_service_box{
+    position: relative;
+    margin-bottom: 0px;
+}
+.ml_experience_center img{
+    width: 100%;
+}
+.ml_completed_project_section{
+    background: #160c0a;
+    color: #ffffff;
+    padding: 20px 0px;
+}
+.ml_completed_project_section h2{
+    margin: 0px;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 24px;
+    padding: 0px 0px 10px;
+}
+.ml_com_pro_box{
+    background: #ffffff;
+    color: #333333;
+    padding: 5px 0px 0px;
+    border-radius: 3px;
+}
+.ml_com_pro_box h3{
+    margin: 0px;
+    line-height: 150%;
+}
+.ml_com_pro_box p{
+    font-size: 14px;
+    line-height: 150%;
+    margin:0px;
+    padding: 10px;
+}
+/* Start Completed project carousel */
+
+#cp-carousel .carousel-inner{
+    padding: 10px 30px;
+}
+#cp-carousel .carousel-control{
+    background: none;
+    color: #ffffff;
+    font-size: 2em;
+    text-shadow: none;
+    margin-top: 30px;
+    top: 30%;
+}
+#cp-carousel .carousel-control.left{
+    left: -12px;
+}
+#cp-carousel .carousel-control.right{
+    right: -12px !important;
+}
+#cp-carousel img{
+    width: 100%;
+    height: 100%;
+}
+
+/* End Completed project carousel */
+
+.ml-circle{
+    border: 2px solid #f1591f;
+    margin: 20px 0px 30px;
+}
+
+.ml_testimonial_box p{
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+.ml_testimonial_box h5{
+    font-weight: 600;
+    margin: 5px 0px;
+    color: #50626c;
+}
+
+/* Start testimonial carousel */
+
+#mlt-carousel .carousel-inner{
+    padding: 10px 30px;
+}
+#mlt-carousel .carousel-control{
+    background: none;
+    color: #50626c;
+    font-size: 2em;
+    text-shadow: none;
+    margin-top: 30px;
+    top: 30%;
+}
+#mlt-carousel .carousel-control.left{
+    left: -12px;
+}
+#mlt-carousel .carousel-control.right{
+    right: -12px !important;
+}
+/* End Testimonial Carousel */
+
+.ml_form_bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1471955268/m_landing/bg-form_18.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 360px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 70px 40px 20px 30px;
+    text-align: center;
+    color: #333333;
+}
+
+.ml_form_section .form-control{
+    display: block;
+    width: 100%;
+    height: 36px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #50626c;
+    background-color: rgba(255,255,255,0.5);
+    background-image: none;
+    border: 1px solid rgba(148, 148, 148, 0.43);
+    border-radius: 3px;
+}
+.btn-send{
+    color: #ffffff;
+    background-color: #50626c;
+    border-color: #50626c;
+}
+.btn-send:hover,
+.btn-send:active,
+.btn-send:focus {
+    color: #ffffff;
+    background-color: #3e4c54;
+    border-color: #3e4c54;
+}
+.send-pos{
+    margin-top: 25px;
+}
+.ml_blog_section{
+    background: #edf5ff;
+    padding-bottom: 20px;
+}
+
+.ml_blog_section img{
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.ml_blog_section h3{
+    margin: 0px 0px 10px;
+    color: #50626c;
+    font-size: 20px;
+}
+.ml_brand_section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1471955268/m_landing/brand-bg_22.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 230px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+}
+.brands-height{
+    min-height: 70px;
+}
