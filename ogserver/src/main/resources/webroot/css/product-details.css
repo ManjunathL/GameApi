@@ -54,6 +54,8 @@
 .related-card .nav-tabs > li.active,
 .design-card .nav-tabs > li.active{
     border-bottom: 4px solid #000000;
+    font-weight:bold!important;
+    color:#000!important;
 }
 .warranty-card .nav-tabs.nav-justified>.active>a,
 .warranty-card .nav-tabs.nav-justified>.active>a:hover,
@@ -100,8 +102,8 @@
 .d-style {
     position: absolute;
     top: 30%;
-    left: 10%;
-    width: 45%;
+    left: 5%;
+    width: 50%;
     text-align: center;
 }
 .d-style h3{
@@ -404,7 +406,7 @@ img.finish-thumbnail:hover {
 @media screen and (max-width: 480px){
     .m-style, .d-style {
         top: 46%;
-        width: 82%;
+        width: 85%;
     }
     .finish-slide-nav .nav>li>a,
     .material-slide-nav .nav>li>a{
