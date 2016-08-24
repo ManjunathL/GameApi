@@ -379,10 +379,10 @@ define([
                     $(this).next('ul').removeClass('viewMenuCls');
                 });
 
-                $('.last-item').click(function(e) {
+                /*$('#home-lnk').click(function(e) {
                     e.stopPropagation();
                     $("#bs-example-navbar-collapse-1").toggle();
-                });
+                });*/
 
                 $('.user').click(function(e) {
                     e.stopPropagation();
