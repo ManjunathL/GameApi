@@ -379,11 +379,6 @@ define([
                     $(this).next('ul').removeClass('viewMenuCls');
                 });
 
-                /*$('#home-lnk').click(function(e) {
-                    e.stopPropagation();
-                    $("#bs-example-navbar-collapse-1").toggle();
-                });*/
-
                 $('.user').click(function(e) {
                     e.stopPropagation();
                     that.showUserPop();
@@ -625,13 +620,13 @@ define([
                     });
 
                 });*/
-                /*$(function() {
+                $(function() {
                     var navMain = $("#bs-example-navbar-collapse-1");
                     var menuLi = $(".menu-li");
                     menuLi.on("click", "a", null, function() {
                         navMain.collapse('hide');
                     });
-                });*/
+                });
 
                 $(window).resize(that.positionSideContact);
 
