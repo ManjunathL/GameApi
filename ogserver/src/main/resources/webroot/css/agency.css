@@ -223,6 +223,67 @@ h6 {
     margin: 0 auto;
 }
 
+/* css attributes */
+
+/* margin top */
+.mt0{margin-top:0;}
+.mt10{margin-top:10px;}
+.mt20{margin-top:20px;}
+.mt30{margin-top:30px;}
+.mt40{margin-top:40px;}
+.mt50{margin-top:50px;}
+.mt60{margin-top:60px;}
+.mt70{margin-top:70px;}
+.mt80{margin-top:80px;}
+.mt90{margin-top:90px;}
+.mt100{margin-top:100px;}
+
+/* margin bottom */
+.mb0{margin-bottom:0;}
+.mb10{margin-bottom:10px;}
+.mb20{margin-bottom:20px;}
+.mb30{margin-bottom:30px;}
+.mb40{margin-bottom:40px;}
+.mb50{margin-bottom:50px;}
+.mb60{margin-bottom:60px;}
+.mb70{margin-bottom:70px;}
+.mb80{margin-bottom:80px;}
+.mb90{margin-bottom:90px;}
+.mb100{margin-bottom:100px;}
+
+.pt0{padding-top:0;}
+.pt10{padding-top:10px;}
+.pt20{padding-top:20px;}
+.pt30{padding-top:30px;}
+.pt40{padding-top:40px;}
+.pt80{padding-top:80px;}
+.pb0{padding-bottom:0;}
+.pb10{padding-bottom:10px;}
+.pb20{padding-bottom:20px;}
+.pb30{padding-bottom:30px;}
+.pb40{padding-bottom:40px;}
+.pb80{padding-bottom:80px;}
+
+
+/* margin top */
+.mt-10{margin-top:-10px;}
+.mt-20{margin-top:-20px;}
+.mt-30{margin-top:-30px;}
+.mt-40{margin-top:-40px;}
+.mt-50{margin-top:-50px;}
+.mt-60{margin-top:-60px;}
+.mt-70{margin-top:-70px;}
+.mt-80{margin-top:-80px;}
+.mt-90{margin-top:-90px;}
+.mt-100{margin-top:-100px;}
+
+.mr10{margin-right:10px;}
+.mr20{margin-right:20px;}
+.mr30{margin-right:30px;}
+
+.absolute{position:absolute; z-index:1;}
+.overflow-hidden{overflow:hidden;}
+
 .bg-none {
     background: none !important;
 }
@@ -1629,6 +1690,204 @@ ul.social-links {
 }
 
 /* ---- NRI Page End ---- */
+
+/* ----- Festive Page CSS ------ */
+
+.festive_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1472110417/festive-lp/festive-banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 540px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 40px 0 40px 0;
+    text-align: center;
+    color: #ffffff;
+}
+.section-fun-facts{
+    background: #f1591f;
+    color: #ffffff;
+    padding: 20px 0px 50px;
+}
+.fact-head{
+    font-weight: 300;
+    text-transform: uppercase;
+}
+.fact-des{
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    display: block;
+}
+
+.de_count {
+    min-height: 160px;
+}
+
+.de_count img{
+    margin-bottom:20px;
+    max-height: 125px;
+}
+
+.section-why-us{
+    background: #ffffff;
+    color: #333333;
+    padding: 20px 0px 40px;
+}
+
+.separator {
+    line-height: 0.5;
+    text-align: center;
+    margin:30px 0 30px 0;
+}
+.separator span {
+    display: inline-block;
+    position: relative;
+}
+.separator span:before,
+.separator span:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    top: 5px;
+    width: 300px;
+}
+.section-why-us .separator span:before,
+.section-why-us .separator span:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    top: 5px;
+    width: 300px;
+}
+.separator span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+.separator span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+.separator span  i{
+    font-size:6px;
+    padding:0;
+    margin:0;
+    float:none;
+}
+.de_light .separator span:before,
+.de_light .separator span:after {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.text-light .separator span:before,
+.text-light .separator span:after {
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.festive-why-us-head{
+    font-weight: 300;
+    color: #333333;
+}
+
+.why-us-fluid{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.section-testimonial{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1472157622/festive-lp/bg-3.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 540px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 40px 0 40px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+#owl-testimonial .item{
+    background: rgba(0,0,0,0.5);
+    padding: 15px 0px;
+    margin: 5px;
+    color: #FFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+    min-height:185px;
+}
+
+@media (max-width: 1300px) {
+    .festive_banner_bg {
+        min-height: 505px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .separator span:before,
+    .separator span:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px solid rgba(255,255,255,.5);
+        top: 5px;
+        width: 135px;
+    }
+    .section-why-us .separator span:before,
+    .section-why-us .separator span:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        top: 5px;
+        width: 135px;
+    }
+    .festive_banner_bg {
+        background-position: inherit;
+        padding: 30px 0px;
+    }
+    .de_count {
+        min-height: 165px;
+    }
+}
+
+@media (max-width: 420px) {
+    .de_count {
+        min-height: 190px;
+    }
+    .festive_banner_bg {
+        background-position: center 100%;
+        padding: 0px;
+    }
+    .section-fun-facts {
+        background: #f1591f;
+        color: #ffffff;
+        padding: 20px 0px 10px;
+    }
+}
+
+.section-portfolio{
+    padding: 35px 0px;
+    background: #fff;
+}
+
+/* ----- End Festive Page CSS ------ */
+
 
 /* ---- Youtube Video ---- */
 
