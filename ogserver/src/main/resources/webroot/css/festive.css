@@ -183,6 +183,12 @@
     min-height:185px;
 }
 
+.festive-contact-section{
+    background: #ffffff;
+    color: #333333;
+    padding: 20px 0px 40px;
+}
+
 @media (max-width: 1300px) {
     .festive_banner_bg {
         min-height: 505px;
