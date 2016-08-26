@@ -87,11 +87,25 @@
       "params": []
     },
     {
+      "id": "blog.select.all",
+      "type": "select",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog",
+      "params": []
+    },
+    {
       "id": "product.select.productid",
       "type": "select",
       "query": "select id, productId, productJson from product where productId = ?",
       "params": [
         "productId"
+      ]
+    },
+    {
+      "id": "blog.select.blogid",
+      "type": "select",
+      "query": "select id, blogId, tags, blogJson from blog where blogId = ?",
+      "params": [
+        "blogId"
       ]
     },
     {
@@ -108,6 +122,22 @@
       "query": "select id, productId, popularity,styleSortSeq, productJson from product where subcategory = ? ORDER BY popularity ASC, styleSortSeq DESC",
       "params": [
         "subcategory"
+      ]
+    },
+    {
+      "id": "product.select.blogTags",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags)",
+      "params": [
+        "tags"
+      ]
+    },
+    {
+      "id": "product.select.allBlogs",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog ",
+      "params": [
+
       ]
     },
     {
@@ -139,6 +169,32 @@
         "relevance",
         "styleSortSeq",
         "url"
+      ]
+    },
+    {
+      "id": "blog.insert",
+      "type": "insert",
+      "table": "blog",
+      "query": "insert into blog(id, blogId, tags, blog_categories, blogJson ) values (?, ?, ?, ?, ?)",
+      "params": [
+        "id",
+        "blogId",
+        "tags",
+        "blog_categories",
+        "blogJson"
+      ]
+    },
+
+    {
+      "id": "blog.update",
+      "type": "update",
+      "table": "blog",
+      "query": "update blog set tags = ?, blog_categories = ?, blogJson = ? where blogId = ?",
+      "params": [
+        "tags",
+        "blog_categories",
+        "blogJson",
+        "blogId"
       ]
     },
     {

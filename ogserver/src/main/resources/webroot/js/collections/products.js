@@ -74,6 +74,13 @@ define([
 					return that.productInPriceRanges(product, selectedPriceRangeIds);
 				}), function (product) {return product;});
 		},
+		filterByPriceRangeS:function (filteredProducts,selectedPriceRangeS){
+
+        				var that = this;
+        				return _.map(filteredProducts.filter(function(product){
+        					return that.productInDefaultPriceRanges(product, selectedPriceRangeS);
+        				}), function (product) {return product;});
+        		},
 			filterByStyle:function (filteredProducts,selectedStyleIds){
 				var that = this;
 				return _.map(filteredProducts.filter(function(product){
@@ -95,6 +102,15 @@ define([
 			}
 
 		},
+		productInDefaultPriceRanges: function (product, priceRangeS) {
+            for (var i=0; i < priceRangeS.length; i++) {
+                console.log("---------------------------");
+                console.log(product.defaultPrice+" =========== "+priceRangeS[i]);
+                if (product.defaultPrice <= priceRangeS[i])
+                    return true;
+            }
+
+        },
 		productInStyles: function (product, styleIds) {
 			for (var i=0; i < styleIds.length; i++) {
 				if (product.styleId == styleIds[i])

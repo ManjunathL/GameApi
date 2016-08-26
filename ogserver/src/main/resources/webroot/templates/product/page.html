@@ -294,6 +294,7 @@
                                 Style
                                 <span class="caret"></span>
                             </a>
+
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
                                 <% _.each(filterMaster.styles, function(style){ %>
                                 <li class="
@@ -321,9 +322,18 @@
                                 <% }); %>
                             </ul>
                         </li>
-                        <% } %>
 
+
+
+                        <% } %>
+                     <!--   <li>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                        <div id="slider-range-min"></div>
+                        </li>-->
                     </ul>
+
+
                 </div>
                 <div class="col-lg-3 col-md-3 hidden-sm hidden-xs align-right">
 <!--
@@ -419,6 +429,7 @@
                 <div class="row padding10_0_30" id="styleFilter">
                     <% if(typeof(filterMaster.styles) !== 'undefined'){ %> Style <% } %>
                 </div>
+
             </div>
             <div class="col-sm-8 col-xs-8 padding-left25">
                 <div id="subcatFilterDesc">
@@ -451,6 +462,7 @@
                 </div>
 
                 <div id="priceFilterDesc">
+
                     <% _.each(filterMaster.price_ranges, function(range){ %>
                     <div class="row separator-horizontal
                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
@@ -504,7 +516,18 @@
                     </div>
                     <% }); %>
                 </div>
+
+                <div id="priceRangeFilter">
+                <!--    <div class="row">
+                    <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                    <div id="slider-range-min1"></div>
+                        </div>-->
+                </div>
+
+
             </div>
+
         </div>
 
         <div class="row align-center padding10-0">
@@ -954,6 +977,27 @@
             filter.set({'filterIds': filterArr});
             filter.set({'selectedFiltersName': filterNameArr});
             filter.set({'priceRangeIds': price_rangeArr});
+            filter.trigger('change');
+        }
+    }
+
+    function getPriceRangeS(id, title) {
+
+        if ($('#' + id).hasClass('noclick')) {
+            removeFilters(title);
+        } else {
+            var filterArr = filter.get('filterIds');
+            var filterNameArr = filter.get('selectedFiltersName');
+            var price_rangeArr = filter.get('priceRangeS');
+            filterArr.push(id);
+            filterNameArr.push(title);
+
+            id = id.substring(0, id.length - 3);
+            price_rangeArr.push(id);
+
+            filter.set({'filterIds': filterArr});
+            filter.set({'selectedFiltersName': filterNameArr});
+            filter.set({'priceRangeS': price_rangeArr});
             filter.trigger('change');
         }
     }
