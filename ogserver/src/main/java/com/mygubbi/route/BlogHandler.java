@@ -37,12 +37,9 @@ public class BlogHandler extends AbstractRouteHandler
         {
 
             if (blogTags.equals("all")){
+                this.fetchProductsAndSendb(context, "blog.select.all", null);
 
-/*
-                this.fetchProductsAndSendb(context, "blog.select.all", "[]");
-*/
-
-            }
+                 }
             else {
 
                 JsonObject params = new JsonObject().put("tags", blogTags);
@@ -55,13 +52,13 @@ public class BlogHandler extends AbstractRouteHandler
        }
 
     }
-   /*private void fetchProductsAndSendb(RoutingContext context, String queryId, String paramsData)
+   private void fetchProductsAndSendb(RoutingContext context, String queryId, JsonObject paramsData)
    {
-       Integer id = LocalCache.getInstance().store(new QueryDataOne(queryId, paramsData));
+       Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
        LOG.info("Executing query:" + queryId + " | " + paramsData);
        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                (AsyncResult<Message<Integer>> selectResult) -> {
-                   QueryDataOne selectData = (QueryDataOne) LocalCache.getInstance().remove(selectResult.result().body());
+                   QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                    if (selectData == null || selectData.rows == null)
                    {
                        sendError(context, "Did not find products for " + paramsData.toString() + ". Error:" + selectData.errorMessage);
@@ -73,7 +70,7 @@ public class BlogHandler extends AbstractRouteHandler
                    }
                });
 
-   }*/
+   }
     private void fetchProductsAndSend(RoutingContext context, String queryId, JsonObject paramsData)
     {
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
