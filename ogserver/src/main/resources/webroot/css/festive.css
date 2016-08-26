@@ -1,6 +1,245 @@
 @charset "utf-8";
 /* CSS Document */
 
+/* ----- Festive Page CSS ------ */
+
+.navbar{
+    height: 70px;
+    background: #FFFFFF;
+}
+.navbar-brand{
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar-brand img {
+    width: 130px;
+    padding: 10px 0px 0px 5px;
+}
+
+.festive_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1472110417/festive-lp/festive-banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 540px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 40px 0 40px 0;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 70px;
+}
+.festive-form{
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 20px 15px;
+    border-radius: 3px;
+}
+
+.festive-form h3{
+    margin: 5px 0px 15px;
+}
+
+.btn-festive{
+    color: #ffffff;
+    border-color: #f1591f;
+    background: #f1591f !important;
+}
+
+.btn-festive:hover,
+.btn-festive:active,
+.btn-festive:focus{
+    color: #ffffff;
+    border-color: #ff591f;
+    background: #ff591f;
+}
+
+.section-fun-facts{
+    background: #f1591f;
+    color: #ffffff;
+    padding: 20px 0px 50px;
+}
+.fact-head{
+    font-weight: 300;
+    text-transform: uppercase;
+}
+.fact-des{
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    display: block;
+}
+
+.de_count {
+    min-height: 160px;
+}
+
+.de_count img{
+    margin-bottom:20px;
+    max-height: 125px;
+}
+
+.section-why-us{
+    background: #ffffff;
+    color: #333333;
+    padding: 20px 0px 40px;
+}
+
+.separator {
+    line-height: 0.5;
+    text-align: center;
+    margin:30px 0 30px 0;
+}
+.separator span {
+    display: inline-block;
+    position: relative;
+}
+.separator span:before,
+.separator span:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    top: 5px;
+    width: 300px;
+}
+.section-why-us .separator span:before,
+.section-why-us .separator span:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    top: 5px;
+    width: 300px;
+}
+.separator span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+.separator span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+.separator span  i{
+    font-size:6px;
+    padding:0;
+    margin:0;
+    float:none;
+}
+.de_light .separator span:before,
+.de_light .separator span:after {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.text-light .separator span:before,
+.text-light .separator span:after {
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.festive-why-us-head{
+    font-weight: 300;
+    color: #333333;
+}
+
+.why-us-fluid{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.section-testimonial{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1472157622/festive-lp/bg-3.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 540px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 40px 0 40px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+#owl-testimonial .item{
+    background: rgba(0,0,0,0.5);
+    padding: 15px 0px;
+    margin: 5px;
+    color: #FFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+    min-height:185px;
+}
+
+@media (max-width: 1300px) {
+    .festive_banner_bg {
+        min-height: 505px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .separator span:before,
+    .separator span:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px solid rgba(255,255,255,.5);
+        top: 5px;
+        width: 135px;
+    }
+    .section-why-us .separator span:before,
+    .section-why-us .separator span:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        top: 5px;
+        width: 135px;
+    }
+    .festive_banner_bg {
+        background-position: inherit;
+        padding: 30px 0px;
+    }
+    .de_count {
+        min-height: 165px;
+    }
+}
+
+@media (max-width: 420px) {
+    .de_count {
+        min-height: 190px;
+    }
+    .festive_banner_bg {
+        background-position: center 100%;
+        padding: 70px 0px;
+
+    }
+    .section-fun-facts {
+        background: #f1591f;
+        color: #ffffff;
+        padding: 20px 0px 10px;
+    }
+}
+
+.section-portfolio{
+    padding: 35px 0px;
+    background: #fff;
+}
+
+/* ----- End Festive Page CSS ------ */
+
+
 /* ================================================== */
 /* isotope */
 /* ================================================== */
@@ -60,26 +299,26 @@
 #filters a {
     outline:none;
     padding: 10px 20px 8px 20px;
-    color: #888;
+    color: #cccccc;
     font-size:11px;
     letter-spacing:3px;
     text-decoration: none;
     text-transform:uppercase;
-    background:#eee;
+    background:#999999;
     border:none !important;
 }
 
 #filters a {
-    color:#888;
+    color:#cccccc;
     border: solid 1px #555;
 }
 
 #filters a:hover {
-	background:#111;
+	background: #f1591f;
 }
 
 #filters a.selected {
-    color: #111;
+    color: #ffffff;
 }
 
 .isotope-item {
@@ -101,224 +340,224 @@
 /* gallery */
 /* ================================================== */
 #gallery-carousel .item {
-text-align: center;
-font-size: 12px;
-width:100%;
-cursor:e-resize;
+    text-align: center;
+    font-size: 12px;
+    width:100%;
+    cursor:e-resize;
 }
 
 .de_carousel .item {
-width:100%;
-display:block;
+    width:100%;
+    display:block;
 }
 
 
 #gallery-carousel .item img {
-width:100%;
-height:auto;
+    width:100%;
+    height:auto;
 }
 
 #gallery-carousel .item h4 {
-margin-bottom: 0;
-font-size: 14px;
+    margin-bottom: 0;
+    font-size: 14px;
 }
 
 #gallery .item{
-overflow:hidden;
+    overflow:hidden;
 }
 
 .pf_text {
-color:#eceff3;
+    color:#eceff3;
 }
 
 .pf_text h4 {
-color:#eceff3;
-margin-bottom: 0;
-font-size: 14px;
-font-weight: 600;
+    color:#eceff3;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .project-info{
-color:#ccc;
-margin-left:20px;
+    color:#ccc;
+    margin-left:20px;
 }
 
 .de_light .project-info{
-color:#606060;
+    color:#606060;
 }
 
 .project-info h2{
-margin-top: 0;
-font-size:18px;
-letter-spacing:3px;
-text-transform:uppercase;
+    margin-top: 0;
+    font-size:18px;
+    letter-spacing:3px;
+    text-transform:uppercase;
 }
 
 .project-info h4{
-font-weight:bold;
+    font-weight:bold;
 }
 
 .project-info .details{
-padding:20px;
-border:solid 1px rgba(255,255,255,.2);
-background:rgba(0,0,0,.5);
-margin-bottom:30px;
+    padding:20px;
+    border:solid 1px rgba(255,255,255,.2);
+    background:rgba(0,0,0,.5);
+    margin-bottom:30px;
 }
 
 .de_light .project-info .details{
-background:#eee;
-border-color:#ddd;
+    background:#eee;
+    border-color:#ddd;
 }
 
 .project-infoproject-info span{
-display:block;
+    display:block;
 }
 
 .project-info span.title{
-display:inline-block;
-min-width:80px;
+    display:inline-block;
+    min-width:80px;
 }
 
 .project-info span.val{
-margin-bottom:15px;
-font-weight:bold;
+    margin-bottom:15px;
+    font-weight:bold;
 }
 
 .project-view{
-padding:120px 0 80px 0;
+    padding:120px 0 80px 0;
 }
 
 .project-images img{
-width:100%;
+    width:100%;
 }
 
 .picframe{
-overflow:hidden;
+    overflow:hidden;
 }
 
 #btn-close-x{
-width:100px;
-height:100px;
-display:block;
-background:url(../images/close.png) center no-repeat;
-margin:0 auto;
-margin-bottom:80px;
-cursor:pointer;
-padding:20px;
+    width:100px;
+    height:100px;
+    display:block;
+    background:url(../images/close.png) center no-repeat;
+    margin:0 auto;
+    margin-bottom:80px;
+    cursor:pointer;
+    padding:20px;
 }
 
 #btn-close-x{
-background:url(../images/close-2.png) center no-repeat;
+    background:url(../images/close-2.png) center no-repeat;
 }
 
 
 .project-name{
-font-size:12px;
-font-weight:bold;
-display:block;
+    font-size:12px;
+    font-weight:bold;
+    display:block;
 }
 
 span.overlay {
-text-align: center;
-display: block;
-width: 100px;
-background: #111;
-position: absolute;
+    text-align: center;
+    display: block;
+    width: 100px;
+    background: #111;
+    position: absolute;
 }
 
 .de_light span.overlay {
-background: #fff;
+    background: #fff;
 }
 
 
 span.icon{
-cursor:pointer;
+    cursor:pointer;
 }
 
 
 
 .overlay .info-area {
-display: block;
-margin-top: 10%;
+    display: block;
+    margin-top: 10%;
 }
 
 .overlay .sb-icons {
-display: block;
-margin-top: 200px;
+    display: block;
+    margin-top: 200px;
 }
 
 .de-gallery .overlay{
-text-align:center;
+    text-align:center;
 }
 
 .de-gallery .overlay  .pf_text{
-display: inline-block;
+    display: inline-block;
 }
 
 .de-gallery .project-name{
-font-size:11px;
-text-transform:uppercase;
-letter-spacing:5px;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:5px;
 }
 
 .de-gallery .overlay .icon {
-display: inline-block;
-margin-top: 200px;
-text-align:center;
+    display: inline-block;
+    margin-top: 200px;
+    text-align:center;
 }
 
 .de-gallery .overlay .icon i{
-text-shadow:none;
-color:#fff;
-border:solid 1px rgba(255,255,255,.1);
-font-size: 22px;
-padding: 20px;
-width: 60px;
-height: 60px;
-text-align: center;
-margin-left:10px;
+    text-shadow:none;
+    color:#fff;
+    border:solid 1px rgba(255,255,255,.1);
+    font-size: 22px;
+    padding: 20px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin-left:10px;
 }
 
 .de-gallery .overlay .icon i.icon-info{
-margin-left:0px;
+    margin-left:0px;
 }
 
 .de-gallery .overlay .icon i:hover{
-color:#222;
-background:#fff;
+    color:#222;
+    background:#fff;
 }
 
 .grid_gallery .item{
-margin-bottom:30px;
+    margin-bottom:30px;
 }
 
 a.img-icon-url, a.img-icon-zoom {
-display: inline-block;
-width: 36px;
-height: 36px;
-background: url(../images/icon-url.png) center no-repeat;
-margin: 0 auto;
-margin: 0 2px 0 2px;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: url(../images/icon-url.png) center no-repeat;
+    margin: 0 auto;
+    margin: 0 2px 0 2px;
 }
 
 a.img-icon-zoom {
-background: url(../images/icon-zoom.png) center no-repeat;
+    background: url(../images/icon-zoom.png) center no-repeat;
 }
 
 .pf_full_width .item{
-float:left;
-width:24.95%;
+    float:left;
+    width:24.95%;
 }
 
 .pf_full_width.pf_3_cols .item{
-width:33.3%;
+    width:33.3%;
 }
 
 .pf_full_width.pf_2_cols .item{
-width:49.9%;
+    width:49.9%;
 }
 
 .pf_full_width img{
-float:left;
-width:100%;
+    float:left;
+    width:100%;
 }
