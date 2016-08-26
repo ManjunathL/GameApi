@@ -390,16 +390,16 @@ ul, ol{
 .trend-explore-space > .btn-explore{
     cursor:pointer;
 }
- .trend-image-overlay {
+    .trend-image-overlay {
      position:relative;
      width:440px;
      height:450px;
- }
- .trend-image-overlay img {
+    }
+    .trend-image-overlay img {
      width:100%;
      vertical-align:top;
- }
- .trend-image-overlay:before {
+    }
+    .trend-image-overlay:before {
      content:'\A';
      position:absolute;
      width:100%; height:100%;
@@ -408,14 +408,57 @@ ul, ol{
      opacity:1;
      transition: all 0.5s;
      -webkit-transition: all 0.5s;
- }
+    }
 
- .trend-image-overlay:hover:before {
+    .trend-image-overlay:hover:before {
      opacity:0;
- }
- .trend-image-overlay:hover .txt-over-trendstyle-image {
+    }
+
+    .trend-image-overlay:hover .txt-over-trendstyle-image {
      display:block;
- }
+    }
+
+    .txt-over-style-image {
+         position: absolute;
+         top: 55%;
+         right: 2%;
+         width: 41%;
+         padding: 0px!important;
+         margin: 0px!important;
+         display:block;
+     }
+
+    .txt-over-style-image div{
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .txt-over-style-image div p{
+      padding:10px;
+      font-weight:300;
+      color:#fff;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .style-image-overlay:after {
+       content:'\A';
+       position:absolute;
+       width:100%; height:100%;
+       top:0; left:0;
+       background:rgba(0,0,0,0.4);
+       opacity:0;
+       transition: all 0.5s;
+       -webkit-transition: all 0.5s;
+    }
+
+    .style-image-overlay-opc{
+        opacity:1;
+    }
+    .style-image-overlay:hover:after {
+      opacity:0;
+    }
+    .style-image-overlay:hover:after .txt-over-style-image {
+        display:none;
+    }
 
 @media (max-width: 767px) {
      .trend-image-overlay {

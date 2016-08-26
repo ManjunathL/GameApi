@@ -375,12 +375,12 @@
                 </div>
             </div>
             <div class="col-lg-4 col-sm-4 col-md-4 padding5">
-                <div class="trend-image-overlay1">
+                <div class="style-image-overlay">
                     <img src="<%= imgBase + 'c_fill,h_450,w_440' + '/stories/childrens-room.jpg'%>"
                          class="hidden-xs hidden-sm img-responsive" alt="Trend & Style" />
                     <img src="<%= imgBase + 'c_fill,h_450,w_667' + '/stories/childrens-room.jpg'%>"
                          class="hidden-lg hidden-md img-responsive width100" alt="Trend & Style" />
-                    <div class="txt-over-trendstyle-image" style="display:block;">
+                    <div class="txt-over-style-image">
                         <div class="width100"><p class="font-size35 txt-color-orange">STYLES</p></div>
                         <div class="width100 hidden-xs hidden-sm"><p class="font-size12 font-weight400">Make Your Child’s Room a Safe Haven</p></div>
                         <div class="width0 trend-explore-space"><a href="/story-Make-Your-Child’s-Room-a-Safe-Haven"><button class="btn btn-explore">EXPLORE</button></a></div>
@@ -536,6 +536,15 @@
     });
 
     $(function() {
+        $(".trend-image-overlay").hover(function() {
+                $(".txt-over-style-image").css('display','none');
+                $(".style-image-overlay").addClass('style-image-overlay-opc');
+            },
+            function() {
+               $(".txt-over-style-image").css('display','block');
+               $(".style-image-overlay").removeClass('style-image-overlay-opc');
+        });
+
         var navMain = $("#bs-example-navbar-collapse-1");
         var subMenuUL = $(".dropdown-menu");
         subMenuUL.on("click", "li", null, function() {
