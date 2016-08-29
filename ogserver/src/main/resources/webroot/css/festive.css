@@ -582,3 +582,6 @@ a.img-icon-zoom {
     float:left;
     width:100%;
 }
+.bold-fnt{
+    font-weight: 600!important;
+}
