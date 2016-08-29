@@ -214,22 +214,31 @@
         width: 135px;
     }
     .festive_banner_bg {
-        background-position: inherit;
-        padding: 30px 0px;
+        min-height: 300px;
+        padding: 25px 0px 25px;
+
     }
     .de_count {
         min-height: 165px;
     }
 }
+@media (max-width: 420px) {
+    .festive_banner_bg {
+        background-size: contain;
+        background-position: inherit;
+        padding: 245px 0px 25px;
 
+    }
+}
 @media (max-width: 420px) {
     .de_count {
         min-height: 190px;
     }
     .festive_banner_bg {
-        background-position: center 100%;
-        padding: 70px 0px;
-
+        min-height: 450px;
+        background-size: contain;
+        background-position: inherit;
+        padding: 150px 0px 25px;
     }
     .section-fun-facts {
         background: #f1591f;
