@@ -1,0 +1,10 @@
+.tab-heading {
+    font-weight: 400;
+    padding: 20px;
+    display: inline-block;
+    width: 30%;
+    font-size: 22px;
+}
+.tab-heading-active {
+    border-bottom: 2px solid rgb(99,161,235);
+}
