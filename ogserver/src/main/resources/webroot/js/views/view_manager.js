@@ -27,6 +27,7 @@ define(function() {
         HOLIDAYLANDINGPAGE: "holidaylandingpage",
         COMPLETEDPROJECTSPAGE: "completedprojectspage",
         NEWPRODUCT_DETAILSPAGE: "NewProductDetailsPage",
+        MYACCOUNTPAGE: "MyAccountPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

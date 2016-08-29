@@ -66,6 +66,7 @@ define([
             'know-your-kitchen(/)': 'knowyourkitchen',
             'remarketing-lp(/)': 'remarketinglp',
             'about-us(/)': 'aboutus',
+            'my_account(/)': 'my_account',
             '*something': 'errorPage'
 
 
@@ -312,6 +313,12 @@ define([
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/user_profile/user_profile.js'], function(UserProfilePage) {
                 VM.create(VM.USER_PROFILE, UserProfilePage).render();
+            });
+        });
+        router.on('route:my_account', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
+            require(['/js/views/my_account/my_account.js'], function(MyAccountPage) {
+                VM.create(VM.MYACCOUNTPAGE, MyAccountPage).render();
             });
         });
         router.on('route:consult', function(actions) {
