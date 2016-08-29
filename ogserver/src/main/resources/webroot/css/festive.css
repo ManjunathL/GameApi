@@ -18,7 +18,7 @@
 }
 
 .festive_banner_bg {
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1472110417/festive-lp/festive-banner.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1472449057/festive-lp/festive-banner.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     min-height: 540px;;
@@ -222,12 +222,13 @@
         min-height: 165px;
     }
 }
-@media (max-width: 420px) {
+@media (max-width: 767px) {
     .festive_banner_bg {
-        background-size: contain;
-        background-position: inherit;
-        padding: 245px 0px 25px;
-
+        min-height: 300px;
+        padding: 5px 0px 5px;
+    }
+    .festive-form{
+        margin: 5% 0% 5%;
     }
 }
 @media (max-width: 420px) {
@@ -235,10 +236,15 @@
         min-height: 190px;
     }
     .festive_banner_bg {
-        min-height: 450px;
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1472455187/festive-lp/mobile-Landing-page.jpg");
+        min-height: 300px;
         background-size: contain;
         background-position: inherit;
-        padding: 150px 0px 25px;
+        padding: 25px 0px 25px;
+    }
+    .festive-form{
+        background: rgb(40, 70, 80);
+        margin: 120% 0% 0%;
     }
     .section-fun-facts {
         background: #f1591f;
