@@ -92,7 +92,7 @@ CREATE TABLE idsequence (
 DROP TABLE IF EXISTS blog;
 CREATE TABLE blog (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  blogId varchar(64) NOT NULL,
+  blogId varchar(256) NOT NULL,
   tags TEXT NOT NULL,
   blog_categories TEXT NULL,
   blogJson TEXT NULL,

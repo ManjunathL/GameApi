@@ -11,7 +11,6 @@ define([
 
         routes: {
             '': 'dashboard',
-
             'shoe-rack-online(/)': 'shoeRackLD',
             'crockery-unit-designs(/)': 'crockeryUnitLD',
             'tv-unit-cabinet(/)': 'tvUnitLD',
@@ -363,8 +362,7 @@ define([
             });
         });
         router.on('route:stories', function(blogcategory) {
-            console.log('smruti');
-            console.log(blogcategory);
+
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
             require(['/js/views/story/stories.js'], function(StoriesPage) {
 
