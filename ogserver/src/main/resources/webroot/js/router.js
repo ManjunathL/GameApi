@@ -67,13 +67,7 @@ define([
             'remarketing-lp(/)': 'remarketinglp',
             'about-us(/)': 'aboutus',
             '*something': 'errorPage'
-
-
         },
-
-
-
-
         dashboard: function() {
             document.title = 'Home Decor, Modular Kitchen, Wardrobe Designs & Renovation Ideas | mygubbi';
             document.querySelector('meta[name="description"]').setAttribute("content", "Buy Customized Home D?cor Interiors online for living room furniture, kitchen furniture, side tables and TV furniture.Get Home d?cor ideas to design your Home");
