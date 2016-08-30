@@ -9,7 +9,7 @@ define([
     '/js/consultutil.js',
     '/js/analytics.js',
     'bxslider',
-    'text!/templates/dashboard/page.html'
+    'text!/templates/dashboard/new-page.html'
 ], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
