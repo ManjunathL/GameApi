@@ -10,13 +10,25 @@ define([
     '/js/mgfirebase.js',
     '/js/analytics.js',
     'text!/templates/my_account/my_account.html',
+    'text!/templates/my_account/my_nest.html',
+    'text!/templates/my_account/my_profile.html',
     '/js/views/view_manager.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, UserProfileTemplate, VM) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, VM) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         renderWithUserProfCallback: function (userProfData, provider) {
-            $(this.el).html(_.template(UserProfileTemplate)({
+            $(this.el).html(_.template(MyAccountTemplate)({
+                'userProfile': userProfData,
+                'provider': provider
+            }));
+
+            $("#mynest").html(_.template(MyNestTemplate)({
+                'userProfile': userProfData,
+                'provider': provider
+            }));
+
+            $("#profile").html(_.template(MyProfileTemplate)({
                 'userProfile': userProfData,
                 'provider': provider
             }));
@@ -139,8 +151,13 @@ define([
         },
         events: {
             "click #save_details": "submit",
+            "click #profile-file-input": "changeProfileImg",
             "submit #changeUserPasswordForm": "changeUserPassword",
             "submit #deactivateUserForm": "deactivateUserAccount"
+        },
+        changeProfileImg: function () {
+            alert('hiiii');
+
         }
 
     });
