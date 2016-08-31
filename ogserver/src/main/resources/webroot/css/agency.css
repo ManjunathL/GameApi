@@ -167,6 +167,7 @@ body{
 
 .text-muted {
     color: #777;
+    font-family: 'Lato', sans-serif;
 }
 
 .text-primary {
@@ -5941,31 +5942,10 @@ a.tab-ico {
 .txt-urstory{
     color: rgba(241,90,34,1);
 }
-.media-txt-title{
-    font-size: 24px;
-    text-transform: inherit;
-}
 .media_separator {
     width: 100%;
     margin: 30px auto 0px;
     border-bottom: 1px solid #CCC;
-}
-.btn-media {
-    color: #fff;
-    background: rgba(241,90,34,1);
-    border-color: rgba(241,90,34,1);
-    border-radius: 0px;
-    text-shadow: 0px 0px 0px #fff;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-style: italic;
-}
-.btn-media:hover,
-.btn-media:active,
-.btn-media:focus{
-    color: #ffffff;
-    background: rgba(241,90,34,0.9);
-    border-color: rgba(241,90,34,0.9);
 }
 .vertline:after {
      content:"";
@@ -7981,6 +7961,7 @@ a#goto-login{
 /* Menu Design End */
 
 /* Start Media Landing Page */
+
 .media-banner img{
     width: 100%;
 }
@@ -8034,5 +8015,8 @@ a#goto-login{
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }
-
+.media-txt-title{
+    font-size: 24px;
+    text-transform: inherit;
+}
 /* End Media landing Page */
