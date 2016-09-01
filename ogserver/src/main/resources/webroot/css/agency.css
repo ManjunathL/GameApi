@@ -5594,8 +5594,9 @@ a.tab-ico {
     font-size: 90px !important;
     /*color: rgba(0, 0, 0, 0.5);*/
     top: 50% !important;
-    left: 50% !important;
+    left: 42% !important;
     position: absolute;
+    margin: 0 auto !important;
 /*
    background:url("https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif") no-repeat center center rgba(0,0,0,0.25) !important;
 */
