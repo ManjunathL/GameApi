@@ -7962,3 +7962,45 @@ a#goto-login{
 }
 
 /* Menu Design End */
+
+/* Banner button */
+.enquire-btn-div{
+    position:absolute;
+    left: 13%;
+    top: 37%;
+}
+.btn-enquire{
+  background-color: #380002!important;
+  color:#ffffff!important;
+  border-radius:0px!important;
+  font-weight: bold;
+  font-size: 18px;
+}
+.btn-enquire:hover,
+.btn-enquire:focus,
+.btn-enquire:active{
+  background-color: #380002!important;
+  color: #ffffff!important;
+  cursor:pointer;
+}
+.fa-play-circle{
+    font-size:18px;
+    padding-left:5%;
+    color:#f1591f;
+}
+
+@media screen and (max-width: 767px) {
+    .enquire-btn-div {
+        position: absolute;
+        left: 10%;
+        top: 31%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .enquire-btn-div {
+        position: absolute;
+        left: 3%;
+        top: 33%;
+    }
+}
