@@ -7966,8 +7966,11 @@ a#goto-login{
 /* Banner button */
 .enquire-btn-div{
     position:absolute;
-    left: 13%;
-    top: 37%;
+    left: 14%;
+    top: 30%;
+}
+.enquire-btn-img{
+    width:68%;
 }
 .btn-enquire{
   background-color: #380002!important;
@@ -7992,15 +7995,21 @@ a#goto-login{
 @media screen and (max-width: 767px) {
     .enquire-btn-div {
         position: absolute;
-        left: 10%;
+        left: 37.5%;
         top: 31%;
+    }
+    .enquire-btn-img{
+        width:85%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .enquire-btn-div {
         position: absolute;
-        left: 3%;
+        left: 32%;
         top: 33%;
+    }
+    .enquire-btn-img{
+        width:68%;
     }
 }
