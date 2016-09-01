@@ -7963,3 +7963,54 @@ a#goto-login{
 }
 
 /* Menu Design End */
+
+/* Banner button */
+.enquire-btn-div{
+    position:absolute;
+    left: 14%;
+    top: 30%;
+}
+.enquire-btn-img{
+    width:68%;
+}
+.btn-enquire{
+  background-color: #380002!important;
+  color:#ffffff!important;
+  border-radius:0px!important;
+  font-weight: bold;
+  font-size: 18px;
+}
+.btn-enquire:hover,
+.btn-enquire:focus,
+.btn-enquire:active{
+  background-color: #380002!important;
+  color: #ffffff!important;
+  cursor:pointer;
+}
+.fa-play-circle{
+    font-size:18px;
+    padding-left:5%;
+    color:#f1591f;
+}
+
+@media screen and (max-width: 767px) {
+    .enquire-btn-div {
+        position: absolute;
+        left: 37.5%;
+        top: 31%;
+    }
+    .enquire-btn-img{
+        width:85%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .enquire-btn-div {
+        position: absolute;
+        left: 32%;
+        top: 33%;
+    }
+    .enquire-btn-img{
+        width:68%;
+    }
+}
