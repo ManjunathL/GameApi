@@ -323,7 +323,7 @@
 
                         <% } %>
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                        <% if(filter.selectedCategoryName == 'kitchen'){ %>
+                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
                         <li>
                             <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
@@ -527,7 +527,7 @@
                 <div id="priceRangeFilter">
                     <div class="row">
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                        <% if(filter.selectedCategoryName == 'kitchen'){ %>
+                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
                         <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
                         <div id="slider-range-min1"></div>
