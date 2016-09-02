@@ -251,7 +251,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                <% _.each(filterMaster.price_ranges, function(range){ %>
+                               <!-- <% _.each(filterMaster.price_ranges, function(range){ %>
                                 <li class="
                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
@@ -274,7 +274,23 @@
                                         <%= range.name %>
                                     </a>
                                 </li>
-                                <% }); %>
+                                <% }); %>-->
+                                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                                <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
+                                <li>
+                                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                                    <div id="slider-range-min"></div>
+                                </li>
+
+                                <% }else{ %>
+                                <li>
+                                    <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                                    <div id="slider-range-min2"></div>
+                                </li>
+                                <% } %>
+                                <% } %>
                             </ul>
                         </li>
                         <% } %>
@@ -322,22 +338,7 @@
 
 
                         <% } %>
-                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
-                        <li>
-                            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
-                            <div id="slider-range-min"></div>
-                        </li>
-
-                        <% }else{ %>
-                        <li>
-                            <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
-
-                            <div id="slider-range-min2"></div>
-                        </li>
-                        <% } %>
-                        <% } %>
                     </ul>
 
 
@@ -470,7 +471,7 @@
 
                 <div id="priceFilterDesc">
 
-                    <% _.each(filterMaster.price_ranges, function(range){ %>
+                    <!--<% _.each(filterMaster.price_ranges, function(range){ %>
                     <div class="row separator-horizontal
                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
@@ -494,7 +495,24 @@
                             <%= range.name %>
                         </label>
                     </div>
-                    <% }); %>
+                    <% }); %>-->
+                    <div class="row">
+
+                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
+                        <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                        <div id="slider-range-min1"></div>
+
+                        <% }else{ %>
+
+                        <input type="text" id="amount3" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                        <div id="slider-range-min3"></div>
+
+                        <% } %>
+                        <% } %>
+                    </div>
                 </div>
                 <div id="styleFilterDesc">
                     <% _.each(filterMaster.styles, function(style){ %>
@@ -524,25 +542,7 @@
                     <% }); %>
                 </div>
 
-                <div id="priceRangeFilter">
-                    <div class="row">
-                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
-                        <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
-                        <div id="slider-range-min1"></div>
-
-                        <% }else{ %>
-
-                            <input type="text" id="amount3" readonly style="border:0; color:#f6931f; font-weight:bold;">
-
-                            <div id="slider-range-min3"></div>
-
-                        <% } %>
-                        <% } %>
-
-                    </div>
-                </div>
 
 
             </div>
