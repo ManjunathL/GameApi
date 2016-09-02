@@ -7966,11 +7966,11 @@ a#goto-login{
 /* Banner button */
 .enquire-btn-div{
     position:absolute;
-    left: 14%;
-    top: 30%;
+    left: 8%;
+    top: 0%;
 }
 .enquire-btn-img{
-    width:68%;
+    width:70%;
 }
 .btn-enquire{
   background-color: #380002!important;
@@ -7995,8 +7995,8 @@ a#goto-login{
 @media screen and (max-width: 767px) {
     .enquire-btn-div {
         position: absolute;
-        left: 37.5%;
-        top: 31%;
+        left: 30%;
+        top: 0%;
     }
     .enquire-btn-img{
         width:85%;
@@ -8006,10 +8006,10 @@ a#goto-login{
 @media screen and (max-width: 480px) {
     .enquire-btn-div {
         position: absolute;
-        left: 32%;
-        top: 33%;
+        left: 16%;
+        top: 0%;
     }
     .enquire-btn-img{
-        width:68%;
+        width:85%;
     }
 }
