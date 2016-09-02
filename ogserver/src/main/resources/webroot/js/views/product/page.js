@@ -176,6 +176,16 @@ define([
                                 silent: true
                             });
 
+                            var priceRangeS = new Array();
+                            priceRangeS.push(200000);
+                            that.filter.set({
+
+                                'priceRangeS': priceRangeS
+                            }, {
+                                silent: true
+                            });
+                            console.log(priceRangeS);
+
                             var styleIds = new Array();
                             that.filter.set({
                                 'styleIds': styleIds
@@ -282,7 +292,12 @@ define([
             }, {
                 silent: true
             });
-
+            var priceRangeS = new Array();
+            that.filter.set({
+                'priceRangeS': priceRangeS
+            }, {
+                silent: true
+            });
             var styleIds = new Array();
             that.filter.set({
                 'styleIds': styleIds
@@ -293,6 +308,7 @@ define([
         productFilter: function() {
 
             var that = this;
+
 
             if (typeof(that.filter.get('viewtype')) !== 'undefined') {
                 that.filter.set({
@@ -323,6 +339,7 @@ define([
             var selectedfilterIds = that.filter.get('filterIds');
             var selectedSubcatIds = that.filter.get('subcatIds');
             var selectedPriceRangeIds = that.filter.get('priceRangeIds');
+            var selectedPriceRangeS = that.filter.get('priceRangeS');
             var selectedStyleIds = that.filter.get('styleIds');
 
             var minPrice = '';
@@ -393,6 +410,17 @@ define([
                 } else {
                     filteredProducts = that.products.filterByPriceRange(filteredProducts, selectedPriceRangeIds);
                 }
+            }
+
+            if (selectedPriceRangeS.length != 0) {
+                if (typeof(filteredProducts) == 'undefined') {
+                    filteredProducts = that.products.toJSON();
+                    filteredProducts = that.products.filterByPriceRangeS(filteredProducts, selectedPriceRangeS);
+                } else {
+                    filteredProducts = that.products.filterByPriceRangeS(filteredProducts, selectedPriceRangeS);
+                }
+
+                console.log("==============" +filteredProducts);
             }
 
             if (selectedStyleIds.length != 0) {
@@ -556,5 +584,7 @@ define([
         }
 
     });
+
+
     return ProductPage;
 });
