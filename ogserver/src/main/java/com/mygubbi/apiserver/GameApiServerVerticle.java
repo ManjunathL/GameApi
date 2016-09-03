@@ -6,6 +6,7 @@ import com.mygubbi.game.proposal.ProposalHandler;
 import com.mygubbi.game.proposal.ProposalModuleHandler;
 import com.mygubbi.game.proposal.ProposalProductHandler;
 import com.mygubbi.route.*;
+import com.mygubbi.si.crm.CrmApiHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
@@ -95,6 +96,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/module", new ProposalModuleHandler(VertxInstance.get()));
 //        router.mountSubRouter("/gapi/catalogue", new ProductHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/crm", new CrmApiHandler(VertxInstance.get()));
 
         //LOG.info("Routes:" + router.getRoutes().toString());
     }
