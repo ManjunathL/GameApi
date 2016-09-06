@@ -104,8 +104,6 @@ define([
 		},
 		productInDefaultPriceRanges: function (product, priceRangeS) {
             for (var i=0; i < priceRangeS.length; i++) {
-                console.log("---------------------------");
-                console.log(product.defaultPrice+" =========== "+priceRangeS[i]);
                 if (product.defaultPrice <= priceRangeS[i])
                     return true;
             }
