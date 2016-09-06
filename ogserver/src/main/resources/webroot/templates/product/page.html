@@ -1,4 +1,3 @@
-<%= console.log(filter.selectedCategoryName) %>
 <section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
 
     <div class="container-fluid category-banner">
@@ -15,7 +14,7 @@
         <% } %>
     </div>
 
-        <div class="container-fluid bg-white hidden-xs">
+    <div class="container-fluid bg-white hidden-xs">
         <div class="container">
             <div class="row">
                 <ul class="breadcrumb">
@@ -28,11 +27,11 @@
                     %>
                     <li>
                         <% if(filter.selectedCategoryName == 'living & dining'){ %>
-                            <a href="/living-and-dining-room-designs">Storage Solutions</a>
+                        <a href="/living-and-dining-room-designs">Storage Solutions</a>
                         <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
-                            <a href="/kitchen-cabinet-design"><%= filter.selectedCategoryName %></a>
+                        <a href="/kitchen-cabinet-design"><%= filter.selectedCategoryName %></a>
                         <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                            <a href="/bedroom-interior-design">Wardrobe</a>
+                        <a href="/bedroom-interior-design">Wardrobe</a>
                         <% } %>
 
                     </li>
@@ -41,10 +40,10 @@
                     null){ %>
                     <li class="active">
                         <% if(filter.selectedSubCategoryName == 'Wardrobe'){ %>
-                            <a href="javascript:void(0);"><span class="li-txt-wrap">Wardrobe Collection</span></a></li>
-                        <% }else { %>
-                            <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
-                        <% } %>
+                        <a href="javascript:void(0);"><span class="li-txt-wrap">Wardrobe Collection</span></a></li>
+                    <% }else { %>
+                    <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
+                    <% } %>
                     <% } %>
                     <% } %>
                 </ul>
@@ -53,66 +52,66 @@
     </div>
     <div class="container-fluid ">
 
-                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                <% if(filter.selectedCategoryName == 'kitchen'){ %>
-               <!-- <section class="collection-banner bg-color-white">
-                    <div class="row">
-                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-                            <div class="collection-img-right">
-                                <a href="/know-your-kitchen"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/know_your_kitchen.png" alt="know your kitchen">
-                                <h5>Know Your Kitchen</h5></a>
-                                <div class="go-link">
-                                    <a href="/know-your-kitchen"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
-                                </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-                            <div class="collection-design-heading">
-                                <h2> KITCHEN DESIGNS </h2>
-                            </div>
-                            <div class="collection-design-icon">
-                                <a href="#" class="" id="youtubelnk" data-toggle="modal" data-target="#videoModal" data-theVideo="https://www.youtube.com/embed/_txE3dw4DaA"><img class="img-center img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470305038/product_collection/video.png"  alt="Null">
-                                     </a>
+        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+        <% if(filter.selectedCategoryName == 'kitchen'){ %>
+        <!-- <section class="collection-banner bg-color-white">
+             <div class="row">
+                 <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                     <div class="collection-img-right">
+                         <a href="/know-your-kitchen"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/know_your_kitchen.png" alt="know your kitchen">
+                         <h5>Know Your Kitchen</h5></a>
+                         <div class="go-link">
+                             <a href="/know-your-kitchen"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
+                         </a>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                     <div class="collection-design-heading">
+                         <h2> KITCHEN DESIGNS </h2>
+                     </div>
+                     <div class="collection-design-icon">
+                         <a href="#" class="" id="youtubelnk" data-toggle="modal" data-target="#videoModal" data-theVideo="https://www.youtube.com/embed/_txE3dw4DaA"><img class="img-center img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470305038/product_collection/video.png"  alt="Null">
+                              </a>
 
-                                <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <div>
-                                                    <iframe width="100%" height="350" src=""></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-                            <div class="collection-img-left">
-                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/treanding_design.png" alt="know your kitchen">
-                                <h5>Trending Designs</h5>
-                                <div class="go-link">
-                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>                --><% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-<!--
-                <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
--->
-                <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-<!--
-                <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
--->
-                <% } %>
-                <% }else{ %>
-<!--
-                <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
--->
-                <% } %>
+                         <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+                             <div class="modal-dialog">
+                                 <div class="modal-content">
+                                     <div class="modal-body">
+                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                         <div>
+                                             <iframe width="100%" height="350" src=""></iframe>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                     <div class="collection-img-left">
+                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/treanding_design.png" alt="know your kitchen">
+                         <h5>Trending Designs</h5>
+                         <div class="go-link">
+                             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </section>                --><% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+        <!--
+                        <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+        -->
+        <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+        <!--
+                        <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+        -->
+        <% } %>
+        <% }else{ %>
+        <!--
+                        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+        -->
+        <% } %>
     </div>
     <!-- H1 tag heading start -->
     <div class="h1-tag-content container-fluid bg-color-white align-center">
@@ -164,7 +163,7 @@
                                  data-toggle="tooltip"
                                  data-placement="bottom"
                                  title="More Filters Applied"
-                                 >...</span>
+                         >...</span>
                         <% } %>
                         <span class="tag-card color-orange margin0" id="clear_all" onclick="removeAllFilters()">Clear All</span>
                         <% } %>
@@ -177,16 +176,16 @@
 
                 <div class="hidden-lg hidden-md col-sm-2 hidden-xs">
                     <div class="row slight-up">
-                      <!--  <span class="glyphicon glyphicon-th-list view-select border-right0
-                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
-                        active
-                        <% } %>"
-                        ></span>--><%
+                        <!--  <span class="glyphicon glyphicon-th-list view-select border-right0
+                           <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
+                          active
+                          <% } %>"
+                          ></span>--><%
                         %><span class="glyphicon glyphicon-th-large view-select
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
                         active
                         <% } %>"
-                        ></span>
+                    ></span>
                     </div>
                 </div>
 
@@ -279,6 +278,22 @@
                                     </a>
                                 </li>
                                 <% }); %>
+                              <!--  <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                                <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
+                                <li>
+                                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                                    <div id="slider-range-min"></div>
+                                </li>
+
+                                <% }else{ %>
+                                <li>
+                                    <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                                    <div id="slider-range-min2"></div>
+                                </li>
+                                <% } %>
+                                <% } %>-->
                             </ul>
                         </li>
                         <% } %>
@@ -326,64 +341,60 @@
 
 
                         <% } %>
-                     <!--   <li>
-                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
-                        <div id="slider-range-min"></div>
-                        </li>-->
                     </ul>
 
 
                 </div>
                 <div class="col-lg-3 col-md-3 hidden-sm hidden-xs align-right">
-<!--
-  ========================== Sorting dropdown ==================================
--->
-<!--
-                    <span>
-                        <a
-                                class="dropdown-toggle color-333 sortby"
-                                id="dropdownMenu_sort"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="true">
-                            Sort By
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                            <li class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc"
-                                                     onclick="setSorting(this.id,this.rel);">Popular</a></li>
-                            <li class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc"
-                                                     onclick="setSorting(this.id,this.rel);">Relevance</a></li>
-                            <li class="sort-list">
-                                <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>"
-                                   onclick="setSorting(this.id,this.rel);">
-                                    Price
-                                    <% if (filter.sortDir === 'desc') { %>
-                                    <span class="pe-7s-angle-down sort-arrow"></span>
-                                    <% } else if (filter.sortDir === 'asc') { %>
-                                    <span class="pe-7s-angle-up sort-arrow"></span>
-                                    <% } %>
-                                </a>
-                            </li>
-                        </ul>
-                    </span>
--->
+                    <!--
+                      ========================== Sorting dropdown ==================================
+                    -->
+                    <!--
+                                        <span>
+                                            <a
+                                                    class="dropdown-toggle color-333 sortby"
+                                                    id="dropdownMenu_sort"
+                                                    data-toggle="dropdown"
+                                                    aria-haspopup="true"
+                                                    aria-expanded="true">
+                                                Sort By
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
+                                                <li class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc"
+                                                                         onclick="setSorting(this.id,this.rel);">Popular</a></li>
+                                                <li class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc"
+                                                                         onclick="setSorting(this.id,this.rel);">Relevance</a></li>
+                                                <li class="sort-list">
+                                                    <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>"
+                                                       onclick="setSorting(this.id,this.rel);">
+                                                        Price
+                                                        <% if (filter.sortDir === 'desc') { %>
+                                                        <span class="pe-7s-angle-down sort-arrow"></span>
+                                                        <% } else if (filter.sortDir === 'asc') { %>
+                                                        <span class="pe-7s-angle-up sort-arrow"></span>
+                                                        <% } %>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </span>
+                    -->
                   <span class="glyphicon glyphicon-th-list view-select border-right0
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
                         active
                         <% } %>"
-                    ></span><%
+                  ></span><%
                     %><span class="glyphicon glyphicon-th-large view-select border-right0
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
                         active
                         <% } %>"
-                    ></span><%
+                ></span><%
                     %><span class="glyphicon glyphicon-th view-select
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'shortgrid')){ %>
                         active
                         <% } %>"
-                    ></span>
+                ></span>
                 </div>
             </div>
 
@@ -413,10 +424,10 @@
 
     <!-- Filter Menu Popup -->
     <div class="filterpop hidden-lg hidden-md">
-       <!-- <div class="row margin0">
-            <h4>Filters</h4>
-            <span class="button border1px position-absolute right10per" onclick="removeAllFilters()">Clear All</span>
-        </div>-->
+        <!-- <div class="row margin0">
+             <h4>Filters</h4>
+             <span class="button border1px position-absolute right10per" onclick="removeAllFilters()">Clear All</span>
+         </div>-->
 
         <div class="row margin0 padding20-0">
             <div class="col-sm-4 col-xs-4 separator-vertical">
@@ -488,6 +499,23 @@
                         </label>
                     </div>
                     <% }); %>
+                  <!--  <div class="row">
+
+                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
+                        <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                        <div id="slider-range-min1"></div>
+
+                        <% }else{ %>
+
+                        <input type="text" id="amount3" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+                        <div id="slider-range-min3"></div>
+
+                        <% } %>
+                        <% } %>-->
+                    </div>
                 </div>
                 <div id="styleFilterDesc">
                     <% _.each(filterMaster.styles, function(style){ %>
@@ -517,18 +545,12 @@
                     <% }); %>
                 </div>
 
-                <div id="priceRangeFilter">
-                <!--    <div class="row">
-                    <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
-                    <div id="slider-range-min1"></div>
-                        </div>-->
-                </div>
 
 
             </div>
 
-        </div>
+
 
         <div class="row align-center padding10-0">
             <span class="button border1px" onclick="applyFilters()">Apply</span>
@@ -565,94 +587,94 @@
         <div class="container">
             <div class="row">
                 <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                    <% if(filter.selectedCategoryName == 'kitchen'){ %>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="page-pre-tab">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <a href="/living-and-dining-room-designs">
-                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
-                                    </div>
-                                </div>
+                <% if(filter.selectedCategoryName == 'kitchen'){ %>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="page-pre-tab">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <a href="/living-and-dining-room-designs">
+                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="page-next-tab">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <h2><a href="/wardrobe-designs-online"> Wardrobe </a></h2>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <a href="/wardrobe-designs-online">
-                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/wardrobe1.jpg" alt="tab-img">
-                                        </a>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="page-next-tab">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <h2><a href="/wardrobe-designs-online"> Wardrobe </a></h2>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <a href="/wardrobe-designs-online">
+                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/wardrobe1.jpg" alt="tab-img">
+                                </a>
                             </div>
                         </div>
-                    <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="page-pre-tab">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <a href="/living-and-dining-room-designs">
-                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+                <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="page-pre-tab">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <a href="/living-and-dining-room-designs">
+                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="page-next-tab">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <h2><a href="/kitchen-cabinet-design"> Kitchen </a></h2>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <a href="/kitchen-cabinet-design">
-                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/kitchen1.jpg" alt="tab-img">
-                                        </a>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="page-next-tab">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <h2><a href="/kitchen-cabinet-design"> Kitchen </a></h2>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <a href="/kitchen-cabinet-design">
+                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/kitchen1.jpg" alt="tab-img">
+                                </a>
                             </div>
                         </div>
-                    <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="page-next-tab">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <a href="/wardrobe-designs-online">
-                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/wardrobe1.jpg" alt="tab-img">
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <h2><a href="/wardrobe-designs-online"> Wardrobe </a></h2>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+                <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="page-next-tab">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <a href="/wardrobe-designs-online">
+                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/wardrobe1.jpg" alt="tab-img">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <h2><a href="/wardrobe-designs-online"> Wardrobe </a></h2>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="page-next-tab">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <h2><a href="/kitchen-cabinet-design"> Kitchen </a></h2>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <a href="/kitchen-cabinet-design">
-                                            <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/kitchen1.jpg" alt="tab-img">
-                                        </a>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="page-next-tab">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <h2><a href="/kitchen-cabinet-design"> Kitchen </a></h2>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <a href="/kitchen-cabinet-design">
+                                    <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/kitchen1.jpg" alt="tab-img">
+                                </a>
                             </div>
                         </div>
-                    <% } %>
+                    </div>
+                </div>
+                <% } %>
                 <% } %>
             </div>
         </div>
@@ -1196,3 +1218,113 @@
     }
     }
 </style>
+<script>
+    $( function() {
+        $( "#slider-range-min" ).slider({
+          range: "min",
+          value: filter.get('priceRangeS'),
+          min: 1,
+          max: 400000,
+
+         start: function (event, ui) {
+            // code
+        },
+        slide: function( event, ui ) {
+                    $( "#amount" ).val( "Rs " + ui.value );
+        },
+        change: function(event, ui) {
+
+                    $( "#amount" ).val( "Rs " + ui.value );
+
+            var price_rangeSArr = new Array();
+            price_rangeSArr.push(ui.value);
+
+                     filter.set({'priceRangeS': price_rangeSArr});
+            filter.trigger('change');
+
+        }
+        });
+        $( "#amount" ).val( "Rs " + $( "#slider-range-min" ).slider( "value" ) );
+      } );
+      $( function() {
+        $( "#slider-range-min1" ).slider({
+          range: "min",
+          value: filter.get('priceRangeS'),
+          min: 1,
+          max: 400000,
+
+         start: function (event, ui) {
+            // code
+        },
+        slide: function( event, ui ) {
+                    $( "#amount1" ).val( "Rs " + ui.value );
+        },
+        change: function(event, ui) {
+
+                    $( "#amount1" ).val( "Rs " + ui.value );
+
+            var price_rangeSArr = new Array();
+            price_rangeSArr.push(ui.value);
+
+                     filter.set({'priceRangeS': price_rangeSArr});
+            filter.trigger('change');
+
+        }
+        });
+        $( "#amount1" ).val( "Rs " + $( "#slider-range-min" ).slider( "value" ) );
+      } );
+      $( function() {
+        $( "#slider-range-min2" ).slider({
+          range: "min",
+          value: filter.get('priceRangeS'),
+          min: 1,
+          max: 40000,
+
+         start: function (event, ui) {
+            // code
+        },
+        slide: function( event, ui ) {
+                    $( "#amount2" ).val( "Rs " + ui.value );
+        },
+        change: function(event, ui) {
+
+                    $( "#amount2" ).val( "Rs " + ui.value );
+
+            var price_rangeSArr = new Array();
+            price_rangeSArr.push(ui.value);
+
+                     filter.set({'priceRangeS': price_rangeSArr});
+            filter.trigger('change');
+
+        }
+        });
+        $( "#amount2" ).val( "Rs " + $( "#slider-range-min2" ).slider( "value" ) );
+      } );
+      $( function() {
+        $( "#slider-range-min3" ).slider({
+          range: "min",
+          value: filter.get('priceRangeS'),
+          min: 1,
+          max: 40000,
+
+         start: function (event, ui) {
+            // code
+        },
+        slide: function( event, ui ) {
+                    $( "#amount3" ).val( "Rs " + ui.value );
+        },
+        change: function(event, ui) {
+
+                    $( "#amount3" ).val( "Rs " + ui.value );
+
+            var price_rangeSArr = new Array();
+            price_rangeSArr.push(ui.value);
+
+                     filter.set({'priceRangeS': price_rangeSArr});
+            filter.trigger('change');
+
+        }
+        });
+        $( "#amount3" ).val( "Rs " + $( "#slider-range-min3" ).slider( "value" ) );
+      } );
+</script>

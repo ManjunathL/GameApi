@@ -184,7 +184,6 @@ define([
                             }, {
                                 silent: true
                             });
-                            console.log(priceRangeS);
 
                             var styleIds = new Array();
                             that.filter.set({
@@ -420,7 +419,6 @@ define([
                     filteredProducts = that.products.filterByPriceRangeS(filteredProducts, selectedPriceRangeS);
                 }
 
-                console.log("==============" +filteredProducts);
             }
 
             if (selectedStyleIds.length != 0) {

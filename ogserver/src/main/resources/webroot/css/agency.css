@@ -167,7 +167,6 @@ body{
 
 .text-muted {
     color: #777;
-    font-family: 'Lato', sans-serif;
 }
 
 .text-primary {
@@ -5595,8 +5594,9 @@ a.tab-ico {
     font-size: 90px !important;
     /*color: rgba(0, 0, 0, 0.5);*/
     top: 50% !important;
-    left: 50% !important;
+    left: 42% !important;
     position: absolute;
+    margin: 0 auto !important;
 /*
    background:url("https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif") no-repeat center center rgba(0,0,0,0.25) !important;
 */
@@ -5940,7 +5940,10 @@ a.tab-ico {
     bottom: 0px;
 }
 .txt-urstory{
-    color: rgba(241,90,34,1);
+    color:#DE1920;
+}
+.media-txt-title{
+    font-size:20px;
 }
 .media_separator {
     width: 100%;
@@ -6032,6 +6035,7 @@ a.tab-ico {
 }
 
 /* ---- Shobha Landing Page ---- */
+
 
 .shobha_plan_txt{
     padding-bottom: 0px!important;
@@ -7960,63 +7964,53 @@ a#goto-login{
 
 /* Menu Design End */
 
-/* Start Media Landing Page */
-
-.media-banner img{
-    width: 100%;
-}
-.m-story-img{
-    background: #fDfDfd;
-    border: 1px solid #ddd;
-}
-
-.m-thumb-box{
-    height: 110px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-}
-.m-thumb-box .img-thumbnail{
-    border: 0px solid #ddd;
-    pointer: cursor;
-}
-
-.hide-bullets {
-    list-style:none;
-    margin-left: -40px;
-    margin-top:20px;
-}
-#myCarousel .carousel-control.left{
-    color: #333;
-    background: transparent;
-}
-#myCarousel .carousel-control.right{
-    color: #333;
-    background: transparent;
-}
-.show-img {
-    position: relative;
-    float:left;
-    margin: 20px 0px;
-}
-.show-img:hover img{
-    opacity:0.8;
-}
-.show-img:hover a {
-    display: block;
-}
-.show-img a {
+/* Banner button */
+.enquire-btn-div{
     position:absolute;
-    display:none;
+    left: 8%;
+    top: 0%;
 }
-.show-img a.update {
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+.enquire-btn-img{
+    width:70%;
 }
-.media-txt-title{
-    font-size: 24px;
-    text-transform: inherit;
+.btn-enquire{
+  background-color: #380002!important;
+  color:#ffffff!important;
+  border-radius:0px!important;
+  font-weight: bold;
+  font-size: 18px;
 }
-/* End Media landing Page */
+.btn-enquire:hover,
+.btn-enquire:focus,
+.btn-enquire:active{
+  background-color: #380002!important;
+  color: #ffffff!important;
+  cursor:pointer;
+}
+.fa-play-circle{
+    font-size:18px;
+    padding-left:5%;
+    color:#f1591f;
+}
+
+@media screen and (max-width: 767px) {
+    .enquire-btn-div {
+        position: absolute;
+        left: 30%;
+        top: 0%;
+    }
+    .enquire-btn-img{
+        width:85%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .enquire-btn-div {
+        position: absolute;
+        left: 16%;
+        top: 0%;
+    }
+    .enquire-btn-img{
+        width:85%;
+    }
+}
