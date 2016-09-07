@@ -48,7 +48,7 @@ public class BlogHandler extends AbstractRouteHandler
     }
         else{
 
-        /*this.fetchProductsAndSendb(context, "blog.select.all", "[]");*/
+        this.fetchProductsAndSendb(context, "blog.select.all", null);
        }
 
     }
