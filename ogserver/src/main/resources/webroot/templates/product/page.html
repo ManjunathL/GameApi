@@ -254,7 +254,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                <% _.each(filterMaster.price_ranges, function(range){ %>
+                               <!-- <% _.each(filterMaster.price_ranges, function(range){ %>
                                 <li class="
                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
@@ -277,23 +277,35 @@
                                         <%= range.name %>
                                     </a>
                                 </li>
-                                <% }); %>
-                              <!--  <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                                <% }); %>-->
+                                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                                 <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
                                 <li>
                                     <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-
+                                    <div class="price-slide">
+                                        <div class="slider-ioc">  </div>
                                     <div id="slider-range-min"></div>
+                                        </div>
+                                    <div class="price-tag">
+                                        <div class="pull-left"> Rs 1 </div>
+                                        <div class="pull-right"> Rs 400000 </div>
+                                    </div>
                                 </li>
 
                                 <% }else{ %>
                                 <li>
                                     <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
-
+                                    <div class="price-slide">
+                                        <div class="slider-ioc">  </div>
                                     <div id="slider-range-min2"></div>
+                                        </div>
+                                    <div class="price-tag">
+                                        <div class="pull-left"> Rs 1</div>
+                                        <div class="pull-right"> Rs 40000 </div>
+                                    </div>
                                 </li>
                                 <% } %>
-                                <% } %>-->
+                                <% } %>
                             </ul>
                         </li>
                         <% } %>
@@ -474,7 +486,7 @@
 
                 <div id="priceFilterDesc">
 
-                    <% _.each(filterMaster.price_ranges, function(range){ %>
+                    <!--<% _.each(filterMaster.price_ranges, function(range){ %>
                     <div class="row separator-horizontal
                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
@@ -498,23 +510,32 @@
                             <%= range.name %>
                         </label>
                     </div>
-                    <% }); %>
-                  <!--  <div class="row">
+                    <% }); %>-->
+                    <div class="row separator-horizontal">
 
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                         <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
                         <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
-
+                        <div class="price-slide">
+                            <div class="slider-ioc"></div>
                         <div id="slider-range-min1"></div>
-
+                        </div>
+                        <div class="price-tag">
+                            <div class="pull-left"> Rs 1 </div>
+                            <div class="pull-right"> Rs 400000  </div>
+                        </div>
                         <% }else{ %>
-
                         <input type="text" id="amount3" readonly style="border:0; color:#f6931f; font-weight:bold;">
-
+                        <div class="price-slide">
+                            <div class="slider-ioc"></div>
                         <div id="slider-range-min3"></div>
-
+                    </div>
+                    <div class="price-tag">
+                        <div class="pull-left"> Rs 1 </div>
+                        <div class="pull-right"> Rs 40000 </div>
+                    </div>
                         <% } %>
-                        <% } %>-->
+                        <% } %>
                     </div>
                 </div>
                 <div id="styleFilterDesc">
@@ -581,7 +602,7 @@
 
     </div>
     <!-- Filter Menu Popup End -->
-
+</div>
     <!-- start menu switch -->
     <div class="bg-color-white">
         <div class="container">
@@ -1284,11 +1305,22 @@
             // code
         },
         slide: function( event, ui ) {
+
+
                     $( "#amount2" ).val( "Rs " + ui.value );
+
+                //$("#slider-range-min2").find(".ui-slider-handle").text(ui.value);
+
+
+
         },
         change: function(event, ui) {
 
                     $( "#amount2" ).val( "Rs " + ui.value );
+
+                    //$("#slider-range-min2").find(".ui-slider-handle").text(ui.value);
+
+
 
             var price_rangeSArr = new Array();
             price_rangeSArr.push(ui.value);
@@ -1298,6 +1330,7 @@
 
         }
         });
+
         $( "#amount2" ).val( "Rs " + $( "#slider-range-min2" ).slider( "value" ) );
       } );
       $( function() {
