@@ -58,7 +58,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             if (StringUtils.isNonEmpty(credentials)) {
                 final String[] values = credentials.split(":", 2);
                 LOG.debug("values :" + credentials);
-                if (values[0].equals("game") && values[1].equals("MyGubbi"))
+                if (values[0].equals("game") && values[1].equals("Mygubbi"))
                     return true;
             }
         }
