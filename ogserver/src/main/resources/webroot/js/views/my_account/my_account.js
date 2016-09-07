@@ -59,6 +59,10 @@ define([
                 "dob": $('#user_dob').val(),
                 "phone": $('#user_phone').val(),
                 "address": $('#user_address').val(),
+                "occupation": $('#occupation').val(),
+                "hobbies": $('#hobbies').val(),
+                "interest": $('#interest').val(),
+                "website": $('#website').val(),
                 "city": $('#user_city').val(),
                 "state": $('#user_state').val(),
                 "pinCode": $('#user_pin_code').val()

@@ -12,10 +12,10 @@
                                 class="img-responsive"
                                 id="user_profile_image"
                                 alt="User Profile Image">
-                        <a class="edit_mode">
+                        <!--<a class="edit_mode">
                             <h4>Change Profile Image</h4>
                             <input type="file" id="profile-file-input">
-                        </a>
+                        </a>-->
                     </div>
                 </div>
 
@@ -120,6 +120,82 @@
                                             name="address"
                                             maxlength="250"
                                             value="<%= userProfile ? userProfile.address : ''%>"
+                                    />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>Occupation :</p>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <p class="view_mode"><%= userProfile ? userProfile.occupation : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="text"
+                                            id="occupation"
+                                            class="form-control"
+                                            name="address"
+                                            maxlength="250"
+                                            value="<%= userProfile ? userProfile.occupation : ''%>"
+                                    />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>Hobbies :</p>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <p class="view_mode"><%= userProfile ? userProfile.hobbies : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="text"
+                                            id="hobbies"
+                                            class="form-control"
+                                            name="address"
+                                            maxlength="250"
+                                            value="<%= userProfile ? userProfile.hobbies : ''%>"
+                                    />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>Interest :</p>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <p class="view_mode"><%= userProfile ? userProfile.interest : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="text"
+                                            id="interest"
+                                            class="form-control"
+                                            name="address"
+                                            maxlength="250"
+                                            value="<%= userProfile ? userProfile.interest : ''%>"
+                                    />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <p>Website :</p>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <p class="view_mode"><%= userProfile ? userProfile.website : ''%></p>
+                                <p class="edit_mode form-group">
+                                    <input
+                                            type="text"
+                                            id="website"
+                                            class="form-control"
+                                            name="address"
+                                            maxlength="250"
+                                            value="<%= userProfile ? userProfile.website : ''%>"
                                     />
                                 </p>
                             </div>
