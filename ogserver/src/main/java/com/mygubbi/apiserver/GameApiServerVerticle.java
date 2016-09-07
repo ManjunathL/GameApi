@@ -41,7 +41,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         Router router = Router.router(VertxInstance.get());
 
         this.setupApiHandler(router);
-        this.setupStaticHandler(router);
+        //this.setupStaticHandler(router);
 
         int httpsPort = ConfigHolder.getInstance().getInteger("game_https_port", 1443);
         HttpServerOptions options = this.getHttpsServerOptions();
@@ -85,6 +85,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         {
             LOG.info("Cache handler not registered.");
         }
+        router.mountSubRouter("/abcd/crm", new CrmApiHandler(VertxInstance.get()));
 
         new ConfiguredRestApiHandler().setup(router);
 
@@ -96,7 +97,6 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/module", new ProposalModuleHandler(VertxInstance.get()));
 //        router.mountSubRouter("/gapi/catalogue", new ProductHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
-        router.mountSubRouter("/gapi/crm", new CrmApiHandler(VertxInstance.get()));
 
         //LOG.info("Routes:" + router.getRoutes().toString());
     }

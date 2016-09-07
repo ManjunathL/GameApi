@@ -324,4 +324,15 @@ CREATE TABLE accpack_addon_map(
   KEY code_key (apcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='addon accessory map';
 
+DROP TABLE IF EXISTS module_category_master;
+CREATE TABLE module_category_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  moduleType varchar(4) NOT NULL,
+  moduleCategory varchar(64) NOT NULL,
+  moduleCode varchar(32) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (moduleCode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module Category Master';
+
 
