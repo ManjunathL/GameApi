@@ -45,7 +45,7 @@ define([
             'terms(/)': 'terms',
             'privacy-policy(/)': 'privacypolicy',
             'mygubbi-difference(/)': 'mygubbidiff',
-            'stories(/)': 'stories',
+            'stories-:blogcategory(/)': 'stories',
             'story-:name(/)': 'story',
             'thankyou-:page(/)':'thankyou',
             'lp(/)':'landingpage',
@@ -357,10 +357,17 @@ define([
                             VM.create(VM.MGDIFF, MyGubbiDiffPage).render();
                         });
                     });
-                    router.on('route:stories', function(actions) {
+                    router.on('route:stories', function(blogcategory) {
+
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
                         require(['/js/views/story/stories.js'], function(StoriesPage) {
-                            VM.create(VM.STORIES, StoriesPage).render();
+
+                             var options = {
+                                model: {
+                                    "blogcategory": blogcategory
+                                }
+                            };
+                            VM.create(VM.STORIES, StoriesPage, options).render();
                         });
                     });
                     router.on('route:story', function(name) {

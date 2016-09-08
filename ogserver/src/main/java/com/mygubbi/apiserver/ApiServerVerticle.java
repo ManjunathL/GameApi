@@ -144,6 +144,7 @@ public class ApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/api/relatedproducts", new RelatedProductHandler(VertxInstance.get()));
         router.mountSubRouter("/api/appliances", new ApplianceHandler(VertxInstance.get()));
         router.mountSubRouter("/api/stories", new StoryHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/blogs", new BlogHandler(VertxInstance.get()));
         router.mountSubRouter("/api/es", new ProductSearchHandler(VertxInstance.get()));
         router.mountSubRouter("/api/pre.search", new PreSearchHandler(VertxInstance.get()));
         router.mountSubRouter("/api/auto.search", new AutoSearchHandler(VertxInstance.get()));

@@ -18,9 +18,16 @@ define([
         render: function() {
 
             var that = this;
-
+            var selectedBlogsCategory = this.model.blogcategory;
+            console.log(selectedBlogsCategory);
             this.story.fetch({
-                success: function() {
+                 data: {
+                     "tags": selectedBlogsCategory
+                 },
+                success: function(response) {
+
+                    console.log(response);
+                    //return false;
                     that.fetchStoriesAndRender();
                     //this.ready();
                 },
