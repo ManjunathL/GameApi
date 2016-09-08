@@ -542,68 +542,67 @@ ul, ol{
     text-decoration: none;
     background-color: #fff;
 }
-  .nav>li>a{
-      padding:10px 10px!important;
-  }
-  #nav>li>a {
+.nav>li>a{
+    padding:10px 10px!important;
+}
+#nav>li>a {
     padding: 5px 11px !important;
     border-right: 1px solid #ddd;
     cursor: pointer;
     background-color: #fff;
     font-size: 15px;
-  }
-  .last-item{
+}
+.last-item{
    border-right:0px solid #ddd!important;
-  }
+}
 
-  .menu-mygubbi{
-      width:100%;
-      margin: 0px auto;
-  }
-  .navbar-center{
-      float: none;
-      position: relative;
-      text-align: center;
-      margin: 5px auto 8px;
-  }
-  .navbar-center li{
-      float:none;
-      text-rendering: optimizeLegibility;
-      display:inline-block;
-      margin: 0px auto;
-
-  }
-  @media (max-width: 767px) {
-        #nav>li>a{
-            padding: 5px 5px!important;
-            border-right: 0px solid #ddd;
-            cursor: pointer;
-            background-color: #fff;
-            width: 100%;
-        }
-  }
-  @media (max-width: 992px) {
-      .mob-container{
+.menu-mygubbi{
+    width:100%;
+    margin: 0px auto;
+}
+.navbar-center{
+    float: none;
+    position: relative;
+    text-align: center;
+    margin: 5px auto 8px;
+}
+.navbar-center li{
+    float:none;
+    text-rendering: optimizeLegibility;
+    display:inline-block;
+    margin: 0px auto;
+}
+@media (max-width: 767px) {
+    #nav>li>a{
+        padding: 5px 5px!important;
+        border-right: 0px solid #ddd;
+        cursor: pointer;
+        background-color: #fff;
+        width: 100%;
+    }
+}
+    @media (max-width: 992px) {
+        .mob-container{
             width: 100%;
             padding: 0px;
             margin: 0px;
-      }
-      .gubbi-list-mob {
-          width: 100%;
-          text-align: left;
-          padding: 5px 0px;
-      }
-  }
+        }
+        .gubbi-list-mob {
+            width: 100%;
+            text-align: left;
+            padding: 5px 0px;
+        }
+    }
 
-  .social-menu-lnk{
-      color: rgba(0,0,0,0.6);
-      font-size:16px;
-      margin-top: 5px;
-  }
-  .
-  /* Menu section End */
+.social-menu-lnk{
+    color: rgba(0,0,0,0.6);
+    font-size:16px;
+    margin-top: 5px;
+}
 
-  /* Main Image Section */
+/* Menu section End */
+
+/* Main Image Section */
   .width100{
       width: 100%!important;
   }
@@ -873,7 +872,34 @@ ul, ol{
       background: rgba(241,90,34,1);
       min-height: 420px;
    }
-
+   /* Start contact us form code By  nagmani on 7th sep 2016 */
+   .contact-light-black-bg{
+        background: rgba(0,0,0,.7);
+        min-height: 420px;
+        color: #ffffff;
+        padding: 70px 15px 20px;
+   }
+    .call-us {
+        margin: 60px 0px 0px;
+    }
+    .contact-phone{
+        color: #ffffff !important;
+        font-size: 1.8em !important;
+        line-height: 1.8em !important;
+    }
+    .contact-circle{
+        background: rgba(241,90,34,1);
+        color: #ffffff;
+        text-align: center;
+        border-radius: 50%;
+        width: 50px;
+        height:50px;
+        margin: 0px auto 20px;
+    }
+    .contact-no{
+        font-size: 20px;
+    }
+    /* End contact us form code By nagmani on 7th sep 2016 */
    .contact-form-bg{
       /*background-color: rgba(0,0,0,0.6);*/
       margin: 0px!important;
@@ -973,6 +999,16 @@ ul, ol{
           min-height:100px;
           width: 100%;
       }
+      /*Start contact us form media code By Nagmani on 7th sep 2016*/
+      .contact-light-black-bg{
+           min-height:100px;
+           width: 100%;
+           padding: 20px;
+     }
+     .call-us {
+         margin: 10px 0px 0px;
+     }
+     /*End contact us form media code By Nagmani on 7th sep 2016*/
       .thought-txt h1 {
           text-transform: none!important;
           font-weight: 400!important;
@@ -5939,17 +5975,37 @@ a.tab-ico {
     left: 0px;
     bottom: 0px;
 }
+/* Start Media page code by Nagmani 2nd Sep 2016 */
 .txt-urstory{
-    color:#DE1920;
+    color: rgba(241,90,34,1);
 }
 .media-txt-title{
-    font-size:20px;
+    font-size: 24px;
+    text-transform: inherit;
 }
 .media_separator {
     width: 100%;
     margin: 30px auto 0px;
     border-bottom: 1px solid #CCC;
 }
+.btn-media {
+    color: #fff;
+    background: rgba(241,90,34,1);
+    border-color: rgba(241,90,34,1);
+    border-radius: 0px;
+    text-shadow: 0px 0px 0px #fff;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-style: italic;
+}
+.btn-media:hover,
+.btn-media:active,
+.btn-media:focus{
+    color: #ffffff;
+    background: rgba(241,90,34,0.9);
+    border-color: rgba(241,90,34,0.9);
+}
+/* End media page code bt Nagmani 2nd sep 2016*/
 .vertline:after {
      content:"";
      position: absolute;
@@ -7697,25 +7753,28 @@ width:14% !important;
         position: absolute;
         width: 32% !important;
      }
+/* Start Service icon code by Nagmani 7th Sep 2016 */
 .kitchen-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
 
 }
+
 .wardrobe-icon{
-width: 29% !important;
-border-right: solid 2px #ccc;
+    width: 32% !important;
+    border-right: solid 2px #ccc;
 }
 .otherunit-icon{
-width: 32% !important;
-
+    width: 32% !important;
 }
+/* End Service icon code by Nagmani 7th Sep 2016 */
 .font-weight600{
- font-weight: 600 !important;
+    font-weight: 600 !important;
 }
 .padding50-94{
-padding: 50px 94px;
+    padding: 50px 94px;
 }
+
 
 .testimonials-carousel .carousel-caption{
     position: absolute;
@@ -7735,9 +7794,11 @@ padding: 50px 94px;
     font-family: 'Raleway', sans-serif;
     margin: 0px;
 }
+
 .testimonials-carousel .carousel-indicators{
     bottom: 90px;
 }
+
 .carousel-inner{
     margin: 0px !important;
 }
@@ -7749,7 +7810,17 @@ padding: 50px 94px;
     min-height: 170px;
     line-height: 150%;
 }
+/* Start process text code by Nagmani 7th Sep 2016 */
+.text-process{
+    text-align: left;
+}
 
+@media screen and (max-width: 992px) {
+    .text-process{
+        text-align: center;
+    }
+}
+/* End process text code by Nagmani 7th Sep 2016 */
 #form-container-content .form-elements input {
     border-radius: 0px !important;
  }
@@ -7856,11 +7927,25 @@ padding: 50px 94px;
         padding-bottom: 10px!important;
     }
 }
-
+/* By Nagmani on 7th Sep 2016 */
 .open-contact-section{
-    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473231431/home/new_design/gubbi-map.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 410px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
 }
-
+/* End By Nagmani on 7th Sep 2016 */
 a#goto-login{
     color:#f1591f!important;
 }
@@ -7963,6 +8048,61 @@ a#goto-login{
 }
 
 /* Menu Design End */
+
+/* Start Media Landing Page by nagmani on 2nd sep */
+.media-banner img{
+    width: 100%;
+}
+.m-story-img{
+    background: #fDfDfd;
+    border: 1px solid #ddd;
+}
+
+.m-thumb-box{
+    height: 110px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+.m-thumb-box .img-thumbnail{
+    border: 0px solid #ddd;
+    pointer: cursor;
+}
+
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+#myCarousel .carousel-control.left{
+    background: transparent;
+}
+#myCarousel .carousel-control.right{
+    background: transparent;
+}
+.show-img {
+    position: relative;
+    float:left;
+    margin: 20px 0px;
+}
+.show-img:hover img{
+    opacity:0.8;
+}
+.show-img:hover a {
+    display: block;
+}
+.show-img a {
+    position:absolute;
+    display:none;
+}
+.show-img a.update {
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+/* End Media landing Page  by nagmani on 2nd sep */
 
 /* Banner button */
 .enquire-btn-div{
