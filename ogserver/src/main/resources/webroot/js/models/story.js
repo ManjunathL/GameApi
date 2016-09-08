@@ -6,7 +6,7 @@ define([
     'backbone'
 ], function($, Backbone){
     var Story = Backbone.Model.extend({
-        urlRoot:restBase + '/api/stories/',
+        urlRoot:restBase + '/api/blogs/',
         defaults: {
             id: ''
         }
