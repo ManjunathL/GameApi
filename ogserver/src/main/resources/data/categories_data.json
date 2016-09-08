@@ -28,6 +28,21 @@
         "name": "Sideboard",
         "id": "sideboard",
         "code": "sideboard"
+      },
+      {
+        "name": "Study Table",
+        "id": "studytable",
+        "code": "studytable"
+      },
+      {
+        "name": "Side Table",
+        "id": "sidetable",
+        "code": "sidetable"
+      },
+      {
+        "name": "Book Rack",
+        "id": "bookrack",
+        "code": "bookrack"
       }
     ]
   },
@@ -71,21 +86,6 @@
         "name": "Wardrobe",
         "id": "wardrobe",
         "code": "wardrobe"
-      },
-      {
-        "name": "Study Table",
-        "id": "studytable",
-        "code": "studytable"
-      },
-      {
-        "name": "Side Table",
-        "id": "sidetable",
-        "code": "sidetable"
-      },
-      {
-        "name": "Book Rack",
-        "id": "bookrack",
-        "code": "bookrack"
       }
     ]
   }
