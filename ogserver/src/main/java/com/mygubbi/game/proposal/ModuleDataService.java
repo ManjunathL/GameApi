@@ -7,6 +7,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.game.proposal.price.ICostComponent;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -15,10 +16,7 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ModuleDataService extends AbstractVerticle
@@ -370,6 +368,7 @@ public class ModuleDataService extends AbstractVerticle
     {
         return this.moduleComponentsMap.get(mgCode);
     }
+
 
 /*
     public Collection<AccHwComponent> getAccessoryAddons(String accessoryCode)

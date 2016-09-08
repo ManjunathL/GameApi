@@ -1,7 +1,8 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
+import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -11,11 +12,9 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Sunil on 08-01-2016.
@@ -112,6 +111,32 @@ public class ModulePricingService extends AbstractVerticle
         }
         this.sendResponse(message, modulePriceHolder, productModule);
     }
+
+    public Collection<ICostComponent> getModuleComponents(ProductModule productModule)
+    {
+        Module mgModule = ModuleDataService.getInstance().getModule(productModule.getMGCode());
+        Collection<ModuleComponent> components = ModuleDataService.getInstance().getModuleComponents(productModule.getMGCode());
+
+        ShutterFinish carcassFinish = ModuleDataService.getInstance().getFinish(productModule.getCarcassCode(), productModule.getFinishCode());
+        RateCard carcassRateCard = RateCardService.getInstance().getRateCard(productModule.getCarcassCode(), RateCard.CARCASS_TYPE);
+        RateCard carcassFinishRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE);
+
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(productModule.getFinishCode());
+        RateCard shutterRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE);
+
+        List<ICostComponent> costComponents = new ArrayList<>();
+
+        for (ModuleComponent moduleComponent : components)
+        {
+            if (moduleComponent.isCarcass())
+            {
+                costComponents.add(new ModulePanel());
+            }
+        }
+
+        return costComponents;
+    }
+
 
     private void calculateComponentCost(ProductModule productModule, ModulePriceHolder modulePriceHolder, ShutterFinish shutterFinish, RateCard carcassRateCard,
                                         RateCard shutterRateCard, IModuleComponent component)

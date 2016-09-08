@@ -3,6 +3,7 @@ package com.mygubbi.game.proposal;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.game.proposal.model.AccessoryPack;
+import com.mygubbi.game.proposal.price.ModulePricingService;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;

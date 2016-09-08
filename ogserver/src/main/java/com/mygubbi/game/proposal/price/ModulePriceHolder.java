@@ -1,4 +1,4 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.game.proposal.model.Module;
 import com.mygubbi.game.proposal.model.RateCard;

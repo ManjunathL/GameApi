@@ -15,10 +15,19 @@ public class Module
     private static final String HEIGHT = "height";
     private static final String DESCRIPTION = "description";
     private static final String IMAGE_PATH = "imagePath";
+    private static final String MODULE_CATEGORY = "moduleCategory";
+    private static final String MODULE_TYPE = "moduleType";
+    private static final String PRODUCT_CATEGORY = "productCategory";
+
+    private static final String STANDARD_MODULE = "S";
+    private static final String CUSTOM_MODULE = "C";
 
     private String code;
     private String description;
     private String imagePath;
+    private String moduleCategory;
+    private String moduleType;
+    private String productCategory;
     private int height;
     private int depth;
     private int width;
@@ -36,6 +45,33 @@ public class Module
         this.setWidth(json.getInteger(WIDTH));
         this.setDescription(json.getString(DESCRIPTION));
         this.setImagePath(json.getString(IMAGE_PATH));
+        this.setModuleCategory(json.getString(MODULE_CATEGORY));
+        this.setModuleType(json.getString(MODULE_TYPE));
+        this.setProductCategory(json.getString(PRODUCT_CATEGORY));
+    }
+
+    public String getModuleCategory() {
+        return moduleCategory;
+    }
+
+    public void setModuleCategory(String moduleCategory) {
+        this.moduleCategory = moduleCategory;
+    }
+
+    public String getModuleType() {
+        return moduleType;
+    }
+
+    public void setModuleType(String moduleType) {
+        this.moduleType = moduleType;
+    }
+
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
     }
 
     public String getCode()
@@ -119,6 +155,13 @@ public class Module
     }
 
 
+    public boolean isStandard() {
+        return this.getModuleType().equals(STANDARD_MODULE);
+    }
+
+    public boolean isCustomized() {
+        return this.getModuleType().equals(CUSTOM_MODULE);
+    }
 }
 
 

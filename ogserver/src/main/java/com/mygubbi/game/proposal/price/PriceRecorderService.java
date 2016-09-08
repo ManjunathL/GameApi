@@ -1,4 +1,4 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.price;
 
 import io.vertx.core.AbstractVerticle;
 

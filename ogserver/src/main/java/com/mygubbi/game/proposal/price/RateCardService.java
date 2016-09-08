@@ -1,4 +1,4 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.common.EncryptedFileHandler;
 import com.mygubbi.common.StringUtils;
