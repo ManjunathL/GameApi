@@ -169,21 +169,36 @@ define([
                                 silent: true
                             });
 
-                            var priceRangeIds = new Array();
+                           /* var priceRangeIds = new Array();
+
                             that.filter.set({
                                 'priceRangeIds': priceRangeIds
                             }, {
                                 silent: true
-                            });
+                            });*/
 
-                            var priceRangeS = new Array();
-                            priceRangeS.push(200000);
+                           /* var priceRangeS = new Array();
+
+                            priceRangeS.push( 200000);
+
                             that.filter.set({
 
                                 'priceRangeS': priceRangeS
+
                             }, {
                                 silent: true
                             });
+                            var priceRangeS1 = new Array();
+
+                              priceRangeS1.push( 500000);
+
+                              that.filter.set({
+
+                             'priceRangeS1': priceRangeS1
+
+                               }, {
+                               silent: true
+                              });*/
 
                             var styleIds = new Array();
                             that.filter.set({
@@ -285,7 +300,7 @@ define([
                 silent: true
             });
 
-            var priceRangeIds = new Array();
+           /* var priceRangeIds = new Array();
             that.filter.set({
                 'priceRangeIds': priceRangeIds
             }, {
@@ -296,7 +311,7 @@ define([
                 'priceRangeS': priceRangeS
             }, {
                 silent: true
-            });
+            });*/
             var styleIds = new Array();
             that.filter.set({
                 'styleIds': styleIds
@@ -402,7 +417,7 @@ define([
             }
 
 
-            if (selectedPriceRangeIds.length != 0) {
+           /* if (selectedPriceRangeIds.length != 0) {
                 if (typeof(filteredProducts) == 'undefined') {
                     filteredProducts = that.products.toJSON();
                     filteredProducts = that.products.filterByPriceRange(filteredProducts, selectedPriceRangeIds);
@@ -419,7 +434,7 @@ define([
                     filteredProducts = that.products.filterByPriceRangeS(filteredProducts, selectedPriceRangeS);
                 }
 
-            }
+            }*/
 
             if (selectedStyleIds.length != 0) {
                 if (typeof(filteredProducts) == 'undefined') {
