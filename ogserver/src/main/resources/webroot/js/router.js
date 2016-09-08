@@ -235,13 +235,13 @@ define([
                 routeSubCategory('Wardrobe', 'bedroom');
             });
             router.on('route:studyTableB', function(actions){
-                routeSubCategory('Study Table', 'bedroom');
+                routeSubCategory('Study Table', 'living & dining');
             });
             router.on('route:sideTableB', function(actions){
-                routeSubCategory('Side Table', 'bedroom');
+                routeSubCategory('Side Table', 'living & dining');
             });
             router.on('route:bookShelfB', function(actions){
-                routeSubCategory('Book Rack', 'bedroom');
+                routeSubCategory('Book Rack', 'living & dining');
             });
             router.on('route:kitchens', function(actions){
                 routeCategory('kitchen');
