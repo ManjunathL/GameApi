@@ -494,7 +494,6 @@
 
 
 <!--- Brand Section -->
-
 <section class="padding50-15 bg-color-white">
     <div class="container flip-container">
         <div class="row">
@@ -502,25 +501,65 @@
                 <h2 class="section-heading text-muted"> We work with </h2>
             </div>
         </div>
-        <div class="brand-container">
+        <div class="hidden-xs hidden-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12"></div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
+                        <img class="cld-responsive width100 padding-bottom10" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/century.jpg" alt="Consultation & Planning">
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
+                        <img class="cld-responsive width100 padding-bottom10" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/hafele.jpg" alt="Consultation & Planning">
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
+                        <img class="cld-responsive width100 padding-bottom10" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/Hettich.jpg" alt="Consultation & Planning">
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
+                        <img class="cld-responsive width100 padding-bottom10" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/greenlam.jpg" alt="Consultation & Planning">
+                    </div>
+                    <div class="col-xs-3"></div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
+                        <img class="cld-responsive width100 padding-bottom10" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/Merino.jpg" alt="Consultation & Planning">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden-lg hidden-md">
             <div class="row">
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
-                    <img class="cld-responsive width100 thumbnail" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470921332/brand/Century_03.jpg" alt="Consultation & Planning">
+                <div class="controls center col-xs-1 margin-top40">
+                    <button class="btn brand-prev disabled" disabled="">
+                        <img src="<%= imgBase + '/home/dark_arr_left.png'%>" class="arr_test" alt="...">
+                    </button>
                 </div>
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
-                    <img class="cld-responsive width100 thumbnail" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470381489/brand/avter_br.png" alt="Consultation & Planning">
+
+                <div class="frame col-xs-10 overflow-hidden" id="brand-frame">
+                    <ul class="clearfix slidee" style="transform: translateZ(0px) translateX(0px); width: 3480px;">
+                        <li class="brand-sly-content bg-color-brand">
+                            <img src="<%= imgBase + '/brand/Century_03.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content bg-color-brand">
+                            <img src="<%= imgBase + '/brand/Haffle.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content bg-color-brand">
+                            <img src="<%= imgBase + '/brand/Hettich.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content bg-color-brand">
+                            <img src="<%= imgBase + '/brand/grenlam.png'%>" alt="...">
+                        </li>
+
+                        <li class="brand-sly-content bg-color-brand">
+                            <img src="<%= imgBase + '/brand/Merino.png'%>" alt="...">
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
-                    <img class="cld-responsive width100 thumbnail" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470921333/brand/Hafele_03.jpg" alt="Consultation & Planning">
-                </div>
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
-                    <img class="cld-responsive width100 thumbnail" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470921333/brand/Hettich_03.jpg" alt="Consultation & Planning">
-                </div>
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
-                    <img class="cld-responsive width100 thumbnail" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470921333/brand/greenlam_03.jpg" alt="Consultation & Planning">
-                </div>
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
-                    <img class="cld-responsive width100 thumbnail" data-src="https://res.cloudinary.com/mygubbi/image/upload/v1470921333/brand/merino_03.jpg" alt="Consultation & Planning">
+
+                <div class="controls center col-xs-1 margin-top40">
+                    <button class="btn brand-next">
+                        <img src="<%= imgBase + '/home/dark_arr_right.png'%>" class="arr_test" alt="...">
+                    </button>
                 </div>
             </div>
         </div>
