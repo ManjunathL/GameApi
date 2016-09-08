@@ -4,11 +4,10 @@ define([
     'backbone',
     'bootstrap',
     'cloudinary_jquery',
-    'text!/templates/consult/consult.html',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js',
-    'css!/css/consult.css'
+    'text!templates/consult/consult.html',
+    'mgfirebase',
+    'consultutil',
+    'analytics'
 ], function($, _, Backbone, Bootstrap, CloudinaryJquery, consultTemplate, MGF, ConsultUtil, Analytics) {
     var ConsultView = Backbone.View.extend({
         el: '.page',

@@ -1,4 +1,4 @@
-define(['/js/kapture.js', '/js/mgfirebase.js'], function(Kapture, MGF) {
+define(['kapture', 'mgfirebase'], function(Kapture, MGF) {
 
     return {
         submit: function(name, email, phone, query, floorplan, propertyName, projectName, cityName) {

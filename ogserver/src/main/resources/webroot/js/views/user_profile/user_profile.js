@@ -7,10 +7,10 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    '/js/mgfirebase.js',
-    '/js/analytics.js',
-    'text!/templates/user_profile/user_profile.html',
-    '/js/views/view_manager.js'
+    'mgfirebase',
+    'analytics',
+    'text!templates/user_profile/user_profile.html',
+    'views/view_manager'
 ], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, UserProfileTemplate, VM) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
