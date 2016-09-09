@@ -177,7 +177,7 @@ define([
                             });
 
                             var priceRangeS = new Array();
-                            priceRangeS.push(100000);
+                            priceRangeS.push(0);
                             that.filter.set({
 
                                 'priceRangeS': priceRangeS
@@ -185,7 +185,7 @@ define([
                                 silent: true
                             });
                             var priceRangeS1 = new Array();
-                                                        priceRangeS1.push(200000);
+                               priceRangeS1.push(200000);
                                                         that.filter.set({
 
                                                             'priceRangeS1': priceRangeS1

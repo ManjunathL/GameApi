@@ -88,6 +88,13 @@ define([
                     return that.productInDefaultPriceRanges1(product, selectedPriceRangeS1);
                 }), function (product) {return product;});
         },
+filterByPriceRangeS4:function (filteredProducts,selectedPriceRangeS4){
+
+                var that = this;
+                return _.map(filteredProducts.filter(function(product){
+                    return that.productInDefaultPriceRanges4(product, selectedPriceRangeS4);
+                }), function (product) {return product;});
+        },
 			filterByStyle:function (filteredProducts,selectedStyleIds){
 				var that = this;
 				return _.map(filteredProducts.filter(function(product){
