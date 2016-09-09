@@ -8104,3 +8104,71 @@ a#goto-login{
     background:#EEEFF1;
 }
 /* End By Nagmani on 7th Sep 2016 */
+
+/* Price Slider */
+
+ .price-slide{
+		margin: 0px 10px;
+	 }
+	 .price-tag{
+		margin: 10px auto;
+	 }
+	 .pull-left{
+		float: left;
+	 }
+	 .pull-right{
+		float: right;
+	 }
+	.slider-ioc {
+		background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473160824/product_collection/slider-icon.png");
+		background-repeat: no-repeat;
+		float: left;
+		width: 16px;
+		height: 16px;
+		z-index: 99;
+		position: absolute;
+		margin: -4px 0px 0px -10px;
+	}
+	.ui-slider-horizontal{
+		height: 0.4em;
+	}
+	.ui-state-default,
+	.ui-widget-content
+	.ui-state-default,
+	.ui-widget-header
+	.ui-state-default,
+	.ui-button,
+	html .ui-button.ui-state-disabled:hover,
+	html .ui-button.ui-state-disabled:active {
+		border: 1px solid #ff8900;
+		background: #ff8900;
+		font-weight: normal;
+		color: #454545;
+	}
+	.ui-slider .ui-slider-handle {
+		position: absolute;
+		z-index: 999;
+		width: .9em;
+		height: .9em;
+		cursor: default;
+		-ms-touch-action: none;
+		touch-action: none;
+	}
+	.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+		border-top-left-radius: 50px;
+	}
+
+	.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+		border-top-right-radius: 50px;
+	}
+	.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+		border-bottom-left-radius: 50px;
+	}
+	.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+		border-bottom-right-radius: 50px;
+	}
+	.ui-widget.ui-widget-content {
+		border: 1px solid #e9e9e9;
+	}
+
+/* End of Price Slider */
