@@ -255,6 +255,9 @@
         margin-bottom: 0;
         max-height: 105px;
     }
+    .fact-des{
+        font-size:12px;
+    }
 }
 
 .section-portfolio{
@@ -267,5 +270,10 @@
     padding: 10px 0px 5px;
     background: #f1591f;
 }
+
+.img-centered {
+  margin: 0 auto;
+}
+
 
 /* ----- End Festive Page CSS ------ */
