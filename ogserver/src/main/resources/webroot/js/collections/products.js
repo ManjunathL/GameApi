@@ -76,11 +76,25 @@ define([
 		},
 		filterByPriceRangeS:function (filteredProducts,selectedPriceRangeS){
 
-        				var that = this;
-        				return _.map(filteredProducts.filter(function(product){
-        					return that.productInDefaultPriceRanges(product, selectedPriceRangeS);
-        				}), function (product) {return product;});
-        		},
+                var that = this;
+                return _.map(filteredProducts.filter(function(product){
+                    return that.productInDefaultPriceRanges(product, selectedPriceRangeS);
+                }), function (product) {return product;});
+        },
+        filterByPriceRangeS1:function (filteredProducts,selectedPriceRangeS1){
+
+                var that = this;
+                return _.map(filteredProducts.filter(function(product){
+                    return that.productInDefaultPriceRanges1(product, selectedPriceRangeS1);
+                }), function (product) {return product;});
+        },
+filterByPriceRangeS4:function (filteredProducts,selectedPriceRangeS4){
+
+                var that = this;
+                return _.map(filteredProducts.filter(function(product){
+                    return that.productInDefaultPriceRanges4(product, selectedPriceRangeS4);
+                }), function (product) {return product;});
+        },
 			filterByStyle:function (filteredProducts,selectedStyleIds){
 				var that = this;
 				return _.map(filteredProducts.filter(function(product){
@@ -104,7 +118,14 @@ define([
 		},
 		productInDefaultPriceRanges: function (product, priceRangeS) {
             for (var i=0; i < priceRangeS.length; i++) {
-                if (product.defaultPrice <= priceRangeS[i])
+                if (product.defaultPrice >= priceRangeS[i])
+                    return true;
+            }
+
+        },
+        productInDefaultPriceRanges1: function (product, priceRangeS1) {
+            for (var i=0; i < priceRangeS1.length; i++) {
+                if (product.defaultPrice <= priceRangeS1[i])
                     return true;
             }
 

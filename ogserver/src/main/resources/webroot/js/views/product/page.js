@@ -169,36 +169,29 @@ define([
                                 silent: true
                             });
 
-                           /* var priceRangeIds = new Array();
-
+                            var priceRangeIds = new Array();
                             that.filter.set({
                                 'priceRangeIds': priceRangeIds
                             }, {
                                 silent: true
-                            });*/
+                            });
 
-                           /* var priceRangeS = new Array();
-
-                            priceRangeS.push( 200000);
-
+                            var priceRangeS = new Array();
+                            priceRangeS.push(0);
                             that.filter.set({
 
                                 'priceRangeS': priceRangeS
-
                             }, {
                                 silent: true
                             });
                             var priceRangeS1 = new Array();
+                               priceRangeS1.push(200000);
+                                                        that.filter.set({
 
-                              priceRangeS1.push( 500000);
-
-                              that.filter.set({
-
-                             'priceRangeS1': priceRangeS1
-
-                               }, {
-                               silent: true
-                              });*/
+                                                            'priceRangeS1': priceRangeS1
+                                                        }, {
+                                                            silent: true
+                                                        });
 
                             var styleIds = new Array();
                             that.filter.set({
@@ -300,7 +293,7 @@ define([
                 silent: true
             });
 
-           /* var priceRangeIds = new Array();
+            var priceRangeIds = new Array();
             that.filter.set({
                 'priceRangeIds': priceRangeIds
             }, {
@@ -311,7 +304,13 @@ define([
                 'priceRangeS': priceRangeS
             }, {
                 silent: true
-            });*/
+            });
+             var priceRangeS1 = new Array();
+                        that.filter.set({
+                            'priceRangeS1': priceRangeS1
+                        }, {
+                            silent: true
+                        });
             var styleIds = new Array();
             that.filter.set({
                 'styleIds': styleIds
@@ -354,6 +353,7 @@ define([
             var selectedSubcatIds = that.filter.get('subcatIds');
             var selectedPriceRangeIds = that.filter.get('priceRangeIds');
             var selectedPriceRangeS = that.filter.get('priceRangeS');
+            var selectedPriceRangeS1 = that.filter.get('priceRangeS1');
             var selectedStyleIds = that.filter.get('styleIds');
 
             var minPrice = '';
@@ -417,7 +417,7 @@ define([
             }
 
 
-           /* if (selectedPriceRangeIds.length != 0) {
+            if (selectedPriceRangeIds.length != 0) {
                 if (typeof(filteredProducts) == 'undefined') {
                     filteredProducts = that.products.toJSON();
                     filteredProducts = that.products.filterByPriceRange(filteredProducts, selectedPriceRangeIds);
@@ -434,7 +434,16 @@ define([
                     filteredProducts = that.products.filterByPriceRangeS(filteredProducts, selectedPriceRangeS);
                 }
 
-            }*/
+            }
+            if (selectedPriceRangeS1.length != 0) {
+                if (typeof(filteredProducts) == 'undefined') {
+                    filteredProducts = that.products.toJSON();
+                    filteredProducts = that.products.filterByPriceRangeS1(filteredProducts, selectedPriceRangeS1);
+                } else {
+                    filteredProducts = that.products.filterByPriceRangeS1(filteredProducts, selectedPriceRangeS1);
+                }
+
+            }
 
             if (selectedStyleIds.length != 0) {
                 if (typeof(filteredProducts) == 'undefined') {
