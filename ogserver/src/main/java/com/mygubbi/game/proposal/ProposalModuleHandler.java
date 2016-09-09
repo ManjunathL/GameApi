@@ -3,6 +3,7 @@ package com.mygubbi.game.proposal;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.game.proposal.model.AccessoryPack;
+import com.mygubbi.game.proposal.price.ComprehensiveModulePricingService;
 import com.mygubbi.game.proposal.price.ModulePricingService;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
@@ -29,6 +30,7 @@ public class ProposalModuleHandler extends AbstractRouteHandler
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/price").handler(this::getPrice);
+        this.post("/pricev2").handler(this::getPriceV2);
         this.get("/accpacks").handler(this::getAccessoryPacksForModule);
     }
 
@@ -52,14 +54,23 @@ public class ProposalModuleHandler extends AbstractRouteHandler
         }
     }
 
-
     private void getPrice(RoutingContext routingContext)
+    {
+        this.getPrice(routingContext, ModulePricingService.CALCULATE_PRICE);
+    }
+
+    private void getPriceV2(RoutingContext routingContext)
+    {
+        this.getPrice(routingContext, ComprehensiveModulePricingService.CALCULATE_PRICE);
+    }
+
+    private void getPrice(RoutingContext routingContext, String priceModule)
     {
         JsonObject moduleJson = routingContext.getBodyAsJson();
         LOG.debug("Module Json : " + moduleJson.encodePrettily());
         ProductModule module = new ProductModule(moduleJson);
         Integer id = LocalCache.getInstance().store(module);
-        VertxInstance.get().eventBus().send(ModulePricingService.CALCULATE_PRICE, id,
+        VertxInstance.get().eventBus().send(priceModule, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     JsonObject result = (JsonObject) LocalCache.getInstance().remove(selectResult.result().body());
                     LOG.debug("result :" + result.encodePrettily());

@@ -136,6 +136,11 @@ CREATE TABLE module_master(
   depth INTEGER NOT NULL DEFAULT 0,
   height INTEGER NOT NULL DEFAULT 0,
   dimension varchar(32) NOT NULL,
+  moduleType char(1) NOT NULL COMMENT 'standard - S and non standard/customized - C',
+  unitType char(16) NOT NULL DEFAULT 'NA' COMMENT 'Identify Sink Unit',
+  material char(8) NULL COMMENT 'Override carcass material',
+  moduleCategory varchar(64) NOT NULL,
+  productCategory varchar(24) DEFAULT 'NULL',
   touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY code_key (code)
@@ -334,5 +339,23 @@ CREATE TABLE module_category_master(
   PRIMARY KEY (id),
   KEY code_key (moduleCode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module Category Master';
+
+
+DROP TABLE IF EXISTS panel_master;
+CREATE TABLE panel_master(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  code varchar(16) NOT NULL,
+  type char(1) NOT NULL, -- Carcass, Shutter
+  side char(1) NOT NULL, -- Left, Right, Top, Bottom
+  title varchar(255) NOT NULL,
+  subtitle varchar(64) NOT NULL DEFAULT 'NA',
+  plength INTEGER NOT NULL DEFAULT 0,
+  breadth INTEGER NOT NULL DEFAULT 0,
+  thickness INTEGER NOT NULL DEFAULT 0,
+  edgebinding varchar(128) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY code_key (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Panel master';
 
 

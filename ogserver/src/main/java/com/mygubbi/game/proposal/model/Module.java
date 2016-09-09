@@ -17,6 +17,8 @@ public class Module
     private static final String IMAGE_PATH = "imagePath";
     private static final String MODULE_CATEGORY = "moduleCategory";
     private static final String MODULE_TYPE = "moduleType";
+    private static final String UNIT_TYPE = "unitType";
+    private static final String MATERIAL = "material";
     private static final String PRODUCT_CATEGORY = "productCategory";
 
     private static final String STANDARD_MODULE = "S";
@@ -27,6 +29,8 @@ public class Module
     private String imagePath;
     private String moduleCategory;
     private String moduleType;
+    private String unitType;
+    private String material;
     private String productCategory;
     private int height;
     private int depth;
@@ -48,6 +52,8 @@ public class Module
         this.setModuleCategory(json.getString(MODULE_CATEGORY));
         this.setModuleType(json.getString(MODULE_TYPE));
         this.setProductCategory(json.getString(PRODUCT_CATEGORY));
+        this.setUnitType(json.getString(UNIT_TYPE));
+        this.setMaterial(json.getString(MATERIAL));
     }
 
     public String getModuleCategory() {
@@ -161,6 +167,26 @@ public class Module
 
     public boolean isCustomized() {
         return this.getModuleType().equals(CUSTOM_MODULE);
+    }
+
+    public String getUnitType()
+    {
+        return unitType;
+    }
+
+    public void setUnitType(String unitType)
+    {
+        this.unitType = unitType;
+    }
+
+    public String getMaterial()
+    {
+        return material;
+    }
+
+    public void setMaterial(String material)
+    {
+        this.material = material;
     }
 }
 

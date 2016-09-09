@@ -62,6 +62,18 @@ insert into code_master (lookupType, code, title) values ('psubcategory', 'bookr
 
 commit;
 
-
 update product p, code_master c set p.categoryId = c.code where p.category = c.title and c.lookupType = 'pcategory';
 update product p, code_master c set p.subcategoryId = c.code where p.subcategory = c.title and c.lookupType = 'psubcategory';
+
+-- Changes done for new pricing module
+
+-- create panel_master
+
+insert panel_master(code, type, side, title, subtitle, plength, breadth, thickness, edgebinding)
+select code, 'C', type, title, 'NA', plength, breadth, thickness, edgebinding from carcass_master;
+
+insert panel_master(code, type, side, title, subtitle, plength, breadth, thickness, edgebinding)
+select code, 'S', 'O', title, type, plength, breadth, thickness, edgebinding from shutter_master;
+
+alter table module_master add column material char(8) NULL;
+alter table module_master add column unitType char(16) NOT NULL DEFAULT 'NA';

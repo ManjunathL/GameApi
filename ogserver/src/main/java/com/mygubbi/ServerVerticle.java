@@ -128,6 +128,12 @@ public class ServerVerticle extends AbstractVerticle
         for (ServiceDef serviceDef : servicesToStart)
         {
             Class serviceClass = serviceDef.getType();
+            if (serviceClass == null)
+            {
+                LOG.error("Class not found for:" + serviceDef.toString());
+                startFuture.fail("Class not found for:" + serviceDef.toString());
+                break;
+            }
             String serviceName = serviceClass.getCanonicalName();
             serviceNames.add(serviceName);
             LOG.info(serviceClass.getName() + " starting ...");

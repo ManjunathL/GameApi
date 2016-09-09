@@ -44,6 +44,30 @@ public class AccessoryPackComponent extends JsonObject implements IModuleCompone
         return this.getDouble(QUANTITY);
     }
 
+    @Override
+    public String getQuantityFormula()
+    {
+        return null;
+    }
+
+    @Override
+    public String getQuantityFlag()
+    {
+        return null;
+    }
+
+    @Override
+    public boolean isFixedQuantity()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isCalculatedQuantity()
+    {
+        return false;
+    }
+
     public boolean isCarcass()
     {
         return CARCASS_TYPE.equals(this.getType());
@@ -63,6 +87,12 @@ public class AccessoryPackComponent extends JsonObject implements IModuleCompone
     {
         return HARDWARE_TYPE.equals(this.getType());
     }
+
+    public boolean isToBeResolved()
+    {
+        return RESOLVED_TYPE.equals(this.getType());
+    }
+
 
 }
 

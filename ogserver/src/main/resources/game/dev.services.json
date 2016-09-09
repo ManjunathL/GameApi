@@ -16,15 +16,20 @@
         "name": "com.mygubbi.apiserver.GameApiServerVerticle",
         "worker": false
       },
+
       {
         "name": "com.mygubbi.game.proposal.ModuleDataService"
       },
+
       {
-        "name": "com.mygubbi.game.proposal.RateCardService"
+        "name": "com.mygubbi.game.proposal.price.RateCardService"
       },
 
       {
-        "name": "com.mygubbi.game.proposal.ModulePricingService"
+        "name": "com.mygubbi.game.proposal.price.ModulePricingService"
+      },
+      {
+        "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService"
       },
 
       {

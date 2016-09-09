@@ -218,7 +218,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select code, width, depth, height, description, imagePath from module_master",
+      "query": "select code, width, depth, height, description, imagePath, moduleType, moduleCategory, productCategory, material, unitType from module_master",
       "params": []
     },
 
@@ -334,6 +334,13 @@
       "type": "select",
       "table": "shutter_master",
       "query": "select code, title, plength, breadth, thickness, edgebinding, quantity from shutter_master",
+      "params": []
+    },
+    {
+      "id": "panel.select.all",
+      "type": "select",
+      "table": "panel_master",
+      "query": "select code, type, side, title, subtitle, plength, breadth, thickness, edgebinding from panel_master",
       "params": []
     },
 

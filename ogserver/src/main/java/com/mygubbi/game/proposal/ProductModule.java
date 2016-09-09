@@ -39,10 +39,14 @@ public class ProductModule extends JsonObject
     private static final String EXPOSED_SIDES = "expSides"; //None, Left, Right, Both
     private static final String EXPOSED_BOTTOM = "expBottom"; //Boolean Yes or No
 
-    private static final String LEFT_EXPOSED = "Left";
-    private static final String NONE_EXPOSED = "None";
-    private static final String RIGHT_EXPOSED = "Right";
     private static final String BOTH_EXPOSED = "Both";
+    private static final String NONE_EXPOSED = "None";
+
+    private static final String LEFT_EXPOSED = "left";
+    private static final String RIGHT_EXPOSED = "right";
+    private static final String TOP_EXPOSED = "top";
+    private static final String BOTTOM_EXPOSED = "bottom";
+    private static final String BACK_EXPOSED = "back";
 
     private static final String REMARKS = "remarks";
     private static final String DESCRIPTION = "description";
@@ -141,12 +145,29 @@ public class ProductModule extends JsonObject
 
     public boolean isLeftExposed()
     {
-        return LEFT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
+        return this.containsKey(LEFT_EXPOSED) && this.getBoolean(LEFT_EXPOSED);
+//        return LEFT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
     }
 
     public boolean isRightExposed()
     {
-        return RIGHT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
+        return this.containsKey(RIGHT_EXPOSED) && this.getBoolean(RIGHT_EXPOSED);
+//        return RIGHT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
+    }
+
+    public boolean isTopExposed()
+    {
+        return this.containsKey(TOP_EXPOSED) && this.getBoolean(TOP_EXPOSED);
+    }
+
+    public boolean isBottomExposed()
+    {
+        return this.containsKey(BOTTOM_EXPOSED) && this.getBoolean(BOTTOM_EXPOSED);
+    }
+
+    public boolean isBackExposed()
+    {
+        return this.containsKey(BACK_EXPOSED) && this.getBoolean(BACK_EXPOSED);
     }
 
     public ProductModule setUnit(String unit)

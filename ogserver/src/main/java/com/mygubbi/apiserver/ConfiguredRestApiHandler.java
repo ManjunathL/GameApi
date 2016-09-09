@@ -25,7 +25,7 @@ public class ConfiguredRestApiHandler
         for (Object restApiObject : restUrls)
         {
             JsonObject restApi = (JsonObject) restApiObject;
-            LOG.info("Configuring url: " + restApi.encodePrettily());
+            LOG.info("Configuring url: " + restApi.getString("uri"));
             if (SOURCE_FILE.equals(restApi.getString("source")))
             {
                 router.mountSubRouter(restApi.getString("uri"), new ResponseFromFileHandler(restApi.getString("file"),

@@ -1,16 +1,19 @@
 package com.mygubbi.config;
 
-import com.mygubbi.common.VertxInstance;import io.vertx.core.AbstractVerticle;
+import com.mygubbi.common.VertxInstance;
+import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -112,7 +115,7 @@ public class ConfigHolder extends AbstractVerticle
 				JsonObject configJson = new JsonObject(jsonText);
 				this.serverConfig = this.serverConfig.mergeIn(configJson);
 
-				LOG.info("Config file: " + configFile + ". Value:" + configJson.encodePrettily());
+				//LOG.info("Config file: " + configFile + ". Value:" + configJson.encodePrettily());
 				loadConfig(configFiles, startFuture);
 			}
 			else

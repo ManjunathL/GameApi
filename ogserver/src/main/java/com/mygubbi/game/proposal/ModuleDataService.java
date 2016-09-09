@@ -7,7 +7,6 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.*;
-import com.mygubbi.game.proposal.price.ICostComponent;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -16,7 +15,10 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ModuleDataService extends AbstractVerticle
@@ -24,7 +26,7 @@ public class ModuleDataService extends AbstractVerticle
 	private final static Logger LOG = LogManager.getLogger(ModuleDataService.class);
 
 	private static ModuleDataService INSTANCE;
-	private AtomicInteger cachingCounter = new AtomicInteger(7);
+	private AtomicInteger cachingCounter = new AtomicInteger(8);
 
     private Multimap<String, ModuleComponent> moduleComponentsMap;
     private Multimap<String, AccessoryPackComponent> accessoryPackComponentsMap;
@@ -34,6 +36,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, Module> moduleMap = Collections.EMPTY_MAP;
     private Map<String, CarcassPanel> carcassPanelMap = Collections.EMPTY_MAP;
     private Map<String, ShutterPanel> shutterPanelMap = Collections.EMPTY_MAP;
+    private Map<String, ModulePanel> panelMasterMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> accessoriesMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> hardwareMap = Collections.EMPTY_MAP;
     private Map<String, ShutterFinish> finishCodeMap = Collections.EMPTY_MAP;
@@ -60,6 +63,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheModuleComponents();
         this.cacheCarcassPanels();
         this.cacheShutterPanels();
+        this.cacheModulePanels();
         this.cacheAccessories();
         this.cacheHardware();
         this.cacheFinishCostCodes();
@@ -139,6 +143,28 @@ public class ModuleDataService extends AbstractVerticle
                             this.shutterPanelMap.put(shutter.getCode(), shutter);
                         }
                         markResult("Shutter panels done.", true);
+                    }
+                });
+    }
+
+    private void cacheModulePanels()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("panel.select.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Panel master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.panelMasterMap= new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            ModulePanel panel = ModulePanel.fromJson(record);
+                            this.panelMasterMap.put(panel.getCode(), panel);
+                        }
+                        markResult("Module panels done.", true);
                     }
                 });
     }
@@ -415,6 +441,11 @@ public class ModuleDataService extends AbstractVerticle
             }
         }
         return shutterFinish;
+    }
+
+    public ModulePanel getPanel(String code)
+    {
+        return this.panelMasterMap.get(code);
     }
 
     public CarcassPanel getCarcassPanel(String code)
