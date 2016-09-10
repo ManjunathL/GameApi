@@ -37,7 +37,6 @@ public class WardrobeMasterSheetHandler extends AbstractMasterSheetHandler
 
     private void loadModuleCodes(String moduleFile) throws IOException {
         this.moduleCodes = new HashSet<>(FileUtils.readLines(new File(moduleFile)));
-
     }
 
 

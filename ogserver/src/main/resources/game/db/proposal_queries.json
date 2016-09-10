@@ -499,6 +499,20 @@
       "type": "select",
       "query": "select code, title, imagePath from acc_hw_master where type = 'A' and code in (select addoncode from accpack_addon_map where apcode = ?)",
       "params": ["apCode"]
+    },
+
+    {
+      "id": "module.category",
+      "type": "select",
+      "query": "select distinct moduleCategory from module_master where productCategory = 'all' and productCategory = ?",
+      "params": ["productCategory"]
+    },
+
+    {
+      "id": "module.category",
+      "type": "select",
+      "query": "select distinct code from module_master where productCategory = ? and productCategory = ?",
+      "params": ["productCategory","moduleCategory"]
     }
 
   ]
