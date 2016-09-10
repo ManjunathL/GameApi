@@ -284,7 +284,7 @@ public class ModulePriceHolder
     {
         for (PanelComponent panel : this.getPanelComponents())
         {
-            if (panel.isShutter())
+            if (panel.isExposed())
             {
                 this.addToShutterCost(panel.getCost());
             }

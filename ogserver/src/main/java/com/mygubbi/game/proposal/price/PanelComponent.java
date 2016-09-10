@@ -293,26 +293,26 @@ public class PanelComponent
 
     public boolean isLeftPanel()
     {
-        return TYPE_LEFT.equals(this.type);
+        return TYPE_LEFT.equals(this.side);
     }
 
     public boolean isRightPanel()
     {
-        return TYPE_RIGHT.equals(this.type);
+        return TYPE_RIGHT.equals(this.side);
     }
 
     public boolean isBottomPanel()
     {
-        return TYPE_BOTTOM.equals(this.type);
+        return TYPE_BOTTOM.equals(this.side);
     }
 
     public boolean isTopPanel()
     {
-        return TYPE_TOP.equals(this.type);
+        return TYPE_TOP.equals(this.side);
     }
 
     public boolean isBackPanel()
     {
-        return TYPE_BACK.equals(this.type);
+        return TYPE_BACK.equals(this.side);
     }
 }
