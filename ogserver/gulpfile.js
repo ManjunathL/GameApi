@@ -18,12 +18,21 @@ gulp.task('css', function(){
     'build/resources/main/webroot/js/libs/bootstrap-custom/css/bootstrap-theme.min.css',
     'build/resources/main/webroot/js/libs/jquery-ui/themes/base/jquery-ui.min.css',
     'build/resources/main/webroot/css/agency.css',
+    'build/resources/main/webroot/css/animate.css',
+    'build/resources/main/webroot/css/festive.css',
     'build/resources/main/webroot/css/consult.css',
     'build/resources/main/webroot/css/shortlist.css',
     'build/resources/main/webroot/css/horizontal.css',
+    'build/resources/main/webroot/css/kyk.css',
+    'build/resources/main/webroot/css/kyw.css',
+    'build/resources/main/webroot/css/ml.css',
+    'build/resources/main/webroot/css/owl.transitions.css',
+    'build/resources/main/webroot/css/font-awesome.css',
     'build/resources/main/webroot/css/font-awesome.min.css',
     'build/resources/main/webroot/fonts/pixeden/pe-icon-7-stroke/css/pe-icon-7-stroke.css',
-    'build/resources/main/webroot/fonts/pixeden/pe-icon-7-stroke/css/helper.css'
+    'build/resources/main/webroot/fonts/pixeden/pe-icon-7-stroke/css/helper.css',
+    'build/resources/main/webroot/js/libs/owl.carousel/dist/assets/owl.theme.default.min.css',
+    'build/resources/main/webroot/js/libs/owl.carousel/dist/assets/owl.carousel.css'
 ], { base: 'build/resources/main/webroot/css' })
 .pipe(concat('single.css'))
 .pipe(cssnano({safe: true}))
@@ -31,4 +40,5 @@ gulp.task('css', function(){
 });
 
 gulp.task('default', ['optimizejs', 'css']);
+
 

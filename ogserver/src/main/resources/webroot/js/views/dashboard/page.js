@@ -10,7 +10,7 @@ define([
     '/js/analytics.js',
     'bxslider',
     'text!/templates/dashboard/page.html',
-    'unveil'
+    'libs/unveil/jquery.unveil.mg'
 ], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
