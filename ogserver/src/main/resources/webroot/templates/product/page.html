@@ -281,11 +281,22 @@
                                 <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                                 <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
                                 <li>
-                                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                   <!-- <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                     <div class="price-slide">
                                         <div class="slider-ioc">  </div>
                                     <div id="slider-range-min"></div>
                                         </div>
+                                    <div class="price-tag">
+                                        <div class="pull-left"> Rs 1 </div>
+                                        <div class="pull-right"> Rs 400000 </div>
+                                    </div>-->
+                                    <p>
+\                                        <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+                                    <div class="price-slide">
+                                        <div class="slider-ioc"></div>
+
+                                    <div id="slider-range"></div>
+                                </div>
                                     <div class="price-tag">
                                         <div class="pull-left"> Rs 1 </div>
                                         <div class="pull-right"> Rs 400000 </div>
@@ -294,7 +305,18 @@
 
                                 <% }else{ %>
                                 <li>
-                                    <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                    <p>
+                                        <input type="text" id="amount2" style="border: 0; color: #f6931f; font-weight: bold;" />
+                                    </p>
+                                    <div class="price-slide">
+                                        <div class="slider-ioc"></div>
+                                    <div id="slider-range2"></div>
+                                    </div>
+                                    <div class="price-tag">
+                                        <div class="pull-left"> Rs 1 </div>
+                                        <div class="pull-right"> Rs 400000 </div>
+                                    </div>
+                                 <!--   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                     <div class="price-slide">
                                         <div class="slider-ioc">  </div>
                                     <div id="slider-range-min2"></div>
@@ -302,7 +324,7 @@
                                     <div class="price-tag">
                                         <div class="pull-left"> Rs 1</div>
                                         <div class="pull-right"> Rs 40000 </div>
-                                    </div>
+                                    </div>-->
                                 </li>
                                 <% } %>
                                 <% } %>
@@ -515,25 +537,27 @@
 
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                         <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
-                        <input type="text" id="amount1" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <input type="text" id="amount3" style="border: 0; color: #f6931f; font-weight: bold;" />
+
                         <div class="price-slide">
                             <div class="slider-ioc"></div>
-                        <div id="slider-range-min1"></div>
+                        <div id="slider-range3"></div>
                         </div>
                         <div class="price-tag">
                             <div class="pull-left"> Rs 1 </div>
                             <div class="pull-right"> Rs 400000  </div>
                         </div>
                         <% }else{ %>
-                        <input type="text" id="amount3" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <input type="text" id="amount4" style="border: 0; color: #f6931f; font-weight: bold;" />
+
                         <div class="price-slide">
                             <div class="slider-ioc"></div>
-                        <div id="slider-range-min3"></div>
-                    </div>
-                    <div class="price-tag">
-                        <div class="pull-left"> Rs 1 </div>
-                        <div class="pull-right"> Rs 40000 </div>
-                    </div>
+                            <div id="slider-range4"></div>
+                        </div>
+                        <div class="price-tag">
+                            <div class="pull-left"> Rs 1 </div>
+                            <div class="pull-right"> Rs 400000  </div>
+                        </div>
                         <% } %>
                         <% } %>
                     </div>
@@ -1240,124 +1264,131 @@
     }
 </style>
 <script>
-    $( function() {
-        $( "#slider-range-min" ).slider({
-          range: "min",
-          value: filter.get('priceRangeS'),
-          min: 1,
-          max: 400000,
 
-         start: function (event, ui) {
-            // code
-        },
-        slide: function( event, ui ) {
-                    $( "#amount" ).val( "Rs " + ui.value );
-        },
-        change: function(event, ui) {
+  $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 400000,
+      values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
+      slide: function( event, ui ) {
+  console.log(ui.values[1]);
+        $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
+      },
+      change: function(event, ui) {
 
-                    $( "#amount" ).val( "Rs " + ui.value );
+        $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
+
+        console.log(ui.values[ 0 ]+ " =========== " +  ui.values[ 1 ]);
 
             var price_rangeSArr = new Array();
-            price_rangeSArr.push(ui.value);
+            var price_rangeSArr1 = new Array();
 
-                     filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr.push(ui.values[ 0 ]);
+            filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr1.push(ui.values[ 1 ]);
+            filter.set({'priceRangeS1': price_rangeSArr1});
             filter.trigger('change');
 
         }
-        });
-        $( "#amount" ).val( "Rs " + $( "#slider-range-min" ).slider( "value" ) );
-      } );
-      $( function() {
-        $( "#slider-range-min1" ).slider({
-          range: "min",
-          value: filter.get('priceRangeS'),
-          min: 1,
-          max: 400000,
+    });
+    $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
+  });
 
-         start: function (event, ui) {
-            // code
-        },
-        slide: function( event, ui ) {
-                    $( "#amount1" ).val( "Rs " + ui.value );
-        },
-        change: function(event, ui) {
+  $(function() {
+    $( "#slider-range3" ).slider({
+      range: true,
+      min: 0,
+      max: 400000,
+      values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
+      slide: function( event, ui ) {
+  console.log(ui.values[1]);
+        $( "#amount3" ).val( "Rs " + ui.values[ 0 ] + " - Rs " + ui.values[ 1 ] );
+      },
+      change: function(event, ui) {
 
-                    $( "#amount1" ).val( "Rs " + ui.value );
+        $( "#amount3" ).val( "Rs " + ui.values[ 0 ] + " - Rs " + ui.values[ 1 ] );
+
+        console.log(ui.values[ 0 ]+ " =========== " +  ui.values[ 1 ]);
 
             var price_rangeSArr = new Array();
-            price_rangeSArr.push(ui.value);
+            var price_rangeSArr1 = new Array();
 
-                     filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr.push(ui.values[ 0 ]);
+            filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr1.push(ui.values[ 1 ]);
+            filter.set({'priceRangeS1': price_rangeSArr1});
             filter.trigger('change');
 
         }
-        });
-        $( "#amount1" ).val( "Rs " + $( "#slider-range-min" ).slider( "value" ) );
-      } );
-      $( function() {
-        $( "#slider-range-min2" ).slider({
-          range: "min",
-          value: filter.get('priceRangeS'),
-          min: 1,
-          max: 40000,
+    });
+    $( "#amount3" ).val( "Rs " + $( "#slider-range3" ).slider( "values", 0 ) +
+      " - Rs " + $( "#slider-range3" ).slider( "values", 1 ) );
+  });
 
-         start: function (event, ui) {
-            // code
-        },
-        slide: function( event, ui ) {
+    $(function() {
+    $( "#slider-range2" ).slider({
+      range: true,
+      min: 0,
+      max: 40000,
+      values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
+      slide: function( event, ui ) {
 
+        $( "#amount2" ).val( "Rs " + ui.values[ 0 ] + " - Rs " + ui.values[ 1 ] );
+      },
+      change: function(event, ui) {
 
-                    $( "#amount2" ).val( "Rs " + ui.value );
-
-                //$("#slider-range-min2").find(".ui-slider-handle").text(ui.value);
-
-
-
-        },
-        change: function(event, ui) {
-
-                    $( "#amount2" ).val( "Rs " + ui.value );
-
-                    //$("#slider-range-min2").find(".ui-slider-handle").text(ui.value);
+        $( "#amount2" ).val( "Rs " + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
 
 
 
             var price_rangeSArr = new Array();
-            price_rangeSArr.push(ui.value);
+            var price_rangeSArr1 = new Array();
 
-                     filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr.push(ui.values[ 0 ]);
+            filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr1.push(ui.values[ 1 ]);
+            filter.set({'priceRangeS1': price_rangeSArr1});
             filter.trigger('change');
 
         }
-        });
+    });
+    $( "#amount2" ).val( "Rs " + $( "#slider-range2" ).slider( "values", 0 ) +
+      " - Rs " + $( "#slider-range2" ).slider( "values", 1 ) );
 
-        $( "#amount2" ).val( "Rs " + $( "#slider-range-min2" ).slider( "value" ) );
-      } );
-      $( function() {
-        $( "#slider-range-min3" ).slider({
-          range: "min",
-          value: filter.get('priceRangeS'),
-          min: 1,
-          max: 40000,
+});
 
-         start: function (event, ui) {
-            // code
-        },
-        slide: function( event, ui ) {
-                    $( "#amount3" ).val( "Rs " + ui.value );
-        },
-        change: function(event, ui) {
+  $(function() {
+    $( "#slider-range4" ).slider({
+      range: true,
+      min: 0,
+      max: 40000,
+      values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
+      slide: function( event, ui ) {
 
-                    $( "#amount3" ).val( "Rs " + ui.value );
+        $( "#amount4" ).val( "Rs " + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
+      },
+      change: function(event, ui) {
+
+        $( "#amount4" ).val( "Rs " + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
+
+
 
             var price_rangeSArr = new Array();
-            price_rangeSArr.push(ui.value);
+            var price_rangeSArr1 = new Array();
 
-                     filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr.push(ui.values[ 0 ]);
+            filter.set({'priceRangeS': price_rangeSArr});
+            price_rangeSArr1.push(ui.values[ 1 ]);
+            filter.set({'priceRangeS1': price_rangeSArr1});
             filter.trigger('change');
 
         }
-        });
-        $( "#amount3" ).val( "Rs " + $( "#slider-range-min3" ).slider( "value" ) );
-      } );
+    });
+    $( "#amount4" ).val( "Rs " + $( "#slider-range4" ).slider( "values", 0 ) +
+      " - Rs " + $( "#slider-range4" ).slider( "values", 1 ) );
+
+});
+
 </script>

@@ -542,68 +542,67 @@ ul, ol{
     text-decoration: none;
     background-color: #fff;
 }
-  .nav>li>a{
-      padding:10px 10px!important;
-  }
-  #nav>li>a {
+.nav>li>a{
+    padding:10px 10px!important;
+}
+#nav>li>a {
     padding: 5px 11px !important;
     border-right: 1px solid #ddd;
     cursor: pointer;
     background-color: #fff;
     font-size: 15px;
-  }
-  .last-item{
+}
+.last-item{
    border-right:0px solid #ddd!important;
-  }
+}
 
-  .menu-mygubbi{
-      width:100%;
-      margin: 0px auto;
-  }
-  .navbar-center{
-      float: none;
-      position: relative;
-      text-align: center;
-      margin: 5px auto 8px;
-  }
-  .navbar-center li{
-      float:none;
-      text-rendering: optimizeLegibility;
-      display:inline-block;
-      margin: 0px auto;
-
-  }
-  @media (max-width: 767px) {
-        #nav>li>a{
-            padding: 5px 5px!important;
-            border-right: 0px solid #ddd;
-            cursor: pointer;
-            background-color: #fff;
-            width: 100%;
-        }
-  }
-  @media (max-width: 992px) {
-      .mob-container{
+.menu-mygubbi{
+    width:100%;
+    margin: 0px auto;
+}
+.navbar-center{
+    float: none;
+    position: relative;
+    text-align: center;
+    margin: 5px auto 8px;
+}
+.navbar-center li{
+    float:none;
+    text-rendering: optimizeLegibility;
+    display:inline-block;
+    margin: 0px auto;
+}
+@media (max-width: 767px) {
+    #nav>li>a{
+        padding: 5px 5px!important;
+        border-right: 0px solid #ddd;
+        cursor: pointer;
+        background-color: #fff;
+        width: 100%;
+    }
+}
+    @media (max-width: 992px) {
+        .mob-container{
             width: 100%;
             padding: 0px;
             margin: 0px;
-      }
-      .gubbi-list-mob {
-          width: 100%;
-          text-align: left;
-          padding: 5px 0px;
-      }
-  }
+        }
+        .gubbi-list-mob {
+            width: 100%;
+            text-align: left;
+            padding: 5px 0px;
+        }
+    }
 
-  .social-menu-lnk{
-      color: rgba(0,0,0,0.6);
-      font-size:16px;
-      margin-top: 5px;
-  }
-  .
-  /* Menu section End */
+.social-menu-lnk{
+    color: rgba(0,0,0,0.6);
+    font-size:16px;
+    margin-top: 5px;
+}
 
-  /* Main Image Section */
+/* Menu section End */
+
+/* Main Image Section */
   .width100{
       width: 100%!important;
   }
