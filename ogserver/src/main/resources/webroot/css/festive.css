@@ -3,16 +3,16 @@
 
 /* ----- Festive Page CSS ------ */
 
-.navbar{
+#festive_lp .navbar{
     height: 70px;
     background: #FFFFFF;
 }
-.navbar-brand{
+#festive_lp .navbar-brand{
     padding: 0px;
     margin: 0px;
 }
 
-.navbar-brand img {
+#festive_lp .navbar-brand img {
     width: 130px;
     padding: 10px 0px 0px 5px;
 }

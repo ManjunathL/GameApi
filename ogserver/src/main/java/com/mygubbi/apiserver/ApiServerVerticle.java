@@ -61,7 +61,7 @@ public class ApiServerVerticle extends AbstractVerticle
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
         });
-        int httpPort = ConfigHolder.getInstance().getInteger("http_port", 8787);
+        int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
         server.requestHandler(router::accept).listen(httpPort);
     }
 
@@ -88,7 +88,7 @@ public class ApiServerVerticle extends AbstractVerticle
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
 
-        int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 8788);
+        int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 443);
         VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
     }
 
