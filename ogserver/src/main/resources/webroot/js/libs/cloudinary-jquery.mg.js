@@ -2835,7 +2835,7 @@
             Util.addClass(tag, "cld-responsive");
           }
           src = Util.getData(tag, 'src-cache') || Util.getData(tag, 'src');
-          if (!Util.isEmpty(src)) {
+          if (src && !Util.isEmpty(src)) {
             src = src.replace(/\bdpr_(1\.0|auto)\b/g, 'dpr_' + this.device_pixel_ratio());
             if (Util.hasClass(tag, 'cld-responsive') && /\bw_auto\b/.exec(src)) {
               containerWidth = parentWidth(tag);
