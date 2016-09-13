@@ -502,18 +502,10 @@
     },
 
     {
-      "id": "module.category",
+      "id": "module.selectModulesByCategory",
       "type": "select",
-      "query": "select distinct moduleCategory from module_master where productCategory = 'all' and productCategory = ?",
-      "params": ["productCategory"]
-    },
-
-    {
-      "id": "module.category",
-      "type": "select",
-      "query": "select distinct code from module_master where productCategory = ? and productCategory = ?",
+      "query": "select distinct code from module_master where productCategory = ? and moduleCategory = ?",
       "params": ["productCategory","moduleCategory"]
     }
-
   ]
 }

@@ -42,11 +42,12 @@ public class ProductModule extends JsonObject
     private static final String BOTH_EXPOSED = "Both";
     private static final String NONE_EXPOSED = "None";
 
-    private static final String LEFT_EXPOSED = "left";
-    private static final String RIGHT_EXPOSED = "right";
-    private static final String TOP_EXPOSED = "top";
-    private static final String BOTTOM_EXPOSED = "bottom";
-    private static final String BACK_EXPOSED = "back";
+    private static final String LEFT_EXPOSED = "exposedLeft";
+    private static final String RIGHT_EXPOSED = "exposedRight";
+    private static final String TOP_EXPOSED = "exposedTop";
+    private static final String BOTTOM_EXPOSED = "exposedBottom";
+    private static final String BACK_EXPOSED = "exposedBack";
+    private static final String ALL_EXPOSED = "exposedAll";
 
     private static final String REMARKS = "remarks";
     private static final String DESCRIPTION = "description";
@@ -61,6 +62,20 @@ public class ProductModule extends JsonObject
     {
         super(json.getMap());
         this.setAccessoryPacks();
+        this.setExposed();
+    }
+
+    private void setExposed() {
+        if (this.containsKey(EXPOSED_SIDES)){
+            if (!this.containsKey(LEFT_EXPOSED))
+                this.put(LEFT_EXPOSED,LEFT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides()));
+            if (!this.containsKey(RIGHT_EXPOSED))
+                this.put(RIGHT_EXPOSED,RIGHT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides()));
+        }
+        if (this.containsKey(EXPOSED_BOTTOM)){
+            if (!this.containsKey(BOTTOM_EXPOSED))
+                this.put(BOTTOM_EXPOSED,this.getBoolean(EXPOSED_BOTTOM,false));
+        }
     }
 
     public int getModuleSequence() {
@@ -146,13 +161,11 @@ public class ProductModule extends JsonObject
     public boolean isLeftExposed()
     {
         return this.containsKey(LEFT_EXPOSED) && this.getBoolean(LEFT_EXPOSED);
-//        return LEFT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
     }
 
     public boolean isRightExposed()
     {
         return this.containsKey(RIGHT_EXPOSED) && this.getBoolean(RIGHT_EXPOSED);
-//        return RIGHT_EXPOSED.equals(this.getExposedSides()) || BOTH_EXPOSED.equals(this.getExposedSides());
     }
 
     public boolean isTopExposed()

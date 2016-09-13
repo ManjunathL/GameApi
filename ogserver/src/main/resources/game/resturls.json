@@ -307,7 +307,7 @@
     {
       "uri": "/gapi/module/modulesByCategory",
       "source": "db",
-      "query":"module.select.modules",
+      "query":"module.selectModulesByCategory",
       "params":["productCategory","moduleCategory"],
       "resultfields":[""],
       "default": "[]"
