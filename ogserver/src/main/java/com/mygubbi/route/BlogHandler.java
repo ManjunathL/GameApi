@@ -48,29 +48,29 @@ public class BlogHandler extends AbstractRouteHandler
     }
         else{
 
-        this.fetchProductsAndSendb(context, "blog.select.all", null);
-       }
+            this.fetchProductsAndSendb(context, "blog.select.all", null);
+        }
 
     }
-   private void fetchProductsAndSendb(RoutingContext context, String queryId, JsonObject paramsData)
-   {
-       Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
-       LOG.info("Executing query:" + queryId + " | " + paramsData);
-       VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-               (AsyncResult<Message<Integer>> selectResult) -> {
-                   QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                   if (selectData == null || selectData.rows == null)
-                   {
-                       sendError(context, "Did not find products for " + paramsData.toString() + ". Error:" + selectData.errorMessage);
-                   }
-                   else
-                   {
+    private void fetchProductsAndSendb(RoutingContext context, String queryId, JsonObject paramsData)
+    {
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
+        LOG.info("Executing query:" + queryId + " | " + paramsData);
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData == null || selectData.rows == null)
+                    {
+                        sendError(context, "Did not find products for " + paramsData.toString() + ". Error:" + selectData.errorMessage);
+                    }
+                    else
+                    {
 
-                       sendJsonResponse(context, selectData.getJsonDataRows("blogJson").toString());
-                   }
-               });
+                        sendJsonResponse(context, selectData.getJsonDataRows("blogJson").toString());
+                    }
+                });
 
-   }
+    }
     private void fetchProductsAndSend(RoutingContext context, String queryId, JsonObject paramsData)
     {
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));

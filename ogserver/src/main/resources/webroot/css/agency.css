@@ -7758,7 +7758,6 @@ width:14% !important;
     border-right: solid 2px #ccc;
 
 }
-
 .wardrobe-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
@@ -7773,7 +7772,6 @@ width:14% !important;
 .padding50-94{
     padding: 50px 94px;
 }
-
 
 .testimonials-carousel .carousel-caption{
     position: absolute;
@@ -8154,7 +8152,100 @@ a#goto-login{
     }
 }
 
-/* ================= Price Slider ===================== */
+
+
+
+/* Start contact us form code By  nagmani on 7th sep 2016 */
+   .contact-light-black-bg{
+        background: rgba(0,0,0,.7);
+        min-height: 420px;
+        color: #ffffff;
+        padding: 70px 15px 20px;
+   }
+    .call-us {
+        margin: 60px 0px 0px;
+    }
+    .contact-phone{
+        color: #ffffff !important;
+        font-size: 1.8em !important;
+        line-height: 1.8em !important;
+    }
+    .contact-circle{
+        background: rgba(241,90,34,1);
+        color: #ffffff;
+        text-align: center;
+        border-radius: 50%;
+        width: 50px;
+        height:50px;
+        margin: 0px auto 20px;
+    }
+    .contact-no{
+        font-size: 20px;
+    }
+    /* End contact us form code By nagmani on 7th sep 2016 */
+  @media (max-width: 767px) {
+/*Start contact us form media code By Nagmani on 7th sep 2016*/
+      .contact-light-black-bg{
+           min-height:100px;
+           width: 100%;
+           padding: 20px;
+     }
+     .call-us {
+         margin: 10px 0px 0px;
+     }
+     /*End contact us form media code By Nagmani on 7th sep 2016*/
+}
+/* Start Service icon code by Nagmani 7th Sep 2016 */
+.kitchen-icon{
+    width: 32% !important;
+    border-right: solid 2px #ccc;
+
+}
+
+.wardrobe-icon{
+    width: 32% !important;
+    border-right: solid 2px #ccc;
+}
+.otherunit-icon{
+    width: 32% !important;
+}
+/* End Service icon code by Nagmani 7th Sep 2016 */
+
+/* Start process text code by Nagmani 7th Sep 2016 */
+.text-process{
+    text-align: left;
+}
+
+@media screen and (max-width: 992px) {
+    .text-process{
+        text-align: center;
+    }
+}
+/* End process text code by Nagmani 7th Sep 2016 */
+/* By Nagmani on 7th Sep 2016 */
+.open-contact-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473333146/home/new_design/gubbi-map.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 410px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+}
+.bg-color-brand{
+    background:#EEEFF1;
+}
+/* End By Nagmani on 7th Sep 2016 */
+
+/* Price Slider */
 
 .price-slide{
     margin: 0px 10px;

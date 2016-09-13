@@ -117,6 +117,22 @@
       ]
     },
     {
+      "id": "product.select.blogTags",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags)",
+      "params": [
+        "tags"
+      ]
+    },
+    {
+      "id": "product.select.allBlogs",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog ",
+      "params": [
+
+      ]
+    },
+    {
       "id": "product.select.subcategory",
       "type": "select",
       "query": "select id, productId, popularity,styleSortSeq, productJson from product where subcategory = ? ORDER BY popularity ASC, styleSortSeq DESC",

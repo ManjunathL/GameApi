@@ -174,7 +174,6 @@ define([
             document.querySelector('meta[name="keywords"]').setAttribute("content", "living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior");
         }
     });
-
     var routeSubCategory = function(subCategory, category) {
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
             require(['views/product/page'], function(ProductPage) {
@@ -358,25 +357,19 @@ define([
                             VM.create(VM.MGDIFF, MyGubbiDiffPage).render();
                         });
                     });
-                   /* router.on('route:stories', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
-                        require(['views/story/stories'], function(StoriesPage) {
-                            VM.create(VM.STORIES, StoriesPage).render();
-                        });
-                    });*/
                     router.on('route:stories', function(blogcategory) {
 
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
-                                require(['views/story/stories'], function(StoriesPage) {
+                        require(['/js/views/story/stories.js'], function(StoriesPage) {
 
-                                     var options = {
-                                        model: {
-                                            "blogcategory": blogcategory
-                                        }
-                                    };
-                                    VM.create(VM.STORIES, StoriesPage, options).render();
-                                });
-                            });
+                             var options = {
+                                model: {
+                                    "blogcategory": blogcategory
+                                }
+                            };
+                            VM.create(VM.STORIES, StoriesPage, options).render();
+                        });
+                    });
                     router.on('route:story', function(name) {
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
                                 require(['views/story/full_story'], function(FullStoryPage) {
