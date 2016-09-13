@@ -1,3 +1,20 @@
+<style>
+    p {
+        font-size: 14px;
+        line-height: 1.75;
+        font-family: 'Lato', sans-serif;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .user_profile p {
+        font-size: 14px;
+    }
+</style>
 <section class="bg-color-white user_page padding50-15">
     <div class="container user_profile">
 
@@ -7,8 +24,7 @@
 
                 <div class="col-md-3 col-sm-3">
                     <div class="row margin-top20 align-center">
-                        <img
-                                src="<%= userProfile ? userProfile.profileImage : imgBase + 'user.png' %>"
+                        <img src="<%= imgBase + '/w_150,h_150,c_thumb,g_face,r_max/' +'user.png' %>"
                                 class="img-responsive"
                                 id="user_profile_image"
                                 alt="User Profile Image">
@@ -60,7 +76,7 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>Date of Birth :</p>
+                                <label>Date of Birth :</label>
                             </div>
                             <div class="col-md-8 col-sm-7">
                                 <p class="view_mode"><%= userProfile ? userProfile.dob : ''%></p>
@@ -85,7 +101,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>Contact :</p>
+                                <label>Contact :</label>
                             </div>
                             <div class="col-md-9 col-sm-8">
                                 <p class="view_mode">+91 <%= userProfile ? userProfile.phone : ''%></p>
@@ -108,7 +124,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>Address :</p>
+                                <label>Address :</label>
                             </div>
                             <div class="col-md-9 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.address : ''%></p>
@@ -127,7 +143,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>Occupation :</p>
+                                <label>Occupation :</label>
                             </div>
                             <div class="col-md-9 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.occupation : ''%></p>
@@ -146,7 +162,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>Hobbies :</p>
+                                <label>Hobbies :</label>
                             </div>
                             <div class="col-md-9 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.hobbies : ''%></p>
@@ -165,7 +181,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>Interest :</p>
+                                <label>Interest :</label>
                             </div>
                             <div class="col-md-9 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.interest : ''%></p>
@@ -184,7 +200,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>Website :</p>
+                                <label>Website :</label>
                             </div>
                             <div class="col-md-9 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.website : ''%></p>
@@ -203,7 +219,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>City :</p>
+                                <label>City :</label>
                             </div>
                             <div class="col-md-3 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.city : ''%></p>
@@ -220,7 +236,7 @@
                                 </p>
                             </div>
                             <div class="col-md-2 col-sm-4">
-                                <p>State :</p>
+                                <label>State :</label>
                             </div>
                             <div class="col-md-3 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.state : ''%></p>
@@ -241,7 +257,7 @@
 
                         <div class="row">
                             <div class="col-md-3 col-sm-4">
-                                <p>PIN Code :</p>
+                                <label>PIN Code :</label>
                             </div>
                             <div class="col-md-9 col-sm-8">
                                 <p class="view_mode"><%= userProfile ? userProfile.pinCode : ''%></p>
