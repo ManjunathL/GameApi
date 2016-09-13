@@ -46,6 +46,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info("Inbound request : " + body);
         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
     }
+
     private boolean isRequestAuthenticated(RoutingContext routingContext){
         final String authorization = routingContext.request().getHeader("Authorization");
         LOG.debug("values :" + authorization);

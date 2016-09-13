@@ -11,7 +11,6 @@ public class ComponentResolver
 {
     public IModuleComponent resolveComponent(IModuleComponent component, ProductModule productModule)
     {
-        //=+IF(F21<350,"H005",IF(F21<400,"H004",IF(F21<450,"H002",IF(F21<500,"H003",IF(F21<550,"H006")))))
 
         String type = null;
         String code = null;
@@ -19,6 +18,7 @@ public class ComponentResolver
         switch(component.getComponentCode())
         {
             case "DRAWER-HW":
+                //=+IF(F21<350,"H005",IF(F21<400,"H004",IF(F21<450,"H002",IF(F21<500,"H003",IF(F21<550,"H006")))))
                 type = IModuleComponent.HARDWARE_TYPE;
                 if (productModule.getDepth() < 350)
                     code = "H005";

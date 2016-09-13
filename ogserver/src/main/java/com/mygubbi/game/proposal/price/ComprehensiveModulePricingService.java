@@ -46,15 +46,24 @@ public class ComprehensiveModulePricingService extends AbstractVerticle
 
     private void calculatePrice(ProductModule productModule, Message message)
     {
-        ModulePriceHolder modulePriceHolder = new ModulePriceHolder(productModule);
-        modulePriceHolder.prepare();
-        if (modulePriceHolder.hasErrors())
+        ModulePriceHolder modulePriceHolder = null;
+        try
         {
-            this.sendResponse(message, modulePriceHolder, productModule);
-            return;
-        }
+            modulePriceHolder = new ModulePriceHolder(productModule);
+            modulePriceHolder.prepare();
+            if (modulePriceHolder.hasErrors())
+            {
+                this.sendResponse(message, modulePriceHolder, productModule);
+                return;
+            }
 
-        modulePriceHolder.calculateTotalCost();
+            modulePriceHolder.calculateTotalCost();
+        }
+        catch (Exception e)
+        {
+            if (modulePriceHolder != null) modulePriceHolder.addError("Error in calculating price:" + e.getMessage());
+            LOG.error("Error in pricing", e);
+        }
         this.sendResponse(message, modulePriceHolder, productModule);
     }
 
