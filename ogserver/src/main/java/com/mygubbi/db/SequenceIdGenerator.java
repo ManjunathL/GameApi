@@ -49,7 +49,7 @@ public class SequenceIdGenerator extends AbstractVerticle
 		this.sequenceMap = this.tableSequences();
 		final Set<String> tables = this.sequenceMap.keySet();
 		final List<String> errors = new ArrayList<String>();
-		
+
 		EventBus eb = vertx.eventBus();
 		for (String table : tables)
 		{

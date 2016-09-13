@@ -3,12 +3,11 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'text!/templates/shortlist/shortlist.html',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js',
-    '/js/views/view_manager.js',
-    'css!/css/shortlist.css'
+    'text!templates/shortlist/shortlist.html',
+    'mgfirebase',
+    'consultutil',
+    'analytics',
+    'views/view_manager'
 ], function($, _, Backbone, Bootstrap, shortlistTemplate, MGF, ConsultUtil, Analytics, VM) {
     var ShortlistView = Backbone.View.extend({
         el: '.page',

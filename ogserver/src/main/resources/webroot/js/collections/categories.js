@@ -1,8 +1,8 @@
 define([
   'jquery',
   'backbone',
-  '/js/models/category.js',
-  '/js/collections/subcategories.js'
+  'models/category',
+  'collections/subcategories'
 ], function($, Backbone, Category, SubCategories){
   var Categories = Backbone.Collection.extend({
     model: Category,

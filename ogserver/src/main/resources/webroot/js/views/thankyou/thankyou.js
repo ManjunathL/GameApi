@@ -2,8 +2,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    '/js/analytics.js',
-    'text!/templates/thankyou/thankyou.html'
+    'analytics',
+    'text!templates/thankyou/thankyou.html'
 ], function($, _, Backbone, Analytics, thankyouTemplate) {
     var ThankyouView = Backbone.View.extend({
         el: '.page',

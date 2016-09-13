@@ -542,68 +542,67 @@ ul, ol{
     text-decoration: none;
     background-color: #fff;
 }
-  .nav>li>a{
-      padding:10px 10px!important;
-  }
-  #nav>li>a {
+.nav>li>a{
+    padding:10px 10px!important;
+}
+#nav>li>a {
     padding: 5px 11px !important;
     border-right: 1px solid #ddd;
     cursor: pointer;
     background-color: #fff;
     font-size: 15px;
-  }
-  .last-item{
+}
+.last-item{
    border-right:0px solid #ddd!important;
-  }
+}
 
-  .menu-mygubbi{
-      width:100%;
-      margin: 0px auto;
-  }
-  .navbar-center{
-      float: none;
-      position: relative;
-      text-align: center;
-      margin: 5px auto 8px;
-  }
-  .navbar-center li{
-      float:none;
-      text-rendering: optimizeLegibility;
-      display:inline-block;
-      margin: 0px auto;
-
-  }
-  @media (max-width: 767px) {
-        #nav>li>a{
-            padding: 5px 5px!important;
-            border-right: 0px solid #ddd;
-            cursor: pointer;
-            background-color: #fff;
-            width: 100%;
-        }
-  }
-  @media (max-width: 992px) {
-      .mob-container{
+.menu-mygubbi{
+    width:100%;
+    margin: 0px auto;
+}
+.navbar-center{
+    float: none;
+    position: relative;
+    text-align: center;
+    margin: 5px auto 8px;
+}
+.navbar-center li{
+    float:none;
+    text-rendering: optimizeLegibility;
+    display:inline-block;
+    margin: 0px auto;
+}
+@media (max-width: 767px) {
+    #nav>li>a{
+        padding: 5px 5px!important;
+        border-right: 0px solid #ddd;
+        cursor: pointer;
+        background-color: #fff;
+        width: 100%;
+    }
+}
+    @media (max-width: 992px) {
+        .mob-container{
             width: 100%;
             padding: 0px;
             margin: 0px;
-      }
-      .gubbi-list-mob {
-          width: 100%;
-          text-align: left;
-          padding: 5px 0px;
-      }
-  }
+        }
+        .gubbi-list-mob {
+            width: 100%;
+            text-align: left;
+            padding: 5px 0px;
+        }
+    }
 
-  .social-menu-lnk{
-      color: rgba(0,0,0,0.6);
-      font-size:16px;
-      margin-top: 5px;
-  }
-  .
-  /* Menu section End */
+.social-menu-lnk{
+    color: rgba(0,0,0,0.6);
+    font-size:16px;
+    margin-top: 5px;
+}
 
-  /* Main Image Section */
+/* Menu section End */
+
+/* Main Image Section */
   .width100{
       width: 100%!important;
   }
@@ -973,6 +972,16 @@ ul, ol{
           min-height:100px;
           width: 100%;
       }
+      /*Start contact us form media code By Nagmani on 7th sep 2016*/
+      .contact-light-black-bg{
+           min-height:100px;
+           width: 100%;
+           padding: 20px;
+     }
+     .call-us {
+         margin: 10px 0px 0px;
+     }
+     /*End contact us form media code By Nagmani on 7th sep 2016*/
       .thought-txt h1 {
           text-transform: none!important;
           font-weight: 400!important;
@@ -4835,7 +4844,6 @@ hr {
 
 .other-accs-options a img {
     max-width: 100%;
-/ / width: 100 %;
     height: auto;
     position: relative;
     z-index: 1;
@@ -5939,17 +5947,37 @@ a.tab-ico {
     left: 0px;
     bottom: 0px;
 }
+/* Start Media page code by Nagmani 2nd Sep 2016 */
 .txt-urstory{
-    color:#DE1920;
+    color: rgba(241,90,34,1);
 }
 .media-txt-title{
-    font-size:20px;
+    font-size: 24px;
+    text-transform: inherit;
 }
 .media_separator {
     width: 100%;
     margin: 30px auto 0px;
     border-bottom: 1px solid #CCC;
 }
+.btn-media {
+    color: #fff;
+    background: rgba(241,90,34,1);
+    border-color: rgba(241,90,34,1);
+    border-radius: 0px;
+    text-shadow: 0px 0px 0px #fff;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-style: italic;
+}
+.btn-media:hover,
+.btn-media:active,
+.btn-media:focus{
+    color: #ffffff;
+    background: rgba(241,90,34,0.9);
+    border-color: rgba(241,90,34,0.9);
+}
+/* End media page code bt Nagmani 2nd sep 2016*/
 .vertline:after {
      content:"";
      position: absolute;
@@ -7697,24 +7725,25 @@ width:14% !important;
         position: absolute;
         width: 32% !important;
      }
+/* Start Service icon code by Nagmani 7th Sep 2016 */
 .kitchen-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
 
 }
 .wardrobe-icon{
-width: 29% !important;
-border-right: solid 2px #ccc;
+    width: 32% !important;
+    border-right: solid 2px #ccc;
 }
 .otherunit-icon{
-width: 32% !important;
-
+    width: 32% !important;
 }
+/* End Service icon code by Nagmani 7th Sep 2016 */
 .font-weight600{
- font-weight: 600 !important;
+    font-weight: 600 !important;
 }
 .padding50-94{
-padding: 50px 94px;
+    padding: 50px 94px;
 }
 
 .testimonials-carousel .carousel-caption{
@@ -7735,9 +7764,11 @@ padding: 50px 94px;
     font-family: 'Raleway', sans-serif;
     margin: 0px;
 }
+
 .testimonials-carousel .carousel-indicators{
     bottom: 90px;
 }
+
 .carousel-inner{
     margin: 0px !important;
 }
@@ -7749,7 +7780,17 @@ padding: 50px 94px;
     min-height: 170px;
     line-height: 150%;
 }
+/* Start process text code by Nagmani 7th Sep 2016 */
+.text-process{
+    text-align: left;
+}
 
+@media screen and (max-width: 992px) {
+    .text-process{
+        text-align: center;
+    }
+}
+/* End process text code by Nagmani 7th Sep 2016 */
 #form-container-content .form-elements input {
     border-radius: 0px !important;
  }
@@ -7856,11 +7897,25 @@ padding: 50px 94px;
         padding-bottom: 10px!important;
     }
 }
-
+/* By Nagmani on 7th Sep 2016 */
 .open-contact-section{
-    background: url("https://res.cloudinary.com/mygubbi/image/upload/v1469247527/kyw/kyw_pattern.png");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473333146/home/new_design/gubbi-map.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 410px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
 }
-
+/* End By Nagmani on 7th Sep 2016 */
 a#goto-login{
     color:#f1591f!important;
 }
@@ -7964,6 +8019,61 @@ a#goto-login{
 
 /* Menu Design End */
 
+/* Start Media Landing Page by nagmani on 2nd sep */
+.media-banner img{
+    width: 100%;
+}
+.m-story-img{
+    background: #fDfDfd;
+    border: 1px solid #ddd;
+}
+
+.m-thumb-box{
+    height: 110px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+.m-thumb-box .img-thumbnail{
+    border: 0px solid #ddd;
+    pointer: cursor;
+}
+
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+#myCarousel .carousel-control.left{
+    background: transparent;
+}
+#myCarousel .carousel-control.right{
+    background: transparent;
+}
+.show-img {
+    position: relative;
+    float:left;
+    margin: 20px 0px;
+}
+.show-img:hover img{
+    opacity:0.8;
+}
+.show-img:hover a {
+    display: block;
+}
+.show-img a {
+    position:absolute;
+    display:none;
+}
+.show-img a.update {
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+/* End Media landing Page  by nagmani on 2nd sep */
+
 /* Banner button */
 .enquire-btn-div{
     position:absolute;
@@ -8014,6 +8124,9 @@ a#goto-login{
         width:85%;
     }
 }
+
+
+
 
 /* Start contact us form code By  nagmani on 7th sep 2016 */
    .contact-light-black-bg{
@@ -8107,68 +8220,297 @@ a#goto-login{
 
 /* Price Slider */
 
- .price-slide{
-		margin: 0px 10px;
-	 }
-	 .price-tag{
-		margin: 10px auto;
-	 }
-	 .pull-left{
-		float: left;
-	 }
-	 .pull-right{
-		float: right;
-	 }
-	.slider-ioc {
-		background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473160824/product_collection/slider-icon.png");
-		background-repeat: no-repeat;
-		float: left;
-		width: 16px;
-		height: 16px;
-		z-index: 99;
-		position: absolute;
-		margin: -4px 0px 0px -10px;
-	}
-	.ui-slider-horizontal{
-		height: 0.4em;
-	}
-	.ui-state-default,
-	.ui-widget-content
-	.ui-state-default,
-	.ui-widget-header
-	.ui-state-default,
-	.ui-button,
-	html .ui-button.ui-state-disabled:hover,
-	html .ui-button.ui-state-disabled:active {
-		border: 1px solid #ff8900;
-		background: #ff8900;
-		font-weight: normal;
-		color: #454545;
-	}
-	.ui-slider .ui-slider-handle {
-		position: absolute;
-		z-index: 999;
-		width: .9em;
-		height: .9em;
-		cursor: default;
-		-ms-touch-action: none;
-		touch-action: none;
-	}
-	.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
-		border-top-left-radius: 50px;
-	}
+.price-slide{
+    margin: 0px 10px;
+ }
+ .price-tag{
+    margin: 10px auto;
+ }
+ .pull-left{
+    float: left;
+ }
+ .pull-right{
+    float: right;
+ }
+.slider-ioc {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473160824/product_collection/slider-icon.png");
+    background-repeat: no-repeat;
+    float: left;
+    width: 16px;
+    height: 16px;
+    z-index: 99;
+    position: absolute;
+    margin: -4px 0px 0px -10px;
+}
+.ui-slider-horizontal{
+    height: 0.4em;
+}
+.ui-state-default,
+.ui-widget-content
+.ui-state-default,
+.ui-widget-header
+.ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
+    border: 1px solid #ff8900;
+    background: #ff8900;
+    font-weight: normal;
+    color: #454545;
+}
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 999;
+    width: .9em;
+    height: .9em;
+    cursor: default;
+    -ms-touch-action: none;
+    touch-action: none;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+    border-top-left-radius: 50px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    border-top-right-radius: 50px;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+    border-bottom-left-radius: 50px;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 50px;
+}
+.ui-widget.ui-widget-content {
+    border: 1px solid #e9e9e9;
+}
+#amount2,
+#amount{
+    margin-left: 73px;
+    margin-bottom: 15px;
+}
 
-	.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
-		border-top-right-radius: 50px;
-	}
-	.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
-		border-bottom-left-radius: 50px;
-	}
-	.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
-		border-bottom-right-radius: 50px;
-	}
-	.ui-widget.ui-widget-content {
-		border: 1px solid #e9e9e9;
-	}
+/* ================= End of Price Slider ===================== */
 
-/* End of Price Slider */
+
+/* Home page changes */
+
+.right-side-menu .nav>li>a{
+    font-family: 'Lato', sans-serif;
+}
+.sb-search{
+    top: 12px;
+}
+.search-close-ico {
+    position: absolute;
+    top: 0;
+    right: 1%;
+    cursor: pointer;
+    color: #5C6E7B;
+}
+.search-ico {
+    font-size: 32px !important;
+}
+.navbar-center{
+    margin: 1px auto 3px;
+}
+.drop{
+    top: 110%;
+}
+.wishlist{
+    color: #596a74 !important
+}
+.wishlist.active{
+    color: rgba(241,90,34,1)!important;
+}
+.premium-home-txt{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    padding-left: 0;
+    text-align: center;
+}
+.banner-icon-height{
+    min-height: inherit;
+}
+.banner-icon-height p{
+    margin-top: 10px;
+    font-family: 'Lato', sans-serif;
+}
+.contact-phone {
+    color: #ffffff !important;
+    font-size: 1.9em !important;
+    line-height: 2em !important;
+}
+.footer-section-top ul,
+.footer-section-top p {
+    font-family: 'Lato', sans-serif;
+}
+.section-heading{
+    color: #566771 !important;
+}
+
+.address_right_section{
+    background: rgba(0,0,0,0.6);
+    width: 25%;
+}
+
+.location_add {
+    padding: 10px 30px 5px 10px;
+    border-top: 1px solid #ccc;
+}
+
+.address_right_section p {
+    padding: 0px;
+    color: #fff;
+    margin: 0px;
+}
+.location-city{
+    margin: 0px;
+}
+.padding-loc-space {
+    padding: 20px 30px 0px !important;
+}
+.btn-popup{
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f1591f !important;
+    padding: 5px 7px;
+    background-color: #f1591f!important;
+    color:#ffffff!important;
+    border-radius:0px!important;
+    text-transform: uppercase!important;
+}
+.btn-popup:hover,
+.btn-popup:focus,
+.btn-popup:active{
+    background-color: #f1591f!important;
+    color: #ffffff!important;
+    border-color: #f1591f !important;
+}
+.padding-top25{
+    padding-top: 25px;
+}
+.padding-bottom25{
+    padding-bottom: 25px;
+}
+
+.testimonials-wrapper img{
+    width: 100%;
+}
+.testimonials-carousel .carousel-caption {
+    position: absolute;
+    bottom: 25px;
+}
+.testimonials-carousel .carousel-indicators {
+    bottom: 115px;
+}
+
+.submenu-explore {
+    float: right;
+    color: #ff3200 !important;
+    font-size: 12px;
+}
+.submenu-des {
+    font-family: 'Lato', sans-serif;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    -webkit-border-radius: 0px 0px 0px 0px !important;
+    -moz-border-radius: 0px 0px 0px 0px !important;
+    border-radius: 0px 0px 0px 0px !important;
+}
+
+.menu-mygubbi .dropdown-menu {
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.txt-over-kitchen-image{
+    width: 100%;
+}
+.mob-c-project{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+.mob-c-btn{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.testimonials-wrapper h4{
+    text-transform: capitalize;
+    font-size:16px;
+}
+
+@media (max-width: 992px) {
+    .address_right_section{
+        background: rgba(0,0,0,0.6);
+        width: 60%;
+    }
+    .address_right_section h4{
+        margin: 0px 0px 10px;
+    }
+    .location_add{
+        margin-top: 0px !important;
+    }
+}
+@media (max-width: 767px) {
+    .banner-icon-height{
+        min-height: 200px;
+    }
+    .address_right_section{
+        background: rgba(0,0,0,0.6);
+        width: 50%;
+    }
+    .testimonials-carousel .carousel-caption {
+        position: relative;
+        bottom: auto;
+        padding: 10px;
+        width: 100%;
+        left: 0px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .enquire-btn-div {
+        position: absolute;
+        left: 30%;
+        top: 0%;
+    }
+    .trend-explore-space {
+        margin-left: 40px!important;
+    }
+    .section-heading{
+        text-align: center;
+        display: table;
+        margin: 0px auto;
+    }
+    .explore-space2{
+        margin: 0px auto !important;
+    }
+    .txt-over-style-image{
+        top: 45%;
+    }
+    .txt-over-trendstyle-image{
+        top: 45%;
+    }
+    .footer-section-top{
+        text-align: center;
+    }
+    .address_right_section {
+        position: relative;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .address_right_section h4{
+        padding: 10px 0px;
+    }
+}

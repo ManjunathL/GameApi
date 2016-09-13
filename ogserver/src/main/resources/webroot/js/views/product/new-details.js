@@ -7,17 +7,17 @@ define([
     'backbone',
     'bootstrap',
     'jqueryeasing',
-    'text!/templates/product/new-details.html',
-    '/js/views/product/details_helper.js',
-    '/js/models/product.js',
-    '/js/models/custom_product.js',
-    'text!/templates/product/new-finish.html',
-    '/js/collections/relatedproducts.js',
-    'text!/templates/product/relatedproduct.html',
-    '/js/slyutil.js',
-    '/js/mgfirebase.js',
-    '/js/analytics.js',
-    '/js/views/view_manager.js'
+    'text!templates/product/new-details.html',
+    'views/product/details_helper',
+    'models/product',
+    'models/custom_product',
+    'text!templates/product/new-finish.html',
+    'collections/relatedproducts',
+    'text!templates/product/relatedproduct.html',
+    'slyutil',
+    'mgfirebase',
+    'analytics',
+    'views/view_manager'
 ], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, FinishTemplate, RelatedProductCollection, relatedproductTemplate, SlyUtil, MGF, Analytics, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',

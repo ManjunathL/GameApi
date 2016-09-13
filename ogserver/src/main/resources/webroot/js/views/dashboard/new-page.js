@@ -4,12 +4,13 @@ define([
     'backbone',
     'bootstrap',
     'cloudinary_jquery',
-    '/js/slyutil.js',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js',
+    'slyutil',
+    'mgfirebase',
+    'consultutil',
+    'analytics',
     'bxslider',
-    'text!/templates/dashboard/new-page.html'
+    'text!templates/dashboard/new-page.html',
+    'libs/unveil/jquery.unveil.mg'
 ], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, dashboardPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
@@ -20,6 +21,7 @@ define([
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
+            $("img").unveil();
             this.ready();
         },
 

@@ -5,10 +5,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    '/js/models/story.js',
-    '/js/analytics.js',
-    'text!/templates/story/full_story.html',
-    '/js/views/story/full_story_helper.js'
+    'models/story',
+    'analytics',
+    'text!templates/story/full_story.html',
+    'views/story/full_story_helper'
 ], function($, _, Backbone, Story, Analytics, fullStoryTemplate, FullStoryHelper) {
     var FullStoryView = Backbone.View.extend({
         el: '.page',

@@ -21,6 +21,9 @@
       },
       {
         "name": "com.mygubbi.catalog.ProductManagementService"
+      },
+      {
+        "name": "com.mygubbi.catalog.BlogManagementService"
       }
     ]
   }

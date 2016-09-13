@@ -1,7 +1,7 @@
 define([
   'jquery',
   'backbone',
-  '/js/models/user.js'
+  'models/user'
 ], function($, Backbone, User){
     var Users = Backbone.Collection.extend({
         model: User,
