@@ -53,6 +53,30 @@ public class HardwareComponent
                 return (productModule.getHeight() + productModule.getWidth() * 2) * 1.05 / 1000;
             case "F9":
                 return (productModule.getHeight() * 2 + productModule.getWidth()) * 1.05 / 1000;
+            case "F10":
+                return (productModule.getWidth() > 600) ? 6 : 4;
+            case "F11":
+                return productModule.getWidth() * 1.05 / 1000;
+            case "F12":
+                return (productModule.getWidth() > 600) ? 4 : 2;
+            case "F13":
+                return (productModule.getWidth() > 1000) ? 2 : 1;
+            case "F14":
+                return productModule.getWidth() * productModule.getDepth() * 10.764 / (1000 / 1000);
+            case "F15":
+                return productModule.getHeight() * 1.05/1000;
+            case "F16":
+                return (productModule.getWidth() > 600) ? 8 : 4;
+            case "F17":
+                return (productModule.getWidth() > 600) ? 3 : 2;
+            case "F18":
+                        int valuenew1 = (productModule.getHeight() > 2100) ? 5 : 4;
+                        int valuenew2 = (productModule.getWidth() > 600) ? 2 : 1;
+                        return valuenew1 * valuenew2*4;
+            case "F19":
+                return (productModule.getWidth() > 600) ? 12 : 8;
+            case "F20":
+                return (productModule.getWidth() > 600) ? 16 : 8;
             default:
                 return 0;
         }

@@ -297,19 +297,11 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/module/moduleCategory",
-      "source": "db",
-      "query":"module.category",
-      "params":["productCategory"],
-      "resultfields":[""],
-      "default": "[]"
-    },
-    {
       "uri": "/gapi/module/modulesByCategory",
       "source": "db",
       "query":"module.selectModulesByCategory",
-      "params":["productCategory","moduleCategory"],
-      "resultfields":[""],
+      "params":["productCategory", "moduleCategory"],
+      "resultfields":[],
       "default": "[]"
     }
   ]

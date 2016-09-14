@@ -12,7 +12,7 @@ public interface IModuleComponent
 
     public static final String RESOLVED_TYPE = "X";
 
-    public static final String QUANTITY_FIXED = "X";
+    public static final String QUANTITY_FIXED = "F";
     public static final String QUANTITY_CALCULATED = "C";
 
     public boolean isCarcass();

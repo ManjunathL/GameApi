@@ -504,7 +504,7 @@
     {
       "id": "module.selectModulesByCategory",
       "type": "select",
-      "query": "select distinct code from module_master where productCategory = ? and moduleCategory = ?",
+      "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
       "params": ["productCategory","moduleCategory"]
     }
   ]
