@@ -506,6 +506,8 @@ define([
                 MGF.removeShortlistProduct(productId).then(function() {
                     product.set('user_shortlisted', false);
                 });
+                $('#wishlist-ico').removeClass('active');
+                $('#wishlist-ico1').removeClass('active');
             } else {
                 MGF.addShortlistProduct(product.toJSON()).then(function() {
                     product.set('user_shortlisted', true);
