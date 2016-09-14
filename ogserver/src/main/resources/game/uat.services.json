@@ -20,7 +20,7 @@
         "worker": false
       },
       {
-        "name": "com.mygubbi.game.proposal.quote.ModuleDataService"
+        "name": "com.mygubbi.game.proposal.ModuleDataService"
       },
       {
         "name": "com.mygubbi.game.proposal.price.RateCardService"
