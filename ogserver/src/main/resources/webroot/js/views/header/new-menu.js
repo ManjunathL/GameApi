@@ -93,6 +93,8 @@ define([
             var slItems = MGF.getShortListedItems();
             $('#shortlistSuperScript').html(slItems ? Object.keys(slItems).length : '');
             $('#shortlistSuperScript1').html(slItems ? Object.keys(slItems).length : '');
+            $('#wishlist-ico').addClass(slItems ? 'active' : '');
+            $('#wishlist-ico1').addClass(slItems ? 'active' : '');
             this.renderShortlist();
         },
         renderShortlist: function() {

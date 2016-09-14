@@ -370,6 +370,16 @@ define([
                     $($(this).closest('li.gubbi-list-desk').children()[0]).addClass('active');
                 });
 
+                /*$('#nav').find('ul.dropdownMenu_lg a').click(function () {
+                    $('#nav').find('ul.dropdownMenu_lg li').removeClass('active');
+                    $($(this).parent('li')).addClass('active').removeClass('open');
+                });*/
+
+                $('#nav').find('ul.gubbi-list-mob-ul a').click(function () {
+                    $('#nav').find('ul.gubbi-list-mob-ul li').removeClass('active');
+                    $($(this).parent('li')).addClass('active');
+                });
+
                 /* Menu onhover code by Smruti */
                 $( ".dropdown-submenu a" )
                 .mouseenter(function() {

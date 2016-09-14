@@ -8044,6 +8044,13 @@ a#goto-login{
     display: block!important;
 }
 
+.gubbi-list-mob-ul >.active>a,
+.gubbi-list-mob-ul >.active>a:hover,
+.gubbi-list-mob-ul >.active>a:focus{
+    color: #ff3200!important;
+    background:#fff!important;
+}
+
 /* Menu Design End */
 
 /* Start Media Landing Page by nagmani on 2nd sep */
