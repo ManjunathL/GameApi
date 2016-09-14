@@ -8372,6 +8372,7 @@ html .ui-button.ui-state-disabled:active {
     padding: 0px;
     color: #fff;
     margin: 0px;
+    line-height: 1.5;
 }
 .location-city{
     margin: 0px;
