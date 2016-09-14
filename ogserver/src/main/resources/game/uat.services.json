@@ -30,7 +30,7 @@
         "instances": 5
       },
       {
-        "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService"
+        "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService",
         "instances": 5
       },
 
