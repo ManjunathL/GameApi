@@ -20,13 +20,17 @@
         "worker": false
       },
       {
-        "name": "com.mygubbi.game.proposal.ModuleDataService"
+        "name": "com.mygubbi.game.proposal.price.ModuleDataService"
       },
       {
-        "name": "com.mygubbi.game.proposal.RateCardService"
+        "name": "com.mygubbi.game.proposal.price.RateCardService"
       },
       {
-        "name": "com.mygubbi.game.proposal.ModulePricingService",
+        "name": "com.mygubbi.game.proposal.price.ModulePricingService",
+        "instances": 5
+      },
+      {
+        "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService"
         "instances": 5
       },
 
