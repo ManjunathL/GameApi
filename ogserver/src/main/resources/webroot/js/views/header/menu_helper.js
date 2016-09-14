@@ -4,10 +4,10 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/collections/autosuggest_products.js',
-    'text!/templates/header/suggest_results.html'
+    'mgfirebase',
+    'consultutil',
+    'collections/autosuggest_products',
+    'text!templates/header/suggest_results.html'
 ], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil, AutoSuggestProducts, SuggestResultsPage) {
     return {
         ref: MGF.rootRef,
@@ -647,7 +647,7 @@ define([
                     href = $(event.currentTarget).attr('href');
                     if (!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
                         event.preventDefault();
-                        url = href.replace(/^\//, '').replace('\#\!\/', '');
+                        url = href.replace("/^\//", '').replace('\#\!\/', '');
                         window.App.router.navigate(url, {
                             trigger: true
                         });

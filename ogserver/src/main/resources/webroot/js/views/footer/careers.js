@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/footer/careers.html'
+    'text!templates/footer/careers.html'
 ], function($, _, Backbone, careerTemplate) {
     var CareerView = Backbone.View.extend({
         el: '.page',

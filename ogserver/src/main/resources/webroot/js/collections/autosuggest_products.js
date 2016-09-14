@@ -1,7 +1,7 @@
 define([
     'jquery',
     'backbone',
-    '/js/models/autosuggest_product.js',
+    'models/autosuggest_product',
     'underscore'
 ], function($, Backbone, AutoSuggestProduct, _) {
     var AutoSuggestProducts = Backbone.Collection.extend({

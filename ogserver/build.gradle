@@ -65,11 +65,11 @@ shadowJar {
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile 'org.slf4j:slf4j-log4j12:1.7.12'
-    compile 'io.vertx:vertx-core:3.1.0'
-    compile 'io.vertx:vertx-web:3.1.0'
-    compile 'io.vertx:vertx-jdbc-client:3.1.0'
-    compile 'io.vertx:vertx-sql-common:3.1.0'
-    compile 'io.vertx:vertx-hazelcast:3.1.0'
+    compile 'io.vertx:vertx-core:3.2.0'
+    compile 'io.vertx:vertx-web:3.2.0'
+    compile 'io.vertx:vertx-jdbc-client:3.2.0'
+    compile 'io.vertx:vertx-sql-common:3.2.0'
+    compile 'io.vertx:vertx-hazelcast:3.2.0'
 
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
@@ -100,5 +100,5 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
-    testCompile 'io.vertx:vertx-unit:3.1.0'
+    testCompile 'io.vertx:vertx-unit:3.2.0'
 }

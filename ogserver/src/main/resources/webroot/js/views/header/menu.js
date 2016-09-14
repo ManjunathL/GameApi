@@ -4,14 +4,14 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'text!/templates/header/menu.html',
-    'text!/templates/header/shortlist_bar.html',
-    '/js/collections/categories.js',
-    '/js/collections/users.js',
-    '/js/models/autoSearch.js',
-    '/js/models/preSearch.js',
-    '/js/views/header/menu_helper.js',
-    '/js/mgfirebase.js'
+    'text!templates/header/menu.html',
+    'text!templates/header/shortlist_bar.html',
+    'collections/categories',
+    'collections/users',
+    'models/autoSearch',
+    'models/preSearch',
+    'views/header/menu_helper',
+    'mgfirebase'
 ], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, shortlistTemplate, Categories, Users, AutoSearch, PreSearch, menuHelper, MGF) {
     var HeaderMenuView = Backbone.View.extend({
         users: null,

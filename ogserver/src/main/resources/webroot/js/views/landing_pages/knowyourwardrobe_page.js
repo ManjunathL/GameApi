@@ -2,12 +2,12 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/landing_pages/knowyourwardrobe_page.html',
+    'text!templates/landing_pages/knowyourwardrobe_page.html',
     'cloudinary_jquery',
-    '/js/slyutil.js',
-    '/js/mgfirebase.js',
-    '/js/consultutil.js',
-    '/js/analytics.js'
+    'slyutil',
+    'mgfirebase',
+    'consultutil',
+    'analytics'
 ], function($, _, Backbone, knowyourwardrobePageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var KnowYourWardrobePageVIew = Backbone.View.extend({
         el: '.page',

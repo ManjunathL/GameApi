@@ -2,8 +2,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/footer/new-footer.html',
-    '/js/mgfirebase.js'
+    'text!templates/footer/new-footer.html',
+    'mgfirebase'
 ], function($, _, Backbone, footerTemplate, MGF) {
     var FooterView = Backbone.View.extend({
         el: '.footer',

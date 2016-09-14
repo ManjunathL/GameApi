@@ -3,16 +3,16 @@
 
 /* ----- Festive Page CSS ------ */
 
-.navbar{
+#festive_lp .navbar{
     height: 70px;
     background: #FFFFFF;
 }
-.navbar-brand{
+#festive_lp .navbar-brand{
     padding: 0px;
     margin: 0px;
 }
 
-.navbar-brand img {
+#festive_lp .navbar-brand img {
     width: 130px;
     padding: 10px 0px 0px 5px;
 }
@@ -191,7 +191,7 @@
 
 @media (max-width: 1300px) {
     .festive_banner_bg {
-        min-height: 505px;
+        min-height: 540px;
         width: 100%;
     }
 }
@@ -255,6 +255,9 @@
         margin-bottom: 0;
         max-height: 105px;
     }
+    .fact-des{
+        font-size:12px;
+    }
 }
 
 .section-portfolio{
@@ -267,5 +270,10 @@
     padding: 10px 0px 5px;
     background: #f1591f;
 }
+
+.img-centered {
+  margin: 0 auto;
+}
+
 
 /* ----- End Festive Page CSS ------ */

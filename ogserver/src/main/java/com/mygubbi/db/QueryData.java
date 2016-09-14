@@ -11,7 +11,6 @@ public class QueryData
 {
 	public String queryId;
 	public QueryDef queryDef;
-	
 	public JsonObject paramsObject;
 	public List<JsonObject> rows;
 	public UpdateResult updateResult;
@@ -24,15 +23,14 @@ public class QueryData
 	
 	public QueryData()
 	{
-		
+
 	}
-	
+
 	public QueryData(String queryId, JsonObject paramsObject)
 	{
 		this.queryId = queryId;
 		this.paramsObject = paramsObject;
 	}
-
 	public JsonArray getParams()
 	{
 		if (this.paramsObject == null || this.queryDef == null || this.queryDef.paramList == null) return null;

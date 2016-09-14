@@ -37,6 +37,10 @@
         "instances": 1
       },
       {
+        "name": "com.mygubbi.catalog.BlogManagementService",
+        "instances": 1
+      },
+      {
         "name": "com.mygubbi.si.email.EmailService",
         "instances": 4
       }

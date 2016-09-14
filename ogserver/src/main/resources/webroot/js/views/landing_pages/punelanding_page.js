@@ -5,11 +5,11 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/landing_pages/punelanding_page.html',
+    'text!templates/landing_pages/punelanding_page.html',
     'cloudinary_jquery',
-    '/js/slyutil.js',
-    '/js/mgfirebase.js',
-    '/js/analytics.js'
+    'slyutil',
+    'mgfirebase',
+    'analytics'
 ], function($, _, Backbone, punelandingPageTemplate, CloudinaryJquery, SlyUtil, MGF, Analytics) {
     var PuneLandingPageVIew = Backbone.View.extend({
         el: '.page',

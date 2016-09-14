@@ -23,6 +23,7 @@ public class ConfigHolder extends AbstractVerticle
 	private String baseConfigFile = "config/conf.base.json";
 	private String esConfig = "config/es.json";
 	private String servicesConfig = "config/all.services.json";
+	private String maxAge = "max-age";
 
 	private List<String> configFilesToLoad;
 
@@ -67,6 +68,10 @@ public class ConfigHolder extends AbstractVerticle
 	public boolean getBoolean(String key, boolean defaultValue)
 	{
 		return this.serverConfig.getBoolean(key, defaultValue);
+	}
+
+	public int getMaxAge() {
+		return getInteger(maxAge, 86400);
 	}
 
 	@Override

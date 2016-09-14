@@ -1,5 +1,6 @@
 require.config({
-    paths: {
+        baseUrl: "js",
+        paths: {
         jquery: 'libs/jquery/dist/jquery.min',
         jqueryui: 'libs/jquery-ui/jquery-ui',
         underscore: 'libs/underscore/underscore-min',
@@ -11,7 +12,8 @@ require.config({
         bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
         bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
         firebase: 'libs/firebase/firebase',
-        cloudinary_jquery: 'libs/cloudinary-jquery/cloudinary-jquery.min',
+        cloudinary_jquery: 'libs/cloudinary-jquery.mg',
+        unveil: 'libs/unveil/jquery.unveil.mg',
         templates: '../templates'
     },
     shim: {
@@ -36,6 +38,10 @@ require.config({
         'cloudinary_jquery': {
             deps: ['jquery'],
             exports: 'cloudinary-jquery'
+        },
+        'unveil': {
+            deps: ['jquery'],
+            exports: 'unveil'
         }
     },
     map: {
