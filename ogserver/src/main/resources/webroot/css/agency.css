@@ -872,7 +872,34 @@ ul, ol{
       background: rgba(241,90,34,1);
       min-height: 420px;
    }
-
+   /* Start contact us form code By  nagmani on 7th sep 2016 */
+   .contact-light-black-bg{
+        background: rgba(0,0,0,.7);
+        min-height: 420px;
+        color: #ffffff;
+        padding: 70px 15px 20px;
+   }
+    .call-us {
+        margin: 60px 0px 0px;
+    }
+    .contact-phone{
+        color: #ffffff !important;
+        font-size: 1.8em !important;
+        line-height: 1.8em !important;
+    }
+    .contact-circle{
+        background: rgba(241,90,34,1);
+        color: #ffffff;
+        text-align: center;
+        border-radius: 50%;
+        width: 50px;
+        height:50px;
+        margin: 0px auto 20px;
+    }
+    .contact-no{
+        font-size: 20px;
+    }
+    /* End contact us form code By nagmani on 7th sep 2016 */
    .contact-form-bg{
       /*background-color: rgba(0,0,0,0.6);*/
       margin: 0px!important;
@@ -8555,3 +8582,81 @@ html .ui-button.ui-state-disabled:active {
         top: 155px;
     }
 }
+
+/* Start Quality Page */
+
+.quality-banner{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473850585/quality/quality-banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 530px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+}
+
+.quality-banner-cnt{
+    background: rgba(241, 90, 34, 0.9);
+    padding: 20px 10px;
+    margin: 100px 0px;
+    color: #ffffff;
+}
+
+.quality-cnt-head{
+    font-size: 52px;
+    line-height: 130%;
+}
+.quality-cnt-des{
+    padding: 10px 100px;
+    font-size:18px;
+    line-height: 130%;
+}
+.quality-materials-section{
+    margin: 30px auto 0px;
+    position: relative;
+}
+.quality-check-line{
+    margin-top: 22px;
+    border-bottom: 1px solid #ddd;
+}
+.quality-check-head-box{
+    margin:0px auto;
+    display: table;
+    position: relative;
+    background: #ffffff;
+    color: rgba(241, 90, 34, 1);
+}
+.quality-check-head {
+    background: #fff none repeat scroll 0 0;
+    font-weight: 300;
+    margin-top: -22px;
+    padding: 0 20px;
+}
+.quality-material-about{
+    padding: 10px 0px;
+}
+.quality-material-about p{
+    font-family: 'Lato', sans-serif;
+}
+.quality-materials-img-box{
+    margin: 30px 0px 50px;
+}
+.qm-head{
+    text-align: center;
+    color: rgba(241, 90, 34, 1);
+    text-transform: capitalize;
+}
+.qm-more{
+    color: rgba(241, 90, 34, 0.9);
+}
+
+/* End Quality Page */
+
