@@ -957,6 +957,9 @@ ul, ol{
       font-weight: 400!important;
       cursor: pointer;
   }
+  .mob-search{
+    font-size: 24px!important;
+  }
 
   /* Mobile Responsiveness */
 
@@ -7780,6 +7783,9 @@ width:14% !important;
     min-height: 170px;
     line-height: 150%;
 }
+.process-icon-height p{
+    font-family: 'Lato', sans-serif;
+}
 /* Start process text code by Nagmani 7th Sep 2016 */
 .text-process{
     text-align: left;
@@ -8142,6 +8148,9 @@ a#goto-login{
         color: #ffffff;
         padding: 70px 15px 20px;
    }
+   .contact-light-black-bg p{
+        font-family: 'Lato', sans-serif;
+   }
     .call-us {
         margin: 60px 0px 0px;
     }
@@ -8224,7 +8233,7 @@ a#goto-login{
     background:#EEEFF1;
 }
 .bg-color-brand img{
-    width: 80%;
+    width: 100%;
 }
 /* End By Nagmani on 7th Sep 2016 */
 
@@ -8319,6 +8328,9 @@ html .ui-button.ui-state-disabled:active {
 .search-ico {
     font-size: 32px !important;
 }
+.mob-search{
+    font-size: 24px!important;
+}
 .navbar-center{
     margin: 1px auto 3px;
 }
@@ -8370,12 +8382,16 @@ html .ui-button.ui-state-disabled:active {
     padding: 10px 30px 5px 10px;
     border-top: 1px solid #ccc;
 }
+.location_add p{
+    font-family: 'Lato', sans-serif;
+}
 
 .address_right_section p {
     padding: 0px;
     color: #fff;
     margin: 0px;
     line-height: 1.5;
+    font-family: 'Lato', sans-serif;
 }
 .location-city{
     margin: 0px;
@@ -8413,9 +8429,6 @@ html .ui-button.ui-state-disabled:active {
 .testimonials-carousel .carousel-caption {
     position: absolute;
     bottom: 25px;
-}
-.testimonials-carousel .carousel-indicators {
-    bottom: 115px;
 }
 
 .submenu-explore {
@@ -8470,6 +8483,18 @@ html .ui-button.ui-state-disabled:active {
     .location_add{
         margin-top: 0px !important;
     }
+    .testimonials-carousel .carousel-caption {
+        width: 96%;
+        left: 2%;
+        right: 2%;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.76);
+        padding: 5px 10px 0px;
+        bottom: 2%;
+    }
+    .testimonials-carousel .carousel-indicators{
+        top: 100px;
+    }
 }
 @media (max-width: 767px) {
     .banner-icon-height{
@@ -8486,12 +8511,14 @@ html .ui-button.ui-state-disabled:active {
         width: 100%;
         left: 0px;
     }
+    .testimonials-carousel .carousel-indicators {
+        top: 255px;
+    }
 }
 @media screen and (max-width: 480px) {
     .enquire-btn-div {
         position: absolute;
-        left: 30%;
-        top: 0%;
+        left: 25%;
     }
     .trend-explore-space {
         margin-left: 40px!important;
@@ -8523,5 +8550,8 @@ html .ui-button.ui-state-disabled:active {
     }
     .address_right_section h4{
         padding: 10px 0px;
+    }
+    .testimonials-carousel .carousel-indicators {
+        top: 155px;
     }
 }
