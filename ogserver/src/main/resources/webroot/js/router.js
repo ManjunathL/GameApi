@@ -66,6 +66,7 @@ define([
             'know-your-kitchen(/)': 'knowyourkitchen',
             'remarketing-lp(/)': 'remarketinglp',
             'about-us(/)': 'aboutus',
+            'quality-check(/)': 'qualitycheck',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -331,6 +332,13 @@ define([
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
                         require(['views/footer/about'], function(AboutPage) {
                             VM.create(VM.ABOUT, AboutPage).render();
+                        });
+                    });
+
+                    router.on('route:qualitycheck', function(actions) {
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        require(['views/quality/quality-check'], function(QualityCheckPage) {
+                            VM.create(VM.QUALITYCHECK, QualityCheckPage).render();
                         });
                     });
                     router.on('route:faq', function(actions) {

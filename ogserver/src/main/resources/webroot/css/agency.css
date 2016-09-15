@@ -8223,6 +8223,9 @@ a#goto-login{
 .bg-color-brand{
     background:#EEEFF1;
 }
+.bg-color-brand img{
+    width: 80%;
+}
 /* End By Nagmani on 7th Sep 2016 */
 
 /* Price Slider */
