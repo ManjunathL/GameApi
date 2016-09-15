@@ -8620,7 +8620,7 @@ html .ui-button.ui-state-disabled:active {
     line-height: 130%;
 }
 .quality-materials-section{
-    margin: 30px auto 0px;
+    margin: 55px auto 0px;
     position: relative;
 }
 .quality-check-line{
@@ -8639,10 +8639,9 @@ html .ui-button.ui-state-disabled:active {
     font-weight: 300;
     margin-top: -22px;
     padding: 0 20px;
+    margin-bottom: 30px;
 }
-.quality-material-about{
-    padding: 10px 0px;
-}
+
 .quality-material-about p{
     font-family: 'Lato', sans-serif;
 }
@@ -8657,6 +8656,27 @@ html .ui-button.ui-state-disabled:active {
 .qm-more{
     color: rgba(241, 90, 34, 0.9);
 }
-
+.quality-de-about{
+    margin: 10px 0px 40px;
+}
+.design-box {
+    height: 458px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 80px;
+}
+.design-box h4 {
+    color: rgba(241, 90, 34, 1);
+}
+.design-box p{
+    margin-bottom: 20px;
+}
+.quality-policy-section{
+    margin: 55px auto 0px;
+    position: relative;
+}
+.policy-list li{
+    padding-bottom: 10px;
+}
 /* End Quality Page */
 
