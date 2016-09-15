@@ -22,6 +22,11 @@ li.list-group-item.main-list-item {
     background-color: #FFF;
     border: 1px solid #DDD;
 }
+.list-group-item:hover,
+.list-group-item:active,
+.list-group-item:focus{
+    color:#f1591f;
+}
 img.timeline-image {
     margin-top: 40px;
     margin-left: -12px;
@@ -75,6 +80,9 @@ img.timeline-image {
     font-size: 16px;
     margin-bottom: 5px;
 }
+.collapse {
+    display: block;
+}
 </style>
 <div class="container padding50-15">
     <div class="row">
@@ -82,14 +90,14 @@ img.timeline-image {
             <h1>My Account</h1>
             <ul class="list-group">
                 <li class="list-group-item main-list-item"><span>Projects </span></li>
-                <li class="list-group-item"><span class="text-primary indent-text">- Info</span></li>
-                <li class="list-group-item"><span class="indent-text">- Project Status</span></li>
-                <li class="list-group-item"><span class="indent-text">- Document Details</span></li>
-                <li class="list-group-item"><span class="indent-text">- Payment Details</span></li>
+                <li class="list-group-item"><a href="#info"><span class="indent-text">- Info</span></a></li>
+                <li class="list-group-item"><a href="#accordion-2"><span class="indent-text">- Project Status</span></a></li>
+                <li class="list-group-item"><a href="#document-details"><span class="indent-text">- Document Details</span></a></li>
+                <li class="list-group-item"><a href="#payment-details"><span class="indent-text">- Payment Details</span></a></li>
             </ul>
         </div>
         <div class="col-md-9">
-            <div>
+            <div id="info">
                 <!--<ul class="nav nav-tabs">
                     <li class="active"><a href="#tab-1" role="tab" data-toggle="tab">Shobha Garland</a></li>
                     <li>
@@ -272,55 +280,11 @@ img.timeline-image {
                                         </div>
                                     </div>
                                 </div>
-                            <div class="panel panel-default">
+                            <div class="panel panel-default" id="document-details">
                                 <div class="panel-heading" role="tab">
                                     <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-2" class="acc-btn">Document Details </a></h4></div>
                                 <div class="panel-collapse collapse item-2" role="tabpanel">
                                     <div class="panel-body">
-                                        <!--<div class="row">
-                                            <div class="col-md-12">
-                                                <label>Select Document Type</label>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">All <span class="caret"></span></button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li role="presentation"><a href="#">First Item</a></li>
-                                                        <li role="presentation"><a href="#">Second Item</a></li>
-                                                        <li role="presentation"><a href="#">Third Item</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row row-margin">
-                                            <div class="col-md-3">
-                                                <div class="card">
-                                                    <div class="card-image"><img class="img-responsive" src="proposal.jpg" /></div>
-                                                    <div class="card-content"><span><i class="material-icons icon-align">picture_as_pdf</i><span class="font-small"> Design Proposal v1.0</span></span>
-                                                        <p class="card-date">(14/7/2016) </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="card">
-                                                    <div class="card-image"><img class="img-responsive" src="3d_kitchen_by_feg.jpg" /></div>
-                                                    <div class="card-content"><span class="align-center"><i class="material-icons icon-align">image</i><span class="font-small"> Kitchen 3d View</span></span>
-                                                        <p class="card-date">(14/7/2016) </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="card">
-                                                    <div class="card-image"><img class="img-responsive" src="floorplan.jpg" /></div>
-                                                    <div class="card-content"><span class="align-center"><i class="material-icons icon-align">picture_as_pdf</i><span class="font-small"> Floor Plan</span></span>
-                                                        <p class="card-date">(14/7/2016) </p>
-                                                    </div>
-                                                </div><i class="icon ion-android-close close-icon"></i></div>
-                                        </div>
-                                        <div class="row row-margin">
-                                            <div class="col-md-12">
-                                                <div class="form-group readonly-form"><span><button class="btn btn-default" type="button">Upload Files</button><span class="text-small"> Upload Floor Plan, Photos and more</span></span>
-                                                </div>
-                                            </div>
-                                        </div>-->
                                         <div class="row row-margin">
                                             <div class="col-md-12">
                                                 <div class="col-md-3"><b>File Link</b></div>
@@ -356,7 +320,7 @@ img.timeline-image {
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
+                            <div class="panel panel-default" id="payment-details">
                                 <div class="panel-heading" role="tab">
                                     <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-3" class="acc-btn">Payment Details</a></h4></div>
                                 <div class="panel-collapse collapse item-3" role="tabpanel">
