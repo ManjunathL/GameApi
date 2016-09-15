@@ -8436,9 +8436,9 @@ html .ui-button.ui-state-disabled:active {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-.txt-over-kitchen-image{
+/*.txt-over-kitchen-image{
     width: 100%;
-}
+}*/
 .mob-c-project{
     position: relative;
     float: left;
@@ -8474,7 +8474,7 @@ html .ui-button.ui-state-disabled:active {
     }
     .address_right_section{
         background: rgba(0,0,0,0.6);
-        width: 50%;
+        width: 100%;
     }
     .testimonials-carousel .carousel-caption {
         position: relative;
