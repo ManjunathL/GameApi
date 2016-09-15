@@ -21,7 +21,6 @@ public class PanelComponent
     private static final int ACCESSORY_PANEL_THICKNESS = 18;
 
     private double quantity;
-    private boolean exposed;
     private RateCard materialRateCard;
     private RateCard finishRateCard;
     private ShutterFinish finish;
@@ -32,7 +31,9 @@ public class PanelComponent
     private int length;
     private int breadth;
     private int thickness;
+    private PanelExposed exposed;
 
+    private enum PanelExposed{NONE, SINGLE, DOUBLE};
 
     public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component)
     {
@@ -53,24 +54,19 @@ public class PanelComponent
     {
         if (this.isShutter() || priceHolder.getProductModule().isAccessoryUnit())
         {
-            this.setFinish(priceHolder.getShutterFinish()).setFinishRateCard(priceHolder.getShutterFinishRateCard());
+            this.setFinish(priceHolder.getShutterFinish());
+            this.setFinishRateCard(this.exposed == PanelExposed.DOUBLE ? priceHolder.getShutterDoubleExposedRateCard() : priceHolder.getShutterFinishRateCard());
         }
         else
         {
-            this.setMaterialRateCard(priceHolder.getCarcassMaterialRateCard())
-                    .setFinish(priceHolder.getCarcassFinish()).setFinishRateCard(priceHolder.getCarcassFinishRateCard());
+            this.setMaterialRateCard(priceHolder.getCarcassMaterialRateCard()).setFinish(priceHolder.getCarcassFinish());
+            this.setFinishRateCard(this.exposed == PanelExposed.DOUBLE ? priceHolder.getCarcassDoubleExposedRateCard() : priceHolder.getCarcassFinishRateCard());
         }
     }
 
     public PanelComponent setQuantity(double quantity)
     {
         this.quantity = quantity;
-        return this;
-    }
-
-    public PanelComponent setExposed(boolean exposed)
-    {
-        this.exposed = exposed;
         return this;
     }
 
@@ -121,11 +117,6 @@ public class PanelComponent
         return quantity;
     }
 
-    public boolean isExposed()
-    {
-        return exposed;
-    }
-
     public RateCard getMaterialRateCard()
     {
         return materialRateCard;
@@ -164,13 +155,13 @@ public class PanelComponent
     public double getCost()
     {
         double unitCost = 0;
-        if (this.isExposed())
+        if (this.exposed == PanelExposed.NONE)
         {
-            unitCost = this.getFinishCost();
+            unitCost = this.getMaterialCost();
         }
         else
         {
-            unitCost = this.getMaterialCost();
+            unitCost = this.getFinishCost();
         }
         return this.quantity * unitCost; //quantity in panel_master is not to be used and can be dropped.
     }
@@ -245,17 +236,26 @@ public class PanelComponent
 
     public void setExposed(ProductModule productModule)
     {
+        this.exposed = PanelExposed.NONE;
+
         if (this.isShutter())
         {
-            this.setExposed(true);
+            this.exposed = PanelExposed.SINGLE;
             return;
         }
 
-        this.setExposed((productModule.isLeftExposed() && this.isLeftPanel()) ||
+        boolean exposedSide = ((productModule.isLeftExposed() && this.isLeftPanel()) ||
                 (productModule.isRightExposed() && this.isRightPanel()) ||
                 (productModule.isBottomExposed() && this.isBottomPanel()) ||
                 (productModule.isTopExposed() && this.isTopPanel()) ||
                 (productModule.isBackExposed() && this.isBackPanel()));
+
+        if (exposedSide) this.exposed = PanelExposed.SINGLE;
+
+        if (exposedSide && productModule.isOpenUnit()) this.exposed = PanelExposed.DOUBLE;
+
+        if (!exposedSide && productModule.isOpenUnit()) this.exposed = PanelExposed.SINGLE;
+
     }
 
     public boolean isShutter()
@@ -315,4 +315,10 @@ public class PanelComponent
     {
         return TYPE_BACK.equals(this.side);
     }
+
+    public boolean isExposed()
+    {
+        return this.exposed != null && this.exposed != PanelExposed.NONE;
+    }
+
 }

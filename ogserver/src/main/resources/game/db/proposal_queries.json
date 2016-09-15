@@ -371,7 +371,7 @@
       "id": "lookup.codes",
       "type": "select",
       "table": "code_master",
-      "query": "select code, title, additionalType from code_master where lookupType = ?",
+      "query": "select code, title, additionalType from code_master where lookupType = ? order by title",
       "params": ["lookupType"]
     },
     {

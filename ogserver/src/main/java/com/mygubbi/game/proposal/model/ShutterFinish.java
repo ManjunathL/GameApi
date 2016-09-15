@@ -9,6 +9,7 @@ import io.vertx.core.json.JsonObject;
 public class ShutterFinish
 {
     private static final String COST_CODE = "costCode";
+    private static final String DOUBLE_EXPOSED_COST_CODE = "doubleExposedCostCode";
     private static final String FINISH_CODE = "finishCode";
     private static final String FINISH_TYPE = "finishType";
     private static final String FINISH_MATERIAL = "finishMaterial";
@@ -20,6 +21,7 @@ public class ShutterFinish
     private static final String EDGE_BINDING = "edgeBinding";
 
     private String costCode;
+    private String doubleExposedCostCode;
     private String finishCode;
     private String finishType;
     private String finishMaterial;
@@ -39,7 +41,8 @@ public class ShutterFinish
     {
         this.setFinishCode(json.getString(FINISH_CODE)).setCostCode(json.getString(COST_CODE)).setFinishType(json.getString(FINISH_TYPE))
                 .setFinishMaterial(json.getString(FINISH_MATERIAL)).setDesign(json.getString(DESIGN)).setShutterMaterial(json.getString(SHUTTER_MATERIAL))
-                .setColorGroupCode(json.getString(COLOR_GROUP_CODE)).setTitle(json.getString(TITLE)).setCuttingOffset(json.getInteger(CUTTING_OFFSET)).setEdgeBinding(json.getString(EDGE_BINDING));
+                .setColorGroupCode(json.getString(COLOR_GROUP_CODE)).setTitle(json.getString(TITLE)).setCuttingOffset(json.getInteger(CUTTING_OFFSET))
+                .setEdgeBinding(json.getString(EDGE_BINDING)).setDoubleExposedCostCode(json.getString(DOUBLE_EXPOSED_COST_CODE));
     }
 
     public String getCostCode()
@@ -147,6 +150,17 @@ public class ShutterFinish
     public ShutterFinish setCuttingOffset(int cuttingOffset)
     {
         this.cuttingOffset = cuttingOffset;
+        return this;
+    }
+
+    public String getDoubleExposedCostCode()
+    {
+        return doubleExposedCostCode;
+    }
+
+    public ShutterFinish setDoubleExposedCostCode(String doubleExposedCostCode)
+    {
+        this.doubleExposedCostCode = doubleExposedCostCode;
         return this;
     }
 }

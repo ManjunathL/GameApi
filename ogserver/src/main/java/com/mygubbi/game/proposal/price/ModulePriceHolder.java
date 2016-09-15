@@ -38,6 +38,8 @@ public class ModulePriceHolder
     private RateCard carcassMaterialRateCard;
     private RateCard carcassFinishRateCard;
     private RateCard shutterFinishRateCard;
+    private RateCard carcassDoubleExposedRateCard;
+    private RateCard shutterDoubleExposedRateCard;
     private RateCard loadingFactorCard;
     private RateCard labourRateCard;
 
@@ -201,8 +203,12 @@ public class ModulePriceHolder
 
         String carcassCode = StringUtils.isEmpty(this.mgModule.getMaterial()) ? productModule.getCarcassCode() : this.mgModule.getMaterial();
         this.carcassMaterialRateCard = RateCardService.getInstance().getRateCard(carcassCode, RateCard.CARCASS_TYPE);
+
         this.carcassFinishRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE);
         this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE);
+
+        this.carcassDoubleExposedRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getDoubleExposedCostCode(), RateCard.SHUTTER_TYPE);
+        this.shutterDoubleExposedRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getDoubleExposedCostCode(), RateCard.SHUTTER_TYPE);
 
         this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE);
         this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE);
@@ -382,4 +388,13 @@ public class ModulePriceHolder
         return shutterFinishRateCard;
     }
 
+    public RateCard getCarcassDoubleExposedRateCard()
+    {
+        return carcassDoubleExposedRateCard;
+    }
+
+    public RateCard getShutterDoubleExposedRateCard()
+    {
+        return shutterDoubleExposedRateCard;
+    }
 }

@@ -47,7 +47,7 @@ public class ProductModule extends JsonObject
     private static final String TOP_EXPOSED = "exposedTop";
     private static final String BOTTOM_EXPOSED = "exposedBottom";
     private static final String BACK_EXPOSED = "exposedBack";
-    private static final String ALL_EXPOSED = "exposedAll";
+    private static final String OPEN_UNIT = "exposedOpen";
 
     private static final String REMARKS = "remarks";
     private static final String DESCRIPTION = "description";
@@ -181,6 +181,11 @@ public class ProductModule extends JsonObject
     public boolean isBackExposed()
     {
         return this.containsKey(BACK_EXPOSED) && this.getBoolean(BACK_EXPOSED);
+    }
+
+    public boolean isOpenUnit()
+    {
+        return this.containsKey(OPEN_UNIT) && this.getBoolean(OPEN_UNIT);
     }
 
     public ProductModule setUnit(String unit)
