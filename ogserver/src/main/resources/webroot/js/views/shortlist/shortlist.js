@@ -55,6 +55,8 @@ define([
                 currentTarget.children('.list-heart').toggleClass('fa-heart-o');
                 currentTarget.children('.list-heart').toggleClass('fa-heart');
                 currentTarget.children('.list-txt').html('shortlist');
+                $('#wishlist-ico').toggleClass('active');
+                $('#wishlist-ico1').toggleClass('active');
                 that.render();
             });
         },
@@ -65,7 +67,6 @@ define([
         openConsultPopup: function(e) {
             var id = $(e.currentTarget).attr('id');
             var popupid = id.replace('shortlist_consult', '');
-            //alert(popupid);
             $('#consultpop' + popupid).modal('show');
         },
         /*submitConsultButton: function() {

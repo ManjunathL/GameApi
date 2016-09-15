@@ -872,34 +872,7 @@ ul, ol{
       background: rgba(241,90,34,1);
       min-height: 420px;
    }
-   /* Start contact us form code By  nagmani on 7th sep 2016 */
-   .contact-light-black-bg{
-        background: rgba(0,0,0,.7);
-        min-height: 420px;
-        color: #ffffff;
-        padding: 70px 15px 20px;
-   }
-    .call-us {
-        margin: 60px 0px 0px;
-    }
-    .contact-phone{
-        color: #ffffff !important;
-        font-size: 1.8em !important;
-        line-height: 1.8em !important;
-    }
-    .contact-circle{
-        background: rgba(241,90,34,1);
-        color: #ffffff;
-        text-align: center;
-        border-radius: 50%;
-        width: 50px;
-        height:50px;
-        margin: 0px auto 20px;
-    }
-    .contact-no{
-        font-size: 20px;
-    }
-    /* End contact us form code By nagmani on 7th sep 2016 */
+
    .contact-form-bg{
       /*background-color: rgba(0,0,0,0.6);*/
       margin: 0px!important;
@@ -8399,6 +8372,7 @@ html .ui-button.ui-state-disabled:active {
     padding: 0px;
     color: #fff;
     margin: 0px;
+    line-height: 1.5;
 }
 .location-city{
     margin: 0px;
@@ -8462,9 +8436,9 @@ html .ui-button.ui-state-disabled:active {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-.txt-over-kitchen-image{
+/*.txt-over-kitchen-image{
     width: 100%;
-}
+}*/
 .mob-c-project{
     position: relative;
     float: left;
@@ -8500,7 +8474,7 @@ html .ui-button.ui-state-disabled:active {
     }
     .address_right_section{
         background: rgba(0,0,0,0.6);
-        width: 50%;
+        width: 100%;
     }
     .testimonials-carousel .carousel-caption {
         position: relative;
