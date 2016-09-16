@@ -3556,7 +3556,7 @@ a.button-orange:hover {
 .filter-button {
     border: 1px solid !important;
     position: absolute;
-    right: 10%;
+    left: 125%;
 }
 
 .filterpop {
