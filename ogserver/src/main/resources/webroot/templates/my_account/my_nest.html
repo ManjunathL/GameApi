@@ -83,6 +83,51 @@ img.timeline-image {
 .collapse {
     display: block;
 }
+.text-small-proposals
+    {
+    font-size:10px;
+    }
+
+.padding-top-10{
+    padding-top:10px;
+    }
+.padding-left-5{
+    padding-left:5px;
+    }
+    .padding-tb-5
+    {
+    padding-top:5px;
+    padding-bottom:5px;
+    }
+.text-style-agreement {
+    font-weight:bold;
+    }
+.approve-btn{
+    padding-left: 120px;
+    padding-bottom: 10px;
+    }
+.padding-top-15{
+    padding-top:15px;
+    }
+ .padding-bottom-10
+    {
+    padding-bottom:10px;
+    }
+.alignment-text{
+    padding-left: 40px;
+    text-align: center;
+    padding-top:15px;
+    }
+.padding-top-5
+    {
+    padding-top:5px;
+    }
+.font-style-or
+    {
+    font-style: italic;
+    font-color: #ccc;
+    }
+
 </style>
 <div class="container padding50-15">
     <div class="row">
@@ -131,8 +176,15 @@ img.timeline-image {
                                             <input class="form-control" id="property-type" placeholder="Enter Mobile Number" value="3BHK Apartment" type="test">
 
                                         </div>
-
                                         <div class="form-group">
+
+                                            <label for="property-type">Tower / Block no</label>
+
+                                            <input class="form-control" id="property-type" placeholder="Enter Mobile Number" value="Block A" type="test">
+
+                                        </div>
+
+                                        <!--<div class="form-group">
 
                                             <label for="exampleInputEmail1">Requirement</label>
 
@@ -150,7 +202,7 @@ img.timeline-image {
 
                                             <label><input value="" type="checkbox">Living &amp; Dining</label>
 
-                                        </div>
+                                        </div>-->
 
 
 
@@ -179,21 +231,127 @@ img.timeline-image {
                                 </div>
                             </div>
                         </div>
-                        <hr />
+
                         <div class="row border-red">
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <hr /><i class="icon ion-information-circled color-red"></i><span> Approval required for</span><span class="text-bold"> Proposal v1.0 (10/8/2016)</span></div>
+                                        <i class="icon ion-information-circled color-red"></i><h3> Approval required for Proposal v1.0 (10/8/2016)</h3></div>
                                     <div class="col-md-12">
                                         <hr />
+                                        <div class="col-md-6">
                                         <p>Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
                                     </div>
-                                    <div class="col-md-12">
-                                        <hr />
+
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (10/8/2016) </span></div>
+                                                </div>
+                                                <div class="row padding-top-10">
+                                                    <div class="col-md-12 align-center">
+                                                    <button class="align-center btn btn-link" type="button">Show Previous Versions</button>
+                                                </div>
+                                                    </div>
+                                            </div>
+
+
+
+                                                </div>
+
+                                        </div>
+
+
+
+                                        </div>
+                                <div class="col-md-12"><hr/></div>
+
+                                <div class="row row-margin col-md-12">
+                                    <div class="row col-md-8"><label>By clicking approve button, above proposal will be accepted</label></div>
+                                    <div class="row col-md-4"><button type="button" class="btn btn-default btn-primary">Approve</button></div>
                                     </div>
+
+                                <div class="row row-magin align-center col-md-12 font-style-or">--------- OR ----------</div>
+                                <div class="row row-margin col-md-12">
+                                    <div class="col-md-8">
+                                        <div style="display:inline;font-weight:bold;">
+                                        <lable>Schedule the date and time</lable>
+                                            </div>
+                                        <div class="row">
+                                        <input
+                                                type="time"
+                                                id="user_time"
+                                                class="form-control"
+                                                name="date"
+                                                placeholder="hh/mm AM/PM"
+
+                                        />
+                                        <input
+                                                type="date"
+                                                id="user_schedule"
+                                                class="form-control"
+                                                name="date"
+                                                dateformat="d M y"
+                                        />
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4"><button type="button" class="btn btn-default btn-danger">Request For Call Back</button></div>
+
                                 </div>
-                                <div class="row acceptance-row">
+
+
+
+                                    </div>
+
+                                <!--<div class="col-md-12">
+                                    <div class="row row-margin col-md-6">
+                                        <div class="checkbox">
+                                        </div>
+                                            <label>
+                                                <input type="checkbox" />I hereby accept the proposal with following:
+                                            </label>
+                                        <div class="row row-margin col-md-12">
+                                            <div class="col-md-6 text-style-agreement row padding-tb-5"><a href="#" class="display-block">- Terms &amp; Conditions</a></div>
+                                            <div class="col-md-6 text-style-agreement row padding-tb-5"><a href="#" class="display-block">- Privacy Policy</a></div>
+                                        </div>
+                                        <div class="approve-btn">
+                                            <button type="button" class="btn btn-default btn-primary">Approve</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 alignment-text">
+                                        <div style="display:inline; font-weight:bold;">
+                                                <lable>Schedule the date and time</lable>
+                                            </div>
+                                        <div class="row">
+                                            <input
+                                                    type="date"
+                                                    id="user_schedule"
+                                                    class="form-control"
+                                                    name="date"
+                                                    dateformat="d M y"
+                                                    />
+                                        <input
+                                                type="time"
+                                                id="user_time"
+                                                class="form-control"
+                                                name="date"
+                                                placeholder="hh/mm AM/PM"
+
+                                        />
+                                            </div>
+                                        <div class="row row-margin padding-bottom-10 padding-top-5">
+                                            <button type="button" class="btn btn-default btn-danger">Request For Call Back</button>
+                                        </div>
+                                    </div>
+
+                                    </div>-->
+                                </div>
+                      <!--          <div class="row acceptance-row">
                                     <div class="col-md-2">
                                         <div class="row">
                                             <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
@@ -216,12 +374,15 @@ img.timeline-image {
                                                 <button class="btn btn-primary btn-sm" type="button">Approve </button>
                                             </div>
                                             <div class="col-md-3 display-inline-block">
-                                                <button class="btn btn-danger btn-sm btn-reject" type="button">Reject </button>
+                                                <button class="btn btn-danger btn-sm btn-reject" type="button">Request for call back </button>
                                                 <p class="reject-comment text-small">You&#39;d be prompted for reason.</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
+
+
+
                             </div>
                         </div>
                         <hr />
@@ -232,20 +393,9 @@ img.timeline-image {
                                 <div class="panel-collapse collapse item-1" role="tabpanel">
                                     <div class="panel-body">
                                         <div class="row bs-wizard" style="border-bottom:0;">
-                                            <div class="col-xs-3 bs-wizard-step complete">
+                                            <div class="col-xs-1 bs-wizard-step complete">
 
-                                                <div class="text-center bs-wizard-stepnum">Order Placed</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center"></div>
-
-                                            </div>
-                                            <div class="col-xs-3 bs-wizard-step complete"><!-- complete -->
-
-                                                <div class="text-center bs-wizard-stepnum">Production Started</div>
+                                                <div class="text-center bs-wizard-stepnum">A</div>
 
                                                 <div class="progress"><div class="progress-bar"></div></div>
 
@@ -254,20 +404,9 @@ img.timeline-image {
                                                 <div class="bs-wizard-info text-center"></div>
 
                                             </div>
-                                            <div class="col-xs-3 bs-wizard-step active"><!-- complete -->
+                                            <div class="col-xs-1 bs-wizard-step complete"><!-- complete -->
 
-                                                <div class="text-center bs-wizard-stepnum">Installation In Progress</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center"></div>
-
-                                            </div>
-                                            <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
-
-                                                <div class="text-center bs-wizard-stepnum">Handing over</div>
+                                                <div class="text-center bs-wizard-stepnum">B</div>
 
                                                 <div class="progress"><div class="progress-bar"></div></div>
 
@@ -276,11 +415,68 @@ img.timeline-image {
                                                 <div class="bs-wizard-info text-center"></div>
 
                                             </div>
+                                            <div class="col-xs-1 bs-wizard-step active"><!-- complete -->
+
+                                                <div class="text-center bs-wizard-stepnum">C</div>
+
+                                                <div class="progress"><div class="progress-bar"></div></div>
+
+                                                <a href="#" class="bs-wizard-dot"></a>
+
+                                                <div class="bs-wizard-info text-center"></div>
+
+                                            </div>
+                                            <div class="col-xs-1 bs-wizard-step disabled"><!-- active -->
+
+                                                <div class="text-center bs-wizard-stepnum">D</div>
+
+                                                <div class="progress"><div class="progress-bar"></div></div>
+
+                                                <a href="#" class="bs-wizard-dot"></a>
+
+                                                <div class="bs-wizard-info text-center"></div>
+
                                         </div>
+                                            <div class="col-xs-1 bs-wizard-step disabled"><!-- active -->
+
+                                                <div class="text-center bs-wizard-stepnum">E</div>
+
+                                                <div class="progress"><div class="progress-bar"></div></div>
+
+                                                <a href="#" class="bs-wizard-dot"></a>
+
+                                                <div class="bs-wizard-info text-center"></div>
+
+                                            </div>
+                                            <div class="col-xs-1 bs-wizard-step disabled"><!-- active -->
+
+                                                <div class="text-center bs-wizard-stepnum">F</div>
+
+                                                <div class="progress"><div class="progress-bar"></div></div>
+
+                                                <a href="#" class="bs-wizard-dot"></a>
+
+                                                <div class="bs-wizard-info text-center"></div>
+
+                                            </div>
+                                            <div class="col-xs-1 bs-wizard-step disabled"><!-- active -->
+
+                                                <div class="text-center bs-wizard-stepnum">G</div>
+
+                                                <div class="progress"><div class="progress-bar"></div></div>
+
+                                                <a href="#" class="bs-wizard-dot"></a>
+
+                                                <div class="bs-wizard-info text-center"></div>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                            <div class="panel panel-default" id="document-details">
+                                </div>
+                            </div>
+                            <!--<div class="panel panel-default" id="document-details">
                                 <div class="panel-heading" role="tab">
                                     <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-2" class="acc-btn">Document Details </a></h4></div>
                                 <div class="panel-collapse collapse item-2" role="tabpanel">
@@ -319,74 +515,189 @@ img.timeline-image {
                                         </div>
                                     </div>
                                 </div>
+                            </div>-->
+
+                                <div class="panel panel-default" id="document-details">
+                                <div class="panel-heading" role="tab">
+                                    <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-2" class="acc-btn">Document Details </a></h4></div>
+                                <div class="panel-collapse collapse item-2" role="tabpanel">
+                                    <div class="panel-body">
+                                        <div class="row row-margin">
+                                            <div class="col-md-12">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (10/8/2016) </span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (10/8/2016) </span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (10/8/2016) </span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                                <!--<div class="panel panel-default" id="document-details">
+                                    <div class="panel-heading" role="tab">
+                                        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-2" class="acc-btn">Document Details </a></h4></div>
+                                    <div class="panel-collapse collapse item-2" role="tabpanel">
+                                        <div class="panel-body col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (10/8/2016) <a href="#" class="padding-left-5"><button class="btn-primary">View</button></a></span></div>
+                                                </div>
+                                                </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (10/8/2016) <a href="#" class="padding-left-5"><button class="btn-primary">View</button></a></span></div>
+                                                </div>
+                                                </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (10/8/2016) <a href="#" class="padding-left-5"><button class="btn-primary">View</button></a></span></div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+
+
                             <div class="panel panel-default" id="payment-details">
                                 <div class="panel-heading" role="tab">
                                     <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-3" class="acc-btn">Payment Details</a></h4></div>
                                 <div class="panel-collapse collapse item-3" role="tabpanel">
                                     <div class="panel-body">
                                         <div class="row bs-wizard" style="border-bottom:0;">
+                                            <label>Request for payment of Rs.15,000 before 10/10/2016</label>
 
 
 
-                                            <div class="col-xs-3 bs-wizard-step complete">
+                                            <!--<div class="col-xs-3 bs-wizard-step complete">
 
-                                                <div class="text-center bs-wizard-stepnum">Milestone 1</div>
+
 
                                                 <div class="progress"><div class="progress-bar"></div></div>
 
                                                 <a href="#" class="bs-wizard-dot"></a>
 
-                                                <div class="bs-wizard-info text-center">10% Payment. </br></br> 10/01/2016 </br> INR 15,000/-</div>
+                                                <div class="bs-wizard-info text-center">Request for Payment of Rs.15,000<br> Before 10/10/2016</div>
 
                                             </div>
 
 
 
-                                            <div class="col-xs-3 bs-wizard-step complete"><!-- complete -->
+                                            <div class="col-xs-3 bs-wizard-step complete">&lt;!&ndash; complete &ndash;&gt;
 
-                                                <div class="text-center bs-wizard-stepnum">Milestone 2</div>
+
 
                                                 <div class="progress"><div class="progress-bar"></div></div>
 
                                                 <a href="#" class="bs-wizard-dot"></a>
 
-                                                <div class="bs-wizard-info text-center">First Installment after confirming Initial Design.</br> 20/01/2016 </br> INR 75,000/-</div>
+                                                <div class="bs-wizard-info text-center">Request for Payment<br> Before 10/10/2016</div>
 
                                             </div>
 
 
 
-                                            <div class="col-xs-3 bs-wizard-step active"><!-- complete -->
+                                            <div class="col-xs-3 bs-wizard-step active">&lt;!&ndash; complete &ndash;&gt;
 
-                                                <div class="text-center bs-wizard-stepnum">Milestone 3</div>
+
 
                                                 <div class="progress"><div class="progress-bar"></div></div>
 
                                                     <a href="#" class="bs-wizard-dot"></a>
 
-                                                    <div class="bs-wizard-info text-center">Second Installment after confirming Final Design.</br> 30/01/2016 </br> INR 50,000/-</div>
+                                                    <div class="bs-wizard-info text-center">Request for Payment<br> Before 10/10/2016</div>
 
                                                 </div>
 
 
 
-                                                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+                                                <div class="col-xs-3 bs-wizard-step disabled">&lt;!&ndash; active &ndash;&gt;
 
-                                                    <div class="text-center bs-wizard-stepnum">Milestone 4</div>
+
 
                                                     <div class="progress"><div class="progress-bar"></div></div>
 
                                                     <a href="#" class="bs-wizard-dot"></a>
 
-                                                    <div class="bs-wizard-info text-center">Final payment before installation.</br> 10/02/2016 </br> INR 75,000/-</div>
+                                                    <div class="bs-wizard-info text-center">Request for Payment<br> Before 10/10/2016</div>
 
-                                                </div>
+                                                </div>-->
 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+                    <div class="panel panel-default" id="Order-details">
+                        <div class="panel-heading" role="tab">
+                            <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-2" class="acc-btn">Order Details </a></h4></div>
+                        <div class="panel-collapse collapse item-2" role="tabpanel">
+                            <div class="panel-body">
+                                <div class="row row-margin">
+                                    <div class="col-md-12"></div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 align-center" style="font-weight:bold;"><span class="text-small-proposals">Sales Order (10/8/2016) </span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 align-center" style="font-weight:bold;"><span class="text-small-proposals">Contract Copy (10/8/2016) </span></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
                             </div>
                         </div>
                         <hr />
