@@ -1952,6 +1952,7 @@ button {
 
 .navbar {
     margin: 0px;
+    border-radius: 0px;
 }
 
 .nav li .consult,
@@ -8677,6 +8678,11 @@ html .ui-button.ui-state-disabled:active {
 }
 .policy-list li{
     padding-bottom: 10px;
+}
+@media (max-width: 767px) {
+    .quality-cnt-des {
+        padding: 10px 10px;
+    }
 }
 /* End Quality Page */
 
