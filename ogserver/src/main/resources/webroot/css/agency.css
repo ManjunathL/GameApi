@@ -1907,9 +1907,9 @@ fieldset[disabled] .btn-xl.active {
     background-color: #fff;
 }
 
-button {
+/*button {
     background: transparent !important;
-}
+}*/
 
 .navbar {
     margin: 0px;
