@@ -17,6 +17,16 @@ public class AccessoryComponent
         this.quantity = moduleComponent.getQuantity();
     }
 
+    public AccHwComponent getComponent()
+    {
+        return component;
+    }
+
+    public double getQuantity()
+    {
+        return quantity;
+    }
+
     public double getCost()
     {
         return this.component.getPrice() * this.quantity;

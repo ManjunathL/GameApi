@@ -12,10 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Sunil on 18-07-2016.
@@ -72,7 +69,7 @@ public class ModulePriceHolder
     public void prepare()
     {
         this.getModuleAndComponents();
-        this.getRateCards();
+        this.prepareRateCards();
         this.resolveComponents();
     }
 
@@ -196,7 +193,7 @@ public class ModulePriceHolder
         return this.panelComponents;
     }
 
-    private void getRateCards()
+    private void prepareRateCards()
     {
         this.shutterFinish = ModuleDataService.getInstance().getFinish(productModule.getFinishCode());
         this.carcassFinish = ModuleDataService.getInstance().getFinish(productModule.getCarcassCode(), productModule.getFinishCode());
@@ -288,6 +285,15 @@ public class ModulePriceHolder
 
     public void calculateTotalCost()
     {
+        this.shutterCost = 0;
+        this.carcassCost = 0;
+        this.accessoryCost = 0;
+        this.hardwareCost = 0;
+        this.labourCost = 0;
+        this.totalCost = 0;
+        this.woodworkCost = 0;
+        this.moduleArea = 0;
+
         for (PanelComponent panel : this.getPanelComponents())
         {
             if (panel.isExposed())
@@ -338,8 +344,6 @@ public class ModulePriceHolder
         this.labourCost = this.moduleArea * labourRateCard.getRate();
         this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
         this.totalCost = this.woodworkCost + this.accessoryCost;
-
-        System.out.println(code + "," + moduleArea + "," + labourCost + "," + carcassCost + "," + shutterCost + "," + hardwareCost + "," + accessoryCost + "," + woodworkCost + "," + totalCost + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null" + "," + "null");
     }
 
     private double round(double value, int places)
@@ -396,5 +400,26 @@ public class ModulePriceHolder
     public RateCard getShutterDoubleExposedRateCard()
     {
         return shutterDoubleExposedRateCard;
+    }
+
+    public String getName()
+    {
+        return this.getProductModule().getUnit() + "-" + this.productModule.getModuleSequence();
+    }
+
+    public List<HardwareComponent> getHardwareComponents()
+    {
+        return this.hardwareComponents;
+    }
+
+    public List<AccessoryComponent> getAccessoryComponents()
+    {
+        return this.accessoryComponents;
+    }
+
+    public List<RateCard> getRateCards()
+    {
+        return Arrays.asList(this.carcassMaterialRateCard, this.carcassFinishRateCard, this.shutterFinishRateCard,
+                this.carcassDoubleExposedRateCard, this.shutterDoubleExposedRateCard, this.loadingFactorCard, this.labourRateCard);
     }
 }

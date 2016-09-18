@@ -21,6 +21,8 @@
   "robots.txt": "User-agent: *\nDisallow: /",
 
   "proposal_docs_folder" : "c:/Users/Public/game_files",
+  "templates_folder" : "c:/Users/Public/game_files",
+  "price_files_folder" : "c:/Users/Public/game_files/price_files",
   "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
   "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",

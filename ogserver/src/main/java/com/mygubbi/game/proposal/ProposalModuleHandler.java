@@ -4,7 +4,9 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.game.proposal.model.AccessoryPack;
 import com.mygubbi.game.proposal.price.ComprehensiveModulePricingService;
+import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.ModulePricingService;
+import com.mygubbi.game.proposal.price.PriceRecorderService;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
@@ -72,19 +74,35 @@ public class ProposalModuleHandler extends AbstractRouteHandler
         Integer id = LocalCache.getInstance().store(module);
         VertxInstance.get().eventBus().send(priceModule, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
-                    JsonObject result = (JsonObject) LocalCache.getInstance().remove(selectResult.result().body());
-                    LOG.debug("result :" + result.encodePrettily());
-                    sendJsonResponse(routingContext, result.toString());
+                    ModulePriceHolder modulePriceHolder = (ModulePriceHolder) LocalCache.getInstance().remove(selectResult.result().body());
+                    sendResponse(routingContext, modulePriceHolder);
+                    recordPriceCalculation(modulePriceHolder);
                 });
     }
 
-    private void getPriceRecorder(RoutingContext routingContext)
+    private void sendResponse(RoutingContext routingContext, ModulePriceHolder modulePriceHolder)
     {
-        JsonObject moduleJson = routingContext.getBodyAsJson();
-        LOG.debug("Module Json : " + moduleJson.encodePrettily());
-        ProductModule module = new ProductModule(moduleJson);
-        Integer id = LocalCache.getInstance().store(module);
-        VertxInstance.get().eventBus().send(ModulePricingService.CALCULATE_PRICE, id);
+        JsonObject resultJson = null;
+        ProductModule productModule = modulePriceHolder.getProductModule();
+        if (modulePriceHolder.hasErrors())
+        {
+            resultJson = new JsonObject().put("errors", modulePriceHolder.getErrors()).put("mgCode", productModule.getMGCode());
+            LOG.info("Pricing for product module has errors: " + productModule.encodePrettily() + " ::: " + resultJson.encodePrettily());
+        }
+        else
+        {
+            resultJson = modulePriceHolder.getPriceJson();
+            JsonObject pm = new JsonObject().put("mg", productModule.getMGCode()).put("carcass", productModule.getCarcassCode())
+                    .put("finish", productModule.getFinishCode());
+            LOG.info("Sending price calculation result :" + pm.encodePrettily() + " :: " + resultJson.encodePrettily());
+        }
+        sendJsonResponse(routingContext, resultJson.toString());
+    }
+
+    private void recordPriceCalculation(ModulePriceHolder modulePriceHolder)
+    {
+        Integer id = LocalCache.getInstance().store(modulePriceHolder);
+        VertxInstance.get().eventBus().send(PriceRecorderService.RECORD_PRICE_CALCULATION, id);
     }
 
 }

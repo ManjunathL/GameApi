@@ -117,4 +117,20 @@ public class RateCard
         return rates;
     }
 
+    public Object getName()
+    {
+        return this.getType() + ":" + this.getCode();
+    }
+
+    public String getRates()
+    {
+        if (this.ratesByThickness.isEmpty()) return "";
+
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Integer, Double> entry : this.ratesByThickness.entrySet())
+        {
+            sb.append(entry.getKey() + "=" + entry.getValue()).append(";");
+        }
+        return sb.toString();
+    }
 }

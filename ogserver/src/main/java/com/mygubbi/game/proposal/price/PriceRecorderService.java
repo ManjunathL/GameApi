@@ -1,53 +1,51 @@
 package com.mygubbi.game.proposal.price;
 
+import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.VertxInstance;
 import io.vertx.core.AbstractVerticle;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by Chirag on 19-08-2016.
  */
 public class PriceRecorderService extends AbstractVerticle
 {
-    private static final String PRICE_FILES_FOLDER = "C:\\Users\\test\\Desktop\\Mygubbi\\CSV Files";
-    private static final String csn = "UTF-8";
+    private final static Logger LOG = LogManager.getLogger(PriceRecorderService.class);
+    public static final String RECORD_PRICE_CALCULATION = "record.price.calculation";
 
-    private String moduleCode;
-    private int productId;
-    private String productTitle;
-
-    private PrintWriter pw = null;
-
-    public PriceRecorderService(String moduleCode, int productId, String productTitle)
+    @Override
+    public void start(Future<Void> startFuture) throws Exception
     {
-        this.moduleCode = moduleCode;
-        this.productId = productId;
-        this.productTitle = productTitle;
-        try
-        {
-            this.pw = new PrintWriter(PRICE_FILES_FOLDER + "\\" + this.productTitle + "-" + this.productId + ".csv", csn);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            this.pw = null;
-        }
+        this.setupPriceRecorder();
+        startFuture.complete();
     }
 
-    public void print(String text)
+    @Override
+    public void stop() throws Exception
     {
-        if (this.pw == null) return;
-        pw.println(text);
+        super.stop();
     }
 
-    public void close()
+    private void setupPriceRecorder()
     {
-        if (this.pw == null) return;
-        this.pw.flush();
-        this.pw.close();
-        this.pw = null;
+        EventBus eb = VertxInstance.get().eventBus();
+        eb.localConsumer(RECORD_PRICE_CALCULATION, (Message<Integer> message) -> {
+            ModulePriceHolder priceHolder = (ModulePriceHolder) LocalCache.getInstance().remove(message.body());
+            try
+            {
+                new PricingCalculationExcelCreator(priceHolder).create();
+            }
+            catch (Exception e)
+            {
+                LOG.error("Price recorder error for module :" + priceHolder.getName(), e);
+            }
+        }).completionHandler(res -> {
+            LOG.info("Module price recorder service started." + res.succeeded());
+        });
     }
+
 }

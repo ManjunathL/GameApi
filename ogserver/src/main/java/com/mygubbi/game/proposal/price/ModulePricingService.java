@@ -10,7 +10,6 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -276,21 +275,7 @@ public class ModulePricingService extends AbstractVerticle
 
     private void sendResponse(Message message, ModulePriceHolder modulePriceHolder, ProductModule productModule)
     {
-        JsonObject resultJson = null;
-        if (modulePriceHolder.hasErrors())
-        {
-            resultJson = new JsonObject().put("errors", modulePriceHolder.getErrors()).put("mgCode", productModule.getMGCode());
-            LOG.info("Pricing for product module has errors: " + productModule.encodePrettily() + " ::: " + resultJson.encodePrettily());
-        }
-        else
-        {
-            resultJson = modulePriceHolder.getPriceJson();
-            JsonObject pm = new JsonObject().put("mg", productModule.getMGCode()).put("carcass", productModule.getCarcassCode())
-                    .put("finish", productModule.getFinishCode());
-            LOG.info("Sending price calculation result :" + pm.encodePrettily() + " :: " + resultJson.encodePrettily());
-        }
-        message.reply(LocalCache.getInstance().store(resultJson));
-
+        message.reply(LocalCache.getInstance().store(modulePriceHolder));
     }
 
 }

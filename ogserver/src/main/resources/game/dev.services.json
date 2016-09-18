@@ -31,6 +31,9 @@
       {
         "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService"
       },
+      {
+        "name": "com.mygubbi.game.proposal.price.PriceRecorderService"
+      },
 
       {
         "name": "com.mygubbi.game.proposal.output.ProposalOutputService"

@@ -11,11 +11,28 @@ public class HardwareComponent
 {
     private AccHwComponent component;
     private double quantity;
+    private String quantityFormula;
 
     public HardwareComponent(AccHwComponent component, ProductModule productModule, IModuleComponent moduleComponent)
     {
         this.component = component;
         this.quantity = this.calculateQuantity(productModule, moduleComponent);
+        this.quantityFormula = moduleComponent.isCalculatedQuantity() ? moduleComponent.getQuantityFormula() : "Fixed Quantity";
+    }
+
+    public AccHwComponent getComponent()
+    {
+        return component;
+    }
+
+    public double getQuantity()
+    {
+        return quantity;
+    }
+
+    public String getQuantityFormula()
+    {
+        return quantityFormula;
     }
 
     public double getCost()

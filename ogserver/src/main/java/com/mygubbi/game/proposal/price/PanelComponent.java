@@ -62,6 +62,15 @@ public class PanelComponent
             this.setMaterialRateCard(priceHolder.getCarcassMaterialRateCard()).setFinish(priceHolder.getCarcassFinish());
             this.setFinishRateCard(this.exposed == PanelExposed.DOUBLE ? priceHolder.getCarcassDoubleExposedRateCard() : priceHolder.getCarcassFinishRateCard());
         }
+
+        if (this.isExposed() && this.getFinishRateCard() == null)
+        {
+            priceHolder.addError("Rate card not setup for finish " + this.code + ":" + this.getType());
+        }
+        else if (!this.isExposed() && this.getMaterialRateCard() == null)
+        {
+            priceHolder.addError("Rate card not setup for carcass " + this.code + ":" + this.getType());
+        }
     }
 
     public PanelComponent setQuantity(double quantity)
@@ -152,9 +161,19 @@ public class PanelComponent
         return code;
     }
 
+    public PanelExposed getExposed()
+    {
+        return exposed;
+    }
+
     public double getCost()
     {
-        double unitCost = 0;
+        return this.quantity * getUnitCost();
+    }
+
+    public double getUnitCost()
+    {
+        double unitCost;
         if (this.exposed == PanelExposed.NONE)
         {
             unitCost = this.getMaterialCost();
@@ -163,7 +182,7 @@ public class PanelComponent
         {
             unitCost = this.getFinishCost();
         }
-        return this.quantity * unitCost; //quantity in panel_master is not to be used and can be dropped.
+        return unitCost;
     }
 
     public double getMaterialCost()
