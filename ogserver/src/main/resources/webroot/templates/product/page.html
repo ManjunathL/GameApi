@@ -298,8 +298,8 @@
                                         <div  id="slider-range"></div>
                                     </div>
                                     <div class="price-tag">
-                                        <div class="pull-left"> Rs 1 </div>
-                                        <div class="pull-right"> Rs 400000 </div>
+                                        <div class="pull-left"> Rs 0 </div>
+                                        <div class="pull-right"> Rs 600000 </div>
                                     </div>
                                 </li>
 
@@ -315,7 +315,7 @@
                                     </div>
                                     <div class="price-tag">
                                         <div class="pull-left"> Rs 0 </div>
-                                        <div class="pull-right"> Rs 400000 </div>
+                                        <div class="pull-right"> Rs 40000 </div>
                                     </div>
                                     <!--   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                        <div class="price-slide">
@@ -545,8 +545,8 @@
                             <div id="slider-range3"></div>
                         </div>
                         <div class="price-tag">
-                            <div class="pull-left"> Rs 1 </div>
-                            <div class="pull-right"> Rs 400000  </div>
+                            <div class="pull-left"> Rs 0 </div>
+                            <div class="pull-right"> Rs 600000  </div>
                         </div>
                         <% }else{ %>
                         <input type="text" id="amount4" style="border: 0; color: #f6931f; font-weight: bold;" />
@@ -556,8 +556,8 @@
                             <div id="slider-range4"></div>
                         </div>
                         <div class="price-tag">
-                            <div class="pull-left"> Rs 1 </div>
-                            <div class="pull-right"> Rs 400000  </div>
+                            <div class="pull-left"> Rs 0</div>
+                            <div class="pull-right"> Rs 40000  </div>
                         </div>
                         <% } %>
                         <% } %>
@@ -1270,7 +1270,7 @@
     $( "#slider-range" ).slider({
       range: true,
       min: 0,
-      max: 400000,
+      max: 600000,
       values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
       slide: function( event, ui ) {
         $( "#amount" ).val( "Rs " + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
@@ -1299,7 +1299,7 @@
     $( "#slider-range3" ).slider({
       range: true,
       min: 0,
-      max: 400000,
+      max: 600000,
       values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
       slide: function( event, ui ) {
   console.log(ui.values[1]);

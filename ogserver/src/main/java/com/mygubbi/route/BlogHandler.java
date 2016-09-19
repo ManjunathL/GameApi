@@ -33,19 +33,19 @@ public class BlogHandler extends AbstractRouteHandler
 
         String blogTags = context.request().getParam("tags");
 
-       if (StringUtils.isNonEmpty(blogTags))
+        if (StringUtils.isNonEmpty(blogTags))
         {
 
             if (blogTags.equals("all")){
                 this.fetchProductsAndSendb(context, "blog.select.all", null);
 
-                 }
+            }
             else {
 
                 JsonObject params = new JsonObject().put("tags", blogTags);
                 this.fetchProductsAndSend(context, "product.select.blogTags", params);
             }
-    }
+        }
         else{
 
             this.fetchProductsAndSendb(context, "blog.select.all", null);
