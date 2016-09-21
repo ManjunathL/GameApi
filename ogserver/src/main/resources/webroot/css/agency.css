@@ -755,6 +755,7 @@ ul, ol{
       text-transform: none!important;
       font-weight: 300!important;
       font-size: 65px!important;
+      margin: 10px 0px;
   }
 
   .premium-home-txt {
@@ -979,7 +980,7 @@ ul, ol{
   }
   .search-ico{
       font-size: 28px!important;
-      color: rgba(0,0,0,0.4);
+      color: #566771;
       padding-top: 10px;
       font-weight: 400!important;
       cursor: pointer;
@@ -2033,6 +2034,7 @@ button {
 
 .search,
 .user {
+    color: #566771 !important;
     padding: 0px !important;
     cursor: pointer;
     -webkit-transition: color 0.3s, opacity 0.2s;
@@ -8366,7 +8368,7 @@ html .ui-button.ui-state-disabled:active {
     top: 110%;
 }
 .wishlist{
-    color: #596a74 !important
+    color: #566771 !important;
 }
 .wishlist.active{
     color: rgba(241,90,34,1)!important;
@@ -8495,9 +8497,10 @@ html .ui-button.ui-state-disabled:active {
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
-.testimonials-wrapper h4{
+.testimonials-wrapper h4 {
+    font-size: 12px;
+    font-weight: 600;
     text-transform: capitalize;
-    font-size:16px;
 }
 
 @media (max-width: 992px) {
@@ -8561,6 +8564,13 @@ html .ui-button.ui-state-disabled:active {
     }
     .txt-over-style-image{
         top: 45%;
+        right: 5%;
+    }
+    .padding-m-5{
+        padding:0px;
+    }
+    .padding-m-15{
+        padding: 15px !important;
     }
     .txt-over-trendstyle-image{
         top: 45%;
