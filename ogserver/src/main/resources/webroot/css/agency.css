@@ -7118,21 +7118,26 @@ a.tab-ico {
 
 /* Start Completed project */
 
+.completed-product-head{
+    font-weight: 300;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    display: inline-block;
+    color: #566771!important;
+}
 .c-project-list {
     margin-top: 30px;
 }
 .c-project-item {
     text-align: center;
-    margin-bottom: 20px;
 }
 .c-project-link {
     display: block;
     position: relative;
 }
-.c-project-link:hover, .c-project-link:focus {
-    -ms-transform: scale(1.025,1.025);
-    -webkit-transform: scale(1.025,1.025);
-    transform: scale(1.025,1.025);
+.c-project-link:hover,
+.c-project-link:focus {
+    background: #000000;
 }
 .c-project-box-title {
     margin: 10px 0 0;
@@ -7149,9 +7154,25 @@ a.tab-ico {
     top: 0;
     left: 0;
     width: 100%;
-    border: 5px solid #f9f9f9;
-    border-radius: 3px;
-    box-shadow: 5px 5px 8px 2px #9c9c9c;
+}
+.c-project-link-cnt {
+    background: rgba(0, 0, 0, 0.1);
+    color: #fff;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.c-project-link-cnt:hover,
+.c-project-link-cnt:focus {
+    background: rgba(0, 0, 0, 0.6);
+}
+.c-project-link-cnt-dt{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .nivo-none{
     display: none;
@@ -7166,7 +7187,11 @@ a.tab-ico {
     margin-bottom: 20px;
 }
 .c-project-list-title{
-    margin-top: 25px;
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
 }
 @media (max-width: 480px){
     .c-project-title h2 {
