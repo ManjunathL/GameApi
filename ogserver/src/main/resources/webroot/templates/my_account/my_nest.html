@@ -121,83 +121,47 @@ img.timeline-image {
         </div>
         <div class="col-md-9">
             <div id="info">
-                <!--<ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab-1" role="tab" data-toggle="tab">Shobha Garland</a></li>
-                    <li>
-                        <a href="#tab-1" role="tab" data-toggle="tab"></a>
-                    </li>
-                </ul>-->
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="tab-1">
-                        <!--<div class="row">
-                            <div class="col-md-12"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1473749993/myaccount/timeline-1.jpg" class="timeline-image" /></div>
-                        </div>-->
                         <div class="row">
+                            <form role="form">
                             <div class="col-md-6">
-                                    <form role="form">
+
+                                    <div class="form-group">
+
+                                        <label for="property-name">Property Name</label>
+
+                                        <input class="form-control" id="property-name" placeholder="Enter Property Name" value="" type="text" required />
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="property-type">Property Type</label>
+
+                                        <input class="form-control" id="property-type" placeholder="Enter Property Type" value="" type="text" required="required" />
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="blockno">Tower / Block no</label>
+
+                                        <input class="form-control" id="blockno" placeholder="Enter Block Number" value="" type="text" required="required">
+
+                                    </div>
 
 
 
-                                        <div class="form-group">
-
-                                            <label for="property-name">Property Name</label>
-                                            <input class="form-control" id="property-name" placeholder="Enter name" value="Axis Aspira" type="test">
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label for="property-type">Property Type</label>
-
-
-
-                                            <input class="form-control" id="property-type" placeholder="Enter Mobile Number" value="3BHK Apartment" type="test">
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label for="blockno">Tower / Block no</label>
-
-                                            <input class="form-control" id="blockno" placeholder="Enter Mobile Number" value="Block A" type="test">
-
-                                        </div>
-
-                                        <!--<div class="form-group">
-
-                                            <label for="exampleInputEmail1">Requirement</label>
-
-                                            <br>
-
-
-
-                                            <label><input checked="true" value="" type="checkbox">Kitchen</label> &nbsp;&nbsp;&nbsp;
-
-
-
-                                            <label><input value="" type="checkbox">Wardrobe</label>
-
-                                            &nbsp;&nbsp;&nbsp;
-
-                                            <label><input value="" type="checkbox">Living &amp; Dining</label>
-
-                                        </div>-->
-
-
-
-
-
-                                    </form>
                             </div>
+
                             <div class="col-md-6">
 
                                 <div class="form-group">
 
                                     <label for="exampleInputEmail1">Builder Name</label>
 
-
-
-                                    <input class="form-control" id="exampleInputEmail1" placeholder="Enter Floor Number" value="Axis Capstone" type="test">
+                                    <input class="form-control" id="exampleInputEmail1" placeholder="Enter Builder Name" value="Axis Capstone" type="text" required="required">
 
                                 </div>
 
@@ -205,10 +169,23 @@ img.timeline-image {
 
                                     <label for="flatno">Flat No.</label>
 
-                                    <input class="form-control" id="flatno" placeholder="Enter Food Preference" value="#203" type="test">
+                                    <input class="form-control" id="flatno" placeholder="Enter Flat Number" value="#203" type="text" required="required">
 
                                 </div>
+
+                                <div class="form-group">
+
+                                    <button type="submit" class="button border1px">
+
+                                        Save Details
+
+                                    </button>
+
+                                </div>
+
                             </div>
+                            </form>
+
                         </div>
                         <hr />
                         <div class="row border-red">
