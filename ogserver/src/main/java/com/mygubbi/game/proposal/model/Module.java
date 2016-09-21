@@ -22,7 +22,7 @@ public class Module
     private static final String PRODUCT_CATEGORY = "productCategory";
 
     private static final String STANDARD_MODULE = "S";
-    private static final String CUSTOM_MODULE = "C";
+    private static final String CUSTOM_MODULE = "N";
 
     private String code;
     private String description;
