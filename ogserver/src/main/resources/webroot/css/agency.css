@@ -223,6 +223,10 @@ h6 {
     margin: 0 auto;
 }
 
+.capitalize{
+    text-transform: capitalize;
+}
+
 /* css attributes */
 
 /* margin top */
@@ -8721,3 +8725,49 @@ html .ui-button.ui-state-disabled:active {
 }
 /* End Quality Page */
 
+/* Start Experience center page */
+
+.exp-atmg-box{
+    min-height: 200px;
+    text-align: center;
+}
+.exp-center-store-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1474523111/exp_center/exp-store.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 460px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.exp-center-store-cnt{
+    background: rgba(241, 90, 34, 0.8);
+    height: 460px;
+    padding: 25px;
+}
+.exp-center-store-head{
+    text-transform: capitalize;
+    margin: 40px 0px 40px;
+    text-align: left;
+}
+.offer-box h2{
+    font-size: 24px;
+    color: #566771;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.order-box-img{
+    width: 200px;
+}
+
+
+/* End Experience center page */
