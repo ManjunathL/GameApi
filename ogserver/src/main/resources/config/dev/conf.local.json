@@ -14,19 +14,8 @@
     "processEvents": false
   },
 
-  /*"apicache" : true,
-  "shopifyredirect": true,
-  "enquirymailto" : "noob@nomansland.xyz"*/
-
   "apicache" : true,
   "shopifyredirect": true,
-  "enquirymailto" : "uat@mygubbi.com",
-
-  "staticConfigPath": "config/test/uat.config.js",
-  "importsPath": "config/test/uat.imports.css",
-  "alljs": "js/all.js",
-
-  "robots.txt": "User-agent: *\nDisallow: /"
-
+  "enquirymailto" : "noob@nomansland.xyz"
 
 }
