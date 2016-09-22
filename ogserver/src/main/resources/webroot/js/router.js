@@ -370,7 +370,7 @@ define([
                     });
                     router.on('route:experiencecenter', function(actions) {
                      setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
-                     require(['views/experienCecenter/experience-center'], function(ExperienceCenterPage) {
+                     require(['views/experienceCenter/experience-center'], function(ExperienceCenterPage) {
                      VM.create(VM.EXPERIENCECENTER, ExperienceCenterPage).render();
                     });
                     });
