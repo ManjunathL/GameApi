@@ -7798,6 +7798,11 @@ width:14% !important;
     border-right: solid 2px #ccc;
 
 }
+.otherunit-icon u,
+.wardrobe-icon u,
+.kitchen-icon u{
+    line-height: 150%;
+}
 .wardrobe-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
@@ -8739,6 +8744,9 @@ html .ui-button.ui-state-disabled:active {
     .quality-cnt-des {
         padding: 10px 10px;
     }
+    .mob-text-center{
+        text-align: center;
+    }
 }
 /* End Quality Page */
 
@@ -8827,8 +8835,40 @@ html .ui-button.ui-state-disabled:active {
 .add-ioc{
     width: 40px;
 }
+.exp_center .carousel-caption{
+    width: 25%;
+    top: 40px;
+    left: 0px;
+    position: absolute;
+    background: rgba(241, 90, 34, 0.9);
+    color: #ffffff;
+    max-height: 400px;
+    font-size: 19px;
+    text-align: left;
+    padding: 15px;
+    text-shadow: none;
+    font-weight: 300;
+}
+.exp-slider .carousel-indicators{
+    bottom: 10px;
+}
 
 @media screen and (max-width: 480px) {
+    .exp-slider .carousel-indicators{
+        top: 120px;
+    }
+    .exp_center {
+        max-height: 700px;
+    }
+    .exp_center .carousel-caption{
+        width:100%;
+        position: relative;
+        margin-top: 10px;
+        color: #444;
+        background: #fff;
+        top: 0px;
+        max-height:700px;
+    }
     .exp-offer-form-bg{
         padding: 20px 25px;
     }
