@@ -16,12 +16,12 @@
   "ssl_keystore": "ssl/keystore.jks",
   "ssl_password": "m!gubb!",
 
-  "firebase": {
+  /*"firebase": {
     "fb_url": "https://sweltering-fire-6356.firebaseio.com",
     "loginid": "mygubbi.fbase@gmail.com",
     "password": "!@#$VGYHasdf435",
     "processEvents": false
-  },
+  },*/
 
   "cloudinary" :{
     "url": "cloudinary://492523411154281:Qpr5Vg3klupb-ETRIsj-caLJ5zg@mygubbi"

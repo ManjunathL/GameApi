@@ -26,7 +26,9 @@ define([
             'study-table-designs-online(/)': 'studyTableB',
             'side-table-design-online(/)': 'sideTableB',
             'book-shelf(/)': 'bookShelfB',
-
+            'nest-of-tables-online(/)': 'nestofTableB',
+            'coffee-tables-online(/)': 'cofeeTableB',
+            'buy-chest-of-drawers-online(/)': 'chestofDrawerB',
             'kitchen-cabinet-design(/)': 'kitchens',
             'living-and-dining-room-designs(/)': 'livingDining',
             'bedroom-interior-design(/)': 'bedroom',
@@ -67,6 +69,7 @@ define([
             'remarketing-lp(/)': 'remarketinglp',
             'about-us(/)': 'aboutus',
             'quality-check(/)': 'qualitycheck',
+            'experience-center(/)': 'experiencecenter',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -159,6 +162,21 @@ define([
             document.querySelector('meta[name="description"]').setAttribute("content", "Custom Made Bookshelves from MyGubbi add to your range of luxury décor and add a touch of elegance to your living abode");
             document.querySelector('meta[name="keywords"]').setAttribute("content", "book shelf, bookshelf design, book rack, bookshelf designs");
         },
+        nestofTableB: function() {
+                    document.title = 'Nest of Tables online Bangalore - mygubbi';
+                    document.querySelector('meta[name="description"]').setAttribute("content", "Buy Nest of Tables online In Bangalore with mygubbi . Shop online for Nest of Tables with trendy designs and customised Nest of Tables.");
+                    document.querySelector('meta[name="keywords"]').setAttribute("content", "Nest of Tables Bangalore, buy Nest of Tables, Nest Of Tables online, buy Nest Of Tables online Bangalore");
+        },
+        cofeeTableB: function() {
+                    document.title = 'Coffee Tables online in India - mygubbi';
+                    document.querySelector('meta[name="description"]').setAttribute("content", "Buy Coffee Tables online at low prices in India. Shop from a wide range of Coffee Tables and­­ customised designs at mygubbi with an easy EMI");
+                    document.querySelector('meta[name="keywords"]').setAttribute("content", "Coffee Tables, buy Coffee Tables, Coffee Tables online, buy Coffee Tables online india");
+        },
+        chestofDrawerB: function() {
+                    document.title = 'Buy Chest of Drawers Online in Bangalore – mygubbi';
+                    document.querySelector('meta[name="description"]').setAttribute("content", "Buy Chest of Drawers online for your home in Bangalore, Pune only at mygubbi.com. Exclusive customised designs of Chest of Drawers now available at 0% EMI.");
+                    document.querySelector('meta[name="keywords"]').setAttribute("content", "Chest of Drawers, buy Chest of Drawers, buy Chest of Drawers online, buy Chest of Drawers Bangalore");
+        },
         bedroom: function () {
             document.title = 'Bedroom Designs - Bedroom Furniture and interiors from mygubbi';
             document.querySelector('meta[name="description"]').setAttribute("content", "MyGubbi offers an Exclusive collection of bedroom furniture to choose from.Get Your Bedroom interiors custom made to fit your Home and Décor.");
@@ -243,6 +261,15 @@ define([
             });
             router.on('route:bookShelfB', function(actions){
                 routeSubCategory('Book Rack', 'living & dining');
+            });
+            router.on('route:nestofTableB', function(actions){
+                routeSubCategory('Nest of Table', 'living & dining');
+            });
+            router.on('route:cofeeTableB', function(actions){
+                routeSubCategory('Coffee Tables', 'living & dining');
+            });
+            router.on('route:chestofDrawerB', function(actions){
+                routeSubCategory('Chest of Drawer', 'living & dining');
             });
             router.on('route:kitchens', function(actions){
                 routeCategory('kitchen');
@@ -340,6 +367,12 @@ define([
                         require(['views/quality/quality-check'], function(QualityCheckPage) {
                             VM.create(VM.QUALITYCHECK, QualityCheckPage).render();
                         });
+                    });
+                    router.on('route:experiencecenter', function(actions) {
+                     setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                     require(['views/experienCecenter/experience-center'], function(ExperienceCenterPage) {
+                     VM.create(VM.EXPERIENCECENTER, ExperienceCenterPage).render();
+                    });
                     });
                     router.on('route:faq', function(actions) {
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);

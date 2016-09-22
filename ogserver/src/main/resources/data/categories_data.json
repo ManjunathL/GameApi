@@ -43,6 +43,21 @@
         "name": "Book Rack",
         "id": "bookrack",
         "code": "bookrack"
+      },
+      {
+        "name": "Coffee Tables",
+        "id": "coffeetable",
+        "code": "coffeetable"
+      },
+      {
+        "name": "Nest of Table",
+        "id": "nestoftable",
+        "code": "nestoftable"
+      },
+      {
+        "name": "Chest of Drawer",
+        "id": "chestofdrawer",
+        "code": "chestofdrawer"
       }
     ]
   },
