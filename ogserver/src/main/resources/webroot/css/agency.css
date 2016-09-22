@@ -5831,6 +5831,8 @@ a.tab-ico {
     width: 100%;
     background-color: #f1591f !important;
     border: 2px solid #f1591f !important;
+    padding: 7px;
+    border-radius: 4px
 }
 
 .consult-h3 {
@@ -7205,6 +7207,9 @@ a.tab-ico {
     .c-project-description{
         font-size: 13px;
         margin-bottom: 15px;
+    }
+    .c-project .border-bottom-grey{
+        border: 0px solid #ddd;
     }
 }
 
@@ -8723,6 +8728,18 @@ html .ui-button.ui-state-disabled:active {
         padding: 10px 10px;
     }
 }
+@media (max-width: 480px) {
+    .quality-cnt-head{
+        font-size: 20px;
+        line-height: 130%;
+    }
+    .quality-banner {
+        height: 460px;
+    }
+    .quality-cnt-des {
+        padding: 10px 10px;
+    }
+}
 /* End Quality Page */
 
 /* Start Experience center page */
@@ -8768,6 +8785,61 @@ html .ui-button.ui-state-disabled:active {
 .order-box-img{
     width: 200px;
 }
+.exp-offer-form-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1474537168/exp_center/exp-contact.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 460px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 160px;
+    text-align: center;
+    color: #3d4b54;
+}
+.exp-offer-address-bg{
+    background: #3d4b54;
+    height: 460px;
+}
+.exp-offer-form-bg .form-control{
+    background: transparent;
+    border-color: #3d4b54;
+    border-radius: 4px;
+    box-shadow: none;
+}
+.exp-center-address {
+    padding: 25px 20px 50px;
+}
+.exp-center-heading{
+    font-weight:300;
+    color: #fff;
+}
+.exp-center-address p,
+.exp-center-address a{
+    color: #ffffff;
+}
+.add-ioc{
+    width: 40px;
+}
 
-
+@media screen and (max-width: 480px) {
+    .exp-offer-form-bg{
+        padding: 20px 25px;
+    }
+    .exp-center-store-bg{
+        height: 100%;
+    }
+    .exp-center-store-head{
+        margin: 10px 0px;
+    }
+    .exp-center-store-cnt{
+        padding: 15px;
+    }
+}
 /* End Experience center page */
