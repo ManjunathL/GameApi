@@ -744,9 +744,11 @@
         $(window).scroll(function () {
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
-                $('#filter-desc-container').addClass('stick').css({'top': '0px'});
+                $('#filter-desc-container').addClass('stick').css({'top': '29px'});
                 //$('#filter-desc').css({'padding': '10px 0px'});
+                $('#filter-desc').css({'line-height': '2'});
                 $('.filter-desc-col').addClass('stick-tag');
+                $('.filter-desc-col').addClass('stick').css({'top': '0px'});
                 $('#filter-choose-container').slideUp();
             } else {
                 $('.back-to-top').fadeOut(duration);

@@ -16,9 +16,12 @@ define([
     'text!templates/category/straight_kitchen.html',
     'text!templates/category/study_table.html',
     'text!templates/category/u_shaped_kitchen.html',
-    'text!templates/category/wardrobe.html'
+    'text!templates/category/wardrobe.html',
+    'text!templates/category/nest_of_table.html',
+    'text!templates/category/chest_of_drawer.html',
+    'text!templates/category/coffee_table.html'
 ], function($, _, Bedroom, BookRack, CrockeryUnit, EntertainmentUnit, FoyerUnit, Kitchen, LShapedKitchen, LivingAndDining,
-    ParallelKitchen, ShoeRack, SideTable, Sideboard, StraightKitchen, StudyTable, UShapedKitchen, Wardrobe) {
+    ParallelKitchen, ShoeRack, SideTable, Sideboard, StraightKitchen, StudyTable, UShapedKitchen, Wardrobe, NestOfTable, ChestOfDrawer, CoffeeTable) {
     return {
         el: '.category-content',
         apply: function(category) {
@@ -42,6 +45,9 @@ define([
                 case "Study Table": pageContent = StudyTable; break;
                 case "U Shaped Kitchen": pageContent = UShapedKitchen; break;
                 case "Wardrobe": pageContent = Wardrobe; break;
+                case "Nest of Table": pageContent = NestOfTable; break;
+                case "Chest of Drawer": pageContent = ChestOfDrawer; break;
+                case "Coffee Tables": pageContent = CoffeeTable; break;
             }
 
             if (pageContent !== null && pageContent !== '') {
