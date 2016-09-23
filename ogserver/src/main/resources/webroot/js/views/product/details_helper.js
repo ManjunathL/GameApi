@@ -125,7 +125,7 @@ define([
                     $('#mainImg').fadeIn(200);
                 });
             }
-            $('html,body').animate({scrollTop:0}, 'slow');
+           // $('html,body').animate({scrollTop:0}, 'slow');
         },
         toggleColor: function(e) {
             this.toggleColorFor($(e.target));

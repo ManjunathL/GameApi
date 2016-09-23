@@ -3612,6 +3612,7 @@ a.button-orange:hover {
         width: 40% !important;
         max-width: 350px !important;
     }
+
 }
 
 .userpop {
@@ -4049,6 +4050,10 @@ a.button-orange:hover {
         display: block;
         padding: 18% 5% 5%;
     }
+    .testimonialSection {
+            border-bottom: 1px solid #CCC;
+            padding: 20px 0px;
+        }
 }
 
 @media (max-width: 320px) {
