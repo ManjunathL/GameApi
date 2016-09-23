@@ -20,6 +20,7 @@ public class ModulePanel
     private int breadth;
     private int thickness;
     private String edgebinding;
+    private String dimensionFormula;
 
     public static ModulePanel fromJson(JsonObject json)
     {
@@ -27,7 +28,8 @@ public class ModulePanel
                 .setSide(json.getString("side")).setTitle(json.getString("title"))
                 .setSubtitle(json.getString("subtitle"))
                 .setLength(json.getInteger("plength")).setBreadth(json.getInteger("breadth"))
-                .setThickness(json.getInteger("thickness")).setEdgebinding(json.getString("edgebinding"));
+                .setThickness(json.getInteger("thickness")).setEdgebinding(json.getString("edgebinding"))
+                .setDimensionFormula(json.getString("dimensionFormula"));
     }
 
     public String getCode()
@@ -131,6 +133,17 @@ public class ModulePanel
     public ModulePanel setSubtitle(String subtitle)
     {
         this.subtitle = subtitle;
+        return this;
+    }
+
+    public String getDimensionFormula()
+    {
+        return dimensionFormula;
+    }
+
+    public ModulePanel setDimensionFormula(String dimensionFormula)
+    {
+        this.dimensionFormula = dimensionFormula;
         return this;
     }
 }

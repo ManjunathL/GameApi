@@ -340,7 +340,7 @@
       "id": "panel.select.all",
       "type": "select",
       "table": "panel_master",
-      "query": "select code, type, side, title, subtitle, plength, breadth, thickness, edgebinding from panel_master",
+      "query": "select * from panel_master",
       "params": []
     },
 

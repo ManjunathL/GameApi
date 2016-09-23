@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.price;
 
+import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
 
@@ -41,6 +42,25 @@ public class PanelComponent
         this.setDimensions(priceHolder.getProductModule(), priceHolder.getMgModule(), modulePanel);
         this.setExposed(priceHolder.getProductModule());
         this.setRateCards(priceHolder);
+        this.doIntegrityCheck(priceHolder);
+    }
+
+    private void doIntegrityCheck(ModulePriceHolder priceHolder)
+    {
+        if (this.getLength() == 0 || this.getBreadth() == 0)
+        {
+            priceHolder.addError("Module dimensions not set for " + this.getCode());
+        }
+
+        if (this.isExposed() && this.getFinishRateCard() == null)
+        {
+            priceHolder.addError("Finish ratecard not set for exposed panel " + this.getCode() + ":" + this.getType() + ":" + this.getExposed());
+        }
+
+        if (!this.isExposed() && this.getMaterialRateCard() == null)
+        {
+            priceHolder.addError("Material ratecard not set for carcass panel " + this.getCode() + ":" + this.getType());
+        }
     }
 
     private void setBaseAttributes(ModulePanel modulePanel, IModuleComponent component)
@@ -61,15 +81,6 @@ public class PanelComponent
         {
             this.setMaterialRateCard(priceHolder.getCarcassMaterialRateCard()).setFinish(priceHolder.getCarcassFinish());
             this.setFinishRateCard(this.exposed == PanelExposed.DOUBLE ? priceHolder.getCarcassDoubleExposedRateCard() : priceHolder.getCarcassFinishRateCard());
-        }
-
-        if (this.isExposed() && this.getFinishRateCard() == null)
-        {
-            priceHolder.addError("Rate card not setup for finish " + this.code + ":" + this.getType());
-        }
-        else if (!this.isExposed() && this.getMaterialRateCard() == null)
-        {
-            priceHolder.addError("Rate card not setup for carcass " + this.code + ":" + this.getType());
         }
     }
 
@@ -232,7 +243,11 @@ public class PanelComponent
 
     private void setDimensionsForCustomizedModule(ProductModule productModule, ModulePanel modulePanel)
     {
-        if (this.isLeftPanel() || this.isRightPanel())
+        if (StringUtils.isNonEmpty(modulePanel.getDimensionFormula()))
+        {
+            this.setDimensionsByFormula(productModule, modulePanel);
+        }
+        else if (this.isLeftPanel() || this.isRightPanel())
         {
             this.setLength(productModule.getDepth()).setBreadth(productModule.getHeight());
         }
@@ -245,6 +260,24 @@ public class PanelComponent
             this.setLength(productModule.getHeight()).setBreadth(productModule.getWidth());
         }
         this.setThickness(modulePanel.getThickness());
+    }
+
+    private void setDimensionsByFormula(ProductModule productModule, ModulePanel modulePanel)
+    {
+        switch (modulePanel.getDimensionFormula())
+        {
+            case "DW":
+                this.setLength(productModule.getDepth()).setBreadth(productModule.getWidth());
+                break;
+            case "DH":
+                this.setLength(productModule.getDepth()).setBreadth(productModule.getHeight());
+                break;
+            case "WH":
+                this.setLength(productModule.getWidth()).setBreadth(productModule.getHeight());
+                break;
+            default:
+                break;
+        }
     }
 
     private void setDimensionsForAccessoryUnit(ProductModule productModule)
