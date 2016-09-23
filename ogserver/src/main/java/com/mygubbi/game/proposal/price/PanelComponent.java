@@ -266,14 +266,14 @@ public class PanelComponent
     {
         switch (modulePanel.getDimensionFormula())
         {
-            case "DW":
-                this.setLength(productModule.getDepth()).setBreadth(productModule.getWidth());
+            case "WD":
+                this.setLength(productModule.getWidth()).setBreadth(productModule.getDepth());
                 break;
-            case "DH":
-                this.setLength(productModule.getDepth()).setBreadth(productModule.getHeight());
+            case "HW":
+                this.setLength(productModule.getHeight()).setBreadth(productModule.getWidth());
                 break;
-            case "WH":
-                this.setLength(productModule.getWidth()).setBreadth(productModule.getHeight());
+            case "HD":
+                this.setLength(productModule.getHeight()).setBreadth(productModule.getDepth());
                 break;
             default:
                 break;
