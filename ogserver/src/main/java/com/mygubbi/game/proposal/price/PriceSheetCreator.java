@@ -70,8 +70,8 @@ public class PriceSheetCreator implements ExcelCellProcessor
                 break;
 
             case "Module Details":
-                this.fillDetails(cell.getRow().getRowNum() + 1, "No Details.", this.priceHolder.getProductModule());
-                break;
+            this.fillDetails(cell.getRow().getRowNum() + 1, "No Details.", this.priceHolder.getProductModule());
+            break;
 
             default:
                 break;

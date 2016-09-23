@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ProductModule extends JsonObject
 {
+    private static final double SQMM2SQFT = 0.0000107639;
+
     private static final String ACCESSORY_UNIT = "Accessory";
 
     public static String MODULE_MAPPED = "m";
@@ -323,6 +325,21 @@ public class ProductModule extends JsonObject
     public int getHeight()
     {
         return this.getInteger(HEIGHT);
+    }
+
+    public double getAreaOfModuleInSft()
+    {
+        double h = this.getHeight();
+        double w = this.getWidth();
+        double d = this.getDepth();
+
+        double t1 = 0;
+        double t2 = 0;
+
+        t1=h;
+        t2=w;
+
+        return t1 * t2 * SQMM2SQFT;
     }
 
     @Override

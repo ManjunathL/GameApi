@@ -50,7 +50,8 @@ public class PricingCalculationExcelCreator
     private String copyTemplateFile()
     {
         String templateFile = ConfigHolder.getInstance().getStringValue("templates_folder", "/tmp") + "/module_price_calculation.xlsx";
-        String targetFile = ConfigHolder.getInstance().getStringValue("price_files_folder", "/tmp") + "/" + this.getOutputFilename();
+        String filename = this.getOutputFilename().replaceAll("/", "").replaceAll(" ", "");
+        String targetFile = ConfigHolder.getInstance().getStringValue("price_files_folder", "/tmp") + "/" + filename;
         try
         {
             VertxInstance.get().fileSystem().deleteBlocking(targetFile);
@@ -65,7 +66,7 @@ public class PricingCalculationExcelCreator
         }
         catch (Exception e)
         {
-            throw new RuntimeException("Error in copying template file " + templateFile + "to " + targetFile
+            throw new RuntimeException("Error in copying template file " + templateFile + " to " + targetFile
                     + " for module " + this.priceHolder.getName() + ".", e);
         }
         return targetFile;
