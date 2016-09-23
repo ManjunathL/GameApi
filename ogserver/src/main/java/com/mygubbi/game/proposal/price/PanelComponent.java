@@ -40,7 +40,7 @@ public class PanelComponent
     {
         this.setBaseAttributes(modulePanel, component);
         this.setDimensions(priceHolder.getProductModule(), priceHolder.getMgModule(), modulePanel);
-        this.setExposed(priceHolder.getProductModule());
+        this.setExposed(priceHolder.getProductModule(),modulePanel);
         this.setRateCards(priceHolder);
         this.doIntegrityCheck(priceHolder);
     }
@@ -286,13 +286,19 @@ public class PanelComponent
         this.setThickness(ACCESSORY_PANEL_THICKNESS);
     }
 
-    public void setExposed(ProductModule productModule)
+    public void setExposed(ProductModule productModule,ModulePanel modulePanel)
     {
         this.exposed = PanelExposed.NONE;
 
         if (this.isShutter())
         {
-            this.exposed = PanelExposed.SINGLE;
+            if (modulePanel.getExposed().equals("D")) {
+                this.exposed = PanelExposed.DOUBLE;
+            }
+            else
+            {
+                this.exposed = PanelExposed.SINGLE;
+            }
             return;
         }
 

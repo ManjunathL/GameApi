@@ -21,6 +21,8 @@ public class ModulePanel
     private int thickness;
     private String edgebinding;
     private String dimensionFormula;
+    private String exposed;
+
 
     public static ModulePanel fromJson(JsonObject json)
     {
@@ -29,7 +31,8 @@ public class ModulePanel
                 .setSubtitle(json.getString("subtitle"))
                 .setLength(json.getInteger("plength")).setBreadth(json.getInteger("breadth"))
                 .setThickness(json.getInteger("thickness")).setEdgebinding(json.getString("edgebinding"))
-                .setDimensionFormula(json.getString("dimensionFormula"));
+                .setDimensionFormula(json.getString("dimensionFormula"))
+                .setExposed(json.getString("exposed"));
     }
 
     public String getCode()
@@ -144,6 +147,15 @@ public class ModulePanel
     public ModulePanel setDimensionFormula(String dimensionFormula)
     {
         this.dimensionFormula = dimensionFormula;
+        return this;
+    }
+
+    public String getExposed() {
+        return exposed;
+    }
+
+    public ModulePanel setExposed(String exposed) {
+        this.exposed = exposed;
         return this;
     }
 }

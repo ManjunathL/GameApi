@@ -291,14 +291,14 @@
       "id": "module.components.select",
       "type": "select",
       "table": "module_components",
-      "query": "select comptype, compcode, quantity from module_components where modulecode = ?",
+      "query": "select * from module_components where modulecode = ?",
       "params": ["modulecode"]
     },
     {
       "id": "module.components.select.all",
       "type": "select",
       "table": "module_components",
-      "query": "select modulecode, comptype, compcode, quantity from module_components ",
+      "query": "select * from module_components ",
       "params": []
     },
     {
@@ -326,7 +326,7 @@
       "id": "carcass.select.all",
       "type": "select",
       "table": "carcass_master",
-      "query": "select code, title, plength, breadth, thickness, edgebinding, area, type from carcass_master",
+      "query": "select * from carcass_master",
       "params": []
     },
     {
