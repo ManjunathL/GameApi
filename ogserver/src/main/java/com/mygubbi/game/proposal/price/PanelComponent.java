@@ -4,6 +4,8 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
 
+import java.util.Objects;
+
 /**
  * Created by Chirag on 08-09-2016.
  */
@@ -292,7 +294,7 @@ public class PanelComponent
 
         if (this.isShutter())
         {
-            if (modulePanel.getExposed().equals("D")) {
+            if (Objects.equals("D", modulePanel.getExposed())) {
                 this.exposed = PanelExposed.DOUBLE;
             }
             else
