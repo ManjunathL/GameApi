@@ -35,7 +35,7 @@ define([
             document.title = userProfData.displayName + ' | mygubbi';
         },
         render: function () {
-            var authData = this.ref.getAuth();
+            var authData = firebase.auth().currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function () {
@@ -69,6 +69,28 @@ define([
             };
             var that = this;
             MGF.updateProfile(formData).then(function () {
+                that.render()
+            });
+
+        },
+        submitPropertyDetails: function (e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
+            var formData = {
+                "property-name": $('#property-name').val(),
+                "property-type": $('#property-type').val(),
+                "blockno": $('#blockno').val(),
+                "builder_name": $('#builder_name').val(),
+                "flatno": $('#flatno').val()
+            };
+
+            console.log(formData);
+            //return false;
+
+
+            var that = this;
+            MGF.updatePropertyDetails(formData).then(function () {
                 that.render()
             });
 
@@ -155,6 +177,7 @@ define([
         },
         events: {
             "click #save_details": "submit",
+            "click #save_property_details": "submitPropertyDetails",
             "click #profile-file-input": "changeProfileImg",
             "submit #changeUserPasswordForm": "changeUserPassword",
             "submit #deactivateUserForm": "deactivateUserAccount"

@@ -90,15 +90,15 @@ define([
             _.bindAll(this, 'renderSub');
         },
         handleShortlistChange: function() {
-            var slItems = MGF.getShortListedItems();
+           /* var slItems = MGF.getShortListedItems();
             $('#shortlistSuperScript').html(slItems ? Object.keys(slItems).length : '');
             $('#shortlistSuperScript1').html(slItems ? Object.keys(slItems).length : '');
-            this.renderShortlist();
+            this.renderShortlist();*/
         },
         renderShortlist: function() {
-            $('.shortlist').html(_.template(shortlistTemplate)({
+            /*$('.shortlist').html(_.template(shortlistTemplate)({
                 user_shortlist_items: MGF.getShortListedItems()
-            }));
+            }));*/
         }
     })
     return HeaderMenuView;

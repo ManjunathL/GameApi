@@ -26,6 +26,8 @@ define([
         },
 
         setUser: function(user) {
+            console.log('  ----------------      users  -----------------');
+            console.log(user);
             users.add(user, {
                 at: 0
             });
@@ -44,7 +46,7 @@ define([
             });
         },
         getUserProfileWithCB: function(next) {
-            var authData = this.ref.getAuth();
+            var authData = firebase.auth().currentUser;
             MGF.getUserProfile(authData, next);
         },
         onFAuth: function(authData) {
@@ -137,12 +139,29 @@ define([
         },
 
         pwdLogin: function() {
-            this.ref.authWithPassword({
+            /*this.ref.authWithPassword({
                 email: $('#emailId').val(),
                 password: $('#pwd').val()
             }, this.authHandler, {
                 remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'
-            });
+            });*/
+            var that = this;
+            var email = $('#emailId').val();
+            var password = $('#pwd').val();
+
+            MGF.rootAuth.signInWithEmailAndPassword(email, password).then(function() {
+              // Sign-in successful.
+              var user = firebase.auth().currentUser;
+              that.setUser(user);
+              $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
+              console.log('Sign-in successful');
+            }, function(error) {
+              // An error happened.
+              console.log('Error'+error);
+            }, this.authHandler, {
+                 remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'
+             });
+            // [END authwithemail]
         },
 
         resetPassword: function() {
@@ -163,8 +182,9 @@ define([
         },
 
         signOut: function(ev) {
-            MGF.stopListeningForShortlistChanges(this.ref.getAuth().uid);
-            this.ref.unauth();
+            //MGF.stopListeningForShortlistChanges(this.ref.getAuth().uid);
+            //this.ref.unauth();
+            MGF.rootAuth.signOut();
             users.reset();
         },
 
@@ -223,7 +243,13 @@ define([
         signUp: function() {
 
             var that = this;
-            this.ref.createUser({
+
+            var email = $('#reg_email_id').val();
+            var password = $('#reg_password').val();
+
+            MGF.handleSignUp(email,password);
+
+            /*this.ref.createUser({
                 email: $('#reg_email_id').val(),
                 password: $('#reg_password').val()
             }, function(error, userData) {
@@ -260,7 +286,7 @@ define([
 
                     });
                 }
-            });
+            });*/
 
             return false;
         },
@@ -271,6 +297,7 @@ define([
             $('#signup').modal('toggle');
             $('#notify').modal('show');
             this.ref.onAuth(this.onFAuth);
+
         },
         gotoLogin: function() {
             $('#notify').modal('toggle');
@@ -358,7 +385,7 @@ define([
 
             parent.delegateEvents(events);
 
-            this.ref.onAuth(this.onFAuth);
+            //this.ref.onAuth(this.onFAuth);
             var that = this;
 
             $(function() {

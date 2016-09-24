@@ -24,7 +24,7 @@ define([
         },
 
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = firebase.auth().currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         ready: function () {

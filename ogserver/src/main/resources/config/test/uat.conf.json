@@ -8,9 +8,9 @@
   },
 
   "firebase": {
-    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
-    "loginid": "mygubbi.fbase@gmail.com",
-    "password": "!@#$VGYHasdf435",
+    "fb_url": "https://mygubbi-cep.firebaseio.com/",
+    "loginid": "mygubbi.uat@gmail.com",
+    "password": "uat@mygubbi",
     "processEvents": false
   },
 

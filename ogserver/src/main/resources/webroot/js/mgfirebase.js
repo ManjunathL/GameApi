@@ -1,10 +1,21 @@
 define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(firebase, _, backbone, LS) {
 
-    var rootUrl = fbaseRootUrl;
-    var rootRef = new Firebase(rootUrl);
+    // Initialize Firebase
+     var config = {
+       apiKey: "AIzaSyALgwN8p4bsgNDskEP_F4IPEyJTeUaQqTo",
+       authDomain: "mygubbi-cep.firebaseapp.com",
+       databaseURL: "https://mygubbi-cep.firebaseio.com",
+       storageBucket: "mygubbi-cep.appspot.com",
+       messagingSenderId: "623623245186"
+     };
+     firebase.initializeApp(config);
+
+     var rootRef = firebase.database().ref();
+     var rootAuth = firebase.auth();
 
     return {
         'rootRef': rootRef,
+        'rootAuth': rootAuth,
         shortlistedItems: null,
         TYPE_CONSULT: "consult",
         TYPE_SUBSCRIBE: "subscribe",
@@ -13,7 +24,44 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         TYPE_USER_REMOVE: "user.remove",
         TYPE_SHORTLIST_PRODUCT_ADD: "shortlist.product.add",
         TYPE_SHORTLIST_PRODUCT_REMOVE: "shortlist.product.remove",
+        handleSignUp: function(email, password) {
+
+        console.log(' ------------- here ------------------');
+           // Sign in with email and pass.
+          // [START createwithemail]
+          this.rootAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
+            console.log("Successfully created user!!!");
+            console.log(userData);
+          }, function(error) {
+            // An error happened.
+            console.log('Error'+error);
+          });
+          // [END createwithemail]
+
+        },
         getUserProfile: function(authData, someFunc) {
+
+            // Listening for auth state changes.
+          // [START authstatelistener]
+          this.rootAuth.onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in.
+              var displayName = user.displayName;
+              var email = user.email;
+              var emailVerified = user.emailVerified;
+              var photoURL = user.photoURL;
+              var isAnonymous = user.isAnonymous;
+              var uid = user.uid;
+              var providerData = user.providerData;
+
+               someFunc(user, providerData);
+            } else {
+                someFunc(null);
+            }
+          });
+          // [END authstatelistener]
+        }
+/*        getUserProfile: function(authData, someFunc) {
 
             if (authData && authData.provider !== 'anonymous') {
                 var userProfileRef = this.rootRef.child("user-profiles/" + authData.uid);
@@ -114,7 +162,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             } else {
                 switch (authData.provider) {
                     case 'password':
-                        return authData.password.email.replace(/@.*/, '');
+                        return authData.password.email.replace(/@.*//*, '');
                     case 'google':
                         return authData.google.displayName;
                     case 'facebook':
@@ -245,6 +293,6 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                     that.addShortlistProduct(shortlistedItem).then(function() {});
                 });
             }
-        }
+        }*/
     };
 });
