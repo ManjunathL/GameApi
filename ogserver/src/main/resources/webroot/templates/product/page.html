@@ -114,20 +114,20 @@
         <% } %>
     </div>
     <!-- H1 tag heading start -->
-    <div class="h1-tag-content container-fluid bg-color-white align-center">
+  <!--  <div class="h1-tag-content container-fluid bg-color-white align-center">
         <h1>
-            <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
+     <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
             null){ %>
             <%= filter.selectedSubCategoryName %>
             <% }else if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
             <%= filter.selectedCategoryName %>
             <% } %>
         </h1>
-    </div>
+    </div>-->
     <!-- H1 tag heading end -->
     <div class="container-fluid bg-color-white" id="filter-desc-container">
         <div class="container">
-            <div class="row padding20-0 filter-desc-col position-relative" id="filter-desc">
+            <div class="row filter-desc-col position-relative" id="filter-desc">
                <!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
                     <div class="design-count margin0">
                         <%= collection.length %>
@@ -137,7 +137,7 @@
                 </div>-->
 
                 <div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
-                    <div id="filtered-list" class="padding8">
+                    <div id="filtered-list">
                         <% var flag = 0; %>
                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ var count = 0; %>
                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
@@ -745,14 +745,16 @@
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
                 $('#filter-desc-container').addClass('stick').css({'top': '0px'});
-                $('#filter-desc').css({'padding': '10px 0px'});
+                //$('#filter-desc').css({'padding': '10px 0px'});
+                $('#filter-desc').css({'line-height': '2'});
                 $('.filter-desc-col').addClass('stick-tag');
                 $('#filter-choose-container').slideUp();
             } else {
                 $('.back-to-top').fadeOut(duration);
                 $('#filter-desc-container').removeClass('stick');
-                $('#filter-desc').css({'padding': '20px 0px'});
+                //$('#filter-desc').css({'padding': '20px 0px'});
                 $('.filter-desc-col').removeClass('stick-tag');
+                $('#filtered-list').removeClass('stick').css({'top': '0px'});
                 $('#filter-choose-container').removeClass('stick').slideDown();
             }
 
@@ -766,7 +768,7 @@
         });
 
         $('#filter-desc-container').on('mouseenter', '.stick-tag', function () {
-            $('#filter-choose-container').addClass('stick').animate({'top': '45px'}, 500);
+            $('#filter-choose-container').addClass('stick').animate({'top': '0px'}, 500);
             $('#filter-choose-container').css('display', 'block');
         });
 
@@ -969,7 +971,7 @@
             metakeyword = 'bedroom designs, bedroom furniture, bedroom interior, bedroom interior design';
             $("meta[name='keywords']").attr("content", metakeyword);
 
-            $(".h1-tag-content h1").html("bedroom interior");
+            $(".h1-tag-content h1").html("buy wardrobe online");
 
         }else if (url.indexOf('/kitchen') != -1) {
 
@@ -990,6 +992,36 @@
             $("meta[name='keywords']").attr("content", metakeyword);
 
             $(".h1-tag-content h1").html("living and dining room designs");
+
+        }else if (url.indexOf('/nest-of-tables-online') != -1) {
+
+            meta = 'Buy Nest of Tables online In Bangalore with mygubbi . Shop online for Nest of Tables with trendy designs and customised Nest of Tables.';
+            $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'Nest of Tables Bangalore, buy Nest of Tables, Nest Of Tables online, buy Nest Of Tables online Bangalore';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("Nest of Tables online");
+
+        }else if (url.indexOf('/coffee-tables-online') != -1) {
+
+            meta = 'Buy Coffee Tables online at low prices in India. Shop from a wide range of Coffee Tables and­­ customised designs at mygubbi with an easy EMI';
+            $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'Coffee Tables, buy Coffee Tables, Coffee Tables online, buy Coffee Tables online india';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("Coffee Tables online");
+
+        }else if (url.indexOf('/coffee-tables-online') != -1) {
+
+            meta = 'Buy Chest of Drawers online for your home in Bangalore, Pune only at mygubbi.com. Exclusive customised designs of Chest of Drawers now available at 0% EMI';
+            $("meta[name='description']").attr("content", meta);
+
+            metakeyword = 'Chest of Drawers, buy Chest of Drawers, buy Chest of Drawers online, buy Chest of Drawers Bangalore';
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+            $(".h1-tag-content h1").html("Chest of Drawers in Bangalore");
 
         }else {
             $("meta[name='description']").attr("content", meta);
