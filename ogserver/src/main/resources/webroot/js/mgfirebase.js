@@ -20,13 +20,11 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         TYPE_CONSULT: "consult",
         TYPE_SUBSCRIBE: "subscribe",
         TYPE_USER_ADD: "user.add",
-        TYPE_USER_UPDATE: "user.update",
+        TYPE_USER_UPDATE: "user.updateProfile",
         TYPE_USER_REMOVE: "user.remove",
         TYPE_SHORTLIST_PRODUCT_ADD: "shortlist.product.add",
         TYPE_SHORTLIST_PRODUCT_REMOVE: "shortlist.product.remove",
         handleSignUp: function(email, password) {
-
-        console.log(' ------------- here ------------------');
            // Sign in with email and pass.
           // [START createwithemail]
           this.rootAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
@@ -41,6 +39,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         },
         getUserProfile: function(authData, someFunc) {
 
+            var that = this;
             // Listening for auth state changes.
           // [START authstatelistener]
           this.rootAuth.onAuthStateChanged(function(user) {
@@ -54,12 +53,112 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
               var uid = user.uid;
               var providerData = user.providerData;
 
-               someFunc(user, providerData);
+                var userProfileRef = firebase.database().ref().child("user-profiles/" + uid);
+
+                var userProfile = null;
+                var that = this;
+
+                userProfileRef.once("value", function(snapshot) {
+                    if (snapshot.exists()) {
+                        that.userProfile = snapshot.val();
+                    }
+                    someFunc(that.userProfile, providerData);
+                   });
+
             } else {
                 someFunc(null);
             }
           });
           // [END authstatelistener]
+        },
+        updateProfile: function(profileData) {
+
+            var that = this;
+            var uid = firebase.auth().currentUser.uid;
+
+            return new Promise(function(resolve, reject){
+                that.rootRef.child('user-profiles').child(uid).set(
+                    profileData,
+                    function(error) {
+                        if (error) {
+                            console.log("password profile data could not be saved." + error);
+                            reject && reject();
+                        } else {
+                            console.log("data saved successfully.");
+                            that.pushEvent(uid, profileData, that.TYPE_USER_UPDATE);
+                            resolve();
+                        }
+                    }
+                );
+            });
+        },
+        getName: function(authData, userProfile) {
+            if (userProfile) {
+                return userProfile.displayName;
+            } else {
+                switch (authData.providerData) {
+                    case 'password':
+                        return authData.password.email.replace('/@.*//*', '');
+                    case 'google':
+                        return authData.google.displayName;
+                    case 'facebook':
+                        return authData.facebook.displayName;
+                        //                    case 'twitter':
+                        //                        return authData.twitter.displayName;
+                }
+            }
+        },
+        getImage: function(authData, userProfile) {
+            if (userProfile) {
+                return userProfile.profileImage;
+            } else {
+                switch (authData.providerData) {
+                    case 'password':
+                        return authData.password.profileImageURL;
+                    case 'google':
+                        return authData.google.profileImageURL;
+                    case 'facebook':
+                        return authData.facebook.profileImageURL;
+                        //                    case 'twitter':
+                        //                        return authData.twitter.profileImageURL;
+                }
+            }
+        },
+        getEmail: function(authData) {
+            switch (authData.providerData) {
+                case 'password':
+                    return authData.password.email;
+                case 'google':
+                    return authData.google.email;
+                case 'facebook':
+                    return authData.facebook.email;
+                    //                case 'twitter':
+                    //                    return authData.twitter.email;
+            }
+        },
+        pushEvent: function(uid, data, type) {
+            var eventData = {
+                "data": data,
+                "type": type
+            };
+            this.rootRef.child("events").push().child(uid).set(eventData, function(error) {
+                if (error) {
+                    console.log("not able to push event data", error);
+                } else {
+                    console.log("successfully pushed event data");
+                }
+            });
+        },
+        doAnonymousAuth: function() {
+             var that = this;
+             var existingAuthData = firebase.auth().currentUser;
+             if (!existingAuthData) {
+                 that.rootRef.authAnonymously(function(error, authData) {
+                     if (error) {
+                         console.log("error in anonymous auth", error);
+                     }
+                 });
+             }
         }
 /*        getUserProfile: function(authData, someFunc) {
 

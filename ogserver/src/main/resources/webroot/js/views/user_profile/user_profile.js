@@ -16,6 +16,7 @@ define([
         el: '.page',
         ref: MGF.rootRef,
         renderWithUserProfCallback: function (userProfData, provider) {
+
             $(this.el).html(_.template(UserProfileTemplate)({
                 'userProfile': userProfData,
                 'provider': provider
@@ -23,7 +24,7 @@ define([
             document.title = userProfData.displayName + ' | mygubbi';
         },
         render: function () {
-            var authData = this.ref.getAuth();
+            var authData = firebase.auth().currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function () {
@@ -61,8 +62,8 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-            var authData = this.ref.getAuth();
-            var email = MGF.getEmail(authData);
+            var authData = firebase.auth().currentUser;
+            var email = authData.email;
 
             this.ref.changePassword({
                 email: email,
