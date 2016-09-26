@@ -35,16 +35,20 @@ public class PanelComponent
     private int breadth;
     private int thickness;
     private PanelExposed exposed;
+    private ModulePanel underlyingPanel;
+    private String accPackCode;
 
     private enum PanelExposed{NONE, SINGLE, DOUBLE};
 
-    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component)
+    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode)
     {
         this.setBaseAttributes(modulePanel, component);
         this.setDimensions(priceHolder.getProductModule(), priceHolder.getMgModule(), modulePanel);
         this.setExposed(priceHolder.getProductModule(),modulePanel);
         this.setRateCards(priceHolder);
         this.doIntegrityCheck(priceHolder);
+        this.underlyingPanel = modulePanel;
+        this.accPackCode = accPackCode;
     }
 
     private void doIntegrityCheck(ModulePriceHolder priceHolder)
@@ -207,18 +211,20 @@ public class PanelComponent
     public double getFinishCost()
     {
         if (this.finishRateCard == null) return 0;
-        return this.getCuttingArea() * this.finishRateCard.getRateByThickness(this.getThickness());
+        return this.getArea() * this.finishRateCard.getRateByThickness(this.getThickness());
 
     }
 
     public double getArea()
     {
-        return this.getLength() * this.getBreadth() * SQMM2SQFT;
-    }
-
-    public double getCuttingArea()
-    {
-        return (this.getLength() - this.finish.getCuttingOffset()) * (this.getBreadth() - this.finish.getCuttingOffset()) * SQMM2SQFT;
+        if (this.exposed == PanelExposed.NONE)
+        {
+            return this.getLength() * this.getBreadth() * SQMM2SQFT;
+        }
+        else
+        {
+            return (this.getLength() - this.finish.getCuttingOffset()) * (this.getBreadth() - this.finish.getCuttingOffset()) * SQMM2SQFT;
+        }
     }
 
     public void setDimensions(ProductModule productModule, Module mgModule, ModulePanel modulePanel)
@@ -381,4 +387,28 @@ public class PanelComponent
         return this.exposed != null && this.exposed != PanelExposed.NONE;
     }
 
+    public String getTitle()
+    {
+        return this.underlyingPanel.getTitle();
+    }
+
+    public String getEdgeBinding()
+    {
+        return this.underlyingPanel.getEdgebinding();
+    }
+
+    public boolean isInAccessoryPack()
+    {
+        return StringUtils.isNonEmpty(this.accPackCode);
+    }
+
+    public boolean isInBaseModule()
+    {
+        return StringUtils.isEmpty(this.accPackCode);
+    }
+
+    public String getDimesions()
+    {
+        return this.getLength() + " X " + this.getBreadth() + " X " + this.thickness;
+    }
 }

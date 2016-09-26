@@ -26,7 +26,7 @@ public class ModuleDataService extends AbstractVerticle
 	private final static Logger LOG = LogManager.getLogger(ModuleDataService.class);
 
 	private static ModuleDataService INSTANCE;
-	private AtomicInteger cachingCounter = new AtomicInteger(8);
+	private AtomicInteger cachingCounter = new AtomicInteger(6);
 
     private Multimap<String, ModuleComponent> moduleComponentsMap;
     private Multimap<String, AccessoryPackComponent> accessoryPackComponentsMap;
@@ -34,8 +34,6 @@ public class ModuleDataService extends AbstractVerticle
     //private Multimap<String, AccHwComponent> accessoryAddonsMap;
     private Multimap<String, AccHwComponent> accessoryPackAddonsMap;
     private Map<String, Module> moduleMap = Collections.EMPTY_MAP;
-    private Map<String, CarcassPanel> carcassPanelMap = Collections.EMPTY_MAP;
-    private Map<String, ShutterPanel> shutterPanelMap = Collections.EMPTY_MAP;
     private Map<String, ModulePanel> panelMasterMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> accessoriesMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> hardwareMap = Collections.EMPTY_MAP;
@@ -61,8 +59,6 @@ public class ModuleDataService extends AbstractVerticle
 	{
         this.cacheModules();
         this.cacheModuleComponents();
-        this.cacheCarcassPanels();
-        this.cacheShutterPanels();
         this.cacheModulePanels();
         this.cacheAccessories();
         this.cacheHardware();
@@ -99,50 +95,6 @@ public class ModuleDataService extends AbstractVerticle
                             this.moduleComponentsMap.put(component.getModuleCode(), component);
                         }
                         markResult("Module components loaded.", true);
-                    }
-                });
-    }
-
-    private void cacheCarcassPanels()
-    {
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("carcass.select.all", new JsonObject())),
-                (AsyncResult<Message<Integer>> dataResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
-                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        markResult("Carcass panels table is empty.", false);
-                    }
-                    else
-                    {
-                        this.carcassPanelMap = new HashMap<String, CarcassPanel>(selectData.rows.size());
-                        for (JsonObject record : selectData.rows)
-                        {
-                            CarcassPanel carcass = CarcassPanel.fromJson(record);
-                            this.carcassPanelMap.put(carcass.getCode(), carcass);
-                        }
-                        markResult("Carcass panels loaded.", true);
-                    }
-                });
-    }
-
-    private void cacheShutterPanels()
-    {
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("shutter.select.all", new JsonObject())),
-                (AsyncResult<Message<Integer>> dataResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
-                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        markResult("Shutter panels table is empty.", false);
-                    }
-                    else
-                    {
-                        this.shutterPanelMap = new HashMap(selectData.rows.size());
-                        for (JsonObject record : selectData.rows)
-                        {
-                            ShutterPanel shutter = ShutterPanel.fromJson(record);
-                            this.shutterPanelMap.put(shutter.getCode(), shutter);
-                        }
-                        markResult("Shutter panels done.", true);
                     }
                 });
     }
@@ -446,16 +398,6 @@ public class ModuleDataService extends AbstractVerticle
     public ModulePanel getPanel(String code)
     {
         return this.panelMasterMap.get(code);
-    }
-
-    public CarcassPanel getCarcassPanel(String code)
-    {
-        return this.carcassPanelMap.get(code);
-    }
-
-    public ShutterPanel getShutterPanel(String code)
-    {
-        return this.shutterPanelMap.get(code);
     }
 
     public AccHwComponent getAccessory(String code)

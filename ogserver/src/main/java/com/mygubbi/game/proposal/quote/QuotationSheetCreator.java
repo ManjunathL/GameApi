@@ -1,8 +1,9 @@
 package com.mygubbi.game.proposal.quote;
 
-import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.si.excel.ExcelCellProcessor;
+import com.mygubbi.si.excel.ExcelSheetProcessor;
 import com.mygubbi.si.excel.ExcelStyles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Created by Sunil on 22-05-2016.
  */
-public class QuotationSheetCreator
+public class QuotationSheetCreator implements ExcelCellProcessor
 {
     private final static Logger LOG = LogManager.getLogger(QuotationSheetCreator.class);
 
@@ -32,6 +33,7 @@ public class QuotationSheetCreator
     private QuoteData quoteData;
     private Sheet quoteSheet;
     private ExcelStyles styles;
+    private ExcelSheetProcessor sheetProcessor;
 
     public QuotationSheetCreator(Sheet quoteSheet, QuoteData quoteData, ExcelStyles styles)
     {
@@ -42,62 +44,25 @@ public class QuotationSheetCreator
 
     public void prepare()
     {
-        this.processQuoteSheet();
+        this.sheetProcessor = new ExcelSheetProcessor(this.quoteSheet, this.styles, this);
+        this.sheetProcessor.process();
     }
 
-    private void processQuoteSheet()
+    @Override
+    public Object getValueForKey(String key)
     {
-        int firstRow = this.quoteSheet.getFirstRowNum();
-        int lastRow = this.quoteSheet.getLastRowNum();
-
-        int rowNum = 0;
-        int cellNum = 0;
-        String cellValue = null;
-        try
+        if ((key.equals("discountamount") && this.quoteData.getDiscountAmount() == 0) ||
+                key.equals("amountafterdiscount") && this.quoteData.getAmountafterdiscount()==this.quoteData.getTotalCost())
         {
-            for (rowNum = lastRow; rowNum >= firstRow; rowNum--)
-            {
-                Row row = this.quoteSheet.getRow(rowNum);
-                int lastCell = row.getLastCellNum();
-                for (cellNum = row.getFirstCellNum(); cellNum < lastCell; cellNum++)
-                {
-                    Cell cell = row.getCell(cellNum);
-                    if (cell == null) continue;
-                    if (cell.getCellType() == Cell.CELL_TYPE_STRING)
-                    {
-                        cellValue = cell.getStringCellValue();
-                        this.handleCell(cell, cellValue);
-                        cellValue = null;
-                    }
-                }
-            }
+            this.sheetProcessor.removeCurrentRow();
+            return ExcelSheetProcessor.CellAction.NONE;
         }
-        catch (Exception e)
-        {
-            String message = "Error processing cell (" + rowNum + "," + cellNum + ") in sheet " + quoteSheet.getSheetName()
-                    + ". Cell value: " + cellValue + " - Error:" + e.getMessage();
-            LOG.error(message, e);
-            throw new RuntimeException(message, e);
-        }
+        return this.quoteData.getValue(key);
     }
 
-    private void handleCell(Cell cell, String cellValue)
+    @Override
+    public void processCell(Cell cell, String cellValue)
     {
-        if (StringUtils.isEmpty(cellValue)) return;
-
-        if (cellValue.charAt(0) == '$')
-        {
-            this.replaceCellValue(cell, cellValue);
-        }
-        else
-        {
-            this.checkTagAndInsertData(cell, cellValue);
-        }
-    }
-
-    private void checkTagAndInsertData(Cell cell, String cellValue)
-    {
-//        LOG.info("Processing " + cellValue);
         switch (cellValue)
         {
             case "Kitchen & Other Units":
@@ -226,10 +191,6 @@ public class QuotationSheetCreator
         this.createSubHeadingRowForCatalog(currentRow, "A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
 
-
-    /*    currentRow++;
-        this.createRowAndFillData(currentRow, "",product.getName() );*/
-
         currentRow++;
         this.createRowAndFillData(currentRow, null, product.getName());
 
@@ -315,14 +276,6 @@ public class QuotationSheetCreator
         return sheet.createRow(currentRow);
     }
 
-    private Row deleteRow(int rownnum, Sheet sheet)
-    {
-        Row dataRow=this.deleteRow(rownnum,this.quoteSheet);
-        sheet.removeRow(dataRow);
-        return dataRow;
-    }
-
-
     private Cell createCellWithData(Row dataRow, int cellNum, int cellType, Object data)
     {
         Cell cell = dataRow.createCell(cellNum, cellType);
@@ -338,39 +291,4 @@ public class QuotationSheetCreator
         }
         return cell;
     }
-
-
-    private void replaceCellValue(Cell cell, String cellValue)
-    {
-        String fieldName = cellValue.substring(1);
-        Object value = this.quoteData.getValue(fieldName);
-
-        if (value == null) value = "";
-        if (value instanceof String)
-        {
-            cell.setCellValue((String) value);
-        }
-        else if (value instanceof Double)
-        {
-            cell.setCellValue((Double) value);
-        }
-        else
-        {
-            cell.setCellValue(value.toString());
-        }
-
-        if (fieldName.equals("discountamount") && this.quoteData.getDiscountAmount() == 0 )
-        {
-            quoteSheet.removeRow(cell.getRow());
-
-        }
-        if (fieldName.equals("amountafterdiscount") && this.quoteData.getAmountafterdiscount()==this.quoteData.getTotalCost())
-        {
-            Row newRow=cell.getRow();
-            quoteSheet.removeRow(newRow);
-        }
-
-
-    }
-
 }

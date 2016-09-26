@@ -144,6 +144,11 @@ public class ProductModule extends JsonObject
         return this.getString(MAPPED);
     }
 
+    public String getDescription()
+    {
+        return this.getString(DESCRIPTION);
+    }
+
     public String getExposedSides()
     {
         return this.getString(EXPOSED_SIDES);

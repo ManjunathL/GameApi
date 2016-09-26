@@ -69,7 +69,7 @@ public class PanelSheetCreator implements ExcelCellProcessor
 
     }
 
-    private int fillShutterPanels(List<AssembledProductInQuote.ModuleShutter> panels, int currentRow, String defaultMessage)
+    private int fillShutterPanels(List<AssembledProductInQuote.ModulePanelComponent> panels, int currentRow, String defaultMessage)
     {
         if (panels == null || panels.isEmpty())
         {
@@ -80,7 +80,7 @@ public class PanelSheetCreator implements ExcelCellProcessor
 
 
         int seq = 1;
-        for (AssembledProductInQuote.ModuleShutter panel : panels)
+        for (AssembledProductInQuote.ModulePanelComponent panel : panels)
         {
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, panel.title, panel.height, panel.width,
@@ -90,7 +90,7 @@ public class PanelSheetCreator implements ExcelCellProcessor
         return currentRow;
     }
 
-    private int fillCarcassPanels(List<AssembledProductInQuote.ModuleCarcass> panels, int currentRow, String defaultMessage)
+    private int fillCarcassPanels(List<AssembledProductInQuote.ModulePanelComponent> panels, int currentRow, String defaultMessage)
     {
         if (panels == null || panels.isEmpty())
         {
@@ -100,11 +100,11 @@ public class PanelSheetCreator implements ExcelCellProcessor
         }
 
         int seq = 1;
-        for (AssembledProductInQuote.ModuleCarcass panel : panels)
+        for (AssembledProductInQuote.ModulePanelComponent panel : panels)
         {
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, panel.title, panel.width,
-                    panel.depth, panel.thickness, panel.quantity, panel.edgebinding, panel.area, panel.dimension});
+                    panel.height, panel.thickness, panel.quantity, panel.edgebinding, panel.area, panel.dimension});
             seq++;
         }
         return currentRow;

@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.price;
 
+import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.AccHwComponent;
 import com.mygubbi.game.proposal.model.IModuleComponent;
@@ -12,12 +13,14 @@ public class HardwareComponent
     private AccHwComponent component;
     private double quantity;
     private String quantityFormula;
+    private String accPackCode;
 
-    public HardwareComponent(AccHwComponent component, ProductModule productModule, IModuleComponent moduleComponent)
+    public HardwareComponent(AccHwComponent component, ProductModule productModule, IModuleComponent moduleComponent, String accPackCode)
     {
         this.component = component;
         this.quantity = this.calculateQuantity(productModule, moduleComponent);
         this.quantityFormula = moduleComponent.isCalculatedQuantity() ? moduleComponent.getQuantityFormula() : "Fixed Quantity";
+        this.accPackCode = accPackCode;
     }
 
     public AccHwComponent getComponent()
@@ -101,4 +104,13 @@ public class HardwareComponent
         }
     }
 
+    public boolean isInAccessoryPack()
+    {
+        return StringUtils.isNonEmpty(this.accPackCode);
+    }
+
+    public boolean isInBaseModule()
+    {
+        return StringUtils.isEmpty(this.accPackCode);
+    }
 }

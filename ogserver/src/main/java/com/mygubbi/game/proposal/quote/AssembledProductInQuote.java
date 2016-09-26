@@ -2,7 +2,12 @@ package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.*;
-import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.game.proposal.model.AccHwComponent;
+import com.mygubbi.game.proposal.model.AccessoryPackComponent;
+import com.mygubbi.game.proposal.model.ModulePanel;
+import com.mygubbi.game.proposal.model.ShutterFinish;
+import com.mygubbi.game.proposal.price.ModulePriceHolder;
+import com.mygubbi.game.proposal.price.PanelComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jooq.lambda.Seq;
@@ -10,6 +15,7 @@ import org.jooq.lambda.tuple.Tuple;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +30,8 @@ public class AssembledProductInQuote
     private final static Logger LOG = LogManager.getLogger(AssembledProductInQuote.class);
 
     private ProductLineItem product;
+    private List<ModulePriceHolder> priceHolders = Collections.EMPTY_LIST;
+
     private List<Accessory> accessories;
     private List<Unit> units;
 
@@ -33,6 +41,8 @@ public class AssembledProductInQuote
     private List<ModulePart> moduleHardware;
     private List<ModulePart> addonAccessories;
     private List<ModulePart> addons;
+
+    private List<PanelComponent> panels;
 
     private double addonsAmount;
     private String shutterMaterial;
@@ -46,6 +56,11 @@ public class AssembledProductInQuote
     public String getTitle()
     {
         return this.product.getTitle();
+    }
+
+    public List<ModulePriceHolder> getPriceHolders()
+    {
+        return this.priceHolders;
     }
 
     public double getTotalAmount()
@@ -145,6 +160,7 @@ public class AssembledProductInQuote
 
     private void prepare()
     {
+        this.priceHolders = new ArrayList<>();
         this.units = new ArrayList<>();
         this.accessories = new ArrayList<>();
         this.moduleAccessories = new ArrayList<>();
@@ -156,6 +172,14 @@ public class AssembledProductInQuote
 
         for (ProductModule module : this.product.getModules())
         {
+            ModulePriceHolder priceHolder = new ModulePriceHolder(module);
+            priceHolder.prepare();
+            if (priceHolder.hasErrors())
+            {
+                throw new RuntimeException("Error in preparing product for module : " + module.getMGCode() + " in product " + this.product.getId());
+            }
+            this.priceHolders.add(priceHolder);
+
             this.modules.add(new ModulePart(module.getMGCode(), "NOS", 1));
             this.addModuleToUnit(module);
             this.collectModuleParts(module);
@@ -165,6 +189,7 @@ public class AssembledProductInQuote
             this.addonsAmount += addon.getAmount();
             this.addToAddons(addon, 1, "NA", 0);
         }
+
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(this.product.getFinishCode());
         this.shutterMaterial = finish.getTitle() + " | " + finish.getFinishMaterial();
     }
@@ -193,7 +218,7 @@ public class AssembledProductInQuote
                 }
                 else if (accessoryPackComponent.isCarcass())
                 {
-                    CarcassPanel carcassPanel = ModuleDataService.getInstance().getCarcassPanel(accessoryPackComponent.getComponentCode());
+                    ModulePanel carcassPanel = ModuleDataService.getInstance().getPanel(accessoryPackComponent.getComponentCode());
                     if (carcassPanel == null) continue;
                     this.addToAccessoryPackPanels(carcassPanel, accessoryPackComponent.getQuantity(), module.getUnit(), module.getSequence());
                 }
@@ -234,7 +259,7 @@ public class AssembledProductInQuote
         this.moduleHardware.add(part);
     }
 
-    private void addToAccessoryPackPanels(CarcassPanel carcassPanel, double quantity, String unit, int seq)
+    private void addToAccessoryPackPanels(ModulePanel carcassPanel, double quantity, String unit, int seq)
     {
         ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS");
         this.accessoryPackPanels.add(part);
@@ -299,19 +324,19 @@ public class AssembledProductInQuote
         return this.product.getModules();
     }
 
-    public List<ModuleCarcass> getAggregatedCarcassPanels()
+    public List<ModulePanelComponent> getAggregatedCarcassPanels()
     {
-        List<ModuleCarcass> aggregated =
+        List<ModulePanelComponent> aggregated =
 
-                Seq.ofType(this.getCarcassPanels().stream(), ModuleCarcass.class)
-                        .groupBy(x -> tuple(x.code, x.title, x.width, x.depth, x.thickness, x.edgebinding, x.dimension),
+                Seq.ofType(this.getPanels(false).stream(), ModulePanelComponent.class)
+                        .groupBy(x -> tuple(x.code, x.title, x.width, x.height, x.thickness, x.edgebinding, x.dimension),
                                 Tuple.collectors(
                                         Collectors.summingDouble(x -> x.quantity), Collectors.summingDouble(x -> x.area)
                                 )
                         )
                         .entrySet()
                         .stream()
-                        .map(e -> new ModuleCarcass().setCode(e.getKey().v1).setTitle(e.getKey().v2).setWidth(e.getKey().v3).setDepth(e.getKey().v4)
+                        .map(e -> new ModulePanelComponent().setCode(e.getKey().v1).setTitle(e.getKey().v2).setWidth(e.getKey().v3).setHeight(e.getKey().v4)
                                 .setThickness(e.getKey().v5).setEdgebinding(e.getKey().v6).setDimension(e.getKey().v7)
                                 .setQuantity(e.getValue().v1).setArea(e.getValue().v2))
                         .collect(Collectors.toList());
@@ -319,11 +344,11 @@ public class AssembledProductInQuote
         return aggregated;
     }
 
-    public List<ModuleShutter> getAggregatedShutterPanels()
+    public List<ModulePanelComponent> getAggregatedShutterPanels()
     {
-        List<ModuleShutter> aggregated =
+        List<ModulePanelComponent> aggregated =
 
-                Seq.ofType(this.getShutterPanels().stream(), ModuleShutter.class)
+                Seq.ofType(this.getPanels(true).stream(), ModulePanelComponent.class)
                         .groupBy(x -> tuple(x.code, x.title, x.height, x.width, x.thickness, x.edgebinding, x.design, x.color, x.dimension),
                                 Tuple.collectors(
                                         Collectors.summingDouble(x -> x.quantity), Collectors.summingDouble(x -> x.area)
@@ -331,7 +356,7 @@ public class AssembledProductInQuote
                         )
                         .entrySet()
                         .stream()
-                        .map(e -> new ModuleShutter().setCode(e.getKey().v1).setTitle(e.getKey().v2).setHeight(e.getKey().v3)
+                        .map(e -> new ModulePanelComponent().setCode(e.getKey().v1).setTitle(e.getKey().v2).setHeight(e.getKey().v3)
                                 .setWidth(e.getKey().v4).setThickness(e.getKey().v5).setEdgebinding(e.getKey().v6)
                                 .setDesign(e.getKey().v7).setColor(e.getKey().v8).setDimension(e.getKey().v9)
                                 .setQuantity(e.getValue().v1).setArea(e.getValue().v2))
@@ -340,40 +365,18 @@ public class AssembledProductInQuote
         return aggregated;
     }
 
-    public List<ModuleCarcass> getCarcassPanels()
+    public List<ModulePanelComponent> getPanels(boolean exposed)
     {
-        List<ModuleCarcass> carcassPanels = new ArrayList<>();
-        for (ProductModule module : this.getModules())
+        List<ModulePanelComponent> panels = new ArrayList<>();
+        for (ModulePriceHolder priceHolder : this.priceHolders)
         {
-            for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(module.getMGCode()))
+            for (PanelComponent panel : priceHolder.getPanelComponents())
             {
-                if (ModuleComponent.CARCASS_TYPE.equals(component.getType()))
-                {
-                    CarcassPanel panel = ModuleDataService.getInstance().getCarcassPanel(component.getComponentCode());
-                    if (panel == null) continue;
-                    carcassPanels.add(new ModuleCarcass(panel, component));
-                }
+                if (panel.isExposed() == exposed)
+                    panels.add(new ModulePanelComponent(panel, priceHolder.getProductModule(), this.product.getDesignCode()));
             }
         }
-        return carcassPanels;
-    }
-
-    public List<ModuleShutter> getShutterPanels()
-    {
-        List<ModuleShutter> shutterPanels = new ArrayList<>();
-        for (ProductModule module : this.getModules())
-        {
-            for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(module.getMGCode()))
-            {
-                if (ModuleComponent.SHUTTER_TYPE.equals(component.getType()))
-                {
-                    ShutterPanel panel = ModuleDataService.getInstance().getShutterPanel(component.getComponentCode());
-                    if (panel == null) continue;
-                    shutterPanels.add(new ModuleShutter(panel, component, module, this.product.getDesignCode()));
-                }
-            }
-        }
-        return shutterPanels;
+        return panels;
     }
 
     public List<ProductAddon> getAddonAccessories()
@@ -413,30 +416,24 @@ public class AssembledProductInQuote
 
         public void addModule(ProductModule module)
         {
-            Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
-            if (mgModule == null)
-            {
-                throw new RuntimeException("Module not found in master : " + module.getMGCode());
-            }
-
             this.moduleCount++;
-            ModuleDimension matchingDimension = this.getModuleDimension(mgModule);
+            ModuleDimension matchingDimension = this.getModuleDimension(module);
             if (matchingDimension != null)
             {
-                matchingDimension.incrementLength(mgModule.getWidth());
+                matchingDimension.incrementLength(module.getWidth());
             }
             else
             {
-                this.moduleDimensions.add(new ModuleDimension(mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight()));
+                this.moduleDimensions.add(new ModuleDimension(module.getWidth(), module.getDepth(), module.getHeight()));
             }
             this.amount += module.getAmount();
         }
 
-        private ModuleDimension getModuleDimension(Module mgModule)
+        private ModuleDimension getModuleDimension(ProductModule module)
         {
             for (ModuleDimension dimension : this.moduleDimensions)
             {
-                if (dimension.depth == mgModule.getDepth() && dimension.height == mgModule.getHeight())
+                if (dimension.depth == module.getDepth() && dimension.height == module.getHeight())
                 {
                     return dimension;
                 }
@@ -531,7 +528,7 @@ public class AssembledProductInQuote
         }
     }
 
-    public static class ModuleShutter
+    public static class ModulePanelComponent
     {
         public String dimension;
         public String code;
@@ -545,87 +542,87 @@ public class AssembledProductInQuote
         public String design;
         public String color;
 
-        public ModuleShutter(ShutterPanel panel, ModuleComponent component, ProductModule module, String design)
+        public ModulePanelComponent(PanelComponent panel, ProductModule module, String design)
         {
             this.code = panel.getCode();
             this.title = panel.getTitle();
-            this.quantity = component.getQuantity();
+            this.quantity = panel.getQuantity();
             this.width = panel.getLength();
             this.height = panel.getBreadth();
             this.thickness = panel.getThickness();
-            this.edgebinding = panel.getEdgebinding();
-            this.area = this.quantity * panel.getCuttingArea(ModuleDataService.getInstance().getFinish(module.getFinishCode()));
+            this.edgebinding = panel.getEdgeBinding();
+            this.area = panel.getArea();
             this.dimension = this.getDimesions();
             this.color = module.getColorCode();
             this.design = design;
         }
 
-        public ModuleShutter()
+        public ModulePanelComponent()
         {
 
         }
 
-        public ModuleShutter setCode(String code)
+        public ModulePanelComponent setCode(String code)
         {
             this.code = code;
             return this;
         }
 
-        public ModuleShutter setTitle(String title)
+        public ModulePanelComponent setTitle(String title)
         {
             this.title = title;
             return this;
         }
 
-        public ModuleShutter setQuantity(double quantity)
+        public ModulePanelComponent setQuantity(double quantity)
         {
             this.quantity = quantity;
             return this;
         }
 
-        public ModuleShutter setWidth(int width)
+        public ModulePanelComponent setWidth(int width)
         {
             this.width = width;
             return this;
         }
 
-        public ModuleShutter setHeight(int height)
+        public ModulePanelComponent setHeight(int height)
         {
             this.height = height;
             return this;
         }
 
-        public ModuleShutter setThickness(int thickness)
+        public ModulePanelComponent setThickness(int thickness)
         {
             this.thickness = thickness;
             return this;
         }
 
-        public ModuleShutter setEdgebinding(String edgebinding)
+        public ModulePanelComponent setEdgebinding(String edgebinding)
         {
             this.edgebinding = edgebinding;
             return this;
         }
 
-        public ModuleShutter setArea(double area)
+        public ModulePanelComponent setArea(double area)
         {
             this.area = area;
             return this;
         }
 
-        public ModuleShutter setDesign(String design)
+        public ModulePanelComponent setDesign(String design)
         {
             this.design = design;
             return this;
         }
 
-        public ModuleShutter setColor(String color)
+        public ModulePanelComponent setColor(String color)
         {
             this.color = color;
             return this;
         }
 
-        public ModuleShutter setDimension(String dimension)
+        public ModulePanelComponent setDimension(String dimension)
         {
             this.dimension = dimension;
             return this;
@@ -637,93 +634,5 @@ public class AssembledProductInQuote
         }
     }
 
-    public static class ModuleCarcass
-    {
-        public String code;
-        public String title;
-        public double quantity;
-        public int width;
-        public int depth;
-        public int thickness;
-        public String edgebinding;
-        public String dimension;
-        public double area;
-
-        public ModuleCarcass()
-        {
-
-        }
-        public ModuleCarcass(CarcassPanel panel, ModuleComponent component)
-        {
-            this.code = panel.getCode();
-            this.title = panel.getTitle();
-            this.quantity = component.getQuantity();
-            this.width = panel.getLength();
-            this.depth = panel.getBreadth();
-            this.thickness = panel.getThickness();
-            this.edgebinding = panel.getEdgebinding();
-            this.area = panel.getArea();
-            this.dimension = this.getDimesions();
-        }
-
-        private String getDimesions()
-        {
-            return this.depth + " X " + this.width + " X " + this.thickness;
-        }
-
-        public ModuleCarcass setCode(String code)
-        {
-            this.code = code;
-            return this;
-        }
-
-        public ModuleCarcass setTitle(String title)
-        {
-            this.title = title;
-            return this;
-        }
-
-        public ModuleCarcass setQuantity(double quantity)
-        {
-            this.quantity = quantity;
-            return this;
-        }
-
-        public ModuleCarcass setWidth(int width)
-        {
-            this.width = width;
-            return this;
-        }
-
-        public ModuleCarcass setDepth(int depth)
-        {
-            this.depth = depth;
-            return this;
-        }
-
-        public ModuleCarcass setThickness(int thickness)
-        {
-            this.thickness = thickness;
-            return this;
-        }
-
-        public ModuleCarcass setEdgebinding(String edgebinding)
-        {
-            this.edgebinding = edgebinding;
-            return this;
-        }
-
-        public ModuleCarcass setDimension(String dimension)
-        {
-            this.dimension = dimension;
-            return this;
-        }
-
-        public ModuleCarcass setArea(double area)
-        {
-            this.area = area;
-            return this;
-        }
-    }
 }
 

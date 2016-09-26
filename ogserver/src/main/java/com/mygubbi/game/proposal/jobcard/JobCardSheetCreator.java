@@ -1,8 +1,9 @@
 package com.mygubbi.game.proposal.jobcard;
 
 import com.mygubbi.game.proposal.ModuleDataService;
-import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.game.proposal.model.ShutterFinish;
+import com.mygubbi.game.proposal.price.ModulePriceHolder;
+import com.mygubbi.game.proposal.price.PanelComponent;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -12,8 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
-
-import java.util.List;
 
 /**
  * Created by Sunil on 22-05-2016.
@@ -62,7 +61,7 @@ public class JobCardSheetCreator implements ExcelCellProcessor
         switch (cellValue)
         {
             case "Modules":
-                this.fillModules(this.product.getModules(), cell.getRow().getRowNum() + 1, "No modules.");
+                this.fillModules(cell.getRow().getRowNum() + 1, "No modules.");
                 break;
 
             default:
@@ -71,9 +70,9 @@ public class JobCardSheetCreator implements ExcelCellProcessor
 
     }
 
-    private int fillModules(List<ProductModule> modules, int currentRow, String defaultMessage)
+    private int fillModules(int currentRow, String defaultMessage)
     {
-        if (modules == null || modules.isEmpty())
+        if (this.product.getPriceHolders() == null || this.product.getPriceHolders().isEmpty())
         {
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new String[]{defaultMessage});
@@ -81,19 +80,18 @@ public class JobCardSheetCreator implements ExcelCellProcessor
         }
 
         int seq = 1;
-        for (ProductModule module : modules)
+        for (ModulePriceHolder holder : this.product.getPriceHolders())
         {
-            Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
-
             currentRow++;
             this.sheetProcessor.createTitleRowInDataSheet(currentRow, new Object[]{"SL NO", "Description", "Width", "Depth", "Height/Thickness",
                     "Qty", "Remarks & Edge Binding", "Area",	"Finish", "Dimension",	"Box"});
 
             currentRow++;
-            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, mgModule.getCode() + " - " + mgModule.getDescription(), mgModule.getWidth(),
-                    mgModule.getDepth(), mgModule.getHeight(), 1});
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq,
+                    holder.getProductModule().getMGCode() + " - " + holder.getProductModule().getDescription(),
+                    holder.getProductModule().getWidth(), holder.getProductModule().getDepth(), holder.getProductModule().getHeight(), 1});
 
-            currentRow = this.fillPanels(currentRow, mgModule, module);
+            currentRow = this.fillPanels(currentRow, holder);
 
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, null);
@@ -103,59 +101,51 @@ public class JobCardSheetCreator implements ExcelCellProcessor
         return currentRow;
     }
 
-    private int fillPanels(int currentRow, Module mgModule, ProductModule module)
+    private int fillPanels(int currentRow, ModulePriceHolder holder)
     {
         int seq = 0;
 
-        for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(mgModule.getCode()))
+        for (PanelComponent panel : holder.getPanelComponents())
         {
-            if (ModuleComponent.CARCASS_TYPE.equals(component.getType()))
-            {
-                CarcassPanel panel = ModuleDataService.getInstance().getCarcassPanel(component.getComponentCode());
-                if (panel == null) continue;
+            if (panel.isInAccessoryPack() || panel.isExposed()) continue;
 
-                if (seq == ALPHABET_SEQUENCE.length) seq = 0;
-                currentRow++;
-                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(), panel.getLength(), panel.getBreadth(),
-                        panel.getThickness(), component.getQuantity(), panel.getEdgebinding(), panel.getArea(), null, panel.getDimesions()});
-                seq++;
-            }
+            if (seq == ALPHABET_SEQUENCE.length) seq = 0;
+            currentRow++;
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(),
+                    panel.getLength(), panel.getBreadth(), panel.getThickness(), panel.getQuantity(), panel.getEdgeBinding(),
+                    panel.getArea(), null, panel.getDimesions()});
+            seq++;
         }
 
         currentRow++;
         this.sheetProcessor.createTitleRowInDataSheet(currentRow, new Object[]{"Shutter", "Description", "Height", "Width", "Thickness",
                 "Qty", "Remarks & Edge Binding", "Design", "Color", "Dimension",	"Box"});
 
-        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(holder.getProductModule().getFinishCode());
 
-
-        for (ModuleComponent component : ModuleDataService.getInstance().getModuleComponents(mgModule.getCode()))
+        for (PanelComponent panel : holder.getPanelComponents())
         {
-            if (ModuleComponent.SHUTTER_TYPE.equals(component.getType()))
-            {
-                ShutterPanel panel = ModuleDataService.getInstance().getShutterPanel(component.getComponentCode());
-                if (panel == null) continue;
+            if (panel.isInAccessoryPack() || !panel.isExposed()) continue;
 
-                if (seq == ALPHABET_SEQUENCE.length) seq = 0;
-                currentRow++;
+            if (seq == ALPHABET_SEQUENCE.length) seq = 0;
+            currentRow++;
 
-                String edgeBinding = this.getEdgeBinding(shutterFinish, panel);
-                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(),  panel.getLength(), panel.getBreadth(),
-                        panel.getThickness(), component.getQuantity(), edgeBinding, product.getProduct().getDesignCode(),
-                        module.getColorCode(), panel.getDimesions()});
-                seq++;
-            }
+            String edgeBinding = this.getEdgeBinding(shutterFinish, panel);
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(),
+                    panel.getLength(), panel.getBreadth(), panel.getThickness(), panel.getQuantity(), edgeBinding,
+                    this.product.getProduct().getDesignCode(), holder.getProductModule().getColorCode(), panel.getDimesions()});
+            seq++;
         }
 
         currentRow++;
         return currentRow;
     }
 
-    private String getEdgeBinding(ShutterFinish shutterFinish, ShutterPanel panel) {
+    private String getEdgeBinding(ShutterFinish shutterFinish, PanelComponent panel) {
 
         if ("Y".equals(shutterFinish.getEdgeBinding()))
         {
-            return panel.getEdgebinding();
+            return panel.getEdgeBinding();
         }
         else
         {

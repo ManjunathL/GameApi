@@ -81,7 +81,7 @@ public class ModulePriceHolder
 
         for (IModuleComponent component : this.getModuleComponents())
         {
-            this.addComponent(component);
+            this.addComponent(component, null);
         }
 
         for (ModuleAccessoryPack moduleAccessoryPack : this.getProductModule().getAccessoryPacks())
@@ -90,7 +90,7 @@ public class ModulePriceHolder
                     ModuleDataService.getInstance().getAccessoryPackComponents(moduleAccessoryPack.getAccessoryPackCode());
             for (IModuleComponent accessoryPackComponent : accessoryPackComponents)
             {
-                this.addComponent(accessoryPackComponent);
+                this.addComponent(accessoryPackComponent, moduleAccessoryPack.getAccessoryPackCode());
             }
             for (String addonCode : moduleAccessoryPack.getAddons())
             {
@@ -99,15 +99,15 @@ public class ModulePriceHolder
         }
     }
 
-    private void addComponent(IModuleComponent component)
+    private void addComponent(IModuleComponent component, String accPackCode)
     {
         if (component.isCarcass() || component.isShutter())
         {
-            this.addModulePanel(component);
+            this.addModulePanel(component, accPackCode);
         }
         else if (component.isHardware())
         {
-            this.addHardwareComponent(component);
+            this.addHardwareComponent(component, accPackCode);
         }
         else if (component.isAccessory())
         {
@@ -122,7 +122,7 @@ public class ModulePriceHolder
             }
             else
             {
-                this.addComponent(resolvedComponent);
+                this.addComponent(resolvedComponent, accPackCode);
             }
         }
         else
@@ -140,21 +140,21 @@ public class ModulePriceHolder
         }
     }
 
-    private void addHardwareComponent(IModuleComponent component)
+    private void addHardwareComponent(IModuleComponent component, String accPackCode)
     {
         AccHwComponent hardwareComponent = this.getHardwareComponent(component.getComponentCode());
         if (hardwareComponent != null)
         {
-            this.hardwareComponents.add(new HardwareComponent(hardwareComponent, this.productModule, component));
+            this.hardwareComponents.add(new HardwareComponent(hardwareComponent, this.productModule, component, accPackCode));
         }
     }
 
-    private void addModulePanel(IModuleComponent component)
+    private void addModulePanel(IModuleComponent component, String accPackCode)
     {
         ModulePanel modulePanel = this.getModulePanel(component);
         if (modulePanel != null)
         {
-            this.panelComponents.add(new PanelComponent(this, modulePanel, component));
+            this.panelComponents.add(new PanelComponent(this, modulePanel, component, accPackCode));
         }
     }
 

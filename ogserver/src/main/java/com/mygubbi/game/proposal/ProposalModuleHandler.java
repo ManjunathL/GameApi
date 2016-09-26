@@ -5,7 +5,6 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.game.proposal.model.AccessoryPack;
 import com.mygubbi.game.proposal.price.ComprehensiveModulePricingService;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
-import com.mygubbi.game.proposal.price.ModulePricingService;
 import com.mygubbi.game.proposal.price.PriceRecorderService;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
@@ -31,7 +30,6 @@ public class ProposalModuleHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
-        this.post("/price").handler(this::getPrice);
         this.post("/pricev2").handler(this::getPriceV2);
         this.get("/accpacks").handler(this::getAccessoryPacksForModule);
     }
@@ -54,11 +52,6 @@ public class ProposalModuleHandler extends AbstractRouteHandler
         {
             sendJsonResponse(routingContext, "[]");
         }
-    }
-
-    private void getPrice(RoutingContext routingContext)
-    {
-        this.getPrice(routingContext, ModulePricingService.CALCULATE_PRICE);
     }
 
     private void getPriceV2(RoutingContext routingContext)

@@ -14,9 +14,12 @@ public class ExcelSheetProcessor
 {
     private final static Logger LOG = LogManager.getLogger(ExcelSheetProcessor.class);
 
+    public static enum CellAction{NONE};
+
     private Sheet sheet;
     private ExcelCellProcessor cellProcessor;
     private ExcelStyles styles;
+    private Cell currentCell;
 
     public ExcelSheetProcessor(Sheet sheet, ExcelStyles styles, ExcelCellProcessor cellProcessor)
     {
@@ -43,6 +46,7 @@ public class ExcelSheetProcessor
                 for (cellNum = row.getFirstCellNum(); cellNum < lastCell; cellNum++)
                 {
                     Cell cell = row.getCell(cellNum);
+                    this.currentCell = cell;
                     if (cell == null) continue;
                     if (cell.getCellType() == Cell.CELL_TYPE_STRING)
                     {
@@ -79,6 +83,8 @@ public class ExcelSheetProcessor
 
     private void replaceCellValue(Cell cell, Object value)
     {
+        if (CellAction.NONE.equals(value)) return;
+
         if (value == null) value = "";
         if (value instanceof String)
         {
@@ -171,4 +177,9 @@ public class ExcelSheetProcessor
     }
 
 
+    public void removeCurrentRow()
+    {
+        if (this.currentCell == null) return;
+        this.sheet.removeRow(this.currentCell.getRow());
+    }
 }
