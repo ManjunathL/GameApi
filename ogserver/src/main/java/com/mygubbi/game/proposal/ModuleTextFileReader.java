@@ -69,7 +69,7 @@ public class ModuleTextFileReader
 
                 String firstCell = record[UNIT_CELL];
                 if ("Base unit".equals(firstCell) || "Wall unit".equals(firstCell)
-                        || "Worktop".equals(firstCell) || "Accessory".equals(firstCell))
+                        || "Worktop".equals(firstCell) )
                 {
                     unit = firstCell;
                     continue;
