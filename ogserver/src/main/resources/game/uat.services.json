@@ -26,10 +26,6 @@
         "name": "com.mygubbi.game.proposal.price.RateCardService"
       },
       {
-        "name": "com.mygubbi.game.proposal.price.ModulePricingService",
-        "instances": 5
-      },
-      {
         "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService",
         "instances": 5
       },
