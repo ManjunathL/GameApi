@@ -32,7 +32,8 @@ define([
         },
         render: function() {
             if (VM.activeView === VM.SHORTLIST) {
-                var authData = this.ref.getAuth();
+            var authData = firebase.auth().currentUser;
+             /*   var authData = this.ref.getAuth();*/
                 MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             }
         },

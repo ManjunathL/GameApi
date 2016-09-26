@@ -298,10 +298,13 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                     //                case 'twitter':
                     //                    return authData.twitter.email;
             }
-        },
+        }*/,
         removeShortlistProduct: function(productId) {
             var that = this;
+/*
             var authData = this.rootRef.getAuth();
+*/
+            var authData = firebase.auth().currentUser;
             return new Promise(function(resolve, reject) {
                 that.rootRef.child("shortlists").child(authData.uid).child(productId).remove(function(error) {
                     if (error) {
@@ -318,7 +321,11 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         addShortlistProduct: function(product) {
             var that = this;
             var productId = product.productId;
+/*
             var authData = this.rootRef.getAuth();
+*/
+            var authData = firebase.auth().currentUser;
+
             return new Promise(function(resolve, reject) {
                 that.rootRef.child("shortlists").child(authData.uid).child(productId).set(
                     product,
@@ -329,11 +336,12 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                         } else {
                             console.log("successfully added shortlist data");
                             resolve();
-                            var email = that.getEmail(that.rootRef.getAuth());
+                            var email = that.getEmail(authData);
                             var data = {
                                 product: product,
                                 email: email ? email : ''
                             };
+
                             that.pushEvent(authData.uid, data, that.TYPE_SHORTLIST_PRODUCT_ADD);
                         }
                     });
@@ -341,7 +349,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         },
         doAnonymousAuth: function() {
             var that = this;
-            var existingAuthData = that.rootRef.getAuth();
+            var existingAuthData = firebase.auth().currentUser;
             if (!existingAuthData) {
                 that.rootRef.authAnonymously(function(error, authData) {
                     if (error) {
@@ -359,20 +367,28 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             });
         },
         stopListeningForShortlistChanges: function(uid) {
-            uid && this.rootRef.child("shortlists").child(uid).off("value");
+            uid && firebase.database().ref().child("shortlists").child(uid).off("value");
         },
         listenForShortlistChanges: function() {
+/*
             var authData = this.rootRef.getAuth();
+*/
+
+            var authData = firebase.auth().currentUser;
             var that = this;
             this.stopListeningForShortlistChanges(this.previousUid);
             this.stopListeningForShortlistChanges(authData.uid);
             this.previousUid = authData.uid;
             this.transferShortlistData(authData);
             var first = true;
-            this.rootRef.child("shortlists").child(authData.uid).on("value", function(snapshot) {
+            firebase.database().ref().child("shortlists").child(authData.uid).on("value", function(snapshot) {
                 if (snapshot.exists()) {
+                console.log('---------------done-------------------');
+                console.log(snapshot.val());
                     that.shortlistedItems = snapshot.val();
                 } else {
+                console.log('---------------not done-------------------');
+
                     that.shortlistedItems = null;
                 }
                 Backbone.trigger('shortlist.change');
@@ -386,12 +402,12 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             });
         },
         transferShortlistData: function(authData) {
-            if (authData.provider !== 'anonymous') { //don't transfer shortlist when a person is logging out
+            if (authData.providerData !== 'anonymous') { //don't transfer shortlist when a person is logging out
                 var that = this;
                 _.each(this.shortlistedItems, function(shortlistedItem) {
                     that.addShortlistProduct(shortlistedItem).then(function() {});
                 });
             }
-        }*/
+        }
     };
 });

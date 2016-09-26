@@ -51,7 +51,7 @@ define([
         },
         onFAuth: function(authData) {
             if (authData) {
-                if (authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
+                if (authData.providerData !== 'anonymous') { //don't do nothin on anonymous auths
                     $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
                         this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
@@ -66,7 +66,7 @@ define([
         formUserData: function(authData, userProfile) {
 
             return {
-                provider: authData.provider,
+                provider: authData.providerData,
                 email: MGF.getEmail(authData),
                 displayName: MGF.getName(authData, userProfile),
                 profileImage: MGF.getImage(authData, userProfile),
@@ -385,8 +385,16 @@ define([
 
             parent.delegateEvents(events);
 
-            //this.ref.onAuth(this.onFAuth);
+/*
+            this.onFAuth();
+*/
             var that = this;
+            var auth = firebase.auth();
+            auth.onAuthStateChanged(this.onFAuth);
+            //this.ref.onAuth(this.onFAuth);
+/*
+            var that = this;
+*/
 
             $(function() {
 

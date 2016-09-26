@@ -84,21 +84,22 @@ define([
                 "query": "/api/products/search/sofa+cum+bed"
             }]);
             this.pre_search = new PreSearch();
-            this.users.on("add", this.render, this);
-            this.users.on("reset", this.render, this);
+            /*this.users.on("add", this.render, this);
+            this.users.on("reset", this.render, this);*/
             this.listenTo(Backbone, 'shortlist.change', this.handleShortlistChange);
             _.bindAll(this, 'renderSub');
         },
         handleShortlistChange: function() {
-           /* var slItems = MGF.getShortListedItems();
+           var slItems = MGF.getShortListedItems();
+           console.log("---------------"+slItems);
             $('#shortlistSuperScript').html(slItems ? Object.keys(slItems).length : '');
             $('#shortlistSuperScript1').html(slItems ? Object.keys(slItems).length : '');
-            this.renderShortlist();*/
+            this.renderShortlist();
         },
         renderShortlist: function() {
-            /*$('.shortlist').html(_.template(shortlistTemplate)({
+            $('.shortlist').html(_.template(shortlistTemplate)({
                 user_shortlist_items: MGF.getShortListedItems()
-            }));*/
+            }));
         }
     })
     return HeaderMenuView;

@@ -29,7 +29,9 @@
     <div class="container">
         <div class="container margin-top40">
             <div class="row grid-view">
-            <% if(shortlistedItems){ %>
+                <%= console.log(shortlistedItems) %>
+
+                <% if(shortlistedItems){ %>
             <% _.each(shortlistedItems, function(product){ %>
             <div class="portfolio">
                 <div class="col-md-6 col-sm-6 portfolio-item">
@@ -67,7 +69,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="portfolio-caption margin0">
                             <div class="row position-relative">
                                 <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0"><%= product.name %></h4>
