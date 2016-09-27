@@ -108,9 +108,17 @@
                                 <li role="presentation">
                                     <a href="#finishes" aria-controls="finishes" role="tab" data-toggle="tab">  Finishes </a>
                                 </li>
+                                <% if(typeof(product.category) !== 'undefined' && product.category != null){ %>
+                                <% if(product.category == 'Bedroom'){ %>
+                                <li role="presentation">
+                                    <a href="#accessories1" aria-controls="accessories1" role="tab" data-toggle="tab"> Accessories </a>
+                                </li>
+                                <% }else if(product.category == 'Kitchen'){ %>
                                 <li role="presentation">
                                     <a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab"> Accessories </a>
                                 </li>
+                                <% } %>
+                                <% } %>
 <!--
                                 <% if(typeof(product.accessories) != 'undefined' && product.accessories.length != 0){ %>
 
@@ -532,6 +540,72 @@
                                          </div>
                                     </div>
                                 </div>
+                                <div role="tabpanel" class="tab-pane" id="accessories1">
+                                    <div class="accessories-wrapper">
+                                        <div class="d-item">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="tab-content acc-carousels margin-top5">
+                                                        <div role="tabpanel" class="acc-img tab-pane active" id="tab_style_9-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1474974041/project_details/KYW_HangerPullOut.jpg" alt="hanger">
+                                                        </div>
+                                                        <div role="tabpanel" class="acc-img tab-pane" id="tab_style_10-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1474974041/project_details/KYW_pull-out-self.jpg" alt="pullout">
+                                                        </div>
+                                                        <div role="tabpanel" class="acc-img tab-pane" id="tab_style_11-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1474974042/project_details/KYW_ShoePullOut.jpg" alt="shoe">
+                                                        </div>
+                                                        <div role="tabpanel" class="acc-img tab-pane" id="tab_style_12-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1474974042/project_details/KYW_TrouserPullout.jpg" alt="trouser">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-style acc-style">
+                                                    <div class="tabbable-line material-slide-nav">
+                                                        <ul class="nav nav-tabs ">
+                                                            <li id="tab_style_9" class="acc-img-cnt active">
+                                                                <a>Hanger <br/>Pull Out</a>
+                                                            </li>
+                                                            <li id="tab_style_10" class="acc-img-cnt">
+                                                                <a>Pull Out <br/> Self </a>
+                                                            </li>
+                                                            <li id="tab_style_11" class="acc-img-cnt">
+                                                                <a>Shoe <br/> Pull Out</a>
+                                                            </li>
+                                                            <li id="tab_style_12" class="acc-img-cnt">
+                                                                <a>Trouser  <br/>Pull Out</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content padding-top15">
+                                                            <div class="acc-cnt tab-pane active" id="tab_style_9-cnt">
+                                                                <p>
+                                                                    Organizing the space below your sink ensures a clutter-free setup for all your cleaning essentials.
+                                                                    Maintaining those stains on your precious dining plates, is now easy!
+                                                                </p>
+                                                            </div>
+                                                            <div class="acc-cnt tab-pane" id="tab_style_10-cnt">
+                                                                <p>
+                                                                    Our range of pullout modular drawers stores kitchen essentials that are of varying sizes and shapes giving you ample room to make the most of your kitchen.
+                                                                </p>
+                                                            </div>
+                                                            <div class="acc-cnt tab-pane" id="tab_style_11-cnt">
+                                                                <p>
+                                                                    These smart little creations ensure that your drawers are organized based on your usage. No more rummaging through seemingly bottomless drawers again!
+                                                                </p>
+                                                            </div>
+                                                            <div class="acc-cnt tab-pane" id="tab_style_12-cnt">
+                                                                <p>
+                                                                    Stylish dish drainers for platforms and for cupboards make sure that your dishes don't have unsightly water stains, and are neatly stacked away once clean.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <% if(typeof(product.category) != 'undefined' && (product.category == "Kitchen")){ %>
                                 <div role="tabpanel" class="tab-pane" id="appliance">
