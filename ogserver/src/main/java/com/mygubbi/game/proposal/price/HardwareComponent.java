@@ -99,6 +99,8 @@ public class HardwareComponent
                 return (productModule.getWidth() > 600) ? 16 : 8;
             case "F21":
                 return new Double((productModule.getWidth() * productModule.getDepth() * 1.05) / (1000 * 1000));
+            case "F22":
+                return new Double(productModule.getHeight() + productModule.getWidth() * 2) / 1000;
             default:
                 return 0;
         }
