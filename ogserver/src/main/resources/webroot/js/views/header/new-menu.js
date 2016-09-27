@@ -90,7 +90,7 @@ define([
             _.bindAll(this, 'renderSub');
         },
         handleShortlistChange: function() {
-            var slItems = MGF.getShortListedItems();
+           var slItems = MGF.getShortListedItems();
             $('#shortlistSuperScript').html(slItems ? Object.keys(slItems).length : '');
             $('#shortlistSuperScript1').html(slItems ? Object.keys(slItems).length : '');
             this.renderShortlist();
