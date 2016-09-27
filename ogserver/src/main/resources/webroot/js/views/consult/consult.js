@@ -20,7 +20,10 @@ define([
             $.cloudinary.responsive();
         },
         render: function() {
+/*
             var authData = this.ref.getAuth();
+*/
+            var authData = firebase.auth().currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
