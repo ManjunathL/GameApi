@@ -149,6 +149,46 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                 }
             });
         },
+        removeShortlistProduct: function(productId) {
+            var that = this;
+            var authData = firebase.auth().currentUser;
+            return new Promise(function(resolve, reject) {
+                that.rootRef.child("shortlists").child(authData.uid).child(productId).remove(function(error) {
+                    if (error) {
+                        reject();
+                    } else {
+                        resolve();
+                        that.pushEvent(authData.uid, {
+                            productId: productId
+                        }, that.TYPE_SHORTLIST_PRODUCT_REMOVE);
+                    }
+                });
+            });
+        },
+        addShortlistProduct: function(product) {
+            var that = this;
+            var productId = product.productId;
+            var authData = firebase.auth().currentUser;
+            return new Promise(function(resolve, reject) {
+                that.rootRef.child("shortlists").child(authData.uid).child(productId).set(
+                    product,
+                    function(error) {
+                        if (error) {
+                            console.log("not able to add shortlist data", error);
+                            reject();
+                        } else {
+                            console.log("successfully added shortlist data");
+                            resolve();
+                            var email = that.getEmail(firebase.auth().currentUser);
+                            var data = {
+                                product: product,
+                                email: email ? email : ''
+                            };
+                            that.pushEvent(authData.uid, data, that.TYPE_SHORTLIST_PRODUCT_ADD);
+                        }
+                    });
+            });
+        },
         doAnonymousAuth: function() {
              var that = this;
              var existingAuthData = firebase.auth().currentUser;
@@ -159,6 +199,49 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                      }
                  });
              }
+        },
+        getShortListedItems: function() {
+         return this.shortlistedItems;
+        },
+        getShortListed: function(id) {
+         return _.findWhere(this.shortlistedItems, {
+             productId: id
+         });
+        },
+        stopListeningForShortlistChanges: function(uid) {
+         uid && this.rootRef.child("shortlists").child(uid).off("value");
+        },
+        listenForShortlistChanges: function() {
+         var authData = firebase.auth().currentUser;
+         var that = this;
+         this.stopListeningForShortlistChanges(this.previousUid);
+         this.stopListeningForShortlistChanges(authData.uid);
+         this.previousUid = authData.uid;
+         this.transferShortlistData(authData);
+         var first = true;
+         this.rootRef.child("shortlists").child(authData.uid).on("value", function(snapshot) {
+             if (snapshot.exists()) {
+                 that.shortlistedItems = snapshot.val();
+             } else {
+                 that.shortlistedItems = null;
+             }
+             Backbone.trigger('shortlist.change');
+             if (first) {
+                 first = false;
+                 LS.submitAllConsultData(_.bind(that.addConsultData, that));
+                 Backbone.trigger('user.change');
+             }
+         }, function(error) {
+             console.log("couldn't start listening to shortlist changes", error);
+         });
+        },
+        transferShortlistData: function(authData) {
+         if (authData.provider !== 'anonymous') { //don't transfer shortlist when a person is logging out
+             var that = this;
+             _.each(this.shortlistedItems, function(shortlistedItem) {
+                 that.addShortlistProduct(shortlistedItem).then(function() {});
+             });
+         }
         }
 /*        getUserProfile: function(authData, someFunc) {
 

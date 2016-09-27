@@ -26,8 +26,6 @@ define([
         },
 
         setUser: function(user) {
-            console.log('  ----------------      users  -----------------');
-            console.log(user);
             users.add(user, {
                 at: 0
             });
@@ -51,7 +49,7 @@ define([
         },
         onFAuth: function(authData) {
             if (authData) {
-                if (authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
+                if (authData.providerData !== 'anonymous') { //don't do nothin on anonymous auths
                     $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
                         this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
@@ -66,7 +64,7 @@ define([
         formUserData: function(authData, userProfile) {
 
             return {
-                provider: authData.provider,
+                providerData: authData.providerData,
                 email: MGF.getEmail(authData),
                 displayName: MGF.getName(authData, userProfile),
                 profileImage: MGF.getImage(authData, userProfile),
@@ -86,7 +84,7 @@ define([
 
             var user = this.formUserData(authData, userProfile);
 
-            if (authData.provider !== 'password') {
+            if (authData.providerData !== 'password') {
                 var userRef = this.ref.child("users/" + authData.uid);
                 var that = this;
                 userRef.once("value", function(snapshot) {
@@ -291,12 +289,15 @@ define([
             return false;
         },
         unAuthAfterProfile: function() {
-            this.ref.unauth();
+            //this.ref.unauth();
             window.signupButton.button('reset');
             $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
             $('#signup').modal('toggle');
             $('#notify').modal('show');
-            this.ref.onAuth(this.onFAuth);
+            //this.ref.onAuth(this.onFAuth);
+            var that = this;
+            var auth = firebase.auth();
+            auth.onAuthStateChanged(this.onFAuth);
 
         },
         gotoLogin: function() {
@@ -387,6 +388,9 @@ define([
 
             //this.ref.onAuth(this.onFAuth);
             var that = this;
+            var auth = firebase.auth();
+            auth.onAuthStateChanged(this.onFAuth);
+
 
             $(function() {
 
@@ -601,16 +605,36 @@ define([
 
                     window.fbButton = $(this);
                     window.fbButton.button('loading');
-                    that.ref.authWithOAuthPopup("facebook", that.authHandler, {
+                    /*that.ref.authWithOAuthPopup("facebook", that.authHandler, {
                         scope: "email"
+                    });*/
+
+                    var auth = firebase.auth();
+
+                    var providerData = new firebase.auth.FacebookAuthProvider();
+                    auth.signInWithPopup(providerData).then(function(result) {
+                      // User signed in!
+                      var uid = result.user.uid;
+                      console.log('Successfully login using facebook'+uid);
+                    }).catch(function(error) {
+                      // An error occurred
+                      console.log('login failed using facebook');
                     });
                 });
 
                 $('#google-btn').click(function() {
                     window.googleButton = $(this);
                     window.googleButton.button('loading');
-                    that.ref.authWithOAuthPopup("google", that.authHandler, {
+                    /*that.ref.authWithOAuthPopup("google", that.authHandler, {
                         scope: "email"
+                    });*/
+                    var auth = firebase.auth();
+
+                    var providerData = new firebase.auth.GoogleAuthProvider();
+                    auth.signInWithPopup(providerData).then(function(result) {
+                      var accessToken = result.credential.accessToken;
+                      that.authHandler();
+                      console.log('Successfully login using google plus'+accessToken);
                     });
                 });
 
