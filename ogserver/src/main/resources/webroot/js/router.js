@@ -70,7 +70,7 @@ define([
             'about-us(/)': 'aboutus',
             'quality-check(/)': 'qualitycheck',
             'experience-center(/)': 'experiencecenter',
-            'platinum-homes(/)': 'platinumhomes',
+            'platinum-home-interiors(/)': 'platinumhomes',
             '*something': 'errorPage'
         },
         dashboard: function() {
