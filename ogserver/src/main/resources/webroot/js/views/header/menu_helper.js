@@ -11,6 +11,7 @@ define([
 ], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil, AutoSuggestProducts, SuggestResultsPage) {
     return {
         ref: MGF.rootRef,
+        refAuth: MGF.rootAuth,
 
         createUser: function(userId, data, next) {
             var that = this;
@@ -47,7 +48,7 @@ define([
             var authData = firebase.auth().currentUser;
             MGF.getUserProfile(authData, next);
         },
-        onFAuth: function(authData) {
+        onFAuth: function(authData) { console.log("authData");console.log(authData);
             if (authData) {
                 if (authData.providerData !== 'anonymous') { //don't do nothin on anonymous auths
                     $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
@@ -74,11 +75,15 @@ define([
         handleAuth: function(authData, userProfile) {
             var email = MGF.getEmail(authData);
 
+            console.log('email');
+            console.log(email);
+
             if (!email) {
                 console.log("email not provided, please try again and provide email id as it is mandatory.");
                 $('#login_error').html("Please tick email, while providing Facebook access.");
                 $('#login_error_row').css("display", "block");
-                this.ref.unauth();
+                //this.ref.unauth();
+                //MGF.rootAuth.signOut();
                 return;
             }
 
@@ -245,7 +250,37 @@ define([
             var email = $('#reg_email_id').val();
             var password = $('#reg_password').val();
 
-            MGF.handleSignUp(email,password);
+            //MGF.handleSignUp(email,password);
+
+            firebase.auth().createUserWithEmailAndPassword(email, password).then(function(userData) {
+
+                console.log("Successfully created user account with uid:", userData.uid);
+
+                var userData = {
+                    providerData: "password",
+                    email: $('#reg_email_id').val(),
+                    displayName: $('#reg_full_name').val(),
+                    profileImage: authData.password.profileImageURL,
+                    uid: authData.uid
+                };
+                that.createUser(authData.uid, userData, null);
+
+                var profileData = {
+                    displayName: $('#reg_full_name').val(),
+                    email: $('#reg_email_id').val(),
+                    phone: $('#reg_contact_num').val(),
+                    profileImage: authData.password.profileImageURL
+                };
+
+                that.createProfile(userData, profileData, that.unAuthAfterProfile);
+
+            }, function(error) {
+                // An error happened.
+                console.log("Error creating user:", error);
+                $('#reg_error').html(error);
+                $('#reg_error_row').css("display", "block");
+                window.signupButton.button('reset');
+            });
 
             /*this.ref.createUser({
                 email: $('#reg_email_id').val(),
@@ -290,6 +325,7 @@ define([
         },
         unAuthAfterProfile: function() {
             //this.ref.unauth();
+            //MGF.rootAuth.signOut();
             window.signupButton.button('reset');
             $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
             $('#signup').modal('toggle');
@@ -388,8 +424,8 @@ define([
 
             //this.ref.onAuth(this.onFAuth);
             var that = this;
-            var auth = firebase.auth();
-            auth.onAuthStateChanged(this.onFAuth);
+            //var auth = firebase.auth();
+            this.refAuth.onAuthStateChanged(this.onFAuth);
 
 
             $(function() {

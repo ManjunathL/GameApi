@@ -20,17 +20,17 @@ define([
         renderWithUserProfCallback: function (userProfData, provider) {
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
-                'provider': provider
+                'providerData': provider
             }));
 
             $("#mynest").html(_.template(MyNestTemplate)({
                 'userProfile': userProfData,
-                'provider': provider
+                'providerData': provider
             }));
 
             $("#profile").html(_.template(MyProfileTemplate)({
                 'userProfile': userProfData,
-                'provider': provider
+                'providerData': provider
             }));
             document.title = userProfData.displayName + ' | mygubbi';
         },

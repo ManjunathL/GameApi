@@ -71,6 +71,20 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
           });
           // [END authstatelistener]
         },
+        createProfile: function(userData, profileData, next) {
+            this.rootRef.child('user-profiles').child(userData.uid).set(
+                profileData,
+                function(error) {
+                    if (error) {
+                        console.log("password profile data could not be saved." + error);
+                    } else {
+                        console.log("data saved successfully.");
+                    }
+                    if (next) next();
+                }
+            );
+            this.pushEvent(userData.uid, profileData, this.TYPE_USER_ADD);
+        },
         updateProfile: function(profileData) {
 
             var that = this;
@@ -125,13 +139,14 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             }
         },
         getEmail: function(authData) {
-            switch (authData.providerData) {
+        var providerData = authData.providerData[0];
+            switch (providerData.providerId) {
                 case 'password':
-                    return authData.password.email;
+                    return providerData.email;
                 case 'google':
-                    return authData.google.email;
+                    return providerData.email;
                 case 'facebook':
-                    return authData.facebook.email;
+                    return providerData.email;
                     //                case 'twitter':
                     //                    return authData.twitter.email;
             }
@@ -193,7 +208,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
              var that = this;
              var existingAuthData = firebase.auth().currentUser;
              if (!existingAuthData) {
-                 that.rootRef.authAnonymously(function(error, authData) {
+                 that.rootRef.signInAnonymously(function(error, authData) {
                      if (error) {
                          console.log("error in anonymous auth", error);
                      }
@@ -434,7 +449,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             var that = this;
             var existingAuthData = firebase.auth().currentUser;
             if (!existingAuthData) {
-                that.rootRef.authAnonymously(function(error, authData) {
+                firebase.auth().signInAnonymously().catch(function(error) {
                     if (error) {
                         console.log("error in anonymous auth", error);
                     }
