@@ -15,6 +15,7 @@ define([
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.ref = MGF.rootRef;
+            this.refAuth = MGF.rootAuth;
             this.listenTo(Backbone, 'user.change', this.render);
             _.bindAll(this, 'render', 'renderWithUserProfCallback');
         },
@@ -32,7 +33,7 @@ define([
         },
         render: function() {
             if (VM.activeView === VM.SHORTLIST) {
-                var authData = firebase.auth().currentUser;
+                var authData = this.refAuth.currentUser;
                 MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             }
         },

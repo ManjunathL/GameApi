@@ -139,7 +139,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             }
         },
         getEmail: function(authData) {
-        var providerData = authData.providerData[0];
+            var providerData = authData.providerData[0];
             switch (providerData.providerId) {
                 case 'password':
                     return providerData.email;
@@ -183,7 +183,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         addShortlistProduct: function(product) {
             var that = this;
             var productId = product.productId;
-            var authData = firebase.auth().currentUser;
+            var authData = this.rootAuth.currentUser;
             return new Promise(function(resolve, reject) {
                 that.rootRef.child("shortlists").child(authData.uid).child(productId).set(
                     product,
@@ -501,20 +501,11 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             var first = true;
             firebase.database().ref().child("shortlists").child(authData.uid).on("value", function(snapshot) {
                 if (snapshot.exists()) {
-                console.log('---------------done-------------------');
-                console.log(snapshot.val());
                     that.shortlistedItems = snapshot.val();
                 } else {
-                console.log('---------------not done-------------------');
-
                     that.shortlistedItems = null;
                 }
                 Backbone.trigger('shortlist.change');
-                if (first) {
-                    first = false;
-                    LS.submitAllConsultData(_.bind(that.addConsultData, that));
-                    Backbone.trigger('user.change');
-                }
             }, function(error) {
                 console.log("couldn't start listening to shortlist changes", error);
             });

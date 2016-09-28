@@ -138,7 +138,7 @@ define([
             window.loginButton && window.loginButton.button('reset');
             window.googleButton && window.googleButton.button('reset');
             window.fbButton && window.fbButton.button('reset');
-            //            window.twitterButton && window.twitterButton.button('reset');
+            //window.twitterButton && window.twitterButton.button('reset');
         },
 
         pwdLogin: function() {
@@ -331,9 +331,7 @@ define([
             $('#signup').modal('toggle');
             $('#notify').modal('show');
             //this.ref.onAuth(this.onFAuth);
-            var that = this;
-            var auth = firebase.auth();
-            auth.onAuthStateChanged(this.onFAuth);
+            this.refAuth.onAuthStateChanged(this.onFAuth);
 
         },
         gotoLogin: function() {
@@ -645,10 +643,8 @@ define([
                         scope: "email"
                     });*/
 
-                    var auth = firebase.auth();
-
                     var providerData = new firebase.auth.FacebookAuthProvider();
-                    auth.signInWithPopup(providerData).then(function(result) {
+                    this.refAuth.signInWithPopup(providerData).then(function(result) {
                       // User signed in!
                       var uid = result.user.uid;
                       console.log('Successfully login using facebook'+uid);
@@ -664,10 +660,9 @@ define([
                     /*that.ref.authWithOAuthPopup("google", that.authHandler, {
                         scope: "email"
                     });*/
-                    var auth = firebase.auth();
 
                     var providerData = new firebase.auth.GoogleAuthProvider();
-                    auth.signInWithPopup(providerData).then(function(result) {
+                    this.refAuth.signInWithPopup(providerData).then(function(result) {
                       var accessToken = result.credential.accessToken;
                       that.authHandler();
                       console.log('Successfully login using google plus'+accessToken);

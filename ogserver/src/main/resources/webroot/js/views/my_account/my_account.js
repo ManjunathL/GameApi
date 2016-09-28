@@ -17,6 +17,7 @@ define([
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
+        refAuth: MGF.rootAuth,
         /*renderWithUserProfCallback: function (userProfData, provider) {
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
@@ -61,7 +62,7 @@ define([
             document.title = userProfData.displayName + ' | mygubbi';
         },
         render: function () {
-            var authData = firebase.auth().currentUser;
+            var authData = this.refAuth.currentUser;
             //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
             //debugger
             MGF.mynest(authData,this.renderWithUserProjectCallback);
@@ -127,10 +128,10 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             var email = MGF.getEmail(authData);
 
-            this.ref.changePassword({
+            this.ref.updatePassword({
                 email: email,
                 oldPassword: $('#old_password').val(),
                 newPassword: $('#new_password').val()
@@ -165,7 +166,7 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             var that = this;
             var email = MGF.getEmail(authData);
 
