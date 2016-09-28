@@ -70,6 +70,7 @@ define([
             'about-us(/)': 'aboutus',
             'quality-check(/)': 'qualitycheck',
             'experience-center(/)': 'experiencecenter',
+            'platinum-homes(/)': 'platinumhomes',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -372,7 +373,13 @@ define([
                      setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
                      require(['views/experienCecenter/experience-center'], function(ExperienceCenterPage) {
                      VM.create(VM.EXPERIENCECENTER, ExperienceCenterPage).render();
+                        });
                     });
+                    router.on('route:platinumhomes', function(actions) {
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        require(['views/platinum_homes/platinum-homes'], function(PlatinumHomesPage) {
+                        VM.create(VM.PLATINUMHOMES, PlatinumHomesPage).render();
+                         });
                     });
                     router.on('route:faq', function(actions) {
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
