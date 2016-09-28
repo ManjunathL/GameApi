@@ -17,14 +17,15 @@ define([
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
-        renderWithUserProfCallback: function (userProfData, provider) {
+        /*renderWithUserProfCallback: function (userProfData, provider) {
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
-                'providerData': provider
+                'provider': provider
             }));
 
             $("#mynest").html(_.template(MyNestTemplate)({
                 'userProfile': userProfData,
+                'myNest':null,
                 'providerData': provider
             }));
 
@@ -33,15 +34,42 @@ define([
                 'providerData': provider
             }));
             document.title = userProfData.displayName + ' | mygubbi';
+        },*/
+        renderWithUserProjectCallback: function (userProfData,mynestitems, provider) {
+        console.log(mynestitems);
+        console.log("+++++++++++++");
+        console.log(userProfData);
+        console.log("-------------------------");
+
+            $(this.el).html(_.template(MyAccountTemplate)({
+                'userProfile': userProfData,
+                'myNest':mynestitems,
+                'provider': provider
+            }));
+
+            $("#mynest").html(_.template(MyNestTemplate)({
+                'userProfile': userProfData,
+                'myNest':mynestitems,
+                'providerData': provider
+            }));
+
+            $("#profile").html(_.template(MyProfileTemplate)({
+                'userProfile': userProfData,
+                'myNest':mynestitems,
+                'providerData': provider
+            }));
+            document.title = userProfData.displayName + ' | mygubbi';
         },
         render: function () {
             var authData = firebase.auth().currentUser;
-            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
+            //debugger
+            MGF.mynest(authData,this.renderWithUserProjectCallback);
         },
         initialize: function () {
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
-            _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit');
+            _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
         },
         handleUserChange: function () {
             if (VM.activeView === VM.USER_PROFILE) {

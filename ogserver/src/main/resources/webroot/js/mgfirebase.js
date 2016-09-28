@@ -4,7 +4,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
      var config = {
        apiKey: "AIzaSyALgwN8p4bsgNDskEP_F4IPEyJTeUaQqTo",
        authDomain: "mygubbi-cep.firebaseapp.com",
-       databaseURL: "https://mygubbi-cep.firebaseio.com",
+       databaseURL: "https://mygubbi-cep.firebaseio.com/",
        storageBucket: "mygubbi-cep.appspot.com",
        messagingSenderId: "623623245186"
      };
@@ -62,7 +62,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                     if (snapshot.exists()) {
                         that.userProfile = snapshot.val();
                     }
-                    someFunc(that.userProfile, providerData);
+                    someFunc(that.userProfile,null, providerData);
                    });
 
             } else {
@@ -112,7 +112,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             } else {
                 switch (authData.providerData) {
                     case 'password':
-                        return authData.password.email.replace('/@.*//*', '');
+                        return authData.password.email.replace('/@.*/', '');
                     case 'google':
                         return authData.google.displayName;
                     case 'facebook':
@@ -241,11 +241,6 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                  that.shortlistedItems = null;
              }
              Backbone.trigger('shortlist.change');
-             if (first) {
-                 first = false;
-                 LS.submitAllConsultData(_.bind(that.addConsultData, that));
-                 Backbone.trigger('user.change');
-             }
          }, function(error) {
              console.log("couldn't start listening to shortlist changes", error);
          });
@@ -257,7 +252,32 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                  that.addShortlistProduct(shortlistedItem).then(function() {});
              });
          }
-        }
+        },
+        mynest: function(authData, someFunc) {
+            var mynestitems = null;
+            var authData = firebase.auth().currentUser;
+             var projRef = firebase.database().ref().child("projects/" + authData.uid+"/my-nest");
+             var projectDetails = null;
+             var that = this;
+
+             projRef.once("value", function(snapshot) {
+                 if (snapshot.exists()) {
+                     that.projectDetails = snapshot.val();
+                     var userProfileRef = firebase.database().ref().child("user-profiles/" + authData.uid);
+
+                     var userProfile = null;
+
+                     userProfileRef.once("value", function(snapshots) {
+                         if (snapshots.exists()) {
+                             that.userProfile = snapshots.val();
+                         }
+                         someFunc(that.userProfile,that.projectDetails, authData.providerData);
+                        });
+                 }
+                 //someFunc(authData,that.projectDetails, authData.providerData);
+             });
+
+         },
 /*        getUserProfile: function(authData, someFunc) {
 
             if (authData && authData.provider !== 'anonymous') {
@@ -396,7 +416,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                     //                case 'twitter':
                     //                    return authData.twitter.email;
             }
-        }*/,
+        }*/
         removeShortlistProduct: function(productId) {
             var that = this;
 /*

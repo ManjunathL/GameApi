@@ -127,11 +127,14 @@ img.timeline-image {
                             <form role="form">
                             <div class="col-md-6">
 
+                                <%= console.log("----Appi------") %>
+                                <%= console.log(myNest) %>
+                                <%= console.log(myNest.project_details.property_name) %>
                                     <div class="form-group">
 
                                         <label for="property-name">Property Name</label>
 
-                                        <input class="form-control" id="property-name" placeholder="Enter Property Name" value="" type="text" required />
+                                        <input class="form-control" id="property-name" placeholder="Enter Property Name" value="<%= myNest ? myNest.project_details.property_name : '' %>" type="text" required />
 
                                     </div>
 
@@ -139,7 +142,7 @@ img.timeline-image {
 
                                         <label for="property-type">Property Type</label>
 
-                                        <input class="form-control" id="property-type" placeholder="Enter Property Type" value="" type="text" required="required" />
+                                        <input class="form-control" id="property-type" placeholder="Enter Property Type" value="<%= myNest ? myNest.project_details.property_type : '' %>"" type="text" required="required" />
 
                                     </div>
 
@@ -147,7 +150,7 @@ img.timeline-image {
 
                                         <label for="blockno">Tower / Block no</label>
 
-                                        <input class="form-control" id="blockno" placeholder="Enter Block Number" value="" type="text" required="required">
+                                        <input class="form-control" id="blockno" placeholder="Enter Block Number" value="<%= myNest ? myNest.project_details.block_number : '' %>"" type="text" required="required">
 
                                     </div>
 
@@ -161,7 +164,7 @@ img.timeline-image {
 
                                     <label for="builder_name">Builder Name</label>
 
-                                    <input class="form-control" id="builder_name" placeholder="Enter Builder Name" value="Axis Capstone" type="text" required="required">
+                                    <input class="form-control" id="builder_name" placeholder="Enter Builder Name" value="<%= myNest ? myNest.project_details.builder_name : '' %>"" type="text" required="required">
 
                                 </div>
 
@@ -169,19 +172,11 @@ img.timeline-image {
 
                                     <label for="flatno">Flat No.</label>
 
-                                    <input class="form-control" id="flatno" placeholder="Enter Flat Number" value="#203" type="text" required="required">
+                                    <input class="form-control" id="flatno" placeholder="Enter Flat Number" value="<%= myNest ? myNest.project_details.flat_number : '' %>"" type="text" required="required">
 
                                 </div>
 
-                                <div class="form-group">
 
-                                    <button id="save_property_details" type="submit" class="button border1px">
-
-                                        Save Details
-
-                                    </button>
-
-                                </div>
 
                             </div>
                             </form>
