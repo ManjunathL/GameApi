@@ -8888,3 +8888,193 @@ html .ui-button.ui-state-disabled:active {
     }
 }
 /* End Experience center page */
+
+/* Start Platinum home */
+
+.platinum-banner-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475053757/platinum_home/platinum_banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 630px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+    color: #3d4b54;
+}
+.platinum-banner-band{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0px;
+    color: #ffffff;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+}
+.platinum-head{
+   color: #4d616b;
+   margin: 50px 0px 20px;
+   font-size: 40px;
+   font-weight: 300;
+   border-bottom: 1px solid #ddd;
+   padding-bottom: 10px;
+   display: inline-block;
+}
+.process-count{
+    color: #ffffff;
+    background: #f24b03;
+    width: 20px;
+    height: 20px;
+    margin: 10px auto;
+    border-radius: 50%;
+    line-height: 20px;
+}
+.platinum-banner-band-head{
+    font-size: 52px;
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+}
+.platinum-banner-band-des{
+    font-size: 32px;
+    font-weight: 100;
+    font-family: 'Raleway', sans-serif;
+}
+.platinum-service-img-des,
+.platinum-service-img-head,
+.platinum-process-img-head{
+    color: #4d616b;
+    font-family: 'lato', sans-serif;
+}
+.platinum-service-img-des{
+    font-size: 14px;
+    margin: 10px 0px 10px;
+}
+.platinum-services-img{
+    max-width: 110px;
+    margin: 20px auto;
+}
+.platinum-process-section{
+    border-top: 1px solid #dddddd;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+.platinum-process-img{
+    max-width: 265px;
+    margin: 10px auto;
+    min-height: 140px;
+}
+
+.platinum-project-section{
+    background: #f0f0f0;
+}
+
+#platinumCarousel01,
+#platinumCarousel02{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#platinumCarousel01 .carousel-indicators,
+#platinumCarousel02 .carousel-indicators{
+    bottom: 0px !important;
+    left: 30%;
+}
+#platinumCarousel01 .carousel-indicators .active,
+#platinumCarousel02 .carousel-indicators .active{
+    background-color: #f1591f;
+}
+#platinumCarousel01 .carousel-indicators li,
+#platinumCarousel02 .carousel-indicators li{
+    border: 1px solid #f1591f;
+}
+.platinum-project-section{
+    padding-bottom: 50px;
+}
+.platinum-testimonial-box{
+    padding: 30px 10px;
+    border: 1px solid #4d616b;
+    margin: 10px 10px 30px;
+}
+#platinumCarousel03 .carousel-indicators{
+    bottom: -15px !important;
+    margin-bottom: 0px !important;
+}
+#platinumCarousel03 .carousel-indicators .active{
+    background-color: #f1591f;
+}
+#platinumCarousel03 .carousel-indicators li{
+    border: 1px solid #f1591f;
+}
+.test-date {
+    background: #f1591f;
+    color: #fff;
+    text-align: center;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+    line-height: 90px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.test-about {
+    min-height: 90px;
+    padding-top: 10px;
+}
+.platinum-testimonial-profile {
+    width: 150px;
+    margin: 40px auto 15px;
+}
+.platinum-contact-section{
+    padding: 0px 0px 50px;
+}
+.platinum-footer-form{
+    margin: 20px 0px 20px;
+}
+.btn-testimonial{
+    color: #ffffff;
+    border-color: #f1591f;
+    background: #f1591f !important;
+    font-size: 18px;
+    font-weight: 400;
+    text-shadow: none;
+}
+.btn-testimonial:active,
+.btn-testimonial:focus,
+.btn-testimonial:hover{
+    color: #ffffff;
+    border-color: #f1591f;
+    background: #f1591f !important;
+}
+
+@media (max-width: 480px) {
+    .platinum-banner-band-head {
+        font-size: 30px;
+    }
+    .test-date {
+        background: #f1591f;
+        color: #fff;
+        text-align: center;
+        width: 75px;
+        height: 75px;
+        margin-bottom: 15px;
+        line-height: 75px;
+        border-radius: 50%;
+        font-size: 16px;
+    }
+    .test-about{
+        font-size: 12px;
+    }
+    .platinum-testimonial-profile {
+        width: 120px;
+        margin: 10px auto 15px;
+    }
+}
+/* End Platinum home */
