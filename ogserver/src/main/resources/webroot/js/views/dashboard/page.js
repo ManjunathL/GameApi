@@ -14,6 +14,7 @@ define([
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
 
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(dashboardPageTemplate)({
@@ -24,7 +25,7 @@ define([
         },
 
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         ready: function () {

@@ -15,6 +15,7 @@ define([
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         renderWithUserProfCallback: function (userProfData, provider) {
 
             $(this.el).html(_.template(UserProfileTemplate)({
@@ -24,7 +25,7 @@ define([
             document.title = userProfData.displayName + ' | mygubbi';
         },
         render: function () {
-            var authData = firebase.auth().currentUser;
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function () {
@@ -100,7 +101,7 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             var that = this;
             var email = MGF.getEmail(authData);
 
