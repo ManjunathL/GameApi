@@ -11,7 +11,7 @@ define([
 ], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil, AutoSuggestProducts, SuggestResultsPage) {
     return {
         ref: MGF.rootRef,
-        refAuth: MGF.rootAuth,
+        refAuth: MGF.refAuth,
 
         createUser: function(userId, data, next) {
             var that = this;
@@ -45,7 +45,7 @@ define([
             });
         },
         getUserProfileWithCB: function(next) {
-            var authData = firebase.auth().currentUser;
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, next);
         },
         onFAuth: function(authData) { console.log("authData");console.log(authData);
@@ -83,7 +83,7 @@ define([
                 $('#login_error').html("Please tick email, while providing Facebook access.");
                 $('#login_error_row').css("display", "block");
                 //this.ref.unauth();
-                //MGF.rootAuth.signOut();
+                //MGF.refAuth.signOut();
                 return;
             }
 
@@ -152,9 +152,9 @@ define([
             var email = $('#emailId').val();
             var password = $('#pwd').val();
 
-            MGF.rootAuth.signInWithEmailAndPassword(email, password).then(function() {
+            this.refAuth.signInWithEmailAndPassword(email, password).then(function() {
               // Sign-in successful.
-              var user = firebase.auth().currentUser;
+              var user = this.refAuth.currentUser;
               that.setUser(user);
               $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
               console.log('Sign-in successful');
@@ -168,7 +168,22 @@ define([
         },
 
         resetPassword: function() {
-            this.ref.resetPassword({
+
+            var emailAddress = $('#forgotEmail').val();
+
+            this.refAuth.sendPasswordResetEmail(emailAddress).then(function() {
+                console.log("reset successfully");
+                $('.modal_success_msg').slideDown();
+                $('#forgotBtn').hide();
+                $('#forgotEmail').prop('disabled', true);
+                window.forgotButton && window.forgotButton.button('reset');
+            }, function(error) {
+                  console.log("Reset Failed!", error);
+                  $('.modal_error_msg').slideDown();
+                  window.forgotButton && window.forgotButton.button('reset');
+            });
+
+            /*this.ref.resetPassword({
                 email: $('#forgotEmail').val()
             }, function(error) {
                 if (error) {
@@ -181,14 +196,19 @@ define([
                     $('#forgotEmail').prop('disabled', true);
                 }
                 window.forgotButton && window.forgotButton.button('reset');
-            });
+            });*/
         },
 
-        signOut: function(ev) {
-            //MGF.stopListeningForShortlistChanges(this.ref.getAuth().uid);
-            //this.ref.unauth();
-            MGF.rootAuth.signOut();
+        signOutUser: function(ev) {
+           // MGF.stopListeningForShortlistChanges(this.refAuth.currentUser.uid);
             users.reset();
+            this.refAuth.signOut().then(function() {
+               // Sign-out successful.
+               console.log("Sign-out successful.");
+            }, function(error) {
+              // An error happened.
+              console.log("Sign-out failed due to some error." + error.errorMessage);
+            });
         },
 
         closeModal: function(ev) {
@@ -252,15 +272,14 @@ define([
 
             //MGF.handleSignUp(email,password);
 
-            firebase.auth().createUserWithEmailAndPassword(email, password).then(function(userData) {
-
+            this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
                 console.log("Successfully created user account with uid:", userData.uid);
 
                 var userData = {
                     providerData: "password",
                     email: $('#reg_email_id').val(),
                     displayName: $('#reg_full_name').val(),
-                    profileImage: authData.password.profileImageURL,
+                    profileImage: authData.photoURL,
                     uid: authData.uid
                 };
                 that.createUser(authData.uid, userData, null);
@@ -269,7 +288,7 @@ define([
                     displayName: $('#reg_full_name').val(),
                     email: $('#reg_email_id').val(),
                     phone: $('#reg_contact_num').val(),
-                    profileImage: authData.password.profileImageURL
+                    profileImage: authData.photoURL,
                 };
 
                 that.createProfile(userData, profileData, that.unAuthAfterProfile);
@@ -325,7 +344,7 @@ define([
         },
         unAuthAfterProfile: function() {
             //this.ref.unauth();
-            //MGF.rootAuth.signOut();
+            //MGF.refAuth.signOut();
             window.signupButton.button('reset');
             $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
             $('#signup').modal('toggle');
@@ -400,12 +419,12 @@ define([
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
             _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'createUser',
-                'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
+                'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOutUser',
                 'closeModal', 'closeUserPopup', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
                 'unAuthAfterProfile');
 
             var events = {
-                "click .signout_icon": this.signOut,
+                "click .signout_icon": this.signOutUser,
                 "click #close-user-pop": this.closeUserPopup,
                 "click #view-all-shortlist": this.closeUserPopup,
                 "click #shortlist-bar-explore": this.closeUserPopup,
@@ -643,15 +662,31 @@ define([
                         scope: "email"
                     });*/
 
-                    var providerData = new firebase.auth.FacebookAuthProvider();
-                    this.refAuth.signInWithPopup(providerData).then(function(result) {
+                    var provider = new firebase.auth.FacebookAuthProvider();
+
+                    firebase.auth().signInWithPopup(provider).then(function(result) {
+                      var token = result.credential.accessToken;
+                      var user = result.user;
+                      var uid = result.user.uid;
+                      firebase.auth().signInWithRedirect(provider);
+                      that.authHandler();
+                      console.log('Successfully login using facebook'+uid);
+                    }).catch(function(error) {
+                      var errorCode = error.code;
+                      var errorMessage = error.message;
+                      var email = error.email;
+                      var credential = error.credential;
+                      console.log('login failed using facebook '+errorMessage);
+                    });
+
+                    /*this.refAuth.signInWithPopup(provider).then(function(result) {
                       // User signed in!
                       var uid = result.user.uid;
                       console.log('Successfully login using facebook'+uid);
                     }).catch(function(error) {
                       // An error occurred
                       console.log('login failed using facebook');
-                    });
+                    });*/
                 });
 
                 $('#google-btn').click(function() {
@@ -662,7 +697,7 @@ define([
                     });*/
 
                     var providerData = new firebase.auth.GoogleAuthProvider();
-                    this.refAuth.signInWithPopup(providerData).then(function(result) {
+                    firebase.auth().signInWithPopup(providerData).then(function(result) {
                       var accessToken = result.credential.accessToken;
                       that.authHandler();
                       console.log('Successfully login using google plus'+accessToken);

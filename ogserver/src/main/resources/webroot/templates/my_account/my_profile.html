@@ -33,7 +33,7 @@
                 <li class="list-group-item main-list-item"><span>Profiles </span></li>
                 <li class="list-group-item"><span class="text-primary indent-text">- Edit Profile</span></li>
                 <li class="list-group-item"><a href="#ChangePassword"><span class="indent-text">- Change Password</span></a></li>
-                <li class="list-group-item"><span class="indent-text">- Deactivate Account</span></li>
+                <!--<li class="list-group-item"><span class="indent-text">- Deactivate Account</span></li>-->
             </ul>
         </div>
 
@@ -316,7 +316,7 @@
                 </form>
 
             </div>
-            <% if((typeof(providerData) !== 'undefined') && (providerData == 'password')){ %>
+            <% if((typeof(providerId) !== 'undefined') && (providerId == 'password')){ %>
 
                 <div class="row padding0">
                     <div id="ChangePassword" class="bg-color-white open_tab_chng_pswd">
@@ -412,7 +412,7 @@
                     </div>
                 </div>
 
-                <div class="row padding0">
+                <!--<div class="row padding0" >
                     <div class="bg-color-white open_tab_deactivate">
                         <div class="row align-center">
                             <a>
@@ -483,7 +483,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div>-->
 
             <% } %>
         </div>

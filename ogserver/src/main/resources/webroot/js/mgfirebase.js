@@ -11,11 +11,11 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
      firebase.initializeApp(config);
 
      var rootRef = firebase.database().ref();
-     var rootAuth = firebase.auth();
+     var refAuth = firebase.auth();
 
     return {
         'rootRef': rootRef,
-        'rootAuth': rootAuth,
+        'refAuth': refAuth,
         shortlistedItems: null,
         TYPE_CONSULT: "consult",
         TYPE_SUBSCRIBE: "subscribe",
@@ -27,7 +27,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         handleSignUp: function(email, password) {
            // Sign in with email and pass.
           // [START createwithemail]
-          this.rootAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
+          this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
             console.log("Successfully created user!!!");
             console.log(userData);
           }, function(error) {
@@ -42,7 +42,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             var that = this;
             // Listening for auth state changes.
           // [START authstatelistener]
-          this.rootAuth.onAuthStateChanged(function(user) {
+          this.refAuth.onAuthStateChanged(function(user) {
             if (user) {
               // User is signed in.
               var displayName = user.displayName;
@@ -51,7 +51,15 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
               var photoURL = user.photoURL;
               var isAnonymous = user.isAnonymous;
               var uid = user.uid;
-              var providerData = user.providerData;
+              if(typeof(user.providerData) !== 'undefined' && user.providerData.length > 0){
+                var providerId = user.providerData[0].providerId;
+              }else{
+                var providerId = user.providerData;
+              }
+
+
+              console.log('provider data ===== ');
+              console.log(providerId);
 
                 var userProfileRef = firebase.database().ref().child("user-profiles/" + uid);
 
@@ -62,7 +70,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                     if (snapshot.exists()) {
                         that.userProfile = snapshot.val();
                     }
-                    someFunc(that.userProfile,null, providerData);
+                    someFunc(that.userProfile,null, providerId);
                    });
 
             } else {
@@ -88,7 +96,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         updateProfile: function(profileData) {
 
             var that = this;
-            var uid = firebase.auth().currentUser.uid;
+            var uid = this.refAuth.currentUser.uid;
 
             return new Promise(function(resolve, reject){
                 that.rootRef.child('user-profiles').child(uid).set(
@@ -110,13 +118,19 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             if (userProfile) {
                 return userProfile.displayName;
             } else {
-                switch (authData.providerData) {
+            console.log('get name');
+                var providerData = '', providerId='';
+                if(typeof(authData.providerData) !== 'undefined'){
+                    var providerData = authData.providerData[0];
+                    var providerId = providerData.providerId;
+                }
+                switch (providerId) {
                     case 'password':
-                        return authData.password.email.replace('/@.*/', '');
-                    case 'google':
-                        return authData.google.displayName;
-                    case 'facebook':
-                        return authData.facebook.displayName;
+                        return providerData.email.replace(/@.*/, '');
+                    case 'google.com':
+                        return providerData.displayName;
+                    case 'facebook.com':
+                        return providerData.displayName;
                         //                    case 'twitter':
                         //                        return authData.twitter.displayName;
                 }
@@ -126,30 +140,42 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             if (userProfile) {
                 return userProfile.profileImage;
             } else {
-                switch (authData.providerData) {
+                console.log('get image');
+                console.log(authData);
+                var providerData = '', providerId='';
+                if(typeof(authData.providerData) !== 'undefined'){
+                    providerData = authData.providerData[0];
+                    providerId = providerData.providerId;
+                }
+                switch (providerId) {
                     case 'password':
-                        return authData.password.profileImageURL;
-                    case 'google':
-                        return authData.google.profileImageURL;
-                    case 'facebook':
-                        return authData.facebook.profileImageURL;
+                        return providerData.photoURL;
+                    case 'google.com':
+                        return providerData.photoURL;
+                    case 'facebook.com':
+                        return providerData.photoURL;
                         //                    case 'twitter':
                         //                        return authData.twitter.profileImageURL;
                 }
             }
         },
         getEmail: function(authData) {
-            var providerData = authData.providerData[0];
-            switch (providerData.providerId) {
+            var providerData = '', providerId='';
+            if(typeof(authData.providerData) !== 'undefined' && authData.providerData.length > 0){
+                providerData = authData.providerData[0];
+                providerId = providerData.providerId;
+            }
+            switch (providerId) {
                 case 'password':
                     return providerData.email;
-                case 'google':
+                case 'google.com':
                     return providerData.email;
-                case 'facebook':
+                case 'facebook.com':
                     return providerData.email;
                     //                case 'twitter':
                     //                    return authData.twitter.email;
             }
+
         },
         pushEvent: function(uid, data, type) {
             var eventData = {
@@ -166,7 +192,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         },
         removeShortlistProduct: function(productId) {
             var that = this;
-            var authData = firebase.auth().currentUser;
+            var authData = this.refAuth.currentUser;
             return new Promise(function(resolve, reject) {
                 that.rootRef.child("shortlists").child(authData.uid).child(productId).remove(function(error) {
                     if (error) {
@@ -183,7 +209,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         addShortlistProduct: function(product) {
             var that = this;
             var productId = product.productId;
-            var authData = this.rootAuth.currentUser;
+            var authData = this.refAuth.currentUser;
             return new Promise(function(resolve, reject) {
                 that.rootRef.child("shortlists").child(authData.uid).child(productId).set(
                     product,
@@ -194,7 +220,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                         } else {
                             console.log("successfully added shortlist data");
                             resolve();
-                            var email = that.getEmail(firebase.auth().currentUser);
+                            var email = that.getEmail(authData);
                             var data = {
                                 product: product,
                                 email: email ? email : ''
@@ -206,13 +232,13 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         },
         doAnonymousAuth: function() {
              var that = this;
-             var existingAuthData = firebase.auth().currentUser;
+             var existingAuthData = that.refAuth.currentUser;
              if (!existingAuthData) {
-                 that.rootRef.signInAnonymously(function(error, authData) {
-                     if (error) {
-                         console.log("error in anonymous auth", error);
-                     }
-                 });
+                 that.refAuth.signInAnonymously().catch(function(error) {
+                      if (error) {
+                          console.log("error in anonymous auth", error);
+                      }
+                  });
              }
         },
         getShortListedItems: function() {
@@ -227,7 +253,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
          uid && this.rootRef.child("shortlists").child(uid).off("value");
         },
         listenForShortlistChanges: function() {
-         var authData = firebase.auth().currentUser;
+         var authData = this.refAuth.currentUser;
          var that = this;
          this.stopListeningForShortlistChanges(this.previousUid);
          this.stopListeningForShortlistChanges(authData.uid);
@@ -255,7 +281,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         },
         mynest: function(authData, someFunc) {
             var mynestitems = null;
-            var authData = firebase.auth().currentUser;
+            var authData = this.refAuth.currentUser;
              var projRef = firebase.database().ref().child("projects/" + authData.uid+"/my-nest");
              var projectDetails = null;
              var that = this;
@@ -271,252 +297,18 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                          if (snapshots.exists()) {
                              that.userProfile = snapshots.val();
                          }
-                         someFunc(that.userProfile,that.projectDetails, authData.providerData);
+                         var providerId = authData.providerData[0].providerId;
+                         /*if(!userProfile){
+                            someFunc(authData,that.projectDetails, providerId);
+                         }else{
+                            someFunc(that.userProfile,that.projectDetails, providerId);
+                         }*/
+                         someFunc(that.userProfile,that.projectDetails, providerId);
                         });
                  }
                  //someFunc(authData,that.projectDetails, authData.providerData);
              });
 
-         },
-/*        getUserProfile: function(authData, someFunc) {
-
-            if (authData && authData.provider !== 'anonymous') {
-                var userProfileRef = this.rootRef.child("user-profiles/" + authData.uid);
-                var userProfile = null;
-                var that = this;
-
-                userProfileRef.once("value", function(snapshot) {
-                    if (snapshot.exists()) {
-                        that.userProfile = snapshot.val();
-                    }
-                    someFunc(that.userProfile, authData.provider);
-                });
-            } else {
-                someFunc(null);
-            }
-        },
-        pushEvent: function(uid, data, type) {
-            var eventData = {
-                "data": data,
-                "type": type
-            };
-            this.rootRef.child("events").push().child(uid).set(eventData, function(error) {
-                if (error) {
-                    console.log("not able to push event data", error);
-                } else {
-                    console.log("successfully pushed event data");
-                }
-            });
-        },
-        addConsultData: function(formData, userId) {
-            var uid = userId ? userId : this.rootRef.getAuth().uid;
-            var that = this;
-            LS.addConsultData(uid, formData); //add to local storage as a backup option
-            this.rootRef.child("consults/" + uid + "/" + Date.now()).set(formData,
-                function(error) {
-                    if (error) {
-                        console.log("problem in inserting consult data", error);
-                    } else {
-                        console.log("successfully inserted consult data");
-                        LS.removeConsultData(uid); //cleanup local storage as firebase has already submitted the data
-                        that.pushEvent(uid, formData, that.TYPE_CONSULT);
-                    }
-                });
-        },
-        subscribeUser: function(email) {
-            var uid = this.rootRef.getAuth().uid;
-            var that = this;
-            var formData = {
-                email: email
-            };
-            this.rootRef.child("subscriptions/" + uid + "/" + Date.now()).set(formData,
-                function(error) {
-                    if (error) {
-                        console.log("problem in inserting subscription data", error);
-                    } else {
-                        console.log("successfully inserted subscription data");
-                        that.pushEvent(uid, formData, that.TYPE_SUBSCRIBE);
-                    }
-                });
-        },
-        createProfile: function(userData, profileData, next) {
-            this.rootRef.child('user-profiles').child(userData.uid).set(
-                profileData,
-                function(error) {
-                    if (error) {
-                        console.log("password profile data could not be saved." + error);
-                    } else {
-                        console.log("data saved successfully.");
-                    }
-                    if (next) next();
-                }
-            );
-            this.pushEvent(userData.uid, profileData, this.TYPE_USER_ADD);
-        },
-        updateProfile: function(profileData) {
-
-            var that = this;
-            var uid = this.rootRef.getAuth().uid;
-            return new Promise(function(resolve, reject){
-                that.rootRef.child('user-profiles').child(uid).set(
-                    profileData,
-                    function(error) {
-                        if (error) {
-                            console.log("password profile data could not be saved." + error);
-                            reject && reject();
-                        } else {
-                            console.log("data saved successfully.");
-                            that.pushEvent(uid, profileData, that.TYPE_USER_UPDATE);
-                            resolve();
-                        }
-                    }
-                );
-            });
-        },
-        getName: function(authData, userProfile) {
-            if (userProfile) {
-                return userProfile.displayName;
-            } else {
-                switch (authData.provider) {
-                    case 'password':
-                        return authData.password.email.replace(/@.*//*, '');
-                    case 'google':
-                        return authData.google.displayName;
-                    case 'facebook':
-                        return authData.facebook.displayName;
-                        //                    case 'twitter':
-                        //                        return authData.twitter.displayName;
-                }
-            }
-        },
-        getImage: function(authData, userProfile) {
-            if (userProfile) {
-                return userProfile.profileImage;
-            } else {
-                switch (authData.provider) {
-                    case 'password':
-                        return authData.password.profileImageURL;
-                    case 'google':
-                        return authData.google.profileImageURL;
-                    case 'facebook':
-                        return authData.facebook.profileImageURL;
-                        //                    case 'twitter':
-                        //                        return authData.twitter.profileImageURL;
-                }
-            }
-        },
-        getEmail: function(authData) {
-            switch (authData.provider) {
-                case 'password':
-                    return authData.password.email;
-                case 'google':
-                    return authData.google.email;
-                case 'facebook':
-                    return authData.facebook.email;
-                    //                case 'twitter':
-                    //                    return authData.twitter.email;
-            }
-        }*/
-        removeShortlistProduct: function(productId) {
-            var that = this;
-/*
-            var authData = this.rootRef.getAuth();
-*/
-            var authData = firebase.auth().currentUser;
-            return new Promise(function(resolve, reject) {
-                that.rootRef.child("shortlists").child(authData.uid).child(productId).remove(function(error) {
-                    if (error) {
-                        reject();
-                    } else {
-                        resolve();
-                        that.pushEvent(authData.uid, {
-                            productId: productId
-                        }, that.TYPE_SHORTLIST_PRODUCT_REMOVE);
-                    }
-                });
-            });
-        },
-        addShortlistProduct: function(product) {
-            var that = this;
-            var productId = product.productId;
-/*
-            var authData = this.rootRef.getAuth();
-*/
-            var authData = firebase.auth().currentUser;
-
-            return new Promise(function(resolve, reject) {
-                that.rootRef.child("shortlists").child(authData.uid).child(productId).set(
-                    product,
-                    function(error) {
-                        if (error) {
-                            console.log("not able to add shortlist data", error);
-                            reject();
-                        } else {
-                            console.log("successfully added shortlist data");
-                            resolve();
-                            var email = that.getEmail(authData);
-                            var data = {
-                                product: product,
-                                email: email ? email : ''
-                            };
-
-                            that.pushEvent(authData.uid, data, that.TYPE_SHORTLIST_PRODUCT_ADD);
-                        }
-                    });
-            });
-        },
-        doAnonymousAuth: function() {
-            var that = this;
-            var existingAuthData = firebase.auth().currentUser;
-            if (!existingAuthData) {
-                firebase.auth().signInAnonymously().catch(function(error) {
-                    if (error) {
-                        console.log("error in anonymous auth", error);
-                    }
-                });
-            }
-        },
-        getShortListedItems: function() {
-            return this.shortlistedItems;
-        },
-        getShortListed: function(id) {
-            return _.findWhere(this.shortlistedItems, {
-                productId: id
-            });
-        },
-        stopListeningForShortlistChanges: function(uid) {
-            uid && firebase.database().ref().child("shortlists").child(uid).off("value");
-        },
-        listenForShortlistChanges: function() {
-/*
-            var authData = this.rootRef.getAuth();
-*/
-
-            var authData = firebase.auth().currentUser;
-            var that = this;
-            this.stopListeningForShortlistChanges(this.previousUid);
-            this.stopListeningForShortlistChanges(authData.uid);
-            this.previousUid = authData.uid;
-            this.transferShortlistData(authData);
-            var first = true;
-            firebase.database().ref().child("shortlists").child(authData.uid).on("value", function(snapshot) {
-                if (snapshot.exists()) {
-                    that.shortlistedItems = snapshot.val();
-                } else {
-                    that.shortlistedItems = null;
-                }
-                Backbone.trigger('shortlist.change');
-            }, function(error) {
-                console.log("couldn't start listening to shortlist changes", error);
-            });
-        },
-        transferShortlistData: function(authData) {
-            if (authData.providerData !== 'anonymous') { //don't transfer shortlist when a person is logging out
-                var that = this;
-                _.each(this.shortlistedItems, function(shortlistedItem) {
-                    that.addShortlistProduct(shortlistedItem).then(function() {});
-                });
-            }
-        }
+         }
     };
 });
