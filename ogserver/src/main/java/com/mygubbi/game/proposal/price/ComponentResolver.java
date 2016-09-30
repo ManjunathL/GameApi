@@ -28,7 +28,7 @@ public class ComponentResolver
                     code = "H002";
                 else if (productModule.getDepth() < 500)
                     code = "H003";
-                else if (productModule.getDepth() < 550)
+                else if (productModule.getDepth() < 650)
                     code = "H006";
                 break;
         }
