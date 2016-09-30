@@ -1,0 +1,27 @@
+<% if(typeof(lateststories) !== 'undefined'){ var count = 0; %>
+<% _.each(lateststories, function(story){ %>
+<% if (count < 3){ %>
+<% if((typeof(story) !== 'undefined') && story.length != 0){ %>
+<div class="padding-top10 padding-bottom10">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-4">
+            <img src="<%= story.blog_main_image %>"
+                 class="img-responsive" alt="Experience Center" />
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8">
+            <h4 class="text-muted text-normal"><%= story.blog_heading %></h4>
+
+            <p><%= story.blog_content.substring(0,150) %></p>
+            <div>
+                <a href="/stories">
+                    <button class="btn btn-explore">MORE</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+<% count = count + 1; %>
+<% } %>
+<% }); %>
+<% } %>
