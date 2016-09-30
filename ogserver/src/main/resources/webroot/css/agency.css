@@ -8848,9 +8848,13 @@ html .ui-button.ui-state-disabled:active {
     max-height: 400px;
     font-size: 19px;
     text-align: left;
-    padding: 15px;
+    padding: 15px 25px 15px 30px;
     text-shadow: none;
     font-weight: 300;
+}
+.exp-center-head{
+    font-size: 22px;
+    margin-bottom: 15px;
 }
 .exp-slider .carousel-indicators{
     bottom: 10px;
