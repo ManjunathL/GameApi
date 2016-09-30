@@ -550,7 +550,7 @@ ul, ol{
     padding:10px 10px!important;
 }
 #nav>li>a {
-    padding: 5px 11px !important;
+    padding: 5px 9px !important;
     border-right: 1px solid #ddd;
     cursor: pointer;
     background-color: #fff;
@@ -841,17 +841,20 @@ ul, ol{
   }
   /* Completed Project Section End */
   /* Testimonial Section */
-  .testimonial-bx{
-      width:550px;
-      height:320px;
-      border:1px solid #ccc;
-  }
-  .text-capitalize{
-      text-transform:Capitalize;
-  }
-  .text-normal{
-      text-transform:inherit;
-  }
+    .testimonial-bx{
+        width:550px;
+        height:320px;
+        border:1px solid #ccc;
+    }
+    .text-capitalize{
+        text-transform:Capitalize;
+    }
+    .text-uppercase{
+        text-transform: Uppercase;
+    }
+    .text-normal{
+        text-transform:inherit;
+    }
   /* Testimonial Section End */
 
   .contact-section{
@@ -8850,9 +8853,13 @@ html .ui-button.ui-state-disabled:active {
     max-height: 400px;
     font-size: 19px;
     text-align: left;
-    padding: 15px;
+    padding: 15px 25px 15px 30px;
     text-shadow: none;
     font-weight: 300;
+}
+.exp-center-head{
+    font-size: 22px;
+    margin-bottom: 15px;
 }
 .exp-slider .carousel-indicators{
     bottom: 10px;
@@ -8908,24 +8915,34 @@ html .ui-button.ui-state-disabled:active {
     padding: 0px;
     text-align: center;
     color: #3d4b54;
+    position: relative;
 }
 .platinum-banner-band{
     left: 0;
     bottom: 0;
     width: 100%;
-    padding: 20px 0px;
+    padding: 10px 0px;
     color: #ffffff;
     position: absolute;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.7);
 }
 .platinum-head{
-   color: #4d616b;
-   margin: 50px 0px 20px;
-   font-size: 40px;
-   font-weight: 300;
-   border-bottom: 1px solid #ddd;
-   padding-bottom: 10px;
-   display: inline-block;
+    color: #4d616b;
+    margin: 50px 0px 20px;
+    font-size: 40px;
+    font-weight: 300;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+.platinum-contact-heading{
+    color: #4d616b;
+    margin: 50px 0px 20px;
+    font-size: 40px;
+    font-weight: 300;
+    padding-bottom: 10px;
+    display: inline-block;
+    text-transform: capitalize;
 }
 .process-count{
     color: #ffffff;
@@ -8938,12 +8955,14 @@ html .ui-button.ui-state-disabled:active {
 }
 .platinum-banner-band-head{
     font-size: 52px;
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: capitalize;
     font-family: 'Raleway', sans-serif;
 }
 .platinum-banner-band-des{
     font-size: 32px;
     font-weight: 100;
+    text-transform: capitalize;
     font-family: 'Raleway', sans-serif;
 }
 .platinum-service-img-des,
@@ -9002,35 +9021,44 @@ html .ui-button.ui-state-disabled:active {
     padding: 30px 10px;
     border: 1px solid #4d616b;
     margin: 10px 10px 30px;
-}
-#platinumCarousel03 .carousel-indicators{
-    bottom: -15px !important;
-    margin-bottom: 0px !important;
-}
-#platinumCarousel03 .carousel-indicators .active{
-    background-color: #f1591f;
-}
-#platinumCarousel03 .carousel-indicators li{
-    border: 1px solid #f1591f;
+    display: inline-block;
 }
 .test-date {
     background: #f1591f;
     color: #fff;
     text-align: center;
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     margin-bottom: 15px;
-    line-height: 90px;
+    line-height: 110px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.test-date-new {
+    background: #f1591f;
+    color: #fff;
+    text-align: center;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    line-height: 25px;
+    padding-top: 25px;
     border-radius: 50%;
     font-size: 18px;
 }
 .test-about {
-    min-height: 90px;
+    min-height: 110px;
     padding-top: 10px;
+}
+.design-finalization{
+    padding-top:30px;
+}
+.execution{
+    padding-top: 45px;
 }
 .platinum-testimonial-profile {
     width: 150px;
-    margin: 40px auto 15px;
+    margin: 60px auto 15px;
 }
 .platinum-contact-section{
     padding: 0px 0px 50px;
@@ -9045,6 +9073,7 @@ html .ui-button.ui-state-disabled:active {
     font-size: 18px;
     font-weight: 400;
     text-shadow: none;
+    border-radius:0px;
 }
 .btn-testimonial:active,
 .btn-testimonial:focus,
@@ -9055,26 +9084,82 @@ html .ui-button.ui-state-disabled:active {
 }
 
 @media (max-width: 480px) {
+    .platinum-banner-bg{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475145725/platinum_home/mobile_02.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 300px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 0px;
+        text-align: center;
+        color: #3d4b54;
+    }
     .platinum-banner-band-head {
         font-size: 30px;
+    }
+    .platinum-contact-heading{
+        font-size: 28px;
+        line-height: 120%;
+    }
+    .platinum-services-img {
+        max-width: 85px;
+        margin: 20px auto;
+    }
+    .platinum-process-img-head,
+    .platinum-service-img-head{
+        font-size: 18px;
+    }
+    .platinum-service-img-des{
+        font-size: 12px;
     }
     .test-date {
         background: #f1591f;
         color: #fff;
         text-align: center;
-        width: 75px;
-        height: 75px;
+        width: 85px;
+        height: 85px;
         margin-bottom: 15px;
         line-height: 75px;
         border-radius: 50%;
-        font-size: 16px;
+        font-size: 14px;
+    }
+    .test-date-new {
+        background: #f1591f;
+        color: #fff;
+        text-align: center;
+        width: 85px;
+        height: 85px;
+        margin-bottom: 15px;
+        line-height: 25px;
+        padding-top: 20px;
+        border-radius: 50%;
+        font-size: 14px;
     }
     .test-about{
-        font-size: 12px;
+        font-size: 10px;
+    }
+    .design-finalization{
+        padding-top: 10px;
+    }
+    .execution{
+        padding-top: 10px;
     }
     .platinum-testimonial-profile {
         width: 120px;
         margin: 10px auto 15px;
+    }
+    #platinumCarousel01 .carousel-indicators,
+    #platinumCarousel02 .carousel-indicators {
+        bottom: -7px !important;
+        left: 40%;
     }
 }
 /* End Platinum home */
