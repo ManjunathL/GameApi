@@ -550,7 +550,7 @@ ul, ol{
     padding:10px 10px!important;
 }
 #nav>li>a {
-    padding: 5px 11px !important;
+    padding: 5px 9px !important;
     border-right: 1px solid #ddd;
     cursor: pointer;
     background-color: #fff;
