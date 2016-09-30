@@ -2,7 +2,8 @@
 <% _.each(lateststories, function(story){ %>
 <% if (count < 3){ %>
 <% if((typeof(story) !== 'undefined') && story.length != 0){ %>
-<div class="padding-top10 padding-bottom10">
+<% if (count == 1){ %>
+<div class="padding-top10 padding-bottom20 hidden-lg hidden-md">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-4">
             <img src="<%= story.blog_main_image %>"
@@ -11,9 +12,28 @@
         <div class="col-lg-6 col-md-6 col-sm-8">
             <h4 class="text-muted text-normal"><%= story.blog_heading %></h4>
 
-            <p><%= story.blog_content.substring(0,150) %></p>
+            <p><%= story.blog_content.substring(0,155) %></p>
             <div>
-                <a href="/stories">
+                <a href="/stories-all">
+                    <button class="btn btn-explore">MORE</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+<div class="padding-top10 padding-bottom20 hidden-xs hidden-sm">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-4">
+            <img src="<%= story.blog_main_image %>"
+                 class="img-responsive" alt="Experience Center" />
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8">
+            <h4 class="text-muted text-normal"><%= story.blog_heading %></h4>
+
+            <p><%= story.blog_content.substring(0,155) %></p>
+            <div>
+                <a href="/stories-all">
                     <button class="btn btn-explore">MORE</button>
                 </a>
             </div>
