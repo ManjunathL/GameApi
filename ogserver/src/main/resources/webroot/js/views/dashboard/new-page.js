@@ -38,7 +38,7 @@ define([
                     lateststories = _(lateststories).sortBy(function(story) {
                         return Date.parse(story.date_of_publish);
                     }).reverse();
-
+                    //commit
                     $("#latest_blog_content").html(_.template(blogPageTemplate)({
                       'lateststories': lateststories
                     }));
