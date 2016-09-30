@@ -9050,6 +9050,12 @@ html .ui-button.ui-state-disabled:active {
     min-height: 110px;
     padding-top: 10px;
 }
+.design-finalization{
+    padding-top:30px;
+}
+.execution{
+    padding-top: 45px;
+}
 .platinum-testimonial-profile {
     width: 150px;
     margin: 60px auto 15px;
@@ -9139,6 +9145,12 @@ html .ui-button.ui-state-disabled:active {
     }
     .test-about{
         font-size: 10px;
+    }
+    .design-finalization{
+        padding-top: 10px;
+    }
+    .execution{
+        padding-top: 10px;
     }
     .platinum-testimonial-profile {
         width: 120px;

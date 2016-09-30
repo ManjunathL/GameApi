@@ -9,13 +9,15 @@ define([
     'consultutil',
     'analytics',
     'bxslider',
+    'models/story',
     'text!templates/dashboard/new-page.html',
+    'text!templates/story/home_story.html',
     'libs/unveil/jquery.unveil.mg'
-], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, dashboardPageTemplate){
+], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, Story, dashboardPageTemplate, blogPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
-
+        story: new Story(),
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(dashboardPageTemplate)({
               'userProfile': userProfData
@@ -23,8 +25,29 @@ define([
             $.cloudinary.responsive();
             $("img").unveil();
             this.ready();
+            this.getStories();
         },
+        getStories: function() {
+            console.log('Blog data');
+            this.story.fetch({
+                 data: {
+                     "tags": 'all'
+                 },
+                success: function(response) {
+                    var lateststories = response.toJSON();
+                    lateststories = _(lateststories).sortBy(function(story) {
+                        return Date.parse(story.date_of_publish);
+                    }).reverse();
 
+                    $("#latest_blog_content").html(_.template(blogPageTemplate)({
+                      'lateststories': lateststories
+                    }));
+                },
+                error: function(model, response, options) {
+                    console.log("couldn't fetch story data - " + response);
+                }
+            });
+        },
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
