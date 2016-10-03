@@ -58,9 +58,14 @@
             <% if(typeof(stories) !== 'undefined'){ %>
             <% _.each(stories, function(story){ %>
 
+            <%= console.log(story) %>
+
             <%
             var blog_url = story.blog_heading;
-            blog_url = blog_url.replace(/-/g,"_");
+
+            if((typeof(blog_url) !== 'undefined') && (blog_url.indexOf('-') !== -1)){
+                blog_url = blog_url.replace(/-/g,"_");
+            }
             blog_url = blog_url.replace(/\s/g,"-");
 
             %>

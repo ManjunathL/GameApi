@@ -24,6 +24,7 @@ define([
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         appliancelst: '#applianceList',
         product: null,
         custom_product: null,
@@ -43,7 +44,7 @@ define([
             var that = this;
             window.custom_product = that.custom_product;
 
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.setProductDetails);
 
         },

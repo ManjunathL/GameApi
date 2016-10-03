@@ -15,7 +15,7 @@ define([
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.ref = MGF.rootRef;
-            this.refAuth = MGF.rootAuth;
+            this.refAuth = MGF.refAuth;
             this.listenTo(Backbone, 'user.change', this.render);
             _.bindAll(this, 'render', 'renderWithUserProfCallback');
         },

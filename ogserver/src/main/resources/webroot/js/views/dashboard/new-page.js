@@ -9,12 +9,15 @@ define([
     '/js/consultutil.js',
     '/js/analytics.js',
     'bxslider',
-    'text!/templates/dashboard/new-page.html'
-], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, dashboardPageTemplate){
+    '/js/models/story.js',
+    'text!/templates/dashboard/new-page.html',
+    'text!/templates/dashboard/blog-page.html'
+], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, Story, dashboardPageTemplate, blogPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
-        refAuth: MGF.rootAuth,
+        refAuth: MGF.refAuth,
+        story: new Story(),
 
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(dashboardPageTemplate)({
@@ -22,8 +25,33 @@ define([
             }));
             $.cloudinary.responsive();
             this.ready();
+            this.getStories();
         },
+        getStories: function() {
+            this.story.fetch({
+                 data: {
+                     "tags": 'all'
+                 },
+                success: function(response) {
+                    var lateststories = response.toJSON();
+                    lateststories = _(lateststories).sortBy(function(story) {
+                        return Date.parse(story.date_of_publish);
+                    }).reverse();
 
+                    var rec_stories = [];
+                    $.each(lateststories.slice(1,3), function(i, data) {
+                        rec_stories.push(data);
+                    });
+
+                    $("#latest_blog_content").html(_.template(blogPageTemplate)({
+                      'lateststories': rec_stories
+                    }));
+                },
+                error: function(model, response, options) {
+                    console.log("couldn't fetch story data - " + response);
+                }
+            });
+        },
         render: function() {
             var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);

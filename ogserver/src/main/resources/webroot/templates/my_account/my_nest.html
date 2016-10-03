@@ -107,6 +107,7 @@ img.timeline-image {
 }
 </style>
 <div class="container padding50-15">
+
     <div class="row">
         <div class="col-md-3">
             <h1>My Account</h1>
@@ -120,6 +121,7 @@ img.timeline-image {
             </ul>
         </div>
         <div class="col-md-9">
+            <% if(typeof(myNest) !== 'undefined'){ %>
             <div id="info">
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="tab-1">
@@ -127,9 +129,8 @@ img.timeline-image {
                             <form role="form">
                             <div class="col-md-6">
 
-                                <%= console.log("----Appi------") %>
+                                <%= console.log("----My nest details------") %>
                                 <%= console.log(myNest) %>
-                                <%= console.log(myNest.project_details.property_name) %>
                                     <div class="form-group">
 
                                         <label for="property-name">Property Name</label>
@@ -736,14 +737,12 @@ img.timeline-image {
                     </div>
                 </div>
                             </div>
-                        </div>
-                        <hr />
-                    </div>
-                </div>
-            </div>
+            <% } %>
         </div>
+    <hr />
     </div>
 </div>
+
 <script>
     $(document).ready(function() {
         $('.list-group').find('li.list-group-item a').click(function () {

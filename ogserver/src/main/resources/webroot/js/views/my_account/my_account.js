@@ -17,7 +17,7 @@ define([
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
-        refAuth: MGF.rootAuth,
+        refAuth: MGF.refAuth,
         /*renderWithUserProfCallback: function (userProfData, provider) {
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
@@ -36,35 +36,32 @@ define([
             }));
             document.title = userProfData.displayName + ' | mygubbi';
         },*/
-        renderWithUserProjectCallback: function (userProfData,mynestitems, provider) {
-        console.log(mynestitems);
-        console.log("+++++++++++++");
-        console.log(userProfData);
-        console.log("-------------------------");
+        renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
 
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
                 'myNest':mynestitems,
-                'provider': provider
-            }));
-
-            $("#mynest").html(_.template(MyNestTemplate)({
-                'userProfile': userProfData,
-                'myNest':mynestitems,
-                'providerData': provider
+                'providerId': providerId
             }));
 
             $("#profile").html(_.template(MyProfileTemplate)({
                 'userProfile': userProfData,
                 'myNest':mynestitems,
-                'providerData': provider
+                'providerId': providerId
             }));
+
+            $("#mynest").html(_.template(MyNestTemplate)({
+                'userProfile': userProfData,
+                'myNest':mynestitems,
+                'providerId': providerId
+            }));
+
+
             document.title = userProfData.displayName + ' | mygubbi';
         },
         render: function () {
             var authData = this.refAuth.currentUser;
             //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
-            //debugger
             MGF.mynest(authData,this.renderWithUserProjectCallback);
         },
         initialize: function () {
@@ -73,7 +70,7 @@ define([
             _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
         },
         handleUserChange: function () {
-            if (VM.activeView === VM.USER_PROFILE) {
+            if (VM.activeView === VM.MYACCOUNTPAGE) {
                 window.location = '/';
             }
         },
@@ -130,8 +127,35 @@ define([
 
             var authData = this.refAuth.currentUser;
             var email = MGF.getEmail(authData);
+            var newPassword = $('#new_password').val();
 
-            this.ref.updatePassword({
+            authData.updatePassword(newPassword).then(function() {
+              // Update successful.
+              $('#success').html("User password changed successfully!");
+              $('#success_row').css("display", "block");
+              console.log("User password changed successfully!");
+              $('#chng_passwd_form').css("display","none");
+            }, function(error) {
+              // An error happened.
+              switch (error.code) {
+                  case "INVALID_PASSWORD":
+                      $('#error').html("The specified user account password is incorrect.");
+                      $('#error_row').css("display", "block");
+                      console.log("The specified user account password is incorrect.");
+                      break;
+                  case "INVALID_USER":
+                      $('#error').html("The specified user account does not exist.");
+                      $('#error_row').css("display", "block");
+                      console.log("The specified user account does not exist.");
+                      break;
+                  default:
+                      $('#error').html("Error changing password:", error);
+                      $('#error_row').css("display", "block");
+                      console.log("Error changing password:", error);
+              }
+            });
+
+            /*this.ref.updatePassword({
                 email: email,
                 oldPassword: $('#old_password').val(),
                 newPassword: $('#new_password').val()
@@ -159,7 +183,7 @@ define([
                     console.log("User password changed successfully!");
                     $('#chng_passwd_form').css("display","none");
                 }
-            });
+            });*/
         },
         deactivateUserAccount: function (e) {
 

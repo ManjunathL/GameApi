@@ -6143,6 +6143,12 @@ a.tab-ico {
     white-space: nowrap;
 }
 
+.story-desc-overflow{
+    text-overflow: ellipsis;
+    max-height: 70px;
+    overflow: hidden;
+}
+
 @media (max-width:1180px){
 
     .shobha_plan_txt{
