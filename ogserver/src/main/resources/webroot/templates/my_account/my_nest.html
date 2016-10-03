@@ -142,7 +142,7 @@ img.timeline-image {
 
                                         <label for="property-type">Property Type</label>
 
-                                        <input class="form-control" id="property-type" placeholder="Enter Property Type" value="<%= myNest ? myNest.project_details.property_type : '' %>"" type="text" required="required" />
+                                        <input class="form-control" id="property-type" placeholder="Enter Property Type" value="<%= myNest ? myNest.project_details.property_type : '' %>" type="text" required="required" />
 
                                     </div>
 
@@ -150,7 +150,7 @@ img.timeline-image {
 
                                         <label for="blockno">Tower / Block no</label>
 
-                                        <input class="form-control" id="blockno" placeholder="Enter Block Number" value="<%= myNest ? myNest.project_details.block_number : '' %>"" type="text" required="required">
+                                        <input class="form-control" id="blockno" placeholder="Enter Block Number" value="<%= myNest ? myNest.project_details.block_number : '' %>" type="text" required="required">
 
                                     </div>
 
@@ -164,7 +164,7 @@ img.timeline-image {
 
                                     <label for="builder_name">Builder Name</label>
 
-                                    <input class="form-control" id="builder_name" placeholder="Enter Builder Name" value="<%= myNest ? myNest.project_details.builder_name : '' %>"" type="text" required="required">
+                                    <input class="form-control" id="builder_name" placeholder="Enter Builder Name" value="<%= myNest ? myNest.project_details.builder_name : '' %>" type="text" required="required">
 
                                 </div>
 
@@ -172,7 +172,7 @@ img.timeline-image {
 
                                     <label for="flatno">Flat No.</label>
 
-                                    <input class="form-control" id="flatno" placeholder="Enter Flat Number" value="<%= myNest ? myNest.project_details.flat_number : '' %>"" type="text" required="required">
+                                    <input class="form-control" id="flatno" placeholder="Enter Flat Number" value="<%= myNest ? myNest.project_details.flat_number : '' %>" type="text" required="required">
 
                                 </div>
 
@@ -202,7 +202,11 @@ img.timeline-image {
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.1 (10/8/2016) </span></div>
+                                                    <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                                        <% if(typeof(myNest) !== 'undefined'){ %>
+                                                        <%= myNest.latest_proposal_details.proposal_name %>
+                                                        <% } %>
+                                                    </span></div>
                                                 </div>
                                                 </a>
                                                 <div class="row padding-top-10">
@@ -371,7 +375,10 @@ img.timeline-image {
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (2/8/2016) </span></div>
+                                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                                            <%= myNest.previous_proposal_details[0].proposal_name %>
+                                                            <% } %> </span></div>
                                                     </div>
                                                         </a>
                                                 </div>
@@ -401,7 +408,10 @@ img.timeline-image {
                                 <div class="row bs-wizard" style="border-bottom:0;">
                                     <div class="col-xs-2 bs-wizard-step complete">
 
-                                        <div class="text-center bs-wizard-stepnum">Initiated</div>
+                                        <div class="text-center bs-wizard-stepnum">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.project_status[0].status_name %>
+                                            <% } %></div>
 
                                         <div class="progress"><div class="progress-bar"></div></div>
 
@@ -412,7 +422,10 @@ img.timeline-image {
                                     </div>
                                     <div class="col-xs-2 bs-wizard-step complete"><!-- complete -->
 
-                                        <div class="text-center bs-wizard-stepnum">Proposal approved</div>
+                                        <div class="text-center bs-wizard-stepnum">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.project_status[1].status_name %>
+                                            <% } %></div>
 
                                         <div class="progress"><div class="progress-bar"></div></div>
 
@@ -434,7 +447,11 @@ img.timeline-image {
                                     </div>-->
                                     <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
 
-                                        <div class="text-center bs-wizard-stepnum">Order placed</div>
+                                        <div class="text-center bs-wizard-stepnum">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.project_status[2].status_name %>
+                                            <% } %>
+                                        </div>
 
                                         <div class="progress"><div class="progress-bar"></div></div>
 
@@ -445,7 +462,10 @@ img.timeline-image {
                                     </div>
                                     <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
 
-                                        <div class="text-center bs-wizard-stepnum">Production Started</div>
+                                        <div class="text-center bs-wizard-stepnum">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.project_status[3].status_name %>
+                                            <% } %></div>
 
                                         <div class="progress"><div class="progress-bar"></div></div>
 
@@ -456,7 +476,11 @@ img.timeline-image {
                                     </div>
                                     <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
 
-                                        <div class="text-center bs-wizard-stepnum">Installation(WIP)</div>
+                                        <div class="text-center bs-wizard-stepnum">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.project_status[4].status_name %>
+                                            <% } %>
+                                        </div>
 
                                         <div class="progress"><div class="progress-bar"></div></div>
 
@@ -467,13 +491,22 @@ img.timeline-image {
                                     </div>
                                     <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
 
-                                        <div class="text-center bs-wizard-stepnum">Handed over</div>
+                                        <div class="text-center bs-wizard-stepnum">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.project_status[5].status_name %>
+                                            <% } %></div>
 
                                         <div class="progress"><div class="progress-bar"></div></div>
 
                                         <a href="#" class="bs-wizard-dot"></a>
 
                                         <div class="bs-wizard-info text-center"></div>
+                                        <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
+
+                                            <div class="text-center bs-wizard-stepnum">
+                                                <% if(typeof(myNest) !== 'undefined'){ %>
+                                                <%= myNest.project_status[6].status_name %>
+                                                <% } %></div>
 
                                     </div>
 
@@ -531,24 +564,46 @@ img.timeline-image {
                             <div class="row row-margin">
                                 <div class="col-md-12">
                                     <div class="col-md-4">
-                                        <a href="http://www.trackode.com/" target="_blank" title="View">
+                                        <a href="<%= myNest.document_details[0].file_link %>" target="_blank" title="View">
                                         <div class="row">
                                             <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.0 (2/8/2016) </span></div>
+                                            <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                                        <% if(typeof(myNest) !== 'undefined'){ %>
+                                                        <%= myNest.document_details[0].file_name %> (<%= myNest.document_details[0].upload_date %>)
+                                                        <% } %> </span></div>
                                         </div>
                                         </a>
                                     </div>
                                     <div class="col-md-4">
-                                        <a href="http://www.trackode.com/" target="_blank" title="View">
+                                        <a href="<%= myNest.document_details[1].file_link %>" target="_blank" title="View">
                                         <div class="row">
                                             <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 align-center"><span class="text-small-proposals">Proposal v1.1 (10/8/2016) </span></div>
+                                            <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                                        <%= myNest.document_details[1].file_name %> (<%= myNest.document_details[1].upload_date %>)
+                                                        <% } %>
+                                            </span></div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="<%= myNest.document_details[2].file_link %>" target="_blank" title="View">
+                                        <div class="row">
+                                            <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                                        <%= myNest.document_details[2].file_name %> (<%= myNest.document_details[2].upload_date %>)
+                                                        <% } %>
+                                            </span></div>
                                         </div>
                                         </a>
                                     </div>
@@ -572,7 +627,11 @@ img.timeline-image {
                     <div class="panel-collapse collapse item-3" role="tabpanel">
                         <div class="panel-body">
                             <div class="row bs-wizard" style="border-bottom:0;">
-                                <label>Request for payment of Rs.15,000 before 10/10/2016</label>
+                                <label>
+                                    <% if(typeof(myNest) !== 'undefined'){ %>
+                                    Pay <%= myNest.payment_details[1].amount %> within <%= myNest.payment_details[1].payment_duedate %>
+                                    <% } %>
+                                </label>
 
 
 
@@ -642,24 +701,31 @@ img.timeline-image {
                             <div class="row row-margin">
                                 <div class="col-md-12"></div>
                                 <div class="col-md-6">
-                                    <a href="http://www.trackode.com/" target="_blank" title="View">
+                                    <a href="<%= myNest.order_details[0].file_link %>" target="_blank" title="View">
                                     <div class="row">
                                         <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 align-center" style="font-weight:bold;"><span class="text-small-proposals">Sales Order (10/8/2016) </span></div>
+                                        <div class="col-md-12 align-center" style="font-weight:bold;"><span class="text-small-proposals">
+                                                        <% if(typeof(myNest) !== 'undefined'){ %>
+                                                        <%= myNest.order_details[0].file_name %> (<%= myNest.order_details[0].updated_date %>)
+                                                        <% } %> </span></div>
                                     </div>
                                         </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="http://www.trackode.com/" target="_blank" title="View">
+                                    <a href="<%= myNest.order_details[1].file_link %>" target="_blank" title="View">
                                     <div class="row">
                                         <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 align-center" style="font-weight:bold;"><span class="text-small-proposals">Contract Copy (10/8/2016) </span></div>
+                                        <div class="col-md-12 align-center" style="font-weight:bold;"><span class="text-small-proposals">
+                                                        <% if(typeof(myNest) !== 'undefined'){ %>
+                                                        <%= myNest.order_details[1].file_name %> (<%= myNest.order_details[1].updated_date %>)
+                                                        <% } %>
+                                        </span></div>
                                     </div>
                                         </a>
                                 </div>
