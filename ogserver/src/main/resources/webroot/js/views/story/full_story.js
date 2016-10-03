@@ -22,8 +22,8 @@ define([
 
             var blog_name = that.model.name;
 
-           //blog_name = blog_name.replace(/-/g, ' ');
-          // blog_name = blog_name.replace(/_/, '-');
+           blog_name = blog_name.replace(/-/g, ' ');
+           blog_name = blog_name.replace(/_/, '-');
 
             this.story.fetch({
                 success: function() {
@@ -57,7 +57,7 @@ define([
             //console.log(_(stories).pluck('date_of_publish'));
 
             var rec_stories = [];
-            $.each(stories.slice(0,4), function(i, data) {
+            $.each(stories.slice(1,5), function(i, data) {
                 rec_stories.push(data);
             });
 
