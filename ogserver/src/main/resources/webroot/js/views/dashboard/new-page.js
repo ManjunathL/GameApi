@@ -38,9 +38,14 @@ define([
                     lateststories = _(lateststories).sortBy(function(story) {
                         return Date.parse(story.date_of_publish);
                     }).reverse();
-                    //commit
+
+                    var rec_stories = [];
+                    $.each(lateststories.slice(1,3), function(i, data) {
+                        rec_stories.push(data);
+                    });
+
                     $("#latest_blog_content").html(_.template(blogPageTemplate)({
-                      'lateststories': lateststories
+                      'lateststories': rec_stories
                     }));
                 },
                 error: function(model, response, options) {

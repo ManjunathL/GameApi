@@ -9164,3 +9164,9 @@ html .ui-button.ui-state-disabled:active {
     }
 }
 /* End Platinum home */
+
+ .story-desc-overflow{
+   text-overflow: ellipsis;
+   max-height: 70px;
+   overflow: hidden;
+}
