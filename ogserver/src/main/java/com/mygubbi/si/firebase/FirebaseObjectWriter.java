@@ -10,32 +10,44 @@ import com.mygubbi.catalog.ProductJson;
  */
 public class FirebaseObjectWriter
 {
+//    private static final String FB_URL = "https://sweltering-fire-6356.firebaseio.com";
+//    private static final String FB_LOGIN = "mygubbi.fbase@gmail.com";
+//    private static final String FB_PASSWORD = "!@#$VGYHasdf435";
+
+//    private static final String FB_URL = "https://mygubbi-cep.firebaseio.com";
+//    private static final String FB_LOGIN = "mygubbi.uat@gmail.com";
+//    private static final String FB_PASSWORD = "uat@mygubbi";
+
+    private static final String FB_URL = "https://dazzling-heat-1615.firebaseio.com";
+    private static final String FB_LOGIN = "sunil@bizosys.com";
+    private static final String FB_PASSWORD = "qwert12";
+
     private Firebase fbRef;
 
     public static void main(String[] args) throws Exception
     {
         ProductJson product = new ProductJson();
-        new FirebaseObjectWriter().connectAndWrite(product);
+        new FirebaseObjectWriter().connectAndWrite();
     }
 
-    public void connectAndWrite(ProductJson product)
+    public void connectAndWrite()
     {
-        System.out.println("Connecting to firebase ...");
+        System.out.println("Connecting to firebase db: " + FB_URL + " with user: " + FB_LOGIN);
 
-        this.fbRef = new Firebase("https://sweltering-fire-6356.firebaseio.com");
-        this.fbRef.authWithPassword("mygubbi.fbase@gmail.com", "!@#$VGYHasdf435", new Firebase.AuthResultHandler()
+        this.fbRef = new Firebase(FB_URL);
+        this.fbRef.authWithPassword(FB_LOGIN, FB_PASSWORD, new Firebase.AuthResultHandler()
         {
             @Override
             public void onAuthenticated(AuthData authData)
             {
                 System.out.println("Firebase authenticated.");
-                updateProduct(product);
+                //updateProduct(product);
             }
 
             @Override
             public void onAuthenticationError(FirebaseError firebaseError)
             {
-                System.out.println("Firebase not authenticated.");
+                System.out.println("Firebase not authenticated." + firebaseError.toString());
             }
         });
         try
@@ -46,6 +58,7 @@ public class FirebaseObjectWriter
         {
             e.printStackTrace();
         }
+        System.exit(0);
     }
 
     private void updateProduct(ProductJson product)

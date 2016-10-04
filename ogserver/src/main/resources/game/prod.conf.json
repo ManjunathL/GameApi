@@ -15,6 +15,10 @@
   "templates_folder" : "c:/Users/Public/game_files",
   "jobcard_template" : "/mnt/game/proposal/templates/jobcard-template.xlsx",
   "salesorder_template" : "/mnt/game/proposal/templates/salesorder-template.xlsx",
-  "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin"
+  "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
+
+  "fbServicesJson": "TO_BE_DEFINED",
+  "fbUrl": "TO_BE_DEFINED"
+
 }
 

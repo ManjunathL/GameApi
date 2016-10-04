@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mygubbi-cep",
+  "private_key_id": "636530ae392043bedbc023eac112d97a9069ca02",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCxznWFYpD5J6MI\n16ajC7v/4mtMaAMRWjcltCjp+7RIwiTSDIj7GflTrlItm2ekpGAw/mk+aV+qm9oB\nySGlqRo7LGuE0pQgo/NT2AUYSXMK0HR59FuCycizmhKJfxYZbHWAZGdZkxjK9GcC\ntW3vEBVTvzaUIs69Xm8dligfxLHdI+9TLY64VtHvueqTkhdpP7Rv1YL2XHg0UAie\nfsTGdcnuDkVDuZiYrdiUPD69FQXs2ZhFJNVl28e1ym5h56kj+iZ1IVZuYwGN4XU5\nJd4jBS1AFI8MY8l5USJp61fdpbO54XkCerlsNJolh+A6PrIp6+YOGVoyOuyuqQe/\nGV8etq11AgMBAAECggEADa9KND3l0odOcPvIA3x/t64BfBv1QHylCe3XyEprEb5/\nfvsf/9N78QjVolT3oSBVlu+9wePyTPs5yDFmuY1OS4ebrtlWNTzpGWbi3X+prwdk\nL46zDFnjbI9LJfH2DXbfhEY1/hroKZat5vN3xpKCUbPBy5zyNHj0LF7GL8u/tLlS\nWVIe9Z6pB4/VAO4lcC0Qd6uS7MZ03kpvobGR+buRuYtWA2nM3WqsSpgSJmtXE/f+\nqpgCZ3nr+JF8uL8f2NDUh7NfRHfFc922370tWgohxOtTCKsTAe57tQ/veth+8NB6\nHy3NRtha8hldmSuxrbdXhJ9dRrwMSmBH3HxdDHjN8QKBgQDn+YU/1couWYHzySU5\nU/tK3n+g0kK20qK6lX/DjZ/7GSUc9+9fz+NGiUbwft3g//pFw0AOZ7TyiNdjEsxJ\nngZx8fTHHmFYsNpEjq70/tst68I2HFqogZNOwN7MyvvAWjzwEfFxXCc5KsyhAjH3\naAMy99OvPU+sovim0R6Rq6GXywKBgQDEOL7UEzC+EZtpdGQEiauCtEBva7G6pOjk\nqiC4yBWU6pRR+jAe1p6iBD2KaWGzec+Od89pBg177SEQEWYNTkq6x2Q85a0byZTB\nI0FCgceLqOw76DbSwaoNIuAOSA7B+Y5137CkmqCs/CMAj+OTgRiMUDANT81A8AzW\n128NJ0OnvwKBgQCzphe9ohHb51GuvL3pMdLQ3pM0tuEXuPRxT0oM5edZjNWjI5fs\nOZEnlTStF3M5xsPJtzYqccI+eh9kCLDQ6mLPZ7RLaIm3J+9BXMa90YlofMaBJWBI\nU2EDgnaJX0Gsa7X5rcuwIM/3g9/JaWvM0G550FfNxMupROUQO69S3PpeFQKBgHtk\nI7xBBRnBALXj1zFzUUM0DoECfBUetsV0pncMe2XVzcdvSOtbkw3XFMwBUMsIAplY\nhjlI8RnJGE1+Y2pinWOvFz2kQKOEs+JwRQ2Jhu4wH73cXP1Tg5gXIkZY0c7xG8DM\nFcys3/Vn6Krl0Ppk6Ab0NgNo922qhqhjeRYQZt8JAoGBALjlY5c5wg3yNuK2L8fF\n6ziBL1ctfan1TdFw+Byain2QNZ1Hp3BACk57P3pa35mO9AK7nkGdMerLpqK5PmFp\nrJDtbETv+vQMIq3cjBiV3Z0+jGXEoKzIHLugP+nNkUwHghfL8pLDNGLytXbTcVaT\n7a/m1+p38VEtQONlsGKM7cHw\n-----END PRIVATE KEY-----\n",
+  "client_email": "mgfbuatadmin@mygubbi-cep.iam.gserviceaccount.com",
+  "client_id": "100416232674961512900",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mgfbuatadmin%40mygubbi-cep.iam.gserviceaccount.com"
+}
