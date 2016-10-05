@@ -23,6 +23,7 @@ define([
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
+            this.getStories();
             $("img").unveil();
             this.ready();
 
@@ -60,13 +61,9 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            debugger
-                        this.getStories();
-
         },
         ready: function () {
             var that = this;
-
             //that.autoPlayYouTubeModal();
 
            /* (function() {
@@ -136,7 +133,7 @@ define([
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
-            _.bindAll(this, 'renderWithUserProfCallback');
+            _.bindAll(this, 'renderWithUserProfCallback','getStories');
         },
         events: {
            // "click #youtubelnk": "autoPlayYouTubeModal"
