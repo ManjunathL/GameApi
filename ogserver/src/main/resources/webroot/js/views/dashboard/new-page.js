@@ -23,9 +23,10 @@ define([
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
+            this.getStories();
             $("img").unveil();
             this.ready();
-            this.getStories();
+
         },
         getStories: function() {
             console.log('Blog data');
