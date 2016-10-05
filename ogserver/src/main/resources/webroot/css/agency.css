@@ -369,41 +369,41 @@ ul, ol{
 
 /* Trend & Style section start */
 .txt-over-trendstyle-image {
-     position: absolute;
-     top: 55%;
-     right: 2%;
-     width: 41%;
-     padding: 0px!important;
-     margin: 0px!important;
-     display:none;
- }
+    position: absolute;
+    top: 55%;
+    right: 2%;
+    width: 41%;
+    padding: 0px!important;
+    margin: 0px!important;
+    display:none;
+}
 
 .txt-over-trendstyle-image div{
-  width: 100%;
-  background: rgba(0,0,0,0.6);
+    width: 100%;
+    background: rgba(0,0,0,0.6);
 }
 .txt-over-trendstyle-image div p{
-  padding:10px;
-  font-weight:300;
-  color:#fff;
-  font-family: 'Lato', sans-serif;
+    padding:10px;
+    font-weight:300;
+    color:#fff;
+    font-family: 'Lato', sans-serif;
 }
 .trend-explore-space{
-     margin-left: 97px !important;
- }
+    margin-left: 97px !important;
+}
 .trend-explore-space > .btn-explore{
     cursor:pointer;
 }
-    .trend-image-overlay {
+.trend-image-overlay {
      position:relative;
      width:440px;
      height:450px;
-    }
-    .trend-image-overlay img {
+}
+.trend-image-overlay img {
      width:100%;
      vertical-align:top;
-    }
-    .trend-image-overlay:before {
+}
+.trend-image-overlay:before {
      content:'\A';
      position:absolute;
      width:100%; height:100%;
@@ -412,57 +412,59 @@ ul, ol{
      opacity:1;
      transition: all 0.5s;
      -webkit-transition: all 0.5s;
-    }
+}
 
-    .trend-image-overlay:hover:before {
-     opacity:0;
-    }
+.trend-image-overlay:hover:before {
+    opacity:0;
+}
 
-    .trend-image-overlay:hover .txt-over-trendstyle-image {
+.trend-image-overlay:hover
+.txt-over-trendstyle-image {
+    display:block;
+}
+
+.txt-over-style-image {
+     position: absolute;
+     top: 55%;
+     right: 2%;
+     width: 41%;
+     padding: 0px!important;
+     margin: 0px!important;
      display:block;
-    }
+ }
 
-    .txt-over-style-image {
-         position: absolute;
-         top: 55%;
-         right: 2%;
-         width: 41%;
-         padding: 0px!important;
-         margin: 0px!important;
-         display:block;
-     }
+.txt-over-style-image div{
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+}
+.txt-over-style-image div p{
+    padding:10px;
+    font-weight:300;
+    color:#fff;
+    font-family: 'Lato', sans-serif;
+}
 
-    .txt-over-style-image div{
-      width: 100%;
-      background: rgba(0,0,0,0.6);
-    }
-    .txt-over-style-image div p{
-      padding:10px;
-      font-weight:300;
-      color:#fff;
-      font-family: 'Lato', sans-serif;
-    }
+.style-image-overlay:after {
+    content:'\A';
+    position:absolute;
+    width:100%;
+    /*height:100%;*/
+    top:0; left:0;
+    background:rgba(0,0,0,0.4);
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
 
-    .style-image-overlay:after {
-       content:'\A';
-       position:absolute;
-       width:100%; height:100%;
-       top:0; left:0;
-       background:rgba(0,0,0,0.4);
-       opacity:0;
-       transition: all 0.5s;
-       -webkit-transition: all 0.5s;
-    }
-
-    .style-image-overlay-opc{
-        opacity:1;
-    }
-    .style-image-overlay:hover:after {
-      opacity:0;
-    }
-    .style-image-overlay:hover:after .txt-over-style-image {
-        display:none;
-    }
+.style-image-overlay-opc{
+    opacity:1;
+}
+.style-image-overlay:hover:after {
+    opacity:0;
+}
+.style-image-overlay:hover:after .txt-over-style-image {
+    display:none;
+}
 
 @media (max-width: 767px) {
      .trend-image-overlay {
@@ -481,6 +483,7 @@ ul, ol{
 }
 
 /* Trend & Style section end */
+
 .apke-liye{
     font-size:35px!important;
 }
@@ -509,13 +512,13 @@ ul, ol{
     color: rgba(241,90,34,1);
  }
  .txt-color-white{
-    color: #ffffff!important;
+    color: #ffffff;
  }
  .txt-color-light-grey{
-     color: #ddd!important;
+     color: #ddd;
   }
  .txt-color-orange{
-    color: rgba(241,90,34,1)!important;
+    color: rgba(241,90,34,1);
  }
 
  .margin0 {
@@ -550,14 +553,15 @@ ul, ol{
     padding:10px 10px!important;
 }
 #nav>li>a {
-    padding: 5px 9px !important;
+    padding: 3px 9px !important;
     border-right: 1px solid #ddd;
     cursor: pointer;
     background-color: #fff;
     font-size: 15px;
+    border-bottom: 3px solid #fff;
 }
 .last-item{
-   border-right:0px solid #ddd!important;
+   border-right: 0px solid #ddd!important;
 }
 
 .menu-mygubbi{
@@ -703,11 +707,14 @@ ul, ol{
 
   /* Service Section */
   .section-heading{
-      font-weight: 300;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
       display: inline-block;
       margin-bottom: 20px;
+      margin-top: 10px;
+      padding-bottom: 10px;
+      font-weight: 300;
+      font-size: 40px;
+      color: #556871 !important;
+      border-bottom: 1px solid #ddd;
   }
 
   .btn-explore{
@@ -757,9 +764,10 @@ ul, ol{
   .thought-txt h1,
   .premium-home-txt h1{
       text-transform: none!important;
-      font-weight: 300!important;
-      font-size: 65px!important;
+      font-weight: 100!important;
+      font-size: 60px!important;
       margin: 10px 0px;
+      font-family: 'Raleway', sans-serif;
   }
 
   .premium-home-txt {
@@ -973,7 +981,6 @@ ul, ol{
   }
 
   .footer-cls{
-      background-color: rgba(102, 102, 102, 0.81);
       padding: 40px 0px;
       color:#ffffff;
   }
@@ -2061,7 +2068,7 @@ button {
 }*/
 
 .header-icon {
-    margin: 0px 5px !important;
+    margin: 5px 5px !important;
     font-size: 24px;
     font-weight: 600 !important;
 }
@@ -3311,12 +3318,6 @@ input[type=checkbox] {
 
 .detail_page_image {
     min-width: 100%;
-}
-
-section h2.section-heading {
-    margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 40px;
 }
 
 section h3.section-subheading {
@@ -7799,7 +7800,7 @@ width:14% !important;
 .kitchen-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
-
+    padding-top: 5px;
 }
 .otherunit-icon u,
 .wardrobe-icon u,
@@ -7809,10 +7810,14 @@ width:14% !important;
 .wardrobe-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
+    padding-top: 5px;
 }
 .otherunit-icon{
     width: 32% !important;
+    padding-top: 5px;
 }
+
+
 /* End Service icon code by Nagmani 7th Sep 2016 */
 .font-weight600{
     font-weight: 600 !important;
@@ -7850,6 +7855,10 @@ width:14% !important;
 .banner-icon-height{
     min-height: 200px;
     line-height: 150%;
+}
+.banner-icon-height p{
+    text-transform: capitalize;
+    color: #556871;
 }
 .process-icon-height{
     min-height: 170px;
@@ -8004,6 +8013,12 @@ a#goto-login{
 .menu-mygubbi #nav li a:focus{
     background: #ffffff;
     color: #ff3200 !important;
+    border-bottom: 3px solid #ff3200;
+}
+
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus {
+    border: 0px solid #fff !important;
 }
 
 .dropdown-submenu {
@@ -8441,13 +8456,14 @@ html .ui-button.ui-state-disabled:active {
 .footer-section-top p {
     font-family: 'Lato', sans-serif;
 }
-.section-heading{
-    color: #566771 !important;
+.footer-section-bottom{
+    background: #556871;
 }
 
 .address_right_section{
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.3);
     width: 25%;
+    padding: 20px 25px;
 }
 
 .location_add {
@@ -8469,7 +8485,7 @@ html .ui-button.ui-state-disabled:active {
     margin: 0px;
 }
 .padding-loc-space {
-    padding: 20px 30px 0px !important;
+    padding: 10px 15px 0px !important;
 }
 .btn-popup{
     border-width: 1px;
@@ -8547,7 +8563,7 @@ html .ui-button.ui-state-disabled:active {
 
 @media (max-width: 992px) {
     .address_right_section{
-        background: rgba(0,0,0,0.6);
+        background: rgba(0,0,0,0.3);
         width: 60%;
     }
     .address_right_section h4{
@@ -8574,7 +8590,7 @@ html .ui-button.ui-state-disabled:active {
         min-height: 200px;
     }
     .address_right_section{
-        background: rgba(0,0,0,0.6);
+        background: rgba(0,0,0,0.3);
         width: 100%;
     }
     .testimonials-carousel .carousel-caption {
@@ -8626,7 +8642,7 @@ html .ui-button.ui-state-disabled:active {
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.3);
     }
     .address_right_section h4{
         padding: 10px 0px;
@@ -8894,7 +8910,7 @@ html .ui-button.ui-state-disabled:active {
 /* Start Platinum home */
 
 .platinum-banner-bg{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475053757/platinum_home/platinum_banner.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475484304/platinum_home/banner-with-texty.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: 630px;

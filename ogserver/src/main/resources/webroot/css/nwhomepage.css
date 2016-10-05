@@ -194,13 +194,13 @@ h6 {
     color: rgba(241,90,34,1);
  }
  .txt-color-white{
-    color: #ffffff!important;
+    color: #ffffff;
  }
  .txt-color-light-grey{
-     color: #ddd!important;
+     color: #ddd;
   }
  .txt-color-orange{
-    color: rgba(241,90,34,1)!important;
+    color: rgba(241,90,34,1);
  }
 
  .margin0 {
@@ -246,14 +246,12 @@ h6 {
 }
 .navbar-center li{
     float:none;
-    text-rendering: optimizelebility;
+    text-rendering: optimizeLegibility;
     display:inline-block;
     margin: 0px auto;
 
 }
-.navbar-center li a{
 
-}
 .social-menu-lnk{
     color: rgba(0,0,0,0.6);
     font-size:16px;
@@ -588,7 +586,6 @@ h6 {
 }
 
 .footer-cls{
-    background-color: rgba(102, 102, 102, 0.81);
     padding: 40px 0px;
     color:#ffffff;
 }
