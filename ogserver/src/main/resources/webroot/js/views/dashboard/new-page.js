@@ -11,7 +11,8 @@ define([
     'bxslider',
     'models/story',
     'text!templates/dashboard/new-page.html',
-    'text!templates/story/home_story.html'
+    'text!templates/story/home_story.html',
+    'libs/unveil/jquery.unveil.mg'
 ], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, Story, dashboardPageTemplate, blogPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
@@ -22,8 +23,7 @@ define([
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
-            this.getStories();
-            //$("img").unveil();
+            $("img").unveil();
             this.ready();
 
         },
@@ -60,9 +60,13 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            debugger
+                        this.getStories();
+
         },
         ready: function () {
             var that = this;
+
             //that.autoPlayYouTubeModal();
 
            /* (function() {
