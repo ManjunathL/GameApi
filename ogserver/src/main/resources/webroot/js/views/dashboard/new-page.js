@@ -24,7 +24,7 @@ define([
             }));
             $.cloudinary.responsive();
             this.getStories();
-            $("img").unveil();
+            //$("img").unveil();
             this.ready();
 
         },
