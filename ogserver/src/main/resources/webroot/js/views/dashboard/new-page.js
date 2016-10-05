@@ -11,8 +11,7 @@ define([
     'bxslider',
     'models/story',
     'text!templates/dashboard/new-page.html',
-    'text!templates/story/home_story.html',
-    'libs/unveil/jquery.unveil.mg'
+    'text!templates/story/home_story.html'
 ], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, Story, dashboardPageTemplate, blogPageTemplate){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
