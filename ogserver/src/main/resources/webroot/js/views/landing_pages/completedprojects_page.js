@@ -31,7 +31,6 @@ define([
             this.ready();
         },
         getStories: function() {
-                    console.log('Blog data');
                     var that = this;
                     that.story.fetch({
                          data: {
@@ -39,8 +38,6 @@ define([
                          },
                         success: function(response) {
                             var lateststories = response.toJSON();
-                            console.log('=========Latest Stories==============');
-                            console.log(lateststories);
                             lateststories = _(lateststories).sortBy(function(story) {
                                 return Date.parse(story.date_of_publish);
                             }).reverse();
@@ -49,8 +46,6 @@ define([
                             $.each(lateststories.slice(1,3), function(i, data) {
                                 rec_stories.push(data);
                             });
-                                console.log('=========rec_stories==============');
-                                console.log(rec_stories);
                             $("#latest_blog_content").html(_.template(blogPageTemplate)({
                               'lateststories': rec_stories
                             }));
