@@ -10,11 +10,14 @@ define([
     'slyutil',
     'mgfirebase',
     'consultutil',
+    'models/story',
+    'text!templates/story/home_story.html',
     'analytics'
-], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Story, blogPageTemplate, Analytics) {
     var CompletedProjectsPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
+        story: new Story(),
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(completedprojectsPageTemplate)({
                 'userProfile': userProfData
@@ -24,8 +27,40 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            this.getStories();
             this.ready();
         },
+        getStories: function() {
+                    console.log('Blog data');
+                    var that = this;
+                    that.story.fetch({
+                         data: {
+                             "tags": 'all'
+                         },
+                        success: function(response) {
+                            var lateststories = response.toJSON();
+                            console.log('=========Latest Stories==============');
+                            console.log(lateststories);
+                            lateststories = _(lateststories).sortBy(function(story) {
+                                return Date.parse(story.date_of_publish);
+                            }).reverse();
+
+                            var rec_stories = [];
+                            $.each(lateststories.slice(1,3), function(i, data) {
+                                rec_stories.push(data);
+                            });
+                                console.log('=========rec_stories==============');
+                                console.log(rec_stories);
+                            $("#latest_blog_content").html(_.template(blogPageTemplate)({
+                              'lateststories': rec_stories
+                            }));
+                        },
+                        error: function(model, response, options) {
+                            console.log("couldn't fetch story data - " + response);
+                        }
+                    });
+                },
+
         ready: function() {
             if ($('#lpalt-frame').length > 0) {
                 var $lpalt_frame = $('#lpalt-frame');
