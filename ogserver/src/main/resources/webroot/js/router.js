@@ -287,7 +287,7 @@ define([
                 });
             });*/
             router.on('route:dashboard', function(actions) {
-              setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+              //setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
                 require(['views/dashboard/new-page'], function(DashboardPage) {
                     VM.create(VM.DASHBOARD, DashboardPage).render();
                 });
