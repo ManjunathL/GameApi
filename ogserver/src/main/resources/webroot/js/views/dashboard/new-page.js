@@ -20,11 +20,12 @@ define([
         story: new Story(),
         renderWithUserProfCallback: function(userProfData) {
         console.log('=========Inside renderWithUserProfCallback==============');
+                    this.getStories();
+
             $(this.el).html(_.template(dashboardPageTemplate)({
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
-            this.getStories();
             $("img").unveil();
 
             this.ready();
