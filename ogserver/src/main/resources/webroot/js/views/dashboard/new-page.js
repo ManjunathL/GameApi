@@ -139,7 +139,7 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             this.getStories();
-            _.bindAll(this, 'renderWithUserProfCallback');
+            _.bindAll(this, 'renderWithUserProfCallback', 'getStories');
 
         },
         events: {
