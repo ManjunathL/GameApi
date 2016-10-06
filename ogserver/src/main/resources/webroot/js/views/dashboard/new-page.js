@@ -19,13 +19,17 @@ define([
         ref: MGF.rootRef,
         story: new Story(),
         renderWithUserProfCallback: function(userProfData) {
+        console.log('=========Inside renderWithUserProfCallback==============');
             $(this.el).html(_.template(dashboardPageTemplate)({
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
-            this.getStories();
+            //this.getStories();
             $("img").unveil();
+
             this.ready();
+                    console.log('=========End renderWithUserProfCallback==============');
+
 
         },
         getStories: function() {
@@ -36,6 +40,7 @@ define([
                      "tags": 'all'
                  },
                 success: function(response) {
+                console.log('=========After Success Latest Stories==============');
                     var lateststories = response.toJSON();
                     console.log('=========Latest Stories==============');
                     console.log(lateststories);
@@ -133,7 +138,11 @@ define([
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
-            _.bindAll(this, 'renderWithUserProfCallback','getStories');
+            console.log('--------Before getStories-------');
+            this.getStories();
+            console.log('--------After getStories-------');
+            _.bindAll(this, 'renderWithUserProfCallback');
+
         },
         events: {
            // "click #youtubelnk": "autoPlayYouTubeModal"
