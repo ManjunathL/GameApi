@@ -24,7 +24,7 @@ define([
               'userProfile': userProfData
             }));
             $.cloudinary.responsive();
-            //this.getStories();
+            this.getStories();
             $("img").unveil();
 
             this.ready();
@@ -138,9 +138,7 @@ define([
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
-            console.log('--------Before getStories-------');
             this.getStories();
-            console.log('--------After getStories-------');
             _.bindAll(this, 'renderWithUserProfCallback');
 
         },
