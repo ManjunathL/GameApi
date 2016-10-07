@@ -2129,7 +2129,7 @@ fieldset[disabled] .btn-xl.active {
     font-size: 18px;
 }
 
-.user_profile img {
+.user_profile img.main_profile_img {
     height: 200px;
     margin: 0px auto;
     border: 8px solid #ffffff;
@@ -2749,11 +2749,15 @@ fieldset[disabled] .btn-xl.active {
     padding-top: 40px;
 }
 
+.padding-top45 {
+    padding-top: 45px;
+}
 
 
 .padding-top80 {
     padding-top: 80px;
 }
+
 
 @media (max-width: 767px) {
     .padding-top80 {

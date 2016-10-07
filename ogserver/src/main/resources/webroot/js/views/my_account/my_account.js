@@ -50,11 +50,11 @@ define([
                 'providerId': providerId
             }));
 
-            $("#mynest").html(_.template(MyNestTemplate)({
+            /*$("#mynest").html(_.template(MyNestTemplate)({
                 'userProfile': userProfData,
                 'myNest':mynestitems,
                 'providerId': providerId
-            }));
+            }));*/
 
 
             document.title = userProfData.displayName + ' | mygubbi';

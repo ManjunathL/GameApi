@@ -1,56 +1,65 @@
 <link rel="stylesheet" href="/css/cep.css">
-<section class="bg-color-white user_page padding10-0">
-    <div class="container-fluid user_profile">
-        <div class="row padding-top15 padding-bottom15 hidden-xs">
-            <ul class="breadcrumb"  style="width: 98%;margin:3px;">
-                <li><a href="/"><i class="fa fa-home"></i></a></li>
-                <li class="active"><a href="javascript:void(0);">My Account</a></li>
-            </ul>
-        </div>
 
-        <div class="row padding-top15 padding-bottom15">
-            <div class="col-md-12">
-                <ul class="nav nav-tabs nav-justified" role="tablist">
-                    <li class="active" role="presentation">
-                        <a role="tab" data-toggle="tab" href="#profile">  Profile </a>
-                    </li>
-                    <li role="presentation">
-                        <a role="tab" data-toggle="tab" href="#mynest">  My Nest </a>
-                    </li>
-                    <li role="presentation">
-                        <a role="tab" data-toggle="tab" href="#center">  Messages (Update Center) </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-12 tab-content">
-            <div role="tabpanel" class="tab-pane active" id="profile">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p>
+<style>
+    .myaccount_list li{
+        padding:15px 50px;
+        text-align: center;
+    }
+    .margin-top50{
+        margin-top:50px!important;
+    }
+    .nav-tabs {
+        border-bottom: 0px solid #ddd !important;
+    }
+    @media screen and (max-width: 991px) {
+        .myaccount_list li{
+            padding:10px 8px;
+        }
+        .menu-tab-list{
+            margin-top:50px!important;
+        }
+    }
 
-                        </p>
+</style>
+<section class="bg-light-gray user_page padding50-0">
+    <div class="container user_profile">
+        <div class="row margin0">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="row bg-white portfolio-box padding-top15 padding-bottom15">
+                    <div class="row">
+                        <img class="main_profile_img" src="http://res.cloudinary.com/demo/image/fetch/w_300,h_300,c_fill,g_face,r_max,f_auto/http://upload.wikimedia.org/wikipedia/commons/0/0c/Scarlett_Johansson_C%C3%A9sars_2014.jpg">
+
                     </div>
+                    <div class="row"><h5 style="color:#f15a23;text-align:center;">Display name</h5></div>
+
+                    <div class="row"><h6 style="color:#7d7d7d;text-align:center;">Display city</h6></div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="mynest">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p>
-
-                        </p>
-                    </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 ">
+                <div class="row bg-white portfolio-box padding-top15 padding-bottom15 menu-tab-list">
+                    <ul class="nav nav-tabs myaccount_list">
+                        <li  class="active">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home.png" class="cld-responsive img-centered">
+                            <div>My Profile</div>
+                        </li>
+                        <li>
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest_def.png" class="cld-responsive img-centered">
+                            <div>My Nest</div>
+                        </li>
+                        <li>
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_message_def.png" class="cld-responsive img-centered">
+                            <div>Message</div>
+                        </li>
+                        <li>
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog_def.png" class="cld-responsive img-centered">
+                            <div>Settings</div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="center">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p>
+                <div class="row margin-top50" id="profile">
 
-                        </p>
-                    </div>
-                </div>
             </div>
-        </div>
-        </div>
+            </div>
+            </div>
     </div>
 </section>
