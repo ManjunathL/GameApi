@@ -9174,3 +9174,10 @@ html .ui-button.ui-state-disabled:active {
     }
 }
 /* End Platinum home */
+/*home page story*/
+.story-desc-overflow{
+text-overflow: ellipsis;
+max-height: 70px;
+overflow: hidden;
+}
+/*end home page story*/

@@ -12,7 +12,8 @@
         <div class="col-lg-6 col-md-6 col-sm-8">
             <h4 class="text-muted text-normal"><%= story.blog_heading %></h4>
 
-            <p><%= story.blog_content.substring(0,155) %></p>
+            <p><div class="story-desc-overflow"><%= story.blog_content %></div></p>
+
             <div>
                 <a href="/stories-all">
                     <button class="btn btn-explore">MORE</button>
@@ -22,6 +23,7 @@
     </div>
 </div>
 <% } %>
+
 <div class="padding-top10 padding-bottom20 hidden-xs hidden-sm">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-4">
@@ -31,7 +33,7 @@
         <div class="col-lg-6 col-md-6 col-sm-8">
             <h4 class="text-muted text-normal"><%= story.blog_heading %></h4>
 
-            <p><%= story.blog_content.substring(0,155) %></p>
+            <p><div class="story-desc-overflow"><%= story.blog_content %></div></p>
             <div>
                 <a href="/stories-all">
                     <button class="btn btn-explore">MORE</button>
