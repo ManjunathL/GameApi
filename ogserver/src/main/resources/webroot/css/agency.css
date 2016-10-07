@@ -2112,17 +2112,7 @@ button {
     right: 10%;
 }
 
-.overflow-hidden {
-    overflow: hidden;
-}
 
-.position-relative {
-    position: relative;
-}
-
-.position-absolute {
-    position: absolute;
-}
 
 .padding8 {
     padding: 8px;
@@ -7068,23 +7058,17 @@ a.tab-ico {
 }
 
 img.thumbnail {
-    /*max-width:20%;*/
     max-height:30%;
     padding: 0 !important;
     -webkit-transition: width 1s, height 1s, -webkit-transform 0.5s;
-    /* For Safari 3.1 to 6.0 */
     transition: width 1s, height 1s, transform 0.5s;
 }
 
  img.thumbnail:hover {
      -webkit-transform:scale(1.2);
-     /* Safari and Chrome */
      -moz-transform:scale(1.2);
-     /* Firefox */
      -ms-transform:scale(1.2);
-     /* IE 9 */
      -o-transform:scale(1.2);
-     /* Opera */
      transform:scale(1.2);
 }
 
@@ -7265,32 +7249,35 @@ img.thumbnail {
     position: absolute;
     width: 32% !important;
 }
-/* Start Service icon code by Nagmani 7th Sep 2016 */
+
 .kitchen-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
     padding-top: 5px;
 }
+
 .otherunit-icon u,
 .wardrobe-icon u,
 .kitchen-icon u{
     line-height: 150%;
 }
+
 .wardrobe-icon{
     width: 32% !important;
     border-right: solid 2px #ccc;
     padding-top: 5px;
 }
+
 .otherunit-icon{
     width: 32% !important;
     padding-top: 5px;
 }
 
 
-/* End Service icon code by Nagmani 7th Sep 2016 */
 .font-weight600{
     font-weight: 600 !important;
 }
+
 .padding50-94{
     padding: 50px 94px;
 }
@@ -7307,6 +7294,7 @@ img.thumbnail {
     line-height: 12px;
     left: 7%;
 }
+
 .testimonials-carousel .carousel-inner p{
     font-size: 10px;
     line-height: 150%;
@@ -7321,22 +7309,25 @@ img.thumbnail {
 .carousel-inner{
     margin: 0px !important;
 }
+
 .banner-icon-height{
     min-height: 200px;
     line-height: 150%;
 }
+
 .banner-icon-height p{
     text-transform: capitalize;
     color: #556871;
 }
+
 .process-icon-height{
     min-height: 170px;
     line-height: 150%;
 }
+
 .process-icon-height p{
     font-family: 'Lato', sans-serif;
 }
-/* Start process text code by Nagmani 7th Sep 2016 */
 
 .text-process{
     text-align: left;
@@ -7347,21 +7338,25 @@ img.thumbnail {
         text-align: center;
     }
 }
-/* End process text code by Nagmani 7th Sep 2016 */
+
 #form-container-content .form-elements input {
     border-radius: 0px !important;
 }
+
 .thumbnail-img{
     border: 39px solid #fff;
 }
+
 .img-thumbnail-shadow{
     box-shadow: 0px 0px 10px 4px #ccc;
 }
+
 .shortlist-consult-sec{
     position: absolute;
     right: 25px;
     top: 45%;
 }
+
 .page-pre-tab,
 .page-next-tab{
     border: 1px solid #ddd;
@@ -7407,6 +7402,7 @@ img.thumbnail {
         margin-bottom:20px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .page-pre-tab h2{
         padding-left: 10px;
@@ -7454,6 +7450,7 @@ img.thumbnail {
     }
 }
 /* By Nagmani on 7th Sep 2016 */
+
 .open-contact-section{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473333146/home/new_design/gubbi-map.jpg");
     background-repeat: no-repeat;
@@ -7471,12 +7468,15 @@ img.thumbnail {
     padding: 0px;
     text-align: center;
 }
+
 /* End By Nagmani on 7th Sep 2016 */
+
 a#goto-login{
     color:#f1591f!important;
 }
 
 /* Menu Design */
+
 .menu-mygubbi #nav li a:hover,
 .menu-mygubbi #nav li a:active,
 .menu-mygubbi #nav li a:focus{
