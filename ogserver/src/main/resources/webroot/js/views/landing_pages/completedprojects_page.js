@@ -19,6 +19,7 @@ define([
         ref: null,
         story: new Story(),
         renderWithUserProfCallback: function(userProfData) {
+        this.getStories();
             $(this.el).html(_.template(completedprojectsPageTemplate)({
                 'userProfile': userProfData
             }));
@@ -71,8 +72,9 @@ define([
         initialize: function() {
             this.ref = MGF.rootRef;
             Analytics.apply(Analytics.TYPE_GENERAL);
+            this.getStories();
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
-            _.bindAll(this, 'renderWithUserProfCallback');
+            _.bindAll(this, 'renderWithUserProfCallback', 'getStories');
         }
     });
     return CompletedProjectsPageVIew;
