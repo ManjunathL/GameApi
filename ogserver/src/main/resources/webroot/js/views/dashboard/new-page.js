@@ -19,7 +19,6 @@ define([
         ref: MGF.rootRef,
         story: new Story(),
         renderWithUserProfCallback: function(userProfData) {
-        console.log('=========Inside renderWithUserProfCallback==============');
                     this.getStories();
 
             $(this.el).html(_.template(dashboardPageTemplate)({
@@ -29,22 +28,17 @@ define([
             $("img").unveil();
 
             this.ready();
-                    console.log('=========End renderWithUserProfCallback==============');
 
 
         },
         getStories: function() {
-            console.log('Blog data');
             var that = this;
             that.story.fetch({
                  data: {
                      "tags": 'all'
                  },
                 success: function(response) {
-                console.log('=========After Success Latest Stories==============');
                     var lateststories = response.toJSON();
-                    console.log('=========Latest Stories==============');
-                    console.log(lateststories);
                     lateststories = _(lateststories).sortBy(function(story) {
                         return Date.parse(story.date_of_publish);
                     }).reverse();
@@ -53,8 +47,6 @@ define([
                     $.each(lateststories.slice(1,3), function(i, data) {
                         rec_stories.push(data);
                     });
-                        console.log('=========rec_stories==============');
-                        console.log(rec_stories);
                     $("#latest_blog_content").html(_.template(blogPageTemplate)({
                       'lateststories': rec_stories
                     }));
