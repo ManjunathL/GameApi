@@ -28,7 +28,8 @@ define([
             this.getStories();
         },
         getStories: function() {
-            this.story.fetch({
+            var that = this;
+            that.story.fetch({
                  data: {
                      "tags": 'all'
                  },

@@ -1,13 +1,3 @@
-<style>
-    .profile-label{
-        text-align:right;
-    }
-    .profile-label label{
-        color:#f15a25;
-        font-weight:bold;
-    }
-
-</style>
 <div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15 ">
     <div class="col-md-6 col-lg-6">
 
@@ -135,10 +125,10 @@
 
 
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-4 col-sm-4 profile-label">
                 <label>Email :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-6 col-sm-6">
                 <p class="view_mode"><%= userProfile ? userProfile.email : ''%></p>
                 <p class="edit_mode form-group">
                     <input
@@ -151,6 +141,13 @@
                             placeholder="Your Email" required />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
+            </div>
+            <div class="col-md-2 col-sm-2 hidden-xs">
+                <span class="glyphicon glyphicon-pencil edit_icon"
+                      data-toggle="tooltip"
+                      data-placement="left"
+                      title="Edit Details">
+                </span>
             </div>
         </div>
 
@@ -233,6 +230,16 @@
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
             </div>
+        </div>
+        <div class="row form-group">
+            <button
+                    class="button border1px float-right edit_mode"
+                    id="save_details"
+                    data-loading-text="<i class='fa fa-spinner fa-spin'></i> Save Details"
+                    type="submit"
+            >
+                Save Details
+            </button>
         </div>
 
     </div>

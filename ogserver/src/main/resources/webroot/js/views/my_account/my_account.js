@@ -50,11 +50,11 @@ define([
                 'providerId': providerId
             }));
 
-            /*$("#mynest").html(_.template(MyNestTemplate)({
+            $("#mynest").html(_.template(MyNestTemplate)({
                 'userProfile': userProfData,
                 'myNest':mynestitems,
                 'providerId': providerId
-            }));*/
+            }));
 
 
             document.title = userProfData.displayName + ' | mygubbi';
@@ -81,18 +81,21 @@ define([
             var formData = {
                 "displayName": $('#user_display_name').val(),
                 "profileImage": $('#user_profile_image').attr('src'),
-                "email": $('#user_email_id').attr('data-value'),
-                "dob": $('#user_dob').val(),
+                "email": $('#user_email_id').val(),
+                //"dob": $('#user_dob').val(),
                 "phone": $('#user_phone').val(),
+                "alt_phone": $('#user_alt_phone').val(),
                 "address": $('#user_address').val(),
                 "occupation": $('#occupation').val(),
                 "hobbies": $('#hobbies').val(),
                 "interest": $('#interest').val(),
-                "website": $('#website').val(),
+                //"website": $('#website').val(),
                 "city": $('#user_city').val(),
                 "state": $('#user_state').val(),
                 "pinCode": $('#user_pin_code').val()
             };
+            console.log(formData);
+
             var that = this;
             MGF.updateProfile(formData).then(function () {
                 that.render()
@@ -229,15 +232,28 @@ define([
             });
         },
         events: {
+            "click .myaccount-lnk": "changeMyaccounttab",
             "click #save_details": "submit",
             "click #save_property_details": "submitPropertyDetails",
             "click #profile-file-input": "changeProfileImg",
             "submit #changeUserPasswordForm": "changeUserPassword",
             "submit #deactivateUserForm": "deactivateUserAccount"
         },
-        changeProfileImg: function () {
-            alert('hiiii');
+        changeMyaccounttab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".myaccount-lnk").removeClass('active');
+            $(".myaccount-lnk-content").css('color','#000');
+            $(".myaccount-lnk-img").css('display','none');
+            $("#"+id).addClass('active');
+            $("#"+id+"-img").css('display','inline-block');
+            $("#"+id+"-content").css('color','#f15a23');
+            $(".myaccount-lnk-img_def").css('display','inline-block');
+            $("#"+id+"-img_def").css('display','none');
 
+            console.log(id);
+            return this;
         }
 
     });

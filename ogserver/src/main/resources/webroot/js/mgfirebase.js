@@ -26,7 +26,6 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         TYPE_SHORTLIST_PRODUCT_REMOVE: "shortlist.product.remove",
         handleSignUp: function(email, password) {
            // Sign in with email and pass.
-          // [START createwithemail]
           this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
             console.log("Successfully created user!!!");
             console.log(userData);
@@ -34,8 +33,6 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
             // An error happened.
             console.log('Error'+error);
           });
-          // [END createwithemail]
-
         },
         getUserProfile: function(authData, someFunc) {
 

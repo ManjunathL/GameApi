@@ -8,3 +8,60 @@
 .tab-heading-active {
     border-bottom: 2px solid rgb(99,161,235);
 }
+
+.nav-tabs.nav-justified.myaccount_list>li>a {
+    border:none;
+    border-radius: none;
+}
+.nav-tabs.nav-justified.myaccount_list>li>a:hover,
+.nav-tabs.nav-justified.myaccount_list>li>a:focus,
+.nav-tabs.nav-justified.myaccount_list>li>a:active {
+    border:none;
+    border-radius: none;
+    background-color:#fff;
+}
+.myaccount_list li{
+    padding:0px 0px;
+    text-align: center;
+}
+.margin-top50{
+    margin-top:50px!important;
+}
+.nav-tabs {
+    border-bottom: 0px solid #ddd !important;
+}
+.myaccount-lnk-img{
+    display:none;
+}
+.myaccount-lnk-img_def{
+    display:inline-block;
+}
+#profile-lnk-img{
+    display:inline-block;
+}
+#profile-lnk-img_def{
+    display:none;
+}
+.profile-label{
+    text-align:right;
+}
+.profile-label label{
+    color:#f15a25;
+    font-weight:bold;
+}
+ul.myaccount_list li{
+  width: auto;
+  float: left;
+}
+
+@media screen and (max-width: 991px) {
+    .profile-label{
+        text-align:left;
+    }
+    .myaccount_list li{
+        padding:10px 8px;
+    }
+    .menu-tab-list{
+        margin-top:50px!important;
+    }
+}
