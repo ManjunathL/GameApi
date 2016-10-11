@@ -1,5 +1,122 @@
 <%= console.log("----My nest details------") %>
 <%= console.log(myNest) %>
+<div class="col-md-12" style="background-color:#f9f9f9">
+    <div class="col-md-6">
+        <div class="row col-md-12 col-sm-12">
+            <div class="col-md-6 col-sm-6 profile-label padding10">
+                <label>Property Name :</label>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <p class="view_mode padding10" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.property_name : '' %></p>
+                <p class="edit_mode form-group">
+                    <input
+                            type="text"
+                            id="display_property_name"
+                            class="form-control"
+                            maxlength="50"
+                            name="displayName"
+                            value="<%= myNest ? myNest.project_details.property_name : '' %>"
+                            placeholder="Your Name" required />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </p>
+            </div>
+
+        </div>
+        <div class="row col-md-12 col-sm-12">
+            <div class="col-md-6 col-sm-6 profile-label">
+                <label>Property Type :</label>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.property_type : '' %></p>
+                <p class="edit_mode form-group property_display_type">
+                    <input
+                            type="text"
+                            id="display_property_type"
+                            class="form-control"
+                            maxlength="50"
+                            name="displayType"
+                            value="<%= myNest ? myNest.project_details.property_name : '' %>"
+                            placeholder="Your Name" required />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </p>
+            </div>
+
+        </div>
+        <div class="row col-md-12 col-sm-12">
+            <div class="col-md-6 col-sm-6 profile-label">
+                <label>Tower / Block no :</label>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.block_number : '' %></p>
+                <p class="edit_mode form-group">
+                    <input
+                            type="text"
+                            id="display_property_block"
+                            class="form-control"
+                            maxlength="50"
+                            name="displayBlock"
+                            value="<%= myNest ? myNest.project_details.block_number : '' %>"
+                            placeholder="Your Name" required />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </p>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="col-md-6">
+        <div class="row col-md-12 col-sm-12">
+            <div class="col-md-6 col-sm-6 profile-label padding10">
+                <label>Builders Name :</label>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <p class="view_mode padding10" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.builder_name : '' %></p>
+                <p class="edit_mode form-group">
+                    <input
+                            type="text"
+                            id="display_property_builder_name"
+                            class="form-control"
+                            maxlength="50"
+                            name="buiderName"
+                            value="<%= myNest ? myNest.project_details.builder_name : '' %>"
+                            placeholder="Your Name" required />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </p>
+            </div>
+
+        </div>
+        <div class="row col-md-12 col-sm-12">
+            <div class="col-md-6 col-sm-6 profile-label">
+                <label>Flat No :</label>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.flat_number : '' %></p>
+                <p class="edit_mode form-group">
+                    <input
+                            type="text"
+                            id="display_property_flat_number"
+                            class="form-control"
+                            maxlength="50"
+                            name="flatNumber"
+                            value="<%= myNest ? myNest.project_details.flat_number : '' %>"
+                            placeholder="Your Name" required />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-1">
+        <span class="glyphicon glyphicon-pencil edit_icon" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit Details" style="display: none;">
+        </span>
+    </div>
+</div>
 <!-- Project Status Start -->
 <section>
     <div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15">

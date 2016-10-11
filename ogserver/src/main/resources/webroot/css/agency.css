@@ -2162,6 +2162,11 @@ fieldset[disabled] .btn-xl.active {
     margin: 0px;
 }
 
+.property_display_type{
+text-align:left;
+font-size:13px;
+}
+
 .user_profile .form-control {
     display: initial;
     width: inherit;
