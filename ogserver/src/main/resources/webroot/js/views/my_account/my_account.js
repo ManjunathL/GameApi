@@ -9,15 +9,17 @@ define([
     'bootstrapvalidator',
     '/js/mgfirebase.js',
     '/js/analytics.js',
+    '/js/models/myAccount.js',
     'text!/templates/my_account/my_account.html',
     'text!/templates/my_account/my_nest.html',
     'text!/templates/my_account/my_profile.html',
     '/js/views/view_manager.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, VM) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, VM) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         refAuth: MGF.refAuth,
+        myaccount: null,
         /*renderWithUserProfCallback: function (userProfData, provider) {
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
@@ -37,6 +39,30 @@ define([
             document.title = userProfData.displayName + ' | mygubbi';
         },*/
         renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
+        var that = this;
+
+            if (!(that.myaccount.get('userProfData'))) {
+                that.myaccount.set({
+                    'userProfData': userProfData
+                }, {
+                    silent: true
+                });
+            }
+            if (!(that.myaccount.get('mynest'))) {
+                that.myaccount.set({
+                    'mynest': mynestitems
+                }, {
+                    silent: true
+                });
+            }
+
+            if (!(that.myaccount.get('providerId'))) {
+                that.myaccount.set({
+                    'providerId': providerId
+                }, {
+                    silent: true
+                });
+            }
 
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
@@ -50,11 +76,7 @@ define([
                 'providerId': providerId
             }));
 
-            $("#mynest").html(_.template(MyNestTemplate)({
-                'userProfile': userProfData,
-                'myNest':mynestitems,
-                'providerId': providerId
-            }));
+
 
 
             document.title = userProfData.displayName + ' | mygubbi';
@@ -65,6 +87,7 @@ define([
             MGF.mynest(authData,this.renderWithUserProjectCallback);
         },
         initialize: function () {
+            this.myaccount = new MyAccount();
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
@@ -232,7 +255,7 @@ define([
             });
         },
         events: {
-            "click .myaccount-lnk": "changeMyaccounttab",
+            "click .myaccount-lnk a": "changeMyaccounttab",
             "click #save_details": "submit",
             "click #save_property_details": "submitPropertyDetails",
             "click #profile-file-input": "changeProfileImg",
@@ -251,9 +274,17 @@ define([
             $("#"+id+"-content").css('color','#f15a23');
             $(".myaccount-lnk-img_def").css('display','inline-block');
             $("#"+id+"-img_def").css('display','none');
+            //return this;
 
-            console.log(id);
-            return this;
+
+            if(id == "mynest-lnk"){
+                var that = this;
+                $("#mynest").html(_.template(MyNestTemplate)({
+                    'userProfile': that.myaccount.get("userProfData"),
+                    'myNest':that.myaccount.get("mynest"),
+                    'providerId': that.myaccount.get("providerId")
+                }));
+            }
         }
 
     });
