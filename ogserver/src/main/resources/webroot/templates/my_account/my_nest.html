@@ -1,6 +1,6 @@
 <%= console.log("----My nest details------") %>
 <%= console.log(myNest) %>
-<!-- Project Status Start -->
+<!-- Property Details Start -->
 <section>
     <div class="col-md-12 col-sm-12 bg-property portfolio-box padding-top15 padding-bottom15">
     <div class="col-md-6">
@@ -120,6 +120,8 @@
     </div>
 </div>
 </section>
+<!-- Property Details End -->
+
 <!-- Project Status Start -->
 <section>
     <div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15 margin-top40">
@@ -219,7 +221,7 @@
 <section>
     <div class="col-md-12 col-sm-12 padding0 margin-top40">
         <div class="row margin0 padding0">
-            <div class="col-md-3 col-sm-3 mynest-tab-listbox">
+            <div class="col-md-3 col-sm-3 mynest-tab-listbox margin-left-0">
                 <a href="#proposal" role="tab" data-toggle="tab">
                     <div class="mynest-inside-box">
                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_praposal.png" alt="proposals">
@@ -243,7 +245,7 @@
                     <p>Payment Details</p>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-3 mynest-tab-listbox">
+            <div class="col-md-3 col-sm-3 mynest-tab-listbox margin-right0">
                 <a href="#doc" role="tab" data-toggle="tab">
                     <div class="mynest-inside-box">
                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_doc.png" alt="document">
@@ -259,7 +261,78 @@
 <section>
     <div class="col-md-12 col-sm-12 bg-white portfolio-box padding0 margin-top40">
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane row margin-top50 active" id="proposal">111111111111</div>
+            <div role="tabpanel" class="tab-pane row active" id="proposal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <i class="icon ion-information-circled color-red"></i><h3 class="text-transform-none txt-color-orange"> Approval required for Proposal v1.1</h3></div>
+                    <div class="col-md-12">
+                        <h4 class="text-transform-none">Initial Proposal(10/8/2016)</h4>
+                        <hr />
+                        <div class="col-md-8">
+                            <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <a href="http://www.trackode.com/" target="_blank" title="View">
+                                    <div class="row">
+                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.latest_proposal_details.proposal_name %>
+                                            <% } %>
+                                        </span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12"><hr/></div>
+
+                <div class="row row-margin col-md-12">
+                    <div class="row col-md-8">
+                        <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
+                        [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
+                    <div class="row col-md-4"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
+                </div>
+
+                <div class="row row-magin align-center col-md-12 font-style-or">
+                    <div class="quality-check-line"></div>
+                    <div class="quality-check-head-box">
+                        <h1 class="quality-check-head text-center"> OR </h1>
+                    </div>
+                </div>
+                <div class="row row-margin col-md-12 padding-bottom15">
+                    <div class="col-md-8">
+                        <div style="display:inline;font-weight:bold;">
+                            <h4 class="text-transform-none">Schedule the date and time with Sales Team</h4>
+                        </div>
+                        <div class="row">
+                            <input
+                                    type="time"
+                                    id="user_time"
+                                    class="form-control"
+                                    name="date"
+                                    placeholder="hh/mm AM/PM"
+
+                            />
+                            <input
+                                    type="date"
+                                    id="user_schedule"
+                                    class="form-control"
+                                    name="date"
+                                    placeholder="dd/mm/yy"
+                                    dateformat="d M y"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-4"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Request For Call Back</button></div>
+                </div>
+            </div>
             <div role="tabpanel" class="tab-pane row margin-top50" id="order">2222222222</div>
             <div role="tabpanel" class="tab-pane row margin-top50" id="card">33333333</div>
             <div role="tabpanel" class="tab-pane row margin-top50" id="doc">4444444444</div>
