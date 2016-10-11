@@ -1,3 +1,148 @@
-<h1>saaaaaaaaaa</h1>
 <%= console.log("----My nest details------") %>
 <%= console.log(myNest) %>
+<!-- Project Status Start -->
+<section>
+    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15">
+        <div class="row bs-wizard margin0 padding0" style="border-bottom:0;">
+                <div class="col-xs-2 bs-wizard-step complete">
+
+                    <div class="text-center bs-wizard-stepnum">
+                        <% if(typeof(myNest) !== 'undefined'){ %>
+                        <%= myNest.project_status[0].status_name %>
+                        <% } %></div>
+
+                    <div class="progress bs-margin65"><div class="progress-bar"></div></div>
+
+                    <a href="#" class="bs-wizard-dot"></a>
+
+                    <div class="bs-wizard-info text-center"></div>
+
+                </div>
+                <div class="col-xs-2 bs-wizard-step complete"><!-- complete -->
+
+                    <div class="text-center bs-wizard-stepnum">
+                        <% if(typeof(myNest) !== 'undefined'){ %>
+                        <%= myNest.project_status[1].status_name %>
+                        <% } %></div>
+
+                    <div class="progress bs-margin43"><div class="progress-bar"></div></div>
+
+                    <a href="#" class="bs-wizard-dot"></a>
+
+                    <div class="bs-wizard-info text-center"></div>
+
+                </div>
+
+                <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
+
+                    <div class="text-center bs-wizard-stepnum">
+                        <% if(typeof(myNest) !== 'undefined'){ %>
+                        <%= myNest.project_status[3].status_name %>
+                        <% } %>
+                    </div>
+
+                    <div class="progress bs-margin65"><div class="progress-bar"></div></div>
+
+                    <a href="#" class="bs-wizard-dot"></a>
+
+                    <div class="bs-wizard-info text-center"></div>
+
+                </div>
+                <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
+
+                    <div class="text-center bs-wizard-stepnum">
+                        <% if(typeof(myNest) !== 'undefined'){ %>
+                        <%= myNest.project_status[4].status_name %>
+                        <% } %></div>
+
+                    <div class="progress bs-margin43"><div class="progress-bar"></div></div>
+
+                    <a href="#" class="bs-wizard-dot"></a>
+
+                    <div class="bs-wizard-info text-center"></div>
+
+                </div>
+                <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
+
+                    <div class="text-center bs-wizard-stepnum">
+                        <% if(typeof(myNest) !== 'undefined'){ %>
+                        <%= myNest.project_status[5].status_name %>
+                        <% } %>
+                    </div>
+
+                    <div class="progress bs-margin43"><div class="progress-bar"></div></div>
+
+                    <a href="#" class="bs-wizard-dot"></a>
+
+                    <div class="bs-wizard-info text-center"></div>
+
+                </div>
+                <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
+
+                    <div class="text-center bs-wizard-stepnum">
+                        <% if(typeof(myNest) !== 'undefined'){ %>
+                        <%= myNest.project_status[6].status_name %>
+                        <% } %></div>
+
+                    <div class="progress bs-margin65"><div class="progress-bar"></div></div>
+
+                    <a href="#" class="bs-wizard-dot"></a>
+
+                    <div class="bs-wizard-info text-center"></div>
+
+                </div>
+            </div>
+    </div>
+</section>
+<!-- Project Status End -->
+<!-- My Nest Menu Start -->
+<section>
+    <div class="col-md-12 col-sm-12 padding0 margin-top40">
+        <div class="row margin0 padding0">
+            <div class="col-md-3 col-sm-3 mynest-tab-listbox">
+                <a href="#proposal" role="tab" data-toggle="tab">
+                    <div class="mynest-inside-box">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_praposal.png" alt="proposals">
+                    </div>
+                    <p>My Proposals</p>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-3 mynest-tab-listbox">
+                <a href="#order" role="tab" data-toggle="tab">
+                <div class="mynest-inside-box">
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_order.png" alt="order">
+                </div>
+                <p>Order Details</p>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-3 mynest-tab-listbox">
+                <a href="#card" role="tab" data-toggle="tab">
+                    <div class="mynest-inside-box">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_card.png" alt="cards">
+                    </div>
+                    <p>Payment Details</p>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-3 mynest-tab-listbox">
+                <a href="#doc" role="tab" data-toggle="tab">
+                    <div class="mynest-inside-box">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_doc.png" alt="document">
+                    </div>
+                    <p>Document Details</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- My Nest Menu End -->
+
+<section>
+    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding0 margin-top40">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane row margin-top50 active" id="proposal">111111111111</div>
+            <div role="tabpanel" class="tab-pane row margin-top50" id="order">2222222222</div>
+            <div role="tabpanel" class="tab-pane row margin-top50" id="card">33333333</div>
+            <div role="tabpanel" class="tab-pane row margin-top50" id="doc">4444444444</div>
+        </div>
+    </div>
+</section>
