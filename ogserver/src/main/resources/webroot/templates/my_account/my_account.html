@@ -8,9 +8,9 @@
                         <img id="user_profile_image" class="main_profile_img" src="<%= imgBase + '/w_300,h_300,c_thumb,g_face,r_max/' + userProfile ? userProfile.profileImage : 'user.png' %>">
 
                     </div>
-                    <div class="row"><h5 style="color:#f15a23;text-align:center;"><%= userProfile ? userProfile.displayName : 'User' %></h5></div>
+                    <div class="row"><h5 style="color:#f15a23;text-align:center;font-weight:bold;"><%= userProfile ? userProfile.displayName : 'User' %></h5></div>
 
-                    <div class="row"><h6 style="color:#7d7d7d;text-align:center;"><%= userProfile ? userProfile.city : ''%></h6></div>
+                    <div class="row"><h6 style="color:#7d7d7d;text-align:center;font-weight:bold;"><%= userProfile ? userProfile.city : ''%></h6></div>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 ">

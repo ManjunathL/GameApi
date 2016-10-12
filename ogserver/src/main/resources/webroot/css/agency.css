@@ -2630,6 +2630,10 @@ font-size:13px;
     position: absolute;
 }
 
+.padding3 {
+    padding: 3px;
+}
+
 .padding8 {
     padding: 8px;
 }
@@ -2971,6 +2975,10 @@ font-size:13px;
 
 .border-bottom-orange {
     border-bottom: 1px solid #f1591f;
+}
+
+.border-bottom-grey {
+    border-bottom: 1px solid grey;
 }
 
 .border-bottom-white {
