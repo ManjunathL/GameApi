@@ -87,6 +87,14 @@ ul.myaccount_list li{
 .user_profile p{
     font-size: 14px!important;
 }
+.userName{
+    color:#f15a23;
+    text-align:center;
+}
+.userCity{
+    color:#7d7d7d;
+    text-align:center;
+}
 .bs-margin65{margin:65px 0px!important;}
 .bs-margin43{margin:43px 0px!important;}
 .bs-wizard {margin-top: 40px;}
@@ -121,5 +129,16 @@ ul.myaccount_list li{
     }
     .menu-tab-list{
         margin-top:50px!important;
+    }
+    .mynest-tab-listbox {
+        height: 100px;
+        width: 40%;
+        background-color: #ffffff;
+        margin: 10px;
+        padding: 0px;
+        display: inline-block;
+    }
+    .margin-left-0 {
+        margin-left: 10px !important;
     }
 }

@@ -1,0 +1,1317 @@
+/*
+    Template: 		Mygubbi
+    Description: 	Main Style sheet
+    Version: 		beta
+    Author: 		Smruti Mohanty, Mehaboob Basha
+    Optimized By:   Nagmani Bhushan
+*/
+
+/* Global Attributes */
+
+body{
+    overflow-x: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.75;
+    font-family: 'Raleway', sans-serif;
+}
+
+p.large {
+    font-size: 16px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    text-decoration: none;
+}
+
+a {
+    color: #000;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: #ff3200;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+ul, ol{
+    font-family: 'Raleway', sans-serif;
+}
+
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=email] {
+    color: #333333;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=password] {
+    font-size: 18px;
+    color: #333333;
+}
+
+input[type=checkbox] {
+    zoom: 1.5;
+    top: 4px;
+    position: relative;
+}
+
+/* Text attributes */
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+.lowercase{
+    text-transform: lowercase;
+}
+
+.text-capitalize{
+    text-transform: Capitalize;
+}
+
+.text-uppercase{
+    text-transform: Uppercase;
+}
+
+.text-normal{
+    text-transform: inherit;
+}
+
+.nowrap{
+    white-space: nowrap;
+}
+
+/* Image attributes */
+
+.img-wrapper {
+    overflow: hidden;
+}
+
+.img-wrapper img {
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    vertical-align: middle;
+}
+
+.img-wrapper img:hover {
+    transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -o-transform: scale(1.05);
+}
+
+.img-centered{
+    margin: 0 auto;
+}
+
+/* margin top */
+
+.mt0{
+    margin-top:0;
+}
+
+.mt10{
+    margin-top:10px;
+}
+
+.mt20{
+    margin-top:20px;
+}
+
+.mt30{
+    margin-top:30px;
+}
+
+.mt40{
+    margin-top:40px;
+}
+
+.mt50{
+    margin-top:50px;
+}
+
+.mt60{
+    margin-top:60px;
+}
+
+.mt70{
+    margin-top:70px;
+}
+
+.mt80{
+    margin-top:80px;
+}
+
+.mt90{
+    margin-top:90px;
+}
+
+.mt100{
+    margin-top:100px;
+}
+
+/* margin bottom */
+
+.mb0{
+    margin-bottom:0;
+}
+
+.mb10{
+    margin-bottom:10px;
+}
+
+.mb20{
+    margin-bottom:20px;
+}
+
+.mb30{
+    margin-bottom:30px;
+}
+
+.mb40{
+    margin-bottom:40px;
+}
+
+.mb50{
+    margin-bottom:50px;
+}
+
+.mb60{
+    margin-bottom:60px;
+}
+
+.mb70{
+    margin-bottom:70px;
+}
+
+.mb80{
+    margin-bottom:80px;
+}
+
+.mb90{
+    margin-bottom:90px;
+}
+
+.mb100{
+    margin-bottom:100px;
+}
+
+/* Margin Right */
+
+.mr10{
+    margin-right:10px;
+}
+
+.mr20{
+    margin-right:20px;
+}
+
+.mr30{
+    margin-right:30px;
+}
+
+/* Margin Left */
+
+.ml10{
+    margin-left:10px;
+}
+
+.ml20{
+    margin-left:20px;
+}
+
+.ml30{
+    margin-left:30px;
+}
+
+/* Margin Top Negative */
+
+.mt-10{
+    margin-top:-10px;
+}
+
+.mt-20{
+    margin-top:-20px;
+}
+
+.mt-30{
+    margin-top:-30px;
+}
+
+.mt-40{
+    margin-top:-40px;
+}
+
+.mt-50{
+    margin-top:-50px;
+}
+
+.mt-60{
+    margin-top:-60px;
+}
+
+.mt-70{
+    margin-top:-70px;
+}
+
+.mt-80{
+    margin-top:-80px;
+}
+
+.mt-90{
+    margin-top:-90px;
+}
+
+.mt-100{
+    margin-top:-100px;
+}
+
+/* Padding Top */
+
+.pt0{
+    padding-top:0;
+}
+
+.pt10{
+    padding-top:10px;
+}
+
+.pt20{
+    padding-top:20px;
+}
+
+.pt30{
+    padding-top:30px;
+}
+
+.pt40{
+    padding-top:40px;
+}
+
+.pt80{
+    padding-top:80px;
+}
+
+.pt90{
+    padding-top:90px;
+}
+
+.pt100{
+    padding-top:100px;
+}
+
+/* Padding Bottom */
+
+.pb0{
+    padding-bottom:0;
+}
+
+.pb10{
+    padding-bottom:10px;
+}
+
+.pb20{
+    padding-bottom:20px;
+}
+
+.pb30{
+    padding-bottom:30px;
+}
+
+.pb40{
+    padding-bottom:40px;
+}
+
+.pb80{
+    padding-bottom:80px;
+}
+
+.pb90{
+    padding-bottom:90px;
+}
+
+.pb100{
+    padding-bottom:100px;
+}
+
+/* Margin Old Attributes */
+
+.margin0 {
+    margin: 0px ;
+}
+
+.margin-top0 {
+    margin-top: 0px;
+}
+
+.margin-top10{
+    margin-top: 10px;
+}
+
+.margin-top20 {
+     margin-top: 20px;
+}
+
+.margin-top70{
+    margin-top:70px;
+}
+
+.margin-bottom0 {
+    margin-bottom: 0px;
+}
+
+.margin-bottom10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom70 {
+    margin-bottom: 70px;
+}
+
+.mbt10{
+    margin:10px 0px;
+}
+
+.mbt20{
+    margin:20px 0px;
+}
+
+/*  Padding Old Section */
+
+.padding0 {
+    padding: 0px;
+}
+
+.padding5 {
+    padding: 5px;
+}
+
+.padding50-15 {
+    padding: 50px 15px;
+}
+
+.padding20-15 {
+    padding: 20px 15px;
+}
+
+.padding-left10{
+    padding-left:10px;
+}
+
+.padding-left15{
+    padding-left:15px;
+}
+
+.padding-right35{
+    padding-right:35px;
+}
+
+.padding-top10{
+    padding-top:10px;
+}
+
+.padding-bottom0{
+    padding-bottom:0px;
+}
+
+.padding-bottom10{
+    padding-bottom:10px;
+}
+
+.padding-bottom15{
+    padding-bottom:15px;
+}
+
+.padding-bottom50{
+    padding-bottom:50px;
+}
+
+/* Background Attributes */
+
+.bg-none {
+    background: none !important;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-color-white {
+    background-color: #ffffff;
+}
+
+.bg-gray {
+    background-color: #CCCCCC;
+}
+
+.bg-light-gray {
+    background-color: #f2f4f4;
+}
+
+.bg-darkest-gray {
+    background-color: #222222;
+}
+
+.bg-blue {
+    background-color: #9FB5BF;
+}
+
+.bg-orange-gray {
+    background-color: #ece9da;
+}
+
+.bg-dark-gray {
+    background-color: #808080;
+}
+
+.bg-dark-darkgreen {
+    background-color: #2F4446;
+}
+
+.portfolio-bg-gray {
+    background-color: #fcfcfc;
+    -webkit-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+}
+
+.orange-background{
+    color: rgba(241,90,34,1);
+}
+
+.bg-color-blue1 {
+    background-color: rgba(15, 81, 114, 1);
+}
+
+.bg-color-blue2 {
+    background-color: rgba(21, 103, 151, 1);
+}
+
+.bg-color-blue3 {
+    background-color: rgba(47, 125, 163, 1);
+}
+
+.bg-color-blue4 {
+    background-color: rgba(68, 134, 168, 1);
+}
+
+.bg-color-blue5 {
+    background-color: rgba(71, 164, 201, 1);
+}
+
+.bg-color-blue6 {
+    background-color: rgba(90, 178, 220, 1);
+}
+
+.bg-color-red {
+    background-color: rgba(242, 91, 34, 1);
+}
+
+.bg-color-gray {
+    background-color: rgba(225, 226, 226, 1);
+}
+
+/* Text Color Attributes */
+
+.text-muted {
+    color: #777;
+}
+
+.text-primary {
+    color: #f1591f;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.text-mg-gray{
+    color: #556871;
+}
+
+.txt-color-white{
+    color: #ffffff;
+}
+
+.txt-color-light-grey{
+    color: #ddd;
+}
+
+.txt-color-orange{
+    color: #f1591f;
+}
+
+/* Font Weight Attributes */
+
+.font-weight100 {
+     font-weight: 100;
+}
+
+.font-weight200 {
+     font-weight: 200;
+}
+
+.font-weight300 {
+     font-weight: 300;
+}
+
+.font-weight400 {
+     font-weight: 400;
+}
+
+/* Main Image Section */
+
+.width100{
+    width: 100%!important;
+}
+
+.width90{
+    width: 90%!important;
+}
+
+.width85{
+    width: 85%!important;
+}
+
+.width80{
+    width: 80%!important;
+}
+
+.width60{
+    width: 60%!important;
+}
+
+.width40{
+    width: 40%!important;
+}
+
+.width0{
+    width: 0%!important;
+}
+
+/* Position Attributes */
+
+.absolute{
+    position: absolute;
+    z-index:1;
+}
+
+.absolute-float-left {
+    position: absolute;
+    float: left;
+}
+
+.absolute-float-right {
+    position: absolute;
+    float: right;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+/* Back To Top */
+.back-to-top {
+    font-size: 20px;
+    position: fixed;
+    bottom: 2em;
+    /*margin: auto;*/
+    right: 10px;
+    text-decoration: none;
+    color: #555 !important;
+    background-color: rgba(225, 225, 225, 0.8) !important;
+    height: 54px;
+    line-height: 54px !important;
+    width: 54px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 1px 1px 5px -1px rgba(0, 0, 0, 0.63);
+}
+
+.back-to-top span {
+    line-height: 45px !important;
+}
+
+.back-to-top:hover {
+    background-color: rgba(200, 200, 200, 0.5) !important;
+    color: #333 !important;
+    text-decoration: none;
+}
+
+/* Start Media Landing Page */
+
+.media-banner img{
+    width: 100%;
+}
+
+.m-story-img{
+    background: #fDfDfd;
+    border: 1px solid #ddd;
+}
+
+.m-thumb-box{
+    height: 110px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+.m-thumb-box .img-thumbnail{
+    border: 0px solid #ddd;
+    pointer: cursor;
+}
+
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+
+#myCarousel .carousel-control.left{
+    background: transparent;
+}
+
+#myCarousel .carousel-control.right{
+    background: transparent;
+}
+
+.show-img {
+    position: relative;
+    float:left;
+    margin: 20px 0px;
+}
+
+.show-img:hover img{
+    opacity:0.8;
+}
+
+.show-img:hover a {
+    display: block;
+}
+
+.show-img a {
+    position:absolute;
+    display:none;
+}
+
+.show-img a.update {
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+/* End Media landing Page */
+
+/* Start Quality Page */
+
+.quality-banner{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1473850585/quality/quality-banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 530px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+}
+
+.quality-banner-cnt{
+    background: rgba(241, 90, 34, 0.9);
+    padding: 20px 10px;
+    margin: 100px 0px;
+    color: #ffffff;
+}
+
+.quality-cnt-head{
+    font-size: 52px;
+    line-height: 130%;
+}
+.quality-cnt-des{
+    padding: 10px 100px;
+    font-size:18px;
+    line-height: 130%;
+}
+.quality-materials-section{
+    margin: 55px auto 0px;
+    position: relative;
+}
+.quality-check-line{
+    margin-top: 22px;
+    border-bottom: 1px solid #ddd;
+}
+.quality-check-head-box{
+    margin:0px auto;
+    display: table;
+    position: relative;
+    background: #ffffff;
+    color: rgba(241, 90, 34, 1);
+}
+.quality-check-head {
+    background: #fff none repeat scroll 0 0;
+    font-weight: 300;
+    margin-top: -22px;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.quality-material-about p{
+    font-family: 'Lato', sans-serif;
+}
+.quality-materials-img-box{
+    margin: 30px 0px 50px;
+}
+.qm-head{
+    text-align: center;
+    color: rgba(241, 90, 34, 1);
+    text-transform: capitalize;
+}
+.qm-more{
+    color: rgba(241, 90, 34, 0.9);
+}
+.quality-de-about{
+    margin: 10px 0px 40px;
+}
+.design-box {
+    height: 458px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 80px;
+}
+.design-box h4 {
+    color: rgba(241, 90, 34, 1);
+}
+.design-box p{
+    margin-bottom: 20px;
+}
+.quality-policy-section{
+    margin: 55px auto 0px;
+    position: relative;
+}
+.policy-list li{
+    padding-bottom: 10px;
+}
+/* End Quality Page */
+
+/* Start Experience center page */
+
+.exp-atmg-box{
+    min-height: 200px;
+    text-align: center;
+}
+.exp-center-store-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1474523111/exp_center/exp-store.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 460px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.exp-center-store-cnt{
+    background: rgba(241, 90, 34, 0.8);
+    height: 460px;
+    padding: 25px;
+}
+.exp-center-store-head{
+    text-transform: capitalize;
+    margin: 40px 0px 40px;
+    text-align: left;
+}
+.offer-box h2{
+    font-size: 24px;
+    color: #566771;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.order-box-img{
+    width: 200px;
+}
+.exp-offer-form-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1474537168/exp_center/exp-contact.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 460px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 160px;
+    text-align: center;
+    color: #3d4b54;
+}
+.exp-offer-address-bg{
+    background: #3d4b54;
+    height: 460px;
+}
+.exp-offer-form-bg .form-control{
+    background: transparent;
+    border-color: #3d4b54;
+    border-radius: 4px;
+    box-shadow: none;
+}
+.exp-center-address {
+    padding: 25px 20px 50px;
+}
+.exp-center-heading{
+    font-weight:300;
+    color: #fff;
+}
+.exp-center-address p,
+.exp-center-address a{
+    color: #ffffff;
+}
+.add-ioc{
+    width: 40px;
+}
+.exp_center .carousel-caption{
+    width: 25%;
+    top: 40px;
+    left: 0px;
+    position: absolute;
+    background: rgba(241, 90, 34, 0.9);
+    color: #ffffff;
+    max-height: 400px;
+    font-size: 19px;
+    text-align: left;
+    padding: 15px 25px 15px 30px;
+    text-shadow: none;
+    font-weight: 300;
+}
+.exp-center-head{
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+.exp-slider .carousel-indicators{
+    bottom: 10px;
+}
+
+/* End Experience center page */
+
+/* Start Platinum home */
+
+.platinum-banner-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475484304/platinum_home/banner-with-texty.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 630px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+    color: #3d4b54;
+    position: relative;
+}
+.platinum-banner-band{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0px;
+    color: #ffffff;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+}
+.platinum-head{
+    color: #4d616b;
+    margin: 50px 0px 20px;
+    font-size: 40px;
+    font-weight: 300;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+.platinum-contact-heading{
+    color: #4d616b;
+    margin: 50px 0px 20px;
+    font-size: 40px;
+    font-weight: 300;
+    padding-bottom: 10px;
+    display: inline-block;
+    text-transform: capitalize;
+}
+.process-count{
+    color: #ffffff;
+    background: #f24b03;
+    width: 20px;
+    height: 20px;
+    margin: 10px auto;
+    border-radius: 50%;
+    line-height: 20px;
+}
+.platinum-banner-band-head{
+    font-size: 52px;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-family: 'Raleway', sans-serif;
+}
+.platinum-banner-band-des{
+    font-size: 32px;
+    font-weight: 100;
+    text-transform: capitalize;
+    font-family: 'Raleway', sans-serif;
+}
+.platinum-service-img-des,
+.platinum-service-img-head,
+.platinum-process-img-head{
+    color: #4d616b;
+    font-family: 'lato', sans-serif;
+}
+.platinum-service-img-des{
+    font-size: 14px;
+    margin: 10px 0px 10px;
+}
+.platinum-services-img{
+    max-width: 110px;
+    margin: 20px auto;
+}
+.platinum-process-section{
+    border-top: 1px solid #dddddd;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+.platinum-process-img{
+    max-width: 265px;
+    margin: 10px auto;
+    min-height: 140px;
+}
+
+.platinum-project-section{
+    background: #f0f0f0;
+}
+
+#platinumCarousel01,
+#platinumCarousel02{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#platinumCarousel01 .carousel-indicators,
+#platinumCarousel02 .carousel-indicators{
+    bottom: 0px !important;
+    left: 30%;
+}
+#platinumCarousel01 .carousel-indicators .active,
+#platinumCarousel02 .carousel-indicators .active{
+    background-color: #f1591f;
+}
+#platinumCarousel01 .carousel-indicators li,
+#platinumCarousel02 .carousel-indicators li{
+    border: 1px solid #f1591f;
+}
+.platinum-project-section{
+    padding-bottom: 50px;
+}
+.platinum-testimonial-box{
+    padding: 30px 10px;
+    border: 1px solid #4d616b;
+    margin: 10px 10px 30px;
+    display: inline-block;
+}
+.test-date {
+    background: #f1591f;
+    color: #fff;
+    text-align: center;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    line-height: 110px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.test-date-new {
+    background: #f1591f;
+    color: #fff;
+    text-align: center;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    line-height: 25px;
+    padding-top: 25px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.test-about {
+    min-height: 110px;
+    padding-top: 10px;
+}
+.design-finalization{
+    padding-top:30px;
+}
+.execution{
+    padding-top: 45px;
+}
+.platinum-testimonial-profile {
+    width: 150px;
+    margin: 60px auto 15px;
+}
+.platinum-contact-section{
+    padding: 0px 0px 50px;
+}
+.platinum-footer-form{
+    margin: 20px 0px 20px;
+}
+.btn-testimonial{
+    color: #ffffff;
+    border-color: #f1591f;
+    background: #f1591f !important;
+    font-size: 18px;
+    font-weight: 400;
+    text-shadow: none;
+    border-radius:0px;
+}
+.btn-testimonial:active,
+.btn-testimonial:focus,
+.btn-testimonial:hover{
+    color: #ffffff;
+    border-color: #f1591f;
+    background: #f1591f !important;
+}
+
+/* End Platinum home */
+
+/*********************************
+ ********* Media Query ***********
+**********************************/
+
+
+/* Large devices (Very large desktops, 1900px and up) */
+@media (min-width: 1900px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+
+    /* Start Quality Page */
+    .quality-cnt-des {
+        padding: 10px 10px;
+    }
+    /* End Quality Page */
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+    /* Start Quality Page */
+    .quality-cnt-head{
+        font-size: 20px;
+        line-height: 130%;
+    }
+    .quality-banner {
+        height: 460px;
+    }
+    .quality-cnt-des {
+        padding: 10px 10px;
+    }
+    .mob-text-center{
+        text-align: center;
+    }
+    /* End Quality Page */
+
+    /* Start Experience center page */
+    .exp-slider .carousel-indicators{
+        top: 120px;
+    }
+    .exp_center {
+        max-height: 700px;
+    }
+    .exp_center .carousel-caption{
+        width:100%;
+        position: relative;
+        margin-top: 10px;
+        color: #444;
+        background: #fff;
+        top: 0px;
+        max-height:700px;
+    }
+    .exp-offer-form-bg{
+        padding: 20px 25px;
+    }
+    .exp-center-store-bg{
+        height: 100%;
+    }
+    .exp-center-store-head{
+        margin: 10px 0px;
+    }
+    .exp-center-store-cnt{
+        padding: 15px;
+    }
+    /* End Experience center page */
+
+    /* Start Platinum Page */
+    .platinum-banner-bg{
+            background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475145725/platinum_home/mobile_02.jpg");
+            background-repeat: no-repeat;
+            background-position: center 100%;
+            height: 300px;
+            width: 100%;
+            -webkit-background-size: 100%;
+            -moz-background-size: 100%;
+            -o-background-size: 100%;
+            background-size: 100%;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            padding: 0px;
+            text-align: center;
+            color: #3d4b54;
+        }
+    .platinum-banner-band-head {
+        font-size: 30px;
+    }
+    .platinum-contact-heading{
+        font-size: 28px;
+        line-height: 120%;
+    }
+    .platinum-services-img {
+        max-width: 85px;
+        margin: 20px auto;
+    }
+    .platinum-process-img-head,
+    .platinum-service-img-head{
+        font-size: 18px;
+    }
+    .platinum-service-img-des{
+        font-size: 12px;
+    }
+    .test-date {
+        background: #f1591f;
+        color: #fff;
+        text-align: center;
+        width: 85px;
+        height: 85px;
+        margin-bottom: 15px;
+        line-height: 75px;
+        border-radius: 50%;
+        font-size: 14px;
+    }
+    .test-date-new {
+        background: #f1591f;
+        color: #fff;
+        text-align: center;
+        width: 85px;
+        height: 85px;
+        margin-bottom: 15px;
+        line-height: 25px;
+        padding-top: 20px;
+        border-radius: 50%;
+        font-size: 14px;
+    }
+    .test-about{
+        font-size: 10px;
+    }
+    .design-finalization{
+        padding-top: 10px;
+    }
+    .execution{
+        padding-top: 10px;
+    }
+    .platinum-testimonial-profile {
+        width: 120px;
+        margin: 10px auto 15px;
+    }
+    #platinumCarousel01 .carousel-indicators,
+    #platinumCarousel02 .carousel-indicators {
+        bottom: -7px !important;
+        left: 40%;
+    }
+    /* End Platinum Page */
+}
