@@ -19,7 +19,6 @@
     <!-- Bootstrap Core CSS -->
 
     <link rel="stylesheet" href="/js/libs/bootstrap-custom/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/js/libs/bootstrap-custom/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/js/libs/jquery-ui/themes/base/jquery-ui.min.css">
 
     <!-- Font and Style CSS -->
@@ -36,9 +35,7 @@
 
     <!-- Custom style css -->
 
-    <link rel="stylesheet" href="/css/agency.css">
     <link rel="stylesheet" href="/css/festive.css">
-    <link rel="stylesheet" href="/css/horizontal.css">
 
 
     <!-- Custom Fonts -->
@@ -71,6 +68,7 @@ fbq('track', "PageView");</script>
                    src="https://www.facebook.com/tr?id=440911379430393&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -106,7 +104,7 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 <body id="festive_lp">
 
 <header>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-festive">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -123,22 +121,28 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 <section class="festive_banner_bg">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-8 col-lg-8"></div>
-            <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="festive-form text-leftfestive.css">
-                    <h3 class="text-left"> Register Now </h3>
-                    <form class="" method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx">
+            <div class="col-sm-6 col-md-8 col-lg-8">
+                <h1 class="text-left festive-banner-head"> Dress your home up this festive season. <br/> Liven it up. Brighten it up. </h1>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4 pn">
+                <div class="festive-form text-left">
+                    <img  class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1475834716/festive-lp/lamp.png" alt="lamp">
+                    <h3 class="text-left"> Get free Design Consultation </h3>
+                    <form class="festive-form-wrapper" method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx">
                         <div class="form-group">
-                            <input type='text' id='FirstName' class="form-control" placeholder="Name *" name='FirstName' maxlength='100' value='' autocomplete='off' required='required' />
+                            <input type='text' id='FirstName' class="form-control" placeholder="Name :" name='FirstName' title='Name' maxlength='100' value='' autocomplete='off' required='required' />
                         </div>
+
                         <div class="form-group">
-                            <input type='text' id='EmailAddress' class="form-control" placeholder="Email *" name='EmailAddress' maxlength='100' value='' autocomplete='off' required='required' />
+                            <input type='text' id='EmailAddress' class="form-control" placeholder="Email :" name='EmailAddress' title='Email' maxlength='100' value='' autocomplete='off' required='required' />
                         </div>
+
                         <div class="form-group">
-                            <input type='text' id='Phone' class="form-control" placeholder="Phone Number *" name='Phone' maxlength='20' value='' autocomplete='off'  />
+                            <input type='text' id='Phone' class="form-control" placeholder="Phone :" name='Phone' title='Phone' maxlength='20' value='' autocomplete='off'  />
                         </div>
-                        <div class="form-group text-left">
-                            <button id="form-submit-button" class="btn btn-default btn-festive" type="submit"> Submit </button>
+
+                        <div class="form-group">
+                            <button id="form-submit-button" class="btn btn-block btn-festive" type="submit"> Contact me with Best Offer </button>
                         </div>
                         <input type="hidden" name="MXHOrgCode" value="9814" />
                         <input type="hidden" name="MXHLandingPageId" value="b72d97b5-6a95-11e6-8f87-22000aa8e760" />
@@ -146,13 +150,13 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                         <input type="hidden" name="MXHFormDataTransfer" value="0" />
                         <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
                         <input type="hidden" name="MXHAsc" value="5" />
-                        <input type="hidden" name="MXHPageTitle" value="Pune festive sale" />
+                        <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
                         <input type="hidden" name="MXHOutputMessagePosition" value="0" />
                         <input type="hidden" name="MXHIsExternallyUsed" value="1" />
                     </form>
-                    <script type="text/javascript"> var MXLandingPageId = 'b72d97b5-6a95-11e6-8f87-22000aa8e760';
-</script>
                 </div>
+                <script type="text/javascript"> var MXLandingPageId = 'b72d97b5-6a95-11e6-8f87-22000aa8e760';
+                </script>
             </div>
         </div>
     </div>
@@ -163,56 +167,60 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 <section class="section-fun-facts text-center">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 margin-bottom20 text-center wow fadeInUp animated animated">
-                <h1 class="fact-head"> Festive Offers - Absolutely Free On Every Order </h1>
-                <div class="separator">
-                    <span> <i class="fa fa-circle"></i> </span>
-                </div>
-                <div class="spacer-single"></div>
+            <div class="col-md-10 col-md-offset-1 margin-bottom20 text-center wow fadeInUp animated animated">
+                <h1 class="fact-head"> Exciting Offers On Every Order You Place ! </h1>
             </div>
 
             <div class="clearfix"></div>
 
-            <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 0sec" data-wow-delay="0" style="visibility: visible; animation-delay: 0s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472797771/festive-lp/07_03_03.png" class="img-responsive cld-responsive img-centered" alt="wardrobe"><br>
-                    <span class="fact-des"> Wardrobe </span>
-                </div>
-            </div>
+            <div class="col-md-8 col-md-offset-2 margin-bottom20 text-center">
 
-            <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 25sec" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472797771/festive-lp/05_03.png" class="img-responsive cld-responsive img-centered" alt="monitor"><br>
-                    <span class="fact-des"> Full hd led tv </span>
-                </div>
-            </div>
+                <div class="row">
 
-            <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 50sec" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472797771/festive-lp/04_03.png" class="img-responsive cld-responsive img-centered" alt="washing-machine"><br>
-                    <span class="fact-des"> Front load washing machine </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 0sec" data-wow-delay="0" style="visibility: visible; animation-delay: 0s; animation-name: fadeIn;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1475838174/festive-lp/1.png" class="img-responsive cld-responsive img-centered" alt="wardrobe"><br>
+                            <span class="fact-des"> Wardrobe <br/> Unit </span>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 75sec" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472797770/festive-lp/03_03.png" class="img-responsive cld-responsive img-centered" alt="sofa"><br>
-                    <span class="fact-des"> 5 seater sofa </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 25sec" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838174/festive-lp/3.png" class="img-responsive cld-responsive img-centered" alt="washing-machine"><br>
+                            <span class="fact-des"> Full - HD <br/> Led TV </span>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 100sec" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472797770/festive-lp/02_03.png" class="img-responsive cld-responsive img-centered" alt="table"><br>
-                    <span class="fact-des"> 6 seater dinning table </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 50sec" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838174/festive-lp/2.png" class="img-responsive cld-responsive img-centered" alt="monitor"><br>
+                            <span class="fact-des"> Washing <br/> Machine </span>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 125sec" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 1.25s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472797771/festive-lp/01_03.png" class="img-responsive cld-responsive img-centered" alt="ac"><br>
-                    <span class="fact-des"> AC And More </span>
+                    <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 75sec" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/4.png" class="img-responsive cld-responsive img-centered" alt="sofa"><br>
+                            <span class="fact-des"> Dinning <br/> Table </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 100sec" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/5.png" class="img-responsive cld-responsive img-centered" alt="table"><br>
+                            <span class="fact-des"> Sofa <br/> Unit  </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4 col-md-2 wow fadeIn animated animated 125sec" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 1.25s; animation-name: fadeIn;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/6.png" class="img-responsive cld-responsive img-centered" alt="ac"><br>
+                            <span class="fact-des"> AC And More </span>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
 
         </div>
@@ -222,250 +230,82 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 
 <!-- Start why us section -->
 <section class="section-why-us text-center">
-    <div class="why-us-fluid">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                <h1 class="festive-why-us-head"> Why Us </h1>
-                <div class="separator"><span><i class="fa fa-circle"></i></span></div>
-                <div class="spacer-single"></div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-1"></div>
-            <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1470034701/home/new_design/01_05.png" alt="completed project" class="img-responsive cld-responsive img-centered"><br>
-                    <span> 100+ Completed Projects </span>
+    <div class="container-fluid">
+        <div class="why-us-fluid">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                    <h1 class="festive-why-us-head"> Know Us A Little More! </h1>
                 </div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1470034701/home/new_design/02_05.png" alt="cities" class="img-responsive cld-responsive img-centered"><br>
-                    <span> 4 Cities </span>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1470034701/home/new_design/03_05.png" alt="express delivery" class="img-responsive cld-responsive img-centered"><br>
-                    <span> 45 Days Express Delivery </span>
-                </div>
-            </div>
+                <div class="clearfix"></div>
 
-            <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1470034701/home/new_design/04_05.png" alt="amc" class="img-responsive cld-responsive img-centered"><br>
-                    <span> 3 Years AMC </span>
+                <div class="col-md-10 col-md-offset-1 margin-bottom20 text-center">
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
+                            <div class="de_count">
+                                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/11.png" alt="completed project" class="img-responsive cld-responsive img-centered"><br>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
+                            <div class="de_count">
+                                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/12.png" alt="cities" class="img-responsive cld-responsive img-centered"><br>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                            <div class="de_count">
+                                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/13.png" alt="express delivery" class="img-responsive cld-responsive img-centered"><br>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
+                            <div class="de_count">
+                                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/14.png" alt="amc" class="img-responsive cld-responsive img-centered"><br>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 wow fadeIn animated" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
+                            <div class="de_count">
+                                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838176/festive-lp/15.png" alt="warranty" class="img-responsive cld-responsive img-centered"><br>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 wow fadeIn animated" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1470034701/home/new_design/05_05.png" alt="warranty" class="img-responsive cld-responsive img-centered"><br>
-                    <span> 5 Years Warranty </span>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
         </div>
     </div>
 </section>
 <!-- End why us section -->
 
 <!-- Start Gallery Section -->
-<!--<section id="section-portfolio" class="section-portfolio" aria-label="section-portfolio">
+<div class="festive-gallery-section">
     <div class="container">
-
-        <div class="spacer-single"></div>
-
         <div class="row">
-            <div class="col-md-12 text-center">
-                <ul id="filters" class="wow fadeInUp" data-wow-delay="0s">
-                    <li><a href="#" data-filter="*" class="selected">All Projects</a></li>
-                    <li><a href="#" data-filter=".residential">KITCHEN</a></li>
-                    <li><a href="#" data-filter=".hospitaly">WARDROBE</a></li>
-                    <li><a href="#" data-filter=".office">TV UNIT</a></li>
-                    <li><a href="#" data-filter=".commercial">SHOE RACK</a></li>
-                    <li><a href="#" data-filter=".CrockeryUnit">CROCKERY UNIT</a></li>
-                </ul>
-
+            <div id="owl-gallery" class="owl-carousel owl-theme">
+                <div class="item">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475841165/festive-lp/SL1.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
+                </div>
+                <div class="item">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475841165/festive-lp/SL2.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
+                </div>
+                <div class="item">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475841165/festive-lp/SL3.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
+                </div>
+                <div class="item">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475841165/festive-lp/SL4.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
+                </div>
+                <div class="item">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475841165/festive-lp/SL5.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
+                </div>
+                <div class="item">
+                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475841165/festive-lp/SL6.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
+                </div>
             </div>
         </div>
-
-    </div>
-
-    <div id="gallery" class="gallery full-gallery de-gallery pf_full_width wow fadeInUp" data-wow-delay=".3s">
-
-        <div class="item residential">
-            <div class="picframe">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213128/festive-lp/fes09.jpg" alt="picframe" />
-            </div>
-        </div>
-
-        <div class="item hospitaly">
-            <div class="picframe">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213127/festive-lp/fes07.jpg" alt="picframe" />
-            </div>
-        </div>
-
-        <div class="item residential">
-            <div class="picframe">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213714/festive-lp/fes11.jpg" alt="picframe" />
-            </div>
-        </div>
-
-        <div class="item commercial">
-            <div class="picframe">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213103/festive-lp/fes01.jpg" alt="picframe" />
-            </div>
-        </div>
-
-        <div class="item office">
-            <div class="picframe">
-
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213122/festive-lp/fes06.jpg" alt="picframe" />
-            </div>
-        </div>
-
-
-        <div class="item office">
-            <div class="picframe">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213112/festive-lp/fes04.jpg" alt="picframe" />
-            </div>
-        </div>
-
-
-        <div class="item commercial">
-            <div class="picframe">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213116/festive-lp/fes02.jpg" alt="picframe" />
-            </div>
-        </div>
-
-
-
-        <div class="item CrockeryUnit">
-            <div class="picframe">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213126/festive-lp/fes10.jpg" alt="picframe" />
-            </div>
-        </div>
-
-    </div>
-
-    <div id="loader-area">
-        <div class="project-load"></div>
-    </div>
-</section>-->
-<div id="owl-gallery" class="owl-carousel owl-theme">
-    <div class="item">
-        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472817574/festive-lp/img-01.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
-    </div>
-    <div class="item">
-        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472817574/festive-lp/img-02.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
-    </div>
-    <div class="item">
-        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472817574/festive-lp/img-03.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
-    </div>
-    <div class="item">
-        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472817575/festive-lp/img-04.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
-    </div>
-    <div class="item">
-        <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1472817574/festive-lp/img-05.jpg" alt="festive-img" class="img-responsive cld-responsive img-centered">
     </div>
 </div>
-<!--<div class="hidden-xs hidden-sm">
-    &lt;!&ndash; Carousel &ndash;&gt;
-    <div id="exp-center-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-        &lt;!&ndash; Indicators &ndash;&gt;
-        <ol class="carousel-indicators bottom_10">
-            <li data-target="#exp-center-carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#exp-center-carousel" data-slide-to="1"></li>
-            <li data-target="#exp-center-carousel" data-slide-to="2"></li>
-            <li data-target="#exp-center-carousel" data-slide-to="3"></li>
-            <li data-target="#exp-center-carousel" data-slide-to="4"></li>
-        </ol>
-
-        &lt;!&ndash; Wrapper for slides &ndash;&gt;
-        <div class="carousel-inner exp_center margin-top0">
-            <div class="item active">
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213126/festive-lp/fes10.jpg" class="car_img_left width293"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col60 padding0-10">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213128/festive-lp/fes09.jpg" class="img-responsive width100"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213116/festive-lp/fes02.jpg" class="car_img_right width293"
-                         alt="Experience Center Image">
-                </div>
-            </div>
-            <div class="item">
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213128/festive-lp/fes09.jpg" class="car_img_left width293"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col60 padding0-10">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213116/festive-lp/fes02.jpg" class="img-responsive width100"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213122/festive-lp/fes06.jpg" class="car_img_right width293"
-                         alt="Experience Center Image">
-                </div>
-            </div>
-            <div class="item">
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213116/festive-lp/fes02.jpg" class="car_img_left width293"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col60 padding0-10">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213122/festive-lp/fes06.jpg" class="img-responsive width100"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213103/festive-lp/fes01.jpg" class="car_img_right width293"
-                         alt="Experience Center Image">
-                </div>
-            </div>
-            <div class="item">
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213122/festive-lp/fes06.jpg" class="car_img_left width293"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col60 padding0-10">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213103/festive-lp/fes01.jpg" class="img-responsive width100"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213126/festive-lp/fes10.jpg" class="car_img_right width293"
-                         alt="Experience Center Image">
-                </div>
-            </div>
-            <div class="item">
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213128/festive-lp/fes09.jpg" class="car_img_left width293"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col60 padding0-10">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213128/festive-lp/fes09.jpg" class="img-responsive width100"
-                         alt="Experience Center Image">
-                </div>
-                <div class="car_col20 padding0">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472213128/festive-lp/fes09.jpg" class="car_img_right width293"
-                         alt="Experience Center Image">
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash; Controls &ndash;&gt;
-        <a class="left carousel-control carousel-overlay" href="#exp-center-carousel" role="button"
-           data-slide="prev">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-        </a>
-        <a class="right carousel-control carousel-overlay" href="#exp-center-carousel" role="button"
-           data-slide="next">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-    </div>
-    &lt;!&ndash; Carousel &ndash;&gt;
-</div>-->
+<!-- End Gallery Section -->
 
 <!-- End Gallery Section -->
 
@@ -474,69 +314,65 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 <!-- Start Gallery Section -->
 
 <!-- section begin -->
-<section class="section-fun-facts text-center">
+<section class="section-fun-facts festive-category-section text-center">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center wow fadeInUp animated animated" style="visibility: visible; animation-name: fadeInUp; opacity: 0;">
-                <h1 class="fact-head"> Our Categories </h1>
-                <div class="separator"><span><i class="fa fa-circle"></i></span></div>
-                <div class="spacer-single"></div>
+            <div class="col-md-8 col-md-offset-2 text-center wow fadeInUp animated animated" style="visibility: visible; animation-name: fadeInUp; opacity: 0;">
+                <h1 class="fact-head"> Your Home Needs - We Have It All! </h1>
             </div>
 
             <div class="clearfix"></div>
 
-            <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801933/festive-lp/wardrob.png" alt="wardrobe" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Wardrobe </span>
-                </div>
-            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="row">
 
-            <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801933/festive-lp/kitchen.png" alt="Kitchen" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Kitchen </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/20.png" alt="wardrobe" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801933/festive-lp/storage.png" alt="storage" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Storage Solutions </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838176/festive-lp/21.png" alt="Kitchen" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801933/festive-lp/TV.png" alt="Entertainment Unit" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Entertainment Unit </span>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801934/festive-lp/crockry.png" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Crockery Unit </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838176/festive-lp/22.png" alt="storage" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801933/festive-lp/Study.png" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Study Table </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838174/festive-lp/23.png" alt="Entertainment Unit" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838174/festive-lp/24.png" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801934/festive-lp/bookrack.png" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Book Rack </span>
-                </div>
-            </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 wow fadeIn animated animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838174/festive-lp/25.png" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn; opacity: 0;">
-                <div class="de_count">
-                    <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1472801933/festive-lp/shoerack.png" class="img-responsive cld-responsive img-centered"><br>
-                    <span class="fact-des"> Shoe Rack </span>
+                    <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838174/festive-lp/26.png" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn; opacity: 0;">
+                        <div class="de_count">
+                            <img data-src="https://res.cloudinary.com/mygubbi/image/upload/v1475838175/festive-lp/27.png" class="img-responsive cld-responsive img-centered"><br>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -545,98 +381,40 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 <!-- End Gallery Section -->
 
 <div class="clearfix"></div>
-
 <!-- Start Gallery Section -->
 <section class="section-testimonial text-center">
-    <h1 class="fact-head"> Customer Speaks </h1>
+    <h1 class="festive-why-us-head"> Customer Speaks </h1>
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center wow fadeInUp">
-                <div class="separator"><span><i class="fa fa-circle"></i></span></div>
-                <div class="spacer-single"></div>
-            </div>
-        </div>
 
         <div id="owl-testimonial" class="owl-carousel owl-theme">
-            <div class="item">
-                <blockquote>
-                    <p>To say we are satisfied with the new kitchen you designed, understates how we feel. We will, without hesitation recommend your company to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p>
-                </blockquote>
-                <h5> Arjita Singh - Purva Highlands, Bangalore </h5>
+            <div class="item festive-testimonial-box">
+                <img class="img-centered img-comma" src="https://res.cloudinary.com/mygubbi/image/upload/v1475842328/festive-lp/Quatation.png" alt="qt">
+                <p>Building my dream house with mygubbi was extremely
+                    smooth, their team provided  me lots of new ideas.
+                    They are professionals  and  master in their craft</p>
+
+                <img class="img-centered img-profile" src="https://res.cloudinary.com/mygubbi/image/upload/v1475842328/festive-lp/jheel.jpg" alt="user">
+                <h5 class="text-centered"> Jheel Parekh - Bangalore </h5>
             </div>
             <div class="item">
-                <blockquote>
-                    <p>Building my dream house with mygubbi was extremely smooth, with a lot of professional ideas given to me by them. All I can say about them is they are - professional, they know their business. Leave your home to them and they will build you your dream house. </p>
-                </blockquote>
-                <h5> Jheel Parekh - Aspira, Bangalore </h5>
-            </div>
-            <div class="item">
-                <blockquote>
-                    <p>Varun and his team from myubbi has provided excellent interior design service; this is all inclusive from architectural design, wood work based on room layout, color selection, comprehensive and complete from idea to implementation. I am proud to recommend myubbi for all interior design needs.</p>
-                </blockquote>
-                <h5> Mrs Dilip Seshadri - Shobha Habitech, Bangalore </h5>
-            </div>
-            <div class="item">
-                <blockquote>
-                    <p>To say we are satisfied with the new kitchen you designed, understates how we feel. We will, without hesitation recommend your company to anyone who asks us about our new kitchen. Thanks a lot for a beautiful kitchen.</p>
-                </blockquote>
-                <h5> Arjita Singh - Purva Highlands, Bangalore </h5>
+                <img class="img-centered img-comma" src="https://res.cloudinary.com/mygubbi/image/upload/v1475842328/festive-lp/Quatation.png" alt="qt">
+                <p>To say we are satisfied with the new kitchen you designed,
+                    understates how we feel. We’ll strongly reccomend
+                    mygubbi to anyone who asks us about our new kitchen ”
+                </p>
+
+                <img class="img-centered img-profile" src="https://res.cloudinary.com/mygubbi/image/upload/v1475842328/festive-lp/arjitha.jpg" alt="user">
+                <h5 class="text-centered "> Arjita Singh - Bangalore </h5>
             </div>
         </div>
 
     </div>
 </section>
-
-<!-- End Gallery Section -->
-
-<!-- Start Contact Section -->
-<!--<section class="festive-contact-section section-why-us text-center">
-    <h1 class="fact-head"> REGISTER NOW </h1>
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center wow fadeInUp">
-                <div class="separator"><span><i class="fa fa-circle"></i></span></div>
-                <div class="spacer-single"></div>
-            </div>
-        </div>
-
-        <div class="clearfix"> </div>
-
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 text-center wow fadeInUp">
-                <div class="festive-footer-form">
-                    <form class="text-left" method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx">
-                        <div class="form-group">
-                            <input type='text' id='FirstName' class="form-control" placeholder="Name *" name='FirstName' maxlength='100' value='' autocomplete='off' required='required' />
-                        </div>
-                        <div class="form-group">
-                            <input type='text' id='EmailAddress' class="form-control" placeholder="Email *" name='EmailAddress' maxlength='100' value='' autocomplete='off' required='required' />
-                        </div>
-                        <div class="form-group">
-                            <input type='text' id='Phone' class="form-control" placeholder="Phone Number *" name='Phone' maxlength='20' value='' autocomplete='off'  />
-                        </div>
-                        <div class="form-group text-left">
-                            <button id="form-submit-button" class="btn btn-default btn-festive" type="submit">Submit</button><br />
-                        </div>
-                        <input type="hidden" name="MXHOrgCode" value="9814" />
-                        <input type="hidden" name="MXHLandingPageId" value="7a60ebb7-6b91-11e6-8f87-22000aa8e760" />
-                        <input type="hidden" name="MXHFormBehaviour" value="1" />
-                        <input type="hidden" name="MXHFormDataTransfer" value="0" />
-                        <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
-                        <input type="hidden" name="MXHAsc" value="5" />
-                        <input type="hidden" name="MXHPageTitle" value="Pune festive sale" />
-                        <input type="hidden" name="MXHOutputMessagePosition" value="0" />
-                        <input type="hidden" name="MXHIsExternallyUsed" value="1" />
-                    </form>
-                    <script type="text/javascript"> var MXLandingPageId = '7a60ebb7-6b91-11e6-8f87-22000aa8e760'; </script>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>-->
-<!-- Start Contact Section -->
+<section class="festive-footer">
+    <p class="text-white text-center"> Copyright © Mygubbi 2016 </p>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+</section>
 
 
 <script type="text/javascript" src="/js/libs/bootstrap/bootstrap.js"></script>
@@ -653,13 +431,15 @@ var google_custom_params = window.google_tag_params;
 var google_remarketing_only = true;
 /* ]]> */
 </script>
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-</script>
+
 <noscript>
     <div style="display:inline;">
         <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/948149851/?value=0&amp;guid=ON&amp;script=0"/>
     </div>
 </noscript>
+
+<script type="text/javascript">$.cloudinary.responsive()</script>
+
 <!-- Gauges Tracking Code Start -->
 <script type="text/javascript">
   var _gauges = _gauges || [];
@@ -675,9 +455,7 @@ var google_remarketing_only = true;
     s.parentNode.insertBefore(t, s);
   })();
 </script>
+
 <!-- Gauges Tracking Code End -->
-
-<script type="text/javascript">$.cloudinary.responsive()</script>
-
 </body>
 </html>

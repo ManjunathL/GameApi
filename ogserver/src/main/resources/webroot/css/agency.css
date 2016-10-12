@@ -35,7 +35,7 @@
     cursor: pointer;
     background-color: #fff;
     font-size: 15px;
-    border-bottom: 3px solid #fff;
+    border-bottom: 4px solid #fff;
 }
 
 .menu-mygubbi ul,
@@ -251,17 +251,17 @@
 }
 
 .btn-explore{
-    background-color: #f1591f !important;
-    color:#ffffff !important;
+    background-color: #f1591f;
+    color:#ffffff;
     border-radius:0px !important;
-    text-transform: uppercase !important;
+    text-transform: uppercase;
 }
 
 .btn-explore:hover,
 .btn-explore:focus,
 .btn-explore:active{
-    background-color: #f1591f !important;
-    color: #ffffff !important;
+    background-color: #dc3000;
+    color: #ffffff;
 }
 
 .txt-over-kitchen-image{
@@ -530,11 +530,11 @@
 }
 
 .search-ico{
-    font-size: 28px!important;
     color: #566771;
-    padding-top: 10px;
-    font-weight: 400!important;
+    padding-top: 12px;
+    font-weight: 600;
     cursor: pointer;
+    font-size: 32px;
 }
 
 .mob-search{
@@ -1441,10 +1441,6 @@ fieldset[disabled] .btn-xl.active {
     background-color: #fff;
 }
 
-button {
-    background: transparent !important;
-}
-
 .navbar {
     margin: 0px;
     border-radius: 0px;
@@ -1870,7 +1866,7 @@ button {
 }
 
 .view-select.active {
-    color: #808080;
+    color: rgba(241,90,34,1);
     -moz-box-shadow: inset 0 0 10px #e6e6e6;
     -webkit-box-shadow: inset 0 0 10px #e6e6e6;
     box-shadow: inset 0 0 10px #e6e6e6;
@@ -7482,7 +7478,7 @@ a#goto-login{
 .menu-mygubbi #nav li a:focus{
     background: #ffffff;
     color: #ff3200 !important;
-    border-bottom: 3px solid #ff3200;
+    border-bottom: 4px solid #ff3200;
 }
 
 .dropdown-menu>li>a:hover,
@@ -7667,8 +7663,13 @@ a#goto-login{
     height:50px;
     margin: 0px auto 20px;
 }
+.contact-circle:hover{
+    background: #dc3000;
+}
+
 .contact-no{
     font-size: 20px;
+    font-family: 'Lato', sans-serif;
 }
 @media (max-width: 767px) {
     .contact-light-black-bg{
@@ -7806,9 +7807,6 @@ html .ui-button.ui-state-disabled:active {
     cursor: pointer;
     color: #5C6E7B;
 }
-.search-ico {
-    font-size: 32px !important;
-}
 .mob-search{
     font-size: 24px!important;
 }
@@ -7846,6 +7844,7 @@ html .ui-button.ui-state-disabled:active {
     font-size: 1.9em !important;
     line-height: 2em !important;
 }
+.footer-section-top,
 .footer-section-top ul,
 .footer-section-top p {
     font-family: 'Lato', sans-serif;
