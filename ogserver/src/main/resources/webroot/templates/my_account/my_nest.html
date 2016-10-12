@@ -272,7 +272,7 @@
                             <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="padding-left: 0px;">
                             <div class="col-md-12">
                                 <a href="http://www.trackode.com/" target="_blank" title="View">
                                     <div class="row">
@@ -297,7 +297,7 @@
                     <div class="row col-md-8">
                         <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
                         [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
-                    <div class="row col-md-4"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
+                    <div class="row col-md-4 align-center" style="padding-left:130px;"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
                 </div>
 
                 <div class="row row-magin align-center col-md-12 font-style-or">
@@ -330,7 +330,8 @@
                             />
                         </div>
                     </div>
-                    <div class="col-md-4"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Request For Call Back</button></div>
+                    <div class="col-md-4" style="padding-left: 45px;">
+    <button type="button" class="btn button-orange font-size18" style="text-transform: none;">Request For Call Back</button></div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane row padding6" id="orderDetails">
@@ -344,7 +345,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12" style="font-weight:bold;"><span class="text-small-proposals">
+                                <div class="col-md-7" style="font-weight:bold;"><span class="text-small-proposals">
                                                                     <% if(typeof(myNest) !== 'undefined'){ %>
                                                                     <%= myNest.order_details[0].file_name %> (<%= myNest.order_details[0].updated_date %>)
                                                                     <% } %>
@@ -359,7 +360,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12" style="font-weight:bold;"><span class="text-small-proposals">
+                                <div class="col-md-9" style="font-weight:bold;"><span class="text-small-proposals">
                                                                     <% if(typeof(myNest) !== 'undefined'){ %>
                                                                     <%= myNest.order_details[1].file_name %> (<%= myNest.order_details[1].updated_date %>)
                                                                     <% } %>
