@@ -3,10 +3,10 @@
 
 
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>Name :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode"><%= userProfile ? userProfile.displayName : 'User' %></p>
                 <p class="edit_mode form-group">
                     <input
@@ -20,13 +20,20 @@
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
             </div>
+            <div class="hidden-lg hidden-md hidden-sm">
+                <span class="glyphicon glyphicon-pencil edit_icon"
+                      data-toggle="tooltip"
+                      data-placement="left"
+                      title="Edit Details">
+                </span>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>Contact :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode">+91 <%= userProfile ? userProfile.phone : ''%></p>
                 <p class="edit_mode form-group">
                     +91 &nbsp;
@@ -46,10 +53,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>Occupation :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode"><%= userProfile ? userProfile.occupation : ''%></p>
                 <p class="edit_mode form-group">
                     <input
@@ -64,10 +71,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>Interest :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode"><%= userProfile ? userProfile.interest : ''%></p>
                 <p class="edit_mode form-group">
                     <input
@@ -82,10 +89,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>Address :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode"><%= userProfile ? userProfile.address : ''%></p>
                 <p class="edit_mode form-group">
                     <input
@@ -100,10 +107,10 @@
             </div>
         </div>
         <div class="row">
-        <div class="col-md-5 col-sm-5 profile-label">
+        <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
             <label>State :</label>
         </div>
-        <div class="col-md-7 col-sm-7">
+        <div class="col-md-7 col-sm-7 col-xs-6">
             <p class="view_mode"><%= userProfile ? userProfile.state : ''%></p>
             <p class="edit_mode form-group">
                 <input
@@ -125,10 +132,10 @@
 
 
         <div class="row">
-            <div class="col-md-4 col-sm-4 profile-label">
+            <div class="col-md-4 col-sm-4 col-xs-6 profile-label">
                 <label>Email :</label>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6 col-xs-6 ">
                 <p class="view_mode"><%= userProfile ? userProfile.email : ''%></p>
                 <p class="edit_mode form-group">
                     <input
@@ -152,10 +159,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>Alternate Contact :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode">+91 <%= userProfile ? userProfile.alt_phone : ''%></p>
                 <p class="edit_mode form-group">
                     +91 &nbsp;
@@ -174,10 +181,10 @@
             </div>
         </div>
         <div class="row padding-top45">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>Hobbies :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode"><%= userProfile ? userProfile.hobbies : ''%></p>
                 <p class="edit_mode form-group">
                     <input
@@ -192,10 +199,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>City :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode"><%= userProfile ? userProfile.city : ''%></p>
                 <p class="edit_mode form-group">
                     <input
@@ -211,10 +218,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 col-sm-5 profile-label">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
                 <label>PIN Code :</label>
             </div>
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-7 col-sm-7 col-xs-6">
                 <p class="view_mode"><%= userProfile ? userProfile.pinCode : ''%></p>
                 <p class="edit_mode form-group">
                     <input

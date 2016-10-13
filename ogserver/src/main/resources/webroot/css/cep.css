@@ -12,13 +12,13 @@
     border-bottom: 2px solid rgb(99,161,235);
 }
 
-.nav-tabs.nav-justified.myaccount_list>li>a {
+.nav-tabs.myaccount_list>li>a {
     border:none;
     border-radius: none;
 }
-.nav-tabs.nav-justified.myaccount_list>li>a:hover,
-.nav-tabs.nav-justified.myaccount_list>li>a:focus,
-.nav-tabs.nav-justified.myaccount_list>li>a:active {
+.nav-tabs.myaccount_list>li>a:hover,
+.nav-tabs.myaccount_list>li>a:focus,
+.nav-tabs.myaccount_list>li>a:active {
     border:none;
     border-radius: none;
     background-color:#fff;
@@ -129,10 +129,10 @@ ul.myaccount_list li{
 
 @media screen and (max-width: 991px) {
     .profile-label{
-        text-align:left;
+        text-align:right;
     }
     .myaccount_list li{
-        padding:10px 8px;
+        padding:10px 5px;
     }
     .menu-tab-list{
         margin-top:50px!important;
@@ -147,5 +147,10 @@ ul.myaccount_list li{
     }
     .margin-left-0 {
         margin-left: 10px !important;
+    }
+    .bg-property{
+        background-color:#f9f9f9;
+        height: auto;
+        min-height: 230px;
     }
 }
