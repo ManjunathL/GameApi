@@ -685,6 +685,52 @@ input[type=checkbox] {
     text-decoration: none;
 }
 
+/* Start FAQ Page */
+
+.faq-section{
+    padding: 50px 0px 30px;
+}
+
+.faq-des{
+    font-size: 16px;
+}
+
+.faq-q {
+    min-height: 140px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.q-container {
+    display: block;
+    min-height: 150px;
+    margin-top: 5px;
+    float: left;
+    margin-right: 20px;
+}
+
+.q-container .icon {
+    width: 55px;
+    height: 55px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #ffffff;
+    background: #f26522;
+    text-align: center;
+}
+
+.q-head{
+    color: #f26522;
+}
+
+.q-details h4{
+    text-transform: inherit;
+    font-size: 20px;
+}
+
+/* End FAQ Page */
+
+
 /* Start Career Page */
 
 .career-bg{
