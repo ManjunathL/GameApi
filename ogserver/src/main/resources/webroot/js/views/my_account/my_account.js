@@ -13,8 +13,9 @@ define([
     'text!/templates/my_account/my_account.html',
     'text!/templates/my_account/my_nest.html',
     'text!/templates/my_account/my_profile.html',
+    'text!/templates/my_account/my_settings.html',
     '/js/views/view_manager.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, VM) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate,MySettingsTemplate, VM) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -181,7 +182,7 @@ define([
               }
             });
 
-            /*this.ref.updatePassword({
+            this.ref.updatePassword({
                 email: email,
                 oldPassword: $('#old_password').val(),
                 newPassword: $('#new_password').val()
@@ -209,7 +210,7 @@ define([
                     console.log("User password changed successfully!");
                     $('#chng_passwd_form').css("display","none");
                 }
-            });*/
+            });
         },
         deactivateUserAccount: function (e) {
 
@@ -280,6 +281,14 @@ define([
             if(id == "mynest-lnk"){
                 var that = this;
                 $("#mynest").html(_.template(MyNestTemplate)({
+                    'userProfile': that.myaccount.get("userProfData"),
+                    'myNest':that.myaccount.get("mynest"),
+                    'providerId': that.myaccount.get("providerId")
+                }));
+            }
+            if(id == "settings-lnk"){
+                var that = this;
+                $("#settings").html(_.template(MySettingsTemplate)({
                     'userProfile': that.myaccount.get("userProfData"),
                     'myNest':that.myaccount.get("mynest"),
                     'providerId': that.myaccount.get("providerId")

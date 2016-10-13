@@ -77,6 +77,11 @@ ul.myaccount_list li{
 .margin20{
     margin:20px!important;
 }
+.btn-warning{ background-color:#000000;}
+
+.margin-top15{
+    margin-top:15px!important;
+}
 .mynest-tab-listbox{
     height: 100px;
     width: 22%;
