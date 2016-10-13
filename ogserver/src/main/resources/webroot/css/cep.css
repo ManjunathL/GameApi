@@ -74,6 +74,9 @@ ul.myaccount_list li{
     margin-right:0px!important;
 }
 
+.margin20{
+    margin:20px!important;
+}
 .mynest-tab-listbox{
     height: 100px;
     width: 22%;
