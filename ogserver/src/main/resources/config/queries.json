@@ -93,6 +93,12 @@
       "params": []
     },
     {
+      "id": "seo.select.all",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory from seo",
+      "params": []
+    },
+    {
       "id": "product.select.productid",
       "type": "select",
       "query": "select id, productId, productJson from product where productId = ?",
@@ -106,6 +112,14 @@
       "query": "select id, blogId, tags, blogJson from blog where blogId = ?",
       "params": [
         "blogId"
+      ]
+    },
+    {
+      "id": "seo.select.seoid",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory from seo where seoId = ?",
+      "params": [
+        "seoId"
       ]
     },
     {
@@ -200,7 +214,23 @@
         "blogJson"
       ]
     },
-
+    {
+      "id": "seo.insert",
+      "type": "insert",
+      "table": "seo",
+      "query": "insert into seo(id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory ) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params": [
+        "id",
+        "seoId",
+        "title",
+        "description",
+        "metaKeywords",
+        "seoJson",
+        "location",
+        "category",
+        "subCategory"
+      ]
+    },
     {
       "id": "blog.update",
       "type": "update",
@@ -211,6 +241,22 @@
         "blog_categories",
         "blogJson",
         "blogId"
+      ]
+    },
+    {
+      "id": "seo.update",
+      "type": "update",
+      "table": "seo",
+      "query": "update seo set title = ?, description = ?, metaKeywords = ? , seoJson = ?, location = ?, category = ? , subCategory = ? where seoId = ?",
+      "params": [
+        "title",
+        "description",
+        "metaKeywords",
+        "seoJson",
+        "location",
+        "category",
+        "subCategory",
+        "seoId"
       ]
     },
     {

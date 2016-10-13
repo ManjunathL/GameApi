@@ -24,6 +24,9 @@
       },
       {
         "name": "com.mygubbi.catalog.BlogManagementService"
+      },
+      {
+        "name": "com.mygubbi.catalog.SeoManagementService"
       }
     ]
   }
