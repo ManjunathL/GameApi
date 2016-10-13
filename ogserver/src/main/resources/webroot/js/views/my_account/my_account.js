@@ -107,7 +107,7 @@ define([
                 "email": $('#user_email_id').val(),
                 //"dob": $('#user_dob').val(),
                 "phone": $('#user_phone').val(),
-                "alt_phone": $('#user_alt_phone').val(),
+                "altPhone": $('#user_alt_phone').val(),
                 "address": $('#user_address').val(),
                 "occupation": $('#occupation').val(),
                 "hobbies": $('#hobbies').val(),

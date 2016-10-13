@@ -10,7 +10,7 @@
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.property_name : '' %></p>
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.projectDetails.propertyName : '' %></p>
                 <p class="edit_mode form-group">
                     <input
                             type="text"
@@ -18,7 +18,7 @@
                             class="form-control"
                             maxlength="50"
                             name="displayName"
-                            value="<%= myNest ? myNest.project_details.property_name : '' %>"
+                            value="<%= myNest ? myNest.projectDetails.propertyName : '' %>"
                             placeholder="Your Name" required />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.property_type : '' %></p>
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.projectDetails.propertyType : '' %></p>
                 <p class="edit_mode form-group property_display_type">
                     <input
                             type="text"
@@ -39,7 +39,7 @@
                             class="form-control"
                             maxlength="50"
                             name="displayType"
-                            value="<%= myNest ? myNest.project_details.property_name : '' %>"
+                            value="<%= myNest ? myNest.projectDetails.propertyName : '' %>"
                             placeholder="Your Name" required />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.block_number : '' %></p>
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.projectDetails.blockNumber : '' %></p>
                 <p class="edit_mode form-group">
                     <input
                             type="text"
@@ -60,7 +60,7 @@
                             class="form-control"
                             maxlength="50"
                             name="displayBlock"
-                            value="<%= myNest ? myNest.project_details.block_number : '' %>"
+                            value="<%= myNest ? myNest.projectDetails.blockNumber : '' %>"
                             placeholder="Your Name" required />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
@@ -77,7 +77,7 @@
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.builder_name : '' %></p>
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.projectDetails.builderName : '' %></p>
                 <p class="edit_mode form-group">
                     <input
                             type="text"
@@ -85,7 +85,7 @@
                             class="form-control"
                             maxlength="50"
                             name="buiderName"
-                            value="<%= myNest ? myNest.project_details.builder_name : '' %>"
+                            value="<%= myNest ? myNest.projectDetails.builderName : '' %>"
                             placeholder="Your Name" required />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.project_details.flat_number : '' %></p>
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.projectDetails.flatNumber : '' %></p>
                 <p class="edit_mode form-group">
                     <input
                             type="text"
@@ -106,7 +106,7 @@
                             class="form-control"
                             maxlength="50"
                             name="flatNumber"
-                            value="<%= myNest ? myNest.project_details.flat_number : '' %>"
+                            value="<%= myNest ? myNest.projectDetails.flatNumber : '' %>"
                             placeholder="Your Name" required />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
@@ -130,7 +130,7 @@
 
                     <div class="text-center bs-wizard-stepnum">
                         <% if(typeof(myNest) !== 'undefined'){ %>
-                        <%= myNest.project_status[0].status_name %>
+                        <%= myNest.projectStatus[0].statusName %>
                         <% } %></div>
 
                     <div class="progress bs-margin65"><div class="progress-bar"></div></div>
@@ -144,7 +144,7 @@
 
                     <div class="text-center bs-wizard-stepnum">
                         <% if(typeof(myNest) !== 'undefined'){ %>
-                        <%= myNest.project_status[1].status_name %>
+                        <%= myNest.projectStatus[1].statusName %>
                         <% } %></div>
 
                     <div class="progress bs-margin43"><div class="progress-bar"></div></div>
@@ -159,7 +159,7 @@
 
                     <div class="text-center bs-wizard-stepnum">
                         <% if(typeof(myNest) !== 'undefined'){ %>
-                        <%= myNest.project_status[3].status_name %>
+                        <%= myNest.projectStatus[3].statusName %>
                         <% } %>
                     </div>
 
@@ -174,7 +174,7 @@
 
                     <div class="text-center bs-wizard-stepnum">
                         <% if(typeof(myNest) !== 'undefined'){ %>
-                        <%= myNest.project_status[4].status_name %>
+                        <%= myNest.projectStatus[4].statusName %>
                         <% } %></div>
 
                     <div class="progress bs-margin43"><div class="progress-bar"></div></div>
@@ -188,7 +188,7 @@
 
                     <div class="text-center bs-wizard-stepnum">
                         <% if(typeof(myNest) !== 'undefined'){ %>
-                        <%= myNest.project_status[5].status_name %>
+                        <%= myNest.projectStatus[5].statusName %>
                         <% } %>
                     </div>
 
@@ -203,7 +203,7 @@
 
                     <div class="text-center bs-wizard-stepnum">
                         <% if(typeof(myNest) !== 'undefined'){ %>
-                        <%= myNest.project_status[6].status_name %>
+                        <%= myNest.projectStatus[6].statusName %>
                         <% } %></div>
 
                     <div class="progress bs-margin65"><div class="progress-bar"></div></div>
@@ -282,7 +282,7 @@
                                     <div class="row">
                                         <div class="col-md-12 align-center"><span class="text-small-proposals">
                                             <% if(typeof(myNest) !== 'undefined'){ %>
-                                            <%= myNest.latest_proposal_details.proposal_name %>
+                                            <%= myNest.proposalDetails[0].proposal_name %>
                                             <% } %>
                                         </span></div>
                                     </div>
@@ -341,7 +341,7 @@
 
                 <div class="col-md-12">
                     <div class="col-md-3">
-                        <a href="<%= myNest.order_details[0].file_link %>" target="_blank" title="View">
+                        <a href="<%= myNest.orderDetails[0].documentLink %>" target="_blank" title="View">
                             <div class="row">
                                 <div class="col-md-3 padding6"><i class="fa fa-file-pdf-o" style="font-size: 36px!important; padding-top:10px; padding-left:30px;" aria-hidden="true"></i>
                                 </div>
@@ -349,14 +349,14 @@
                             <div class="row">
                                 <div class="col-md-7" style="font-weight:bold;"><span class="text-small-proposals">
                                                                     <% if(typeof(myNest) !== 'undefined'){ %>
-                                                                    <%= myNest.order_details[0].file_name %> (<%= myNest.order_details[0].updated_date %>)
+                                                                    <%= myNest.orderDetails[0].documentName %> (<%= myNest.orderDetails[0].uploadDate %>)
                                                                     <% } %>
                                                     </span></div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-3 float-left">
-                        <a href="<%= myNest.order_details[1].file_link %>" target="_blank" title="View">
+                        <a href="<%= myNest.orderDetails[1].documentLink %>" target="_blank" title="View">
                             <div class="row">
                                 <div class="col-md-3 padding6"><i class="fa fa-file-pdf-o" style="font-size: 36px!important; padding-top:10px; padding-left:30px;" aria-hidden="true"></i>
                                 </div>
@@ -364,7 +364,7 @@
                             <div class="row">
                                 <div class="col-md-9" style="font-weight:bold;"><span class="text-small-proposals">
                                                                     <% if(typeof(myNest) !== 'undefined'){ %>
-                                                                    <%= myNest.order_details[1].file_name %> (<%= myNest.order_details[1].updated_date %>)
+                                                                    <%= myNest.orderDetails[1].documentName %> (<%= myNest.orderDetails[1].uploadDate %>)
                                                                     <% } %>
                                                     </span></div>
                             </div>
@@ -382,35 +382,35 @@
                     </div>
                     <div class="row align-center padding6">
                         <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[0].amount %>
+                            <%= myNest.paymentDetails[0].paymentAmount %>
                             <% } %> </div>
                         <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[0].payment_duedate %>
+                            <%= myNest.paymentDetails[0].paymentDate %>
                             <% } %></div>
                         <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[0].status %>
+                            <%= myNest.paymentDetails[0].paymentRef %>
                             <% } %></div>
                     </div>
                     <div class="row align-center padding6">
                         <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[1].amount %>
+                            <%= myNest.paymentDetails[1].paymentAmount %>
                             <% } %> </div>
                         <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[1].payment_duedate %>
+                            <%= myNest.paymentDetails[1].paymentDate %>
                             <% } %></div>
                         <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[1].status %>
+                            <%= myNest.paymentDetails[1].paymentRef %>
                             <% } %></div>
                     </div>
                     <div class="row align-center padding6">
                         <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[2].amount %>
+                            <%= myNest.paymentDetails[2].paymentAmount %>
                             <% } %> </div>
                         <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[2].payment_duedate %>
+                            <%= myNest.paymentDetails[2].paymentDate %>
                             <% } %></div>
                         <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.payment_details[2].status %>
+                            <%= myNest.paymentDetails[2].paymentRef %>
                             <% } %></div>
                     </div>
                 </div>
@@ -422,7 +422,7 @@
 
                 <div class="col-md-12">
                     <div class="col-md-3">
-                        <a href="<%= myNest.document_details[0].file_link %>" target="_blank" title="View">
+                        <a href="<%= myNest.documentDetails[0].documentLink %>" target="_blank" title="View">
                             <div class="row">
                                 <div class="col-md-3 padding6"><i class="fa fa-file-pdf-o" style="font-size: 36px!important; padding-top:10px; padding-left:30px;" aria-hidden="true"></i>
                                 </div>
@@ -430,14 +430,14 @@
                             <div class="row">
                                 <div class="col-md-12" style="font-weight:bold;"><span class="text-small-proposals">
                                                                     <% if(typeof(myNest) !== 'undefined'){ %>
-                                                                    <%= myNest.document_details[0].file_name %> (<%= myNest.document_details[0].upload_date %>)
+                                                                    <%= myNest.documentDetails[0].documentName %> (<%= myNest.documentDetails[0].uploadDate %>)
                                                                     <% } %>
                                                     </span></div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-3 float-left">
-                        <a href="<%= myNest.document_details[1].file_link %>" target="_blank" title="View">
+                        <a href="<%= myNest.documentDetails[1].documentLink %>" target="_blank" title="View">
                             <div class="row">
                                 <div class="col-md-3 padding6"><i class="fa fa-file-pdf-o" style="font-size: 36px!important; padding-top:10px; padding-left:30px;" aria-hidden="true"></i>
                                 </div>
@@ -445,7 +445,7 @@
                             <div class="row">
                                 <div class="col-md-12" style="font-weight:bold;"><span class="text-small-proposals">
                                                                     <% if(typeof(myNest) !== 'undefined'){ %>
-                                                                    <%= myNest.document_details[1].file_name %> (<%= myNest.document_details[0].upload_date %>)
+                                                                    <%= myNest.documentDetails[1].documentName %> (<%= myNest.documentDetails[0].uploadDate %>)
                                                                     <% } %>
                                                     </span></div>
                             </div>

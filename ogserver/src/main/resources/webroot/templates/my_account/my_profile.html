@@ -163,7 +163,7 @@
                 <label>Alternate Contact :</label>
             </div>
             <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode">+91 <%= userProfile ? userProfile.alt_phone : ''%></p>
+                <p class="view_mode">+91 <%= userProfile ? userProfile.altPhone : ''%></p>
                 <p class="edit_mode form-group">
                     +91 &nbsp;
                     <input
@@ -173,7 +173,7 @@
                             name="phone"
                             min="0"
                             max="9999999999"
-                            value="<%= userProfile ? userProfile.alt_phone : ''%>"
+                            value="<%= userProfile ? userProfile.altPhone : ''%>"
                             pattern="\d{10}"
                             required />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>

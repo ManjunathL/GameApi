@@ -279,7 +279,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
         mynest: function(authData, someFunc) {
             var mynestitems = null;
             var authData = this.refAuth.currentUser;
-             var projRef = firebase.database().ref().child("projects/" + authData.uid+"/my-nest");
+             var projRef = firebase.database().ref().child("projects/" + authData.uid+"/myNest");
              var projectDetails = null;
              var that = this;
 
