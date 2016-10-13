@@ -318,6 +318,7 @@
                                     class="form-control"
                                     name="date"
                                     placeholder="hh/mm AM/PM"
+                                    style="margin:20px;"
 
                             />
                             <input
@@ -327,6 +328,7 @@
                                     name="date"
                                     placeholder="dd/mm/yy"
                                     dateformat="d M y"
+                                    style="margin:20px;"
                             />
                         </div>
                     </div>
@@ -370,7 +372,51 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane row margin-top50" id="card">33333333</div>
+            <div role="tabpanel" class="tab-pane row padding6" id="card">
+                <div class="col-md-12 proposal-font-heading border-bottom-grey padding6"> Payment Details</div>
+                <div class="col-md-12">
+                    <div class="row align-center">
+                    <div class="col-md-4" style="font-weight:bold;">Amount</div>
+                    <div class="col-md-4" style="font-weight:bold;">Date</div>
+                    <div class="col-md-4" style="font-weight:bold;">Status</div>
+                    </div>
+                    <div class="row align-center padding6">
+                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[0].amount %>
+                            <% } %> </div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[0].payment_duedate %>
+                            <% } %></div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[0].status %>
+                            <% } %></div>
+                    </div>
+                    <div class="row align-center padding6">
+                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[1].amount %>
+                            <% } %> </div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[1].payment_duedate %>
+                            <% } %></div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[1].status %>
+                            <% } %></div>
+                    </div>
+                    <div class="row align-center padding6">
+                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[2].amount %>
+                            <% } %> </div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[2].payment_duedate %>
+                            <% } %></div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.payment_details[2].status %>
+                            <% } %></div>
+                    </div>
+                </div>
+
+
+            </div>
             <div role="tabpanel" class="tab-pane row padding6" id="doc">
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6"> Document Details</div>
 
