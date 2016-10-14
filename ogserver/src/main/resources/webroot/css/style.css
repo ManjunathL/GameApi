@@ -696,14 +696,14 @@ input[type=checkbox] {
 }
 
 .faq-q {
-    min-height: 140px;
+    min-height: 260px;
     margin-bottom: 20px;
     text-align: left;
 }
 
 .q-container {
     display: block;
-    min-height: 150px;
+    min-height: 260px;
     margin-top: 5px;
     float: left;
     margin-right: 20px;
