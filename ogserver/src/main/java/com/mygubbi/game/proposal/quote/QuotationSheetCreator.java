@@ -160,6 +160,12 @@ public class QuotationSheetCreator implements ExcelCellProcessor
             currentRow++;
             this.createRowAndFillData(currentRow, null, "Unit consists of " + unit.moduleCount + " modules as per design provided.",1.0,unit.amount,0.0);
 
+            currentRow++;
+            this.createRowAndFillData(currentRow, null, "Base Carcass : " + product.getProduct().getBaseCarcassCode() + " , Wall Carcass : " + product.getProduct().getWallCarcassCode());
+
+            currentRow++;
+            this.createRowAndFillData(currentRow, null, "Finish Material : " + product.getProduct().getFinishCode() + " , Finish Type : " + product.getProduct().getFinishType());
+
             unitSequence++;
             if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
         }
