@@ -54,19 +54,22 @@
             ga('send', 'pageview');
         }
     </script>
+
     <!-- Facebook Pixel Code -->
     <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','//connect.facebook.net/en_US/fbevents.js');
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','//connect.facebook.net/en_US/fbevents.js');
 
-fbq('init', '440911379430393');
-fbq('track', "PageView");</script>
-    <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=440911379430393&ev=PageView&noscript=1"
-    /></noscript>
+        fbq('init', '440911379430393');
+        fbq('track', "PageView");
+    </script>
+
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=440911379430393&ev=PageView&noscript=1"/>
+    </noscript>
     <!-- End Facebook Pixel Code -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -74,21 +77,25 @@ fbq('track', "PageView");</script>
     <!--[if lt IE 9]>
     <![endif]-->
     <!-- Facebook Conversion Code for leads -->
-    <script>(function() {
-var _fbq = window._fbq || (window._fbq = []);
-if (!_fbq.loaded) {
-var fbds = document.createElement('script');
-fbds.async = true;
-fbds.src = 'https://connect.facebook.net/en_US/fbds.js';
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(fbds, s);
-_fbq.loaded = true;
-}
-})();
-window._fbq = window._fbq || [];
-window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
-</script>
-    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6031737483829&amp;cd[value]=0.00&amp;cd[currency]=INR&amp;noscript=1" /></noscript>
+    <script>
+    (function() {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+        var fbds = document.createElement('script');
+        fbds.async = true;
+        fbds.src = 'https://connect.facebook.net/en_US/fbds.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(fbds, s);
+        _fbq.loaded = true;
+        }
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
+    </script>
+
+    <noscript>
+        <img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6031737483829&amp;cd[value]=0.00&amp;cd[currency]=INR&amp;noscript=1" />
+    </noscript>
 
     <script type="text/javascript" src="/js/libs/jquery/dist/jquery.min.js"></script>
 
@@ -169,15 +176,14 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                         <input type="hidden" name="MXHLandingPageId" value="fb27aaa9-6a94-11e6-8f87-22000aa8e760" />
                         <input type="hidden" name="MXHFormBehaviour" value="1" />
                         <input type="hidden" name="MXHFormDataTransfer" value="0" />
-                        <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
+                        <input type="hidden" name="MXHRedirectUrl" value="https://uat.mygubbi.com/thankyou-email-lp-page" />
                         <input type="hidden" name="MXHAsc" value="5" />
                         <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
                         <input type="hidden" name="MXHOutputMessagePosition" value="0" />
                         <input type="hidden" name="MXHIsExternallyUsed" value="1" />
                     </form>
+                    <script type="text/javascript"> var MXLandingPageId = 'fb27aaa9-6a94-11e6-8f87-22000aa8e760'; </script>
                 </div>
-                <script type="text/javascript"> var MXLandingPageId = 'fb27aaa9-6a94-11e6-8f87-22000aa8e760';
-                </script>
             </div>
         </div>
     </div>
@@ -443,6 +449,8 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 <script type="text/javascript" src="/js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
 <script type="text/javascript" src="/js/jquery.isotope.min.js"></script>
 <script type="text/javascript" src="/js/festive.js"></script>
+
+
 <!-- Google Code for Remarketing Tag -->
 
 <script type="text/javascript">
@@ -476,7 +484,7 @@ var google_remarketing_only = true;
     s.parentNode.insertBefore(t, s);
   })();
 </script>
-
 <!-- Gauges Tracking Code End -->
+
 </body>
 </html>
