@@ -106,6 +106,10 @@ ul, ol{
     padding: 0px 5px;
 }
 
+.festive-form img{
+    max-width: 85%;
+}
+
 .festive-form .festive-form-wrapper{
     padding: 10px 20px;
 }
