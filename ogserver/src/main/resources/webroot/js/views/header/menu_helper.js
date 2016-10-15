@@ -142,12 +142,6 @@ define([
         },
 
         pwdLogin: function() {
-            /*this.ref.authWithPassword({
-                email: $('#emailId').val(),
-                password: $('#pwd').val()
-            }, this.authHandler, {
-                remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'
-            });*/
             var that = this;
             var email = $('#emailId').val();
             var password = $('#pwd').val();
@@ -160,6 +154,8 @@ define([
               console.log('Sign-in successful');
             }, function(error) {
               // An error happened.
+              $('#login_error').html("The password is invalid. Please enter a correct password.");
+              $('#login_error_row').css("display", "block");
               console.log('Error'+error);
             }, this.authHandler, {
                  remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'
@@ -182,21 +178,6 @@ define([
                   $('.modal_error_msg').slideDown();
                   window.forgotButton && window.forgotButton.button('reset');
             });
-
-            /*this.ref.resetPassword({
-                email: $('#forgotEmail').val()
-            }, function(error) {
-                if (error) {
-                    console.log("Reset Failed!", error);
-                    $('.modal_error_msg').slideDown();
-                } else {
-                    console.log("reset successfully");
-                    $('.modal_success_msg').slideDown();
-                    $('#forgotBtn').hide();
-                    $('#forgotEmail').prop('disabled', true);
-                }
-                window.forgotButton && window.forgotButton.button('reset');
-            });*/
         },
 
         signOutUser: function(ev) {

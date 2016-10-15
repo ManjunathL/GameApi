@@ -1,254 +1,250 @@
-<div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15 ">
-    <div class="col-md-6 col-lg-6">
-
-
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>Name :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode"><%= userProfile ? userProfile.displayName : 'User' %></p>
-                <p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="user_display_name"
-                            class="form-control"
-                            maxlength="50"
-                            name="displayName"
-                            value="<%=userProfile ? userProfile.displayName : ''%>"
-                            placeholder="Your Name" required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>
-            </div>
-            <div class="hidden-lg hidden-md hidden-sm">
-                <span class="glyphicon glyphicon-pencil edit_icon"
-                      data-toggle="tooltip"
-                      data-placement="left"
-                      title="Edit Details">
-                </span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>Contact :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode">+91 <%= userProfile ? userProfile.phone : ''%></p>
-                <p class="edit_mode form-group">
-                    +91 &nbsp;
-                    <input
-                            type="number"
-                            id="user_phone"
-                            class="form-control"
-                            name="phone"
-                            min="0"
-                            max="9999999999"
-                            value="<%= userProfile ? userProfile.phone : ''%>"
-                            pattern="\d{10}"
-                            required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>Occupation :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode"><%= userProfile ? userProfile.occupation : ''%></p>
-                <p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="occupation"
-                            class="form-control"
-                            name="address"
-                            maxlength="250"
-                            value="<%= userProfile ? userProfile.occupation : ''%>"
-                    />
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>Interest :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode"><%= userProfile ? userProfile.interest : ''%></p>
-                <p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="interest"
-                            class="form-control"
-                            name="address"
-                            maxlength="250"
-                            value="<%= userProfile ? userProfile.interest : ''%>"
-                    />
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>Address :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode"><%= userProfile ? userProfile.address : ''%></p>
-                <p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="user_address"
-                            class="form-control"
-                            name="address"
-                            maxlength="250"
-                            value="<%= userProfile ? userProfile.address : ''%>"
-                    />
-                </p>
-            </div>
-        </div>
-        <div class="row">
-        <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-            <label>State :</label>
-        </div>
-        <div class="col-md-7 col-sm-7 col-xs-6">
-            <p class="view_mode"><%= userProfile ? userProfile.state : ''%></p>
-            <p class="edit_mode form-group">
-                <input
-                        type="text"
-                        id="user_state"
-                        class="form-control"
-                        name="state"
-                        maxlength="25"
-                        value="<%= userProfile ? userProfile.state : ''%>"
-                />
-                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            </p>
-        </div>
-        </div>
-
+<div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15 position-relative">
+    <div class="row edit_icon_div">
+            <span class="glyphicon glyphicon-pencil edit_icon"
+                  data-toggle="tooltip"
+                  data-placement="left"
+                  title="Edit Details">
+            </span>
     </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
 
-    <div class="col-md-6 col-lg-6">
 
-
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-6 profile-label">
-                <label>Email :</label>
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Name :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode"><%= userProfile ? userProfile.displayName : 'User' %></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="text"
+                                id="user_display_name"
+                                class="form-control"
+                                maxlength="50"
+                                name="displayName"
+                                value="<%=userProfile ? userProfile.displayName : ''%>"
+                                placeholder="Your Name" required />
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </p>
+                </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6 ">
-                <p class="view_mode"><%= userProfile ? userProfile.email : ''%></p>
+
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Contact :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode">+91 <%= userProfile ? userProfile.phone : ''%></p>
+                    <p class="edit_mode form-group">
+                        +91 &nbsp;
+                        <input
+                                type="number"
+                                id="user_phone"
+                                class="form-control"
+                                name="phone"
+                                min="0"
+                                max="9999999999"
+                                value="<%= userProfile ? userProfile.phone : ''%>"
+                                pattern="\d{10}"
+                                required />
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Occupation :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode"><%= userProfile ? userProfile.occupation : ''%></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="text"
+                                id="occupation"
+                                class="form-control"
+                                name="address"
+                                maxlength="250"
+                                value="<%= userProfile ? userProfile.occupation : ''%>"
+                        />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Interest :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode"><%= userProfile ? userProfile.interest : ''%></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="text"
+                                id="interest"
+                                class="form-control"
+                                name="address"
+                                maxlength="250"
+                                value="<%= userProfile ? userProfile.interest : ''%>"
+                        />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Address :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode"><%= userProfile ? userProfile.address : ''%></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="text"
+                                id="user_address"
+                                class="form-control"
+                                name="address"
+                                maxlength="250"
+                                value="<%= userProfile ? userProfile.address : ''%>"
+                        />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                <label>State :</label>
+            </div>
+            <div class="col-md-7 col-sm-7 col-xs-6">
+                <p class="view_mode"><%= userProfile ? userProfile.state : ''%></p>
                 <p class="edit_mode form-group">
                     <input
                             type="text"
-                            id="user_email_id"
+                            id="user_state"
                             class="form-control"
-                            maxlength="50"
-                            name="email"
-                            value="<%= userProfile ? userProfile.email : ''%>"
-                            placeholder="Your Email" required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>
-            </div>
-            <div class="col-md-2 col-sm-2 hidden-xs">
-                <span class="glyphicon glyphicon-pencil edit_icon"
-                      data-toggle="tooltip"
-                      data-placement="left"
-                      title="Edit Details">
-                </span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>Alternate Contact :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode">+91 <%= userProfile ? userProfile.altPhone : ''%></p>
-                <p class="edit_mode form-group">
-                    +91 &nbsp;
-                    <input
-                            type="number"
-                            id="user_alt_phone"
-                            class="form-control"
-                            name="phone"
-                            min="0"
-                            max="9999999999"
-                            value="<%= userProfile ? userProfile.altPhone : ''%>"
-                            pattern="\d{10}"
-                            required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>
-            </div>
-        </div>
-        <div class="row padding-top45">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>Hobbies :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode"><%= userProfile ? userProfile.hobbies : ''%></p>
-                <p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="hobbies"
-                            class="form-control"
-                            name="address"
-                            maxlength="250"
-                            value="<%= userProfile ? userProfile.hobbies : ''%>"
-                    />
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>City :</label>
-            </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode"><%= userProfile ? userProfile.city : ''%></p>
-                <p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="user_city"
-                            class="form-control"
-                            name="city"
+                            name="state"
                             maxlength="25"
-                            value="<%= userProfile ? userProfile.city : ''%>"
+                            value="<%= userProfile ? userProfile.state : ''%>"
                     />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                <label>PIN Code :</label>
             </div>
-            <div class="col-md-7 col-sm-7 col-xs-6">
-                <p class="view_mode"><%= userProfile ? userProfile.pinCode : ''%></p>
-                <p class="edit_mode form-group">
-                    <input
-                            type="number"
-                            id="user_pin_code"
-                            class="form-control"
-                            name="pinCode"
-                            min="0"
-                            max="999999"
-                            value="<%= userProfile ? userProfile.pinCode : ''%>"
-                            pattern="\d{6}"
-                    />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>
-            </div>
-        </div>
-        <div class="row form-group">
-            <button
-                    class="button border1px float-right edit_mode"
-                    id="save_details"
-                    data-loading-text="<i class='fa fa-spinner fa-spin'></i> Save Details"
-                    type="submit"
-            >
-                Save Details
-            </button>
+
         </div>
 
+        <div class="col-md-6 col-lg-6">
+
+
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Email :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6 ">
+                    <p class="view_mode"><%= userProfile ? userProfile.email : ''%></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="text"
+                                id="user_email_id"
+                                class="form-control"
+                                maxlength="50"
+                                name="email"
+                                value="<%= userProfile ? userProfile.email : ''%>"
+                                placeholder="Your Email" required />
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Alternate Contact :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode">+91 <%= userProfile ? userProfile.altPhone : ''%></p>
+                    <p class="edit_mode form-group">
+                        +91 &nbsp;
+                        <input
+                                type="number"
+                                id="user_alt_phone"
+                                class="form-control"
+                                name="phone"
+                                min="0"
+                                max="9999999999"
+                                value="<%= userProfile ? userProfile.altPhone : ''%>"
+                                pattern="\d{10}"
+                                required />
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="row padding-top45">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>Hobbies :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode"><%= userProfile ? userProfile.hobbies : ''%></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="text"
+                                id="hobbies"
+                                class="form-control"
+                                name="address"
+                                maxlength="250"
+                                value="<%= userProfile ? userProfile.hobbies : ''%>"
+                        />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>City :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode"><%= userProfile ? userProfile.city : ''%></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="text"
+                                id="user_city"
+                                class="form-control"
+                                name="city"
+                                maxlength="25"
+                                value="<%= userProfile ? userProfile.city : ''%>"
+                        />
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                    <label>PIN Code :</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-6">
+                    <p class="view_mode"><%= userProfile ? userProfile.pinCode : ''%></p>
+                    <p class="edit_mode form-group">
+                        <input
+                                type="number"
+                                id="user_pin_code"
+                                class="form-control"
+                                name="pinCode"
+                                min="0"
+                                max="999999"
+                                value="<%= userProfile ? userProfile.pinCode : ''%>"
+                                pattern="\d{6}"
+                        />
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="row form-group">
+                <button
+                        class="button border1px float-right edit_mode"
+                        id="save_details"
+                        data-loading-text="<i class='fa fa-spinner fa-spin'></i> Save Details"
+                        type="submit"
+                        style="margin-right: 15px;"
+                >
+                    Save Details
+                </button>
+            </div>
+
+        </div>
     </div>
 </div>
 <script>

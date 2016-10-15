@@ -110,6 +110,13 @@ ul.myaccount_list li{
     color:#7d7d7d;
     text-align:center;
 }
+.edit_icon_div{
+    position:absolute;
+    top:15px;
+    right:70px;
+    z-index:1;
+}
+
 .bs-margin65{margin:65px 0px!important;}
 .bs-margin43{margin:43px 0px!important;}
 .bs-wizard {margin-top: 40px;}
@@ -152,6 +159,7 @@ ul.myaccount_list li{
         margin: 10px;
         padding: 0px;
         display: inline-block;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .margin-left-0 {
         margin-left: 10px !important;

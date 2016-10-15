@@ -1,44 +1,130 @@
-<div class="margin-top15" style="background-color:#ffffff;padding:25px;">
-    <div class="row">
-        <div class="col-md-5 col-sm-5">
-            <p>Old Password :</p>
-        </div>
-        <div class="col-md-7 col-sm-7 form-group">
-            <input
-                    type="password"
-                    class="form-control"
-                    id="old_password"
-                    pattern=".{6,}" required />
-        </div>
-    </div>
+<section>
+    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15">
+        <form id="changeUserPasswordForm" name="changeUserPasswordData" data-toggle="validator" role="form">
+            <div id="success_row">
+                <div class="col-md-12 col-sm-12">
+                    <p id="success" class="font-size12 align-center"></p>
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="col-md-5 col-sm-5">
-            <p>New Password :</p>
-        </div>
-        <div class="col-md-7 col-sm-7 form-group">
-            <input
-                    type="password"
-                    class="form-control"
-                    id="new_password"
-                    pattern=".{6,}" required />
-        </div>
-    </div>
+            <div id="error_row">
+                <div class="col-md-12 col-sm-12">
+                    <p id="error" class="error-class font-size12 align-center"></p>
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="col-md-5 col-sm-5">
-            <p>Confirm Password :</p>
-        </div>
-        <div class="col-md-7 col-sm-7 form-group">
-            <input
-                    type="password"
-                    class="form-control"
-                    id="confirm_password">
-        </div>
-    </div>
-    <div class="row align-center">
-        <button type="button" class="btn button-orange font-size18" style="text-transform: none;">Save</button>
-    </div>
+            <div id="chng_passwd_form">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                    <label>Old Password :</label>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="old_password"
+                            pattern=".{6,}" required />
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                    <label>New Password :</label>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="new_password"
+                            pattern=".{6,}" required />
+                </div>
+            </div>
 
-</div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                    <label>Confirm Password :</label>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="confirm_password" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+<!--
+                <button type="button" class="button border1px" style="text-transform: none;">Update Password</button>
+-->
+                    <button
+                            class="button border1px"
+                            type="submit"
+                            id="set_password"
+                            data-loading-text="<i class='fa fa-spinner fa-spin'></i> Set Password">
+                        Set Password
+                    </button>
+                    <button
+                            class="button border1px"
+                            id="cancel_chng_pswd"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+                </div>
+        </form>
+    </div>
+</section>
+<script>
+    $(document).ready(function() {
+
+        $('#set_password').click(function() {
+            $('#error_row, #success_row').css('display','none');
+        });
+
+        $('.chng_pswd').click(function() {
+            $('#error_row, #success_row').css('display','none');
+            $('.change_password').slideToggle();
+            if($('.open_tab_chng_pswd').hasClass('padding0_20_20')){
+                $('.open_tab_chng_pswd').removeClass('padding0_20_20');
+            }else{
+                $('.open_tab_chng_pswd').addClass('padding0_20_20');
+            }
+            var item = $(this).find('.sort-arrow');
+            if (item.hasClass('pe-7s-angle-down')){
+                $(item).removeClass('pe-7s-angle-down').addClass('pe-7s-angle-up');
+            }else {
+                $(item).removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
+            }
+        });
+
+        $('#cancel_chng_pswd').click(function() {
+            $('#old_password, #new_password, #confirm_password').val('');
+            $('.change_password').slideUp();
+            $('.open_tab_chng_pswd').removeClass('padding0_20_20');
+
+            var item = $(this).find('.sort-arrow');
+            $(item).removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+    });
+
+    var password = document.getElementById("new_password")
+            , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+</script>

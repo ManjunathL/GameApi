@@ -264,11 +264,15 @@
             <div role="tabpanel" class="tab-pane padding10 active" id="proposal">
                 <div class="row">
                     <div class="col-md-12">
-                        <i class="icon ion-information-circled color-red"></i><h3 class="text-transform-none txt-color-orange"> Approval required for Proposal v1.1</h3></div>
+                        <i class="icon ion-information-circled color-red"></i><h3 class="text-transform-none txt-color-orange"> Approval required for <% if(typeof(myNest) !== 'undefined'){ %>
+                        <%= myNest.proposalDetails[0].proposalName %>
+                        <% } %></h3></div>
                     <div class="col-md-12">
-                        <h4 class="text-transform-none">Initial Proposal(10/8/2016)</h4>
+                        <h4 class="text-transform-none">Initial Proposal(<% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.proposalDetails[0].uploadedDate %>
+                            <% } %>)</h4>
                         <hr />
-                        <div class="col-md-8">
+                        <div class="col-md-8 padding0">
                             <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
                         </div>
 
@@ -282,7 +286,7 @@
                                     <div class="row">
                                         <div class="col-md-12 align-center"><span class="text-small-proposals">
                                             <% if(typeof(myNest) !== 'undefined'){ %>
-                                            <%= myNest.proposalDetails[0].proposal_name %>
+                                            <%= myNest.proposalDetails[0].proposalName %>
                                             <% } %>
                                         </span></div>
                                     </div>
@@ -291,13 +295,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12"><hr/></div>
+                <div class="row"><div class="col-md-12"><hr/></div></div>
 
-                <div class="row row-margin col-md-12">
-                    <div class="row col-md-8">
-                        <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
-                        [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
-                    <div class="row col-md-4 align-center" style="padding-left:130px;"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-8 padding0">
+                            <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
+                            [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
+                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
+                    </div>
                 </div>
 
                 <div class="row row-magin align-center col-md-12 font-style-or">
@@ -307,33 +313,39 @@
                     </div>
                 </div>
                 <div class="row row-margin col-md-12 padding-bottom15">
-                    <div class="col-md-8">
+                    <div class="col-md-8 padding0">
                         <div style="display:inline;font-weight:bold;">
                             <h4 class="text-transform-none">Schedule the date and time with Sales Team</h4>
                         </div>
                         <div class="row">
-                            <input
-                                    type="time"
-                                    id="user_time"
-                                    class="form-control"
-                                    name="date"
-                                    placeholder="hh/mm AM/PM"
-                                    style="margin:20px;"
+                            <div class="col-md-12">
+                                <div class="col-md-4 padding0">
+                                    <input
+                                            type="time"
+                                            id="user_time"
+                                            class="form-control"
+                                            name="date"
+                                            placeholder="hh/mm AM/PM"
+                                            style="margin:20px 0px;"
 
-                            />
-                            <input
-                                    type="date"
-                                    id="user_schedule"
-                                    class="form-control"
-                                    name="date"
-                                    placeholder="dd/mm/yy"
-                                    dateformat="d M y"
-                                    style="margin:20px;"
-                            />
+                                    />
+                                </div>
+                                <div class="col-md-6 padding0">
+                                    <input
+                                            type="date"
+                                            id="user_schedule"
+                                            class="form-control"
+                                            name="date"
+                                            placeholder="dd/mm/yy"
+                                            dateformat="d M y"
+                                            style="margin:20px 0px;"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4" style="padding-left: 45px;">
-    <button type="button" class="btn button-orange font-size18" style="text-transform: none;">Request For Call Back</button></div>
+                    <div class="col-md-4 padding0">
+    <button type="button" class="btn button-orange font-size18" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane row padding6" id="orderDetails">

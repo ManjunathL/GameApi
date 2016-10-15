@@ -14,31 +14,14 @@ define([
     'text!/templates/my_account/my_nest.html',
     'text!/templates/my_account/my_profile.html',
     'text!/templates/my_account/my_settings.html',
+    'text!/templates/my_account/my_message.html',
     '/js/views/view_manager.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate,MySettingsTemplate, VM) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         refAuth: MGF.refAuth,
         myaccount: null,
-        /*renderWithUserProfCallback: function (userProfData, provider) {
-            $(this.el).html(_.template(MyAccountTemplate)({
-                'userProfile': userProfData,
-                'provider': provider
-            }));
-
-            $("#mynest").html(_.template(MyNestTemplate)({
-                'userProfile': userProfData,
-                'myNest':null,
-                'providerData': provider
-            }));
-
-            $("#profile").html(_.template(MyProfileTemplate)({
-                'userProfile': userProfData,
-                'providerData': provider
-            }));
-            document.title = userProfData.displayName + ' | mygubbi';
-        },*/
         renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
         var that = this;
 
@@ -161,7 +144,6 @@ define([
               $('#success').html("User password changed successfully!");
               $('#success_row').css("display", "block");
               console.log("User password changed successfully!");
-              $('#chng_passwd_form').css("display","none");
             }, function(error) {
               // An error happened.
               switch (error.code) {
@@ -180,36 +162,6 @@ define([
                       $('#error_row').css("display", "block");
                       console.log("Error changing password:", error);
               }
-            });
-
-            this.ref.updatePassword({
-                email: email,
-                oldPassword: $('#old_password').val(),
-                newPassword: $('#new_password').val()
-            }, function (error) {
-                if (error) {
-                    switch (error.code) {
-                        case "INVALID_PASSWORD":
-                            $('#error').html("The specified user account password is incorrect.");
-                            $('#error_row').css("display", "block");
-                            console.log("The specified user account password is incorrect.");
-                            break;
-                        case "INVALID_USER":
-                            $('#error').html("The specified user account does not exist.");
-                            $('#error_row').css("display", "block");
-                            console.log("The specified user account does not exist.");
-                            break;
-                        default:
-                            $('#error').html("Error changing password:", error);
-                            $('#error_row').css("display", "block");
-                            console.log("Error changing password:", error);
-                    }
-                } else {
-                    $('#success').html("User password changed successfully!");
-                    $('#success_row').css("display", "block");
-                    console.log("User password changed successfully!");
-                    $('#chng_passwd_form').css("display","none");
-                }
             });
         },
         deactivateUserAccount: function (e) {
@@ -289,6 +241,14 @@ define([
             if(id == "settings-lnk"){
                 var that = this;
                 $("#settings").html(_.template(MySettingsTemplate)({
+                    'userProfile': that.myaccount.get("userProfData"),
+                    'myNest':that.myaccount.get("mynest"),
+                    'providerId': that.myaccount.get("providerId")
+                }));
+            }
+            if(id == "message-lnk"){
+                var that = this;
+                $("#message").html(_.template(MyMessageTemplate)({
                     'userProfile': that.myaccount.get("userProfData"),
                     'myNest':that.myaccount.get("mynest"),
                     'providerId': that.myaccount.get("providerId")
