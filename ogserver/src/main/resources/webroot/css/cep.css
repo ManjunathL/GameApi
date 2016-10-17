@@ -116,6 +116,14 @@ ul.myaccount_list li{
     right:70px;
     z-index:1;
 }
+.chart_time_left{
+    color:#0074BC;
+    margin-left:7px;
+}
+.chart_time_right{
+    color:#0074BC;
+    margin-left:7px;
+}
 
 .bs-margin65{margin:65px 0px!important;}
 .bs-margin43{margin:43px 0px!important;}
