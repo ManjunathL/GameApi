@@ -35,10 +35,6 @@
       },
 
       {
-        "name": "com.mygubbi.si.firebase.FirebaseDataService"
-      },
-
-      {
         "name": "com.mygubbi.si.email.EmailService"
       }
     ]

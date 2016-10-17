@@ -34,9 +34,6 @@
         "name": "com.mygubbi.game.proposal.output.ProposalOutputService",
         "instances": 10
       },
-      {
-        "name": "com.mygubbi.si.firebase.FirebaseDataService"
-      },
 
       {
         "name": "com.mygubbi.si.email.EmailService"
