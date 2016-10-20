@@ -56,6 +56,7 @@ define([
             'mangalore-lp(/)':'mangalorelandingpage',
             'email-lp(/)':'emaillandingpage',
             'nri-:cityName(/)' : 'nripage',
+            'l-shaped-kitchen-design-:cityName(/)': 'lshapedK1',
             'media(/)': 'mediapage',
             'shobha-lp(/)': 'shobhalandingpage',
             'pune-lp(/)': 'punelandingpage',
@@ -195,6 +196,25 @@ define([
             document.querySelector('meta[name="keywords"]').setAttribute("content", "living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior");
         }
     });
+
+    var routeSubCategoryCity = function( subCategory, category , cityName) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+
+            require(['views/product/page'], function(ProductPage) {
+                var options = {
+                    model: {
+
+                        "selectedCategories": category,
+                        "selectedSubCategories": subCategory,
+                        "cityName": cityName
+
+                    }
+                };
+                console.log("=-=-=-=-=-=-=-=-=-=-=-=-");
+                            console.log(cityName);
+                VM.create(VM.PRODUCT_LISTING, ProductPage, options).render();
+            });
+        };
     var routeSubCategory = function(subCategory, category) {
         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
         require(['views/product/page'], function(ProductPage) {
@@ -242,6 +262,9 @@ define([
         });
         router.on('route:lshapedK', function(actions){
             routeSubCategory('L Shaped Kitchen', 'kitchen');
+        });
+        router.on('route:lshapedK1', function(cityName){
+            routeSubCategoryCity('L Shaped Kitchen', 'kitchen', cityName);
         });
         router.on('route:ushapedK', function(actions){
             routeSubCategory('U Shaped Kitchen', 'kitchen');
