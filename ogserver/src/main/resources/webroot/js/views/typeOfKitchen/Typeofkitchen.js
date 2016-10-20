@@ -5,18 +5,18 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/kitchenAccessories/kitchenAccessories.html',
+    'text!templates/typeOfKitchen/typeofkitchen.html',
     'cloudinary_jquery',
     'slyutil',
     'mgfirebase',
     'consultutil',
     'analytics'
-], function($, _, Backbone, kitchenAccessoriesPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
-    var kitchenAccessoriesPageVIew = Backbone.View.extend({
+], function($, _, Backbone, TypeOfKitchenPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+    var TypeOfKitchenPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
         renderWithUserProfCallback: function(userProfData) {
-            $(this.el).html(_.template(kitchenAccessoriesPageTemplate)({
+            $(this.el).html(_.template(TypeOfKitchenPageTemplate)({
                 'userProfile': userProfData
             }));
             $.cloudinary.responsive();
@@ -32,40 +32,40 @@ define([
             _.bindAll(this, 'renderWithUserProfCallback');
         },
         events: {
-            "click .drawers-lnk": "changedrawerstab",
-            "click .sink-lnk": "changesinktab",
-            "click .splash-lnk": "changesplashtab"
+            "click .base-lnk": "changebasetab",
+            "click .wall-lnk": "changewalltab",
+            "click .tall-lnk": "changetalltab"
         },
-        changedrawerstab: function(e) {
+        changebasetab: function(e) {
             e.preventDefault();
             var currentTarget = $(e.currentTarget);
             var id = $(e.currentTarget).attr('id');
-            $(".drawers-img").removeClass('active');
-             $(".drawers-cnt").removeClass('active');
+            $(".base-img").removeClass('active');
+             $(".base-cnt").removeClass('active');
                 $("#"+id+"-img").addClass('active');
             $("#"+id+"-content").addClass('active');
 
             console.log(id);
             return this;
         },
-        changesinktab: function(e) {
+        changewalltab: function(e) {
             e.preventDefault();
             var currentTarget = $(e.currentTarget);
             var id = $(e.currentTarget).attr('id');
-            $(".sink-img").removeClass('active');
-             $(".sink-cnt").removeClass('active');
+            $(".wall-img").removeClass('active');
+             $(".wall-cnt").removeClass('active');
                 $("#"+id+"-img").addClass('active');
             $("#"+id+"-content").addClass('active');
 
             console.log(id);
             return this;
         },
-        changesplashtab: function(e) {
+        changetalltab: function(e) {
             e.preventDefault();
             var currentTarget = $(e.currentTarget);
             var id = $(e.currentTarget).attr('id');
-            $(".splash-img").removeClass('active');
-             $(".splash-cnt").removeClass('active');
+            $(".tall-img").removeClass('active');
+             $(".tall-cnt").removeClass('active');
                 $("#"+id+"-img").addClass('active');
             $("#"+id+"-content").addClass('active');
 
@@ -73,5 +73,5 @@ define([
             return this;
         }
     });
-    return kitchenAccessoriesPageVIew;
+    return TypeOfKitchenPageVIew;
 });

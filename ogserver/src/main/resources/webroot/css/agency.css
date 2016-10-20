@@ -26,7 +26,7 @@
 /* Header Section */
 
 .nav>li>a{
-    padding:10px 10px!important;
+    padding:10px 10px;
 }
 
 #nav>li>a {
