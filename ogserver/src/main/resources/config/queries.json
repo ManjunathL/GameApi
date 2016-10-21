@@ -141,16 +141,18 @@
     {
       "id": "seo.select.seoSubCategory",
       "type": "select",
-      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, subCategory from seo where subCategory = ?",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, subCategory from seo where subCategory = ? AND location = ?",
       "params": [
-        "subCategory"
+        "subCategory",
+        "location"
       ]
     },{
       "id": "seo.select.seoCategory",
       "type": "select",
-      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, subCategory from seo where category = ?",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, subCategory from seo where category = ? AND location = ? ",
       "params": [
-        "category"
+        "category",
+        "location"
       ]
     },
     {
