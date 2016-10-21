@@ -1,12 +1,14 @@
 <section class="bg-white menu-spacer">
     <div class="container-fluid category-banner">
-        <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
+        <div class="row">
+            <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
+        </div>
     </div>
     <div class="container bg-color-white hidden-xs">
         <div class="row">
             <ul class="breadcrumb">
                 <li><a href="/"><i class="fa fa-home"></i></a></li>
-                <li class="active"><a href="javascript:void(0);">Stories</a></li>
+                <li class="active"><a href="javascript:void(0);"> Stories </a></li>
             </ul>
         </div>
     </div>
@@ -19,8 +21,8 @@
 
             <%
             var blog_url = story.blog_heading;
-            /*blog_url = blog_url.replace(/-/g,"_");
-            blog_url = blog_url.replace(/\s/g,"-");*/
+            //blog_url = blog_url.replace(/-/g,"_");
+            //blog_url = blog_url.replace(/\s/g,"-");
 
             %>
 

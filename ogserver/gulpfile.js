@@ -18,6 +18,7 @@ gulp.task('css', function(){
     'build/resources/main/webroot/js/libs/bootstrap-custom/css/bootstrap-theme.min.css',
     'build/resources/main/webroot/js/libs/jquery-ui/themes/base/jquery-ui.min.css',
     'build/resources/main/webroot/css/agency.css',
+    'build/resources/main/webroot/css/style.css',
     'build/resources/main/webroot/css/animate.css',
     'build/resources/main/webroot/css/festive.css',
     'build/resources/main/webroot/css/consult.css',

@@ -93,6 +93,12 @@
       "params": []
     },
     {
+      "id": "seo.select.all",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory from seo",
+      "params": []
+    },
+    {
       "id": "product.select.productid",
       "type": "select",
       "query": "select id, productId, productJson from product where productId = ?",
@@ -109,6 +115,14 @@
       ]
     },
     {
+      "id": "seo.select.seoid",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory from seo where seoId = ?",
+      "params": [
+        "seoId"
+      ]
+    },
+    {
       "id": "product.select.category",
       "type": "select",
       "query": "select id, productId, popularity,styleSortSeq, productJson from product where category = ? ORDER BY popularity ASC, styleSortSeq DESC",
@@ -122,6 +136,21 @@
       "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags)",
       "params": [
         "tags"
+      ]
+    },
+    {
+      "id": "seo.select.seoSubCategory",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, subCategory from seo where subCategory = ?",
+      "params": [
+        "subCategory"
+      ]
+    },{
+      "id": "seo.select.seoCategory",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, subCategory from seo where category = ?",
+      "params": [
+        "category"
       ]
     },
     {
@@ -200,7 +229,23 @@
         "blogJson"
       ]
     },
-
+    {
+      "id": "seo.insert",
+      "type": "insert",
+      "table": "seo",
+      "query": "insert into seo(id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory ) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params": [
+        "id",
+        "seoId",
+        "title",
+        "description",
+        "metaKeywords",
+        "seoJson",
+        "location",
+        "category",
+        "subCategory"
+      ]
+    },
     {
       "id": "blog.update",
       "type": "update",
@@ -211,6 +256,22 @@
         "blog_categories",
         "blogJson",
         "blogId"
+      ]
+    },
+    {
+      "id": "seo.update",
+      "type": "update",
+      "table": "seo",
+      "query": "update seo set title = ?, description = ?, metaKeywords = ? , seoJson = ?, location = ?, category = ? , subCategory = ? where seoId = ?",
+      "params": [
+        "title",
+        "description",
+        "metaKeywords",
+        "seoJson",
+        "location",
+        "category",
+        "subCategory",
+        "seoId"
       ]
     },
     {

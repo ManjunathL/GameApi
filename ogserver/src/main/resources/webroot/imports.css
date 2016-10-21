@@ -4,19 +4,18 @@
 @import url("/js/libs/owl.carousel/dist/assets/owl.carousel.css");
 @import url("/js/libs/owl.carousel/dist/assets/owl.theme.default.min.css");
 @import url("/css/owl.transitions.css");
-@import url("/css/festive.css");
-@import url("/css/nwhomepage.css");
-@import url("/css/kyw.css");
-@import url("/css/kyk.css");
-@import url("/css/ml.css");
-@import url("/css/nwhomepage.css");
-@import url("/css/agency.css");
-@import url("/css/font-awesome.css");
 @import url("/css/animate.css");
-@import url("/css/consult.css");
-@import url("/css/shortlist.css");
-@import url("/css/horizontal.css");
-/*@import url("/css/styles.css");*/
 @import url("/css/font-awesome.min.css");
 @import url("/fonts/pixeden/pe-icon-7-stroke/css/pe-icon-7-stroke.css");
 @import url("/fonts/pixeden/pe-icon-7-stroke/css/helper.css");
+
+@import url("/css/festive.css");
+@import url("/css/kyw.css");
+@import url("/css/kyk.css");
+@import url("/css/ml.css");
+@import url("/css/consult.css");
+@import url("/css/shortlist.css");
+@import url("/css/horizontal.css");
+
+@import url("/css/agency.css");
+@import url("/css/style.css");

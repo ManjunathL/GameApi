@@ -11,44 +11,44 @@
         <div class="col-md-8 col-sm-8">
             <% if(typeof(full_story) !== 'undefined') {  %>
 
-                <div class="padding10">
-                    <h2 class="justify hidden-xs">
-                        <% var blg_hdng = full_story.blog_heading;
-                        /*var r = /\\u([\d\w]{4})/gi;
-                        blg_hdng = blg_hdng.replace(r, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16)); } );
-                        blg_hdng = unescape(blg_hdng);*/ %>
-                        <%= blg_hdng %>
-                        <% document.title = blg_hdng + ' | mygubbi'; %>
-                    </h2>
-                    <h4 class="justify hidden-lg hidden-md hidden-sm">
-                        <%= blg_hdng %>
-                    </h4>
+            <div class="padding10">
+                <h2 class="justify hidden-xs">
+                    <% var blg_hdng = full_story.blog_heading;
+                    var r = /\\u([\d\w]{4})/gi;
+                    blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                    return String.fromCharCode(parseInt(grp, 16)); } );
+                    blg_hdng = unescape(blg_hdng); %>
+                    <%= blg_hdng %>
+                    <% document.title = blg_hdng + ' | mygubbi'; %>
+                </h2>
+                <h4 class="justify hidden-lg hidden-md hidden-sm">
+                    <%= blg_hdng %>
+                </h4>
 
-                    <div class="date">By <%= full_story.author %> | <%= full_story.date_of_publish %></div>
-                    <div class="padding10-0">
-                        <img src="<%= full_story.blog_main_image %>"
-                             class="img-responsive"
-                             title="<%= blg_hdng %>"
-                             alt="<%= blg_hdng %>">
-                    </div>
-                    <p>
-                        <% var blg_stry = full_story.blog_content;
-                        /*var r = /\\u([\d\w]{4})/gi;
-                        blg_stry = blg_stry.replace(r, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16)); } );
-                        blg_stry = unescape(blg_stry);*/ %>
-                        <%= blg_stry %>
-                    </p>
-                    <div class="padding-top15">
-                        <h4>Article posted in : </h4>
-                        <% _.each(full_story.blog_categories, function(cat){ %>
+                <div class="date">By <%= full_story.author %> | <%= full_story.date_of_publish %></div>
+                <div class="padding10-0">
+                    <img src="<%= full_story.blog_main_image %>"
+                         class="img-responsive"
+                         title="<%= blg_hdng %>"
+                         alt="<%= blg_hdng %>">
+                </div>
+                <p>
+                    <% var blg_stry = full_story.blog_content;
+                    var r = /\\u([\d\w]{4})/gi;
+                    blg_stry = blg_stry.replace(r, function (match, grp) {
+                    return String.fromCharCode(parseInt(grp, 16)); } );
+                    blg_stry = unescape(blg_stry); %>
+                    <%= blg_stry %>
+                </p>
+                <div class="padding-top15">
+                    <h4>Article posted in : </h4>
+                    <% _.each(full_story.blog_categories, function(cat){ %>
                             <span class="tag-card">
                                 <%= cat %>
                             </span>
-                        <% }); %>
-                    </div>
+                    <% }); %>
                 </div>
+            </div>
 
             <% }%>
 
@@ -60,8 +60,8 @@
 
             <%
             var blog_url = story.blog_heading;
-            /*blog_url = blog_url.replace(/-/g,"_");
-            blog_url = blog_url.replace(/\s/g,"-");*/
+            blog_url = blog_url.replace(/-/g,"_");
+            blog_url = blog_url.replace(/\s/g,"-");
 
             %>
 
@@ -78,10 +78,10 @@
                     <a href="/story-<%= encodeURIComponent(blog_url) %>">
                         <h5>
                             <% var blg_hdng = story.blog_heading;
-                            /*var r = /\\u([\d\w]{4})/gi;
-                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                            var r = /\\u([\d\w]{4})/gi;
+                          blg_hdng = blg_hdng.replace(r, function (match, grp) {
                             return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_hdng = unescape(blg_hdng);*/ %>
+                            blg_hdng = unescape(blg_hdng); %>
                             <%= blg_hdng %>
                         </h5>
                     </a>
