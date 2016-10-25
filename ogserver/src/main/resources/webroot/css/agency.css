@@ -246,7 +246,7 @@
     padding-bottom: 10px;
     font-weight: 300;
     font-size: 40px;
-    color: #556871 !important;
+    color: #556871;
     border-bottom: 1px solid #ddd;
 }
 
@@ -1139,7 +1139,7 @@ ul.social-links {
 
 /* ---- Landing Page End  ---- */
 
-/* ---- NRI Page ---- */
+/* ---- NRI Page ----
 
 .nri_banner_txt {
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1468483864/nri_page/optimized_img/Desktop_top_Banner.jpg");
@@ -1266,7 +1266,7 @@ ul.social-links {
     color: rgba(215, 11, 54, 1) !important;
 }
 
-/* ---- NRI Page End ---- */
+*//* ---- NRI Page End ---- */
 
 /* ---- Youtube Video ---- */
 
