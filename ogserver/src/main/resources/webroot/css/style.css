@@ -764,6 +764,36 @@ input[type=checkbox] {
     color: #556871;
 }
 
+.nri-why-us-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477388100/nri_page/center-banner_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 140px 0 140px 0;
+    text-align: center;
+    color: #ffffff;
+}
+.nri-why-us-section h4{
+    font-size: 13px;
+}
+.nri-why-us-section p{
+    font-size: 10px;
+}
+
+.img-nri-why {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
 /* End NRI Page */
 
 /* Start Kitchen Accessories Page */
