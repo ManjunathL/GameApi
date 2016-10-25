@@ -76,7 +76,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475832922/festive-lp/festive_banner.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 630px;;
+    min-height: 610px;;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -93,7 +93,7 @@ ul, ol{
 
 .festive-banner-head {
     line-height: 140%;
-    font-size: 38px;
+    font-size: 36px;
     margin-top: 60px;
     font-weight: 600;
     text-transform: capitalize;
@@ -107,7 +107,7 @@ ul, ol{
 }
 
 .festive-form img{
-    max-width: 85%;
+    max-width: 75%;
 }
 
 .festive-form .festive-form-wrapper{
@@ -126,7 +126,8 @@ ul, ol{
     border-radius: 0px;
     box-shadow: none;
     border: 1px solid #aaa;
-    height: 40px;
+    height: 35px;
+    line-height: 35px;
 }
 
 .btn-festive{
@@ -323,8 +324,13 @@ ul, ol{
 
 @media (max-width: 1300px) {
     .festive_banner_bg {
-        min-height: 540px;
+        min-height: 610px;
         width: 100%;
+    }
+}
+@media (min-width: 1200px) {
+    .festive-container {
+        width: 1090px;
     }
 }
 

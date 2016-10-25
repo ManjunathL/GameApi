@@ -139,6 +139,21 @@
       ]
     },
     {
+      "id": "seo.select.seoSubCategory",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, subCategory from seo where subCategory = ?",
+      "params": [
+        "subCategory"
+      ]
+    },{
+      "id": "seo.select.seoCategory",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, subCategory from seo where category = ?",
+      "params": [
+        "category"
+      ]
+    },
+    {
       "id": "product.select.allBlogs",
       "type": "select",
       "query": "select id, blogId, blog_categories, blogJson from blog ",

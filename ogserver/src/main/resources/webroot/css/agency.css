@@ -26,7 +26,7 @@
 /* Header Section */
 
 .nav>li>a{
-    padding:10px 10px!important;
+    padding:10px 10px;
 }
 
 #nav>li>a {
@@ -2144,6 +2144,14 @@ fieldset[disabled] .btn-xl.active {
 
 .padding0-30 {
     padding: 0px 30px;
+}
+@media screen and (max-width: 480px) {
+    .padding-m-0{
+        padding: 0px;
+    }
+    .margin-m-0{
+        margin: 0px;
+    }
 }
 
 .padding5per {
@@ -8007,7 +8015,7 @@ html .ui-button.ui-state-disabled:active {
     .section-heading{
         text-align: center;
         display: table;
-        margin: 0px auto;
+        margin: 10px auto 20px;
     }
     .explore-space2{
         margin: 0px auto !important;
@@ -8034,13 +8042,13 @@ html .ui-button.ui-state-disabled:active {
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.8);
     }
     .address_right_section h4{
         padding: 10px 0px;
     }
     .testimonials-carousel .carousel-indicators {
-        top: 155px;
+        top: 140px;
     }
 }
 

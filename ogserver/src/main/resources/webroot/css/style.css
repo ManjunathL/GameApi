@@ -323,6 +323,10 @@ input[type=checkbox] {
     padding-top:40px;
 }
 
+.pt50{
+    padding-top:50px;
+}
+
 .pt80{
     padding-top:80px;
 }
@@ -355,6 +359,10 @@ input[type=checkbox] {
 
 .pb40{
     padding-bottom:40px;
+}
+
+.pb50{
+    padding-bottom:50px;
 }
 
 .pb80{
@@ -684,6 +692,109 @@ input[type=checkbox] {
     color: #333 !important;
     text-decoration: none;
 }
+
+/* Start Kitchen Accessories Page */
+
+.kitchen-head{
+    display: inline-block;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    font-weight: 300;
+    font-size: 40px;
+    color: #556871;
+}
+
+.kitchen-tab{
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    width: 100%;
+}
+.kitchen-tab-sink{
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 55%;
+    width: 100%;
+}
+
+.kitchen-card {
+    margin: 0px 10px;
+}
+
+.kitchen-card .nav-tabs > li.active{
+    border-bottom: 7px solid #000000;
+}
+
+.kitchen-card .nav-tabs.nav-justified>.active>a,
+.kitchen-card .nav-tabs.nav-justified>.active>a:hover,
+.kitchen-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+    background: transparent;
+}
+
+.drawers-details{
+    margin-top: 15px;
+}
+
+@media (min-width:768px) {
+    .kitchen-card .nav-tabs.nav-new-justified>li{
+        width: auto;
+    }
+    .kitchen-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kitchen-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 7px solid #b98e53;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-size: 11px;
+        padding: 10px 0px;
+    }
+    .kitchen-card .nav-tabs.nav-justified>li>a:hover,
+    .kkitchen-card .nav-tabs.nav-justified>li>a:active,
+    .kitchen-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 7px solid #bd7513;
+    }
+}
+
+@media (max-width: 768px){
+    .kitchen-tab {
+        position: relative;
+    }
+    .kitchen-tab-sink{
+        position: relative;
+    }
+    .kitchen-card{
+        padding: 0px;
+    }
+    .kitchen-card{
+        margin: 0px 0px 10px;
+    }
+}
+
+@media (max-width: 768px){
+    .kitchen-tab {
+        position: relative;
+    }
+    .kitchen-tab-sink{
+        position: relative;
+    }
+    .kitchen-card{
+        padding:10px 10px;
+    }
+    .kitchen-card{
+        margin: 0px;
+    }
+}
+
+
+/* End Kitchen Accessories Page */
 
 /* Start FAQ Page */
 
