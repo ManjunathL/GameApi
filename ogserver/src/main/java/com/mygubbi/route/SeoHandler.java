@@ -32,17 +32,18 @@ public class SeoHandler  extends AbstractRouteHandler {
         String subcategory = context.request().getParam("subCategory");
         if (StringUtils.isEmpty(subcategory))
         {
-            String seoTags = context.request().getParam("category");
-            System.out.println(seoTags.toString());
+            String seoCategory = context.request().getParam("category");
+            String seoCity = context.request().getParam("location");
+            System.out.println(seoCategory.toString());
             System.out.println("no Sub category");
-            if (StringUtils.isNonEmpty(seoTags)) {
+            if (StringUtils.isNonEmpty(seoCategory)) {
 
-                if (seoTags.equals("all")) {
+                if (seoCategory.equals("all")) {
                     this.fetchSeosAndSenddb(context, "seo.select.all", null);
 
                 } else {
 
-                    JsonObject params = new JsonObject().put("category", seoTags);
+                    JsonObject params = new JsonObject().put("category", seoCategory).put("location", seoCity);
                     this.fetchSeosAndSend(context, "seo.select.seoCategory", params);
                 }
             } else {
@@ -51,16 +52,17 @@ public class SeoHandler  extends AbstractRouteHandler {
             }
         }
         else{
-            String seoTags = context.request().getParam("subCategory");
-            System.out.println(seoTags.toString());
-            if (StringUtils.isNonEmpty(seoTags)) {
+            String seoSubCategory = context.request().getParam("subCategory");
+            String seoCity = context.request().getParam("location");
+            System.out.println(seoSubCategory.toString());
+            if (StringUtils.isNonEmpty(seoSubCategory)) {
 
-                if (seoTags.equals("all")) {
+                if (seoSubCategory.equals("all")) {
                     this.fetchSeosAndSenddb(context, "seo.select.all", null);
 
                 } else {
 
-                    JsonObject params = new JsonObject().put("subCategory", seoTags);
+                    JsonObject params = new JsonObject().put("subCategory", seoSubCategory).put("location", seoCity);
                     this.fetchSeosAndSend(context, "seo.select.seoSubCategory", params);
                 }
             } else {
