@@ -246,7 +246,7 @@
     padding-bottom: 10px;
     font-weight: 300;
     font-size: 40px;
-    color: #556871 !important;
+    color: #556871;
     border-bottom: 1px solid #ddd;
 }
 
@@ -1139,7 +1139,7 @@ ul.social-links {
 
 /* ---- Landing Page End  ---- */
 
-/* ---- NRI Page ---- */
+/* ---- NRI Page ----
 
 .nri_banner_txt {
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1468483864/nri_page/optimized_img/Desktop_top_Banner.jpg");
@@ -1266,7 +1266,7 @@ ul.social-links {
     color: rgba(215, 11, 54, 1) !important;
 }
 
-/* ---- NRI Page End ---- */
+*//* ---- NRI Page End ---- */
 
 /* ---- Youtube Video ---- */
 
@@ -2453,6 +2453,14 @@ fieldset[disabled] .btn-xl.active {
     border: 1px solid !important;
 }
 
+.border-grey{
+    border: 1px solid #CCC;
+}
+
+.border-right-grey{
+    border-right: 1px solid #CCC;
+}
+
 .border-bottom-orange {
     border-bottom: 1px solid #f1591f;
 }
@@ -2463,6 +2471,18 @@ fieldset[disabled] .btn-xl.active {
 
 .border-bottom-grey {
     border-bottom: 1px solid #CCC;
+}
+
+.border-top-orange {
+    border-top: 1px solid #f1591f;
+}
+
+.border-top-white {
+    border-top: 1px solid #ffffff;
+}
+
+.border-top-grey {
+    border-top: 1px solid #CCC;
 }
 
 .separator-horizontal {
@@ -2982,7 +3002,7 @@ a.button-orange:hover {
 .filter-button {
     border: 1px solid !important;
     position: absolute;
-    left: 125%;
+    right: 10%;
 }
 
 .filterpop {
@@ -3031,7 +3051,6 @@ a.button-orange:hover {
         width: 40% !important;
         max-width: 350px !important;
     }
-
 }
 
 .userpop {
@@ -3469,10 +3488,6 @@ a.button-orange:hover {
         display: block;
         padding: 18% 5% 5%;
     }
-    .testimonialSection {
-            border-bottom: 1px solid #CCC;
-            padding: 20px 0px;
-        }
 }
 
 @media (max-width: 320px) {
@@ -6631,9 +6646,6 @@ a.tab-ico {
     .c-project-description{
         font-size: 13px;
         margin-bottom: 15px;
-    }
-    .c-project .border-bottom-grey{
-        border: 0px solid #ddd;
     }
 }
 

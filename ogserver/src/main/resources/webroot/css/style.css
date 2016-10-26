@@ -82,6 +82,18 @@ input[type=checkbox] {
     position: relative;
 }
 
+/* Start Display style */
+
+.inline-block{
+    display: inline-block;
+}
+
+.block{
+    display: block;
+}
+
+/* End Display style */
+
 /* Text attributes */
 
 .capitalize{
@@ -473,6 +485,27 @@ input[type=checkbox] {
     padding-bottom:50px;
 }
 
+@media (max-width: 768px) {
+    .mob-padding-0{
+        padding: 0px;
+    }
+    .mob-margin-0{
+        margin: 0px;
+    }
+    .mob-margin-top-0{
+        margin-top: 0px;
+    }
+    .mob-padding-top-0{
+        padding-top: 0px;
+    }
+    .mob-margin-bottom-0{
+        margin-bottom: 0px;
+    }
+    .mob-padding-bottom-0{
+        padding-bottom: 0px;
+    }
+}
+
 /* Background Attributes */
 
 .bg-none {
@@ -692,6 +725,262 @@ input[type=checkbox] {
     color: #333 !important;
     text-decoration: none;
 }
+/* Start NRI Page */
+
+.nri-banner-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477307316/nri_page/nri_bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 140px 0 140px 0;
+    text-align: center;
+}
+
+.nri-banner-cnt{
+    padding: 30px;
+    color: #ffffff;
+    background: rgba(234,97,15,0.7);
+    padding-bottom: 42px;
+}
+.nri-banner-cnt h1{
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+.nri-banner-cnt p{
+    margin-bottom: 30px;
+}
+
+.nri-banner-form{
+    color: #ffffff;
+    background: rgba(88,89,91,0.7);
+    padding-bottom: 10px;
+}
+
+.nri-banner-form .form-control{
+    border-radius: 0px;
+}
+
+.btn-nri {
+    border-radius: 0px;
+    background: #546670;
+}
+
+.btn-nri:hover,
+.btn-nri:active,
+.btn-nri:focus {
+    color: #dddddd;
+}
+
+.nri-services-section p{
+    font-size: 20px;
+    color: #556871;
+}
+
+.nri-description-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477398251/nri_page/your_04.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 470px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 110px 30px 110px 40px;
+    text-align: left;
+    color: #ffffff;
+}
+
+.nri-description-bg h2{
+    font-weight: 400;
+    font-size: 34px;
+    text-transform: inherit;
+    line-height: 140%;
+    margin: 0px;
+}
+
+.nri-dec-hr{
+    border-top: 1px solid #fff;
+    line-height: 1px;
+    margin: 30px 0px;
+}
+
+.nri-description-section h4{
+    font-size: 14px;
+}
+
+.nri-description-section p{
+    font-size: 12px;
+    padding: 10px 10px 0px;
+}
+
+.manufacturing-box{
+    min-height: 235px;
+}
+
+.img-manufacturing{
+    padding: 10px 0px 0px;
+    width: 80px;
+}
+
+.nri-why-us-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477388100/nri_page/center-banner_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 140px 0 140px 0;
+    text-align: center;
+    color: #ffffff;
+}
+.nri-why-us-section h4{
+    font-size: 13px;
+}
+.nri-why-us-section p{
+    font-size: 10px;
+}
+
+.img-nri-why {
+    width: 100px;
+    margin-bottom: 15px;
+}
+@media (max-width: 768px) {
+    .manufacturing-box{
+        min-height: 330px;
+    }
+    .nri-description-bg{
+        height: auto;
+    }
+}
+
+/* End NRI Page */
+
+/* Start Kitchen Accessories Page */
+
+.kitchen-head{
+    display: inline-block;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    font-weight: 300;
+    font-size: 40px;
+    color: #556871;
+}
+
+.kitchen-tab{
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    width: 100%;
+}
+.kitchen-tab-sink{
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 55%;
+    width: 100%;
+}
+
+.kitchen-card {
+    margin: 0px 10px;
+}
+
+.kitchen-card .nav-tabs > li.active{
+    border-bottom: 7px solid #000000;
+}
+
+.kitchen-card .nav-tabs.nav-justified>.active>a,
+.kitchen-card .nav-tabs.nav-justified>.active>a:hover,
+.kitchen-card .nav-tabs.nav-justified>.active>a:focus{
+    border: 0px solid #ddd;
+    background: transparent;
+}
+
+.drawers-details{
+    margin-top: 15px;
+}
+
+@media (min-width:768px) {
+    .kitchen-head{
+        font-size: 24px;
+    }
+    .kitchen-card .nav-tabs.nav-new-justified>li{
+        width: auto;
+    }
+    .kitchen-card .nav-tabs.nav-justified>li>a{
+        border: 0px solid #ddd;
+        cursor: pointer;
+    }
+    .kitchen-card .nav-tabs.nav-justified>li>a{
+        border-bottom: 7px solid #b98e53;
+        border-radius: 0px;
+        background: transparent;
+        margin:0px 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-size: 11px;
+        padding: 10px 10px;
+    }
+    .kitchen-card .nav-tabs.nav-justified>li>a:hover,
+    .kkitchen-card .nav-tabs.nav-justified>li>a:active,
+    .kitchen-card .nav-tabs.nav-justified>li>a:focus{
+        border-bottom: 7px solid #bd7513;
+    }
+}
+
+@media (max-width: 768px){
+    .kitchen-tab {
+        position: relative;
+    }
+    .kitchen-tab-sink{
+        position: relative;
+    }
+    .kitchen-card{
+        padding: 0px;
+    }
+    .kitchen-card{
+        margin: 0px 0px 10px;
+    }
+}
+
+@media (max-width: 768px){
+    .kitchen-tab {
+        position: relative;
+    }
+    .kitchen-tab-sink{
+        position: relative;
+    }
+    .kitchen-card{
+        padding:10px 10px;
+    }
+    .kitchen-card{
+        margin: 0px;
+    }
+}
+
+
+/* End Kitchen Accessories Page */
 
 /* Start Kitchen Accessories Page */
 
@@ -1397,6 +1686,14 @@ input[type=checkbox] {
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 
+    /* Start FAQ page */
+    .q-container{
+        min-height: 60px;
+    }
+    .faq-q{
+        min-height: 60px;
+    }
+    /* End FAQ page */
 
     /* Start Quality Page */
     .quality-cnt-des {
@@ -1407,6 +1704,15 @@ input[type=checkbox] {
 
 /* Landscape phones and down */
 @media (max-width: 480px) {
+
+    /* Start FAQ page */
+    .q-container{
+        min-height: 60px;
+    }
+    .faq-q{
+        min-height: 60px;
+    }
+    /* End FAQ page */
 
     /* Start Quality Page */
     .quality-cnt-head{

@@ -19,13 +19,26 @@ import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
 import io.vertx.ext.web.handler.sockjs.PermittedOptions;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
+import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpHost;
+import org.apache.http.client.utils.URIUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class ApiServerVerticle extends AbstractVerticle
 {
     private final static Logger LOG = LogManager.getLogger(ApiServerVerticle.class);
+
+    private static String[] URLS = new String[]{
+            "http://mygubbi.com", "http://mygubbi.com/", "http://mygubbi.com/bangalore-lp1",
+            "http://www.mygubbi.com", "http://www.mygubbi.com/", "http://www.mygubbi.com/bangalore-lp",
+            "https://mygubbi.com", "https://mygubbi.com/", "https://mygubbi.com/bangalore-lp1",
+            "https://www.mygubbi.com", "https://www.mygubbi.com/", "https://www.mygubbi.com/bangalore-lp"
+    };
 
     private static final String STANDARD_RESPONSE = new JsonObject().put("status", "error")
             .put("error", "Request did not have a response").toString();
@@ -51,12 +64,28 @@ public class ApiServerVerticle extends AbstractVerticle
         Router router = Router.router(VertxInstance.get());
         router.route().handler(routingContext -> {
             String url = routingContext.request().absoluteURI();
-            if (url.startsWith("http:"))
+            try
             {
-                url = "https:" + url.substring(5);
+                URI baseUri = new URI(url);
+                HttpHost httpHost = URIUtils.extractHost(baseUri);
+                String hostName = httpHost.getHostName();
+                boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
+                boolean httpScheme = ("http").equals(httpHost.getSchemeName());
+                if (hostNameIsNaked || httpScheme)
+                {
+                    if (hostNameIsNaked) hostName = "www." + hostName;
+                    URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
+                    url = newUri.toString();
+                    //System.out.println("URL " + url + " rewritten as :" + newUri.toString() + " in " + duration);
+                }
+                else
+                {
+                    System.out.println("URL " + url +  "Error with url:" + url );
+                }
             }
-            else
+            catch (URISyntaxException e)
             {
+                System.out.println("Error with url:" + url + " || " + e.getMessage());
                 url = httpsRedirectUrl;
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
