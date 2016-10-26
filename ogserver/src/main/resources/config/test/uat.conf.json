@@ -20,7 +20,7 @@
 
   "staticConfigPath": "config/test/uat.config.js",
   "importsPath": "config/test/uat.imports.css",
-  "alljs": "js/all.js",
+  "alljs": "js/minmain.js",
 
   "robots.txt": "User-agent: *\nDisallow: /"
 
