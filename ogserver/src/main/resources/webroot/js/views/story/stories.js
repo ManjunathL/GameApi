@@ -7,7 +7,7 @@ define([
     'backbone',
     'models/story',
     'analytics',
-    'text!templates/story/stories.html'
+    'text!templates/story/new_stories.html'
 ], function($, _, Backbone, Story, Analytics, storiesTemplate) {
     var StoriesView = Backbone.View.extend({
         el: '.page',
@@ -49,7 +49,12 @@ define([
             }).reverse();
             //console.log(_(stories).pluck('date_of_publish'));
 
-            $(this.el).html(_.template(storiesTemplate)({'stories': stories}));
+            var rec_stories = [];
+            $.each(stories.slice(1,5), function(i, data) {
+                rec_stories.push(data);
+            });
+
+            $(this.el).html(_.template(storiesTemplate)({'stories': stories,'rec_stories': rec_stories,}));
         }
     });
     return StoriesView;

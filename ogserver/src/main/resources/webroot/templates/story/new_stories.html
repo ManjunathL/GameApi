@@ -1,0 +1,281 @@
+<section class="menu-spacer bg-color-white">
+
+    <!-- Start story bg -->
+    <div class="story-bg"></div>
+    <!-- End story bg -->
+
+    <div class="career-culture-section pt30 pb30">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="pb20">
+                                <div class="show-img">
+                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1472560251/media_page/raises.jpg" />
+                                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final" class="btn btn-default btn-media update"> Download </a>
+                                </div>
+                                <h2 class="txt-urstory media-txt-title">
+                                    Mygubbi.com Raises $2.5 Million in Seed Funding
+                                </h2>
+                                <p>
+                                    mygubbi.com, a fast growing online home interior décor and furnishing company,
+                                    today announced that it has raised $2.5 million in seed funding from multiple angel investors led by Vipul Parekh, Co-
+                                    founder, Big Basket; Ananda Kallugadde, Co-Founder NeoBytes and Rajesh K Murthy, EVP of Infosys.
+                                </p>
+                                <p class="text-muted text-left"> 07.03.2016 </p>
+                                <p>
+                                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final" class="color-orange read_full font-size16 hidden-sm hidden-md hidden-lg"> Download </a>
+                                </p>
+                            </div>
+                            <div class="pb20">
+                                <div class="show-img">
+                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1472560251/media_page/raises.jpg" />
+                                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final" class="btn btn-default btn-media update"> Download </a>
+                                </div>
+                                <h2 class="txt-urstory media-txt-title">
+                                    Mygubbi.com Raises $2.5 Million in Seed Funding
+                                </h2>
+                                <p>
+                                    mygubbi.com, a fast growing online home interior décor and furnishing company,
+                                    today announced that it has raised $2.5 million in seed funding from multiple angel investors led by Vipul Parekh, Co-
+                                    founder, Big Basket; Ananda Kallugadde, Co-Founder NeoBytes and Rajesh K Murthy, EVP of Infosys.
+                                </p>
+                                <p class="text-muted text-left"> 07.03.2016 </p>
+                                <p>
+                                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final" class="color-orange read_full font-size16 hidden-sm hidden-md hidden-lg"> Download </a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="pb20">
+                                <div class="show-img">
+                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1472560251/media_page/raises.jpg" />
+                                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final" class="btn btn-default btn-media update"> Download </a>
+                                </div>
+                                <h2 class="txt-urstory media-txt-title">
+                                    Mygubbi.com Raises $2.5 Million in Seed Funding
+                                </h2>
+                                <p>
+                                    mygubbi.com, a fast growing online home interior décor and furnishing company,
+                                    today announced that it has raised $2.5 million in seed funding from multiple angel investors led by Vipul Parekh, Co-
+                                    founder, Big Basket; Ananda Kallugadde, Co-Founder NeoBytes and Rajesh K Murthy, EVP of Infosys.
+                                </p>
+                                <p class="text-muted text-left"> 07.03.2016 </p>
+                                <p>
+                                    <a href="https://res.cloudinary.com/mygubbi/image/upload/media_page/Mygubbi_seed_funding_press_release_final_-incl_quotes_1.pdf" target="_blank" download="Mygubbi_seed_funding_press_release_final" class="color-orange read_full font-size16 hidden-sm hidden-md hidden-lg"> Download </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="blog-side-box">
+
+                        <h3>More Stories</h3>
+                        <% if(typeof(rec_stories) !== 'undefined'){ %>
+                        <% _.each(rec_stories, function(story){ %>
+
+                        <%
+                        var blog_url = story.blog_heading;
+                        blog_url = blog_url.replace(/-/g,"_");
+                        blog_url = blog_url.replace(/\s/g,"-");
+
+                        %>
+
+                        <div class="row margin25-0-0">
+                            <div class="col-md-5 padding0">
+                                <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                    <img
+                                            src="<%= story.blog_main_image %>"
+                                            class="img-responsive"
+                                            title="">
+                                </a>
+                            </div>
+                            <div class="col-md-7 padding-right0">
+                                <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                    <h5>
+                                        <% var blg_hdng = story.blog_heading;
+                                        var r = /\\u([\d\w]{4})/gi;
+                                        blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                                        return String.fromCharCode(parseInt(grp, 16)); } );
+                                        blg_hdng = unescape(blg_hdng); %>
+                                        <%= blg_hdng %>
+                                    </h5>
+                                </a>
+                                <div class="date_small"><%= story.date_of_publish %></div>
+                            </div>
+                        </div>
+                        <% }); } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+<!--
+<section class="bg-white menu-spacer">
+    &lt;!&ndash;<div class="container-fluid category-banner">
+        <div class="row">
+            <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
+        </div>
+    </div>&ndash;&gt;
+    <div class="container bg-color-white hidden-xs">
+        <div class="row">
+            <ul class="breadcrumb">
+                <li><a href="/"><i class="fa fa-home"></i></a></li>
+                <li class="active"><a href="javascript:void(0);"> Stories111111111111111111111111 </a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container blogs">
+        <div class="col-md-12 col-sm-12 padding15">
+
+            <% if(typeof(stories) !== 'undefined'){ count = 1; %>
+            <% _.each(stories, function(story){ %>
+            <% if((typeof(story.id) !== 'undefined') && (story.blog_main_image != '')){ %>
+
+            <%
+            var blog_url = story.blog_heading;
+            //blog_url = blog_url.replace(/-/g,"_");
+            //blog_url = blog_url.replace(/\s/g,"-");
+
+            %>
+
+            <% if (count % 2 != 0) { %>
+
+            <% var blg_hdng = story.blog_heading;
+            var r = /\\u([\d\w]{4})/gi;
+            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+            return String.fromCharCode(parseInt(grp, 16)); } );
+            blg_hdng = unescape(blg_hdng); %>
+
+            <div class="row margin50-0">
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                        <img
+                                src="<%= story.blog_main_image %>"
+                                class="img-responsive"
+                                title="<%= blg_hdng %>"
+                                alt="<%= blg_hdng %>">
+                    </a>
+                </div>
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <p class="color-333">
+                        <% var cnt = 0; %>
+                        <% _.each(story.blog_categories, function(cat){ %>
+                        <% if(cnt != 0) { %> | <% } %>
+                        <%= cat %>
+                        <% cnt = cnt + 1; }); %>
+                    </p>
+                    <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                        <h2 class="hidden-xs">
+                            <%= blg_hdng %>
+                        </h2>
+                        <h4 class="hidden-lg hidden-md hidden-sm">
+                            <% var blg_hdng = story.blog_heading;
+                            var r = /\\u([\d\w]{4})/gi;
+                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                            return String.fromCharCode(parseInt(grp, 16)); } );
+                            blg_hdng = unescape(blg_hdng); %>
+                            <%= blg_hdng %>
+                        </h4>
+                    </a>
+
+                    <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
+                    <p class="padding-top15 blog_data justify">
+                        <% var blg_stry = story.blog_content;
+                        var r = /\\u([\d\w]{4})/gi;
+                        blg_stry = blg_stry.replace(r, function (match, grp) {
+                        return String.fromCharCode(parseInt(grp, 16)); } );
+                        blg_stry = unescape(blg_stry);
+                        var n = blg_stry.indexOf('</p>');
+                    if (n > 200){
+                    var stry = blg_stry.slice(0, 180); %>
+                    <%= stry %>...
+                    <% } else {
+                    var stry = blg_stry.slice(0, n); %>
+                    <%= stry %>
+                    <% } %>
+                    </p>
+                    <p class="font-size16">
+                        <a href="/story-<%= encodeURIComponent(blog_url) %>" class="color-orange read_full">Read Full Story</a>
+                    </p>
+                </div>
+            </div>
+
+            <% } else { %>
+            <% var blg_hdng = story.blog_heading;
+            var r = /\\u([\d\w]{4})/gi;
+            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+            return String.fromCharCode(parseInt(grp, 16)); } );
+            blg_hdng = unescape(blg_hdng); %>
+
+            <div class="row margin50-0">
+                <div class="col-xs-12 col-md-7 col-sm-12 pull-right">
+                    <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                        <img
+                                src="<%= story.blog_main_image %>"
+                                class="img-responsive"
+                                title="<%= blg_hdng %>"
+                                alt="<%= blg_hdng %>">
+                    </a>
+                </div>
+                <div class="col-xs-12 col-md-5 col-sm-12">
+                    <p class="color-333">
+                        <% var cnt = 0; %>
+                        <% _.each(story.blog_categories, function(cat){ %>
+                        <% if(cnt != 0) { %> | <% } %>
+                        <%= cat %>
+                        <% cnt = cnt + 1; }); %>
+                    </p>
+                    <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                        <h2 class="hidden-xs">
+                            <%= blg_hdng %>
+                        </h2>
+                        <h4 class="hidden-lg hidden-md hidden-sm">
+                            <% var blg_hdng = story.blog_heading;
+                            var r = /\\u([\d\w]{4})/gi;
+                            blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                            return String.fromCharCode(parseInt(grp, 16)); } );
+                            blg_hdng = unescape(blg_hdng); %>
+                            <%= blg_hdng %>
+                        </h4>
+                    </a>
+
+                    <div class="date">By <%= story.author %> | <%= story.date_of_publish %></div>
+                    <p class="padding-top15 blog_data justify">
+                        <% var blg_stry = story.blog_content;
+                        var r = /\\u([\d\w]{4})/gi;
+                        blg_stry = blg_stry.replace(r, function (match, grp) {
+                        return String.fromCharCode(parseInt(grp, 16)); } );
+                        blg_stry = unescape(blg_stry);
+                        var n = blg_stry.indexOf('</p>');
+                    if (n > 200){
+                    var stry = blg_stry.slice(0, 180); %>
+                    <%= stry %>...
+                    <% } else {
+                    var stry = blg_stry.slice(0, n); %>
+                    <%= stry %>
+                    <% } %>
+                    </p>
+                    <p class="font-size16">
+                        <a href="/story-<%= encodeURIComponent(blog_url) %>"
+                           class="color-orange read_full">Read Full Story</a>
+                    </p>
+                </div>
+            </div>
+
+            <% } %>
+            <% count = count + 1; %>
+            <% } %>
+            <% }); } %>
+        </div>
+    </div>
+</section>
+-->
