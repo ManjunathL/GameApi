@@ -485,6 +485,27 @@ input[type=checkbox] {
     padding-bottom:50px;
 }
 
+@media (max-width: 768px) {
+    .mob-padding-0{
+        padding: 0px;
+    }
+    .mob-margin-0{
+        margin: 0px;
+    }
+    .mob-margin-top-0{
+        margin-top: 0px;
+    }
+    .mob-padding-top-0{
+        padding-top: 0px;
+    }
+    .mob-margin-bottom-0{
+        margin-bottom: 0px;
+    }
+    .mob-padding-bottom-0{
+        padding-bottom: 0px;
+    }
+}
+
 /* Background Attributes */
 
 .bg-none {
@@ -764,6 +785,57 @@ input[type=checkbox] {
     color: #556871;
 }
 
+.nri-description-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477398251/nri_page/your_04.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: 470px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 110px 30px 110px 40px;
+    text-align: left;
+    color: #ffffff;
+}
+
+.nri-description-bg h2{
+    font-weight: 400;
+    font-size: 34px;
+    text-transform: inherit;
+    line-height: 140%;
+    margin: 0px;
+}
+
+.nri-dec-hr{
+    border-top: 1px solid #fff;
+    line-height: 1px;
+    margin: 30px 0px;
+}
+
+.nri-description-section h4{
+    font-size: 14px;
+}
+
+.nri-description-section p{
+    font-size: 12px;
+    padding: 10px 10px 0px;
+}
+
+.manufacturing-box{
+    min-height: 235px;
+}
+
+.img-manufacturing{
+    padding: 10px 0px 0px;
+    width: 80px;
+}
+
 .nri-why-us-section{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477388100/nri_page/center-banner_02.jpg");
     background-repeat: no-repeat;
@@ -792,6 +864,14 @@ input[type=checkbox] {
 .img-nri-why {
     width: 100px;
     margin-bottom: 15px;
+}
+@media (max-width: 768px) {
+    .manufacturing-box{
+        min-height: 330px;
+    }
+    .nri-description-bg{
+        height: auto;
+    }
 }
 
 /* End NRI Page */
@@ -842,6 +922,9 @@ input[type=checkbox] {
 }
 
 @media (min-width:768px) {
+    .kitchen-head{
+        font-size: 24px;
+    }
     .kitchen-card .nav-tabs.nav-new-justified>li{
         width: auto;
     }
@@ -1579,6 +1662,14 @@ input[type=checkbox] {
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 
+    /* Start FAQ page */
+    .q-container{
+        min-height: 60px;
+    }
+    .faq-q{
+        min-height: 60px;
+    }
+    /* End FAQ page */
 
     /* Start Quality Page */
     .quality-cnt-des {
@@ -1589,6 +1680,15 @@ input[type=checkbox] {
 
 /* Landscape phones and down */
 @media (max-width: 480px) {
+
+    /* Start FAQ page */
+    .q-container{
+        min-height: 60px;
+    }
+    .faq-q{
+        min-height: 60px;
+    }
+    /* End FAQ page */
 
     /* Start Quality Page */
     .quality-cnt-head{

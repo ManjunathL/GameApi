@@ -2453,6 +2453,14 @@ fieldset[disabled] .btn-xl.active {
     border: 1px solid !important;
 }
 
+.border-grey{
+    border: 1px solid #CCC;
+}
+
+.border-right-grey{
+    border-right: 1px solid #CCC;
+}
+
 .border-bottom-orange {
     border-bottom: 1px solid #f1591f;
 }
@@ -2463,6 +2471,18 @@ fieldset[disabled] .btn-xl.active {
 
 .border-bottom-grey {
     border-bottom: 1px solid #CCC;
+}
+
+.border-top-orange {
+    border-top: 1px solid #f1591f;
+}
+
+.border-top-white {
+    border-top: 1px solid #ffffff;
+}
+
+.border-top-grey {
+    border-top: 1px solid #CCC;
 }
 
 .separator-horizontal {
@@ -6626,9 +6646,6 @@ a.tab-ico {
     .c-project-description{
         font-size: 13px;
         margin-bottom: 15px;
-    }
-    .c-project .border-bottom-grey{
-        border: 0px solid #ddd;
     }
 }
 
