@@ -80,12 +80,13 @@ public class ApiServerVerticle extends AbstractVerticle
                 }
                 else
                 {
-                    System.out.println("URL " + url +  "Error with url:" + url );
+                    LOG.info("if starts with www ", url);
+                    url = httpsRedirectUrl;
                 }
             }
             catch (URISyntaxException e)
             {
-                System.out.println("Error with url:" + url + " || " + e.getMessage());
+                LOG.info("Error with url:" + url + " || " + e.getMessage());
                 url = httpsRedirectUrl;
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
