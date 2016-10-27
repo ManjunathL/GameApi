@@ -3,6 +3,21 @@
 
 /* Know Your Kitchen */
 
+.btn-k-explore{
+     background-color: #000000;
+     color:#ffffff;
+     border-radius:0px !important;
+     text-transform: uppercase;
+     border: 2px solid #000000;
+ }
+
+ .btn-k-explore:hover,
+ .btn-k-explore:focus,
+ .btn-k-explore:active{
+     background-color: #ffffff;
+     color: #000000;
+ }
+
 .kyk-box p{
     font-size: 16px;
     line-height: 150%;
