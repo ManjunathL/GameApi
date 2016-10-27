@@ -5,7 +5,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/typeOfKitchen/typeofkitchen.html',
+    'text!templates/typeofkitchen/typeofkitchen.html',
     'cloudinary_jquery',
     'slyutil',
     'mgfirebase',
@@ -45,7 +45,6 @@ define([
                 $("#"+id+"-img").addClass('active');
             $("#"+id+"-content").addClass('active');
 
-            console.log(id);
             return this;
         },
         changewalltab: function(e) {
@@ -57,7 +56,6 @@ define([
                 $("#"+id+"-img").addClass('active');
             $("#"+id+"-content").addClass('active');
 
-            console.log(id);
             return this;
         },
         changetalltab: function(e) {
