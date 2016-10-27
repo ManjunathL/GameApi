@@ -28,6 +28,7 @@ define(function() {
         COMPLETEDPROJECTSPAGE: "completedprojectspage",
         NEWPRODUCT_DETAILSPAGE: "NewProductDetailsPage",
         QUALITYCHECK: "QualityCheckPage",
+        TYPEOFKITCHENPAGE: "typeofkitchen",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

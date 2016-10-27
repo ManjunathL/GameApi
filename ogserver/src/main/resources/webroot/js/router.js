@@ -536,7 +536,7 @@ define([
         });
         router.on('route:typeofkitchen', function(actions) {
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
-            require(['views/typeOfKitchen/typeofkitchen'], function(typeofkitchen) {
+            require(['views/typeofkitchen/typeofkitchen'], function(typeofkitchen) {
                 VM.create(VM.TYPEOFKITCHENPAGE, typeofkitchen).render();
             });
         });
