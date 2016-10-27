@@ -504,6 +504,9 @@ input[type=checkbox] {
     .mob-padding-bottom-0{
         padding-bottom: 0px;
     }
+    .mob-padding-15{
+        padding: 15px;
+    }
 }
 
 /* Background Attributes */
@@ -872,6 +875,13 @@ input[type=checkbox] {
     .nri-description-bg{
         height: auto;
     }
+    .nri-process-unit {
+        min-height: 410px;
+    }
+    .nri-process-unit img{
+        width: 180px;
+    }
+
 }
 
 /* End NRI Page */
