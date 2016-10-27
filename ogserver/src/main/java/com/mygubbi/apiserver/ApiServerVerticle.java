@@ -76,7 +76,8 @@ public class ApiServerVerticle extends AbstractVerticle
                     if (hostNameIsNaked) hostName = "www." + hostName;
                     URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
                     url = newUri.toString();
-                    //System.out.println("URL " + url + " rewritten as :" + newUri.toString() + " in " + duration);
+                    LOG.info("Rewriting if doesn't starts with www", url);
+                    LOG.info("URL " + url + " rewritten as :" + newUri.toString());
                 }
                 else
                 {
