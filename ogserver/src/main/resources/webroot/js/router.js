@@ -8,7 +8,6 @@ define([
 /*    var prod = 'products';
     prod = prod.replace(/\s/g,"-");*/
     var AppRouter = Backbone.Router.extend({
-
         routes: {
             '': 'dashboard',
 
