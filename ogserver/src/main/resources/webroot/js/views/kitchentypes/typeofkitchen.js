@@ -32,66 +32,38 @@ define([
                 _.bindAll(this, 'renderWithUserProfCallback');
             },
             events: {
-                "click .hob-lnk": "changehobtab",
-                "click .chimney-lnk": "changechimneytab",
-                "click .apl-lnk": "changeapltab",
-                "click .sink-lnk": "changesinktab",
-                "click .faucet-lnk": "changefaucettab"
+                "click .base-lnk": "changebasetab",
+                "click .wall-lnk": "changewalltab",
+                "click .tall-lnk": "changetalltab"
             },
-            changehobtab: function(e){
+            changebasetab: function(e) {
                 e.preventDefault();
                 var currentTarget = $(e.currentTarget);
                 var id = $(e.currentTarget).attr('id');
-                $(".hob-img").removeClass('active');
-                 $(".hob-cnt").removeClass('active');
+                $(".base-img").removeClass('active');
+                 $(".base-cnt").removeClass('active');
                     $("#"+id+"-img").addClass('active');
                 $("#"+id+"-content").addClass('active');
 
-                console.log(id);
                 return this;
             },
-            changechimneytab: function(e){
+            changewalltab: function(e) {
                 e.preventDefault();
                 var currentTarget = $(e.currentTarget);
                 var id = $(e.currentTarget).attr('id');
-                $(".chimney-img").removeClass('active');
-                 $(".chimney-cnt").removeClass('active');
+                $(".wall-img").removeClass('active');
+                 $(".wall-cnt").removeClass('active');
                     $("#"+id+"-img").addClass('active');
                 $("#"+id+"-content").addClass('active');
 
-                console.log(id);
                 return this;
             },
-            changeapltab: function(e){
+            changetalltab: function(e) {
                 e.preventDefault();
                 var currentTarget = $(e.currentTarget);
                 var id = $(e.currentTarget).attr('id');
-                $(".apl-img").removeClass('active');
-                 $(".apl-cnt").removeClass('active');
-                    $("#"+id+"-img").addClass('active');
-                $("#"+id+"-content").addClass('active');
-
-                console.log(id);
-                return this;
-            },
-            changesinktab: function(e){
-                e.preventDefault();
-                var currentTarget = $(e.currentTarget);
-                var id = $(e.currentTarget).attr('id');
-                $(".sink-img").removeClass('active');
-                 $(".sink-cnt").removeClass('active');
-                    $("#"+id+"-img").addClass('active');
-                $("#"+id+"-content").addClass('active');
-
-                console.log(id);
-                return this;
-            },
-            changefaucettab: function(e){
-                e.preventDefault();
-                var currentTarget = $(e.currentTarget);
-                var id = $(e.currentTarget).attr('id');
-                $(".faucet-img").removeClass('active');
-                 $(".faucet-cnt").removeClass('active');
+                $(".tall-img").removeClass('active');
+                 $(".tall-cnt").removeClass('active');
                     $("#"+id+"-img").addClass('active');
                 $("#"+id+"-content").addClass('active');
 
