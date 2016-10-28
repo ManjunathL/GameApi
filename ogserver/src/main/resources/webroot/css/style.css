@@ -1014,7 +1014,7 @@ input[type=checkbox] {
     display: block;
     position: absolute;
     z-index: 999;
-    top: 55%;
+    top: 45%;
     width: 100%;
 }
 
@@ -1056,7 +1056,7 @@ input[type=checkbox] {
         padding: 10px 0px;
     }
     .wall-tab .kitchen-card .nav-tabs.nav-justified>li>a{
-        padding: 10px 15px;
+        padding: 10px 10px;
     }
     .kitchen-card .nav-tabs.nav-justified>li>a:hover,
     .kkitchen-card .nav-tabs.nav-justified>li>a:active,
