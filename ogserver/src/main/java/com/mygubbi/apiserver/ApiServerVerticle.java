@@ -76,16 +76,18 @@ public class ApiServerVerticle extends AbstractVerticle
                     if (hostNameIsNaked) hostName = "www." + hostName;
                     URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
                     url = newUri.toString();
-                    //System.out.println("URL " + url + " rewritten as :" + newUri.toString() + " in " + duration);
+                    LOG.info("Rewriting if doesn't starts with www", url);
+                    LOG.info("URL " + url + " rewritten as :" + newUri.toString());
                 }
                 else
                 {
-                    System.out.println("URL " + url +  "Error with url:" + url );
+                    LOG.info("if starts with www ", url);
+                    url = httpsRedirectUrl;
                 }
             }
             catch (URISyntaxException e)
             {
-                System.out.println("Error with url:" + url + " || " + e.getMessage());
+                LOG.info("Error with url:" + url + " || " + e.getMessage());
                 url = httpsRedirectUrl;
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");

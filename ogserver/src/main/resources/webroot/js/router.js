@@ -8,7 +8,6 @@ define([
 /*    var prod = 'products';
     prod = prod.replace(/\s/g,"-");*/
     var AppRouter = Backbone.Router.extend({
-
         routes: {
             '': 'dashboard',
 
@@ -72,6 +71,7 @@ define([
             'experience-center(/)': 'experiencecenter',
             'platinum-home-interiors(/)': 'platinumhomes',
             'kitchen-accessories(/)': 'kitchenAccessories',
+            'kitchen-appliance(/)': 'kitchenAppliance',
             'type-of-kitchen(/)': 'typeofkitchen',
             '*something': 'errorPage'
         },
@@ -528,9 +528,15 @@ define([
                 VM.create(VM.KITCHENACCESSORIESPAGE, kitchenAccessories).render();
             });
         });
+        router.on('route:kitchenAppliance', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            require(['views/kitchenAppliance/kitchen_appliance'], function(kitchenAppliance) {
+                VM.create(VM.KITCHENAPPLIANCEPAGE, kitchenAppliance).render();
+            });
+        });
         router.on('route:typeofkitchen', function(actions) {
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
-            require(['views/typeOfKitchen/typeofkitchen'], function(typeofkitchen) {
+            require(['views/kitchentypes/typeofkitchen'], function(typeofkitchen) {
                 VM.create(VM.TYPEOFKITCHENPAGE, typeofkitchen).render();
             });
         });
