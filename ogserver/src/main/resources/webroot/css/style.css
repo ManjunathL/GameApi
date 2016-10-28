@@ -700,6 +700,13 @@ input[type=checkbox] {
 .position-absolute {
     position: absolute;
 }
+.clr-search-lnk{
+    position: absolute;
+    top: 15px;
+    right: 5%;
+    color: #999;
+    cursor:pointer;
+}
 
 /* Back To Top */
 .back-to-top {
@@ -1659,11 +1666,59 @@ input[type=checkbox] {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding: 0px;
+    padding: 140px 0px 140px 0px;
     text-align: center;
     color: #ffffff;
 }
-
+.bg-orange-blog{
+    background-color: rgba(241, 89, 31, 0.77);
+}
+.bg-orange-blog > h1{
+    font-weight: bold;
+    text-transform: none!important;
+    font-size: 50px;
+}
+.blog-menu li a{
+    text-transform: uppercase;
+    color:#ff3200;
+    border-bottom: 2px solid #fff;
+}
+.blog-menu li a:hover,
+.blog-menu li a:focus,
+.blog-menu li a:active{
+    border-bottom: 2px solid #666;
+    background-color:#ffffff;
+}
+.blog-borderbtm{
+    border-bottom: 2px solid #666;
+    padding: 10px 0px;
+}
+.blog-card{
+    outline: 0;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #ff3200;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+    float: left;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.blog-card:active,
+.blog-card:focus,
+.blog-card:hover{
+    color: #ffffff;
+    background-color: #ff3200;
+}
+.blog-search{
+    position:absolute;
+    top: 10px;
+    left: 25px;
+}
 /* End Blog */
 
 /*********************************

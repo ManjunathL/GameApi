@@ -62,7 +62,7 @@ define([
             });
 
             $(this.el).html(_.template(fullStoryTemplate)({
-                'stories': rec_stories,
+                'rec_stories': rec_stories,
                 'full_story': full_story
             }));
 

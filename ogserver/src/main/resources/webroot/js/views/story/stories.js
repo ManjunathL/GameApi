@@ -50,11 +50,11 @@ define([
             //console.log(_(stories).pluck('date_of_publish'));
 
             var rec_stories = [];
-            $.each(stories.slice(1,5), function(i, data) {
+            $.each(stories.slice(1,4), function(i, data) {
                 rec_stories.push(data);
             });
 
-            $(this.el).html(_.template(storiesTemplate)({'stories': stories,'rec_stories': rec_stories,}));
+            $(this.el).html(_.template(storiesTemplate)({'stories': stories,'rec_stories': rec_stories}));
         }
     });
     return StoriesView;

@@ -16,6 +16,7 @@
         <div id="sb-search" class="sb-search hidden-xs hidden-sm" >
             <form id="searchForm1">
                 <input class="sb-search-input" placeholder="Search for awesomeness here..." type="text" value="" name="term" id="searchInput1" autocomplete="off">
+                <i class="fa fa-refresh clr-search-lnk" title="CLEAR" aria-hidden="true" style="display:none;"></i>
                 <i class="pe-7s-close search-ico search-close-ico" style="font-size:16px;"></i>
             </form>
             <div class="row sb-search_suggest hidden-xs hidden-sm"></div>
@@ -23,6 +24,7 @@
         <div id="sb-search-duplicate" class="sb-search hidden-md hidden-lg" style="position:absolute;">
             <form id="searchForm2">
                 <input class="sb-search-input" placeholder="Search for awesomeness here..." type="text" value="" name="search" id="searchInput2" autocomplete="off">
+                <i class="fa fa-refresh clr-search-lnk" title="CLEAR" aria-hidden="true" style="display:none;"></i>
                 <i class="pe-7s-close search-ico search-close-ico" style="font-size:16px;"></i>
             </form>
             <% if(typeof(a_srch) !== 'undefined' && ((Object.keys(a_srch).length) !== 0)) { %>
@@ -30,6 +32,8 @@
                 <%  _.each(a_srch, function(as){
                 if(as && as.resultName){ %>
                 <a href="#" class="sb-search-txt"><p><%= as.resultName %></p></a>
+                console.log("=============");
+                console.log(as.resultName);
                 <% } }); %>
 
                 <% if(typeof(p_srch) !== 'undefined' && ((Object.keys(p_srch).length) !== 0)) {
