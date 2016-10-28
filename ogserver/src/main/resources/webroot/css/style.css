@@ -950,7 +950,7 @@ input[type=checkbox] {
         text-transform: uppercase;
         cursor: pointer;
         font-size: 11px;
-        padding: 10px 10px;
+        padding: 10px 0px;
     }
     .kitchen-card .nav-tabs.nav-justified>li>a:hover,
     .kkitchen-card .nav-tabs.nav-justified>li>a:active,
