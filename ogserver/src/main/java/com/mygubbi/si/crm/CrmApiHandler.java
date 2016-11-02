@@ -57,7 +57,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData.rows.isEmpty())
+                    if (selectData.rows.isEmpty() || selectData.rows == null)
                     {
                         sendError(routingContext.response(), "User does not exist for email: " + email);
                     }
@@ -160,7 +160,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData.rows.isEmpty())
+                    if (selectData.rows == null || selectData.rows.isEmpty() )
                     {
                         try
                         {
@@ -184,6 +184,7 @@ public class CrmApiHandler extends AbstractRouteHandler
     private void createUserOnWebsite(JsonObject userJson)
     {
         String email = userJson.getString("email");
+        String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
         if (host == null)
         {
@@ -196,11 +197,13 @@ public class CrmApiHandler extends AbstractRouteHandler
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
-                    .setPath("/createuser")
-                    .setParameter("email", email)
-                    .setParameter("password", password)
-                    .setParameter("phone", userJson.getString("phone"))
+                    .setPath("/registerUser.html")
+                    .setFragment(fragment)
                     .setParameter("name", userJson.getString("name"))
+                    .setParameter("email", email)
+                    .setParameter("phone", userJson.getString("phone"))
+                    .setParameter("password", password)
+                    .setParameter("photoUrl","null")
                     .build();
             HttpResponse response = Request.Get(uri).execute().returnResponse();
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
@@ -234,6 +237,5 @@ public class CrmApiHandler extends AbstractRouteHandler
         sendError(routingContext.response(), "Credentials not valid");
         return false;
     }
-
 
 }
