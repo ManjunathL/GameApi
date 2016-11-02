@@ -183,6 +183,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void createUserOnWebsite(JsonObject userJson)
     {
+        LOG.debug("User Json: " + userJson.encodePrettily());
         String email = userJson.getString("email");
         String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
@@ -194,14 +195,16 @@ public class CrmApiHandler extends AbstractRouteHandler
         try
         {
             String password = RandomStringUtils.random(8, true, true);
+            String name = userJson.getString("firstName") + userJson.getString("lastName");
+            String phone =  userJson.getString("mobile");
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registerUser.html")
-                    .setFragment(fragment)
-                    .setParameter("name", userJson.getString("name"))
+                    .setParameter("_escaped_fragment_",fragment)
+                    .setParameter("name", name)
                     .setParameter("email", email)
-                    .setParameter("phone", userJson.getString("phone"))
+                    .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
                     .build();
