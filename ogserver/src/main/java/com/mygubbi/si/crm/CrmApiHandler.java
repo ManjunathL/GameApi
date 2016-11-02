@@ -205,6 +205,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
                     .build();
+            LOG.debug("URL :" +  uri.toString());
             HttpResponse response = Request.Get(uri).execute().returnResponse();
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
             {
