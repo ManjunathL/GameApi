@@ -18,7 +18,9 @@
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
 
   "fbServicesJson": "TO_BE_DEFINED",
-  "fbUrl": "TO_BE_DEFINED"
+  "fbUrl": "TO_BE_DEFINED",
+  "websiteHost": "game.mygubbi.com"
+
 
 }
 

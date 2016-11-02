@@ -18,7 +18,8 @@
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
 
   "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
-  "fbUrl": "https://mygubbi-cep.firebaseio.com"
+  "fbUrl": "https://mygubbi-cep.firebaseio.com",
+  "websiteHost": "uat.mygubbi.com"
 
 }
 
