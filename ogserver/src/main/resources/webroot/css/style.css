@@ -926,6 +926,14 @@ input[type=checkbox] {
     border: 0px solid #ddd;
     background: transparent;
 }
+.kitchen-card .nav-tabs.nav-new-justified{
+    width: 100%;
+    border-bottom: 0;
+    margin: 0px auto;
+    text-align: center;
+    position: relative;
+    display: inline;
+}
 
 .drawers-details{
     margin-top: 15px;
@@ -943,7 +951,7 @@ input[type=checkbox] {
         cursor: pointer;
     }
     .kitchen-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 7px solid #b98e53;
+        border-bottom: 7px solid #aaaaaa;
         border-radius: 0px;
         background: transparent;
         margin:0px 1px;
@@ -955,7 +963,7 @@ input[type=checkbox] {
     .kitchen-card .nav-tabs.nav-justified>li>a:hover,
     .kkitchen-card .nav-tabs.nav-justified>li>a:active,
     .kitchen-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 7px solid #bd7513;
+        border-bottom: 7px solid #999999;
     }
 }
 
@@ -1046,13 +1054,13 @@ input[type=checkbox] {
         cursor: pointer;
     }
     .kitchen-card .nav-tabs.nav-justified>li>a{
-        border-bottom: 7px solid #b98e53;
+        border-bottom: 7px solid #aaa;
         border-radius: 0px;
         background: transparent;
         margin:0px 1px;
         text-transform: uppercase;
         cursor: pointer;
-        font-size: 11px;
+        font-size: 14px;
         padding: 10px 0px;
     }
     .wall-tab .kitchen-card .nav-tabs.nav-justified>li>a{
@@ -1061,7 +1069,7 @@ input[type=checkbox] {
     .kitchen-card .nav-tabs.nav-justified>li>a:hover,
     .kkitchen-card .nav-tabs.nav-justified>li>a:active,
     .kitchen-card .nav-tabs.nav-justified>li>a:focus{
-        border-bottom: 7px solid #bd7513;
+        border-bottom: 7px solid #999999;
     }
 }
 
