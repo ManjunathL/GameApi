@@ -19,7 +19,9 @@
 
   "fbServicesJson": "TO_BE_DEFINED",
   "fbUrl": "TO_BE_DEFINED",
-  "websiteHost": "game.mygubbi.com"
+  "websiteHost": "game.mygubbi.com",
+  "acceptSSLCertificates": "false"
+
 
 
 }
