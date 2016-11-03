@@ -19,10 +19,17 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.fluent.Request;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.net.ssl.SSLContext;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.Base64;
@@ -51,13 +58,14 @@ public class CrmApiHandler extends AbstractRouteHandler
         if (!isRequestAuthenticated(routingContext)) return;
 
         JsonObject requestJson = routingContext.getBodyAsJson();
+        LOG.debug("JSON :" + requestJson.encodePrettily());
         String email = requestJson.getString("email");
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData.rows.isEmpty() || selectData.rows == null)
+                    if (selectData.rows == null || selectData.rows.isEmpty())
                     {
                         sendError(routingContext.response(), "User does not exist for email: " + email);
                     }
@@ -183,6 +191,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void createUserOnWebsite(JsonObject userJson)
     {
+        String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
         String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
@@ -193,6 +202,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         }
         try
         {
+            HttpResponse response;
             String password = RandomStringUtils.random(8, true, true);
             String name = userJson.getString("firstName") + " " + userJson.getString("lastName");
             String phone =  userJson.getString("mobile");
@@ -202,18 +212,34 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setPath("/registerUser.html")
                     .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
-                    .setParameter("email", email.replace("%40", "@"))
+                    .setParameter("email", email)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
                     .build();
             LOG.debug("URL :" + uri.toString());
 
-            HttpResponse response = Request.Get(uri).execute().returnResponse();
-            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
+            if (acceptSSLCertificates.equals("true"))
             {
-                LOG.error("Error in calling website for creating user." + response.toString());
-                throw new RuntimeException("Error in creating user for : " + email);
+                org.apache.http.ssl.SSLContextBuilder context_b = SSLContextBuilder.create();
+                context_b.loadTrustMaterial(new org.apache.http.conn.ssl.TrustSelfSignedStrategy());
+                SSLContext ssl_context = context_b.build();
+                org.apache.http.conn.ssl.SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(ssl_context,
+                        new org.apache.http.conn.ssl.NoopHostnameVerifier());
+
+                HttpClientBuilder builder = HttpClients.custom()
+                        .setSSLSocketFactory(sslSocketFactory);
+                CloseableHttpClient httpclient = builder.build();
+
+               response = httpclient.execute(new HttpGet(uri));
+            }
+            else
+            {
+                response = Request.Get(uri).execute().returnResponse();
+            }
+                if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                    LOG.error("Error in calling website for creating user." + response.toString());
+                    throw new RuntimeException("Error in creating user for : " + email);
             }
         }
         catch (Exception e)
