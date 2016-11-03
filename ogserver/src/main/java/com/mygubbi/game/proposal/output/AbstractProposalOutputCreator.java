@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.output;
 
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
+import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelWorkbookManager;
 
@@ -11,21 +12,23 @@ import com.mygubbi.si.excel.ExcelWorkbookManager;
 public abstract class AbstractProposalOutputCreator implements ProposalOutputCreator
 {
     protected QuoteData quoteData;
+    protected ProposalHeader proposalHeader;
     protected ExcelWorkbookManager workbookManager;
     private String outputFile;
 
     public abstract String getTemplateName();
     public abstract String getOutputFilename();
 
-    public AbstractProposalOutputCreator(QuoteData quoteData)
+    public AbstractProposalOutputCreator(QuoteData quoteData,ProposalHeader proposalHeader)
     {
         this.quoteData = quoteData;
+        this.proposalHeader=proposalHeader;
     }
 
     protected void openWorkbook()
     {
-        this.outputFile = this.copyTemplateFile();
-        this.workbookManager = new ExcelWorkbookManager(this.outputFile);
+        //this.outputFile = this.copyTemplateFile();
+        //this.workbookManager = new ExcelWorkbookManager(this.outputFile);
     }
 
     @Override

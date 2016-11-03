@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.jobcard;
 
+import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
@@ -13,9 +14,9 @@ public class ExcelJobCardCreator extends AbstractProposalOutputCreator
 {
     private final static Logger LOG = LogManager.getLogger(ExcelJobCardCreator.class);
 
-    public ExcelJobCardCreator(QuoteData quoteData)
+    public ExcelJobCardCreator(QuoteData quoteData, ProposalHeader proposalHeader)
     {
-        super(quoteData);
+        super(quoteData,proposalHeader);
     }
 
     public String getTemplateName()

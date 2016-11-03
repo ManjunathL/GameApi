@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.erp;
 
+import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
@@ -13,9 +14,9 @@ public class ExcelSalesOrderCreator extends AbstractProposalOutputCreator
 {
     private final static Logger LOG = LogManager.getLogger(ExcelSalesOrderCreator.class);
 
-    public ExcelSalesOrderCreator(QuoteData quoteData)
+    public ExcelSalesOrderCreator(QuoteData quoteData, ProposalHeader proposalHeader)
     {
-        super(quoteData);
+        super(quoteData,proposalHeader);
     }
 
     public String getTemplateName()

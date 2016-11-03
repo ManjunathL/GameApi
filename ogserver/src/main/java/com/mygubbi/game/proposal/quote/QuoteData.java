@@ -178,7 +178,7 @@ public class QuoteData
         return this.getTotalCost()-this.discountAmount;
     }
 
-    private String concatValuesFromKeys(String[] keys, String delimiter)
+    public String concatValuesFromKeys(String[] keys, String delimiter)
     {
         int size = keys.length;
         StringBuilder sb = new StringBuilder();

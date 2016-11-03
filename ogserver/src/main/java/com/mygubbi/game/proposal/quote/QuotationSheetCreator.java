@@ -91,7 +91,7 @@ public class QuotationSheetCreator implements ExcelCellProcessor
         }
     }
 
-    private int fillAssembledProducts(int currentRow)
+    public int fillAssembledProducts(int currentRow)
     {
         List<AssembledProductInQuote> assembledProducts = this.quoteData.getAssembledProducts();
         if (assembledProducts.isEmpty())

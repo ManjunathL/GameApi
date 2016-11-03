@@ -142,6 +142,15 @@
     },
 
     {
+        "id":"proposal.id",
+        "type":"select",
+        "table":"proposal",
+        "query":"SELECT id FROM proposal ORDER BY id DESC LIMIT 1",
+        "params":[]
+
+    },
+
+    {
       "id": "proposal.document.select",
       "type": "select",
       "table": "proposal_documents",
