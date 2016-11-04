@@ -5,30 +5,31 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'collections/stories',
     'models/story',
     'analytics',
     'text!templates/story/stories.html'
-], function($, _, Backbone, Story, Analytics, storiesTemplate) {
+], function($, _, Backbone, Stories, Story, Analytics, storiesTemplate) {
     var StoriesView = Backbone.View.extend({
         el: '.page',
         story: new Story(),
+        stories: null,
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
+            this.stories = new Stories();
         },
         render: function() {
 
             var that = this;
             var selectedBlogsCategory = this.model.blogcategory;
-            console.log(selectedBlogsCategory);
-            this.story.fetch({
+            this.stories.fetch({
                  data: {
                      "tags": selectedBlogsCategory
                  },
                 success: function(response) {
 
-                    console.log(response);
                     //return false;
-                    that.fetchStoriesAndRender();
+                    that.fetchStoriesAndRender(selectedBlogsCategory);
                     //this.ready();
                 },
                 error: function(model, response, options) {
@@ -36,22 +37,23 @@ define([
                 }
             });
         },
-        fetchStoriesAndRender: function() {
+        fetchStoriesAndRender: function(selectedBlogsCategory) {
             var that = this;
-            var stories = that.story;
-            stories = stories.toJSON();
+            var nwstories = that.stories;
+            nwstories = nwstories.toJSON();
 
-            delete stories.id;
+            delete nwstories.id;
 
-            //console.log(_(stories).pluck('date_of_publish'));
-            stories = _(stories).sortBy(function(story) {
+            nwstories = _(nwstories).sortBy(function(story) {
                 return Date.parse(story.date_of_publish);
             }).reverse();
-            //console.log(_(stories).pluck('date_of_publish'));
 
-            $(this.el).html(_.template(storiesTemplate)({'stories': stories}));
+            var rec_stories = [];
+            $.each(nwstories.slice(1,4), function(i, data) {
+                rec_stories.push(data);
+            });
+            $(this.el).html(_.template(storiesTemplate)({'selCat':selectedBlogsCategory,'stories': nwstories,'rec_stories': rec_stories}));
         }
     });
     return StoriesView;
 });
-
