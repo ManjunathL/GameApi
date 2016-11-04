@@ -28,7 +28,7 @@ define([
 
                     console.log(response);
                     //return false;
-                    that.fetchStoriesAndRender();
+                    that.fetchStoriesAndRender(selectedBlogsCategory);
                     //this.ready();
                 },
                 error: function(model, response, options) {
@@ -36,7 +36,7 @@ define([
                 }
             });
         },
-        fetchStoriesAndRender: function() {
+        fetchStoriesAndRender: function(selectedBlogsCategory) {
             var that = this;
             var stories = that.story;
             stories = stories.toJSON();
@@ -54,7 +54,7 @@ define([
                 rec_stories.push(data);
             });
 
-            $(this.el).html(_.template(storiesTemplate)({'stories': stories,'rec_stories': rec_stories}));
+            $(this.el).html(_.template(storiesTemplate)({'selCat':selectedBlogsCategory,'stories': stories,'rec_stories': rec_stories}));
         }
     });
     return StoriesView;

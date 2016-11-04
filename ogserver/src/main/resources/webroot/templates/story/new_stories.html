@@ -1,3 +1,21 @@
+<style>
+   	.waterfall{
+	}
+	.waterfall > div {
+		margin:0px 0px 0px 0px;
+		padding: 15px;
+	}
+	.waterfall > div:hover{
+	}
+	opacity: 1;
+	}
+	.waterfall > .content-column > div{
+		margin-right: 0;
+	}
+	.special{
+	}
+
+</style>
 <section class="menu-spacer bg-color-white">
 
     <!-- Start story bg -->
@@ -16,26 +34,41 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 pt30 pb30">
-                    <ul class="nav navbar-center navbar-nav blog-menu">
-                        <li class="active"><a href="">Home</a></li>
-                        <li><a href="">Design</a></li>
-                        <li><a href="">Architecture</a></li>
-                        <li><a href="">Interior</a></li>
+                    <ul id="blog-menu-list" class="nav navbar-center navbar-nav blog-menu">
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "all")){ %> class="active" <% } %>><a href="/stories-all">Home</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "trends")){ %> class="active" <% } %>><a href="/stories-trends">Trends & Styles</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "interiors")){ %> class="active" <% } %>><a href="/stories-interiors">Interiors</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "architecture")){ %> class="active" <% } %>><a href="/stories-architecture">Architecture</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "design")){ %> class="active" <% } %>><a href="/stories-design">Design</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "outdoor")){ %> class="active" <% } %>><a href="/stories-outdoor">Outdoors</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "kitchen")){ %> class="active" <% } %>><a href="/stories-kitchen">Kitchen</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "bathroom")){ %> class="active" <% } %>><a href="/stories-bathroom">Bathroom</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "expert-tips")){ %> class="active" <% } %>><a href="/stories-expert-tips">Expert Tips</a></li>
+
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "living")){ %> class="active" <% } %>><a href="/stories-living">Living Room</a></li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-9 col-md-9 col-lg-9">
-                    <div class="row">
-                        <% if(typeof(stories) !== 'undefined'){ count = 1; %>
-                        <% _.each(stories, function(bgstory){ %>
-                        <% if(typeof(bgstory) !== 'undefined' && bgstory != ""){ %>
+                    <div class="case">
+                        <div class="waterfall" data-col-min-width="300"  data-default-container-width=1200" data-autoresize="true">
+                            <% if(typeof(stories) !== 'undefined'){ count = 1; %>
+                            <% _.each(stories, function(bgstory){ %>
+                            <% if(typeof(bgstory) !== 'undefined' && bgstory != ""){ %>
                             <% if(count < 7){ %>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
                                 <% if (count % 2 != 0) { %>
 
-                                    <div class="pb20">
-                                        <div class="show-img">
+                                    <div class="special pb20">
+                                        <div class="show-blog-img">
                                                 <img
                                                         src="<%= bgstory.blog_main_image %>"
                                                         class="img-responsive"
@@ -50,7 +83,7 @@
                                                 <%= bgstory.blog_heading %>
                                             </h2>
                                         </a>
-                                        <p class="font-size18">
+                                        <p class="font-size14">
                                             <% var cnt = 0; %>
                                             <% _.each(bgstory.blog_categories, function(cat){ %>
                                             <% if(cnt != 0) { %> | <% } %>
@@ -75,12 +108,20 @@
 
                                         <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
                                         </p>
+
+                                        <% if(count == 3){ %>
+                                        <div class="padding20-15" style="border: 2px solid #666;margin:110px 0px;">
+                                            <p>Have nothing in your house that you do not know to be useful, or believe to be beautiful. Have nothing in your house that you do not know to be useful, or believe to be beautiful.</p>
+                                            <p class="text-muted text-left">DIETER RAMS</p>
+                                        </div>
+                                        <% } %>
+
                                     </div>
 
                                 <% }else{ %>
 
-                                    <div class="pb20">
-                                        <div class="show-img">
+                                    <div class="special pb20">
+                                        <div class="show-blog-img">
                                             <img
                                                     src="<%= bgstory.blog_main_image %>"
                                                     class="img-responsive"
@@ -95,7 +136,7 @@
                                                 <%= bgstory.blog_heading %>
                                             </h2>
                                         </a>
-                                        <p class="font-size18">
+                                        <p class="font-size14">
                                             <% var cnt = 0; %>
                                             <% _.each(bgstory.blog_categories, function(cat){ %>
                                             <% if(cnt != 0) { %> | <% } %>
@@ -123,12 +164,11 @@
                                     </div>
 
                                 <% } %>
+                            <% } %>
+                            <% } %>
+                            <% count++; }); %>
+                            <% } %>
                         </div>
-                            <% } %>
-                            <% } %>
-
-                        <% count++; }); %>
-                        <% } %>
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
@@ -180,21 +220,30 @@
                         <div class="row pt30 pb20">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <h2 class="txt-urstory media-txt-title">Tags</h2>
-                                <span class="tag-card blog-card">
-                                    Home
-                                </span>
+                                <ul class="blog-menu-list list-inline padding0 margin0">
+                                    <li>
+                                        <a class="btn blog-card" href="/stories-all">Home</a>
+                                    </li>
 
-                                <span class="tag-card blog-card">
-                                    Trends n style
-                                </span>
+                                    <li><a class="btn blog-card" href="/stories-trends">Trends & Styles</a></li>
 
-                                <span class="tag-card blog-card">
-                                    Interiors
-                                </span>
+                                    <li><a class="btn blog-card" href="/stories-interiors">Interiors</a></li>
 
-                                <span class="tag-card blog-card">
-                                    Design
-                                </span>
+                                    <li><a class="btn blog-card" href="/stories-architecture">Architecture</a></li>
+
+                                    <li><a class="btn blog-card" href="/stories-design">Design</a></li>
+
+                                    <li><a class="btn blog-card" href="/stories-outdoor">Outdoors</a></li>
+
+                                    <li><a class="btn blog-card" href="/stories-kitchen">Kitchen</a></li>
+
+                                    <li><a class="btn blog-card" href="/stories-bathroom">Bathroom</a></li>
+
+                                    <li><a class="btn blog-card" href="/stories-expert-tips">Expert Tips</a></li>
+
+                                    <li><a class="btn blog-card" href="/stories-living">Living Room</a></li>
+                                </ul>
+
                             </div>
                         </div>
                         <div class="row pt30">
@@ -204,23 +253,23 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <ul class="nav navbar-nav navbar-left">
                                 <li>
-                                    <a href="https://www.instagram.com/my_gubbi/" target="_blank" class="social-menu-lnk"><i class="fa fa-instagram" aria-hidden="true"></i>
+                                    <a href="https://www.instagram.com/my_gubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-instagram" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" class="social-menu-lnk"><i class="fa fa-youtube-square" aria-hidden="true"></i>
+                                    <a href="" class="social-menu-lnk font-size22"><i class="fa fa-youtube-square" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/myGubbi/" target="_blank" class="social-menu-lnk"><i class="fa fa-facebook-square" aria-hidden="true"></i>
+                                    <a href="https://www.facebook.com/myGubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-facebook-square" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://in.pinterest.com/my_gubbi/mygubbi/" target="_blank" class="social-menu-lnk"><i class="fa fa-pinterest-square" aria-hidden="true"></i>
+                                    <a href="https://in.pinterest.com/my_gubbi/mygubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-pinterest-square" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://twitter.com/my_gubbi" target="_blank" class="social-menu-lnk"><i class="fa fa-twitter-square" aria-hidden="true"></i>
+                                    <a href="https://twitter.com/my_gubbi" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-twitter-square" aria-hidden="true"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -232,8 +281,117 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 align-center">
-                    <button class="btn btn-orange">OLDER POSTS</button>
+                    <button class="btn btn-orange" id="older-post-lnk">OLDER POSTS</button>
                 </div>
+            </div>
+            <div class="row" id="older_posts">
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="case">
+                        <div class="waterfall" data-col-min-width="300"  data-default-container-width=1200" data-autoresize="true">
+                            <% if(typeof(stories) !== 'undefined'){ count = 1; %>
+                            <% _.each(stories, function(bgstory){ %>
+                            <% if(typeof(bgstory) !== 'undefined' && bgstory != ""){ %>
+                            <% if(count > 6){ %>
+                            <% if (count % 2 != 0) { %>
+
+                            <div class="special pb20">
+                                <div class="show-blog-img">
+                            <img
+                                src="<%= bgstory.blog_main_image %>"
+                                class="img-responsive"
+                                title="<%= bgstory.blog_heading %>"
+                                alt="<%= bgstory.blog_heading %>"
+                            >
+                            </div>
+                                <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
+                                <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
+                                <h2 class="txt-urstory media-txt-title">
+                                <%= bgstory.blog_heading %>
+                                <%= "Count Odd :-"+ count %>
+                                </h2>
+                                </a>
+                                <p class="font-size14">
+                                <% var cnt = 0; %>
+                                <% _.each(bgstory.blog_categories, function(cat){ %>
+                                <% if(cnt != 0) { %> | <% } %>
+                                <span class="blog-borderbtm"><%= cat %></span>
+                                <% cnt = cnt + 1; }); %>
+                                </p>
+                                <p class="pt10"> <!--<%= bgstory.blog_content %>-->
+
+                                <% var blg_stry = bgstory.blog_content;
+                                var r = /\\u([\d\w]{4})/gi;
+                                blg_stry = blg_stry.replace(r, function (match, grp) {
+                                return String.fromCharCode(parseInt(grp, 16)); } );
+                                blg_stry = unescape(blg_stry);
+                                var n = blg_stry.indexOf('</p>');
+                                if (n > 200){  %>
+                                <% var stry = blg_stry.slice(0, 180); %>
+                                <%= stry %>...
+                                <% } else { %>
+                                <% var stry = blg_stry.slice(0, n); %>
+                                <%= stry %>
+                                <% } %>
+
+                                <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
+                                </p>
+                            </div>
+
+                            <% }else{ %>
+
+                            <div class="special pb20">
+                            <div class="show-blog-img">
+                            <img
+                            src="<%= bgstory.blog_main_image %>"
+                            class="img-responsive"
+                            title="<%= bgstory.blog_heading %>"
+                            alt="<%= bgstory.blog_heading %>"
+                            >
+                            </div>
+                            <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
+                            <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
+                            <h2 class="txt-urstory media-txt-title">
+                            <%= bgstory.blog_heading %>
+                            <%= "Count Even :-"+ count %>
+                            </h2>
+                            </a>
+                            <p class="font-size14">
+                            <% var cnt = 0; %>
+                            <% _.each(bgstory.blog_categories, function(cat){ %>
+                            <% if(cnt != 0) { %> | <% } %>
+                            <span class="blog-borderbtm"><%= cat %></span>
+                            <% cnt = cnt + 1; }); %>
+                            </p>
+                            <p class="pt10"> <!--<%= bgstory.blog_content %>-->
+
+                            <% var blg_stry = bgstory.blog_content;
+                            var r = /\\u([\d\w]{4})/gi;
+                            blg_stry = blg_stry.replace(r, function (match, grp) {
+                            return String.fromCharCode(parseInt(grp, 16)); } );
+                            blg_stry = unescape(blg_stry);
+                            var n = blg_stry.indexOf('</p>');
+                            if (n > 200){  %>
+                            <% var stry = blg_stry.slice(0, 180); %>
+                            <%= stry %>...
+                            <% } else { %>
+                            <% var stry = blg_stry.slice(0, n); %>
+                            <%= stry %>
+                            <% } %>
+
+                            <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
+                            </p>
+                            </div>
+
+                            <% } %>
+                            <% } %>
+                            <% } %>
+                            <% count++; }); %>
+                            <% } %>
+
+
+                        </div>
+                        </div>
+                    </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
@@ -241,7 +399,7 @@
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <div class="pb20">
-                        <div class="show-img">
+                        <div class="show-blog-img">
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474613385/stories/colour-palete.jpg" class="img-responsive" title="How Pattern Play Helps Designers" alt="How Pattern Play Helps Designers" style="height: 350px;">
                         </div>
                         <p class="text-muted text-left date">Sep 5, 2016 | by mygubbi</p>
@@ -261,7 +419,7 @@
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <div class="pb20">
-                        <div class="show-img">
+                        <div class="show-blog-img">
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1476355773/stories/stone-bathrooms.jpg" class="img-responsive" title="5 ways to create stone based bathroom" alt="5 ways to create stone based bathroom" style="height: 350px;">
                         </div>
                         <p class="text-muted text-left date">Sep 30, 2016 | by mygubbi</p>
@@ -281,7 +439,7 @@
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <div class="pb20">
-                        <div class="show-img">
+                        <div class="show-blog-img">
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1477548536/stories/wrong-interiors.jpg" class="img-responsive" title="5 Common Mistakes in Interiors and What to Do" alt="5 Common Mistakes in Interiors and What to Do" style="height: 350px;">
                         </div>
                         <p class="text-muted text-left date">Oct 03, 2016 | by mygubbi</p>
@@ -306,7 +464,7 @@
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="pb20">
-                        <div class="show-img">
+                        <div class="show-blog-img">
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1477548536/stories/wrong-interiors.jpg" class="img-responsive" title="5 Common Mistakes in Interiors and What to Do" alt="5 Common Mistakes in Interiors and What to Do">
                         </div>
                         <p class="text-muted text-left date font-size14">Oct 03, 2016 | by mygubbi</p>
@@ -319,7 +477,7 @@
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="pb20">
-                        <div class="show-img">
+                        <div class="show-blog-img">
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1477548536/stories/wrong-interiors.jpg" class="img-responsive" title="5 Common Mistakes in Interiors and What to Do" alt="5 Common Mistakes in Interiors and What to Do">
                         </div>
                         <p class="text-muted text-left date font-size14">Oct 03, 2016 | by mygubbi</p>
@@ -335,3 +493,23 @@
     </div>
 
 </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"><\/script>')</script>
+<script src="https://cdn.jsdelivr.net/jquery.waterfall/0.1/jquery.waterfall.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        $('#older-post-lnk').click(function(){
+			$("#older_posts").toggle();
+			loadingBlogs();
+		});
+		/*$('#blog-menu-list').find('li a').click(function () { alert('hiiiiiiiiiiii');
+            $('#blog-menu-list').find('li a').removeClass('active');
+            $(this).addClass('active');
+            $($(this).closest('li').children()[0]).addClass('active');
+        });*/
+	});
+	function loadingBlogs(){
+	    $('.waterfall').waterfall({autoresize: true});
+	}
+</script>
