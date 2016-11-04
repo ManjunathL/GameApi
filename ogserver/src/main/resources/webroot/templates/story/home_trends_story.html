@@ -1,0 +1,17 @@
+<% if(typeof(lateststories1) !== 'undefined'){ %>
+
+<div class="col-lg-4 col-sm-4 col-md-4 padding5 hidden-xs">
+    <div class="trend-image-overlay">
+        <% var blog_main_image =lateststories1.blog_main_image; %>
+        <img src="<%= blog_main_image %>"
+             class="cld-responsive hidden-xs hidden-sm img-responsive width100" style="height:450px;width:667px;" alt="Trend & Style" />
+        <!--<img src="<%= imgBase + 'c_fill,h_450,w_667' + '/stories/Studio_Apartments.jpg'%>"
+             class="cld-responsive hidden-lg hidden-md img-responsive width100" alt="Trend & Style" />-->
+        <div class="txt-over-trendstyle-image">
+            <div class="width100"><p class="font-size35 txt-color-orange">Trends</p></div>
+            <div class="width100 hidden-xs hidden-sm"><p class="font-size12 font-weight400">Make the most of your studio apartment</p></div>
+            <div class="width0 trend-explore-space"><a href="/story-Make-the-most-of-your-studio-apartment"><button class="btn btn-explore">EXPLORE</button></a></div>
+        </div>
+    </div>
+</div>
+<% } %>
