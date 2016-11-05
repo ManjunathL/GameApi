@@ -115,7 +115,6 @@
 }
 
 .txt-over-trendstyle-image div{
-    width: 100%;
     background: rgba(0,0,0,0.6);
 }
 
@@ -170,14 +169,13 @@
      position: absolute;
      top: 55%;
      right: 2%;
-     width: 41%;
+     width: 45%;
      padding: 0px!important;
      margin: 0px!important;
      display:block;
 }
 
 .txt-over-style-image div{
-    width: 100%;
     background: rgba(0,0,0,0.6);
 }
 
