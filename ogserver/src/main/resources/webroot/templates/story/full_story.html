@@ -9,7 +9,7 @@
                      title="<%= blg_hdng %>"
                      alt="<%= blg_hdng %>">
                 </div>
-                <div class="date"><%= full_story.date_of_publish %> | by <%= full_story.author %></div>
+                <div class="date align-center"><%= full_story.date_of_publish %> | by <%= full_story.author %></div>
             </div>
         </div>
         <div class="row">
@@ -44,15 +44,18 @@
                           <% _.each(rec_stories, function(story){ %>
 
                           <%
-                          var blog_url = story.blog_heading;
-                          blog_url = blog_url.replace(/-/g,"_");
+                          var blog_url = story.blogId;
+                          //blog_url = blog_url.replace(/-/g,"_");
+                          blog_url = blog_url.replace(/-/g," ");
                           blog_url = blog_url.replace(/\s/g,"-");
+                          console.log(blog_url);
 
                           %>
 
+
                           <div class="row margin25-0-0">
                               <div class="col-md-5 padding0">
-                                  <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                  <a href="/story-<%= blog_url %>">
                                       <img
                                               src="<%= story.blog_main_image %>"
                                               class="img-responsive"
@@ -60,14 +63,14 @@
                                   </a>
                               </div>
                               <div class="col-md-7 padding-right0">
-                                  <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                  <a href="/story-<%= blog_url %>">
                                       <h5>
-                                          <% var blg_hdng = story.blog_heading;
-                                          var r = /\\u([\d\w]{4})/gi;
-                                          blg_hdng = blg_hdng.replace(r, function (match, grp) {
+                                          <% var blg_hdng1 = story.blog_heading;
+                                          /*var r = /\\u([\d\w]{4})/gi;
+                                          blg_hdng1 = blg_hdng1.replace(r, function (match, grp) {
                                           return String.fromCharCode(parseInt(grp, 16)); } );
-                                          blg_hdng = unescape(blg_hdng); %>
-                                          <%= blg_hdng %>
+                                          blg_hdng1 = unescape(blg_hdng1);*/ %>
+                                          <%= blg_hdng1 %>
                                       </h5>
                                   </a>
                                   <div class="date_small"><%= story.date_of_publish %></div>

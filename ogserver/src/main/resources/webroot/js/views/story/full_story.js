@@ -5,16 +5,19 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'collections/stories',
     'models/story',
     'analytics',
     'text!templates/story/full_story.html',
     'views/story/full_story_helper'
-], function($, _, Backbone, Story, Analytics, fullStoryTemplate, FullStoryHelper) {
+], function($, _, Backbone, Stories, Story, Analytics, fullStoryTemplate, FullStoryHelper) {
     var FullStoryView = Backbone.View.extend({
         el: '.page',
         story: new Story(),
+        stories: null,
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
+            this.stories = new Stories();
         },
         render: function() {
 
@@ -23,9 +26,11 @@ define([
             var blog_name = that.model.name;
 
            blog_name = blog_name.replace(/-/g, ' ');
-           blog_name = blog_name.replace(/_/, '-');
+           //blog_name = blog_name.replace(/_/, '-');
 
-            this.story.fetch({
+           console.log(blog_name);
+
+            this.stories.fetch({
                 success: function() {
                     that.fetchStoryAndRender(blog_name);
                 },
@@ -38,7 +43,7 @@ define([
         fetchStoryAndRender: function(name) {
 
             var that = this;
-            var stories = that.story;
+            var stories = that.stories;
             stories = stories.toJSON();
             var full_story = {};
 
@@ -57,11 +62,16 @@ define([
             //console.log(_(stories).pluck('date_of_publish'));
 
             var rec_stories = [];
-            $.each(stories.slice(1,5), function(i, data) {
+            $.each(stories.slice(1,4), function(i, data) {
                 rec_stories.push(data);
             });
 
-            $(this.el).html(_.template(fullStoryTemplate)({
+            console.log("rec_stories");
+            console.log(rec_stories);
+
+            var fullTemp = _.template(fullStoryTemplate);
+
+            $(this.el).html(fullTemp({
                 'rec_stories': rec_stories,
                 'full_story': full_story
             }));
