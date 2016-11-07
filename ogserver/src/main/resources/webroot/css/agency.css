@@ -133,14 +133,23 @@
     cursor:pointer;
 }
 
+.style-image-overlay,
 .trend-image-overlay {
      position:relative;
-     width:440px;
      height:450px;
+     overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .style-image-overlay,
+    .trend-image-overlay {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+    }
 }
 
 .trend-image-overlay img {
-     width:100%;
      vertical-align:top;
 }
 
@@ -169,7 +178,7 @@
      position: absolute;
      top: 55%;
      right: 2%;
-     width: 45%;
+     width: 50%;
      padding: 0px!important;
      margin: 0px!important;
      display:block;
