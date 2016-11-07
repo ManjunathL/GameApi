@@ -5367,10 +5367,10 @@ a.tab-ico {
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
 
-.mg-carousel > .item {
+/*.mg-carousel > .item {
     display: block !important;
     height: 0 !important;
-}
+}*/
 
 .mg-carousel > .active {
     height: auto !important;
@@ -6133,7 +6133,7 @@ a.tab-ico {
     float: left;
     margin-right: 10px;
 }
-.kitchen-head h1{
+.kitchen-lp-head h1{
     color: #ffffff;
     font-size: 42px;
     margin: 140px 0px 35px 0px;
@@ -6147,6 +6147,8 @@ a.tab-ico {
     color: #ffffff;
     font-weight: 200;
     text-transform: capitalize;
+    background: #f1591f;
+    border-color: #f1591f;
 }
 .btn-kitchen:hover,
 .btn-kitchen:active,
@@ -6154,6 +6156,7 @@ a.tab-ico {
     text-shadow: 0px 0px 0px #fff;
     color: #ffffff;
     font-weight: 200;
+    background: #dc3000;
 }
 .kitchen-form .form-control{
     color: #FFFFFF;
