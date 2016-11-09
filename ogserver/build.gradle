@@ -101,6 +101,8 @@ dependencies {
 */
     compile 'org.apache.poi:poi:3.12'
     compile group: 'org.jooq', name: 'jool', version: '0.9.11'
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.3.4'
+
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
 

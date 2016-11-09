@@ -27,6 +27,16 @@ public class CrmApiClient
         this.initSoapClient();
     }
 
+//    public static void main(String[] args)
+//    {
+//        String  opportunity= "SAL-1607-000039";
+//        try {
+//            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     private void initSoapClient() throws Exception
     {
         try {
@@ -65,6 +75,7 @@ public class CrmApiClient
                 }
 
                 halfbyte = data[i] & 15;
+
             } while(two_halfs++ < 1);
         }
 
