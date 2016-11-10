@@ -7392,8 +7392,8 @@ img.thumbnail {
 .page-next-tab{
     border: 1px solid #ddd;
     padding: 10px;
-    margin-bottom: 35px;
-    box-shadow: 0px 0px 8px 4px #cacaca;
+    box-shadow: 0px 0px 4px 4px #cacaca;
+    background: #fff;
 }
 
 .page-pre-tab h2{
