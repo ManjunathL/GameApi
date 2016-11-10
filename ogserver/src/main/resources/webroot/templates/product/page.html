@@ -1,17 +1,19 @@
 <section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
 
     <div class="container-fluid category-banner">
-        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-        <% if(filter.selectedCategoryName == 'kitchen'){ %>
-        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
-        <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-        <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
-        <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-        <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
-        <% } %>
-        <% }else{ %>
-        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
-        <% } %>
+        <div class="row">
+            <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+            <% if(filter.selectedCategoryName == 'kitchen'){ %>
+            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+            <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+            <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+            <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+            <% } %>
+            <% }else{ %>
+            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <% } %>
+        </div>
     </div>
 
     <div class="container-fluid bg-white hidden-xs">
@@ -629,8 +631,8 @@
         <!-- Filter Menu Popup End -->
     </div>
     <!-- start menu switch -->
-    <div class="bg-color-white">
-        <div class="container">
+    <div class="bg-light-gray mt30 mb30">
+        <div class="container-fluid">
             <div class="row">
                 <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                 <% if(filter.selectedCategoryName == 'kitchen'){ %>
@@ -729,7 +731,7 @@
 
     <div class="container-fluid bg-color-white">
         <div class="container justify">
-            <div class="category-content margin-bottom30 bg-light-gray portfolio-box padding30"></div>
+            <div class="category-content mt10 margin-bottom30 padding30"></div>
         </div>
     </div>
 

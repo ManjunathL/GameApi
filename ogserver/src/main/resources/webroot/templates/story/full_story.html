@@ -14,6 +14,8 @@
                 <div class="padding10">
                     <h2 class="justify hidden-xs">
                         <% var blg_hdng = full_story.blog_heading;
+                        console.log("+=========+");
+                        console.log(full_story);
                         var r = /\\u([\d\w]{4})/gi;
                         blg_hdng = blg_hdng.replace(r, function (match, grp) {
                         return String.fromCharCode(parseInt(grp, 16)); } );
