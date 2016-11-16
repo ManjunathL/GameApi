@@ -50,10 +50,10 @@ public class CrmApiClient
 
 
         try {
-            //System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
 
             //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-            System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
+           // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
             // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
 
         } catch (Exception e) {
@@ -130,14 +130,24 @@ public class CrmApiClient
                 .put("paymentRef",doc.getValue("payment_reference3_c"))
                 .put("paymentStatus",doc.getValue(""))
                 .put("paymentType",doc.getValue(""));
-        JsonArray act = new JsonArray();
-        act.add(newDoc);
-        act.add(newDoc1);
-        act.add(newDoc2);
+        JsonObject status1 = new JsonObject().put("status", "NA")
+                .put("statusId","NA")
+                .put("statusName",doc.getValue("sales_stage"));
+        JsonArray payment = new JsonArray();
+        payment.add(newDoc);
+        payment.add(newDoc1);
+        payment.add(newDoc2);
+        JsonArray status = new JsonArray();
+        status.add(status1);
+
+        JsonObject finalJson = new JsonObject();
+        finalJson.put("paymentDetails",(Object)payment);
+        finalJson.put("projectStatus",(Object)status);
+
 /*
-        System.out.print("+++_+_++_+_+" +act);
+        System.out.print("+++_+_++_+_+" +payment);
 */
-        return act.encodePrettily();
+        return finalJson.encodePrettily();
 
 
     }
