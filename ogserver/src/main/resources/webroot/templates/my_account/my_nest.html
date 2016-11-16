@@ -1,431 +1,88 @@
-<style>
-.list-group {
-    border-radius: 4px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.075);
-}
-.list-group {
-    padding-left: 0px;
-    margin-bottom: 20px;
-}
-li.list-group-item.main-list-item {
-    font-weight: 700;
-}
-.list-group-item:first-child {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: 10px 15px;
-    margin-bottom: -1px;
-    background-color: #FFF;
-    border: 1px solid #DDD;
-}
-.list-group-item:hover,
-.list-group-item:active,
-.list-group-item:focus{
-    color:#f1591f;
-}
-img.timeline-image {
-    margin-top: 40px;
-    margin-left: -12px;
-    width: 100%;
-    height: 100px;
-}
-.border-red {
-    border: 1px solid #F88383;
-}
-.btn-primary:focus, .btn-primary:hover {
-    background-color: #265A88!important;
-    background-position: 0px -15px!important;
-}
-.btn-primary:hover {
-    color: #FFF!important;
-    background-color: #286090!important;
-    border-color: #204D74!important;
-}
-.btn-primary {
-    background-image: linear-gradient(to bottom, #337AB7 0px, #265A88 100%)!important;
-    background-repeat: repeat-x!important;
-    border-color: #245580!important;
-}
-.btn-danger:focus, .btn-danger:hover {
-    background-color: #C12E2A!important;
-    background-position: 0px -15px!important;
-}
-.btn-danger:hover {
-    color: #FFF!important;
-    background-color: #C9302C!important;
-    border-color: #AC2925!important;
-}
-.btn.focus, .btn:focus, .btn:hover {
-    color: #333!important;
-    text-decoration: none!important;
-}
-.btn-reject {
-    margin-left: 40px!important;
-}
-.btn-danger {
-    background-image: linear-gradient(to bottom, #D9534F 0px, #C12E2A 100%)!important;
-    background-repeat: repeat-x!important;
-    border-color: #B92C28!important;
-}
-.reject-comment{
-    font-size:14px!important;
-}
-
-.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {
-    color: #595959;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-.collapse {
-    display: block;
-}
-</style>
-<div class="container padding50-15">
-    <div class="row">
-        <div class="col-md-3">
-            <h1>My Account</h1>
-            <ul class="list-group">
-                <li class="list-group-item main-list-item"><span>Projects </span></li>
-                <li class="list-group-item"><a href="#info" class="active"><span class="indent-text">- Introduce Proposal </span></a></li>
-                <li class="list-group-item"><a href="#accordion-2"><span class="indent-text">- Project Status</span></a></li>
-                <li class="list-group-item"><a href="#document-details"><span class="indent-text">- Document Details</span></a></li>
-                <li class="list-group-item"><a href="#payment-details"><span class="indent-text">- Payment Details</span></a></li>
-            </ul>
-        </div>
-        <div class="col-md-9">
-            <div id="info">
-                <!--<ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab-1" role="tab" data-toggle="tab">Shobha Garland</a></li>
-                    <li>
-                        <a href="#tab-1" role="tab" data-toggle="tab"></a>
-                    </li>
-                </ul>-->
-                <div class="tab-content">
-                    <div class="tab-pane active" role="tabpanel" id="tab-1">
-                        <!--<div class="row">
-                            <div class="col-md-12"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1473749993/myaccount/timeline-1.jpg" class="timeline-image" /></div>
-                        </div>-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                    <form role="form">
-
-
-
-                                        <div class="form-group">
-
-                                            <label for="property-name">Property Name</label>
-                                            <input class="form-control" id="property-name" placeholder="Enter name" value="Axis Aspira" type="test">
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label for="property-type">Property Type</label>
-
-
-
-                                            <input class="form-control" id="property-type" placeholder="Enter Mobile Number" value="3BHK Apartment" type="test">
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label for="exampleInputEmail1">Requirement</label>
-
-                                            <br>
-
-
-
-                                            <label><input checked="true" value="" type="checkbox">Kitchen</label> &nbsp;&nbsp;&nbsp;
-
-
-
-                                            <label><input value="" type="checkbox">Wardrobe</label>
-
-                                            &nbsp;&nbsp;&nbsp;
-
-                                            <label><input value="" type="checkbox">Living &amp; Dining</label>
-
-                                        </div>
-
-
-
-
-
-                                    </form>
-                            </div>
-                            <div class="col-md-6">
-
-                                <div class="form-group">
-
-                                    <label for="exampleInputEmail1">Builder Name</label>
-
-
-
-                                    <input class="form-control" id="exampleInputEmail1" placeholder="Enter Floor Number" value="Axis Capstone" type="test">
-
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label for="flatno">Flat No.</label>
-
-                                    <input class="form-control" id="flatno" placeholder="Enter Food Preference" value="#203" type="test">
-
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row border-red">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <hr /><i class="icon ion-information-circled color-red"></i><span> Approval required for</span><span class="text-bold"> Proposal v1.0 (10/8/2016)</span></div>
-                                    <div class="col-md-12">
-                                        <hr />
-                                        <p>Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <hr />
-                                    </div>
-                                </div>
-                                <div class="row acceptance-row">
-                                    <div class="col-md-2">
-                                        <div class="row">
-                                            <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 align-center"><span class="text-small">Proposal v1.0 (10/8/2016) <a href="#">View</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 height100">
-                                        <div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" />I hereby accept the proposal with following:</label>
-                                            </div><a href="#" class="display-block">- Terms &amp; Conditions</a><a href="#" class="display-block">- Agreement </a></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="margin-auto">
-                                            <div class="col-md-3 display-inline-block valign-top">
-                                                <button class="btn btn-primary btn-sm" type="button">Approve </button>
-                                            </div>
-                                            <div class="col-md-3 display-inline-block">
-                                                <button class="btn btn-danger btn-sm btn-reject" type="button">Reject </button>
-                                                <p class="reject-comment text-small">You&#39;d be prompted for reason.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="panel-group" role="tablist" aria-multiselectable="true" id="accordion-2">
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab">
-                                    <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="true" href="#accordion-2 .item-1" class="acc-btn">Project Status</a></h4></div>
-                                <div class="panel-collapse collapse item-1" role="tabpanel">
-                                    <div class="panel-body">
-                                        <div class="row bs-wizard" style="border-bottom:0;">
-                                            <div class="col-xs-3 bs-wizard-step complete">
-
-                                                <div class="text-center bs-wizard-stepnum">Order Placed</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center"></div>
-
-                                            </div>
-                                            <div class="col-xs-3 bs-wizard-step complete"><!-- complete -->
-
-                                                <div class="text-center bs-wizard-stepnum">Production Started</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center"></div>
-
-                                            </div>
-                                            <div class="col-xs-3 bs-wizard-step active"><!-- complete -->
-
-                                                <div class="text-center bs-wizard-stepnum">Installation In Progress</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center"></div>
-
-                                            </div>
-                                            <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
-
-                                                <div class="text-center bs-wizard-stepnum">Handing over</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center"></div>
-
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <div class="panel panel-default" id="document-details">
-                                <div class="panel-heading" role="tab">
-                                    <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="true" href="#accordion-2 .item-2" class="acc-btn">Document Details </a></h4></div>
-                                <div class="panel-collapse collapse item-2" role="tabpanel">
-                                    <div class="panel-body">
-                                        <div class="row row-margin">
-                                            <div class="col-md-12">
-                                                <div class="col-md-3"><b>File Link</b></div>
-                                                <div class="col-md-3"><b>Upload Date</b></div>
-                                                <div class="col-md-3"><b>Uploaded By</b></div>
-                                                <div class="col-md-3"><b>Amount</b></div>
-                                            </div>
-                                        </div>
-                                        <div class="row row-margin">
-                                            <div class="col-md-12">
-                                                <div class="col-md-3"><a target="_blank" href="http://www.trackode.com"><i class="fa fa-file-text" aria-hidden="true"></i> my nest floorplan</a></div>
-                                                <div class="col-md-3"> 15/01/2016 </div>
-                                                <div class="col-md-3">Praveen Grao</div>
-                                                <div class="col-md-3"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row row-margin">
-                                            <div class="col-md-12">
-                                                <div class="col-md-3"><a target="_blank" href="http://www.trackode.com"><i class="fa fa-file-text" aria-hidden="true"></i> my nest design</a></div>
-                                                <div class="col-md-3"> 20/01/2016 </div>
-                                                <div class="col-md-3">Vijayakrishna</div>
-                                                <div class="col-md-3"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row row-margin">
-                                            <div class="col-md-12">
-                                                <div class="col-md-3"><a target="_blank" href="http://www.trackode.com"><i class="fa fa-file-text" aria-hidden="true"></i> my nest proposal</a></div>
-                                                <div class="col-md-3"> 25/01/2016 </div>
-                                                <div class="col-md-3">Bharath</div>
-                                                <div class="col-md-3"> INR 1,00,000</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default" id="payment-details">
-                                <div class="panel-heading" role="tab">
-                                    <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-2" aria-expanded="false" href="#accordion-2 .item-3" class="acc-btn">Payment Details</a></h4></div>
-                                <div class="panel-collapse collapse item-3" role="tabpanel">
-                                    <div class="panel-body">
-                                        <div class="row bs-wizard" style="border-bottom:0;">
-
-
-
-                                            <div class="col-xs-3 bs-wizard-step complete">
-
-                                                <div class="text-center bs-wizard-stepnum">Milestone 1</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center">10% Payment. </br></br> 10/01/2016 </br> INR 15,000/-</div>
-
-                                            </div>
-
-
-
-                                            <div class="col-xs-3 bs-wizard-step complete"><!-- complete -->
-
-                                                <div class="text-center bs-wizard-stepnum">Milestone 2</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                <a href="#" class="bs-wizard-dot"></a>
-
-                                                <div class="bs-wizard-info text-center">First Installment after confirming Initial Design.</br> 20/01/2016 </br> INR 75,000/-</div>
-
-                                            </div>
-
-
-
-                                            <div class="col-xs-3 bs-wizard-step active"><!-- complete -->
-
-                                                <div class="text-center bs-wizard-stepnum">Milestone 3</div>
-
-                                                <div class="progress"><div class="progress-bar"></div></div>
-
-                                                    <a href="#" class="bs-wizard-dot"></a>
-
-                                                    <div class="bs-wizard-info text-center">Second Installment after confirming Final Design.</br> 30/01/2016 </br> INR 50,000/-</div>
-
-                                                </div>
-
-
-
-                                                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
-
-                                                    <div class="text-center bs-wizard-stepnum">Milestone 4</div>
-
-                                                    <div class="progress"><div class="progress-bar"></div></div>
-
-                                                    <a href="#" class="bs-wizard-dot"></a>
-
-                                                    <div class="bs-wizard-info text-center">Final payment before installation.</br> 10/02/2016 </br> INR 75,000/-</div>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<html>
+<head>
+    <script type="text/javascript" src="/js/libs/jquery/dist/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script>
+     // Initialize Firebase
+     var config = {
+       apiKey: "AIzaSyALgwN8p4bsgNDskEP_F4IPEyJTeUaQqTo",
+       authDomain: "mygubbi-cep.firebaseapp.com",
+       databaseURL: "https://mygubbi-cep.firebaseio.com",
+       storageBucket: "mygubbi-cep.appspot.com",
+       messagingSenderId: "623623245186"
+     };
+     firebase.initializeApp(config);
+    </script>
+</head>
+<body>
+<h1 id="test"></h1>
 <script>
-    $(document).ready(function() {
-        $('.list-group').find('li.list-group-item a').click(function () {
-                $('.list-group').find('li.list-group-item a').removeClass('active');
-                $(this).addClass('active');
+        $(document).ready(function() {
+            var path = $(location).attr('href');
+
+            var vars = [], hash;
+            var q = document.URL.split('?')[1];
+            if(q != undefined){
+                q = q.split('&');
+                for(var i = 0; i < q.length; i++){
+                    hash = q[i].split('=');
+                    vars.push(hash[1]);
+                    vars[hash[0]] = hash[1];
+                }
+            }
+
+            alert(' -------i am here------ ');
+
+            var uid = vars['uid'];
+            var mynest= vars['mynest'];
+            var mynestData = decodeURIComponent(mynest);
+
+
+
+            console.log(' --------------- uid ---------------');
+            console.log(uid);
+
+            var mynestJSONData = JSON.parse(mynestData);
+
+            console.log("-------------- mynest data ------------------");
+            console.log(typeof(mynestJSONData));
+            console.log(mynestData);
+
+            createProjects(uid,mynestJSONData);
+
+        });
+
+        function createProjects(uid,mynestData){
+            alert(' -------here------ ');
+
+            firebase.database().ref().child('projects').child(uid).set(
+                mynestData,
+                function(error) {
+                    if (error) {
+                        console.log("projects data could not be saved." + error);
+                    } else {
+                        console.log("projects data saved successfully.");
+                    }
+                }
+            );
+            pushEvent(uid, mynestData, "projects.add");
+        }
+        function pushEvent(uid, data, type){
+            alert(' -------event add------ ');
+            var eventData = {
+                "data": data,
+                "type": type
+            };
+            firebase.database().ref().child("events").push().child(uid).set(eventData, function(error) {
+                if (error) {
+                    console.log("not able to push event data", error);
+                } else {
+                    console.log("successfully pushed event data");
+                }
             });
-    });
-</script>
-<style>
-.bs-wizard {margin-top: 40px;}
+        }
 
-/*Form Wizard*/
-.bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
-.bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
-.bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
-.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
-.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;}
-.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; }
-.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
-.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
-.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
-.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
-.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
-.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
-.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
-.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
-.bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
-.bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
-.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
-/*END Form Wizard*/
-
-</style>
+    </script>
+</body>
+</html>
