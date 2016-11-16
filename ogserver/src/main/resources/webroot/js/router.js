@@ -73,7 +73,7 @@ define([
             'kitchen-accessories(/)': 'kitchenAccessories',
             'kitchen-appliance(/)': 'kitchenAppliance',
             'type-of-kitchen(/)': 'typeofkitchen',
-            'ergonomics(/)': 'ergonomics'
+            'ergonomics(/)': 'ergonomics',
             '*something': 'errorPage'
         },
         dashboard: function() {
