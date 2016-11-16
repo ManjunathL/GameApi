@@ -83,6 +83,7 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
             String getLatestDocuments = new CrmApiClient().getLatestDocuments(parentType,parentId,category);
 
 
+
             if (getLatestDocuments == null || getLatestDocuments.isEmpty())
             {
                 sendJsonResponse(context, "[]");
@@ -121,6 +122,8 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
 
         try {
             String opportunityDetails = new CrmApiClient().getOpportunityDetails(opportunityId);
+
+
             if (opportunityDetails == null || opportunityDetails.isEmpty())
             {
                 sendJsonResponse(context, "[]");

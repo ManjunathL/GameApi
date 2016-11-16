@@ -50,9 +50,9 @@ public class CrmApiClient
 
 
         try {
-            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+            //System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
 
-            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+            System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
             //System.out.println(new CrmApiClient().updateTask( parentType, opportunity, status, taskId , taskType, parentId));
            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
 
@@ -108,11 +108,44 @@ public class CrmApiClient
 
     public String getOpportunityDetails(String opportunityId) throws Exception
     {
-        return new JsonObject(this.crmPort.get_opportunity_details(this.sessionId, opportunityId)).encodePrettily();
+      JsonObject doc = new JsonObject(this.crmPort.get_opportunity_details(this.sessionId, opportunityId));
+        JsonObject newDoc = new JsonObject().put("paymentAmount", doc.getString("amount"))
+                .put("paymentDate",doc.getValue("m1_payment_date_c"))
+                .put("paymentMode",doc.getValue("m1_mode_of_payment_c"))
+                .put("paymentPercentage","10% Payment")
+                .put("paymentRef",doc.getValue("payment_reference1_c"))
+                .put("paymentStatus",doc.getValue(""))
+                .put("paymentType",doc.getValue(""));
+        JsonObject newDoc1 = new JsonObject().put("paymentAmount", doc.getString("amount"))
+                .put("paymentDate",doc.getValue("m2_payment_date_c"))
+                .put("paymentMode",doc.getValue("m2_mode_of_payment_c"))
+                .put("paymentPercentage","70% Payment")
+                .put("paymentRef",doc.getValue("payment_reference2_c"))
+                .put("paymentStatus",doc.getValue(""))
+                .put("paymentType",doc.getValue(""));
+        JsonObject newDoc2 = new JsonObject().put("paymentAmount", doc.getString("amount"))
+                .put("paymentDate",doc.getValue("m3_payment_date_c"))
+                .put("paymentMode",doc.getValue("m3_mode_of_payment_c"))
+                .put("paymentPercentage","100% Payment")
+                .put("paymentRef",doc.getValue("payment_reference3_c"))
+                .put("paymentStatus",doc.getValue(""))
+                .put("paymentType",doc.getValue(""));
+        JsonArray act = new JsonArray();
+        act.add(newDoc);
+        act.add(newDoc1);
+        act.add(newDoc2);
+/*
+        System.out.print("+++_+_++_+_+" +act);
+*/
+        return new String(act.encodePrettily());
+
+
     }
 
     public String getDocuments(String parentType, String parentId, String category, String type) throws Exception
     {
+
+
         return new JsonArray(this.crmPort.get_documents(this.sessionId, parentType, parentId, category, type)).encodePrettily();
     }
 
