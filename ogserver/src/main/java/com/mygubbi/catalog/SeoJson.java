@@ -60,6 +60,10 @@ public class SeoJson  extends JsonObject {
     {
         return this.getString("description");
     }
+    public String getContent()
+    {
+        return this.getString("content");
+    }
     public String getTitle()
     {
         return this.getString("title");

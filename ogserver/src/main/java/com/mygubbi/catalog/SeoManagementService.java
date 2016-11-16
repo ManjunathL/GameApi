@@ -71,7 +71,8 @@ public class SeoManagementService extends AbstractVerticle
                 .put("location", seoJson.getLocation())
                 .put("category", seoJson.getCategory())
                 .put("subCategory", seoJson.getSubCategory())
-                .put("seoJson", seoJson.toString());
+                .put("seoJson", seoJson.toString())
+                .put("content", seoJson.getContent());
         Integer id = LocalCache.getInstance().store(new QueryData("seo.select.seoid", seo));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
