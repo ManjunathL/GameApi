@@ -80,7 +80,18 @@ public class CrmApiHandler extends AbstractRouteHandler
     private void createProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject userJson)
     {
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + userJson.getString("name")).put("createdBy", "crm");
-        proposalData.put("designer", requestJson.getString("designer")); //todo: all other attributes from requestJson
+        proposalData.put("designer", requestJson.getString("designer"));
+        proposalData.put("opportunityId", requestJson.getString("opportunityId"));
+        proposalData.put("userId", requestJson.getString("userId"));
+        proposalData.put("email", requestJson.getString("email"));
+        proposalData.put("designerUserId", requestJson.getString("designerUserId"));
+        proposalData.put("designerName", requestJson.getString("designerName"));
+        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
+        proposalData.put("salesExecName", requestJson.getString("salesExecName"));
+        proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
+        proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
+        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
+        proposalData.put("profile", requestJson.getString("profile"));
 
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,

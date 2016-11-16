@@ -7,6 +7,7 @@ import com.mygubbi.game.proposal.ProposalModuleHandler;
 import com.mygubbi.game.proposal.ProposalProductHandler;
 import com.mygubbi.route.*;
 import com.mygubbi.si.crm.CrmApiHandler;
+import com.mygubbi.si.crm.CrmOutboundApiHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
@@ -86,6 +87,7 @@ public class GameApiServerVerticle extends AbstractVerticle
             LOG.info("Cache handler not registered.");
         }
         router.mountSubRouter("/gapi/crm", new CrmApiHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/crmOutbound", new CrmOutboundApiHandler(VertxInstance.get()));
 
         new ConfiguredRestApiHandler().setup(router);
 

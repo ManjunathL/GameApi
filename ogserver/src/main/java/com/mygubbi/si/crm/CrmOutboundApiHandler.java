@@ -2,6 +2,7 @@ package com.mygubbi.si.crm;
 
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 
@@ -25,11 +26,52 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
     }
 
     private void updateDocument(RoutingContext context) {
+        String parentId = context.request().getParam("parentId");
+        String parentType = context.request().getParam("parentType");
+        String category = context.request().getParam("category");
+        String user_id = context.request().getParam("user_id");
+        String file_contents = context.request().getParam("file_contents");
+        String file_ext = context.request().getParam("file_ext");
+        String file_name = context.request().getParam("file_name");
 
+        try
+        {
+        String updateDocument = new CrmApiClient().updateDocument(parentId, parentType, category, user_id, file_contents, file_ext, file_name);
+            if (updateDocument == null || updateDocument.isEmpty())
+            {
+                sendJsonResponse(context, "[]");
+            }
+            else{
+                sendJsonResponse(context, updateDocument );
+                }
+            }
+        catch (Exception e) {
+            sendError(context, "No Documents Found : ");
+        }
     }
 
     private void updateTask(RoutingContext context) {
+        String parentId = context.request().getParam("parentId");
+        String parentType = context.request().getParam("parentType");
+        String status = context.request().getParam("status");
+        String task_id = context.request().getParam("task_id");
+        String task_type = context.request().getParam("task_type");
+        String user_id = context.request().getParam("user_id");
 
+        try
+        {
+            String updateTask = new CrmApiClient().updateTask(parentId, parentType, status, task_id, task_type, user_id);
+            if (updateTask == null || updateTask.isEmpty())
+            {
+                sendJsonResponse(context, "[]");
+            }
+            else{
+                sendJsonResponse(context, updateTask );
+            }
+        }
+        catch (Exception e) {
+            sendError(context, "No Task Found : ");
+        }
     }
 
     private void getLatestDocuments(RoutingContext context) {
@@ -39,6 +81,8 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
 
         try {
             String getLatestDocuments = new CrmApiClient().getLatestDocuments(parentType,parentId,category);
+
+
             if (getLatestDocuments == null || getLatestDocuments.isEmpty())
             {
                 sendJsonResponse(context, "[]");
@@ -80,6 +124,8 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
             if (opportunityDetails == null || opportunityDetails.isEmpty())
             {
                 sendJsonResponse(context, "[]");
+                System.out.print("==============" +opportunityDetails);
+
             }
             else {
                 sendJsonResponse(context, opportunityDetails);

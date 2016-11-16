@@ -27,15 +27,39 @@ public class CrmApiClient
         this.initSoapClient();
     }
 
-//    public static void main(String[] args)
-//    {
-//        String  opportunity= "SAL-1607-000039";
-//        try {
-//            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+   /* public static void main(String[] args)
+    {
+        String  opportunity= "SAL-1607-000039";
+        try {
+            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+    public static void main(String[] args)
+    {
+        String  opportunity= "SAL-1607-000039";
+        String  opportunities = "Opportunities";
+        String  category = "Floor_Plan";
+        String  type = "all";
+        String  status = "In Progress";
+        String  taskType = "Intial Approval";
+        String  parentType = "Oppertunity";
+        String  taskId = null;
+        String  parentId ="1";
+
+
+        try {
+            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+
+            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+            //System.out.println(new CrmApiClient().updateTask( parentType, opportunity, status, taskId , taskType, parentId));
+           // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void initSoapClient() throws Exception
     {
@@ -101,6 +125,17 @@ public class CrmApiClient
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String updateDocument(String parentType, String parentId, String category, String user_id, String file_contents, String file_ext, String file_name) throws Exception {
+
+        return new JsonArray(this.crmPort.update_document(this.sessionId, parentType, parentId, category, user_id, file_contents, file_ext, file_name)).encodePrettily();
+    }
+
+    public String updateTask(String parentType, String parentId, String status, String task_id, String task_type, String user_id) throws Exception {
+        System.out.print(parentType + parentId + status + task_id + task_type + user_id);
+        System.out.print( new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)));
+        return new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)).encodePrettily();
     }
 
 }
