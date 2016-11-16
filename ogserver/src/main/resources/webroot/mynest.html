@@ -1,0 +1,88 @@
+<html>
+<head>
+    <script type="text/javascript" src="/js/libs/jquery/dist/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script>
+     // Initialize Firebase
+     var config = {
+       apiKey: "AIzaSyALgwN8p4bsgNDskEP_F4IPEyJTeUaQqTo",
+       authDomain: "mygubbi-cep.firebaseapp.com",
+       databaseURL: "https://mygubbi-cep.firebaseio.com",
+       storageBucket: "mygubbi-cep.appspot.com",
+       messagingSenderId: "623623245186"
+     };
+     firebase.initializeApp(config);
+    </script>
+</head>
+<body>
+<h1 id="test"></h1>
+<script>
+        $(document).ready(function() {
+            var path = $(location).attr('href');
+
+            var vars = [], hash;
+            var q = document.URL.split('?')[1];
+            if(q != undefined){
+                q = q.split('&');
+                for(var i = 0; i < q.length; i++){
+                    hash = q[i].split('=');
+                    vars.push(hash[1]);
+                    vars[hash[0]] = hash[1];
+                }
+            }
+
+            alert(' -------i am here------ ');
+
+            var uid = vars['uid'];
+            var mynest= vars['mynest'];
+            var mynestData = decodeURIComponent(mynest);
+
+
+
+            console.log(' --------------- uid ---------------');
+            console.log(uid);
+
+            var mynestJSONData = JSON.parse(mynestData);
+
+            console.log("-------------- mynest data ------------------");
+            console.log(typeof(mynestJSONData));
+            console.log(mynestData);
+
+            createProjects(uid,mynestJSONData);
+
+        });
+
+        function createProjects(uid,mynestData){
+            alert(' -------here------ ');
+
+            firebase.database().ref().child('projects').child(uid).set(
+                mynestData,
+                function(error) {
+                    if (error) {
+                        console.log("projects data could not be saved." + error);
+                    } else {
+                        console.log("projects data saved successfully.");
+                    }
+                }
+            );
+            pushEvent(uid, mynestData, "projects.add");
+        }
+        function pushEvent(uid, data, type){
+            alert(' -------event add------ ');
+            var eventData = {
+                "data": data,
+                "type": type
+            };
+            firebase.database().ref().child("events").push().child(uid).set(eventData, function(error) {
+                if (error) {
+                    console.log("not able to push event data", error);
+                } else {
+                    console.log("successfully pushed event data");
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
