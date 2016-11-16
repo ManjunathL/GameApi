@@ -73,6 +73,7 @@ define([
             'kitchen-accessories(/)': 'kitchenAccessories',
             'kitchen-appliance(/)': 'kitchenAppliance',
             'type-of-kitchen(/)': 'typeofkitchen',
+            'ergonomics(/)': 'ergonomics'
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -538,6 +539,12 @@ define([
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
             require(['views/kitchentypes/typeofkitchen'], function(typeofkitchen) {
                 VM.create(VM.TYPEOFKITCHENPAGE, typeofkitchen).render();
+            });
+        });
+        router.on('route:ergonomics', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            require(['views/ergonomics/ergonomics'], function(ergonomic) {
+                VM.create(VM.ERGONOMICPAGE, ergonomics).render();
             });
         });
         router.on('route:remarketinglp', function(actions) {
