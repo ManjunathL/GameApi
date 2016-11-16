@@ -87,9 +87,11 @@ public class GameApiServerVerticle extends AbstractVerticle
             LOG.info("Cache handler not registered.");
         }
         router.mountSubRouter("/gapi/crm", new CrmApiHandler(VertxInstance.get()));
-        router.mountSubRouter("/gapi/crmOutbound", new CrmOutboundApiHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/outboundCrm", new CrmOutboundApiHandler(VertxInstance.get()));
+
 
         new ConfiguredRestApiHandler().setup(router);
+
 
         router.mountSubRouter("/gapi/user.auth", new GameUserLoginHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/user.reg", new GameUserRegistrationHandler(VertxInstance.get()));
