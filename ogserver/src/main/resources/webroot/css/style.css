@@ -801,10 +801,18 @@ footer {
     border-top: 1px solid #ccc;
 }
 
+footer p{
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
+    line-height: 24px;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+    font-weight: 300;
+}
 footer a {
     color: rgba(255,255,255,0.6);
     line-height: 24px;
-    font-size: 14px;
+    font-size: 12px;
     -webkit-transition: color 0.3s, opacity 0.2s;
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
     font-weight: 300;
@@ -898,7 +906,57 @@ ul.social-buttons li a {
 ul.social-buttons li a:hover,
 ul.social-buttons li a:focus,
 ul.social-buttons li a:active {
-    background-color: rgba(255,255,255,0.9);
+    color: rgba(255,255,255,0.9);
+}
+
+.footer-form-control{
+    color: rgba(255,255,255,0.4);
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.1);
+}
+.btn-footer{
+    background: #151d22;
+    text-transform: uppercase;
+    border-radius: 0px;
+    color: rgba(255,255,255,0.6);
+}
+.btn-footer:hover,
+.btn-footer:active,
+.btn-footer:focus{
+    background: #151d22;
+    color: rgba(255,255,255,0.9);
+}
+
+.list-tag>li {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.6);
+    margin-right: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding: 3px 12px;
+}
+.list-tag>li:hover,
+.list-tag>li:active,
+.list-tag>li:focus {
+    background: #151d22;
+    color: rgba(255,255,255,0.9);
+}
+
+.footer-section-top,
+.footer-section-top ul,
+.footer-section-top p {
+    font-family: 'Lato', sans-serif;
+}
+
+.footer-section-bottom{
+    background: #33434c;
+    padding: 20px 0px 0px;
+}
+
+.footer-section-bottom a,
+.footer-section-bottom p{
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
 }
 
 /* End Footer Page */
@@ -925,8 +983,8 @@ ul.social-buttons li a:active {
 
 .btn-k-explore{
      background-color: #000000;
-     color:#ffffff;
-     border-radius:0px !important;
+     color: #ffffff;
+     border-radius: 0px !important;
      text-transform: uppercase;
      border: 2px solid #000000;
  }

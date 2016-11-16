@@ -7794,14 +7794,7 @@ html .ui-button.ui-state-disabled:active {
     font-size: 1.9em !important;
     line-height: 2em !important;
 }
-.footer-section-top,
-.footer-section-top ul,
-.footer-section-top p {
-    font-family: 'Lato', sans-serif;
-}
-.footer-section-bottom{
-    background: #556871;
-}
+
 
 .address_right_section{
     background: rgba(0,0,0,0.8);
