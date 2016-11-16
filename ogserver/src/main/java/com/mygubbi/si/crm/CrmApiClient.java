@@ -52,9 +52,9 @@ public class CrmApiClient
         try {
             //System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
 
-            System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-            //System.out.println(new CrmApiClient().updateTask( parentType, opportunity, status, taskId , taskType, parentId));
-           // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
+            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+            System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
+            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,17 +137,28 @@ public class CrmApiClient
 /*
         System.out.print("+++_+_++_+_+" +act);
 */
-        return new String(act.encodePrettily());
+        return act.encodePrettily();
 
 
     }
 
     public String getDocuments(String parentType, String parentId, String category, String type) throws Exception
     {
+        String documentLinkBaseUrl = "https://s3-ap-southeast-1.amazonaws.com/mygubbicrm/";
+        JsonArray doc = new JsonArray(this.crmPort.get_documents(this.sessionId, parentType, parentId, category, type));
 
+        JsonObject newDoc = doc.getJsonObject(0);
 
-        return new JsonArray(this.crmPort.get_documents(this.sessionId, parentType, parentId, category, type)).encodePrettily();
-    }
+        JsonObject latestDoc = new JsonObject().put("documentLink", documentLinkBaseUrl+newDoc.getString("docUrl"))
+                .put("documentName", newDoc.getString("documentName"))
+                .put("documentType", newDoc.getString("docType"))
+                .put("uploadDate", newDoc.getString("date"))
+                ;
+
+        JsonArray act = new JsonArray();
+        act.add(latestDoc);
+
+        return act.encodePrettily();    }
 
     public String getLatestDocuments(String parentType, String parentId, String category) throws Exception
     {

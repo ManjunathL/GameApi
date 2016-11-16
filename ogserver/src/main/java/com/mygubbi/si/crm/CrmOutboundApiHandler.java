@@ -2,7 +2,6 @@ package com.mygubbi.si.crm;
 
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 
@@ -127,8 +126,6 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
             if (opportunityDetails == null || opportunityDetails.isEmpty())
             {
                 sendJsonResponse(context, "[]");
-                System.out.print("==============" +opportunityDetails);
-
             }
             else {
                 sendJsonResponse(context, opportunityDetails);
