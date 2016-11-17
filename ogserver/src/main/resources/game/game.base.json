@@ -28,7 +28,7 @@
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
   "ratecard_file": "d:/tmp/ratecard.bin",
 
-  "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json"],
+  "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
 
   "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
   "fbUrl": "https://mygubbi-cep.firebaseio.com"

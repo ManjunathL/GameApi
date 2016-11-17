@@ -12,7 +12,6 @@ import com.mygubbi.si.firebase.FirebaseDataService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -75,13 +74,11 @@ public class CrmApiHandler extends AbstractRouteHandler
                         createProposal(routingContext, requestJson, selectData.rows.get(0));
                     }
                 });
-
     }
 
     private void createProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject userJson)
     {
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + userJson.getString("name")).put("createdBy", "crm");
-        proposalData.put("designer", requestJson.getString("designer"));
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + userJson.getString("profile")).put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
         proposalData.put("email", requestJson.getString("email"));
@@ -92,19 +89,12 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
         proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
-        JsonObject status1 = new JsonObject().put("state", requestJson.getString("primary_address_state"))
-                .put("pinCode",requestJson.getString("primary_address_postalcode"))
-                .put("occupation",requestJson.getString("profession_c "))
-                .put("statusId",requestJson.getString("project_name_c"))
-                .put("Property Name",requestJson.getString("project_name_c "))
-                .put("city",requestJson.getString("property_address_city_c"))
-                .put("Property Type",requestJson.getString("property_type_c "));
-       JsonArray arr = new JsonArray();
-            arr.add(status1);
-        JsonObject newDocObj = proposalData.put("Mehbub", arr);
 
+        String Json = requestJson.getString("profile ");
+        JsonObject jsonObjectProfile = new JsonObject(Json);
+        proposalData.put("profile",jsonObjectProfile);
 
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", newDocObj));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -130,7 +120,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                         this.updateProposal(routingContext, requestJson, proposalData, userJson);
                     }
                 });
-
     }
 
     private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData, JsonObject userJson)
@@ -154,12 +143,20 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData, JsonObject userJson)
     {
-        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + userJson.getString("fbid") + "/my_nest/project_details")
-                .setJsonData(this.getProjectDetailsJson(requestJson));
-        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, LocalCache.getInstance().store(dataRequest),
+        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + userJson.getString("fbid") + "/myNest/projectDetails")
+                .setJsonData(this.getProjectDetailsJson(proposalData));
+        Integer id = LocalCache.getInstance().store(dataRequest);
+        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
-                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (!dataResponse.isError())
+                    LOG.debug("select Result :" + selectResult.result());
+                    Integer id_new = selectResult.result().body();
+                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
+                    LOG.debug("Firebase data response :" + dataResponse);
+                    if (dataResponse == null ){
+                        LOG.error("Error Occuered in dataResponse");
+                    }
+
+                    else if (!dataResponse.isError())
                     {
                         LOG.info("Firebase updated with " + requestJson.encode());
                     }
@@ -168,8 +165,39 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private JsonObject getProjectDetailsJson(JsonObject requestJson)
     {
-        return new JsonObject().put("property_name", requestJson.getString("projectName")).put("property_type", requestJson.getString("propertyType"))
-                .put("property_city", requestJson.getString("propertyAddressCity"));
+        String propertyName = requestJson.getJsonObject("profile").getString("projectName");
+        String propertyType = requestJson.getJsonObject("profile").getString("propertyType");
+        String propertyAddressCity = requestJson.getJsonObject("profile").getString("propertyAddressCity");
+        String blockNumber = requestJson.getJsonObject("profile").getString("blockNumber");
+        String builderName = requestJson.getJsonObject("profile").getString("builderName");
+        String flatNumber = requestJson.getJsonObject("profile").getString("propertyAddressCity");
+        if (propertyAddressCity == null)
+        {
+            propertyAddressCity = "NA";
+        }
+        if (propertyName == null)
+        {
+            propertyName = "NA";
+        }
+        if (propertyType == null)
+        {
+            propertyType = "NA";
+        }
+        if (blockNumber == null)
+        {
+            blockNumber = "NA";
+        }
+        if (builderName == null)
+        {
+            builderName = "NA";
+        }
+        if (flatNumber == null)
+        {
+            flatNumber = "NA";
+        }
+
+        return new JsonObject().put("propertName", propertyName).put("propertyType", propertyType)
+                .put("propertyCity", propertyAddressCity).put("blockNumber",blockNumber).put("builderName",builderName).put("flatNumber",flatNumber);
     }
 
     private void createCustomer(RoutingContext routingContext)
