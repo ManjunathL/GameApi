@@ -12,6 +12,7 @@ import com.mygubbi.si.firebase.FirebaseDataService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -91,9 +92,19 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
         proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
-        proposalData.put("profile", requestJson.getString("profile"));
+        JsonObject status1 = new JsonObject().put("state", requestJson.getString("primary_address_state"))
+                .put("pinCode",requestJson.getString("primary_address_postalcode"))
+                .put("occupation",requestJson.getString("profession_c "))
+                .put("statusId",requestJson.getString("project_name_c"))
+                .put("Property Name",requestJson.getString("project_name_c "))
+                .put("city",requestJson.getString("property_address_city_c"))
+                .put("Property Type",requestJson.getString("property_type_c "));
+       JsonArray arr = new JsonArray();
+            arr.add(status1);
+        JsonObject newDocObj = proposalData.put("Mehbub", arr);
 
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
+
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", newDocObj));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());

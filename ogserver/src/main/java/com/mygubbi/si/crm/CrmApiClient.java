@@ -27,15 +27,15 @@ public class CrmApiClient
         this.initSoapClient();
     }
 
-   /* public static void main(String[] args)
-    {
-        String  opportunity= "SAL-1607-000039";
-        try {
-            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+    /* public static void main(String[] args)
+     {
+         String  opportunity= "SAL-1607-000039";
+         try {
+             System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }*/
     public static void main(String[] args)
     {
         String  opportunity= "SAL-1607-000039";
@@ -53,7 +53,7 @@ public class CrmApiClient
             System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
 
             //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-           // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
+            // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
             // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
 
         } catch (Exception e) {
@@ -108,42 +108,69 @@ public class CrmApiClient
 
     public String getOpportunityDetails(String opportunityId) throws Exception
     {
-      JsonObject doc = new JsonObject(this.crmPort.get_opportunity_details(this.sessionId, opportunityId));
+        JsonObject doc = new JsonObject(this.crmPort.get_opportunity_details(this.sessionId, opportunityId));
+
+        String status = (String) doc.getValue("sales_stage");
+
+        if (status.equals("Customer_Requirement_Update") || status.equals("Floor Plan Uploaded") || status.equals("Initial Proposal Uploaded")){
+            status = "initiated";
+        }
+        else if (status.equals("Send Approved Proposal") ){
+            status = "Proposal approved";
+        }
+        else if(status.equals("Booking Amount Collected") || status.equals("Site_Measurement_Uploaded") || status.equals("Detail Design") || status.equals("Final Proposal Uploaded") || status.equals("Proposal Approval")){
+            status = "Order Placed";
+        }
+        else if (status.equals("Collect Milestone 2 Payment") ){
+            status = "Production Started";
+        }
+        else {
+            status = "Installation in Progress";
+        }
         JsonObject newDoc = new JsonObject().put("paymentAmount", doc.getString("amount"))
                 .put("paymentDate",doc.getValue("m1_payment_date_c"))
                 .put("paymentMode",doc.getValue("m1_mode_of_payment_c"))
-                .put("paymentPercentage","10% Payment")
+                .put("paymentPercentage","10")
                 .put("paymentRef",doc.getValue("payment_reference1_c"))
-                .put("paymentStatus",doc.getValue(""))
-                .put("paymentType",doc.getValue(""));
+                .put("paymentStatus",status)
+                .put("paymentType","booking");
         JsonObject newDoc1 = new JsonObject().put("paymentAmount", doc.getString("amount"))
                 .put("paymentDate",doc.getValue("m2_payment_date_c"))
                 .put("paymentMode",doc.getValue("m2_mode_of_payment_c"))
-                .put("paymentPercentage","70% Payment")
+                .put("paymentPercentage","70")
                 .put("paymentRef",doc.getValue("payment_reference2_c"))
-                .put("paymentStatus",doc.getValue(""))
-                .put("paymentType",doc.getValue(""));
+                .put("paymentStatus",status)
+                .put("paymentType","advance");
         JsonObject newDoc2 = new JsonObject().put("paymentAmount", doc.getString("amount"))
                 .put("paymentDate",doc.getValue("m3_payment_date_c"))
                 .put("paymentMode",doc.getValue("m3_mode_of_payment_c"))
-                .put("paymentPercentage","100% Payment")
+                .put("paymentPercentage","100")
                 .put("paymentRef",doc.getValue("payment_reference3_c"))
                 .put("paymentStatus",doc.getValue(""))
                 .put("paymentType",doc.getValue(""));
         JsonObject status1 = new JsonObject().put("status", "NA")
                 .put("statusId","NA")
-                .put("statusName",doc.getValue("sales_stage"));
+                .put("statusName",status);
         JsonArray payment = new JsonArray();
         payment.add(newDoc);
         payment.add(newDoc1);
         payment.add(newDoc2);
-        JsonArray status = new JsonArray();
-        status.add(status1);
+        JsonArray statusArr = new JsonArray();
+        statusArr.add(status1);
+
+
+        String  opportunity= "SAL-1607-000039";
+        String  opportunities = "Opportunities";
+        String  category = "Floor_Plan";
+        String  type = "all";
+
+        JsonArray document = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+JsonObject newDocObj = document.getJsonObject(0);
 
         JsonObject finalJson = new JsonObject();
+        finalJson.put("DocumentDetails",(Object)newDocObj);
         finalJson.put("paymentDetails",(Object)payment);
-        finalJson.put("projectStatus",(Object)status);
-
+        finalJson.put("projectStatus",(Object)statusArr);
 /*
         System.out.print("+++_+_++_+_+" +payment);
 */
