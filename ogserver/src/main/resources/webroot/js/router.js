@@ -16,7 +16,7 @@ define([
             'tv-unit-cabinet(/)': 'tvUnitLD',
             'sideboard(/)': 'sideboardLD',
             'foyer-design(/)': 'foyerLD',
-            'products/Living & Dining/Foyer(/)': 'foyerLD',
+            //'products/Living & Dining/Foyer(/)': 'foyerLD',
             'l-shaped-kitchen-design(/)': 'lshapedK',
             'u-shaped-kitchen-design(/)': 'ushapedK',
             'straight-kitchen-design(/)': 'straightK',
