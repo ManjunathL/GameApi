@@ -27,16 +27,7 @@ public class CrmApiClient
         this.initSoapClient();
     }
 
-    /* public static void main(String[] args)
-     {
-         String  opportunity= "SAL-1607-000039";
-         try {
-             System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }*/
-    public static void main(String[] args)
+   /* public static void main(String[] args)
     {
         String  opportunity= "SAL-1607-000039";
         String  opportunities = "Opportunities";
@@ -59,7 +50,7 @@ public class CrmApiClient
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void initSoapClient() throws Exception
     {
@@ -158,22 +149,28 @@ public class CrmApiClient
         JsonArray statusArr = new JsonArray();
         statusArr.add(status1);
 
-
-        String  opportunity= "SAL-1607-000039";
         String  opportunities = "Opportunities";
-        String  category = "Floor_Plan";
+        String  categoryFloorPlan = "Floor_Plan";
         String  type = "all";
 
-        JsonArray document = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-JsonObject newDocObj = document.getJsonObject(0);
+        JsonArray documentFloorPlan = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFloorPlan, type));
+
+        String  categoryProposal = "Proposal";
+
+        JsonArray documentProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryProposal, type));
+
+        JsonObject objectDocumentFloorPlan = documentFloorPlan.getJsonObject(0);
+        JsonObject objectDocumentProposal = documentProposal.getJsonObject(0);
+
+        JsonArray proposalObject = new JsonArray();
+        proposalObject.add(objectDocumentFloorPlan);
+        proposalObject.add(objectDocumentProposal);
 
         JsonObject finalJson = new JsonObject();
-        finalJson.put("DocumentDetails",(Object)newDocObj);
+
+        finalJson.put("documentDetails",(Object)proposalObject);
         finalJson.put("paymentDetails",(Object)payment);
         finalJson.put("projectStatus",(Object)statusArr);
-/*
-        System.out.print("+++_+_++_+_+" +payment);
-*/
         return finalJson.encodePrettily();
 
 
@@ -186,15 +183,14 @@ JsonObject newDocObj = document.getJsonObject(0);
 
         JsonObject newDoc = doc.getJsonObject(0);
 
-        JsonObject latestDoc = new JsonObject().put("documentLink", documentLinkBaseUrl+newDoc.getString("docUrl"))
+        JsonObject docJson1 = new JsonObject().put("documentLink", documentLinkBaseUrl+newDoc.getString("docUrl"))
                 .put("documentName", newDoc.getString("documentName"))
-                .put("documentType", newDoc.getString("docType"))
+                .put("documentType", newDoc.getString("categoryId"))
                 .put("uploadDate", newDoc.getString("date"))
                 ;
 
         JsonArray act = new JsonArray();
-        act.add(latestDoc);
-
+        act.add(docJson1);
         return act.encodePrettily();    }
 
     public String getLatestDocuments(String parentType, String parentId, String category) throws Exception

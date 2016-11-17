@@ -1,14 +1,28 @@
 package com.mygubbi.si.crm;
 
+import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.VertxInstance;
+import com.mygubbi.db.DatabaseService;
+import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
+import com.mygubbi.si.firebase.FirebaseDataRequest;
+import com.mygubbi.si.firebase.FirebaseDataService;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by Chirag on 26-10-2016.
  */
 public class CrmOutboundApiHandler extends AbstractRouteHandler {
+
+    private final static Logger LOG = LogManager.getLogger(CrmOutboundApiHandler.class);
+
 
 
     public CrmOutboundApiHandler(Vertx vertx)
@@ -116,24 +130,56 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
 
     }
 
-    private void getOpportunityDetails(RoutingContext context) {
-        String opportunityId = context.request().getParam("opportunityId");
+    private void getOpportunityDetails(RoutingContext routingContext) {
+        String emailId = routingContext.request().getParam("emailId");
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", emailId)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                        if (selectData.rows == null || selectData.rows.isEmpty())
+                        {
+                            sendError(routingContext.response(), "User does not exist for email: " + emailId);
+                        }
+                        else
+                        {
+                            JsonObject userObject = selectData.rows.get(0);
+                            String opportunityDetails = userObject.getString("crmId");
+                            try {
+                                opportunityDetails = new CrmApiClient().getOpportunityDetails(opportunityDetails);
+                                if (opportunityDetails == null || opportunityDetails.isEmpty())
+                                {
+                                    sendJsonResponse(routingContext, "[]");
+                                }
+                                else {
+                                    sendJsonResponse(routingContext, opportunityDetails);
+                                    JsonObject oppObj = new JsonObject(opportunityDetails);
+                                    updateDataInFirebase(oppObj,userObject);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
-        try {
-            String opportunityDetails = new CrmApiClient().getOpportunityDetails(opportunityId);
-
-
-            if (opportunityDetails == null || opportunityDetails.isEmpty())
-            {
-                sendJsonResponse(context, "[]");
-            }
-            else {
-                sendJsonResponse(context, opportunityDetails);
-            }
-        } catch (Exception e) {
-            sendError(context, "Opportunity not valid : " + opportunityId);
-        }
+                        }
+                    });
     }
 
+    private void updateDataInFirebase(JsonObject requestJson, JsonObject userObject)
+    {
+        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + userObject.getString("fbid") + "/myNest/")
+              .setJsonData(requestJson);
+        Integer id = LocalCache.getInstance().store(dataRequest);
+        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    Integer id_new = selectResult.result().body();
+                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
+                    if (dataResponse == null ){
+                        LOG.error("Error occurred in dataResponse");
+                    }
 
+                    else if (!dataResponse.isError())
+                    {
+                        LOG.info("Firebase updated with " + requestJson.encode());
+                    }
+                });
+    }
 }

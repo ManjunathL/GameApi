@@ -196,7 +196,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             flatNumber = "NA";
         }
 
-        return new JsonObject().put("propertName", propertyName).put("propertyType", propertyType)
+        return new JsonObject().put("propertyName", propertyName).put("propertyType", propertyType)
                 .put("propertyCity", propertyAddressCity).put("blockNumber",blockNumber).put("builderName",builderName).put("flatNumber",flatNumber);
     }
 

@@ -40,6 +40,14 @@
       ]
     },
     {
+      "id": "user_profile.select.crm",
+      "type": "select",
+      "query": "select crmId from user_profile where email = ?",
+      "params": [
+        "email"
+      ]
+    },
+    {
       "id": "event_log.insert",
       "type": "insert",
       "table": "event_log",
