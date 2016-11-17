@@ -36,7 +36,7 @@ define([
             'products/:categories(/:subcategories)(/)': prod,
 */
             'product_search-:searchTerm(/)': 'products-search',
-            'product-:id(/)': 'product',
+           // 'product-:id(/)': 'product',
             'user_profile(/)': 'user_profile',
             'consult(/)': 'consult',
             'shortlist(/)': 'shortlist',
