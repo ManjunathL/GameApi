@@ -245,6 +245,7 @@
                         <% } %>
 
                         <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %>
+<!--
                         <li class="padding0-20">
                             <a
                                     class="dropdown-toggle"
@@ -256,7 +257,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                <!-- <% _.each(filterMaster.price_ranges, function(range){ %>
+                                &lt;!&ndash; <% _.each(filterMaster.price_ranges, function(range){ %>
                                  <li class="
                                  <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                  <% _.each(filter.selectedFiltersName, function(filtername){ %>
@@ -279,11 +280,11 @@
                                          <%= range.name %>
                                      </a>
                                  </li>
-                                 <% }); %>-->
+                                 <% }); %>&ndash;&gt;
                                 <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                                 <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
                                 <li>
-                                    <!-- <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                    &lt;!&ndash; <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                      <div class="price-slide">
                                          <div class="slider-ioc">  </div>
                                      <div id="slider-range-min"></div>
@@ -291,7 +292,7 @@
                                      <div class="price-tag">
                                          <div class="pull-left"> Rs 1 </div>
                                          <div class="pull-right"> Rs 400000 </div>
-                                     </div>-->
+                                     </div>&ndash;&gt;
                                     <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
     margin-left: 26px;" />
                                     <div class="price-slide">
@@ -319,7 +320,7 @@
                                         <div class="pull-left"> Rs 0 </div>
                                         <div class="pull-right"> Rs 40000 </div>
                                     </div>
-                                    <!--   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                    &lt;!&ndash;   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                        <div class="price-slide">
                                            <div class="slider-ioc">  </div>
                                        <div id="slider-range-min2"></div>
@@ -327,12 +328,13 @@
                                        <div class="price-tag">
                                            <div class="pull-left"> Rs 1</div>
                                            <div class="pull-right"> Rs 40000 </div>
-                                       </div>-->
+                                       </div>&ndash;&gt;
                                 </li>
                                 <% } %>
                                 <% } %>
                             </ul>
                         </li>
+-->
                         <% } %>
 
                         <% if(typeof(filterMaster.styles) !== 'undefined'){ %>
@@ -471,9 +473,9 @@
                 <div class="row padding10_0_30 active" id="subcatFilter">
                     <% if(typeof(subcategoriesList) !== 'undefined'){ %> Sub Category <% } %>
                 </div>
-                <div class="row padding10_0_30" id="priceFilter">
+               <!-- <div class="row padding10_0_30" id="priceFilter">
                     <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %> Price Range <% } %>
-                </div>
+                </div>-->
                 <div class="row padding10_0_30" id="styleFilter">
                     <% if(typeof(filterMaster.styles) !== 'undefined'){ %> Style <% } %>
                 </div>
