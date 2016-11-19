@@ -27,8 +27,8 @@ public abstract class AbstractProposalOutputCreator implements ProposalOutputCre
 
     protected void openWorkbook()
     {
-        //this.outputFile = this.copyTemplateFile();
-        //this.workbookManager = new ExcelWorkbookManager(this.outputFile);
+        this.outputFile = this.copyTemplateFile();
+        this.workbookManager = new ExcelWorkbookManager(this.outputFile);
     }
 
     @Override

@@ -259,6 +259,7 @@ public class ModulePriceHolder
                 .put("carcassCost", this.round(this.carcassCost, 2))
                 .put("shutterCost", this.round(this.shutterCost, 2))
                 .put("accessoryCost", this.round(this.accessoryCost, 2))
+                .put("labourCost", this.round(this.labourCost, 2))
                 .put("hardwareCost", this.round(this.hardwareCost, 2))
                 .put("totalCost", this.round(this.totalCost, 2));
     }
