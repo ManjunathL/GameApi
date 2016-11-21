@@ -95,7 +95,7 @@
     <div class="portfolio">
         <div class="<% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == 'shortgrid')){ %>col-md-4 col-sm-4<% }else{ %>col-md-6 col-sm-6<% } %> portfolio-item">
             <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
-                <div class="row margin0 position-relative">
+                <div class="row position-relative">
                     <a href="/newproduct-details-<%= product.productId %>" class="portfolio-link">
                         <img width="555px" height="333px" class="img-responsive  thumbnail-img "
                              src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
