@@ -142,12 +142,12 @@ public class CrmApiClient
         JsonObject status1 = new JsonObject().put("status", "NA")
                 .put("statusId","NA")
                 .put("statusName",status);
+
         JsonArray payment = new JsonArray();
         payment.add(newDoc);
         payment.add(newDoc1);
         payment.add(newDoc2);
-        JsonArray statusArr = new JsonArray();
-        statusArr.add(status1);
+
 
         String  opportunities = "Opportunities";
         String  categoryFloorPlan = "Floor_Plan";
@@ -170,7 +170,7 @@ public class CrmApiClient
 
         finalJson.put("documentDetails",(Object)proposalObject);
         finalJson.put("paymentDetails",(Object)payment);
-        finalJson.put("projectStatus",(Object)statusArr);
+        finalJson.put("projectStatus",(Object)status1);
         return finalJson.encodePrettily();
 
 
@@ -186,9 +186,8 @@ public class CrmApiClient
         JsonObject docJson1 = new JsonObject().put("documentLink", documentLinkBaseUrl+newDoc.getString("docUrl"))
                 .put("documentName", newDoc.getString("documentName"))
                 .put("documentType", newDoc.getString("categoryId"))
-                .put("uploadDate", newDoc.getString("date"))
-                ;
-
+                .put("uploadDate", "NA");
+        //.put("uploadDate", newDoc.getString("date"))
         JsonArray act = new JsonArray();
         act.add(docJson1);
         return act.encodePrettily();    }

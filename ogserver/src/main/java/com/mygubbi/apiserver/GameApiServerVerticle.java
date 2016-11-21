@@ -2,9 +2,11 @@ package com.mygubbi.apiserver;
 
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
+import com.mygubbi.config.StaticConfigHandler;
 import com.mygubbi.game.proposal.ProposalHandler;
 import com.mygubbi.game.proposal.ProposalModuleHandler;
 import com.mygubbi.game.proposal.ProposalProductHandler;
+import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import com.mygubbi.si.crm.CrmApiHandler;
 import com.mygubbi.si.crm.CrmOutboundApiHandler;
@@ -14,6 +16,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 import org.apache.logging.log4j.LogManager;
@@ -42,20 +45,13 @@ public class GameApiServerVerticle extends AbstractVerticle
         Router router = Router.router(VertxInstance.get());
 
         this.setupApiHandler(router);
-        //this.setupStaticHandler(router);
+        this.setupPrerenderHandler(router);
+        this.setupStaticConfigHandler(router);
+        this.setupStaticHandler(router);
 
-        int httpsPort = ConfigHolder.getInstance().getInteger("game_https_port", 1443);
-        HttpServerOptions options = this.getHttpsServerOptions();
-        VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
-        LOG.info("Starting http server on port : " + httpsPort);
-    }
-
-    private HttpServerOptions getHttpsServerOptions()
-    {
         String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
         String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
-        return new HttpServerOptions()
-/*
+        HttpServerOptions options = new HttpServerOptions()
                 .setKeyStoreOptions(new JksOptions().
                         setPath(ssl_keystore).
                         setPassword(ssl_password))
@@ -63,9 +59,18 @@ public class GameApiServerVerticle extends AbstractVerticle
                         setPath(ssl_keystore).
                         setPassword(ssl_password))
                 .setSsl(true)
-*/
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
+
+        int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 1443);
+        VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
+    }
+    private void setupStaticConfigHandler(Router router) {
+        router.route(HttpMethod.GET, "/*").handler(new StaticConfigHandler());
+    }
+    private void setupPrerenderHandler(Router router)
+    {
+        router.route(HttpMethod.GET, "/*").handler(new PrerenderingHandler());
     }
 
     private void setupStaticHandler(Router router)
@@ -89,9 +94,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/crm", new CrmApiHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/outboundCrm", new CrmOutboundApiHandler(VertxInstance.get()));
 
-
         new ConfiguredRestApiHandler().setup(router);
-
 
         router.mountSubRouter("/gapi/user.auth", new GameUserLoginHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/user.reg", new GameUserRegistrationHandler(VertxInstance.get()));
