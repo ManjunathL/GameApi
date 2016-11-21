@@ -124,6 +124,11 @@ ul.myaccount_list li{
     color:#0074BC;
     margin-left:7px;
 }
+.doc-details {
+    font-weight:bold;
+    padding-top:10px;
+    padding-left:30px;
+}
 
 .bs-margin65{margin:65px 0px!important;}
 .bs-margin43{margin:43px 0px!important;}
