@@ -1,10 +1,10 @@
 package com.mygubbi.si.firebase;
 
-import com.firebase.client.*;
+import com.google.firebase.database.*;
 import com.mygubbi.si.data.DataProcessor;
 import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.data.EventData;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +16,11 @@ public class FirebaseEventListener implements ChildEventListener, ValueEventList
 {
     private final static org.apache.logging.log4j.Logger LOG = LogManager.getLogger(FirebaseEventListener.class);
 
-    private Firebase fbRef;
+    private DatabaseReference fbRef;
     private Map<String, DataProcessor> processorMap = new HashMap<>();
     private EventAcknowledger acknowledger;
 
-    public FirebaseEventListener(Firebase fbRef, EventAcknowledger acknowledger)
+    public FirebaseEventListener(DatabaseReference fbRef, EventAcknowledger acknowledger)
     {
         this.fbRef = fbRef;
         this.acknowledger = acknowledger;
@@ -64,6 +64,11 @@ public class FirebaseEventListener implements ChildEventListener, ValueEventList
     @Override
     public void onChildMoved(DataSnapshot dataSnapshot, String s)
     {
+
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
 
     }
 
@@ -119,9 +124,5 @@ public class FirebaseEventListener implements ChildEventListener, ValueEventList
         return eventData;
     }
 
-    @Override
-    public void onCancelled(FirebaseError firebaseError)
-    {
 
-    }
 }

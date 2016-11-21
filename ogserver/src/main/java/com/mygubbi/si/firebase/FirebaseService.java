@@ -1,9 +1,8 @@
 package com.mygubbi.si.firebase;
 
-import com.firebase.client.AuthData;
-import com.firebase.client.Config;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.crm.NewEnquiryProcessor;
@@ -12,7 +11,6 @@ import com.mygubbi.user.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,8 +33,10 @@ public class FirebaseService extends AbstractVerticle
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
-        this.setFirebaseConfig();
-        this.connectToFirebase(startFuture);
+        this.startEventListener = ConfigHolder.getInstance().getBoolean("processfbEvents",false);
+
+        new FirebaseLifecycleManager().init();
+        setup(startFuture);
     }
 
     @Override
@@ -46,40 +46,40 @@ public class FirebaseService extends AbstractVerticle
         if (this.listener != null) this.listener.stop();
     }
 
-    private void setFirebaseConfig()
-    {
-        Config config = new Config();
-        config.setPersistenceEnabled(false);
-        config.setPersistenceCacheSizeBytes(1024 * 1024 * 32); //32 MB
-        Firebase.setDefaultConfig(config);
-    }
+//    private void setFirebaseConfig()
+//    {
+//        Config config = new Config();
+//        config.setPersistenceEnabled(false);
+//        config.setPersistenceCacheSizeBytes(1024 * 1024 * 32); //32 MB
+//        Firebase.setDefaultConfig(config);
+//    }
 
-    private void connectToFirebase(Future<Void> startFuture)
-    {
-        JsonObject config = (JsonObject) ConfigHolder.getInstance().getConfigValue("firebase");
-        if (config == null)
-        {
-            throw new RuntimeException("Could not find config with key 'firebase'");
-        }
-        this.startEventListener = config.getBoolean("processEvents", true);
-        this.fbRef = new Firebase(config.getString("fb_url"));
-        this.fbRef.authWithPassword(config.getString("loginid"), config.getString("password"), new Firebase.AuthResultHandler()
-        {
-            @Override
-            public void onAuthenticated(AuthData authData)
-            {
-                LOG.info("Firebase authenticated for " + config.getString("fb_url"));
-                setup(startFuture);
-            }
-
-            @Override
-            public void onAuthenticationError(FirebaseError firebaseError)
-            {
-                LOG.error("Firebase authentication failed." + firebaseError.getMessage() + "|" + firebaseError.getDetails());
-                startFuture.fail(firebaseError.toException());
-            }
-        });
-    }
+//    private void connectToFirebase(Future<Void> startFuture)
+//    {
+//        JsonObject config = (JsonObject) ConfigHolder.getInstance().getConfigValue("firebase");
+//
+//        if (config == null)
+//        {
+//            throw new RuntimeException("Could not find config with key 'firebase'");
+//        }
+//        this.fbRef = new Firebase(config.getString("fb_url"));
+//        this.fbRef.authWithPassword(config.getString("loginid"), config.getString("password"), new Firebase.AuthResultHandler()
+//        {
+//            @Override
+//            public void onAuthenticated(AuthData authData)
+//            {
+//                LOG.info("Firebase authenticated for " + config.getString("fb_url"));
+//                setup(startFuture);
+//            }
+//
+//            @Override
+//            public void onAuthenticationError(FirebaseError firebaseError)
+//            {
+//                LOG.error("Firebase authentication failed." + firebaseError.getMessage() + "|" + firebaseError.getDetails());
+//                startFuture.fail(firebaseError.toException());
+//            }
+//        });
+//    }
 
     private void setup(Future<Void> startFuture)
     {
@@ -97,7 +97,8 @@ public class FirebaseService extends AbstractVerticle
 
     private void setupEventListeners()
     {
-        Firebase eventsFbRef = this.fbRef.child("/events");
+        final DatabaseReference eventsFbRef = FirebaseDatabase.getInstance().getReference("/events");
+//        Firebase eventsFbRef = this.fbRef.child("/events");
         EventAcknowledger acknowledger = new FirebaseAcknowledger(eventsFbRef);
         this.listener = new FirebaseEventListener(eventsFbRef, acknowledger);
         this.listener.register(new UserRegistrationProcessor(acknowledger));
