@@ -64,6 +64,12 @@ input[type=password],
 input[type=email] {
     color: #333333;
 }
+footer input[type=text],
+footer input[type=number],
+footer input[type=password],
+footer input[type=email] {
+    color: #ffffff;
+}
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -756,7 +762,8 @@ input[type=checkbox] {
     color: #333 !important;
     text-decoration: none;
 }
-/* Start Footer Page */
+
+/* Start Footer */
 
 .bg-color-footer-top{
     background: #323a3f;
@@ -910,7 +917,7 @@ ul.social-buttons li a:active {
 }
 
 .footer-form-control{
-    color: rgba(255,255,255,0.4);
+    color: #ffffff;
     background-color: rgba(255,255,255,0.1);
     border-color: rgba(255,255,255,0.1);
 }
@@ -959,7 +966,27 @@ ul.social-buttons li a:active {
     font-size: 14px;
 }
 
-/* End Footer Page */
+/* End Footer */
+
+/* Start kitchen material Page */
+
+.material-head {
+    color: #4d616b;
+    margin: 50px 0px 20px;
+    font-size: 40px;
+    font-weight: 300;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.material-details p {
+    font-size: 16px;
+    line-height: 150%;
+    color: #444444;
+}
+
+/* End kitchen material Page */
 
 /* Start Know your kitchen and wardrobe Page */
 
