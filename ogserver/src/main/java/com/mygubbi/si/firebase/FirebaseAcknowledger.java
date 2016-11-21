@@ -1,6 +1,6 @@
 package com.mygubbi.si.firebase;
 
-import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
@@ -8,7 +8,6 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.data.EventData;
 import io.vertx.core.AsyncResult;
-import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
@@ -21,9 +20,9 @@ public class FirebaseAcknowledger implements EventAcknowledger
 {
     private final static Logger LOG = LogManager.getLogger(FirebaseAcknowledger.class);
 
-    private Firebase fbRef;
+    private DatabaseReference fbRef;
 
-    public FirebaseAcknowledger(Firebase fbRef)
+    public FirebaseAcknowledger(DatabaseReference fbRef)
     {
         this.fbRef = fbRef;
     }

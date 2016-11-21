@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.quote;
 
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -164,7 +165,7 @@ public class QuotationSheetCreator implements ExcelCellProcessor
             this.createRowAndFillData(currentRow, null, "Base Carcass : " + product.getProduct().getBaseCarcassCode() + " , Wall Carcass : " + product.getProduct().getWallCarcassCode());
 
             currentRow++;
-            this.createRowAndFillData(currentRow, null, "Finish Material : " + product.getProduct().getFinishCode() + " , Finish Type : " + product.getProduct().getFinishType());
+            this.createRowAndFillData(currentRow, null, "Finish Material : " + ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle() + " , Finish Type : " + product.getProduct().getFinishType());
 
             unitSequence++;
             if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;

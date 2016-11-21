@@ -12,8 +12,7 @@ public class ExcelQuoteCreator extends AbstractProposalOutputCreator
 {
     private final static Logger LOG = LogManager.getLogger(ExcelQuoteCreator.class);
 
-
-    public ExcelQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader)
+    public ExcelQuoteCreator(QuoteData quoteData,ProposalHeader proposalHeader)
     {
         super(quoteData,proposalHeader);
     }
@@ -25,17 +24,16 @@ public class ExcelQuoteCreator extends AbstractProposalOutputCreator
 
     public String getOutputFilename()
     {
-        return "/quotation.pdf";
+        return "/quotation.xlsx";
     }
 
 
     public void create()
     {
-        new NewQuotationSheetCreator(this.quoteData,this.proposalHeader);
-        /*this.openWorkbook();
+        this.openWorkbook();
         new QuotationSheetCreator(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles()).prepare();
-        new DataSheetCreator(this.workbookManager.getSheetByName("Data"), this.quoteData, this.workbookManager.getStyles()).prepare();
-        this.closeWorkbook();*/
+       new DataSheetCreator(this.workbookManager.getSheetByName("Data"), this.quoteData, this.workbookManager.getStyles()).prepare();
+        this.closeWorkbook();
     }
 
     @Override

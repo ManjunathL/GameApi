@@ -15,7 +15,6 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.fluent.Request;
@@ -253,7 +252,8 @@ public class CrmApiHandler extends AbstractRouteHandler
         try
         {
             HttpResponse response;
-            String password = RandomStringUtils.random(8, true, true);
+           // String password = RandomStringUtils.random(8, true, true);
+            String password = "mygubbi";
             String name = userJson.getString("firstName") + " " + userJson.getString("lastName");
             String phone =  userJson.getString("mobile");
             URI uri = new URIBuilder()

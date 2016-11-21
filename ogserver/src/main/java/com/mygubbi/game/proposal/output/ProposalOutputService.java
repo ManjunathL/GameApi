@@ -160,7 +160,7 @@ public class ProposalOutputService extends AbstractVerticle
         }
         catch (Exception e)
         {
-            String errorMessage = "Error in preparing excel file for :" + proposalHeader.getId() + ". " + e.getMessage();
+            String errorMessage = "Error in preparing file for :" + proposalHeader.getId() + ". " + e.getMessage();
             sendResponse(message, new JsonObject().put("error", errorMessage));
             LOG.error(errorMessage, e);
         }
