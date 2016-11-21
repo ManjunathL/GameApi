@@ -1777,7 +1777,7 @@ ul.social-buttons li a:active {
     display: block;
     position: absolute;
     z-index: 999;
-    top: 20%;
+    top: 10%;
     width: 100%;
 }
 .kyk-counter-content-tab{
