@@ -1848,6 +1848,10 @@ ul.social-buttons li a:active {
 .kyw-handle-card{
     padding: 10px 20px;
 }
+.kyk-finishe-details{
+    color: #ffffff;
+    padding: 10px 20px;
+}
 
 
 .accessories-section-img{
@@ -2145,6 +2149,9 @@ ul.social-buttons li a:active {
     border: 0px solid #ddd;
     background: transparent;
 }
+.kyk-finishe-card .nav-tabs.nav-justified>li>a{
+    color: #ffffff;
+}
 .kyk-splash-card .nav-tabs.nav-justified>.active>a,
 .kyk-splash-card .nav-tabs.nav-justified>.active>a:hover,
 .kyk-splash-card .nav-tabs.nav-justified>.active>a:focus{
@@ -2409,6 +2416,12 @@ ul.social-buttons li a:active {
     .kyw-wardrobe-card,
     .kyw-dimensions-card{
         margin: 0px 0px 10px;
+    }
+    .kyk-finishe-card .nav-tabs.nav-justified>li>a{
+        color: #333333;
+    }
+    .kyk-finishe-details{
+        color: #333333;
     }
     .interior-section .carousel-caption{
         padding:0px;
