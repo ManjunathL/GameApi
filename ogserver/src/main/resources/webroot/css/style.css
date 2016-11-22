@@ -869,6 +869,32 @@ footer ul.social-buttons li a {
     -moz-transition: all .3s;
     transition: all .3s;
 }
+footer .ioc-circle {
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    background: #fdfbfb;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0px auto;
+    float: left;
+    cursor: pointer;
+}
+
+footer .ioc-circle:hover,
+footer .ioc-circle:focus,
+footer .ioc-circle:active{
+    background: rgba(253, 251, 251, 0.7);
+}
+
+footer .ioc-circle .glyphicon{
+    color: #33434c;
+    display: inline-block;
+    margin: 7px 9px;
+    float: left;
+    width: 100%;
+    font-size: 18px;
+}
 
 .userpop ul.social-buttons li a {
     display: block;
