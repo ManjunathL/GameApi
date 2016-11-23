@@ -34,9 +34,7 @@ public class FirebaseService extends AbstractVerticle
     public void start(Future<Void> startFuture) throws Exception
     {
         this.startEventListener = ConfigHolder.getInstance().getBoolean("processfbEvents",false);
-
-        new FirebaseLifecycleManager().init();
-        setup(startFuture);
+        this.setup(startFuture);
     }
 
     @Override
@@ -86,19 +84,21 @@ public class FirebaseService extends AbstractVerticle
         if (this.startEventListener)
         {
             LOG.info("Setting up event listeners.");
+            new FirebaseLifecycleManager().init();
             this.setupEventListeners();
         }
         else
         {
             LOG.info("Not setting up event listeners.");
         }
-        this.setupProductUpdateService(startFuture);
+//        this.setupProductUpdateService(startFuture);
+        startFuture.complete();
+
     }
 
     private void setupEventListeners()
     {
         final DatabaseReference eventsFbRef = FirebaseDatabase.getInstance().getReference("/events");
-//        Firebase eventsFbRef = this.fbRef.child("/events");
         EventAcknowledger acknowledger = new FirebaseAcknowledger(eventsFbRef);
         this.listener = new FirebaseEventListener(eventsFbRef, acknowledger);
         this.listener.register(new UserRegistrationProcessor(acknowledger));

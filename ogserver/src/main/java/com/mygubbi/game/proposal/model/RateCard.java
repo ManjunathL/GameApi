@@ -18,6 +18,7 @@ public class RateCard
     public static final String FACTOR_TYPE = "F";
     public static final String LOADING_FACTOR = "L";
     public static final String LABOUR_FACTOR = "B";
+    public static final String LOADING_FACTOR_NONSTANDARD = "N";
 
     private String type;
     private String code;

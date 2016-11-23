@@ -39,6 +39,7 @@ public class ModulePriceHolder
     private RateCard shutterDoubleExposedRateCard;
     private RateCard loadingFactorCard;
     private RateCard labourRateCard;
+    private RateCard nonStandardloadingFactorCard;
 
     private double shutterCost = 0;
     private double carcassCost = 0;
@@ -49,7 +50,11 @@ public class ModulePriceHolder
     private double woodworkCost = 0;
     private double moduleArea;
 
+    private String moduleCode;
+    private String moduleType;
+
     private JsonArray errors = null;
+
 
     public ModulePriceHolder()
     {
@@ -66,11 +71,29 @@ public class ModulePriceHolder
         return this.moduleComponents;
     }
 
+
     public void prepare()
     {
+        this.mgModule = ModuleDataService.getInstance().getModule(productModule.getMGCode());
+
+        standardOrNonStandardModule();
+
         this.getModuleAndComponents();
         this.prepareRateCards();
         this.resolveComponents();
+    }
+
+    private void standardOrNonStandardModule() {
+        this.moduleCode =  ModuleDataService.getInstance().getModule(productModule.getMGCode()).getCode();
+
+        if (moduleCode.startsWith("MG-NS"))
+        {
+            moduleType = "nonStandard";
+        }
+        else
+        {
+            moduleType = "Standard";
+        }
     }
 
     private void resolveComponents()
@@ -209,9 +232,10 @@ public class ModulePriceHolder
 
         this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE);
         this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE);
+        this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD, RateCard.FACTOR_TYPE);
 
         if (carcassMaterialRateCard == null || carcassFinishRateCard == null || shutterFinishRateCard == null
-                || loadingFactorCard == null || labourRateCard == null)
+                || loadingFactorCard == null || labourRateCard == null || nonStandardloadingFactorCard == null)
         {
             this.addError("Carcass, Carcass Finish, Shutter, Labour or Loading factor rate cards not setup." + carcassCode + " : "
                     + productModule.getFinishCode() + " : " + shutterFinish.getCostCode());
@@ -220,7 +244,6 @@ public class ModulePriceHolder
 
     private void getModuleAndComponents()
     {
-        this.mgModule = ModuleDataService.getInstance().getModule(productModule.getMGCode());
         this.moduleComponents = ModuleDataService.getInstance().getModuleComponents(productModule.getMGCode());
         if (moduleComponents == null || moduleComponents.isEmpty() || mgModule == null)
         {
@@ -299,11 +322,25 @@ public class ModulePriceHolder
         {
             if (panel.isExposed())
             {
-                this.addToShutterCost(panel.getCost());
+                if ("Standard".equals(moduleType))
+                {
+                    this.addToShutterCost(panel.getCost());
+                }
+                else
+                {
+                    this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                }
             }
             else
             {
-                this.addToCarcassCost(panel.getCost());
+                if ("Standard".equals(moduleType))
+                {
+                    this.addToCarcassCost(panel.getCost());
+                }
+                else
+                {
+                    this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                }
             }
         }
 

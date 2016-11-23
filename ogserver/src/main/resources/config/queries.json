@@ -4,9 +4,8 @@
       "id": "user_profile.insert",
       "type": "insert",
       "table": "user_profile",
-      "query": "insert into user_profile (id, fbid, active, email, profile) values (?, 'A', ?, ?, ?)",
+      "query": "insert into user_profile ( fbid, active, email, profile) values (?, 'A', ?, ?)",
       "params": [
-        "id",
         "fbid",
         "email",
         "profile"
@@ -51,9 +50,8 @@
       "id": "event_log.insert",
       "type": "insert",
       "table": "event_log",
-      "query": "insert into event_log (id, fbid, event_type, event_data) values (?, ?, ?, ?)",
+      "query": "insert into event_log ( fbid, event_type, event_data) values ( ?, ?, ?)",
       "params": [
-        "id",
         "fbid",
         "event_type",
         "event_data"
@@ -63,9 +61,8 @@
       "id": "event_error.insert",
       "type": "insert",
       "table": "event_errors",
-      "query": "insert into event_errors(id, fbid, event_type, event_data, reason) values (?, ?, ?, ?, ?)",
+      "query": "insert into event_errors( fbid, event_type, event_data, reason) values ( ?, ?, ?, ?)",
       "params": [
-        "id",
         "fbid",
         "event_type",
         "event_data",
@@ -76,9 +73,8 @@
       "id": "enquiry.insert",
       "type": "insert",
       "table": "enquiries",
-      "query": "insert into enquiries(id, fbid, uid, email, contactNumber, fullName, propertyName, requirements) values (?, ?, ?, ?, ?, ?, ?, ?)",
+      "query": "insert into enquiries( fbid, uid, email, contactNumber, fullName, propertyName, requirements) values ( ?, ?, ?, ?, ?, ?, ?)",
       "params": [
-        "id",
         "fbid",
         "uid",
         "email",

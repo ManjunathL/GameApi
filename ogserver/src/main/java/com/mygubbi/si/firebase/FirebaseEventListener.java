@@ -24,6 +24,7 @@ public class FirebaseEventListener implements ChildEventListener, ValueEventList
     {
         this.fbRef = fbRef;
         this.acknowledger = acknowledger;
+        LOG.info("Listening for data changes at " + fbRef.toString());
     }
 
     public void register(DataProcessor processor)
@@ -33,14 +34,14 @@ public class FirebaseEventListener implements ChildEventListener, ValueEventList
 
     public void start()
     {
-        //this.fbRef.addListenerForSingleValueEvent(this);
+        this.fbRef.addListenerForSingleValueEvent(this);
         this.fbRef.addChildEventListener(this);
     }
 
     public void stop()
     {
         this.fbRef.removeEventListener((ChildEventListener) this);
-        //this.fbRef.removeEventListener((ValueEventListener) this);
+        this.fbRef.removeEventListener((ValueEventListener) this);
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -14,7 +16,9 @@ import java.io.InputStream;
  */
 public class FirebaseLifecycleManager
 {
-    private static boolean initalized = false;
+    private final static Logger LOG = LogManager.getLogger(FirebaseLifecycleManager.class);
+
+    private static volatile boolean initalized = false;
     private String servicesJsonFile;
     private String fbUrl;
 
@@ -32,6 +36,7 @@ public class FirebaseLifecycleManager
 
     public synchronized void init()
     {
+        LOG.info("Firebase initialized at start:" + initalized);
         if (initalized) return;
 
         if (servicesJsonFile == null || fbUrl == null)
@@ -48,7 +53,7 @@ public class FirebaseLifecycleManager
                     .setDatabaseUrl(fbUrl)
                     .build();
             FirebaseApp.initializeApp(options);
-            System.out.println("Firebase connected.");
+            LOG.info("Firebase connected.");
         }
         catch (Exception e)
         {
@@ -69,6 +74,7 @@ public class FirebaseLifecycleManager
             }
         }
         initalized = true;
+        LOG.info("Firebase initialized:" + initalized);
     }
 
 }

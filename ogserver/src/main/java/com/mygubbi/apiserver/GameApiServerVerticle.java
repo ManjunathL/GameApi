@@ -36,19 +36,24 @@ public class GameApiServerVerticle extends AbstractVerticle
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
-        this.setupHttpSslServer();
+        Router router = Router.router(VertxInstance.get());
+        this.setupApiHandler(router);
+        this.setupHttpSslServer(router);
+        this.setupHttpServer(router);
         startFuture.complete();
     }
 
-    private void setupHttpSslServer()
+    private void setupHttpServer(Router router)
     {
-        Router router = Router.router(VertxInstance.get());
+        HttpServerOptions options = new HttpServerOptions()
+                .setCompressionSupported(true)
+                .setTcpKeepAlive(true);
+        int httpPort =  1443;
+        VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpPort);
+    }
 
-        this.setupApiHandler(router);
-        this.setupPrerenderHandler(router);
-        this.setupStaticConfigHandler(router);
-        this.setupStaticHandler(router);
-
+    private void setupHttpSslServer(Router router)
+    {
         String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
         String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
         HttpServerOptions options = new HttpServerOptions()
@@ -62,9 +67,10 @@ public class GameApiServerVerticle extends AbstractVerticle
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
 
-        int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 1443);
+        int httpsPort =  1444;
         VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
     }
+
     private void setupStaticConfigHandler(Router router) {
         router.route(HttpMethod.GET, "/*").handler(new StaticConfigHandler());
     }
