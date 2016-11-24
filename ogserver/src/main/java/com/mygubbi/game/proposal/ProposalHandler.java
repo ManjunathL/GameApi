@@ -38,6 +38,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
+        this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
@@ -109,6 +110,11 @@ public class ProposalHandler extends AbstractRouteHandler
     private void downloadQuote(RoutingContext routingContext)
     {
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION);
+    }
+
+    private void downloadQuotePdf(RoutingContext routingContext)
+    {
+        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTEPDF);
     }
 
     private void downloadJobCard(RoutingContext routingContext)

@@ -1,6 +1,9 @@
 package com.mygubbi.game.proposal.quote;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -8,13 +11,7 @@ import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.util.CellRangeAddress;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +19,7 @@ import java.util.List;
 /**
  * Created by user on 02-Nov-16.
  */
-public class NewQuotationSheetCreator
+public class QuotationPDFCreator
 {
     public static final String DEST = "d:/wede.pdf";
 
@@ -33,21 +30,14 @@ public class NewQuotationSheetCreator
     QuoteData quoteData;
     private ProposalHeader proposalHeader;
 
-    NewQuotationSheetCreator(QuoteData quoteData,ProposalHeader proposalHeader)
+    QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader)
     {
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
-        try
-        {
-            this.createpdf(DEST);
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
+
     }
 
-    private void  createpdf(String dest)
+    public void  createpdf(String dest)
     {   try {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));

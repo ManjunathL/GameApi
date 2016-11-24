@@ -4,6 +4,7 @@ import com.mygubbi.game.proposal.erp.ExcelSalesOrderCreator;
 import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.quote.ExcelQuoteCreator;
+import com.mygubbi.game.proposal.quote.PdfQuoteCreator;
 import com.mygubbi.game.proposal.quote.QuoteData;
 
 /**
@@ -11,7 +12,7 @@ import com.mygubbi.game.proposal.quote.QuoteData;
  */
 public interface ProposalOutputCreator
 {
-    public enum OutputType {QUOTATION, JOBCARD, SALESORDER};
+    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF};
 
     public void create();
 
@@ -31,6 +32,11 @@ public interface ProposalOutputCreator
 
             case SALESORDER:
                 return new ExcelSalesOrderCreator(quoteData,proposalHeader);
+
+            case QUOTEPDF:
+                return new PdfQuoteCreator(quoteData, proposalHeader);
+
+
 
             default:
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
