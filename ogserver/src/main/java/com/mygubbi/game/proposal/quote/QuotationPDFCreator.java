@@ -11,6 +11,8 @@ import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.FileOutputStream;
 import java.util.Date;
@@ -21,7 +23,10 @@ import java.util.List;
  */
 public class QuotationPDFCreator
 {
-    public static final String DEST = "d:/wede.pdf";
+//    public static final String DEST = "d:/wede.pdf";
+
+    private final static Logger LOG = LogManager.getLogger(QuotationPDFCreator.class);
+
 
     private static final String[] ALPHABET_SEQUENCE = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
     private static final String[] ROMAN_SEQUENCE = new String[]{"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv"};
@@ -37,10 +42,16 @@ public class QuotationPDFCreator
 
     }
 
-    public void  createpdf(String dest)
+    public String getOutputFilename()
+    {
+        return "/quotation.pdf";
+    }
+
+    public void  createpdf(String destination)
     {   try {
+
         Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(destination));
         writer.setPdfVersion(PdfWriter.VERSION_1_7);
         writer.createXmpMetadata();
 
