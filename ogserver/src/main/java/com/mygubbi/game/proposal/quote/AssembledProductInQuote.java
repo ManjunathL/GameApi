@@ -58,6 +58,11 @@ public class AssembledProductInQuote
         return this.product.getTitle();
     }
 
+    public String getCatagoryName()
+    {
+        return this.product.getProductCategory();
+    }
+
     public List<ModulePriceHolder> getPriceHolders()
     {
         return this.priceHolders;
@@ -272,11 +277,11 @@ public class AssembledProductInQuote
 
     private void addToProductAccessories(AccHwComponent accessoryComponent, double quantity)
     {
-        Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle());
+        Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle(),accessoryComponent.getPrice());
         accessory.incrementQuantity(quantity);
     }
 
-    private Accessory getAccessory(String code, String title)
+    private Accessory getAccessory(String code, String title,double msp)
     {
         if (StringUtils.isEmpty(code)) code = "Default";
         for (Accessory accessory : this.accessories)
@@ -287,7 +292,7 @@ public class AssembledProductInQuote
             }
         }
 
-        Accessory accessory = new Accessory(code, title);
+        Accessory accessory = new Accessory(code, title,msp);
         this.accessories.add(accessory);
         return accessory;
     }
@@ -477,11 +482,13 @@ public class AssembledProductInQuote
         public String code;
         public String title;
         public double quantity;
+        public double msp;
 
-        public Accessory(String code, String title)
+        public Accessory(String code, String title,double msp)
         {
             this.code = code;
             this.title = title;
+            this.msp=msp;
         }
 
         public void incrementQuantity(double qty)

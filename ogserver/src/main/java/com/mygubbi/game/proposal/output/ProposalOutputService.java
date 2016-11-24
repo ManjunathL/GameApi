@@ -157,6 +157,7 @@ public class ProposalOutputService extends AbstractVerticle
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader);
             outputCreator.create();
             sendResponse(message, new JsonObject().put(outputCreator.getOutputKey(), outputCreator.getOutputFile()));
+            LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
         }
         catch (Exception e)
         {

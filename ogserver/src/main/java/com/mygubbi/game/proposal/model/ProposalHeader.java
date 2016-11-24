@@ -17,6 +17,14 @@ public class ProposalHeader extends JsonObject
     public static final String DESIGNER_NAME = "designerName";
     public static final String AMOUNT = "amount";
     public static final String FOLDER_PATH = "folderPath";
+    public static final String QNAME="title";
+    public static final String NAME="cname";
+    public static final String CONTACT="cphone1";
+    public static final String QUOTENO="quoteNo";
+    public static final String CID="customerId";
+    public static final String SALESPHONE="salesPhone";
+    public static final String SALESEMAIL="salesEmail";
+
 
     public ProposalHeader(JsonObject json)
     {
@@ -27,7 +35,34 @@ public class ProposalHeader extends JsonObject
     {
 
     }
-
+    public String getSalesPhone()
+    {
+        return this.getString(SALESPHONE);
+    }
+    public String getSalesEmail()
+    {
+        return this.getString(SALESEMAIL);
+    }
+    public String getContact()
+    {
+        return this.getString(CONTACT);
+    }
+    public String getQuoteNum()
+    {
+        return this.getString(QUOTENO);
+    }
+    public String getCustomerId()
+    {
+        return this.getString(CID);
+    }
+    public String getQuotationFor()
+    {
+        return this.getString(QNAME);
+    }
+    public String getName()
+    {
+        return this.getString(NAME);
+    }
     public String folderPath()
     {
         return this.getString(FOLDER_PATH);

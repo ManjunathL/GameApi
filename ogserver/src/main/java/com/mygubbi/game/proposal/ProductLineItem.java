@@ -47,6 +47,10 @@ public class ProductLineItem extends JsonObject
 
     }
 
+    public  String getProductCategory() {
+        return this.getString(PRODUCT_CATEGORY);
+    }
+
     public ProductLineItem(JsonObject data)
     {
         super(data.getMap());

@@ -22,14 +22,14 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
     public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader){
         this.quoteData = quoteData;
         this.proposalHeader = proposalHeader;
-        this.targetFile = this.quoteData.getProposalHeader().folderPath() + "/quotation.pdf";
+        this.targetFile = this.quoteData.getProposalHeader().folderPath() + "//quotation.pdf";
 
     }
 
     @Override
     public void create() {
 
-        LOG.debug("PATH :" + targetFile+this.getOutputFile());
+        LOG.debug("PATH :" + this.getOutputFile());
 
         new QuotationPDFCreator(quoteData, proposalHeader).createpdf(targetFile);
     }

@@ -34,10 +34,10 @@ public class QuoteData
     private List<ProductLineItem> catalogueProducts;
     private List<ProductAddon> headerLevelAddons = Collections.emptyList();
 
-    private double productsCost;
-    private double addonsCost;
+    public double productsCost;
+    public double addonsCost;
 
-    private double discountAmount;
+    public double discountAmount;
 
     public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount)
     {
