@@ -9,15 +9,17 @@
       },
       {
         "name": "com.mygubbi.db.QueryPrepareService"
+      },
+
+      {
+        "name": "com.mygubbi.si.firebase.FirebaseDataService"
+      },
+
+      {
+        "name": "com.mygubbi.si.firebase.FirebaseService"
       }
 
-//      {
-//        "name": "com.mygubbi.si.firebase.FirebaseDataService"
-//      },
 //
-//      {
-//        "name": "com.mygubbi.si.firebase.FirebaseService"
-//      }
     ],
     "parallel": [
       {

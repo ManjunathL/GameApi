@@ -42,11 +42,6 @@ public class QuotationPDFCreator
 
     }
 
-    public String getOutputFilename()
-    {
-        return "/quotation.pdf";
-    }
-
     public void  createpdf(String destination)
     {   try {
 
@@ -84,23 +79,14 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-        //System.out.println("Addrerss printed");
-
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
         PdfPCell cell1;
-
-        /*System.out.print("title" +proposalHeader.getTITLE());
-        System.out.println("Date:" + DateFormatUtils.format(new Date(), "dd-MMM-yyyy"));
-        System.out.print("title" +proposalHeader.getProjectName());
-        System.out.print("title" +proposalHeader.getCrmId());*/
 
         cell1 = new PdfPCell(new Paragraph("Quotation for:" + "title"));
         PdfPCell cell2 = new PdfPCell(new Paragraph("Date:" + DateFormatUtils.format(new Date(), "dd-MMM-yyyy")));
         table.addCell(cell1);
         table.addCell(cell2);
-
-        //System.out.println("quoatation printed");
 
         PdfPCell cell3 = new PdfPCell(new Paragraph("Name:" + "Project name"));
         PdfPCell cell4 = new PdfPCell(new Paragraph("CRM ID:" + proposalHeader.getCrmId()));
@@ -111,7 +97,6 @@ public class QuotationPDFCreator
         PdfPCell cell6 = new PdfPCell(new Paragraph("Quotation num: quote num"));
         table.addCell(cell5);
         table.addCell(cell6);
-        //System.out.print("project Address" +quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","));
         PdfPCell cell7 = new PdfPCell(new Paragraph("Project Adress:" + quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ",")));
         PdfPCell cell8 = new PdfPCell(new Paragraph("Customer ID:"));
         table.addCell(cell7);
@@ -122,7 +107,6 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-        //System.out.print("sales value printed");
         PdfPTable stable = new PdfPTable(3);
         stable.setWidthPercentage(100);
         PdfPCell scell1 = new PdfPCell(new Paragraph("Sales/Design"));
@@ -132,9 +116,6 @@ public class QuotationPDFCreator
         stable.addCell(scell2);
         stable.addCell(scell3);
 
-        /*System.out.println("Sales name" +quoteData.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/"));
-        System.out.println("Sales phone" +proposalHeader.getSalesphone());
-        System.out.println("email" +proposalHeader.getEmail());*/
 
         PdfPCell scell4 = new PdfPCell(new Paragraph(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/")));
         PdfPCell scell5 = new PdfPCell(new Paragraph("SalesNumber"));
@@ -148,7 +129,6 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-        //System.out.print("ssss value inserted");
         itemsTable = new PdfPTable(5);
         itemsTable.setWidthPercentage(100);
         PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SL. No"));
@@ -201,9 +181,7 @@ public class QuotationPDFCreator
         B1Table.addCell(B1Cell4);
         B1Table.addCell(B1Cell5);
 
-        //System.out.println("cal  acc func");
         this.fillAddons(B1Table, this.quoteData.getAccessories(), "No additional accessories.");
-        //System.out.println("finish  acc func");
         document.add(B1Table);
 
         PdfPTable B2Table = new PdfPTable(5);
@@ -219,7 +197,6 @@ public class QuotationPDFCreator
         B2Table.addCell(B2Cell4);
         B2Table.addCell(B2Cell5);
 
-        //System.out.print("call addons");
         this.fillAddons(B2Table, this.quoteData.getAppliances(), "No additional appliances.");
         document.add(B2Table);
 
@@ -374,7 +351,7 @@ public class QuotationPDFCreator
         }
         catch(Exception e)
         {
-            System.out.println(e.toString());
+            LOG.error(e.toString());
         }
     }
 
@@ -395,7 +372,6 @@ public class QuotationPDFCreator
     }
     private void fillAssembledProductInfo(PdfPTable tabname,int sequenceNumber, AssembledProductInQuote product)
     {
-       // System.out.println(product.getTitle());
         this.createProductTitleRow(tabname,"A." + String.valueOf(sequenceNumber), product.getTitle());
         this.fillAssembledProductUnits(tabname,product);
 
@@ -419,10 +395,6 @@ public class QuotationPDFCreator
         int unitSequence = 0;
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
-            /*System.out.println(unit.title);
-            System.out.println(unit.getDimensions());
-            System.out.println(unit.moduleCount);
-            System.out.print(unit.amount);*/
 
             this.createSubHeadingRow(tabname,"A."+ ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
             this.createRowAndFillData(tabname,null, "Unit consists of " + unit.moduleCount + " modules as per design provided.",1.0,unit.amount,0.0);
@@ -443,7 +415,6 @@ public class QuotationPDFCreator
 
     private void createRowAndFillData(PdfPTable tabname,String index, String title, Double quantity, Double amount, Double total)
     {
-        //System.out.println("index" +index+ "title" +title+ "Quantity" +quantity+ "amount" +amount+ "total" +total);
         tabname.addCell(index);
         tabname.addCell(title);
         tabname.addCell(Double.toString(quantity));
@@ -467,8 +438,6 @@ public class QuotationPDFCreator
         int acSequence = 0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
-            /*System.out.println(accessory.title);
-            System.out.println(accessory.quantity);*/
 
             this.createRowAndFillData(tabname,ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, null, null);
             acSequence++;
@@ -501,12 +470,7 @@ public class QuotationPDFCreator
 
     private void fillCatalogProductInfo(PdfPTable tabname, int sequenceNumber, ProductLineItem product)
     {
-        //int currentRow = startRow;
-        /*System.out.println(product.getTitle());
-        System.out.println(product.getQuantity());
-        System.out.println(product.getRate());
-        System.out.println(product.getAmount());
-        System.out.println(product.getName());*/
+
         this.createSubHeadingRowForCatalog(tabname,"A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
 
@@ -540,8 +504,7 @@ public class QuotationPDFCreator
     }
     private void createRowWithMessage(PdfPTable tabname,String message)
     {
-        /*System.out.println(message);
-        this.createRowAndFillData(tabname,null, message, null, null, null);*/
+
         tabname.addCell(message);
     }
 }
