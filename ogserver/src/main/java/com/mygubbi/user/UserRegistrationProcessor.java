@@ -76,7 +76,7 @@ public class UserRegistrationProcessor implements DataProcessor
     private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-        String FirstName = jsonData.getString("firstName");
+        String FirstName = jsonData.getString("displayName");
         String Phone = jsonData.getString("Phone");
         String mail = jsonData.getString("email");
 
