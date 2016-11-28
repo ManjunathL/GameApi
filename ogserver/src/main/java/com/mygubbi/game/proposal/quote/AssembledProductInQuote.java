@@ -205,7 +205,7 @@ public class AssembledProductInQuote
         {
             Collection<AccessoryPackComponent> accessoryPackComponents =
                     ModuleDataService.getInstance().getAccessoryPackComponents(modAccessoryPack.getAccessoryPackCode());
-            if (accessoryPackComponents == null || accessoryPackComponents.isEmpty()) continue;
+            if (accessoryPackComponents == null ) continue;
             for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
             {
                 if (accessoryPackComponent.isAccessory())
