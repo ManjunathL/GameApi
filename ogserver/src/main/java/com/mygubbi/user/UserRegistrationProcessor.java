@@ -76,10 +76,9 @@ public class UserRegistrationProcessor implements DataProcessor
     private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-        String FirstName = jsonData.getString("firstName");
-        String Phone = jsonData.getString("Phone");
-        String mail = jsonData.getString("email");
-
+        String SubjectTemplate = "Thank you" + jsonData.getString("displayName") +", for registering with mygubbi. Unique styles are waiting for you.";
+        LOG.info("===========SubjectTemplate===========");
+        LOG.info(SubjectTemplate);
 
         EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail(jsonData.getString("email"))
                 .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
