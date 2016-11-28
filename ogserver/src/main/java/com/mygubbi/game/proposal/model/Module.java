@@ -20,6 +20,8 @@ public class Module
     private static final String UNIT_TYPE = "unitType";
     private static final String MATERIAL = "material";
     private static final String PRODUCT_CATEGORY = "productCategory";
+    public static final String ACCESSORYPACKDEFAULT = "accessoryPackDefault";
+    public static final String REMARKS = "remarks";
 
     private static final String STANDARD_MODULE = "S";
     private static final String CUSTOM_MODULE = "N";
@@ -35,6 +37,8 @@ public class Module
     private int height;
     private int depth;
     private int width;
+    private String accessoryPackDefault;
+    private String remarks;
 
     public Module()
     {
@@ -54,6 +58,8 @@ public class Module
         this.setProductCategory(json.getString(PRODUCT_CATEGORY));
         this.setUnitType(json.getString(UNIT_TYPE));
         this.setMaterial(json.getString(MATERIAL));
+        this.setAccessoryPackDefault(json.getString(ACCESSORYPACKDEFAULT));
+        this.setRemarks(json.getString(REMARKS));
     }
 
     public String getModuleCategory() {
@@ -188,6 +194,23 @@ public class Module
     {
         this.material = material;
     }
+
+    public String getAccessoryPackDefault() {
+        return accessoryPackDefault;
+    }
+    public void setAccessoryPackDefault(String accessoryPackDefault)
+    {
+        this.accessoryPackDefault = accessoryPackDefault;
+    }
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+
 }
 
 
