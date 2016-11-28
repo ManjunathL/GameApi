@@ -76,18 +76,30 @@ public class UserRegistrationProcessor implements DataProcessor
     private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
+        String SubjectTemplate = "Thank you" + " " + jsonData.getString("displayName") +", for registering with mygubbi. Unique styles are waiting for you.";
+        LOG.info("===========SubjectTemplate===========");
+        LOG.info(SubjectTemplate);
+
         EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail(jsonData.getString("email"))
                 .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
                 .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
         Integer id = LocalCache.getInstance().store(emailData);
         VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
                 (AsyncResult<Message<Integer>> result) -> {
+
                     if (result.succeeded())
                     {
+                        LOG.info(id);
+                        LOG.info(emailData.getTextMessage());
+                        LOG.info(result.cause());
                         this.acknowledger.done(eventData);
                     }
                     else
                     {
+                        LOG.info(result.cause());
+                        LOG.info(id);
+                        LOG.info(emailData.getTextMessage());
+                        LOG.info("USER RESGISTRATION PROCESS ERROR");
                         this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
                     }
                 });
