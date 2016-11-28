@@ -89,12 +89,16 @@ public class UserRegistrationProcessor implements DataProcessor
 
                     if (result.succeeded())
                     {
-                        LOG.info(result.toString());
+                        LOG.info(id);
+                        LOG.info(emailData.getTextMessage());
+                        LOG.info(result.cause());
                         this.acknowledger.done(eventData);
                     }
                     else
                     {
-                        LOG.info(result.toString());
+                        LOG.info(result.cause());
+                        LOG.info(id);
+                        LOG.info(emailData.getTextMessage());
                         LOG.info("USER RESGISTRATION PROCESS ERROR");
                         this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
                     }
