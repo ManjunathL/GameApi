@@ -14,7 +14,14 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import io.vertx.core.json.JsonArray;
 /**
  * Created by Sunil on 07-01-2016.
  */
@@ -57,7 +64,9 @@ public class UserRegistrationProcessor implements DataProcessor
     private void createNewUser(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
+
         JsonObject userJson = new JsonObject().put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
+
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> res) -> {
@@ -76,10 +85,7 @@ public class UserRegistrationProcessor implements DataProcessor
     private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-        String SubjectTemplate = "Thank you" + " " + jsonData.getString("displayName") +", for registering with mygubbi. Unique styles are waiting for you.";
-        LOG.info("===========SubjectTemplate===========");
-        LOG.info(SubjectTemplate);
-
+        sendToLeadSquared(jsonData);
         EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail(jsonData.getString("email"))
                 .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
                 .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
@@ -89,19 +95,69 @@ public class UserRegistrationProcessor implements DataProcessor
 
                     if (result.succeeded())
                     {
-                        LOG.info(id);
-                        LOG.info(emailData.getTextMessage());
-                        LOG.info(result.cause());
                         this.acknowledger.done(eventData);
                     }
                     else
                     {
-                        LOG.info(result.cause());
-                        LOG.info(id);
-                        LOG.info(emailData.getTextMessage());
+
                         LOG.info("USER RESGISTRATION PROCESS ERROR");
                         this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
                     }
                 });
+    }
+    private void sendToLeadSquared(JsonObject requestJson){
+
+        JsonObject obj = new JsonObject().put("Attribute", "FirstName")
+                .put("Value", requestJson.getValue("displayName"));
+        /*JsonObject obj3 = new JsonObject().put("Attribute", "LastName")
+                .put("Value", "Basha");*/
+        JsonObject obj1 = new JsonObject().put("Attribute","Phone").put("Value",requestJson.getValue("phone"));
+        JsonObject obj2 = new JsonObject().put("Attribute","EmailAddress").put("Value",requestJson.getValue("email"));
+        String accessKey = "u$r1c221f1db494ffe457d25c16814685ce";
+        String secretKey = "894f1e8cbdc36c967504b9dc912905f1fc77c012";
+        String api_url_base = "https://api.leadsquared.com/v2/LeadManagement.svc/Lead.Create?accessKey=" + accessKey + "&secretKey=" + secretKey ;
+        System.out.println(api_url_base);
+        JsonArray data = new JsonArray().add(obj);
+        data.add(obj1);
+        data.add(obj2);
+        //data.add(obj3);
+        LOG.info(data);
+        LOG.info("API to send data into leadsquared");
+        try {
+            URL objUrl = new URL(api_url_base);
+            HttpsURLConnection conn = (HttpsURLConnection) objUrl.openConnection();
+            conn.setDoOutput( true );
+            conn.setInstanceFollowRedirects( false );
+            conn.setRequestMethod( "POST" );
+            conn.setRequestProperty( "Content-Type", "application/json");
+            conn.setRequestProperty( "charset", "utf-8");
+            //conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            conn.setUseCaches( false );
+            try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+                LOG.info("Sene data");
+                LOG.info(data.encodePrettily());
+                wr.writeBytes(data.encodePrettily());
+                wr.flush();
+                wr.close();
+                int responseCode = conn.getResponseCode();
+                LOG.info("Response Code : " + responseCode);
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                //print result
+                LOG.info(response.toString());
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        };
+
+
     }
 }
