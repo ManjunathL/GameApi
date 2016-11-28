@@ -76,14 +76,14 @@ public class UserRegistrationProcessor implements DataProcessor
     private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-        String DisplayName = jsonData.getString("displayName");
+        String FirstName = jsonData.getString("firstName");
+        String Phone = jsonData.getString("Phone");
+        String mail = jsonData.getString("email");
+
 
         EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail(jsonData.getString("email"))
                 .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
-                .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("Thank you" + DisplayName +" for registering with mygubbi. Unique styles are waiting for you.");
-        LOG.info("Email Sending to customer");
-        LOG.info(DisplayName + "" + jsonData.getString("email") );
-
+                .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
         Integer id = LocalCache.getInstance().store(emailData);
         VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
                 (AsyncResult<Message<Integer>> result) -> {
@@ -93,6 +93,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     }
                     else
                     {
+                        LOG.info("USER RESGISTRATION PROCESS ERROR");
                         this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
                     }
                 });
