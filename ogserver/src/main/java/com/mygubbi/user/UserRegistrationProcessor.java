@@ -124,7 +124,8 @@ public class UserRegistrationProcessor implements DataProcessor
         data.add(obj1);
         data.add(obj2);
         //data.add(obj3);
-        System.out.print(data);
+        LOG.info(data);
+        LOG.info("API to send data into leadsquared");
         try {
             URL objUrl = new URL(api_url_base);
             HttpsURLConnection conn = (HttpsURLConnection) objUrl.openConnection();
@@ -136,8 +137,8 @@ public class UserRegistrationProcessor implements DataProcessor
             //conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
             conn.setUseCaches( false );
             try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
-                System.out.print("done");
-                System.out.println(data.encodePrettily());
+                LOG.info("Sene data");
+                LOG.info(data.encodePrettily());
                 wr.writeBytes(data.encodePrettily());
                 wr.flush();
                 wr.close();
