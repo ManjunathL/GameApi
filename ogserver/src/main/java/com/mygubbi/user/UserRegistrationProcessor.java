@@ -86,6 +86,7 @@ public class UserRegistrationProcessor implements DataProcessor
         Integer id = LocalCache.getInstance().store(emailData);
         VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
                 (AsyncResult<Message<Integer>> result) -> {
+                    LOG.info(result.toString());
                     if (result.succeeded())
                     {
                         this.acknowledger.done(eventData);
