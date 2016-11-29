@@ -50,6 +50,14 @@
       "default": "[]"
     },
     {
+      "uri": "/gapi/proposal/id",
+      "source": "db",
+      "query":"proposal.id",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
       "uri": "/gapi/proposal/cancel",
       "source": "db",
       "query":"proposal.cancel",
