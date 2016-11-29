@@ -70,7 +70,7 @@ public class QuotationPDFCreator
 
         document.open();
             writer.setPageEvent(new CustomBorder());
-            Image img = Image.getInstance("mygubbi.png");
+            Image img = Image.getInstance("C:\\Users\\user\\IdeaProjects\\apidevelopment\\ogserver\\file-uploads\\myGubbi_Logo.png");
             img.setWidthPercentage(50);
         document.add(img);
         Paragraph p;
@@ -325,25 +325,25 @@ public class QuotationPDFCreator
 
             p = new Paragraph("Discount(C):" +this.getRoundOffValue(quoteData.discountAmount) ,fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
-        document.add(p);
+            document.add(p);
 
 
-            double fin_value;
+            Double fin_value;
             double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
-            if(val %10 ==0)
+            //Double grandTotal = totalAfterDiscount + costOfAccessories + addonsTotal;
+            Double rem=val%10;
+
+            if(rem<5)
             {
-                fin_value=val;
-            }
+                fin_value=val-rem;
+             }
             else
             {
-                double val1 = val - val % 10;
-                double rem = val - val1;
-                fin_value = val + (10 - rem);
+                fin_value=val+(10-rem);
             }
-
-            p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(fin_value) + "\n" ,fsize1);
-        p.setAlignment(Element.ALIGN_RIGHT);
-        document.add(p);
+            p = new Paragraph("Estimated Cost After Discount (A+B-C): " +fin_value.intValue() + "\n" ,fsize1);
+            p.setAlignment(Element.ALIGN_RIGHT);
+            document.add(p);
 
         p = new Paragraph("      ");
         p.setAlignment(Element.ALIGN_LEFT);
@@ -352,7 +352,7 @@ public class QuotationPDFCreator
         PdfPTable table2=new PdfPTable(1);
         table2.setWidthPercentage(100);
 
-            p=new Paragraph("In words: " +word.convertNumberToWords((int)(fin_value)) + " Rupees Only" ,fsize1);
+            p=new Paragraph("In words: " +word.convertNumberToWords(fin_value.intValue()) + " Rupees Only" ,fsize1);
 
             //p=new Paragraph("In words: " +new CurrencyUtil().convert(String.valueOf(fin_value)) ,fsize1);
             table2.addCell(new Paragraph(p));
@@ -675,7 +675,6 @@ public class QuotationPDFCreator
             }
             else if(cname.equals("W") || cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits"))
             {
-
                 SW1modulecount += unit.moduleCount;
                 SW1basecarcass = product.getProduct().getBaseCarcassCode();
                 SW1wallcarcass = product.getProduct().getWallCarcassCode();
