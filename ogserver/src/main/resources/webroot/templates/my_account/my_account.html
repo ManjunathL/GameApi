@@ -23,6 +23,7 @@
                                 <div class="myaccount-lnk-content" id="profile-lnk-content" style="color:#f15a23;">My Profile</div>
                             </a>
                         </li>
+                        <% if(typeof(myNest) !==  'undefined' && myNest !== null){ %>
                         <li class="myaccount-lnk">
                             <a href="#mynest" id="mynest-lnk" role="tab" data-toggle="tab">
                                 <img class="myaccount-lnk-img" id="mynest-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest.png" class="cld-responsive img-centered">
@@ -37,6 +38,7 @@
                                 <div class="myaccount-lnk-content" id="message-lnk-content">Message</div>
                             </a>
                         </li>
+                        <% } %>
                         <li class="myaccount-lnk">
                             <a href="#settings" id="settings-lnk" role="tab" data-toggle="tab">
                                 <img class="myaccount-lnk-img" id="settings-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog.png" class="cld-responsive img-centered">

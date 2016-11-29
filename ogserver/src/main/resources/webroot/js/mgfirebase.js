@@ -285,6 +285,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
 
              projRef.once("value", function(snapshot) {
                  if (snapshot.exists()) {
+                 console.log("--------project details--------");
                      that.projectDetails = snapshot.val();
                      var userProfileRef = firebase.database().ref().child("user-profiles/" + authData.uid);
 
@@ -295,17 +296,24 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                              that.userProfile = snapshots.val();
                          }
                          var providerId = authData.providerData[0].providerId;
-                         /*if(!userProfile){
-                            someFunc(authData,that.projectDetails, providerId);
-                         }else{
-                            someFunc(that.userProfile,that.projectDetails, providerId);
-                         }*/
                          someFunc(that.userProfile,that.projectDetails, providerId);
                         });
+                 }else{
+                    console.log("--------project details not exists--------");
+                    var userProfileRef = firebase.database().ref().child("user-profiles/" + authData.uid);
+                    var userProfile = null;
+                    var providerId = authData.providerData[0].providerId;
+
+                    userProfileRef.once("value", function(snapshot) {
+                        if (snapshot.exists()) {
+                            that.userProfile = snapshot.val();
+                        }
+                        someFunc(that.userProfile,null, providerId);
+                       });
+
                  }
-                 //someFunc(authData,that.projectDetails, authData.providerData);
              });
 
-         }
+        }
     };
 });
