@@ -1182,7 +1182,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-12 col-md-12 col-lg-12" id="warranty">
                     <div id="returns">
                         <h1 class="section-heading"> Returns </h1>
                     </div>
@@ -2546,18 +2546,29 @@
 <script>
 $( document ).ready(function() {
     var hash = shipping;
-    if (window.location.href.trim().toLowerCase().indexOf('#shipping') > -1) {
-    $('html, body').animate({
-           scrollTop: $(hash).offset().top
-         }, 800, function(){
-         });
-    },
-    var hash = returns;
-    if (window.location.href.trim().toLowerCase().indexOf('#returns') > -1) {
+    var hash1 = returns;
+    var hash2 = warranty;
+
+    if (window.location.href.trim().toLowerCase().indexOf('-shipping') > -1) {
     $('html, body').animate({
            scrollTop: $(hash).offset().top
          }, 800, function(){
          });
     }
+
+    if (window.location.href.trim().toLowerCase().indexOf('-returns') > -1) {
+    $('html, body').animate({
+           scrollTop: $(hash1).offset().top
+         }, 800, function(){
+         });
+    }
+
+    if (window.location.href.trim().toLowerCase().indexOf('-warranty') > -1) {
+    $('html, body').animate({
+           scrollTop: $(hash2).offset().top
+         }, 800, function(){
+         });
+    }
+
 });
 </script>
