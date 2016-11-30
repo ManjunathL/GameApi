@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/js/libs/highlight/highlight.css">
+<script type="text/javascript" src="/js/libs/highlight/highlight.js"></script>
 <section class="menu-spacer bg-color-white">
     <div class="container">
         <% if(typeof(full_story) !== 'undefined') {  %>
@@ -82,7 +84,7 @@
                           <div class="row pt30 pb20">
                               <div class="col-sm-12 col-md-12 col-lg-12">
                                   <span class="pe-7s-search blog-search pe-fw"></span>
-                                  <input type="text" class="form-control" />
+                                  <input type="text" class="form-control" id="text-search" />
                               </div>
                           </div>
 
@@ -152,3 +154,20 @@
         <% }%>
     </div>
 </section>
+<script type="text/javascript">
+    $(function() {
+        $('#text-search').bind('keyup change', function(ev) {
+            // pull in the new value
+            var searchTerm = $(this).val();
+
+            // remove any old highlighted terms
+            $('body').removeHighlight();
+
+            // disable highlighting if empty
+            if ( searchTerm ) {
+                // highlight the new term
+                $('body').highlight( searchTerm );
+            }
+        });
+    });
+</script>
