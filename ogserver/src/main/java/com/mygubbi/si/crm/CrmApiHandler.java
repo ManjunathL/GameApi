@@ -83,7 +83,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info("request Json:------>");
         LOG.info(requestJson);
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + userJson.getString("profile"));
-       /* .put("createdBy", requestJson.getString("designerName"));
+        proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
         proposalData.put("email", requestJson.getString("email"));
@@ -93,7 +93,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("salesExecName", requestJson.getString("salesExecName"));
         proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
-        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));*/
+        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
 
         String Json = requestJson.getString("profile ");
         JsonObject jsonObjectProfile = new JsonObject(Json);
