@@ -78,6 +78,10 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void createProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject userJson)
     {
+        LOG.info("USER JSON:------>");
+        LOG.info(userJson);
+        LOG.info("request Json:------>");
+        LOG.info(requestJson);
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + userJson.getString("profile")).put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -90,12 +94,11 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
         proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
 
-        String Json = requestJson.getString("profile ");
+        String Json = requestJson.getString("profile");
         JsonObject jsonObjectProfile = new JsonObject(Json);
         proposalData.put("profile",jsonObjectProfile);
-        LOG.info("+++++++++++++ Request JSON ++++++++++");
-        LOG.info(requestJson.encodePrettily());
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", requestJson));
+
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -106,7 +109,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                        String docsFolder = this.proposalDocsFolder + "/" + requestJson.getLong("id");
+                        String docsFolder = this.proposalDocsFolder + "/" + proposalData.getLong("id");
                         try
                         {
                             VertxInstance.get().fileSystem().mkdirBlocking(docsFolder);
@@ -118,7 +121,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                             return;
                         }
                         proposalData.put("folderPath", docsFolder);
-                        this.updateProposal(routingContext, requestJson, requestJson, userJson);
+                        this.updateProposal(routingContext, requestJson, proposalData, userJson);
                     }
                 });
     }
