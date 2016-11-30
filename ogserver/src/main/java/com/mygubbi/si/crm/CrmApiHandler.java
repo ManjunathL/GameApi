@@ -94,7 +94,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
         proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
 
-        String Json = requestJson.getString("profile");
+        String Json = requestJson.getString("profile ");
         JsonObject jsonObjectProfile = new JsonObject(Json);
         proposalData.put("profile",jsonObjectProfile);
 
