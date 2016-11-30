@@ -70,7 +70,7 @@ public class QuotationPDFCreator
 
         document.open();
             writer.setPageEvent(new CustomBorder());
-            Image img = Image.getInstance("C:\\Users\\user\\IdeaProjects\\apidevelopment\\ogserver\\file-uploads\\myGubbi_Logo.png");
+            Image img = Image.getInstance("myGubbi_Logo.png");
             img.setWidthPercentage(50);
         document.add(img);
         Paragraph p;
