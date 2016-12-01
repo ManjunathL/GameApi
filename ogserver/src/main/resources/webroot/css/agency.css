@@ -7235,9 +7235,9 @@ img.thumbnail {
     font-weight: 500;
     padding: 0px;
     margin: 0px;
-    width: 70%;
+    width: 96%;
     line-height: 12px;
-    left: 7%;
+    left: 3%;
 }
 
 .testimonials-carousel .carousel-inner p{
@@ -7249,6 +7249,13 @@ img.thumbnail {
 
 .testimonials-carousel .carousel-indicators{
     bottom: 115px;
+}
+
+.img-testimonials{
+    position: absolute;
+    top: -35px;
+    width: 145px !important;
+    right: -5px;
 }
 
 .carousel-inner{
@@ -7878,7 +7885,11 @@ html .ui-button.ui-state-disabled:active {
 }
 .testimonials-carousel .carousel-caption {
     position: absolute;
-    bottom: 15px;;
+    bottom: 15px;
+    background: rgba(255,255,255,0.8);;
+    padding: 12px 15px;
+    border-radius: 50px;
+    height: 110px;
 }
 #latest_blog_content h4{
     font-size: 24px;
@@ -8014,6 +8025,7 @@ html .ui-button.ui-state-disabled:active {
         background: rgba(255, 255, 255, 0.76);
         padding: 5px 10px 0px;
         bottom: 2%;
+        height: auto;
     }
     .mob-container{
         width: 100%;

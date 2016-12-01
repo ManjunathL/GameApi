@@ -3871,12 +3871,31 @@ ul.social-buttons li a:active {
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-
+    /* Global Class */
+    .mobile-text-center{
+        text-align: center;
+    }
+    .mobile-text-left{
+        text-align: left;
+    }
+    .mobile-text-right{
+        text-align: right;
+    }
 }
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 
+    /* Global Class */
+    .mobile-text-center{
+        text-align: center;
+    }
+    .mobile-text-left{
+        text-align: left;
+    }
+    .mobile-text-right{
+        text-align: right;
+    }
     /* Start FAQ page */
     .q-container{
         min-height: 60px;
