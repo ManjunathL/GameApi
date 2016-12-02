@@ -268,14 +268,14 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
              console.log("couldn't start listening to shortlist changes", error);
          });
         },
-        transferShortlistData: function(authData) {
-         if (authData.provider !== 'anonymous') { //don't transfer shortlist when a person is logging out
-             var that = this;
-             _.each(this.shortlistedItems, function(shortlistedItem) {
-                 that.addShortlistProduct(shortlistedItem).then(function() {});
-             });
-         }
-        },
+       transferShortlistData: function(authData) {
+                if ((typeof(authData.provider) !== "undefined") && (authData.provider[0].providerId !== 'anonymous')) { //don't transfer shortlist when a person is logging out
+                    var that = this;
+                    _.each(that.shortlistedItems, function(shortlistedItem) {
+                        that.addShortlistProduct(shortlistedItem).then(function() {});
+                    });
+                }
+               },
         mynest: function(authData, someFunc) {
             var mynestitems = null;
             var authData = this.refAuth.currentUser;

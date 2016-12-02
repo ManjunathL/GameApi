@@ -167,19 +167,134 @@
 <section>
     <div class="col-md-12 col-sm-12 bg-white portfolio-box margin-top40">
         <div class="tab-content">
+            <div role="tabpanel" class="tab-pane padding10 active" id="proposal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <i class="icon ion-information-circled color-red"></i><h3 class="text-transform-none txt-color-orange"> Approval required for <% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.documentDetails[0].documentName %>
+                        <% } %></h3></div>
+                    <div class="col-md-12">
+                        <h4 class="text-transform-none">Initial Proposal(<% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.documentDetails[0].uploadDate %>
+                            <% } %>)</h4>
+                        <hr />
+                        <div class="col-md-8 padding0">
+                            <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
+                        </div>
+
+                        <div class="col-md-4" style="padding-left: 0px;">
+                            <div class="col-md-12">
+                                <a href="http://www.trackode.com/" target="_blank" title="View">
+                                    <div class="row">
+                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.documentDetails[0].documentName %>
+                                            <% } %>
+                                        </span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"><div class="col-md-12"><hr/></div></div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-8 padding0">
+                            <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
+                            [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
+                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
+                    </div>
+                </div>
+
+                <div class="row row-magin align-center col-md-12 font-style-or">
+                    <div class="quality-check-line"></div>
+                    <div class="quality-check-head-box">
+                        <h1 class="quality-check-head text-center"> OR </h1>
+                    </div>
+                </div>
+                <div class="row row-margin col-md-12 padding-bottom15">
+                    <div class="col-md-8 padding0">
+                        <div style="display:inline;font-weight:bold;">
+                            <h4 class="text-transform-none">Schedule the date and time with Sales Team</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4 padding0">
+                                    <input
+                                            type="time"
+                                            id="user_time"
+                                            class="form-control"
+                                            name="date"
+                                            placeholder="hh/mm AM/PM"
+                                            style="margin:20px 0px;"
+
+                                    />
+                                </div>
+                                <div class="col-md-6 padding0">
+                                    <input
+                                            type="date"
+                                            id="user_schedule"
+                                            class="form-control"
+                                            name="date"
+                                            placeholder="dd/mm/yy"
+                                            dateformat="d M y"
+                                            style="margin:20px 0px;"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 padding0">
+                        <button type="button" class="btn button-orange font-size18" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
+                </div>
+            </div>
             <div role="tabpanel" class="tab-pane row padding6" id="card">
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6"> Payment Details</div>
                 <div class="col-md-12">
                     <div class="row align-center">
                     <div class="col-md-4" style="font-weight:bold;">Amount</div>
                     <div class="col-md-4" style="font-weight:bold;">Date</div>
+                    <div class="col-md-4" style="font-weight:bold;">Reference</div>
                     </div>
                     <div class="row align-center padding6">
                         <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].amount %>
+                            <%= myNest.paymentDetails[0].m1_amount_collected_c %>
                             <% } %> </div>
                         <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].date_entered %>
+                            <%= myNest.paymentDetails[0].m1_payment_date_c %>
+                            <% } %></div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].payment_reference1_c %>
+                            <% } %></div>
+
+                    </div>
+                    <div class="row align-center padding6">
+                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m2_amount_collected_c %>
+                            <% } %> </div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m2_payment_date_c %>
+                            <% } %></div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].payment_reference2_c %>
+                            <% } %></div>
+
+                    </div>
+                    <div class="row align-center padding6">
+                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m3_amount_collected_c %>
+                            <% } %> </div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m3_payment_date_c %>
+                            <% } %></div>
+                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].payment_reference3_c %>
                             <% } %></div>
 
                     </div>
