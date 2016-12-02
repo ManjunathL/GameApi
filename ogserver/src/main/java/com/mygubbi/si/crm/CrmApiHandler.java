@@ -46,7 +46,7 @@ public class CrmApiHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
-        this.post("/createProposal").handler(this::createProposal);
+       // this.post("/createProposal").handler(this::createProposal);
         this.post("/createCustomer").handler(this::createCustomer);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
@@ -60,29 +60,17 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.debug("JSON :" + requestJson.encodePrettily());
         String email = requestJson.getString("email");
 
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        sendError(routingContext.response(), "User does not exist for email: " + email);
-                    }
-                    else
-                    {
-                        createProposal(routingContext, requestJson, selectData.rows.get(0));
-                    }
-                });
+                        createProposal(routingContext, requestJson);
+
     }
 
 
-    private void createProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject userJson)
+    private void createProposal(RoutingContext routingContext, JsonObject requestJson)
     {
-        LOG.info("USER JSON:------>");
-        LOG.info(userJson);
+
         LOG.info("request Json:------>");
         LOG.info(requestJson);
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + userJson.getString("profile"));
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("profile"));
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -122,12 +110,13 @@ public class CrmApiHandler extends AbstractRouteHandler
                             return;
                         }
                         proposalData.put("folderPath", docsFolder);
-                        this.updateProposal(routingContext, requestJson, proposalData, userJson);
+                        createProposal(routingContext);
+                        this.updateProposal(routingContext, requestJson, proposalData);
                     }
                 });
     }
 
-    private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData, JsonObject userJson)
+    private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.folder.update", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -141,7 +130,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     else
                     {
                         sendJsonResponse(routingContext, proposalData.toString());
-                        updateDataInFirebase(requestJson, proposalData, userJson);
+                        updateDataInFirebase(requestJson, proposalData, requestJson);
                     }
                 });
     }
