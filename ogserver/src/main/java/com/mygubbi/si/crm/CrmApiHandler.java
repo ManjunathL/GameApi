@@ -236,6 +236,8 @@ public class CrmApiHandler extends AbstractRouteHandler
                     {
                         try
                         {
+
+                            LOG.info("Create Customer inside " +userJson.encodePrettily());
                             createUserOnWebsite(userJson);
                             sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
@@ -257,6 +259,7 @@ public class CrmApiHandler extends AbstractRouteHandler
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
+        LOG.info(email);
         String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
         if (host == null)
@@ -269,7 +272,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             HttpResponse response;
            // String password = RandomStringUtils.random(8, true, true);
             String password = "mygubbi";
-            String name = userJson.getString("firstName") + " " + userJson.getString("lastName");
+            String name = userJson.getString("firstName");
             String phone =  userJson.getString("mobile");
             URI uri = new URIBuilder()
                     .setScheme("https")
