@@ -79,14 +79,17 @@ public class ProposalOutputService extends AbstractVerticle
     {
         QueryData queryData = null;
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
-        if (quoteRequest.hasProductIds())
-        {
-            queryData = new QueryData("proposal.product.selected.detail", paramsJson.put("productIds", quoteRequest.getProductIdsAsText()));
-        }
-        else
-        {
-            queryData = new QueryData("proposal.product.all.detail", paramsJson);
-        }
+//        if (quoteRequest.hasProductIds())
+//        {
+//            queryData = new QueryData("proposal.product.selected.detail", paramsJson.put("productIds", quoteRequest.getProductIdsAsText()));
+//            LOG.debug("paramsJson :" + paramsJson.encodePrettily());
+//        }
+//        else
+//        {
+//            queryData = new QueryData("proposal.product.all.detail", paramsJson);
+//        }
+        queryData = new QueryData("proposal.product.all.detail", paramsJson);
+
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -102,7 +105,17 @@ public class ProposalOutputService extends AbstractVerticle
                         List<ProductLineItem> products = new ArrayList<ProductLineItem>();
                         for (JsonObject json : resultData.rows)
                         {
-                            products.add(new ProductLineItem(json));
+                            if (quoteRequest.hasProductIds())
+                            {
+                                if (quoteRequest.getProductIds().contains(json.getInteger("id")))
+                                {
+                                    products.add(new ProductLineItem(json));
+                                }
+                            }
+                            else
+                            {
+                                products.add(new ProductLineItem(json));
+                            }
                         }
                         this.getProposalAddons(quoteRequest, proposalHeader, products, message);
                     }
@@ -115,15 +128,16 @@ public class ProposalOutputService extends AbstractVerticle
         QueryData queryData = null;
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
         LOG.debug("Proposal product :" + paramsJson.toString());
-        if (quoteRequest.hasAddonIds())
-        {
-            queryData = new QueryData("proposal.addon.selected.detail", paramsJson.put("addonIds", quoteRequest.getAddonIdsAsText()));
-        }
-        else
-        {
-            queryData = new QueryData("proposal.addon.list", paramsJson);
-        }
-        LOG.debug("Proposal product :" + paramsJson.toString());
+//        if (quoteRequest.hasAddonIds())
+//        {
+//            queryData = new QueryData("proposal.addon.selected.detail", paramsJson.put("addonIds", quoteRequest.getAddonIdsAsText()));
+//        }
+//        else
+//        {
+//            queryData = new QueryData("proposal.addon.list", paramsJson);
+//        }
+        queryData = new QueryData("proposal.addon.list", paramsJson);
+
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -134,18 +148,26 @@ public class ProposalOutputService extends AbstractVerticle
                         LOG.error("Proposal level addons not found for id:" + proposalHeader.getId() + resultData.errorMessage);
                         return;
                     }
-
-                    List<ProductAddon> addons = null;
-                    if (resultData.rows != null && !resultData.rows.isEmpty())
-                    {
-                        addons = new ArrayList<ProductAddon>();
+                    else {
+                        List<ProductAddon> addons = new ArrayList<ProductAddon>();
                         for (JsonObject json : resultData.rows)
                         {
-                            addons.add(new ProductAddon(json));
+                            if (quoteRequest.hasAddonIds())
+                            {
+                                if (quoteRequest.getAddonIds().contains(json.getInteger("id")))
+                                {
+                                    addons.add(new ProductAddon(json));
+                                }
+                            }
+                            else
+                            {
+                                addons.add(new ProductAddon(json));
+                            }
                         }
+                        this.createQuote(quoteRequest, proposalHeader, products, addons, message);
                     }
-                    this.createQuote(quoteRequest, proposalHeader, products, addons, message);
                 });
+
     }
 
     private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,

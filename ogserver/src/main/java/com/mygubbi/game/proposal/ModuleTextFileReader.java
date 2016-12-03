@@ -116,7 +116,18 @@ public class ModuleTextFileReader
         return productModules;
     }
 
+
     private void getNewProductModule(List<ProductModule> productModules, String unit, String name, String moduleCode, int sequence, String color, String remarks, int width, int depth, int height, int moduleSequence) {
+        if ("Base unit".equals(unit)) {
+            String newUnit = "N - Base Units";
+            unit = newUnit;
+        }
+
+        if ("Wall unit".equals(unit)) {
+            String newUnit = "N - Wall Units";
+            unit = newUnit;
+        }
+
         ProductModule module = new ProductModule()
                 .setUnit(unit)
                 .setExternalCode(moduleCode)
