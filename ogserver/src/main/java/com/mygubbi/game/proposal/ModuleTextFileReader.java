@@ -128,6 +128,11 @@ public class ModuleTextFileReader
             unit = newUnit;
         }
 
+        if ("Tall unit".equals(unit)) {
+            String newUnit = "S - Kitchen Tall Units";
+            unit = newUnit;
+        }
+
         ProductModule module = new ProductModule()
                 .setUnit(unit)
                 .setExternalCode(moduleCode)
