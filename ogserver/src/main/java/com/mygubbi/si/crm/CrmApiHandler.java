@@ -31,6 +31,7 @@ import org.apache.logging.log4j.Logger;
 import javax.net.ssl.SSLContext;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
@@ -54,9 +55,6 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void createProposal(RoutingContext routingContext)
     {
-        LOG.debug("create proposal request");
-
-        LOG.debug("create proposal request");
         LOG.debug("create proposal request");
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
@@ -260,11 +258,14 @@ public class CrmApiHandler extends AbstractRouteHandler
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
+        String decodeEmail = null;
         try {
-            email = java.net.URLDecoder.decode(email, "UTF-8");
+            decodeEmail = new String(email.getBytes("ISO-8859-1"), "UTF-8");
+            LOG.info("Decode Email" +decodeEmail);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
         String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
         if (host == null)
@@ -285,7 +286,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setPath("/registerUser.html")
                     .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
-                    .setParameter("crmId",userJson.getString("opportunityId"))
                     .setParameter("email", email)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
