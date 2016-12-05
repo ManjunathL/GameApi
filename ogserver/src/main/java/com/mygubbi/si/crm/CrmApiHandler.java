@@ -271,7 +271,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             HttpResponse response;
            // String password = RandomStringUtils.random(8, true, true);
             String password = "mygubbi";
-            String name = "test";
+            String name = userJson.getString("first_name");
             String phone =  userJson.getString("mobile");
             URI uri = new URIBuilder()
                     .setScheme("https")
