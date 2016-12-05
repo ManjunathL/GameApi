@@ -32,8 +32,6 @@ class CustomBorder extends PdfPageEventHelper {
 }
 public class QuotationPDFCreator
 {
-//    public static final String DEST = "d:/wede.pdf";
-
     private final static Logger LOG = LogManager.getLogger(QuotationPDFCreator.class);
 
     String series;
@@ -46,7 +44,6 @@ public class QuotationPDFCreator
 
     PdfPTable itemsTable,B1Table;
     QuoteData quoteData;
-    public String pdfFile;
 
     Font fsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
     Font fsize1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -61,14 +58,14 @@ public class QuotationPDFCreator
     }
 
     public void  createpdf(String destination)
-    {   try {
+    {
+        try {
 
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(destination));
         writer.setPdfVersion(PdfWriter.VERSION_1_7);
         writer.createXmpMetadata();
-
-        document.open();
+            document.open();
             writer.setPageEvent(new CustomBorder());
             Image img = Image.getInstance("myGubbi_Logo.png");
             img.setWidthPercentage(50);
@@ -98,7 +95,6 @@ public class QuotationPDFCreator
             float[] columnWidths2 = {4,2};
             PdfPTable table = new PdfPTable(columnWidths2);
         table.setWidthPercentage(100);
-        PdfPCell cell1;
 
             Phrase phrase = new Phrase();
             phrase.add(new Chunk("Quotation For: ",fsize1));
@@ -205,7 +201,7 @@ public class QuotationPDFCreator
         this.fillCatalogProducts(itemsTable);
         document.add(itemsTable);
 
-            p = new Paragraph("Estimated Cost(A):" +this.getRoundOffValue(quoteData.productsCost) ,fsize1);
+        p = new Paragraph("Estimated Cost(A):" +this.getRoundOffValue(String.valueOf((int)quoteData.productsCost)) ,fsize1);
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
@@ -309,28 +305,24 @@ public class QuotationPDFCreator
         this.fillAddons(B4Table, this.quoteData.getServices(), "No additional services.");
         document.add(B4Table);
 
-            p = new Paragraph("Estimated Cost(B):" +this.getRoundOffValue(quoteData.addonsCost),fsize1);
+            p = new Paragraph("Estimated Cost(B):" +this.getRoundOffValue(String.valueOf((int)quoteData.addonsCost)),fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
             double val2=quoteData.getTotalCost();
             double val3=val2-val2%10;
-            double rem1=val2-val3;
-            double fin_value1=val2+(10-rem1);
 
-
-            p = new Paragraph("Estimated Cost(A+B):" +this.getRoundOffValue(quoteData.getTotalCost()) ,fsize1);
+        p = new Paragraph("Estimated Cost(A+B):" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost())) ,fsize1);
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
-            p = new Paragraph("Discount(C):" +this.getRoundOffValue(quoteData.discountAmount) ,fsize1);
+            p = new Paragraph("Discount(C):" +this.getRoundOffValue(String.valueOf((int)quoteData.discountAmount)) ,fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
 
             Double fin_value;
             double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
-            //Double grandTotal = totalAfterDiscount + costOfAccessories + addonsTotal;
             Double rem=val%10;
 
             if(rem<5)
@@ -341,7 +333,7 @@ public class QuotationPDFCreator
             {
                 fin_value=val+(10-rem);
             }
-            p = new Paragraph("Estimated Cost After Discount (A+B-C): " +fin_value.intValue() + "\n" ,fsize1);
+            p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(String.valueOf(fin_value.intValue())) + "\n" ,fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
@@ -353,8 +345,6 @@ public class QuotationPDFCreator
         table2.setWidthPercentage(100);
 
             p=new Paragraph("In words: " +word.convertNumberToWords(fin_value.intValue()) + " Rupees Only" ,fsize1);
-
-            //p=new Paragraph("In words: " +new CurrencyUtil().convert(String.valueOf(fin_value)) ,fsize1);
             table2.addCell(new Paragraph(p));
         document.add(table2);
 
@@ -420,9 +410,6 @@ public class QuotationPDFCreator
             cel9.addElement(p);
             cel9.setBorder(Rectangle.NO_BORDER);
             tab.addCell(p);
-
-            /*Font size3=new Font(Font.FontFamily.TIMES_ROMAN,6,Font.BOLD);
-            p=new Paragraph("VAT @ 14.5% & S T @14.5%",size3);*/
 
             tab.addCell(new Paragraph("1. The quote rate is inclusive of Applicable taxes." + ", Taxes are subject to changes, due to Govt. policies & changes in the rate if any, - the same will be chared at the time of submission of bill.\n"
                     +"2. The images depicted in the drawings and presentations are representative only. The final design - drawings provided and approved by the client will be conceived and executed at the site.\n"
@@ -585,7 +572,8 @@ public class QuotationPDFCreator
             if(cname.equals("K") )
             {
 
-                if(unit.title.contains("N - Base Units") ||
+                if(unit.title.contains("Base unit")||
+                        unit.title.contains("N - Base Units") ||
                         unit.title.contains("N - Drawer Units") ||
                         unit.title.contains("N - Drawer") ||
                         unit.title.contains("N - Open Units") ||
@@ -606,7 +594,8 @@ public class QuotationPDFCreator
                 {
                     if(unit.title.contains("N - Base Units") || unit.title.contains("S - Kitchen Base Corner Units")||
                             unit.title.contains("S - Kitchen Base Drawer Units") ||
-                            unit.title.contains("S - Kitchen Base Shutter Units") ) {
+                            unit.title.contains("S - Kitchen Base Shutter Units") ||
+                            unit.title.contains("Base unit")) {
 
                         KBmodulecount += unit.moduleCount;
                     }
@@ -621,7 +610,8 @@ public class QuotationPDFCreator
                         caption="Kitchen Base Unit";
                     }
                 }
-                else if (unit.title.contains("S - Kitchen Wall Corner Units")||
+                else if (unit.title.contains("Wall unit")||
+                        unit.title.contains("S - Kitchen Wall Corner Units")||
                         unit.title.contains("S - Kitchen Wall Flap Up Units") ||
                         unit.title.contains("S - Kitchen Wall Open Units") ||
                         unit.title.contains("S - Kitchen Wall Shutter Units")||
@@ -642,7 +632,7 @@ public class QuotationPDFCreator
                     }
 
                 }
-                else if (unit.title.contains("S - Kitchen Tall Units") ||  unit.title.contains ("N - Tall/Semi Tall Units"))
+                else if (unit.title.contains("Tall unit") || unit.title.contains("S - Kitchen Tall Units") ||  unit.title.contains ("N - Tall/Semi Tall Units"))
                 {
 
                     KTmoduleCount += unit.moduleCount;
@@ -673,7 +663,6 @@ public class QuotationPDFCreator
                     }
 
                 }
-
             }
             else if(cname.equals("W") || cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits"))
             {
@@ -813,20 +802,20 @@ public class QuotationPDFCreator
         tabname.addCell(cell);
 
         PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(quantity),fsize);
+        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
         Pindex.setAlignment(Element.ALIGN_RIGHT);
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
 
         PdfPCell cell4=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(amount),fsize);
+        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(amount.intValue())),fsize);
         Pindex.setAlignment(Element.ALIGN_RIGHT);
         cell4.addElement(Pindex);
         tabname.addCell(cell4);
 
         PdfPCell cell3=new PdfPCell();
         double amt=quantity*amount;
-        Paragraph Pamt=new Paragraph(this.getRoundOffValue(amt),fsize);
+        Paragraph Pamt=new Paragraph(this.getRoundOffValue(String.valueOf((int)amt)),fsize);
         Pamt.setAlignment(Element.ALIGN_RIGHT);
         cell3.addElement(Pamt);
         tabname.addCell(cell3);
@@ -867,7 +856,7 @@ public class QuotationPDFCreator
         this.createCellWithData(tabname,"WoodWork Cost",amt-amount);
     }
 
-    private void createCellWithData(PdfPTable tabname,String str,Object data)
+    private void createCellWithData(PdfPTable tabname,String str,double data)
     {
         PdfPCell cell1 = new PdfPCell();
         Paragraph p1=new Paragraph(str,fsize);
@@ -877,23 +866,11 @@ public class QuotationPDFCreator
         tabname.addCell(cell1);
 
         PdfPCell cell = new PdfPCell();
-        Paragraph p=new Paragraph(this.getRoundOffValue(Double.parseDouble(data.toString())),fsize);
+        Paragraph p=new Paragraph(this.getRoundOffValue(String.valueOf((int)data)),fsize);
         p.setAlignment(Element.ALIGN_RIGHT);
         cell.addElement(p);
         tabname.addCell(cell);
     }
-
-
-    private void createCellWithData(PdfPTable tabname,Object data)
-    {
-        PdfPCell cell = new PdfPCell();
-        Paragraph p=new Paragraph(this.getRoundOffValue(Double.parseDouble(data.toString())),fsize);
-        p.setAlignment(Element.ALIGN_RIGHT);
-        cell.addElement(p);
-        cell.setColspan(5);
-        tabname.addCell(cell);
-    }
-
     private void fillCatalogProducts(PdfPTable tabname)
     {
         List<ProductLineItem> catalogProducts = this.quoteData.getCatalogueProducts();
@@ -936,21 +913,20 @@ public class QuotationPDFCreator
         tabname.addCell(cell);
 
         cell=new PdfPCell();
-        p=new Paragraph(this.getRoundOffValue(quantity),fsize);
+        p=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
         p.setAlignment(Element.ALIGN_RIGHT);
         cell.addElement(p);
         tabname.addCell(cell);
 
         PdfPCell cell1=new PdfPCell();
-        p=new Paragraph(this.getRoundOffValue(amount),fsize);
+        p=new Paragraph(this.getRoundOffValue(String.valueOf(amount.intValue())),fsize);
         p.setAlignment(Element.ALIGN_RIGHT);
         cell1.addElement(p);
         tabname.addCell(cell1);
 
         PdfPCell cell2=new PdfPCell();
         double amt=quantity*amount;
-        LOG.info("amount:" +amt);
-        Paragraph Pamt=new Paragraph(this.getRoundOffValue(total),fsize);
+        Paragraph Pamt=new Paragraph(this.getRoundOffValue(String.valueOf(total.intValue())),fsize);
         Pamt.setAlignment(Element.ALIGN_RIGHT);
         cell2.addElement(Pamt);
         tabname.addCell(cell2);
@@ -980,11 +956,24 @@ public class QuotationPDFCreator
         tabname.addCell(cell);
     }
 
-    public static String getRoundOffValue(double value)
+    public static String getRoundOffValue(String value)
     {
+        value=value.replace(",","");
+        char lastDigit=value.charAt(value.length()-1);
+        String result = "";
+        int len = value.length()-1;
+        int nDigits = 0;
 
-        DecimalFormat df = new DecimalFormat("##,##,##,##,##,##,###");
-        return df.format(value);
+        for (int i = len - 1; i >= 0; i--)
+        {
+            result = value.charAt(i) + result;
+            nDigits++;
+            if (((nDigits % 2) == 0) && (i > 0))
+            {
+                result = "," + result;
+            }
+        }
+        return (result+lastDigit);
     }
 
     class customeclass
@@ -1033,7 +1022,8 @@ public class QuotationPDFCreator
             return wallcarcass;
         }
 
-        public void setWallcarcass(String wallcarcass) {
+        public void setWallcarcass(String wallcarcass)
+        {
             this.wallcarcass = wallcarcass;
         }
 
