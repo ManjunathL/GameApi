@@ -89,7 +89,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson);
         createCustomer(routingContext);
 
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("profile"));
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name"));
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -117,6 +117,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
+                        LOG.info("Create Proposal in Else");
                         String docsFolder = this.proposalDocsFolder + "/" + proposalData.getLong("id");
                         try
                         {
@@ -129,6 +130,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                             return;
                         }
                         proposalData.put("folderPath", docsFolder);
+                        LOG.info("Done Proposal");
                         this.updateProposal(routingContext, requestJson, proposalData);
                     }
                 });
@@ -136,6 +138,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
     {
+        LOG.info("updateProposal Started");
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.folder.update", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -147,6 +150,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
+                        LOG.info("updateProposal Success in else");
                         sendJsonResponse(routingContext, proposalData.toString());
                         updateDataInFirebase(requestJson, proposalData);
                     }
@@ -158,24 +162,24 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info("Update in Firebase");
         LOG.info(proposalData.encodePrettily());
         LOG.info(requestJson.encodePrettily());
-//        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + userJson.getString("fbid") + "/myNest/projectDetails")
-//                .setJsonData(this.getProjectDetailsJson(proposalData));
-//        Integer id = LocalCache.getInstance().store(dataRequest);
-//        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
-//                (AsyncResult<Message<Integer>> selectResult) -> {
-//                    LOG.debug("select Result :" + selectResult.result());
-//                    Integer id_new = selectResult.result().body();
-//                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
-//                    LOG.debug("Firebase data response :" + dataResponse);
-//                    if (dataResponse == null ){
-//                        LOG.error("Error Occuered in dataResponse");
-//                    }
-//
-//                    else if (!dataResponse.isError())
-//                    {
-//                        LOG.info("Firebase updated with " + requestJson.encode());
-//                    }
-//                });
+        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + requestJson.getString("fbid") + "/myNest/projectDetails")
+                .setJsonData(this.getProjectDetailsJson(proposalData));
+        Integer id = LocalCache.getInstance().store(dataRequest);
+        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    LOG.debug("select Result :" + selectResult.result());
+                    Integer id_new = selectResult.result().body();
+                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
+                    LOG.debug("Firebase data response :" + dataResponse);
+                    if (dataResponse == null ){
+                        LOG.error("Error Occuered in dataResponse");
+                    }
+
+                    else if (!dataResponse.isError())
+                    {
+                        LOG.info("Firebase updated with " + requestJson.encode());
+                    }
+                });
     }
 
     private JsonObject getProjectDetailsJson(JsonObject requestJson)
