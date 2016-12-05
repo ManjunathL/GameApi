@@ -30,6 +30,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.SSLContext;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
@@ -284,8 +285,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
                     .build();
-            LOG.debug("URL :" + uri.toString());
-
+            LOG.debug("URL :" + URLEncoder.encode(uri.toString(), "UTF-8"));
             if (acceptSSLCertificates.equals("true"))
             {
                 org.apache.http.ssl.SSLContextBuilder context_b = SSLContextBuilder.create();
