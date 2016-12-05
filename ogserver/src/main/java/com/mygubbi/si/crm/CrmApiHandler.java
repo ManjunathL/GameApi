@@ -259,14 +259,6 @@ public class CrmApiHandler extends AbstractRouteHandler
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
-        String decodeEmail = null;
-        try {
-            decodeEmail = new String(email.getBytes("ISO-8859-1"), "UTF-8");
-            LOG.info("Decode Email" +decodeEmail);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
         String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
         if (host == null)
@@ -281,21 +273,14 @@ public class CrmApiHandler extends AbstractRouteHandler
             String password = "mygubbi";
             String name = userJson.getString("first_name");
             String phone =  userJson.getString("mobile");
-            String encodedEmail = null;
-            try {
-                encodedEmail = URLEncoder.encode(decodeEmail, "UTF-8");
-                LOG.info("Encode Email" +encodedEmail);
 
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registerUser.html")
                     .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
-                    .setParameter("email", encodedEmail)
+                    .setParameter("email", email)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
