@@ -32,6 +32,7 @@ import javax.net.ssl.SSLContext;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
@@ -280,13 +281,21 @@ public class CrmApiHandler extends AbstractRouteHandler
             String password = "mygubbi";
             String name = userJson.getString("first_name");
             String phone =  userJson.getString("mobile");
+            String encodedEmail = null;
+            try {
+                encodedEmail = URLEncoder.encode(decodeEmail, "UTF-8");
+                LOG.info("Encode Email" +encodedEmail);
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registerUser.html")
                     .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
-                    .setParameter("email", decodeEmail)
+                    .setParameter("email", encodedEmail)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
