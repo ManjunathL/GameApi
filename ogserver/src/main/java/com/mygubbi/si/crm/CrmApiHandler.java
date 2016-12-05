@@ -29,8 +29,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.SSLContext;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
@@ -260,6 +260,11 @@ public class CrmApiHandler extends AbstractRouteHandler
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
+        try {
+            email = java.net.URLDecoder.decode(email, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
         if (host == null)
@@ -280,12 +285,13 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setPath("/registerUser.html")
                     .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
+                    .setParameter("crmId",userJson.getString("opportunityId"))
                     .setParameter("email", email)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
                     .build();
-            LOG.debug("URL :" + URLEncoder.encode(uri.toString(), "UTF-8"));
+            LOG.debug("URL :" + uri.toString());
             if (acceptSSLCertificates.equals("true"))
             {
                 org.apache.http.ssl.SSLContextBuilder context_b = SSLContextBuilder.create();
