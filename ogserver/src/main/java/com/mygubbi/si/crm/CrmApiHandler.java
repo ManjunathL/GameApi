@@ -288,12 +288,14 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setPath("/registerUser.html")
                     //.setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
-                    .setParameter("email", decodedEmail.toString())
+                    .setParameter("email", email)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
                     .build();
             LOG.debug("URL :" + uri.toString());
+            String urlString = URLDecoder.decode(uri.toString(), "UTF-8");
+            URI uriDecode = new URI(urlString);
             if (acceptSSLCertificates.equals("true"))
             {
                 org.apache.http.ssl.SSLContextBuilder context_b = SSLContextBuilder.create();
@@ -306,11 +308,11 @@ public class CrmApiHandler extends AbstractRouteHandler
                         .setSSLSocketFactory(sslSocketFactory);
                 CloseableHttpClient httpclient = builder.build();
 
-               response = httpclient.execute(new HttpGet(uri));
+               response = httpclient.execute(new HttpGet(uriDecode));
             }
             else
             {
-                response = Request.Get(uri).execute().returnResponse();
+                response = Request.Get(uriDecode).execute().returnResponse();
             }
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                     LOG.error("Error in calling website for creating user." + response.toString());
