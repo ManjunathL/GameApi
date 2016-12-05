@@ -296,6 +296,8 @@ public class CrmApiHandler extends AbstractRouteHandler
             LOG.debug("URL :" + uri.toString());
             String urlString = URLDecoder.decode(uri.toString(), "UTF-8");
             URI uriDecode = new URI(urlString);
+            LOG.debug("URL DE-CODE :" + uriDecode.toString());
+
             if (acceptSSLCertificates.equals("true"))
             {
                 org.apache.http.ssl.SSLContextBuilder context_b = SSLContextBuilder.create();
