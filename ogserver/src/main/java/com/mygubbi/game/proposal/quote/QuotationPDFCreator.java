@@ -408,6 +408,8 @@ public class QuotationPDFCreator
                     +"3. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
                     ,fsize));
 
+        document.add(tab2);
+
         PdfPTable tab=new PdfPTable(1);
         tab.setWidthPercentage(100);
 
@@ -600,7 +602,7 @@ public class QuotationPDFCreator
                         unit.title.contains("S - Wardrobe Panels") ||
                         unit.title.contains("S - Bathroom Vanity") ||
                         unit.title.contains("S - Hinged Wardrobe 2100") ||
-                        unit.title.contains("S - Hinged Wardrobe 2400"))
+                        unit.title.contains("S - Hinged Wardrobe 2400") )
                 {
                     if(unit.title.contains("N - Base Units") || unit.title.contains("S - Kitchen Base Corner Units")||
                             unit.title.contains("S - Kitchen Base Drawer Units") ||
