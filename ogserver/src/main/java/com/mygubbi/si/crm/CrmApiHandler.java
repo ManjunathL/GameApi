@@ -34,6 +34,7 @@ import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -273,14 +274,16 @@ public class CrmApiHandler extends AbstractRouteHandler
             String password = "mygubbi";
             String name = userJson.getString("first_name");
             String phone =  userJson.getString("mobile");
+            String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
 
+            LOG.info("decodedEmail"   +decodedEmail);
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registerUser.html")
                     .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
-                    .setParameter("email", email)
+                    .setParameter("email", decodedEmail)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
