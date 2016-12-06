@@ -312,6 +312,8 @@ public class CrmApiHandler extends AbstractRouteHandler
                 LOG.info("acceptSSLCertificates True");
 
                response = httpclient.execute(new HttpGet(uriDecode));
+                int statusCode = response.getStatusLine().getStatusCode();
+                LOG.info("STATUS CODE: " +statusCode);
             }
             else
             {
