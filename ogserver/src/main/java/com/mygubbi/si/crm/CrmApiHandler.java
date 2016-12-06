@@ -311,7 +311,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-               response = httpclient.execute(new HttpGet(uriDecode));
+               response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +statusCode);
             }
@@ -319,7 +319,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             {
                 LOG.info("acceptSSLCertificates False");
 
-                response = Request.Get(uriDecode).execute().returnResponse();
+                response = Request.Get(uri).execute().returnResponse();
             }
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                     LOG.error("Error in calling website for creating user." + response.toString());
