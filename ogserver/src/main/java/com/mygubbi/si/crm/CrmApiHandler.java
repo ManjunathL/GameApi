@@ -91,6 +91,9 @@ public class CrmApiHandler extends AbstractRouteHandler
 
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name"));
         proposalData.put("createdBy", requestJson.getString("designerName"));
+        proposalData.put("cname", requestJson.getString("first_name"));
+        proposalData.put("designerName", requestJson.getString("designerName"));
+        proposalData.put("salesExecName", requestJson.getString("salesName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
         proposalData.put("email", requestJson.getString("email"));
