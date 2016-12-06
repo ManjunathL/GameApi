@@ -106,7 +106,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject jsonObjectProfile = new JsonObject(Json);
         proposalData.put("profile",jsonObjectProfile);
         LOG.info("PROPOSAL DATA: " +proposalData);
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create.crm", proposalData));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
