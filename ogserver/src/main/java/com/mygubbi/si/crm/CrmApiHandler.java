@@ -51,7 +51,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/createProposal").handler(this::createProposal);
-        //this.post("/createCustomer").handler(this::createCustomer);
+        this.post("/createCustomer").handler(this::createCustomer);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
 
@@ -106,7 +106,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject jsonObjectProfile = new JsonObject(Json);
         proposalData.put("profile",jsonObjectProfile);
         LOG.info("PROPOSAL DATA: " +proposalData);
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create.crm", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -287,7 +287,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registerUser.html")
-                    //.setParameter("_escaped_fragment_",fragment)
+                    .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
                     .setParameter("email", email)
                     .setParameter("phone", phone)
