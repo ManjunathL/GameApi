@@ -65,7 +65,6 @@
 
         });
         function createUser(userData){
-            //alert(' -------I am------ ');
             firebase.database().ref().child("users").child(userData.uid).set(userData, function(error) {
                 if (error) {
                     console.log("Data could not be saved." + error);
@@ -75,7 +74,6 @@
             });
         }
         function createProfile(userData,profileData){
-            //alert(' -------here------ ');
 
             firebase.database().ref().child('user-profiles').child(userData.uid).set(
                 profileData,
@@ -90,7 +88,6 @@
             pushEvent(userData.uid, profileData, "user.add");
         }
         function pushEvent(uid, data, type){
-            //alert(' -------event add------ ');
             var eventData = {
                 "data": data,
                 "type": type
