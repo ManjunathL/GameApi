@@ -309,11 +309,14 @@ public class CrmApiHandler extends AbstractRouteHandler
                 HttpClientBuilder builder = HttpClients.custom()
                         .setSSLSocketFactory(sslSocketFactory);
                 CloseableHttpClient httpclient = builder.build();
+                LOG.info("acceptSSLCertificates True");
 
                response = httpclient.execute(new HttpGet(uriDecode));
             }
             else
             {
+                LOG.info("acceptSSLCertificates False");
+
                 response = Request.Get(uriDecode).execute().returnResponse();
             }
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
