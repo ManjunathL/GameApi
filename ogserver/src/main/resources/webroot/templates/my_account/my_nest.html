@@ -171,11 +171,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <i class="icon ion-information-circled color-red"></i><h3 class="text-transform-none txt-color-orange"> Approval required for <% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.documentDetails[0].documentName %>
+                            <%= myNest.documentDetails[1].documentName %>
                         <% } %></h3></div>
                     <div class="col-md-12">
                         <h4 class="text-transform-none">Initial Proposal(<% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.documentDetails[0].uploadDate %>
+                            <%= myNest.documentDetails[1].uploadDate %>
                             <% } %>)</h4>
                         <hr />
                         <div class="col-md-8 padding0">
@@ -184,7 +184,7 @@
 
                         <div class="col-md-4" style="padding-left: 0px;">
                             <div class="col-md-12">
-                                <a href="http://www.trackode.com/" target="_blank" title="View">
+                                <a href="<%= myNest.documentDetails[1].documentLink %>" target="_blank" title="View">
                                     <div class="row">
                                         <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
                                         </div>
@@ -192,7 +192,7 @@
                                     <div class="row">
                                         <div class="col-md-12 align-center"><span class="text-small-proposals">
                                             <% if(typeof(myNest) !== 'undefined'){ %>
-                                            <%= myNest.documentDetails[0].documentName %>
+                                            <%= myNest.documentDetails[1].documentName %>
                                             <% } %>
                                         </span></div>
                                     </div>
