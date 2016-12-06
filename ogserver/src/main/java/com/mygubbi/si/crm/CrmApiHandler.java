@@ -89,11 +89,8 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson);
         createCustomer(routingContext);
 
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name"));
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
         proposalData.put("createdBy", requestJson.getString("designerName"));
-        proposalData.put("cname", requestJson.getString("first_name"));
-        proposalData.put("designerName", requestJson.getString("designerName"));
-        proposalData.put("salesExecName", requestJson.getString("salesName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
         proposalData.put("email", requestJson.getString("email"));
@@ -157,6 +154,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         sendJsonResponse(routingContext, proposalData.encodePrettily());
                         updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
+                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
     }
@@ -176,7 +174,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
                     LOG.debug("Firebase data response :" + dataResponse);
                     if (dataResponse == null ){
-                        LOG.error("Error Occuered in dataResponse");
+                        LOG.error("Error Occured in dataResponse");
                     }
 
                     else if (!dataResponse.isError())
