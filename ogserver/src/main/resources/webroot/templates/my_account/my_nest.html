@@ -258,43 +258,72 @@
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6"> Payment Details</div>
                 <div class="col-md-12">
                     <div class="row align-center">
-                    <div class="col-md-4" style="font-weight:bold;">Amount</div>
+                        <div class="col-sm-3" style="font-weight:bold;">Payment Milestone</div>
+                        <div class="col-sm-2" style="font-weight:bold;">% Amount</div>
+                        <div class="col-sm-2" style="font-weight:bold;">Amount</div>
+                        <div class="col-sm-2" style="font-weight:bold;">Payment Date</div>
+                        <div class="col-sm-2" style="font-weight:bold;">Transaction Ref</div>
+                   <!-- <div class="col-md-4" style="font-weight:bold;">Amount</div>
                     <div class="col-md-4" style="font-weight:bold;">Date</div>
-                    <div class="col-md-4" style="font-weight:bold;">Reference</div>
+                    <div class="col-md-4" style="font-weight:bold;">Reference</div>-->
                     </div>
                     <div class="row align-center padding6">
-                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-3">  Booking Amount </div>
+                        <div class="col-sm-2">  3% </div>
+                        <div class="col-sm-2"> <% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m1_amount_collected_c %>
                             <% } %> </div>
-                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-2"><% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m1_payment_date_c %>
                             <% } %></div>
-                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-2"><% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference1_c %>
                             <% } %></div>
 
                     </div>
                     <div class="row align-center padding6">
-                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-3"> Design Finalization</div>
+                        <div class="col-sm-2">  47% </div>
+                        <div class="col-sm-2"> <% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m2_amount_collected_c %>
                             <% } %> </div>
-                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-2"><% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m2_payment_date_c %>
                             <% } %></div>
-                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-2"><% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference2_c %>
                             <% } %></div>
 
                     </div>
                     <div class="row align-center padding6">
-                        <div class="col-md-4"> <% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-3">  Balance </div>
+                        <div class="col-sm-2">  50% </div>
+                       <div class="col-sm-2"> <% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m3_amount_collected_c %>
                             <% } %> </div>
-                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-2"><% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m3_payment_date_c %>
                             <% } %></div>
-                        <div class="col-md-4"><% if(typeof(myNest) !== 'undefined'){ %>
+                        <div class="col-sm-2"><% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference3_c %>
+                            <% } %></div>
+
+                    </div>
+                    <div class="row row-magin align-center col-md-12 font-style-or">
+                        <div class="quality-check-line"></div>
+                        </div>
+
+                    <div class="row align-center padding6">
+                        <div class="col-sm-3 padding-top-10 ">  Total Amount </div>
+                        <div class="col-sm-2">  </div>
+                        <div class="col-sm-2 padding-top-10"> <% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m4_amount_collected_c %>
+                            <% } %> </div>
+                        <div class="col-sm-2 padding-top-10"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m4_payment_date_c %>
+                            <% } %></div>
+                        <div class="col-sm-2 padding-top-10"><% if(typeof(myNest) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].payment_reference4_c %>
                             <% } %></div>
 
                     </div>
