@@ -208,7 +208,7 @@
                         <div class="col-md-8 padding0">
                             <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
                             [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
-                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
+                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button id="approvebtn" type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
                     </div>
                 </div>
 
@@ -230,8 +230,8 @@
                                             type="time"
                                             id="user_time"
                                             class="form-control"
-                                            name="date"
-                                            placeholder="hh/mm AM/PM"
+                                            name="time"
+                                            placeholder="hh-mm"
                                             style="margin:20px 0px;"
 
                                     />
@@ -239,7 +239,7 @@
                                 <div class="col-md-6 padding0">
                                     <input
                                             type="date"
-                                            id="user_schedule"
+                                            id="user_date"
                                             class="form-control"
                                             name="date"
                                             placeholder="dd/mm/yy"
@@ -251,25 +251,26 @@
                         </div>
                     </div>
                     <div class="col-md-4 padding0">
-                        <button type="button" class="btn button-orange font-size18" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
+                        <button type="button" id="callback" class="btn button-orange font-size18" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane row padding6" id="card">
-                <div class="col-md-12 proposal-font-heading border-bottom-grey padding6"> Payment Details</div>
+                <div class="col-md-12 proposal-font-heading border-bottom-grey padding6"> Payment History</div>
                 <div class="col-md-12">
                     <div class="row align-center">
+
+
+                    <div class="row align-center padding-top-10">
                         <div class="col-sm-3" style="font-weight:bold;">Payment Milestone</div>
                         <div class="col-sm-2" style="font-weight:bold;">% Amount</div>
                         <div class="col-sm-2" style="font-weight:bold;">Amount</div>
                         <div class="col-sm-2" style="font-weight:bold;">Payment Date</div>
                         <div class="col-sm-2" style="font-weight:bold;">Transaction Ref</div>
-                   <!-- <div class="col-md-4" style="font-weight:bold;">Amount</div>
-                    <div class="col-md-4" style="font-weight:bold;">Date</div>
-                    <div class="col-md-4" style="font-weight:bold;">Reference</div>-->
+
                     </div>
                     <div class="row align-center padding6">
                         <div class="col-sm-3">  Booking Amount </div>
-                        <div class="col-sm-2">  3% </div>
+                        <div class="col-sm-2">  3 </div>
                         <div class="col-sm-2"> <% if(typeof(myNest) !== 'undefined'){ %>
                             <%= parseFloat(myNest.paymentDetails[0].m1_amount_collected_c).toFixed(2) %>
                             <% } %> </div>
@@ -284,7 +285,7 @@
                     </div>
                     <div class="row align-center padding6">
                         <div class="col-sm-3"> Design Finalization</div>
-                        <div class="col-sm-2">  47% </div>
+                        <div class="col-sm-2">  47 </div>
                         <div class="col-sm-2"> <% if(typeof(myNest) !== 'undefined'){ %>
                             <%= parseFloat(myNest.paymentDetails[0].m2_amount_collected_c).toFixed(2) %>
                             <% } %> </div>
@@ -299,7 +300,7 @@
                     </div>
                     <div class="row align-center padding6">
                         <div class="col-sm-3">  Balance </div>
-                        <div class="col-sm-2">  50% </div>
+                        <div class="col-sm-2">  50 </div>
                        <div class="col-sm-2"> <% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m3_amount_collected_c %>
                             <% } %> </div>
@@ -311,6 +312,7 @@
                             <% } %></div>
 
                     </div>
+
                     <div class="row row-magin align-center col-md-12 font-style-or">
                         <div class="quality-check-line"></div>
                         </div>
@@ -328,6 +330,7 @@
                             <%= myNest.paymentDetails[0].payment_reference4_c %>
                             <% } %></div>
 
+                    </div>
                     </div>
                 </div>
 
@@ -363,3 +366,4 @@
         </div>
     </div>
 </section>
+

@@ -210,10 +210,50 @@ define([
         events: {
             "click .myaccount-lnk a": "changeMyaccounttab",
             "click #save_details": "submit",
+            "click #approvebtn": "changeapprove",
+            "click #callback": "requestcall",
             "click #save_property_details": "submitPropertyDetails",
             "click #profile-file-input": "changeProfileImg",
             "submit #changeUserPasswordForm": "changeUserPassword",
             "submit #deactivateUserForm": "deactivateUserAccount"
+
+        },
+        requestcall: function(e) {
+                    if (e.isDefaultPrevented()) return;
+                                e.preventDefault();
+
+                                var authData = this.refAuth.currentUser;
+                                 var eventData = {
+                                                proposal_status: "Request for call back",
+                                                scheduledDate: $('#user_date').val(),
+                                                scheduledTime: $('#user_time').val()
+                                            };
+               this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
+                                if (error) {
+                                    console.log("not able to push data", error);
+                                } else {
+                                    console.log("successfully pushed data");
+                                }
+                            });
+        },
+        changeapprove: function(e) {
+            if (e.isDefaultPrevented()) return;
+                        e.preventDefault();
+
+                        var authData = this.refAuth.currentUser;
+                         var eventData = {
+                                        proposal_status: "Approve"
+
+                                    };
+
+
+       this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
+                        if (error) {
+                            console.log("not able to push data", error);
+                        } else {
+                            console.log("successfully pushed data");
+                        }
+                    });
         },
         changeMyaccounttab: function(e) {
             e.preventDefault();
