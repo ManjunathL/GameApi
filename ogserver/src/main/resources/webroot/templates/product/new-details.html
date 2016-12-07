@@ -807,19 +807,22 @@
                                                 <% } %>-->
                                                 <div class="carousel-inner" role="listbox">
                                                     <div class="item items">
-                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app2.jpg" alt="First Image">
+                                                        <img class="hidden-xs hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app2.jpg" alt="First Image">
+                                                        <img class="hidden-lg hidden-md" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103942/project_details/mobile/app2_mob.jpg" alt="First Image">
                                                         <div class="carousel-caption">
                                                             <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
                                                         </div>
                                                     </div>
                                                     <div class="item items">
-                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app3.jpg" data-color="firebrick" alt="Second Image">
+                                                        <img class="hidden-xs hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app3.jpg" data-color="firebrick" alt="Second Image">
+                                                        <img class="hidden-lg hidden-md" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103942/project_details/mobile/app3_mob.jpg" data-color="firebrick" alt="Second Image">
                                                         <div class="carousel-caption">
                                                             <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
                                                         </div>
                                                     </div>
                                                     <div class="item items">
-                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/app1.jpg" data-color="violet" alt="Third Image">
+                                                        <img class="hidden-xs hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/app1.jpg" data-color="violet" alt="Third Image">
+                                                        <img class="hidden-lg hidden-md" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103943/project_details/mobile/acc1_mob.jpg" data-color="violet" alt="Third Image">
                                                         <div class="carousel-caption">
                                                             <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens.</p>
                                                         </div>
@@ -1005,18 +1008,18 @@
 <script>
     var items = $('.carousels .items');
 
-    var wHeight = $(window).height();
-    var nHeight = (wHeight/2);
+    //var wHeight = $(window).height();
+    //var nHeight = (wHeight/2);
 
-    items.eq(0).addClass('active');
-    items.height(nHeight);
-    items.addClass('full-screen');
+    //items.eq(0).addClass('active');
+    //items.height(nHeight);
+    //items.addClass('full-screen');
 
 
     var apitems = $('.appliance-carousels .items');
     apitems.eq(0).addClass('active');
-    apitems.height(nHeight);
-    apitems.addClass('full-screen');
+    //apitems.height(nHeight);
+    //apitems.addClass('full-screen');
 
     /*var dsitems = $('.design-carousels .design-style-img');
     dsitems.height(nHeight);
@@ -1040,7 +1043,7 @@
       $(this).remove();
     });
 
-    $('.appliance-carousels img').each(function() {
+    /*$('.appliance-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({
@@ -1048,7 +1051,7 @@
         'background-color' : $color
       });
       $(this).remove();
-    });
+    });*/
 
     /*$('.design-carousels img').each(function() {
       var $src = $(this).attr('src');
