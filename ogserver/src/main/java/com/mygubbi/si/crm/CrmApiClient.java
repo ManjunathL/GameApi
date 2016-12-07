@@ -14,7 +14,7 @@ import java.security.MessageDigest;
  */
 public class CrmApiClient
 {
-    public static final String APPLICATION_NAME = "mygubbi_crm";
+    public static final String APPLICATION_NAME = "mygubbilive";
     public static final String VERSION = "0.1";
     public static final String USER_NAME = "admin";
     public static final String PASSWORD = "admin!@#";
@@ -30,7 +30,8 @@ public class CrmApiClient
 //    public static void main(String[] args)
 //    {
 //        //String  opportunity= "SAL-1607-000039";
-//        String  opportunity= "SAL-1608-000110";
+//        String  opportunity= "SAL-1607-000035";
+//        //String  opportunity= "SAL-1608-000110";
 //        String  opportunities = "Opportunities";
 //        String  category = "Floor_Plan";
 //        String  type = "all";
@@ -153,23 +154,28 @@ public class CrmApiClient
 
         String  opportunities = "Opportunities";
         String  categoryFloorPlan = "Floor_Plan";
-        String  type = "all";
+        String  type = "latest";
 
         JsonArray documentFloorPlan = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFloorPlan, type));
         //JsonArray latestDocumentFloorPlan = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryFloorPlan));
-        String  categoryProposal = "Proposal";
+        String  categoryInitialProposal = "Proposal";
 
-        JsonArray documentProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryProposal, type));
+        JsonArray documentInitialProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryInitialProposal, type));
+       String  categoryFinalProposal = "Final_Poposal";
+
+        JsonArray documentFinalProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFinalProposal, type));
        // JsonArray latestDocumentProposal = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryProposal));
 
         JsonObject objectDocumentFloorPlan = documentFloorPlan.getJsonObject(0);
         //JsonObject objectLatestDocumentFloorPlan = latestDocumentFloorPlan.getJsonObject(0);
-        JsonObject objectDocumentProposal = documentProposal.getJsonObject(0);
+        JsonObject objectInitialDocumentProposal = documentInitialProposal.getJsonObject(0);
+        JsonObject objectFinalDocumentProposal = documentFinalProposal.getJsonObject(0);
         //JsonObject objectLatestDocumentProposal = latestDocumentProposal.getJsonObject(0);
 
         JsonArray proposalObject = new JsonArray();
         proposalObject.add(objectDocumentFloorPlan);
-        proposalObject.add(objectDocumentProposal);
+        proposalObject.add(objectInitialDocumentProposal);
+        proposalObject.add(objectFinalDocumentProposal);
        // proposalObject.add(objectLatestDocumentFloorPlan);
         //proposalObject.add(objectLatestDocumentProposal);
 
@@ -196,7 +202,7 @@ public class CrmApiClient
                 .put("uploadDate", "NA");
         //.put("uploadDate", newDoc.getString("date"))
         JsonArray act = new JsonArray();
-        act.add(docJson1);
+        act.add(newDoc);
         return act.encodePrettily();    }
 
     public String getLatestDocuments(String parentType, String parentId, String category) throws Exception
