@@ -1,13 +1,10 @@
-body { background: #e8e8e8; }
-.container { margin: 0 auto; }
 
-/* Example wrapper */
 .wrap {
 	position: relative;
 	margin: 10px 0;
 }
 
-/* Frame */
+
 .frame {
 	height: auto;
 	overflow: hidden;
@@ -35,7 +32,6 @@ body { background: #e8e8e8; }
     border-top: 1px solid #f1591f;
 }
 
-/* Scrollbar */
 .scrollbar {
 	margin: 0 0 10px 0;
 	height: 2px;
@@ -56,7 +52,6 @@ body { background: #e8e8e8; }
 	height: 20px;
 }
 
-/* Pages */
 .pages {
 	list-style: none;
 	margin: 20px 0;
@@ -82,17 +77,34 @@ body { background: #e8e8e8; }
 	background: #666;
 }
 
-/* Controls */
-.controls { margin-top: 15px; text-align: center; padding: 0px 0px !important;}
+.controls {
+    text-align: center;
+    padding: 0px 0px !important;
+}
 
 .controls button {padding: 0px 0px;}
 
-/* One Item Per Frame example*/
-.oneperframe { height: 300px; line-height: 300px; }
-.oneperframe ul li { width: 1140px; }
-.oneperframe ul li.active { background: #333; }
+.oneperframe {
+    height: 300px;
+    line-height: 300px;
+}
+.oneperframe ul li {
+    width: 1140px;
+}
+.oneperframe ul li.active {
+    background: #333;
+}
 
-/* Crazy example */
-.crazy ul li:nth-child(2n) { width: 100px; margin: 0 4px 0 20px; }
-.crazy ul li:nth-child(3n) { width: 300px; margin: 0 10px 0 5px; }
-.crazy ul li:nth-child(4n) { width: 400px; margin: 0 30px 0 2px; }
+.crazy ul li:nth-child(2n) {
+    width: 100px;
+    margin: 0 4px 0 20px;
+}
+.crazy ul li:nth-child(3n) {
+    width: 300px;
+    margin: 0 10px 0 5px;
+}
+
+.crazy ul li:nth-child(4n) {
+    width: 400px;
+    margin: 0 30px 0 2px;
+}
