@@ -8241,7 +8241,7 @@ html .ui-button.ui-state-disabled:active {
     }
 
     #filter-desc {
-        padding: 20px 0px !important;
+       padding: 10px 0px 55px 0px!important;
     }
 
     .product-caption {
