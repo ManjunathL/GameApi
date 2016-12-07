@@ -27,32 +27,32 @@ public class CrmApiClient
         this.initSoapClient();
     }
 
-    public static void main(String[] args)
-    {
-        String  opportunity= "SAL-1607-000039";
-        //String  opportunity= "SAL-1607-000035";
-        //String  opportunity= "SAL-1608-000110";
-        String  opportunities = "Opportunities";
-        String  category = "Floor_Plan";
-        String  type = "all";
-        String  status = "In Progress";
-        String  taskType = "Intial Approval";
-        String  parentType = "Oppertunity";
-        String  taskId = null;
-        String  parentId ="1";
-
-
-        try {
-            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
-
-            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-            // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
-            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args)
+//    {
+//        String  opportunity= "SAL-1607-000039";
+//        //String  opportunity= "SAL-1607-000035";
+//        //String  opportunity= "SAL-1608-000110";
+//        String  opportunities = "Opportunities";
+//        String  category = "Floor_Plan";
+//        String  type = "all";
+//        String  status = "In Progress";
+//        String  taskType = "Intial Approval";
+//        String  parentType = "Oppertunity";
+//        String  taskId = null;
+//        String  parentId ="1";
+//
+//
+//        try {
+//            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+//
+//            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+//            // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
+//            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void initSoapClient() throws Exception
     {
