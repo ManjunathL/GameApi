@@ -3886,24 +3886,6 @@ ul.social-buttons li a:active {
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
     /* Global Class */
-    .mobile-text-center{
-        text-align: center;
-    }
-    .mobile-text-left{
-        text-align: left;
-    }
-    .mobile-text-right{
-        text-align: right;
-    }
-    .mob-text-center{
-        text-align: center;
-    }
-    .mob-text-left{
-        text-align: left;
-    }
-    .mob-text-right{
-        text-align: right;
-    }
 }
 
 /* Landscape phone to portrait tablet */
