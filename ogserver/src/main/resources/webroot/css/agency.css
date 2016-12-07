@@ -8265,3 +8265,14 @@ html .ui-button.ui-state-disabled:active {
         width: 100%;
     }
 }
+
+/* Mobile Responsive by Smruti on 7thDec2016 */
+
+@media (max-width: 991px) {
+    .style-tab-bg,
+    .style-tab-bg > .nav-tabs>li.active>a,
+    .style-tab-bg > .nav-tabs>li.active>a:hover,
+    .style-tab-bg > .nav-tabs>li.active>a:focus {
+        background: #cfcfcf;
+    }
+}
