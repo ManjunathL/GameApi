@@ -1,7 +1,3 @@
-/*
-body { background: #e8e8e8; }
-.container { margin: 0 auto; }
-
 
 .wrap {
 	position: relative;
@@ -81,15 +77,34 @@ body { background: #e8e8e8; }
 	background: #666;
 }
 
-.controls { margin-top: 15px; text-align: center; padding: 0px 0px !important;}
+.controls {
+    text-align: center;
+    padding: 0px 0px !important;
+}
 
 .controls button {padding: 0px 0px;}
 
-.oneperframe { height: 300px; line-height: 300px; }
-.oneperframe ul li { width: 1140px; }
-.oneperframe ul li.active { background: #333; }
+.oneperframe {
+    height: 300px;
+    line-height: 300px;
+}
+.oneperframe ul li {
+    width: 1140px;
+}
+.oneperframe ul li.active {
+    background: #333;
+}
 
+.crazy ul li:nth-child(2n) {
+    width: 100px;
+    margin: 0 4px 0 20px;
+}
+.crazy ul li:nth-child(3n) {
+    width: 300px;
+    margin: 0 10px 0 5px;
+}
 
-.crazy ul li:nth-child(2n) { width: 100px; margin: 0 4px 0 20px; }
-.crazy ul li:nth-child(3n) { width: 300px; margin: 0 10px 0 5px; }
-.crazy ul li:nth-child(4n) { width: 400px; margin: 0 30px 0 2px; }*/
+.crazy ul li:nth-child(4n) {
+    width: 400px;
+    margin: 0 30px 0 2px;
+}
