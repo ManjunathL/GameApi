@@ -8091,8 +8091,9 @@ html .ui-button.ui-state-disabled:active {
     }
     .txt-over-style-image{
         top: 45%;
-        right: 5%;
-        width: 60%;
+        right: auto;
+        width: 100%;
+        text-align: center;
     }
     .padding-m-5{
         padding:0px;
@@ -8106,9 +8107,12 @@ html .ui-button.ui-state-disabled:active {
     .footer-section-top{
         text-align: center;
     }
+    footer .ioc-circle{
+        float: none;
+    }
     .mob-e-btn {
         position: absolute;
-        top: 35%;
+        top: 25%;
     }
     .address_right_section {
         position: relative;
@@ -8130,6 +8134,18 @@ html .ui-button.ui-state-disabled:active {
     }
     .location_add {
         padding: 10px 0px 5px 10px;
+    }
+    .carousel-control.testimonials-carousel-control {
+        background: transparent;
+        opacity: 1;
+        cursor: pointer;
+        z-index: 999;
+    }
+    .glyphicon.glyphicon-chevron-right.testimonials-right {
+        top: 25%;
+    }
+    .glyphicon.glyphicon-chevron-left.testimonials-left {
+        top: 25%;
     }
 }
 
