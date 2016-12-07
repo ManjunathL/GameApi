@@ -305,11 +305,11 @@ img.finish-thumbnail:hover {
     padding:0px !important;
 }
 #mycarousel-appliances .carousel-caption{
-    left: 38%;
     right: 10%;
     padding-bottom: 25px;
     width: 20%;
     top: 5%;
+    position: absolute;
 }
 #mycarousel-appliances .carousel-caption p{
     color: rgba(0,0,0,0.6);
@@ -365,6 +365,13 @@ img.finish-thumbnail:hover {
     }
     .appliances-wrapper .carousel-indicators {
         bottom: 10px;
+    }
+}
+@media screen and (max-width: 992px){
+    #mycarousel-appliances .carousel-caption{
+        padding-bottom: 25px;
+        width:100%;
+        position: relative;
     }
 }
 
