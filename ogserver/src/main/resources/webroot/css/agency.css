@@ -8001,7 +8001,7 @@ html .ui-button.ui-state-disabled:active {
 @media (max-width: 992px) {
     .mob-e-btn {
         position: absolute;
-        top: 50%;
+        top: 35%;
     }
     .address_right_section{
         position: relative;
@@ -8059,7 +8059,19 @@ html .ui-button.ui-state-disabled:active {
         left: 0px;
     }
     .testimonials-carousel .carousel-indicators {
-        top: 255px;
+        bottom: 170px;
+    }
+    .carousel-control.testimonials-carousel-control {
+        background: transparent;
+        opacity: 1;
+        cursor: pointer;
+        z-index: 999;
+    }
+    .glyphicon.glyphicon-chevron-right.testimonials-right {
+        top: 45%;
+    }
+    .glyphicon.glyphicon-chevron-left.testimonials-left {
+        top: 45%;
     }
     #latest_blog_content h4 {
         font-size: 24px;
@@ -8067,6 +8079,9 @@ html .ui-button.ui-state-disabled:active {
     }
     .txt-over-style-image {
         width: 40%;
+        text-align: center;
+        right: 0px;
+        left: 30%;
     }
     .location_add {
         padding: 10px 0px 5px 10px;
@@ -8092,8 +8107,9 @@ html .ui-button.ui-state-disabled:active {
     .txt-over-style-image{
         top: 45%;
         right: auto;
-        width: 100%;
+        width: 80%;
         text-align: center;
+        left: 10%;
     }
     .padding-m-5{
         padding:0px;
