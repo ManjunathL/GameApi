@@ -27,32 +27,32 @@ public class CrmApiClient
         this.initSoapClient();
     }
 
-//    public static void main(String[] args)
-//    {
-//        String  opportunity= "SAL-1607-000039";
-//        //String  opportunity= "SAL-1607-000035";
-//        //String  opportunity= "SAL-1608-000110";
-//        String  opportunities = "Opportunities";
-//        String  category = "Floor_Plan";
-//        String  type = "all";
-//        String  status = "In Progress";
-//        String  taskType = "Intial Approval";
-//        String  parentType = "Oppertunity";
-//        String  taskId = null;
-//        String  parentId ="1";
-//
-//
-//        try {
-//            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
-//
-//            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-//            // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
-//            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static void main(String[] args)
+    {
+       // String  opportunity= "SAL-1607-000039";
+       // String  opportunity= "SAL-1607-000035";
+         String  opportunity= "SAL-1608-000110";
+        String  opportunities = "Opportunities";
+        String  category = "Floor_Plan";
+        String  type = "all";
+        String  status = "In Progress";
+        String  taskType = "Intial Approval";
+        String  parentType = "Oppertunity";
+        String  taskId = null;
+        String  parentId ="1";
+
+
+        try {
+            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+
+            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+            // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
+            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void initSoapClient() throws Exception
     {
@@ -153,29 +153,41 @@ public class CrmApiClient
 
 
         String  opportunities = "Opportunities";
+
         String  categoryFloorPlan = "Floor_Plan";
         String  type = "latest";
-
         JsonArray documentFloorPlan = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFloorPlan, type));
         //JsonArray latestDocumentFloorPlan = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryFloorPlan));
+
         String  categoryInitialProposal = "Proposal";
-
         JsonArray documentInitialProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryInitialProposal, type));
-       String  categoryFinalProposal = "Final_Poposal";
 
+        String  categoryFinalProposal = "Final_Poposal";
         JsonArray documentFinalProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFinalProposal, type));
+
+
        // JsonArray latestDocumentProposal = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryProposal));
 
-        JsonObject objectDocumentFloorPlan = documentFloorPlan.getJsonObject(0);
         //JsonObject objectLatestDocumentFloorPlan = latestDocumentFloorPlan.getJsonObject(0);
-        JsonObject objectInitialDocumentProposal = documentInitialProposal.getJsonObject(0);
-        JsonObject objectFinalDocumentProposal = documentFinalProposal.getJsonObject(0);
         //JsonObject objectLatestDocumentProposal = latestDocumentProposal.getJsonObject(0);
 
         JsonArray proposalObject = new JsonArray();
-        proposalObject.add(objectDocumentFloorPlan);
-        proposalObject.add(objectInitialDocumentProposal);
-        proposalObject.add(objectFinalDocumentProposal);
+        if (documentFloorPlan.size() != 0 ) {
+            JsonObject objectDocumentFloorPlan = documentFloorPlan.getJsonObject(0);
+
+            proposalObject.add(objectDocumentFloorPlan);
+        }
+        if (documentInitialProposal.size() != 0 ) {
+            JsonObject objectInitialDocumentProposal = documentInitialProposal.getJsonObject(0);
+
+            proposalObject.add(objectInitialDocumentProposal);
+        }
+        if (documentFinalProposal.size() != 0 )
+        {
+            JsonObject objectFinalDocumentProposal = documentFinalProposal.getJsonObject(0);
+            proposalObject.add(objectFinalDocumentProposal);
+
+        }
        // proposalObject.add(objectLatestDocumentFloorPlan);
         //proposalObject.add(objectLatestDocumentProposal);
 
@@ -194,8 +206,10 @@ public class CrmApiClient
         String documentLinkBaseUrl = "https://s3-ap-southeast-1.amazonaws.com/mygubbicrm/";
         JsonArray doc = new JsonArray(this.crmPort.get_documents(this.sessionId, parentType, parentId, category, type));
 
+        if (doc.size() == 0){
+            return doc.encodePrettily();
+           }
         JsonObject newDoc = doc.getJsonObject(0);
-
         JsonObject docJson1 = new JsonObject().put("documentLink", documentLinkBaseUrl+newDoc.getString("docUrl"))
                 .put("documentName", newDoc.getString("documentName"))
                 .put("documentType", newDoc.getString("categoryId"))
@@ -203,7 +217,9 @@ public class CrmApiClient
         //.put("uploadDate", newDoc.getString("date"))
         JsonArray act = new JsonArray();
         act.add(newDoc);
-        return act.encodePrettily();    }
+        return act.encodePrettily();
+
+    }
 
     public String getLatestDocuments(String parentType, String parentId, String category) throws Exception
     {
