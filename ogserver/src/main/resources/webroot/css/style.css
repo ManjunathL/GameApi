@@ -541,6 +541,12 @@ input[type=checkbox] {
     .mob-padding-top-50{
         padding-top: 50px;
     }
+    .md-center{
+        float: none !important;
+        text-align: center;
+        margin: 10px auto;
+        background: transparent !important;
+    }
 }
 
 /* Background Attributes */
@@ -3942,6 +3948,12 @@ ul.social-buttons li a:active {
     }
     .mob-text-center{
         text-align: center;
+    }
+    .mob-text-left{
+        text-align: left;
+    }
+    .mob-text-right{
+        text-align: right;
     }
     /* End Quality Page */
 
