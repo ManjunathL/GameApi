@@ -202,7 +202,7 @@ define([
         }
     });
     var routeSubCategory = function(subCategory, category) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/product/page'], function(ProductPage) {
                 var options = {
                     model: {
@@ -215,7 +215,7 @@ define([
         };
 
         var routeCategory = function(category) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/product/page'], function(ProductPage) {
                 var options = {
                     model: {
@@ -294,13 +294,13 @@ define([
                 });
             });*/
             router.on('route:dashboard', function(actions) {
-              //setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+              //setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                 require(['views/dashboard/new-page'], function(DashboardPage) {
                     VM.create(VM.DASHBOARD, DashboardPage).render();
                 });
             });
             router.on('route:products', function(categories, subcategories, searchTerm, sortBy, sortDir, layout) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/product/page'], function(ProductPage) {
                             var options = {
                                 model: {
@@ -316,7 +316,7 @@ define([
                         });
                     });
                     router.on('route:products-search', function(searchTerm) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/product/page'], function(ProductPage) {
                             console.log('searchTerm');
                             console.log(searchTerm);
@@ -329,7 +329,7 @@ define([
                         });
                     });
                     router.on('route:product', function(productId) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/product/details'], function(ProductDetailPage) {
                             var options = {
                                 model: {
@@ -340,81 +340,81 @@ define([
                         });
                     });
                     router.on('route:user_profile', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/user_profile/user_profile'], function(UserProfilePage) {
                             VM.create(VM.USER_PROFILE, UserProfilePage).render();
                         });
                     });
                     router.on('route:consult', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/consult/consult'], function(ConsultPage) {
                             VM.create(VM.CONSULT, ConsultPage).render();
                         });
                     });
                     router.on('route:shortlist', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/shortlist/shortlist'], function(ShortlistPage) {
                             VM.create(VM.SHORTLIST, ShortlistPage).render();
                         });
                     });
                     router.on('route:careers', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/footer/careers'], function(CareerPage) {
                             VM.create(VM.CAREERS, CareerPage).render();
                         });
                     });
                     router.on('route:about', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/footer/about'], function(AboutPage) {
                             VM.create(VM.ABOUT, AboutPage).render();
                         });
                     });
 
                     router.on('route:qualitycheck', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/quality/quality-check'], function(QualityCheckPage) {
                             VM.create(VM.QUALITYCHECK, QualityCheckPage).render();
                         });
                     });
                     router.on('route:experiencecenter', function(actions) {
-                     setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                     setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                      require(['views/experienceCenter/experience-center'], function(ExperienceCenterPage) {
                      VM.create(VM.EXPERIENCECENTER, ExperienceCenterPage).render();
                         });
                     });
                     router.on('route:platinumhomes', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/platinum_homes/platinum-homes'], function(PlatinumHomesPage) {
                         VM.create(VM.PLATINUMHOMES, PlatinumHomesPage).render();
                          });
                     });
                     router.on('route:faq', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/footer/faq'], function(FaqPage) {
                             VM.create(VM.FAQ, FaqPage).render();
                         });
                     });
                     router.on('route:privacypolicy', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/footer/privacypolicy'], function(PrivacyPolicyPage) {
                             VM.create(VM.PRIVACY_POLICY, PrivacyPolicyPage).render();
                         });
                     });
                     router.on('route:terms', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/footer/terms'], function(TermsPage) {
                             VM.create(VM.TERMS, TermsPage).render();
                         });
                     });
                     router.on('route:mygubbidiff', function(actions) {
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/footer/mygubbidiff'], function(MyGubbiDiffPage) {
                             VM.create(VM.MGDIFF, MyGubbiDiffPage).render();
                         });
                     });
                     router.on('route:stories', function(blogcategory) {
 
-                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['/js/views/story/stories.js'], function(StoriesPage) {
 
                  var options = {
@@ -426,7 +426,7 @@ define([
             });
         });
         router.on('route:story', function(name) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/story/full_story'], function(FullStoryPage) {
 
                 var options = {
@@ -438,145 +438,145 @@ define([
             });
         });
         router.on('route:thankyou', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/thankyou/thankyou'], function(ThankYouPage) {
                 VM.create(VM.THANKYOU, ThankYouPage).render();
             });
         });
         router.on('route:landingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/landing_page'], function(LandingPage) {
                 VM.create(VM.LANDINGPAGE, LandingPage).render();
             });
         });
         router.on('route:newlandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/newlanding_page'], function(NewLandingPage) {
                 VM.create(VM.NEWLANDINGPAGE, NewLandingPage).render();
             });
         });
         router.on('route:fblandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/fblanding_page'], function(FbLandingPage) {
                 VM.create(VM.FBLANDINGPAGE, FbLandingPage).render();
             });
         });
         router.on('route:mangalorelandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/mangalorelanding_page'], function(MangaloreLandingPage) {
                 VM.create(VM.MANGALORELANDINGPAGE, MangaloreLandingPage).render();
             });
         });
         router.on('route:emaillandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/emaillanding_page'], function(EmailLandingPage) {
                 VM.create(VM.EMAILLANDINGPAGE, EmailLandingPage).render();
             });
         });
         router.on('route:shobhalandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/shobhalanding_page'], function(ShobhaLandingPage) {
                 VM.create(VM.SHOBHALANDINGPAGE, ShobhaLandingPage).render();
             });
         });
         router.on('route:punelandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/punelanding_page'], function(PuneLandingPage) {
                 VM.create(VM.PUNELANDINGPAGE, PuneLandingPage).render();
             });
         });
         router.on('route:kitchenlandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/kitchenlanding_page'], function(KitchenLandingPage) {
                 VM.create(VM.KITCHENLANDINGPAGE, KitchenLandingPage).render();
             });
         });
         router.on('route:ebook', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/ebook/ebook'], function(EbookPage) {
                 VM.create(VM.EBOOKPAGE, EbookPage).render();
             });
         });
         router.on('route:errorPage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/errorPage/errorPage'], function(ErrorPage) {
                 VM.create(VM.ERRORPAGE, ErrorPage).render();
             });
         });
         router.on('route:holidaylandingpage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/holidaylanding_page'], function(HolidayLandingPage) {
                 VM.create(VM.HOLIDAYLANDINGPAGE, HolidayLandingPage).render();
             });
         });
         router.on('route:completedprojectspage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/completedprojects_page'], function(CompletedProjectsPage) {
                 VM.create(VM.COMPLETEDPROJECTSPAGE, CompletedProjectsPage).render();
             });
         });
         router.on('route:knowyourwardrobe', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/knowyourwardrobe_page'], function(KnowYourWardrobe) {
                 VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourWardrobe).render();
             });
         });
         router.on('route:knowyourkitchen', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/knowyourkitchen_page'], function(KnowYourKitchen) {
                 VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourKitchen).render();
             });
         });
         router.on('route:kitchenAccessories', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/kitchenAccessories/kitchenAccessories'], function(kitchenAccessories) {
                 VM.create(VM.KITCHENACCESSORIESPAGE, kitchenAccessories).render();
             });
         });
         router.on('route:kitchenAppliance', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/kitchenAppliance/kitchen_appliance'], function(kitchenAppliance) {
                 VM.create(VM.KITCHENAPPLIANCEPAGE, kitchenAppliance).render();
             });
         });
         router.on('route:kitchenMaterial', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/kitchenMaterial/kitchen-material'], function(kitchenMaterial) {
                 VM.create(VM.KITCHENMATERIALPAGEPAGE, kitchenMaterial).render();
             });
         });
         router.on('route:kitchenMaterial', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/kitchenMaterial/kitchen-material'], function(kitchenMaterial) {
                 VM.create(VM.KITCHENMATERIALPAGE, kitchenMaterial).render();
             });
         });
         router.on('route:typeofkitchen', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/kitchentypes/typeofkitchen'], function(typeofkitchen) {
                 VM.create(VM.TYPEOFKITCHENPAGE, typeofkitchen).render();
             });
         });
         router.on('route:ergonomics', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/ergonomics/ergonomics'], function(ergonomics) {
                 VM.create(VM.ERGONOMICSPAGE, ergonomics).render();
             });
         });
         router.on('route:remarketinglp', function(actions) {
-                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                     require(['views/landing_pages/remarketinglp_page'], function(RemarketingLp) {
                         VM.create(VM.COMPLETEDPROJECTSPAGE, RemarketingLp).render();
                     });
                 });
         router.on('route:mediapage', function(actions) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/media_pages/media_page'], function(MediaPage) {
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
             });
         });
         router.on('route:newdetailspage', function(productId) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/product/new-details'], function(NewProductDetailsPage) {
                 var options = {
                     model: {
@@ -588,7 +588,7 @@ define([
             });
         });
         router.on('route:nripage', function(cityName) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/nri_pages/nri_page'], function(NriPage) {
                 var options = {
                     model: {
@@ -599,7 +599,7 @@ define([
             });
         });
         router.on('route:aboutus', function(actions) {
-                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                     require(['views/footer/aboutus'], function(AboutUsPage) {
                         VM.create(VM.ABOUTUS, AboutUsPage).render();
                     });
