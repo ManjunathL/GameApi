@@ -193,10 +193,11 @@ public class CrmApiHandler extends AbstractRouteHandler
 //                    }
 //                    else
 //                    {
-                        JsonObject jsonEmail = new JsonObject(selectData.rows.get(0).getString("fbid"));
-                        LOG.info("JSON EMAIL:" + jsonEmail);
+                    String fbid = selectData.rows.get(0).getString("fbid");
+                        //JsonObject jsonEmail = new JsonObject(selectData.rows.get(0).getString("fbid"));
+                        LOG.info("JSON fbid:" + fbid);
                        // createProposal(routingContext, requestJson, selectData.rows.get(0));
-                FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + jsonEmail + "/myNest/projectDetails")
+                FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + fbid + "/myNest/projectDetails")
                 .setJsonData(this.getProjectDetailsJson(proposalData));
         Integer id = LocalCache.getInstance().store(dataRequest);
         VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
