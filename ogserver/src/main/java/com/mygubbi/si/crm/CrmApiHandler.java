@@ -69,12 +69,14 @@ public class CrmApiHandler extends AbstractRouteHandler
             @Override
             public void run() {
                 super.run();
-                try {
-                    this.wait(2000);
-                } catch (InterruptedException e) {
-                    LOG.info(e.getMessage());
+                synchronized (this) {
+                    try {
+                        this.wait(2000);
+                        createProposal(routingContext, requestJson);
+                    } catch (InterruptedException e) {
+                        LOG.info(e.getMessage());
+                    }
                 }
-                createProposal(routingContext, requestJson);
             }
         }.start();
 
