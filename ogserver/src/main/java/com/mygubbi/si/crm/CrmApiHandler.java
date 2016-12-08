@@ -293,6 +293,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
+                    .setParameter("crmId",userJson.getString("opportunityId"))
                     .build();
             LOG.debug("URL :" + uri.toString());
             String urlString = URLDecoder.decode(uri.toString(), "UTF-8");
