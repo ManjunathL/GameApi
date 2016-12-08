@@ -37,7 +37,6 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -170,14 +169,8 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson.encodePrettily());
         String email = requestJson.getString("email");
         LOG.info(email);
-        try {
 
-            TimeUnit.MINUTES.sleep(1);
-
-        } catch (InterruptedException e) {
-            //Handle exception
-        }
-        Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email",  new JsonObject().put("email", email)));
+       /* Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email",  new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     LOG.info("Executing query:" + "user_profile.select.email" );
@@ -194,9 +187,9 @@ public class CrmApiHandler extends AbstractRouteHandler
                         LOG.info (useJsonEmail.encodePrettily());
                         //sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
 
-/*
+*//*
                         sendJsonResponse(context, selectData.getJsonDataRows("productJson").toString());
-*/
+*//*
 
         FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + useJsonEmail.getString("fbid") + "/myNest/projectDetails")
                 .setJsonData(this.getProjectDetailsJson(proposalData));
@@ -215,8 +208,25 @@ public class CrmApiHandler extends AbstractRouteHandler
                     {
                         LOG.info("Firebase updated with " + requestJson.encode());
                     }
-                });
+                });*/
+        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + requestJson.getString("fbid") + "/myNest/projectDetails")
+                .setJsonData(this.getProjectDetailsJson(proposalData));
+        Integer id = LocalCache.getInstance().store(dataRequest);
+        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    LOG.debug("select Result :" + selectResult.result());
+                    Integer id_new = selectResult.result().body();
+                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
+                    LOG.debug("Firebase data response :" + dataResponse);
+                    if (dataResponse == null ){
+                        LOG.error("Error Occured in dataResponse");
                     }
+
+                    else if (!dataResponse.isError())
+                    {
+                        LOG.info("Firebase updated with " + requestJson.encode());
+                    }
+
                 });
     }
 
