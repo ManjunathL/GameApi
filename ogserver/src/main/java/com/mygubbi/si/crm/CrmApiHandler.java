@@ -171,24 +171,24 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson.encodePrettily());
 
                 String email = proposalData.getString("email");
-        LOG.info("=============" +email);
 
         Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-                    synchronized (this) {
-                        while (selectData.rows == null || selectData.rows.isEmpty()) {
-                            System.out.println("still null");
-
-                            try {
-                                LOG.info("no data in user profile table");
-                                this.wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            while (selectData.rows == null || selectData.rows.isEmpty()) {
+                                try {
+                                    LOG.info("no data in user profile table");
+                                    this.wait();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
-                    }
+                    }.start();
 //                    if (selectData.rows == null || selectData.rows.isEmpty())
 //                    {
                        // sendError(routingContext.response(), "User does not exist for email: " + email);
