@@ -65,15 +65,9 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    wait(1900);
-                } catch (Exception e) {}
+
                 createProposal(routingContext, requestJson);
-                }
-    }.start();
+
 
 
 //        String email = requestJson.getString("email");
@@ -176,21 +170,29 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(proposalData.encodePrettily());
         LOG.info(requestJson.encodePrettily());
 
-                String email = requestJson.getString("email");
+                String email = proposalData.getString("email");
+        LOG.info("=============" +email);
+
         Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-                  int i;
-                    for(i=0;i<1000;++i) {
-                      // continue with old code here
+                    while (selectData.rows == null || selectData.rows.isEmpty()) {
+                        System.out.println("still null");
 
-                        if (selectData.rows == null || selectData.rows.isEmpty()) {
+                        try {
                             LOG.info("no data in user profile table");
-                            // sendError(routingContext.response(), "User does not exist for email: " + email);
+                            wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
-
+//                    if (selectData.rows == null || selectData.rows.isEmpty())
+//                    {
+                       // sendError(routingContext.response(), "User does not exist for email: " + email);
+//                    }
+//                    else
+//                    {
                         JsonObject jsonEmail = new JsonObject(selectData.rows.toString());
                         LOG.info("JSON EMAIL:" + jsonEmail);
                        // createProposal(routingContext, requestJson, selectData.rows.get(0));
@@ -212,7 +214,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         LOG.info("Firebase updated with " + requestJson.encode());
                     }
                 });
-
+//            }
         });
     }
 
