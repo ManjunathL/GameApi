@@ -24,10 +24,86 @@ define([
         myaccount: null,
         renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
         var that = this;
+        console.log("-----------mynestitems-------------")
+        console.log(mynestitems);
+        if(typeof(mynestitems) !== 'undefined'){
+
+            var project_status = mynestitems.paymentDetails[0].sales_stage;
+            var project_statusArr = new Array();
+            switch (project_status) {
+                case "FLOOR_PLAN":
+                    project_statusArr = ["initiated"];
+                    break;
+                case "INITIAL_PROPOSAL":
+                    project_statusArr = ["initiated"];
+                    break;
+                case "BOOKING_FORM":
+                    project_statusArr = ["initiated","proposal approved"];
+                    break;
+                case "SITE_MEASUREMENT":
+                    project_statusArr = ["initiated","proposal approved"];
+                    break;
+                case "DETAILED_DESIGN ":
+                    project_statusArr = ["initiated","proposal approved"];
+                    break;
+                case "FINAL_PROPOSAL":
+                    project_statusArr = ["initiated","proposal approved"];
+                    break;
+                case "WORKS_CONTRACT":
+                    project_statusArr = ["initiated","proposal approved","order placed"];
+                    break;
+                case "SCOPE_DOCUMENT":
+                    project_statusArr = ["initiated","proposal approved","order placed"];
+                    break;
+                case "WORKING_DRAWING":
+                      project_statusArr = ["initiated","proposal approved","order placed"];
+                      break;
+                case "PRODUCTION_DRAWING":
+                      project_statusArr = ["initiated","proposal approved","order placed"];
+                      break;
+                case "SITE_PRESINSTALLATION_CHECKLIST":
+                      project_statusArr = ["initiated","proposal approved","order placed"];
+                      break;
+                case "PO_EXTRACT":
+                      project_statusArr = ["initiated","proposal approved","order placed"];
+                      break;
+                case "QC_REPORT":
+                      project_statusArr = ["initiated","proposal approved","order placed"];
+                      break;
+                case "PRODUCT_PHOTOS":
+                      project_statusArr = ["initiated","proposal approved","order placed","production started"];
+                      break;
+                case "PACKING_LIST_AND_ACCESSORIES_LIST":
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation"];
+                      break;
+                case "INVOICES":
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation"];
+                      break;
+                case "SNAGLIST":
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation"];
+                      break;
+                case "CUSTOMER_HANDOVER":
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation","Handed Over"];
+                      break;
+            }
+console.log('-------- project_statusArr  -----------');
+console.log(project_statusArr);
+
+        }
+
+
 
             if (!(that.myaccount.get('userProfData'))) {
                 that.myaccount.set({
                     'userProfData': userProfData
+                }, {
+                    silent: true
+                });
+            }
+
+            if (!(that.myaccount.get('projectStatusArr'))) {
+                that.myaccount.set({
+                    'projectStatusArr': project_statusArr
                 }, {
                     silent: true
                 });
@@ -51,13 +127,15 @@ define([
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
                 'myNest':mynestitems,
-                'providerId': providerId
+                'providerId': providerId,
+                'projectStatusArr':project_statusArr
             }));
 
             $("#profile").html(_.template(MyProfileTemplate)({
                 'userProfile': userProfData,
                 'myNest':mynestitems,
-                'providerId': providerId
+                'providerId': providerId,
+                'projectStatusArr':project_statusArr
             }));
 
 
@@ -275,7 +353,8 @@ define([
                 $("#mynest").html(_.template(MyNestTemplate)({
                     'userProfile': that.myaccount.get("userProfData"),
                     'myNest':that.myaccount.get("mynest"),
-                    'providerId': that.myaccount.get("providerId")
+                    'providerId': that.myaccount.get("providerId"),
+                    'projectStatusArr':that.myaccount.get("projectStatusArr")
                 }));
             }
             if(id == "settings-lnk"){
@@ -283,7 +362,8 @@ define([
                 $("#settings").html(_.template(MySettingsTemplate)({
                     'userProfile': that.myaccount.get("userProfData"),
                     'myNest':that.myaccount.get("mynest"),
-                    'providerId': that.myaccount.get("providerId")
+                    'providerId': that.myaccount.get("providerId"),
+                    'projectStatusArr':that.myaccount.get("projectStatusArr")
                 }));
             }
             if(id == "message-lnk"){
@@ -291,7 +371,8 @@ define([
                 $("#message").html(_.template(MyMessageTemplate)({
                     'userProfile': that.myaccount.get("userProfData"),
                     'myNest':that.myaccount.get("mynest"),
-                    'providerId': that.myaccount.get("providerId")
+                    'providerId': that.myaccount.get("providerId"),
+                    'projectStatusArr':that.myaccount.get("projectStatusArr")
                 }));
             }
         }
