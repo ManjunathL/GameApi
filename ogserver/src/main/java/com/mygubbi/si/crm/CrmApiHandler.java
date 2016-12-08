@@ -62,8 +62,18 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-        createProposal(routingContext, requestJson);
-
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    this.wait(50000);
+                } catch (InterruptedException e) {
+                    LOG.info(e.getMessage());
+                }
+                createProposal(routingContext, requestJson);
+            }
+        };
 //        String email = requestJson.getString("email");
 //        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
 //        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -313,7 +323,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-               response = httpclient.execute(new HttpGet(uriDecode));
+               response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +statusCode);
             }
@@ -321,7 +331,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             {
                 LOG.info("acceptSSLCertificates False");
 
-                response = Request.Get(uriDecode).execute().returnResponse();
+                response = Request.Get(uri).execute().returnResponse();
             }
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                     LOG.error("Error in calling website for creating user." + response.toString());
