@@ -65,8 +65,8 @@ public class UserRegistrationProcessor implements DataProcessor
     {
         JsonObject jsonData = eventData.getJsonData();
         LOG.info("Mehbub" +jsonData.encodePrettily());
-        LOG.info("Mehbub Event" +eventData.toString());
-        JsonObject userJson = new JsonObject().put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData).put("crmId",jsonData.getString("crmId"));
+        JsonObject userJson = new JsonObject().put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData).put("crmId",jsonData.getValue("crmId"));
+        LOG.info("Mehbub userJson" +userJson.toString());
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
