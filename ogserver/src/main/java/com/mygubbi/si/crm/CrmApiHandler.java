@@ -67,7 +67,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             public void run() {
                 super.run();
                 try {
-                    this.wait(10000);
+                    this.wait(2000);
                 } catch (InterruptedException e) {
                     LOG.info(e.getMessage());
                 }
