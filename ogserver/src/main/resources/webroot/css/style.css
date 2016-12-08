@@ -538,6 +538,9 @@ input[type=checkbox] {
     .mob-padding-15{
         padding: 15px;
     }
+    .mob-padding-top-10{
+        padding-top: 10px;
+    }
     .mob-padding-top-50{
         padding-top: 50px;
     }

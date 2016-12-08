@@ -2,10 +2,13 @@
 
     <div class="container-fluid category-banner">
         <div class="row">
-            <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
+            <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive hidden-xs" alt="Shortlist Page Banner">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481195953/project_details/wishlist_mob.png" class="img-responsive hidden-lg hidden-md  hidden-sm" alt="Shortlist Page Banner">
         </div>
     </div>
+
     <% var slcount = shortlistedItems ? Object.keys(shortlistedItems).length : 0; %>
+
     <div class="bg-white hidden-xs">
         <div class="container">
             <div class="row">
@@ -16,185 +19,177 @@
             </div>
         </div>
     </div>
+
     <div class="bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="design-count margin0"> You have <%=slcount%> Shortlisted Item<%=slcount===1?'':'s'%>
-                    </div>
+                    <h3 class="shortlist-title"> You have <%=slcount%> Shortlisted Item<%=slcount===1?'':'s'%> </h3>
                 </div>
             </div>
         </div>
     </div>
 
-
     <div class="container">
-        <div class="row">
+        <div class="row mt30">
             <div class="grid-view">
-            <% if(shortlistedItems){ %>
-            <% _.each(shortlistedItems, function(product){ %>
-            <div class="portfolio">
-                <div class="col-md-6 col-sm-6 portfolio-item">
-                    <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
-                        <div class="row position-relative">
-                            <a href="/newproduct-details-<%= product.productId %>" class="portfolio-link">
-                                <img class="img-responsive thumbnail-img" src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
-                                        title="<%= product.name %>" alt="<%= product.name %>"/>
-                            </a>
-                            <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
-                                <div class="listli">
-                                    <a href="/newproduct-details-<%= product.productId %>">
-                                        <span class="glyph fa fa-info"></span>
-                                        <!--<span class="list-txt">know more</span>-->
+                <% if(shortlistedItems){ %>
+                <% _.each(shortlistedItems, function(product){ %>
+                <div class="portfolio">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="portfolio-item">
+                            <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
+                                <div class="position-relative">
+                                    <a href="/newproduct-details-<%= product.productId %>" class="portfolio-link">
+                                        <img class="img-responsive thumbnail-img" src="<%= imgBase + product.images[0] %>"
+                                             title="<%= product.name %>" alt="<%= product.name %>"/>
                                     </a>
-                                </div>
-                                <div class="listli">
-                                    <a class="shortlistable" data-element="<%=product.productId%>" href="#">
-                                        <span class="list-heart fa fa-heart"></span>
-                                        <span class="list-txt">shortlist</span>
-                                    </a>
-                                </div>
-                                <div class="listli">
-                                    <a href="javascript:void(0);" >
-                                        <span id="shortshare-grid-ico<%=product.productId%>" class="glyph fa fa-share shortgridshare"></span>
-                                        <div id="shortgrid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                            <% var share_url = window.location.protocol + '//' + window.location.host + '/newproduct-details-'+ product.productId %>
-                                            <span><a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
-                                            <span><a href="javascript:void(0);" onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
-                                            <span><a href="javascript:void(0);"
-                                             onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
-                                             class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
+                                    <div class="list-button-strip">
+                                        <div class="listli">
+                                            <a href="/newproduct-details-<%= product.productId %>">
+                                                <span class="glyph fa fa-info"></span>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="portfolio-caption margin0">
-                            <div class="row position-relative">
-                                <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0"><%= product.name %></h4>
-                                <!--<h6 class="col-md-12 col-sm-12 col-xs-12 align-center padding0">Starting From</h6>
-                                <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0 margin0 margin-bottom20">
-                                    <% if (product.defaultPrice !== 0) { %>
-                                    <i class="fa fa-inr"></i>
-                                    <%= product.defaultPrice %>/-
-                                    <% } else { %>
-                                    Consult for Price
-                                    <% } %>
-                                </h4>-->
-                                <div class="shortlist-consult-sec"><a href="javascript:void(0);" id="shortlist_consult<%= product.productId %>" class="shortlist_consult consult padding-left10 padding-right10">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Consult Modal -->
-            <div id="consultpop<%= product.productId %>" class="modal fade consultpop" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="contact-form">
-                        <div class="row">
-                            <h2 class="align-center">
-                                <span class="pe-7s-note"></span>
-                                Consult
-                            </h2>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="paddingtop30">
-                                    <div class="row margin_auto">
-                                        <div class="col-xs-6">
-                                            <span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 80 88 86 0860</span>
+                                        <div class="listli">
+                                            <a class="shortlistable" data-element="<%=product.productId%>" href="#">
+                                                <span class="list-heart fa fa-heart"></span>
+                                                <span class="list-txt">shortlist</span>
+                                            </a>
                                         </div>
-                                        <div class="col-xs-6 align-right">
-                                            <span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span>
+                                        <div class="listli">
+                                            <a href="javascript:void(0);" >
+                                                <span id="shortshare-grid-ico<%=product.productId%>" class="glyph fa fa-share shortgridshare"></span>
+                                                <div id="shortgrid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
+                                                    <% var share_url = window.location.protocol + '//' + window.location.host + '/newproduct-details-'+ product.productId %>
+                                                    <span><a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
+                                                    <span><a href="javascript:void(0);" onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')" class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
+                                                <span><a href="javascript:void(0);"
+                                                         onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
+                                                         class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="portfolio-caption">
+                                    <div class="position-relative">
+                                        <h4 class="product-title text-center"><%= product.name %></h4>
+                                        <div class="shortlist-consult-sec">
+                                            <a href="javascript:void(0);" id="shortlist_consult<%= product.productId %>" class="shortlist_consult consult">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="row display-none" id="consult_error_row<%= product.productId %>">
-                                    <p class="margin0 error-text align-center" id="consult_error<%= product.productId %>"></p>
-                                </div>
+                        </div>
+                    </div>
+                </div>
 
-                                <form id="consultForm-<%= product.productId %>" data-toggle="validator" role="form" method="post" enctype="multipart/form-data"
-                                      action="https://web.mxradon.com/t/FormTracker.aspx"
-                                      class="width90 margin_auto paddingtop20">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <input type='text' class="width100 form-control"
-                                                   id='FirstName' name='FirstName'
-                                                   placeholder="Name*" maxlength='100'
-                                                   value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
-                                                   required='required'/>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type='text' class="width100 form-control"
-                                                   id='EmailAddress'
-                                                   name='EmailAddress' placeholder="Email*" maxlength='100'
-                                                   value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
-                                                   required='required' pattern=".+@.+\..+"
-                                                   title="<abc>@<xyz>.<com>"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type='text' class="width100 form-control" id='Phone'
-                                                   name='Phone'
-                                                   placeholder="Phone Number*" maxlength='20'
-                                                   value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
-                                                   required='required' pattern="\d{10}"
-                                                   title="e.g. 9876543210"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <textarea class="width100 form-control" id="mx_Requirement"
-                                                          name='mx_Requirement' maxlength='150' value='' autocomplete='off'
-                                                          placeholder="Describe your Requirements / Queries">I'm interested in "<%= product.name %>" . Looking forward to hear from you.</textarea>
+                <!-- Consult Modal -->
+                <div id="consultpop<%= product.productId %>" class="modal fade consultpop" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="contact-form">
+                            <div class="row">
+                                <h2 class="align-center">
+                                    <span class="pe-7s-note"></span>
+                                    Consult
+                                </h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="paddingtop30">
+                                        <div class="row margin_auto">
+                                            <div class="col-xs-6">
+                                                <span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 80 88 86 0860</span>
+                                            </div>
+                                            <div class="col-xs-6 align-right">
+                                                <span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="text" class="width100 form-control" placeholder="Property Name"
-                                                   id='mx_Street2' name='mx_Street2' maxlength='256' value='' autocomplete='off' />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for='exclude_FileUpload_1'>Upload Floorplan</label>
-                                            <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
-                                            <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
-                                        </div>
-                                        <div class="align-center form-group">
-                                            <button class="button-blue"
-                                                    id="form-submit-button"
-                                                    type="submit">Submit
-                                            </button>
-                                            <br/>
-                                            <input type="hidden" name="MXHOrgCode" value="9814" />
-                                            <input type="hidden" name="MXHLandingPageId" value="f7c3e93f-3d1a-11e6-b61b-22000aa8e760" />
-                                            <input type="hidden" name="MXHFormBehaviour" value="1" />
-                                            <input type="hidden" name="MXHFormDataTransfer" value="0" />
-                                            <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-shortlist-product" />
-                                            <input type="hidden" name="MXHAsc" value="5" />
-                                            <input type="hidden" name="MXHPageTitle" value="Shortlist Products" />
-                                            <input type="hidden" name="MXHOutputMessagePosition" value="0" />
-                                            <input type="hidden" name="MXHIsExternallyUsed" value="1" />
-                                        </div>
                                     </div>
-                                </form>
-                                <script type="text/javascript"> var MXLandingPageId = 'f7c3e93f-3d1a-11e6-b61b-22000aa8e760'; </script>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row display-none" id="consult_error_row<%= product.productId %>">
+                                        <p class="margin0 error-text align-center" id="consult_error<%= product.productId %>"></p>
+                                    </div>
 
+                                    <form id="consultForm-<%= product.productId %>" data-toggle="validator" role="form" method="post" enctype="multipart/form-data"
+                                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                                          class="width90 margin_auto paddingtop20">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <input type='text' class="width100 form-control"
+                                                       id='FirstName' name='FirstName'
+                                                       placeholder="Name*" maxlength='100'
+                                                       value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                                       required='required'/>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type='text' class="width100 form-control"
+                                                       id='EmailAddress'
+                                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                                       value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                                       required='required' pattern=".+@.+\..+"
+                                                       title="<abc>@<xyz>.<com>"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type='text' class="width100 form-control" id='Phone'
+                                                       name='Phone'
+                                                       placeholder="Phone Number*" maxlength='20'
+                                                       value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                                       required='required' pattern="\d{10}"
+                                                       title="e.g. 9876543210"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <textarea class="width100 form-control" id="mx_Requirement"
+                                                              name='mx_Requirement' maxlength='150' value='' autocomplete='off'
+                                                              placeholder="Describe your Requirements / Queries">I'm interested in "<%= product.name %>" . Looking forward to hear from you.</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="width100 form-control" placeholder="Property Name"
+                                                       id='mx_Street2' name='mx_Street2' maxlength='256' value='' autocomplete='off' />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for='exclude_FileUpload_1'>Upload Floorplan</label>
+                                                <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
+                                                <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
+                                            </div>
+                                            <div class="align-center form-group">
+                                                <button class="button-blue"
+                                                        id="form-submit-button"
+                                                        type="submit">Submit
+                                                </button>
+                                                <br/>
+                                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                                <input type="hidden" name="MXHLandingPageId" value="f7c3e93f-3d1a-11e6-b61b-22000aa8e760" />
+                                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-shortlist-product" />
+                                                <input type="hidden" name="MXHAsc" value="5" />
+                                                <input type="hidden" name="MXHPageTitle" value="Shortlist Products" />
+                                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <script type="text/javascript"> var MXLandingPageId = 'f7c3e93f-3d1a-11e6-b61b-22000aa8e760'; </script>
+
+                                </div>
+                            </div>
+                            <div id="close-consult-pop<%= product.productId %>" data-element="#consultpop<%= product.productId %>" class="close-consult-pop close-icon signup-form">
+                                <img src="<%= imgBase + 'close-white.png'%>" alt="Close" title="Close">
                             </div>
                         </div>
-                        <div id="close-consult-pop<%= product.productId %>" data-element="#consultpop<%= product.productId %>" class="close-consult-pop close-icon signup-form">
-                            <img src="<%= imgBase + 'close-white.png'%>" alt="Close" title="Close">
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div>
-            <!-- consult Modal End -->
-            <% }); %>
-            <% } %>
+                <!-- consult Modal End -->
+                <% }); %>
+                <% } %>
             </div>
         </div>
     </div>

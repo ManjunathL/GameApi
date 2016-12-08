@@ -262,6 +262,14 @@
     border-bottom: 1px solid #ddd;
 }
 
+.home-img-head{
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-weight: 300;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #000;
+}
+
 .btn-explore{
     background-color: #f1591f;
     color:#ffffff;
@@ -3302,6 +3310,9 @@ a.button-orange:hover {
 .shortlist-thumb {
     width: 100%;
 }
+.shortlist-title {
+    text-transform: capitalize;
+}
 
 .shortlist-remove {
     position: absolute;
@@ -3518,14 +3529,12 @@ a.button-orange:hover {
 }
 
 .portfolio .portfolio-item .portfolio-caption {
-    margin: 0;
-    padding: 25px;
+    padding: 10px 25px;
     max-width: 100%;
     background-color: #fff;
 }
 
 .portfolio .portfolio-item .portfolio-caption-bg-gray {
-    margin: 0;
     padding: 25px;
     max-width: 100%;
     background-color: #fcfcfc;
@@ -3629,19 +3638,16 @@ a.button-orange:hover {
 }
 
 .portfolio .portfolio-item .portfolio-caption h4 {
-    margin: 0;
     text-transform: none;
     font-size: 20px;
 }
 
 .portfolio .portfolio-item .portfolio-caption h3 {
-    margin: 0;
     text-transform: none;
     font-size: 18px;
 }
 
 .portfolio .portfolio-item .portfolio-caption p {
-    margin: 0;
     font-size: 16px;
 }
 
@@ -5314,18 +5320,16 @@ a.tab-ico {
 .shortlist_consult,
 .shortlist_consult:focus,
 .shortlist_consult.active {
-    color: #fff !important;
+    color: #fff ;
     font-weight: 400;
     font-size: 14px;
     letter-spacing: 1px;
-    margin-top: 5px !important;
-    margin-left: 10px;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    margin-top: 10px;
+    padding: 10px 7px ;
     border-color: #f1591f;
     border-radius: 0px;
     text-transform: uppercase;
-    background-color: #f1591f !important;
+    background-color: #f1591f;
     -webkit-transition: color 0.3s, opacity 0.2s;
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
@@ -7353,9 +7357,9 @@ img.thumbnail {
 }
 
 .shortlist-consult-sec{
-    position: absolute;
-    right: 25px;
-    top: 45%;
+    text-align: center;
+    display: block;
+    margin: 10px auto;
 }
 
 .page-pre-tab,
@@ -7402,6 +7406,9 @@ img.thumbnail {
     .page-next-tab{
         margin-bottom:20px;
     }
+    .thumbnail-img{
+        border: 10px solid #fff;
+    }
 }
 
 @media screen and (max-width: 767px) {
@@ -7425,6 +7432,12 @@ img.thumbnail {
     }
     .padding-loc-space{
        padding-bottom: 10px!important;
+    }
+    .thumbnail-img{
+        border: 5px solid #fff;
+    }
+    .img-thumbnail-shadow {
+        box-shadow: 1px 2px 4px #ccc;
     }
 }
 
@@ -8050,7 +8063,7 @@ html .ui-button.ui-state-disabled:active {
 @media (max-width: 992px) {
     .mob-e-btn {
         position: absolute;
-        top: 35%;
+        top: 20%;
     }
     .address_right_section{
         position: relative;
@@ -8177,7 +8190,7 @@ html .ui-button.ui-state-disabled:active {
     }
     .mob-e-btn {
         position: absolute;
-        top: 25%;
+        top: 15%;
     }
     .address_right_section {
         position: relative;

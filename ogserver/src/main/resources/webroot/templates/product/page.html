@@ -4,14 +4,19 @@
         <div class="row">
             <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
             <% if(filter.selectedCategoryName == 'kitchen'){ %>
-            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <img width="100%" src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive hidden-xs" alt="Kitchen">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481197718/project_details/KitchenFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Kitchen">
             <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-            <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+            <img width="100%" src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive hidden-xs" alt="Bedroom">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481198346/project_details/BedroomFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Bedroom">
             <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
             <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481198438/project_details/LivingRoomFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Living & Dining">
+
             <% } %>
             <% }else{ %>
-            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <img width="100%" src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive hidden-xs" alt="Kitchen">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481197718/project_details/KitchenFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Kitchen">
             <% } %>
         </div>
     </div>
@@ -80,8 +85,8 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-4 col-xs-4 hidden-lg hidden-md ">
-                        <span class="button filter-button">Filter</span>
+                    <div class="col-sm-4 col-xs-4 hidden-lg hidden-md mob-padding-top-10">
+                        <span class="button filter-button"> Filter </span>
                     </div>
 
                     <div class="col-sm-8 hidden-xs hidden-lg hidden-md">
