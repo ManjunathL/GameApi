@@ -172,11 +172,13 @@ public class CrmApiHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
+                        LOG.error("in update firebase");
                         //sendError(requestJson, "Did not find product for "  + ". Error:" + selectData.errorMessage);
                     }
                     else
                     {
                         JsonObject useJsonEmail = new JsonObject(selectData.rows.toString());
+                        LOG.info (useJsonEmail.encodePrettily());
                         //sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
 
 /*
