@@ -175,7 +175,22 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info("Update in Firebase");
         LOG.info(proposalData.encodePrettily());
         LOG.info(requestJson.encodePrettily());
-        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + requestJson.getString("fbid") + "/myNest/projectDetails")
+
+                String email = requestJson.getString("email");
+        Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
+                (AsyncResult<Message<Integer>> selectResult1) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
+                    if (selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                       // sendError(routingContext.response(), "User does not exist for email: " + email);
+                    }
+                    else
+                    {
+                        JsonObject jsonEmail = new JsonObject(selectData.rows.toString());
+                        LOG.info("JSON EMAIL:" + jsonEmail);
+                       // createProposal(routingContext, requestJson, selectData.rows.get(0));
+                FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + jsonEmail.getString("fbid") + "/myNest/projectDetails")
                 .setJsonData(this.getProjectDetailsJson(proposalData));
         Integer id = LocalCache.getInstance().store(dataRequest);
         VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
@@ -193,6 +208,8 @@ public class CrmApiHandler extends AbstractRouteHandler
                         LOG.info("Firebase updated with " + requestJson.encode());
                     }
                 });
+            }
+        });
     }
 
     private JsonObject getProjectDetailsJson(JsonObject requestJson)
