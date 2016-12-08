@@ -10,6 +10,7 @@ import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.firebase.FirebaseDataRequest;
 import com.mygubbi.si.firebase.FirebaseDataService;
 import io.vertx.core.AsyncResult;
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
@@ -57,6 +58,8 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void createProposal(RoutingContext routingContext)
     {
+        new DeploymentOptions().setWorker(true);
+
         LOG.debug("create proposal request");
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
