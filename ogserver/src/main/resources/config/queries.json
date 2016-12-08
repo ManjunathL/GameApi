@@ -4,11 +4,12 @@
       "id": "user_profile.insert",
       "type": "insert",
       "table": "user_profile",
-      "query": "insert into user_profile ( fbid, active, email, profile) values (?, 'A', ?, ?)",
+      "query": "insert into user_profile ( fbid, active, email, profile, crmId) values (?, 'A', ?, ?, ?)",
       "params": [
         "fbid",
         "email",
-        "profile"
+        "profile",
+        "crmId"
       ]
     },
     {
