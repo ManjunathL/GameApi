@@ -7,8 +7,10 @@ import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
+import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.firebase.FirebaseDataRequest;
 import com.mygubbi.si.firebase.FirebaseDataService;
+import com.mygubbi.user.UserRegistrationProcessor;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -62,26 +64,26 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-        //createProposal(routingContext, requestJson);
+        createProposal(routingContext, requestJson);
 
-        String email = requestJson.getString("email");
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        sendError(routingContext.response(), "User does not exist for email: " + email);
-                    }
-                    else
-                    {
-                        createProposal(routingContext, requestJson, selectData.rows.get(0));
-                    }
-                });
+//        String email = requestJson.getString("email");
+//        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+//        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+//                (AsyncResult<Message<Integer>> selectResult) -> {
+//                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+//                    if (selectData.rows == null || selectData.rows.isEmpty())
+//                    {
+//                        sendError(routingContext.response(), "User does not exist for email: " + email);
+//                    }
+//                    else
+//                    {
+//                        createProposal(routingContext, requestJson, selectData.rows.get(0));
+//                    }
+//                });
     }
 
 
-    private void createProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject userJson)
+    private void createProposal(RoutingContext routingContext, JsonObject requestJson)
     {
 //        LOG.info("USER JSON:------>");
 //        LOG.info(userJson);
@@ -131,12 +133,12 @@ public class CrmApiHandler extends AbstractRouteHandler
                         }
                         proposalData.put("folderPath", docsFolder);
                         LOG.info("Done Proposal");
-                        this.updateProposal(routingContext, requestJson, proposalData, userJson);
+                        this.updateProposal(routingContext, requestJson, proposalData);
                     }
                 });
     }
 
-    private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData, JsonObject userJson)
+    private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
     {
         LOG.info("updateProposal Started");
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.folder.update", proposalData));
@@ -152,19 +154,19 @@ public class CrmApiHandler extends AbstractRouteHandler
                     {
 
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
-                        updateDataInFirebase(requestJson, proposalData,userJson);
+                        updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
     }
 
-    private void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData, JsonObject userJson)
+    private void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData)
     {
         LOG.info("Update in Firebase");
         LOG.info(proposalData.encodePrettily());
         LOG.info(requestJson.encodePrettily());
-        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + userJson.getString("fbid") + "/myNest/projectDetails")
+        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + requestJson.getString("fbid") + "/myNest/projectDetails")
                 .setJsonData(this.getProjectDetailsJson(proposalData));
         Integer id = LocalCache.getInstance().store(dataRequest);
         VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
@@ -246,6 +248,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
                             createUserOnWebsite(userJson);
+                            UserRegistrationProcessor new1 = new UserRegistrationProcessor((EventAcknowledger) userJson);
                            // sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
