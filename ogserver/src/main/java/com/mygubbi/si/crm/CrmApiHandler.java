@@ -177,14 +177,16 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-                    while (selectData.rows == null || selectData.rows.isEmpty()) {
-                        System.out.println("still null");
+                    synchronized (this) {
+                        while (selectData.rows == null || selectData.rows.isEmpty()) {
+                            System.out.println("still null");
 
-                        try {
-                            LOG.info("no data in user profile table");
-                            wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            try {
+                                LOG.info("no data in user profile table");
+                                this.wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 //                    if (selectData.rows == null || selectData.rows.isEmpty())
