@@ -183,7 +183,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
                   int i;
                     for(i=0;i<1000;++i) {
-                        selectData.rows = null;
                       // continue with old code here
 
                         if (selectData.rows == null || selectData.rows.isEmpty()) {
