@@ -36,6 +36,7 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -63,7 +64,9 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
         try {
-            Thread.sleep(40000);
+            Thread b = new Thread();
+            b.wait(40000);
+           // Thread.sleep(40000);
             LOG.info("i am sleeping for 40 seconds");
         } catch (InterruptedException e) {
             e.printStackTrace();
