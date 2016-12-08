@@ -183,6 +183,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
+                        LOG.info("no data in user profile table");
                        // sendError(routingContext.response(), "User does not exist for email: " + email);
                     }
                     else
