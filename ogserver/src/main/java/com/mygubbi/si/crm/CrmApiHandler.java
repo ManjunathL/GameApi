@@ -67,13 +67,14 @@ public class CrmApiHandler extends AbstractRouteHandler
             public void run() {
                 super.run();
                 try {
-                    this.wait(50000);
+                    this.wait(10000);
                 } catch (InterruptedException e) {
                     LOG.info(e.getMessage());
                 }
                 createProposal(routingContext, requestJson);
             }
-        };
+        }.start();
+
 //        String email = requestJson.getString("email");
 //        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
 //        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
