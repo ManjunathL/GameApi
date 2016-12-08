@@ -64,7 +64,8 @@ public class UserRegistrationProcessor implements DataProcessor
     private void createNewUser(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-
+        LOG.info("Mehbub" +jsonData.encodePrettily());
+        LOG.info("Mehbub Event" +eventData.toString());
         JsonObject userJson = new JsonObject().put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
