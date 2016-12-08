@@ -64,26 +64,19 @@ public class CrmApiHandler extends AbstractRouteHandler
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
-        new Thread() {
-            @Override
-            public void run() {
-                createCustomer(routingContext);
-                try {
-                    this.wait(1700);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }.start();
-
+        createCustomer(routingContext);
         new Thread(){
             @Override
             public void run() {
+                super.run();
                 synchronized (this) {
-
+                    try {
+                        this.wait(1700);
                         createProposal(routingContext, requestJson);
-
+                        this.notifyAll();
+                    } catch (InterruptedException e) {
+                        LOG.info(e.getMessage());
+                    }
                 }
             }
         }.start();
@@ -111,7 +104,6 @@ public class CrmApiHandler extends AbstractRouteHandler
 //        LOG.info(userJson);
         LOG.info("request Json:------>");
         LOG.info(requestJson);
-        createCustomer(routingContext);
 
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
         proposalData.put("createdBy", requestJson.getString("designerName"));
