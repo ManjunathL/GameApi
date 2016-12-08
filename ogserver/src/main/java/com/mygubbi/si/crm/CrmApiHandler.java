@@ -62,26 +62,26 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-        createProposal(routingContext, requestJson);
+        //createProposal(routingContext, requestJson);
 
-//        String email = requestJson.getString("email");
-//        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-//        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-//                (AsyncResult<Message<Integer>> selectResult) -> {
-//                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-//                    if (selectData.rows == null || selectData.rows.isEmpty())
-//                    {
-//                        sendError(routingContext.response(), "User does not exist for email: " + email);
-//                    }
-//                    else
-//                    {
-//                        createProposal(routingContext, requestJson, selectData.rows.get(0));
-//                    }
-//                });
+        String email = requestJson.getString("email");
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        sendError(routingContext.response(), "User does not exist for email: " + email);
+                    }
+                    else
+                    {
+                        createProposal(routingContext, requestJson, selectData.rows.get(0));
+                    }
+                });
     }
 
 
-    private void createProposal(RoutingContext routingContext, JsonObject requestJson)
+    private void createProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject userJson)
     {
 //        LOG.info("USER JSON:------>");
 //        LOG.info(userJson);
@@ -89,7 +89,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson);
         createCustomer(routingContext);
 
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name"));
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -131,12 +131,12 @@ public class CrmApiHandler extends AbstractRouteHandler
                         }
                         proposalData.put("folderPath", docsFolder);
                         LOG.info("Done Proposal");
-                        this.updateProposal(routingContext, requestJson, proposalData);
+                        this.updateProposal(routingContext, requestJson, proposalData, userJson);
                     }
                 });
     }
 
-    private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
+    private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData, JsonObject userJson)
     {
         LOG.info("updateProposal Started");
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.folder.update", proposalData));
@@ -152,19 +152,19 @@ public class CrmApiHandler extends AbstractRouteHandler
                     {
 
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
-                        updateDataInFirebase(requestJson, proposalData);
+                        updateDataInFirebase(requestJson, proposalData,userJson);
                         LOG.info("updateProposal Success in else");
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
     }
 
-    private void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData)
+    private void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData, JsonObject userJson)
     {
         LOG.info("Update in Firebase");
         LOG.info(proposalData.encodePrettily());
         LOG.info(requestJson.encodePrettily());
-        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + requestJson.getString("fbid") + "/myNest/projectDetails")
+        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + userJson.getString("fbid") + "/myNest/projectDetails")
                 .setJsonData(this.getProjectDetailsJson(proposalData));
         Integer id = LocalCache.getInstance().store(dataRequest);
         VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
