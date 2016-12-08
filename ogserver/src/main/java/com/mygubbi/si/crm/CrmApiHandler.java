@@ -295,7 +295,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setParameter("photoUrl","null")
                     .setParameter("crmId",userJson.getString("opportunityId"))
                     .build();
-            LOG.debug("URL :" + uri.toString());
+           // LOG.debug("URL :" + uri.toString());
             String urlString = URLDecoder.decode(uri.toString(), "UTF-8");
             URI uriDecode = new URI(urlString);
             LOG.debug("URL DE-CODE :" + uriDecode.toString());
@@ -313,7 +313,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-               response = httpclient.execute(new HttpGet(uri));
+               response = httpclient.execute(new HttpGet(uriDecode));
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +statusCode);
             }
@@ -321,7 +321,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             {
                 LOG.info("acceptSSLCertificates False");
 
-                response = Request.Get(uri).execute().returnResponse();
+                response = Request.Get(uriDecode).execute().returnResponse();
             }
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                     LOG.error("Error in calling website for creating user." + response.toString());
