@@ -65,17 +65,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    wait(1900);
-                } catch (Exception e) {}
                 createProposal(routingContext, requestJson);
-                }
-    }.start();
-
-
 //        String email = requestJson.getString("email");
 //        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
 //        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -181,35 +171,46 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-                    if (selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        LOG.info("no data in user profile table");
-                       // sendError(routingContext.response(), "User does not exist for email: " + email);
-                    }
-                    else
-                    {
-                        JsonObject jsonEmail = new JsonObject(selectData.rows.toString());
-                        LOG.info("JSON EMAIL:" + jsonEmail);
-                       // createProposal(routingContext, requestJson, selectData.rows.get(0));
-                FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + jsonEmail.getString("fbid") + "/myNest/projectDetails")
-                .setJsonData(this.getProjectDetailsJson(proposalData));
-        Integer id = LocalCache.getInstance().store(dataRequest);
-        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    LOG.debug("select Result :" + selectResult.result());
-                    Integer id_new = selectResult.result().body();
-                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
-                    LOG.debug("Firebase data response :" + dataResponse);
-                    if (dataResponse == null ){
-                        LOG.error("Error Occured in dataResponse");
-                    }
+                    new Thread() {
 
-                    else if (!dataResponse.isError())
-                    {
-                        LOG.info("Firebase updated with " + requestJson.encode());
-                    }
-                });
-            }
+                        public void run() {
+                            while (selectData.rows == null || selectData.rows.isEmpty()) {
+                                LOG.info("no data in user profile table");
+                                try {
+                                    this.wait(2000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                // sendError(routingContext.response(), "User does not exist for email: " + email);
+                            }
+                        }
+                    }.start();
+//                    if (selectData.rows == null || selectData.rows.isEmpty())
+//                    {
+//                        LOG.info("no data in user profile table");
+//                       // sendError(routingContext.response(), "User does not exist for email: " + email);
+//                    }
+//                    else
+//                    {
+                    JsonObject jsonEmail = new JsonObject(selectData.rows.toString());
+                    LOG.info("JSON EMAIL:" + jsonEmail);
+                    // createProposal(routingContext, requestJson, selectData.rows.get(0));
+                    FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + jsonEmail.getString("fbid") + "/myNest/projectDetails")
+                            .setJsonData(this.getProjectDetailsJson(proposalData));
+                    Integer id = LocalCache.getInstance().store(dataRequest);
+                    VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
+                            (AsyncResult<Message<Integer>> selectResult) -> {
+                                LOG.debug("select Result :" + selectResult.result());
+                                Integer id_new = selectResult.result().body();
+                                FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
+                                LOG.debug("Firebase data response :" + dataResponse);
+                                if (dataResponse == null) {
+                                    LOG.error("Error Occured in dataResponse");
+                                } else if (!dataResponse.isError()) {
+                                    LOG.info("Firebase updated with " + requestJson.encode());
+                                }
+                            });
+//                }
         });
     }
 
