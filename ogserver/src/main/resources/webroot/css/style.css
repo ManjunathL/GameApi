@@ -3660,6 +3660,18 @@ ul.social-buttons li a:active {
     position: relative;
 }
 
+@media (max-width: 767px) {
+    .p-service-bg {
+        height: 1060px;
+    }
+}
+
+@media (max-width: 480px) {
+    .p-service-bg {
+        height: 960px;
+    }
+}
+
 .p-service-card .nav-tabs > li > a{
     color: rgba(253,253,253,0.6);
     font-weight: 300;
