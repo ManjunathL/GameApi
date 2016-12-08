@@ -63,7 +63,8 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(40000);
+            LOG.info("i am sleeping for 40 seconds");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
