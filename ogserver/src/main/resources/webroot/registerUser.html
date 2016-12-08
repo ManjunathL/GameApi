@@ -36,7 +36,9 @@
             var email = decodeURIComponent(vars['email']);
             var phone = vars['phone'];
             var password = vars['password'];
+
             var photoURL = vars['photoURL'] ? vars['photoURL']: 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';
+            var crmId = vars['crmId'];
 
             console.log(photoURL);
 
@@ -56,6 +58,7 @@
                     email: email,
                     phone: phone,
                     profileImage: photoURL,
+                    crmId:crmId
                 };
                 createProfile(userData,profileData);
             }, function(error) {
