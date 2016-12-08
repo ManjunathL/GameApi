@@ -9,6 +9,7 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.firebase.FirebaseDataRequest;
 import com.mygubbi.si.firebase.FirebaseDataService;
+import com.mygubbi.user.UserRegistrationProcessor;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -36,6 +37,7 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -63,14 +65,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-        try {
-            Thread b = new Thread();
-            b.wait(40000);
-           // Thread.sleep(40000);
-            LOG.info("i am sleeping for 40 seconds");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         createProposal(routingContext, requestJson);
 
 //        String email = requestJson.getString("email");
@@ -175,7 +170,13 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson.encodePrettily());
         String email = requestJson.getString("email");
         LOG.info(email);
+        try {
 
+            TimeUnit.MINUTES.sleep(1);
+
+        } catch (InterruptedException e) {
+            //Handle exception
+        }
         Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email",  new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
