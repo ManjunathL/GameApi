@@ -9,7 +9,6 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.firebase.FirebaseDataRequest;
 import com.mygubbi.si.firebase.FirebaseDataService;
-import com.mygubbi.user.UserRegistrationProcessor;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -37,7 +36,6 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.concurrent.locks.Lock;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -64,7 +62,6 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-
         createProposal(routingContext, requestJson);
 
 //        String email = requestJson.getString("email");
@@ -167,48 +164,6 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info("Update in Firebase");
         LOG.info(proposalData.encodePrettily());
         LOG.info(requestJson.encodePrettily());
-        String email = requestJson.getString("email");
-        LOG.info(email);
-
-       /* Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email",  new JsonObject().put("email", email)));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
-                (AsyncResult<Message<Integer>> selectResult1) -> {
-                    LOG.info("Executing query:" + "user_profile.select.email" );
-                    LOG.info("selectResult1:" + selectResult1 );
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        LOG.error("in update firebase");
-                        //sendError(requestJson, "Did not find product for "  + ". Error:" + selectData.errorMessage);
-                    }
-                    else
-                    {
-                        JsonObject useJsonEmail = new JsonObject(selectData.rows.toString());
-                        LOG.info (useJsonEmail.encodePrettily());
-                        //sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
-
-*//*
-                        sendJsonResponse(context, selectData.getJsonDataRows("productJson").toString());
-*//*
-
-        FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + useJsonEmail.getString("fbid") + "/myNest/projectDetails")
-                .setJsonData(this.getProjectDetailsJson(proposalData));
-        Integer id = LocalCache.getInstance().store(dataRequest);
-        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    LOG.debug("select Result :" + selectResult.result());
-                    Integer id_new = selectResult.result().body();
-                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
-                    LOG.debug("Firebase data response :" + dataResponse);
-                    if (dataResponse == null ){
-                        LOG.error("Error Occured in dataResponse");
-                    }
-
-                    else if (!dataResponse.isError())
-                    {
-                        LOG.info("Firebase updated with " + requestJson.encode());
-                    }
-                });*/
         FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + requestJson.getString("fbid") + "/myNest/projectDetails")
                 .setJsonData(this.getProjectDetailsJson(proposalData));
         Integer id = LocalCache.getInstance().store(dataRequest);
@@ -226,7 +181,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                     {
                         LOG.info("Firebase updated with " + requestJson.encode());
                     }
-
                 });
     }
 
