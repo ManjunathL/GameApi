@@ -62,6 +62,11 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         createProposal(routingContext, requestJson);
 
 //        String email = requestJson.getString("email");
@@ -190,22 +195,22 @@ public class CrmApiHandler extends AbstractRouteHandler
 
         FirebaseDataRequest dataRequest = new FirebaseDataRequest().setDataUrl("/projects/" + useJsonEmail.getString("fbid") + "/myNest/projectDetails")
                 .setJsonData(this.getProjectDetailsJson(proposalData));
-//        Integer id = LocalCache.getInstance().store(dataRequest);
-//        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
-//                (AsyncResult<Message<Integer>> selectResult) -> {
-//                    LOG.debug("select Result :" + selectResult.result());
-//                    Integer id_new = selectResult.result().body();
-//                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
-//                    LOG.debug("Firebase data response :" + dataResponse);
-//                    if (dataResponse == null ){
-//                        LOG.error("Error Occured in dataResponse");
-//                    }
-//
-//                    else if (!dataResponse.isError())
-//                    {
-//                        LOG.info("Firebase updated with " + requestJson.encode());
-//                    }
-//                });
+        Integer id = LocalCache.getInstance().store(dataRequest);
+        VertxInstance.get().eventBus().send(FirebaseDataService.UPDATE_DB, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    LOG.debug("select Result :" + selectResult.result());
+                    Integer id_new = selectResult.result().body();
+                    FirebaseDataRequest dataResponse = (FirebaseDataRequest) LocalCache.getInstance().remove(id_new);
+                    LOG.debug("Firebase data response :" + dataResponse);
+                    if (dataResponse == null ){
+                        LOG.error("Error Occured in dataResponse");
+                    }
+
+                    else if (!dataResponse.isError())
+                    {
+                        LOG.info("Firebase updated with " + requestJson.encode());
+                    }
+                });
                     }
                 });
     }
