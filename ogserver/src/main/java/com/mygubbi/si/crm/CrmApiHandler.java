@@ -165,7 +165,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(proposalData.encodePrettily());
         LOG.info(requestJson.encodePrettily());
         String email = requestJson.getString("email");
-        Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email", proposalData));
+        Integer id1 = LocalCache.getInstance().store(new QueryData("user_profile.select.email",  new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     LOG.info("Executing query:" + "user_profile.select.email" );
