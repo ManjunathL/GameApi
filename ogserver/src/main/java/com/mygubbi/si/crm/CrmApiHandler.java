@@ -67,19 +67,14 @@ public class CrmApiHandler extends AbstractRouteHandler
         new Thread(){
             @Override
             public void run() {
-                synchronized (this) {
-                    createCustomer(routingContext);
-                }
+                createCustomer(routingContext);
                 try {
-                    this.wait(1999);
-                    this.notifyAll();
+                    wait(1900);
                 } catch (Exception e) {}
-                synchronized (this) {
-                    createProposal(routingContext, requestJson);
+                createProposal(routingContext, requestJson);
                 }
-        };
-
     }.start();
+
 
 //        String email = requestJson.getString("email");
 //        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
