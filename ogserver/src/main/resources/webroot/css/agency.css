@@ -1637,8 +1637,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .slight-up {
-    position: absolute;
-    top: -1px;
+    text-align: right;
 }
 
 .user_name {
@@ -2645,6 +2644,7 @@ fieldset[disabled] .btn-xl.active {
 
 .stick {
     position: fixed;
+    padding: 10px 0px;
     z-index: 999;
     width: 100%;
     -webkit-transition: color 0.3s, opacity 0.2s;
@@ -3008,6 +3008,49 @@ a.button-orange:hover {
     font-size: 16px;
     display: none;
 }
+.collection-img-right{
+    float: right;
+    margin: 10px;
+}
+.collection-img-left{
+    float: left;
+    margin: 10px;
+}
+
+.collection-design-heading {
+    border-bottom: 1px solid #ddd;
+    margin: 10px auto;
+    padding-bottom: 5px;
+    display: inline-block;
+    color: #415159;
+}
+.collection-design-heading h2{
+    font-weight: 100;
+}
+.collection-img-right h5{
+    margin-bottom: 3px;
+    font-weight: 100;
+}
+.collection-img-left h5{
+    margin-bottom: 3px;
+    font-weight: 100;
+}
+@media (max-width: 768px) {
+    .collection-img-right{
+        float: none;
+    }
+    .collection-img-left{
+        float: none;
+    }
+}
+@media (max-width: 480px) {
+    .collection-img-right{
+        float: none;
+    }
+    .collection-img-left{
+        float: none;
+    }
+}
 
 .sortby {
     display: inline-block;
@@ -3054,8 +3097,6 @@ a.button-orange:hover {
 
 .filter-button {
     border: 1px solid !important;
-    position: absolute;
-    right: 10%;
 }
 
 .filterpop {
@@ -3308,6 +3349,7 @@ a.button-orange:hover {
     position: absolute;
     top: 0px;
     right: -90px;
+    width: 90px;
     list-style: none;
     padding: 10px;
     background: transparent linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent) repeat scroll 0% 0%;
@@ -3422,14 +3464,12 @@ a.button-orange:hover {
     cursor: pointer;
 }
 
-.dim {
-    font-weight: 400;
-    color: #000;
-}
-
 .portfolio .portfolio-item {
     right: 0;
     margin: 0 0 15px;
+}
+.portfolio-list-img{
+    padding: 15px 0px;
 }
 
 .portfolio-box {
@@ -3997,6 +4037,16 @@ body {
 
 /* Changes done by Smruti */
 
+.product-title{
+    text-transform: capitalize;
+    margin: 10px 0px 20px;
+    font-size: 19px;
+}
+.product-title-lg{
+    text-transform: capitalize;
+    margin: 20px 0px 20px;
+    font-size: 22px;
+}
 .portfolio-item {
     margin-bottom: 25px;
 }
@@ -5073,7 +5123,6 @@ a.tab-ico {
 
     .breadcrumb {
         width: 100%;
-        margin-left: 10px;
     }
 }
 
@@ -7296,7 +7345,7 @@ img.thumbnail {
 }
 
 .thumbnail-img{
-    border: 39px solid #fff;
+    border: 20px solid #fff;
 }
 
 .img-thumbnail-shadow{
@@ -8220,7 +8269,7 @@ html .ui-button.ui-state-disabled:active {
 
     .list-heart {
         font-size: 22px !important;
-        padding: 10px 0px !important;
+        padding: 13px 4px;
     }
 
     .listli {
@@ -8230,6 +8279,7 @@ html .ui-button.ui-state-disabled:active {
     .glyph {
         height: 30px !important;
         width: 30px !important;
+        font-size: 12px;
     }
 
     .portfolio .portfolio-item .portfolio-caption h4 {
@@ -8241,7 +8291,7 @@ html .ui-button.ui-state-disabled:active {
     }
 
     #filter-desc {
-       padding: 10px 0px 55px 0px!important;
+        padding: 10px 0px;
     }
 
     .product-caption {

@@ -1,10 +1,12 @@
 <section class="menu-spacer bg-light-gray">
 
     <div class="container-fluid category-banner">
-        <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
+        <div class="row">
+            <img width="100%" src="<%= imgBase + 'wishlist.png'%>" class="img-responsive" alt="Shortlist Page Banner">
+        </div>
     </div>
     <% var slcount = shortlistedItems ? Object.keys(shortlistedItems).length : 0; %>
-    <div class="container-fluid bg-color-white hidden-xs">
+    <div class="bg-white hidden-xs">
         <div class="container">
             <div class="row">
                 <ul class="breadcrumb">
@@ -14,11 +16,11 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-color-white">
+    <div class="bg-white">
         <div class="container">
-            <div class="row padding20-0">
+            <div class="row">
                 <div class="col-xs-12">
-                    <div class="design-count margin0">You have <%=slcount%> Shortlisted Item<%=slcount===1?'':'s'%>
+                    <div class="design-count margin0"> You have <%=slcount%> Shortlisted Item<%=slcount===1?'':'s'%>
                     </div>
                 </div>
             </div>
@@ -27,8 +29,8 @@
 
 
     <div class="container">
-        <div class="container margin-top40">
-            <div class="row grid-view">
+        <div class="row">
+            <div class="grid-view">
             <% if(shortlistedItems){ %>
             <% _.each(shortlistedItems, function(product){ %>
             <div class="portfolio">
@@ -36,7 +38,7 @@
                     <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
                         <div class="row position-relative">
                             <a href="/newproduct-details-<%= product.productId %>" class="portfolio-link">
-                                <img width="555px" height="333px" class="img-responsive thumbnail-img" src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
+                                <img class="img-responsive thumbnail-img" src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
                                         title="<%= product.name %>" alt="<%= product.name %>"/>
                             </a>
                             <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
@@ -71,7 +73,7 @@
                         <div class="portfolio-caption margin0">
                             <div class="row position-relative">
                                 <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0"><%= product.name %></h4>
-                                <h6 class="col-md-12 col-sm-12 col-xs-12 align-center padding0">Starting From</h6>
+                                <!--<h6 class="col-md-12 col-sm-12 col-xs-12 align-center padding0">Starting From</h6>
                                 <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0 margin0 margin-bottom20">
                                     <% if (product.defaultPrice !== 0) { %>
                                     <i class="fa fa-inr"></i>
@@ -79,7 +81,7 @@
                                     <% } else { %>
                                     Consult for Price
                                     <% } %>
-                                </h4>
+                                </h4>-->
                                 <div class="shortlist-consult-sec"><a href="javascript:void(0);" id="shortlist_consult<%= product.productId %>" class="shortlist_consult consult padding-left10 padding-right10">C<span class="pe-7s-help1 pe-fw consult-inline-icon"></span>NSULT</a></div>
                             </div>
                         </div>
@@ -196,5 +198,6 @@
             </div>
         </div>
     </div>
+
 </section>
 
