@@ -64,22 +64,22 @@ public class CrmApiHandler extends AbstractRouteHandler
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
-        createCustomer(routingContext);
         new Thread(){
             @Override
             public void run() {
-                super.run();
                 synchronized (this) {
-                    try {
-                        this.wait(1700);
-                        createProposal(routingContext, requestJson);
-                        this.notifyAll();
-                    } catch (InterruptedException e) {
-                        LOG.info(e.getMessage());
-                    }
+                    createCustomer(routingContext);
                 }
-            }
-        }.start();
+                try {
+                    this.wait(1999);
+                    this.notifyAll();
+                } catch (Exception e) {}
+                synchronized (this) {
+                    createProposal(routingContext, requestJson);
+                }
+        };
+
+    }.start();
 
 //        String email = requestJson.getString("email");
 //        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
