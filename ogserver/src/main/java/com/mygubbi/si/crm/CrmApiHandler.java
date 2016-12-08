@@ -64,10 +64,10 @@ public class CrmApiHandler extends AbstractRouteHandler
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
+        createCustomer(routingContext);
         new Thread(){
             @Override
             public void run() {
-                createCustomer(routingContext);
                 try {
                     wait(1900);
                 } catch (Exception e) {}
