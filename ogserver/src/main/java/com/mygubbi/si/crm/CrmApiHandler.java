@@ -178,6 +178,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
+                        LOG.info("No Data into DB");
                        // sendError(routingContext.response(), "User does not exist for email: " + email);
                     }
                     else
