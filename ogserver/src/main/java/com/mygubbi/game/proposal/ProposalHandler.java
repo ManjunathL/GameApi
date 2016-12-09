@@ -34,6 +34,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.get("/list").handler(this::getProposals);
         this.post("/create").handler(this::createProposal);
+        this.post("/version/createdraft").handler(this::createInitialDraftProposal);
         this.post("/update").handler(this::updateProposal);
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
@@ -43,12 +44,36 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
 
+    private void createInitialDraftProposal(RoutingContext routingContext) {
+        JsonObject versionData = routingContext.getBodyAsJson();
+        LOG.debug("routing context :" + versionData.encodePrettily());
+       /* if (StringUtils.isEmpty(versionData.getString("proposalId")) || StringUtils.isEmpty(versionData.getString("title")))
+        {
+            sendError(routingContext, "Error in creating version as versionNo or title or status are not set.");
+            return;
+        }*/
+        Integer id = LocalCache.getInstance().store(new QueryData("version.createdraft", versionData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in creating version.");
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, versionData.toString());
+                    }
+                });
+    }
+
     //todo: code doc.remove
 
 
     private void createProposal(RoutingContext routingContext)
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
+        LOG.debug("proposalData :" + proposalData.encodePrettily());
         if (StringUtils.isEmpty(proposalData.getString("title")) || StringUtils.isEmpty(proposalData.getString("createdBy")))
         {
             sendError(routingContext, "Error in creating proposal as title or createdBy are not set.");
