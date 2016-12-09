@@ -308,12 +308,19 @@ define([
                 }, delay);
             };
         },
+        clearSearchedProduct: function(ev){
+            ev.preventDefault();
+            ev.stopPropagation();
+            $('.sb-search-input').val("");
+            $('.clr-search-lnk').css('display','none');
+        },
         gotoSearchedProduct: function(ev) {
             ev.preventDefault();
             ev.stopPropagation();
             var target = $(ev.currentTarget).data('target');
             $('.sb-search-input').val($(ev.currentTarget).text());
             $('.sb-search_suggest').slideUp();
+            $('.clr-search-lnk').css('display','block');
 
             //close the search bar start
             var isMobile = window.matchMedia("only screen and (max-width: 920px)");
@@ -353,7 +360,8 @@ define([
                 "click #close-contactus-pop": this.toggleContactUsPop,
                 //"click #contact-form-explore": this.toggleContactUsPop,
                 "click #goto-login": this.gotoLogin,
-                "click .sb-search-txt": this.gotoSearchedProduct
+                "click .sb-search-txt": this.gotoSearchedProduct,
+                "click .clr-search-lnk": this.clearSearchedProduct
             };
 
             parent.delegateEvents(events);
