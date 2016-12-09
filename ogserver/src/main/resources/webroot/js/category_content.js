@@ -1,58 +1,46 @@
 define([
     'jquery',
     'underscore',
-    'text!templates/category/bedroom.html',
-    'text!templates/category/book_rack.html',
-    'text!templates/category/crockery_unit.html',
-    'text!templates/category/entertainment_unit.html',
-    'text!templates/category/foyer_unit.html',
-    'text!templates/category/kitchen.html',
-    'text!templates/category/l_shaped_kitchen.html',
-    'text!templates/category/living_&_dining.html',
-    'text!templates/category/parallel_kitchen.html',
-    'text!templates/category/shoe_rack.html',
-    'text!templates/category/side_table.html',
-    'text!templates/category/sideboard.html',
-    'text!templates/category/straight_kitchen.html',
-    'text!templates/category/study_table.html',
-    'text!templates/category/u_shaped_kitchen.html',
-    'text!templates/category/wardrobe.html',
-    'text!templates/category/nest_of_table.html',
-    'text!templates/category/chest_of_drawer.html',
-    'text!templates/category/coffee_table.html'
-], function($, _, Bedroom, BookRack, CrockeryUnit, EntertainmentUnit, FoyerUnit, Kitchen, LShapedKitchen, LivingAndDining,
-    ParallelKitchen, ShoeRack, SideTable, Sideboard, StraightKitchen, StudyTable, UShapedKitchen, Wardrobe, NestOfTable, ChestOfDrawer, CoffeeTable) {
+    'models/seoFilterMaster',
+    'text!templates/category/content_seo.html'
+], function($, _,SEOFilterMaster, ContentSeoTemplate) {
     return {
         el: '.category-content',
-        apply: function(category) {
+        seoFilterMaster: new SEOFilterMaster(),
 
-            var pageContent;
+        apply: function(category,subCategory,location) {
 
-            switch (category) {
-                case "bedroom": pageContent = Bedroom; break;
-                case "Book Rack": pageContent = BookRack; break;
-                case "Crockery Unit": pageContent = CrockeryUnit; break;
-                case "Entertainment Unit": pageContent = EntertainmentUnit; break;
-                case "Foyer Unit": pageContent = FoyerUnit; break;
-                case "kitchen": pageContent = Kitchen; break;
-                case "L Shaped Kitchen": pageContent = LShapedKitchen; break;
-                case "living & dining": pageContent = LivingAndDining; break;
-                case "Parallel Kitchen": pageContent = ParallelKitchen; break;
-                case "Shoe Rack": pageContent = ShoeRack; break;
-                case "Side Table": pageContent = SideTable; break;
-                case "Sideboard": pageContent = Sideboard; break;
-                case "Straight Kitchen": pageContent = StraightKitchen; break;
-                case "Study Table": pageContent = StudyTable; break;
-                case "U Shaped Kitchen": pageContent = UShapedKitchen; break;
-                case "Wardrobe": pageContent = Wardrobe; break;
-                case "Nest of Table": pageContent = NestOfTable; break;
-                case "Chest of Drawer": pageContent = ChestOfDrawer; break;
-                case "Coffee Tables": pageContent = CoffeeTable; break;
+        var loc = location;
+        if((loc == null) || (loc == "") ){
+            loc = "website";
+        }
+         /*console.log(" ----------------Category Content----------------- ");
+         console.log(category+"  ================ "+subCategory+" ============ "+loc);*/
+        var that = this;
+        that.seoFilterMaster.fetch({
+          data: {
+              "category": category,
+              "subcategory": subCategory,
+              "location": loc
+          },
+
+            success: function(response) {
+                console.log("SEO filterMaster fetch successfully- ");
+                console.log(response);
+                console.log(response.get(0).content);
+
+                var ContentSeo = _.template(ContentSeoTemplate);
+                $(".category-content").html(ContentSeo({
+                      "description": response.get(0).content
+                  }));
+
+            },
+            error: function(model, response, options) {
+                console.log("error from SEO filterMaster fetch - " + response);
             }
+         });
 
-            if (pageContent !== null && pageContent !== '') {
-                    $(this.el).html(pageContent);
-            }
+
         }
     };
 });

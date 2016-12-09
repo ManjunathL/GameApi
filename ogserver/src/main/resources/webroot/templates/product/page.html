@@ -653,8 +653,21 @@
 
         $('[data-toggle="tooltip"]').tooltip();
 
-
         var meta = 'mygubbi';
+        var metakeyword = 'mygubbi';
+        var metatitle = 'mygubbi';
+        var url = $(location).attr('href');
+
+        meta = filter.get('metaDesc');
+        $("meta[name='description']").attr("content", meta);
+
+        metakeyword = filter.get('metaKeyword');
+        $("meta[name='keywords']").attr("content", metakeyword);
+
+        metatitle = filter.get('metaTitle');
+        document.title = metatitle;
+
+        /*var meta = 'mygubbi';
         var metakeyword = 'mygubbi';
         var url = $(location).attr('href');
 
@@ -850,7 +863,7 @@
         }else {
             $("meta[name='description']").attr("content", meta);
             $("meta[name='keywords']").attr("content", metakeyword);
-        }
+        }*/
 
     });
 
