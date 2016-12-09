@@ -65,25 +65,20 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-           // String result = createCustomer(routingContext);
-                createProposal(routingContext, requestJson);
-
-
-
-//        String email = requestJson.getString("email");
-//        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-//        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-//                (AsyncResult<Message<Integer>> selectResult) -> {
-//                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-//                    if (selectData.rows == null || selectData.rows.isEmpty())
-//                    {
-//                        sendError(routingContext.response(), "User does not exist for email: " + email);
-//                    }
-//                    else
-//                    {
-//                        createProposal(routingContext, requestJson, selectData.rows.get(0));
-//                    }
-//                });
+        String email = requestJson.getString("email");
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        createCustomer(routingContext);
+                    }
+                    else
+                    {
+                        createProposal(routingContext, requestJson);
+                    }
+                });
     }
 
 
@@ -177,24 +172,14 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-                        while (selectData.rows == null || selectData.rows.isEmpty()) {
-                            if (selectData.rows != null) {
-                                break;
-                            } else {
-                                try {
-                                    wait(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
 
-//                    if (selectData.rows == null || selectData.rows.isEmpty())
-//                    {
+
+                    if (selectData.rows == null || selectData.rows.isEmpty())
+                    {
                        // sendError(routingContext.response(), "User does not exist for email: " + email);
-//                    }
-//                    else
-//                    {
+                    }
+                    else
+                    {
                     String fbid = selectData.rows.get(0).getString("fbid");
                         //JsonObject jsonEmail = new JsonObject(selectData.rows.get(0).getString("fbid"));
                         LOG.info("JSON fbid:" + fbid);
@@ -217,9 +202,10 @@ public class CrmApiHandler extends AbstractRouteHandler
                         LOG.info("Firebase updated with " + requestJson.encode());
                     }
                 });
-//            }
+           }
         });
     }
+
 
     private JsonObject getProjectDetailsJson(JsonObject requestJson)
     {
@@ -284,7 +270,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
                            createUserOnWebsite(userJson);
                           //  sendJsonResponse();
-                          // sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
                         {
@@ -354,6 +340,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +statusCode);
+
             }
             else
             {
