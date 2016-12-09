@@ -177,17 +177,18 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-                    synchronized (this) {
 
                         while (selectData.rows == null || selectData.rows.isEmpty()) {
 
-                                try {
-                                     wait(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
+                            try {
+                                synchronized (this) {
+                                    wait(2000);
                                 }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
+
 //                    if (selectData.rows == null || selectData.rows.isEmpty())
 //                    {
                        // sendError(routingContext.response(), "User does not exist for email: " + email);
