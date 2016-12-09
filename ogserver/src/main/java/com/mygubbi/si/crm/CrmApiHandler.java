@@ -9,6 +9,7 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.firebase.FirebaseDataRequest;
 import com.mygubbi.si.firebase.FirebaseDataService;
+import com.mygubbi.si.firebase.FirebaseService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
@@ -73,10 +74,11 @@ public class CrmApiHandler extends AbstractRouteHandler
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
                         createCustomer(routingContext);
+                        createProposal(routingContext, requestJson);
                     }
                     else
                     {
-                        createProposal(routingContext, requestJson);
+
                     }
                 });
     }
@@ -269,13 +271,8 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
                            createUserOnWebsite(userJson);
-                            if(selectData.rows.isEmpty()){
-                                LOG.info("no customer data");
-                            }
-                            else {
-                                createProposal(routingContext, userJson);
-                            }
-                            //  sendJsonResponse();
+
+                        //  sendJsonResponse();
                         //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
@@ -346,7 +343,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +statusCode);
-
             }
             else
             {
