@@ -65,7 +65,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         createCustomer(routingContext);
-
+           // String result = createCustomer(routingContext);
                 createProposal(routingContext, requestJson);
 
 
@@ -177,15 +177,15 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id1,
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
-
                         while (selectData.rows == null || selectData.rows.isEmpty()) {
-
-                            try {
-                                synchronized (this) {
-                                    wait(2000);
+                            if (selectData.rows != null) {
+                                break;
+                            } else {
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
                         }
 
@@ -282,8 +282,9 @@ public class CrmApiHandler extends AbstractRouteHandler
                         {
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
-                            createUserOnWebsite(userJson);
-                           // sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                           createUserOnWebsite(userJson);
+                          //  sendJsonResponse();
+                          // sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
                         {
