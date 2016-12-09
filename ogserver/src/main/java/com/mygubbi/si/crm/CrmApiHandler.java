@@ -186,6 +186,8 @@ public class CrmApiHandler extends AbstractRouteHandler
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            this.notify();
+
                         }
                     }
 //                    if (selectData.rows == null || selectData.rows.isEmpty())
