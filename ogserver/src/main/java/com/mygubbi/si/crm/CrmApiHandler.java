@@ -179,14 +179,16 @@ public class CrmApiHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
                     synchronized (this) {
                         while (selectData.rows == null || selectData.rows.isEmpty()) {
-
-                            try {
-                                LOG.info("no data in user profile table");
-                                this.wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                            if (selectData != null ) {
+                                break;
                             }
-                            this.notify();
+                             else {
+                                try {
+                                     wait(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
                         }
                     }
