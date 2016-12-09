@@ -4085,3 +4085,11 @@ ul.social-buttons li a:active {
     }
     /* End Platinum Page */
 }
+
+.clr-search-lnk{
+    position: absolute;
+    top: 15px;
+    right: 5%;
+    color: #999;
+    cursor:pointer;
+}
