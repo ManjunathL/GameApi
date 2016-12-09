@@ -64,6 +64,14 @@
     },
 
     {
+      "id": "version.createdraft",
+      "type": "insert",
+      "table": "version_master",
+      "query": "insert into version_master(version, proposalId, title, status, finalAmount, remarks) values (0.1, ?, ?, 'draft', 0.0, 'add remarks')",
+      "params": ["proposalId", "title"]
+    },
+
+    {
       "id": "proposal.update",
       "type": "update",
       "table": "proposal",
@@ -272,6 +280,14 @@
       "type": "select",
       "table": "proposal_product",
       "query": "select id, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, createdOn, createdBy, updatedOn, updatedBy, costWoAccessories from proposal_product where proposalId = ? and active = 'A'",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "proposal.versions.list",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where proposalId = ? ",
       "params": ["proposalId"]
     },
 

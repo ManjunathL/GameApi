@@ -98,6 +98,14 @@
       "default": "[]"
     },
     {
+      "uri": "/gapi/proposal/versions",
+      "source": "db",
+      "query":"proposal.versions.list",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
       "uri": "/gapi/proposal/addon.add",
       "source": "db",
       "query":"proposal.addon.add",
