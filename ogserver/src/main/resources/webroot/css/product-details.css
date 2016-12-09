@@ -306,7 +306,7 @@ img.finish-thumbnail:hover {
     padding:0px !important;
 }
 #mycarousel-appliances .carousel-caption{
-    right: 10%;
+    right: 2%;
     padding-bottom: 25px;
     width: 20%;
     top: 5%;
@@ -372,6 +372,7 @@ img.finish-thumbnail:hover {
     #mycarousel-appliances .carousel-caption{
         padding-bottom: 25px;
         width:100%;
+        right:0;
         position: relative;
     }
 }

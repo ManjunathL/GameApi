@@ -5,18 +5,18 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/experienceCenter/experience-center.html',
+    'text!templates/mygubbiStudio/mygubbi-studio.html',
     'cloudinary_jquery',
     'slyutil',
     'mgfirebase',
     'consultutil',
     'analytics'
-], function($, _, Backbone, ExperienceCenterPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
-    var ExperienceCenterPageVIew = Backbone.View.extend({
+], function($, _, Backbone, MygubbiStudioPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+    var MygubbiStudioPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
         renderWithUserProfCallback: function(userProfData) {
-            $(this.el).html(_.template(ExperienceCenterPageTemplate)({
+            $(this.el).html(_.template(MygubbiStudioPageTemplate)({
                 'userProfile': userProfData
             }));
             $.cloudinary.responsive();
@@ -32,5 +32,5 @@ define([
             _.bindAll(this, 'renderWithUserProfCallback');
         }
     });
-    return ExperienceCenterPageVIew;
+    return MygubbiStudioPageVIew;
 });
