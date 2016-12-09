@@ -74,16 +74,16 @@ define([
                       project_statusArr = ["initiated","proposal approved","order placed","production started"];
                       break;
                 case "PACKING_LIST_AND_ACCESSORIES_LIST":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation"];
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
                       break;
                 case "INVOICES":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation"];
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
                       break;
                 case "SNAGLIST":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation"];
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
                       break;
                 case "CUSTOMER_HANDOVER":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","Installation","Handed Over"];
+                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
                       break;
             }
 console.log('-------- project_statusArr  -----------');
