@@ -178,18 +178,14 @@ public class CrmApiHandler extends AbstractRouteHandler
                 (AsyncResult<Message<Integer>> selectResult1) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult1.result().body());
                     synchronized (this) {
+
                         while (selectData.rows == null || selectData.rows.isEmpty()) {
-                            if (selectData != null ) {
-                                break;
-                            }
-                             else {
+
                                 try {
                                      wait(1000);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                            }
-
                         }
                     }
 //                    if (selectData.rows == null || selectData.rows.isEmpty())
