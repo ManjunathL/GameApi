@@ -318,7 +318,9 @@ define([
             ev.preventDefault();
             ev.stopPropagation();
             var target = $(ev.currentTarget).data('target');
-            $('.sb-search-input').val($(ev.currentTarget).text());
+            var srctxt = $(ev.currentTarget).text();
+
+            $('.sb-search-input').val(srctxt);
             $('.sb-search_suggest').slideUp();
             $('.clr-search-lnk').css('display','block');
 
