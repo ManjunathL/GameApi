@@ -325,8 +325,8 @@
     width: 50%;
 }
 
-.thought-txt h1,
-.premium-home-txt h1{
+.thought-txt h2,
+.premium-home-txt h2{
     text-transform: none!important;
     font-weight: 100!important;
     font-size: 60px!important;
