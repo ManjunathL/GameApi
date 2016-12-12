@@ -1643,7 +1643,7 @@ ul.social-buttons li a:active {
     font-weight: 300;
 }
 .kyw-wardrobe-details{
-    padding: 20px 0px 10px;
+    padding: 20px 0px 0px;
 }
 .kyw-wardrobe-details p{
     font-size: 16px;
@@ -1889,7 +1889,7 @@ ul.social-buttons li a:active {
     line-height: 150%;
 }
 .kyw-handle-card{
-    padding: 10px 20px;
+    padding: 10px 20px 0px;
 }
 .kyk-finishe-details{
     color: #ffffff;

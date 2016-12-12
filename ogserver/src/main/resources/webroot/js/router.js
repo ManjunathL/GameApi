@@ -28,7 +28,7 @@ define([
             'coffee-tables-online(/)': 'cofeeTableB',
             'buy-chest-of-drawers-online(/)': 'chestofDrawerB',
             'kitchen-cabinet-design(/)': 'kitchens',
-                        'storage-solutions(/)': 'livingDining',
+            'storage-solutions(/)': 'livingDining',
 
 //            'living-and-dining-room-designs(/)': 'livingDining',
 //            'bedroom-interior-design(/)': 'bedroom',
@@ -70,7 +70,7 @@ define([
             'book-shelf-:cityName(/)': 'bookShelfB',
             'nest-of-tables-:cityName(/)': 'nestofTableB',
             'coffee-tables-:cityName(/)': 'cofeeTableB',
-            'buy-chest-of-drawers--:cityName(/)': 'chestofDrawerB',
+            'buy-chest-of-drawers-:cityName(/)': 'chestofDrawerB',
             'modular-kitchen-:cityName(/)': 'kitchens',
             'storage-solutions-:cityName(/)': 'livingDining',
             //'wardrobes-online-:cityName(/)': 'bedroom',
