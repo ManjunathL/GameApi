@@ -105,6 +105,14 @@
       "params": []
     },
     {
+      "id": "product.select.blogTagsLatest",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog where NOT FIND_IN_SET(?,tags)",
+      "params": [
+        "tags"
+      ]
+    },
+    {
       "id": "product.select.productid",
       "type": "select",
       "query": "select id, productId, productJson from product where productId = ?",
