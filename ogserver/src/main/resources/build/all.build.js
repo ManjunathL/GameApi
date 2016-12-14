@@ -36,6 +36,7 @@
         'views/product/details_helper',
         'views/product/page',
         'views/shortlist/shortlist',
+        'views/story/full_diy',
         'views/story/full_story',
         'views/story/full_story_helper',
         'views/story/stories',
@@ -55,6 +56,9 @@
             bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
             firebase: 'libs/firebase/firebase',
             cloudinary_jquery: 'libs/cloudinary-jquery/cloudinary-jquery.min',
+            zepto: 'libs/zepto-full/zepto.min',
+            jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
+            highlight: 'libs/highlight/highlight',
             templates: '../templates'
         }
 })
