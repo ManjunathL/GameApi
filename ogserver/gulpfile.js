@@ -33,7 +33,7 @@ gulp.task('css', function(){
     'build/resources/main/webroot/fonts/pixeden/pe-icon-7-stroke/css/pe-icon-7-stroke.css',
     'build/resources/main/webroot/fonts/pixeden/pe-icon-7-stroke/css/helper.css',
     'build/resources/main/webroot/js/libs/owl.carousel/dist/assets/owl.theme.default.min.css',
-    'build/resources/main/webroot/js/libs/owl.carousel/dist/assets/owl.carousel.css'
+    'build/resources/main/webroot/js/libs/owl.carousel/dist/assets/owl.carousel.css',
     'build/resources/main/webroot/js/libs/highlight/highlight.css'
 ], { base: 'build/resources/main/webroot/css' })
 .pipe(concat('single.css'))
