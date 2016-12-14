@@ -399,7 +399,7 @@ ul, ol{
         margin: 15px 20px 10px 20px;
     }
     .festive_banner_bg {
-        min-height: 300px;
+        min-height: 1050px;
         padding: 5px 0px 5px;
     }
     .festive-form{
@@ -419,7 +419,7 @@ ul, ol{
     }
     .festive_banner_bg {
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481290153/red-plum/plam-bg-mob.jpg");
-        min-height: 300px;
+        min-height: 800px;;
         background-size: contain;
         background-position: inherit;
         padding: 25px 0px 25px;
@@ -435,7 +435,7 @@ ul, ol{
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
     .festive-form{
-        margin: 80% 0% 0%;
+        margin: 10% 0% 0%;
     }
     #owl-testimonial p{
         font-size: 14px;
