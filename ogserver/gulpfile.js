@@ -5,11 +5,11 @@ var concat = require ('gulp-concat-css');
 var exec = require('child_process').exec;
 
 gulp.task('optimizejs', function (cb) {
-//  return exec('node build/resources/main/build/r.js -o build/resources/main/build/all.build.js', function (err, stdout, stderr) {
-//    console.log(stdout);
-//    console.log(stderr);
-//    cb(err);
-//  });
+  return exec('node build/resources/main/build/r.js -o build/resources/main/build/all.build.js', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
 });
 
 gulp.task('css', function(){
