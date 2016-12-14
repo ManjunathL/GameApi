@@ -407,8 +407,8 @@ ul, ol{
     .festive-banner-head {
         text-align: center;
     }
-    .section-fun-facts{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481719166/red-plum/BG_pattern.jpg");
+    .festive-category-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481287815/red-plum/needs-bg.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
         min-height: 350px;
