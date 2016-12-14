@@ -152,7 +152,9 @@ define([
             document.title = 'About | MyGubbi';
         },
         faq: function() {
-            document.title = 'FAQs | MyGubbi';
+            document.title = 'Browse through our FAQ section to understand the process better';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Our FAQs guides you through our process and what you can expect of our services and products. Do check out the FAQ section for guidance on using our website and availing the services");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "MyGubbi FAQ ,MyGubbi warranty, MyGubbi shipping, MyGubbi returns");
         },
         terms: function() {
             document.title = 'T&C | MyGubbi';
