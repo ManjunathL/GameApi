@@ -89,6 +89,7 @@ public class SeoHandler  extends AbstractRouteHandler {
                     {
 
                         sendJsonResponse(context, selectData.getJsonDataRows("seoJson").toString());
+                       // sendJsonResponse(context, selectData.rows.toString().toString());
                     }
                 });
 
@@ -108,6 +109,8 @@ public class SeoHandler  extends AbstractRouteHandler {
                     {
 
                         sendJsonResponse(context, selectData.getJsonDataRows("seoJson").toString());
+                       // sendJsonResponse(context, selectData.rows.toString().toString());
+
                     }
                 });
 

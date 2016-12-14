@@ -161,8 +161,18 @@
                                 <div class="q-details">
                                     <h4 class="txt-color-orange"> How should I handover the house keys? </h4>
                                     <p>
-                                        We offer multiple payment methods for our buyers. You can pick any one from the below list for quick payment: Demand Draft, Cheque, NEFT Transfer
+                                        Option 1 - The client can hand over the keys to the designer at the time of final discussion.
                                     </p>
+                                    <p>
+                                        Option 2 - Clients can leave the keys at the Experience Center.
+                                    </p>
+                                    <p>
+                                        Option 3 - Clients can also come over to the site on the day of delivery with keys, in order to have the touch and feel of the products.
+                                    </p>
+                                    <p>
+                                        Option 4 - In case the client is, for various reasons, unable to drop the keys, then MyGubbi team will go to the clients place to collect it.
+                                    </p>
+                                    <p></p>
                                 </div>
 
                             </div>
@@ -903,7 +913,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="shipping" class="col-sm-12 col-md-12 col-lg-12">
                     <h1 class="section-heading"> Shipping & Packaging </h1>
                 </div>
             </div>
@@ -1172,8 +1182,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <h1 class="section-heading"> Returns </h1>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="warranty">
+                    <div id="returns">
+                        <h1 class="section-heading"> Returns </h1>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -2531,3 +2543,32 @@
     </div>-->
 
 </section>
+<script>
+$( document ).ready(function() {
+    var hash = shipping;
+    var hash1 = returns;
+    var hash2 = warranty;
+
+    if (window.location.href.trim().toLowerCase().indexOf('-shipping') > -1) {
+    $('html, body').animate({
+           scrollTop: $(hash).offset().top
+         }, 800, function(){
+         });
+    }
+
+    if (window.location.href.trim().toLowerCase().indexOf('-returns') > -1) {
+    $('html, body').animate({
+           scrollTop: $(hash1).offset().top
+         }, 800, function(){
+         });
+    }
+
+    if (window.location.href.trim().toLowerCase().indexOf('-warranty') > -1) {
+    $('html, body').animate({
+           scrollTop: $(hash2).offset().top
+         }, 800, function(){
+         });
+    }
+
+});
+</script>

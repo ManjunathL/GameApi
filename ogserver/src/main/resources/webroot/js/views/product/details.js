@@ -4,7 +4,7 @@ define([
     'backbone',
     'bootstrap',
     'jqueryeasing',
-    'text!templates/product/details.html',
+    //'text!templates/product/details.html',
     'views/product/details_helper',
     'models/product',
     'models/custom_product',

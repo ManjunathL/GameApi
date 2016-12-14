@@ -45,7 +45,8 @@ define([
          "click .wardrobe-lnk": "changeWardHandletab",
         "click .material-lnk": "changeMaterialtab",
         "click .counter-lnk": "changeCountertab",
-        "click .finishes-swatches": "changeSwatchestab"
+        "click .finishes-swatches": "changeSwatchestab",
+        "click .typefinishes": "typefinishtab"
         },
         changeSwatchestab: function(e) {
             e.preventDefault();
@@ -65,6 +66,17 @@ define([
             var id = $(e.currentTarget).attr('id');
             $(".counter-img").removeClass('active');
              $(".counter-cnt").removeClass('active');
+                $("#"+id+"-img").addClass('active');
+            $("#"+id+"-cnt").addClass('active');
+            console.log(id);
+            return this;
+        },
+        typefinishtab: function(e) {
+            e.preventDefault();
+            var currentTarget = $(e.currentTarget);
+            var id = $(e.currentTarget).attr('id');
+            $(".type-img").removeClass('active');
+             $(".type-cnt").removeClass('active');
                 $("#"+id+"-img").addClass('active');
             $("#"+id+"-cnt").addClass('active');
             console.log(id);

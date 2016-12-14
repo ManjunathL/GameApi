@@ -10,14 +10,14 @@ define([
     'slyutil',
     'mgfirebase',
     'consultutil',
-    'models/story',
+    'collections/stories',
     'text!templates/story/home_story.html',
     'analytics'
-], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Story, blogPageTemplate, Analytics) {
+], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Stories, blogPageTemplate, Analytics) {
     var CompletedProjectsPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
-        story: new Story(),
+        story: new Stories(),
         renderWithUserProfCallback: function(userProfData) {
         this.getStories();
             $(this.el).html(_.template(completedprojectsPageTemplate)({
@@ -44,7 +44,7 @@ define([
                             }).reverse();
 
                             var rec_stories = [];
-                            $.each(lateststories.slice(1,3), function(i, data) {
+                            $.each(lateststories.slice(0,2), function(i, data) {
                                 rec_stories.push(data);
                             });
                             $("#latest_blog_content").html(_.template(blogPageTemplate)({

@@ -1,17 +1,19 @@
 <section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
 
     <div class="container-fluid category-banner">
-        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-        <% if(filter.selectedCategoryName == 'kitchen'){ %>
-        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
-        <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-        <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
-        <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-        <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
-        <% } %>
-        <% }else{ %>
-        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
-        <% } %>
+        <div class="row">
+            <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+            <% if(filter.selectedCategoryName == 'kitchen'){ %>
+            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+            <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+            <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
+            <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+            <% } %>
+            <% }else{ %>
+            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <% } %>
+        </div>
     </div>
 
     <div class="container-fluid bg-white hidden-xs">
@@ -243,6 +245,7 @@
                         <% } %>
 
                         <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %>
+<!--
                         <li class="padding0-20">
                             <a
                                     class="dropdown-toggle"
@@ -254,7 +257,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                <!-- <% _.each(filterMaster.price_ranges, function(range){ %>
+                                &lt;!&ndash; <% _.each(filterMaster.price_ranges, function(range){ %>
                                  <li class="
                                  <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                                  <% _.each(filter.selectedFiltersName, function(filtername){ %>
@@ -277,11 +280,11 @@
                                          <%= range.name %>
                                      </a>
                                  </li>
-                                 <% }); %>-->
+                                 <% }); %>&ndash;&gt;
                                 <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                                 <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
                                 <li>
-                                    <!-- <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                    &lt;!&ndash; <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                      <div class="price-slide">
                                          <div class="slider-ioc">  </div>
                                      <div id="slider-range-min"></div>
@@ -289,7 +292,7 @@
                                      <div class="price-tag">
                                          <div class="pull-left"> Rs 1 </div>
                                          <div class="pull-right"> Rs 400000 </div>
-                                     </div>-->
+                                     </div>&ndash;&gt;
                                     <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
     margin-left: 26px;" />
                                     <div class="price-slide">
@@ -317,7 +320,7 @@
                                         <div class="pull-left"> Rs 0 </div>
                                         <div class="pull-right"> Rs 40000 </div>
                                     </div>
-                                    <!--   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                    &lt;!&ndash;   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                        <div class="price-slide">
                                            <div class="slider-ioc">  </div>
                                        <div id="slider-range-min2"></div>
@@ -325,12 +328,13 @@
                                        <div class="price-tag">
                                            <div class="pull-left"> Rs 1</div>
                                            <div class="pull-right"> Rs 40000 </div>
-                                       </div>-->
+                                       </div>&ndash;&gt;
                                 </li>
                                 <% } %>
                                 <% } %>
                             </ul>
                         </li>
+-->
                         <% } %>
 
                         <% if(typeof(filterMaster.styles) !== 'undefined'){ %>
@@ -459,19 +463,19 @@
 
     <!-- Filter Menu Popup -->
     <div class="filterpop hidden-lg hidden-md">
-        <!-- <div class="row margin0">
+        <!-- <div class="row">
              <h4>Filters</h4>
              <span class="button border1px position-absolute right10per" onclick="removeAllFilters()">Clear All</span>
          </div>-->
 
-        <div class="row margin0 padding20-0">
+        <div class="row padding20-0">
             <div class="col-sm-4 col-xs-4 separator-vertical">
                 <div class="row padding10_0_30 active" id="subcatFilter">
                     <% if(typeof(subcategoriesList) !== 'undefined'){ %> Sub Category <% } %>
                 </div>
-                <div class="row padding10_0_30" id="priceFilter">
+               <!-- <div class="row padding10_0_30" id="priceFilter">
                     <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %> Price Range <% } %>
-                </div>
+                </div>-->
                 <div class="row padding10_0_30" id="styleFilter">
                     <% if(typeof(filterMaster.styles) !== 'undefined'){ %> Style <% } %>
                 </div>
@@ -602,11 +606,11 @@
                 <span class="button border1px" onclick="applyFilters()">Apply</span>
             </div>
 
-            <div class="row margin0">
+            <div class="row">
                 <h5>Filters Applied :</h5>
             </div>
 
-            <div class="row margin0">
+            <div class="row">
                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
 
@@ -629,8 +633,8 @@
         <!-- Filter Menu Popup End -->
     </div>
     <!-- start menu switch -->
-    <div class="bg-color-white">
-        <div class="container">
+    <div class="bg-light-gray mt30 mb30">
+        <div class="container-fluid">
             <div class="row">
                 <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
                 <% if(filter.selectedCategoryName == 'kitchen'){ %>
@@ -729,7 +733,7 @@
 
     <div class="container-fluid bg-color-white">
         <div class="container justify">
-            <div class="category-content margin-bottom30 bg-light-gray portfolio-box padding30"></div>
+            <div class="category-content mt10 margin-bottom30 padding30"></div>
         </div>
     </div>
 

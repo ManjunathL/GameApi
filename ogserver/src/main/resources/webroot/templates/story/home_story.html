@@ -3,29 +3,35 @@
 <% if (count < 3){ %>
 <% if((typeof(story) !== 'undefined') && story.length != 0){ %>
 <% if (count == 1){ %>
-<div class="padding-top10 padding-bottom20 hidden-lg hidden-md">
+<div class="padding-bottom10 hidden-lg hidden-md">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-4">
             <img src="<%= story.blog_main_image %>"
                  class="img-responsive" alt="Experience Center" />
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-8">
+        <div class="col-lg-6 col-md-6 col-sm-8 mobile-text-center">
             <h4 class="text-normal text-mg-gray"><%= story.blog_heading %></h4>
 
             <p><div class="story-desc-overflow text-mg-gray"><%= story.blog_content %></div></p>
 
             <div>
-                <a href="/stories-all">
+                <%
+                var blog_url = story.blog_heading;
+                blog_url = blog_url.replace(/-/g,"_");
+                blog_url = blog_url.replace(/\s/g,"-");
+
+                %>
+                <a href="/story-<%= encodeURIComponent(blog_url) %>">
                     <button class="btn btn-explore">MORE</button>
                 </a>
             </div>
         </div>
     </div>
 </div>
-<div class="border-bottom-grey mb10"></div>
+<div class="border-bottom-grey mb10 hidden-xs hidden-sm hidden-md"></div>
 <% } %>
 
-<div class="padding-top10 padding-bottom20 hidden-xs hidden-sm">
+<div class="padding-bottom20 hidden-xs hidden-sm">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-4">
             <img src="<%= story.blog_main_image %>"
@@ -36,7 +42,13 @@
 
             <p><div class="story-desc-overflow text-mg-gray"><%= story.blog_content %></div></p>
             <div>
-                <a href="/stories-all">
+                <%
+                var blog_url = story.blog_heading;
+                blog_url = blog_url.replace(/-/g,"_");
+                blog_url = blog_url.replace(/\s/g,"-");
+
+                %>
+                <a href="/story-<%= encodeURIComponent(blog_url) %>">
                     <button class="btn btn-explore"> MORE </button>
                 </a>
             </div>

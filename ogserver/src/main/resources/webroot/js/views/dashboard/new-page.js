@@ -9,17 +9,24 @@ define([
     'consultutil',
     'analytics',
     'bxslider',
-    'models/story',
+    'collections/stories',
     'text!templates/dashboard/new-page.html',
     'text!templates/story/home_story.html',
+    'text!templates/story/home_interior_story.html',
+    'text!templates/story/home_trends_story.html',
+    'text!templates/story/home_architechture_story.html',
     'libs/unveil/jquery.unveil.mg'
-], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, Story, dashboardPageTemplate, blogPageTemplate){
+], function($, _, Backbone, Bootstrap, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics, BxSlider, Stories, dashboardPageTemplate, blogPageTemplate, homeInteriorBlog, homeTrendBlog, homeArchBlog){
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
-        story: new Story(),
+        story: new Stories(),
         renderWithUserProfCallback: function(userProfData) {
-                    this.getStories();
+            this.getStories();
+            this.getStoriesInteriors();
+            this.getStoriesTrends();
+            this.getStoriesArch();
+
 
             $(this.el).html(_.template(dashboardPageTemplate)({
               'userProfile': userProfData
@@ -43,19 +50,83 @@ define([
                         return Date.parse(story.date_of_publish);
                     }).reverse();
 
+
                     var rec_stories = [];
-                    $.each(lateststories.slice(1,3), function(i, data) {
+                    $.each(lateststories.slice(0,2), function(i, data) {
                         rec_stories.push(data);
                     });
                     $("#latest_blog_content").html(_.template(blogPageTemplate)({
                       'lateststories': rec_stories
                     }));
+
                 },
                 error: function(model, response, options) {
                     console.log("couldn't fetch story data - " + response);
                 }
             });
         },
+
+        getStoriesInteriors: function() {
+                    var that = this;
+                    that.story.fetch({
+                         data: {
+                             "tags": "interiors"
+                         },
+                        success: function(res) {
+                            var lateststories3 = res.toJSON();
+                            lateststories3 = _(lateststories3).sortBy(function(story) {
+                                return Date.parse(story.date_of_publish);
+                            }).reverse();
+
+                            $("#latest_interior_blog_content").html(_.template(homeInteriorBlog)({
+                              'lateststories3': lateststories3[0]
+                            }));
+                        },
+                        error: function(model, response, options) {
+                            console.log("couldn't fetch story data - " + response);
+                        }
+                    });
+                },
+        getStoriesTrends: function() {
+                            var that = this;
+                            that.story.fetch({
+                                 data: {
+                                     "tags": "trends"
+                                 },
+                                success: function(respo) {
+                                    var lateststories1 = respo.toJSON();
+                                    lateststories1 = _(lateststories1).sortBy(function(story) {
+                                        return Date.parse(story.date_of_publish);
+                                    }).reverse();
+                                    $("#latest_interior_blog_content1").html(_.template(homeTrendBlog)({
+                                      'lateststories1': lateststories1[0]
+                                    }));
+                                },
+                                error: function(model, response, options) {
+                                    console.log("couldn't fetch story data - " + response);
+                                }
+                            });
+                    },
+        getStoriesArch: function() {
+                            var that = this;
+                            that.story.fetch({
+                                 data: {
+                                     "tags": "architecture"
+                                 },
+                                success: function(result) {
+                                    var lateststories2 = result.toJSON();
+                                    lateststories2 = _(lateststories2).sortBy(function(story) {
+                                        return Date.parse(story.date_of_publish);
+                                    }).reverse();
+                                    $("#latest_interior_blog_content2").html(_.template(homeArchBlog)({
+                                      'lateststories2': lateststories2[0]
+                                    }));
+                                },
+                                error: function(model, response, options) {
+                                    console.log("couldn't fetch story data - " + response);
+                                }
+                            });
+                    },
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
@@ -132,7 +203,10 @@ define([
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             this.getStories();
-            _.bindAll(this, 'renderWithUserProfCallback', 'getStories');
+            this.getStoriesInteriors();
+            this.getStoriesTrends();
+            this.getStoriesArch();
+            _.bindAll(this, 'renderWithUserProfCallback', 'getStories', 'getStoriesInteriors','getStoriesTrends',  'getStoriesArch');
 
         },
         events: {

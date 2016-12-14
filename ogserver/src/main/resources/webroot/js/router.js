@@ -16,7 +16,7 @@ define([
             'tv-unit-cabinet(/)': 'tvUnitLD',
             'sideboard(/)': 'sideboardLD',
             'foyer-design(/)': 'foyerLD',
-            'products/Living & Dining/Foyer(/)': 'foyerLD',
+            //'products/Living & Dining/Foyer(/)': 'foyerLD',
             'l-shaped-kitchen-design(/)': 'lshapedK',
             'u-shaped-kitchen-design(/)': 'ushapedK',
             'straight-kitchen-design(/)': 'straightK',
@@ -36,13 +36,16 @@ define([
             'products/:categories(/:subcategories)(/)': prod,
 */
             'product_search-:searchTerm(/)': 'products-search',
-            'product-:id(/)': 'product',
+           // 'product-:id(/)': 'product',
             'user_profile(/)': 'user_profile',
             'consult(/)': 'consult',
             'shortlist(/)': 'shortlist',
             'careers(/)': 'careers',
             'about-mygubbi(/)': 'about',
             'faq(/)': 'faq',
+            'faq-shipping(/)': 'faq',
+            'faq-returns(/)': 'faq',
+            'faq-warranty(/)': 'faq',
             'terms(/)': 'terms',
             'privacy-policy(/)': 'privacypolicy',
             'mygubbi-difference(/)': 'mygubbidiff',
@@ -74,6 +77,8 @@ define([
             'kitchen-accessories(/)': 'kitchenAccessories',
             'kitchen-appliance(/)': 'kitchenAppliance',
             'type-of-kitchen(/)': 'typeofkitchen',
+            'ergonomics(/)': 'ergonomics',
+            'kitchen-material(/)': 'kitchenMaterial',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -547,10 +552,28 @@ define([
                 VM.create(VM.KITCHENAPPLIANCEPAGE, kitchenAppliance).render();
             });
         });
+        router.on('route:kitchenMaterial', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            require(['views/kitchenMaterial/kitchen-material'], function(kitchenMaterial) {
+                VM.create(VM.KITCHENMATERIALPAGEPAGE, kitchenMaterial).render();
+            });
+        });
+        router.on('route:kitchenMaterial', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            require(['views/kitchenMaterial/kitchen-material'], function(kitchenMaterial) {
+                VM.create(VM.KITCHENMATERIALPAGE, kitchenMaterial).render();
+            });
+        });
         router.on('route:typeofkitchen', function(actions) {
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
             require(['views/kitchentypes/typeofkitchen'], function(typeofkitchen) {
                 VM.create(VM.TYPEOFKITCHENPAGE, typeofkitchen).render();
+            });
+        });
+        router.on('route:ergonomics', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            require(['views/ergonomics/ergonomics'], function(ergonomics) {
+                VM.create(VM.ERGONOMICSPAGE, ergonomics).render();
             });
         });
         router.on('route:remarketinglp', function(actions) {

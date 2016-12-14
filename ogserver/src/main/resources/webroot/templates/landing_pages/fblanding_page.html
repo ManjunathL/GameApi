@@ -1,7 +1,10 @@
 <section class="bg-white padding-bottom20 menu-spacer">
+
     <div class="container-fluid">
-        <img data-src="<%= imgBase + 'w_auto' + '/landing_page/Banner_Final.jpg'%>"
-             class="cld-responsive img-centered" alt="mygubbi smart offer">
+        <div class="row">
+            <img src="<%= imgBase + 'w_auto' + '/landing_page/Banner_Final.jpg'%>" class="img-responsive img-centered" alt="mygubbi smart offer">
+        </div>
+
         <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">-->
         <!--&lt;!&ndash; Indicators &ndash;&gt;-->
         <!--<ol class="carousel-indicators">-->
@@ -12,27 +15,26 @@
         <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
         <!--<div class="carousel-inner mg-carousel">-->
         <!--<div class="item active">-->
-        <!--<img data-src="<%= imgBase + 'w_auto' + '/landing_page/1.jpg'%>"-->
+        <!--<img src="<%= imgBase + 'w_auto' + '/landing_page/1.jpg'%>"-->
         <!--class="cld-responsive img-centered" alt="mygubbi smart offer">-->
         <!--</div>-->
         <!--<div class="item">-->
-        <!--<img data-src="<%= imgBase + 'w_auto' + '/landing_page/2.jpg'%>"-->
+        <!--<img src="<%= imgBase + 'w_auto' + '/landing_page/2.jpg'%>"-->
         <!--class="cld-responsive img-centered" alt="mygubbi cool offer">-->
         <!--</div>-->
         <!--</div>-->
         <!--</div>-->
 
     </div>
+
     <div class="container-fluid">
         <!-- Contact Form -->
-        <div class="row margin0">
+        <div class="row">
             <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-12 col-xs-12 carousel-form-box">
-                <div class="row margin0">
-                    <h3 class="heading-center-notransform padding-bottom10 border-bottom-orange">
-                        Get your FREE design now!
-                    </h3>
-                </div>
-                <div class="row margin0">
+                <h3 class="heading-center-notransform padding-bottom10 border-bottom-orange">
+                    Get your FREE design now!
+                </h3>
+                <div class="fb-form margin0">
                     <form method="post" enctype="multipart/form-data"
                           action="https://web.mxradon.com/t/FormTracker.aspx"
                           class="width90 margin_auto paddingtop20">
@@ -79,61 +81,11 @@
                         </div>
                     </form>
                     <script type="text/javascript"> var MXLandingPageId = '5779bc96-3c62-11e6-b61b-22000aa8e760'; </script>
-
-                    <!-- <form id="contactFBLpForm1" name="consultData" data-toggle="validator" role="form"
-                           class="width90 margin_auto paddingtop20">
-                         <div class="row">
-                             <div class="margin-bottom20 form-group">
-                                 <input type="text" class="width100 form-control" placeholder="Name*"
-                                        id="contact_full_name1" name="fullName"
-                                        value="<%=userProfile ? userProfile.displayName : ''%>" required/>
-                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                                 <div class="help-block with-errors"></div>
-                             </div>
-                             <div class="margin-bottom20 form-group">
-                                 <input type="email" class="width100 form-control" placeholder="Email*"
-                                        id="contact_email_id1" name="email"
-                                        value="<%=userProfile ? userProfile.email : ''%>" required
-                                        pattern=".+@.+\..+"
-                                        title="<abc>@<xyz>.<com>"/>
-
-                                 <div class="help-block with-errors"></div>
-                             </div>
-                             <div class="margin-bottom20 form-group has-feedback">
-                                 <input type="text" class="width100 form-control" placeholder="Phone Number*"
-                                        id="contact_contact_num1" name="contactNumber"
-                                        value="<%=userProfile ? userProfile.phone : ''%>" required
-                                        pattern="\d{10}"
-                                        title="e.g. 9876543210"/>
-
-                                 <div class="help-block with-errors"></div>
-                             </div>
-
-                             <div class="align-center form-group">
-                                 <button
-                                         id="contactus-submit-btn1"
-                                         class="button-orange consult-submit-orange"
-                                         type="submit"
-                                         data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">
-                                     submit
-                                 </button>
-                             </div>
-                         </div>
-                     </form>
-
-                     <div id="message-padding" class="display-none margintop100 hidden-xs hidden-sm"></div>
-                     <div id="success-message" class="display-none">
-                         <p class="font-size18">Thank you for contacting mygubbi. Our team will get back to you
-                             as soon as possible.</p>
-
-                         <p class="font-size16 margintop40">Want to keep Exploring? Click <a
-                                 href="/products/kitchen/L Shaped Kitchen">here</a></p>
-                     </div>-->
                 </div>
             </div>
         </div>
     </div>
+
     <section class="project-description">
         <div class="container">
             <div class="row">
@@ -154,8 +106,9 @@
             </div>
         </div>
     </section>
+
     <div class="container">
-        <div class="row margin0 margin-bottom20 margin-top20">
+        <div class="row margin-bottom20 margin-top20">
             <h1 class="heading-center-notransform">
                 Bring home prosperity this Ugadi
             </h1>
@@ -163,9 +116,9 @@
                 Celebrate the New Year with finest interior products
             </h3>
         </div>
-        <div class="row margin0">
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
-                <div class="col-lg-12 col-md-12 bg-green padding-top15 height300">
+                <div class="bg-green padding-top15 height300">
                     <h1 class="heading-center-notransform">Assured Gift</h1>
 
                     <h1 class="heading-center-notransform">@</h1>
@@ -175,14 +128,15 @@
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-orange text-color-white height300">
-                    <div class="row margin0 margin-bottom20">
-                        <h3 class="heading-center-notransform">
+                <div class="bg-orange text-color-white height300 padding10">
+
+                    <div class="margin-bottom20">
+                        <h3 class="heading-center-notransform margin0 pt20">
                             Contact Us
                         </h3>
                     </div>
 
-                    <div class="row margin0">
+                    <div class="address-box">
                         <div class="row align-left">
                             <a href="https://www.google.co.in/maps/place/Orange+Gubbi+technologies/@12.9174948,77.6451492,15z"
                                target="_blank">
@@ -221,20 +175,22 @@
                         </div>
                     </div>
 
-                    <div class="row margin0 margin-bottom10 height300">
+                    <div class="margin-bottom10 height300">
                         <ul class="list-inline social-links align-center">
                             <li>
-                                <a href="https://twitter.com/my_gubbi" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="https://twitter.com/my_gubbi" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
                             </li>
                             <li>
-                                <a href="https://facebook.com/mygubbi" target="_blank"><i
-                                        class="fa fa-facebook"></i></a>
+                                <a href="https://facebook.com/mygubbi" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
                             </li>
                         </ul>
                     </div>
 
                 </div>
-
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-4 margin-top10 padding20">
@@ -246,259 +202,56 @@
         </div>
     </div>
 
-    <div class="container-fluid bg-light-green align-center padding0-10per">
-        <h2 class="heading-center-notransform margin-top40">
-            Sneak-peek about us:
-        </h2>
+    <div class="bg-light-green align-center">
+        <div class="container">
+            <h2 class="heading-center-notransform margin-top40">
+                Sneak-peek about us:
+            </h2>
 
-        <div class="row margin0 margin-bottom20">
-            <p class="font-size16 justify">
-                mygubbi.com is a fast growing online home interior decor and furnishing company. We provide end-to-end
-                solutions, right from designing to the delivery of the product. Our sophisticated designs are customized
-                to keep your taste in mind. You can choose from our wide category of products; including kitchen units,
-                wardrobes, entertainment units, shoe racks, tables and more. Our team is highly qualified and have the
-                best interest in offering stylish, practical and classy interiors for your home. We, at mygubbi.com
-                understand the need for functional yet stylish home-décor which is sure to meet your need.
-            </p>
-            <p class="font-size16">
-                Step into a home that you always wanted
-            </p>
+            <div class="row margin-bottom20">
+                <div class="col-sm-12 com-md-12">
+                    <p class="font-size16 justify">
+                        mygubbi.com is a fast growing online home interior decor and furnishing company. We provide end-to-end
+                        solutions, right from designing to the delivery of the product. Our sophisticated designs are customized
+                        to keep your taste in mind. You can choose from our wide category of products; including kitchen units,
+                        wardrobes, entertainment units, shoe racks, tables and more. Our team is highly qualified and have the
+                        best interest in offering stylish, practical and classy interiors for your home. We, at mygubbi.com
+                        understand the need for functional yet stylish home-décor which is sure to meet your need.
+                    </p>
+                    <p class="font-size16">
+                        Step into a home that you always wanted
+                    </p>
+                </div>
+            </div>
         </div>
-
     </div>
 
-    <!--<div class="container">-->
-    <!--<h1 class="heading-center-notransform margin-top40">-->
-    <!--Stop over this week and take away Gift vouchers worth 20K-->
-    <!--</h1>-->
-
-    <!--<h3 class="heading-center-notransform">-->
-    <!--You can redeem them anytime-->
-    <!--</h3>-->
-
-    <!--<div class="row margin0 margin-top20 margin-bottom20">-->
-
-    <!--<div class="col-lg-6 col-md-6 col-sm-6">-->
-    <!--<div class="row margin0 margin-bottom15">-->
-    <!--<div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">-->
-    <!--<img data-src="<%= imgBase + 'w_auto' + '/landing_page/01_03.png'%>"-->
-    <!--class="cld-responsive"-->
-    <!--alt="5 years warranty">-->
-    <!--</div>-->
-    <!--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">-->
-    <!--<h4 class="text-transform-none color-orange">-->
-    <!--5 Year Warranty-->
-    <!--</h4>-->
-    <!--<span class="font-size14">-->
-    <!--on every product-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="row margin0 margin-bottom15">-->
-    <!--<div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">-->
-    <!--<img data-src="<%= imgBase + 'w_auto' + '/landing_page/02_03.png'%>"-->
-    <!--class="cld-responsive"-->
-    <!--alt="45 days delivery">-->
-    <!--</div>-->
-    <!--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">-->
-    <!--<h4 class="text-transform-none color-orange">-->
-    <!--45 days delivery-->
-    <!--</h4>-->
-    <!--<span class="font-size14">-->
-    <!--Guaranteed-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="row margin0 margin-bottom15">-->
-    <!--<div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">-->
-    <!--<img data-src="<%= imgBase + 'w_auto' + '/landing_page/03_03.png'%>"-->
-    <!--class="cld-responsive"-->
-    <!--alt="Free Maintenance">-->
-    <!--</div>-->
-    <!--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">-->
-    <!--<h4 class="text-transform-none color-orange">-->
-    <!--Free Maintenance-->
-    <!--</h4>-->
-    <!--<span class="font-size14">-->
-    <!--for 3 year-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="row margin0 margin-bottom15">-->
-    <!--<div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">-->
-    <!--<img data-src="<%= imgBase + 'w_auto' + '/landing_page/05_03.png'%>"-->
-    <!--class="cld-responsive"-->
-    <!--alt="Easy EMI Options">-->
-    <!--</div>-->
-    <!--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">-->
-    <!--<h4 class="text-transform-none color-orange">-->
-    <!--Easy EMI options-->
-    <!--</h4>-->
-    <!--<span class="font-size14">-->
-    <!--via Bajaj Finserv-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="row margin0 margin-bottom15">-->
-    <!--<div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-2 align-right">-->
-    <!--<img data-src="<%= imgBase + 'w_auto' + '/landing_page/6_03.png'%>"-->
-    <!--class="cld-responsive"-->
-    <!--alt="Alliance Partners">-->
-    <!--</div>-->
-    <!--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 align-center">-->
-    <!--<h4 class="text-transform-none color-orange">-->
-    <!--Hettich & Hafele-->
-    <!--</h4>-->
-    <!--<span class="font-size14">-->
-    <!--are our alliance partners-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--</div>-->
-
-    <!--<div class="col-lg-5 col-md-5 col-sm-5 bg-orange-gray">-->
-    <!--<p id="form-heading" class="consult-form-heading">-->
-    <!--Design Your my<span class="color-orange">gubbi</span>-->
-    <!--Home</p>-->
-
-    <!--<div class="row display-none" id="contact_error_row">-->
-    <!--<p class="margin0 error-text align-center" id="contact_error"></p>-->
-    <!--</div>-->
-
-    <!--<form id="contactLpForm2" name="consultData" data-toggle="validator" role="form"-->
-    <!--class="width90 margin_auto paddingtop20">-->
-    <!--<div class="row">-->
-    <!--<div class="margin-bottom20 form-group">-->
-    <!--<input type="text" class="width100 form-control" placeholder="Name*"-->
-    <!--id="contact_full_name2" name="fullName"-->
-    <!--value="<%=userProfile ? userProfile.displayName : ''%>" required/>-->
-    <!--<span class="glyphicon form-control-feedback" aria-hidden="true"></span>-->
-
-    <!--<div class="help-block with-errors"></div>-->
-    <!--</div>-->
-    <!--<div class="margin-bottom20 form-group">-->
-    <!--<input type="email" class="width100 form-control" placeholder="Email*"-->
-    <!--id="contact_email_id2" name="email"-->
-    <!--value="<%=userProfile ? userProfile.email : ''%>" required-->
-    <!--pattern=".+@.+\..+"-->
-    <!--title="<abc>@<xyz>.<com>"/>-->
-
-    <!--<div class="help-block with-errors"></div>-->
-    <!--</div>-->
-    <!--<div class="margin-bottom20 form-group has-feedback">-->
-    <!--<input type="text" class="width100 form-control" placeholder="Phone Number*"-->
-    <!--id="contact_contact_num2" name="contactNumber"-->
-    <!--value="<%=userProfile ? userProfile.phone : ''%>" required pattern="\d{10}"-->
-    <!--title="e.g. 9876543210"/>-->
-
-    <!--<div class="help-block with-errors"></div>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-    <!--<div class="margin-bottom20 form-group">-->
-    <!--<textarea class="width100 form-control" id="contact_requirement2"-->
-    <!--name="requirements"-->
-    <!--placeholder="Describe your Requirements / Queries"></textarea>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="margin-bottom20 form-group">-->
-    <!--<input type="text" class="width100 form-control" placeholder="Property Name"-->
-    <!--name="propertyName" value=""-->
-    <!--id="contact_property_name2"/>-->
-    <!--<span class="glyphicon form-control-feedback" aria-hidden="true"></span>-->
-
-    <!--<div class="help-block with-errors"></div>-->
-    <!--</div>-->
-    <!--<div class="margin-bottom20 form-group">-->
-    <!--<label for="contact_floorplan2">Upload Floorplan</label>-->
-    <!--<input type="file" class="width100 form-control" placeholder="Floorplan"-->
-    <!--name="floorPlan" value=""-->
-    <!--id="contact_floorplan2" accept=".pdf,.jpg,.jpeg,.png"/>-->
-    <!--<span class="glyphicon form-control-feedback" aria-hidden="true"></span>-->
-
-    <!--<div class="help-block with-errors"></div>-->
-    <!--</div>-->
-    <!--<div class="align-center form-group">-->
-    <!--<button-->
-    <!--id="contactus-submit-btn2"-->
-    <!--class="button-orange margin-top20 margin-bottom20 consult-submit-orange"-->
-    <!--type="submit"-->
-    <!--data-loading-text="<i class='fa fa-spinner fa-spin'></i> submit">-->
-    <!--submit-->
-    <!--</button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</form>-->
-
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="container-fluid  hidden-sm hidden-xs flip-container bg-orange-gray margin-top40">-->
-    <!--<div class="col-lg-12 text-center margin-top25 margin-bottom20">-->
-    <!--<h2 class="consult-h3" style="text-transform:initial;">What do we offer at-->
-    <!--<span class="color-orange">The Experience Centre ?</span>-->
-    <!--</h2>-->
-    <!--</div>-->
-    <!--<div class="flip-div">-->
-    <!--<div class="flip-cards">-->
-    <!--<div class="front-card">-->
-    <!--<img class="width100" src="<%= imgBase %>consult/1a.png" alt="Consultation & Planning">-->
-    <!--</div>-->
-    <!--<div class="reverse-card">-->
-    <!--<img class="width100" src="<%= imgBase %>consult/1b.png" alt="Consultation & Planning">-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="flip-cards">-->
-    <!--<div class="front-card">-->
-    <!--<img class="width100" src="<%= imgBase %>consult/2a.png" alt="Consultation & Planning">-->
-    <!--</div>-->
-    <!--<div class="reverse-card">-->
-    <!--<img class="width100" src="<%= imgBase %>consult/2b.png" alt="Consultation & Planning">-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="flip-cards">-->
-    <!--<div class="front-card">-->
-    <!--<img class="width100" src="<%= imgBase %>consult/3a.png" alt="Consultation & Planning">-->
-    <!--</div>-->
-    <!--<div class="reverse-card">-->
-    <!--<img class="width100" src="<%= imgBase %>consult/3b.png" alt="Consultation & Planning">-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-
     <div class="container">
-        <h3 class="heading-center-notransform margin-top40">
-            Introducing
-        </h3>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="heading-center-notransform margin-top40">
+                    Introducing
+                </h3>
 
-        <h1 class="heading-center-notransform">
-                        <span class="color-orange">
-                            The Experience Centre</span>
-            @ mygubbi
-            </span>
-        </h1>
+                <h1 class="heading-center-notransform">
+                    <span class="color-orange"> The Experience Centre </span> @ mygubbi
+                </h1>
+            </div>
+        </div>
 
-        <div class="row margin0 margin-top25">
 
-            <div class="width80 div-align-center">
-                <div class="row margin0 justify font-size16">
+        <div class="row margin-top25">
+
+            <div class="col-md-offset-1 col-sm-10 col-md-offset-1 col-md-10">
+                <div class="justify font-size16">
                     A day visit to The Experience Centre will put all our creativity and imagination at your fingertips.
                     We at The Experience Centre offer complete Interior Design & Decor Services to renovate, decorate
                     and furnish each property
                 </div>
 
-                <div class="row margin0 margin-top20">
+                <div class="row margin-top20">
                     <div class="col-lg-6 col-md-6 col-sm-6">
-                        <img
-                                data-src="<%= imgBase + 'w_auto' + '/landing_page/img1_11.png'%>"
-                                class="cld-responsive">
+                        <img src="<%= imgBase + 'w_auto' + '/landing_page/img1_11.png'%>" class="cld-responsive img-responsive">
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <h3 class="text-transform-none">
@@ -514,16 +267,13 @@
                     </div>
                 </div>
 
-                <div class="row margin0 margin-top20">
+                <div class="row  margin-top20">
                     <div class="col-lg-6 col-md-6 col-sm-6">
-                        <img
-                                data-src="<%= imgBase + 'w_auto' + '/landing_page/img2_11.png'%>"
-                                class="cld-responsive">
+                        <img src="<%= imgBase + 'w_auto' + '/landing_page/img2_11.png'%>" class="cld-responsive img-responsive">
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <h3 class="text-transform-none">
-                                <span class="color-orange">Don't confuse
-                                this</span> with a furniture store.
+                            <span class="color-orange">Don't confuse this </span> with a furniture store.
                         </h3>
 
                         <p class="font-size16">
@@ -535,7 +285,7 @@
                     </div>
                 </div>
 
-                <div class="row margin0 margin-top40 align-center">
+                <div class="row  margin-top40 align-center">
                     <a href="/consult">
                         <h3 class="heading_with_border">
                             Book your consultation
@@ -627,7 +377,7 @@
                                                         I am proud to recommend myubbi for all interior design needs.</p></blockquote></div>
                                                     <div class="testmonial-cust-dtls">
                                                         Mrs Dilip Seshadri
-                                                        <span><b> Shobha Habitech </b></span>
+                                                        <span><b> Sobha Habitech </b></span>
                                                         <span>Bangalore</span>
                                                     </div>
                                                 </div>
@@ -708,7 +458,7 @@
                                                     </p></blockquote></div>
                                                     <div class="testmonial-cust-dtls">
                                                         Mrs Dilip Seshadri
-                                                        <span><b> Shobha Habitech </b></span>
+                                                        <span><b> Sobha Habitech </b></span>
                                                         <span>Bangalore</span>
                                                     </div>
                                                 </div>
@@ -790,7 +540,7 @@
                                                     </p></blockquote></div>
                                                     <div class="testmonial-cust-dtls">
                                                         Mrs Dilip Seshadri
-                                                        <span><b> Shobha Habitech </b></span>
+                                                        <span><b> Sobha Habitech </b></span>
                                                         <span>Bangalore</span>
                                                     </div>
                                                 </div>
