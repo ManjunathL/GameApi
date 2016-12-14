@@ -10,7 +10,7 @@ gulp.task('optimizejs', function (cb) {
     console.log(stderr);
     cb(err);
   });
-});
+})
 
 gulp.task('css', function(){
     return gulp.src([

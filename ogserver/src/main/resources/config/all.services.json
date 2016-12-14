@@ -19,12 +19,12 @@
         "name": "com.mygubbi.apiserver.ApiServerVerticle",
         "worker": false
       },
-      {
-        "name": "com.mygubbi.search.SearchService"
-      },
-      {
-        "name": "com.mygubbi.si.firebase.FirebaseService"
-      },
+//      {
+//        "name": "com.mygubbi.search.SearchService"
+//      },
+//      {
+//        "name": "com.mygubbi.si.firebase.FirebaseService"
+//      },
       {
         "name": "com.mygubbi.catalog.ProductManagementService"
       },
