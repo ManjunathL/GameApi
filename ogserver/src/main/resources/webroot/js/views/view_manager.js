@@ -8,6 +8,7 @@ define(function() {
         SHORTLIST: "shortlist",
         STORIES: "stories",
         STORY: "story",
+        DIY: "diy",
         ABOUT: "about",
         TERMS: "terms",
         PRIVACY_POLICY: "privacy_policy",

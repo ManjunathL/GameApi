@@ -32,8 +32,6 @@
                 <%  _.each(a_srch, function(as){
                 if(as && as.resultName){ %>
                 <a href="#" class="sb-search-txt"><p><%= as.resultName %></p></a>
-                console.log("=============");
-                console.log(as.resultName);
                 <% } }); %>
 
                 <% if(typeof(p_srch) !== 'undefined' && ((Object.keys(p_srch).length) !== 0)) {

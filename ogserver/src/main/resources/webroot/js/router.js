@@ -48,6 +48,7 @@ define([
             'mygubbi-difference(/)': 'mygubbidiff',
             'stories-:blogcategory(/)': 'stories',
             'story-:name(/)': 'story',
+            'diy-:name(/)': 'diy',
             'thankyou-:page(/)':'thankyou',
             'lp(/)':'landingpage',
             'oglp(/)':'newlandingpage',
@@ -430,6 +431,18 @@ define([
                     }
                 };
                 VM.create(VM.STORY, FullStoryPage, options).render();
+            });
+        });
+        router.on('route:diy', function(name) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            require(['views/story/full_diy'], function(FullDiyPage) {
+
+                var options = {
+                    model: {
+                        "name": name
+                    }
+                };
+                VM.create(VM.DIY, FullDiyPage, options).render();
             });
         });
         router.on('route:thankyou', function(actions) {

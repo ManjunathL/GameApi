@@ -5,12 +5,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'highlight',
     'collections/stories',
     'models/story',
     'analytics',
     'text!templates/story/full_story.html',
     'views/story/full_story_helper'
-], function($, _, Backbone, Stories, Story, Analytics, fullStoryTemplate, FullStoryHelper) {
+], function($, _, Backbone, Highlight, Stories, Story, Analytics, fullStoryTemplate, FullStoryHelper) {
     var FullStoryView = Backbone.View.extend({
         el: '.page',
         story: new Story(),
@@ -28,7 +29,7 @@ define([
            blog_name = blog_name.replace(/-/g, ' ');
            //blog_name = blog_name.replace(/_/, '-');
 
-           console.log(blog_name);
+           //console.log(blog_name);
 
             this.stories.fetch({
                 success: function() {
@@ -50,7 +51,7 @@ define([
             delete stories.id;
 
             _.find(stories, function(item, index) {
-                if (item.blog_heading == name) {
+                if (item.blogId == name) {
                     full_story = item;
                 }
             });
@@ -65,9 +66,6 @@ define([
             $.each(stories.slice(1,4), function(i, data) {
                 rec_stories.push(data);
             });
-
-            console.log("rec_stories");
-            console.log(rec_stories);
 
             var fullTemp = _.template(fullStoryTemplate);
 

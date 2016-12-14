@@ -15,8 +15,6 @@
 	.special{
 	}
 </style>
-<link rel="stylesheet" href="/js/libs/highlight/highlight.css">
-<script type="text/javascript" src="/js/libs/highlight/highlight.js"></script>
 <section class="menu-spacer bg-color-white">
 
     <!-- Start story bg -->
@@ -70,7 +68,7 @@
                                 blog_url = blog_url.replace(/-/g,"_");
                                 blog_url = blog_url.replace(/-/g," ");
                                 blog_url = blog_url.replace(/\s/g,"-");
-                                console.log(blog_url);
+                                //console.log(blog_url);
 
                                 %>
                                 <% if(typeof(bgstory) !== 'undefined' && bgstory != ""){ %>
@@ -198,7 +196,7 @@
                         blog_url = blog_url.replace(/-/g,"_");
                         blog_url = blog_url.replace(/-/g," ");
                         blog_url = blog_url.replace(/\s/g,"-");
-                        console.log(blog_url);
+                        //console.log(blog_url);
 
                         %>
 
@@ -310,12 +308,22 @@
                                 <% if(typeof(stories) !== 'undefined'){ count = 1; %>
                                 <% _.each(stories, function(bgstory){ %>
                                 <% if(typeof(bgstory) !== 'undefined' && bgstory != ""){ %>
+
+                                <%
+                                var blog_url = bgstory.blogId;
+                                blog_url = blog_url.replace(/-/g,"_");
+                                blog_url = blog_url.replace(/-/g," ");
+                                blog_url = blog_url.replace(/\s/g,"-");
+                                //console.log(blog_url);
+
+                                %>
+
                                 <% if(count > 5){ %>
                                 <% if (count % 2 != 0) { %>
 
                                 <div class="special pb20 pl10 pr10">
                                     <div class="show-blog-img">
-                                        <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
+                                        <a href="/story-<%= encodeURIComponent(blog_url) %>">
                                         <img
                                             src="<%= bgstory.blog_main_image %>"
                                             class="img-responsive"
@@ -325,7 +333,7 @@
                                         </a>
                                     </div>
                                     <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
-                                    <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
+                                    <a href="/story-<%= encodeURIComponent(blog_url) %>">
                                     <h2 class="txt-urstory media-txt-title">
                                     <%= bgstory.blog_heading %>
                                     <!--<%= "Count Odd :-"+ count %>-->
@@ -419,97 +427,83 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
                 <h2 class="txt-urstory media-txt-title">Latest From The Blog</h2>
                 </div>
+                <% if(typeof(latest_stories) !== 'undefined'){ count = 1; %>
+                <% _.each(latest_stories, function(latestblog){ %>
+
+                <%
+                var latestblog_url = latestblog.blogId;
+                latestblog_url = latestblog_url.replace(/-/g,"_");
+                latestblog_url = latestblog_url.replace(/-/g," ");
+                latestblog_url = latestblog_url.replace(/\s/g,"-");
+                %>
+
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <div class="pb20">
-                        <div class="show-blog-img">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474613385/stories/colour-palete.jpg" class="img-responsive" title="How Pattern Play Helps Designers" alt="How Pattern Play Helps Designers" style="height: 350px;">
+                        <div class="show-blog-img" style="height:350px;">
+                            <a href="/story-<%= encodeURIComponent(latestblog_url) %>">
+                                <img
+                                        src="<%= latestblog.blog_main_image %>" style="height:350px;"
+                                        class="img-responsive object-fit_cover"
+                                        title="<%= latestblog.blog_heading %>"
+                                        alt="<%= latestblog.blog_heading %>"
+                                >
+                            </a>
                         </div>
-                        <p class="text-muted text-left date">Sep 5, 2016 | by mygubbi</p>
-                        <a href="/story-How%20Pattern%20Play%20Helps%20Designers">
+                        <p class="text-muted text-left date"><%= latestblog.date_of_publish %> | by <%= latestblog.author %></p>
+                        <a href="/story-<%= encodeURIComponent(latestblog_url) %>">
                             <h2 class="txt-urstory media-txt-title font-size16">
-                                How Pattern Play Helps Designers
+                                <%= latestblog.blog_heading %>
                             </h2>
                         </a>
                         <p class="font-size14">
-                            <span class="blog-borderbtm">trends n style</span>
-
-                            |
-                            <span class="blog-borderbtm">interiors</span>
+                            <% var cnt = 0; %>
+                            <% _.each(latestblog.blog_categories, function(cat){ %>
+                            <% if(cnt != 0) { %> | <% } %>
+                            <span class="blog-borderbtm"><%= cat %></span>
+                            <% cnt = cnt + 1; }); %>
 
                         </p>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <div class="pb20">
-                        <div class="show-blog-img">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1476355773/stories/stone-bathrooms.jpg" class="img-responsive" title="5 ways to create stone based bathroom" alt="5 ways to create stone based bathroom" style="height: 350px;">
-                        </div>
-                        <p class="text-muted text-left date">Sep 30, 2016 | by mygubbi</p>
-                        <a href="/story-5%20ways%20to%20create%20stone%20based%20bathroom">
-                            <h2 class="txt-urstory media-txt-title font-size16">
-                                5 ways to create stone based bathroom
-                            </h2>
-                        </a>
-                        <p class="font-size14">
-                            <span class="blog-borderbtm">design</span>
-
-                            |
-                            <span class="blog-borderbtm">architecture</span>
-
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <div class="pb20">
-                        <div class="show-blog-img">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1477548536/stories/wrong-interiors.jpg" class="img-responsive" title="5 Common Mistakes in Interiors and What to Do" alt="5 Common Mistakes in Interiors and What to Do" style="height: 350px;">
-                        </div>
-                        <p class="text-muted text-left date">Oct 03, 2016 | by mygubbi</p>
-                        <a href="/story-5%20Common%20Mistakes%20in%20Interiors%20and%20What%20to%20Do">
-                            <h2 class="txt-urstory media-txt-title font-size16">
-                                5 Common Mistakes in Interiors and What to Do
-                            </h2>
-                        </a>
-                        <p class="font-size14">
-                            <span class="blog-borderbtm">interiors</span>
-
-                            |
-                            <span class="blog-borderbtm">design</span>
-
-                        </p>
-                    </div>
-                </div>
+                <% }); %>
+                <% } %>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h2 class="txt-urstory media-txt-title">DIY Corner</h2>
                 </div>
+                <% if(typeof(diys) !== 'undefined'){ count = 1; %>
+                <% _.each(diys, function(diy){ %>
+
+                <%
+                var diy_url = diy.diyId;
+                diy_url = diy_url.replace(/-/g,"_");
+                diy_url = diy_url.replace(/-/g," ");
+                diy_url = diy_url.replace(/\s/g,"-");
+
+                %>
                 <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="pb20">
                         <div class="show-blog-img">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1477548536/stories/wrong-interiors.jpg" class="img-responsive" title="5 Common Mistakes in Interiors and What to Do" alt="5 Common Mistakes in Interiors and What to Do">
+                            <a href="/diy-<%= encodeURIComponent(diy_url) %>">
+                                <img
+                                        src="<%= diy.diy_main_image %>"
+                                        class="img-responsive"
+                                        title="<%= diy.diy_heading %>"
+                                        alt="<%= diy.diy_heading %>"
+                                >
+                            </a>
                         </div>
-                        <p class="text-muted text-left date font-size14">Oct 03, 2016 | by mygubbi</p>
-                        <a href="/story-5%20Common%20Mistakes%20in%20Interiors%20and%20What%20to%20Do">
+                        <p class="text-muted text-left date font-size14"><%= diy.date_of_publish %> | by <%= diy.author %></p>
+                        <a href="/diy-<%= encodeURIComponent(diy_url) %>">
                             <h2 class="txt-urstory media-txt-title font-size14">
-                                5 Common Mistakes in Interiors and What to Do
+                                <%= diy.diy_heading %>
                             </h2>
                         </a>
                     </div>
                 </div>
-                <div class="col-sm-4 col-md-4 col-lg-4">
-                    <div class="pb20">
-                        <div class="show-blog-img">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1477548536/stories/wrong-interiors.jpg" class="img-responsive" title="5 Common Mistakes in Interiors and What to Do" alt="5 Common Mistakes in Interiors and What to Do">
-                        </div>
-                        <p class="text-muted text-left date font-size14">Oct 03, 2016 | by mygubbi</p>
-                        <a href="/story-5%20Common%20Mistakes%20in%20Interiors%20and%20What%20to%20Do">
-                            <h2 class="txt-urstory media-txt-title font-size14">
-                                5 Common Mistakes in Interiors and What to Do
-                            </h2>
-                        </a>
-                    </div>
-                </div>
+                <% }); %>
+                <% } %>
             </div>
         </div>
     </div>

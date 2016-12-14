@@ -1755,6 +1755,22 @@ input[type=checkbox] {
     position: relative;
     float: left;
 }
+
+.highlight {
+    background-color: #fff34d;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.highlight {
+    padding:1px 4px;
+    margin:0 -4px;
+}
+
 /* End Blog */
 
 /*********************************
@@ -1943,4 +1959,31 @@ input[type=checkbox] {
         left: 40%;
     }
     /* End Platinum Page */
+}
+
+/* Image attributes */
+
+.object-fit_fill {
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.object-fit_contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.object-fit_cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.object-fit_none {
+  -o-object-fit: none;
+     object-fit: none;
+}
+
+.object-fit_scale-down {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }

@@ -16,6 +16,7 @@ require.config({
         unveil: 'libs/unveil/jquery.unveil.mg',
         zepto: 'libs/zepto-full/zepto.min',
         jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
+        highlight: 'libs/highlight/highlight',
         templates: '../templates'
     },
     shim: {
