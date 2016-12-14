@@ -62,7 +62,7 @@ define([
             //console.log(_(stories).pluck('date_of_publish'));
 
             var rec_stories = [];
-            $.each(stories.slice(1,4), function(i, data) {
+            $.each(stories.slice(0,4), function(i, data) {
                 rec_stories.push(data);
             });
 
@@ -72,7 +72,7 @@ define([
             var fullTemp = _.template(fullStoryTemplate);
 
             $(this.el).html(fullTemp({
-                'rec_stories': rec_stories,
+                'stories': rec_stories,
                 'full_story': full_story
             }));
 
