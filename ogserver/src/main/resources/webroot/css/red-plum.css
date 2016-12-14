@@ -80,7 +80,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481290153/red-plum/plam-bg.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: 650px;
+    min-height: 650px;;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -97,8 +97,8 @@ ul, ol{
 
 .festive-banner-head {
     line-height: 140%;
-    font-size: 44px;
-    margin-top: 60px;
+    font-size: 42px;
+    padding-top: 80px;
     font-weight: 600;
     text-transform: capitalize;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
@@ -157,7 +157,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481286071/red-plum/plum-offer.png");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 390px;
+    min-height: 350px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -281,7 +281,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481287815/red-plum/needs-bg.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 480px;
+    min-height: 480px;;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -340,16 +340,7 @@ ul, ol{
     font-family: 'Lato', sans-serif;
 }
 
-@media (max-width: 1300px) {
-    .festive_banner_bg {
-        min-height: 610px;
-        width: 100%;
-    }
-}
-@media (min-width: 1300px) {
-    .festive-container {
-        width: 1260px;
-    }
+@media (min-width: 1280px) {
     .festive-form .festive-form-wrapper {
         padding: 10px 45px;
     }
@@ -365,6 +356,7 @@ ul, ol{
     .prn{
         padding-right: 0px;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -384,13 +376,27 @@ ul, ol{
         top: 5px;
         width: 135px;
     }
-    .festive_banner_bg {
-        min-height: 300px;
-        padding: 25px 0px 25px;
 
-    }
     .de_count {
         min-height: 230px;
+    }
+    .section-fun-facts{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481719166/red-plum/BG_pattern.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 350px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        color: #ffffff;
+        padding: 20px 0px 50px;
     }
 }
 @media (max-width: 767px) {
@@ -398,35 +404,52 @@ ul, ol{
         width: 150px;
         margin: 15px 20px 10px 20px;
     }
-    .festive_banner_bg {
-        min-height: 1050px;
-        padding: 5px 0px 5px;
-    }
-    .festive-form{
-        margin: 5% 0% 5%;
-    }
     .festive-banner-head {
         text-align: center;
     }
+    .section-fun-facts{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481719166/red-plum/BG_pattern.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 350px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        color: #ffffff;
+        padding: 20px 0px 50px;
+    }
 }
 @media (max-width: 420px) {
+    .festive_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481290153/red-plum/plam-bg-mob.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
+    .festive-form h3{
+        font-size: 22px;
+    }
     .navbar-festive .navbar-brand img {
-        width: 150px;
-        margin: 15px 20px 10px 20px;
+        width: 145px;
+        margin: 25px 20px 10px 20px;
     }
     .de_count {
         min-height: 125px;
     }
-    .festive_banner_bg {
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481290153/red-plum/plam-bg-mob.jpg");
-        min-height: 800px;
-        background-size: contain;
-        background-position: inherit;
-        padding: 25px 0px 25px;
-    }
     .festive-banner-head {
         text-align: center;
-        padding: 5px 5px;
+        padding: 10px;
         line-height: 130%;
         font-size: 24px;
         margin-top: 10%;
@@ -434,8 +457,8 @@ ul, ol{
         text-transform: capitalize;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .festive-form{
-        margin: 10% 0% 0%;
+    .festive-mob-form{
+        padding: 0px;
     }
     #owl-testimonial p{
         font-size: 14px;
@@ -444,7 +467,6 @@ ul, ol{
         padding: 5px 0px;
     }
     .section-fun-facts {
-        background: #e8193e;
         color: #ffffff;
         padding: 20px 0px 10px;
     }

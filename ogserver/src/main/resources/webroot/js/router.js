@@ -125,6 +125,7 @@ define([
             'type-of-kitchen(/)': 'typeofkitchen',
             'ergonomics(/)': 'ergonomics',
             'kitchen-material(/)': 'kitchenMaterial',
+            'payment(/)': 'payment',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -671,7 +672,15 @@ define([
             document.title = 'Kitchen Material | MyGubbi';
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/kitchenMaterial/kitchen-material'], function(kitchenMaterial) {
-                VM.create(VM.KITCHENMATERIALPAGEPAGE, kitchenMaterial).render();
+                VM.create(VM.KITCHENMATERIALPAGE, kitchenMaterial).render();
+            });
+        });
+
+        router.on('route:payment', function(actions) {
+            document.title = 'Kitchen Material | MyGubbi';
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+            require(['views/payment/payment'], function(payment) {
+                VM.create(VM.PAYMENTPAGE, payment).render();
             });
         });
 
