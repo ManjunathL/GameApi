@@ -15,8 +15,6 @@
 	.special{
 	}
 </style>
-<link rel="stylesheet" href="/js/libs/highlight/highlight.css">
-<script type="text/javascript" src="/js/libs/highlight/highlight.js"></script>
 <section class="menu-spacer bg-color-white">
 
     <!-- Start story bg -->
@@ -36,25 +34,25 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 pt30 pb30">
                     <ul id="blog-menu-list" class="nav navbar-center navbar-nav blog-menu">
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "all")){ %> class="active" <% } %> ><a href="/stories-all">Home</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "all")){ %> class="active" <% } %>><a href="/stories-all">Home</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "trends")){ %> class="active" <% } %> ><a href="/stories-trends">Trends & Styles</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "trends")){ %> class="active" <% } %>><a href="/stories-trends">Trends & Styles</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "interiors")){ %> class="active" <% } %> ><a href="/stories-interiors">Interiors</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "interiors")){ %> class="active" <% } %>><a href="/stories-interiors">Interiors</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "architecture")){ %> class="active" <% } %> ><a href="/stories-architecture">Architecture</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "architecture")){ %> class="active" <% } %>><a href="/stories-architecture">Architecture</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "design")){ %> class="active" <% } %> ><a href="/stories-design">Design</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "design")){ %> class="active" <% } %>><a href="/stories-design">Design</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "outdoor")){ %> class="active" <% } %> ><a href="/stories-outdoor">Outdoors</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "outdoor")){ %> class="active" <% } %>><a href="/stories-outdoor">Outdoors</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "kitchen")){ %> class="active" <% } %> ><a href="/stories-kitchen">Kitchen</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "kitchen")){ %> class="active" <% } %>><a href="/stories-kitchen">Kitchen</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "bathroom")){ %> class="active" <% } %> ><a href="/stories-bathroom">Bathroom</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "bathroom")){ %> class="active" <% } %>><a href="/stories-bathroom">Bathroom</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "expert-tips")){ %> class="active" <% } %> ><a href="/stories-expert-tips">Expert Tips</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "expert-tips")){ %> class="active" <% } %>><a href="/stories-expert-tips">Expert Tips</a></li>
 
-                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "living")){ %> class="active" <% } %> ><a href="/stories-living">Living Room</a></li>
+                        <li <% if((typeof(selCat) !== 'undefined') && (selCat == "living")){ %> class="active" <% } %>><a href="/stories-living">Living Room</a></li>
                     </ul>
                 </div>
             </div>
@@ -80,14 +78,14 @@
                                 <div class="special pb20 pl10 pr10">
                                     <div class="show-blog-img">
                                         <a href="/story-<%= blog_url %>">
-                                        <img
-                                                src="<%= bgstory.blog_main_image %>"
-                                                class="img-responsive"
-                                                title="<%= bgstory.blog_heading %>"
-                                                alt="<%= bgstory.blog_heading %>"
-                                        <% if(count == 5){ %> style="height: 350px;" <% } %>
-                                        >
-                                            </a>
+                                            <img
+                                                    src="<%= bgstory.blog_main_image %>"
+                                                    class="img-responsive"
+                                                    title="<%= bgstory.blog_heading %>"
+                                                    alt="<%= bgstory.blog_heading %>"
+                                            <% if(count == 5){ %> style="height: 350px;" <% } %>
+                                            >
+                                        </a>
                                     </div>
                                     <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
                                     <a href="/story-<%= blog_url %>">
@@ -128,13 +126,13 @@
                                 <div class="special pb20 pl10 pr10">
                                     <div class="show-blog-img">
                                         <a href="/story-<%= blog_url %>">
-                                        <img
-                                                src="<%= bgstory.blog_main_image %>"
-                                                class="img-responsive"
-                                                title="<%= bgstory.blog_heading %>"
-                                                alt="<%= bgstory.blog_heading %>"
-                                        <% if(count == 2){ %> style="height: 350px;" <% } %>
-                                        >
+                                            <img
+                                                    src="<%= bgstory.blog_main_image %>"
+                                                    class="img-responsive"
+                                                    title="<%= bgstory.blog_heading %>"
+                                                    alt="<%= bgstory.blog_heading %>"
+                                            <% if(count == 2){ %> style="height: 350px;" <% } %>
+                                            >
                                         </a>
                                     </div>
                                     <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
@@ -270,27 +268,27 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a href="https://www.instagram.com/my_gubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-instagram" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="" class="social-menu-lnk font-size22"><i class="fa fa-youtube-square" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.facebook.com/myGubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-facebook-square" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://in.pinterest.com/my_gubbi/mygubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-pinterest-square" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://twitter.com/my_gubbi" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-twitter-square" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                                    <li>
+                                        <a href="https://www.instagram.com/my_gubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-instagram" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="social-menu-lnk font-size22"><i class="fa fa-youtube-square" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.facebook.com/myGubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-facebook-square" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://in.pinterest.com/my_gubbi/mygubbi/" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-pinterest-square" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/my_gubbi" target="_blank" class="social-menu-lnk font-size22"><i class="fa fa-twitter-square" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
 
@@ -310,42 +308,52 @@
                                 <% if(typeof(stories) !== 'undefined'){ count = 1; %>
                                 <% _.each(stories, function(bgstory){ %>
                                 <% if(typeof(bgstory) !== 'undefined' && bgstory != ""){ %>
+
+                                <%
+                                var blog_url = bgstory.blogId;
+                                blog_url = blog_url.replace(/-/g,"_");
+                                blog_url = blog_url.replace(/-/g," ");
+                                blog_url = blog_url.replace(/\s/g,"-");
+                                //console.log(blog_url);
+
+                                %>
+
                                 <% if(count > 5){ %>
                                 <% if (count % 2 != 0) { %>
 
                                 <div class="special pb20 pl10 pr10">
                                     <div class="show-blog-img">
-                                        <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
-                                        <img
-                                            src="<%= bgstory.blog_main_image %>"
-                                            class="img-responsive"
-                                            title="<%= bgstory.blog_heading %>"
-                                            alt="<%= bgstory.blog_heading %>"
-                                        >
+                                        <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                            <img
+                                                    src="<%= bgstory.blog_main_image %>"
+                                                    class="img-responsive"
+                                                    title="<%= bgstory.blog_heading %>"
+                                                    alt="<%= bgstory.blog_heading %>"
+                                            >
                                         </a>
                                     </div>
                                     <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
-                                    <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
-                                    <h2 class="txt-urstory media-txt-title">
-                                    <%= bgstory.blog_heading %>
-                                    <!--<%= "Count Odd :-"+ count %>-->
-                                    </h2>
+                                    <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                        <h2 class="txt-urstory media-txt-title">
+                                            <%= bgstory.blog_heading %>
+                                            <!--<%= "Count Odd :-"+ count %>-->
+                                        </h2>
                                     </a>
                                     <p class="font-size14">
-                                    <% var cnt = 0; %>
-                                    <% _.each(bgstory.blog_categories, function(cat){ %>
-                                    <% if(cnt != 0) { %> | <% } %>
-                                    <span class="blog-borderbtm"><%= cat %></span>
-                                    <% cnt = cnt + 1; }); %>
+                                        <% var cnt = 0; %>
+                                        <% _.each(bgstory.blog_categories, function(cat){ %>
+                                        <% if(cnt != 0) { %> | <% } %>
+                                        <span class="blog-borderbtm"><%= cat %></span>
+                                        <% cnt = cnt + 1; }); %>
                                     </p>
                                     <p class="pt10"> <!--<%= bgstory.blog_content %>-->
 
-                                    <% var blg_stry = bgstory.blog_content;
-                                    var r = /\\u([\d\w]{4})/gi;
-                                    blg_stry = blg_stry.replace(r, function (match, grp) {
-                                    return String.fromCharCode(parseInt(grp, 16)); } );
-                                    blg_stry = unescape(blg_stry);
-                                    var n = blg_stry.indexOf('</p>');
+                                        <% var blg_stry = bgstory.blog_content;
+                                        var r = /\\u([\d\w]{4})/gi;
+                                        blg_stry = blg_stry.replace(r, function (match, grp) {
+                                        return String.fromCharCode(parseInt(grp, 16)); } );
+                                        blg_stry = unescape(blg_stry);
+                                        var n = blg_stry.indexOf('</p>');
                                     if (n > 200){  %>
                                     <% var stry = blg_stry.slice(0, 180); %>
                                     <%= stry %>...
@@ -364,26 +372,26 @@
                                     <div class="show-blog-img">
                                         <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
                                             <img
-                                            src="<%= bgstory.blog_main_image %>"
-                                            class="img-responsive"
-                                            title="<%= bgstory.blog_heading %>"
-                                            alt="<%= bgstory.blog_heading %>"
+                                                    src="<%= bgstory.blog_main_image %>"
+                                                    class="img-responsive"
+                                                    title="<%= bgstory.blog_heading %>"
+                                                    alt="<%= bgstory.blog_heading %>"
                                             >
                                         </a>
                                     </div>
                                     <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
                                     <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
-                                    <h2 class="txt-urstory media-txt-title">
-                                    <%= bgstory.blog_heading %>
-                                    <!--<%= "Count Even :-"+ count %>-->
-                                    </h2>
+                                        <h2 class="txt-urstory media-txt-title">
+                                            <%= bgstory.blog_heading %>
+                                            <!--<%= "Count Even :-"+ count %>-->
+                                        </h2>
                                     </a>
                                     <p class="font-size14">
-                                    <% var cnt = 0; %>
-                                    <% _.each(bgstory.blog_categories, function(cat){ %>
-                                    <% if(cnt != 0) { %> | <% } %>
-                                    <span class="blog-borderbtm"><%= cat %></span>
-                                    <% cnt = cnt + 1; }); %>
+                                        <% var cnt = 0; %>
+                                        <% _.each(bgstory.blog_categories, function(cat){ %>
+                                        <% if(cnt != 0) { %> | <% } %>
+                                        <span class="blog-borderbtm"><%= cat %></span>
+                                        <% cnt = cnt + 1; }); %>
                                     </p>
                                     <p class="pt10"> <!--<%= bgstory.blog_content %>-->
 
@@ -393,15 +401,15 @@
                                         return String.fromCharCode(parseInt(grp, 16)); } );
                                         blg_stry = unescape(blg_stry);
                                         var n = blg_stry.indexOf('</p>');
-                                        if (n > 200){  %>
-                                        <% var stry = blg_stry.slice(0, 180); %>
-                                        <%= stry %>...
-                                        <% } else { %>
-                                        <% var stry = blg_stry.slice(0, n); %>
-                                        <%= stry %>
-                                        <% } %>
+                                    if (n > 200){  %>
+                                    <% var stry = blg_stry.slice(0, 180); %>
+                                    <%= stry %>...
+                                    <% } else { %>
+                                    <% var stry = blg_stry.slice(0, n); %>
+                                    <%= stry %>
+                                    <% } %>
 
-                                        <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
+                                    <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
                                     </p>
                                 </div>
 
@@ -417,14 +425,22 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2 class="txt-urstory media-txt-title">Latest From The Blog</h2>
+                    <h2 class="txt-urstory media-txt-title">Latest From The Blog</h2>
                 </div>
                 <% if(typeof(latest_stories) !== 'undefined'){ count = 1; %>
                 <% _.each(latest_stories, function(latestblog){ %>
+
+                <%
+                var latestblog_url = latestblog.blogId;
+                latestblog_url = latestblog_url.replace(/-/g,"_");
+                latestblog_url = latestblog_url.replace(/-/g," ");
+                latestblog_url = latestblog_url.replace(/\s/g,"-");
+                %>
+
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <div class="pb20">
                         <div class="show-blog-img" style="height:350px;">
-                            <a href="/story-<%= encodeURIComponent(latestblog.blog_heading) %>">
+                            <a href="/story-<%= encodeURIComponent(latestblog_url) %>">
                                 <img
                                         src="<%= latestblog.blog_main_image %>" style="height:350px;"
                                         class="img-responsive object-fit_cover"
@@ -434,7 +450,7 @@
                             </a>
                         </div>
                         <p class="text-muted text-left date"><%= latestblog.date_of_publish %> | by <%= latestblog.author %></p>
-                        <a href="/story-<%= encodeURIComponent(latestblog.blog_heading) %>">
+                        <a href="/story-<%= encodeURIComponent(latestblog_url) %>">
                             <h2 class="txt-urstory media-txt-title font-size16">
                                 <%= latestblog.blog_heading %>
                             </h2>
@@ -458,10 +474,18 @@
                 </div>
                 <% if(typeof(diys) !== 'undefined'){ count = 1; %>
                 <% _.each(diys, function(diy){ %>
+
+                <%
+                var diy_url = diy.diyId;
+                diy_url = diy_url.replace(/-/g,"_");
+                diy_url = diy_url.replace(/-/g," ");
+                diy_url = diy_url.replace(/\s/g,"-");
+
+                %>
                 <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="pb20">
                         <div class="show-blog-img">
-                            <a href="/diy-<%= encodeURIComponent(diy.diy_heading) %>">
+                            <a href="/diy-<%= encodeURIComponent(diy_url) %>">
                                 <img
                                         src="<%= diy.diy_main_image %>"
                                         class="img-responsive"
@@ -471,7 +495,7 @@
                             </a>
                         </div>
                         <p class="text-muted text-left date font-size14"><%= diy.date_of_publish %> | by <%= diy.author %></p>
-                        <a href="/diy-<%= encodeURIComponent(diy.diy_heading) %>">
+                        <a href="/diy-<%= encodeURIComponent(diy_url) %>">
                             <h2 class="txt-urstory media-txt-title font-size14">
                                 <%= diy.diy_heading %>
                             </h2>
@@ -480,19 +504,6 @@
                 </div>
                 <% }); %>
                 <% } %>
-                <!--<div class="col-sm-4 col-md-4 col-lg-4">
-                    <div class="pb20">
-                        <div class="show-blog-img">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1477548536/stories/wrong-interiors.jpg" class="img-responsive" title="5 Common Mistakes in Interiors and What to Do" alt="5 Common Mistakes in Interiors and What to Do">
-                        </div>
-                        <p class="text-muted text-left date font-size14">Oct 03, 2016 | by mygubbi</p>
-                        <a href="/story-5%20Common%20Mistakes%20in%20Interiors%20and%20What%20to%20Do">
-                            <h2 class="txt-urstory media-txt-title font-size14">
-                                5 Common Mistakes in Interiors and What to Do
-                            </h2>
-                        </a>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>

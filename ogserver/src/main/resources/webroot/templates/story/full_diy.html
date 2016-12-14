@@ -1,4 +1,3 @@
-<script type="text/javascript" src="/js/libs/highlight/highlight.js"></script>
 <section class="menu-spacer bg-color-white">
     <div class="container">
         <% if(typeof(full_diy) !== 'undefined') {  %>
@@ -34,8 +33,7 @@
                             /*var r = /\\u([\d\w]{4})/gi;
                             blg_stry = blg_stry.replace(r, function (match, grp) {
                             return String.fromCharCode(parseInt(grp, 16)); } );
-                            blg_stry = unescape(blg_stry);*/
-                            %>
+                            blg_stry = unescape(blg_stry);*/ %>
                             <%= blg_stry %>
                         </p>
                     </div>
@@ -46,19 +44,17 @@
                             <% _.each(rec_diys, function(diy){ %>
 
                             <%
-                               var diy_url = diy.diyId;
-
-                            //diy_url = diy_url.replace(/-/g,"_");
-                            //diy_url = diy_url.replace(/-/g," ");
-                            //diy_url = diy_url.replace(/\s/g,"-");
-                            console.log(diy_url);
+                            var diy_url = diy.diyId;
+                            diy_url = diy_url.replace(/-/g,"_");
+                            diy_url = diy_url.replace(/-/g," ");
+                            diy_url = diy_url.replace(/\s/g,"-");
 
                             %>
 
 
                             <div class="row margin25-0-0">
                                 <div class="col-md-5 padding0">
-                                    <a href="/diy-<%= diy_url %>">
+                                    <a href="/diy-<%= encodeURIComponent(diy_url) %>">
                                         <img
                                                 src="<%= diy.diy_main_image %>"
                                                 class="img-responsive"
@@ -66,7 +62,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-7 padding-right0">
-                                    <a href="/diy-<%= diy_url %>">
+                                    <a href="/diy-<%= encodeURIComponent(diy_url) %>">
                                         <h5>
                                             <% var diy_hdng1 = diy.diy_heading;
                                             /*var r = /\\u([\d\w]{4})/gi;

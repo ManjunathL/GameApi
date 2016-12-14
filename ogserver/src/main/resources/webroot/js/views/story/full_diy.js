@@ -25,7 +25,8 @@ define([
 
             var diy_name = that.model.name;
 
-           console.log(diy_name);
+            diy_name = diy_name.replace(/-/g, ' ');
+            diy_name = diy_name.replace(/_/, '-');
 
             this.diys.fetch({
                 success: function() {
@@ -47,7 +48,7 @@ define([
             delete diys.id;
 
             _.find(diys, function(item, index) {
-                if (item.diy_heading == name) {
+                if (item.diyId == name) {
                     full_diy = item;
                 }
             });
@@ -60,10 +61,6 @@ define([
             $.each(diys.slice(0,3), function(i, data) {
                 rec_diys.push(data);
             });
-
-            console.log("rec_diys");
-            console.log(rec_diys);
-
 
             var fullTemp = _.template(fullDiyTemplate);
 

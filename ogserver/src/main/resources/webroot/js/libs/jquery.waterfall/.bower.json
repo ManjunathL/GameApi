@@ -1,0 +1,41 @@
+{
+  "name": "jquery.waterfall",
+  "homepage": "https://github.com/LinZap/jquery.waterfall",
+  "authors": [
+    "LinZap",
+    "Zap <soldierzx0705@gmail.com>"
+  ],
+  "description": "LightWaterfall, cross-browser typesetting on the web with jQuery",
+  "main": "waterfall-light.js",
+  "keywords": [
+    "waterfall"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/LinZap/jquery.waterfall.git"
+  },
+  "license": "Apache",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "*.html",
+    "README.md",
+    "bower.json"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  },
+  "_release": "4977d1722c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4977d1722c6c100758d77286ad5f2c7f9b6584a8"
+  },
+  "_source": "https://github.com/LinZap/jquery.waterfall.git",
+  "_target": "*",
+  "_originalSource": "jquery.waterfall",
+  "_direct": true
+}
