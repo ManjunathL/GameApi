@@ -3260,6 +3260,27 @@ ul.social-buttons li a:active {
 /* End FAQ Page */
 
 
+/* Start Payment Page */
+.payment-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481700058/payment/payment-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 480px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+    color: #ffffff;
+}
+/* End Payment Page */
+
 /* Start Career Page */
 
 .career-bg{
@@ -3917,7 +3938,8 @@ ul.social-buttons li a:active {
 }
 .blog-borderbtm{
     border-bottom: 2px solid #666;
-    padding: 10px 0px;
+    padding: 5px 0px;
+    display: inline-block;
 }
 .blog-card{
     margin-bottom: 10px;
