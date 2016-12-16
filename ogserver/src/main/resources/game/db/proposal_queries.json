@@ -317,6 +317,13 @@
       "params": ["id"],
       "jsonfields":["modules", "addons"]
     },
+    {
+      "id": "proposal.product.versionlist",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select id, fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, createdOn, createdBy, updatedOn, updatedBy, costWoAccessories from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
+      "params": ["proposalId","fromVersion"]
+    },
 
 
     // Module costing queries

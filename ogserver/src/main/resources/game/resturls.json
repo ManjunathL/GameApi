@@ -179,6 +179,14 @@
       "resultfields":[],
       "default": "[]"
     },
+    {
+      "uri": "/gapi/product/versionlist",
+      "source": "db",
+      "query":"proposal.product.versionlist",
+      "params":["proposalId","fromVersion"],
+      "resultfields":[],
+      "default": "[]"
+    },
 
     {
       "uri": "/gapi/codelookup",
