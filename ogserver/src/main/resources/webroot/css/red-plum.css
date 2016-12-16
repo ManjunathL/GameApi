@@ -94,6 +94,9 @@ ul, ol{
     text-align: center;
     color: #ffffff;
 }
+.festive-banner-mob{
+    position: relative;
+}
 
 .festive-banner-head {
     line-height: 140%;
@@ -105,9 +108,24 @@ ul, ol{
     text-align: right;
 }
 
+.festive-banner-head-mob {
+    text-align: left;
+    font-size: 25px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #333;
+    position: absolute;
+    top: 10%;
+    padding: 20px;
+    line-height: 140%;
+}
+
 .festive-form{
     background: #20175c;
     color: #ffffff;
+    padding: 0px;
+}
+
+.festive-mob-form{
     padding: 0px;
 }
 

@@ -83,6 +83,121 @@
 
 /* Start Home Page Banner Section */
 
+.banner-link {
+    position: absolute;
+    right: 22%;
+    top: 0px;
+}
+
+.img-banner-link {
+    width: 335px;
+}
+
+
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    .banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 180px;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 560px) {
+    .banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 150px;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    .banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 100px;
+    }
+}
+
+
+/* Landscape phone to portrait tablet */
+@media (min-width: 767px) {
+    .banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 180px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 260px;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+.banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 320px;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) {
+.banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 380px;
+    }
+}
+
+/* Large devices (large desktops, 1700px and up) */
+@media (min-width: 1700px) {
+    .banner-link {
+        position: absolute;
+        right: 22%;
+        top: 0px;
+    }
+
+    .img-banner-link {
+        width: 470px;
+    }
+}
+
 .txt-over-banner-image{
     position: absolute;
     width: 46%;
