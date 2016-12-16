@@ -134,7 +134,11 @@ define([
             document.querySelector('meta[name="keywords"]').setAttribute("content", "home interior décor, home interior design, interior home décor, home interiors, custom made furniture, custom furniture, online customised furniture, modern furniture design, furniture designs");
         },
         consult: function() {
-            document.title = 'Consult our experts | MyGubbi';
+            document.title = 'Get in touch with us for th best advice on home decor and remodelling';
+            document.querySelector('meta[name="description"]')
+            .setAttribute("content", "Consult our experts to gets tips and advice on the best decor theme and furniture units for your home. Get in touch with us right away.");
+            document.querySelector('meta[name="keywords"]')
+            .setAttribute("content", "MyGubbi address, MyGubbi contac us");
         },
         shortlist: function() {
             document.title = 'Shortlisted products for easy and fast access | MyGubbi';
@@ -146,10 +150,14 @@ define([
             document.title = 'Thank you for contacting MyGubbi';
         },
         careers: function() {
-            document.title = 'Careers | MyGubbi';
+            document.title = 'Work with us to explore the world of home decor';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Exhibit your talent in mastering the business of interior designing by working with us");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "mygubbi careers");
         },
         about: function() {
-            document.title = 'About | MyGubbi';
+            document.title = 'Know about our products and services for online home decor ';
+            document.querySelector('meta[name="description"]').setAttribute("content", "We are experts in offering modular furnishing and home decor solutions");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "mygubbi about us");
         },
         faq: function() {
             document.title = 'Browse through our FAQ section to understand the process better';
@@ -157,10 +165,14 @@ define([
             document.querySelector('meta[name="keywords"]').setAttribute("content", "MyGubbi FAQ ,MyGubbi warranty, MyGubbi shipping, MyGubbi returns");
         },
         terms: function() {
-            document.title = 'T&C | MyGubbi';
+            document.title = 'Our terms and conditions offer you the benefit of hassle free experience ';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Refer the terms and conditions on our website to know more about the reserved rights, online conduct, registration and cancellation/refund policies ");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "mygubbi terms and conditions");
         },
         privacypolicy: function() {
-            document.title = 'Privacy Policy | MyGubbi';
+            document.title = 'We maintain confidentiality of your personal information';
+                        document.querySelector('meta[name="description"]').setAttribute("content", "Our privacy policy ensures that your log in details and personal information shared on the website for communication purposes maintains the privacy standards.  ");
+                        document.querySelector('meta[name="keywords"]').setAttribute("content", "mygubbi privacy policy");
         },
         mygubbidiff: function() {
             document.title = 'MyGubbi difference | MyGubbi';
@@ -488,14 +500,22 @@ define([
                         });
                     });
                     router.on('route:mygubbistudio', function(actions) {
-                        document.title = 'MyGubbi Studio | MyGubbi';
-                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                        document.title = 'Experience studio to give you the feel of our collection of elegant furniture units';
+                        document.querySelector('meta[name="description"]')
+                        .setAttribute("content", "Explore our collection of sophisticated furniture units at our experience studios. You can also consult our designers to get the best advice on the look you need for your home. ");
+                        document.querySelector('meta[name="keywords"]')
+                        .setAttribute("content", "mygubbi studio, mygubbi showroom , mygubbi experience center");
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                          require(['views/mygubbiStudio/mygubbi-studio'], function(MygubbiStudioPage) {
                             VM.create(VM.MYGUBBISTUDIO, MygubbiStudioPage).render();
                         });
                     });
                     router.on('route:platinumhomes', function(actions) {
-                        document.title = 'Platinum Homes | MyGubbi';
+                        document.title = 'MyGubbi: Home Interiors & Decor Online, Platinum Home Interior designs';
+                        document.querySelector('meta[name="description"]')
+                        .setAttribute("content", "Home interior design made easy with Platinum Home Interiors. Get excellent design ideas customised and implemented to suit your home needs. Beautiful Homes Interiors made easy.");
+                        document.querySelector('meta[name="keywords"]')
+                        .setAttribute("content", "Platinum home, Platinum home interior services, Platinum home interior, Platinum interior services, modular home interiors ");
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/platinum_homes/platinum-homes'], function(PlatinumHomesPage) {
                         VM.create(VM.PLATINUMHOMES, PlatinumHomesPage).render();
@@ -635,7 +655,11 @@ define([
             });
         });
         router.on('route:completedprojectspage', function(actions) {
-            document.title = 'Completed Projects | MyGubbi';
+            document.title = 'Completed Projects with customised Home Interiors and design from MyGubbi';
+            document.querySelector('meta[name="description"]')
+            .setAttribute("content", "Browse through the completed projects customised and designed by home interior designers from MyGubbi. Complete home interiors solution providers.");
+            document.querySelector('meta[name="keywords"]')
+            .setAttribute("content", "mygubbi completed projects");
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/completedprojects_page'], function(CompletedProjectsPage) {
                 VM.create(VM.COMPLETEDPROJECTSPAGE, CompletedProjectsPage).render();
@@ -645,14 +669,14 @@ define([
             document.title = 'Know Your Wardrobe | MyGubbi';
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/knowyourwardrobe_page'], function(KnowYourWardrobe) {
-                VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourWardrobe).render();
+                VM.create(VM.KNOWYOURWARDROBEPAGE, KnowYourWardrobe).render();
             });
         });
         router.on('route:knowyourkitchen', function(actions) {
             document.title = 'Know Your Kitchen | MyGubbi';
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/knowyourkitchen_page'], function(KnowYourKitchen) {
-                VM.create(VM.COMPLETEDPROJECTSPAGE, KnowYourKitchen).render();
+                VM.create(VM.KNOWYOURKITCHENPAGE, KnowYourKitchen).render();
             });
         });
         router.on('route:kitchenAccessories', function(actions) {
@@ -679,7 +703,9 @@ define([
         });
 
         router.on('route:payment', function(actions) {
-            document.title = 'Kitchen Material | MyGubbi';
+            document.title = 'Our payment terms make your online interior design easy ';
+                        document.querySelector('meta[name="description"]').setAttribute("content", "Check our payment terms to know about the available payment options");
+                        document.querySelector('meta[name="keywords"]').setAttribute("content", "mygubbi payment");
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/payment/payment'], function(payment) {
                 VM.create(VM.PAYMENTPAGE, payment).render();
@@ -703,7 +729,7 @@ define([
         router.on('route:remarketinglp', function(actions) {
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/landing_pages/remarketinglp_page'], function(RemarketingLp) {
-                VM.create(VM.COMPLETEDPROJECTSPAGE, RemarketingLp).render();
+                VM.create(VM.REMARKETINGLPSPAGE, RemarketingLp).render();
             });
         });
         router.on('route:mediapage', function(actions) {
@@ -725,7 +751,11 @@ define([
             });
         });
         router.on('route:nripage', function(cityName) {
-            document.title = 'NRI Zoon | MyGubbi';
+            document.title = 'Premium homes for premium living. Get end to end service for your dream home with us ';
+            document.querySelector('meta[name="description"]')
+            .setAttribute("content", "Our NRI service is a for the premium home segment focusing on the end to end solution for home decor. Our service follows the international standards to ensure the best in class quality.");
+            document.querySelector('meta[name="keywords"]')
+            .setAttribute("content", "MyGubbi NRI Services");
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/nri_pages/nri_page'], function(NriPage) {
                 var options = {
