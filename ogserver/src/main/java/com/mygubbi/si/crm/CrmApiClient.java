@@ -1,18 +1,13 @@
 package com.mygubbi.si.crm;
 
-import com.mygubbi.common.LocalCache;
-import com.mygubbi.common.VertxInstance;
-import com.mygubbi.si.data.EventData;
+
 import com.mygubbi.si.email.EmailData;
-import com.mygubbi.si.email.EmailService;
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 import com.sugarcrm.www.sugarcrm.Set_entry_result;
 import com.sugarcrm.www.sugarcrm.SugarsoapLocator;
 import com.sugarcrm.www.sugarcrm.SugarsoapPortType;
 import com.sugarcrm.www.sugarcrm.User_auth;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
