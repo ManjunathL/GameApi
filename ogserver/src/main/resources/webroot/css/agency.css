@@ -93,6 +93,15 @@
     width: 335px;
 }
 
+.banner-mobile-link {
+    background: #784715;
+    padding-bottom: 30px;
+}
+
+.red-plum-mob-banner-link{
+    display: block;
+    height: 100%;
+}
 
 
 /* Landscape phone to portrait tablet */
