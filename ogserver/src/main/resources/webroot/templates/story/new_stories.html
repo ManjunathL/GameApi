@@ -29,7 +29,7 @@
     </div>
     <!-- End story bg -->
 
-    <div class="career-culture-section pt30 pb30">
+    <div id="blog-cntId" class="career-culture-section pt30 pb30">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 pt30 pb30">
@@ -93,7 +93,7 @@
                                             <%= bgstory.blog_heading %>
                                         </h2>
                                     </a>
-                                    <p class="font-size14">
+                                    <p class="font-size14 capitalize">
                                         <% var cnt = 0; %>
                                         <% _.each(bgstory.blog_categories, function(cat){ %>
                                         <% if(cnt != 0) { %> | <% } %>
@@ -141,7 +141,7 @@
                                             <%= bgstory.blog_heading %>
                                         </h2>
                                     </a>
-                                    <p class="font-size14">
+                                    <p class="font-size14 capitalize">
                                         <% var cnt = 0; %>
                                         <% _.each(bgstory.blog_categories, function(cat){ %>
                                         <% if(cnt != 0) { %> | <% } %>
@@ -339,7 +339,7 @@
                                             <!--<%= "Count Odd :-"+ count %>-->
                                         </h2>
                                     </a>
-                                    <p class="font-size14">
+                                    <p class="font-size14 capitalize">
                                         <% var cnt = 0; %>
                                         <% _.each(bgstory.blog_categories, function(cat){ %>
                                         <% if(cnt != 0) { %> | <% } %>
@@ -386,7 +386,7 @@
                                             <!--<%= "Count Even :-"+ count %>-->
                                         </h2>
                                     </a>
-                                    <p class="font-size14">
+                                    <p class="font-size14 capitalize">
                                         <% var cnt = 0; %>
                                         <% _.each(bgstory.blog_categories, function(cat){ %>
                                         <% if(cnt != 0) { %> | <% } %>
@@ -455,7 +455,7 @@
                                 <%= latestblog.blog_heading %>
                             </h2>
                         </a>
-                        <p class="font-size14">
+                        <p class="font-size14 capitalize">
                             <% var cnt = 0; %>
                             <% _.each(latestblog.blog_categories, function(cat){ %>
                             <% if(cnt != 0) { %> | <% } %>
@@ -525,4 +525,22 @@
             }
         });
     });
+</script>
+<script>
+$( document ).ready(function() {
+    $(".blog-menu").click(function(){
+        $('html, body').animate({
+               scrollTop: $("#blog-cntId").offset().top
+             }, 100, function(){
+        });
+    });
+
+    $(".blog-menu-list").click(function(){
+        $('html, body').animate({
+               scrollTop: $("#blog-cntId").offset().top
+             }, 100, function(){
+        });
+    });
+
+});
 </script>
