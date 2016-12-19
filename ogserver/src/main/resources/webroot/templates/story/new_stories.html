@@ -185,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="col-sm-3 col-md-3 col-lg-3 hidden-xs hidden-sm">
                     <div class="blog-side-box">
                         <h3 class="txt-urstory media-txt-title">More Stories</h3>
                         <% if(typeof(rec_stories) !== 'undefined'){ %>
@@ -310,11 +310,14 @@
                                 <% if(typeof(bgstory) !== 'undefined' && bgstory != ""){ %>
 
                                 <%
-                                var blog_url = bgstory.blogId;
-                                blog_url = blog_url.replace(/-/g,"_");
-                                blog_url = blog_url.replace(/-/g," ");
-                                blog_url = blog_url.replace(/\s/g,"-");
-                                //console.log(blog_url);
+                                //console.log(" ---- bgstory -----");
+                                //console.log(bgstory);
+                                var oldblog_url = bgstory.blogId;
+                                oldblog_url = oldblog_url.replace(/-/g,"_");
+                                oldblog_url = oldblog_url.replace(/-/g," ");
+                                oldblog_url = oldblog_url.replace(/\s/g,"-");
+                                //console.log(" ----------- oldblog_url -----------------");
+                                //console.log(oldblog_url);
 
                                 %>
 
@@ -323,7 +326,7 @@
 
                                 <div class="special pb20 pl10 pr10">
                                     <div class="show-blog-img">
-                                        <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                        <a href="/story-<%= oldblog_url %>">
                                             <img
                                                     src="<%= bgstory.blog_main_image %>"
                                                     class="img-responsive"
@@ -333,7 +336,7 @@
                                         </a>
                                     </div>
                                     <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
-                                    <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                                    <a href="/story-<%= oldblog_url %>">
                                         <h2 class="txt-urstory media-txt-title">
                                             <%= bgstory.blog_heading %>
                                             <!--<%= "Count Odd :-"+ count %>-->
@@ -362,7 +365,7 @@
                                     <%= stry %>
                                     <% } %>
 
-                                    <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
+                                    <a href="/story-<%= oldblog_url %>" class="color-orange read_full">Read Full Story</a>
                                     </p>
                                 </div>
 
@@ -370,7 +373,7 @@
 
                                 <div class="special pb20 pl10 pr10">
                                     <div class="show-blog-img">
-                                        <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
+                                        <a href="/story-<%= oldblog_url %>">
                                             <img
                                                     src="<%= bgstory.blog_main_image %>"
                                                     class="img-responsive"
@@ -380,7 +383,7 @@
                                         </a>
                                     </div>
                                     <p class="text-muted text-left date"><%= bgstory.date_of_publish %> | by <%= bgstory.author %></p>
-                                    <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>">
+                                    <a href="/story-<%= oldblog_url %>">
                                         <h2 class="txt-urstory media-txt-title">
                                             <%= bgstory.blog_heading %>
                                             <!--<%= "Count Even :-"+ count %>-->
@@ -409,7 +412,7 @@
                                     <%= stry %>
                                     <% } %>
 
-                                    <a href="/story-<%= encodeURIComponent(bgstory.blog_heading) %>" class="color-orange read_full">Read Full Story</a>
+                                    <a href="/story-<%= oldblog_url %>" class="color-orange read_full">Read Full Story</a>
                                     </p>
                                 </div>
 

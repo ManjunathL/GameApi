@@ -27,7 +27,7 @@ define([
             var blog_name = that.model.name;
 
            blog_name = blog_name.replace(/-/g, ' ');
-           //blog_name = blog_name.replace(/_/, '-');
+           blog_name = blog_name.replace(/_/, '-');
 
            //console.log(blog_name);
 
