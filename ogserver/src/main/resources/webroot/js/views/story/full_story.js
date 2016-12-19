@@ -29,8 +29,6 @@ define([
            blog_name = blog_name.replace(/-/g, ' ');
            blog_name = blog_name.replace(/_/, '-');
 
-           //console.log(blog_name);
-
             this.stories.fetch({
                 success: function() {
                     that.fetchStoryAndRender(blog_name);
@@ -51,7 +49,7 @@ define([
             delete stories.id;
 
             _.find(stories, function(item, index) {
-                if (item.blogId == name) {
+                if (item.blogId.indexOf(name) !== -1) {
                     full_story = item;
                 }
             });
