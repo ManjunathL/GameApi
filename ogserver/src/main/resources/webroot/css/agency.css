@@ -138,15 +138,14 @@
 @media (max-width: 480px) {
     .banner-link {
         position: absolute;
-        right: 22%;
+        right: 31%;
         top: 0px;
     }
 
     .img-banner-link {
-        width: 140px;
+        width: 160px;
     }
 }
-
 
 /* Landscape phone to portrait tablet */
 @media (min-width: 767px) {
@@ -173,6 +172,7 @@
         width: 260px;
     }
 }
+
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 .banner-link {
@@ -185,6 +185,7 @@
         width: 320px;
     }
 }
+
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1400px) {
 .banner-link {
@@ -220,6 +221,7 @@
     right: 0%;
     padding: 30px;
 }
+
 .txt-over-head{
     text-shadow: 2px 2px 2px #333;
 }
