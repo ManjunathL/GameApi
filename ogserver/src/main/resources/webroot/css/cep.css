@@ -134,6 +134,10 @@ ul.myaccount_list li{
     padding-left:30px;
 }
 
+.project-sts{
+    padding:15px 0px 15px 0px;
+}
+
 .bs-margin65{margin:65px 0px!important;}
 .bs-margin43{margin:43px 0px!important;}
 .bs-wizard {margin-top: 40px;}

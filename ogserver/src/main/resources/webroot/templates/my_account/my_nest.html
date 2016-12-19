@@ -1,6 +1,7 @@
 <%= console.log("----My nest details------") %>
 <%= console.log(myNest) %>
 <!-- Property Details Start -->
+<% if(typeof(myNest.projectDetails) != 'undefined'){ %>
 <section>
     <div class="col-md-12 col-sm-12 bg-property portfolio-box padding-top15 padding-bottom15">
     <div class="col-md-6">
@@ -121,11 +122,13 @@
 </div>
 </section>
 <!-- Property Details End -->
+<% } %>
 
 <!-- Project Status Start -->
+<% if(typeof(projectStatusArr) != 'undefined'){ %>
 <section>
-    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15 margin-top40">
-        <div class="row bs-wizard margin0 padding0" style="border-bottom:0;">
+    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding0 project-sts margin-top40">
+        <div class="row bs-wizard margin0 padding0" style="border-bottom:0;width: 790px;">
             <% var defaultArr = new Array(); %>
             <% defaultArr = ["initiated","proposal approved","order placed","production started","installation","handed over"]; %>
             <% _.each(defaultArr, function(value) { %>
@@ -157,9 +160,6 @@
                    bs-wizard-dot-none
                    <% } %>
                 <% }); %>
-
-
-
                 ">
 
                 </a>
@@ -172,6 +172,7 @@
         </div>
     </div>
 </section>
+<% } %>
 <!-- Project Status End -->
 <!-- My Nest Menu Start -->
 <section>
@@ -214,19 +215,33 @@
 </section>
 <!-- My Nest Menu End -->
 
+<% if(typeof(myNest.documentDetails[1]) != 'undefined'){ %>
+
 <section>
     <div class="col-md-12 col-sm-12 bg-white portfolio-box margin-top40">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane padding10 active" id="proposal">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div id="approve_successMsg" class="alert alert-info display-none">
+                            Thank you for approving proposal. Our team will get back to you
+                            as soon as possible.
+                        </div>
+                        <div id="reqCallbk_successMsg" class="alert alert-info display-none">
+                            Thank you for your respone. Our team will get back to you
+                            as soon as possible.
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <i class="icon ion-information-circled color-red"></i><h3 class="text-transform-none txt-color-orange"> Approval required for <% if(typeof(myNest) !== 'undefined'){ %>
                             <%= myNest.documentDetails[1].documentName %>
                         <% } %></h3></div>
                     <div class="col-md-12">
-                        <h4 class="text-transform-none">Initial Proposal(<% if(typeof(myNest) !== 'undefined'){ %>
-                            <%= myNest.documentDetails[1].uploadDate %>
-                            <% } %>)</h4>
+                        <h4 class="text-transform-none">Initial Proposal <% if((typeof(myNest) !== 'undefined') && (typeof(myNest.documentDetails[1].uploadDate) !== 'undefined')){ %>
+                            ( <%= myNest.documentDetails[1].uploadDate %> )
+                            <% } %></h4>
                         <hr />
                         <div class="col-md-8 padding0">
                             <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
@@ -234,7 +249,7 @@
 
                         <div class="col-md-4" style="padding-left: 0px;">
                             <div class="col-md-12">
-                                <a href="<%= myNest.documentDetails[1].documentLink %>" target="_blank" title="View">
+                                <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
                                     <div class="row">
                                         <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
                                         </div>
@@ -258,7 +273,7 @@
                         <div class="col-md-8 padding0">
                             <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
                             [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
-                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button id="approvebtn" type="button" class="btn button-orange font-size18" style="text-transform: none;">Approve</button></div>
+                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button id="approvebtn" type="button" class="btn button-orange font-size18" data-element="<%= myNest.paymentDetails[0].salesExecEmail %>" data-element1="<%= userProfile ? userProfile.displayName : '' %>" data-element2="<%= userProfile ? userProfile.phone : '' %>" data-element3="<%= myNest.paymentDetails[0].designerEmail %>" style="text-transform: none;">Approve</button></div>
                     </div>
                 </div>
 
@@ -283,8 +298,7 @@
                                             name="time"
                                             placeholder="hh-mm"
                                             style="margin:20px 0px;"
-
-                                    />
+                                            required="required" />
                                 </div>
                                 <div class="col-md-6 padding0">
                                     <input
@@ -294,14 +308,16 @@
                                             name="date"
                                             placeholder="dd/mm/yy"
                                             dateformat="d M y"
+                                            min="0"
                                             style="margin:20px 0px;"
-                                    />
+                                            required="required" />
                                 </div>
                             </div>
                         </div>
+                        <div class="row margin0" id="requestCB_error" style="color:red;"></div>
                     </div>
                     <div class="col-md-4 padding0">
-                        <button type="button" id="callback" class="btn button-orange font-size18" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
+                        <button type="button" id="callback" class="btn button-orange font-size18" data-element="<%= myNest.paymentDetails[0].salesExecEmail %>" data-element1="<%= userProfile ? userProfile.displayName : '' %>" data-element2="<%= userProfile ? userProfile.phone : '' %>" data-element3="<%= myNest.paymentDetails[0].designerEmail %>" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane row padding6" id="card">
@@ -392,7 +408,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 doc-details">
-                        <a href="<%= myNest.documentDetails[0].documentLink %>" target="_blank" title="View">
+                        <a href="<%= myNest.documentDetails[0].docUrl %>" target="_blank" title="View">
                            <span class="text-small-proposals">
                                 <% if(typeof(myNest) !== 'undefined'){ %>
                                 <%= myNest.documentDetails[0].documentName %>
@@ -403,7 +419,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 doc-details">
-                        <a href="<%= myNest.documentDetails[1].documentLink %>" target="_blank" title="View">
+                        <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
                            <span class="text-small-proposals">
                                 <% if(typeof(myNest) !== 'undefined'){ %>
                                 <%= myNest.documentDetails[1].documentName %>
@@ -416,4 +432,4 @@
         </div>
     </div>
 </section>
-
+<% } %>

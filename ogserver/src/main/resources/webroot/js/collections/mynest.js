@@ -13,7 +13,7 @@ define([
                console.log("collection");
 
          });
-          console.log("=======mynest=======");
+          console.log("=======mynest 445555555555555555555555555555555555555=======");
                      console.log(mynest);
        }
    });
