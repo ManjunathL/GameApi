@@ -74,10 +74,10 @@ public class CrmApiHandler extends AbstractRouteHandler
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
                         createCustomer(routingContext);
-                        createProposal(routingContext, requestJson);
                     }
                     else
                     {
+                        createProposal(routingContext, requestJson);
 
                     }
                 });
@@ -90,8 +90,10 @@ public class CrmApiHandler extends AbstractRouteHandler
 //        LOG.info(userJson);
         LOG.info("request Json:------>");
         LOG.info(requestJson);
+            String stringToBeInserted = requestJson.toString();
 
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+        proposalData.put("fullJson", stringToBeInserted);
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -108,7 +110,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject jsonObjectProfile = new JsonObject(Json);
         proposalData.put("profile",jsonObjectProfile);
         LOG.info("PROPOSAL DATA: " +proposalData);
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create.crm", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -290,7 +292,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     }
 
-    private void createUserOnWebsite(JsonObject userJson)
+    private int createUserOnWebsite(JsonObject userJson)
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
@@ -344,6 +346,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +statusCode);
+                return statusCode;
             }
             else
             {
@@ -360,6 +363,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         {
             throw new RuntimeException("Error in creating user for : " + email, e);
         }
+        return 0;
     }
 
     private boolean isRequestAuthenticated(RoutingContext routingContext){

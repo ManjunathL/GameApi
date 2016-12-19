@@ -58,9 +58,9 @@
     {
       "id": "proposal.create.crm",
       "type": "insert",
-      "table": "proposal",
-      "query": "insert into proposal(status, title, version, createdBy, crmId, cname, designerName, salesExecName) values ('draft', ?, '1.0', ?, ?, ?, ?, ?)",
-      "params": ["title", "createdBy","opportunityId"]
+      "table": "proposaltemp",
+      "query": "insert into proposal(status, title, version, createdBy, crmId, cname, designerName, salesExecName,fullJson) values ('draft', ?, '1.0', ?, ?, ?, ?, ?, ?)",
+      "params": ["title", "createdBy","opportunityId", "designerName", "salesExecName", "fullJson" ]
     },
 
     {
