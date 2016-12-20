@@ -26,6 +26,7 @@
 /* Header Section */
 .navbar-fixed-top{
     position: fixed !important;
+    z-index: 10 !important;
 }
 
 .page-cnt{
@@ -2803,7 +2804,7 @@ fieldset[disabled] .btn-xl.active {
 .stick {
     position: fixed;
     padding: 10px 0px;
-    z-index: 999;
+    z-index: 11;
     width: 100%;
     -webkit-transition: color 0.3s, opacity 0.2s;
     transition: color 0.3s, opacity 0.2s, transform 0.5s;
@@ -8294,6 +8295,7 @@ html .ui-button.ui-state-disabled:active {
     .location_add {
         padding: 10px 0px 5px 10px;
     }
+
 }
 @media screen and (max-width: 480px) {
     .enquire-btn-div {
