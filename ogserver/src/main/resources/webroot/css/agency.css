@@ -26,7 +26,7 @@
 /* Header Section */
 .navbar-fixed-top{
     position: fixed !important;
-    z-index: 10 !important;
+    z-index: 15 !important;
 }
 
 .page-cnt{
