@@ -93,7 +93,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             String stringToBeInserted = requestJson.toString();
 
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
-        proposalData.put("fullJson", stringToBeInserted);
+        proposalData.put("fullJson", requestJson);
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
