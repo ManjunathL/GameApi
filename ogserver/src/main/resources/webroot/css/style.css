@@ -1797,7 +1797,7 @@ ul.social-buttons li a:active {
 .kyk-kitchen-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 90px;
     width: 100%;
 }
@@ -1805,7 +1805,7 @@ ul.social-buttons li a:active {
 .kyw-wardrobe-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
@@ -1813,28 +1813,28 @@ ul.social-buttons li a:active {
 .kyw-finishes-type-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 30%;
     width: 100%;
 }
 .kyw-splash-panel-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
 .kyw-material-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 10%;
     width: 100%;
 }
 .kyk-counter-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 10%;
     width: 100%;
 }
@@ -3017,14 +3017,14 @@ ul.social-buttons li a:active {
 .kitchen-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
 .kitchen-tab-sink{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 55%;
     width: 100%;
 }
@@ -3131,14 +3131,14 @@ ul.social-buttons li a:active {
 .kitchen-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
 .kitchen-tab-sink{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 45%;
     width: 100%;
 }
