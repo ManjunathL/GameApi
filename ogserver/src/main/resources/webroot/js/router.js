@@ -571,7 +571,7 @@ define([
             });
         });
         router.on('route:diy', function(name) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/c_scale,h_95,w_130/v1472648928/home/new_design/preloader.nobg.gif' class='page-tran'>"), 0);
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/story/full_diy'], function(FullDiyPage) {
 
                 var options = {
