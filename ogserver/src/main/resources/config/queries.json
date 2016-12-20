@@ -13,6 +13,19 @@
       ]
     },
     {
+      "id": "user_profile.insert_crm",
+      "type": "insert",
+      "table": "user_profile",
+      "query": "insert into user_profile ( fbid, active, email, profile, crmId, proposal) values (?, 'A', ?, ?, ?, ?)",
+      "params": [
+        "fbid",
+        "email",
+        "profile",
+        "crmId",
+        "proposal"
+      ]
+    },
+    {
       "id": "user_profile.update",
       "type": "update",
       "table": "user_profile",

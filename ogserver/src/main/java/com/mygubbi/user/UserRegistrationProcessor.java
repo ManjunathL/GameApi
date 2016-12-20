@@ -4,6 +4,8 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.si.crm.CreateProposal;
+import com.mygubbi.si.crm.CrmApiHandler;
 import com.mygubbi.si.data.DataProcessor;
 import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.data.EventData;
@@ -65,10 +67,10 @@ public class UserRegistrationProcessor implements DataProcessor
     {
         JsonObject jsonData = eventData.getJsonData();
         LOG.info("Mehbub" +jsonData.encodePrettily());
-        JsonObject userJson = new JsonObject().put("crmId", jsonData.getString("crmId")).put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
+        JsonObject userJson = new JsonObject().put("proposal",jsonData.getString("proposal")).put("crmId", jsonData.getString("crmId")).put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
         LOG.info("Mehbub USER" +userJson.encodePrettily());
 
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert_crm", userJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> res) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(res.result().body());
@@ -78,6 +80,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     }
                     else
                     {
+
                         this.sendWelcomeEmail(eventData);
                     }
                 });
