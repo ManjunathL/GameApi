@@ -163,7 +163,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 });
     }
 
-    private void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData)
+    public void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData)
     {
         LOG.info("Update in Firebase");
         LOG.info(proposalData.encodePrettily());
@@ -308,7 +308,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             HttpResponse response;
            // String password = RandomStringUtils.random(8, true, true);
             String password = "mygubbi";
-            String name = userJson.getString("first_name");
+            String name = userJson.getString("firstName");
             String phone =  userJson.getString("mobile");
             String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
 
@@ -324,6 +324,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
                     .setParameter("crmId",userJson.getString("opportunityId"))
+                    .setParameter("proposal",userJson.toString())
                     .build();
            // LOG.debug("URL :" + uri.toString());
             String urlString = URLDecoder.decode(uri.toString(), "UTF-8");
