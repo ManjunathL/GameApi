@@ -155,12 +155,14 @@
 @media (max-width: 480px) {
     .banner-link {
         position: absolute;
-        right: 31%;
+        right: auto;
         top: 0px;
+        padding: 0% 30%;
     }
 
     .img-banner-link {
-        width: 160px;
+        width: 100%;
+        margin: 0px auto;
     }
 }
 
@@ -8183,7 +8185,7 @@ html .ui-button.ui-state-disabled:active {
         font-size: 18px;
     }
     .story-desc-overflow {
-        max-height: 170px;
+        max-height: 175px;
     }
     .txt-over-style-image {
         position: absolute;
@@ -8250,7 +8252,7 @@ html .ui-button.ui-state-disabled:active {
 
 @media (max-width: 767px) {
     .banner-icon-height{
-        min-height: 145px;
+        min-height: 150px;
     }
     .address_right_section{
         background: rgba(0,0,0,0.8);
