@@ -65,7 +65,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
-        createCustomer(routingContext);
+        //createCustomer(routingContext);
         String email = requestJson.getString("email");
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -274,6 +274,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
                            createUserOnWebsite(userJson);
+                            createProposal(routingContext, userJson);
 
                         //  sendJsonResponse();
                         //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
