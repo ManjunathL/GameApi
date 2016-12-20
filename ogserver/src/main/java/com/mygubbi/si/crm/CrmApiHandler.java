@@ -156,7 +156,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     {
 
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
-                        updateDataInFirebase(requestJson, proposalData);
+                       // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
