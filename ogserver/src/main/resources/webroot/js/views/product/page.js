@@ -101,6 +101,13 @@ define([
                             silent: true
                         });
                     }
+                    if (!(that.filter.get('location'))) {
+                       that.filter.set({
+                           'location': that.seoFilterMaster.get(0).location
+                       }, {
+                           silent: true
+                       });
+                   }
                      if (!(that.filter.get('metaTitle'))) {
                         that.filter.set({
                             'metaTitle': that.seoFilterMaster.get(0).title

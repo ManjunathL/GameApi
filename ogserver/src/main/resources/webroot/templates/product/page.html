@@ -27,6 +27,24 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <ul class="breadcrumb">
                         <li><a href="/"><i class="fa fa-home"></i></a></li>
+                        <% var city = filter.location; %>
+                        <% if(city !== 'undefined' && city != null){ %>
+                        <% if(city == 'website' ){ %>
+                        <li></li>
+
+                        <% }else{ %>
+
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span >
+
+                                     <%= city %>
+
+                                </span></a>
+                        </li>
+                        <% } %>
+
+                        <% } %>
                         <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
                         <li class="active"><a href="javascript:void(0);"><span
                                 class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
@@ -35,11 +53,11 @@
                         %>
                         <li>
                             <% if(filter.selectedCategoryName == 'living & dining'){ %>
-                            <a href="/living-and-dining-room-designs">Storage Solutions</a>
+                            <a href="/living-and-dining-room-designs"><%= filter.selectedCategoryName %></a>
                             <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
                             <a href="/kitchen-cabinet-design"><%= filter.selectedCategoryName %></a>
                             <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                            <a href="/bedroom-interior-design">Wardrobe</a>
+                            <a href="/bedroom-interior-design"><%= filter.selectedCategoryName %></a>
                             <% } %>
 
                         </li>
@@ -47,11 +65,8 @@
                         <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
                         null){ %>
                         <li class="active">
-                            <% if(filter.selectedSubCategoryName == 'Wardrobe'){ %>
-                            <a href="javascript:void(0);"><span class="li-txt-wrap">Wardrobe Collection</span></a></li>
-                        <% }else { %>
-                        <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
-                        <% } %>
+                            <a href="javascript:void(0);"><span
+                                    class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
                         <% } %>
                         <% } %>
                     </ul>
