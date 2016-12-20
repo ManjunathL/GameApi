@@ -78,7 +78,7 @@
                             <% } %>
                             <% if (filter.selectedFiltersName != '' && filter.filterIds != '') {%>
                             <% if(flag == 1){ %>
-                             <span class="tag-card" id="filter-ellipses" data-toggle="tooltip" data-placement="bottom" title="More Filters Applied">...</span>
+                            <span class="tag-card" id="filter-ellipses" data-toggle="tooltip" data-placement="bottom" title="More Filters Applied">...</span>
                             <% } %>
                             <span class="tag-card color-orange margin0" id="clear_all" onclick="removeAllFilters()"> Clear All </span>
                             <% } %>
@@ -148,96 +148,96 @@
                         <% } %>
 
                         <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %>
-<!--
-                        <li class="padding0-20">
-                            <a
-                                    class="dropdown-toggle"
-                                    id="dropdownMenu_pricerange"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="true">
-                                Price Range
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                &lt;!&ndash; <% _.each(filterMaster.price_ranges, function(range){ %>
-                                 <li class="
-                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                 <% if(range.name == filtername){ %> noclick <% } %>
-                                 <% }); %>
-                                 <% } %>"
-                                     id="<%= range.id + 'p_r' %>"
-                                     title="<%= range.name %>"
-                                     onclick="getPriceRangeId(this.id,this.title)">
-                                     <a>
-                                         <input
-                                                 type="checkbox"
-                                                 class="margin-right-5"
-                                                 name="price_range"
-                                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                         <% if(range.name == filtername){ %> checked <% } %>
-                                         <% }); %>
-                                         <% } %>>
-                                         <%= range.name %>
-                                     </a>
-                                 </li>
-                                 <% }); %>&ndash;&gt;
-                                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                                <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
-                                <li>
-                                    &lt;!&ndash; <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                                     <div class="price-slide">
-                                         <div class="slider-ioc">  </div>
-                                     <div id="slider-range-min"></div>
-                                         </div>
-                                     <div class="price-tag">
-                                         <div class="pull-left"> Rs 1 </div>
-                                         <div class="pull-right"> Rs 400000 </div>
-                                     </div>&ndash;&gt;
-                                    <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
-    margin-left: 26px;" />
-                                    <div class="price-slide">
-                                        <div class="slider-ioc"></div>
+                        <!--
+                                                <li class="padding0-20">
+                                                    <a
+                                                            class="dropdown-toggle"
+                                                            id="dropdownMenu_pricerange"
+                                                            data-toggle="dropdown"
+                                                            aria-haspopup="true"
+                                                            aria-expanded="true">
+                                                        Price Range
+                                                        <span class="caret"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
+                                                        &lt;!&ndash; <% _.each(filterMaster.price_ranges, function(range){ %>
+                                                         <li class="
+                                                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                                         <% if(range.name == filtername){ %> noclick <% } %>
+                                                         <% }); %>
+                                                         <% } %>"
+                                                             id="<%= range.id + 'p_r' %>"
+                                                             title="<%= range.name %>"
+                                                             onclick="getPriceRangeId(this.id,this.title)">
+                                                             <a>
+                                                                 <input
+                                                                         type="checkbox"
+                                                                         class="margin-right-5"
+                                                                         name="price_range"
+                                                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                                                 <% if(range.name == filtername){ %> checked <% } %>
+                                                                 <% }); %>
+                                                                 <% } %>>
+                                                                 <%= range.name %>
+                                                             </a>
+                                                         </li>
+                                                         <% }); %>&ndash;&gt;
+                                                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                                                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
+                                                        <li>
+                                                            &lt;!&ndash; <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                                             <div class="price-slide">
+                                                                 <div class="slider-ioc">  </div>
+                                                             <div id="slider-range-min"></div>
+                                                                 </div>
+                                                             <div class="price-tag">
+                                                                 <div class="pull-left"> Rs 1 </div>
+                                                                 <div class="pull-right"> Rs 400000 </div>
+                                                             </div>&ndash;&gt;
+                                                            <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
+                            margin-left: 26px;" />
+                                                            <div class="price-slide">
+                                                                <div class="slider-ioc"></div>
 
-                                        <div  id="slider-range"></div>
-                                    </div>
-                                    <div class="price-tag">
-                                        <div class="pull-left"> Rs 0 </div>
-                                        <div class="pull-right"> Rs 600000 </div>
-                                    </div>
-                                </li>
+                                                                <div  id="slider-range"></div>
+                                                            </div>
+                                                            <div class="price-tag">
+                                                                <div class="pull-left"> Rs 0 </div>
+                                                                <div class="pull-right"> Rs 600000 </div>
+                                                            </div>
+                                                        </li>
 
-                                <% }else{ %>
-                                <li>
-                                    <p>
-                                        <input type="text" id="amount2" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
-    margin-left: 26px;" />
-                                    </p>
-                                    <div class="price-slide">
-                                        <div class="slider-ioc"></div>
-                                        <div id="slider-range2"></div>
-                                    </div>
-                                    <div class="price-tag">
-                                        <div class="pull-left"> Rs 0 </div>
-                                        <div class="pull-right"> Rs 40000 </div>
-                                    </div>
-                                    &lt;!&ndash;   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                                       <div class="price-slide">
-                                           <div class="slider-ioc">  </div>
-                                       <div id="slider-range-min2"></div>
-                                           </div>
-                                       <div class="price-tag">
-                                           <div class="pull-left"> Rs 1</div>
-                                           <div class="pull-right"> Rs 40000 </div>
-                                       </div>&ndash;&gt;
-                                </li>
-                                <% } %>
-                                <% } %>
-                            </ul>
-                        </li>
--->
+                                                        <% }else{ %>
+                                                        <li>
+                                                            <p>
+                                                                <input type="text" id="amount2" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
+                            margin-left: 26px;" />
+                                                            </p>
+                                                            <div class="price-slide">
+                                                                <div class="slider-ioc"></div>
+                                                                <div id="slider-range2"></div>
+                                                            </div>
+                                                            <div class="price-tag">
+                                                                <div class="pull-left"> Rs 0 </div>
+                                                                <div class="pull-right"> Rs 40000 </div>
+                                                            </div>
+                                                            &lt;!&ndash;   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                                               <div class="price-slide">
+                                                                   <div class="slider-ioc">  </div>
+                                                               <div id="slider-range-min2"></div>
+                                                                   </div>
+                                                               <div class="price-tag">
+                                                                   <div class="pull-left"> Rs 1</div>
+                                                                   <div class="pull-right"> Rs 40000 </div>
+                                                               </div>&ndash;&gt;
+                                                        </li>
+                                                        <% } %>
+                                                        <% } %>
+                                                    </ul>
+                                                </li>
+                        -->
                         <% } %>
 
                         <% if(typeof(filterMaster.styles) !== 'undefined'){ %>
@@ -422,7 +422,7 @@
                         <% }); %>
                     </div>
 
-            </div>
+                </div>
 
                 <div class="close-icon2per" onclick="closePop()">
                     <img src="<%= imgBase + 'close-white.png'%>" title="Close" alt="Close">
@@ -437,20 +437,20 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
-                <h5> Filters Applied : </h5>
+                    <h5> Filters Applied : </h5>
 
-                <div class="cart-wrapper">
-                    <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                    <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                    <div class="font-size14 tag-card">
-                        <span class="padding-right20"><%= filtername %></span>
+                    <div class="cart-wrapper">
+                        <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                        <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                        <div class="font-size14 tag-card">
+                            <span class="padding-right20"><%= filtername %></span>
                         <span class="pe-7s-close font-size25 tag-card-close"
-                                onclick="removeFilters('<%= filtername %>')">
+                              onclick="removeFilters('<%= filtername %>')">
                         </span>
+                        </div>
+                        <% }); %>
+                        <% } %>
                     </div>
-                    <% }); %>
-                    <% } %>
-                </div>
                 </div>
             </div>
         </div>
@@ -569,7 +569,11 @@
         $(window).scroll(function () {
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
-                $('#filter-desc-container').addClass('stick').css({'top': '0px'});
+                if(document.documentElement.clientWidth < 900){
+                    $('#filter-desc-container').addClass('stick').css({'top': '75px'});
+                }else{
+                    $('#filter-desc-container').addClass('stick').css({'top': '116px'});
+                }
                 //$('#filter-desc').css({'padding': '10px 0px'});
                 $('#filter-desc').css({'line-height': '2'});
                 $('.filter-desc-col').addClass('stick-tag');
@@ -579,7 +583,12 @@
                 $('#filter-desc-container').removeClass('stick');
                 //$('#filter-desc').css({'padding': '20px 0px'});
                 $('.filter-desc-col').removeClass('stick-tag');
-                $('#filtered-list').removeClass('stick').css({'top': '0px'});
+                if(document.documentElement.clientWidth < 900){
+                   $('#filtered-list').removeClass('stick').css({'top': '75px'});
+                }else{
+                    $('#filtered-list').removeClass('stick').css({'top': '116px'});
+                }
+
                 $('#filter-choose-container').removeClass('stick').slideDown();
             }
 
@@ -593,7 +602,7 @@
         });
 
         $('#filter-desc-container').on('mouseenter', '.stick-tag', function () {
-            $('#filter-choose-container').addClass('stick').animate({'top': '0px'}, 500);
+            $('#filter-choose-container').addClass('stick').animate({'top': '116px'}, 500);
             $('#filter-choose-container').css('display', 'block');
         });
 
