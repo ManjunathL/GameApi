@@ -71,7 +71,7 @@ define([
             'nest-of-tables-:cityName(/)': 'nestofTableB',
             'coffee-tables-:cityName(/)': 'cofeeTableB',
             'buy-chest-of-drawers-:cityName(/)': 'chestofDrawerB',
-            'modular-kitchen-:cityName(/)': 'kitchens',
+            'modular-kitchen-cabinet-:cityName(/)': 'kitchens',
             'storage-solutions-:cityName(/)': 'livingDining',
             //'wardrobes-online-:cityName(/)': 'bedroom',
             /* End of enhancment of SEO City URL */

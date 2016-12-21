@@ -1173,7 +1173,7 @@ ul.social-buttons li a:active {
    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: 420px;
+    min-height: 420px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -1240,7 +1240,7 @@ ul.social-buttons li a:active {
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470644384/kyk/sink___faucet.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: 420px;
+    min-height: 420px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -1301,7 +1301,7 @@ ul.social-buttons li a:active {
        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
-        height: 570px;
+        min-height: 570px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
@@ -1319,7 +1319,7 @@ ul.social-buttons li a:active {
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470644384/kyk/sink___faucet.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
-        height: 570px;
+        min-height: 570px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
@@ -1468,16 +1468,16 @@ ul.social-buttons li a:active {
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470396311/kyk/10.jpg");
         background-repeat: no-repeat;
         background-position: inherit;
-        height: auto;
+        min-height: 170px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
         -o-background-size: 100%;
         background-size: 100%;
-        -webkit-background-size: contain;
-        -moz-background-size: contain;
-        -o-background-size: contain;
-        background-size: contain;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
         padding: 15px 0 15px 0;
         text-align: center;
         color: #333333;
@@ -1495,21 +1495,23 @@ ul.social-buttons li a:active {
     .kyk-kyw-head-light{
         color: #333;
     }
-
+    .kyk-sink-cont{
+        text-align: center;
+    }
     .kyk-sink-section{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470395676/kyk/16.jpg");
         background-repeat: no-repeat;
         background-position: inherit;
-        height: auto;
+        min-height: 170px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
         -o-background-size: 100%;
         background-size: 100%;
-        -webkit-background-size: contain;
-        -moz-background-size: contain;
-        -o-background-size: contain;
-        background-size: contain;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
         padding: 15px 0 15px 0;
         text-align: center;
         color: #333333;
@@ -1828,7 +1830,7 @@ ul.social-buttons li a:active {
     display: block;
     position: absolute;
     z-index: 9;
-    top: 10%;
+    top: 5%;
     width: 100%;
 }
 .kyk-counter-content-tab{
