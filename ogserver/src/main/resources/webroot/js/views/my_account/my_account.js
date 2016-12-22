@@ -390,7 +390,7 @@ define([
                         that.proposal.fetch({
                             data: {
                              "emailId": salesExecEmail,
-                             "status":"rejected",
+                             "status":"Deferred",
                              "customerName":customerName,
                              "customerPhone":customerphone,
                              "designerEmail":designerEmail,
@@ -446,7 +446,7 @@ define([
                     that.proposal.fetch({
                         data: {
                          "emailId": salesExecEmail,
-                         "status":"approved",
+                         "status":"Completed",
                          "customerName":customerName,
                          "customerPhone":customerphone,
                          "designerEmail":designerEmail,
