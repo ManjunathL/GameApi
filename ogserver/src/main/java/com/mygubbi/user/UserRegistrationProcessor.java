@@ -81,7 +81,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     else
                     {
 
-                        this.sendWelcomeEmail(eventData);
+                       // this.sendWelcomeEmail(eventData);
                     }
                 });
     }
