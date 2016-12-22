@@ -5,8 +5,11 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.route.AbstractRouteHandler;
+import com.mygubbi.si.email.EmailData;
 import com.mygubbi.si.firebase.FirebaseDataRequest;
 import com.mygubbi.si.firebase.FirebaseDataService;
+import com.sendgrid.SendGrid;
+import com.sendgrid.SendGridException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -15,6 +18,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Date;
 
 /**
  * Created by Chirag on 26-10-2016.
@@ -30,6 +35,7 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.get("/getOpportunityDetails").handler(this::getOpportunityDetails);
+        this.get("/sendApprovalEmail").handler(this::sendEmailToSales);
         this.post("/getDocuments").handler(this::getDocuments);
         this.post("/getLatestDocuments").handler(this::getLatestDocuments);
         this.post("/updateTask").handler(this::updateTask);
@@ -37,6 +43,97 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
 
 
     }
+
+    private void sendEmailToSales(RoutingContext routingContext) {
+        String emailId = routingContext.request().getParam("emailId");
+        String status = routingContext.request().getParam("status");
+        String customerName = routingContext.request().getParam("customerName");
+        String customerPhone = routingContext.request().getParam("customerPhone");
+        String scheduleTime = routingContext.request().getParam("scheduleTime");
+        String designerEmail = routingContext.request().getParam("designerEmail");
+        String crmId = routingContext.request().getParam("crmId");
+        String  opportunities = "Opportunities";
+        String taskType = routingContext.request().getParam("taskType");
+        String  taskId = "";
+        String  parentId = "1";
+        JsonObject params = new JsonObject().put("emailId", emailId).put("status", status).put("scheduleTime",scheduleTime).put("customerName",customerName).put("customerPhone",customerPhone).put("designerEmail",designerEmail);
+      //  JsonObject updateInCrm = new JsonObject().
+        try {
+            LOG.info(" Update Task" +opportunities + "," + crmId + "," + status + "," + taskType + "," + parentId);
+           new CrmApiClient().updateTask(opportunities, crmId, status, taskId, taskType, parentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sendWelcomeEmail(params);
+        sendJsonResponse(routingContext, new JsonObject().put("status is", "Email Sent and task Updated").toString());
+
+    }
+
+
+    private void sendWelcomeEmail(JsonObject jsonData) {
+    String emailId = jsonData.getString("emailId");
+    String status = jsonData.getString("status");
+    String customerName = jsonData.getString("customerName");
+    String customerPhone = jsonData.getString("customerPhone");
+    String scheduleTime = jsonData.getString("scheduleTime");
+    String designerEmail = jsonData.getString("designerEmail");
+    LOG.info(emailId);
+    LOG.info(status);
+    LOG.info(scheduleTime);
+    LOG.info(customerName);
+    LOG.info(customerPhone);
+    LOG.info(designerEmail);
+    if (status != "approved" & scheduleTime != null ) {
+        EmailData emailData = new EmailData().setFromEmail("mehaboob.basha@orangegubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+                .setSubject("Welcome to mygubbi!")
+                .setBodyTemplate("your customer")
+                .setTextMessage(customerName + " " + "has " + " "+ status + "  " + "our  proposal." + " " + "Please call back to this number" + " " + customerPhone + " @ " + scheduleTime );
+
+        final String SENDGRID_APIKEY = "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";
+
+        SendGrid sendgrid = new SendGrid(SENDGRID_APIKEY);
+        SendGrid.Email email = new SendGrid.Email();
+        email.addTo(emailData.getToEmail());
+        email.setFrom(emailData.getFromEmail());
+        email.setCc(new String[]{"smruti.m@mygubbi.com"});
+        email.setSubject(emailData.getSubject());
+        email.setHtml(emailData.getMessageBody());
+//        email.setText("Trying again ...");
+
+        try {
+            SendGrid.Response response = sendgrid.send(email);
+            LOG.info("Message sent status: " + response.getMessage());
+        } catch (SendGridException e) {
+            LOG.error("Error in sending email.", e);
+        }
+    }
+    else{
+
+        EmailData emailData = new EmailData().setFromEmail("mehaboob.basha@orangegubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+                .setSubject("Welcome to mygubbi!")
+                .setBodyTemplate("your customer")
+                .setTextMessage(customerName + " " + "has " + " "+ status + " his proposal");
+
+        final String SENDGRID_APIKEY = "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";
+
+        SendGrid sendgrid = new SendGrid(SENDGRID_APIKEY);
+        SendGrid.Email email = new SendGrid.Email();
+        email.addTo(emailData.getToEmail());
+        email.setFrom(emailData.getFromEmail());
+        email.setCc(new String[]{"smruti.m@mygubbi.com"});
+        email.setSubject(emailData.getSubject());
+        email.setHtml(emailData.getMessageBody());
+//        email.setText("Trying again ...");
+
+        try {
+            SendGrid.Response response = sendgrid.send(email);
+            LOG.info("Message sent status: " + response.getMessage());
+        } catch (SendGridException e) {
+            LOG.error("Error in sending email.", e);
+        }
+    }
+
+}
 
     private void updateDocument(RoutingContext context) {
         String parentId = context.request().getParam("parentId");
@@ -47,22 +144,17 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
         String file_ext = context.request().getParam("file_ext");
         String file_name = context.request().getParam("file_name");
 
-        try
-        {
-        String updateDocument = new CrmApiClient().updateDocument(parentId, parentType, category, user_id, file_contents, file_ext, file_name);
-            if (updateDocument == null || updateDocument.isEmpty())
-            {
+        try {
+            String updateDocument = new CrmApiClient().updateDocument(parentId, parentType, category, user_id, file_contents, file_ext, file_name);
+            if (updateDocument == null || updateDocument.isEmpty()) {
                 sendJsonResponse(context, "[]");
+            } else {
+                sendJsonResponse(context, updateDocument);
             }
-            else{
-                sendJsonResponse(context, updateDocument );
-                }
-            }
-        catch (Exception e) {
+        } catch (Exception e) {
             sendError(context, "No Documents Found : ");
         }
     }
-
     private void updateTask(RoutingContext context) {
         String parentId = context.request().getParam("parentId");
         String parentType = context.request().getParam("parentType");

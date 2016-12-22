@@ -22,8 +22,8 @@ public class CrmApiClient
 {
     public static final String APPLICATION_NAME = "mygubbilive";
     public static final String VERSION = "0.1";
-    public static final String USER_NAME = "Admin";
-    public static final String PASSWORD = "Dolphin19";
+    public static final String USER_NAME = "admin";
+    public static final String PASSWORD = "admin!@#";
     private final static Logger LOG = LogManager.getLogger(CrmApiClient.class);
 
     private SugarsoapPortType crmPort;
@@ -36,25 +36,34 @@ public class CrmApiClient
 
 //    public static void main(String[] args)
 //    {
-//       // String  opportunity= "SAL-1607-000039";
-//        String  opportunity= "SAL-1607-000035";
-//       // String  opportunity= "SAL-1607-000039";
-//        // String  opportunity= "SAL-1608-000110";
+//        //String  opportunity= "SAL-1607-000039";
+//       // String  opportunity= "SAL-1607-000035";
+//        String  opportunity= "SAL-1612-000793";
+//        //String  opportunity= "SAL-1607-000039";
+//        //String  opportunity= "SAL-1609-000286";
+//        //String  opportunity= "SAL-1607-000022";
+//       // String  opportunity= "SAL-1611-000541";
+//       // String  opportunity= "SAL-1608-000110";
 //        String  opportunities = "Opportunities";
 //        String  category = "Floor_Plan";
 //        String  type = "all";
 //        String  status = "In Progress";
 //        String  taskType = "Intial Approval";
 //        String  parentType = "Oppertunity";
-//        String  taskId = null;
+//        String  taskId = "";
 //        String  parentId ="1";
 //
 //
 //        try {
-//            System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
-//
-//            //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-//            // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
+//           System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+//          //  status  = "Deferred";
+//            status  = "Completed";
+//           taskType = "INITIAL_PROPOSAL_APPROVAL"; // initial proposal aprrove
+//           // taskType = "SEND_INITIAL_PROPOSAL";  // Send initial Proposal
+//            // taskType = "INITIAL_PROPOSAL_RESPONSE"; // Customer Response on initial Proposal
+//            //parentId = "19769ef7-515e-485f-3d23-5703a4073947";
+//           //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+//          // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
 //            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
 //
 //        } catch (Exception e) {
@@ -110,7 +119,6 @@ public class CrmApiClient
     public String getOpportunityDetails(String opportunityId) throws Exception
     {
         JsonObject doc = new JsonObject(this.crmPort.get_opportunity_details(this.sessionId, opportunityId));
-        sendWelcomeEmail(doc);
         String status = (String) doc.getValue("sales_stage");
 
 //        if (status.equals("Customer_Requirement_Update") || status.equals("Floor Plan Uploaded") || status.equals("Initial Proposal Uploaded")){
@@ -162,40 +170,40 @@ public class CrmApiClient
 
         String  opportunities = "Opportunities";
 
-        String  categoryFloorPlan = "Floor_Plan";
+        String  categoryFloorPlan = "FLOOR_PLAN";
         String  type = "latest";
         JsonArray documentFloorPlan = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFloorPlan, type));
         //JsonArray latestDocumentFloorPlan = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryFloorPlan));
-
-        String  categoryInitialProposal = "Proposal";
-        JsonArray documentInitialProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryInitialProposal, type));
-
-        String  categoryFinalProposal = "Final_Poposal";
-        JsonArray documentFinalProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFinalProposal, type));
-
-
-       // JsonArray latestDocumentProposal = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryProposal));
-
-        //JsonObject objectLatestDocumentFloorPlan = latestDocumentFloorPlan.getJsonObject(0);
-        //JsonObject objectLatestDocumentProposal = latestDocumentProposal.getJsonObject(0);
-
         JsonArray proposalObject = new JsonArray();
         if (documentFloorPlan.size() != 0 ) {
             JsonObject objectDocumentFloorPlan = documentFloorPlan.getJsonObject(0);
 
             proposalObject.add(objectDocumentFloorPlan);
         }
+        String  categoryInitialProposal = "INITIAL_PROPOSAL";
+        JsonArray documentInitialProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryInitialProposal, type));
         if (documentInitialProposal.size() != 0 ) {
             JsonObject objectInitialDocumentProposal = documentInitialProposal.getJsonObject(0);
 
             proposalObject.add(objectInitialDocumentProposal);
         }
+        String  categoryFinalProposal = "FINAL_PROPOSAL";
+        JsonArray documentFinalProposal = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryFinalProposal, type));
         if (documentFinalProposal.size() != 0 )
         {
             JsonObject objectFinalDocumentProposal = documentFinalProposal.getJsonObject(0);
             proposalObject.add(objectFinalDocumentProposal);
 
         }
+
+       // JsonArray latestDocumentProposal = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryProposal));
+
+        //JsonObject objectLatestDocumentFloorPlan = latestDocumentFloorPlan.getJsonObject(0);
+        //JsonObject objectLatestDocumentProposal = latestDocumentProposal.getJsonObject(0);
+
+
+
+
        // proposalObject.add(objectLatestDocumentFloorPlan);
         //proposalObject.add(objectLatestDocumentProposal);
 
@@ -251,37 +259,14 @@ public class CrmApiClient
     }
 
     public String updateTask(String parentType, String parentId, String status, String task_id, String task_type, String user_id) throws Exception {
-        System.out.print(parentType + parentId + status + task_id + task_type + user_id);
-        System.out.print( new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)));
-        return new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)).encodePrettily();
+
+
+        System.out.println(parentType + parentId + status + task_id + task_type + user_id);
+        //System.out.print( new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)));
+       //return new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)).encodePrettily();
+        String doc = this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id);
+        return doc;
     }
 
-
-    private void sendWelcomeEmail(JsonObject jsonData) {
-//        EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
-//                .setHtmlBody(true).setParams(new JsonObject().put("name", "Mehbub").getMap())
-//                .setSubject("Welcome to mygubbi!").setBodyTemplate("email/welcome.user.vm")
-//                .setSubjectTemplate("email/welcome.user.subject.vm");
-        EmailData emailData = new EmailData().setFromEmail("mehaboob.basha@orangegubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
-                .setSubject("Welcome to mygubbi!")
-                .setBodyTemplate("your customer")
-                .setTextMessage(jsonData.getString("customer_email_c") + "approved his proposal");
-         final String SENDGRID_APIKEY = "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";
-
-        SendGrid sendgrid = new SendGrid(SENDGRID_APIKEY);
-        SendGrid.Email email = new SendGrid.Email();
-        email.addTo(emailData.getToEmail());
-        email.setFrom(emailData.getFromEmail());
-        email.setSubject(emailData.getSubject());
-        email.setHtml(emailData.getMessageBody());
-//        email.setText("Trying again ...");
-
-        try {
-            SendGrid.Response response = sendgrid.send(email);
-            LOG.info("Message sent status: " + response.getMessage());
-        } catch (SendGridException e) {
-            LOG.error("Error in sending email.", e);
-        }
-    }
 
 }
