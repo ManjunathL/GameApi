@@ -460,6 +460,7 @@ define([
                                 console.log("successfully pushed data");
                                 $("#approve_successMsg").fadeIn();
                                 $("#approvebtn").addClass('disabled');
+                                $(".salesStage").fadeOut(1000);
                                 $('#approve_successMsg').fadeOut(5000);
                             }
                         },
