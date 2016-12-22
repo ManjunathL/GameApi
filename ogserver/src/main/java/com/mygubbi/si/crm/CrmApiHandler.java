@@ -274,7 +274,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         {
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
-                           createUserOnWebsite(userJson);
+                            createCustomer(routingContext, userJson);
                             createProposal(routingContext, userJson);
 
                         //  sendJsonResponse();
@@ -293,7 +293,16 @@ public class CrmApiHandler extends AbstractRouteHandler
                 });
 
     }
+    private void createCustomer(RoutingContext routingContext, JsonObject requestJson) {
 
+        JsonObject userJson = routingContext.getBodyAsJson();
+        LOG.info("New customer request : " + userJson.encodePrettily());
+        LOG.info("RequestJSON customer request : " + requestJson.encodePrettily());
+        requestJson.put("opportunityId", requestJson.getString("opportunityId"));
+        LOG.info("UpdatedRequestJSON customer request : " + requestJson.encodePrettily());
+        createUserOnWebsite(requestJson);
+
+    }
     private int createUserOnWebsite(JsonObject userJson)
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
@@ -310,10 +319,10 @@ public class CrmApiHandler extends AbstractRouteHandler
             HttpResponse response;
            // String password = RandomStringUtils.random(8, true, true);
             String password = "mygubbi";
-           // String name = userJson.getString("firstName");
-            String name = userJson.getString("email");
-            //String phone =  userJson.getString("mobile");
-            String phone =  userJson.getString("userId");
+            String name = userJson.getString("firstName");
+            //String name = userJson.getString("email");
+            String phone =  userJson.getString("mobile");
+           // String phone =  userJson.getString("userId");
             String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
 
             LOG.info("decodedEmail"   +decodedEmail);
