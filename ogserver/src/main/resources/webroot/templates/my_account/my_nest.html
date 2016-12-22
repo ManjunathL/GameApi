@@ -222,6 +222,8 @@
         <div class="tab-content">
             <% if(typeof(myNest.documentDetails[1]) != 'undefined'){ %>
             <div role="tabpanel" class="tab-pane padding10 active" id="proposal">
+
+
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
                         <div id="approve_successMsg" class="alert alert-info display-none">
@@ -268,13 +270,58 @@
                     </div>
                 </div>
                 <div class="row"><div class="col-md-12"><hr/></div></div>
+                <% if(typeof(myNest.documentDetails[2]) != 'undefined'){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="text-transform-none">Final Proposal <% if((typeof(myNest) !== 'undefined') && (typeof(myNest.documentDetails[2].uploadDate) !== 'undefined')){ %>
+                            ( <%= myNest.documentDetails[2].uploadDate %> )
+                            <% } %></h4>
+                        <hr />
+                        <div class="col-md-8 padding0">
+                            <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
+                        </div>
 
+                        <div class="col-md-4" style="padding-left: 0px;">
+                            <div class="col-md-12">
+                                <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
+                                    <div class="row">
+                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                            <% if(typeof(myNest) !== 'undefined'){ %>
+                                            <%= myNest.documentDetails[2].documentName %>
+                                            <% } %>
+                                        </span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row"><div class="col-md-12"><hr/></div></div>
+                <% } %>
+
+                <%
+                    var taskType = '';
+                    if(typeof(myNest.documentDetails[2]) != 'undefined'){
+                            taskType = "FINAL_PROPOSAL_RESPONSE";
+                    }else{
+                            taskType = "INITIAL_PROPOSAL_RESPONSE";
+                    }
+
+
+                %>
+                <%= console.log(' ===================== taskType =================== ') %>
+                <%= console.log(taskType) %>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-8 padding0">
                             <h4 class="text-transform-none">By clicking approve button, above proposal will be accepted</h4>
                             [<i>Click here to indicate that you have read and agree to the terms of the Mygubbi Customer Agreement</i>]</div>
-                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button id="approvebtn" type="button" class="btn button-orange font-size18" data-element="<%= myNest.paymentDetails[0].salesExecEmail %>" data-element1="<%= userProfile ? userProfile.displayName : '' %>" data-element2="<%= userProfile ? userProfile.phone : '' %>" data-element3="<%= myNest.paymentDetails[0].designerEmail %>" style="text-transform: none;">Approve</button></div>
+                        <div class="col-md-4 padding0 align-left" style="margin: 40px 0px 0px 0px;"><button id="approvebtn" type="button" class="btn button-orange font-size18" data-element="<%= myNest.paymentDetails[0].salesExecEmail %>" data-element1="<%= userProfile ? userProfile.displayName : '' %>" data-element2="<%= userProfile ? userProfile.phone : '' %>" data-element3="<%= myNest.paymentDetails[0].designerEmail %>" data-element4="<%= userProfile ? userProfile.crmId : '' %>" data-element5="<%= taskType ? taskType : '' %>" style="text-transform: none;">Approve</button></div>
                     </div>
                 </div>
 
@@ -318,7 +365,7 @@
                         <div class="row margin0" id="requestCB_error" style="color:red;"></div>
                     </div>
                     <div class="col-md-4 padding0">
-                        <button type="button" id="callback" class="btn button-orange font-size18" data-element="<%= myNest.paymentDetails[0].salesExecEmail %>" data-element1="<%= userProfile ? userProfile.displayName : '' %>" data-element2="<%= userProfile ? userProfile.phone : '' %>" data-element3="<%= myNest.paymentDetails[0].designerEmail %>" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
+                        <button type="button" id="callback" class="btn button-orange font-size18" data-element="<%= myNest.paymentDetails[0].salesExecEmail %>" data-element1="<%= userProfile ? userProfile.displayName : '' %>" data-element2="<%= userProfile ? userProfile.phone : '' %>" data-element3="<%= myNest.paymentDetails[0].designerEmail %>" data-element4="<%= userProfile ? userProfile.crmId : '' %>" data-element5="<%= taskType ? taskType : '' %>" style="text-transform: none;margin: 45px 0px 0px 0px;">Request For Call Back</button></div>
                 </div>
             </div>
             <% } %>
@@ -425,6 +472,17 @@
                         <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
                            <span class="text-small-proposals">
                                 <%= myNest.documentDetails[1].documentName %>
+                           </span>
+                        </a>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 doc-details">
+                        <% if(typeof(myNest.documentDetails[2]) !== 'undefined'){ %>
+                        <a href="<%= myNest.documentDetails[2].docUrl %>" target="_blank" title="View">
+                           <span class="text-small-proposals">
+                                <%= myNest.documentDetails[2].documentName %>
                            </span>
                         </a>
                         <% } %>

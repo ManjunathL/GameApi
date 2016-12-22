@@ -374,6 +374,8 @@ define([
                 var customerName = $(e.currentTarget).data('element1');
                 var customerphone = $(e.currentTarget).data('element2');
                 var designerEmail = $(e.currentTarget).data('element3');
+                var crmId = $(e.currentTarget).data('element4');
+                var taskType = $(e.currentTarget).data('element5');
                 var scheduleTime = $('#user_date').val() + ' ' + $('#user_time').val();
 
                 var eventData = {
@@ -392,6 +394,8 @@ define([
                              "customerName":customerName,
                              "customerPhone":customerphone,
                              "designerEmail":designerEmail,
+                             "crmId":crmId,
+                             "taskType":taskType,
                              "scheduleTime":scheduleTime
                             },
                             success: function(response) {
@@ -427,6 +431,8 @@ define([
             var customerName = $(e.currentTarget).data('element1');
             var customerphone = $(e.currentTarget).data('element2');
             var designerEmail = $(e.currentTarget).data('element3');
+            var crmId = $(e.currentTarget).data('element4');
+            var taskType = $(e.currentTarget).data('element5');
 
             var eventData = {
                 proposal_status: "Approve"
@@ -443,7 +449,9 @@ define([
                          "status":"approved",
                          "customerName":customerName,
                          "customerPhone":customerphone,
-                         "designerEmail":designerEmail
+                         "designerEmail":designerEmail,
+                         "crmId":crmId,
+                         "taskType":taskType
                         },
                         success: function(response) {
                             console.log(" --------------- proposal response ----------------");
