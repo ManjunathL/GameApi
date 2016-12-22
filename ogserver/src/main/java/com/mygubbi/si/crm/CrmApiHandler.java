@@ -86,13 +86,14 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void createProposal(RoutingContext routingContext, JsonObject requestJson)
     {
-//        LOG.info("USER JSON:------>");
-//        LOG.info(userJson);
+        JsonObject userJson = routingContext.getBodyAsJson();
+        LOG.info("USER JSON:------>");
+        LOG.info(userJson);
         LOG.info("request Json:------>");
         LOG.info(requestJson);
             String stringToBeInserted = requestJson.toString();
 
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + userJson.getString("firstName")).put("cname", requestJson.getString("firstName")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
        // proposalData.put("fullJson", requestJson);
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
