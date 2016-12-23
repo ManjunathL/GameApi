@@ -31,7 +31,7 @@ define([
             'storage-solutions(/)': 'livingDining',
 
 //            'living-and-dining-room-designs(/)': 'livingDining',
-//            'bedroom-interior-design(/)': 'bedroom',
+//            'wardrobe-designs-online(/)': 'bedroom',
             /* Start Dynamic City Url SEO -- Mehbub */
 //            'l-shaped-kitchen-design-:cityName(/)': 'lshapedK',
 //            'shoe-rack-online-:cityName(/)': 'shoeRackLD',
@@ -51,7 +51,7 @@ define([
 //            'buy-chest-of-drawers-online-:cityName(/)': 'chestofDrawerB',
 //            'kitchen-cabinet-design-:cityName(/)': 'kitchens',
 //            'living-and-dining-room-designs-:cityName(/)': 'livingDining',
-//            'bedroom-interior-design-:cityName(/)': 'bedroom',
+//            'wardrobe-designs-online-:cityName(/)': 'bedroom',
 
             /* Enhancement of SEO city URL's */
 
