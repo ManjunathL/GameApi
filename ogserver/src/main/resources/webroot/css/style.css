@@ -2819,6 +2819,7 @@ ul.social-buttons li a:active {
         margin: 5% 0%;
         width: 100%;
         float: right;
+        text-align: center;
     }
     .kyk-splash-card {
         margin: 5% 0%;
