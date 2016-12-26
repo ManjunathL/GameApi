@@ -21,7 +21,7 @@
   "fbUrl": "https://mygubbi-cep.firebaseio.com",
   "processfbEvents": true,
   "websiteHost": "mygubbi.com",
-  "acceptSSLCertificates": "true"
+  "acceptSSLCertificates": "false"
 
 }
 
