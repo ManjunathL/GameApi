@@ -311,7 +311,11 @@ public class CrmApiHandler extends AbstractRouteHandler
            // String password = RandomStringUtils.random(8, true, true);
             String password = "mygubbi";
             //String name = userJson.getString("email");
-            String name = userJson.getString("first_name");
+            //String name = userJson.getString("first_name");
+            String fullName = userJson.getString("first_name");
+            // Get the index of the first space.
+            int firstSpaceIndex = fullName.indexOf(" ");
+            String name = fullName.substring(0, firstSpaceIndex);
            String phone =  userJson.getString("mobile");
            // String phone =  userJson.getString("userId");
             String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
