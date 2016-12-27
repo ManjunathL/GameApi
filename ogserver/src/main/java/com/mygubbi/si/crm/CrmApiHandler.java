@@ -275,10 +275,10 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
                            createUserOnWebsite(userJson);
-                         //   createProposal(routingContext, userJson);
+                            createProposal(routingContext, userJson);
 
                         //  sendJsonResponse();
-                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
                         {
