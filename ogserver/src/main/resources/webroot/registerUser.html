@@ -34,7 +34,7 @@
 
             var name = vars['name'];
             var email = decodeURIComponent(vars['email']);
-            var phone = vars['phone'];
+            var phone = decodeURIComponent(vars['phone']);
             var password = vars['password'];
 
             var photoURL = vars['photoURL'] ? vars['photoURL']: 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';

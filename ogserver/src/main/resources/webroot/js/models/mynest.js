@@ -12,6 +12,5 @@ define([
           emailId: ''
         }
     });
-    console.log("model");
     return MyNest;
 });

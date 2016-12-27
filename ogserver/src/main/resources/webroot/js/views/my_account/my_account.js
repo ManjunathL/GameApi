@@ -17,82 +17,23 @@ define([
     'text!/templates/my_account/my_message.html',
     '/js/views/view_manager.js',
     '/js/models/proposal.js',
-    '/js/models/mynest.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNest) {
+    '/js/collections/mynests.js'
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         refAuth: MGF.refAuth,
         myaccount: null,
         proposal: null,
-        mynest:null,
+        mynests:null,
         renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
         var that = this;
         console.log("-----------mynestitems-------------")
         console.log(mynestitems);
-        if(typeof(mynestitems) !== 'undefined'){
+        if(typeof(mynestitems) !== 'undefined' && mynestitems !== null){
 
             var project_status = mynestitems.paymentDetails[0].sales_stage;
             var project_statusArr = new Array();
-            /*switch (project_status) {
-                case "FLOOR_PLAN":
-                    project_statusArr = ["initiated"];
-                    break;
-                case "INITIAL_PROPOSAL":
-                    project_statusArr = ["initiated"];
-                    break;
-                case "BOOKING_FORM":
-                    project_statusArr = ["initiated","proposal approved"];
-                    break;
-                case "SITE_MEASUREMENT":
-                    project_statusArr = ["initiated","proposal approved"];
-                    break;
-                case "DETAILED_DESIGN ":
-                    project_statusArr = ["initiated","proposal approved"];
-                    break;
-                case "FINAL_PROPOSAL":
-                    project_statusArr = ["initiated","proposal approved"];
-                    break;
-                case "WORKS_CONTRACT":
-                    project_statusArr = ["initiated","proposal approved","order placed"];
-                    break;
-                case "SCOPE_DOCUMENT":
-                    project_statusArr = ["initiated","proposal approved","order placed"];
-                    break;
-                case "WORKING_DRAWING":
-                      project_statusArr = ["initiated","proposal approved","order placed"];
-                      break;
-                case "PRODUCTION_DRAWING":
-                      project_statusArr = ["initiated","proposal approved","order placed"];
-                      break;
-                case "SITE_PRESINSTALLATION_CHECKLIST":
-                      project_statusArr = ["initiated","proposal approved","order placed"];
-                      break;
-                case "PO_EXTRACT":
-                      project_statusArr = ["initiated","proposal approved","order placed"];
-                      break;
-                case "QC_REPORT":
-                      project_statusArr = ["initiated","proposal approved","order placed"];
-                      break;
-                case "PRODUCT_PHOTOS":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started"];
-                      break;
-                case "PACKING_LIST_AND_ACCESSORIES_LIST":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
-                      break;
-                case "INVOICES":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
-                      break;
-                case "SNAGLIST":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
-                      break;
-                case "CUSTOMER_HANDOVER":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
-                      break;
-                case "Closed_Won":
-                      project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
-                      break;
-            }*/
             switch (project_status) {
                 case "PROSPECT":case "FLOOR_PLAN_UPLOADED":case "INITIAL_PROPOSAL_UPLOADED":case "INITIAL_PROPOSAL_SENT":
                     project_statusArr = ["initiated"];
@@ -174,12 +115,14 @@ define([
             var authData = this.refAuth.currentUser;
             //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
             MGF.mynest(authData,this.renderWithUserProjectCallback);
+
+
             var that = this;
             var mynestProf = authData.email;
             //var mynestProf = this.model.email;
             console.log(" Mehbub ============= >mynestProf");
             console.log(mynestProf);
-            this.mynest.fetch({
+            this.mynests.fetch({
                  data: {
                      "emailId": mynestProf
                  },
@@ -198,7 +141,7 @@ define([
         },
         fetchMynestAndRender: function(mynestProf) {
             var that = this;
-            var newProf = that.mynest;
+            var newProf = that.mynests;
             newProf = newProf.toJSON();
 
             console.log("---------- Start Profile ------------");
@@ -209,7 +152,7 @@ define([
         },
         initialize: function () {
             this.myaccount = new MyAccount();
-            this.mynest = new MyNest();
+            this.mynests = new MyNests();
 
             this.proposal = new Proposal();
             Analytics.apply(Analytics.TYPE_GENERAL);
