@@ -2,11 +2,11 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
 
     // Initialize Firebase
      var config = {
-       apiKey: "AIzaSyALgwN8p4bsgNDskEP_F4IPEyJTeUaQqTo",
-       authDomain: "mygubbi-cep.firebaseapp.com",
-       databaseURL: "https://mygubbi-cep.firebaseio.com/",
-       storageBucket: "mygubbi-cep.appspot.com",
-       messagingSenderId: "623623245186"
+       apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
+       authDomain: "mygubbi-uat.firebaseapp.com",
+       databaseURL: "https://mygubbi-uat.firebaseio.com/",
+       storageBucket: "mygubbi-uat.appspot.com",
+       messagingSenderId: "106892346704"
      };
      firebase.initializeApp(config);
 

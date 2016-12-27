@@ -6,17 +6,18 @@
     <script>
      // Initialize Firebase
      var config = {
-       apiKey: "AIzaSyALgwN8p4bsgNDskEP_F4IPEyJTeUaQqTo",
-       authDomain: "mygubbi-cep.firebaseapp.com",
-       databaseURL: "https://mygubbi-cep.firebaseio.com",
-       storageBucket: "mygubbi-cep.appspot.com",
-       messagingSenderId: "623623245186"
+       apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
+       authDomain: "mygubbi-uat.firebaseapp.com",
+       databaseURL: "https://mygubbi-uat.firebaseio.com",
+       storageBucket: "mygubbi-uat.appspot.com",
+       messagingSenderId: "106892346704"
      };
      firebase.initializeApp(config);
     </script>
 </head>
 <body>
     <h1 id="test"></h1>
+    <div id="testdv"></div>
     <script>
         $(document).ready(function() {
             var path = $(location).attr('href');
@@ -45,7 +46,7 @@
 
             firebase.auth().createUserWithEmailAndPassword(email, password).then(function(userData) {
                 console.log("Successfully created user account with uid:", userData.uid);
-
+                $("#testdv").text("Successfully created user account with uid:" + userData.uid);
                 var userData = {
                     providerData: "password",
                     email: email,
@@ -65,6 +66,7 @@
             }, function(error) {
                 // An error happened.
                 console.log("Error creating user:", error);
+                $("#testdv").text("Error creating user:" + error);
             });
 
         });
@@ -72,8 +74,10 @@
             firebase.database().ref().child("users").child(userData.uid).set(userData, function(error) {
                 if (error) {
                     console.log("Data could not be saved." + error);
+                    $("#testdv").text("Data could not be saved." + error);
                 } else {
                     console.log("Data saved successfully.");
+                    $("#testdv").text("Data saved successfully.");
                 }
             });
         }
@@ -84,8 +88,10 @@
                 function(error) {
                     if (error) {
                         console.log("password profile data could not be saved." + error);
+                        $("#testdv").text("password profile data could not be saved." + error);
                     } else {
                         console.log("data saved successfully.");
+                        $("#testdv").text("data saved successfully.");
                     }
                 }
             );
@@ -99,8 +105,10 @@
             firebase.database().ref().child("events").push().child(uid).set(eventData, function(error) {
                 if (error) {
                     console.log("not able to push event data", error);
+                    $("#testdv").text("not able to push event data" + error);
                 } else {
                     console.log("successfully pushed event data");
+                    $("#testdv").text("successfully pushed event data");
                 }
             });
         }

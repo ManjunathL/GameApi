@@ -8,7 +8,7 @@
   },
 
   "firebase": {
-    "fb_url": "https://mygubbi-cep.firebaseio.com/",
+    "fb_url": "https://mygubbi-uat.firebaseio.com/",
     "loginid": "mygubbi.uat@gmail.com",
     "password": "uat@mygubbi",
     "processEvents": false
