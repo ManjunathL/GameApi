@@ -20,8 +20,8 @@
   "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
   "fbUrl": "https://mygubbi-cep.firebaseio.com",
   "processfbEvents": true,
-  "websiteHost": "mygubbi.com",
-  "acceptSSLCertificates": "false"
+  "websiteHost": "52.220.90.92",
+  "acceptSSLCertificates": "true"
 
 }
 
