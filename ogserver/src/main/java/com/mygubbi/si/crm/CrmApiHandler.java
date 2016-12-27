@@ -19,10 +19,12 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -53,7 +55,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/createProposal").handler(this::createProposal);
-        this.post("/createCustomer").handler(this::createCustomer);
+      //  this.post("/createCustomer").handler(this::createCustomer);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
 
@@ -65,7 +67,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
-        createCustomer(routingContext);
+        //createCustomer(routingContext);
         String email = requestJson.getString("email");
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -74,10 +76,10 @@ public class CrmApiHandler extends AbstractRouteHandler
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
                         createCustomer(routingContext);
-                        createProposal(routingContext, requestJson);
                     }
                     else
                     {
+                        createProposal(routingContext, requestJson);
 
                     }
                 });
@@ -86,12 +88,15 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     private void createProposal(RoutingContext routingContext, JsonObject requestJson)
     {
-//        LOG.info("USER JSON:------>");
-//        LOG.info(userJson);
+        JsonObject userJson = routingContext.getBodyAsJson();
+        LOG.info("USER JSON:------>");
+        LOG.info(userJson);
         LOG.info("request Json:------>");
         LOG.info(requestJson);
+        String stringToBeInserted = requestJson.toString();
 
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("email")).put("cname", requestJson.getString("email")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+       // proposalData.put("fullJson", requestJson);
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -137,7 +142,63 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                 });
     }
+    private void createNewProposal(JsonObject requestJson)
+    {
+//        JsonObject userJson = routingContext.getBodyAsJson();
+//        LOG.info("USER JSON:------>");
+//        LOG.info(userJson);
+        LOG.info("request Json:------>");
+        LOG.info(requestJson);
+        String stringToBeInserted = requestJson.toString();
 
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("email")).put("cname", requestJson.getString("email")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+        // proposalData.put("fullJson", requestJson);
+        proposalData.put("createdBy", requestJson.getString("designerName"));
+        proposalData.put("opportunityId", requestJson.getString("opportunityId"));
+        proposalData.put("userId", requestJson.getString("userId"));
+        proposalData.put("email", requestJson.getString("email"));
+        proposalData.put("designerUserId", requestJson.getString("designerUserId"));
+        proposalData.put("designerName", requestJson.getString("designerName"));
+        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
+        proposalData.put("salesExecName", requestJson.getString("salesExecName"));
+        proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
+        proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
+        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
+
+        String Json = requestJson.getString("profile ");
+        JsonObject jsonObjectProfile = new JsonObject(Json);
+        proposalData.put("profile",jsonObjectProfile);
+        LOG.info("PROPOSAL DATA: " +proposalData);
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        //sendError(requestJson, "Error in creating proposal.");
+
+                        LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        LOG.info("Create Proposal in Else");
+                        String docsFolder = this.proposalDocsFolder + "/" + proposalData.getLong("id");
+                        try
+                        {
+                            VertxInstance.get().fileSystem().mkdirBlocking(docsFolder);
+                        }
+                        catch (Exception e)
+                        {
+                          //  sendError(routingContext, "Error in creating folder for proposal at path:" + docsFolder);
+                            LOG.error("Error in creating folder for proposal at path:" + docsFolder + ". Error:" + resultData.errorMessage, resultData.error);
+                            return;
+                        }
+                        proposalData.put("folderPath", docsFolder);
+                        LOG.info("Done Proposal");
+                       // this.updateProposal(routingContext, requestJson, proposalData);
+                    }
+                });
+    }
     private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
     {
         LOG.info("updateProposal Started");
@@ -152,16 +213,15 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
-
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
-                        updateDataInFirebase(requestJson, proposalData);
+                       // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
     }
 
-    private void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData)
+    public void updateDataInFirebase(JsonObject requestJson, JsonObject proposalData)
     {
         LOG.info("Update in Firebase");
         LOG.info(proposalData.encodePrettily());
@@ -271,10 +331,11 @@ public class CrmApiHandler extends AbstractRouteHandler
                         {
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
-                           createUserOnWebsite(userJson);
+                            createUserOnWebsite(userJson);
+                         //  createProposal(routingContext, userJson);
 
-                        //  sendJsonResponse();
-                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        // sendJsonResponse();
+                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
                         {
@@ -290,7 +351,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     }
 
-    private void createUserOnWebsite(JsonObject userJson)
+    private int createUserOnWebsite(JsonObject userJson)
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
@@ -306,8 +367,21 @@ public class CrmApiHandler extends AbstractRouteHandler
             HttpResponse response;
            // String password = RandomStringUtils.random(8, true, true);
             String password = "mygubbi";
-            String name = userJson.getString("first_name");
-            String phone =  userJson.getString("mobile");
+            String name;
+            //String name = userJson.getString("email");
+            //String name = userJson.getString("first_name");
+            String fullName = userJson.getString("first_name");
+            // Get the index of the first space.
+            if(fullName.indexOf(" ") != -1) {
+                int firstSpaceIndex = fullName.indexOf(" ");
+                name = fullName.substring(0, firstSpaceIndex);
+            }
+            else {
+                name = fullName;
+            }
+            LOG.info("Name of Customer : " +name);
+           String phone =  userJson.getString("mobile");
+           // String phone =  userJson.getString("userId");
             String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
 
             LOG.info("decodedEmail"   +decodedEmail);
@@ -341,9 +415,16 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-               response = httpclient.execute(new HttpGet(uri));
+                response = httpclient.execute(new HttpGet(uri));
+                ResponseHandler<String> handler = new BasicResponseHandler();
+                String body = handler.handleResponse(response);
+
+               // int code = response.getStatusLine().getStatusCode();
                 int statusCode = response.getStatusLine().getStatusCode();
-                LOG.info("STATUS CODE: " +statusCode);
+                LOG.info("STATUS CODE: " +body);
+                LOG.info("STATUS CODE Success: " +statusCode);
+                createNewProposal(userJson);
+                return statusCode;
             }
             else
             {
@@ -360,6 +441,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         {
             throw new RuntimeException("Error in creating user for : " + email, e);
         }
+        return 0;
     }
 
     private boolean isRequestAuthenticated(RoutingContext routingContext){

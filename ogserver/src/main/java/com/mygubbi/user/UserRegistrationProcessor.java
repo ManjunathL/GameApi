@@ -4,6 +4,8 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.si.crm.CreateProposal;
+import com.mygubbi.si.crm.CrmApiHandler;
 import com.mygubbi.si.data.DataProcessor;
 import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.data.EventData;
@@ -78,7 +80,8 @@ public class UserRegistrationProcessor implements DataProcessor
                     }
                     else
                     {
-                        this.sendWelcomeEmail(eventData);
+
+                       // this.sendWelcomeEmail(eventData);
                     }
                 });
     }
