@@ -66,23 +66,25 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         //createCustomer(routingContext);
-        String email = requestJson.getString("email");
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                      //  createCustomer(routingContext, requestJson);
-                        createProposal(routingContext, requestJson);
+        createProposal(routingContext, requestJson);
 
-                    }
-                    else
-                    {
-                        createProposal(routingContext, requestJson);
-
-                    }
-                });
+//        String email = requestJson.getString("email");
+//        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+//        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+//                (AsyncResult<Message<Integer>> selectResult) -> {
+//                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+//                    if (selectData.rows == null || selectData.rows.isEmpty())
+//                    {
+//                     //  createCustomer(routingContext, requestJson);
+//                        createProposal(routingContext, requestJson);
+//
+//                    }
+//                    else
+//                    {
+//                        createProposal(routingContext, requestJson);
+//
+//                    }
+//                });
     }
 
 
