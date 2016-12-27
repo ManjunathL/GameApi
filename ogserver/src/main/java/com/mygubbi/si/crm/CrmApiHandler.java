@@ -73,7 +73,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        createCustomer(routingContext);
+                        createCustomer(routingContext, requestJson);
                     }
                     else
                     {
@@ -250,21 +250,21 @@ public class CrmApiHandler extends AbstractRouteHandler
                 .put("propertyCity", propertyAddressCity).put("blockNumber",blockNumber).put("builderName",builderName).put("flatNumber",flatNumber);
     }
 
-    private void createCustomer(RoutingContext routingContext)
+    private void createCustomer(RoutingContext routingContext, JsonObject requestJson)
     {
         LOG.debug("Create customer request.");
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject userJson = routingContext.getBodyAsJson();
-        LOG.info("Create customer request : " + userJson.encodePrettily());
+        LOG.info("Create customer request : " + requestJson.encodePrettily());
 
-        String email = userJson.getString("email");
+        String email = requestJson.getString("email");
         if (StringUtils.isEmpty(email))
         {
             sendError(routingContext.response(), "Email not found in json request.");
             return;
         }
 
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", userJson));
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", requestJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -273,12 +273,15 @@ public class CrmApiHandler extends AbstractRouteHandler
                         try
                         {
 
-                            LOG.info("Create Customer inside " +userJson.encodePrettily());
-                           createUserOnWebsite(userJson);
-                            createProposal(routingContext, userJson);
-
-                        //  sendJsonResponse();
-                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                            LOG.info("Create Customer inside " +requestJson.encodePrettily());
+                          String value = String.valueOf(createUserOnWebsite(requestJson));
+                           if(value != null ){
+                            createProposal(routingContext, requestJson);
+                        }
+                            else{
+                            //  sendJsonResponse();
+                            sendJsonResponse(routingContext, new JsonObject().put("status", "CUstomer created but not proposal").toString());
+                        }
                         }
                         catch (Exception e)
                         {
