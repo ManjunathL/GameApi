@@ -19,12 +19,10 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -75,8 +73,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        createProposal(routingContext, requestJson);
-
                         createCustomer(routingContext);
                     }
                     else
@@ -163,7 +159,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
                        // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
-                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
     }
@@ -278,11 +274,11 @@ public class CrmApiHandler extends AbstractRouteHandler
                         {
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
-                            createUserOnWebsite(userJson);
-                          //  createProposal(routingContext, userJson);
+                           createUserOnWebsite(userJson);
+                            createProposal(routingContext, userJson);
 
                         //  sendJsonResponse();
-                       sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
                         {
@@ -362,14 +358,9 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-                response = httpclient.execute(new HttpGet(uri));
-                ResponseHandler<String> handler = new BasicResponseHandler();
-                String body = handler.handleResponse(response);
-
-               // int code = response.getStatusLine().getStatusCode();
+               response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
-                LOG.info("STATUS CODE: " +body);
-                LOG.info("STATUS CODE Success: " +statusCode);
+                LOG.info("STATUS CODE: " +statusCode);
                 return statusCode;
             }
             else
