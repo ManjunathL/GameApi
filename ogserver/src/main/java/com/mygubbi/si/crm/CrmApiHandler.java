@@ -73,7 +73,9 @@ public class CrmApiHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        createCustomer(routingContext, requestJson);
+                      //  createCustomer(routingContext, requestJson);
+                        createProposal(routingContext, requestJson);
+
                     }
                     else
                     {
@@ -93,9 +95,8 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson);
         String stringToBeInserted = requestJson.toString();
 
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("first_name")).put("cname", requestJson.getString("first_name")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesExecName")).put("fullJson", userJson);
-
-        // proposalData.put("fullJson", requestJson);
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("email")).put("cname", requestJson.getString("email")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+       // proposalData.put("fullJson", requestJson);
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -107,11 +108,12 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
         proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
+
         String Json = requestJson.getString("profile ");
         JsonObject jsonObjectProfile = new JsonObject(Json);
         proposalData.put("profile",jsonObjectProfile);
         LOG.info("PROPOSAL DATA: " +proposalData);
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create.crm", proposalData));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -159,6 +161,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
                        // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
+                        createUserOnWebsite(requestJson);
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
@@ -282,7 +285,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         }
                             else{
                             //  sendJsonResponse();
-                            sendJsonResponse(routingContext, new JsonObject().put("status", "CUstomer created but not proposal").toString());
+                            sendJsonResponse(routingContext, new JsonObject().put("status", "Error creating proposal & customer").toString());
                         }
                         }
                         catch (Exception e)
