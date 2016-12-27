@@ -32,6 +32,15 @@
       "params": ["userId"]
     },
 
+
+    {
+      "id": "proposal.updateversion",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set title = ?,finalAmount = ? , status = ? , remarks = ? , fromVersion = ? where version = ? and proposalId = ? ",
+      "params": ["title","finalAmount","status","remarks","fromVersion","version","proposalId"]
+    },
+
     {
       "id": "proposal.summary",
       "type": "select",
@@ -67,8 +76,16 @@
       "id": "version.createdraft",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, proposalId, title, status, finalAmount, remarks) values (0.1, ?, ?, 'draft', 0.0, 'add remarks')",
-      "params": ["proposalId", "title"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, finalAmount, remarks) values (0.1, ?, ?, ?, 'draft', 0.0, 'add remarks')",
+      "params": ["fromVersion", "proposalId", "title"]
+    },
+
+    {
+      "id": "version.createPostSalesInitial",
+      "type": "insert",
+      "table": "version_master",
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, finalAmount, remarks) values (1.1, ?, ?, ? , 'draft', 0.0, 'add remarks')",
+      "params": ["fromVersion", "proposalId", "title"]
     },
 
     {
@@ -88,12 +105,93 @@
     },
 
     {
-      "id": "proposal.submit",
+      "id": "version.publish",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set status = 'active' where id = ?",
-      "params": ["id"]
+      "query": "update version_master set status = 'published' where version = ? and proposalId = ?",
+      "params": ["version","proposalId"]
     },
+
+    {
+      "id": "version.confirm",
+      "type": "update",
+      "table": "proposal",
+      "query": "update version_master set status = 'confirmed', version = ?, fromVersion = ? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+    },
+
+    {
+      "id": "version.designsignoff",
+      "type": "update",
+      "table": "proposal",
+      "query": "update version_master set status = 'DSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+    },
+
+    {
+      "id": "version.productionsignoff",
+      "type": "update",
+      "table": "proposal",
+      "query": "update version_master set status = 'PSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+    },
+
+    {
+      "id": "version.createversion",
+      "type": "insert",
+      "table": "version_master",
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, finalAmount, remarks) values (?, ?, ?, ?, ?, ?, ?)",
+      "params": ["version","fromVersion","proposalId", "title","status","finalAmount","remarks"]
+    },
+
+    {
+      "id": "version.lockallpresalesversions",
+      "type": "insert",
+      "table": "version_master",
+      "query": "update version_master set status = ? where version like '0.%'",
+      "params": ["status"]
+    },
+
+    {
+      "id": "version.lockallpostsalesversions",
+      "type": "insert",
+      "table": "version_master",
+      "query": "update version_master set status = ? where version like '1.%'",
+      "params": ["status"]
+    },
+
+    {
+      "id": "proposal.version.presales",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where version like '0.%' and proposalId = ?",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "proposal.version.postsales",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where version like '1.%' and proposalId = ?",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "proposal.version.production",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where version like '2.%' and proposalId = ?",
+      "params": ["proposalId"]
+    },
+
+    {
+      "id": "version.lockallpostsalesversions",
+      "type": "insert",
+      "table": "version_master",
+      "query": "update version_master set status = ? where version like '1.%'",
+      "params": ["status"]
+    },
+
     {
       "id": "proposal.publish",
       "type": "update",
@@ -101,6 +199,7 @@
       "query": "update proposal set status = 'published' where id = ?",
       "params": ["id"]
     },
+
     {
       "id": "proposal.revise",
       "type": "update",
@@ -253,18 +352,42 @@
       "id": "proposal.product.create",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)",
-      "params": ["proposalId", "title", "seq", "type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?)",
+      "params": ["proposalId","fromVersion", "title", "seq", "type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
         "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
         "modules", "addons", "createdBy", "costWoAccessories"]
+    },
+
+    {
+      "id": "proposal.product.updateVersionOnConfirm",
+      "type": "insert",
+      "table": "proposal_product",
+      "query": "update proposal_product set fromVersion = ? where proposalId = ? and fromVersion = ?",
+      "params": ["version","proposalId","fromVersion"]
+    },
+
+    {
+      "id": "proposal.product.createnew",
+      "type": "insert",
+      "table": "proposal_product",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select proposalId, ?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId= ? and fromVersion = ?",
+      "params": ["toVersion","proposalId","fromVersion"]
     },
 
     {
       "id": "proposal.product.update",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ? where id = ?",
-      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories", "id"]
+      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?, fromVersion = ? where id = ?",
+      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories", "fromVersion", "id"]
+    },
+
+    {
+      "id": "proposal.product.updatesequence",
+      "type": "update",
+      "table": "proposal_product",
+      "query": "update proposal_product set seq=? where id=?",
+      "params": ["seq","id"]
     },
 
     {
@@ -313,8 +436,8 @@
       "id": "proposal.product.detail",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product where id = ?",
-      "params": ["id"],
+      "query": "select * from proposal_product where id = ? and fromVersion = ?",
+      "params": ["id","fromVersion"],
       "jsonfields":["modules", "addons"]
     },
     {

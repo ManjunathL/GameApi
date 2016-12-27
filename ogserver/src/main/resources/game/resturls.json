@@ -26,13 +26,63 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/submit",
+      "uri": "/gapi/proposal/version/publish",
       "source": "db",
-      "query":"proposal.submit",
-      "params":["id"],
+      "query":"version.publish",
+      "params":["version","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
+    {
+      "uri": "/gapi/proposal/version/confirm",
+      "source": "db",
+      "query":"version.confirm",
+      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/designsignoff",
+      "source": "db",
+      "query":"version.designsignoff",
+      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/productionsignoff",
+      "source": "db",
+      "query":"version.productionsignoff",
+      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/locakallpresalesversions",
+      "source": "db",
+      "query":"version.lockallpresalesversions",
+      "params":["status"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/version/locakallpostsalesversions",
+      "source": "db",
+      "query":"version.lockallpostsalesversions",
+      "params":["status"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/updateversion",
+      "source": "db",
+      "query":"proposal.updateversion",
+      "params":["title","finalAmount","status","remarks","version","proposalId","fromVersion"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
     {
       "uri": "/gapi/proposal/publish",
       "source": "db",
@@ -90,10 +140,43 @@
       "default": "[]"
     },
     {
+      "uri": "/gapi/proposal/version/updateVersionOnConfirm",
+      "source": "db",
+      "query":"proposal.product.updateVersionOnConfirm",
+      "params":["fromVersion","proposalId","version"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/presales",
+      "source": "db",
+      "query":"proposal.version.presales",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/postsales",
+      "source": "db",
+      "query":"proposal.version.postsales",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/production",
+      "source": "db",
+      "query":"proposal.version.production",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
       "uri": "/gapi/product/list",
       "source": "db",
       "query":"proposal.product.list",
-      "params":["proposalId"],
+      "params":["proposalId","fromVersion"],
       "resultfields":[],
       "default": "[]"
     },
@@ -142,7 +225,7 @@
       "uri": "/gapi/product/detail",
       "source": "db",
       "query":"proposal.product.detail",
-      "params":["id"],
+      "params":["id","fromVersion"],
       "resultfields":[],
       "default": "{}",
       "singleRecord": true

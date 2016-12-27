@@ -30,6 +30,8 @@ public class ProposalProductHandler extends AbstractRouteHandler
         this.post("/loadandupdate").handler(this::loadAndUpdate);
         this.post("/update").handler(this::updateProduct);
         this.post("/delete").handler(this::deleteProduct);
+        this.post("/createnew").handler(this::copyProductsFromVersion);
+        this.post("/updatesequence").handler(this::updateProductSequence);
     }
 
     private void loadAndUpdate(RoutingContext routingContext)
@@ -85,6 +87,26 @@ public class ProposalProductHandler extends AbstractRouteHandler
                 });
     }
 
+    private void updateProductSequence(RoutingContext routingContext)
+    {
+        JsonObject productJson = routingContext.getBodyAsJson();
+        LOG.debug("Product Json :" + productJson.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.updatesequence", productJson));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in updating product line item in the proposal.");
+                        LOG.error("Error in updating product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, productJson.toString());
+                    }
+                });
+    }
+
     private void deleteProduct(RoutingContext routingContext)
     {
         JsonObject productJson = routingContext.getBodyAsJson();
@@ -103,4 +125,26 @@ public class ProposalProductHandler extends AbstractRouteHandler
                     }
                 });
     }
+
+    private void copyProductsFromVersion(RoutingContext routingContext)
+    {
+        JsonObject productJson = routingContext.getBodyAsJson();
+        LOG.debug("Get body as Json :" + productJson.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.createnew", productJson));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in removing product line item in the proposal.");
+                        LOG.error("Error in removing product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, productJson.toString());
+                    }
+                });
+    }
+
+
 }

@@ -15,10 +15,12 @@ public class QuoteRequest
     private static final String PRODUCT_IDS = "productIds";
     private static final String DISCOUNT_AMOUNT = "discountAmount";
     private static final String ADDON_IDS = "addonIds";
+    private static final String VERSION_IDS = "versionIds";
 
     private int proposalId;
     private List<Integer> productsIds;
     private List<Integer> addonIds;
+    private List<Integer> versionIds;
     private double discountAmount = 0.0;
     private ProposalOutputCreator.OutputType outputType;
     
@@ -38,6 +40,10 @@ public class QuoteRequest
         if (jsonData.containsKey(ADDON_IDS))
         {
             this.setAddonIds(jsonData.getJsonArray(ADDON_IDS).getList());
+        }
+        if (jsonData.containsKey(VERSION_IDS))
+        {
+            this.setAddonIds(jsonData.getJsonArray(VERSION_IDS).getList());
         }
         if (jsonData.containsKey(DISCOUNT_AMOUNT))
         {
@@ -90,6 +96,24 @@ public class QuoteRequest
     }
 
     public String getAddonIdsAsText()
+    {
+        return StringUtils.listToString(this.addonIds, ',');
+    }
+
+    public List<Integer> getVersionIds() {
+        return addonIds;
+    }
+
+    public void setVersionIds(List<Integer> addonIds) {
+        this.addonIds = addonIds;
+    }
+
+    public boolean hasVersionIds()
+    {
+        return (this.addonIds != null) && (this.addonIds.size() > 0);
+    }
+
+    public String getVersionIdsAsText()
     {
         return StringUtils.listToString(this.addonIds, ',');
     }

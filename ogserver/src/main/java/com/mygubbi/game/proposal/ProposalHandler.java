@@ -35,6 +35,8 @@ public class ProposalHandler extends AbstractRouteHandler
         this.get("/list").handler(this::getProposals);
         this.post("/create").handler(this::createProposal);
         this.post("/version/createdraft").handler(this::createInitialDraftProposal);
+        this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
+        this.post("/version/createversion").handler(this::createProposalVersion);
         this.post("/update").handler(this::updateProposal);
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
@@ -53,6 +55,47 @@ public class ProposalHandler extends AbstractRouteHandler
             return;
         }*/
         Integer id = LocalCache.getInstance().store(new QueryData("version.createdraft", versionData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in creating version.");
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, versionData.toString());
+                    }
+                });
+    }
+
+    private void createPostSalesInitial(RoutingContext routingContext) {
+        JsonObject versionData = routingContext.getBodyAsJson();
+        LOG.debug("routing context :" + versionData.encodePrettily());
+       /* if (StringUtils.isEmpty(versionData.getString("proposalId")) || StringUtils.isEmpty(versionData.getString("title")))
+        {
+            sendError(routingContext, "Error in creating version as versionNo or title or status are not set.");
+            return;
+        }*/
+        Integer id = LocalCache.getInstance().store(new QueryData("version.createPostSalesInitial", versionData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in creating version.");
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, versionData.toString());
+                    }
+                });
+    }
+
+    private void createProposalVersion(RoutingContext routingContext) {
+        JsonObject versionData = routingContext.getBodyAsJson();
+        LOG.debug("routing context :" + versionData.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("version.createversion", versionData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
