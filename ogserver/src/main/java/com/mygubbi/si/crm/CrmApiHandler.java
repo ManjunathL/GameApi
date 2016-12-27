@@ -93,8 +93,9 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(requestJson);
         String stringToBeInserted = requestJson.toString();
 
-        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("email")).put("cname", requestJson.getString("email")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
-       // proposalData.put("fullJson", requestJson);
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("email")).put("cname", requestJson.getString("email")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName")).put("fullJson", userJson);
+
+        // proposalData.put("fullJson", requestJson);
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -106,12 +107,11 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
         proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
-
         String Json = requestJson.getString("profile ");
         JsonObject jsonObjectProfile = new JsonObject(Json);
         proposalData.put("profile",jsonObjectProfile);
         LOG.info("PROPOSAL DATA: " +proposalData);
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create.crm", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -275,7 +275,9 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                             LOG.info("Create Customer inside " +requestJson.encodePrettily());
                           String value = String.valueOf(createUserOnWebsite(requestJson));
-                           if(value != null ){
+                            LOG.info("Value Customer inside " +value);
+
+                            if(value != null ){
                             createProposal(routingContext, requestJson);
                         }
                             else{
