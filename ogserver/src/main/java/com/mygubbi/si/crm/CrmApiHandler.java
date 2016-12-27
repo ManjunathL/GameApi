@@ -19,10 +19,12 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -322,7 +324,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             else {
                 name = fullName;
             }
-            LOG.info("Name of Customer" +name);
+            LOG.info("Name of Customer : " +name);
            String phone =  userJson.getString("mobile");
            // String phone =  userJson.getString("userId");
             String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
@@ -359,8 +361,12 @@ public class CrmApiHandler extends AbstractRouteHandler
                 LOG.info("acceptSSLCertificates True");
 
                response = httpclient.execute(new HttpGet(uri));
+                response = httpclient.execute(new HttpGet(uri));
+                ResponseHandler<String> handler = new BasicResponseHandler();
+                String body = handler.handleResponse(response);
+               // int code = response.getStatusLine().getStatusCode();
                 int statusCode = response.getStatusLine().getStatusCode();
-                LOG.info("STATUS CODE: " +statusCode);
+                LOG.info("STATUS CODE: " +body);
                 return statusCode;
             }
             else
