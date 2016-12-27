@@ -276,11 +276,11 @@ public class CrmApiHandler extends AbstractRouteHandler
                         {
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
-                           createUserOnWebsite(userJson);
-                            createProposal(routingContext, userJson);
+                            createUserOnWebsite(userJson);
+                         //   createProposal(routingContext, userJson);
 
-                        //  sendJsonResponse();
-                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        // sendJsonResponse();
+                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
                         {
@@ -360,13 +360,14 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-               response = httpclient.execute(new HttpGet(uri));
                 response = httpclient.execute(new HttpGet(uri));
                 ResponseHandler<String> handler = new BasicResponseHandler();
                 String body = handler.handleResponse(response);
+
                // int code = response.getStatusLine().getStatusCode();
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +body);
+                LOG.info("STATUS CODE Success: " +statusCode);
                 return statusCode;
             }
             else
