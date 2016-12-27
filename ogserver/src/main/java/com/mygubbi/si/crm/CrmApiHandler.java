@@ -142,7 +142,63 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                 });
     }
+    private void createNewProposal(JsonObject requestJson)
+    {
+//        JsonObject userJson = routingContext.getBodyAsJson();
+//        LOG.info("USER JSON:------>");
+//        LOG.info(userJson);
+        LOG.info("request Json:------>");
+        LOG.info(requestJson);
+        String stringToBeInserted = requestJson.toString();
 
+        JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("email")).put("cname", requestJson.getString("email")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
+        // proposalData.put("fullJson", requestJson);
+        proposalData.put("createdBy", requestJson.getString("designerName"));
+        proposalData.put("opportunityId", requestJson.getString("opportunityId"));
+        proposalData.put("userId", requestJson.getString("userId"));
+        proposalData.put("email", requestJson.getString("email"));
+        proposalData.put("designerUserId", requestJson.getString("designerUserId"));
+        proposalData.put("designerName", requestJson.getString("designerName"));
+        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
+        proposalData.put("salesExecName", requestJson.getString("salesExecName"));
+        proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
+        proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
+        proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
+
+        String Json = requestJson.getString("profile ");
+        JsonObject jsonObjectProfile = new JsonObject(Json);
+        proposalData.put("profile",jsonObjectProfile);
+        LOG.info("PROPOSAL DATA: " +proposalData);
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        //sendError(requestJson, "Error in creating proposal.");
+
+                        LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        LOG.info("Create Proposal in Else");
+                        String docsFolder = this.proposalDocsFolder + "/" + proposalData.getLong("id");
+                        try
+                        {
+                            VertxInstance.get().fileSystem().mkdirBlocking(docsFolder);
+                        }
+                        catch (Exception e)
+                        {
+                          //  sendError(routingContext, "Error in creating folder for proposal at path:" + docsFolder);
+                            LOG.error("Error in creating folder for proposal at path:" + docsFolder + ". Error:" + resultData.errorMessage, resultData.error);
+                            return;
+                        }
+                        proposalData.put("folderPath", docsFolder);
+                        LOG.info("Done Proposal");
+                       // this.updateProposal(routingContext, requestJson, proposalData);
+                    }
+                });
+    }
     private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
     {
         LOG.info("updateProposal Started");
@@ -157,7 +213,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
-
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
                        // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
@@ -277,7 +332,7 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                             LOG.info("Create Customer inside " +userJson.encodePrettily());
                             createUserOnWebsite(userJson);
-                         //   createProposal(routingContext, userJson);
+                         //  createProposal(routingContext, userJson);
 
                         // sendJsonResponse();
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
@@ -368,6 +423,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +body);
                 LOG.info("STATUS CODE Success: " +statusCode);
+                createNewProposal(userJson);
                 return statusCode;
             }
             else
