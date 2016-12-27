@@ -163,7 +163,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
                        // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
-//                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
     }
@@ -282,7 +282,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                           //  createProposal(routingContext, userJson);
 
                         //  sendJsonResponse();
-                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        //sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                         }
                         catch (Exception e)
                         {
