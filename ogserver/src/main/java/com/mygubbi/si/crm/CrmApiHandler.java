@@ -274,16 +274,9 @@ public class CrmApiHandler extends AbstractRouteHandler
                         {
 
                             LOG.info("Create Customer inside " +requestJson.encodePrettily());
-                          String value = String.valueOf(createUserOnWebsite(requestJson));
-                            LOG.info("Value Customer inside " +value);
-
-                            if(value != null ){
+                          createUserOnWebsite(requestJson);
                             createProposal(routingContext, requestJson);
-                        }
-                            else{
-                            //  sendJsonResponse();
-                            sendJsonResponse(routingContext, new JsonObject().put("status", "CUstomer created but not proposal").toString());
-                        }
+                            sendJsonResponse(routingContext, new JsonObject().put("status", "Success").toString());
                         }
                         catch (Exception e)
                         {
@@ -366,7 +359,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
                 LOG.info("STATUS CODE: " +statusCode);
-                return statusCode;
             }
             else
             {
