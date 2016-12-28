@@ -315,6 +315,8 @@ public class CrmApiHandler extends AbstractRouteHandler
             //String name = userJson.getString("email");
             //String name = userJson.getString("first_name");
             String fullName = userJson.getString("first_name");
+            String customerJson = userJson.encodePrettily();
+            LOG.info(customerJson);
             // Get the index of the first space.
             if(fullName.indexOf(" ") != -1) {
                 int firstSpaceIndex = fullName.indexOf(" ");
@@ -346,12 +348,12 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setHost(host)
                     .setPath("/registeruser")
                     .setParameter("_escaped_fragment_",fragment)
-                    .setParameter("json", userJson.toString())
+                    .setParameter("json", URLDecoder.decode(customerJson, "UTF-8"))
                     .build();
             LOG.debug("URL :" + uri.toString());
-            String urlString = URLEncoder.encode(uri.toString(), "UTF-8");
+           /* String urlString = ;
             URI uriDecode = new URI(urlString);
-           LOG.debug("URL DE-CODE :" + uriDecode.toString());
+           *///LOG.debug("URL DE-CODE :" + uriDecode.toString());
 
             if (acceptSSLCertificates.equals("true"))
             {
@@ -366,7 +368,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-               response = httpclient.execute(new HttpGet(uriDecode));
+               response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
                 // Getting the response body.
                 String responseBody = EntityUtils.toString(response.getEntity());
