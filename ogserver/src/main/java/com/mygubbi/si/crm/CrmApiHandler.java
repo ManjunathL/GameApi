@@ -27,6 +27,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,21 +67,22 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         //createCustomer(routingContext);
-        String email = requestJson.getString("email");
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        createCustomer(routingContext, requestJson);
-                    }
-                    else
-                    {
-                        createProposal(routingContext, requestJson);
-
-                    }
-                });
+        createProposal(routingContext, requestJson);
+//        String email = requestJson.getString("email");
+//        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+//        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+//                (AsyncResult<Message<Integer>> selectResult) -> {
+//                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+//                    if (selectData.rows == null || selectData.rows.isEmpty())
+//                    {
+//                        createCustomer(routingContext, requestJson);
+//                    }
+//                    else
+//                    {
+//                        createProposal(routingContext, requestJson);
+//
+//                    }
+//                });
     }
 
 
@@ -159,7 +161,8 @@ public class CrmApiHandler extends AbstractRouteHandler
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
                        // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
-                     //   sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                        createUserOnWebsite(requestJson);
+                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
     }
@@ -358,7 +361,11 @@ public class CrmApiHandler extends AbstractRouteHandler
 
                response = httpclient.execute(new HttpGet(uri));
                 int statusCode = response.getStatusLine().getStatusCode();
+                // Getting the response body.
+                String responseBody = EntityUtils.toString(response.getEntity());
+                LOG.info("responseBody: " +responseBody);
                 LOG.info("STATUS CODE: " +statusCode);
+
             }
             else
             {
