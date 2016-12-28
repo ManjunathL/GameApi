@@ -91,8 +91,8 @@ public class FirebaseDataService extends AbstractVerticle
 
     public static void main(String[] args) throws Exception
     {
-        String servicesJson = "config/test/mygubbi-cep-firebase.json";
-        String fbUrl = "https://mygubbi-cep.firebaseio.com";
+        String servicesJson = "config/test/mygubbi-uat-firebase.json";
+        String fbUrl = "https://mygubbi-uat.firebaseio.com";
         new FirebaseLifecycleManager(servicesJson, fbUrl).init();
         System.out.println("App name:" + FirebaseDatabase.getInstance().getApp().getName());
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/projects")
