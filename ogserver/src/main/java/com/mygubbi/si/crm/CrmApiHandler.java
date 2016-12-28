@@ -66,25 +66,21 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         //createCustomer(routingContext);
-        createProposal(routingContext, requestJson);
+        String email = requestJson.getString("email");
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        createCustomer(routingContext, requestJson);
+                    }
+                    else
+                    {
+                        createProposal(routingContext, requestJson);
 
-//        String email = requestJson.getString("email");
-//        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-//        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-//                (AsyncResult<Message<Integer>> selectResult) -> {
-//                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-//                    if (selectData.rows == null || selectData.rows.isEmpty())
-//                    {
-//                     //  createCustomer(routingContext, requestJson);
-//                        createProposal(routingContext, requestJson);
-//
-//                    }
-//                    else
-//                    {
-//                        createProposal(routingContext, requestJson);
-//
-//                    }
-//                });
+                    }
+                });
     }
 
 
@@ -163,7 +159,6 @@ public class CrmApiHandler extends AbstractRouteHandler
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
                        // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
-                        createUserOnWebsite(requestJson);
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
@@ -287,7 +282,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         }
                             else{
                             //  sendJsonResponse();
-                            sendJsonResponse(routingContext, new JsonObject().put("status", "Error creating proposal & customer").toString());
+                            sendJsonResponse(routingContext, new JsonObject().put("status", "CUstomer created but not proposal").toString());
                         }
                         }
                         catch (Exception e)
