@@ -343,12 +343,15 @@ public class CrmApiHandler extends AbstractRouteHandler
 //                    .setParameter("photoUrl","null")
 //                    .setParameter("crmId",userJson.getString("opportunityId"))
 //                    .build();
+            String urlString = URLDecoder.decode(customerJson, "UTF-8");
+            LOG.debug("URL :" + urlString);
+
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registeruser")
                     .setParameter("_escaped_fragment_",fragment)
-                    .setParameter("json", URLDecoder.decode(customerJson, "UTF-8"))
+                    .setParameter("json", urlString)
                     .build();
             LOG.debug("URL :" + uri.toString());
            /* String urlString = ;
