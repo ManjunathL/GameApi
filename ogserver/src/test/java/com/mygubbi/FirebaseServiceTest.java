@@ -24,8 +24,8 @@ public class FirebaseServiceTest
     {
         System.out.println("Starting the test.");
 
-        this.fbRef = new Firebase("https://sweltering-fire-6356.firebaseio.com");
-        this.fbRef.authWithPassword("mygubbi.fbase@gmail.com", "!@#$VGYHasdf435", new Firebase.AuthResultHandler()
+        this.fbRef = new Firebase("https://mygubbi-uat.firebaseio.com/");
+        this.fbRef.authWithPassword("mygubbi.uat@gmail.com", "uat@mygubbi", new Firebase.AuthResultHandler()
         {
             @Override
             public void onAuthenticated(AuthData authData)

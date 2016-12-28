@@ -17,9 +17,11 @@
   "ssl_password": "m!gubb!",
 
   "firebase": {
-    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
-    "loginid": "mygubbi.fbase@gmail.com",
-    "password": "!@#$VGYHasdf435",
+    //"fb_url": "https://sweltering-fire-6356.firebaseio.com",
+    "fb_url": "https://mygubbi-uat.firebaseio.com",
+    "loginid": "mygubbi.uat@gmail.com",
+    //"password": "!@#$VGYHasdf435",
+    "password": "uat@mygubbi",
     "processEvents": false
   },
 
