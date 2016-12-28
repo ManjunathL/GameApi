@@ -349,9 +349,9 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setParameter("json", userJson.encodePrettily())
                     .build();
             LOG.debug("URL :" + uri.toString());
-            String urlString = URLDecoder.decode(uri.toString(), "UTF-8");
-            URI uriDecode = new URI(urlString);
-            LOG.debug("URL DE-CODE :" + uriDecode.toString());
+            String urlString = URLEncoder.encode(uri.toString(), "UTF-8");
+           // URI uriDecode = new URI(urlString);
+           LOG.debug("URL DE-CODE :" + urlString);
 
             if (acceptSSLCertificates.equals("true"))
             {
@@ -366,7 +366,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 CloseableHttpClient httpclient = builder.build();
                 LOG.info("acceptSSLCertificates True");
 
-               response = httpclient.execute(new HttpGet(uri));
+               response = httpclient.execute(new HttpGet(urlString));
                 int statusCode = response.getStatusLine().getStatusCode();
                 // Getting the response body.
                 String responseBody = EntityUtils.toString(response.getEntity());
