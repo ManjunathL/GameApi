@@ -329,19 +329,26 @@ public class CrmApiHandler extends AbstractRouteHandler
             String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
 
             LOG.info("decodedEmail"   +decodedEmail);
+//            URI uri = new URIBuilder()
+//                    .setScheme("https")
+//                    .setHost(host)
+//                    .setPath("/registeruser")
+//                    .setParameter("_escaped_fragment_",fragment)
+//                    .setParameter("name", name)
+//                    .setParameter("email", email)
+//                    .setParameter("phone", phone)
+//                    .setParameter("password", password)
+//                    .setParameter("photoUrl","null")
+//                    .setParameter("crmId",userJson.getString("opportunityId"))
+//                    .build();
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registeruser")
                     .setParameter("_escaped_fragment_",fragment)
-                    .setParameter("name", name)
-                    .setParameter("email", email)
-                    .setParameter("phone", phone)
-                    .setParameter("password", password)
-                    .setParameter("photoUrl","null")
-                    .setParameter("crmId",userJson.getString("opportunityId"))
+                    .setParameter("json", userJson.encodePrettily())
                     .build();
-           // LOG.debug("URL :" + uri.toString());
+            LOG.debug("URL :" + uri.toString());
             String urlString = URLDecoder.decode(uri.toString(), "UTF-8");
             URI uriDecode = new URI(urlString);
             LOG.debug("URL DE-CODE :" + uriDecode.toString());
