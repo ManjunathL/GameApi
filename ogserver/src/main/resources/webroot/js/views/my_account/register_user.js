@@ -25,8 +25,8 @@ define([
 
 
               var name = result.name;
-              var email = result.email;
-              var phone = result.phone;
+              var email = decodeURIComponent(result.email);
+              var phone = decodeURIComponent(result.phone);
               var password = result.password;
 
               var photoURL = result.photoURL ? result.photoURL : 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';
