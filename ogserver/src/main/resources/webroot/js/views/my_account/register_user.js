@@ -5,7 +5,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    '/js/mgfirebase.js'
+    '/js/mgfirebase.js',
+    'text!/templates/my_account/register_user.html'
 ], function ($, _, Backbone, MGF) {
     var UserProfileView = Backbone.View.extend({
         initialize: function() {
