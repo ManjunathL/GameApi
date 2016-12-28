@@ -5,7 +5,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    '/js/mgfirebase.js',
+    '/js/mgfirebase.js'
 ], function ($, _, Backbone, MGF) {
     var UserProfileView = Backbone.View.extend({
         initialize: function() {
