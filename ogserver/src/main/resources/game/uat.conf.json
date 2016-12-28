@@ -20,8 +20,7 @@
   "fbServicesJson": "config/test/mygubbi-uat-firebase.json",
   "fbUrl": "https://mygubbi-uat.firebaseio.com",
   "processfbEvents": true,
- // "websiteHost": "52.220.90.92",
-  "websiteHost": "192.168.104.119",
+  "websiteHost": "52.220.90.92",
   "acceptSSLCertificates": "true"
 
 }
