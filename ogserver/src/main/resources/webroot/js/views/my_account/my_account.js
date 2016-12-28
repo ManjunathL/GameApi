@@ -116,23 +116,19 @@ define([
             //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
             MGF.mynest(authData,this.renderWithUserProjectCallback);
 
+            setTimeout(
+                $('.page').append("<img id='loadico' src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>")
+            , 2000);
 
             var that = this;
             var mynestProf = authData.email;
             //var mynestProf = this.model.email;
-            console.log(" Mehbub ============= >mynestProf");
-            console.log(mynestProf);
             this.mynests.fetch({
                  data: {
                      "emailId": mynestProf
                  },
                 success: function(response) {
-                console.log(" Mehbub ============= >response");
-
-                    console.log(response);
-                    //return false;
                    that.fetchMynestAndRender(mynestProf);
-                //                   this.ready();
                 },
                 error: function(model, response, options) {
                     console.log("couldn't fetch getopportunity data - " + response);
@@ -144,11 +140,7 @@ define([
             var newProf = that.mynests;
             newProf = newProf.toJSON();
 
-            console.log("---------- Start Profile ------------");
-            console.log(newProf);
-            console.log("---------- End Profile ------------");
-
-            //this.ready();
+            $("#loadico").hide();
         },
         initialize: function () {
             this.myaccount = new MyAccount();

@@ -28,6 +28,7 @@ define(function() {
         COMPLETEDPROJECTSPAGE: "completedprojectspage",
         NEWPRODUCT_DETAILSPAGE: "NewProductDetailsPage",
         MYACCOUNTPAGE: "MyAccountPage",
+        REGISTER_USER: "RegisterUser",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

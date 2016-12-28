@@ -12,6 +12,7 @@ define([
         routes: {
             '': 'dashboard',
 
+            'registeruser?*queryString(/)': 'registerUser',
             'shoe-rack-online(/)': 'shoeRackLD',
             'crockery-unit-designs(/)': 'crockeryUnitLD',
             'tv-unit-cabinet(/)': 'tvUnitLD',
@@ -307,6 +308,18 @@ define([
                     }
                 };
                 VM.create(VM.PRODUCT_DETAILS, ProductDetailPage, options).render();
+            });
+        });
+
+        router.on('route:registerUser', function(userdata) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>"), 0);
+            require(['/js/views/my_account/register_user.js'], function(RegisterUser) {
+                var options = {
+                    model: {
+                        "userdata": userdata
+                    }
+                };
+                VM.create(VM.REGISTER_USER, RegisterUser, options).render();
             });
         });
         router.on('route:user_profile', function(actions) {

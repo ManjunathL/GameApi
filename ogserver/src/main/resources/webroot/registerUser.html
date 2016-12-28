@@ -47,12 +47,26 @@
             firebase.auth().createUserWithEmailAndPassword(email, password).then(function(userData) {
                 console.log("Successfully created user account with uid:", userData.uid);
                 $("#testdv").text("Successfully created user account with uid:" + userData.uid);
+
+                var uid = userData.uid;
+                /*firebase.auth().signOut().then(function() {
+                      console.log("Sign-out successful");
+                      $("#testdv").text("Sign-out successful");
+                }, function(error) {
+                  console.log("An error happened");
+                  $("#testdv").text("An error happened");
+                });*/
+
+
+                console.log("uid: "+uid);
+                $("#testdv").text("uid: "+uid);
+
                 var userData = {
                     providerData: "password",
                     email: email,
                     displayName: name,
                     profileImage: photoURL,
-                    uid: userData.uid
+                    uid: uid
                 };
                  createUser(userData);
                  var profileData = {
@@ -109,6 +123,7 @@
                 } else {
                     console.log("successfully pushed event data");
                     $("#testdv").text("successfully pushed event data");
+
                 }
             });
         }
