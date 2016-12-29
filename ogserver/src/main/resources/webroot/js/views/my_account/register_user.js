@@ -7,7 +7,7 @@ define([
     'backbone',
     '/js/mgfirebase.js',
     'text!/templates/my_account/register_user.html'
-], function ($, _, Backbone, MGF) {
+], function ($, _, Backbone, MGF, RegisterUserTemplate) {
     var UserProfileView = Backbone.View.extend({
         initialize: function() {
             console.log('hi Smruti');
@@ -29,7 +29,10 @@ define([
               console.log(result);
 
               var name = result.name;
-              var email = decodeURIComponent(result.email);
+              var semail = decodeURIComponent(result.email);
+              var email = semail.replace("|", ".");
+              console.log(semail+ '----------------' + email);
+
               var phone = decodeURIComponent(result.phone);
               var password = result.password;
 
