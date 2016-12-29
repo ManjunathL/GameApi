@@ -351,7 +351,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setHost(host)
                     .setPath("/registeruser")
                     .setParameter("_escaped_fragment_",fragment)
-                    .setParameter("json", urlString)
+                    .setParameter("json", userJson.encodePrettily())
                     .build();
             LOG.debug("URL :" + uri.toString());
            /* String urlString = ;
