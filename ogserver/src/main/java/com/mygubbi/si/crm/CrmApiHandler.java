@@ -328,31 +328,32 @@ public class CrmApiHandler extends AbstractRouteHandler
             LOG.info("Name of Customer : " +name);
            String phone =  userJson.getString("mobile");
            // String phone =  userJson.getString("userId");
-            String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
+           // String decodedEmail = URLDecoder.decode(email, StandardCharsets.UTF_8.name());
+            String encodeEmail = URLEncoder.encode(email, StandardCharsets.UTF_8.name());
 
-            LOG.info("decodedEmail"   +decodedEmail);
-//            URI uri = new URIBuilder()
-//                    .setScheme("https")
-//                    .setHost(host)
-//                    .setPath("/registeruser")
-//                    .setParameter("_escaped_fragment_",fragment)
-//                    .setParameter("name", name)
-//                    .setParameter("email", email)
-//                    .setParameter("phone", phone)
-//                    .setParameter("password", password)
-//                    .setParameter("photoUrl","null")
-//                    .setParameter("crmId",userJson.getString("opportunityId"))
-//                    .build();
-            String urlString = URLDecoder.decode(customerJson, "UTF-8");
-            LOG.debug("URL :" + urlString);
-
+            LOG.info("decodedEmail"   +encodeEmail);
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registeruser")
                     .setParameter("_escaped_fragment_",fragment)
-                    .setParameter("json", userJson.encodePrettily())
+                    .setParameter("name", name)
+                    .setParameter("email", encodeEmail)
+                    .setParameter("phone", phone)
+                    .setParameter("password", password)
+                    .setParameter("photoUrl","null")
+                    .setParameter("crmId",userJson.getString("opportunityId"))
                     .build();
+            String urlString = URLDecoder.decode(customerJson, "UTF-8");
+            LOG.debug("URL :" + urlString);
+
+//            URI uri = new URIBuilder()
+//                    .setScheme("https")
+//                    .setHost(host)
+//                    .setPath("/registeruser")
+//                    .setParameter("_escaped_fragment_",fragment)
+//                    .setParameter("json", userJson.encodePrettily())
+//                    .build();
             LOG.debug("URL :" + uri.toString());
            /* String urlString = ;
             URI uriDecode = new URI(urlString);
