@@ -71,12 +71,33 @@ window.google_trackConversion({
 <!-- Google Code for HM Conversion Conversion Page -->
 <script type="text/javascript">
 /* <![CDATA[ */
-var google_conversion_id = 948149851;
-var google_conversion_language = "en";
-var google_conversion_format = "3";
-var google_conversion_color = "ffffff";
-var google_conversion_label = "0DBgCPDT_mwQ27yOxAM";
-var google_remarketing_only = false;
+
+goog_snippet_varsw = function() {
+   var wd = window;
+   wd.google_conversion_id = 948149851;
+   wd.google_conversion_label = "0DBgCPDT_mwQ27yOxAM";
+   wd.google_conversion_language = "en";
+   wd.google_conversion_format = "3";
+   wd.google_conversion_color = "ffffff";
+   wd.google_remarketing_only = false;
+}
+// DO NOT CHANGE THE CODE BELOW.
+   goog_report_conversionw = function(url) {
+   goog_snippet_varsw();
+   window.google_conversion_format = "3";
+   var optt = new Object();
+   optt.onload_callback = function() {
+   if (typeof(url) != 'undefined') {
+   window.location = url;
+   }
+   }
+   var conv_handlerr = window['google_trackConversion'];
+   if (typeof(conv_handlerr) == 'function') {
+   conv_handlerr(optt);
+   }
+}
+
+
 /* ]]> */
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
