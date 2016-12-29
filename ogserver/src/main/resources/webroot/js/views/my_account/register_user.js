@@ -1,5 +1,5 @@
 /**
- * Created by Smruti on 29/08/16.
+ * Created by Smruti on 28/12/16.
  */
 define([
     'jquery',
@@ -24,6 +24,9 @@ define([
                 result[pair[0]] = decodeURIComponent(pair[1] || '');
               });
 
+              //var res = JSON.parse(result.json);
+
+              console.log(result);
 
               var name = result.name;
               var email = decodeURIComponent(result.email);
@@ -71,12 +74,9 @@ define([
                   console.log("Error creating user:", error);
               });
 
-
-
-            console.log(result.name);
         },
         createUser: function(userData){
-             MGF.rootRef.ref().child("users").child(userData.uid).set(userData, function(error) {
+             MGF.rootRef.child("users").child(userData.uid).set(userData, function(error) {
                  if (error) {
                      console.log("Data could not be saved." + error);
                  } else {
@@ -85,6 +85,7 @@ define([
              });
         },
         createProfile: function(userData,profileData){
+            var that = this;
             MGF.rootRef.child('user-profiles').child(userData.uid).set(
                 profileData,
                 function(error) {
@@ -97,7 +98,7 @@ define([
                     }
                 }
             );
-            pushEvent(userData.uid, profileData, "user.add");
+            that.pushEvent(userData.uid, profileData, "user.add");
 
         },
         pushEvent: function(uid, data, type){
