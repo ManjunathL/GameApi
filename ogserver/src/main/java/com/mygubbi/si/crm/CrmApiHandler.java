@@ -333,13 +333,15 @@ public class CrmApiHandler extends AbstractRouteHandler
             String decodedEmail = URLDecoder.decode(encodeEmail, "UTF-8");
             LOG.info("encodeEmail"   +encodeEmail);
             LOG.info("decodedEmail"   +decodedEmail);
+            String newEmail = decodedEmail.replace('.', '|');
+            LOG.info(newEmail);
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registeruser")
                     .setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
-                    .setParameter("email", decodedEmail)
+                    .setParameter("email", newEmail)
                     .setParameter("phone", phone)
                     .setParameter("password", password)
                     .setParameter("photoUrl","null")
