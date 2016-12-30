@@ -36,12 +36,42 @@
             <div class="row">
                 <div class="product-main-section">
                     <div class="col-sm-7 col-md-7 col-lg-7">
-                        <div class="product-main-img">
-                            <% if(typeof(product.images) !== 'undefined'){ %>
-                            <img draggable="false" id="mainImg"
-                                 src="<%= imgBase + product.images[0] %>"
-                                 alt="<%= product.name %>" title="<%= product.name %>" class="width100">
-                            <% } %>
+                        <div class="portfolio-bg-gray margin-bottom40 portfolio-box overflow-hidden">
+                            <div class="position-relative">
+                            <a class="product-main-img">
+                                <% if(typeof(product.images) !== 'undefined'){ %>
+                                <img draggable="false" id="mainImg"
+                                     src="<%= imgBase + product.images[0] %>"
+                                     alt="<%= product.name %>" title="<%= product.name %>" class="img-responsive">
+                                <% } %>
+                            </a>
+                            <div class="list-button-strip">
+                                <div class="listli">
+                                    <a class="shortlistable-item" href="#" data-element="<%=product.productId%>">
+                                        <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
+                                        <span class="list-txt"> shortlist </span>
+                                    </a>
+                                </div>
+                                <div class="listli">
+                                    <a href="javascript:void(0);">
+                                        <span id="share-ico<%=product.productId%>" class="glyph fa fa-share listshare"></span>
+
+                                        <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
+                                            <% var share_url = window.location.protocol + '//' + window.location.host + '/product-' + product.productId %>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                         <!-- Product Related Images Start -->
                         <div class="wrap">
