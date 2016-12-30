@@ -3500,9 +3500,9 @@ a.button-orange:hover {
     padding: 7px;
     text-align: center;
     width: 35px;
-    border: 2px solid #FFF;
-    color: #FFF;
-    font-size: 18px;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 16px !important;
 }
 
 .listing-button-strip {
