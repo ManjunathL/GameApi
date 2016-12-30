@@ -119,26 +119,28 @@
                                     <h2 class="txt-urstory media-txt-title">Share</h2>
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <% var share_url = window.location.href %>
+                                    <% var share_title = blg_hdng %>
                                     <ul class="nav navbar-nav navbar-left socialLnkShare">
                                         <li>
-                                            <a href="https://www.instagram.com/my_gubbi/" target="_blank" class="social-menu-lnk"><i class="fa fa-instagram" aria-hidden="true"></i>
-                                            </a>
+                                            <a href="javascript:void(0);"
+                                               onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=share_title%>', '', 'width=585,height=368')"
+                                               class="share-popup11 social-menu-lnk"><i class="fa fa-facebook-square font-size22"></i></a>
                                         </li>
                                         <li>
-                                            <a href="" class="social-menu-lnk"><i class="fa fa-youtube-square" aria-hidden="true"></i>
-                                            </a>
+                                            <a href="javascript:void(0);"
+                                               onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&description=<%= share_title %>', '', 'width=585,height=368')"
+                                               class="share-popup11 social-menu-lnk"><i class="fa fa-pinterest-square font-size22"></i></a>
                                         </li>
                                         <li>
-                                            <a href="https://www.facebook.com/myGubbi/" target="_blank" class="social-menu-lnk"><i class="fa fa-facebook-square" aria-hidden="true"></i>
-                                            </a>
+                                            <a href="javascript:void(0);"
+                                               onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= share_title %>', '', 'width=585,height=368')"
+                                               class="share-popup11 social-menu-lnk"><i class="fa fa-twitter-square font-size22"></i></a>
                                         </li>
                                         <li>
-                                            <a href="https://in.pinterest.com/my_gubbi/mygubbi/" target="_blank" class="social-menu-lnk"><i class="fa fa-pinterest-square" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://twitter.com/my_gubbi" target="_blank" class="social-menu-lnk"><i class="fa fa-twitter-square" aria-hidden="true"></i>
-                                            </a>
+                                            <a href="javascript:void(0);"
+                                               onclick="window.open('https://plus.google.com/share?url=<%=share_url%>', '', 'width=585,height=368')"
+                                               class="share-popup11 social-menu-lnk"><i class="fa fa-google-plus-square font-size22"></i></a>
                                         </li>
                                     </ul>
                                 </div>
