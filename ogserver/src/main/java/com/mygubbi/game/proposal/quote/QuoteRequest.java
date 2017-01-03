@@ -12,12 +12,14 @@ import java.util.List;
 public class QuoteRequest
 {
     private static final String PROPOSAL_ID = "proposalId";
+    private static final String FROMVERSION="fromVersion";
     private static final String PRODUCT_IDS = "productIds";
     private static final String DISCOUNT_AMOUNT = "discountAmount";
     private static final String ADDON_IDS = "addonIds";
     private static final String VERSION_IDS = "versionIds";
 
     private int proposalId;
+    private String fromVersion;
     private List<Integer> productsIds;
     private List<Integer> addonIds;
     private List<Integer> versionIds;
@@ -33,6 +35,10 @@ public class QuoteRequest
     {
         this(jsonData.getInteger(PROPOSAL_ID));
         this.outputType = outputType;
+        if(jsonData.containsKey(FROMVERSION))
+        {
+            this.setFromVersion(jsonData.getString(FROMVERSION));
+        }
         if (jsonData.containsKey(PRODUCT_IDS))
         {
             this.setProductsIds(jsonData.getJsonArray(PRODUCT_IDS).getList());
@@ -43,12 +49,16 @@ public class QuoteRequest
         }
         if (jsonData.containsKey(VERSION_IDS))
         {
-            this.setAddonIds(jsonData.getJsonArray(VERSION_IDS).getList());
+            this.setVersionIds(jsonData.getJsonArray(VERSION_IDS).getList());
         }
         if (jsonData.containsKey(DISCOUNT_AMOUNT))
         {
             this.discountAmount = jsonData.getDouble(DISCOUNT_AMOUNT);
         }
+    }
+
+    public void setFromVersion(String fromVersion) {
+        this.fromVersion = fromVersion;
     }
 
     public ProposalOutputCreator.OutputType getOutputType()
@@ -61,6 +71,9 @@ public class QuoteRequest
         return this.proposalId;
     }
 
+    public String getFromVersion() {
+        return fromVersion;
+    }
 
     public List<Integer> getProductIds()
     {

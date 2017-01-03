@@ -48,7 +48,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         HttpServerOptions options = new HttpServerOptions()
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
-        int httpPort =  1443;
+        int httpPort =  ConfigHolder.getInstance().getInteger("http_port",1445);
         VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpPort);
     }
 
@@ -67,7 +67,7 @@ public class GameApiServerVerticle extends AbstractVerticle
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
 
-        int httpsPort =  1444;
+        int httpsPort =   ConfigHolder.getInstance().getInteger("https_port",1446);;
         VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
     }
 

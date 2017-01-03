@@ -61,7 +61,7 @@
       "uri": "/gapi/proposal/version/locakallpresalesversions",
       "source": "db",
       "query":"version.lockallpresalesversions",
-      "params":["status"],
+      "params":["status","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -70,7 +70,32 @@
       "uri": "/gapi/proposal/version/locakallpostsalesversions",
       "source": "db",
       "query":"version.lockallpostsalesversions",
-      "params":["status"],
+      "params":["status","proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/lockallversionsexceptpso",
+      "source": "db",
+      "query":"version.lockallversionsexceptpso",
+      "params":["status","proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/version/getlatestversion",
+      "source": "db",
+      "query":"version.getlatestversion",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/getlatestTemproary",
+      "source": "db",
+      "query":"version.getlatestversionTemproary",
+      "params":["proposalId","version"],
       "resultfields":[],
       "default": "[]"
     },
@@ -78,7 +103,7 @@
       "uri": "/gapi/proposal/updateversion",
       "source": "db",
       "query":"proposal.updateversion",
-      "params":["title","finalAmount","status","remarks","version","proposalId","fromVersion"],
+      "params":["title","finalAmount","status","remarks","version","discountAmount","discountPercentage","Amount","proposalId","fromVersion"],
       "resultfields":[],
       "default": "[]"
     },
@@ -408,6 +433,14 @@
       "source": "db",
       "query":"module.selectModulesByCategory",
       "params":["productCategory", "moduleCategory"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/id",
+      "source": "db",
+      "query":"proposal.id",
+      "params":[],
       "resultfields":[],
       "default": "[]"
     }

@@ -4,8 +4,6 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.si.crm.CreateProposal;
-import com.mygubbi.si.crm.CrmApiHandler;
 import com.mygubbi.si.data.DataProcessor;
 import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.data.EventData;
@@ -13,9 +11,11 @@ import com.mygubbi.si.email.EmailData;
 import com.mygubbi.si.email.EmailService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import io.vertx.core.json.JsonArray;
 /**
  * Created by Sunil on 07-01-2016.
  */

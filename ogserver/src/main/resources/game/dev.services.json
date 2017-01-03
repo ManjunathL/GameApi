@@ -12,15 +12,15 @@
       },
       {
         "name": "com.mygubbi.si.email.EmailService"
-      },
-
+      }
+/*
       {
         "name": "com.mygubbi.si.firebase.FirebaseDataService"
       },
 
       {
         "name": "com.mygubbi.si.firebase.FirebaseService"
-      }
+      }*/
 
 //
     ],

@@ -78,7 +78,9 @@ public class ProposalOutputService extends AbstractVerticle
     private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message)
     {
         QueryData queryData = null;
-        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
+        JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
+        LOG.info("get proposal products from Version" +quoteRequest.getFromVersion());
+
 //        if (quoteRequest.hasProductIds())
 //        {
 //            queryData = new QueryData("proposal.product.selected.detail", paramsJson.put("productIds", quoteRequest.getProductIdsAsText()));
@@ -89,11 +91,11 @@ public class ProposalOutputService extends AbstractVerticle
 //            queryData = new QueryData("proposal.product.all.detail", paramsJson);
 //        }
         queryData = new QueryData("proposal.product.all.detail", paramsJson);
-
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    LOG.info("Parameter Values" +resultData.paramsObject);
                     if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
                     {
                         message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
@@ -175,7 +177,7 @@ public class ProposalOutputService extends AbstractVerticle
     {
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader);
             outputCreator.create();
             sendResponse(message, new JsonObject().put(outputCreator.getOutputKey(), outputCreator.getOutputFile()));

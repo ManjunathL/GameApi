@@ -42,6 +42,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
+        this.post("/downloadmarginsheet").handler(this::downloadMarginSheet);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
@@ -190,6 +191,11 @@ public class ProposalHandler extends AbstractRouteHandler
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.JOBCARD);
     }
 
+    private void downloadMarginSheet(RoutingContext routingContext)
+    {
+        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.MARGIN);
+    }
+
     private void downloadSalesOrder(RoutingContext routingContext)
     {
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.SALESORDER);
@@ -197,6 +203,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type)
     {
+        LOG.debug("");
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
         VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,

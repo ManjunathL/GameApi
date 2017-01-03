@@ -9,8 +9,8 @@
     "password": "OG$#gubi32"
   },
 
-  "http_port" : 1443,
-  "https_port" : 1444,
+  "http_port" : 1445,
+  "https_port" : 1446,
   "proposal_docs_folder" : "/mnt/game/proposal/",
   "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
   "templates_folder" : "c:/Users/Public/game_files",
@@ -19,8 +19,8 @@
   "salesorder_template" : "/mnt/game/proposal/templates/salesorder-template.xlsx",
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
 
-  "fbServicesJson": "config/test/mygubbi-uat-firebase.json",
-  "fbUrl": "https://mygubbi-uat.firebaseio.com",
+  "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
+  "fbUrl": "https://mygubbi-cep.firebaseio.com",
   "processfbEvents": true,
   "websiteHost": "52.220.90.92",
   "acceptSSLCertificates": "true"

@@ -2,10 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.*;
-import com.mygubbi.game.proposal.model.AccHwComponent;
-import com.mygubbi.game.proposal.model.AccessoryPackComponent;
-import com.mygubbi.game.proposal.model.ModulePanel;
-import com.mygubbi.game.proposal.model.ShutterFinish;
+import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.PanelComponent;
 import org.apache.logging.log4j.LogManager;
@@ -404,6 +401,7 @@ public class AssembledProductInQuote
         return Seq.seq(this.product.getAddons()).filter(addon -> addon.isAppliance()).toList();
     }
 
+
     public static class Unit
     {
         public int sequence;
@@ -458,6 +456,21 @@ public class AssembledProductInQuote
         }
     }
 
+    public static class ModulePrice
+    {
+        public double totalCost;
+        public double woodWorkCost;
+        public double hardwareCost;
+
+        public ModulePrice(double totalCost, double woodWorkCost, double hardwareCost)
+        {
+            this.totalCost = totalCost;
+            this.woodWorkCost = woodWorkCost;
+            this.hardwareCost = hardwareCost;
+
+        }
+    }
+
     public static class ModuleDimension
     {
         public int length;
@@ -506,6 +519,9 @@ public class AssembledProductInQuote
         public double quantity;
         public String make;
         public String uom;
+        public double cost;
+        public double costWoAccessories;
+        public double hardwareCost;
 
         public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom)
         {

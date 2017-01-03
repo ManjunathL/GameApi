@@ -1,6 +1,5 @@
 package com.mygubbi.game.proposal.quote;
 
-import com.mygubbi.common.CurrencyUtil;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
@@ -30,6 +29,8 @@ public class QuoteData
     private ProposalHeader proposalHeader;
     private List<ProductLineItem> products;
 
+    NumberToWord word=new NumberToWord();
+
     private List<AssembledProductInQuote> assembledProducts;
     private List<ProductLineItem> catalogueProducts;
     private List<ProductAddon> headerLevelAddons = Collections.emptyList();
@@ -38,13 +39,15 @@ public class QuoteData
     public double addonsCost;
 
     public double discountAmount;
+    public String fromVersion;
 
-    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount)
+    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion)
     {
         this.proposalHeader = proposalHeader;
         this.products = products;
         if (addons != null) this.headerLevelAddons = addons;
         this.discountAmount = discountAmount;
+        this.fromVersion=fromVersion;
         this.prepare();
     }
 
@@ -76,6 +79,7 @@ public class QuoteData
 
         LOG.info("Products cost :" + this.productsCost + ". Addons cost:" + this.addonsCost);
         LOG.info("Discount Amount :" + this.discountAmount);
+        LOG.info("Version number: " +this.fromVersion);
     }
 
     public List<AssembledProductInQuote> getAssembledProducts()
@@ -137,6 +141,7 @@ public class QuoteData
     public Object getValue(String key)
     {
         if (this.proposalHeader.containsKey(key)) return this.proposalHeader.getValue(key);
+        float fromVersionFloat = Float.parseFloat(this.fromVersion);
         switch (key)
         {
             case "date":
@@ -152,11 +157,17 @@ public class QuoteData
             case "totalamount":
                 return this.getTotalCost();
             case "discountamount":
-                return this.discountAmount;
+                return (int)this.discountAmount;
+            case "fromVersion":
+                LOG.info("version number in case" +this.fromVersion);
+                return (fromVersionFloat)/10;
             case "amountafterdiscount":
                 return this.getTotalCost()-getDiscountAmount();
             case "totalamountinwords":
-                return new CurrencyUtil().convert(String.valueOf(this.getTotalCost() - this.discountAmount));
+                double val=this.getTotalCost() - this.discountAmount;
+                Double rem=val-val%10;
+                return word.convertNumberToWords(rem.intValue()) + " Rupees Only";
+                //return new CurrencyUtil().convert(String.valueOf((int)(this.getTotalCost() - this.discountAmount)));
             default:
                 return null;
         }

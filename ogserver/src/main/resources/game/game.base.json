@@ -3,10 +3,10 @@
 
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
+    "url": "jdbc:mysql://localhost/game",
     "max_pool_size": 20,
-    "user": "admin",
-    "password": "OG$#gubi32"
+    "user": "root",
+    "password": "root"
   },
 
 
@@ -20,18 +20,21 @@
 
   "robots.txt": "User-agent: *\nDisallow: /",
 
+  "http_port" : 1445,
+  "https_port" : 1446,
   "proposal_docs_folder" : "c:/Users/Public/game_files",
   "templates_folder" : "c:/Users/Public/game_files",
   "price_files_folder" : "c:/Users/Public/game_files/price_files",
   "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
   "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
-  "ratecard_file": "e:/ratecard.bin",
+  "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
+  "ratecard_file": "d:/tmp/ratecard.bin",
 
   "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
 
-  "fbServicesJson": "config/test/mygubbi-uat-firebase.json",
-  "fbUrl": "https://mygubbi-uat.firebaseio.com",
+  "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
+  "fbUrl": "https://mygubbi-cep.firebaseio.com",
   "processfbEvents": true
 
 
