@@ -26,28 +26,10 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <ul class="breadcrumb">
-
                         <li><a href="/"><i class="fa fa-home"></i></a></li>
                         <% var city = filter.location; %>
-                        <!--<%= console.log("++++++city++++") %>
-                        <%= console.log(city) %>-->
-
-                        <!--<% if(city !== 'undefined' && city != null){ %>-->
-                        <!--<% if(city == 'website' ){ %>-->
-                        <!--<li></li>-->
-                        <!--<% }else{ %>-->
-                        <!--<li>-->
-                        <!--<a href="javascript:void(0);">-->
-                        <!--<span >-->
-                        <!--<%= city %>-->
-                        <!--</span></a>-->
-                        <!--</li>-->
-                        <!--<% } %>-->
-                        <!--<% } %>-->
-                        <% if(city == 'website' ){ %>
-                        <% var city = '' } %>
-
-
+                        <%= console.log("++++++city++++") %>
+                        <%= console.log(city) %>
                         <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
                         <li class="active"><a href="javascript:void(0);"><span
                                 class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
@@ -55,35 +37,50 @@
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){
                         %>
                         <li>
-                            <!--<%= console.log('testing City based category') %>
-                            <%= console.log(filter.selectedCategoryName) %>-->
+                            <%= console.log('testing City based category') %>
+                            <%= console.log(filter.selectedCategoryName) %>
                             <%= console.log(city) %>
-                            <% if(city == 'website' & filter.selectedCategoryName == 'kitchen') { %>
+                            <% if(city == 'website'  && filter.selectedCategoryName == 'kitchen') { %>
                             <% var cityKitchen = 'kitchen-cabinet-design' %>
                             <% }else { %>
                             <% var cityKitchen = 'modular-kitchen-cabinet' %>
                             <% } %>
-                            <% if(city == 'website'  & filter.selectedCategoryName == 'bedroom') { %>
+                            <% if(city == 'website'  && filter.selectedCategoryName == 'bedroom') { %>
                             <% var cityWardrobe = 'wardrobe-designs-online' %>
                             <% }else { %>
                             <% var cityWardrobe = 'wardrobes-online' %>
                             <% } %>
-                            <% if(city == 'website'  & filter.selectedCategoryName == 'living & dining') { %>
+                            <% if(city == 'website'  && filter.selectedCategoryName == 'living & dining') { %>
                             <% var cityStorage = 'storage-solutions' %>
                             <% }else { %>
                             <% var cityStorage = 'storage-solutions' %>
                             <% } %>
+
                             <% if(filter.selectedCategoryName == 'living & dining'){ %>
-                            <a href="<%= cityStorage %><% if(city != '') { %>-<%= city %>  <% } %>  "  >Storage Solutions <% if(city != '') { %> - <%= city %>  <% } %> </a>
+                            <a href="<%= cityStorage %><% if(city != 'website') { %>-<%= city %>  <% }else { %>
+                        <%  %>
+                        <% } %> ">Storage Solutions <% if(city != 'website') { %> - <%= city %>  <% }else { %>
+                                <%  %>
+                                <% } %>  </a>
                             <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
-                            <a href="<%= cityKitchen %><% if(city != '') { %>-<%= city %>  <% } %> " ><%= filter.selectedCategoryName %> <% if(city != '') { %> - <%= city %> <% } %></a>
+                            <a href="<%= cityKitchen %><% if(city != 'website') { %>-<%= city %>  <% }else { %>
+                        <%  %>
+                        <% } %> " >Kitchen <% if(city != 'website') { %> - <%= city %>  <% }else { %>
+                                <%  %>
+                                <% } %> </a>
                             <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                            <a href="<%= cityWardrobe %><% if(city != '') { %>-<%= city %>  <% } %> " >Wardrobe <% if(city != '') { %> - <%= city %> <% } %></a>
+                            <a href="<%= cityWardrobe %><% if(city != 'website') { %>-<%= city %>  <% }else { %>
+                        <%  %>
+                        <% } %> " >Wardrobe <% if(city != 'website') { %> - <%= city %>  <% }else { %>
+                                <%  %>
+                                <% } %> </a>
                             <% } %>
 
 
                         </li>
                         <% } %>
+                        <% if(city == 'website' ){ %>
+                        <% var city = '' } %>
                         <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
                         null){ %>
                         <li class="active">
