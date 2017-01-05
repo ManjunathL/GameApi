@@ -18,13 +18,13 @@
                         <% } %>
                     </li>
                     <% } %>
-                    <% if(typeof(product.subcategory) !== 'undefined' && product.subcategory != null){ %>
+                    <!--<% if(typeof(product.subcategory) !== 'undefined' && product.subcategory != null){ %>
                         <% if(product.subcategory == 'Wardrobe'){ %>
                             <li><a href="<%= product.url %>">Wardrobe Collection</a></li>
                         <% }else { %>
                             <li><a href="<%= product.url %>"><%= product.subcategory %></a></li>
                         <% } %>
-                    <% } %>
+                    <% } %>-->
                     <% if(typeof(product.name) !== 'undefined'){ %>
                     <li class="active"><a href="javascript:void(0);"><span
                             class="li-txt-wrap"><%= product.name %></span></a></li>
