@@ -401,7 +401,7 @@
       "id": "proposal.product.createnew",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select proposalId, ?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId= ? and fromVersion = ?",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select proposalId, ?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId= ? and fromVersion = ? and active = 'A'",
       "params": ["toVersion","proposalId","fromVersion"]
     },
 

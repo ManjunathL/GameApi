@@ -15,6 +15,7 @@ public class ProposalHeader extends JsonObject
     public static final String PROJECT_CITY = "pcity";
     public static final String SALESPERSON_NAME = "salesName";
     public static final String DESIGNER_NAME = "designerName";
+    public static final String DESIGN_PARTNER_NAME = "designPartnerName";
     public static final String AMOUNT = "amount";
     public static final String FOLDER_PATH = "folderPath";
     public static final String QNAME="title";
@@ -39,6 +40,10 @@ public class ProposalHeader extends JsonObject
     public String getSalesPhone()
     {
         return this.getString(SALESPHONE);
+    }
+    public String getDesignPartnerName()
+    {
+        return this.getString(DESIGN_PARTNER_NAME);
     }
     public String getSalesEmail()
     {
