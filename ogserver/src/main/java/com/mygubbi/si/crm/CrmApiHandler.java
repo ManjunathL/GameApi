@@ -339,7 +339,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     .setScheme("https")
                     .setHost(host)
                     .setPath("/registeruser")
-                    .setParameter("_escaped_fragment_",fragment)
+                    //.setParameter("_escaped_fragment_",fragment)
                     .setParameter("name", name)
                     .setParameter("email", newEmail)
                     .setParameter("phone", phone)
