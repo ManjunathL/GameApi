@@ -2,7 +2,6 @@ package com.mygubbi.game.proposal.output;
 
 import com.mygubbi.game.proposal.erp.ExcelSalesOrderCreator;
 import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
-import com.mygubbi.game.proposal.margin.MarginExcelCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.quote.ExcelQuoteCreator;
 import com.mygubbi.game.proposal.quote.PdfQuoteCreator;
@@ -13,7 +12,7 @@ import com.mygubbi.game.proposal.quote.QuoteData;
  */
 public interface ProposalOutputCreator
 {
-    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF, MARGIN};
+    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF};
 
     public void create();
 
@@ -36,10 +35,6 @@ public interface ProposalOutputCreator
 
             case QUOTEPDF:
                 return new PdfQuoteCreator(quoteData, proposalHeader);
-
-            case MARGIN:
-                return new MarginExcelCreator(quoteData, proposalHeader);
-
 
 
             default:
