@@ -11,11 +11,12 @@ public class ExcelStyles
 {
     private CellStyle boldStyle;
     private CellStyle titleStyle;
-
+    private CellStyle indexStyle;
     public ExcelStyles(Workbook wb)
     {
         this.boldStyle = this.createBoldStyle(wb);
         this.titleStyle = this.createTitleStyle(wb);
+        this.indexStyle = this.createIndexStyle(wb);
     }
 
     public CellStyle getBoldStyle()
@@ -26,6 +27,11 @@ public class ExcelStyles
     public CellStyle getTitleStyle()
     {
         return titleStyle;
+    }
+
+    public CellStyle getIndexStyle()
+    {
+        return indexStyle;
     }
 
     private CellStyle createBoldStyle(Workbook wb)
@@ -51,6 +57,24 @@ public class ExcelStyles
         style.setFillForegroundColor(orange.getIndexed());
         LOG.info("Title color: " + style.getFillBackgroundColorColor());
         LOG.info("Title color code: " + style.getFillBackgroundColor()); */
+        return style;
+    }
+
+    private CellStyle createIndexStyle(Workbook wb)
+    {
+        CellStyle style = wb.createCellStyle();
+        Font font = wb.createFont();
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        font.setFontHeight(new Double(font.getFontHeight() * 1.3).shortValue());
+        style.setFont(font);
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+       /*XSSFColor orange = new XSSFColor(new java.awt.Color(255,200,0));
+       LOG.info("Title color code prior : " + style.getFillBackgroundColor());
+       XSSFColor orange = new XSSFColor(Color.ORANGE);
+       style.setFillBackgroundColor(orange.getIndexed());
+       style.setFillForegroundColor(orange.getIndexed());
+       LOG.info("Title color: " + style.getFillBackgroundColorColor());
+       LOG.info("Title color code: " + style.getFillBackgroundColor()); */
         return style;
     }
 

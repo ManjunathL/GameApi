@@ -31,7 +31,7 @@ public class ExcelQuoteCreator extends AbstractProposalOutputCreator
     public void create()
     {
         this.openWorkbook();
-        new QuotationSheetCreator(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles()).prepare();
+        new ExcelQuoteSheetCreator(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles()).prepare();
        new DataSheetCreator(this.workbookManager.getSheetByName("Data"), this.quoteData, this.workbookManager.getStyles()).prepare();
         this.closeWorkbook();
     }

@@ -61,7 +61,7 @@
       "uri": "/gapi/proposal/version/locakallpresalesversions",
       "source": "db",
       "query":"version.lockallpresalesversions",
-      "params":["status","proposalId"],
+      "params":["internalStatus","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -70,7 +70,7 @@
       "uri": "/gapi/proposal/version/locakallpostsalesversions",
       "source": "db",
       "query":"version.lockallpostsalesversions",
-      "params":["status","proposalId"],
+      "params":["internalStatus","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -78,7 +78,7 @@
       "uri": "/gapi/proposal/version/lockallversionsexceptpso",
       "source": "db",
       "query":"version.lockallversionsexceptpso",
-      "params":["status","proposalId"],
+      "params":["internalStatus","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -103,7 +103,7 @@
       "uri": "/gapi/proposal/updateversion",
       "source": "db",
       "query":"proposal.updateversion",
-      "params":["title","finalAmount","status","remarks","version","discountAmount","discountPercentage","Amount","proposalId","fromVersion"],
+      "params":["title","finalAmount","status","internalStatus","remarks","version","discountAmount","discountPercentage","amount","date","proposalId","fromVersion"],
       "resultfields":[],
       "default": "[]"
     },
@@ -201,7 +201,7 @@
       "uri": "/gapi/product/list",
       "source": "db",
       "query":"proposal.product.list",
-      "params":["proposalId","fromVersion"],
+      "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -441,6 +441,40 @@
       "source": "db",
       "query":"proposal.id",
       "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/city/selectMonthCount",
+      "source": "db",
+      "query":"city.selectMonthCount",
+      "params":["city", "curmonth"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/city/newCityQuote",
+      "source": "db",
+      "query":"city.newCityQuote",
+      "params":["city", "curmonth","proposalId","quoteNo"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/city/selectCity",
+      "source": "db",
+      "query":"city.selectCity",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/city/checkCity",
+      "source": "db",
+      "query":"city.checkCity",
+      "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
     }

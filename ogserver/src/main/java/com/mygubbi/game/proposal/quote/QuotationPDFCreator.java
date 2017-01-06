@@ -114,15 +114,13 @@ public class QuotationPDFCreator
             phrase4.add(new Chunk("Contact: ",fsize1));
             phrase4.add(new Chunk(proposalHeader.getContact(),fsize));
 
-            float fromVersionFloat = Float.parseFloat(quoteData.fromVersion);
-            fromVersionFloat = fromVersionFloat/10;
+            String strqnum= quoteData.fromVersion;
+            strqnum=strqnum.replace(".","");
 
             Phrase phrase5 = new Phrase();
             phrase5.add(new Chunk("Quotation #: ",fsize1));
-            phrase5.add(new Chunk(proposalHeader.getQuoteNum(),fsize));
-            phrase5.add(new Chunk("Version #: ",fsize1));
-            Paragraph p1=new Paragraph(String.valueOf(fromVersionFloat),fsize);
-            phrase5.add(p1);
+            phrase5.add(new Chunk(proposalHeader.getQuoteNumNew()+ "." +strqnum,fsize));
+
 
             Phrase phrase6 = new Phrase();
             phrase6.add(new Chunk("Project Address: ",fsize1));
@@ -566,8 +564,10 @@ public class QuotationPDFCreator
 
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
+
             if(cname.equals("K") )
             {
+
                 if(unit.title.contains("Base unit")||
                         unit.title.contains("N - Base Units") ||
                         unit.title.contains("N - Drawer Units") ||
@@ -904,7 +904,6 @@ public class QuotationPDFCreator
         cell.addElement(p);
         tabname.addCell(cell);
     }
-
     private void fillCatalogProducts(PdfPTable tabname)
     {
         List<ProductLineItem> catalogProducts = this.quoteData.getCatalogueProducts();
@@ -924,9 +923,7 @@ public class QuotationPDFCreator
     {
         this.createSubHeadingRowForCatalog(tabname,"A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
-
         this.createRowAndFillData(tabname,null, product.getName());
-
     }
 
     private void createSubHeadingRowForCatalog(PdfPTable tabname, String index, String title,Double quantity, Double amount, Double total)

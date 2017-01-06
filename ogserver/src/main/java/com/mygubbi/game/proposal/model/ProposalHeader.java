@@ -24,6 +24,7 @@ public class ProposalHeader extends JsonObject
     public static final String CID="customerId";
     public static final String SALESPHONE="salesPhone";
     public static final String SALESEMAIL="salesEmail";
+    public static final String QUOTE_NO_NEW="quoteNoNew";
 
 
     public ProposalHeader(JsonObject json)
@@ -50,6 +51,10 @@ public class ProposalHeader extends JsonObject
     public String getQuoteNum()
     {
         return this.getString(QUOTENO);
+    }
+    public String getQuoteNumNew()
+    {
+        return this.getString(QUOTE_NO_NEW);
     }
     public String getCustomerId()
     {

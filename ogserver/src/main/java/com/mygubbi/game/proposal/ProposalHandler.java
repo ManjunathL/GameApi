@@ -37,6 +37,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/version/createdraft").handler(this::createInitialDraftProposal);
         this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
         this.post("/version/createversion").handler(this::createProposalVersion);
+        this.post("/version/copyversion").handler(this::copyVersion);
         this.post("/update").handler(this::updateProposal);
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
@@ -97,6 +98,24 @@ public class ProposalHandler extends AbstractRouteHandler
         JsonObject versionData = routingContext.getBodyAsJson();
         LOG.debug("routing context :" + versionData.encodePrettily());
         Integer id = LocalCache.getInstance().store(new QueryData("version.createversion", versionData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in creating version.");
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, versionData.toString());
+                    }
+                });
+    }
+
+    private void copyVersion(RoutingContext routingContext) {
+        JsonObject versionData = routingContext.getBodyAsJson();
+        LOG.debug("routing context :" + versionData.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("version.copyversion", versionData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());

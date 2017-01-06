@@ -4,7 +4,7 @@
       "id": "proposal.list.status",
       "type": "select",
       "table": "proposal",
-      "query": "select id, crmId, version, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status = ?",
+      "query": "select id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status = ?",
       "params": ["status"]
     },
 
@@ -12,7 +12,7 @@
       "id": "proposal.list.all",
       "type": "select",
       "table": "proposal",
-      "query": "select 'W' as editFlag, id, crmId, version, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "query": "select 'W' as editFlag, id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
       "params": []
     },
 
@@ -20,7 +20,7 @@
       "id": "proposal.list.sales",
       "type": "select",
       "table": "proposal",
-      "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, version, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
       "params": ["userId"]
     },
 
@@ -28,17 +28,26 @@
       "id": "proposal.list.designer",
       "type": "select",
       "table": "proposal",
-      "query": "select IF(designerEmail = ?, 'W', 'R') as editFlag, id, crmId, version, quoteNo, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "query": "select IF(designerEmail = ?, 'W', 'R') as editFlag, id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
       "params": ["userId"]
     },
+
+    {
+      "id": "proposal.list.designartner",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal where designPartnerEmail = ?",
+      "params": ["userId"]
+    },
+
 
 
     {
       "id": "proposal.updateversion",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set title = ?,finalAmount = ? , status = ? , remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , Amount = ? where version = ? and proposalId = ? ",
-      "params": ["title","finalAmount","status","remarks","fromVersion" , "discountAmount" , "discountPercentage","Amount","version","proposalId"]
+      "query": "update version_master set title = ?,finalAmount = ? , status = ? , internalStatus = ?, remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , amount = ?,date = ? where version = ? and proposalId = ? ",
+      "params": ["title","finalAmount", "status", "internalStatus", "remarks","fromVersion" , "discountAmount" , "discountPercentage","amount","date","version","proposalId"]
     },
 
     {
@@ -76,15 +85,15 @@
       "id": "version.createdraft",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, finalAmount, remarks,discountAmount,discountPercentage,amount) values (0.1, ?, ?, ?, 'Draft', 0.0, 'Provide Option description',0.0,0.0,0.0)",
-      "params": ["fromVersion", "proposalId", "title"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount, date) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, 'Provide Option description',0.0,0.0,0.0,?)",
+      "params": ["fromVersion", "proposalId", "title", "date"]
     },
 
     {
       "id": "version.createPostSalesInitial",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, finalAmount, remarks,discountAmount,discountPercentage,amount) values (1.0, ?, ?, ? , 'Draft', 0.0, 'Provide Option Description',0.0,0.0,0.0)",
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount) values (1.0, ?, ?, ? , 'Draft', 'Draft', 0.0, 'Provide Option Description',0.0,0.0,0.0)",
       "params": ["fromVersion", "proposalId", "title"]
     },
 
@@ -92,8 +101,8 @@
       "id": "proposal.update",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, customerId = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ? where id = ?",
-      "params": ["title", "crmId", "quoteNo", "customerId", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "amount", "updatedBy", "status", "version", "id"]
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, customerId = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ? where id = ?",
+      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "customerId", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "amount", "updatedBy", "status", "version", "id"]
     },
 
     {
@@ -108,7 +117,7 @@
       "id": "version.publish",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'published' where version = ? and proposalId = ?",
+      "query": "update version_master set status = 'Published', internalStatus = 'Published' where version = ? and proposalId = ?",
       "params": ["version","proposalId"]
     },
 
@@ -116,7 +125,7 @@
       "id": "version.confirm",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'Confirmed', version = ?, fromVersion = ? where version = ? and proposalId = ?",
+      "query": "update version_master set status = 'Confirmed', internalStatus = 'Confirmed', version = ?, fromVersion = ? where version = ? and proposalId = ?",
       "params": ["version", "fromVersion", "toVersion", "proposalId"]
     },
 
@@ -124,7 +133,7 @@
       "id": "version.designsignoff",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'DSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
+      "query": "update version_master set status = 'DSO', internalStatus = 'DSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
       "params": ["version", "fromVersion", "toVersion", "proposalId"]
     },
 
@@ -132,7 +141,7 @@
       "id": "version.productionsignoff",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'PSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
+      "query": "update version_master set status = 'PSO', internalStatus = 'PSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
       "params": ["version", "fromVersion", "toVersion", "proposalId"]
     },
 
@@ -140,32 +149,40 @@
       "id": "version.createversion",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, finalAmount, remarks,discountPercentage,discountAmount,amount) values (?, ?, ?, ?, ?, ?, ? , ? , ? , ?)",
-      "params": ["version","fromVersion","proposalId", "title","status","finalAmount","remarks","discountPercentage","discountAmount","amount"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,date) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?, ?)",
+      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount","date"]
+    },
+
+    {
+      "id": "version.copyversion",
+      "type": "insert",
+      "table": "version_master",
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?)",
+      "params": ["version","fromVersion","toVersion", "discountAmount","discountPercentage"]
     },
 
     {
       "id": "version.lockallpresalesversions",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set status = ? where version like '0.%' and proposalId = ?",
-      "params": ["status","proposalId"]
+      "query": "update version_master set internalStatus = ? where version like '0.%' and proposalId = ?",
+      "params": ["internalStatus","proposalId"]
     },
 
     {
       "id": "version.lockallpostsalesversions",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set status = ? where version like '1.%' and proposalId = ?",
-      "params": ["status","proposalId"]
+      "query": "update version_master set internalStatus = ? where version like '1.%' and proposalId = ?",
+      "params": ["internalStatus","proposalId"]
     },
 
     {
       "id": "version.lockallversionsexceptpso",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set status = ? where version like '2.%' and proposalId = ? and status != 'PSO' ",
-      "params": ["status","proposalId"]
+      "query": "update version_master set internalStatus = ? where version like '2.%' and proposalId = ? and status != 'PSO' ",
+      "params": ["internalStatus","proposalId"]
     },
 
     {
@@ -207,13 +224,6 @@
       "params": ["proposalId"]
     },
 
-    {
-      "id": "version.lockallpostsalesversions",
-      "type": "insert",
-      "table": "version_master",
-      "query": "update version_master set status = ? where version like '1.%'",
-      "params": ["status"]
-    },
 
     {
       "id": "proposal.publish",
@@ -274,9 +284,7 @@
       "type": "delete",
       "table": "proposal_documents",
       "query": "delete from proposal_documents where id = ?",
-      "params": [
-        "id"
-      ]
+      "params": ["id"]
     },
 
     {
@@ -699,6 +707,34 @@
       "type": "select",
       "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath, accessoryPackDefault, remarks from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
       "params": ["productCategory","moduleCategory"]
+    },
+
+
+    {
+      "id": "city.selectMonthCount",
+      "type": "select",
+      "query": "select * from city_master where curmonth= ? and city = ? ",
+      "params": ["curmonth","city"]
+    },
+
+    {
+      "id": "city.newCityQuote",
+      "type": "insert",
+      "query": "insert into city_master(city,curmonth,proposalId,quoteNo,cityLocked) values (?, ?, ?, ?, 'Yes')",
+      "params": ["city","curmonth","proposalId","quoteNo"]
+    },
+    {
+      "id": "city.selectCity",
+      "type": "select",
+      "query": "select * from city_master where proposalId= ?",
+      "params": ["proposalId"]
+    },
+    {
+      "id": "city.checkCity",
+      "type": "select",
+      "query": "select cityLocked from city_master where proposalId= ?",
+      "params": ["proposalId"]
     }
+
   ]
 }
