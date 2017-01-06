@@ -590,7 +590,7 @@
                 <!--</p>-->
 
                 <p>
-                    New to mygubbi?<a href="#" id="new_reg">&nbsp;Sign Up</a>
+                    New to mygubbi?<a href="javascript:void(0);" id="new_reg">&nbsp;Sign Up</a>
                 </p>
             </div>
         </div>
@@ -667,7 +667,7 @@
                     </div>
                     <div class="margin-bottom20 form-group has-feedback">
                         <p class="margin0">Contact Number</p>
-                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" pattern="\d{10}"/>
+                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" max-length="10" pattern="\d{10}" required />
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="margin-bottom20 form-group">

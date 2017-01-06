@@ -94,10 +94,8 @@ define([
                 function(error) {
                     if (error) {
                         console.log("password profile data could not be saved." + error);
-                        $("#testdv").text("password profile data could not be saved." + error);
                     } else {
                         console.log("data saved successfully.");
-                        $("#testdv").text("data saved successfully.");
                     }
                 }
             );
@@ -112,13 +110,11 @@ define([
             MGF.rootRef.child("events").push().child(uid).set(eventData, function(error) {
                 if (error) {
                     console.log("not able to push event data", error);
-                    $("#testdv").text("not able to push event data" + error);
                 } else {
                     console.log("successfully pushed event data");
-                    $("#testdv").text("successfully pushed event data");
-
                 }
             });
+
         }
     });
     return UserProfileView;

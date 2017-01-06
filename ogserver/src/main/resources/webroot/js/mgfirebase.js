@@ -63,7 +63,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                 var userProfile = null;
                 var that = this;
 
-                userProfileRef.once("value", function(snapshot) {
+                userProfileRef.on("value", function(snapshot) {
                     if (snapshot.exists()) {
                         that.userProfile = snapshot.val();
                     }
@@ -283,7 +283,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
              var projectDetails = null;
              var that = this;
 
-             projRef.once("value", function(snapshot) {
+             projRef.on("value", function(snapshot) {
                  if (snapshot.exists()) {
                  console.log("--------project details--------");
                      that.projectDetails = snapshot.val();
@@ -291,7 +291,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
 
                      var userProfile = null;
 
-                     userProfileRef.once("value", function(snapshots) {
+                     userProfileRef.on("value", function(snapshots) {
                          if (snapshots.exists()) {
                              that.userProfile = snapshots.val();
                          }
@@ -304,7 +304,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                     var userProfile = null;
                     var providerId = authData.providerData[0].providerId;
 
-                    userProfileRef.once("value", function(snapshot) {
+                    userProfileRef.on("value", function(snapshot) {
                         if (snapshot.exists()) {
                             that.userProfile = snapshot.val();
                         }

@@ -420,9 +420,9 @@
                             <% } %></div>
 
                     </div>
-                    <div class="row align-center padding6">
+                    <!--<div class="row align-center padding6">
                         <div class="col-sm-3">  Balance </div>
-                        <!--<div class="col-sm-2">  50 </div>-->
+                        &lt;!&ndash;<div class="col-sm-2">  50 </div>&ndash;&gt;
                        <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].m3_amount_collected_c %>
                             <% } %> </div>
@@ -433,7 +433,7 @@
                             <%= myNest.paymentDetails[0].payment_reference3_c %>
                             <% } %></div>
 
-                    </div>
+                    </div>-->
 
                     <!--<div class="row row-magin align-center col-md-12 font-style-or">
                         <div class="quality-check-line"></div>
@@ -465,6 +465,7 @@
                 <div class="row">
                     <div class="col-md-12 doc-details">
                         <% if(typeof(myNest.documentDetails[0]) !== 'undefined'){ %>
+                        <span class="font-size16 shortlist">Floor Plan | </span>
                         <a href="<%= myNest.documentDetails[0].docUrl %>" target="_blank" title="View">
                            <span class="text-small-proposals">
                                 <%= myNest.documentDetails[0].documentName %>
@@ -476,6 +477,7 @@
                 <div class="row">
                     <div class="col-md-12 doc-details">
                         <% if(typeof(myNest.documentDetails[1]) !== 'undefined'){ %>
+                        <span class="font-size16 shortlist">Initial Proposal | </span>
                         <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
                            <span class="text-small-proposals">
                                 <%= myNest.documentDetails[1].documentName %>
@@ -487,9 +489,10 @@
                 <div class="row">
                     <div class="col-md-12 doc-details">
                         <% if(typeof(myNest.documentDetails[2]) !== 'undefined'){ %>
+                        <span class="font-size16 shortlist">Final Proposal | </span>
                         <a href="<%= myNest.documentDetails[2].docUrl %>" target="_blank" title="View">
                            <span class="text-small-proposals">
-                                <%= myNest.documentDetails[2].documentName %>
+                                Final Proposal | <%= myNest.documentDetails[2].documentName %>
                            </span>
                         </a>
                         <% } %>

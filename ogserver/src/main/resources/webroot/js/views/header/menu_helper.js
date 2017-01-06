@@ -36,7 +36,7 @@ define([
             var userProfileRef = this.ref.child("user-profiles/" + uid);
             var userProfile = null;
             var that = this;
-            userProfileRef.once("value", function(snapshot) {
+            userProfileRef.on("value", function(snapshot) {
                 if (snapshot.exists()) {
                     userProfile = snapshot.val();
                 }
@@ -92,7 +92,7 @@ define([
             if (authData.providerData !== 'password') {
                 var userRef = this.ref.child("users/" + authData.uid);
                 var that = this;
-                userRef.once("value", function(snapshot) {
+                userRef.on("value", function(snapshot) {
                     if (snapshot.exists()) {
                         that.setUser(user);
                         console.log("user already exists in firebase");
@@ -186,6 +186,7 @@ define([
             this.refAuth.signOut().then(function() {
                // Sign-out successful.
                console.log("Sign-out successful.");
+               window.location = '/';
             }, function(error) {
               // An error happened.
               console.log("Sign-out failed due to some error." + error.errorMessage);
@@ -250,27 +251,47 @@ define([
 
             var email = $('#reg_email_id').val();
             var password = $('#reg_password').val();
+            var phoneNum = $('#reg_contact_num').val();
 
             //MGF.handleSignUp(email,password);
 
             this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
                 console.log("Successfully created user account with uid:", userData.uid);
+                var photoURL = userData.photoURL ? userData.photoURL: 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';
+
 
                 var userData = {
                     providerData: "password",
                     email: $('#reg_email_id').val(),
                     displayName: $('#reg_full_name').val(),
-                    profileImage: authData.photoURL,
-                    uid: authData.uid
+                    profileImage: photoURL,
+                    uid: userData.uid
                 };
-                that.createUser(authData.uid, userData, null);
+
+                console.log(userData);
+
+
+
+                var profileJSONData = function(userData) {
+                    if (userData) {
+                        that.setUser(userData);
+                        that.createProfile(userData, {
+                            displayName: $('#reg_full_name').val(),
+                            email: $('#reg_email_id').val(),
+                            phone: phoneNum,
+                            profileImage: photoURL
+                        }, null);
+                    }
+                };
 
                 var profileData = {
                     displayName: $('#reg_full_name').val(),
                     email: $('#reg_email_id').val(),
-                    phone: $('#reg_contact_num').val(),
-                    profileImage: authData.photoURL,
+                    phone: phoneNum,
+                    profileImage: photoURL
                 };
+
+                that.createUser(userData.uid, userData, profileJSONData);
 
                 that.createProfile(userData, profileData, that.unAuthAfterProfile);
 
@@ -281,57 +302,18 @@ define([
                 $('#reg_error_row').css("display", "block");
                 window.signupButton.button('reset');
             });
-
-            /*this.ref.createUser({
-                email: $('#reg_email_id').val(),
-                password: $('#reg_password').val()
-            }, function(error, userData) {
-                if (error) {
-                    console.log("Error creating user:", error);
-                    $('#reg_error').html(error);
-                    $('#reg_error_row').css("display", "block");
-                    window.signupButton.button('reset');
-                } else {
-                    console.log("Successfully created user account with uid:", userData.uid);
-                    that.ref.offAuth(that.onFAuth);
-                    that.ref.authWithPassword({
-                        email: $('#reg_email_id').val(),
-                        password: $('#reg_password').val()
-                    }, function(error, authData) {
-
-                        var userData = {
-                            provider: "password",
-                            email: $('#reg_email_id').val(),
-                            displayName: $('#reg_full_name').val(),
-                            profileImage: authData.password.profileImageURL,
-                            uid: authData.uid
-                        };
-                        that.createUser(authData.uid, userData, null);
-
-                        var profileData = {
-                            displayName: $('#reg_full_name').val(),
-                            email: $('#reg_email_id').val(),
-                            phone: $('#reg_contact_num').val(),
-                            profileImage: authData.password.profileImageURL
-                        };
-
-                        that.createProfile(userData, profileData, that.unAuthAfterProfile);
-
-                    });
-                }
-            });*/
-
-            return false;
         },
         unAuthAfterProfile: function() {
-            //this.ref.unauth();
-            //MGF.refAuth.signOut();
             window.signupButton.button('reset');
             $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
-            $('#signup').modal('toggle');
+            $('#signup').modal('hide');
             $('#notify').modal('show');
-            //this.ref.onAuth(this.onFAuth);
+
             this.refAuth.onAuthStateChanged(this.onFAuth);
+
+            setTimeout(function() {
+                window.location = '/';
+            }, 1000);
 
         },
         gotoLogin: function() {
@@ -685,39 +667,6 @@ define([
                     });
                 });
 
-
-                /*$(function() {
-                    var navMain = $("#bs-example-navbar-collapse-1");
-                    var subMenuUL = $(".dropdown-menu");
-                    subMenuUL.on("click", "li", null, function() {
-                        navMain.collapse('hide');
-                    });
-
-                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li", null, function() {
-                        $(this).parent().hide();
-                    });
-
-
-                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").hover(function() {
-                            $(this).show();
-                        },
-                        function() {
-                           $(this).hide();
-                            $(this).hide();
-                        });
-
-                    $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {
-                       $('.dropdownMenu_lg').hide();
-                       var that = this;
-                       $(this).next('.dropdownMenu_lg').show();
-                    });
-
-                    $("#bs-example-navbar-collapse-1").mouseleave(function(){
-                        var hovered = $("#bs-example-navbar-collapse-1").find(".dropdownMenu_lg").length;
-                        !!hovered && $('.dropdownMenu_lg').hide();
-                    });
-
-                });*/
                 $(function() {
                     var navMain = $("#bs-example-navbar-collapse-1");
                     var menuLi = $(".menu-li");
