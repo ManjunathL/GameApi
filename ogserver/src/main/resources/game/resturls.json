@@ -18,6 +18,14 @@
       "singleRecord": true
     },
     {
+      "uri": "/gapi/proposal/listbydesignpartner",
+      "source": "db",
+      "query":"proposal.list.designpartner",
+      "params":["designPartnerEmail"],
+      "resultfields":[],
+      "default": "{}"
+    },
+    {
       "uri": "/gapi/proposal/documents",
       "source": "db",
       "query":"proposal.document.select",
