@@ -157,18 +157,25 @@ public class QuoteData
             case "salesdesign":
                 return this.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/");
             case "productscost":
-                return round(this.productsCost);
+                 return this.getRoundOffValue(String.valueOf((int)this.productsCost));
+                //return round(this.productsCost);
             case "addonscost":
-                return round(this.addonsCost);
+                return this.getRoundOffValue(String.valueOf((int)this.addonsCost));
+                //return round(this.addonsCost);
             case "totalamount":
-                return this.getTotalCost();
+                return this.getRoundOffValue(String.valueOf((int)this.getTotalCost()));
+                //return this.getTotalCost();
             case "discountamount":
-                return (int)this.discountAmount;
+                return this.getRoundOffValue(String.valueOf((int)this.discountAmount));
+                //return (int)this.discountAmount;
             case "fromVersion":
                 LOG.info("version number in case" +this.fromVersion);
                 return (fromVersionFloat)/10;
             case "amountafterdiscount":
-                return this.getTotalCost()-getDiscountAmount();
+                double grandTotal=this.getTotalCost()-getDiscountAmount();
+                double res=grandTotal-grandTotal%10;
+                return this.getRoundOffValue(String.valueOf((int)res));
+                //return res;
             case "totalamountinwords":
                 double val=this.getTotalCost() - this.discountAmount;
                 Double rem=val-val%10;
@@ -256,5 +263,24 @@ public class QuoteData
     public ProposalHeader getProposalHeader()
     {
         return proposalHeader;
+    }
+    public static String getRoundOffValue(String value)
+    {
+        value=value.replace(",","");
+        char lastDigit=value.charAt(value.length()-1);
+        String result = "";
+        int len = value.length()-1;
+        int nDigits = 0;
+
+        for (int i = len - 1; i >= 0; i--)
+        {
+            result = value.charAt(i) + result;
+            nDigits++;
+            if (((nDigits % 2) == 0) && (i > 0))
+            {
+                result = "," + result;
+            }
+        }
+        return (result+lastDigit);
     }
 }

@@ -322,9 +322,12 @@ public class QuotationPDFCreator
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
-            Double fin_value;
-            double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
-            Double rem=val%10;
+
+            Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
+
+            Double res=val-val%10;
+
+           /* Double rem=val%10;
 
             if(rem<5)
             {
@@ -333,8 +336,8 @@ public class QuotationPDFCreator
             else
             {
                 fin_value=val+(10-rem);
-            }
-            p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(String.valueOf(fin_value.intValue())) + "\n" ,fsize1);
+            }*/
+            p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
@@ -345,7 +348,7 @@ public class QuotationPDFCreator
         PdfPTable table2=new PdfPTable(1);
         table2.setWidthPercentage(100);
 
-            p=new Paragraph("In words: " +word.convertNumberToWords(fin_value.intValue()) + " Rupees Only" ,fsize1);
+            p=new Paragraph("In words: " +word.convertNumberToWords(res.intValue()) + " Rupees Only" ,fsize1);
             table2.addCell(new Paragraph(p));
         document.add(table2);
 
@@ -520,10 +523,19 @@ public class QuotationPDFCreator
             {
                 return num;
             }
-            else if (li.get(index).getTitle().equals("Kitchen Base Unit") || li.get(index).getTitle().equals("Kitchen Tall Unit") || li.get(index).getTitle().equals("Kitchen Wall Unit") || li.get(index).getTitle().equals("Kitchen Lofts"))
+
+            else if (li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit") || li.get(index).getTitle().contains("Kitchen Wall Unit") || li.get(index).getTitle().contains("Kitchen Lofts"))
             {
+                LOG.info("title1 " +li.get(index).getTitle());
+                LOG.info("Dimension" +li.get(index).getDimension());
                 num += 1;
+                if(li.get(index).getDimension().equals("")) {
+                    this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle()); // + " - " + li.get(index).getDimension());
+                }
+                else
+                {
                 this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle() + " - " +li.get(index).getDimension());
+                }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
                 this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Base Carcass: " + li.get(index).getBasecarcass() + ",Wall Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + fmaterial + " , Finish Type : " + li.get(index).getFinishtype(), 1.0, li.get(index).getAmount(), 0.0);
                 unitSequence++;
@@ -531,8 +543,15 @@ public class QuotationPDFCreator
             }
             else
             {
+                LOG.info("title2 " +li.get(index).getTitle());
                 num += 1;
+                if(li.get(index).getTitle().contains("Wardrobe"))
+                {
+                    this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle()+ " - " +li.get(index).getDimension());
+                }
+                else {
                 this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle());
+                }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
 
                 this.createRowAndFillData(li.get(index).getTabName(), null, "Base Carcass: " + li.get(index).getBasecarcass() + ",Wall Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + fmaterial + " , Finish Type : " + li.get(index).getFinishtype(), 1.0, li.get(index).getAmount(), 0.0);
@@ -556,7 +575,7 @@ public class QuotationPDFCreator
         double KBamount=0,KWamount=0,KTamount=0,KLamount=0,SW1amount=0;
 
         int unitSequence = 0;
-        String basewidth="",wallwidth="",tallwidth="",loftwidth="";
+        String basewidth="",wallwidth="",tallwidth="",loftwidth="",wardrobewidth="";
         List<String> kwList= new ArrayList<String>();
         List<String> kbList=new ArrayList<String>();
         List<String> ktList=new ArrayList<String>();
@@ -564,10 +583,8 @@ public class QuotationPDFCreator
 
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
-
             if(cname.equals("K") )
             {
-
                 if(unit.title.contains("Base unit")||
                         unit.title.contains("N - Base Units") ||
                         unit.title.contains("N - Drawer Units") ||
@@ -593,6 +610,9 @@ public class QuotationPDFCreator
                             unit.title.contains("S - Kitchen Base Shutter Units") ||
                             unit.title.contains("Base unit")) {
                         KBmodulecount += unit.moduleCount;
+                        String width = unit.getDimensions();
+                        basewidth=  basewidth + " , " +width;
+                        kbList.add(new String(width));
                     }
                     KBbasecarcass = product.getProduct().getBaseCarcassCode();
                     KBWallcarcass = product.getProduct().getWallCarcassCode();
@@ -604,12 +624,12 @@ public class QuotationPDFCreator
                     {
                         caption="Kitchen Base Unit"; // + " - " +unit.getDimensions();
                     }
-                    LOG.info("base unit");
+                    /*LOG.info("base unit");
                     String width = unit.getDimensions();
-                    basewidth=  width + " , " + basewidth;
+                    basewidth=  basewidth + " , " +width;
                     LOG.info("Length= " +basewidth.length());
-                    /*LOG.info("base width" +basewidth);*/
-                    kbList.add(new String(width));
+                    *//*LOG.info("base width" +basewidth);*//*
+                    kbList.add(new String(width));*/
                 }
                 else if (unit.title.contains("Wall unit")||
                         unit.title.contains("S - Kitchen Wall Corner Units")||
@@ -633,7 +653,7 @@ public class QuotationPDFCreator
                     }
 
                     String width = unit.getDimensions();
-                    wallwidth=width + " , " + wallwidth;
+                    wallwidth=wallwidth + " , " +width ;
                     kwList.add(new String(width));
 
                     /*String width = unit.getDimensions();
@@ -651,12 +671,13 @@ public class QuotationPDFCreator
 
                     if(cname.equals("K"))
                     {
-                        caption2="Kitchen Tall Unit" + " - " +unit.getDimensions();
+                        caption2="Kitchen Tall Unit";
                     }
 
                     String width = unit.getDimensions();
-                    tallwidth=width + " , " + tallwidth;
+                    tallwidth=tallwidth + " , " +width;
                     ktList.add(new String(width));
+                    LOG.info("Tall width" +tallwidth);
                 }
 
                 else if(unit.title.contains("S - Kitchen Loft Units") || unit.title.contains("S - Sliding Wardrobe with Loft") || unit.title.contains("S - Wardrobe Lofts"))
@@ -670,15 +691,15 @@ public class QuotationPDFCreator
 
                     if(cname.equals("K"))
                     {
-                        caption3="Kitchen Lofts" + " - " +unit.getDimensions();
+                        caption3="Kitchen Lofts" ;
                     }
 
                     String width = unit.getDimensions();
-                    loftwidth=width + " , "  +loftwidth;
+                    loftwidth=loftwidth + " , " +width;
                     klList.add(new String(width));
                 }
             }
-            else if(cname.equals("W") || cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits") || cname.equals("codrawers"))
+            else if(cname.equals("W") || cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits") || cname.equals("codrawers") || cname.equals("usstorage"))
             {
                 SW1modulecount += unit.moduleCount;
                 SW1basecarcass = product.getProduct().getBaseCarcassCode();
@@ -686,9 +707,13 @@ public class QuotationPDFCreator
                 SW1finishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                 SW1finishtype = product.getProduct().getFinishType();
                 SW1amount += unit.amount;
+
                 if(cname.equals("W"))
                 {
-                    caption4="Wardrobe" + " - " + unit.getDimensions();
+                    caption4="Wardrobe";
+                    String width = unit.getDimensions();
+                    wardrobewidth=wardrobewidth + " , " +width;
+                    klList.add(new String(width));
                 }
                 else if(cname.equals("K"))
                 {
@@ -746,6 +771,10 @@ public class QuotationPDFCreator
                 {
                     caption4="Chest of Drawers";
                 }
+                else if(cname.equals("usstorage"))
+                {
+                    caption4="Under Staircase Storage";
+                }
             }
             else
             {
@@ -759,17 +788,22 @@ public class QuotationPDFCreator
         li=new ArrayList<QuotationPDFCreator.customeclass>();
         QuotationPDFCreator.customeclass obj;
         if(basewidth!="") {
-            basewidth = this.changeCharInPosition(basewidth.length() - 2, ' ', basewidth);
+            basewidth =basewidth.substring(2) ;
+                    //this.changeCharInPosition(basewidth.length() - 2, ' ', basewidth);
         }
         if(wallwidth!="") {
-            wallwidth = this.changeCharInPosition(wallwidth.length() - 2, ' ', wallwidth);
+            wallwidth =wallwidth.substring(2);
         }
         if(tallwidth!="") {
-            tallwidth = this.changeCharInPosition(tallwidth.length() - 2, ' ', tallwidth);
+            tallwidth = tallwidth.substring(2);
         }
 
         if(loftwidth!="") {
-            loftwidth = this.changeCharInPosition(loftwidth.length() - 2, ' ', loftwidth);
+            loftwidth = loftwidth.substring(2);
+        }
+
+        if(wardrobewidth!="") {
+            wardrobewidth = wardrobewidth.substring(2);
         }
 
         obj=new QuotationPDFCreator.customeclass(tabname,caption,KBmodulecount,KBbasecarcass,KBWallcarcass,KBfinishmaterial,KBfinishtype,KBamount,basewidth);
@@ -788,7 +822,7 @@ public class QuotationPDFCreator
         li2=new ArrayList<QuotationPDFCreator.customeclass>();
         QuotationPDFCreator.customeclass ob2;
 
-        ob2=new QuotationPDFCreator.customeclass(tabname,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,null);
+        ob2=new QuotationPDFCreator.customeclass(tabname,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,wardrobewidth);
         li2.add(ob2);
 
         int num1=customFunction(li2);
@@ -796,11 +830,7 @@ public class QuotationPDFCreator
         return num;
 
     }
-    public String changeCharInPosition(int position, char ch, String str){
-        char[] charArray = str.toCharArray();
-        charArray[position] = ch;
-        return new String(charArray);
-    }
+
 
     private void createSubHeadingRow(PdfPTable tabname,String index, String title)
     {

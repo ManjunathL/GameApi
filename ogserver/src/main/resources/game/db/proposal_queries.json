@@ -40,6 +40,13 @@
       "params": ["designPartnerEmail"]
     },
 
+    {
+      "id": "proposal.list.crmid",
+      "type": "select",
+      "table": "proposal",
+      "query": "select crmId from proposal where status != 'deleted'",
+      "params": []
+    },
 
 
     {
@@ -101,8 +108,8 @@
       "id": "proposal.update",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, customerId = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ? where id = ?",
-      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "customerId", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "amount", "updatedBy", "status", "version", "id"]
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, customerId = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ? where id = ?",
+      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "customerId", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version", "id"]
     },
 
     {
