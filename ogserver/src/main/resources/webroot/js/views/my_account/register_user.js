@@ -30,7 +30,8 @@ define([
 
               var name = result.name;
               var semail = decodeURIComponent(result.email);
-              var email = semail.replace("|", ".");
+
+              var email = semail.split('|').join(".");
               console.log(semail+ '----------------' + email);
 
               var phone = decodeURIComponent(result.phone);

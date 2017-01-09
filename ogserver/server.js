@@ -10,14 +10,15 @@ var options = {
 
 https.createServer(options, function(request, response) {
 
-    console.log('Server running at http://127.0.0.1:8685/');
+    console.log('Server running at https://127.0.0.1:8685/');
 
     var url_parts = url.parse(request.url, true);
     var query = url_parts.query;
 
     var name = query.name;
     var semail = decodeURIComponent(query.email);
-    var email = semail.replace("|", ".");
+
+    var email = semail.split('|').join(".");
     console.log(semail+ '----------------' + email);
 
     var phone = decodeURIComponent(query.phone);
