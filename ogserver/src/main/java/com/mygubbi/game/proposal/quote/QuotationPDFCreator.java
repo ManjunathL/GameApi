@@ -529,7 +529,13 @@ public class QuotationPDFCreator
                 LOG.info("title1 " +li.get(index).getTitle());
                 LOG.info("Dimension" +li.get(index).getDimension());
                 num += 1;
+                if(li.get(index).getDimension().equals("")) {
+                    this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle()); // + " - " + li.get(index).getDimension());
+                }
+                else
+                {
                 this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle() + " - " +li.get(index).getDimension());
+                }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
                 this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Base Carcass: " + li.get(index).getBasecarcass() + ",Wall Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + fmaterial + " , Finish Type : " + li.get(index).getFinishtype(), 1.0, li.get(index).getAmount(), 0.0);
                 unitSequence++;
@@ -539,7 +545,13 @@ public class QuotationPDFCreator
             {
                 LOG.info("title2 " +li.get(index).getTitle());
                 num += 1;
+                if(li.get(index).getTitle().contains("Wardrobe"))
+                {
+                    this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle()+ " - " +li.get(index).getDimension());
+                }
+                else {
                 this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle());
+                }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
 
                 this.createRowAndFillData(li.get(index).getTabName(), null, "Base Carcass: " + li.get(index).getBasecarcass() + ",Wall Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + fmaterial + " , Finish Type : " + li.get(index).getFinishtype(), 1.0, li.get(index).getAmount(), 0.0);
@@ -563,7 +575,7 @@ public class QuotationPDFCreator
         double KBamount=0,KWamount=0,KTamount=0,KLamount=0,SW1amount=0;
 
         int unitSequence = 0;
-        String basewidth="",wallwidth="",tallwidth="",loftwidth="";
+        String basewidth="",wallwidth="",tallwidth="",loftwidth="",wardrobewidth="";
         List<String> kwList= new ArrayList<String>();
         List<String> kbList=new ArrayList<String>();
         List<String> ktList=new ArrayList<String>();
@@ -571,10 +583,8 @@ public class QuotationPDFCreator
 
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
-
             if(cname.equals("K") )
             {
-
                 if(unit.title.contains("Base unit")||
                         unit.title.contains("N - Base Units") ||
                         unit.title.contains("N - Drawer Units") ||
@@ -600,6 +610,9 @@ public class QuotationPDFCreator
                             unit.title.contains("S - Kitchen Base Shutter Units") ||
                             unit.title.contains("Base unit")) {
                         KBmodulecount += unit.moduleCount;
+                        String width = unit.getDimensions();
+                        basewidth=  basewidth + " , " +width;
+                        kbList.add(new String(width));
                     }
                     KBbasecarcass = product.getProduct().getBaseCarcassCode();
                     KBWallcarcass = product.getProduct().getWallCarcassCode();
@@ -611,12 +624,12 @@ public class QuotationPDFCreator
                     {
                         caption="Kitchen Base Unit"; // + " - " +unit.getDimensions();
                     }
-                    LOG.info("base unit");
+                    /*LOG.info("base unit");
                     String width = unit.getDimensions();
                     basewidth=  basewidth + " , " +width;
                     LOG.info("Length= " +basewidth.length());
-                    /*LOG.info("base width" +basewidth);*/
-                    kbList.add(new String(width));
+                    *//*LOG.info("base width" +basewidth);*//*
+                    kbList.add(new String(width));*/
                 }
                 else if (unit.title.contains("Wall unit")||
                         unit.title.contains("S - Kitchen Wall Corner Units")||
@@ -694,9 +707,13 @@ public class QuotationPDFCreator
                 SW1finishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                 SW1finishtype = product.getProduct().getFinishType();
                 SW1amount += unit.amount;
+
                 if(cname.equals("W"))
                 {
-                    caption4="Wardrobe" + " - " + unit.getDimensions();
+                    caption4="Wardrobe";
+                    String width = unit.getDimensions();
+                    wardrobewidth=wardrobewidth + " , " +width;
+                    klList.add(new String(width));
                 }
                 else if(cname.equals("K"))
                 {
@@ -785,6 +802,10 @@ public class QuotationPDFCreator
             loftwidth = loftwidth.substring(2);
         }
 
+        if(wardrobewidth!="") {
+            wardrobewidth = wardrobewidth.substring(2);
+        }
+
         obj=new QuotationPDFCreator.customeclass(tabname,caption,KBmodulecount,KBbasecarcass,KBWallcarcass,KBfinishmaterial,KBfinishtype,KBamount,basewidth);
         li.add(obj);
 
@@ -801,7 +822,7 @@ public class QuotationPDFCreator
         li2=new ArrayList<QuotationPDFCreator.customeclass>();
         QuotationPDFCreator.customeclass ob2;
 
-        ob2=new QuotationPDFCreator.customeclass(tabname,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,null);
+        ob2=new QuotationPDFCreator.customeclass(tabname,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,wardrobewidth);
         li2.add(ob2);
 
         int num1=customFunction(li2);

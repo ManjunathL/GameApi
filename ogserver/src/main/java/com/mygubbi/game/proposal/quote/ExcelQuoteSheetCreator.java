@@ -159,8 +159,6 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         currentRow++;
         /*this.createRow(currentRow, this.quoteSheet);*/
         return currentRow;
-
-
     }
 
     private int fillAssembledProductUnits(AssembledProductInQuote product, int currentRow,String series)
@@ -178,7 +176,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         String KBfinishtype="",KWfinishtype="",KTfinishtype="",KLfinishtype="",SW1finishtype="";
         double KBamount=0,KWamount=0,KTamount=0,KLamount=0,SW1amount=0;
 
-        String basewidth="",wallwidth="",tallwidth="",loftwidth="";
+        String basewidth="",wallwidth="",tallwidth="",loftwidth="",wardrobewidth="";
         List<String> kwList= new ArrayList<String>();
         List<String> kbList=new ArrayList<String>();
         List<String> ktList=new ArrayList<String>();
@@ -213,21 +211,19 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                             unit.title.contains("S - Kitchen Base Shutter Units") ||
                             unit.title.contains("Base unit")) {
                         KBmodulecount += unit.moduleCount;
+                        String width = unit.getDimensions();
+                        basewidth=  basewidth + " , " +width;
+                        kbList.add(new String(width));
                     }
                     KBbasecarcass = product.getProduct().getBaseCarcassCode();
                     KBWallcarcass = product.getProduct().getWallCarcassCode();
                     KBfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     KBfinishtype = product.getProduct().getFinishType();
                     KBamount += unit.amount;
-
                     if(cname.equals("K"))
                     {
                         caption="Kitchen Base Unit"; // + " - " +unit.getDimensions();
                     }
-
-                    String width = unit.getDimensions();
-                    basewidth=  basewidth + " , " +width;
-                    kbList.add(new String(width));
                 }
                 else if (unit.title.contains("Wall unit")||
                         unit.title.contains("S - Kitchen Wall Corner Units")||
@@ -238,25 +234,34 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                         unit.title.contains("S - Wall Open Units") ||
                         unit.title.contains ("N - Wall Units") )
                 {
+                    /*if(!unit.title.contains("N - Wall Units"))
+                    {
+                        String width = unit.getDimensions();
+                        wallwidth=wallwidth + " , " +width ;
+                        kwList.add(new String(width));
+                    }*/
                     KWmoduleCount += unit.moduleCount;
                     KWbasecarcass = product.getProduct().getBaseCarcassCode();
                     KWwallcarcass = product.getProduct().getWallCarcassCode();
                     KWfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     KWfinishtype = product.getProduct().getFinishType();
                     KWamount += unit.amount;
-
+                    String width = unit.getDimensions();
+                    wallwidth=wallwidth + " , " +width ;
+                    kwList.add(new String(width));
                     if(cname.equals("K"))
                     {
                         caption1="Kitchen Wall Unit";
                     }
-
-                    String width = unit.getDimensions();
-                    wallwidth=wallwidth + " , " +width ;
-                    kwList.add(new String(width));
-
                 }
                 else if (unit.title.contains("Tall unit") || unit.title.contains("S - Kitchen Tall Units") ||  unit.title.contains ("N - Tall/Semi Tall Units"))
                 {
+                    /*if(!unit.title.contains("N - Tall/Semi Tall Units"))
+                    {
+                    String width = unit.getDimensions();
+                    wallwidth=wallwidth + " , " +width ;
+                    kwList.add(new String(width));
+                    }*/
                     KTmoduleCount += unit.moduleCount;
                     KTbasecarcass = product.getProduct().getBaseCarcassCode();
                     KTwallcarcass = product.getProduct().getWallCarcassCode();
@@ -301,9 +306,14 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 SW1finishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                 SW1finishtype = product.getProduct().getFinishType();
                 SW1amount += unit.amount;
+
+
                 if(cname.equals("W"))
                 {
-                    caption4="Wardrobe" + " - " + unit.getDimensions();
+                    caption4="Wardrobe";
+                    String width = unit.getDimensions();
+                    wardrobewidth=wardrobewidth + " , " +width;
+                    klList.add(new String(width));
                 }
                 else if(cname.equals("K"))
                 {
@@ -402,6 +412,10 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         if(loftwidth!="") {
             loftwidth = loftwidth.substring(2);
         }
+        if(wardrobewidth!="")
+        {
+            wardrobewidth=wardrobewidth.substring(2);
+        }
 
         if(KBamount!=0) {
             obj = new customeclass(rowValue, caption, KBmodulecount, KBbasecarcass, KBWallcarcass, KBfinishmaterial, KBfinishtype, KBamount, basewidth);
@@ -451,7 +465,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
         li2=new ArrayList<customeclass>();
         customeclass ob2;
-        ob2=new customeclass(rowValue,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,null);
+        ob2=new customeclass(rowValue,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,wardrobewidth);
         li2.add(ob2);
 
         rowValue=customFunction(li2,unitSequence);
@@ -549,11 +563,15 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
             {
                 cr= li.get(index).getCurrentRow();
 
+                if(li.get(index).getDimension().equals("")) {
+                    cr++;
+                    this.createSubHeadingRow(cr,series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle());
+                    cr++;
+                }else {
                 cr++;
                 this.createSubHeadingRow(cr,series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle() + " - " + li.get(index).getDimension());
                 cr++;
-
-
+                }
                 this.createRowAndFillDataNew(cr, null, "Unit consists of " + li.get(index).getModulecount() + " modules as per design provided.",1.0,li.get(index).getAmount(),li.get(index).getAmount());
                 cr++;
 
@@ -570,8 +588,14 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
             else
             {
                 cr= li.get(index).getCurrentRow();
+                if(li.get(index).getTitle().contains("Wardrobe")) {
+                    this.createSubHeadingRow(cr, series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle() + " - " + li.get(index).getDimension());
+                    cr++;
+                }else
+                {
                 this.createSubHeadingRow(cr,series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle());
                 cr++;
+                }
 
                 this.createRowAndFillDataNew(cr, null, "Base Carcass : " + li.get(index).getBasecarcass() + " , Wall Carcass : " + li.get(index).getWallcarcass(),1.0,li.get(index).getAmount(),li.get(index).getAmount());
                 cr++;
