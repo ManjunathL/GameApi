@@ -226,7 +226,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                     }
 
                     String width = unit.getDimensions();
-                    basewidth=  width + " , " + basewidth;
+                    basewidth=  basewidth + " , " +width;
                     kbList.add(new String(width));
                 }
                 else if (unit.title.contains("Wall unit")||
@@ -251,7 +251,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                     }
 
                     String width = unit.getDimensions();
-                    wallwidth=width + " , " + wallwidth;
+                    wallwidth=wallwidth + " , " +width ;
                     kwList.add(new String(width));
 
                 }
@@ -266,11 +266,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
                     if(cname.equals("K"))
                     {
-                        caption2="Kitchen Tall Unit" + " - " +unit.getDimensions();
+                        caption2="Kitchen Tall Unit" ;
                     }
 
                     String width = unit.getDimensions();
-                    tallwidth=width + " , " + tallwidth;
+                    tallwidth=tallwidth + " , " +width;
                     ktList.add(new String(width));
                 }
 
@@ -285,15 +285,15 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
                     if(cname.equals("K"))
                     {
-                        caption3="Kitchen Lofts" + " - " +unit.getDimensions();
+                        caption3="Kitchen Lofts" ;
                     }
 
                     String width = unit.getDimensions();
-                    loftwidth=width + " , "  +loftwidth;
+                    loftwidth=loftwidth + " , " +width;
                     klList.add(new String(width));
                 }
             }
-            else if(cname.equals("W") || cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits") || cname.equals("codrawers"))
+            else if(cname.equals("W") || cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits") || cname.equals("codrawers") || cname.equals("usstorage"))
             {
                 SW1modulecount += unit.moduleCount;
                 SW1basecarcass = product.getProduct().getBaseCarcassCode();
@@ -362,6 +362,10 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 {
                     caption4="Cest Of Drawers";
                 }
+                else if(cname.equals("usstorage"))
+                {
+                    caption4="Under Staircase Storage";
+                }
             }
             /*else
             {
@@ -385,16 +389,18 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         li=new ArrayList<customeclass>();
         customeclass obj;
         if(basewidth!="") {
-            basewidth = this.changeCharInPosition(basewidth.length() - 2, ' ', basewidth);
+            basewidth =basewidth.substring(2) ;
+            //this.changeCharInPosition(basewidth.length() - 2, ' ', basewidth);
         }
         if(wallwidth!="") {
-            wallwidth = this.changeCharInPosition(wallwidth.length() - 2, ' ', wallwidth);
+            wallwidth =wallwidth.substring(2);
         }
         if(tallwidth!="") {
-            tallwidth = this.changeCharInPosition(tallwidth.length() - 2, ' ', tallwidth);
+            tallwidth = tallwidth.substring(2);
         }
+
         if(loftwidth!="") {
-            loftwidth = this.changeCharInPosition(loftwidth.length() - 2, ' ', loftwidth);
+            loftwidth = loftwidth.substring(2);
         }
 
         if(KBamount!=0) {
@@ -508,7 +514,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
             currentRow++;
-            this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, null, null);
+            this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
             amount=amount+(accessory.quantity*accessory.msp);
             acSequence++;
             if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
@@ -547,7 +553,8 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 this.createSubHeadingRow(cr,series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle() + " - " + li.get(index).getDimension());
                 cr++;
 
-                this.createRowAndFillData(cr, null, "Unit consists of " + li.get(index).getModulecount() + " modules as per design provided.",1.0,li.get(index).getAmount(),li.get(index).getAmount());
+
+                this.createRowAndFillDataNew(cr, null, "Unit consists of " + li.get(index).getModulecount() + " modules as per design provided.",1.0,li.get(index).getAmount(),li.get(index).getAmount());
                 cr++;
 
                 this.createRowAndFillData(cr, null, "Base Carcass : " + li.get(index).getBasecarcass() + " , Wall Carcass : " + li.get(index).getWallcarcass());
@@ -566,7 +573,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 this.createSubHeadingRow(cr,series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle());
                 cr++;
 
-                this.createRowAndFillData(cr, null, "Base Carcass : " + li.get(index).getBasecarcass() + " , Wall Carcass : " + li.get(index).getWallcarcass(),1.0,li.get(index).getAmount(),li.get(index).getAmount());
+                this.createRowAndFillDataNew(cr, null, "Base Carcass : " + li.get(index).getBasecarcass() + " , Wall Carcass : " + li.get(index).getWallcarcass(),1.0,li.get(index).getAmount(),li.get(index).getAmount());
                 cr++;
 
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
@@ -615,7 +622,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
     private void createRowAndFillData(int rowNum, String index, String title, Double quantity, Double amount, Double total)
     {
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
-        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
         this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
         this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount);
@@ -624,21 +631,45 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
     private void createRowAndFillData(int rowNum,String title,Double amount)
     {
+        String amt=this.getRoundOffValue(String.valueOf(amount.intValue()));
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
-        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, amount);
-        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_STRING, title);
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_STRING, amt).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getTextStyle());
     }
 
     private void createSubHeadingRowForCatalog(int rowNum, String index, String title,Double quantity, Double amount, Double total)
     {
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index);
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC,total).setCellStyle(this.styles.getTitleStyle());
+    }
+    private void createRowAndFillDataNew(int rowNum, String index, String title, Double quantity, Double amount, Double total)
+    {
+        String amt=this.getRoundOffValue(String.valueOf(amount.intValue()));
+        String Total=this.getRoundOffValue(String.valueOf(total.intValue()));
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_STRING, amt).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_STRING, Total).setCellStyle(this.styles.getTextStyle());
+    }
+
+    /*private void createSubHeadingRowNew(int rowNum, String index, String title,Double quantity, Double amount, Double total)
+    {
+        String amt=this.getRoundOffValue(String.valueOf(amount.intValue()));
+        String Total=this.getRoundOffValue(String.valueOf(total.intValue()));
+        //this.getRoundOffValue(String.valueOf(amount.intValue()))
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
         this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getTitleStyle());
         this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getTitleStyle());
         this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
-        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount);
-        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
-    }
-
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_STRING, amt).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_STRING,Total).setCellStyle(this.styles.getTextStyle());
+    }*/
 
     private void createSubHeadingRow(int rowNum, String index, String title)
     {
@@ -699,11 +730,6 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         }
     }
 
-    public String changeCharInPosition(int position, char ch, String str){
-        char[] charArray = str.toCharArray();
-        charArray[position] = ch;
-        return new String(charArray);
-    }
 
     class customeclass
     {
@@ -796,5 +822,25 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         public void setAmount(double amount) {
             this.amount = amount;
         }
+    }
+
+    public static String getRoundOffValue(String value)
+    {
+        value=value.replace(",","");
+        char lastDigit=value.charAt(value.length()-1);
+        String result = "";
+        int len = value.length()-1;
+        int nDigits = 0;
+
+        for (int i = len - 1; i >= 0; i--)
+        {
+            result = value.charAt(i) + result;
+            nDigits++;
+            if (((nDigits % 2) == 0) && (i > 0))
+            {
+                result = "," + result;
+            }
+        }
+        return (result+lastDigit);
     }
 }

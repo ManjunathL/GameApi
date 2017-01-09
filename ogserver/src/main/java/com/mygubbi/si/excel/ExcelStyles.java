@@ -12,11 +12,13 @@ public class ExcelStyles
     private CellStyle boldStyle;
     private CellStyle titleStyle;
     private CellStyle indexStyle;
+    private CellStyle textStyle;
     public ExcelStyles(Workbook wb)
     {
         this.boldStyle = this.createBoldStyle(wb);
         this.titleStyle = this.createTitleStyle(wb);
         this.indexStyle = this.createIndexStyle(wb);
+        this.textStyle=this.createTextStyle(wb);
     }
 
     public CellStyle getBoldStyle()
@@ -33,6 +35,8 @@ public class ExcelStyles
     {
         return indexStyle;
     }
+
+    public CellStyle getTextStyle(){ return textStyle; }
 
     private CellStyle createBoldStyle(Workbook wb)
     {
@@ -68,14 +72,14 @@ public class ExcelStyles
         font.setFontHeight(new Double(font.getFontHeight() * 1.3).shortValue());
         style.setFont(font);
         style.setAlignment(CellStyle.ALIGN_CENTER);
-       /*XSSFColor orange = new XSSFColor(new java.awt.Color(255,200,0));
-       LOG.info("Title color code prior : " + style.getFillBackgroundColor());
-       XSSFColor orange = new XSSFColor(Color.ORANGE);
-       style.setFillBackgroundColor(orange.getIndexed());
-       style.setFillForegroundColor(orange.getIndexed());
-       LOG.info("Title color: " + style.getFillBackgroundColorColor());
-       LOG.info("Title color code: " + style.getFillBackgroundColor()); */
         return style;
     }
+    private CellStyle createTextStyle(Workbook wb)
+    {
+        CellStyle style = wb.createCellStyle();
+        style.setAlignment(CellStyle.ALIGN_RIGHT);
+        return style;
+    }
+
 
 }
