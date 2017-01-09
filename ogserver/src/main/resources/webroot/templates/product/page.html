@@ -83,12 +83,8 @@
                         <% var city = '' } %>
                         <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
                         null){ %>
-                        <!--<li class="active">-->
-                        <!--<% if(filter.selectedSubCategoryName == 'Wardrobe'){ %>-->
-                        <!--<a href="javascript:void(0);"><span class="li-txt-wrap">Wardrobe Collection</span></a></li>-->
-                        <!--<% }else { %>-->
-                        <!--<a href="" id="breadcrum-link"><span class="li-txt-wrap" style="cursor: pointer;"><%= filter.selectedSubCategoryName %> <% if(city != '') { %> - <%= city %> <% } %></span></a></li>-->
-                        <!--<% } %>-->
+                        <li class="active">
+                            <a href="" id="breadcrum-link"><span class="li-txt-wrap" style="cursor: pointer;"><%= filter.selectedSubCategoryName %> <% if(city != '') { %> - <%= city %> <% } %></span></a></li>
                         <% } %>
                         <% } %>
                     </ul>
