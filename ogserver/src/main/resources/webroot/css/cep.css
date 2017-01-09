@@ -111,10 +111,11 @@ ul.myaccount_list li{
     text-align:center;
 }
 .edit_icon_div{
-    position:absolute;
-    top:15px;
-    right:70px;
-    z-index:1;
+    position: absolute;
+    top: 4px;
+    right: 70px;
+    z-index: 1;
+    font-size: 12px;
 }
 .chart_time_left{
     color:#0074BC;

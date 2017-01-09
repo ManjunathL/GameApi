@@ -52,16 +52,16 @@ define([
             if(typeof(client_project_status_c) != 'undefined' && client_project_status_c != null){
 
                 switch (client_project_status_c) {
-                    case "Project Initiated":case "Upload Scope Document - Conduct 'Kick off' meeting - completed":case "Upload Workshop Drawing - completed":case "Upload Prod drawing signed-off by customer - completed":case "Upload Pre-Installation checklist & list site work - completed":case "Complete Preinstallation site work - completed":case "Generate SO extract & update ERP - completed":
+                    case "Project Initiated":case "Upload Scope Document - Conduct 'Kick off' meeting --Completed":case "Upload Workshop Drawing --Completed":case "Upload Prod drawing signed-off by customer --Completed":case "Upload Pre-Installation checklist & list site work --Completed":case "Complete Preinstallation site work --Completed":case "Generate SO extract & update ERP --Completed":
                         project_statusArr = ["initiated","proposal approved","order placed"];
                         break;
-                    case "Generate PO extract & update ERP - completed":case "Update PO details in CRM & Confirm delivery dates - completed":case "Update Product readiness for inspection  - completed":case "Upload the QC report post vendor site inspection  - completed":case "Final Payment Collection - completed":case "Update GRNs against the POs - completed":case "Upload product photos to confirm readiness for Delivery - completed":case "Update DO completion status - Completed":case "Upload Invoices - Completed":case "Upload Packing list and Accessories list - Completed":case "Update Site delivery status - Completed":
+                    case "Generate PO extract & update ERP --Completed":case "Update PO details in CRM & Confirm delivery dates --Completed":case "Update Product readiness for inspection  --Completed":case "Upload the QC report post vendor site inspection  --Completed":case "Final Payment Collection - completed":case "Update GRNs against the POs --Completed":case "Upload product photos to confirm readiness for Delivery --Completed":case "Update DO completion status --Completed":case "Upload Invoices --Completed":case "Upload Packing list and Accessories list --Completed":case "Update Site delivery status --Completed":
                           project_statusArr = ["initiated","proposal approved","order placed","production started"];
                           break;
-                    case "Update Site Installation status - Completed":case "Upload Snaglist and confirm QC completion - Completed":
+                    case "Update Site Installation status --Completed":case "Upload Snaglist and confirm QC completion  --Completed":
                           project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
                           break;
-                    case "Upload Handover document and update Project Closure status - Completed":
+                    case "Upload Handover document and update Project Closure status --Completed":
                           project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
                           break;
                 }
@@ -107,19 +107,14 @@ define([
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
                 'myNest':mynestitems,
-                'providerId': providerId,
-                'projectStatusArr':project_statusArr
+                'providerId': providerId
             }));
 
             $("#profile").html(_.template(MyProfileTemplate)({
-                'userProfile': userProfData,
-                'myNest':mynestitems,
-                'providerId': providerId,
-                'projectStatusArr':project_statusArr
+                'userProfile': that.myaccount.get("userProfData"),
+                'myNest':that.myaccount.get("mynest"),
+                'providerId': that.myaccount.get("providerId")
             }));
-
-
-
 
             document.title = userProfData.displayName + ' | mygubbi';
         },
@@ -127,6 +122,7 @@ define([
             var authData = this.refAuth.currentUser;
             //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
             MGF.mynest(authData,this.renderWithUserProjectCallback);
+
 
             setTimeout(
                 $('.page').append("<img id='loadico' src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>")
@@ -146,6 +142,8 @@ define([
                     console.log("couldn't fetch getopportunity data - " + response);
                 }
             });
+
+
         },
         fetchMynestAndRender: function(mynestProf) {
             var that = this;
@@ -157,9 +155,9 @@ define([
         initialize: function () {
             this.myaccount = new MyAccount();
             this.mynests = new MyNests();
-
             this.proposal = new Proposal();
             Analytics.apply(Analytics.TYPE_GENERAL);
+            this.myaccount.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
         },
@@ -183,7 +181,7 @@ define([
                 "occupation": $('#occupation').val(),
                 "hobbies": $('#hobbies').val(),
                 "interest": $('#interest').val(),
-                //"website": $('#website').val(),
+                "crmId": $('#crmId').val(),
                 "city": $('#user_city').val(),
                 "state": $('#user_state').val(),
                 "pinCode": $('#user_pin_code').val()
@@ -234,7 +232,7 @@ define([
             console.log(newPassword);
 
             if((newPassword != null) && (oldpassword != newPassword)){
-               authData.reauthenticate(firebase.auth.EmailAuthProvider.credential(email, oldpassword));
+               //authData.reauthenticate(firebase.auth.EmailAuthProvider.credential(email, oldpassword));
 
                authData.updatePassword(newPassword).then(function() {
                     // Update successful.
@@ -366,7 +364,7 @@ define([
                                 if(response){
                                     console.log("successfully pushed data");
                                     $("#reqCallbk_successMsg").fadeIn();
-                                    $("#approvebtn").addClass('disabled');
+                                    //$("#approvebtn").addClass('disabled');
                                     $('#reqCallbk_successMsg').fadeOut(5000);
                                 }
                             },
@@ -376,6 +374,7 @@ define([
                         });
                     }
                 });
+                return false;
             }
         },
         changeapprove: function(e) {
@@ -432,7 +431,7 @@ define([
                     });
                 }
             });
-
+            return false;
         },
         changeMyaccounttab: function(e) {
             e.preventDefault();
@@ -448,7 +447,14 @@ define([
             $("#"+id+"-img_def").css('display','none');
             //return this;
 
-
+            if(id == "profile-lnk"){
+                var that = this;
+                $("#profile").html(_.template(MyProfileTemplate)({
+                    'userProfile': that.myaccount.get("userProfData"),
+                    'myNest':that.myaccount.get("mynest"),
+                    'providerId': that.myaccount.get("providerId")
+                }));
+            }
             if(id == "mynest-lnk"){
                 var that = this;
                 $("#mynest").html(_.template(MyNestTemplate)({
@@ -467,7 +473,7 @@ define([
                     'projectStatusArr':that.myaccount.get("projectStatusArr")
                 }));
             }
-            if(id == "message-lnk"){
+            /*if(id == "message-lnk"){
                 var that = this;
                 $("#message").html(_.template(MyMessageTemplate)({
                     'userProfile': that.myaccount.get("userProfData"),
@@ -475,7 +481,7 @@ define([
                     'providerId': that.myaccount.get("providerId"),
                     'projectStatusArr':that.myaccount.get("projectStatusArr")
                 }));
-            }
+            }*/
         }
 
     });

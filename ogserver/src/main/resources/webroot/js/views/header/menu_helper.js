@@ -27,6 +27,9 @@ define([
         },
 
         setUser: function(user) {
+            console.log('User data after setUser');
+            console.log(user);
+
             users.add(user, {
                 at: 0
             });
@@ -50,7 +53,7 @@ define([
         },
         onFAuth: function(authData) { console.log("authData");console.log(authData);
             if (authData) {
-                if (authData.providerData !== 'anonymous') { //don't do nothin on anonymous auths
+                if ((typeof(authData.providerData[0]) != 'undefined') && (authData.providerData[0].providerId !== 'anonymous')) { //don't do nothin on anonymous auths
                     $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
                         this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
@@ -146,10 +149,16 @@ define([
             var email = $('#emailId').val();
             var password = $('#pwd').val();
 
-            this.refAuth.signInWithEmailAndPassword(email, password).then(function() {
+            this.refAuth.signInWithEmailAndPassword(email, password).then(function(authData) {
               // Sign-in successful.
-              var user = this.refAuth.currentUser;
-              that.setUser(user);
+
+              this.refAuth.onAuthStateChanged(this.onFAuth);
+              //var user = authData;
+
+              console.log('User data after login');
+              //console.log(user);
+
+              //that.setUser(user);
               $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
               console.log('Sign-in successful');
             }, function(error) {
@@ -157,6 +166,7 @@ define([
               $('#login_error').html("The password is invalid. Please enter a correct password.");
               $('#login_error_row').css("display", "block");
               console.log('Error'+error);
+              window.loginButton && window.loginButton.button('reset');
             }, this.authHandler, {
                  remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'
              });

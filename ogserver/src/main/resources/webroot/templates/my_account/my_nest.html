@@ -13,17 +13,6 @@
 
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].project_name_c : '' %></p>
-                <!--<p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="display_property_name"
-                            class="form-control"
-                            maxlength="50"
-                            name="displayName"
-                            value="<%= myNest ? myNest.paymentDetails[0].project_name_c : '' %>"
-                            placeholder="Your Name" required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>-->
             </div>
 
         </div>
@@ -34,17 +23,6 @@
 
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].property_type_c : '' %></p>
-                <!--<p class="edit_mode form-group property_display_type">
-                    <input
-                            type="text"
-                            id="display_property_type"
-                            class="form-control"
-                            maxlength="50"
-                            name="displayType"
-                            value="<%= myNest ? myNest.paymentDetails[0].property_type_c : '' %>"
-                            placeholder="Your Name" required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>-->
             </div>
 
         </div>
@@ -55,17 +33,6 @@
 
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].tower_c : '' %></p>
-                <!--<p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="display_property_block"
-                            class="form-control"
-                            maxlength="50"
-                            name="displayBlock"
-                            value="<%= myNest ? myNest.paymentDetails[0].tower_c : '' %>"
-                            placeholder="Your Name" required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>-->
             </div>
 
         </div>
@@ -80,17 +47,6 @@
 
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].builder_name_c : '' %></p>
-                <!--<p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="display_property_builder_name"
-                            class="form-control"
-                            maxlength="50"
-                            name="buiderName"
-                            value="<%= myNest ? myNest.paymentDetails[0].builder_name_c : '' %>"
-                            placeholder="Your Name" required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>-->
             </div>
 
         </div>
@@ -101,17 +57,6 @@
 
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].flat_no_c : '' %></p>
-                <!--<p class="edit_mode form-group">
-                    <input
-                            type="text"
-                            id="display_property_flat_number"
-                            class="form-control"
-                            maxlength="50"
-                            name="flatNumber"
-                            value="<%= myNest ? myNest.paymentDetails[0].flat_no_c : '' %>"
-                            placeholder="Your Name" required />
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                </p>-->
             </div>
 
         </div>
@@ -135,7 +80,6 @@
             <% _.each(defaultArr, function(value) { %>
             <div class="col-xs-2 bs-wizard-step
                 <% _.each(projectStatusArr, function(comment){ %>
-                    <%= console.log(comment) %>
                    <% if(value === comment){ %>
                         complete
                    <% }else{ %>
@@ -154,7 +98,6 @@
 
                 <a href="#" class="
                 <% _.each(projectStatusArr, function(comment){ %>
-                    <%= console.log(comment) %>
                    <% if(value === comment){ %>
                         bs-wizard-dot
                    <% }else{ %>
@@ -349,7 +292,7 @@
                                             id="user_time"
                                             class="form-control"
                                             name="time"
-                                            placeholder="hh-mm"
+                                            placeholder="hh/mm AM/PM"
                                             style="margin:20px 0px;"
                                             required="required" />
                                 </div>
@@ -387,7 +330,7 @@
                         <!--<div class="col-sm-2" style="font-weight:bold;">% Amount</div>-->
                         <div class="col-sm-2" style="font-weight:bold;">Amount</div>
                         <div class="col-sm-2" style="font-weight:bold;">Payment Date</div>
-                        <div class="col-sm-2" style="font-weight:bold;">Transaction Ref</div>
+                        <div class="col-sm-3" style="font-weight:bold;">Transaction Ref</div>
 
                     </div>
                     <div class="row align-center padding6">
@@ -400,7 +343,7 @@
                             <% var date1 = new Date(myNest.paymentDetails[0].m1_payment_date_c) %>
                             <%= date1.getDate() + '/' + (date1.getMonth() + 1) + '/' +  date1.getFullYear() %>
                             <% } %></div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
+                        <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference1_c %>
                             <% } %></div>
 
@@ -417,6 +360,21 @@
                             <% } %></div>
                         <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference2_c) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference2_c %>
+                            <% } %></div>
+
+                    </div>
+                    <div class="row align-center padding6">
+                        <div class="col-sm-3"> Final Amount</div>
+                        <!--<div class="col-sm-2">  47 </div>-->
+                        <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
+                            <%= parseFloat(myNest.paymentDetails[0].m3_amount_collected_c).toFixed(2) %>
+                            <% } %> </div>
+                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
+                            <% var date = new Date(myNest.paymentDetails[0].m3_payment_date_c) %>
+                            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
+                            <% } %></div>
+                        <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].payment_reference3_c %>
                             <% } %></div>
 
                     </div>
@@ -492,7 +450,7 @@
                         <span class="font-size16 shortlist">Final Proposal | </span>
                         <a href="<%= myNest.documentDetails[2].docUrl %>" target="_blank" title="View">
                            <span class="text-small-proposals">
-                                Final Proposal | <%= myNest.documentDetails[2].documentName %>
+                                <%= myNest.documentDetails[2].documentName %>
                            </span>
                         </a>
                         <% } %>

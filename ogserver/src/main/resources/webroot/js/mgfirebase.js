@@ -286,6 +286,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
              projRef.on("value", function(snapshot) {
                  if (snapshot.exists()) {
                  console.log("--------project details--------");
+                 console.log(authData);
                      that.projectDetails = snapshot.val();
                      var userProfileRef = firebase.database().ref().child("user-profiles/" + authData.uid);
 

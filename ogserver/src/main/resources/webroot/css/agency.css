@@ -1693,6 +1693,7 @@ fieldset[disabled] .btn-xl.active {
 
 .view_mode {
     cursor: default;
+    word-break: break-word;
 }
 
 .edit_icon {
