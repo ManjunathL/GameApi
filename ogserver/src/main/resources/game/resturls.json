@@ -91,9 +91,9 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/version/lockallversionsexceptpso",
+      "uri": "/gapi/proposal/version/lockallversions",
       "source": "db",
-      "query":"version.lockallversionsexceptpso",
+      "query":"version.lockallversions",
       "params":["internalStatus","proposalId"],
       "resultfields":[],
       "default": "[]"

@@ -76,8 +76,8 @@
       "id": "proposal.create",
       "type": "insert",
       "table": "proposal",
-      "query": "insert into proposal(status, title, version, createdBy, crmId) values ('Draft', ?, '1.0', ?, ?)",
-      "params": ["title", "createdBy","opportunityId"]
+      "query": "insert into proposal(status, title, version, createdBy, crmId) values ('Draft', '', '1.0', ?, ?)",
+      "params": ["createdBy","opportunityId"]
     },
 
     {
@@ -92,7 +92,7 @@
       "id": "version.createdraft",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount, date) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, 'Provide Option description',0.0,0.0,0.0,?)",
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount, date) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, '',0.0,0.0,0.0,?)",
       "params": ["fromVersion", "proposalId", "title", "date"]
     },
 
@@ -185,10 +185,10 @@
     },
 
     {
-      "id": "version.lockallversionsexceptpso",
+      "id": "version.lockallversions",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set internalStatus = ? where version like '2.%' and proposalId = ? and status != 'PSO' ",
+      "query": "update version_master set internalStatus = ? where version like '2.%' and proposalId = ? ",
       "params": ["internalStatus","proposalId"]
     },
 

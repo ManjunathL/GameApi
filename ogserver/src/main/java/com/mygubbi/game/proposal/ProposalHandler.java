@@ -136,7 +136,7 @@ public class ProposalHandler extends AbstractRouteHandler
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
         LOG.debug("proposalData :" + proposalData.encodePrettily());
-        if (StringUtils.isEmpty(proposalData.getString("title")) || StringUtils.isEmpty(proposalData.getString("createdBy")))
+        if ( StringUtils.isEmpty(proposalData.getString("createdBy")))
         {
             sendError(routingContext, "Error in creating proposal as title or createdBy are not set.");
             return;
