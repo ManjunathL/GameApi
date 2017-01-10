@@ -397,9 +397,12 @@ public class CrmApiHandler extends AbstractRouteHandler
                     throw new RuntimeException("Error in creating user for : " + email);
             }
         }
+
         catch (Exception e)
         {
-            throw new RuntimeException("Error in creating user for : " + email, e);
+//            throw new RuntimeException("Error in creating user for : " + email, e);
+            e.printStackTrace();
+
         }
         return 0;
     }
