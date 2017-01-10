@@ -382,7 +382,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 LOG.info("responseBody: " +responseBody);
                 LOG.info("STATUS CODE: " +statusCode);
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-                    LOG.error("Error in calling website for creating user." + response.toString());
+                    LOG.error("Error in calling website for creating user." + responseBody);
                     throw new RuntimeException("Error in creating user for : " + email);
                 }
             }
