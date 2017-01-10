@@ -19,8 +19,8 @@
   "salesorder_template" : "/mnt/game/proposal/templates/salesorder-template.xlsx",
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
 
-  "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
-  "fbUrl": "https://mygubbi-cep.firebaseio.com",
+  "fbServicesJson": "config/test/mygubbi-uat-firebase.json",
+  "fbUrl": "https://mygubbi-uat.firebaseio.com",
   "processfbEvents": true,
   "websiteHost": "52.220.90.92:8685",
   "acceptSSLCertificates": "true"
