@@ -321,16 +321,14 @@
             <% } %>
             <div role="tabpanel" class="tab-pane row padding6" id="card">
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6"> Payment History</div>
+                <div class="col-md-12 border-bottom-grey padding6 align-right font-weight-bold"> Total Amount: <% if(typeof(myNest.paymentDetails[0].amount) !== 'undefined'){ %><%= myNest.paymentDetails[0].amount %><% } %></div>
                 <div class="col-md-12">
-                    <div class="row align-center">
-
-
                     <div class="row align-center padding-top-10">
-                        <div class="col-sm-3" style="font-weight:bold;">Payment Milestone</div>
+                        <div class="col-sm-3 font-weight-bold">Payment Milestone</div>
                         <!--<div class="col-sm-2" style="font-weight:bold;">% Amount</div>-->
-                        <div class="col-sm-2" style="font-weight:bold;">Amount</div>
-                        <div class="col-sm-2" style="font-weight:bold;">Payment Date</div>
-                        <div class="col-sm-3" style="font-weight:bold;">Transaction Ref</div>
+                        <div class="col-sm-2 font-weight-bold">Amount</div>
+                        <div class="col-sm-2 font-weight-bold">Payment Date</div>
+                        <div class="col-sm-3 font-weight-bold">Transaction Ref</div>
 
                     </div>
                     <div class="row align-center padding6">
@@ -411,7 +409,6 @@
                             <% } %></div>
 
                     </div>-->
-                    </div>
                 </div>
 
 

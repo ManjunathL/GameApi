@@ -121,6 +121,9 @@ define([
         render: function () {
             var authData = this.refAuth.currentUser;
             //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
+
+            debugger
+
             MGF.mynest(authData,this.renderWithUserProjectCallback);
 
 

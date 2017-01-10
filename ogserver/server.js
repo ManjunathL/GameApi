@@ -1,4 +1,17 @@
-var firebase = require("firebase");
+var firebaseFB = require("firebase");
+
+var fbConfig = {
+    apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
+    authDomain: "mygubbi-uat.firebaseapp.com",
+    databaseURL: "https://mygubbi-uat.firebaseio.com",
+    storageBucket: "mygubbi-uat.appspot.com",
+};
+
+var resFbApp = firebaseFB.initializeApp(fbConfig);
+
+var refFbAuth = resFbApp.auth();
+var refFbDatabase = resFbApp.database().ref();
+
 var url = require('url');
 
 var fs = require('fs');
@@ -10,7 +23,7 @@ var options = {
 
 https.createServer(options, function(request, response) {
 
-    console.log('Server running at https://127.0.0.1:8685/');
+    console.log('Server running at https://127.0.0.1:8385/');
 
     var url_parts = url.parse(request.url, true);
     var query = url_parts.query;
@@ -29,17 +42,7 @@ https.createServer(options, function(request, response) {
 
     //response.writeHead(200, {"Content-Type": "text/plain"});
 
-    var config = {
-        apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
-        authDomain: "mygubbi-uat.firebaseapp.com",
-        databaseURL: "https://mygubbi-uat.firebaseio.com",
-        storageBucket: "mygubbi-uat.appspot.com",
-    };
 
-    var defaultApp = firebase.initializeApp(config);
-
-    var defaultStorage = defaultApp.auth();
-    var defaultDatabase = defaultApp.database();
 
     var message = {};
     var errorMessage = "";
@@ -47,9 +50,9 @@ https.createServer(options, function(request, response) {
 
 
 
-    if(defaultApp){
+    if(resFbApp){
 
-        firebase.auth().createUserWithEmailAndPassword(email, password).then(function(userData) {
+        refFbAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
             console.log("Successfully created user account with uid:", userData.uid);
 
             var uid = userData.uid;
@@ -64,7 +67,7 @@ https.createServer(options, function(request, response) {
                 profileImage: photoURL,
                 uid: uid
             };
-             firebase.database().ref().child("users").child(userData.uid).set(userData, function(error) {
+             refFbDatabase.child("users").child(userData.uid).set(userData, function(error) {
                 if (error) {
                     console.error("Data could not be saved." + error);
                     response.writeHead(500, {"Content-Type": "application/json"});
@@ -82,7 +85,7 @@ https.createServer(options, function(request, response) {
                     };
 
                     var data = profileData;
-                    firebase.database().ref().child('user-profiles').child(userData.uid).set(
+                    refFbDatabase.child('user-profiles').child(userData.uid).set(
                         data,
                         function(error) {
                             if (error) {
@@ -97,7 +100,7 @@ https.createServer(options, function(request, response) {
                                     "data": data,
                                     "type": "user.add"
                                 };
-                                firebase.database().ref().child("events").push().child(userData.uid).set(eventData, function(error) {
+                                refFbDatabase.child("events").push().child(userData.uid).set(eventData, function(error) {
                                     if (error) {
                                         console.error("not able to push event data"+ error.message);
                                         response.writeHead(500, {"Content-Type": "application/json"});
@@ -134,5 +137,5 @@ https.createServer(options, function(request, response) {
         response.end();
     }
 
-}).listen(8685);
+}).listen(8385);
 
