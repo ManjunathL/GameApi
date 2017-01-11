@@ -166,7 +166,6 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         unitSequence = 0;
         String caption="",caption1="",caption2="",caption3="",caption4="",caption5="";
         String cname=product.getCatagoryName();
-        LOG.info("cname " +cname);
 
         int rowValue=currentRow;
         int KBmodulecount=0,KWmoduleCount=0,KTmoduleCount=0,KLmoduleCount=0,SW1modulecount=0;
@@ -311,9 +310,21 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 if(cname.equals("W"))
                 {
                     caption4="Wardrobe";
-                    String width = unit.getDimensions();
-                    wardrobewidth=wardrobewidth + " , " +width;
-                    klList.add(new String(width));
+                    if(unit.title.contains("N - Base Units") ||
+                            unit.title.contains("N - Drawer Units") ||
+                            unit.title.contains("N - Drawer") ||
+                            unit.title.contains("N - Open Units") ||
+                            unit.title.contains("N - Panelling") ||
+                            unit.title.contains ("N - WoodWork Add On") ||
+                            unit.title.contains("N - Wall Units") ||
+                            unit.title.contains("N - Tall/Semi Tall Units") ||
+                            unit.title.contains("N - Wall Units")) {
+
+                    }else {
+                        String width = unit.getDimensions();
+                        wardrobewidth = wardrobewidth + " , " + width;
+                        klList.add(new String(width));
+                    }
                 }
                 else if(cname.equals("K"))
                 {
