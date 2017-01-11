@@ -8208,3 +8208,17 @@ html .ui-button.ui-state-disabled:active {
 }
 
 /*end home page story*/
+
+.upload-pic-form{
+    position: absolute;
+    top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#upload-file-selector {
+    display:none;
+}
+.camera-op{
+    opacity: 0.7;
+}

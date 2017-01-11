@@ -7,6 +7,7 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
+    'cloudinary_jquery',
     '/js/mgfirebase.js',
     '/js/analytics.js',
     '/js/models/myAccount.js',
@@ -18,7 +19,7 @@ define([
     '/js/views/view_manager.js',
     '/js/models/proposal.js',
     '/js/collections/mynests.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, CloudinaryJquery, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -121,9 +122,6 @@ define([
         render: function () {
             var authData = this.refAuth.currentUser;
             //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
-
-            debugger
-
             MGF.mynest(authData,this.renderWithUserProjectCallback);
 
 
@@ -159,8 +157,9 @@ define([
             this.myaccount = new MyAccount();
             this.mynests = new MyNests();
             this.proposal = new Proposal();
+            $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             Analytics.apply(Analytics.TYPE_GENERAL);
-            this.myaccount.on('change', this.render, this);
+            //this.myaccount.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
         },
@@ -173,9 +172,15 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
+            /*var profileImage = $('#upload-file-selector').val();
+            var imgPath = "/cep/profile_pic" + profileImage;
+            $.cloudinary.uploader.upload(imgPath, function(result) {
+              console.log(result)
+            });*/
+
             var formData = {
                 "displayName": $('#user_display_name').val(),
-                "profileImage": $('#user_profile_image').attr('src'),
+                "profileImage": profileImage,
                 "email": $('#user_email_id').val(),
                 //"dob": $('#user_dob').val(),
                 "phone": $('#user_phone').val(),
@@ -209,10 +214,6 @@ define([
                 "flatno": $('#flatno').val()
             };
 
-            console.log(formData);
-            //return false;
-
-
             var that = this;
             MGF.updatePropertyDetails(formData).then(function () {
                 that.render()
@@ -227,12 +228,6 @@ define([
             var email = MGF.getEmail(authData);
             var oldpassword = $('#old_password').val();
             var newPassword = $('#new_password').val();
-
-            console.log(email);
-            console.log('---------------oldPassword---------------');
-            console.log(oldpassword);
-            console.log('---------------newPassword---------------');
-            console.log(newPassword);
 
             if((newPassword != null) && (oldpassword != newPassword)){
                //authData.reauthenticate(firebase.auth.EmailAuthProvider.credential(email, oldpassword));
@@ -346,37 +341,38 @@ define([
                     scheduledDate: $('#user_date').val(),
                     scheduledTime: $('#user_time').val()
                 };
-                this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
+
+                that.proposal.fetch({
+                    data: {
+                     "emailId": salesExecEmail,
+                     "status":"Deferred",
+                     "customerName":customerName,
+                     "customerPhone":customerphone,
+                     "designerEmail":designerEmail,
+                     "crmId":crmId,
+                     "taskType":taskType,
+                     "scheduleTime":scheduleTime
+                    },
+                    success: function(response) {
+                        console.log(" --------------- proposal response ----------------");
+                        console.log(response);
+                        if(response){
+                            $("#reqCallbk_successMsg").fadeIn();
+                            $(".salesStage").fadeOut(1000);
+                            $('#reqCallbk_successMsg').fadeOut(5000);
+                        }
+                    },
+                    error: function(model, response, options) {
+                        console.log("couldn't fetch data - " + response);
+                    }
+                });
+                /*this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
                     if (error) {
                         console.log("not able to push data", error);
                     } else {
-                        that.proposal.fetch({
-                            data: {
-                             "emailId": salesExecEmail,
-                             "status":"Deferred",
-                             "customerName":customerName,
-                             "customerPhone":customerphone,
-                             "designerEmail":designerEmail,
-                             "crmId":crmId,
-                             "taskType":taskType,
-                             "scheduleTime":scheduleTime
-                            },
-                            success: function(response) {
-                                console.log(" --------------- proposal response ----------------");
-                                console.log(response);
-                                if(response){
-                                    console.log("successfully pushed data");
-                                    $("#reqCallbk_successMsg").fadeIn();
-                                    //$("#approvebtn").addClass('disabled');
-                                    $('#reqCallbk_successMsg').fadeOut(5000);
-                                }
-                            },
-                            error: function(model, response, options) {
-                                console.log("couldn't fetch data - " + response);
-                            }
-                        });
+                        console.log("successfully pushed data");
                     }
-                });
+                });*/
                 return false;
             }
         },
@@ -402,38 +398,39 @@ define([
                 proposal_status: "Approve"
 
             };
-            this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
+
+            that.proposal.fetch({
+                data: {
+                 "emailId": salesExecEmail,
+                 "status":"Completed",
+                 "customerName":customerName,
+                 "customerPhone":customerphone,
+                 "designerEmail":designerEmail,
+                 "crmId":crmId,
+                 "taskType":taskType
+                },
+                success: function(response) {
+                    console.log(" --------------- proposal response ----------------");
+                    console.log(response);
+                    if(response){
+
+                        $("#approve_successMsg").fadeIn();
+                        $("#approvebtn").addClass('disabled');
+                        $(".salesStage").fadeOut(1000);
+                        $('#approve_successMsg').fadeOut(5000);
+                    }
+                },
+                error: function(model, response, options) {
+                    console.log("couldn't fetch data - " + response);
+                }
+            });
+            /*this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
                 if (error) {
                     console.log("not able to push data", error);
                 } else {
-
-                    that.proposal.fetch({
-                        data: {
-                         "emailId": salesExecEmail,
-                         "status":"Completed",
-                         "customerName":customerName,
-                         "customerPhone":customerphone,
-                         "designerEmail":designerEmail,
-                         "crmId":crmId,
-                         "taskType":taskType
-                        },
-                        success: function(response) {
-                            console.log(" --------------- proposal response ----------------");
-                            console.log(response);
-                            if(response){
-                                console.log("successfully pushed data");
-                                $("#approve_successMsg").fadeIn();
-                                $("#approvebtn").addClass('disabled');
-                                $(".salesStage").fadeOut(1000);
-                                $('#approve_successMsg').fadeOut(5000);
-                            }
-                        },
-                        error: function(model, response, options) {
-                            console.log("couldn't fetch data - " + response);
-                        }
-                    });
+                    console.log("successfully pushed data");
                 }
-            });
+            });*/
             return false;
         },
         changeMyaccounttab: function(e) {
