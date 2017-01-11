@@ -73,7 +73,7 @@
 <!-- Project Status Start -->
 <% if(typeof(projectStatusArr) != 'undefined'){ %>
 <section>
-    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding0 project-sts margin-top40">
+    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding0 project-sts margin-top40 hidden-xs hidden-sm">
         <div class="row bs-wizard margin0 padding0" style="border-bottom:0;width: 790px;">
             <% var defaultArr = new Array(); %>
             <% defaultArr = ["initiated","proposal approved","order placed","production started","installation","handed over"]; %>
@@ -113,6 +113,29 @@
             </div>
 
             <% }); %>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="col-md-12 col-sm-12 bg-white portfolio-box padding0 project-sts margin-top40 hidden-lg hidden-md">
+        <div class="row margin0 padding0">
+            <ul class="timeline my-nest-timeline">
+                <% var defaultArr = new Array(); %>
+                <% defaultArr = ["initiated","proposal approved","order placed","production started","installation","handed over"]; %>
+                <% _.each(defaultArr, function(value) { %>
+                <li class="timeline-inverted">
+                    <div class="timeline-badge" style=" <% _.each(projectStatusArr, function(comment){ %>
+                    <% if(value === comment){ %>background-color: #5ed268;<% } %>
+                    <% }); %>"
+                    ><i class="glyphicon glyphicon-check"></i></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title"><%= value %></h4>
+                        </div>
+                    </div>
+                </li>
+                <% }); %>
+            </ul>
         </div>
     </div>
 </section>
