@@ -28,82 +28,67 @@ define([
         proposal: null,
         mynests:null,
         renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
-        var that = this;
-        console.log("-----------mynestitems-------------")
-        console.log(mynestitems);
-        if(typeof(mynestitems) !== 'undefined' && mynestitems !== null){
+            var that = this;
+            console.log("-----------mynestitems-------------")
+            console.log(mynestitems);
+            if(typeof(mynestitems) !== 'undefined' && mynestitems !== null){
 
-            var project_status = mynestitems.paymentDetails[0].sales_stage;
-            var client_project_status_c = mynestitems.paymentDetails[0].client_project_status_c;
-            var project_statusArr = new Array();
-            switch (project_status) {
-                case "PROSPECT":case "FLOOR_PLAN_UPLOADED":case "INITIAL_PROPOSAL_UPLOADED":case "INITIAL_PROPOSAL_SENT":
-                    project_statusArr = ["initiated"];
-                    break;
-                case "COLLECT_BOOKING_AMOUNT":case "COLLECTED_BOOKING_AMOUNT":case "SITE_MEASUREMENT_UPLOADED":case "DETAILED_DESIGN_APPROVED ":case "FINAL_PROPOSAL_UPLOADED":case "FINAL_PROPOSAL_SENT":case "COLLECT_ORDER_AMOUNT":
-                    project_statusArr = ["initiated","proposal approved"];
-                    break;
-                case "Closed_Won":
-                    project_statusArr = ["initiated","proposal approved","order placed"];
-                    break;
-            }
-
-            console.log('-------------client_project_status_c---------------');
-            console.log(client_project_status_c);
-            if(typeof(client_project_status_c) != 'undefined' && client_project_status_c != null){
-
-                switch (client_project_status_c) {
-                    case "Project Initiated":case "Upload Scope Document - Conduct 'Kick off' meeting --Completed":case "Upload Workshop Drawing --Completed":case "Upload Prod drawing signed-off by customer --Completed":case "Upload Pre-Installation checklist & list site work --Completed":case "Complete Preinstallation site work --Completed":case "Generate SO extract & update ERP --Completed":
+                var project_status = mynestitems.paymentDetails[0].sales_stage;
+                var client_project_status_c = mynestitems.paymentDetails[0].client_project_status_c;
+                var project_statusArr = new Array();
+                switch (project_status) {
+                    case "PROSPECT":case "FLOOR_PLAN_UPLOADED":case "INITIAL_PROPOSAL_UPLOADED":case "INITIAL_PROPOSAL_SENT":
+                        project_statusArr = ["initiated"];
+                        break;
+                    case "COLLECT_BOOKING_AMOUNT":case "COLLECTED_BOOKING_AMOUNT":case "SITE_MEASUREMENT_UPLOADED":case "DETAILED_DESIGN_APPROVED ":case "FINAL_PROPOSAL_UPLOADED":case "FINAL_PROPOSAL_SENT":case "COLLECT_ORDER_AMOUNT":
+                        project_statusArr = ["initiated","proposal approved"];
+                        break;
+                    case "Closed_Won":
                         project_statusArr = ["initiated","proposal approved","order placed"];
                         break;
-                    case "Generate PO extract & update ERP --Completed":case "Update PO details in CRM & Confirm delivery dates --Completed":case "Update Product readiness for inspection  --Completed":case "Upload the QC report post vendor site inspection  --Completed":case "Final Payment Collection - completed":case "Update GRNs against the POs --Completed":case "Upload product photos to confirm readiness for Delivery --Completed":case "Update DO completion status --Completed":case "Upload Invoices --Completed":case "Upload Packing list and Accessories list --Completed":case "Update Site delivery status --Completed":
-                          project_statusArr = ["initiated","proposal approved","order placed","production started"];
-                          break;
-                    case "Update Site Installation status --Completed":case "Upload Snaglist and confirm QC completion  --Completed":
-                          project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
-                          break;
-                    case "Upload Handover document and update Project Closure status --Completed":
-                          project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
-                          break;
+                }
+                if(typeof(client_project_status_c) != 'undefined' && client_project_status_c != null){
+
+                    switch (client_project_status_c) {
+                        case "Project Initiated":case "Upload Scope Document - Conduct 'Kick off' meeting --Completed":case "Upload Workshop Drawing --Completed":case "Upload Prod drawing signed-off by customer --Completed":case "Upload Pre-Installation checklist & list site work --Completed":case "Complete Preinstallation site work --Completed":case "Generate SO extract & update ERP --Completed":
+                            project_statusArr = ["initiated","proposal approved","order placed"];
+                            break;
+                        case "Generate PO extract & update ERP --Completed":case "Update PO details in CRM & Confirm delivery dates --Completed":case "Update Product readiness for inspection  --Completed":case "Upload the QC report post vendor site inspection  --Completed":case "Final Payment Collection - completed":case "Update GRNs against the POs --Completed":case "Upload product photos to confirm readiness for Delivery --Completed":case "Update DO completion status --Completed":case "Upload Invoices --Completed":case "Upload Packing list and Accessories list --Completed":case "Update Site delivery status --Completed":
+                              project_statusArr = ["initiated","proposal approved","order placed","production started"];
+                              break;
+                        case "Update Site Installation status --Completed":case "Upload Snaglist and confirm QC completion  --Completed":
+                              project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
+                              break;
+                        case "Upload Handover document and update Project Closure status --Completed":
+                              project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
+                              break;
+                    }
                 }
             }
-            console.log('-------- project_statusArr  -----------');
-            console.log(project_statusArr);
 
-        }
+            that.myaccount.set({
+                'userProfData': userProfData
+            }, {
+                silent: true
+            });
 
+            that.myaccount.set({
+                'projectStatusArr': project_statusArr
+            }, {
+                silent: true
+            });
 
+            that.myaccount.set({
+                'mynest': mynestitems
+            }, {
+                silent: true
+            });
 
-            if (!(that.myaccount.get('userProfData'))) {
-                that.myaccount.set({
-                    'userProfData': userProfData
-                }, {
-                    silent: true
-                });
-            }
-
-            if (!(that.myaccount.get('projectStatusArr'))) {
-                that.myaccount.set({
-                    'projectStatusArr': project_statusArr
-                }, {
-                    silent: true
-                });
-            }
-            if (!(that.myaccount.get('mynest'))) {
-                that.myaccount.set({
-                    'mynest': mynestitems
-                }, {
-                    silent: true
-                });
-            }
-
-            if (!(that.myaccount.get('providerId'))) {
-                that.myaccount.set({
-                    'providerId': providerId
-                }, {
-                    silent: true
-                });
-            }
+            that.myaccount.set({
+                'providerId': providerId
+            }, {
+                silent: true
+            });
 
             $(this.el).html(_.template(MyAccountTemplate)({
                 'userProfile': userProfData,
@@ -121,9 +106,7 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            //MGF.getUserProfile(authData, this.renderWithUserProjectCallback);
             MGF.mynest(authData,this.renderWithUserProjectCallback);
-
 
             setTimeout(
                 $('.page').append("<img id='loadico' src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>")
@@ -131,7 +114,6 @@ define([
 
             var that = this;
             var mynestProf = authData.email;
-            //var mynestProf = this.model.email;
             this.mynests.fetch({
                  data: {
                      "emailId": mynestProf
@@ -159,7 +141,7 @@ define([
             this.proposal = new Proposal();
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             Analytics.apply(Analytics.TYPE_GENERAL);
-            //this.myaccount.on('change', this.render, this);
+            this.myaccount.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
         },
@@ -366,13 +348,6 @@ define([
                         console.log("couldn't fetch data - " + response);
                     }
                 });
-                /*this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
-                    if (error) {
-                        console.log("not able to push data", error);
-                    } else {
-                        console.log("successfully pushed data");
-                    }
-                });*/
                 return false;
             }
         },
@@ -424,13 +399,6 @@ define([
                     console.log("couldn't fetch data - " + response);
                 }
             });
-            /*this.ref.child("projects").child(authData.uid).child("myNest").child("paymentDetails").child("initial_proposal_status").set(eventData, function(error) {
-                if (error) {
-                    console.log("not able to push data", error);
-                } else {
-                    console.log("successfully pushed data");
-                }
-            });*/
             return false;
         },
         changeMyaccounttab: function(e) {
