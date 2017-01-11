@@ -79,7 +79,6 @@ public class ProposalOutputService extends AbstractVerticle
     {
         QueryData queryData = null;
         JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
-        LOG.info("get proposal products from Version" +quoteRequest.getFromVersion());
 
 //        if (quoteRequest.hasProductIds())
 //        {

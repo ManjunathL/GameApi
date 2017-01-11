@@ -121,24 +121,22 @@ public class QuotationPDFCreator
             phrase5.add(new Chunk("Quotation #: ",fsize1));
             phrase5.add(new Chunk(proposalHeader.getQuoteNumNew()+ "." +strqnum,fsize));
 
-
-            Phrase phrase6 = new Phrase();
-            phrase6.add(new Chunk("Project Address: ",fsize1));
-            phrase6.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
-
-            Phrase phrase7 = new Phrase();
-            phrase7.add(new Chunk("Customer Id: ",fsize1));
-            phrase7.add(new Chunk(proposalHeader.getCustomerId(),fsize));
-
             table.addCell(phrase);
             table.addCell(phrase1);
             table.addCell(phrase2);
             table.addCell(phrase3);
             table.addCell(phrase4);
             table.addCell(phrase5);
-            table.addCell(phrase6);
-            table.addCell(phrase7);
+
+            PdfPTable pdfPTable=new PdfPTable(1);
+            pdfPTable.setWidthPercentage(100);
+            Phrase phrase6 = new Phrase();
+            phrase6.add(new Chunk("Project Address: ",fsize1));
+            phrase6.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
+            pdfPTable.addCell(phrase6);
+
         document.add(table);
+            document.add(pdfPTable);
 
         p = new Paragraph("      ");
         p.setAlignment(Element.ALIGN_LEFT);
@@ -711,9 +709,21 @@ public class QuotationPDFCreator
                 if(cname.equals("W"))
                 {
                     caption4="Wardrobe";
-                    String width = unit.getDimensions();
-                    wardrobewidth=wardrobewidth + " , " +width;
-                    klList.add(new String(width));
+                    if(unit.title.contains("N - Base Units") ||
+                            unit.title.contains("N - Drawer Units") ||
+                            unit.title.contains("N - Drawer") ||
+                            unit.title.contains("N - Open Units") ||
+                            unit.title.contains("N - Panelling") ||
+                            unit.title.contains ("N - WoodWork Add On") ||
+                            unit.title.contains("N - Wall Units") ||
+                            unit.title.contains("N - Tall/Semi Tall Units") ||
+                            unit.title.contains("N - Wall Units")) {
+
+                    }else {
+                        String width = unit.getDimensions();
+                        wardrobewidth = wardrobewidth + " , " + width;
+                        klList.add(new String(width));
+                    }
                 }
                 else if(cname.equals("K"))
                 {
