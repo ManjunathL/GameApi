@@ -147,6 +147,7 @@ define([
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
         },
         handleUserChange: function () {
+            console.log('handle user change');
             if (VM.activeView === VM.MYACCOUNTPAGE) {
                 window.location = '/';
             }
