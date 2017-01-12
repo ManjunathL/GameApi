@@ -1,19 +1,19 @@
 {
-//  "jdbc": {
-//    "driver_class": "com.mysql.jdbc.Driver",
-//    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
-//    "max_pool_size": 20,
-//    "user": "admin",
-//    "password": "OG$#gubi32"
-//  },
-
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/mg",
-    "max_pool_size": 4,
-    "user": "root",
-    "password": "root"
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
+    "max_pool_size": 20,
+    "user": "admin",
+    "password": "OG$#gubi32"
   },
+
+//  "jdbc": {
+//    "driver_class": "com.mysql.jdbc.Driver",
+//    "url": "jdbc:mysql://localhost/mg",
+//    "max_pool_size": 4,
+//    "user": "root",
+//    "password": "root"
+//  },
 
   "firebase": {
     "fb_url": "https://sweltering-fire-6356.firebaseio.com",
