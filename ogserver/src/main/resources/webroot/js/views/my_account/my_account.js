@@ -7,7 +7,6 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'cloudinary_jquery',
     '/js/mgfirebase.js',
     '/js/analytics.js',
     '/js/models/myAccount.js',
@@ -19,7 +18,7 @@ define([
     '/js/views/view_manager.js',
     '/js/models/proposal.js',
     '/js/collections/mynests.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, CloudinaryJquery, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
+], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -106,6 +105,9 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
+            console.log('-------------authData in myaccount page--------------------');
+            console.log(authData);
+
             MGF.mynest(authData,this.renderWithUserProjectCallback);
 
             setTimeout(
@@ -139,11 +141,10 @@ define([
             this.myaccount = new MyAccount();
             this.mynests = new MyNests();
             this.proposal = new Proposal();
-            $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             Analytics.apply(Analytics.TYPE_GENERAL);
+            _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
             this.myaccount.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
-            _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
         },
         handleUserChange: function () {
             if (VM.activeView === VM.MYACCOUNTPAGE) {
@@ -154,11 +155,6 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-            /*var profileImage = $('#upload-file-selector').val();
-            var imgPath = "/cep/profile_pic" + profileImage;
-            $.cloudinary.uploader.upload(imgPath, function(result) {
-              console.log(result)
-            });*/
 
             var formData = {
                 "displayName": $('#user_display_name').val(),
