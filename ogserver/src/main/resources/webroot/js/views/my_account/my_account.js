@@ -58,7 +58,7 @@ define([
                         case "Update Site Installation status --Completed":case "Upload Snaglist and confirm QC completion  --Completed":
                               project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
                               break;
-                        case "Upload Handover document and update Project Closure status --Completed":
+                        case "Upload Handover document and update Project Closure status --Completed":case "Project Completed":
                               project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
                               break;
                     }

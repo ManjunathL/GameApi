@@ -151,14 +151,9 @@ define([
 
             this.refAuth.signInWithEmailAndPassword(email, password).then(function(authData) {
               // Sign-in successful.
-
-              this.refAuth.onAuthStateChanged(this.onFAuth);
-              //var user = authData;
-
               console.log('User data after login');
-              //console.log(user);
+              console.log(authData);
 
-              //that.setUser(user);
               $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
               console.log('Sign-in successful');
             }, function(error) {
