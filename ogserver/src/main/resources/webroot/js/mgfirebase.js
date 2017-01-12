@@ -269,28 +269,28 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
          });
         },
        transferShortlistData: function(authData) {
-                if ((typeof(authData.provider) !== "undefined") && (authData.provider[0].providerId !== 'anonymous')) { //don't transfer shortlist when a person is logging out
-                    var that = this;
-                    _.each(that.shortlistedItems, function(shortlistedItem) {
-                        that.addShortlistProduct(shortlistedItem).then(function() {});
-                    });
-                }
-               },
+        if ((typeof(authData.provider) !== "undefined") && (authData.provider[0].providerId !== 'anonymous')) { //don't transfer shortlist when a person is logging out
+            var that = this;
+            _.each(that.shortlistedItems, function(shortlistedItem) {
+                that.addShortlistProduct(shortlistedItem).then(function() {});
+            });
+        }
+       },
         mynest: function(authData, someFunc) {
             console.log('------------authData in my nest----------------');
             console.log(authData);
+            var that = this;
             var mynestitems = null;
             //var authData = this.refAuth.currentUser;
-             var projRef = firebase.database().ref().child("projects/" + authData.uid+"/myNest");
+             var projRef = that.rootRef.child("projects/" + authData.uid+"/myNest");
              var projectDetails = null;
-             var that = this;
 
              projRef.on("value", function(snapshot) {
                  if (snapshot.exists()) {
                  console.log("--------project details--------");
                  console.log(authData);
                      that.projectDetails = snapshot.val();
-                     var userProfileRef = firebase.database().ref().child("user-profiles/" + authData.uid);
+                     var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
 
                      var userProfile = null;
 
@@ -303,7 +303,7 @@ define(['firebase', 'underscore', 'backbone', '/js/local_storage.js'], function(
                         });
                  }else{
                     console.log("--------project details not exists--------");
-                    var userProfileRef = firebase.database().ref().child("user-profiles/" + authData.uid);
+                    var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
                     var userProfile = null;
                     var providerId = authData.providerData[0].providerId;
 
