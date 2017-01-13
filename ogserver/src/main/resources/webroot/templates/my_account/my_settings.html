@@ -102,11 +102,7 @@
 
         $('#cancel_chng_pswd').click(function() {
             $('#old_password, #new_password, #confirm_password').val('');
-            $('.change_password').slideUp();
-            $('.open_tab_chng_pswd').removeClass('padding0_20_20');
-
-            var item = $(this).find('.sort-arrow');
-            $(item).removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
+            return false;
         });
 
         $('[data-toggle="tooltip"]').tooltip();

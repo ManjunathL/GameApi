@@ -30,37 +30,40 @@ define([
             var that = this;
             console.log("-----------mynestitems-------------")
             console.log(mynestitems);
+            var project_statusArr = new Array();
             if(typeof(mynestitems) !== 'undefined' && mynestitems !== null){
+                if(typeof(mynestitems.paymentDetails) !== 'undefined' && mynestitems.paymentDetails !== null){
 
-                var project_status = mynestitems.paymentDetails[0].sales_stage;
-                var client_project_status_c = mynestitems.paymentDetails[0].client_project_status_c;
-                var project_statusArr = new Array();
-                switch (project_status) {
-                    case "PROSPECT":case "FLOOR_PLAN_UPLOADED":case "INITIAL_PROPOSAL_UPLOADED":case "INITIAL_PROPOSAL_SENT":
-                        project_statusArr = ["initiated"];
-                        break;
-                    case "COLLECT_BOOKING_AMOUNT":case "COLLECTED_BOOKING_AMOUNT":case "SITE_MEASUREMENT_UPLOADED":case "DETAILED_DESIGN_APPROVED ":case "FINAL_PROPOSAL_UPLOADED":case "FINAL_PROPOSAL_SENT":case "COLLECT_ORDER_AMOUNT":
-                        project_statusArr = ["initiated","proposal approved"];
-                        break;
-                    case "Closed_Won":
-                        project_statusArr = ["initiated","proposal approved","order placed"];
-                        break;
-                }
-                if(typeof(client_project_status_c) != 'undefined' && client_project_status_c != null){
+                    var project_status = mynestitems.paymentDetails[0].sales_stage;
+                    var client_project_status_c = mynestitems.paymentDetails[0].client_project_status_c;
 
-                    switch (client_project_status_c) {
-                        case "Project Initiated":case "Upload Scope Document - Conduct 'Kick off' meeting --Completed":case "Upload Workshop Drawing --Completed":case "Upload Prod drawing signed-off by customer --Completed":case "Upload Pre-Installation checklist & list site work --Completed":case "Complete Preinstallation site work --Completed":case "Generate SO extract & update ERP --Completed":
+                    switch (project_status) {
+                        case "PROSPECT":case "FLOOR_PLAN_UPLOADED":case "INITIAL_PROPOSAL_UPLOADED":case "INITIAL_PROPOSAL_SENT":
+                            project_statusArr = ["initiated"];
+                            break;
+                        case "COLLECT_BOOKING_AMOUNT":case "COLLECTED_BOOKING_AMOUNT":case "SITE_MEASUREMENT_UPLOADED":case "DETAILED_DESIGN_APPROVED ":case "FINAL_PROPOSAL_UPLOADED":case "FINAL_PROPOSAL_SENT":case "COLLECT_ORDER_AMOUNT":
+                            project_statusArr = ["initiated","proposal approved"];
+                            break;
+                        case "Closed_Won":
                             project_statusArr = ["initiated","proposal approved","order placed"];
                             break;
-                        case "Generate PO extract & update ERP --Completed":case "Update PO details in CRM & Confirm delivery dates --Completed":case "Update Product readiness for inspection  --Completed":case "Upload the QC report post vendor site inspection  --Completed":case "Final Payment Collection - completed":case "Update GRNs against the POs --Completed":case "Upload product photos to confirm readiness for Delivery --Completed":case "Update DO completion status --Completed":case "Upload Invoices --Completed":case "Upload Packing list and Accessories list --Completed":case "Update Site delivery status --Completed":
-                              project_statusArr = ["initiated","proposal approved","order placed","production started"];
-                              break;
-                        case "Update Site Installation status --Completed":case "Upload Snaglist and confirm QC completion  --Completed":
-                              project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
-                              break;
-                        case "Upload Handover document and update Project Closure status --Completed":case "Project Completed":
-                              project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
-                              break;
+                    }
+                    if(typeof(client_project_status_c) != 'undefined' && client_project_status_c != null){
+
+                        switch (client_project_status_c) {
+                            case "Project Initiated":case "Upload Scope Document - Conduct 'Kick off' meeting --Completed":case "Upload Workshop Drawing --Completed":case "Upload Prod drawing signed-off by customer --Completed":case "Upload Pre-Installation checklist & list site work --Completed":case "Complete Preinstallation site work --Completed":case "Generate SO extract & update ERP --Completed":
+                                project_statusArr = ["initiated","proposal approved","order placed"];
+                                break;
+                            case "Generate PO extract & update ERP --Completed":case "Update PO details in CRM & Confirm delivery dates --Completed":case "Update Product readiness for inspection  --Completed":case "Upload the QC report post vendor site inspection  --Completed":case "Final Payment Collection - completed":case "Update GRNs against the POs --Completed":case "Upload product photos to confirm readiness for Delivery --Completed":case "Update DO completion status --Completed":case "Upload Invoices --Completed":case "Upload Packing list and Accessories list --Completed":case "Update Site delivery status --Completed":
+                                  project_statusArr = ["initiated","proposal approved","order placed","production started"];
+                                  break;
+                            case "Update Site Installation status --Completed":case "Upload Snaglist and confirm QC completion  --Completed":
+                                  project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
+                                  break;
+                            case "Upload Handover document and update Project Closure status --Completed":case "Project Completed":
+                                  project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
+                                  break;
+                        }
                     }
                 }
             }
