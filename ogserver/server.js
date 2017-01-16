@@ -23,7 +23,7 @@ var options = {
 
 https.createServer(options, function(request, response) {
 
-    console.log('Server running at https://127.0.0.1:8385/');
+    console.log('Server running at https://127.0.0.1:8685/');
 
     var url_parts = url.parse(request.url, true);
     var query = url_parts.query;
@@ -37,7 +37,7 @@ https.createServer(options, function(request, response) {
     var phone = decodeURIComponent(query.phone);
     var password = query.password;
 
-    var photoURL = query.photoURL ? query.photoURL : 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';
+    var photoURL = query.photoURL ? query.photoURL : 'https://res.cloudinary.com/mygubbi/image/upload/v1484131794/cep/user_new.png';
     var crmId = query.crmId;
 
     //response.writeHead(200, {"Content-Type": "text/plain"});
@@ -137,5 +137,5 @@ https.createServer(options, function(request, response) {
         response.end();
     }
 
-}).listen(8385);
+}).listen(8685);
 
