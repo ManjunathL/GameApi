@@ -548,6 +548,35 @@
 /* Experience Center Section End */
 
 /* Completed Project Section */
+.c-project-description{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1484549324/completed_projects/banner-page.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 650px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+}
+.comp-project-head {
+     background: rgba(241, 90, 34, 0.6);
+     padding: 0px 20px 15px;
+     margin-top: 50%;
+     color: #fff;
+}
+.cp-head{
+    padding: 15px 10px 15px;
+    font-weight: 300;
+    color: #fff;
+    border-bottom: 1px solid #ffffff;
+}
 .txt-over-completed-project-image {
     position: absolute;
     top: 48%;
@@ -582,6 +611,91 @@
 }
 .explore-space2 {
     margin-left: 195px !important;
+}
+.btn26 {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    -webkit-box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
+    border-bottom: 5px solid #f1591f;
+}
+.btn26 img {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0;
+    width: 100%;
+    left: 0;
+}
+.btn26 .ovrly {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.btn26 .buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.btn26 .buttons .fa {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+    background: #f1591f;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    margin: 0 1px;
+    color: #fff;
+    -webkit-transition: all 0.3s cubic-bezier(0, 1.135, 0.73, 1.405);
+    -moz-transition: all 0.3s cubic-bezier(0, 1.135, 0.73, 1.405);
+    -o-transition: all 0.3s cubic-bezier(0, 1.135, 0.73, 1.405);
+    transition: all 0.3s cubic-bezier(0, 1.135, 0.73, 1.405);
+}
+.btn26 .buttons .fa-search {
+    -webkit-transition-delay: 0.1s;
+    -moz-transition-delay: 0.1s;
+    -ms-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+.btn26:hover .buttons .fa {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+.btn26:hover .ovrly {
+    opacity: 1;
 }
 /* Completed Project Section End */
 
@@ -6723,7 +6837,7 @@ a.tab-ico {
     left: 0;
     width: 100%;
 }
-.c-project-link-cnt {
+/*.c-project-link-cnt {
     background: rgba(0, 0, 0, 0.1);
     color: #fff;
     height: 100%;
@@ -6741,7 +6855,7 @@ a.tab-ico {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+}*/
 .nivo-none{
     display: none;
 }
@@ -6761,6 +6875,22 @@ a.tab-ico {
     line-height: normal;
     margin: 0;
 }
+.cp-detail{
+    font-size: 16px;
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
+.comp-project-title{
+    font-size: 20px;
+    font-weight: 700;
+    color: #f1591f;
+    text-transform: capitalize;
+}
+@media (max-width: 768px){
+    .c-project-description{
+        min-height: 460px;
+    }
+}
 @media (max-width: 480px){
     .c-project-title h2 {
         margin: 20px 0px 10px;
@@ -6769,6 +6899,10 @@ a.tab-ico {
     .c-project-description{
         font-size: 13px;
         margin-bottom: 15px;
+        min-height: 300px;
+    }
+    .comp-project-head{
+        margin-top: 0px;
     }
 }
 
