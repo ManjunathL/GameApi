@@ -37,7 +37,7 @@ https.createServer(options, function(request, response) {
     var phone = decodeURIComponent(query.phone);
     var password = query.password;
 
-    var photoURL = query.photoURL ? query.photoURL : 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';
+    var photoURL = query.photoURL ? query.photoURL : 'https://res.cloudinary.com/mygubbi/image/upload/v1484131794/cep/user_new.png';
     var crmId = query.crmId;
 
     //response.writeHead(200, {"Content-Type": "text/plain"});
