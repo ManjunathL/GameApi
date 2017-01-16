@@ -1,0 +1,34 @@
+[
+  {
+    "email_id": "gaurav345@gmail.com",
+    "name": "Gaurav Kumar",
+    "address": "Bannerghatta Road, Bangalore",
+    "city": "Bangalore",
+    "phone_no": "89809808088",
+    "interest": "interest"
+  },
+  {
+    "email_id": "steve@gmail.com",
+    "name": "Steve J",
+    "address": "Mumbai",
+    "city": "Mumbai",
+    "phone_no": "57868677788",
+    "interest": "interest"
+  },
+  {
+    "email_id": "ravi@gmail.com",
+    "name": "Ravi S",
+    "address": "Lavelle Road, Bangalore",
+    "city": "Bangalore",
+    "phone_no": "7377388299",
+    "interest": "interest"
+  },
+  {
+    "email_id": "sunil@gmail.com",
+    "name": "Sunil",
+    "address": "HSR Layout, Bangalore",
+    "city": "Bangalore",
+    "phone_no": "7745539930",
+    "interest": "interest"
+  }
+]

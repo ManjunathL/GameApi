@@ -598,8 +598,11 @@
             <% } %>
             <div class="user_name"><%= users.at(0).get('displayName') %></div>
             <div class="sub-font" id="view_profile">
-                <a href="/user_profile">
+                <!--<a href="/user_profile">
                     View Profile
+                </a>-->
+                <a href="/my_account">
+                    My Account
                 </a>
                 <a class="signout_icon display-inline-block padding-left25">
                     Sign Out
@@ -682,7 +685,7 @@
                 <!--</p>-->
 
                 <p>
-                    New to mygubbi?<a href="#" id="new_reg">&nbsp;Sign Up</a>
+                    New to mygubbi?<a href="javascript:void(0);" id="new_reg">&nbsp;Sign Up</a>
                 </p>
             </div>
         </div>
@@ -759,7 +762,7 @@
                     </div>
                     <div class="margin-bottom20 form-group has-feedback">
                         <p class="margin0">Contact Number</p>
-                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" pattern="\d{10}"/>
+                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" max-length="10" pattern="\d{10}" required />
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="margin-bottom20 form-group">

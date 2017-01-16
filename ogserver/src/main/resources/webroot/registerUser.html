@@ -6,17 +6,18 @@
     <script>
      // Initialize Firebase
      var config = {
-       apiKey: "AIzaSyALgwN8p4bsgNDskEP_F4IPEyJTeUaQqTo",
-       authDomain: "mygubbi-cep.firebaseapp.com",
-       databaseURL: "https://mygubbi-cep.firebaseio.com",
-       storageBucket: "mygubbi-cep.appspot.com",
-       messagingSenderId: "623623245186"
+       apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
+       authDomain: "mygubbi-uat.firebaseapp.com",
+       databaseURL: "https://mygubbi-uat.firebaseio.com",
+       storageBucket: "mygubbi-uat.appspot.com",
+       messagingSenderId: "106892346704"
      };
      firebase.initializeApp(config);
     </script>
 </head>
 <body>
     <h1 id="test"></h1>
+    <div id="testdv"></div>
     <script>
         $(document).ready(function() {
             var path = $(location).attr('href');
@@ -31,28 +32,41 @@
                     vars[hash[0]] = hash[1];
                 }
             }
-            alert(vars['name']);
-            alert(vars['email']);
-            alert(vars['phone']);
-            alert(vars['password']);
 
             var name = vars['name'];
-            var email = vars['email'];
-            var phone = vars['phone'];
+            var email = decodeURIComponent(vars['email']);
+            var phone = decodeURIComponent(vars['phone']);
             var password = vars['password'];
+
             var photoURL = vars['photoURL'] ? vars['photoURL']: 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';
+            var crmId = vars['crmId'];
+            var proposal = vars['proposal'];
 
             console.log(photoURL);
 
             firebase.auth().createUserWithEmailAndPassword(email, password).then(function(userData) {
                 console.log("Successfully created user account with uid:", userData.uid);
+                $("#testdv").text("Successfully created user account with uid:" + userData.uid);
+
+                var uid = userData.uid;
+                /*firebase.auth().signOut().then(function() {
+                      console.log("Sign-out successful");
+                      $("#testdv").text("Sign-out successful");
+                }, function(error) {
+                  console.log("An error happened");
+                  $("#testdv").text("An error happened");
+                });*/
+
+
+                console.log("uid: "+uid);
+                $("#testdv").text("uid: "+uid);
 
                 var userData = {
                     providerData: "password",
                     email: email,
                     displayName: name,
                     profileImage: photoURL,
-                    uid: userData.uid
+                    uid: uid
                 };
                  createUser(userData);
                  var profileData = {
@@ -60,41 +74,44 @@
                     email: email,
                     phone: phone,
                     profileImage: photoURL,
+                    crmId:crmId
                 };
                 createProfile(userData,profileData);
             }, function(error) {
                 // An error happened.
                 console.log("Error creating user:", error);
+                $("#testdv").text("Error creating user:" + error);
             });
 
         });
         function createUser(userData){
-            alert(' -------I am------ ');
             firebase.database().ref().child("users").child(userData.uid).set(userData, function(error) {
                 if (error) {
                     console.log("Data could not be saved." + error);
+                    $("#testdv").text("Data could not be saved." + error);
                 } else {
                     console.log("Data saved successfully.");
+                    $("#testdv").text("Data saved successfully.");
                 }
             });
         }
         function createProfile(userData,profileData){
-            alert(' -------here------ ');
 
             firebase.database().ref().child('user-profiles').child(userData.uid).set(
                 profileData,
                 function(error) {
                     if (error) {
                         console.log("password profile data could not be saved." + error);
+                        $("#testdv").text("password profile data could not be saved." + error);
                     } else {
                         console.log("data saved successfully.");
+                        $("#testdv").text("data saved successfully.");
                     }
                 }
             );
             pushEvent(userData.uid, profileData, "user.add");
         }
         function pushEvent(uid, data, type){
-            alert(' -------event add------ ');
             var eventData = {
                 "data": data,
                 "type": type
@@ -102,8 +119,11 @@
             firebase.database().ref().child("events").push().child(uid).set(eventData, function(error) {
                 if (error) {
                     console.log("not able to push event data", error);
+                    $("#testdv").text("not able to push event data" + error);
                 } else {
                     console.log("successfully pushed event data");
+                    $("#testdv").text("successfully pushed event data");
+
                 }
             });
         }

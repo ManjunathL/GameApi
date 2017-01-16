@@ -1,56 +1,74 @@
 <link rel="stylesheet" href="/css/cep.css">
-<section class="bg-color-white user_page padding10-0">
-    <div class="container-fluid user_profile">
-        <div class="row padding-top15 padding-bottom15 hidden-xs">
-            <ul class="breadcrumb"  style="width: 98%;margin:3px;">
-                <li><a href="/"><i class="fa fa-home"></i></a></li>
-                <li class="active"><a href="javascript:void(0);">My Account</a></li>
-            </ul>
-        </div>
-
-        <div class="row padding-top15 padding-bottom15">
-            <div class="col-md-12">
-                <ul class="nav nav-tabs nav-justified" role="tablist">
-                    <li class="active" role="presentation">
-                        <a role="tab" data-toggle="tab" href="#profile">  <i class="glyphicon glyphicon-user"></i> Profile </a>
-                    </li>
-                    <li role="presentation">
-                        <a role="tab" data-toggle="tab" href="#mynest">  My Nest </a>
-                    </li>
-                    <li role="presentation">
-                        <a role="tab" data-toggle="tab" href="#center">  Messages (Update Center) </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-12 tab-content">
-            <div role="tabpanel" class="tab-pane active" id="profile">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p>
-                            11111111111111111111111
-                        </p>
+<section class="bg-light-gray user_page padding50-0">
+    <div class="container user_profile111">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="bg-white portfolio-box padding-top15 padding-bottom15">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+<!--
+                            <img id="user_profile_image" class="main_profile_img img-responsive img-centered" src="<%= imgBase + 'w_210,h_210,c_thumb,g_face,r_max/v1476252192/cep/Scarlett_Johansson_Césars_2014.jpg' %>">
+-->
+                            <img id="user_profile_image" class="main_profile_img img-responsive img-centered width80" src="<%= userProfile ? userProfile.profileImage : 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png' %>">
+                            <!--<form class="edit_mode form-group upload-pic-form">
+                                <span id="fileselector">
+                                    <label for="upload-file-selector">
+                                        <input id="upload-file-selector" type="file">
+                                        <i class="fa fa-2x fa-camera camera-op"></i>
+                                    </label>
+                                </span>
+                            </form>-->
+                        </div>
                     </div>
+                    <h5 class="userName"><%= userProfile ? userProfile.displayName : 'User' %></h5>
+                    <h6 class="userCity"><%= userProfile ? userProfile.city : ''%></h6>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="mynest">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p>
-                            2222222222222222
-                        </p>
-                    </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 ">
+                <div class="row bg-white portfolio-box padding-top15 padding-bottom15 menu-tab-list">
+                    <ul class="nav nav-tabs myaccount_list" data-tabs="tabs" role="tablist">
+                        <% if(typeof(userProfile) !==  'undefined' && userProfile !== null){ %>
+                        <li class="myaccount-lnk active">
+                            <a href="#profile" id="profile-lnk"  role="tab" data-toggle="tab">
+                                <img class="myaccount-lnk-img" id="profile-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home.png" class="cld-responsive img-centered">
+                                <img class="myaccount-lnk-img_def" id="profile-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home_def.png" class="cld-responsive img-centered">
+                                <div class="myaccount-lnk-content" id="profile-lnk-content" style="color:#f15a23;">My Profile</div>
+                            </a>
+                        </li>
+                        <% } %>
+                        <% if(typeof(myNest) !==  'undefined' && myNest !== null){ %>
+                        <li class="myaccount-lnk">
+                            <a href="#mynest" id="mynest-lnk" role="tab" data-toggle="tab">
+                                <img class="myaccount-lnk-img" id="mynest-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest.png" class="cld-responsive img-centered">
+                                <img class="myaccount-lnk-img_def" id="mynest-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest_def.png" class="cld-responsive img-centered">
+                                <div class="myaccount-lnk-content" id="mynest-lnk-content">My Nest</div>
+                            </a>
+                        </li>
+                        <!--<li class="myaccount-lnk">
+                            <a href="#message" id="message-lnk" role="tab" data-toggle="tab">
+                                <img class="myaccount-lnk-img" id="message-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_message.png" class="cld-responsive img-centered">
+                                <img class="myaccount-lnk-img_def" id="message-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_message_def.png" class="cld-responsive img-centered">
+                                <div class="myaccount-lnk-content" id="message-lnk-content">Message</div>
+                            </a>
+                        </li>-->
+                        <% } %>
+                        <li class="myaccount-lnk">
+                            <a href="#settings" id="settings-lnk" role="tab" data-toggle="tab">
+                                <img class="myaccount-lnk-img" id="settings-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog.png" class="cld-responsive img-centered">
+                                <img class="myaccount-lnk-img_def" id="settings-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog_def.png" class="cld-responsive img-centered">
+                                <div class="myaccount-lnk-content" id="settings-lnk-content">Settings</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                <div role="tabpanel" class="tab-pane row margin-top50 active" id="profile"></div>
+                <div role="tabpanel" class="tab-pane row margin-top50" id="mynest"></div>
+                <div role="tabpanel" class="tab-pane row margin-top50" id="message"></div>
+                <div role="tabpanel" class="tab-pane row margin-top50" id="settings"></div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="center">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p>
-                            33333333333333333333333
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </div>
 </section>
+

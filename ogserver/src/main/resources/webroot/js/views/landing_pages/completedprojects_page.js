@@ -18,6 +18,7 @@ define([
         el: '.page',
         ref: null,
         story: new Stories(),
+        refAuth: null,
         renderWithUserProfCallback: function(userProfData) {
         this.getStories();
             $(this.el).html(_.template(completedprojectsPageTemplate)({
@@ -26,7 +27,7 @@ define([
             $.cloudinary.responsive();
         },
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             this.getStories();
             this.ready();
@@ -71,6 +72,7 @@ define([
         },
         initialize: function() {
             this.ref = MGF.rootRef;
+            this.refAuth = MGF.refAuth;
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.getStories();
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});

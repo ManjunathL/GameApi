@@ -11,6 +11,7 @@ define([
         routes: {
             '': 'dashboard',
 
+            'registeruser?*queryString(/)': 'registerUser',
             'shoe-rack-online(/)': 'shoeRackLD',
             'crockery-unit-designs(/)': 'crockeryUnitLD',
             'tv-unit-cabinet(/)': 'tvUnitLD',

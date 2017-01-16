@@ -10,7 +10,7 @@
   "scripts": {
     "start": "http-server src/main/resources/webroot -a 0.0.0.0 -p 8787 -c-1 -S",
     "prestart": "npm install",
-    "install": "bower install --allow-root",
+    "install": "bower install",
     "minify": "gulp"
   },
   "main": "build/server",
@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "bower": "^1.6.8",
-    "express": "~2.5.8"
+    "express": "~2.5.8",
+    "firebase": "^3.4.0"
   },
   "optionalDependencies": {},
   "devDependencies": {

@@ -23,6 +23,7 @@ define([
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         product: null,
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
@@ -37,7 +38,7 @@ define([
         },
         render: function() {
             var that = this;
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.setProductDetails);
 
         },

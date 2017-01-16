@@ -20,7 +20,9 @@ define([
     var DashboardPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         story: new Stories(),
+
         renderWithUserProfCallback: function(userProfData) {
             this.getStories();
             this.getStoriesInteriors();
@@ -35,8 +37,6 @@ define([
             $("img").unveil();
 
             this.ready();
-
-
         },
         getStories: function() {
             var that = this;
@@ -128,7 +128,7 @@ define([
                             });
                     },
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         ready: function () {

@@ -26,8 +26,10 @@ define([
 
             var blog_name = that.model.name;
 
-           blog_name = blog_name.replace(/-/g, ' ');
-           blog_name = blog_name.replace(/_/, '-');
+            if(typeof(blog_name) !== 'undefined'){
+                blog_name = blog_name.replace(/-/g, ' ');
+                blog_name = blog_name.replace(/_/, '-');
+            }
 
             this.stories.fetch({
                 success: function() {
