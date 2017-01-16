@@ -11,7 +11,6 @@ define([
         routes: {
             '': 'dashboard',
 
-            'registeruser?*queryString(/)': 'registerUser',
             'shoe-rack-online(/)': 'shoeRackLD',
             'crockery-unit-designs(/)': 'crockeryUnitLD',
             'tv-unit-cabinet(/)': 'tvUnitLD',
@@ -127,6 +126,7 @@ define([
             'ergonomics(/)': 'ergonomics',
             'kitchen-material(/)': 'kitchenMaterial',
             'payment(/)': 'payment',
+            'my_account(/)': 'my_account',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -467,6 +467,12 @@ define([
                         setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                         require(['views/user_profile/user_profile'], function(UserProfilePage) {
                             VM.create(VM.USER_PROFILE, UserProfilePage).render();
+                        });
+                    });
+                    router.on('route:my_account', function(actions) {
+                        setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                        require(['/js/views/my_account/my_account.js'], function(MyAccountPage) {
+                            VM.create(VM.MYACCOUNTPAGE, MyAccountPage).render();
                         });
                     });
                     router.on('route:consult', function(actions) {
