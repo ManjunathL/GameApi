@@ -21,8 +21,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class OldUrlRedirectHandler implements Handler<RoutingContext>
 {
-    private final static Logger LOG = LogManager.getLogger(ShopifyRedirectHandler.class);
-    private static final String COLLECTIONS_URI = "/collections/";
+    private final static Logger LOG = LogManager.getLogger(OldUrlRedirectHandler.class);
+    private static final String COLLECTIONS_URI = "/newproduct-details-";
     public static final int COLLECTIONS_URI_LENGTH = COLLECTIONS_URI.length();
 
     private final ConcurrentHashMap<RequestKey, ApiResponse> dataCache = new ConcurrentHashMap(256);
@@ -35,16 +35,40 @@ public class OldUrlRedirectHandler implements Handler<RoutingContext>
 
     private void prepareRedirectUrls()
     {
-        JsonArray shopifyUrls = (JsonArray) ConfigHolder.getInstance().getConfigValue("oldurls");
+         String test = "{\n" +
+                 "  \"oldurls\": [\n" +
+                 "    {\n" +
+                 "      \"old\": \"/bedroom-interior-design\",\n" +
+                 "      \"new\": \"/wardrobe-designs-online\"\n" +
+                 "    },\n" +
+                 "    {\n" +
+                 "      \"old\": \"/newproduct-details-\",\n" +
+                 "      \"new\": \"/product-\"\n" +
+                 "    },\n" +
+                 "    {\n" +
+                 "      \"old\": \"/living-and-dining-room-designs\",\n" +
+                 "      \"new\": \"/storage-solutions\"\n" +
+                 "    }\n" +
+                 "  ]\n" +
+                 "}\n" +
+                 "\n";
+        JsonObject jsobj = new JsonObject(test);
+
+        //JsonArray shopifyUrls = (JsonArray) ConfigHolder.getInstance().getConfigValue("oldurls");
+        JsonArray shopifyUrls = (JsonArray) jsobj.getValue("oldurls");
+
         if (shopifyUrls == null || shopifyUrls.isEmpty())
         {
             LOG.info("OLD Urls not configured.");
+            LOG.info("i am null redirect 0000");
+
             return;
         }
 
         this.shopifyUrlsMap = new HashMap<>(256);
         for (Object urlObject : shopifyUrls)
         {
+            LOG.info(urlObject.toString());
             JsonObject urlJson = (JsonObject) urlObject;
             this.shopifyUrlsMap.put(urlJson.getString("old"), urlJson.getString("new"));
         }
@@ -58,22 +82,19 @@ public class OldUrlRedirectHandler implements Handler<RoutingContext>
 
         if (StringUtils.isNonEmpty(newUrl))
         {
+            LOG.info("iam in old url redirect");
             RouteUtil.getInstance().redirect(context, newUrl, "Redirecting to new mygubbi.com site");
             return;
         }
-//
-//        if (oldUrl.startsWith(COLLECTIONS_URI))
-//        {
-//            LOG.info("Current url:" + oldUrl);
-//            List<String> urlParts = StringUtils.fastSplit(oldUrl.substring(COLLECTIONS_URI_LENGTH), '/');
-//            if (urlParts != null && urlParts.size() == 3 && urlParts.get(1).equals("products"))
-//            {
-//                newUrl = "/product-" + urlParts.get(2);
-//                RouteUtil.getInstance().redirect(context, newUrl, "Redirecting to new mygubbi.com site");
-//                this.shopifyUrlsMap.put(oldUrl, newUrl);
-//                return;
-//            }
-//        }
+
+        if (oldUrl.startsWith(COLLECTIONS_URI))
+        {
+            String oldURI = oldUrl;
+            String newURI = oldURI.replace("/newproduct-details-","product-");
+            LOG.info("Current url:" + newURI);
+            RouteUtil.getInstance().redirect(context, newURI, "Redirecting to new mygubbi.com site");
+
+        }
 
         context.next();
     }
