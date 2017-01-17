@@ -147,11 +147,18 @@ public class QuoteData
             case "date":
                 return DateFormatUtils.format(new Date(), "dd-MMM-yyyy");
             case "qno":
+                if(proposalHeader.getQuoteNum()==null || proposalHeader.getQuoteNum().equals(""))
+                {
                 String vnum=this.fromVersion;
                 vnum=vnum.replace(".","");
                 LOG.info("");
                 String strqnum= proposalHeader.getQuoteNumNew()+ "."+ vnum;
                 return strqnum;
+
+                }
+                else {
+                    return proposalHeader.getQuoteNum();
+                }
             case "projectaddress":
                 return this.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ",");
             case "salesdesign":

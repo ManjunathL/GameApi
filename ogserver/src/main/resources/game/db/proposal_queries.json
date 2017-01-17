@@ -76,7 +76,7 @@
       "id": "proposal.create",
       "type": "insert",
       "table": "proposal",
-      "query": "insert into proposal(status, title, version, createdBy, crmId) values ('Draft', '', '1.0', ?, ?)",
+      "query": "insert into proposal(status, title, version, createdBy, crmId) values ('Deleted', '', '0.1', ?, ?)",
       "params": ["createdBy","opportunityId"]
     },
 

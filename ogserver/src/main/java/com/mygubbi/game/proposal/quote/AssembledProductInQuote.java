@@ -454,6 +454,32 @@ public class AssembledProductInQuote
             }
             return sb.toString();
         }
+
+         public int getWidth()
+        {
+            for (ModuleDimension dimension : this.moduleDimensions)
+            {
+                return dimension.length;
+            }
+            return 0;
+        }
+        public int getDepth()
+        {
+            for (ModuleDimension dimension : this.moduleDimensions)
+            {
+                return dimension.depth;
+            }
+            return 0;
+        }
+
+        public int getHeight()
+        {
+            for (ModuleDimension dimension : this.moduleDimensions)
+            {
+                return dimension.height;
+            }
+            return 0;
+        }
     }
 
     public static class ModulePrice
@@ -473,7 +499,7 @@ public class AssembledProductInQuote
 
     public static class ModuleDimension
     {
-        public int length;
+        public int length;//width
         public int depth;
         public int height;
 
