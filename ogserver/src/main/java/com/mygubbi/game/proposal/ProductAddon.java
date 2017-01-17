@@ -9,7 +9,7 @@ public class ProductAddon extends JsonObject
 {
     public static final String ACCESSORY_TYPE = "Accessories";
     public static final String APPLIANCE_TYPE = "Appliances";
-    public static final String COUNTERTOP_TYPE = "Countertop";
+    public static final String COUNTERTOP_TYPE = "Counter Top";
     public static final String SERVICE_TYPE = "Services";
     public static final String LOOSE_FURNITURE_TYPE = "Loose Furniture";
 

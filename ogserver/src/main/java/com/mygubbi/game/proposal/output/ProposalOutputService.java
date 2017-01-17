@@ -127,8 +127,10 @@ public class ProposalOutputService extends AbstractVerticle
     {
 
         QueryData queryData = null;
-        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId());
-        LOG.debug("Proposal product :" + paramsJson.toString());
+        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
+        LOG.debug("Proposal product addon :" + paramsJson.toString());
+        /*JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
+        LOG.info("get proposal products from Version" +quoteRequest.getFromVersion());*/
 //        if (quoteRequest.hasAddonIds())
 //        {
 //            queryData = new QueryData("proposal.addon.selected.detail", paramsJson.put("addonIds", quoteRequest.getAddonIdsAsText()));
@@ -137,7 +139,7 @@ public class ProposalOutputService extends AbstractVerticle
 //        {
 //            queryData = new QueryData("proposal.addon.list", paramsJson);
 //        }
-        queryData = new QueryData("proposal.addon.list", paramsJson);
+        queryData = new QueryData("proposal.version.addon.list", paramsJson);
 
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,

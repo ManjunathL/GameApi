@@ -336,11 +336,11 @@
     },
 
     {
-      "id": "proposal.addon.list",
+      "id": "proposal.version.addon.list",
       "type": "select",
       "table": "proposal_addon",
-      "query": "select * from proposal_addon where proposalId = ?",
-      "params": ["proposalId"]
+      "query": "select * from proposal_addon where proposalId = ? and fromVersion = ?",
+      "params": ["proposalId","fromVersion"]
     },
 
     {
@@ -363,17 +363,16 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, code, categoryCode, productTypeCode, brandCode, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      "params":["proposalId", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, brandCode, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
     },
 
     {
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
-      "params": [
-        "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
+      "query": "update proposal_addon set seq = ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
+      "params": ["seq", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
     },
 
     {
