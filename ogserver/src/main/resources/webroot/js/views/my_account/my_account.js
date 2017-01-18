@@ -8,17 +8,17 @@ define([
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    '/js/mgfirebase.js',
-    '/js/analytics.js',
-    '/js/models/myAccount.js',
-    'text!/templates/my_account/my_account.html',
-    'text!/templates/my_account/my_nest.html',
-    'text!/templates/my_account/my_profile.html',
-    'text!/templates/my_account/my_settings.html',
-    'text!/templates/my_account/my_message.html',
-    '/js/views/view_manager.js',
-    '/js/models/proposal.js',
-    '/js/collections/mynests.js'
+    'mgfirebase',
+    'analytics',
+    'models/myAccount',
+    'text!templates/my_account/my_account.html',
+    'text!templates/my_account/my_nest.html',
+    'text!templates/my_account/my_profile.html',
+    'text!templates/my_account/my_settings.html',
+    'text!templates/my_account/my_message.html',
+    'views/view_manager',
+    'models/proposal',
+    'collections/mynests'
 ], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
