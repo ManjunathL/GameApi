@@ -14,11 +14,12 @@ define([
     'text!templates/product/new-finish.html',
     'collections/relatedproducts',
     'text!templates/product/relatedproduct.html',
+    'models/product_filter',
     'slyutil',
     'mgfirebase',
     'analytics',
     'views/view_manager'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, FinishTemplate, RelatedProductCollection, relatedproductTemplate, SlyUtil, MGF, Analytics, VM) {
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, FinishTemplate, RelatedProductCollection, relatedproductTemplate, Filter, SlyUtil, MGF, Analytics, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -26,6 +27,7 @@ define([
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.product = new ProductModel();
+            this.productfilter = new Filter();
             window.product = this.product;
             this.custom_product = new CustomProduct();
             this.RelatedProducts = new RelatedProductCollection();
@@ -82,7 +84,23 @@ define([
 
             var selectedSubCategory = that.product.get('subcategory');
             var selectedCategory = that.product.get('categoryId');
-
+            var productName = that.product.get('name');
+            window.productfilter = that.productfilter;
+             this.productfilter.set({
+                 'selectedCategoryName':selectedCategory
+             }, {
+                 silent: true
+             });
+             this.productfilter.set({
+                 'selectedSubCategoryName':selectedSubCategory
+             }, {
+                 silent: true
+             });
+             this.productfilter.set({
+                 'productName':productName
+             }, {
+                 silent: true
+             });
             var compiledTemplate = _.template(productPageTemplate);
             $(that.el).html(compiledTemplate({
                 "product": that.product.toJSON(),

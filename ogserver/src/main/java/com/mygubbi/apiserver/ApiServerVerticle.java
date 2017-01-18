@@ -59,6 +59,7 @@ public class ApiServerVerticle extends AbstractVerticle
 
     private void setupHttpRedirectServer()
     {
+
         String httpsRedirectUrl = ConfigHolder.getInstance().getStringValue("urlwithssl", "https://www.mygubbi.com");
         HttpServer server = VertxInstance.get().createHttpServer();
         Router router = Router.router(VertxInstance.get());
@@ -93,6 +94,7 @@ public class ApiServerVerticle extends AbstractVerticle
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
         });
+        this.setupRedirectHandlerForOldUrls(router);
         int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
         server.requestHandler(router::accept).listen(httpPort);
     }
@@ -102,7 +104,9 @@ public class ApiServerVerticle extends AbstractVerticle
         Router router = Router.router(VertxInstance.get());
 
         this.setupApiHandler(router);
+        this.setupNakedDomainRouter(router);
         this.setupRedirectHandlerForShopifyUrls(router);
+        this.setupRedirectHandlerForOldUrls(router);
         this.setupPrerenderHandler(router);
         this.setupStaticConfigHandler(router);
         this.setupStaticHandler(router);
@@ -159,6 +163,20 @@ public class ApiServerVerticle extends AbstractVerticle
             router.route(HttpMethod.GET, "/*").handler(new ShopifyRedirectHandler());
             LOG.info("Registered Shopify url handler");
         }
+    }
+    private void setupRedirectHandlerForOldUrls(Router router)
+    {
+        boolean oldUrlRedirectOn = ConfigHolder.getInstance().getBoolean("oldurlredirect", false);
+        if (oldUrlRedirectOn)
+        {
+            router.route(HttpMethod.GET, "/*").handler(new OldUrlRedirectHandler());
+            LOG.info("Registered Old url handler");
+        }
+    }
+
+    private void setupNakedDomainRouter(Router router)
+    {
+        router.route(HttpMethod.GET, "/*").handler(new NakedDomainHandler());
     }
 
     private void setupApiHandler(Router router)

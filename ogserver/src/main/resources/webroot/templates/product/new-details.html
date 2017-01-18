@@ -1184,6 +1184,48 @@
           interval: 6000,
           pause: "false"
         });
+     var meta = 'mehbub';
+        var category = productfilter.get('selectedCategoryName');
+        var subcategory = productfilter.get('selectedSubCategoryName');
+        var productName = productfilter.get('productName');
+            console.log("category=============");
+            console.log(category);
+            console.log(subcategory);
+            console.log(productName);
+         if( category == 'bedroom') {
+            meta = productfilter.get('productName') + ' is a ' + subcategory + ' from the house of MyGubbi. ' + productName + ' is ergonomically designed and feature a series of horizontal and vertical shelves.';
+            $("meta[name='description']").attr("content", meta);
+
+             metakeyword = productName + ' , ' +productName+ ' online, ' + productName +', Buy ' + productName;
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+             document.title = productName;
+
+            }
+          else if( category == 'kitchen') {
+            meta = productName + ' is one of the best ' + subcategory + 's available in the ' + category + '.The ' +
+            productName + ' has multiple cabinets and shelves for easy storage.';
+            $("meta[name='description']").attr("content", meta);
+
+             metakeyword = productName + ' , ' +productName+ ' online, ' + productName +', Buy ' + productName;
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+             document.title = productName;
+
+            }
+           else {
+            if(category == 'livingndining'){
+             category = 'storage solution';
+            }
+            meta = productName + ' is a ' + subcategory + ' from the house of MyGubbi  and makes for perfect ' + category + '. ' +
+            productName + ' also helps enhance the look of your living room, when placed against a wall.';
+            $("meta[name='description']").attr("content", meta);
+
+             metakeyword = productName + ' , ' +productName+ ' online, ' + productName +', Buy ' + productName;
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+             document.title = productName;
+           }
     });
 
 
