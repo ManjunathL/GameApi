@@ -69,11 +69,13 @@ public class ExcelStyles
         CellStyle style = wb.createCellStyle();
         Font font = wb.createFont();
         font.setBoldweight(Font.BOLDWEIGHT_BOLD);
-        font.setFontHeight(new Double(font.getFontHeight() * 1.3).shortValue());
+        font.setFontHeightInPoints((short) 11);
+        //font.setFontHeight(new Double(font.getFontHeight() * 1.3).shortValue());
         style.setFont(font);
         style.setAlignment(CellStyle.ALIGN_CENTER);
         return style;
     }
+
     private CellStyle createTextStyle(Workbook wb)
     {
         CellStyle style = wb.createCellStyle();
