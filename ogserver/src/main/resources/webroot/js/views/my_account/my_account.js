@@ -3,22 +3,23 @@
  */
 define([
     'jquery',
+    'jqueryui',
     'underscore',
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
-    'mgfirebase',
-    'analytics',
-    'models/myAccount',
-    'text!templates/my_account/my_account.html',
-    'text!templates/my_account/my_nest.html',
-    'text!templates/my_account/my_profile.html',
-    'text!templates/my_account/my_settings.html',
-    'text!templates/my_account/my_message.html',
-    'views/view_manager',
-    'models/proposal',
-    'collections/mynests'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
+    '/js/mgfirebase.js',
+    '/js/analytics.js',
+    '/js/models/myAccount.js',
+    'text!/templates/my_account/my_account.html',
+    'text!/templates/my_account/my_nest.html',
+    'text!/templates/my_account/my_profile.html',
+    'text!/templates/my_account/my_settings.html',
+    'text!/templates/my_account/my_message.html',
+    '/js/views/view_manager.js',
+    '/js/models/proposal.js',
+    '/js/collections/mynests.js'
+], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -162,7 +163,7 @@ define([
 
             var formData = {
                 "displayName": $('#user_display_name').val(),
-                "profileImage": profileImage,
+                "profileImage": $('#user_profile_image').attr('src'),
                 "email": $('#user_email_id').val(),
                 //"dob": $('#user_dob').val(),
                 "phone": $('#user_phone').val(),
@@ -341,7 +342,7 @@ define([
                         if(response){
                             $("#reqCallbk_successMsg").fadeIn();
                             $(".salesStage").fadeOut(1000);
-                            $('#reqCallbk_successMsg').fadeOut(5000);
+                            $('#reqCallbk_successMsg').fadeOut(10000);
                         }
                     },
                     error: function(model, response, options) {
@@ -392,7 +393,7 @@ define([
                         $("#approve_successMsg").fadeIn();
                         $("#approvebtn").addClass('disabled');
                         $(".salesStage").fadeOut(1000);
-                        $('#approve_successMsg').fadeOut(5000);
+                        $('#approve_successMsg').fadeOut(10000);
                     }
                 },
                 error: function(model, response, options) {
