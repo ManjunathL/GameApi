@@ -3,10 +3,12 @@
  */
 define([
     'jquery',
+    'jqueryui',
     'underscore',
     'backbone',
     'bootstrap',
     'bootstrapvalidator',
+    'cloudinary_jquery',
     '/js/mgfirebase.js',
     '/js/analytics.js',
     '/js/models/myAccount.js',
@@ -18,7 +20,7 @@ define([
     '/js/views/view_manager.js',
     '/js/models/proposal.js',
     '/js/collections/mynests.js'
-], function ($, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
+], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, CloudinaryJquery, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -144,6 +146,7 @@ define([
             this.myaccount = new MyAccount();
             this.mynests = new MyNests();
             this.proposal = new Proposal();
+            $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             Analytics.apply(Analytics.TYPE_GENERAL);
             _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
             this.myaccount.on('change', this.render, this);
@@ -159,10 +162,21 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
+            /*var profileImage = $('#upload-file-frm').val();
+
+            console.log('-------------- profileImage -----------------');
+            console.log(profileImage);
+
+            var imgPath = "/home/smruti/Downloads/cust1.jpg";
+            $.cloudinary.v2.uploader.upload(imgPath);*/
+
+            //$.cloudinary.image(imgPath, {type: "fetch"});
+
+            //$.cloudinary.image("user_sample_image_1001.jpg", {height: 100, gravity: "face", width: 150, crop: "thumb"});
 
             var formData = {
                 "displayName": $('#user_display_name').val(),
-                "profileImage": profileImage,
+                "profileImage": $('#user_profile_image').attr('src'),
                 "email": $('#user_email_id').val(),
                 //"dob": $('#user_dob').val(),
                 "phone": $('#user_phone').val(),
@@ -341,7 +355,7 @@ define([
                         if(response){
                             $("#reqCallbk_successMsg").fadeIn();
                             $(".salesStage").fadeOut(1000);
-                            $('#reqCallbk_successMsg').fadeOut(5000);
+                            $('#reqCallbk_successMsg').fadeOut(10000);
                         }
                     },
                     error: function(model, response, options) {
@@ -392,7 +406,7 @@ define([
                         $("#approve_successMsg").fadeIn();
                         $("#approvebtn").addClass('disabled');
                         $(".salesStage").fadeOut(1000);
-                        $('#approve_successMsg').fadeOut(5000);
+                        $('#approve_successMsg').fadeOut(10000);
                     }
                 },
                 error: function(model, response, options) {

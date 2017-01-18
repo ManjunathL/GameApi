@@ -309,25 +309,22 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-4 padding0">
-                                    <input
-                                            type="time"
-                                            id="user_time"
-                                            class="form-control"
-                                            name="time"
-                                            placeholder="hh/mm AM/PM"
-                                            style="margin:20px 0px;"
-                                            required="required" />
-                                </div>
                                 <div class="col-md-6 padding0">
                                     <input
-                                            type="date"
+                                            type="text"
                                             id="user_date"
                                             class="form-control"
                                             name="date"
-                                            placeholder="dd/mm/yy"
-                                            dateformat="d M y"
-                                            min="0"
+
+                                            style="margin:20px 0px;"
+                                            required="required" />
+                                </div>
+                                <div class="col-md-4 padding0">
+                                    <input
+                                            type="text"
+                                            id="user_time"
+                                            class="form-control"
+                                            name="time"
                                             style="margin:20px 0px;"
                                             required="required" />
                                 </div>
@@ -482,3 +479,20 @@
 </section>
 <% } %>
 <% } %>
+<link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.css" type="text/css" />
+<link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
+<script src="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.js"></script>
+<script>
+    $(function () {
+        $('#user_date').datepicker({
+            minDate: 0,
+            dateFormat: 'dd/mm/yy'
+        });
+        $('#user_time').timepicker({
+            minTime: { hour: new Date().getHours(), minute: new Date().getMinutes() },
+            showPeriod: true,
+            showLeadingZero: true
+        });
+    });
+
+</script>
