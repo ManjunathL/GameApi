@@ -122,12 +122,13 @@ public class QuotationPDFCreator
 
             Phrase phrase5 = new Phrase();
             phrase5.add(new Chunk("Quotation #: ",fsize1));
+
             if(proposalHeader.getQuoteNum()==null || proposalHeader.getQuoteNum().equals(""))
             {
                 qnum=proposalHeader.getQuoteNumNew()+ "." +strqnum;
             }
             else {
-                qnum=proposalHeader.getQuoteNum();
+                qnum=proposalHeader.getQuoteNum()+ "." +strqnum;
             }
             phrase5.add(new Chunk(qnum,fsize));
 
