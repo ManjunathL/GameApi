@@ -147,17 +147,17 @@ public class QuoteData
             case "date":
                 return DateFormatUtils.format(new Date(), "dd-MMM-yyyy");
             case "qno":
-                if(proposalHeader.getQuoteNum()==null || proposalHeader.getQuoteNum().equals(""))
-                {
                 String vnum=this.fromVersion;
                 vnum=vnum.replace(".","");
+                if(proposalHeader.getQuoteNum()==null || proposalHeader.getQuoteNum().equals(""))
+                {
                 LOG.info("");
                 String strqnum= proposalHeader.getQuoteNumNew()+ "."+ vnum;
                 return strqnum;
 
                 }
                 else {
-                    return proposalHeader.getQuoteNum();
+                    return proposalHeader.getQuoteNum() + "." +vnum;
                 }
             case "projectaddress":
                 return this.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ",");
@@ -178,10 +178,11 @@ public class QuoteData
             case "fromVersion":
                 LOG.info("version number in case" +this.fromVersion);
                 return (fromVersionFloat)/10;
-            case "amountafterdiscount":
-                double grandTotal=this.getTotalCost()-getDiscountAmount();
-                double res=grandTotal-grandTotal%10;
-                return this.getRoundOffValue(String.valueOf((int)res));
+            case "amountafterdiscount1":
+                Double grandTotal=this.getTotalCost()-getDiscountAmount();
+                Double res=grandTotal-grandTotal%10;
+                LOG.info("Val" +this.getRoundOffValue(String.valueOf(res.intValue())));
+                return this.getRoundOffValue(String.valueOf(res.intValue()));
                 //return res;
             case "totalamountinwords":
                 double val=this.getTotalCost() - this.discountAmount;
