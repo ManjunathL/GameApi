@@ -68,11 +68,14 @@ public class UserRegistrationProcessor implements DataProcessor
         LOG.info("Mehbub" +jsonData.encodePrettily());
         JsonObject userJson = new JsonObject().put("crmId", jsonData.getString("crmId")).put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
         LOG.info("Mehbub USER" +userJson.encodePrettily());
+        this.sendWelcomeEmail(eventData);
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> res) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(res.result().body());
+                   LOG.info(resultData);
+                   LOG.info(resultData.toString());
                     if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
                     {
                         this.acknowledger.failed(eventData, "User could not be recorded in database.");
