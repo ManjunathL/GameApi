@@ -1,23 +1,17 @@
 <html>
 <body>
-Dear $vdata.fName,
-<br/><br/>
+Dear $vdata.displayName,
+<br/>
 We would like to thank you for your interest in MyGubbi.com. It brings us great joy in serving your home decor needs to help you bring you stylish interiors.<br/><br/>
-
-<br/><br/>
-
-To make the process of beautifying your home easy, we have created an account for you on our CRM/CEP portal. Here you would be able to access all documents pertaining to the project. You can seamlessly view, download and upload the documents related to your home decor project.<br/><br/>
-
+<br/>
+To make the process of beautifying your home easy, we have created an account for you on our CRM/CEP portal. Here you would be able to access all documents pertaining to the project. You can seamlessly view, download and upload the documents related to your home decor project.<br/>
 The login credentials of the same are given below for your perusal.
-<br/><br/>
+<br/>
 <b>Login ID </b>- $vdata.email
 <br>
 <b>Password </b> - mygubbi
-
-<br/><br/>
-
+<br/>
 For any assistance on understanding how this portal is useful for you, call us on 8884442459.
-<br/><br/>
-
+<br/>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <html>
 <body>
+Dear $vdata.displayName,
 Dear $vdata.fName,
 <br/><br/>
 We would like to thank you for your interest in MyGubbi.com. It brings us great joy in serving your home decor needs to help you bring you stylish interiors.<br/>

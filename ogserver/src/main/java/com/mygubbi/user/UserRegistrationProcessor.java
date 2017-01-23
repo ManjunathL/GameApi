@@ -95,6 +95,7 @@ public class UserRegistrationProcessor implements DataProcessor
         String fName = jsonData.getString("displayName");
         String email = jsonData.getString("email");
         String testemail = "";
+        LOG.info(fName);
         String crmId = jsonData.getString("crmId");
         if(crmId.isEmpty()) {
             sendToLeadSquared(jsonData);
@@ -179,6 +180,7 @@ public class UserRegistrationProcessor implements DataProcessor
                 in.close();
                 //print result
                 LOG.info(response.toString());
+                return;
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
