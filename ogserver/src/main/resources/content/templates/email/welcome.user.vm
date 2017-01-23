@@ -1,24 +1,22 @@
 <html>
-
 <body>
-A HEARTY WELCOME
+Dear $vdata.fName,
 <br/><br/>
-We are thrilled to get connected with you, and are immensely excited to decorate your homes.
+We would like to thank you for your interest in MyGubbi.com. It brings us great joy in serving your home decor needs to help you bring you stylish interiors.<br/><br/>
+
 <br/><br/>
 
-Let's quickly familiarize you with Mygubbi.
+To make the process of beautifying your home easy, we have created an account for you on our CRM/CEP portal. Here you would be able to access all documents pertaining to the project. You can seamlessly view, download and upload the documents related to your home decor project.<br/><br/>
+
+The login credentials of the same are given below for your perusal.
+<br/><br/>
+<b>Login ID </b>- $vdata.email
+<br>
+<b>Password </b> - mygubbi
+
 <br/><br/>
 
-"One stop destination for complete Home Interior Solutions."
-<br/><br/>
-
-Mygubbi accomplishes the aspirations of all the customers, who are looking for visually appealing homes. From fixed modular interior solutions to loose furniture, Mygubbi is the best place to get personalized products crafted exclusively for you.
-<br/><br/>
-
-Visit our website at Mygubbi.com, and check out our delectably designed products. Be the first one to know the latest updates on all items and ongoing discounts, subscribe to our newsletter.
-<br/><br/>
-
-Our consultants will get in touch with you at the earliest, alternatively you can call Thirtha at 8088 860 860 to know more about services and offers.
+For any assistance on understanding how this portal is useful for you, call us on 8884442459.
 <br/><br/>
 
 </body>

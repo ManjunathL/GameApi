@@ -85,10 +85,9 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
     LOG.info(designerEmail);
     if (status != "approved" & scheduleTime != null ) {
         EmailData emailData = new EmailData().setFromEmail("mehaboob.basha@orangegubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
-                .setSubject("Welcome to mygubbi!")
-                .setBodyTemplate("your customer")
-                .setTextMessage(customerName + " " + "has " + " "+ status + "  " + "our  proposal." + " " + "Please call back to this number" + " " + customerPhone + " @ " + scheduleTime );
-
+                .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
+                .setBodyTemplate("email/cep.proposal.requestcall.vm")
+                .setSubjectTemplate("email/requestcall.subject.vm");
         final String SENDGRID_APIKEY = "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";
 
         SendGrid sendgrid = new SendGrid(SENDGRID_APIKEY);
@@ -110,9 +109,10 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
     else{
 
         EmailData emailData = new EmailData().setFromEmail("mehaboob.basha@orangegubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
-                .setSubject("Welcome to mygubbi!")
-                .setBodyTemplate("your customer")
-                .setTextMessage(customerName + " " + "has " + " "+ status + " his proposal");
+                .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
+                .setBodyTemplate("email/cep.proposal.approve.vm")
+                .setSubjectTemplate("email/approval.subject.vm");
+
 
         final String SENDGRID_APIKEY = "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";
 
