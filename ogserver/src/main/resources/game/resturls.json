@@ -378,7 +378,16 @@
       "uri": "/gapi/addon/productTypes",
       "source": "db",
       "query":"addons.product.types",
-      "params":["roomCode", "categoryCode"],
+      "params":["categoryCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/productSubTypes",
+      "source": "db",
+      "query":"addons.product.subtypes",
+      "params":["categoryCode","productTypeCode"],
       "resultfields":[],
       "default": "[]"
     },
@@ -387,7 +396,7 @@
       "uri": "/gapi/addon/brands",
       "source": "db",
       "query":"addons.brands",
-      "params":["productTypeCode"],
+      "params":["categoryCode", "productSubTypeCode", "productTypeCode"],
       "resultfields":[],
       "default": "[]"
     },
@@ -396,7 +405,7 @@
       "uri": "/gapi/addon/products",
       "source": "db",
       "query":"addons.products",
-      "params":["productTypeCode", "brandCode"],
+      "params":["categoryCode","productTypeCode","productSubTypeCode", "brandCode"],
       "resultfields":[],
       "default": "[]"
     },
