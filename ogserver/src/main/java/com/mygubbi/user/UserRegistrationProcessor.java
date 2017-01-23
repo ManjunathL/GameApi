@@ -84,6 +84,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     {
 
                         this.sendWelcomeEmail(eventData);
+
                     }
                 });
     }
@@ -180,7 +181,6 @@ public class UserRegistrationProcessor implements DataProcessor
                 in.close();
                 //print result
                 LOG.info(response.toString());
-                return;
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -188,6 +188,7 @@ public class UserRegistrationProcessor implements DataProcessor
             e.printStackTrace();
         };
 
+        return;
 
     }
 }
