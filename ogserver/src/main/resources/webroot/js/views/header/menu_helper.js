@@ -262,7 +262,7 @@ define([
 
             this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
                 console.log("Successfully created user account with uid:", userData.uid);
-                var photoURL = userData.photoURL ? userData.photoURL: 'https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png';
+                var photoURL = userData.photoURL ? userData.photoURL: 'https://res.cloudinary.com/mygubbi/image/upload/v1484131794/cep/user_new.png';
 
 
                 var userData = {
@@ -284,7 +284,8 @@ define([
                             displayName: $('#reg_full_name').val(),
                             email: $('#reg_email_id').val(),
                             phone: phoneNum,
-                            profileImage: photoURL
+                            profileImage: photoURL,
+                            crmId:""
                         }, null);
                     }
                 };
@@ -293,7 +294,8 @@ define([
                     displayName: $('#reg_full_name').val(),
                     email: $('#reg_email_id').val(),
                     phone: phoneNum,
-                    profileImage: photoURL
+                    profileImage: photoURL,
+                    crmId:""
                 };
 
                 that.createUser(userData.uid, userData, profileJSONData);

@@ -41,6 +41,7 @@
         'views/story/full_story_helper',
         'views/story/stories',
         'views/thankyou/thankyou',
+        'views/my_account/my_account',
         'views/user_profile/user_profile'
     ],
     paths: {
@@ -59,6 +60,7 @@
             zepto: 'libs/zepto-full/zepto.min',
             jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
             highlight: 'libs/highlight/highlight',
+            timepicker: 'libs/jquery.ui.timepicker/jquery.ui.timepicker',
             templates: '../templates'
         }
 })

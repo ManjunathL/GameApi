@@ -4,6 +4,7 @@
 define([
     'jquery',
     'jqueryui',
+    'timepicker',
     'underscore',
     'backbone',
     'bootstrap',
@@ -19,7 +20,7 @@ define([
     'views/view_manager',
     'models/proposal',
     'collections/mynests'
-], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
+], function ($, jqueryui, timepicker, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,

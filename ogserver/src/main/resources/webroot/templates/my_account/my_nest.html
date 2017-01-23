@@ -1,6 +1,10 @@
 <% if(typeof(myNest) !==  'undefined' && myNest !== null){ %>
 <%= console.log("----My nest details------") %>
 <%= console.log(myNest) %>
+
+<link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.css" type="text/css" />
+<link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
+
 <!-- Property Details Start -->
 <% if(typeof(myNest.paymentDetails) != 'undefined'){ %>
 <section>
@@ -199,6 +203,20 @@
                 <% if(typeof(Initpropcls) != 'undefined' && (Initpropcls !== '')){ %>
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">No Proposal found</div>
                 <% } %>
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div id="approve_successMsg" class="alert alert-info display-none">
+                            Thank you for approving proposal. Our team will get back to you
+                            as soon as possible.
+                        </div>
+                        <div id="reqCallbk_successMsg" class="alert alert-info display-none">
+                            Thank you for your respone. Our team will get back to you
+                            as soon as possible.
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row" <%= Initpropcls%>>
                     <div class="col-md-12">
                         <i class="icon ion-information-circled color-red"></i><h3 class="text-transform-none txt-color-orange"> Approval required for <% if(typeof(myNest) !== 'undefined'){ %>
@@ -310,7 +328,6 @@
                                             id="user_date"
                                             class="form-control"
                                             name="date"
-
                                             style="margin:20px 0px;"
                                             required="required" />
                                 </div>
@@ -476,9 +493,7 @@
 </section>
 <% } %>
 <% } %>
-<link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.css" type="text/css" />
-<link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
-<script src="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.js"></script>
+<!--<script src="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.js"></script>-->
 <script>
     $(function () {
         $('#user_date').datepicker({
