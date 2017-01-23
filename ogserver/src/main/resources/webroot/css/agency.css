@@ -8654,7 +8654,7 @@ html .ui-button.ui-state-disabled:active {
     }
 }
 
-
+/* CEP design code Start */
 .upload-pic-form{
     position: absolute;
     top: 50%;
@@ -8668,3 +8668,4 @@ html .ui-button.ui-state-disabled:active {
 .camera-op{
     opacity: 0.7;
 }
+/* CEP design code End */
