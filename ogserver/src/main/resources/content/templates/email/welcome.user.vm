@@ -3,20 +3,28 @@
 Dear $vdata.displayName,
 <br/>
 <br/>
-We would like to thank you for your interest in MyGubbi.com. It brings us great joy in serving your home decor needs to help you bring you stylish interiors.<br/>
-<br/>
-To make the process of beautifying your home easy, we have created an account for you on our CRM/CEP portal. Here you would be able to access all documents pertaining to the project. You can seamlessly view, download and upload the documents related to your home decor project.<br/>
-The login credentials of the same are given below for your perusal.
+Thank you for choosing MyGubbi for your home décor and furnishing solutions requirement! We are excited about partnering with you and bringing stylish interiors to your dream home.
 <br/>
 <br/>
-<b>Login ID </b>- $vdata.email
+To make the process of beautifying your home easy, we would like to introduce you to our customer portal, wherein you can have access to all documents about the project. On this portal you can view, download and upload all documents related to this home decor project!
+<br/><br/>
+Please find below the username and password to log in to our customer portal.<br/><br/>
+<b>Login ID</b> - $vdata.email
+<br/>
+<b>Password</b> - mygubbi
 <br/>
 <br/>
-<b>Password </b> - mygubbi
+Want to know more about how this portal is useful for you?
 <br/>
 <br/>
-For any assistance on understanding how this portal is useful for you, call us on 8884442459.
+Please feel free to call us on 8884442459 and we would be glad to help!
 <br/>
 <br/>
+Thank you once again for choosing us and we are excited to be working with you.
+<br/>
+<br/>
+Best Regards,
+<br/>
+MyGubbi Team.
 </body>
 </html>
