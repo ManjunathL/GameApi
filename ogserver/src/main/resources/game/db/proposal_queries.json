@@ -624,7 +624,7 @@
       "id": "addons.product.subtypes",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct productSubTypeCode from addon_master where categoryCode = ? and productCategoryCode = ?",
+      "query": "select distinct productSubTypeCode from addon_master where categoryCode = ? and productTypeCode = ?",
       "params": ["categoryCode", "productTypeCode"]
     },
     {
