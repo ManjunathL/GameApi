@@ -84,6 +84,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     {
 
                         this.sendWelcomeEmail(eventData);
+                        sendToLeadSquared(jsonData);
                         this.acknowledger.done(eventData);
 
 
@@ -94,15 +95,9 @@ public class UserRegistrationProcessor implements DataProcessor
     private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-
-        String fName = jsonData.getString("displayName");
-        String email = jsonData.getString("email");
-        String testemail = "";
-        LOG.info(fName);
         String crmId = jsonData.getString("crmId");
         if(crmId.isEmpty()) {
-            sendToLeadSquared(jsonData);
-            EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
                     .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
                     .setBodyTemplate("email/welcome.websiteuser.vm").setSubjectTemplate("email/welcome.user.subject.vm");
             Integer id = LocalCache.getInstance().store(emailData);
@@ -110,6 +105,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     (AsyncResult<Message<Integer>> result) -> {
 
                         if (result.succeeded()) {
+                            LOG.info("sent Mail");
                             this.acknowledger.done(eventData);
                         } else {
 
@@ -119,8 +115,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     });
         }
         else{
-            sendToLeadSquared(jsonData);
-            EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
                     .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
                     .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
             Integer id = LocalCache.getInstance().store(emailData);
@@ -128,6 +123,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     (AsyncResult<Message<Integer>> result) -> {
 
                         if (result.succeeded()) {
+                            LOG.info("sent Mail");
                             this.acknowledger.done(eventData);
                         } else {
 
