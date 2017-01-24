@@ -552,7 +552,7 @@
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1484549324/completed_projects/banner-page.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 650px;
+    min-height: 680px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -566,7 +566,7 @@
     text-align: center;
 }
 .comp-project-head {
-     background: rgba(241, 90, 34, 0.6);
+     background: rgba(241, 90, 34, 0.7);
      padding: 0px 20px 15px;
      margin-top: 50%;
      color: #fff;

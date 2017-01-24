@@ -15,6 +15,7 @@ require.config({
         cloudinary_jquery: 'libs/cloudinary-jquery.mg',
         unveil: 'libs/unveil/jquery.unveil.mg',
         zepto: 'libs/zepto-full/zepto.min',
+        /*fresco: 'libs/frescojs-light/js/fresco/fresco',*/
         jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
         highlight: 'libs/highlight/highlight',
         timepicker: 'libs/jquery.ui.timepicker/jquery.ui.timepicker',
@@ -51,6 +52,10 @@ require.config({
             deps: ['jquery'],
             exports: 'zepto'
         }
+/*        'fresco': {
+            deps: ['jquery'],
+            exports: 'fresco'
+        }*/
     },
     map: {
         '*': {
