@@ -73,19 +73,10 @@ public class ApiServerVerticle extends AbstractVerticle
                 boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
                 boolean httpScheme = ("http").equals(httpHost.getSchemeName());
                 //boolean httpsScheme = ("https").equals(httpHost.getSchemeName());
-                if (hostNameIsNaked)
-                {
-                    if (hostNameIsNaked) hostName = "www." + hostName;
-                    URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
-                    url = newUri.toString();
-                    LOG.info("Rewriting if doesn't starts with www", url);
-                    LOG.info("URL " + url + " rewritten as :" + newUri.toString());
-                }
-                else
-                {
-                    LOG.info("if starts with www ", url);
-                    url = httpsRedirectUrl;
-                }
+                if (hostNameIsNaked) hostName = "www." + hostName;
+                URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
+                url = newUri.toString();
+                LOG.info("URL " + url + " rewritten as :" + newUri.toString());
             }
             catch (URISyntaxException e)
             {
