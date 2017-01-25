@@ -3298,6 +3298,14 @@ ul.social-buttons li a:active {
 /* End Payment Page */
 
 /* Start Career Page */
+.more {
+  display: none;
+}
+a.showLink,
+a.hideLink {
+  text-decoration: none;
+  color: #f1591f;
+}
 
 .career-bg{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1476333128/career/career_bg.jpg");

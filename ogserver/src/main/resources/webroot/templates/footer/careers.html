@@ -92,10 +92,18 @@
                                                 <div class="panel-heading"> Senior Interior Designer </div>
                                                 <div class="panel-body">
                                                     <p>
-                                                        He/ She will be responsible for developing, managing and recording technical
-                                                        aspects of the project. They work closely with the project manager, design
-                                                        coordinators, and project teams on conceptual designs, presentations, design
-                                                        development, and production.
+                                                        He/ She will be responsible for developing, managing and recording technical aspects of the project.
+                                                        <a href="#" id="example-show" class="showLink" onclick="showHide('example');return false;"> More. </a>
+
+
+
+                                                    <span id="example" class="more">
+
+                                                            They work closely with the project manager, design coordinators, and
+                                                            project teams on conceptual designs, presentations, design development, and production.
+                                                            <a href="#" id="example-hide" class="hideLink" onclick="showHide('example');return false;">
+                                                                Less.</a>
+                                                    </span>
                                                     </p>
                                                 </div>
                                                 <div class="panel-footer">
@@ -164,10 +172,18 @@
                                             <div class="panel panel-default panel-career">
                                                 <div class="panel-heading"> 3D Visualizer </div>
                                                 <div class="panel-body">
-                                                    <P>
-                                                        In-house interior, proficient in working with Auto desk 3D Studio Max,
-                                                        V-ray,and Adobe Photoshop. Modeling, Texturing, Lighting, and Rendering.
-                                                        Should have experience on working for high end interior designs.
+                                                    <p>
+                                                        In-house interior, proficient in working with Auto desk 3D Studio Max, V-ray,and Adobe Photoshop.
+                                                        <a href="#" id="exp-show" class="showLink" onclick="showHide('exp');return false;"> More. </a>
+
+
+
+                                                    <span id="exp" class="more">
+                                                        They work closely with the project manager, design coordinators, and
+                                                        project teams on conceptual designs, presentations, design development, and production.
+                                                        <a href="#" id="exp-hide" class="hideLink" onclick="showHide('exp');return false;">
+                                                            Less.</a>
+                                                    </span>
                                                     </p>
                                                 </div>
                                                 <div class="panel-footer">
@@ -249,9 +265,15 @@
                                                 <div class="panel-body">
                                                     <p>
                                                         Have minimum 2 years of sales experience (interior industry preferred).
+                                                        <a href="#" id="exp2-show" class="showLink" onclick="showHide('exp2');return false;"> More. </a>
+
+                                                    <span id="exp2" class="more">
                                                         Be able to generate leads through internal & external references, cold calls,
                                                         and meet customers to understand more about their interior requirement and meet
                                                         developers, architects, PMC etc to get the business.
+                                                        <a href="#" id="exp2-hide" class="hideLink" onclick="showHide('exp2');return false;">
+                                                            Less.</a>
+                                                    </span>
                                                     </p>
                                                 </div>
                                                 <div class="panel-footer">
@@ -390,12 +412,21 @@
                                                 <div class="panel-heading"> Zonal Head – Pune </div>
                                                 <div class="panel-body">
                                                     <p>
+
+                                                    </p>
+                                                    <p>
                                                         Achieves regional sales operational objectives by contributing regional sales
-                                                        information and recommendations to strategic plans and reviews; preparing and
-                                                        completing action plans; implementing production, productivity, quality, and
+                                                        information and recommendations to strategic plans and reviews;
+                                                        <a href="#" id="exp3-show" class="showLink" onclick="showHide('exp3');return false;"> More. </a>
+
+                                                    <span id="exp3" class="more">
+                                                         preparing and completing action plans; implementing production, productivity, quality, and
                                                         customer-service standards; resolving problems;  identifying trends; determining
                                                         regional sales system improvements; implementing change. Meets regional sales
                                                         financial objectives by forecasting requirements; preparing an annual budget; etc.
+                                                        <a href="#" id="exp3-hide" class="hideLink" onclick="showHide('exp3');return false;">
+                                                            Less.</a>
+                                                    </span>
                                                     </p>
                                                 </div>
                                                 <div class="panel-footer">
@@ -549,3 +580,20 @@
     <!-- End career culture -->
 
 </section>
+
+<script language="javascript" type="text/javascript">
+function showHide(shID) {
+   if (document.getElementById(shID)) {
+      if (document.getElementById(shID+'-show').style.display != 'none') {
+         document.getElementById(shID+'-show').style.display = 'none';
+         document.getElementById(shID).style.display = 'block';
+      }
+      else {
+         document.getElementById(shID+'-show').style.display = 'inline';
+         document.getElementById(shID).style.display = 'none';
+      }
+   }
+}
+</script>
+
+
