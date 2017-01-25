@@ -552,7 +552,7 @@
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1484549324/completed_projects/banner-page.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 680px;
+    min-height: 740px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -576,6 +576,21 @@
     font-weight: 300;
     color: #fff;
     border-bottom: 1px solid #ffffff;
+}
+
+.pbCaptionText {
+    font-size: 1.9em !important;
+}
+.pbWrapper > *, .pbHide .pbWrapper > .prepare{
+    border-radius: 0px !important;
+}
+.pbThumbs li.active a img {
+    border-color: #f1591f !important;
+}
+
+#pbPrevBtn b:before,
+#pbNextBtn b:after{
+    font-size: 10em !important;
 }
 
 /* Completed Project Section End */
