@@ -141,9 +141,9 @@
                                                onclick="window.open('https://plus.google.com/share?url=<%=share_url%>', '', 'width=585,height=368')"
                                                class="share-popup11 social-menu-lnk"><i class="fa fa-google-plus-square font-size22"></i></a>
                                         </li>
-                                        <li>
+                                        <li class="hidden-lg hidden-md">
                                             <% var whatsappmessage = encodeURIComponent(share_title)+" - "+encodeURIComponent(share_url); %>
-                                            <a href="whatsapp://send?text=<%= whatsappmessage %>" data-action="share/whatsapp/share">Share via Whatsapp</a>
+                                            <a href="whatsapp://send?text=<%= whatsappmessage %>" data-action="share/whatsapp/share"><i class="fa fa-whatsapp font-size22" aria-hidden="true"></i></a>
                                         </li>
                                     </ul>
                                 </div>
