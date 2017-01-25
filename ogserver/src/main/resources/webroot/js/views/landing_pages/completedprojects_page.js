@@ -1,6 +1,7 @@
 /**
  * Created by mygubbi on 01/07/16.
- */
+**/
+
 define([
     'jquery',
     'underscore',
@@ -12,7 +13,7 @@ define([
     'consultutil',
     'collections/stories',
     'text!templates/story/home_story.html',
-    'analytics'
+    'analytics',
 ], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Stories, blogPageTemplate, Analytics) {
     var CompletedProjectsPageVIew = Backbone.View.extend({
         el: '.page',
