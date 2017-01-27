@@ -58,6 +58,16 @@
         "name": "Chest of Drawer",
         "id": "chestofdrawer",
         "code": "chestofdrawer"
+      },
+      {
+        "name": "Dresser",
+        "id": "dresser",
+        "code": "dresser"
+      },
+      {
+        "name": "Console Table",
+        "id": "consoletable",
+        "code": "consoletable"
       }
     ]
   },

@@ -29,6 +29,8 @@ define([
             'buy-chest-of-drawers-online(/)': 'chestofDrawerB',
             'kitchen-cabinet-design(/)': 'kitchens',
             'storage-solutions(/)': 'livingDining',
+            'console-tables(/)': 'consoletables',
+            'dressers(/)': 'dressers',
 
 //            'living-and-dining-room-designs(/)': 'livingDining',
 //            'wardrobe-designs-online(/)': 'bedroom',
@@ -73,6 +75,8 @@ define([
             'buy-chest-of-drawers-:cityName(/)': 'chestofDrawerB',
             'modular-kitchen-cabinet-:cityName(/)': 'kitchens',
             'storage-solutions-:cityName(/)': 'livingDining',
+            'console-table-:cityName(/)': 'consoletables',
+            'dressers-:cityName(/)': 'dressers',
             //'wardrobes-online-:cityName(/)': 'bedroom',
             /* End of enhancment of SEO City URL */
             /* End Dynamic City Url SEO -- Mehbub */
@@ -391,6 +395,18 @@ define([
                                     cityName = "website";
                                 }
                 routeSubCategory('Chest of Drawer', 'living & dining', cityName);
+            });
+            router.on('route:consoletables', function(cityName){
+             if((cityName == null) || (cityName == "") ){
+                                    cityName = "website";
+                                }
+                routeSubCategory('Console Table', 'living & dining', cityName);
+            });
+            router.on('route:dressers', function(cityName){
+             if((cityName == null) || (cityName == "") ){
+                                    cityName = "website";
+                                }
+                routeSubCategory('Dresser', 'living & dining', cityName);
             });
             router.on('route:kitchens', function(cityName){
              if((cityName == null) || (cityName == "") ){
