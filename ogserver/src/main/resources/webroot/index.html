@@ -68,8 +68,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- End Google Tag Manager -->
     <script type="text/javascript">
     window.onload = function(){
-    if(window.location.toString().indexOf("faq-shipping") || window.location.toString().indexOf("faq-warranty") || window.location.toString().indexOf("faq-returns") ){
-    document.getElementById("link").href = "faq";
+    if(window.location.toString().indexOf("faq-shipping") > -1 || window.location.toString().indexOf("faq-returns") > -1 || window.location.toString().indexOf("faq-warranty") > -1){
+    document.getElementById("link").href = "https://www.mygubbi.com/faq";
     }
     else{
     document.getElementById("link").href = window.location.toString();
