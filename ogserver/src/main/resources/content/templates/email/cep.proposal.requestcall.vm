@@ -1,0 +1,14 @@
+<html>
+
+<body>
+Hi,
+
+<br/><br/>
+This is to inform you that $vdata.customerName has requested you to get in touch with them. Kindly do the needful and call them back on the following number $vdata.customerPhone @ $vdata.scheduleTime<br/><br/>
+
+Thanks & Regards,<br/>
+ MyGubbi Team <br/>
+
+
+</body>
+</html>

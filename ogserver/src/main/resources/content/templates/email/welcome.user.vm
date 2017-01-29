@@ -1,25 +1,30 @@
 <html>
-
 <body>
-A HEARTY WELCOME
+Dear $vdata.displayName,
+<br/>
+<br/>
+Thank you for choosing MyGubbi for your home decor and furnishing solutions requirement! We are excited about partnering with you and bringing stylish interiors to your dream home.
+<br/>
+<br/>
+To make the process of beautifying your home easy, we would like to introduce you to our customer portal, wherein you can have access to all documents about the project. On this portal you can view, download and upload all documents related to this home decor project!
 <br/><br/>
-We are thrilled to get connected with you, and are immensely excited to decorate your homes.
-<br/><br/>
-
-Let's quickly familiarize you with Mygubbi.
-<br/><br/>
-
-"One stop destination for complete Home Interior Solutions."
-<br/><br/>
-
-Mygubbi accomplishes the aspirations of all the customers, who are looking for visually appealing homes. From fixed modular interior solutions to loose furniture, Mygubbi is the best place to get personalized products crafted exclusively for you.
-<br/><br/>
-
-Visit our website at Mygubbi.com, and check out our delectably designed products. Be the first one to know the latest updates on all items and ongoing discounts, subscribe to our newsletter.
-<br/><br/>
-
-Our consultants will get in touch with you at the earliest, alternatively you can call Thirtha at 8088 860 860 to know more about services and offers.
-<br/><br/>
-
+Please find below the username and password to log in to our customer portal.<br/><br/>
+<b>Login ID</b> - $vdata.email
+<br/>
+<b>Password</b> - mygubbi
+<br/>
+<br/>
+Want to know more about how this portal is useful for you?
+<br/>
+<br/>
+Please feel free to call us on 8884442459 and we would be glad to help!
+<br/>
+<br/>
+Thank you once again for choosing us and we are excited to be working with you.
+<br/>
+<br/>
+Best Regards,
+<br/>
+MyGubbi Team.
 </body>
 </html>

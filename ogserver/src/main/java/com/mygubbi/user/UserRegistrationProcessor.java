@@ -68,11 +68,14 @@ public class UserRegistrationProcessor implements DataProcessor
         LOG.info("Mehbub" +jsonData.encodePrettily());
         JsonObject userJson = new JsonObject().put("crmId", jsonData.getString("crmId")).put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
         LOG.info("Mehbub USER" +userJson.encodePrettily());
+        this.sendWelcomeEmail(eventData);
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> res) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(res.result().body());
+                   LOG.info(resultData);
+                   LOG.info(resultData.toString());
                     if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
                     {
                         this.acknowledger.failed(eventData, "User could not be recorded in database.");
@@ -80,7 +83,11 @@ public class UserRegistrationProcessor implements DataProcessor
                     else
                     {
 
-                       // this.sendWelcomeEmail(eventData);
+                        this.sendWelcomeEmail(eventData);
+                        sendToLeadSquared(jsonData);
+                        this.acknowledger.done(eventData);
+
+
                     }
                 });
     }
@@ -88,25 +95,43 @@ public class UserRegistrationProcessor implements DataProcessor
     private void sendWelcomeEmail(EventData eventData)
     {
         JsonObject jsonData = eventData.getJsonData();
-        sendToLeadSquared(jsonData);
-        EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail(jsonData.getString("email"))
-                .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
-                .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
-        Integer id = LocalCache.getInstance().store(emailData);
-        VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
-                (AsyncResult<Message<Integer>> result) -> {
+        String crmId = jsonData.getString("crmId");
+        if(crmId.isEmpty()) {
+            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+                    .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
+                    .setBodyTemplate("email/welcome.websiteuser.vm").setSubjectTemplate("email/welcome.user.subject.vm");
+            Integer id = LocalCache.getInstance().store(emailData);
+            VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
+                    (AsyncResult<Message<Integer>> result) -> {
 
-                    if (result.succeeded())
-                    {
-                        this.acknowledger.done(eventData);
-                    }
-                    else
-                    {
+                        if (result.succeeded()) {
+                            LOG.info("sent Mail");
+                            this.acknowledger.done(eventData);
+                        } else {
 
-                        LOG.info("USER RESGISTRATION PROCESS ERROR");
-                        this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
-                    }
-                });
+                            LOG.info("USER RESGISTRATION PROCESS ERROR");
+                            this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
+                        }
+                    });
+        }
+        else{
+            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+                    .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
+                    .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
+            Integer id = LocalCache.getInstance().store(emailData);
+            VertxInstance.get().eventBus().send(EmailService.SEND_EMAIL, id,
+                    (AsyncResult<Message<Integer>> result) -> {
+
+                        if (result.succeeded()) {
+                            LOG.info("sent Mail");
+                            this.acknowledger.done(eventData);
+                        } else {
+
+                            LOG.info("USER RESGISTRATION PROCESS ERROR");
+                            this.acknowledger.failed(eventData, "Error in sending welcome email to user.");
+                        }
+                    });
+        }
     }
     private void sendToLeadSquared(JsonObject requestJson){
 
@@ -161,6 +186,7 @@ public class UserRegistrationProcessor implements DataProcessor
             e.printStackTrace();
         };
 
+        return;
 
     }
 }
