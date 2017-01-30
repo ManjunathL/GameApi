@@ -2873,15 +2873,16 @@ ul.social-buttons li a:active {
 }
 
 .nri-banner-cnt{
-    padding: 30px;
+    padding: 20px 20px 5px;
     color: #ffffff;
     background: rgba(234,97,15,0.7);
-    padding-bottom: 42px;
 }
+
 .nri-banner-cnt h1{
     font-weight: 300;
     margin-bottom: 30px;
 }
+
 .nri-banner-cnt p{
     margin-bottom: 30px;
 }
@@ -2947,11 +2948,14 @@ ul.social-buttons li a:active {
 
 .nri-description-section h4{
     font-size: 14px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .nri-description-section p{
     font-size: 12px;
     padding: 10px 10px 0px;
+    line-height: 160%;
 }
 
 .manufacturing-box{
@@ -2959,8 +2963,8 @@ ul.social-buttons li a:active {
 }
 
 .img-manufacturing{
-    padding: 10px 0px 0px;
-    width: 80px;
+    padding: 7px 0px 0px;
+    width: 65px;
 }
 
 .nri-why-us-section{
