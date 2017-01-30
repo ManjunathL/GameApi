@@ -28,8 +28,7 @@
                     <ul class="breadcrumb">
                         <li><a href="/"><i class="fa fa-home"></i></a></li>
                         <% var city = filter.location; %>
-                        <%= console.log("++++++city++++") %>
-                        <%= console.log(city) %>
+
                         <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
                         <li class="active"><a href="javascript:void(0);"><span
                                 class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
@@ -81,8 +80,11 @@
                         <% } %>
                         <% if(city == 'website' ){ %>
                         <% var city = '' } %>
+                        <%= console.log(filter.selectedSubCategoryName) %>
                         <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
-                        null){ %>
+                        null && filter.selectedSubCategoryName != "Wardrobe"){ %>
+                        <%= console.log("Am in") %>
+
                         <li class="active">
                             <a href="" id="breadcrum-link"><span class="li-txt-wrap" style="cursor: pointer;"><%= filter.selectedSubCategoryName %> <% if(city != '') { %> - <%= city %> <% } %></span></a></li>
                         <% } %>
