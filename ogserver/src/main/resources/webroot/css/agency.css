@@ -548,11 +548,12 @@
 /* Experience Center Section End */
 
 /* Completed Project Section */
+
 .c-project-description{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1484549324/completed_projects/banner-page.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1485354677/completed_projects/Desktop_banner.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 680px;
+    min-height: 740px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -576,6 +577,57 @@
     font-weight: 300;
     color: #fff;
     border-bottom: 1px solid #ffffff;
+}
+
+.txt-over-completed-project-image {
+    position: absolute;
+    top: 48%;
+    left: 5%;
+}
+.txt-over-completed-project-img {
+    position: absolute;
+    top: 25%;
+    left: 5%;
+}
+.txt-over-completed-project-img div {
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+}
+.txt-over-completed-project-image div {
+    width: 45%;
+    background: rgba(0,0,0,0.6);
+}
+.txt-over-completed-project-img div p,
+.txt-over-completed-project-image div p{
+    padding: 20px;
+    font-weight: 300;
+    color:#fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 130%;
+}
+.picture-prfct{
+    background:none!important;
+}
+.picture-prfct p{
+    padding-left:0px!important;
+}
+.explore-space2 {
+    margin-left: 195px !important;
+}
+
+.pbCaptionText {
+    font-size: 1.9em !important;
+}
+.pbWrapper > *, .pbHide .pbWrapper > .prepare{
+    border-radius: 0px !important;
+}
+.pbThumbs li.active a img {
+    border-color: #f1591f !important;
+}
+
+#pbPrevBtn b:before,
+#pbNextBtn b:after{
+    font-size: 10em !important;
 }
 
 /* Completed Project Section End */
