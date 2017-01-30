@@ -144,16 +144,16 @@ public class CrmOutboundApiHandler extends AbstractRouteHandler {
         String file_ext = context.request().getParam("file_ext");
         String file_name = context.request().getParam("file_name");
 
-        try {
-            String updateDocument = new CrmApiClient().updateDocument(parentId, parentType, category, user_id, file_contents, file_ext, file_name);
-            if (updateDocument == null || updateDocument.isEmpty()) {
-                sendJsonResponse(context, "[]");
-            } else {
-                sendJsonResponse(context, updateDocument);
-            }
-        } catch (Exception e) {
-            sendError(context, "No Documents Found : ");
-        }
+//        try {
+//            String updateDocument = new CrmApiClient().updateDocument(parentId, parentType, category, user_id, file_contents, file_ext, file_name);
+//            if (updateDocument == null || updateDocument.isEmpty()) {
+//                sendJsonResponse(context, "[]");
+//            } else {
+//                sendJsonResponse(context, updateDocument);
+//            }
+//        } catch (Exception e) {
+//            sendError(context, "No Documents Found : ");
+//        }
     }
     private void updateTask(RoutingContext context) {
         String parentId = context.request().getParam("parentId");
