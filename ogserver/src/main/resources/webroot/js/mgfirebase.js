@@ -1,14 +1,16 @@
 define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebase, _, backbone, LS) {
 
     // Initialize Firebase
-     var config = {
+     /*var config = {
        apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
        authDomain: "mygubbi-uat.firebaseapp.com",
        databaseURL: "https://mygubbi-uat.firebaseio.com/",
        storageBucket: "mygubbi-uat.appspot.com",
        messagingSenderId: "106892346704"
-     };
-     firebase.initializeApp(config);
+     };*/
+     firebase.initializeApp(fbaseconfig);
+
+    console.log(fbaseconfig.databaseURL);
 
      var rootRef = firebase.database().ref();
      var refAuth = firebase.auth();

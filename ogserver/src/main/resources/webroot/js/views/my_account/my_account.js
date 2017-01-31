@@ -115,9 +115,9 @@ define([
 
             MGF.mynest(authData,this.renderWithUserProjectCallback);
 
-            setTimeout(
+            /*setTimeout(
                 $('.page').append("<img id='loadico' src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>")
-            , 2000);
+            , 2000);*/
 
             var that = this;
             var mynestProf = authData.email;
@@ -140,7 +140,7 @@ define([
             var newProf = that.mynests;
             newProf = newProf.toJSON();
 
-            $("#loadico").hide();
+            //$("#loadico").hide();
         },
         initialize: function () {
             this.myaccount = new MyAccount();
@@ -182,7 +182,7 @@ define([
 
             var that = this;
             MGF.updateProfile(formData).then(function () {
-                that.render()
+                that.render();
             });
 
         },
@@ -200,7 +200,7 @@ define([
 
             var that = this;
             MGF.updatePropertyDetails(formData).then(function () {
-                that.render()
+                that.render();
             });
 
         },
