@@ -29,10 +29,6 @@
         "instances": 10
       },
       {
-        "name": "com.mygubbi.si.firebase.FirebaseService",
-        "instances": 1
-      },
-      {
         "name": "com.mygubbi.catalog.ProductManagementService",
         "instances": 1
       },
