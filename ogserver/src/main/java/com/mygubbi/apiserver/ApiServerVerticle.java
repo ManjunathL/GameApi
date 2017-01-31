@@ -85,7 +85,7 @@ public class ApiServerVerticle extends AbstractVerticle
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
         });
-        this.setupRedirectHandlerForOldUrls(router);
+       // this.setupRedirectHandlerForOldUrls(router);
         int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
         server.requestHandler(router::accept).listen(httpPort);
     }
@@ -97,7 +97,7 @@ public class ApiServerVerticle extends AbstractVerticle
         this.setupApiHandler(router);
         this.setupNakedDomainRouter(router);
         this.setupRedirectHandlerForShopifyUrls(router);
-        this.setupRedirectHandlerForOldUrls(router);
+      //  this.setupRedirectHandlerForOldUrls(router);
         this.setupPrerenderHandler(router);
         this.setupStaticConfigHandler(router);
         this.setupStaticHandler(router);
