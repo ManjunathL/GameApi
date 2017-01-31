@@ -51,10 +51,6 @@ require.config({
             deps: ['jquery'],
             exports: 'zepto'
         }
-/*        'fresco': {
-            deps: ['jquery'],
-            exports: 'fresco'
-        }*/
     },
     map: {
         '*': {
