@@ -1,15 +1,21 @@
 {
   "version": "0.0.0a",
 
+//  "jdbc": {
+//    "driver_class": "com.mysql.jdbc.Driver",
+//    "url": "jdbc:mysql://localhost/game",
+//    "max_pool_size": 20,
+//    "user": "root",
+//    "password": "root"
+//  },
+
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/game",
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
     "max_pool_size": 20,
-    "user": "root",
-    "password": "root"
+    "user": "admin",
+    "password": "OG$#gubi32"
   },
-
-
   "urlwithssl": "",
 
   "firebase": {},
@@ -29,12 +35,12 @@
   "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
   "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
-  "ratecard_file": "d:/tmp/ratecard.bin",
+  "ratecard_file": "e:/ratecard.bin",
 
   "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
 
-  "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
-  "fbUrl": "https://mygubbi-cep.firebaseio.com",
+  "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
+  "fbUrl": "https://mygubbi.firebaseio.com",
   "processfbEvents": true
 
 
