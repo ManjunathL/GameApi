@@ -7,7 +7,7 @@ define([
     'backbone'
 ], function($, Backbone) {
     var MyNest = Backbone.Model.extend({
-        urlRoot:'https://gameuat.mygubbi.com:1444' + '/gapi/outboundCrm/getOpportunityDetails',
+        urlRoot:'https://game.mygubbi.com:1446' + '/gapi/outboundCrm/getOpportunityDetails',
         defaults: {
           emailId: ''
         }

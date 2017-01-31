@@ -4,7 +4,7 @@ define([
     'underscore'
 ], function($, Backbone, _) {
     var MyNest = Backbone.Collection.extend({
-        url: 'https://gameuat.mygubbi.com:1444' + '/gapi/outboundCrm/getOpportunityDetails'
+        url: 'https://game.mygubbi.com:1446' + '/gapi/outboundCrm/getOpportunityDetails'
     });
     return MyNest;
 });
