@@ -8,6 +8,13 @@
       {
         "name": "com.mygubbi.db.DatabaseService",
         "instances": 10
+      },
+      {
+        "name": "com.mygubbi.si.firebase.FirebaseDataService"
+      },
+
+      {
+        "name": "com.mygubbi.si.firebase.FirebaseService"
       }
     ],
     "parallel": [

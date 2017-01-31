@@ -26,6 +26,13 @@
         "name": "com.mygubbi.search.SearchService"
       },
       {
+        "name": "com.mygubbi.si.firebase.FirebaseDataService"
+      },
+
+      {
+        "name": "com.mygubbi.si.firebase.FirebaseService"
+      },
+      {
         "name": "com.mygubbi.catalog.ProductManagementService"
       }
 
