@@ -1,6 +1,6 @@
 <div class="bg-white">
 
-    <section class="nri-banner-section">
+    <section class="nri-banner-section" id="nri-form">
         <div class="container">
             <div class="row">
                 <div class="col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10">
@@ -28,18 +28,18 @@
                                         <input type='text' class="form-control" id='EmailAddress' name='EmailAddress' placeholder="Email*" maxlength='100' value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom10 form-group">
+                                        <div class="col-sm-6 col-md-6 col-lg-6  margin-bottom10 form-group">
                                             <input type='text' class="form-control" id='mx_countrycode' placeholder="Country Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
                                         </div>
-                                        <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom10 form-group">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 margin-bottom10 form-group">
                                             <input type='text' class="form-control" id='Phone' name='Phone' placeholder="Phone Number*" maxlength='20' value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
                                         </div>
                                     </div>
                                     <div class="margin-bottom10 form-group">
-                                        <input type='text' class="form-control" id='mx_City' name='mx_City' placeholder="City*" maxlength='50' value='' autocomplete='off' required='required'/>
+                                        <input type='text' class="form-control" id='mx_City' name='mx_City' placeholder="Current City*" maxlength='50' value='' autocomplete='off' required='required'/>
                                     </div>
                                     <div class="margin-bottom10 form-group">
-                                        <input type='text' class="form-control" id='mx_Street2' name='mx_Street2' placeholder="Property Name" maxlength='256' value='' autocomplete='off'/>
+                                        <input type='text' class="form-control" id='mx_Street2' name='mx_Street2' placeholder="City where the property is located*" maxlength='256' value='' autocomplete='off'/>
                                     </div>
                                     <div class="margin-bottom10 form-group">
                                         <input type='file' class="form-control" id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off'/>
@@ -47,7 +47,7 @@
                                         <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan'/>
                                     </div>
                                     <div class="margin-bottom10 form-group">
-                                        <button class="btn btn-block btn-nri" id="form-submit-button" type="submit"> CONSULT </button>
+                                        <button class="btn btn-block btn-nri" id="form-submit-button" type="submit"> Enquire Now </button>
                                         <input type="hidden" name="MXHOrgCode" value="9814"/>
                                         <input type="hidden" name="MXHLandingPageId" value="8d7bb83a-0c47-11e6-b61b-22000aa8e760"/>
                                         <input type="hidden" name="MXHFormBehaviour" value="1"/>
@@ -133,6 +133,11 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt40 text-center">
+                    <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -167,6 +172,11 @@
                         <img class="img-responsive img-centered img-nri-why" src="https://res.cloudinary.com/mygubbi/image/upload/v1477388328/nri_page/across-cities.png" alt="across cities">
                         <h4> Across 4 Cities </h4>
                         <p> Present in 4 leading cities across India. </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt40 text-center">
+                        <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
                     </div>
                 </div>
             </div>
@@ -213,6 +223,11 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt20 mb20 text-center">
+                    <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -244,6 +259,11 @@
                         <div class="col-xs-3"></div>
                         <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
                             <img class="cld-responsive width100 padding-bottom10" src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/v1473332622/brand/Merino.jpg" alt="Consultation & Planning">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt40 text-center">
+                            <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
                         </div>
                     </div>
                 </div>
