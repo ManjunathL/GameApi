@@ -5,6 +5,7 @@ var fbaseRootUrl = "https://mygubbi-uat.firebaseio.com/";
 var applyAnalytics = false;
 var appendRobotsNoFollow = true;
 
+// Initialize Firebase
 var fbaseconfig = {
    apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
    authDomain: "mygubbi-uat.firebaseapp.com",
@@ -12,3 +13,4 @@ var fbaseconfig = {
    storageBucket: "mygubbi-uat.appspot.com",
    messagingSenderId: "106892346704"
  };
+

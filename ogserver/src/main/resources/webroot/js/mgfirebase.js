@@ -1,13 +1,6 @@
 define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebase, _, backbone, LS) {
 
     // Initialize Firebase
-     /*var config = {
-       apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
-       authDomain: "mygubbi-uat.firebaseapp.com",
-       databaseURL: "https://mygubbi-uat.firebaseio.com/",
-       storageBucket: "mygubbi-uat.appspot.com",
-       messagingSenderId: "106892346704"
-     };*/
      firebase.initializeApp(fbaseconfig);
 
     console.log(fbaseconfig.databaseURL);
@@ -283,41 +276,50 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
             console.log(authData);
             var that = this;
             var mynestitems = null;
-            //var authData = this.refAuth.currentUser;
-             var projRef = that.rootRef.child("projects/" + authData.uid+"/myNest");
-             var projectDetails = null;
 
-             projRef.on("value", function(snapshot) {
-                 if (snapshot.exists()) {
-                 console.log("--------project details--------");
-                 console.log(authData);
-                     that.projectDetails = snapshot.val();
-                     var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
+            if(authData){
+                var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
+                var userProfile = null;
+                var providerId = authData.providerData[0].providerId;
 
-                     var userProfile = null;
+                userProfileRef.on("value", function(snapshot) {
+                    if (snapshot.exists()) {
+                        that.userProfile = snapshot.val();
+                    }
 
-                     userProfileRef.on("value", function(snapshots) {
-                         if (snapshots.exists()) {
-                             that.userProfile = snapshots.val();
-                         }
-                         var providerId = authData.providerData[0].providerId;
-                         someFunc(that.userProfile,that.projectDetails, providerId);
+                   console.log(' ---------- userProfile-------------');
+                   console.log(that.userProfile.crmId);
+
+
+                   if(typeof(that.userProfile.crmId) !== 'undefined' && that.userProfile.crmId !== null){
+
+                        var projRef = that.rootRef.child("projects/" + authData.uid+"/myNest");
+                        var projectDetails = null;
+
+                        projRef.on("value", function(snapshot) {
+                           if (snapshot.exists()) {
+                           console.log("--------project details--------");
+                           console.log(authData);
+                               that.projectDetails = snapshot.val();
+                               var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
+
+                               var userProfile = null;
+
+                               userProfileRef.on("value", function(snapshots) {
+                                   if (snapshots.exists()) {
+                                       that.userProfile = snapshots.val();
+                                   }
+                                   var providerId = authData.providerData[0].providerId;
+                                   someFunc(that.userProfile,that.projectDetails, providerId);
+                                  });
+                           }
                         });
-                 }else{
-                    console.log("--------project details not exists--------");
-                    var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
-                    var userProfile = null;
-                    var providerId = authData.providerData[0].providerId;
 
-                    userProfileRef.on("value", function(snapshot) {
-                        if (snapshot.exists()) {
-                            that.userProfile = snapshot.val();
-                        }
-                        someFunc(that.userProfile,null, providerId);
-                       });
+                   }
 
-                 }
-             });
+                    someFunc(that.userProfile,null, providerId);
+                   });
+            }
 
         }
     };
