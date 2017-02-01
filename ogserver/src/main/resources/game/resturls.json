@@ -233,7 +233,7 @@
       "uri": "/gapi/proposal/addon.add",
       "source": "db",
       "query":"proposal.addon.add",
-      "params":["proposalId", "code","fromVersion","seq", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"],
+      "params":["proposalId", "code","fromVersion","seq", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"],
       "resultfields":[],
       "default": "[]"
     },

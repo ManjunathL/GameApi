@@ -1175,6 +1175,7 @@ public class QuotationPDFCreator
         int index = 1;
         for (ProductAddon addon : addOns)
         {
+            LOG.debug(addon.toString());
             this.createRowAndFillData(tabname,String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             index++;
         }

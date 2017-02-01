@@ -17,6 +17,7 @@ public class ProductAddon extends JsonObject
     private static final String CODE = "code";
     private static final String ADDON_CATEGORY_CODE = "categoryCode";
     private static final String PRODUCT_TYPE_CODE = "productTypeCode";
+    private static final String PRODUCT_SUBTYPE_CODE = "productSubtypeCode";
     private static final String BRAND_CODE = "brandCode";
     private static final String CATALOGUE_CODE = "catalogueCode";
     private static final String TITLE = "title";
@@ -102,6 +103,8 @@ public class ProductAddon extends JsonObject
 
     public String getProductTypeCode() { return this.getString(PRODUCT_TYPE_CODE);}
 
-    public String getExtendedTitle() { return this.getProductTypeCode() + "-" +this.getTitle();}
+    public String getProductSubtypeCode() { return this.getString(PRODUCT_SUBTYPE_CODE);}
+
+    public String getExtendedTitle() { return this.getProductTypeCode() + "-" + this.getProductSubtypeCode() + "-" +this.getTitle();}
 }
 
