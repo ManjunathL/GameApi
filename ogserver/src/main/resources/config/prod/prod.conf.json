@@ -11,7 +11,7 @@
     "fb_url": "https://mygubbi.firebaseio.com",
     "loginid": "mygubbi.fbase@gmail.com",
     "password": "!@#$VGYHasdf435",
-    "processEvents": true
+    "processEvents": false
   },
 
   "ssl_keystore": "ssl/mygubbi.jks",
