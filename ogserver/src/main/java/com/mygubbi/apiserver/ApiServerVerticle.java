@@ -96,7 +96,7 @@ public class ApiServerVerticle extends AbstractVerticle
 
         this.setupApiHandler(router);
         this.setupNakedDomainRouter(router);
-        //this.setupRedirectHandlerForShopifyUrls(router);
+        this.setupRedirectHandlerForShopifyUrls(router);
       //  this.setupRedirectHandlerForOldUrls(router);
         this.setupPrerenderHandler(router);
         this.setupStaticConfigHandler(router);
