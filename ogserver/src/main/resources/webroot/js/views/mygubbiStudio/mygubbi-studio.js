@@ -22,6 +22,7 @@ define([
             $.cloudinary.responsive();
         },
         render: function() {
+            document.getElementById("canlink").href = window.location.href;
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },

@@ -13,6 +13,7 @@ define([
         },
         ready: function() {
             $(function() {
+            document.getElementById("canlink").href = window.location.href;
                 var faded = true;
                 $(window).scroll(function() {
                     var duration = 300;

@@ -39,7 +39,12 @@ define([
             _.bindAll(this, 'clearShortlisted', 'markShortlisted', 'render');
         },
         render: function() {
-
+         if(window.location.href.indexOf("faq-shipping") > -1 || window.location.toString().indexOf("faq-returns") > -1 || window.location.toString().indexOf("faq-warranty") > -1){
+            document.getElementById("canlink").href = "https://www.mygubbi.com/faq";
+            }
+            else{
+            document.getElementById("canlink").href = window.location.href;
+            }
             var that = this;
 
             window.filter = that.filter;

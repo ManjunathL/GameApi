@@ -30,6 +30,7 @@ define([
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             this.getStories();
+            document.getElementById("canlink").href = window.location.href;
             this.ready();
         },
         getStories: function() {

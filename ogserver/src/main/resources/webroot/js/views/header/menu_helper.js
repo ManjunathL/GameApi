@@ -373,7 +373,12 @@ define([
 
             $(function() {
 
-
+                 if(window.location.href.indexOf("faq-shipping") > -1 || window.location.toString().indexOf("faq-returns") > -1 || window.location.toString().indexOf("faq-warranty") > -1){
+                    document.getElementById("canlink").href = "https://www.mygubbi.com/faq";
+                    }
+                    else{
+                    document.getElementById("canlink").href = window.location.href;
+                 }
                 $('#nav').find('li.gubbi-list-desk a').click(function () {
                     $('#nav').find('li.gubbi-list-desk a').removeClass('active');
                     $(this).addClass('active');

@@ -35,6 +35,7 @@ define([
             document.title = userProfData.displayName + ' | mygubbi';
         },
         render: function () {
+            document.getElementById("canlink").href = window.location.href;
             var authData = this.ref.getAuth();
             console.log(authData.uid);
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);

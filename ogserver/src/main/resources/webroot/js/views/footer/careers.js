@@ -8,6 +8,8 @@ define([
         el: '.page',
         render: function() {
             $(this.el).html(careerTemplate);
+            document.getElementById("canlink").href = window.location.href;
+
         }
     });
     return CareerView;

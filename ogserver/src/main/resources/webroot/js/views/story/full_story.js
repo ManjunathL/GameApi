@@ -23,7 +23,7 @@ define([
         render: function() {
 
             var that = this;
-
+            document.getElementById("canlink").href = window.location.href;
             var blog_name = that.model.name;
 
            blog_name = blog_name.replace(/-/g, ' ');
