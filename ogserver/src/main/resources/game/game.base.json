@@ -18,6 +18,9 @@
   },
   "urlwithssl": "",
 
+  "ssl_keystore": "ssl/mygubbiprod.jks",
+  "ssl_password": "0r@nge123$",
+
   "firebase": {},
 
   "cloudinary" :{},
@@ -41,7 +44,7 @@
 
   "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
   "fbUrl": "https://mygubbi.firebaseio.com",
-  "processfbEvents": true
-
+  "processfbEvents": true,
+  "acceptSSLCertificates": "true"
 
 }
