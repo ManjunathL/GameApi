@@ -21,7 +21,8 @@
     "password": "!@#$VGYHasdf435",
     "processEvents": false
   },
-
+  "ssl_keystore": "ssl/mygubbiprod.jks",
+  "ssl_password": "0r@nge123$",
   "apicache" : true,
   "shopifyredirect": true,
   "oldurlredirect": true,
@@ -29,7 +30,7 @@
   "staticConfigPath": "config/test/uat.config.js",
   "importsPath": "config/test/uat.imports.css",
   "alljs": "js/min.js",
-
+  "acceptSSLCertificates": "true",
   "robots.txt": "User-agent: *\nDisallow: /"
 
 }
