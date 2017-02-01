@@ -31,6 +31,7 @@ public class ProductModule extends JsonObject
 
     private static final String EXTCODE = "extCode";
     private static final String MGCODE = "mgCode";
+    private static final String MODULE_CATEGORY = "moduleCategory";
     private static final String IMAGE_PATH = "imagePath";
 
     private static final String CARCASS_CODE = "carcassCode";
@@ -40,6 +41,7 @@ public class ProductModule extends JsonObject
     private static final String AMOUNT = "amount";
     private static final String EXPOSED_SIDES = "expSides"; //None, Left, Right, Both
     private static final String EXPOSED_BOTTOM = "expBottom"; //Boolean Yes or No
+
 
     private static final String BOTH_EXPOSED = "Both";
     private static final String NONE_EXPOSED = "None";
@@ -129,6 +131,11 @@ public class ProductModule extends JsonObject
         return this.getString(MGCODE);
     }
 
+    public String getModuleCategory()
+    {
+        return this.getString(MODULE_CATEGORY);
+    }
+
     public String getImagePath()
     {
         return this.getString(IMAGE_PATH);
@@ -210,6 +217,12 @@ public class ProductModule extends JsonObject
     public ProductModule setMGCode(String code)
     {
         this.put(MGCODE, code);
+        return this;
+    }
+
+    public ProductModule setModuleCategory(String moduleCategory)
+    {
+        this.put(MODULE_CATEGORY, moduleCategory );
         return this;
     }
 
