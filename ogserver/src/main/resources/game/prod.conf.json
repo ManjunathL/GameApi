@@ -9,6 +9,9 @@
     "password": "myGubb!$$"
   },
 
+  "ssl_keystore": "ssl/mygubbiprod.jks",
+  "ssl_password": "0r@nge123$",
+
   "http_port" : 1445,
   "https_port" : 1446,
   "proposal_docs_folder" : "/mnt/game/proposal/",
@@ -21,7 +24,8 @@
 
   "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
   "fbUrl": "https://mygubbi.firebaseio.com",
-  "websiteHost": "www.mygubbi.com:8685",
+  "websiteHost": "localhost:8685",
+ // "websiteHost": "www.mygubbi.com:8685",
   "acceptSSLCertificates": "true",
   "processfbEvents": true
 

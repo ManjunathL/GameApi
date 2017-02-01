@@ -54,8 +54,8 @@ public class GameApiServerVerticle extends AbstractVerticle
 
     private void setupHttpSslServer(Router router)
     {
-        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
-        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
+        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/mygubbiprod.jks");
+        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "0r@nge123$");
         HttpServerOptions options = new HttpServerOptions()
                 .setKeyStoreOptions(new JksOptions().
                         setPath(ssl_keystore).
