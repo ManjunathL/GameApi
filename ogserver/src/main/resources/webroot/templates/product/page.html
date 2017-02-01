@@ -36,9 +36,6 @@
                         <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){
                         %>
                         <li>
-                            <%= console.log('testing City based category') %>
-                            <%= console.log(filter.selectedCategoryName) %>
-                            <%= console.log(city) %>
                             <% if(city == 'website'  && filter.selectedCategoryName == 'kitchen') { %>
                             <% var cityKitchen = 'kitchen-cabinet-design' %>
                             <% }else { %>
@@ -80,10 +77,8 @@
                         <% } %>
                         <% if(city == 'website' ){ %>
                         <% var city = '' } %>
-                        <%= console.log(filter.selectedSubCategoryName) %>
                         <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
                         null && filter.selectedSubCategoryName != "Wardrobe"){ %>
-                        <%= console.log("Am in") %>
 
                         <li class="active">
                             <a href="" id="breadcrum-link"><span class="li-txt-wrap" style="cursor: pointer;"><%= filter.selectedSubCategoryName %> <% if(city != '') { %> - <%= city %> <% } %></span></a></li>
@@ -1170,7 +1165,6 @@
       max: 600000,
       values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
       slide: function( event, ui ) {
-  console.log(ui.values[1]);
         $( "#amount3" ).val( "Rs " + ui.values[ 0 ] + " - Rs " + ui.values[ 1 ] );
       },
       change: function(event, ui) {

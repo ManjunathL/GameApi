@@ -89,11 +89,7 @@ define([
 
             Promise.all([getFilterMasterPromise, getCategoriesPromise, getProductsPromise, getcityDetailsPromise]).then(function() {
 
-                console.log(" ======= City Details =======");
-
                 if(typeof(that.seoFilterMaster) !== 'undefined' && typeof(that.seoFilterMaster.get(0)) !== 'undefined'){
-                 console.log("JSON TITLE");
-                 console.log(JSON.stringify(that.seoFilterMaster.get(0).title));
                     if (!(that.filter.get('metaKeyword'))) {
                         that.filter.set({
                             'metaKeyword': that.seoFilterMaster.get(0).meta_keywords
@@ -133,12 +129,6 @@ define([
                 if (categ === undefined || categ === '' || categ === null) {
                     categ = selectedCategories;
                 }
-                console.log("selectedCategories");
-                console.log(selectedCategories);
-                console.log("categ");
-                console.log(categ);
-                console.log("selectedCityName");
-                console.log(selectedCityName);
                 CategoryContent.apply(selectedCategories,selectedSubCategories,selectedCityName);
 
             }).catch(function(err) {
@@ -147,15 +137,10 @@ define([
 
         },
         getCityDetails: function(cityName){
-
-            console.log('------------- cityName ------------');
-            console.log(cityName);
             var that = this;
             var selectedCategoryName = that.filter.get('selectedCategoryName');
             var selectedSubCategoryName = that.filter.get('selectedSubCategoryName');
 
-            console.log("selectedSubCategoryName");
-            console.log(selectedSubCategoryName);
 
         return new Promise(function(resolve, reject) {
             if (!that.seoFilterMaster.get("location")) {
