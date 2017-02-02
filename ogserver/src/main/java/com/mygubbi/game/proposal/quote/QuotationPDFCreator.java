@@ -218,7 +218,7 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
-        B1Table = new PdfPTable(5);
+        B1Table = new PdfPTable(columnWidths1);
         B1Table.setWidthPercentage(100);
 
             PdfPCell cel1=new PdfPCell();

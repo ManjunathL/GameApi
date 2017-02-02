@@ -233,7 +233,7 @@
       "uri": "/gapi/proposal/addon.add",
       "source": "db",
       "query":"proposal.addon.add",
-      "params":["proposalId", "code","fromVersion","seq", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"],
+      "params":["proposalId", "code","fromVersion","seq", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"],
       "resultfields":[],
       "default": "[]"
     },
@@ -396,7 +396,7 @@
       "uri": "/gapi/addon/brands",
       "source": "db",
       "query":"addons.brands",
-      "params":["categoryCode", "productSubTypeCode", "productTypeCode"],
+      "params":["categoryCode", "productSubtypeCode", "productTypeCode"],
       "resultfields":[],
       "default": "[]"
     },
@@ -405,7 +405,16 @@
       "uri": "/gapi/addon/products",
       "source": "db",
       "query":"addons.products",
-      "params":["categoryCode","productTypeCode","productSubTypeCode", "brandCode"],
+      "params":["categoryCode","productTypeCode","productSubtypeCode", "brandCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/newprods",
+      "source": "db",
+      "query":"abc.newprods",
+      "params":["categoryCode","productTypeCode","productSubtypeCode", "brandCode"],
       "resultfields":[],
       "default": "[]"
     },

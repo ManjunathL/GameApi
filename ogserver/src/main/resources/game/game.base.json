@@ -1,20 +1,13 @@
 {
   "version": "0.0.0a",
 
-//  "jdbc": {
-//    "driver_class": "com.mysql.jdbc.Driver",
-//    "url": "jdbc:mysql://localhost/game",
-//    "max_pool_size": 20,
-//    "user": "root",
-//    "password": "root"
-//  },
 
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
+    "url": "jdbc:mysql://localhost/game",
     "max_pool_size": 20,
-    "user": "admin",
-    "password": "OG$#gubi32"
+    "user": "root",
+    "password": "root"
   },
   "urlwithssl": "",
 
@@ -38,7 +31,7 @@
   "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
   "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
-  "ratecard_file": "e:/ratecard.bin",
+  "ratecard_file": "d:/tmp/ratecard.bin",
 
   "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
 

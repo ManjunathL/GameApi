@@ -363,8 +363,8 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
     },
 
     {
@@ -642,15 +642,15 @@
       "type": "select",
       "table": "addon_master",
       "query": "select distinct brandCode from addon_master where categoryCode = ? and productSubTypeCode = ? and productTypeCode = ?",
-      "params": ["categoryCode", "productSubTypeCode", "productTypeCode"]
+      "params": ["categoryCode", "productSubtypeCode", "productTypeCode"]
     },
 
     {
       "id": "addons.products",
       "type": "select",
       "table": "addon_master",
-      "query": "select catalogueCode,title,code,rate,imagePath,uom from addon_master where categoryCode = ? and productTypeCode = ? and productSubTypeCode = ? and brandCode = ?",
-      "params": ["categoryCode","productTypeCode","productSubTypeCode", "brandCode"]
+      "query": "select catalogueCode,title,product,code,rate,imagePath,uom from addon_master where categoryCode = ? and productTypeCode = ? and productSubtypeCode = ? and brandCode = ?",
+      "params": ["categoryCode","productTypeCode","productSubtypeCode", "brandCode"]
     },
 
     {
