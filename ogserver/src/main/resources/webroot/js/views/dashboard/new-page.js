@@ -130,6 +130,7 @@ define([
         render: function() {
             var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            document.getElementById("canlink").href = window.location.href;
         },
         ready: function () {
             var that = this;

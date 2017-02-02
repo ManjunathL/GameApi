@@ -112,6 +112,7 @@ define([
             var authData = this.refAuth.currentUser;
             console.log('-------------authData in myaccount page--------------------');
             console.log(authData);
+            document.getElementById("canlink").href = window.location.href;
 
             MGF.mynest(authData,this.renderWithUserProjectCallback);
 

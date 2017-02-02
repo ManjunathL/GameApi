@@ -33,6 +33,7 @@ define([
         render: function() {
             if (VM.activeView === VM.SHORTLIST) {
                 var authData = this.refAuth.currentUser;
+                document.getElementById("canlink").href = window.location.href;
                 MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             }
         },

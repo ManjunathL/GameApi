@@ -11,6 +11,7 @@ define([
             Analytics.apply(Analytics.TYPE_THANKYOU);
         },
         render: function() {
+            document.getElementById("canlink").href = window.location.href;
             $(this.el).html(_.template(thankyouTemplate));
         }
     });

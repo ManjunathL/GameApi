@@ -29,6 +29,7 @@ define([
         render: function() {
 
             var that = this;
+            document.getElementById("canlink").href = window.location.href;
             var selectedBlogsCategory = this.model.blogcategory;
 
             this.stories.fetch({

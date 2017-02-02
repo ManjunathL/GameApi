@@ -23,6 +23,7 @@ define([
         },
         render: function(){
             var authData = this.ref.getAuth();
+            document.getElementById("canlink").href = window.location.href;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function(){

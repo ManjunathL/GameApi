@@ -24,6 +24,12 @@ define([
         render: function() {
             var authData = this.ref.getAuth();
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            if(window.location.href.indexOf("faq-shipping") > -1 || window.location.toString().indexOf("faq-returns") > -1 || window.location.toString().indexOf("faq-warranty") > -1){
+            document.getElementById("canlink").href = "https://www.mygubbi.com/faq";
+            }
+            else{
+            document.getElementById("canlink").href = window.location.href;
+            }
         },
         initialize: function() {
             this.ref = MGF.rootRef;

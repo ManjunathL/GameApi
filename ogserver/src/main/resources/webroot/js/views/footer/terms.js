@@ -8,6 +8,7 @@ define([
         el: '.page',
         render: function() {
             $(this.el).html(termsTemplate);
+            document.getElementById("canlink").href = window.location.href;
         }
     });
     return TermsView;

@@ -9,6 +9,8 @@ define([
         el: '.footer',
         render: function() {
             $(this.el).html(_.template(footerTemplate));
+            document.getElementById("canlink").href = window.location.href;
+
             this.ready();
         },
         ready: function() {

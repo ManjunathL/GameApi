@@ -23,7 +23,7 @@ define([
         render: function() {
 
             var that = this;
-
+            document.getElementById("canlink").href = window.location.href;
             var blog_name = that.model.name;
 
             if(typeof(blog_name) !== 'undefined'){
