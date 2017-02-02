@@ -24,8 +24,8 @@
 
   "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
   "fbUrl": "https://mygubbi.firebaseio.com",
-  "websiteHost": "localhost:8685",
- // "websiteHost": "www.mygubbi.com:8685",
+ // "websiteHost": "localhost:8685",
+ "websiteHost": "www.mygubbi.com:8685",
   "acceptSSLCertificates": "true",
   "processfbEvents": true
 
