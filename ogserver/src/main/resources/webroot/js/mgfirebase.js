@@ -312,12 +312,17 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                                    var providerId = authData.providerData[0].providerId;
                                    someFunc(that.userProfile,that.projectDetails, providerId);
                                   });
+                           }else{
+                               someFunc(that.userProfile,null, providerId);
                            }
+
                         });
 
+                   }else{
+                    someFunc(that.userProfile,null, providerId);
                    }
 
-                    someFunc(that.userProfile,null, providerId);
+
                    });
             }
 
