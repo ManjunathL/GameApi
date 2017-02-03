@@ -420,11 +420,27 @@
     },
 
     {
+      "id": "proposal.addon.createnew",
+      "type": "insert",
+      "table": "proposal_addon",
+      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy) select proposalId, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy from proposal_addon where proposalId= ? and fromVersion = ? ",
+      "params": ["toVersion","proposalId","fromVersion"]
+    },
+
+    {
       "id": "proposal.product.createnewfromoldproposal",
       "type": "insert",
       "table": "proposal_product",
       "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select ?,?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
       "params": ["proposalId","version","oldProposalId","toVersion"]
+    },
+
+    {
+      "id": "proposal.addon.createnewfromoldproposal",
+      "type": "insert",
+      "table": "proposal_addon",
+      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy from proposal_addon where proposalId= ? and fromVersion = ? ",
+      "params": ["proposalId","toVersion","oldProposalId","fromVersion"]
     },
 
     {
@@ -634,14 +650,14 @@
       "id": "addons.product.subtypes",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct productSubTypeCode from addon_master where categoryCode = ? and productTypeCode = ?",
+      "query": "select distinct productSubtypeCode from addon_master where categoryCode = ? and productTypeCode = ?",
       "params": ["categoryCode", "productTypeCode"]
     },
     {
       "id": "addons.brands",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct brandCode from addon_master where categoryCode = ? and productSubTypeCode = ? and productTypeCode = ?",
+      "query": "select distinct brandCode from addon_master where categoryCode = ? and productSubtypeCode = ? and productTypeCode = ?",
       "params": ["categoryCode", "productSubtypeCode", "productTypeCode"]
     },
 
