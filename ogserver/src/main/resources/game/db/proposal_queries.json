@@ -439,8 +439,8 @@
       "id": "proposal.addon.createnewfromoldproposal",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy from proposal_addon where proposalId= ? and fromVersion = ? ",
-      "params": ["proposalId","toVersion","oldProposalId","fromVersion"]
+      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy from proposal_addon where proposalId = ? and fromVersion = ? ",
+      "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
     {
