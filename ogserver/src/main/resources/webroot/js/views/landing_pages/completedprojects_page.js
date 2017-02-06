@@ -8,13 +8,12 @@ define([
     'backbone',
     'text!templates/landing_pages/completedprojects_page.html',
     'cloudinary_jquery',
-    'slyutil',
     'mgfirebase',
     'consultutil',
     'collections/stories',
     'text!templates/story/home_story.html',
     'analytics',
-], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Stories, blogPageTemplate, Analytics) {
+], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, MGF, ConsultUtil, Stories, blogPageTemplate, Analytics) {
     var CompletedProjectsPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
@@ -61,16 +60,7 @@ define([
                 },
 
         ready: function() {
-            if ($('#lpalt-frame').length > 0) {
-                var $lpalt_frame = $('#lpalt-frame');
-                var $lpalt_wrap = $lpalt_frame.parent().parent();
-                SlyUtil.create($lpalt_wrap, '#lpalt-frame', '.lpalt-next', '.lpalt-prev').init();
-            }
-            if ($('#brand-frame').length > 0) {
-                var $brand_frame = $('#brand-frame');
-                var $brand_wrap = $brand_frame.parent().parent();
-                SlyUtil.create($brand_wrap, '#brand-frame', '.brand-next', '.brand-prev').init();
-            }
+
         },
         initialize: function() {
             this.ref = MGF.rootRef;

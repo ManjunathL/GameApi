@@ -469,10 +469,72 @@
 <script type="text/javascript" src="/js/libs/hover-pack/hover-pack.js"></script>
 
 <script>
-    jQuery('.photobox-lightbox').photobox('a');
+    $('.photobox-lightbox').photobox('a');
     // or with a fancier selector and some settings, and a callback:
-    jQuery('.photobox-lightbox').photobox('a:first', { thumbs:false, time:0 }, imageLoaded);
+    $('.photobox-lightbox').photobox('a:first', { thumbs:false, time:0 }, imageLoaded);
     function imageLoaded() {
         console.log('image has been loaded...');
     }
+
+    $(document).ready(function(){
+
+        /* Slide */
+        $('#slide a').each(function(index, element) {
+            $(this).hoverdir();
+        });
+
+        /* Stroke */
+        $('.b-link-stroke').prepend('<div class="b-top-line"></div>');
+        $('.b-link-stroke').prepend('<div class="b-bottom-line"></div>');
+
+        /* Twist */
+        $('.b-link-twist').prepend('<div class="b-top-line"><b></b></div>');
+        $('.b-link-twist').prepend('<div class="b-bottom-line"><b></b></div>');
+        $('.b-link-twist img').each(function(index, element) {
+            $(this).css('visibility','hidden');
+            $(this).parent().find('.b-top-line, .b-bottom-line').css('background-image','url('+$(this).attr('src')+')');
+        });
+
+        /* Flip */
+        $('.b-link-flip').prepend('<div class="b-top-line"><b></b></div>');
+        $('.b-link-flip').prepend('<div class="b-bottom-line"><b></b></div>');
+        $('.b-link-flip img').each(function(index, element) {
+            $(this).css('visibility','hidden');
+            $(this).parent().find('.b-top-line, .b-bottom-line').css('background-image','url('+$(this).attr('src')+')');
+
+        });
+
+        /* Fade */
+        $('.b-link-fade').each(function(index, element) {
+            $(this).append('<div class="b-top-line"></div>')
+        });
+
+        /* Flow */
+        $('.b-link-flow').each(function(index, element) {
+            $(this).append('<div class="b-top-line"></div>')
+        });
+
+        /* Box */
+        $('.b-link-box').prepend('<div class="b-top-line"></div>');
+        $('.b-link-box').prepend('<div class="b-bottom-line"></div>');
+
+        /* Stripe */
+        $('.b-link-stripe').each(function(index, element) {
+            $(this).prepend('<div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div>');
+        });
+
+        /* Apart */
+        $('.b-link-apart-vertical, .b-link-apart-horisontal').each(function(index, element) {
+            $(this).prepend('<div class="b-top-line"></div><div class="b-bottom-line"></div><div class="b-top-line-up"></div><div class="b-bottom-line-up"></div>');
+        });
+
+        /* diagonal */
+        $('.b-link-diagonal').each(function(index, element) {
+            $(this).prepend('<div class="b-line-group"><div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div></div>');
+        });
+
+        setTimeout("calculate_margin();", 100);
+
+    });
+
 </script>
