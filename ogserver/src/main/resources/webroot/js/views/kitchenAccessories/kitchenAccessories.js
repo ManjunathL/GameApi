@@ -14,7 +14,8 @@ define([
 ], function($, _, Backbone, kitchenAccessoriesPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var kitchenAccessoriesPageVIew = Backbone.View.extend({
         el: '.page',
-        ref: null,
+        ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(kitchenAccessoriesPageTemplate)({
                 'userProfile': userProfData
@@ -22,7 +23,7 @@ define([
             $.cloudinary.responsive();
         },
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             document.getElementById("canlink").href = window.location.href;
 
