@@ -12,39 +12,51 @@ define([
     'collections/subcategories',
     'models/filter',
     'models/filterMaster',
+    'models/seoFilterMaster',
     'mgfirebase',
     'analytics',
     'category_content',
     'views/view_manager'
-], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, MGF, Analytics, CategoryContent, VM) {
+], function($, jqueryui, _, Backbone, Bootstrap, productPageTemplate, productPageSmallGridTemplate, filterTemplate, Products, Categories, subCategories, Filter, FilterMaster, SEOFilterMaster, MGF, Analytics, CategoryContent, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         products: null,
         filter: null,
         filterMaster: null,
+        seoFilterMaster: null,
         categories: null,
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.products = new Products();
             this.filter = new Filter();
             this.filterMaster = new FilterMaster();
+            this.seoFilterMaster = new SEOFilterMaster();
             this.categories = new Categories();
             this.subCategories = new subCategories();
+
             this.filter.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
             _.bindAll(this, 'clearShortlisted', 'markShortlisted', 'render');
         },
         render: function() {
-
+         if(window.location.href.indexOf("faq-shipping") > -1 || window.location.toString().indexOf("faq-returns") > -1 || window.location.toString().indexOf("faq-warranty") > -1){
+            document.getElementById("canlink").href = "https://www.mygubbi.com/faq";
+            }
+            else{
+            document.getElementById("canlink").href = window.location.href;
+            }
             var that = this;
 
             window.filter = that.filter;
 
+            var selectedCategories = this.model.selectedCategories;
             var selectedSubCategories = that.model.selectedSubCategories;
-            var selectedCategories = that.model.selectedCategories;
+            var selectedCityName = this.model.cityName;
 
-            that.filter.set({
-                'selectedCategoryName':that.model.selectedCategories
+
+
+            this.filter.set({
+                'selectedCategoryName':selectedCategories
             }, {
                 silent: true
             });
@@ -70,7 +82,7 @@ define([
                     silent: true
                 });
             }
-
+//debugger
             var subCategory = '';
 
             var selectedSubCategoriesList = {};
@@ -78,23 +90,86 @@ define([
             var getFilterMasterPromise = that.getFilterMaster();
             var getCategoriesPromise = that.getCategories(selectedSubCategories);
             var getProductsPromise = that.getProducts();
+            var getcityDetailsPromise = this.getCityDetails(selectedCityName);
 
+            Promise.all([getFilterMasterPromise, getCategoriesPromise, getProductsPromise, getcityDetailsPromise]).then(function() {
 
-            Promise.all([getFilterMasterPromise, getCategoriesPromise, getProductsPromise]).then(function() {
+                if(typeof(that.seoFilterMaster) !== 'undefined' && typeof(that.seoFilterMaster.get(0)) !== 'undefined'){
+                    if (!(that.filter.get('metaKeyword'))) {
+                        that.filter.set({
+                            'metaKeyword': that.seoFilterMaster.get(0).meta_keywords
+                        }, {
+                            silent: true
+                        });
+                    }
+                    if (!(that.filter.get('location'))) {
+                       that.filter.set({
+                           'location': that.seoFilterMaster.get(0).location
+                       }, {
+                           silent: true
+                       });
+                   }
+                     if (!(that.filter.get('metaTitle'))) {
+                        that.filter.set({
+                            'metaTitle': that.seoFilterMaster.get(0).title
+
+                        }, {
+                            silent: true
+                        });
+                    }
+                    if (!(that.filter.get('metaDesc'))) {
+                        that.filter.set({
+                            'metaDesc': that.seoFilterMaster.get(0).description
+                        }, {
+                            silent: true
+                        });
+                    }
+                }
                 that.markShortlisted();
                 that.productFilter();
 
                 var categ = selectedSubCategories;
+                var categ1 = selectedCategories;
+
                 if (categ === undefined || categ === '' || categ === null) {
                     categ = selectedCategories;
                 }
-                CategoryContent.apply(categ);
+                CategoryContent.apply(selectedCategories,selectedSubCategories,selectedCityName);
 
             }).catch(function(err) {
             	console.log('Catch: ', err);
             });
 
         },
+        getCityDetails: function(cityName){
+            var that = this;
+            var selectedCategoryName = that.filter.get('selectedCategoryName');
+            var selectedSubCategoryName = that.filter.get('selectedSubCategoryName');
+
+
+        return new Promise(function(resolve, reject) {
+            if (!that.seoFilterMaster.get("location")) {
+                that.seoFilterMaster.fetch({
+                  data: {
+                      "category": selectedCategoryName,
+                      "subcategory": selectedSubCategoryName,
+                      "location": cityName
+                  },
+                    success: function(response) {
+                        console.log("SEO filterMaster fetch successfully- ");
+                        console.log(response);
+                        resolve();
+                    },
+                    error: function(model, response, options) {
+                        console.log("error from SEO filterMaster fetch - " + response);
+                        reject();
+                    }
+                 });
+             } else{
+                 resolve();
+             }
+         });
+    },
         getFilterMaster: function() {
             var that = this;
             return new Promise(function(resolve, reject) {
@@ -186,12 +261,12 @@ define([
                             });
                             var priceRangeS1 = new Array();
                                priceRangeS1.push(600000);
-                                                        that.filter.set({
+                            that.filter.set({
 
-                                                            'priceRangeS1': priceRangeS1
-                                                        }, {
-                                                            silent: true
-                                                        });
+                                'priceRangeS1': priceRangeS1
+                            }, {
+                                silent: true
+                            });
 
                             var styleIds = new Array();
                             that.filter.set({
@@ -321,7 +396,6 @@ define([
         productFilter: function() {
 
             var that = this;
-
 
             if (typeof(that.filter.get('viewtype')) !== 'undefined') {
                 that.filter.set({

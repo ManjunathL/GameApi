@@ -1,6 +1,7 @@
 /**
  * Created by mygubbi on 01/07/16.
- */
+**/
+
 define([
     'jquery',
     'underscore',
@@ -12,12 +13,13 @@ define([
     'consultutil',
     'collections/stories',
     'text!templates/story/home_story.html',
-    'analytics'
+    'analytics',
 ], function($, _, Backbone, completedprojectsPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Stories, blogPageTemplate, Analytics) {
     var CompletedProjectsPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
         story: new Stories(),
+        refAuth: null,
         renderWithUserProfCallback: function(userProfData) {
         this.getStories();
             $(this.el).html(_.template(completedprojectsPageTemplate)({
@@ -26,9 +28,10 @@ define([
             $.cloudinary.responsive();
         },
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             this.getStories();
+            document.getElementById("canlink").href = window.location.href;
             this.ready();
         },
         getStories: function() {
@@ -71,6 +74,7 @@ define([
         },
         initialize: function() {
             this.ref = MGF.rootRef;
+            this.refAuth = MGF.refAuth;
             Analytics.apply(Analytics.TYPE_GENERAL);
             this.getStories();
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});

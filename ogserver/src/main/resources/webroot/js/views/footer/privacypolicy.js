@@ -8,6 +8,8 @@ define([
         el: '.page',
         render: function() {
             $(this.el).html(privacypolicyTemplate);
+            document.getElementById("canlink").href = window.location.href;
+
         }
     });
     return PrivacyPolicyView;

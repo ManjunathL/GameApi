@@ -11,6 +11,7 @@ define([
 ], function($, _, Backbone, Bootstrap, BootstrapValidator, MGF, ConsultUtil, AutoSuggestProducts, SuggestResultsPage) {
     return {
         ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
 
         createUser: function(userId, data, next) {
             var that = this;
@@ -26,6 +27,9 @@ define([
         },
 
         setUser: function(user) {
+            console.log('User data after setUser');
+            console.log(user);
+
             users.add(user, {
                 at: 0
             });
@@ -35,7 +39,7 @@ define([
             var userProfileRef = this.ref.child("user-profiles/" + uid);
             var userProfile = null;
             var that = this;
-            userProfileRef.once("value", function(snapshot) {
+            userProfileRef.on("value", function(snapshot) {
                 if (snapshot.exists()) {
                     userProfile = snapshot.val();
                 }
@@ -44,12 +48,12 @@ define([
             });
         },
         getUserProfileWithCB: function(next) {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, next);
         },
-        onFAuth: function(authData) {
+        onFAuth: function(authData) { console.log("authData");console.log(authData);
             if (authData) {
-                if (authData.provider !== 'anonymous') { //don't do nothin on anonymous auths
+                if ((typeof(authData.providerData[0]) != 'undefined') && (authData.providerData[0].providerId !== 'anonymous')) { //don't do nothin on anonymous auths
                     $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
                         this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
@@ -64,7 +68,7 @@ define([
         formUserData: function(authData, userProfile) {
 
             return {
-                provider: authData.provider,
+                providerData: authData.providerData,
                 email: MGF.getEmail(authData),
                 displayName: MGF.getName(authData, userProfile),
                 profileImage: MGF.getImage(authData, userProfile),
@@ -74,20 +78,24 @@ define([
         handleAuth: function(authData, userProfile) {
             var email = MGF.getEmail(authData);
 
+            console.log('email');
+            console.log(email);
+
             if (!email) {
                 console.log("email not provided, please try again and provide email id as it is mandatory.");
                 $('#login_error').html("Please tick email, while providing Facebook access.");
                 $('#login_error_row').css("display", "block");
-                this.ref.unauth();
+                //this.ref.unauth();
+                //MGF.refAuth.signOut();
                 return;
             }
 
             var user = this.formUserData(authData, userProfile);
 
-            if (authData.provider !== 'password') {
+            if (authData.providerData !== 'password') {
                 var userRef = this.ref.child("users/" + authData.uid);
                 var that = this;
-                userRef.once("value", function(snapshot) {
+                userRef.on("value", function(snapshot) {
                     if (snapshot.exists()) {
                         that.setUser(user);
                         console.log("user already exists in firebase");
@@ -133,39 +141,61 @@ define([
             window.loginButton && window.loginButton.button('reset');
             window.googleButton && window.googleButton.button('reset');
             window.fbButton && window.fbButton.button('reset');
-            //            window.twitterButton && window.twitterButton.button('reset');
+            //window.twitterButton && window.twitterButton.button('reset');
         },
 
         pwdLogin: function() {
-            this.ref.authWithPassword({
-                email: $('#emailId').val(),
-                password: $('#pwd').val()
+            var that = this;
+            var email = $('#emailId').val();
+            var password = $('#pwd').val();
+
+            this.refAuth.signInWithEmailAndPassword(email, password).then(function(authData) {
+              // Sign-in successful.
+              console.log('User data after login');
+              console.log(authData);
+
+              $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
+              console.log('Sign-in successful');
+            }, function(error) {
+              // An error happened.
+              $('#login_error').html("The password is invalid. Please enter a correct password.");
+              $('#login_error_row').css("display", "block");
+              console.log('Error'+error);
+              window.loginButton && window.loginButton.button('reset');
             }, this.authHandler, {
-                remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'
-            });
+                 remember: $('#remember').is(':checked') ? 'default' : 'sessionOnly'
+             });
+            // [END authwithemail]
         },
 
         resetPassword: function() {
-            this.ref.resetPassword({
-                email: $('#forgotEmail').val()
-            }, function(error) {
-                if (error) {
-                    console.log("Reset Failed!", error);
-                    $('.modal_error_msg').slideDown();
-                } else {
-                    console.log("reset successfully");
-                    $('.modal_success_msg').slideDown();
-                    $('#forgotBtn').hide();
-                    $('#forgotEmail').prop('disabled', true);
-                }
+
+            var emailAddress = $('#forgotEmail').val();
+
+            this.refAuth.sendPasswordResetEmail(emailAddress).then(function() {
+                console.log("reset successfully");
+                $('.modal_success_msg').slideDown();
+                $('#forgotBtn').hide();
+                $('#forgotEmail').prop('disabled', true);
                 window.forgotButton && window.forgotButton.button('reset');
+            }, function(error) {
+                  console.log("Reset Failed!", error);
+                  $('.modal_error_msg').slideDown();
+                  window.forgotButton && window.forgotButton.button('reset');
             });
         },
 
-        signOut: function(ev) {
-            MGF.stopListeningForShortlistChanges(this.ref.getAuth().uid);
-            this.ref.unauth();
+        signOutUser: function(ev) {
+           // MGF.stopListeningForShortlistChanges(this.refAuth.currentUser.uid);
             users.reset();
+            this.refAuth.signOut().then(function() {
+               // Sign-out successful.
+               console.log("Sign-out successful.");
+               window.location = '/';
+            }, function(error) {
+              // An error happened.
+              console.log("Sign-out failed due to some error." + error.errorMessage);
+            });
         },
 
         closeModal: function(ev) {
@@ -223,54 +253,75 @@ define([
         signUp: function() {
 
             var that = this;
-            this.ref.createUser({
-                email: $('#reg_email_id').val(),
-                password: $('#reg_password').val()
-            }, function(error, userData) {
-                if (error) {
-                    console.log("Error creating user:", error);
-                    $('#reg_error').html(error);
-                    $('#reg_error_row').css("display", "block");
-                    window.signupButton.button('reset');
-                } else {
-                    console.log("Successfully created user account with uid:", userData.uid);
-                    that.ref.offAuth(that.onFAuth);
-                    that.ref.authWithPassword({
-                        email: $('#reg_email_id').val(),
-                        password: $('#reg_password').val()
-                    }, function(error, authData) {
 
-                        var userData = {
-                            provider: "password",
-                            email: $('#reg_email_id').val(),
+            var email = $('#reg_email_id').val();
+            var password = $('#reg_password').val();
+            var phoneNum = $('#reg_contact_num').val();
+
+            //MGF.handleSignUp(email,password);
+
+            this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
+                console.log("Successfully created user account with uid:", userData.uid);
+                var photoURL = userData.photoURL ? userData.photoURL: 'https://res.cloudinary.com/mygubbi/image/upload/v1484131794/cep/user_new.png';
+
+
+                var userData = {
+                    providerData: "password",
+                    email: $('#reg_email_id').val(),
+                    displayName: $('#reg_full_name').val(),
+                    profileImage: photoURL,
+                    uid: userData.uid
+                };
+
+                console.log(userData);
+
+
+
+                var profileJSONData = function(userData) {
+                    if (userData) {
+                        that.setUser(userData);
+                        that.createProfile(userData, {
                             displayName: $('#reg_full_name').val(),
-                            profileImage: authData.password.profileImageURL,
-                            uid: authData.uid
-                        };
-                        that.createUser(authData.uid, userData, null);
-
-                        var profileData = {
-                            displayName: $('#reg_full_name').val(),
                             email: $('#reg_email_id').val(),
-                            phone: $('#reg_contact_num').val(),
-                            profileImage: authData.password.profileImageURL
-                        };
+                            phone: phoneNum,
+                            profileImage: photoURL,
+                            crmId:""
+                        }, null);
+                    }
+                };
 
-                        that.createProfile(userData, profileData, that.unAuthAfterProfile);
+                var profileData = {
+                    displayName: $('#reg_full_name').val(),
+                    email: $('#reg_email_id').val(),
+                    phone: phoneNum,
+                    profileImage: photoURL,
+                    crmId:""
+                };
 
-                    });
-                }
+                that.createUser(userData.uid, userData, profileJSONData);
+
+                that.createProfile(userData, profileData, that.unAuthAfterProfile);
+
+            }, function(error) {
+                // An error happened.
+                console.log("Error creating user:", error);
+                $('#reg_error').html(error);
+                $('#reg_error_row').css("display", "block");
+                window.signupButton.button('reset');
             });
-
-            return false;
         },
         unAuthAfterProfile: function() {
-            this.ref.unauth();
             window.signupButton.button('reset');
             $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
-            $('#signup').modal('toggle');
+            $('#signup').modal('hide');
             $('#notify').modal('show');
-            this.ref.onAuth(this.onFAuth);
+
+            this.refAuth.onAuthStateChanged(this.onFAuth);
+
+            setTimeout(function() {
+                window.location = '/';
+            }, 1000);
+
         },
         gotoLogin: function() {
             $('#notify').modal('toggle');
@@ -318,11 +369,7 @@ define([
             ev.preventDefault();
             ev.stopPropagation();
             var target = $(ev.currentTarget).data('target');
-
             var srctxt = $(ev.currentTarget).text();
-
-            console.log(" ===   Search Text ========");
-            console.log(typeof(srctxt));
 
             $('.sb-search-input').val(srctxt);
             $('.sb-search_suggest').slideUp();
@@ -351,12 +398,12 @@ define([
 
             //add any new functions to this list. This is essential as this class is only a helper, the functions are called from outside.
             _.bindAll(this, 'toggleContactUsPop', 'closeContactForm', 'createUser',
-                'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOut',
+                'setUser', 'getUserProfileHandleAuth', 'getUserProfileWithCB', 'onFAuth', 'handleAuth', 'authHandler', 'pwdLogin', 'resetPassword', 'signOutUser',
                 'closeModal', 'closeUserPopup', 'signUp', 'gotoLogin', 'showUserPop', 'createProfile',
                 'unAuthAfterProfile');
 
             var events = {
-                "click .signout_icon": this.signOut,
+                "click .signout_icon": this.signOutUser,
                 "click #close-user-pop": this.closeUserPopup,
                 "click #view-all-shortlist": this.closeUserPopup,
                 "click #shortlist-bar-explore": this.closeUserPopup,
@@ -368,17 +415,24 @@ define([
                 "click #goto-login": this.gotoLogin,
                 "click .sb-search-txt": this.gotoSearchedProduct,
                 "click .clr-search-lnk": this.clearSearchedProduct
-
             };
 
             parent.delegateEvents(events);
 
-            this.ref.onAuth(this.onFAuth);
+            //this.ref.onAuth(this.onFAuth);
             var that = this;
+            //var auth = firebase.auth();
+            this.refAuth.onAuthStateChanged(this.onFAuth);
+
 
             $(function() {
 
-
+                 if(window.location.href.indexOf("faq-shipping") > -1 || window.location.toString().indexOf("faq-returns") > -1 || window.location.toString().indexOf("faq-warranty") > -1){
+                    document.getElementById("canlink").href = "https://www.mygubbi.com/faq";
+                    }
+                    else{
+                    document.getElementById("canlink").href = window.location.href;
+                 }
                 $('#nav').find('li.gubbi-list-desk a').click(function () {
                     $('#nav').find('li.gubbi-list-desk a').removeClass('active');
                     $(this).addClass('active');
@@ -599,52 +653,52 @@ define([
 
                     window.fbButton = $(this);
                     window.fbButton.button('loading');
-                    that.ref.authWithOAuthPopup("facebook", that.authHandler, {
+                    /*that.ref.authWithOAuthPopup("facebook", that.authHandler, {
                         scope: "email"
+                    });*/
+
+                    var provider = new firebase.auth.FacebookAuthProvider();
+
+                    firebase.auth().signInWithPopup(provider).then(function(result) {
+                      var token = result.credential.accessToken;
+                      var user = result.user;
+                      var uid = result.user.uid;
+                      firebase.auth().signInWithRedirect(provider);
+                      that.authHandler();
+                      console.log('Successfully login using facebook'+uid);
+                    }).catch(function(error) {
+                      var errorCode = error.code;
+                      var errorMessage = error.message;
+                      var email = error.email;
+                      var credential = error.credential;
+                      console.log('login failed using facebook '+errorMessage);
                     });
+
+                    /*this.refAuth.signInWithPopup(provider).then(function(result) {
+                      // User signed in!
+                      var uid = result.user.uid;
+                      console.log('Successfully login using facebook'+uid);
+                    }).catch(function(error) {
+                      // An error occurred
+                      console.log('login failed using facebook');
+                    });*/
                 });
 
                 $('#google-btn').click(function() {
                     window.googleButton = $(this);
                     window.googleButton.button('loading');
-                    that.ref.authWithOAuthPopup("google", that.authHandler, {
+                    /*that.ref.authWithOAuthPopup("google", that.authHandler, {
                         scope: "email"
+                    });*/
+
+                    var providerData = new firebase.auth.GoogleAuthProvider();
+                    firebase.auth().signInWithPopup(providerData).then(function(result) {
+                      var accessToken = result.credential.accessToken;
+                      that.authHandler();
+                      console.log('Successfully login using google plus'+accessToken);
                     });
                 });
 
-
-                /*$(function() {
-                    var navMain = $("#bs-example-navbar-collapse-1");
-                    var subMenuUL = $(".dropdown-menu");
-                    subMenuUL.on("click", "li", null, function() {
-                        navMain.collapse('hide');
-                    });
-
-                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li", null, function() {
-                        $(this).parent().hide();
-                    });
-
-
-                    $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").hover(function() {
-                            $(this).show();
-                        },
-                        function() {
-                           $(this).hide();
-                            $(this).hide();
-                        });
-
-                    $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {
-                       $('.dropdownMenu_lg').hide();
-                       var that = this;
-                       $(this).next('.dropdownMenu_lg').show();
-                    });
-
-                    $("#bs-example-navbar-collapse-1").mouseleave(function(){
-                        var hovered = $("#bs-example-navbar-collapse-1").find(".dropdownMenu_lg").length;
-                        !!hovered && $('.dropdownMenu_lg').hide();
-                    });
-
-                });*/
                 $(function() {
                     var navMain = $("#bs-example-navbar-collapse-1");
                     var menuLi = $(".menu-li");

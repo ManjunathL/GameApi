@@ -7,21 +7,30 @@
     "password": "OG$#gubi32"
   },
 
+//  "jdbc": {
+//    "driver_class": "com.mysql.jdbc.Driver",
+//    "url": "jdbc:mysql://localhost/mg",
+//    "max_pool_size": 4,
+//    "user": "root",
+//    "password": "root"
+//  },
+
   "firebase": {
-    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
-    "loginid": "mygubbi.fbase@gmail.com",
-    "password": "!@#$VGYHasdf435",
+    "fb_url": "https://mygubbi-uat.firebaseio.com/",
+    "loginid": "mygubbi.uat@gmail.com",
+    "password": "uat@mygubbi",
     "processEvents": false
   },
-
+  "ssl_keystore": "ssl/mygubbiprod.jks",
+  "ssl_password": "0r@nge123$",
   "apicache" : true,
   "shopifyredirect": true,
+  "oldurlredirect": true,
   "enquirymailto" : "uat@mygubbi.com",
-
   "staticConfigPath": "config/test/uat.config.js",
   "importsPath": "config/test/uat.imports.css",
   "alljs": "js/min.js",
-
+  "acceptSSLCertificates": "true",
   "robots.txt": "User-agent: *\nDisallow: /"
 
 }

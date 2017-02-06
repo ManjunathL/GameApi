@@ -1,126 +1,34 @@
-<div class="row list-view" style="display:block;">
-    <% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == "largelist")){ %>
+<div class="mob-padding-top-10"></div>
 
-    <% if(typeof(collection) !== 'undefined'){ %>
-    <% _.each(collection, function(product){ %>
-
-    <div class="row portfolio-bg-gray margin-bottom40 portfolio-box overflow-hidden img-thumbnail-shadow">
-        <div class="col-md-7 list-img col-7-img">
-            <div class="row margin15-0 position-relative overflow-hidden">
-
-                <a href="/newproduct-details-<%= product.productId %>">
-                    <img width="670px" height="402px" class="img-responsive"
-                         src="<%= imgBase + 'c_fit,w_670,h_402/' + product.images[0] %>"
-                            title="<%= product.name %>" alt="<%= product.name %>"/>
-                </a>
-
-                <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
-                    <div class="listli">
-                        <a href="/newproduct-details-<%= product.productId %>">
-                            <span class="glyph fa fa-info"></span>
-                            <!--<span class="list-txt">know more</span>-->
-                        </a>
-                    </div>
-                    <div class="listli">
-                        <a class="shortlistable-item" href="#" data-element="<%=product.productId%>">
-                            <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
-                            <span class="list-txt">shortlist</span>
-                        </a>
-                    </div>
-                    <div class="listli">
-                        <a href="javascript:void(0);">
-                            <span id="share-ico<%=product.productId%>" class="glyph fa fa-share listshare"></span>
-
-                            <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                <% var share_url = window.location.protocol + '//' + window.location.host + '/newproduct-details-' + product.productId %>
-                                    <span><a href="javascript:void(0);"
-                                             onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
-                                             class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
-                                    <span><a href="javascript:void(0);"
-                                             onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
-                                             class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
-                                    <span><a href="javascript:void(0);"
-                                             onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
-                                             class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-5 col-5-txt margin15-0">
-            <div class="col-md-12 padding0 margin-bottom20">
-                        <span>
-                            <a href="/newproduct-details-<%= product.productId %>" class="list-heading-col5">
-                                <h2><%= product.name %></h2>
-                            </a>
-                        </span>
-                        <span class="cost-col5">
-                            <% if (product.defaultPrice !== '0') { %>
-                                <i class="fa fa-inr"></i>
-                                <%= product.defaultPrice %>/-
-                            <% } else { %>
-                                Consult for Price
-                            <% } %>
-                        </span>
-            </div>
-
-            <div class="font-size18 padding0">
-                <span class="dim">Description</span>
-
-                <p class="justify margin-top8">
-                    <%= product.desc %>
-                </p>
-            </div>
-            <div class="font-size18 margin-top20 dimsn">
-                <span class="dim">Dimension :</span>
-                <%= product.dimension %>
-            </div>
-
-
-        </div>
-    </div>
-
-    <% }); %>
-    <% } %>
-    <% } %>
-
-</div>
-
-<div class="row grid-view" style="display:block;">
-    <% if(typeof(filter.get('viewtype')) !== 'undefined' && ((filter.get('viewtype') == "largegrid") || (filter.get('viewtype') == "shortgrid"))){ %>
-    <% _.each(collection, function(product){ %>
-
-    <div class="portfolio">
-        <div class="<% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == 'shortgrid')){ %>col-md-4 col-sm-4<% }else{ %>col-md-6 col-sm-6<% } %> portfolio-item">
-            <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
-                <div class="row position-relative">
-                    <a href="/newproduct-details-<%= product.productId %>" class="portfolio-link">
-                        <img width="555px" height="333px" class="img-responsive  thumbnail-img "
-                             src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>"
-                                title="<%= product.name %>" alt="<%= product.name %>"/>
+<div class="row">
+    <div class="list-view" style="display:block;">
+        <% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == "largelist")){ %>
+        <% if(typeof(collection) !== 'undefined'){ %>
+        <% _.each(collection, function(product){ %>
+        <div class="portfolio-bg-gray margin-bottom40 portfolio-box overflow-hidden img-thumbnail-shadow">
+            <div class="col-md-7 col-sm-7 col-lg-7">
+                <div class="position-relative overflow-hidden portfolio-list-img">
+                    <a href="/product-<%= product.productId %>">
+                        <img class="img-responsive" src="<%= imgBase + 'c_fit,w_670,h_402/' + product.images[0] %>" title="<%= product.name %>" alt="<%= product.name %>"/>
                     </a>
-
-                    <div class="col-md-2 col-sm-3 col-xs-3 list-button-strip">
-                        <div class="listli">
-                            <a href="/newproduct-details-<%= product.productId %>">
+                    <div class="list-button-strip">
+                        <!--<div class="listli">
+                            <a href="/product-<%= product.productId %>">
                                 <span class="glyph fa fa-info"></span>
-                                <!--<span class="list-txt">know more</span>-->
                             </a>
-                        </div>
+                        </div>-->
                         <div class="listli">
-                            <a class="shortlistable-item" data-element="<%=product.productId%>" href="#">
+                            <a class="shortlistable-item" href="#" data-element="<%=product.productId%>">
                                 <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
-                                <!--<span class="list-txt"><%=product.user_shortlisted ? 'shortlisted' : 'shortlist'%></span>-->
+                                <span class="list-txt">shortlist</span>
                             </a>
                         </div>
                         <div class="listli">
                             <a href="javascript:void(0);">
-                                <span id="share-grid-ico<%=product.productId%>" class="glyph fa fa-share gridshare"></span>
+                                <span id="share-ico<%=product.productId%>" class="glyph zmdi zmdi-share listshare"></span>
 
-                                <div id="grid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                    <% var share_url = window.location.protocol + '//' + window.location.host + '/newproduct-details-'+ product.productId %>
+                                <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
+                                    <% var share_url = window.location.protocol + '//' + window.location.host + '/product-' + product.productId %>
                                     <span><a href="javascript:void(0);"
                                              onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
@@ -134,66 +42,89 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
-
-                <div class="text-upper portfolio margin0 ">
-                    <div class="row product-margin-top">
-                        <h4 class="col-md-12 col-sm-12 col-xs-12 align-center padding0  ">
-                            <a href="/newproduct-details-<%= product.productId %>" title="<%= product.name %>" class="grid-heading-col8">
-                                <%= product.name %>
-                            </a>
-                        </h4>
-                        <h6 class="col-md-12 col-sm-12 col-xs-12 align-center padding0"> </h6>
-                       <h5 class="col-md-12 col-sm-12 col-xs-12 align-center padding0 margin0 product-margin-bottom">
-                           <!--  <% if (product.defaultPrice !== '0') { %>
-                            <i class="fa fa-inr"></i>
-
-                            <%= product.defaultPrice %>/-
-                            <% } else { %>
-                            Consult for Price
-                            <% } %>-->
-
-                        </h5>
-                        <div id="content">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470299660/gubbi.png" class="ribbon"/>
-
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-lg-5">
+                <h4 class="product-title-lg">
+                    <a href="/product-<%= product.productId %>" class="portfolio-link">
+                        <%= product.name %>
+                    </a>
+                </h4>
+                <div class="font-size18">
+                    <span class="dim">Description</span>
+                    <p class="justify margin-top8">
+                        <%= product.desc %>
+                    </p>
+                </div>
+                <div class="font-size18">
+                    <span class="dim"> Dimension :</span>
+                    <%= product.dimension %>
                 </div>
             </div>
         </div>
+        <% }); %>
+        <% } %>
+        <% } %>
     </div>
-
-    <% }); %>
-    <% } %>
 </div>
 
-<style>
-    .thumbnail-img{
-    border: 39px solid #fff;
-    }
-    .img-thumbnail-shadow{
-    box-shadow: 0px 0px 10px 4px #ccc;
+<div class="row">
+    <div class="grid-view" style="display:block;">
+        <% if(typeof(filter.get('viewtype')) !== 'undefined' && ((filter.get('viewtype') == "largegrid") || (filter.get('viewtype') == "shortgrid"))){ %>
+        <% _.each(collection, function(product){ %>
+        <div class="portfolio">
+            <div class="<% if(typeof(filter.get('viewtype')) !== 'undefined' && (filter.get('viewtype') == 'shortgrid')){ %>col-md-4 col-sm-4<% }else{ %>col-md-6 col-sm-6<% } %> portfolio-item">
 
-    }
-    .text-upper{
-    text-transform: uppercase !important;
-    }
-    #content {
-    position: relative;
-    }
-    #content img {
-    position: absolute;
-    top: 4px;
-    right: 35px;
-    }
-    .product-margin-bottom{
-    margin-bottom: 20px!important;
-    }
-    .product-margin-top{
-    margin-top: -18px;
-    }
-</style>
+                <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
+                    <div class="position-relative">
+                        <a href="/product-<%= product.productId %>" class="portfolio-link">
+                            <img class="img-responsive  thumbnail-img" src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>" title="<%= product.name %>" alt="<%= product.name %>"/>
+                        </a>
+                        <div class="list-button-strip">
+                            <!--<div class="listli">
+                                <a href="/product-<%= product.productId %>">
+                                    <span class="glyph fa fa-info"></span>
+                                </a>
+                            </div>-->
+                            <div class="listli">
+                                <a class="shortlistable-item" data-element="<%=product.productId%>" href="#">
+                                    <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
+                                </a>
+                            </div>
+                            <div class="listli">
+                                <a href="javascript:void(0);">
+                                    <span id="share-grid-ico<%=product.productId%>" class="glyph zmdi zmdi-share gridshare"></span>
+
+                                    <div id="grid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
+                                        <% var share_url = window.location.protocol + '//' + window.location.host + '/product-'+ product.productId %>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="product-title text-center">
+                        <a href="/product-<%= product.productId %>" title="<%= product.name %>" class="grid-heading-col8">
+                            <%= product.name %>
+                        </a>
+                    </h4>
+                </div>
+
+            </div>
+        </div>
+        <% }); %>
+        <% } %>
+    </div>
+</div>
 
 
 

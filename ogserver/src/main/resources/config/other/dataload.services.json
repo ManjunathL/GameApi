@@ -27,6 +27,9 @@
       },
       {
         "name": "com.mygubbi.catalog.SeoManagementService"
+      },
+      {
+        "name": "com.mygubbi.catalog.DIYManagementService"
       }
     ]
   }

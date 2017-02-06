@@ -10,21 +10,21 @@
                     <% if(typeof(product.category) !== 'undefined' && product.category != null){ %>
                     <li>
                         <% if(product.category == 'Living & Dining'){ %>
-                        <a href="/living-and-dining-room-designs">Storage Solutions</a>
+                        <a href="/storage-solutions">Storage Solutions</a>
                         <% }else if(product.category == 'Kitchen'){ %>
                         <a href="/kitchen-cabinet-design"><%= product.category %></a>
                         <% }else if(product.category == 'Bedroom'){ %>
-                        <a href="/bedroom-interior-design">Wardrobe</a>
+                        <a href="/wardrobe-designs-online">Wardrobe</a>
                         <% } %>
                     </li>
                     <% } %>
-                    <% if(typeof(product.subcategory) !== 'undefined' && product.subcategory != null){ %>
+                    <!--<% if(typeof(product.subcategory) !== 'undefined' && product.subcategory != null){ %>
                         <% if(product.subcategory == 'Wardrobe'){ %>
                             <li><a href="<%= product.url %>">Wardrobe Collection</a></li>
                         <% }else { %>
                             <li><a href="<%= product.url %>"><%= product.subcategory %></a></li>
                         <% } %>
-                    <% } %>
+                    <% } %>-->
                     <% if(typeof(product.name) !== 'undefined'){ %>
                     <li class="active"><a href="javascript:void(0);"><span
                             class="li-txt-wrap"><%= product.name %></span></a></li>
@@ -36,18 +36,48 @@
             <div class="row">
                 <div class="product-main-section">
                     <div class="col-sm-7 col-md-7 col-lg-7">
-                        <div class="product-main-img">
-                            <% if(typeof(product.images) !== 'undefined'){ %>
-                            <img draggable="false" id="mainImg"
-                                 src="<%= imgBase + product.images[0] %>"
-                                 alt="<%= product.name %>" title="<%= product.name %>" class="width100">
-                            <% } %>
+                        <div class="margin-bottom40 portfolio-box overflow-hidden">
+                            <div class="position-relative">
+                            <a class="product-main-img">
+                                <% if(typeof(product.images) !== 'undefined'){ %>
+                                <img draggable="false" id="mainImg"
+                                     src="<%= imgBase + product.images[0] %>"
+                                     alt="<%= product.name %>" title="<%= product.name %>" class="img-responsive">
+                                <% } %>
+                            </a>
+                            <div class="list-button-strip">
+                                <div class="listli">
+                                    <a class="shortlistable-item" href="#" data-element="<%=product.productId%>">
+                                        <span class="list-heart fa <%=product.user_shortlisted ? 'fa-heart' : 'fa-heart-o'%>"></span>
+                                        <span class="list-txt"> shortlist </span>
+                                    </a>
+                                </div>
+                                <div class="listli">
+                                    <a href="javascript:void(0);">
+                                        <span id="share-ico<%=product.productId%>" class="glyph zmdi zmdi-share listshare"></span>
+
+                                        <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
+                                            <% var share_url = window.location.protocol + '//' + window.location.host + '/product-' + product.productId %>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.twitter.com/intent/tweet?url=<%=share_url%>&text=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-twitter-square"></i></a></span>
+                                    <span><a href="javascript:void(0);"
+                                             onclick="window.open('https://www.pinterest.com/pin/create/link/?url=<%=share_url%>&media=<%= imgBase + product.images[0] %>&description=<%= product.name %>', '', 'width=585,height=368')"
+                                             class="share-popup11"><i class="fa fa-pinterest-square"></i></a></span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                         <!-- Product Related Images Start -->
                         <div class="wrap">
                             <div class="row">
 
-                                <div class="controls center col-xs-1">
+                                <div class="controls col-xs-1 details-control">
                                     <button class="btn prev disabled" disabled=""><i class="pe-7s-angle-left font-size30"></i>
                                     </button>
                                 </div>
@@ -67,7 +97,7 @@
                                     <% } %>
                                 </div>
 
-                                <div class="controls center col-xs-1">
+                                <div class="controls col-xs-1 details-control">
                                     <button class="btn next"><i class="pe-7s-angle-right font-size30"></i></button>
                                 </div>
                             </div>
@@ -81,11 +111,11 @@
                             <p class="about-product">
                                 <%= product.desc %>
                             </p>
-                            <div class="product-price padding-top40">
-                                <h4> <!--Price starting from :--> <strong> <!--<% if (product.defaultPrice !== '0') { %>Rs. <%= product.defaultPrice %> /- <% } else { %>-->  <!--<% } %>-->Consult for Price</strong></h4>
-                            </div>
+                            <!--<div class="product-price padding-top40">-->
+                                <!--<h4> &lt;!&ndash;Price starting from :&ndash;&gt; <strong> &lt;!&ndash;<% if (product.defaultPrice !== '0') { %>Rs. <%= product.defaultPrice %> /- <% } else { %>&ndash;&gt;  &lt;!&ndash;<% } %>&ndash;&gt;Consult for Price</strong></h4>-->
+                            <!--</div>-->
                             <div class="consult-section">
-                                <button id="product_consult" class="btn btn-block btn-product"> Consult </button>
+                                <button id="product_consult" class="btn btn-block btn-product"> Consult for Price </button>
                             </div>
                         </div>
                     </div>
@@ -154,7 +184,7 @@
                                                     </p>
                                                 </div>
                                             </div>-->
-                                            <div class="row">
+                                            <div class="row hidden-sm hidden-xs">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="tab-content design-carousels margin-top5">
                                                         <div role="tabpanel" class="design-style-img tab-pane active" id="tab_style_1-img">
@@ -232,6 +262,83 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Mobile Responsive Code -->
+                                            <div class="row hidden-md hidden-lg">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="style-tab-bg tab-content design-carousels margin-top5">
+                                                        <ul class="nav nav-tabs nav-justified">
+                                                            <li id="tab_style_111" class="design-style active">
+                                                                <a>Black and White, <br/> The Original</a>
+                                                            </li>
+                                                            <li id="tab_style_21" class="design-style">
+                                                                <a>Monochrome, <br/> The Glorious Embrace</a>
+                                                            </li>
+                                                            <li id="tab_style_31" class="design-style">
+                                                                <a>Bold & Vibrant, <br/> Renaissance</a>
+                                                            </li>
+                                                            <li id="tab_style_41" class="design-style">
+                                                                <a>Fresh, <br/> Dolce Vita</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-content design-carousels margin-top5">
+                                                        <div role="tabpanel" class="design-style-img tab-pane active" id="tab_style_111-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481093091/project_details/mobile/style_board_b_w_mob.jpg" alt="b_w">
+                                                        </div>
+                                                        <div role="tabpanel" class="design-style-img tab-pane" id="tab_style_21-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481101245/project_details/mobile/style_board_monochrome_mob.jpg" alt="monochrome">
+                                                        </div>
+                                                        <div role="tabpanel" class="design-style-img tab-pane" id="tab_style_31-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481101244/project_details/mobile/style_board_bold_mob.jpg" alt="bold">
+                                                        </div>
+                                                        <div role="tabpanel" class="design-style-img tab-pane" id="tab_style_41-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481101244/project_details/mobile/style_board_fresh_mob.jpg" alt="fresh">
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-content padding-top15">
+                                                        <div class="design-style-cnt tab-pane active" id="tab_style_111-cnt">
+                                                            <p>
+                                                                Bring back the originality of colour - just go all
+                                                                out with black and white! Make bold statements which
+                                                                are true to your nature and have it reflected on
+                                                                your designs. Black and white patterns blend
+                                                                beautifully with minimalistic and linear design
+                                                                approach.
+                                                            </p>
+                                                        </div>
+                                                        <div class="design-style-cnt tab-pane" id="tab_style_21-cnt">
+                                                            <p>
+                                                                Monochrome designs redefine patterns which are
+                                                                appealing, attractive and on par with the latest
+                                                                trends. Once it blends in with your thoughts, we are
+                                                                sure it would marry you through your entire design
+                                                                process. Mix these patterns with your contemporary
+                                                                designs, you’re sure to recreate magic!
+                                                            </p>
+                                                        </div>
+                                                        <div class="design-style-cnt tab-pane" id="tab_style_31-cnt">
+                                                            <p>
+                                                                For those who ooze out vibrancy, these designs are
+                                                                about feeling warm with organized clutter around!
+                                                                Blend these patterns with subtle colours and be rest
+                                                                assured that bold energies are bound to reflect from
+                                                                your home! These designs pick inspiration from
+                                                                Jodhpur style furniture and Persian style pattern.
+                                                            </p>
+                                                        </div>
+                                                        <div class="design-style-cnt tab-pane" id="tab_style_41-cnt">
+                                                            <p>
+                                                                Ever longed for houses with blue and white finishes
+                                                                along with sand color imprints? If yes, then these
+                                                                designs are just for you! Extremely warm, relaxing
+                                                                and positive, they are for those who love to live
+                                                                among the blue waters hitting against the white
+                                                                windows.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +346,7 @@
                                 <div role="tabpanel" class="tab-pane" id="material">
                                     <div class="material-wrapper">
                                         <div class="m-item">
-                                            <div class="row">
+                                            <div class="row hidden-xs hidden-sm">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="tab-content material-carousels margin-top5">
                                                         <div role="tabpanel" class="m-item-img material-img tab-pane active" id="tab_material_1-img">
@@ -281,6 +388,50 @@
                                                                     scratch resistant.
                                                                 </p>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row hidden-lg hidden-md">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="style-tab-bg tab-content material-carousels margin-top5">
+                                                        <ul class="nav nav-tabs nav-justified">
+                                                            <li id="tab_material_11" class="tab_material active">
+                                                                <a>
+                                                                    MDF </a>
+                                                            </li>
+                                                            <li id="tab_material_21" class="tab_material">
+                                                                <a>
+                                                                    PLY </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-content material-carousels margin-top5">
+                                                        <div role="tabpanel" class="m-item-img material-img tab-pane active" id="tab_material_11-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103941/project_details/mobile/product-detail-page_mdf_mob.jpg" alt="mdf">
+                                                        </div>
+                                                        <div role="tabpanel" class="m-item-img material-img tab-pane" id="tab_material_21-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103941/project_details/mobile/product-detail-page_PLY_mob.jpg" alt="ply">
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-content material-carousels margin-top5">
+                                                        <div class="material-cnt tab-pane active" id="tab_material_11-cnt">
+                                                            <p>
+                                                                Durable, economical and perfect for practical
+                                                                storage solutions, MDF can be field, cut and drilled
+                                                                without damaging the surface.
+                                                            </p>
+                                                        </div>
+                                                        <div class="material-cnt tab-pane" id="tab_material_21-cnt">
+                                                            <p>
+                                                                Plywood is a strong material which is extremely
+                                                                durable and economical. Plywood is sheets of wood
+                                                                that have been pasted together through strong
+                                                                chemical treatment, thereby making them extremely
+                                                                sturdy. Plywood is also more economical than solid
+                                                                wood and they are easy to maintain, as they are
+                                                                scratch resistant.
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -478,7 +629,7 @@
                                 <div role="tabpanel" class="tab-pane" id="accessories">
                                     <div class="accessories-wrapper">
                                         <div class="d-item">
-                                        <div class="row">
+                                        <div class="row hidden-sm hidden-xs">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <div class="tab-content acc-carousels margin-top5">
                                                 <div role="tabpanel" class="acc-img tab-pane active" id="tab_style_5-img">
@@ -537,13 +688,70 @@
                                             </div>
                                         </div>
                                         </div>
-                                         </div>
-                                    </div>
+                                        <div class="row hidden-lg hidden-md">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="style-tab-bg tab-content acc-carousels margin-top5">
+                                                    <ul class="nav nav-tabs nav-justified">
+                                                        <li id="tab_style_51" class="acc-img-cnt active">
+                                                            <a>Under Sink <br/> Solutions</a>
+                                                        </li>
+                                                        <li id="tab_style_61" class="acc-img-cnt">
+                                                            <a>Pull Out <br/> Drawers </a>
+                                                        </li>
+                                                        <li id="tab_style_71" class="acc-img-cnt">
+                                                            <a>Drawer <br/> Organizers</a>
+                                                        </li>
+                                                        <li id="tab_style_81" class="acc-img-cnt">
+                                                            <a>Dish <br/> Drainers</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-content acc-carousels margin-top5">
+                                                    <div role="tabpanel" class="acc-img tab-pane active" id="tab_style_51-img">
+                                                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103941/project_details/mobile/accs1_mob.jpg" alt="undersink">
+                                                    </div>
+                                                    <div role="tabpanel" class="acc-img tab-pane" id="tab_style_61-img">
+                                                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103941/project_details/mobile/accs2_mob.jpg" alt="pullout">
+                                                    </div>
+                                                    <div role="tabpanel" class="acc-img tab-pane" id="tab_style_71-img">
+                                                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103942/project_details/mobile/accs3_mob.jpg" alt="drawer">
+                                                    </div>
+                                                    <div role="tabpanel" class="acc-img tab-pane" id="tab_style_81-img">
+                                                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103942/project_details/mobile/accs4_mob.jpg" alt="dish">
+                                                    </div>
+                                                </div>
+                                                <div class="tab-content acc-carousels margin-top5">
+                                                    <div class="acc-cnt tab-pane active" id="tab_style_51-cnt">
+                                                        <p>
+                                                            Organizing the space below your sink ensures a clutter-free setup for all your cleaning essentials.
+                                                            Maintaining those stains on your precious dining plates, is now easy!
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_61-cnt">
+                                                        <p>
+                                                            Our range of pullout modular drawers stores kitchen essentials that are of varying sizes and shapes giving you ample room to make the most of your kitchen.
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_71-cnt">
+                                                        <p>
+                                                            These smart little creations ensure that your drawers are organized based on your usage. No more rummaging through seemingly bottomless drawers again!
+                                                        </p>
+                                                    </div>
+                                                    <div class="acc-cnt tab-pane" id="tab_style_81-cnt">
+                                                        <p>
+                                                            Stylish dish drainers for platforms and for cupboards make sure that your dishes don't have unsightly water stains, and are neatly stacked away once clean.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                             </div>
+                                        </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="accessories1">
                                     <div class="accessories-wrapper">
                                         <div class="d-item">
-                                            <div class="row">
+                                            <div class="row hidden-xs hidden-sm">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="tab-content acc-carousels margin-top5">
                                                         <div role="tabpanel" class="acc-img tab-pane active" id="tab_style_9-img">
@@ -600,6 +808,61 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row hidden-md hidden-lg">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="style-tab-bg tab-content acc-carousels margin-top5">
+                                                        <ul class="nav nav-tabs nav-justified">
+                                                            <li id="tab_style_91" class="acc-img-cnt active">
+                                                                <a>Hanger Pull Out</a>
+                                                            </li>
+                                                            <li id="tab_style_101" class="acc-img-cnt">
+                                                                <a>Pull Out Self </a>
+                                                            </li>
+                                                            <li id="tab_style_1111" class="acc-img-cnt">
+                                                                <a>Shoe Pull Out</a>
+                                                            </li>
+                                                            <li id="tab_style_121" class="acc-img-cnt">
+                                                                <a>Trouser Pull Out</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-content acc-carousels margin-top5">
+                                                        <div role="tabpanel" class="acc-img tab-pane active" id="tab_style_91-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103940/project_details/mobile/KYW_HangerPullOut_mob.jpg" alt="hanger">
+                                                        </div>
+                                                        <div role="tabpanel" class="acc-img tab-pane" id="tab_style_101-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103940/project_details/mobile/KYW_pull-out-self_mob.jpg" alt="pullout">
+                                                        </div>
+                                                        <div role="tabpanel" class="acc-img tab-pane" id="tab_style_1111-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103940/project_details/mobile/KYW_ShoePullOut_mob.jpg" alt="shoe">
+                                                        </div>
+                                                        <div role="tabpanel" class="acc-img tab-pane" id="tab_style_121-img">
+                                                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103940/project_details/mobile/KYW_TrouserPullout_mob.jpg" alt="trouser">
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-content acc-carousels margin-top5">
+                                                        <div class="acc-cnt tab-pane active" id="tab_style_91-cnt">
+                                                            <p>
+                                                                Don't let congested hanger arrangement add mess in your life. Our smooth and seamless hanger pull out is specially designed keeping your comfort in mind. This makes life so much manageable and organized. A perfect accessory for your wardrobe.
+                                                            </p>
+                                                        </div>
+                                                        <div class="acc-cnt tab-pane" id="tab_style_101-cnt">
+                                                            <p>
+                                                                The best way to declutter and live a more organized life. With this pullout shelf, you can categorise your things and arrange them in order. There is no mess up and no struggling to find the right clothes or accessories from inside the wardrobe. Pull out the shelf and pick what you want with ease.
+                                                            </p>
+                                                        </div>
+                                                        <div class="acc-cnt tab-pane" id="tab_style_1111-cnt">
+                                                            <p>
+                                                                Give your shoes a perfectly textured and aesthetically designed place in your wardrobe. Managing shoe pairs has never been so easy. With this smooth shoe pullout, you can keep your pairs impeccably clean and well managed. This one is a shoe lover's dream accessory.
+                                                            </p>
+                                                        </div>
+                                                        <div class="acc-cnt tab-pane" id="tab_style_121-cnt">
+                                                            <p>
+                                                                Turn the hassle and mess before going to office every morning into a smooth and breezy experience . A strategically designed trouser pull out can do just the job for you. It keeps your perfectly ironed trousers in perfect and seamless arrangement. Just pull out the rack, pick up the trouser and slide it back. A perfect accessory to keep the trouser crease crisp and perfect.                                                                </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -629,19 +892,22 @@
                                                 <% } %>-->
                                                 <div class="carousel-inner" role="listbox">
                                                     <div class="item items">
-                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app2.jpg" alt="First Image">
+                                                        <img class="hidden-xs hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app2.jpg" alt="First Image">
+                                                        <img class="hidden-lg hidden-md" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103942/project_details/mobile/app2_mob.jpg" alt="First Image">
                                                         <div class="carousel-caption">
                                                             <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
                                                         </div>
                                                     </div>
                                                     <div class="item items">
-                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app3.jpg" data-color="firebrick" alt="Second Image">
+                                                        <img class="hidden-xs hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317949/project_details/app3.jpg" data-color="firebrick" alt="Second Image">
+                                                        <img class="hidden-lg hidden-md" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103942/project_details/mobile/app3_mob.jpg" data-color="firebrick" alt="Second Image">
                                                         <div class="carousel-caption">
                                                             <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens. </p>
                                                         </div>
                                                     </div>
                                                     <div class="item items">
-                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/app1.jpg" data-color="violet" alt="Third Image">
+                                                        <img class="hidden-xs hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/v1468317948/project_details/app1.jpg" data-color="violet" alt="Third Image">
+                                                        <img class="hidden-lg hidden-md" src="https://res.cloudinary.com/mygubbi/image/upload/v1481103943/project_details/mobile/acc1_mob.jpg" data-color="violet" alt="Third Image">
                                                         <div class="carousel-caption">
                                                             <p>Well operating appliances are known to form the backbone of a functional kitchen. Chimneys and Hobs are the most important appliances one looks for along with built-in microwave, dishwasher, refrigerator and water purifier. Some of the best brands that sell these appliances are Bosch, Faber, KAFF and Siemens.</p>
                                                         </div>
@@ -827,30 +1093,30 @@
 <script>
     var items = $('.carousels .items');
 
-    var wHeight = $(window).height();
-    var nHeight = (wHeight/2);
+    //var wHeight = $(window).height();
+    //var nHeight = (wHeight/2);
 
-    items.eq(0).addClass('active');
-    items.height(nHeight);
-    items.addClass('full-screen');
+    //items.eq(0).addClass('active');
+    //items.height(nHeight);
+    //items.addClass('full-screen');
 
 
     var apitems = $('.appliance-carousels .items');
     apitems.eq(0).addClass('active');
-    apitems.height(nHeight);
-    apitems.addClass('full-screen');
+    //apitems.height(nHeight);
+    //apitems.addClass('full-screen');
 
-    var dsitems = $('.design-carousels .design-style-img');
+    /*var dsitems = $('.design-carousels .design-style-img');
     dsitems.height(nHeight);
-    dsitems.addClass('full-screen');
+    dsitems.addClass('full-screen');*/
 
-    var dsitems = $('.acc-carousels .acc-img');
+    /*var dsitems = $('.acc-carousels .acc-img');
     dsitems.height(nHeight);
-    dsitems.addClass('full-screen');
+    dsitems.addClass('full-screen');*/
 
-    var mtitems = $('.material-carousels .material-img');
+    /*var mtitems = $('.material-carousels .material-img');
     mtitems.height(nHeight);
-    mtitems.addClass('full-screen');
+    mtitems.addClass('full-screen');*/
 
     $('.carousels img').each(function() {
       var $src = $(this).attr('src');
@@ -862,7 +1128,7 @@
       $(this).remove();
     });
 
-    $('.appliance-carousels img').each(function() {
+    /*$('.appliance-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({
@@ -870,9 +1136,9 @@
         'background-color' : $color
       });
       $(this).remove();
-    });
+    });*/
 
-    $('.design-carousels img').each(function() {
+    /*$('.design-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({
@@ -880,9 +1146,9 @@
         'background-color' : $color
       });
       $(this).remove();
-    });
+    });*/
 
-    $('.acc-carousels img').each(function() {
+    /*$('.acc-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({
@@ -890,9 +1156,9 @@
         'background-color' : $color
       });
       $(this).remove();
-    });
+    });*/
 
-    $('.material-carousels img').each(function() {
+    /*$('.material-carousels img').each(function() {
       var $src = $(this).attr('src');
       var $color = $(this).attr('data-color');
       $(this).parent().css({
@@ -900,7 +1166,7 @@
         'background-color' : $color
       });
       $(this).remove();
-    });
+    });*/
 
 
 
@@ -918,6 +1184,48 @@
           interval: 6000,
           pause: "false"
         });
+     var meta = 'mehbub';
+        var category = productfilter.get('selectedCategoryName');
+        var subcategory = productfilter.get('selectedSubCategoryName');
+        var productName = productfilter.get('productName');
+            console.log("category=============");
+            console.log(category);
+            console.log(subcategory);
+            console.log(productName);
+         if( category == 'bedroom') {
+            meta = productfilter.get('productName') + ' is a ' + subcategory + ' from the house of MyGubbi. ' + productName + ' is ergonomically designed and feature a series of horizontal and vertical shelves.';
+            $("meta[name='description']").attr("content", meta);
+
+             metakeyword = productName + ' , ' +productName+ ' online, ' + productName +', Buy ' + productName;
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+             document.title = productName;
+
+            }
+          else if( category == 'kitchen') {
+            meta = productName + ' is one of the best ' + subcategory + 's available in the ' + category + '.The ' +
+            productName + ' has multiple cabinets and shelves for easy storage.';
+            $("meta[name='description']").attr("content", meta);
+
+             metakeyword = productName + ' , ' +productName+ ' online, ' + productName +', Buy ' + productName;
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+             document.title = productName;
+
+            }
+           else {
+            if(category == 'livingndining'){
+             category = 'storage solution';
+            }
+            meta = productName + ' is a ' + subcategory + ' from the house of MyGubbi  and makes for perfect ' + category + '. ' +
+            productName + ' also helps enhance the look of your living room, when placed against a wall.';
+            $("meta[name='description']").attr("content", meta);
+
+             metakeyword = productName + ' , ' +productName+ ' online, ' + productName +', Buy ' + productName;
+            $("meta[name='keywords']").attr("content", metakeyword);
+
+             document.title = productName;
+           }
     });
 
 

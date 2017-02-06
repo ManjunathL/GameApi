@@ -1,203 +1,136 @@
-<section class="menu-spacer bg-light-gray" xmlns="http://www.w3.org/1999/html">
+<section class="menu-spacer bg-light-gray">
 
     <div class="container-fluid category-banner">
         <div class="row">
             <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
             <% if(filter.selectedCategoryName == 'kitchen'){ %>
-            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <img width="100%" src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive hidden-xs" alt="Kitchen">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481197718/project_details/KitchenFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Kitchen">
             <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-            <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
+            <img width="100%" src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive hidden-xs" alt="Bedroom">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481198346/project_details/BedroomFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Bedroom">
             <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-            <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
+            <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive hidden-xs" alt="Living & Dining">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481198438/project_details/LivingRoomFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Living & Dining">
+
             <% } %>
             <% }else{ %>
-            <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
+            <img width="100%" src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive hidden-xs" alt="Kitchen">
+            <img width="100%" src="https://res.cloudinary.com/mygubbi/image/upload/v1481197718/project_details/KitchenFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Kitchen">
             <% } %>
         </div>
     </div>
 
-    <div class="container-fluid bg-white hidden-xs">
+    <div class="bg-white hidden-xs">
         <div class="container">
             <div class="row">
-                <ul class="breadcrumb">
-                    <li><a href="/"><i class="fa fa-home"></i></a></li>
-                    <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
-                    <li class="active"><a href="javascript:void(0);"><span
-                            class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
-                    <% }else{ %>
-                    <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){
-                    %>
-                    <li>
-                        <% if(filter.selectedCategoryName == 'living & dining'){ %>
-                        <a href="/living-and-dining-room-designs">Storage Solutions</a>
-                        <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
-                        <a href="/kitchen-cabinet-design"><%= filter.selectedCategoryName %></a>
-                        <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-                        <a href="/bedroom-interior-design">Wardrobe</a>
-                        <% } %>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb">
+                        <li><a href="/"><i class="fa fa-home"></i></a></li>
+                        <% var city = filter.location; %>
 
-                    </li>
-                    <% } %>
-                    <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
-                    null){ %>
-                    <li class="active">
-                        <% if(filter.selectedSubCategoryName == 'Wardrobe'){ %>
-                        <a href="javascript:void(0);"><span class="li-txt-wrap">Wardrobe Collection</span></a></li>
-                    <% }else { %>
-                    <a href="javascript:void(0);"><span class="li-txt-wrap"><%= filter.selectedSubCategoryName %></span></a></li>
-                    <% } %>
-                    <% } %>
-                    <% } %>
-                </ul>
+                        <% if(typeof(filter.searchTerm) !== 'undefined' && filter.searchTerm != null){ %>
+                        <li class="active"><a href="javascript:void(0);"><span
+                                class="li-txt-wrap"><%= filter.searchTerm %></span></a></li>
+                        <% }else{ %>
+                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){
+                        %>
+                        <li>
+                            <% if(city == 'website'  && filter.selectedCategoryName == 'kitchen') { %>
+                            <% var cityKitchen = 'kitchen-cabinet-design' %>
+                            <% }else { %>
+                            <% var cityKitchen = 'modular-kitchen-cabinet' %>
+                            <% } %>
+                            <% if(city == 'website'  && filter.selectedCategoryName == 'bedroom') { %>
+                            <% var cityWardrobe = 'wardrobe-designs-online' %>
+                            <% }else { %>
+                            <% var cityWardrobe = 'wardrobes-online' %>
+                            <% } %>
+                            <% if(city == 'website'  && filter.selectedCategoryName == 'living & dining') { %>
+                            <% var cityStorage = 'storage-solutions' %>
+                            <% }else { %>
+                            <% var cityStorage = 'storage-solutions' %>
+                            <% } %>
+
+                            <% if(filter.selectedCategoryName == 'living & dining'){ %>
+                            <a href="<%= cityStorage %><% if(city != 'website') { %>-<%= city %>  <% }else { %>
+                        <%  %>
+                        <% } %> ">Storage Solutions <% if(city != 'website') { %> - <%= city %>  <% }else { %>
+                                <%  %>
+                                <% } %>  </a>
+                            <% }else if(filter.selectedCategoryName == 'kitchen'){ %>
+                            <a href="<%= cityKitchen %><% if(city != 'website') { %>-<%= city %>  <% }else { %>
+                        <%  %>
+                        <% } %> " >Kitchen <% if(city != 'website') { %> - <%= city %>  <% }else { %>
+                                <%  %>
+                                <% } %> </a>
+                            <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
+                            <a href="<%= cityWardrobe %><% if(city != 'website') { %>-<%= city %>  <% }else { %>
+                        <%  %>
+                        <% } %> " >Wardrobe <% if(city != 'website') { %> - <%= city %>  <% }else { %>
+                                <%  %>
+                                <% } %> </a>
+                            <% } %>
+
+
+                        </li>
+                        <% } %>
+                        <% if(city == 'website' ){ %>
+                        <% var city = '' } %>
+                        <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
+                        null && filter.selectedSubCategoryName != "Wardrobe"){ %>
+
+                        <li class="active">
+                            <a href="" id="breadcrum-link"><span class="li-txt-wrap" style="cursor: pointer;"><%= filter.selectedSubCategoryName %> <% if(city != '') { %> - <%= city %> <% } %></span></a></li>
+                        <% } %>
+                        <% } %>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid ">
 
-        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-        <% if(filter.selectedCategoryName == 'kitchen'){ %>
-        <!-- <section class="collection-banner bg-color-white">
-             <div class="row">
-                 <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-                     <div class="collection-img-right">
-                         <a href="/know-your-kitchen"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/know_your_kitchen.png" alt="know your kitchen">
-                         <h5>Know Your Kitchen</h5></a>
-                         <div class="go-link">
-                             <a href="/know-your-kitchen"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
-                         </a>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-                     <div class="collection-design-heading">
-                         <h2> KITCHEN DESIGNS </h2>
-                     </div>
-                     <div class="collection-design-icon">
-                         <a href="#" class="" id="youtubelnk" data-toggle="modal" data-target="#videoModal" data-theVideo="https://www.youtube.com/embed/_txE3dw4DaA"><img class="img-center img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1470305038/product_collection/video.png"  alt="Null">
-                              </a>
-
-                         <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
-                             <div class="modal-dialog">
-                                 <div class="modal-content">
-                                     <div class="modal-body">
-                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                         <div>
-                                             <iframe width="100%" height="350" src=""></iframe>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-                     <div class="collection-img-left">
-                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470303648/product_collection/treanding_design.png" alt="know your kitchen">
-                         <h5>Trending Designs</h5>
-                         <div class="go-link">
-                             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1470304099/product_collection/go.png" alt="know your kitchen">
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </section>                --><% }else if(filter.selectedCategoryName == 'bedroom'){ %>
-        <!--
-                        <img src="<%= imgBase + 'BedroomFinal.jpg'%>" class="img-responsive" alt="Bedroom">
-        -->
-        <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
-        <!--
-                        <img src="<%= imgBase + 'LivingRoomFinal.jpg'%>" class="img-responsive" alt="Living & Dining">
-        -->
-        <% } %>
-        <% }else{ %>
-        <!--
-                        <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive" alt="Kitchen">
-        -->
-        <% } %>
-    </div>
-    <!-- H1 tag heading start -->
-  <!--  <div class="h1-tag-content container-fluid bg-color-white align-center">
-        <h1>
-     <% if(typeof(filter.selectedSubCategoryName) !== 'undefined' && filter.selectedSubCategoryName !=
-            null){ %>
-            <%= filter.selectedSubCategoryName %>
-            <% }else if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-            <%= filter.selectedCategoryName %>
-            <% } %>
-        </h1>
-    </div>-->
-    <!-- H1 tag heading end -->
-    <div class="container-fluid bg-color-white" id="filter-desc-container">
+    <div class="bg-white" id="filter-desc-container">
         <div class="container">
-            <div class="row filter-desc-col position-relative" id="filter-desc">
-               <!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
-                    <div class="design-count margin0">
-                        <%= collection.length %>
-                        Products
-                        Found
-                    </div>
-                </div>-->
-
-                <div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
-                    <div id="filtered-list">
-                        <% var flag = 0; %>
-                        <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ var count = 0; %>
-                        <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                        <% if (count < 4){ %>
-                            <span class="font-size14 tag-card">
-                                <span class="padding-right10"><%= filtername %></span>
-                                <span
-                                        class="pe-7s-close font-size25 tag-card-close"
-                                        onclick="removeFilters('<%= filtername %>')">
+            <div class="row" id="filter-desc">
+                <div class="filter-desc-col position-relative">
+                    <div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
+                        <div id="filtered-list">
+                            <% var flag = 0; %>
+                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ var count = 0; %>
+                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                            <% if (count < 4){ %>
+                                <span class="font-size14 tag-card">
+                                    <span class="padding-right10"><%= filtername %></span>
+                                    <span class="pe-7s-close font-size25 tag-card-close" onclick="removeFilters('<%= filtername %>')"> </span>
                                 </span>
-                            </span>
-                        <% count = count + 1; }else { flag = 1; } }); %>
-                        <% } %>
+                            <% count = count + 1; }else { flag = 1; } }); %>
+                            <% } %>
+                            <% if (filter.selectedFiltersName != '' && filter.filterIds != '') {%>
+                            <% if(flag == 1){ %>
+                            <span class="tag-card" id="filter-ellipses" data-toggle="tooltip" data-placement="bottom" title="More Filters Applied">...</span>
+                            <% } %>
+                            <span class="tag-card color-orange margin0" id="clear_all" onclick="removeAllFilters()"> Clear All </span>
+                            <% } %>
+                        </div>
+                    </div>
 
-                        <!--<% if((typeof(filter.minPrice) !== 'undefined' && typeof(filter.maxPrice) !== 'undefined') && ((filter.maxPrice !=  filter.maxPriceLimit) && (filter.minPrice != filter.minPriceLimit))){ %>-->
-                        <!--<span class="tag-card"><%= '&#8377;'+filter.minPrice+' - '+ filter.maxPrice %><a href="javascript:void(0);" onclick="removePrice()">X</a></span>-->
-                        <!--<% } %>-->
-                        <% if (filter.selectedFiltersName != '' && filter.filterIds != '') {%>
-                        <% if(flag == 1){ %>
-                         <span
-                                 class="tag-card"
-                                 id="filter-ellipses"
-                                 data-toggle="tooltip"
-                                 data-placement="bottom"
-                                 title="More Filters Applied"
-                         >...</span>
-                        <% } %>
-                        <span class="tag-card color-orange margin0" id="clear_all" onclick="removeAllFilters()">Clear All</span>
-                        <% } %>
+                    <div class="col-sm-4 col-xs-4 hidden-lg hidden-md mob-padding-top-10">
+                        <span class="button filter-button"> Filter </span>
+                    </div>
+
+                    <div class="col-sm-8 hidden-xs hidden-lg hidden-md">
+                        <div class="slight-up">
+                            <span class="glyphicon glyphicon-th-large view-select <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %> active<% } %>"></span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="hidden-lg hidden-md col-sm-4 col-xs-4">
-                    <span class="button filter-button">Filter</span>
-                </div>
-
-                <div class="hidden-lg hidden-md col-sm-2 hidden-xs">
-                    <div class="row slight-up">
-                        <!--  <span class="glyphicon glyphicon-th-list view-select border-right0
-                           <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
-                          active
-                          <% } %>"
-                          ></span>--><%
-                        %><span class="glyphicon glyphicon-th-large view-select
-                        <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
-                        active
-                        <% } %>"
-                    ></span>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 
-    <div class="container-fluid portfolio-box bg-white hidden-sm hidden-xs" id="filter-choose-container">
+    <div class="portfolio-box bg-white hidden-sm hidden-xs" id="filter-choose-container">
         <div class="container">
-
             <div class="row padding10-0" id="filter-choose">
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
                     <h4>Filters:</h4>
@@ -245,96 +178,96 @@
                         <% } %>
 
                         <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %>
-<!--
-                        <li class="padding0-20">
-                            <a
-                                    class="dropdown-toggle"
-                                    id="dropdownMenu_pricerange"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="true">
-                                Price Range
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                &lt;!&ndash; <% _.each(filterMaster.price_ranges, function(range){ %>
-                                 <li class="
-                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                 <% if(range.name == filtername){ %> noclick <% } %>
-                                 <% }); %>
-                                 <% } %>"
-                                     id="<%= range.id + 'p_r' %>"
-                                     title="<%= range.name %>"
-                                     onclick="getPriceRangeId(this.id,this.title)">
-                                     <a>
-                                         <input
-                                                 type="checkbox"
-                                                 class="margin-right-5"
-                                                 name="price_range"
-                                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                         <% if(range.name == filtername){ %> checked <% } %>
-                                         <% }); %>
-                                         <% } %>>
-                                         <%= range.name %>
-                                     </a>
-                                 </li>
-                                 <% }); %>&ndash;&gt;
-                                <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                                <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
-                                <li>
-                                    &lt;!&ndash; <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                                     <div class="price-slide">
-                                         <div class="slider-ioc">  </div>
-                                     <div id="slider-range-min"></div>
-                                         </div>
-                                     <div class="price-tag">
-                                         <div class="pull-left"> Rs 1 </div>
-                                         <div class="pull-right"> Rs 400000 </div>
-                                     </div>&ndash;&gt;
-                                    <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
-    margin-left: 26px;" />
-                                    <div class="price-slide">
-                                        <div class="slider-ioc"></div>
+                        <!--
+                                                <li class="padding0-20">
+                                                    <a
+                                                            class="dropdown-toggle"
+                                                            id="dropdownMenu_pricerange"
+                                                            data-toggle="dropdown"
+                                                            aria-haspopup="true"
+                                                            aria-expanded="true">
+                                                        Price Range
+                                                        <span class="caret"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
+                                                        &lt;!&ndash; <% _.each(filterMaster.price_ranges, function(range){ %>
+                                                         <li class="
+                                                         <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                                         <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                                         <% if(range.name == filtername){ %> noclick <% } %>
+                                                         <% }); %>
+                                                         <% } %>"
+                                                             id="<%= range.id + 'p_r' %>"
+                                                             title="<%= range.name %>"
+                                                             onclick="getPriceRangeId(this.id,this.title)">
+                                                             <a>
+                                                                 <input
+                                                                         type="checkbox"
+                                                                         class="margin-right-5"
+                                                                         name="price_range"
+                                                                 <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                                                 <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                                                 <% if(range.name == filtername){ %> checked <% } %>
+                                                                 <% }); %>
+                                                                 <% } %>>
+                                                                 <%= range.name %>
+                                                             </a>
+                                                         </li>
+                                                         <% }); %>&ndash;&gt;
+                                                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                                                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
+                                                        <li>
+                                                            &lt;!&ndash; <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                                             <div class="price-slide">
+                                                                 <div class="slider-ioc">  </div>
+                                                             <div id="slider-range-min"></div>
+                                                                 </div>
+                                                             <div class="price-tag">
+                                                                 <div class="pull-left"> Rs 1 </div>
+                                                                 <div class="pull-right"> Rs 400000 </div>
+                                                             </div>&ndash;&gt;
+                                                            <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
+                            margin-left: 26px;" />
+                                                            <div class="price-slide">
+                                                                <div class="slider-ioc"></div>
 
-                                        <div  id="slider-range"></div>
-                                    </div>
-                                    <div class="price-tag">
-                                        <div class="pull-left"> Rs 0 </div>
-                                        <div class="pull-right"> Rs 600000 </div>
-                                    </div>
-                                </li>
+                                                                <div  id="slider-range"></div>
+                                                            </div>
+                                                            <div class="price-tag">
+                                                                <div class="pull-left"> Rs 0 </div>
+                                                                <div class="pull-right"> Rs 600000 </div>
+                                                            </div>
+                                                        </li>
 
-                                <% }else{ %>
-                                <li>
-                                    <p>
-                                        <input type="text" id="amount2" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
-    margin-left: 26px;" />
-                                    </p>
-                                    <div class="price-slide">
-                                        <div class="slider-ioc"></div>
-                                        <div id="slider-range2"></div>
-                                    </div>
-                                    <div class="price-tag">
-                                        <div class="pull-left"> Rs 0 </div>
-                                        <div class="pull-right"> Rs 40000 </div>
-                                    </div>
-                                    &lt;!&ndash;   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                                       <div class="price-slide">
-                                           <div class="slider-ioc">  </div>
-                                       <div id="slider-range-min2"></div>
-                                           </div>
-                                       <div class="price-tag">
-                                           <div class="pull-left"> Rs 1</div>
-                                           <div class="pull-right"> Rs 40000 </div>
-                                       </div>&ndash;&gt;
-                                </li>
-                                <% } %>
-                                <% } %>
-                            </ul>
-                        </li>
--->
+                                                        <% }else{ %>
+                                                        <li>
+                                                            <p>
+                                                                <input type="text" id="amount2" style="border: 0; color: #f6931f; font-weight: bold;margin-bottom: 10px;
+                            margin-left: 26px;" />
+                                                            </p>
+                                                            <div class="price-slide">
+                                                                <div class="slider-ioc"></div>
+                                                                <div id="slider-range2"></div>
+                                                            </div>
+                                                            <div class="price-tag">
+                                                                <div class="pull-left"> Rs 0 </div>
+                                                                <div class="pull-right"> Rs 40000 </div>
+                                                            </div>
+                                                            &lt;!&ndash;   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                                               <div class="price-slide">
+                                                                   <div class="slider-ioc">  </div>
+                                                               <div id="slider-range-min2"></div>
+                                                                   </div>
+                                                               <div class="price-tag">
+                                                                   <div class="pull-left"> Rs 1</div>
+                                                                   <div class="pull-right"> Rs 40000 </div>
+                                                               </div>&ndash;&gt;
+                                                        </li>
+                                                        <% } %>
+                                                        <% } %>
+                                                    </ul>
+                                                </li>
+                        -->
                         <% } %>
 
                         <% if(typeof(filterMaster.styles) !== 'undefined'){ %>
@@ -385,74 +318,29 @@
 
 
                 </div>
-                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs align-right">
-                    <!--
-                      ========================== Sorting dropdown ==================================
-                    -->
-                    <!--
-                                        <span>
-                                            <a
-                                                    class="dropdown-toggle color-333 sortby"
-                                                    id="dropdownMenu_sort"
-                                                    data-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="true">
-                                                Sort By
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu drop left-none" aria-labelledby="dropdownMenu">
-                                                <li class="sort-list"><a href="javascript:void(0);" id="popularity" rel="desc"
-                                                                         onclick="setSorting(this.id,this.rel);">Popular</a></li>
-                                                <li class="sort-list"><a href="javascript:void(0);" id="relevance" rel="desc"
-                                                                         onclick="setSorting(this.id,this.rel);">Relevance</a></li>
-                                                <li class="sort-list">
-                                                    <a href="javascript:void(0);" id="defaultPrice" rel="<%= filter.sortDir %>"
-                                                       onclick="setSorting(this.id,this.rel);">
-                                                        Price
-                                                        <% if (filter.sortDir === 'desc') { %>
-                                                        <span class="pe-7s-angle-down sort-arrow"></span>
-                                                        <% } else if (filter.sortDir === 'asc') { %>
-                                                        <span class="pe-7s-angle-up sort-arrow"></span>
-                                                        <% } %>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </span>
-                    -->
-                  <span class="glyphicon glyphicon-th-list view-select border-right0
+                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs text-right">
+                    <span class="glyphicon glyphicon-th-list view-select border-right0
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largelist')){ %>
                         active
-                        <% } %>"
-                  ></span><%
-                    %><span class="glyphicon glyphicon-th-large view-select border-right0
+                        <% } %>">
+                    </span>
+                    <span class="glyphicon glyphicon-th-large view-select border-right0
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'largegrid')){ %>
                         active
-                        <% } %>"
-                ></span><%
-                    %><span class="glyphicon glyphicon-th view-select
+                        <% } %>">
+                    </span>
+                    <span class="glyphicon glyphicon-th view-select
                         <% if(typeof(filter.viewtype) !== 'undefined' && (filter.viewtype == 'shortgrid')){ %>
                         active
-                        <% } %>"
-                ></span>
+                        <% } %>">
+                    </span>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!--<div class="row filter-group">-->
-    <!--<div class="fname col-md-2">Price</div>-->
-    <!--<div class="filter-list col-md-10">-->
-    <!--<div class="btn-group">-->
-
-    <!--<p>-->
-    <!--<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">-->
-    <!--</p>-->
-    <!--<div id="slider-range"></div>-->
-
-
-    <div class="container-fluid bg-color-white">
-        <div class="container margin-top40">
+    <div class="bg-white">
+        <div class="container">
             <div class="listing"></div>
         </div>
     </div>
@@ -461,178 +349,143 @@
         <span class="fa fa-chevron-up"></span>
     </a>
 
-    <!-- Filter Menu Popup -->
     <div class="filterpop hidden-lg hidden-md">
-        <!-- <div class="row">
-             <h4>Filters</h4>
-             <span class="button border1px position-absolute right10per" onclick="removeAllFilters()">Clear All</span>
-         </div>-->
-
-        <div class="row padding20-0">
-            <div class="col-sm-4 col-xs-4 separator-vertical">
-                <div class="row padding10_0_30 active" id="subcatFilter">
-                    <% if(typeof(subcategoriesList) !== 'undefined'){ %> Sub Category <% } %>
-                </div>
-               <!-- <div class="row padding10_0_30" id="priceFilter">
-                    <% if(typeof(filterMaster.price_ranges) !== 'undefined'){ %> Price Range <% } %>
-                </div>-->
-                <div class="row padding10_0_30" id="styleFilter">
-                    <% if(typeof(filterMaster.styles) !== 'undefined'){ %> Style <% } %>
-                </div>
-
-            </div>
-            <div class="col-sm-8 col-xs-8 padding-left25">
-                <div id="subcatFilterDesc">
-                    <% _.each(subcategoriesList, function(subcat){ %>
-
-                    <div class="row subcategorycls separator-horizontal
-                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                <% if(subcat.name == filtername){ %> noclick <% } %>
-                                <% }); %>
-                                <% } %>"
-                         id="<%= subcat.id + 's_c' + 'fil' %>"
-                         title="<%= subcat.name %>"
-                         onclick="getFil(this.id)">
-                        <label>
-                            <input
-                                    type="checkbox"
-                                    class="margin-right-5"
-                                    name="subcat"
-                                    value="<%= subcat.name %>"
-                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                            <% if(subcat.name == filtername){ %> checked <% } %>
-                            <% }); %>
-                            <% } %>>
-                            <%= subcat.name %>
-                        </label>
-                    </div>
-                    <% }); %>
-                </div>
-
-                <div id="priceFilterDesc">
-
-                    <!--<% _.each(filterMaster.price_ranges, function(range){ %>
-                    <div class="row separator-horizontal
-                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                <% if(range.name == filtername){ %> noclick <% } %>
-                                <% }); %>
-                                <% } %>"
-                         id="<%= range.id + 'p_r' + 'fil' %>"
-                         title="<%= range.name %>"
-                         onclick="getFil(this.id)">
-                        <label>
-                            <input
-                                    type="checkbox"
-                                    class="margin-right-5"
-                                    name="price_range"
-                                    value="<%= range.name %>"
-                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                            <% if(range.name == filtername){ %> checked <% } %>
-                            <% }); %>
-                            <% } %>>
-                            <%= range.name %>
-                        </label>
-                    </div>
-                    <% }); %>-->
-                    <div class="row separator-horizontal">
-
-                        <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
-                        <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
-                        <input type="text" id="amount3" style="border: 0; color: #f6931f; font-weight: bold;" />
-
-                        <div class="price-slide">
-                            <div class="slider-ioc"></div>
-                            <div id="slider-range3"></div>
-                        </div>
-                        <div class="price-tag">
-                            <div class="pull-left"> Rs 0 </div>
-                            <div class="pull-right"> Rs 600000  </div>
-                        </div>
-                        <% }else{ %>
-                        <input type="text" id="amount4" style="border: 0; color: #f6931f; font-weight: bold;" />
-
-                        <div class="price-slide">
-                            <div class="slider-ioc"></div>
-                            <div id="slider-range4"></div>
-                        </div>
-                        <div class="price-tag">
-                            <div class="pull-left"> Rs 0</div>
-                            <div class="pull-right"> Rs 40000  </div>
-                        </div>
-                        <% } %>
-                        <% } %>
-                    </div>
-                </div>
-                <div id="styleFilterDesc">
-                    <% _.each(filterMaster.styles, function(style){ %>
-                    <div class="row separator-horizontal
-                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                                <% if(style.name == filtername){ %> noclick <% } %>
-                                <% }); %>
-                                <% } %>"
-                         id="<%= style.id + 'sty' +'fil' %>"
-                         title="<%= style.name %>"
-                         onclick="getFil(this.id)">
-                        <label>
-                            <input
-                                    type="checkbox"
-                                    class="margin-right-5"
-                                    name="style"
-                                    value="<%= style.name %>"
-                            <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                            <% _.each(filter.selectedFiltersName, function(filtername){ %>
-                            <% if(style.name == filtername){ %> checked <% } %>
-                            <% }); %>
-                            <% } %>>
-                            <%= style.name %>
-                        </label>
-                    </div>
-                    <% }); %>
-                </div>
-
-
-
-
-            </div>
-
-
-
-            <div class="row align-center padding10-0">
-                <span class="button border1px" onclick="applyFilters()">Apply</span>
-            </div>
-
+        <div class="container">
             <div class="row">
-                <h5>Filters Applied :</h5>
-            </div>
-
-            <div class="row">
-                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
-                <% _.each(filter.selectedFiltersName, function(filtername){ %>
-
-                <div class="font-size14 tag-card">
-                    <span class="padding-right20"><%= filtername %></span>
-                    <span
-                            class="pe-7s-close font-size25 tag-card-close"
-                            onclick="removeFilters('<%= filtername %>')">
-                    </span>
+                <div class="col-sm-4 col-xs-4 ">
+                    <div class="separator-vertical">
+                        <div class="padding10_0_30 active" id="subcatFilter">
+                            <% if(typeof(subcategoriesList) !== 'undefined'){ %> Sub Category <% } %>
+                        </div>
+                        <div class="padding10_0_30" id="styleFilter">
+                            <% if(typeof(filterMaster.styles) !== 'undefined'){ %> Style <% } %>
+                        </div>
+                    </div>
                 </div>
-                <% }); %>
-                <% } %>
-            </div>
 
-            <div class="close-icon2per" onclick="closePop()">
-                <img src="<%= imgBase + 'close-white.png'%>" title="Close" alt="Close">
-            </div>
+                <div class="col-sm-8 col-xs-8">
+                    <div id="subcatFilterDesc">
+                        <% _.each(subcategoriesList, function(subcat){ %>
 
+                        <div class="subcategorycls separator-horizontal
+                                    <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                    <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                    <% if(subcat.name == filtername){ %> noclick <% } %>
+                                    <% }); %>
+                                    <% } %>"
+                             id="<%= subcat.id + 's_c' + 'fil' %>"
+                             title="<%= subcat.name %>"
+                             onclick="getFil(this.id)">
+                            <label>
+                                <input
+                                        type="checkbox"
+                                        class="margin-right-5"
+                                        name="subcat"
+                                        value="<%= subcat.name %>"
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(subcat.name == filtername){ %> checked <% } %>
+                                <% }); %>
+                                <% } %>>
+                                <%= subcat.name %>
+                            </label>
+                        </div>
+                        <% }); %>
+                    </div>
+
+                    <div id="priceFilterDesc">
+                        <div class="separator-horizontal">
+
+                            <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
+                            <% if(filter.selectedCategoryName == 'kitchen' || filter.selectedCategoryName == 'bedroom'){ %>
+                            <input type="text" id="amount3" style="border: 0; color: #f6931f; font-weight: bold;" />
+
+                            <div class="price-slide">
+                                <div class="slider-ioc"></div>
+                                <div id="slider-range3"></div>
+                            </div>
+                            <div class="price-tag">
+                                <div class="pull-left"> Rs 0 </div>
+                                <div class="pull-right"> Rs 600000  </div>
+                            </div>
+                            <% }else{ %>
+                            <input type="text" id="amount4" style="border: 0; color: #f6931f; font-weight: bold;" />
+
+                            <div class="price-slide">
+                                <div class="slider-ioc"></div>
+                                <div id="slider-range4"></div>
+                            </div>
+                            <div class="price-tag">
+                                <div class="pull-left"> Rs 0</div>
+                                <div class="pull-right"> Rs 40000  </div>
+                            </div>
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div id="styleFilterDesc">
+                        <% _.each(filterMaster.styles, function(style){ %>
+                        <div class="row separator-horizontal
+                                    <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                    <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                    <% if(style.name == filtername){ %> noclick <% } %>
+                                    <% }); %>
+                                    <% } %>"
+                             id="<%= style.id + 'sty' +'fil' %>"
+                             title="<%= style.name %>"
+                             onclick="getFil(this.id)">
+                            <label>
+                                <input
+                                        type="checkbox"
+                                        class="margin-right-5"
+                                        name="style"
+                                        value="<%= style.name %>"
+                                <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                                <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                                <% if(style.name == filtername){ %> checked <% } %>
+                                <% }); %>
+                                <% } %>>
+                                <%= style.name %>
+                            </label>
+                        </div>
+                        <% }); %>
+                    </div>
+
+                </div>
+
+                <div class="close-icon2per" onclick="closePop()">
+                    <img src="<%= imgBase + 'close-white.png'%>" title="Close" alt="Close">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="text-center padding10-0">
+                        <span class="btn btn-explore" onclick="applyFilters()"> Apply </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <h5> Filters Applied : </h5>
+
+                    <div class="cart-wrapper">
+                        <% if(typeof(filter.selectedFiltersName) !== 'undefined'){ %>
+                        <% _.each(filter.selectedFiltersName, function(filtername){ %>
+                        <div class="font-size14 tag-card">
+                            <span class="padding-right20"><%= filtername %></span>
+                        <span class="pe-7s-close font-size25 tag-card-close"
+                              onclick="removeFilters('<%= filtername %>')">
+                        </span>
+                        </div>
+                        <% }); %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Filter Menu Popup End -->
     </div>
-    <!-- start menu switch -->
+
     <div class="bg-light-gray mt30 mb30">
         <div class="container-fluid">
             <div class="row">
@@ -642,12 +495,12 @@
                     <div class="page-pre-tab">
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <a href="/living-and-dining-room-designs">
+                                <a href="/storage-solutions">
                                     <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
                                 </a>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
+                                <h2><a href="/storage-solutions"> Single Unit </a></h2>
                             </div>
                         </div>
                     </div>
@@ -671,12 +524,12 @@
                     <div class="page-pre-tab">
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <a href="/living-and-dining-room-designs">
+                                <a href="/storage-solutions">
                                     <img class="img-responsive img-thumbnail" src="https://res.cloudinary.com/mygubbi/image/upload/v1471524152/product_collection/single_unit1.jpg" alt="tab-img">
                                 </a>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <h2><a href="/living-and-dining-room-designs"> Single Unit </a></h2>
+                                <h2><a href="/storage-solutions"> Single Unit </a></h2>
                             </div>
                         </div>
                     </div>
@@ -729,7 +582,6 @@
             </div>
         </div>
     </div>
-    <!-- end menu switch -->
 
     <div class="container-fluid bg-color-white">
         <div class="container justify">
@@ -739,7 +591,6 @@
 
 </section>
 
-
 <script>
     $(document).ready(function () {
 
@@ -748,7 +599,11 @@
         $(window).scroll(function () {
             if ($(this).scrollTop() > offset) {
                 $('.back-to-top').fadeIn(duration);
-                $('#filter-desc-container').addClass('stick').css({'top': '0px'});
+                if(document.documentElement.clientWidth < 900){
+                    $('#filter-desc-container').addClass('stick').css({'top': '75px'});
+                }else{
+                    $('#filter-desc-container').addClass('stick').css({'top': '116px'});
+                }
                 //$('#filter-desc').css({'padding': '10px 0px'});
                 $('#filter-desc').css({'line-height': '2'});
                 $('.filter-desc-col').addClass('stick-tag');
@@ -758,7 +613,12 @@
                 $('#filter-desc-container').removeClass('stick');
                 //$('#filter-desc').css({'padding': '20px 0px'});
                 $('.filter-desc-col').removeClass('stick-tag');
-                $('#filtered-list').removeClass('stick').css({'top': '0px'});
+                if(document.documentElement.clientWidth < 900){
+                   $('#filtered-list').removeClass('stick').css({'top': '75px'});
+                }else{
+                    $('#filtered-list').removeClass('stick').css({'top': '116px'});
+                }
+
                 $('#filter-choose-container').removeClass('stick').slideDown();
             }
 
@@ -772,7 +632,7 @@
         });
 
         $('#filter-desc-container').on('mouseenter', '.stick-tag', function () {
-            $('#filter-choose-container').addClass('stick').animate({'top': '0px'}, 500);
+            $('#filter-choose-container').addClass('stick').animate({'top': '116px'}, 500);
             $('#filter-choose-container').css('display', 'block');
         });
 
@@ -791,8 +651,7 @@
         });
 
         $('#filtered-list').css({
-            'white-space': 'nowrap',
-            'overflow': 'hidden'
+            'white-space': 'nowrap'
         });
 
 
@@ -833,8 +692,21 @@
 
         $('[data-toggle="tooltip"]').tooltip();
 
-
         var meta = 'mygubbi';
+        var metakeyword = 'mygubbi';
+        var metatitle = 'mygubbi';
+        var url = $(location).attr('href');
+
+        meta = filter.get('metaDesc');
+        $("meta[name='description']").attr("content", meta);
+
+        metakeyword = filter.get('metaKeyword');
+        $("meta[name='keywords']").attr("content", metakeyword);
+
+        metatitle = filter.get('metaTitle');
+        document.title = metatitle;
+
+        /*var meta = 'mygubbi';
         var metakeyword = 'mygubbi';
         var url = $(location).attr('href');
 
@@ -987,7 +859,7 @@
 
             $(".h1-tag-content h1").html("buy kitchen cabinets");
 
-        }else if (url.indexOf('/living-and-dining-room-designs') != -1) {
+        }else if (url.indexOf('/storage-solutions') != -1) {
 
             meta = 'Buy Your Living Room furniture online from MyGubbi and jazz up your life with the latest Décor.Get Your Dining Room furniture custom made by picking out from a range of dining room designs';
             $("meta[name='description']").attr("content", meta);
@@ -1030,7 +902,7 @@
         }else {
             $("meta[name='description']").attr("content", meta);
             $("meta[name='keywords']").attr("content", metakeyword);
-        }
+        }*/
 
     });
 
@@ -1255,51 +1127,6 @@
         }
     }
 </script>
-<style>
-    .collection-img-right{
-    float: right;
-    margin: 10px;
-    }
-    .collection-img-left{
-    float: left;
-    margin: 10px;
-    }
-
-    .collection-design-heading {
-    border-bottom: 1px solid #ddd;
-    margin: 10px auto;
-    padding-bottom: 5px;
-    display: inline-block;
-    color: #415159;
-    }
-    .collection-design-heading h2{
-    font-weight: 100;
-    }
-    .collection-img-right h5{
-    margin-bottom: 3px;
-    font-weight: 100;
-    }
-    .collection-img-left h5{
-    margin-bottom: 3px;
-    font-weight: 100;
-    }
-    @media (max-width: 768px) {
-    .collection-img-right{
-    float: none;
-    }
-    .collection-img-left{
-    float: none;
-    }
-    }
-    @media (max-width: 480px) {
-    .collection-img-right{
-    float: none;
-    }
-    .collection-img-left{
-    float: none;
-    }
-    }
-</style>
 <script>
 
   $(function() {
@@ -1338,7 +1165,6 @@
       max: 600000,
       values: [ filter.get('priceRangeS'), filter.get('priceRangeS1') ],
       slide: function( event, ui ) {
-  console.log(ui.values[1]);
         $( "#amount3" ).val( "Rs " + ui.values[ 0 ] + " - Rs " + ui.values[ 1 ] );
       },
       change: function(event, ui) {

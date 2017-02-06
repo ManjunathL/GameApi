@@ -16,6 +16,7 @@ define([
     var NriPageVIew = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
 
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(nriPageTemplate)({
@@ -26,7 +27,9 @@ define([
         },
 
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
+            document.getElementById("canlink").href = window.location.href;
+
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             this.ready();
         },

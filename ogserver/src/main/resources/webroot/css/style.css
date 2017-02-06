@@ -1,9 +1,8 @@
 /*
     Template: 		Mygubbi
     Description: 	Main Style sheet
-    Version: 		beta
-    Author: 		Smruti Mohanty, Mehaboob Basha
-    Optimized By:   Nagmani Bhushan
+    Version: 		1.1
+    Author: 		Smruti Mohanty & Mehaboob Basha
 */
 
 /* Global Attributes */
@@ -124,6 +123,10 @@ input[type=checkbox] {
 
 .text-normal{
     text-transform: inherit;
+}
+
+.font-noraml{
+    font-weight: noraml;
 }
 
 .nowrap{
@@ -420,35 +423,6 @@ input[type=checkbox] {
     padding-bottom:100px;
 }
 
-/* Padding Right */
-
-.pr0{
-    padding-right:0;
-}
-
-.pr10{
-    padding-right:10px;
-}
-
-.pr20{
-    padding-right:20px;
-}
-
-/* Padding Left */
-
-.pl0{
-    padding-left:0;
-}
-
-.pl10{
-    padding-left:10px;
-}
-
-.pl20{
-    padding-left:20px;
-}
-
-
 /* Margin Old Attributes */
 
 .margin0 {
@@ -567,8 +541,26 @@ input[type=checkbox] {
     .mob-padding-15{
         padding: 15px;
     }
+    .mob-padding-top-10{
+        padding-top: 10px;
+    }
+    .mob-padding-bottom-10{
+        padding-bottom: 10px;
+    }
+    .mob-padding-top-20{
+        padding-top: 20px;
+    }
+    .mob-padding-bottom-20{
+        padding-bottom: 20px;
+    }
     .mob-padding-top-50{
         padding-top: 50px;
+    }
+    .md-center{
+        float: none !important;
+        text-align: center;
+        margin: 10px auto;
+        background: transparent !important;
     }
 }
 
@@ -866,9 +858,9 @@ footer span {
 }
 
 footer h5 {
-    text-transform: uppercase;
     font-weight: 400;
     line-height: 20px;
+    text-transform: inherit;
 }
 
 footer .social-btn-link{
@@ -927,6 +919,9 @@ footer .ioc-circle .glyphicon{
 @media (max-width: 767px) {
     footer .ioc-circle .glyphicon{
         width: 50%;
+    }
+    footer .ioc-circle{
+        float: none;
     }
 }
 
@@ -1182,7 +1177,7 @@ ul.social-buttons li a:active {
    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: 420px;
+    min-height: 420px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -1249,7 +1244,7 @@ ul.social-buttons li a:active {
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470644384/kyk/sink___faucet.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: 420px;
+    min-height: 420px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -1310,7 +1305,7 @@ ul.social-buttons li a:active {
        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470137364/kyk/HANDLE-.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
-        height: 570px;
+        min-height: 570px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
@@ -1328,7 +1323,7 @@ ul.social-buttons li a:active {
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470644384/kyk/sink___faucet.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
-        height: 570px;
+        min-height: 570px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
@@ -1477,16 +1472,16 @@ ul.social-buttons li a:active {
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470396311/kyk/10.jpg");
         background-repeat: no-repeat;
         background-position: inherit;
-        height: auto;
+        min-height: 170px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
         -o-background-size: 100%;
         background-size: 100%;
-        -webkit-background-size: contain;
-        -moz-background-size: contain;
-        -o-background-size: contain;
-        background-size: contain;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
         padding: 15px 0 15px 0;
         text-align: center;
         color: #333333;
@@ -1504,21 +1499,23 @@ ul.social-buttons li a:active {
     .kyk-kyw-head-light{
         color: #333;
     }
-
+    .kyk-sink-cont{
+        text-align: center;
+    }
     .kyk-sink-section{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1470395676/kyk/16.jpg");
         background-repeat: no-repeat;
         background-position: inherit;
-        height: auto;
+        min-height: 170px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
         -o-background-size: 100%;
         background-size: 100%;
-        -webkit-background-size: contain;
-        -moz-background-size: contain;
-        -o-background-size: contain;
-        background-size: contain;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
         padding: 15px 0 15px 0;
         text-align: center;
         color: #333333;
@@ -1660,7 +1657,7 @@ ul.social-buttons li a:active {
     font-weight: 300;
 }
 .kyw-wardrobe-details{
-    padding: 20px 0px 10px;
+    padding: 20px 0px 0px;
 }
 .kyw-wardrobe-details p{
     font-size: 16px;
@@ -1806,7 +1803,7 @@ ul.social-buttons li a:active {
 .kyk-kitchen-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 90px;
     width: 100%;
 }
@@ -1814,7 +1811,7 @@ ul.social-buttons li a:active {
 .kyw-wardrobe-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
@@ -1822,28 +1819,28 @@ ul.social-buttons li a:active {
 .kyw-finishes-type-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 30%;
     width: 100%;
 }
 .kyw-splash-panel-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
 .kyw-material-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
-    top: 10%;
+    z-index: 9;
+    top: 5%;
     width: 100%;
 }
 .kyk-counter-content-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 10%;
     width: 100%;
 }
@@ -1906,7 +1903,7 @@ ul.social-buttons li a:active {
     line-height: 150%;
 }
 .kyw-handle-card{
-    padding: 10px 20px;
+    padding: 10px 20px 0px;
 }
 .kyk-finishe-details{
     color: #ffffff;
@@ -2826,6 +2823,7 @@ ul.social-buttons li a:active {
         margin: 5% 0%;
         width: 100%;
         float: right;
+        text-align: center;
     }
     .kyk-splash-card {
         margin: 5% 0%;
@@ -2848,13 +2846,6 @@ ul.social-buttons li a:active {
     .hidden-mobile{
         display: none !important;
     }
-}
-.clr-search-lnk{
-    position: absolute;
-    top: 15px;
-    right: 5%;
-    color: #999;
-    cursor:pointer;
 }
 
 /* End Global Media Query */
@@ -2882,15 +2873,16 @@ ul.social-buttons li a:active {
 }
 
 .nri-banner-cnt{
-    padding: 30px;
+    padding: 20px 20px 5px;
     color: #ffffff;
     background: rgba(234,97,15,0.7);
-    padding-bottom: 42px;
 }
+
 .nri-banner-cnt h1{
     font-weight: 300;
     margin-bottom: 30px;
 }
+
 .nri-banner-cnt p{
     margin-bottom: 30px;
 }
@@ -2956,11 +2948,14 @@ ul.social-buttons li a:active {
 
 .nri-description-section h4{
     font-size: 14px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .nri-description-section p{
     font-size: 12px;
     padding: 10px 10px 0px;
+    line-height: 160%;
 }
 
 .manufacturing-box{
@@ -2968,8 +2963,8 @@ ul.social-buttons li a:active {
 }
 
 .img-manufacturing{
-    padding: 10px 0px 0px;
-    width: 80px;
+    padding: 7px 0px 0px;
+    width: 65px;
 }
 
 .nri-why-us-section{
@@ -3033,14 +3028,14 @@ ul.social-buttons li a:active {
 .kitchen-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
 .kitchen-tab-sink{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 55%;
     width: 100%;
 }
@@ -3147,14 +3142,14 @@ ul.social-buttons li a:active {
 .kitchen-tab{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 0px;
     width: 100%;
 }
 .kitchen-tab-sink{
     display: block;
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     top: 45%;
     width: 100%;
 }
@@ -3285,7 +3280,36 @@ ul.social-buttons li a:active {
 /* End FAQ Page */
 
 
+/* Start Payment Page */
+.payment-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481700058/payment/payment-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 480px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    text-align: center;
+    color: #ffffff;
+}
+/* End Payment Page */
+
 /* Start Career Page */
+.more {
+  display: none;
+}
+a.showLink,
+a.hideLink {
+  text-decoration: none;
+  color: #f1591f;
+}
 
 .career-bg{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1476333128/career/career_bg.jpg");
@@ -3319,6 +3343,64 @@ ul.social-buttons li a:active {
 .career-offer li.gubbi {
     background: url('https://res.cloudinary.com/mygubbi/image/upload/v1476339052/career/gubbi.png') no-repeat left top;
     padding-left: 35px;
+}
+.nav-career .nav-tabs.nav-justified>.active>a,
+.nav-career .nav-tabs.nav-justified>.active>a:hover,
+.nav-career .nav-tabs.nav-justified>.active>a:focus{
+    border-width: 0px;
+}
+.nav-career .nav-tabs>li>a:hover{
+    background-color: transparent;
+}
+.nav-career .nav-tabs > li.active{
+    border-bottom: 0px solid #f1591f;
+}
+.nav-career img {
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
+}
+.nav-career img:hover {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+          cursor: pointer;
+}
+.nav-career h4{
+    margin-top: 25px;
+    text-transform: capitalize;
+}
+@media (min-width: 768px){
+    .nav-career .nav-tabs.nav-justified>li>a {
+        border: 0px solid #ddd;
+        border-radius: 0;
+    }
+}
+.tab-career{
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+.panel-career>.panel-heading {
+    background-image: -webkit-linear-gradient(top, #556871 0, #61717b 100%);
+    background-image: -o-linear-gradient(top, #556871 0, #61717b 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #556871), to(#61717b));
+    background-image: linear-gradient(to bottom, #556871 0, #61717b 100%);
+    background-repeat: repeat-x;
+}
+.panel-career>.panel-heading {
+    color: #fff;
+    background-color: #556871;
+    border-color: #ddd;
+}
+
+.modal-career{
+
+}
+
+@media (min-width: 1200px) {
+  .modal-xl {
+    width: 1200px;
+  }
 }
 
 /* End Career Page */
@@ -3684,6 +3766,18 @@ ul.social-buttons li a:active {
     position: relative;
 }
 
+@media (max-width: 767px) {
+    .p-service-bg {
+        height: 1060px;
+    }
+}
+
+@media (max-width: 480px) {
+    .p-service-bg {
+        height: 960px;
+    }
+}
+
 .p-service-card .nav-tabs > li > a{
     color: rgba(253,253,253,0.6);
     font-weight: 300;
@@ -3930,7 +4024,8 @@ ul.social-buttons li a:active {
 }
 .blog-borderbtm{
     border-bottom: 2px solid #666;
-    padding: 10px 0px;
+    padding: 5px 0px;
+    display: inline-block;
 }
 .blog-card{
     margin-bottom: 10px;
@@ -3980,6 +4075,7 @@ ul.social-buttons li a:active {
 
 /* End Blog */
 
+
 /*********************************
  ********* Media Query ***********
 **********************************/
@@ -4008,15 +4104,6 @@ ul.social-buttons li a:active {
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
     /* Global Class */
-    .mobile-text-center{
-        text-align: center;
-    }
-    .mobile-text-left{
-        text-align: left;
-    }
-    .mobile-text-right{
-        text-align: right;
-    }
 }
 
 /* Landscape phone to portrait tablet */
@@ -4030,6 +4117,15 @@ ul.social-buttons li a:active {
         text-align: left;
     }
     .mobile-text-right{
+        text-align: right;
+    }
+    .mob-text-center{
+        text-align: center;
+    }
+    .mob-text-left{
+        text-align: left;
+    }
+    .mob-text-right{
         text-align: right;
     }
     /* Start FAQ page */
@@ -4073,6 +4169,12 @@ ul.social-buttons li a:active {
     }
     .mob-text-center{
         text-align: center;
+    }
+    .mob-text-left{
+        text-align: left;
+    }
+    .mob-text-right{
+        text-align: right;
     }
     /* End Quality Page */
 
@@ -4187,29 +4289,10 @@ ul.social-buttons li a:active {
     /* End Platinum Page */
 }
 
-/* Image attributes */
-
-.object-fit_fill {
-  -o-object-fit: fill;
-     object-fit: fill;
-}
-
-.object-fit_contain {
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-
-.object-fit_cover {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.object-fit_none {
-  -o-object-fit: none;
-     object-fit: none;
-}
-
-.object-fit_scale-down {
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+.clr-search-lnk{
+    position: absolute;
+    top: 15px;
+    right: 5%;
+    color: #999;
+    cursor:pointer;
 }

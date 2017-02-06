@@ -16,6 +16,7 @@ define([
         el: '.page',
         ref: null,
         render: function() {
+            document.getElementById("canlink").href = window.location.href;
             $(this.el).html(_.template(mediaPageTemplate));
             $.cloudinary.responsive();
         },

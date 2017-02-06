@@ -36,10 +36,12 @@
         'views/product/details_helper',
         'views/product/page',
         'views/shortlist/shortlist',
+        'views/story/full_diy',
         'views/story/full_story',
         'views/story/full_story_helper',
         'views/story/stories',
         'views/thankyou/thankyou',
+        'views/my_account/my_account',
         'views/user_profile/user_profile'
     ],
     paths: {
@@ -54,7 +56,12 @@
             bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
             bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
             firebase: 'libs/firebase/firebase',
-            cloudinary_jquery: 'libs/cloudinary-jquery/cloudinary-jquery.min',
+            cloudinary_jquery: 'libs/cloudinary-jquery.mg',
+            unveil: 'libs/unveil/jquery.unveil.mg',
+            zepto: 'libs/zepto-full/zepto.min',
+            jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
+            highlight: 'libs/highlight/highlight',
+            timepicker: 'libs/jquery.ui.timepicker/jquery.ui.timepicker',
             templates: '../templates'
         }
 })

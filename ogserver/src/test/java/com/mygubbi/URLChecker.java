@@ -50,9 +50,10 @@ public class URLChecker
             String hostName = httpHost.getHostName();
             boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
             boolean httpScheme = ("http").equals(httpHost.getSchemeName());
-            if (hostNameIsNaked || httpScheme)
+            boolean httpsScheme = ("https").equals(httpHost.getSchemeName());
+            if (hostNameIsNaked || httpScheme || httpsScheme)
             {
-                if (hostNameIsNaked) hostName = "www." + hostName;
+                if (hostNameIsNaked || httpScheme || httpsScheme) hostName = "www." + hostName;
                 URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
                 newUri.toString();
                 //System.out.println("URL " + url + " rewritten as :" + newUri.toString() + " in " + duration);

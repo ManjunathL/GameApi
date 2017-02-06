@@ -12,6 +12,7 @@ define([
     var EmailLandingPageVIew = Backbone.View.extend({
         el: '.page',
         ref: null,
+        refAuth: null,
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(emaillandingPageTemplate)({
                 'userProfile': userProfData
@@ -19,8 +20,9 @@ define([
             $.cloudinary.responsive();
         },
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            document.getElementById("canlink").href = window.location.href;
             this.ready();
         },
         ready: function() {
@@ -37,6 +39,7 @@ define([
         },
         initialize: function() {
             this.ref = MGF.rootRef;
+            this.refAuth = MGF.refAuth;
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');

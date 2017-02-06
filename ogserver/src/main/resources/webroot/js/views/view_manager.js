@@ -28,6 +28,8 @@ define(function() {
         HOLIDAYLANDINGPAGE: "holidaylandingpage",
         COMPLETEDPROJECTSPAGE: "completedprojectspage",
         NEWPRODUCT_DETAILSPAGE: "NewProductDetailsPage",
+        MYACCOUNTPAGE: "MyAccountPage",
+        REGISTER_USER: "RegisterUser",
         QUALITYCHECK: "QualityCheckPage",
         TYPEOFKITCHENPAGE: "typeofkitchen",
         Views: {},

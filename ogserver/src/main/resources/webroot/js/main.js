@@ -17,6 +17,7 @@ require.config({
         zepto: 'libs/zepto-full/zepto.min',
         jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
         highlight: 'libs/highlight/highlight',
+        timepicker: 'libs/jquery.ui.timepicker/jquery.ui.timepicker',
         templates: '../templates'
     },
     shim: {

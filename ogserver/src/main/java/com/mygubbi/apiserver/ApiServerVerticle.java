@@ -59,6 +59,7 @@ public class ApiServerVerticle extends AbstractVerticle
 
     private void setupHttpRedirectServer()
     {
+
         String httpsRedirectUrl = ConfigHolder.getInstance().getStringValue("urlwithssl", "https://www.mygubbi.com");
         HttpServer server = VertxInstance.get().createHttpServer();
         Router router = Router.router(VertxInstance.get());
@@ -71,19 +72,11 @@ public class ApiServerVerticle extends AbstractVerticle
                 String hostName = httpHost.getHostName();
                 boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
                 boolean httpScheme = ("http").equals(httpHost.getSchemeName());
-                if (hostNameIsNaked || httpScheme)
-                {
-                    if (hostNameIsNaked) hostName = "www." + hostName;
-                    URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
-                    url = newUri.toString();
-                    LOG.info("Rewriting if doesn't starts with www", url);
-                    LOG.info("URL " + url + " rewritten as :" + newUri.toString());
-                }
-                else
-                {
-                    LOG.info("if starts with www ", url);
-                    url = httpsRedirectUrl;
-                }
+                //boolean httpsScheme = ("https").equals(httpHost.getSchemeName());
+                if (hostNameIsNaked) hostName = "www." + hostName;
+                URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
+                url = newUri.toString();
+                LOG.info("URL " + url + " rewritten as :" + newUri.toString());
             }
             catch (URISyntaxException e)
             {
@@ -92,6 +85,7 @@ public class ApiServerVerticle extends AbstractVerticle
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
         });
+       // this.setupRedirectHandlerForOldUrls(router);
         int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
         server.requestHandler(router::accept).listen(httpPort);
     }
@@ -101,13 +95,15 @@ public class ApiServerVerticle extends AbstractVerticle
         Router router = Router.router(VertxInstance.get());
 
         this.setupApiHandler(router);
+        this.setupNakedDomainRouter(router);
         this.setupRedirectHandlerForShopifyUrls(router);
+      //  this.setupRedirectHandlerForOldUrls(router);
         this.setupPrerenderHandler(router);
         this.setupStaticConfigHandler(router);
         this.setupStaticHandler(router);
 
-        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
-        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
+        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/mygubbiprod.jks");
+        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "0r@nge123$");
         HttpServerOptions options = new HttpServerOptions()
                 .setKeyStoreOptions(new JksOptions().
                         setPath(ssl_keystore).
@@ -158,6 +154,20 @@ public class ApiServerVerticle extends AbstractVerticle
             router.route(HttpMethod.GET, "/*").handler(new ShopifyRedirectHandler());
             LOG.info("Registered Shopify url handler");
         }
+    }
+    private void setupRedirectHandlerForOldUrls(Router router)
+    {
+        boolean oldUrlRedirectOn = ConfigHolder.getInstance().getBoolean("oldurlredirect", false);
+        if (oldUrlRedirectOn)
+        {
+            router.route(HttpMethod.GET, "/*").handler(new OldUrlRedirectHandler());
+            LOG.info("Registered Old url handler");
+        }
+    }
+
+    private void setupNakedDomainRouter(Router router)
+    {
+        router.route(HttpMethod.GET, "/*").handler(new NakedDomainHandler());
     }
 
     private void setupApiHandler(Router router)

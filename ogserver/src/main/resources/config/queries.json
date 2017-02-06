@@ -93,10 +93,24 @@
       "params": []
     },
     {
+      "id": "diy.select.all",
+      "type": "select",
+      "query": "select id, diyId, tags, diy_categories, diyJson from diy",
+      "params": []
+    },
+    {
       "id": "seo.select.all",
       "type": "select",
       "query": "select id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory, content from seo",
       "params": []
+    },
+    {
+      "id": "product.select.blogTagsLatest",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog where NOT FIND_IN_SET(?,tags)",
+      "params": [
+        "tags"
+      ]
     },
     {
       "id": "product.select.productid",
@@ -112,6 +126,14 @@
       "query": "select id, blogId, tags, blogJson from blog where blogId = ?",
       "params": [
         "blogId"
+      ]
+    },
+    {
+      "id": "diy.select.diyid",
+      "type": "select",
+      "query": "select id, diyId, tags, diyJson from diy where diyId = ?",
+      "params": [
+        "diyId"
       ]
     },
     {
@@ -165,6 +187,14 @@
       ]
     },
     {
+      "id": "product.select.allDiys",
+      "type": "select",
+      "query": "select id, diyId, diy_categories, diyJson from diy ",
+      "params": [
+
+      ]
+    },
+    {
       "id": "product.select.subcategory",
       "type": "select",
       "query": "select id, productId, popularity,styleSortSeq, productJson from product where subcategory = ? ORDER BY popularity ASC, styleSortSeq DESC",
@@ -178,14 +208,6 @@
       "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags)",
       "params": [
         "tags"
-      ]
-    },
-    {
-      "id": "product.select.allBlogs",
-      "type": "select",
-      "query": "select id, blogId, blog_categories, blogJson from blog ",
-      "params": [
-
       ]
     },
     {
@@ -233,6 +255,19 @@
       ]
     },
     {
+      "id": "diy.insert",
+      "type": "insert",
+      "table": "diy",
+      "query": "insert into diy(id, diyId, tags, diy_categories, diyJson ) values (?, ?, ?, ?, ?)",
+      "params": [
+        "id",
+        "diyId",
+        "tags",
+        "diy_categories",
+        "diyJson"
+      ]
+    },
+    {
       "id": "seo.insert",
       "type": "insert",
       "table": "seo",
@@ -260,6 +295,18 @@
         "blog_categories",
         "blogJson",
         "blogId"
+      ]
+    },
+    {
+      "id": "diy.update",
+      "type": "update",
+      "table": "diy",
+      "query": "update diy set tags = ?, diy_categories = ?, diyJson = ? where diyId = ?",
+      "params": [
+        "tags",
+        "diy_categories",
+        "diyJson",
+        "diyId"
       ]
     },
     {

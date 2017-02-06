@@ -14,6 +14,10 @@ require.config({
         firebase: 'libs/firebase/firebase',
         cloudinary_jquery: 'libs/cloudinary-jquery.mg',
         unveil: 'libs/unveil/jquery.unveil.mg',
+        zepto: 'libs/zepto-full/zepto.min',
+        jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
+        highlight: 'libs/highlight/highlight',
+        timepicker: 'libs/jquery.ui.timepicker/jquery.ui.timepicker',
         templates: '../templates'
     },
     shim: {
@@ -42,6 +46,10 @@ require.config({
         'unveil': {
             deps: ['jquery'],
             exports: 'unveil'
+        },
+        'zepto': {
+            deps: ['jquery'],
+            exports: 'zepto'
         }
     },
     map: {

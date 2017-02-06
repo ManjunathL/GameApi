@@ -1,5 +1,5 @@
 <!--Navigation-->
-<nav id="mainNav" class="navbar navbar-shrink border-bottom-grey margin-bottom0 bg-color-white" style="min-height:75px;">
+<nav id="mainNav" class="navbar navbar-shrink border-bottom-grey margin-bottom0 bg-color-white navbar-fixed-top" style="min-height:75px; z-index: 20 !important">
     <div class="container mob-container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll pull-left">
@@ -108,7 +108,7 @@
 </nav>
 <!-- Navigation End -->
 
-<nav class="navbar collapse navbar-collapse border-bottom-grey menu-sec-height bg-color-white" id="bs-example-navbar-collapse-1">
+<nav class="navbar collapse navbar-collapse border-bottom-grey menu-sec-height bg-color-white navbar-fixed-top navbar-fixed-top-mg margin-top75" id="bs-example-navbar-collapse-1">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -271,7 +271,7 @@
                             </ul>
                         </li>
                         <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
-                            <a  href="/living-and-dining-room-designs"
+                            <a  href="/storage-solutions"
                                 class="dropdown-toggle"
                                 id="dropdownMenu_lg_livndin"
                                 data-toggle="dropdown" data-hover="dropdown">
@@ -495,7 +495,7 @@
                             <a class="page-scroll" href="/completed-projects">Completed Projects</a>
                         </li>
                         <li class="gubbi-list-desk gubbi-list-mob menu-li">
-                            <a class="page-scroll" href="/experience-center">Experience Center</a>
+                            <a class="page-scroll" href="/mygubbi-studio"> MyGubbi Studio </a>
                         </li>
                         <li class="gubbi-list-desk gubbi-list-mob menu-li">
                             <a class="page-scroll" href="/nri-bangalore">NRI Zone</a>
@@ -598,8 +598,11 @@
             <% } %>
             <div class="user_name"><%= users.at(0).get('displayName') %></div>
             <div class="sub-font" id="view_profile">
-                <a href="/user_profile">
+                <!--<a href="/user_profile">
                     View Profile
+                </a>-->
+                <a href="/my_account">
+                    My Account
                 </a>
                 <a class="signout_icon display-inline-block padding-left25">
                     Sign Out
@@ -682,7 +685,7 @@
                 <!--</p>-->
 
                 <p>
-                    New to mygubbi?<a href="#" id="new_reg">&nbsp;Sign Up</a>
+                    New to mygubbi?<a href="javascript:void(0);" id="new_reg">&nbsp;Sign Up</a>
                 </p>
             </div>
         </div>
@@ -759,7 +762,7 @@
                     </div>
                     <div class="margin-bottom20 form-group has-feedback">
                         <p class="margin0">Contact Number</p>
-                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" pattern="\d{10}"/>
+                        <input type="number" class="width100 form-control" placeholder="9876543210 or 8076543210" id="reg_contact_num" max-length="10" pattern="\d{10}" required />
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="margin-bottom20 form-group">

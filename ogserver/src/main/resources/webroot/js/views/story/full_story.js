@@ -23,13 +23,13 @@ define([
         render: function() {
 
             var that = this;
-
+            document.getElementById("canlink").href = window.location.href;
             var blog_name = that.model.name;
 
-           blog_name = blog_name.replace(/-/g, ' ');
-           //blog_name = blog_name.replace(/_/, '-');
-
-           //console.log(blog_name);
+            if(typeof(blog_name) !== 'undefined'){
+                blog_name = blog_name.replace(/-/g, ' ');
+                blog_name = blog_name.replace(/_/, '-');
+            }
 
             this.stories.fetch({
                 success: function() {
@@ -51,7 +51,7 @@ define([
             delete stories.id;
 
             _.find(stories, function(item, index) {
-                if (item.blogId == name) {
+                if (item.blogId.indexOf(name) !== -1) {
                     full_story = item;
                 }
             });
