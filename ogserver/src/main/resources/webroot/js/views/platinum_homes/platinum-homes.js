@@ -14,7 +14,8 @@ define([
 ], function($, _, Backbone, PlatinumHomesPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var PlatinumHomesPageVIew = Backbone.View.extend({
         el: '.page',
-        ref: null,
+        ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(PlatinumHomesPageTemplate)({
                 'userProfile': userProfData
@@ -22,7 +23,7 @@ define([
             $.cloudinary.responsive();
         },
         render: function() {
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
             if(window.location.href.indexOf("faq-shipping") > -1 || window.location.toString().indexOf("faq-returns") > -1 || window.location.toString().indexOf("faq-warranty") > -1){
             document.getElementById("canlink").href = "https://www.mygubbi.com/faq";
