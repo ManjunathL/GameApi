@@ -56,6 +56,7 @@ public class ProductModule extends JsonObject
     private static final String REMARKS = "remarks";
     private static final String DESCRIPTION = "description";
     private static final String ACCPACKS = "accessoryPacks";
+    private static final String ACC_PACK_DEFAULT = "accessoryPackDefault";
 
     public ProductModule()
     {
@@ -200,6 +201,16 @@ public class ProductModule extends JsonObject
     public boolean isOpenUnit()
     {
         return this.containsKey(OPEN_UNIT) && this.getBoolean(OPEN_UNIT);
+    }
+
+    public String getAccPackDefault() {
+        return this.getString(ACC_PACK_DEFAULT);
+    }
+
+    public ProductModule setAccPackDefault(String accPackDefault)
+    {
+        this.put(ACC_PACK_DEFAULT,accPackDefault);
+        return this;
     }
 
     public ProductModule setUnit(String unit)
