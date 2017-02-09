@@ -68,7 +68,7 @@ public class UserRegistrationProcessor implements DataProcessor
         LOG.info("Mehbub" +jsonData.encodePrettily());
         JsonObject userJson = new JsonObject().put("crmId", jsonData.getString("crmId")).put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
         LOG.info("Mehbub USER" +userJson.encodePrettily());
-        this.sendWelcomeEmail(eventData);
+       // this.sendWelcomeEmail(eventData);
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,

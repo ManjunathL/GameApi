@@ -8,6 +8,13 @@
       {
         "name": "com.mygubbi.db.DatabaseService",
         "instances": 10
+      },
+      {
+        "name": "com.mygubbi.si.firebase.FirebaseDataService"
+      },
+
+      {
+        "name": "com.mygubbi.si.firebase.FirebaseService"
       }
     ],
     "parallel": [
@@ -27,10 +34,6 @@
       {
         "name": "com.mygubbi.search.SearchService",
         "instances": 10
-      },
-      {
-        "name": "com.mygubbi.si.firebase.FirebaseService",
-        "instances": 1
       },
       {
         "name": "com.mygubbi.catalog.ProductManagementService",

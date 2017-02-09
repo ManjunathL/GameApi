@@ -93,7 +93,6 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
             case "B.4":
                 this.fillAddons(cell, this.quoteData.getServices(), "No additional services.");
                 break;
-
             default:
                 break;
         }
@@ -225,7 +224,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 {
                     if(unit.title.contains("N - Base Units") || unit.title.contains("S - Kitchen Base Corner Units")||
                             unit.title.contains("S - Kitchen Base Drawer Units") ||
-                            unit.title.contains("S - Kitchen Base Shutter Units") ||
+                            unit.title.contains("S - Kitchen Base Shutter Units") ||unit.title.contains("S - Storage Module Base Unit")||
                             unit.title.contains("Base unit")) {
                         KBmodulecount += unit.moduleCount;
                         String width = unit.getDimensions();
@@ -234,7 +233,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
                         if(unit.title.contains("S - Kitchen Base Corner Units")||
                                 unit.title.contains("S - Kitchen Base Drawer Units") ||
-                                unit.title.contains("S - Kitchen Base Shutter Units") )
+                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") )
                                 {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -342,15 +341,15 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                             unit.title.contains("N - Open Units") ||
                             unit.title.contains("N - Panelling") ||
                             unit.title.contains ("N - WoodWork Add On") ||
-                            unit.title.contains("N - Wall Units") ||
+                            unit.title.contains("S - Sliding Mechanism") ||
                             unit.title.contains("N - Tall/Semi Tall Units") ||
                             unit.title.contains("N - Wall Units") ||
                             unit.title.contains("S - Hinged Wardrobe 2100") ||
                             unit.title.contains("S - Hinged Wardrobe 2400") ||
                             unit.title.contains("S - Sliding Wardrobe 2100") ||
                             unit.title.contains("S - Sliding Wardrobe 2400") ||
-                           /* unit.title.contains("S - Sliding Wardrobe with Loft") ||
-                            unit.title.contains("S - Wardrobe Lofts") ||*/
+                            unit.title.contains("S - Storage Module Wall Unit") ||
+                            unit.title.contains("S - Storage Module Base Unit") ||
                             unit.title.contains("S - Wardrobe Panels"))
                     {
                         WWmodulecount += unit.moduleCount;
@@ -409,7 +408,6 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                         wardrobewidth = wardrobewidth + " , " + width;
                           kwaList.add(new String(width));
                       }
-
                     }
                 }
                 else if(cname.equals("K"))

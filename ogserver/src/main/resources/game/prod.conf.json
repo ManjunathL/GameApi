@@ -9,6 +9,9 @@
     "password": "myGubb!$$"
   },
 
+  "ssl_keystore": "ssl/mygubbiprod.jks",
+  "ssl_password": "0r@nge123$",
+
   "http_port" : 1445,
   "https_port" : 1446,
   "proposal_docs_folder" : "/mnt/game/proposal/",
@@ -19,10 +22,12 @@
   "salesorder_template" : "/mnt/game/proposal/templates/salesorder-template.xlsx",
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
 
-  "fbServicesJson": "TO_BE_DEFINED",
-  "fbUrl": "TO_BE_DEFINED",
-  "websiteHost": "game.mygubbi.com",
-  "acceptSSLCertificates": "false"
+  "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
+  "fbUrl": "https://mygubbi.firebaseio.com",
+ // "websiteHost": "localhost:8685",
+ "websiteHost": "www.mygubbi.com:8685",
+  "acceptSSLCertificates": "true",
+  "processfbEvents": true
 
 
 

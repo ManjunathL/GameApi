@@ -418,6 +418,8 @@ public class ModuleDataService extends AbstractVerticle
             module.setMappedFlag(ProductModule.MODULE_MAPPED);
             module.setMGCode(mgModule.getCode());
             module.setImagePath(mgModule.getImagePath());
+            module.setModuleCategory(mgModule.getModuleCategory());
+            module.setAccPackDefault(mgModule.getAccessoryPackDefault());
         }
         else
         {

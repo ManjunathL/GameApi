@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "firebase-mygubbi",
+  "private_key_id": "ab84025908d04005b152b915cca3301f2ed7a3d1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDFs9389vCRNn/8\nSd+XMXfexp4CUiPVfr9bngA1pWULg2SwE2f6g8tD40DnOd9F9Kd23uOWvVdJn33k\n5nJ8UVYRAKrcOAbghZslvmDYjffiCkgxxeRxMDWXIcNXBadII90c25+87QlfcNrc\nfctooBHiagSW23TcNL2EsspbvGcXFMiUC8ullU+FnCyxpMV4NEdWR07BQF9ruouo\nWs+DyMKZePe0kl92okjTuCzBoBgZ9uRpqbVC0yxXXNFXs1UxSJ1hfMPs2NM1gLpY\nRvr5qfy2783rAs3rq36+6jUGNUDvifka/Fw7UEiDd6MHUWwwsIDwSU55wyNFhdPp\nwADYmkIfAgMBAAECggEBAIKZoFKEWkTDKObjchWxswryT90en9dgBE8kX+UQXmCt\nqqz6FN0ThQpSrERTIaBXzuyirtucNnZHKuY0KXrgTCetNjGFvV1CRUw4qEdF+XNT\n8X8XyCHRhAVTY3QwIuJv9pgiqTInr+JhbeLsIpv56faUrHVvgZIaMPvhE/Znzf4b\nLjmO9EAFuuPPwmbNh7TIZXocZMjc7Oz7ndXWV+8QSVa+/EZJOmeYQvgFHp8pp3O+\nGUflcxmAki4/Wz0a3lOFm7gFTDGqf0qjQKg9MWQaeLG3Xv8VhtgzXErQ7BXGxogf\nLWuqL4v1zvth/gfXTmvT2LSXYFyTWBpLlmXk9ZXLH3kCgYEA6X5k5QCjFZl+Yt9u\n3nSIoKHQDPzL6bvjX9BxHxt01JuXMksag8kh1M0PIuRg1lSlul+uN3SJrP0ywyx+\nEvggo7BJvInjLrNyG4n2a7K3RpZS/nEGlGOF26MTWTsaQdPOhd/TcXVYrFH6hKRs\nK5cw51y4Cl0xHINPNqQzKbeIEX0CgYEA2MJN7R0OHowEZVW58mzJ7l6wlgFZyVpt\nVoQpxxUNDsAp+iBj03chxI5hJGCZ6JLi1Gp7Pv1+fMx8oVhzA3hZ0npiR6nIobFL\nXuq18xQMURfp8aJkl9NEXXfOU4+gHNEcAmiCrZs5e8UnOiHLjtYYZMxvJa69jirE\nMiCsYOVzNMsCgYEAx7yFlpgq6gk54l57uvQ5BCAnl1SRIsrFQGtQuWmFUXIfrrgs\nYFuoAx+/OPvgEriqZHoA0BNyynZ1/BuNZbC4Sw48pXnWy1ZZ4FDuaUaiHVHugRYy\nqLFSCoa/wG8ckP8dBcxoVgAp8I7YHKuClO9quB/Kl6MMpfV1x6pC0gbb8QkCgYEA\nz02VZY6CMGjM03WXbujofxcEX5JPIqlfJH0lz4ashEz4WIWds2KeYvOgqD/TMoE4\netqToHyj+gs/rrd+1/TEQu5VDCCvByUe5lonRaEI3o22aihbeHDPU2z/YR9di/HZ\njdwSDqMD6QF3MLudiK/tiImUSz/BfjQci6x/7/PBqN0CgYEA2SiYU+0pJd1cQ+GU\nisD7Mu0UjB/b2idtv91jYqd7bGEAmkxGAdL4YoQ7SbtDg5QtV09K5Pqbdmcu+ccE\nwHq2ooK86m7lNvyWmqHM5WCgdGwCpevGNeed/lZzfiYPNsfLxhbNq2xXpwUds2g3\nb7OU1d4m79Zos8+hIzhRnnNTJig=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mygubbi-live@firebase-mygubbi.iam.gserviceaccount.com",
+  "client_id": "110283352418029731399",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mygubbi-live%40firebase-mygubbi.iam.gserviceaccount.com"
+}

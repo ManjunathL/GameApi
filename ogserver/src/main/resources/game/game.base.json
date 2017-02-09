@@ -1,6 +1,7 @@
 {
   "version": "0.0.0a",
 
+
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://localhost/mg",
@@ -8,9 +9,10 @@
     "user": "root",
     "password": "root"
   },
-
-
   "urlwithssl": "",
+
+  "ssl_keystore": "ssl/mygubbiprod.jks",
+  "ssl_password": "0r@nge123$",
 
   "firebase": {},
 
@@ -33,9 +35,9 @@
 
   "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
 
-  "fbServicesJson": "config/test/mygubbi-cep-firebase.json",
-  "fbUrl": "https://mygubbi-cep.firebaseio.com",
-  "processfbEvents": true
-
+  "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
+  "fbUrl": "https://mygubbi.firebaseio.com",
+  "processfbEvents": true,
+  "acceptSSLCertificates": "true"
 
 }

@@ -23,7 +23,7 @@ public class CrmApiClient
     public static final String APPLICATION_NAME = "mygubbilive";
     public static final String VERSION = "0.1";
     public static final String USER_NAME = "admin";
-    public static final String PASSWORD = "admin!@#";
+    public static final String PASSWORD = "Dolphin19";
     private final static Logger LOG = LogManager.getLogger(CrmApiClient.class);
 
     private SugarsoapPortType crmPort;
@@ -253,10 +253,10 @@ public class CrmApiClient
         return act.encodePrettily();
     }
 
-    public String updateDocument(String parentType, String parentId, String category, String user_id, String file_contents, String file_ext, String file_name) throws Exception {
-
-        return new JsonArray(this.crmPort.update_document(this.sessionId, parentType, parentId, category, user_id, file_contents, file_ext, file_name)).encodePrettily();
-    }
+//    public String updateDocument(String parentType, String parentId, String category, String user_id, String file_contents, String file_ext, String file_name) throws Exception {
+//
+//        return new JsonArray(this.crmPort.update_document(this.sessionId, parentType, parentId, category, user_id, file_contents, file_ext, file_name)).encodePrettily();
+//    }
 
     public String updateTask(String parentType, String parentId, String status, String task_id, String task_type, String user_id) throws Exception {
 

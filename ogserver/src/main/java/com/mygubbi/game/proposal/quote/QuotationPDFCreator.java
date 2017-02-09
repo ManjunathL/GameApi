@@ -218,7 +218,7 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
-        B1Table = new PdfPTable(5);
+        B1Table = new PdfPTable(columnWidths1);
         B1Table.setWidthPercentage(100);
 
             PdfPCell cel1=new PdfPCell();
@@ -643,7 +643,7 @@ public class QuotationPDFCreator
                     if(unit.title.contains("N - Base Units") || unit.title.contains("S - Kitchen Base Corner Units")||
                             unit.title.contains("S - Kitchen Base Drawer Units") ||
                             unit.title.contains("S - Kitchen Base Shutter Units") ||
-                            unit.title.contains("Base unit")) {
+                            unit.title.contains("Base unit") ||  unit.title.contains("S - Storage Module Base Unit")) {
 
                         KBmodulecount += unit.moduleCount;
                         String width = unit.getDimensions();
@@ -651,7 +651,7 @@ public class QuotationPDFCreator
                         kbList.add(new String(width));
                         if(unit.title.contains("S - Kitchen Base Corner Units")||
                                 unit.title.contains("S - Kitchen Base Drawer Units") ||
-                                unit.title.contains("S - Kitchen Base Shutter Units") )
+                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") )
                         {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -767,14 +767,15 @@ public class QuotationPDFCreator
                             unit.title.contains("N - Panelling") ||
                             unit.title.contains ("N - WoodWork Add On") ||
                             unit.title.contains("N - Wall Units") ||
+                            unit.title.contains("S - Sliding Mechanism") ||
                             unit.title.contains("N - Tall/Semi Tall Units") ||
                         unit.title.contains("N - Wall Units") ||
                         unit.title.contains("S - Hinged Wardrobe 2100") ||
                         unit.title.contains("S - Hinged Wardrobe 2400") ||
                         unit.title.contains("S - Sliding Wardrobe 2100") ||
                         unit.title.contains("S - Sliding Wardrobe 2400") ||
-                           /* unit.title.contains("S - Sliding Wardrobe with Loft") ||
-                            unit.title.contains("S - Wardrobe Lofts") ||*/
+                            unit.title.contains("S - Storage Module Wall Unit") ||
+                            unit.title.contains("S - Storage Module Base Unit") ||
                         unit.title.contains("S - Wardrobe Panels"))
                 {
                     WWmodulecount += unit.moduleCount;

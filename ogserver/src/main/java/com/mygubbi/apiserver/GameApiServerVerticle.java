@@ -3,6 +3,7 @@ package com.mygubbi.apiserver;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.config.StaticConfigHandler;
+import com.mygubbi.game.proposal.ProposalAddonHandler;
 import com.mygubbi.game.proposal.ProposalHandler;
 import com.mygubbi.game.proposal.ProposalModuleHandler;
 import com.mygubbi.game.proposal.ProposalProductHandler;
@@ -54,8 +55,8 @@ public class GameApiServerVerticle extends AbstractVerticle
 
     private void setupHttpSslServer(Router router)
     {
-        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
-        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
+        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/mygubbiprod.jks");
+        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "0r@nge123$");
         HttpServerOptions options = new HttpServerOptions()
                 .setKeyStoreOptions(new JksOptions().
                         setPath(ssl_keystore).
@@ -107,6 +108,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/user.change_pwd", new GameUserChangePwdHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/product", new ProposalProductHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/addon", new ProposalAddonHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/module", new ProposalModuleHandler(VertxInstance.get()));
 //        router.mountSubRouter("/gapi/catalogue", new ProductHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
