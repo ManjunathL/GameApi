@@ -148,7 +148,7 @@ public class QuotationPDFCreator
             phrase6.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
             pdfPTable.addCell(phrase6);
 
-        document.add(table);
+            document.add(table);
             document.add(pdfPTable);
 
             p = new Paragraph("      ");

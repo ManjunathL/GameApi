@@ -124,7 +124,7 @@
       "id": "version.publish",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'Published', internalStatus = 'Published' where version = ? and proposalId = ?",
+      "query": "update version_master set status = 'Published', internalStatus = 'Locked' where version = ? and proposalId = ?",
       "params": ["version","proposalId"]
     },
 
@@ -363,16 +363,16 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, brandCode, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode,productSubtypeCode, brandCode, catalogueCode, title, rate, quantity, amount, uom, updatedBy) values (? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode","productSubtypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy"]
     },
 
     {
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set seq = ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
-      "params": ["seq", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
+      "query": "update proposal_addon set seq = ?, code = ?, categoryCode = ?, productTypeCode = ?,productSubtypeCode=?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
+      "params": ["seq", "code", "categoryCode", "productTypeCode","productSubtypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
     },
 
     {
@@ -409,14 +409,6 @@
       "table": "proposal_product",
       "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select proposalId, ?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId= ? and fromVersion = ? and active = 'A'",
       "params": ["toVersion","proposalId","fromVersion"]
-    },
-
-    {
-      "id": "proposal.product.createnewfromoldproposal",
-      "type": "insert",
-      "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select ?,?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
-      "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
     {
@@ -624,23 +616,23 @@
       "id": "addons.product.subtypes",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct productSubTypeCode from addon_master where categoryCode = ? and productTypeCode = ?",
-      "params": ["categoryCode", "productTypeCode"]
+      "query": "select distinct productSubtypeCode from addon_master where categoryCode = ?, productTypeCode=?",
+      "params": ["categoryCode","productTypeCode"]
     },
     {
       "id": "addons.brands",
       "type": "select",
       "table": "addon_master",
-      "query": "select distinct brandCode from addon_master where categoryCode = ? and productSubTypeCode = ? and productTypeCode = ?",
-      "params": ["categoryCode", "productSubTypeCode", "productTypeCode"]
+      "query": "select distinct brandCode from addon_master where ProductTypeCode = ?",
+      "params": ["productTypeCode"]
     },
 
     {
       "id": "addons.products",
       "type": "select",
       "table": "addon_master",
-      "query": "select catalogueCode,title,code,rate,imagePath,uom from addon_master where categoryCode = ? and productTypeCode = ? and productSubTypeCode = ? and brandCode = ?",
-      "params": ["categoryCode","productTypeCode","productSubTypeCode", "brandCode"]
+      "query": "select catalogueCode,title,code,rate,imagePath,uom from addon_master where productTypeCode = ? and brandCode = ?",
+      "params": ["productTypeCode", "brandCode"]
     },
 
     {
