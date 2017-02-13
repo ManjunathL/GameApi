@@ -11,8 +11,9 @@ define([
     'models/autoSearch',
     'models/preSearch',
     'views/header/menu_helper',
-    'mgfirebase'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, shortlistTemplate, Categories, Users, AutoSearch, PreSearch, menuHelper, MGF) {
+    'mgfirebase',
+    'collections/payments'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, shortlistTemplate, Categories, Users, AutoSearch, PreSearch, menuHelper, MGF, Payments) {
     var HeaderMenuView = Backbone.View.extend({
         users: null,
         categories: null,
@@ -51,7 +52,27 @@ define([
             menuHelper.ready(this);
         },
         events: {},
-        initialize: function() {
+        initialize: function(request) {
+            this.payments = new Payments();
+
+            console.log('-----------------in payment--------------------');
+            console.log(request);
+
+            this.payments.fetch({
+                data: $.param({ page: 1}),
+                processData: false,
+                type: 'POST',
+
+                success: function (req, res) {
+                console.log('-----------------in payment response--------------------');
+                console.log(req);
+                 response.setHeader('Access-Control-Allow-Credentials', true);
+                 response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                 response.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+                 console.log(response.toJSON());
+                }
+            });
+
             this.users = new Users();
             this.categories = new Categories();
             this.auto_search = new AutoSearch([{
