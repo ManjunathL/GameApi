@@ -7,7 +7,7 @@
                     <form id="payuform" action='https://test.payu.in/_payment' method='post'>
                         <input type="hidden" name="firstname" value="<%= userProfile ? userProfile.displayName : '' %>" />
                         <input type="hidden" name="lastname" value="" />
-                        <input type="hidden" name="surl" value="https://test.mygubbi.com/" />
+                        <input type="hidden" name="surl" value="https://localhost:8787/paysuccess" />
                         <input type="hidden" name="phone" value="<%= userProfile ? userProfile.phone : '' %>" />
                         <input type="hidden" name="key" value="gtKFFx" />
                         <input type="hidden" name="hash" id="hashkey" value ="" />
