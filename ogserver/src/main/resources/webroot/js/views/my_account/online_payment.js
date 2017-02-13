@@ -10,11 +10,12 @@ define([
     'bootstrap',
     'bootstrapvalidator',
     'mgfirebase',
+    'cloudinary_jquery',
     'text!templates/my_account/online_payment.html',
     'analytics',
     'views/view_manager',
     'collections/payments'
-], function ($, jqueryui, _, sha512, Backbone, Bootstrap, BootstrapValidator, MGF, OnlinePaymentTemplate, Analytics, VM, MyPayments) {
+], function ($, jqueryui, _, sha512, Backbone, Bootstrap, BootstrapValidator, MGF, CloudinaryJquery, OnlinePaymentTemplate, Analytics, VM, MyPayments) {
     var OnlinePaymentView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,

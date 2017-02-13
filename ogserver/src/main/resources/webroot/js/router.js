@@ -502,22 +502,10 @@ define([
                 });
             });
             router.on('route:online_payment_success', function(req,res) {
-            console.log('----------inside online payment success----------------');
-            console.log(req);
-            res.setHeader('Access-Control-Allow-Credentials', true);
-            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-            console.log(res);
-            return false;
-                /*setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                 require(['/js/views/my_account/online_payment_success.js'], function(OnlinePaymentSuccessPage) {
-                    var options = {
-                        model: {
-                            "msg": msg
-                        }
-                    };
-                    VM.create(VM.ONLINEPAYMENTSUCCESSPAGE, OnlinePaymentSuccessPage, options).render();
-                });*/
+                    VM.create(VM.ONLINEPAYMENTSUCCESSPAGE, OnlinePaymentSuccessPage).render();
+                });
             });
             router.on('route:consult', function(actions) {
                 setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);

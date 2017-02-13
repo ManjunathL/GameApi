@@ -10,25 +10,39 @@ define([
     'bootstrap',
     'bootstrapvalidator',
     'mgfirebase',
-    'text!templates/my_account/online_payment.html',
+    'cloudinary_jquery',
+    'text!templates/my_account/online_payment_success.html',
     'analytics',
     'views/view_manager',
     'collections/payments'
-], function ($, jqueryui, _, sha512, Backbone, Bootstrap, BootstrapValidator, MGF, OnlinePaymentTemplate, Analytics, VM, MyPayments) {
-    var OnlinePaymentView = Backbone.View.extend({
+], function ($, jqueryui, _, sha512, Backbone, Bootstrap, BootstrapValidator, MGF, CloudinaryJquery, OnlinePaymentSuccessTemplate, Analytics, VM, MyPayments) {
+    var OnlinePaymentSuccessView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         refAuth: MGF.refAuth,
         payments:null,
+        renderWithUserProfCallback: function(userProfData) {
+            $(this.el).html(_.template(OnlinePaymentSuccessTemplate)({
+                'userProfile': userProfData
+            }));
+            $.cloudinary.responsive();
+        },
         render: function () {
-            console.log('inside success page');
-            console.log(this.model.msg);
-        }
+            var authData = this.refAuth.currentUser;
+            console.log('-------------authData in myaccount page--------------------');
+            console.log(authData);
+            document.getElementById("canlink").href = window.location.href;
+
+            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+        },
         initialize: function() {
+            this.ref = MGF.rootRef;
+            this.refAuth = MGF.refAuth;
+            this.payments = new MyPayments();
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
             _.bindAll(this, 'renderWithUserProfCallback');
         }
     });
-    return OnlinePaymentView;
+    return OnlinePaymentSuccessView;
 });
