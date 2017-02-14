@@ -233,7 +233,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
                         if(unit.title.contains("S - Kitchen Base Corner Units")||
                                 unit.title.contains("S - Kitchen Base Drawer Units") ||
-                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") )
+                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit")  || unit.title.contains("Base unit") )
                                 {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();

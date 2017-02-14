@@ -380,11 +380,11 @@ public class QuotationPDFCreator
 
             tab1.addCell(new Paragraph
                     ("1. \tPly: \tIS 303- BWR grade for kitchen, MR Grade for wardrobe and other units\n" +
-                            "2. \tMdf: \tExterior Grade mdf\n" +
+                            "2. \tMdf: \tInterior Grade mdf\n" +
                             "3. \tEdge Banding: \tRehau\n" +
                             "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
                             "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
-                            "6. \tAccessories: \tHettich/Haffle/Evershine/Ebco/Grass\n" +
+                            "6. \tAccessories: \tHe - Hettich/Ha - Hafele/Ev - Evershine/Eb - Ebco\n" +
                             "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
                             "8. \tLacquered Glass: \tSaint Gobain\n" +
                             "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
@@ -444,17 +444,17 @@ public class QuotationPDFCreator
         table4.setWidthPercentage(100);
             table4.addCell(new Paragraph("6. Design Sign up fees amounting to Rs.15000/- or 10% of the Budgetary quote is non-refundable. This amount will be adjusted against the final order value. Booking confirmation shall be acknowledged in the copy of this budgetary proposal.\n"
                     +"7. The 50% advance paid post approval of the design and quote cannot be refunded as the production would have be commenced.\n"
-                    +"8. Warranty : 5 years of warranty against any manufacturing defect. The material specifications and brands specified are as per the approved standards of Orangegubbi Technologies Private Limited and covered under warranty.\n"
+                    +"8. Warranty : 5 years of warranty against any manufacturing defect. The material specifications and brands specified are as per the approved standards of Gubbi Technologies Private Limited and covered under warranty.\n"
                     +"9. Any modifications/alterations to the proposed design will have an impact on the techno commercials of this quote and hence new drawings as well as associated commercials will be provided for by MyGubbi if the same occurs.\n"
                     +"10. Delivery shall be within 45 days from order Final Confirmation.\n"
-                    +"11. Cheque / Demant Draft should be in favour of \"ORANGEGUBBI TECHNOLOGIES PRIVATE LIMITED.\n",fsize));
+                    +"11. Cheque / Demant Draft should be in favour of \"GUBBI TECHNOLOGIES PRIVATE LIMITED.\n",fsize));
         document.add(table4);
 
         p = new Paragraph("      ");
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-            p = new Paragraph(new Paragraph("THANKS for considering OrangeGubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
+            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
         document.add(p);
 
         document.close();
@@ -651,7 +651,8 @@ public class QuotationPDFCreator
                         kbList.add(new String(width));
                         if(unit.title.contains("S - Kitchen Base Corner Units")||
                                 unit.title.contains("S - Kitchen Base Drawer Units") ||
-                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") )
+                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") ||
+                                unit.title.contains("Base unit") )
                         {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
