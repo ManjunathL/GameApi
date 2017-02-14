@@ -589,14 +589,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
       "params": []
     },
 
@@ -753,7 +753,7 @@
     {
       "id": "module.selectModulesByCategory",
       "type": "select",
-      "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath, accessoryPackDefault, remarks from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
+      "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath, accessoryPackDefault, remarks, unitType from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
       "params": ["productCategory","moduleCategory"]
     },
 
