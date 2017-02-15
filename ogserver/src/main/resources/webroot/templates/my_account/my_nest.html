@@ -22,6 +22,17 @@
         </div>
         <div class="row col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                <label>Builders Name :</label>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].builder_name_c : '' %></p>
+            </div>
+
+        </div>
+
+        <div class="row col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
                 <label>Property Type :</label>
             </div>
 
@@ -30,6 +41,10 @@
             </div>
 
         </div>
+
+
+    </div>
+    <div class="col-md-6">
         <div class="row col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
                 <label>Tower/Block no :</label>
@@ -41,19 +56,6 @@
 
         </div>
 
-
-    </div>
-    <div class="col-md-6">
-        <div class="row col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                <label>Builders Name :</label>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].builder_name_c : '' %></p>
-            </div>
-
-        </div>
         <div class="row col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
                 <label>Flat No :</label>
@@ -64,6 +66,17 @@
             </div>
 
         </div>
+        <div class="row col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                <label>BHK :</label>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].tower_c : '' %></p>
+            </div>
+
+        </div>
+
     </div>
     <div class="col-md-1">
         <span class="glyphicon glyphicon-pencil edit_icon" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit Details" style="display: none;">
