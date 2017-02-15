@@ -14,7 +14,8 @@ define([
 ], function($, _, Backbone, MygubbiStudioPageTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var MygubbiStudioPageVIew = Backbone.View.extend({
         el: '.page',
-        ref: null,
+        ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         renderWithUserProfCallback: function(userProfData) {
             $(this.el).html(_.template(MygubbiStudioPageTemplate)({
                 'userProfile': userProfData
@@ -23,7 +24,7 @@ define([
         },
         render: function() {
             document.getElementById("canlink").href = window.location.href;
-            var authData = this.ref.getAuth();
+            var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
