@@ -32,6 +32,8 @@ define(function() {
         REGISTER_USER: "RegisterUser",
         QUALITYCHECK: "QualityCheckPage",
         TYPEOFKITCHENPAGE: "typeofkitchen",
+        ONLINEPAYMENTPAGE: "OnlinePaymentPage",
+        ONLINEPAYMENTSUCCESSPAGE: "OnlinePaymentSuccessPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

@@ -85,7 +85,7 @@
 }
 
 .navbar-center li{
-    float:none;
+    float: inherit;
     text-rendering: optimizeLegibility;
     display:inline-block;
     margin: 0px auto;
@@ -7861,6 +7861,13 @@ a#goto-login{
     background: #ffffff;
     color: #ff3200 !important;
     border-bottom: 2px solid #ff3200;
+}
+.menu-mygubbi #nav .mega-dropdown-menu li a:hover,
+.menu-mygubbi #nav .mega-dropdown-menu li a:active,
+.menu-mygubbi #nav .mega-dropdown-menu li a:focus {
+    background: #ffffff;
+    color: #ff3200 !important;
+    border-bottom: 0px solid #ff3200;
 }
 
 .dropdown-menu>li>a:hover,
