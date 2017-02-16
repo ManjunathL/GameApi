@@ -120,6 +120,78 @@
                         <li class="gubbi-list-desk gubbi-list-mob hidden-lg hidden-md menu-li">
                             <a href="/" id="home-lnk" class="page-scroll">Home</a>
                         </li>
+                        <!--<li class="dropdown mega-dropdown">
+                            <a href="/kitchen-cabinet-design" class="dropdown-toggle" data-toggle="dropdown"> Kitchen <span class="caret"></span></a>
+                            <ul class="row dropdown-menu mega-dropdown-menu">
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li class="dropdown-header">
+                                            Kitchen
+                                        </li>
+                                        <li>
+                                            <a href="/know-your-kitchen">
+                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1474955267/home/new_design/KNK_N.jpg" alt="Straight Kitchen">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/know-your-kitchen">
+                                                Know Your Kitchen
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="/stories-kitchen"> Trends and Style </a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="col-sm-10">
+                                    <ul>
+                                        <li class="dropdown-header">
+                                            Types of Kitchen
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li>
+                                            <a href="/l-shaped-kitchen-design">
+                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780761/home/new_design/L-SHAPE.jpg" alt="L Shaped Kitchen">
+                                            </a>
+                                        </li>
+                                        <li><a href="/l-shaped-kitchen-design">L Shaped Kitchen</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li>
+                                            <a href="/u-shaped-kitchen-design">
+                                                <img class="img-responsive width100" class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780761/home/new_design/U-SHAPE.jpg" alt="U Shaped Kitchen">
+                                            </a>
+                                        </li>
+                                        <li><a href="/u-shaped-kitchen-design"> U Shaped Kitchen </a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li>
+                                            <a href="/parallel-kitchen-design">
+                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780761/home/new_design/Parellel.jpg" alt="Parallel Kitchen">
+                                            </a>
+                                        </li>
+                                        <li><a href="/parallel-kitchen-design"> Parallel Kitchen </a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li>
+                                            <a href="/straight-kitchen-design">
+                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780762/home/new_design/Straight.jpg" alt="Straight Kitchen">
+                                            </a>
+                                        </li>
+                                        <li><a href="/straight-kitchen-design"> Straight Kitchen </a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>-->
                         <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
                             <a href="/kitchen-cabinet-design" class="dropdown-toggle" id="dropdownMenu_lg_kitchen" data-toggle="dropdown" data-hover="dropdown">
                                 Kitchen
@@ -433,7 +505,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!--<li class="dropdown-submenu">
+                                <li class="dropdown-submenu">
                                     <a href="/console-tables" class="dropdown-toggle" data-toggle="dropdown"> Console Table </a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -460,7 +532,7 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </li>-->
+                                </li>
                             </ul>
                             <!--<ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
 
@@ -1014,3 +1086,54 @@
 </div>
 
 <!-- Search Overlay End -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dropdown").hover(
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+                $(this).toggleClass('open');
+            },
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+                $(this).toggleClass('open');
+            }
+        );
+    });
+</script>
+
+<style>
+    .mega-dropdown {
+      position: static !important;
+    }
+    .mega-dropdown-menu {
+        padding: 20px 0px;
+        width: 100%;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    .mega-dropdown-menu > li > ul {
+      padding: 0;
+      margin: 0;
+    }
+    .mega-dropdown-menu > li > ul > li {
+      list-style: none;
+      display: block;
+    }
+    .mega-dropdown-menu > li > ul > li > a {
+      display: block;
+      color: #222;
+      padding: 3px 5px;
+    }
+    .mega-dropdown-menu > li ul > li > a:hover,
+    .mega-dropdown-menu > li ul > li > a:focus {
+      text-decoration: none;
+    }
+    .mega-dropdown-menu .dropdown-header {
+      font-size: 18px;
+      color: #ff3546;
+      padding: 5px 60px 5px 5px;
+      line-height: 30px;
+    }
+
+</style>

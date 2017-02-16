@@ -3012,6 +3012,48 @@ ul.social-buttons li a:active {
 
 }
 
+.nri-testimonial-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1487156404/nri_page/testimonial.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    height: auto;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 70px 0 70px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.nri-testimonial-section .carousel-control .fa-angle-left,
+.nri-testimonial-section .carousel-control .fa-angle-right {
+    font-size: 22px;
+    background-color: transparent;
+    line-height: 30px;
+    text-shadow: none;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+}
+
+.nri-testimonial-section .carousel-control.left,
+.nri-testimonial-section .carousel-control.right{
+    background: transparent;
+}
+@media screen and (min-width: 768px){
+    .nri-testimonial-section .carousel-indicators {
+        bottom: -45px;
+    }
+}
+
+
+
 /* End NRI Page */
 
 /* Start Kitchen Accessories Page */
