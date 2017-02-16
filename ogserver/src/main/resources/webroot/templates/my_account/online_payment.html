@@ -3,8 +3,15 @@
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
             <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12" id="payerror" style="display:none;">
+                    <div class="alert alert-danger fade in">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Error!</strong> A problem has been occurred while submitting your data.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="invoice-box">
-
                     <form id="payuform" action='<%= paybaseUrl %>' method='post'>
                         <input type="hidden" name="firstname" value="<%= userProfile ? userProfile.displayName : '' %>" />
                         <input type="hidden" name="lastname" value="" />
@@ -52,7 +59,8 @@
                         </div>
                         <div class="form-group">
                             <label> Amount : </label>
-                            <label class="font-noraml"> <input type="text" id="payamount" value="" required="required" /> </label>
+                            <input type="text" id="payamount" value="" required />
+                            <label id="payamountlbl"></label>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-12 text-center mt20">
@@ -65,11 +73,12 @@
     </div>
 </div>
 <script>
-    document.getElementById("uniqueid").value = randId();
-    document.getElementById("uniqueid").innerHTML = document.getElementById("uniqueid").value;
-    document.getElementById("trnxid").value = document.getElementById("uniqueid").value;
+    $(document).ready(function() {
+        document.getElementById("uniqueid").value = randId();
+        document.getElementById("uniqueid").innerHTML = document.getElementById("uniqueid").value;
+        document.getElementById("trnxid").value = document.getElementById("uniqueid").value;
+    });
     function randId() {
      return Math.random().toString(36).substr(2, 10);
     }
-
 </script>

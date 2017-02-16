@@ -17,10 +17,11 @@ define([
     'text!templates/my_account/my_profile.html',
     'text!templates/my_account/my_settings.html',
     'text!templates/my_account/my_message.html',
+    'text!templates/my_account/payment_history.html',
     'views/view_manager',
     'models/proposal',
     'collections/mynests'
-], function ($, jqueryui, timepicker, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
+], function ($, jqueryui, timepicker, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, PaymentHistoryTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -30,8 +31,6 @@ define([
         mynests:null,
         renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
             var that = this;
-            console.log("-----------mynestitems-------------")
-            console.log(mynestitems);
             var project_statusArr = new Array();
             if(typeof(mynestitems) !== 'undefined' && mynestitems !== null){
                 if(typeof(mynestitems.paymentDetails) !== 'undefined' && mynestitems.paymentDetails !== null){
@@ -110,11 +109,11 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            console.log('-------------authData in myaccount page--------------------');
-            console.log(authData);
             document.getElementById("canlink").href = window.location.href;
 
             MGF.mynest(authData,this.renderWithUserProjectCallback);
+
+            MGF.getTransactionDetails(authData,this.renderTranscationDetails);
 
             /*setTimeout(
                 $('.page').append("<img id='loadico' src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>")
@@ -136,6 +135,18 @@ define([
 
 
         },
+        renderTranscationDetails: function(transdetails){
+            console.log('-------------yuppeeeeeeeee------------------');
+            console.log(transdetails);
+            var that = this;
+            if(transdetails) {
+                that.myaccount.set({
+                    'transdetails': transdetails
+                }, {
+                    silent: true
+                });
+            }
+        },
         fetchMynestAndRender: function(mynestProf) {
             var that = this;
             var newProf = that.mynests;
@@ -148,7 +159,7 @@ define([
             this.mynests = new MyNests();
             this.proposal = new Proposal();
             Analytics.apply(Analytics.TYPE_GENERAL);
-            _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
+            _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit','renderTranscationDetails');
             this.myaccount.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
         },
@@ -309,11 +320,21 @@ define([
             "click #save_details": "submit",
             "click #approvebtn": "changeapprove",
             "click #callback": "requestcall",
+            "click #onlinepay": "showPaymentHistory",
             "click #save_property_details": "submitPropertyDetails",
             "click #profile-file-input": "changeProfileImg",
             "submit #changeUserPasswordForm": "changeUserPassword",
             "submit #deactivateUserForm": "deactivateUserAccount"
 
+        },
+        showPaymentHistory: function(e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+            var that = this;
+            var payHisTemp = _.template(PaymentHistoryTemplate);
+            $("#payHistory").html(payHisTemp({
+                'transdetails':that.myaccount.get("transdetails")
+            }));
         },
         requestcall: function(e) {
             if (e.isDefaultPrevented()) return;

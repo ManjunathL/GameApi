@@ -436,9 +436,7 @@ define([
                 });
             });*/
             router.on('route:dashboard', function(actions) {
-                console.log('----------------actions-------------------');
-                console.log(actions);
-              //setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+              setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                 require(['views/dashboard/new-page'], function(DashboardPage) {
                     VM.create(VM.DASHBOARD, DashboardPage).render();
                 });

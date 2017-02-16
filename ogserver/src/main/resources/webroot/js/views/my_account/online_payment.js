@@ -41,7 +41,15 @@ define([
         events: {
             "click #send_payu": "makePayment"
         },
-        makePayment: function(){
+        makePayment: function(e){
+            e.preventDefault();
+            if($("#payamount").val() == '' || $("#payamount").val().trim() == ''){
+                console.log('---------gggggggggggggggg----------------');
+                $("#payamount").focus();
+                $("#payamountlbl").text('Please enter a amount.');
+                return false;
+            }
+
             var authData = this.refAuth.currentUser;
             var uid = authData.uid;
             var email = authData.email;
@@ -70,6 +78,8 @@ define([
                    "hash": "",
                    "service_provider": "payu"
                };
+
+               $("payerror").hide();
 
                 var hashKey = this.generateHashkey(paymentData);
 

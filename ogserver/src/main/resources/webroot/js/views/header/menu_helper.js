@@ -27,9 +27,6 @@ define([
         },
 
         setUser: function(user) {
-            console.log('User data after setUser');
-            console.log(user);
-
             users.add(user, {
                 at: 0
             });
@@ -44,20 +41,20 @@ define([
                     userProfile = snapshot.val();
                 }
                 that.handleAuth(authData, userProfile);
-                console.log("handleAuth done");
+                //console.log("handleAuth done");
             });
         },
         getUserProfileWithCB: function(next) {
             var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, next);
         },
-        onFAuth: function(authData) { console.log("authData");console.log(authData);
+        onFAuth: function(authData) {
             if (authData) {
                 if ((typeof(authData.providerData[0]) != 'undefined') && (authData.providerData[0].providerId !== 'anonymous')) { //don't do nothin on anonymous auths
                     $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                     if (users.length === 0 || users.at(0).get('uid') !== authData.uid) {
                         this.getUserProfileHandleAuth(authData.uid, authData, this.handleAuth);
-                        console.log("user profile done");
+                        //console.log("user profile done");
                     }
                 }
                 MGF.listenForShortlistChanges();
@@ -77,10 +74,6 @@ define([
         },
         handleAuth: function(authData, userProfile) {
             var email = MGF.getEmail(authData);
-
-            console.log('email');
-            console.log(email);
-
             if (!email) {
                 console.log("email not provided, please try again and provide email id as it is mandatory.");
                 $('#login_error').html("Please tick email, while providing Facebook access.");
@@ -98,7 +91,7 @@ define([
                 userRef.on("value", function(snapshot) {
                     if (snapshot.exists()) {
                         that.setUser(user);
-                        console.log("user already exists in firebase");
+                        //console.log("user already exists in firebase");
                         window.fbButton && window.fbButton.button('reset');
                         //                        window.twitterButton && window.twitterButton.button('reset');
                         window.googleButton && window.googleButton.button('reset');
