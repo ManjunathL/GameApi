@@ -133,6 +133,7 @@ define([
             'my_account(/)': 'my_account',
             'online-payment(/)': 'online_payment',
             'paysuccess-:txnId(/)': 'online_payment_success',
+            'payfailure-:txnId(/)': 'online_payment_failure',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -508,6 +509,17 @@ define([
                         }
                     };
                     VM.create(VM.ONLINEPAYMENTSUCCESSPAGE, OnlinePaymentSuccessPage, options).render();
+                });
+            });
+            router.on('route:online_payment_failure', function(txnId) {
+                setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                require(['/js/views/my_account/online_payment_failure.js'], function(OnlinePaymentFailurePage) {
+                    var options = {
+                        model: {
+                            "txnId": txnId
+                        }
+                    };
+                    VM.create(VM.ONLINEPAYMENTFAILUREPAGE, OnlinePaymentFailurePage, options).render();
                 });
             });
             router.on('route:consult', function(actions) {
