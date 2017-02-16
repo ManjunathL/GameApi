@@ -162,30 +162,44 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
+            var displayName = $('#user_display_name').val();
+            var emailId = $('#user_email_id').val();
+            var phone = $('#user_phone').val();
 
-            var formData = {
-                "displayName": $('#user_display_name').val(),
-                "profileImage": $('#user_profile_image').attr('src'),
-                "email": $('#user_email_id').val(),
-                //"dob": $('#user_dob').val(),
-                "phone": $('#user_phone').val(),
-                "altPhone": $('#user_alt_phone').val(),
-                "address": $('#user_address').val(),
-                "occupation": $('#occupation').val(),
-                "hobbies": $('#hobbies').val(),
-                "interest": $('#interest').val(),
-                "crmId": $('#crmId').val(),
-                "city": $('#user_city').val(),
-                "state": $('#user_state').val(),
-                "pinCode": $('#user_pin_code').val()
-            };
-            console.log(formData);
+            $("#saveSuccss").hide();
 
-            var that = this;
-            MGF.updateProfile(formData).then(function () {
-                that.render();
-            });
+            if((displayName.trim() == "") || (emailId.trim() == "") || (phone.trim() == "")){
+                console.log('---not done---');
+                $("#saveErr").show();
+                return false;
+            }else{
+                $("#saveErr").hide();
+                var formData = {
+                    "displayName": displayName,
+                    "profileImage": $('#user_profile_image').attr('src'),
+                    "email": emailId,
+                    //"dob": $('#user_dob').val(),
+                    "phone": phone,
+                    "altPhone": $('#user_alt_phone').val(),
+                    "address": $('#user_address').val(),
+                    "occupation": $('#occupation').val(),
+                    "hobbies": $('#hobbies').val(),
+                    "interest": $('#interest').val(),
+                    "crmId": $('#crmId').val(),
+                    "city": $('#user_city').val(),
+                    "state": $('#user_state').val(),
+                    "pinCode": $('#user_pin_code').val()
+                };
 
+                var that = this;
+                MGF.updateProfile(formData).then(function () {
+                    $('.edit_mode').hide();
+                    $('.view_mode').show();
+                    $('.edit_icon').show();
+                    $("#saveSuccss").show();
+                    that.render();
+                });
+            }
         },
         submitPropertyDetails: function (e) {
             if (e.isDefaultPrevented()) return;

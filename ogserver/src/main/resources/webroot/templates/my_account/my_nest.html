@@ -1,7 +1,4 @@
 <% if(typeof(myNest) !==  'undefined' && myNest !== null){ %>
-<%= console.log("----My nest details------") %>
-<%= console.log(myNest) %>
-
 <link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.css" type="text/css" />
 <link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
 
@@ -9,62 +6,75 @@
 <% if(typeof(myNest.paymentDetails) != 'undefined'){ %>
 <section>
     <div class="col-md-12 col-sm-12 bg-property portfolio-box padding-top15 padding-bottom15">
-    <div class="col-md-6">
-        <div class="row col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                <label>Property Name :</label>
+        <div class="col-md-6">
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                    <label>Property Name :</label>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].project_name_c ? myNest.paymentDetails[0].project_name_c : 'NA' %></p>
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                    <label>Builders Name :</label>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].builder_name_c ? myNest.paymentDetails[0].builder_name_c : 'NA' %></p>
+                </div>
+
             </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].project_name_c : '' %></p>
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                    <label>Property Type :</label>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].property_type_c ? myNest.paymentDetails[0].property_type_c : 'NA' %></p>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                    <label>Tower/Block no :</label>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%=  myNest.paymentDetails[0].tower_c ? myNest.paymentDetails[0].tower_c : 'NA' %></p>
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                    <label>Flat No :</label>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].flat_no_c ? myNest.paymentDetails[0].flat_no_c : 'NA' %></p>
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                    <label>BHK :</label>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].bhk_c ? myNest.paymentDetails[0].bhk_c : 'NA' %></p>
+                </div>
+
             </div>
 
         </div>
-        <div class="row col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                <label>Property Type :</label>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].property_type_c : '' %></p>
-            </div>
-
-        </div>
-        <div class="row col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                <label>Tower/Block no :</label>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].tower_c : '' %></p>
-            </div>
-
-        </div>
-
-
-    </div>
-    <div class="col-md-6">
-        <div class="row col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                <label>Builders Name :</label>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].builder_name_c : '' %></p>
-            </div>
-
-        </div>
-        <div class="row col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                <label>Flat No :</label>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest ? myNest.paymentDetails[0].flat_no_c : '' %></p>
-            </div>
-
-        </div>
-    </div>
     <div class="col-md-1">
         <span class="glyphicon glyphicon-pencil edit_icon" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit Details" style="display: none;">
         </span>
@@ -179,6 +189,14 @@
                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_doc.png" alt="document">
                     </div>
                     <p>Document Details</p>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6 mynest-tab-listbox margin-right0">
+                <a href="#payonline" role="tab" data-toggle="tab">
+                    <div class="mynest-inside-box">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_card.png" alt="document">
+                    </div>
+                    <p>Online Payment Details</p>
                 </a>
             </div>
         </div>
@@ -309,12 +327,8 @@
 
 
                 %>
-                <%= console.log(' ===================== taskType =================== ') %>
-                <%= console.log(taskType) %>
                 <% if((typeof(myNest.paymentDetails[0]) != 'undefined') && (typeof(myNest.paymentDetails[0].sales_stage) != 'undefined')){ %>
                 <% if((myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT") || (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
-                <%= console.log(' ===================== Sale stage =================== ') %>
-                <%= console.log(myNest.paymentDetails[0].sales_stage) %>
                 <div class="row" <%= Finalpropcls%>><div class="col-md-12"><hr/></div></div>
                 <div class="row salesStage">
                     <div class="col-md-12">
@@ -372,7 +386,7 @@
             <div role="tabpanel" class="tab-pane row padding6" id="card">
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
                     <div class="col-md-6">Payment History</div>
-                    <div class="col-md-6 align-right"><a href="/online-payment" class="btn btn-orange">Online Payment</a></div>
+                   <!-- <div class="col-md-6 align-right"><a href="/online-payment" class="btn btn-orange">Online Payment</a></div>-->
 
                 </div>
                 <div class="col-md-12 border-bottom-grey padding6 align-right font-weight-bold"> Total Amount: <% if(typeof(myNest.paymentDetails[0].amount) !== 'undefined'){ %><%= myNest.paymentDetails[0].amount %><% } %></div>
@@ -382,6 +396,7 @@
                         <!--<div class="col-sm-2" style="font-weight:bold;">% Amount</div>-->
                         <div class="col-sm-2 font-weight-bold">Amount</div>
                         <div class="col-sm-2 font-weight-bold">Payment Date</div>
+                        <div class="col-sm-2 font-weight-bold">Payment Mode</div>
                         <div class="col-sm-3 font-weight-bold">Transaction Ref</div>
 
                     </div>
@@ -394,6 +409,9 @@
                         <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_payment_date_c) !== 'undefined'){ %>
                             <% var date1 = new Date(myNest.paymentDetails[0].m1_payment_date_c) %>
                             <%= date1.getDate() + '/' + (date1.getMonth() + 1) + '/' +  date1.getFullYear() %>
+                            <% } %></div>
+                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_mode_of_payment_c) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m1_mode_of_payment_c %>
                             <% } %></div>
                         <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference1_c %>
@@ -410,6 +428,9 @@
                             <% var date = new Date(myNest.paymentDetails[0].m2_payment_date_c) %>
                             <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
                             <% } %></div>
+                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_mode_of_payment_c) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m2_mode_of_payment_c %>
+                            <% } %></div>
                         <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference2_c) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference2_c %>
                             <% } %></div>
@@ -424,6 +445,9 @@
                         <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
                             <% var date = new Date(myNest.paymentDetails[0].m3_payment_date_c) %>
                             <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
+                            <% } %></div>
+                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_mode_of_payment_c) !== 'undefined'){ %>
+                            <%= myNest.paymentDetails[0].m3_mode_of_payment_c %>
                             <% } %></div>
                         <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
                             <%= myNest.paymentDetails[0].payment_reference3_c %>
@@ -508,6 +532,106 @@
                     </div>
                 </div>
             </div>
+    <div role="tabpanel" class="tab-pane row padding6" id="payonline">
+        <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
+            <div class="col-md-6">Online Payment History</div>
+            <div class="col-md-6 align-right"><a href="/online-payment" class="btn btn-orange">Online Payment</a></div>
+
+        </div>
+<!--
+        <div class="col-md-12 border-bottom-grey padding6 align-right font-weight-bold"> Total Amount: <% if(typeof(myNest.paymentDetails[0].amount) !== 'undefined'){ %><%= myNest.paymentDetails[0].amount %><% } %></div>
+-->
+        <div class="col-md-12">
+            <div class="row align-center padding-top-10">
+                <div class="col-sm-3 font-weight-bold">Invoice#</div>
+                <!--<div class="col-sm-2" style="font-weight:bold;">% Amount</div>-->
+                <div class="col-sm-2 font-weight-bold">Amount</div>
+                <div class="col-sm-2 font-weight-bold">Payment Date</div>
+                <div class="col-sm-3 font-weight-bold">Transaction Ref#</div>
+
+            </div>
+            <!--<div class="row align-center padding6">
+                <div class="col-sm-3">453278765432 </div>
+                &lt;!&ndash;<div class="col-sm-2">  3 </div>&ndash;&gt;
+                <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){ %>
+                    <%= parseFloat(myNest.paymentDetails[0].m1_amount_collected_c).toFixed(2) %>
+                    <% } %> </div>
+                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_payment_date_c) !== 'undefined'){ %>
+                    <% var date1 = new Date(myNest.paymentDetails[0].m1_payment_date_c) %>
+                    <%= date1.getDate() + '/' + (date1.getMonth() + 1) + '/' +  date1.getFullYear() %>
+                    <% } %></div>
+                <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].payment_reference1_c %>
+                    <% } %></div>
+
+            </div>
+            <div class="row align-center padding6">
+                <div class="col-sm-3">4535656765432</div>
+                &lt;!&ndash;<div class="col-sm-2">  47 </div>&ndash;&gt;
+                <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){ %>
+                    <%= parseFloat(myNest.paymentDetails[0].m2_amount_collected_c).toFixed(2) %>
+                    <% } %> </div>
+                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_payment_date_c) !== 'undefined'){ %>
+                    <% var date = new Date(myNest.paymentDetails[0].m2_payment_date_c) %>
+                    <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
+                    <% } %></div>
+                <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference2_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].payment_reference2_c %>
+                    <% } %></div>
+
+            </div>-->
+            <div class="row align-center padding6">
+                <div class="col-sm-3">wa4lbid61q</div>
+                <!--<div class="col-sm-2">  47 </div>-->
+                <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
+                    <%= parseFloat(myNest.paymentDetails[0].m3_amount_collected_c).toFixed(2) %>
+                    <% } %>  100 </div>
+                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
+                    <% var date = new Date(myNest.paymentDetails[0].m3_payment_date_c) %>
+                    <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
+                    <% } %> 13/02/2017</div>
+                <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].payment_reference3_c %>
+                    <% } %> 8274HGUHGF7524 </div>
+
+            </div>
+            <!--<div class="row align-center padding6">
+                <div class="col-sm-3">  Balance </div>
+                &lt;!&ndash;<div class="col-sm-2">  50 </div>&ndash;&gt;
+               <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].m3_amount_collected_c %>
+                    <% } %> </div>
+                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].m3_payment_date_c %>
+                    <% } %></div>
+                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].payment_reference3_c %>
+                    <% } %></div>
+
+            </div>-->
+
+            <!--<div class="row row-magin align-center col-md-12 font-style-or">
+                <div class="quality-check-line"></div>
+                </div>
+
+            <div class="row align-center padding6">
+                <div class="col-sm-3 padding-top-10 ">  Total Amount </div>
+                <div class="col-sm-2">  </div>
+                <div class="col-sm-2 padding-top-10"> <% if(typeof(myNest.paymentDetails[0].m4_amount_collected_c) !== 'undefined'){ %>
+                    <%= parseFloat(myNest.paymentDetails[0].m4_amount_collected_c).toFixed(2) %>
+                    <% } %> </div>
+                <div class="col-sm-2 padding-top-10"><% if(typeof(myNest.paymentDetails[0].m4_payment_date_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].m4_payment_date_c %>
+                    <% } %></div>
+                <div class="col-sm-2 padding-top-10"><% if(typeof(myNest.paymentDetails[0].payment_reference4_c) !== 'undefined'){ %>
+                    <%= myNest.paymentDetails[0].payment_reference4_c %>
+                    <% } %></div>
+
+            </div>-->
+        </div>
+
+
+    </div>
         </div>
     </div>
 </section>

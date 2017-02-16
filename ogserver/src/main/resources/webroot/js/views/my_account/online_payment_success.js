@@ -31,9 +31,12 @@ define([
             var authData = this.refAuth.currentUser;
             console.log('-------------authData in myaccount page--------------------');
             console.log(authData);
-            document.getElementById("canlink").href = window.location.href;
-
-            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            if(authData.email !== null){
+                document.getElementById("canlink").href = window.location.href;
+                MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            }else{
+                window.location = '/';
+            }
         },
         initialize: function() {
             this.ref = MGF.rootRef;
