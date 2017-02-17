@@ -623,15 +623,25 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
     {
         int currentRow = startRow;
 
-        this.createSubHeadingRowForCatalog(currentRow, "A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
+        this.createSubHeadingRowForCatalog(currentRow, "A." +String.valueOf(sequenceNumber),product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
 
-        currentRow++;
-        this.createRowAndFillData(currentRow, null, product.getName());
-
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+        series="A." +String.valueOf(sequenceNumber) + ".";
 
         currentRow++;
+        this.createSubHeadingRow(currentRow,series+ "a",product.getRoomCode());
+
+        currentRow++;
+        this.createRowAndFillData(currentRow, null, "Material : " + product.getBaseCarcassCode(),1.0,product.getAmount(),product.getAmount());
+
+        currentRow++;
+        this.createRowAndFillData(currentRow, null, "Finish : " + product.getFinishCode());
+
+        currentRow++;
+        this.createRowAndFillData(currentRow,"Total Cost",product.getAmount());
+        //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+
+        //currentRow++;
         this.createRow(currentRow, this.quoteSheet);
 
         return currentRow;
@@ -792,11 +802,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
     private void createSubHeadingRowForCatalog(int rowNum, String index, String title,Double quantity, Double amount, Double total)
     {
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
-        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index);
-        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
-        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getTitleStyle());
+       /* this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
         this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount).setCellStyle(this.styles.getTitleStyle());
-        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC,total).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC,total).setCellStyle(this.styles.getTitleStyle());*/
     }
     private void createRowAndFillDataNew(int rowNum, String index, String title, Double quantity, Double amount, Double total)
     {

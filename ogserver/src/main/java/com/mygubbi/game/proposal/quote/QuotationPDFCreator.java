@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.*;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.model.AccessoryPack;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
@@ -12,8 +13,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by user on 02-Nov-16.
@@ -590,7 +593,7 @@ public class QuotationPDFCreator
 
     private void fillAssembledProductUnits(PdfPTable tabname,AssembledProductInQuote product,String series)
     {
-        wunitSequence = 0;;
+        wunitSequence = 0;
         String caption="",caption1="",caption2="",caption3="",caption4="",captionLoft="",captionWardrobe="";
         String cname=product.getCatagoryName();
 
@@ -651,7 +654,7 @@ public class QuotationPDFCreator
                         kbList.add(new String(width));
                         if(unit.title.contains("S - Kitchen Base Corner Units")||
                                 unit.title.contains("S - Kitchen Base Drawer Units") ||
-                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") )
+                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") || unit.title.contains("Base unit") )
                         {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -1127,26 +1130,39 @@ public class QuotationPDFCreator
         this.createSubHeadingRowForCatalog(tabname,"A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
         this.createRowAndFillData(tabname,null, product.getName());
+        series="A." +String.valueOf(sequenceNumber) + ".";
+        this.createSubHeadingRow(tabname,series+ "a",product.getRoomCode());
+        this.createRowAndFillData(tabname, null, "Material : " + product.getBaseCarcassCode() + "\n" +"Finish : " + product.getFinishCode(),1.0,product.getAmount(),product.getAmount());
+        //this.createRowAndFillData(tabname, null, "Finish : " + product.getFinishCode());
+        this.createCellWithData(tabname,"Total Cost",product.getAmount());
+        //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+
+        //currentRow++;
+        //this.createRow(currentRow, this.quoteSheet);
     }
 
     private void createSubHeadingRowForCatalog(PdfPTable tabname, String index, String title,Double quantity, Double amount, Double total)
     {
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+
         PdfPCell cell;
         Paragraph p;
 
+        PdfPCell cell1=new PdfPCell();
+        Paragraph Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+
         cell=new PdfPCell();
-        p=new Paragraph(index,fsize);
-        p.setAlignment(Element.ALIGN_CENTER);
+        p=new Paragraph(title,size1);
+        p.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(p);
         tabname.addCell(cell);
 
-        cell=new PdfPCell();
-        p=new Paragraph(title,fsize);
-        p.setAlignment(Element.ALIGN_CENTER);
-        cell.addElement(p);
-        tabname.addCell(cell);
-
-        cell=new PdfPCell();
+        /*cell=new PdfPCell();
         p=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
         p.setAlignment(Element.ALIGN_RIGHT);
         cell.addElement(p);
@@ -1163,7 +1179,7 @@ public class QuotationPDFCreator
         Paragraph Pamt=new Paragraph(this.getRoundOffValue(String.valueOf(total.intValue())),fsize);
         Pamt.setAlignment(Element.ALIGN_RIGHT);
         cell2.addElement(Pamt);
-        tabname.addCell(cell2);
+        tabname.addCell(cell2);*/
     }
 
     private void fillAddons(PdfPTable tabname,List<ProductAddon> addOns, String emptyMessage)

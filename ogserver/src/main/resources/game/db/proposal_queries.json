@@ -495,7 +495,7 @@
       "id": "proposal.product.all.detail",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product where proposalId = ? and fromVersion = ? and active = 'A' order by type",
+      "query": "select * from proposal_product where proposalId = ? and fromVersion = ? and active = 'A' order by seq",
       "params": ["proposalId","fromVersion"],
       "jsonfields":["modules", "addons"]
     },
@@ -504,7 +504,7 @@
       "id": "proposal.product.selected.detail",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product where proposalId = ? and active = 'A' and id in (?) order by type",
+      "query": "select * from proposal_product where proposalId = ? and active = 'A' and id in (?) order by seq",
       "params": ["proposalId", "productIds"],
       "jsonfields":["modules", "addons"]
     },
@@ -521,7 +521,7 @@
       "id": "proposal.product.versionlist",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
+      "query": "select * from proposal_product where proposalId = ? and fromVersion = ? and active = 'A' order by seq",
       "params": ["proposalId","fromVersion"],
       "jsonfields":["modules", "addons"]
     },
@@ -586,17 +586,25 @@
     },
 
     {
+      "id": "ratecard.select.all",
+      "type": "select",
+      "table": "ratecard_master",
+      "query": "select * from ratecard_master",
+      "params": []
+    },
+
+    {
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
       "params": []
     },
 
@@ -753,11 +761,12 @@
     {
       "id": "module.selectModulesByCategory",
       "type": "select",
-      "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath, accessoryPackDefault, remarks from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
+      "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath, accessoryPackDefault, remarks, unitType from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
       "params": ["productCategory","moduleCategory"]
     },
 
 
+    //city related queries
     {
       "id": "city.selectMonthCount",
       "type": "select",

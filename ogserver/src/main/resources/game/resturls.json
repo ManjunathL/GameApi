@@ -520,6 +520,14 @@
       "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/addon/addondetails",
+      "source": "db",
+      "query":"addons.addonPriceDetails",
+      "params":["code"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }
