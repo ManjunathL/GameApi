@@ -235,7 +235,6 @@ public class AssembledProductInQuote
                 this.addToAddonAccessories(accessory, 1, module.getUnit(), module.getSequence());
             }
         }
-
     }
 
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
@@ -298,11 +297,11 @@ public class AssembledProductInQuote
 
     private void addModuleToUnit(ProductModule module)
     {
-        Unit unit = this.getUnit(module.getUnit());
+        Unit unit = this.getUnit(module.getUnit(),module.getModuleCategory());
         unit.addModule(module);
     }
 
-    private Unit getUnit(String unitTitle)
+    private Unit getUnit(String unitTitle,String moduleCategory)
     {
         if (StringUtils.isEmpty(unitTitle)) unitTitle = "Default";
         for (Unit unit : this.units)
@@ -313,7 +312,7 @@ public class AssembledProductInQuote
             }
         }
 
-        Unit unit = new Unit(this.units.size() + 1, unitTitle);
+        Unit unit = new Unit(this.units.size() + 1, unitTitle,moduleCategory);
         this.units.add(unit);
         return unit;
     }
@@ -409,13 +408,15 @@ public class AssembledProductInQuote
         public int sequence;
         public short moduleCount;
         public String title;
+        public String moduleCategory;
         public List<ModuleDimension> moduleDimensions;
         public double amount=0;
 
-        public Unit(int sequence, String title)
+        public Unit(int sequence, String title,String moduleCategory)
         {
             this.sequence = sequence;
             this.title = title;
+            this.moduleCategory=moduleCategory;
             this.moduleDimensions = new ArrayList<>();
         }
 
@@ -527,7 +528,19 @@ public class AssembledProductInQuote
         public String catalogCode;
         public String catalog;
 
-        public Accessory(String code, String title,double msp,String catalogCode,String catalog)
+        @Override
+        public String toString() {
+            return "Accessory{" +
+                    "catalog='" + catalog + '\'' +
+                    ", code='" + code + '\'' +
+                    ", title='" + title + '\'' +
+                    ", quantity=" + quantity +
+                    ", msp=" + msp +
+                    ", catalogCode='" + catalogCode + '\'' +
+                    '}';
+        }
+
+        public Accessory(String code, String title, double msp, String catalogCode, String catalog)
         {
             this.code = code;
             this.title = title;
