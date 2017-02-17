@@ -136,10 +136,15 @@ define([
 
         },
         renderTranscationDetails: function(transdetails){
-            console.log('-------------yuppeeeeeeeee------------------');
-            console.log(transdetails);
             var that = this;
             if(transdetails) {
+                transdetails = _(transdetails).sortBy(function(trnsc) {
+                    return Date.parse(trnsc.addedon);
+                }).reverse();
+
+                console.log('================transdetails====================');
+                console.log(transdetails);
+
                 that.myaccount.set({
                     'transdetails': transdetails
                 }, {
@@ -189,7 +194,6 @@ define([
                     "displayName": displayName,
                     "profileImage": $('#user_profile_image').attr('src'),
                     "email": emailId,
-                    //"dob": $('#user_dob').val(),
                     "phone": phone,
                     "altPhone": $('#user_alt_phone').val(),
                     "address": $('#user_address').val(),
@@ -374,8 +378,6 @@ define([
                      "scheduleTime":scheduleTime
                     },
                     success: function(response) {
-                        console.log(" --------------- proposal response ----------------");
-                        console.log(response);
                         if(response){
                             $("#reqCallbk_successMsg").fadeIn();
                             $(".salesStage").fadeOut(1000);
@@ -423,8 +425,6 @@ define([
                  "taskType":taskType
                 },
                 success: function(response) {
-                    console.log(" --------------- proposal response ----------------");
-                    console.log(response);
                     if(response){
 
                         $("#approve_successMsg").fadeIn();
