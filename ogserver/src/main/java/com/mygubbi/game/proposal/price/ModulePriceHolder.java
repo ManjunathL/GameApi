@@ -90,6 +90,10 @@ public class ModulePriceHolder
         {
             moduleType = "nonStandard";
         }
+        else if (moduleCode.equals("MG-NS-H-001"))
+        {
+            moduleType ="hike";
+        }
         else
         {
             moduleType = "Standard";
@@ -334,6 +338,10 @@ public class ModulePriceHolder
             else
             {
                 if ("Standard".equals(moduleType))
+                {
+                    this.addToCarcassCost(panel.getCost());
+                }
+                else if ("hike".equals(moduleType))
                 {
                     this.addToCarcassCost(panel.getCost());
                 }

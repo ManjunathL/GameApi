@@ -597,14 +597,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
+      "query": "select code, title, make, imagePath,catalogCode, msp as price, uom, category from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom , category from acc_hw_master where type = 'H'",
       "params": []
     },
 
