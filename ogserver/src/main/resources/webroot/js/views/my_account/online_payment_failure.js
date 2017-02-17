@@ -13,14 +13,14 @@ define([
     'text!templates/my_account/online_payment_failure.html',
     'analytics',
     'views/view_manager'
-], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, MGF, CloudinaryJquery, OnlinePaymentSuccessTemplate, Analytics, VM) {
-    var OnlinePaymentSuccessView = Backbone.View.extend({
+], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, MGF, CloudinaryJquery, OnlinePaymentFailureTemplate, Analytics, VM) {
+    var OnlinePaymentFailureView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         refAuth: MGF.refAuth,
         renderWithUserProfCallback: function(userProfData) {
             var txnid = this.model.txnId;
-            $(this.el).html(_.template(OnlinePaymentSuccessTemplate)({
+            $(this.el).html(_.template(OnlinePaymentFailureTemplate)({
                 'userProfile': userProfData,
                 'txnid':txnid
             }));
@@ -28,12 +28,8 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            if(authData.email !== null){
-                document.getElementById("canlink").href = window.location.href;
-                MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            }else{
-                window.location = '/';
-            }
+            document.getElementById("canlink").href = window.location.href;
+            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         initialize: function() {
             this.ref = MGF.rootRef;
@@ -43,5 +39,5 @@ define([
             _.bindAll(this, 'renderWithUserProfCallback');
         }
     });
-    return OnlinePaymentSuccessView;
+    return OnlinePaymentFailureView;
 });

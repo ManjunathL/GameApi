@@ -29,8 +29,6 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            console.log('-----------authData----------------');
-            console.log(authData.email);
             if(authData.email !== null){
                 document.getElementById("canlink").href = window.location.href;
                 MGF.getUserProfile(authData, this.renderWithUserProfCallback);
@@ -44,7 +42,7 @@ define([
         makePayment: function(e){
             e.preventDefault();
             if($("#payamount").val() == '' || $("#payamount").val().trim() == ''){
-                console.log('---------gggggggggggggggg----------------');
+                console.log('---------g----------------');
                 $("#payamount").focus();
                 $("#payamountlbl").text('Please enter a amount.');
                 return false;
@@ -83,7 +81,6 @@ define([
 
                 var hashKey = this.generateHashkey(paymentData);
 
-                console.log(firstname+' ----------- '+email+' ------ '+phone+' ------ '+productinfo+' ------ '+OpportunityId+' ------ '+trnxId);
                 if(hashKey){
                     $("#udf2").val(uid);
                     $("#vamount").val(amount);
@@ -96,16 +93,9 @@ define([
             }
         },
         generateHashkey: function(paymentData){
-            console.log('----------i m here--------------');
-            console.log(paymentData);
-
             var hashSequence ="key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
             var hashVarsSeq = hashSequence.split('|');
             var hash_string = new Array();
-
-            console.log(hashVarsSeq);
-            console.log(" ---- hashVarsSeq ----");
-            console.log(hashVarsSeq.length);
 
             for(var i=0; i < hashVarsSeq.length; i++) {
                 var ss = hashVarsSeq[i];
@@ -114,14 +104,9 @@ define([
             }
             hash_string += SALT;
 
-            console.log(hash_string);
-
             var hash = sha512(hash_string);
                 hash = hash.toLowerCase();
-
-            console.log(hash);
             return hash;
-
         },
         initialize: function() {
             this.ref = MGF.rootRef;
