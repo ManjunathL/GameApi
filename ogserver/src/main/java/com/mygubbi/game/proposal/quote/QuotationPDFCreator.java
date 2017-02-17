@@ -318,6 +318,31 @@ public class QuotationPDFCreator
         this.fillAddons(B4Table, this.quoteData.getServices(), "No additional services.");
         document.add(B4Table);
 
+            PdfPTable B5Table = new PdfPTable(columnWidths1);
+            B5Table.setWidthPercentage(100);
+
+            PdfPCell cel5=new PdfPCell();
+            p = new Paragraph("CUSTOM ADDON ACCESSORIES",fsize1);
+            p.setAlignment(Element.ALIGN_LEFT);
+            cel5.addElement(p);
+            cel5.setColspan(5);
+            cel5.setBorder(Rectangle.NO_BORDER);
+            B5Table.addCell(cel5);
+
+            PdfPCell B5Cell1 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell2 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell3 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell4 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell5 = new PdfPCell(new Paragraph("",fsize));
+            B5Table.addCell(B5Cell1);
+            B5Table.addCell(B5Cell2);
+            B5Table.addCell(B5Cell3);
+            B5Table.addCell(B5Cell4);
+            B5Table.addCell(B5Cell5);
+
+            this.fillAddons(B5Table, this.quoteData.getCustomAddons(), "No additional custom addons.");
+            document.add(B5Table);
+
             p = new Paragraph("Estimated Cost(B):" +this.getRoundOffValue(String.valueOf((int)quoteData.addonsCost)),fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
@@ -370,11 +395,11 @@ public class QuotationPDFCreator
             PdfPTable tab1=new PdfPTable(1);
         tab1.setWidthPercentage(100);
 
-            PdfPCell cel5=new PdfPCell();
+            PdfPCell cel6=new PdfPCell();
             p = new Paragraph("Material Specification",fsize1);
-        p.setAlignment(Element.ALIGN_LEFT);
-            cel5.addElement(p);
-            cel5.setBorder(Rectangle.NO_BORDER);
+            p.setAlignment(Element.ALIGN_LEFT);
+            cel6.addElement(p);
+            cel6.setBorder(Rectangle.NO_BORDER);
             tab1.addCell(cel5);
 
 
@@ -390,22 +415,22 @@ public class QuotationPDFCreator
                             "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
                             "10.\tSink: \tCarisyl/Franke/Nirali\n",fsize));
 
-            PdfPCell cel6=new PdfPCell();
+            PdfPCell cel7=new PdfPCell();
             p = new Paragraph(new Paragraph("Other Finishes offered are Acrylic, Foil, PU paint, UV laminated panels,Hardwood of mygubbi make.\t\t\t\t\n",fsize));
         p.setAlignment(Element.ALIGN_LEFT);
-            cel6.addElement(p);
-            cel6.setBorder(Rectangle.NO_BORDER);
+            cel7.addElement(p);
+            cel7.setBorder(Rectangle.NO_BORDER);
             tab1.addCell(cel6);
             document.add(tab1);
 
             PdfPTable tab2=new PdfPTable(1);
         tab2.setWidthPercentage(100);
 
-            PdfPCell cel7=new PdfPCell();
+            PdfPCell cel8=new PdfPCell();
             p = new Paragraph("Note:\n",fsize);
         p.setAlignment(Element.ALIGN_LEFT);
-            cel7.addElement(p);
-            cel7.setBorder(Rectangle.NO_BORDER);
+            cel8.addElement(p);
+            cel8.setBorder(Rectangle.NO_BORDER);
             tab2.addCell(cel7);
 
             tab2.addCell(new Paragraph("1. \t All 25 mm shelves will be in MDF with both side finish\n"
@@ -1084,7 +1109,11 @@ public class QuotationPDFCreator
         double amount=0.0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
-            this.createRowAndFillData(tabname,ROMAN_SEQUENCE[acSequence], accessory.title);
+            if(accessory.catalog.equals("Primary") || accessory.catalog.equals("Add on")||accessory.catalog.equals("Standalone add on"))
+            {
+                this.createRowAndFillData(tabname , ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
+            }
+            //this.createRowAndFillData(tabname,ROMAN_SEQUENCE[acSequence], accessory.title);
             amount=amount+(accessory.quantity*accessory.msp);
             acSequence++;
             if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
@@ -1177,7 +1206,10 @@ public class QuotationPDFCreator
         int index = 1;
         for (ProductAddon addon : addOns)
         {
-            this.createRowAndFillData(tabname,String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            if(("Custom Addon").equals (addon.getCategoryCode()))
+                this.createRowAndFillData(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            else
+                 this.createRowAndFillData(tabname,String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             index++;
         }
     }

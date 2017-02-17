@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS game_user;
 CREATE TABLE `game_user` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`active` CHAR(1) NOT NULL DEFAULT 'A',
@@ -18,11 +17,10 @@ ENGINE=InnoDB
 
 
 
+
 -------------------------
 --Proposal related tables
 -------------------------
-DROP TABLE IF EXISTS proposal;
-CREATE TABLE proposal(
 CREATE TABLE `proposal` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`status` CHAR(10) NOT NULL DEFAULT 'Active',
@@ -30,7 +28,7 @@ CREATE TABLE `proposal` (
 	`version` CHAR(10) NULL DEFAULT NULL,
 	`crmId` VARCHAR(64) NULL DEFAULT NULL,
 	`quoteNo` VARCHAR(64) NULL DEFAULT NULL,
-	`quoteNoNew` VARCHAR(64) NULL DEFAULT NULL,
+	`customerId` VARCHAR(64) NULL DEFAULT NULL,
 	`cname` VARCHAR(64) NULL DEFAULT NULL,
 	`caddress1` VARCHAR(128) NULL DEFAULT NULL,
 	`caddress2` VARCHAR(128) NULL DEFAULT NULL,
@@ -49,9 +47,6 @@ CREATE TABLE `proposal` (
 	`designerName` VARCHAR(128) NULL DEFAULT NULL,
 	`designerEmail` VARCHAR(128) NULL DEFAULT NULL,
 	`designerPhone` VARCHAR(16) NULL DEFAULT NULL,
-	`designPartnerName` VARCHAR(128) NULL DEFAULT NULL,
-	`designPartnerEmail` VARCHAR(128) NULL DEFAULT NULL,
-	`designPartnerPhone` VARCHAR(16) NULL DEFAULT NULL,
 	`amount` INT(11) NOT NULL DEFAULT '0',
 	`folderPath` VARCHAR(255) NULL DEFAULT NULL,
 	`createdOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -59,6 +54,10 @@ CREATE TABLE `proposal` (
 	`updatedOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`updatedBy` VARCHAR(64) NULL DEFAULT NULL,
 	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`quoteNoNew` VARCHAR(64) NULL DEFAULT NULL,
+	`designPartnerName` VARCHAR(128) NULL DEFAULT NULL,
+	`designPartnerEmail` VARCHAR(128) NULL DEFAULT NULL,
+	`designPartnerPhone` VARCHAR(16) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`)
 )
 COMMENT='Proposal Master'
@@ -68,16 +67,16 @@ ENGINE=InnoDB
 
 
 
-DROP TABLE IF EXISTS proposal_product;
+
 CREATE TABLE `proposal_product` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`active` CHAR(1) NOT NULL DEFAULT 'A',
 	`proposalId` INT(11) NOT NULL,
-	`fromVersion` VARCHAR(50) NOT NULL,
+	`fromVersion` VARCHAR(4) NULL DEFAULT NULL,
 	`title` VARCHAR(255) NOT NULL DEFAULT 'TITLE',
 	`seq` INT(11) NOT NULL DEFAULT '0',
 	`type` CHAR(16) NOT NULL DEFAULT 'CUSTOMIZED',
-	`roomCode` VARCHAR(255) NOT NULL DEFAULT 'Kitchen',
+	`roomCode` VARCHAR(16) NOT NULL DEFAULT 'Kitchen',
 	`productCategoryCode` VARCHAR(16) NOT NULL DEFAULT 'Kitchen',
 	`catalogueId` VARCHAR(32) NULL DEFAULT NULL,
 	`catalogueName` VARCHAR(128) NULL DEFAULT NULL,
@@ -125,15 +124,16 @@ CREATE TABLE proposal_documents(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal documents';
 
 
-DROP TABLE IF EXISTS proposal_addon;
 CREATE TABLE `proposal_addon` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`seq` INT(4) NOT NULL DEFAULT '0',
 	`proposalId` INT(11) NOT NULL,
-	`fromVersion` FLOAT NOT NULL,
+	`fromVersion` VARCHAR(50) NOT NULL,
 	`code` VARCHAR(16) NOT NULL,
 	`categoryCode` VARCHAR(32) NOT NULL DEFAULT 'NA',
 	`productTypeCode` CHAR(32) NOT NULL DEFAULT 'All',
+	`productSubtypeCode` CHAR(32) NOT NULL DEFAULT 'All',
+	`product` CHAR(32) NOT NULL DEFAULT 'All',
 	`brandCode` VARCHAR(32) NULL DEFAULT NULL,
 	`catalogueCode` VARCHAR(32) NOT NULL,
 	`title` VARCHAR(255) NOT NULL,
@@ -152,8 +152,6 @@ ENGINE=InnoDB
 ;
 
 
-
-DROP TABLE IF EXISTS module_master;
 CREATE TABLE `module_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`code` VARCHAR(255) NOT NULL,
@@ -170,7 +168,7 @@ CREATE TABLE `module_master` (
 	`material` CHAR(8) NULL DEFAULT NULL,
 	`unitType` CHAR(16) NULL DEFAULT NULL,
 	`accessoryPackDefault` CHAR(4) NULL DEFAULT NULL,
-	`remarks` VARCHAR(255) NULL DEFAULT 'Add Remarks',
+	`remarks` VARCHAR(64) NULL DEFAULT 'Add Remarks',
 	PRIMARY KEY (`id`),
 	INDEX `code_key` (`code`)
 )
@@ -179,7 +177,7 @@ ENGINE=InnoDB
 ;
 
 
-DROP TABLE IF EXISTS module_components;
+
 CREATE TABLE `module_components` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`modulecode` VARCHAR(32) NULL DEFAULT NULL,
@@ -197,7 +195,7 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-DROP TABLE IF EXISTS code_master;
+
 CREATE TABLE `code_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`lookupType` CHAR(16) NULL DEFAULT NULL,
@@ -213,6 +211,7 @@ COMMENT='Code Master'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
 
 
 DROP TABLE IF EXISTS color_master;
@@ -284,7 +283,6 @@ CREATE TABLE carcass_master(
 
 ---------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS acc_hw_master;
 CREATE TABLE `acc_hw_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`type` CHAR(1) NOT NULL DEFAULT 'A',
@@ -308,19 +306,21 @@ ENGINE=InnoDB
 ;
 
 
-DROP TABLE IF EXISTS addon_master;
 CREATE TABLE `addon_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`code` VARCHAR(16) NOT NULL,
 	`categoryCode` VARCHAR(32) NOT NULL DEFAULT 'NA',
 	`roomCode` VARCHAR(32) NOT NULL DEFAULT 'All',
 	`productTypeCode` CHAR(32) NOT NULL DEFAULT 'All',
+	`productSubtypeCode` CHAR(32) NOT NULL DEFAULT 'All',
 	`brandCode` VARCHAR(32) NULL DEFAULT NULL,
+	`product` VARCHAR(32) NULL DEFAULT NULL,
 	`catalogueCode` VARCHAR(32) NULL DEFAULT NULL,
 	`rateReadOnly` TINYINT(1) NULL DEFAULT NULL,
 	`title` VARCHAR(255) NULL DEFAULT NULL,
-	`rate` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`rate` DECIMAL(10,2) NULL DEFAULT '0.00',
 	`mrp` DECIMAL(10,2) NULL DEFAULT '0.00',
+	`dealerPrice` DOUBLE NULL DEFAULT '0',
 	`uom` CHAR(5) NOT NULL DEFAULT 'N',
 	`imagePath` VARCHAR(255) NOT NULL,
 	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -333,9 +333,9 @@ ENGINE=InnoDB
 ;
 
 
+
 ----------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS acc_pack_master;
 CREATE TABLE `acc_pack_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`code` VARCHAR(16) NOT NULL,
@@ -350,9 +350,9 @@ ENGINE=InnoDB
 ;
 
 
+
 ----------------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS acc_pack_components;
 CREATE TABLE `acc_pack_components` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`apcode` VARCHAR(16) NOT NULL,
@@ -369,9 +369,9 @@ ENGINE=InnoDB
 ;
 
 
+
 ----------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS module_acc_pack;
 CREATE TABLE `module_acc_pack` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`apcode` VARCHAR(16) NOT NULL,
@@ -387,7 +387,7 @@ ENGINE=InnoDB
 
 
 
-DROP TABLE IF EXISTS accpack_addon_map;
+
 CREATE TABLE `accpack_addon_map` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`apcode` VARCHAR(16) NOT NULL,
@@ -402,6 +402,7 @@ ENGINE=InnoDB
 ;
 
 
+
 --DROP TABLE IF EXISTS module_category_master;
 --CREATE TABLE module_category_master(
 --  id INTEGER NOT NULL AUTO_INCREMENT,
@@ -413,8 +414,6 @@ ENGINE=InnoDB
 --  KEY code_key (moduleCode)
 --) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module Category Master';
 
-
-DROP TABLE IF EXISTS panel_master;
 CREATE TABLE `panel_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`code` VARCHAR(16) NOT NULL,
@@ -438,6 +437,7 @@ ENGINE=InnoDB
 ;
 
 
+
 CREATE TABLE `city_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`city` VARCHAR(50) NOT NULL DEFAULT '0',
@@ -445,24 +445,25 @@ CREATE TABLE `city_master` (
 	`proposalId` INT(11) NOT NULL DEFAULT '0',
 	`quoteNo` VARCHAR(50) NOT NULL DEFAULT '0',
 	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`cityLocked` VARCHAR(4) NULL DEFAULT NULL,
+	`cityLocked` VARCHAR(4) NULL DEFAULT 'Yes',
 	PRIMARY KEY (`id`)
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB
 ;
 
+
 CREATE TABLE `version_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`proposalId` INT(11) NOT NULL,
 	`version` VARCHAR(50) NOT NULL,
-	`fromVersion` VARCHAR(50) NULL DEFAULT NULL,
+	`fromVersion` VARCHAR(4) NULL DEFAULT NULL,
 	`title` VARCHAR(255) NOT NULL,
 	`finalAmount` DOUBLE NOT NULL,
-	`status` VARCHAR(64) NOT NULL,
-	`internalStatus` VARCHAR(64) NOT NULL,
-	`date` VARCHAR(50) NOT NULL,
-	`remarks` VARCHAR(255) NOT NULL,
+	`status` CHAR(64) NOT NULL,
+	`internalStatus` CHAR(64) NULL DEFAULT NULL,
+	`date` VARCHAR(64) NULL DEFAULT NULL,
+	`remarks` VARCHAR(255) NULL DEFAULT NULL,
 	`discountPercentage` DOUBLE NOT NULL,
 	`discountAmount` DOUBLE NOT NULL,
 	`amount` DOUBLE NOT NULL,
@@ -471,6 +472,7 @@ CREATE TABLE `version_master` (
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB
 ;
+
 
 
 

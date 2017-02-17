@@ -12,6 +12,7 @@ public class ProductAddon extends JsonObject
     public static final String COUNTERTOP_TYPE = "Counter Top";
     public static final String SERVICE_TYPE = "Services";
     public static final String LOOSE_FURNITURE_TYPE = "Loose Furniture";
+    public static final String CUSTOM_ADDON_TYPE = "Custom Addon";
 
     private static final String SEQ = "seq";
     private static final String CODE = "code";
@@ -97,6 +98,11 @@ public class ProductAddon extends JsonObject
         return SERVICE_TYPE.equals(this.getCategoryCode());
     }
 
+    public boolean isCustomAddon()
+    {
+        return CUSTOM_ADDON_TYPE.equals(this.getCategoryCode());
+    }
+
     public String getTitle()
     {
         return this.getString(TITLE);
@@ -111,5 +117,6 @@ public class ProductAddon extends JsonObject
     }
 
     public String getExtendedTitle() { return this.getProductTypeCode() + "-" + this.getProductSubtypeCode() + "-" +this.getProduct();}
+    public String getCustomTitle() { return this.getProduct();}
 }
 

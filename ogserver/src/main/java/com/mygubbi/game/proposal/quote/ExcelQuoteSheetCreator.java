@@ -93,6 +93,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
             case "B.4":
                 this.fillAddons(cell, this.quoteData.getServices(), "No additional services.");
                 break;
+
+            case "B.5":
+                this.fillAddons(cell, this.quoteData.getCustomAddons(), "No additional custom addons.");
+                break;
+
             default:
                 break;
         }
@@ -650,7 +655,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
             currentRow++;
-            this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
+            if(accessory.catalog.equals("Primary") || accessory.catalog.equals("Add on")||accessory.catalog.equals("Standalone add on"))
+            {
+                this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
+            }
+
             amount=amount+(accessory.quantity*accessory.msp);
             acSequence++;
             if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
@@ -875,7 +884,10 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         int index = 1;
         for (ProductAddon addon : addOns)
         {
-            this.createRowAndFillData(currentRow, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            if(("Custom Addon").equals (addon.getCategoryCode()))
+                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            else
+                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             currentRow++;
             index++;
         }

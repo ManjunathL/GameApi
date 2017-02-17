@@ -5,6 +5,7 @@ import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.PanelComponent;
+import com.sun.org.apache.xml.internal.resolver.Catalog;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jooq.lambda.Seq;
@@ -123,14 +124,14 @@ public class AssembledProductInQuote
     private List<ModulePart> getAggregatedModuleParts(List<ModulePart> parts)
     {
         return Seq.ofType(parts.stream(), ModulePart.class)
-                .groupBy(x -> tuple(x.code, x.uom),
+                .groupBy(x -> tuple(x.code, x.uom,x.title,x.catalogCode),
                         Tuple.collectors(
                                 Collectors.summingDouble(x -> x.quantity), Collectors.summingDouble(x -> x.quantity)
                         )
                 )
                 .entrySet()
                 .stream()
-                .map(e -> new ModulePart(e.getKey().v1, e.getKey().v2, e.getValue().v1))
+                .map(e -> new ModulePart(e.getKey().v1, e.getKey().v2, e.getValue().v1,e.getKey().v3,e.getKey().v4))
                 .collect(Collectors.toList());
     }
 
@@ -239,46 +240,47 @@ public class AssembledProductInQuote
 
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
     {
-        ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom());
+        ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom(),"gh");
         this.addons.add(part);
     }
 
-    private void addToAddonAccessories(AccHwComponent component, double quantity, String unit, int seq)
+    private void addToAddonAccessories(AccHwComponent component, double quantity, String unit, int seq )
     {
         ModulePart part = this.createModulePart(component, quantity, unit, seq);
         this.addonAccessories.add(part);
     }
 
-    private void addToModuleAccessories(AccHwComponent component, double quantity, String unit, int seq)
+    private void addToModuleAccessories(AccHwComponent component, double quantity, String unit, int seq )
     {
-        ModulePart part = this.createModulePart(component, quantity, unit, seq);
+        ModulePart part = this.createModulePart(component, quantity, unit, seq );
         this.moduleAccessories.add(part);
     }
 
-    private void addToModuleHardware(AccHwComponent component, double quantity, String unit, int seq)
+    private void addToModuleHardware(AccHwComponent component, double quantity, String unit, int seq )
     {
-        ModulePart part = this.createModulePart(component, quantity, unit, seq);
+        ModulePart part = this.createModulePart(component, quantity, unit, seq );
         this.moduleHardware.add(part);
     }
 
     private void addToAccessoryPackPanels(ModulePanel carcassPanel, double quantity, String unit, int seq)
     {
-        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS");
+        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","No catalog code");
         this.accessoryPackPanels.add(part);
     }
 
     private ModulePart createModulePart(AccHwComponent component, double quantity, String unit, int seq)
     {
-        return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom());
+        return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom(),component.getCatalogCode());
+
     }
 
     private void addToProductAccessories(AccHwComponent accessoryComponent, double quantity)
     {
-        Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle(),accessoryComponent.getPrice());
+        Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle(),accessoryComponent.getPrice(),accessoryComponent.getCatalogCode(),accessoryComponent.getCategory());
         accessory.incrementQuantity(quantity);
     }
 
-    private Accessory getAccessory(String code, String title,double msp)
+    private Accessory getAccessory(String code, String title,double msp,String catalogCode,String catalog)
     {
         if (StringUtils.isEmpty(code)) code = "Default";
         for (Accessory accessory : this.accessories)
@@ -289,7 +291,7 @@ public class AssembledProductInQuote
             }
         }
 
-        Accessory accessory = new Accessory(code, title,msp);
+        Accessory accessory = new Accessory(code, title,msp,catalogCode,catalog);
         this.accessories.add(accessory);
         return accessory;
     }
@@ -522,12 +524,16 @@ public class AssembledProductInQuote
         public String title;
         public double quantity;
         public double msp;
+        public String catalogCode;
+        public String catalog;
 
-        public Accessory(String code, String title,double msp)
+        public Accessory(String code, String title,double msp,String catalogCode,String catalog)
         {
             this.code = code;
             this.title = title;
             this.msp=msp;
+            this.catalogCode = catalogCode;
+            this.catalog= catalog;
         }
 
         public void incrementQuantity(double qty)
@@ -548,8 +554,9 @@ public class AssembledProductInQuote
         public double cost;
         public double costWoAccessories;
         public double hardwareCost;
+        public String catalogCode;
 
-        public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom)
+        public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom, String catalogCode)
         {
             this.unit = unit;
             this.seq = seq;
@@ -558,6 +565,7 @@ public class AssembledProductInQuote
             this.quantity = quantity;
             this.make = make;
             this.uom = uom;
+            this.catalogCode = catalogCode;
         }
 
         public ModulePart(String code, String title, String make, String uom, double quantity)
@@ -574,6 +582,14 @@ public class AssembledProductInQuote
             this.code = code;
             this.quantity = quantity;
             this.uom = uom;
+        }
+        public ModulePart(String code, String uom, double quantity,String title,String catalogCode)
+        {
+            this.code = code;
+            this.quantity = quantity;
+            this.uom = uom;
+            this.title = title;
+            this.catalogCode = catalogCode;
         }
     }
 

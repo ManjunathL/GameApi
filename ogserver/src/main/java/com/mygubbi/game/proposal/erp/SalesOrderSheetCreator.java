@@ -87,7 +87,7 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
     {
         for (AssembledProductInQuote.ModulePart modulePart : parts)
         {
-            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{currentRow, modulePart.code, modulePart.uom, modulePart.quantity});
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{currentRow, modulePart.code, modulePart.uom, modulePart.quantity , modulePart.title , modulePart.catalogCode});
             currentRow++;
         }
         return currentRow;
