@@ -304,8 +304,10 @@
     }
 }
 
+.style-image-overlay img,
 .trend-image-overlay img {
      vertical-align:top;
+     max-width: 100%;
 }
 
 .trend-image-overlay:before {
