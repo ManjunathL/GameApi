@@ -197,37 +197,24 @@
                     <p>Document Details</p>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-6 mynest-tab-listbox margin-right0">
+            <!--<div class="col-md-3 col-sm-3 col-xs-6 mynest-tab-listbox margin-right0">
                 <a id="onlinepay" href="#payonline" role="tab" data-toggle="tab">
                     <div class="mynest-inside-box">
                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_card.png" alt="document">
                     </div>
                     <p>Online Payment Details</p>
                 </a>
-            </div>
+            </div>-->
         </div>
     </div>
 </section>
 <!-- My Nest Menu End -->
 
 <% if(typeof(myNest.documentDetails) != 'undefined'){ %>
-
 <section>
     <div class="col-md-12 col-sm-12 bg-white portfolio-box margin-top40">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane padding10 active" id="proposal">
-            <% if(typeof(myNest.documentDetails[1]) != 'undefined'){ %>
-                <% var Initpropcls = ''; %>
-                <% var Finalpropcls = ''; %>
-                <% if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_UPLOADED")){ %>
-                <% Initpropcls = 'style="display:none"'; %>
-                <% }else if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")){ %>
-                <% Finalpropcls = 'style="display:none"'; %>
-                <% } %>
-                <% if(typeof(Initpropcls) != 'undefined' && (Initpropcls !== '')){ %>
-                <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">No Proposal found</div>
-                <% } %>
-
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
                         <div id="approve_successMsg" class="alert alert-info display-none">
@@ -240,102 +227,112 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row" <%= Initpropcls%>>
-                    <div class="col-md-12">
-                        <i class="icon ion-information-circled color-red"></i>
-                        <h3 class="text-transform-none txt-color-orange">
-                            <% if(typeof(myNest) !== 'undefined'){ %>
-                                <% if(typeof(myNest.documentDetails[2]) != 'undefined'){ %>
-                                    <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT"){ %>
-                                        Approval required for <%= myNest.documentDetails[2].documentName %>
-                                    <% }else{ %>
-                                        List of Proposals
-                                    <% } %>
-                                <% }else if(typeof(myNest.documentDetails[1]) != 'undefined'){ %>
-                                    <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT"){ %>
-                                        Approval required for <%= myNest.documentDetails[1].documentName %>
-                                    <% }else{ %>
-                                        List of Proposals
-                                    <% } %>
-                                <% } %>
-                            <% } %>
-                        </h3>
-                    </div>
-                    <div class="col-md-12">
-                        <h4 class="text-transform-none">Initial Proposal <% if((typeof(myNest) !== 'undefined') && (typeof(myNest.documentDetails[1].uploadDate) !== 'undefined')){ %>
-                            ( <%= myNest.documentDetails[1].uploadDate %> )
-                            <% } %></h4>
-                        <hr />
-                        <div class="col-md-8 padding0">
-                            <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
-                        </div>
-
-                        <div class="col-md-4" style="padding-left: 0px;">
-                            <div class="col-md-12">
-                                <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
-                                    <div class="row">
-                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
-                                            <% if(typeof(myNest) !== 'undefined'){ %>
-                                            <%= myNest.documentDetails[1].documentName %>
-                                            <% } %>
-                                        </span></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <% if(typeof(myNest.documentDetails[2]) != 'undefined'){ %>
-                <div class="row" <%= Finalpropcls%>><div class="col-md-12"><hr/></div></div>
-                <div class="row" <%= Finalpropcls%>>
-                    <div class="col-md-12">
-                        <h4 class="text-transform-none">Final Proposal <% if((typeof(myNest) !== 'undefined') && (typeof(myNest.documentDetails[2].uploadDate) !== 'undefined')){ %>
-                            ( <%= myNest.documentDetails[2].uploadDate %> )
-                            <% } %></h4>
-                        <hr />
-                        <div class="col-md-8 padding0">
-                            <p class="align-left">Note that this is an final proposal with actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
-                        </div>
-
-                        <div class="col-md-4" style="padding-left: 0px;">
-                            <div class="col-md-12">
-                                <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
-                                    <div class="row">
-                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
-                                            <% if(typeof(myNest) !== 'undefined'){ %>
-                                            <%= myNest.documentDetails[2].documentName %>
-                                            <% } %>
-                                        </span></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <% if(typeof(myNest.documentDetails) != 'undefined'){ %>
+                <% var taskType = ''; %>
+                <% var scnt = 0; %>
+                <% var Initpropcls = ''; %>
+                <% var Finalpropcls = ''; %>
+                <% if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_UPLOADED")){ %>
+                    <% Initpropcls = 'style="display:none"'; %>
+                <% }else if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")){ %>
+                    <% Finalpropcls = 'style="display:none"'; %>
+                <% } %>
+                <% if(typeof(Initpropcls) != 'undefined' && (Initpropcls !== '')){ %>
+                <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">No Proposal found</div>
                 <% } %>
 
-                <%
-                    var taskType = '';
-                    if(typeof(myNest.documentDetails[2]) != 'undefined'){
-                            taskType = "FINAL_PROPOSAL_RESPONSE";
-                    }else{
-                            taskType = "INITIAL_PROPOSAL_RESPONSE";
-                    }
+                    <% _.each(myNest.documentDetails, function(mydoc){ %>
+                        <% if((mydoc.categoryId != "FLOOR_PLAN")){ %>
+                        <% if((mydoc.categoryId != "INITIAL_PROPOSAL") && (mydoc.categoryId != "FINAL_PROPOSAL")){ %>
+                            <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">No Proposal found</div>
+                        <% }else{ %>
+                            <% if((mydoc.categoryId == "INITIAL_PROPOSAL") || (mydoc.categoryId == "FINAL_PROPOSAL")){ %>
+                                <% if(mydoc.categoryId == "INITIAL_PROPOSAL"){ %>
+                                <div class="row" <%= Initpropcls%>>
+                                    <div class="col-md-12">
+                                        <i class="icon ion-information-circled color-red"></i>
+                                        <h3 class="text-transform-none txt-color-orange">
+                                            <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT") || (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
+                                            Approval required for <%= mydoc.documentRevisionFileName %>
+                                            <% }else{ %>
+                                            List of Proposals
+                                            <% } %>
+                                        </h3>
+                                    </div>
+                                </div>
 
+                                <% taskType = "INITIAL_PROPOSAL_RESPONSE"; %>
+                                <div class="row" <%= Initpropcls%>>
+                                    <div class="col-md-12">
+                                        <h4 class="text-transform-none">Initial Proposal <% if(typeof(mydoc.uploadDate) !== 'undefined'){ %>
+                                            ( <%= mydoc.uploadDate %> )
+                                            <% } %></h4>
+                                        <hr />
+                                        <div class="col-md-8 padding0">
+                                            <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
+                                        </div>
 
-                %>
+                                        <div class="col-md-4" style="padding-left: 0px;">
+                                            <div class="col-md-12">
+                                                <a href="<%= mydoc.docUrl %>" target="_blank" title="View">
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                                                <%= mydoc.documentRevisionFileName %>
+                                                            </span></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                                <% if(mydoc.categoryId == "FINAL_PROPOSAL"){ %>
+                                    <% taskType = "FINAL_PROPOSAL_RESPONSE"; %>
+                                    <div class="row" <%= Finalpropcls %>><div class="col-md-12"><hr/></div></div>
+                                    <div class="row" <%= Finalpropcls %>>
+                                        <div class="col-md-12">
+                                            <h4 class="text-transform-none">Final Proposal <% if(typeof(mydoc.uploadDate) !== 'undefined'){ %>
+                                                ( <%= mydoc.uploadDate %> )
+                                                <% } %></h4>
+                                            <hr />
+                                            <div class="col-md-8 padding0">
+                                                <p class="align-left">Note that this is an final proposal with actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
+                                            </div>
+
+                                            <div class="col-md-4" style="padding-left: 0px;">
+                                                <div class="col-md-12">
+                                                    <a href="<%= mydoc.docUrl %>" target="_blank" title="View">
+                                                        <div class="row">
+                                                            <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                                                    <%= mydoc.documentRevisionFileName %>
+                                                                </span></div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                            <% } %>
+                            <% } %>
+                    <% scnt= scnt +1; }); %>
+                <% } %>
+
+                <%= console.log('======== taskType =======') %>
+                <%= console.log(taskType) %>
+
                 <% if((typeof(myNest.paymentDetails[0]) != 'undefined') && (typeof(myNest.paymentDetails[0].sales_stage) != 'undefined')){ %>
                 <% if((myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT") || (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
-                <div class="row" <%= Finalpropcls%>><div class="col-md-12"><hr/></div></div>
+                <div class="row" <%= Finalpropcls %>><div class="col-md-12"><hr/></div></div>
                 <div class="row salesStage">
                     <div class="col-md-12">
                         <div class="col-md-8 padding0">
@@ -385,168 +382,138 @@
                 </div>
                 <% } %>
                 <% } %>
-            <% }else{ %>
-                <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">No Proposal found</div>
-            <% } %>
+
             </div>
             <div role="tabpanel" class="tab-pane row padding6" id="card">
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
-                    <div class="col-md-6">Payment History</div>
+                    <div class="col-md-6">Payment Details</div>
                    <!-- <div class="col-md-6 align-right"><a href="/online-payment" class="btn btn-orange">Online Payment</a></div>-->
 
                 </div>
-                <div class="col-md-12 border-bottom-grey padding6 align-right font-weight-bold"> Total Amount: <% if(typeof(myNest.paymentDetails[0].amount) !== 'undefined'){ %><%= myNest.paymentDetails[0].amount %><% } %></div>
-                <div class="col-md-12">
-                    <div class="row align-center padding-top-10">
-                        <div class="col-sm-3 font-weight-bold">Payment Milestone</div>
-                        <!--<div class="col-sm-2" style="font-weight:bold;">% Amount</div>-->
-                        <div class="col-sm-2 font-weight-bold">Amount</div>
-                        <div class="col-sm-2 font-weight-bold">Payment Date</div>
-                        <div class="col-sm-2 font-weight-bold">Payment Mode</div>
-                        <div class="col-sm-3 font-weight-bold">Transaction Ref</div>
+                <div class="col-md-12 border-bottom-grey padding6 align-right font-weight-bold">
+                    Total Amount:
+                    <% if(typeof(myNest.paymentDetails[0].final_proposal_amount_c) !== 'undefined' && myNest.paymentDetails[0].final_proposal_amount_c !== ''){ %>
+                        <%= parseFloat(myNest.paymentDetails[0].final_proposal_amount_c).toFixed(2) %>
+                    <% }else if(typeof(myNest.paymentDetails[0].estimated_project_cost_c) !== 'undefined' && myNest.paymentDetails[0].estimated_project_cost_c !== ''){ %>
+                        <%= parseFloat(myNest.paymentDetails[0].estimated_project_cost_c).toFixed(2) %>
+                    <% }else if(typeof(myNest.paymentDetails[0].amount) !== 'undefined' && myNest.paymentDetails[0].amount !== ''){ %>
+                        <%= parseFloat(myNest.paymentDetails[0].amount).toFixed(2) %>
+                    <% }else{ %>
+                        <%= "NA" %>
+                    <% } %>
+                </div>
+                <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
+                    <a id="offlnpay" href="#payoffline" role="tab" data-toggle="tab">Offline</a> | <a id="onlinepay" href="#payonlin" role="tab" data-toggle="tab">Online</a>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane padding6 active" id="payoffline">
+                            <div class="row align-center padding-top-10">
+                                <div class="col-sm-3 font-weight-bold">Payment Milestone</div>
+                                <!--<div class="col-sm-2" style="font-weight:bold;">% Amount</div>-->
+                                <div class="col-sm-2 font-weight-bold">Amount</div>
+                                <div class="col-sm-2 font-weight-bold">Payment Date</div>
+                                <div class="col-sm-2 font-weight-bold">Payment Mode</div>
+                                <div class="col-sm-3 font-weight-bold">Transaction Ref</div>
 
-                    </div>
-                    <div class="row align-center padding6">
-                        <div class="col-sm-3">Booking Amount </div>
-                        <!--<div class="col-sm-2">  3 </div>-->
-                        <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){ %>
-                            <%= parseFloat(myNest.paymentDetails[0].m1_amount_collected_c).toFixed(2) %>
-                            <% } %> </div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_payment_date_c) !== 'undefined'){ %>
-                            <% var date1 = new Date(myNest.paymentDetails[0].m1_payment_date_c) %>
-                            <%= date1.getDate() + '/' + (date1.getMonth() + 1) + '/' +  date1.getFullYear() %>
-                            <% } %></div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_mode_of_payment_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].m1_mode_of_payment_c %>
-                            <% } %></div>
-                        <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].payment_reference1_c %>
-                            <% } %></div>
+                            </div>
+                            <div class="row align-center padding6">
+                                <div class="col-sm-3">Booking Amount </div>
+                                <!--<div class="col-sm-2">  3 </div>-->
+                                <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){ %>
+                                    <%= parseFloat(myNest.paymentDetails[0].m1_amount_collected_c).toFixed(2) %>
+                                    <% } %> </div>
+                                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_payment_date_c) !== 'undefined'){ %>
+                                    <% var date1 = new Date(myNest.paymentDetails[0].m1_payment_date_c) %>
+                                    <%= date1.getDate() + '/' + (date1.getMonth() + 1) + '/' +  date1.getFullYear() %>
+                                    <% } %></div>
+                                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_mode_of_payment_c) !== 'undefined'){ %>
+                                    <%= myNest.paymentDetails[0].m1_mode_of_payment_c %>
+                                    <% } %></div>
+                                <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
+                                    <%= myNest.paymentDetails[0].payment_reference1_c %>
+                                    <% } %></div>
 
-                    </div>
-                    <div class="row align-center padding6">
-                        <div class="col-sm-3">Order Confirmation</div>
-                        <!--<div class="col-sm-2">  47 </div>-->
-                        <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){ %>
-                            <%= parseFloat(myNest.paymentDetails[0].m2_amount_collected_c).toFixed(2) %>
-                            <% } %> </div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_payment_date_c) !== 'undefined'){ %>
-                            <% var date = new Date(myNest.paymentDetails[0].m2_payment_date_c) %>
-                            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
-                            <% } %></div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_mode_of_payment_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].m2_mode_of_payment_c %>
-                            <% } %></div>
-                        <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference2_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].payment_reference2_c %>
-                            <% } %></div>
+                            </div>
+                            <div class="row align-center padding6">
+                                <div class="col-sm-3">Order Confirmation</div>
+                                <!--<div class="col-sm-2">  47 </div>-->
+                                <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){ %>
+                                    <%= parseFloat(myNest.paymentDetails[0].m2_amount_collected_c).toFixed(2) %>
+                                    <% } %> </div>
+                                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_payment_date_c) !== 'undefined'){ %>
+                                    <% var date = new Date(myNest.paymentDetails[0].m2_payment_date_c) %>
+                                    <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
+                                    <% } %></div>
+                                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_mode_of_payment_c) !== 'undefined'){ %>
+                                    <%= myNest.paymentDetails[0].m2_mode_of_payment_c %>
+                                    <% } %></div>
+                                <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference2_c) !== 'undefined'){ %>
+                                    <%= myNest.paymentDetails[0].payment_reference2_c %>
+                                    <% } %></div>
 
-                    </div>
-                    <div class="row align-center padding6">
-                        <div class="col-sm-3">Final Amount</div>
-                        <!--<div class="col-sm-2">  47 </div>-->
-                        <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
-                            <%= parseFloat(myNest.paymentDetails[0].m3_amount_collected_c).toFixed(2) %>
-                            <% } %> </div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
-                            <% var date = new Date(myNest.paymentDetails[0].m3_payment_date_c) %>
-                            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
-                            <% } %></div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_mode_of_payment_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].m3_mode_of_payment_c %>
-                            <% } %></div>
-                        <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].payment_reference3_c %>
-                            <% } %></div>
+                            </div>
+                            <div class="row align-center padding6">
+                                <div class="col-sm-3">Final Amount</div>
+                                <!--<div class="col-sm-2">  47 </div>-->
+                                <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
+                                    <%= parseFloat(myNest.paymentDetails[0].m3_amount_collected_c).toFixed(2) %>
+                                    <% } %> </div>
+                                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
+                                    <% var date = new Date(myNest.paymentDetails[0].m3_payment_date_c) %>
+                                    <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
+                                    <% } %></div>
+                                <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_mode_of_payment_c) !== 'undefined'){ %>
+                                    <%= myNest.paymentDetails[0].m3_mode_of_payment_c %>
+                                    <% } %></div>
+                                <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
+                                    <%= myNest.paymentDetails[0].payment_reference3_c %>
+                                    <% } %></div>
 
-                    </div>
-                    <!--<div class="row align-center padding6">
-                        <div class="col-sm-3">  Balance </div>
-                        &lt;!&ndash;<div class="col-sm-2">  50 </div>&ndash;&gt;
-                       <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].m3_amount_collected_c %>
-                            <% } %> </div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].m3_payment_date_c %>
-                            <% } %></div>
-                        <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].payment_reference3_c %>
-                            <% } %></div>
-
-                    </div>-->
-
-                    <!--<div class="row row-magin align-center col-md-12 font-style-or">
-                        <div class="quality-check-line"></div>
+                            </div>
                         </div>
 
-                    <div class="row align-center padding6">
-                        <div class="col-sm-3 padding-top-10 ">  Total Amount </div>
-                        <div class="col-sm-2">  </div>
-                        <div class="col-sm-2 padding-top-10"> <% if(typeof(myNest.paymentDetails[0].m4_amount_collected_c) !== 'undefined'){ %>
-                            <%= parseFloat(myNest.paymentDetails[0].m4_amount_collected_c).toFixed(2) %>
-                            <% } %> </div>
-                        <div class="col-sm-2 padding-top-10"><% if(typeof(myNest.paymentDetails[0].m4_payment_date_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].m4_payment_date_c %>
-                            <% } %></div>
-                        <div class="col-sm-2 padding-top-10"><% if(typeof(myNest.paymentDetails[0].payment_reference4_c) !== 'undefined'){ %>
-                            <%= myNest.paymentDetails[0].payment_reference4_c %>
-                            <% } %></div>
-
-                    </div>-->
+                        <div role="tabpanel" class="tab-pane padding6" id="payonlin" >
+                            <div class="row">
+                                <div class="col-md-12 align-right">
+                                    <a href="/online-payment" class="btn btn-orange">Online Payment</a>
+                                </div>
+                            </div>
+                            <div id="payHistory"></div>
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
             <div role="tabpanel" class="tab-pane row padding6" id="doc">
                 <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
                         Document Type | Document link
                 </div>
-                <div class="row">
-                    <div class="col-md-12 doc-details">
-                        <% if(typeof(myNest.documentDetails[0]) !== 'undefined'){ %>
-                        <span class="font-size16 shortlist">Floor Plan | </span>
-                        <a href="<%= myNest.documentDetails[0].docUrl %>" target="_blank" title="View">
-                           <span class="text-small-proposals">
-                                <%= myNest.documentDetails[0].documentName %>
-                           </span>
-                        </a>
-                        <% } %>
-                    </div>
-                </div>
-                <div class="row" <%= Initpropcls%>>
-                    <div class="col-md-12 doc-details">
-                        <% if(typeof(myNest.documentDetails[1]) !== 'undefined'){ %>
-                        <span class="font-size16 shortlist">Initial Proposal | </span>
-                        <a href="<%= myNest.documentDetails[1].docUrl %>" target="_blank" title="View">
-                           <span class="text-small-proposals">
-                                <%= myNest.documentDetails[1].documentName %>
-                           </span>
-                        </a>
-                        <% } %>
-                    </div>
-                </div>
-                <div class="row" <%= Finalpropcls%>>
-                    <div class="col-md-12 doc-details">
-                        <% if(typeof(myNest.documentDetails[2]) !== 'undefined'){ %>
-                        <span class="font-size16 shortlist">Final Proposal | </span>
-                        <a href="<%= myNest.documentDetails[2].docUrl %>" target="_blank" title="View">
-                           <span class="text-small-proposals">
-                                <%= myNest.documentDetails[2].documentName %>
-                           </span>
-                        </a>
-                        <% } %>
-                    </div>
-                </div>
+                <% if(typeof(myNest.documentDetails) !== 'undefined'){ %>
+                    <% _.each(myNest.documentDetails, function(mdoc){ %>
+                        <div class="row" <% if(mdoc.categoryId == "FINAL_PROPOSAL"){ %> <%= Finalpropcls %> <% }else if(mdoc.categoryId == "INITIAL_PROPOSAL"){ %> <%= Initpropcls %> <% } %> >
+                            <div class="col-md-12 doc-details">
+                                <% var dcarr= new Array(); %>
+                                <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
+                                <span class="font-size16 shortlist"><%= dcarr[mdoc.categoryId] %> | </span>
+                                <a href="<%= mdoc.docUrl %>" target="_blank" title="View">
+                                   <span class="text-small-proposals">
+                                        <%= mdoc.documentRevisionFileName %>
+                                   </span>
+                                </a>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } %>
             </div>
-    <div role="tabpanel" class="tab-pane row padding6" id="payonline">
+   <!-- <div role="tabpanel" class="tab-pane row padding6" id="payonline">
         <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
             <div class="col-md-6">Online Payment History</div>
             <div class="col-md-6 align-right"><a href="/online-payment" class="btn btn-orange">Online Payment</a></div>
 
         </div>
-<!--
+&lt;!&ndash;
         <div class="col-md-12 border-bottom-grey padding6 align-right font-weight-bold"> Total Amount: <% if(typeof(myNest.paymentDetails[0].amount) !== 'undefined'){ %><%= myNest.paymentDetails[0].amount %><% } %></div>
--->
+&ndash;&gt;
         <div class="col-md-12">
             <div class="row padding-top-10">
                 <div class="col-md-1 font-weight-bold">Sl#</div>
@@ -555,21 +522,22 @@
                 <div class="col-md-2 font-weight-bold">Payment Mode</div>
                 <div class="col-md-2 font-weight-bold">Transaction#</div>
                 <div class="col-md-2 font-weight-bold">Status</div>
-                <!--<div class="col-md-2 font-weight-bold">Reason</div>-->
+                &lt;!&ndash;<div class="col-md-2 font-weight-bold">Reason</div>&ndash;&gt;
             </div>
             <div id="payHistory"></div>
         </div>
 
 
-    </div>
+    </div>-->
         </div>
     </div>
 </section>
 <% } %>
 <% } %>
-<!--<script src="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.js"></script>-->
 <script>
     $(function () {
+        $("#offlnpay").addClass("active");
+        $("#onlinepay").removeClass("active");
         $('#user_date').datepicker({
             minDate: 0,
             dateFormat: 'dd/mm/yy'
@@ -578,6 +546,14 @@
             minTime: { hour: new Date().getHours(), minute: new Date().getMinutes() },
             showPeriod: true,
             showLeadingZero: true
+        });
+        $("#onlinepay").click(function(){
+            $("#onlinepay").addClass("active");
+            $("#offlnpay").removeClass("active");
+        });
+        $("#offlnpay").click(function(){
+            $("#offlnpay").addClass("active");
+            $("#onlinepay").removeClass("active");
         });
     });
 

@@ -366,6 +366,9 @@ define([
                     scheduledTime: $('#user_time').val()
                 };
 
+                //console.log(eventData);
+                //return false;
+
                 that.proposal.fetch({
                     data: {
                      "emailId": salesExecEmail,
