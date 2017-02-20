@@ -121,6 +121,12 @@ ul.myaccount_list li{
     background: #fff;
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
+@media (max-width: 767px){
+    .edit_icon_div{
+        right: 0px;
+        top: -25px;
+    }
+}
 .chart_time_left{
     color:#0074BC;
     margin-left:7px;
