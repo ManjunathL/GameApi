@@ -313,16 +313,10 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
         },
         getTransactionDetails: function(authData,someFunct) {
             var that = this;
-            console.log(authData.uid);
             var transactnRef = that.rootRef.child("transactions/" + authData.uid+"/myPayment");
-            console.log('------here---------');
-            console.log(transactnRef);
             transactnRef.on("value", function(snapshot) {
-            console.log('------here111---------');
                if (snapshot.exists()) {
                    that.transDetails = snapshot.val();
-                   console.log('------hereeeeeeeeeee---------');
-                   console.log(snapshot.val());
                    someFunct(that.transDetails);
                }
             });

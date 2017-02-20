@@ -1,7 +1,14 @@
-<%= console.log('-------------ohhhhhhhhhhhhhhhhhhhhhhhh------------------') %>
-<%= console.log(transdetails) %>
 <% if(typeof(transdetails) !== 'undefined'){ %>
     <% var cnt= 1 ; %>
+    <div class="row padding-top-10">
+        <div class="col-md-1 font-weight-bold">Sl#</div>
+        <div class="col-md-2 font-weight-bold">Amount</div>
+        <div class="col-md-3 font-weight-bold">Payment Date</div>
+        <div class="col-md-2 font-weight-bold">Payment Mode</div>
+        <div class="col-md-2 font-weight-bold">Transaction#</div>
+        <div class="col-md-2 font-weight-bold">Status</div>
+        <!--<div class="col-md-2 font-weight-bold">Reason</div>-->
+    </div>
     <% _.each(transdetails, function(trns){ %>
     <div class="row payhis <% if(cnt%2 == 0){ %> bg-gray <% }else{ %> bg-color-white <% } %>">
         <div class="col-md-1"><%= cnt %></div>
@@ -38,4 +45,6 @@
             </div>-->
     </div>
     <% cnt=cnt+1; }); %>
+<% }else{ %>
+    <div class="col-md-12 proposal-font-heading padding6">No Transaction found</div>
 <% } %>
