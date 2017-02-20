@@ -132,7 +132,8 @@ define([
             'payment(/)': 'payment',
             'my_account(/)': 'my_account',
             'online-payment(/)': 'online_payment',
-            'paysuccess(/)': 'online_payment_success',
+            'paysuccess-:txnId(/)': 'online_payment_success',
+            'payfailure-:txnId(/)': 'online_payment_failure',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -436,9 +437,7 @@ define([
                 });
             });*/
             router.on('route:dashboard', function(actions) {
-                console.log('----------------actions-------------------');
-                console.log(actions);
-              //setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+              setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                 require(['views/dashboard/new-page'], function(DashboardPage) {
                     VM.create(VM.DASHBOARD, DashboardPage).render();
                 });
@@ -501,10 +500,26 @@ define([
                     VM.create(VM.ONLINEPAYMENTPAGE, OnlinePaymentPage).render();
                 });
             });
-            router.on('route:online_payment_success', function(req,res) {
+            router.on('route:online_payment_success', function(txnId) {
                 setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                 require(['/js/views/my_account/online_payment_success.js'], function(OnlinePaymentSuccessPage) {
-                    VM.create(VM.ONLINEPAYMENTSUCCESSPAGE, OnlinePaymentSuccessPage).render();
+                    var options = {
+                        model: {
+                            "txnId": txnId
+                        }
+                    };
+                    VM.create(VM.ONLINEPAYMENTSUCCESSPAGE, OnlinePaymentSuccessPage, options).render();
+                });
+            });
+            router.on('route:online_payment_failure', function(txnId) {
+                setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                require(['/js/views/my_account/online_payment_failure.js'], function(OnlinePaymentFailurePage) {
+                    var options = {
+                        model: {
+                            "txnId": txnId
+                        }
+                    };
+                    VM.create(VM.ONLINEPAYMENTFAILUREPAGE, OnlinePaymentFailurePage, options).render();
                 });
             });
             router.on('route:consult', function(actions) {

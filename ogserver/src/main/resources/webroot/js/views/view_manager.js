@@ -34,6 +34,7 @@ define(function() {
         TYPEOFKITCHENPAGE: "typeofkitchen",
         ONLINEPAYMENTPAGE: "OnlinePaymentPage",
         ONLINEPAYMENTSUCCESSPAGE: "OnlinePaymentSuccessPage",
+        ONLINEPAYMENTFAILUREPAGE: "OnlinePaymentFailurePage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

@@ -10,17 +10,17 @@ define([
     'bootstrapvalidator',
     'mgfirebase',
     'cloudinary_jquery',
-    'text!templates/my_account/online_payment_success.html',
+    'text!templates/my_account/online_payment_failure.html',
     'analytics',
     'views/view_manager'
-], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, MGF, CloudinaryJquery, OnlinePaymentSuccessTemplate, Analytics, VM) {
-    var OnlinePaymentSuccessView = Backbone.View.extend({
+], function ($, jqueryui, _, Backbone, Bootstrap, BootstrapValidator, MGF, CloudinaryJquery, OnlinePaymentFailureTemplate, Analytics, VM) {
+    var OnlinePaymentFailureView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
         refAuth: MGF.refAuth,
         renderWithUserProfCallback: function(userProfData) {
             var txnid = this.model.txnId;
-            $(this.el).html(_.template(OnlinePaymentSuccessTemplate)({
+            $(this.el).html(_.template(OnlinePaymentFailureTemplate)({
                 'userProfile': userProfData,
                 'txnid':txnid
             }));
@@ -39,5 +39,5 @@ define([
             _.bindAll(this, 'renderWithUserProfCallback');
         }
     });
-    return OnlinePaymentSuccessView;
+    return OnlinePaymentFailureView;
 });

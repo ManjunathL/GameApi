@@ -1,0 +1,41 @@
+<%= console.log('-------------ohhhhhhhhhhhhhhhhhhhhhhhh------------------') %>
+<%= console.log(transdetails) %>
+<% if(typeof(transdetails) !== 'undefined'){ %>
+    <% var cnt= 1 ; %>
+    <% _.each(transdetails, function(trns){ %>
+    <div class="row payhis <% if(cnt%2 == 0){ %> bg-gray <% }else{ %> bg-color-white <% } %>">
+        <div class="col-md-1"><%= cnt %></div>
+        <!--<div class="col-sm-2">  47 </div>-->
+        <div class="col-md-2"> <% if(typeof(trns.amount) !== 'undefined'){ %>
+            <%= parseFloat(trns.amount).toFixed(2) %>
+            <% } %></div>
+        <div class="col-md-3"><% if(typeof(trns.addedon) !== 'undefined'){ %>
+            <% var date = new Date(trns.addedon) %>
+            <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
+            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
+            <% } %></div>
+        <div class="col-md-2">
+            <% var dfarr= new Array(); %>
+            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card"}; %>
+            <% if(typeof(trns.mode) !== 'undefined'){ %>
+                <%= dfarr[trns.mode] %>
+            <% } %>
+        </div>
+        <div class="col-md-2"><% if(typeof(trns.txnid) !== 'undefined'){ %>
+        <%= trns.txnid %>
+        <% } %></div>
+        <div class="col-md-2 capitalize"><% if(typeof(trns.status) !== 'undefined'){ %>
+            <%= trns.status %>
+            <% } %></div>
+        <!--<div class="col-md-2">
+            <% if(trns.status == "failure"){ %>
+            <% if(typeof(trns.field9) !== 'undefined'){ %>
+                <%= trns.field9 %>
+                <% } %>
+            <% }else{ %>
+            NA
+            <% } %>
+            </div>-->
+    </div>
+    <% cnt=cnt+1; }); %>
+<% } %>

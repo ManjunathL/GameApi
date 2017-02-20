@@ -345,3 +345,63 @@ padding-left:100px;
         padding: 10px 20px 15px 20px;
     }
 }
+.navbar-festive{
+    margin-bottom: 0px;
+    height: 100px;
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    border-radius: 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-festive .navbar-brand{
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar-festive .navbar-brand img {
+    width: 150px;
+    margin: 15px 0px 10px 0px;
+}
+.btn-navy{
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFFFFF;
+}
+.btn-navy:hover,
+.btn-navy:active,
+.btn-navy:focus{
+    background-color: #18a689;
+    border-color: #18a689;
+    color: #FFFFFF;
+}
+.mt20{
+    margin-top: 20px;
+}
+.invoice-box{
+    margin: 40px auto;
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    min-height: 280px;
+    padding: 20px;
+}
+.invoice-box h3{
+    margin: 0px 0px 20px;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+.font-noraml{
+    font-weight: 400;
+}
+
+#payamountlbl{
+    color:red;
+    font-size:12px;
+    margin-left:60px;
+}
+.payhis{
+    line-height: 45px;
+    border-bottom: 1px solid #ccc;
+}

@@ -29,81 +29,84 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            console.log('-------------authData in myaccount page--------------------');
-            console.log(authData);
-            document.getElementById("canlink").href = window.location.href;
-
-            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-
+            if(authData.email !== null){
+                document.getElementById("canlink").href = window.location.href;
+                MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+            }else{
+                window.location = '/';
+            }
         },
         events: {
             "click #send_payu": "makePayment"
         },
-        makePayment: function(){
+        makePayment: function(e){
+            e.preventDefault();
+            if($("#payamount").val() == '' || $("#payamount").val().trim() == ''){
+                console.log('---------g----------------');
+                $("#payamount").focus();
+                $("#payamountlbl").text('Please enter a amount.');
+                return false;
+            }
+
             var authData = this.refAuth.currentUser;
-            var firstname = $("#firstname").val();
+            var uid = authData.uid;
             var email = authData.email;
-            var phone = $("#phone").val();
-            var OpportunityId = $("#udf1").val();
-            var trnxId = $("#trnxid").val();
-            var productinfo = "test product";
 
-            var paymentData = {
-               "key": "gtKFFx",
-               "txnid": trnxId,
-               "amount": "100",
-               "productinfo": productinfo,
-               "firstname": firstname,
-               "email": email,
-               "phone": phone,
-               "udf1": OpportunityId,
-               "surl": "https://localhost:8787/",
-               "furl": "https://localhost:8787/kitchen-cabinet-design",
-               "hash": "",
-               "service_provider": "payu"
-           };
+            if(email !== null){
+                var firstname = $("#firstname").val();
 
-            var hashKey = this.generateHashkey(paymentData);
+                var phone = $("#phone").val();
+                var OpportunityId = $("#udf1").val();
+                var trnxId = $("#trnxid").val();
+                var productinfo = "Mygubbi Modular Furniture";
+                var amount = $("#payamount").val();
 
-            console.log(firstname+' ----------- '+email+' ------ '+phone+' ------ '+productinfo+' ------ '+OpportunityId+' ------ '+trnxId);
-            //return false;
-            if(hashKey){
-            //document.getElementById("hash").valu = hashKey;
-            $("#hashkey").val(hashKey);
-            $("#payuform").submit();
-            return false;
+                var paymentData = {
+                   "key": merchantKey,
+                   "txnid": trnxId,
+                   "amount": amount,
+                   "productinfo": productinfo,
+                   "firstname": firstname,
+                   "email": email,
+                   "phone": phone,
+                   "udf1": OpportunityId,
+                   "udf2": uid,
+                   "surl": successbaseUrl,
+                   "furl": failurebaseUrl,
+                   "hash": "",
+                   "service_provider": "payu"
+               };
+
+               $("payerror").hide();
+
+                var hashKey = this.generateHashkey(paymentData);
+
+                if(hashKey){
+                    $("#udf2").val(uid);
+                    $("#vamount").val(amount);
+                    $("#hashkey").val(hashKey);
+                    $("#payuform").submit();
+                    return false;
+                }
+            }else{
+                window.location = '/';
             }
         },
         generateHashkey: function(paymentData){
-        console.log('----------i m here--------------');
-        console.log(paymentData);
-
             var hashSequence ="key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
-            var SALT = "eCwWELxi";
             var hashVarsSeq = hashSequence.split('|');
             var hash_string = new Array();
 
-            console.log(hashVarsSeq);
-            console.log(" ---- hashVarsSeq ----");
-            console.log(hashVarsSeq.length);
-
             for(var i=0; i < hashVarsSeq.length; i++) {
-                console.log(hashVarsSeq[i]);
                 var ss = hashVarsSeq[i];
-                console.log('paymentData.ss - --------------- '+paymentData[ss]);
                 hash_string += paymentData[ss] ? paymentData[ss] : '';
                 hash_string += '|';
             }
             hash_string += SALT;
 
-            console.log(hash_string);
-
             var hash = sha512(hash_string);
                 hash = hash.toLowerCase();
-
-            console.log(hash);
             return hash;
-
         },
         initialize: function() {
             this.ref = MGF.rootRef;

@@ -17,10 +17,11 @@ define([
     'text!templates/my_account/my_profile.html',
     'text!templates/my_account/my_settings.html',
     'text!templates/my_account/my_message.html',
+    'text!templates/my_account/payment_history.html',
     'views/view_manager',
     'models/proposal',
     'collections/mynests'
-], function ($, jqueryui, timepicker, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, VM, Proposal, MyNests) {
+], function ($, jqueryui, timepicker, _, Backbone, Bootstrap, BootstrapValidator, MGF, Analytics, MyAccount, MyAccountTemplate, MyNestTemplate, MyProfileTemplate, MySettingsTemplate, MyMessageTemplate, PaymentHistoryTemplate, VM, Proposal, MyNests) {
     var UserProfileView = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -30,8 +31,6 @@ define([
         mynests:null,
         renderWithUserProjectCallback: function (userProfData,mynestitems, providerId) {
             var that = this;
-            console.log("-----------mynestitems-------------")
-            console.log(mynestitems);
             var project_statusArr = new Array();
             if(typeof(mynestitems) !== 'undefined' && mynestitems !== null){
                 if(typeof(mynestitems.paymentDetails) !== 'undefined' && mynestitems.paymentDetails !== null){
@@ -110,11 +109,11 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            console.log('-------------authData in myaccount page--------------------');
-            console.log(authData);
             document.getElementById("canlink").href = window.location.href;
 
             MGF.mynest(authData,this.renderWithUserProjectCallback);
+
+            MGF.getTransactionDetails(authData,this.renderTranscationDetails);
 
             /*setTimeout(
                 $('.page').append("<img id='loadico' src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>")
@@ -136,6 +135,23 @@ define([
 
 
         },
+        renderTranscationDetails: function(transdetails){
+            var that = this;
+            if(transdetails) {
+                transdetails = _(transdetails).sortBy(function(trnsc) {
+                    return Date.parse(trnsc.addedon);
+                }).reverse();
+
+                console.log('================transdetails====================');
+                console.log(transdetails);
+
+                that.myaccount.set({
+                    'transdetails': transdetails
+                }, {
+                    silent: true
+                });
+            }
+        },
         fetchMynestAndRender: function(mynestProf) {
             var that = this;
             var newProf = that.mynests;
@@ -148,7 +164,7 @@ define([
             this.mynests = new MyNests();
             this.proposal = new Proposal();
             Analytics.apply(Analytics.TYPE_GENERAL);
-            _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit');
+            _.bindAll(this, 'renderWithUserProjectCallback', 'render', 'submit','renderTranscationDetails');
             this.myaccount.on('change', this.render, this);
             this.listenTo(Backbone, 'user.change', this.handleUserChange);
         },
@@ -162,30 +178,43 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
+            var displayName = $('#user_display_name').val();
+            var emailId = $('#user_email_id').val();
+            var phone = $('#user_phone').val();
 
-            var formData = {
-                "displayName": $('#user_display_name').val(),
-                "profileImage": $('#user_profile_image').attr('src'),
-                "email": $('#user_email_id').val(),
-                //"dob": $('#user_dob').val(),
-                "phone": $('#user_phone').val(),
-                "altPhone": $('#user_alt_phone').val(),
-                "address": $('#user_address').val(),
-                "occupation": $('#occupation').val(),
-                "hobbies": $('#hobbies').val(),
-                "interest": $('#interest').val(),
-                "crmId": $('#crmId').val(),
-                "city": $('#user_city').val(),
-                "state": $('#user_state').val(),
-                "pinCode": $('#user_pin_code').val()
-            };
-            console.log(formData);
+            $("#saveSuccss").hide();
 
-            var that = this;
-            MGF.updateProfile(formData).then(function () {
-                that.render();
-            });
+            if((displayName.trim() == "") || (emailId.trim() == "") || (phone.trim() == "")){
+                console.log('---not done---');
+                $("#saveErr").show();
+                return false;
+            }else{
+                $("#saveErr").hide();
+                var formData = {
+                    "displayName": displayName,
+                    "profileImage": $('#user_profile_image').attr('src'),
+                    "email": emailId,
+                    "phone": phone,
+                    "altPhone": $('#user_alt_phone').val(),
+                    "address": $('#user_address').val(),
+                    "occupation": $('#occupation').val(),
+                    "hobbies": $('#hobbies').val(),
+                    "interest": $('#interest').val(),
+                    "crmId": $('#crmId').val(),
+                    "city": $('#user_city').val(),
+                    "state": $('#user_state').val(),
+                    "pinCode": $('#user_pin_code').val()
+                };
 
+                var that = this;
+                MGF.updateProfile(formData).then(function () {
+                    $('.edit_mode').hide();
+                    $('.view_mode').show();
+                    $('.edit_icon').show();
+                    $("#saveSuccss").show();
+                    that.render();
+                });
+            }
         },
         submitPropertyDetails: function (e) {
             if (e.isDefaultPrevented()) return;
@@ -295,11 +324,21 @@ define([
             "click #save_details": "submit",
             "click #approvebtn": "changeapprove",
             "click #callback": "requestcall",
+            "click #onlinepay": "showPaymentHistory",
             "click #save_property_details": "submitPropertyDetails",
             "click #profile-file-input": "changeProfileImg",
             "submit #changeUserPasswordForm": "changeUserPassword",
             "submit #deactivateUserForm": "deactivateUserAccount"
 
+        },
+        showPaymentHistory: function(e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+            var that = this;
+            var payHisTemp = _.template(PaymentHistoryTemplate);
+            $("#payHistory").html(payHisTemp({
+                'transdetails':that.myaccount.get("transdetails")
+            }));
         },
         requestcall: function(e) {
             if (e.isDefaultPrevented()) return;
@@ -339,8 +378,6 @@ define([
                      "scheduleTime":scheduleTime
                     },
                     success: function(response) {
-                        console.log(" --------------- proposal response ----------------");
-                        console.log(response);
                         if(response){
                             $("#reqCallbk_successMsg").fadeIn();
                             $(".salesStage").fadeOut(1000);
@@ -388,8 +425,6 @@ define([
                  "taskType":taskType
                 },
                 success: function(response) {
-                    console.log(" --------------- proposal response ----------------");
-                    console.log(response);
                     if(response){
 
                         $("#approve_successMsg").fadeIn();
