@@ -122,6 +122,7 @@ define([
             'remarketing-lp(/)': 'remarketinglp',
             'about-us(/)': 'aboutus',
             'quality-check(/)': 'qualitycheck',
+            'addons(/)': 'addons',
             'mygubbi-studio(/)': 'mygubbistudio',
             'platinum-home-interiors(/)': 'platinumhomes',
             'kitchen-accessories(/)': 'kitchenAccessories',
@@ -551,6 +552,13 @@ define([
                 setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                 require(['views/quality/quality-check'], function(QualityCheckPage) {
                     VM.create(VM.QUALITYCHECK, QualityCheckPage).render();
+                });
+            });
+
+            router.on('route:addons', function(actions) {
+                setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                require(['views/addons/addons'], function(addonsPage) {
+                    VM.create(VM.ADDONS, addonsPage).render();
                 });
             });
             router.on('route:mygubbistudio', function(actions) {

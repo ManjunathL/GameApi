@@ -4,82 +4,88 @@
 
 <!-- Property Details Start -->
 <% if(typeof(myNest.paymentDetails) != 'undefined'){ %>
-<section>
-    <div class="col-md-12 col-sm-12 bg-property portfolio-box padding-top15 padding-bottom15">
-        <div class="col-md-6">
-            <div class="row col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                    <label>Property Name :</label>
-                </div>
+<section class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="bg-property portfolio-box padding-top15 padding-bottom15">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                            <label>Property Name :</label>
+                        </div>
 
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].project_name_c ? myNest.paymentDetails[0].project_name_c : 'NA' %></p>
-                </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].project_name_c ? myNest.paymentDetails[0].project_name_c : 'NA' %></p>
+                        </div>
 
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                            <label>Builders Name :</label>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].builder_name_c ? myNest.paymentDetails[0].builder_name_c : 'NA' %></p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                            <label>Property Type :</label>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].property_type_c ? myNest.paymentDetails[0].property_type_c : 'NA' %></p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                            <label>Tower/Block no :</label>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p class="view_mode" style="font-size:13px;font-weight:bold;"><%=  myNest.paymentDetails[0].tower_c ? myNest.paymentDetails[0].tower_c : 'NA' %></p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                            <label>Flat No :</label>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].flat_no_c ? myNest.paymentDetails[0].flat_no_c : 'NA' %></p>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
+                            <label>BHK :</label>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].bhk_c ? myNest.paymentDetails[0].bhk_c : 'NA' %></p>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
-            <div class="row col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                    <label>Builders Name :</label>
+            <div class="row">
+                <div class="col-md-1">
+            <span class="glyphicon glyphicon-pencil edit_icon" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit Details" style="display: none;">
+            </span>
                 </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].builder_name_c ? myNest.paymentDetails[0].builder_name_c : 'NA' %></p>
-                </div>
-
             </div>
-
-            <div class="row col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                    <label>Property Type :</label>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].property_type_c ? myNest.paymentDetails[0].property_type_c : 'NA' %></p>
-                </div>
-
-            </div>
-
-
         </div>
-        <div class="col-md-6">
-            <div class="row col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                    <label>Tower/Block no :</label>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%=  myNest.paymentDetails[0].tower_c ? myNest.paymentDetails[0].tower_c : 'NA' %></p>
-                </div>
-
-            </div>
-
-            <div class="row col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                    <label>Flat No :</label>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].flat_no_c ? myNest.paymentDetails[0].flat_no_c : 'NA' %></p>
-                </div>
-
-            </div>
-            <div class="row col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-6 col-sm-6 col-xs-6 profile-label">
-                    <label>BHK :</label>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="view_mode" style="font-size:13px;font-weight:bold;"><%= myNest.paymentDetails[0].bhk_c ? myNest.paymentDetails[0].bhk_c : 'NA' %></p>
-                </div>
-
-            </div>
-
-        </div>
-    <div class="col-md-1">
-        <span class="glyphicon glyphicon-pencil edit_icon" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit Details" style="display: none;">
-        </span>
     </div>
-</div>
 </section>
 <!-- Property Details End -->
 <% } %>
