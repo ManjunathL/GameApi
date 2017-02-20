@@ -22,13 +22,13 @@
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 ">
-                <div class="row bg-white portfolio-box padding-top15 padding-bottom15 menu-tab-list">
+                <div class="bg-white portfolio-box padding-top15 padding-bottom15 menu-tab-list">
                     <ul class="nav nav-tabs myaccount_list" data-tabs="tabs" role="tablist">
                         <% if(typeof(userProfile) !==  'undefined' && userProfile !== null){ %>
                         <li class="myaccount-lnk active">
                             <a href="#profile" id="profile-lnk"  role="tab" data-toggle="tab">
-                                <img class="myaccount-lnk-img" id="profile-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home.png" class="cld-responsive img-centered">
-                                <img class="myaccount-lnk-img_def" id="profile-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home_def.png" class="cld-responsive img-centered">
+                                <img id="profile-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home.png" class="myaccount-lnk-img cld-responsive img-centered">
+                                <img id="profile-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home_def.png" class="myaccount-lnk-img_def cld-responsive img-centered">
                                 <div class="myaccount-lnk-content" id="profile-lnk-content" style="color:#f15a23;">My Profile</div>
                             </a>
                         </li>
@@ -36,9 +36,9 @@
                         <% if(typeof(myNest) !==  'undefined' && myNest !== null){ %>
                         <li class="myaccount-lnk">
                             <a href="#mynest" id="mynest-lnk" role="tab" data-toggle="tab">
-                                <img class="myaccount-lnk-img" id="mynest-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest.png" class="cld-responsive img-centered">
-                                <img class="myaccount-lnk-img_def" id="mynest-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest_def.png" class="cld-responsive img-centered">
-                                <div class="myaccount-lnk-content" id="mynest-lnk-content">My Nest</div>
+                                <img id="mynest-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest.png" class="myaccount-lnk-img cld-responsive img-centered">
+                                <img id="mynest-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest_def.png" class="myaccount-lnk-img_def cld-responsive img-centered">
+                                <div class="myaccount-lnk-content" id="mynest-lnk-content"> My Nest </div>
                             </a>
                         </li>
                         <!--<li class="myaccount-lnk">
@@ -51,18 +51,18 @@
                         <% } %>
                         <li class="myaccount-lnk">
                             <a href="#settings" id="settings-lnk" role="tab" data-toggle="tab">
-                                <img class="myaccount-lnk-img" id="settings-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog.png" class="cld-responsive img-centered">
-                                <img class="myaccount-lnk-img_def" id="settings-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog_def.png" class="cld-responsive img-centered">
+                                <img id="settings-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog.png" class="myaccount-lnk-img cld-responsive img-centered">
+                                <img id="settings-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog_def.png" class="myaccount-lnk-img_def cld-responsive img-centered">
                                 <div class="myaccount-lnk-content" id="settings-lnk-content">Settings</div>
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="tab-content">
-                <div role="tabpanel" class="tab-pane row margin-top50 active" id="profile"></div>
-                <div role="tabpanel" class="tab-pane row margin-top50" id="mynest"></div>
-                <div role="tabpanel" class="tab-pane row margin-top50" id="message"></div>
-                <div role="tabpanel" class="tab-pane row margin-top50" id="settings"></div>
+                <div role="tabpanel" class="tab-pane margin-top50 active" id="profile"></div>
+                <div role="tabpanel" class="tab-pane margin-top50" id="mynest"></div>
+                <div role="tabpanel" class="tab-pane margin-top50" id="message"></div>
+                <div role="tabpanel" class="tab-pane margin-top50" id="settings"></div>
                 </div>
             </div>
         </div>
