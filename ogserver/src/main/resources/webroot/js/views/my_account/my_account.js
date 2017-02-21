@@ -142,9 +142,6 @@ define([
                     return Date.parse(trnsc.addedon);
                 }).reverse();
 
-                console.log('================transdetails====================');
-                console.log(transdetails);
-
                 that.myaccount.set({
                     'transdetails': transdetails
                 }, {
