@@ -23,7 +23,7 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
            // Sign in with email and pass.
           this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
             console.log("Successfully created user!!!");
-            console.log(userData);
+            //console.log(userData);
           }, function(error) {
             // An error happened.
             console.log('Error'+error);
@@ -48,10 +48,6 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
               }else{
                 var providerId = user.providerData;
               }
-
-
-              console.log('provider data ===== ');
-              console.log(providerId);
 
                 var userProfileRef = firebase.database().ref().child("user-profiles/" + uid);
 
@@ -110,7 +106,6 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
             if (userProfile) {
                 return userProfile.displayName;
             } else {
-            console.log('get name');
                 var providerData = '', providerId='';
                 if(typeof(authData.providerData) !== 'undefined'){
                     var providerData = authData.providerData[0];
@@ -132,8 +127,6 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
             if (userProfile) {
                 return userProfile.profileImage;
             } else {
-                console.log('get image');
-                console.log(authData);
                 var providerData = '', providerId='';
                 if(typeof(authData.providerData) !== 'undefined'){
                     providerData = authData.providerData[0];
@@ -272,8 +265,6 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
         }
        },
         mynest: function(authData, someFunc) {
-            console.log('------------authData in my nest----------------');
-            console.log(authData);
             var that = this;
             var mynestitems = null;
 
@@ -286,11 +277,6 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                     if (snapshot.exists()) {
                         that.userProfile = snapshot.val();
                     }
-
-                   console.log(' ---------- userProfile-------------');
-                   console.log(that.userProfile.crmId);
-
-
                    if(typeof(that.userProfile.crmId) !== 'undefined' && that.userProfile.crmId !== null){
 
                         var projRef = that.rootRef.child("projects/" + authData.uid+"/myNest");
@@ -298,8 +284,6 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
 
                         projRef.on("value", function(snapshot) {
                            if (snapshot.exists()) {
-                           console.log("--------project details--------");
-                           console.log(authData);
                                that.projectDetails = snapshot.val();
                                var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
 
@@ -326,6 +310,16 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                    });
             }
 
+        },
+        getTransactionDetails: function(authData,someFunct) {
+            var that = this;
+            var transactnRef = that.rootRef.child("transactions/" + authData.uid+"/myPayment");
+            transactnRef.on("value", function(snapshot) {
+               if (snapshot.exists()) {
+                   that.transDetails = snapshot.val();
+                   someFunct(that.transDetails);
+               }
+            });
         }
     };
 });

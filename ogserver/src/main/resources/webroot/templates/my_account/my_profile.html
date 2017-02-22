@@ -1,5 +1,33 @@
+<style>
+    .tooltip {
+        position: absolute!important;
+        z-index: 999!important;
+        width: 100px!important;
+        height: 2.2em!important;
+        cursor: pointer!important;
+        opacity: 2;
+        font-family: 'Lato', sans-serif;
+    }
+
+</style>
 <div class="col-md-12 col-sm-12 bg-white portfolio-box padding-top15 padding-bottom15 position-relative">
-    <div class="row edit_icon_div">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12" id="saveErr" style="display:none;">
+            <div class="alert alert-danger fade in">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> A problem has been occurred while submitting your data.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12" id="saveSuccss" style="display:none;">
+            <div class="alert alert-success fade in">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Success!</strong> Your profile has been updated successfully.
+            </div>
+        </div>
+    </div>
+    <div class="edit_icon_div">
             <span class="glyphicon glyphicon-pencil edit_icon"
                   data-toggle="tooltip"
                   data-placement="left"
@@ -7,6 +35,7 @@
             </span>
     </div>
     <div class="row">
+        <form id="editDetailsForm" method="post">
         <div class="col-md-6 col-lg-6">
 
 
@@ -35,18 +64,17 @@
                     <label>Contact :</label>
                 </div>
                 <div class="col-md-7 col-sm-7 col-xs-6">
-                    <p class="view_mode">+91 <%= userProfile ? userProfile.phone : ''%></p>
+                    <p class="view_mode"><%= userProfile ? userProfile.phone : ''%></p>
                     <p class="edit_mode form-group">
-                        +91 &nbsp;
                         <input
-                                type="number"
+                                type="text"
                                 id="user_phone"
                                 class="form-control"
                                 name="phone"
                                 min="0"
-                                max="9999999999"
+                                maxlength="15"
+                                pattern="\d{15}"
                                 value="<%= userProfile ? userProfile.phone : ''%>"
-                                pattern="\d{10}"
                                 required />
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </p>
@@ -157,18 +185,17 @@
                     <label>Alternate Contact :</label>
                 </div>
                 <div class="col-md-7 col-sm-7 col-xs-6">
-                    <p class="view_mode">+91 <%= userProfile ? userProfile.altPhone : ''%></p>
+                    <p class="view_mode"><%= userProfile ? userProfile.altPhone : ''%></p>
                     <p class="edit_mode form-group">
-                        +91 &nbsp;
                         <input
-                                type="number"
+                                type="text"
                                 id="user_alt_phone"
                                 class="form-control"
                                 name="phone"
                                 min="0"
-                                max="9999999999"
+                                maxlength="15"
                                 value="<%= userProfile ? userProfile.altPhone : ''%>"
-                                pattern="\d{10}"
+                                pattern="\d{15}"
                                 required />
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </p>
@@ -246,6 +273,7 @@
             </div>
 
         </div>
+        </form>
     </div>
 </div>
 <script>
@@ -257,94 +285,16 @@
             $('.edit_mode').show();
         });
 
-        $('#save_details').click(function() {
+        /*$('#save_details').click(function() {
             $('.edit_mode').hide();
             $('.view_mode').show();
             $('.edit_icon').show();
-        });
-
-
-        $('#set_password').click(function() {
-            $('#error_row, #success_row').css('display','none');
-        });
-
-        $('.chng_pswd').click(function() {
-            $('#error_row, #success_row').css('display','none');
-            $('.change_password').slideToggle();
-            if($('.open_tab_chng_pswd').hasClass('padding0_20_20')){
-                $('.open_tab_chng_pswd').removeClass('padding0_20_20');
-            }else{
-                $('.open_tab_chng_pswd').addClass('padding0_20_20');
-            }
-            var item = $(this).find('.sort-arrow');
-            if (item.hasClass('pe-7s-angle-down')){
-                $(item).removeClass('pe-7s-angle-down').addClass('pe-7s-angle-up');
-            }else {
-                $(item).removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
-            }
-        });
-
-        $('#cancel_chng_pswd').click(function() {
-            $('#old_password, #new_password, #confirm_password').val('');
-            $('.change_password').slideUp();
-            $('.open_tab_chng_pswd').removeClass('padding0_20_20');
-
-            var item = $(this).find('.sort-arrow');
-            $(item).removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
-        });
-
-
-        $('.dactvate').click(function() {
-            $('#confirm_deactivate, #dactvate_passwd, #deactiate_success_row, #deactiate_error_row').css('display','none');
-            $('.deactivate_account').slideToggle();
-            $('#deactivate').css('display','inline');
-            if($('.open_tab_deactivate').hasClass('padding0_20_20')){
-                $('.open_tab_deactivate').removeClass('padding0_20_20');
-            }else{
-                $('.open_tab_deactivate').addClass('padding0_20_20');
-            }
-            var item = $(this).find('.sort-arrow');
-            if (item.hasClass('pe-7s-angle-down')){
-                $(item).removeClass('pe-7s-angle-down').addClass('pe-7s-angle-up');
-            }else {
-                $(item).removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
-            }
-        });
-
-        $('#deactivate').click(function() {
-            $('#dactvate_passwd, #confirm_deactivate').css('display','inline');
-            $('#deactivate').css('display','none');
-        });
-
-        $('#confirm_deactivate').click(function() {
-            $('#deactiate_success_row, #deactiate_error_row').css('display','none');
-        });
-
-        $('#cancel_dactvate').click(function() {
-            $('.deactivate_account').slideUp();
-            $('.open_tab_deactivate').removeClass('padding0_20_20');
-
-            var item = $(this).find('.sort-arrow');
-            $(item).removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
-        });
+        });*/
 
         $('[data-toggle="tooltip"]').tooltip();
 
+
     });
-
-    var password = document.getElementById("new_password")
-            , confirm_password = document.getElementById("confirm_password");
-
-    function validatePassword(){
-        if(password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Passwords Don't Match");
-        } else {
-            confirm_password.setCustomValidity('');
-        }
-    }
-
-    password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
 
     var name = document.getElementById("user_display_name");
     var phone = document.getElementById("user_phone");
@@ -353,22 +303,25 @@
     function validateUserData(){
         if(name.value == ''){
             name.setCustomValidity('Please enter your name.');
+            return false;
         }
         if(phone.value == ''){
             phone.setCustomValidity('Please enter your contact number.');
-        }else{
+            return false;
+        }/*else{
             var patt = new RegExp("\d{10}");
             var res = patt.test(phone);
             if(!res){
                 phone.setCustomValidity('Please match the requested format');
             }
-        }
+        }*/
 
         if(pin.value != ''){
             patt = new RegExp("\d{6}");
             res = patt.test(pin);
             if(!res){
                 pin.setCustomValidity('Please match the requested format');
+                return false;
             }
         }
     }

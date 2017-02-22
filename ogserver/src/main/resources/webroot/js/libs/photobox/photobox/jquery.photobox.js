@@ -77,6 +77,8 @@
     ///////////////////////////////////////////////
     // Should remove this and use underscore/lodash if possible
 
+
+
     function throttle(callback, duration){
         var wait = false;
         return function(){

@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="/css/cep.css">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12" id="payerror" style="display:none;">
+                    <div class="alert alert-danger fade in">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Error!</strong> A problem has been occurred while submitting your data.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="invoice-box">
+                    <form id="payuform" action='<%= paybaseUrl %>' method='post'>
+                        <input type="hidden" name="firstname" value="<%= userProfile ? userProfile.displayName : '' %>" />
+                        <input type="hidden" name="lastname" value="" />
+                        <input type="hidden" name="surl" value="<%= successbaseUrl %>" />
+                        <input type="hidden" name="phone" value="<%= userProfile ? userProfile.phone : '' %>" />
+                        <input type="hidden" name="key" value="<%= merchantKey %>" />
+                        <input type="hidden" name="hash" id="hashkey" value ="" />
+                        <input type="hidden" name="curl" value="<%= failurebaseUrl %>" />
+                        <input type="hidden" name="furl" value="<%= cancelbaseUrl %>" />
+                        <input type="hidden" name="txnid" id="trnxid"  value="" />
+                        <input type="hidden" name="udf1" id="udf1"  value="<%= userProfile ? userProfile.crmId : '' %>" />
+                        <input type="hidden" name="udf2" id="udf2"  value="" />
+                        <input type="hidden" name="productinfo" value="Mygubbi Modular Furniture" />
+                        <input type="hidden" name="amount" id="vamount" value="" />
+                        <input type="hidden" name="email" value="<%= userProfile ? userProfile.email : '' %>" />
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <a href="javascript:void(0);" id="back_payu" class="pull-left" onclick="history.go(-1);"> <i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;<span class="text-primary">Go Back</span> </a>
+                        <h3 class="text-center"> Payment Details </h3>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Client Name : </label>
+                            <label class="font-noraml"> <%= userProfile ? userProfile.displayName : '' %> </label>
+                            <input type="hidden" id="firstname" value="<%= userProfile ? userProfile.displayName : '' %>" />
+                        </div>
+                        <div class="form-group">
+                            <label>Contact No : </label>
+                            <label class="font-noraml"> <%= userProfile ? userProfile.phone : '' %> </label>
+                            <input type="hidden" id="phone" value="<%= userProfile ? userProfile.phone : '' %>" />
+                        </div>
+                        <div class="form-group">
+                            <label>Opportunity ID : </label>
+                            <label class="font-noraml"> <%= userProfile ? userProfile.crmId : '' %> </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label> Transaction # : </label>
+                            <label class="font-noraml" id="uniqueid"></label>
+                            <input type="hidden" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label> Product Info : </label>
+                            <label class="font-noraml"> Mygubbi Modular Furniture </label>
+                        </div>
+                        <div class="form-group">
+                            <label> Amount : </label>
+                            <input type="text" id="payamount" value="" required />
+                            <label id="payamountlbl"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center mt20">
+                        <a href="javascript:void(0);" id="send_payu" class="button-blue"> Make Payment </a>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        document.getElementById("uniqueid").value = randId();
+        document.getElementById("uniqueid").innerHTML = document.getElementById("uniqueid").value;
+        document.getElementById("trnxid").value = document.getElementById("uniqueid").value;
+    });
+    function randId() {
+     return Math.random().toString(36).substr(2, 10);
+    }
+</script>

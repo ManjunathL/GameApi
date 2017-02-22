@@ -18,6 +18,7 @@ require.config({
         jquerywaterfall: 'libs/jquery.waterfall/waterfall-light',
         highlight: 'libs/highlight/highlight',
         timepicker: 'libs/jquery.ui.timepicker/jquery.ui.timepicker',
+        sha512: 'libs/sha512',
         templates: '../templates'
     },
     shim: {

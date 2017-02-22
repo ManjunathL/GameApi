@@ -85,7 +85,7 @@
 }
 
 .navbar-center li{
-    float:none;
+    float: inherit;
     text-rendering: optimizeLegibility;
     display:inline-block;
     margin: 0px auto;
@@ -304,8 +304,10 @@
     }
 }
 
+.style-image-overlay img,
 .trend-image-overlay img {
      vertical-align:top;
+     max-width: 100%;
 }
 
 .trend-image-overlay:before {
@@ -1951,7 +1953,7 @@ fieldset[disabled] .btn-xl.active {
 
 .edit_icon {
     position: absolute;
-    padding: 0px 20px 20px;
+    padding: 4px 6px;
     cursor: pointer;
 }
 
@@ -7861,6 +7863,13 @@ a#goto-login{
     background: #ffffff;
     color: #ff3200 !important;
     border-bottom: 2px solid #ff3200;
+}
+.menu-mygubbi #nav .mega-dropdown-menu li a:hover,
+.menu-mygubbi #nav .mega-dropdown-menu li a:active,
+.menu-mygubbi #nav .mega-dropdown-menu li a:focus {
+    background: #ffffff;
+    color: #ff3200 !important;
+    border-bottom: 0px solid #ff3200;
 }
 
 .dropdown-menu>li>a:hover,
