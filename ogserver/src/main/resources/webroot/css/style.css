@@ -87,6 +87,15 @@ input[type=checkbox] {
     position: relative;
 }
 
+.para{
+    display: inline;
+}
+.small-head{
+    font-size: 15px;
+    display: inline;
+    text-transform: lowercase;
+}
+
 /* Start Display style */
 
 .inline-block{
