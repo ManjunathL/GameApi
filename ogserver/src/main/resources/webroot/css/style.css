@@ -4347,3 +4347,19 @@ a.hideLink {
     color: #999;
     cursor:pointer;
 }
+
+.category-details span.nwds {
+    font-size: 12px !important;
+    line-height: 1.75;
+    font-family: 'Raleway', sans-serif;
+}
+.category-details .hnwds {
+    font-size: 12px !important;
+    line-height: 1.75;
+    font-family: 'Raleway', sans-serif;
+}
+.category-details .blodnwds {
+    font-size: 12px !important;
+    line-height: 1.75;
+    font-family: 'Raleway', sans-serif;
+}
