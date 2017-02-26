@@ -1,8 +1,10 @@
 package com.mygubbi.game.proposal.model;
 
-import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
+import com.mygubbi.game.proposal.price.RateCardService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.sql.Date;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,9 @@ import java.util.Map;
 
 public class RateCard
 {
+
+    private final static Logger LOG = LogManager.getLogger(RateCard.class);
+
     public static final String CARCASS_TYPE = "C";
     public static final String SHUTTER_TYPE = "S";
     public static final String FACTOR_TYPE = "F";
@@ -20,35 +25,19 @@ public class RateCard
     public static final String LABOUR_FACTOR = "B";
     public static final String LOADING_FACTOR_NONSTANDARD = "N";
 
-    private String type;
     private String code;
-    private double rate;
-    private Map<Integer, Double> ratesByThickness = Collections.EMPTY_MAP;
+    private String type;
+    private String city;
+    private Date priceDate;
+    private double rateUsed;
+    private Map<Integer, Double> ratesUsed = Collections.EMPTY_MAP;
 
-/*
-    public static RateCard fromJson(JsonObject json)
-    {
-        return new RateCard().setCode(json.getString("code")).setType(json.getString("type"))
-                .setRate(json.getDouble("rate")).setRatesByThickness(createRateMap(json.getJsonArray("rates")));
-    }
-*/
-
-    public RateCard()
-    {
-
-    }
-
-    public RateCard(JsonObject json)
-    {
-        this.setCode(json.getString("code")).setType(json.getString("type"));
-        if (json.containsKey("rate"))
-        {
-            this.setRate(json.getDouble("rate"));
-        }
-        if (json.containsKey("rates"))
-        {
-            this.setRatesByThickness(createRateMap(json.getJsonArray("rates")));
-        }
+    public RateCard(String code, String type, Date priceDate, String city) {
+        this.code = code;
+        this.type = type;
+        this.priceDate = priceDate;
+        this.city = city;
+        this.ratesUsed = new HashMap<>();
     }
 
     public String getCode()
@@ -56,66 +45,60 @@ public class RateCard
         return code;
     }
 
-    public RateCard setCode(String code)
-    {
-        this.code = code;
-        return this;
-    }
-
     public String getType()
     {
         return type;
     }
 
-    public RateCard setType(String type)
+    public double getRateByThickness(int thickness)
     {
-        this.type = type;
-        return this;
+
+        PriceMaster priceMaster;
+        if (CARCASS_TYPE.equals(this.type)) {
+            priceMaster = RateCardService.getInstance().getCarcassRate(this.code, thickness, this.priceDate,this.city);
+
+        }
+        else {
+            priceMaster = RateCardService.getInstance().getShutterRate(this.code, thickness, this.priceDate, this.city);
+
+
+        }
+
+
+
+        double price = 0;
+        if (priceMaster != null ) {
+            price = priceMaster.getPrice();
+        }
+
+        this.ratesUsed.put(thickness,price) ;
+        return price;
     }
 
     public double getRate()
     {
-        return rate;
-    }
+        this.rateUsed = 0;
+        PriceMaster factorRate = RateCardService.getInstance().getFactorRate(this.code,this.priceDate, this.city);
 
-    public RateCard setRate(double rate)
-    {
-        this.rate = rate;
-        return this;
-    }
-
-    public double getRateByThickness(int thickness)
-    {
-        if (!this.ratesByThickness.containsKey(thickness)) return 0;
-        return this.ratesByThickness.get(thickness);
-    }
-
-    public RateCard setRatesByThickness(Map<Integer, Double> ratesByThickness)
-    {
-        this.ratesByThickness = ratesByThickness;
-        return this;
+        if (factorRate != null) {
+            this.rateUsed = factorRate.getPrice();
+        }
+        return this.rateUsed;
     }
 
     public String getKey()
     {
-        return makeKey(this.getCode(), this.getType());
+        return makeKey(this.getType(), this.getCode());
     }
 
-    public static String makeKey(String code, String type)
+    public static String makeKey(String type, String code)
     {
-        return code + ":" + type;
-
+        return type + ":" + code;
     }
 
-    private Map<Integer, Double> createRateMap(JsonArray ratesArray)
+    public static String makeKey(String type, String code, int thickness)
     {
-        Map<Integer, Double> rates = new HashMap<>();
-        for (Object rateObject : ratesArray)
-        {
-            JsonObject rateJson = (JsonObject) rateObject;
-            rates.put(rateJson.getInteger("thickness"), rateJson.getDouble("rate"));
-        }
-        return rates;
+        return type + ":" + code + ":" + thickness;
     }
 
     public Object getName()
@@ -125,10 +108,10 @@ public class RateCard
 
     public String getRates()
     {
-        if (this.ratesByThickness.isEmpty()) return "";
+        if (this.ratesUsed.isEmpty()) return "";
 
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Integer, Double> entry : this.ratesByThickness.entrySet())
+        for (Map.Entry<Integer, Double> entry : this.ratesUsed.entrySet())
         {
             sb.append(entry.getKey() + "=" + entry.getValue()).append(";");
         }

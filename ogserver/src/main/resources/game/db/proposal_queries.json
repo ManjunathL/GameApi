@@ -113,6 +113,14 @@
     },
 
     {
+      "id": "proposal.update.onconfirm",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?, priceDate = ? where id = ?",
+      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version", "priceDate", "id"]
+    },
+
+    {
       "id": "proposal.folder.update",
       "type": "update",
       "table": "proposal",
@@ -582,6 +590,22 @@
       "type": "select",
       "table": "panel_master",
       "query": "select * from panel_master",
+      "params": []
+    },
+
+    {
+      "id": "ratecard.distinct.select.all",
+      "type": "select",
+      "table": "ratecard_master",
+      "query": "select distinct code,type from ratecard_master",
+      "params": []
+    },
+
+    {
+      "id": "pricemaster.select.all",
+      "type": "select",
+      "table": "price_master",
+      "query": "select rateType,rateId,city,price,fromDate,toDate from price_master",
       "params": []
     },
 

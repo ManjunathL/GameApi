@@ -40,9 +40,13 @@ public class QuoteData
 
     public double discountAmount;
     public String fromVersion;
+    private String city;
+    private java.sql.Date priceDate;
 
     public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion)
     {
+        this.city = proposalHeader.getProjectCity();
+        this.priceDate = proposalHeader.getPriceDate();
         this.proposalHeader = proposalHeader;
         this.products = products;
         if (addons != null) this.headerLevelAddons = addons;
@@ -65,7 +69,7 @@ public class QuoteData
             }
             else
             {
-                AssembledProductInQuote assembledProduct = new AssembledProductInQuote(product);
+                AssembledProductInQuote assembledProduct = new AssembledProductInQuote(product,this.city,this.priceDate);
                 this.assembledProducts.add(assembledProduct);
                 this.productsCost += assembledProduct.getAmountWithoutAddons();
                 this.addonsCost += assembledProduct.getAddonsAmount();

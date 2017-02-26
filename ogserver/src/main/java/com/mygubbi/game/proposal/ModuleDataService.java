@@ -35,6 +35,7 @@ public class ModuleDataService extends AbstractVerticle
     private Multimap<String, AccHwComponent> accessoryPackAddonsMap;
     private Map<String, Module> moduleMap = Collections.EMPTY_MAP;
     private Map<String, ModulePanel> panelMasterMap = Collections.EMPTY_MAP;
+    private Map<String, RateCardMaster> rateCardMasterMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> accessoriesMap = Collections.EMPTY_MAP;
     private Map<String, AccHwComponent> hardwareMap = Collections.EMPTY_MAP;
     private Map<String, ShutterFinish> finishCodeMap = Collections.EMPTY_MAP;
@@ -63,6 +64,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheAccessories();
         this.cacheHardware();
         this.cacheFinishCostCodes();
+
 	}
 
     private void cacheAccessories()
@@ -120,6 +122,7 @@ public class ModuleDataService extends AbstractVerticle
                     }
                 });
     }
+
 
     private void cacheAccHw(String type, Map<String, AccHwComponent> components)
     {
@@ -373,6 +376,11 @@ public class ModuleDataService extends AbstractVerticle
     public Module getModule(String code)
     {
         return this.moduleMap.get(code);
+    }
+
+    public RateCardMaster getRateCard(String code)
+    {
+        return this.rateCardMasterMap.get(code);
     }
 
     public ShutterFinish getFinish(String finishCode)

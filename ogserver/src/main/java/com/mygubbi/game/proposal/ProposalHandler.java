@@ -39,6 +39,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/version/createversion").handler(this::createProposalVersion);
         this.post("/version/copyversion").handler(this::copyVersion);
         this.post("/update").handler(this::updateProposal);
+        this.post("/updateonconfirm").handler(this::updateProposalOnConfirm);
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
@@ -174,6 +175,13 @@ public class ProposalHandler extends AbstractRouteHandler
         JsonObject proposalData = routingContext.getBodyAsJson();
         LOG.info("Proposal:" + proposalData.encodePrettily());
         this.updateProposal(routingContext, proposalData, "proposal.update");
+    }
+
+    private void updateProposalOnConfirm(RoutingContext routingContext)
+    {
+        JsonObject proposalData = routingContext.getBodyAsJson();
+        LOG.info("Proposal:" + proposalData.encodePrettily());
+        this.updateProposal(routingContext, proposalData, "proposal.update.onconfirm");
     }
 
     private void updateProposal(RoutingContext routingContext, JsonObject proposalData, String queryId)

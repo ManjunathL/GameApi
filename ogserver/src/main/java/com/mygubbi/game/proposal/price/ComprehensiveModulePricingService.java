@@ -2,7 +2,7 @@ package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
-import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.ModuleForPrice;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
@@ -36,19 +36,19 @@ public class ComprehensiveModulePricingService extends AbstractVerticle
     {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(CALCULATE_PRICE, (Message<Integer> message) -> {
-            ProductModule productModule = (ProductModule) LocalCache.getInstance().remove(message.body());
-            this.calculatePrice(productModule, message);
+            ModuleForPrice moduleForPrice = (ModuleForPrice) LocalCache.getInstance().remove(message.body());
+            this.calculatePrice(moduleForPrice, message);
         }).completionHandler(res -> {
             LOG.info("Comprehensive Module price calculator service started." + res.succeeded());
         });
     }
 
-    private void calculatePrice(ProductModule productModule, Message message)
+    private void calculatePrice(ModuleForPrice moduleForPrice, Message message)
     {
         ModulePriceHolder modulePriceHolder = null;
         try
         {
-            modulePriceHolder = new ModulePriceHolder(productModule);
+            modulePriceHolder = new ModulePriceHolder(moduleForPrice);
             modulePriceHolder.prepare();
             if (modulePriceHolder.hasErrors())
             {

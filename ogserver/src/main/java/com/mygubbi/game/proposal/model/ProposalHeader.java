@@ -2,6 +2,8 @@ package com.mygubbi.game.proposal.model;
 
 import io.vertx.core.json.JsonObject;
 
+import java.sql.Date;
+
 /**
  * Created by test on 21-05-2016.
  */
@@ -26,6 +28,7 @@ public class ProposalHeader extends JsonObject
     public static final String SALESPHONE="salesPhone";
     public static final String SALESEMAIL="salesEmail";
     public static final String QUOTE_NO_NEW="quoteNoNew";
+    public static final String PRICE_DATE="priceDate";
 
 
     public ProposalHeader(JsonObject json)
@@ -76,6 +79,13 @@ public class ProposalHeader extends JsonObject
     public String folderPath()
     {
         return this.getString(FOLDER_PATH);
+    }
+    public String getProjectCity()
+    {
+        return this.getString(PROJECT_CITY);
+    }  public Date getPriceDate()
+    {
+        return Date.valueOf((PRICE_DATE));
     }
 
     public String getCrmId()
