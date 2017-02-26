@@ -1,93 +1,111 @@
-DROP TABLE IF EXISTS game_user;
-CREATE TABLE game_user (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  active char(1) NOT NULL DEFAULT 'A',
-  name varchar(255) NOT NULL,
-  email varchar(255) NOT NULL,
-  role varchar(255) NOT NULL,
-  phone varchar(25) NULL,
-  salt varchar(255) NOT NULL,
-  hash varchar(255) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  UNIQUE KEY unique_email (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `game_user` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`active` CHAR(1) NOT NULL DEFAULT 'A',
+	`name` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`role` VARCHAR(255) NOT NULL,
+	`phone` VARCHAR(25) NULL DEFAULT NULL,
+	`salt` VARCHAR(255) NOT NULL,
+	`hash` VARCHAR(255) NOT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `unique_email` (`email`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
 
 
 -------------------------
 --Proposal related tables
 -------------------------
-DROP TABLE IF EXISTS proposal;
-CREATE TABLE proposal(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  status char(10) NOT NULL DEFAULT 'Active', -- Active, Submitted, Cancelled
-  title varchar(255) NOT NULL,
-  version char(10) NULL,
-  crmId varchar(64) NULL,
-  quoteNo varchar(64) NULL,
-  customerId varchar(64) NULL,
-  cname varchar(64) NULL,
-  caddress1 varchar(128) NULL,
-  caddress2 varchar(128) NULL,
-  caddress3 varchar(128) NULL,
-  ccity varchar(64) NULL,
-  cemail varchar(128) NULL,
-  cphone1 varchar(16) NULL,
-  cphone2 varchar(16) NULL,
-  projectName varchar(128) NULL,
-  paddress1 varchar(128) NULL,
-  paddress2 varchar(128) NULL,
-  pcity varchar(64) NULL,
-  salesName varchar(128) NULL,
-  salesEmail varchar(128) NULL,
-  salesPhone varchar(16) NULL,
-  designerName varchar(128) NULL,
-  designerEmail varchar(128) NULL,
-  designerPhone varchar(16) NULL,
-  amount int NOT NULL DEFAULT 0,
-  folderPath varchar(255) NULL,
-  createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  createdBy varchar(64) NULL,
-  updatedOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  updatedBy varchar(64) NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Master';
+CREATE TABLE `proposal` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`status` CHAR(10) NOT NULL DEFAULT 'Active',
+	`title` VARCHAR(255) NOT NULL,
+	`version` CHAR(10) NULL DEFAULT NULL,
+	`crmId` VARCHAR(64) NULL DEFAULT NULL,
+	`quoteNo` VARCHAR(64) NULL DEFAULT NULL,
+	`customerId` VARCHAR(64) NULL DEFAULT NULL,
+	`cname` VARCHAR(64) NULL DEFAULT NULL,
+	`caddress1` VARCHAR(128) NULL DEFAULT NULL,
+	`caddress2` VARCHAR(128) NULL DEFAULT NULL,
+	`caddress3` VARCHAR(128) NULL DEFAULT NULL,
+	`ccity` VARCHAR(64) NULL DEFAULT NULL,
+	`cemail` VARCHAR(128) NULL DEFAULT NULL,
+	`cphone1` VARCHAR(16) NULL DEFAULT NULL,
+	`cphone2` VARCHAR(16) NULL DEFAULT NULL,
+	`projectName` VARCHAR(128) NULL DEFAULT NULL,
+	`paddress1` VARCHAR(128) NULL DEFAULT NULL,
+	`paddress2` VARCHAR(128) NULL DEFAULT NULL,
+	`pcity` VARCHAR(64) NULL DEFAULT NULL,
+	`salesName` VARCHAR(128) NULL DEFAULT NULL,
+	`salesEmail` VARCHAR(128) NULL DEFAULT NULL,
+	`salesPhone` VARCHAR(16) NULL DEFAULT NULL,
+	`designerName` VARCHAR(128) NULL DEFAULT NULL,
+	`designerEmail` VARCHAR(128) NULL DEFAULT NULL,
+	`designerPhone` VARCHAR(16) NULL DEFAULT NULL,
+	`amount` INT(11) NOT NULL DEFAULT '0',
+	`folderPath` VARCHAR(255) NULL DEFAULT NULL,
+	`createdOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`createdBy` VARCHAR(64) NULL DEFAULT NULL,
+	`updatedOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`updatedBy` VARCHAR(64) NULL DEFAULT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`quoteNoNew` VARCHAR(64) NULL DEFAULT NULL,
+	`designPartnerName` VARCHAR(128) NULL DEFAULT NULL,
+	`designPartnerEmail` VARCHAR(128) NULL DEFAULT NULL,
+	`designPartnerPhone` VARCHAR(16) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='Proposal Master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
 
-DROP TABLE IF EXISTS proposal_product;
-CREATE TABLE proposal_product(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  active char(1) NOT NULL DEFAULT 'A',
-  proposalId INTEGER NOT NULL,
-  title varchar(255) NOT NULL DEFAULT 'TITLE',
-  seq int NOT NULL DEFAULT 0,
-  type char(16) NOT NULL DEFAULT 'CUSTOMIZED',
-  roomCode varchar(16) NOT NULL DEFAULT 'Kitchen',
-  productCategoryCode varchar(16) NOT NULL DEFAULT 'Kitchen',
-  catalogueId varchar(32) NULL,
-  catalogueName varchar(128) NULL,
-  makeTypeCode char(1) NOT NULL,
-  baseCarcassCode varchar(32) NOT NULL DEFAULT 'PLY',
-  wallCarcassCode varchar(8) NOT NULL DEFAULT 'PLY',
-  finishTypeCode varchar(16) NOT NULL,
-  finishCode varchar(32) NOT NULL,
-  designCode varchar(32) NOT NULL,
-  dimension varchar(64) NULL,
-  quantity INTEGER NOT NULL DEFAULT 1,
-  amount DOUBLE NOT NULL DEFAULT 0,
-  quoteFilePath varchar(255) NULL,
-  modules TEXT NULL,
-  addons TEXT NULL,
-  createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  createdBy varchar(64) NULL,
-  updatedOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  updatedBy varchar(64) NULL,
-  costWoAccessories DOUBLE NULL DEFAULT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY proposal_key (proposalId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Products';
+
+
+CREATE TABLE `proposal_product` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`active` CHAR(1) NOT NULL DEFAULT 'A',
+	`proposalId` INT(11) NOT NULL,
+	`fromVersion` VARCHAR(4) NULL DEFAULT NULL,
+	`title` VARCHAR(255) NOT NULL DEFAULT 'TITLE',
+	`seq` INT(11) NOT NULL DEFAULT '0',
+	`type` CHAR(16) NOT NULL DEFAULT 'CUSTOMIZED',
+	`roomCode` VARCHAR(16) NOT NULL DEFAULT 'Kitchen',
+	`productCategoryCode` VARCHAR(16) NOT NULL DEFAULT 'Kitchen',
+	`catalogueId` VARCHAR(32) NULL DEFAULT NULL,
+	`catalogueName` VARCHAR(128) NULL DEFAULT NULL,
+	`makeTypeCode` CHAR(1) NOT NULL,
+	`baseCarcassCode` VARCHAR(32) NOT NULL DEFAULT 'PLY',
+	`wallCarcassCode` VARCHAR(8) NOT NULL DEFAULT 'PLY',
+	`finishTypeCode` VARCHAR(16) NOT NULL,
+	`finishCode` VARCHAR(32) NOT NULL,
+	`designCode` VARCHAR(32) NOT NULL,
+	`dimension` VARCHAR(64) NULL DEFAULT NULL,
+	`quantity` INT(11) NOT NULL DEFAULT '1',
+	`amount` DOUBLE NOT NULL DEFAULT '0',
+	`quoteFilePath` VARCHAR(255) NULL DEFAULT NULL,
+	`modules` TEXT NULL,
+	`addons` TEXT NULL,
+	`createdOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`createdBy` VARCHAR(64) NULL DEFAULT NULL,
+	`updatedOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`updatedBy` VARCHAR(64) NULL DEFAULT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`costWoAccessories` DOUBLE NULL DEFAULT '0',
+	PRIMARY KEY (`id`),
+	INDEX `proposal_key` (`proposalId`)
+)
+COMMENT='Proposal Products'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
 
 
 DROP TABLE IF EXISTS proposal_documents;
@@ -106,70 +124,95 @@ CREATE TABLE proposal_documents(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal documents';
 
 
-DROP TABLE IF EXISTS proposal_addon;
-CREATE TABLE proposal_addon(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  proposalId INTEGER NOT NULL,
-  code varchar(16) NOT NULL,
-  categoryCode varchar(32) NOT NULL DEFAULT 'NA',
-  productTypeCode char(32) NOT NULL DEFAULT 'All',
-  brandCode varchar(32) NULL,
-  catalogueCode varchar(32) NOT NULL,
-  title varchar(255) NOT NULL,
-  rate DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  quantity DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  amount DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
-  updatedBy varchar(64) NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY proposalid_key (proposalId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Proposal Addons';
+CREATE TABLE `proposal_addon` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`seq` INT(4) NOT NULL DEFAULT '0',
+	`proposalId` INT(11) NOT NULL,
+	`fromVersion` VARCHAR(50) NOT NULL,
+	`code` VARCHAR(16) NOT NULL,
+	`categoryCode` VARCHAR(32) NOT NULL DEFAULT 'NA',
+	`productTypeCode` CHAR(32) NOT NULL DEFAULT 'All',
+	`productSubtypeCode` CHAR(32) NOT NULL DEFAULT 'All',
+	`product` CHAR(32) NOT NULL DEFAULT 'All',
+	`brandCode` VARCHAR(32) NULL DEFAULT NULL,
+	`catalogueCode` VARCHAR(32) NOT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`rate` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`quantity` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`uom` CHAR(10) NOT NULL DEFAULT 'N',
+	`updatedBy` VARCHAR(64) NULL DEFAULT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `proposalid_key` (`proposalId`)
+)
+COMMENT='Proposal Addons'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
-DROP TABLE IF EXISTS module_master;
-CREATE TABLE module_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  code varchar(32) NOT NULL,
-  description varchar(255) NOT NULL,
-  imagePath varchar(255) NOT NULL,
-  width INTEGER NOT NULL DEFAULT 0,
-  depth INTEGER NOT NULL DEFAULT 0,
-  height INTEGER NOT NULL DEFAULT 0,
-  dimension varchar(32) NOT NULL,
-  moduleType char(1) NOT NULL COMMENT 'standard - S and non standard/customized - C',
-  unitType char(16) NOT NULL DEFAULT 'NA' COMMENT 'Identify Sink Unit',
-  material char(8) NULL COMMENT 'Override carcass material',
-  moduleCategory varchar(64) NOT NULL,
-  productCategory varchar(24) DEFAULT 'NULL',
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Module master';
 
-DROP TABLE IF EXISTS module_components;
-CREATE TABLE module_components(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  modulecode varchar(32) NOT NULL,
-  comptype char(1) NOT NULL, -- C - Carcass, S- Shutter, A - Accessory, H- Hardware
-  compcode varchar(32) NOT NULL, -- Component code - Carcass, Shutter, Hardware, Accessory
-  quantity DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY mc_key (modulecode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Module to Component mapping';
+CREATE TABLE `module_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`code` VARCHAR(255) NOT NULL,
+	`description` VARCHAR(255) NOT NULL,
+	`imagePath` VARCHAR(255) NOT NULL,
+	`width` INT(11) NOT NULL DEFAULT '0',
+	`depth` INT(11) NOT NULL DEFAULT '0',
+	`height` INT(11) NOT NULL DEFAULT '0',
+	`dimension` VARCHAR(32) NOT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`moduleType` VARCHAR(2) NOT NULL COMMENT 'standard - S and non standard/customized - C',
+	`moduleCategory` VARCHAR(64) NOT NULL,
+	`productCategory` VARCHAR(24) NULL DEFAULT 'NULL',
+	`material` CHAR(8) NULL DEFAULT NULL,
+	`unitType` CHAR(16) NULL DEFAULT NULL,
+	`accessoryPackDefault` CHAR(4) NULL DEFAULT NULL,
+	`remarks` VARCHAR(64) NULL DEFAULT 'Add Remarks',
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`code`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
-DROP TABLE IF EXISTS code_master;
-CREATE TABLE code_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  lookupType varchar(16) NOT NULL DEFAULT 'NA', -- CM - Carcass Material, SF- Shutter Finish, FT - Finish Types
-  levelType varchar(1) NOT NULL DEFAULT 'A', -- P - Product, M - Module, A - All
-  additionalType varchar(16) NULL,
-  code varchar(16) NOT NULL,
-  title varchar(64) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Code Master';
+
+
+CREATE TABLE `module_components` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`modulecode` VARCHAR(32) NULL DEFAULT NULL,
+	`comptype` CHAR(1) NOT NULL,
+	`compcode` VARCHAR(32) NOT NULL,
+	`quantity` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`quantityFlag` CHAR(1) NULL DEFAULT NULL,
+	`quantityFormula` CHAR(5) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `mc_key` (`modulecode`)
+)
+COMMENT='Module to Component mapping'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `code_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`lookupType` CHAR(16) NULL DEFAULT NULL,
+	`levelType` VARCHAR(1) NOT NULL DEFAULT 'A',
+	`additionalType` VARCHAR(16) NULL DEFAULT NULL,
+	`code` CHAR(64) NULL DEFAULT NULL,
+	`title` VARCHAR(64) NOT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`code`)
+)
+COMMENT='Code Master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
 
 DROP TABLE IF EXISTS color_master;
 CREATE TABLE color_master(
@@ -240,94 +283,125 @@ CREATE TABLE carcass_master(
 
 ---------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS acc_hw_master;
-CREATE TABLE acc_hw_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  type char(1) NOT NULL DEFAULT 'A', -- A - Accessory, H - Hardware
-  code varchar(16) NOT NULL,
-  catalogCode varchar(16) NOT NULL,
-  title varchar(255) NOT NULL,
-  make varchar(16) NOT NULL,
-  category varchar(32) Null,
-  imagePath varchar(255) NULL,
-  uom char(10) NOT NULL DEFAULT 'N', -- N Numbers, S Set
-  cp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  msp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory and Hardware master';
+CREATE TABLE `acc_hw_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`type` CHAR(1) NOT NULL DEFAULT 'A',
+	`code` VARCHAR(16) NOT NULL,
+	`catalogCode` VARCHAR(16) NOT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`make` VARCHAR(16) NOT NULL,
+	`category` VARCHAR(32) NULL DEFAULT NULL,
+	`imagePath` VARCHAR(255) NULL DEFAULT NULL,
+	`uom` CHAR(10) NOT NULL DEFAULT 'N',
+	`cp` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`mrp` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`msp` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`code`)
+)
+COMMENT='Accessory and Hardware master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
-DROP TABLE IF EXISTS addon_master;
-CREATE TABLE addon_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  code varchar(16) NOT NULL,
-  categoryCode varchar(32) NOT NULL DEFAULT 'NA',
-  roomCode varchar(32) NOT NULL DEFAULT 'All',
-  productTypeCode char(32) NOT NULL DEFAULT 'All',
-  brandCode varchar(32) NULL,
-  catalogueCode varchar(32) NOT NULL,
-  rateReadOnly boolean NOT NULL,
-  title varchar(255) NOT NULL,
-  rate DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  mrp DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-  uom char(5) NOT NULL DEFAULT 'N', -- N Numbers, S Set
-  imagePath varchar(255) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Addon Master';
+
+CREATE TABLE `addon_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`code` VARCHAR(16) NOT NULL,
+	`categoryCode` VARCHAR(32) NOT NULL DEFAULT 'NA',
+	`roomCode` VARCHAR(32) NOT NULL DEFAULT 'All',
+	`productTypeCode` CHAR(32) NOT NULL DEFAULT 'All',
+	`productSubtypeCode` CHAR(32) NOT NULL DEFAULT 'All',
+	`brandCode` VARCHAR(32) NULL DEFAULT NULL,
+	`product` VARCHAR(32) NULL DEFAULT NULL,
+	`catalogueCode` VARCHAR(32) NULL DEFAULT NULL,
+	`rateReadOnly` TINYINT(1) NULL DEFAULT NULL,
+	`title` VARCHAR(255) NULL DEFAULT NULL,
+	`rate` DECIMAL(10,2) NULL DEFAULT '0.00',
+	`mrp` DECIMAL(10,2) NULL DEFAULT '0.00',
+	`dealerPrice` DOUBLE NULL DEFAULT '0',
+	`uom` CHAR(5) NOT NULL DEFAULT 'N',
+	`imagePath` VARCHAR(255) NOT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`code`)
+)
+COMMENT='Addon Master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
 
 
 ----------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS acc_pack_master;
-CREATE TABLE acc_pack_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  code varchar(16) NOT NULL,
-  title varchar(255) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory pack master';
+CREATE TABLE `acc_pack_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`code` VARCHAR(16) NOT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`code`)
+)
+COMMENT='Accessory pack master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
 
 ----------------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS acc_pack_components;
-CREATE TABLE acc_pack_components(
-id INTEGER NOT NULL AUTO_INCREMENT,
-apcode varchar(16) NOT NULL,
-type char(1) NOT NULL, --
-code varchar(16) NOT NULL,
-qty DECIMAL(10,2) NOT NULL DEFAULT 0.0,
-touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (apcode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Accessory pack components';
+CREATE TABLE `acc_pack_components` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`apcode` VARCHAR(16) NOT NULL,
+	`type` CHAR(1) NOT NULL,
+	`code` VARCHAR(16) NOT NULL,
+	`qty` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`apcode`)
+)
+COMMENT='Accessory pack components'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
 
 ----------------------------------------------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS module_acc_pack;
-CREATE TABLE module_acc_pack(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  apcode varchar(16) NOT NULL,
-  mgcode varchar(32) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (mgcode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module accessory pack';
+CREATE TABLE `module_acc_pack` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`apcode` VARCHAR(16) NOT NULL,
+	`mgcode` VARCHAR(32) NULL DEFAULT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`mgcode`)
+)
+COMMENT='module accessory pack'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
 
-DROP TABLE IF EXISTS accpack_addon_map;
-CREATE TABLE accpack_addon_map(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  apcode varchar(16) NOT NULL,
-  addoncode varchar(16) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (apcode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='addon accessory map';
+
+
+CREATE TABLE `accpack_addon_map` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`apcode` VARCHAR(16) NOT NULL,
+	`addoncode` VARCHAR(16) NOT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`apcode`)
+)
+COMMENT='addon accessory map'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
 
 --DROP TABLE IF EXISTS module_category_master;
 --CREATE TABLE module_category_master(
@@ -340,22 +414,65 @@ CREATE TABLE accpack_addon_map(
 --  KEY code_key (moduleCode)
 --) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='module Category Master';
 
+CREATE TABLE `panel_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`code` VARCHAR(16) NOT NULL,
+	`type` CHAR(1) NOT NULL,
+	`side` CHAR(1) NOT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`subtitle` VARCHAR(64) NOT NULL DEFAULT 'NA',
+	`plength` INT(11) NOT NULL DEFAULT '0',
+	`breadth` INT(11) NOT NULL DEFAULT '0',
+	`thickness` INT(11) NOT NULL DEFAULT '0',
+	`edgebinding` VARCHAR(128) NOT NULL,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`dimensionFormula` CHAR(4) NULL DEFAULT NULL,
+	`exposed` CHAR(1) NULL DEFAULT NULL COMMENT 'D or S',
+	PRIMARY KEY (`id`),
+	INDEX `code_key` (`code`)
+)
+COMMENT='Panel master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
-DROP TABLE IF EXISTS panel_master;
-CREATE TABLE panel_master(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  code varchar(16) NOT NULL,
-  type char(1) NOT NULL, -- Carcass, Shutter
-  side char(1) NOT NULL, -- Left, Right, Top, Bottom
-  title varchar(255) NOT NULL,
-  subtitle varchar(64) NOT NULL DEFAULT 'NA',
-  plength INTEGER NOT NULL DEFAULT 0,
-  breadth INTEGER NOT NULL DEFAULT 0,
-  thickness INTEGER NOT NULL DEFAULT 0,
-  edgebinding varchar(128) NOT NULL,
-  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  KEY code_key (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Panel master';
+
+
+CREATE TABLE `city_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`city` VARCHAR(50) NOT NULL DEFAULT '0',
+	`curmonth` INT(2) NOT NULL,
+	`proposalId` INT(11) NOT NULL DEFAULT '0',
+	`quoteNo` VARCHAR(50) NOT NULL DEFAULT '0',
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`cityLocked` VARCHAR(4) NULL DEFAULT 'Yes',
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `version_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`proposalId` INT(11) NOT NULL,
+	`version` VARCHAR(50) NOT NULL,
+	`fromVersion` VARCHAR(4) NULL DEFAULT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`finalAmount` DOUBLE NOT NULL,
+	`status` CHAR(64) NOT NULL,
+	`internalStatus` CHAR(64) NULL DEFAULT NULL,
+	`date` VARCHAR(64) NULL DEFAULT NULL,
+	`remarks` VARCHAR(255) NULL DEFAULT NULL,
+	`discountPercentage` DOUBLE NOT NULL,
+	`discountAmount` DOUBLE NOT NULL,
+	`amount` DOUBLE NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+
 
 

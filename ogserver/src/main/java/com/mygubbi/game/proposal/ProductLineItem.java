@@ -68,6 +68,10 @@ public class ProductLineItem extends JsonObject
         return this.getString(TYPE);
     }
 
+    public  String getRoomCode() {
+        return this.getString(ROOM_CODE);
+    }
+
     public String getKdMaxFile()
     {
         return this.getString(QUOTE_FILE_PATH);

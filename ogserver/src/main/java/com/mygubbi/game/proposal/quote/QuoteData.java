@@ -121,6 +121,11 @@ public class QuoteData
         return getAddonsByCategory(ProductAddon.SERVICE_TYPE);
     }
 
+    public List<ProductAddon> getCustomAddons()
+    {
+        return getAddonsByCategory(ProductAddon.CUSTOM_ADDON_TYPE);
+    }
+
     private List<ProductAddon> getAddonsByCategory(String categoryCode)
     {
         List<ProductAddon> addons = new ArrayList<>();
@@ -258,7 +263,7 @@ public class QuoteData
         List<AssembledProductInQuote.ModulePart> aggregated =
 
                 Seq.ofType(hwList.stream(), AssembledProductInQuote.ModulePart.class)
-                        .groupBy(x -> tuple(x.code, x.make, x.title, x.uom),
+                        .groupBy(x -> tuple(x.code, x.make, x.title, x.uom,x.catalogCode),
                                 Tuple.collectors(
                                         Collectors.summingDouble(x -> x.quantity)
                                 )

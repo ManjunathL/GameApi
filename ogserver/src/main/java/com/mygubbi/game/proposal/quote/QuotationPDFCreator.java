@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.*;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.model.AccessoryPack;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
@@ -12,8 +13,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by user on 02-Nov-16.
@@ -148,7 +151,7 @@ public class QuotationPDFCreator
             phrase6.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
             pdfPTable.addCell(phrase6);
 
-        document.add(table);
+            document.add(table);
             document.add(pdfPTable);
 
             p = new Paragraph("      ");
@@ -318,6 +321,31 @@ public class QuotationPDFCreator
         this.fillAddons(B4Table, this.quoteData.getServices(), "No additional services.");
         document.add(B4Table);
 
+            PdfPTable B5Table = new PdfPTable(columnWidths1);
+            B5Table.setWidthPercentage(100);
+
+            PdfPCell cel5=new PdfPCell();
+            p = new Paragraph("CUSTOM ADDON ACCESSORIES",fsize1);
+            p.setAlignment(Element.ALIGN_LEFT);
+            cel5.addElement(p);
+            cel5.setColspan(5);
+            cel5.setBorder(Rectangle.NO_BORDER);
+            B5Table.addCell(cel5);
+
+            PdfPCell B5Cell1 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell2 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell3 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell4 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell5 = new PdfPCell(new Paragraph("",fsize));
+            B5Table.addCell(B5Cell1);
+            B5Table.addCell(B5Cell2);
+            B5Table.addCell(B5Cell3);
+            B5Table.addCell(B5Cell4);
+            B5Table.addCell(B5Cell5);
+
+            this.fillAddons(B5Table, this.quoteData.getCustomAddons(), "No additional custom addons.");
+            document.add(B5Table);
+
             p = new Paragraph("Estimated Cost(B):" +this.getRoundOffValue(String.valueOf((int)quoteData.addonsCost)),fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
@@ -370,11 +398,11 @@ public class QuotationPDFCreator
             PdfPTable tab1=new PdfPTable(1);
         tab1.setWidthPercentage(100);
 
-            PdfPCell cel5=new PdfPCell();
+            PdfPCell cel6=new PdfPCell();
             p = new Paragraph("Material Specification",fsize1);
-        p.setAlignment(Element.ALIGN_LEFT);
-            cel5.addElement(p);
-            cel5.setBorder(Rectangle.NO_BORDER);
+            p.setAlignment(Element.ALIGN_LEFT);
+            cel6.addElement(p);
+            cel6.setBorder(Rectangle.NO_BORDER);
             tab1.addCell(cel5);
 
 
@@ -390,22 +418,22 @@ public class QuotationPDFCreator
                             "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
                             "10.\tSink: \tCarisyl/Franke/Nirali\n",fsize));
 
-            PdfPCell cel6=new PdfPCell();
+            PdfPCell cel7=new PdfPCell();
             p = new Paragraph(new Paragraph("Other Finishes offered are Acrylic, Foil, PU paint, UV laminated panels,Hardwood of mygubbi make.\t\t\t\t\n",fsize));
         p.setAlignment(Element.ALIGN_LEFT);
-            cel6.addElement(p);
-            cel6.setBorder(Rectangle.NO_BORDER);
+            cel7.addElement(p);
+            cel7.setBorder(Rectangle.NO_BORDER);
             tab1.addCell(cel6);
             document.add(tab1);
 
             PdfPTable tab2=new PdfPTable(1);
         tab2.setWidthPercentage(100);
 
-            PdfPCell cel7=new PdfPCell();
+            PdfPCell cel8=new PdfPCell();
             p = new Paragraph("Note:\n",fsize);
         p.setAlignment(Element.ALIGN_LEFT);
-            cel7.addElement(p);
-            cel7.setBorder(Rectangle.NO_BORDER);
+            cel8.addElement(p);
+            cel8.setBorder(Rectangle.NO_BORDER);
             tab2.addCell(cel7);
 
             tab2.addCell(new Paragraph("1. \t All 25 mm shelves will be in MDF with both side finish\n"
@@ -590,7 +618,7 @@ public class QuotationPDFCreator
 
     private void fillAssembledProductUnits(PdfPTable tabname,AssembledProductInQuote product,String series)
     {
-        wunitSequence = 0;;
+        wunitSequence = 0;
         String caption="",caption1="",caption2="",caption3="",caption4="",captionLoft="",captionWardrobe="";
         String cname=product.getCatagoryName();
 
@@ -620,39 +648,39 @@ public class QuotationPDFCreator
         {
             if(cname.equals("K") )
             {
-                if(unit.title.contains("Base unit")||
-                        unit.title.contains("N - Base Units") ||
-                        unit.title.contains("N - Drawer Units") ||
-                        unit.title.contains("N - Drawer") ||
-                        unit.title.contains("N - Open Units") ||
-                        unit.title.contains("N - Panelling") ||
-                        unit.title.contains ("N - WoodWork Add On") ||
-                        unit.title.contains("S - Kitchen Base Corner Units")||
-                        unit.title.contains("S - Kitchen Base Drawer Units") ||
-                        unit.title.contains("S - Kitchen Base Shutter Units") ||
-                        unit.title.contains("S - Kitchen Panels") ||
-                        unit.title.contains("S - Sliding Mechanism") ||
-                        unit.title.contains("S - Sliding Wardrobe 2100") ||
-                        unit.title.contains("S - Sliding Wardrobe 2400") ||
-                        unit.title.contains("S - Storage Module Base Unit") ||
-                        unit.title.contains("S - Wardrobe Panels") ||
-                        unit.title.contains("S - Bathroom Vanity") ||
-                        unit.title.contains("S - Hinged Wardrobe 2100") ||
-                        unit.title.contains("S - Hinged Wardrobe 2400") )
+                if(unit.moduleCategory.contains("Base unit")||
+                        unit.moduleCategory.contains("N - Base Units") ||
+                        unit.moduleCategory.contains("N - Drawer Units") ||
+                        unit.moduleCategory.contains("N - Drawer") ||
+                        unit.moduleCategory.contains("N - Open Units") ||
+                        unit.moduleCategory.contains("N - Panelling") ||
+                        unit.moduleCategory.contains ("N - WoodWork Add On") ||
+                        unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                        unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Panels") ||
+                        unit.moduleCategory.contains("S - Sliding Mechanism") ||
+                        unit.moduleCategory.contains("S - Sliding Wardrobe 2100") ||
+                        unit.moduleCategory.contains("S - Sliding Wardrobe 2400") ||
+                        unit.moduleCategory.contains("S - Storage Module Base Unit") ||
+                        unit.moduleCategory.contains("S - Wardrobe Panels") ||
+                        unit.moduleCategory.contains("S - Bathroom Vanity") ||
+                        unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
+                        unit.moduleCategory.contains("S - Hinged Wardrobe 2400") )
                 {
-                    if(unit.title.contains("N - Base Units") || unit.title.contains("S - Kitchen Base Corner Units")||
-                            unit.title.contains("S - Kitchen Base Drawer Units") ||
-                            unit.title.contains("S - Kitchen Base Shutter Units") ||
-                            unit.title.contains("Base unit") ||  unit.title.contains("S - Storage Module Base Unit")) {
+                    if(unit.moduleCategory.contains("N - Base Units") || unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                            unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
+                            unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
+                            unit.moduleCategory.contains("Base unit") ||  unit.moduleCategory.contains("S - Storage Module Base Unit")) {
 
                         KBmodulecount += unit.moduleCount;
                         String width = unit.getDimensions();
                         basewidth=  basewidth + " , " +width;
                         kbList.add(new String(width));
-                        if(unit.title.contains("S - Kitchen Base Corner Units")||
-                                unit.title.contains("S - Kitchen Base Drawer Units") ||
-                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit") ||
-                                unit.title.contains("Base unit") )
+                        if(unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                                unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
+                                unit.moduleCategory.contains("S - Kitchen Base Shutter Units") || unit.moduleCategory.contains("S - Storage Module Base Unit") || unit.moduleCategory.contains("Base unit") )
+
                         {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -671,14 +699,14 @@ public class QuotationPDFCreator
                         caption="Kitchen Base Unit"; // + " - " +unit.getDimensions();
                     }
                 }
-                else if (unit.title.contains("Wall unit")||
-                        unit.title.contains("S - Kitchen Wall Corner Units")||
-                        unit.title.contains("S - Kitchen Wall Flap Up Units") ||
-                        unit.title.contains("S - Kitchen Wall Open Units") ||
-                        unit.title.contains("S - Kitchen Wall Shutter Units")||
-                        unit.title.contains("S - Storage Module Wall Unit")||
-                        unit.title.contains("S - Wall Open Units") ||
-                        unit.title.contains ("N - Wall Units") )
+                else if (unit.moduleCategory.contains("Wall unit")||
+                        unit.moduleCategory.contains("S - Kitchen Wall Corner Units")||
+                        unit.moduleCategory.contains("S - Kitchen Wall Flap Up Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Wall Open Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Wall Shutter Units")||
+                        unit.moduleCategory.contains("S - Storage Module Wall Unit")||
+                        unit.moduleCategory.contains("S - Wall Open Units") ||
+                        unit.moduleCategory.contains ("N - Wall Units") )
                 {
 
                     KWmoduleCount += unit.moduleCount;
@@ -688,7 +716,7 @@ public class QuotationPDFCreator
                     KWfinishtype = product.getProduct().getFinishType();
                     KWamount += unit.amount;
 
-                    if(!unit.title.contains ("N - Wall Units")) {
+                    if(!unit.moduleCategory.contains ("N - Wall Units")) {
                         kwwidthSum = kwwidthSum + unit.getWidth();
                         kwheightSum = unit.getHeight();
                         kwdepthSum = unit.getDepth();
@@ -705,7 +733,7 @@ public class QuotationPDFCreator
                     wallwidth=wallwidth + " , " +width ;
                     kwList.add(new String(width));
                 }
-                else if (unit.title.contains("Tall unit") || unit.title.contains("S - Kitchen Tall Units") ||  unit.title.contains ("N - Tall/Semi Tall Units"))
+                else if (unit.moduleCategory.contains("Tall unit") || unit.moduleCategory.contains("S - Kitchen Tall Units") ||  unit.moduleCategory.contains ("N - Tall/Semi Tall Units"))
                 {
                     KTmoduleCount += unit.moduleCount;
                     KTbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -718,7 +746,7 @@ public class QuotationPDFCreator
                     {
                         caption2="Kitchen Tall Unit";
                     }
-                    if(!unit.title.contains ("N - Tall/Semi Tall Units")) {
+                    if(!unit.moduleCategory.contains ("N - Tall/Semi Tall Units")) {
                     String width = unit.getDimensions();
                     tallwidth=tallwidth + " , " +width;
                     ktList.add(new String(width));
@@ -736,7 +764,7 @@ public class QuotationPDFCreator
 
                 }
 
-                else if(unit.title.contains("S - Kitchen Loft Units") || unit.title.contains("S - Sliding Wardrobe with Loft") || unit.title.contains("S - Wardrobe Lofts"))
+                else if(unit.moduleCategory.contains("S - Kitchen Loft Units") || unit.moduleCategory.contains("S - Sliding Wardrobe with Loft") || unit.moduleCategory.contains("S - Wardrobe Lofts"))
                 {
                     KLmoduleCount += unit.moduleCount;
                     KLbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -761,23 +789,23 @@ public class QuotationPDFCreator
             }
             else if(cname.equals("W"))
             {
-                    if(unit.title.contains("N - Base Units") ||
-                            unit.title.contains("N - Drawer Units") ||
-                            unit.title.contains("N - Drawer") ||
-                            unit.title.contains("N - Open Units") ||
-                            unit.title.contains("N - Panelling") ||
-                            unit.title.contains ("N - WoodWork Add On") ||
-                            unit.title.contains("N - Wall Units") ||
-                            unit.title.contains("S - Sliding Mechanism") ||
-                            unit.title.contains("N - Tall/Semi Tall Units") ||
-                        unit.title.contains("N - Wall Units") ||
-                        unit.title.contains("S - Hinged Wardrobe 2100") ||
-                        unit.title.contains("S - Hinged Wardrobe 2400") ||
-                        unit.title.contains("S - Sliding Wardrobe 2100") ||
-                        unit.title.contains("S - Sliding Wardrobe 2400") ||
-                            unit.title.contains("S - Storage Module Wall Unit") ||
-                            unit.title.contains("S - Storage Module Base Unit") ||
-                        unit.title.contains("S - Wardrobe Panels"))
+                    if(unit.moduleCategory.contains("N - Base Units") ||
+                            unit.moduleCategory.contains("N - Drawer Units") ||
+                            unit.moduleCategory.contains("N - Drawer") ||
+                            unit.moduleCategory.contains("N - Open Units") ||
+                            unit.moduleCategory.contains("N - Panelling") ||
+                            unit.moduleCategory.contains ("N - WoodWork Add On") ||
+                            unit.moduleCategory.contains("N - Wall Units") ||
+                            unit.moduleCategory.contains("S - Sliding Mechanism") ||
+                            unit.moduleCategory.contains("N - Tall/Semi Tall Units") ||
+                            unit.moduleCategory.contains("N - Wall Units") ||
+                            unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
+                            unit.moduleCategory.contains("S - Hinged Wardrobe 2400") ||
+                            unit.moduleCategory.contains("S - Sliding Wardrobe 2100") ||
+                            unit.moduleCategory.contains("S - Sliding Wardrobe 2400") ||
+                            unit.moduleCategory.contains("S - Storage Module Wall Unit") ||
+                            unit.moduleCategory.contains("S - Storage Module Base Unit") ||
+                            unit.moduleCategory.contains("S - Wardrobe Panels"))
                 {
                     WWmodulecount += unit.moduleCount;
                     WWbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -786,7 +814,7 @@ public class QuotationPDFCreator
                     WWfinishtype = product.getProduct().getFinishType();
                     WWamount += unit.amount;
                     captionWardrobe="Wardrobe";
-                    if(!(unit.title.contains ("N")|| unit.title.contains("S - Wardrobe Panels"))) {
+                    if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels"))) {
                         String width = unit.getDimensions();
                         wardrobewidth = wardrobewidth + " , " + width;
                         kwaList.add(new String(width));
@@ -819,7 +847,7 @@ public class QuotationPDFCreator
                 if(cname.equals("W"))
                 {
                     caption4="Wardrobe";
-                    if(!(unit.title.contains ("N")|| unit.title.contains("S - Wardrobe Panels"))) {
+                    if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels"))) {
                         String width = unit.getDimensions();
                         wardrobewidth = wardrobewidth + " , " + width;
                         kwaList.add(new String(width));
@@ -831,7 +859,7 @@ public class QuotationPDFCreator
                 }
                 else if(cname.equals("Storage Modules"))
                 {
-                    caption4="Stroage Modules";
+                    caption4="Storage Modules";
                 }
                 else if(cname.equals("wallpanelling"))
                 {
@@ -1023,6 +1051,21 @@ public class QuotationPDFCreator
         tabname.addCell(cell2);
     }
 
+    private void createRowforAcc(PdfPTable tabname,String index,String title)
+    {
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        cell=new PdfPCell(new Paragraph(title,fsize));
+        tabname.addCell(cell);
+    }
     private void createRowAndFillData(PdfPTable tabname,String index, String title, Double quantity, Double amount, Double total)
     {
         PdfPCell cell;
@@ -1084,11 +1127,16 @@ public class QuotationPDFCreator
         double amount=0.0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
-            this.createRowAndFillData(tabname,ROMAN_SEQUENCE[acSequence], accessory.title);
+            if(accessory.catalog.equals("Primary") || accessory.catalog.equals("Add on")|| accessory.catalog.equals("Standalone add on"))
+            {
+                LOG.info("Acc" +accessory.catalog + "ACC title" +accessory.title);
+                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title);
+                acSequence++;
+                if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
+            }
             amount=amount+(accessory.quantity*accessory.msp);
-            acSequence++;
-            if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
         }
+
         this.createCellWithData(tabname,"Accessory Cost",amount);
         this.createCellWithData(tabname,"WoodWork Cost",amt-amount);
     }
@@ -1128,26 +1176,39 @@ public class QuotationPDFCreator
         this.createSubHeadingRowForCatalog(tabname,"A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
         this.createRowAndFillData(tabname,null, product.getName());
+        series="A." +String.valueOf(sequenceNumber) + ".";
+        this.createSubHeadingRow(tabname,series+ "a",product.getRoomCode());
+        this.createRowAndFillData(tabname, null, "Material : " + product.getBaseCarcassCode() + "\n" +"Finish : " + product.getFinishCode(),1.0,product.getAmount(),product.getAmount());
+        //this.createRowAndFillData(tabname, null, "Finish : " + product.getFinishCode());
+        this.createCellWithData(tabname,"Total Cost",product.getAmount());
+        //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+
+        //currentRow++;
+        //this.createRow(currentRow, this.quoteSheet);
     }
 
     private void createSubHeadingRowForCatalog(PdfPTable tabname, String index, String title,Double quantity, Double amount, Double total)
     {
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+
         PdfPCell cell;
         Paragraph p;
 
+        PdfPCell cell1=new PdfPCell();
+        Paragraph Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+
         cell=new PdfPCell();
-        p=new Paragraph(index,fsize);
-        p.setAlignment(Element.ALIGN_CENTER);
+        p=new Paragraph(title,size1);
+        p.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(p);
         tabname.addCell(cell);
 
-        cell=new PdfPCell();
-        p=new Paragraph(title,fsize);
-        p.setAlignment(Element.ALIGN_CENTER);
-        cell.addElement(p);
-        tabname.addCell(cell);
-
-        cell=new PdfPCell();
+        /*cell=new PdfPCell();
         p=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
         p.setAlignment(Element.ALIGN_RIGHT);
         cell.addElement(p);
@@ -1164,7 +1225,7 @@ public class QuotationPDFCreator
         Paragraph Pamt=new Paragraph(this.getRoundOffValue(String.valueOf(total.intValue())),fsize);
         Pamt.setAlignment(Element.ALIGN_RIGHT);
         cell2.addElement(Pamt);
-        tabname.addCell(cell2);
+        tabname.addCell(cell2);*/
     }
 
     private void fillAddons(PdfPTable tabname,List<ProductAddon> addOns, String emptyMessage)
@@ -1177,7 +1238,10 @@ public class QuotationPDFCreator
         int index = 1;
         for (ProductAddon addon : addOns)
         {
-            this.createRowAndFillData(tabname,String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            if(("Custom Addon").equals (addon.getCategoryCode()))
+                this.createRowAndFillData(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            else
+                 this.createRowAndFillData(tabname,String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             index++;
         }
     }

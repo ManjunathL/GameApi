@@ -807,7 +807,12 @@
       "type": "select",
       "query": "select cityLocked from city_master where proposalId= ?",
       "params": ["proposalId"]
+    },
+    {
+      "id": "addons.addonPriceDetails",
+      "type": "select",
+      "query": "select * from addon_master where code= ?",
+      "params": ["code"]
     }
-
   ]
 }

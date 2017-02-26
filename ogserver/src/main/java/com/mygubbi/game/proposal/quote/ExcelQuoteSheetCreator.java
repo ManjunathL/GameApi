@@ -93,6 +93,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
             case "B.4":
                 this.fillAddons(cell, this.quoteData.getServices(), "No additional services.");
                 break;
+
+            case "B.5":
+                this.fillAddons(cell, this.quoteData.getCustomAddons(), "No additional custom addons.");
+                break;
+
             default:
                 break;
         }
@@ -202,38 +207,38 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         {
             if(cname.equals("K") )
             {
-                if(unit.title.contains("Base unit")||
-                        unit.title.contains("N - Base Units") ||
-                        unit.title.contains("N - Drawer Units") ||
-                        unit.title.contains("N - Drawer") ||
-                        unit.title.contains("N - Open Units") ||
-                        unit.title.contains("N - Panelling") ||
-                        unit.title.contains ("N - WoodWork Add On") ||
-                        unit.title.contains("S - Kitchen Base Corner Units")||
-                        unit.title.contains("S - Kitchen Base Drawer Units") ||
-                        unit.title.contains("S - Kitchen Base Shutter Units") ||
-                        unit.title.contains("S - Kitchen Panels") ||
-                        unit.title.contains("S - Sliding Mechanism") ||
-                        unit.title.contains("S - Sliding Wardrobe 2100") ||
-                        unit.title.contains("S - Sliding Wardrobe 2400") ||
-                        unit.title.contains("S - Storage Module Base Unit") ||
-                        unit.title.contains("S - Wardrobe Panels") ||
-                        unit.title.contains("S - Bathroom Vanity") ||
-                        unit.title.contains("S - Hinged Wardrobe 2100") ||
-                        unit.title.contains("S - Hinged Wardrobe 2400") )
+                if(unit.moduleCategory.contains("Base unit")||
+                        unit.moduleCategory.contains("N - Base Units") ||
+                        unit.moduleCategory.contains("N - Drawer Units") ||
+                        unit.moduleCategory.contains("N - Drawer") ||
+                        unit.moduleCategory.contains("N - Open Units") ||
+                        unit.moduleCategory.contains("N - Panelling") ||
+                        unit.moduleCategory.contains ("N - WoodWork Add On") ||
+                        unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                        unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Panels") ||
+                        unit.moduleCategory.contains("S - Sliding Mechanism") ||
+                        unit.moduleCategory.contains("S - Sliding Wardrobe 2100") ||
+                        unit.moduleCategory.contains("S - Sliding Wardrobe 2400") ||
+                        unit.moduleCategory.contains("S - Storage Module Base Unit") ||
+                        unit.moduleCategory.contains("S - Wardrobe Panels") ||
+                        unit.moduleCategory.contains("S - Bathroom Vanity") ||
+                        unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
+                        unit.moduleCategory.contains("S - Hinged Wardrobe 2400") )
                 {
-                    if(unit.title.contains("N - Base Units") || unit.title.contains("S - Kitchen Base Corner Units")||
-                            unit.title.contains("S - Kitchen Base Drawer Units") ||
-                            unit.title.contains("S - Kitchen Base Shutter Units") ||unit.title.contains("S - Storage Module Base Unit")||
-                            unit.title.contains("Base unit")) {
+                    if(unit.moduleCategory.contains("N - Base Units") || unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                            unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
+                            unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||unit.moduleCategory.contains("S - Storage Module Base Unit")||
+                            unit.moduleCategory.contains("Base unit")) {
                         KBmodulecount += unit.moduleCount;
                         String width = unit.getDimensions();
                         basewidth=  basewidth + " , " +width;
                         kbList.add(new String(width));
 
-                        if(unit.title.contains("S - Kitchen Base Corner Units")||
-                                unit.title.contains("S - Kitchen Base Drawer Units") ||
-                                unit.title.contains("S - Kitchen Base Shutter Units") || unit.title.contains("S - Storage Module Base Unit")  || unit.title.contains("Base unit") )
+                        if(unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                                unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
+                                unit.moduleCategory.contains("S - Kitchen Base Shutter Units") || unit.moduleCategory.contains("S - Storage Module Base Unit")  || unit.moduleCategory.contains("Base unit") )
                                 {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -252,14 +257,14 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                         caption="Kitchen Base Unit"; // + " - " +unit.getDimensions();
                     }
                 }
-                else if (unit.title.contains("Wall unit")||
-                        unit.title.contains("S - Kitchen Wall Corner Units")||
-                        unit.title.contains("S - Kitchen Wall Flap Up Units") ||
-                        unit.title.contains("S - Kitchen Wall Open Units") ||
-                        unit.title.contains("S - Kitchen Wall Shutter Units")||
-                        unit.title.contains("S - Storage Module Wall Unit")||
-                        unit.title.contains("S - Wall Open Units") ||
-                        unit.title.contains ("N - Wall Units") )
+                else if (unit.moduleCategory.contains("Wall unit")||
+                        unit.moduleCategory.contains("S - Kitchen Wall Corner Units")||
+                        unit.moduleCategory.contains("S - Kitchen Wall Flap Up Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Wall Open Units") ||
+                        unit.moduleCategory.contains("S - Kitchen Wall Shutter Units")||
+                        unit.moduleCategory.contains("S - Storage Module Wall Unit")||
+                        unit.moduleCategory.contains("S - Wall Open Units") ||
+                        unit.moduleCategory.contains ("N - Wall Units") )
                 {
                     KWmoduleCount += unit.moduleCount;
                     KWbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -271,7 +276,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                     wallwidth=wallwidth + " , " +width ;
                     kwList.add(new String(width));
 
-                    if(!unit.title.contains ("N - Wall Units"))
+                    if(!unit.moduleCategory.contains ("N - Wall Units"))
                     {
                         kwwidthSum = kwwidthSum + unit.getWidth();
                         kwheightSum = unit.getHeight();
@@ -283,7 +288,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                         caption1="Kitchen Wall Unit";
                     }
                 }
-                else if (unit.title.contains("Tall unit") || unit.title.contains("S - Kitchen Tall Units") ||  unit.title.contains ("N - Tall/Semi Tall Units"))
+                else if (unit.moduleCategory.contains("Tall unit") || unit.moduleCategory.contains("S - Kitchen Tall Units") ||  unit.moduleCategory.contains ("N - Tall/Semi Tall Units"))
                 {
                     KTmoduleCount += unit.moduleCount;
                     KTbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -295,7 +300,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                     {
                         caption2="Kitchen Tall Unit" ;
                     }
-                    if(!unit.title.contains ("N - Tall/Semi Tall Units")) {
+                    if(!unit.moduleCategory.contains ("N - Tall/Semi Tall Units")) {
                     String width = unit.getDimensions();
                     tallwidth=tallwidth + " , " +width;
                     ktList.add(new String(width));
@@ -308,7 +313,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                     }
                 }
 
-                else if(unit.title.contains("S - Kitchen Loft Units") || unit.title.contains("S - Sliding Wardrobe with Loft") || unit.title.contains("S - Wardrobe Lofts"))
+                else if(unit.moduleCategory.contains("S - Kitchen Loft Units") || unit.moduleCategory.contains("S - Sliding Wardrobe with Loft") || unit.moduleCategory.contains("S - Wardrobe Lofts"))
                 {
                     KLmoduleCount += unit.moduleCount;
                     KLbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -335,22 +340,22 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
             }
             else if(cname.equals("W"))
             {
-                    if(unit.title.contains("N - Base Units") ||
-                            unit.title.contains("N - Drawer Units") ||
-                            unit.title.contains("N - Drawer") ||
-                            unit.title.contains("N - Open Units") ||
-                            unit.title.contains("N - Panelling") ||
-                            unit.title.contains ("N - WoodWork Add On") ||
-                            unit.title.contains("S - Sliding Mechanism") ||
-                            unit.title.contains("N - Tall/Semi Tall Units") ||
-                            unit.title.contains("N - Wall Units") ||
-                            unit.title.contains("S - Hinged Wardrobe 2100") ||
-                            unit.title.contains("S - Hinged Wardrobe 2400") ||
-                            unit.title.contains("S - Sliding Wardrobe 2100") ||
-                            unit.title.contains("S - Sliding Wardrobe 2400") ||
-                            unit.title.contains("S - Storage Module Wall Unit") ||
-                            unit.title.contains("S - Storage Module Base Unit") ||
-                            unit.title.contains("S - Wardrobe Panels"))
+                    if(unit.moduleCategory.contains("N - Base Units") ||
+                            unit.moduleCategory.contains("N - Drawer Units") ||
+                            unit.moduleCategory.contains("N - Drawer") ||
+                            unit.moduleCategory.contains("N - Open Units") ||
+                            unit.moduleCategory.contains("N - Panelling") ||
+                            unit.moduleCategory.contains ("N - WoodWork Add On") ||
+                            unit.moduleCategory.contains("S - Sliding Mechanism") ||
+                            unit.moduleCategory.contains("N - Tall/Semi Tall Units") ||
+                            unit.moduleCategory.contains("N - Wall Units") ||
+                            unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
+                            unit.moduleCategory.contains("S - Hinged Wardrobe 2400") ||
+                            unit.moduleCategory.contains("S - Sliding Wardrobe 2100") ||
+                            unit.moduleCategory.contains("S - Sliding Wardrobe 2400") ||
+                            unit.moduleCategory.contains("S - Storage Module Wall Unit") ||
+                            unit.moduleCategory.contains("S - Storage Module Base Unit") ||
+                            unit.moduleCategory.contains("S - Wardrobe Panels"))
                     {
                         WWmodulecount += unit.moduleCount;
                         WWbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -359,7 +364,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                         WWfinishtype = product.getProduct().getFinishType();
                         WWamount += unit.amount;
                         captionWardrobe="Wardrobe";
-                        if(!(unit.title.contains ("N")|| unit.title.contains("S - Wardrobe Panels"))) {
+                        if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels"))) {
                             String width = unit.getDimensions();
                             wardrobewidth = wardrobewidth + " , " + width;
                             kwaList.add(new String(width));
@@ -392,18 +397,18 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 if(cname.equals("W"))
                 {
                     caption4="Wardrobe";
-                    if(unit.title.contains("N - Base Units") ||
-                            unit.title.contains("N - Drawer Units") ||
-                            unit.title.contains("N - Drawer") ||
-                            unit.title.contains("N - Open Units") ||
-                            unit.title.contains("N - Panelling") ||
-                            unit.title.contains ("N - WoodWork Add On") ||
-                            unit.title.contains("N - Wall Units") ||
-                            unit.title.contains("N - Tall/Semi Tall Units") ||
-                            unit.title.contains("N - Wall Units")) {
+                    if(unit.moduleCategory.contains("N - Base Units") ||
+                            unit.moduleCategory.contains("N - Drawer Units") ||
+                            unit.moduleCategory.contains("N - Drawer") ||
+                            unit.moduleCategory.contains("N - Open Units") ||
+                            unit.moduleCategory.contains("N - Panelling") ||
+                            unit.moduleCategory.contains ("N - WoodWork Add On") ||
+                            unit.moduleCategory.contains("N - Wall Units") ||
+                            unit.moduleCategory.contains("N - Tall/Semi Tall Units") ||
+                            unit.moduleCategory.contains("N - Wall Units")) {
 
                     }else {
-                      if(!(unit.title.contains ("N")|| unit.title.contains("S - Wardrobe Panels"))) {
+                      if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels"))) {
                         String width = unit.getDimensions();
                         wardrobewidth = wardrobewidth + " , " + width;
                           kwaList.add(new String(width));
@@ -416,7 +421,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 }
                 else if(cname.equals("Storage Modules"))
                 {
-                    caption4="Stroage Modules";
+                    caption4="Storage Modules";
                 }
                 else if(cname.equals("wallpanelling"))
                 {
@@ -623,15 +628,25 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
     {
         int currentRow = startRow;
 
-        this.createSubHeadingRowForCatalog(currentRow, "A." +String.valueOf(sequenceNumber), product.getTitle(), Double.valueOf(product.getQuantity()),
+        this.createSubHeadingRowForCatalog(currentRow, "A." +String.valueOf(sequenceNumber),product.getTitle(), Double.valueOf(product.getQuantity()),
                 product.getRate(), (double) Math.round(product.getAmount()));
 
-        currentRow++;
-        this.createRowAndFillData(currentRow, null, product.getName());
-
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+        series="A." +String.valueOf(sequenceNumber) + ".";
 
         currentRow++;
+        this.createSubHeadingRow(currentRow,series+ "a",product.getRoomCode());
+
+        currentRow++;
+        this.createRowAndFillData(currentRow, null, "Material : " + product.getBaseCarcassCode(),1.0,product.getAmount(),product.getAmount());
+
+        currentRow++;
+        this.createRowAndFillData(currentRow, null, "Finish : " + product.getFinishCode());
+
+        currentRow++;
+        this.createRowAndFillData(currentRow,"Total Cost",product.getAmount());
+        //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
+
+        //currentRow++;
         this.createRow(currentRow, this.quoteSheet);
 
         return currentRow;
@@ -639,6 +654,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
     private int fillAssembledProductAccessories(List<AssembledProductInQuote.Accessory> accessories, int currentRow, String unitSequenceLetter)
     {
+
         if (accessories == null || accessories.isEmpty())
         {
             return currentRow;
@@ -649,11 +665,16 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         double amount=0.0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
-            currentRow++;
-            this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
+            if(accessory.catalog.equals("Primary") || accessory.catalog.equals("Add on")||accessory.catalog.equals("Standalone add on"))
+            {
+                currentRow++;
+                LOG.info("Acc" +accessory.catalog + "ACC title" +accessory.title);
+                this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
+                acSequence++;
+                if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
+            }
             amount=amount+(accessory.quantity*accessory.msp);
-            acSequence++;
-            if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
+
         }
         /*currentRow++;
         LOG.info("After Merge2 " +currentRow);
@@ -792,11 +813,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
     private void createSubHeadingRowForCatalog(int rowNum, String index, String title,Double quantity, Double amount, Double total)
     {
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
-        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index);
-        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
-        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getTitleStyle());
+       /* this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
         this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, amount).setCellStyle(this.styles.getTitleStyle());
-        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC,total).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC,total).setCellStyle(this.styles.getTitleStyle());*/
     }
     private void createRowAndFillDataNew(int rowNum, String index, String title, Double quantity, Double amount, Double total)
     {
@@ -875,7 +896,10 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         int index = 1;
         for (ProductAddon addon : addOns)
         {
-            this.createRowAndFillData(currentRow, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            if(("Custom Addon").equals (addon.getCategoryCode()))
+                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            else
+                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             currentRow++;
             index++;
         }
