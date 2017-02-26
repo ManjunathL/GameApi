@@ -528,6 +528,26 @@
       "params":["code"],
       "resultfields":[],
       "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/workbench/codelookup",
+      "source": "db",
+      "query":"code.codelookup",
+      "params":["lookupType"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/workbench/additionalcodelookup",
+      "source": "db",
+      "query":"code.additionalcodelookup",
+      "params":["lookupType","additionalType"],
+      "resultfields":[],
+      "default": "[]"
     }
+
+
   ]
 }

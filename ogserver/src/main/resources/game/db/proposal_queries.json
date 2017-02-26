@@ -813,6 +813,18 @@
       "type": "select",
       "query": "select * from addon_master where code= ?",
       "params": ["code"]
+    },
+    {
+      "id": "code.codelookup",
+      "type": "select",
+      "query": "select * from code_master where lookupType = ?",
+      "params": ["lookupType"]
+    },
+    {
+      "id": "code.additionalcodelookup",
+      "type": "select",
+      "query": "select * from code_master where lookupType = ? and additionalType = ?",
+      "params": ["lookupType", "additionalType"]
     }
   ]
 }
