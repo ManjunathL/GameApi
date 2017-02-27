@@ -546,7 +546,33 @@
       "params":["lookupType","additionalType"],
       "resultfields":[],
       "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/accdetails",
+      "source": "db",
+      "query":"accessory.details",
+      "params":["apcode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/acchwdetails",
+      "source": "db",
+      "query":"accessory.hwdetails",
+      "params":["apcode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/accratedetails",
+      "source": "db",
+      "query":"accessory.ratedetails",
+      "params":["code"],
+      "resultfields":[],
+      "default": "[]"
     }
+
 
   ]
 }

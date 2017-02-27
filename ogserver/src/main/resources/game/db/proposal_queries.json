@@ -825,6 +825,28 @@
       "type": "select",
       "query": "select * from code_master where lookupType = ? and additionalType = ?",
       "params": ["lookupType", "additionalType"]
+    },
+
+    {
+      "id": "accessory.details",
+      "type": "select",
+      "table": "acc_pack_components",
+      "query": "select apcode,type,code from acc_pack_components where apcode=? and type='A'",
+      "params": ["apcode"]
+    },
+    {
+      "id": "accessory.hwdetails",
+      "type": "select",
+      "table": "acc_pack_components",
+      "query": "select apcode,type,code from acc_pack_components where apcode=? and type='H'",
+      "params": ["apcode"]
+    },
+    {
+      "id": "accessory.ratedetails",
+      "type": "select",
+      "table": "acc_hw_master",
+      "query": "select id,type,code,title,make,category,imagePath,uom,cp,mrp,msp from acc_hw_master where code=?",
+      "params": ["code"]
     }
   ]
 }
