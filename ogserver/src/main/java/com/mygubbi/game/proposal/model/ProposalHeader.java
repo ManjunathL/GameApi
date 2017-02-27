@@ -83,9 +83,19 @@ public class ProposalHeader extends JsonObject
     public String getProjectCity()
     {
         return this.getString(PROJECT_CITY);
-    }  public Date getPriceDate()
+    }
+
+
+    public Date getPriceDate()
     {
-        return Date.valueOf((PRICE_DATE));
+        Object value = this.getValue(PRICE_DATE);
+        if (value == null)
+        {
+            value = new Date(System.currentTimeMillis());
+            return (Date) value;
+
+        }
+        return (Date) value;
     }
 
     public String getCrmId()
