@@ -53,8 +53,8 @@
       "id": "proposal.updateversion",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set title = ?,finalAmount = ? , status = ? , internalStatus = ?, remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , amount = ?,date = ? where version = ? and proposalId = ? ",
-      "params": ["title","finalAmount", "status", "internalStatus", "remarks","fromVersion" , "discountAmount" , "discountPercentage","amount","date","version","proposalId"]
+      "query": "update version_master set title = ?,finalAmount = ? , status = ? , internalStatus = ?, remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , amount = ? where version = ? and proposalId = ? ",
+      "params": ["title","finalAmount", "status", "internalStatus", "remarks","fromVersion" , "discountAmount" , "discountPercentage","amount","version","proposalId"]
     },
 
     {
@@ -92,8 +92,8 @@
       "id": "version.createdraft",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount, date) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, '',0.0,0.0,0.0,?)",
-      "params": ["fromVersion", "proposalId", "title", "date"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, '',0.0,0.0,0.0)",
+      "params": ["fromVersion", "proposalId", "title"]
     },
 
     {
@@ -164,8 +164,8 @@
       "id": "version.createversion",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,date) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?, ?)",
-      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount","date"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?)",
+      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount"]
     },
 
     {

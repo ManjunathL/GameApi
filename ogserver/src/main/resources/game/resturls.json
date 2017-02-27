@@ -119,7 +119,7 @@
       "uri": "/gapi/proposal/updateversion",
       "source": "db",
       "query":"proposal.updateversion",
-      "params":["title","finalAmount","status","internalStatus","remarks","version","discountAmount","discountPercentage","amount","date","proposalId","fromVersion"],
+      "params":["title","finalAmount","status","internalStatus","remarks","version","discountAmount","discountPercentage","amount","proposalId","fromVersion"],
       "resultfields":[],
       "default": "[]"
     },
@@ -547,7 +547,6 @@
       "resultfields":[],
       "default": "[]"
     }
-
 
   ]
 }
