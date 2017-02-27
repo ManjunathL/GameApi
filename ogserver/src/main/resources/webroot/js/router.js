@@ -132,6 +132,8 @@ define([
             'kitchen-material(/)': 'kitchenMaterial',
             'payment(/)': 'payment',
             'my_account(/)': 'my_account',
+            'my_nest(/)': 'my_nest',
+            'my_settings(/)': 'my_settings',
             'online-payment(/)': 'online_payment',
             'paysuccess-:txnId(/)': 'online_payment_success',
             'payfailure-:txnId(/)': 'online_payment_failure',
@@ -493,6 +495,18 @@ define([
                 setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
                 require(['/js/views/my_account/my_account.js'], function(MyAccountPage) {
                     VM.create(VM.MYACCOUNTPAGE, MyAccountPage).render();
+                });
+            });
+            router.on('route:my_nest', function(actions) {
+                setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                require(['/js/views/my_account/my_nest.js'], function(MyNestPage) {
+                    VM.create(VM.MYNESTPAGE, MyNestPage).render();
+                });
+            });
+            router.on('route:my_settings', function(actions) {
+                setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                require(['/js/views/my_account/my_settings.js'], function(MySettingsPage) {
+                    VM.create(VM.MYSETTINGSPAGE, MySettingsPage).render();
                 });
             });
             router.on('route:online_payment', function(actions) {

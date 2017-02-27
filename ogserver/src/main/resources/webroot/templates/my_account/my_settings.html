@@ -1,70 +1,94 @@
-<section class="row">
-    <div class="col-md-12 col-sm-12">
-        <div class="bg-white portfolio-box padding-top15 padding-bottom15">
-
-            <form id="changeUserPasswordForm" name="changeUserPasswordData" data-toggle="validator" role="form">
-
-                <div id="success_row" class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <p id="success" class="font-size12 align-center"></p>
+<link rel="stylesheet" href="/css/cep.css">
+<section class="bg-light-gray user_page padding50-0">
+    <div class="container user_profile111">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="bg-white portfolio-box padding-top15 padding-bottom15">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <img id="user_profile_image" class="main_profile_img img-responsive img-centered width80" src="<%= userProfile ? userProfile.profileImage : 'https://res.cloudinary.com/mygubbi/image/upload/v1484131794/cep/user_new.png' %>">
+                            <!--<form id="upload-file-frm" class="edit_mode form-group upload-pic-form" method = "post" enctype="multipart/form-data">
+                                <span id="fileselector">
+                                    <label for="upload-file-selector">
+                                        <input id="upload-file-selector" type="file">
+                                        <i class="fa fa-2x fa-camera camera-op"></i>
+                                    </label>
+                                </span>
+                            </form>-->
+                        </div>
                     </div>
+                    <h5 class="userName"><%= userProfile ? userProfile.displayName : 'User' %></h5>
+                    <h6 class="userCity"><%= userProfile ? userProfile.city : ''%></h6>
                 </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 ">
+                <div class="bg-white portfolio-box padding-top15 padding-bottom15">
 
-                <div id="error_row" class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <p id="error" class="error-class font-size12 align-center"></p>
-                    </div>
+                    <form id="changeUserPasswordForm" name="changeUserPasswordData" data-toggle="validator" role="form">
+
+                        <div id="success_row" class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <p id="success" class="font-size12 align-center"></p>
+                            </div>
+                        </div>
+
+                        <div id="error_row" class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <p id="error" class="error-class font-size12 align-center"></p>
+                            </div>
+                        </div>
+
+                        <div id="chng_passwd_form">
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                                    <label> Old Password :</label>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+                                    <input
+                                            type="password"
+                                            class="form-control"
+                                            id="old_password"
+                                            pattern=".{6,}" required />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                                    <label> New Password :</label>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+                                    <input type="password"  class="form-control" id="new_password"  pattern=".{6,}" required />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                                    <label> Confirm Password :</label>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+                                    <input type="password" class="form-control" id="confirm_password" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-xs-6 form-group">
+                                    <button class="button border1px" type="submit" id="set_password" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Set Password">
+                                        Set Password
+                                    </button>
+                                    <button class="button border1px" id="cancel_chng_pswd">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
                 </div>
-
-                <div id="chng_passwd_form">
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
-                            <label> Old Password :</label>
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-6 form-group">
-                            <input
-                                    type="password"
-                                    class="form-control"
-                                    id="old_password"
-                                    pattern=".{6,}" required />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
-                            <label> New Password :</label>
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-6 form-group">
-                            <input type="password"  class="form-control" id="new_password"  pattern=".{6,}" required />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
-                            <label> Confirm Password :</label>
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-6 form-group">
-                            <input type="password" class="form-control" id="confirm_password" required>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3 col-xs-6 profile-label">
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-6 form-group">
-                            <button class="button border1px" type="submit" id="set_password" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Set Password">
-                                Set Password
-                            </button>
-                            <button class="button border1px" id="cancel_chng_pswd">
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </form>
-
+            </div>
         </div>
     </div>
 </section>

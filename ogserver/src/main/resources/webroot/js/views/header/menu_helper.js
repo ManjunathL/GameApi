@@ -149,6 +149,7 @@ define([
 
               $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
               console.log('Sign-in successful');
+              //window.location = '/my_account';
             }, function(error) {
               // An error happened.
               $('#login_error').html("The password is invalid. Please enter a correct password.");
