@@ -24,14 +24,13 @@ import java.sql.Date;
 public class ProposalAddonHandler extends AbstractRouteHandler {
     private final static Logger LOG = LogManager.getLogger(ProposalAddonHandler.class);
 
-    Date priceDate;
 
     public ProposalAddonHandler(Vertx vertx) {
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/createnew").handler(this::copyAddonsFromVersion);
         this.post("/createnewfromoldproposal").handler(this::copyAddonsFromOldProposal);
-        this.get("/getprice").handler(this::getAddonPrice);
+        this.get("/getprice").handler(this::getAddonPriceThroughGetMethod);
 
     }
 
@@ -76,22 +75,23 @@ public class ProposalAddonHandler extends AbstractRouteHandler {
                 });
     }
 
-    private void getAddonPrice(RoutingContext routingContext) {
-        String versionJson1 = routingContext.get("code");
-        String versionJson2 = routingContext.get("priceDate");
-        String versionJson3 = routingContext.get("city");
 
-        LOG.debug("COde :" + versionJson1 + "|" + versionJson2 + "|" + versionJson3 + "|" );
+    private void getAddonPriceThroughGetMethod(RoutingContext context) {
+        String code = context.request().getParam("code");
+        String priceDate = context.request().getParam("priceDate");
+        String city = context.request().getParam("city");
 
+        getAddonPrice(context, code, Date.valueOf(priceDate.substring(0, 9)), city);
 
-       this.priceDate = Date.valueOf(versionJson2.substring(0, 9));
+    }
 
-        PriceMaster addonRate = RateCardService.getInstance().getAddonRate(versionJson1, this.priceDate, versionJson3);
+    private void getAddonPrice(RoutingContext routingContext, String code, Date priceDate, String city) {
+        PriceMaster addonRate = RateCardService.getInstance().getAddonRate(code, priceDate, city);
         if (addonRate == null || addonRate.getPrice() == 0) {
              LOG.error("Error in retrieving addon price");
+            sendError(routingContext, "Error in retrieving addon price.");
         } else {
-            sendJsonResponse(routingContext, addonRate.toString());
+            sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
-
     }
 }

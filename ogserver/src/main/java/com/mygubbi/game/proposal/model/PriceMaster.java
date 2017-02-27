@@ -32,8 +32,8 @@ public class PriceMaster {
 
     public PriceMaster(JsonObject json)
     {
-        Date fromDateInSql = Date.valueOf(json.getValue(FROM_DATE).toString().substring(0, 9));
-        Date toDateInSql = Date.valueOf(json.getValue(TO_DATE).toString().substring(0, 9));
+        Date fromDateInSql = Date.valueOf(json.getValue(FROM_DATE).toString().substring(0, 10));
+        Date toDateInSql = Date.valueOf(json.getValue(TO_DATE).toString().substring(0, 10));
 
         this.setRateType(json.getString(RATE_TYPE))
                 .setRateId(json.getString(RATE_ID))
@@ -119,5 +119,11 @@ public class PriceMaster {
                 ", fromDate=" + fromDate +
                 ", toDate=" + toDate +
                 '}';
+    }
+
+    public JsonObject toJson()
+    {
+        return new JsonObject().put("rateType", this.rateType).put("rateId", this.rateId).put("city", this.city).put("price", this.price)
+                .put("fromDate", this.fromDate.toString()).put("toDate", this.toDate.toString());
     }
 }

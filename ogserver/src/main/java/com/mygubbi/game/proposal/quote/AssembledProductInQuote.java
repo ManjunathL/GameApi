@@ -8,7 +8,6 @@ import com.mygubbi.game.proposal.model.ModulePanel;
 import com.mygubbi.game.proposal.model.ShutterFinish;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.PanelComponent;
-import com.sun.org.apache.xml.internal.resolver.Catalog;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jooq.lambda.Seq;

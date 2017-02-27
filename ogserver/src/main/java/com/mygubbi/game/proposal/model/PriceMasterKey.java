@@ -6,7 +6,7 @@ package com.mygubbi.game.proposal.model;
 public class PriceMasterKey {
 
     public static final String RATECARD_TYPE = "R";
-    public static final String ADDON_TYPE = "A";
+    public static final String ADDON_TYPE = "D";
     public static final String ACESSORY_TYPE = "A";
     public static final String HARDWARE_TYPE = "H";
 
