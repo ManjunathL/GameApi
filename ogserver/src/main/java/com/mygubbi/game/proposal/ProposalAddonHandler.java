@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.common.DateUtil;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
@@ -81,7 +82,7 @@ public class ProposalAddonHandler extends AbstractRouteHandler {
         String priceDate = context.request().getParam("priceDate");
         String city = context.request().getParam("city");
 
-        getAddonPrice(context, code, Date.valueOf(priceDate.substring(0, 9)), city);
+        getAddonPrice(context, code, DateUtil.convertDate(priceDate), city);
 
     }
 

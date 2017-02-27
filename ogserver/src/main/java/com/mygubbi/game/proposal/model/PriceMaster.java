@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.model;
 
+import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,8 +33,8 @@ public class PriceMaster {
 
     public PriceMaster(JsonObject json)
     {
-        Date fromDateInSql = Date.valueOf(json.getValue(FROM_DATE).toString().substring(0, 10));
-        Date toDateInSql = Date.valueOf(json.getValue(TO_DATE).toString().substring(0, 10));
+        Date fromDateInSql = DateUtil.convertDate(json.getString(FROM_DATE));
+        Date toDateInSql = DateUtil.convertDate(json.getString(TO_DATE));;
 
         this.setRateType(json.getString(RATE_TYPE))
                 .setRateId(json.getString(RATE_ID))
