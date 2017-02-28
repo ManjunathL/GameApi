@@ -270,7 +270,7 @@ public class AssembledProductInQuote
 
     private void addToAccessoryPackPanels(ModulePanel carcassPanel, double quantity, String unit, int seq)
     {
-        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","No catalog code");
+        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","NA");
         this.accessoryPackPanels.add(part);
     }
 

@@ -413,7 +413,7 @@
 
     {
       "id": "proposal.product.updateVersionOnConfirm",
-      "type": "insert",
+      "type": "update",
       "table": "proposal_product",
       "query": "update proposal_product set fromVersion = ? where proposalId = ? and fromVersion = ?",
       "params": ["version","proposalId","fromVersion"]
@@ -449,6 +449,14 @@
       "table": "proposal_addon",
       "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy from proposal_addon where proposalId = ? and fromVersion = ? ",
       "params": ["proposalId","version","oldProposalId","toVersion"]
+    },
+
+    {
+      "id": "proposal.addon.updateVersionOnConfirm",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set fromVersion = ? where proposalId = ? and fromVersion = ?",
+      "params": ["version","proposalId","fromVersion"]
     },
 
     {
