@@ -3,6 +3,7 @@ package com.mygubbi.game.proposal.price;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ModuleAccessoryPack;
 import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ModuleForPrice;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
 import io.vertx.core.json.JsonArray;
@@ -53,6 +54,9 @@ public class ModulePriceHolder
     private String moduleCode;
     private String moduleType;
 
+    private java.sql.Date priceDate;
+    private String city;
+
     private JsonArray errors = null;
 
 
@@ -61,9 +65,19 @@ public class ModulePriceHolder
 
     }
 
-    public ModulePriceHolder(ProductModule productModule)
+    public ModulePriceHolder(ModuleForPrice moduleForPrice)
+    {
+        this.productModule = moduleForPrice.getModule();
+        this.priceDate = moduleForPrice.getPriceDate();
+        this.city = moduleForPrice.getCity();
+    }
+
+    public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date)
     {
         this.productModule = productModule;
+        this.city = city;
+        this.priceDate = date;
+
     }
 
     public Collection<ModuleComponent> getModuleComponents()
@@ -163,7 +177,7 @@ public class ModulePriceHolder
         AccHwComponent accessoryComponent = this.getAccessoryComponent(component.getComponentCode());
         if (accessoryComponent != null)
         {
-            this.accessoryComponents.add(new AccessoryComponent(accessoryComponent, component));
+            this.accessoryComponents.add(new AccessoryComponent(accessoryComponent, component,this.priceDate,this.city));
         }
     }
 
@@ -172,7 +186,7 @@ public class ModulePriceHolder
         AccHwComponent hardwareComponent = this.getHardwareComponent(component.getComponentCode());
         if (hardwareComponent != null)
         {
-            this.hardwareComponents.add(new HardwareComponent(hardwareComponent, this.productModule, component, accPackCode));
+            this.hardwareComponents.add(new HardwareComponent(hardwareComponent, this.productModule, component, accPackCode, this.city,this.priceDate));
         }
     }
 
@@ -226,17 +240,20 @@ public class ModulePriceHolder
         this.carcassFinish = ModuleDataService.getInstance().getFinish(productModule.getCarcassCode(), productModule.getFinishCode());
 
         String carcassCode = StringUtils.isEmpty(this.mgModule.getMaterial()) ? productModule.getCarcassCode() : this.mgModule.getMaterial();
-        this.carcassMaterialRateCard = RateCardService.getInstance().getRateCard(carcassCode, RateCard.CARCASS_TYPE);
+        this.carcassMaterialRateCard = RateCardService.getInstance().getRateCard(carcassCode, RateCard.CARCASS_TYPE,this.priceDate, this.city);
 
-        this.carcassFinishRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE);
-        this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE);
+        this.carcassFinishRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
+        this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
 
-        this.carcassDoubleExposedRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getDoubleExposedCostCode(), RateCard.SHUTTER_TYPE);
-        this.shutterDoubleExposedRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getDoubleExposedCostCode(), RateCard.SHUTTER_TYPE);
+        this.carcassDoubleExposedRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getDoubleExposedCostCode(),
+                RateCard.SHUTTER_TYPE,this.priceDate, this.city);
+        this.shutterDoubleExposedRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getDoubleExposedCostCode(),
+                RateCard.SHUTTER_TYPE,this.priceDate, this.city);
 
-        this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE);
-        this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE);
-        this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD, RateCard.FACTOR_TYPE);
+        this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
         if (carcassMaterialRateCard == null || carcassFinishRateCard == null || shutterFinishRateCard == null
                 || loadingFactorCard == null || labourRateCard == null || nonStandardloadingFactorCard == null)

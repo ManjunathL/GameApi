@@ -2,15 +2,18 @@ package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.*;
-import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.game.proposal.model.AccHwComponent;
+import com.mygubbi.game.proposal.model.AccessoryPackComponent;
+import com.mygubbi.game.proposal.model.ModulePanel;
+import com.mygubbi.game.proposal.model.ShutterFinish;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.PanelComponent;
-import com.sun.org.apache.xml.internal.resolver.Catalog;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,9 +47,13 @@ public class AssembledProductInQuote
 
     private double addonsAmount;
     private String shutterMaterial;
+    private String city;
+    private java.sql.Date priceDate;
 
-    public AssembledProductInQuote(ProductLineItem product)
+    public AssembledProductInQuote(ProductLineItem product, String city, Date date)
     {
+        this.city = city;
+        this.priceDate = date;
         this.product = product;
         this.prepare();
     }
@@ -175,7 +182,7 @@ public class AssembledProductInQuote
 
         for (ProductModule module : this.product.getModules())
         {
-            ModulePriceHolder priceHolder = new ModulePriceHolder(module);
+            ModulePriceHolder priceHolder = new ModulePriceHolder(module,this.city,this.priceDate);
             priceHolder.prepare();
             if (priceHolder.hasErrors())
             {

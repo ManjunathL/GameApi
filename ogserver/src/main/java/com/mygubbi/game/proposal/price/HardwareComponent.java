@@ -4,6 +4,11 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.AccHwComponent;
 import com.mygubbi.game.proposal.model.IModuleComponent;
+import com.mygubbi.game.proposal.model.PriceMaster;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.Date;
 
 /**
  * Created by Sunil on 09-09-2016.
@@ -14,13 +19,20 @@ public class HardwareComponent
     private double quantity;
     private String quantityFormula;
     private String accPackCode;
+    private Date priceDate;
+    private String city;
 
-    public HardwareComponent(AccHwComponent component, ProductModule productModule, IModuleComponent moduleComponent, String accPackCode)
+    private final static Logger LOG = LogManager.getLogger(PriceMaster.class);
+
+
+    public HardwareComponent(AccHwComponent component, ProductModule productModule, IModuleComponent moduleComponent, String accPackCode, String city, Date priceDate)
     {
         this.component = component;
         this.quantity = this.calculateQuantity(productModule, moduleComponent);
         this.quantityFormula = moduleComponent.isCalculatedQuantity() ? moduleComponent.getQuantityFormula() : "Fixed Quantity";
         this.accPackCode = accPackCode;
+        this.priceDate = priceDate;
+        this.city = city;
     }
 
     public AccHwComponent getComponent()
@@ -40,7 +52,9 @@ public class HardwareComponent
 
     public double getCost()
     {
-        return this.component.getPrice() * this.quantity;
+        LOG.debug("hardware component : " + component.toString());
+        PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(component.getCode(), this.priceDate, this.city);
+        return hardwareRate.getPrice() * this.quantity;
     }
 
     private double calculateQuantity(ProductModule productModule, IModuleComponent moduleComponent)
