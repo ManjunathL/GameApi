@@ -35,6 +35,7 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9">
                 <div class="bg-white portfolio-box padding-top15 padding-bottom15 position-relative">
+
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12" id="saveErr" style="display:none;">
                             <div class="alert alert-danger fade in">
@@ -43,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12" id="saveSuccss" style="display:none;">
                             <div class="alert alert-success fade in">
@@ -51,23 +53,21 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="edit_icon_div">
-            <span class="glyphicon glyphicon-pencil edit_icon"
-                  data-toggle="tooltip"
-                  data-placement="left"
-                  title="Edit Details">
-            </span>
+                        <span class="glyphicon glyphicon-pencil edit_icon" data-toggle="tooltip" data-placement="left" title="Edit Details">
+                        </span>
                     </div>
+
                     <div class="row">
-                        <form id="editDetailsForm" method="post">
+                        <form class="padding10" id="editDetailsForm" method="post">
                             <div class="col-md-6 col-lg-6">
 
-
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                                        <label>Name :</label>
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label> Name : </label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.displayName : 'User' %></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -84,10 +84,10 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>Contact :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.phone : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -106,10 +106,10 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>Occupation :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.occupation : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -123,11 +123,12 @@
                                         </p>
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>Interest :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.interest : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -141,11 +142,12 @@
                                         </p>
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
-                                        <label>Address :</label>
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label> Address :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.address : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -159,11 +161,12 @@
                                         </p>
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>State :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.state : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -185,10 +188,10 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>Email :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6 ">
+                                    <div class="col-md-7 col-sm-7 col-xs-7 ">
                                         <p class="view_mode"><%= userProfile ? userProfile.email : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -205,10 +208,10 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>Alternate Contact :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.altPhone : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -226,10 +229,10 @@
                                     </div>
                                 </div>
                                 <div class="row padding-top45">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>Hobbies :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.hobbies : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -244,10 +247,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>City :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.city : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input
@@ -263,10 +266,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 profile-label">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
                                         <label>PIN Code :</label>
                                     </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-6">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
                                         <p class="view_mode"><%= userProfile ? userProfile.pinCode : ''%></p>
                                         <p class="edit_mode form-group">
                                             <input

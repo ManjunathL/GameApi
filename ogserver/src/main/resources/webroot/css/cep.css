@@ -85,7 +85,7 @@ ul.myaccount_list li{
 .mynest-tab-listbox{
     height: 70px;
     background-color: #ffffff;
-    margin: 14px;
+    margin-right: 14px;
     padding:0px;
     width:38%;
     color:#ffffff;
@@ -125,10 +125,59 @@ ul.myaccount_list li{
     background: #fff;
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
+
+@media screen and (max-width: 991px) {
+    .profile-label{
+        text-align:right;
+    }
+    .myaccount_list li{
+        padding:10px 5px;
+    }
+    .menu-tab-list{
+        margin-top:50px!important;
+    }
+    .mynest-tab-listbox {
+        height: 100px;
+        width: 40%;
+        background-color: #ffffff;
+        margin-right: 10px;
+        padding: 0px;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .margin-left-0 {
+        margin-left: 10px !important;
+    }
+    .bg-property{
+        background-color:#f9f9f9;
+        height: auto;
+        min-height: 230px;
+    }
+}
+
+
 @media (max-width: 767px){
     .edit_icon_div{
         right: 0px;
         top: -25px;
+    }
+
+}
+@media (max-width: 420px){
+    .mynest-inside-box img{
+        width: 40px;
+        float: left;
+    }
+    .mynest-inside-box span{
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .mynest-inside-box{
+        height: 45px;
+    }
+    .mynest-tab-listbox {
+        height: 45px;
     }
 }
 .chart_time_left{
@@ -180,34 +229,7 @@ ul.myaccount_list li{
 .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
 /*END Form Wizard*/
 
-@media screen and (max-width: 991px) {
-    .profile-label{
-        text-align:right;
-    }
-    .myaccount_list li{
-        padding:10px 5px;
-    }
-    .menu-tab-list{
-        margin-top:50px!important;
-    }
-    .mynest-tab-listbox {
-        height: 100px;
-        width: 40%;
-        background-color: #ffffff;
-        margin: 10px;
-        padding: 0px;
-        display: inline-block;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .margin-left-0 {
-        margin-left: 10px !important;
-    }
-    .bg-property{
-        background-color:#f9f9f9;
-        height: auto;
-        min-height: 230px;
-    }
-}
+
 
 
 /* Timeline Design */
