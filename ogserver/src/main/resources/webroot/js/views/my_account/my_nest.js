@@ -172,10 +172,58 @@ define([
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
             var that = this;
+
+            var paydtls = {};
+            var paydtlsobj = [];
+
+            $.each(that.myaccount.get("transdetails"), function(i, data) {
+                var paydtls = {};
+                paydtls['payAmount'] = data.amount;
+                paydtls['payDate'] = data.addedon;
+                paydtls['payMode'] = data.mode;
+                paydtls['payTransId'] = data.txnid;
+                paydtls['status'] = data.status;
+                paydtlsobj.push(paydtls);
+            });
+            var nesttt = that.myaccount.get("mynest");
+
+            if(typeof(nesttt.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){
+                var nestpaydtls = {};
+                nestpaydtls['payAmount'] = nesttt.paymentDetails[0].m1_amount_collected_c;
+                nestpaydtls['payDate'] = nesttt.paymentDetails[0].m1_payment_date_c;
+                nestpaydtls['payMode'] = nesttt.paymentDetails[0].m1_mode_of_payment_c;
+                nestpaydtls['payTransId'] = nesttt.paymentDetails[0].payment_reference1_c;
+                nestpaydtls['status'] = 'Success';
+                paydtlsobj.push(nestpaydtls);
+            }
+            if(typeof(nesttt.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){
+                var nestpaydtls2 = {};
+                nestpaydtls2['payAmount'] = nesttt.paymentDetails[0].m2_amount_collected_c;
+                nestpaydtls2['payDate'] = nesttt.paymentDetails[0].m2_payment_date_c;
+                nestpaydtls2['payMode'] = nesttt.paymentDetails[0].m2_mode_of_payment_c;
+                nestpaydtls2['payTransId'] = nesttt.paymentDetails[0].payment_reference2_c;
+                nestpaydtls2['status'] = 'Success';
+                paydtlsobj.push(nestpaydtls2);
+            }
+            if(typeof(nesttt.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){
+                var nestpaydtls3 = {};
+                nestpaydtls3['payAmount'] = nesttt.paymentDetails[0].m3_amount_collected_c;
+                nestpaydtls3['payDate'] = nesttt.paymentDetails[0].m3_payment_date_c;
+                nestpaydtls3['payMode'] = nesttt.paymentDetails[0].m3_mode_of_payment_c;
+                nestpaydtls3['payTransId'] = nesttt.paymentDetails[0].payment_reference3_c;
+                nestpaydtls3['status'] = 'Success';
+                paydtlsobj.push(nestpaydtls3);
+            }
+
+            paydtlsobj = _(paydtlsobj).sortBy(function(payhisdtls) {
+                return Date.parse(payhisdtls.payDate);
+            }).reverse();
+
+            console.log("+++++++++++++++++++++++++++++++");
+                        console.log(paydtlsobj);
             var payHisTemp = _.template(PaymentHistoryTemplate);
             $("#payHistory").html(payHisTemp({
-                'transdetails':that.myaccount.get("transdetails"),
-                'myNest':that.myaccount.get("mynest")
+                'paydtlsobj':paydtlsobj
             }));
         },
         requestcall: function(e) {

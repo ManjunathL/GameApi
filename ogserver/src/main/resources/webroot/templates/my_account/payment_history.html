@@ -1,97 +1,26 @@
-   <%= console.log('-------------------------------') %>
-   <%= console.log(myNest) %>
-   <% if(typeof(myNest.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){ %>
-    <div class="row payhis bg-color-white">
-        <div class="col-md-1">1</div>
-        <!--<div class="col-sm-2">  47 </div>-->
-        <div class="col-md-2"> <% if(typeof(myNest.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){ %>
-            <%= parseFloat(myNest.paymentDetails[0].m1_amount_collected_c).toFixed(2) %>
-            <% } %></div>
-        <div class="col-md-3"><% if(typeof(myNest.paymentDetails[0].m1_payment_date_c) !== 'undefined'){ %>
-            <% var date = new Date(myNest.paymentDetails[0].m1_payment_date_c) %>
-            <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
-            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
-            <% } %></div>
-        <div class="col-md-2">
-            <% if(typeof(myNest.paymentDetails[0].m1_mode_of_payment_c) !== 'undefined'){ %>
-            <%= myNest.paymentDetails[0].m1_mode_of_payment_c %>
-            <% } %>
-        </div>
-        <div class="col-md-2"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
-            <%= myNest.paymentDetails[0].payment_reference1_c %>
-            <% } %></div>
-        <div class="col-md-2 capitalize"><% if(typeof(myNest.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){ %>Success<% } %></div>
-    </div>
-   <% } %>
-   <% if(typeof(myNest.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){ %>
-    <div class="row payhis bg-gray">
-        <div class="col-md-1">2</div>
-        <!--<div class="col-sm-2">  47 </div>-->
-        <div class="col-md-2"> <% if(typeof(myNest.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){ %>
-            <%= parseFloat(myNest.paymentDetails[0].m2_amount_collected_c).toFixed(2) %>
-            <% } %></div>
-        <div class="col-md-3"><% if(typeof(myNest.paymentDetails[0].m2_payment_date_c) !== 'undefined'){ %>
-            <% var date = new Date(myNest.paymentDetails[0].m2_payment_date_c) %>
-            <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
-            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
-            <% } %></div>
-        <div class="col-md-2">
-            <% if(typeof(myNest.paymentDetails[0].m2_mode_of_payment_c) !== 'undefined'){ %>
-            <%= myNest.paymentDetails[0].m2_mode_of_payment_c %>
-            <% } %>
-        </div>
-        <div class="col-md-2"><% if(typeof(myNest.paymentDetails[0].payment_reference2_c) !== 'undefined'){ %>
-            <%= myNest.paymentDetails[0].payment_reference2_c %>
-            <% } %></div>
-        <div class="col-md-2 capitalize"><% if(typeof(myNest.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){ %>Success<% } %></div>
-    </div>
-   <% } %>
-   <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
-    <div class="row payhis bg-color-white">
-        <div class="col-md-1">3</div>
-        <!--<div class="col-sm-2">  47 </div>-->
-        <div class="col-md-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
-            <%= parseFloat(myNest.paymentDetails[0].m3_amount_collected_c).toFixed(2) %>
-            <% } %></div>
-        <div class="col-md-3"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
-            <% var date = new Date(myNest.paymentDetails[0].m3_payment_date_c) %>
-            <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
-            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
-            <% } %></div>
-        <div class="col-md-2">
-            <% if(typeof(myNest.paymentDetails[0].m3_mode_of_payment_c) !== 'undefined'){ %>
-            <%= myNest.paymentDetails[0].m3_mode_of_payment_c %>
-            <% } %>
-        </div>
-        <div class="col-md-2"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
-            <%= myNest.paymentDetails[0].payment_reference3_c %>
-            <% } %></div>
-        <div class="col-md-2 capitalize"><% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>Success<% } %></div>
-    </div>
-   <% } %>
-    <% if(typeof(transdetails) !== 'undefined'){ %>
-    <% var cnt= 4 ; %>
-    <% _.each(transdetails, function(trns){ %>
+<% if(typeof(paydtlsobj) !== 'undefined'){ %>
+    <% var cnt= 0 ; %>
+    <% _.each(paydtlsobj, function(trns){ %>
     <div class="row payhis <% if(cnt%2 == 0){ %> bg-gray <% }else{ %> bg-color-white <% } %>">
         <div class="col-md-1"><%= cnt %></div>
         <!--<div class="col-sm-2">  47 </div>-->
-        <div class="col-md-2"> <% if(typeof(trns.amount) !== 'undefined'){ %>
-            <%= parseFloat(trns.amount).toFixed(2) %>
+        <div class="col-md-2"> <% if(typeof(trns.payAmount) !== 'undefined'){ %>
+            <%= parseFloat(trns.payAmount).toFixed(2) %>
             <% } %></div>
-        <div class="col-md-3"><% if(typeof(trns.addedon) !== 'undefined'){ %>
-            <% var date = new Date(trns.addedon) %>
+        <div class="col-md-3"><% if(typeof(trns.payDate) !== 'undefined'){ %>
+            <% var date = new Date(trns.payDate) %>
             <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
             <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
             <% } %></div>
         <div class="col-md-2">
             <% var dfarr= new Array(); %>
-            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card"}; %>
-            <% if(typeof(trns.mode) !== 'undefined'){ %>
-                <%= dfarr[trns.mode] %>
+            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card","CASH":"Cash","Cheque":"Cheque"}; %>
+            <% if(typeof(trns.payMode) !== 'undefined'){ %>
+                <%= dfarr[trns.payMode] %>
             <% } %>
         </div>
-        <div class="col-md-2"><% if(typeof(trns.txnid) !== 'undefined'){ %>
-        <%= trns.txnid %>
+        <div class="col-md-2"><% if(typeof(trns.payTransId) !== 'undefined'){ %>
+        <%= trns.payTransId %>
         <% } %></div>
         <div class="col-md-2 capitalize"><% if(typeof(trns.status) !== 'undefined'){ %>
             <%= trns.status %>
