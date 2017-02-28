@@ -571,14 +571,101 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
+                        <!--<li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
                             <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
                             <span class="user user-img"
                                   style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
                             <% }else { %>
                             <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
                             <% } %>
+                        </li>-->
+                        <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+                        <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
+                            <a  href="javascript:void(0);"
+                                class="dropdown-toggle"
+                                id="dropdownMenu_lg_blogpost"
+                                data-toggle="dropdown">
+                                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+                                <span class="user user-img"
+                                      style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                                <% }else { %>
+                                <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+                                <% } %>
+
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
+
+                                <li><a href="/my_account">
+                                    My Profile
+                                </a></li>
+
+                                <li><a href="/my_nest">
+                                    My Nest
+                                </a></li>
+
+                                <li><a href="/my_settings">
+                                    Settings
+                                </a></li>
+                                <li><a href="/shortlist">
+                                    Shortlist
+                                </a></li>
+                                <li><a class="signout_icon">
+                                    Sign Out
+                                </a></li>
+
+                            </ul>
                         </li>
+                        <li class="hidden-lg hidden-md gubbi-list-desk gubbi-list-mob">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_sm_blogpost"
+                                    data-toggle="dropdown">
+
+
+                                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+                                <span class="user user-img"
+                                      style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                                <% }else { %>
+                                <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+                                <% } %>
+
+                                <span class="caret"></span>
+                            </a>
+                            <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+                            <ul class="dropdown-menu drop gubbi-list-mob-ul" aria-labelledby="dropdownMenu">
+
+                                <li><a href="/my_account">
+                                    My Profile
+                                </a></li>
+
+                                <li><a href="/my_nest">
+                                    My Nest
+                                </a></li>
+
+                                <li><a href="/shortlist">
+                                    Shortlist
+                                </a></li>
+
+                                <li><a href="/my_settings">
+                                    Settings
+                                </a></li>
+
+                                <li><a class="signout_icon">
+                                    Sign Out
+                                </a></li>
+
+
+
+
+                            </ul>
+                            <% } %>
+                        </li>
+                        <% }else{ %>
+                        <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
+                            <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+                        </li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
