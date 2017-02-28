@@ -174,7 +174,8 @@ define([
             var that = this;
             var payHisTemp = _.template(PaymentHistoryTemplate);
             $("#payHistory").html(payHisTemp({
-                'transdetails':that.myaccount.get("transdetails")
+                'transdetails':that.myaccount.get("transdetails"),
+                'myNest':that.myaccount.get("mynest")
             }));
         },
         requestcall: function(e) {

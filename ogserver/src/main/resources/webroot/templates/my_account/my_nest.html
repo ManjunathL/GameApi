@@ -144,7 +144,7 @@
                             </a>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 portfolio-box mynest-tab-listbox">
-                            <a href="#card1" role="tab" data-toggle="tab">
+                            <a id="onlinepay" href="#card1" role="tab" data-toggle="tab">
                                 <div class="mynest-inside-box">
                                     <img src="https://res.cloudinary.com/mygubbi/image/upload/v1474615907/cep/nest_card.png" alt="cards"><span>Payment Details</span>
                                 </div>
@@ -364,82 +364,24 @@
                                 <%= "NA" %>
                                 <% } %>
                             </div>
-                            <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
+                            <!--<div class="col-md-12 proposal-font-heading border-bottom-grey padding6">
                                 <a id="offlnpay" href="#payoffline" role="tab" data-toggle="tab">Offline</a> | <a id="onlinepay" href="#payonlin" role="tab" data-toggle="tab">Online</a>
-                            </div>
+                            </div>-->
                             <div class="col-md-12 col-sm-12">
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane padding6 active" id="payoffline">
-                                        <div class="row align-center padding-top-10">
-                                            <div class="col-sm-3 font-weight-bold">Payment Milestone</div>
-                                            <!--<div class="col-sm-2" style="font-weight:bold;">% Amount</div>-->
-                                            <div class="col-sm-2 font-weight-bold">Amount</div>
-                                            <div class="col-sm-2 font-weight-bold">Payment Date</div>
-                                            <div class="col-sm-2 font-weight-bold">Payment Mode</div>
-                                            <div class="col-sm-3 font-weight-bold">Transaction Ref</div>
-
-                                        </div>
-                                        <div class="row align-center padding6">
-                                            <div class="col-sm-3">Booking Amount </div>
-                                            <!--<div class="col-sm-2">  3 </div>-->
-                                            <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){ %>
-                                                <%= parseFloat(myNest.paymentDetails[0].m1_amount_collected_c).toFixed(2) %>
-                                                <% } %> </div>
-                                            <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_payment_date_c) !== 'undefined'){ %>
-                                                <% var date1 = new Date(myNest.paymentDetails[0].m1_payment_date_c) %>
-                                                <%= date1.getDate() + '/' + (date1.getMonth() + 1) + '/' +  date1.getFullYear() %>
-                                                <% } %></div>
-                                            <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m1_mode_of_payment_c) !== 'undefined'){ %>
-                                                <%= myNest.paymentDetails[0].m1_mode_of_payment_c %>
-                                                <% } %></div>
-                                            <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference1_c) !== 'undefined'){ %>
-                                                <%= myNest.paymentDetails[0].payment_reference1_c %>
-                                                <% } %></div>
-
-                                        </div>
-                                        <div class="row align-center padding6">
-                                            <div class="col-sm-3">Order Confirmation</div>
-                                            <!--<div class="col-sm-2">  47 </div>-->
-                                            <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m2_amount_collected_c) !== 'undefined'){ %>
-                                                <%= parseFloat(myNest.paymentDetails[0].m2_amount_collected_c).toFixed(2) %>
-                                                <% } %> </div>
-                                            <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_payment_date_c) !== 'undefined'){ %>
-                                                <% var date = new Date(myNest.paymentDetails[0].m2_payment_date_c) %>
-                                                <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
-                                                <% } %></div>
-                                            <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m2_mode_of_payment_c) !== 'undefined'){ %>
-                                                <%= myNest.paymentDetails[0].m2_mode_of_payment_c %>
-                                                <% } %></div>
-                                            <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference2_c) !== 'undefined'){ %>
-                                                <%= myNest.paymentDetails[0].payment_reference2_c %>
-                                                <% } %></div>
-
-                                        </div>
-                                        <div class="row align-center padding6">
-                                            <div class="col-sm-3">Final Amount</div>
-                                            <!--<div class="col-sm-2">  47 </div>-->
-                                            <div class="col-sm-2"> <% if(typeof(myNest.paymentDetails[0].m3_amount_collected_c) !== 'undefined'){ %>
-                                                <%= parseFloat(myNest.paymentDetails[0].m3_amount_collected_c).toFixed(2) %>
-                                                <% } %> </div>
-                                            <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_payment_date_c) !== 'undefined'){ %>
-                                                <% var date = new Date(myNest.paymentDetails[0].m3_payment_date_c) %>
-                                                <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() %>
-                                                <% } %></div>
-                                            <div class="col-sm-2"><% if(typeof(myNest.paymentDetails[0].m3_mode_of_payment_c) !== 'undefined'){ %>
-                                                <%= myNest.paymentDetails[0].m3_mode_of_payment_c %>
-                                                <% } %></div>
-                                            <div class="col-sm-3"><% if(typeof(myNest.paymentDetails[0].payment_reference3_c) !== 'undefined'){ %>
-                                                <%= myNest.paymentDetails[0].payment_reference3_c %>
-                                                <% } %></div>
-
-                                        </div>
-                                    </div>
-
-                                    <div role="tabpanel" class="tab-pane padding6" id="payonlin" >
+                                    <div role="tabpanel" class="tab-pane padding6 active" id="payonlin">
                                         <div class="row">
                                             <div class="col-md-12 align-right">
                                                 <a href="/online-payment" class="btn btn-orange">Online Payment</a>
                                             </div>
+                                        </div>
+                                        <div class="row padding-top-10">
+                                            <div class="col-md-1 font-weight-bold">Sl#</div>
+                                            <div class="col-md-2 font-weight-bold">Amount</div>
+                                            <div class="col-md-3 font-weight-bold">Payment Date</div>
+                                            <div class="col-md-2 font-weight-bold">Payment Mode</div>
+                                            <div class="col-md-2 font-weight-bold">Transaction#</div>
+                                            <div class="col-md-2 font-weight-bold">Status</div>
                                         </div>
                                         <div id="payHistory"></div>
                                     </div>
