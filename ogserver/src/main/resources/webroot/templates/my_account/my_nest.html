@@ -1,4 +1,6 @@
 <% if(typeof(myNest) !==  'undefined' && myNest !== null){ %>
+<link rel="stylesheet" href="/js/libs/ihover/src/ihover.css" type="text/css" />
+
 <link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/jquery.ui.timepicker.css" type="text/css" />
 <link rel="stylesheet" href="/js/libs/jquery.ui.timepicker/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
 
@@ -23,65 +25,80 @@
         </div>
     </div>
 
-    <div class="mt20">
-        <div class="row">
-            <!-- Property Section Start -->
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <div class="portfolio-box bg-white padding15">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <label class="font-normal text-left txt-color-orange">Property Details</label>
+        <div class="mt20">
+            <div class="row">
+                <!-- Property Section Start -->
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="portfolio-box pb-cep bg-white padding15">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <label class="font-normal text-left txt-color-orange">Property Details</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="font-normal text-left txt-color-orange">Property Name:</label>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="font-normal text-left txt-color-orange">Property Name:</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="txt-formt"><%= myNest.paymentDetails[0].project_name_c ? myNest.paymentDetails[0].project_name_c : 'NA' %></label>
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="txt-formt"><%= myNest.paymentDetails[0].project_name_c ? myNest.paymentDetails[0].project_name_c : 'NA' %></label>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="font-normal text-left txt-color-orange">Builders Name:</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="txt-formt"><%= myNest.paymentDetails[0].builder_name_c ? myNest.paymentDetails[0].builder_name_c : 'NA' %></label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="font-normal text-left txt-color-orange">Builders Name:</label>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="font-normal text-left txt-color-orange">Property Type:</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="txt-formt"><%= myNest.paymentDetails[0].property_type_c ? myNest.paymentDetails[0].property_type_c : 'NA' %></label>
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="txt-formt"><%= myNest.paymentDetails[0].builder_name_c ? myNest.paymentDetails[0].builder_name_c : 'NA' %></label>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="font-normal text-left txt-color-orange">Tower/Block#:</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="txt-formt"><%=  myNest.paymentDetails[0].tower_c ? myNest.paymentDetails[0].tower_c : 'NA' %></label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="font-normal text-left txt-color-orange">Property Type:</label>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="font-normal text-left txt-color-orange">Flat No:</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="txt-formt"><%= myNest.paymentDetails[0].flat_no_c ? myNest.paymentDetails[0].flat_no_c : 'NA' %></label>
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="txt-formt"><%= myNest.paymentDetails[0].property_type_c ? myNest.paymentDetails[0].property_type_c : 'NA' %></label>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="font-normal text-left txt-color-orange">BHK:</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="txt-formt"><%= myNest.paymentDetails[0].bhk_c ? myNest.paymentDetails[0].bhk_c : 'NA' %></label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="font-normal text-left txt-color-orange">Tower/Block#:</label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="txt-formt"><%=  myNest.paymentDetails[0].tower_c ? myNest.paymentDetails[0].tower_c : 'NA' %></label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="font-normal text-left txt-color-orange">Flat No:</label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="txt-formt"><%= myNest.paymentDetails[0].flat_no_c ? myNest.paymentDetails[0].flat_no_c : 'NA' %></label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="font-normal text-left txt-color-orange">BHK:</label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label class="txt-formt"><%= myNest.paymentDetails[0].bhk_c ? myNest.paymentDetails[0].bhk_c : 'NA' %></label>
-                        </div>
-                    </div>
 
+                </div>
+                <div class="mt20">
+                    <div class="portfolio-box bg-white">
+                        <div class="ih-item square effect3 bottom_to_top">
+                            <a href="https://www.mygubbi.com/know-your-kitchen">
+                                <div class="img">
+                                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1488285100/cep/kyk.jpg" alt="img">
+                                </div>
+                                <div class="info">
+                                    <h3>Know Your Kitchen</h3>
+                                    <p>Sink In To Know More !</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Property Section End -->
@@ -413,38 +430,58 @@
             </div>
             <!-- Middle Section End -->
 
-            <!-- Document Section Start -->
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <div class="portfolio-box bg-white padding15">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <label class="font-normal text-left txt-color-orange">Documents</label>
-                        </div>
-                    </div>
-                    <% if(typeof(myNest.documentDetails) !== 'undefined'){ %>
-                    <% _.each(myNest.documentDetails, function(mdoc){ %>
-                    <div class="row" <% if(mdoc.categoryId == "FINAL_PROPOSAL"){ %> <%= Finalpropcls %> <% }else if(mdoc.categoryId == "INITIAL_PROPOSAL"){ %> <%= Initpropcls %> <% } %> >
-                        <div class="col-md-2 col-sm-2 col-xs-2">
-                            <label class="font-normal text-left txt-color-orange"><i class="fa fa-file-pdf-o"></i></label>
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-10">
-                            <% var dcarr= new Array(); %>
-                            <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
-                            <!--<span class="shortlist txt-formt"><%= dcarr[mdoc.categoryId] %> | </span>-->
-                            <a href="<%= mdoc.docUrl %>" target="_blank" title="View">
-                                <span class="shortlist txt-formt"><%= dcarr[mdoc.categoryId] %></span>
-                                       <!--<span class="txt-formt text-small-proposals">
-                                            <%= mdoc.documentRevisionFileName %>
-                                       </span>-->
-                            </a>
-                        </div>
-                    </div>
-                    <% }); %>
-                    <% } %>
+    <!-- Document Section Start -->
+    <div class="col-sm-3 col-md-3 col-lg-3">
+        <div class="portfolio-box pb-cep bg-white padding15">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <label class="font-normal text-left txt-color-orange">Documents</label>
                 </div>
             </div>
-            <!-- Document Section End -->
+
+            <div class="row">
+                <% if(typeof(myNest.documentDetails) !== 'undefined'){ %>
+                <% _.each(myNest.documentDetails, function(mdoc){ %>
+                <div class="col-md-12 col-sm-12 col-xs-12" <% if(mdoc.categoryId == "FINAL_PROPOSAL"){ %> <%= Finalpropcls %> <% }else if(mdoc.categoryId == "INITIAL_PROPOSAL"){ %> <%= Initpropcls %> <% } %> >
+                    <span class="pull-left txt-color-orange mr10">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </span>
+                    <% var dcarr= new Array(); %>
+                    <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
+                    <span class="pull-left">
+                        <div class="shortlist">
+                                <%= dcarr[mdoc.categoryId] %>
+                        </div>
+                    </span>
+                    <!--<a href="<%= mdoc.docUrl %>" target="_blank" title="View">
+                       <span class="txt-formt text-small-proposals">
+                            <%= mdoc.documentRevisionFileName %>
+                       </span>
+                    </a>-->
+                </div>
+                <% }); %>
+                <% } %>
+            </div>
+
+    </div>
+    <div class="mt20">
+        <div class="portfolio-box bg-white">
+            <div class="ih-item square effect3 bottom_to_top">
+                <a href="https://www.mygubbi.com/know-your-wardrobe">
+                    <div class="img">
+                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1488285100/cep/kyw.jpg" alt="img">
+                    </div>
+                    <div class="info">
+                        <h3>Know Your Wardrobe</h3>
+                        <p>Drve into The Deep Spaces !</p>
+                    </div>
+                </a>
+            </div>
         </div>
+    </div>
+    </div>
+    <!-- Document Section End -->
+    </div>
     </div>
 
 </div>
