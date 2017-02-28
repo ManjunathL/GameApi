@@ -207,7 +207,8 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         {
             if(cname.equals("K") )
             {
-                if(unit.moduleCategory.contains("Base unit")||
+                if(     unit.moduleCategory.contains("H - Panel") ||
+                        unit.moduleCategory.contains("Base unit")||
                         unit.moduleCategory.contains("N - Base Units") ||
                         unit.moduleCategory.contains("N - Drawer Units") ||
                         unit.moduleCategory.contains("N - Drawer") ||
@@ -227,10 +228,12 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2400") )
                 {
-                    if(unit.moduleCategory.contains("N - Base Units") || unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                    if(     unit.moduleCategory.contains("N - Base Units") ||
+                            unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
                             unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
-                            unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||unit.moduleCategory.contains("S - Storage Module Base Unit")||
-                            unit.moduleCategory.contains("Base unit")) {
+                            unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
+                            unit.moduleCategory.contains("S - Storage Module Base Unit"))
+                             {
                         KBmodulecount += unit.moduleCount;
                         String width = unit.getDimensions();
                         basewidth=  basewidth + " , " +width;
@@ -238,7 +241,9 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
                         if(unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
                                 unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
-                                unit.moduleCategory.contains("S - Kitchen Base Shutter Units") || unit.moduleCategory.contains("S - Storage Module Base Unit")  || unit.moduleCategory.contains("Base unit") )
+                                unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
+                                unit.moduleCategory.contains("S - Storage Module Base Unit")  ||
+                                unit.moduleCategory.contains("Base unit") )
                                 {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -340,7 +345,8 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
             }
             else if(cname.equals("W"))
             {
-                    if(unit.moduleCategory.contains("N - Base Units") ||
+                    if(unit.moduleCategory.contains("H - Panel") ||
+                        unit.moduleCategory.contains("N - Base Units") ||
                             unit.moduleCategory.contains("N - Drawer Units") ||
                             unit.moduleCategory.contains("N - Drawer") ||
                             unit.moduleCategory.contains("N - Open Units") ||

@@ -119,7 +119,7 @@
       "uri": "/gapi/proposal/updateversion",
       "source": "db",
       "query":"proposal.updateversion",
-      "params":["title","finalAmount","status","internalStatus","remarks","version","discountAmount","discountPercentage","amount","date","proposalId","fromVersion"],
+      "params":["title","finalAmount", "status", "internalStatus", "remarks","fromVersion" , "discountAmount" , "discountPercentage","amount","date","profit","margin", "amountWotax", "manufactureAmount","version","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -476,6 +476,30 @@
       "source": "db",
       "query":"module.selectModulesByCategory",
       "params":["productCategory", "moduleCategory"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/accdetails",
+      "source": "db",
+      "query":"accessory.details",
+      "params":["apcode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/acchwdetails",
+      "source": "db",
+      "query":"accessory.hwdetails",
+      "params":["apcode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/accratedetails",
+      "source": "db",
+      "query":"accessory.ratedetails",
+      "params":["code"],
       "resultfields":[],
       "default": "[]"
     },

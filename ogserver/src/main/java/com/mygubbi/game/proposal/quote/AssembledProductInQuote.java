@@ -301,12 +301,27 @@ public class AssembledProductInQuote
         unit.addModule(module);
     }
 
-    private Unit getUnit(String unitTitle,String moduleCategory)
+    /*private Unit getUnit(String unitTitle,String moduleCategory)
     {
         if (StringUtils.isEmpty(unitTitle)) unitTitle = "Default";
         for (Unit unit : this.units)
         {
             if (unit.title.equals(unitTitle))
+            {
+                return unit;
+            }
+        }
+
+        Unit unit = new Unit(this.units.size() + 1, unitTitle,moduleCategory);
+        this.units.add(unit);
+        return unit;
+    }*/
+    private Unit getUnit(String unitTitle,String moduleCategory)
+    {
+        if (StringUtils.isEmpty(moduleCategory)) moduleCategory = "Default";
+        for (Unit unit : this.units)
+        {
+            if (unit.moduleCategory.equals(moduleCategory))
             {
                 return unit;
             }
@@ -420,6 +435,18 @@ public class AssembledProductInQuote
             this.moduleDimensions = new ArrayList<>();
         }
 
+        @Override
+        public String toString() {
+            return "Unit{" +
+                    "amount=" + amount +
+                    ", sequence=" + sequence +
+                    ", moduleCount=" + moduleCount +
+                    ", title='" + title + '\'' +
+                    ", moduleCategory='" + moduleCategory + '\'' +
+                    ", moduleDimensions=" + moduleDimensions +
+                    '}';
+        }
+
         public void addModule(ProductModule module)
         {
             this.moduleCount++;
@@ -433,6 +460,7 @@ public class AssembledProductInQuote
                 this.moduleDimensions.add(new ModuleDimension(module.getWidth(), module.getDepth(), module.getHeight()));
             }
             this.amount += module.getAmount();
+
         }
 
         private ModuleDimension getModuleDimension(ProductModule module)

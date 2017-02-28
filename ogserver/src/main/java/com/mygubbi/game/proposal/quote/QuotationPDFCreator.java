@@ -403,7 +403,7 @@ public class QuotationPDFCreator
             p.setAlignment(Element.ALIGN_LEFT);
             cel6.addElement(p);
             cel6.setBorder(Rectangle.NO_BORDER);
-            tab1.addCell(cel5);
+            tab1.addCell(cel6);
 
 
             tab1.addCell(new Paragraph
@@ -423,7 +423,7 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
             cel7.addElement(p);
             cel7.setBorder(Rectangle.NO_BORDER);
-            tab1.addCell(cel6);
+            tab1.addCell(cel7);
             document.add(tab1);
 
             PdfPTable tab2=new PdfPTable(1);
@@ -434,7 +434,7 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
             cel8.addElement(p);
             cel8.setBorder(Rectangle.NO_BORDER);
-            tab2.addCell(cel7);
+            tab2.addCell(cel8);
 
             tab2.addCell(new Paragraph("1. \t All 25 mm shelves will be in MDF with both side finish\n"
                     +"2. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered kitchen quote. These items will be quoted seperately if needed.\n"
@@ -644,11 +644,20 @@ public class QuotationPDFCreator
         List<String> klList=new ArrayList<String>();
         List<String> kwaList=new ArrayList<String>();
 
+        for(AssembledProductInQuote.Unit unit1: product.getUnits())
+        {
+            LOG.info("unit module category" +unit1.toString());
+        }
+
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
+
+
+
             if(cname.equals("K") )
             {
-                if(unit.moduleCategory.contains("Base unit")||
+                if(     unit.moduleCategory.contains("H - Panel") ||
+                        unit.moduleCategory.contains("Base Units") ||
                         unit.moduleCategory.contains("N - Base Units") ||
                         unit.moduleCategory.contains("N - Drawer Units") ||
                         unit.moduleCategory.contains("N - Drawer") ||
@@ -668,19 +677,23 @@ public class QuotationPDFCreator
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2400") )
                 {
-                    if(unit.moduleCategory.contains("N - Base Units") || unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
+                    if(     unit.moduleCategory.contains("N - Base Units") ||
+                            unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
                             unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
                             unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
-                            unit.moduleCategory.contains("Base unit") ||  unit.moduleCategory.contains("S - Storage Module Base Unit")) {
+                            unit.moduleCategory.contains("S - Storage Module Base Unit")) {
 
+                        LOG.info("Module count " +unit.moduleCount);
                         KBmodulecount += unit.moduleCount;
                         String width = unit.getDimensions();
                         basewidth=  basewidth + " , " +width;
                         kbList.add(new String(width));
+
                         if(unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
                                 unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
-                                unit.moduleCategory.contains("S - Kitchen Base Shutter Units") || unit.moduleCategory.contains("S - Storage Module Base Unit") || unit.moduleCategory.contains("Base unit") )
-
+                                unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
+                                unit.moduleCategory.contains("S - Storage Module Base Unit") ||
+                                unit.moduleCategory.contains("Base unit") )
                         {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -789,7 +802,8 @@ public class QuotationPDFCreator
             }
             else if(cname.equals("W"))
             {
-                    if(unit.moduleCategory.contains("N - Base Units") ||
+                    if(     unit.moduleCategory.contains("H - Panel") ||
+                            unit.moduleCategory.contains("N - Base Units") ||
                             unit.moduleCategory.contains("N - Drawer Units") ||
                             unit.moduleCategory.contains("N - Drawer") ||
                             unit.moduleCategory.contains("N - Open Units") ||

@@ -1,13 +1,12 @@
 {
   "version": "0.0.0a",
 
-
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/mg",
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
     "max_pool_size": 20,
-    "user": "root",
-    "password": "root"
+    "user": "admin",
+    "password": "OG$#gubi32"
   },
   "urlwithssl": "",
 
