@@ -13,7 +13,7 @@
                 <span class="txt-formt"><%= userProfile ? userProfile.displayName : 'NA' %></span>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4">
-                <label class="font-normal text-left txt-color-orange">Opportunity ID:</label>
+                <label class="font-normal text-left txt-color-orange">ID:</label>
                 <span class="txt-formt"><%= userProfile ? userProfile.crmId : 'NA' %></span>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4">
@@ -90,7 +90,7 @@
                 <!-- Project Status start -->
                 <% if(typeof(projectStatusArr) != 'undefined'){ %>
                 <div class="portfolio-box bg-white mb20 project-sts">
-                    <div class="row bs-wizard" style="border-bottom:0;">
+                    <div class="row bs-wizard hidden-xs hidden-sm" style="border-bottom:0;">
                         <% var defaultArr = new Array(); %>
                         <% defaultArr = ["initiated","proposal approved","order placed","production started","installation","handed over"]; %>
                         <% _.each(defaultArr, function(value) { %>
@@ -129,6 +129,25 @@
                         </div>
 
                         <% }); %>
+                    </div>
+                    <div class="row margin-top40 hidden-lg hidden-md">
+                        <ul class="timeline my-nest-timeline">
+                            <% var defaultArr = new Array(); %>
+                            <% defaultArr = ["initiated","proposal approved","order placed","production started","installation","handed over"]; %>
+                            <% _.each(defaultArr, function(value) { %>
+                            <li class="timeline-inverted">
+                                <div class="timeline-badge" style=" <% _.each(projectStatusArr, function(comment){ %>
+                    <% if(value === comment){ %>background-color: #5ed268;<% } %>
+                    <% }); %>"
+                                ><i class="glyphicon glyphicon-check"></i></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title"><%= value %></h4>
+                                    </div>
+                                </div>
+                            </li>
+                            <% }); %>
+                        </ul>
                     </div>
                 </div>
                 <% } %>
@@ -399,7 +418,7 @@
                 <div class="portfolio-box bg-white padding15">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <label class="font-normal text-left txt-color-orange">Document Details</label>
+                            <label class="font-normal text-left txt-color-orange">Documents</label>
                         </div>
                     </div>
                     <% if(typeof(myNest.documentDetails) !== 'undefined'){ %>
@@ -411,11 +430,12 @@
                         <div class="col-md-10 col-sm-10 col-xs-10">
                             <% var dcarr= new Array(); %>
                             <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
-                            <span class="shortlist txt-formt"><%= dcarr[mdoc.categoryId] %> | </span>
+                            <!--<span class="shortlist txt-formt"><%= dcarr[mdoc.categoryId] %> | </span>-->
                             <a href="<%= mdoc.docUrl %>" target="_blank" title="View">
-                                       <span class="txt-formt text-small-proposals">
+                                <span class="shortlist txt-formt"><%= dcarr[mdoc.categoryId] %></span>
+                                       <!--<span class="txt-formt text-small-proposals">
                                             <%= mdoc.documentRevisionFileName %>
-                                       </span>
+                                       </span>-->
                             </a>
                         </div>
                     </div>
