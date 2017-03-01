@@ -613,7 +613,7 @@
       "id": "pricemaster.select.all",
       "type": "select",
       "table": "price_master",
-      "query": "select rateType,rateId,city,price,fromDate,toDate from price_master",
+      "query": "select rateType,rateId,city,price,sourcePrice,fromDate,toDate from price_master",
       "params": []
     },
 
