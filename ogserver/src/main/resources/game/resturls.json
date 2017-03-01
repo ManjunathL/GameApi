@@ -572,24 +572,7 @@
       "params":["apcode"],
       "resultfields":[],
       "default": "[]"
-    },
-    {
-      "uri": "/gapi/proposal/accratedetails",
-      "source": "db",
-      "query":"accessory.ratedetails",
-      "params":["code"],
-      "resultfields":[],
-      "default": "[]"
-    },
-    {
-      "uri": "/gapi/proposal/accratedetails",
-      "source": "db",
-      "query":"accessory.ratedetails",
-      "params":["rateId","city"],
-      "resultfields":[],
-      "default": "[]"
     }
-
 
   ]
 }

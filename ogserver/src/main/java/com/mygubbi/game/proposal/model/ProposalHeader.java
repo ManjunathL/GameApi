@@ -30,6 +30,8 @@ public class ProposalHeader extends JsonObject
     public static final String QUOTE_NO_NEW="quoteNoNew";
     public static final String PRICE_DATE="priceDate";
 
+    private Date priceDate;
+
 
     public ProposalHeader(JsonObject json)
     {
@@ -86,16 +88,12 @@ public class ProposalHeader extends JsonObject
     }
 
 
-    public Date getPriceDate()
-    {
-        Object value = this.getValue(PRICE_DATE);
-        if (value == null)
-        {
-            value = new Date(System.currentTimeMillis());
-            return (Date) value;
+    public Date getPriceDate() {
+        return priceDate;
+    }
 
-        }
-        return (Date) value;
+    public void setPriceDate(Date priceDate) {
+        this.priceDate = priceDate;
     }
 
     public String getCrmId()
