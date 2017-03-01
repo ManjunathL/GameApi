@@ -1,0 +1,17 @@
+<html>
+<body>
+Dear Team,
+<br/>
+<br/>
+Our Esteemed Customer <b> $vdata.firstname </b> bearing CRM-ID:<b> $vdata.udf1 </b>has completed his payment of Rupees $vdata.amount with transaction Id <b> $vdata.txnid </b>
+<br/>
+<br/>
+Please create ERP receipt entry in ERP system
+<br/><br/>
+Please create corresponding CRM entry.
+<br/><br/>
+Best Regards,
+<br/>
+MyGubbi Team.
+</body>
+</html>

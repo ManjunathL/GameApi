@@ -68,14 +68,14 @@ public class UserRegistrationProcessor implements DataProcessor
         LOG.info("Mehbub" +jsonData.encodePrettily());
         JsonObject userJson = new JsonObject().put("crmId", jsonData.getString("crmId")).put("fbid", eventData.getUid()).put("email", jsonData.getString("email")).put("profile", jsonData);
         LOG.info("Mehbub USER" +userJson.encodePrettily());
-       // this.sendWelcomeEmail(eventData);
+        // this.sendWelcomeEmail(eventData);
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", userJson));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> res) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(res.result().body());
-                   LOG.info(resultData);
-                   LOG.info(resultData.toString());
+                    LOG.info(resultData);
+                    LOG.info(resultData.toString());
                     if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
                     {
                         this.acknowledger.failed(eventData, "User could not be recorded in database.");
@@ -84,7 +84,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     {
 
                         this.sendWelcomeEmail(eventData);
-                        sendToLeadSquared(jsonData);
+                        sendToLeadSquared(eventData);
                         this.acknowledger.done(eventData);
 
 
@@ -133,7 +133,8 @@ public class UserRegistrationProcessor implements DataProcessor
                     });
         }
     }
-    private void sendToLeadSquared(JsonObject requestJson){
+    private void sendToLeadSquared(EventData eventData){
+        JsonObject requestJson = eventData.getJsonData();
 
         JsonObject obj = new JsonObject().put("Attribute", "FirstName")
                 .put("Value", requestJson.getValue("displayName"));
@@ -162,23 +163,27 @@ public class UserRegistrationProcessor implements DataProcessor
             //conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
             conn.setUseCaches( false );
             try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
-                LOG.info("Sene data");
+                LOG.info("Send data");
                 LOG.info(data.encodePrettily());
                 wr.writeBytes(data.encodePrettily());
                 wr.flush();
                 wr.close();
                 int responseCode = conn.getResponseCode();
                 LOG.info("Response Code : " + responseCode);
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
+                LOG.info("response done");
+                this.acknowledger.done(eventData);
+                return;
+//                BufferedReader in = new BufferedReader(
+//                        new InputStreamReader(conn.getInputStream()));
+//                String inputLine;
+//                StringBuffer response = new StringBuffer();
+//                while ((inputLine = in.readLine()) != null) {
+//                    response.append(inputLine);
+//                }
+//                in.close();
                 //print result
-                LOG.info(response.toString());
+
+
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

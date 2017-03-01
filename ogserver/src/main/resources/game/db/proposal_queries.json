@@ -848,7 +848,38 @@
       "table": "acc_pack_components",
       "query": "select apcode,type,code from acc_pack_components where apcode=? and type='H'",
       "params": ["apcode"]
+    },
+    {
+      "id": "accessory.ratedetails",
+      "type": "select",
+      "table": "acc_hw_master",
+      "query": "select id,type,code,title,make,category,imagePath,uom,cp,mrp,msp from acc_hw_master where code=?",
+      "params": ["code"]
+    },
+    {
+      "id": "transaction.insert",
+      "type": "insert",
+      "table": "transaction",
+      "query": "insert into transaction (bankcode, txnid, net_amount_debit, amount, phone, productinfo, status, firstname, addedon, bank_ref_num, email, mihpayid, udf1, card_type, name_on_card, cardnum, fulldetails) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params": [
+        "bankcode",
+        "txnid",
+        "net_amount_debit",
+        "amount",
+        "phone",
+        "productinfo",
+        "status",
+        "firstname",
+        "addedon",
+        "bank_ref_num",
+        "email",
+        "mihpayid",
+        "udf1",
+        "card_type",
+        "name_on_card",
+        "cardnum",
+        "fulldetails"
+      ]
     }
-
   ]
 }
