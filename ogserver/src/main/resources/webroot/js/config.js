@@ -24,6 +24,11 @@ var failurebaseUrl = "http://192.168.104.88:8080/TestingApp/failure.jsp";
 var cancelbaseUrl = "http://192.168.104.88:8080/TestingApp/failure.jsp";
 */
 
+/* Live Payment Details */
+/*var paybaseUrl="https://secure.payu.in/_payment";
+var merchantKey = "ovDDuS";
+var SALT = "wIsJh9pk";*/
+
 var successbaseUrl = "https://gameuat.mygubbi.com:1446/gapi/payment/sucessPayment";
 var failurebaseUrl = "https://gameuat.mygubbi.com:1446/gapi/payment/failurePayment";
 var cancelbaseUrl = "https://gameuat.mygubbi.com:1446/gapi/payment/failurePayment";
