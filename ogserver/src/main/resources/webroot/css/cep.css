@@ -160,6 +160,7 @@ ul.myaccount_list li{
     .edit_icon_div{
         right: 0px;
         top: -25px;
+        box-shadow: none;
     }
 
 }
@@ -455,9 +456,6 @@ padding-left:100px;
 }
 
 .btn-password{
-
-}
-.btn-password{
     background-color: #f1591f;
     color:#ffffff;
     border-radius:0px !important;
@@ -468,5 +466,23 @@ padding-left:100px;
 .btn-password:focus,
 .btn-password:active{
     background-color: #dc3000;
+    color: #ffffff;
+}
+.ih-item{
+    position: relative;
+    display: block;
+}
+
+.info-cep {
+    position: absolute;
+    bottom: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #efefef;
+    left: 10px;
+    right: 10px;
+}
+
+.info-cep:hover {
     color: #ffffff;
 }
