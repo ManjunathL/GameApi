@@ -1,13 +1,16 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.common.DateUtil;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
+import com.mygubbi.game.proposal.price.RateCardService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
@@ -18,6 +21,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.Date;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -44,6 +49,8 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
+        this.get("/hardwareratedetails").handler(this::getHardwareRate);
+        this.get("/accratedetails").handler(this::getAccessoryRate);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
@@ -265,6 +272,44 @@ public class ProposalHandler extends AbstractRouteHandler
                 });
 
 
+    }
+
+    private void getAccessoryRate(RoutingContext context) {
+        String code = context.request().getParam("code");
+        String priceDate = context.request().getParam("priceDate");
+        String city = context.request().getParam("city");
+
+        getAccessoryRate(context, code, DateUtil.convertDate(priceDate), city);
+
+    }
+
+    private void getAccessoryRate(RoutingContext routingContext, String code, Date priceDate, String city) {
+        PriceMaster addonRate = RateCardService.getInstance().getAccessoryRate(code, priceDate, city);
+        if (addonRate == null || addonRate.getPrice() == 0) {
+            LOG.error("Error in retrieving addon price");
+            sendError(routingContext, "Error in retrieving addon price.");
+        } else {
+            sendJsonResponse(routingContext, addonRate.toJson().toString());
+        }
+    }
+
+    private void getHardwareRate(RoutingContext context) {
+        String code = context.request().getParam("code");
+        String priceDate = context.request().getParam("priceDate");
+        String city = context.request().getParam("city");
+
+        getHardwareRate(context, code, DateUtil.convertDate(priceDate), city);
+
+    }
+
+    private void getHardwareRate(RoutingContext routingContext, String code, Date priceDate, String city) {
+        PriceMaster addonRate = RateCardService.getInstance().getHardwareRate(code, priceDate, city);
+        if (addonRate == null || addonRate.getPrice() == 0) {
+            LOG.error("Error in retrieving addon price");
+            sendError(routingContext, "Error in retrieving addon price.");
+        } else {
+            sendJsonResponse(routingContext, addonRate.toJson().toString());
+        }
     }
 
 }

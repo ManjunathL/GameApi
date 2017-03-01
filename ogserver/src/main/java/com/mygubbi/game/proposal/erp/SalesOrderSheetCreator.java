@@ -1,6 +1,5 @@
 package com.mygubbi.game.proposal.erp;
 
-import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
@@ -72,7 +71,9 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
             return currentRow;
         }
 
+/*
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedModules());
+*/
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryPackPanels());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryPackHardware());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryPackAccessories());

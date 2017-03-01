@@ -246,7 +246,7 @@ public class AssembledProductInQuote
 
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
     {
-        ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom(),"gh");
+        ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom(),"gh","dd");
         this.addons.add(part);
     }
 
@@ -270,13 +270,14 @@ public class AssembledProductInQuote
 
     private void addToAccessoryPackPanels(ModulePanel carcassPanel, double quantity, String unit, int seq)
     {
-        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","No catalog code");
+        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","NA","NA");
         this.accessoryPackPanels.add(part);
     }
 
     private ModulePart createModulePart(AccHwComponent component, double quantity, String unit, int seq)
     {
-        return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom(),component.getCatalogCode());
+        LOG.info("component" +component);
+        return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom(),component.getCatalogCode(),component.getCategory());
 
     }
 
@@ -286,7 +287,7 @@ public class AssembledProductInQuote
         accessory.incrementQuantity(quantity);
     }
 
-    private Accessory getAccessory(String code, String title,double msp,String catalogCode,String catalog)
+    private Accessory getAccessory(String code, String title,double msp,String catalogCode,String category)
     {
         if (StringUtils.isEmpty(code)) code = "Default";
         for (Accessory accessory : this.accessories)
@@ -296,8 +297,7 @@ public class AssembledProductInQuote
                 return accessory;
             }
         }
-
-        Accessory accessory = new Accessory(code, title,msp,catalogCode,catalog);
+        Accessory accessory = new Accessory(code, title,msp,catalogCode,category);
         this.accessories.add(accessory);
         return accessory;
     }
@@ -561,12 +561,12 @@ public class AssembledProductInQuote
         public double quantity;
         public double msp;
         public String catalogCode;
-        public String catalog;
+        public String category;
 
         @Override
         public String toString() {
             return "Accessory{" +
-                    "catalog='" + catalog + '\'' +
+                    "category='" + category + '\'' +
                     ", code='" + code + '\'' +
                     ", title='" + title + '\'' +
                     ", quantity=" + quantity +
@@ -581,7 +581,7 @@ public class AssembledProductInQuote
             this.title = title;
             this.msp=msp;
             this.catalogCode = catalogCode;
-            this.catalog= catalog;
+            this.category= catalog;
         }
 
         public void incrementQuantity(double qty)
@@ -603,8 +603,9 @@ public class AssembledProductInQuote
         public double costWoAccessories;
         public double hardwareCost;
         public String catalogCode;
+        public String category;
 
-        public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom, String catalogCode)
+        public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom, String catalogCode,String category)
         {
             this.unit = unit;
             this.seq = seq;
@@ -614,6 +615,7 @@ public class AssembledProductInQuote
             this.make = make;
             this.uom = uom;
             this.catalogCode = catalogCode;
+            this.category=category;
         }
 
         public ModulePart(String code, String title, String make, String uom, double quantity)

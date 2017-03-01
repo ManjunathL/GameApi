@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -671,10 +670,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         double amount=0.0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
-            if(accessory.catalog.equals("Primary") || accessory.catalog.equals("Add on")||accessory.catalog.equals("Standalone add on"))
+            if(accessory.category.equals("Primary") || accessory.category.equals("Add on")||accessory.category.equals("Standalone add on"))
             {
+                LOG.debug("Accessory :" + accessory.toString());
                 currentRow++;
-                LOG.info("Acc" +accessory.catalog + "ACC title" +accessory.title);
+                LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
                 this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;

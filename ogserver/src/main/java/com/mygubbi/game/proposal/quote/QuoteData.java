@@ -47,6 +47,10 @@ public class QuoteData
     {
         this.city = proposalHeader.getProjectCity();
         this.priceDate = proposalHeader.getPriceDate();
+        if (this.priceDate == null)
+        {
+            this.priceDate = new java.sql.Date(System.currentTimeMillis());
+        }
         this.proposalHeader = proposalHeader;
         this.products = products;
         if (addons != null) this.headerLevelAddons = addons;

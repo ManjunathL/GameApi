@@ -204,8 +204,8 @@
       "id": "version.getlatestversion",
       "type": "select",
       "table": "version_master",
-      "query": "select * from version_master where version=(select MAX(version) from version_master where proposalId = ?)",
-      "params": ["proposalId"]
+      "query": "select * from version_master where version=(select MAX(version) from version_master where proposalId = ?) and proposald = ? ",
+      "params": ["proposalId","proposalId"]
     },
     {
       "id": "version.getlatestversionTemproary",
@@ -413,7 +413,7 @@
 
     {
       "id": "proposal.product.updateVersionOnConfirm",
-      "type": "insert",
+      "type": "update",
       "table": "proposal_product",
       "query": "update proposal_product set fromVersion = ? where proposalId = ? and fromVersion = ?",
       "params": ["version","proposalId","fromVersion"]
@@ -449,6 +449,14 @@
       "table": "proposal_addon",
       "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy from proposal_addon where proposalId = ? and fromVersion = ? ",
       "params": ["proposalId","version","oldProposalId","toVersion"]
+    },
+
+    {
+      "id": "proposal.addon.updateVersionOnConfirm",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set fromVersion = ? where proposalId = ? and fromVersion = ?",
+      "params": ["version","proposalId","fromVersion"]
     },
 
     {
@@ -613,14 +621,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom, category from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category from acc_hw_master where type = 'H'",
       "params": []
     },
 
@@ -840,13 +848,7 @@
       "table": "acc_pack_components",
       "query": "select apcode,type,code from acc_pack_components where apcode=? and type='H'",
       "params": ["apcode"]
-    },
-    {
-      "id": "accessory.ratedetails",
-      "type": "select",
-      "table": "acc_hw_master",
-      "query": "select id,type,code,title,make,category,imagePath,uom,cp,mrp,msp from acc_hw_master where code=?",
-      "params": ["code"]
     }
+
   ]
 }

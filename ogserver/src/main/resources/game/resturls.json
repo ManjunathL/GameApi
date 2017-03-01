@@ -103,7 +103,7 @@
       "uri": "/gapi/proposal/version/getlatestversion",
       "source": "db",
       "query":"version.getlatestversion",
-      "params":["proposalId"],
+      "params":["proposalId","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -181,9 +181,18 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/version/updateVersionOnConfirm",
+      "uri": "/gapi/proposal/version/product/updateVersionOnConfirm",
       "source": "db",
       "query":"proposal.product.updateVersionOnConfirm",
+      "params":["fromVersion","proposalId","version"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/version/addon/updateVersionOnConfirm",
+      "source": "db",
+      "query":"proposal.addon.updateVersionOnConfirm",
       "params":["fromVersion","proposalId","version"],
       "resultfields":[],
       "default": "[]"
@@ -563,16 +572,7 @@
       "params":["apcode"],
       "resultfields":[],
       "default": "[]"
-    },
-    {
-      "uri": "/gapi/proposal/accratedetails",
-      "source": "db",
-      "query":"accessory.ratedetails",
-      "params":["code"],
-      "resultfields":[],
-      "default": "[]"
     }
-
 
   ]
 }
