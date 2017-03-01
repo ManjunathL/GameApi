@@ -103,7 +103,7 @@
       "uri": "/gapi/proposal/version/getlatestversion",
       "source": "db",
       "query":"version.getlatestversion",
-      "params":["proposalId"],
+      "params":["proposalId","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
