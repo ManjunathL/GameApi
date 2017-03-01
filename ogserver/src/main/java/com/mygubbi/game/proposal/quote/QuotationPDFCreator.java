@@ -5,7 +5,6 @@ import com.itextpdf.text.pdf.*;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
-import com.mygubbi.game.proposal.model.AccessoryPack;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
@@ -13,10 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by user on 02-Nov-16.
@@ -1127,9 +1124,9 @@ public class QuotationPDFCreator
         double amount=0.0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
-            if(accessory.catalog.equals("Primary") || accessory.catalog.equals("Add on")|| accessory.catalog.equals("Standalone add on"))
+            if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
-                LOG.info("Acc" +accessory.catalog + "ACC title" +accessory.title);
+                LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
                 this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title);
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;

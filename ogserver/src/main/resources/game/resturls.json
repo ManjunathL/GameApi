@@ -103,7 +103,7 @@
       "uri": "/gapi/proposal/version/getlatestversion",
       "source": "db",
       "query":"version.getlatestversion",
-      "params":["proposalId"],
+      "params":["proposalId","proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -572,16 +572,7 @@
       "params":["apcode"],
       "resultfields":[],
       "default": "[]"
-    },
-    {
-      "uri": "/gapi/proposal/accratedetails",
-      "source": "db",
-      "query":"accessory.ratedetails",
-      "params":["code"],
-      "resultfields":[],
-      "default": "[]"
     }
-
 
   ]
 }

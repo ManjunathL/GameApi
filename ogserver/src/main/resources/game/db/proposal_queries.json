@@ -204,8 +204,8 @@
       "id": "version.getlatestversion",
       "type": "select",
       "table": "version_master",
-      "query": "select * from version_master where version=(select MAX(version) from version_master where proposalId = ?)",
-      "params": ["proposalId"]
+      "query": "select * from version_master where version=(select MAX(version) from version_master where proposalId = ?) and proposald = ? ",
+      "params": ["proposalId","proposalId"]
     },
     {
       "id": "version.getlatestversionTemproary",
@@ -621,14 +621,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom, category from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category from acc_hw_master where type = 'H'",
       "params": []
     },
 
