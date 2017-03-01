@@ -449,7 +449,24 @@ padding-left:100px;
 .pb-cep{
     min-height: 210px;
 }
-.ih-item.square{
-    width: 100%;
-    height: 100%;
+
+.kn-info{
+    margin-bottom: 0px;
+}
+
+.btn-password{
+
+}
+.btn-password{
+    background-color: #f1591f;
+    color:#ffffff;
+    border-radius:0px !important;
+    padding: 6px 17px;
+}
+
+.btn-password:hover,
+.btn-password:focus,
+.btn-password:active{
+    background-color: #dc3000;
+    color: #ffffff;
 }
