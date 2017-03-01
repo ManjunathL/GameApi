@@ -175,16 +175,18 @@ define([
 
             var paydtls = {};
             var paydtlsobj = [];
-
-            $.each(that.myaccount.get("transdetails"), function(i, data) {
-                var paydtls = {};
-                paydtls['payAmount'] = data.amount;
-                paydtls['payDate'] = data.addedon;
-                paydtls['payMode'] = data.mode;
-                paydtls['payTransId'] = data.txnid;
-                paydtls['status'] = data.status;
-                paydtlsobj.push(paydtls);
-            });
+            console.log(that.myaccount.get("transdetails"));
+            if(that.myaccount.get("transdetails")){
+                $.each(that.myaccount.get("transdetails"), function(i, data) {
+                    var paydtls = {};
+                    paydtls['payAmount'] = data.amount;
+                    paydtls['payDate'] = data.addedon;
+                    paydtls['payMode'] = data.mode;
+                    paydtls['payTransId'] = data.txnid;
+                    paydtls['status'] = data.status;
+                    paydtlsobj.push(paydtls);
+                });
+            }
             var nesttt = that.myaccount.get("mynest");
 
             if(typeof(nesttt.paymentDetails[0].m1_amount_collected_c) !== 'undefined'){

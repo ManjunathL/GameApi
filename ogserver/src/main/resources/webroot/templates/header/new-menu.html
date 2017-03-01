@@ -59,8 +59,36 @@
             </a>
 
             <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-            <span class="user user-img"
-                  style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                <a  href="javascript:void(0);"
+                    class="dropdown-toggle last-item"
+                    id="dropdownMenu_lg_userproflpost"
+                    data-toggle="dropdown">
+                    <span class="user-img" style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
+
+                    <li><a href="/my_account">
+                        My Profile
+                    </a></li>
+                    <% if(typeof(userProfile) !== 'undefined'){ %>
+                    <% if(typeof(userProfile) !== 'undefined' && userProfile.crmId != ""){ %>
+                    <li><a href="/my_nest">
+                        My Nest
+                    </a></li>
+                    <% } %>
+                    <% } %>
+                    <li><a href="/my_settings">
+                        Settings
+                    </a></li>
+                    <li><a href="/shortlist">
+                        Shortlist
+                    </a></li>
+                    <li><a class="signout_icon">
+                        Sign Out
+                    </a></li>
+
+                </ul>
             <% }else { %>
             <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
             <% } %>
@@ -121,78 +149,6 @@
                         <li class="gubbi-list-desk gubbi-list-mob hidden-lg hidden-md menu-li">
                             <a href="/" id="home-lnk" class="page-scroll">Home</a>
                         </li>
-                        <!--<li class="dropdown mega-dropdown">
-                            <a href="/kitchen-cabinet-design" class="dropdown-toggle" data-toggle="dropdown"> Kitchen <span class="caret"></span></a>
-                            <ul class="row dropdown-menu mega-dropdown-menu">
-                                <li class="col-sm-2">
-                                    <ul>
-                                        <li class="dropdown-header">
-                                            Kitchen
-                                        </li>
-                                        <li>
-                                            <a href="/know-your-kitchen">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1474955267/home/new_design/KNK_N.jpg" alt="Straight Kitchen">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/know-your-kitchen">
-                                                Know Your Kitchen
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a href="/stories-kitchen"> Trends and Style </a></li>
-                                    </ul>
-                                </li>
-
-                                <li class="col-sm-10">
-                                    <ul>
-                                        <li class="dropdown-header">
-                                            Types of Kitchen
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-2">
-                                    <ul>
-                                        <li>
-                                            <a href="/l-shaped-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780761/home/new_design/L-SHAPE.jpg" alt="L Shaped Kitchen">
-                                            </a>
-                                        </li>
-                                        <li><a href="/l-shaped-kitchen-design">L Shaped Kitchen</a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-2">
-                                    <ul>
-                                        <li>
-                                            <a href="/u-shaped-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780761/home/new_design/U-SHAPE.jpg" alt="U Shaped Kitchen">
-                                            </a>
-                                        </li>
-                                        <li><a href="/u-shaped-kitchen-design"> U Shaped Kitchen </a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-2">
-                                    <ul>
-                                        <li>
-                                            <a href="/parallel-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780761/home/new_design/Parellel.jpg" alt="Parallel Kitchen">
-                                            </a>
-                                        </li>
-                                        <li><a href="/parallel-kitchen-design"> Parallel Kitchen </a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-2">
-                                    <ul>
-                                        <li>
-                                            <a href="/straight-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1471780762/home/new_design/Straight.jpg" alt="Straight Kitchen">
-                                            </a>
-                                        </li>
-                                        <li><a href="/straight-kitchen-design"> Straight Kitchen </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>-->
                         <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
                             <a href="/kitchen-cabinet-design" class="dropdown-toggle" id="dropdownMenu_lg_kitchen" data-toggle="dropdown" data-hover="dropdown">
                                 Kitchen
@@ -686,13 +642,7 @@
                                 class="dropdown-toggle last-item"
                                 id="dropdownMenu_lg_userprofpost"
                                 data-toggle="dropdown">
-                                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                                <span class="user user-img"
-                                      style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
-                                <% }else { %>
-                                <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
-                                <% } %>
-
+                                <span class="user-img" style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu drop dropdownMenu_lg" aria-labelledby="dropdownMenu">
@@ -700,67 +650,24 @@
                                 <li><a href="/my_account">
                                     My Profile
                                 </a></li>
-
-                                <li><a href="/my_nest">
-                                    My Nest
-                                </a></li>
-
-                                <li><a href="/my_settings">
-                                    Settings
-                                </a></li>
-                                <li><a href="/shortlist">
-                                    Shortlist
-                                </a></li>
-                                <li><a class="signout_icon">
-                                    Sign Out
-                                </a></li>
-
-                            </ul>
-                        </li>
-                        <li class="hidden-lg hidden-md gubbi-list-desk gubbi-list-mob">
-                            <a
-                                    class="dropdown-toggle"
-                                    id="dropdownMenu_sm_userprofpost"
-                                    data-toggle="dropdown">
-
-
-                                <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                                <span class="user user-img"
-                                      style="background-image:url('<%= users.at(0).get('profileImage') %>')"></span>
-                                <% }else { %>
-                                <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+                                <% if(typeof(userProfile) !== 'undefined'){ %>
+                                    <% if(typeof(userProfile.crmId) !== 'undefined' && userProfile.crmId != ""){ %>
+                                        <li><a href="/my_nest">
+                                            My Nest
+                                        </a></li>
+                                    <% } %>
                                 <% } %>
-
-                                <span class="caret"></span>
-                            </a>
-                            <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                            <ul class="dropdown-menu drop gubbi-list-mob-ul" aria-labelledby="dropdownMenu">
-
-                                <li><a href="/my_account">
-                                    My Profile
-                                </a></li>
-
-                                <li><a href="/my_nest">
-                                    My Nest
-                                </a></li>
-
-                                <li><a href="/shortlist">
-                                    Shortlist
-                                </a></li>
-
                                 <li><a href="/my_settings">
                                     Settings
                                 </a></li>
-
+                                <li><a href="/shortlist">
+                                    Shortlist
+                                </a></li>
                                 <li><a class="signout_icon">
                                     Sign Out
                                 </a></li>
 
-
-
-
                             </ul>
-                            <% } %>
                         </li>
                         <% }else{ %>
                         <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">

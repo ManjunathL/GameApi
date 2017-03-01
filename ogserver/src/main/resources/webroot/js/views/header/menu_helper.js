@@ -93,9 +93,10 @@ define([
                         that.setUser(user);
                         //console.log("user already exists in firebase");
                         window.fbButton && window.fbButton.button('reset');
-                        //                        window.twitterButton && window.twitterButton.button('reset');
+                        //window.twitterButton && window.twitterButton.button('reset');
                         window.googleButton && window.googleButton.button('reset');
                         $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
+
                     } else {
                         console.log("user doesn't exist in firebase, creating..");
 
@@ -110,7 +111,7 @@ define([
                                 }, null);
                             }
                             window.fbButton && window.fbButton.button('reset');
-                            //                            window.twitterButton && window.twitterButton.button('reset');
+                            //window.twitterButton && window.twitterButton.button('reset');
                             window.googleButton && window.googleButton.button('reset');
                             $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
                         };
@@ -149,7 +150,28 @@ define([
 
               $('#user-icon').toggleClass("glyphicon glyphicon-user fa fa-spinner fa-spin");
               console.log('Sign-in successful');
-              //window.location = '/my_account';
+
+
+              console.log(authData.uid);
+
+
+              var userProfileRef = that.ref.child("user-profiles/" + authData.uid);
+              var userProfile = null;
+              userProfileRef.on("value", function(snapshot) {
+                  if (snapshot.exists()) {
+                      userProfile = snapshot.val();
+                      console.log("===================userProfile====================");
+                      console.log(userProfile);
+                      if(typeof(userProfile) !== 'undefined'){
+                          if(typeof(userProfile.crmId) !== 'undefined' && userProfile.crmId != ""){
+                              window.location = "/my_nest";
+                          }else{
+                              window.location = "/my_account";
+                          }
+                        }
+                  }
+              });
+
             }, function(error) {
               // An error happened.
               $('#login_error').html("The password is invalid. Please enter a correct password.");
