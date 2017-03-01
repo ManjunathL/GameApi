@@ -453,3 +453,20 @@ padding-left:100px;
 .kn-info{
     margin-bottom: 0px;
 }
+
+.btn-password{
+
+}
+.btn-password{
+    background-color: #f1591f;
+    color:#ffffff;
+    border-radius:0px !important;
+    padding: 6px 17px;
+}
+
+.btn-password:hover,
+.btn-password:focus,
+.btn-password:active{
+    background-color: #dc3000;
+    color: #ffffff;
+}
