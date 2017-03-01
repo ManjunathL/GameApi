@@ -175,7 +175,6 @@ define([
 
             var paydtls = {};
             var paydtlsobj = [];
-            console.log(that.myaccount.get("transdetails"));
             if(that.myaccount.get("transdetails")){
                 $.each(that.myaccount.get("transdetails"), function(i, data) {
                     var paydtls = {};
@@ -221,8 +220,6 @@ define([
                 return Date.parse(payhisdtls.payDate);
             }).reverse();
 
-            console.log("+++++++++++++++++++++++++++++++");
-                        console.log(paydtlsobj);
             var payHisTemp = _.template(PaymentHistoryTemplate);
             $("#payHistory").html(payHisTemp({
                 'paydtlsobj':paydtlsobj

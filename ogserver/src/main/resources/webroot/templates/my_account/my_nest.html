@@ -450,11 +450,27 @@
                     <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
                     <a href="<%= mdoc.docUrl %>" target="_blank" title="View">
                        <span class="pull-left txt-formt text-small-proposals">
-                            <%= mdoc.documentRevisionFileName %>
+                            <%= dcarr[mdoc.categoryId] %>
                        </span>
                     </a>
                 </div>
                 <% }); %>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                   <span class="pull-left txt-color-orange mr10">
+                        <i class="fa fa-file-pdf-o"></i>
+                   </span>
+                   <span class="pull-left txt-formt text-small-proposals">
+                        Booking From
+                   </span>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                       <span class="pull-left txt-color-orange mr10">
+                            <i class="fa fa-file-pdf-o"></i>
+                       </span>
+                        <span class="pull-left txt-formt text-small-proposals">
+                            Works Contract
+                       </span>
+                </div>
                 <% } %>
             </div>
 
