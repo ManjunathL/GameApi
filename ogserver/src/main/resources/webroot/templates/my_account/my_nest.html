@@ -448,16 +448,11 @@
                     </span>
                     <% var dcarr= new Array(); %>
                     <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
-                    <span class="pull-left">
-                        <div class="shortlist">
-                                <%= dcarr[mdoc.categoryId] %>
-                        </div>
-                    </span>
-                    <!--<a href="<%= mdoc.docUrl %>" target="_blank" title="View">
-                       <span class="txt-formt text-small-proposals">
+                    <a href="<%= mdoc.docUrl %>" target="_blank" title="View">
+                       <span class="pull-left txt-formt text-small-proposals">
                             <%= mdoc.documentRevisionFileName %>
                        </span>
-                    </a>-->
+                    </a>
                 </div>
                 <% }); %>
                 <% } %>
