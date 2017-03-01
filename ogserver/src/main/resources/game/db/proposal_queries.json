@@ -621,14 +621,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'A'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom, category from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category from acc_hw_master where type = 'H'",
       "params": []
     },
 
@@ -855,6 +855,14 @@
       "table": "acc_hw_master",
       "query": "select id,type,code,title,make,category,imagePath,uom,cp,mrp,msp from acc_hw_master where code=?",
       "params": ["code"]
+    },
+
+    {
+      "id": "accessory.ratedetails",
+      "type": "select",
+      "table": "price_master",
+      "query": "select rateId,city,price,sourcePrice,fromDate,toDate from price_master where rateId=? and city=?",
+      "params": ["rateId","city"]
     }
   ]
 }
