@@ -1,0 +1,231 @@
+<html>
+<body>
+Dear Valued Customer,
+ <br/><br/>
+This is a confirmation that your Payment with below details is received.
+<br/><br/>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="500">
+        <tr>
+            <td height="68" valign="top">
+                <p style="background: rgba(0, 0, 0, 0);float:left;width:100%;text-align:center;width:100%;color: #b1a3a3;margin:0;font-size:30px;font-weight:bold;line-height:68px;font-family:Arial,Helvetica,sans-serif;">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/logo.png"></p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" style=
+                "border:1px #DDDDDD solid; background:#f7f5f5" width="100%">
+                    <tr>
+                        <td>
+                            <p style=
+                            "height:10px; line-height:10px; font-size:1px; margin:0; float:left; width:100%;">
+                            &nbsp;</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p style=
+                            "height:10px; line-height:10px; font-size:1px; margin:0; float:left; width:100%;">
+                            &nbsp;</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top">
+                            <table border="0" cellpadding="0" cellspacing="0"
+                            width="100%">
+                                <tr>
+                                    <td width="10">&nbsp;</td>
+
+                                    <td>
+                                        <table border="0" cellpadding="0"
+                                        cellspacing="0" style=
+                                        "background-color: #FFFFFF" width=
+                                        "478">
+                                            <tr>
+                                                <td colspan="4">
+                                                    <p style=
+                                                    "height:12px; line-height:12px; font-size:1px; margin:0; float:left; width:100%;">
+                                                    &nbsp;</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td width="10"></td>
+
+                                                <td valign="top" width="229">
+                                                    <p style=
+                                                    "color:#000000; font-size:13px; margin:0; line-height:15px; font-family:Arial, Helvetica, sans-serif; font-weight:bold">
+                                                    TransactionId: <span style=
+                                                    "color:#1c8304;">$vdata.txnid</span></p>
+                                                </td>
+
+                                                <td valign="top">
+                                                    <p style="color:#000000; font-size:13px; margin:0; line-height:15px; font-family:Arial, Helvetica, sans-serif; font-weight:bold">
+                                                   Payment Date : <span style="color:#1c8304;"> $vdata.addedon</span> </p>
+                                                </td>
+
+                                                <td width="10"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="4">
+                                                    <p style=
+                                                    "height:16px; line-height:16px; font-size:1px; margin:0; float:left; width:100%;">
+                                                    &nbsp;</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td width="10"></td>
+
+                                                <td valign="top" width="229">
+                                                    <p style="color:#000000; font-size:13px; margin:0; line-height:15px; font-family:Arial, Helvetica, sans-serif; font-weight:bold">
+                                                         Name: <span style= "color:#1c8304;"><span style="color:#1c8304;">$vdata.firstname</span></p>
+                                                </td>
+
+                                                <td valign="top"><a href="#"
+                                                style=
+                                                "color:#000000; font-size:13px;line-height:15px; font-family:Arial, Helvetica, sans-serif; ">
+                                                </a><span style=" font-weight:bold">Email: <span style="color:#1c8304;">  $vdata.email</span></td>
+
+                                                <td width="10"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="4">
+                                                    <p style=
+                                                    "height:12px; line-height:12px; font-size:1px; margin:0; float:left; width:100%;">
+                                                    &nbsp;</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                    <td width="10">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p style=
+                            "height:10px; line-height:10px; font-size:1px; margin:0; float:left; width:100%;">
+                            &nbsp;</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top">
+                            <table border="0" cellpadding="0" cellspacing="0"
+                            width="100%">
+                                <tr>
+                                    <td width="10">&nbsp;</td>
+
+                                    <td>
+                                        <table border="0" cellpadding="0"
+                                        cellspacing="0" style=
+                                        "border:1px #a1a1a1 solid; background:#ffffff; border-bottom:none;"
+                                        width="478">
+                                            <tr style="background:#a1a1a1">
+                                                <td width="10"></td>
+
+                                                <td height="25" style=
+                                                "border-right:1px #fff solid"
+                                                width="323">
+                                                    <p style=
+                                                    "color:#fff; font-size:12px; line-height:14px; font-family:Arial, Helvetica, sans-serif; margin:0;">
+                                                    Description</p>
+                                                </td>
+
+                                                <td width="15"></td>
+
+                                                <td width="127">
+                                                    <p style=
+                                                    "color:#fff; font-size:12px; line-height:14px; font-family:Arial, Helvetica, sans-serif; margin:0;">
+                                                    Total</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style=
+                                                "border-bottom:1px #a1a1a1 solid"
+                                                width="10"></td>
+
+                                                <td height="25" style=
+                                                "border-right:1px #a1a1a1 solid;border-bottom:1px #a1a1a1 solid"
+                                                width="326">
+                                                    <p style=
+                                                    "color:#333; font-size:12px; line-height:14px; font-family:Arial, Helvetica, sans-serif; margin:0;">
+                                                    Mygubbi Modular Furniture (*)</p>
+                                                </td>
+
+                                                <td style=
+                                                "border-bottom:1px #a1a1a1 solid"
+                                                width="15"></td>
+
+                                                <td style=
+                                                "border-bottom:1px #a1a1a1 solid"
+                                                width="127">
+                                                    <p style=
+                                                    "color:#333333; font-size:12px; line-height:14px; font-family:Arial, Helvetica, sans-serif; margin:0;">
+                                                    $vdata.amount</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style=
+                                                "border-bottom:1px #a1a1a1 solid"
+                                                width="10"></td>
+
+                                                <td align="right" height="25"
+                                                style=
+                                                "border-right:1px #a1a1a1 solid;border-bottom:1px #a1a1a1 solid"
+                                                width="326">
+                                                    <p style=
+                                                    "color:#333; font-size:12px; font-weight:bold; line-height:14px; font-family:Arial, Helvetica, sans-serif; margin:0;">
+                                                    Total (All Inclusive) INR
+                                                    (Indian
+                                                    Rupees)&nbsp;&nbsp;</p>
+                                                </td>
+
+                                                <td style=
+                                                "border-bottom:1px #a1a1a1 solid"
+                                                width="15"></td>
+
+                                                <td style=
+                                                "border-bottom:1px #a1a1a1 solid"
+                                                width="127"><a href="#" style=
+                                                "color:#333333!important; text-decoration:underline; font-size:12px; line-height:14px; font-family:Arial, Helvetica, sans-serif; margin:0;">
+                                                $vdata.amount</a></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                    <td width="10">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p style=
+                            "height:10px; line-height:10px; font-size:1px; margin:0; float:left; width:100%;">
+                            &nbsp;</p>
+                        </td>
+                    </tr>
+ </table>
+ </table>
+ <br/><br/>
+ We appreciate your business with us.
+ <br/><br/>
+  Thanks & Regards,<br/>
+   MyGubbi Sales Team <br/>
+1502, 2nd Floor, 19th Main Road,<br/>
+Sector 4, HSR Layout, Bangalore 560 102, India.<br/>
+ </body>
+ </html>

@@ -18,6 +18,7 @@ public class PriceMaster {
     public static final String RATE_TYPE = "rateType";
     public static final String RATE_ID = "rateId";
     public static final String PRICE = "price";
+    public static final String SOURCE_PRICE = "sourcePrice";
     public static final String CITY = "city";
     public static final String FROM_DATE = "fromDate";
     public static final String TO_DATE = "toDate";
@@ -26,6 +27,7 @@ public class PriceMaster {
     private String rateId;
     private String city;
     private double price;
+    private double sourcePrice;
     private Date fromDate;
     private Date toDate;
 
@@ -40,6 +42,7 @@ public class PriceMaster {
                 .setRateId(json.getString(RATE_ID))
                 .setCity(json.getString(CITY))
                 .setPrice(json.getDouble(PRICE))
+                .setSourcePrice(json.getDouble(SOURCE_PRICE))
                 .setFromDate(fromDateInSql)
                 .setToDate(toDateInSql);
     }
@@ -67,6 +70,15 @@ public class PriceMaster {
     }
 
     public PriceMaster setPrice(double price) {
+        this.price = price;
+        return this;
+    }
+
+    public double getSourcePrice() {
+        return price;
+    }
+
+    public PriceMaster setSourcePrice(double price) {
         this.price = price;
         return this;
     }
@@ -124,7 +136,8 @@ public class PriceMaster {
 
     public JsonObject toJson()
     {
-        return new JsonObject().put("rateType", this.rateType).put("rateId", this.rateId).put("city", this.city).put("price", this.price)
+        return new JsonObject().put("rateType", this.rateType).put("rateId", this.rateId).put("city", this.city)
+                .put("price", this.price).put("sourcePrice",this.sourcePrice)
                 .put("fromDate", this.fromDate.toString()).put("toDate", this.toDate.toString());
     }
 }
