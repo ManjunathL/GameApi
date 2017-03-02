@@ -9,7 +9,7 @@ define([
         TYPE_THANKYOU: 'thankyou',
         el: '.analytics',
         apply: function(analyticsType) {
-            if (applyAnalytics) {
+            /*if (applyAnalytics) {
                 if (analyticsType === this.TYPE_THANKYOU) {
                     $(this.el).html(ThankYou);
                 } else if (analyticsType === this.TYPE_GENERAL) {
@@ -17,7 +17,7 @@ define([
                 } else {
                     console.log("ERROR: analytics type NOT configured.");
                 }
-            }
+            }*/
         }
     };
 });

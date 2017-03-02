@@ -33,6 +33,7 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <![endif]-->
+    <script  src="/js/libs/jquery/dist/jquery.min.js"></script>
 
     <script src="/js/config.js"> </script>
     <script>
@@ -75,6 +76,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager (noscript) -->
 <div class="container-fluid row padding0 margin0 padding-m-0 margin-m-0"></div>
 
+
 <script type="text/javascript" async>
     var _TConnecto = _TConnecto || {};
     _TConnecto.licenseKey = 'SN3BTWB1R9WIWCXT';
@@ -98,9 +100,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         meta.content = "NOINDEX, NOFOLLOW";
         document.getElementsByTagName('head')[0].appendChild(meta);
     }
+    $( document ).ready(function() {
+     var cururl = window.location.href;
+        var durl = (window.location.href.indexOf("thankyou") > -1) ? 'thankyou' : 'general';
+        console.log(cururl);
+        console.log('-----------ghdgfgdhf------------------');
+        console.log(durl);
+   (function() {
+            if(durl == 'general'){ console.log('============general==============');
+                            alert("general");
+  $('div.test').contents().unwrap();
+
+                    $("div.test-thankyou").remove();
+
+            }
+            else if(durl == 'thankyou'){
+            alert("thank you");
+                    console.log('===========thankyou===============');
+  $('div.test-thankyou').contents().unwrap();
+
+                    $("div.test").remove();
+
+            }
+  })();
+  });
+
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion_async.js" charset="utf-8"></script>
+<div class="test" id="test">
+    <script>
+    ga('set', 'page', location.pathname);
+    fbPixel('PageView');
+</script>
+    <!-- Google Code for Remarketing Tag -->
+    <!--------------------------------------------------
+    Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+    --------------------------------------------------->
+    <script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 948149851;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/948149851/?guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
 
+</div>
 
 <!--LeadSquared Tracking Code Start-->
 <script type="text/javascript" src="https://web.mxradon.com/t/Tracker.js"></script>
@@ -128,5 +179,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- Gauges Tracking Code End -->
 
+
+<div class="test-thankyou" id="test-thankyou">
+    <script>
+   ga('set', 'page', location.pathname);
+   fbPixel('Lead');
+</script>
+    <!-- Google Code for HM Conversion Conversion Page -->
+    <script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 948149851;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "0DBgCPDT_mwQ27yOxAM";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/948149851/?label=0DBgCPDT_mwQ27yOxAM&amp;guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
+
+
+</div>
 </body>
 </html>
