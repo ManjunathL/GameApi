@@ -210,125 +210,93 @@
                                     <% var taskType = ''; %>
                                     <% var scnt = 0; %>
                                     <% var Initpropcls = ''; %>
+                                    <% var viwpcls = ''; %>
                                     <% var Finalpropcls = ''; %>
-                                    <% if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_UPLOADED")){ %>
-                                    <% Initpropcls = 'style="display:none"'; %>
-                                    <% }else if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")){ %>
+                                    <% if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")){ %>
                                     <% Finalpropcls = 'style="display:none"'; %>
                                     <% } %>
-                                    <% if(typeof(Initpropcls) != 'undefined' && (Initpropcls !== '')){ %>
-                                    <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">No Proposal found</div>
-                                    <% } %>
-
-                                    <% _.each(myNest.documentDetails, function(mydoc){ %>
-                                    <% if((mydoc.categoryId != "FLOOR_PLAN")){ %>
-                                    <% if((mydoc.categoryId != "INITIAL_PROPOSAL") && (mydoc.categoryId != "FINAL_PROPOSAL")){ %>
-                                    <div class="col-md-12 proposal-font-heading border-bottom-grey padding6">No Proposal found</div>
-                                    <% }else{ %>
-                                    <% if((mydoc.categoryId == "INITIAL_PROPOSAL") || (mydoc.categoryId == "FINAL_PROPOSAL")){ %>
-                                    <% if((scnt == 1 && myNest.documentDetails[1].categoryId != "FINAL_PROPOSAL") || (scnt == 0 && myNest.documentDetails[0].categoryId == "INITIAL_PROPOSAL")){ %>
                                     <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <i class="icon ion-information-circled color-red"></i>
-                                            <h3 class="text-transform-none txt-color-orange">
-                                                Approval required for Final Proposal
-                                            </h3>
-                                        </div>
-                                    </div>
-
-                                    <% }else if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT")){  %>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <i class="icon ion-information-circled color-red"></i>
-                                            <h3 class="text-transform-none txt-color-orange">
-                                                Approval required for Initial Proposal
-                                            </h3>
-                                        </div>
-                                    </div>
-
-                                    <% }else{ %>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <i class="icon ion-information-circled color-red"></i>
-                                            <h3 class="text-transform-none txt-color-orange">List of Proposals</h3>
-                                        </div>
-                                    </div>
+                                    <% Initpropcls = 'style="display:none"'; %>
                                     <% } %>
+
+                                    <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' &&
+                                        (myNest.paymentDetails[0].sales_stage == "FLOOR_PLAN_UPLOADED")
+                                        || (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_UPLOADED")
+                                        || (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT")
+                                        || (myNest.paymentDetails[0].sales_stage == "COLLECT_BOOKING_AMOUNT")
+                                        || (myNest.paymentDetails[0].sales_stage == "COLLECTED_BOOKING_AMOUNT")
+                                        || (myNest.paymentDetails[0].sales_stage == "SITE_MEASUREMENT_UPLOADED")
+                                        || (myNest.paymentDetails[0].sales_stage == "DETAILED_DESIGN_APPROVED")
+                                        || (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")
+
+                                    ){ %>
+                                    <% viwpcls = 'style="display:block"'; %>
+
                                     <% } %>
-                                    <% if(mydoc.categoryId == "INITIAL_PROPOSAL"){ %>
-                                    <% taskType = "INITIAL_PROPOSAL_RESPONSE"; %>
-                                    <div class="row" <%= Initpropcls%>>
-                                    <div class="col-md-12">
-                                        <h4 class="text-transform-none">Initial Proposal <% if(typeof(mydoc.uploadDate) !== 'undefined'){ %>
-                                            ( <%= mydoc.uploadDate %> )
-                                            <% } %></h4>
-                                        <hr />
-                                        <div class="col-md-8 padding0">
-                                            <p class="align-left">Note that this is an initial proposal without actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
-                                        </div>
 
-                                        <div class="col-md-4" style="padding-left: 0px;">
-                                            <div class="col-md-12">
-                                                <a href="<%= mydoc.docUrl %>" target="_blank" title="View">
-                                                    <div class="row">
-                                                        <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12 align-center"><span class="text-small-proposals">
-                                                                            <%= mydoc.documentRevisionFileName %>
-                                                                        </span></div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% } %>
-                                <% if(mydoc.categoryId == "FINAL_PROPOSAL"){ %>
-                                <% taskType = "FINAL_PROPOSAL_RESPONSE"; %>
-                                <div class="row" <%= Finalpropcls %>><div class="col-md-12"><hr/></div></div>
-                            <div class="row" <%= Finalpropcls %>>
-                            <div class="col-md-12">
-                                <h4 class="text-transform-none">Final Proposal <% if(typeof(mydoc.uploadDate) !== 'undefined'){ %>
-                                    ( <%= mydoc.uploadDate %> )
-                                    <% } %></h4>
-                                <hr />
-                                <div class="col-md-8 padding0">
-                                    <p class="align-left">Note that this is an final proposal with actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
-                                </div>
+                                    <% if(viwpcls != ""){ %>
+                                        <div <%= Initpropcls %>><h4 class="font-normal text-left txt-color-orange" style="text-transform:initial;">Our team is working on your proposal and will get in touch with you shortly.        Thank you!</h4></div>
+                                    <% } %>
+                                    <% _.each(myNest.documentDetails, function(mydoc){ %>
+                                        <% if(mydoc.categoryId == "FINAL_PROPOSAL"){ %>
+                                            <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
 
-                                <div class="col-md-4" style="padding-left: 0px;">
-                                    <div class="col-md-12">
-                                        <a href="<%= mydoc.docUrl %>" target="_blank" title="View">
                                             <div class="row">
-                                                <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                <div class="col-md-12">
+                                                    <i class="icon ion-information-circled color-red"></i>
+                                                    <h3 class="text-transform-none txt-color-orange">
+                                                        Approval required for Final Proposal
+                                                    </h3>
                                                 </div>
                                             </div>
+                                            <% }else{ %>
                                             <div class="row">
-                                                <div class="col-md-12 align-center"><span class="text-small-proposals">
-                                                                            <%= mydoc.documentRevisionFileName %>
-                                                                        </span></div>
+                                                <div class="col-md-12">
+                                                    <i class="icon ion-information-circled color-red"></i>
+                                                    <h3 class="text-transform-none txt-color-orange">List of Proposal</h3>
+                                                </div>
                                             </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <% } %>
-                        <% } %>
-                        <% } %>
-                        <% } %>
-                        <% scnt= scnt +1; }); %>
-                        <% } %>
+                                            <% } %>
+
+
+                                                <% taskType = "FINAL_PROPOSAL_RESPONSE"; %>
+                                                <div class="row" <%= Finalpropcls %>><div class="col-md-12"><hr/></div></div>
+                                                <div class="row" <%= Finalpropcls %>>
+                                                <div class="col-md-12">
+                                                    <h4 class="text-transform-none">Final Proposal <% if(typeof(mydoc.uploadDate) !== 'undefined'){ %>
+                                                        ( <%= mydoc.uploadDate %> )
+                                                        <% } %></h4>
+                                                    <hr />
+                                                    <div class="col-md-8 padding0">
+                                                        <p class="align-left">Note that this is an final proposal with actual site measurements and is liable to change. Approval would be taken again once site measurement is done and design is complete. </p>
+                                                    </div>
+
+                                                    <div class="col-md-4" style="padding-left: 0px;">
+                                                        <div class="col-md-12">
+                                                            <a href="<%= mydoc.docUrl %>" target="_blank" title="View">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 align-center"><i class="fa fa-file-pdf-o" style="font-size: 36px!important;" aria-hidden="true"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 align-center"><span class="text-small-proposals">
+                                                                                            <%= mydoc.documentRevisionFileName %>
+                                                                                        </span></div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                    <% scnt= scnt +1; }); %>
+                                    <% } %>
 
                         <%= console.log('======== taskType =======') %>
                         <%= console.log(taskType) %>
 
                         <% if((typeof(myNest.paymentDetails[0]) != 'undefined') && (typeof(myNest.paymentDetails[0].sales_stage) != 'undefined')){ %>
-                        <% if((myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT") || (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
+                        <% if(myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT"){ %>
                         <div class="row" <%= Finalpropcls %>><div class="col-md-12"><hr/></div></div>
                     <div class="row salesStage">
                         <div class="col-md-12">
@@ -440,14 +408,42 @@
 
             <div class="row">
                 <% if(typeof(myNest.documentDetails) !== 'undefined'){ %>
-                <% _.each(myNest.documentDetails, function(mdoc){ %>
-                <div class="col-md-12 col-sm-12 col-xs-12" <% if(mdoc.categoryId == "FINAL_PROPOSAL"){ %> <%= Finalpropcls %> <% }else if(mdoc.categoryId == "INITIAL_PROPOSAL"){ %> <%= Initpropcls %> <% } %> >
+                <% var dfdocArr = new Array(); %>
+                <% dfdocArr = ["Floor Plan","Initial Proposal","Final Proposal","Booking Form","Works Contract"]; %>
+                <% _.each(dfdocArr, function(dfdoc) { %>
+                <div class="col-md-12 col-sm-12 col-xs-12" >
+                    <span class="pull-left txt-color-orange mr10">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </span>
+                    <% var docUrl = ""; %>
+                    <% var dcarr= new Array(); %>
+                    <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
+
+
+                        <a <% _.each(myNest.documentDetails, function(mdoc){ %>
+                    <% if(dfdoc == dcarr[mdoc.categoryId]){ %> href="<%= mdoc.docUrl %>" <% } %>
+                    <% }); %>target="_blank" title="View">
+                            <span class="pull-left txt-formt text-small-proposals">
+                                <%= dfdoc %>
+                           </span>
+                        </a>
+                </div>
+                <% }); %>
+
+
+                <!--<% _.each(myNest.documentDetails, function(mdoc){ %>
+                <div class="col-md-12 col-sm-12 col-xs-12" >
                     <span class="pull-left txt-color-orange mr10">
                         <i class="fa fa-file-pdf-o"></i>
                     </span>
                     <% var dcarr= new Array(); %>
                     <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal"}; %>
-                    <a href="<%= mdoc.docUrl %>" target="_blank" title="View">
+                    <% var docUrl = "";
+                    %>
+                    <% if(viwpcls != ""){ %>
+                    <% docUrl = mdoc.docUrl; %>
+                    <% } %>
+                    <a href="<%= docUrl %>" target="_blank" title="View">
                        <span class="pull-left txt-formt text-small-proposals">
                             <%= dcarr[mdoc.categoryId] %>
                        </span>
@@ -469,7 +465,7 @@
                         <span class="pull-left txt-formt text-small-proposals">
                             Works Contract
                        </span>
-                </div>
+                </div>-->
                 <% } %>
             </div>
 
