@@ -15,7 +15,7 @@ var fbaseconfig = {
 };
 
 
-/* Live Payment Config */
+/* Live Payment Configuration */
 var paybaseUrl="https://secure.payu.in/_payment";
 var merchantKey = "ovDDuS";
 var SALT = "wIsJh9pk";
