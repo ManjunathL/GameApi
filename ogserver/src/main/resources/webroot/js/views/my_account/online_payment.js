@@ -29,12 +29,8 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            //if(authData.email !== null){
-                document.getElementById("canlink").href = window.location.href;
-                MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            //}else{
-              //  window.location = '/';
-            //}
+            document.getElementById("canlink").href = window.location.href;
+            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         events: {
             "click #send_payu": "makePayment"
