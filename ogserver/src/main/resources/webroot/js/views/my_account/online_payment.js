@@ -48,6 +48,8 @@ define([
                 return false;
             }
 
+            $("#payamountlbl").text('');
+
             var authData = this.refAuth.currentUser;
             var uid = authData.uid;
             var email = authData.email;

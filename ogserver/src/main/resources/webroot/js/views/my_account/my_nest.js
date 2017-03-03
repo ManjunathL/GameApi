@@ -110,7 +110,7 @@ define([
                 $('.page').append("<img id='loadico' src='https://res.cloudinary.com/mygubbi/image/upload/v1470959542/home/new_design/mygubbi.gif' class='page-tran'>")
             , 2000);*/
 
-            /*var that = this;
+            var that = this;
             var mynestProf = authData.email;
             this.mynests.fetch({
                  data: {
@@ -122,7 +122,7 @@ define([
                 error: function(model, response, options) {
                     console.log("couldn't fetch getopportunity data - " + response);
                 }
-            });*/
+            });
 
 
         },

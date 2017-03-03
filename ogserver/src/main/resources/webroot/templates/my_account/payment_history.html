@@ -14,7 +14,7 @@
             <% } %></div>
         <div class="col-md-2">
             <% var dfarr= new Array(); %>
-            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card","CASH":"Cash","Cheque":"Cheque"}; %>
+            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card","CASH":"Cash","Cheque":"Cheque","Neft":"Neft"}; %>
             <% if(typeof(trns.payMode) !== 'undefined'){ %>
                 <%= dfarr[trns.payMode] %>
             <% } %>

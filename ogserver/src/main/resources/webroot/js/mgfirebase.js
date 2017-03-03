@@ -276,14 +276,10 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                 if (user) {
                     uid = user.uid;
                     providerId = user.providerData[0].providerId;
-                    console.log('=================user authData======================');
-                    console.log(user.uid);
                 }
 
 
             if(uid){
-                console.log('=================nest uid======================');
-                                console.log(uid);
                 var userProfileRef = that.rootRef.child("user-profiles/" + uid);
                 var userProfile = null;
                 var providerId = providerId;
@@ -337,8 +333,6 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                     uid=user.uid;
                 }
             if(uid){
-                console.log('=================nest uid======================');
-                console.log(uid);
                 var transactnRef = that.rootRef.child("transactions/" + uid+"/myPayment");
                 transactnRef.on("value", function(snapshot) {
                    if (snapshot.exists()) {

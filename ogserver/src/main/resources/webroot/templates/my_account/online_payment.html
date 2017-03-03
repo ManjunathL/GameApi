@@ -78,8 +78,33 @@
         document.getElementById("uniqueid").value = randId();
         document.getElementById("uniqueid").innerHTML = document.getElementById("uniqueid").value;
         document.getElementById("trnxid").value = document.getElementById("uniqueid").value;
+
+        if (window.event.keyCode == 13 ) return false;
+
+        $('#payamount').keypress(function(e){
+            if ( e.which == 13 ) return false;
+            //or...
+            if ( e.which == 13 ) e.preventDefault();
+
+            $("#payamountlbl").text('');
+            var regex  = /^\d+(?:\.\d{0,2})$/;
+            var numStr = $('#payamount').val();
+            if (!regex.test(numStr)){
+                $("#payamount").focus();
+                $("#payamountlbl").text('Please enter a valid amount.');
+            }
+
+        });
+
+        $('#payamount').blur(function(e){
+            $("#payamountlbl").text('');
+        });
+
     });
     function randId() {
      return Math.random().toString(36).substr(2, 10);
     }
+
+
+
 </script>
