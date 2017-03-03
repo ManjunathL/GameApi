@@ -29,12 +29,12 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            if(authData.email !== null){
+            //if(authData.email !== null){
                 document.getElementById("canlink").href = window.location.href;
                 MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            }else{
-                window.location = '/';
-            }
+            //}else{
+              //  window.location = '/';
+            //}
         },
         events: {
             "click #send_payu": "makePayment"

@@ -54,35 +54,28 @@ define([
             var newPassword = $('#new_password').val();
 
             if((newPassword != null) && (oldpassword != newPassword)){
-               //authData.reauthenticate(firebase.auth.EmailAuthProvider.credential(email, oldpassword));
-
-               authData.updatePassword(newPassword).then(function() {
-                    // Update successful.
-                    $('#success').html("User password changed successfully!");
-                    $('#success_row').css("display", "block");
-                    console.log("User password changed successfully!");
-                  }, function(error) {
-                    // An error happened.
-                    switch (error.code) {
-                        case "INVALID_PASSWORD":
-                            $('#error').html("The specified user account password is incorrect.");
-                            $('#error_row').css("display", "block");
-                            console.log("The specified user account password is incorrect.");
-                            break;
-                        case "INVALID_USER":
-                            $('#error').html("The specified user account does not exist.");
-                            $('#error_row').css("display", "block");
-                            console.log("The specified user account does not exist.");
-                            break;
-                        default:
-                            $('#error').html("Error changing password:", error);
-                            $('#error_row').css("display", "block");
-                            console.log("Error changing password:", error);
-                    }
-                  });
+               authData.reauthenticate(firebase.auth.EmailAuthProvider.credential(email, oldpassword)).then(function() {
+                 authData.updatePassword(newPassword).then(function() {
+                        $('#success').html("User password changed successfully!");
+                        $('#success_row').css("display", "block");
+                        $("#success_row").fadeOut(10000);
+                        console.log("User password changed successfully!");
+                    }, function(error) {
+                        $('#error').html("Error changing password:", error);
+                        $('#error_row').css("display", "block");
+                        $("#error_row").fadeOut(10000);
+                        console.log("Error changing password:", error);
+                 });
+               }, function(error) {
+                    $('#error').html("The specified user account password is incorrect.");
+                    $('#error_row').css("display", "block");
+                    $("#error_row").fadeOut(10000);
+                    console.log("The specified user account password is incorrect.");
+               });
             }else{
                 $('#error').html("Error changing password:", error);
                 $('#error_row').css("display", "block");
+                $("#error_row").fadeOut(10000);
                 console.log("Error changing password:", error);
             }
         },
