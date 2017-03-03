@@ -207,6 +207,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <% if(typeof(myNest.documentDetails) != 'undefined'){ %>
+                                    <input type="hidden" id="salesExecEmail" value="<%= myNest.paymentDetails[0].salesExecEmail %>" />
                                     <% var taskType = ''; %>
                                     <% var scnt = 0; %>
                                     <% var Initpropcls = ''; %>
@@ -478,6 +479,12 @@
             $("#offlnpay").addClass("active");
             $("#onlinepay").removeClass("active");
         });
+
+
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("salesExcMail", $("#salesExecEmail").val());
+        }
+
     });
 
 </script>

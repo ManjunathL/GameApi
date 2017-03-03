@@ -65,6 +65,7 @@ define([
                 var trnxId = $("#trnxid").val();
                 var productinfo = "Mygubbi Modular Furniture";
                 var amount = $("#payamount").val();
+                var salesExcmail = $("#salesExcmail").val();
 
                 var paymentData = {
                    "key": merchantKey,
@@ -76,6 +77,7 @@ define([
                    "phone": phone,
                    "udf1": OpportunityId,
                    "udf2": uid,
+                   "udf3": salesExcmail,
                    "surl": successbaseUrl,
                    "furl": failurebaseUrl,
                    "hash": "",
@@ -88,6 +90,7 @@ define([
 
                 if(hashKey){
                     $("#udf2").val(uid);
+                    $("#udf3").val(salesExcmail);
                     $("#vamount").val(amount);
                     $("#hashkey").val(hashKey);
                     $("#payuform").submit();

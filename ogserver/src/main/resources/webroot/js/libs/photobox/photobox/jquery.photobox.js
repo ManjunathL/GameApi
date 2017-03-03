@@ -113,7 +113,9 @@
             e.stopPropagation();
         });
 
-        $(doc.body).append(overlay);
+        //$(doc.body).append(overlay);
+
+        $("#photobx").append(overlay);
 
         // need this for later:
         docElm = doc.documentElement;
