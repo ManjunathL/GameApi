@@ -44,6 +44,13 @@ define([
                 return false;
             }
 
+            var regexp = /^(\d*([.,](?=\d{1,2}))?\d+)+((?!\2)[.,]\d\d)?$/;
+
+            if (!regexp.test($("#payamount").val())) {
+               $("#payamount").focus();
+               $("#payamountlbl").text('Please enter a valid amount.');
+            }
+
             $("#payamountlbl").text('');
 
             var authData = this.refAuth.currentUser;
