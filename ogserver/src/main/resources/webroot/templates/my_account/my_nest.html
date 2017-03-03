@@ -210,7 +210,7 @@
                                     <% var taskType = ''; %>
                                     <% var scnt = 0; %>
                                     <% var Initpropcls = ''; %>
-                                    <% var viwpcls = ''; %>
+
                                     <% var Finalpropcls = ''; %>
                                     <% if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")){ %>
                                     <% Finalpropcls = 'style="display:none"'; %>
@@ -219,6 +219,7 @@
                                     <% Initpropcls = 'style="display:none"'; %>
                                     <% } %>
 
+                                    <% var viwpcls = ''; %>
                                     <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' &&
                                         (myNest.paymentDetails[0].sales_stage == "FLOOR_PLAN_UPLOADED")
                                         || (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_UPLOADED")
@@ -231,7 +232,6 @@
 
                                     ){ %>
                                     <% viwpcls = 'style="display:block"'; %>
-
                                     <% } %>
 
                                     <% if(viwpcls != ""){ %>
