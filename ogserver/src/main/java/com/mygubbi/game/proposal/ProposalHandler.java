@@ -270,12 +270,10 @@ public class ProposalHandler extends AbstractRouteHandler
                                 });
                     }
                 });
-
-
     }
 
     private void getAccessoryRate(RoutingContext context) {
-        String code = context.request().getParam("code");
+        String code = context.request().getParam("rateId");
         String priceDate = context.request().getParam("priceDate");
         String city = context.request().getParam("city");
 
@@ -294,7 +292,7 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void getHardwareRate(RoutingContext context) {
-        String code = context.request().getParam("code");
+        String code = context.request().getParam("rateId");
         String priceDate = context.request().getParam("priceDate");
         String city = context.request().getParam("city");
 

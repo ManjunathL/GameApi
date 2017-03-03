@@ -278,7 +278,6 @@ public class AssembledProductInQuote
     {
         LOG.info("component" +component);
         return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom(),component.getCatalogCode(),component.getCategory());
-
     }
 
     private void addToProductAccessories(AccHwComponent accessoryComponent, double quantity)

@@ -5,6 +5,8 @@ import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelWorkbookManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by test on 22-07-2016.
@@ -18,7 +20,7 @@ public abstract class AbstractProposalOutputCreator implements ProposalOutputCre
 
     public abstract String getTemplateName();
     public abstract String getOutputFilename();
-
+    private final static Logger LOG = LogManager.getLogger(AbstractProposalOutputCreator.class);
     public AbstractProposalOutputCreator(QuoteData quoteData,ProposalHeader proposalHeader)
     {
         this.quoteData = quoteData;
@@ -40,6 +42,7 @@ public abstract class AbstractProposalOutputCreator implements ProposalOutputCre
     private String copyTemplateFile()
     {
         String templateName = this.getTemplateName();
+        LOG.info("&&&&" +templateName);
         String templateFile = ConfigHolder.getInstance().getStringValue(templateName, "/tmp/" + this.getTemplateName() + ".xlsx");
         String targetFile = this.quoteData.getProposalHeader().folderPath() + "/" + this.getOutputFilename();
         try

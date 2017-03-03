@@ -15,8 +15,6 @@ public class AccHwComponent
     private double price;
     private String uom;
     private String catalogCode;
-
-
     private String category;
 
     public static AccHwComponent fromJson(JsonObject json)

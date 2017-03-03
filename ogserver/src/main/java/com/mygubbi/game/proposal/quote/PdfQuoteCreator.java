@@ -17,8 +17,6 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
     private ProposalHeader proposalHeader;
     private String targetFile;
 
-
-
     public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader){
         this.quoteData = quoteData;
         this.proposalHeader = proposalHeader;

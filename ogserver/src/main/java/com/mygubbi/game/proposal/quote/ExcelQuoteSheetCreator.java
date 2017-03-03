@@ -734,7 +734,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
 
-                this.createRowAndFillData(cr, null, "Finish Material : " + fmaterial + " , Finish Type : " + li.get(index).getFinishtype());
+                this.createRowAndFillData(cr, null, "Finish Material : " + li.get(index).getFinishtype()+ " , Finish Type : " + fmaterial);
                 unitSequence++;
                 if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
             }
@@ -756,7 +756,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 cr++;
 
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
-                this.createRowAndFillData(cr, null, "Finish Material : " + fmaterial + " , Finish Type : " + li.get(index).getFinishtype());
+                this.createRowAndFillData(cr, null, "Finish Material : " +li.get(index).getFinishtype() + " , Finish Type : " +fmaterial );
                 //cr++;
 
                 unitSequence++;

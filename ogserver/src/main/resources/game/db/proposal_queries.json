@@ -204,7 +204,7 @@
       "id": "version.getlatestversion",
       "type": "select",
       "table": "version_master",
-      "query": "select * from version_master where version=(select MAX(version) from version_master where proposalId = ?) and proposald = ? ",
+      "query": "select * from version_master where version=(select MAX(version) from version_master where proposalId = ?) and proposalId = ? ",
       "params": ["proposalId","proposalId"]
     },
     {
