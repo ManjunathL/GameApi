@@ -13,3 +13,13 @@ var fbaseconfig = {
    storageBucket: "firebase-mygubbi.appspot.com",
    messagingSenderId: "896609033641"
 };
+
+
+/* Live Payment Details */
+var paybaseUrl="https://secure.payu.in/_payment";
+var merchantKey = "ovDDuS";
+var SALT = "wIsJh9pk";
+
+var successbaseUrl = "https://game.mygubbi.com:1446/gapi/payment/sucessPayment";
+var failurebaseUrl = "https://game.mygubbi.com:1446/gapi/payment/failurePayment";
+var cancelbaseUrl = "https://game.mygubbi.com:1446/gapi/payment/failurePayment";
