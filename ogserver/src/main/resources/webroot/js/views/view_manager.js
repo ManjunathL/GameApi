@@ -29,6 +29,8 @@ define(function() {
         COMPLETEDPROJECTSPAGE: "completedprojectspage",
         NEWPRODUCT_DETAILSPAGE: "NewProductDetailsPage",
         MYACCOUNTPAGE: "MyAccountPage",
+        MYNESTPAGE: "MyNestPage",
+        MYSETTINGSPAGE: "MySettingsPage",
         REGISTER_USER: "RegisterUser",
         QUALITYCHECK: "QualityCheckPage",
         TYPEOFKITCHENPAGE: "typeofkitchen",

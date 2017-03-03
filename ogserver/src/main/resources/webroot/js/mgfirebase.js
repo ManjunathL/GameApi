@@ -267,11 +267,22 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
         mynest: function(authData, someFunc) {
             var that = this;
             var mynestitems = null;
-
+            var uid = "";
+            var providerId = "";
             if(authData){
-                var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
+                uid=authData.uid;
+            }
+            this.refAuth.onAuthStateChanged(function(user) {
+                if (user) {
+                    uid = user.uid;
+                    providerId = user.providerData[0].providerId;
+                }
+
+
+            if(uid){
+                var userProfileRef = that.rootRef.child("user-profiles/" + uid);
                 var userProfile = null;
-                var providerId = authData.providerData[0].providerId;
+                var providerId = providerId;
 
                 userProfileRef.on("value", function(snapshot) {
                     if (snapshot.exists()) {
@@ -279,13 +290,13 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                     }
                    if(typeof(that.userProfile.crmId) !== 'undefined' && that.userProfile.crmId !== null){
 
-                        var projRef = that.rootRef.child("projects/" + authData.uid+"/myNest");
+                        var projRef = that.rootRef.child("projects/" + uid+"/myNest");
                         var projectDetails = null;
 
                         projRef.on("value", function(snapshot) {
                            if (snapshot.exists()) {
                                that.projectDetails = snapshot.val();
-                               var userProfileRef = that.rootRef.child("user-profiles/" + authData.uid);
+                               var userProfileRef = that.rootRef.child("user-profiles/" + uid);
 
                                var userProfile = null;
 
@@ -293,7 +304,7 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
                                    if (snapshots.exists()) {
                                        that.userProfile = snapshots.val();
                                    }
-                                   var providerId = authData.providerData[0].providerId;
+                                   var providerId = providerId;
                                    someFunc(that.userProfile,that.projectDetails, providerId);
                                   });
                            }else{
@@ -309,17 +320,29 @@ define(['firebase', 'underscore', 'backbone', 'local_storage'], function(firebas
 
                    });
             }
-
+});
         },
         getTransactionDetails: function(authData,someFunct) {
             var that = this;
-            var transactnRef = that.rootRef.child("transactions/" + authData.uid+"/myPayment");
-            transactnRef.on("value", function(snapshot) {
-               if (snapshot.exists()) {
-                   that.transDetails = snapshot.val();
-                   someFunct(that.transDetails);
-               }
+            var uid = "";
+            if(authData){
+                uid=authData.uid;
+            }
+            this.refAuth.onAuthStateChanged(function(user) {
+                if (user) {
+                    uid=user.uid;
+                }
+            if(uid){
+                var transactnRef = that.rootRef.child("transactions/" + uid+"/myPayment");
+                transactnRef.on("value", function(snapshot) {
+                   if (snapshot.exists()) {
+                       that.transDetails = snapshot.val();
+                       someFunct(that.transDetails);
+                   }
+                });
+            }
             });
         }
+
     };
 });

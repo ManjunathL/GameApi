@@ -487,6 +487,9 @@ input[type=checkbox] {
 .padding5 {
     padding: 5px;
 }
+.padding15 {
+    padding: 15px;
+}
 
 .padding50-15 {
     padding: 50px 15px;

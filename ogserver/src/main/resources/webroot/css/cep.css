@@ -1,6 +1,10 @@
+body{
+    font-family: 'Lato', sans-serif;
+}
 .bg-property{
     background-color:#f9f9f9;
 }
+
 .tab-heading {
     font-weight: 400;
     padding: 20px;
@@ -83,17 +87,21 @@ ul.myaccount_list li{
     margin-top:15px!important;
 }
 .mynest-tab-listbox{
-    height: 100px;
-    width: 22%;
+    height: 70px;
     background-color: #ffffff;
-    margin: 14px;
+    margin-right: 14px;
     padding:0px;
+    width:38%;
+    color:#ffffff;
 }
 .mynest-inside-box{
     background-color: #f15a25;
-    height: 75px;
+    height: 70px;
     width: 100%;
     text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
 }
 .mynest-tab-listbox p {
     font-size: 14px!important;
@@ -121,10 +129,60 @@ ul.myaccount_list li{
     background: #fff;
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
+
+@media screen and (max-width: 991px) {
+    .profile-label{
+        text-align:right;
+    }
+    .myaccount_list li{
+        padding:10px 5px;
+    }
+    .menu-tab-list{
+        margin-top:50px!important;
+    }
+    .mynest-tab-listbox {
+        height: 100px;
+        width: 40%;
+        background-color: #ffffff;
+        margin-right: 10px;
+        padding: 0px;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .margin-left-0 {
+        margin-left: 10px !important;
+    }
+    .bg-property{
+        background-color:#f9f9f9;
+        height: auto;
+        min-height: 230px;
+    }
+}
+
+
 @media (max-width: 767px){
     .edit_icon_div{
         right: 0px;
         top: -25px;
+        box-shadow: none;
+    }
+
+}
+@media (max-width: 420px){
+    .mynest-inside-box img{
+        width: 40px;
+        float: left;
+    }
+    .mynest-inside-box span{
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .mynest-inside-box{
+        height: 45px;
+    }
+    .mynest-tab-listbox {
+        height: 45px;
     }
 }
 .chart_time_left{
@@ -149,7 +207,7 @@ ul.myaccount_list li{
     padding:15px 0px 15px 0px;
 }
 
-.bs-margin65{margin:40px 0px!important;}
+.bs-margin65{margin:45px 0px!important;}
 .bs-margin43{margin:43px 0px!important;}
 .bs-wizard {margin-top: 40px;}
 
@@ -157,11 +215,11 @@ ul.myaccount_list li{
 .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959;font-size: 14px;margin-bottom: 5px;text-transform: Capitalize;font-weight: bold;}
-.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {font-family: 'Lato', sans-serif;color: #595959;font-size: 11px;margin-bottom: 5px;text-transform: Capitalize;font-weight: bold;}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 11px;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 65px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; }
-.bs-wizard-dot-none {width: 30px;height: 30px;display: block;top: 70px;left: 50%;margin-top: -60px;margin-left: 50px;border-radius: 50%;background: #f5f5f5;}
+.bs-wizard-dot-none {width: 30px;height: 30px;display: block;top: 70px;left: 50%;margin-top: -65px;margin-left: 47px;border-radius: 50%;background: #f5f5f5;}
 .bs-wizard-dot-none:after {width: 14px; height: 14px; border-radius: 50px; position: absolute; top: 8px; left: 8px; background: #f5f5f5;}
 .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
 .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
@@ -176,34 +234,7 @@ ul.myaccount_list li{
 .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
 /*END Form Wizard*/
 
-@media screen and (max-width: 991px) {
-    .profile-label{
-        text-align:right;
-    }
-    .myaccount_list li{
-        padding:10px 5px;
-    }
-    .menu-tab-list{
-        margin-top:50px!important;
-    }
-    .mynest-tab-listbox {
-        height: 100px;
-        width: 40%;
-        background-color: #ffffff;
-        margin: 10px;
-        padding: 0px;
-        display: inline-block;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .margin-left-0 {
-        margin-left: 10px !important;
-    }
-    .bg-property{
-        background-color:#f9f9f9;
-        height: auto;
-        min-height: 230px;
-    }
-}
+
 
 
 /* Timeline Design */
@@ -414,4 +445,48 @@ padding-left:100px;
 .payhis{
     line-height: 45px;
     border-bottom: 1px solid #ccc;
+}
+
+.txt-formt{
+    font-size: 13px;
+    color: #556871;
+}
+.pb-cep{
+    min-height: 210px;
+}
+
+.kn-info{
+    margin-bottom: 0px;
+}
+
+.btn-password{
+    background-color: #f1591f;
+    color:#ffffff;
+    border-radius:0px !important;
+    padding: 6px 17px;
+}
+
+.btn-password:hover,
+.btn-password:focus,
+.btn-password:active{
+    background-color: #dc3000;
+    color: #ffffff;
+}
+.ih-item{
+    position: relative;
+    display: block;
+}
+
+.info-cep {
+    position: absolute;
+    bottom: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #efefef;
+    left: 10px;
+    right: 10px;
+}
+
+.info-cep:hover {
+    color: #ffffff;
 }

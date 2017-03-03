@@ -24,6 +24,7 @@
                         <input type="hidden" name="txnid" id="trnxid"  value="" />
                         <input type="hidden" name="udf1" id="udf1"  value="<%= userProfile ? userProfile.crmId : '' %>" />
                         <input type="hidden" name="udf2" id="udf2"  value="" />
+                        <input type="hidden" name="udf3" id="udf3"  value="" />
                         <input type="hidden" name="productinfo" value="Mygubbi Modular Furniture" />
                         <input type="hidden" name="amount" id="vamount" value="" />
                         <input type="hidden" name="email" value="<%= userProfile ? userProfile.email : '' %>" />
@@ -42,6 +43,7 @@
                             <label>Contact No : </label>
                             <label class="font-noraml"> <%= userProfile ? userProfile.phone : '' %> </label>
                             <input type="hidden" id="phone" value="<%= userProfile ? userProfile.phone : '' %>" />
+                            <input type="hidden" id="salesExcmail" value="" />
                         </div>
                         <div class="form-group">
                             <label>Opportunity ID : </label>
@@ -60,7 +62,7 @@
                         </div>
                         <div class="form-group">
                             <label> Amount : </label>
-                            <input type="text" id="payamount" value="" required />
+                            <input type="text" id="payamount" autocomplete="off" value="" required />
                             <label id="payamountlbl"></label>
                         </div>
                     </div>
@@ -75,11 +77,41 @@
 </div>
 <script>
     $(document).ready(function() {
+        document.getElementById("salesExcmail").value = localStorage.getItem("salesExcMail");
+
         document.getElementById("uniqueid").value = randId();
         document.getElementById("uniqueid").innerHTML = document.getElementById("uniqueid").value;
         document.getElementById("trnxid").value = document.getElementById("uniqueid").value;
+
+        if (window.event.keyCode == 13 ) return false;
+
+        $('#payamount').keypress(function(e){
+            if ( e.which == 13 ) return false;
+            //or...
+            if ( e.which == 13 ) e.preventDefault();
+
+            var newVal = $('#payamount').val();
+            var regexp = /^(\d*([.,](?=\d{1,2}))?\d+)+((?!\2)[.,]\d\d)?$/;
+
+            if (regexp.test(newVal)) {
+               $("#payamountlbl").text('');
+
+            }else{
+               $("#payamount").focus();
+               $("#payamountlbl").text('Please enter a valid amount.');
+            }
+
+        });
+
+        /*$('#payamount').blur(function(e){
+            $("#payamountlbl").text('');
+        });*/
+
     });
     function randId() {
      return Math.random().toString(36).substr(2, 10);
     }
+
+
+
 </script>

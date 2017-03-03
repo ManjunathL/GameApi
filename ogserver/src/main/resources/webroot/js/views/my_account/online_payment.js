@@ -29,12 +29,8 @@ define([
         },
         render: function () {
             var authData = this.refAuth.currentUser;
-            if(authData.email !== null){
-                document.getElementById("canlink").href = window.location.href;
-                MGF.getUserProfile(authData, this.renderWithUserProfCallback);
-            }else{
-                window.location = '/';
-            }
+            document.getElementById("canlink").href = window.location.href;
+            MGF.getUserProfile(authData, this.renderWithUserProfCallback);
         },
         events: {
             "click #send_payu": "makePayment"
@@ -48,6 +44,15 @@ define([
                 return false;
             }
 
+            var regexp = /^(\d*([.,](?=\d{1,2}))?\d+)+((?!\2)[.,]\d\d)?$/;
+
+            if (!regexp.test($("#payamount").val())) {
+               $("#payamount").focus();
+               $("#payamountlbl").text('Please enter a valid amount.');
+            }
+
+            $("#payamountlbl").text('');
+
             var authData = this.refAuth.currentUser;
             var uid = authData.uid;
             var email = authData.email;
@@ -60,6 +65,7 @@ define([
                 var trnxId = $("#trnxid").val();
                 var productinfo = "Mygubbi Modular Furniture";
                 var amount = $("#payamount").val();
+                var salesExcmail = $("#salesExcmail").val();
 
                 var paymentData = {
                    "key": merchantKey,
@@ -71,6 +77,7 @@ define([
                    "phone": phone,
                    "udf1": OpportunityId,
                    "udf2": uid,
+                   "udf3": salesExcmail,
                    "surl": successbaseUrl,
                    "furl": failurebaseUrl,
                    "hash": "",
@@ -83,6 +90,7 @@ define([
 
                 if(hashKey){
                     $("#udf2").val(uid);
+                    $("#udf3").val(salesExcmail);
                     $("#vamount").val(amount);
                     $("#hashkey").val(hashKey);
                     $("#payuform").submit();

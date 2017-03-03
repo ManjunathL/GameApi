@@ -1,35 +1,26 @@
-<% if(typeof(transdetails) !== 'undefined'){ %>
+<% if(typeof(paydtlsobj) !== 'undefined'){ %>
     <% var cnt= 1 ; %>
-    <div class="row padding-top-10">
-        <div class="col-md-1 font-weight-bold">Sl#</div>
-        <div class="col-md-2 font-weight-bold">Amount</div>
-        <div class="col-md-3 font-weight-bold">Payment Date</div>
-        <div class="col-md-2 font-weight-bold">Payment Mode</div>
-        <div class="col-md-2 font-weight-bold">Transaction#</div>
-        <div class="col-md-2 font-weight-bold">Status</div>
-        <!--<div class="col-md-2 font-weight-bold">Reason</div>-->
-    </div>
-    <% _.each(transdetails, function(trns){ %>
+    <% _.each(paydtlsobj, function(trns){ %>
     <div class="row payhis <% if(cnt%2 == 0){ %> bg-gray <% }else{ %> bg-color-white <% } %>">
         <div class="col-md-1"><%= cnt %></div>
         <!--<div class="col-sm-2">  47 </div>-->
-        <div class="col-md-2"> <% if(typeof(trns.amount) !== 'undefined'){ %>
-            <%= parseFloat(trns.amount).toFixed(2) %>
+        <div class="col-md-2"> <% if(typeof(trns.payAmount) !== 'undefined'){ %>
+            <%= parseFloat(trns.payAmount).toFixed(2) %>
             <% } %></div>
-        <div class="col-md-3"><% if(typeof(trns.addedon) !== 'undefined'){ %>
-            <% var date = new Date(trns.addedon) %>
+        <div class="col-md-3"><% if(typeof(trns.payDate) !== 'undefined'){ %>
+            <% var date = new Date(trns.payDate) %>
             <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
             <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
             <% } %></div>
         <div class="col-md-2">
             <% var dfarr= new Array(); %>
-            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card"}; %>
-            <% if(typeof(trns.mode) !== 'undefined'){ %>
-                <%= dfarr[trns.mode] %>
+            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card","CASH":"Cash","Cheque":"Cheque","Neft":"Neft"}; %>
+            <% if(typeof(trns.payMode) !== 'undefined'){ %>
+                <%= dfarr[trns.payMode] %>
             <% } %>
         </div>
-        <div class="col-md-2"><% if(typeof(trns.txnid) !== 'undefined'){ %>
-        <%= trns.txnid %>
+        <div class="col-md-2"><% if(typeof(trns.payTransId) !== 'undefined'){ %>
+        <%= trns.payTransId %>
         <% } %></div>
         <div class="col-md-2 capitalize"><% if(typeof(trns.status) !== 'undefined'){ %>
             <%= trns.status %>
@@ -45,6 +36,4 @@
             </div>-->
     </div>
     <% cnt=cnt+1; }); %>
-<% }else{ %>
-    <div class="col-md-12 proposal-font-heading padding6">No Transaction found</div>
 <% } %>

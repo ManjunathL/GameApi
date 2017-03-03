@@ -1,5 +1,17 @@
 <link rel="stylesheet" href="/css/cep.css">
-<section class="bg-light-gray user_page padding50-0">
+<style>
+    .tooltip {
+        position: absolute!important;
+        z-index: 999!important;
+        width: 100px!important;
+        height: 2.2em!important;
+        cursor: pointer!important;
+        opacity: 2;
+        font-family: 'Lato', sans-serif;
+    }
+
+</style>
+<section class="bg-light-gray user_page pt20 pb20">
     <div class="container user_profile111">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3">
@@ -21,51 +33,338 @@
                     <h6 class="userCity"><%= userProfile ? userProfile.city : ''%></h6>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 ">
-                <div class="bg-white portfolio-box padding-top15 padding-bottom15 menu-tab-list">
-                    <ul class="nav nav-tabs myaccount_list" data-tabs="tabs" role="tablist">
-                        <% if(typeof(userProfile) !==  'undefined' && userProfile !== null){ %>
-                        <li class="myaccount-lnk active">
-                            <a href="#profile" id="profile-lnk"  role="tab" data-toggle="tab">
-                                <img id="profile-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home.png" class="myaccount-lnk-img cld-responsive img-centered">
-                                <img id="profile-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_home_def.png" class="myaccount-lnk-img_def cld-responsive img-centered">
-                                <div class="myaccount-lnk-content" id="profile-lnk-content" style="color:#f15a23;">My Profile</div>
-                            </a>
-                        </li>
-                        <% } %>
-                        <% if(typeof(myNest) !==  'undefined' && myNest !== null){ %>
-                        <li class="myaccount-lnk">
-                            <a href="#mynest" id="mynest-lnk" role="tab" data-toggle="tab">
-                                <img id="mynest-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest.png" class="myaccount-lnk-img cld-responsive img-centered">
-                                <img id="mynest-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_nest_def.png" class="myaccount-lnk-img_def cld-responsive img-centered">
-                                <div class="myaccount-lnk-content" id="mynest-lnk-content"> My Nest </div>
-                            </a>
-                        </li>
-                        <!--<li class="myaccount-lnk">
-                            <a href="#message" id="message-lnk" role="tab" data-toggle="tab">
-                                <img class="myaccount-lnk-img" id="message-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_message.png" class="cld-responsive img-centered">
-                                <img class="myaccount-lnk-img_def" id="message-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_message_def.png" class="cld-responsive img-centered">
-                                <div class="myaccount-lnk-content" id="message-lnk-content">Message</div>
-                            </a>
-                        </li>-->
-                        <% } %>
-                        <li class="myaccount-lnk">
-                            <a href="#settings" id="settings-lnk" role="tab" data-toggle="tab">
-                                <img id="settings-lnk-img" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog.png" class="myaccount-lnk-img cld-responsive img-centered">
-                                <img id="settings-lnk-img_def" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/v1474615902/cep/cep_ioc_cog_def.png" class="myaccount-lnk-img_def cld-responsive img-centered">
-                                <div class="myaccount-lnk-content" id="settings-lnk-content">Settings</div>
-                            </a>
-                        </li>
-                    </ul>
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="bg-white portfolio-box padding-top15 padding-bottom15 position-relative">
+
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12" id="saveErr" style="display:none;">
+                            <div class="alert alert-danger fade in">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>Error!</strong> A problem has been occurred while submitting your data.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12" id="saveSuccss" style="display:none;">
+                            <div class="alert alert-success fade in">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>Success!</strong> Your profile has been updated successfully.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edit_icon_div">
+                        <span class="glyphicon glyphicon-pencil edit_icon" data-toggle="tooltip" data-placement="left" title="Edit Details">
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <form class="padding10" id="editDetailsForm" method="post">
+                            <div class="col-md-6 col-lg-6">
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label> Name : </label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.displayName : 'User' %></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="user_display_name"
+                                                    class="form-control"
+                                                    maxlength="50"
+                                                    name="displayName"
+                                                    value="<%=userProfile ? userProfile.displayName : ''%>"
+                                                    placeholder="Your Name" required />
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>Contact :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.phone : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="user_phone"
+                                                    class="form-control"
+                                                    name="phone"
+                                                    min="0"
+                                                    maxlength="15"
+                                                    pattern="\d{15}"
+                                                    value="<%= userProfile ? userProfile.phone : ''%>"
+                                                    required />
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>Occupation :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.occupation : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="occupation"
+                                                    class="form-control"
+                                                    name="address"
+                                                    maxlength="250"
+                                                    value="<%= userProfile ? userProfile.occupation : ''%>"
+                                            />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>Interest :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.interest : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="interest"
+                                                    class="form-control"
+                                                    name="address"
+                                                    maxlength="250"
+                                                    value="<%= userProfile ? userProfile.interest : ''%>"
+                                            />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label> Address :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.address : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="user_address"
+                                                    class="form-control"
+                                                    name="address"
+                                                    maxlength="250"
+                                                    value="<%= userProfile ? userProfile.address : ''%>"
+                                            />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>State :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.state : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="user_state"
+                                                    class="form-control"
+                                                    name="state"
+                                                    maxlength="25"
+                                                    value="<%= userProfile ? userProfile.state : ''%>"
+                                            />
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 col-lg-6">
+
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>Email :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7 ">
+                                        <p class="view_mode"><%= userProfile ? userProfile.email : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="user_email_id"
+                                                    class="form-control"
+                                                    maxlength="50"
+                                                    name="email"
+                                                    value="<%= userProfile ? userProfile.email : ''%>"
+                                                    placeholder="Your Email" required />
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>Alternate Contact :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.altPhone : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="user_alt_phone"
+                                                    class="form-control"
+                                                    name="phone"
+                                                    min="0"
+                                                    maxlength="15"
+                                                    value="<%= userProfile ? userProfile.altPhone : ''%>"
+                                                    pattern="\d{15}"
+                                                    required />
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row padding-top45">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>Hobbies :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.hobbies : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="hobbies"
+                                                    class="form-control"
+                                                    name="address"
+                                                    maxlength="250"
+                                                    value="<%= userProfile ? userProfile.hobbies : ''%>"
+                                            />
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>City :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.city : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="text"
+                                                    id="user_city"
+                                                    class="form-control"
+                                                    name="city"
+                                                    maxlength="25"
+                                                    value="<%= userProfile ? userProfile.city : ''%>"
+                                            />
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 profile-label">
+                                        <label>PIN Code :</label>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="view_mode"><%= userProfile ? userProfile.pinCode : ''%></p>
+                                        <p class="edit_mode form-group">
+                                            <input
+                                                    type="number"
+                                                    id="user_pin_code"
+                                                    class="form-control"
+                                                    name="pinCode"
+                                                    min="0"
+                                                    max="999999"
+                                                    value="<%= userProfile ? userProfile.pinCode : ''%>"
+                                                    pattern="\d{6}"
+                                            />
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <input type="hidden" id="crmId" name="crmId" value="<%= userProfile ? userProfile.crmId : ''%>" />
+                                    <button
+                                            class="button border1px float-right edit_mode"
+                                            id="save_details"
+                                            data-loading-text="<i class='fa fa-spinner fa-spin'></i> Save Details"
+                                            type="submit"
+                                            style="margin-right: 15px;"
+                                    >
+                                        Save Details
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="tab-content">
-                <div role="tabpanel" class="tab-pane margin-top50 active" id="profile"></div>
-                <div role="tabpanel" class="tab-pane margin-top50" id="mynest"></div>
-                <div role="tabpanel" class="tab-pane margin-top50" id="message"></div>
-                <div role="tabpanel" class="tab-pane margin-top50" id="settings"></div>
+
+                <div class="cep-password pt20 view_mode">
+                    <a href="/my_settings" class="btn btn-password"> Change Password </a>
                 </div>
+
             </div>
         </div>
     </div>
 </section>
 
+<script>
+    $(document).ready(function() {
+
+        $('.edit_icon').click(function() {
+            $('.view_mode').hide();
+            $('.edit_icon').hide();
+            $('.edit_mode').show();
+        });
+
+        /*$('#save_details').click(function() {
+            $('.edit_mode').hide();
+            $('.view_mode').show();
+            $('.edit_icon').show();
+        });*/
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+
+    });
+
+    var name = document.getElementById("user_display_name");
+    var phone = document.getElementById("user_phone");
+    var pin = document.getElementById("user_pin_code");
+
+    function validateUserData(){
+        if(name.value == ''){
+            name.setCustomValidity('Please enter your name.');
+            return false;
+        }
+        if(phone.value == ''){
+            phone.setCustomValidity('Please enter your contact number.');
+            return false;
+        }/*else{
+            var patt = new RegExp("\d{10}");
+            var res = patt.test(phone);
+            if(!res){
+                phone.setCustomValidity('Please match the requested format');
+            }
+        }*/
+
+        if(pin.value != ''){
+            patt = new RegExp("\d{6}");
+            res = patt.test(pin);
+            if(!res){
+                pin.setCustomValidity('Please match the requested format');
+                return false;
+            }
+        }
+    }
+
+    name.onchange = validateUserData;
+    phone.onchange = validateUserData;
+    pin.onkeyup = validateUserData;
+
+</script>
