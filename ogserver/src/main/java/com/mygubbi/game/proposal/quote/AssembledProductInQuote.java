@@ -2,10 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.*;
-import com.mygubbi.game.proposal.model.AccHwComponent;
-import com.mygubbi.game.proposal.model.AccessoryPackComponent;
-import com.mygubbi.game.proposal.model.ModulePanel;
-import com.mygubbi.game.proposal.model.ShutterFinish;
+import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.PanelComponent;
 import org.apache.logging.log4j.LogManager;
@@ -103,6 +100,11 @@ public class AssembledProductInQuote
         return this.getAggregatedModuleParts(this.modules);
     }
 
+    public List<ModulePart> getAggregatedModuleHardware()
+    {
+        return this.getAggregatedModuleParts(this.modules);
+    }
+
     public List<ModulePart> getAggregatedAccessoryPackPanels()
     {
         return this.getAggregatedModuleParts(this.accessoryPackPanels);
@@ -193,6 +195,7 @@ public class AssembledProductInQuote
             this.modules.add(new ModulePart(module.getMGCode(), "NOS", 1));
             this.addModuleToUnit(module);
             this.collectModuleParts(module);
+            this.collectModuleComponents(module);
         }
         for (ProductAddon addon : this.product.getAddons())
         {
@@ -243,6 +246,26 @@ public class AssembledProductInQuote
             }
         }
     }
+
+    private void collectModuleComponents(ProductModule module)
+    {
+
+            Collection<ModuleComponent> moduleComponents =
+                    ModuleDataService.getInstance().getModuleComponents(module.getMGCode());
+            if (moduleComponents == null ) return;
+            for (ModuleComponent moduleComponent : moduleComponents)
+            {
+                if (moduleComponent.isHardware())
+                {
+                    AccHwComponent hardware = ModuleDataService.getInstance().getHardware(moduleComponent.getComponentCode());
+                    if (hardware == null) continue;
+                    this.addToModuleHardware(hardware, moduleComponent.getQuantity(), module.getUnit(), module.getSequence());
+                }
+            }
+
+
+        }
+
 
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
     {

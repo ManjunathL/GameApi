@@ -22,6 +22,7 @@ public interface ProposalOutputCreator
 
     public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader)
     {
+
         switch (outputType)
         {
             case QUOTATION:

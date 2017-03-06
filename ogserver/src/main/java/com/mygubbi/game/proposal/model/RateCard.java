@@ -61,7 +61,6 @@ public class RateCard
         else {
             priceMaster = RateCardService.getInstance().getShutterRate(this.code, thickness, this.priceDate, this.city);
 
-
         }
 
 

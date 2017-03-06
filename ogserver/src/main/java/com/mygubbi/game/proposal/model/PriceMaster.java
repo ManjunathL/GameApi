@@ -33,6 +33,10 @@ public class PriceMaster {
 
     private final static Logger LOG = LogManager.getLogger(PriceMaster.class);
 
+    public PriceMaster() {
+
+    }
+
     public PriceMaster(JsonObject json)
     {
         Date fromDateInSql = DateUtil.convertDate(json.getString(FROM_DATE));

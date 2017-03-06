@@ -146,7 +146,7 @@ public class RateCardService extends AbstractVerticle
 
 	public PriceMaster getCarcassRate(String code, int thickness, Date priceDate, String city)
 	{
-		LOG.debug("getCarcass rate : " + code + ":" + thickness + ":" + priceDate + ":" + city);
+		LOG.debug("get Carcass rate : " + code + ":" + thickness + ":" + priceDate + ":" + city);
 		String rateCardID = RateCard.makeKey(RateCard.CARCASS_TYPE,code,thickness);
 		return getPriceMaster(priceDate, city, rateCardID, PriceMasterKey.RATECARD_TYPE);
 	}

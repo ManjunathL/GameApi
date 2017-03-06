@@ -276,7 +276,6 @@ public class ProposalHandler extends AbstractRouteHandler
         String code = context.request().getParam("rateId");
         String priceDate = context.request().getParam("priceDate");
         String city = context.request().getParam("city");
-
         getAccessoryRate(context, code, DateUtil.convertDate(priceDate), city);
 
     }
@@ -295,7 +294,6 @@ public class ProposalHandler extends AbstractRouteHandler
         String code = context.request().getParam("rateId");
         String priceDate = context.request().getParam("priceDate");
         String city = context.request().getParam("city");
-
         getHardwareRate(context, code, DateUtil.convertDate(priceDate), city);
 
     }
@@ -309,5 +307,4 @@ public class ProposalHandler extends AbstractRouteHandler
             sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
     }
-
 }
