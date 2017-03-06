@@ -1,13 +1,12 @@
 {
   "version": "0.0.0a",
 
-
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/mg",
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
     "max_pool_size": 20,
-    "user": "root",
-    "password": "root"
+    "user": "admin",
+    "password": "OG$#gubi32"
   },
   "urlwithssl": "",
 
@@ -28,6 +27,9 @@
   "templates_folder" : "c:/Users/Public/game_files",
   "price_files_folder" : "c:/Users/Public/game_files/price_files",
   "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
+  "quote_template_PUN" : "c:/Users/Public/game_files/quote-template-PUN.xlsx",
+  "quote_template_CHN" : "c:/Users/Public/game_files/quote-template-CHN.xlsx",
+  "quote_template_MLR" : "c:/Users/Public/game_files/quote-template-MLR.xlsx",
   "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
   "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",

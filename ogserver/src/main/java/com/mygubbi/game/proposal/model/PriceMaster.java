@@ -74,12 +74,13 @@ public class PriceMaster {
         return this;
     }
 
-    public double getSourcePrice() {
+    public double getSourcePrice()
+    {
         return sourcePrice;
     }
 
-    public PriceMaster setSourcePrice(double sourcePrice) {
-        this.sourcePrice = sourcePrice;
+    public PriceMaster setSourcePrice(double price) {
+        this.sourcePrice = price;
         return this;
     }
 

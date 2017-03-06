@@ -19,8 +19,19 @@ public class ExcelQuoteCreator extends AbstractProposalOutputCreator
 
     public String getTemplateName()
     {
-        return "quote_template";
-    }
+        if(proposalHeader.getProjectCity().equals("Chennai")) {
+            return "quote_template_CHN";
+        }else if(proposalHeader.getProjectCity().equals("Mangalore"))
+        {
+            return "quote_template_MLR";
+        }if(proposalHeader.getProjectCity().equals("Pune"))
+        {
+            return "quote_template_PUN";
+        }
+        else {
+            return "quote_template";
+        }
+}
 
     public String getOutputFilename()
     {
