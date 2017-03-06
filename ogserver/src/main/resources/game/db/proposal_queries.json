@@ -819,20 +819,39 @@
     {
       "id": "addons.addonPriceDetails",
       "type": "select",
+      "table": "addon_master",
       "query": "select * from addon_master where code= ?",
       "params": ["code"]
     },
     {
-      "id": "code.codelookup",
+      "id": "workbench.code.codelookup",
       "type": "select",
+      "table": "code_master",
       "query": "select * from code_master where lookupType = ?",
       "params": ["lookupType"]
     },
     {
-      "id": "code.additionalcodelookup",
+      "id": "workbench.code.additionalcodelookup",
       "type": "select",
+      "table": "code_master",
       "query": "select * from code_master where lookupType = ? and additionalType = ?",
       "params": ["lookupType", "additionalType"]
+    },
+    {
+      "id": "workbench.designmaster.create",
+      "type": "insert",
+      "table": "design_master",
+      "query": "insert into design_master (spaceName,webDisplayName,3dFileLocation,primaryImageLocation,secondaryImageLocationJson,l0Location,moodBoardLocation,conceptNote, spaceType, spaceSize, propertyType, spaceDesignStyle, spaceColorStyle, furnitureJson, decorJson, wallTreatmentType, wallMaterial, wallFinishMaterial, wallFinishSwatch, code, ceilingType, ceilingMaterial, ceilingFinishMaterial, ceilingFinishSwatch, flooringMaterial, flooringFinishSwatch, userPersonaJson, designerDetailsJson, taggedProductJson ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
+      "params": ["spaceName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","code","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","userPersonaJson","designerDetailsJson","taggedProductJson"],
+      "jsonfields":["secondaryImageLocationJson", "conceptNote","furnitureJson","decorJson","userPersonaJson","designerDetailsJson","taggedProductJson"]
+    },
+    {
+      "id": "workbench.productmaster.create",
+      "type": "insert",
+      "table": "product_master",
+      "query": "insert into product_master (productName, webDisplayName, 3dFileLocation, primaryImageLocation, secondaryImageLocationJson, category, subcategory, usp, designAttribute, spaceJSon, productStyle, otherDesignStyle, productColor, productCompatibilityColor, furnitureComponentMaterialJson, designerDetailsJson, sourcingScale) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
+      "params": ["productName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale"],
+      "jsonfields":["secondaryImageLocationJson", "spaceJSon","furnitureComponentMaterialJson","designerDetailsJson"]
     },
 
     {

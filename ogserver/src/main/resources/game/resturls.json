@@ -539,23 +539,7 @@
       "default": "[]"
     },
 
-    {
-      "uri": "/gapi/workbench/codelookup",
-      "source": "db",
-      "query":"code.codelookup",
-      "params":["lookupType"],
-      "resultfields":[],
-      "default": "[]"
-    },
 
-    {
-      "uri": "/gapi/workbench/additionalcodelookup",
-      "source": "db",
-      "query":"code.additionalcodelookup",
-      "params":["lookupType","additionalType"],
-      "resultfields":[],
-      "default": "[]"
-    },
 
     {
       "uri": "/gapi/proposal/accdetails",
@@ -570,6 +554,41 @@
       "source": "db",
       "query":"accessory.hwdetails",
       "params":["apcode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+
+    {
+      "uri": "/gapi/workbench/codelookup",
+      "source": "db",
+      "query":"workbench.code.codelookup",
+      "params":["lookupType"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/workbench/additionalcodelookup",
+      "source": "db",
+      "query":"workbench.code.additionalcodelookup",
+      "params":["lookupType","additionalType"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/designmaster/create",
+      "source": "db",
+      "query":"workbench.designmaster.create",
+      "params":["spaceName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","code","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","userPersonaJson","designerDetailsJson","taggedProductJson"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/productmaster/create",
+      "source": "db",
+      "query":"workbench.productmaster.create",
+      "params":["productName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale"],
       "resultfields":[],
       "default": "[]"
     }
