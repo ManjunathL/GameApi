@@ -916,7 +916,7 @@
     bottom: 5% !important;
     width: 100%;
     display: inline-block;
-    z-index: 300;
+    z-index: 1;
     text-align: center;
 }
 
@@ -958,7 +958,7 @@
 }
 
 .slider_left {
-    z-index: 300;
+    z-index: 10;
     width: 10%;
     position: absolute;
     top: 0%;
@@ -976,7 +976,7 @@
 }
 
 .slider_right {
-    z-index: 300;
+    z-index: 10;
     width: 10%;
     position: absolute;
     top: 0%;
