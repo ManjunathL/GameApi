@@ -580,7 +580,7 @@
       "uri": "/gapi/workbench/designmaster/create",
       "source": "db",
       "query":"workbench.designmaster.create",
-      "params":["spaceName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","code","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","userPersonaJson","designerDetailsJson","taggedProductJson"],
+      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","code","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","userPersonaJson","designerDetailsJson","taggedProductJson"],
       "resultfields":[],
       "default": "[]"
     },
