@@ -1035,6 +1035,42 @@ ul.social-buttons li a:active {
 
 /* End Footer */
 
+/* Start ADDONS Page */
+.addons-img-box {
+    background: #efefef;
+    padding: 15px 15px;
+    margin-top: 20px;
+    margin-bottom:5px;
+    border-radius: 2px;
+}
+.addons-img {
+    position: relative;
+    display: block;
+    margin: 0px auto;
+}
+.addons-price {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+}
+.addons-details h3 {
+    text-transform: capitalize;
+    margin: 10px 0px 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+}
+.addons-details p{
+    font-size: 14px;
+    margin: 0px;
+    font-family: 'Lato', sans-serif;
+}
+/* End ADDONS Page */
+
 /* Start kitchen material Page */
 
 .material-head {
