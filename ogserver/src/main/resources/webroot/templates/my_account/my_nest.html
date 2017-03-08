@@ -216,7 +216,7 @@
                                     <% if(typeof(myNest.paymentDetails[0]) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")){ %>
                                     <% Finalpropcls = 'style="display:none"'; %>
                                     <% } %>
-                                    <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
+                                    <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "Closed_Won")){ %>
                                     <% Initpropcls = 'style="display:none"'; %>
                                     <% } %>
 
@@ -240,7 +240,7 @@
                                     <% } %>
                                     <% _.each(myNest.documentDetails, function(mydoc){ %>
                                         <% if(mydoc.categoryId == "FINAL_PROPOSAL"){ %>
-                                            <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")){ %>
+                                            <!--<% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' && (myNest.paymentDetails[0].sales_stage == "Closed_Won")){ %>
 
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -257,7 +257,7 @@
                                                     <h3 class="text-transform-none txt-color-orange">List of Proposal</h3>
                                                 </div>
                                             </div>
-                                            <% } %>
+                                            <% } %>-->
 
 
                                                 <% taskType = "FINAL_PROPOSAL_RESPONSE"; %>
@@ -296,7 +296,7 @@
                         <%= console.log('======== taskType =======') %>
                         <%= console.log(taskType) %>
 
-                        <% if((typeof(myNest.paymentDetails[0]) != 'undefined') && (typeof(myNest.paymentDetails[0].sales_stage) != 'undefined')){ %>
+                        <!--<% if((typeof(myNest.paymentDetails[0]) != 'undefined') && (typeof(myNest.paymentDetails[0].sales_stage) != 'undefined')){ %>
                         <% if(myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT"){ %>
                         <div class="row" <%= Finalpropcls %>><div class="col-md-12"><hr/></div></div>
                     <div class="row salesStage">
@@ -348,7 +348,7 @@
                         </div>
                     </div>
                     <% } %>
-                    <% } %>
+                    <% } %>-->
                 </div>
             </div>
                         </div>
@@ -409,6 +409,23 @@
 
             <div class="row">
                 <% if(typeof(myNest.documentDetails) !== 'undefined'){ %>
+
+
+                <% var intipclslnk = ''; %>
+                <% if(typeof(myNest.paymentDetails[0].sales_stage) != 'undefined' &&
+                (myNest.paymentDetails[0].sales_stage == "FLOOR_PLAN_UPLOADED")
+                || (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_UPLOADED")
+                || (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT")
+                || (myNest.paymentDetails[0].sales_stage == "COLLECT_BOOKING_AMOUNT")
+                || (myNest.paymentDetails[0].sales_stage == "COLLECTED_BOOKING_AMOUNT")
+
+                ){ %>
+                <% intipclslnk = 'style="display:none"'; %>
+                <% } %>
+
+                <%= console.log('===========mynest===============') %>
+                <%= console.log(myNest.paymentDetails[0].sales_stage) %>
+
                 <% var dfdocArr = new Array(); %>
                 <% dfdocArr = ["Floor Plan","Initial Proposal","Final Proposal","Booking Form","Works Contract"]; %>
                 <% _.each(dfdocArr, function(dfdoc) { %>
@@ -422,7 +439,26 @@
 
 
                         <a <% _.each(myNest.documentDetails, function(mdoc){ %>
-                    <% if(dfdoc == dcarr[mdoc.categoryId]){ %> href="<%= mdoc.docUrl %>" <% } %>
+                    <% if(dfdoc == dcarr[mdoc.categoryId]){ %>
+                        <% if(dfdoc == "Initial Proposal"
+                                    && (typeof(myNest.paymentDetails[0].sales_stage) != 'undefined'
+                                    && (myNest.paymentDetails[0].sales_stage == "FLOOR_PLAN_UPLOADED")
+                                    || (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_UPLOADED")
+                                    || (myNest.paymentDetails[0].sales_stage == "INITIAL_PROPOSAL_SENT")
+                                    || (myNest.paymentDetails[0].sales_stage == "COLLECT_BOOKING_AMOUNT")
+                        )){ %>
+                        <% }else if(dfdoc == "Final Proposal"
+                                && (typeof(myNest.paymentDetails[0].sales_stage) != 'undefined'
+                                && (myNest.paymentDetails[0].sales_stage == "SITE_MEASUREMENT_UPLOADED")
+                                || (myNest.paymentDetails[0].sales_stage == "DETAILED_DESIGN_APPROVED")
+                                || (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_UPLOADED")
+                                || (myNest.paymentDetails[0].sales_stage == "FINAL_PROPOSAL_SENT")
+                                || (myNest.paymentDetails[0].sales_stage == "COLLECT_ORDER_AMOUNT")
+                        )){ %>
+                        <% }else{ %>
+                                href="<%= mdoc.docUrl %>"
+                        <% } %>
+                    <% } %>
                     <% }); %>target="_blank" title="View">
                             <span class="pull-left txt-formt text-small-proposals">
                                 <%= dfdoc %>
