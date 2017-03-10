@@ -137,6 +137,7 @@ define([
             'online-payment(/)': 'online_payment',
             'paysuccess-:txnId(/)': 'online_payment_success',
             'payfailure-:txnId(/)': 'online_payment_failure',
+            'partners-:developers(/)': 'partners',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -843,11 +844,19 @@ define([
             });
         });
         router.on('route:aboutus', function(actions) {
-                    setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
-                    require(['views/footer/aboutus'], function(AboutUsPage) {
-                        VM.create(VM.ABOUTUS, AboutUsPage).render();
-                    });
-                });
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+            require(['views/footer/aboutus'], function(AboutUsPage) {
+                VM.create(VM.ABOUTUS, AboutUsPage).render();
+            });
+        });
+
+        router.on('route:partners', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+            require(['views/partners/builders'], function(BuilderPage) {
+                VM.create(VM.BUILDERPAGE, BuilderPage).render();
+            });
+        });
+
         router.on('route', function () {
             $("html,body").scrollTop(0);
         });
