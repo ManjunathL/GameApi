@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.quote;
 
+import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +21,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
     public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader){
         this.quoteData = quoteData;
         this.proposalHeader = proposalHeader;
-        this.targetFile = this.quoteData.getProposalHeader().folderPath() + "//quotation.pdf";
+        this.targetFile = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/") + "//quotation.pdf";
 
     }
 

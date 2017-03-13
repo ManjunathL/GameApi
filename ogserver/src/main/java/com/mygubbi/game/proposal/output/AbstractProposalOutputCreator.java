@@ -44,7 +44,7 @@ public abstract class AbstractProposalOutputCreator implements ProposalOutputCre
         String templateName = this.getTemplateName();
         LOG.info("&&&&" +templateName);
         String templateFile = ConfigHolder.getInstance().getStringValue(templateName, "/tmp/" + this.getTemplateName() + ".xlsx");
-        String targetFile = this.quoteData.getProposalHeader().folderPath() + "/" + this.getOutputFilename();
+        String targetFile = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/") + "/" + this.getOutputFilename();
         try
         {
             VertxInstance.get().fileSystem().deleteBlocking(targetFile);
