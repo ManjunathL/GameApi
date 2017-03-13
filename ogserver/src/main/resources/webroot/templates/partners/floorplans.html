@@ -1,0 +1,43 @@
+<%= console.log(" ============== floorplans ==================") %>
+<%= console.log(floorplans) %>
+<% if(typeof(floorplans) !== 'undefined'){ %>
+<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 pddn-20-top pddn-20-btm text-center">
+<div class="owl-carousel owl-theme">
+    <% _.each(floorplans, function(flr){ %>
+    <div class="item">
+        <p class="flat-no text-center">Flat No: <%= flr.apartment_number %></p>
+        <img class="img-responsive" src="<%= flr.floor_plan_img %>" alt="floor-plan">
+        <p class="flat-no text-center"> Floor Plan - <%= flr.level_type %>  </p>
+        <input type="hidden" id="flrplnId" value="<%= flr.floorPlanId %>">
+        <button type="button" class="getpak btn btn-main-color"> Get Package </button>
+    </div>
+    <% }); %>
+</div>
+</div>
+<script src="partners/assets/plugins/OwlCarousel/owl.carousel.js"></script>
+<script>
+    $(document).ready(function() {
+    $('.owl-carousel').owlCarousel({
+		loop: true,
+		margin: 10,
+		responsiveClass: true,
+		responsive: {
+		  0: {
+			items: 1,
+			nav: true
+		  },
+		  600: {
+			items: 1,
+			nav: false
+		  },
+		  1000: {
+			items: 1,
+			nav: true,
+			loop: false,
+			margin: 20
+		  }
+		}
+	  });
+	 });
+</script>
+<% } %>

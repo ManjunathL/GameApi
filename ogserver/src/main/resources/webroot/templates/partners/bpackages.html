@@ -1,0 +1,30 @@
+<%= console.log(" ============== bpackages ==================") %>
+<%= console.log(bpackages) %>
+<% if(typeof(bpackages) !== 'undefined'){ %>
+<div class="row">
+    <% _.each(bpackages, function(bpk){ %>
+    <div class="col-sm-4">
+        <!-- Pricing Pass 01 -->
+        <div class="white-bg">
+            <h3 class="text-uppercase text-center pddn-20-top pddn-10-btm"><%= bpk.package_name %></h3>
+            <div class="accent-bg pddn-20-top-btm text-center">
+                <p class="price">
+                        <span class="text-bigger">
+                            <img src="<%= bpk.package_logo %>" alt="logo" class="img-responsive img-center pddn-30">
+                        </span>
+                </p>
+            </div>
+            <ul class="list-pricing">
+                <li> <%= bpk.Package_description %> </li>
+            </ul>
+            <p class=" pddn-20-btm text-center">
+            <% if(bpk.platinum_status !== 1){ %>
+            <button class="getdsgn btn btn-main-ghost" data-element="<%= bpk.packageId %>">Get Design</button>
+            <% } %>
+            </p>
+        </div>
+        <!-- /.Pricing Pass 01 -->
+    </div>
+    <% }); %>
+</div>
+<% } %>

@@ -97,7 +97,7 @@
                                 <h2 class="white"> Co-creating Beautiful Homes! </h2>
 
                                 <h3 class="mrgn-50-top white sm-title">
-                                    <span class="date"><a href=""> Explore 360 View </a></span>
+                                    <span class="date"><a href="https://www.urbana.ozonegroup.com/360-view-three-bhk.php" target="_blank"> Explore 360 View </a></span>
                                 </h3>
                             </div>
                         </div>
@@ -287,25 +287,17 @@
             <div class="col-md-12 text-center">
                 <form novalidate style="visibility: visible; animation-name: zoomIn;">
                     <div class="row">
-                        <div class="col-sm-2">
-                            <select class="form-control sm-select">
-                                <option>Select Phase</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                        <div class="col-sm-3">
+                            <select id="prjctsel" class="form-control sm-select">
+                                <option>Select Project</option>
                             </select>
                         </div>
                         <div class="col-sm-2">
-                            <select class="form-control sm-select">
+                            <select id="towersel" class="form-control sm-select">
                                 <option>Select Tower/Block</option>
-                                <option>1/A</option>
-                                <option>2/B</option>
-                                <option>3/C</option>
-                                <option>4/D</option>
                             </select>
                         </div>
-                        <div class="col-sm-2">
+                        <!--<div class="col-sm-2">
                             <select class="form-control sm-select">
                                 <option>Select Level </option>
                                 <option>1</option>
@@ -313,129 +305,30 @@
                                 <option>3</option>
                                 <option>4</option>
                             </select>
-                        </div>
+                        </div>-->
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label class="sr-only" for="Email"></label>
-                                <input type="number" class="form-control" placeholder="Enter Apt. No. *" id="email">
+                                <label class="sr-only" for="apartment_number"></label>
+                                <input type="number" class="form-control" placeholder="Enter Flat No. *" id="apartment_number">
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-main-color"> Submit </button>
+                        <div class="col-sm-1">
+                            <button id="twsubmt" type="button" class="btn btn-main-color"> Submit </button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <!-- /.Newsletter Form -->
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 pddn-20-top pddn-20-btm text-center">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <p class="flat-no text-center">Flat No: 305</p>
-                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1486981129/ozone/Shobha-type.jpg" alt="floor-plan">
-                        <p class="flat-no text-center"> Floor Plan </p>
-                        <button type="button" id="room-no-1" class="btn btn-main-color"> Get Package </button>
-                    </div>
-                    <div class="item">
-                        <p class="flat-no text-center">Flat No: 305</p>
-                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1486981129/ozone/Shobha-type.jpg" alt="floor-plan">
-                        <p class="flat-no text-center"> Floor Plan </p>
-                        <button type="button" id="room-no-2" class="btn btn-main-color"> Get Package </button>
-                    </div>
-                </div>
-            </div>
+        <div class="row" id="flrplnsel">
+
         </div>
         <!-- Pricing Passes -->
-        <div id="ozon-flat">
-            <div class="row">
-                <div class="col-sm-4">
-                    <!-- Pricing Pass 01 -->
-                    <div class="white-bg">
-                        <h3 class="text-uppercase text-center pddn-20-top pddn-10-btm">Classic</h3>
-                        <div class="accent-bg pddn-20-top-btm text-center">
-                            <p class="price">
-                        <span class="text-bigger">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1487147361/ozone/classic.png" alt="logo" class="img-responsive img-center pddn-30">
-                        </span>
-                            </p>
-                        </div>
-                        <ul class="list-pricing">
-                            <li> Home Interiors for your 2BHK @ 2.99l </li>
-                        </ul>
-                        <p class=" pddn-20-btm text-center"><button id="design-no-01" class="btn btn-main-ghost">Get Design</button></p>
-                    </div>
-                    <!-- /.Pricing Pass 01 -->
-                </div>
-                <div class="col-sm-4">
-                    <!-- Pricing Pass 02 -->
-                    <div class="white-bg">
-                        <h3 class="text-uppercase text-center pddn-20-top pddn-10-btm">Premium</h3>
-                        <div class="accent-bg pddn-20-top-btm text-center">
-                            <p class="price">
-                        <span class="text-bigger">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1487147361/ozone/premium.png" alt="logo" class="img-responsive img-center pddn-30">
-                        </span>
-                            </p>
-                        </div>
-                        <ul class="list-pricing">
-                            <li> Home Interiors for your 3BHK @ 3.99l </li>
-                        </ul>
-                        <p class=" pddn-20-btm text-center"><button id="design-no-02" class="btn btn-main-ghost">Get Design</button></p>
-                    </div>
-                    <!-- /.Pricing Pass 02 -->
-                </div>
-                <div class="col-sm-4">
-                    <!-- Pricing Pass 03 -->
-                    <div class="white-bg">
-                        <h3 class="text-uppercase text-center pddn-20-top pddn-10-btm">Platinum</h3>
-                        <div class="accent-bg pddn-20-top-btm text-center">
-                            <p class="price">
-                        <span class="text-bigger">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1487147361/ozone/platinium.png" alt="logo" class="img-responsive img-center pddn-30">
-                        </span>
-                            </p>
-                        </div>
-                        <ul class="list-pricing">
-                            <li> Designing every inch of your home, with elan! </li>
-                        </ul>
-                        <p class=" pddn-20-btm text-center"><button id="design-no-03" class="btn btn-main-ghost">Get Design</button></p>
-                    </div>
-                    <!-- /.Pricing Pass 03 -->
-                </div>
-            </div>
+        <div id="ozon-pkag">
         </div>
 
-        <div id="ozon-design">
-            <div class="pddn-20-top pddn-20-btm">
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-                        <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1487069168/ozone/Living_Contemp.jpg" alt="Living Contemp">
-                                <p class="about-flat text-center"> Living Room </p>
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1487069168/ozone/Kidsroom_Contemp.jpg" alt="Kidsroom Contemp">
-                                <p class="about-flat text-center"> Kids Room </p>
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1487069168/ozone/Guestroom_Contemp.jpg" alt="Guest Room">
-                                <p class="about-flat text-center"> Guest Room </p>
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1487069168/ozone/Bedroom_Contemp.jpg" alt="Bedroom">
-                                <p class="about-flat text-center"> Bed Room </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 text-center">
-                        <a href="#location" class="btn btn-ozon-color"> Contact Me With The Best Designs </a>
-                    </div>
-                </div>
-            </div>
+        <div id="ozon-designs">
+
         </div>
 
     </div>

@@ -1,0 +1,8 @@
+<%= console.log(" ============== projects ==================") %>
+<%= console.log(projects) %>
+<% if(typeof(projects) !== 'undefined'){ %>
+<option>Select Project</option>
+<% _.each(projects, function(prj){ %>
+<option value="<%= prj.project_name %>"><%= prj.project_name %></option>
+<% }); %>
+<% } %>
