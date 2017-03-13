@@ -6,10 +6,14 @@ import com.mygubbi.config.ConfigHolder;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.utils.URIUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -99,6 +103,65 @@ public class RouteUtil {
                 .setStatusMessage(statusMessage)
                 .putHeader("Location", url)
                 .end();
+        return;
+    }public void redirectHttpsBuilder(RoutingContext routingContext, String url, String bilderName, String statusMessage) {
+        String newUrl = "";
+        if(!"www".equals(bilderName) && !"mygubbi".equals(bilderName) ) {
+            LOG.info("i am In Builder");
+            LOG.info("first");
+            LOG.info(url);
+            //newUrl = url + "partners" + "-" + bilderName;
+            newUrl = "https://ozone1.mygubbi.com/partners" + "-" + bilderName;
+            LOG.info("second");
+            LOG.info(newUrl);
+            LOG.info("Redirecting " + routingContext.request().uri() + " to " + newUrl);
+            HttpServerResponse response = routingContext.response();
+            response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
+                    .setStatusMessage(statusMessage)
+                    .putHeader("Location", newUrl)
+                    .end();
+            return;
+        }
+        else{
+            LOG.info("Redirecting " + routingContext.request().uri() + " to " + url);
+            HttpServerResponse response = routingContext.response();
+            response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
+                    .setStatusMessage(statusMessage)
+                    .putHeader("Location", newUrl)
+                    .end();
+            return;
+        }
+    }
+    public void redirectBuilder(RoutingContext routingContext, String url, String bilderName, String statusMessage) {
+        String newUrl = "";
+        if(!"www".equals(bilderName) && !"mygubbi".equals(bilderName) ) {
+            LOG.info("i am In Builder");
+            LOG.info("first");
+            LOG.info(url);
+            //newUrl = url + "partners" + "-" + bilderName;
+            newUrl = "https://ozone1.mygubbi.com/partners" + "-" + bilderName;
+            LOG.info("second");
+            LOG.info(newUrl);
+            LOG.info("Redirecting " + routingContext.request().uri() + " to " + newUrl);
+            HttpServerResponse response = routingContext.response();
+            response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
+                    .setStatusMessage(statusMessage)
+                    .putHeader("Location", newUrl)
+                    .end();
+            return;
+        }
+        else{
+            LOG.info("Redirecting " + routingContext.request().uri() + " to " + url);
+            HttpServerResponse response = routingContext.response();
+            response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
+                    .setStatusMessage(statusMessage)
+                    .putHeader("Location", newUrl)
+                    .end();
+            return;
+        }
+
+
+
     }
 
 }
