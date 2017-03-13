@@ -30,6 +30,12 @@
             <ul class="nav navbar-nav navbar-center">
                 <li><a class="page-scroll" href="#home"> <i class="fa fa-home"></i> </a></li>
                 <li><a class="page-scroll" href="#why-mygubbi">Why MyGubbi</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Projects</a>
+                    <ul class="dropdown-menu" id="prjctsel">
+
+                    </ul>
+                </li>
                 <li><a class="page-scroll" href="#schedule">Process</a></li>
                 <li><a class="page-scroll" href="#personalized">Personalized Designs</a></li>
                 <li><a class="page-scroll" href="#gallery">Gallery</a></li>
@@ -288,9 +294,9 @@
                 <form novalidate style="visibility: visible; animation-name: zoomIn;">
                     <div class="row">
                         <div class="col-sm-3">
-                            <select id="prjctsel" class="form-control sm-select">
+                           <!-- <select id="prjctsel" class="form-control sm-select">
                                 <option>Select Project</option>
-                            </select>
+                            </select>-->
                         </div>
                         <div class="col-sm-2">
                             <select id="towersel" class="form-control sm-select">
@@ -648,4 +654,18 @@
 		}
 	  })
 	})
+</script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $(".dropdown").hover(
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+                $(this).toggleClass('open');
+            },
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+                $(this).toggleClass('open');
+            }
+        );
+    });
 </script>

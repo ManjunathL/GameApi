@@ -1,6 +1,6 @@
 <%= console.log(" ============== floorplans ==================") %>
 <%= console.log(floorplans) %>
-<% if(typeof(floorplans) !== 'undefined'){ %>
+<% if(typeof(floorplans) !== 'undefined' && floorplans.length != 0){ %>
 <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 pddn-20-top pddn-20-btm text-center">
 <div class="owl-carousel owl-theme">
     <% _.each(floorplans, function(flr){ %>
@@ -40,4 +40,6 @@
 	  });
 	 });
 </script>
+<% }else{ %>
+<h3 class="text-center">No Floor Plan Available</h3>
 <% } %>

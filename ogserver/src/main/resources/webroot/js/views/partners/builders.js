@@ -96,7 +96,7 @@ define([
          });
         },
         events: {
-            "change #prjctsel": "getTowerBlockNames",
+            "click .prjctselcls": "getTowerBlockNames",
             "click #twsubmt": "getFloorplanImg",
             "click .getpak": "getPackages",
             "click .getdsgn": "getDesignGallery"
@@ -104,10 +104,11 @@ define([
         getTowerBlockNames: function(e){
             e.preventDefault();
             var currentTarget = $(e.currentTarget);
-            var projectName = $("#prjctsel").val();
+            var projectName = currentTarget.data('element');
 
             console.log(' selected project name ');
             console.log(projectName);
+
             var that = this;
             that.partner.set({
                 'projectName':projectName
@@ -131,6 +132,8 @@ define([
                          $("#towersel").html(towerTemp({
                              'towers':towers
                          }));
+
+                         window.location.href="#personalized";
 
                      },
                      error: function(model, response, options) {
