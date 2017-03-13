@@ -118,5 +118,11 @@ public class ProductAddon extends JsonObject
 
     public String getExtendedTitle() { return this.getProductTypeCode() + "-" + this.getProductSubtypeCode() + "-" +this.getProduct();}
     public String getCustomTitle() { return this.getProduct();}
+
+    public ProductAddon setRate(double rate)
+    {
+        this.put(RATE, rate);
+        return this;
+    }
 }
 

@@ -44,6 +44,14 @@
       {
         "name": "com.mygubbi.game.proposal.output.ProposalOutputService",
         "instances": 2
+      },
+
+      {
+        "name": "com.mygubbi.game.proposal.price.ProposalPricingUpdateService"
+      },
+
+      {
+        "name": "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService"
       }
 
 

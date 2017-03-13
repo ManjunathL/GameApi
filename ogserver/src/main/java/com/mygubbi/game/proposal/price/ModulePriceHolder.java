@@ -485,4 +485,13 @@ public class ModulePriceHolder
         return Arrays.asList(this.carcassMaterialRateCard, this.carcassFinishRateCard, this.shutterFinishRateCard,
                 this.carcassDoubleExposedRateCard, this.shutterDoubleExposedRateCard, this.loadingFactorCard, this.labourRateCard);
     }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public double getCostWoAccessories()
+    {
+        return totalCost-accessoryCost;
+    }
 }

@@ -127,6 +127,11 @@ public class ProductLineItem extends JsonObject
         return this.getString(CATALOGUE_NAME);
     }
 
+    public ProductLineItem setAmount(double amount) {
+        this.put(AMOUNT, amount);
+        return this;
+    }
+
     public ProductLineItem addModule(ProductModule module)
     {
         if (!this.containsKey(MODULES))

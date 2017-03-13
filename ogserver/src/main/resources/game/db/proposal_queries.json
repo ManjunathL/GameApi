@@ -83,9 +83,64 @@
     {
       "id": "proposal.create.crm",
       "type": "insert",
-      "table": "proposaltemp",
+      "table": "proposal",
       "query": "insert into proposal(status, title, version, createdBy, crmId, cname, designerName, salesExecName,fullJson) values ('draft', ?, '1.0', ?, ?, ?, ?, ?, ?)",
       "params": ["title", "createdBy","opportunityId", "designerName", "salesExecName", "fullJson" ]
+    },
+
+    {
+      "id": "proposal.select.updateprice",
+      "type": "select",
+      "table": "proposal",
+      "query": "select id,status,version,crmId,pcity,quoteNo,title,quoteNoNew,priceDate from proposal where id = ?",
+      "params": ["proposalId" ]
+    },
+
+    {
+      "id": "proposal.version.select.updateprice",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where proposalId in (select pr.id from proposal pr where pr.id not in (select vm.proposalId from version_master vm where vm.status = 'Confirmed'))",
+      "params": [ ]
+    },
+     {
+      "id": "proposal.version.products.select",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
+      "params": [ "proposalId","version"],
+       "jsonfields":["modules", "addons"]
+    },
+
+    {
+      "id": "proposal.version.price.update",
+      "type": "update",
+      "table": "proposal",
+      "query": "update version_master set amount = ?, finalAmount = ? where id = ?",
+      "params": ["amount", "finalAmount", "id" ]
+    },
+    {
+      "id": "proposalproduct.updateprice.select",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal_product where active = 'A' ",
+      "params": []
+    },
+
+    {
+      "id": "proposaladdon.updateprice.select",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal_product where active = 'A' ",
+      "params": []
+    },
+
+    {
+      "id": "proposal.audit.insert",
+      "type": "insert",
+      "table": "audit_master",
+      "query": "insert into audit_master(proposalId,priceDate,oldAmount,newAmount) values( ?, ?, ?, ?) ",
+      "params": ["proposalId","priceDate","oldAmount","newAmount"]
     },
 
     {

@@ -57,6 +57,7 @@ public class ProductModule extends JsonObject
     private static final String DESCRIPTION = "description";
     private static final String ACCPACKS = "accessoryPacks";
     private static final String ACC_PACK_DEFAULT = "accessoryPackDefault";
+    private static final String COST_WO_ACCESSORIES = "costWoAccessories";
 
     public ProductModule()
     {
@@ -121,6 +122,8 @@ public class ProductModule extends JsonObject
     {
         return this.getDouble(AMOUNT);
     }
+
+    public double getCostWoAccessories() { return this.getDouble(COST_WO_ACCESSORIES);}
 
     public String getRemarks()
     {
@@ -389,5 +392,15 @@ public class ProductModule extends JsonObject
     public boolean isAccessoryUnit()
     {
         return ACCESSORY_UNIT.equals(this.getUnit());
+    }
+
+    public ProductModule setAmount(double amount) {
+        this.put(AMOUNT, amount);
+        return this;
+    }
+
+    public ProductModule setCostWoAccessories(double costWoAccessories) {
+        this.put(COST_WO_ACCESSORIES, costWoAccessories);
+        return this;
     }
 }

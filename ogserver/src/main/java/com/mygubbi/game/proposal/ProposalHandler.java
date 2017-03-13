@@ -10,6 +10,7 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
+import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
 import com.mygubbi.game.proposal.price.RateCardService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.route.AbstractRouteHandler;
@@ -51,18 +52,36 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
         this.get("/hardwareratedetails").handler(this::getHardwareRate);
         this.get("/accratedetails").handler(this::getAccessoryRate);
+        this.post("/updatepricefordraftproposals").handler(this::updatePriceForDraftProposals);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
+    }
+
+    private void updatePriceForDraftProposals(RoutingContext context) {
+
+        JsonObject updatePriceJsonData = new JsonObject();
+        updatePriceJsonData.put("status", false);
+        int id = LocalCache.getInstance().store(updatePriceJsonData);
+        VertxInstance.get().eventBus().send(ProposalPricingUpdateService.RETRIEVE_DRAFT_PROPOSALS, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+                {
+                    JsonObject resultData = (JsonObject) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (!resultData.getBoolean("status"))
+                    {
+                        sendError(context, "Error in updating version.");
+                        LOG.error("Error in updating version.");
+                    }
+                    else
+                    {
+                        sendJsonResponse(context,"Successfully updated the Quotations");
+                        LOG.info("Successfully updated the Quotations");
+                    }
+                });
     }
 
     private void createInitialDraftProposal(RoutingContext routingContext) {
         JsonObject versionData = routingContext.getBodyAsJson();
         LOG.debug("routing context :" + versionData.encodePrettily());
-       /* if (StringUtils.isEmpty(versionData.getString("proposalId")) || StringUtils.isEmpty(versionData.getString("title")))
-        {
-            sendError(routingContext, "Error in creating version as versionNo or title or status are not set.");
-            return;
-        }*/
         Integer id = LocalCache.getInstance().store(new QueryData("version.createdraft", versionData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -81,11 +100,6 @@ public class ProposalHandler extends AbstractRouteHandler
     private void createPostSalesInitial(RoutingContext routingContext) {
         JsonObject versionData = routingContext.getBodyAsJson();
         LOG.debug("routing context :" + versionData.encodePrettily());
-       /* if (StringUtils.isEmpty(versionData.getString("proposalId")) || StringUtils.isEmpty(versionData.getString("title")))
-        {
-            sendError(routingContext, "Error in creating version as versionNo or title or status are not set.");
-            return;
-        }*/
         Integer id = LocalCache.getInstance().store(new QueryData("version.createPostSalesInitial", versionData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
