@@ -12,9 +12,12 @@ public class AuditMaster extends JsonObject {
 
     public static final String ID = "id";
     public static final String PROPOSAL_ID = "proposalId";
+    public static final String VERSION = "version";
     public static final String PRICE_DATE = "priceDate";
-    public static final String OLD_AMOUNT = "oldAmount";
-    public static final String NEW_AMOUNT = "newAmount";
+    public static final String OLD_AMOUNT_PRODUCT = "oldAmountProduct";
+    public static final String NEW_AMOUNT_PRODUCT = "newAmountProduct";
+    public static final String OLD_AMOUNT_ADDON = "oldAmountAddon";
+    public static final String NEW_AMOUNT_ADDON = "newAmountAddon";
 
     public AuditMaster() {}
 
@@ -30,16 +33,28 @@ public class AuditMaster extends JsonObject {
         return this.getInteger(PROPOSAL_ID);
     }
 
+    public String getVERSION() {
+        return this.getString(VERSION);
+    }
+
     public Date getPriceDate() {
         return (Date) this.getValue(PRICE_DATE);
     }
 
-    public double getOldAmount() {
-        return this.getDouble(OLD_AMOUNT);
+    public double getOldAmountProduct() {
+        return this.getDouble(OLD_AMOUNT_PRODUCT);
     }
 
-    public double getNewAmount() {
-        return this.getDouble(NEW_AMOUNT);
+    public double getNewAmountProduct() {
+        return this.getDouble(NEW_AMOUNT_PRODUCT);
+    }
+
+    public double getOldAmountAddon() {
+        return this.getDouble(OLD_AMOUNT_ADDON);
+    }
+
+    public double getNewAmountAddon() {
+        return this.getDouble(NEW_AMOUNT_ADDON);
     }
 
     public AuditMaster setId(int id) {
@@ -52,6 +67,11 @@ public class AuditMaster extends JsonObject {
         return this;
     }
 
+    public AuditMaster setVersion(String version) {
+        this.put(VERSION, version);
+        return this;
+    }
+
     public AuditMaster setPriceDate(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = formatter.format(date);
@@ -59,13 +79,23 @@ public class AuditMaster extends JsonObject {
         return this;
     }
 
-    public AuditMaster setOldAmount(double oldAmount) {
-        this.put(OLD_AMOUNT, oldAmount);
+    public AuditMaster setOldAmountProduct(double oldAmountProduct) {
+        this.put(OLD_AMOUNT_PRODUCT, oldAmountProduct);
         return this;
     }
 
-    public AuditMaster setNewAmount(double newAmount) {
-        this.put(NEW_AMOUNT, newAmount);
+    public AuditMaster setNewAmountProduct(double newAmountProduct) {
+        this.put(NEW_AMOUNT_PRODUCT, newAmountProduct);
+        return this;
+    }
+
+    public AuditMaster setOldAmountAddon(double newAmountProduct) {
+        this.put(NEW_AMOUNT_PRODUCT, newAmountProduct);
+        return this;
+    }
+
+    public AuditMaster setNewAmountAddon(double newAmountProduct) {
+        this.put(NEW_AMOUNT_PRODUCT, newAmountProduct);
         return this;
     }
 

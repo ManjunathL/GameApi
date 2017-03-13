@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonObject;
 public class ProposalVersion extends JsonObject{
 
     public static final String ID = "id";
+    public static final String VERSION = "version";
     public static final String PROPOSAL_ID = "proposalId";
     public static final String FINAL_AMOUNT = "finalAmount";
     public static final String DISCOUNT_AMOUNT = "discountAmount";
@@ -34,6 +35,15 @@ public class ProposalVersion extends JsonObject{
 
     public ProposalVersion setProposalId(int proposalId) {
         this.put(PROPOSAL_ID, proposalId);
+        return this;
+    }
+
+    public String getVersion() {
+        return this.getString(VERSION);
+    }
+
+    public ProposalVersion setVersion(String version) {
+        this.put(VERSION, version);
         return this;
     }
 

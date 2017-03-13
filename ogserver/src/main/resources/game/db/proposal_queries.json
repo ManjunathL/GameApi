@@ -113,6 +113,14 @@
     },
 
     {
+      "id": "proposal.version.addons.select",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select * from proposal_addon where proposalId = ? and fromVersion = ?",
+      "params": [ "proposalId","version"]
+    },
+
+    {
       "id": "proposal.version.price.update",
       "type": "update",
       "table": "proposal",
@@ -141,6 +149,14 @@
       "table": "audit_master",
       "query": "insert into audit_master(proposalId,priceDate,oldAmount,newAmount) values( ?, ?, ?, ?) ",
       "params": ["proposalId","priceDate","oldAmount","newAmount"]
+    },
+
+    {
+      "id": "proposal.audit.addon.update",
+      "type": "update",
+      "table": "audit_master",
+      "query": "update audit_master set oldAmountAddon = ?, newAmountAddon = ? where proposalId = ? and version = ?",
+      "params": ["oldAmountAddon","newAmountAddon","proposalId","version"]
     },
 
     {
@@ -444,6 +460,14 @@
       "table": "proposal_addon",
       "query": "update proposal_addon set seq = ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
       "params": ["seq", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
+    },
+
+    {
+      "id": "proposal.version.addon.update",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set rate = ? where proposalId = ? and version = ?",
+      "params": ["rate", "proposalId", "version"]
     },
 
     {
