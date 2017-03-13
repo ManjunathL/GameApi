@@ -24,6 +24,13 @@ public class RateCard
     public static final String LOADING_FACTOR = "L";
     public static final String LABOUR_FACTOR = "B";
     public static final String LOADING_FACTOR_NONSTANDARD = "N";
+    public static final String CUSTOM_ADDON_SALES_PRICE_FACTOR = "CASP";
+    public static final String ADDON_WO_TAX_FACTOR = "ADWOTAX";
+    public static final String LABOUR_COST_FACTOR = "LC";
+    public static final String NONSTD_MANUFACTURING_COST_FACTOR = "NSTDMC";
+    public static final String STD_MANUFACTURING_COST_FACTOR = "STDMC";
+    public static final String PRODUCT_WO_TAX = "PRODWOTAX";
+    public static final String DISCOUNT_PERCENTAGE = "DP";
 
     private String code;
     private String type;

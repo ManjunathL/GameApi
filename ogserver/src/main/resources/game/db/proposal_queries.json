@@ -947,6 +947,14 @@
       "query": "select id,type,code,title,make,category,imagePath,uom,cp,mrp,msp from acc_hw_master where code=?",
       "params": ["code"]
     },
+
+    {
+      "id": "ratefactor.details",
+      "type": "select",
+      "table": "ratecard_master",
+      "query": "select rateCardID,code,type,thickness from ratecard_master where rateCardId=?",
+      "params": ["rateCardId"]
+    },
     {
       "id": "transaction.insert",
       "type": "insert",

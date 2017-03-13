@@ -606,6 +606,15 @@
       "params":[],
       "resultfields":[],
       "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/rcodedetails",
+      "source": "db",
+      "query":"ratefactor.details",
+      "params":["rateCardId"],
+      "resultfields":[],
+      "default": "[]"
     }
 
   ]

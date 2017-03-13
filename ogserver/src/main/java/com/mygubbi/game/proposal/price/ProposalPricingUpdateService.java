@@ -77,8 +77,7 @@ public class ProposalPricingUpdateService extends AbstractVerticle
                                     });
                         }
                         updatePriceJsonData.put("status", true);
-                        /*message.reply(LocalCache.getInstance().store(updatePriceJsonData));*/
-                        message.reply(updatePriceJsonData);
+                        message.reply(LocalCache.getInstance().store(updatePriceJsonData));
                     }
 
                 });
