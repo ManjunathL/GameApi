@@ -1,8 +1,11 @@
 package com.mygubbi;
 
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.client.utils.URIUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,8 +19,11 @@ public class URLChecker
             "http://mygubbi.com", "http://mygubbi.com/", "http://mygubbi.com/bangalore-lp1",
             "http://www.mygubbi.com", "http://www.mygubbi.com/", "http://www.mygubbi.com/bangalore-lp1",
             "https://mygubbi.com", "https://mygubbi.com/", "https://mygubbi.com/bangalore-lp1",
-            "https://www.mygubbi.com", "https://www.mygubbi.com/", "https://www.mygubbi.com/bangalore-lp1"
+            "https://www.mygubbi.com", "https://www.mygubbi.com/", "https://www.mygubbi.com/bangalore-lp1",
+            "https://uat.mygubbi.com", "https://mydev.mygubbi.com/", "https://ozone.mygubbi.com/bangalore-lp1",
+            "https://abc.mygubbi.com", "https://mehbub.mygubbi.com/", "https://shobha.mygubbi.com/bangalore-lp1"
     };
+    private final static Logger LOG = LogManager.getLogger(URLChecker.class);
 
     public static void main(String[] args)
     {
@@ -28,7 +34,7 @@ public class URLChecker
     {
         long start = System.currentTimeMillis();
         int count = 0;
-        for (int i = 0; i < 100000; i++)
+        for (int i = 0; i < 2; i++)
         {
             for (String url : URLS)
             {
@@ -48,20 +54,28 @@ public class URLChecker
             URI baseUri = new URI(url);
             HttpHost httpHost = URIUtils.extractHost(baseUri);
             String hostName = httpHost.getHostName();
+            LOG.info("=-=-=-baseUri-=-=-");
+            LOG.info(baseUri);
+            LOG.info("hostName");
+            LOG.info(hostName);
+            String beforeFirstDot = hostName.split("\\.")[0];
+            LOG.info(beforeFirstDot);
+            boolean hostname = StringUtils.indexOf(hostName,".") == 1;
+            if(!"www".equals(beforeFirstDot)  && !"mygubbi".equals(beforeFirstDot)){
+                LOG.info("i am In Builder");
+                URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
+                url = newUri.toString();
+                LOG.info("URL " + url + " rewritten as :" + newUri.toString());
+            }
             boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
             boolean httpScheme = ("http").equals(httpHost.getSchemeName());
             boolean httpsScheme = ("https").equals(httpHost.getSchemeName());
-            if (hostNameIsNaked || httpScheme || httpsScheme)
-            {
-                if (hostNameIsNaked || httpScheme || httpsScheme) hostName = "www." + hostName;
-                URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
-                newUri.toString();
-                //System.out.println("URL " + url + " rewritten as :" + newUri.toString() + " in " + duration);
-            }
-            else
-            {
-//                System.out.println("URL " + url + " not rewritten in "  + duration);
-            }
+            if (hostNameIsNaked)
+                hostName = "www." + hostName;
+            URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
+            newUri.toString();
+            System.out.println("URL " + url + " rewritten as :" + newUri.toString() + " in ");
+
         }
         catch (URISyntaxException e)
         {

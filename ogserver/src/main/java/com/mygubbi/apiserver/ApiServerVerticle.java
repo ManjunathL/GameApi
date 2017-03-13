@@ -5,6 +5,7 @@ import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.config.StaticConfigHandler;
 import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
+import com.sun.net.httpserver.HttpsServer;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
@@ -52,8 +53,8 @@ public class ApiServerVerticle extends AbstractVerticle
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
-        this.setupHttpSslServer();
         this.setupHttpRedirectServer();
+        this.setupHttpSslServer();
         startFuture.complete();
     }
 
@@ -65,13 +66,22 @@ public class ApiServerVerticle extends AbstractVerticle
         Router router = Router.router(VertxInstance.get());
         router.route().handler(routingContext -> {
             String url = routingContext.request().absoluteURI();
+            String beforeFirstDot = "";
             try
             {
                 URI baseUri = new URI(url);
                 HttpHost httpHost = URIUtils.extractHost(baseUri);
                 String hostName = httpHost.getHostName();
+                LOG.info("=-=-=-baseUri-=-=-");
+                LOG.info(baseUri);
+                LOG.info("hostName");
+                LOG.info(hostName);
+                beforeFirstDot = hostName.split("\\.")[0];
+                LOG.info(beforeFirstDot);
+                boolean hostname = StringUtils.indexOf(hostName,".") == 1;
                 boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
-                boolean httpScheme = ("http").equals(httpHost.getSchemeName());
+
+                //boolean httpScheme = ("http").equals(httpHost.getSchemeName());
                 //boolean httpsScheme = ("https").equals(httpHost.getSchemeName());
                 if (hostNameIsNaked) hostName = "www." + hostName;
                 URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
@@ -83,7 +93,7 @@ public class ApiServerVerticle extends AbstractVerticle
                 LOG.info("Error with url:" + url + " || " + e.getMessage());
                 url = httpsRedirectUrl;
             }
-            RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
+            RouteUtil.getInstance().redirectBuilder(routingContext, url, beforeFirstDot, "Redirecting to secure mygubbi.com site");
         });
        // this.setupRedirectHandlerForOldUrls(router);
         int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
@@ -97,11 +107,11 @@ public class ApiServerVerticle extends AbstractVerticle
         this.setupApiHandler(router);
         this.setupNakedDomainRouter(router);
         this.setupRedirectHandlerForShopifyUrls(router);
-      //  this.setupRedirectHandlerForOldUrls(router);
+        this.setupRedirectHandlerForOldUrls(router);
         this.setupPrerenderHandler(router);
         this.setupStaticConfigHandler(router);
         this.setupStaticHandler(router);
-
+      
         String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/mygubbiprod.jks");
         String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "0r@nge123$");
         HttpServerOptions options = new HttpServerOptions()
@@ -114,6 +124,9 @@ public class ApiServerVerticle extends AbstractVerticle
                 .setSsl(true)
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
+
+    LOG.info("hello mehbub. you are very good person");
+
 
         int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 443);
         VertxInstance.get().createHttpServer(options).requestHandler(router::accept).listen(httpsPort);
@@ -168,7 +181,10 @@ public class ApiServerVerticle extends AbstractVerticle
     private void setupNakedDomainRouter(Router router)
     {
         router.route(HttpMethod.GET, "/*").handler(new NakedDomainHandler());
+
     }
+
+
 
     private void setupApiHandler(Router router)
     {
@@ -191,6 +207,7 @@ public class ApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/api/auto.search", new AutoSearchHandler(VertxInstance.get()));
         router.mountSubRouter("/api/seo", new SeoHandler(VertxInstance.get()));
         router.mountSubRouter("/api/diy", new DIYHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/partner", new PartnerHandler(VertxInstance.get()));
 
         //router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
     }
