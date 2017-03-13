@@ -8,8 +8,7 @@
         <p class="flat-no text-center">Flat No: <%= flr.apartment_number %></p>
         <img class="img-responsive" src="<%= flr.floor_plan_img %>" alt="floor-plan">
         <p class="flat-no text-center"> Floor Plan - <%= flr.level_type %>  </p>
-        <input type="hidden" id="flrplnId" value="<%= flr.floorPlanId %>">
-        <button type="button" class="getpak btn btn-main-color"> Get Package </button>
+        <button type="button" class="getpak btn btn-main-color" data-element="<%= flr.floorPlanId %>"> Get Package </button>
     </div>
     <% }); %>
 </div>

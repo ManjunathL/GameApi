@@ -1,6 +1,6 @@
 <%= console.log(" ============== bpackages ==================") %>
 <%= console.log(bpackages) %>
-<% if(typeof(bpackages) !== 'undefined'){ %>
+<% if(typeof(bpackages) !== 'undefined' && bpackages.length != 0){ %>
 <div class="row">
     <% _.each(bpackages, function(bpk){ %>
     <div class="col-sm-4">
@@ -29,4 +29,6 @@
     </div>
     <% }); %>
 </div>
+<% }else{ %>
+<h3 class="text-center">No Package Available</h3>
 <% } %>

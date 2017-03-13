@@ -177,7 +177,7 @@ define([
         getPackages: function(e){
          e.preventDefault();
          var currentTarget = $(e.currentTarget);
-         var floorplanId = $("#flrplnId").val();
+         var floorplanId = currentTarget.data('element');
 
          console.log('================floorPlanId=================');
          console.log(floorplanId);
