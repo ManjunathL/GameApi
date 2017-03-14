@@ -103,7 +103,7 @@
       "uri": "/gapi/proposal/version/getlatestversion",
       "source": "db",
       "query":"version.getlatestversion",
-      "params":["proposalId"],
+      "params":["proposalId","proposalId"],
       "resultfields":[],
       "default": "{}"
     },
@@ -557,8 +557,6 @@
       "resultfields":[],
       "default": "[]"
     },
-
-
     {
       "uri": "/gapi/workbench/codelookup",
       "source": "db",
@@ -591,7 +589,22 @@
       "params":["productName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/rcodedetails",
+      "source": "db",
+      "query":"ratefactor.details",
+      "params":["rateCardId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/moduleacchwdetails",
+      "source": "db",
+      "query":"module.hwdetails",
+      "params":["modulecode"],
+      "resultfields":[],
+      "default": "[]"
     }
-
   ]
 }
