@@ -75,7 +75,11 @@ public class QuotationPDFCreator
             LOG.info("City: " +proposalHeader.getProjectCity());
             if(proposalHeader.getProjectCity().equals("Chennai"))
             {
-                p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor, Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", fsize);
+                p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor", fsize);
+                p.setAlignment(Element.ALIGN_LEFT);
+                document.add(p);
+
+                p = new Paragraph("Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", fsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
