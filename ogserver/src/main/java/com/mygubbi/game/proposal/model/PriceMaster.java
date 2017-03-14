@@ -134,6 +134,7 @@ public class PriceMaster {
                 ", rateId='" + rateId + '\'' +
                 ", city='" + city + '\'' +
                 ", price=" + price +
+                ", sourcePrice=" + sourcePrice +
                 ", fromDate=" + fromDate +
                 ", toDate=" + toDate +
                 '}';

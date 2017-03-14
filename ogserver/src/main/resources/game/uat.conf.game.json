@@ -13,7 +13,7 @@
   "ssl_password": "0r@nge123$",
   "http_port" : 1445,
   "https_port" : 1446,
-  "proposal_docs_folder" : "/mnt/game/proposal/",
+  "proposal_docs_folder" : "/mnt/game/proposal",
   "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
   "quote_template_PUN" : "/mnt/game/proposal/templates/quote-template-PUN.xlsx",
   "quote_template_CHN" : "/mnt/game/proposal/templates/quote-template-CHN.xlsx",
