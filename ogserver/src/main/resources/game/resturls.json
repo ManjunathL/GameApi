@@ -615,6 +615,15 @@
       "params":["rateCardId"],
       "resultfields":[],
       "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/moduleacchwdetails",
+      "source": "db",
+      "query":"module.hwdetails",
+      "params":["modulecode"],
+      "resultfields":[],
+      "default": "[]"
     }
 
   ]
