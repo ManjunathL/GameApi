@@ -242,7 +242,7 @@ public class PaymentHandler extends AbstractRouteHandler
                         email.addTo(emailData.getToEmail());
                         email.setFrom(emailData.getFromEmail());
                         //email.setCc(new String[]{"shashidhar.rajarao@mygubbi.com"});
-                        email.setCc(new String[]{"shashidhar.rajarao@mygubbi.com", "smruti.m@mygubbi.com" , "mehaboob.basha@mygubbi.com"});
+                        //email.setCc(new String[]{"shashidhar.rajarao@mygubbi.com", "smruti.m@mygubbi.com" , "mehaboob.basha@mygubbi.com"});
                         email.setSubject(emailData.getSubject());
                         email.setHtml(emailData.getMessageBody());
                         try {

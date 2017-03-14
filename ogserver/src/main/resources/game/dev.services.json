@@ -51,7 +51,16 @@
 
       {
         "name": "com.mygubbi.si.email.EmailService"
+      },
+
+      {
+        "name": "com.mygubbi.game.proposal.price.ProposalPricingUpdateService"
+      },
+
+      {
+        "name": "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService"
       }
+
 
 
     ]

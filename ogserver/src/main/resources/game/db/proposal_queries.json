@@ -83,9 +83,80 @@
     {
       "id": "proposal.create.crm",
       "type": "insert",
-      "table": "proposaltemp",
+      "table": "proposal",
       "query": "insert into proposal(status, title, version, createdBy, crmId, cname, designerName, salesExecName,fullJson) values ('draft', ?, '1.0', ?, ?, ?, ?, ?, ?)",
       "params": ["title", "createdBy","opportunityId", "designerName", "salesExecName", "fullJson" ]
+    },
+
+    {
+      "id": "proposal.select.updateprice",
+      "type": "select",
+      "table": "proposal",
+      "query": "select id,status,version,crmId,pcity,quoteNo,title,quoteNoNew,priceDate from proposal where id = ?",
+      "params": ["proposalId" ]
+    },
+
+    {
+      "id": "proposal.version.select.updateprice",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where proposalId in (select pr.id from proposal pr where pr.id not in (select vm.proposalId from version_master vm where vm.status = 'Confirmed'))",
+      "params": [ ]
+    },
+     {
+      "id": "proposal.version.products.select",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
+      "params": [ "proposalId","version"],
+       "jsonfields":["modules", "addons"]
+    },
+
+    {
+      "id": "proposal.version.addons.select",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select * from proposal_addon where proposalId = ? and fromVersion = ?",
+      "params": [ "proposalId","version"]
+    },
+
+    {
+      "id": "proposal.version.price.update",
+      "type": "update",
+      "table": "proposal",
+      "query": "update version_master set amount = ?, finalAmount = ? where id = ?",
+      "params": ["amount", "finalAmount", "id" ]
+    },
+    {
+      "id": "proposalproduct.updateprice.select",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal_product where active = 'A' ",
+      "params": []
+    },
+
+    {
+      "id": "proposaladdon.updateprice.select",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal_product where active = 'A' ",
+      "params": []
+    },
+
+    {
+      "id": "proposal.audit.insert",
+      "type": "insert",
+      "table": "audit_master",
+      "query": "insert into audit_master(proposalId,priceDate,oldAmount,newAmount) values( ?, ?, ?, ?) ",
+      "params": ["proposalId","priceDate","oldAmount","newAmount"]
+    },
+
+    {
+      "id": "proposal.audit.addon.update",
+      "type": "update",
+      "table": "audit_master",
+      "query": "update audit_master set oldAmountAddon = ?, newAmountAddon = ? where proposalId = ? and version = ?",
+      "params": ["oldAmountAddon","newAmountAddon","proposalId","version"]
     },
 
     {
@@ -389,6 +460,14 @@
       "table": "proposal_addon",
       "query": "update proposal_addon set seq = ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ? where id = ?",
       "params": ["seq", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id"]
+    },
+
+    {
+      "id": "proposal.version.addon.update",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set rate = ? where proposalId = ? and version = ?",
+      "params": ["rate", "proposalId", "version"]
     },
 
     {
@@ -841,16 +920,33 @@
       "id": "workbench.designmaster.create",
       "type": "insert",
       "table": "design_master",
-      "query": "insert into design_master (spaceName,webDisplayName,3dFileLocation,primaryImageLocation,secondaryImageLocationJson,l0Location,moodBoardLocation,conceptNote, spaceType, spaceSize, propertyType, spaceDesignStyle, spaceColorStyle, furnitureJson, decorJson, wallTreatmentType, wallMaterial, wallFinishMaterial, wallFinishSwatch, code, ceilingType, ceilingMaterial, ceilingFinishMaterial, ceilingFinishSwatch, flooringMaterial, flooringFinishSwatch, userPersonaJson, designerDetailsJson, taggedProductJson ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
-      "params": ["spaceName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","code","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","userPersonaJson","designerDetailsJson","taggedProductJson"],
+      "query": "insert into design_master (spaceName,webDisplayName,dFileLocation,primaryImageLocation,secondaryImageLocationJson,l0Location,moodBoardLocation,conceptNote, spaceType, spaceSize, propertyType, spaceDesignStyle, spaceColorStyle, furnitureJson, decorJson, wallTreatmentType, wallMaterial, wallFinishMaterial, wallFinishSwatch, ceilingType, ceilingMaterial, ceilingFinishMaterial, ceilingFinishSwatch, flooringMaterial, flooringFinishSwatch,lighting, designElement, userPersonaJson, designerDetailsJson, taggedProductJson, designerstory ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
+      "params": ["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","lighting","designElement","userPersonaJson","designerDetailsJson","taggedProductJson", "designerstory"],
+      "jsonfields":["secondaryImageLocationJson", "conceptNote","furnitureJson","decorJson","userPersonaJson","designerDetailsJson","taggedProductJson"]
+    },
+    {
+      "id": "workbench.designmaster.select",
+      "type": "select",
+      "table": "design_master",
+      "query": "select * from design_master",
+      "params": [],
       "jsonfields":["secondaryImageLocationJson", "conceptNote","furnitureJson","decorJson","userPersonaJson","designerDetailsJson","taggedProductJson"]
     },
     {
       "id": "workbench.productmaster.create",
       "type": "insert",
       "table": "product_master",
-      "query": "insert into product_master (productName, webDisplayName, 3dFileLocation, primaryImageLocation, secondaryImageLocationJson, category, subcategory, usp, designAttribute, spaceJSon, productStyle, otherDesignStyle, productColor, productCompatibilityColor, furnitureComponentMaterialJson, designerDetailsJson, sourcingScale) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
-      "params": ["productName","webDisplayName","3dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale"],
+      "query": "insert into product_master (productName, webDisplayName, dFileLocation, primaryImageLocation, secondaryImageLocationJson, category, subcategory, usp, designAttribute, spaceJSon, productStyle, otherDesignStyle, productColor, productCompatibilityColor, furnitureComponentMaterialJson, designerDetailsJson, sourcingScale, designerstory) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
+      "params": ["productName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale","designerstory"],
+      "jsonfields":["secondaryImageLocationJson", "spaceJSon","furnitureComponentMaterialJson","designerDetailsJson"]
+    },
+
+    {
+      "id": "workbench.productmaster.select",
+      "type": "select",
+      "table": "product_master",
+      "query": "select * from product_master",
+      "params": [],
       "jsonfields":["secondaryImageLocationJson", "spaceJSon","furnitureComponentMaterialJson","designerDetailsJson"]
     },
 
@@ -874,6 +970,14 @@
       "table": "acc_hw_master",
       "query": "select id,type,code,title,make,category,imagePath,uom,cp,mrp,msp from acc_hw_master where code=?",
       "params": ["code"]
+    },
+
+    {
+      "id": "ratefactor.details",
+      "type": "select",
+      "table": "ratecard_master",
+      "query": "select rateCardID,code,type,thickness from ratecard_master where rateCardId=?",
+      "params": ["rateCardId"]
     },
     {
       "id": "ratefactor.details",

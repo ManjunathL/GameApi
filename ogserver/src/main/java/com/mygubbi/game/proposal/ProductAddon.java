@@ -16,6 +16,8 @@ public class ProductAddon extends JsonObject
 
     private static final String SEQ = "seq";
     private static final String CODE = "code";
+    private static final String FROM_VERSION = "fromVersion";
+    private static final String PROPOSAL_ID = "proposalId";
     private static final String ADDON_CATEGORY_CODE = "categoryCode";
     private static final String PRODUCT_TYPE_CODE = "productTypeCode";
     private static final String PRODUCT_SUBTYPE_CODE = "productSubtypeCode";
@@ -53,6 +55,11 @@ public class ProductAddon extends JsonObject
         return this.getDouble(AMOUNT);
     }
 
+    public int getProposalId()
+    {
+        return this.getInteger(PROPOSAL_ID);
+    }
+
     public String getCategoryCode()
     {
         return this.getString(ADDON_CATEGORY_CODE);
@@ -71,6 +78,11 @@ public class ProductAddon extends JsonObject
     public String getCode()
     {
         return this.getString(CODE);
+    }
+
+    public String getFromVersion()
+    {
+        return this.getString(FROM_VERSION);
     }
 
     public String getUom()
@@ -118,5 +130,11 @@ public class ProductAddon extends JsonObject
 
     public String getExtendedTitle() { return this.getProductTypeCode() + "-" + this.getProductSubtypeCode() + "-" +this.getProduct();}
     public String getCustomTitle() { return this.getProduct();}
+
+    public ProductAddon setRate(double rate)
+    {
+        this.put(RATE, rate);
+        return this;
+    }
 }
 

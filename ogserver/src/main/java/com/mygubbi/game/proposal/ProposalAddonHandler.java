@@ -81,9 +81,7 @@ public class ProposalAddonHandler extends AbstractRouteHandler {
         String code = context.request().getParam("code");
         String priceDate = context.request().getParam("priceDate");
         String city = context.request().getParam("city");
-
         getAddonPrice(context, code, DateUtil.convertDate(priceDate), city);
-
     }
 
     private void getAddonPrice(RoutingContext routingContext, String code, Date priceDate, String city) {
