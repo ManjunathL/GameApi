@@ -605,3 +605,255 @@ ul, ol{
 
 
 /* ----- End Festive Page CSS ------ */
+/* Cucumber Page CSS */
+.cucumber_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481329/cucumber_sales/banner_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 550px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.cucumber-form{
+    background: #126612;
+    color: #ffffff;
+    padding: 50px 0px;
+    min-height: 550px;
+}
+
+.cucumber-mob-form{
+    padding: 0px;
+}
+
+.cucumber-form img{
+    max-width: 85%;
+}
+
+.cucumber-form .cucumber-form-wrapper{
+    padding: 10px 20px;
+}
+
+.cucumber-form h3 {
+    text-align: center;
+    margin: 0px 0px 5px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: #ffe241;
+    font-size:42px;
+}
+
+.cucumber-form .form-control{
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid #aaa;
+    height: 35px;
+    line-height: 35px;
+}
+
+.btn-cucumber{
+    color: #000;
+    border-color: #fee200;
+    background: #fee200;
+    font-size: 20px;
+}
+
+.btn-cucumber:hover,
+.btn-cucumber:active,
+.btn-cucumber:focus{
+    color: #000;
+    border-color: #ffe241;
+    background: #ffe241;
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+.btn-cucumber-red{
+    color: #ffffff;
+    border-color: #ba2027;
+    background: #ba2027;
+    font-size: 20px;
+}
+
+.btn-cucumber-red:hover,
+.btn-cucumber-red:active,
+.btn-cucumber-red:focus{
+    color: #ffffff;
+    border-color: rgba(186, 32, 39, 0.84);
+    background: rgba(186, 32, 39, 0.84);
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+
+.section-cucu-facts{
+    background-color:#96dbd6;
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 350px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px 0px 50px;
+}
+.section-cucu-interior-facts{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/offer-bg_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 545px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px 0px 50px;
+}
+.cucumber-why-us-head{
+    font-weight: 300;
+    color: #126612;
+    text-transform: capitalize;
+    font-size: 42px;
+    padding: 30px 0px 50px;
+    margin: 0px;
+}
+.cucumber-choose-head{
+    font-weight: 600;
+    color: #ba2027;
+}
+
+.whyus-fnt{
+    font-weight: 600;
+    color: #2e4042;
+    font-size: 16px;
+    text-shadow: 0px 0px 0px #2e4042;
+}
+.whyus-fnt-weight{
+    font-weight: 300;
+    color: #2e4042;
+    font-size: 14px;
+    text-shadow: 0px 0px 0px #2e4042;
+}
+.cucumber-gallery-section {
+    background: #ffffff;
+    padding: 40px 0px 40px;
+}
+.cucumber-gallery-txt{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    padding-left: 0;
+    text-align: left;
+}
+.cucumber-gallery-subtxt{
+    padding: 20px 120px;
+}
+.slidhead{
+    font-size: 40px;
+    font-weight: 300;
+}
+.slidpara{
+    font-size:12px;
+}
+.andfnt{
+    font-size: 30px;
+    padding-bottom: 0px;
+    padding-top: 25px;
+}
+.morfnt{
+    font-size: 35px;
+    font-weight: 600;
+}
+.cucumber-footer {
+    padding: 10px 0px 5px 25px;
+    background: #96dbd6;
+    color: #333;
+}
+.cucu-testimonial{
+    font-size: 16px;
+}
+.cucumber-testimonial-box{
+    border: 2px solid #96dbd6 !important;
+}
+@media (max-width: 420px) {
+    .cucumber_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481329/cucumber_sales/banner_02.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
+    .cucumber-why-us-head{
+        font-size: 26px;
+        padding: 20px 0px;
+    }
+    .section-cucu-interior-facts{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/mobile-bg_02.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 545px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        color: #ffffff;
+        padding: 20px 0px 50px;
+    }
+    .cucumber-gallery-txt{
+        position: relative;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        width: 100%;
+        background: #ccc;
+        padding-left: 0;
+        text-align: left;
+    }
+    .cucumber-gallery-subtxt {
+        padding: 20px 20px;
+    }
+    .slidhead{
+        font-size: 30px;
+        font-weight: 300;
+        color: #000;
+    }
+    .slidpara {
+        font-size: 12px;
+        width: 100%;
+        color: #000;
+    }
+}
