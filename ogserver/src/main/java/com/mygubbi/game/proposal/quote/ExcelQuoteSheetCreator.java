@@ -360,7 +360,8 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                             unit.moduleCategory.contains("S - Sliding Wardrobe 2400") ||
                             unit.moduleCategory.contains("S - Storage Module Wall Unit") ||
                             unit.moduleCategory.contains("S - Storage Module Base Unit") ||
-                            unit.moduleCategory.contains("S - Wardrobe Panels"))
+                            unit.moduleCategory.contains("S - Wardrobe Panels") ||
+                            unit.moduleCategory.contains("S - Sliding Wardrobe with Loft"))
                     {
                         WWmodulecount += unit.moduleCount;
                         WWbasecarcass = product.getProduct().getBaseCarcassCode();
