@@ -951,6 +951,14 @@
     },
 
     {
+      "id": "workbench.materialcomponentmapping.select",
+      "type": "select",
+      "table": "material_component_mapping",
+      "query": "select distinct mm.materialName from material_component_mapping mm INNER JOIN code_master cm ON mm.componentName = ? and cm.lookupType = 'component'",
+      "params": ["componentName"]
+    },
+
+    {
       "id": "accessory.details",
       "type": "select",
       "table": "acc_pack_components",
