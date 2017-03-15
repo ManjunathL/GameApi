@@ -610,7 +610,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481329/cucumber_sales/banner_02.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 550px;
+    min-height: 580px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -628,7 +628,7 @@ ul, ol{
     background: #126612;
     color: #ffffff;
     padding: 50px 0px;
-    min-height: 550px;
+    min-height: 580px;
 }
 
 .cucumber-mob-form{
@@ -765,8 +765,9 @@ ul, ol{
 .whyus-fnt{
     font-weight: 600;
     color: #2e4042;
-    font-size: 12px;
+    font-size: 18px;
     text-shadow: 0px 0px 0px #2e4042;
+    font-family: 'Abel', sans-serif;
 }
 .whyus-fnt-weight{
     font-weight: 300;
@@ -825,6 +826,12 @@ ul, ol{
 }
 .cucu-testimonial{
     font-size: 16px!important;
+    color: #5d4c46;
+}
+.cucu-testimonialtxt{
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    font-weight: 600;
 }
 .cucumber-testimonial-box{
     border: 2px solid #96dbd6 !important;
