@@ -1017,6 +1017,14 @@
         "cardnum",
         "fulldetails"
       ]
+    },
+
+    {
+      "id": "module.hwdetails",
+      "type": "select",
+      "table": "module_components",
+      "query": "select modulecode,comptype,compcode,quantity from module_components where modulecode=? and comptype='H' ",
+      "params": ["modulecode"]
     }
   ]
 }

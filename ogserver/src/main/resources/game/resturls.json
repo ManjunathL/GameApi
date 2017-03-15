@@ -103,7 +103,7 @@
       "uri": "/gapi/proposal/version/getlatestversion",
       "source": "db",
       "query":"version.getlatestversion",
-      "params":["proposalId","proposalId"],
+      "params":["proposalId"],
       "resultfields":[],
       "default": "{}"
     },
@@ -557,6 +557,8 @@
       "resultfields":[],
       "default": "[]"
     },
+
+
     {
       "uri": "/gapi/workbench/codelookup",
       "source": "db",
@@ -614,14 +616,7 @@
       "resultfields":[],
       "default": "[]"
     },
-    {
-      "uri": "/gapi/proposal/rcodedetails",
-      "source": "db",
-      "query":"ratefactor.details",
-      "params":["rateCardId"],
-      "resultfields":[],
-      "default": "[]"
-    },
+
     {
       "uri": "/gapi/proposal/moduleacchwdetails",
       "source": "db",
@@ -630,5 +625,6 @@
       "resultfields":[],
       "default": "[]"
     }
+
   ]
 }
