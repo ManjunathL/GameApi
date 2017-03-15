@@ -484,10 +484,10 @@
       "id": "proposal.product.create",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ?)",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?)",
       "params": ["proposalId","fromVersion", "title", "seq", "type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
         "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
-        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount"]
+        "modules", "addons", "createdBy", "costWoAccessories"]
     },
 
     {
@@ -502,7 +502,7 @@
       "id": "proposal.product.createnew",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax) select proposalId, ?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories, profit , margin , amountWoTax, manufactureAmount from proposal_product where proposalId= ? and fromVersion = ? and active = 'A'",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select proposalId, ?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId= ? and fromVersion = ? and active = 'A'",
       "params": ["toVersion","proposalId","fromVersion"]
     },
 
@@ -518,7 +518,7 @@
       "id": "proposal.product.createnewfromoldproposal",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories, profit , margin , amountWoTax) select ?,?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories, profit, margin, amountWoTax from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories) select ?,?, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
       "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
@@ -542,8 +542,8 @@
       "id": "proposal.product.update",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?, profit = ? ,margin = ?, amountWoTax = ?, manufactureAmount = ?, fromVersion = ? where id = ?",
-      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","fromVersion", "id"]
+      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?, fromVersion = ? where id = ?",
+      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories", "fromVersion", "id"]
     },
 
     {
@@ -566,7 +566,7 @@
       "id": "proposal.product.list",
       "type": "select",
       "table": "proposal_product",
-      "query": "select id, fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, createdOn, createdBy, updatedOn, updatedBy, costWoAccessories, profit , margin , amountWoTax,manufactureAmount from proposal_product where proposalId = ? and active = 'A'",
+      "query": "select id, fromVersion, title, seq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, dimension, quantity, amount, quoteFilePath, createdOn, createdBy, updatedOn, updatedBy, costWoAccessories from proposal_product where proposalId = ? and active = 'A'",
       "params": ["proposalId"]
     },
     {
