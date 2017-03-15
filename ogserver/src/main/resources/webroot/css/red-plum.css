@@ -57,6 +57,13 @@ ul, ol{
 .position-relative {
     position: relative;
 }
+.mt30{
+    margin-top: 30px;
+}
+.mt50{
+    margin-top: 50px;
+}
+
 .mt70{
     margin-top: 70px;
 }
@@ -643,6 +650,39 @@ ul, ol{
     padding: 10px 20px;
 }
 
+.cucumber-price-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481325/cucumber_sales/offer-white-bg_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 545px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #333333;
+    padding: 95px 0px 95px;
+}
+
+.cucumber-price-bg h1{
+    font-size: 52px;
+    margin:0px;
+    text-transform:capitalize;
+    color: #126612;
+
+}
+.cucumber-price-bg h2{
+    color: #126612;
+    font-size: 42px;
+    margin:0px;
+     text-transform:capitalize;
+
+ }
 .cucumber-form h3 {
     text-align: center;
     margin: 0px 0px 5px;
@@ -662,6 +702,7 @@ ul, ol{
     line-height: 35px;
     font-family: 'Lato', sans-serif;
 }
+
 .footercnt{
     font-family: 'Lato', sans-serif;
     font-weight: 600;
@@ -671,7 +712,6 @@ ul, ol{
     padding: 30px 0px 50px;
     margin: 0px;
 }
-
 
 .btn-cucumber{
     color: #000;
@@ -850,6 +890,12 @@ ul, ol{
     .cucumber-why-us-head{
         font-size: 26px;
         padding: 20px 0px;
+    }
+    .cucumber-price-bg h1{
+        font-size: 30px;
+    }
+    .cucumber-price-bg h2{
+        font-size: 16px;
     }
     .section-cucu-interior-facts{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/mobile-bg_02.jpg");
