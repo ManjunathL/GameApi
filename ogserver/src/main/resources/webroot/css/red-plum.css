@@ -650,6 +650,8 @@ ul, ol{
     font-weight: 600;
     color: #ffe241;
     font-size:42px;
+    /*font-size: 32px;*/
+    font-family: 'Lato', sans-serif;
 }
 
 .cucumber-form .form-control{
@@ -658,13 +660,25 @@ ul, ol{
     border: 1px solid #aaa;
     height: 35px;
     line-height: 35px;
+    font-family: 'Lato', sans-serif;
 }
+.footercnt{
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size:40px;
+    color: #126612;
+    text-transform: capitalize;
+    padding: 30px 0px 50px;
+    margin: 0px;
+}
+
 
 .btn-cucumber{
     color: #000;
     border-color: #fee200;
     background: #fee200;
     font-size: 20px;
+    font-family: 'Lato', sans-serif;
 }
 
 .btn-cucumber:hover,
@@ -676,12 +690,14 @@ ul, ol{
     outline: thin dotted;
     outline: 0px auto -webkit-focus-ring-color;
     outline-offset: 0px;
+    font-family: 'Lato', sans-serif;
 }
 .btn-cucumber-red{
     color: #ffffff;
     border-color: #ba2027;
     background: #ba2027;
     font-size: 20px;
+    font-family: 'Lato', sans-serif;
 }
 
 .btn-cucumber-red:hover,
@@ -693,6 +709,7 @@ ul, ol{
     outline: thin dotted;
     outline: 0px auto -webkit-focus-ring-color;
     outline-offset: 0px;
+    font-family: 'Lato', sans-serif;
 }
 
 .section-cucu-facts{
@@ -735,7 +752,8 @@ ul, ol{
     font-weight: 300;
     color: #126612;
     text-transform: capitalize;
-    font-size: 42px;
+    font-size:42px;
+    /*font-size: 32px;*/
     padding: 30px 0px 50px;
     margin: 0px;
 }
@@ -747,18 +765,27 @@ ul, ol{
 .whyus-fnt{
     font-weight: 600;
     color: #2e4042;
-    font-size: 16px;
+    font-size: 12px;
     text-shadow: 0px 0px 0px #2e4042;
 }
 .whyus-fnt-weight{
     font-weight: 300;
     color: #2e4042;
-    font-size: 14px;
-    text-shadow: 0px 0px 0px #2e4042;
+    font-size: 16px;
+    /* text-shadow: 0px 0px 0px #2e4042; */
+    font-family: 'Abel', sans-serif;
 }
 .cucumber-gallery-section {
     background: #ffffff;
-    padding: 40px 0px 40px;
+    padding: 0px;
+}
+
+#cucumber #owl-gallery  .owl-dots{
+    position: absolute;
+    left: 46%;
+    top: 76%;
+    margin: 0px !important;
+    padding: 10px 0px 5px;
 }
 .cucumber-gallery-txt{
     position: absolute;
@@ -776,9 +803,11 @@ ul, ol{
 .slidhead{
     font-size: 40px;
     font-weight: 300;
+    font-family: 'Abel', sans-serif;
+    text-align: right;
 }
 .slidpara{
-    font-size:12px;
+    font-size:14px;
 }
 .andfnt{
     font-size: 30px;
@@ -795,7 +824,7 @@ ul, ol{
     color: #333;
 }
 .cucu-testimonial{
-    font-size: 16px;
+    font-size: 16px!important;
 }
 .cucumber-testimonial-box{
     border: 2px solid #96dbd6 !important;
