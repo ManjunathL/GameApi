@@ -166,14 +166,14 @@ public class PaymentHandler extends AbstractRouteHandler
 //            System.out.println("decodedBytes " + new String(decodedBytes));
             if(Objects.equals(status, "failure")){
                 LOG.info("Failure=====>   " +paymentJsonObj.getString("status"));
-                RouteUtil.getInstance().redirect(routingContext, "https://cep.mygubbi.com/payfailure-" + encryptTxn, "Redirecting to new Success Page");
+                RouteUtil.getInstance().redirect(routingContext, "https://www.mygubbi.com/payfailure-" + encryptTxn, "Redirecting to new Success Page");
 
             }
             else {
                 LOG.info("==Success===>   " +paymentJsonObj.getString("status"));
                 sendSuccessEmailToCustomer(paymentJsonObj);
                 sendSuccessEmailTomygubbiTeam(paymentJsonObj);
-                RouteUtil.getInstance().redirect(routingContext, "https://cep.mygubbi.com/paysuccess-" + encryptTxn, "Redirecting to new Success Page");
+                RouteUtil.getInstance().redirect(routingContext, "https://www.mygubbi.com/paysuccess-" + encryptTxn, "Redirecting to new Success Page");
             }
         }
 
