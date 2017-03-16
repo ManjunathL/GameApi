@@ -865,7 +865,7 @@ ul, ol{
     color: #333;
 }
 .cucu-testimonial{
-    font-size: 18px!important;
+    font-size: 16px !important;
     color: #111;
 }
 .cucu-testimonialtxt{
@@ -941,6 +941,12 @@ ul, ol{
         font-size: 12px;
         width: 100%;
         color: #000;
+    }
+    .cucumber-price-bg{
+        padding: 30px 0px;
+    }
+    .whyus-fnt{
+        font-size: 16px;
     }
     #cucumber #owl-gallery  .owl-dots{
         position: relative;
