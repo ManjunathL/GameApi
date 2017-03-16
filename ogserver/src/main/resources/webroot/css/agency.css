@@ -913,7 +913,7 @@
 
 .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
     position: absolute;
-    bottom: 5% !important;
+    bottom: 10% !important;
     width: 100%;
     display: inline-block;
     z-index: 1;
