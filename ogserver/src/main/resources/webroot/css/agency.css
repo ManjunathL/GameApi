@@ -298,7 +298,6 @@
     .style-image-overlay,
     .trend-image-overlay {
         position: relative;
-        height: 300px;
         overflow: hidden;
     }
 }
@@ -8540,7 +8539,7 @@ html .ui-button.ui-state-disabled:active {
         margin: 0px auto !important;
     }
     .txt-over-style-image{
-        top: 45%;
+        top: 30%;
         right: auto;
         width: 80%;
         text-align: center;
