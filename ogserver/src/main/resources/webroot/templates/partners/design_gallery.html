@@ -1,28 +1,20 @@
-<%= console.log(" ============== bpackages ==================") %>
-<%= console.log(bpackages) %>
+<%= console.log(" ============== designgallerys ==================") %>
+<%= console.log(designgallerys) %>
 
-<% if(typeof(bpackages) !== 'undefined'){ %>
+<% if(typeof(designgallerys) !== 'undefined'){ %>
 <div class="pddn-20-top pddn-20-btm">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-            <% _.each(bpackages, function(bpk){ %>
-            <% var myobj = {} %>
-            <%= console.log('===== selpackageId ==') %>
-            <%= console.log(selpackageId) %>
-            <% if(bpk.packageId == selpackageId){ %>
-            <%= console.log(" ------------deisgns--------------- ") %>
-            <%= console.log(bpk.design_img_JSON) %>
             <div class="owl-carousel owl-theme">
-                <% myobj = $.parseJSON(bpk.design_img_JSON) %>
-                <% _.map(myobj, function(key,value){ %>
+            <% _.each(designgallerys, function(dsn){ %>
+
                 <div class="item">
-                    <img class="img-responsive" src="<%= key %>" alt="<%= value %>-Contemp">
-                    <p class="about-flat text-center"> <%= value %> </p>
+                    <img class="img-responsive" src="<%= dsn.design_img %>" alt="<%= dsn.space_name %>-Contemp">
+                    <p class="about-flat text-center"> <%= dsn.space_name %> </p>
                 </div>
-                <% }); %>
-            </div>
-            <% } %>
+
             <% }); %>
+            </div>
         </div>
     </div>
     <div class="row">

@@ -5,9 +5,9 @@
 <div class="owl-carousel owl-theme">
     <% _.each(floorplans, function(flr){ %>
     <div class="item">
-        <p class="flat-no text-center">Flat No: <%= flr.apartment_number %></p>
+        <p class="flat-no text-center"><%= flr.floor_plan_set_name %></p>
         <img class="img-responsive" src="<%= flr.floor_plan_img %>" alt="floor-plan">
-        <p class="flat-no text-center"> Floor Plan - <%= flr.level_type %>  </p>
+        <p class="flat-no text-center"> Floor Plan - <%= flr.flag %>  </p>
         <button type="button" class="getpak btn btn-main-color" data-element="<%= flr.floorPlanId %>"> Get Package </button>
     </div>
     <% }); %>
@@ -40,5 +40,81 @@
 	 });
 </script>
 <% }else{ %>
-<h3 class="text-center">No Floor Plan Available</h3>
+<div class="row">
+    <div class="col-sm-4">
+        <!-- Pricing Pass 01 -->
+        <div class="white-bg">
+            <h3 class="text-uppercase text-center pddn-20-top pddn-10-btm">Custom</h3>
+            <div class="accent-bg pddn-20-top-btm text-center">
+                <p class="price">
+				<span class="text-bigger">
+					<img src="https://res.cloudinary.com/mygubbi/image/upload/v1487147361/ozone/classic.png" alt="logo" class="img-responsive img-center pddn-30">
+				</span>
+                </p>
+            </div>
+            <ul class="list-pricing">
+                <li> Home Interiors for your 2BHK @ 2.99l </li>
+            </ul>
+            <!-- Button trigger modal -->
+
+
+            <p class=" pddn-20-btm text-center"><button class="getdsgn btn btn-main-ghost" data-element="5">Get Design</button></p>
+
+            </p>
+        </div>
+        <!-- /.Pricing Pass 01 -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="col-sm-4">
+        <!-- Pricing Pass 03 -->
+        <div class="white-bg">
+            <h3 class="text-uppercase text-center pddn-20-top pddn-10-btm">Platinum</h3>
+            <div class="accent-bg pddn-20-top-btm text-center">
+                <p class="price">
+				<span class="text-bigger">
+					<img src="https://res.cloudinary.com/mygubbi/image/upload/v1487147361/ozone/platinium.png" alt="logo" class="img-responsive img-center pddn-30">
+				</span>
+                </p>
+            </div>
+            <ul class="list-pricing">
+                <li> Designing every inch of your home, with elan! </li>
+            </ul>
+            <p class=" pddn-20-btm text-center"><a href="#location" class="btn btn-ozon-color"> Enquire Now </a></p>
+        </div>
+        <!-- /.Pricing Pass 03 -->
+    </div>
+</div>
+<script>
+    var status = "less";
+
+function toggleCustomText()
+{
+    var text="What ever you need Interiors, we will provide ";
+
+    if (status == "less") {
+        document.getElementById("textArea").innerHTML=text;
+        document.getElementById("toggleButton").innerText = "See Less";
+        status = "more";
+    } else if (status == "more") {
+        document.getElementById("textArea").innerHTML = "";
+        document.getElementById("toggleButton").innerText = "See More";
+        status = "less"
+    }
+}
+function togglePlatinumText()
+{
+    var text="Every Inch of your interiors will be done by us";
+
+    if (status == "less") {
+        document.getElementById("textAreaPlatinum").innerHTML=text;
+        document.getElementById("toggleButtonPlatinum").innerText = "See Less";
+        status = "more";
+    } else if (status == "more") {
+        document.getElementById("textAreaPlatinum").innerHTML = "";
+        document.getElementById("toggleButtonPlatinum").innerText = "See More";
+        status = "less"
+    }
+}
+</script>
 <% } %>

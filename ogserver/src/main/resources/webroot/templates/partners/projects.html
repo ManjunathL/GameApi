@@ -2,6 +2,9 @@
 <%= console.log(projects) %>
 <% if(typeof(projects) !== 'undefined'){ %>
 <% _.each(projects, function(prj){ %>
-<li><a class="prjctselcls" data-element="<%= prj.project_name %>"><%= prj.project_name %></a></li>
+<li class="dropdown-submenu"><a class="prjctselcls" data-element="<%= prj.project_name %>"><%= prj.project_name %></a>
+<ul class="dropdown-menu" id="subprjctsel">
+</ul>
+</li>
 <% }); %>
 <% } %>
