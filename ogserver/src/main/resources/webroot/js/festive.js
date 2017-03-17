@@ -42,7 +42,10 @@ $(document).ready(function() {
   var owl = $("#owl-gallery");
     owl.owlCarousel({
       navigation : true,
-      items: 1
+      items: 1,
+      loop:true,
+      autoplay:true,
+      autoplayTimeout:3000
     });
 });
 
