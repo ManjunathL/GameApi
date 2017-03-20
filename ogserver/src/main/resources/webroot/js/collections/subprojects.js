@@ -4,7 +4,7 @@ define([
     'underscore'
 ], function($, Backbone, _) {
     var Projects = Backbone.Collection.extend({
-        url: 'https://192.168.104.88/api/partner/subProjectDetails'
+        url: '/api/partner/subProjectDetails'
     });
     return Projects;
 });

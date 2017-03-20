@@ -96,7 +96,7 @@ public class ApiServerVerticle extends AbstractVerticle
             RouteUtil.getInstance().redirectBuilder(routingContext, url, beforeFirstDot, "Redirecting to secure mygubbi.com site");
         });
        // this.setupRedirectHandlerForOldUrls(router);
-        int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
+        int httpPort = ConfigHolder.getInstance().getInteger("http_port", 87);
         server.requestHandler(router::accept).listen(httpPort);
     }
 
