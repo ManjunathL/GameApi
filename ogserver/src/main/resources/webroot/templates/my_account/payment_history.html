@@ -16,107 +16,53 @@
     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
         <thead>
         <tr>
-            <th data-toggle="true"> Client Id </th>
-            <th data-toggle="true"> Client Name </th>
-            <th data-hide="phone"> Amount </th>
-            <th data-hide="phone,tablet"> Payment Ref</th>
-            <th data-hide="phone,tablet"> Invoice ID </th>
-            <th data-hide="phone,tablet"> Sales Order No </th>
+            <th data-toggle="true"> Sl# </th>
+            <th data-toggle="true"> Amount </th>
+            <th data-hide="phone"> Payment Date </th>
+            <th data-hide="phone"> Transaction# </th>
+            <th data-hide="phone,tablet"> Payment Mode</th>
+            <th data-hide="phone,tablet"> Reciept# </th>
             <th data-hide="phone">Payment Status</th>
-            <th class="text-right" data-sort-ignore="true">Action</th>
-
         </tr>
         </thead>
         <tbody>
+        <% _.each(paydtlsobj, function(trns){ %>
         <tr>
             <td>
-                324
+                <%= cnt %>
             </td>
             <td>
-                Nagmani Bhushan
+                <% if(typeof(trns.payAmount) !== 'undefined'){ %>
+                <%= parseFloat(trns.payAmount).toFixed(2) %>
+                <% } %>
             </td>
             <td>
-                50,000
+                <% if(typeof(trns.payDate) !== 'undefined'){ %>
+                <% var date = new Date(trns.payDate) %>
+                <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
+                <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
+                <% } %>
             </td>
             <td>
-                BJFNM3098
+                <% if(typeof(trns.payTransId) !== 'undefined'){ %>
+                <%= trns.payTransId %>
+                <% } %>
             </td>
             <td>
-                INV-000567F7-00
+                <% var dfarr= new Array(); %>
+                <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card","CASH":"Cash","Cheque":"Cheque","Neft":"Neft"}; %>
+                <% if(typeof(trns.payMode) !== 'undefined'){ %>
+                <%= dfarr[trns.payMode] %>
+                <% } %>
             </td>
             <td>
                 DSO/16-17/00050
             </td>
             <td>
-                <span class="label label-success"> Sucess </span>
-            </td>
-            <td class="text-right">
-                <div class="btn-group">
-                    <a href="payment-status.html" class="btn-white btn btn-xs"> View </a>
-                    <button class="btn-white btn btn-xs demo4"> Delete </button>
-                </div>
+                <span class="label <% if((typeof(trns.status) !== 'undefined') && (trns.status == 'Success')){ %>label-success<% }else{ %>label-danger<% } %>"><% if(typeof(trns.status) !== 'undefined'){ %><%= trns.status %><% } %></span>
             </td>
         </tr>
-        <tr>
-            <td>
-                325
-            </td>
-            <td>
-                Mehaboob Basha
-            </td>
-            <td>
-                10,0000
-            </td>
-            <td>
-                BJFNM3098
-            </td>
-            <td>
-                INV-000567F7-00
-            </td>
-            <td>
-                DSO/16-17/00050
-            </td>
-            <td>
-                <span class="label label-warning"> Pending </span>
-            </td>
-            <td class="text-right">
-                <div class="btn-group">
-                    <a href="payment-status.html" class="btn-white btn btn-xs"> View </a>
-                    <button class="btn-white btn btn-xs demo3"> Mark as paid </button>
-                    <button class="btn-white btn btn-xs demo4"> Delete </button>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                325
-            </td>
-            <td>
-                Smarti
-            </td>
-            <td>
-                20,0000
-            </td>
-            <td>
-                BJFNM3098
-            </td>
-            <td>
-                INV-000567F7-00
-            </td>
-            <td>
-                DSO/16-17/00050
-            </td>
-            <td>
-                <span class="label label-danger"> Fail </span>
-            </td>
-            <td class="text-right">
-                <div class="btn-group">
-                    <a href="payment-status.html" class="btn-white btn btn-xs"> View </a>
-                    <button class="btn-white btn btn-xs demo3"> Mark as paid </button>
-                    <button class="btn-white btn btn-xs demo4"> Delete </button>
-                </div>
-            </td>
-        </tr>
+        <% cnt=cnt+1; }); %>
         </tbody>
         <tfoot>
         <tr>
@@ -126,45 +72,5 @@
         </tr>
         </tfoot>
     </table>
-
-    <% _.each(paydtlsobj, function(trns){ %>
-
-
-
-    <div class="row payhis <% if(cnt%2 == 0){ %> bg-gray <% }else{ %> bg-color-white <% } %>">
-        <div class="col-md-1"><%= cnt %></div>
-        <!--<div class="col-sm-2">  47 </div>-->
-        <div class="col-md-2"> <% if(typeof(trns.payAmount) !== 'undefined'){ %>
-            <%= parseFloat(trns.payAmount).toFixed(2) %>
-            <% } %></div>
-        <div class="col-md-3"><% if(typeof(trns.payDate) !== 'undefined'){ %>
-            <% var date = new Date(trns.payDate) %>
-            <% var frminute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(); %>
-            <%= date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + ' ' +date.getHours()+':'+frminute %>
-            <% } %></div>
-        <div class="col-md-2">
-            <% var dfarr= new Array(); %>
-            <% dfarr= {"NB": "Net Banking", "CC": "Credit Card", "DC": "Debit Card","CASH":"Cash","Cheque":"Cheque","Neft":"Neft"}; %>
-            <% if(typeof(trns.payMode) !== 'undefined'){ %>
-                <%= dfarr[trns.payMode] %>
-            <% } %>
-        </div>
-        <div class="col-md-2"><% if(typeof(trns.payTransId) !== 'undefined'){ %>
-        <%= trns.payTransId %>
-        <% } %></div>
-        <div class="col-md-2 capitalize"><% if(typeof(trns.status) !== 'undefined'){ %>
-            <%= trns.status %>
-            <% } %></div>
-        <!--<div class="col-md-2">
-            <% if(trns.status == "failure"){ %>
-            <% if(typeof(trns.field9) !== 'undefined'){ %>
-                <%= trns.field9 %>
-                <% } %>
-            <% }else{ %>
-            NA
-            <% } %>
-            </div>-->
-    </div>
-    <% cnt=cnt+1; }); %>
 <% } %>
 
