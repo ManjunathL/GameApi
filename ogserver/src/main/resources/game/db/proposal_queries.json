@@ -179,16 +179,16 @@
       "id": "proposal.update",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ? where id = ?",
-      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version", "id"]
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?,maxDiscountPercentage = ? where id = ?",
+      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version","maxDiscountPercentage" , "id"]
     },
 
     {
       "id": "proposal.update.onconfirm",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?, priceDate = ? where id = ?",
-      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version", "priceDate", "id"]
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?, maxDiscountPercentage=?, priceDate = ? where id = ?",
+      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version","maxDiscountPercentage", "priceDate", "id"]
     },
 
     {
@@ -700,14 +700,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom, category from acc_hw_master where type = 'A'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom, category,ERPCode from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category,ERPCode from acc_hw_master where type = 'H'",
       "params": []
     },
 

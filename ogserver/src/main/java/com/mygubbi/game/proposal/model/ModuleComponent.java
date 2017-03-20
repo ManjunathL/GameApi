@@ -129,4 +129,16 @@ public class ModuleComponent implements IModuleComponent
         this.quantityFormula = quantityFormula;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "ModuleComponent{" +
+                "componentCode='" + componentCode + '\'' +
+                ", moduleCode='" + moduleCode + '\'' +
+                ", type='" + type + '\'' +
+                ", quantityFlag='" + quantityFlag + '\'' +
+                ", quantityFormula='" + quantityFormula + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

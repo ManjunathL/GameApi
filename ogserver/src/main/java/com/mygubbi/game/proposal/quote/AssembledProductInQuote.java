@@ -133,14 +133,14 @@ public class AssembledProductInQuote
     private List<ModulePart> getAggregatedModuleParts(List<ModulePart> parts)
     {
         return Seq.ofType(parts.stream(), ModulePart.class)
-                .groupBy(x -> tuple(x.code, x.uom,x.title,x.catalogCode),
+                .groupBy(x -> tuple(x.code, x.uom,x.title,x.catalogCode,x.ERPCode),
                         Tuple.collectors(
                                 Collectors.summingDouble(x -> x.quantity), Collectors.summingDouble(x -> x.quantity)
                         )
                 )
                 .entrySet()
                 .stream()
-                .map(e -> new ModulePart(e.getKey().v1, e.getKey().v2, e.getValue().v1,e.getKey().v3,e.getKey().v4))
+                .map(e -> new ModulePart(e.getKey().v1, e.getKey().v2, e.getValue().v1,e.getKey().v3,e.getKey().v4,e.getKey().v5))
                 .collect(Collectors.toList());
     }
 
@@ -269,7 +269,7 @@ public class AssembledProductInQuote
 
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
     {
-        ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom(),"gh","dd");
+        ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom(),"gh","dd"," ");
         this.addons.add(part);
     }
 
@@ -293,23 +293,23 @@ public class AssembledProductInQuote
 
     private void addToAccessoryPackPanels(ModulePanel carcassPanel, double quantity, String unit, int seq)
     {
-        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","NA","NA");
+        ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","NA","NA","NA");
         this.accessoryPackPanels.add(part);
     }
 
     private ModulePart createModulePart(AccHwComponent component, double quantity, String unit, int seq)
     {
         LOG.info("component" +component);
-        return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom(),component.getCatalogCode(),component.getCategory());
+        return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom(),component.getCatalogCode(),component.getCategory(),component.getERPCode());
     }
 
     private void addToProductAccessories(AccHwComponent accessoryComponent, double quantity)
     {
-        Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle(),accessoryComponent.getPrice(),accessoryComponent.getCatalogCode(),accessoryComponent.getCategory());
+        Accessory accessory = this.getAccessory(accessoryComponent.getCode(), accessoryComponent.getTitle(),accessoryComponent.getPrice(),accessoryComponent.getCatalogCode(),accessoryComponent.getCategory(),accessoryComponent.getERPCode());
         accessory.incrementQuantity(quantity);
     }
 
-    private Accessory getAccessory(String code, String title,double msp,String catalogCode,String category)
+    private Accessory getAccessory(String code, String title,double msp,String catalogCode,String category,String ERPCode)
     {
         if (StringUtils.isEmpty(code)) code = "Default";
         for (Accessory accessory : this.accessories)
@@ -319,7 +319,7 @@ public class AssembledProductInQuote
                 return accessory;
             }
         }
-        Accessory accessory = new Accessory(code, title,msp,catalogCode,category);
+        Accessory accessory = new Accessory(code, title,msp,catalogCode,category,ERPCode);
         this.accessories.add(accessory);
         return accessory;
     }
@@ -584,6 +584,7 @@ public class AssembledProductInQuote
         public double msp;
         public String catalogCode;
         public String category;
+        public String ERPCode;
 
         @Override
         public String toString() {
@@ -597,13 +598,14 @@ public class AssembledProductInQuote
                     '}';
         }
 
-        public Accessory(String code, String title, double msp, String catalogCode, String catalog)
+        public Accessory(String code, String title, double msp, String catalogCode, String catalog,String ERPCode)
         {
             this.code = code;
             this.title = title;
             this.msp=msp;
             this.catalogCode = catalogCode;
             this.category= catalog;
+            this.ERPCode=ERPCode;
         }
 
         public void incrementQuantity(double qty)
@@ -626,8 +628,10 @@ public class AssembledProductInQuote
         public double hardwareCost;
         public String catalogCode;
         public String category;
+        public String ERPCode;
 
-        public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom, String catalogCode,String category)
+
+        public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom, String catalogCode,String category,String ERPCode)
         {
             this.unit = unit;
             this.seq = seq;
@@ -638,6 +642,7 @@ public class AssembledProductInQuote
             this.uom = uom;
             this.catalogCode = catalogCode;
             this.category=category;
+            this.ERPCode=ERPCode;
         }
 
         public ModulePart(String code, String title, String make, String uom, double quantity)
@@ -655,13 +660,34 @@ public class AssembledProductInQuote
             this.quantity = quantity;
             this.uom = uom;
         }
-        public ModulePart(String code, String uom, double quantity,String title,String catalogCode)
+        public ModulePart(String code, String uom, double quantity,String title,String catalogCode,String ERPCode)
         {
             this.code = code;
             this.quantity = quantity;
             this.uom = uom;
             this.title = title;
             this.catalogCode = catalogCode;
+            this.ERPCode=ERPCode;
+
+        }
+
+        @Override
+        public String toString() {
+            return "ModulePart{" +
+                    "catalogCode='" + catalogCode + '\'' +
+                    ", unit='" + unit + '\'' +
+                    ", seq=" + seq +
+                    ", code='" + code + '\'' +
+                    ", title='" + title + '\'' +
+                    ", quantity=" + quantity +
+                    ", make='" + make + '\'' +
+                    ", uom='" + uom + '\'' +
+                    ", cost=" + cost +
+                    ", costWoAccessories=" + costWoAccessories +
+                    ", hardwareCost=" + hardwareCost +
+                    ", category='" + category + '\'' +
+                    ", ERPCode='" + ERPCode + '\'' +
+                    '}';
         }
     }
 

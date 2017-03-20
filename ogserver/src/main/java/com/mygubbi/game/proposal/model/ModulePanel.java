@@ -158,4 +158,21 @@ public class ModulePanel
         this.exposed = exposed;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "ModulePanel{" +
+                "breadth=" + breadth +
+                ", code='" + code + '\'' +
+                ", type='" + type + '\'' +
+                ", side='" + side + '\'' +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", length=" + length +
+                ", thickness=" + thickness +
+                ", edgebinding='" + edgebinding + '\'' +
+                ", dimensionFormula='" + dimensionFormula + '\'' +
+                ", exposed='" + exposed + '\'' +
+                '}';
+    }
 }
