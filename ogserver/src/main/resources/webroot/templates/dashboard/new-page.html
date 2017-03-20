@@ -2,31 +2,41 @@
 <section class="bg-color-white">
     <div class="container-fluid">
         <div class="row">
-            <div class="position-relative">
-                <img data-src="<%= imgBase + 'w_auto' + '/home/optimize_img/Home-page-banner.jpg'%>"
-                     class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi bedroom design" />
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1487764241/home/optimize_img/mobile-banner.jpg"
-                     class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design" />
-
-                <!--<img data-src="<%= imgBase + 'w_auto' + '/home/optimize_img/MG_Web_banner_2400X1064.jpg'%>"
-                     class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="MyGubbi Red Plum Sale" />
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1481028580/home/optimize_img/MG_Mobile_banner_992X573.jpg"
-                     class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="MyGubbi Red Plum Sale" />
-                <div class="banner-link">
-                    <a href="https://www.mygubbi.com/bangalore-red-plum-sale.html">
-                        <img data-src="<%= imgBase + 'w_auto' + '/home/optimize_img/Web_banner_Offer_Mask.png'%>"
-                             class="cld-responsive img-banner-link" alt="MyGubbi Red Plum Sale" />
-                    </a>
-                </div>
-
-                <div class="banner-mobile-link hidden-xs hidden-sm hidden-md hidden-lg">
-                    <a class="red-plum-mob-banner-link" href="https://www.mygubbi.com/bangalore-red-plum-sale.html">
-                        <img data-src="<%= imgBase + 'w_auto' + '/home/optimize_img/Web_banner_Offer_Mask.png'%>"
-                             class="cld-responsive img-centered img-mob-banner-link" alt="MyGubbi Red Plum Sale" />
-                    </a>
-                </div>-->
+            <div class="slider_container position-relative">
+                <ul class="bxslider padding0">
+                    <li>
+                        <a class="slider-move" href="#" data-number="0">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1489986221/home/Sparrow_day_dektop.jpg"
+                                 class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="MyGubbi Cucumber Sale" />
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1489986221/home/Sparrow_day_mobile.jpg"
+                                 class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="MyGubbi Cucumber Sale" />
+                        </a>
+                    </li>
+                    <li>
+                        <a id="cucumber" class="slider-move" href="https://www.mygubbi.com/cucumber-sale.html" data-number="1">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1489645050/cucumber_sales/Banner_Desktop_Cucumber.jpg"
+                                 class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="MyGubbi Cucumber Sale" />
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1489645311/cucumber_sales/Banner_mobile_Cucumber.jpg"
+                                 class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="MyGubbi Cucumber Sale" />
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slider-move" href="#" data-number="2">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1472790324/home/optimize_img/Home-page-banner.jpg"
+                                 class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi bedroom design" />
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1487764241/home/optimize_img/mobile-banner.jpg"
+                                 class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design" />
+                        </a>
+                    </li>
+                </ul>
+                <!-- Controls -->
+                <a class="slider_left" role="button" data-slide="prev">
+                    <img src="<%= imgBase + 'arr-left-thick.png'%>" class="arr_left" alt="...">
+                </a>
+                <a class="slider_right" role="button" data-slide="next">
+                    <img src="<%= imgBase + 'arr-right-thick.png'%>" class="arr_right" alt="...">
+                </a>
             </div>
-
         </div>
     </div>
 </section>
@@ -763,5 +773,10 @@
             !!hovered && $('.dropdownMenu_lg').hide();
         });
 
+    });
+    $(document).ready(function(){
+    $("#cucumber").click(function(){
+            window.location.href="https://www.mygubbi.com/cucumber-sale.html"
+        });
     });
 </script>

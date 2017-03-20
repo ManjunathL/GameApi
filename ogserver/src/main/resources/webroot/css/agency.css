@@ -298,7 +298,6 @@
     .style-image-overlay,
     .trend-image-overlay {
         position: relative;
-        height: 300px;
         overflow: hidden;
     }
 }
@@ -916,7 +915,7 @@
     bottom: 5% !important;
     width: 100%;
     display: inline-block;
-    z-index: 300;
+    z-index: 1;
     text-align: center;
 }
 
@@ -929,7 +928,7 @@
     width: 10px;
     height: 10px;
     margin: 0 5px;
-    background: #f2f4f4 !important;
+    background: #556670 !important;
     outline: 0;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -958,7 +957,7 @@
 }
 
 .slider_left {
-    z-index: 300;
+    z-index: 10;
     width: 10%;
     position: absolute;
     top: 0%;
@@ -976,7 +975,7 @@
 }
 
 .slider_right {
-    z-index: 300;
+    z-index: 10;
     width: 10%;
     position: absolute;
     top: 0%;
@@ -8540,7 +8539,7 @@ html .ui-button.ui-state-disabled:active {
         margin: 0px auto !important;
     }
     .txt-over-style-image{
-        top: 45%;
+        top: 30%;
         right: auto;
         width: 80%;
         text-align: center;

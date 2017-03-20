@@ -142,6 +142,9 @@ input[type=checkbox] {
     white-space: nowrap;
 }
 
+.word-break{
+    word-break: break-all;
+}
 /* Image attributes */
 
 .object-fit_fill {

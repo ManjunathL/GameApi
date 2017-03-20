@@ -27,22 +27,16 @@ $(document).ready(function() {
         }
     });
 
-    owl.on('mousewheel', '.owl-stage', function (e) {
-        if (e.deltaY>0) {
-            owl.trigger('next.owl');
-        } else {
-            owl.trigger('prev.owl');
-        }
-        e.preventDefault();
-    });
-
 });
 
 $(document).ready(function() {
   var owl = $("#owl-gallery");
     owl.owlCarousel({
       navigation : true,
-      items: 1
+      items: 1,
+      loop:true,
+      autoplay:true,
+      autoplayTimeout:3000
     });
 });
 
