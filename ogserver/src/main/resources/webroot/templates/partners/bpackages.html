@@ -15,13 +15,13 @@
                 </p>
             </div>
             <ul class="list-pricing">
-                <li> <%= bpk.Package_description %> </li>
+                <li> <% if(bpk.package_price != 'NA'){ %>Home Interiors for you @ <%= bpk.package_price %>l <% }else{ %> Designing every inch of your home, with elan!<% } %></li>
             </ul>
 
-            <% if(bpk.platinum_status !== 1){ %>
+            <% if(bpk.package_price !== 'NA'){ %>
             <p class=" pddn-20-btm text-center"><button class="getdsgn btn btn-main-ghost" data-element="<%= bpk.packageId %>">Get Design</button></p>
             <% }else{ %>
-            <p class=" pddn-20-btm text-center"><a href="#location" class="btn btn-ozon-color"> Contact Us </a></p>
+            <p class=" pddn-20-btm text-center"><a href="#location" class="btn btn-ozon-color"> Enquire Now </a></p>
             <% } %>
 
         </div>

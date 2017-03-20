@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +34,6 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <![endif]-->
-    <script  src="/js/libs/jquery/dist/jquery.min.js"></script>
 
     <script src="/js/config.js"> </script>
     <script>
@@ -60,22 +60,22 @@
     </script>
     <script src="/js/libs/promise-polyfill/Promise.min.js"></script>
     <script data-main="/js/main.js" src="/js/libs/requirejs/require.js"></script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script  src="/js/libs/jquery/dist/jquery.min.js"></script>
+
+</head>
+<body id="page-top" class="index">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NQCP625');</script>
-    <!-- End Google Tag Manager -->
-
-</head>
-<body id="page-top" class="index">
+<!-- End Google Tag Manager -->
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQCP625"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div class="container-fluid row padding0 margin0 padding-m-0 margin-m-0"></div>
-
 
 <script type="text/javascript" async>
     var _TConnecto = _TConnecto || {};
@@ -100,56 +100,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         meta.content = "NOINDEX, NOFOLLOW";
         document.getElementsByTagName('head')[0].appendChild(meta);
     }
-    $( document ).ready(function() {
-     var cururl = window.location.href;
-        var durl = (window.location.href.indexOf("thankyou") > -1) ? 'thankyou' : 'general';
-        console.log(cururl);
-        console.log('-----------ghdgfgdhf------------------');
-        console.log(durl);
-   (function() {
-            if(durl == 'general'){ console.log('============general==============');
-  $('div.test').contents().unwrap();
-
-                    $("div.test-thankyou").remove();
-
-            }
-            else if(durl == 'thankyou'){
-                    console.log('===========thankyou===============');
-  $('div.test-thankyou').contents().unwrap();
-
-                    $("div.test").remove();
-
-            }
-  })();
-  });
-
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion_async.js" charset="utf-8"></script>
-<div class="test" id="test">
-    <script>
-    ga('set', 'page', location.pathname);
-    fbPixel('PageView');
-</script>
-    <!-- Google Code for Remarketing Tag -->
-    <!--------------------------------------------------
-    Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
-    --------------------------------------------------->
-    <script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 948149851;
-var google_custom_params = window.google_tag_params;
-var google_remarketing_only = true;
-/* ]]> */
-</script>
-    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-    </script>
-    <noscript>
-        <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/948149851/?guid=ON&amp;script=0"/>
-        </div>
-    </noscript>
 
-</div>
 
 <!--LeadSquared Tracking Code Start-->
 <script type="text/javascript" src="https://web.mxradon.com/t/Tracker.js"></script>
@@ -175,34 +128,36 @@ var google_remarketing_only = true;
   })();
 </script>
 
+<script>
+ var cururl = window.location.href;
+    var durl = (window.location.href.indexOf("thankyou") > -1) ? 'thankyou' : 'general';
+    (function() {
+        if(durl == 'general'){ console.log('============ general code ==============');
+            ga('set', 'page', location.pathname);
+            fbPixel('PageView');
+        remTrack();
+        }else if(durl == 'thankyou'){
+            fbPixel('Lead');
+            adwTrack();
+
+        }
+        })();
+    function adwTrack() {
+        var img = new Image(1,1);
+        img.src ="https://www.googleadservices.com/pagead/conversion/948149851/?label=KDjHCJmZ-m4Q27yOxAM&guid=ON&script=0";
+    }
+     function remTrack() {
+        var img = new Image(1,1);
+        img.src ="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/948149851/?guid=ON&script=0";
+    }
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+
+
+
 <!-- Gauges Tracking Code End -->
 
 
-<div class="test-thankyou" id="test-thankyou">
-    <script>
-   ga('set', 'page', location.pathname);
-   fbPixel('Lead');
-</script>
-    <!-- Google Code for HM Conversion Conversion Page -->
-    <script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 948149851;
-var google_conversion_language = "en";
-var google_conversion_format = "3";
-var google_conversion_color = "ffffff";
-var google_conversion_label = "0DBgCPDT_mwQ27yOxAM";
-var google_remarketing_only = false;
-/* ]]> */
-</script>
-    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-    </script>
-    <noscript>
-        <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/948149851/?label=0DBgCPDT_mwQ27yOxAM&amp;guid=ON&amp;script=0"/>
-        </div>
-    </noscript>
-
-
-</div>
 </body>
 </html>

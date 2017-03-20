@@ -15,52 +15,41 @@ import org.apache.http.client.utils.URIUtils;
 /**
  * Created by Mehbub on 10-01-2017.
  */
-public class NakedDomainHandler implements Handler<RoutingContext>
-{
+public class NakedDomainHandler implements Handler<RoutingContext> {
     private final static Logger LOG = LogManager.getLogger(NakedDomainHandler.class);
 
-    public NakedDomainHandler()
-    {
+    public NakedDomainHandler() {
 
     }
 
     @Override
-    public void handle(RoutingContext context)
-    {
+    public void handle(RoutingContext context) {
         String url = context.request().absoluteURI();
         String beforeFirstDot1 = url.split("\\.")[0];
-        org.apache.commons.lang.StringUtils.split(beforeFirstDot1,"\\:");
-
-        LOG.info(beforeFirstDot1.split("\\:"));
-        if (url.startsWith("https://www."))
-        {
+        org.apache.commons.lang.StringUtils.split(beforeFirstDot1, "\\:");
+        if (url.startsWith("https://www.")) {
             context.next();
             return;
         }
-
-        else if (url.equals("https://ozone1.mygubbi.com")){
+        if (url.equals("https://ozone.mygubbi.com/") || url.equals("https://shobha.mygubbi.com/")) {
             URI baseUri = null;
 
-                try {
-                    baseUri = new URI(url);
-                    HttpHost httpHost = URIUtils.extractHost(baseUri);
-                    String hostName = httpHost.getHostName();
-                    String beforeFirstDot = hostName.split("\\.")[0];
-                    LOG.info(beforeFirstDot);
-                    LOG.info("smruti");
-                    boolean hostNameIsNaked = org.apache.commons.lang.StringUtils.countMatches(hostName, ".") == 1;
-                    if (!hostNameIsNaked){
-                        RouteUtil.getInstance().redirectBuilder(context, url, beforeFirstDot, "Redirecting to https www.mygubbi.com site");
-                        return;
-                    }else{
-                        RouteUtil.getInstance().redirect(context, url, "Redirecting to https www.mygubbi.com site");
-                        return;
-                    }
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
+            try {
+                baseUri = new URI(url);
+                HttpHost httpHost = URIUtils.extractHost(baseUri);
+                String hostName = httpHost.getHostName();
+                String beforeFirstDot = hostName.split("\\.")[0];
+                LOG.info(beforeFirstDot);
+                boolean hostNameIsNaked = org.apache.commons.lang.StringUtils.countMatches(hostName, ".") == 1;
+
+                LOG.info("ruma");
+                RouteUtil.getInstance().redirectBuilder(context, url, beforeFirstDot, "Redirecting to https www.mygubbi.com site");
+                return;
+
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
         }
-        else {
             try {
                 URI baseUri = new URI(url);
                 HttpHost httpHost = URIUtils.extractHost(baseUri);
@@ -76,9 +65,10 @@ public class NakedDomainHandler implements Handler<RoutingContext>
                     return;
                 }
             } catch (URISyntaxException e) {
-                LOG.info("Error with url:" + url + " || " + e.getMessage());
+                e.printStackTrace();
             }
-        }
+
+
         //This should not reach but let it process normally
         context.next();
     }

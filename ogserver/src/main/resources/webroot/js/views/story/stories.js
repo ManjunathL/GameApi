@@ -79,12 +79,17 @@ define([
         fetchStoriesAndRender: function(selectedBlogsCategory) {
             var that = this;
             var nwdiys = that.diys;
+            nwdiys = nwdiys.toJSON();
             var nwstories = that.stories;
             nwstories = nwstories.toJSON();
 
             var latestBlogs = that.latestblogs.toJSON();
 
             delete nwstories.id;
+
+            nwdiys = _(nwdiys).sortBy(function(diyss) {
+             return Date.parse(diyss.date_of_publish);
+            }).reverse();
 
             //console.log(_(stories).pluck('date_of_publish'));
             nwstories = _(nwstories).sortBy(function(story) {
@@ -111,7 +116,7 @@ define([
                 'stories': nwstories,
                 'rec_stories': rec_stories,
                 'latest_stories': latest_stories,
-                'diys':nwdiys.toJSON()
+                'diys':nwdiys
             }));
             this.ready();
         },

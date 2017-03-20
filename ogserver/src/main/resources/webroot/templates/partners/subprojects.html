@@ -1,0 +1,7 @@
+<%= console.log(" ============== projects ==================") %>
+<%= console.log(subprojects) %>
+<% if(typeof(subprojects) !== 'undefined'){ %>
+<% _.each(subprojects, function(sprj){ %>
+<li><a class="subprjctselcls" data-element="<%= sprj.project_name %>" data-element1="<%= sprj.sub_project_name %>"><%= sprj.sub_project_name %></a></li>
+<% }); %>
+<% } %>

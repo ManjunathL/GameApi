@@ -8,7 +8,7 @@ require.config({
         text: 'libs/text/text',
         jqueryeasing: 'libs/jquery.easing/js/jquery.easing.min',
         sly: 'libs/sly/dist/sly',
-        bxslider: 'libs/bxslider-4/jquery.bxslider.min',
+        bxslider: 'libs/bxslider-4/jquery.bxslider',
         bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
         bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
         firebase: 'libs/firebase/firebase',

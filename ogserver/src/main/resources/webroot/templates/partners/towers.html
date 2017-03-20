@@ -3,6 +3,6 @@
 <% if(typeof(towers) !== 'undefined'){ %>
 <option>Select Tower/Block</option>
 <% _.each(towers, function(twr){ %>
-<option value="<%= twr.blockId %>"><%= twr.block_name %></option>
+<option value="<%= twr.groupId %>"><%= twr.grouping_name %></option>
 <% }); %>
 <% } %>

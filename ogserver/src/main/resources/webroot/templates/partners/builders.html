@@ -31,8 +31,8 @@
                 <li><a class="page-scroll" href="#home"> <i class="fa fa-home"></i> </a></li>
                 <li><a class="page-scroll" href="#why-mygubbi">Why MyGubbi</a></li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Projects</a>
-                    <ul class="dropdown-menu" id="prjctsel">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Projects<b class="caret"></b></a>
+                    <ul class="dropdown-menu multi-level" id="prjctsel">
 
                     </ul>
                 </li>
@@ -43,6 +43,8 @@
                 <li><a class="page-scroll" target="_blank" href="https://www.mygubbi.com/nri-bangalore">NRI</a></li>
                 <li><a class="page-scroll" href="#location">Contact Us</a></li>
             </ul>
+
+
         </div>
         <!--/.navbar-collapse -->
     </div>
@@ -657,7 +659,7 @@
 </script>
     <script type="text/javascript">
     $(document).ready(function(){
-        $(".dropdown").hover(
+        /*$(".dropdown").hover(
             function() {
                 $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
                 $(this).toggleClass('open');
@@ -666,6 +668,6 @@
                 $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
                 $(this).toggleClass('open');
             }
-        );
+        );*/
     });
 </script>

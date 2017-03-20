@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogserver.iml" filepath="$PROJECT_DIR$/.idea/modules/ogserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogserver_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ogserver_main.iml" group="ogserver" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogserver_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ogserver_main.iml" group="ogserver" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogserver_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ogserver_test.iml" group="ogserver" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogserver_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ogserver_test.iml" group="ogserver" />
     </modules>
   </component>

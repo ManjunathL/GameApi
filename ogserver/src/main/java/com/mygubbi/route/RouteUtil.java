@@ -104,42 +104,15 @@ public class RouteUtil {
                 .putHeader("Location", url)
                 .end();
         return;
-    }public void redirectHttpsBuilder(RoutingContext routingContext, String url, String bilderName, String statusMessage) {
-        String newUrl = "";
-        if(!"www".equals(bilderName) && !"mygubbi".equals(bilderName) ) {
-            LOG.info("i am In Builder");
-            LOG.info("first");
-            LOG.info(url);
-            //newUrl = url + "partners" + "-" + bilderName;
-            newUrl = "https://ozone1.mygubbi.com/partners" + "-" + bilderName;
-            LOG.info("second");
-            LOG.info(newUrl);
-            LOG.info("Redirecting " + routingContext.request().uri() + " to " + newUrl);
-            HttpServerResponse response = routingContext.response();
-            response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
-                    .setStatusMessage(statusMessage)
-                    .putHeader("Location", newUrl)
-                    .end();
-            return;
-        }
-        else{
-            LOG.info("Redirecting " + routingContext.request().uri() + " to " + url);
-            HttpServerResponse response = routingContext.response();
-            response.setStatusCode(HttpStatus.SC_MOVED_PERMANENTLY)
-                    .setStatusMessage(statusMessage)
-                    .putHeader("Location", newUrl)
-                    .end();
-            return;
-        }
     }
     public void redirectBuilder(RoutingContext routingContext, String url, String bilderName, String statusMessage) {
         String newUrl = "";
-        if(!"www".equals(bilderName) && !"mygubbi".equals(bilderName) ) {
+        if(!"www".equals(bilderName) && !"mygubbi".equals(bilderName)  && !"mydev1".equals(bilderName)) {
             LOG.info("i am In Builder");
             LOG.info("first");
             LOG.info(url);
             //newUrl = url + "partners" + "-" + bilderName;
-            newUrl = "https://ozone1.mygubbi.com/partners" + "-" + bilderName;
+            newUrl = "https://" + bilderName +".mygubbi.com/partners" + "-" + bilderName;
             LOG.info("second");
             LOG.info(newUrl);
             LOG.info("Redirecting " + routingContext.request().uri() + " to " + newUrl);

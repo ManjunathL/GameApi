@@ -160,8 +160,6 @@ define([
               userProfileRef.on("value", function(snapshot) {
                   if (snapshot.exists()) {
                       userProfile = snapshot.val();
-                      console.log("===================userProfile====================");
-                      console.log(userProfile);
                       if(typeof(userProfile) !== 'undefined'){
                           if(typeof(userProfile.crmId) !== 'undefined' && userProfile.crmId != ""){
                               window.location = "/my_nest";

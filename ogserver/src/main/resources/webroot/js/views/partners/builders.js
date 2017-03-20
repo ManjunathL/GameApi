@@ -9,6 +9,7 @@ define([
     'text!templates/partners/builders.html',
     'text!templates/partners/speakers.html',
     'text!templates/partners/projects.html',
+    'text!templates/partners/subprojects.html',
     'text!templates/partners/towers.html',
     'text!templates/partners/floorplans.html',
     'text!templates/partners/bpackages.html',
@@ -16,25 +17,34 @@ define([
     'models/partner',
     'collections/developers',
     'collections/projects',
+    'collections/subprojects',
     'collections/towers',
+    'collections/unitdetails',
     'collections/floorplans',
-    'collections/bpackages'
-], function($, _, Backbone, Analytics, BuildersTemplate, SpeakersTemplate, ProjectsTemplate, TowersTemplate, FloorplansTemplate, BpackagesTemplate, DesigGalleryTemplate, Partner, Developers, Projects, Towers, Floorplans, Bpackages) {
+    'collections/bpackages',
+    'collections/designgallerys'
+], function($, _, Backbone, Analytics, BuildersTemplate, SpeakersTemplate, ProjectsTemplate, SubProjectsTemplate, TowersTemplate, FloorplansTemplate, BpackagesTemplate, DesigGalleryTemplate, Partner, Developers, Projects, Subprojects, Towers, Unitdetails, Floorplans, Bpackages, Designgallerys) {
     var BuildersView = Backbone.View.extend({
         el: '#page-top',
         developers: null,
         projects: null,
+        subprojects: null,
         towers: null,
+        unitdetails: null,
         floorplans: null,
         bpackages: null,
+        designgallerys: null,
         partner: null,
         initialize: function() {
             this.partner = new Partner();
             this.developers = new Developers();
             this.projects = new Projects();
+            this.subprojects = new Subprojects();
             this.towers = new Towers();
+            this.unitdetails = new Unitdetails();
             this.floorplans = new Floorplans();
             this.bpackages = new Bpackages();
+            this.designgallerys = new Designgallerys();
             Analytics.apply(Analytics.TYPE_GENERAL);
         },
         render: function() {
@@ -84,20 +94,41 @@ define([
                  console.log(response);
                  var projects = response.toJSON();
 
-                 var prjTemp = _.template(ProjectsTemplate);
-                 $("#prjctsel").html(prjTemp({
-                     'projects':projects
-                 }));
-
+                var prjTemp = _.template(ProjectsTemplate);
+                $("#prjctsel").html(prjTemp({
+                  'projects':projects
+                }));
+                that.fetchSubprojectDetails();
              },
              error: function(model, response, options) {
                  console.log("couldn't fetch projects data - " + response);
              }
          });
         },
+        fetchSubprojectDetails: function(){
+            var that = this;
+            this.subprojects.fetch({
+                data: {
+                    "developer_name": "ozone"
+                },
+                success: function(response) {
+                    console.log(response);
+                    var subprojects = response.toJSON();
+
+                    var subprjTemp = _.template(SubProjectsTemplate);
+                    $("#subprjctsel").html(subprjTemp({
+                      'subprojects':subprojects
+                    }));
+
+                },
+                error: function(model, response, options) {
+                    console.log("couldn't fetch developers data - " + response);
+                }
+            });
+        },
         events: {
-            "click .prjctselcls": "getTowerBlockNames",
-            "click #twsubmt": "getFloorplanImg",
+            "click .subprjctselcls": "getTowerBlockNames",
+            "click #twsubmt": "getUnitDetails",
             "click .getpak": "getPackages",
             "click .getdsgn": "getDesignGallery"
         },
@@ -105,9 +136,11 @@ define([
             e.preventDefault();
             var currentTarget = $(e.currentTarget);
             var projectName = currentTarget.data('element');
+            var subprojectName = currentTarget.data('element1');
 
             console.log(' selected project name ');
             console.log(projectName);
+            console.log(subprojectName);
 
             var that = this;
             that.partner.set({
@@ -115,14 +148,20 @@ define([
             }, {
                 silent: true
             });
+            that.partner.set({
+                'subprojectName':subprojectName
+            }, {
+                silent: true
+            });
 
 
-            if(projectName != null){
+            if(projectName != null && subprojectName != null){
 
                 this.towers.fetch({
                      data: {
                          "developer_name": that.partner.get('developerName'),
-                         "project_name": that.partner.get('projectName')
+                         "project_name": that.partner.get('projectName'),
+                         "sub_project_name": that.partner.get('subprojectName')
                      },
                      success: function(response) {
                          console.log(response);
@@ -133,6 +172,10 @@ define([
                              'towers':towers
                          }));
 
+                        $("#apartment_number").val('');
+                        $("#flrplnsel").html('');
+                        $("#ozon-pkag").html('');
+                        $("#ozon-designs").html('');
                          window.location.href="#personalized";
 
                      },
@@ -142,42 +185,98 @@ define([
                 });
             }
         },
-        getFloorplanImg: function(e){
+        getUnitDetails: function(e){
          e.preventDefault();
          var currentTarget = $(e.currentTarget);
-         var blockId = $("#towersel").val();
-         var block_name = $("#towersel option:selected").text();
+         var groupId = $("#towersel").val();
+         var grouping_name = $("#towersel option:selected").text();
          var apartment_number = $("#apartment_number").val();
-
-         console.log(blockId+" ------------------- "+block_name+" --------------------------- "+apartment_number);
 
 
          var that = this;
-         this.floorplans.fetch({
+         if(grouping_name != null && apartment_number != null){
+         this.unitdetails.fetch({
               data: {
-                  "blockId": blockId,
-                  "block_name": block_name,
-                  "apartment_number": apartment_number
+                  "sub_project_name": that.partner.get('subprojectName'),
+                  "group_code": grouping_name,
+                  "unit_number": apartment_number
               },
               success: function(response) {
-                  console.log(response);
-                  var floorplans = response.toJSON();
+                  console.log("unit Master");
 
-                  var flTemp = _.template(FloorplansTemplate);
-                  $("#flrplnsel").html(flTemp({
-                      'floorplans':floorplans
-                  }));
+                  var unitDetails = response.toJSON();
+                  console.log(unitDetails);
+                  if(unitDetails.length != 0){
+                      that.partner.set({
+                          'floorPlanSetId':unitDetails[0].floor_plan_setId
+                      }, {
+                          silent: true
+                      });
+
+                      that.partner.set({
+                          'subProjectId':unitDetails[0].subProjectId
+                      }, {
+                          silent: true
+                      });
+                  }else{
+                    that.partner.set({
+                      'floorPlanSetId':''
+                  }, {
+                      silent: true
+                  });
+
+                  that.partner.set({
+                      'subProjectId':''
+                  }, {
+                      silent: true
+                  });
+                  }
+                  that.getFloorplanImg();
 
               },
               error: function(model, response, options) {
-                  console.log("couldn't fetch floor plan data - " + response);
+                  console.log("couldn't fetch unit data - " + response);
               }
-         });
+           });
+            }
+        },
+        getFloorplanImg: function(){
+            var that = this;
+            this.floorplans.fetch({
+                data: {
+                  "subProjectId": that.partner.get('subProjectId')
+                },
+                success: function(response) {
+                    console.log('floor plans');
+                    console.log(response);
+                    var floorplans = response.toJSON();
+                       if(floorplans.length != 0){
+                      that.partner.set({
+                          'floorPlanSetId':floorplans[0].floor_plan_setId
+                      }, {
+                          silent: true
+                      });
+                        }
+                     var flTemp = _.template(FloorplansTemplate);
+                      $("#flrplnsel").html(flTemp({
+                          'floorplans':floorplans
+                      }));
+                      that.getPackages();
+                },
+                error: function(model, response, options) {
+                  console.log("couldn't fetch floor plan data - " + response);
+                }
+          });
         },
         getPackages: function(e){
          e.preventDefault();
          var currentTarget = $(e.currentTarget);
          var floorplanId = currentTarget.data('element');
+
+         var that = this;
+         if(!floorplanId){
+           var floorplanId = that.partner.get('floorPlanSetId')
+         }
 
          console.log('================floorPlanId=================');
          console.log(floorplanId);
@@ -186,7 +285,7 @@ define([
          var that = this;
          this.bpackages.fetch({
               data: {
-                  "floorPlanId": floorplanId
+                  "floor_plan_setId": floorplanId
               },
               success: function(response) {
                   console.log(response);
@@ -214,11 +313,25 @@ define([
             var currentTarget = $(e.currentTarget);
             var that = this;
             var packageId = currentTarget.data('element');
-            var desgnTemp = _.template(DesigGalleryTemplate);
-            $("#ozon-designs").html(desgnTemp({
-              'bpackages':that.partner.get('bpackages'),
-              'selpackageId':packageId
-            }));
+
+            this.designgallerys.fetch({
+                data: {
+                  "packageId": packageId
+                },
+                success: function(response) {
+                    var designgallerys = response.toJSON();
+
+                     var desgnTemp = _.template(DesigGalleryTemplate);
+                     $("#ozon-designs").html(desgnTemp({
+                       'designgallerys':designgallerys,
+                       'selpackageId':packageId
+                     }));
+                },
+                error: function(model, response, options) {
+                  console.log("couldn't fetch floor plan data - " + response);
+                }
+          });
+
         }
     });
     return BuildersView;

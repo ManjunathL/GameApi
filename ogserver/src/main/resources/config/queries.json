@@ -368,6 +368,108 @@
         "productId",
         "uid"
       ]
+    },
+    {
+      "id": "builder.select.developerDetails",
+      "type": "select",
+      "query": "SELECT * from developer where developer_name = ?;",
+      "params": [
+        "developer_name"
+      ]
+    },
+    /*{
+      "id": "builder.select.projectDetails",
+      "type": "select",
+      "query": "SELECT * from projecttable where developer_name = ?;",
+      "params": [
+        "developer_name"
+      ]
+    },
+    {
+      "id": "builder.select.towerDetails",
+      "type": "select",
+      "query": "SELECT * from tower_block_table where developer_name = ? && project_name = ?;",
+      "params": [
+        "developer_name",
+        "project_name"
+      ]
+    },
+    {
+      "id": "builder.select.floorPlanDetails",
+      "type": "select",
+      "query": "SELECT * from unit_master_table where  blockId = ? && block_name = ? && apartment_number = ?;",
+      "params": [
+        "blockId",
+        "block_name",
+        "apartment_number"
+      ]
+    },
+    {
+      "id": "builder.select.packageDetails",
+      "type": "select",
+      "query": "SELECT * from design_gallery where  floorPlanId = ? ;",
+      "params": [
+        "floorPlanId"
+      ]
+    }*/
+    {
+      "id": "builder.select.projectDetails",
+      "type": "select",
+      "query": "SELECT * from project_table where developer_name = ?;",
+      "params": [
+        "developer_name"
+      ]
+    },
+    {
+      "id": "builder.select.subProjectDetails",
+      "type": "select",
+      "query": "SELECT * from subproject_table where developer_name = ?;",
+      "params": [
+        "developer_name"
+      ]
+    },
+    {
+      "id": "builder.select.towerDetails",
+      "type": "select",
+      "query": "SELECT * from grouping_table where project_name = ? && sub_project_name = ?; ",
+      "params": [
+        "project_name",
+        "sub_project_name"
+      ]
+    },
+    {
+      "id": "builder.select.unitDetails",
+      "type": "select",
+      "query": "SELECT * from unit_master where  group_code = ? && sub_project_name = ? && unit_number = ?;",
+      "params": [
+        "group_code",
+        "sub_project_name",
+        "unit_number"
+      ]
+    },
+    {
+      "id": "builder.select.floorPlanDetails",
+      "type": "select",
+      "query": "SELECT * from floor_plan_master where subProjectId = ?;",
+      "params": [
+        "subProjectId"
+      ]
+    },
+    {
+      "id": "builder.select.packageDetails",
+      "type": "select",
+      "query": "SELECT * from package_master where  floor_plan_setId = ? ;",
+      "params": [
+        "floor_plan_setId"
+      ]
+    },
+    {
+      "id": "builder.select.galleryDesignDetails",
+      "type": "select",
+      "query": "SELECT * from package_design_gallery where  packageId = ? ;",
+      "params": [
+        "packageId"
+      ]
     }
   ]
 }
