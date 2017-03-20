@@ -26,9 +26,12 @@ public class PartnerHandler extends AbstractRouteHandler {
         this.route().handler(BodyHandler.create());
         this.get("/developerDetails").handler(this::developerDetail);
         this.get("/projectDetails").handler(this::projectDetail);
+        this.get("/subProjectDetails").handler(this::subProjectDetail);
         this.get("/towerDetails").handler(this::towerDetail);
         this.get("/floorPlanDetails").handler(this::floorPlanDetail);
         this.get("/packageDetails").handler(this::packageDetail);
+        this.get("/unitDetails").handler(this::unitDetail);
+        this.get("/designGalleryDetails").handler(this::designGalleryDetail);
     }
     private void developerDetail(RoutingContext context){
 
@@ -67,6 +70,14 @@ public class PartnerHandler extends AbstractRouteHandler {
         JsonObject params = new JsonObject().put("developer_name", builderName);
         this.fetchProjectDetailsAndSend(context, "builder.select.projectDetails", params);
     }
+    private void subProjectDetail(RoutingContext context){
+
+        String builderName = context.request().getParam("developer_name");
+
+
+        JsonObject params = new JsonObject().put("developer_name", builderName);
+        this.fetchProjectDetailsAndSend(context, "builder.select.subProjectDetails", params);
+    }
     private void fetchProjectDetailsAndSend(RoutingContext context, String queryId, JsonObject paramsData){
 
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
@@ -88,7 +99,7 @@ public class PartnerHandler extends AbstractRouteHandler {
                     }
                 });
     }
-    private void towerDetail(RoutingContext context){
+    /*private void towerDetail(RoutingContext context){
 
         String builderName = context.request().getParam("developer_name");
         String projectName = context.request().getParam("project_name");
@@ -96,6 +107,17 @@ public class PartnerHandler extends AbstractRouteHandler {
 
         JsonObject params = new JsonObject().put("developer_name", builderName)
                                             .put("project_name", projectName);
+        this.fetchtowerDetailsAndSend(context, "builder.select.towerDetails", params);
+    } */
+    private void towerDetail(RoutingContext context){
+
+        String builderName = context.request().getParam("developer_name");
+        String projectName = context.request().getParam("project_name");
+        String subProjectName = context.request().getParam("sub_project_name");
+
+
+        JsonObject params = new JsonObject().put("project_name", projectName)
+                                            .put("sub_project_name", subProjectName);
         this.fetchtowerDetailsAndSend(context, "builder.select.towerDetails", params);
     }
     private void fetchtowerDetailsAndSend(RoutingContext context, String queryId, JsonObject paramsData){
@@ -122,14 +144,10 @@ public class PartnerHandler extends AbstractRouteHandler {
     private void floorPlanDetail(RoutingContext context){
 
         //String builderName = context.request().getParam("developer_name");
-        String blockId = context.request().getParam("blockId");
-        String blockName = context.request().getParam("block_name");
-        String apartmentNumber = context.request().getParam("apartment_number");
+        String subProjectId = context.request().getParam("subProjectId");
 
 
-        JsonObject params = new JsonObject().put("blockId", blockId)
-                                            .put("block_name", blockName)
-                                            .put("apartment_number", apartmentNumber);
+        JsonObject params = new JsonObject().put("subProjectId",subProjectId);
         this.fetchfloorPlanDetailsAndSend(context, "builder.select.floorPlanDetails", params);
     }
     private void fetchfloorPlanDetailsAndSend(RoutingContext context, String queryId, JsonObject paramsData){
@@ -153,17 +171,83 @@ public class PartnerHandler extends AbstractRouteHandler {
                     }
                 });
     }
+    private void unitDetail(RoutingContext context){
+
+        //String builderName = context.request().getParam("developer_name");
+        String group_code = context.request().getParam("group_code");
+        String sub_project_name = context.request().getParam("sub_project_name");
+        String unit_number = context.request().getParam("unit_number");
+
+
+        JsonObject params = new JsonObject().put("group_code", group_code)
+                                            .put("sub_project_name", sub_project_name)
+                                            .put("unit_number", unit_number);
+        this.fetchUnitDetailsAndSend(context, "builder.select.unitDetails", params);
+    }
+    private void fetchUnitDetailsAndSend(RoutingContext context, String queryId, JsonObject paramsData){
+
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
+        LOG.info("Executing query:" + queryId + " | " + paramsData);
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData == null || selectData.rows == null)
+                    {
+                        sendError(context, "Did not find products for " + paramsData.toString() + ". Error:" + selectData.errorMessage);
+                    }
+                    else
+                    {
+                        String result = selectData.rows.toString();
+                        sendJsonResponse(context, result );
+
+                        //                     context.response().putHeader("content-type", "application/json").end(selectData.getJsonDataRows("productJson").encodePrettily());
+
+                    }
+                });
+    }
     private void packageDetail(RoutingContext context){
 
         //String builderName = context.request().getParam("developer_name");
-        String floorPlanId = context.request().getParam("floorPlanId");
+        String floor_plan_setId = context.request().getParam("floor_plan_setId");
 
 
 
-        JsonObject params = new JsonObject().put("floorPlanId", floorPlanId);
+        JsonObject params = new JsonObject().put("floor_plan_setId", floor_plan_setId);
         this.fetchPackageDetailsAndSend(context, "builder.select.packageDetails", params);
     }
     private void fetchPackageDetailsAndSend(RoutingContext context, String queryId, JsonObject paramsData){
+
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
+        LOG.info("Executing query:" + queryId + " | " + paramsData);
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData == null || selectData.rows == null)
+                    {
+                        sendError(context, "Did not find products for " + paramsData.toString() + ". Error:" + selectData.errorMessage);
+                    }
+                    else
+                    {
+                        String result = selectData.rows.toString();
+                        sendJsonResponse(context, result );
+
+                        //                     context.response().putHeader("content-type", "application/json").end(selectData.getJsonDataRows("productJson").encodePrettily());
+
+                    }
+                });
+    }
+
+    private void designGalleryDetail(RoutingContext context){
+
+        //String builderName = context.request().getParam("developer_name");
+        String packageId = context.request().getParam("packageId");
+
+
+
+        JsonObject params = new JsonObject().put("packageId", packageId);
+        this.fetchdesignGalleryDetailsAndSend(context, "builder.select.galleryDesignDetails", params);
+    }
+    private void fetchdesignGalleryDetailsAndSend(RoutingContext context, String queryId, JsonObject paramsData){
 
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, paramsData));
         LOG.info("Executing query:" + queryId + " | " + paramsData);

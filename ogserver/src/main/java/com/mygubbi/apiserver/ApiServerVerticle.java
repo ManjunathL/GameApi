@@ -80,13 +80,15 @@ public class ApiServerVerticle extends AbstractVerticle
                 LOG.info(beforeFirstDot);
                 boolean hostname = StringUtils.indexOf(hostName,".") == 1;
                 boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
-
+                LOG.info(hostNameIsNaked);
                 //boolean httpScheme = ("http").equals(httpHost.getSchemeName());
                 //boolean httpsScheme = ("https").equals(httpHost.getSchemeName());
                 if (hostNameIsNaked) hostName = "www." + hostName;
                 URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
                 url = newUri.toString();
-                LOG.info("URL " + url + " rewritten as :" + newUri.toString());
+                LOG.info("URL " + baseUri + " rewritten as :" + newUri.toString());
+                RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
+
             }
             catch (URISyntaxException e)
             {
@@ -103,15 +105,15 @@ public class ApiServerVerticle extends AbstractVerticle
     private void setupHttpSslServer()
     {
         Router router = Router.router(VertxInstance.get());
-
         this.setupApiHandler(router);
         this.setupNakedDomainRouter(router);
+     //   this.setupBuilderDomainRouter(router);
         this.setupRedirectHandlerForShopifyUrls(router);
         this.setupRedirectHandlerForOldUrls(router);
         this.setupPrerenderHandler(router);
         this.setupStaticConfigHandler(router);
         this.setupStaticHandler(router);
-      
+
         String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/mygubbiprod.jks");
         String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "0r@nge123$");
         HttpServerOptions options = new HttpServerOptions()
@@ -124,8 +126,6 @@ public class ApiServerVerticle extends AbstractVerticle
                 .setSsl(true)
                 .setCompressionSupported(true)
                 .setTcpKeepAlive(true);
-
-    LOG.info("hello mehbub. you are very good person");
 
 
         int httpsPort = ConfigHolder.getInstance().getInteger("https_port", 443);
@@ -181,9 +181,9 @@ public class ApiServerVerticle extends AbstractVerticle
     private void setupNakedDomainRouter(Router router)
     {
         router.route(HttpMethod.GET, "/*").handler(new NakedDomainHandler());
+//      /  router.route(HttpMethod.GET, "/*").handler(new BuilderDomainHandler());
 
     }
-
 
 
     private void setupApiHandler(Router router)
