@@ -912,7 +912,7 @@
 
 .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
     position: absolute;
-    bottom: 10% !important;
+    bottom: 5% !important;
     width: 100%;
     display: inline-block;
     z-index: 1;
@@ -928,7 +928,7 @@
     width: 10px;
     height: 10px;
     margin: 0 5px;
-    background: #ffffff !important;
+    background: #556670 !important;
     outline: 0;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
