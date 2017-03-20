@@ -1,10 +1,12 @@
 <%= console.log(" ============== projects ==================") %>
 <%= console.log(projects) %>
 <% if(typeof(projects) !== 'undefined'){ %>
+<% var c =0; %>
 <% _.each(projects, function(prj){ %>
-<li class="dropdown-submenu"><a class="prjctselcls" data-element="<%= prj.project_name %>"><%= prj.project_name %></a>
-<ul class="dropdown-menu" id="subprjctsel">
-</ul>
+<li <% if(c == 0 ){ %> class="dropdown-submenu" <% } %>>
+    <a class="prjctselcls dropdown-toggle" data-element="<%= prj.project_name %>"><%= prj.project_name %></a>
+    <ul class="dropdown-menu" id="subprjctsel">
+    </ul>
 </li>
-<% }); %>
+<% c++; }); %>
 <% } %>

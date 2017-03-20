@@ -834,6 +834,10 @@ section#full-schedule .coffee-break p {text-transform:uppercase; font-size:21px;
     border-radius: 0 6px 6px 6px;
 }
 
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
 .dropdown-submenu:hover>.dropdown-menu {
     display: block;
 }
