@@ -21,7 +21,9 @@
             <th data-hide="phone"> Payment Date </th>
             <th data-hide="phone"> Transaction# </th>
             <th data-hide="phone,tablet"> Payment Mode</th>
+<!--
             <th data-hide="phone,tablet"> Reciept# </th>
+-->
             <th data-hide="phone">Payment Status</th>
         </tr>
         </thead>
@@ -55,13 +57,11 @@
                 <%= dfarr[trns.payMode] %>
                 <% } %>
             </td>
-            <td>
+            <!--<td>
                 DSO/16-17/00050
-            </td>
+            </td>-->
             <td>
-                <span class="label <% if((typeof(trns.status) !== 'undefined') && (trns.status == 'success')){ %>label-success<% }else{ %>label-danger<% } %>">
-                    <% if(typeof(trns.status) !== 'undefined'){ %><%= trns.status %><% } %>
-                </span>
+                <span class="label capitalize <% if((typeof(trns.status) !== 'undefined') && (trns.status == 'success') || (trns.status == 'Success')){ %>label-success<% }else{ %>label-danger<% } %>"><% if(typeof(trns.status) !== 'undefined'){ %><%= trns.status %><% } %></span>
             </td>
         </tr>
         <% cnt=cnt+1; }); %>
