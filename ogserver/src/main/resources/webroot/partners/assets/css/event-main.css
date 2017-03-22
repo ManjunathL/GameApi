@@ -94,11 +94,13 @@ a:hover, a:focus {color: #6C7A89;text-decoration: none;}
 @media (min-width: 768px) and  (max-width: 992px)  {
 #lightnav .navbar-nav>li>a {padding:20px 10px;font-size:13px}
 }
-
+.dropdown-menu > li > a{
+    cursor: pointer;
+}
 /* ========== Dark Navigation ========== */
 #darknav.navbar-default {background-color:rgba(20,20,20,0.9);border-color: #000;}
 #darknav.navbar-default .navbar-collapse, #darknav.navbar-default .navbar-form {border-color: rgba(14,14,14,0.9)}
-#darknav .navbar-nav>li>a { text-transform:uppercase}
+#darknav .navbar-nav>li>a { text-transform:uppercase; cursor: pointer;}
 #darknav.navbar-default .navbar-nav>li>a {color: #fff;}
 #darknav .navbar-nav>li>a:hover, #darknav .navbar-nav>li>a:focus {color:#6C7A89;}
 #darknav.navbar-default .navbar-nav>.active>a, #darknav.navbar-default .navbar-nav>.active>a:focus, #darknav.navbar-default .navbar-nav>.active>a:hover {background:transparent;color:#6C7A89;}
@@ -189,11 +191,11 @@ and (orientation : landscape) {
 /*********  
 4.Common styles for Sections 
 *********/
-section {padding:45px 0}
+section {padding:15px 0}
 section h1 {text-transform:uppercase; font-size:46px;font-weight:400; margin-top:0;}
 section h2 {text-transform:uppercase; font-size:38px;font-weight:400; margin-top:0;}
-section .section-title, section .section-title-color, section .section-title-white {margin-bottom:40px;}
-@media (max-width: 768px) { 
+section .section-title, section .section-title-color, section .section-title-white {margin-bottom:15px;}
+@media (max-width: 768px) {
 section h2 {text-transform:uppercase; font-size:21px;font-weight:400; margin-top:0;}
 }
 /* ========== Section Title Black ========== */
@@ -221,8 +223,12 @@ section#event-features h2 {font-size:21px; margin:25px 0 10px}
 /*********  
 6.Section Speakers
 *********/
-.ceo-speak{
-	margin-top: 10%;
+.ceo-speak {
+    margin-top: 10%;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 400;
+    font-family: lato;
 }
 /*section#speakers {background:#EFEFEF}*/
 section#speakers .speaker-item {margin:15px 0;}
@@ -339,7 +345,10 @@ figure.speaker:hover:before,figure.speaker.hover:before,figure.speaker:hover:aft
 	background: #EFEFEF;
 }
 .whymg-box {
-    margin: 60px 0px;
+    margin: 5px 0px 15px;
+}
+.whymg-box img{
+    margin: 10px auto;
 }
 /*********  
 7.Section Highlight
@@ -351,6 +360,7 @@ section#highlight {background:url(https://res.cloudinary.com/mygubbi/image/uploa
 8.Section Timeline
 *********/
 #timeline .timeline-item:after, #timeline .timeline-item:before {content: '';display: block;width: 100%;clear: both;}
+
 #timeline {width: 100%;margin: 30px auto;position: relative;padding: 0 10px;-webkit-transition: all 0.4s ease;-moz-transition: all 0.4s ease;-ms-transition: all 0.4s ease;transition: all 0.4s ease;}
 #timeline:before {content: "";width: 3px;height: 100%;background: #EFEFEF;left: 50%;top: 0; position: absolute;}
 #timeline:after {content: "";clear: both;display: table;width: 100%;}
@@ -364,10 +374,17 @@ section#highlight {background:url(https://res.cloudinary.com/mygubbi/image/uploa
 #timeline .timeline-item .timeline-content.right:before {content: '';right: 45%;left: inherit;border-left: 0;border-right: 7px solid #f1f1f1;}
 @media screen and (max-width: 768px) {
 #timeline {margin: 30px;padding: 0px;width: 90%;}
+
+.timeline-item img{
+    max-width: 140px;
+    padding: 20px;
+}
+
 #timeline:before {left: 0;}
 #timeline .timeline-item .timeline-content {width: 90%;float: right;  }
 #timeline .timeline-item .timeline-content:before, #timeline .timeline-item .timeline-content.right:before {left: 10%;margin-left: -6px;border-left: 0;border-right: 7px solid #f1f1f1;}
 #timeline .timeline-item .timeline-icon {left: 0;}
+.last-icon {margin-bottom:10px;}
 }
 
 /*********  
@@ -604,11 +621,25 @@ header#fullwidth .sm-title {text-transform:uppercase; font-weight:700;font-size:
 
 header#fullwidth .header-text {position: relative;z-index: 20;padding: 10% 5% 5%;height: 100%;}
 
+/* ========== Hero Backgrounds ========== */
+.homepage {background-image: url(https://res.cloudinary.com/mygubbi/image/upload/v1490182077/ozone/fullwidth-header.jpg);}
+.schedulebg {background-image: url(../media/image-backgrounds/black-and-white/schedulebg.jpg);}
+.speakersbg {background-image: url(../media/image-backgrounds/black-and-white/speakersbg.jpg);}
+.latest-news {background-image: url(../media/image-backgrounds/black-and-white/latest-newsbg.jpg);}
+.speakerdetails {background-image: url(../media/image-backgrounds/black-and-white/speaker-detailsbg.jpg);}
+.blankbg {background-image: url(../media/image-backgrounds/black-and-white/buildingsbg.jpg);}
+.getstarted {background-image:url(../media/image-backgrounds/black-and-white/peoplebg.jpg);}
 
-@media (max-width: 768px) { 
-header#fullwidth h1 {text-transform:uppercase;font-weight:400;font-size:21px;background:#6C7A89;color:#FFF;margin-top:40%}
-header#fullwidth h2 {text-transform:uppercase; font-weight:400; font-size:28px}
+@media (max-width: 768px) {
+    .img-deco{
+        max-width: 60px;
+    }
+}
+header#fullwidth h1 {text-transform:uppercase;font-weight:400;font-size:21px;background:#6C7A89;color:#FFF;margin-top: 10px;}
+header#fullwidth h2 {text-transform:uppercase; font-weight:400; font-size:28px }
 header#fullwidth .sm-title {text-transform:uppercase; font-weight:700;font-size:12px}
+header h3 span.date{
+    margin-top: 18px;
 }
 
 @media only screen 
@@ -645,7 +676,8 @@ header#fullwidth h2 {text-transform: uppercase;font-weight: 400;font-size: 21px;
 }
 
 @media (max-width: 640px) {
-header#fullwidth h1 {text-transform:uppercase;font-weight:400;font-size:21px;background:#6C7A89;color:#FFF;margin-top:40%}
+.brand-logo{margin: 40px auto 0px;}
+header#fullwidth h1 {text-transform:uppercase;font-weight:400;font-size:21px;background:#6C7A89;color:#FFF;margin-top: 15px; margin-bottom: 0px;}
 header#fullwidth h2 {text-transform:uppercase; font-weight:400; font-size:24px}
 header#fullwidth .header-text {position: relative;z-index: 20;padding: 10% 0% 0;height: 100%;}
 } 
@@ -656,15 +688,6 @@ header#hero-sm .header-text{padding-top:100px;padding-bottom:50px}
 @media(min-width:768px) {
 header#hero-sm .header-text {padding-top: 150px;padding-bottom: 100px;}
 }
-
-/* ========== Hero Backgrounds ========== */
-.homepage {background-image: url(../media/image-backgrounds/fullwidth-header.jpg);}
-.schedulebg {background-image: url(../media/image-backgrounds/black-and-white/schedulebg.jpg);}
-.speakersbg {background-image: url(../media/image-backgrounds/black-and-white/speakersbg.jpg);}
-.latest-news {background-image: url(../media/image-backgrounds/black-and-white/latest-newsbg.jpg);}
-.speakerdetails {background-image: url(../media/image-backgrounds/black-and-white/speaker-detailsbg.jpg);}
-.blankbg {background-image: url(../media/image-backgrounds/black-and-white/buildingsbg.jpg);}
-.getstarted {background-image:url(../media/image-backgrounds/black-and-white/peoplebg.jpg);}
 
 
 /*********  
@@ -881,6 +904,7 @@ section#full-schedule .coffee-break p {text-transform:uppercase; font-size:21px;
 }
 @media(max-width:768px) {
 .arrow i {display: none;}
+.mrgn-50-top {margin-top: 0px}
 }
 
 @-webkit-keyframes arrow {
