@@ -877,7 +877,7 @@ section#full-schedule .coffee-break p {text-transform:uppercase; font-size:21px;
 24.Animated Arrow For Home Page 
 *********/
 @media(min-width:768px) {
-.arrow i {position: relative;margin: 0 auto;display: block;top: 70px;color: #FFF;-webkit-animation: arrow 1s both infinite;animation: arrow 1s both infinite;}
+.arrow i {position: relative;margin: 0 auto;display: block;top: 0px; color: #FFF;-webkit-animation: arrow 1s both infinite;animation: arrow 1s both infinite;}
 }
 @media(max-width:768px) {
 .arrow i {display: none;}
