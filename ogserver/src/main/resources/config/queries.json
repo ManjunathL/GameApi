@@ -368,6 +368,15 @@
         "productId",
         "uid"
       ]
+    },
+    {
+      "id": "addon-master.select.all",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select * from addon_master where categoryCode = ?",
+      "params": [
+        "categoryCode"
+      ]
     }
   ]
 }
