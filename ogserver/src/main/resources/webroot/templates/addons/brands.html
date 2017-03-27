@@ -1,0 +1,6 @@
+<option> Brands </option>
+<% if(typeof(resBrand) !== 'undefined'){ %>
+<% _.each(resBrand, function(radons){ %>
+<option value="<%= radons %>"><%= radons %></option>
+<% }); %>
+<% } %>
