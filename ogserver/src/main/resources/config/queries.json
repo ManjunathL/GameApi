@@ -373,10 +373,15 @@
       "id": "addon-master.select.all",
       "type": "select",
       "table": "addon_master",
-      "query": "select * from addon_master where categoryCode = ?",
-      "params": [
-        "categoryCode"
-      ]
+      "query": "select * from addon_master",
+      "params": []
+    },
+    {
+      "id": "addon-master.select.all",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select * from addon_master",
+      "params": []
     }
   ]
 }
