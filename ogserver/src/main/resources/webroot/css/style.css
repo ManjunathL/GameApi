@@ -1041,15 +1041,19 @@ ul.social-buttons li a:active {
 /* Start ADDONS Page */
 .addons-img-box {
     background: #efefef;
-    padding: 15px 15px;
+    padding: 15px 15px 5px;
     margin-top: 20px;
     margin-bottom:5px;
     border-radius: 2px;
+    min-height: 325px;
 }
 .addons-img {
     position: relative;
     display: block;
     margin: 0px auto;
+    min-height: 175px;
+    max-height: 175px;
+    overflow: hidden;
 }
 .addons-price {
     position: absolute;
@@ -1060,6 +1064,12 @@ ul.social-buttons li a:active {
     width: 100%;
     color: #fff;
     font-family: 'Lato', sans-serif;
+}
+.addons-details h5 {
+    font-size: 13px;
+    text-transform: capitalize;
+    line-height: 150%;
+    margin-bottom: 0px;
 }
 .addons-details h3 {
     text-transform: capitalize;
