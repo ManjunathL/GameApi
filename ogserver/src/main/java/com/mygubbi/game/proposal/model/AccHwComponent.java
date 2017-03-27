@@ -16,13 +16,16 @@ public class AccHwComponent
     private String uom;
     private String catalogCode;
     private String category;
+    private String ERPCode;
 
     public static AccHwComponent fromJson(JsonObject json)
     {
         return new AccHwComponent().setCode(json.getString("code")).setTitle(json.getString("title"))
                 .setMakeType(json.getString("makeType")).setMake(json.getString("make"))
                 .setImageUrl(json.getString("imagePath")).setPrice(json.getDouble("price")).setUom(json.getString("uom"))
-                .setCatalogCode(json.getString("catalogCode")).setCategory((json.getString("category")));
+                .setCatalogCode(json.getString("catalogCode"))
+                .setCategory(json.getString("category"))
+                .setERPCode(json.getString("ERPCode"));
     }
 
     public String getMake()
@@ -121,18 +124,28 @@ public class AccHwComponent
         return this;
     }
 
+    public String getERPCode() {
+        return ERPCode;
+    }
+
+    public AccHwComponent setERPCode(String ERPCode) {
+        this.ERPCode = ERPCode;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "AccHwComponent{" +
-                "code='" + code + '\'' +
+                "catalogCode='" + catalogCode + '\'' +
+                ", code='" + code + '\'' +
                 ", title='" + title + '\'' +
                 ", makeType='" + makeType + '\'' +
                 ", make='" + make + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", price=" + price +
                 ", uom='" + uom + '\'' +
-                ", catalogCode='" + catalogCode + '\'' +
                 ", category='" + category + '\'' +
+                ", ERPCode='" + ERPCode + '\'' +
                 '}';
     }
 }

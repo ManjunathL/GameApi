@@ -431,14 +431,20 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
-            p = new Paragraph("Discount(C):" +this.getRoundOffValue(String.valueOf((int)quoteData.discountAmount)) ,fsize1);
-            p.setAlignment(Element.ALIGN_RIGHT);
-            document.add(p);
 
+            LOG.info("Quote data" +quoteData);
+            LOG.info("discount amount" +quoteData.discountAmount);
+            LOG.info("is value" +(!(quoteData.discountAmount==0.0)));
+            if(!(quoteData.discountAmount==0.0))
+            {
+                p = new Paragraph("Discount(C):" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
+                p.setAlignment(Element.ALIGN_RIGHT);
+                document.add(p);
+            }
 
-            Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
+                Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
 
-            Double res=val-val%10;
+                Double res = val - val % 10;
 
            /* Double rem=val%10;
 

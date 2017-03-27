@@ -304,4 +304,23 @@ public class QuoteData
         }
         return (result+lastDigit);
     }
+
+
+    @Override
+    public String toString() {
+        return "QuoteData{" +
+                "addonsCost=" + addonsCost +
+                ", proposalHeader=" + proposalHeader +
+                ", products=" + products +
+                ", word=" + word +
+                ", assembledProducts=" + assembledProducts +
+                ", catalogueProducts=" + catalogueProducts +
+                ", headerLevelAddons=" + headerLevelAddons +
+                ", productsCost=" + productsCost +
+                ", discountAmount=" + discountAmount +
+                ", fromVersion='" + fromVersion + '\'' +
+                ", city='" + city + '\'' +
+                ", priceDate=" + priceDate +
+                '}';
+    }
 }

@@ -135,4 +135,17 @@ public class QuoteRequest
     {
         return this.discountAmount;
     }
+
+    @Override
+    public String toString() {
+        return "QuoteRequest{" +
+                "addonIds=" + addonIds +
+                ", proposalId=" + proposalId +
+                ", fromVersion='" + fromVersion + '\'' +
+                ", productsIds=" + productsIds +
+                ", versionIds=" + versionIds +
+                ", discountAmount=" + discountAmount +
+                ", outputType=" + outputType +
+                '}';
+    }
 }
