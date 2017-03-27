@@ -1,12 +1,7 @@
 package com.mygubbi.game.proposal.erp;
 
 import com.mygubbi.common.StringUtils;
-import com.mygubbi.game.proposal.ModuleAccessoryPack;
-import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.AccHwComponent;
-import com.mygubbi.game.proposal.model.AccessoryPackComponent;
-import com.mygubbi.game.proposal.model.ModuleComponent;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -17,9 +12,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by user on 20-Mar-17.

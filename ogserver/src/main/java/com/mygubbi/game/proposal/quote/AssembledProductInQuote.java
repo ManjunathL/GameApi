@@ -630,6 +630,7 @@ public class AssembledProductInQuote
         public String category;
         public String ERPCode;
 
+
         public ModulePart(String unit, int seq, String code, String title, double quantity, String make, String uom, String catalogCode,String category,String ERPCode)
         {
             this.unit = unit;

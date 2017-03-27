@@ -1,13 +1,6 @@
 package com.mygubbi.game.proposal.erp;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mygubbi.game.proposal.ModuleAccessoryPack;
-import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.AccHwComponent;
-import com.mygubbi.game.proposal.model.AccessoryPack;
-import com.mygubbi.game.proposal.model.AccessoryPackComponent;
-import com.mygubbi.game.proposal.model.ModuleComponent;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -18,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -170,7 +162,7 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
     private int WriteData(int currentRow,String serialnum, String item, String UOM, double quantity, String title,String catalogcode)
     {
         this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{currentRow, serialnum,item,UOM,quantity,title,catalogcode});
-        currentRow++;
+            currentRow++;
 
         return currentRow;
     }*/

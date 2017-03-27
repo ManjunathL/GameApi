@@ -609,6 +609,15 @@
     },
 
     {
+      "uri": "/gapi/workbench/materialcomponentmapping/select",
+      "source": "db",
+      "query":"workbench.materialcomponentmapping.select",
+      "params":["componentName"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
       "uri": "/gapi/proposal/rcodedetails",
       "source": "db",
       "query":"ratefactor.details",
