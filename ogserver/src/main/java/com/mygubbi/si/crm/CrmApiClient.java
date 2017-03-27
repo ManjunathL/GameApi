@@ -1,9 +1,6 @@
 package com.mygubbi.si.crm;
 
 
-import com.mygubbi.si.email.EmailData;
-import com.sendgrid.SendGrid;
-import com.sendgrid.SendGridException;
 import com.sugarcrm.www.sugarcrm.Set_entry_result;
 import com.sugarcrm.www.sugarcrm.SugarsoapLocator;
 import com.sugarcrm.www.sugarcrm.SugarsoapPortType;
@@ -34,42 +31,44 @@ public class CrmApiClient
         this.initSoapClient();
     }
 
-//    public static void main(String[] args)
-//    {
-//        //String  opportunity= "SAL-1607-000039";
-//       // String  opportunity= "SAL-1607-000035";
+   /* public static void main(String[] args)
+    {
+        //String  opportunity= "SAL-1607-000039";
+       // String  opportunity= "SAL-1607-000035";
 //        String  opportunity= "SAL-1612-000793";
-//        //String  opportunity= "SAL-1607-000039";
-//        //String  opportunity= "SAL-1609-000286";
-//        //String  opportunity= "SAL-1607-000022";
-//       // String  opportunity= "SAL-1611-000541";
-//       // String  opportunity= "SAL-1608-000110";
-//        String  opportunities = "Opportunities";
-//        String  category = "Floor_Plan";
-//        String  type = "all";
-//        String  status = "In Progress";
-//        String  taskType = "Intial Approval";
-//        String  parentType = "Oppertunity";
-//        String  taskId = "";
-//        String  parentId ="1";
-//
-//
-//        try {
-//           System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
-//          //  status  = "Deferred";
-//            status  = "Completed";
-//           taskType = "INITIAL_PROPOSAL_APPROVAL"; // initial proposal aprrove
-//           // taskType = "SEND_INITIAL_PROPOSAL";  // Send initial Proposal
-//            // taskType = "INITIAL_PROPOSAL_RESPONSE"; // Customer Response on initial Proposal
-//            //parentId = "19769ef7-515e-485f-3d23-5703a4073947";
-//           //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
-//          // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
-//            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+       // String  opportunity= "SAL-1701-000955";
+        String  opportunity= "SAL-1610-000457";
+        //String  opportunity= "SAL-1607-000039";
+        //String  opportunity= "SAL-1609-000286";
+        //String  opportunity= "SAL-1607-000022";
+       // String  opportunity= "SAL-1611-000541";
+       // String  opportunity= "SAL-1608-000110";
+        String  opportunities = "Opportunities";
+        String  category = "Floor_Plan";
+        String  type = "all";
+        String  status = "In Progress";
+        String  taskType = "Intial Approval";
+        String  parentType = "Oppertunity";
+        String  taskId = "";
+        String  parentId ="1";
+
+
+        try {
+           System.out.println(new CrmApiClient().getOpportunityDetails(opportunity));
+          //  status  = "Deferred";
+            status  = "Completed";
+           taskType = "INITIAL_PROPOSAL_APPROVAL"; // initial proposal aprrove
+           // taskType = "SEND_INITIAL_PROPOSAL";  // Send initial Proposal
+            // taskType = "INITIAL_PROPOSAL_RESPONSE"; // Customer Response on initial Proposal
+            //parentId = "19769ef7-515e-485f-3d23-5703a4073947";
+           //System.out.println(new CrmApiClient().getDocuments(opportunities, opportunity, category, type));
+          // System.out.println(new CrmApiClient().updateTask( opportunities, opportunity, status, taskId , taskType, parentId));
+            // System.out.println(new CrmApiClient().updateDocument( parentType, opportunity, status, taskId , taskType, parentId));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
     private void initSoapClient() throws Exception
     {
@@ -118,6 +117,7 @@ public class CrmApiClient
 
     public String getOpportunityDetails(String opportunityId) throws Exception
     {
+        LOG.info("-=-=-=-"   +opportunityId);
         JsonObject doc = new JsonObject(this.crmPort.get_opportunity_details(this.sessionId, opportunityId));
         String status = (String) doc.getValue("sales_stage");
 
@@ -193,6 +193,22 @@ public class CrmApiClient
         {
             JsonObject objectFinalDocumentProposal = documentFinalProposal.getJsonObject(0);
             proposalObject.add(objectFinalDocumentProposal);
+
+        }
+        String  categoryBookingForm = "BOOKING_FORM";
+        JsonArray documentBooking = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryBookingForm, type));
+        if (documentBooking.size() != 0 )
+        {
+            JsonObject objectFinalDocumentBooking = documentBooking.getJsonObject(0);
+            proposalObject.add(objectFinalDocumentBooking);
+
+        }
+        String  categoryWorkContract = "WORKS_CONTRACT";
+        JsonArray documentContract = new JsonArray(new CrmApiClient().getDocuments(opportunities, opportunityId, categoryWorkContract, type));
+        if (documentContract.size() != 0)
+        {
+            JsonObject objectFinalDocumentContract = documentContract.getJsonObject(0);
+            proposalObject.add(objectFinalDocumentContract);
 
         }
 

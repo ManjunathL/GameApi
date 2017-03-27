@@ -3,6 +3,8 @@ package com.mygubbi.game.proposal.price;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
@@ -39,6 +41,9 @@ public class PanelComponent
     private String accPackCode;
 
     private enum PanelExposed{NONE, SINGLE, DOUBLE};
+
+    private final static Logger LOG = LogManager.getLogger(PanelComponent.class);
+
 
     public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode)
     {
@@ -298,17 +303,6 @@ public class PanelComponent
     {
         this.exposed = PanelExposed.NONE;
 
-        if (this.isShutter())
-        {
-            if (Objects.equals("D", modulePanel.getExposed())) {
-                this.exposed = PanelExposed.DOUBLE;
-            }
-            else
-            {
-                this.exposed = PanelExposed.SINGLE;
-            }
-            return;
-        }
 
         boolean exposedSide = ((productModule.isLeftExposed() && this.isLeftPanel()) ||
                 (productModule.isRightExposed() && this.isRightPanel()) ||
@@ -318,9 +312,47 @@ public class PanelComponent
 
         if (exposedSide) this.exposed = PanelExposed.SINGLE;
 
-        if (exposedSide && productModule.isOpenUnit()) this.exposed = PanelExposed.DOUBLE;
+     /*   if (exposedSide && productModule.isOpenUnit()) this.exposed = PanelExposed.DOUBLE;
 
-        if (!exposedSide && productModule.isOpenUnit()) this.exposed = PanelExposed.SINGLE;
+        if (!exposedSide && productModule.isOpenUnit()) this.exposed = PanelExposed.SINGLE;*/
+
+        if (productModule.isOpenUnit())
+        {
+            LOG.debug("Product module is an open unit");
+
+            if (this.isShutter())
+            {
+                LOG.debug("This is a shutter panel");
+                this.exposed = PanelExposed.DOUBLE;
+            }
+
+            if (this.isCarcass())
+
+            {
+                if (modulePanel.getExposed() == null)
+                {
+                    this.exposed = PanelExposed.SINGLE;
+
+                }
+                else if (("D").equals(modulePanel.getExposed()))
+                {
+                    this.exposed = PanelExposed.DOUBLE;
+                }
+
+            }
+
+        }
+        else  if (this.isShutter())
+        {
+            if (Objects.equals("D", modulePanel.getExposed())) {
+                this.exposed = PanelExposed.DOUBLE;
+            }
+            else
+            {
+                this.exposed = PanelExposed.SINGLE;
+            }
+
+        }
 
     }
 

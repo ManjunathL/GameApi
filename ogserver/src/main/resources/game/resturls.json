@@ -618,6 +618,40 @@
     },
 
     {
+      "uri": "/gapi/workbench/productmaster/id",
+      "source": "db",
+      "query":"workbench.productmaster.id",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/designmaster/id",
+      "source": "db",
+      "query":"workbench.designmaster.id",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/workbench/designmaster/fetch",
+      "source": "db",
+      "query":"workbench.designmaster.fetch",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/materialfinishmapping",
+      "source": "db",
+      "query":"workbench.materialfinishmapping.select",
+      "params":["materialName"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
       "uri": "/gapi/proposal/rcodedetails",
       "source": "db",
       "query":"ratefactor.details",
