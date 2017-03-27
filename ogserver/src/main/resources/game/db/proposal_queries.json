@@ -902,6 +902,8 @@
       "query": "select * from addon_master where code= ?",
       "params": ["code"]
     },
+
+    //Workbench Related queries
     {
       "id": "workbench.code.codelookup",
       "type": "select",
@@ -949,6 +951,45 @@
       "params": [],
       "jsonfields":["secondaryImageLocationJson", "spaceJSon","furnitureComponentMaterialJson","designerDetailsJson"]
     },
+
+    {
+      "id": "workbench.materialcomponentmapping.select",
+      "type": "select",
+      "table": "material_component_mapping",
+      "query": "select distinct mm.materialName from material_component_mapping mm INNER JOIN code_master cm ON mm.componentName = ? and cm.lookupType = 'component'",
+      "params": ["componentName"]
+    },
+
+    {
+      "id": "workbench.productmaster.id",
+      "type": "select",
+      "table": "product_master",
+      "query": "select * from product_master where id = ? ",
+      "params": ["id"]
+    },
+    {
+      "id": "workbench.designmaster.id",
+      "type": "select",
+      "table": "design_master",
+      "query": "select * from design_master where id = ? ",
+      "params": ["id"]
+    },
+    {
+      "id": "workbench.designmaster.fetch",
+      "type": "select",
+      "table": "design_master",
+      "query": "select d.spaceName , d.primaryImageLocation , d.designerstory , t.productName , t.imagePath from design_master d INNER JOIN tagproduct_master t ON d.spaceName=t.spaceName where d.id=?; ",
+      "params": ["id"]
+    },
+    {
+      "id": "workbench.materialfinishmapping.select",
+      "type": "select",
+      "table": "material_finish_mapping",
+      "query": "select * from material_finish_mapping where materialName = ? ",
+      "params": ["materialName"]
+    },
+
+    //GaAME accessory related queries
 
     {
       "id": "workbench.materialcomponentmapping.select",

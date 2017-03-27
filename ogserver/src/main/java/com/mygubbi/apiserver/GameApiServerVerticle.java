@@ -3,10 +3,7 @@ package com.mygubbi.apiserver;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.config.StaticConfigHandler;
-import com.mygubbi.game.proposal.ProposalAddonHandler;
-import com.mygubbi.game.proposal.ProposalHandler;
-import com.mygubbi.game.proposal.ProposalModuleHandler;
-import com.mygubbi.game.proposal.ProposalProductHandler;
+import com.mygubbi.game.proposal.*;
 import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import com.mygubbi.si.crm.CrmApiHandler;
@@ -113,6 +110,7 @@ public class GameApiServerVerticle extends AbstractVerticle
 //        router.mountSubRouter("/gapi/catalogue", new ProductHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/categories", new CategoryHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/payment", new PaymentHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/fileupload", new FileUploadHandler(VertxInstance.get()));
 
         //LOG.info("Routes:" + router.getRoutes().toString());
     }
