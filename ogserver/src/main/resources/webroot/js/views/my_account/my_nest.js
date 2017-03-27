@@ -44,6 +44,9 @@ define([
                         case "Closed_Won":
                             project_statusArr = ["initiated","proposal approved","order placed"];
                             break;
+                        case "Closed_Lost":case "On_Hold":
+                            project_statusArr = ["initiated","proposal approved","order placed"];
+                            break;
                     }
                     if(typeof(client_project_status_c) != 'undefined' && client_project_status_c != null){
 

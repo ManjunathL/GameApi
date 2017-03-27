@@ -118,7 +118,7 @@
 	#pbCaption label:after{ background:#FFF; box-shadow:12px 0 #FFF, -12px 0 #FFF; content:""; display:inline-block; height:0; padding:10px 5px; text-align:right; vertical-align:top; width:0; }
 	#pbCaption label:hover{ opacity:1; }
 	#pbCaption .title,
-	#pbCaption .counter{ display:inline-block; color:#FFF; margin:0 6px; }
+	#pbCaption .counter{ display:inline-block; color:#FFF; margin:10px 6px; }
 	#pbCaption .counter{ display:none; opacity:.55; }
 	.hasCounter #pbCaption .counter{ display:inline-block; }
 	.pbCaptionText{ transition:.3s; opacity:.9; font-weight:bold; font-size:.9em; text-shadow:1px 1px 1px rgba(0,0,0,.5); padding-left:60px; } /* padding-left from <label> */
