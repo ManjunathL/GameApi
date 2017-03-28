@@ -1,17 +1,22 @@
+<% if(typeof(addonsdtls) !== 'undefined'){ count = 1; %>
+<% _.each(addonsdtls, function(addons){ %>
+<div class="col-sm-4 col-md-3 col-lg-3">
+    <div class="addons-img-box">
+        <div class="addons-img">
 
-    <% if(typeof(addonsdtls) !== 'undefined'){ count = 1; %>
-    <% _.each(addonsdtls, function(addons){ %>
-    <div class="col-sm-4 col-md-3 col-lg-3">
-        <div class="addons-img-box">
-            <a href="#" class="addons-img">
-                <img class="img-responsive" src="<%= addons.imagePath %>" alt= "<%= addons.title %>">
-                <span class="addons-price">MRP: <%= addons.dealerPrice %>₹ </span>
-            </a>
-            <div class="addons-details">
-                <h3>  <%= addons.title %> </h3>
-                <p> Product Code:  <%= addons.code %> </p>
-            </div>
+            <% if(addons.imagePath == ''){ %>
+            <img class="img-responsive object-fit_cover width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1490611606/addons/img-not-abl.jpg" alt= "<%= addons.title %>">
+            <% }else{ %>
+            <img class="img-responsive object-fit_cover width100" src="<%= addons.imagePath %>" alt= "<%= addons.title %>">
+
+            <% } %>
+            <span class="addons-price">MRP: <%= addons.dealerPrice %>₹ </span>
+        </div>
+        <div class="addons-details">
+            <h5>  <%= addons.title %> </h5>
+            <p> Product Code:  <%= addons.code %> </p>
         </div>
     </div>
-    <% }); %>
-    <% } %>
+</div>
+<% }); %>
+<% } %>
