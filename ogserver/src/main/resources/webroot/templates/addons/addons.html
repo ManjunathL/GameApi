@@ -71,10 +71,10 @@
                                 <img class="img-responsive object-fit_cover width100" src="<%= addons.imagePath %>" alt= "<%= addons.title %>">
 
                                 <% } %>
-                                <span class="addons-price">MRP: <%= addons.dealerPrice %>₹ </span>
+                                <span class="addons-price">MRP: ₹ <%= addons.rate %> </span>
                             </div>
                             <div class="addons-details">
-                                <h5>  <%= addons.title %> </h5>
+                                <h5>  <%= addons.productTypeCode+ " - "+ addons.product %> </h5>
                                 <p> Product Code:  <%= addons.code %> </p>
                             </div>
                         </div>
