@@ -442,7 +442,7 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,? )",
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?)",
       "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks","profit","margin","sourcePrice","amountWOTax"]
     },
 
@@ -458,8 +458,8 @@
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set seq = ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? where id = ?",
-      "params": ["seq", "code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","id"]
+      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? where id = ?",
+      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","id"]
     },
 
     {
@@ -526,7 +526,7 @@
       "id": "proposal.addon.createnewfromoldproposal",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax from proposal_addon where proposalId = ? and fromVersion = ? ",
+      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax,product from proposal_addon where proposalId = ? and fromVersion = ? ",
       "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
@@ -542,7 +542,7 @@
       "id": "proposal.product.update",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set seq = ?,manualSeq=?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?,source=? fromVersion = ? where id = ?",
+      "query": "update proposal_product set seq = ?,manualSeq=?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?,source = ? where fromVersion = ? and id = ?",
       "params": ["seq","manualSeq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories","source" ,"fromVersion", "id"]
     },
 
