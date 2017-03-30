@@ -58,6 +58,7 @@ public class ProductModule extends JsonObject
     private static final String ACCPACKS = "accessoryPacks";
     private static final String ACC_PACK_DEFAULT = "accessoryPackDefault";
     private static final String COST_WO_ACCESSORIES = "costWoAccessories";
+    private static final String ACCESSORY_FLAG = "accessoryflag";
 
     public ProductModule()
     {
@@ -174,6 +175,11 @@ public class ProductModule extends JsonObject
     public int getSequence()
     {
         return this.getInteger(SEQ);
+    }
+
+    public String getAccessoryFlag()
+    {
+        return this.getString(ACCESSORY_FLAG);
     }
 
     public boolean isLeftExposed()
@@ -321,6 +327,12 @@ public class ProductModule extends JsonObject
     public ProductModule setMappedFlag(String flag)
     {
         this.put(MAPPED, flag);
+        return this;
+    }
+
+    public ProductModule setAccessoryFlag(String flag)
+    {
+        this.put(ACCESSORY_FLAG, flag);
         return this;
     }
 

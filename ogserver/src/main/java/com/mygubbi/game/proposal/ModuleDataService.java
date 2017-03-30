@@ -7,7 +7,6 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.*;
-import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -429,6 +428,7 @@ public class ModuleDataService extends AbstractVerticle
             module.setImagePath(mgModule.getImagePath());
             module.setModuleCategory(mgModule.getModuleCategory());
             module.setAccPackDefault(mgModule.getAccessoryPackDefault());
+            module.setAccessoryFlag("N");
         }
         else
         {
