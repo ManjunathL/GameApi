@@ -110,6 +110,11 @@ public class ProductJson extends JsonObject
         return this.getJsonArray("images").getString(0);
     }
 
+    public String getSeoId()
+    {
+        return this.getString("seoId");
+    }
+
     public String getUrl()
     {
         return this.getString("url");
