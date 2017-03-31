@@ -392,7 +392,7 @@
     {
       "id": "product.select.relatedSeo",
       "type": "select",
-      "query": "SELECT * FROM product as a WHERE a.category = ? ORDER BY `createDt` DESC LIMIT 2",
+      "query": "SELECT * FROM product as a WHERE a.category = ? ORDER BY createDt DESC LIMIT 2",
       "params": [
         "category"
       ]
