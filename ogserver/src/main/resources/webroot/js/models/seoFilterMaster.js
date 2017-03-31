@@ -8,7 +8,7 @@ define([
 ], function($, Backbone) {
     var SEOFilterMaster = Backbone.Model.extend({
         //urlRoot:restBase + '/api/seo',
-        urlRoot:'https://192.168.104.88/api/seo',
+        urlRoot:restBase + '/api/seo',
         defaults: {
           category: '',
           subCategory: '',
