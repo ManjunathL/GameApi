@@ -1,5 +1,71 @@
 <div class="category-details">
-    <%= description %>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <%= description %>
+
+            <% if(typeof(subcategoryList) != 'undefined'){ %>
+                <% _.each(subcategoryList, function(subc){ %>
+                <% if(subc.subCategory != ''){ %>
+
+                    <h3><a href="<%= subc.url %>"><%= subc.subCategory %></a></h3>
+                    <% } %>
+                <% }); %>
+            <% } %>
+
+            <% if(typeof(other_catg_url) != 'undefined'){ %>
+            <h3 class="frq-h3">Other Categories Related to <%= selectedcategory %> Online</h3>
+            <% var obj = other_catg_url; %>
+            <% _.each(obj, function(ob,i){ %>
+
+                <a class="frq-lnk" href="/<%= ob %>"><%= i %></a>
+            <% }); %>
+
+            <% } %>
+            <div class="clearfix"></div>
+
+            <% if(typeof(H_Tags) != 'undefined'){ %>
+                <h3 class="frq-h3">Best Tags to <%= selectedcategory %></h3>
+                <h2><%= H_Tags %></h2>
+            <% } %>
+        </div>
+    </div>
+
+    <% if(typeof(selectedProducts) != 'undefined'){ %>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h3 class="frq-h3">Frequently Bought Together with <%= selectedcategory %></h3>
+        </div>
+
+        <% _.each(selectedProducts, function(prod){ %>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                <div class="frq-product">
+                    <img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prod.images[0] %>" alt="<%= prod.name %>">
+
+                    <div class="text-center">
+                        <h4 class="frq-h4"><a href="#"><%= prod.name %></a></h4>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+    <% } %>
+    <% if(typeof(selectedProducts1) != 'undefined'){ %>
+    <div class="row">
+        <% _.each(selectedProducts1, function(prodd){ %>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                <div class="frq-product">
+                    <img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prodd.images[0] %>" alt="<%= prodd.name %>">
+
+                    <div class="text-center">
+                        <h4 class="frq-h4"><a href="#"><%= prodd.name %></a></h4>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    <% } %>
+
 </div>
 
 <style>

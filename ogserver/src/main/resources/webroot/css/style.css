@@ -4415,3 +4415,42 @@ a.hideLink {
     line-height: 1.75;
     font-family: 'Raleway', sans-serif;
 }
+
+.frq-h3{
+    font-size: 20px;
+    color: #333;
+}
+
+.frq-h4{
+    text-transform: capitalize;
+}
+
+.frq-h4 a{
+    padding-top: 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 400;
+}
+
+.frq-h4 a:hover{
+     color: #f1591f;
+}
+
+.frq-lnk{
+    display:inline-block;
+    float:left;
+    color:#606060;
+    border:1px solid #606060;
+    border-radius:20px;
+    margin-right:10px;
+    padding: 5px 12px;
+}
+.frq-lnk:hover{
+    color: #f1591f;
+    border:1px solid #f1591f;
+}
+.frq-product{
+    background:#f5f5f5;
+    padding: 15px;
+    margin-bottom: 30px;
+}

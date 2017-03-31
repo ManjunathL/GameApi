@@ -13,8 +13,8 @@ import org.apache.logging.log4j.Logger;
 public class StaticConfigHandler implements Handler<RoutingContext> {
 
     private static final String CONFIG_RESOURCE = "/js/config.js";
-    private static final String MAIN_JS_RESOURCE = "/js/main.js";
-    private static final String IMPORTS_RESOURCE = "/imports.css";
+    private static final String MAIN_JS_RESOURCE = "../js/main.js";
+    private static final String IMPORTS_RESOURCE = "../imports.css";
     private static final String ROBOTS_RESOURCE = "/robots.txt";
 
     private final static Logger LOG = LogManager.getLogger(StaticConfigHandler.class);

@@ -271,7 +271,7 @@
       "id": "seo.insert",
       "type": "insert",
       "table": "seo",
-      "query": "insert into seo(id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory, content ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "query": "insert into seo(id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory, content, url, other_catg_url ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       "params": [
         "id",
         "seoId",
@@ -282,7 +282,9 @@
         "location",
         "category",
         "subCategory",
-        "content"
+        "content",
+        "url",
+        "other_catg_url"
       ]
     },
     {
@@ -313,7 +315,7 @@
       "id": "seo.update",
       "type": "update",
       "table": "seo",
-      "query": "update seo set title = ?, description = ?, metaKeywords = ? , seoJson = ?, location = ?, category = ? , subCategory = ?, content = ? where seoId = ?",
+      "query": "update seo set title = ?, description = ?, metaKeywords = ? , seoJson = ?, location = ?, category = ? , subCategory = ?, content = ?, url = ?, other_catg_url = ? where seoId = ?",
       "params": [
         "title",
         "description",
@@ -323,6 +325,8 @@
         "category",
         "subCategory",
         "content",
+        "url",
+        "other_catg_url",
         "seoId"
       ]
     },
@@ -383,6 +387,14 @@
       "query": "select * from addon_master where categoryCode = ?",
       "params": [
         "categoryCode"
+      ]
+    },
+    {
+      "id": "product.select.relatedSeo",
+      "type": "select",
+      "query": "SELECT * FROM product as a WHERE a.category = ? ORDER BY createDt DESC LIMIT 2",
+      "params": [
+        "category"
       ]
     }
   ]
