@@ -39,10 +39,10 @@
         <% _.each(selectedProducts, function(prod){ %>
             <div class="col-lg-4 col-md-4 col-sm-4 text-center">
                 <div class="frq-product">
-                    <img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prod.images[0] %>" alt="<%= prod.name %>">
+                    <a href="/product-<%= prod.id %>"><img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prod.images[0] %>" alt="<%= prod.name %>"></a>
 
                     <div class="text-center">
-                        <h4 class="frq-h4"><a href="#"><%= prod.name %></a></h4>
+                        <h4 class="frq-h4"><a href="/product-<%= prod.id %>"><%= prod.name %></a></h4>
                     </div>
                 </div>
             </div>
@@ -55,10 +55,10 @@
         <% _.each(selectedProducts1, function(prodd){ %>
             <div class="col-lg-4 col-md-4 col-sm-4 text-center">
                 <div class="frq-product">
-                    <img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prodd.images[0] %>" alt="<%= prodd.name %>">
+                    <a href="/product-<%= prodd.id %>"><img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prodd.images[0] %>" alt="<%= prodd.name %>"></a>
 
                     <div class="text-center">
-                        <h4 class="frq-h4"><a href="#"><%= prodd.name %></a></h4>
+                        <h4 class="frq-h4"><a href="/product-<%= prodd.id %>"><%= prodd.name %></a></h4>
                     </div>
                 </div>
             </div>
@@ -66,6 +66,47 @@
     </div>
     <% } %>
 
+    <% if(selectedcategory == "kitchen"){ %>
+    <h3 class="frq-h3">Other cities</h3>
+    <div>
+        <a class="frq-lnk" href="/shoe-rack-bangalore">Shoe Rack - Bangalore</a>
+        <a class="frq-lnk" href="/crockery-unit-bangalore">Crockery Unit - Bangalore</a>
+        <a class="frq-lnk" href="/book-shelf-pune">Book Rack - Pune</a>
+        <a class="frq-lnk" href="/side-table-pune">Side Table - Pune</a>
+        <a class="frq-lnk" href="/side-board-chennai">Sideboard - Chennai</a>
+        <a class="frq-lnk" href="/tv-unit-chennai">Entertainment Unit - Chennai</a>
+        <a class="frq-lnk" href="/study-table-mangalore">Study Table - Mangalore</a>
+        <a class="frq-lnk" href="/parallel-kitchen-mangalore">Parallel Kitchen - Mangalore</a>
+    </div>
+    <% } %>
+
+    <% if(selectedcategory == "Wardrobe"){ %>
+    <h3 class="frq-h3">Other cities</h3>
+    <div>
+        <a class="frq-lnk" href="/coffee-tables-bangalore">Coffee Tables - Bangalore</a>
+        <a class="frq-lnk" href="/nest-of-tables-bangalore">Nest Of Table - Bangalore</a>
+        <a class="frq-lnk" href="/l-shaped-kitchen-chennai">L Shaped Kitchen - Chennai</a>
+        <a class="frq-lnk" href="/u-shaped-kitchen-chennai">U Shaped Kitchen - Chennai</a>
+        <a class="frq-lnk" href="/foyer-design-pune">Foyer Design - Pune</a>
+        <a class="frq-lnk" href="/buy-chest-of-drawers-pune">Chest Of Drawer - Pune</a>
+        <a class="frq-lnk" href="/storage-solutions-mangalore">Storage Solutions - Mangalore</a>
+        <a class="frq-lnk" href="/straight-kitchen-mangalore">Straight Kitchen - Mangalore</a>
+    </div>
+    <% } %>
+
+    <% if(selectedcategory == "Storage Solutions"){ %>
+    <h3 class="frq-h3">Other cities</h3>
+    <div>
+        <a class="frq-lnk" href="/wardrobes-online-bangalore">Wardrobe Online - Bangalore</a>
+        <a class="frq-lnk" href="/straight-kitchen-bangalore">Straight Kitchen - Bangalore</a>
+        <a class="frq-lnk" href="/coffee-tables-pune">Coffee Tables - Pune</a>
+        <a class="frq-lnk" href="/nest-of-tables-pune">Nest Of Table - Pune</a>
+        <a class="frq-lnk" href="/modular-kitchen-cabinet-chennai">Modular Kitchen Cabinate - Chennai</a>
+        <a class="frq-lnk" href="/parallel-kitchen-chennai">Parallel Kitchen - Chennai</a>
+        <a class="frq-lnk" href="/l-shaped-kitchen-mangalore">L Shaped Kitchen - Mangalore</a>
+        <a class="frq-lnk" href="/u-shaped-kitchen-mangalore">U Shaped Kitchen - Mangalore</a>
+    </div>
+    <% } %>
 </div>
 
 <style>

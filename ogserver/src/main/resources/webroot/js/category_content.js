@@ -23,8 +23,16 @@ define([
             }
             var that = this;
 
+            var vcategory = category;
+
+            if(category == "bedroom"){
+                vcategory = "Wardrobe";
+            }else if(category == "living & dining"){
+                vcategory = "Storage Solutions";
+            }
+
             that.seoFilter.set({
-             'selcategory':category
+             'selcategory':vcategory
             }, {
               silent: true
             });

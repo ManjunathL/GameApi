@@ -4439,11 +4439,12 @@ a.hideLink {
 .frq-lnk{
     display:inline-block;
     float:left;
-    color:#606060;
-    border:1px solid #606060;
+    color: #999;
+    border: 1px solid #ddd;
     border-radius:20px;
     margin-right:10px;
     padding: 5px 12px;
+    margin-bottom: 15px;
 }
 .frq-lnk:hover{
     color: #f1591f;
