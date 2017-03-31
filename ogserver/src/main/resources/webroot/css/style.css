@@ -1056,14 +1056,14 @@ ul.social-buttons li a:active {
     overflow: hidden;
 }
 .addons-price {
+    font-family: 'Lato', sans-serif;
     position: absolute;
     bottom: 0;
     left: 0;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(241, 90, 34, 0.8);
     width: 100%;
     color: #fff;
-    font-family: 'Lato', sans-serif;
 }
 .addons-details h5 {
     font-size: 13px;
