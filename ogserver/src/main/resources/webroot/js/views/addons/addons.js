@@ -83,12 +83,15 @@ define([
         getSubcatList: function(){
             var that = this;
             var selectedCategory = $('#filter-category option:selected').text();
-            this.filterAddon.set({
+
+            if(selectedCategory !== 'Category'){
+                this.filterAddon.set({
                     'selectedCategory':selectedCategory
-                          }, {
-                              silent: true
-                             }
-                                );
+                    }, {
+                    silent: true
+                    }
+                );
+            }
 
             var addonsdtls = that.filterAddon.get('selectedaddonsdtls');
             var resProductType = that.addons.getSubcategoriesList(selectedCategory);
@@ -104,12 +107,14 @@ define([
         getSubcatList1: function(){
             var that = this;
             var productType = $('#filter-product-type option:selected').text();
+            if(productType !== 'Product Type'){
             this.filterAddon.set({
                                 'productType':productType
                                       }, {
                                           silent: true
                                       }
                                  );
+             }
             var resProductSubtype = that.addons.getProductSubtypeList(productType);
              $("#filter-product-subtype").html(_.template(ProductSubtypeTemplate)({
                 'resProductSubtype': resProductSubtype
@@ -184,6 +189,11 @@ define([
                console.log('=============Brand Filter===============');
                console.log(resfil);
                console.log(resfil.length);
+              }
+
+
+              if(resfil.length == 0){
+                resfil = that.filterAddon.get('selectedaddonsdtls');
               }
 
 
