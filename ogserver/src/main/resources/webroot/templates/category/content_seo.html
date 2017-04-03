@@ -4,14 +4,15 @@
             <%= description %>
 
             <% if(typeof(subcategoryList) != 'undefined'){ %>
-                <% _.each(subcategoryList, function(subc){ %>
+            <h3 class="frq-h3">Related to <%= selectedcategory %></h3>
+            <% _.each(subcategoryList, function(subc){ %>
                 <% if(subc.subCategory != ''){ %>
 
-                    <h3><a href="<%= subc.url %>"><%= subc.subCategory %></a></h3>
+                    <a class="frq-lnk" href="<%= subc.url %>"><%= subc.subCategory %></a>
                     <% } %>
                 <% }); %>
             <% } %>
-
+            <div class="clearfix"></div>
             <% if(typeof(other_catg_url) != 'undefined'){ %>
             <h3 class="frq-h3">Other Categories Related to <%= selectedcategory %> Online</h3>
             <% var obj = other_catg_url; %>
