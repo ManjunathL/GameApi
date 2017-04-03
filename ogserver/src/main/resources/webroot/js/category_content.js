@@ -70,7 +70,7 @@ define([
                              silent: true
                          });
                          that.seoFilter.set({
-                            'H_Tags':res[0].H_Tags
+                            'H_tags':res[0].H_tags
                         }, {
                              silent: true
                          });
@@ -191,7 +191,7 @@ define([
                       "description": that.seoFilter.get('seoDesc'),
                       "subcategoryList": that.seoFilter.get('selectedSubCategories'),
                       "other_catg_url": that.seoFilter.get('other_catg_url'),
-                      "H_Tags": that.seoFilter.get('H_Tags'),
+                      "H_tags": that.seoFilter.get('H_tags'),
                       "selectedProducts": that.seoFilter.get('selectedProducts'),
                       "selectedProducts1": that.seoFilter.get('selectedProducts1')
                  }));
