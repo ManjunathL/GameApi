@@ -332,6 +332,7 @@ public class PanelComponent
                 if (modulePanel.getExposed() == null)
                 {
                     this.exposed = PanelExposed.SINGLE;
+                    if(exposedSide) this.exposed = PanelExposed.DOUBLE;
 
                 }
                 else if (("D").equals(modulePanel.getExposed()))
