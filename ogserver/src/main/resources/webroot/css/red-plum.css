@@ -77,12 +77,18 @@ ul, ol{
 }
 .navbar-festive .navbar-brand{
     padding: 0px;
-    margin: 0px;
+    margin: 0px auto;
+    width: 100%;
 }
 
 .navbar-festive .navbar-brand img {
     width: 150px;
-    margin: 15px 0px 10px 0px;
+    margin: 15px auto 10px;
+}
+
+.width100{
+    width: 100%;
+    margin: 0px auto;
 }
 
 .festive_banner_bg {
@@ -475,7 +481,7 @@ ul, ol{
 @media (max-width: 767px) {
     .navbar-festive .navbar-brand img {
         width: 150px;
-        margin: 15px 20px 10px 20px;
+        margin: 15px auto 10px;
     }
     .festive-banner-head {
         text-align: center;
@@ -535,7 +541,7 @@ ul, ol{
     }
     .navbar-festive .navbar-brand img {
         width: 145px;
-        margin: 25px 20px 10px 20px;
+        margin: 15px auto 10px;
     }
     .de_count {
         min-height: 125px;
@@ -631,11 +637,33 @@ ul, ol{
     text-align: center;
     color: #ffffff;
 }
+.cool_honeymoon_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1491570500/cool_honeymoon/Desktop.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 580px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
 .cucumber-form{
     background: #126612;
     color: #ffffff;
     padding: 50px 0px;
     min-height: 580px;
+}
+.cool-honeymoon-form{
+    background: #ba2027;
+    min-height: 400px;
 }
 
 .cucumber-mob-form{
@@ -648,6 +676,24 @@ ul, ol{
 
 .cucumber-form .cucumber-form-wrapper{
     padding: 10px 20px;
+}
+.cool-honeymoon-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481325/cucumber_sales/offer-white-bg_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 300px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #333333;
+    padding: 45px 0px 45px;
 }
 
 .cucumber-price-bg{
@@ -878,7 +924,7 @@ ul, ol{
 }
 @media (max-width: 420px) {
     .cucumber_banner_bg {
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481329/cucumber_sales/banner_02.jpg");
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1491570750/cool_honeymoon/mobile.jpg");
         min-height: 300px;
         padding: 10px 0px 10px;
         -webkit-background-size: contain;
