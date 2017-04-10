@@ -21,20 +21,31 @@ define([
             }
             var that = this;
 
-            var vcategory = category;
-            var dcategory = category;
+            var vcategory = '';
+            var dcategory = '';
 
-            if(subCategory != ''){
-                vcategory = subCategory;
+            if((typeof(subCategory) !== 'undefined') && (subCategory != '')){
+                vcategory = category;
                 dcategory = subCategory;
+            }else if(category == "kitchen"){
+                vcategory = "Kitchen";
+                dcategory = vcategory;
             }else if(category == "bedroom"){
                 vcategory = "Wardrobe";
+                dcategory = vcategory;
             }else if(category == "living & dining"){
                 vcategory = "Storage Solutions";
+                dcategory = vcategory;
             }
 
             that.seoFilter.set({
              'selcategory':vcategory
+            }, {
+              silent: true
+            });
+
+            that.seoFilter.set({
+             'selTitle':dcategory
             }, {
               silent: true
             });
@@ -179,6 +190,7 @@ define([
                 $(".category-content").html(ContentSeo({
                       "selPage": that.seoFilter.get('selPage'),
                       "selectedcategory": that.seoFilter.get('selcategory'),
+                      "selTitle": that.seoFilter.get('selTitle'),
                       "description": that.seoFilter.get('seoDesc'),
                       "subcategoryList": that.seoFilter.get('selectedSubCategories'),
                       "other_catg_url": that.seoFilter.get('other_catg_url'),
