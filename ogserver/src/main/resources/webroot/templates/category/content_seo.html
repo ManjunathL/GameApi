@@ -4,16 +4,17 @@
             <% if(typeof(selPage) == 'undefined' || selPage == '' || selPage == null){ %>
             <%= description %>
             <% } %>
-
-            <% if(typeof(subcategoryList) != 'undefined'){ %>
+            <div class="clearfix"></div>
+            <% if(typeof(other_subcatg_url) != 'undefined'){ %>
             <h3 class="frq-h3">Related to <%= selTitle %></h3>
-            <% _.each(subcategoryList, function(subc){ %>
-                <% if(subc.subCategory != ''){ %>
+            <% _.each(other_subcatg_url, function(subcatobj,j){ %>
 
-                    <a class="frq-lnk" href="<%= subc.url %>"><%= subc.subCategory %></a>
-                    <% } %>
-                <% }); %>
+            <a class="frq-lnk" href="/<%= subcatobj %>"><%= j %></a>
+            <% }); %>
+
             <% } %>
+
+
             <div class="clearfix"></div>
             <% if(typeof(other_catg_url) != 'undefined'){ %>
             <h3 class="frq-h3">Other Categories Related to <%= selTitle %> Online</h3>
@@ -73,8 +74,6 @@
         <% }); %>
     </div>
     <% } %>
-    <%= console.log("+++++++++selectedcategory+++++++++") %>
-    <%= console.log(selectedcategory) %>
     <% if(selectedcategory == "Kitchen" || selectedcategory == "kitchen"){ %>
     <h3 class="frq-h3">Other cities</h3>
     <div>

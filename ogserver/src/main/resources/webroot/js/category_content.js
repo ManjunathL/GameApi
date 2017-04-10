@@ -74,9 +74,7 @@ define([
                       "location": loc
                     },
                     success: function(response) {
-                        console.log("+++++++++++SEO data++++++++++++++");
                         var res = response.toJSON();
-                        console.log(response);
                         that.seoFilter.set({
                          'selectedSubCategories':res
                         }, {
@@ -97,6 +95,11 @@ define([
                         }, {
                              silent: true
                          });
+                         that.seoFilter.set({
+                            'other_subcatg_url':res[0].other_subcatg_url
+                        }, {
+                             silent: true
+                         });
                         resolve();
                     },
                     error: function(err){
@@ -110,8 +113,6 @@ define([
             var that = this;
             var selectedCategoryName = category;
             var othcat = "";
-            console.log("+++++++++++++++category+++++++++++++++++");
-            console.log(category);
             if(category === "kitchen"){
                 othcat = "Bedroom";
             }else if(category === "bedroom"){
@@ -121,16 +122,12 @@ define([
             }else if(category === "livingndining"){
                 othcat = "Kitchen";
             }
-            console.log("+++++++++++++++++++++++");
-            console.log(othcat);
             return new Promise(function(resolve, reject) {
                  that.seoProducts.fetch({
                     data: {
                       "category": othcat
                     },
                      success: function(response) {
-                         console.log("+++++++++++++++SEO Products+++++++++++++++");
-                         console.log(response);
                          that.seoFilter.set({
                              'selectedProducts':response.toJSON()
                          }, {
@@ -159,16 +156,12 @@ define([
             }else if(category === "livingndining"){
                 othcat = "Bedroom";
             }
-            console.log("+++++++++++++++++++++++");
-            console.log(othcat);
             return new Promise(function(resolve, reject) {
                  that.seoProducts.fetch({
                     data: {
                       "category": othcat,
                     },
                      success: function(response) {
-                         console.log("+++++++++++++++SEO Products+++++++++++++++");
-                         console.log(response);
                          that.seoFilter.set({
                              'selectedProducts1':response.toJSON()
                          }, {
@@ -194,6 +187,7 @@ define([
                       "description": that.seoFilter.get('seoDesc'),
                       "subcategoryList": that.seoFilter.get('selectedSubCategories'),
                       "other_catg_url": that.seoFilter.get('other_catg_url'),
+                      "other_subcatg_url": that.seoFilter.get('other_subcatg_url'),
                       "H_tags": that.seoFilter.get('H_tags'),
                       "selectedProducts": that.seoFilter.get('selectedProducts'),
                       "selectedProducts1": that.seoFilter.get('selectedProducts1')
