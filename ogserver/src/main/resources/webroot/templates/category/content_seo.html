@@ -1,7 +1,9 @@
 <div class="category-details">
     <div class="row">
         <div class="col-sm-12 col-md-12">
+            <% if(typeof(selPage) == 'undefined' || selPage == '' || selPage == null){ %>
             <%= description %>
+            <% } %>
 
             <% if(typeof(subcategoryList) != 'undefined'){ %>
             <h3 class="frq-h3">Related to <%= selectedcategory %></h3>
@@ -24,9 +26,14 @@
             <% } %>
             <div class="clearfix"></div>
 
-            <% if(typeof(H_tags) != 'undefined'){ %>
-                <h3 class="frq-h3">Best Tags to <%= selectedcategory %></h3>
-                <h2><%= H_tags %></h2>
+            <% if(typeof(selPage) == 'undefined' || selPage == '' || selPage == null){ %>
+                <% if(typeof(H_tags) != 'undefined'){ %>
+                    <h3 class="frq-h3">Best Tags to <%= selectedcategory %></h3>
+                    <h2><%= H_tags %></h2>
+                <% } %>
+            <% }else{ %>
+                <h3 class="frq-h3">Best Tags to <%= selPage %></h3>
+                <h2><%= selPage %>, Online <%= selPage %></h2>
             <% } %>
         </div>
     </div>
@@ -66,8 +73,9 @@
         <% }); %>
     </div>
     <% } %>
-
-    <% if(selectedcategory == "kitchen"){ %>
+    <%= console.log("+++++++++selectedcategory+++++++++") %>
+    <%= console.log(selectedcategory) %>
+    <% if(selectedcategory == "Kitchen"){ %>
     <h3 class="frq-h3">Other cities</h3>
     <div>
         <a class="frq-lnk" href="/shoe-rack-bangalore">Shoe Rack - Bangalore</a>

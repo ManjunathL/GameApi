@@ -8,12 +8,12 @@
         <div class="portfolio-bg-gray margin-bottom40 portfolio-box overflow-hidden img-thumbnail-shadow">
             <div class="col-md-7 col-sm-7 col-lg-7">
                 <div class="position-relative overflow-hidden portfolio-list-img">
-                    <a href="/product-<%= product.productId %>">
+                    <a href="/<%= product.seoId %>/p/<%= product.productId %>">
                         <img class="img-responsive" src="<%= imgBase + 'c_fit,w_670,h_402/' + product.images[0] %>" title="<%= product.name %>" alt="<%= product.name %>"/>
                     </a>
                     <div class="list-button-strip">
                         <!--<div class="listli">
-                            <a href="/product-<%= product.productId %>">
+                            <a href="/<%= product.seoId %>/p/<%= product.productId %>">
                                 <span class="glyph fa fa-info"></span>
                             </a>
                         </div>-->
@@ -28,7 +28,7 @@
                                 <span id="share-ico<%=product.productId%>" class="glyph zmdi zmdi-share listshare"></span>
 
                                 <div id="list-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                    <% var share_url = window.location.protocol + '//' + window.location.host + '/product-' + product.productId %>
+                                    <% var share_url = window.location.protocol + '//' + window.location.host + '/' + product.seoId + '/p/' + product.productId %>
                                     <span><a href="javascript:void(0);"
                                              onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-5 col-sm-5 col-lg-5">
                 <h4 class="product-title-lg">
-                    <a href="/product-<%= product.productId %>" class="portfolio-link">
+                    <a href="/<%= product.seoId %>/p/<%= product.productId %>" class="portfolio-link">
                         <%= product.name %>
                     </a>
                 </h4>
@@ -78,12 +78,12 @@
 
                 <div class="portfolio-box overflow-hidden img-thumbnail-shadow">
                     <div class="position-relative">
-                        <a href="/product-<%= product.productId %>" class="portfolio-link">
+                        <a href="/<%= product.seoId %>/p/<%= product.productId %>" class="portfolio-link">
                             <img class="img-responsive  thumbnail-img" src="<%= imgBase + 'c_fit,w_555,h_333/' + product.images[0] %>" title="<%= product.name %>" alt="<%= product.name %>"/>
                         </a>
                         <div class="list-button-strip">
                             <!--<div class="listli">
-                                <a href="/product-<%= product.productId %>">
+                                <a href="/<%= product.seoId %>/p/<%= product.productId %>">
                                     <span class="glyph fa fa-info"></span>
                                 </a>
                             </div>-->
@@ -97,7 +97,7 @@
                                     <span id="share-grid-ico<%=product.productId%>" class="glyph zmdi zmdi-share gridshare"></span>
 
                                     <div id="grid-share-txt<%=product.productId%>" class="list-txt share-ico-txt">
-                                        <% var share_url = window.location.protocol + '//' + window.location.host + '/product-'+ product.productId %>
+                                        <% var share_url = window.location.protocol + '//' + window.location.host + '/' + product.seoId + '/p/' + product.productId %>
                                     <span><a href="javascript:void(0);"
                                              onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<%=share_url%>&t=<%=product.name%>', '', 'width=585,height=368')"
                                              class="share-popup11"><i class="fa fa-facebook-square"></i></a></span>
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <h4 class="product-title text-center">
-                        <a href="/product-<%= product.productId %>" title="<%= product.name %>" class="grid-heading-col8">
+                        <a href="/<%= product.seoId %>/p/<%= product.productId %>" title="<%= product.name %>" class="grid-heading-col8">
                             <%= product.name %>
                         </a>
                     </h4>

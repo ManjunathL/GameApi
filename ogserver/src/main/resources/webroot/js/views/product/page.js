@@ -134,7 +134,7 @@ define([
                 if (categ === undefined || categ === '' || categ === null) {
                     categ = selectedCategories;
                 }
-                CategoryContent.apply(selectedCategories,selectedSubCategories,selectedCityName);
+                CategoryContent.apply(selectedCategories,selectedSubCategories,selectedCityName,'');
 
             }).catch(function(err) {
             	console.log('Catch: ', err);

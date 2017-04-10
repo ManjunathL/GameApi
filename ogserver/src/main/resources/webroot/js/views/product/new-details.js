@@ -18,8 +18,9 @@ define([
     'slyutil',
     'mgfirebase',
     'analytics',
+    'category_content',
     'views/view_manager'
-], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, FinishTemplate, RelatedProductCollection, relatedproductTemplate, Filter, SlyUtil, MGF, Analytics, VM) {
+], function($, _, Backbone, Bootstrap, JqueryEasing, productPageTemplate, DetailsHelper, ProductModel, CustomProduct, FinishTemplate, RelatedProductCollection, relatedproductTemplate, Filter, SlyUtil, MGF, Analytics, CategoryContent, VM) {
     var ProductPage = Backbone.View.extend({
         el: '.page',
         ref: MGF.rootRef,
@@ -86,6 +87,9 @@ define([
             var selectedSubCategory = that.product.get('subcategory');
             var selectedCategory = that.product.get('categoryId');
             var productName = that.product.get('name');
+
+            CategoryContent.apply(selectedCategory,selectedSubCategory,'',productName);
+
             window.productfilter = that.productfilter;
              this.productfilter.set({
                  'selectedCategoryName':selectedCategory
@@ -109,117 +113,6 @@ define([
             }));
 
             DetailsHelper.ready(that);
-
-           /* that.getRelatedProducts(selectedSubCategory).then(function() {
-
-                if (!that.custom_product.get('selectedMaterial')) {
-                    that.custom_product.set({
-                        'selectedMaterial': that.product.get('defaultMaterial')
-                    }, {
-                        silent: true
-                    });
-                }
-
-                if (!that.custom_product.get('material')) {
-                    var materials = new Array();
-                    var materialobj = {};
-                    _.map(that.product.get('material'), function(model) {
-                        materials.push(model.material);
-                        if (model.material == that.product.get('defaultMaterial')) {
-                            materialobj[model.material] = {"Desc":model.materialDescription,"Img":model.materialImage};
-                        } else {
-                            return false;
-                        }
-                    });
-
-
-
-                    that.custom_product.set({
-                        'materials': _.uniq(materials)
-                    }, {
-                        silent: true
-                    });
-                    if (!that.custom_product.get('materialobj')) {
-                        that.custom_product.set({
-                            'materialobj': materialobj
-                        }, {
-                            silent: true
-                        });
-                    }
-                }
-
-                if (!that.custom_product.get('selectedStyle')) {
-                    that.custom_product.set({
-                        'selectedStyle': that.product.get('styleName')
-                    }, {
-                        silent: true
-                    });
-                }
-
-                if (!that.custom_product.get('selectedFinish')) {
-                    that.custom_product.set({
-                        'selectedFinish': that.product.get('defaultFinish')
-                    }, {
-                        silent: true
-                    });
-                }
-
-                if (!that.custom_product.get('finish')) {
-                    var finishes = new Array();
-                    var finishobj = {};
-                    _.map(that.product.get('finish'), function(model) {
-                        finishes.push(model.finishName);
-                        if (model.finishName == that.product.get('defaultFinish')) {
-                            var finishTypeArr = new Array();
-                            var finishStyleObj = {};
-                            _.map(model.finishes, function(finstype) {
-                                finishTypeArr.push(finstype.finishType);
-                                _.map(finstype.finishStyleType, function(finsStyletype) {
-                                    if(finsStyletype.finishStyleId == that.product.get('styleId')){
-                                        finishStyleObj[finstype.finishType] = finsStyletype.finishImage;
-                                    }else{
-                                        return false;
-                                    }
-                                });
-
-                            });
-                            finishobj[model.finishName] = {"Desc":model.finishDescription,"FinishType":finishTypeArr,"FinishStyleObj":finishStyleObj};
-                        } else {
-                            return false;
-                        }
-                    });
-
-
-                    that.custom_product.set({
-                        'finishes': _.uniq(finishes)
-                    }, {
-                        silent: true
-                    });
-                    if (!that.custom_product.get('finishobj')) {
-                        that.custom_product.set({
-                            'finishobj': finishobj
-                        }, {
-                            silent: true
-                        });
-                    }
-                }
-
-
-                var compiledTemplate = _.template(productPageTemplate);
-                $(that.el).html(compiledTemplate({
-                    "product": that.product.toJSON(),
-                    "materialobj":materialobj,
-                    "materials":materials,
-                    "finishobj":finishobj,
-                    "finishes":finishes,
-                    "custom_product": that.custom_product,
-                    "relatedProducts": _.uniq(that.relatedProducts),
-                    'userProfile': userProfData
-                }));
-
-                DetailsHelper.ready(that);
-
-            });*/
 
         },
         getRelatedProducts: function(selectedSubCategory) {
@@ -252,8 +145,6 @@ define([
         events: {
             "click #product_consult": "openConsultPopup",
             "click #close-consult-pop": "closeModal",
-            /*"click li.choose-material": "changeMaterial",
-            "click li.choose-finish": "changeFinish",*/
             "click li.design-style": "changeDesignStyle",
             "click li.acc-img-cnt": "changeAccessory",
             "click li.tab_material": "changeMaterialTab"
@@ -297,122 +188,6 @@ define([
         openConsultPopup: function() {
             $('#consultpop').modal('show');
         },
-        /*changeMaterial: function(event) {
-            var that = this;
-
-            var selectedMaterial = $(event.currentTarget).data("material");
-
-            if (typeof(that.custom_product.get('selectedMaterial')) !== 'undefined') {
-                that.custom_product.set({
-                    'selectedMaterial': selectedMaterial
-                }, {
-                    silent: true
-                });
-
-                var materials = new Array();
-                var materialobj = {};
-                _.map(that.product.get('material'), function(model) {
-                    materials.push(model.material);
-                    if (model.material == selectedMaterial) {
-                        console.log(model.materialDescription);
-                        materialobj[model.material] = {"Desc":model.materialDescription,"Img":model.materialImage};
-                    } else {
-                        return false;
-                    }
-                });
-
-                that.custom_product.set({
-                    'materials': _.uniq(materials)
-                }, {
-                    silent: true
-                });
-                if (typeof(that.custom_product.get('materialobj')) !== 'undefined') {
-                    that.custom_product.set({
-                        'materialobj': materialobj
-                    }, {
-                        silent: true
-                    });
-                }
-            }
-
-            $("#material-img-content").attr("src", "https://res.cloudinary.com/mygubbi/image/upload/v1468317950/project_details/"+materialobj[selectedMaterial].Img)
-            $("#material-tab-content").html('<div class="choose-active tab-pane active" id="'+selectedMaterial+'"><p>'+materialobj[selectedMaterial].Desc+'</p></div>');
-
-            return this;
-        },
-        changeFinish: function(event) {
-            var that = this;
-
-            var selectedFinish = $(event.currentTarget).data("finish");
-
-            if (typeof(that.custom_product.get('selectedFinish')) !== 'undefined') {
-                that.custom_product.set({
-                    'selectedFinish': selectedFinish
-                }, {
-                    silent: true
-                });
-            }
-            var finishes = new Array();
-            var finishobj = {};
-
-
-            var finishStyleObj1 = {};
-            var finishStyleObj = {};
-
-            if (!that.custom_product.get('finish')) {
-                _.map(that.product.get('finish'), function(model) {
-                    finishes.push(model.finishName);
-                    if (model.finishName == selectedFinish) {
-                        var finishTypeArr = new Array();
-
-                        _.map(model.finishes, function(finstype) {
-                          var result =  _.filter( finstype.finishStyleType, function ( model ) {
-                                return model.finishStyleId == "cmono";
-                           });
-
-                           _.map(result, function (value, key) {
-                             finishStyleObj[finstype.finishType] = result[key].finishImage;
-                             finishStyleObj1 = result[key].finishStyle;
-                           });
-
-                            finishTypeArr.push(finstype.finishType);
-
-                        });
-
-                        finishobj[model.finishName] = {"Desc":model.finishDescription,"FinishType":finishTypeArr,"finishStyleObj":finishStyleObj};
-                    } else {
-                        return false;
-                    }
-                });
-
-                that.custom_product.set({
-                    'finishes': _.uniq(finishes)
-                }, {
-                    silent: true
-                });
-                if (!that.custom_product.get('finishobj')) {
-                    that.custom_product.set({
-                        'finishobj': finishobj
-                    }, {
-                        silent: true
-                    });
-                }
-            }
-
-            $("#finish-tab-content").html('<div class="choose-active tab-pane active" id="'+selectedFinish+'"><p>'+finishobj[selectedFinish].Desc+'</p></div>');
-            //$("#finishList").html('hiiiiiiiiiiiiiiiiiiiiii');
-
-            var nwfinishTemplate = _.template(FinishTemplate);
-
-            $('#finishList').html(nwfinishTemplate({
-                "finishobj": finishobj,
-                "finishStyleObj":finishStyleObj,
-                "selectedFinish": this.custom_product.get('selectedFinish')
-            }));
-
-
-            return this;
-        },*/
         changeAccessory: function(e) {
                                     e.preventDefault();
                                     var currentTarget = $(e.currentTarget);

@@ -116,7 +116,8 @@ define([
             'e-book(/)': 'ebook',
             'completed-projects(/)': 'completedprojectspage',
             //'newproduct-details-:id(/)': 'newdetailspage',
-            'product-:id(/)': 'newdetailspage',
+            //'product-:id(/)': 'newdetailspage',
+            ':seoId/p/:id(/)':'newdetailspage',
             'know-your-wardrobe(/)': 'knowyourwardrobe',
             'know-your-kitchen(/)': 'knowyourkitchen',
             'remarketing-lp(/)': 'remarketinglp',
@@ -814,18 +815,15 @@ define([
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
             });
         });
-        router.on('route:newdetailspage', function(productId) {
-            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
-            require(['views/product/new-details'], function(NewProductDetailsPage) {
-                var options = {
-                    model: {
-                        "id": productId
-                    }
-                };
-
-                VM.create(VM.NEWPRODUCT_DETAILSPAGE, NewProductDetailsPage, options).render();
-            });
-        });
+        router.on('route:newdetailspage', function(seoId, productId) {
+           setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+           require(['../../js/views/product/new-details'], function(NewProductDetailsPage) {                            var options = {
+                   model: {
+                       "id": productId
+                   }
+               };                            VM.create(VM.NEWPRODUCT_DETAILSPAGE, NewProductDetailsPage, options).render();
+           });
+       });
         router.on('route:nripage', function(cityName) {
             document.title = 'Premium homes for premium living. Get end to end service for your dream home with us ';
             document.querySelector('meta[name="description"]')
