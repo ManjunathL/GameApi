@@ -48,10 +48,10 @@
         <% _.each(selectedProducts, function(prod){ %>
             <div class="col-lg-4 col-md-4 col-sm-4 text-center">
                 <div class="frq-product">
-                    <a href="/product-<%= prod.id %>"><img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prod.images[0] %>" alt="<%= prod.name %>"></a>
+                    <a href="/<%= prod.seoId %>/p/<%= prod.productId %>"><img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prod.images[0] %>" alt="<%= prod.name %>"></a>
 
                     <div class="text-center">
-                        <h4 class="frq-h4"><a href="/product-<%= prod.id %>"><%= prod.name %></a></h4>
+                        <h4 class="frq-h4"><a href="/<%= prod.seoId %>/p/<%= prod.productId %>"><%= prod.name %></a></h4>
                     </div>
                 </div>
             </div>
@@ -64,10 +64,10 @@
         <% _.each(selectedProducts1, function(prodd){ %>
             <div class="col-lg-4 col-md-4 col-sm-4 text-center">
                 <div class="frq-product">
-                    <a href="/product-<%= prodd.id %>"><img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prodd.images[0] %>" alt="<%= prodd.name %>"></a>
+                    <a href="/<%= prodd.seoId %>/p/<%= prodd.productId %>"><img class="img-responsive width100" src="<%= imgBase +'c_fill,h_250,w_300/'+ prodd.images[0] %>" alt="<%= prodd.name %>"></a>
 
                     <div class="text-center">
-                        <h4 class="frq-h4"><a href="/product-<%= prodd.id %>"><%= prodd.name %></a></h4>
+                        <h4 class="frq-h4"><a href="/<%= prodd.seoId %>/p/<%= prodd.productId %>"><%= prodd.name %></a></h4>
                     </div>
                 </div>
             </div>
