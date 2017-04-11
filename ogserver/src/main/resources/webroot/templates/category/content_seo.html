@@ -6,7 +6,7 @@
             <% } %>
             <div class="clearfix"></div>
             <% if(typeof(other_subcatg_url) != 'undefined'){ %>
-            <h3 class="frq-h3">Related to <%= selTitle %></h3>
+            <h3 class="frq-h3">Related to <b><%= selTitle %></b></h3>
             <% _.each(other_subcatg_url, function(subcatobj,j){ %>
 
             <a class="frq-lnk" href="/<%= subcatobj %>"><%= j %></a>
@@ -17,7 +17,7 @@
 
             <div class="clearfix"></div>
             <% if(typeof(other_catg_url) != 'undefined'){ %>
-            <h3 class="frq-h3">Other Categories Related to <%= selTitle %> Online</h3>
+            <h3 class="frq-h3">Other Category’s Related to <b><%= selTitle %> Online</b></h3>
             <% var obj = other_catg_url; %>
             <% _.each(obj, function(ob,i){ %>
 
@@ -29,11 +29,11 @@
 
             <% if(typeof(selPage) == 'undefined' || selPage == '' || selPage == null){ %>
                 <% if(typeof(H_tags) != 'undefined'){ %>
-                    <h3 class="frq-h3">Best Tags to <%= selTitle %></h3>
+            <h3 class="frq-h3">Best Tags to <b><%= selTitle %></b></h3>
                     <h2><%= H_tags %></h2>
                 <% } %>
             <% }else{ %>
-                <h3 class="frq-h3">Best Tags to <%= selPage %></h3>
+            <h3 class="frq-h3">Best Tags to <b><%= selPage %></b></h3>
                 <h2><%= selPage %>, Online <%= selPage %></h2>
             <% } %>
         </div>
@@ -42,7 +42,7 @@
     <% if(typeof(selectedProducts) != 'undefined'){ %>
     <div class="row">
         <div class="col-sm-12 col-md-12">
-            <h3 class="frq-h3">Frequently Bought Together with <%= selTitle %></h3>
+            <h3 class="frq-h3">Frequently Bought Together with <b><%= selTitle %></b></h3>
         </div>
 
         <% _.each(selectedProducts, function(prod){ %>
