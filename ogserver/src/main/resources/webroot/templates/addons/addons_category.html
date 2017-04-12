@@ -1,0 +1,6 @@
+<option> Category </option>
+<% if(typeof(resaddons) !== 'undefined'){ %>
+<% _.each(resaddons, function(radons){ %>
+<option value="<%= radons %>"><%= radons %></option>
+<% }); %>
+<% } %>

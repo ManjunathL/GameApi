@@ -10,11 +10,13 @@
             <img class="img-responsive object-fit_cover width100" src="<%= addons.imagePath %>" alt= "<%= addons.title %>">
 
             <% } %>
-            <span class="addons-price">MRP:₹ <%= addons.rate %> </span>
+            <span class="addons-price">MSP: ₹ <%= Math.round(addons.rate) %> /-</span>
         </div>
         <div class="addons-details">
             <h5>  <%= addons.productTypeCode+ " - " +addons.product %> </h5>
-            <p> Product Code:  <%= addons.code %> </p>
+            <% if(typeof(addons.catalogueCode) !== 'undefined' && addons.catalogueCode != ''){ %>
+            <p> Product Code:  <%= addons.catalogueCode %> </p>
+            <% } %>
         </div>
     </div>
 </div>

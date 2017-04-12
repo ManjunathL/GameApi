@@ -8,6 +8,7 @@ define([
     'collections/addons',
     'models/filterAddon',
     'text!templates/addons/addons.html',
+    'text!templates/addons/addons_category.html',
     'text!templates/addons/product_types.html',
     'text!templates/addons/product_subtypes.html',
     'text!templates/addons/brands.html',
@@ -17,7 +18,7 @@ define([
     'mgfirebase',
     'consultutil',
     'analytics'
-], function($, _, Backbone, Addons, FilterAddon, AddonsPageTemplate, ProductTypeTemplate, ProductSubtypeTemplate, BrandTemplate,AddonsFilterTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
+], function($, _, Backbone, Addons, FilterAddon, AddonsPageTemplate, CategoriesTemplate, ProductTypeTemplate, ProductSubtypeTemplate, BrandTemplate,AddonsFilterTemplate, CloudinaryJquery, SlyUtil, MGF, ConsultUtil, Analytics) {
     var AddonsPageVIew = Backbone.View.extend({
         el: '.page',
         addons: null,
@@ -26,10 +27,6 @@ define([
         refAuth: MGF.refAuth,
         renderWithAddons: function(addonsdtls) {
             var resaddons = this.addons.getCategoriesList(addonsdtls);
-
-
-
-
             //console.log(resaddons);
             this.filterAddon.set({
                   'selectedaddonsdtls':addonsdtls
@@ -46,25 +43,19 @@ define([
         },
 
         render: function() {
+            var that = this;
+            this.addons.fetch({
+               data: {
+               },
 
-                      var that = this;
-
-
-
-                      this.addons.fetch({
-                           data: {
-                           },
-
-                          success: function(response) {
-                             console.log("in addons");
-                             console.log(response);
-                             var addonsdtls = response.toJSON();
-                             that.renderWithAddons(addonsdtls);
-                          },
-                          error: function(model, response, options) {
-                              console.log("couldn't fetch story data - " + response);
-                          }
-                      });
+              success: function(response) {
+                 var addonsdtls = response.toJSON();
+                 that.renderWithAddons(addonsdtls);
+              },
+              error: function(model, response, options) {
+                  console.log("couldn't fetch addon data - " + response);
+              }
+            });
         },
         initialize: function() {
             this.ref = MGF.rootRef;
@@ -80,11 +71,20 @@ define([
             "change #filter-product-subtype": "getSubcatList2",
             "change #filter-brands": "getSubcatList3"
         },
+        getCatList: function(addonsdtls){
+            var resaddons = this.addons.getCategoriesList(addonsdtls);
+            $("#filter-category").html(_.template(CategoriesTemplate)({
+                'resaddons': resaddons
+            }));
+        },
         getSubcatList: function(){
             var that = this;
             var selectedCategory = $('#filter-category option:selected').text();
 
-            if(selectedCategory !== 'Category'){
+            console.log("+++++++++++Category++++++++++++++++");
+                            console.log(selectedCategory);
+
+            if(selectedCategory.trim() !== 'Category'){
                 this.filterAddon.set({
                     'selectedCategory':selectedCategory
                     }, {
@@ -107,13 +107,17 @@ define([
         getSubcatList1: function(){
             var that = this;
             var productType = $('#filter-product-type option:selected').text();
-            if(productType !== 'Product Type'){
-            this.filterAddon.set({
-                                'productType':productType
-                                      }, {
-                                          silent: true
-                                      }
-                                 );
+
+            console.log("+++++++++++productType++++++++++++++++");
+                         console.log(productType);
+
+            if(productType.trim() !== 'Product Type'){
+                this.filterAddon.set({
+                    'productType':productType
+                      }, {
+                          silent: true
+                      }
+                 );
              }
             var resProductSubtype = that.addons.getProductSubtypeList(productType);
              $("#filter-product-subtype").html(_.template(ProductSubtypeTemplate)({
@@ -161,45 +165,24 @@ define([
             var x_selectedproductType= that.filterAddon.get('productType') ? that.filterAddon.get('productType') : '';
             var x_selectedproductSubtype= that.filterAddon.get('productSubtype') ? that.filterAddon.get('productSubtype') : '' ;
             var x_selectedbrand= that.filterAddon.get('brand') ? that.filterAddon.get('brand') : '' ;
-            console.log('=============X Category List===============');
-            console.log(x_selectedCategory);
-            console.log(x_selectedproductType);
-            console.log(x_selectedproductSubtype);
             var resfil = {};
             if(x_selectedCategory != ''){
                resfil = that.addons.filterCategorywise(x_selectedCategory);
-                console.log('=============Category Filter===============');
-                console.log(resfil);
-                console.log(resfil.length);
             }
             if(x_selectedproductType != ''){
               resfil = that.addons.filterProductTypewise(resfil,x_selectedproductType,x_selectedCategory);
-              console.log('=============Product Type Filter===============');
-              console.log(resfil);
-              console.log(resfil.length);
             }
             if(x_selectedproductSubtype != ''){
               resfil = that.addons.filterProductSubtypewise(resfil,x_selectedproductSubtype,x_selectedproductType,x_selectedCategory);
-              console.log('=============Product Subtype Filter===============');
-              console.log(resfil);
-              console.log(resfil.length);
              }
              if(x_selectedbrand != ''){
                resfil = that.addons.filterBrandwise(resfil,x_selectedbrand,x_selectedproductSubtype,x_selectedproductType,x_selectedCategory);
-               console.log('=============Brand Filter===============');
-               console.log(resfil);
-               console.log(resfil.length);
               }
 
 
               if(resfil.length == 0){
                 resfil = that.filterAddon.get('selectedaddonsdtls');
               }
-
-
-              console.log('=============Final Filter===============');
-                             console.log(resfil);
-                             console.log(resfil.length);
              $("#allAddons").html(_.template(AddonsFilterTemplate)({
                  'addonsdtls': resfil
              }));
