@@ -117,6 +117,8 @@ public class OldUrlRedirectHandler implements Handler<RoutingContext>
                         if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                         {
                             LOG.error("sorry no product id found");
+                            RouteUtil.getInstance().redirect(context, "/", "Redirecting to new product url");
+
                         }
                         else
                         {
