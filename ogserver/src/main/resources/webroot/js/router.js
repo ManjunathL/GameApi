@@ -117,7 +117,7 @@ define([
             'completed-projects(/)': 'completedprojectspage',
             //'newproduct-details-:id(/)': 'newdetailspage',
             //'product-:id(/)': 'newdetailspage',
-            ':seoId/p/:id(/)':'newdetailspage',
+            ':id/p/:seoId(/)':'newdetailspage',
             'know-your-wardrobe(/)': 'knowyourwardrobe',
             'know-your-kitchen(/)': 'knowyourkitchen',
             'remarketing-lp(/)': 'remarketinglp',
@@ -815,7 +815,7 @@ define([
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
             });
         });
-        router.on('route:newdetailspage', function(seoId, productId) {
+        router.on('route:newdetailspage', function(productId, seoId ) {
            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
            require(['../../js/views/product/new-details'], function(NewProductDetailsPage) {                            var options = {
                    model: {

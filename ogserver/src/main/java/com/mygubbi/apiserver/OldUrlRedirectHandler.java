@@ -116,7 +116,9 @@ public class OldUrlRedirectHandler implements Handler<RoutingContext>
                         QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                         if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                         {
-                            LOG.error("sorry no product id found");
+                            LOG.error("sorrry no product id found");
+                            RouteUtil.getInstance().redirect(context, "/", "Redirecting to new product url");
+
                         }
                         else
                         {
@@ -124,7 +126,7 @@ public class OldUrlRedirectHandler implements Handler<RoutingContext>
                             LOG.info(jsonDataRows.encodePrettily());
                             JsonObject obj = jsonDataRows.getJsonObject(0);
 
-                            String newURI = "/" +obj.getString("seoId") + "/p/" + productId;
+                            String newURI = "/" + productId + "/p/" +obj.getString("seoId");
                             LOG.info(newURI);
                             RouteUtil.getInstance().redirect(context, newURI, "Redirecting to new product url");
                         }
