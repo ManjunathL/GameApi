@@ -124,7 +124,7 @@ public class OldUrlRedirectHandler implements Handler<RoutingContext>
                             LOG.info(jsonDataRows.encodePrettily());
                             JsonObject obj = jsonDataRows.getJsonObject(0);
 
-                            String newURI = "/" +obj.getString("seoId") + "/p/" + productId;
+                            String newURI = "/" + productId + "/p/" +obj.getString("seoId");
                             LOG.info(newURI);
                             RouteUtil.getInstance().redirect(context, newURI, "Redirecting to new product url");
                         }
