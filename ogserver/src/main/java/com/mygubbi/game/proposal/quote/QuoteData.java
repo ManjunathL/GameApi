@@ -130,6 +130,11 @@ public class QuoteData
         return getAddonsByCategory(ProductAddon.CUSTOM_ADDON_TYPE);
     }
 
+    public List<ProductAddon> getLooseFurniture()
+    {
+        return getAddonsByCategory(ProductAddon.LOOSE_FURNITURE_TYPE);
+    }
+
     private List<ProductAddon> getAddonsByCategory(String categoryCode)
     {
         List<ProductAddon> addons = new ArrayList<>();

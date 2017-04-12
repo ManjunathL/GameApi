@@ -13,12 +13,15 @@ public class ExcelStyles
     private CellStyle titleStyle;
     private CellStyle indexStyle;
     private CellStyle textStyle;
+    private CellStyle specificationStyle;
+
     public ExcelStyles(Workbook wb)
     {
         this.boldStyle = this.createBoldStyle(wb);
         this.titleStyle = this.createTitleStyle(wb);
         this.indexStyle = this.createIndexStyle(wb);
         this.textStyle=this.createTextStyle(wb);
+        this.specificationStyle = this.createSpecificationStyle(wb);
     }
 
     public CellStyle getBoldStyle()
@@ -31,12 +34,18 @@ public class ExcelStyles
         return titleStyle;
     }
 
+
     public CellStyle getIndexStyle()
     {
         return indexStyle;
     }
 
     public CellStyle getTextStyle(){ return textStyle; }
+
+    public CellStyle getSpecificationStyle()
+    {
+        return specificationStyle;
+    }
 
     private CellStyle createBoldStyle(Workbook wb)
     {
@@ -80,6 +89,13 @@ public class ExcelStyles
     {
         CellStyle style = wb.createCellStyle();
         style.setAlignment(CellStyle.ALIGN_RIGHT);
+        return style;
+    }
+
+    private CellStyle createSpecificationStyle(Workbook wb)
+    {
+        CellStyle style = wb.createCellStyle();
+        style.setAlignment(CellStyle.ALIGN_LEFT);
         return style;
     }
 

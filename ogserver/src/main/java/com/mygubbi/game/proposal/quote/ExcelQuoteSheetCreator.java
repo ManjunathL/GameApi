@@ -97,6 +97,10 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 this.fillAddons(cell, this.quoteData.getCustomAddons(), "No additional custom addons.");
                 break;
 
+            case "B.6":
+                this.fillAddons(cell, this.quoteData.getLooseFurniture(), "No additional Loose Furniture.");
+                break;
+
             default:
                 break;
         }
@@ -869,6 +873,17 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
     }
 
+    private void createProductSpecificationRow(int rowNum, String index, String title)
+    {
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
+        dataRow.setHeight(new Double(dataRow.getHeight() * 1.5).shortValue());
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title).setCellStyle(this.styles.getSpecificationStyle());
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, null).setCellStyle(this.styles.getTitleStyle());
+    }
+
     private Row createRow(int currentRow, Sheet sheet)
     {
         sheet.shiftRows(currentRow, sheet.getLastRowNum(), 1);
@@ -905,10 +920,13 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         {
             if(("Custom Addon").equals (addon.getCategoryCode()))
                 this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-            else
+            else {
                 this.createRowAndFillData(currentRow, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-            currentRow++;
-            index++;
+                currentRow++;
+                this.createProductSpecificationRow(currentRow,"",addon.getTitle());
+            }
+                currentRow++;
+                index++;
         }
     }
 

@@ -420,6 +420,31 @@ public class QuotationPDFCreator
             this.fillAddons(B5Table, this.quoteData.getCustomAddons(), "No additional custom addons.");
             document.add(B5Table);
 
+            PdfPTable B6Table = new PdfPTable(columnWidths1);
+            B6Table.setWidthPercentage(100);
+
+            PdfPCell cell6=new PdfPCell();
+            p = new Paragraph("LOOSE FURNITURE",fsize1);
+            p.setAlignment(Element.ALIGN_LEFT);
+            cell6.addElement(p);
+            cell6.setColspan(5);
+            cell6.setBorder(Rectangle.NO_BORDER);
+            B6Table.addCell(cell6);
+
+            PdfPCell B6Cell1 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B6Cell2 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B6Cell3 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B6Cell4 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B6Cell5 = new PdfPCell(new Paragraph("",fsize));
+            B6Table.addCell(B6Cell1);
+            B6Table.addCell(B6Cell2);
+            B6Table.addCell(B6Cell3);
+            B6Table.addCell(B6Cell4);
+            B6Table.addCell(B6Cell5);
+
+            this.fillAddons(B6Table, this.quoteData.getLooseFurniture(), "No additional Loose Furniture.");
+            document.add(B6Table);
+
             p = new Paragraph("Estimated Cost(B):" +this.getRoundOffValue(String.valueOf((int)quoteData.addonsCost)),fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
@@ -645,6 +670,31 @@ public class QuotationPDFCreator
         tabname.addCell(cell);
     }
 
+    private void specificationRow(PdfPTable tabname,String index,String title)
+    {
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
+        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+
+        PdfPCell cell1=new PdfPCell();
+        Paragraph Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        PdfPCell cell2=new PdfPCell();
+        Paragraph paragraph=new Paragraph(title,size1);
+        cell2.addElement(paragraph);
+        tabname.addCell(cell2);
+
+
+        PdfPCell cell = new PdfPCell();
+        Paragraph p=new Paragraph("");
+        p.setAlignment(Element.ALIGN_RIGHT);
+        cell.addElement(p);
+        cell.setColspan(3);
+        tabname.addCell(cell);
+
+    }
     private int customFunction(List<QuotationPDFCreator.customeclass> li,int unitSequence)
     {
         //int unitSequence = 0;
@@ -1333,12 +1383,15 @@ public class QuotationPDFCreator
             return;
         }
         int index = 1;
+
         for (ProductAddon addon : addOns)
         {
             if(("Custom Addon").equals (addon.getCategoryCode()))
                 this.createRowAndFillData(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             else
                  this.createRowAndFillData(tabname,String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+                 this.specificationRow(tabname,"",addon.getTitle());
+
             index++;
         }
     }
