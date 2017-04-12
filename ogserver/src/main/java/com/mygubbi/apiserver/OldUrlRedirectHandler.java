@@ -116,7 +116,7 @@ public class OldUrlRedirectHandler implements Handler<RoutingContext>
                         QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                         if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                         {
-                            LOG.error("sorry no product id found");
+                            LOG.error("sorrry no product id found");
                             RouteUtil.getInstance().redirect(context, "/", "Redirecting to new product url");
 
                         }
