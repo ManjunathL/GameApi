@@ -61,7 +61,7 @@
 
 	.pbWrapper > div,
 	.pbWrapper > img{
-		transition:.8s .5s cubic-bezier(.1, .87, .48, 1);
+		/*transition:.8s .5s cubic-bezier(.1, .87, .48, 1);*/
 
 		-webkit-transform:none;
 		-ms-transform:none;
