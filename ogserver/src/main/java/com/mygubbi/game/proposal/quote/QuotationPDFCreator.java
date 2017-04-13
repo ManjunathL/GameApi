@@ -1218,7 +1218,6 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Paragraph Ptitle;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
@@ -1227,13 +1226,8 @@ public class QuotationPDFCreator
         cell1.addElement(Pindex);
         tabname.addCell(cell1);
 
-
-        PdfPCell tcell=new PdfPCell();
-        Ptitle=new Paragraph(title,size1);
-        Ptitle.setAlignment(Element.ALIGN_CENTER);
-        cell1.addElement(Ptitle);
-        tabname.addCell(tcell);
-        tabname.addCell(tcell);
+        cell=new PdfPCell(new Paragraph(title,fsize));
+        tabname.addCell(cell);
 
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
