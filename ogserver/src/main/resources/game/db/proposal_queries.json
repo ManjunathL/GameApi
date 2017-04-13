@@ -458,8 +458,8 @@
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? where id = ?",
-      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","id"]
+      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? , productSubtypeCode = ? where id = ?",
+      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","productSubtypeCode","id"]
     },
 
     {
@@ -785,7 +785,7 @@
       "id": "addons.products",
       "type": "select",
       "table": "addon_master",
-      "query": "select catalogueCode,title,product,code,rate,imagePath,uom from addon_master where categoryCode = ? and productTypeCode = ? and productSubtypeCode = ? and brandCode = ?",
+      "query": "select categoryCode,catalogueCode,title,product,code,rate,imagePath,uom from addon_master where categoryCode = ? and productTypeCode = ? and productSubtypeCode = ? and brandCode = ?",
       "params": ["categoryCode","productTypeCode","productSubtypeCode", "brandCode"]
     },
 

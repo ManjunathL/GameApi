@@ -94,11 +94,11 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 break;
 
             case "B.5":
-                this.fillAddons(cell, this.quoteData.getCustomAddons(), "No additional custom addons.");
+                this.fillAddons(cell, this.quoteData.getLooseFurniture(), "No additional Loose Furniture.");
                 break;
 
             case "B.6":
-                this.fillAddons(cell, this.quoteData.getLooseFurniture(), "No additional Loose Furniture.");
+                this.fillAddons(cell, this.quoteData.getCustomAddons(), "No additional custom addons.");
                 break;
 
             default:
