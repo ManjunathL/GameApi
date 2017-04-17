@@ -214,6 +214,7 @@
         "name",
         "id",
         "productId",
+        "seoId",
         "desc",
         "category",
         "subcategory",
