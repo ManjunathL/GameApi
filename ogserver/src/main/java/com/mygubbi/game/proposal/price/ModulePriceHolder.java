@@ -41,6 +41,7 @@ public class ModulePriceHolder
     private RateCard loadingFactorCard;
     private RateCard labourRateCard;
     private RateCard nonStandardloadingFactorCard;
+    private Boolean finishValue =false;
 
     private double shutterCost = 0;
     private double carcassCost = 0;
@@ -315,6 +316,7 @@ public class ModulePriceHolder
 
     public void addToShutterCost(double cost)
     {
+        if (cost == 0) return;
         this.shutterCost += cost;
     }
 
@@ -346,10 +348,25 @@ public class ModulePriceHolder
                 if ("Standard".equals(moduleType))
                 {
                     this.addToShutterCost(panel.getCost());
+                    if(panel.getCost()==0.0)
+                    {
+                        //this.addToShutterCost(0.0);
+                        finishValue =true;
+                        return;
+                    }
                 }
                 else
                 {
+                    if(panel.getCost()==0.0)
+                    {
+                        //this.addToShutterCost(0.0);
+                        finishValue =true;
+                        return;
+                    }
+                    else
+                    {
                     this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                    }
                 }
             }
             else
@@ -404,9 +421,14 @@ public class ModulePriceHolder
 
     private void calculateTotalCost(RateCard labourRateCard, RateCard loadingFactorCard, String code)
     {
-        this.labourCost = this.moduleArea * labourRateCard.getRate();
-        this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
-        this.totalCost = this.woodworkCost + this.accessoryCost;
+        if(true==equals(finishValue))
+        {
+            this.totalCost=0.0;
+        }else {
+            this.labourCost = this.moduleArea * labourRateCard.getRate();
+            this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
+            this.totalCost = this.woodworkCost + this.accessoryCost;
+        }
     }
 
     private double round(double value, int places)

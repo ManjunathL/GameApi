@@ -108,9 +108,9 @@
       "default": "{}"
     },
     {
-      "uri": "/gapi/proposal/version/getlatestTemproary",
+      "uri": "/gapi/proposal/version/getversiondetails",
       "source": "db",
-      "query":"version.getlatestversionTemproary",
+      "query":"version.getversiondetails",
       "params":["proposalId","version"],
       "resultfields":[],
       "default": "[]"

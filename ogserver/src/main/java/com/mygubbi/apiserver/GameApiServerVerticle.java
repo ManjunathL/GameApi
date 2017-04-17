@@ -16,6 +16,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +36,12 @@ public class GameApiServerVerticle extends AbstractVerticle
     public void start(Future<Void> startFuture) throws Exception
     {
         Router router = Router.router(VertxInstance.get());
+        router.route().handler(CorsHandler.create("*")
+                .allowedMethod(HttpMethod.GET)
+                .allowedMethod(HttpMethod.POST)
+                .allowedMethod(HttpMethod.OPTIONS)
+                .allowedHeader("Authorization")
+                .allowedHeader("Content-Type"));
         this.setupApiHandler(router);
         this.setupHttpSslServer(router);
         this.setupHttpServer(router);

@@ -279,7 +279,7 @@
       "params": ["proposalId","proposalId"]
     },
     {
-      "id": "version.getlatestversionTemproary",
+      "id": "version.getversiondetails",
       "type": "select",
       "table": "version_master",
       "query": "select * from version_master where proposalId = ? and version = ?",
