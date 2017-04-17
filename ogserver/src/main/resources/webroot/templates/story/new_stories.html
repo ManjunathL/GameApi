@@ -510,6 +510,57 @@
                 <% }); %>
                 <% } %>
             </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 align-center pb20">
+                    <button class="btn btn-orange" id="older-diy-lnk">OLDER POSTS</button>
+                </div>
+            </div>
+            <div class="row" id="older_diys" style="display:none;">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div id="box3">
+                        <% if(typeof(alldiys) !== 'undefined'){ dcount = 1; %>
+                        <%= console.log(alldiys) %>
+
+                        <% _.each(alldiys, function(diy){ %>
+
+                        <%
+                        var diy_url = diy.diyId;
+                        diy_url = diy_url.replace(/-/g,"_");
+                        diy_url = diy_url.replace(/-/g," ");
+                        diy_url = diy_url.replace(/\s/g,"-");
+
+                        %>
+
+                        <% if(dcount > 3){ %>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <div class="pb20">
+                                <div class="show-blog-img">
+                                    <a href="/diy-<%= encodeURIComponent(diy_url) %>">
+                                        <img
+                                                src="<%= diy.diy_main_image %>"
+                                                class="img-responsive"
+                                                title="<%= diy.diy_heading %>"
+                                                alt="<%= diy.diy_heading %>"
+                                        >
+                                    </a>
+                                </div>
+                                <p class="text-muted text-left date font-size14"><%= diy.date_of_publish %> | by <%= diy.author %></p>
+                                <a href="/diy-<%= encodeURIComponent(diy_url) %>">
+                                    <h2 class="txt-urstory media-txt-title font-size14">
+                                        <%= diy.diy_heading %>
+                                    </h2>
+                                </a>
+                            </div>
+                        </div>
+
+                        <% } %>
+                        <% dcount++; }); %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

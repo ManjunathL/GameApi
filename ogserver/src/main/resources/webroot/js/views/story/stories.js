@@ -107,6 +107,11 @@ define([
                 latest_stories.push(data);
             });
 
+            var latest_diys = [];
+            $.each(nwdiys.slice(0,3), function(i, data) {
+                latest_diys.push(data);
+            });
+
             //console.log("---------- Start Stories ------------");
             //console.log(latest_stories);
             //console.log("---------- End Stories ------------");
@@ -116,12 +121,28 @@ define([
                 'stories': nwstories,
                 'rec_stories': rec_stories,
                 'latest_stories': latest_stories,
-                'diys':nwdiys
+                'diys':latest_diys,
+                'alldiys':nwdiys
             }));
             this.ready();
         },
         events: {
-            "click #older-post-lnk": "openOlderBlogs"
+            "click #older-post-lnk": "openOlderBlogs",
+            "click #older-diy-lnk": "openOlderDIYs"
+        },
+        openOlderDIYs: function(){
+            $("#older_diys").toggle();
+            var wtrsetting = {
+                    top : false,
+                    w : false,
+                    col : false,
+                    gap : 10,
+                    gridWidth : [200,400,600],
+                    refresh: 500,
+                    timer : false,
+                    scrollbottom : false
+            };
+            $('#box3').waterfall(wtrsetting);
         },
         openOlderBlogs: function(){
             $("#older_posts").toggle();
