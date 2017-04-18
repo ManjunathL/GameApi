@@ -12,6 +12,7 @@ public class ProposalVersion extends JsonObject{
     public static final String PROPOSAL_ID = "proposalId";
     public static final String FINAL_AMOUNT = "finalAmount";
     public static final String DISCOUNT_AMOUNT = "discountAmount";
+    public static final String DISCOUNT_PERCENTAGE = "discountPercentage";
     public static final String AMOUNT= "amount";
 
     public ProposalVersion() {}
@@ -71,6 +72,15 @@ public class ProposalVersion extends JsonObject{
 
     public ProposalVersion setDiscountAmount(double discountAmount) {
         this.put(DISCOUNT_AMOUNT, discountAmount);
+        return this;
+    }
+
+    public double getDiscountPercentage() {
+        return this.getDouble(DISCOUNT_PERCENTAGE);
+    }
+
+    public ProposalVersion setDiscountPercenatge(double discountPercentage) {
+        this.put(DISCOUNT_PERCENTAGE, discountPercentage);
         return this;
     }
 }

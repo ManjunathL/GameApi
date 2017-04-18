@@ -132,8 +132,8 @@
       "id": "proposal.version.price.update",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set amount = ?, finalAmount = ? where id = ?",
-      "params": ["amount", "finalAmount", "id" ]
+      "query": "update version_master set amount = ?, finalAmount = ?, discountAmount = ? where id = ?",
+      "params": ["amount", "finalAmount", "discountAmount", "id" ]
     },
     {
       "id": "proposalproduct.updateprice.select",
@@ -550,8 +550,8 @@
       "id": "proposal.product.update",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set seq = ?,manualSeq=?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?,source = ? where fromVersion = ? and id = ?",
-      "params": ["seq","manualSeq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories","source" ,"fromVersion", "id"]
+      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, designCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?,source = ? where fromVersion = ? and id = ?",
+      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories","source" ,"fromVersion", "id"]
     },
 
     {
