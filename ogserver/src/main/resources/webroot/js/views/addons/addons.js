@@ -81,6 +81,25 @@ define([
             var that = this;
             var selectedCategory = $('#filter-category option:selected').text();
 
+            this.filterAddon.set({
+            'productType':''
+              }, {
+                  silent: true
+              }
+            );
+            this.filterAddon.set({
+            'productSubtype':''
+            }, {
+               silent: true
+             }
+            );
+            this.filterAddon.set({
+              'brand':''
+                     }, {
+                          silent: true
+                        }
+                     );
+
             if(selectedCategory.trim() !== 'Category'){
                 this.filterAddon.set({
                     'selectedCategory':selectedCategory
@@ -95,25 +114,6 @@ define([
                     silent: true
                     }
                 );
-
-                this.filterAddon.set({
-                'productType':''
-                  }, {
-                      silent: true
-                  }
-                );
-                this.filterAddon.set({
-                'productSubtype':''
-                }, {
-                   silent: true
-                 }
-                );
-                this.filterAddon.set({
-                  'brand':''
-                         }, {
-                              silent: true
-                            }
-                         );
              }
 
             var addonsdtls = that.filterAddon.get('selectedaddonsdtls');
@@ -123,6 +123,7 @@ define([
                 'resProductType': resProductType
             }));
 
+            $('#filter-product-subtype').html('<option value="">Product Type</option>');
             $('#filter-product-subtype').html('<option value="">Product Subtype</option>');
             $('#filter-brands').html('<option value="">Brands</option>');
             that.addonsFilter();
@@ -130,6 +131,19 @@ define([
         getSubcatList1: function(){
             var that = this;
             var productType = $('#filter-product-type option:selected').text();
+
+            this.filterAddon.set({
+             'productSubtype':''
+              }, {
+                   silent: true
+                 }
+              );
+              this.filterAddon.set({
+                              'brand':''
+                                     }, {
+                                          silent: true
+                                        }
+                                     );
 
             if(productType.trim() !== 'Product Type'){
                 this.filterAddon.set({
@@ -145,18 +159,6 @@ define([
                           silent: true
                       }
                  );
-                 this.filterAddon.set({
-                 'productSubtype':''
-                  }, {
-                       silent: true
-                     }
-                  );
-                  this.filterAddon.set({
-                                  'brand':''
-                                         }, {
-                                              silent: true
-                                            }
-                                         );
              }
             var resProductSubtype = that.addons.getProductSubtypeList(productType);
              $("#filter-product-subtype").html(_.template(ProductSubtypeTemplate)({
@@ -168,6 +170,13 @@ define([
         getSubcatList2: function(){
             var that = this;
             var productSubtype = $('#filter-product-subtype option:selected').text();
+
+             this.filterAddon.set({
+                                             'brand':''
+                                                    }, {
+                                                         silent: true
+                                                       }
+                                                    );
 
             if(productSubtype.trim() !== 'Product Subtype'){
                 this.filterAddon.set({
@@ -183,12 +192,7 @@ define([
                       silent: true
                     }
                  );
-                 this.filterAddon.set({
-                                 'brand':''
-                                        }, {
-                                             silent: true
-                                           }
-                                        );
+
             }
 
             $('#filter-brands').html('<option value="">Brands</option>');
