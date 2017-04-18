@@ -88,7 +88,7 @@ define([
             var selectedCategory = that.product.get('categoryId');
             var productName = that.product.get('name');
 
-            //CategoryContent.apply(selectedCategory,selectedSubCategory,'',productName);
+            CategoryContent.apply(selectedCategory,selectedSubCategory,'',productName);
 
             window.productfilter = that.productfilter;
              this.productfilter.set({
@@ -189,18 +189,18 @@ define([
             $('#consultpop').modal('show');
         },
         changeAccessory: function(e) {
-                                    e.preventDefault();
-                                    var currentTarget = $(e.currentTarget);
-                                    var id = $(e.currentTarget).attr('id');
-                                    $(".acc-img").removeClass('active');
-                                    $(".acc-cnt").removeClass('active');
-                                    $(".acc-img-cnt").removeClass('active');
+                e.preventDefault();
+                var currentTarget = $(e.currentTarget);
+                var id = $(e.currentTarget).attr('id');
+                $(".acc-img").removeClass('active');
+                $(".acc-cnt").removeClass('active');
+                $(".acc-img-cnt").removeClass('active');
 
-                                    $("#"+id+"-img").addClass('active');
-                                    $("#"+id).addClass('active');
-                                    $("#"+id+"-cnt").addClass('active');
+                $("#"+id+"-img").addClass('active');
+                $("#"+id).addClass('active');
+                $("#"+id+"-cnt").addClass('active');
 
-                                    return this;
+                return this;
           },
         changeDesignStyle: function(e) {
              e.preventDefault();
