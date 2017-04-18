@@ -81,7 +81,6 @@ public class ProposalPricingUpdateService extends AbstractVerticle
                     }
 
                 });
-
     }
 
 }

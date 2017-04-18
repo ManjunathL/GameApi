@@ -136,5 +136,11 @@ public class ProductAddon extends JsonObject
         this.put(RATE, rate);
         return this;
     }
+
+    public ProductAddon setAmount(double amount)
+    {
+        this.put(AMOUNT, amount);
+        return this;
+    }
 }
 

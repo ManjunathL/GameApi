@@ -103,6 +103,14 @@
       "query": "select * from version_master where proposalId in (select pr.id from proposal pr where pr.id not in (select vm.proposalId from version_master vm where vm.status = 'Confirmed'))",
       "params": [ ]
     },
+
+    {
+      "id": "proposal.version.getdraftversion",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where proposalId = ?",
+      "params": ["id"]
+    },
      {
       "id": "proposal.version.products.select",
       "type": "select",
@@ -147,8 +155,8 @@
       "id": "proposal.audit.insert",
       "type": "insert",
       "table": "audit_master",
-      "query": "insert into audit_master(proposalId,priceDate,oldAmount,newAmount) values( ?, ?, ?, ?) ",
-      "params": ["proposalId","priceDate","oldAmount","newAmount"]
+      "query": "insert into audit_master(proposalId,version,priceDate,oldAmountProduct,newAmountProduct) values( ?, ?, ?, ?, ?) ",
+      "params": ["proposalId","version","priceDate","oldAmountProduct","newAmountProduct"]
     },
 
     {
@@ -466,8 +474,8 @@
       "id": "proposal.version.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set rate = ? where proposalId = ? and version = ?",
-      "params": ["rate", "proposalId", "version"]
+      "query": "update proposal_addon set rate = ?, amount = ? where proposalId = ? and fromVersion = ?",
+      "params": ["rate", "amount", "proposalId", "version"]
     },
 
     {

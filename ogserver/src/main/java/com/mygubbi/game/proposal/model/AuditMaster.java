@@ -89,16 +89,15 @@ public class AuditMaster extends JsonObject {
         return this;
     }
 
-    public AuditMaster setOldAmountAddon(double newAmountProduct) {
-        this.put(NEW_AMOUNT_PRODUCT, newAmountProduct);
+    public AuditMaster setOldAmountAddon(double oldAmountAddon) {
+        this.put(OLD_AMOUNT_ADDON, oldAmountAddon );
         return this;
     }
 
-    public AuditMaster setNewAmountAddon(double newAmountProduct) {
-        this.put(NEW_AMOUNT_PRODUCT, newAmountProduct);
+    public AuditMaster setNewAmountAddon(double newAmountAddon) {
+        this.put(NEW_AMOUNT_ADDON, newAmountAddon);
         return this;
     }
-
 
 
 }
