@@ -147,7 +147,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         auditMaster.setOldAmountProduct(oldProductCost);
 
                         updateVersionPrice(proposalVersion);
-                        
+
                         auditMaster.setNewAmountProduct(totalProposalVersionProductCost);
                         createAuditRecord(auditMaster);
                         LOG.info("Updated...");
@@ -170,8 +170,6 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     double newTotalVersionAddonCost = 0;
                     double totalVersionAddonCost = 0;
 
-
-
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
@@ -191,6 +189,11 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
                         for (JsonObject record : selectData.rows) {
                             ProductAddon addonLineItem = new ProductAddon(record);
+                            if (addonLineItem.isCustomAddon())
+                            {
+                                newTotalVersionAddonCost += addonLineItem.getAmount();
+                                continue;
+                            }
                             PriceMaster addonRate = RateCardService.getInstance().getAddonRate(addonLineItem.getCode(), priceDate, proposalHeader.getPcity());
                             newTotalVersionAddonCost += addonRate.getPrice();
                             addonLineItem.setRate(addonRate.getPrice());

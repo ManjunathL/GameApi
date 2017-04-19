@@ -120,7 +120,8 @@ public class PriceMaster {
         int after = inputDate.compareTo(this.getToDate());
         LOG.debug("Input date:" + inputDate + " from date: " + this.getFromDate() + " to date:" + this.getToDate()
                 + " before:" + before + " after:" + after);
-        return (before >= 0 && after <= 0);
+    return (before >= 0 && after <= 0);
+
     }
 
     public PriceMasterKey getKey() {
