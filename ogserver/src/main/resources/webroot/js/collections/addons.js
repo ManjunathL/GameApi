@@ -40,12 +40,12 @@ define([
             });
             return resultSubcat;
         },
-         getProductSubtypeList: function(productSubtype) {
+         getProductSubtypeList: function(productType) {
             var resultProSubtype = new Array();
             var temp=null;
             this.each(function (model) {
             var protypecode = model.get('productTypeCode');
-              if (protypecode === productSubtype.trim()) {
+              if (protypecode === productType.trim()) {
                 var xx = model.get('productSubtypeCode');
                 if(xx!=temp)
                 resultProSubtype.push(xx);
@@ -54,17 +54,18 @@ define([
             });
             return resultProSubtype;
         },
-        getBrandList: function(brand) {
+        getBrandList: function(productType,productSubtype) {
             var resultProBrand = new Array();
-            var temp=null;
+            var tempBr = null;
             this.each(function (model) {
             var prosubtypecode = model.get('productSubtypeCode');
-              if (prosubtypecode === brand.trim()) {
-                var xx = model.get('brandCode');
-                if(xx!=temp)
-                resultProBrand.push(xx);
+            var protypecode = model.get('productTypeCode');
+              if (prosubtypecode === productSubtype.trim() && protypecode === productType.trim()) {
+                var brandNm = model.get('brandCode');
+                if(brandNm != tempBr)
+                resultProBrand.push(brandNm);
               }
-              temp=xx;
+              tempBr=brandNm;
             });
             return resultProBrand;
         },
