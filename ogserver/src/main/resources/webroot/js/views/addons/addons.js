@@ -170,6 +170,7 @@ define([
         getSubcatList2: function(){
             var that = this;
             var productSubtype = $('#filter-product-subtype option:selected').text();
+            var productType = that.filterAddon.get('productType') ? that.filterAddon.get('productType') : '';
 
              this.filterAddon.set({
                                              'brand':''
@@ -196,7 +197,7 @@ define([
             }
 
             $('#filter-brands').html('<option value="">Brands</option>');
-            var resBrand = that.addons.getBrandList(productSubtype);
+            var resBrand = that.addons.getBrandList(productType,productSubtype);
 
             $("#filter-brands").html(_.template(BrandTemplate)({
                  'resBrand': resBrand
