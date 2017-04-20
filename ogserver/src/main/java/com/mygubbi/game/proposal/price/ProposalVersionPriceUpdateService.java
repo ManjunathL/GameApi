@@ -72,13 +72,9 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     }
                     else
                     {
-                        for (JsonObject record : selectData.rows)
-                        {
-                            Proposal proposalHeader = new Proposal(record);
+                            Proposal proposalHeader = new Proposal(selectData.rows.get(0));
                             calculatePriceForModules(message, proposalVersion,proposalHeader);
                             calculatePriceForAddons(message, proposalVersion,proposalHeader);
-                        }
-                        message.reply(LocalCache.getInstance().store(proposalVersion));
                     }
                  });
     }
@@ -145,11 +141,10 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         finalAmount = finalAmount - finalAmount%10;
                         proposalVersion.setFinalAmount(finalAmount);
                         auditMaster.setOldAmountProduct(oldProductCost);
-
-                        updateVersionPrice(proposalVersion);
-
                         auditMaster.setNewAmountProduct(totalProposalVersionProductCost);
-                        createAuditRecord(auditMaster);
+
+                        updateVersionPrice(message,proposalVersion,auditMaster,true);
+
                         LOG.info("Updated...");
                     }
                 });
@@ -208,22 +203,19 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
                         LOG.debug("Update version price before :" + proposalVersion.toString());
 
-                        updateVersionPrice(proposalVersion);
 
                         auditMaster.setProposalId(proposalHeader.getId());
                         auditMaster.setVersion(proposalVersion.getVersion());
                         auditMaster.setPriceDate(priceDate);
                         auditMaster.setNewAmountAddon(newTotalVersionAddonCost);
 
-                        updateAuditRecordForAddons(auditMaster);
+                        updateVersionPrice(message,proposalVersion,auditMaster,false);
+
+
 
                     }
 
                 });
-
-
-
-
     }
 
     private void updateProductPrice(ProductLineItem productLineItem)
@@ -262,7 +254,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                 });
     }
 
-    private void updateVersionPrice(ProposalVersion proposalVersion)
+    private void updateVersionPrice(Message<Integer> message,ProposalVersion proposalVersion, AuditMaster auditMaster,boolean updateAddon)
     {
         String query = "proposal.version.price.update";
         Integer id = LocalCache.getInstance().store(new QueryData(query, proposalVersion));
@@ -275,14 +267,18 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     }
                     else
                     {
+                        createAuditRecord(message,auditMaster,updateAddon,proposalVersion);
+
                         LOG.info("Updated Proposal Product " + proposalVersion.getId());
                     }
+
                 });
     }
 
-    private void createAuditRecord(AuditMaster auditMaster)
+    private void createAuditRecord(Message<Integer> message,AuditMaster auditMaster,boolean updateAddonFlag, ProposalVersion proposalVersion)
     {
-        String query = "proposal.audit.insert";
+
+        String query = updateAddonFlag ? "proposal.audit.insert" : "proposal.audit.addon.update";
         Integer id = LocalCache.getInstance().store(new QueryData(query, auditMaster));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -295,10 +291,11 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     {
                         LOG.info("Inserted Audit Record " + auditMaster.toString());
                     }
+                    message.reply(LocalCache.getInstance().store(proposalVersion));
                 });
     }
 
-    private void updateAuditRecordForAddons(AuditMaster auditMaster)
+    /*private void updateAuditRecordForAddons(AuditMaster auditMaster)
     {
         String query = "proposal.audit.addon.update";
         Integer id = LocalCache.getInstance().store(new QueryData(query, auditMaster));
@@ -314,5 +311,5 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         LOG.info("Inserted Audit Record " + auditMaster.toString());
                     }
                 });
-    }
+    }*/
 }
