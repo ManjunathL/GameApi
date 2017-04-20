@@ -88,7 +88,7 @@ define([
             var selectedCategory = that.product.get('categoryId');
             var productName = that.product.get('name');
 
-            CategoryContent.apply(selectedCategory,selectedSubCategory,'',productName);
+            //CategoryContent.apply(selectedCategory,selectedSubCategory,'',productName);
 
             window.productfilter = that.productfilter;
              this.productfilter.set({
