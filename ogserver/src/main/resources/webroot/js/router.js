@@ -21,6 +21,8 @@ define([
             'straight-kitchen-design(/)': 'straightK',
             'parallel-kitchen-design(/)': 'parallelK',
             'wardrobe-designs-online(/)': 'wardrobeB',
+            'sliding-wardrobe-online(/)': 'wardrobeSlide',
+            'swing-wardrobe-online(/)': 'wardrobeSwing',
             'study-table-designs-online(/)': 'studyTableB',
             'side-table-design-online(/)': 'sideTableB',
             'book-shelf(/)': 'bookShelfB',
@@ -367,6 +369,18 @@ define([
                                     cityName = "website";
                                 }
                 routeSubCategory('Wardrobe', 'bedroom', cityName);
+            });
+            router.on('route:wardrobeSlide', function(cityName){
+             if((cityName == null) || (cityName == "") ){
+                                    cityName = "website";
+                                }
+                routeSubCategory('Sliding Wardrobe', 'bedroom', cityName);
+            });
+            router.on('route:wardrobeSwing', function(cityName){
+             if((cityName == null) || (cityName == "") ){
+                                    cityName = "website";
+                                }
+                routeSubCategory('Swing Wardrobe', 'bedroom', cityName);
             });
             router.on('route:studyTableB', function(cityName){
              if((cityName == null) || (cityName == "") ){

@@ -108,9 +108,14 @@
     "maxPriceLimit":400000,
     "subCategories": [
       {
-        "name": "Wardrobe",
-        "id": "wardrobe",
-        "code": "wardrobe"
+        "name": "Sliding Wardrobe",
+        "id": "slidingwardrobe",
+        "code": "slidingwardrobe"
+      },
+      {
+        "name": "Swing Wardrobe",
+        "id": "swingwardrobe",
+        "code": "swingwardrobe"
       }
     ]
   }
