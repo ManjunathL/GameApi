@@ -55,18 +55,20 @@ public class VersionPriceUpdateHandler extends AbstractRouteHandler {
                         }
                         else
                         {
-                            for (JsonObject record : resultData.rows)
-                            {
-                                ProposalVersion proposalVersion = new ProposalVersion(record);
+
+                                ProposalVersion proposalVersion = new ProposalVersion(resultData.rows.get(0));
                                 Integer pvId = LocalCache.getInstance().store(proposalVersion);
                                 VertxInstance.get().eventBus().send(ProposalVersionPriceUpdateService.UPDATE_VERSION_PRICE, pvId,
                                         (AsyncResult<Message<Integer>> dataresult) ->
                                         {
                                             ProposalVersion result = (ProposalVersion) LocalCache.getInstance().remove(dataresult.result().body());
+                                            if (result == null)
+                                            {
+                                                sendError(context,"Error in copying proposal version");
+                                            }
+                                            sendJsonResponse(context, proposalJson.toString());
                                         });
-                            }
 
-                            sendJsonResponse(context, proposalJson.toString());
                         }
                     });
         }
