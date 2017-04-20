@@ -1,0 +1,1151 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ----- Festive Page CSS ------ */
+
+body{
+    background: #ffffff;
+    overflow-x: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.75;
+    font-family: 'Raleway', sans-serif;
+}
+
+p.large {
+    font-size: 16px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    text-decoration: none;
+}
+
+a {
+    color: #000;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: #ff3200;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-family: 'Lato', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    font-family: 'Abel', sans-serif;
+    font-weight: 400;
+}
+
+ul, ol{
+    font-family: 'Raleway', sans-serif;
+}
+.position-relative {
+    position: relative;
+}
+.mt30{
+    margin-top: 30px;
+}
+.mt50{
+    margin-top: 50px;
+}
+
+.mt70{
+    margin-top: 70px;
+}
+.mb20{
+    margin-bottom: 20px;
+}
+.mb30{
+    margin-bottom: 30px;
+}
+
+.navbar-festive{
+    margin-bottom: 0px;
+    height: 100px;
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    border-radius: 0px;
+}
+.navbar-festive .navbar-brand{
+    padding: 0px;
+    margin: 0px auto;
+    width: 100%;
+}
+
+.navbar-festive .navbar-brand img {
+    width: 150px;
+    margin: 15px auto 10px;
+}
+
+.width100{
+    width: 100%;
+    margin: 0px auto;
+}
+
+.festive_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481290153/red-plum/plam-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 650px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 40px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.festive_kitchen_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1482990965/red-plum/Kitchen.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 650px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 40px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.festive_wardrobe_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1482990965/red-plum/wardrobe.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 650px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 40px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.festive-banner-mob{
+    position: relative;
+}
+
+.festive-banner-head {
+    line-height: 140%;
+    font-size: 42px;
+    padding-top: 80px;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    text-align: right;
+}
+
+.festive-banner-head-mob {
+    text-align: left;
+    font-size: 25px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #333;
+    position: absolute;
+    top: 10%;
+    padding: 20px;
+    line-height: 140%;
+}
+.festive-banner-kitchen-head-mob {
+    text-align: left;
+    font-size: 25px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #333;
+    position: absolute;
+    padding: 10px 20px;
+    line-height: 140%;
+    bottom: 0px;
+}
+
+.festive-form{
+    background: #20175c;
+    color: #ffffff;
+    padding: 0px;
+}
+
+.festive-mob-form{
+    padding: 0px;
+}
+
+.festive-form img{
+    max-width: 85%;
+}
+
+.festive-form .festive-form-wrapper{
+    padding: 10px 20px;
+}
+
+.festive-form h3 {
+    text-align: center;
+    margin: 0px 0px 5px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: #ffe241;
+}
+
+.festive-form .form-control{
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid #aaa;
+    height: 35px;
+    line-height: 35px;
+}
+
+.btn-festive{
+    color: #ffffff;
+    border-color: #fe6510;
+    background: #fe6510;
+    font-size: 20px;
+}
+
+.btn-festive:hover,
+.btn-festive:active,
+.btn-festive:focus{
+    color: #ffffff;
+    border-color: #dc3000;
+    background: #dc3000;
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+
+.section-fun-facts{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481286071/red-plum/plum-offer.png");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 350px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px 0px 50px;
+}
+
+.fact-head{
+    margin: 0px;
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 35px 0px 50px;
+    font-size: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.fact-des{
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    display: block;
+}
+
+.de_count {
+    min-height: 160px;
+}
+
+.de_count img{
+    max-height: 140px;
+}
+
+.section-why-us{
+    background: #ffffff;
+    color: #333333;
+    padding: 20px 0px 40px;
+}
+
+.separator {
+    line-height: 0.5;
+    text-align: center;
+    margin:30px 0 30px 0;
+}
+
+.separator span {
+    display: inline-block;
+    position: relative;
+}
+
+.separator span:before,
+.separator span:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    top: 5px;
+    width: 300px;
+}
+
+.section-why-us .separator span:before,
+.section-why-us .separator span:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    top: 5px;
+    width: 300px;
+}
+
+.separator span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.separator span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+.separator span  i{
+    font-size:6px;
+    padding:0;
+    margin:0;
+    float:none;
+}
+
+.de_light .separator span:before,
+.de_light .separator span:after {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.text-light .separator span:before,
+.text-light .separator span:after {
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.festive-why-us-head{
+    font-weight: 600;
+    color: #4b3b03;
+    text-transform: capitalize;
+    font-size: 42px;
+    padding: 30px 0px 50px;
+    margin: 0px;
+}
+
+.why-us-fluid{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.festive-gallery-section{
+    background: #ffffff;
+    padding: 40px 0px 40px;
+}
+
+.festive-category-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481287815/red-plum/needs-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 480px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.section-testimonial{
+    background: #ffffff;
+    padding-bottom: 50px;
+}
+
+#owl-testimonial .item{
+    padding: 0px;
+    margin: 0px 15px;;
+    color: #444444;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+    min-height:185px;
+    background: #96dad5;
+}
+#owl-testimonial h5{
+    text-transform: capitalize;
+}
+
+#owl-testimonial p{
+    font-size: 18px;
+    font-style: italic;
+    text-align: left;
+    padding: 10px 15px 0px;
+    font-weight: 100;
+}
+.mod-testimonial{
+    background: #4eb9b6;
+    color: #ffffff;
+}
+.mod-testimonial p{
+    color: #ffffff;
+    font-size: 14px;
+}
+.w22{
+    width: 22px;
+}
+
+.festive-contact-section{
+    background: #ffffff;
+    color: #333333;
+    padding: 20px 0px 40px;
+}
+
+.festive-footer{
+    padding: 35px 0px 25px;
+    background: #523b63;
+    color: #ffffff;
+}
+
+.festive-footer p{
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+}
+
+@media (min-width: 1280px) {
+    .festive-form .festive-form-wrapper {
+        padding: 10px 45px;
+    }
+}
+
+@media (min-width: 992px) {
+    .pn{
+        padding: 0px;
+    }
+    .pln{
+        padding-left: 0px;
+    }
+    .prn{
+        padding-right: 0px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .separator span:before,
+    .separator span:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px solid rgba(255,255,255,.5);
+        top: 5px;
+        width: 135px;
+    }
+    .section-why-us .separator span:before,
+    .section-why-us .separator span:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        top: 5px;
+        width: 135px;
+    }
+
+    .de_count {
+        min-height: 230px;
+    }
+    .section-fun-facts{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481719166/red-plum/BG_pattern.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 350px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        color: #ffffff;
+        padding: 20px 0px 50px;
+    }
+}
+@media (max-width: 767px) {
+    .navbar-festive .navbar-brand img {
+        width: 150px;
+        margin: 15px auto 10px;
+    }
+    .festive-banner-head {
+        text-align: center;
+    }
+    .festive-category-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481287815/red-plum/needs-bg.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 350px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        color: #ffffff;
+        padding: 20px 0px 50px;
+    }
+}
+@media (max-width: 420px) {
+    .festive_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481290153/red-plum/plam-bg-mob.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
+    .festive_kitchen_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1482990965/red-plum/Kitchen.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
+    .festive_wardrobe_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1482990965/red-plum/wardrobe.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
+    .festive-form h3{
+        font-size: 22px;
+    }
+    .navbar-festive .navbar-brand img {
+        width: 145px;
+        margin: 15px auto 10px;
+    }
+    .de_count {
+        min-height: 125px;
+    }
+    .festive-banner-head {
+        text-align: center;
+        padding: 10px;
+        line-height: 130%;
+        font-size: 24px;
+        margin-top: 10%;
+        font-weight: 400;
+        text-transform: capitalize;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    .festive-mob-form{
+        padding: 0px;
+    }
+    #owl-testimonial p{
+        font-size: 14px;
+    }
+    .owl-carousel .owl-item .img-profile{
+        padding: 5px 0px;
+    }
+    .section-fun-facts {
+        color: #ffffff;
+        padding: 20px 0px 10px;
+    }
+    .de_count img {
+        margin-bottom: 0;
+        max-height: 105px;
+    }
+    .fact-head{
+        font-size: 26px;
+        padding: 15px 0px 30px;
+    }
+    .fact-des{
+        font-size:12px;
+    }
+    .festive-why-us-head{
+        font-size: 26px;
+        padding: 20px 0px;
+    }
+    .festive-gallery-section,
+    .section-why-us{
+        padding: 15px 0px 15px;
+    }
+    .btn-festive{
+        font-size: 14px;
+    }
+}
+
+.section-portfolio{
+    padding: 35px 0px;
+    background: #fff;
+}
+
+#owl-gallery .owl-dots {
+    margin: 0px !important;
+    padding: 10px 0px 5px;
+}
+
+.owl-carousel .owl-item .img-comma{
+    width: 40px !important;
+}
+
+.owl-carousel .owl-item .img-profile{
+    width: auto;
+    padding: 15px 0px;
+}
+
+.owl-carousel .owl-item img{
+    width: auto;
+}
+.img-centered {
+    margin: 0 auto;
+}
+
+
+/* ----- End Festive Page CSS ------ */
+/* Cucumber Page CSS */
+.cucumber_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492594655/landing_page/modular-wardrobes/Hero-image.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 580px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.kitchen_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492680439/landing_page/kitchen-cabinets/Hero_image_banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 580px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.banner-why-us-box{
+    padding: 15px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+    margin-top: 45%;
+}
+.cool_honeymoon_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1491570500/cool_honeymoon/Desktop.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 580px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.cucumber-form{
+    background: #ba2027;
+    color: #ffffff;
+    padding: 50px 20px;
+    min-height: 580px;
+}
+.mkc{
+    background: #f7e902;
+}
+.cool-honeymoon-form{
+    background: #ba2027;
+    min-height: 400px;
+}
+
+.cucumber-mob-form{
+    padding: 0px;
+}
+
+.cucumber-form img{
+    max-width: 85%;
+}
+
+.cucumber-form .cucumber-form-wrapper{
+    padding: 10px 20px;
+}
+.cool-honeymoon-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481325/cucumber_sales/offer-white-bg_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 300px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #333333;
+    padding: 45px 0px 45px;
+}
+
+/*.cucumber-price-bg{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489481325/cucumber_sales/offer-white-bg_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 545px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #333333;
+    padding: 95px 0px 95px;
+}*/
+
+.cucumber-price-bg h1{
+    font-size: 52px;
+    margin:0px;
+    text-transform:capitalize;
+    color: #126612;
+
+}
+.cucumber-price-bg h2{
+    color: #126612;
+    font-size: 42px;
+    margin:0px;
+     text-transform:capitalize;
+
+ }
+.cucumber-form h3 {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 36px;
+    font-family: 'Lato', sans-serif;
+}
+
+.cucumber-form .form-control{
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid #aaa;
+    height: 35px;
+    line-height: 35px;
+    font-family: 'Lato', sans-serif;
+}
+
+.footercnt{
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size:40px;
+    color: #126612;
+    text-transform: capitalize;
+    padding: 30px 0px 50px;
+    margin: 0px;
+}
+
+.btn-cucumber{
+    color: #000;
+    border-color: #fee200;
+    background: #fee200;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-mkc{
+    color: #ffffff;
+    border-color: #ba2220;
+    background: #ba2220;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-cucumber:hover,
+.btn-cucumber:active,
+.btn-cucumber:focus{
+    color: #000;
+    border-color: #ffe241;
+    background: #ffe241;
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+    font-family: 'Lato', sans-serif;
+}
+.btn-mkc:hover,
+.btn-mkc:active,
+.btn-mkc:focus{
+    color: #ffffff;
+    border-color: #ba2220;
+    background: #ba2220;
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+    font-family: 'Lato', sans-serif;
+}
+.btn-cucumber-red{
+    color: #ffffff;
+    border-color: #ba2027;
+    background: #ba2027;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-cucumber-red:hover,
+.btn-cucumber-red:active,
+.btn-cucumber-red:focus{
+    color: #ffffff;
+    border-color: rgba(186, 32, 39, 0.84);
+    background: rgba(186, 32, 39, 0.84);
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+    font-family: 'Lato', sans-serif;
+}
+
+.section-cucu-facts{
+    background-color:#96dbd6;
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 350px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px 0px 50px;
+}
+.section-cucu-interior-facts{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/offer-bg_02.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 545px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px 0px 50px;
+}
+.cucumber-why-us-head{
+    font-weight: 300;
+    color: #126612;
+    text-transform: capitalize;
+    font-size:42px;
+    /*font-size: 32px;*/
+    padding: 30px 0px 50px;
+    margin: 0px;
+}
+.cucumber-choose-head{
+    font-weight: 600;
+    color: #ba2027;
+}
+.whyus-fnt{
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 14px;
+    text-shadow: 0px 0px 0px #2e4042;
+    font-family: 'Abel', sans-serif;
+}
+.whyus-fnt-weight{
+    font-weight: 300;
+    color: #2e4042;
+    font-size: 16px;
+    /* text-shadow: 0px 0px 0px #2e4042; */
+    font-family: 'Abel', sans-serif;
+}
+.cucumber-gallery-section {
+    background: #ffffff;
+    padding: 0px;
+}
+
+#cucumber #owl-gallery  .owl-dots{
+    position: absolute;
+    left: 46%;
+    top: 76%;
+    margin: 0px !important;
+    padding: 10px 0px 5px;
+}
+.cucumber-gallery-txt{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    padding-left: 0;
+    text-align: left;
+}
+.cucumber-gallery-subtxt{
+    padding: 20px 120px;
+}
+.slidhead{
+    font-size: 40px;
+    font-weight: 300;
+    font-family: 'Abel', sans-serif;
+    text-align: right;
+}
+.slidpara{
+    font-size:12px;
+}
+.andfnt{
+    font-size: 30px;
+    padding-bottom: 0px;
+    padding-top: 25px;
+}
+.morfnt{
+    font-size: 35px;
+    font-weight: 600;
+}
+.cucumber-footer {
+    padding: 10px 0px 5px 25px;
+    background: #96dbd6;
+    color: #333;
+}
+.cucu-testimonial{
+    font-size: 15px !important;
+    color: #111;
+}
+
+.cucu-testimonialtxt{
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    font-weight: 600;
+}
+
+.mod-green{
+    color: #126612;
+}
+.mod-red{
+    color: #ba2027;
+}
+.mod-head{
+    border-bottom: 1px solid #333;
+    display: inline-block;
+    padding: 10px;
+}
+
+.nav-tabs { border-bottom: 2px solid #DDD; }
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+.nav-tabs > li > a {
+    border: none;
+    color: #126612;
+    background: #8bd5d5;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+    border: none;
+    color: #ffffff !important;
+    background: #ba2027!important;
+    border-radius:0px;
+}
+
+.nav-tabs > li > a::after {
+    content: "";
+    background: #4285F4;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: -1px;
+    transition: all 250ms ease 0s;
+    transform: scale(0);
+}
+.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+
+.tab-nav > li > a::after {
+    background: #ba2027;
+    color: #fff;
+}
+.tab-pane {
+    position: relative;
+padding:0; }
+.tab-content{padding:0px}
+
+.nav-tabs.nav-justified>li>a{
+    border-radius:0px;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus{
+    border: none;
+    color: #ffffff !important;
+    background: #ba2027!important;
+    border-radius:0px;
+}
+.mkc-dec{
+    position: absolute;
+    width:100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    bottom: 0px;
+    padding: 15px;
+    text-align: center;
+}
+
+@media (max-width: 420px) {
+    .cucumber_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492594655/landing_page/modular-wardrobes/Hero-image.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
+    .kitchen_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492680439/landing_page/kitchen-cabinets/Hero_image_banner.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
+    .cucumber-why-us-head{
+        font-size: 26px;
+        padding: 20px 0px;
+    }
+    .cucumber-form{
+        min-height:500px;
+    }
+    .cucumber-price-bg h1{
+        font-size: 30px;
+    }
+    .cucumber-price-bg h2{
+        font-size: 16px;
+    }
+    .section-cucu-interior-facts{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/mobile-bg_02.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 545px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        color: #ffffff;
+        padding: 20px 0px 50px;
+    }
+    .cucumber-gallery-txt{
+        position: relative;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        width: 100%;
+        background: #ccc;
+        padding-left: 0;
+        text-align: left;
+    }
+    .cucumber-gallery-subtxt {
+        padding: 20px 20px;
+    }
+    .slidhead{
+        font-size: 30px;
+        font-weight: 300;
+        color: #000;
+        text-align:left;
+    }
+    .slidpara {
+        font-size: 12px;
+        width: 100%;
+        color: #000;
+    }
+    .whyus-fnt{
+        font-size: 16px;
+    }
+    #cucumber #owl-gallery  .owl-dots{
+        position: relative;
+        left: 0%;
+        top: 0%;
+    }
+}
