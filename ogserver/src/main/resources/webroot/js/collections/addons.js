@@ -45,9 +45,9 @@ define([
             var temp=null;
             this.each(function (model) {
             var protypecode = model.get('productTypeCode');
-              if (protypecode === productType.trim()) {
-                var xx = model.get('productSubtypeCode');
-                if(xx!=temp)
+              if (protypecode.trim() === productType.trim()) {
+                var xx = model.get('productSubtypeCode').trim();
+                if($.inArray( xx, resultProSubtype ) && xx!=temp)
                 resultProSubtype.push(xx);
               }
               temp=xx;
@@ -61,8 +61,8 @@ define([
             var prosubtypecode = model.get('productSubtypeCode');
             var protypecode = model.get('productTypeCode');
               if (prosubtypecode === productSubtype.trim() && protypecode === productType.trim()) {
-                var brandNm = model.get('brandCode');
-                if(brandNm != tempBr)
+                var brandNm = model.get('brandCode').trim();
+                if($.inArray( brandNm, resultProBrand ) && brandNm != tempBr)
                 resultProBrand.push(brandNm);
               }
               tempBr=brandNm;
