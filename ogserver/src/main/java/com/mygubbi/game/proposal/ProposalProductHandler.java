@@ -33,6 +33,9 @@ public class ProposalProductHandler extends AbstractRouteHandler
         this.post("/createnew").handler(this::copyProductsFromVersion);
         this.post("/createnewfromoldproposal").handler(this::copyProductsFromOldProposalId);
         this.post("/updatesequence").handler(this::updateProductSequence);
+        this.post("/insertproductlibray").handler(this::CreateProposalProductLibrary);
+        this.post("/updateproductlibray").handler(this::UpdateProposalProductLibrary);
+        this.post("/addtoproposalproduct").handler(this::AddToProposalProductFromLibrary);
     }
 
     private void loadAndUpdate(RoutingContext routingContext)
@@ -149,6 +152,101 @@ public class ProposalProductHandler extends AbstractRouteHandler
                     }
                 });
     }
+
+
+    private void CreateProposalProductLibrary(RoutingContext routingContext)
+    {
+        //LOG.info("Product library item" +productLineItem);
+        JsonObject productJson = routingContext.getBodyAsJson();
+        LOG.debug("Get body as Json :" + productJson.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.insertproductlibray", productJson));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+
+                    LOG.debug("resultData.updateResult.getUpdated() 1:" + resultData.updateResult.getUpdated());
+
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in copying product line item in the proposal.");
+                        LOG.error("Error in copying product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, productJson.toString());
+                    }
+                });
+
+        /*String query;
+        if(productLineItem.getFromVersion()!="0" && productLineItem.getProposalId()!="0")
+        {
+            query= "proposal.product.updateproductlibray";
+        }else
+        {
+            query="proposal.product.insertproductlibray";
+        }
+        //String query = productLineItem.getId() == 0 ? "proposal.product.insertproductlibray" : "proposal.product.updateproductlibray";
+        LOG.info("id " +query);
+        Integer id = LocalCache.getInstance().store(new QueryData(query, productLineItem));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in updating product line item in the proposal. " + resultData.errorMessage);
+                        LOG.error("Error in updating product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, productLineItem.toString());
+                    }
+                });*/
+    }
+
+    private void UpdateProposalProductLibrary(RoutingContext routingContext)
+    {
+        JsonObject productJson = routingContext.getBodyAsJson();
+        LOG.debug("Get body as Json :" + productJson.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.updateproductlibray", productJson));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+
+                    LOG.debug("resultData.updateResult.getUpdated() 1:" + resultData.updateResult.getUpdated());
+
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in copying product line item in the proposal.");
+                        LOG.error("Error in copying product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, productJson.toString());
+                    }
+                });
+    }
+    private void AddToProposalProductFromLibrary(RoutingContext routingContext)
+    {
+        JsonObject versionJson = routingContext.getBodyAsJson();
+        LOG.debug("Get body as Json :" + versionJson.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.product.addtoproposalproduct", versionJson));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    LOG.debug("resultData.updateResult.getUpdated() 2:" + resultData.updateResult.getUpdated());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in copying product line item in the proposal.");
+                        LOG.error("Error in copying product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, versionJson.toString());
+                    }
+                });
+    }
+
+
 
     private void copyProductsFromOldProposalId(RoutingContext routingContext)
     {

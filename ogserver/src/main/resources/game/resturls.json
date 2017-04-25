@@ -676,6 +676,46 @@
       "params":["modulecode"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/selectallproducts",
+      "source": "db",
+      "query":"proposal.selectallproducts",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/searchproductlibrary",
+      "source": "db",
+      "query":"proposal.searchproductlibray",
+      "params":["productTitle"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/selectproductlibrary",
+      "source": "db",
+      "query":"proposal.selectproductlibray",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/selectlibrarybasedonid",
+      "source": "db",
+      "query":"proposal.selectproductlibrarybasedonid",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/selectcategorybasedonproduct",
+      "source": "db",
+      "query":"proposal.selectcategorybasedonproduct",
+      "params":["category"],
+      "resultfields":[],
+      "default": "[]"
     }
 
   ]
