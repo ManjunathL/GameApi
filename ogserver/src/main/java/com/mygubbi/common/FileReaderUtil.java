@@ -18,7 +18,7 @@
 * limitations under the License.
 */
 
-package com.vk.vertxapi.util;
+package com.mygubbi.common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
