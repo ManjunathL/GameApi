@@ -47,7 +47,7 @@ define([
             var protypecode = model.get('productTypeCode');
               if (protypecode.trim() === productType.trim()) {
                 var xx = model.get('productSubtypeCode').trim();
-                if($.inArray( xx, resultProSubtype ) && xx!=temp)
+                if(($.inArray( xx, resultProSubtype ) == -1) && (xx!=temp))
                 resultProSubtype.push(xx);
               }
               temp=xx;
@@ -62,7 +62,7 @@ define([
             var protypecode = model.get('productTypeCode');
               if (prosubtypecode === productSubtype.trim() && protypecode === productType.trim()) {
                 var brandNm = model.get('brandCode').trim();
-                if($.inArray( brandNm, resultProBrand ) && brandNm != tempBr)
+                if(($.inArray( brandNm, resultProBrand ) == -1) && (brandNm != tempBr))
                 resultProBrand.push(brandNm);
               }
               tempBr=brandNm;
