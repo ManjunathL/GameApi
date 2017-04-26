@@ -4462,3 +4462,213 @@ a.hideLink {
     padding: 15px;
     margin-bottom: 30px;
 }
+
+.k-banner{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1493191099/product_collection/kitchen/k-banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 225px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0px;
+    text-align: center;
+}
+.w-banner{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1493212660/product_collection/wardrobe/w-banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 225px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0px;
+    text-align: center;
+}
+.s-banner{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1493213090/product_collection/storage/s-banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 225px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 0px;
+    text-align: center;
+}
+.k-ban-h4{
+    font-weight: 400;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 4px;
+}
+.k-ban-h2{
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 1px;
+    padding: 0px;
+    margin: 10px 0px;
+    font-size: 30px;
+}
+.k-ban-h1{
+    font-weight: 900;
+    font-family: 'Raleway', sans-serif;
+    font-size: 75px;
+    color: #fff;
+    background: #181411;
+    margin: 0px;
+    padding: 10px 14px;
+    display: inline-block;
+}
+
+.w-ban-h4{
+    font-weight: 400;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 12px;
+}
+.w-ban-h2{
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 1px;
+    padding: 0px;
+    margin: 10px 0px;
+    font-size: 21px;
+}
+.w-ban-h1{
+    font-weight: 900;
+    font-family: 'Raleway', sans-serif;
+    font-size: 60px;
+    color: #fff;
+    background: #181411;
+    margin: 0px;
+    padding: 10px 14px;
+    display: inline-block;
+}
+
+.s-ban-h4{
+    font-weight: 400;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 6px;
+    color: #11374e;
+}
+.s-ban-h2{
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 1px;
+    padding: 0px;
+    margin: 10px 0px;
+    font-size: 19px;
+    color: #11374e;
+}
+.s-ban-h1{
+    font-weight: 900;
+    font-family: 'Raleway', sans-serif;
+    font-size: 65px;
+    color: #fff;
+    background: #11374e;
+    margin: 0px;
+    padding: 10px 14px;
+    display: inline-block;
+}
+@media (max-width: 1024px) {
+    .k-ban-h4,
+    .w-ban-h4,
+    .s-ban-h4{
+        font-size: 14px;
+    }
+    .k-ban-h2,
+    .w-ban-h2,
+    .s-ban-h2{
+        font-size: 26px;
+    }
+    .k-ban-h1,
+    .w-ban-h1,
+    .s-ban-h1{
+        font-size: 55px;
+    }
+}
+@media (max-width: 520px) {
+    .k-banner{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1493212398/product_collection/kitchen/k-banner-mob.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 185px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 35px 0px;
+        text-align: center;
+    }
+    .w-banner{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1493212659/product_collection/wardrobe/w-banner-mob.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 185px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 35px 0px;
+        text-align: center;
+    }
+    .s-banner{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1493213088/product_collection/storage/s-banner-mob.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 185px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 35px 0px;
+        text-align: center;
+    }
+    .k-ban-h4,
+    .w-ban-h4,
+    .s-ban-h4{
+        font-size: 12px;
+    }
+    .k-ban-h2,
+    .w-ban-h2,
+    .s-ban-h2{
+        font-size: 15px;
+    }
+     .k-ban-h1,
+     .w-ban-h1,
+     .s-ban-h1{
+        font-size: 24px;
+    }
+}
