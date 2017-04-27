@@ -65,9 +65,6 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-
-
-
 CREATE TABLE `proposal_product` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`active` CHAR(1) NOT NULL DEFAULT 'A',
@@ -92,6 +89,10 @@ CREATE TABLE `proposal_product` (
 	`quoteFilePath` VARCHAR(255) NULL DEFAULT NULL,
 	`modules` TEXT NULL,
 	`addons` TEXT NULL,
+	`spaceName` varchar(64) not null default 'default',
+	`subSpaceName` varchar(64) not null default 'room',
+	`description` varchar(2048) not null default '',
+	`imageUrl` varchar(128) not null default '',
 	`createdOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`createdBy` VARCHAR(64) NULL DEFAULT NULL,
 	`updatedOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -141,6 +142,10 @@ CREATE TABLE `proposal_addon` (
 	`quantity` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
 	`amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
 	`uom` CHAR(10) NOT NULL DEFAULT 'N',
+    `spaceName` varchar(64) not null default 'default',
+    `subSpaceName` varchar(64) not null default 'room',
+	`description` varchar(2048) not null default '',
+	`imageUrl` varchar(128) not null default '',
 	`updatedBy` VARCHAR(64) NULL DEFAULT NULL,
 	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
@@ -150,7 +155,6 @@ COMMENT='Proposal Addons'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
-
 
 CREATE TABLE `module_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -473,6 +477,11 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB
 ;
 
-
-
-
+delimiter $$
+drop function if exists get_addon_price;
+CREATE FUNCTION get_addon_price (code varchar(30), priceDate date) returns double
+BEGIN
+declare addon_price double;
+select price into addon_price from price_master where rateId = code and priceDate between fromDate and toDate;
+return addon_price;
+END$$

@@ -2,7 +2,7 @@
   "elasticsearch": {
     "cluster_name": "elasticsearch_dev"
   },
-  "mygubbi_index": {
+  "space_lib_index": {
     "settings": {
       "analysis": {
         "filter": {
@@ -40,157 +40,60 @@
       }
     },
     "mappings": {
-      "product": {
+      "items": {
         "_all": {
           "index_analyzer": "nGram_analyzer",
           "search_analyzer": "whitespace_analyzer"
         },
         "properties": {
+          "id": {
+            "type": "string",
+            "index": "not_analyzed",
+            "include_in_all": false
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
           "category": {
             "type": "string",
             "index": "not_analyzed"
           },
-          "categoryId": {
-            "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
-          },
-          "components": {
-            "properties": {
-              "name": {
-                "type": "string",
-                "index": "no",
-                "include_in_all": false
-              },
-              "qty": {
-                "type": "long",
-                "index": "no",
-                "include_in_all": false
-              },
-              "size": {
-                "type": "string",
-                "index": "no",
-                "include_in_all": false
-              }
-            }
-          },
-          "createDt": {
-            "type": "string"
-          },
-          "curr": {
-            "type": "string",
-            "index": "no",
-            "include_in_all": false
-          },
-          "defaultFinish": {
-            "type": "string"
-          },
-          "defaultMaterial": {
-            "type": "string"
-          },
-          "defaultPrice": {
-            "type": "long",
-            "index": "not_analyzed",
-            "include_in_all": false
-          },
-          "desc": {
-            "type": "string"
-          },
-          "designer": {
-            "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
-          },
-          "dimension": {
-            "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
-          },
-          "id": {
+          "subCategory": {
             "type": "string",
             "index": "not_analyzed"
           },
-          "images": {
+          "img": {
             "type": "string",
             "index": "no",
             "include_in_all": false
           },
-          "likes": {
-            "type": "long",
+          "price": {
+            "type": "string",
             "index": "no",
             "include_in_all": false
           },
-          "mf": {
-            "properties": {
-              "basePrice": {
-                "type": "long",
-                "include_in_all": false
-              },
-              "finish": {
-                "type": "string",
-                "include_in_all": false
-              },
-              "material": {
-                "type": "string",
-                "include_in_all": false
-              }
-            }
-          },
-          "name": {
-            "type": "string"
-          },
-          "pageId": {
-            "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
-          },
-          "popularity": {
-            "type": "long",
-            "index": "no",
-            "include_in_all": false
-          },
-          "priceId": {
-            "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
-          },
-          "priceRange": {
+          "spaceName": {
             "type": "string",
             "index": "not_analyzed"
           },
-          "productId": {
+          "style": {
             "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
+            "index": "not_analyzed"
           },
-          "relevance": {
-            "type": "long",
-            "index": "no",
-            "include_in_all": false
-          },
-          "shortlisted": {
-            "type": "long",
-            "index": "no",
-            "include_in_all": false
-          },
-          "styleId": {
+          "color": {
             "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
+            "index": "not_analyzed"
           },
-          "styleName": {
-            "type": "string"
-          },
-          "subcategory": {
-            "type": "string"
-          },
-          "subcategoryId": {
+          "size": {
             "type": "string",
-            "index": "not_analyzed",
-            "include_in_all": false
-          },
-          "tags": {
-            "type": "string"
+            "index": "not_analyzed"
           }
         }
       }
@@ -205,31 +108,8 @@
           "operator": "and"
         }
       }
-    }
-  },
-  "suggestQueryJson": {
-    "size": 20,
-    "_source": {
-      "include": [
-        "name",
-        "id",
-        "productId",
-        "desc",
-        "category",
-        "subcategory",
-        "tags",
-        "styleName",
-        "priceRange",
-        "defaultPrice"
-      ]
     },
-    "query": {
-      "match": {
-        "_all": {
-          "query": "__TERM",
-          "operator": "and"
-        }
-      }
-    }
+    "filter": "__FILTER",
+    "facets": "__FACETS"
   }
 }

@@ -60,6 +60,9 @@ insert into code_master (lookupType, code, title) values ('psubcategory', 'study
 insert into code_master (lookupType, code, title) values ('psubcategory', 'sidetable', 'Side Table');
 insert into code_master (lookupType, code, title) values ('psubcategory', 'bookrack', 'Book Rack');
 
+insert into code_master (lookupType, code, title) values ('spacecategory', 'kitchen', 'Kitchen');
+insert into code_master (lookupType, code, title) values ('spacecategory', 'living', 'Living');
+
 commit;
 
 update product p, code_master c set p.categoryId = c.code where p.category = c.title and c.lookupType = 'pcategory';

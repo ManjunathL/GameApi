@@ -1,4 +1,4 @@
-package com.vk.vertxapi.search;
+package com.mygubbi.search;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.mygubbi.common.FileReaderUtil;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
@@ -31,7 +32,6 @@ import org.elasticsearch.search.suggest.phrase.PhraseSuggestionBuilder;
 import org.elasticsearch.search.suggest.term.TermSuggestion;
 import org.elasticsearch.search.suggest.term.TermSuggestionBuilder;
 
-import com.vk.vertxapi.util.FileReaderUtil;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -472,7 +472,7 @@ public class ElasticsearchClient
 	{
 		String searchQueryJson = searchJSON.replaceFirst("__TERM", term);
 		System.out.println(searchQueryJson);
-		SearchQueryData results = elasticsearchClient.query(new SearchQueryData(indexName, new JsonObject(searchQueryJson)));
+		SearchQueryData results = elasticsearchClient.query(new SearchQueryData(indexName, new JsonObject(searchQueryJson), null));
 		System.out.println(results.getResult());
 	}
 }

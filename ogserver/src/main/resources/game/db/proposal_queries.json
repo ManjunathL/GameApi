@@ -1091,6 +1091,76 @@
       "table": "module_components",
       "query": "select modulecode,comptype,compcode,quantity from module_components where modulecode=? and comptype='H' ",
       "params": ["modulecode"]
+    },
+    {
+      "id": "space.add.prodcutlib",
+      "type": "insert",
+      "table": "proposal_product",
+      "query": "INSERT INTO proposal_product (`active`, `proposalId`, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, `spaceName`, `subSpaceName`, description, imageUrl) (SELECT 'Y', ?, `title`, ?, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, 1 as `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, ? as `fromVersion`, 0.0 as `profit`, 0.0 as `margin`, 0.0 as `amountWoTax`, 0.0 as `manufactureAmount`, 0 as `manualSeq`, `source`, ? as spaceName, ? as subSpaceName, productDescription, imageUrl FROM product_library WHERE title = ? limit 1)",
+      "params": ["proposalId", "seq", "fromVersion", "spaceName", "subSpaceName", "title"]
+    },
+    {
+      "id": "space.add.catalogue",
+      "type": "insert",
+      "table": "proposal_product",
+      "query": "insert into proposal_product (`active`, `proposalId`, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, spaceName, subSpaceName, productDescription, imageUrl ) select 'Y', ? as proposalId, `name` as title, ? as seq, 'CATALOGUE' as `type`, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.categoryId')) as roomCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.subcategoryId')) as productCategoryCode, productId as catalogueId, '' as catalogueName,'' as makeTypeCode,  JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultMaterial')) as baseCarcassCode, '' as wallCarcassCode, '' as finishTypeCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultFinish')) as finishCode,'' as designCode, '' as `dimension`, 1 as quantity, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultPrice')) as amount, '' as quoteFilePath, '' as modules, '' as addons, now(), ? as createdBy, now(),  ? as updatedBy, now(), 0 as costWoAccessories, ? as fromVersion,  0 as profit, 0 as `margin`, 0 as `amountWoTax`, 0 as `manufactureAmount`, 0 as manualSeq, '' as source, ?, ?, description, JSON_UNQUOTE(JSON_EXTRACT(productShortJson, '$.image')) as imgUrl from product where productId = ?",
+      "params": ["proposalId", "seq", "fromVersion", "spaceName", "subSpaceName", "productId"]
+    },
+    {
+      "id": "space.add.addon",
+      "type": "insert",
+      "table": "proposal_addon",
+      "query": "INSERT INTO `proposal_addon` (`seq`, `proposalId`, `fromVersion`, `code`, `categoryCode`, `productTypeCode`, `productSubtypeCode`, `product`, `brandCode`, `catalogueCode`, `title`, `rate`, `quantity`, `amount`, `uom`, `updatedBy`, `touchtime`, `profit`, `margin`, `remarks`, `sourcePrice`, `amountWOTax`, spaceName, subSpaceName) select ? as seq, ? as `proposalId`, ? as `fromVersion`, `code`, `categoryCode`, `productTypeCode`, `productSubtypeCode`, `product`, `brandCode`, `catalogueCode`, `title`, get_addon_price(?, ?) as rate, ? as quantity, 0.0 as amount, `uom`, ?, now(), 0 as `dealerPrice`, 0 as profit, `imagePath`, now(), ?, ? from addon_master where code = ?",
+      "params": ["proposalId", "fromVersion", "rateId", "priceDate", "quantity", "updatedBy", "spaceName", "subSpaceName", "code"]
+    },
+    {
+      "id": "space.update.addon",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update `proposal_addon` set quantity = ?, updatedBy = ? where id = ?",
+      "params": ["quantity", "updatedBy", "id"]
+    },
+    {
+      "id": "space.delete.product",
+      "type": "update",
+      "table": "proposal_product",
+      "query": "update proposal_product set active = 'N' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "space.delete.addon",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set active = 'N' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "space.select.product",
+      "type": "update",
+      "table": "proposal_product",
+      "query": "update proposal_addon set active = 'N' where id = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "space.delete.product",
+      "type": "update",
+      "table": "proposal_product",
+      "query": "update proposal_product set active = 'N' where proposalId = ? and fromVersion = ? and spaceName = ?",
+      "params": ["proposalId", "fromVersion", "spaceName"]
+    },
+    {
+      "id": "space.delete.addon",
+      "type": "update",
+      "table": "proposal_addon",
+      "query": "update proposal_addon set active = 'N' where proposalId = ? and fromVersion = ? and spaceName = ?",
+      "params": ["proposalId", "fromVersion", "spaceName"]
+    },
+    {
+      "id": "spaces.data",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select pp.id, pp.title, pp.description, pp.`type`, pp.imageUrl, pp.proposalId, pp.fromVersion from proposal_product pp union select pa.id, pa.title, pa.description, pa.categoryCode as type, pa.imageUrl, pa.proposalId, pa.fromVersion from proposal_addon pa where proposalId = ? and fromVersion = ?",
+      "params": ["proposalId", "fromVersion"]
     }
   ]
 }
