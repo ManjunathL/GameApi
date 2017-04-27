@@ -4511,7 +4511,7 @@ a.hideLink {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding: 20px 0px;
+    padding: 35px 0px;
     text-align: center;
 }
 .k-ban-h4{
@@ -4541,22 +4541,23 @@ a.hideLink {
 .w-ban-h4{
     font-weight: 400;
     font-family: 'Raleway', sans-serif;
-    letter-spacing: 12px;
+    letter-spacing: 5px;
+    color: #11374e;
 }
 .w-ban-h2{
     font-weight: 500;
     font-family: 'Raleway', sans-serif;
-    letter-spacing: 1px;
     padding: 0px;
     margin: 10px 0px;
-    font-size: 21px;
+    font-size: 20px;
+    color: #11374e;
 }
 .w-ban-h1{
     font-weight: 900;
     font-family: 'Raleway', sans-serif;
     font-size: 60px;
     color: #fff;
-    background: #181411;
+    background: #11374e;
     margin: 0px;
     padding: 10px 14px;
     display: inline-block;
@@ -4565,24 +4566,23 @@ a.hideLink {
 .s-ban-h4{
     font-weight: 400;
     font-family: 'Raleway', sans-serif;
-    letter-spacing: 6px;
+    letter-spacing: 10px;
     color: #11374e;
 }
 .s-ban-h2{
     font-weight: 500;
     font-family: 'Raleway', sans-serif;
-    letter-spacing: 1px;
     padding: 0px;
     margin: 10px 0px;
-    font-size: 19px;
+    font-size: 22px;
     color: #11374e;
 }
 .s-ban-h1{
     font-weight: 900;
     font-family: 'Raleway', sans-serif;
-    font-size: 65px;
+    font-size: 50px;
     color: #fff;
-    background: #11374e;
+    background: #181411;
     margin: 0px;
     padding: 10px 14px;
     display: inline-block;
