@@ -4,7 +4,7 @@ import com.google.firebase.database.*;
 import com.mygubbi.si.data.DataProcessor;
 import com.mygubbi.si.data.EventAcknowledger;
 import com.mygubbi.si.data.EventData;
-import org.apache.logging.log4j.LogManager;
+import org.apache.log4j.LogManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class FirebaseEventListener implements ChildEventListener, ValueEventListener
 {
-    private final static org.apache.logging.log4j.Logger LOG = LogManager.getLogger(FirebaseEventListener.class);
+    private final static org.apache.log4j.Logger LOG = LogManager.getLogger(FirebaseEventListener.class);
 
     private DatabaseReference fbRef;
     private Map<String, DataProcessor> processorMap = new HashMap<>();

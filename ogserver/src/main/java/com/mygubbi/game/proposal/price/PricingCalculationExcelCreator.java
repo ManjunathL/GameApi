@@ -3,8 +3,8 @@ package com.mygubbi.game.proposal.price;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.si.excel.ExcelWorkbookManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Sunil on 22-05-2016.

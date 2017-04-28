@@ -1,0 +1,994 @@
+INFO vert.x-worker-thread-7 com.mygubbi.config.ConfigHolder - Final merged config : {
+  "version" : "0.0.0a",
+  "jdbc" : {
+    "driver_class" : "com.mysql.jdbc.Driver",
+    "url" : "jdbc:mysql://localhost/mg",
+    "max_pool_size" : 20,
+    "user" : "root",
+    "password" : "root"
+  },
+  "urlwithssl" : "",
+  "datatables" : [ "user_profile", "event_log", "event_errors", "shortlisted", "product", "enquiries" ],
+  "ssl_keystore" : "ssl/mygubbiprod.jks",
+  "ssl_password" : "0r@nge123$",
+  "firebase" : { },
+  "cloudinary" : { },
+  "staticConfigPath" : "",
+  "robots.txt" : "User-agent: *\nDisallow: /",
+  "services" : {
+    "sequential" : [ {
+      "name" : "com.mygubbi.support.LogServiceVerticle"
+    }, {
+      "name" : "com.mygubbi.db.DatabaseService"
+    }, {
+      "name" : "com.mygubbi.db.QueryPrepareService"
+    }, {
+      "name" : "com.mygubbi.si.email.EmailService"
+    } ],
+    "parallel" : [ {
+      "name" : "com.mygubbi.apiserver.GameApiServerVerticle",
+      "worker" : false
+    }, {
+      "name" : "com.mygubbi.game.proposal.ModuleDataService"
+    }, {
+      "name" : "com.mygubbi.game.proposal.price.RateCardService"
+    }, {
+      "name" : "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService"
+    }, {
+      "name" : "com.mygubbi.game.proposal.price.PriceRecorderService"
+    }, {
+      "name" : "com.mygubbi.game.proposal.output.ProposalOutputService"
+    }, {
+      "name" : "com.mygubbi.si.email.EmailService"
+    }, {
+      "name" : "com.mygubbi.game.proposal.price.ProposalPricingUpdateService"
+    }, {
+      "name" : "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService"
+    }, {
+      "name" : "com.mygubbi.search.LibSearchService"
+    } ]
+  },
+  "elasticsearch" : {
+    "cluster_name" : "elasticsearch_dev"
+  },
+  "mygubbi_index" : {
+    "settings" : {
+      "analysis" : {
+        "filter" : {
+          "nGram_filter" : {
+            "type" : "nGram",
+            "min_gram" : 3,
+            "max_gram" : 20,
+            "token_chars" : [ "letter", "digit", "punctuation", "symbol" ]
+          }
+        },
+        "analyzer" : {
+          "nGram_analyzer" : {
+            "type" : "custom",
+            "tokenizer" : "whitespace",
+            "filter" : [ "lowercase", "asciifolding", "nGram_filter" ]
+          },
+          "whitespace_analyzer" : {
+            "type" : "custom",
+            "tokenizer" : "whitespace",
+            "filter" : [ "lowercase", "asciifolding" ]
+          }
+        }
+      }
+    },
+    "mappings" : {
+      "product" : {
+        "_all" : {
+          "index_analyzer" : "nGram_analyzer",
+          "search_analyzer" : "whitespace_analyzer"
+        },
+        "properties" : {
+          "category" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "categoryId" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "components" : {
+            "properties" : {
+              "name" : {
+                "type" : "string",
+                "index" : "no",
+                "include_in_all" : false
+              },
+              "qty" : {
+                "type" : "long",
+                "index" : "no",
+                "include_in_all" : false
+              },
+              "size" : {
+                "type" : "string",
+                "index" : "no",
+                "include_in_all" : false
+              }
+            }
+          },
+          "createDt" : {
+            "type" : "string"
+          },
+          "curr" : {
+            "type" : "string",
+            "index" : "no",
+            "include_in_all" : false
+          },
+          "defaultFinish" : {
+            "type" : "string"
+          },
+          "defaultMaterial" : {
+            "type" : "string"
+          },
+          "defaultPrice" : {
+            "type" : "long",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "desc" : {
+            "type" : "string"
+          },
+          "designer" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "dimension" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "id" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "images" : {
+            "type" : "string",
+            "index" : "no",
+            "include_in_all" : false
+          },
+          "likes" : {
+            "type" : "long",
+            "index" : "no",
+            "include_in_all" : false
+          },
+          "mf" : {
+            "properties" : {
+              "basePrice" : {
+                "type" : "long",
+                "include_in_all" : false
+              },
+              "finish" : {
+                "type" : "string",
+                "include_in_all" : false
+              },
+              "material" : {
+                "type" : "string",
+                "include_in_all" : false
+              }
+            }
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "pageId" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "popularity" : {
+            "type" : "long",
+            "index" : "no",
+            "include_in_all" : false
+          },
+          "priceId" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "priceRange" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "productId" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "relevance" : {
+            "type" : "long",
+            "index" : "no",
+            "include_in_all" : false
+          },
+          "shortlisted" : {
+            "type" : "long",
+            "index" : "no",
+            "include_in_all" : false
+          },
+          "styleId" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "styleName" : {
+            "type" : "string"
+          },
+          "subcategory" : {
+            "type" : "string"
+          },
+          "subcategoryId" : {
+            "type" : "string",
+            "index" : "not_analyzed",
+            "include_in_all" : false
+          },
+          "tags" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  },
+  "searchQueryJson" : {
+    "size" : 99999,
+    "query" : {
+      "match" : {
+        "_all" : {
+          "query" : "__TERM",
+          "operator" : "and"
+        }
+      }
+    }
+  },
+  "suggestQueryJson" : {
+    "size" : 20,
+    "_source" : {
+      "include" : [ "name", "id", "productId", "desc", "category", "subcategory", "tags", "styleName", "priceRange", "defaultPrice" ]
+    },
+    "query" : {
+      "match" : {
+        "_all" : {
+          "query" : "__TERM",
+          "operator" : "and"
+        }
+      }
+    }
+  },
+  "http_port" : 1445,
+  "https_port" : 1446,
+  "proposal_docs_folder" : "c:/Users/Public/game_files",
+  "templates_folder" : "c:/Users/Public/game_files",
+  "price_files_folder" : "c:/Users/Public/game_files/price_files",
+  "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
+  "quote_template_PUN" : "c:/Users/Public/game_files/quote-template-PUN.xlsx",
+  "quote_template_CHN" : "c:/Users/Public/game_files/quote-template-CHN.xlsx",
+  "quote_template_MLR" : "c:/Users/Public/game_files/quote-template-MLR.xlsx",
+  "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
+  "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
+  "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
+  "ratecard_file" : "d:/tmp/ratecard.bin",
+  "queryfiles" : [ "game/db/proposal_queries.json", "game/db/user_queries.json", "config/queries.json" ],
+  "fbServicesJson" : "config/prod/mygubbi-cep-live-firebase.json",
+  "fbUrl" : "https://mygubbi.firebaseio.com",
+  "processfbEvents" : true,
+  "acceptSSLCertificates" : "true",
+  "amazon_s3_bucketname" : "designwh",
+  "amazon_s3_access_key" : "AKIAJS7FUU6IRYAPHDLQ",
+  "amazon_s3_secret_key" : "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",
+  "amazon_uploads_directory" : "c:/Users/Public/uploads",
+  "resturls" : [ {
+    "uri" : "/gapi/proposal/summary",
+    "source" : "db",
+    "query" : "proposal.summary",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/header",
+    "source" : "db",
+    "query" : "proposal.header",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "{}",
+    "singleRecord" : true
+  }, {
+    "uri" : "/gapi/proposal/listbydesignpartner",
+    "source" : "db",
+    "query" : "proposal.list.designpartner",
+    "params" : [ "designPartnerEmail" ],
+    "resultfields" : [ ],
+    "default" : "{}"
+  }, {
+    "uri" : "/gapi/proposal/listcrmid",
+    "source" : "db",
+    "query" : "proposal.list.crmid",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "{}"
+  }, {
+    "uri" : "/gapi/proposal/documents",
+    "source" : "db",
+    "query" : "proposal.document.select",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/publish",
+    "source" : "db",
+    "query" : "version.publish",
+    "params" : [ "version", "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/confirm",
+    "source" : "db",
+    "query" : "version.confirm",
+    "params" : [ "version", "fromVersion", "toVersion", "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/designsignoff",
+    "source" : "db",
+    "query" : "version.designsignoff",
+    "params" : [ "version", "fromVersion", "toVersion", "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/productionsignoff",
+    "source" : "db",
+    "query" : "version.productionsignoff",
+    "params" : [ "version", "fromVersion", "toVersion", "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/locakallpresalesversions",
+    "source" : "db",
+    "query" : "version.lockallpresalesversions",
+    "params" : [ "internalStatus", "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/locakallpostsalesversions",
+    "source" : "db",
+    "query" : "version.lockallpostsalesversions",
+    "params" : [ "internalStatus", "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/lockallversions",
+    "source" : "db",
+    "query" : "version.lockallversions",
+    "params" : [ "internalStatus", "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/getlatestversion",
+    "source" : "db",
+    "query" : "version.getlatestversion",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "{}"
+  }, {
+    "uri" : "/gapi/proposal/version/getversiondetails",
+    "source" : "db",
+    "query" : "version.getversiondetails",
+    "params" : [ "proposalId", "version" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/updateversion",
+    "source" : "db",
+    "query" : "proposal.updateversion",
+    "params" : [ "title", "finalAmount", "status", "internalStatus", "remarks", "version", "discountAmount", "discountPercentage", "amount", "proposalId", "fromVersion" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/publish",
+    "source" : "db",
+    "query" : "proposal.publish",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/revise",
+    "source" : "db",
+    "query" : "proposal.revise",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/id",
+    "source" : "db",
+    "query" : "proposal.id",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/cancel",
+    "source" : "db",
+    "query" : "proposal.cancel",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/delete",
+    "source" : "db",
+    "query" : "proposal.delete",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/add.doc",
+    "source" : "db",
+    "query" : "proposal.document.add",
+    "params" : [ "proposalId", "title", "fileName", "attachmentType", "uploadedBy" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/remove.doc",
+    "source" : "db",
+    "query" : "proposal.document.remove",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/product/updateVersionOnConfirm",
+    "source" : "db",
+    "query" : "proposal.product.updateVersionOnConfirm",
+    "params" : [ "fromVersion", "proposalId", "version" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/addon/updateVersionOnConfirm",
+    "source" : "db",
+    "query" : "proposal.addon.updateVersionOnConfirm",
+    "params" : [ "fromVersion", "proposalId", "version" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/presales",
+    "source" : "db",
+    "query" : "proposal.version.presales",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/postsales",
+    "source" : "db",
+    "query" : "proposal.version.postsales",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/production",
+    "source" : "db",
+    "query" : "proposal.version.production",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/product/list",
+    "source" : "db",
+    "query" : "proposal.product.list",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/versions",
+    "source" : "db",
+    "query" : "proposal.versions.list",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/addon.add",
+    "source" : "db",
+    "query" : "proposal.addon.add",
+    "params" : [ "proposalId", "code", "fromVersion", "seq", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "remarks" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/addon.update",
+    "source" : "db",
+    "query" : "proposal.addon.update",
+    "params" : [ "code", "categoryCode", "seq", "fromVersion", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id", "product", "profit", "margin", "sourcePrice", "amountWOTax" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/addon.remove",
+    "source" : "db",
+    "query" : "proposal.addon.remove",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/addon.list",
+    "source" : "db",
+    "query" : "proposal.addon.list",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/version/addonlist",
+    "source" : "db",
+    "query" : "proposal.version.addon.list",
+    "params" : [ "proposalId", "fromVersion" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/product/detail",
+    "source" : "db",
+    "query" : "proposal.product.detail",
+    "params" : [ "id", "fromVersion" ],
+    "resultfields" : [ ],
+    "default" : "{}",
+    "singleRecord" : true
+  }, {
+    "uri" : "/gapi/product/manualSeq",
+    "source" : "db",
+    "query" : "proposal.product.manualSeq",
+    "params" : [ "proposalId", "fromVersion" ],
+    "resultfields" : [ ],
+    "default" : "{}"
+  }, {
+    "uri" : "/gapi/product/delete",
+    "source" : "db",
+    "query" : "proposal.product.delete",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/product/documents",
+    "source" : "db",
+    "query" : "product.document.select",
+    "params" : [ "productId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/product/add.doc",
+    "source" : "db",
+    "query" : "product.document.add",
+    "params" : [ "proposalId", "productId", "title", "fileName", "attachmentType", "uploadedBy" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/product/remove.doc",
+    "source" : "db",
+    "query" : "proposal.document.remove",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/product/versionlist",
+    "source" : "db",
+    "query" : "proposal.product.versionlist",
+    "params" : [ "proposalId", "fromVersion" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/codelookup",
+    "source" : "db",
+    "query" : "lookup.codes",
+    "params" : [ "lookupType" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/finishlookup",
+    "source" : "db",
+    "query" : "finish.lookup",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/colorlookup",
+    "source" : "file",
+    "file" : "game/data/finish_type_colors.json",
+    "default" : "[]",
+    "encoding" : "application/json"
+  }, {
+    "uri" : "/gapi/module/addonsforaccpack",
+    "source" : "db",
+    "query" : "addons.selectbyaccpack",
+    "params" : [ "apCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addons",
+    "source" : "db",
+    "query" : "addons.select",
+    "params" : [ "producttype", "addontype" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addon/categories",
+    "source" : "db",
+    "query" : "addons.categories",
+    "params" : [ "roomCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addon/productTypes",
+    "source" : "db",
+    "query" : "addons.product.types",
+    "params" : [ "categoryCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addon/productSubTypes",
+    "source" : "db",
+    "query" : "addons.product.subtypes",
+    "params" : [ "categoryCode", "productTypeCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addon/brands",
+    "source" : "db",
+    "query" : "addons.brands",
+    "params" : [ "categoryCode", "productSubtypeCode", "productTypeCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addon/products",
+    "source" : "db",
+    "query" : "addons.products",
+    "params" : [ "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addon/newprods",
+    "source" : "db",
+    "query" : "abc.newprods",
+    "params" : [ "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/user/listbyrole",
+    "source" : "db",
+    "query" : "game_user.byrole",
+    "params" : [ "role" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/finishcodes",
+    "source" : "db",
+    "query" : "finish.codes",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/colorcodes",
+    "source" : "db",
+    "query" : "color.codes",
+    "params" : [ "colorGroupCode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/allcolorlookup",
+    "source" : "db",
+    "query" : "colors.select.all",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/catalogproduct",
+    "source" : "db",
+    "query" : "product.select.productid",
+    "params" : [ "productId" ],
+    "resultfields" : [ "productJson" ],
+    "default" : "{}",
+    "singleRecord" : true
+  }, {
+    "uri" : "/gapi/catalog-products",
+    "source" : "db",
+    "query" : "product.select.subcategory",
+    "params" : [ "subcategory" ],
+    "resultfields" : [ "productJson" ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/module/modulesByCategory",
+    "source" : "db",
+    "query" : "module.selectModulesByCategory",
+    "params" : [ "productCategory", "moduleCategory" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/id",
+    "source" : "db",
+    "query" : "proposal.id",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/city/selectMonthCount",
+    "source" : "db",
+    "query" : "city.selectMonthCount",
+    "params" : [ "city", "curmonth" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/city/newCityQuote",
+    "source" : "db",
+    "query" : "city.newCityQuote",
+    "params" : [ "city", "curmonth", "proposalId", "quoteNo" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/city/selectCity",
+    "source" : "db",
+    "query" : "city.selectCity",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/city/checkCity",
+    "source" : "db",
+    "query" : "city.checkCity",
+    "params" : [ "proposalId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/addon/addondetails",
+    "source" : "db",
+    "query" : "addons.addonPriceDetails",
+    "params" : [ "code" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/accdetails",
+    "source" : "db",
+    "query" : "accessory.details",
+    "params" : [ "apcode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/acchwdetails",
+    "source" : "db",
+    "query" : "accessory.hwdetails",
+    "params" : [ "apcode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/codelookup",
+    "source" : "db",
+    "query" : "workbench.code.codelookup",
+    "params" : [ "lookupType" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/additionalcodelookup",
+    "source" : "db",
+    "query" : "workbench.code.additionalcodelookup",
+    "params" : [ "lookupType", "additionalType" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/designmaster/create",
+    "source" : "db",
+    "query" : "workbench.designmaster.create",
+    "params" : [ "spaceName", "webDisplayName", "dFileLocation", "primaryImageLocation", "secondaryImageLocationJson", "l0Location", "moodBoardLocation", "conceptNote", "spaceType", "spaceSize", "propertyType", "spaceDesignStyle", "spaceColorStyle", "furnitureJson", "decorJson", "wallTreatmentType", "wallMaterial", "wallFinishMaterial", "wallFinishSwatch", "ceilingType", "ceilingMaterial", "ceilingFinishMaterial", "ceilingFinishSwatch", "flooringMaterial", "flooringFinishSwatch", "lighting", "designElement", "userPersonaJson", "designerDetailsJson", "taggedProductJson", "designerstory" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/designmaster/select",
+    "source" : "db",
+    "query" : "workbench.designmaster.select",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/productmaster/create",
+    "source" : "db",
+    "query" : "workbench.productmaster.create",
+    "params" : [ "productName", "webDisplayName", "dFileLocation", "primaryImageLocation", "secondaryImageLocationJson", "category", "subcategory", "usp", "designAttribute", "spaceJSon", "productStyle", "otherDesignStyle", "productColor", "productCompatibilityColor", "furnitureComponentMaterialJson", "designerDetailsJson", "sourcingScale", "designerstory" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/productmaster/select",
+    "source" : "db",
+    "query" : "workbench.productmaster.select",
+    "params" : [ ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/materialcomponentmapping/select",
+    "source" : "db",
+    "query" : "workbench.materialcomponentmapping.select",
+    "params" : [ "componentName" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/productmaster/id",
+    "source" : "db",
+    "query" : "workbench.productmaster.id",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/designmaster/id",
+    "source" : "db",
+    "query" : "workbench.designmaster.id",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/designmaster/fetch",
+    "source" : "db",
+    "query" : "workbench.designmaster.fetch",
+    "params" : [ "id" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/workbench/materialfinishmapping",
+    "source" : "db",
+    "query" : "workbench.materialfinishmapping.select",
+    "params" : [ "materialName" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/rcodedetails",
+    "source" : "db",
+    "query" : "ratefactor.details",
+    "params" : [ "rateCardId" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  }, {
+    "uri" : "/gapi/proposal/moduleacchwdetails",
+    "source" : "db",
+    "query" : "module.hwdetails",
+    "params" : [ "modulecode" ],
+    "resultfields" : [ ],
+    "default" : "[]"
+  } ]
+}
+INFO vert.x-worker-thread-8 com.mygubbi.ServerVerticle - Config Service started.
+INFO vert.x-worker-thread-8 com.mygubbi.ServerVerticle - com.mygubbi.si.email.EmailService starting ...
+INFO vert.x-worker-thread-9 com.mygubbi.si.email.EmailService - EmailService registered.true
+INFO vert.x-worker-thread-10 com.mygubbi.ServerVerticle - com.mygubbi.si.email.EmailService started.
+INFO vert.x-worker-thread-10 com.mygubbi.ServerVerticle - com.mygubbi.db.QueryPrepareService starting ...
+INFO vert.x-worker-thread-11 com.mygubbi.common.MultiFileReader - File to read : game/db/proposal_queries.json
+INFO vert.x-worker-thread-12 com.mygubbi.common.MultiFileReader - File to read : game/db/user_queries.json
+INFO vert.x-worker-thread-13 com.mygubbi.common.MultiFileReader - File to read : config/queries.json
+INFO vert.x-worker-thread-14 com.mygubbi.common.MultiFileReader - All files loaded.
+INFO vert.x-worker-thread-14 com.mygubbi.db.QueryPrepareService - Query map created.
+INFO vert.x-worker-thread-15 com.mygubbi.ServerVerticle - com.mygubbi.db.QueryPrepareService started.
+INFO vert.x-worker-thread-15 com.mygubbi.ServerVerticle - com.mygubbi.db.DatabaseService starting ...
+INFO MLog-Init-Reporter com.mchange.v2.log.MLog - MLog clients using log4j logging.
+INFO vert.x-worker-thread-16 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5.1 [built 16-June-2015 00:06:36 -0700; debug? true; trace: 10]
+INFO vertx-jdbc-service-get-connection-thread com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 1hge0w79n1dsjocm2831yp|754c8732, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> 1hge0w79n1dsjocm2831yp|754c8732, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost/mg, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 20, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+INFO vert.x-worker-thread-17 com.mygubbi.db.DatabaseService - Connection to DB established.
+INFO vert.x-worker-thread-17 com.mygubbi.db.DatabaseService - Database service started.
+INFO vert.x-worker-thread-18 com.mygubbi.ServerVerticle - com.mygubbi.db.DatabaseService started.
+INFO vert.x-worker-thread-17 com.mygubbi.db.DatabaseService - Database Service handler registered.true
+INFO vert.x-worker-thread-18 com.mygubbi.ServerVerticle - com.mygubbi.support.LogServiceVerticle starting ...
+INFO vert.x-worker-thread-19 com.mygubbi.support.LogServiceVerticle - Log service started.
+INFO vert.x-worker-thread-19 com.mygubbi.support.LogServiceVerticle - Log Service handler registered.
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.support.LogServiceVerticle started.
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.apiserver.GameApiServerVerticle starting ...
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.ModuleDataService starting ...
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.RateCardService starting ...
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.ComprehensiveModulePricingService starting ...
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.PriceRecorderService starting ...
+INFO vert.x-worker-thread-3 com.mygubbi.game.proposal.price.ComprehensiveModulePricingService - Comprehensive Module price calculator service started.true
+INFO vert.x-worker-thread-3 com.mygubbi.game.proposal.price.PriceRecorderService - Module price recorder service started.true
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.output.ProposalOutputService starting ...
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.si.email.EmailService starting ...
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.GameApiServerVerticle - Cache handler not registered.
+INFO vert.x-worker-thread-4 com.mygubbi.game.proposal.output.ProposalOutputService - Proposal output service started.true
+INFO vert.x-worker-thread-5 com.mygubbi.si.email.EmailService - EmailService registered.true
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.ProposalPricingUpdateService starting ...
+INFO vert.x-worker-thread-4 com.mygubbi.game.proposal.price.ProposalPricingUpdateService - Update Proposal price service started.true
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService starting ...
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.search.LibSearchService starting ...
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.ComprehensiveModulePricingService started.
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.PriceRecorderService started.
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.output.ProposalOutputService started.
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.si.email.EmailService started.
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.ProposalPricingUpdateService started.
+INFO vert.x-worker-thread-11 com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService - Proposal version price update service started.true
+INFO vert.x-worker-thread-11 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService started.
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/summary
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/header
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/listbydesignpartner
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/listcrmid
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/documents
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/publish
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/confirm
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/designsignoff
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/productionsignoff
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/locakallpresalesversions
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/locakallpostsalesversions
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/lockallversions
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/getlatestversion
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/getversiondetails
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/updateversion
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/publish
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/revise
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/id
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/cancel
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/delete
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/add.doc
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/remove.doc
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/product/updateVersionOnConfirm
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/addon/updateVersionOnConfirm
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/presales
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/postsales
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/production
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/list
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/versions
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/addon.add
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/addon.update
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/addon.remove
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/addon.list
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/version/addonlist
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/detail
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/manualSeq
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/delete
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/documents
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/add.doc
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/remove.doc
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/product/versionlist
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/codelookup
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/finishlookup
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/colorlookup
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/module/addonsforaccpack
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addons
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addon/categories
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addon/productTypes
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addon/productSubTypes
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addon/brands
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addon/products
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addon/newprods
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/user/listbyrole
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/finishcodes
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/colorcodes
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/allcolorlookup
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/catalogproduct
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/catalog-products
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/module/modulesByCategory
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/id
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/city/selectMonthCount
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/city/newCityQuote
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/city/selectCity
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/city/checkCity
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/addon/addondetails
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/accdetails
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/acchwdetails
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/codelookup
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/additionalcodelookup
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/designmaster/create
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/designmaster/select
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/productmaster/create
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/productmaster/select
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/materialcomponentmapping/select
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/productmaster/id
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/designmaster/id
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/designmaster/fetch
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/workbench/materialfinishmapping
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/rcodedetails
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Configuring url: /gapi/proposal/moduleacchwdetails
+INFO vert.x-eventloop-thread-0 com.mygubbi.apiserver.ConfiguredRestApiHandler - Urls configured.
+INFO vert.x-eventloop-thread-0 com.mygubbi.game.proposal.ProposalHandler - this.proposalDocsFolder:c:/Users/Public/game_files
+INFO vert.x-worker-thread-10 com.mygubbi.game.proposal.ModuleDataService - Module master is loaded.
+INFO vert.x-worker-thread-18 com.mygubbi.game.proposal.ModuleDataService - Module components loaded.
+INFO vert.x-worker-thread-19 com.mygubbi.ServerVerticle - com.mygubbi.apiserver.GameApiServerVerticle started.
+INFO vert.x-worker-thread-3 com.mygubbi.game.proposal.ModuleDataService - Module panels done.
+INFO vert.x-worker-thread-3 com.mygubbi.game.proposal.ModuleDataService - Accessories or Hardware loaded for type H
+INFO vert.x-worker-thread-3 com.mygubbi.game.proposal.ModuleDataService - Finish master is loaded.
+INFO vert.x-worker-thread-3 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.price.RateCardService started.
+INFO vert.x-worker-thread-10 com.mygubbi.game.proposal.ModuleDataService - Accessory Pack addons are loaded.
+INFO vert.x-worker-thread-10 com.mygubbi.ServerVerticle - com.mygubbi.game.proposal.ModuleDataService started.
+INFO vert.x-worker-thread-0 org.elasticsearch.node - [Tyrannus] version[1.7.4], pid[6180], build[0d3159b/2015-12-15T16:45:04Z]
+INFO vert.x-worker-thread-0 org.elasticsearch.node - [Tyrannus] initializing ...
+INFO vert.x-worker-thread-0 org.elasticsearch.plugins - [Tyrannus] loaded [], sites []
+WARN vert.x-worker-thread-0 org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.
+INFO vert.x-worker-thread-0 org.elasticsearch.node - [Tyrannus] initialized
+INFO vert.x-worker-thread-0 org.elasticsearch.node - [Tyrannus] starting ...
+INFO vert.x-worker-thread-0 org.elasticsearch.transport - [Tyrannus] bound_address {inet[/0:0:0:0:0:0:0:0:9301]}, publish_address {inet[/192.168.0.7:9301]}
+INFO vert.x-worker-thread-0 org.elasticsearch.discovery - [Tyrannus] elasticsearch_dev/awg02zP0Q92VxvDB3dff1w
+INFO elasticsearch[Tyrannus][clusterService#updateTask][T#1] org.elasticsearch.cluster.service - [Tyrannus] detected_master [Toxin][2JJIgMTVSIiakPoR3nCxUg][admin-PC][inet[/192.168.0.7:9300]], added {[Toxin][2JJIgMTVSIiakPoR3nCxUg][admin-PC][inet[/192.168.0.7:9300]],}, reason: zen-disco-receive(from master [[Toxin][2JJIgMTVSIiakPoR3nCxUg][admin-PC][inet[/192.168.0.7:9300]]])
+INFO vert.x-worker-thread-0 org.elasticsearch.node - [Tyrannus] started
+INFO vert.x-worker-thread-0 com.mygubbi.ServerVerticle - com.mygubbi.search.LibSearchService started.

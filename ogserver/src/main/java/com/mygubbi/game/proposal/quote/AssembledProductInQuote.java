@@ -5,8 +5,8 @@ import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.PanelComponent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple;
 

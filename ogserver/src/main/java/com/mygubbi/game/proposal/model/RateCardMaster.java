@@ -1,8 +1,8 @@
 package com.mygubbi.game.proposal.model;
 
 import io.vertx.core.json.JsonObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Chirag on 15-02-2017.

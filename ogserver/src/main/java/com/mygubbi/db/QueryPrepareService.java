@@ -1,19 +1,17 @@
 package com.mygubbi.db;
 
 import com.mygubbi.common.MultiFileReader;
-import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class QueryPrepareService extends AbstractVerticle implements MultiFileReader.ResultHandler
 {

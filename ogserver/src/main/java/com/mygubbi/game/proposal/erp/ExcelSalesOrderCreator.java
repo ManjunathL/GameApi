@@ -4,8 +4,8 @@ import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Sunil on 22-05-2016.

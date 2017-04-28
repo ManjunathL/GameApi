@@ -11,12 +11,11 @@ import com.mygubbi.search.SearchQueryData;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class ProductSpaceHandler extends AbstractRouteHandler {
 
@@ -32,7 +31,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
         this.post("/deleteprod").handler(this::deleteProduct);
         this.post("/deletespace").handler(this::deleteSpace);
         this.get("/getspacedata").handler(this::getSpaceProducts);
-        this.post("/search").handler(this::search);
+q        this.post("/search").handler(this::search);
     }
 
     private void addLibProductToSpace(RoutingContext context)
@@ -140,7 +139,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
         });
     }
 
-    private void deleteSpaceAddon(RoutingContext context, Jsonobject inputJson)
+    private void deleteSpaceAddon(RoutingContext context, JsonObject inputJson)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("space.delete.addon", inputJson));
         vertx.eventBus().send(DatabaseService.DB_QUERY, id,
@@ -190,18 +189,23 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
 
     private void search(RoutingContext context) {
         JsonObject inputJson = context.getBodyAsJson();
-        query(context, "spaceSearchQueryJson", inputJson);
+        query(context, "searchQueryJson", inputJson);
     }
 
     private void query(RoutingContext context, String queryName, JsonObject inputJson)
     {
+        LOG.info(inputJson.toString());
         String inputTerm = inputJson.getString("term");
         JsonObject facetJson = inputJson.getJsonObject("facets");
         JsonObject filterJson = inputJson.getJsonObject("filter");
 
+        LOG.info(facetJson);
+        LOG.info(filterJson);
+
         JsonObject jsonObject = (JsonObject) ConfigHolder.getInstance().getConfigValue(queryName);
         jsonObject.put("facets", facetJson);
         jsonObject.put("filter", filterJson);
+
         String searchQueryJson = jsonObject.toString().replaceAll("__TERM", inputTerm);
         LOG.info("queryJson:" + searchQueryJson);
 

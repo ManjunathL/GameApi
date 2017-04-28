@@ -8,8 +8,7 @@ import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.*;
 
 import java.util.Date;
 
@@ -18,7 +17,7 @@ import java.util.Date;
  */
 public class FirebaseDataService extends AbstractVerticle
 {
-    private static final Logger LOG = LogManager.getLogger(FirebaseDataService.class);
+    private static final org.apache.log4j.Logger LOG = LogManager.getLogger(FirebaseDataService.class);
 
     public static String UPDATE_DB = "update.firebasedb";
 
@@ -75,7 +74,7 @@ public class FirebaseDataService extends AbstractVerticle
                 @Override
                 public void onCancelled(DatabaseError databaseError)
                 {
-                    LOG.error("Error in updating firebase db. Data:" + dataRequest.toString(), databaseError);
+                    LOG.error("Error in updating firebase db. Data:" + dataRequest.toString() + databaseError);
                     dataRequest.setError(true).setErrorMessage(databaseError.getMessage());
                     message.reply(LocalCache.getInstance().store(dataRequest));
                 }

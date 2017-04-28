@@ -7,7 +7,8 @@ import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
 import com.mygubbi.si.excel.ExcelSheetProcessor;
 import com.mygubbi.si.excel.ExcelStyles;
-import org.apache.logging.log4j.LogManager;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class SalesOrderSheetCreatorForModule implements ExcelCellProcessor
 {
-    private final static org.apache.logging.log4j.Logger LOG = LogManager.getLogger(SalesOrderSheetCreatorForModule.class);
+    private final static Logger LOG = LogManager.getLogger(SalesOrderSheetCreatorForModule.class);
 
     private final AssembledProductInQuote product;
     private Sheet soSheet;

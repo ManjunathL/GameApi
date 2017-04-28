@@ -3,20 +3,16 @@ package com.mygubbi.search;
 import com.mygubbi.ServerVerticle;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
-import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.DeploymentOptions;
-import io.vertx.core.Handler;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.elasticsearch.action.index.IndexResponse;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class EsIndexer
 {

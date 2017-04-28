@@ -1,27 +1,19 @@
 package com.mygubbi.db;
 
-import com.hazelcast.nio.serialization.Data;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.mygubbi.common.LocalCache;
 import com.mygubbi.config.ConfigHolder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.core.HazelcastInstance;
-import com.mygubbi.common.LocalCache;
+import java.util.*;
 
 public class SequenceIdGenerator extends AbstractVerticle
 {
@@ -73,7 +65,7 @@ public class SequenceIdGenerator extends AbstractVerticle
 				}
 				else if (result.failed())
 				{
-					LOG.error("Sequence not obtained for " + table, resultData.errorMessage);
+					LOG.error("Sequence not obtained for " + table + ": " +  resultData.errorMessage);
 					errors.add(table + " : " + resultData.errorMessage);
 				}
 			});

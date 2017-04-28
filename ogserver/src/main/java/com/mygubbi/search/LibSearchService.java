@@ -7,8 +7,8 @@ import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
@@ -31,8 +31,8 @@ import java.util.Map;
 public class LibSearchService extends AbstractVerticle {
     private final static Logger LOG = LogManager.getLogger(LibSearchService.class);
     private Node node;
-    private Client client;
 
+    private Client client;
     public static final String INDEX = "index";
     public static final String PREPARE = "prepare";
     public static final String SEARCH = "search";

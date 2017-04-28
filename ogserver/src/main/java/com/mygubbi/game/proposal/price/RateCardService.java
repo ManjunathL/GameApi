@@ -6,14 +6,17 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.game.proposal.model.PriceMaster;
+import com.mygubbi.game.proposal.model.PriceMasterKey;
+import com.mygubbi.game.proposal.model.RateCard;
+import com.mygubbi.game.proposal.model.RateCardMaster;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -48,7 +51,7 @@ public class RateCardService extends AbstractVerticle
 					QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
 					if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
 					{
-						LOG.debug("Rate Card master table is empty.", false);
+						LOG.debug("Rate Card master table is empty.");
 						startFuture.fail("Rate card master is empty");
 						return;
 					}
@@ -60,7 +63,7 @@ public class RateCardService extends AbstractVerticle
 							RateCardMaster rateCardMaster = RateCardMaster.fromJson(record);
 							this.rateCardMap.put(rateCardMaster.getCodeTypeKey(), rateCardMaster);
 						}
-						LOG.debug("Rate Card master done.", true);
+						LOG.debug("Rate Card master done.");
 						setupPriceMasters(startFuture);
 					}
 				});
@@ -73,7 +76,7 @@ public class RateCardService extends AbstractVerticle
 					QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
 					if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
 					{
-						LOG.debug("Price master table is empty.", false);
+						LOG.debug("Price master table is empty.");
 						startFuture.fail("Price master is empty");
 						return;
 					}
@@ -86,7 +89,7 @@ public class RateCardService extends AbstractVerticle
 							this.priceMasterMap.put(priceMaster.getKey(), priceMaster);
 							LOG.debug("Setting price master for :" + priceMaster.getKey().toString());
 						}
-						LOG.debug("Price master done.", true);
+						LOG.debug("Price master done.");
 						startFuture.complete();
 					}
 				});

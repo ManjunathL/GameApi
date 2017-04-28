@@ -3,8 +3,8 @@ package com.mygubbi.game.proposal.price;
 import com.mygubbi.game.proposal.model.AccHwComponent;
 import com.mygubbi.game.proposal.model.IModuleComponent;
 import com.mygubbi.game.proposal.model.PriceMaster;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 

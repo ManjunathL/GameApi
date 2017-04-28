@@ -1,5 +1,7 @@
 package com.mygubbi.db;
 
+import com.mygubbi.common.LocalCache;
+import com.mygubbi.config.ConfigHolder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -8,12 +10,8 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.SQLConnection;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.mygubbi.config.ConfigHolder;
-import com.mygubbi.common.LocalCache;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class DatabaseService extends AbstractVerticle
 {
