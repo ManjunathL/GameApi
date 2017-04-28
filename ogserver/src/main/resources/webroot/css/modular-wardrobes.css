@@ -248,6 +248,24 @@ ul, ol{
     outline-offset: 0px;
 }
 
+.btn-enquiry{
+    color: #ffffff;
+    border-color: #ba2028;
+    background: #ba2027;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 9px 17px;
+    border-radius: 0px;
+}
+
+.btn-enquiry:hover,
+.btn-enquiry:active,
+.btn-enquiry:focus{
+    color: #ffffff;
+    border-color: #84171d;
+    background: #84171d;
+}
+
 .section-fun-facts{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481286071/red-plum/plum-offer.png");
     background-repeat: no-repeat;
@@ -411,11 +429,10 @@ ul, ol{
 }
 
 #owl-testimonial p{
-    font-size: 18px;
-    font-style: italic;
-    text-align: left;
+    font-size: 14px;
+    text-align: justify;
     padding: 10px 15px 0px;
-    font-weight: 100;
+    font-weight: 400;
 }
 .mod-testimonial{
     background: #4eb9b6;
@@ -792,6 +809,16 @@ ul, ol{
     font-weight: 600;
     font-size: 36px;
     font-family: 'Lato', sans-serif;
+    color: #ba2220;
+}
+
+.cucumber-form.mw h3 {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 36px;
+    font-family: 'Lato', sans-serif;
+    color: #ffffff;
 }
 
 .cucumber-form .form-control{
@@ -821,36 +848,33 @@ ul, ol{
     font-family: 'Lato', sans-serif;
 }
 
-.btn-mkc{
-    color: #ffffff;
-    border-color: #ba2220;
-    background: #ba2220;
-    font-size: 20px;
-    font-family: 'Lato', sans-serif;
-}
-
 .btn-cucumber:hover,
 .btn-cucumber:active,
 .btn-cucumber:focus{
     color: #000;
     border-color: #ffe241;
     background: #ffe241;
-    outline: thin dotted;
-    outline: 0px auto -webkit-focus-ring-color;
-    outline-offset: 0px;
     font-family: 'Lato', sans-serif;
 }
+
+.btn-mkc{
+    color: #ffffff;
+    border-color: #ba2220;
+    background: #ba2220;
+    font-size: 18px;
+    font-width: 600;
+    font-family: 'Lato', sans-serif;
+}
+
 .btn-mkc:hover,
 .btn-mkc:active,
 .btn-mkc:focus{
     color: #ffffff;
     border-color: #ba2220;
     background: #ba2220;
-    outline: thin dotted;
-    outline: 0px auto -webkit-focus-ring-color;
-    outline-offset: 0px;
     font-family: 'Lato', sans-serif;
 }
+
 .btn-cucumber-red{
     color: #ffffff;
     border-color: #ba2027;
@@ -889,6 +913,7 @@ ul, ol{
     color: #ffffff;
     padding: 20px 0px 50px;
 }
+
 .section-cucu-interior-facts{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/offer-bg_02.jpg");
     background-repeat: no-repeat;
@@ -907,6 +932,7 @@ ul, ol{
     color: #ffffff;
     padding: 20px 0px 50px;
 }
+
 .cucumber-why-us-head{
     font-weight: 300;
     color: #126612;
@@ -916,17 +942,23 @@ ul, ol{
     padding: 30px 0px 50px;
     margin: 0px;
 }
+
 .cucumber-choose-head{
     font-weight: 600;
     color: #ba2027;
 }
+
 .whyus-fnt{
     font-weight: 600;
-    color: #ffffff;
-    font-size: 14px;
-    text-shadow: 0px 0px 0px #2e4042;
-    font-family: 'Abel', sans-serif;
+    color: #333;
+    font-size: 16px;
 }
+.de_count .whyus-fnt{
+    font-weight: 600;
+    color: #fff;
+    font-size: 16px;
+}
+
 .whyus-fnt-weight{
     font-weight: 300;
     color: #2e4042;
@@ -934,6 +966,7 @@ ul, ol{
     /* text-shadow: 0px 0px 0px #2e4042; */
     font-family: 'Abel', sans-serif;
 }
+
 .cucumber-gallery-section {
     background: #ffffff;
     padding: 0px;
@@ -946,6 +979,7 @@ ul, ol{
     margin: 0px !important;
     padding: 10px 0px 5px;
 }
+
 .cucumber-gallery-txt{
     position: absolute;
     bottom: 0;
@@ -956,35 +990,37 @@ ul, ol{
     padding-left: 0;
     text-align: left;
 }
+
 .cucumber-gallery-subtxt{
     padding: 20px 120px;
 }
+
 .slidhead{
     font-size: 40px;
     font-weight: 300;
     font-family: 'Abel', sans-serif;
     text-align: right;
 }
+
 .slidpara{
     font-size:12px;
 }
+
 .andfnt{
     font-size: 30px;
     padding-bottom: 0px;
     padding-top: 25px;
 }
+
 .morfnt{
     font-size: 35px;
     font-weight: 600;
 }
+
 .cucumber-footer {
     padding: 10px 0px 5px 25px;
     background: #96dbd6;
     color: #333;
-}
-.cucu-testimonial{
-    font-size: 15px !important;
-    color: #111;
 }
 
 .cucu-testimonialtxt{
@@ -996,24 +1032,50 @@ ul, ol{
 .mod-green{
     color: #126612;
 }
+
 .mod-red{
     color: #ba2027;
 }
+
 .mod-head{
     border-bottom: 1px solid #333;
     display: inline-block;
     padding: 10px;
 }
 
-.nav-tabs { border-bottom: 2px solid #DDD; }
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+
+.mod-cerbg{
+    position: absolute;
+    bottom: 15px;
+    margin-left: -15px;
+}
+
+.mod-cer{
+    position: absolute;
+    bottom: 15px;
+    margin-left: -15px;
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #DDD;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    border-width: 0;
+}
+
 .nav-tabs > li > a {
     border: none;
     color: #126612;
     background: #8bd5d5;
+    font-weight: 600;
+    margin: 0px 1px;
 }
 
-.nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+.nav-tabs > li.active > a,
+.nav-tabs > li > a:hover {
     border: none;
     color: #ffffff !important;
     background: #ba2027!important;
@@ -1022,7 +1084,7 @@ ul, ol{
 
 .nav-tabs > li > a::after {
     content: "";
-    background: #4285F4;
+    background: #ba2027;
     height: 2px;
     position: absolute;
     width: 100%;
@@ -1031,16 +1093,25 @@ ul, ol{
     transition: all 250ms ease 0s;
     transform: scale(0);
 }
-.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+
+.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+    transform: scale(1);
+}
 
 .tab-nav > li > a::after {
     background: #ba2027;
     color: #fff;
 }
+
 .tab-pane {
     position: relative;
-padding:0; }
-.tab-content{padding:0px}
+    padding:0;
+    border-top: 2px solid #ba2027;
+}
+
+.tab-content{
+    padding:0px
+}
 
 .nav-tabs.nav-justified>li>a{
     border-radius:0px;
@@ -1064,6 +1135,14 @@ padding:0; }
     text-align: center;
 }
 
+@media (max-width: 768px) {
+    #owl-testimonial .item{
+        margin: 0px;
+    }
+    #owl-testimonial p{
+        padding: 25px;
+    }
+}
 @media (max-width: 420px) {
     .cucumber_banner_bg {
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492594655/landing_page/modular-wardrobes/Hero-image.jpg");
@@ -1147,5 +1226,25 @@ padding:0; }
         position: relative;
         left: 0%;
         top: 0%;
+    }
+    .mkc-dec{
+        position: relative;
+        width:100%;
+        background: rgba(0, 0, 0, 0.0);
+        color: #333;
+        bottom: 0px;
+        padding: 15px;
+        text-align: justify;
+    }
+    .de_count .whyus-fnt{
+        font-weight: 600;
+        color: #333;
+        font-size: 16px;
+    }
+    #owl-testimonial .item{
+        margin: 0px;
+    }
+    #owl-testimonial p{
+        padding: 25px;
     }
 }
