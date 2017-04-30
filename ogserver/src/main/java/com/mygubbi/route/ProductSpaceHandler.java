@@ -31,7 +31,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
         this.post("/deleteprod").handler(this::deleteProduct);
         this.post("/deletespace").handler(this::deleteSpace);
         this.get("/getspacedata").handler(this::getSpaceProducts);
-q        this.post("/search").handler(this::search);
+        this.post("/search").handler(this::search);
     }
 
     private void addLibProductToSpace(RoutingContext context)
