@@ -193,6 +193,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             newTotalVersionAddonCost += addonRate.getPrice();
                             addonLineItem.setRate(addonRate.getPrice());
                             addonLineItem.setAmount(addonRate.getPrice() * addonLineItem.getQuantity());
+                            addonLineItem.setFromVersion(proposalVersion.getVersion());
                             updateAddonPrice(addonLineItem);
                         }
                         double totalVersionAmount = proposalVersion.getAmount() + newTotalVersionAddonCost;

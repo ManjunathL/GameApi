@@ -142,5 +142,11 @@ public class ProductAddon extends JsonObject
         this.put(AMOUNT, amount);
         return this;
     }
+
+    public ProductAddon setFromVersion(String version)
+    {
+        this.put(FROM_VERSION, version);
+        return this;
+    }
 }
 

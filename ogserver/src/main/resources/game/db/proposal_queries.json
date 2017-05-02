@@ -1236,6 +1236,64 @@
       "query": "select * from product_library_master where category=?",
       "params": ["category"],
       "jsonfields":[]
+    },
+    //Product Library
+    {
+      "id": "proposal.product.insertproductlibray",
+      "type": "insert",
+      "table": "product_library",
+      "query": "insert into product_library (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source,subCategory,productDescription,variant,variantDescription,imageurl,productTitle) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)",
+      "params": ["proposalId","fromVersion", "title", "seq","manualSeq","type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
+        "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
+        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","variant","variantDescription","imageurl","productTitle"]
+    },
+    {
+      "id": "proposal.product.updateproductlibray",
+      "type": "update",
+      "table": "product_library",
+      "query": "update product_library set title=?, seq=?,manualSeq=?, type=?, roomCode=?, productCategoryCode=?, catalogueId=?, catalogueName=?, makeTypeCode=?, baseCarcassCode=?, wallCarcassCode=?, finishTypeCode=?, finishCode=?, designCode=?, dimension=?, quantity=?, amount=?, quoteFilePath=?, modules=?, addons=?, createdBy=?, costWoAccessories=?,profit=?,margin=?,amountWoTax=?,manufactureAmount=?,source=?,subCategory=?,productDescription=?,variant=?,variantDescription=?,imageurl=?,productTitle=? where proposalId=?",
+      "params": ["title", "seq","manualSeq","type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
+        "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
+        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","variant","variantDescription","imageurl","productTitle","proposalId"]
+    },
+    {
+      "id": "proposal.searchproductlibray",
+      "type": "select",
+      "table": "product_library",
+      "query": "select * from product_library where productTitle = ? ",
+      "params": ["productTitle"],
+      "jsonfields":["modules", "addons"]
+    },
+    {
+      "id": "proposal.selectproductlibray",
+      "type": "select",
+      "table": "product_library",
+      "query": "select * from product_library",
+      "params": [],
+      "jsonfields":["modules", "addons"]
+    },
+    {
+      "id": "proposal.product.addtoproposalproduct",
+      "type": "insert",
+      "table": "proposal_product",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source) select ?,?, title,?,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source from product_library where id=?",
+      "params": ["proposalId","fromVersion","seq","id"]
+    },
+    {
+      "id": "proposal.selectproductlibrarybasedonid",
+      "type": "select",
+      "table": "product_library",
+      "query": "select * from product_library where id=?",
+      "params": ["id"],
+      "jsonfields":["modules", "addons"]
+    },
+    {
+      "id": "proposal.selectcategorybasedonproduct",
+      "type": "select",
+      "table": "product_library_master",
+      "query": "select * from product_library_master where category=?",
+      "params": ["category"],
+      "jsonfields":[]
     }
   ]
 }
