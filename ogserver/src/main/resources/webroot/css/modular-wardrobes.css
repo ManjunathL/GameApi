@@ -296,16 +296,21 @@ ul, ol{
 
 .fact-des{
     text-transform: uppercase;
-    padding-bottom: 20px;
     display: block;
+}
+.fact-des-works{
+    text-transform: uppercase;
+    display: block;
+    font-size:9px;
 }
 
 .de_count {
-    min-height: 160px;
+    min-height: 130px;
 }
 
 .de_count img{
     max-height: 140px;
+    width: 90px;
 }
 
 .section-why-us{
@@ -501,7 +506,7 @@ ul, ol{
     }
 
     .de_count {
-        min-height: 230px;
+        min-height: 130px;
     }
     .section-fun-facts{
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1481719166/red-plum/BG_pattern.jpg");
@@ -624,6 +629,9 @@ ul, ol{
     .fact-des{
         font-size:12px;
     }
+    .fact-des-works{
+        font-size:12px;
+    }
     .festive-why-us-head{
         font-size: 26px;
         padding: 20px 0px;
@@ -670,7 +678,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492594655/landing_page/modular-wardrobes/Hero-image.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 580px;
+    min-height: 520px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -688,7 +696,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492680439/landing_page/kitchen-cabinets/Hero_image_banner.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 580px;
+    min-height: 520px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -702,11 +710,31 @@ ul, ol{
     text-align: center;
     color: #ffffff;
 }
+
+.cuc-sale-bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1493894890/landing_page/modular-wardrobes/cucu-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 520px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+
 .banner-why-us-box{
     padding: 15px;
     color: #ffffff;
     background: rgba(0, 0, 0, 0.7);
-    margin-top: 45%;
+    margin-top: 53%;
 }
 .cool_honeymoon_bg {
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1491570500/cool_honeymoon/Desktop.jpg");
@@ -729,8 +757,8 @@ ul, ol{
 .cucumber-form{
     background: #ba2027;
     color: #ffffff;
-    padding: 50px 20px;
-    min-height: 580px;
+    padding: 60px 20px 30px;
+    min-height: 480px;
 }
 .mkc{
     background: #f7e902;
@@ -956,15 +984,16 @@ ul, ol{
 .de_count .whyus-fnt{
     font-weight: 600;
     color: #fff;
-    font-size: 16px;
+    font-size: 10px;
 }
 
 .whyus-fnt-weight{
-    font-weight: 300;
+    font-weight: 400;
     color: #2e4042;
     font-size: 16px;
-    /* text-shadow: 0px 0px 0px #2e4042; */
-    font-family: 'Abel', sans-serif;
+    margin-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
+    text-transform: capitalize;
 }
 
 .cucumber-gallery-section {
@@ -1041,6 +1070,7 @@ ul, ol{
     border-bottom: 1px solid #333;
     display: inline-block;
     padding: 10px;
+    font-family: 'Raleway', sans-serif;
 }
 
 
