@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.price;
 
+import com.mygubbi.common.DateUtil;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
@@ -98,8 +99,13 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         double totalProposalVersionProductCost = 0;
                         double oldProductCost = 0;
 
+                        String priceDate1 = proposalHeader.getPriceDate();
+                        Date dateToBeUsed = DateUtil.convertDate(priceDate1);
 
-                        Date priceDate = proposalHeader.getPriceDate() != null ? proposalHeader.getPriceDate() : new Date(System.currentTimeMillis());
+                        LOG.debug("Price Date : " + priceDate1);
+                        LOG.debug("Date to be used : " + dateToBeUsed);
+
+                        Date priceDate = priceDate1 != null ? dateToBeUsed : new Date(System.currentTimeMillis());
                         for (JsonObject record : selectData.rows)
                         {
                             double totalProductCost = 0;
@@ -154,7 +160,9 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
         QueryData value = new QueryData("proposal.version.addons.select", proposalVersion);
         Integer id = LocalCache.getInstance().store(value);
         AuditMaster auditMaster = new AuditMaster();
-        Date priceDate = proposalHeader.getPriceDate() != null ? proposalHeader.getPriceDate() : new Date(System.currentTimeMillis());
+        String priceDate1 = proposalHeader.getPriceDate();
+        Date dateToBeUsed = DateUtil.convertDate(priceDate1);
+        Date priceDate = proposalHeader.getPriceDate() != null ? dateToBeUsed : new Date(System.currentTimeMillis());
         LOG.debug("Price Date : " + priceDate);
         LOG.debug("Price Date from proposal header : " + proposalHeader.getPriceDate());
 
