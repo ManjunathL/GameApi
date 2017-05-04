@@ -60,8 +60,9 @@ insert into code_master (lookupType, code, title) values ('psubcategory', 'study
 insert into code_master (lookupType, code, title) values ('psubcategory', 'sidetable', 'Side Table');
 insert into code_master (lookupType, code, title) values ('psubcategory', 'bookrack', 'Book Rack');
 
-insert into code_master (lookupType, code, title) values ('spacecategory', 'kitchen', 'Kitchen');
-insert into code_master (lookupType, code, title) values ('spacecategory', 'living', 'Living');
+insert into code_master (lookupType, code, title) values ('spacecategory', 'Kitchen', 'Kitchen');
+insert into code_master (lookupType, code, title) values ('spacecategory', 'Living', 'Living');
+insert into code_master (lookupType, code, title) values ('spacecategory', 'Bedroom', 'Bedroom');
 
 commit;
 

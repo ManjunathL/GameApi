@@ -32,9 +32,19 @@ public class RouteUtil {
                 .end(new JsonObject().put("status", "error").put("error", message).encode());
     }
 
+    public void sendSuccess(HttpServerResponse response, String message)
+    {
+        response.putHeader("content-type", JSON_TYPE)
+                .end(new JsonObject().put("status", "success").put("message", message).encode());
+    }
+
     public void sendError(RoutingContext context, String message)
     {
         this.sendError(context.response(), message);
+    }
+    public void sendSuccess(RoutingContext context, String message)
+    {
+        this.sendSuccess(context.response(), message);
     }
 
     public void sendJsonResponseFromFile(RoutingContext context, String filePath)

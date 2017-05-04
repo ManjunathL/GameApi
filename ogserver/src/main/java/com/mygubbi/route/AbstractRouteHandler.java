@@ -27,10 +27,18 @@ public abstract class AbstractRouteHandler extends RouterImpl
     {
         routeUtil.sendError(response, message);
     }
-
     protected void sendError(RoutingContext context, String message)
     {
         routeUtil.sendError(context, message);
+    }
+
+    protected void sendSuccess(HttpServerResponse response, String message)
+    {
+        routeUtil.sendSuccess(response, message);
+    }
+    protected void sendSuccess(RoutingContext context, String message)
+    {
+        routeUtil.sendSuccess(context, message);
     }
 
     protected void sendJsonResponseFromFile(RoutingContext context, String filePath)

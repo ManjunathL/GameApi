@@ -29,8 +29,9 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
         this.post("/addcatprod").handler(this::addCatProductToSpace);
         this.post("/addaddon").handler(this::addAddonToSpace);
         this.post("/deleteprod").handler(this::deleteProduct);
+        this.post("/deleteaddon").handler(this::deleteAddon);
         this.post("/deletespace").handler(this::deleteSpace);
-        this.get("/getspacedata").handler(this::getSpaceProducts);
+        this.post("/getspacedata").handler(this::getSpaceProducts);
         this.post("/search").handler(this::search);
     }
 
@@ -50,7 +51,10 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
             else
             {
                 LOG.info("Successfully added product to space");
-                sendJsonResponse(context, "Successfully added product to space");
+                int rowId = selectData.paramsObject.getInteger("id");
+                JsonObject result = new JsonObject();
+                result.put("id", rowId);
+                sendJsonResponse(context, result.toString());
             }
         });
     }
@@ -71,7 +75,10 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
                     else
                     {
                         LOG.info("Successfully added catalogue product to space");
-                        sendJsonResponse(context, "Successfully added catalogue product to space");
+                        int rowId = selectData.paramsObject.getInteger("id");
+                        JsonObject result = new JsonObject();
+                        result.put("id", rowId);
+                        sendJsonResponse(context, result.toString());
                     }
                 });
     }
@@ -92,7 +99,10 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
                     else
                     {
                         LOG.info("Successfully added addon to space");
-                        sendJsonResponse(context, "Successfully added addon to space");
+                        int rowId = selectData.paramsObject.getInteger("id");
+                        JsonObject result = new JsonObject();
+                        result.put("id", rowId);
+                        sendJsonResponse(context, result.toString());
                     }
                 });
     }
@@ -113,10 +123,11 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
             else
             {
                 LOG.info("Successfully deleted product to space");
-                sendJsonResponse(context, "Successfully deleted product from space");
+                sendSuccess(context, "Successfully deleted product from space");
             }
         });
     }
+
 
     private void deleteSpace(RoutingContext context)
     {
@@ -139,6 +150,11 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
         });
     }
 
+    private void deleteAddon(RoutingContext context)
+    {
+        this.deleteSpaceAddon(context, context.getBodyAsJson());
+    }
+
     private void deleteSpaceAddon(RoutingContext context, JsonObject inputJson)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("space.delete.addon", inputJson));
@@ -154,20 +170,14 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
                     else
                     {
                         LOG.info("Successfully deleted space items from addon");
-                        sendJsonResponse(context, "Successfully deleted space");
+                        sendSuccess(context, "Successfully deleted");
                     }
                 });
     }
 
     private void getSpaceProducts(RoutingContext context)
     {
-        String proposalIdStr = context.request().getParam("proposalId");
-        int proposalId = Integer.parseInt(proposalIdStr);
-        String version = context.request().getParam("fromVersion");
-
-        JsonObject inputJson = new JsonObject();
-        inputJson.put("proposalId", proposalId);
-        inputJson.put("fromVersion", version);
+        JsonObject inputJson = context.getBodyAsJson();
 
         Integer id = LocalCache.getInstance().store(new QueryData("spaces.data", inputJson));
         vertx.eventBus().send(DatabaseService.DB_QUERY, id,
