@@ -1096,14 +1096,14 @@
       "id": "space.add.prodcutlib",
       "type": "insert",
       "table": "proposal_product",
-      "query": "INSERT INTO proposal_product (`active`, `proposalId`, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, `spaceName`, `subSpaceName`, description, imageUrl) (SELECT 'Y', ?, `title`, ?, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, 1 as `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, now(), ?, now(), ?,  now(), `costWoAccessories`, ? as `fromVersion`, 0.0 as `profit`, 0.0 as `margin`, 0.0 as `amountWoTax`, 0.0 as `manufactureAmount`, 0 as `manualSeq`, `source`, ? as spaceName, ? as subSpaceName, productDescription, imageUrl FROM product_library WHERE title = ? limit 1)",
+      "query": "INSERT INTO proposal_product (`active`, `proposalId`, pId, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, `spaceName`, `subSpaceName`, description, imageUrl) (SELECT 'Y', ?, title, `title`, ?, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, 1 as `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, now(), ?, now(), ?,  now(), `costWoAccessories`, ? as `fromVersion`, 0.0 as `profit`, 0.0 as `margin`, 0.0 as `amountWoTax`, 0.0 as `manufactureAmount`, 0 as `manualSeq`, `source`, ? as spaceName, ? as subSpaceName, productDescription, imageUrl FROM product_library WHERE title = ? limit 1)",
       "params": ["proposalId", "seq", "createdBy", "updatedBy", "fromVersion", "spaceName", "subSpaceName", "title"]
     },
     {
       "id": "space.add.catalogue",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (`active`, `proposalId`, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, spaceName, subSpaceName, description, imageUrl ) select 'Y', ? as proposalId, `name` as title, ? as seq, 'CATALOGUE' as `type`, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.categoryId')) as roomCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.subcategoryId')) as productCategoryCode, productId as catalogueId, '' as catalogueName,'' as makeTypeCode,  JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultMaterial')) as baseCarcassCode, '' as wallCarcassCode, '' as finishTypeCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultFinish')) as finishCode,'' as designCode, '' as `dimension`, 1 as quantity, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultPrice')) as amount, '' as quoteFilePath, '' as modules, '' as addons, now(), ? as createdBy, now(),  ? as updatedBy, now(), 0 as costWoAccessories, ? as fromVersion,  0 as profit, 0 as `margin`, 0 as `amountWoTax`, 0 as `manufactureAmount`, 0 as manualSeq, '' as source, ?, ?, description, JSON_UNQUOTE(JSON_EXTRACT(productShortJson, '$.image')) as imgUrl from product where productId = ?",
+      "query": "insert into proposal_product (`active`, `proposalId`, pId, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, spaceName, subSpaceName, description, imageUrl ) select 'Y', ? as proposalId, productId, `name` as title, ? as seq, 'CATALOGUE' as `type`, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.categoryId')) as roomCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.subcategoryId')) as productCategoryCode, productId as catalogueId, '' as catalogueName,'' as makeTypeCode,  JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultMaterial')) as baseCarcassCode, '' as wallCarcassCode, '' as finishTypeCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultFinish')) as finishCode,'' as designCode, '' as `dimension`, 1 as quantity, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultPrice')) as amount, '' as quoteFilePath, '' as modules, '' as addons, now(), ? as createdBy, now(),  ? as updatedBy, now(), 0 as costWoAccessories, ? as fromVersion,  0 as profit, 0 as `margin`, 0 as `amountWoTax`, 0 as `manufactureAmount`, 0 as manualSeq, '' as source, ?, ?, description, JSON_UNQUOTE(JSON_EXTRACT(productShortJson, '$.image')) as imgUrl from product where productId = ?",
       "params": ["proposalId", "seq", "createdBy", "updatedBy", "fromVersion", "spaceName", "subSpaceName", "productId"]
     },
     {
@@ -1138,7 +1138,21 @@
       "id": "spaces.data",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from (select pp.id, pp.title, pp.description, pp.`type`, pp.imageUrl, pp.proposalId, pp.fromVersion, pp.spaceName, pp.subSpaceName from proposal_product pp union select pa.id, pa.title, pa.description, pa.categoryCode as type, pa.imageUrl, pa.proposalId, pa.fromVersion, pa.spaceName, pa.subSpaceName from proposal_addon pa) as t where t.proposalId = ? and t.fromVersion = ?",
+      "query": "select * from (select pp.id, pp.title, pp.description, pp.`type`, pp.imageUrl as img, pp.proposalId, pp.fromVersion, pp.spaceName, pp.subSpaceName, 'P' as itemType, pp.pId, pp.active from proposal_product pp union select pa.id, pa.title, pa.description, pa.categoryCode as type, pa.imageUrl as img, pa.proposalId, pa.fromVersion, pa.spaceName, pa.subSpaceName, 'A' as itemType, pa.code as pId, 'Y' as active from proposal_addon pa) as t where t.proposalId = ? and t.fromVersion = ? and t.active = 'Y'",
+      "params": ["proposalId", "fromVersion"]
+    },
+    {
+      "id": "space.delete.products",
+      "type": "update",
+      "table": "proposal_product",
+      "query": "update proposal_product set active = 'N', updatedBy = ?  where proposalId = ? and fromVersion = ?",
+      "params": ["updatedBy", "proposalId", "fromVersion"]
+    },
+    {
+      "id": "space.delete.addons",
+      "type": "delete",
+      "table": "proposal_addon",
+      "query": "delete from proposal_addon where proposalId = ? and fromVersion = ?",
       "params": ["proposalId", "fromVersion"]
     }
   ]

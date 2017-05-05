@@ -132,7 +132,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
     private void deleteSpace(RoutingContext context)
     {
         JsonObject inputJson = context.getBodyAsJson();
-        Integer id = LocalCache.getInstance().store(new QueryData("space.delete.product", inputJson));
+        Integer id = LocalCache.getInstance().store(new QueryData("space.delete.products", inputJson));
         vertx.eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) ->
         {
@@ -145,19 +145,19 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
             else
             {
                 LOG.info("Successfully deleted space items from product");
-                deleteSpaceAddon(context, inputJson);
+                deleteSpaceAddon(context, inputJson, "space.delete.addons");
             }
         });
     }
 
     private void deleteAddon(RoutingContext context)
     {
-        this.deleteSpaceAddon(context, context.getBodyAsJson());
+        this.deleteSpaceAddon(context, context.getBodyAsJson(), "space.delete.addon");
     }
 
-    private void deleteSpaceAddon(RoutingContext context, JsonObject inputJson)
+    private void deleteSpaceAddon(RoutingContext context, JsonObject inputJson, String queryId)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("space.delete.addon", inputJson));
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, inputJson));
         vertx.eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) ->
                 {
@@ -191,7 +191,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
             }
             else
             {
-                LOG.info("Successfully deleted space");
+                LOG.info("Successfully fetched space data");
                 sendJsonResponse(context, selectData.rows.toString());
             }
         });

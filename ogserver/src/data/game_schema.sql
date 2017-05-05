@@ -69,6 +69,7 @@ CREATE TABLE `proposal_product` (
  `id` INT(11) NOT NULL AUTO_INCREMENT,
  `active` CHAR(1) NOT NULL DEFAULT 'A',
  `proposalId` INT(11) NOT NULL,
+ `pId` VARCHAR(255) NOT NULL,
  `title` VARCHAR(255) NOT NULL DEFAULT 'TITLE',
  `seq` INT(11) NOT NULL DEFAULT '0',
  `type` CHAR(16) NOT NULL DEFAULT 'CUSTOMIZED',
@@ -105,7 +106,7 @@ CREATE TABLE `proposal_product` (
  `subSpaceName` varchar(64) not null default 'room',
  `description` varchar(2048) not null default '',
  `imageUrl` varchar(128) not null default '',
-PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`),
  INDEX `proposal_key` (`proposalId`)
 )
 COMMENT='Proposal Products'
