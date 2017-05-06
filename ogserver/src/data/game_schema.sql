@@ -58,6 +58,7 @@ CREATE TABLE `proposal` (
 	`designPartnerName` VARCHAR(128) NULL DEFAULT NULL,
 	`designPartnerEmail` VARCHAR(128) NULL DEFAULT NULL,
 	`designPartnerPhone` VARCHAR(16) NULL DEFAULT NULL,
+	`proposalType` char(1) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`)
 )
 COMMENT='Proposal Master'
@@ -106,6 +107,7 @@ CREATE TABLE `proposal_product` (
  `subSpaceName` varchar(64) not null default 'room',
  `description` varchar(2048) not null default '',
  `imageUrl` varchar(128) not null default '',
+ `proposalType` char(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
  INDEX `proposal_key` (`proposalId`)
 )
@@ -141,7 +143,7 @@ CREATE TABLE `proposal_addon` (
  `categoryCode` VARCHAR(32) NOT NULL DEFAULT 'NA',
  `productTypeCode` CHAR(32) NOT NULL DEFAULT 'All',
  `productSubtypeCode` CHAR(64) NULL DEFAULT NULL,
- `product` CHAR(32) NOT NULL DEFAULT 'All',
+ `product` VARCHAR(64) NOT NULL DEFAULT 'All',
  `brandCode` VARCHAR(32) NULL DEFAULT NULL,
  `catalogueCode` VARCHAR(32) NOT NULL,
  `title` VARCHAR(255) NOT NULL,
@@ -160,6 +162,7 @@ CREATE TABLE `proposal_addon` (
  `subSpaceName` varchar(64) not null default 'room',
  `description` varchar(2048) not null default '',
  `imageUrl` varchar(128) not null default '',
+ `proposalType` char(1) NULL DEFAULT NULL,
  PRIMARY KEY (`id`),
  INDEX `proposalid_key` (`proposalId`)
 )
@@ -484,6 +487,7 @@ CREATE TABLE `version_master` (
 	`discountPercentage` DOUBLE NOT NULL,
 	`discountAmount` DOUBLE NOT NULL,
 	`amount` DOUBLE NOT NULL,
+	`proposalType` char(1) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`)
 )
 COLLATE='latin1_swedish_ci'

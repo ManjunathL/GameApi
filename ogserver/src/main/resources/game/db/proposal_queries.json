@@ -17,10 +17,26 @@
     },
 
     {
+      "id": "d.proposal.list.all",
+      "type": "select",
+      "table": "proposal",
+      "query": "select 'W' as editFlag, id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName,designPartnerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted' and proposalType = 'D'",
+      "params": []
+    },
+
+    {
       "id": "proposal.list.sales",
       "type": "select",
       "table": "proposal",
       "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName,designPartnerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted'",
+      "params": ["userId"]
+    },
+
+    {
+      "id": "d.proposal.list.sales",
+      "type": "select",
+      "table": "proposal",
+      "query": "select IF(salesEmail = ?, 'W', 'R') as editFlag, id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName,designPartnerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted' and proposalType = 'D'",
       "params": ["userId"]
     },
 
@@ -33,10 +49,26 @@
     },
 
     {
+      "id": "d.proposal.list.designer",
+      "type": "select",
+      "table": "proposal",
+      "query": "select IF(designerEmail = ?, 'W', 'R') as editFlag, id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName,designPartnerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where status != 'deleted' and proposalType = 'D'",
+      "params": ["userId"]
+    },
+
+    {
       "id": "proposal.list.designpartner",
       "type": "select",
       "table": "proposal",
       "query": "select id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName, designPartnerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where designPartnerEmail = ?",
+      "params": ["designPartnerEmail"]
+    },
+
+    {
+      "id": "d.proposal.list.designpartner",
+      "type": "select",
+      "table": "proposal",
+      "query": "select id, crmId, version, quoteNo, quoteNoNew, title, status, salesName, designerName, designPartnerName, amount, projectName, pcity, createdOn, createdBy, updatedOn, updatedBy from proposal where designPartnerEmail = ? and proposalType = 'D'",
       "params": ["designPartnerEmail"]
     },
 
@@ -76,8 +108,8 @@
       "id": "proposal.create",
       "type": "insert",
       "table": "proposal",
-      "query": "insert into proposal(status, title, version, createdBy, crmId) values ('Deleted', '', '0.1', ?, ?)",
-      "params": ["createdBy","opportunityId"]
+      "query": "insert into proposal(status, title, version, createdBy, crmId, proposalType) values ('Deleted', '', '0.1', ?, ?, ?)",
+      "params": ["createdBy","opportunityId", "proposalType"]
     },
 
     {
@@ -171,8 +203,8 @@
       "id": "version.createdraft",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount,profit,margin,amountWotax,manufactureAmount) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, '',0.0,0.0,0.0,0.0,0.0,0.0,0.0)",
-      "params": ["fromVersion", "proposalId", "title"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount,profit,margin,amountWotax,manufactureAmount, proposalType) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, '',0.0,0.0,0.0,0.0,0.0,0.0,0.0, ?)",
+      "params": ["fromVersion", "proposalId", "title", "proposalType"]
     },
 
     {
@@ -1096,42 +1128,42 @@
       "id": "space.add.prodcutlib",
       "type": "insert",
       "table": "proposal_product",
-      "query": "INSERT INTO proposal_product (`active`, `proposalId`, pId, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, `spaceName`, `subSpaceName`, description, imageUrl) (SELECT 'Y', ?, title, `title`, ?, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, 1 as `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, now(), ?, now(), ?,  now(), `costWoAccessories`, ? as `fromVersion`, 0.0 as `profit`, 0.0 as `margin`, 0.0 as `amountWoTax`, 0.0 as `manufactureAmount`, 0 as `manualSeq`, `source`, ? as spaceName, ? as subSpaceName, productDescription, imageUrl FROM product_library WHERE title = ? limit 1)",
+      "query": "INSERT INTO proposal_product (`active`, `proposalId`, pId, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, `spaceName`, `subSpaceName`, description, imageUrl, proposalType) (SELECT 'Y', ?, title, `title`, ?, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, 1 as `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, now(), ?, now(), ?,  now(), `costWoAccessories`, ? as `fromVersion`, 0.0 as `profit`, 0.0 as `margin`, 0.0 as `amountWoTax`, 0.0 as `manufactureAmount`, 0 as `manualSeq`, `source`, ? as spaceName, ? as subSpaceName, productDescription, imageUrl, 'D' FROM product_library WHERE title = ? limit 1)",
       "params": ["proposalId", "seq", "createdBy", "updatedBy", "fromVersion", "spaceName", "subSpaceName", "title"]
     },
     {
       "id": "space.add.catalogue",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (`active`, `proposalId`, pId, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, spaceName, subSpaceName, description, imageUrl ) select 'Y', ? as proposalId, productId, `name` as title, ? as seq, 'CATALOGUE' as `type`, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.categoryId')) as roomCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.subcategoryId')) as productCategoryCode, productId as catalogueId, '' as catalogueName,'' as makeTypeCode,  JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultMaterial')) as baseCarcassCode, '' as wallCarcassCode, '' as finishTypeCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultFinish')) as finishCode,'' as designCode, '' as `dimension`, 1 as quantity, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultPrice')) as amount, '' as quoteFilePath, '' as modules, '' as addons, now(), ? as createdBy, now(),  ? as updatedBy, now(), 0 as costWoAccessories, ? as fromVersion,  0 as profit, 0 as `margin`, 0 as `amountWoTax`, 0 as `manufactureAmount`, 0 as manualSeq, '' as source, ?, ?, description, JSON_UNQUOTE(JSON_EXTRACT(productShortJson, '$.image')) as imgUrl from product where productId = ?",
+      "query": "insert into proposal_product (`active`, `proposalId`, pId, `title`, `seq`, `type`, `roomCode`, `productCategoryCode`, `catalogueId`, `catalogueName`, `makeTypeCode`, `baseCarcassCode`, `wallCarcassCode`, `finishTypeCode`, `finishCode`, `designCode`, `dimension`, `quantity`, `amount`, `quoteFilePath`, `modules`, `addons`, `createdOn`, `createdBy`, `updatedOn`, `updatedBy`, `touchtime`, `costWoAccessories`, `fromVersion`, `profit`, `margin`, `amountWoTax`, `manufactureAmount`, `manualSeq`, `source`, spaceName, subSpaceName, description, imageUrl, proposalType ) select 'Y', ? as proposalId, productId, `name` as title, ? as seq, 'CATALOGUE' as `type`, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.categoryId')) as roomCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.subcategoryId')) as productCategoryCode, productId as catalogueId, '' as catalogueName,'' as makeTypeCode,  JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultMaterial')) as baseCarcassCode, '' as wallCarcassCode, '' as finishTypeCode, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultFinish')) as finishCode,'' as designCode, '' as `dimension`, 1 as quantity, JSON_UNQUOTE(JSON_EXTRACT(productJson, '$.defaultPrice')) as amount, '' as quoteFilePath, '' as modules, '' as addons, now(), ? as createdBy, now(),  ? as updatedBy, now(), 0 as costWoAccessories, ? as fromVersion,  0 as profit, 0 as `margin`, 0 as `amountWoTax`, 0 as `manufactureAmount`, 0 as manualSeq, '' as source, ?, ?, description, JSON_UNQUOTE(JSON_EXTRACT(productShortJson, '$.image')) as imgUrl, 'D' from product where productId = ?",
       "params": ["proposalId", "seq", "createdBy", "updatedBy", "fromVersion", "spaceName", "subSpaceName", "productId"]
     },
     {
       "id": "space.add.addon",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "INSERT INTO `proposal_addon` (`seq`, `proposalId`, `fromVersion`, `code`, `categoryCode`, `productTypeCode`, `productSubtypeCode`, `product`, `brandCode`, `catalogueCode`, `title`, `rate`, `quantity`, `amount`, `uom`, `updatedBy`, `touchtime`, `profit`, `margin`, `remarks`, `sourcePrice`, `amountWOTax`, spaceName, subSpaceName, description, imageUrl) select ? as seq, ? as `proposalId`, ? as `fromVersion`, `code`, `categoryCode`, `productTypeCode`, `productSubtypeCode`,  `product`, `brandCode`, `catalogueCode`, `title`, get_addon_price(?, ?) as rate, ? as quantity, 0.0 as amount, `uom`, ?,now(), 0 as `profit`, 0 as margin, '' as remarks, 0 as sourcePrice, 0.0 as amountWOTax, ?, ?, title as description, imagePath as imageUrl   from addon_master where code = ?",
+      "query": "INSERT INTO `proposal_addon` (`seq`, `proposalId`, `fromVersion`, `code`, `categoryCode`, `productTypeCode`, `productSubtypeCode`, `product`, `brandCode`, `catalogueCode`, `title`, `rate`, `quantity`, `amount`, `uom`, `updatedBy`, `touchtime`, `profit`, `margin`, `remarks`, `sourcePrice`, `amountWOTax`, spaceName, subSpaceName, description, imageUrl, proposalType) select ? as seq, ? as `proposalId`, ? as `fromVersion`, `code`, `categoryCode`, `productTypeCode`, `productSubtypeCode`,  `product`, `brandCode`, `catalogueCode`, `title`, get_addon_price(?, ?) as rate, ? as quantity, 0.0 as amount, `uom`, ?,now(), 0 as `profit`, 0 as margin, '' as remarks, 0 as sourcePrice, 0.0 as amountWOTax, ?, ?, title as description, imagePath as imageUrl, 'D'   from addon_master where code = ?",
       "params": ["seq", "proposalId", "fromVersion", "rateId", "priceDate", "quantity", "updatedBy", "spaceName", "subSpaceName", "code"]
     },
     {
       "id": "space.update.addon",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update `proposal_addon` set quantity = ?, updatedBy = ? where id = ?",
+      "query": "update `proposal_addon` set quantity = ?, updatedBy = ? where id = ? and proposalType = 'D'",
       "params": ["quantity", "updatedBy", "id"]
     },
     {
       "id": "space.delete.product",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set active = 'N', updatedBy = ? where id = ?",
-      "params": ["updatedBy", "id"]
+      "query": "delete from proposal_product where id = ? and proposalType = 'D'",
+      "params": ["id"]
     },
     {
       "id": "space.delete.addon",
       "type": "delete",
       "table": "proposal_addon",
-      "query": "delete from proposal_addon where id = ?",
+      "query": "delete from proposal_addon where id = ? and proposalType = 'D'",
       "params": ["id"]
     },
     {
@@ -1143,10 +1175,10 @@
     },
     {
       "id": "space.delete.products",
-      "type": "update",
+      "type": "delete",
       "table": "proposal_product",
-      "query": "update proposal_product set active = 'N', updatedBy = ?  where proposalId = ? and fromVersion = ?",
-      "params": ["updatedBy", "proposalId", "fromVersion"]
+      "query": "delete from proposal_product where proposalId = ? and fromVersion = ?",
+      "params": ["proposalId", "fromVersion"]
     },
     {
       "id": "space.delete.addons",

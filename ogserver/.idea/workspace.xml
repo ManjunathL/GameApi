@@ -5,10 +5,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.log" afterPath="$PROJECT_DIR$/api.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.log.1" afterPath="$PROJECT_DIR$/api.log.1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/game_data.sql" afterPath="$PROJECT_DIR$/src/data/game_data.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/route/AbstractRouteHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/route/AbstractRouteHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/game_schema.sql" afterPath="$PROJECT_DIR$/src/data/game_schema.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductSpaceHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductSpaceHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/route/RouteUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/route/RouteUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/search/LibSearchService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/search/LibSearchService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" afterPath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" />
     </list>
     <list id="d1c8cd9a-1633-405e-852e-aa524b0854f2" name="New changelist" comment="" />
@@ -74,11 +74,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="game_schema.sql" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game_schema.sql" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/data/game_schema.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="167" column="19" lean-forward="false" selection-start-line="167" selection-start-column="19" selection-end-line="167" selection-end-column="19" />
+            <state relative-caret-position="170">
+              <caret line="152" column="18" lean-forward="false" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -87,67 +87,48 @@
       <file leaf-file-name="ProductSpaceHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductSpaceHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="188" column="29" lean-forward="false" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="29" />
-              <folding>
-                <element signature="e#6758#6759#0" expanded="true" />
-                <element signature="e#6829#6830#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/db/DatabaseService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="127" column="24" lean-forward="false" selection-start-line="127" selection-start-column="24" selection-end-line="127" selection-end-column="24" />
+            <state relative-caret-position="159">
+              <caret line="235" column="28" lean-forward="false" selection-start-line="235" selection-start-column="28" selection-end-line="235" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractRouteHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/AbstractRouteHandler.java">
+      <file leaf-file-name="resturls.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/game/resturls.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="36" column="29" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-              <folding>
-                <element signature="e#1619#1620#0" expanded="true" />
-                <element signature="e#1676#1677#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="92">
+              <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RouteUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/RouteUtil.java">
+      <file leaf-file-name="GameApiServerVerticle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="34" column="16" lean-forward="false" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
-              <folding>
-                <element signature="e#2795#2796#0" expanded="true" />
-                <element signature="e#2849#2850#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="34">
+              <caret line="112" column="64" lean-forward="false" selection-start-line="112" selection-start-column="64" selection-end-line="112" selection-end-column="64" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="proposal_queries.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProposalHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="308" column="37" lean-forward="false" selection-start-line="308" selection-start-column="37" selection-end-line="308" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="proposal_queries.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="1140" column="16" lean-forward="false" selection-start-line="1140" selection-start-column="16" selection-end-line="1140" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QueryData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/db/QueryData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="125" column="9" lean-forward="false" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
+            <state relative-caret-position="153">
+              <caret line="1172" column="516" lean-forward="false" selection-start-line="1172" selection-start-column="16" selection-end-line="1172" selection-end-column="516" />
               <folding />
             </state>
           </provider>
@@ -157,36 +138,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>version.create</find>
-      <find>products</find>
-      <find>proposal_</find>
-      <find>proposal_product</find>
-      <find>space.add.catalogue</find>
-      <find>space.add</find>
-      <find>space.add.addon</find>
-      <find>workbench.code.codelookup</find>
-      <find>month</find>
-      <find>createdra</find>
-      <find>deleted</find>
-      <find>update</find>
-      <find>proposal.update</find>
-      <find>proposal/version/getlatestversion</find>
-      <find>version.getlatestversion</find>
-      <find>city/selectCity</find>
-      <find>city.selectCity</find>
-      <find>code</find>
-      <find>code_master</find>
-      <find>lookupTy</find>
-      <find>lookup.codes</find>
-      <find>paramsObject</find>
-      <find>setResult</find>
-      <find>space.add.prodcutlib</find>
       <find>deleteSpaceAddon</find>
       <find>delete.</find>
       <find>update proposal_product set active = 'N' where proposalId</find>
-      <find>proposal_addon</find>
       <find>spaces.data</find>
       <find>getSpaceProducts</find>
+      <find>proposal_product</find>
+      <find>deleteSpace</find>
+      <find>space.delete.product</find>
+      <find>space.delete.addon</find>
+      <find>getRecordsAsText</find>
+      <find>SEARCH_TEXT</find>
+      <find>proposal</find>
+      <find>searchQueryJson</find>
+      <find>INDEX_NAME</find>
+      <find>INDEX_NAME_U</find>
+      <find>userSearch</find>
+      <find>/proposal/</find>
+      <find>create</find>
+      <find>proposal.create</find>
+      <find>proposal.folder.update</find>
+      <find>createdraft</find>
+      <find>version.createdraft</find>
+      <find>version_master</find>
+      <find>insert into proposal</find>
+      <find>/list</find>
+      <find>gapi/proposal/list</find>
+      <find>proposal.list</find>
+      <find>proposal.list.</find>
+      <find>getProposalsDesign</find>
+      <find>proposal_addon</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -486,9 +467,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/route/PaymentHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/route/RelatedProductHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/search/LibSearchService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/si/catalog/ShopifyCatalogConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/si/crm/CrmOutboundApiHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/si/firebase/FirebaseAcknowledger.java" />
@@ -531,12 +509,15 @@
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/ExcelQuoteCreator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/ExcelQuoteSheetCreator.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/src/data/game_schema.sql" />
         <option value="$PROJECT_DIR$/src/data/game_data.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/route/RouteUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/route/AbstractRouteHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/search/LibSearchService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductSpaceHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/game/resturls.json" />
         <option value="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" />
+        <option value="$PROJECT_DIR$/src/data/game_schema.sql" />
       </list>
     </option>
   </component>
@@ -563,6 +544,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -606,7 +588,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -975,7 +956,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32807016" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -986,13 +966,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38737202" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3532423" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993174" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5631579" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2806354" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2987897" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24961714" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1034,27 +1014,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/support/LogServiceVerticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/template/VelocityTemplateProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/rest/RestResponseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/rest/RequestData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1300,34 +1259,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/esspace.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="101" column="18" lean-forward="false" selection-start-line="101" selection-start-column="3" selection-end-line="101" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductSearchHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="48" lean-forward="false" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="121" column="55" lean-forward="true" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/ResponseFromDBHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1335,21 +1270,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="64" lean-forward="false" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/game/resturls.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="349" column="0" lean-forward="true" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/db/DatabaseService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
+        <state relative-caret-position="1972">
           <caret line="127" column="24" lean-forward="false" selection-start-line="127" selection-start-column="24" selection-end-line="127" selection-end-column="24" />
           <folding />
         </state>
@@ -1357,7 +1283,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/db/QueryData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
+        <state relative-caret-position="1989">
           <caret line="125" column="9" lean-forward="false" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
           <folding />
         </state>
@@ -1365,49 +1291,98 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/RouteUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
+        <state relative-caret-position="425">
           <caret line="34" column="16" lean-forward="false" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
-          <folding>
-            <element signature="e#2795#2796#0" expanded="true" />
-            <element signature="e#2849#2850#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/AbstractRouteHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
+        <state relative-caret-position="425">
           <caret line="36" column="29" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
           <folding>
-            <element signature="e#1619#1620#0" expanded="true" />
-            <element signature="e#1676#1677#0" expanded="true" />
+            <element signature="e#1619#1620#0" expanded="false" />
+            <element signature="e#1676#1677#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/game_schema.sql">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/search/SearchService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="167" column="19" lean-forward="false" selection-start-line="167" selection-start-column="19" selection-end-line="167" selection-end-column="19" />
+        <state relative-caret-position="1904">
+          <caret line="135" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/esspace.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/search/LibSearchService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="135" column="56" lean-forward="false" selection-start-line="135" selection-start-column="56" selection-end-line="135" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductSearchHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="40" column="48" lean-forward="true" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductSpaceHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="188" column="29" lean-forward="false" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="29" />
-          <folding>
-            <element signature="e#6758#6759#0" expanded="true" />
-            <element signature="e#6829#6830#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="159">
+          <caret line="235" column="28" lean-forward="false" selection-start-line="235" selection-start-column="28" selection-end-line="235" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/game/resturls.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="112" column="64" lean-forward="false" selection-start-line="112" selection-start-column="64" selection-end-line="112" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="308" column="37" lean-forward="false" selection-start-line="308" selection-start-column="37" selection-end-line="308" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="1172" column="516" lean-forward="false" selection-start-line="1172" selection-start-column="16" selection-end-line="1172" selection-end-column="516" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/game_schema.sql">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="1140" column="16" lean-forward="false" selection-start-line="1140" selection-start-column="16" selection-end-line="1140" selection-end-column="16" />
+          <caret line="152" column="18" lean-forward="false" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="18" />
           <folding />
         </state>
       </provider>

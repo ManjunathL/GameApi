@@ -21,6 +21,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
 
     private final static Logger LOG = LogManager.getLogger(ProductSpaceHandler.class);
     private static final String PRODUCT_TYPE = "items";
+    private static final String USER_TYPE = "users";
 
     public ProductSpaceHandler(Vertx vertx) {
         super(vertx);
@@ -33,6 +34,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
         this.post("/deletespace").handler(this::deleteSpace);
         this.post("/getspacedata").handler(this::getSpaceProducts);
         this.post("/search").handler(this::search);
+        this.post("/usearch").handler(this::userSearch);
     }
 
     private void addLibProductToSpace(RoutingContext context)
@@ -227,4 +229,34 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
                     sendJsonResponse(context, selectData.getResult());
                 });
     }
+
+    private void userSearch(RoutingContext context)
+    {
+        JsonObject inputJson = context.getBodyAsJson();
+        LOG.info(inputJson.toString());
+
+        String inputTerm = inputJson.getString("term");
+        JsonObject facetJson = inputJson.getJsonObject("facets");
+        JsonObject filterJson = inputJson.getJsonObject("filter");
+
+        LOG.info(facetJson);
+        LOG.info(filterJson);
+
+        String queryName = "searchQueryJson";
+        JsonObject jsonObject = (JsonObject) ConfigHolder.getInstance().getConfigValue(queryName);
+        jsonObject.put("facets", facetJson);
+        jsonObject.put("filter", filterJson);
+
+        String searchQueryJson = jsonObject.toString().replaceAll("__TERM", inputTerm);
+        LOG.info("queryJson:" + searchQueryJson);
+
+        Integer id = LocalCache.getInstance().store(new SearchQueryData(LibSearchService.INDEX_NAME_U, new JsonObject(searchQueryJson), USER_TYPE, true));
+        VertxInstance.get().eventBus().send(LibSearchService.SEARCH_TEXT, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+                {
+                    SearchQueryData selectData = (SearchQueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    sendJsonResponse(context, selectData.getResult());
+                });
+    }
+
 }

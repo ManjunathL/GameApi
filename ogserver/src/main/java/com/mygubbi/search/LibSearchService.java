@@ -36,7 +36,9 @@ public class LibSearchService extends AbstractVerticle {
     public static final String INDEX = "index";
     public static final String PREPARE = "prepare";
     public static final String SEARCH = "search";
+    public static final String SEARCH_TEXT = "search.text";
     public static final String INDEX_NAME = "space_lib_index";
+    public static final String INDEX_NAME_U = "user_index";
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
@@ -45,6 +47,7 @@ public class LibSearchService extends AbstractVerticle {
             this.setupPrepareIndexHandler();
             this.setupIndexHandler();
             this.setupQueryHandler();
+            this.setupQueryTextRespHandler();
             startFuture.complete();
         } catch (Exception e) {
             LOG.error("Error in starting search service.", e);
@@ -57,7 +60,11 @@ public class LibSearchService extends AbstractVerticle {
         eb.localConsumer(PREPARE, (Message<Integer> message) -> {
             try {
                 deleteIndex(INDEX_NAME);
+                deleteIndex(INDEX_NAME_U);
+
                 createIndex(INDEX_NAME, ConfigHolder.getInstance().getConfigValue(INDEX_NAME).toString());
+                createIndex(INDEX_NAME_U, ConfigHolder.getInstance().getConfigValue(INDEX_NAME_U).toString());
+
                 message.reply(true);
             } catch (Exception e) {
                 LOG.error("Error in preparting index", e);
@@ -112,6 +119,16 @@ public class LibSearchService extends AbstractVerticle {
             {
                 qData.setResult(this.responseToJson(response));
             }
+            message.reply(LocalCache.getInstance().store(qData));
+        });
+    }
+
+    private void setupQueryTextRespHandler() {
+        EventBus eb = vertx.eventBus();
+        eb.localConsumer(SEARCH_TEXT, (Message<Integer> message) -> {
+            SearchQueryData qData = (SearchQueryData) LocalCache.getInstance().remove(message.body());
+            SearchResponse response = client.prepareSearch(qData.getIndex()).setTypes(qData.getType()).setSource(qData.getQuery().toString()).execute().actionGet();
+            qData.setResult(this.getRecordsAsText(response));
             message.reply(LocalCache.getInstance().store(qData));
         });
     }
