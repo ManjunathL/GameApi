@@ -108,6 +108,7 @@ CREATE TABLE `proposal_product` (
  `description` varchar(2048) not null default '',
  `imageUrl` varchar(128) not null default '',
  `proposalType` char(1) NULL DEFAULT NULL,
+ `spaceCategory` varchar(64) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
  INDEX `proposal_key` (`proposalId`)
 )
@@ -163,6 +164,7 @@ CREATE TABLE `proposal_addon` (
  `description` varchar(2048) not null default '',
  `imageUrl` varchar(128) not null default '',
  `proposalType` char(1) NULL DEFAULT NULL,
+ `spaceCategory` varchar(64) NULL DEFAULT NULL,
  PRIMARY KEY (`id`),
  INDEX `proposalid_key` (`proposalId`)
 )
