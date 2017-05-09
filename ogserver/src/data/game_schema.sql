@@ -504,3 +504,32 @@ declare addon_price double;
 select price into addon_price from price_master where rateId = code and priceDate between fromDate and toDate;
 return addon_price;
 END$$
+
+DROP TABLE IF EXISTS `sow_master`;
+CREATE TABLE `sow_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`spaceCategory` VARCHAR(16) NOT NULL,
+	`sow` TEXT,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `sc_key` (`spaceCategory`)
+)
+COMMENT='SOW master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+;
+
+DROP TABLE IF EXISTS `space_master`;
+CREATE TABLE `space_master` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`spaceCategory` VARCHAR(16) NOT NULL,
+	`spaceName` VARCHAR(64) NOT NULL,
+	`subSpaceName` VARCHAR(64) NOT NULL,
+	`proposalId` INTEGER NOT NULL,
+	`fromVersion` VARCHAR(8) NOT NULL,
+	`sow` TEXT,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `sm_key` (`spaceName`, `subSpaceName`, `proposalId`)
+)
+COMMENT='Space master'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

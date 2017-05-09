@@ -1186,6 +1186,39 @@
       "table": "proposal_addon",
       "query": "delete from proposal_addon where proposalId = ? and fromVersion = ?",
       "params": ["proposalId", "fromVersion"]
+    },
+
+    {
+      "id": "add.spacemaster",
+      "type": "insert",
+      "table": "space_master",
+      "query": "insert into space_master (  spaceCategory, spaceName, subSpaceName, proposalId, fromVersion, sow) values (?, ?, ?, ?, ?, select sow from sow_master where spaceCategory = ?)",
+      "params": [ "spaceCategory", "spaceName", "subSpaceName", "proposalId", "fromVersion", "sowSpaceCategory" ]
+    },
+
+    {
+      "id": "select.spacemaster",
+      "type": "select",
+      "table": "space_master",
+      "query": "select * from space_master where proposalId = ? and fromVersion = ?",
+      "params": [ "proposalId", "fromVersion"]
+    },
+
+    {
+      "id": "update.spacemaster",
+      "type": "update",
+      "table": "space_master",
+      "query": "update space_master set sow = ? where proposalId = ? and fromVersion = ?",
+      "params": [ "sow", "proposalId", "fromVersion" ]
+    },
+
+    {
+      "id": "delete.spacemaster",
+      "type": "delete",
+      "table": "space_master",
+      "query": "delete from space_master where proposalId = ? and fromVersion = ? and spaceName = ?",
+      "params": [ "proposalId", "fromVersion", "spaceName" ]
     }
+
   ]
 }
