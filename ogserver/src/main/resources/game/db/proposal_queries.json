@@ -1192,8 +1192,8 @@
       "id": "add.spacemaster",
       "type": "insert",
       "table": "space_master",
-      "query": "insert into space_master (  spaceCategory, spaceName, subSpaceName, proposalId, fromVersion, sow) values (?, ?, ?, ?, ?, select sow from sow_master where spaceCategory = ?)",
-      "params": [ "spaceCategory", "spaceName", "subSpaceName", "proposalId", "fromVersion", "sowSpaceCategory" ]
+      "query": "insert into space_master (  spaceCategory, spaceName, subSpaceName, proposalId, fromVersion, sow, createdOn, createdBy, updatedBy  ) values ( ?, ?, ?, ?, ?, (select sow from sow_master where spaceCategory = ?), now(), ?, ?)",
+      "params": [ "spaceCategory", "spaceName", "subSpaceName", "proposalId", "fromVersion", "sowSpaceCategory",  "createdBy", "updatedBy" ]
     },
 
     {
@@ -1201,15 +1201,16 @@
       "type": "select",
       "table": "space_master",
       "query": "select * from space_master where proposalId = ? and fromVersion = ?",
-      "params": [ "proposalId", "fromVersion"]
+      "params": [ "proposalId", "fromVersion"],
+      "jsonfields":["sow"]
     },
 
     {
       "id": "update.spacemaster",
       "type": "update",
       "table": "space_master",
-      "query": "update space_master set sow = ? where proposalId = ? and fromVersion = ?",
-      "params": [ "sow", "proposalId", "fromVersion" ]
+      "query": "update space_master set sow = ?, updatedBy = ? where proposalId = ? and fromVersion = ?",
+      "params": [ "sow", "proposalId", "fromVersion", "updatedBy" ]
     },
 
     {
@@ -1218,7 +1219,17 @@
       "table": "space_master",
       "query": "delete from space_master where proposalId = ? and fromVersion = ? and spaceName = ?",
       "params": [ "proposalId", "fromVersion", "spaceName" ]
+    },
+
+    {
+      "id": "select.sow",
+      "type": "select",
+      "table": "sow_master",
+      "query": "select * from sow_master where spaceCategory = ?",
+      "params": [ "spaceCategory" ],
+      "jsonfields":["sow"]
     }
+
 
   ]
 }

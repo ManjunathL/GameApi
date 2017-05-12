@@ -527,6 +527,10 @@ CREATE TABLE `space_master` (
 	`proposalId` INTEGER NOT NULL,
 	`fromVersion` VARCHAR(8) NOT NULL,
 	`sow` TEXT,
+	`createdOn` datetime,
+	`createdBy` varchar(64) not null,
+	`updatedBy` varchar(64) not null,
+	`touchtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `sm_key` (`spaceName`, `subSpaceName`, `proposalId`)
 )

@@ -676,6 +676,51 @@
       "params":["modulecode"],
       "resultfields":[],
       "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/smdata",
+      "source": "db",
+      "query":"select.spacemaster",
+      "params":["proposalId", "fromVersion"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/smadd",
+      "source": "db",
+      "query":"add.spacemaster",
+      "params":["spaceCategory", "spaceName", "subSpaceName", "proposalId", "fromVersion", "sowSpaceCategory",  "createdBy", "updatedBy"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/smupdate",
+      "source": "db",
+      "query":"update.spacemaster",
+      "params":["sow", "proposalId", "fromVersion", "updatedBy"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/proposal/smdelete",
+      "source": "db",
+      "query":"delete.spacemaster",
+      "params":["proposalId", "fromVersion", "spaceName"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/sow",
+      "source": "db",
+      "query":"select.sow",
+      "params":["spaceCategory"],
+      "resultfields":[],
+      "default": "[]"
     }
 
   ]
