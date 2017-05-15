@@ -14,6 +14,10 @@ public class SearchQueryData
 		this(index, query, type, true);
 	}
 
+	public SearchQueryData(String index, JsonObject query) {
+		this(index, query, null, true);
+	}
+
 	public SearchQueryData(String index, JsonObject query, String type, boolean recordsOnly) {
 		this.index = index;
 		this.query = query;
