@@ -24,8 +24,8 @@
 
   "robots.txt": "User-agent: *\nDisallow: /",
 
-  "http_port" : 1445,
-  "https_port" : 1446,
+  "http_port" : 1447,
+  "https_port" : 1448,
   "proposal_docs_folder" : "c:/Users/Public/game_files",
   "templates_folder" : "c:/Users/Public/game_files",
   "price_files_folder" : "c:/Users/Public/game_files/price_files",
