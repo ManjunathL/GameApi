@@ -1,0 +1,55 @@
+{
+  "values": [
+    {
+      "crmId": "SAL-1702-001368",
+      "projectCity": "Bangalore",
+      "displayName": "Kumar",
+      "phone": "+91-9972412161",
+      "address": "Shantinagar Bangalore",
+      "projectName": "My Project",
+      "projectAddress": "",
+      "designerName": "Imran Ali",
+      "designerEmail": "imranali@hotmail.com",
+      "designerPhone": "+91-9972412161",
+      "salesExecName": "Gautam Bolar",
+      "salesExecEmail": "gautam_bolar@hotmail.com",
+      "salesExecPhone": "+91-9972412161",
+      "profileImage": "https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png",
+      "email": "dagmardsilva27@hotmail.com"
+    },
+    {
+      "crmId": "SAL-1702-001369",
+      "projectCity": "Bangalore",
+      "displayName": "Seeta",
+      "phone": "+91-9972412162",
+      "address": "BTM Layout",
+      "projectName": "3bhk Apartment",
+      "projectAddress": "",
+      "designerName": "Shweta",
+      "designerEmail": "shweta@yahoo.com",
+      "designerPhone": "+91-9972412171",
+      "salesExecName": "Gautam Bolar",
+      "salesExecEmail": "gautam_bolar@yahoo.com",
+      "salesExecPhone": "+91-9972412161",
+      "profileImage": "https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png",
+      "email": "seeta@gmail.com"
+    },
+    {
+      "crmId": "SAL-1702-001370",
+      "projectCity": "Bangalore",
+      "displayName": "Chirag",
+      "phone": "+91-9972412233",
+      "address": "Bommanahalli",
+      "projectName": "New House 4BHK",
+      "projectAddress": "",
+      "designerName": "Imran Ali",
+      "designerEmail": "imranali@gmail.com",
+      "designerPhone": "+91-9972412165",
+      "salesExecName": "Gautam Bolar",
+      "salesExecEmail": "gautam_bolar@gmail.com",
+      "salesExecPhone": "+91-9972412161",
+      "profileImage": "https://res.cloudinary.com/mygubbi/image/upload/f_auto/user.png",
+      "email": "chirag@hotmail.com"
+    }
+  ]
+}
