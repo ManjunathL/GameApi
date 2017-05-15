@@ -89,6 +89,19 @@
     },
 
     {
+      "id": "crm.proposal.create",
+      "type": "insert",
+      "table": "crm_profile_data",
+      "query": "insert into crm_profile_data(opportunityId, userId, email, fullJson ) values (?, ?, ?, ?)",
+      "params": [
+        "opportunityId",
+        "userId",
+        "email",
+        "fullJson"
+      ]
+    },
+
+    {
       "id": "proposal.select.updateprice",
       "type": "select",
       "table": "proposal",

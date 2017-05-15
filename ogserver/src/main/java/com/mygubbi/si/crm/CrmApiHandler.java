@@ -32,6 +32,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.SSLContext;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
@@ -54,6 +55,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/createProposal").handler(this::createProposal);
+       // this.get("/").handler(this::test);
       //  this.post("/createCustomer").handler(this::createCustomer);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
@@ -96,7 +98,6 @@ public class CrmApiHandler extends AbstractRouteHandler
         String stringToBeInserted = requestJson.toString();
 
         JsonObject proposalData = new JsonObject().put("title", "Proposal for " + requestJson.getString("email")).put("cname", requestJson.getString("email")).put("designerName", requestJson.getString("designerName")).put("salesExecName", requestJson.getString("salesName"));
-       // proposalData.put("fullJson", requestJson);
         proposalData.put("createdBy", requestJson.getString("designerName"));
         proposalData.put("opportunityId", requestJson.getString("opportunityId"));
         proposalData.put("userId", requestJson.getString("userId"));
@@ -108,12 +109,38 @@ public class CrmApiHandler extends AbstractRouteHandler
         proposalData.put("floorPlanURL", requestJson.getString("floorPlanURL"));
         proposalData.put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
         proposalData.put("salesExecUserId", requestJson.getString("salesExecUserId"));
-
         String Json = requestJson.getString("profile ");
         JsonObject jsonObjectProfile = new JsonObject(Json);
+
         proposalData.put("profile",jsonObjectProfile);
-        LOG.info("PROPOSAL DATA: " +proposalData);
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
+
+        JsonObject crmData = new JsonObject().put("opportunityId", requestJson.getString("opportunityId"))
+                .put("userId", requestJson.getString("userId"))
+                .put("email", requestJson.getString("email"));
+        LOG.info("PROPOSAL DATA: " +crmData);
+
+        JsonObject jsonObj = new JsonObject(requestJson.encodePrettily());
+        crmData.put("fullJson",jsonObj);
+        Integer id = LocalCache.getInstance().store(new QueryData("crm.proposal.create", crmData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in creating proposal.");
+                        LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        LOG.info("Create Proposal in Else");
+                        LOG.info("Done Proposal");
+                        LOG.info("Staring creating profile on website");
+                        createUserOnWebsite(requestJson);
+                        LOG.info("created profile on website");
+                        sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
+                    }
+                });
+        /*Integer id = LocalCache.getInstance().store(new QueryData("proposal.create", proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -140,7 +167,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         LOG.info("Done Proposal");
                         this.updateProposal(routingContext, requestJson, proposalData);
                     }
-                });
+                });*/
     }
 
     private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
@@ -426,5 +453,76 @@ public class CrmApiHandler extends AbstractRouteHandler
         sendError(routingContext.response(), "Credentials not valid");
         return false;
     }
+
+    private void test(RoutingContext routingContext){
+        String str = "{\n" +
+                "  \"opportunityId\" : \"SAL-1705-005514\",\n" +
+                "  \"userId\" : \"admin\",\n" +
+                "  \"first_name\" : \"Test\",\n" +
+                "  \"last_name\" : \"May03\",\n" +
+                "  \"email\" : \"test03@gmail.com\",\n" +
+                "  \"mobile\" : \"+91-7026705125\",\n" +
+                "  \"city\" : \"Bangalore\",\n" +
+                "  \"propertycity\" : \"Kalkere\",\n" +
+                "  \"designerUserId\" : \"ashwini.s@mygubbi.com\",\n" +
+                "  \"designerName\" : \"Ashwini S\",\n" +
+                "  \"designerMobile\" : \"8884442465\",\n" +
+                "  \"salesExecUserId\" : \"admin\",\n" +
+                "  \"salesExecName\" : \"mygubbi Administrator\",\n" +
+                "  \"salesExecMobile\" : \"9900344988\",\n" +
+                "  \"floorPlanURL\" : \"14498426-8264-d237-46ab-5912ecf1d0b6\",\n" +
+                "  \"kDMaxDesignURL\" : \"\",\n" +
+                "  \"profile \" : \"{\\\"2WheelersNo\\\":\\\"\\\",\\\"2WheelersOwned\\\":\\\"0\\\",\\\"address\\\":\\\"\\\",\\\"anniversary\\\":\\\"\\\",\\\"annualIncome\\\":\\\"NULL\\\",\\\"bedroom\\\":\\\"0\\\",\\\"bHK\\\":\\\"3\\\",\\\"birthday\\\":\\\"\\\",\\\"boy\\\":\\\"0\\\",\\\"boyAge\\\":\\\"NULL\\\",\\\"builderName\\\":\\\"mmm\\\",\\\"businessType\\\":\\\"B2C\\\",\\\"callBackCount\\\":\\\"NULL\\\",\\\"carsNo\\\":\\\"\\\",\\\"carsOwn\\\":\\\"0\\\",\\\"currency\\\":\\\"-99\\\",\\\"education\\\":\\\"\\\",\\\"enquiryID\\\":null,\\\"facebookHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"futureFollowupDate\\\":null,\\\"geocode Status\\\":\\\"\\\",\\\"girl\\\":\\\"0\\\",\\\"girlAge\\\":\\\"NULL\\\",\\\"googleHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"intialNotification\\\":null,\\\"kitchen\\\":\\\"1\\\",\\\"latitude\\\":\\\"0.00000000\\\",\\\"linkedInHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"livingDining\\\":\\\"0\\\",\\\"married\\\":\\\"0\\\",\\\"opportunityAmount\\\":null,\\\"parentsInLawsLiveIn\\\":\\\"0\\\",\\\"positionDate\\\":\\\"\\\",\\\"possession\\\":\\\"2017-05-05\\\",\\\"productServiceInterested\\\":\\\"walkkkk\\\",\\\"profession\\\":\\\"\\\",\\\"projectName\\\":\\\"my property\\\",\\\"projectStatus\\\":\\\"Registration_Pending\\\",\\\"propertyAddressCity\\\":null,\\\"propertyType\\\":\\\"Apartment\\\",\\\"siblingLiveIn\\\":\\\"0\\\",\\\"sourceItem\\\":null,\\\"spouseAnnualIncome\\\":\\\"NULL\\\",\\\"spouseBirthday\\\":\\\"\\\",\\\"spouseEmployer\\\":\\\"\\\",\\\"spouseName\\\":\\\"\\\",\\\"spouseProfession\\\":\\\"\\\",\\\"twitter Handle\\\":\\\"http:\\\\/\\\\/\\\",\\\"block\\\":null,\\\"flat\\\":null}\"\n" +
+                "}";
+        JsonObject requestJson = new JsonObject(str);
+        LOG.info("REQuest DATA: " +requestJson.encodePrettily());
+        LOG.info("shruti" +requestJson.getValue("profile"));
+       // JsonObject requestJson = new JsonObject(str);
+        LOG.info("profile DATA: " +requestJson.encodePrettily());
+        JsonObject crmData = new JsonObject().put("opportunityId", requestJson.getString("opportunityId"))
+                .put("userId", requestJson.getString("userId"))
+                .put("email", requestJson.getString("email"));
+        LOG.info("PROPOSAL DATA: " +crmData);
+        JsonObject jsonObj = new JsonObject(requestJson.encodePrettily());
+        crmData.put("fullJson",jsonObj);
+        LOG.info("PROPOSAL DATA: " +crmData.encodePrettily());
+
+        /*Integer id = LocalCache.getInstance().store(new QueryData("crm.proposal.create", crmData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    LOG.info(id);
+                    LOG.info(DatabaseService.DB_QUERY);
+                    LOG.info(selectResult);
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    LOG.info(resultData);
+            if (resultData == null || resultData.rows == null || resultData.rows.isEmpty()) {
+                LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
+            } else {
+                LOG.info("Create Proposal in Else");
+                LOG.info("Done Proposal");
+                LOG.info("Staring creating profile on website");
+                LOG.info("created profile on website");
+
+            }
+
+
+                });*/
+        Integer id = LocalCache.getInstance().store(new QueryData("crm.proposal.create", crmData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData == null)
+                    {
+                        LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        LOG.info("Create Proposal in Else");
+
+                        LOG.info("Done Proposal");
+                    }
+                });
+    }
+
 
 }
