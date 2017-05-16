@@ -26,7 +26,7 @@
 
   "http_port" : 1447,
   "https_port" : 1448,
-  "proposal_docs_folder" : "/mnt/game/proposal",
+  "proposal_docs_folder" : "/mnt/game/proposal/workbench/",
   "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
   "quote_template_PUN" : "/mnt/game/proposal/templates/quote-template-PUN.xlsx",
   "quote_template_CHN" : "/mnt/game/proposal/templates/quote-template-CHN.xlsx",
