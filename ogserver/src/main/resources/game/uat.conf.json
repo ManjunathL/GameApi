@@ -25,7 +25,8 @@
   "fbUrl": "https://mygubbi-uat.firebaseio.com",
   "processfbEvents": true,
   "websiteHost": "52.220.90.92:8685",
-  "acceptSSLCertificates": "true"
+  "acceptSSLCertificates": "true",
+  "sugarcrm_url" : "https://suite.mygubbi.com/mygubbi_crm/soap.php"
 
 }
 

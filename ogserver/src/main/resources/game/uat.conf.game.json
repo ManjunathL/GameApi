@@ -1,6 +1,5 @@
 {
   "version": "0.0.0a",
-
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
@@ -8,27 +7,35 @@
     "user": "admin",
     "password": "OG$#gubi32"
   },
-
+  "urlwithssl": "",
   "ssl_keystore": "ssl/mygubbiprod.jks",
   "ssl_password": "0r@nge123$",
-  "http_port" : 1445,
-  "https_port" : 1446,
-  "proposal_docs_folder" : "/mnt/game/proposal",
-  "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
-  "quote_template_PUN" : "/mnt/game/proposal/templates/quote-template-PUN.xlsx",
-  "quote_template_CHN" : "/mnt/game/proposal/templates/quote-template-CHN.xlsx",
-  "quote_template_MLR" : "/mnt/game/proposal/templates/quote-template-MLR.xlsx",
-  "templates_folder" : "mnt/game/proposal/templates",
-  "price_files_folder" : "mnt/game/proposal/price_files",
-  "jobcard_template" : "/mnt/game/proposal/templates/jobcard-template.xlsx",
-  "salesorder_template" : "/mnt/game/proposal/templates/salesorder-template.xlsx",
+  "http_port": 1445,
+  "https_port": 1446,
+  "proposal_docs_folder": "/mnt/game/proposal",
+  "quote_template": "/mnt/game/proposal/templates/quote-template.xlsx",
+  "quote_template_PUN": "/mnt/game/proposal/templates/quote-template-PUN.xlsx",
+  "quote_template_CHN": "/mnt/game/proposal/templates/quote-template-CHN.xlsx",
+  "quote_template_MLR": "/mnt/game/proposal/templates/quote-template-MLR.xlsx",
+  "templates_folder": "mnt/game/proposal/templates",
+  "price_files_folder": "mnt/game/proposal/price_files",
+  "jobcard_template": "/mnt/game/proposal/templates/jobcard-template.xlsx",
+  "salesorder_template": "/mnt/game/proposal/templates/salesorder-template.xlsx",
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
-
-  "fbServicesJson": "config/test/mygubbi-uat-firebase.json",
-  "fbUrl": "https://mygubbi-uat.firebaseio.com",
+  "queryfiles": [
+    "game/db/proposal_queries.json",
+    "game/db/user_queries.json",
+    "config/queries.json"
+  ],
+  "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
+  "fbUrl": "https://mygubbi.firebaseio.com",
   "processfbEvents": true,
-  "websiteHost": "52.220.90.92:8685",
-  "acceptSSLCertificates": "true"
+  "acceptSSLCertificates": "true",
+  "amazon_s3_bucketname": "designwh",
+  "amazon_s3_access_key": "AKIAJS7FUU6IRYAPHDLQ",
+  "amazon_s3_secret_key": "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",
+  "amazon_uploads_directory": "c:/Users/Public/uploads",
+  "sugarcrm_url" : "https://suite.mygubbi.com/mygubbi_crm/soap.php"
 
 }
 
