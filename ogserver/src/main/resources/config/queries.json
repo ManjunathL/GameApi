@@ -13,6 +13,16 @@
       ]
     },
     {
+      "id": "user_profile.crm.update",
+      "type": "update",
+      "table": "user_profile",
+      "query": "update user_profile set fbid = ? where email = ?",
+      "params": [
+        "fbid",
+        "email"
+      ]
+    },
+    {
       "id": "user_profile.insert_crm",
       "type": "insert",
       "table": "user_profile",
