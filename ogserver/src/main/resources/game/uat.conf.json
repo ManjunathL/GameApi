@@ -1,21 +1,21 @@
 {
   "version": "0.0.0a",
 
-  /*"jdbc": {
+  "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
     "max_pool_size": 20,
     "user": "admin",
     "password": "OG$#gubi32"
-  },*/
+  },
 
-  "jdbc": {
+  /*"jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://localhost/mygubbi-db",
     "max_pool_size": 4,
     "user": "root",
     "password": "root"
-  },
+  },*/
 
   "ssl_keystore": "ssl/mygubbiprod.jks",
   "ssl_password": "0r@nge123$",
