@@ -1,12 +1,20 @@
 {
   "version": "0.0.0a",
 
-  "jdbc": {
+  /*"jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg",
     "max_pool_size": 20,
     "user": "admin",
     "password": "OG$#gubi32"
+  },*/
+
+  "jdbc": {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://localhost/mygubbi-db",
+    "max_pool_size": 4,
+    "user": "root",
+    "password": "root"
   },
 
   "ssl_keystore": "ssl/mygubbiprod.jks",
@@ -26,7 +34,7 @@
   "processfbEvents": true,
   "websiteHost": "52.220.90.92:8685",
   "acceptSSLCertificates": "true",
-  "sugarcrm_url" : "https://suite.mygubbi.com/mygubbi_crm/soap.php"
+  "sugarcrm_url" : "http://52.66.107.178/mygubbi_crm/soap.php"
 
 }
 
