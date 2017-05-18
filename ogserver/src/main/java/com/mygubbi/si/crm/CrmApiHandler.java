@@ -125,9 +125,13 @@ public class CrmApiHandler extends AbstractRouteHandler
                 .put("fbid", "")
                 .put("email", requestJson.getString("email"))
                 .put("profile", jsonArray2.toString());
+        JsonObject crmDataToBeInserted = new JsonObject().put("crmId", crmData.getString("opportunityId"))
+                .put("fbid", "")
+                .put("email", crmData.getString("email"))
+                .put("profile", crmData.getString("profile"));
 
         LOG.info("PROPOSAL DATA: " +crmData);
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", crmData));
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", crmDataToBeInserted));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
