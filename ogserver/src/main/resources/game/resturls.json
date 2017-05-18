@@ -340,15 +340,6 @@
     },
 
     {
-      "uri": "/gapi/temp/userprofile",
-      "source": "db",
-      "query":"proposal.temp.userprofile",
-      "params":[],
-      "resultfields":[],
-      "default": "[]"
-    },
-
-    {
       "uri": "/gapi/codelookup",
       "source": "db",
       "query":"lookup.codes",
@@ -833,8 +824,119 @@
       "params":["crmId"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/selecthandletitle",
+      "source": "db",
+      "query":"module.selecthandletitle",
+      "params":["type"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/selecthandlefinish",
+      "source": "db",
+      "query":"module.selecthandlefinish",
+      "params":["title","type"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/selecthandleThickness",
+      "source": "db",
+      "query":"module.selecthandleThickness",
+      "params":["title","finish","type"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/checkhandlepresent",
+      "source": "db",
+      "query":"module.checkhandlepresent",
+      "params":["code"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/selectfromcodemaster",
+      "source": "db",
+      "query":"module.selectfromcodemaster",
+      "params":["lookupType"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/selectcategory",
+      "source": "db",
+      "query":"proposal.selectcategory",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/selectproductname",
+      "source": "db",
+      "query":"proposal.selectproductname",
+      "params":["productCategoryCode","subCategory"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/selectproductfromlibrary",
+      "source": "db",
+      "query":"proposal.selectproductfromlibrary",
+      "params":["productCategoryCode","subCategory","productTitle"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/sqftcalculation",
+      "source": "db",
+      "query":"module.sqftcalculation",
+      "params":["code"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/selecthandleCode",
+      "source": "db",
+      "query":"module.selecthandlecode",
+      "params":["title","finish","type","thickness"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/handledata",
+      "source": "db",
+      "query":"module.handledata",
+      "params":["code"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/accessoryhandledata",
+      "source": "db",
+      "query":"accessory.handledetails",
+      "params":["apcode","type"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/selecthandleimage",
+      "source": "db",
+      "query":"module.selecthandleimage",
+      "params":["title","finish","type"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/shuttercodeforcombo",
+      "source": "db",
+      "query":"module.shuttercode",
+      "params":["finishCode"],
+      "resultfields":[],
+      "default": "[]"
     }
-
 
   ]
 }

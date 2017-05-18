@@ -28,6 +28,7 @@ public class ProductAddon extends JsonObject
     private static String QUANTITY = "quantity";
     private static String AMOUNT = "amount";
     private static String RATE = "rate";
+    private static String REMARKS = "remarks";
 
 
     public ProductAddon()
@@ -147,6 +148,14 @@ public class ProductAddon extends JsonObject
     {
         this.put(FROM_VERSION, version);
         return this;
+    }
+
+    public  String getREMARKS() {
+        return this.getString(REMARKS);
+    }
+
+    public static void setREMARKS(String REMARKS) {
+        ProductAddon.REMARKS = REMARKS;
     }
 }
 

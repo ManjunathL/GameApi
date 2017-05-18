@@ -918,12 +918,22 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         int index = 1;
         for (ProductAddon addon : addOns)
         {
-            if(("Custom Addon").equals (addon.getCategoryCode()))
+            if(("Custom Addon").equals (addon.getCategoryCode())) {
                 this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-            else {
-                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+            }else if(("Appliances").equals(addon.getCategoryCode()))
+            {
+                this.createProductTitleRow(currentRow,String.valueOf(index), addon.getExtendedTitle());
                 currentRow++;
-                this.createProductSpecificationRow(currentRow,"",addon.getTitle());
+                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
+                currentRow++;
+            }
+            else
+            {
+                this.createProductTitleRow(currentRow,String.valueOf(index), addon.getExtendedTitle());
+                currentRow++;
+                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
+                currentRow++;
+                this.createRowAndFillData(currentRow,null,"Location: " +addon.getREMARKS());
             }
                 currentRow++;
                 index++;

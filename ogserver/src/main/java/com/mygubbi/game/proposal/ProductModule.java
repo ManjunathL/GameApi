@@ -60,7 +60,7 @@ public class ProductModule extends JsonObject
     private static final String COST_WO_ACCESSORIES = "costWoAccessories";
     private static final String ACCESSORY_FLAG = "accessoryflag";
     private static final String HANDLE_CODE = "handleCode";
-    private static final String KNOB_CODE = "KnobCode";
+    private static final String KNOB_CODE = "knobCode";
     private static final String HANDLE_QUANTITY = "handleQuantity";
     private static final String KNOB_QUANTITY = "knobQuantity";
 
