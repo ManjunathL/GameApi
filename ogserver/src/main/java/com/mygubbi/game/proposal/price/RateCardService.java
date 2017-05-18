@@ -120,6 +120,12 @@ public class RateCardService extends AbstractVerticle
 
 	}
 
+	public PriceMaster getHandleOrKnobRate(String code, Date priceDate, String city)
+	{
+		return getPriceMaster(priceDate, city, code, PriceMasterKey.KNOB_OR_HANDLE_TYPE);
+
+	}
+
 	public PriceMaster getFactorRate(String code, Date priceDate, String city)
 	{
 		String rateCardID = RateCard.makeKey(RateCard.FACTOR_TYPE,code);
