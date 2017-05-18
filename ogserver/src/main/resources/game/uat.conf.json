@@ -32,7 +32,7 @@
   "fbServicesJson": "config/test/mygubbi-uat-firebase.json",
   "fbUrl": "https://mygubbi-uat.firebaseio.com",
   "processfbEvents": true,
-  "websiteHost": "52.220.90.92:8685",
+  "websiteHost": "52.74.136.198:8685",
   "acceptSSLCertificates": "true",
   "sugarcrm_url" : "http://52.66.107.178/mygubbi_crm/soap.php"
 
