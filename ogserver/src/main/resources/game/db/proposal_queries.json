@@ -939,9 +939,17 @@
       "id": "workbench.designmaster.create",
       "type": "insert",
       "table": "design_master",
-      "query": "insert into design_master (spaceName,webDisplayName,dFileLocation,primaryImageLocation,secondaryImageLocationJson,l0Location,moodBoardLocation,conceptNote, spaceType, spaceSize, propertyType, spaceDesignStyle, spaceColorStyle, furnitureJson, decorJson, wallTreatmentType, wallMaterial, wallFinishMaterial, wallFinishSwatch, ceilingType, ceilingMaterial, ceilingFinishMaterial, ceilingFinishSwatch, flooringMaterial, flooringFinishSwatch,lighting, designElement, userPersonaJson, designerDetailsJson, taggedProductJson, designerstory ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
-      "params": ["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","lighting","designElement","userPersonaJson","designerDetailsJson","taggedProductJson", "designerstory"],
-      "jsonfields":["secondaryImageLocationJson", "conceptNote","furnitureJson","decorJson","userPersonaJson","designerDetailsJson","taggedProductJson"]
+      "query": "insert into design_master (spaceName,webDisplayName,dFileLocation,primaryImageLocation,secondaryImageLocationJson,l0Location,moodBoardLocation,conceptNote, spaceType, spaceLayout, spaceSize, propertyType, spaceDesignStyle, spaceColorStyle, spaceFeature, furnitureJson, decorJson, wallTreatmentType, wallMaterial, wallFinishMaterial, wallFinishSwatch, ceilingType, ceilingMaterial, ceilingFinishMaterial, ceilingFinishSwatch, flooringMaterial,flooringFinish, flooringFinishSwatch,lighting, designElement, user1, hobby1, profession1, user2, hobby2, profession2, ageGroup, religion, community, designerDetailsJson, taggedProductJson, designerstory ) values (?,?,?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
+      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceLayout","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","spaceFeature", "furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinish","flooringFinishSwatch","lighting","designElement","user1", "hobby1", "profession1", "user2", "hobby2", "profession2","ageGroup", "religion", "community", "designerDetailsJson","taggedProductJson","designerstory"],
+      "jsonfields":["secondaryImageLocationJson", "conceptNote","spaceLayout","spaceFeature", "furnitureJson","decorJson","wallTreatmentType","wallMaterial", "wallFinishMaterial","ceilingType", "ceilingMaterial","flooringMaterial","flooringFinish","designerDetailsJson","taggedProductJson"]
+    },
+    {
+      "id": "workbench.designmaster.update",
+      "type": "update",
+      "table": "design_master",
+      "query": "update design_master set spaceName = ?, webDisplayName = ?, dFileLocation = ?, primaryImageLocation = ? , secondaryImageLocationJson = ? where id = ? ",
+      "params": ["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","id"],
+      "jsonfields":["secondaryImageLocationJson"]
     },
     {
       "id": "workbench.designmaster.select",
@@ -949,7 +957,14 @@
       "table": "design_master",
       "query": "select * from design_master",
       "params": [],
-      "jsonfields":["secondaryImageLocationJson", "conceptNote","furnitureJson","decorJson","userPersonaJson","designerDetailsJson","taggedProductJson"]
+      "jsonfields":["secondaryImageLocationJson","designerDetailsJson","taggedProductJson"]
+    },
+    {
+      "id": "workbench.designmaster.id",
+      "type": "select",
+      "table": "design_master",
+      "query": "select * from design_master where id = ? ",
+      "params": ["id"]
     },
     {
       "id": "workbench.productmaster.create",
@@ -968,7 +983,34 @@
       "params": [],
       "jsonfields":["secondaryImageLocationJson", "spaceJSon","furnitureComponentMaterialJson","designerDetailsJson"]
     },
-
+    {
+      "id": "workbench.productmaster.id",
+      "type": "select",
+      "table": "product_master",
+      "query": "select * from product_master where id = ? ",
+      "params": ["id"]
+    },
+    {
+      "id": "workbench.materialfinishmapping.select",
+      "type": "select",
+      "table": "material_finish_mapping",
+      "query": "select distinct mf.materialName , mf.finishName, mc.componentName from material_finish_mapping mf INNER JOIN material_component_mapping mc on mf.materialName= ? and mc.element = ? ",
+      "params": ["materialName","element"]
+    },
+    {
+      "id": "workbench.finishmapping.select",
+      "type": "select",
+      "table": "finish_mapping",
+      "query": "select * from finish_mapping where finishMaterial = ?",
+      "params": ["finishMaterial"]
+    },
+    {
+      "id": "workbench.designmaster.delete",
+      "type": "delete",
+      "table": "design_master",
+      "query": "delete from design_master where id = ?",
+      "params": ["id"]
+    },
     {
       "id": "workbench.materialcomponentmapping.select",
       "type": "select",
@@ -976,7 +1018,34 @@
       "query": "select distinct mm.materialName from material_component_mapping mm INNER JOIN code_master cm ON mm.componentName = ? and cm.lookupType = 'component'",
       "params": ["componentName"]
     },
-
+    {
+      "id": "workbench.tagproductmaster.create",
+      "type": "insert",
+      "table": "tagproduct_master",
+      "query": "insert into tagproduct_master (productName, imagePath, spaceName) values (?,?,?) ",
+      "params": ["productName","imagePath","spaceName"]
+    },
+    {
+      "id": "workbench.tagproductmaster.select",
+      "type": "select",
+      "table": "tagproduct_master",
+      "query": "select p.id,t.productName,t.imagePath,t.spaceName from tagproduct_master t INNER JOIN product_master p on p.productName=t.productName INNER JOIN design_master d  ON d.spaceName=t.spaceName where d.id= ? ",
+      "params": ["id"]
+    },
+    {
+      "id": "workbench.designmaster.fetch",
+      "type": "select",
+      "table": "design_master",
+      "query": "select d.spaceName , d.primaryImageLocation , d.designerstory , t.productName , t.imagePath from design_master d INNER JOIN tagproduct_master t ON d.spaceName=t.spaceName where d.id=?; ",
+      "params": ["id"]
+    },
+    {
+      "id": "workbench.materialcomponent.select",
+      "type": "select",
+      "table": "code_master",
+      "query": "select cm.title,mm.code,mm.materialName from code_master cm INNER JOIN material_component_mapping mm on cm.title=mm.componentName where cm.lookupType=? and cm.additionalType=? ",
+      "params": ["lookupType","additionalType"]
+    },
     {
       "id": "workbench.productmaster.id",
       "type": "select",
@@ -998,13 +1067,13 @@
       "query": "select d.spaceName , d.primaryImageLocation , d.designerstory , t.productName , t.imagePath from design_master d INNER JOIN tagproduct_master t ON d.spaceName=t.spaceName where d.id=?; ",
       "params": ["id"]
     },
-    {
+    /*{
       "id": "workbench.materialfinishmapping.select",
       "type": "select",
       "table": "material_finish_mapping",
       "query": "select * from material_finish_mapping where materialName = ? ",
       "params": ["materialName"]
-    },
+    }*/
 
     //GaAME accessory related queries
 

@@ -589,14 +589,31 @@
       "uri": "/gapi/workbench/designmaster/create",
       "source": "db",
       "query":"workbench.designmaster.create",
-      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinishSwatch","lighting","designElement","userPersonaJson","designerDetailsJson","taggedProductJson","designerstory"],
+      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceLayout","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","spaceFeature", "furnitureJson","decorJson","wallTreatmentType","wallMaterial","wallFinishMaterial","wallFinishSwatch","ceilingType","ceilingMaterial","ceilingFinishMaterial","ceilingFinishSwatch","flooringMaterial","flooringFinish","flooringFinishSwatch","lighting","designElement","user1", "hobby1", "profession1", "user2", "hobby2", "profession2","ageGroup", "religion", "community", "designerDetailsJson","taggedProductJson","designerstory"],
       "resultfields":[],
       "default": "[]"
-    },{
+    },
+    {
+      "uri": "/gapi/workbench/designmaster/update",
+      "source": "db",
+      "query":"workbench.designmaster.update",
+      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
       "uri": "/gapi/workbench/designmaster/select",
       "source": "db",
       "query":"workbench.designmaster.select",
       "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/designmaster/id",
+      "source": "db",
+      "query":"workbench.designmaster.id",
+      "params":["id"],
       "resultfields":[],
       "default": "[]"
     },
@@ -635,6 +652,81 @@
       "default": "[]"
     },
     {
+      "uri": "/gapi/workbench/materialfinishmapping/id",
+      "source": "db",
+      "query":"workbench.materialfinishmapping.select",
+      "params":["materialName","element"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/finishmapping/material",
+      "source": "db",
+      "query":"workbench.finishmapping.select",
+      "params":["finishMaterial"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/designmaster/delete",
+      "source": "db",
+      "query":"workbench.designmaster.delete",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/workbench/designmaster/fetch",
+      "source": "db",
+      "query":"workbench.designmaster.fetch",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/tagproductmaster/select",
+      "source": "db",
+      "query":"workbench.tagproductmaster.select",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+        "uri": "/gapi/workbench/materialcomponent/select",
+      "source": "db",
+      "query":"workbench.materialcomponent.select",
+      "params":["lookupType","additionalType"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/workbench/materialcomponentmapping/select",
+      "source": "db",
+      "query":"workbench.materialcomponentmapping.select",
+      "params":["componentName"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/tagproductmaster/create",
+      "source": "db",
+      "query":"workbench.tagproductmaster.create",
+      "params":["productName","imagePath","spaceName"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/workbench/productmaster/id",
+      "source": "db",
+      "query":"workbench.productmaster.id",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
       "uri": "/gapi/workbench/designmaster/id",
       "source": "db",
       "query":"workbench.designmaster.id",
@@ -652,10 +744,10 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/workbench/materialfinishmapping",
+      "uri": "/gapi/workbench/materialcomponentmapping/select",
       "source": "db",
-      "query":"workbench.materialfinishmapping.select",
-      "params":["materialName"],
+      "query":"workbench.materialcomponentmapping.select",
+      "params":["materialName","element"],
       "resultfields":[],
       "default": "[]"
     },
@@ -845,5 +937,6 @@
       "resultfields":[],
       "default": "[]"
     }
+
   ]
 }

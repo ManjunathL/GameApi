@@ -101,8 +101,8 @@ public class Proposal extends JsonObject{
         return this;
     }
 
-    public Date getPriceDate() {
-        return (Date) this.getValue(PRICE_DATE);
+    public String getPriceDate() {
+        return this.getString(PRICE_DATE);
     }
 
     public Proposal setPriceDate(Date priceDate) {

@@ -5,6 +5,7 @@ import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -18,37 +19,40 @@ public class FileUploadHandler extends AbstractRouteHandler {
 
     private final static Logger LOG = LogManager.getLogger(FileUploadHandler.class);
 
-    private JsonArray urlJsonArray = null;
-    private String defaultUrl = "https://" + ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname", "designwh") + ".s3-" + Regions.AP_SOUTH_1 + ".amazonaws.com/";
+    private String defaultUrl = "http://" + "designwhimages.mygubbi.com/";
 
 
     AmazonS3FileUploadClient amazonS3FileUploadClient;
 
     public FileUploadHandler(Vertx vertx) {
-        super(vertx);
-        this.route().handler(BodyHandler.create());
-        this.route().handler(BodyHandler.create().setUploadsDirectory(ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "/mnt/uploads")));
 
-        this.post("/").handler(this::fileToAmazon);
+        super(vertx);
+        String amazon_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
+        LOG.debug("path : " + amazon_uploads_directory);
+        this.route().handler(BodyHandler.create().setUploadsDirectory("c:/Users/Public/uploads"));
+
+        this.post("/file").handler(this::fileToAmazon);
         String bucketName = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname", "designwh");
         amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName);
 
     }
 
     private void fileToAmazon(RoutingContext routingContext) {
+        LOG.info("Inside file upload ");
+
         routingContext.response().putHeader("Content-Type", "text/plain");
 
         routingContext.response().setChunked(true);
+        JsonArray urlJsonArray = new JsonArray();
+
 
         for (FileUpload f : routingContext.fileUploads()) {
+            LOG.info("uploading  " + f.fileName() + ":" + f.uploadedFileName());
 
-            amazonS3FileUploadClient.uploadFile(f.fileName(),f.fileName());
+            amazonS3FileUploadClient.uploadFile(f.fileName(),f.uploadedFileName());
             urlJsonArray.add(defaultUrl+f.fileName());
 
         }
         sendJsonResponse(routingContext,urlJsonArray.toString());
-
-        routingContext.response().end();
     }
-
 }

@@ -1,6 +1,7 @@
 package com.mygubbi.si.crm;
 
 
+import com.mygubbi.config.ConfigHolder;
 import com.sugarcrm.www.sugarcrm.Set_entry_result;
 import com.sugarcrm.www.sugarcrm.SugarsoapLocator;
 import com.sugarcrm.www.sugarcrm.SugarsoapPortType;
@@ -73,7 +74,7 @@ public class CrmApiClient
     private void initSoapClient() throws Exception
     {
         try {
-            this.crmPort = new SugarsoapLocator().getsugarsoapPort();
+            this.crmPort = new SugarsoapLocator(ConfigHolder.getInstance().getStringValue("sugarcrm_url","https://suite.mygubbi.com/mygubbi_crm/soap.php")).getsugarsoapPort();
             this.sessionId = this.getSession(USER_NAME, PASSWORD);
             System.out.println("Session id:" + this.sessionId);
         } catch (Exception e) {
