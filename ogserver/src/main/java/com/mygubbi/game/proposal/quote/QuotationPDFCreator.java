@@ -1387,12 +1387,24 @@ public class QuotationPDFCreator
 
         for (ProductAddon addon : addOns)
         {
+            LOG.info("category " +addon.getCategoryCode());
             if(("Custom Addon").equals (addon.getCategoryCode()))
                 this.createRowAndFillData(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-            else {
-                this.createRowAndFillData(tabname, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-                LOG.info("addon title " +addon.getTitle());
+            else if(("Appliances").equals(addon.getCategoryCode()))
+            {
+                this.createProductTitleRow(tabname,String.valueOf(index),addon.getExtendedTitle());
+                this.createRowAndFillData(tabname, null,"Specification: " +addon.getTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+                LOG.info("addon remarks " +addon.getREMARKS());
+            }
+            else
+            {
+                this.createProductTitleRow(tabname,String.valueOf(index),addon.getExtendedTitle());
+                this.createRowAndFillData(tabname, null,"Specification: " +addon.getTitle()+ "\nLocation: " +addon.getREMARKS() , addon.getQuantity(), addon.getRate(), addon.getAmount());
+                LOG.info("addon remarks " +addon.getREMARKS());
+                //this.createRowAndFillData(tabname, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+                /*LOG.info("addon title " +addon.getTitle());
                 this.specificationRow(tabname, "", addon.getTitle());
+                this.specificationRow(tabname,"","");*/
             }
             index++;
         }

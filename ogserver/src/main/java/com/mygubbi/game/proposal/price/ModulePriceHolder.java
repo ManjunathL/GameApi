@@ -46,6 +46,7 @@ public class ModulePriceHolder
     private double shutterCost = 0;
     private double carcassCost = 0;
     private double accessoryCost = 0;
+    private double handleandKnobCost = 0;
     private double hardwareCost = 0;
     private double labourCost = 0;
     private double totalCost = 0;
@@ -139,6 +140,9 @@ public class ModulePriceHolder
                 this.addAccessoryComponent(new ModuleComponent().setComponentCode(addonCode).setQuantity(1));
             }
         }
+        if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
+        LOG.info("productModule.getKnobCode()" +productModule.getKnobCode());
+        if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
     }
 
     private void addComponent(IModuleComponent component, String accPackCode)
@@ -198,6 +202,15 @@ public class ModulePriceHolder
         {
             this.panelComponents.add(new PanelComponent(this, modulePanel, component, accPackCode));
         }
+    }
+
+    private void getHandleOrKnobRate(String code,double quantity)
+    {
+        LOG.info("code " +code + "qty " +quantity);
+        PriceMaster handleAndKnobCost = RateCardService.getInstance().getHandleOrKnobRate(code, this.priceDate, this.city);
+        LOG.info("Price " +handleAndKnobCost);
+        handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
+        LOG.info("value " +handleandKnobCost);
     }
 
     private ModulePanel getModulePanel(IModuleComponent component)
@@ -304,6 +317,7 @@ public class ModulePriceHolder
                 .put("carcassCost", this.round(this.carcassCost, 2))
                 .put("shutterCost", this.round(this.shutterCost, 2))
                 .put("accessoryCost", this.round(this.accessoryCost, 2))
+                .put("handleAndKnobCost", this.round(this.handleandKnobCost, 2))
                 .put("labourCost", this.round(this.labourCost, 2))
                 .put("hardwareCost", this.round(this.hardwareCost, 2))
                 .put("totalCost", this.round(this.totalCost, 2));
@@ -427,7 +441,7 @@ public class ModulePriceHolder
         }else {
             this.labourCost = this.moduleArea * labourRateCard.getRate();
             this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
-            this.totalCost = this.woodworkCost + this.accessoryCost;
+            this.totalCost = this.woodworkCost + this.accessoryCost + handleandKnobCost;
         }
     }
 

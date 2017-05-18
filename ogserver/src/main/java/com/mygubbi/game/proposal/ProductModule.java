@@ -59,6 +59,10 @@ public class ProductModule extends JsonObject
     private static final String ACC_PACK_DEFAULT = "accessoryPackDefault";
     private static final String COST_WO_ACCESSORIES = "costWoAccessories";
     private static final String ACCESSORY_FLAG = "accessoryflag";
+    private static final String HANDLE_CODE = "handleCode";
+    private static final String KNOB_CODE = "knobCode";
+    private static final String HANDLE_QUANTITY = "handleQuantity";
+    private static final String KNOB_QUANTITY = "knobQuantity";
 
     public ProductModule()
     {
@@ -214,6 +218,22 @@ public class ProductModule extends JsonObject
 
     public String getAccPackDefault() {
         return this.getString(ACC_PACK_DEFAULT);
+    }
+
+    public String getHandleCode() {
+        return this.getString(HANDLE_CODE);
+    }
+
+    public String getKnobCode() {
+        return this.getString(KNOB_CODE);
+    }
+
+    public double getHandleQuantity() {
+        return this.getDouble(HANDLE_QUANTITY);
+    }
+
+    public double getKnobQuantity() {
+        return this.getDouble(KNOB_QUANTITY);
     }
 
     public ProductModule setAccPackDefault(String accPackDefault)
