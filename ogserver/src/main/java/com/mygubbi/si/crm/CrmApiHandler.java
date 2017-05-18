@@ -85,8 +85,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                    sendError(routingContext, "customer already exists");
-                    }
+                        updateProposal(routingContext, requestJson);                  }
                 });
     }
 
@@ -152,7 +151,46 @@ public class CrmApiHandler extends AbstractRouteHandler
 
     }
 
-    private void updateProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
+    private void updateProposal(RoutingContext routingContext, JsonObject requestJson)
+    {
+        JsonObject userJson = routingContext.getBodyAsJson();
+        LOG.info("USER JSON:------>");
+        LOG.info(userJson);
+        LOG.info("request Json:------>");
+        LOG.info(requestJson);
+
+        JSONArray jsonArray2 = new JSONArray();
+        jsonArray2.put(requestJson);
+        System.out.println("====jsonArray2");
+        System.out.println(jsonArray2);
+        JsonArray array = new JsonArray();
+        array.add(new JsonObject(requestJson.encodePrettily()));
+        LOG.info("===array");
+        LOG.info(array);
+        JsonObject crmData = new JsonObject().put("crmId", requestJson.getString("opportunityId"))
+                .put("profile", array)
+                .put("email", requestJson.getString("email"));
+
+
+        LOG.info("PROPOSAL DATA: " +crmData);
+
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.update.emailId", crmData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+
+                    LOG.info("Create Proposal in Else");
+                    LOG.info("Done Proposal");
+                    LOG.info("Staring creating profile on website");
+                    createUserOnWebsite(requestJson);
+                    LOG.info("created profile on website");
+                    sendJsonResponse(routingContext, new JsonObject().put("status", "Updated existed profile successfully").toString());
+
+                });
+
+    }
+
+
+    private void updateTestProposal(RoutingContext routingContext, JsonObject requestJson, JsonObject proposalData)
     {
         LOG.info("updateProposal Started");
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.folder.update", proposalData));
