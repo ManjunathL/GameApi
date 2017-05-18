@@ -31,6 +31,8 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.net.ssl.SSLContext;
 import java.io.IOException;
@@ -40,7 +42,8 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import java.util.*;
+
 
 /**
  * Created by sunil on 25-04-2016.
@@ -56,7 +59,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/createProposal").handler(this::createProposal);
-      //this.get("/").handler(this::test);
+     // this.get("/").handler(this::test);
       //  this.post("/createCustomer").handler(this::createCustomer);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
@@ -114,15 +117,16 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject jsonObjectProfile = new JsonObject(Json);
 
         proposalData.put("profile",jsonObjectProfile);
-
+        JSONArray jsonArray2 = new JSONArray();
+        jsonArray2.put(requestJson);
+        System.out.println("====jsonArray2");
+        System.out.println(jsonArray2);
         JsonObject crmData = new JsonObject().put("crmId", requestJson.getString("opportunityId"))
                 .put("fbid", "")
                 .put("email", requestJson.getString("email"))
-                .put("profile", requestJson);
+                .put("profile", jsonArray2.toString());
 
         LOG.info("PROPOSAL DATA: " +crmData);
-        JsonObject jsonObj = new JsonObject(requestJson.encodePrettily());
-        crmData.put("fullJson",jsonObj);
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", crmData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -428,6 +432,19 @@ public class CrmApiHandler extends AbstractRouteHandler
         sendError(routingContext.response(), "Credentials not valid");
         return false;
     }
+    private Map<String, String> parameters(Map<String, List<String>> maplist) {
+        Map<String, String> map = new HashMap<String, String>();
+
+        Set mapSet = (Set) maplist.entrySet();
+        Iterator mapIterator = mapSet.iterator();
+        while (mapIterator.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) mapIterator.next();
+            String keyValue = (String) mapEntry.getKey();
+            List<String> value = (List<String>) mapEntry.getValue();
+            map.put(keyValue, value.get(0));
+        }
+        return map;
+    }
 
     private void test(RoutingContext routingContext){
         String str = "{\n" +
@@ -435,7 +452,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 "  \"userId\" : \"admin\",\n" +
                 "  \"first_name\" : \"Test\",\n" +
                 "  \"last_name\" : \"May03\",\n" +
-                "  \"email\" : \"test009@gmail.com\",\n" +
+                "  \"email\" : \"tes090@gmail.com\",\n" +
                 "  \"mobile\" : \"+91-7026705125\",\n" +
                 "  \"city\" : \"Bangalore\",\n" +
                 "  \"propertycity\" : \"Kalkere\",\n" +
@@ -450,46 +467,29 @@ public class CrmApiHandler extends AbstractRouteHandler
                 "  \"profile \" : \"{\\\"2WheelersNo\\\":\\\"\\\",\\\"2WheelersOwned\\\":\\\"0\\\",\\\"address\\\":\\\"\\\",\\\"anniversary\\\":\\\"\\\",\\\"annualIncome\\\":\\\"NULL\\\",\\\"bedroom\\\":\\\"0\\\",\\\"bHK\\\":\\\"3\\\",\\\"birthday\\\":\\\"\\\",\\\"boy\\\":\\\"0\\\",\\\"boyAge\\\":\\\"NULL\\\",\\\"builderName\\\":\\\"mmm\\\",\\\"businessType\\\":\\\"B2C\\\",\\\"callBackCount\\\":\\\"NULL\\\",\\\"carsNo\\\":\\\"\\\",\\\"carsOwn\\\":\\\"0\\\",\\\"currency\\\":\\\"-99\\\",\\\"education\\\":\\\"\\\",\\\"enquiryID\\\":null,\\\"facebookHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"futureFollowupDate\\\":null,\\\"geocode Status\\\":\\\"\\\",\\\"girl\\\":\\\"0\\\",\\\"girlAge\\\":\\\"NULL\\\",\\\"googleHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"intialNotification\\\":null,\\\"kitchen\\\":\\\"1\\\",\\\"latitude\\\":\\\"0.00000000\\\",\\\"linkedInHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"livingDining\\\":\\\"0\\\",\\\"married\\\":\\\"0\\\",\\\"opportunityAmount\\\":null,\\\"parentsInLawsLiveIn\\\":\\\"0\\\",\\\"positionDate\\\":\\\"\\\",\\\"possession\\\":\\\"2017-05-05\\\",\\\"productServiceInterested\\\":\\\"walkkkk\\\",\\\"profession\\\":\\\"\\\",\\\"projectName\\\":\\\"my property\\\",\\\"projectStatus\\\":\\\"Registration_Pending\\\",\\\"propertyAddressCity\\\":null,\\\"propertyType\\\":\\\"Apartment\\\",\\\"siblingLiveIn\\\":\\\"0\\\",\\\"sourceItem\\\":null,\\\"spouseAnnualIncome\\\":\\\"NULL\\\",\\\"spouseBirthday\\\":\\\"\\\",\\\"spouseEmployer\\\":\\\"\\\",\\\"spouseName\\\":\\\"\\\",\\\"spouseProfession\\\":\\\"\\\",\\\"twitter Handle\\\":\\\"http:\\\\/\\\\/\\\",\\\"block\\\":null,\\\"flat\\\":null}\"\n" +
                 "}";
         JsonObject requestJson = new JsonObject(str);
-        /*LOG.info("REQuest DATA: " +requestJson.encodePrettily());
-        LOG.info("shruti" +requestJson.getValue("profile"));*/
-       // JsonObject requestJson = new JsonObject(str);
-/*
-        LOG.info("profile DATA: " +requestJson.encodePrettily());
-*/
+        JSONObject one = new JSONObject().put("full Json", requestJson.encodePrettily());
+        JSONArray arr = new JSONArray().put(requestJson.encodePrettily());
+        LOG.info(arr);
+        JSONArray one1 = new JSONArray().put(arr);
+
+        LOG.info("arr put");
+
+        JSONObject obj= new JSONObject(str.toString());
+
+        JSONArray jsonArray2 = new JSONArray();
+        jsonArray2.put(obj);
+        System.out.println("====jsonArray2");
+        System.out.println(jsonArray2);
+
         JsonObject crmData = new JsonObject().put("opportunityId", requestJson.getString("opportunityId"))
                 .put("userId", requestJson.getString("userId"))
-                .put("email", requestJson.getString("email"));
-
+                .put("email", requestJson.getString("email"))
+                .put("profile", jsonArray2.toString());
+        LOG.info("===crmData");
+        LOG.info(crmData);
         JsonObject email = new JsonObject().put("email", requestJson.getString("email"));
-/*
-        LOG.info("PROPOSAL DATA: " +crmData);
-*/
-        JsonObject jsonObj = new JsonObject(requestJson.encodePrettily());
-        crmData.put("fullJson",jsonObj);
-/*
-        LOG.info("PROPOSAL DATA: " +crmData.encodePrettily());
-*/
-
-        /*Integer id = LocalCache.getInstance().store(new QueryData("crm.proposal.create", crmData));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    LOG.info(id);
-                    LOG.info(DatabaseService.DB_QUERY);
-                    LOG.info(selectResult);
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    LOG.info(resultData);
-            if (resultData == null || resultData.rows == null || resultData.rows.isEmpty()) {
-                LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
-            } else {
-                LOG.info("Create Proposal in Else");
-                LOG.info("Done Proposal");
-                LOG.info("Staring creating profile on website");
-                LOG.info("created profile on website");
-
-            }
 
 
-                });*/
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", email));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -497,7 +497,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     LOG.info("Check query (ms):" + selectData.responseTimeInMillis);
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        createNewUser(requestJson, routingContext);
+                        createNewUser(crmData, routingContext);
                     }
                     else
                     {
@@ -505,27 +505,23 @@ public class CrmApiHandler extends AbstractRouteHandler
                         updateUser(requestJson, routingContext);
                         LOG.info("Done Proposal");
                     }
-
-        /*Integer id = LocalCache.getInstance().store(new QueryData("crm.proposal.create", crmData));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData == null)
-                    {
-                        LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
-                    }
-                    else
-                    {
-                        LOG.info("Create Proposal in Else");
-
-                        LOG.info("Done Proposal");
-                    }*/
                 });
+    }
+    private static JSONArray convertToArray(JSONObject songsObject) {
+        Iterator objectProperty = songsObject.keys();
+        final JSONArray jsonArray = new JSONArray();
+        while (objectProperty.hasNext()) {
+            String key = (String) objectProperty.next();
+            final JSONObject songObject = new JSONObject();
+            songObject.put(key, songsObject.getString(key));
+            jsonArray.put(songObject);
+        }
+        return jsonArray;
     }
     private void createNewUser(JsonObject jsonData,RoutingContext routingContext )
     {
         LOG.info("Creating input data" +jsonData.encodePrettily());
-        JsonObject userJson = new JsonObject().put("crmId", jsonData.getString("opportunityId")).put("fbid", "").put("email", jsonData.getString("email")).put("profile", jsonData);
+        JsonObject userJson = new JsonObject().put("crmId", jsonData.getString("opportunityId")).put("fbid", "").put("email", jsonData.getString("email")).put("profile", jsonData.getString("profile"));
 
         LOG.info("Create USER" +userJson.encodePrettily());
         // this.sendWelcomeEmail(eventData);
