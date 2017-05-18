@@ -72,11 +72,6 @@ public class CrmApiHandler extends AbstractRouteHandler
         if (!isRequestAuthenticated(routingContext)) return;
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
-        JSONArray jsonArray2 = new JSONArray();
-        jsonArray2.put(requestJson);
-        System.out.println("====jsonArray2");
-        System.out.println(jsonArray2);
-        requestJson.put("full Json", jsonArray2.toString());
         //createCustomer(routingContext);
         String email = requestJson.getString("email");
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
@@ -127,10 +122,14 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject crmData = new JsonObject().put("crmId", requestJson.getString("opportunityId"))
                 .put("fbid", "")
                 .put("email", requestJson.getString("email"))
-                .put("profile", requestJson.getString("Full Json"));
+                .put("profile", jsonArray2.toString());
+        JsonObject crmDataToBeInserted = new JsonObject().put("crmId", crmData.getString("opportunityId"))
+                .put("fbid", "")
+                .put("email", crmData.getString("email"))
+                .put("profile", crmData.getValue("profile"));
 
         LOG.info("PROPOSAL DATA: " +crmData);
-        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", crmData));
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", crmDataToBeInserted));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
