@@ -123,7 +123,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 .put("fbid", "")
                 .put("email", requestJson.getString("email"))
                 .put("profile", jsonArray2.toString());
-        JsonObject crmDataToBeInserted = new JsonObject().put("crmId", crmData.getString("opportunityId"))
+        JsonObject crmDataToBeInserted = new JsonObject().put("crmId", crmData.getString("crmId"))
                 .put("fbid", "")
                 .put("email", crmData.getString("email"))
                 .put("profile", crmData.getValue("profile"));
