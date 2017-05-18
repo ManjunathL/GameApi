@@ -73,22 +73,20 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject requestJson = routingContext.getBodyAsJson();
         LOG.debug("JSON :" + requestJson.encodePrettily());
         //createCustomer(routingContext);
-        createProposal(routingContext, requestJson);
-//        String email = requestJson.getString("email");
-//        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
-//        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-//                (AsyncResult<Message<Integer>> selectResult) -> {
-//                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-//                    if (selectData.rows == null || selectData.rows.isEmpty())
-//                    {
-//                        createCustomer(routingContext, requestJson);
-//                    }
-//                    else
-//                    {
-//                        createProposal(routingContext, requestJson);
-//
-//                    }
-//                });
+        String email = requestJson.getString("email");
+        Integer id = LocalCache.getInstance().store(new QueryData("user_profile.select.email", new JsonObject().put("email", email)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        createProposal(routingContext, requestJson);
+                    }
+                    else
+                    {
+                    sendError(routingContext, "customer already exists");
+                    }
+                });
     }
 
 
@@ -135,20 +133,14 @@ public class CrmApiHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
-                    {
-                        sendError(routingContext, "Error in creating proposal.");
-                        LOG.error("Error in creating proposal. " + resultData.errorMessage, resultData.error);
-                    }
-                    else
-                    {
+
                         LOG.info("Create Proposal in Else");
                         LOG.info("Done Proposal");
                         LOG.info("Staring creating profile on website");
                         createUserOnWebsite(requestJson);
                         LOG.info("created profile on website");
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
-                    }
+
                 });
 
     }
