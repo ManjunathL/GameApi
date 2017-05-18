@@ -144,6 +144,12 @@ public class ProductAddon extends JsonObject
         return this;
     }
 
+    public ProductAddon setFromVersion(String version)
+    {
+        this.put(FROM_VERSION, version);
+        return this;
+    }
+
     public  String getREMARKS() {
         return this.getString(REMARKS);
     }
