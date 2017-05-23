@@ -11,6 +11,16 @@
         "profile",
         "crmId"
       ]
+    },{
+      "id": "user_profile.update.emailId",
+      "type": "update",
+      "table": "user_profile",
+      "query": "update user_profile set profile = ?, crmId = ?  where email = ?",
+      "params": [
+        "profile",
+        "crmId",
+        "email"
+      ]
     },
     {
       "id": "user_profile.crm.update",
