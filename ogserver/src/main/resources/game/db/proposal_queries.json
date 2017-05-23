@@ -1176,26 +1176,26 @@
       "id": "proposal.product.insertproductlibray",
       "type": "insert",
       "table": "product_library",
-      "query": "insert into product_library (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source,subCategory,productDescription,collection,variantDescription,imageurl,productTitle) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)",
+      "query": "insert into product_library (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, designCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source,subCategory,productDescription,collection,variantDescription,imageurl,productTitle,hinge,glass,handleType,handleFinish,handleImage,knobType,knobFinish,knobImage) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)",
       "params": ["proposalId","fromVersion", "title", "seq","manualSeq","type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
         "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
-        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle"]
+        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle","hinge","glass","handleType","handleFinish","handleImage","knobType","knobFinish","knobImage"]
     },
     {
       "id": "proposal.product.updateproductlibray",
       "type": "update",
       "table": "product_library",
-      "query": "update product_library set title=?, seq=?,manualSeq=?, type=?, roomCode=?, productCategoryCode=?, catalogueId=?, catalogueName=?, makeTypeCode=?, baseCarcassCode=?, wallCarcassCode=?, finishTypeCode=?, finishCode=?, designCode=?, dimension=?, quantity=?, amount=?, quoteFilePath=?, modules=?, addons=?, createdBy=?, costWoAccessories=?,profit=?,margin=?,amountWoTax=?,manufactureAmount=?,source=?,subCategory=?,productDescription=?,collection=?,variantDescription=?,imageurl=?,productTitle=? where proposalId=?",
+      "query": "update product_library set title=?, seq=?,manualSeq=?, type=?, roomCode=?, productCategoryCode=?, catalogueId=?, catalogueName=?, makeTypeCode=?, baseCarcassCode=?, wallCarcassCode=?, finishTypeCode=?, finishCode=?, designCode=?, dimension=?, quantity=?, amount=?, quoteFilePath=?, modules=?, addons=?, createdBy=?, costWoAccessories=?,profit=?,margin=?,amountWoTax=?,manufactureAmount=?,source=?,subCategory=?,productDescription=?,collection=?,variantDescription=?,imageurl=?,productTitle=?,hinge=?,glass=?,handleType=?,handleFinish=?,handleImage=?,knobType=?,knobFinish=?,knobImage=? where proposalId=?",
       "params": ["title", "seq","manualSeq","type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
         "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "designCode", "dimension", "quantity", "amount", "quoteFilePath",
-        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle","proposalId"]
+        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle","proposalId","hinge","glass","handleType","handleFinish","handleImage","knobType","knobFinish","knobImage"]
     },
     {
       "id": "proposal.searchproductlibray",
       "type": "select",
       "table": "product_library",
-      "query": "select * from product_library where productTitle = ? ",
-      "params": ["productTitle"],
+      "query": "select * from product_library where productTitle = ? and collection = ?",
+      "params": ["productTitle","collection"],
       "jsonfields":["modules", "addons"]
     },
     {
