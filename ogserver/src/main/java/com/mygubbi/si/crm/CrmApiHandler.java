@@ -60,7 +60,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/createProposal").handler(this::createProposal);
-    // this.get("/").handler(this::test);
+     //this.get("/").handler(this::test);
       //  this.post("/createCustomer").handler(this::createCustomer);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
     }
@@ -115,25 +115,47 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject jsonObjectProfile = new JsonObject(Json);
 
         proposalData.put("profile",jsonObjectProfile);
-        JSONArray jsonArray2 = new JSONArray();
-        jsonArray2.put(requestJson);
-        System.out.println("====jsonArray2");
-        System.out.println(jsonArray2);
+        JsonObject completeJson = new JsonObject().put("opportunityId", requestJson.getString("opportunityId"))
+                .put("userId", requestJson.getString("userId"))
+                .put("first_name", requestJson.getString("first_name"))
+                .put("last_name", requestJson.getString("last_name"))
+                .put("email", requestJson.getString("email"))
+                .put("mobile", requestJson.getString("mobile"))
+                .put("city", requestJson.getString("city"))
+                .put("propertystreet", requestJson.getString("propertystreet"))
+                .put("propertycity", requestJson.getString("propertycity"))
+                .put("designerUserId", requestJson.getString("designerUserId"))
+                .put("designerName", requestJson.getString("designerName"))
+                .put("designerMobile", requestJson.getString("designerMobile"))
+                .put("salesExecUserId", requestJson.getString("salesExecUserId"))
+                .put("salesExecMobile", requestJson.getString("salesExecMobile"))
+                .put("salesExecName", requestJson.getString("salesExecName"))
+                .put("floorPlanURL", requestJson.getString("floorPlanURL"))
+                .put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
+        JsonObject profJson = new JsonObject(requestJson.getString("profile "));
+
+        LOG.info("profJson");
+        LOG.info(profJson.encodePrettily());
+        JsonObject profileJson = new JsonObject(profJson.encodePrettily());
+        LOG.info("profileJson");
+        LOG.info(profileJson.encodePrettily());
+        JsonArray profJsonArr = new JsonArray().add(profileJson);
+        LOG.info("profileJsonArr");
+        LOG.info(profJsonArr.encodePrettily());
+
+        completeJson.put("completeProfile", profJsonArr);
+        LOG.info("completeJson");
+        LOG.info(completeJson.encodePrettily());
+
         JsonArray array = new JsonArray();
-        array.add(new JsonObject(requestJson.encodePrettily()));
+        array.add(new JsonObject(completeJson.encodePrettily()));
         LOG.info("===array");
         LOG.info(array);
         JsonObject crmData = new JsonObject().put("crmId", requestJson.getString("opportunityId"))
                 .put("fbid", "")
                 .put("email", requestJson.getString("email"))
                 .put("profile", array);
-
-
-        LOG.info("PROPOSAL DATA: " +crmData);
-        JSONObject crm = new JSONObject().put("opportunityId", requestJson.getString("opportunityId"))
-                .put("userId", requestJson.getString("userId"))
-                .put("email", requestJson.getString("email"))
-                .put("profile", jsonArray2);
+        JsonArray completeArray = new JsonArray().add(completeJson.encodePrettily());
 
         Integer id = LocalCache.getInstance().store(new QueryData("user_profile.insert", crmData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -158,13 +180,43 @@ public class CrmApiHandler extends AbstractRouteHandler
         LOG.info(userJson);
         LOG.info("request Json:------>");
         LOG.info(requestJson);
+        JsonObject completeJson = new JsonObject().put("opportunityId", requestJson.getString("opportunityId"))
+                .put("userId", requestJson.getString("userId"))
+                .put("first_name", requestJson.getString("first_name"))
+                .put("last_name", requestJson.getString("last_name"))
+                .put("email", requestJson.getString("email"))
+                .put("mobile", requestJson.getString("mobile"))
+                .put("city", requestJson.getString("city"))
+                .put("propertystreet", requestJson.getString("propertystreet"))
+                .put("propertycity", requestJson.getString("propertycity"))
+                .put("designerUserId", requestJson.getString("designerUserId"))
+                .put("designerName", requestJson.getString("designerName"))
+                .put("designerMobile", requestJson.getString("designerMobile"))
+                .put("salesExecUserId", requestJson.getString("salesExecUserId"))
+                .put("salesExecMobile", requestJson.getString("salesExecMobile"))
+                .put("salesExecName", requestJson.getString("salesExecName"))
+                .put("floorPlanURL", requestJson.getString("floorPlanURL"))
+                .put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
+        JsonObject profJson = new JsonObject(requestJson.getString("profile "));
 
+        LOG.info("profJson");
+        LOG.info(profJson.encodePrettily());
+        JsonObject profileJson = new JsonObject(profJson.encodePrettily());
+        LOG.info("profileJson");
+        LOG.info(profileJson.encodePrettily());
+        JsonArray profJsonArr = new JsonArray().add(profileJson);
+        LOG.info("profileJsonArr");
+        LOG.info(profJsonArr.encodePrettily());
+
+        completeJson.put("completeProfile", profJsonArr);
+        LOG.info("completeJson");
+        LOG.info(completeJson.encodePrettily());
         JSONArray jsonArray2 = new JSONArray();
         jsonArray2.put(requestJson);
         System.out.println("====jsonArray2");
         System.out.println(jsonArray2);
         JsonArray array = new JsonArray();
-        array.add(new JsonObject(requestJson.encodePrettily()));
+        array.add(new JsonObject(completeJson.encodePrettily()));
         LOG.info("===array");
         LOG.info(array);
         JsonObject crmData = new JsonObject().put("crmId", requestJson.getString("opportunityId"))
@@ -508,7 +560,39 @@ public class CrmApiHandler extends AbstractRouteHandler
                 "  \"profile \" : \"{\\\"2WheelersNo\\\":\\\"\\\",\\\"2WheelersOwned\\\":\\\"0\\\",\\\"address\\\":\\\"\\\",\\\"anniversary\\\":\\\"\\\",\\\"annualIncome\\\":\\\"NULL\\\",\\\"bedroom\\\":\\\"0\\\",\\\"bHK\\\":\\\"3\\\",\\\"birthday\\\":\\\"\\\",\\\"boy\\\":\\\"0\\\",\\\"boyAge\\\":\\\"NULL\\\",\\\"builderName\\\":\\\"mmm\\\",\\\"businessType\\\":\\\"B2C\\\",\\\"callBackCount\\\":\\\"NULL\\\",\\\"carsNo\\\":\\\"\\\",\\\"carsOwn\\\":\\\"0\\\",\\\"currency\\\":\\\"-99\\\",\\\"education\\\":\\\"\\\",\\\"enquiryID\\\":null,\\\"facebookHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"futureFollowupDate\\\":null,\\\"geocode Status\\\":\\\"\\\",\\\"girl\\\":\\\"0\\\",\\\"girlAge\\\":\\\"NULL\\\",\\\"googleHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"intialNotification\\\":null,\\\"kitchen\\\":\\\"1\\\",\\\"latitude\\\":\\\"0.00000000\\\",\\\"linkedInHandle\\\":\\\"http:\\\\/\\\\/\\\",\\\"livingDining\\\":\\\"0\\\",\\\"married\\\":\\\"0\\\",\\\"opportunityAmount\\\":null,\\\"parentsInLawsLiveIn\\\":\\\"0\\\",\\\"positionDate\\\":\\\"\\\",\\\"possession\\\":\\\"2017-05-05\\\",\\\"productServiceInterested\\\":\\\"walkkkk\\\",\\\"profession\\\":\\\"\\\",\\\"projectName\\\":\\\"my property\\\",\\\"projectStatus\\\":\\\"Registration_Pending\\\",\\\"propertyAddressCity\\\":null,\\\"propertyType\\\":\\\"Apartment\\\",\\\"siblingLiveIn\\\":\\\"0\\\",\\\"sourceItem\\\":null,\\\"spouseAnnualIncome\\\":\\\"NULL\\\",\\\"spouseBirthday\\\":\\\"\\\",\\\"spouseEmployer\\\":\\\"\\\",\\\"spouseName\\\":\\\"\\\",\\\"spouseProfession\\\":\\\"\\\",\\\"twitter Handle\\\":\\\"http:\\\\/\\\\/\\\",\\\"block\\\":null,\\\"flat\\\":null}\"\n" +
                 "}";
         JsonObject requestJson = new JsonObject(str);
-        JSONObject one = new JSONObject().put("full Json", requestJson.encodePrettily());
+        LOG.info("requestJson2");
+        LOG.info(requestJson.getString("profile "));
+        JsonObject completeJson = new JsonObject().put("opportunityId", requestJson.getString("opportunityId"))
+        .put("userId", requestJson.getString("userId"))
+        .put("first_name", requestJson.getString("first_name"))
+        .put("last_name", requestJson.getString("last_name"))
+        .put("email", requestJson.getString("email"))
+        .put("mobile", requestJson.getString("mobile"))
+        .put("city", requestJson.getString("city"))
+        .put("propertystreet", requestJson.getString("propertystreet"))
+        .put("propertycity", requestJson.getString("propertycity"))
+        .put("designerUserId", requestJson.getString("designerUserId"))
+        .put("designerName", requestJson.getString("designerName"))
+        .put("designerMobile", requestJson.getString("designerMobile"))
+        .put("salesExecUserId", requestJson.getString("salesExecUserId"))
+        .put("salesExecMobile", requestJson.getString("salesExecMobile"))
+        .put("salesExecName", requestJson.getString("salesExecName"))
+        .put("floorPlanURL", requestJson.getString("floorPlanURL"))
+        .put("kDMaxDesignURL", requestJson.getString("kDMaxDesignURL"));
+        JsonObject profJson = new JsonObject(requestJson.getString("profile "));
+
+  LOG.info("profJson");
+  LOG.info(profJson.encodePrettily());
+  JsonObject profileJson = new JsonObject(profJson.encodePrettily());
+        LOG.info("profileJson");
+        LOG.info(profileJson.encodePrettily());
+        JsonArray profJsonArr = new JsonArray().add(profileJson);
+        LOG.info("profileJsonArr");
+        LOG.info(profJsonArr.encodePrettily());
+
+        completeJson.put("completeProfile", profJsonArr);
+        LOG.info("completeJson");
+        LOG.info(completeJson.encodePrettily());
         JSONArray arr = new JSONArray().put(requestJson.encodePrettily());
         LOG.info(arr);
         JSONArray one1 = new JSONArray().put(arr);
@@ -530,7 +614,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         JsonObject crmData = new JsonObject().put("opportunityId", requestJson.getString("opportunityId"))
                 .put("userId", requestJson.getString("userId"))
                 .put("email", requestJson.getString("email"))
-                .put("profile", array);
+                .put("profile", profJsonArr);
         LOG.info(crmData);
         JSONObject crm = new JSONObject().put("opportunityId", requestJson.getString("opportunityId"))
                 .put("userId", requestJson.getString("userId"))
