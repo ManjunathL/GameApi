@@ -551,7 +551,7 @@
 
 
     {
-      "uri": "/gapi/proposal/accProdetails",
+      "uri": "/gapi/proposal/accdetails",
       "source": "db",
       "query":"accessory.details",
       "params":["apcode"],
