@@ -35,6 +35,7 @@ public class RateCard
     private String code;
     private String type;
     private String city;
+    private String productCategory;
     private Date priceDate;
     private double rateUsed;
     private Map<Integer, Double> ratesUsed = Collections.EMPTY_MAP;
@@ -44,6 +45,15 @@ public class RateCard
         this.type = type;
         this.priceDate = priceDate;
         this.city = city;
+        this.ratesUsed = new HashMap<>();
+    }
+
+    public RateCard(String code, String type, Date priceDate, String city, String productCategory) {
+        this.code = code;
+        this.type = type;
+        this.priceDate = priceDate;
+        this.city = city;
+        this.productCategory = productCategory;
         this.ratesUsed = new HashMap<>();
     }
 
@@ -69,9 +79,6 @@ public class RateCard
             priceMaster = RateCardService.getInstance().getShutterRate(this.code, thickness, this.priceDate, this.city);
 
         }
-
-
-
         double price = 0;
         if (priceMaster != null ) {
             price = priceMaster.getPrice();
@@ -92,6 +99,17 @@ public class RateCard
         return this.rateUsed;
     }
 
+    public double getRateBasedOnProduct()
+    {
+        this.rateUsed = 0;
+        PriceMaster factorRate = RateCardService.getInstance().getFactorRate(this.code,this.priceDate, this.city, this.productCategory);
+
+        if (factorRate != null) {
+            this.rateUsed = factorRate.getPrice();
+        }
+        return this.rateUsed;
+    }
+
     public String getKey()
     {
         return makeKey(this.getType(), this.getCode());
@@ -105,6 +123,11 @@ public class RateCard
     public static String makeKey(String type, String code, int thickness)
     {
         return type + ":" + code + ":" + thickness;
+    }
+
+    public static String makeKey(String type, String code, String productCategory)
+    {
+        return type + ":" + code + ":" + productCategory;
     }
 
     public Object getName()

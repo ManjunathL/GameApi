@@ -22,14 +22,18 @@ public class RateCardMaster {
     private String rateCardId;
     private String code;
     private String type;
+    private String productCategory;
 
 
 
-    public static RateCardMaster fromJson(JsonObject json)
+
+    public RateCardMaster(JsonObject json)
     {
-        return new RateCardMaster().setRateCardId(json.getString("rateCardId"))
+        this.setRateCardId(json.getString("rateCardId"))
                 .setCode(json.getString("code"))
-                .setType(json.getString("type"));
+                .setType(json.getString("type"))
+                .setProductCategory(json.getString("productCategory"));
+
     }
 
     public String getRateCardId() {
@@ -62,8 +66,17 @@ public class RateCardMaster {
         return this;
     }
 
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public RateCardMaster setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+        return this;
+    }
+
     public String getCodeTypeKey() {
-        return type + ":" + code;
+        return type + ":" + code ;
     }
 
     public static String makeKey(String type, String code)
@@ -74,5 +87,25 @@ public class RateCardMaster {
     public static String makeKey(String code, String type, int thickness)
     {
         return type + KEYDELIMITER + code + KEYDELIMITER + thickness;
+    }
+
+    public static String makeKey(String code, String type, String productCategory)
+    {
+        return type + KEYDELIMITER + code + KEYDELIMITER + productCategory;
+    }
+
+    public RateCardMasterKey getKey()
+    {
+        return new RateCardMasterKey(this.getType(), this.getCode(), this.getProductCategory());
+    }
+
+    @Override
+    public String toString() {
+        return "RateCardMaster{" +
+                "rateCardId='" + rateCardId + '\'' +
+                ", code='" + code + '\'' +
+                ", type='" + type + '\'' +
+                ", productCategory='" + productCategory + '\'' +
+                '}';
     }
 }

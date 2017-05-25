@@ -23,6 +23,7 @@ public class ModulePriceHolder
     private final static Logger LOG = LogManager.getLogger(ModulePriceHolder.class);
 
     private static final double SQMM2SQFT = 0.0000107639;
+    private static final String WARDROBE = "Wardrobe";
 
     private ProductModule productModule;
     private Module mgModule;
@@ -41,6 +42,7 @@ public class ModulePriceHolder
     private RateCard loadingFactorCard;
     private RateCard labourRateCard;
     private RateCard nonStandardloadingFactorCard;
+    private RateCard loadingFactorBasedOnProduct;
     private Boolean finishValue =false;
 
     private double shutterCost = 0;
@@ -265,9 +267,11 @@ public class ModulePriceHolder
         this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
 
         if (carcassMaterialRateCard == null || carcassFinishRateCard == null || shutterFinishRateCard == null
-                || loadingFactorCard == null || labourRateCard == null || nonStandardloadingFactorCard == null)
+                || loadingFactorCard == null || labourRateCard == null || nonStandardloadingFactorCard == null || loadingFactorBasedOnProduct == null)
         {
             this.addError("Carcass, Carcass Finish, Shutter, Labour or Loading factor rate cards not setup." + carcassCode + " : "
                     + productModule.getFinishCode() + " : " + shutterFinish.getCostCode());
@@ -354,11 +358,20 @@ public class ModulePriceHolder
 
         for (PanelComponent panel : this.getPanelComponents())
         {
+            double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
             if (panel.isExposed())
             {
                 if ("Standard".equals(moduleType))
                 {
-                    this.addToShutterCost(panel.getCost());
+                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()))
+                    {
+                        LOG.debug("Inside Wardrobe If clause shutter");
+                        LOG.debug("Rate : " + rate);
+                        this.addToShutterCost(panel.getCost() * rate);
+                    }
+                    else {
+                        this.addToShutterCost(panel.getCost());
+                    }
                     if(panel.getCost()==0.0)
                     {
                         //this.addToShutterCost(0.0);
@@ -384,7 +397,15 @@ public class ModulePriceHolder
             {
                 if ("Standard".equals(moduleType))
                 {
-                    this.addToCarcassCost(panel.getCost());
+                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()))
+                    {
+                        LOG.debug("Inside Wardrobe If clause Carcass");
+
+                        this.addToCarcassCost(panel.getCost() * rate);
+                    }
+                    else {
+                        this.addToCarcassCost(panel.getCost());
+                    }
                 }
                 else if ("hike".equals(moduleType))
                 {

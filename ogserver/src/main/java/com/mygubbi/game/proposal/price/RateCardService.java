@@ -24,8 +24,9 @@ import java.util.Map;
 public class RateCardService extends AbstractVerticle
 {
 	private final static Logger LOG = LogManager.getLogger(RateCardService.class);
-	private Map<String, RateCardMaster> rateCardMap = Collections.EMPTY_MAP;
+	//private Map<String, RateCardMaster> rateCardMap = Collections.EMPTY_MAP;
 	private Multimap<PriceMasterKey, PriceMaster> priceMasterMap;
+	private Multimap<RateCardMasterKey, RateCardMaster> rateCardMap;
 
 	private static RateCardService INSTANCE;
 	
@@ -54,11 +55,13 @@ public class RateCardService extends AbstractVerticle
 					}
 					else
 					{
-						this.rateCardMap= new HashMap(selectData.rows.size());
+						this.rateCardMap= ArrayListMultimap.create();
 						for (JsonObject record : selectData.rows)
 						{
-							RateCardMaster rateCardMaster = RateCardMaster.fromJson(record);
-							this.rateCardMap.put(rateCardMaster.getCodeTypeKey(), rateCardMaster);
+							RateCardMaster rateCardMaster = new RateCardMaster(record);;
+							this.rateCardMap.put(rateCardMaster.getKey(), rateCardMaster);
+							LOG.debug("Setting rate card master for :" + rateCardMaster.toString());
+
 						}
 						LOG.debug("Rate Card master done.", true);
 						setupPriceMasters(startFuture);
@@ -94,12 +97,27 @@ public class RateCardService extends AbstractVerticle
 
 	public RateCard getRateCard(String code, String type, Date priceDate, String city)
 	{
-		RateCardMaster rateCardMaster = this.rateCardMap.get(RateCardMaster.makeKey(type, code));
+		RateCardMasterKey key = new RateCardMasterKey(code, type,"all");
+		Collection<RateCardMaster> rateCardMaster = this.rateCardMap.get(key);
         if (rateCardMaster == null)
         {
             LOG.info("Rate card not found for " + type + ":" + code);
         }
         return new RateCard(code,type,priceDate, city);
+	}
+
+	public RateCard getRateCardBasedOnProduct(String code, String type, Date priceDate, String city, String productCategory)
+	{
+		LOG.debug("Rate card based on product");
+		RateCardMasterKey key = new RateCardMasterKey(code, type,"all");
+		Collection<RateCardMaster> rateCardMaster = this.rateCardMap.get(key);
+		LOG.debug("Rate card map :" + rateCardMap.values().toString() );
+		LOG.debug("Rate card found on product");
+		if (rateCardMaster == null)
+        {
+            LOG.info("Rate card not found for " + type + ":" + code + ":" + productCategory);
+        }
+        return new RateCard(code,type,priceDate, city, productCategory);
 	}
 
 	public PriceMaster getAddonRate(String code, Date priceDate, String city)
@@ -133,6 +151,13 @@ public class RateCardService extends AbstractVerticle
 		return getPriceMaster(priceDate, city, rateCardID, PriceMasterKey.RATECARD_TYPE);
 	}
 
+	public PriceMaster getFactorRate(String code, Date priceDate, String city, String productCategory)
+	{
+		String rateCardID = RateCard.makeKey(RateCard.FACTOR_TYPE,code,productCategory);
+
+		return getPriceMaster(priceDate, city, rateCardID, PriceMasterKey.RATECARD_TYPE);
+	}
+
 	private PriceMaster getPriceMaster(Date priceDate, String city, String rateCardID, String ratecardType) {
 
 		PriceMaster priceMaster = checkPriceMasterForCity(priceDate, city, rateCardID, ratecardType);
@@ -159,6 +184,7 @@ public class RateCardService extends AbstractVerticle
 
 	private PriceMaster checkPriceMasterForCity(Date priceDate, String city, String rateCardID, String ratecardType) {
 		PriceMasterKey key = new PriceMasterKey(ratecardType, rateCardID, city);
+		LOG.debug("price Master key : " + key.toString());
 		Collection<PriceMaster> priceList = this.priceMasterMap.get(key);
 		LOG.debug("Check price master for " + key.toString() + " result:" + priceList.size());
 		for (PriceMaster priceMaster : priceList)
