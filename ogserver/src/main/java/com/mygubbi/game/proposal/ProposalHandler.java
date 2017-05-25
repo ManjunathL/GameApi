@@ -53,6 +53,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
         this.get("/hardwareratedetails").handler(this::getHardwareRate);
         this.get("/accratedetails").handler(this::getAccessoryRate);
+        this.get("/handleknobdetails").handler(this::getHandleKnobDetails);
         this.post("/updatepricefordraftproposals").handler(this::updatePriceForDraftProposals);
         this.get("/ratefactordetailsfromhandler").handler(this::getRateFactor);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
@@ -344,6 +345,24 @@ public class ProposalHandler extends AbstractRouteHandler
             sendError(routingContext, "Error in retrieving factor rate.");
         } else {
             sendJsonResponse(routingContext, factorRate.toJson().toString());
+        }
+    }
+
+    private void getHandleKnobDetails(RoutingContext context) {
+        String code = context.request().getParam("rateId");
+        String priceDate = context.request().getParam("priceDate");
+        String city = context.request().getParam("city");
+        getHandleKnobDetails(context, code, DateUtil.convertDate(priceDate), city);
+
+    }
+
+    private void getHandleKnobDetails(RoutingContext routingContext, String code, Date priceDate, String city) {
+        PriceMaster addonRate = RateCardService.getInstance().getHandleOrKnobRate(code, priceDate, city);
+        if (addonRate == null || addonRate.getPrice() == 0) {
+            LOG.error("Error in retrieving addon price");
+            sendError(routingContext, "Error in retrieving addon price.");
+        } else {
+            sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
     }
 }

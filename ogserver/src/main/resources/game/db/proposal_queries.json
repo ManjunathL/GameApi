@@ -701,7 +701,7 @@
       "id": "ratecard.distinct.select.all",
       "type": "select",
       "table": "ratecard_master",
-      "query": "select distinct code,type from ratecard_master",
+      "query": "select distinct rateCardId, code,type,productCategory from ratecard_master",
       "params": []
     },
 
@@ -1233,7 +1233,7 @@
       "id": "proposal.selectuserprofiledata",
       "type": "select",
       "table": "user_profile",
-      "query": "select * from user_profile where crmId=? or crmId='SAL-1701-000848'",
+      "query": "select profile from user_profile where crmId=? or crmId='SAL-1705-001550'",
       "params": ["crmId"],
       "jsonfields":["profile"]
     },
@@ -1241,7 +1241,7 @@
       "id": "proposal.selectuserprofiledatabasedoncrmid",
       "type": "select",
       "table": "user_profile",
-      "query": "select * from user_profile where crmId=?",
+      "query": "select profile from user_profile where crmId=?",
       "params": ["crmId"],
       "jsonfields":["profile"]
     },
