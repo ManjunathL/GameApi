@@ -701,7 +701,7 @@
       "id": "ratecard.distinct.select.all",
       "type": "select",
       "table": "ratecard_master",
-      "query": "select distinct code,type from ratecard_master",
+      "query": "select distinct rateCardId, code,type,productCategory from ratecard_master",
       "params": []
     },
 
