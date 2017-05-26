@@ -49,6 +49,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
+        //this.post("/downloadprodspecfile").handler(this::downloadProdSpec);
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
         this.get("/hardwareratedetails").handler(this::getHardwareRate);
         this.get("/accratedetails").handler(this::getAccessoryRate);
@@ -245,6 +246,11 @@ public class ProposalHandler extends AbstractRouteHandler
     {
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.SALESORDER);
     }
+
+    /*private void downloadProdSpec(RoutingContext routingContext)
+    {
+        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.PRODSPEC);
+    }*/
 
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type)
     {

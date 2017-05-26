@@ -83,8 +83,9 @@ public class ModuleSheetCreator implements ExcelCellProcessor
             currentRow++;
             Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
             ShutterFinish finish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
-            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getDescription(),
-                    mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), mgModule.getDimension()});
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(),mgModule.getCode(), mgModule.getDescription(),
+                    mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(),finish.getTitle(), mgModule.getDimension(),module.getExposedSides(),
+                    finish.getEdgeBinding(),module.getHandleCode()});
             seq++;
         }
         return currentRow;
