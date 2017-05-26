@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by user on 02-Nov-16.
@@ -170,7 +171,11 @@ public class QuotationPDFCreator
                 document.add(p);
 
             }
-
+            if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
+            {
+                LOG.info("packge value " +proposalHeader.getPackageFlag());
+                return;
+            }
             float[] columnWidths2 = {4,2};
             PdfPTable table = new PdfPTable(columnWidths2);
             table.setWidthPercentage(100);
@@ -259,6 +264,12 @@ public class QuotationPDFCreator
             float[] columnWidths1 = {1,8,1,1,1};
             itemsTable = new PdfPTable(columnWidths1);
             itemsTable.setWidthPercentage(100);
+
+            if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
+            {
+                LOG.info("packge value " +proposalHeader.getPackageFlag());
+                return;
+            }
 
             PdfPCell cel=new PdfPCell();
             p=new Paragraph("KITCHEN & OTHER BASE UNITS",fsize1);
@@ -471,17 +482,6 @@ public class QuotationPDFCreator
                 Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
 
                 Double res = val - val % 10;
-
-           /* Double rem=val%10;
-
-            if(rem<5)
-            {
-                fin_value=val-rem;
-             }
-            else
-            {
-                fin_value=val+(10-rem);
-            }*/
             p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
