@@ -29,6 +29,7 @@ public class ProposalHeader extends JsonObject
     public static final String SALESEMAIL="salesEmail";
     public static final String QUOTE_NO_NEW="quoteNoNew";
     public static final String PRICE_DATE="priceDate";
+    public static final String PACKAGE_FLAG="packageFlag";
 
     private Date priceDate;
 
@@ -86,7 +87,7 @@ public class ProposalHeader extends JsonObject
     {
         return this.getString(PROJECT_CITY);
     }
-
+    public String getPackageFlag() { return this.getString(PACKAGE_FLAG);}
 
     public Date getPriceDate() {
         return priceDate;
