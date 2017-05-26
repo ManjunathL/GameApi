@@ -421,6 +421,10 @@ public class ProductModule extends JsonObject
                 ", code='" + this.getMGCode() + '\'' +
                 ", finish='" + this.getFinishCode() + '\'' +
                 ", color='" + this.getColorCode() + '\'' +
+                ", handleCode='" + this.getHandleCode() + '\'' +
+                ", knobCode='" + this.getKnobCode()+ '\'' +
+                ", handleQuantity='" + this.getHandleQuantity() + '\'' +
+                ", knobQuantity='" + this.getKnobQuantity() + '\'' +
                 ", remarks='" + this.getRemarks() + '\'' +
                 '}';
 
@@ -440,4 +444,6 @@ public class ProductModule extends JsonObject
         this.put(COST_WO_ACCESSORIES, costWoAccessories);
         return this;
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.jobcard;
 
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.model.Handle;
 import com.mygubbi.game.proposal.model.Module;
 import com.mygubbi.game.proposal.model.ShutterFinish;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
@@ -15,6 +16,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Sunil on 22-05-2016.
@@ -83,9 +85,18 @@ public class ModuleSheetCreator implements ExcelCellProcessor
             currentRow++;
             Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
             ShutterFinish finish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
-            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(),mgModule.getCode(), mgModule.getDescription(),
-                    mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(),finish.getTitle(), mgModule.getDimension(),module.getExposedSides(),
-                    finish.getEdgeBinding(),module.getHandleCode()});
+            if ( (Objects.equals(mgModule.getHandleMandatory(),"Yes")) || (!module.getHandleCode().isEmpty()) )  {
+            Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
+            LOG.debug("Handle object : " + handle.toString());
+                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), mgModule.getDimension(), module.getExposedSides(),
+                        finish.getEdgeBinding(), handle.getTitle()});
+            }
+            else
+                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), finish.getFinishMaterial(), mgModule.getDimension(), module.getExposedSides(),
+                        finish.getEdgeBinding(), "NA"});
+
             seq++;
         }
         return currentRow;

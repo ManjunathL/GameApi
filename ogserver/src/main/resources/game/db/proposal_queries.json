@@ -759,6 +759,13 @@
     },
 
     {
+      "id": "handle.master.all",
+      "type": "select",
+      "table": "handle_master",
+      "query": "select code,type,title,finish,mgCode,thickness,sourcePrice,msp,imagePath from handle_master",
+      "params": []
+    },
+    {
       "id": "addons.categories",
       "type": "select",
       "table": "addon_master",

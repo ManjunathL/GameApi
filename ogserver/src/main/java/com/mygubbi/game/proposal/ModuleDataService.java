@@ -40,6 +40,8 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, AccHwComponent> hardwareMap = Collections.EMPTY_MAP;
     private Map<String, ShutterFinish> finishCodeMap = Collections.EMPTY_MAP;
     private Map<String, AccessoryPack> accessoryPackMap = Collections.EMPTY_MAP;
+    private Map<String, Handle> handleMap = Collections.EMPTY_MAP;
+
 
 	public static ModuleDataService getInstance()
 	{
@@ -64,6 +66,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheAccessories();
         this.cacheHardware();
         this.cacheFinishCostCodes();
+        this.cacheHandleData();
 
 	}
 
@@ -194,6 +197,29 @@ public class ModuleDataService extends AbstractVerticle
                             this.finishCodeMap.put(finish.getFinishCode(), finish);
                         }
                         markResult("Finish master is loaded.", true);
+                    }
+                });
+    }
+
+    private void cacheHandleData()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("handle.master.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Handle master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.handleMap = new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            Handle handle = new Handle(record);
+                            this.handleMap.put(handle.getCode(),handle);
+                        }
+                        markResult("Handle master is loaded.", true);
                     }
                 });
     }
@@ -386,6 +412,11 @@ public class ModuleDataService extends AbstractVerticle
     public ShutterFinish getFinish(String finishCode)
     {
         return this.finishCodeMap.get(finishCode);
+    }
+
+    public Handle getHandleTitle(String handleCode)
+    {
+        return this.handleMap.get(handleCode);
     }
 
     public ShutterFinish getFinish(String carcassCode, String finishCode)
