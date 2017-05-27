@@ -1232,16 +1232,16 @@
     {
       "id": "proposal.selectuserprofiledata",
       "type": "select",
-      "table": "user_profile",
-      "query": "select profile from user_profile where crmId=? or crmId='SAL-1705-001550'",
-      "params": ["crmId"],
+      "table": "user_profile_temp",
+      "query": "select profile from user_profile_temp",
+      "params": [],
       "jsonfields":["profile"]
     },
     {
       "id": "proposal.selectuserprofiledatabasedoncrmid",
       "type": "select",
-      "table": "user_profile",
-      "query": "select profile from user_profile where crmId=?",
+      "table": "user_profile_temp",
+      "query": "select profile from user_profile_temp where crmId=?",
       "params": ["crmId"],
       "jsonfields":["profile"]
     },

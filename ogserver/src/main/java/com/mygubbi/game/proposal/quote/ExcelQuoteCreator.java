@@ -5,6 +5,8 @@ import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 /**
  * Created by Sunil on 22-05-2016.
  */
@@ -42,8 +44,15 @@ public class ExcelQuoteCreator extends AbstractProposalOutputCreator
     public void create()
     {
         this.openWorkbook();
-        new ExcelQuoteSheetCreator(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles()).prepare();
-       new DataSheetCreator(this.workbookManager.getSheetByName("Data"), this.quoteData, this.workbookManager.getStyles()).prepare();
+        if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
+        {
+            new ExcelQuoteSheetCreatorForPackage(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles()).prepare();
+        }
+        else
+        {
+            new ExcelQuoteSheetCreator(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles()).prepare();
+        }
+        new DataSheetCreator(this.workbookManager.getSheetByName("Data"), this.quoteData, this.workbookManager.getStyles()).prepare();
         this.closeWorkbook();
     }
 

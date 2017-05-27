@@ -6,6 +6,8 @@ import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 /**
  * Created by Chirag on 23-11-2016.
  */
@@ -29,8 +31,14 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
     public void create() {
 
         LOG.debug("PATH :" + this.getOutputFile());
-
-        new QuotationPDFCreator(quoteData, proposalHeader).createpdf(targetFile);
+        if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
+        {
+            LOG.info("if");
+            new QuotationPdfCreatorForPackage(quoteData,proposalHeader).createpdf(targetFile);
+        }else {
+            LOG.info("else");
+            new QuotationPDFCreator(quoteData, proposalHeader).createpdf(targetFile);
+        }
     }
 
     @Override
