@@ -32,7 +32,6 @@ import org.elasticsearch.search.suggest.phrase.PhraseSuggestionBuilder;
 import org.elasticsearch.search.suggest.term.TermSuggestion;
 import org.elasticsearch.search.suggest.term.TermSuggestionBuilder;
 
-
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -99,7 +98,7 @@ public class ElasticsearchClient
 	public SearchQueryData query(SearchQueryData qData) throws ElasticsearchException
 	{
 		SearchResponse searchResponse = client.prepareSearch(qData.getIndex()).setSource(qData.getQuery().toString()).execute().actionGet();
-		qData.setResult(this.getRecordsAsTextWithFacet(searchResponse));
+		qData.setResult(this.responseToJson(searchResponse));
 		return qData;
 	}
 
@@ -215,6 +214,7 @@ public class ElasticsearchClient
 	            if (iterator.hasNext()) sb.append(',');
 	        }
 	        sb.append("],");
+
 	        sb.append("\"facets\" : {");
 	        
 	        System.out.println("------------------");
@@ -311,12 +311,14 @@ public class ElasticsearchClient
 			{
 				case 1:
 					System.out.println("Preparing...");
-					prepare(elasticsearchClient, isJar);
+					prepare(elasticsearchClient, isJar, "user_index");
+					prepare(elasticsearchClient, isJar, "space_lib_index");
 					break;
 							
 				case 2:
 					System.out.println("Cleaning...");
-					clean(elasticsearchClient);
+					clean(elasticsearchClient, "user_index");
+					clean(elasticsearchClient, "space_lib_index");
 					break;
 
 				case 3:
@@ -332,7 +334,9 @@ public class ElasticsearchClient
 					break;
 
 				case 4:
-					indexUsingDefault(elasticsearchClient, isJar);
+					//indexUsingDefault(elasticsearchClient, isJar);
+					indexUsersUsingDefault(elasticsearchClient, isJar, "user_index");
+					indexSpaceUsingDefault(elasticsearchClient, isJar, "space_lib_index");
 					break;
 					
 				case 5:
@@ -384,11 +388,11 @@ public class ElasticsearchClient
 		System.out.println("Created : " + status);
 	}
 	*/
-	private static void prepare(ElasticsearchClient elasticsearchClient, boolean isJar) 
+	private static void prepare(ElasticsearchClient elasticsearchClient, boolean isJar, String index)
 	{
-		System.out.println("Creating space_lib_index");
-		String config = (isJar) ? FileReaderUtil.toStringFromJar("space_lib_index") : FileReaderUtil.toString("space_lib_index");
-		boolean status = elasticsearchClient.createIndex("space_lib_index", config);
+		System.out.println("Creating " + index);
+		String config = (isJar) ? FileReaderUtil.toStringFromJar(index) : FileReaderUtil.toString(index);
+		boolean status = elasticsearchClient.createIndex(index, config);
 		System.out.println("Created : " + status);
 	}
 
@@ -416,10 +420,10 @@ public class ElasticsearchClient
 	}
 	*/
 
-	private static void clean(ElasticsearchClient elasticsearchClient) 
+	private static void clean(ElasticsearchClient elasticsearchClient, String index)
 	{
-		System.out.println("Deleting space_lib_index");
-		boolean status = elasticsearchClient.deleteIndex("space_lib_index");
+		System.out.println("Deleting " + index);
+		boolean status = elasticsearchClient.deleteIndex(index);
 		System.out.println("Deleted : " + status);
 	}
 
@@ -459,20 +463,28 @@ public class ElasticsearchClient
 	}
 	*/
 
-	private static void indexUsingDefault(ElasticsearchClient elasticsearchClient, boolean isJar)
+	private static void indexSpaceUsingDefault(ElasticsearchClient elasticsearchClient, boolean isJar, String index)
 	{
-		clean(elasticsearchClient);
-		prepare(elasticsearchClient, isJar);
+		clean(elasticsearchClient, index);
+		prepare(elasticsearchClient, isJar, index);
 		indexDocs(elasticsearchClient, "space_lib_index", "items", "space.json", isJar);
 	}
 
+	private static void indexUsersUsingDefault(ElasticsearchClient elasticsearchClient, boolean isJar, String index)
+	{
+		clean(elasticsearchClient, index);
+		prepare(elasticsearchClient, isJar, index);
+		indexDocs(elasticsearchClient, index, "users", "users.json", isJar);
+	}
+
 	//final static String searchJSON = "{\"size\":99999,\"query\":{\"match\":{\"_all\":{\"query\":\"__TERM\",\"operator\":\"and\"}}},\"facets\":{\"tags\":{\"terms\":{\"fields\": [\"category\", \"subCategory\"]}}}}";
-	final static String searchJSON = "{\"size\":99999,\"query\":{\"match\":{\"_all\":{\"query\":\"__TERM\",\"operator\":\"and\"}}},\"facets\":{\"cat\":{\"terms\":{\"field\":\"category\"}},\"subcat\":{\"terms\":{\"field\":\"subCategory\"}}}}";
+	//final static String searchJSON = "{\"size\":99999,\"query\":{\"match\":{\"_all\":{\"query\":\"__TERM\",\"operator\":\"and\"}}},\"facets\":{\"cat\":{\"terms\":{\"field\":\"category\"}},\"subcat\":{\"terms\":{\"field\":\"subCategory\"}}}}";
+	final static String searchJSON = "{\"size\":99999,\"query\":{\"match\":{\"_all\":{\"query\":\"__TERM\",\"operator\":\"and\"}}},\"filter\":{},\"facets\":{}}";
 	private static void search(ElasticsearchClient elasticsearchClient, String term, String indexName)
 	{
 		String searchQueryJson = searchJSON.replaceFirst("__TERM", term);
 		System.out.println(searchQueryJson);
-		SearchQueryData results = elasticsearchClient.query(new SearchQueryData(indexName, new JsonObject(searchQueryJson), null));
+		SearchQueryData results = elasticsearchClient.query(new SearchQueryData(indexName, new JsonObject(searchQueryJson)));
 		System.out.println(results.getResult());
 	}
 }

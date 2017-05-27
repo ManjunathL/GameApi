@@ -10,8 +10,6 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import junit.framework.TestCase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
@@ -24,8 +22,6 @@ public class AmazonS3FileUploadTest extends TestCase {
     AmazonS3 s3client;
 
     String bucketName = "designwh";
-
-    private final static Logger LOG = LogManager.getLogger(AmazonS3FileUploadTest.class);
 
     public void testValidRecord(){
 
@@ -49,7 +45,6 @@ public class AmazonS3FileUploadTest extends TestCase {
                 withCredentials(new AWSStaticCredentialsProvider(basicAWSCredentials)).withRegion(Regions.AP_SOUTH_1).build();
 
         if (s3client == null) {
-            LOG.debug("Could not log in to Amazon s3");
         }
 
 
@@ -65,22 +60,9 @@ public class AmazonS3FileUploadTest extends TestCase {
             s3client.putObject(putObjectRequest);
 
         } catch (AmazonServiceException ase) {
-            LOG.error("Caught an AmazonServiceException, which " +
-                    "means your request made it " +
-                    "to Amazon S3, but was rejected with an error response" +
-                    " for some reason.");
-            LOG.error("Error Message:    " + ase.getMessage());
-            LOG.error("HTTP Status Code: " + ase.getStatusCode());
-            LOG.error("AWS Error Code:   " + ase.getErrorCode());
-            LOG.error("Error Type:       " + ase.getErrorType());
-            LOG.error("Request ID:       " + ase.getRequestId());
+
         } catch (AmazonClientException ace) {
-            LOG.debug("Caught an AmazonClientException, which " +
-                    "means the client encountered " +
-                    "an internal error while trying to " +
-                    "communicate with S3, " +
-                    "such as not being able to access the network.");
-            LOG.error("Error Message: " + ace.getMessage());
+
         }
     }
 
