@@ -39,6 +39,8 @@ public class AssembledProductInQuote
     private List<ModulePart> moduleHardware;
     private List<ModulePart> addonAccessories;
     private List<ModulePart> addons;
+    private List<ModulePart> handles;
+    private List<ModulePart> knob;
 
     private List<PanelComponent> panels;
 
@@ -181,6 +183,8 @@ public class AssembledProductInQuote
         this.addonAccessories = new ArrayList<>();
         this.addons = new ArrayList<>();
         this.modules = new ArrayList<>();
+        this.handles = new ArrayList<>();
+        this.knob = new ArrayList<>();
 
         for (ProductModule module : this.product.getModules())
         {
@@ -196,6 +200,8 @@ public class AssembledProductInQuote
             this.addModuleToUnit(module);
             this.collectModuleParts(module);
             this.collectModuleComponents(module);
+            this.collectModuleHandles(module);
+            this.collectModuleKnob(module);
         }
         for (ProductAddon addon : this.product.getAddons())
         {
@@ -262,10 +268,16 @@ public class AssembledProductInQuote
                     this.addToModuleHardware(hardware, moduleComponent.getQuantity(), module.getUnit(), module.getSequence());
                 }
             }
+    }
 
+    private void collectModuleHandles(ProductModule module)
+    {
 
-        }
+    }
+    private void collectModuleKnob(ProductModule module)
+    {
 
+    }
 
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
     {
