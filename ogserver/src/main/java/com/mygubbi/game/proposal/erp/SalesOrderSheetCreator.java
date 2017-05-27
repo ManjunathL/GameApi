@@ -135,6 +135,7 @@ public class SalesOrderSheetCreator implements ExcelCellProcessor
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryPackAccessories());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAccessoryAddons());
         currentRow = this.writeRecords(currentRow, this.product.getAggregatedAddons());
+        currentRow = this.writeRecords(currentRow, this.product.getAggregatedKnobAndHandle());
 
         return currentRow;
     }

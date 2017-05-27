@@ -5,6 +5,7 @@ import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.PanelComponent;
+import com.mygubbi.game.proposal.price.RateCardService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jooq.lambda.Seq;
@@ -39,8 +40,7 @@ public class AssembledProductInQuote
     private List<ModulePart> moduleHardware;
     private List<ModulePart> addonAccessories;
     private List<ModulePart> addons;
-    private List<ModulePart> handles;
-    private List<ModulePart> knob;
+    private List<ModulePart> handleandKnob;
 
     private List<PanelComponent> panels;
 
@@ -122,6 +122,12 @@ public class AssembledProductInQuote
         return this.getAggregatedModuleParts(this.moduleHardware);
     }
 
+
+    public List<ModulePart> getAggregatedKnobAndHandle()
+    {
+        return this.getAggregatedModuleParts(this.handleandKnob);
+    }
+
     public List<ModulePart> getAggregatedAccessoryAddons()
     {
         return this.getAggregatedModuleParts(this.addonAccessories);
@@ -183,8 +189,7 @@ public class AssembledProductInQuote
         this.addonAccessories = new ArrayList<>();
         this.addons = new ArrayList<>();
         this.modules = new ArrayList<>();
-        this.handles = new ArrayList<>();
-        this.knob = new ArrayList<>();
+        this.handleandKnob = new ArrayList<>();
 
         for (ProductModule module : this.product.getModules())
         {
@@ -272,11 +277,13 @@ public class AssembledProductInQuote
 
     private void collectModuleHandles(ProductModule module)
     {
-
+        Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
+        this.addToModuleHandle(handle,module.getHandleQuantity());
     }
     private void collectModuleKnob(ProductModule module)
     {
-
+        Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getKnobCode());
+        this.addToModuleHandle(handle,module.getKnobQuantity());
     }
 
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
@@ -300,13 +307,27 @@ public class AssembledProductInQuote
     private void addToModuleHardware(AccHwComponent component, double quantity, String unit, int seq )
     {
         ModulePart part = this.createModulePart(component, quantity, unit, seq );
-        this.moduleHardware.add(part);
+        PriceMaster addonRate = RateCardService.getInstance().getHardwareRate(component.getCode(),this.priceDate,this.city);
+        if(!(addonRate.getPrice()==0))
+        {
+            this.moduleHardware.add(part);
+        }
+
     }
 
     private void addToAccessoryPackPanels(ModulePanel carcassPanel, double quantity, String unit, int seq)
     {
         ModulePart part = new ModulePart(unit, seq, carcassPanel.getCode(), carcassPanel.getTitle(), quantity, "NA", "NOS","NA","NA","NA");
         this.accessoryPackPanels.add(part);
+    }
+
+    private void addToModuleHandle(Handle handleCode, double quantity)
+    {
+        ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),"Catalogue code","ERP code");
+        if(!(quantity==0.0))
+        {
+            this.handleandKnob.add(part);
+        }
     }
 
     private ModulePart createModulePart(AccHwComponent component, double quantity, String unit, int seq)
