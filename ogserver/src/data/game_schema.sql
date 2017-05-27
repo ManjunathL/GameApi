@@ -109,6 +109,7 @@ CREATE TABLE `proposal_product` (
  `imageUrl` varchar(128) not null default '',
  `proposalType` char(1) NULL DEFAULT NULL,
  `spaceCategory` varchar(64) NULL DEFAULT NULL,
+ `spaceId` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
  INDEX `proposal_key` (`proposalId`)
 )
@@ -165,6 +166,7 @@ CREATE TABLE `proposal_addon` (
  `imageUrl` varchar(128) not null default '',
  `proposalType` char(1) NULL DEFAULT NULL,
  `spaceCategory` varchar(64) NULL DEFAULT NULL,
+ `spaceId` int(11) NOT NULL DEFAULT 0,
  PRIMARY KEY (`id`),
  INDEX `proposalid_key` (`proposalId`)
 )
@@ -521,6 +523,7 @@ ENGINE=InnoDB;
 DROP TABLE IF EXISTS `space_master`;
 CREATE TABLE `space_master` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`active` char(1) NOT NULL DEFAULT 'Y',
 	`spaceCategory` VARCHAR(16) NOT NULL,
 	`spaceName` VARCHAR(64) NOT NULL,
 	`subSpaceName` VARCHAR(64) NOT NULL,

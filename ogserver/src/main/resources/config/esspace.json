@@ -112,6 +112,12 @@
     "filter": "__FILTER",
     "facets": "__FACETS"
   },
+  "customQueryJson": {
+    "size": 100,
+    "query": "__QUERY",
+    "filter": "__FILTER",
+    "facets": "__FACETS"
+  },
   "user_index" : {
     "settings": {
       "analysis": {

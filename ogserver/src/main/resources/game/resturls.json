@@ -679,19 +679,10 @@
     },
 
     {
-      "uri": "/gapi/proposal/smdata",
+      "uri": "/gapi/proposal/space",
       "source": "db",
       "query":"select.spacemaster",
-      "params":["proposalId", "fromVersion"],
-      "resultfields":[],
-      "default": "[]"
-    },
-
-    {
-      "uri": "/gapi/proposal/smadd",
-      "source": "db",
-      "query":"add.spacemaster",
-      "params":["spaceCategory", "spaceName", "subSpaceName", "proposalId", "fromVersion", "sowSpaceCategory",  "createdBy", "updatedBy"],
+      "params":["id"],
       "resultfields":[],
       "default": "[]"
     },
@@ -721,7 +712,17 @@
       "params":["spaceCategory"],
       "resultfields":[],
       "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/pr/spaceall",
+      "source": "db",
+      "query":"select.spaceall",
+      "params":[ "proposalId", "fromVersion" ],
+      "resultfields":[],
+      "default": "[]"
     }
+
 
   ]
 }

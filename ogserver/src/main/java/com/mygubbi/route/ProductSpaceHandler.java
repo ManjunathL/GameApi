@@ -35,6 +35,96 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
         this.post("/getspacedata").handler(this::getSpaceProducts);
         this.post("/search").handler(this::search);
         this.post("/usearch").handler(this::userSearch);
+        this.post("/csearch").handler(this::customSearch);
+        this.post("/addspace").handler(this::addSpace);
+        this.post("/renamespace").handler(this::renameSpace);
+    }
+
+    private void addSpace(RoutingContext context)
+    {
+        JsonObject inputJson = context.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QueryData("add.spacemaster", inputJson));
+        vertx.eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+        {
+            QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+            if (selectData.errorFlag)
+            {
+                LOG.error("Error in creating space");
+                sendError(context, "Error in creating space");
+            }
+            else
+            {
+                LOG.info("Successfully created a space");
+                int rowId = selectData.paramsObject.getInteger("id");
+                JsonObject result = new JsonObject();
+                result.put("id", rowId);
+                sendJsonResponse(context, result.toString());
+            }
+        });
+    }
+
+    private void renameSpace(RoutingContext context)
+    {
+        JsonObject inputJson = context.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QueryData("rename.spacemaster", inputJson));
+        vertx.eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+                {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.errorFlag)
+                    {
+                        LOG.error("Error in updating spacename");
+                        sendError(context, "Error in updating spacename");
+                    }
+                    else
+                    {
+                        LOG.info("Successfully updated spacemaster");
+                        updateproductSpace(context);
+                    }
+                });
+    }
+
+    private void updateproductSpace(RoutingContext context)
+    {
+        JsonObject inputJson = context.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QueryData("updatespace.proposal.product", inputJson));
+        vertx.eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+                {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.errorFlag)
+                    {
+                        LOG.error("Error in updating spacename");
+                        sendError(context, "Error in updating spacename");
+                    }
+                    else
+                    {
+                        LOG.info("Successfully updated product space");
+                        updateAddonSpace(context);
+                    }
+                });
+    }
+
+    private void updateAddonSpace(RoutingContext context)
+    {
+        JsonObject inputJson = context.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QueryData("updatespace.proposal.addon", inputJson));
+        vertx.eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+                {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.errorFlag)
+                    {
+                        LOG.error("Error in updating spacename");
+                        sendError(context, "Error in updating spacename");
+                    }
+                    else
+                    {
+                        LOG.info("Successfully updated addon space");
+                        sendSuccess(context, "Successfully updated space name");
+                    }
+                });
     }
 
     private void addLibProductToSpace(RoutingContext context)
@@ -134,6 +224,27 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
     private void deleteSpace(RoutingContext context)
     {
         JsonObject inputJson = context.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QueryData("delete.spacemaster", inputJson));
+        vertx.eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+                {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData.errorFlag)
+                    {
+                        LOG.error("Error in deleting space");
+                        sendError(context, "Error in deleting space");
+                    }
+                    else
+                    {
+                        LOG.info("Successfully deleted space");
+                        deleteSpaceProduct(context);
+                    }
+                });
+    }
+
+    private void deleteSpaceProduct(RoutingContext context)
+    {
+        JsonObject inputJson = context.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QueryData("space.delete.products", inputJson));
         vertx.eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) ->
@@ -177,10 +288,11 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
                 });
     }
 
+
     private void getSpaceProducts(RoutingContext context)
     {
         JsonObject inputJson = context.getBodyAsJson();
-
+        LOG.info(inputJson.encodePrettily());
         Integer id = LocalCache.getInstance().store(new QueryData("spaces.data", inputJson));
         vertx.eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) ->
@@ -188,7 +300,7 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
             QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
             if (selectData.errorFlag)
             {
-                LOG.error("Error in getting spaces data");
+                LOG.error("Error in getting spaces data" + selectData.errorMessage);
                 sendError(context, "Error in getting spaces data");
             }
             else
@@ -259,4 +371,35 @@ public class ProductSpaceHandler extends AbstractRouteHandler {
                 });
     }
 
+
+    private void customSearch(RoutingContext context)
+    {
+        JsonObject inputJson = context.getBodyAsJson();
+        LOG.info(inputJson.toString());
+
+        JsonObject queryJson = inputJson.getJsonObject("query");
+        JsonObject facetJson = inputJson.getJsonObject("facets");
+        JsonObject filterJson = inputJson.getJsonObject("filter");
+
+        LOG.info(queryJson);
+        LOG.info(facetJson);
+        LOG.info(filterJson);
+
+        String queryName = "customQueryJson";
+        JsonObject jsonObject = (JsonObject) ConfigHolder.getInstance().getConfigValue(queryName);
+        jsonObject.put("query", queryJson);
+        jsonObject.put("facets", facetJson);
+        jsonObject.put("filter", filterJson);
+
+        String customQueryJson = jsonObject.toString();
+        LOG.info("queryJson:" + customQueryJson);
+
+        Integer id = LocalCache.getInstance().store(new SearchQueryData(LibSearchService.INDEX_NAME, jsonObject, PRODUCT_TYPE, true));
+        VertxInstance.get().eventBus().send(LibSearchService.SEARCH_TEXT, id,
+                (AsyncResult<Message<Integer>> selectResult) ->
+                {
+                    SearchQueryData selectData = (SearchQueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    sendJsonResponse(context, selectData.getResult());
+                });
+    }
 }
