@@ -813,7 +813,7 @@
       "uri": "/gapi/proposal/selectuserprofiledata",
       "source": "db",
       "query":"proposal.selectuserprofiledata",
-      "params":["crmId"],
+      "params":[],
       "resultfields":[],
       "default": "[]"
     },
@@ -934,6 +934,14 @@
       "source": "db",
       "query":"module.shuttercode",
       "params":["finishCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/user/listbyemail",
+      "source": "db",
+      "query":"game_user.select",
+      "params":["email"],
       "resultfields":[],
       "default": "[]"
     }
