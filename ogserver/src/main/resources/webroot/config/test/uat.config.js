@@ -21,6 +21,9 @@ var merchantKey = "gtKFFx";
 var SALT = "eCwWELxi";*/
 
 
+var gamecrmbaseUrl= "https://gameuat.mygubbi.com:1446";
+
+
 /* Live Payment Details */
 var paybaseUrl="https://secure.payu.in/_payment";
 var merchantKey = "ovDDuS";

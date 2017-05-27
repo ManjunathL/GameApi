@@ -14,6 +14,7 @@ var fbaseconfig = {
    messagingSenderId: "896609033641"
 };
 
+var gamecrmbaseUrl= "https://game.mygubbi.com:1446";
 
 /* Live Payment Configuration */
 var paybaseUrl="https://secure.payu.in/_payment";
