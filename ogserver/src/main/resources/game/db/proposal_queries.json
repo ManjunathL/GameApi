@@ -1239,16 +1239,16 @@
     {
       "id": "proposal.selectuserprofiledata",
       "type": "select",
-      "table": "user_profile_temp",
-      "query": "select profile from user_profile_temp",
+      "table": "user_profile",
+      "query": "select profile from user_profile",
       "params": [],
       "jsonfields":["profile"]
     },
     {
       "id": "proposal.selectuserprofiledatabasedoncrmid",
       "type": "select",
-      "table": "user_profile_temp",
-      "query": "select profile from user_profile_temp where crmId=?",
+      "table": "user_profile",
+      "query": "select profile from user_profile where crmId=?",
       "params": ["crmId"],
       "jsonfields":["profile"]
     },
