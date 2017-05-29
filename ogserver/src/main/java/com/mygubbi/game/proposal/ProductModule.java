@@ -63,6 +63,8 @@ public class ProductModule extends JsonObject
     private static final String KNOB_CODE = "knobCode";
     private static final String HANDLE_QUANTITY = "handleQuantity";
     private static final String KNOB_QUANTITY = "knobQuantity";
+    private static final String HINGE_CODE = "hingeCode";
+    private static final String HINGE_QUANTITY = "hingeQuantity";
     private static final String PRODUCT_CATEGORY = "productCategory";
 
     public ProductModule()
@@ -239,6 +241,14 @@ public class ProductModule extends JsonObject
 
     public String getProductCategory() {
         return this.getString(PRODUCT_CATEGORY);
+    }
+
+    public double getHingeQuantity() {
+        return this.getDouble(HINGE_QUANTITY);
+    }
+
+    public String getHingeCode() {
+        return this.getString(HINGE_CODE);
     }
 
     public ProductModule setAccPackDefault(String accPackDefault)

@@ -144,6 +144,7 @@ public class ModulePriceHolder
         }
         if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
         if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+        if (!(this.productModule.getHingeCode() == null)) this.getHandleOrKnobRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
     }
 
     private void addComponent(IModuleComponent component, String accPackCode)
