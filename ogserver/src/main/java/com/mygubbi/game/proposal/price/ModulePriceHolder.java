@@ -144,7 +144,7 @@ public class ModulePriceHolder
         }
         if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
         if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
-        if (!(this.productModule.getHingeCode() == null)) this.getHandleOrKnobRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
+        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
     }
 
     private void addComponent(IModuleComponent component, String accPackCode)
@@ -209,6 +209,13 @@ public class ModulePriceHolder
     private void getHandleOrKnobRate(String code,double quantity)
     {
         PriceMaster handleAndKnobCost = RateCardService.getInstance().getHandleOrKnobRate(code, this.priceDate, this.city);
+
+        handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
+    }
+
+    private void getHingeRate(String code,double quantity)
+    {
+        PriceMaster handleAndKnobCost = RateCardService.getInstance().getHingeRate(code, this.priceDate, this.city);
 
         handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
     }

@@ -144,6 +144,12 @@ public class RateCardService extends AbstractVerticle
 
 	}
 
+	public PriceMaster getHingeRate(String code, Date priceDate, String city)
+	{
+		return getPriceMaster(priceDate, city, code, PriceMasterKey.HINGE_TYPE);
+
+	}
+
 	public PriceMaster getFactorRate(String code, Date priceDate, String city)
 	{
 		String rateCardID = RateCard.makeKey(RateCard.FACTOR_TYPE,code);

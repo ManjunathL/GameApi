@@ -10,6 +10,7 @@ public class PriceMasterKey {
     public static final String ACESSORY_TYPE = "A";
     public static final String HARDWARE_TYPE = "H";
     public static final String KNOB_OR_HANDLE_TYPE = "K";
+    public static final String HINGE_TYPE = "I";
 
     private String rateType;
     private String rateId;
