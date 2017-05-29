@@ -277,11 +277,19 @@ public class AssembledProductInQuote
 
     private void collectModuleHandles(ProductModule module)
     {
+        if(module.getHandleCode()==null)
+        {
+            return;
+        }
         Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
         this.addToModuleHandle(handle,module.getHandleQuantity());
     }
     private void collectModuleKnob(ProductModule module)
     {
+        if(module.getKnobCode()==null)
+        {
+            return;
+        }
         Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getKnobCode());
         this.addToModuleHandle(handle,module.getKnobQuantity());
     }
@@ -308,11 +316,11 @@ public class AssembledProductInQuote
     {
         ModulePart part = this.createModulePart(component, quantity, unit, seq );
         PriceMaster addonRate = RateCardService.getInstance().getHardwareRate(component.getCode(),this.priceDate,this.city);
+        LOG.info("rate for hardware " +addonRate.getPrice());
         if(!(addonRate.getPrice()==0))
         {
             this.moduleHardware.add(part);
         }
-
     }
 
     private void addToAccessoryPackPanels(ModulePanel carcassPanel, double quantity, String unit, int seq)
@@ -323,6 +331,7 @@ public class AssembledProductInQuote
 
     private void addToModuleHandle(Handle handleCode, double quantity)
     {
+        LOG.info("handle code " +handleCode +"quantity " +quantity);
         ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),"Catalogue code","ERP code");
         if(!(quantity==0.0))
         {

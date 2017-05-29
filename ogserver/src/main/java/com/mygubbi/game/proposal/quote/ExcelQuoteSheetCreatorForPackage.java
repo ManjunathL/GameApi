@@ -695,7 +695,7 @@ public class ExcelQuoteSheetCreatorForPackage implements ExcelCellProcessor
         currentRow++;
         this.createRowAndFillData(currentRow,"WoodWork Cost",product.getAmountWithoutAddons());*/
 
-        currentRow++;
+       // currentRow++;
         /*this.createRowAndFillData(currentRow,"Accessory Cost",amount);
         currentRow++;
         this.createRowAndFillData(currentRow,"WoodWork Cost",amt-amount);
@@ -762,7 +762,7 @@ public class ExcelQuoteSheetCreatorForPackage implements ExcelCellProcessor
 
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
                 this.createRowAndFillData(cr, null, "Finish Material : " +li.get(index).getFinishtype() + " , Finish Type : " +fmaterial );
-                //cr++;
+                cr++;
 
                 unitSequence++;
                 if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
