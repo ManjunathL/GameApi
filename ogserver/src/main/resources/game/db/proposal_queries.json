@@ -1361,6 +1361,14 @@
       "query": "select title,imagePath from shutter_master where shutterCode in (select shutterCode from shutter_finish_mapping where finishcode in(select finishcode from finish_master where finishCode = ?))",
       "params": ["finishCode"],
       "jsonfields":[]
+    },
+    {
+      "id": "module.hingdata",
+      "type": "select",
+      "table": "module_hinge_map",
+      "query": "select modulecode,hingecode,qty,type,qtyFormula,qtyFlag from module_hinge_map where modulecode=? and type=?",
+      "params": ["modulecode","type"],
+      "jsonfields":[]
     }
   ]
 }
