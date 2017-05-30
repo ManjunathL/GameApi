@@ -482,7 +482,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select code, width, depth, height, description, imagePath, moduleType, moduleCategory, productCategory, material, unitType, accessoryPackDefault, remarks, handleMandatory, knobMandatory,sqftCalculation from module_master",
+      "query": "select code, width, depth, height, description, imagePath, moduleType, moduleCategory, productCategory, material, unitType, accessoryPackDefault, remarks, handleMandatory, knobMandatory, hingeMandatory, sqftCalculation from module_master",
       "params": []
     },
 
@@ -888,7 +888,7 @@
     {
       "id": "module.selectModulesByCategory",
       "type": "select",
-      "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath, accessoryPackDefault, remarks, unitType from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
+      "query": "select distinct code, description, width, depth, height, productCategory, moduleCategory, moduleType, imagePath, accessoryPackDefault, remarks, unitType, handleMandatory, knobMandatory, hingeMandatory, sqftCalculation from module_master where (productCategory='all' or productCategory = ?) and moduleCategory = ?",
       "params": ["productCategory","moduleCategory"]
     },
 

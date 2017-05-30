@@ -460,6 +460,10 @@ public class ModuleDataService extends AbstractVerticle
             module.setModuleCategory(mgModule.getModuleCategory());
             module.setAccPackDefault(mgModule.getAccessoryPackDefault());
             module.setAccessoryFlag("N");
+            module.setHandleMandatory(mgModule.getHandleMandatory());
+            module.setKnobMandatory(mgModule.getKnobMandatory());
+            module.setHingeMandatory(mgModule.getHingeMandatory());
+            module.setSqftCalculation(mgModule.getSqftCalculation());
         }
         else
         {

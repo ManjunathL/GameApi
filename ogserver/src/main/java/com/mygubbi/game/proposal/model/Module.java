@@ -23,6 +23,9 @@ public class Module
     public static final String ACCESSORYPACKDEFAULT = "accessoryPackDefault";
     public static final String REMARKS = "remarks";
     private static final String HANDLE_MANDATORY = "handleMandatory";
+    private static final String KNOB_MANDATORY = "knobMandatory";
+    private static final String HINGE_MANDATORY = "hingeMandatory";
+    private static final String SQFT_CALCULATION = "sqftCalculation";
 
 
     private static final String STANDARD_MODULE = "S";
@@ -42,6 +45,9 @@ public class Module
     private String accessoryPackDefault;
     private String remarks;
     private String handleMandatory;
+    private String knobMandatory;
+    private String hingeMandatory;
+    private String sqftCalculation;
 
     public Module()
     {
@@ -64,6 +70,10 @@ public class Module
         this.setAccessoryPackDefault(json.getString(ACCESSORYPACKDEFAULT));
         this.setRemarks(json.getString(REMARKS));
         this.setHandleMandatory(json.getString(HANDLE_MANDATORY));
+        this.setKnobMandatory(json.getString(KNOB_MANDATORY));
+        this.setHingeMandatory(json.getString(HINGE_MANDATORY));
+        this.setSqftCalculation(json.getString(SQFT_CALCULATION));
+
     }
 
     public String getModuleCategory() {
@@ -220,6 +230,30 @@ public class Module
 
     public void setHandleMandatory(String handleMandatory) {
         this.handleMandatory = handleMandatory;
+    }
+
+    public String getKnobMandatory() {
+        return knobMandatory;
+    }
+
+    public void setKnobMandatory(String knobMandatory) {
+        this.knobMandatory = knobMandatory;
+    }
+
+    public String getHingeMandatory() {
+        return hingeMandatory;
+    }
+
+    public void setHingeMandatory(String hingeMandatory) {
+        this.hingeMandatory = hingeMandatory;
+    }
+
+    public String getSqftCalculation() {
+        return sqftCalculation;
+    }
+
+    public void setSqftCalculation(String sqftCalculation) {
+        this.sqftCalculation = sqftCalculation;
     }
 }
 
