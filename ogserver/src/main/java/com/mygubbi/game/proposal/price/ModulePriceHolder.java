@@ -49,6 +49,7 @@ public class ModulePriceHolder
     private double carcassCost = 0;
     private double accessoryCost = 0;
     private double handleandKnobCost = 0;
+    private double hingeCost = 0;
     private double hardwareCost = 0;
     private double labourCost = 0;
     private double totalCost = 0;
@@ -142,6 +143,10 @@ public class ModulePriceHolder
                 this.addAccessoryComponent(new ModuleComponent().setComponentCode(addonCode).setQuantity(1));
             }
         }
+        for (HingePack hingePack : this.productModule.getHingePacks())
+        {
+            this.getHingeRateBasedOnQty(hingePack);
+        }
         if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
         if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
         if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
@@ -211,6 +216,30 @@ public class ModulePriceHolder
         PriceMaster handleAndKnobCost = RateCardService.getInstance().getHandleOrKnobRate(code, this.priceDate, this.city);
 
         handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
+    }
+
+    private void getHingeRateBasedOnQty(HingePack hingePack)
+    {
+        double quantity = hingePack.getQUANTITY();
+        if (Objects.equals(hingePack.getQtyFlag(), "C"))
+        {
+          if (Objects.equals(hingePack.getQtyFormula(), "F6"))
+          {
+              int value1 = (productModule.getHeight() > 2100) ? 5 : 4;
+              int value2 = (productModule.getWidth() > 600) ? 2 : 1;
+              quantity = value1 * value2;
+          }
+            else  if (Objects.equals(hingePack.getQtyFormula(), "F12"))
+          {
+              quantity = (productModule.getWidth() >= 601) ? 4 : 2;
+          }
+            PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(hingePack.getHingeCode(),this.priceDate,this.city);
+            hingeCost += hingeCostPriceMaster.getPrice() * quantity;
+        }
+        else {
+            PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(hingePack.getHingeCode(),this.priceDate,this.city);
+            hingeCost += hingeCostPriceMaster.getPrice() * quantity;
+        }
     }
 
     private void getHingeRate(String code,double quantity)
@@ -327,6 +356,7 @@ public class ModulePriceHolder
                 .put("shutterCost", this.round(this.shutterCost, 2))
                 .put("accessoryCost", this.round(this.accessoryCost, 2))
                 .put("handleAndKnobCost", this.round(this.handleandKnobCost, 2))
+                .put("hingeCost", this.round(this.hingeCost, 2))
                 .put("labourCost", this.round(this.labourCost, 2))
                 .put("hardwareCost", this.round(this.hardwareCost, 2))
                 .put("totalCost", this.round(this.totalCost, 2));
@@ -466,8 +496,8 @@ public class ModulePriceHolder
             this.totalCost=0.0;
         }else {
             this.labourCost = this.moduleArea * labourRateCard.getRate();
-            this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.hardwareCost;
-            this.totalCost = this.woodworkCost + this.accessoryCost + handleandKnobCost;
+            this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + handleandKnobCost + hingeCost;
+            this.totalCost = this.woodworkCost + this.accessoryCost ;
         }
     }
 
