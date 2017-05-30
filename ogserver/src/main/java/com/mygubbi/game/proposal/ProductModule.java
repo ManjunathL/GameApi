@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.game.proposal.model.HingePack;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -56,6 +57,7 @@ public class ProductModule extends JsonObject
     private static final String REMARKS = "remarks";
     private static final String DESCRIPTION = "description";
     private static final String ACCPACKS = "accessoryPacks";
+    private static final String HINGE_PACK = "hingePack";
     private static final String ACC_PACK_DEFAULT = "accessoryPackDefault";
     private static final String COST_WO_ACCESSORIES = "costWoAccessories";
     private static final String ACCESSORY_FLAG = "accessoryflag";
@@ -76,6 +78,7 @@ public class ProductModule extends JsonObject
     {
         super(json.getMap());
         this.setAccessoryPacks();
+        this.setHingePacks();
         this.setExposed();
     }
 
@@ -385,9 +388,31 @@ public class ProductModule extends JsonObject
         }
     }
 
+
     public List<ModuleAccessoryPack> getAccessoryPacks()
     {
         if (this.containsKey(ACCPACKS)) return this.getJsonArray(ACCPACKS).getList();
+        return Collections.EMPTY_LIST;
+    }
+
+    private void setHingePacks()
+    {
+        if (this.containsKey(HINGE_PACK))
+        {
+            JsonArray hingePackJson = this.getJsonArray(HINGE_PACK);
+            JsonArray hingePacks = new JsonArray();
+            for (int i=0; i < hingePackJson.size(); i++)
+            {
+                hingePacks.add(new HingePack(hingePackJson.getJsonObject(i)));
+            }
+            this.put(HINGE_PACK, hingePacks);
+        }
+    }
+
+
+    public List<HingePack> getHingePacks()
+    {
+        if (this.containsKey(HINGE_PACK)) return this.getJsonArray(HINGE_PACK).getList();
         return Collections.EMPTY_LIST;
     }
 
