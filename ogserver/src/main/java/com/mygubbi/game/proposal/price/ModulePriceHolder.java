@@ -149,7 +149,7 @@ public class ModulePriceHolder
         }
         if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
         if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
-        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
+//        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
     }
 
     private void addComponent(IModuleComponent component, String accPackCode)
@@ -496,7 +496,7 @@ public class ModulePriceHolder
             this.totalCost=0.0;
         }else {
             this.labourCost = this.moduleArea * labourRateCard.getRate();
-            this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + handleandKnobCost + hingeCost;
+            this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.handleandKnobCost + this.hingeCost + this.hardwareCost;
             this.totalCost = this.woodworkCost + this.accessoryCost ;
         }
     }
