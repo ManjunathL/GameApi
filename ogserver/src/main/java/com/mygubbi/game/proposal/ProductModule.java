@@ -1,6 +1,5 @@
 package com.mygubbi.game.proposal;
 
-import com.mygubbi.game.proposal.model.HingePack;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -67,7 +66,11 @@ public class ProductModule extends JsonObject
     private static final String KNOB_QUANTITY = "knobQuantity";
     private static final String HINGE_CODE = "hingeCode";
     private static final String HINGE_QUANTITY = "hingeQuantity";
+    private static final String HANDLE_MANDATORY = "handleMandatory";
+    private static final String KNOB_MANDATORY = "knobMandatory";
+    private static final String HINGE_MANDATORY = "hingeMandatory";
     private static final String PRODUCT_CATEGORY = "productCategory";
+    private static final String SQFT_CALCULATION = "sqftCalculation";
 
     public ProductModule()
     {
@@ -78,7 +81,6 @@ public class ProductModule extends JsonObject
     {
         super(json.getMap());
         this.setAccessoryPacks();
-        this.setHingePacks();
         this.setExposed();
     }
 
@@ -254,6 +256,14 @@ public class ProductModule extends JsonObject
         return this.getString(HINGE_CODE);
     }
 
+    public String getHandleMandatory() { return this.getString(HANDLE_MANDATORY);}
+
+    public String getKnobMandatory() { return this.getString(KNOB_MANDATORY); }
+
+    public String getHingeMandatory() { return this.getString(HINGE_MANDATORY); }
+
+    public String getSqftCalculation() {  return this.getString(SQFT_CALCULATION);  }
+
     public ProductModule setAccPackDefault(String accPackDefault)
     {
         this.put(ACC_PACK_DEFAULT,accPackDefault);
@@ -388,7 +398,6 @@ public class ProductModule extends JsonObject
         }
     }
 
-
     public List<ModuleAccessoryPack> getAccessoryPacks()
     {
         if (this.containsKey(ACCPACKS)) return this.getJsonArray(ACCPACKS).getList();
@@ -415,6 +424,31 @@ public class ProductModule extends JsonObject
         if (this.containsKey(HINGE_PACK)) return this.getJsonArray(HINGE_PACK).getList();
         return Collections.EMPTY_LIST;
     }
+
+    public ProductModule setHandleMandatory(String flag)
+    {
+        this.put(HANDLE_MANDATORY, flag);
+        return this;
+    }
+
+    public ProductModule setKnobMandatory(String flag)
+    {
+        this.put(KNOB_MANDATORY, flag);
+        return this;
+    }
+
+    public ProductModule setHingeMandatory(String flag)
+    {
+        this.put(HINGE_MANDATORY, flag);
+        return this;
+    }
+
+    public ProductModule setSqftCalculation(String flag)
+    {
+        this.put(SQFT_CALCULATION, flag);
+        return this;
+    }
+
 
     public int getWidth()
     {
@@ -461,6 +495,10 @@ public class ProductModule extends JsonObject
                 ", handleQuantity='" + this.getHandleQuantity() + '\'' +
                 ", knobQuantity='" + this.getKnobQuantity() + '\'' +
                 ", remarks='" + this.getRemarks() + '\'' +
+                ", handleMandatory='" + this.getHandleMandatory() + '\'' +
+                ", knobMandatory='" + this.getKnobMandatory() + '\'' +
+                ", hingeMandatory='" + this.getHingeMandatory() + '\'' +
+                ", sqftCalculation='" + this.getSqftCalculation() + '\'' +
                 '}';
 
     }
