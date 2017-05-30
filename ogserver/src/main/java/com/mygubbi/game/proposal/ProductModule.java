@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.game.proposal.model.HingePack;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -81,6 +82,7 @@ public class ProductModule extends JsonObject
     {
         super(json.getMap());
         this.setAccessoryPacks();
+        this.setHingePacks();
         this.setExposed();
     }
 
