@@ -952,6 +952,14 @@
       "params":["modulecode","type"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/module/selectshutterimage",
+      "source": "db",
+      "query":"module.shutterimage",
+      "params":["shutterCode"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }
