@@ -72,6 +72,10 @@ public class ProductModule extends JsonObject
     private static final String HINGE_MANDATORY = "hingeMandatory";
     private static final String PRODUCT_CATEGORY = "productCategory";
     private static final String SQFT_CALCULATION = "sqftCalculation";
+    private static final String HANDLE_TYPE = "handleType";
+    private static final String HANDLE_FINISH = "handleFinish";
+    private static final String KNOB_TYPE = "konbType";
+    private static final String KNOB_FINISH = "knobFinish";
 
     public ProductModule()
     {
@@ -265,6 +269,47 @@ public class ProductModule extends JsonObject
     public String getHingeMandatory() { return this.getString(HINGE_MANDATORY); }
 
     public String getSqftCalculation() {  return this.getString(SQFT_CALCULATION);  }
+
+    public String getHandleType() {
+        return this.getString(HANDLE_TYPE);
+    }
+
+    public String getHandleFinish() {
+        return this.getString(HANDLE_FINISH);
+    }
+
+    public String getKnobType() {
+        return this.getString(KNOB_TYPE);
+    }
+
+    public String getKnobFinish() {
+        return this.getString(KNOB_FINISH);
+    }
+
+    public ProductModule setHandleType(String handleType)
+    {
+        this.put(HANDLE_TYPE,handleType);
+        return this;
+    }
+
+    public ProductModule setHandleFinish(String handleFinish)
+    {
+        this.put(HANDLE_FINISH,handleFinish);
+        return this;
+    }
+
+    public ProductModule setKnobType(String knobType)
+    {
+        this.put(KNOB_TYPE,knobType);
+        return this;
+    }
+
+    public ProductModule setKnobFinish(String knobFinish)
+    {
+        this.put(KNOB_FINISH,knobFinish);
+        return this;
+    }
+
 
     public ProductModule setAccPackDefault(String accPackDefault)
     {

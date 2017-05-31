@@ -59,7 +59,7 @@ public class ProposalProductHandler extends AbstractRouteHandler
         for (int i = 0; i < size; i++)
         {
             ProductModule module = modules.get(i);
-            ModuleDataService.getInstance().setMapping(module);
+            ModuleDataService.getInstance().setMapping(module,productLineItem);
             productLineItem.addModule(module);
         }
         this.updateProductLineItem(routingContext, productLineItem);

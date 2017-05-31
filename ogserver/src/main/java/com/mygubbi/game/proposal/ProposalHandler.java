@@ -305,7 +305,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void getAccessoryRate(RoutingContext routingContext, String code, Date priceDate, String city) {
         PriceMaster addonRate = RateCardService.getInstance().getAccessoryRate(code, priceDate, city);
-        if (addonRate == null || addonRate.getPrice() == 0) {
+        if (addonRate == null ) {
             LOG.error("Error in retrieving addon price");
             sendError(routingContext, "Error in retrieving addon price.");
         } else {
@@ -323,7 +323,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void getHardwareRate(RoutingContext routingContext, String code, Date priceDate, String city) {
         PriceMaster addonRate = RateCardService.getInstance().getHardwareRate(code, priceDate, city);
-        if (addonRate == null || addonRate.getPrice() == 0) {
+        if (addonRate == null ) {
             LOG.error("Error in retrieving addon price");
             sendError(routingContext, "Error in retrieving addon price.");
         } else {
@@ -341,7 +341,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void getRateFactor(RoutingContext routingContext, String code, Date priceDate, String city) {
         PriceMaster factorRate = RateCardService.getInstance().getFactorRate(code, priceDate, city);
-        if (factorRate == null || factorRate.getPrice() == 0) {
+        if (factorRate == null ) {
             LOG.error("Error in retrieving factor rate");
             sendError(routingContext, "Error in retrieving factor rate.");
         } else {
@@ -367,9 +367,9 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void getHandleKnobDetails(RoutingContext routingContext, String code, Date priceDate, String city) {
         PriceMaster addonRate = RateCardService.getInstance().getHandleOrKnobRate(code, priceDate, city);
-        if (addonRate == null || addonRate.getPrice() == 0) {
-            LOG.error("Error in retrieving addon price");
-            sendError(routingContext, "Error in retrieving addon price.");
+        if (addonRate == null ) {
+            LOG.error("Error in retrieving handle price");
+            sendError(routingContext, "Error in retrieving handle price.");
         } else {
             sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
@@ -377,9 +377,9 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void getHingeDetails(RoutingContext routingContext, String code, Date priceDate, String city) {
         PriceMaster addonRate = RateCardService.getInstance().getHingeRate(code, priceDate, city);
-        if (addonRate == null || addonRate.getPrice() == 0) {
-            LOG.error("Error in retrieving addon price");
-            sendError(routingContext, "Error in retrieving addon price.");
+        if (addonRate == null ) {
+            LOG.error("Error in retrieving hinge price");
+            sendError(routingContext, "Error in retrieving hinge price.");
         } else {
             sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
