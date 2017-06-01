@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,6 +73,17 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                 break;
         }
     }
+    public String exposedSides(ProductModule module) {
+        String exposed="";
+        if(module.isLeftExposed()) {exposed+="Left";}
+        if(module.isRightExposed()) {exposed+=" Right";}
+        if(module.isBottomExposed()) {exposed+=" Bottom";}
+        if(module.isTopExposed()) {exposed+=" Top";}
+        if(module.isBackExposed()) {exposed+=" Back";}
+        if(module.isOpenUnit()) {exposed+=" Open";}
+
+        return exposed;
+    }
 
     private int fillModules(List<ProductModule> modules, int currentRow, String defaultMessage) {
         if (modules == null || modules.isEmpty()) {
@@ -93,14 +105,14 @@ public class ModuleSheetCreator implements ExcelCellProcessor
             if ((module.getHandleCode()!= null)&& (module.getKnobCode()== null))  {
             Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
-                    mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                    mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), exposedSides(module),
                     finish.getEdgeBinding(),hingeTitle, handle.getTitle(), "NA",this.product.getGlass()});
                 seq++;
             }
             else if ((module.getHandleCode()== null)&& (module.getKnobCode()!= null))   {
                 Handle knob = ModuleDataService.getInstance().getHandleTitle(module.getKnobCode());
                 this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
-                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), exposedSides(module),
                         finish.getEdgeBinding(),hingeTitle, "NA", knob.getTitle(),this.product.getGlass()});
                 seq++;
             }
@@ -108,13 +120,13 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                 Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
                 Handle knob = ModuleDataService.getInstance().getHandleTitle(module.getKnobCode());
                 this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
-                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), exposedSides(module),
                         finish.getEdgeBinding(),hingeTitle,handle.getTitle(),knob.getTitle(),this.product.getGlass()});
                 seq++;
             }
             else {
                 this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
-                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), finish.getFinishMaterial(), module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), finish.getFinishMaterial(), module.getColorCode(), mgModule.getDimension(), exposedSides(module),
                         finish.getEdgeBinding(), hingeTitle, "NA", "NA",this.product.getGlass()});
 
                 seq++;
