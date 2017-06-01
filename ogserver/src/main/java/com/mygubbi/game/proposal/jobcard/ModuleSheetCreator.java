@@ -1,8 +1,10 @@
 package com.mygubbi.game.proposal.jobcard;
 
 import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.Handle;
+import com.mygubbi.game.proposal.model.HingePack;
 import com.mygubbi.game.proposal.model.Module;
 import com.mygubbi.game.proposal.model.ShutterFinish;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
@@ -30,6 +32,7 @@ public class ModuleSheetCreator implements ExcelCellProcessor
     private ExcelStyles styles;
     private AssembledProductInQuote product;
     private ExcelSheetProcessor sheetProcessor;
+    private String hingeTitle;
 
     public ModuleSheetCreator(Sheet sheet, QuoteData quoteData, AssembledProductInQuote product, ExcelStyles styles)
     {
@@ -70,35 +73,55 @@ public class ModuleSheetCreator implements ExcelCellProcessor
         }
     }
 
-    private int fillModules(List<ProductModule> modules, int currentRow, String defaultMessage)
-    {
-        if (modules == null || modules.isEmpty())
-        {
+    private int fillModules(List<ProductModule> modules, int currentRow, String defaultMessage) {
+        if (modules == null || modules.isEmpty()) {
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new String[]{defaultMessage});
             return currentRow;
         }
 
         int seq = 1;
-        for (ProductModule module : modules)
-        {
+        for (ProductModule module : modules) {
             currentRow++;
             Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
             ShutterFinish finish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
-            if ( (Objects.equals(mgModule.getHandleMandatory(),"Yes")) || (!module.getHandleCode().isEmpty()) )  {
-            Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
-            LOG.debug("Handle object : " + handle.toString());
-                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
-                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), mgModule.getDimension(), module.getExposedSides(),
-                        finish.getEdgeBinding(), handle.getTitle()});
+            for (HingePack hingePack : module.getHingePacks())
+            {
+                hingeTitle =  hingePack.getTYPE();
             }
-            else
-                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
-                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), finish.getFinishMaterial(), mgModule.getDimension(), module.getExposedSides(),
-                        finish.getEdgeBinding(), "NA"});
 
-            seq++;
+            if ((module.getHandleCode()!= null)&& (module.getKnobCode()== null))  {
+            Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
+                    mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                    finish.getEdgeBinding(),hingeTitle, handle.getTitle(), "NA",this.product.getGlass()});
+                seq++;
+            }
+            else if ((module.getHandleCode()== null)&& (module.getKnobCode()!= null))   {
+                Handle knob = ModuleDataService.getInstance().getHandleTitle(module.getKnobCode());
+                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                        finish.getEdgeBinding(),hingeTitle, "NA", knob.getTitle(),this.product.getGlass()});
+                seq++;
+            }
+            else if ((module.getHandleCode()!= null)&& (module.getKnobCode()!= null))   {
+                Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
+                Handle knob = ModuleDataService.getInstance().getHandleTitle(module.getKnobCode());
+                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(),finish.getFinishMaterial(),module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                        finish.getEdgeBinding(),hingeTitle,handle.getTitle(),knob.getTitle(),this.product.getGlass()});
+                seq++;
+            }
+            else {
+                this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
+                        mgModule.getWidth(), mgModule.getDepth(), mgModule.getHeight(), 1, module.getCarcassCode(), finish.getTitle(), finish.getFinishMaterial(), module.getColorCode(), mgModule.getDimension(), module.getExposedSides(),
+                        finish.getEdgeBinding(), hingeTitle, "NA", "NA",this.product.getGlass()});
+
+                seq++;
+            }
+
         }
-        return currentRow;
-    }
+            return currentRow;
+        }
+
 }

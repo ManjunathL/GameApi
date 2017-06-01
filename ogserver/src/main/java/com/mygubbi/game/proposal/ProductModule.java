@@ -4,6 +4,7 @@ import com.mygubbi.game.proposal.model.HingePack;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,6 +73,10 @@ public class ProductModule extends JsonObject
     private static final String HINGE_MANDATORY = "hingeMandatory";
     private static final String PRODUCT_CATEGORY = "productCategory";
     private static final String SQFT_CALCULATION = "sqftCalculation";
+    private static final String HANDLE_TYPE = "handleType";
+    private static final String HANDLE_FINISH = "handleFinish";
+    private static final String KNOB_TYPE = "konbType";
+    private static final String KNOB_FINISH = "knobFinish";
 
     public ProductModule()
     {
@@ -266,6 +271,47 @@ public class ProductModule extends JsonObject
 
     public String getSqftCalculation() {  return this.getString(SQFT_CALCULATION);  }
 
+    public String getHandleType() {
+        return this.getString(HANDLE_TYPE);
+    }
+
+    public String getHandleFinish() {
+        return this.getString(HANDLE_FINISH);
+    }
+
+    public String getKnobType() {
+        return this.getString(KNOB_TYPE);
+    }
+
+    public String getKnobFinish() {
+        return this.getString(KNOB_FINISH);
+    }
+
+    public ProductModule setHandleType(String handleType)
+    {
+        this.put(HANDLE_TYPE,handleType);
+        return this;
+    }
+
+    public ProductModule setHandleFinish(String handleFinish)
+    {
+        this.put(HANDLE_FINISH,handleFinish);
+        return this;
+    }
+
+    public ProductModule setKnobType(String knobType)
+    {
+        this.put(KNOB_TYPE,knobType);
+        return this;
+    }
+
+    public ProductModule setKnobFinish(String knobFinish)
+    {
+        this.put(KNOB_FINISH,knobFinish);
+        return this;
+    }
+
+
     public ProductModule setAccPackDefault(String accPackDefault)
     {
         this.put(ACC_PACK_DEFAULT,accPackDefault);
@@ -331,6 +377,13 @@ public class ProductModule extends JsonObject
         this.put(DIMENSION, dimension);
         return this;
     }
+
+    public ProductModule setExposedSides(String exposedSides)
+    {
+        this.put(EXPOSED_SIDES, exposedSides);
+        return this;
+    }
+
 
     public ProductModule setCarcassCode(String code)
     {
@@ -492,8 +545,10 @@ public class ProductModule extends JsonObject
                 ", code='" + this.getMGCode() + '\'' +
                 ", finish='" + this.getFinishCode() + '\'' +
                 ", color='" + this.getColorCode() + '\'' +
+                ", exposedSides='" + this.getExposedSides() + '\'' +
                 ", handleCode='" + this.getHandleCode() + '\'' +
                 ", knobCode='" + this.getKnobCode()+ '\'' +
+                ", hingeCode='" + this.getHingeCode()+ '\'' +
                 ", handleQuantity='" + this.getHandleQuantity() + '\'' +
                 ", knobQuantity='" + this.getKnobQuantity() + '\'' +
                 ", remarks='" + this.getRemarks() + '\'' +

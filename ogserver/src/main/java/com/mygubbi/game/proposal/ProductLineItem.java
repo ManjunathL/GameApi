@@ -35,10 +35,15 @@ public class ProductLineItem extends JsonObject
     private static final String QUOTE_FILE_PATH = "quoteFilePath";
     private static final String MODULES = "modules";
     private static final String ADDONS = "addons";
+    private static final String GLASS = "glass";
     private static final String CREATED_ON = "createdOn";
     private static final String CREATED_BY = "createdBy";
     private static final String UPDATED_ON = "updatedOn";
     private static final String UPDATED_BY = "updatedBy";
+    private static final String HANDLE_TYPE = "handleType";
+    private static final String HANDLE_FINISH = "handleFinish";
+    private static final String KNOB_TYPE = "konbType";
+    private static final String KNOB_FINISH = "knobFinish";
 
     public static final String BASE_UNIT_TYPE = "Base unit";
 
@@ -125,6 +130,27 @@ public class ProductLineItem extends JsonObject
     public String getName()
     {
         return this.getString(CATALOGUE_NAME);
+    }
+
+    public String getHandleType() {
+        return this.getString(HANDLE_TYPE);
+    }
+
+    public String getHandleFinish() {
+        return this.getString(HANDLE_FINISH);
+    }
+
+    public String getKnobType() {
+        return this.getString(KNOB_TYPE);
+    }
+
+    public String getKnobFinish() {
+        return this.getString(KNOB_FINISH);
+    }
+
+    public String getGlass()
+    {
+        return this.getString(GLASS);
     }
 
     public ProductLineItem setAmount(double amount) {

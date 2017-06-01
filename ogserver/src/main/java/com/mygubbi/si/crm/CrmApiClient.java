@@ -20,8 +20,8 @@ public class CrmApiClient
 {
     public static final String APPLICATION_NAME = "mygubbilive";
     public static final String VERSION = "0.1";
-    public static final String USER_NAME = "admin";
-    public static final String PASSWORD = "Dolphin19";
+    public static final String USER_NAME = ConfigHolder.getInstance().getStringValue("sugarcrm_username","admin");
+    public static final String PASSWORD = ConfigHolder.getInstance().getStringValue("sugarcrm_password","Dolphin19");
     private final static Logger LOG = LogManager.getLogger(CrmApiClient.class);
 
     private SugarsoapPortType crmPort;
@@ -76,6 +76,7 @@ public class CrmApiClient
         try {
             this.crmPort = new SugarsoapLocator(ConfigHolder.getInstance().getStringValue("sugarcrm_url","https://suite.mygubbi.com/mygubbi_crm/soap.php")).getsugarsoapPort();
             this.sessionId = this.getSession(USER_NAME, PASSWORD);
+            System.out.println("sugarcrm_url:" +  ConfigHolder.getInstance().getStringValue("sugarcrm_url", "https://suite.mygubbi.com/mygubbi_crm/soap.php"));
             System.out.println("Session id:" + this.sessionId);
         } catch (Exception e) {
             throw new RuntimeException("Error in creating session ID");
@@ -213,7 +214,7 @@ public class CrmApiClient
 
         }
 
-       // JsonArray latestDocumentProposal = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryProposal));
+        // JsonArray latestDocumentProposal = new JsonArray(new CrmApiClient().getLatestDocuments(opportunities,opportunityId,categoryProposal));
 
         //JsonObject objectLatestDocumentFloorPlan = latestDocumentFloorPlan.getJsonObject(0);
         //JsonObject objectLatestDocumentProposal = latestDocumentProposal.getJsonObject(0);
@@ -221,7 +222,7 @@ public class CrmApiClient
 
 
 
-       // proposalObject.add(objectLatestDocumentFloorPlan);
+        // proposalObject.add(objectLatestDocumentFloorPlan);
         //proposalObject.add(objectLatestDocumentProposal);
 
         JsonObject finalJson = new JsonObject();
@@ -241,7 +242,7 @@ public class CrmApiClient
 
         if (doc.size() == 0){
             return doc.encodePrettily();
-           }
+        }
         JsonObject newDoc = doc.getJsonObject(0);
         JsonObject docJson1 = new JsonObject().put("documentLink", documentLinkBaseUrl+newDoc.getString("docUrl"))
                 .put("documentName", newDoc.getString("documentName"))
@@ -280,7 +281,7 @@ public class CrmApiClient
 
         System.out.println(parentType + parentId + status + task_id + task_type + user_id);
         //System.out.print( new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)));
-       //return new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)).encodePrettily();
+        //return new JsonArray(this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id)).encodePrettily();
         String doc = this.crmPort.update_task_status (this.sessionId, parentType, parentId, status, task_id, task_type, user_id);
         return doc;
     }
