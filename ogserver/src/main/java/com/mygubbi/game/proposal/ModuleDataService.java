@@ -479,7 +479,7 @@ public class ModuleDataService extends AbstractVerticle
         return this.hardwareMap.get(code);
     }
 
-    public void setMapping(ProductModule module)
+    public void setMapping(ProductModule module, ProductLineItem  productLineItem)
     {
         Module mgModule = this.getModule(module.getExternalCode());
         if (mgModule != null)
@@ -494,6 +494,10 @@ public class ModuleDataService extends AbstractVerticle
             module.setKnobMandatory(mgModule.getKnobMandatory());
             module.setHingeMandatory(mgModule.getHingeMandatory());
             module.setSqftCalculation(mgModule.getSqftCalculation());
+            module.setHandleFinish(productLineItem.getHandleFinish());
+            module.setHandleType(productLineItem.getHandleType());
+            module.setKnobType(productLineItem.getKnobType());
+            module.setKnobFinish(productLineItem.getKnobFinish());
         }
         else
         {
