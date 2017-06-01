@@ -41,6 +41,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, ShutterFinish> finishCodeMap = Collections.EMPTY_MAP;
     private Map<String, AccessoryPack> accessoryPackMap = Collections.EMPTY_MAP;
     private Map<String, Handle> handleMap = Collections.EMPTY_MAP;
+    private Map<String, HingePack> hingePackMap = Collections.EMPTY_MAP;
 
 
 	public static ModuleDataService getInstance()
@@ -67,6 +68,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheHardware();
         this.cacheFinishCostCodes();
         this.cacheHandleData();
+        this.cacheHingePackData();
 
 	}
 
@@ -220,6 +222,29 @@ public class ModuleDataService extends AbstractVerticle
                             this.handleMap.put(handle.getCode(),handle);
                         }
                         markResult("Handle master is loaded.", true);
+                    }
+                });
+    }
+
+    private void cacheHingePackData()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("modulehinge.master.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Module Hinge Map table is empty.", false);
+                    }
+                    else
+                    {
+                        this.hingePackMap = new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            HingePack hingePack = new HingePack(record);
+                            this.hingePackMap.put(hingePack.getHingeCode(),hingePack);
+                        }
+                        markResult("Module Hinge Map is loaded.", true);
                     }
                 });
     }
@@ -417,6 +442,11 @@ public class ModuleDataService extends AbstractVerticle
     public Handle getHandleTitle(String handleCode)
     {
         return this.handleMap.get(handleCode);
+    }
+
+    public HingePack getHingePackType(String hingeType)
+    {
+        return this.hingePackMap.get(hingeType);
     }
 
     public ShutterFinish getFinish(String carcassCode, String finishCode)

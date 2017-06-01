@@ -29,7 +29,7 @@ public class RateCardService extends AbstractVerticle
 	private Multimap<RateCardMasterKey, RateCardMaster> rateCardMap;
 
 	private static RateCardService INSTANCE;
-	
+
 	public static RateCardService getInstance()
 	{
 		return INSTANCE;

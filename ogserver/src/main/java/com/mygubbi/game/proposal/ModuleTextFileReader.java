@@ -131,6 +131,11 @@ public class ModuleTextFileReader
                 .setColorCode(color)
                 .setRemarks(remarks)
                 .setModuleSequence(moduleSequence);
+                /*.setHandleMandatory(handleMandatory)
+                .setKnobMandatory(knobMandatory)
+                .setHingeMandatory(hingeMandatory)
+                .setSqftCalculation(sqftCalculation);*/
+
         productModules.add(module);
     }
 

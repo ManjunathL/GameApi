@@ -214,14 +214,19 @@ public class ModulePriceHolder
     private void getHandleOrKnobRate(String code,double quantity)
     {
         PriceMaster handleAndKnobCost = RateCardService.getInstance().getHandleOrKnobRate(code, this.priceDate, this.city);
+        if (handleAndKnobCost!=null)
+        {
+            handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
+        }
 
-        handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
+
     }
 
     private void getHingeRateBasedOnQty(HingePack hingePack)
     {
+
         double quantity = hingePack.getQUANTITY();
-        if (Objects.equals(hingePack.getQtyFlag(), "C"))
+      if (Objects.equals(hingePack.getQtyFlag(), "C"))
         {
           if (Objects.equals(hingePack.getQtyFormula(), "F6"))
           {

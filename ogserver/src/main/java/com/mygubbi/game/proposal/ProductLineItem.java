@@ -35,6 +35,7 @@ public class ProductLineItem extends JsonObject
     private static final String QUOTE_FILE_PATH = "quoteFilePath";
     private static final String MODULES = "modules";
     private static final String ADDONS = "addons";
+    private static final String GLASS = "glass";
     private static final String CREATED_ON = "createdOn";
     private static final String CREATED_BY = "createdBy";
     private static final String UPDATED_ON = "updatedOn";
@@ -125,6 +126,11 @@ public class ProductLineItem extends JsonObject
     public String getName()
     {
         return this.getString(CATALOGUE_NAME);
+    }
+
+    public String getGlass()
+    {
+        return this.getString(GLASS);
     }
 
     public ProductLineItem setAmount(double amount) {

@@ -41,6 +41,8 @@ public class AssembledProductInQuote
     private List<ModulePart> addonAccessories;
     private List<ModulePart> addons;
     private List<ModulePart> handleandKnob;
+    private List<ModulePart> hingePack;
+
 
     private List<PanelComponent> panels;
 
@@ -48,6 +50,7 @@ public class AssembledProductInQuote
     private String shutterMaterial;
     private String city;
     private java.sql.Date priceDate;
+    private String hingeTitle;
 
     public AssembledProductInQuote(ProductLineItem product, String city, Date date)
     {
@@ -66,6 +69,8 @@ public class AssembledProductInQuote
     {
         return this.product.getProductCategory();
     }
+
+    public String getGlass(){ return this.product.getGlass();}
 
     public List<ModulePriceHolder> getPriceHolders()
     {
@@ -126,6 +131,11 @@ public class AssembledProductInQuote
     public List<ModulePart> getAggregatedKnobAndHandle()
     {
         return this.getAggregatedModuleParts(this.handleandKnob);
+    }
+
+    public List<ModulePart> getAggregatedHingePack()
+    {
+        return this.getAggregatedModuleParts(this.hingePack);
     }
 
     public List<ModulePart> getAggregatedAccessoryAddons()
@@ -190,6 +200,7 @@ public class AssembledProductInQuote
         this.addons = new ArrayList<>();
         this.modules = new ArrayList<>();
         this.handleandKnob = new ArrayList<>();
+        this.hingePack = new ArrayList<>();
 
         for (ProductModule module : this.product.getModules())
         {
@@ -207,6 +218,7 @@ public class AssembledProductInQuote
             this.collectModuleComponents(module);
             this.collectModuleHandles(module);
             this.collectModuleKnob(module);
+            this.collectModuleHinge(module);
         }
         for (ProductAddon addon : this.product.getAddons())
         {
@@ -294,6 +306,19 @@ public class AssembledProductInQuote
         this.addToModuleHandle(handle,module.getKnobQuantity());
     }
 
+    private void collectModuleHinge(ProductModule module)
+    {
+        if (module.getHingePacks().size() == 0)
+        {
+            return;
+        }
+        else{
+         for (HingePack hingePack : module.getHingePacks()) {
+            LOG.info("hingePack " +hingePack.toString());
+            this.addToModuleHinge(hingePack, hingePack.getQUANTITY());
+        }}
+    }
+
     private void addToAddons(ProductAddon addon, double quantity, String unit, int seq)
     {
         ModulePart part = new ModulePart(unit, seq, addon.getCode(), addon.getTitle(), quantity, addon.getBrandCode(), addon.getUom(),"gh","dd"," ");
@@ -336,6 +361,16 @@ public class AssembledProductInQuote
         if(!(quantity==0.0))
         {
             this.handleandKnob.add(part);
+        }
+    }
+
+    private void addToModuleHinge(HingePack hingeCode, double quantity)
+    {
+        LOG.debug("Hinge Pack /; " + hingePack.toString());
+        ModulePart part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),"Catalogue code","ERP code");
+        if(!(quantity==0.0))
+        {
+            this.hingePack.add(part);
         }
     }
 

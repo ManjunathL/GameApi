@@ -4,6 +4,7 @@ import com.mygubbi.game.proposal.model.HingePack;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -332,6 +333,13 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setExposedSides(String exposedSides)
+    {
+        this.put(EXPOSED_SIDES, exposedSides);
+        return this;
+    }
+
+
     public ProductModule setCarcassCode(String code)
     {
         this.put(CARCASS_CODE, code);
@@ -492,8 +500,10 @@ public class ProductModule extends JsonObject
                 ", code='" + this.getMGCode() + '\'' +
                 ", finish='" + this.getFinishCode() + '\'' +
                 ", color='" + this.getColorCode() + '\'' +
+                ", exposedSides='" + this.getExposedSides() + '\'' +
                 ", handleCode='" + this.getHandleCode() + '\'' +
                 ", knobCode='" + this.getKnobCode()+ '\'' +
+                ", hingeCode='" + this.getHingeCode()+ '\'' +
                 ", handleQuantity='" + this.getHandleQuantity() + '\'' +
                 ", knobQuantity='" + this.getKnobQuantity() + '\'' +
                 ", remarks='" + this.getRemarks() + '\'' +

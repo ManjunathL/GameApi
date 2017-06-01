@@ -31,6 +31,8 @@
   "websiteHost": "www.mygubbi.com:8685",
   "acceptSSLCertificates": "true",
   "processfbEvents": true,
+  "sugarcrm_username": "admin",
+  "sugarcrm_password": "Dolphin19",
   "sugarcrm_url" : "https://suite.mygubbi.com/mygubbi_crm/soap.php"
 
 

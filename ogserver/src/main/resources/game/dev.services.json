@@ -36,7 +36,7 @@
 
       {
         "name": "com.mygubbi.game.proposal.price.RateCardService"
-      },
+        },
 
       {
         "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService"
