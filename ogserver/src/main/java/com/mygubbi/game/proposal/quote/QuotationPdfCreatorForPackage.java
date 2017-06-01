@@ -294,7 +294,8 @@ public class QuotationPdfCreatorForPackage
             this.fillCatalogProducts(itemsTable);
             document.add(itemsTable);
 
-            p = new Paragraph("Estimated Cost(A):" +this.getRoundOffValue(String.valueOf((int)quoteData.productsCost)) ,fsize1);
+            double products=quoteData.productsCost - quoteData.discountAmount;
+            p = new Paragraph("Estimated Cost(A):" +this.getRoundOffValue(String.valueOf((int)products)) ,fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
@@ -453,10 +454,9 @@ public class QuotationPdfCreatorForPackage
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
-            double val2=quoteData.getTotalCost();
-            double val3=val2-val2%10;
-
-            p = new Paragraph("Estimated Cost(A+B):" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost())) ,fsize1);
+            int Total= (int) (products + quoteData.addonsCost);
+            int res = Total - Total % 10;
+            p = new Paragraph("Estimated Cost(A+B):" +this.getRoundOffValue(String.valueOf((res))) ,fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
@@ -467,7 +467,7 @@ public class QuotationPdfCreatorForPackage
             PdfPTable table2=new PdfPTable(1);
             table2.setWidthPercentage(100);
 
-            p=new Paragraph("In words: " +word.convertNumberToWords((int)quoteData.getTotalCost()) + " Rupees Only" ,fsize1);
+            p=new Paragraph("In words: " +word.convertNumberToWords(res) + " Rupees Only" ,fsize1);
             table2.addCell(new Paragraph(p));
             document.add(table2);
 
