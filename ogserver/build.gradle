@@ -89,6 +89,7 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.4'
     compile 'org.apache.lucene:lucene-expressions:4.10.4'
     compile 'com.google.guava:guava:19.0'
+    compile group: 'us.monoid.web', name: 'resty', version: '0.3.2'
 
     compile 'org.apache.poi:poi:3.12'
     compile group: 'org.jooq', name: 'jool', version: '0.9.11'
