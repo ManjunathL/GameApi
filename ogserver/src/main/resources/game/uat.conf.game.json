@@ -28,8 +28,8 @@
     "game/db/user_queries.json",
     "config/queries.json"
   ],
-  "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
-  "fbUrl": "https://mygubbi.firebaseio.com",
+  "fbServicesJson": "config/test/mygubbi-uat-firebase.json",
+  "fbUrl": "https://mygubbi-uat.firebaseio.com",
   "processfbEvents": true,
   "sugarcrm_username": "admin",
   "sugarcrm_password": "admin!@#",
