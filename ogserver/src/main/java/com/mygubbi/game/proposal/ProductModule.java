@@ -77,6 +77,7 @@ public class ProductModule extends JsonObject
     private static final String HANDLE_FINISH = "handleFinish";
     private static final String KNOB_TYPE = "konbType";
     private static final String KNOB_FINISH = "knobFinish";
+    private static final String SHUTTER_DESIGN_CODE = "shutterDesignCode";
 
     public ProductModule()
     {
@@ -126,6 +127,11 @@ public class ProductModule extends JsonObject
     public String getFinishCode()
     {
         return this.getString(FINISH_CODE);
+    }
+
+    public String getShutterDesignCode()
+    {
+        return this.getString(SHUTTER_DESIGN_CODE);
     }
 
     public String getFinishType()
@@ -397,6 +403,12 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setShutterDesignCode(String code)
+    {
+        this.put(SHUTTER_DESIGN_CODE, code);
+        return this;
+    }
+
     public ProductModule setFinishType(String code)
     {
         this.put(FINISH_TYPE, code);
@@ -544,6 +556,7 @@ public class ProductModule extends JsonObject
                 ", extCode='" + this.getExternalCode() + '\'' +
                 ", code='" + this.getMGCode() + '\'' +
                 ", finish='" + this.getFinishCode() + '\'' +
+                ", shutterDesignCode='" + this.getShutterDesignCode() + '\'' +
                 ", color='" + this.getColorCode() + '\'' +
                 ", exposedSides='" + this.getExposedSides() + '\'' +
                 ", handleCode='" + this.getHandleCode() + '\'' +
