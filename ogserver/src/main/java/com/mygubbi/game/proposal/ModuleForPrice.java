@@ -15,11 +15,14 @@ public class ModuleForPrice extends JsonObject
     private static final String PRICE_DATE = "priceDate";
     private static final String CITY = "city";
     private static final String MODULE = "module";
+    private static final String HANDLE_TYPE = "handleType";
+    private static final String PRODUCT = "product";
 
     public ModuleForPrice(JsonObject json)
     {
         super(json.getMap());
         this.setModule();
+        this.setProduct();
     }
 
     public Date getPriceDate()
@@ -32,6 +35,9 @@ public class ModuleForPrice extends JsonObject
         return this.getString(CITY);
     }
 
+    public String getHandleType() {
+        return this.getString(HANDLE_TYPE);
+    }
 
     public ModuleForPrice setCreateDate(Date createDate)
     {
@@ -52,6 +58,20 @@ public class ModuleForPrice extends JsonObject
         {
             this.put(MODULE, new ProductModule(this.getJsonObject(MODULE)));
         }
+    }
+
+    private void setProduct()
+    {
+        if (this.containsKey(PRODUCT))
+        {
+            this.put(PRODUCT, new ProductLineItem(this.getJsonObject(PRODUCT)));
+        }
+    }
+
+    public ProductLineItem getProduct()
+    {
+        if (this.containsKey(PRODUCT)) return (ProductLineItem) this.getJsonObject(PRODUCT);
+        return null;
     }
 
     public ProductModule getModule()

@@ -1,10 +1,7 @@
 package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.common.StringUtils;
-import com.mygubbi.game.proposal.ModuleAccessoryPack;
-import com.mygubbi.game.proposal.ModuleDataService;
-import com.mygubbi.game.proposal.ModuleForPrice;
-import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -24,8 +21,14 @@ public class ModulePriceHolder
 
     private static final double SQMM2SQFT = 0.0000107639;
     private static final String WARDROBE = "Wardrobe";
+    private static final String NORMAL = "Normal";
+    private static final String GOLA_PROFILE = "Gola Profile";
+    private static final String KITCHEN_BASE_CORNER_UNIT = "Kitchen Base Corner Unit";
+    private static final String LOFTS = "Loft";
+
 
     private ProductModule productModule;
+    private ProductLineItem productLineItem;
     private Module mgModule;
     private Collection<ModuleComponent> moduleComponents;
     private List<PanelComponent> panelComponents = Collections.EMPTY_LIST;
@@ -43,6 +46,16 @@ public class ModulePriceHolder
     private RateCard labourRateCard;
     private RateCard nonStandardloadingFactorCard;
     private RateCard loadingFactorBasedOnProduct;
+
+    private PriceMaster lWidthRate;
+    private PriceMaster cWidthRate;
+    private PriceMaster wWidthRate;
+    private PriceMaster bracketRate;
+    private PriceMaster cConnectorRate;
+    private PriceMaster lConnectorRate;
+    private PriceMaster gProfileRate;
+    private PriceMaster jProfileRate;
+
     private Boolean finishValue =false;
 
     private double shutterCost = 0;
@@ -58,6 +71,7 @@ public class ModulePriceHolder
 
     private String moduleCode;
     private String moduleType;
+    private String handleType;
 
     private java.sql.Date priceDate;
     private String city;
@@ -75,6 +89,8 @@ public class ModulePriceHolder
         this.productModule = moduleForPrice.getModule();
         this.priceDate = moduleForPrice.getPriceDate();
         this.city = moduleForPrice.getCity();
+        this.handleType = moduleForPrice.getHandleType();
+        this.productLineItem = moduleForPrice.getProduct();
     }
 
     public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date)
@@ -100,6 +116,8 @@ public class ModulePriceHolder
         this.getModuleAndComponents();
         this.prepareRateCards();
         this.resolveComponents();
+        //this.resolveHandles();
+
     }
 
     private void standardOrNonStandardModule() {
@@ -147,9 +165,113 @@ public class ModulePriceHolder
         {
             this.getHingeRateBasedOnQty(hingePack);
         }
+
+//        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
         if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
         if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
-//        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
+    }
+
+    private void resolveHandles()
+    {
+        if (Objects.equals(this.handleType, NORMAL))
+        {
+            if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
+            if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+        }
+        else if (Objects.equals(this.handleType,GOLA_PROFILE ))
+        {
+            int moduleCount = 0;
+            int drawerModuleCount= 0;
+            int wallProfileWidth = 0;
+            double lProfileWidth = 0.0;
+            double cProfileWidth = 0.0;
+            //int golaProfileLength = productLineItem.getGolaprofileLength;
+            double wProfilePrice = 0.0;
+            double lProfilePrice = 0.0;
+            double cProfilePrice = 0.0;
+            double profilePrice = 0.0;
+            double bracketPrice = 0.0;
+            double lConnectorPrice = 0.0;
+            double cConnectorPrice = 0.0;
+            double golaProfilePrice = 0.0;
+
+
+            for (ProductModule module : this.productLineItem.getModules())
+            {
+                if (!(module.getModuleCategory().contains(LOFTS)))
+                {
+                    if (Objects.equals(module.getHandleMandatory(), "Yes"))
+                    {
+                        moduleCount = moduleCount + 1;
+                        if (Objects.equals(module.getUnit(), "Wall Unit"))
+                        {
+                            wallProfileWidth = wallProfileWidth + module.getWidth();
+                        }
+                        else if (Objects.equals(module.getUnit(), "Base Unit")){
+                            if (Objects.equals(module.getModuleCategory(), KITCHEN_BASE_CORNER_UNIT))
+                            {
+                                lProfileWidth = lProfileWidth + (module.getWidth()/2);
+                            }
+                            else if (module.getModuleCategory().contains("Drawer"))
+                            {
+                                drawerModuleCount = drawerModuleCount + 1;
+                                cProfileWidth = cProfileWidth + module.getWidth();
+                            }
+                            else {
+                                lProfileWidth = lProfileWidth + module.getWidth();
+
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+
+
+
+            wProfilePrice = wallProfileWidth/1000*wWidthRate.getPrice();
+            lProfilePrice = lProfileWidth/1000*lWidthRate.getPrice();
+            cProfilePrice = cProfileWidth/1000*cWidthRate.getPrice();
+
+            profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
+            bracketPrice = (moduleCount * 2) * this.bracketRate.getPrice();
+           // lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
+            cConnectorPrice = drawerModuleCount * this.cConnectorRate.getPrice();
+
+            golaProfilePrice = profilePrice + bracketPrice + lConnectorPrice + cConnectorPrice;
+            handleandKnobCost += golaProfilePrice;
+
+        }
+        else {
+
+            double lWidth = 0;
+            double gOrJProfilePrice = 0;
+            double quantity = 0;
+            for (ProductModule module : this.productLineItem.getModules())
+            {
+                Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(module.getMGCode());
+                for (AccessoryPackComponent accessoryPackComponent : handles)
+                {
+                    quantity = accessoryPackComponent.getQuantity();
+                }
+                if (Objects.equals(module.getHandleMandatory(), "Yes"))
+                {
+                    if (module.getModuleCategory().contains("Drawer"))
+                    {
+                        lWidth = lWidth + (quantity * module.getWidth());
+                    }
+                    else {
+                        lWidth = lWidth + module.getWidth();
+                    }
+                }
+            }
+
+            gOrJProfilePrice = lWidth/1000 * lWidthRate.getPrice();
+            handleandKnobCost += gOrJProfilePrice;
+        }
+
     }
 
     private void addComponent(IModuleComponent component, String accPackCode)
@@ -311,6 +433,20 @@ public class ModulePriceHolder
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
+
+        //Profile Handles
+
+         this.lWidthRate = RateCardService.getInstance().getAccessoryRate("H073", priceDate, city);
+        this.cWidthRate = RateCardService.getInstance().getAccessoryRate("H071", priceDate, city);
+        this.wWidthRate = RateCardService.getInstance().getAccessoryRate("H076", priceDate, city);
+        this.bracketRate = RateCardService.getInstance().getAccessoryRate("H075", priceDate, city);
+        this.lConnectorRate = RateCardService.getInstance().getAccessoryRate("H074", priceDate, city);
+        this.cConnectorRate = RateCardService.getInstance().getAccessoryRate("H072", priceDate, city);
+        this.gProfileRate = RateCardService.getInstance().getAccessoryRate("H018", priceDate, city);
+        this.jProfileRate = RateCardService.getInstance().getAccessoryRate("H077", priceDate, city);
+
+
+
 
         if (carcassMaterialRateCard == null || carcassFinishRateCard == null || shutterFinishRateCard == null
                 || loadingFactorCard == null || labourRateCard == null || nonStandardloadingFactorCard == null || loadingFactorBasedOnProduct == null)
