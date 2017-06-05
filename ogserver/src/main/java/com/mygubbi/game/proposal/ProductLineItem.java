@@ -44,6 +44,8 @@ public class ProductLineItem extends JsonObject
     private static final String HANDLE_FINISH = "handleFinish";
     private static final String KNOB_TYPE = "konbType";
     private static final String KNOB_FINISH = "knobFinish";
+    public static final String NO_OF_LENGTHS="noOfLengths";
+    public static final String HANDLETYPE_SELECTION="handleTypeSelection";
 
     public static final String BASE_UNIT_TYPE = "Base unit";
 
@@ -151,6 +153,14 @@ public class ProductLineItem extends JsonObject
     public String getGlass()
     {
         return this.getString(GLASS);
+    }
+
+    public String getHandletypeSelection() {
+        return this.getString(HANDLETYPE_SELECTION);
+    }
+
+    public double getNoOfLengths() {
+        return this.getDouble(NO_OF_LENGTHS);
     }
 
     public ProductLineItem setAmount(double amount) {

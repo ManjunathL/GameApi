@@ -68,9 +68,9 @@ public class ProductModule extends JsonObject
     private static final String KNOB_QUANTITY = "knobQuantity";
     private static final String HINGE_CODE = "hingeCode";
     private static final String HINGE_QUANTITY = "hingeQuantity";
-    private static final String HANDLE_MANDATORY = "handleMandatory";
-    private static final String KNOB_MANDATORY = "knobMandatory";
-    private static final String HINGE_MANDATORY = "hingeMandatory";
+    private static final String HANDLE_MANDATORY = "handlePresent";
+    private static final String KNOB_MANDATORY = "knobPresent";
+    private static final String HINGE_MANDATORY = "hingePresent";
     private static final String PRODUCT_CATEGORY = "productCategory";
     private static final String SQFT_CALCULATION = "sqftCalculation";
     private static final String HANDLE_TYPE = "handleType";

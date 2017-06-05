@@ -71,7 +71,7 @@ public class ModulePriceHolder
 
     private String moduleCode;
     private String moduleType;
-    private String handleType;
+   // private String handleType;
 
     private java.sql.Date priceDate;
     private String city;
@@ -89,7 +89,7 @@ public class ModulePriceHolder
         this.productModule = moduleForPrice.getModule();
         this.priceDate = moduleForPrice.getPriceDate();
         this.city = moduleForPrice.getCity();
-        this.handleType = moduleForPrice.getHandleType();
+        //this.handleType = moduleForPrice.getProduct().getHandletypeSelection();
         this.productLineItem = moduleForPrice.getProduct();
     }
 
@@ -116,7 +116,7 @@ public class ModulePriceHolder
         this.getModuleAndComponents();
         this.prepareRateCards();
         this.resolveComponents();
-        //this.resolveHandles();
+        this.resolveHandles();
 
     }
 
@@ -167,25 +167,28 @@ public class ModulePriceHolder
         }
 
 //        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
-        if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
-        if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+       /* if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
+        if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());*/
     }
 
     private void resolveHandles()
     {
-        if (Objects.equals(this.handleType, NORMAL))
+        LOG.info("productline item" +productLineItem.toString());
+        LOG.info("this.productLineItem.getHandletypeSelection() " +this.productLineItem.getHandletypeSelection());
+        if (Objects.equals(this.productLineItem.getHandletypeSelection(), NORMAL))
         {
+            LOG.debug("normal Handle" + this.productModule.getHandleCode()+ ":" +this.productModule.getHandleQuantity());
             if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
             if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
         }
-        else if (Objects.equals(this.handleType,GOLA_PROFILE ))
+        else if (Objects.equals(this.productLineItem.getHandletypeSelection(),GOLA_PROFILE ))
         {
             int moduleCount = 0;
             int drawerModuleCount= 0;
             int wallProfileWidth = 0;
             double lProfileWidth = 0.0;
             double cProfileWidth = 0.0;
-            //int golaProfileLength = productLineItem.getGolaprofileLength;
+            double golaProfileLength = productLineItem.getNoOfLengths();
             double wProfilePrice = 0.0;
             double lProfilePrice = 0.0;
             double cProfilePrice = 0.0;
@@ -237,7 +240,7 @@ public class ModulePriceHolder
 
             profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
             bracketPrice = (moduleCount * 2) * this.bracketRate.getPrice();
-           // lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
+            lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
             cConnectorPrice = drawerModuleCount * this.cConnectorRate.getPrice();
 
             golaProfilePrice = profilePrice + bracketPrice + lConnectorPrice + cConnectorPrice;
@@ -246,11 +249,14 @@ public class ModulePriceHolder
         }
         else {
 
+            LOG.debug("G or J profile : ");
+
             double lWidth = 0;
             double gOrJProfilePrice = 0;
             double quantity = 0;
             for (ProductModule module : this.productLineItem.getModules())
             {
+                LOG.debug("Module : " + module.toString());
                 Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(module.getMGCode());
                 for (AccessoryPackComponent accessoryPackComponent : handles)
                 {
@@ -261,14 +267,17 @@ public class ModulePriceHolder
                     if (module.getModuleCategory().contains("Drawer"))
                     {
                         lWidth = lWidth + (quantity * module.getWidth());
+                        LOG.debug("Inside if :" + lWidth);
                     }
                     else {
                         lWidth = lWidth + module.getWidth();
+                        LOG.debug("Inside else :" + lWidth);
                     }
                 }
             }
 
             gOrJProfilePrice = lWidth/1000 * lWidthRate.getPrice();
+            LOG.debug("L width Rate :" + lWidthRate.getPrice());
             handleandKnobCost += gOrJProfilePrice;
         }
 
@@ -436,14 +445,14 @@ public class ModulePriceHolder
 
         //Profile Handles
 
-         this.lWidthRate = RateCardService.getInstance().getAccessoryRate("H073", priceDate, city);
-        this.cWidthRate = RateCardService.getInstance().getAccessoryRate("H071", priceDate, city);
-        this.wWidthRate = RateCardService.getInstance().getAccessoryRate("H076", priceDate, city);
-        this.bracketRate = RateCardService.getInstance().getAccessoryRate("H075", priceDate, city);
-        this.lConnectorRate = RateCardService.getInstance().getAccessoryRate("H074", priceDate, city);
-        this.cConnectorRate = RateCardService.getInstance().getAccessoryRate("H072", priceDate, city);
-        this.gProfileRate = RateCardService.getInstance().getAccessoryRate("H018", priceDate, city);
-        this.jProfileRate = RateCardService.getInstance().getAccessoryRate("H077", priceDate, city);
+         this.lWidthRate = RateCardService.getInstance().getHardwareRate("H073", priceDate, city);
+        this.cWidthRate = RateCardService.getInstance().getHardwareRate("H071", priceDate, city);
+        this.wWidthRate = RateCardService.getInstance().getHardwareRate("H076", priceDate, city);
+        this.bracketRate = RateCardService.getInstance().getHardwareRate("H075", priceDate, city);
+        this.lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
+        this.cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
+        this.gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
+        this.jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
 
 
 

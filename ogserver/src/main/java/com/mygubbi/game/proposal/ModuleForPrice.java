@@ -1,8 +1,13 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+
+import static org.apache.poi.ss.formula.functions.NumericFunction.LOG;
 
 /**
  * Created by Sunil on 27-04-2016.
@@ -10,6 +15,7 @@ import java.sql.Date;
 
 public class ModuleForPrice extends JsonObject
 {
+    private final static Logger LOG = LogManager.getLogger(ModuleForPrice.class);
     private static final double SQMM2SQFT = 0.0000107639;
 
     private static final String PRICE_DATE = "priceDate";
@@ -21,6 +27,7 @@ public class ModuleForPrice extends JsonObject
     public ModuleForPrice(JsonObject json)
     {
         super(json.getMap());
+        LOG.info("JSON object for product" +json.encodePrettily());
         this.setModule();
         this.setProduct();
     }
