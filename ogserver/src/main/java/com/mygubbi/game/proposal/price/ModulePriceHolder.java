@@ -410,22 +410,62 @@ public class ModulePriceHolder
         LOG.debug("Hinge Pack inside QTY : " + hingePack);
 
         double quantity = hingePack.getQUANTITY();
-      if (Objects.equals(hingePack.getQtyFlag(), "C"))
-        {
-            LOG.debug("Hinge Pack inside C : " + hingePack);
-          if (Objects.equals(hingePack.getQtyFormula(), "F6"))
-          {
-              int value1 = (productModule.getHeight() > 2100) ? 5 : 4;
-              int value2 = (productModule.getWidth() > 600) ? 2 : 1;
-              quantity = value1 * value2;
+
+      if (Objects.equals(hingePack.getQtyFlag(), "C")) {
+          LOG.debug("inisde 1st if" + hingePack);
+          if (Objects.equals(hingePack.getQtyFormula(), "") || hingePack.getQtyFormula().isEmpty()) {
+              LOG.debug("inisde 2nd if" + hingePack);
+              String code = null;
+              if (Objects.equals(hingePack.getTYPE(), "Soft Close"))
+              {
+                  LOG.debug("inisde soft close" + hingePack);
+                  if (productModule.getDepth() < 350)
+                      code = "HINGE05";
+                  else if (productModule.getDepth() < 400)
+                      code = "HINGE04";
+                  else if (productModule.getDepth() < 450)
+                      code = "HINGE02";
+                  else if (productModule.getDepth() < 500)
+                      code = "HINGE03";
+                  else if (productModule.getDepth() < 650)
+                      code = "HINGE06";
+              }
+              else
+              {
+                  LOG.debug("inisde non soft close" + hingePack);
+
+                  if (productModule.getDepth() < 350)
+                      code = "HINGE11";
+                  else if (productModule.getDepth() < 400)
+                      code = "HINGE10";
+                  else if (productModule.getDepth() < 450)
+                      code = "HINGE08";
+                  else if (productModule.getDepth() < 500)
+                      code = "HINGE09";
+                  else if (productModule.getDepth() < 650)
+                      code = "HINGE12";
+              }
+
+
+              LOG.debug("code" + code);
+
+              PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(code, this.priceDate, this.city);
+              hingeCost += hingeCostPriceMaster.getPrice() * quantity;
+
+          } else {
+
+              LOG.debug("Hinge Pack inside C : " + hingePack);
+              if (Objects.equals(hingePack.getQtyFormula(), "F6")) {
+                  int value1 = (productModule.getHeight() > 2100) ? 5 : 4;
+                  int value2 = (productModule.getWidth() > 600) ? 2 : 1;
+                  quantity = value1 * value2;
+              } else if (Objects.equals(hingePack.getQtyFormula(), "F12")) {
+                  quantity = (productModule.getWidth() >= 601) ? 4 : 2;
+              }
+              PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(hingePack.getHingeCode(), this.priceDate, this.city);
+              hingeCost += hingeCostPriceMaster.getPrice() * quantity;
           }
-            else  if (Objects.equals(hingePack.getQtyFormula(), "F12"))
-          {
-              quantity = (productModule.getWidth() >= 601) ? 4 : 2;
-          }
-            PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(hingePack.getHingeCode(),this.priceDate,this.city);
-            hingeCost += hingeCostPriceMaster.getPrice() * quantity;
-        }
+      }
         else {
             PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(hingePack.getHingeCode(),this.priceDate,this.city);
             hingeCost += hingeCostPriceMaster.getPrice() * quantity;
