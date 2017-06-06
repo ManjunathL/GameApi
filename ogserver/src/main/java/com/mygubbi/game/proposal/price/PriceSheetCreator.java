@@ -1,5 +1,7 @@
 package com.mygubbi.game.proposal.price;
 
+import com.mygubbi.game.proposal.model.Handle;
+import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.model.RateCard;
 import com.mygubbi.si.excel.ExcelCellProcessor;
 import com.mygubbi.si.excel.ExcelSheetProcessor;
@@ -60,6 +62,10 @@ public class PriceSheetCreator implements ExcelCellProcessor
             case "Accessories":
                 this.fillAccessories(cell.getRow().getRowNum() + 1, "No Accessories.");
                 break;
+
+          /*  case "Production Specification":
+                this.fillProductionSpecification(cell.getRow().getRowNum() + 1, "No Components.");
+                break;*/
 
             case "Rate Cards":
                 this.fillRateCards(cell.getRow().getRowNum() + 1, "No Rate Cards.");
@@ -145,6 +151,27 @@ public class PriceSheetCreator implements ExcelCellProcessor
         return currentRow;
     }
 
+    /*private int fillProductionSpecification(int currentRow, String defaultMessage)
+    {
+        List<Handle> productionSpecificationComponents = this.priceHolder.getProductionSpecificationComponents();
+        if (productionSpecificationComponents == null || productionSpecificationComponents.isEmpty())
+        {
+            currentRow++;
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new String[]{defaultMessage});
+            return currentRow;
+        }
+
+        int seq = 1;
+        for (Handle productionSpecification : productionSpecificationComponents)
+        {
+            currentRow++;
+            this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, productionSpecification.getType(), productionSpecification.getCode(),
+                    productionSpecification.getMgCode(), productionSpecification.getThickness(), productionSpecification.getTitle()});
+            seq++;
+        }
+        return currentRow;
+    }
+*/
     private int fillRateCards(int currentRow, String defaultMessage)
     {
         List<RateCard> rateCards = this.priceHolder.getRateCards();

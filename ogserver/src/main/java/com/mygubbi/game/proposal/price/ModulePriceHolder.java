@@ -23,7 +23,7 @@ public class ModulePriceHolder
     private static final String WARDROBE = "Wardrobe";
     private static final String NORMAL = "Normal";
     private static final String GOLA_PROFILE = "Gola Profile";
-    private static final String KITCHEN_BASE_CORNER_UNIT = "Kitchen Base Corner Unit";
+    private static final String CORNER_UNIT = "Corner";
     private static final String LOFTS = "Loft";
 
 
@@ -163,7 +163,9 @@ public class ModulePriceHolder
         }
         for (HingePack hingePack : this.productModule.getHingePacks())
         {
+            Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
             this.getHingeRateBasedOnQty(hingePack);
+         //   this.productionSpecificationComponents.add(new Handle(hinge.getType(),hinge.getCode(),hinge.getMgCode(),hinge.getThickness(),hinge.getTitle()));
         }
 
 //        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
@@ -177,9 +179,17 @@ public class ModulePriceHolder
         LOG.info("this.productLineItem.getHandletypeSelection() " +this.productLineItem.getHandletypeSelection());
         if (Objects.equals(this.productLineItem.getHandletypeSelection(), NORMAL))
         {
-            LOG.debug("normal Handle" + this.productModule.getHandleCode()+ ":" +this.productModule.getHandleQuantity());
-            if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
-            if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+            if (!(this.productModule.getHandleCode() == null))
+            {
+                this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
+               // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+              //  this.productionSpecificationComponents.add(new Handle(handle));
+            }
+            if (!(this.productModule.getKnobCode() == null)){
+                this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+               // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
+              //  this.productionSpecificationComponents.add(new Handle(knob));
+            }
         }
         else if (Objects.equals(this.productLineItem.getHandletypeSelection(),GOLA_PROFILE ))
         {
@@ -211,7 +221,7 @@ public class ModulePriceHolder
                             wallProfileWidth = wallProfileWidth + module.getWidth();
                         }
                         else if (Objects.equals(module.getUnit(), "Base Unit")){
-                            if (Objects.equals(module.getModuleCategory(), KITCHEN_BASE_CORNER_UNIT))
+                            if (module.getModuleCategory().contains(CORNER_UNIT))
                             {
                                 lProfileWidth = lProfileWidth + (module.getWidth()/2);
                             }
@@ -276,9 +286,20 @@ public class ModulePriceHolder
                 }
             }
 
-            gOrJProfilePrice = lWidth/1000 * lWidthRate.getPrice();
-            LOG.debug("L width Rate :" + lWidthRate.getPrice());
-            handleandKnobCost += gOrJProfilePrice;
+            if (this.productLineItem.getHandletypeSelection().equals("G Profile"))
+            {
+                gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
+                //LOG.debug("L width Rate :" + gProfileRate.getPrice());
+                handleandKnobCost += gOrJProfilePrice;
+            }
+            else
+            {
+                gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
+                //LOG.debug("L width Rate :" + jProfileRate.getPrice());
+                handleandKnobCost += gOrJProfilePrice;
+            }
+
+
         }
 
     }
