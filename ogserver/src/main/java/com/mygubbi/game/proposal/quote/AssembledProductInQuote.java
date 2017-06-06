@@ -204,7 +204,7 @@ public class AssembledProductInQuote
 
         for (ProductModule module : this.product.getModules())
         {
-            ModulePriceHolder priceHolder = new ModulePriceHolder(module,this.city,this.priceDate);
+            ModulePriceHolder priceHolder = new ModulePriceHolder(module,this.city,this.priceDate,this.product);
             priceHolder.prepare();
             if (priceHolder.hasErrors())
             {

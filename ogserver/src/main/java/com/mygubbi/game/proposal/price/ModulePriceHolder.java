@@ -94,11 +94,12 @@ public class ModulePriceHolder
         this.productLineItem = moduleForPrice.getProduct();
     }
 
-    public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date)
+    public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date,ProductLineItem productLineItem )
     {
         this.productModule = productModule;
         this.city = city;
         this.priceDate = date;
+        this.productLineItem = productLineItem;
 
     }
 

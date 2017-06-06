@@ -1381,7 +1381,7 @@
       "id": "module.hingdata",
       "type": "select",
       "table": "module_hinge_map",
-      "query": "select modulecode,hingecode,qty,type,qtyFormula,qtyFlag from module_hinge_map where modulecode=? and type=?",
+      "query": "select modulecode,hingecode,qty,type,qtyFlag,qtyFormula from module_hinge_map where modulecode=? and type=?",
       "params": ["modulecode","type"],
       "jsonfields":[]
     },
