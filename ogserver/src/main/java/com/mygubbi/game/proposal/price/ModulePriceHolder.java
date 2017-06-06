@@ -87,6 +87,7 @@ public class ModulePriceHolder
     public ModulePriceHolder(ModuleForPrice moduleForPrice)
     {
         this.productModule = moduleForPrice.getModule();
+        LOG.debug("This productModule : " + this.productModule);
         this.priceDate = moduleForPrice.getPriceDate();
         this.city = moduleForPrice.getCity();
         //this.handleType = moduleForPrice.getProduct().getHandletypeSelection();
@@ -176,8 +177,11 @@ public class ModulePriceHolder
     private void resolveHandles()
     {
         LOG.info("productline item" +productLineItem.toString());
-        LOG.info("this.productLineItem.getHandletypeSelection() " +this.productLineItem.getHandletypeSelection());
-        if (Objects.equals(this.productLineItem.getHandletypeSelection(), NORMAL))
+        String handletypeSelection = this.productLineItem.getHandletypeSelection();
+        LOG.debug("Handle type selection String : " + handletypeSelection);
+        LOG.info("this.productLineItem.getHandletypeSelection() " + handletypeSelection);
+
+        if (Objects.equals(handletypeSelection, NORMAL))
         {
             if (!(this.productModule.getHandleCode() == null))
             {
@@ -191,7 +195,7 @@ public class ModulePriceHolder
               //  this.productionSpecificationComponents.add(new Handle(knob));
             }
         }
-        else if (Objects.equals(this.productLineItem.getHandletypeSelection(),GOLA_PROFILE ))
+        else if (Objects.equals(handletypeSelection,GOLA_PROFILE ))
         {
             int moduleCount = 0;
             int drawerModuleCount= 0;
@@ -257,9 +261,9 @@ public class ModulePriceHolder
             handleandKnobCost += golaProfilePrice;
 
         }
-        else {
+        else if (Objects.equals(handletypeSelection, "G Profile")){
 
-            LOG.debug("G or J profile : ");
+            LOG.debug("G Profile : ");
 
             double lWidth = 0;
             double gOrJProfilePrice = 0;
@@ -285,21 +289,47 @@ public class ModulePriceHolder
                     }
                 }
             }
-
-            if (this.productLineItem.getHandletypeSelection().equals("G Profile"))
-            {
                 gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
+            LOG.debug("G profile rate : " +  gProfileRate.getPrice());
+
+            LOG.debug("Inside G profile : "+ gOrJProfilePrice);
                 //LOG.debug("L width Rate :" + gProfileRate.getPrice());
                 handleandKnobCost += gOrJProfilePrice;
-            }
-            else
+
+        }
+        else
+        {
+            LOG.debug("J profile : ");
+
+            double lWidth = 0;
+            double gOrJProfilePrice = 0;
+            double quantity = 0;
+            for (ProductModule module : this.productLineItem.getModules())
             {
-                gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
-                //LOG.debug("L width Rate :" + jProfileRate.getPrice());
-                handleandKnobCost += gOrJProfilePrice;
+                LOG.debug("Module : " + module.toString());
+                Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(module.getMGCode());
+                for (AccessoryPackComponent accessoryPackComponent : handles)
+                {
+                    quantity = accessoryPackComponent.getQuantity();
+                }
+                if (Objects.equals(module.getHandleMandatory(), "Yes"))
+                {
+                    if (module.getModuleCategory().contains("Drawer"))
+                    {
+                        lWidth = lWidth + (quantity * module.getWidth());
+                        LOG.debug("Inside if :" + lWidth);
+                    }
+                    else {
+                        lWidth = lWidth + module.getWidth();
+                        LOG.debug("Inside else :" + lWidth);
+                    }
+                }
             }
-
-
+            gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
+            LOG.debug("J profile rate : " +  jProfileRate.getPrice());
+            LOG.debug("Inside J profile : "+ gOrJProfilePrice);
+            //LOG.debug("L width Rate :" + gProfileRate.getPrice());
+            handleandKnobCost += gOrJProfilePrice;
         }
 
     }
@@ -312,6 +342,7 @@ public class ModulePriceHolder
         }
         else if (component.isHardware())
         {
+            LOG.debug("hardware Components : " + component.toString());
             this.addHardwareComponent(component, accPackCode);
         }
         else if (component.isAccessory())
@@ -376,10 +407,12 @@ public class ModulePriceHolder
 
     private void getHingeRateBasedOnQty(HingePack hingePack)
     {
+        LOG.debug("Hinge Pack inside QTY : " + hingePack);
 
         double quantity = hingePack.getQUANTITY();
       if (Objects.equals(hingePack.getQtyFlag(), "C"))
         {
+            LOG.debug("Hinge Pack inside C : " + hingePack);
           if (Objects.equals(hingePack.getQtyFormula(), "F6"))
           {
               int value1 = (productModule.getHeight() > 2100) ? 5 : 4;
@@ -473,7 +506,9 @@ public class ModulePriceHolder
         this.lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
         this.cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
         this.gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
+        LOG.debug("G profile Rate : " + this.gProfileRate);
         this.jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
+        LOG.debug("J profile Rate : " + this.jProfileRate);
 
 
 
