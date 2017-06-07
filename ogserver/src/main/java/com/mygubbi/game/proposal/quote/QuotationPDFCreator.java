@@ -983,7 +983,7 @@ public class QuotationPDFCreator
                     kwaList.add(new String(width));
                 }
             }
-            else if(cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits") || cname.equals("codrawers") || cname.equals("usstorage"))
+            else if(cname.equals("Storage Modules") || cname.equals("wallpanelling")  || cname.equals("oswalls")  || cname.equals("sidetables") ||  cname.equals("shoerack") ||  cname.equals("Bathroom Vanity") ||  cname.equals("tvunit") ||  cname.equals("barunit") || cname.equals("bookshelf") ||  cname.equals("crunit") ||  cname.equals("wallunits") || cname.equals("codrawers") || cname.equals("usstorage") || cname.equals("poojaunit") || cname.equals("studytable") || cname.equals("others"))
             {
                 SW1modulecount += unit.moduleCount;
                 SW1basecarcass = product.getProduct().getBaseCarcassCode();
@@ -1060,6 +1060,18 @@ public class QuotationPDFCreator
                 else if(cname.equals("usstorage"))
                 {
                     caption4="Under Staircase Storage";
+                }
+                else if(cname.equals("poojaunit"))
+                {
+                    caption4="Pooja Unit";
+                }
+                else if(cname.equals("studytable"))
+                {
+                    caption4="Study Table";
+                }
+                else if(cname.equals("others"))
+                {
+                    caption4="Others";
                 }
             }
             /*else
