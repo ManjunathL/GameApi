@@ -92,6 +92,7 @@ public class ModulePriceHolder
         this.city = moduleForPrice.getCity();
         //this.handleType = moduleForPrice.getProduct().getHandletypeSelection();
         this.productLineItem = moduleForPrice.getProduct();
+        LOG.debug("This City : " + this.city);
     }
 
     public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date,ProductLineItem productLineItem )
@@ -100,6 +101,8 @@ public class ModulePriceHolder
         this.city = city;
         this.priceDate = date;
         this.productLineItem = productLineItem;
+        LOG.debug("This City : " + this.city);
+
 
     }
 
@@ -214,29 +217,29 @@ public class ModulePriceHolder
             double golaProfilePrice = 0.0;
 
 
-            for (ProductModule module : this.productLineItem.getModules())
-            {
-                if (!(module.getModuleCategory().contains(LOFTS)))
+          //  for (ProductModule module : this.productLineItem.getModules())
+           // {
+                if (!(this.productModule.getModuleCategory().contains(LOFTS)))
                 {
-                    if (Objects.equals(module.getHandleMandatory(), "Yes"))
+                    if (Objects.equals(this.productModule.getHandleMandatory(), "Yes"))
                     {
                         moduleCount = moduleCount + 1;
-                        if (Objects.equals(module.getUnit(), "Wall Unit"))
+                        if (Objects.equals(this.productModule.getUnit(), "Wall Unit"))
                         {
-                            wallProfileWidth = wallProfileWidth + module.getWidth();
+                            wallProfileWidth = wallProfileWidth + this.productModule.getWidth();
                         }
-                        else if (Objects.equals(module.getUnit(), "Base Unit")){
-                            if (module.getModuleCategory().contains(CORNER_UNIT))
+                        else if (Objects.equals(this.productModule.getUnit(), "Base Unit")){
+                            if (this.productModule.getModuleCategory().contains(CORNER_UNIT))
                             {
-                                lProfileWidth = lProfileWidth + (module.getWidth()/2);
+                                lProfileWidth = lProfileWidth + (this.productModule.getWidth()/2);
                             }
-                            else if (module.getModuleCategory().contains("Drawer"))
+                            else if (this.productModule.getModuleCategory().contains("Drawer"))
                             {
                                 drawerModuleCount = drawerModuleCount + 1;
-                                cProfileWidth = cProfileWidth + module.getWidth();
+                                cProfileWidth = cProfileWidth + this.productModule.getWidth();
                             }
                             else {
-                                lProfileWidth = lProfileWidth + module.getWidth();
+                                lProfileWidth = lProfileWidth + this.productModule.getWidth();
 
                             }
 
@@ -245,7 +248,7 @@ public class ModulePriceHolder
                     }
                 }
 
-            }
+           // }
 
 
 
@@ -269,27 +272,27 @@ public class ModulePriceHolder
             double lWidth = 0;
             double gOrJProfilePrice = 0;
             double quantity = 0;
-            for (ProductModule module : this.productLineItem.getModules())
-            {
-                LOG.debug("Module : " + module.toString());
-                Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(module.getMGCode());
+           // for (ProductModule module : this.productLineItem.getModules())
+           // {
+                LOG.debug("Module : " + this.productModule.toString());
+                Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(this.productModule.getMGCode());
                 for (AccessoryPackComponent accessoryPackComponent : handles)
                 {
                     quantity = accessoryPackComponent.getQuantity();
                 }
-                if (Objects.equals(module.getHandleMandatory(), "Yes"))
+                if (Objects.equals(this.productModule.getHandleMandatory(), "Yes"))
                 {
-                    if (module.getModuleCategory().contains("Drawer"))
+                    if (this.productModule.getModuleCategory().contains("Drawer"))
                     {
-                        lWidth = lWidth + (quantity * module.getWidth());
-                        LOG.debug("Inside if :" + lWidth);
+                        lWidth = lWidth + (quantity * this.productModule.getWidth());
+                        LOG.debug("Inside if :" + lWidth + ":" + quantity + ":" + this.productModule.getWidth());
                     }
                     else {
-                        lWidth = lWidth + module.getWidth();
-                        LOG.debug("Inside else :" + lWidth);
+                        lWidth = lWidth + this.productModule.getWidth();
+                        LOG.debug("Inside else :" + lWidth + ":" + this.productModule.getWidth());
                     }
                 }
-            }
+           // }
                 gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
             LOG.debug("G profile rate : " +  gProfileRate.getPrice());
 
@@ -305,27 +308,27 @@ public class ModulePriceHolder
             double lWidth = 0;
             double gOrJProfilePrice = 0;
             double quantity = 0;
-            for (ProductModule module : this.productLineItem.getModules())
-            {
-                LOG.debug("Module : " + module.toString());
-                Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(module.getMGCode());
+          //  for (ProductModule module : this.productLineItem.getModules())
+          //  {
+                LOG.debug("Module : " + this.productModule.toString());
+                Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(this.productModule.getMGCode());
                 for (AccessoryPackComponent accessoryPackComponent : handles)
                 {
                     quantity = accessoryPackComponent.getQuantity();
                 }
-                if (Objects.equals(module.getHandleMandatory(), "Yes"))
+                if (Objects.equals(this.productModule.getHandleMandatory(), "Yes"))
                 {
-                    if (module.getModuleCategory().contains("Drawer"))
+                    if (this.productModule.getModuleCategory().contains("Drawer"))
                     {
-                        lWidth = lWidth + (quantity * module.getWidth());
+                        lWidth = lWidth + (quantity * this.productModule.getWidth());
                         LOG.debug("Inside if :" + lWidth);
                     }
                     else {
-                        lWidth = lWidth + module.getWidth();
+                        lWidth = lWidth + this.productModule.getWidth();
                         LOG.debug("Inside else :" + lWidth);
                     }
                 }
-            }
+           // }
             gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
             LOG.debug("J profile rate : " +  jProfileRate.getPrice());
             LOG.debug("Inside J profile : "+ gOrJProfilePrice);
