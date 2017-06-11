@@ -203,66 +203,58 @@ public class ModulePriceHolder
         {
             int moduleCount = 0;
             int drawerModuleCount= 0;
-            int wallProfileWidth = 0;
+            double wallProfileWidth = 0.0;
             double lProfileWidth = 0.0;
             double cProfileWidth = 0.0;
             double golaProfileLength = productLineItem.getNoOfLengths();
-            double wProfilePrice = 0.0;
-            double lProfilePrice = 0.0;
-            double cProfilePrice = 0.0;
-            double profilePrice = 0.0;
-            double bracketPrice = 0.0;
-            double lConnectorPrice = 0.0;
-            double cConnectorPrice = 0.0;
-            double golaProfilePrice = 0.0;
+            double wProfilePrice ;
+            double lProfilePrice ;
+            double cProfilePrice ;
+            double profilePrice ;
+            double bracketPrice ;
+            double lConnectorPrice ;
+            double cConnectorPrice ;
+            double golaProfilePrice ;
 
+            if (Objects.equals(this.productModule.getGolaProfileFlag(), "Yes"))
+            {
 
-          //  for (ProductModule module : this.productLineItem.getModules())
-           // {
-                if (!(this.productModule.getModuleCategory().contains(LOFTS)))
-                {
-                    if (Objects.equals(this.productModule.getHandleMandatory(), "Yes"))
-                    {
-                        moduleCount = moduleCount + 1;
-                        if (Objects.equals(this.productModule.getUnit(), "Wall Unit"))
-                        {
-                            wallProfileWidth = wallProfileWidth + this.productModule.getWidth();
-                        }
-                        else if (Objects.equals(this.productModule.getUnit(), "Base Unit")){
-                            if (this.productModule.getModuleCategory().contains(CORNER_UNIT))
-                            {
-                                lProfileWidth = lProfileWidth + (this.productModule.getWidth()/2);
-                            }
-                            else if (this.productModule.getModuleCategory().contains("Drawer"))
-                            {
-                                drawerModuleCount = drawerModuleCount + 1;
-                                cProfileWidth = cProfileWidth + this.productModule.getWidth();
-                            }
-                            else {
-                                lProfileWidth = lProfileWidth + this.productModule.getWidth();
+                 for (ProductModule module : this.productLineItem.getModules()) {
+                     if (!(module.getModuleCategory().contains(LOFTS))) {
+                         if (Objects.equals(module.getHandleMandatory(), "Yes")) {
+                             moduleCount = moduleCount + 1;
+                             if (module.getModuleCategory().contains("Wall")) {
+                                 LOG.debug("Inside wall unit");
+                                 wallProfileWidth = wallProfileWidth + module.getWidth();
+                             } else if (Objects.equals(module.getUnit(), "Base Unit")) {
+                                 if (module.getModuleCategory().contains(CORNER_UNIT)) {
+                                     lProfileWidth = lProfileWidth + (module.getWidth() / 2);
+                                 } else if (module.getModuleCategory().contains("Drawer")) {
+                                     drawerModuleCount = drawerModuleCount + 1;
+                                     cProfileWidth = cProfileWidth + module.getWidth();
+                                 } else {
+                                     lProfileWidth = lProfileWidth + module.getWidth();
+                                 }
+                             }
+                         }
+                     }
+                 }
 
-                            }
+                wProfilePrice = wallProfileWidth/1000*wWidthRate.getPrice();
+                lProfilePrice = lProfileWidth/1000*lWidthRate.getPrice();
+                cProfilePrice = cProfileWidth/1000*cWidthRate.getPrice();
 
-                        }
+                profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
+                bracketPrice = (moduleCount * 2) * this.bracketRate.getPrice();
+                lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
+                cConnectorPrice = drawerModuleCount * this.cConnectorRate.getPrice();
 
-                    }
-                }
+                golaProfilePrice = profilePrice + bracketPrice + lConnectorPrice + cConnectorPrice;
+                handleandKnobCost += golaProfilePrice;
 
-           // }
+                LOG.debug("Gola Profile Price: " + golaProfilePrice);
 
-
-
-            wProfilePrice = wallProfileWidth/1000*wWidthRate.getPrice();
-            lProfilePrice = lProfileWidth/1000*lWidthRate.getPrice();
-            cProfilePrice = cProfileWidth/1000*cWidthRate.getPrice();
-
-            profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
-            bracketPrice = (moduleCount * 2) * this.bracketRate.getPrice();
-            lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
-            cConnectorPrice = drawerModuleCount * this.cConnectorRate.getPrice();
-
-            golaProfilePrice = profilePrice + bracketPrice + lConnectorPrice + cConnectorPrice;
-            handleandKnobCost += golaProfilePrice;
+            }
 
         }
         else if (Objects.equals(handletypeSelection, "G Profile")){
@@ -332,6 +324,7 @@ public class ModulePriceHolder
             gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
             LOG.debug("J profile rate : " +  jProfileRate.getPrice());
             LOG.debug("Inside J profile : "+ gOrJProfilePrice);
+
             //LOG.debug("L width Rate :" + gProfileRate.getPrice());
             handleandKnobCost += gOrJProfilePrice;
         }
