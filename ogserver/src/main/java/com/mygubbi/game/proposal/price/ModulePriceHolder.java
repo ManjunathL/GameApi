@@ -184,20 +184,41 @@ public class ModulePriceHolder
 
         LOG.debug("Inisde resolve handles module :" + this.productModule.encodePrettily());
 
+        if (Objects.equals(handletypeSelection,NORMAL ))
+        {
+            LOG.debug("Inside normal");
+
             if (!(this.productModule.getHandleCode() == null))
             {
                 this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
-               // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
-              //  this.productionSpecificationComponents.add(new Handle(handle));
+                // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                //  this.productionSpecificationComponents.add(new Handle(handle));
             }
             if (!(this.productModule.getKnobCode() == null)){
                 this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
-               // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
-              //  this.productionSpecificationComponents.add(new Handle(knob));
+                // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
+                //  this.productionSpecificationComponents.add(new Handle(knob));
             }
+        }
+
 
         if (Objects.equals(handletypeSelection,GOLA_PROFILE ))
         {
+
+            LOG.debug("Inside gola profile");
+
+
+            if (!(this.productModule.getHandleCode() == null))
+            {
+                this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
+                // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                //  this.productionSpecificationComponents.add(new Handle(handle));
+            }
+            if (!(this.productModule.getKnobCode() == null)){
+                this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+                // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
+                //  this.productionSpecificationComponents.add(new Handle(knob));
+            }
             int moduleCount = 0;
             int drawerModuleCount= 0;
             double wallProfileWidth = 0.0;
@@ -288,7 +309,7 @@ public class ModulePriceHolder
                 handleandKnobCost += gOrJProfilePrice;
 
         }
-        else
+        else if (Objects.equals(handletypeSelection, "J Profile"))
         {
             LOG.debug("J profile : ");
 
@@ -392,6 +413,7 @@ public class ModulePriceHolder
         if (handleAndKnobCost!=null)
         {
             handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
+            LOG.debug("Handle and Knob Cost : " + handleAndKnobCost.getPrice() + ":" + quantity);
         }
 
 
