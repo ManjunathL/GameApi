@@ -79,6 +79,7 @@ public class ProductModule extends JsonObject
     private static final String KNOB_FINISH = "knobFinish";
     private static final String SHUTTER_DESIGN_CODE = "shutterDesignCode";
     private static final String GOLA_PROFILE_FLAG = "golaProfileFlag";
+    private static final String CUSTOM_CHECK = "customCheck";
 
     public ProductModule()
     {
@@ -464,6 +465,17 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setCustomCheck(String customCheck)
+    {
+        this.put(CUSTOM_CHECK,customCheck);
+        return this;
+    }
+
+    public String getCustomCheck() {
+        return CUSTOM_CHECK;
+    }
+
+
     private void setAccessoryPacks()
     {
         if (this.containsKey(ACCPACKS))
@@ -582,6 +594,7 @@ public class ProductModule extends JsonObject
                 ", knobMandatory='" + this.getKnobMandatory() + '\'' +
                 ", hingeMandatory='" + this.getHingeMandatory() + '\'' +
                 ", sqftCalculation='" + this.getSqftCalculation() + '\'' +
+                ", customCheck='" + this.getCustomCheck() + '\'' +
                 '}';
 
     }
