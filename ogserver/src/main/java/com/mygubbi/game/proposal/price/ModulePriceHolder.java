@@ -233,6 +233,10 @@ public class ModulePriceHolder
                                      lProfileWidth = lProfileWidth + module.getWidth();
                                  }
                              }
+                             else if (module.getModuleCategory().contains("Tall"))
+                             {
+                                 lProfileWidth = lProfileWidth + module.getHeight();
+                             }
                          }
                      }
                  }
