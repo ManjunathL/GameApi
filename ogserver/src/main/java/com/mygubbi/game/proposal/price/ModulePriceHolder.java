@@ -180,13 +180,10 @@ public class ModulePriceHolder
 
     private void resolveHandles()
     {
-        LOG.info("productline item" +productLineItem.toString());
         String handletypeSelection = this.productLineItem.getHandletypeSelection();
-        LOG.debug("Handle type selection String : " + handletypeSelection);
-        LOG.info("this.productLineItem.getHandletypeSelection() " + handletypeSelection);
 
-        if (Objects.equals(handletypeSelection, NORMAL))
-        {
+        LOG.debug("Inisde resolve handles module :" + this.productModule.encodePrettily());
+
             if (!(this.productModule.getHandleCode() == null))
             {
                 this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
@@ -198,8 +195,8 @@ public class ModulePriceHolder
                // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
               //  this.productionSpecificationComponents.add(new Handle(knob));
             }
-        }
-        else if (Objects.equals(handletypeSelection,GOLA_PROFILE ))
+
+        if (Objects.equals(handletypeSelection,GOLA_PROFILE ))
         {
             int moduleCount = 0;
             int drawerModuleCount= 0;
@@ -221,10 +218,10 @@ public class ModulePriceHolder
 
                  for (ProductModule module : this.productLineItem.getModules()) {
                      if (!(module.getModuleCategory().contains(LOFTS))) {
+                         LOG.debug("Inside loft :" + module.getModuleCategory());
                          if (Objects.equals(module.getHandleMandatory(), "Yes")) {
                              moduleCount = moduleCount + 1;
                              if (module.getModuleCategory().contains("Wall")) {
-                                 LOG.debug("Inside wall unit");
                                  wallProfileWidth = wallProfileWidth + module.getWidth();
                              } else if (Objects.equals(module.getUnit(), "Base Unit")) {
                                  if (module.getModuleCategory().contains(CORNER_UNIT)) {
@@ -235,6 +232,10 @@ public class ModulePriceHolder
                                  } else {
                                      lProfileWidth = lProfileWidth + module.getWidth();
                                  }
+                             }
+                             else if (module.getModuleCategory().contains("Tall"))
+                             {
+                                 lProfileWidth = lProfileWidth + module.getHeight();
                              }
                          }
                      }
