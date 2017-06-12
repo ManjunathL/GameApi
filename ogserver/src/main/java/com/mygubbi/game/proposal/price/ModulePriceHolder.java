@@ -188,14 +188,14 @@ public class ModulePriceHolder
         {
             LOG.debug("Inside normal");
 
-            if (!(this.productModule.getHandleCode() == null))
+            if (!(this.productLineItem.getHandleCode() == null))
             {
-                this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
+                this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
                 // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
                 //  this.productionSpecificationComponents.add(new Handle(handle));
             }
-            if (!(this.productModule.getKnobCode() == null)){
-                this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+            if (!(this.productLineItem.getKnobCode() == null)){
+                this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
                 // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
                 //  this.productionSpecificationComponents.add(new Handle(knob));
             }
@@ -210,12 +210,12 @@ public class ModulePriceHolder
 
             if (!(this.productModule.getHandleCode() == null))
             {
-                this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
+                this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
                 // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
                 //  this.productionSpecificationComponents.add(new Handle(handle));
             }
             if (!(this.productModule.getKnobCode() == null)){
-                this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());
+                this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
                 // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
                 //  this.productionSpecificationComponents.add(new Handle(knob));
             }
@@ -668,7 +668,7 @@ public class ModulePriceHolder
                 {
                     if (Objects.equals(WARDROBE, this.productModule.getProductCategory()))
                     {
-                        LOG.debug("Inside Wardrobe If clause shutter");
+                        LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
                         LOG.debug("Rate : " + rate);
                         this.addToShutterCost(panel.getCost() * rate);
                     }
@@ -702,7 +702,7 @@ public class ModulePriceHolder
                 {
                     if (Objects.equals(WARDROBE, this.productModule.getProductCategory()))
                     {
-                        LOG.debug("Inside Wardrobe If clause Carcass");
+                        LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
 
                         this.addToCarcassCost(panel.getCost() * rate);
                     }
