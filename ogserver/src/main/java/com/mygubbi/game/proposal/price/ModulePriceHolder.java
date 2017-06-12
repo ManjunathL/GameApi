@@ -235,12 +235,11 @@ public class ModulePriceHolder
             double golaProfilePrice ;
 
                      if (!(this.productModule.getModuleCategory().contains(LOFTS))) {
-                         LOG.debug("Inside loft :" + this.productModule.getModuleCategory());
                          if (Objects.equals(this.productModule.getHandleMandatory(), "Yes")) {
                              moduleCount = moduleCount + 1;
                              if (this.productModule.getModuleCategory().contains("Wall")) {
                                  wallProfileWidth = wallProfileWidth + this.productModule.getWidth();
-                             } else if (Objects.equals(this.productModule.getUnit(), "Base Unit")) {
+                             } else if (this.productModule.getModuleCategory().contains("Base")) {
                                  if (this.productModule.getModuleCategory().contains(CORNER_UNIT)) {
                                      lProfileWidth = lProfileWidth + (this.productModule.getWidth() / 2);
                                  } else if (this.productModule.getModuleCategory().contains("Drawer")) {
