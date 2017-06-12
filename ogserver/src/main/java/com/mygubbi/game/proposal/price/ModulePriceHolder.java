@@ -101,7 +101,7 @@ public class ModulePriceHolder
         this.city = city;
         this.priceDate = date;
         this.productLineItem = productLineItem;
-        LOG.debug("This City : " + this.city);
+        LOG.debug("Inside 2nd Module price holder");
 
 
     }
@@ -213,33 +213,29 @@ public class ModulePriceHolder
             double cConnectorPrice ;
             double golaProfilePrice ;
 
-            if (Objects.equals(this.productModule.getGolaProfileFlag(), "Yes"))
-            {
-
-                 for (ProductModule module : this.productLineItem.getModules()) {
-                     if (!(module.getModuleCategory().contains(LOFTS))) {
-                         LOG.debug("Inside loft :" + module.getModuleCategory());
-                         if (Objects.equals(module.getHandleMandatory(), "Yes")) {
+                     if (!(this.productModule.getModuleCategory().contains(LOFTS))) {
+                         LOG.debug("Inside loft :" + this.productModule.getModuleCategory());
+                         if (Objects.equals(this.productModule.getHandleMandatory(), "Yes")) {
                              moduleCount = moduleCount + 1;
-                             if (module.getModuleCategory().contains("Wall")) {
-                                 wallProfileWidth = wallProfileWidth + module.getWidth();
-                             } else if (Objects.equals(module.getUnit(), "Base Unit")) {
-                                 if (module.getModuleCategory().contains(CORNER_UNIT)) {
-                                     lProfileWidth = lProfileWidth + (module.getWidth() / 2);
-                                 } else if (module.getModuleCategory().contains("Drawer")) {
+                             if (this.productModule.getModuleCategory().contains("Wall")) {
+                                 wallProfileWidth = wallProfileWidth + this.productModule.getWidth();
+                             } else if (Objects.equals(this.productModule.getUnit(), "Base Unit")) {
+                                 if (this.productModule.getModuleCategory().contains(CORNER_UNIT)) {
+                                     lProfileWidth = lProfileWidth + (this.productModule.getWidth() / 2);
+                                 } else if (this.productModule.getModuleCategory().contains("Drawer")) {
                                      drawerModuleCount = drawerModuleCount + 1;
-                                     cProfileWidth = cProfileWidth + module.getWidth();
+                                     cProfileWidth = cProfileWidth + this.productModule.getWidth();
+                                     lProfileWidth = lProfileWidth + this.productModule.getWidth();
                                  } else {
-                                     lProfileWidth = lProfileWidth + module.getWidth();
+                                     lProfileWidth = lProfileWidth + this.productModule.getWidth();
                                  }
                              }
-                             else if (module.getModuleCategory().contains("Tall"))
+                             else if (this.productModule.getModuleCategory().contains("Tall"))
                              {
-                                 lProfileWidth = lProfileWidth + module.getHeight();
+                                 lProfileWidth = lProfileWidth + this.productModule.getHeight();
                              }
                          }
                      }
-                 }
 
                 wProfilePrice = wallProfileWidth/1000*wWidthRate.getPrice();
                 lProfilePrice = lProfileWidth/1000*lWidthRate.getPrice();
@@ -247,15 +243,13 @@ public class ModulePriceHolder
 
                 profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
                 bracketPrice = (moduleCount * 2) * this.bracketRate.getPrice();
-                lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
+//                lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
                 cConnectorPrice = drawerModuleCount * this.cConnectorRate.getPrice();
 
-                golaProfilePrice = profilePrice + bracketPrice + lConnectorPrice + cConnectorPrice;
+                golaProfilePrice = profilePrice + bracketPrice  + cConnectorPrice;
                 handleandKnobCost += golaProfilePrice;
 
                 LOG.debug("Gola Profile Price: " + golaProfilePrice);
-
-            }
 
         }
         else if (Objects.equals(handletypeSelection, "G Profile")){
@@ -532,6 +526,7 @@ public class ModulePriceHolder
         this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        LOG.debug("this.nonstandard" + this.nonStandardloadingFactorCard.getRate());
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
 
@@ -593,17 +588,22 @@ public class ModulePriceHolder
         return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
                 .put("moduleArea", this.moduleArea)
                 .put("totalCost", this.round(this.totalCost, 2));
+
 */
-        return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
-                .put("moduleArea", this.moduleArea)
-                .put("carcassCost", this.round(this.carcassCost, 2))
-                .put("shutterCost", this.round(this.shutterCost, 2))
-                .put("accessoryCost", this.round(this.accessoryCost, 2))
-                .put("handleAndKnobCost", this.round(this.handleandKnobCost, 2))
-                .put("hingeCost", this.round(this.hingeCost, 2))
-                .put("labourCost", this.round(this.labourCost, 2))
-                .put("hardwareCost", this.round(this.hardwareCost, 2))
-                .put("totalCost", this.round(this.totalCost, 2));
+
+
+                return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
+                        .put("moduleArea", this.moduleArea)
+                        .put("carcassCost", this.round(this.carcassCost, 2))
+                        .put("shutterCost", this.round(this.shutterCost, 2))
+                        .put("accessoryCost", this.round(this.accessoryCost, 2))
+                        .put("handleAndKnobCost", this.round(this.handleandKnobCost, 2))
+                        .put("hingeCost", this.round(this.hingeCost, 2))
+                        .put("labourCost", this.round(this.labourCost, 2))
+                        .put("hardwareCost", this.round(this.hardwareCost, 2))
+                        .put("totalCost", this.round(this.totalCost, 2));
+
+
     }
 
     public void addToCarcassCost(double cost)
