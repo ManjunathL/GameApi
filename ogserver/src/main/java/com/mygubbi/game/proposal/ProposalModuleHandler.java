@@ -56,15 +56,16 @@ public class ProposalModuleHandler extends AbstractRouteHandler
 
     private void getPriceV2(RoutingContext routingContext)
     {
+
         this.getPrice(routingContext, ComprehensiveModulePricingService.CALCULATE_PRICE);
     }
 
     private void getPrice(RoutingContext routingContext, String priceModule)
     {
         LOG.debug("Price module : " + priceModule);
-        JsonObject moduleJson = routingContext.getBodyAsJson();
-        LOG.debug("Module Json : " + moduleJson.encodePrettily());
-        ModuleForPrice moduleForPrice = new ModuleForPrice(moduleJson);
+        JsonObject modulePriceHolderJson = routingContext.getBodyAsJson();
+        LOG.debug("Module Json : " + modulePriceHolderJson.encodePrettily());
+        ModuleForPrice moduleForPrice = new ModuleForPrice(modulePriceHolderJson);
         Integer id = LocalCache.getInstance().store(moduleForPrice);
         VertxInstance.get().eventBus().send(priceModule, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
