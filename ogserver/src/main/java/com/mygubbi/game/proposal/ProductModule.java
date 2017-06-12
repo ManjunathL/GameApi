@@ -78,6 +78,7 @@ public class ProductModule extends JsonObject
     private static final String KNOB_TYPE = "konbType";
     private static final String KNOB_FINISH = "knobFinish";
     private static final String SHUTTER_DESIGN_CODE = "shutterDesignCode";
+    private static final String GOLA_PROFILE_FLAG = "golaProfileFlag";
 
     public ProductModule()
     {
@@ -292,6 +293,18 @@ public class ProductModule extends JsonObject
     public String getKnobFinish() {
         return this.getString(KNOB_FINISH);
     }
+
+    public String getGolaProfileFlag() {
+        return this.getString(GOLA_PROFILE_FLAG);
+    }
+
+    public ProductModule setGolaProfileFlag(String golaProfileFlag)
+    {
+        this.put(GOLA_PROFILE_FLAG,golaProfileFlag);
+        return this;
+    }
+
+
 
     public ProductModule setHandleType(String handleType)
     {
