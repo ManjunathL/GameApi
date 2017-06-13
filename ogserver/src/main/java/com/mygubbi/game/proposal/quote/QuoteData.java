@@ -41,12 +41,17 @@ public class QuoteData
     public double discountAmount;
     public String fromVersion;
     private String city;
+    private String title;
     private java.sql.Date priceDate;
 
     public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion)
     {
         this.city = proposalHeader.getProjectCity();
         this.priceDate = proposalHeader.getPriceDate();
+        for(ProductLineItem productLineItem: products)
+        {
+            this.title=productLineItem.getTitle();
+        }
         if (this.priceDate == null)
         {
             this.priceDate = new java.sql.Date(System.currentTimeMillis());
@@ -207,6 +212,10 @@ public class QuoteData
                 Double rem=val-val%10;
                 return word.convertNumberToWords(rem.intValue()) + " Rupees Only";
                 //return new CurrencyUtil().convert(String.valueOf((int)(this.getTotalCost() - this.discountAmount)));
+            case "city":
+                return this.city;
+            case "product.title":
+                return this.title;
             default:
                 return null;
         }
