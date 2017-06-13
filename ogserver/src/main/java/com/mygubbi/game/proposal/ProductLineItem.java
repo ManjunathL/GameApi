@@ -44,7 +44,7 @@ public class ProductLineItem extends JsonObject
     private static final String HANDLE_FINISH = "handleFinish";
     private static final String KNOB_TYPE = "konbType";
     private static final String KNOB_FINISH = "knobFinish";
-    public static final String NO_OF_LENGTHS="noOfLengths";
+    //public static final String NO_OF_LENGTHS="noOfLengths";
     public static final String HANDLETYPE_SELECTION="handleTypeSelection";
 
     public static final String HANDLE_CODE="handleCode";
@@ -174,10 +174,10 @@ public class ProductLineItem extends JsonObject
         return this.getString(HANDLETYPE_SELECTION);
     }
 
-    public double getNoOfLengths() {
-        return this.getDouble(NO_OF_LENGTHS);
+   /* public String getNoOfLengths() {
+        return this.getString(NO_OF_LENGTHS);
     }
-
+*/
 
     public ProductLineItem setAmount(double amount) {
         this.put(AMOUNT, amount);
