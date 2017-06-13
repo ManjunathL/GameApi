@@ -1118,7 +1118,7 @@
       "id": "accessory.hwdetails",
       "type": "select",
       "table": "acc_pack_components",
-      "query": "select apcode,type,code from acc_pack_components where apcode=? and type='H'",
+      "query": "select apcode,type,code,qty from acc_pack_components where apcode=? and type='H'",
       "params": ["apcode"]
     },
     {
@@ -1147,7 +1147,7 @@
       "id": "module.hwdetails",
       "type": "select",
       "table": "module_components",
-      "query": "select modulecode,comptype,compcode,quantity from module_components where modulecode=? and comptype='H' ",
+      "query": "select modulecode,comptype,compcode,quantity,quantityFlag,quantityFormula from module_components where modulecode=? and comptype='H' ",
       "params": ["modulecode"]
     },
     {
@@ -1176,13 +1176,13 @@
       ]
     },
 
-    {
+    /*{
       "id": "module.hwdetails",
       "type": "select",
       "table": "module_components",
       "query": "select modulecode,comptype,compcode,quantity from module_components where modulecode=? and comptype='H' ",
       "params": ["modulecode"]
-    },
+    },*/
 
     {
       "id": "proposal.selectallproducts",
