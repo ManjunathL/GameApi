@@ -224,7 +224,7 @@ public class ModulePriceHolder
             double wallProfileWidth = 0.0;
             double lProfileWidth = 0.0;
             double cProfileWidth = 0.0;
-            double golaProfileLength = productLineItem.getNoOfLengths();
+            String golaProfileLength = productLineItem.getNoOfLengths();
             double wProfilePrice ;
             double lProfilePrice ;
             double cProfilePrice ;

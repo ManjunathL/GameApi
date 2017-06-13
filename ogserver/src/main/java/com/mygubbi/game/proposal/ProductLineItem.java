@@ -174,8 +174,8 @@ public class ProductLineItem extends JsonObject
         return this.getString(HANDLETYPE_SELECTION);
     }
 
-    public double getNoOfLengths() {
-        return this.getDouble(NO_OF_LENGTHS);
+    public String getNoOfLengths() {
+        return this.getString(NO_OF_LENGTHS);
     }
 
 
