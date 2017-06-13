@@ -62,6 +62,7 @@ public class ModulePriceHolder
     private double carcassCost = 0;
     private double accessoryCost = 0;
     private double handleandKnobCost = 0;
+    private double handleandKnobSourceCost = 0;
     private double hingeCost = 0;
     private double hardwareCost = 0;
     private double labourCost = 0;
@@ -234,7 +235,17 @@ public class ModulePriceHolder
             double cConnectorPrice ;
             double golaProfilePrice ;
 
-                     if (!(this.productModule.getModuleCategory().contains(LOFTS))) {
+            double wProfileSourceCost;
+            double lProfileSorceCost;
+            double cProfileSourceCost;
+
+            double profileSourceCost;
+            double bracketSourceCost;
+            double cConnectorSourceCost;
+
+            double golaprofileSourceCost ;
+
+            if (!(this.productModule.getModuleCategory().contains(LOFTS))) {
                          if (Objects.equals(this.productModule.getHandleMandatory(), "Yes")) {
                              moduleCount = moduleCount + 1;
                              if (this.productModule.getModuleCategory().contains("Wall")) {
@@ -266,6 +277,19 @@ public class ModulePriceHolder
 //                lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
                 cConnectorPrice = drawerModuleCount * this.cConnectorRate.getPrice();
 
+
+                wProfileSourceCost = wallProfileWidth/1000 * wWidthRate.getSourcePrice();
+                lProfileSorceCost = lProfileWidth/1000 * lWidthRate.getSourcePrice();
+                cProfileSourceCost = cProfileWidth/1000 * cWidthRate.getSourcePrice();
+
+                profileSourceCost = wProfileSourceCost + lProfileSorceCost + cProfileSourceCost;
+                bracketSourceCost = (moduleCount * 2) * this.bracketRate.getSourcePrice();
+                cConnectorSourceCost = drawerModuleCount * this.cConnectorRate.getSourcePrice();
+
+                golaprofileSourceCost = profileSourceCost + bracketSourceCost + cConnectorSourceCost;
+
+                handleandKnobSourceCost = golaprofileSourceCost;
+
                 golaProfilePrice = profilePrice + bracketPrice  + cConnectorPrice;
                 handleandKnobCost += golaProfilePrice;
 
@@ -277,6 +301,7 @@ public class ModulePriceHolder
             LOG.debug("G Profile : ");
 
             double lWidth = 0;
+            double gOrJProfileSourceCost;
             double gOrJProfilePrice = 0;
             double quantity = 0;
            // for (ProductModule module : this.productLineItem.getModules())
@@ -292,20 +317,23 @@ public class ModulePriceHolder
                     if (this.productModule.getModuleCategory().contains("Drawer"))
                     {
                         lWidth = lWidth + (quantity * this.productModule.getWidth());
-                        LOG.debug("Inside if :" + lWidth + ":" + quantity + ":" + this.productModule.getWidth());
                     }
                     else {
                         lWidth = lWidth + this.productModule.getWidth();
-                        LOG.debug("Inside else :" + lWidth + ":" + this.productModule.getWidth());
                     }
                 }
            // }
                 gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
             LOG.debug("G profile rate : " +  gProfileRate.getPrice());
 
+
+            gOrJProfileSourceCost = lWidth/1000 * gProfileRate.getSourcePrice();
+            handleandKnobSourceCost +=  gOrJProfileSourceCost;
+
             LOG.debug("Inside G profile : "+ gOrJProfilePrice);
                 //LOG.debug("L width Rate :" + gProfileRate.getPrice());
                 handleandKnobCost += gOrJProfilePrice;
+
 
         }
         else if (Objects.equals(handletypeSelection, "J Profile"))
@@ -313,7 +341,8 @@ public class ModulePriceHolder
             LOG.debug("J profile : ");
 
             double lWidth = 0;
-            double gOrJProfilePrice = 0;
+            double gOrJProfileSourceCost;
+            double gOrJProfilePrice;
             double quantity = 0;
           //  for (ProductModule module : this.productLineItem.getModules())
           //  {
@@ -339,6 +368,9 @@ public class ModulePriceHolder
             gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
             LOG.debug("J profile rate : " +  jProfileRate.getPrice());
             LOG.debug("Inside J profile : "+ gOrJProfilePrice);
+
+            gOrJProfileSourceCost = lWidth/1000 * jProfileRate.getSourcePrice();
+            handleandKnobSourceCost +=  gOrJProfileSourceCost;
 
             //LOG.debug("L width Rate :" + gProfileRate.getPrice());
             handleandKnobCost += gOrJProfilePrice;
@@ -412,6 +444,7 @@ public class ModulePriceHolder
         if (handleAndKnobCost!=null)
         {
             handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
+            handleandKnobSourceCost += handleAndKnobCost.getSourcePrice() * quantity;
             LOG.debug("Handle and Knob Cost : " + handleAndKnobCost.getPrice() + ":" + quantity);
         }
 
@@ -619,6 +652,7 @@ public class ModulePriceHolder
                         .put("shutterCost", this.round(this.shutterCost, 2))
                         .put("accessoryCost", this.round(this.accessoryCost, 2))
                         .put("handleAndKnobCost", this.round(this.handleandKnobCost, 2))
+                        .put("handleAndKnobSourceCost", this.round(this.handleandKnobSourceCost, 2))
                         .put("hingeCost", this.round(this.hingeCost, 2))
                         .put("labourCost", this.round(this.labourCost, 2))
                         .put("hardwareCost", this.round(this.hardwareCost, 2))
