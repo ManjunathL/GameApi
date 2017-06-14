@@ -472,7 +472,7 @@ public class ProductModule extends JsonObject
     }
 
     public String getCustomCheck() {
-        return CUSTOM_CHECK;
+        return this.getString(CUSTOM_CHECK);
     }
 
 
