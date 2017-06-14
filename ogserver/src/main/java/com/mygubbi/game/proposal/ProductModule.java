@@ -80,6 +80,7 @@ public class ProductModule extends JsonObject
     private static final String SHUTTER_DESIGN_CODE = "shutterDesignCode";
     private static final String GOLA_PROFILE_FLAG = "golaProfileFlag";
     private static final String CUSTOM_CHECK = "customCheck";
+    private static final String HANDLE_OVERRIDE_FLAG = "handleOverrideFlag";
 
     public ProductModule()
     {
@@ -295,16 +296,15 @@ public class ProductModule extends JsonObject
         return this.getString(KNOB_FINISH);
     }
 
-    public String getGolaProfileFlag() {
-        return this.getString(GOLA_PROFILE_FLAG);
+    public String getHandleOverrideFlag() {
+        return this.getString(HANDLE_OVERRIDE_FLAG);
     }
 
-    public ProductModule setGolaProfileFlag(String golaProfileFlag)
+    public ProductModule setHandleOverrideFlag(String handleOverrideFlag)
     {
-        this.put(GOLA_PROFILE_FLAG,golaProfileFlag);
+        this.put(HANDLE_OVERRIDE_FLAG,handleOverrideFlag);
         return this;
     }
-
 
 
     public ProductModule setHandleType(String handleType)

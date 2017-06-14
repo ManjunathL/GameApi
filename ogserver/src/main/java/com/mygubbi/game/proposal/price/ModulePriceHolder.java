@@ -185,22 +185,36 @@ public class ModulePriceHolder
 
         LOG.debug("Inisde resolve handles module :" + this.productModule.encodePrettily());
 
+        if (handletypeSelection == null) return;
+
         if (Objects.equals(handletypeSelection,NORMAL ))
         {
-            LOG.debug("Inside normal");
-
-            if (!(this.productLineItem.getHandleCode() == null))
+            if (this.productModule.getHandleOverrideFlag()== null)
             {
-                this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
-                // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
-                //  this.productionSpecificationComponents.add(new Handle(handle));
+                if (!(this.productLineItem.getHandleCode() == null))
+                {
+                    this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
+                    // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                    //  this.productionSpecificationComponents.add(new Handle(handle));
+                }
             }
+            else if (this.productModule.getHandleOverrideFlag().equals("Yes")) {
+                {
+                    this.getHandleOrKnobRate(this.productModule.getHandleCode(), this.productModule.getHandleQuantity());
+                    // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                    //  this.productionSpecificationComponents.add(new Handle(handle));
+                }
+            }
+
+
+
             if (!(this.productLineItem.getKnobCode() == null)){
                 this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
                 // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
                 //  this.productionSpecificationComponents.add(new Handle(knob));
             }
         }
+
 
 
         if (Objects.equals(handletypeSelection,GOLA_PROFILE ))
