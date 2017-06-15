@@ -453,6 +453,9 @@ ul, ol{
     .festive-form .festive-form-wrapper {
         padding: 10px 45px;
     }
+    .nri-form .nri-form-wrapper {
+        padding: 10px 45px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -755,8 +758,8 @@ ul, ol{
 
 .nri-bg-gray{
     background-color: #f1f1f1;
-    min-height:421px;
     padding: 48px 40px;
+    height: 421px;
 }
 
 .nri-h3-cnt{
@@ -767,8 +770,8 @@ ul, ol{
     font-weight:600;
 }
 .nri-p-cnt{
-    padding: 15px 35px 0px 0px;
-    line-height: 35px;
+    padding: 15px 200px 0px 0px;
+    line-height: 220%;
     font-family: 'Raleway', sans-serif;
     font-size: 18px;
     font-weight: 400;
@@ -808,9 +811,9 @@ ul, ol{
 }
 
 .nri-special li.sicon {
-    background: url('https://res.cloudinary.com/mygubbi/image/upload/v1497268140/nri_lp/LP_16.jpg') no-repeat left top;
-    padding-left: 110px;
-    padding-top: 25px;
+    background: url('https://res.cloudinary.com/mygubbi/image/upload/v1497419908/nri_lp/Icons-for-single.png') no-repeat left top;
+    padding-left: 75px;
+    padding-top: 5px;
 }
 
 
@@ -851,6 +854,39 @@ ul, ol{
     font-size: 22px;
     font-weight: 400;
     text-align: left;
+}
+
+.nri-form {
+    background: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    padding: 15px 35px;
+}
+.nri-mob-form{
+    padding: 0px;
+}
+
+.nri-form img{
+    max-width: 85%;
+}
+
+.nri-form .nri-form-wrapper{
+    padding: 10px 20px;
+}
+
+.nri-form h3 {
+    text-align: center;
+    margin: 0px 0px 5px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: #f1591f;;
+}
+
+.nri-form .form-control{
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid #aaa;
+    height: 35px;
+    line-height: 35px;
 }
 
 .cucumber-form h3 {
@@ -951,7 +987,7 @@ ul, ol{
     font-weight: 900;
     border-bottom: 1px solid #f1591f;
     line-height: 120%;
-    margin: 0px 290px;
+    margin: 0px 285px;
 }
 .section-cucu-interior-facts{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/offer-bg_02.jpg");
@@ -1044,7 +1080,7 @@ ul, ol{
 }
 .nri-footer {
     padding: 10px 0px 5px 25px;
-    background-color: #f1f1f1;
+    background-color: #b5b4b4;
     color: #333;
 }
 .nri-time{
@@ -1056,6 +1092,12 @@ ul, ol{
 }
 
 @media (max-width: 420px) {
+    .nri-bg-gray{
+        height:auto;
+    }
+    .nri-p-cnt {
+        padding: 15px 20px 0px 0px;
+    }
     .nri-price-bg h2 {
         color: #ffffff;
         font-size: 24px;
@@ -1083,7 +1125,7 @@ ul, ol{
         padding: 30px 0px 30px;
     }
     .section-nri-facts h1 {
-        font-size: 26px;
+        font-size: 28px;
         line-height: 120%;
 
     }
@@ -1124,9 +1166,18 @@ ul, ol{
         padding: 10px 20px;
         border-radius: 50px;
     }
+    .nri-form h3{
+        font-size: 22px;
+    }
 }
 
 @media (max-width: 768px) {
+    .nri-bg-gray{
+        height:auto;
+    }
+    .nri-p-cnt {
+        padding: 15px 20px 0px 0px;
+    }
     .nri-price-bg h2 {
         color: #ffffff;
         font-size: 24px;
@@ -1154,7 +1205,7 @@ ul, ol{
         padding: 30px 0px 30px;
     }
     .section-nri-facts h1 {
-        font-size: 26px;
+        font-size: 28px;
         line-height: 120%;
 
     }
@@ -1193,5 +1244,8 @@ ul, ol{
         font-family: 'Lato', sans-serif;
         padding: 10px 20px;
         border-radius: 50px;
+    }
+    .nri-form h3{
+        font-size: 22px;
     }
 }
