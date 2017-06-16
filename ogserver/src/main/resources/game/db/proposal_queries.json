@@ -1392,6 +1392,88 @@
       "query": "select * from shutter_master where shutterCode=?",
       "params": ["shutterCode"],
       "jsonfields":[]
+    },
+    {
+      "id": "blog.select.blogid",
+      "type": "select",
+      "query": "select id, blogId, tags, blogJson from blog where blogId = ?",
+      "params": [
+        "blogId"
+      ]
+    },
+    {
+      "id": "blog.insert",
+      "type": "insert",
+      "table": "blog",
+      "query": "insert into blog(blogId, tags, blog_categories, blogJson ) values (?, ?, ?, ?)",
+      "params": [
+        "blogId",
+        "tags",
+        "blog_categories",
+        "blogJson"
+      ]
+    },
+    {
+      "id": "blog.update",
+      "type": "update",
+      "table": "blog",
+      "query": "update blog set tags = ?, blog_categories = ?, blogJson = ? where blogId = ?",
+      "params": [
+        "tags",
+        "blog_categories",
+        "blogJson",
+        "blogId"
+      ]
+    },
+    {
+      "id": "blog.delete",
+      "type": "delete",
+      "table": "blog",
+      "query": "delete from blog where blogId = ?",
+      "params": [
+        "blogId"
+      ]
+    },
+    {
+      "id": "diy.select.diyid",
+      "type": "select",
+      "query": "select id, diyId, tags, diyJson from diy where diyId = ?",
+      "params": [
+        "diyId"
+      ]
+    },
+    {
+      "id": "diy.insert",
+      "type": "insert",
+      "table": "diy",
+      "query": "insert into diy(diyId, tags, diy_categories, diyJson ) values (?, ?, ?, ?)",
+      "params": [
+        "diyId",
+        "tags",
+        "diy_categories",
+        "diyJson"
+      ]
+    },
+    {
+      "id": "diy.update",
+      "type": "update",
+      "table": "diy",
+      "query": "update diy set tags = ?, diy_categories = ?, diyJson = ? where diyId = ?",
+      "params": [
+        "tags",
+        "diy_categories",
+        "diyJson",
+        "diyId"
+      ]
+    },
+    {
+      "id": "diy.delete",
+      "type": "delete",
+      "table": "diy",
+      "query": "delete from diy where diyId = ?",
+      "params": [
+        "diyId"
+      ]
     }
   ]
 }
