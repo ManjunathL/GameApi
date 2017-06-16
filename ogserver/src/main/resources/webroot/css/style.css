@@ -4523,10 +4523,10 @@ a.hideLink {
     /* End Platinum Page */
     /* NRI Page */
     .nri-banner-section{
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497428751/nri_page/banner-with-text_02.jpg");
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497603824/nri_page/Banner_02.jpg");
         background-repeat: no-repeat;
         background-position: center 100%;
-        min-height: 145px;
+        min-height: 250px;
         width: 100%;
         -webkit-background-size: 100%;
         -moz-background-size: 100%;
