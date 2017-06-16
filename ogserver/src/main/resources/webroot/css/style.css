@@ -2970,7 +2970,7 @@ ul.social-buttons li a:active {
 
 .nri-banner-form .form-control{
     border-radius: 0px;
-    padding: 10px;
+    padding: 5px 10px;
 }
 
 .btn-nri {
@@ -2983,7 +2983,9 @@ ul.social-buttons li a:active {
 .btn-nri:hover,
 .btn-nri:active,
 .btn-nri:focus {
-    color: #dddddd;
+    color: #f15a22;
+    background: #fff;
+    border: 1px solid #f15a22;
 }
 
 .nri-services-section p{
@@ -3092,10 +3094,13 @@ ul.social-buttons li a:active {
     margin: 50px 100px 20px 30px;
 }
 
-.nri-communication-box h1{
+.nri-communication-box h1 {
     line-height: 140%;
-    font-size: 32px;
+    font-size: 38px;
+    text-transform: capitalize;
+    font-weight: 300;
 }
+
 .nri-communication-box p {
     font-size: 14px;
     margin-bottom: 20px;
@@ -3168,7 +3173,7 @@ ul.social-buttons li a:active {
 
 .nri-faq-section .q-container .icon {
     width: 40px;
-    height: 37px;
+    height: 35px;
     line-height: 37px;
     font-size: 14px;
     color: #ffffff;
@@ -3204,7 +3209,7 @@ ul.social-buttons li a:active {
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1487156404/nri_page/testimonial.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: auto;
+    min-height: 475px;;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;

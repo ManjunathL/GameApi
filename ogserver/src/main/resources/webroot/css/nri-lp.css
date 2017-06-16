@@ -458,7 +458,7 @@ ul, ol{
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
     .pn{
         padding: 0px;
     }
@@ -468,10 +468,20 @@ ul, ol{
     .prn{
         padding-right: 0px;
     }
-
+    .btn-festive{
+        font-size: 14px;
+    }
 }
 
+@media (max-width: 992px) {
+    .btn-festive{
+        font-size: 14px;
+    }
+}
 @media (max-width: 768px) {
+    .btn-festive{
+        font-size: 14px;
+    }
     .separator span:before,
     .separator span:after {
         content: "";
@@ -746,7 +756,7 @@ ul, ol{
 .btn-nri-orange{
     text-transform: uppercase;
     color: #f1591f;
-    background-color: #nri-footer;
+    background-color: #f1f1f1;
     font-size: 18px;
     font-weight: 600;
     padding: 10px 20px;
@@ -760,10 +770,8 @@ ul, ol{
     background-color: #f1f1f1;
 }
 
-.nri-bg-gray{
-    background-color: #f1f1f1;
-    padding: 48px 40px;
-    height: 421px;
+.nri-bg-gray {
+    padding: 30px 45px;
 }
 
 .nri-h3-cnt{
@@ -773,12 +781,12 @@ ul, ol{
     font-size:30px;
     font-weight:600;
 }
-.nri-p-cnt{
-    padding: 15px 200px 0px 0px;
-    line-height: 220%;
+.nri-p-cnt {
+    line-height: 190%;
     font-family: 'Raleway', sans-serif;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 400;
+    max-width: 400px;
 }
 
 
@@ -853,7 +861,7 @@ ul, ol{
 }
 
 .nri-mail{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'lato', sans-serif;
     color: #333;
     font-size: 22px;
     font-weight: 400;
@@ -861,8 +869,7 @@ ul, ol{
 }
 
 .nri-form {
-    background: rgba(3, 3, 3, 0.2);
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.5);
     padding: 15px 35px;
 }
 .nri-mob-form{
@@ -882,7 +889,7 @@ ul, ol{
     margin: 0px 0px 5px;
     text-transform: capitalize;
     font-weight: 600;
-    color: #f1591f;;
+    color: #4f4f4f;
 }
 
 .nri-form .form-control{
@@ -1179,11 +1186,21 @@ ul, ol{
 }
 
 @media (max-width: 768px) {
-    .nri-bg-gray{
-        height:auto;
+    .nri-bg-gray {
+        padding: 15px;
     }
     .nri-p-cnt {
-        padding: 15px 20px 0px 0px;
+        padding: 0px;
+        font-size: 18px;
+        line-height: 150%;
+    }
+    .nri-h3-cnt{
+        font-size: 22px;
+        margin: 0px 0px 10px;
+        font-weight: 600;
+    }
+    .btn-nri-orange{
+        font-size: 14px;
     }
     .nri-price-bg h2 {
         color: #ffffff;
