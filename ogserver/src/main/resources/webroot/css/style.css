@@ -4444,23 +4444,23 @@ a.hideLink {
 
     /* Start Platinum Page */
     .platinum-banner-bg{
-            background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475145725/platinum_home/mobile_02.jpg");
-            background-repeat: no-repeat;
-            background-position: center 100%;
-            height: 300px;
-            width: 100%;
-            -webkit-background-size: 100%;
-            -moz-background-size: 100%;
-            -o-background-size: 100%;
-            background-size: 100%;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            padding: 0px;
-            text-align: center;
-            color: #3d4b54;
-        }
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1475145725/platinum_home/mobile_02.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        height: 300px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 0px;
+        text-align: center;
+        color: #3d4b54;
+    }
     .platinum-banner-band-head {
         font-size: 30px;
     }
@@ -4522,6 +4522,31 @@ a.hideLink {
     }
     /* End Platinum Page */
     /* NRI Page */
+    .nri-banner-section{
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497428751/nri_page/banner-with-text_02.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        min-height: 145px;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 0 ;
+        text-align: center;
+    }
+    .nri-banner-form {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 10px 15px 10px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.26);
+        margin-top: 20px;
+    }
     .manufacturing-box {
         min-height: 200px;
     }

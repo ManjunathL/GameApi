@@ -1,6 +1,54 @@
 <div class="bg-white">
 
     <section class="nri-banner-section" id="nri-form">
+        <div class="container hidden-xs hidden-sm">
+            <div class="row">
+                <div class="col-sm-12 col-md-offset-1  col-md-10">
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8 col-lg-4 col-lg-offset-8">
+                            <div class="nri-banner-form">
+
+                                <form method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx" class="width90 margin_auto paddingtop20">
+                                    <h4 class="text-center"> Consultation Form </h4>
+                                    <div class="margin-bottom10 form-group">
+                                        <input type='text' class="form-control" id='FirstName' name='FirstName' placeholder="Name" maxlength='100' value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off' required='required'/>
+                                    </div>
+                                    <div class="margin-bottom10 form-group">
+                                        <input type='text' class="form-control" id='EmailAddress' name='EmailAddress' placeholder="Email ID" maxlength='100' value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom10 form-group">
+                                            <input type='text' class="form-control" id='mx_countrycode' placeholder="ISD Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
+                                        </div>
+                                        <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom10 form-group">
+                                            <input type='text' class="form-control" id='Phone' name='Phone' placeholder="Phone" maxlength='20' value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
+                                        </div>
+                                    </div>
+                                    <div class="margin-bottom10 form-group">
+                                        <input type='text' class="form-control" id='mx_City' name='mx_City' placeholder="City" maxlength='50' value='' autocomplete='off' required='required'/>
+                                    </div>
+                                    <div class="margin-bottom10 form-group">
+                                        <button class="btn btn-block btn-nri" id="form-submit-button" type="submit"> CONTACT ME  </button>
+                                        <input type="hidden" name="MXHOrgCode" value="9814"/>
+                                        <input type="hidden" name="MXHLandingPageId" value="8d7bb83a-0c47-11e6-b61b-22000aa8e760"/>
+                                        <input type="hidden" name="MXHFormBehaviour" value="1"/>
+                                        <input type="hidden" name="MXHFormDataTransfer" value="0"/>
+                                        <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page"/>
+                                        <input type="hidden" name="MXHAsc" value="5"/>
+                                        <input type="hidden" name="MXHPageTitle" value="Email"/>
+                                        <input type="hidden" name="MXHOutputMessagePosition" value="0"/>
+                                        <input type="hidden" name="MXHIsExternallyUsed" value="1"/>
+                                    </div>
+                                </form>
+                                <script type="text/javascript"> var MXLandingPageId = '8d7bb83a-0c47-11e6-b61b-22000aa8e760'; </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="nri-mob-form hidden-lg hidden-md">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-offset-1  col-md-10">
@@ -68,7 +116,7 @@
         </div>
     </section>
 
-    <section class="nri-description-section border-top-grey pt100 pb100">
+    <section class="nri-description-section border-top-grey pt100 pb100 mob-padding-top-20 mob-padding-bottom-20">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
@@ -205,52 +253,93 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5">
-                    <div class="process-cnt-box">
-                        <h4 class="txt-color-orange text-left"> 3. Place Your Order </h4>
-                        <p class="text-left">
-                            We have a transparent and seamless system for placing an order. As soon as the order is placed, we allocate the best of our resources to curate your home into a dream space.
-                        </p>
+            <div class="hidden-xs hidden-sm">
+                <div class="row">
+                    <div class="col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5">
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 3. Place Your Order </h4>
+                            <p class="text-left">
+                                We have a transparent and seamless system for placing an order. As soon as the order is placed, we allocate the best of our resources to curate your home into a dream space.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 1. Explore Designs </h4>
+                            <p class="text-left">
+                                We have a wide-range and an eclectic mix of stunning designs across kitchens, wardrobes and home-decor. Our designs are unique, thoughtful and standard complaint.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <img class="img-responsive img-center" src="https://res.cloudinary.com/mygubbi/image/upload/v1497520789/nri_page/Process_Desktop_03.png">
+                    </div>
+                    <div class="col-sm-3 col-md-3 ">
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 5. Post-Handover Services </h4>
+                            <p class="text-left">
+                                While we do a bi-yearly inspection of our products and fix issues, you can also seek our assistance in case of any interior or service related issue.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb40">
+                    <div class="col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3">
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 2. Customize Designs </h4>
+                            <p class="text-left">
+                                We believe that each home deserves a unique soul and we bring alive that soul by customizing our designs according to the dreams of the family
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 ">
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 4. Delivery In 45 Days </h4>
+                            <p class="text-left">
+                                We are on firm ground with logistics and are committed to our promise of prompt delivery and hassle-free installation.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <div class="process-cnt-box">
-                        <h4 class="txt-color-orange text-left"> 1. Explore Designs </h4>
-                        <p class="text-left">
-                            We have a wide-range and an eclectic mix of stunning designs across kitchens, wardrobes and home-decor. Our designs are unique, thoughtful and standard complaint.
-                        </p>
+            <div class="hidden-lg hidden-md">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-6">
+                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1497603824/nri_page/icon_06.jpg" >
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <img class="img-responsive img-center" src="https://res.cloudinary.com/mygubbi/image/upload/v1497520789/nri_page/Process_Desktop_03.png">
-                </div>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <div class="process-cnt-box">
-                        <h4 class="txt-color-orange text-left"> 3. Place Your Order </h4>
-                        <p class="text-left">
-                            We have a transparent and seamless system for placing an order. As soon as the order is placed, we allocate the best of our resources to curate your home into a dream space.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row pb40">
-                <div class="col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3">
-                    <div class="process-cnt-box">
-                        <h4 class="txt-color-orange text-left"> 2. Customize Designs </h4>
-                        <p class="text-left">
-                            We believe that each home deserves a unique soul and we bring alive that soul by customizing our designs according to the dreams of the family
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 ">
-                    <div class="process-cnt-box">
-                        <h4 class="txt-color-orange text-left"> 4. Delivery In 45 Days </h4>
-                        <p class="text-left">
-                            We are on firm ground with logistics and are committed to our promise of prompt delivery and hassle-free installation.
-                        </p>
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 1. Explore Designs </h4>
+                            <p class="text-left">
+                                We have a wide-range and an eclectic mix of stunning designs across kitchens, wardrobes and home-decor. Our designs are unique, thoughtful and standard complaint.
+                            </p>
+                        </div>
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 2. Customize Designs </h4>
+                            <p class="text-left">
+                                We believe that each home deserves a unique soul and we bring alive that soul by customizing our designs according to the dreams of the family
+                            </p>
+                        </div>
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 3. Place Your Order </h4>
+                            <p class="text-left">
+                                We have a transparent and seamless system for placing an order. As soon as the order is placed, we allocate the best of our resources to curate your home into a dream space.
+                            </p>
+                        </div>
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 4. Delivery In 45 Days </h4>
+                            <p class="text-left">
+                                We are on firm ground with logistics and are committed to our promise of prompt delivery and hassle-free installation.
+                            </p>
+                        </div>
+                        <div class="process-cnt-box">
+                            <h4 class="txt-color-orange text-left"> 5. Post-Handover Services </h4>
+                            <p class="text-left">
+                                While we do a bi-yearly inspection of our products and fix issues, you can also seek our assistance in case of any interior or service related issue.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -258,7 +347,34 @@
     </section>
 
     <section class="nri-communication">
-        <div class="row">
+        <div class="hidden-xs hidden-sm">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1497524613/nri_page/track_04.jpg">
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="nri-communication-box">
+                        <h1> Personalised Communication For Your <strong> Personalised Home! </strong> </h1>
+                        <p>
+                            To make the process of beautifying your home easy, we have developed a Customer
+                            Engagement Portal (CEP). Here you would be able to access all documents pertaining
+                            to the project. Through this portal you can also seamlessly view, download and
+                            upload all the documents related to your home decor project.
+                        </p>
+                        <p>
+                            All you need to do is enter login credentials which are provided in the welcome
+                            mail. As soon as you enter this portal you would be able to view your profile
+                            along with your project details which highlights the project status, documents,
+                            proposal and more. You can also view the products that you have shortlisted from
+                            the website catalog. Apart from this you can have a look at your payment history
+                            and download the same for future reference.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container hidden-lg hidden-md mob-padding-bottom-10">
+            <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-6">
                 <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1497524613/nri_page/track_04.jpg">
             </div>
@@ -282,6 +398,8 @@
                 </div>
             </div>
         </div>
+        </div>
+
     </section>
 
     <section>
