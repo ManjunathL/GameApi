@@ -104,6 +104,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         }
         router.mountSubRouter("/gapi/crm", new CrmApiHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/outboundCrm", new CrmOutboundApiHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/directus", new DirectusBlogHandler(VertxInstance.get()));
 
         new ConfiguredRestApiHandler().setup(router);
 
