@@ -2922,10 +2922,10 @@ ul.social-buttons li a:active {
 /* Start NRI Page */
 
 .nri-banner-section{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477307316/nri_page/nri_bg.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497428751/nri_page/banner-with-text_02.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    height: auto;
+    min-height: 600px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -2935,8 +2935,14 @@ ul.social-buttons li a:active {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding: 140px 0 140px 0;
+    padding: 60px 0 60px 0;
     text-align: center;
+}
+
+.nri-banner-form h4{
+    margin: 0px 0px 15px;
+    color: #4f4f4f;
+    font-weight: 900;
 }
 
 .nri-banner-cnt{
@@ -2956,17 +2962,22 @@ ul.social-buttons li a:active {
 
 .nri-banner-form{
     color: #ffffff;
-    background: rgba(88,89,91,0.7);
-    padding-bottom: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 15px 10px;
+    border-radius: 4px;
+    box-shadow: 8px 0px 20px rgba(51, 51, 51, 0.26);
 }
 
 .nri-banner-form .form-control{
     border-radius: 0px;
+    padding: 10px;
 }
 
 .btn-nri {
-    border-radius: 0px;
-    background: #546670;
+    margin-top: 30px;
+    border-radius: 3px;
+    background: #f15a22;
+    box-shadow: 0px 2px 3px rgba(170, 76, 0, 0.76);
 }
 
 .btn-nri:hover,
@@ -2976,7 +2987,7 @@ ul.social-buttons li a:active {
 }
 
 .nri-services-section p{
-    font-size: 20px;
+    font-size: 18px;
     color: #556871;
 }
 
@@ -3012,30 +3023,39 @@ ul.social-buttons li a:active {
     line-height: 1px;
     margin: 30px 0px;
 }
+.nri-description-section{
+    background: #f0f0f0;
+}
 
 .nri-description-section h4{
     font-size: 14px;
-    padding-bottom: 0px;
+    text-transform: capitalize;
     margin-bottom: 0px;
+    font-weight: 600;
 }
 
 .nri-description-section p{
     font-size: 12px;
-    padding: 10px 10px 0px;
-    line-height: 160%;
+    padding: 15px 0px 0px;
+    line-height: 150%;
+    margin: 0px;
 }
 
 .manufacturing-box{
-    min-height: 235px;
+    background: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    padding: 15px 15px;
+    min-height: 200px;
+    margin-bottom: 30px;
 }
 
-.img-manufacturing{
-    padding: 7px 0px 0px;
-    width: 65px;
+.img-manufacturing {
+    margin-top: 25px;
 }
 
 .nri-why-us-section{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1477388100/nri_page/center-banner_02.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497504350/nri_page/bg_icons.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     height: auto;
@@ -3048,7 +3068,7 @@ ul.social-buttons li a:active {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding: 140px 0 140px 0;
+    padding: 90px 0 90px 0;
     text-align: center;
     color: #ffffff;
 }
@@ -3063,9 +3083,102 @@ ul.social-buttons li a:active {
     width: 100px;
     margin-bottom: 15px;
 }
+
+.nri-communication{
+    background: #f0f0f0;
+}
+
+.nri-communication-box {
+    margin: 50px 100px 20px 30px;
+}
+
+.nri-communication-box h1{
+    line-height: 140%;
+    font-size: 32px;
+}
+.nri-communication-box p {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.nri-faq-section{
+    background: #f0f0f0;
+}
+
+.nri-faq-section .panel-heading {
+     padding: 0;
+}
+
+.nri-faq-section .panel-title{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+.nri-faq-section .panel-default>.panel-heading{
+    color: #f26522;
+}
+
+.nri-faq-section .accordion-toggle {
+     position: relative;
+     display: block;
+     padding: 10px 30px 10px 10px;
+     font-size: 14px;
+     font-weight: 400;
+     text-decoration: none;
+     background: none repeat scroll 0% 0% #fff;
+     text-align: left;
+     text-transform: none;
+}
+
+.nri-faq-section .glyphicon {
+     position: relative;
+     top: -25px;
+     display: inline-block;
+     font-family: 'Glyphicons Halflings';
+     font-style: normal;
+     font-weight: normal;
+     line-height: 1;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     right: 20px;
+}
+
+.nri-faq-section .accordion-toggle:hover {
+    background: #fefefe;
+    text-decoration: none;
+}
+
+.nri-faq-section .panel-body {
+     text-align: justify;
+     padding: 15px 15px 15px 60px;
+}
+
+.nri-faq-section .panel-body  p{
+    font-family: 'Lato', sans-serif;
+}
+
+.nri-faq-section .q-container {
+    display: block;
+    margin-right: 20px;
+    z-index: 10;
+    position: relative;
+    float: left;
+    min-height: initial;
+    margin-top: 0px;
+}
+
+.nri-faq-section .q-container .icon {
+    width: 40px;
+    height: 37px;
+    line-height: 37px;
+    font-size: 14px;
+    color: #ffffff;
+    background: #f26522;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .manufacturing-box{
-        min-height: 330px;
+        min-height: 335px;
     }
     .nri-description-bg{
         height: auto;
@@ -3076,6 +3189,14 @@ ul.social-buttons li a:active {
     .nri-process-unit img{
         width: 180px;
     }
+    .nri-communication-box {
+        margin: 15px 10px 15px 0px;
+    }
+    .nri-communication-box h1 {
+        line-height: 140%;
+        font-size: 18px;
+    }
+
 
 }
 
@@ -4213,6 +4334,10 @@ a.hideLink {
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
     /* Global Class */
+    .nri-banner-section{
+        min-height: 350px;
+        padding: 10px 0 10px 0;
+    }
 }
 
 /* Landscape phone to portrait tablet */
@@ -4396,6 +4521,11 @@ a.hideLink {
         left: 40%;
     }
     /* End Platinum Page */
+    /* NRI Page */
+    .manufacturing-box {
+        min-height: 200px;
+    }
+    /* End NRI Page */
 }
 
 .clr-search-lnk{
@@ -4603,6 +4733,7 @@ a.hideLink {
     .s-ban-h1{
         font-size: 55px;
     }
+
 }
 @media (max-width: 520px) {
     .k-banner{

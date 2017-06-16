@@ -3,51 +3,32 @@
     <section class="nri-banner-section" id="nri-form">
         <div class="container">
             <div class="row">
-                <div class="col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10">
+                <div class="col-sm-12 col-md-offset-1  col-md-10">
                     <div class="row">
-                        <div class="col-sm-8 col-md-8 col-lg-8 padding0">
-                            <div class="nri-banner-cnt text-left">
-                                <h1> YOUR VIRTUAL PRESENCE <br/> IS ALL IT TAKES </h1>
-                                <!--<p>
-                                    Basically we are an End to end service line wherein we set up a complete home,
-                                    which includes services right from choosing the right paints to wallpapers to curtains,
-                                    kitchens, wardrobes, plumbing, carpentry and more.
-                                </p>-->
-                                <div class="nri-banner-btn margin-bottom45">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 padding0">
+                        <div class="col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8 col-lg-4 col-lg-offset-8">
                             <div class="nri-banner-form">
+
                                 <form method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx" class="width90 margin_auto paddingtop20">
+                                    <h4 class="text-center"> Consultation Form </h4>
                                     <div class="margin-bottom10 form-group">
-                                        <input type='text' class="form-control" id='FirstName' name='FirstName' placeholder="Name*" maxlength='100' value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off' required='required'/>
+                                        <input type='text' class="form-control" id='FirstName' name='FirstName' placeholder="Name" maxlength='100' value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off' required='required'/>
                                     </div>
                                     <div class="margin-bottom10 form-group">
-                                        <input type='text' class="form-control" id='EmailAddress' name='EmailAddress' placeholder="Email*" maxlength='100' value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                        <input type='text' class="form-control" id='EmailAddress' name='EmailAddress' placeholder="Email ID" maxlength='100' value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6  margin-bottom10 form-group">
-                                            <input type='text' class="form-control" id='mx_countrycode' placeholder="Country Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
+                                        <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom10 form-group">
+                                            <input type='text' class="form-control" id='mx_countrycode' placeholder="ISD Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6 margin-bottom10 form-group">
-                                            <input type='text' class="form-control" id='Phone' name='Phone' placeholder="Phone Number*" maxlength='20' value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
+                                        <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom10 form-group">
+                                            <input type='text' class="form-control" id='Phone' name='Phone' placeholder="Phone" maxlength='20' value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
                                         </div>
                                     </div>
                                     <div class="margin-bottom10 form-group">
-                                        <input type='text' class="form-control" id='mx_City' name='mx_City' placeholder="Current City*" maxlength='50' value='' autocomplete='off' required='required'/>
+                                        <input type='text' class="form-control" id='mx_City' name='mx_City' placeholder="City" maxlength='50' value='' autocomplete='off' required='required'/>
                                     </div>
                                     <div class="margin-bottom10 form-group">
-                                        <input type='text' class="form-control" id='mx_Street2' name='mx_Street2' placeholder="City where the property is located*" maxlength='256' value='' autocomplete='off'/>
-                                    </div>
-                                    <div class="margin-bottom10 form-group">
-                                        <input type='file' class="form-control" id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off'/>
-
-                                        <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan'/>
-                                    </div>
-                                    <div class="margin-bottom10 form-group">
-                                        <button class="btn btn-block btn-nri" id="form-submit-button" type="submit"> Enquire Now </button>
+                                        <button class="btn btn-block btn-nri" id="form-submit-button" type="submit"> CONTACT ME  </button>
                                         <input type="hidden" name="MXHOrgCode" value="9814"/>
                                         <input type="hidden" name="MXHLandingPageId" value="8d7bb83a-0c47-11e6-b61b-22000aa8e760"/>
                                         <input type="hidden" name="MXHFormBehaviour" value="1"/>
@@ -71,8 +52,8 @@
     <section class="nri-services-section">
         <div class="container">
             <div class="row">
-                <div class="position-relative inline-block pt80 pb80 text-center">
-                    <div class="col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-10">
+                <div class="position-relative inline-block pt40 pb40 text-center">
+                    <div class="col-sm-12 col-md-12">
                         <h2 class="section-heading"> NRI SERVICES </h2>
                         <p>
                             Our vision is to simplify the process of styling home interiors while you are nestled
@@ -87,96 +68,128 @@
         </div>
     </section>
 
-    <section class="nri-description-section border-top-grey">
-        <div class="container-fluid">
+    <section class="nri-description-section border-top-grey pt100 pb100">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-5 col-md-5 col-lg-5 padding0">
-                    <div class="nri-description-bg">
-                        <h2> Our Manufacturing Follows International product standards </h2>
-                        <div class="nri-dec-hr"></div>
-                        <h2> 250+ Products </h2>
-                        <h2> Personalized Design Themes </h2>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-md-7 col-lg-7 text-center">
+                <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="row">
-                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 border-right-grey border-bottom-grey padding0 manufacturing-box">
-                            <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/selection.png">
-                            <h4> EASE OF SELECTION </h4>
-                            <p> Browse through our range of furnishing units and modern decor. You can also get customized designs based on your likes and interests. </p>
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                            <div class="manufacturing-box">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/selection.png">
+                                    </div>
+                                    <div class="col-sm-12 col-md-8 col-lg-8 text-left">
+                                        <h4> Ease of Selection </h4>
+                                        <p> Get customized designs based on your personal style or get inspiration through our showcased designs online, from the comfort of your home. </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 border-right-grey border-bottom-grey padding0 manufacturing-box">
-                            <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/support.png">
-                            <h4> ACTIVE CUSTOMER SUPPORT </h4>
-                            <p> You can connect with us over mail, video or phone call as per your convenience to get a better understanding on the design requirements and choose the right look for your home interiors.  </p>
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                            <div class="manufacturing-box">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/support.png">
+                                    </div>
+                                    <div class="col-sm-12 col-md-8 col-lg-8 text-left">
+                                        <h4> Active Customer Support </h4>
+                                        <p> Connect with us over mail, video or phone call as per your convenience & time zone, to help us understand your design requirements better and give you the right look for your home interiors. </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 border-right-grey border-bottom-grey padding0 manufacturing-box">
-                            <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/services.png">
-                            <h4> ADDITIONAL SUPPORT SERVICES </h4>
-                            <p> We offer end-to-end service, which ensures that any additional work like electric or plumbing services at the site will be done by the right professional </p>
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                            <div class="manufacturing-box">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/services.png">
+                                    </div>
+                                    <div class="col-sm-12 col-md-8 col-lg-8 text-left">
+                                        <h4> Additional Support Services </h4>
+                                        <p> Avail end-to-end services, to ensure that all additional work like electrical or plumbing is done onsite by the right professional! </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 border-right-grey border-bottom-grey padding0 manufacturing-box">
-                            <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/update.png">
-                            <h4> REGULAR UPDATES </h4>
-                            <p> Images or video updates are provided regularly to help you understand the progress of the design project. </p>
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                            <div class="manufacturing-box">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/update.png">
+                                    </div>
+                                    <div class="col-sm-12 col-md-8 col-lg-8 text-left">
+                                        <h4> Regular Updates </h4>
+                                        <p> Have access to images & live video updates, to track the progress of your project in real-time. </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 border-right-grey border-bottom-grey padding0 manufacturing-box">
-                            <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/process.png">
-                            <h4> DILIGENT PROCESS </h4>
-                            <p> We have a wide range of original designs specially crafted by our in-house design team. The designs cater to a variety of tastes across various styles. </p>
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                            <div class="manufacturing-box">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/process.png">
+                                    </div>
+                                    <div class="col-sm-12 col-md-8 col-lg-8 text-left">
+                                        <h4> Diligent Design Process </h4>
+                                        <p> Our in-house designers play special attention  while customizing your home interiors, taking into account your lifestyle and personal preferences. </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 border-right-grey border-bottom-grey padding0 manufacturing-box">
-                            <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/payment.png">
-                            <h4> FLEXIBLE PAYMENTS </h4>
-                            <p> You have the advantage of doing partial payments. We also have EMI options available. </p>
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                            <div class="manufacturing-box">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/v1477399828/nri_page/payment.png">
+                                    </div>
+                                    <div class="col-sm-12 col-md-8 col-lg-8 text-left">
+                                        <h4> Guardians as Representatives </h4>
+                                        <p> Your virtual presence - your guardians can connect and co-ordinate  with us for your project while you’re away! </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt40 text-center">
-                    <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="nri-why-us-wraper">
-        <div class="pt80 text-center">
-            <h2 class="section-heading"> Why Us? </h2>
-        </div>
         <div class="nri-why-us-section text-center">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-sm-12 col-md-12 clo-lg-12">
+                        <div class="mb40">
+                            <h2 class="section-heading-bg"> Why Us? </h2>
+                        </div>
+                    </div>
                     <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-2 col-md-2 col-lg-2 col-xs-6">
                         <img class="img-responsive img-centered img-nri-why" src="https://res.cloudinary.com/mygubbi/image/upload/v1477388327/nri_page/original-designs.png" alt="original-designs">
-                        <h4> Original Designs </h4>
+                        <h4 class="txt-color-orange"> Original Designs </h4>
                         <p> Your design will always be addressed to your satisfaction. </p>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2 col-xs-6">
                         <img class="img-responsive img-centered img-nri-why" src="https://res.cloudinary.com/mygubbi/image/upload/v1477388328/nri_page/personal-engagement.png" alt="personal-engagement">
-                        <h4> Personal Engagement </h4>
+                        <h4 class="txt-color-orange"> Personal Engagement </h4>
                         <p> Allowing you to discuss about your prerequisites and design preferences. </p>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2 col-xs-6">
                         <img class="img-responsive img-centered img-nri-why" src="https://res.cloudinary.com/mygubbi/image/upload/v1477388327/nri_page/photorealistic-renders.png" alt="photorealistic-renders">
-                        <h4> Photorealistic Renders </h4>
-                        <p> Accurate and realistic renderings for better understanding of the outcome. </p>
+                        <h4 class="txt-color-orange"> 3D Renders </h4>
+                        <p> Accurate and 3D renderings for better understanding of the outcome. </p>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2 col-xs-6">
-                        <img class="img-responsive img-centered img-nri-why" src="https://res.cloudinary.com/mygubbi/image/upload/v1477388327/nri_page/post-handover-services.png" alt="post-handover-services">
-                        <h4> Post Handover Services </h4>
-                        <p> We do bi-yearly inspection of our products and other fix issues. </p>
+                        <img class="img-responsive img-centered img-nri-why" src="https://res.cloudinary.com/mygubbi/image/upload/v1497505145/nri_page/team.png" alt="Dedicated Team">
+                        <h4 class="txt-color-orange"> Dedicated Team </h4>
+                        <p> We have a dedicated team for NRI customers, who work at their time zones. </p>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2 col-xs-12">
                         <img class="img-responsive img-centered img-nri-why" src="https://res.cloudinary.com/mygubbi/image/upload/v1477388328/nri_page/across-cities.png" alt="across cities">
-                        <h4> Across 4 Cities </h4>
-                        <p> Present in 4 leading cities across India. </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt40 text-center">
-                        <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
+                        <h4 class="txt-color-orange"> Across 9 Cities </h4>
+                        <p> Present in 9 leading cities across India. </p>
                     </div>
                 </div>
             </div>
@@ -186,45 +199,86 @@
     <section class="nri-process-section border-bottom-grey text-center">
         <div class="container">
             <div class="row">
-                <div class="pt80 text-center">
-                    <h2 class="section-heading"> PROCESS? WE KEEP IT SIMPLE! </h2>
-                </div>
-                <div class="pt20">
-                    <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-2 col-md-2 col-lg-2 col-xs-6 padding0 mob-padding-15 nri-process-unit">
-                        <img class="img-centered img-responsive hidden-xs hidden-sm" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477486431/nri_page/site.png">
-                        <img class="img-centered img-responsive hidden-lg hidden-md" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477542444/nri_page/site_mob.png">
-                        <h4>SITE VISIT</h4>
-                        <p> Our design experts visit your home to plan the right design suitable for your interiors by analyzing the layout of your living space. Depending on the theme demanded by your home, our experts suggest the right design and furniture units that will transform the appearance of your home interiors. </p>
-                    </div>
-                    <div class="col-sm-2 col-md-2 col-lg-2 col-xs-6 padding0 mob-padding-15 nri-process-unit">
-                        <img class="img-centered img-responsive pt80 hidden-xs hidden-sm" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477486645/nri_page/engaging.png">
-                        <img class="img-centered img-responsive hidden-lg hidden-md" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477542433/nri_page/engaging_mob.png">
-                        <h4> ENGAGING DISCUSSION </h4>
-                        <p>The design process actively takes your suggestions on the right look you need for your home interiors. Your discussions with the designing experts helps in choosing the right decor essentials needed for your living space. Our design experts ensure that you are a part of the design process through phone calls or video calls frequently.</p>
-                    </div>
-                    <div class="col-sm-2 col-md-2 col-lg-2 col-xs-6 padding0 mob-padding-15 nri-process-unit">
-                        <img class="img-centered img-responsive hidden-xs hidden-sm" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477542857/nri_page/handover.png">
-                        <img class="img-centered img-responsive hidden-lg hidden-md" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477542433/nri_page/handover_mob.png">
-                        <h4>FINALIZATION OF DESIGN PLAN</h4>
-                        <p>For a better understanding of the design, drawings and 3D renders are shared with your for approvals. Feedback on the shared designs are then incorporated to make sure that designing is done based on your personal needs and preferences. </p>
-                    </div>
-                    <div class="col-sm-2 col-md-2 col-lg-2 col-xs-6 padding0 mob-padding-15 nri-process-unit">
-                        <img class="img-centered img-responsive pt80 hidden-xs hidden-sm" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477486722/nri_page/delivery.png">
-                        <img class="img-centered img-responsive hidden-lg hidden-md" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477542433/nri_page/delivery_mob.png">
-                        <h4>FREE DELIVERY & INSTALLATION</h4>
-                        <p>Our services include free delivery and installation to offer you with hassle-free service. </p>
-                    </div>
-                    <div class="col-sm-2 col-md-2 col-lg-2 col-xs-12 padding0 mob-padding-15 nri-process-unit">
-                        <img class="img-centered img-responsive hidden-xs hidden-sm" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1481213275/nri_page/finalization.png">
-                        <img class="img-centered img-responsive hidden-lg hidden-md" alt="process" src="https://res.cloudinary.com/mygubbi/image/upload/v1477542433/nri_page/finalization_mob.png">
-                        <h4>POST-HANDOVER SERVICES</h4>
-                        <p>While we do a bi-yearly inspection of our products and fix issues, you can also seek our assistance in case of any interior or service related issue. </p>
+                <div class="col-md-12">
+                    <div class="pt80 pb40 text-center">
+                        <h2 class="section-heading"> PROCESS? WE KEEP IT SIMPLE! </h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt20 mb20 text-center">
-                    <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
+                <div class="col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5">
+                    <div class="process-cnt-box">
+                        <h4 class="txt-color-orange text-left"> 3. Place Your Order </h4>
+                        <p class="text-left">
+                            We have a transparent and seamless system for placing an order. As soon as the order is placed, we allocate the best of our resources to curate your home into a dream space.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="process-cnt-box">
+                        <h4 class="txt-color-orange text-left"> 1. Explore Designs </h4>
+                        <p class="text-left">
+                            We have a wide-range and an eclectic mix of stunning designs across kitchens, wardrobes and home-decor. Our designs are unique, thoughtful and standard complaint.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <img class="img-responsive img-center" src="https://res.cloudinary.com/mygubbi/image/upload/v1497520789/nri_page/Process_Desktop_03.png">
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="process-cnt-box">
+                        <h4 class="txt-color-orange text-left"> 3. Place Your Order </h4>
+                        <p class="text-left">
+                            We have a transparent and seamless system for placing an order. As soon as the order is placed, we allocate the best of our resources to curate your home into a dream space.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb40">
+                <div class="col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3">
+                    <div class="process-cnt-box">
+                        <h4 class="txt-color-orange text-left"> 2. Customize Designs </h4>
+                        <p class="text-left">
+                            We believe that each home deserves a unique soul and we bring alive that soul by customizing our designs according to the dreams of the family
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 ">
+                    <div class="process-cnt-box">
+                        <h4 class="txt-color-orange text-left"> 4. Delivery In 45 Days </h4>
+                        <p class="text-left">
+                            We are on firm ground with logistics and are committed to our promise of prompt delivery and hassle-free installation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nri-communication">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1497524613/nri_page/track_04.jpg">
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="nri-communication-box">
+                    <h1> Personalised Communication For Your <strong> Personalised Home! </strong> </h1>
+                    <p>
+                        To make the process of beautifying your home easy, we have developed a Customer
+                        Engagement Portal (CEP). Here you would be able to access all documents pertaining
+                        to the project. Through this portal you can also seamlessly view, download and
+                        upload all the documents related to your home decor project.
+                    </p>
+                    <p>
+                        All you need to do is enter login credentials which are provided in the welcome
+                        mail. As soon as you enter this portal you would be able to view your profile
+                        along with your project details which highlights the project status, documents,
+                        proposal and more. You can also view the products that you have shortlisted from
+                        the website catalog. Apart from this you can have a look at your payment history
+                        and download the same for future reference.
+                    </p>
                 </div>
             </div>
         </div>
@@ -281,86 +335,38 @@
         </div>
     </section>
 
-    <!--<section class="nri-brand-section border-bottom-grey">
+    <section class="nri-brand-section border-bottom-grey">
         <div class="position-relative pt80 pb80 text-center">
             <div class="container flip-container">
                 <div class="row">
                     <div class="col-lg-12 col-sm-12 col-md-12 text-center">
-                        <h2 class="section-heading"> We work with </h2>
+                        <h2 class="section-heading"> OUR PRESENCE </h2>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="hidden-xs hidden-sm">
-                    <div class="row">
-                        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12"></div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
-                            <img class="cld-responsive width100 padding-bottom10" src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/v1473332622/brand/century.jpg" alt="Consultation & Planning">
-                        </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
-                            <img class="cld-responsive width100 padding-bottom10" src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/v1473332622/brand/hafele.jpg" alt="Consultation & Planning">
-                        </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
-                            <img class="cld-responsive width100 padding-bottom10" src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/v1473332622/brand/Hettich.jpg" alt="Consultation & Planning">
-                        </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
-                            <img class="cld-responsive width100 padding-bottom10" src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/v1473332622/brand/greenlam.jpg" alt="Consultation & Planning">
-                        </div>
-                        <div class="col-xs-3"></div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-6">
-                            <img class="cld-responsive width100 padding-bottom10" src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/v1473332622/brand/Merino.jpg" alt="Consultation & Planning">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-offset-5 col-sm-2 col-md-offset-5 col-md-2 mt40 text-center">
-                            <a href="#nri-form" class="btn btn-explore"> Enquire Now </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden-lg hidden-md">
-                    <div class="row">
-                        <div class="controls center col-xs-2 mt60">
-                            <button class="btn brand-prev disabled" disabled="">
-                                <img src="<%= imgBase + '/home/dark_arr_left.png'%>" class="arr_test" alt="...">
-                            </button>
-                        </div>
-
-                        <div class="frame col-xs-8 overflow-hidden" id="brand-frame">
-                            <ul class="clearfix slidee" style="transform: translateZ(0px) translateX(0px); width: 3480px;">
-                                <li class="brand-sly-content bg-color-brand">
-                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/century.jpg" alt="...">
-                                </li>
-
-                                <li class="brand-sly-content bg-color-brand">
-                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/hafele.jpg" alt="...">
-                                </li>
-
-                                <li class="brand-sly-content bg-color-brand">
-                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/Hettich.jpg" alt="...">
-                                </li>
-
-                                <li class="brand-sly-content bg-color-brand">
-                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/greenlam.jpg" alt="...">
-                                </li>
-
-                                <li class="brand-sly-content bg-color-brand">
-                                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1473332622/brand/Merino.jpg" alt="...">
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="controls center col-xs-2 mt60">
-                            <button class="btn brand-next">
-                                <img src="<%= imgBase + '/home/dark_arr_right.png'%>" class="arr_test" alt="...">
-                            </button>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12 text-center">
+                        <ul class="list-inline">
+                            <li> Banglaore  </li>|
+                            <li> Chennai  </li>|
+                            <li> Hyderabad  </li>|
+                            <li> Pune  </li>|
+                            <li> Mangalore  </li>|
+                            <li> Coimbatore  </li>|
+                            <li> Thane  </li>|
+                            <li> Cochin  </li>|
+                            <li> Trivandrum </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </section>-->
+    </section>
 
     <section class="nri-faq-section">
+
+    </section>
+
+    <section class="nri-faq-section ">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 text-center">
@@ -372,293 +378,321 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 text-center">
                     <p class="faq-des">
-                        We are passionate about the idea of making your house a dream home you have
-                        always been envisioning. Our interior design experts have considerable experience
-                        in assessing a design project, regardless of the size. On their design consultation,
-                        they register the dimensions of the interior space, requirements of the client,
-                        his budget and the feasibility of implementing the design. The following are
-                        some of the frequently asked questions with corresponding answers they have
-                        recorded to give you a fair idea on the things you should consider during the
-                        design project:
+                        Do I need to visit from time to time? How will I know if the quality of the materials used is good?
+                        There will be a host of questions on your mind. We've answered a few below. If you have more, we're just a phone call or email away.
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 text-center">
                     <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="faq-q mt30">
+                        <div class="panel-group" id="accordion">
 
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                            <div class="col-sm-6 col-md-6 col-lg-6 mt30 mb30">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                How do I make an account on mygubbi ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <p>
+                                                Dear Buyer! It’s very easy to register an account on mygubbi. Just click on the “Log In” link on the top right hand side of the page. If you are already a member, fill in your account details and sign in.
+                                                A new member can make an account instantly by clicking on “Register” link. A new window will open, fill in your basic details and choose a highly-secure password. Simple! You are a member of mygubbi now. Sign in again with your account details.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange">  How do I make an account on mygubbi ? </h4>
-                                    <p>
-                                        Dear Buyer! It’s very easy to register an account on mygubbi. Just click on the “Log In” link on the top right hand side of the page. If you are already a member, fill in your account details and sign in.
-
-                                        A new member can make an account instantly by clicking on “Register” link. A new window will open, fill in your basic details and choose a highly-secure password. Simple! You are a member of mygubbi now. Sign in again with your account details.
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                What are the advantages of having a mygubbi account ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                mygubbi account comes up with manifold benefits apart from ease of shopping.
+                                                You will be getting updates on discounts or seasonal offers running on our store.
+                                                We would love to share our exclusive collection and updates with you.
+                                                Do go through our newsletters and stay connected.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange">  What are the advantages of having a mygubbi account ? </h4>
-                                    <p>
-                                        mygubbi account comes up with manifold benefits apart from ease of shopping.
-                                        You will be getting updates on discounts or seasonal offers running on our store.
-                                        We would love to share our exclusive collection and updates with you.
-                                        Do go through our newsletters and stay connected.
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                                What are the payment terms for shopping at mygubbi ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                For standard products, we expect 50% of the amount to start manufacturing process.
+                                                Rest can be paid once the products are finished and packaged in our warehouse for delivery.
+                                                For customized orders, we follow a 10-40-50 payment policy. We expect 10% of initial budget
+                                                as advance which will be adjusted against the total cost of the project later.
+                                                The next 40% will be expected on finalization of the design and the last 50%
+                                                will be paid once material is ready for shipment.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange"> How safe is it to use my credit card details while shopping on mygubbi ? </h4>
-                                    <p>
-                                        Absolutely safe! We use RBI guidelines for payments for all kinds of transactions including DD,
-                                        Cheque, NEFT transfer and other payment methods. Rest assured, your details are stored only on
-                                        temporary basis and get automatically deleted once the transaction gets over.
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsefive">
+                                                Do you include service tax in the cost price ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsefive" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                Yes, the cost price is cumulative of manufacturing and designing cost along with additional pricing (for extra services), VAT and service tax.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange"> What are the payment terms for shopping at mygubbi ? </h4>
-                                    <p>
-                                        For standard products, we expect 50% of the amount to start manufacturing process.
-                                        Rest can be paid once the products are finished and packaged in our warehouse for delivery.
-                                        For customized orders, we follow a 10-40-50 payment policy. We expect 10% of initial budget
-                                        as advance which will be adjusted against the total cost of the project later.
-                                        The next 40% will be expected on finalization of the design and the last 50%
-                                        will be paid once material is ready for shipment.
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsesix">
+                                                Why don’t you offer “Cash on Delivery” option to buyers ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsesix" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                All the products are “Customized” items. They are designed and manufactured especially for an individual.
+                                                Craftsmen and artisans require an advance payment before they start manufacturing any particular item.
+                                                Hence, we don’t offer “Cash on Delivery” option.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange">  Do you include service tax in the cost price? </h4>
-                                    <p>
-                                        Yes, the cost price is cumulative of manufacturing and designing cost along with additional pricing (for extra services), VAT and service tax.
-                                    </p>
-                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseseven">
+                                                How should I handover the house keys?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseseven" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
 
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                                There are multiple options to hand over the keys. <br/>
+                                                <span class="pt10">
+                                                    <b>Option 1 </b>- The client can hand over the keys to the designer at the time of final discussion. <br/>
+                                                    <b>Option 2 </b> - Clients can leave the keys at the Experience Center. <br/>
+                                                    <b>Option 3 </b> - Clients can also come over to the site on the day of delivery with keys, in order to have the touch and feel of the products. <br/>
+                                                    <b>Option 4 </b> - In case the client is, for various reasons, unable to drop the keys, then MyGubbi team will go to the clients place to collect it. <br/>
+                                                </span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange">  Why don’t you offer “Cash on Delivery” option to buyers ? </h4>
-                                    <p>
-                                        All the products are “Customized” items. They are designed and manufactured especially for an individual.
-                                        Craftsmen and artisans require an advance payment before they start manufacturing any particular item.
-                                        Hence, we don’t offer “Cash on Delivery” option.
-                                    </p>
-                                </div>
-
                             </div>
-                            <div class="faq-q">
 
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                            <div class="col-sm-6 col-md-6 col-lg-6 mt30 mb30">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseeight">
+                                                What if I don’t like the product ? Can I return it ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseeight" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                We assure you that one will definitely adore the products designed after much care and intricacy.
+                                                Our designers and artisans strive to create the finest specimen to refurbish your abode.
+                                                We heartily apologize as we don’t receive any returns. mygubbi products are designed after
+                                                customer’s inputs, opinions and regular audits. After putting immense efforts our designers
+                                                are able to craft the perfect specimen for you. We haven’t received any complaints from our
+                                                buyers so far. So, don’t worry!
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange"> How should I handover the house keys? </h4>
-                                    <p>
-
-                                        There are multiple options to hand over the keys. <br/>
-                                        <span class="pt10">
-                                            <b>Option 1 </b>- The client can hand over the keys to the designer at the time of final discussion. <br/>
-                                            <b>Option 2 </b> - Clients can leave the keys at the Experience Center. <br/>
-                                            <b>Option 3 </b> - Clients can also come over to the site on the day of delivery with keys, in order to have the touch and feel of the products. <br/>
-                                            <b>Option 4 </b> - In case the client is, for various reasons, unable to drop the keys, then MyGubbi team will go to the clients place to collect it. <br/>
-                                        </span>
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="faq-q mt30">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsenine">
+                                                Do I have to pay for shipping of the products ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsenine" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                No, we don’t charge any shipping or delivery charges. Our delivery services are absolutely free.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange"> What if I don’t like the product ? Can I return it ?  </h4>
-                                    <p>
-                                        We assure you that one will definitely adore the products designed after much care and intricacy.
-                                        Our designers and artisans strive to create the finest specimen to refurbish your abode.
-                                        We heartily apologize as we don’t receive any returns. mygubbi products are designed after
-                                        customer’s inputs, opinions and regular audits. After putting immense efforts our designers
-                                        are able to craft the perfect specimen for you. We haven’t received any complaints from our
-                                        buyers so far. So, don’t worry!
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseten">
+                                                How can I contact designer if I want changes ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseten" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                mygubbi offers you the benefit of modifying the design before manufacturing commences.
+                                                You can twitch the design whenever you want.
+                                                You can reach us at: 08088 860 860 or drop a mail at reach@mygubbi.com
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange"> Do I have to pay for shipping of the products ? </h4>
-                                    <p>
-                                        No, we don’t charge any shipping or delivery charges. Our delivery services are absolutely free.
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseeleven">
+                                                How can I track my order ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseeleven" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                You will get a confirmation mail post manufacturing of the project.
+                                                You can contact us on customer care number to track the shipment.
+                                                If you want to visit the design studio to know the status of item,
+                                                you are free to pay us a visit anytime.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange"> How can I contact designer if I want changes ? </h4>
-                                    <p>
-                                        mygubbi offers you the benefit of modifying the design before manufacturing commences.
-                                        You can twitch the design whenever you want.
-                                        You can reach us at: 08088 860 860 or drop a mail at reach@mygubbi.com
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsetwelve">
+                                                Do you deliver in my city ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsetwelve" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                Please write to us to check if we deliver in your city.
+                                                You can simply fill the enquiry form with your correct contact details.
+                                                We will get in touch with complete details.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange">  How can I track my order ? </h4>
-                                    <p>
-                                        You will get a confirmation mail post manufacturing of the project.
-                                        You can contact us on customer care number to track the shipment.
-                                        If you want to visit the design studio to know the status of item,
-                                        you are free to pay us a visit anytime.
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class="faq-q">
-
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="q-container">
+                                            <div class="icon">
+                                                Q
+                                            </div>
+                                        </div>
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsethirteen">
+                                                Why are mygubbi products not available at my pin code ?
+                                            </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsethirteen" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                The delivery of the products is restricted by many factors- may be legal issues or state regulations.
+                                                We can swiftly deliver the product in Bangalore or nearby location.
+                                                We want to make sure that we are able to deliver and install the products with safety and warranty.
+                                                Hence, we don’t deliver at certain locations. But we are expanding on daily basis, do keep an eye on us.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange">   Do you deliver in my city ? </h4>
-                                    <p>
-                                        Please write to us to check if we deliver in your city.
-                                        You can simply fill the enquiry form with your correct contact details.
-                                        We will get in touch with complete details.
-                                    </p>
-                                </div>
-
                             </div>
-                            <div class="faq-q">
 
-                                <!-- ICON -->
-                                <div class="q-container">
-                                    <div class="icon">
-                                        Q
-                                    </div>
-                                </div>
-
-                                <!-- FEATURE HEADING AND DESCRIPTION -->
-                                <div class="q-details">
-                                    <h4 class="txt-color-orange"> Why are mygubbi products not available at my pin code ? </h4>
-                                    <p>
-                                        The delivery of the products is restricted by many factors- may be legal issues or state regulations.
-                                        We can swiftly deliver the product in Bangalore or nearby location.
-                                        We want to make sure that we are able to deliver and install the products with safety and warranty.
-                                        Hence, we don’t deliver at certain locations. But we are expanding on daily basis, do keep an eye on us.
-                                    </p>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -667,3 +701,15 @@
     </section>
 
 </div>
+
+
+<script type="text/javascript">
+    function toggleChevron(e) {
+        $(e.target)
+            .prev('.panel-heading')
+            .find("i.indicator")
+            .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+        }
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+</script>
