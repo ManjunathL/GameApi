@@ -653,7 +653,7 @@ ul, ol{
 /* ----- End Festive Page CSS ------ */
 /* NRI LP Page CSS */
 .nri_banner_bg {
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497268144/nri_lp/Banner_02.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497532162/nri_lp/Banner_03.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     min-height: 580px;
@@ -756,6 +756,10 @@ ul, ol{
     font-family: 'Raleway', sans-serif;
 }
 
+.nri-bg-lightgray{
+    background-color: #f1f1f1;
+}
+
 .nri-bg-gray{
     background-color: #f1f1f1;
     padding: 48px 40px;
@@ -789,7 +793,7 @@ ul, ol{
 }
 
 .nri-cities li{
-     padding: 35px 0px;
+     padding: 20px 0px;
      display: inline-block;
 }
 .nri-cities li h4{
@@ -857,7 +861,7 @@ ul, ol{
 }
 
 .nri-form {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(3, 3, 3, 0.2);
     color: #ffffff;
     padding: 15px 35px;
 }
@@ -951,9 +955,9 @@ ul, ol{
 .btn-nri-red:hover,
 .btn-nri-red:active,
 .btn-nri-red:focus{
-    color: #ffffff;
-    border-color: rgba(186, 32, 39, 0.84);
-    background: rgba(186, 32, 39, 0.84);
+    color: #f1591f;
+    border-color: #f1f1f1;
+    background: #f1f1f1;
     outline: thin dotted;
     outline: 0px auto -webkit-focus-ring-color;
     outline-offset: 0px;
@@ -987,7 +991,10 @@ ul, ol{
     font-weight: 900;
     border-bottom: 1px solid #f1591f;
     line-height: 120%;
-    margin: 0px 285px;
+    display: initial;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 5px;
 }
 .section-cucu-interior-facts{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1489486247/cucumber_sales/offer-bg_02.jpg");
