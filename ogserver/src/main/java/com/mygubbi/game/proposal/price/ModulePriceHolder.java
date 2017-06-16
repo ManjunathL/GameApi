@@ -274,10 +274,11 @@ public class ModulePriceHolder
                                  } else {
                                      lProfileWidth = lProfileWidth + this.productModule.getWidth();
                                  }
-                             }
-                             else if (this.productModule.getModuleCategory().contains("Tall"))
-                             {
+                             } else if (this.productModule.getModuleCategory().contains("Tall")) {
                                  lProfileWidth = lProfileWidth + this.productModule.getHeight();
+                             } else {
+                                 lProfileWidth = lProfileWidth + this.productModule.getWidth();
+
                              }
                          }
                      }
