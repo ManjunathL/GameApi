@@ -801,7 +801,7 @@ ul, ol{
     border-right: 1px solid #ddd;
     color: #777;
     text-transform: inherit;
-    font-size: 22px;
+    font-size: 16px;
     font-family: 'Raleway', sans-serif;
 }
 .bordernon{
@@ -1162,7 +1162,7 @@ ul, ol{
         display: inline-block;
     }
     .nri-cities li h4 {
-        font-size: 15px;
+        font-size: 14px;
     }
     .btn-nri-red {
         color: #ffffff;
@@ -1241,7 +1241,7 @@ ul, ol{
         display: inline-block;
     }
     .nri-cities li h4 {
-        font-size: 15px;
+        font-size: 14px;
     }
     .btn-nri-red {
         color: #ffffff;
