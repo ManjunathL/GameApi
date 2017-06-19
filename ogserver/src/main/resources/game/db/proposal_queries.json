@@ -1255,7 +1255,7 @@
       "id": "proposal.selectuserprofiledata",
       "type": "select",
       "table": "user_profile",
-      "query": "select profile from user_profile",
+      "query": "select profile from user_profile where crmId != ''",
       "params": [],
       "jsonfields":["profile"]
     },
