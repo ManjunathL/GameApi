@@ -31,7 +31,6 @@ public class DirectusBlogHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
-
         this.post("/insertBlog").handler(this::addBlogItem); //Category, Sub-Category
         this.post("/deleteBlog").handler(this::deleteBlogItem); //Category, Sub-Category
         this.post("/insertDiy").handler(this::addDiyItem); //Category, Sub-Category
