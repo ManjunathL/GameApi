@@ -132,6 +132,8 @@ public class UserRegistrationProcessor implements DataProcessor
         JsonObject jsonData = eventData.getJsonData();
         String crmId = jsonData.getString("crmId");
         String email =  jsonData.getString("email");
+        LOG.info("==== email ===");
+        LOG.info(email);
         if(crmId.isEmpty()) {
             EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail(email)
                     .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
@@ -141,6 +143,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     (AsyncResult<Message<Integer>> result) -> {
 
                         if (result.succeeded()) {
+                            LOG.info("emailData"  + emailData);
                             LOG.info("sent Mail");
                             this.acknowledger.done(eventData);
                         } else {
@@ -159,6 +162,8 @@ public class UserRegistrationProcessor implements DataProcessor
                     (AsyncResult<Message<Integer>> result) -> {
 
                         if (result.succeeded()) {
+                            LOG.info("emailData"  + emailData);
+
                             LOG.info("sent Mail");
                             this.acknowledger.done(eventData);
                         } else {
