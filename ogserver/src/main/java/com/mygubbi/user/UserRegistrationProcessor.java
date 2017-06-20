@@ -131,8 +131,9 @@ public class UserRegistrationProcessor implements DataProcessor
     {
         JsonObject jsonData = eventData.getJsonData();
         String crmId = jsonData.getString("crmId");
+        String email =  jsonData.getString("email");
         if(crmId.isEmpty()) {
-            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail(email)
                     .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
                     .setBodyTemplate("email/welcome.websiteuser.vm").setSubjectTemplate("email/welcome.user.subject.vm");
             Integer id = LocalCache.getInstance().store(emailData);
@@ -150,7 +151,7 @@ public class UserRegistrationProcessor implements DataProcessor
                     });
         }
         else{
-            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail("mehaboob.basha@mygubbi.com")
+            EmailData emailData = new EmailData().setFromEmail("noreply@mygubbi.com").setToEmail(email)
                     .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Welcome to mygubbi!")
                     .setBodyTemplate("email/welcome.user.vm").setSubjectTemplate("email/welcome.user.subject.vm");
             Integer id = LocalCache.getInstance().store(emailData);
