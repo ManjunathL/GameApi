@@ -246,8 +246,8 @@ ul, ol{
 
 .btn-festive{
     color: #ffffff;
-    border-color: #fe6510;
-    background: #fe6510;
+    border-color: #f1591f;
+    background: #f1591f;
     font-size: 20px;
 }
 
@@ -468,9 +468,7 @@ ul, ol{
     .prn{
         padding-right: 0px;
     }
-    .btn-festive{
-        font-size: 14px;
-    }
+
 }
 
 @media (max-width: 992px) {
@@ -766,6 +764,17 @@ ul, ol{
     font-family: 'Raleway', sans-serif;
 }
 
+.btn-nri-orange:hover,
+.btn-nri-orange:active,
+.btn-nri-orange:focus{
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #f1591f;
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+
 .nri-bg-lightgray{
     background-color: #f1f1f1;
 }
@@ -869,8 +878,11 @@ ul, ol{
 }
 
 .nri-form {
-    background: rgba(255, 255, 255, 0.5);
-    padding: 15px 35px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px 30px;
+    border-radius: 4px;
+    box-shadow: 8px 0px 20px rgba(51, 51, 51, 0.26);
 }
 .nri-mob-form{
     padding: 0px;
@@ -1234,7 +1246,8 @@ ul, ol{
 
     }
     .section-nri-facts .nri-subheading {
-        margin: 0px 80px;
+        margin: 0px 50px;
+        line-height: 150%;
     }
     .pdn0{
         padding:0px !important;
