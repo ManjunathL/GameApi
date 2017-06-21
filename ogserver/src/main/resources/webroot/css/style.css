@@ -3198,8 +3198,9 @@ ul.social-buttons li a:active {
         margin: 15px 10px 15px 0px;
     }
     .nri-communication-box h1 {
-        line-height: 140%;
-        font-size: 18px;
+        line-height: 150%;
+        font-size: 21px;
+        font-weight: 500;
     }
 
 
@@ -4554,6 +4555,10 @@ a.hideLink {
     }
     .manufacturing-box {
         min-height: 200px;
+    }
+    .nri-description-section h4{
+        font-size: 16px;
+        font-weight: 400;
     }
     /* End NRI Page */
 }
