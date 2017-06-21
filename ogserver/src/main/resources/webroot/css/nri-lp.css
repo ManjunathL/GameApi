@@ -750,6 +750,17 @@ ul, ol{
     border-radius: 50px;
     margin-top: 20px;
 }
+.btn-nri-white:hover,
+.btn-nri-white:active,
+.btn-nri-white:focus{
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #f1591f;
+    border: 1px solid #f1f1f1;
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
 
 .btn-nri-orange{
     text-transform: uppercase;
@@ -975,7 +986,7 @@ ul, ol{
 .btn-nri-red:active,
 .btn-nri-red:focus{
     color: #f1591f;
-    border-color: #f1f1f1;
+    border-color: #f1591f;
     background: #f1f1f1;
     outline: thin dotted;
     outline: 0px auto -webkit-focus-ring-color;
