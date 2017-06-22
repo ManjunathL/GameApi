@@ -50,7 +50,8 @@ define([
             var that = this;
             this.diys.fetch({
                  data: {
-                     "id": "1"
+                     "id": "1",
+                     "tags": selectedBlogsCategory
                  },
                 success: function(response) {
                     that.fetchStoriesAndRender(selectedBlogsCategory);
