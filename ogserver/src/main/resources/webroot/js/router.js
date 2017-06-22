@@ -109,7 +109,7 @@ define([
             'fblp(/)':'fblandingpage',
             'mangalore-lp(/)':'mangalorelandingpage',
             'email-lp(/)':'emaillandingpage',
-            'nri-:cityName(/)' : 'nripage',
+            'nri-services-:cityName(/)' : 'nripage',
             'media(/)': 'mediapage',
             'shobha-lp(/)': 'shobhalandingpage',
             'pune-lp(/)': 'punelandingpage',
