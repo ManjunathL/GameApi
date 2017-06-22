@@ -81,6 +81,8 @@ public class ProductModule extends JsonObject
     private static final String GOLA_PROFILE_FLAG = "golaProfileFlag";
     private static final String CUSTOM_CHECK = "customCheck";
     private static final String HANDLE_OVERRIDE_FLAG = "handleOverrideFlag";
+    private static final String HANDLE_THICKNESS = "handleThickness";
+
 
     public ProductModule()
     {
@@ -300,6 +302,16 @@ public class ProductModule extends JsonObject
         return this.getString(HANDLE_OVERRIDE_FLAG);
     }
 
+    public  String getHandleThickness() {
+        return this.getString(HANDLE_THICKNESS);
+    }
+
+    public ProductModule setHandleThickness(String handleThickness)
+    {
+        this.put(HANDLE_THICKNESS,handleThickness);
+        return this;
+
+    }
     public ProductModule setHandleOverrideFlag(String handleOverrideFlag)
     {
         this.put(HANDLE_OVERRIDE_FLAG,handleOverrideFlag);
@@ -471,6 +483,12 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setProductCategory(String productCategory)
+    {
+        this.put(PRODUCT_CATEGORY,productCategory);
+        return this;
+    }
+
     public String getCustomCheck() {
         return this.getString(CUSTOM_CHECK);
     }
@@ -541,7 +559,17 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setHandleQuantity(String handleQuantity)
+    {
+        this.put(HANDLE_QUANTITY, handleQuantity);
+        return this;
+    }
 
+    public ProductModule setKnobQuantity(String knobQuantity)
+    {
+        this.put(KNOB_QUANTITY, knobQuantity);
+        return this;
+    }
     public int getWidth()
     {
         return this.getInteger(WIDTH);

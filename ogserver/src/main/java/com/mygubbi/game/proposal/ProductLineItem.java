@@ -49,6 +49,7 @@ public class ProductLineItem extends JsonObject
 
     public static final String HANDLE_CODE="handleCode";
     public static final String KNOB_CODE="knobCode";
+    public static final String HANDLE_THICKNESS="handleThickness";
 
 
     public static final String BASE_UNIT_TYPE = "Base unit";
@@ -167,6 +168,7 @@ public class ProductLineItem extends JsonObject
         return this.getString(KNOB_CODE);
     }
 
+    public String getHandleThickness() { return this.getString(HANDLE_THICKNESS);}
 
 
 

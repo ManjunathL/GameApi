@@ -498,6 +498,8 @@ public class ModuleDataService extends AbstractVerticle
             module.setHandleType(productLineItem.getHandleType());
             module.setKnobType(productLineItem.getKnobType());
             module.setKnobFinish(productLineItem.getKnobFinish());
+            module.setHandleThickness(productLineItem.getHandleThickness());
+            module.setProductCategory(productLineItem.getProductCategory());
         }
         else
         {
