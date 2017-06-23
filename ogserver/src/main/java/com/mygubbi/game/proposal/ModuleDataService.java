@@ -500,17 +500,29 @@ public class ModuleDataService extends AbstractVerticle
             module.setKnobFinish(productLineItem.getKnobFinish());
             module.setHandleThickness(productLineItem.getHandleThickness());
             module.setProductCategory(productLineItem.getProductCategory());
+            module.setHandleQuantity(String.valueOf(0));
+            module.setKnobQuantity(String.valueOf(0));
 
-            Collection<AccessoryPackComponent> accessoryPackComponents = ModuleDataService.getInstance().getAccessoryPackComponents(mgModule.getCode());
-            for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
+            if (module.getHandleMandatory().equals("Yes"))
             {
-                if (accessoryPackComponent.getType().equals("HL"))
+                Collection<AccessoryPackComponent> accessoryPackComponents = ModuleDataService.getInstance().getAccessoryPackComponents(mgModule.getCode());
+                for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
                 {
-                    module.setHandleQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                    if (accessoryPackComponent.getType().equals("HL"))
+                    {
+                        module.setHandleQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                    }
                 }
-                if (accessoryPackComponent.getType().equals("K"))
+            }
+            if (module.getKnobMandatory().equals("Yes"))
+            {
+                Collection<AccessoryPackComponent> accessoryPackComponents = ModuleDataService.getInstance().getAccessoryPackComponents(mgModule.getCode());
+                for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
                 {
-                    module.setKnobQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                    if (accessoryPackComponent.getType().equals("K"))
+                    {
+                        module.setKnobQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                    }
                 }
             }
 
