@@ -559,7 +559,7 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule setHandleQuantity(String handleQuantity)
+    public ProductModule setHandleQuantity(double handleQuantity)
     {
         this.put(HANDLE_QUANTITY, handleQuantity);
         return this;

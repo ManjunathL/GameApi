@@ -500,8 +500,8 @@ public class ModuleDataService extends AbstractVerticle
             module.setKnobFinish(productLineItem.getKnobFinish());
             module.setHandleThickness(productLineItem.getHandleThickness());
             module.setProductCategory(productLineItem.getProductCategory());
-            module.setHandleQuantity(String.valueOf(0));
-            module.setKnobQuantity(String.valueOf(0));
+           /* module.setHandleQuantity(String.valueOf(0));
+            module.setKnobQuantity(String.valueOf(0));*/
 
             if (module.getHandleMandatory().equals("Yes"))
             {
@@ -510,7 +510,7 @@ public class ModuleDataService extends AbstractVerticle
                 {
                     if (accessoryPackComponent.getType().equals("HL"))
                     {
-                        module.setHandleQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                        module.setHandleQuantity(accessoryPackComponent.getQuantity());
                     }
                 }
             }
