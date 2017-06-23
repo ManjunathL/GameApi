@@ -912,7 +912,7 @@
     {
       "id": "city.selectMonthCount",
       "type": "select",
-      "query": "select distinct(quoteNo) from city_master where curmonth= ? and city = ? ",
+      "query": "select quoteNo from city_master where curmonth= ? and city = ? ",
       "params": ["curmonth","city"]
     },
 
