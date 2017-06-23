@@ -500,6 +500,20 @@ public class ModuleDataService extends AbstractVerticle
             module.setKnobFinish(productLineItem.getKnobFinish());
             module.setHandleThickness(productLineItem.getHandleThickness());
             module.setProductCategory(productLineItem.getProductCategory());
+
+            Collection<AccessoryPackComponent> accessoryPackComponents = ModuleDataService.getInstance().getAccessoryPackComponents(mgModule.getCode());
+            for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
+            {
+                if (accessoryPackComponent.getType().equals("HL"))
+                {
+                    module.setHandleQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                }
+                if (accessoryPackComponent.getType().equals("K"))
+                {
+                    module.setKnobQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                }
+            }
+
         }
         else
         {
