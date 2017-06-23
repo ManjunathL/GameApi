@@ -715,7 +715,7 @@ public class ModulePriceHolder
             {
                 if ("Standard".equals(moduleType))
                 {
-                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()))
+                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory()))
                     {
                         LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
                         LOG.debug("Rate : " + rate);
@@ -749,7 +749,7 @@ public class ModulePriceHolder
             {
                 if ("Standard".equals(moduleType))
                 {
-                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()))
+                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory()))
                     {
                         LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
 
