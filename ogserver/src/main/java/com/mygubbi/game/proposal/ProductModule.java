@@ -565,7 +565,7 @@ public class ProductModule extends JsonObject
         return this;
     }
 
-    public ProductModule setKnobQuantity(String knobQuantity)
+    public ProductModule setKnobQuantity(double knobQuantity)
     {
         this.put(KNOB_QUANTITY, knobQuantity);
         return this;

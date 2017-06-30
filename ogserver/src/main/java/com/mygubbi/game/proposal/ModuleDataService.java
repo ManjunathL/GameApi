@@ -521,7 +521,7 @@ public class ModuleDataService extends AbstractVerticle
                 {
                     if (accessoryPackComponent.getType().equals("K"))
                     {
-                        module.setKnobQuantity(String.valueOf(accessoryPackComponent.getQuantity()));
+                        module.setKnobQuantity(accessoryPackComponent.getQuantity());
                     }
                 }
             }

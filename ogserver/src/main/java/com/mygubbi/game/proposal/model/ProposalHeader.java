@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.model;
 
+import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
@@ -90,7 +91,7 @@ public class ProposalHeader extends JsonObject
     public String getPackageFlag() { return this.getString(PACKAGE_FLAG);}
 
     public Date getPriceDate() {
-        return priceDate;
+        return DateUtil.convertDate(this.getString(PRICE_DATE));
     }
 
     public void setPriceDate(Date priceDate) {
