@@ -7,6 +7,8 @@ import io.vertx.core.json.JsonObject;
 import org.json.JSONArray;
 
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by User on 27-06-2017.
@@ -38,6 +40,14 @@ public class ModuleCountReport {
                 if (proposal.next()) {
 
                     proposalTitle = proposal.getString("title");
+
+                    Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
+                    Matcher match= pt.matcher(proposalTitle);
+                    while(match.find())
+                    {
+                        String s= match.group();
+                        proposalTitle=proposalTitle.replaceAll("\\"+s, "");
+                    }
                     proposalQuoteNo = proposal.getString("quoteNoNew");
                     crmId = proposal.getString("crmId");
                 }
