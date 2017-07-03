@@ -17,10 +17,9 @@ public class ModuleCountReport {
     public static void main(String[] args) {
         try {
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg_report","admin", "OG$#gubi32");
+                    "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/prod_check","admin", "OG$#gubi32");
 
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM proposal_product where id = 27714");
+            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM proposal_product where createdOn > '2017-04-01 00:00:00' and active = 'A'");
 
 
             while (rs.next()) {
@@ -32,8 +31,9 @@ public class ModuleCountReport {
                 String proposalTitle = null;
                 String proposalQuoteNo = null;
                 String crmId = null;
+                System.out.println("ProposalId :" + proposalId);
 
-                ResultSet proposal = stmt.executeQuery("SELECT * FROM proposal where id = " + proposalId);
+                ResultSet proposal = con.createStatement().executeQuery("SELECT * FROM proposal where id = " + proposalId);
 
                 if (proposal.next()) {
 
@@ -72,7 +72,7 @@ public class ModuleCountReport {
                             + " | " + "Hike Module Count :" + hikeModuleCount + " | " + "Standard Module Price : " + stdModulePrice
                             + " | " + "N std Module Price :" + nStdModulePrice + " | " + "Hike Module Price :" + hikeModulePrice);*/
 
-                int insert = stmt.executeUpdate("INSERT INTO module_report (proposalId, proposalTitle, quoteNo, crmId, version," +
+                int insert = con.createStatement().executeUpdate("INSERT INTO module_report (proposalId, proposalTitle, quoteNo, crmId, version," +
                         " productTitle, amount, stdModuleCount, stdModulePrice, nStdModuleCount, nStdModulePrice," +
                         " hikeModuleCount, hikeModulePrice) VALUES ("+ proposalId + "," + "'" + proposalTitle + "'" + "," +
                         "'" + proposalQuoteNo + "'" + "," + "'" +crmId + "'" + "," + "'" + version + "'" + "," + "'" +
