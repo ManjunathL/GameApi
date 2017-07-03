@@ -21,7 +21,7 @@ public class ModuleCountReport {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/prod_check","admin", "OG$#gubi32");
 
-            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM proposal_product where createdOn > '2017-04-01 00:00:00' and active = 'A'");
+            ResultSet rs = con.createStatement().executeQuery("select * from proposal_product where proposalId = 4756");
 
 
             while (rs.next()) {
@@ -29,6 +29,7 @@ public class ModuleCountReport {
                 int proposalId = rs.getInt("proposalId");
                 String version = rs.getString("fromVersion");
                 String productTitle = rs.getString("title");
+                productTitle  = productTitle.replaceAll("[^a-zA-Z]+"," ");
                 double productTotal = rs.getDouble("amount");
                 String proposalTitle = null;
                 String proposalQuoteNo = null;
@@ -41,13 +42,8 @@ public class ModuleCountReport {
 
                     proposalTitle = proposal.getString("title");
 
-                    Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
-                    Matcher match= pt.matcher(proposalTitle);
-                    while(match.find())
-                    {
-                        String s= match.group();
-                        proposalTitle=proposalTitle.replaceAll("\\"+s, "");
-                    }
+                    proposalTitle  = proposalTitle.replaceAll("[^a-zA-Z]+"," ");
+
                     proposalQuoteNo = proposal.getString("quoteNoNew");
                     crmId = proposal.getString("crmId");
                 }
