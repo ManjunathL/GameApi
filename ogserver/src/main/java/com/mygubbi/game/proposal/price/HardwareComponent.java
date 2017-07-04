@@ -129,4 +129,22 @@ public class HardwareComponent
     {
         return StringUtils.isEmpty(this.accPackCode);
     }
+
+    public double getTotalSourcePrice()
+    {
+        LOG.debug("hardware component : " + component.toString());
+        PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(component.getCode(), this.priceDate, this.city);
+        return hardwareRate.getSourcePrice() * this.quantity;
+    }
+    public double getSourcePrice()
+    {
+        PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(component.getCode(), this.priceDate, this.city);
+        return hardwareRate.getSourcePrice();
+    }
+    public double getPrice()
+    {
+        PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(component.getCode(), this.priceDate, this.city);
+        return hardwareRate.getPrice();
+    }
+
 }

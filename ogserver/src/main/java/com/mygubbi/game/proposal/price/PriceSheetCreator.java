@@ -123,7 +123,7 @@ public class PriceSheetCreator implements ExcelCellProcessor
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, hw.getComponent().getCode(),
                     hw.getComponent().getTitle(), hw.getComponent().getMake(), hw.getComponent().getUom(),
-                    hw.getComponent().getPrice(), hw.getQuantityFormula(), hw.getQuantity(), hw.getCost()});
+                    hw.getPrice(),hw.getSourcePrice(),hw.getQuantityFormula(), hw.getQuantity(), hw.getCost(),hw.getTotalSourcePrice()});
             seq++;
         }
         return currentRow;
@@ -145,7 +145,7 @@ public class PriceSheetCreator implements ExcelCellProcessor
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, acc.getComponent().getCode(),
                     acc.getComponent().getTitle(), acc.getComponent().getMake(), acc.getComponent().getUom(),
-                    acc.getComponent().getPrice(), acc.getQuantity(), acc.getCost()});
+                    acc.getPrice(),acc.getSourcePrice(),acc.getQuantity(), acc.getCost(),acc.getTotalSourcePrice()});
             seq++;
         }
         return currentRow;
