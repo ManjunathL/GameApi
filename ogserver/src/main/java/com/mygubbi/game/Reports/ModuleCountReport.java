@@ -7,6 +7,8 @@ import io.vertx.core.json.JsonObject;
 import org.json.JSONArray;
 
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by User on 27-06-2017.
@@ -17,10 +19,9 @@ public class ModuleCountReport {
     public static void main(String[] args) {
         try {
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg_report","admin", "OG$#gubi32");
+                    "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/prod_check","admin", "OG$#gubi32");
 
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM proposal_product where id = 27714");
+            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM proposal_product where createdOn > '2017-04-01 00:00:00' and active = 'A'");
 
 
             while (rs.next()) {
@@ -28,20 +29,26 @@ public class ModuleCountReport {
                 int proposalId = rs.getInt("proposalId");
                 String version = rs.getString("fromVersion");
                 String productTitle = rs.getString("title");
+                productTitle  = productTitle.replaceAll("[^a-zA-Z]+"," ");
                 double productTotal = rs.getDouble("amount");
                 String proposalTitle = null;
                 String proposalQuoteNo = null;
                 String crmId = null;
+                System.out.println("Inserting for product :" + proposalId + " : " + version + " :" + productTitle);
 
-                ResultSet proposal = stmt.executeQuery("SELECT * FROM proposal where id = " + proposalId);
+                ResultSet proposal = con.createStatement().executeQuery("SELECT * FROM proposal where id = " + proposalId);
 
                 if (proposal.next()) {
 
                     proposalTitle = proposal.getString("title");
+
+                    proposalTitle  = proposalTitle.replaceAll("[^a-zA-Z]+"," ");
+
                     proposalQuoteNo = proposal.getString("quoteNoNew");
                     crmId = proposal.getString("crmId");
-                }
+                    crmId  = crmId.replaceAll("[^a-zA-Z]+"," ");
 
+                }
 
                     JsonArray jsonArray = new JsonArray(array);
                     int stdModuleCount = 0;
@@ -54,7 +61,9 @@ public class ModuleCountReport {
                     for (int i = 0; i < jsonArray.size(); i++) {
                         JsonObject module = jsonArray.getJsonObject(i);
                         String moduleCategory = module.getString("moduleCategory");
+                        if (module.getDouble("amount") == null) continue;
                         double moduleAmount = module.getDouble("amount");
+                        if (moduleCategory == null) continue;
                         if (moduleCategory.startsWith("S")) {
                             stdModuleCount = stdModuleCount + 1;
                             stdModulePrice = stdModulePrice + moduleAmount;
@@ -65,14 +74,12 @@ public class ModuleCountReport {
                             hikeModuleCount = hikeModuleCount + 1;
                             hikeModulePrice = hikeModulePrice + moduleAmount;
                         }
-
-
                     }
                     /*System.out.println("StdModuleCount :" + stdModuleCount + " | " + "Non std Module Count :" + nStdModuleCount
                             + " | " + "Hike Module Count :" + hikeModuleCount + " | " + "Standard Module Price : " + stdModulePrice
                             + " | " + "N std Module Price :" + nStdModulePrice + " | " + "Hike Module Price :" + hikeModulePrice);*/
 
-                int insert = stmt.executeUpdate("INSERT INTO module_report (proposalId, proposalTitle, quoteNo, crmId, version," +
+                int insert = con.createStatement().executeUpdate("INSERT INTO module_report_copy (proposalId, proposalTitle, quoteNo, crmId, version," +
                         " productTitle, amount, stdModuleCount, stdModulePrice, nStdModuleCount, nStdModulePrice," +
                         " hikeModuleCount, hikeModulePrice) VALUES ("+ proposalId + "," + "'" + proposalTitle + "'" + "," +
                         "'" + proposalQuoteNo + "'" + "," + "'" +crmId + "'" + "," + "'" + version + "'" + "," + "'" +

@@ -43,6 +43,11 @@
       },
 
       {
+        "name": "com.mygubbi.game.proposal.price.PriceRecorderService"
+      },
+
+
+      {
         "name": "com.mygubbi.si.email.EmailService"
       },
 
