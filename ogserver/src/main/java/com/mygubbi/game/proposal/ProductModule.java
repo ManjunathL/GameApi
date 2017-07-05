@@ -514,7 +514,7 @@ public class ProductModule extends JsonObject
         return Collections.EMPTY_LIST;
     }
 
-    private void setHingePacks()
+    public void setHingePacks()
     {
         if (this.containsKey(HINGE_PACK))
         {
@@ -640,6 +640,20 @@ public class ProductModule extends JsonObject
     public ProductModule setCostWoAccessories(double costWoAccessories) {
         this.put(COST_WO_ACCESSORIES, costWoAccessories);
         return this;
+    }
+
+    public ProductModule setHandleCode(String handleCode)
+    {
+        this.put(HANDLE_CODE,handleCode);
+        return this;
+
+    }
+
+    public ProductModule setKnobCode(String knobCode)
+    {
+        this.put(KNOB_CODE,knobCode);
+        return this;
+
     }
 
 

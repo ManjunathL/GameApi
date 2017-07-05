@@ -500,6 +500,8 @@ public class ModuleDataService extends AbstractVerticle
             module.setKnobFinish(productLineItem.getKnobFinish());
             module.setHandleThickness(productLineItem.getHandleThickness());
             module.setProductCategory(productLineItem.getProductCategory());
+            module.setHandleCode(productLineItem.getHandleCode());
+            module.setKnobCode(productLineItem.getKnobCode());
            /* module.setHandleQuantity(String.valueOf(0));
             module.setKnobQuantity(String.valueOf(0));*/
 
@@ -524,6 +526,13 @@ public class ModuleDataService extends AbstractVerticle
                         module.setKnobQuantity(accessoryPackComponent.getQuantity());
                     }
                 }
+            }
+            if(module.getHingeMandatory().equals("Yes"))
+            {
+                HingePack hingePackType = ModuleDataService.getInstance().getHingePackType(productLineItem.getHinge());
+                LOG.info("hinge PAcktype " +hingePackType);
+                /*List<ModuleHingeMap> hingeMaps = proposalDataProvider.getHinges(module.getMgCode(), product.getHinge());
+                module.setHingePack(hingeMaps);*/
             }
 
         }
