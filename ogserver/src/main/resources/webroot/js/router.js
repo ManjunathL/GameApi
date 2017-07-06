@@ -111,6 +111,7 @@ define([
             'email-lp(/)':'emaillandingpage',
             'nri-services-:cityName(/)' : 'nripage',
             'media(/)': 'mediapage',
+            'kitchen-slp(/)': 'kitchenslppage',
             'shobha-lp(/)': 'shobhalandingpage',
             'pune-lp(/)': 'punelandingpage',
             'kitchen-lp(/)': 'kitchenlandingpage',
@@ -827,6 +828,12 @@ define([
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
             require(['views/media_pages/media_page'], function(MediaPage) {
                 VM.create(VM.MEDIAPAGE, MediaPage).render();
+            });
+        });
+        router.on('route:kitchenslppage', function(actions) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+            require(['views/seo_page/kitchen-slp'], function(KitchenSlpPage) {
+                VM.create(VM.KITCHENSLPPAGE, KitchenSlpPage).render();
             });
         });
         router.on('route:newdetailspage', function(productId, seoId ) {
