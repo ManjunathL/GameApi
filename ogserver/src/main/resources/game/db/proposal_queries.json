@@ -1474,6 +1474,38 @@
       "params": [
         "diyId"
       ]
+    },
+
+    //SOW relted Queries
+    {
+      "id": "proposal.sow.create",
+      "type": "insert",
+      "table": "proposal_sow",
+      "query": "insert into proposal_sow(proposalId, version, spaceType, productId, product, room,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06,L2S07) values (?, ?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? )",
+      "params": ["proposalId",
+        "version",
+        "spaceType",
+        "productId",
+        "product",
+        "room",
+        "L1S01",
+        "L2S01",
+        "L2S02",
+        "L2S03",
+        "L2S04",
+        "L2S05",
+        "L2S06",
+        "L2S07"
+      ]
+    },
+    {
+      "id": "sow.master.select.all",
+      "type": "select",
+      "table": "sow_master",
+      "query": "select * from sow_master",
+      "params": [],
+      "jsonfields":[]
     }
+
   ]
 }

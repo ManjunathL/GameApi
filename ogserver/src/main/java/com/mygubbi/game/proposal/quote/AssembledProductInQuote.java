@@ -62,6 +62,16 @@ public class AssembledProductInQuote
         return this.product.getTitle();
     }
 
+    public String getSpaceType()
+    {
+        return this.product.getSpaceType();
+    }
+
+    public String getRoom()
+    {
+        return this.product.getRoomCode();
+    }
+
     public String getCatagoryName()
     {
         return this.product.getProductCategory();

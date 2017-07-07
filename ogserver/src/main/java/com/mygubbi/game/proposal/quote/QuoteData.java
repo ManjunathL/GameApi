@@ -64,6 +64,21 @@ public class QuoteData
         this.prepare();
     }
 
+    public QuoteData(ProposalHeader proposalHeader,String fromVersion)
+    {
+        this.city = proposalHeader.getProjectCity();
+        this.priceDate = proposalHeader.getPriceDate();
+        if (this.priceDate == null)
+        {
+            this.priceDate = new java.sql.Date(System.currentTimeMillis());
+        }
+        this.proposalHeader = proposalHeader;
+        this.products = products;
+        this.discountAmount = discountAmount;
+        this.fromVersion=fromVersion;
+        this.prepare();
+    }
+
     private void prepare()
     {
         this.assembledProducts = new ArrayList<>();
