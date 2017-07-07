@@ -733,16 +733,22 @@ public class ModulePriceHolder
                 }
                 else
                 {
+                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) )
+                    {
+                        LOG.info("shoerack value 1 " +rate);
+                        this.addToShutterCost(panel.getCost() * rate);
+                    }
+                    else
+                    {
+                        this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                    }
                     if(panel.getCost()==0.0)
                     {
                         //this.addToShutterCost(0.0);
                         finishValue =true;
                         return;
                     }
-                    else
-                    {
-                    this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                    }
+
                 }
             }
             else
@@ -765,7 +771,15 @@ public class ModulePriceHolder
                 }
                 else
                 {
-                    this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) )
+                    {
+                        LOG.info("Shoerack value in else 2 " +rate);
+                        this.addToCarcassCost(panel.getCost() * rate);
+                    }
+                    else
+                    {
+                        this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                    }
                 }
             }
         }
