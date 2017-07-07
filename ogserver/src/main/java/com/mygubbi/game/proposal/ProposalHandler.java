@@ -10,6 +10,7 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
+import com.mygubbi.game.proposal.output.ProposalOutputServiceCopy;
 import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
 import com.mygubbi.game.proposal.price.RateCardService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
@@ -49,6 +50,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
+        this.post("/createsowsheet").handler(this::createSowSheet);
         //this.post("/downloadprodspecfile").handler(this::downloadProdSpec);
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
         this.get("/hardwareratedetails").handler(this::getHardwareRate);
@@ -237,6 +239,11 @@ public class ProposalHandler extends AbstractRouteHandler
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTEPDF);
     }
 
+    private void createSowSheet(RoutingContext routingContext)
+    {
+        this.createSOWOutput(routingContext, ProposalOutputCreator.OutputType.SOW);
+    }
+
     private void downloadJobCard(RoutingContext routingContext)
     {
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.JOBCARD);
@@ -256,9 +263,23 @@ public class ProposalHandler extends AbstractRouteHandler
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type)
     {
         LOG.debug("");
+        LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
         VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
+                (AsyncResult<Message<Integer>> result) -> {
+                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                    sendJsonResponse(routingContext, response.toString());
+                });
+    }
+
+    private void createSOWOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type)
+    {
+        LOG.debug("Create Sow output");
+        LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
+        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
+        VertxInstance.get().eventBus().send(ProposalOutputServiceCopy.CREATE_SOW_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());

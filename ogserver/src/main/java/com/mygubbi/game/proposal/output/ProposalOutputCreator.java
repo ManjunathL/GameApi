@@ -6,13 +6,14 @@ import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.quote.ExcelQuoteCreator;
 import com.mygubbi.game.proposal.quote.PdfQuoteCreator;
 import com.mygubbi.game.proposal.quote.QuoteData;
+import com.mygubbi.game.proposal.quote.SOWTemplateCreator;
 
 /**
  * Created by Sunil on 22-07-2016.
  */
 public interface ProposalOutputCreator
 {
-    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF};
+    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF, SOW};
 
     public void create();
 
@@ -20,22 +21,23 @@ public interface ProposalOutputCreator
 
     public String getOutputKey();
 
-    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader)
-    {
+    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader) {
 
-        switch (outputType)
-        {
+        switch (outputType) {
             case QUOTATION:
-                return new ExcelQuoteCreator(quoteData,proposalHeader);
+                return new ExcelQuoteCreator(quoteData, proposalHeader);
 
             case JOBCARD:
-                return new ExcelJobCardCreator(quoteData,proposalHeader);
+                return new ExcelJobCardCreator(quoteData, proposalHeader);
 
             case SALESORDER:
-                return new ExcelSalesOrderCreator(quoteData,proposalHeader);
+                return new ExcelSalesOrderCreator(quoteData, proposalHeader);
 
             case QUOTEPDF:
                 return new PdfQuoteCreator(quoteData, proposalHeader);
+
+            case SOW:
+                return new SOWTemplateCreator(quoteData, proposalHeader);
 
 
             default:

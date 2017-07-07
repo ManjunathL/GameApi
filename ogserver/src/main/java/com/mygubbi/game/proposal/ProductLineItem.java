@@ -50,8 +50,10 @@ public class ProductLineItem extends JsonObject
     public static final String HANDLE_CODE="handleCode";
     public static final String KNOB_CODE="knobCode";
     public static final String HANDLE_THICKNESS="handleThickness";
-    private static final String HINGE_PACK = "hingePack";
-    private static final String HINGE="hinge";
+    public static final String HINGE_TYPE="hingeType";
+    public static final String SPACE_TYPE="spaceType";
+
+
 
     public static final String BASE_UNIT_TYPE = "Base unit";
 
@@ -170,14 +172,13 @@ public class ProductLineItem extends JsonObject
     }
 
     public String getHandleThickness() { return this.getString(HANDLE_THICKNESS);}
+    public String getSpaceType() { return this.getString(SPACE_TYPE);}
 
 
 
     public String getHandletypeSelection() {
         return this.getString(HANDLETYPE_SELECTION);
     }
-
-    public String getHinge() { return this.getString(HINGE);}
 
    /* public String getNoOfLengths() {
         return this.getString(NO_OF_LENGTHS);

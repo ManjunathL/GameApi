@@ -21,34 +21,48 @@ public class ModuleCountReport {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/prod_check","admin", "OG$#gubi32");
 
-            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM proposal_product where createdOn > '2017-04-01 00:00:00' and active = 'A'");
+            ResultSet versions = con.createStatement().executeQuery("select proposalId,version,date from version_master where date >= \"2017-04-01 00:00:41\" group by proposalId,version order by proposalId ");
 
 
-            while (rs.next()) {
-                String array = rs.getString("modules");
-                int proposalId = rs.getInt("proposalId");
-                String version = rs.getString("fromVersion");
-                String productTitle = rs.getString("title");
-                productTitle  = productTitle.replaceAll("[^a-zA-Z]+"," ");
-                double productTotal = rs.getDouble("amount");
-                String proposalTitle = null;
-                String proposalQuoteNo = null;
-                String crmId = null;
-                System.out.println("Inserting for product :" + proposalId + " : " + version + " :" + productTitle);
+            while (versions.next()) {
+                int version_proposalId = versions.getInt("proposalId");
+                String version = versions.getString("version");
+                Date version_CreateDate = versions.getDate("date");
 
-                ResultSet proposal = con.createStatement().executeQuery("SELECT * FROM proposal where id = " + proposalId);
 
-                if (proposal.next()) {
+            ResultSet products = con.createStatement().executeQuery("select * from proposal_product where proposalId = " + version_proposalId + " and fromVersion = " + "'" + version + "'");
 
-                    proposalTitle = proposal.getString("title");
 
-                    proposalTitle  = proposalTitle.replaceAll("[^a-zA-Z]+"," ");
+                while (products.next()) {
 
-                    proposalQuoteNo = proposal.getString("quoteNoNew");
-                    crmId = proposal.getString("crmId");
-                    crmId  = crmId.replaceAll("[^a-zA-Z]+"," ");
 
-                }
+                    String array = products.getString("modules");
+                    int productId = products.getInt("id");
+                    String productTitle = products.getString("title");
+                    String productCategory = products.getString("productCategoryCode");
+                    productTitle = productTitle.replaceAll("[^a-zA-Z]+", " ");
+                    double productTotal = products.getDouble("amount");
+                    String proposalTitle = null;
+                    String proposalQuoteNo = null;
+                    String crmId = null;
+                    System.out.println("Inserting for product :" + version_proposalId + " : " + version + " :" + productTitle);
+
+
+                    ResultSet proposal = con.createStatement().executeQuery("SELECT * FROM proposal where id = " + version_proposalId);
+
+                    while (proposal.next()) {
+
+                        proposalTitle = proposal.getString("title");
+
+                        proposalTitle = proposalTitle.replaceAll("[^a-zA-Z]+", " ");
+
+                        proposalQuoteNo = proposal.getString("quoteNoNew");
+                        crmId = proposal.getString("crmId");
+                        crmId = crmId.replaceAll("[^a-zA-Z]+", " ");
+
+                    }
+
+                    if (array == null) continue;
 
                     JsonArray jsonArray = new JsonArray(array);
                     int stdModuleCount = 0;
@@ -79,17 +93,17 @@ public class ModuleCountReport {
                             + " | " + "Hike Module Count :" + hikeModuleCount + " | " + "Standard Module Price : " + stdModulePrice
                             + " | " + "N std Module Price :" + nStdModulePrice + " | " + "Hike Module Price :" + hikeModulePrice);*/
 
-                int insert = con.createStatement().executeUpdate("INSERT INTO module_report_copy (proposalId, proposalTitle, quoteNo, crmId, version," +
-                        " productTitle, amount, stdModuleCount, stdModulePrice, nStdModuleCount, nStdModulePrice," +
-                        " hikeModuleCount, hikeModulePrice) VALUES ("+ proposalId + "," + "'" + proposalTitle + "'" + "," +
-                        "'" + proposalQuoteNo + "'" + "," + "'" +crmId + "'" + "," + "'" + version + "'" + "," + "'" +
-                        productTitle + "'" + "," + productTotal + "," + stdModuleCount + "," + stdModulePrice + "," +
-                        nStdModuleCount + "," + nStdModulePrice + "," + hikeModuleCount + "," + hikeModulePrice + ")");
+                    int insert = con.createStatement().executeUpdate("INSERT INTO module_report_copy_copy (proposalId, productId, proposalTitle, quoteNo, crmId, version," +
+                            " productTitle, productCategory, amount, stdModuleCount, stdModulePrice, nStdModuleCount, nStdModulePrice," +
+                            " hikeModuleCount, hikeModulePrice) VALUES (" + version_proposalId + "," + productId + "," + "'" + proposalTitle + "'" + "," +
+                            "'" + proposalQuoteNo + "'" + "," + "'" + crmId + "'" + "," + "'" + version + "'" + "," + "'" +
+                            productTitle + "'" + "," + "'" + productCategory + "'" + "," + productTotal + "," + stdModuleCount + "," + stdModulePrice + "," +
+                            nStdModuleCount + "," + nStdModulePrice + "," + hikeModuleCount + "," + hikeModulePrice + ")");
 
-                    if (insert == 1)
-                    {
-                        System.out.println("Inserted record for Proposal :" + proposalId);
+                    if (insert == 1) {
+                        System.out.println("Inserted record for Proposal :" + version_proposalId);
                     }
+                }
 
                 }
         }

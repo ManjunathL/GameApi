@@ -28,6 +28,7 @@ public class ModuleDataService extends AbstractVerticle
 	private static ModuleDataService INSTANCE;
 	private AtomicInteger cachingCounter = new AtomicInteger(6);
 
+    private Multimap<String, SOWMaster> sowMasterMap;
     private Multimap<String, ModuleComponent> moduleComponentsMap;
     private Multimap<String, AccessoryPackComponent> accessoryPackComponentsMap;
     private Multimap<String, AccessoryPack> moduleAccessoryPacksMap;
@@ -69,6 +70,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheFinishCostCodes();
         this.cacheHandleData();
         this.cacheHingePackData();
+        this.cacheSowMasterData();
 
 	}
 
@@ -100,6 +102,28 @@ public class ModuleDataService extends AbstractVerticle
                         {
                             ModuleComponent component = ModuleComponent.fromJson(record);
                             this.moduleComponentsMap.put(component.getModuleCode(), component);
+                        }
+                        markResult("Module components loaded.", true);
+                    }
+                });
+    }
+
+    private void cacheSowMasterData()
+    {
+        this.sowMasterMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("sow.master.select.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Module components table is empty.", false);
+                    }
+                    else
+                    {
+                        for (JsonObject record : selectData.rows)
+                        {
+                            SOWMaster component = SOWMaster.fromJson(record);
+                            this.sowMasterMap.put(component.getSpaceType(), component);
                         }
                         markResult("Module components loaded.", true);
                     }
@@ -401,6 +425,11 @@ public class ModuleDataService extends AbstractVerticle
         return this.moduleComponentsMap.get(mgCode);
     }
 
+    public Collection<SOWMaster> getSOWMaster(String spaceType)
+    {
+        return this.sowMasterMap.get(spaceType);
+    }
+
 
 /*
     public Collection<AccHwComponent> getAccessoryAddons(String accessoryCode)
@@ -526,13 +555,6 @@ public class ModuleDataService extends AbstractVerticle
                         module.setKnobQuantity(accessoryPackComponent.getQuantity());
                     }
                 }
-            }
-            if(module.getHingeMandatory().equals("Yes"))
-            {
-                HingePack hingePackType = ModuleDataService.getInstance().getHingePackType(productLineItem.getHinge());
-                LOG.info("hinge PAcktype " +hingePackType);
-                /*List<ModuleHingeMap> hingeMaps = proposalDataProvider.getHinges(module.getMgCode(), product.getHinge());
-                module.setHingePack(hingeMaps);*/
             }
 
         }
