@@ -44,4 +44,18 @@ public interface ProposalOutputCreator
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
         }
     }
+
+        public static ProposalOutputCreator getCreator(OutputType outputType, ProposalHeader proposalHeader)
+    {
+
+        switch (outputType)
+        {
+
+
+
+
+            default:
+                throw new RuntimeException("Output creator not defined for type:" + outputType);
+        }
+    }
 }

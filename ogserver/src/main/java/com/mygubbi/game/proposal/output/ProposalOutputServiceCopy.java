@@ -184,6 +184,7 @@ public class ProposalOutputServiceCopy extends AbstractVerticle
     {
         try
         {
+
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(),proposalHeader);
             outputCreator.create();
             sendResponse(message, new JsonObject().put(outputCreator.getOutputKey(), outputCreator.getOutputFile()));
