@@ -12,10 +12,7 @@ import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.round;
@@ -289,6 +286,211 @@ public class AssembledProductInQuote
 
     private void collectModuleHandles(ProductModule module)
     {
+        String NORMAL = "Normal";
+        String GOLA_PROFILE = "Gola Profile";
+        String CORNER_UNIT = "Corner";
+        String LOFTS = "Loft";
+
+        PriceMaster lWidthRate = RateCardService.getInstance().getHardwareRate("H073", priceDate, city);
+        PriceMaster cWidthRate = RateCardService.getInstance().getHardwareRate("H071", priceDate, city);
+        PriceMaster wWidthRate = RateCardService.getInstance().getHardwareRate("H076", priceDate, city);
+        PriceMaster bracketRate = RateCardService.getInstance().getHardwareRate("H075", priceDate, city);
+        PriceMaster lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
+        PriceMaster cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
+        PriceMaster gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
+        PriceMaster jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
+
+
+        LOG.info("Product Module " +module);
+        LOG.info("Product handle type selection" +this.product.getHandletypeSelection());
+        if (Objects.equals(this.product.getHandletypeSelection(),GOLA_PROFILE ))
+        {
+
+            LOG.debug("Inside gola profile");
+
+            /*if (!(module.getHandleCode() == null))
+            {
+                this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
+                // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                //  this.productionSpecificationComponents.add(new Handle(handle));
+            }
+            if (!(this.productModule.getKnobCode() == null)){
+                this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
+                // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
+                //  this.productionSpecificationComponents.add(new Handle(knob));
+            }*/
+            int moduleCount = 0;
+            int drawerModuleCount= 0;
+            double wallProfileWidth = 0.0;
+            double lProfileWidth = 0.0;
+            double cProfileWidth = 0.0;
+            //double golaProfileLength = Double.valueOf(productLineItem.getNoOfLengths().toString());
+            double wProfilePrice ;
+            double lProfilePrice ;
+            double cProfilePrice ;
+            double profilePrice ;
+            double bracketPrice ;
+            double lConnectorPrice ;
+            double cConnectorPrice ;
+            double golaProfilePrice ;
+
+            double wProfileSourceCost;
+            double lProfileSorceCost;
+            double cProfileSourceCost;
+
+            double profileSourceCost;
+            double bracketSourceCost;
+            double cConnectorSourceCost;
+
+            double golaprofileSourceCost ;
+
+            if (!(module.getModuleCategory().contains(LOFTS))) {
+                if (Objects.equals(module.getHandleMandatory(), "Yes")) {
+                    moduleCount = moduleCount + 1;
+                    if (module.getModuleCategory().contains("Wall")) {
+                        wallProfileWidth = wallProfileWidth + module.getWidth();
+                    } else if (module.getModuleCategory().contains("Base")) {
+                        if (module.getModuleCategory().contains(CORNER_UNIT)) {
+                            lProfileWidth = lProfileWidth + (module.getWidth() / 2);
+                        } else if (module.getModuleCategory().contains("Drawer")) {
+                            drawerModuleCount = drawerModuleCount + 1;
+                            cProfileWidth = cProfileWidth + module.getWidth();
+                            lProfileWidth = lProfileWidth + module.getWidth();
+                        } else {
+                            lProfileWidth = lProfileWidth + module.getWidth();
+                        }
+                    } else if (module.getModuleCategory().contains("Tall")) {
+                        lProfileWidth = lProfileWidth + module.getHeight();
+                    } else {
+                        lProfileWidth = lProfileWidth + module.getWidth();
+
+                    }
+                }
+            }
+
+            wProfilePrice = wallProfileWidth/1000*wWidthRate.getPrice();
+
+            AccHwComponent hardware = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
+            this.addToModuleHardware(hardware, 0.0 , module.getUnit(), module.getSequence());
+
+            lProfilePrice = lProfileWidth/1000*lWidthRate.getPrice();
+            AccHwComponent hardware1 = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
+            this.addToModuleHardware(hardware1, 0.0 , module.getUnit(), module.getSequence());
+
+            cProfilePrice = cProfileWidth/1000*cWidthRate.getPrice();
+            AccHwComponent hardware2 = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
+            this.addToModuleHardware(hardware2, 0.0 , module.getUnit(), module.getSequence());
+
+            profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
+            bracketPrice = (moduleCount * 2) * bracketRate.getPrice();
+            AccHwComponent hardware3 = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
+            this.addToModuleHardware(hardware3, 0.0 , module.getUnit(), module.getSequence());
+//                lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
+            cConnectorPrice = drawerModuleCount * cConnectorRate.getPrice();
+            AccHwComponent hardware4 = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
+            this.addToModuleHardware(hardware4, 0.0 , module.getUnit(), module.getSequence());
+
+
+            wProfileSourceCost = wallProfileWidth/1000 * wWidthRate.getSourcePrice();
+            lProfileSorceCost = lProfileWidth/1000 * lWidthRate.getSourcePrice();
+            cProfileSourceCost = cProfileWidth/1000 * cWidthRate.getSourcePrice();
+
+            profileSourceCost = wProfileSourceCost + lProfileSorceCost + cProfileSourceCost;
+            bracketSourceCost = (moduleCount * 2) * bracketRate.getSourcePrice();
+            cConnectorSourceCost = drawerModuleCount * cConnectorRate.getSourcePrice();
+
+            golaprofileSourceCost = profileSourceCost + bracketSourceCost + cConnectorSourceCost;
+
+            //handleandKnobSourceCost = golaprofileSourceCost;
+
+            golaProfilePrice = profilePrice + bracketPrice  + cConnectorPrice;
+            //handleandKnobCost += golaProfilePrice;
+
+            LOG.debug("Gola Profile Price: " + golaProfilePrice);
+
+        }
+        if (Objects.equals(this.product.getHandletypeSelection(), "G Profile")){
+
+            LOG.debug("G Profile : ");
+
+            double lWidth = 0;
+            double gOrJProfileSourceCost;
+            double gOrJProfilePrice = 0;
+            double quantity = 0;
+            // for (ProductModule module : this.productLineItem.getModules())
+            // {
+            Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(module.getMGCode());
+            for (AccessoryPackComponent accessoryPackComponent : handles)
+            {
+                quantity = accessoryPackComponent.getQuantity();
+            }
+            if (Objects.equals(module.getHandleMandatory(), "Yes"))
+            {
+                if (module.getModuleCategory().contains("Drawer"))
+                {
+                    lWidth = lWidth + (quantity * module.getWidth());
+                }
+                else {
+                    lWidth = lWidth + module.getWidth();
+                }
+            }
+            // }
+            gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
+            AccHwComponent hardware5 = ModuleDataService.getInstance().getHardware(gProfileRate.getRateId());
+            this.addToModuleHardware(hardware5, quantity , module.getUnit(), module.getSequence());
+            LOG.debug("G profile rate : " +  gProfileRate.getPrice());
+
+
+            gOrJProfileSourceCost = lWidth/1000 * gProfileRate.getSourcePrice();
+            /*handleandKnobSourceCost +=  gOrJProfileSourceCost;
+
+            LOG.debug("Inside G profile : "+ gOrJProfilePrice);
+            //LOG.debug("L width Rate :" + gProfileRate.getPrice());
+            handleandKnobCost += gOrJProfilePrice;*/
+
+
+        }
+        if (Objects.equals(this.product.getHandletypeSelection(), "J Profile"))
+        {
+            LOG.debug("J profile : ");
+
+            double lWidth = 0;
+            double gOrJProfileSourceCost;
+            double gOrJProfilePrice;
+            double quantity = 0;
+            //  for (ProductModule module : this.productLineItem.getModules())
+            //  {
+
+            Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(module.getMGCode());
+            for (AccessoryPackComponent accessoryPackComponent : handles)
+            {
+                quantity = accessoryPackComponent.getQuantity();
+            }
+            if (Objects.equals(module.getHandleMandatory(), "Yes"))
+            {
+                if (module.getModuleCategory().contains("Drawer"))
+                {
+                    lWidth = lWidth + (quantity * module.getWidth());
+                    LOG.debug("Inside if :" + lWidth);
+                }
+                else {
+                    lWidth = lWidth + module.getWidth();
+                    LOG.debug("Inside else :" + lWidth);
+                }
+            }
+            // }
+            gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
+            AccHwComponent hardware6 = ModuleDataService.getInstance().getHardware(jProfileRate.getRateId());
+            this.addToModuleHardware(hardware6, quantity , module.getUnit(), module.getSequence());
+            LOG.debug("J profile rate : " +  jProfileRate.getPrice());
+            LOG.debug("Inside J profile : "+ gOrJProfilePrice);
+
+            gOrJProfileSourceCost = lWidth/1000 * jProfileRate.getSourcePrice();
+            /*handleandKnobSourceCost +=  gOrJProfileSourceCost;
+
+            //LOG.debug("L width Rate :" + gProfileRate.getPrice());
+            handleandKnobCost += gOrJProfilePrice;*/
+        }
         if(module.getHandleCode()==null)
         {
             return;
