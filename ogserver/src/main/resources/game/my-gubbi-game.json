@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "my-gubbi",
+  "private_key_id": "1245fa64969f50628c3320e5c1ade16a25c67692",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCqnwhK9q6T/kHa\n09ZOe/HmrlbkR78KW8j5rJO7ESbA/LthFarZ/zDPcV3DpCVlK4mbk3b2iQSXrNw8\nazxQ0vAKgTOwz/AavyWnI5pCgAsiz4nkEOpcbodazKKkSLZNcBC5UM0fq4eI6QcL\ncv4G2zuzZezHC9OQHqIZuQhNx6rnIyb4AHzjkpwaX2b6P8nFOyFxl6srd5EE7GcB\n7tY4au/BehfFsGw7mVMnNpM9N9doNduX/wIx/r2CLCM74uylGdIYNr7c01b0/5n2\n99nNgB5W134svbUA8whLORNXFGXGM1W5/AZZzoERmm+W0QPTE25cULQCzDFGN7pg\nnlc4v5TxAgMBAAECggEALfgE6vWFWZgiNAvo7GJWbTlBbeWqoebSwfnuH3NihpJR\nBbopuuwXQXygr4o1DQnq3EChx5Bo7ViESb72lCwQwjPHMncDkKE5Ssu7zvjihzF1\nTD4GdnrM+vixRSPWAg0UZGlRqpuzO37VCA+mQ0Cj2BS483PLP0QRlm6Uvyfxcq5D\neQol52IZ5k8OV38DNH6qG5jQBo82BUiiw73WKMoG0SjP3IXPbHELqgQ/oogvAXrS\nJoWaLyp/Wy6wBOLfWF3Gu/Op6OTHCY5T1HMTj2tVrcYovtr7M3IPT2cngVrsxh36\nHhNLFEMSBn+jWryQ4oFSIFFx+L9wZfEoNu/jcfcK1QKBgQDq75VnWqkDprQqrPEb\n8hhArBOeFHlc/vA998tQQYhDt8H6hAq8BgvnYVFnJxj9+XKkSxP79oQ6XtoN80Ot\nwBXM+kOZH4kSjE+06KQ/kslPecj7eBBNLwFWp/z4B6N4jOye6R3UJWXf/0V+hVXR\ngeEySkTrbnoVMAdpW87hKQH9MwKBgQC560C4Zzt+UdDG+Nzp4npAcX+Id3Zqlqum\nQfa5cIK6BrzmAyYhnOBdiNuYAH3Kzv3acnVQtuitxKjH/5SHJtKX2IK+GJd5BOcz\ncCY41fN35mGuUSnji0oFtS1c8Ajl5sEfHgmaNXq70CaqIt24JtuNsBJGTryKhCbc\ndsgXJFX9SwKBgB8b1ma3JIYtPtIf0FVo+zklD/vwrhlYUKuD8lIQO2DsJi1r6pf3\nHQBobIUCMlb+/uUuY9kLTXsFME6ElcOeGcTopqbR/C6OkcdcvtMENs/lSm2x+kae\nIMk+uUqGiGjgED0ClUaQJStB/AvC0BhL4GvuVa3vFQ9VKsYSuBQsf+ztAoGAHqb3\nq69xcpkgl71uBq2NRFSyFxjDED25HRchC1/OXcdAm5eHUOFhaGpo8f2av7YyyjI2\nv1D4ubWDsj2kCkhPTjOnEppRVuWFDMj/tD0p/+mezzOYeWh8ksZVLU5x2R2bV3sH\nUEJi8tYVmdVXwsW9SvXtfWP718aD9bMruA0IlFMCgYEAkZjg+hDGGSN4YENpaFTR\nFU9tTLzD76znPPCbCFy46axNuzgPNH3HtNCI1YZcZan0S0ikyD5lNSZ44e4b5NzX\n372uKesgL9rdAE5DtJtE4tx5KQFaBuXc/NAs/RUqBEXQutxd/GdkZ7I86CQez2ts\nas5LBZCMz58kVkcZumMutc4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mygame@my-gubbi.iam.gserviceaccount.com",
+  "client_id": "101065170445138407536",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mygame%40my-gubbi.iam.gserviceaccount.com"
+}

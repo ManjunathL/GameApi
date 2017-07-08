@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gamedrive-173004",
+  "private_key_id": "89e1ad5ed7b14325eddc58a02048a2b5a5aad65c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDlab/IFZCn4YKH\ncBA1yJ5/9oIcejZxwNNN+B0Zw7g8y3rjrwQ1Hu3PQIaybCXK2SYtLgop7cFdb+hS\nSBo0sEXRqyz5RuwQdczlYA//aH0iHhsnvbiGEW3yoybVp1qXj1qgSkcTG6rfUt8P\nQ8siiMb0c/i/5HgXNGc99UXwRHaFYTcuHfcBO478WIIL2r+Vj0KAE31OYjnm16FZ\n7mhH9WE+Qb+bTF+S62lRFJOMc372k/MRgIDcJktxARZ2/1xwFWiuVqSNMLgaWu1J\nM4999BdCV0oCPqehdM5RjyI4Ft3mRW2GKWubicfnIfn3XP07vmRttUwNkiySeULP\n4wjV3w2/AgMBAAECggEAXaRnuwVKcax0OlJ822dTg0oc3ADqvk4GMnpHbp/cUTyB\nofRrlD9WtNVS5fuNBZrToXd8gJbi6f/m5cc2ozEcnrPvfKT9cM6U3z/x58A/67A8\nR2GCs37j0TnVfTp9mQXT6T/IeT0+5z+Ne06h2SvZgijgbXuVpWsnhTvb23ImqtQ4\ns3P54VexKWwwNBx0YNz3t9m9r0/6NM3mcVUCo7gFhHCb377XT0TxICeqzypez6Cr\nt+eiJjpYmMHO701dhmQHLs4bwEghlkZRHr+xcTZ8v2OzbeNBv4SDzTEsSxgR1yUU\n1PnJdobTSgySg9CgD9D69VcKWqFFDOiaOO0I4laXWQKBgQD/Z3h2lv/qbQnqpzMR\ntPMX9mLrvHyXgJfKjCivG72y+IdypmL7ZwdzeVHmDmoNNcZxU8z6bxUTz9fw4rW/\npwvJqQkU4HLC3ZFgFkkC+j46MPuZgY+kUdrD+vmkJd41rM3uxJfe3curPcE6BZbY\n2ApaRqVX2S4zJI37IL4DrLTV1QKBgQDl8sGpg5FzJnBAcJAiCpbSGJmJ6eJnh0rr\nILCVhLsyA7bo8KMBX1gzO1Ny8kAC3l5ewhSyGBVQmJKjDnsKsjB4BB0Q6QrEEubI\nh9b+/4Y5zLqzFLOl7n6+k9Io8iFpsZsiECirvAvIHT1zgdrGkrgPpH4r51avXhMs\nzDcKsrc7QwKBgQC+xVK9gdx2Biw6EdmbiEVryKXq30dRAsRejoJ1CYuQewLxKEcW\n8cYnAp+h73JXm6s2Sxn4lbBws/bf/vcyyFuNra0S4vPVihpkY0D18GU6ogvMhXH9\nkwaNDJIbgg2QmhrYFhA6cAEJT39dD3+1SOmytMIb9CUGHm/O/I3xwLbyYQKBgCUf\nL4yCJPUF+5ErmtkkBH0eY4sUKuyztrCGsnsw1leYqeqpDmemUMLUjQA9g3/zDiEW\nC+lEYgyE1Qdlyw9K/PAjGd4lAQvuUTuGUnsQHUcveeR3LxlWizeQ/ZiGnkZF2dmB\n6k7vKKfBsK35BKyR+wzrbUMBMclV0pqkzS349AOpAoGAKRXo+OMsEwP9V2Ec2RJ8\nOuD6PA7gmXeSvJyRP8EqP+BiS7khYmIZWZY+69U6WGyaA7yu6PPnwWF6G0RemYj8\n7dW6JVyEOZDBszgFViOFhhYNCP5ii+0n84M3kt6r9Q9SafaFsMhWjkb6VG46jlKd\nWenR3LTmqGn0W5w6NBg7SXk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "gamedrive@gamedrive-173004.iam.gserviceaccount.com",
+  "client_id": "106441074713556586635",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gamedrive%40gamedrive-173004.iam.gserviceaccount.com"
+}
+
