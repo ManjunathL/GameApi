@@ -134,6 +134,13 @@ public class DriveServiceProvider
         }
     }
 
+    public DriveFile uploadFileForUser(String filePath, String email)
+    {
+        DriveFile driveFile = this.uploadFile(filePath);
+        this.allowUserToEditFile(driveFile.getId(), email);
+        return driveFile;
+    }
+
     public void allowUserToEditFile(String id, String email)
     {
         Permission userPermission = new Permission()
