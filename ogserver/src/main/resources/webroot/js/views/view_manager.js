@@ -37,6 +37,7 @@ define(function() {
         ONLINEPAYMENTPAGE: "OnlinePaymentPage",
         ONLINEPAYMENTSUCCESSPAGE: "OnlinePaymentSuccessPage",
         ONLINEPAYMENTFAILUREPAGE: "OnlinePaymentFailurePage",
+        DOUBLEBONAZAPAGE: "DoubleBonanzaPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

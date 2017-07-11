@@ -140,6 +140,7 @@ define([
             'online-payment(/)': 'online_payment',
             'paysuccess-:txnId(/)': 'online_payment_success',
             'payfailure-:txnId(/)': 'online_payment_failure',
+            'double-bonanza-:id(/)': 'double_bonanza',
             '*something': 'errorPage'
         },
         dashboard: function() {
@@ -671,6 +672,18 @@ define([
                     }
                 };
                 VM.create(VM.DIY, FullDiyPage, options).render();
+            });
+        });
+        router.on('route:double_bonanza', function(id) {
+            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+            require(['views/landing_pages/double-bonanza'], function(DoubleBonanzaPage) {
+
+                var options = {
+                    model: {
+                        "id": id
+                    }
+                };
+                VM.create(VM.DOUBLEBONAZAPAGE, DoubleBonanzaPage, options).render();
             });
         });
         router.on('route:thankyou', function(actions) {
