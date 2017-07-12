@@ -199,7 +199,7 @@ ul, ol{
 .donaza-why-us-head{
     font-weight: 300;
     color: #a42376;
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-size: 42px;
     padding: 30px 0px 50px;
     margin: 0px;
@@ -255,11 +255,39 @@ ul, ol{
     text-align: center;
     color: #ffffff;
 }
+
+.fact-head{
+    margin: 0px;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 60px 0px 10px;
+    font-size: 40px;
+}
+
+.fact-sub-head{
+    margin: 0px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0px 0px 60px;
+    font-size: 40px;
+    color: #fffe04;
+}
+
+.section-fun-facts h4{
+    min-height: 40px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+}
+
+
 .section-testimonial{
-    background: #ffffff;
+    background: #f2f2f2;
     padding-bottom: 50px;
 }
 
+.donaza-testimonial-box{
+    background: #ffffff;
+}
 #owl-testimonial .item{
     padding: 15px 0px;
     margin: 5px;
@@ -269,18 +297,16 @@ ul, ol{
     border-radius: 3px;
     text-align: center;
     min-height:185px;
-    border: 1px solid #757373;
 }
 #owl-testimonial h5{
     text-transform: capitalize;
 }
 
 #owl-testimonial p{
-    font-size: 18px;
-    font-style: italic;
+    font-size: 16px;
     text-align: left;
-    padding: 10px 15px 0px;
-    font-weight: 100;
+    padding: 20px 30px;
+    font-weight: 300;
 }
 
 .donaza-contact-section{
@@ -316,6 +342,41 @@ ul, ol{
 .donaza-gallery-section .owl-theme .owl-dots .owl-dot.active span,
 .donaza-gallery-section .owl-theme .owl-dots .owl-dot:hover span {
     background: #fdfc04;
+}
+
+.section-testimonial .owl-theme .owl-dots .owl-dot span {
+    width: 30px;
+    height: 2px;
+}
+
+.section-testimonial .owl-theme .owl-dots .owl-dot.active span,
+.section-testimonial .owl-theme .owl-dots .owl-dot:hover span {
+    background: #eb010c;
+}
+.section-testimonial h3{
+    color: #eb010c;
+}
+.section-testimonial h4{
+    color: #8f817e;
+}
+
+.section-portfolio{
+    padding: 35px 0px;
+    background: #fff;
+}
+
+.owl-carousel .owl-item .img-comma{
+    width: 40px !important;
+}
+
+.owl-carousel .owl-item .img-profile{
+    width: 130px;
+    padding: 15px 0px;
+    margin-top: -60px;
+}
+
+.img-centered {
+    margin: 0 auto;
 }
 
 @media (max-width: 1300px) {
@@ -443,25 +504,7 @@ ul, ol{
     }
 }
 
-.section-portfolio{
-    padding: 35px 0px;
-    background: #fff;
-}
 
-
-
-.owl-carousel .owl-item .img-comma{
-    width: 40px !important;
-}
-
-.owl-carousel .owl-item .img-profile{
-    width: auto;
-    padding: 15px 0px;
-}
-
-.img-centered {
-    margin: 0 auto;
-}
 
 
 /* ----- End donaza Page CSS ------ */
