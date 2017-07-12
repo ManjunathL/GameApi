@@ -4253,8 +4253,10 @@ a.hideLink {
 
 .blog-menu li a{
     text-transform: uppercase;
-    color:#ff3200;
+    color: #ff3200;
     border-bottom: 2px solid #fff;
+    font-size: 13px;
+    font-weight: 500;
 }
 .blog-borderbtm{
     border-bottom: 2px solid #666;

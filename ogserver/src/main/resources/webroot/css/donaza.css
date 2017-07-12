@@ -55,8 +55,20 @@ ul, ol{
     font-family: 'Raleway', sans-serif;
 }
 
+.pl20{
+    padding-left: 20px;
+}
 .mt50{
     margin-top:50px;
+}
+@media (max-width: 768px){
+    .mob-m0{
+        margin: 0px;
+    }
+    .mob-p0{
+        padding:0px;
+    }
+
 }
 @media (min-width: 992px){
     .navbar-header {
@@ -148,7 +160,7 @@ ul, ol{
    border-radius: 28px;
    color: #ffffff;
    font-size: 18px;
-   padding: 10px 20px 10px 20px;
+   padding: 10px 30px 10px 30px;
    text-decoration: none;
    font-weight: 400;
 }
@@ -197,6 +209,14 @@ ul, ol{
 }
 
 .donaza-why-us-head{
+    font-weight: 300;
+    color: #a42376;
+    text-transform: uppercase;
+    font-size: 42px;
+    padding: 50px 0px 40px;
+    margin: 0px;
+}
+.donaza-customer-head{
     font-weight: 300;
     color: #a42376;
     text-transform: uppercase;
@@ -507,33 +527,121 @@ ul, ol{
 
     }
     .de_count {
-        min-height: 165px;
+        min-height: 120px;
     }
 }
 @media (max-width: 767px) {
+    .donaza-container-mob {
+        background: #f2f2f2;
+    }
+    .navbar-donaza .navbar-brand {
+        padding: 0px;
+        margin: 0px auto;
+        position: relative;
+        width: 100%;
+        float: none;
+    }
     .navbar-donaza .navbar-brand img {
         width: 150px;
-        margin: 15px 20px 10px 20px;
+        margin: 15px auto;
+        text-align: center;
+    }
+    .section-offer-donaza{
+        padding: 30px 20px 70px;
+    }
+    .navbar-donaza .navbar-brand img {
+        width: 150px;
+        margin: 15px auto;
+        text-align: center;
     }
     .donaza_banner_bg {
         min-height: 300px;
         padding: 5px 0px 5px;
     }
-    .donaza-form{
-        margin: 5% 0% 5%;
+    .section-why-us h4 {
+        text-transform: capitalize;
+        font-weight: 400;
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    .donaza-gallery-head h2 {
+        color: #fffe04;
+        font-size: 18px;
+        margin: 0px;
+        text-align: center;
+    }
+    .donaza-gallery-head {
+        position: absolute;
+        bottom: 30px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        width: 100%;
+        padding: 5px 0px 0px;
+        z-index: 9;
+    }
+    .donaza-gallery-head p {
+        color: #ffffff;
+        opacity: 0.8;
+        font-size: 12px;
+        text-align: center;
+        padding: 0px;
+        margin: 0px;
+    }
+    #owl-gallery .owl-dots {
+        margin: 0px !important;
+        padding: 0px;
+    }
+    .fact-head{
+        font-size: 26px;
+        padding: 15px 0px 10px;
+    }
+    .fact-sub-head {
+        margin: 0px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 0px 0px 60px;
+        font-size: 25px;
+        color: #fffe04;
+    }
+    #owl-testimonial p{
+        font-size: 14px;
+        text-align: center;
+    }
+    .donaza-consult-section .sub-head {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-family: 'Raleway', sans-serif;
+        font-size: 34px;
+        margin: 20px 0px 20px;
+    }
+    .donaza-footer h5{
+        text-align: center;
+    }
+    .donaza-footer h6 {
+        margin-top: 30px;
+        font-family: 'Lato', sans-serif;
+        text-transform: capitalize;
+        text-align: center;
     }
 }
 @media (max-width: 420px) {
+    .navbar-donaza .navbar-brand {
+        padding: 0px;
+        margin: 0px auto;
+        position: relative;
+        width: 100%;
+        float: none;
+    }
     .navbar-donaza .navbar-brand img {
         width: 150px;
-        margin: 15px 20px 10px 20px;
+        margin: 15px auto;
+        text-align: center;
     }
     .de_count {
-        min-height: 125px;
+        min-height: 110px;
     }
     .donaza_banner_bg {
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1476272309/donaza-lp/donaza_banner_mob.jpg");
-        min-height: 300px;
+        min-height: 350px;
         background-size: contain;
         background-position: inherit;
         padding: 25px 0px 25px;
@@ -547,17 +655,20 @@ ul, ol{
         text-transform: capitalize;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .donaza-form{
-        margin: 80% 0% 0%;
+    .donaza-form {
+        margin: 0px 15px 0px;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
     }
     #owl-testimonial p{
         font-size: 14px;
+        text-align: center;
     }
     .owl-carousel .owl-item .img-profile{
         padding: 5px 0px;
+        margin-top: -40px;
     }
     .section-fun-facts {
-        background: #f1591f;
+            background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1499863341/landing_page/double-bonanza/icons_bg.jpg");
         color: #ffffff;
         padding: 20px 0px 10px;
     }
@@ -567,7 +678,15 @@ ul, ol{
     }
     .fact-head{
         font-size: 26px;
-        padding: 15px 0px 30px;
+        padding: 15px 0px 10px;
+    }
+    .fact-sub-head {
+        margin: 0px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 0px 0px 60px;
+        font-size: 25px;
+        color: #fffe04;
     }
     .fact-des{
         font-size:12px;
@@ -576,9 +695,19 @@ ul, ol{
         font-size: 26px;
         padding: 20px 0px;
     }
-    .donaza-gallery-section,
-    .section-why-us{
+    .donaza-customer-head{
+        font-size: 26px;
+        padding: 20px 0px;
+    }
+    .donaza-customer-head{
+        font-size: 36px;
+        padding: 20px 0px 0px;
+    }
+    .donaza-gallery-section{
         padding: 0px;
+    }
+    .section-why-us{
+        padding: 10px 0px;
     }
     .btn-donaza{
         font-size: 14px;
