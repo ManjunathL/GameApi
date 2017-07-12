@@ -215,15 +215,17 @@ ul, ol{
 .donaza-gallery-section{
     background: #ffffff;
     padding: 0px;
+    position: relative;
 }
 
 .donaza-gallery-head {
     position: absolute;
-    bottom: 0px;
+    bottom: 30px;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     width: 100%;
-    padding: 10px 0px 25px;
+    padding: 10px 0px 0px;
+    z-index: 9;
 }
 
 .donaza-gallery-head h2{
@@ -339,20 +341,24 @@ ul, ol{
 
 #owl-gallery .owl-dots {
     margin: 0px !important;
-    padding: 10px 0px 5px;
+    padding: 5px 0px 5px;
     position: absolute;
     bottom: 0px;
     width: 100%;
+    z-index: 9999999;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .donaza-gallery-section .owl-theme .owl-dots .owl-dot span {
     width: 30px;
     height: 2px;
+    z-index: 99;
 }
 
 .donaza-gallery-section .owl-theme .owl-dots .owl-dot.active span,
 .donaza-gallery-section .owl-theme .owl-dots .owl-dot:hover span {
     background: #fdfc04;
+    z-index: 99;
 }
 
 .section-testimonial .owl-theme .owl-dots .owl-dot span {
