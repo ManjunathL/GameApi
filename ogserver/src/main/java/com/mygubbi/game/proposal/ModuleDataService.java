@@ -70,7 +70,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheFinishCostCodes();
         this.cacheHandleData();
         this.cacheHingePackData();
-        this.cacheSowMasterData();
+       /* this.cacheSowMasterData();*/
 
 	}
 
@@ -108,7 +108,7 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
-    private void cacheSowMasterData()
+  /*  private void cacheSowMasterData()
     {
         this.sowMasterMap = ArrayListMultimap.create();
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("sow.master.select.all", new JsonObject())),
@@ -128,7 +128,7 @@ public class ModuleDataService extends AbstractVerticle
                         markResult("Module components loaded.", true);
                     }
                 });
-    }
+    }*/
 
     private void cacheModulePanels()
     {
