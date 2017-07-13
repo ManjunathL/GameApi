@@ -29,6 +29,12 @@ public class GoogleDriveTest
         this.serviceProvider.downloadFile(file.getId(), "D:/Downloads/TestCopy12-Downloaded.xlsx", DriveServiceProvider.TYPE_XLS);
     }
 
+    private void testUploadXLSAndDownloadPDF()
+    {
+        DriveFile file = this.serviceProvider.uploadFile("/home/shilpa/Downloads/sow_checklist.xls");
+        System.out.println(file);
+        this.serviceProvider.downloadFile(file.getId(), "/home/shilpa/Downloads/sow_checklist.pdf", DriveServiceProvider.TYPE_PDF);
+    }
     private void testUpload()
     {
         DriveFile file = this.serviceProvider.uploadFile("D:/Downloads/TestCopy12.xlsx");
