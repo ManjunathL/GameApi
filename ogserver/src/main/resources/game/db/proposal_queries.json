@@ -1505,6 +1505,13 @@
       "query": "select * from sow_master",
       "params": [],
       "jsonfields":[]
+    },
+    {
+      "id": "proposal.duplicatecrm",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal where crmId = ? and status != 'Deleted';",
+      "params": ["crmId"]
     }
 
   ]

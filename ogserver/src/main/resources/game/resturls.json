@@ -960,6 +960,14 @@
       "params":["shutterCode"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/duplicatecrm",
+      "source": "db",
+      "query":"proposal.duplicatecrm",
+      "params":["crmId"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }

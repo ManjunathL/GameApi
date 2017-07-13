@@ -311,8 +311,8 @@ public class AssembledProductInQuote
         PriceMaster jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
 
 
-        LOG.info("Product Module " +module);
-        LOG.info("Product handle type selection" +this.product.getHandletypeSelection());
+        //LOG.info("Product Module " +module);
+        //LOG.info("Product handle type selection" +this.product.getHandletypeSelection());
         if (Objects.equals(this.product.getHandletypeSelection(),GOLA_PROFILE ))
         {
 
