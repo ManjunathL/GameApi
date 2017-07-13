@@ -25,6 +25,7 @@ public class DriveServiceProvider
     public static final String TYPE_XLS = "xls";
     public static final String TYPE_DOC = "doc";
     public static final String TYPE_CSV = "csv";
+    public static final String TYPE_PDF = "pdf";
 
     private Map<String, String > mimeTypes = null;
     private DriveServiceManager serviceManager;
@@ -42,6 +43,7 @@ public class DriveServiceProvider
         this.mimeTypes.put(TYPE_XLS, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         this.mimeTypes.put(TYPE_DOC, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
         this.mimeTypes.put(TYPE_CSV, "text/csv");
+        this.mimeTypes.put(TYPE_PDF,"application/pdf");
     }
 
     public DriveFile uploadFile(String filePath)
