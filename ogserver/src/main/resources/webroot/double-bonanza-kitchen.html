@@ -112,10 +112,10 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                     <img src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/logo.jpg" class="cld-responsive" alt="logo" />
                 </a>
                 <ul class="double-nav list-inline pull-right hidden-xs hidden-sm">
-                    <li><a href="#section-offer"> Double Bonaza offer </a> | </li>
-                    <li><a href="#why-us"> Why choose us? </a> | </li>
-                    <li><a href="#home-interior"> All your home interior in One Place </a> | </li>
-                    <li><a href="#customer-speaks"> Customer Speaks </a> | </li>
+                    <li><a href="#section-offer"> Double Bonaza offer </a> </li> |
+                    <li><a href="#why-us"> Why choose us? </a> </li> |
+                    <li><a href="#home-interior"> Services </a> </li> |
+                    <li><a href="#customer-speaks"> Customer Speaks </a> </li> |
                     <li><a href="#contact-us"> Contact Us </a> </li>
                 </ul>
             </div>
@@ -125,12 +125,12 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 </header>
 
 <!-- Start donaza banner -->
-<section id="home" class="donaza_banner_bg">
+<section id="home" class="donaza_banner_bg hidden-xs hidden-sm">
     <div class="container donaza-container">
         <div class="mt50">
             <div class="row">
                 <div class="col-sm-6 col-md-8 col-lg-8 pn">
-                    <img  class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1499824586/landing_page/double-bonanza/kitchen.jpg" alt="Banner">
+                    <img class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1499824586/landing_page/double-bonanza/kitchen.jpg" alt="Banner">
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-4 pn">
                     <div class="donaza-form text-left">
@@ -197,6 +197,77 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
         </div>
     </div>
 </section>
+
+<section id="home-mob" class="hidden-lg hidden-md">
+    <div class="container-fluid donaza-container donaza-container-mob">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8 pn mob-p0">
+                <img class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1499938404/kitchen_mob.jpg" alt="Banner">
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 pn">
+                <div class="donaza-form text-left">
+                    <h3 class="text-left"> GET <strong> FREE </strong> DESIGN </h3>
+                    <form class="donaza-form-wrapper" method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx">
+                        <div class="form-group">
+                            <input type='text' id='FirstName' class="form-control" placeholder="Name :" name='FirstName' title='Name' maxlength='100' value='' autocomplete='off' required='required' />
+                        </div>
+
+                        <div class="form-group">
+                            <input type='text' id='EmailAddress' class="form-control" placeholder="Email :" name='EmailAddress' title='Email' maxlength='100' value='' autocomplete='off' required='required' />
+                        </div>
+
+                        <div class="form-group">
+                            <input type='text' id='Phone' class="form-control" placeholder="Phone :" name='Phone' title='Phone' maxlength='20' value='' autocomplete='off'  />
+                        </div>
+
+                        <div class="form-group">
+                            <select id='mx_Age_Group' class="form-control" name='mx_Age_Group'>
+                                <option value='ageGroup'> Age </option>
+                                <option value='0-30' >0-30</option>
+                                <option value='31-35' >31-35</option>
+                                <option value='36-40' >36-40</option>
+                                <option value='41-45' >41-45</option>
+                                <option value='46-50' >46-50</option>
+                                <option value='51-55' >51-55</option>
+                                <option value='56-60' >56-60</option>
+                                <option value='60+' >60+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                <option value='cityName'>City</option>
+                                <option value='Bangalore'> Bangalore </option>
+                                <option value='Pune'> Pune </option>
+                                <option value='Mangalore'> Mangalore </option>
+                                <option value='Chennai'> Chennai </option>
+                                <option value='Other' >Other</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="form-group text-center">
+                            <button id="form-submit-button" class="btn btn-donaza" type="submit"> CONTACT US </button>
+                        </div>
+
+                        <input type="hidden" name="MXHOrgCode" value="9814" />
+                        <input type="hidden" name="MXHLandingPageId" value="37fa0fe6-654f-11e7-bd09-22000aa220ce" />
+                        <input type="hidden" name="MXHFormBehaviour" value="1" />
+                        <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                        <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
+                        <input type="hidden" name="MXHAsc" value="5" />
+                        <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
+                        <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                        <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                    </form>
+                </div>
+                <script type="text/javascript"> var MXLandingPageId = '37fa0fe6-654f-11e7-bd09-22000aa220ce';
+                </script>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- End donaza banner -->
 
 <!-- Start offer section -->
@@ -213,7 +284,8 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 
 <!-- Start offer section -->
 <section class="section-offer-donaza-2">
-     <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1499824594/landing_page/double-bonanza/offer_02.jpg" alt="banner">
+    <img class="img-responsive hidden-xs hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/v1499824594/landing_page/double-bonanza/offer_02.jpg" alt="banner">
+    <img class="img-responsive hidden-md hidden-lg" src="https://res.cloudinary.com/mygubbi/image/upload/v1499860765/landing_page/double-bonanza/offer-mob.jpg" alt="banner">
 </section>
 <!-- End offer section -->
 
@@ -223,10 +295,16 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
         <div class="why-us-fluid">
             <div class="row">
                 <div class="col-md-12 text-center wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                    <h1 class="donaza-why-us-head">
+                    <h1 class="donaza-why-us-head hidden-xs hidden-sm">
                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499851351/landing_page/double-bonanza/lines_02.png" alt="arrow">
                         WHY <strong> CHOOSE US ?</strong>
                         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499851351/landing_page/double-bonanza/lines_02.png" alt="arrow">
+                    </h1>
+                    <h1 class="donaza-why-us-head hidden-md hidden-lg">
+                        WHY <br/>
+                        <img width="40" src="https://res.cloudinary.com/mygubbi/image/upload/v1499861703/landing_page/double-bonanza/lines_02_mob.png" alt="arrow">
+                        <strong> CHOOSE US ?</strong>
+                        <img width="40" src="https://res.cloudinary.com/mygubbi/image/upload/v1499861703/landing_page/double-bonanza/lines_02_mob.png" alt="arrow">
                     </h1>
                 </div>
                 <div class="clearfix"></div>
@@ -280,16 +358,20 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 <div id="home-interior" class="donaza-gallery-section">
     <div id="owl-gallery" class="owl-carousel owl-theme">
         <div class="item">
-            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/KI01.jpg" alt="donaza-img" class="img-responsive">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/KI01.jpg" alt="donaza-img" class="img-responsive hidden-xs hidden-sm">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499866007/landing_page/double-bonanza/mob/KI01_MOB.jpg" alt="donaza-img" class="img-responsive hidden-md hidden-lg">
         </div>
         <div class="item">
-            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/kit02.jpg" alt="donaza-img" class="img-responsive">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/kit02.jpg" alt="donaza-img" class="img-responsive hidden-xs hidden-sm">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499866007/landing_page/double-bonanza/mob/kit02_MOB.jpg" alt="donaza-img" class="img-responsive hidden-md hidden-lg">
         </div>
         <div class="item">
-            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/kit03.jpg" alt="donaza-img" class="img-responsive">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/kit03.jpg" alt="donaza-img" class="img-responsive hidden-xs hidden-sm">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499866007/landing_page/double-bonanza/mob/kit03_MOB.jpg" alt="donaza-img" class="img-responsive hidden-md hidden-lg">
         </div>
         <div class="item">
-            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/kit04.jpg" alt="donaza-img" class="img-responsive">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499852263/landing_page/double-bonanza/kit04.jpg" alt="donaza-img" class="img-responsive hidden-xs hidden-sm">
+            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499866007/landing_page/double-bonanza/mob/kit04_MOB.jpg" alt="donaza-img" class="img-responsive hidden-md hidden-lg">
         </div>
     </div>
     <div class="donaza-gallery-head">
@@ -305,22 +387,22 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 </div>
 <!-- End Gallery Section -->
 
-<!-- End Gallery Section -->
-
-<div class="clearfix"></div>
-
-<!-- Start Gallery Section -->
-
 <!-- section begin -->
 <section class="section-fun-facts donaza-category-section text-center">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center wow fadeInUp animated animated" style="visibility: visible; animation-name: fadeInUp; opacity: 0;">
                 <h1 class="fact-head"> All Your Home Interior Needs In  </h1>
-                <h1 class="fact-sub-head">
+                <h1 class="fact-sub-head hidden-xs hidden-sm">
                     <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499851610/landing_page/double-bonanza/lines_02_white.png" alt="arrow">
                     One Place
                     <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499851610/landing_page/double-bonanza/lines_02_white.png" alt="arrow">
+                </h1>
+
+                <h1 class="fact-sub-head hidden-md hidden-lg">
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499863100/landing_page/double-bonanza/lines_02_white_mobile.png" alt="arrow">
+                    One Place
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499863100/landing_page/double-bonanza/lines_02_white_mobile.png" alt="arrow">
                 </h1>
             </div>
         </div>
@@ -407,10 +489,16 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 
 <!-- Start Gallery Section -->
 <section id="customer-speaks" class="section-testimonial text-center">
-    <h1 class="donaza-why-us-head">
+    <h1 class="donaza-customer-head hidden-xs hidden-sm">
         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499851351/landing_page/double-bonanza/lines_02.png" alt="arrow">
         Customer <strong> Speaks </strong>
         <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499851351/landing_page/double-bonanza/lines_02.png" alt="arrow">
+    </h1>
+    <h1 class="donaza-customer-head hidden-md hidden-lg">
+        Customer <br/>
+        <img width="40" src="https://res.cloudinary.com/mygubbi/image/upload/v1499861703/landing_page/double-bonanza/lines_02_mob.png" alt="arrow">
+        <strong> Speaks </strong>
+        <img width="40" src="https://res.cloudinary.com/mygubbi/image/upload/v1499861703/landing_page/double-bonanza/lines_02_mob.png" alt="arrow">
     </h1>
     <div class="container">
         <div class="row">
@@ -452,21 +540,37 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
 </section>
 
 <section id="contact-us" class="donaza-consult-section">
-    <h1 class="head"> Get A FREE <br/> </h1>
-    <h1 class="sub-head"> DESIGN CONSULTATION! </h1>
-    <a href="#home" class="btn btn-book-now"> Book Now </a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h1 class="head"> Get A FREE <br/> </h1>
+                <h1 class="sub-head"> DESIGN CONSULTATION! </h1>
+                <a href="#home" class="btn btn-book-now hidden-xs hidden-sm"> Book Now </a>
+                <a href="#home-mob" class="btn btn-book-now hidden-md hidden-lg"> Book Now </a>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="donaza-footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-6">
+            <div class="col-sm-6 col-md-6 hidden-xs hidden-sm">
                 <h5> CONTACT INFO </h5>
-                <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824588/landing_page/double-bonanza/phone_06.jpg" alt="phone"> 080888 60860 (9 AM to 6 PM, Mon - Sat) </P>
+                <P class="hidden-xs hidden-sm"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824588/landing_page/double-bonanza/phone_06.jpg" alt="phone"> 080888 60860 (9 AM to 6 PM, Mon - Sat) </P>
+                <P class="hidden-md hidden-lg"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824588/landing_page/double-bonanza/phone_06.jpg" alt="phone"> 080888 60860 <br/><span class="pl20"> (9 AM to 6 PM, Mon - Sat) </span>  </P>
                 <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824587/landing_page/double-bonanza/mail_06.jpg" alt="phone"> reach@mygubbi.com </P>
                 <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824579/landing_page/double-bonanza/location_06.jpg" alt="phone">  1502, 2nd Floor, 19th Main Road, Sector 4, HSR Layout, Bangalore 560 102, India </P>
             </div>
-            <div class="col-sm-6 col-md-6">
+            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-md-6 hidden-md hidden-lg">
+                <h5> CONTACT INFO </h5>
+                <P class="hidden-xs hidden-sm"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824588/landing_page/double-bonanza/phone_06.jpg" alt="phone"> 080888 60860 (9 AM to 6 PM, Mon - Sat) </P>
+                <P class="hidden-md hidden-lg"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824588/landing_page/double-bonanza/phone_06.jpg" alt="phone"> 080888 60860 <br/><span class="pl20"> (9 AM to 6 PM, Mon - Sat) </span>  </P>
+                <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824587/landing_page/double-bonanza/mail_06.jpg" alt="phone"> reach@mygubbi.com </P>
+                <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1499824579/landing_page/double-bonanza/location_06.jpg" alt="phone">  1502, 2nd Floor, 19th Main Road, Sector 4, HSR Layout, Bangalore 560 102, India </P>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <h6 class="text-right"> Copyright © MyGubbi 2017 </h6>
             </div>
         </div>
