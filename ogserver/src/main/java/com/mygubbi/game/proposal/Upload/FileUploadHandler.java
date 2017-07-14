@@ -1,11 +1,9 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.Upload;
 
-import com.amazonaws.regions.Regions;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
