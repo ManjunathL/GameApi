@@ -9,6 +9,7 @@ public class SOWMaster extends JsonObject {
 
     public static final String SPACE_TYPE = "spaceType";
 
+    public static final String L1S01_CODE = "L1S01Code";
     public static final String L1S01 = "L1S01";
     public static final String L2S01 = "L2S01";
     public static final String L2S02 = "L2S02";
@@ -20,8 +21,12 @@ public class SOWMaster extends JsonObject {
 
     public SOWMaster() {}
 
+    public SOWMaster(JsonObject jsonObject) {
+        super(jsonObject.getMap());
+    }
 
-    public static SOWMaster fromJson(JsonObject json)
+
+    private static SOWMaster fromJson(JsonObject json)
     {
         SOWMaster sow_master = new SOWMaster();
         sow_master.setSpaceType(json.getString("spaceType"));
@@ -47,6 +52,9 @@ public class SOWMaster extends JsonObject {
     }
 
 
+    public String getL1S01Code() {
+        return this.getString(L1S01_CODE);
+    }
 
     public String getL1S01() {
         return this.getString(L1S01);

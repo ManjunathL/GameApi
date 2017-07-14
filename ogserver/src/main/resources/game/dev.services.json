@@ -59,7 +59,14 @@
 
       {
         "name": "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService"
+      },
+
+
+      {
+        "name": "com.mygubbi.game.proposal.sow.SOWCreatorService"
       }
+
+
 
 
 

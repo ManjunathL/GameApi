@@ -95,7 +95,7 @@ public class ProposalOutputService extends AbstractVerticle
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     LOG.info("Parameter Values" +resultData.paramsObject);
-                    /*if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
+                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
                     {
                         message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
                         LOG.error("Proposal products not found for id:" + proposalHeader.getId());
@@ -103,7 +103,7 @@ public class ProposalOutputService extends AbstractVerticle
                         this.getProposalAddons(quoteRequest, proposalHeader, null, message);
                     }
                     else
-                    {*/
+                    {
                         List<ProductLineItem> products = new ArrayList<ProductLineItem>();
                         for (JsonObject json : resultData.rows)
                         {
@@ -120,7 +120,7 @@ public class ProposalOutputService extends AbstractVerticle
                             }
                         }
                         this.getProposalAddons(quoteRequest, proposalHeader, products, message);
-                    //}
+                    }
                 });
     }
 

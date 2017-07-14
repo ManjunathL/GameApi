@@ -57,7 +57,7 @@ public class SOWReaderTest {
             Sheet sheet = wb.getSheetAt(i);
             String sheetName = wb.getSheetName(i);
             System.out.println(sheetName);
-            if (!sheetName.equals("SOW"))
+            if (!sheetName.equals("sow"))
             {
                 continue;
             }

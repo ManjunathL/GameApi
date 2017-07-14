@@ -161,16 +161,21 @@ public class DatabaseService extends AbstractVerticle
 	{
 		if (index >= qDataList.size())
 		{
+			LOG.debug("Done with queries :" + index + " : " + qDataList.size());
 			message.reply(LocalCache.getInstance().store(qDataList));
+			return;
 		}
 
 		QueryData qData = qDataList.get(index);
 		if (qData.errorFlag)
 		{
+			LOG.debug("Skipping query :" + qData.queryId + " : " + qData.errorMessage);
+
 			handleQueryInGroup(message, qDataList, index + 1);
 		}
 
 		qData.startQuery();
+		LOG.debug("running query :" + qData.queryId + " : " + qData.paramsObject);
 
 		this.client.getConnection(res -> {
 			if (res.succeeded())
@@ -205,6 +210,8 @@ public class DatabaseService extends AbstractVerticle
 			else
 			{
 				qData.setError(res2.cause());
+				LOG.error("Error:", res2.cause());
+
 			}
 			connection.close();
             handleQueryInGroup(message, qDataList, index + 1);

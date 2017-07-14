@@ -11,8 +11,7 @@ import java.io.*;
 /**
  * Created by test on 08-06-2016.
  */
-public class ExcelWorkbookManager
-{
+public class ExcelWorkbookManager extends XSSFWorkbook {
     private final static Logger LOG = LogManager.getLogger(ExcelWorkbookManager.class);
 
     private String xlFilename;

@@ -968,6 +968,14 @@
       "params":["crmId"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/sow/selectlineitemsv2",
+      "source": "db",
+      "query":"proposal.select.sow.v2",
+      "params":["proposalId","version"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }

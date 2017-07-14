@@ -46,11 +46,11 @@ public class DriveServiceProvider
         this.mimeTypes.put(TYPE_PDF,"application/pdf");
     }
 
-    public DriveFile uploadFile(String filePath)
+    public DriveFile uploadFile(String filePath, String filename)
     {
         this.serviceManager.getDrive();
         File fileMetadata = new File();
-        fileMetadata.setName("My Report");
+        fileMetadata.setName(filename);
         fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
         //convert' => true,
         //'uploadType' => 'multipart',
@@ -89,11 +89,14 @@ public class DriveServiceProvider
 
     public void downloadFile(String id, String path, String mimeType)
     {
+        LOG.debug("Inisde download file :" + id + " : " + path + " : " + mimeType) ;
         try
         {
+            LOG.debug("inisde download file");
             FileOutputStream outputStream = new FileOutputStream(path);
             if (this.mimeTypes.containsKey(mimeType))
             {
+                LOG.debug("inisde if file");
                 this.serviceManager.getDrive().files().export(id, this.mimeTypes.get(mimeType))
                         .executeMediaAndDownloadTo(outputStream);
             }
@@ -136,9 +139,10 @@ public class DriveServiceProvider
         }
     }
 
-    public DriveFile uploadFileForUser(String filePath, String email)
+    public DriveFile uploadFileForUser(String filePath, String email, String fileName)
     {
-        DriveFile driveFile = this.uploadFile(filePath);
+        LOG.debug("filePath :" + filePath + ":" + email + ":" +fileName);
+        DriveFile driveFile = this.uploadFile(filePath, fileName);
         this.allowUserToEditFile(driveFile.getId(), email);
         return driveFile;
     }
@@ -151,12 +155,12 @@ public class DriveServiceProvider
                 .setEmailAddress(email);
         try
         {
-            this.serviceManager.getDrive().permissions().create(id, userPermission)
+            this.serviceManager.getDrive().permissions().create(id, userPermission).setSendNotificationEmail(false)
                     .setFields("id").execute();
         }
         catch (IOException e)
         {
-            throw new RuntimeException("Unable to make user " + email + " to edit file " + id);
+            throw new RuntimeException("Unable to make user " + email + " to edit file " + id,e);
         }
     }
 }
