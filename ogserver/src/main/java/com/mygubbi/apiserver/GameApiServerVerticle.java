@@ -4,6 +4,8 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.config.StaticConfigHandler;
 import com.mygubbi.game.proposal.*;
+import com.mygubbi.game.proposal.Upload.CloudinaryFileUploadHandler;
+import com.mygubbi.game.proposal.Upload.FileUploadHandler;
 import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import com.mygubbi.si.crm.CrmApiHandler;

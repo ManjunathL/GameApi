@@ -1,5 +1,7 @@
 package com.mygubbi.game.proposal;
 
+import com.itextpdf.text.pdf.PdfNumber;
+import com.itextpdf.text.pdf.PdfPage;
 import com.mygubbi.common.DateUtil;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.StringUtils;
@@ -7,16 +9,20 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
+//import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
 import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
 import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
 import com.mygubbi.game.proposal.price.RateCardService;
+import com.mygubbi.game.proposal.quote.MergePdfsRequest;
+import com.mygubbi.game.proposal.quote.PdfMerger;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
 import com.mygubbi.game.proposal.sow.SOWWriteToDatabase;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
+import com.mygubbi.game.proposal.quote.SowPdfRequest;
 import com.mygubbi.route.AbstractRouteHandler;
+import com.mygubbi.game.proposal.output.SOWPdfOutputService;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
@@ -28,6 +34,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.List;
 
 /**
@@ -41,7 +49,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     public DriveServiceProvider serviceProvider;
     public SOWWriteToDatabase sowWriteToDatabase;
-    public BOQWriteToDatabase boqWriteToDatabase;
+//    public BOQWriteToDatabase boqWriteToDatabase;
 
     public ProposalHandler(Vertx vertx)
     {
@@ -56,15 +64,17 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/update").handler(this::updateProposal);
         this.post("/updateonconfirm").handler(this::updateProposalOnConfirm);
         this.post("/downloadquote").handler(this::downloadQuote);
+        this.post("/downloadquoteansow").handler(this::downloadQuoteAndSow);
+
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/createsowsheet").handler(this::createSowSheet);
-        this.post("/createboqsheet").handler(this::createBoqSheet);
+//        this.post("/createboqsheet").handler(this::createBoqSheet);
         this.post("/savesowfile").handler(this::saveSowFile);
         this.post("/discardsowfile").handler(this::discardSowFile);
         this.post("/copysowlineitems").handler(this::copySowLineItems);
         this.post("/createboqlineitems").handler(this::createBoqLineItems);
-        this.post("/saveboqfile").handler(this::saveBoqFile);
+//        this.post("/saveboqfile").handler(this::saveBoqFile);
         this.post("/discardboqfile").handler(this::discardBoqFile);
         //this.post("/downloadprodspecfile").handler(this::downloadProdSpec);
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
@@ -249,6 +259,16 @@ public class ProposalHandler extends AbstractRouteHandler
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION);
     }
 
+    private void downloadQuoteAndSow(RoutingContext routingContext){
+        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION);
+    }
+
+//    private void downloadSow(RoutingContext routingContext)
+//    {
+////        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION);
+//        this.createSOWPdfOutput(routingContext);
+//    }
+
     private void downloadQuotePdf(RoutingContext routingContext)
     {
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTEPDF);
@@ -259,10 +279,10 @@ public class ProposalHandler extends AbstractRouteHandler
         this.createSOWOutput(routingContext);
     }
 
-    private void createBoqSheet(RoutingContext routingContext)
-    {
-        this.createBoqSheet(routingContext, ProposalOutputCreator.OutputType.BOQ);
-    }
+//    private void createBoqSheet(RoutingContext routingContext)
+//    {
+//        this.createBoqSheet(routingContext, ProposalOutputCreator.OutputType.BOQ);
+//    }
 
     private void downloadJobCard(RoutingContext routingContext)
     {
@@ -289,9 +309,44 @@ public class ProposalHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    sendJsonResponse(routingContext, response.toString());
+                    this.createSOWPdfOutput(routingContext,response);
+//                    sendJsonResponse(routingContext, response.toString());
                 });
     }
+
+    private void createSOWPdfOutput(RoutingContext routingContext,JsonObject quotePDfResponse){
+        LOG.debug("Create SOW pdf output :" + routingContext.getBodyAsJson().toString());
+        JsonObject sowRequestJson = routingContext.getBodyAsJson();
+        // here sow service, chirag will write need to be called, to that pass argument -- proposalId and version no
+        //that service should return me output of jsonobject having  xlsFileName,xlsLocation
+
+        JsonObject inputJson = new JsonObject();
+        inputJson.put("xlsFileName","sow_checklist.xls");
+        inputJson.put("xlsLocation","/home/shilpa/Downloads/");
+        Integer id = LocalCache.getInstance().store(new SowPdfRequest(sowRequestJson));
+        VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id,
+                (AsyncResult<Message<Integer>> result) -> {
+                    JsonObject sowResponse = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                    createMergedPdf(routingContext,quotePDfResponse,sowResponse);
+                });
+    }
+
+    private void createMergedPdf(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject sowResponse){
+        LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());
+        Map<String,PdfNumber> inputPdfMap = new LinkedHashMap<>();
+        inputPdfMap.put(quotePDfResponse.getString("quoteFile"), PdfPage.PORTRAIT);
+        inputPdfMap.put(quotePDfResponse.getString("sowPdfFile"),PdfPage.LANDSCAPE);
+
+        String outputFileName = "/home/shilpa/Downloads/merge_pdf/merged_file.pdf";
+        Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfMap, outputFileName));
+        VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
+                (AsyncResult<Message<Integer>> result) -> {
+                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                    sendJsonResponse(routingContext, response.toString());
+                });
+
+    }
+
 
     private void createSOWOutput(RoutingContext routingContext)
     {
@@ -344,18 +399,18 @@ public class ProposalHandler extends AbstractRouteHandler
         JsonObject jsonObject = routingContext.getBodyAsJson();
     }
 
-    private void saveBoqFile(RoutingContext routingContext)
-    {
-       JsonObject jsonObject = routingContext.getBodyAsJson();
-        String file_id = jsonObject.getString("id");
-        int proposalId = jsonObject.getInteger("proposalId");
-        String path = "D:/Mygubbi GAME/boq_downloaded.xlsx";
-        this.serviceProvider = new DriveServiceProvider();
-        this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
-        this.boqWriteToDatabase = new BOQWriteToDatabase();
-        //this.boqWriteToDatabase.writeToDB(path,proposalId);
-        sendJsonResponse(routingContext,jsonObject.toString());
-    }
+//    private void saveBoqFile(RoutingContext routingContext)
+//    {
+//       JsonObject jsonObject = routingContext.getBodyAsJson();
+//        String file_id = jsonObject.getString("id");
+//        int proposalId = jsonObject.getInteger("proposalId");
+//        String path = "D:/Mygubbi GAME/boq_downloaded.xlsx";
+//        this.serviceProvider = new DriveServiceProvider();
+//        this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
+//        this.boqWriteToDatabase = new BOQWriteToDatabase();
+//        //this.boqWriteToDatabase.writeToDB(path,proposalId);
+//        sendJsonResponse(routingContext,jsonObject.toString());
+//    }
 
     private void discardBoqFile(RoutingContext routingContext)
     {

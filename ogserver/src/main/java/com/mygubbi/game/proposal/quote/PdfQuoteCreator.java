@@ -35,6 +35,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
         {
             LOG.info("if");
             new QuotationPdfCreatorForPackage(quoteData,proposalHeader).createpdf(targetFile);
+            //here take target file as input
         }else {
             LOG.info("else");
             new QuotationPDFCreator(quoteData, proposalHeader).createpdf(targetFile);
