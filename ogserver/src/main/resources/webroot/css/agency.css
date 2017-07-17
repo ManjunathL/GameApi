@@ -2855,11 +2855,15 @@ fieldset[disabled] .btn-xl.active {
 
 .super-script {
     display: block !important;
-    color: #555;
+    color: #;
     font-size: 12px;
     position: absolute;
-    top: 0px;
-    right: 12px;
+    top: 5px;
+    right: 3px;
+    border-radius: 20px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 18px;
 }
 .super-script1 {
     display: block !important;
