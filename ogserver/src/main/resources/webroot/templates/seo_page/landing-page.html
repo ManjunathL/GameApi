@@ -4,17 +4,17 @@
 <link rel="stylesheet" href="/css/owl.transitions.css">
 <% console.log("===page") %>
 <% console.log(page) %>
-<% console.log( page[0].section4_categories) %>
+<% console.log( page[0].categories) %>
 <% console.log( page[0].Related_Categories) %>
 <section class="seo-lp-banner">
     <div class="hidden-xs hidden-sm">
-        <img class="img-responsive width100" src="<%= page[0].banner_image_desktop %>" alt="Seo Banner">
+        <img class="img-responsive width100" src="<%= page[0].Banner_Image_Desktop %>" alt="Seo Banner">
     </div>
 </section>
 
 <section class="seo-lp-banner-mob">
     <div class="hidden-lg hidden-md">
-        <img class="img-responsive width100" src="<%= page[0].banner_image_mobile %>" alt="Seo Banner">
+        <img class="img-responsive width100" src="<%= page[0].Banner_Image_mobile %>" alt="Seo Banner">
     </div>
     <div class="text-center hidden-lg hidden-md">
         <div class="container-fluid">
@@ -60,11 +60,11 @@
     <div class="container">
         <div class="col-sm-6 col-md-6 col-lg-5 col-lg-offset-1 mt60 mob-margin-top-0">
             <h1 class="seo-about-head mt60 mob-margin-top-0">
-                <%= page[0].section2_Title %>
+                <%= page[0].Section2_Title %>
             </h1>
             <span class="text-left"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1498629666/seo-page/seo-arrow3.png" alt="arrow"> </span>
             <p class="text-justify mt20">
-                <%= page[0].section2_content %>
+                <%= page[0].Section2_Content %>
             </p>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-4 col-lg-offset-1 mt60 mb30 mob-margin-top-0">
@@ -198,7 +198,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <h1 class="text-center"><%= page[0].section5_heading %></h1>
+                <h1 class="text-center"><%= page[0].Section5_Heading %></h1>
                 <span><img src="https://res.cloudinary.com/mygubbi/image/upload/v1498629666/seo-page/seo-arrow3.png" alt="arrow"> </span>
             </div>
         </div>
@@ -212,7 +212,7 @@
                     <div class="col-sm-6 col-md-6">
                         <div class="row">
                             <div class="col-sm-12 col-md-7 col-md-offset-4 mt30 text-justify">
-                                <%= page[0].section5_content1 %>
+                                <%= page[0].Section5_Content1 %>
                             </div>
                         </div>
                     </div>
@@ -222,12 +222,12 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-md-6 pn">
-                        <img src="<%= page[0].section5_image1_mobile %>" alt="storage solutions" class="img-responsive">
+                        <img src="<%= page[0].section5_image2_mobile %>" alt="storage solutions" class="img-responsive">
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="row">
                             <div class="col-sm-12 col-md-7 col-md-offset-1 mt30 text-justify">
-                                <%= page[0].section5_content2 %>
+                                <%= page[0].Section5_Content2 %>
                             </div>
                         </div>
                     </div>
@@ -243,7 +243,7 @@
                         <div class="row">
                             <div class="col-sm-7 col-sm-offset-4">
                                 <p class="text-justify">
-                                    <%= page[0].section5_content1 %>
+                                    <%= page[0].Section5_Content1 %>
                                 </p>
                             </div>
                         </div>
@@ -258,7 +258,7 @@
                         <div class="row">
                             <div class="col-sm-7 col-sm-offset-1">
                                 <p class="text-justify">
-                                    <%= page[0].section5_content2 %>
+                                    <%= page[0].Section5_Content2 %>
                                 </p>
                             </div>
                         </div>
@@ -278,7 +278,7 @@
             <div class="col-sm-10 col-sm-offset-1 col-md-12">
                 <div class="row">
                     <div class="col-sm-9 col-md-9">
-                        <h1 class="mob-text-center"> Interested in <%= page[0].section7_heading %>? </h1>
+                        <h1 class="mob-text-center"> Interested in <%= page[0].Section7_Heading %>? </h1>
                     </div>
                     <div class="col-sm-3 col-md-3 mob-text-center">
                         <a class="btn btn-seo-book" href="#">
@@ -325,11 +325,11 @@
         var metakeyword = 'mygubbi';
         var metatitle = 'mygubbi';
         meta = lpfilter.get('seo');
-        $("meta[name='description']").attr("content", meta[0].meta_description);
+        $("meta[name='description']").attr("content", meta[0].Meta_Description);
 
-        $("meta[name='keywords']").attr("content", meta[0].meta_keywords);
+        $("meta[name='keywords']").attr("content", meta[0].Meta_Keywords);
 
-        document.title =  meta[0].meta_title;
+        document.title =  meta[0].Meta_Title;
 
 
       var owl = $("#owl-seo-type");

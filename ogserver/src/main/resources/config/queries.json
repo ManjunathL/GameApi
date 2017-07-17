@@ -400,7 +400,7 @@
     {
       "id": "page.select.page_url",
       "type": "select",
-      "query": "select * from landing_page where page_url = ?",
+      "query": "select * from seo_landing_page where page_url = ?",
       "params": ["page_url"]
     }
   ]
