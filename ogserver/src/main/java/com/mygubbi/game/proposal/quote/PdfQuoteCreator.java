@@ -23,7 +23,8 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
     public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader){
         this.quoteData = quoteData;
         this.proposalHeader = proposalHeader;
-        this.targetFile = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/") + "//quotation.pdf";
+        String targetFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal");
+        this.targetFile = targetFolder+"/"+quoteData.getProposalHeader().getId() + "/quotation.pdf";
 
     }
 

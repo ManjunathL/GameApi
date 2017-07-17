@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.output;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
+import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.quote.MergePdfsRequest;
 import com.mygubbi.game.proposal.quote.SowPdfRequest;
 
@@ -50,11 +51,17 @@ public class SOWPdfOutputService extends AbstractVerticle {
                 upload using google api and download pdf from there
                 convert pdf to json object
              */
-            String filePath =sowPdfReq.getXlsLocation()+sowPdfReq.getXlsFileName();
-            DriveFile file = this.serviceProvider.uploadFile("/home/shilpa/Downloads/","sow_checklist.xls");
+            String filePath = sowPdfReq.getXlsFileName();
+            String fileDownloaded = sowPdfReq.getFileNameToUpload();
+            String fileNameInDrive = sowPdfReq.getXlsFileNameInDrive();
+            String userId = sowPdfReq.getUserId();
+            LOG.info("file for Upload :: "+filePath+fileDownloaded);
+            LOG.info("Default file :: "+fileNameInDrive);
+            DriveFile file = this.serviceProvider.uploadFileForUser(filePath+fileDownloaded,userId,fileNameInDrive);
             System.out.println(file);
-            this.serviceProvider.downloadFile(file.getId(), "/home/shilpa/Downloads/sow_checklist.pdf", DriveServiceProvider.TYPE_PDF);
-            sendResponse(message, new JsonObject().put("sowPdfFile","/home/shilpa/Downloads/sow_checklist.pdf" ));
+            String pdfToDownload = ConfigHolder.getInstance().getStringValue("sow_downloaded_pdf_fomat","sow.pdf");
+            this.serviceProvider.downloadFile(file.getId(),filePath+pdfToDownload, DriveServiceProvider.TYPE_PDF);
+            sendResponse(message, new JsonObject().put("sowPdfFile",filePath+pdfToDownload ));
 
         }).completionHandler(res -> {
             LOG.info("setupSowPdfOutput started." + res.succeeded());

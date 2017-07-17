@@ -11,6 +11,7 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 //import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
 import com.mygubbi.game.proposal.model.PriceMaster;
+import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
 import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
@@ -33,6 +34,7 @@ import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -260,6 +262,7 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void downloadQuoteAndSow(RoutingContext routingContext){
+        LOG.info("Routing Context :: "+routingContext);
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION);
     }
 
@@ -309,21 +312,32 @@ public class ProposalHandler extends AbstractRouteHandler
         VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    this.createSOWPdfOutput(routingContext,response);
-//                    sendJsonResponse(routingContext, response.toString());
+                    String fileToUpload = ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");
+                    String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
+                    if(fileSowFileExists(proposalFolder+"/"+fileToUpload)){
+                        this.getProposalHeader(routingContext,response);
+                    }else{
+                        sendJsonResponse(routingContext, response.toString());
+                    }
+
+
                 });
     }
 
-    private void createSOWPdfOutput(RoutingContext routingContext,JsonObject quotePDfResponse){
-        LOG.debug("Create SOW pdf output :" + routingContext.getBodyAsJson().toString());
-        JsonObject sowRequestJson = routingContext.getBodyAsJson();
-        // here sow service, chirag will write need to be called, to that pass argument -- proposalId and version no
-        //that service should return me output of jsonobject having  xlsFileName,xlsLocation
+    private boolean fileSowFileExists(String fileName){
 
-        JsonObject inputJson = new JsonObject();
-        inputJson.put("xlsFileName","sow_checklist.xls");
-        inputJson.put("xlsLocation","/home/shilpa/Downloads/");
-        Integer id = LocalCache.getInstance().store(new SowPdfRequest(sowRequestJson));
+        File f = new File(fileName);
+        if(f.exists() && !f.isDirectory()) {
+            LOG.info("FileName :: "+fileName +" Exists");
+           return true;
+        }
+        LOG.info("FileName :: "+fileName +" Not     Exists");
+        return false;
+    }
+    private void createSOWPdfOutput(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject inputJson){
+        LOG.debug("Create SOW pdf output :" + routingContext.getBodyAsJson().toString());
+
+        Integer id = LocalCache.getInstance().store(new SowPdfRequest(inputJson));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject sowResponse = (JsonObject) LocalCache.getInstance().remove(result.result().body());
@@ -331,13 +345,49 @@ public class ProposalHandler extends AbstractRouteHandler
                 });
     }
 
+    private void getProposalHeader(RoutingContext context,JsonObject quotePDfResponse){
+
+        Integer proposalId = context.getBodyAsJson().getInteger("proposalId");
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id",proposalId)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag)
+                    {
+                        sendError(context, "Error in getting  proposal header.");
+                        LOG.error("Error in getting  proposal header. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        JsonObject proposalHeader = resultData.rows.get(0);
+
+                        String fileToUpload = ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");
+                        String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
+
+                        JsonObject inputJson = new JsonObject();
+                        inputJson.put("xlsFileLocation",proposalFolder+ "/" + proposalId+"/");
+                        inputJson.put("fileNameToUpload",fileToUpload);
+                        inputJson.put("xlsFileNameInDrive",proposalHeader.getString("quoteNoNew")+"_"+fileToUpload);
+                        inputJson.put("userId",context.getBodyAsJson().getString("userId"));
+                        createSOWPdfOutput(context,quotePDfResponse,inputJson);
+                    }
+                });
+
+
+    }
     private void createMergedPdf(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject sowResponse){
         LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());
         Map<String,PdfNumber> inputPdfMap = new LinkedHashMap<>();
         inputPdfMap.put(quotePDfResponse.getString("quoteFile"), PdfPage.PORTRAIT);
-        inputPdfMap.put(quotePDfResponse.getString("sowPdfFile"),PdfPage.LANDSCAPE);
+        inputPdfMap.put(sowResponse.getString("sowPdfFile"),PdfPage.LANDSCAPE);
 
-        String outputFileName = "/home/shilpa/Downloads/merge_pdf/merged_file.pdf";
+        LOG.info("quotePDfResponse.getString(\"quoteFile\") :: "+quotePDfResponse.getString("quoteFile"));
+        LOG.info("inputPdfMap.put(sowResponse.getString(\"sowPdfFile\")::"+sowResponse.getString("sowPdfFile"));
+        LOG.info("MAP :: "+inputPdfMap);
+        String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" );
+        String merged_pdf = ConfigHolder.getInstance().getStringValue("merged_pdf","merged.pdf" );
+
+        String outputFileName = location_folder+"/"+merged_pdf;
         Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfMap, outputFileName));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {

@@ -7,7 +7,7 @@ public class GoogleDriveTest
 {
     public static void main(String[] args)
     {
-        new GoogleDriveTest().testUploadAndDownload();
+        new GoogleDriveTest().testUploadXLSAndDownloadPDF();
     }
 
     private void listFiles()
@@ -31,7 +31,7 @@ public class GoogleDriveTest
 
     private void testUploadXLSAndDownloadPDF()
     {
-        DriveFile file = this.serviceProvider.uploadFile("/home/shilpa/Downloads/sow_checklist.xls","abc");
+        DriveFile file = this.serviceProvider.uploadFileForUser("/home/shilpa/Downloads","chiragsharath@gmail.com","sow_checklist.xls");
         System.out.println(file);
         this.serviceProvider.downloadFile(file.getId(), "/home/shilpa/Downloads/sow_checklist.pdf", DriveServiceProvider.TYPE_PDF);
     }
