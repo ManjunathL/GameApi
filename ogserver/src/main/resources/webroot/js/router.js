@@ -10,7 +10,7 @@ define([
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'dashboard',
-
+            ':pageurl/online(/)':'seolp',
             'shoe-rack-online(/)': 'shoeRackLD',
             'crockery-unit-designs(/)': 'crockeryUnitLD',
             'tv-unit-cabinet(/)': 'tvUnitLD',
@@ -838,13 +838,27 @@ define([
         });
         router.on('route:newdetailspage', function(productId, seoId ) {
            setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
-           require(['../../js/views/product/new-details'], function(NewProductDetailsPage) {                            var options = {
+           require(['../../js/views/product/new-details'], function(NewProductDetailsPage) {
+                              var options = {
                    model: {
                        "id": productId
                    }
                };                            VM.create(VM.NEWPRODUCT_DETAILSPAGE, NewProductDetailsPage, options).render();
            });
        });
+       router.on('route:seolp', function(pageurl) {
+
+                setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
+                require(['views/seo_page/landing-page'], function(LandingPage) {
+
+                var options = {
+                model: {
+                   "spageurl": pageurl
+                }
+                };
+                VM.create(VM.LANDINGPAGE, LandingPage, options).render();
+                });
+                            });
         router.on('route:nripage', function(cityName) {
             document.title = 'Premium homes for premium living. Get end to end service for your dream home with us ';
             document.querySelector('meta[name="description"]')

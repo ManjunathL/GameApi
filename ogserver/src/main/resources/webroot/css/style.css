@@ -3867,6 +3867,17 @@ a.hideLink {
         border: 1px solid #ddd;
     }
 
+    @media (max-width: 768px){
+        .seo-mob-process .de_count {
+            min-height: 160px;
+        }
+        .seo-mob-process .whyus-fnt {
+            font-size: 12px;
+        }
+        .seo-book-now{
+            margin-top: 10px;
+        }
+    }
     @media (max-width: 420px){
         .seo-mob-process .de_count {
             min-height: 160px;
