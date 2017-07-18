@@ -57,7 +57,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             String userId = sowPdfReq.getUserId();
             LOG.info("file for Upload :: "+filePath+fileDownloaded);
             LOG.info("Default file :: "+fileNameInDrive);
-            DriveFile file = this.serviceProvider.uploadFileForUser(filePath+fileDownloaded,userId,fileNameInDrive);
+            DriveFile file = this.serviceProvider.uploadFileForUser(filePath+fileDownloaded,userId,fileNameInDrive,"shilpa.g@mygubbi.com","yes");
             System.out.println(file);
             String pdfToDownload = ConfigHolder.getInstance().getStringValue("sow_downloaded_pdf_fomat","sow.pdf");
             this.serviceProvider.downloadFile(file.getId(),filePath+pdfToDownload, DriveServiceProvider.TYPE_PDF);

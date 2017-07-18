@@ -61,28 +61,33 @@ public class SOWCreatorService extends AbstractVerticle {
         List<QueryData> queryDatas =new ArrayList<>();
 
         double version = quoteRequest.getDouble("version");
-        String db_query = null;
+        String db_query_product = null;
+        String db_query_addon = null;
         JsonObject jsonObject = new JsonObject().put("proposalId", quoteRequest.getInteger("proposalId"))
-                .put("userId",quoteRequest.getString("userId"));
+                .put("userId",quoteRequest.getString("userId")).put("readOnlyFlag",quoteRequest.getString("readOnlyFlag"));
 
         if (version==1.0 || version==2.0) {
             String versiontobeconsidered = String.valueOf(version);
             jsonObject.put("versiontobeconsidered" , versiontobeconsidered);
             jsonObject.put("sowversion" , version == 1.0 ? "1.0" : "2.0");
-            db_query = "proposal.product.specificversion";
+            db_query_product = "proposal.product.specificversion";
+            db_query_addon = "proposal.addon.specificversion";
         }
         else if (version<1.0)
         {
-            db_query = "proposal.product.sow.till1";
+            db_query_product = "proposal.product.sow.till1";
+            db_query_addon = "proposal.addon.sow.till1";
             jsonObject.put("sowversion" , "1.0");
         }
         else
         {
-            db_query = "proposal.product.sow.till2";
+            db_query_product = "proposal.product.sow.till2";
+            db_query_addon = "proposal.addon.sow.till2";
             jsonObject.put("sowversion" , "2.0");
         }
 
-        queryDatas.add(new QueryData(db_query,jsonObject));
+        queryDatas.add(new QueryData(db_query_product,jsonObject));
+        queryDatas.add(new QueryData(db_query_addon,jsonObject));
         queryDatas.add(new QueryData("proposal.sow.select.space.rooms",jsonObject));
 
 
@@ -98,8 +103,15 @@ public class SOWCreatorService extends AbstractVerticle {
                     }
                     else
                     {
-                        List<JsonObject> proposal_spaces = resultData.get(0).rows;
-                        List<JsonObject> proposal_sows = resultData.get(1).rows;
+                        List<JsonObject> proposal__product_spaces = resultData.get(0).rows;
+                        List<JsonObject> proposal__addon_spaces = resultData.get(1).rows;
+                        List<JsonObject> proposal_sows = resultData.get(2).rows;
+                        List<JsonObject> proposal_spaces = new ArrayList<JsonObject>();
+                        proposal_spaces.addAll(proposal__product_spaces);
+                        proposal_spaces.addAll(proposal__addon_spaces);
+                        LOG.debug("Products : " + proposal__product_spaces.toString());
+                        LOG.debug("Addons : " + proposal__addon_spaces.toString());
+                        LOG.debug("Proposal : " + proposal_spaces.toString());
                         syncSowWIthProposalData(jsonObject,message,proposal_spaces,proposal_sows);
                     }
 
@@ -108,9 +120,6 @@ public class SOWCreatorService extends AbstractVerticle {
 
     private void syncSowWIthProposalData(JsonObject quoteRequest, Message message, List<JsonObject> proposalSpaces, List<JsonObject> proposalSows)
     {
-        LOG.debug("SOW with proposal data");
-        LOG.debug("Proposal Spaces :" + proposalSpaces.size());
-        LOG.debug("SOW Spaces :" + proposalSows.size());
         List<QueryData> queryDataList =new ArrayList<>();
 
 
@@ -120,17 +129,14 @@ public class SOWCreatorService extends AbstractVerticle {
     }
 
     private void addSpacesToSow(JsonObject quoteRequest, List<JsonObject> proposalSpaces, List<JsonObject> proposalSows, List<QueryData> queryDataList) {
-        LOG.debug("aDD SPACES");
         for (JsonObject proposalSpace : proposalSpaces)
         {
-            LOG.debug("Json object in add spaces :" + proposalSpace.toString());
             String space = proposalSpace.getString("spaceType");
             String room = proposalSpace.getString("roomcode");
+            LOG.debug("Add to spaces to sow :" + space + " | room" + room);
 
             if (spaceNotExistinProposalSow(space,room,proposalSows))
             {
-                LOG.debug("Creating SOW for Space and Room :" + space + ":"+ room);
-
                 proposalSpace.put("proposalId",quoteRequest.getInteger("proposalId"));
                 proposalSpace.put("version",quoteRequest.getString("sowversion"));
                 QueryData queryData = new QueryData("proposal.sow.create",proposalSpace);
@@ -168,6 +174,7 @@ public class SOWCreatorService extends AbstractVerticle {
         {
             String sowSpace = proposalSpace.getString("spaceType");
             String sowroom = proposalSpace.getString("roomcode");
+            LOG.debug("Space Type : " + sowSpace + " | roomcode" + sowroom);
 
           if (space.equals(sowSpace) && room.equals(sowroom))
               return false;
@@ -221,7 +228,6 @@ public class SOWCreatorService extends AbstractVerticle {
                     }
                     else
                     {
-                        LOG.debug("GOt SOW and header ");
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.get(0).rows.get(0));
                         List<JsonObject> sow_jsons = resultData.get(1).rows;
                         List<ProposalSOW> proposalSOWs = new ArrayList<ProposalSOW>();
@@ -237,13 +243,11 @@ public class SOWCreatorService extends AbstractVerticle {
     }
 
     private void createSowAndUploadToDrive(JsonObject sowrequest,Message message, ProposalHeader proposalHeader, List<ProposalSOW> proposalSOWs) {
-        LOG.debug("Upload to drive");
+
         String outputFile = new SOWTemplateCreator(proposalHeader,proposalSOWs).create();
 
-        DriveFile driveFile = this.driveServiceProvider.uploadFileForUser(outputFile,sowrequest.getString("userId"), proposalHeader.getQuoteNumNew() + "_SOW");
-
+        DriveFile driveFile = this.driveServiceProvider.uploadFileForUser(outputFile,sowrequest.getString("userId"), proposalHeader.getQuoteNumNew() + "_SOW", proposalHeader.getSalesEmail(), sowrequest.getString("readOnlyFlag"));
         sendResponse(message, new JsonObject().put("driveWebViewLink",driveFile.getWebViewLink()).put("id",driveFile.getId()).put("outputFile",outputFile).put("version",sowrequest.getString("sowversion")));
-
     }
 
     private void sendResponse(Message message, JsonObject response)
@@ -251,6 +255,5 @@ public class SOWCreatorService extends AbstractVerticle {
         LOG.debug("Response :" + response.encodePrettily());
         message.reply(LocalCache.getInstance().store(response));
     }
-
 
 }

@@ -8,6 +8,7 @@ import com.mygubbi.si.excel.ExcelCellProcessor;
 import com.mygubbi.si.excel.ExcelSheetProcessor;
 import com.mygubbi.si.excel.ExcelStyles;
 import io.vertx.core.json.JsonObject;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -73,7 +74,12 @@ public class SowSheetCreator implements ExcelCellProcessor
     @Override
     public Object getValueForKey(String key)
     {
-        return null;
+        Object value = this.getValue(key);
+        if (value == null)
+        {
+            return null;
+        }
+        return value;
     }
 
     @Override
@@ -396,6 +402,25 @@ public class SowSheetCreator implements ExcelCellProcessor
         quoteSheet.addValidationData(validation);
 
         return cell;
+    }
+
+    public Object getValue(String key)
+    {
+        if (this.proposalHeader.containsKey(key)) return this.proposalHeader.getValue(key);
+        switch (key)
+        {
+            case "date":
+                return DateFormatUtils.format(new Date(), "dd-MMM-yyyy");
+            case "qno":
+                String vnum=this.proposalHeader.getQuoteNumNew();
+                return vnum;
+            case "clientno":
+                return this.proposalHeader.getQuoteNumNew();
+            case "clientdetails":
+                return this.proposalHeader.getName();
+            default:
+                return null;
+        }
     }
 
 

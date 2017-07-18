@@ -450,8 +450,8 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?)",
-      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks","profit","margin","sourcePrice","amountWOTax"]
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax, spaceType, roomcode) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?)",
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks","profit","margin","sourcePrice","amountWOTax", "spaceType", "room"]
     },
 
     {
@@ -466,8 +466,8 @@
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? , productSubtypeCode = ?, remarks =? where id = ?",
-      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","productSubtypeCode","remarks", "id"]
+      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? , productSubtypeCode = ?, remarks =?, spaceType = ?, roomcode = ? where id = ?",
+      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","productSubtypeCode","remarks", "spaceType", "room", "id"]
     },
 
     {
@@ -615,7 +615,15 @@
       "id": "proposal.product.sow.till1",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomCode from proposal_product where proposalId = ? and fromVersion like '0.%' and active = 'A' order by seq;",
+      "query": "select distinct spaceType,roomCode as roomcode from proposal_product where proposalId = ? and fromVersion like '0.%' and active = 'A' order by seq;",
+      "params": ["proposalId"],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal.addon.sow.till1",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select distinct spaceType,roomCode as roomcode from proposal_addon where proposalId = ? and fromVersion like '0.%'",
       "params": ["proposalId"],
       "jsonfields":[]
     },
@@ -624,7 +632,15 @@
       "id": "proposal.product.sow.till2",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomCode from proposal_product where proposalId = ? and fromVersion like '1.%' and active = 'A' order by seq;",
+      "query": "select distinct spaceType,roomCode as roomcode from proposal_product where proposalId = ? and fromVersion like '1.%' and active = 'A' order by seq;",
+      "params": ["proposalId"],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal.addon.sow.till2",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select distinct spaceType,roomCode as roomcode from proposal_addon where proposalId = ? and fromVersion like '1.%'",
       "params": ["proposalId"],
       "jsonfields":[]
     },
@@ -633,9 +649,17 @@
       "id": "proposal.product.select.sow.all",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomCode from proposal_product where proposalId = ? and fromVersion = ? and active = 'A' order by seq",
+      "query": "select distinct spaceType,roomCode as roomcode from proposal_product where proposalId = ? and fromVersion = ? and active = 'A' order by seq",
       "params": ["proposalId","fromVersion"],
       "jsonfields":["modules"]
+    },
+    {
+      "id": "proposal.addon.select.sow.all",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select distinct spaceType,roomCode from proposal_addon where proposalId = ? and fromVersion = ?",
+      "params": ["proposalId","fromVersion"],
+      "jsonfields":[]
     },
 
     {
@@ -661,6 +685,14 @@
       "type": "select",
       "table": "proposal_product",
       "query": "select distinct spaceType,roomcode from proposal_product where proposalId = ?  and fromVersion = ?",
+      "params": ["proposalId","versiontobeconsidered"],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal.addon.specificversion",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select distinct spaceType,roomcode from proposal_addon where proposalId = ?  and fromVersion = ?",
       "params": ["proposalId","versiontobeconsidered"],
       "jsonfields":[]
     },
@@ -821,6 +853,14 @@
       "table": "addon_master",
       "query": "select distinct categoryCode, rateReadOnly from addon_master",
       "params": []
+    },
+
+    {
+      "id": "addons.sapcetypes",
+      "type": "select",
+      "table": "code_master",
+      "query": "select distinct code from code_master where lookupType = ?",
+      "params": ["spaceType"]
     },
 
     {
@@ -1556,9 +1596,9 @@
     },
     {
       "id": "proposal.sow.version.copy",
-      "type": "select",
+      "type": "insert",
       "table": "proposal_sow",
-      "query": "insert into proposal_sow(proposalId,version,spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06) values( select proposalId,'2.0',spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S02,L2S03,L2S04,L2S05,L2S06 where proposalId = ?);",
+      "query": "insert into proposal_sow(proposalId,version,spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06) select proposalId,'2.0',spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06 from proposal_sow where proposalId = ?;",
       "params": ["proposalId"],
       "jsonfields":[]
     },
@@ -1586,14 +1626,14 @@
       "table": "proposal",
       "query": "select * from proposal where crmId = ? and status != 'Deleted';",
       "params": ["crmId"]
-    },
-    {
+    }
+   /* {
       "id": "proposal.select.sow.v2",
       "type": "select",
       "table": "proposal_sow",
       "query": "select * from proposal_sow where proposalId = ? and version = ?",
       "params": ["proposalId","version"]
-    }
+    }*/
 
   ]
 }
