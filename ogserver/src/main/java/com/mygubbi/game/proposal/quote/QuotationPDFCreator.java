@@ -73,7 +73,7 @@ public class QuotationPDFCreator
             document.add(img);
             Paragraph p;
 
-            LOG.info("City: " +proposalHeader.getProjectCity());
+            //LOG.info("City: " +proposalHeader.getProjectCity());
             if(proposalHeader.getProjectCity().equals("Chennai"))
             {
                 p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor", fsize);
@@ -173,7 +173,7 @@ public class QuotationPDFCreator
             }
             if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
             {
-                LOG.info("packge value " +proposalHeader.getPackageFlag());
+               // LOG.info("packge value " +proposalHeader.getPackageFlag());
                 return;
             }
             float[] columnWidths2 = {4,2};
@@ -267,7 +267,7 @@ public class QuotationPDFCreator
 
             if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
             {
-                LOG.info("packge value " +proposalHeader.getPackageFlag());
+               // LOG.info("packge value " +proposalHeader.getPackageFlag());
                 return;
             }
 
@@ -469,9 +469,9 @@ public class QuotationPDFCreator
         document.add(p);
 
 
-            LOG.info("Quote data" +quoteData);
-            LOG.info("discount amount" +quoteData.discountAmount);
-            LOG.info("is value" +(!(quoteData.discountAmount==0.0)));
+           // LOG.info("Quote data" +quoteData);
+            //LOG.info("discount amount" +quoteData.discountAmount);
+            //LOG.info("is value" +(!(quoteData.discountAmount==0.0)));
             if(!(quoteData.discountAmount==0.0))
             {
                 p = new Paragraph("Discount(C):" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
@@ -500,6 +500,14 @@ public class QuotationPDFCreator
         p = new Paragraph("      ");
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
+
+        p=new Paragraph("Please refer Appendix-1 for detailed Scope of Services",fsize1);
+        p.setAlignment(Element.ALIGN_LEFT);
+        document.add(p);
+
+            p = new Paragraph("      ");
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
 
             PdfPTable tab1=new PdfPTable(1);
         tab1.setWidthPercentage(100);
@@ -717,7 +725,7 @@ public class QuotationPDFCreator
                 this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle() + " - " +li.get(index).getDimension());
                 }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
-                LOG.info("finish material " +li.get(index).getFinishtype()  +"finish type" +fmaterial);
+                //LOG.info("finish material " +li.get(index).getFinishtype()  +"finish type" +fmaterial);
                 if(li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit")) {
                     this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial, 1.0, li.get(index).getAmount(), 0.0);
 
@@ -778,7 +786,7 @@ public class QuotationPDFCreator
 
         for(AssembledProductInQuote.Unit unit1: product.getUnits())
         {
-            LOG.info("unit module category" +unit1.toString());
+            //LOG.info("unit module category" +unit1.toString());
         }
 
         for (AssembledProductInQuote.Unit unit : product.getUnits())
@@ -812,7 +820,7 @@ public class QuotationPDFCreator
                             unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
                             unit.moduleCategory.contains("S - Storage Module Base Unit")) {
 
-                        LOG.info("Module count " +unit.moduleCount);
+                        //LOG.info("Module count " +unit.moduleCount);
                         KBmodulecount += unit.moduleCount;
                         String width = unit.getDimensions();
                         basewidth=  basewidth + " , " +width;
@@ -835,7 +843,7 @@ public class QuotationPDFCreator
                     KBfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     KBfinishtype = product.getProduct().getFinishType();
 
-                    LOG.info("title" +unit.moduleCategory + "amount" +unit.amount);
+                   // LOG.info("title" +unit.moduleCategory + "amount" +unit.amount);
                     KBamount += unit.amount;
 
                     if(cname.equals("Kitchen"))
@@ -933,7 +941,7 @@ public class QuotationPDFCreator
             }
             else if(cname.equals("Wardrobe"))
             {
-                LOG.info("wardrobe category" + unit.moduleCategory);
+               // LOG.info("wardrobe category" + unit.moduleCategory);
 
                     if(     unit.moduleCategory.contains("H - Panel") ||
                             unit.moduleCategory.contains("N - Base Units") ||
@@ -1289,7 +1297,7 @@ public class QuotationPDFCreator
         {
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
-                LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
+               // LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
                 this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title);
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
@@ -1399,20 +1407,20 @@ public class QuotationPDFCreator
 
         for (ProductAddon addon : addOns)
         {
-            LOG.info("category " +addon.getCategoryCode());
+            //LOG.info("category " +addon.getCategoryCode());
             if(("Custom Addon").equals (addon.getCategoryCode()))
                 this.createRowAndFillData(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             else if(("Appliances").equals(addon.getCategoryCode()))
             {
                 this.createProductTitleRow(tabname,String.valueOf(index),addon.getExtendedTitle());
                 this.createRowAndFillData(tabname, null,"Specification: " +addon.getTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-                LOG.info("addon remarks " +addon.getREMARKS());
+               // LOG.info("addon remarks " +addon.getREMARKS());
             }
             else
             {
                 this.createProductTitleRow(tabname,String.valueOf(index),addon.getExtendedTitle());
                 this.createRowAndFillData(tabname, null,"Specification: " +addon.getTitle()+ "\nLocation: " +addon.getREMARKS() , addon.getQuantity(), addon.getRate(), addon.getAmount());
-                LOG.info("addon remarks " +addon.getREMARKS());
+                //LOG.info("addon remarks " +addon.getREMARKS());
                 //this.createRowAndFillData(tabname, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
                 /*LOG.info("addon title " +addon.getTitle());
                 this.specificationRow(tabname, "", addon.getTitle());
