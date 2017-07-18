@@ -451,7 +451,7 @@
       "type": "insert",
       "table": "proposal_addon",
       "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax, spaceType, roomcode) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?)",
-      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks","profit","margin","sourcePrice","amountWOTax", "spaceType", "room"]
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks","profit","margin","sourcePrice","amountWOTax", "spaceType", "roomcode"]
     },
 
     {
@@ -467,7 +467,7 @@
       "type": "update",
       "table": "proposal_addon",
       "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? , productSubtypeCode = ?, remarks =?, spaceType = ?, roomcode = ? where id = ?",
-      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","productSubtypeCode","remarks", "spaceType", "room", "id"]
+      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","productSubtypeCode","remarks", "spaceType", "roomcode", "id"]
     },
 
     {
@@ -1551,8 +1551,6 @@
       ]
     },
 
-    //sow relted Queries
-
     {
       "id": "sow.master.select.all",
       "type": "select",
@@ -1600,15 +1598,6 @@
       "table": "proposal_sow",
       "query": "insert into proposal_sow(proposalId,version,spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06) select proposalId,'2.0',spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06 from proposal_sow where proposalId = ?;",
       "params": ["proposalId"],
-      "jsonfields":[]
-    },
-
-    {
-      "id": "sow.master.select.all",
-      "type": "select",
-      "table": "sow_master",
-      "query": "select * from sow_master",
-      "params": [],
       "jsonfields":[]
     },
 
