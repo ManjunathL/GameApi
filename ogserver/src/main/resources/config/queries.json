@@ -89,15 +89,27 @@
     {
       "id": "blog.select.all",
       "type": "select",
-      "query": "select id, blogId, tags, blog_categories, blogJson from blog",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'publish'",
+      "params": []
+    },
+    {
+      "id": "blog.select.all.draft",
+      "type": "select",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'draft' ",
       "params": []
     },
     {
       "id": "diy.select.all",
       "type": "select",
-      "query": "select id, diyId, tags, diy_categories, diyJson from diy",
+      "query": "select id, diyId, tags, diy_categories, diyJson from diy where status = 'publish'",
       "params": []
     },
+    {
+      "id": "diy.select.all.draft",
+      "type": "select",
+      "query": "select * from diy where status = 'draft'",
+      "params": []
+    }
     {
       "id": "seo.select.all",
       "type": "select",

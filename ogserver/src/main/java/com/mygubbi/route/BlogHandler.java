@@ -40,6 +40,10 @@ public class BlogHandler extends AbstractRouteHandler
                 this.fetchProductsAndSendb(context, "blog.select.all", null);
 
             }
+            else if (blogTags.equals("draft")){
+                this.fetchProductsAndSendb(context, "blog.select.all.draft", null);
+
+            }
             else {
 
                 JsonObject params = new JsonObject().put("tags", blogTags);

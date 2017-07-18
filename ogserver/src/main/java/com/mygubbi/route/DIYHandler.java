@@ -30,29 +30,53 @@ public class DIYHandler extends AbstractRouteHandler
     private void getAll(RoutingContext context) {
 
         String productId = context.request().getParam("");
+        String blogTags = context.request().getParam("tags");
+        LOG.info("=====blogTags");
+        LOG.info(blogTags);
+        if (blogTags.equals("draft")) {
 
-        Integer id = LocalCache.getInstance().store(new QueryData("diy.select.all", new JsonObject()));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    LOG.info("Executing query:" + "diy.select.all" );
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
-                    {
-                        sendError(context, "Did not find product for "  + ". Error:" + selectData.errorMessage);
-                    }
-                    else
-                    {
+            Integer id = LocalCache.getInstance().store(new QueryData("diy.select.all.draft", new JsonObject()));
+            VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                    (AsyncResult<Message<Integer>> selectResult) -> {
+                        LOG.info("Executing query:" + "diy.select.all.draft" );
+                        QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                        if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                        {
+                            sendError(context, "Did not find product for "  + ". Error:" + selectData.errorMessage);
+                        }
+                        else
+                        {
 
-                        sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
+                            sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
 
 /*
                         sendJsonResponse(context, selectData.getJsonDataRows("productJson").toString());
 */
 
 
-                    }
-                });
+                        }
+                    });
+        } else {
+            Integer id = LocalCache.getInstance().store(new QueryData("diy.select.all", new JsonObject()));
+            VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                    (AsyncResult<Message<Integer>> selectResult) -> {
+                        LOG.info("Executing query:" + "diy.select.all");
+                        QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                        if (selectData == null || selectData.rows == null || selectData.rows.isEmpty()) {
+                            sendError(context, "Did not find product for " + ". Error:" + selectData.errorMessage);
+                        } else {
 
+                            sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
+
+/*
+                        sendJsonResponse(context, selectData.getJsonDataRows("productJson").toString());
+*/
+
+
+                        }
+                    });
+
+        }
     }
 }
 
