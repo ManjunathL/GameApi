@@ -48,6 +48,7 @@ public class DriveServiceProvider
 
     public DriveFile uploadFile(String filePath, String filename)
     {
+        LOG.debug("File Path :" + filePath + "fileName :" + filename);
         this.serviceManager.getDrive();
         File fileMetadata = new File();
         fileMetadata.setName(filename);
@@ -139,19 +140,50 @@ public class DriveServiceProvider
         }
     }
 
-    public DriveFile uploadFileForUser(String filePath, String email, String fileName)
+    public DriveFile uploadFileForUser(String filePath, String email, String fileName, String salesEmail, String readOnlyFlag)
     {
-        LOG.debug("filePath :" + filePath + ":" + email + ":" +fileName);
+        LOG.debug("filePath :" + filePath + ":" + email + ":" +fileName + " : " + readOnlyFlag);
         DriveFile driveFile = this.uploadFile(filePath, fileName);
-        this.allowUserToEditFile(driveFile.getId(), email);
+        if (readOnlyFlag.equals("yes"))
+        {
+            this.allowUserToReadFile(driveFile.getId(), email);
+            this.allowUserToReadFile(driveFile.getId(), "shilpa.g@mygubbi.com");
+        }
+        else
+        {
+            this.allowUserToEditFile(driveFile.getId(), email);
+            this.allowUserToEditFile(driveFile.getId(), "shilpa.g@mygubbi.com");
+        }
+
+
         return driveFile;
     }
 
     public void allowUserToEditFile(String id, String email)
     {
+        LOG.debug("Allow user to edit file :" + email);
         Permission userPermission = new Permission()
                 .setType("user")
                 .setRole("writer")
+                .setEmailAddress(email);
+        try
+        {
+            this.serviceManager.getDrive().permissions().create(id, userPermission).setSendNotificationEmail(false)
+                    .setFields("id").execute();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException("Unable to make user " + email + " to edit file " + id,e);
+        }
+    }
+
+    public void allowUserToReadFile(String id, String email)
+    {
+        LOG.debug("Allow user to read file :" + email);
+
+        Permission userPermission = new Permission()
+                .setType("user")
+                .setRole("reader")
                 .setEmailAddress(email);
         try
         {
