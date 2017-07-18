@@ -89,13 +89,19 @@
     {
       "id": "blog.select.all",
       "type": "select",
-      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'publish'",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'publish' ",
       "params": []
     },
     {
       "id": "blog.select.all.draft",
       "type": "select",
       "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'draft' ",
+      "params": []
+    },
+    {
+      "id": "blog.select.all.publish",
+      "type": "select",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'publish' ",
       "params": []
     },
     {

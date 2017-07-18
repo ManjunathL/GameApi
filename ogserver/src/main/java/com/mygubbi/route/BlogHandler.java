@@ -80,7 +80,7 @@ public class BlogHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (selectData == null || selectData.rows == null)
                     {
-                        sendError(context, "Did not find products for " + paramsData.toString() + ". Error:" + selectData.errorMessage);
+                        sendError(context, "Did not find blogs for " + paramsData.toString() + ". Error:" + selectData.errorMessage);
                     }
                     else
                     {

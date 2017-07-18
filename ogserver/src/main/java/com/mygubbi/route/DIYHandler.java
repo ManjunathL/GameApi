@@ -56,6 +56,29 @@ public class DIYHandler extends AbstractRouteHandler
 
                         }
                     });
+        } else if (blogTags.equals("all")) {
+
+            Integer id = LocalCache.getInstance().store(new QueryData("diy.select.all", new JsonObject()));
+            VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                    (AsyncResult<Message<Integer>> selectResult) -> {
+                        LOG.info("Executing query:" + "diy.select.all.draft" );
+                        QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                        if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                        {
+                            sendError(context, "Did not find product for "  + ". Error:" + selectData.errorMessage);
+                        }
+                        else
+                        {
+
+                            sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
+
+/*
+                        sendJsonResponse(context, selectData.getJsonDataRows("productJson").toString());
+*/
+
+
+                        }
+                    });
         } else {
             Integer id = LocalCache.getInstance().store(new QueryData("diy.select.all", new JsonObject()));
             VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -65,6 +88,7 @@ public class DIYHandler extends AbstractRouteHandler
                         if (selectData == null || selectData.rows == null || selectData.rows.isEmpty()) {
                             sendError(context, "Did not find product for " + ". Error:" + selectData.errorMessage);
                         } else {
+                            LOG.info("Executing query:" + "diy.select.all" +selectData.getJsonDataRows("diyJson").toString());
 
                             sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
 
