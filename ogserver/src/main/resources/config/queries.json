@@ -109,7 +109,7 @@
       "type": "select",
       "query": "select * from diy where status = 'draft'",
       "params": []
-    }
+    },
     {
       "id": "seo.select.all",
       "type": "select",
