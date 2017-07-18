@@ -16,12 +16,12 @@
 
             <div>
                 <%
-                var blog_url = story.blog_heading;
+                var blog_url = story.blogId;
                 blog_url = blog_url.replace(/-/g,"_");
                 blog_url = blog_url.replace(/\s/g,"-");
 
                 %>
-                <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                <a href="/story-<%= blog_url %>">
                     <button class="btn btn-explore">MORE</button>
                 </a>
             </div>
@@ -43,12 +43,12 @@
             <p><div class="story-desc-overflow text-mg-gray"><%= story.blog_content %></div></p>
             <div>
                 <%
-                var blog_url = story.blog_heading;
+                var blog_url = story.blogId;
                 blog_url = blog_url.replace(/-/g,"_");
                 blog_url = blog_url.replace(/\s/g,"-");
 
                 %>
-                <a href="/story-<%= encodeURIComponent(blog_url) %>">
+                <a href="/story-<%= blog_url %>">
                     <button class="btn btn-explore"> MORE </button>
                 </a>
             </div>
