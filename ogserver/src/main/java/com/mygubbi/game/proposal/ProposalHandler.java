@@ -9,7 +9,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
+//import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
 import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
@@ -35,9 +35,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.sql.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -50,7 +48,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     public DriveServiceProvider serviceProvider;
     public SOWWriteToDatabase sowWriteToDatabase;
-    public BOQWriteToDatabase boqWriteToDatabase;
+//    public BOQWriteToDatabase boqWriteToDatabase;
 
     public ProposalHandler(Vertx vertx)
     {
@@ -58,6 +56,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.get("/list").handler(this::getProposals);
         this.post("/create").handler(this::createProposal);
+        this.post("/version/publish").handler(this::publishVersionAfterValidation);
         this.post("/version/createdraft").handler(this::createInitialDraftProposal);
         this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
         this.post("/version/createversion").handler(this::createProposalVersion);
@@ -129,6 +128,231 @@ public class ProposalHandler extends AbstractRouteHandler
                 });
     }
 
+    private void publishVersionAfterValidation(RoutingContext context){
+        JsonObject contextJson = context.getBodyAsJson();
+        LOG.info("publishVersionAfterValidation Routing context:: "+contextJson);
+
+        String verFromProposal = String.valueOf(contextJson.getDouble("version"));
+        String sowVersion = null ;
+        if(verFromProposal.contains("0.")){
+            sowVersion = "1.0";
+        }else if(verFromProposal.contains("1.")){
+            sowVersion = "2.0";
+        }else{
+            LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
+        }
+
+        JsonObject queryParams =  new JsonObject();
+        queryParams.put("proposalId", contextJson.getInteger("proposalId"));
+        queryParams.put("sowversion", sowVersion);
+        queryParams.put("version",verFromProposal);
+
+        LOG.info("Query Params :: "+queryParams);
+        List spaceService = new ArrayList();
+        Set proposalSpaceRoomset = new HashSet();
+        List proposalSpaceRoomList =  new ArrayList();
+        JsonObject response = new JsonObject();
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.proposalversion", queryParams));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag )
+                    {
+                        sendError(context, "Error in getting proposals.");
+                        LOG.error("Error in getting proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        if(resultData.rows.size() == 0) {
+                            LOG.info("SOW ROWS NOT THERE");
+                            response.put("status","Failure");
+                            response.put("comments", "No associated SOW");
+                            LOG.info("Response is :: "+response);
+                            sendJsonResponse(context, response.toString());
+                        }else{
+                            resultData.rows.forEach(row ->
+                                {
+                                    LOG.info("row :: "+row);
+                                    LOG.info("row :: "+row.getString("spaceType")+","+row.getString("roomcode"));
+                                        spaceService.add(row);
+                                        proposalSpaceRoomset.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+//                                        proposalSpaceRoomList.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+                                });
+                            spaceService.forEach(item->LOG.info(item));
+                            proposalSpaceRoomList.addAll(proposalSpaceRoomset);
+                            getListOfDistintSpaces(context,spaceService,proposalSpaceRoomList,queryParams);
+                        }
+                    }
+                });
+    }
+
+    private void getListOfDistintSpaces(RoutingContext routingContext,List spaceService,List proposalSpaceRoomList,JsonObject params) {
+        JsonObject queryParams =  new JsonObject();
+        Double proposalId = routingContext.getBodyAsJson().getDouble("proposalId");
+        Double version = routingContext.getBodyAsJson().getDouble("version");
+        queryParams.put("proposalIdForPro", proposalId);
+        queryParams.put("fromVerForProd", version);
+        queryParams.put("proposalIdForAddOn", proposalId);
+        queryParams.put("fromVerForAddOn", version);
+
+        JsonObject response = new JsonObject();
+        List distinctSpacesList = new ArrayList();
+
+        Integer id = LocalCache.getInstance().store(new QueryData("spaces.select.fromProductAndAddon", queryParams));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
+            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+            if (resultData.errorFlag )
+            {
+                sendError(routingContext, "Error in getting spaces.");
+                LOG.error("Error in getting spaces. " + resultData.errorMessage, resultData.error);
+            }
+            else
+            {
+                if(resultData.rows.size() == 0) {
+                    LOG.info("NO SPACES ADDED FOR PRODUCT/ADDON");
+                    response.put("status","Failure");
+                    response.put("comments", "No associated Spaces");
+                    LOG.info("Response is :: "+response);
+                    sendJsonResponse(routingContext, response.toString());
+                }else{
+                    resultData.rows.forEach(row ->{
+                                distinctSpacesList.add(row.getString("spaceType")+"_"+row.getString("roomCode"));
+                        });
+                    distinctSpacesList.forEach(item->LOG.info(item));
+                    LOG.info("proposalSpaceRoomList = ");
+                    proposalSpaceRoomList.forEach(item->LOG.info(item));
+                    LOG.info("distinctSpacesList = ");
+                    distinctSpacesList.forEach(item->LOG.info(item));
+                    List ls1 = compareLists(new ArrayList<>(proposalSpaceRoomList),new ArrayList<>(distinctSpacesList));
+                    List ls2 = compareLists(new ArrayList<>(distinctSpacesList),new ArrayList<>(proposalSpaceRoomList));
+
+                    if(ls1.size() > 0 ){
+                        StringBuilder val = new StringBuilder();
+                        ls1.forEach(item->val.append(item+","));
+                        response.put("status","Failure");
+                        response.put("comments","There are entries in SOW, but no addons for following :: "+val.toString());
+                        LOG.info("Response is :: "+response);
+                        sendJsonResponse(routingContext, response.toString());
+                    }else if(ls2.size() > 0 ){
+                        StringBuilder val = new StringBuilder();
+                        ls2.forEach(item->val.append(item+","));
+                        response.put("status","Failure");
+                        response.put("comments","There are entries in Adddons, but no SOW for following :: "+val.toString());
+                        LOG.info("Response is :: "+response);
+                        sendJsonResponse(routingContext, response.toString());
+                    }else{
+                       getListOfAddonCodesFromSowServiceMap(routingContext,spaceService,params);
+                    }
+
+
+
+                }
+            }
+        });
+
+    }
+    private void getListOfAddonCodesFromSowServiceMap(RoutingContext routingContext,List
+            <JsonObject>spaceServiceFromSow,JsonObject params) {
+    //iterate through the spaceServiceFromSow and get L1S01Code1 if L1S01 is yes
+        //get list of addons  from sow_service_map where L1S01Code = L1S01Code1
+        //get the list of addons product_addons where proposalId and versionId
+        //now check whether both addon lists are equal/how many are there in one over the other.
+
+        JsonObject response = new JsonObject();
+        List addOnsFromsowServiceMp = new ArrayList();
+        Integer id = LocalCache.getInstance().store(new QueryData("select.sowservicemap", params));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
+            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+            if (resultData.errorFlag) {
+                sendError(routingContext, "Error in getting addon codes.");
+                LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
+            } else {
+                if (resultData.rows.size() == 0) {
+                    LOG.info("NO ADDONS ARE THERE FOR SERVICE ");
+                    response.put("status","Failure");
+                    response.put("comments", "No addons are there for service ");
+                    sendJsonResponse(routingContext, response.toString());
+                } else {
+                    resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row.getString("addonCode")));
+                    getListOfAddOnCodesFromProductAddons(routingContext,spaceServiceFromSow,addOnsFromsowServiceMp);
+
+                }
+            }
+        });
+
+    }
+
+    private void getListOfAddOnCodesFromProductAddons(RoutingContext routingContext,List
+            <JsonObject>spaceServiceFromSow,List addOnsFromsowServiceMp) {
+        JsonObject queryParams =  new JsonObject();
+        queryParams.put("proposalId", routingContext.getBodyAsJson().getDouble("proposalId"));
+        queryParams.put("fromVersion", routingContext.getBodyAsJson().getDouble("version"));
+
+        JsonObject response = new JsonObject();
+        List addOnsFromProductAddons = new ArrayList();
+        Integer id = LocalCache.getInstance().store(new QueryData("select.proposalAddOns", queryParams));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
+            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+            if (resultData.errorFlag) {
+                sendError(routingContext, "Error in getting addon codes.");
+                LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
+            } else {
+                if (resultData.rows.size() == 0) {
+                    LOG.info("NO ADDONS ARE THERE FOR SERVICE" );
+                    response.put("status","Failure");
+                    response.put("comments", "No addons are there for service " );
+                    sendJsonResponse(routingContext, response.toString());
+                } else {
+                    resultData.rows.forEach(row->addOnsFromProductAddons.add(row.getString("code")));
+
+                    List ls1 = compareLists(new ArrayList<>(addOnsFromsowServiceMp),new ArrayList<>(addOnsFromProductAddons));
+                    List ls2 = compareLists(new ArrayList<>(addOnsFromProductAddons),new ArrayList<>(addOnsFromsowServiceMp));
+
+                    if(ls1.size() > 0 ){
+                        StringBuilder val = new StringBuilder();
+                        ls1.forEach(item->val.append(item+","));
+                        response.put("status","Failure");
+                        response.put("comments","There are entries in SOW, but no addons added for following :: "+val.toString());
+                        LOG.info("Response is :: "+response);
+                        sendJsonResponse(routingContext, response.toString());
+                    }else if(ls2.size() > 0 ){
+                        StringBuilder val = new StringBuilder();
+                        ls2.forEach(item->val.append(item+","));
+                        response.put("status","Failure");
+                        response.put("comments","There are entries in Adddons, but no SOW for following :: "+val.toString());
+                        LOG.info("Response is :: "+response);
+                        sendJsonResponse(routingContext, response.toString());
+                    }else{
+                       publishTheVersion(routingContext);
+                    }
+                }
+            }
+        });
+    }
+    private void publishTheVersion(RoutingContext routingContext) {
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.publish",
+                new JsonObject().put("id", routingContext.getBodyAsJson().getDouble("proposalId"))));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id, (AsyncResult<Message<Integer>> selectResult) -> {
+            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+            if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0) {
+                sendError(routingContext, "Error in publishing proposal");
+                LOG.error("Error in publishing proposal " + resultData.errorMessage, resultData.error);
+            } else {
+                LOG.info("Response is :: SUCCESS");
+                JsonObject response = new JsonObject();
+                response.put("status","Success");
+                response.put("comments","Successfully Published Proposal");
+                sendJsonResponse(routingContext,response.toString());
+            }
+        });
+    }
+
+
+    public  static List compareLists(List<String> sourceList, List<String> destinationList){
+
+        sourceList.removeAll( destinationList );
+        return sourceList;
+    }
     private void createPostSalesInitial(RoutingContext routingContext) {
         JsonObject versionData = routingContext.getBodyAsJson();
         LOG.debug("routing context :" + versionData.encodePrettily());
@@ -313,7 +537,7 @@ public class ProposalHandler extends AbstractRouteHandler
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     String fileToUpload = ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");
                     String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
-                    if(fileSowFileExists(proposalFolder+"/"+fileToUpload)){
+                    if(fileSowFileExists(proposalFolder+"/"+quoteRequestJson.getInteger("proposalId")+"/"+fileToUpload)){
                         this.getProposalHeader(routingContext,response);
                     }else{
                         sendJsonResponse(routingContext, response.toString());
@@ -402,6 +626,7 @@ public class ProposalHandler extends AbstractRouteHandler
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         LOG.debug("RequestJson :" + routingContext.getBodyAsJson());
         Integer id = LocalCache.getInstance().store(quoteRequestJson);
+        LOG.info("Integer id = "+id);
         VertxInstance.get().eventBus().send(SOWCreatorService.CREATE_SOW_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
@@ -428,7 +653,8 @@ public class ProposalHandler extends AbstractRouteHandler
         String file_id = jsonObject.getString("id");
         int proposalId = jsonObject.getInteger("proposalId");
         String version = jsonObject.getString("version");
-        String path = "D:/Mygubbi GAME/sow_downloaded.xlsx";
+        String path = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal")+
+                "/"+proposalId+"/"+ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");//"D:/Mygubbi GAME/sow_downloaded.xlsx";
         this.serviceProvider = new DriveServiceProvider();
         this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
         this.sowWriteToDatabase = new SOWWriteToDatabase();
@@ -456,7 +682,7 @@ public class ProposalHandler extends AbstractRouteHandler
         String path = "D:/Mygubbi GAME/boq_downloaded.xlsx";
         this.serviceProvider = new DriveServiceProvider();
         this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
-        this.boqWriteToDatabase = new BOQWriteToDatabase();
+//        this.boqWriteToDatabase = new BOQWriteToDatabase();
         //this.boqWriteToDatabase.writeToDB(path,proposalId);
         sendJsonResponse(routingContext,jsonObject.toString());
     }

@@ -42,14 +42,6 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/version/publish",
-      "source": "db",
-      "query":"version.publish",
-      "params":["version","proposalId"],
-      "resultfields":[],
-      "default": "[]"
-    },
-    {
       "uri": "/gapi/proposal/version/confirm",
       "source": "db",
       "query":"version.confirm",

@@ -61,6 +61,8 @@ public class SowSheetCreator implements ExcelCellProcessor
         this.quoteSheet = quoteSheet;
         this.styles = styles;
         this.proposal_sows = proposal_sows;
+        LOG.info("SOWS In SowSheetCreator :: "+this.proposal_sows.toArray().toString());
+        this.proposal_sows.forEach(item->LOG.info(item));
         this.proposalHeader = proposalHeader;
     }
 

@@ -1569,6 +1569,15 @@
       "jsonfields":[]
     },
     {
+      "id": "spaces.select.fromProductAndAddon",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select distinct spaceType,roomCode from proposal_product where proposalId = ? and fromVersion = ? union select distinct spaceType,roomcode from proposal_addon where proposalId = ? and fromVersion = ?",
+      "params": ["proposalIdForPro","fromVerForProd","proposalIdForAddOn","fromVerForAddOn"],
+      "jsonfields":[]
+    },
+
+    {
       "id": "proposal.sow.create",
       "type": "insert",
       "table": "proposal_sow",
@@ -1598,6 +1607,32 @@
       "table": "proposal_sow",
       "query": "insert into proposal_sow(proposalId,version,spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06) select proposalId,'2.0',spaceType,roomcode,addonCode,L1S01Code,L1S01,L2S01,L2S02,L2S03,L2S04,L2S05,L2S06 from proposal_sow where proposalId = ?;",
       "params": ["proposalId"],
+      "jsonfields":[]
+    },
+
+    {
+      "id": "select.sowservicemap",
+      "type": "select",
+      "table": "sow_service_map",
+      "query": "select addonCode from sow_service_map where L1S01Code in (select  L1S01Code  from proposal_sow where proposalId = ? and version = ? and L1S01 = 'Yes');",
+      "params": ["proposalId","sowversion"],
+      "jsonfields":[]
+    },
+
+    {
+      "id": "select.proposalAddOns",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select code from proposal_addon where proposalId = ? and fromVersion = ?",
+      "params": ["proposalId","fromVersion"],
+      "jsonfields":[]
+    },
+    {
+      "id": "sow.master.select.all",
+      "type": "select",
+      "table": "sow_master",
+      "query": "select * from sow_master",
+      "params": [],
       "jsonfields":[]
     },
 

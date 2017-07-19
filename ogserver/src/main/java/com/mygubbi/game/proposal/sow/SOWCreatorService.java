@@ -46,6 +46,7 @@ public class SOWCreatorService extends AbstractVerticle {
     {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(CREATE_SOW_OUTPUT, (Message<Integer> message) -> {
+            LOG.info("INSIDE setupSowCreator");
             JsonObject quoteRequest = (JsonObject) LocalCache.getInstance().remove(message.body());
             this.getDistinctSpaceAndRooms(quoteRequest, message);
         }).completionHandler(res -> {
@@ -57,7 +58,7 @@ public class SOWCreatorService extends AbstractVerticle {
     private void getDistinctSpaceAndRooms(JsonObject quoteRequest, Message message)
     {
         LOG.debug("distinct space ");
-
+        LOG.info("INSIDE getDistinctSpaceAndRooms");
         List<QueryData> queryDatas =new ArrayList<>();
 
         double version = quoteRequest.getDouble("version");
@@ -137,6 +138,7 @@ public class SOWCreatorService extends AbstractVerticle {
 
             if (spaceNotExistinProposalSow(space,room,proposalSows))
             {
+                LOG.info("spaceNotExistinProposalSow Returning TRUE");
                 proposalSpace.put("proposalId",quoteRequest.getInteger("proposalId"));
                 proposalSpace.put("version",quoteRequest.getString("sowversion"));
                 QueryData queryData = new QueryData("proposal.sow.create",proposalSpace);
@@ -170,11 +172,13 @@ public class SOWCreatorService extends AbstractVerticle {
     }
 
     private boolean spaceNotExistinProposalSow(String space, String room, List<JsonObject> proposalSows) {
+        LOG.debug("Inside spaceNotExistinProposalSow");
+        LOG.debug("Space :: "+space+", Room::"+room);
         for (JsonObject proposalSpace : proposalSows)
         {
             String sowSpace = proposalSpace.getString("spaceType");
             String sowroom = proposalSpace.getString("roomcode");
-            LOG.debug("Space Type : " + sowSpace + " | roomcode" + sowroom);
+            LOG.debug("Space Type : " + sowSpace + " | roomcode :" + sowroom);
 
           if (space.equals(sowSpace) && room.equals(sowroom))
               return false;
@@ -243,6 +247,9 @@ public class SOWCreatorService extends AbstractVerticle {
     }
 
     private void createSowAndUploadToDrive(JsonObject sowrequest,Message message, ProposalHeader proposalHeader, List<ProposalSOW> proposalSOWs) {
+
+        LOG.info("proposalSOWs are ::"+proposalSOWs.listIterator().toString());
+        proposalSOWs.forEach(item->LOG.info(item));
 
         String outputFile = new SOWTemplateCreator(proposalHeader,proposalSOWs).create();
 
