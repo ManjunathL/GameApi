@@ -11,6 +11,7 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 //import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
 import com.mygubbi.game.proposal.model.PriceMaster;
+import com.mygubbi.game.proposal.model.SOWMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
 import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
@@ -266,7 +267,9 @@ public class ProposalHandler extends AbstractRouteHandler
                     response.put("comments", "No addons are there for service - ");
                     sendJsonResponse(routingContext, response.toString());
                 } else {
-                    resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row.getString("addonCode")));
+//                    resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row.getString("addonCode")));
+                    resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row));
+                    //get the service code also and add to diff list
                     getListOfAddOnCodesFromProductAddons(routingContext,spaceServiceFromSow,addOnsFromsowServiceMp);
 
                 }
@@ -292,42 +295,101 @@ public class ProposalHandler extends AbstractRouteHandler
             } else {
                 if (resultData.rows.size() == 0) {
                     LOG.info("NO ADDONS ARE THERE FOR SERVICE IN PRODUCTS" );
+                    // get services which don't have
                     response.put("status","Failure");
                     response.put("comments", "No addons are there for service " );
                     sendJsonResponse(routingContext, response.toString());
                 } else {
-                    resultData.rows.forEach(row->addOnsFromProductAddons.add(row.getString("code")));
+//                    resultData.rows.forEach(row->addOnsFromProductAddons.add(row.getString("code")));
 
+                    resultData.rows.forEach(row->addOnsFromProductAddons.add(row));
                     LOG.info("addOnsFromsowServiceMp ::");
                     addOnsFromsowServiceMp.forEach(item->LOG.info(item));
 
                     LOG.info("addOnsFromProductAddons ::");
                     addOnsFromProductAddons.forEach(item->LOG.info(item));
 
+                    Set serviceSetFromSowNotInProdAddOn  = new HashSet();
                     boolean found = false;
 
-                    for(Object object1 : addOnsFromProductAddons){
-                        for(Object object2: addOnsFromsowServiceMp){
+                    for(Object object1 : addOnsFromsowServiceMp){
+                        String key = ((JsonObject)object1).getString("addonCode");
+                        for(Object object2: addOnsFromProductAddons){
                             LOG.info("Obj1 = "+object1+", Obj2 = "+object2);
-                            if(((String)object1).equalsIgnoreCase((String)object2)){
+                            String addOnFromSow = ((JsonObject)object2).getString("code");
+
+                            if(addOnFromSow.equalsIgnoreCase(key)){
                                 found = true;
                                 break;
+                            }else{
+                                serviceSetFromSowNotInProdAddOn.add(object1);
+                            }
+                        }
+                    }
+
+
+                    Set prodSetFromProdAddOnNotInSow  = new HashSet();
+                    boolean prodFound = false;
+
+                    for(Object object1 : addOnsFromProductAddons){
+                        String key = ((JsonObject)object1).getString("code");
+                        for(Object object2: addOnsFromsowServiceMp){
+                            LOG.info("Obj1 = "+object1+", Obj2 = "+object2);
+                            String addOnFromProd = ((JsonObject)object2).getString("addonCode");
+
+                            if(addOnFromProd.equalsIgnoreCase(key)){
+                                prodFound = true;
+                                break;
+                            }else{
+                                prodSetFromProdAddOnNotInSow.add(object1);
                             }
                         }
                     }
 
                     if(!found){
-                        LOG.info("No Addons are there for the SOW added" );
+                        LOG.info("No Addons are there for the added SOW" );
+//                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
                         response.put("status","Failure");
-                        response.put("comments", "No Addons are there for the SOW added." );
+                        response.put("comments", "No Addons are there for the added SOW - "
+                                +getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
                         sendJsonResponse(routingContext, response.toString());
-                    }else{
+                    }else if(!prodFound){
+                        LOG.info("No SOWs are there for the Addons added" );
+//                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+                        response.put("status","Failure");
+                        response.put("comments", "No SOWs are there for the added Addon - "
+                                +getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+                        sendJsonResponse(routingContext, response.toString());
+                    }
+                    else{
                         publishTheProposal(routingContext);
                     }
 
                 }
             }
         });
+    }
+    private String getL1SO1Value(List<JsonObject> paramObj){
+        StringBuilder sbServiceName = new StringBuilder();
+        paramObj.forEach(item->{
+            String spaceType = item.getString("spaceType");
+            Collection<SOWMaster> sowMasterList = ModuleDataService.getInstance().getSOWMaster(spaceType);
+            Object[] masterSOWs = (Object[])sowMasterList.toArray();
+
+            String strL1S01Code = item.getString("L1S01Code");
+            int noOfRows = masterSOWs.length;
+            for(int i =0 ;i< noOfRows;i++){
+                SOWMaster sow = (SOWMaster) masterSOWs[i];
+
+                if(sow.getL1S01Code().equalsIgnoreCase(strL1S01Code)){
+                    sbServiceName.append(sow.getL1S01());
+                    if((i+1) > noOfRows){
+                        sbServiceName.append(", ");
+                    }
+                }
+            }
+        });
+      return sbServiceName.toString();
     }
     private void publishTheProposal(RoutingContext routingContext) {
         JsonObject queryParams = new JsonObject();
