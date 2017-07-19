@@ -1650,6 +1650,21 @@
       "table": "proposal",
       "query": "select * from proposal where crmId = ? and status != 'Deleted';",
       "params": ["crmId"]
+    },
+
+    {
+      "id": "proposal.header.updatesowremarksv1",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set sowremarksv1 = ? where id  = ?",
+      "params": ["newsowremarks","id"]
+    },
+    {
+      "id": "proposal.header.updatesowremarksv2",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set sowremarksv2 = ? where id  = ?",
+      "params": ["newsowremarks","id"]
     }
    /* {
       "id": "proposal.select.sow.v2",

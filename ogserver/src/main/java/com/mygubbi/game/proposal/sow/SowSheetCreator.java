@@ -54,6 +54,7 @@ public class SowSheetCreator implements ExcelCellProcessor
     private ExcelSheetProcessor sheetProcessor;
     List<ProposalSOW> proposal_sows ;
     private ProposalHeader proposalHeader;
+    private String version;
 
 
     public SowSheetCreator(XSSFSheet quoteSheet, ExcelStyles styles, ProposalHeader proposalHeader, List<ProposalSOW> proposal_sows)
@@ -64,6 +65,7 @@ public class SowSheetCreator implements ExcelCellProcessor
         LOG.info("SOWS In SowSheetCreator :: "+this.proposal_sows.toArray().toString());
         this.proposal_sows.forEach(item->LOG.info(item));
         this.proposalHeader = proposalHeader;
+        this.version = proposal_sows.get(0).getString("version");
     }
 
     public void prepare()
@@ -107,6 +109,8 @@ public class SowSheetCreator implements ExcelCellProcessor
             LOG.debug("Proposal sow is empty");
             return currentRow;
         }
+
+
         List<SpaceRoom> distinctSpaceRooms = getDistinctSpaceRooms();
         for (SpaceRoom spaceRoom : distinctSpaceRooms)
         {
@@ -168,11 +172,13 @@ public class SowSheetCreator implements ExcelCellProcessor
         ProposalSOW proposalSow = null;
         for (ProposalSOW proposal_sow : proposal_sows)
         {
-            if (proposal_sow.getSpaceType().equals(spaceType) && proposal_sow.getROOM().equals(room))
+            if (proposal_sow.getSpaceType().equals(spaceType) && proposal_sow.getROOM().equals(room) && proposal_sow.getL1S01Code().equals(L1S01COde))
             {
                 proposalSow = proposal_sow;
             }
         }
+
+        LOG.debug("Proposal SOw Heading row :" + proposalSow);
 
         String L1S01DropDownValue = "";
         String L2S01DropDownValue = "";
@@ -263,11 +269,13 @@ public class SowSheetCreator implements ExcelCellProcessor
         ProposalSOW proposal_sow = null;
         for (ProposalSOW proposal_sow_1 : proposal_sows)
         {
-            if (proposal_sow_1.getSpaceType().equals(spaceType) && proposal_sow_1.getROOM().equals(room))
+            if (proposal_sow_1.getSpaceType().equals(spaceType) && proposal_sow_1.getROOM().equals(room) && proposal_sow_1.getL1S01Code().equals(L1S01Code))
             {
                 proposal_sow = proposal_sow_1;
             }
         }
+
+        LOG.debug("Proposal SOw Data row :" + proposal_sow);
 
         String L1S01DropDownValue = "";
         String L2S01DropDownValue = "";
@@ -419,7 +427,16 @@ public class SowSheetCreator implements ExcelCellProcessor
             case "clientno":
                 return this.proposalHeader.getQuoteNumNew();
             case "clientdetails":
-                return this.proposalHeader.getName();
+                return this.proposalHeader.getName() + " , " + this.proposalHeader.getCrmId();
+            case "remarks":
+                if (this.version.equals("1.0"))
+                {
+                    return this.proposalHeader.getSowRemarksV1();
+                }
+                else if (this.version.equals("2.0"))
+                {
+                    return this.proposalHeader.getSowRemarksV2();
+                }
             default:
                 return null;
         }

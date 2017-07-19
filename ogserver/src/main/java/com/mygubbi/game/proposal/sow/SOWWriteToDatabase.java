@@ -4,9 +4,13 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.model.Proposal;
+import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalSOW;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.RoutingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -31,6 +35,26 @@ public class SOWWriteToDatabase {
     public void writeToDB(String file, int proposalId, String version)
     {
 
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id",proposalId)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag)
+                    {
+                        LOG.error("Error in getting  proposal header. " + resultData.errorMessage, resultData.error);
+                    }
+                    else {
+                        JsonObject proposalHeader = resultData.rows.get(0);
+                        readFromExcelAndWriteToDB(file, proposalId, version, proposalHeader);
+
+                    }
+                });
+
+
+
+    }
+
+    private void readFromExcelAndWriteToDB(String file, int proposalId, String version, JsonObject proposalHeader) {
         try {
             FileInputStream newFile = new FileInputStream(new File(
                     file));
@@ -41,6 +65,25 @@ public class SOWWriteToDatabase {
             String room =  null;
             int noOfRows = sheet.getLastRowNum();
             LOG.debug("No of rows :" + noOfRows);
+
+            XSSFRow xssfRow_remarks = sheet.getRow(1);
+            XSSFCell xssfCell_remarks = xssfRow_remarks.getCell(7);
+            String remarks = xssfCell_remarks.getStringCellValue();
+            String remarks_raw = xssfCell_remarks.getRawValue();
+            LOG.debug("Remarks total :" + remarks);
+            LOG.debug("Remarks raw :" + remarks_raw);
+            if (version.equals("1.0"))
+            {
+                proposalHeader.put("newsowremarks",remarks);
+                updateProposalHeader(proposalHeader, version);
+
+            }
+            else
+            {
+                proposalHeader.put("newsowremarks",remarks);
+                updateProposalHeader(proposalHeader, version);
+            }
+
             for (int i = 3;i < noOfRows ; i++)
             {
                 XSSFRow xssfRow = sheet.getRow(i);
@@ -95,8 +138,6 @@ public class SOWWriteToDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void updateSOwRecord(ProposalSOW proposal_sow)
@@ -111,6 +152,30 @@ public class SOWWriteToDatabase {
                         return;
                     } else {
                         LOG.info("Inserted sow Record " + proposal_sow.toString());
+                    }
+                });
+    }
+
+    private void updateProposalHeader(JsonObject proposalHeaderObject, String sowVersion)
+    {
+        String query;
+        if (sowVersion.equals("1.0"))
+        {
+            query = "proposal.header.updatesowremarksv1";
+        }
+        else
+        {
+            query = "proposal.header.updatesowremarksv2";
+        }
+        Integer id = LocalCache.getInstance().store(new QueryData(query, proposalHeaderObject));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0) {
+                        LOG.error("Error in updating remarks in the proposal table " + resultData.errorMessage, resultData.error);
+                        return;
+                    } else {
+                        LOG.info("Updated remarks for proposal " + proposalHeaderObject.toString());
                     }
                 });
     }
