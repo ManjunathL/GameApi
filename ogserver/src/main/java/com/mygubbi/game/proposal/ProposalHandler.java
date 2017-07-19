@@ -56,6 +56,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.get("/list").handler(this::getProposals);
         this.post("/create").handler(this::createProposal);
+        this.post("/version/publishoverride").handler(this::publishTheProposal);
         this.post("/version/publish").handler(this::publishVersionAfterValidation);
         this.post("/version/createdraft").handler(this::createInitialDraftProposal);
         this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
@@ -243,9 +244,6 @@ public class ProposalHandler extends AbstractRouteHandler
                     }else{
                        getListOfAddonCodesFromSowServiceMap(routingContext,spaceService,params);
                     }
-
-
-
                 }
             }
         });
@@ -253,11 +251,6 @@ public class ProposalHandler extends AbstractRouteHandler
     }
     private void getListOfAddonCodesFromSowServiceMap(RoutingContext routingContext,List
             <JsonObject>spaceServiceFromSow,JsonObject params) {
-    //iterate through the spaceServiceFromSow and get L1S01Code1 if L1S01 is yes
-        //get list of addons  from sow_service_map where L1S01Code = L1S01Code1
-        //get the list of addons product_addons where proposalId and versionId
-        //now check whether both addon lists are equal/how many are there in one over the other.
-
         JsonObject response = new JsonObject();
         List addOnsFromsowServiceMp = new ArrayList();
         Integer id = LocalCache.getInstance().store(new QueryData("select.sowservicemap", params));
@@ -268,9 +261,9 @@ public class ProposalHandler extends AbstractRouteHandler
                 LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
             } else {
                 if (resultData.rows.size() == 0) {
-                    LOG.info("NO ADDONS ARE THERE FOR SERVICE ");
+                    LOG.info("NO ADDONS ARE SELECTED IN SOW SHEET");
                     response.put("status","Failure");
-                    response.put("comments", "No addons are there for service ");
+                    response.put("comments", "No addons are there for service - ");
                     sendJsonResponse(routingContext, response.toString());
                 } else {
                     resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row.getString("addonCode")));
@@ -278,14 +271,14 @@ public class ProposalHandler extends AbstractRouteHandler
 
                 }
             }
-        });
+            });
 
     }
 
     private void getListOfAddOnCodesFromProductAddons(RoutingContext routingContext,List
             <JsonObject>spaceServiceFromSow,List addOnsFromsowServiceMp) {
         JsonObject queryParams =  new JsonObject();
-        queryParams.put("proposalId", routingContext.getBodyAsJson().getDouble("proposalId"));
+        queryParams.put("proposalId", routingContext.getBodyAsJson().getInteger("proposalId"));
         queryParams.put("fromVersion", routingContext.getBodyAsJson().getDouble("version"));
 
         JsonObject response = new JsonObject();
@@ -298,50 +291,70 @@ public class ProposalHandler extends AbstractRouteHandler
                 LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
             } else {
                 if (resultData.rows.size() == 0) {
-                    LOG.info("NO ADDONS ARE THERE FOR SERVICE" );
+                    LOG.info("NO ADDONS ARE THERE FOR SERVICE IN PRODUCTS" );
                     response.put("status","Failure");
                     response.put("comments", "No addons are there for service " );
                     sendJsonResponse(routingContext, response.toString());
                 } else {
                     resultData.rows.forEach(row->addOnsFromProductAddons.add(row.getString("code")));
 
-                    List ls1 = compareLists(new ArrayList<>(addOnsFromsowServiceMp),new ArrayList<>(addOnsFromProductAddons));
-                    List ls2 = compareLists(new ArrayList<>(addOnsFromProductAddons),new ArrayList<>(addOnsFromsowServiceMp));
+                    LOG.info("addOnsFromsowServiceMp ::");
+                    addOnsFromsowServiceMp.forEach(item->LOG.info(item));
 
-                    if(ls1.size() > 0 ){
-                        StringBuilder val = new StringBuilder();
-                        ls1.forEach(item->val.append(item+","));
+                    LOG.info("addOnsFromProductAddons ::");
+                    addOnsFromProductAddons.forEach(item->LOG.info(item));
+
+                    boolean found = false;
+
+                    for(Object object1 : addOnsFromProductAddons){
+                        for(Object object2: addOnsFromsowServiceMp){
+                            LOG.info("Obj1 = "+object1+", Obj2 = "+object2);
+                            if(((String)object1).equalsIgnoreCase((String)object2)){
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(!found){
+                        LOG.info("No Addons are there for the SOW added" );
                         response.put("status","Failure");
-                        response.put("comments","There are entries in SOW, but no addons added for following :: "+val.toString());
-                        LOG.info("Response is :: "+response);
-                        sendJsonResponse(routingContext, response.toString());
-                    }else if(ls2.size() > 0 ){
-                        StringBuilder val = new StringBuilder();
-                        ls2.forEach(item->val.append(item+","));
-                        response.put("status","Failure");
-                        response.put("comments","There are entries in Adddons, but no SOW for following :: "+val.toString());
-                        LOG.info("Response is :: "+response);
+                        response.put("comments", "No Addons are there for the SOW added." );
                         sendJsonResponse(routingContext, response.toString());
                     }else{
-                       publishTheVersion(routingContext);
+                        publishTheProposal(routingContext);
                     }
+
                 }
             }
         });
     }
-    private void publishTheVersion(RoutingContext routingContext) {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.publish",
-                new JsonObject().put("id", routingContext.getBodyAsJson().getDouble("proposalId"))));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id, (AsyncResult<Message<Integer>> selectResult) -> {
-            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0) {
+    private void publishTheProposal(RoutingContext routingContext) {
+        JsonObject queryParams = new JsonObject();
+        queryParams.put("id",routingContext.getBodyAsJson().getInteger("proposalId"));
+        queryParams.put("version",routingContext.getBodyAsJson().getDouble("version"));
+        queryParams.put("proposalId",routingContext.getBodyAsJson().getInteger("proposalId"));
+
+        List<QueryData> queryDatas = new ArrayList<>();
+        queryDatas.add(new QueryData("version.publish",queryParams));
+        queryDatas.add(new QueryData("proposal.publish",queryParams));
+
+        Integer id = LocalCache.getInstance().store(queryDatas);
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id, (AsyncResult<Message<Integer>> selectResult) -> {
+            List<QueryData> resultDatas = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+            if (resultDatas.get(0).errorFlag || resultDatas.get(0).updateResult.getUpdated() == 0) {
+                sendError(routingContext, "Error in publishing version");
+                LOG.error("Error in publishing version "+resultDatas.get(0).errorMessage, resultDatas.get(0).error );
+            }else if(resultDatas.get(1).errorFlag || resultDatas.get(1).updateResult.getUpdated() == 0){
                 sendError(routingContext, "Error in publishing proposal");
-                LOG.error("Error in publishing proposal " + resultData.errorMessage, resultData.error);
-            } else {
+                LOG.error("Error in publishing proposal "+resultDatas.get(1).errorMessage, resultDatas.get(1).error );
+            }
+
+            else {
                 LOG.info("Response is :: SUCCESS");
                 JsonObject response = new JsonObject();
-                response.put("status","Success");
-                response.put("comments","Successfully Published Proposal");
+                response.put("status","success");
+                response.put("comments","Successfully Published Version/Proposal");
                 sendJsonResponse(routingContext,response.toString());
             }
         });

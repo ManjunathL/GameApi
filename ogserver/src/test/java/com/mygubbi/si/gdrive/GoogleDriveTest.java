@@ -31,9 +31,9 @@ public class GoogleDriveTest
 
     private void testUploadXLSAndDownloadPDF()
     {
-        DriveFile file = this.serviceProvider.uploadFileForUser("/home/shilpa/Downloads","chiragsharath@gmail.com","sow_checklist.xls");
-        System.out.println(file);
-        this.serviceProvider.downloadFile(file.getId(), "/home/shilpa/Downloads/sow_checklist.pdf", DriveServiceProvider.TYPE_PDF);
+//        DriveFile file = this.serviceProvider.uploadFileForUser("/home/shilpa/Downloads","chiragsharath@gmail.com","sow_checklist.xls");
+//        System.out.println(file);
+//        this.serviceProvider.downloadFile(file.getId(), "/home/shilpa/Downloads/sow_checklist.pdf", DriveServiceProvider.TYPE_PDF);
     }
     private void testUpload()
     {
@@ -45,9 +45,9 @@ public class GoogleDriveTest
 
     private void testUploadForUser()
     {
-        DriveFile file = this.serviceProvider.uploadFileForUser("D:/Mygubbi GAME/TestCopy12.xlsx","chiragsharath@gmail.com","test");
-        System.out.println(file);
-        System.out.println("Permission granted to edit file - " + file.getName());
+//        DriveFile file = this.serviceProvider.uploadFileForUser("D:/Mygubbi GAME/TestCopy12.xlsx","chiragsharath@gmail.com","test");
+//        System.out.println(file);
+//        System.out.println("Permission granted to edit file - " + file.getName());
 
     }
 }
