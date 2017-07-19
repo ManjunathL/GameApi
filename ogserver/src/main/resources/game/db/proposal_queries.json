@@ -1614,7 +1614,7 @@
       "id": "select.sowservicemap",
       "type": "select",
       "table": "sow_service_map",
-      "query": "select  psow.spaceType,psow.L1S01Code,psow.addonCode  from (select spaceType,L1S01Code,addonCode from proposal_sow where proposalId = ?  and version = ? and L1S01 = 'Yes')psow inner join sow_service_map mp on mp.L1S01Code = psow.L1S01Code",
+      "query": "select  psow.spaceType,psow.L1S01Code,mp.addonCode  from (select spaceType,L1S01Code,addonCode from proposal_sow where proposalId = ?  and version = ? and L1S01 = 'Yes')psow inner join sow_service_map mp on mp.L1S01Code = psow.L1S01Code",
       "params": ["proposalId","sowversion"],
       "jsonfields":[]
     },
@@ -1623,7 +1623,7 @@
       "id": "select.proposalAddOns",
       "type": "select",
       "table": "proposal_addon",
-      "query": "select addon.spaceType, mp.L1S01Code as L1S01Code ,addon.code as code from (select * from proposal_addon   where proposalId = ? and fromVersion = ?)addon left outer join sow_service_map mp on mp.addOnCode = addon.code",
+      "query": "select addon.spaceType, mp.L1S01Code as L1S01Code ,addon.code as code from (select * from proposal_addon   where proposalId = ?  and fromVersion = ? and categoryCode in ('Appliances','Counter Top','Services'))addon left outer join sow_service_map mp on mp.addOnCode = addon.code",
       "params": ["proposalId","fromVersion"],
       "jsonfields":[]
     },

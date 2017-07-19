@@ -33,6 +33,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.sql.Date;
@@ -177,8 +178,11 @@ public class ProposalHandler extends AbstractRouteHandler
                                     LOG.info("row :: "+row);
                                     LOG.info("row :: "+row.getString("spaceType")+","+row.getString("roomcode"));
                                         spaceService.add(row);
-                                        proposalSpaceRoomset.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
-//                                        proposalSpaceRoomList.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+                                        LOG.info("L1S01 = "+row.getString("L1S01"));
+                                        if(row.getString("L1S01").equalsIgnoreCase("Yes")) {
+                                            proposalSpaceRoomset.add(row.getString("spaceType") + "_" + row.getString("roomcode"));
+                                        }
+    // proposalSpaceRoomList.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
                                 });
                             spaceService.forEach(item->LOG.info(item));
                             proposalSpaceRoomList.addAll(proposalSpaceRoomset);
@@ -233,13 +237,15 @@ public class ProposalHandler extends AbstractRouteHandler
                         ls1.forEach(item->val.append(item+","));
                         response.put("status","Failure");
                         response.put("comments","There are entries in SOW, but no addons for following :: "+val.toString());
+                        response.put("params",ls1);
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
                     }else if(ls2.size() > 0 ){
                         StringBuilder val = new StringBuilder();
                         ls2.forEach(item->val.append(item+","));
                         response.put("status","Failure");
-                        response.put("comments","There are entries in Adddons, but no SOW for following :: "+val.toString());
+                        response.put("comments","Please add the SOWs for the following records :: ");
+                        response.put("params",ls2);
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
                     }else{
@@ -264,7 +270,7 @@ public class ProposalHandler extends AbstractRouteHandler
                 if (resultData.rows.size() == 0) {
                     LOG.info("NO ADDONS ARE SELECTED IN SOW SHEET");
                     response.put("status","Failure");
-                    response.put("comments", "No addons are there for service - ");
+                    response.put("comments", "No addons are there for SOW");
                     sendJsonResponse(routingContext, response.toString());
                 } else {
 //                    resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row.getString("addonCode")));
@@ -339,7 +345,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
                             if(addOnFromProd.equalsIgnoreCase(key)){
                                 prodFound = true;
-                                break;
+//                                break;
                             }else{
                                 prodSetFromProdAddOnNotInSow.add(object1);
                             }
@@ -348,17 +354,18 @@ public class ProposalHandler extends AbstractRouteHandler
 
                     if(!found){
                         LOG.info("No Addons are there for the added SOW" );
-//                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
                         response.put("status","Failure");
-                        response.put("comments", "No Addons are there for the added SOW - "
+                        response.put("comments", "Please add Addons for following SOW - "
                                 +getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+                        LOG.info("Response is:: "+response );
                         sendJsonResponse(routingContext, response.toString());
                     }else if(!prodFound){
                         LOG.info("No SOWs are there for the Addons added" );
-//                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
                         response.put("status","Failure");
-                        response.put("comments", "No SOWs are there for the added Addon - "
-                                +getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+                            response.put("comments", "Please add SOWs for following addons - "
+                                +getL1SO1Value(new ArrayList<JsonObject>(prodSetFromProdAddOnNotInSow)));
                         sendJsonResponse(routingContext, response.toString());
                     }
                     else{
