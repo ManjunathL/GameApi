@@ -6,8 +6,8 @@ define([
     'underscore',
     'backbone',
     'highlight',
-    'collections/stories',
-    'models/story',
+    'collections/allstories',
+    'models/allstory',
     'analytics',
     'text!templates/story/full_story.html',
     'views/story/full_story_helper'
@@ -49,18 +49,25 @@ define([
             var full_story = {};
 
             delete stories.id;
+                        console.log("=-=-=-=-item=-=-=");
+
+                            console.log(stories);
 
             _.find(stories, function(item, index) {
                 if (item.blogId.indexOf(name) !== -1) {
+
                     full_story = item;
+
                 }
+                                                    console.log(full_story);
+
             });
 
             //console.log(_(stories).pluck('date_of_publish'));
             stories = _(stories).sortBy(function(story) {
                 return Date.parse(story.date_of_publish);
             }).reverse();
-            //console.log(_(stories).pluck('date_of_publish'));
+            console.log(full_story);
 
             var rec_stories = [];
             $.each(stories.slice(1,4), function(i, data) {

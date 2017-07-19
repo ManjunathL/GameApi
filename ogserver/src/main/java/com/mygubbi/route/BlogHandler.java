@@ -27,8 +27,27 @@ public class BlogHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.get("/").handler(this::getAll); //Category, Sub-Category
         this.get("/latestTag").handler(this::getLatest); //Category, Sub-Category
+        this.get("/allBlogs").handler(this::getAllBlogs); //Category, Sub-Category
     }
+    private void getAllBlogs(RoutingContext context) {
 
+        Integer id = LocalCache.getInstance().store(new QueryData("blog.select.allBlogs", null));
+        LOG.info("Executing query:" + "blog.select.allBlogs" + " | " );
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData == null || selectData.rows == null)
+                    {
+                        sendError(context, "Did not find blogs for . Error:" + selectData.errorMessage);
+                    }
+                    else
+                    {
+                        //  this.fetchLatestProductsAndSend(context, "product.select.blogTagsLatest", paramsData);
+
+                        sendJsonResponse(context, selectData.getJsonDataRows("blogJson").toString());
+                    }
+                });
+    }
     private void getAll(RoutingContext context) {
 
         String blogTags = context.request().getParam("tags");
