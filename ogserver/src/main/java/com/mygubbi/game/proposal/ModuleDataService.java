@@ -116,7 +116,7 @@ public class ModuleDataService extends AbstractVerticle
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        markResult("Module components table is empty.", false);
+                        markResult("SOW master table is empty.", false);
                     }
                     else
                     {
@@ -125,7 +125,7 @@ public class ModuleDataService extends AbstractVerticle
                             SOWMaster component = new SOWMaster(record);
                             this.sowMasterMap.put(component.getSpaceType(), component);
                         }
-                        markResult("Module components loaded.", true);
+                        markResult("SOW master loaded.", true);
                     }
                 });
     }
@@ -147,7 +147,7 @@ public class ModuleDataService extends AbstractVerticle
                             ModulePanel panel = ModulePanel.fromJson(record);
                             this.panelMasterMap.put(panel.getCode(), panel);
                         }
-                        markResult("Module panels done.", true);
+                        markResult("Panel master done.", true);
                     }
                 });
     }

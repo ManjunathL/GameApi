@@ -26,12 +26,14 @@ public class SOWTemplateCreator
     private DriveFile driveFile;
     public DriveServiceProvider driveServiceProvider = new DriveServiceProvider();
     public List<ProposalSOW> proposal_sows;
+    private String sowVersion;
 
 
-    public SOWTemplateCreator(ProposalHeader proposalHeader, List<ProposalSOW> proposal_sow)
+    public SOWTemplateCreator(ProposalHeader proposalHeader, List<ProposalSOW> proposal_sow, String sowVersion)
     {
         this.proposalHeader = proposalHeader;
         this.proposal_sows = proposal_sow;
+        this.sowVersion = sowVersion;
     }
 
     public String getTemplateName()
@@ -48,7 +50,7 @@ public class SOWTemplateCreator
     public String create()
     {
         this.openWorkbook();
-        new SowSheetCreator((XSSFSheet) this.workbookManager.getSheetByName("sow"),this.workbookManager.getStyles(),this.proposalHeader,proposal_sows).prepare();
+        new SowSheetCreator((XSSFSheet) this.workbookManager.getSheetByName("sow"),this.workbookManager.getStyles(),this.proposalHeader,proposal_sows, sowVersion).prepare();
         this.closeWorkbook();
         return outputFile;
     }

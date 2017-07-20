@@ -251,7 +251,9 @@ public class SOWCreatorService extends AbstractVerticle {
         LOG.info("proposalSOWs are ::"+proposalSOWs.listIterator().toString());
         proposalSOWs.forEach(item->LOG.info(item));
 
-        String outputFile = new SOWTemplateCreator(proposalHeader,proposalSOWs).create();
+        LOG.debug("SOW Version in sow crearor service : " + sowrequest.getString("sowversion") );
+
+        String outputFile = new SOWTemplateCreator(proposalHeader,proposalSOWs,sowrequest.getString("sowversion")).create();
 
         DriveFile driveFile = this.driveServiceProvider.uploadFileForUser(outputFile,sowrequest.getString("userId"), proposalHeader.getQuoteNumNew() + "_SOW", proposalHeader.getSalesEmail(), sowrequest.getString("readOnlyFlag"));
         sendResponse(message, new JsonObject().put("driveWebViewLink",driveFile.getWebViewLink()).put("id",driveFile.getId()).put("outputFile",outputFile).put("version",sowrequest.getString("sowversion")));

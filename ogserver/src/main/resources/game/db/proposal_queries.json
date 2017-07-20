@@ -1665,14 +1665,14 @@
       "table": "proposal",
       "query": "update proposal set sowremarksv2 = ? where id  = ?",
       "params": ["newsowremarks","id"]
-    }
-   /* {
+    },
+    {
       "id": "proposal.select.sow.v2",
       "type": "select",
       "table": "proposal_sow",
       "query": "select * from proposal_sow where proposalId = ? and version = ?",
       "params": ["proposalId","version"]
-    }*/
+    }
 
   ]
 }

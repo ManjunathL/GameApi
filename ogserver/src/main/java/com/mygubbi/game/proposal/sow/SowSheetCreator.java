@@ -57,7 +57,7 @@ public class SowSheetCreator implements ExcelCellProcessor
     private String version;
 
 
-    public SowSheetCreator(XSSFSheet quoteSheet, ExcelStyles styles, ProposalHeader proposalHeader, List<ProposalSOW> proposal_sows)
+    public SowSheetCreator(XSSFSheet quoteSheet, ExcelStyles styles, ProposalHeader proposalHeader, List<ProposalSOW> proposal_sows, String sowVersion)
     {
         this.quoteSheet = quoteSheet;
         this.styles = styles;
@@ -65,7 +65,9 @@ public class SowSheetCreator implements ExcelCellProcessor
         LOG.info("SOWS In SowSheetCreator :: "+this.proposal_sows.toArray().toString());
         this.proposal_sows.forEach(item->LOG.info(item));
         this.proposalHeader = proposalHeader;
-        this.version = proposal_sows.get(0).getString("version");
+        this.version = sowVersion;
+        LOG.debug("Version inside SOW Sheet creator : " + this.version);
+
     }
 
     public void prepare()
@@ -428,6 +430,8 @@ public class SowSheetCreator implements ExcelCellProcessor
                 return this.proposalHeader.getQuoteNumNew();
             case "clientdetails":
                 return this.proposalHeader.getName() + " , " + this.proposalHeader.getCrmId();
+            case "version":
+                return this.version;
             case "remarks":
                 if (this.version.equals("1.0"))
                 {

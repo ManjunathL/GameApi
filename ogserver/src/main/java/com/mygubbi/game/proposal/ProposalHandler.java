@@ -9,7 +9,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-//import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
+import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
 import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.model.SOWMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
@@ -38,6 +38,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.sql.Date;
 import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -50,7 +52,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     public DriveServiceProvider serviceProvider;
     public SOWWriteToDatabase sowWriteToDatabase;
-//    public BOQWriteToDatabase boqWriteToDatabase;
+    public BOQWriteToDatabase boqWriteToDatabase;
 
     public ProposalHandler(Vertx vertx)
     {
@@ -68,7 +70,6 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/updateonconfirm").handler(this::updateProposalOnConfirm);
         this.post("/downloadquote").handler(this::downloadQuote);
         this.post("/downloadquoteansow").handler(this::downloadQuoteAndSow);
-
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/createsowsheet").handler(this::createSowSheet);
@@ -764,7 +765,7 @@ public class ProposalHandler extends AbstractRouteHandler
         String path = "D:/Mygubbi GAME/boq_downloaded.xlsx";
         this.serviceProvider = new DriveServiceProvider();
         this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
-//        this.boqWriteToDatabase = new BOQWriteToDatabase();
+        this.boqWriteToDatabase = new BOQWriteToDatabase();
         //this.boqWriteToDatabase.writeToDB(path,proposalId);
         sendJsonResponse(routingContext,jsonObject.toString());
     }
