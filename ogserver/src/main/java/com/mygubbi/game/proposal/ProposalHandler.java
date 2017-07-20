@@ -174,28 +174,62 @@ public class ProposalHandler extends AbstractRouteHandler
                             LOG.info("Response is :: "+response);
                             sendJsonResponse(context, response.toString());
                         }else{
-                            resultData.rows.forEach(row ->
-                                {
-                                    LOG.info("row :: "+row);
-                                    LOG.info("row :: "+row.getString("spaceType")+","+row.getString("roomcode"));
-                                        spaceService.add(row);
-                                        LOG.info("L1S01 = "+row.getString("L1S01"));
-                                        if(row.getString("L1S01").equalsIgnoreCase("Yes")) {
-                                            proposalSpaceRoomset.add(row.getString("spaceType") + "_" + row.getString("roomcode"));
-                                        }
-    // proposalSpaceRoomList.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
-                                });
-                            spaceService.forEach(item->LOG.info(item));
-                            proposalSpaceRoomList.addAll(proposalSpaceRoomset);
-                            getListOfDistintSpaces(context,spaceService,proposalSpaceRoomList,queryParams);
+                            Boolean serMadeNo = false;
+                            for(int i=0; i < resultData.rows.size();i++) {
+                                JsonObject row = resultData.rows.get(i);
+                                LOG.info("row :: " + row);
+                                LOG.info("row :: " + row.getString("spaceType") + "," + row.getString("roomcode"));
+                                spaceService.add(row);
+                                LOG.info("L1S01 = " + row.getString("L1S01"));
+                                String strL1Code = row.getString("L1S01");
+                                if (strL1Code.equalsIgnoreCase("Yes")) {
+                                    proposalSpaceRoomset.add(row.getString("spaceType") + "_" + row.getString("roomcode"));
+                                } else if (strL1Code.equalsIgnoreCase("No")) {
+                                    serMadeNo = true;
+                                }
+                            }
+
+                            if(proposalSpaceRoomset.size() ==  0 && serMadeNo){
+                                proposalSpaceRoomList.addAll(proposalSpaceRoomset);
+                                checkifAddonsAreThere(context,spaceService,proposalSpaceRoomList,queryParams);
+
+                            }else {
+                                spaceService.forEach(item -> LOG.info(item));
+                                proposalSpaceRoomList.addAll(proposalSpaceRoomset);
+                                getListOfDistintSpaces(context, spaceService, proposalSpaceRoomList, queryParams);
+                            }
                         }
                     }
                 });
     }
 
+    private void checkifAddonsAreThere(RoutingContext routingContext,List spaceService,List proposalSpaceRoomList,JsonObject params) {
+        JsonObject queryParams =  new JsonObject();
+        Integer proposalId = routingContext.getBodyAsJson().getInteger("proposalId");
+        Double version = routingContext.getBodyAsJson().getDouble("version");
+        queryParams.put("proposalId", proposalId);
+        queryParams.put("fromVersion", version);
+
+        Integer id = LocalCache.getInstance().store(new QueryData("select.proposalAddOns.sow", queryParams));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
+            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+            if (resultData.errorFlag) {
+                sendError(routingContext, "Error in getting spaces.");
+                LOG.error("Error in getting spaces. " + resultData.errorMessage, resultData.error);
+            } else {
+                if (resultData.rows.size() == 0) {
+                    publishTheProposal(routingContext);
+                }else{
+                    getListOfDistintSpaces(routingContext, spaceService, proposalSpaceRoomList, queryParams);
+                }
+            }
+
+        });
+    }
+
     private void getListOfDistintSpaces(RoutingContext routingContext,List spaceService,List proposalSpaceRoomList,JsonObject params) {
         JsonObject queryParams =  new JsonObject();
-        Double proposalId = routingContext.getBodyAsJson().getDouble("proposalId");
+        Integer proposalId = routingContext.getBodyAsJson().getInteger("proposalId");
         Double version = routingContext.getBodyAsJson().getDouble("version");
         queryParams.put("proposalIdForPro", proposalId);
         queryParams.put("fromVerForProd", version);
@@ -225,7 +259,7 @@ public class ProposalHandler extends AbstractRouteHandler
                     resultData.rows.forEach(row ->{
                                 distinctSpacesList.add(row.getString("spaceType")+"_"+row.getString("roomCode"));
                         });
-                    distinctSpacesList.forEach(item->LOG.info(item));
+
                     LOG.info("proposalSpaceRoomList = ");
                     proposalSpaceRoomList.forEach(item->LOG.info(item));
                     LOG.info("distinctSpacesList = ");
@@ -685,12 +719,12 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());
         Map<String,PdfNumber> inputPdfMap = new LinkedHashMap<>();
         inputPdfMap.put(quotePDfResponse.getString("quoteFile"), PdfPage.PORTRAIT);
-        inputPdfMap.put(sowResponse.getString("sowPdfFile"),PdfPage.LANDSCAPE);
+        inputPdfMap.put(sowResponse.getString("sowPdfFile"),PdfPage.PORTRAIT);
 
         LOG.info("quotePDfResponse.getString(\"quoteFile\") :: "+quotePDfResponse.getString("quoteFile"));
         LOG.info("inputPdfMap.put(sowResponse.getString(\"sowPdfFile\")::"+sowResponse.getString("sowPdfFile"));
         LOG.info("MAP :: "+inputPdfMap);
-        String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" );
+        String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" )+"/"+routingContext.getBodyAsJson().getInteger("proposalId");
         String merged_pdf = ConfigHolder.getInstance().getStringValue("merged_pdf","merged.pdf" );
 
         String outputFileName = location_folder+"/"+merged_pdf;
