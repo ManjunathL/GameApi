@@ -1679,6 +1679,14 @@
       "table": "proposal_sow",
       "query": "select * from proposal_sow where proposalId = ? and version = ?",
       "params": ["proposalId","version"]
+    },
+    {
+      "id": "proposal.product.crm",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where proposalId =?",
+      "params": ["proposalId"],
+      "jsonfields":[]
     }
 
   ]

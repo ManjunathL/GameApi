@@ -985,6 +985,15 @@
       "params":["proposalId","version"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/crm/getproduct",
+      "source": "db",
+      "query":"proposal.product.crm",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
     }
+
   ]
 }
