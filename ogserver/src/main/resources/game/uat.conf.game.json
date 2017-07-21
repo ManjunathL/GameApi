@@ -46,5 +46,9 @@
   "amazon_uploads_directory": "c:/Users/Public/uploads",
   "sugarcrm_url" : "http://52.66.107.178/mygubbi_crm/soap.php"
 
+  "driveAppName" : "GAME Drive App",
+  "driveCredentials" : "/game/gamedrive.json",
+  "localDriveFolder" : "/mnt/game/gdrive/"
+
 }
 

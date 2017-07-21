@@ -10,6 +10,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import com.mygubbi.config.ConfigHolder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,14 +44,14 @@ public class DriveServiceManager
 
     public DriveServiceManager()
     {
-/*
         this.APPLICATION_NAME = ConfigHolder.getInstance().getStringValue("driveAppName", "GAME Drive App");
         this.credentialsJson = ConfigHolder.getInstance().getStringValue("driveCredentials", "/game/gamedrive.json");
         this.localDriveFolder = ConfigHolder.getInstance().getStringValue("localDriveFolder", "D:/data/gdrive/");
-*/
-        this.APPLICATION_NAME = "GAME Drive App";
+
+
+       /* this.APPLICATION_NAME = "GAME Drive App";
         this.credentialsJson = "/game/gamedrive.json";
-        this.localDriveFolder = "D:/data/gdrive/";
+        this.localDriveFolder = "D:/data/gdrive/";*/
         this.DATA_STORE_DIR = new File(localDriveFolder);
 
     }
