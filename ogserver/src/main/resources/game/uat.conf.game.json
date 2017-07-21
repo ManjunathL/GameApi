@@ -22,7 +22,7 @@
   "price_files_folder": "/mnt/game/proposal/price_files",
   "jobcard_template": "/mnt/game/proposal/templates/jobcard-template.xlsx",
   "salesorder_template": "/mnt/game/proposal/templates/salesorder-template.xlsx",
-  "sow_template" : "c:/Users/Public/game_files/sow_template.xlsx",
+  "sow_template" : "/mnt/game/proposal/templates/sow_template.xlsx",
   "sow_downloaded_xls_format":"sow.xlsx",
   "sow_downloaded_pdf_fomat" : "sow.pdf",
   "merged_pdf":"merged.pdf",
@@ -44,7 +44,11 @@
   "amazon_s3_access_key": "AKIAJS7FUU6IRYAPHDLQ",
   "amazon_s3_secret_key": "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",
   "amazon_uploads_directory": "c:/Users/Public/uploads",
-  "sugarcrm_url" : "http://52.66.107.178/mygubbi_crm/soap.php"
+  "sugarcrm_url" : "http://52.66.107.178/mygubbi_crm/soap.php",
+
+  "driveAppName" : "GAME Drive App",
+  "driveCredentials" : "/game/gamedrive.json",
+  "localDriveFolder" : "/mnt/game/gdrive/"
 
 }
 
