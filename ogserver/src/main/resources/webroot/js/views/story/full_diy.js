@@ -5,8 +5,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'collections/diys',
-    'models/diy',
+    'collections/fulldiys',
+    'models/alldiy',
     'analytics',
     'text!templates/story/full_diy.html',
     'views/story/full_story_helper'

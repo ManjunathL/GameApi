@@ -203,6 +203,13 @@
       "params": [
 
       ]
+    },{
+      "id": "diy.select.allDiys",
+      "type": "select",
+      "query": "select * from diy ",
+      "params": [
+
+      ]
     },
     {
       "id": "product.select.allDiys",

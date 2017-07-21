@@ -25,8 +25,27 @@ public class DIYHandler extends AbstractRouteHandler
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.get("/").handler(this::getAll);
+        this.get("/allDiy").handler(this::getAllDiys);
     }
+    private void getAllDiys(RoutingContext context) {
 
+        Integer id = LocalCache.getInstance().store(new QueryData("diy.select.allDiys", null));
+        LOG.info("Executing query:" + "diy.select.allDiys" + " | " );
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (selectData == null || selectData.rows == null)
+                    {
+                        sendError(context, "Did not find blogs for . Error:" + selectData.errorMessage);
+                    }
+                    else
+                    {
+                        //  this.fetchLatestProductsAndSend(context, "product.select.blogTagsLatest", paramsData);
+
+                        sendJsonResponse(context, selectData.getJsonDataRows("diyJson").toString());
+                    }
+                });
+    }
     private void getAll(RoutingContext context) {
 
         String productId = context.request().getParam("");
