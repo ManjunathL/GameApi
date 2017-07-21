@@ -323,8 +323,8 @@
       "id": "proposal.publish",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set status = 'Published' where id = ? and version =?",
-      "params": ["id","version"]
+      "query": "update proposal set status = 'Published',version = ? where id = ?",
+      "params": ["version","id"]
     },
 
     {
