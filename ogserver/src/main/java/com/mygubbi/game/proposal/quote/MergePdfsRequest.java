@@ -78,10 +78,12 @@ public class MergePdfsRequest {
                 //Create page and add content.
                 while (currentPdfReaderPage <= pdfReader.getNumberOfPages()) {
                     document.newPage();
+
                     writer.addPageDictEntry(PdfName.ROTATE, readers.get(pdfReader));
                     pdfImportedPage = writer.getImportedPage(pdfReader, currentPdfReaderPage);
                     pageContentByte.addTemplate(pdfImportedPage, 0, 0);
                     currentPdfReaderPage++;
+//                    document.setPageSize(PageSize.A4.rotate());
                 }
                 currentPdfReaderPage = 1;
             }
