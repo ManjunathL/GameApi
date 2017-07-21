@@ -1,3 +1,4 @@
+/*
 package com.mygubbi.game.proposal;
 
 import java.io.*;
@@ -6,13 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
 
-import com.mygubbi.common.LocalCache;
-import com.mygubbi.common.VertxInstance;
-import com.mygubbi.db.DatabaseService;
-import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.model.Proposal_SOW;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.eventbus.Message;
+import com.mygubbi.game.proposal.model.ProposalSOW;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.util.CellRangeAddressList;
@@ -229,7 +224,8 @@ public class CopyToNewSheet {
         }
     }
 
-  /*  private static void createSowRecord(Proposal_SOW proposal_sow)
+  */
+/*  private static void createSowRecord(ProposalSOW proposal_sow)
     {
 
         String query = "proposal.sow.create";
@@ -243,10 +239,11 @@ public class CopyToNewSheet {
                     }
                     else
                     {
-                        LOG.info("Inserted SOW Record " + proposal_sow.toString());
+                        LOG.info("Inserted sow Record " + proposal_sow.toString());
                     }
                 });
-    }*/
+    }*//*
+
 
     private static void readValuesFromExcel()
     {
@@ -276,7 +273,7 @@ public class CopyToNewSheet {
                         }
 
                     }
-                Proposal_SOW proposal_sow = new Proposal_SOW();
+                ProposalSOW proposal_sow = new ProposalSOW();
                 proposal_sow.setProposalId(1);
                 proposal_sow.setVersion(0.1);
                 proposal_sow.setSpaceType("MBR");
@@ -290,10 +287,11 @@ public class CopyToNewSheet {
                 proposal_sow.setL2S04(services_value[4]);
                 proposal_sow.setL2S05(services_value[5]);
                 proposal_sow.setL2S06(services_value[6]);
-                proposal_sow.setL2S07(services_value[7]);
 
 
-                        /*createSowRecord(proposal_sow);*/
+                        */
+/*createSowRecord(proposal_sow);*//*
+
                 System.out.println("Proposal_sow :" + proposal_sow.toString());
 
                 Connection con = DriverManager.getConnection(
@@ -305,7 +303,7 @@ public class CopyToNewSheet {
                          + proposal_sow.getProductId()  + "," + "'" + proposal_sow.getPRODUCT() + "'" + "," + "'" + proposal_sow.getROOM() + "'" + "," + "'" +
                         proposal_sow.getL1S01() + "'" + "," + "'" + proposal_sow.getL2S01() + "'" + "," + "'" + proposal_sow.getL2S02() +"'" + "," + "'" +
                         proposal_sow.getL2S03() + "'" + "," + "'" + proposal_sow.getL2S04() + "'" + "," + "'" + proposal_sow.getL2S05() +"'" + "," + "'" +
-                        proposal_sow.getL2S06() + "'" + "," + "'"+ proposal_sow.getL2S07() + "'"+ ")");
+                        proposal_sow.getL2S06() + "'" + ")");
 
                 if (insert == 1)
                 {
@@ -327,3 +325,4 @@ public class CopyToNewSheet {
 
 
 }
+*/

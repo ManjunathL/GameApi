@@ -231,6 +231,10 @@ public class QuoteData
                 return this.city;
             case "product.title":
                 return this.title;
+            case "clientno":
+                return this.proposalHeader.getQuoteNumNew();
+            case "clientdetails":
+                return this.proposalHeader.getName();
             default:
                 return null;
         }

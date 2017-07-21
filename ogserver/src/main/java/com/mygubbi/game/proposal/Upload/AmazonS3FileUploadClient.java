@@ -1,4 +1,4 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.Upload;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;

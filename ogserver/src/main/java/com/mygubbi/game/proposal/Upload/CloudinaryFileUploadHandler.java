@@ -1,19 +1,15 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.Upload;
 
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.model.CloudinaryImageUrl;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.catalog.CloudinaryImageUploader;
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Set;
 
 /**
  * Created by shruthi on 20-Apr-17.

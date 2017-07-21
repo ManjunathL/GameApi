@@ -7,7 +7,7 @@ public class GoogleDriveTest
 {
     public static void main(String[] args)
     {
-        new GoogleDriveTest().listFiles();
+        new GoogleDriveTest().testUploadXLSAndDownloadPDF();
     }
 
     private void listFiles()
@@ -24,23 +24,30 @@ public class GoogleDriveTest
 
     private void testUploadAndDownload()
     {
-        DriveFile file = this.serviceProvider.uploadFile("D:/Downloads/TestCopy12.xlsx");
+        DriveFile file = this.serviceProvider.uploadFile("D:/Mygubbi GAME/TestCopy12.xlsx","test");
         System.out.println(file);
-        this.serviceProvider.downloadFile(file.getId(), "D:/Downloads/TestCopy12-Downloaded.xlsx", DriveServiceProvider.TYPE_XLS);
+        this.serviceProvider.downloadFile(file.getId(), "D:/Mygubbi GAME/TestCopy12Downloaded.xlsx", DriveServiceProvider.TYPE_XLS);
     }
 
     private void testUploadXLSAndDownloadPDF()
     {
-        DriveFile file = this.serviceProvider.uploadFile("/home/shilpa/Downloads/sow_checklist.xls");
+        DriveFile file = this.serviceProvider.uploadFileForUser("/home/shilpa/Downloads","chiragsharath@gmail.com","","sow_checklist.xls","");
         System.out.println(file);
         this.serviceProvider.downloadFile(file.getId(), "/home/shilpa/Downloads/sow_checklist.pdf", DriveServiceProvider.TYPE_PDF);
     }
     private void testUpload()
     {
-        DriveFile file = this.serviceProvider.uploadFile("D:/Downloads/TestCopy12.xlsx");
+        DriveFile file = this.serviceProvider.uploadFile("D:/Mygubbi GAME/TestCopy12.xlsx","test");
         System.out.println(file);
         this.serviceProvider.allowUserToEditFile(file.getId(), "guttulasunil@gmail.com");
         System.out.println("Permission granted to edit file - " + file.getName());
     }
 
+    private void testUploadForUser()
+    {
+        DriveFile file = this.serviceProvider.uploadFileForUser("D:/Mygubbi GAME/TestCopy12.xlsx","chiragsharath@gmail.com","test","shilpa.g@mygubbi.com","yes");
+        System.out.println(file);
+        System.out.println("Permission granted to edit file - " + file.getName());
+
+    }
 }

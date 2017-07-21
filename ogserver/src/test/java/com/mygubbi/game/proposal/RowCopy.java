@@ -21,7 +21,7 @@ public class RowCopy {
 
     public static void main(String[] args) throws Exception{
         XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream("D:\\Mygubbi GAME\\TestNew.xlsx"));
-        XSSFSheet sheet = workbook.getSheet("SOW");
+        XSSFSheet sheet = workbook.getSheet("sow");
 
         XSSFWorkbook new_workbook = new XSSFWorkbook();
         XSSFSheet outSheet = workbook.createSheet();

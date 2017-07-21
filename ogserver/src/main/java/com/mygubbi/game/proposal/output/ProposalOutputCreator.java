@@ -1,12 +1,11 @@
 package com.mygubbi.game.proposal.output;
 
+import com.mygubbi.game.proposal.sow.SOWTemplateCreator;
+//import com.mygubbi.game.proposal.erp.BOQTemplateCreator;
 import com.mygubbi.game.proposal.erp.ExcelSalesOrderCreator;
 import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
-import com.mygubbi.game.proposal.quote.ExcelQuoteCreator;
-import com.mygubbi.game.proposal.quote.PdfQuoteCreator;
-import com.mygubbi.game.proposal.quote.QuoteData;
-import com.mygubbi.game.proposal.quote.SOWTemplateCreator;
+import com.mygubbi.game.proposal.quote.*;
 
 /**
  * Created by Sunil on 22-07-2016.
@@ -36,10 +35,6 @@ public interface ProposalOutputCreator
             case QUOTEPDF:
                 return new PdfQuoteCreator(quoteData, proposalHeader);
 
-            case SOW:
-                return new SOWTemplateCreator(quoteData, proposalHeader);
-
-
             default:
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
         }
@@ -58,4 +53,7 @@ public interface ProposalOutputCreator
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
         }
     }
+
+
+
 }

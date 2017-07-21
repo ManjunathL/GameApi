@@ -100,6 +100,10 @@ public class ProductAddon extends JsonObject
     {
         return APPLIANCE_TYPE.equals(this.getCategoryCode());
     }
+    public boolean isLooseFurniture()
+    {
+        return LOOSE_FURNITURE_TYPE.equals(this.getCategoryCode());
+    }
 
     public boolean isCounterTop()
     {

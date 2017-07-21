@@ -125,6 +125,7 @@ public class DatabaseService extends AbstractVerticle
 
 	private void runSelectQuery(Message message, QueryData qData, SQLConnection connection)
 	{
+		LOG.info("Query:" + qData.queryDef.query + ". Params:" + qData.getParams());
 		connection.queryWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
 		  if (res2.succeeded()) 
 		  {
@@ -161,16 +162,21 @@ public class DatabaseService extends AbstractVerticle
 	{
 		if (index >= qDataList.size())
 		{
+			LOG.debug("Done with queries :" + index + " : " + qDataList.size());
 			message.reply(LocalCache.getInstance().store(qDataList));
+			return;
 		}
 
 		QueryData qData = qDataList.get(index);
 		if (qData.errorFlag)
 		{
+			LOG.debug("Skipping query :" + qData.queryId + " : " + qData.errorMessage);
+
 			handleQueryInGroup(message, qDataList, index + 1);
 		}
 
 		qData.startQuery();
+		LOG.debug("running query :" + qData.queryId + " : " + qData.paramsObject);
 
 		this.client.getConnection(res -> {
 			if (res.succeeded())
@@ -205,6 +211,8 @@ public class DatabaseService extends AbstractVerticle
 			else
 			{
 				qData.setError(res2.cause());
+				LOG.error("Error:", res2.cause());
+
 			}
 			connection.close();
             handleQueryInGroup(message, qDataList, index + 1);

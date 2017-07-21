@@ -26,7 +26,7 @@ public class ModuleDataService extends AbstractVerticle
 	private final static Logger LOG = LogManager.getLogger(ModuleDataService.class);
 
 	private static ModuleDataService INSTANCE;
-	private AtomicInteger cachingCounter = new AtomicInteger(6);
+	private AtomicInteger cachingCounter = new AtomicInteger(9);
 
     private Multimap<String, SOWMaster> sowMasterMap;
     private Multimap<String, ModuleComponent> moduleComponentsMap;
@@ -70,7 +70,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheFinishCostCodes();
         this.cacheHandleData();
         this.cacheHingePackData();
-       /* this.cacheSowMasterData();*/
+       this.cacheSowMasterData();
 
 	}
 
@@ -108,7 +108,7 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
-  /*  private void cacheSowMasterData()
+    private void cacheSowMasterData()
     {
         this.sowMasterMap = ArrayListMultimap.create();
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("sow.master.select.all", new JsonObject())),
@@ -116,19 +116,19 @@ public class ModuleDataService extends AbstractVerticle
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
-                        markResult("Module components table is empty.", false);
+                        markResult("SOW master table is empty.", false);
                     }
                     else
                     {
                         for (JsonObject record : selectData.rows)
                         {
-                            SOWMaster component = SOWMaster.fromJson(record);
+                            SOWMaster component = new SOWMaster(record);
                             this.sowMasterMap.put(component.getSpaceType(), component);
                         }
-                        markResult("Module components loaded.", true);
+                        markResult("SOW master loaded.", true);
                     }
                 });
-    }*/
+    }
 
     private void cacheModulePanels()
     {
@@ -147,7 +147,7 @@ public class ModuleDataService extends AbstractVerticle
                             ModulePanel panel = ModulePanel.fromJson(record);
                             this.panelMasterMap.put(panel.getCode(), panel);
                         }
-                        markResult("Module panels done.", true);
+                        markResult("Panel master done.", true);
                     }
                 });
     }

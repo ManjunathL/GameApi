@@ -1,8 +1,10 @@
 package com.mygubbi.si.excel;
 
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Workbook;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.w3c.dom.css.RGBColor;
 
 /**
  * Created by test on 08-06-2016.
@@ -14,6 +16,8 @@ public class ExcelStyles
     private CellStyle indexStyle;
     private CellStyle textStyle;
     private CellStyle specificationStyle;
+    private CellStyle coloredCellStyle;
+    private CellStyle lockedTextStyle;
 
     public ExcelStyles(Workbook wb)
     {
@@ -22,6 +26,8 @@ public class ExcelStyles
         this.indexStyle = this.createIndexStyle(wb);
         this.textStyle=this.createTextStyle(wb);
         this.specificationStyle = this.createSpecificationStyle(wb);
+        this.coloredCellStyle = this.createBackGroundStyleForCell(wb);
+        this.lockedTextStyle = this.createCellLockedStyle(wb);
     }
 
     public CellStyle getBoldStyle()
@@ -41,10 +47,15 @@ public class ExcelStyles
     }
 
     public CellStyle getTextStyle(){ return textStyle; }
+    public CellStyle getLockedTextStyle(){ return lockedTextStyle; }
 
     public CellStyle getSpecificationStyle()
     {
         return specificationStyle;
+    }
+    public CellStyle getColoredCellStyle()
+    {
+        return coloredCellStyle;
     }
 
     private CellStyle createBoldStyle(Workbook wb)
@@ -53,6 +64,20 @@ public class ExcelStyles
         Font font = wb.createFont();
         font.setBoldweight(Font.BOLDWEIGHT_BOLD);
         style.setFont(font);
+        return style;
+    }
+
+    private CellStyle createBackGroundStyleForCell(Workbook wb)
+    {
+        CellStyle style = wb.createCellStyle();
+        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        style.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        style.setBorderTop(CellStyle.BORDER_MEDIUM);
+        style.setBorderLeft(CellStyle.BORDER_MEDIUM);
+        style.setBorderRight(CellStyle.BORDER_MEDIUM);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setAlignment(CellStyle.ALIGN_LEFT);
+        style.setWrapText(true);
         return style;
     }
 
@@ -88,8 +113,20 @@ public class ExcelStyles
     private CellStyle createTextStyle(Workbook wb)
     {
         CellStyle style = wb.createCellStyle();
-        style.setAlignment(CellStyle.ALIGN_RIGHT);
+        style.setAlignment(CellStyle.ALIGN_LEFT);
+        style.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        style.setBorderTop(CellStyle.BORDER_MEDIUM);
+        style.setBorderLeft(CellStyle.BORDER_MEDIUM);
+        style.setBorderRight(CellStyle.BORDER_MEDIUM);
+        style.setWrapText(true);
         return style;
+    }
+
+    private CellStyle createCellLockedStyle(Workbook wb)
+    {
+        CellStyle unlockedCellStyle = wb.createCellStyle();
+        unlockedCellStyle.setLocked(false);
+        return unlockedCellStyle;
     }
 
     private CellStyle createSpecificationStyle(Workbook wb)

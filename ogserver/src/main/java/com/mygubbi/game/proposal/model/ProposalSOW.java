@@ -5,16 +5,14 @@ import io.vertx.core.json.JsonObject;
 /**
  * Created by User on 06-07-2017.
  */
-public class Proposal_SOW extends JsonObject {
+public class ProposalSOW extends JsonObject {
 
 
     public static final String ID = "id";
     public static final String PROPOSAL_ID = "proposalId";
     public static final String VERSION  = "version";
     public static final String SPACE_TYPE = "spaceType";
-    public static final String ROOM = "room";
-    public static final String PRODUCT_ID = "productId";
-    public static final String PRODUCT = "product";
+    public static final String ROOM = "roomcode";
     public static final String L1S01 = "L1S01";
     public static final String L2S01 = "L2S01";
     public static final String L2S02 = "L2S02";
@@ -22,11 +20,11 @@ public class Proposal_SOW extends JsonObject {
     public static final String L2S04 = "L2S04";
     public static final String L2S05 ="L2S05";
     public static final String L2S06 ="L2S06";
-    public static final String L2S07 ="L2S07";
+    public static final String L1S01Code ="L1S01Code";
 
-    public Proposal_SOW() {}
+    public ProposalSOW() {}
 
-    public Proposal_SOW(JsonObject jsonObject){
+    public ProposalSOW(JsonObject jsonObject){
         super(jsonObject.getMap());
     }
 
@@ -38,8 +36,8 @@ public class Proposal_SOW extends JsonObject {
         return this.getInteger(PROPOSAL_ID);
     }
 
-    public double getVERSION() {
-        return this.getDouble(VERSION);
+    public String getVERSION() {
+        return this.getString(VERSION);
     }
 
     public String getSpaceType() {
@@ -48,14 +46,6 @@ public class Proposal_SOW extends JsonObject {
 
     public String getROOM() {
         return this.getString(ROOM);
-    }
-
-    public int getProductId() {
-        return this.getInteger(PRODUCT_ID);
-    }
-
-    public String getPRODUCT() {
-        return this.getString(PRODUCT);
     }
 
     public String getL1S01() {
@@ -85,99 +75,87 @@ public class Proposal_SOW extends JsonObject {
     public String getL2S06() {
         return this.getString(L2S06);
     }
-
-    public String getL2S07() {
-        return this.getString(L2S07);
+    public String getL1S01Code() {
+        return this.getString(L1S01Code);
     }
 
-    public Proposal_SOW setId(int id)
+
+    public ProposalSOW setId(int id)
     {
         put(ID,id);
         return this;
     }
 
-    public Proposal_SOW setProposalId(int proposalId)
+    public ProposalSOW setProposalId(int proposalId)
     {
         put(PROPOSAL_ID,proposalId);
         return this;
     }
 
-    public Proposal_SOW setVersion(double version)
+    public ProposalSOW setVersion(String version)
     {
         put(VERSION,version);
         return this;
     }
 
-    public Proposal_SOW setSpaceType(String spaceType)
+    public ProposalSOW setSpaceType(String spaceType)
     {
         put(SPACE_TYPE,spaceType);
         return this;
     }
 
-    public Proposal_SOW setRoom(String room)
+    public ProposalSOW setRoom(String room)
     {
         put(ROOM,room);
         return this;
     }
 
-    public Proposal_SOW setProductId(int productId)
-    {
-        put(PRODUCT_ID,productId);
-        return this;
-    }
-
-    public Proposal_SOW setProduct(String product)
-    {
-        put(PRODUCT,product);
-        return this;
-    }
-
-    public Proposal_SOW setL1S01(String l1s01)
+    public ProposalSOW setL1S01(String l1s01)
     {
         put(L1S01,l1s01);
         return this;
     }
 
-    public Proposal_SOW setL2S01(String l2s01)
+    public ProposalSOW setL2S01(String l2s01)
     {
         put(L2S01,l2s01);
         return this;
     }
 
-    public Proposal_SOW setL2S02(String l2s02)
+    public ProposalSOW setL2S02(String l2s02)
     {
         put(L2S02,l2s02);
         return this;
     }
 
-    public Proposal_SOW setL2S03(String l2s03)
+    public ProposalSOW setL2S03(String l2s03)
     {
         put(L2S03,l2s03);
         return this;
     }
 
-    public Proposal_SOW setL2S04(String l2s04)
+    public ProposalSOW setL2S04(String l2s04)
     {
         put(L2S04,l2s04);
         return this;
     }
 
-    public Proposal_SOW setL2S05(String l2s05)
+    public ProposalSOW setL2S05(String l2s05)
     {
         put(L2S05,l2s05);
         return this;
     }
 
-    public Proposal_SOW setL2S06(String l2s06)
+    public ProposalSOW setL2S06(String l2s06)
     {
         put(L2S06,l2s06);
         return this;
     }
-
-    public Proposal_SOW setL2S07(String l2s07)
+    public ProposalSOW setL1S01Code(String l2s06)
     {
-        put(L2S07,l2s07);
+        put(L1S01Code,l2s06);
         return this;
     }
+
 
 }

@@ -11,6 +11,8 @@ import java.sql.Date;
 public class ProposalHeader extends JsonObject
 {
 
+    public static final String ID = "id";
+
     public static final String CRMID = "crmId";
     public static final String PROJECT_NAME = "projectName";
     public static final String PROJECT_ADDRESS1 = "paddress1";
@@ -31,6 +33,8 @@ public class ProposalHeader extends JsonObject
     public static final String QUOTE_NO_NEW="quoteNoNew";
     public static final String PRICE_DATE="priceDate";
     public static final String PACKAGE_FLAG="packageFlag";
+    public static final String SOW_REMARKS_V1="sowremarksv1";
+    public static final String SOW_REMARKS_V2="sowremarksv2";
 
     private Date priceDate;
 
@@ -89,6 +93,27 @@ public class ProposalHeader extends JsonObject
         return this.getString(PROJECT_CITY);
     }
     public String getPackageFlag() { return this.getString(PACKAGE_FLAG);}
+
+    public String getSowRemarksV1() {
+        return this.getString(SOW_REMARKS_V1);
+    }
+
+    public String getSowRemarksV2() {
+        return this.getString(SOW_REMARKS_V2);
+    }
+
+    public ProposalHeader setSowRemarksV1(String remarksV1)
+    {
+        put(remarksV1,SOW_REMARKS_V1);
+        return this;
+    }
+
+    public ProposalHeader setSowRemarksV2(String remarksV2)
+    {
+        put(remarksV2,SOW_REMARKS_V2);
+        return this;
+    }
+
 
     public Date getPriceDate() {
         return DateUtil.convertDate(this.getString(PRICE_DATE));

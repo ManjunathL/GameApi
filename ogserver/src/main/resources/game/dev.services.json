@@ -59,6 +59,13 @@
 
       {
         "name": "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService"
+      },
+
+      {
+        "name":"com.mygubbi.game.proposal.output.SOWPdfOutputService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.sow.SOWCreatorService"
       }
 
 

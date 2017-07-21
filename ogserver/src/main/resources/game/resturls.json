@@ -42,14 +42,6 @@
       "default": "[]"
     },
     {
-      "uri": "/gapi/proposal/version/publish",
-      "source": "db",
-      "query":"version.publish",
-      "params":["version","proposalId"],
-      "resultfields":[],
-      "default": "[]"
-    },
-    {
       "uri": "/gapi/proposal/version/confirm",
       "source": "db",
       "query":"version.confirm",
@@ -242,7 +234,7 @@
       "uri": "/gapi/proposal/addon.add",
       "source": "db",
       "query":"proposal.addon.add",
-      "params":["proposalId", "code","fromVersion","seq", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks"],
+      "params":["proposalId", "code","fromVersion","seq", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks", "spaceType", "room"],
       "resultfields":[],
       "default": "[]"
     },
@@ -388,6 +380,15 @@
       "source": "db",
       "query":"addons.categories",
       "params":["roomCode"],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
+      "uri": "/gapi/addon/spacetype",
+      "source": "db",
+      "query":"addons.spacetypes",
+      "params":["spacetype"],
       "resultfields":[],
       "default": "[]"
     },
@@ -966,6 +967,22 @@
       "source": "db",
       "query":"proposal.duplicatecrm",
       "params":["crmId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/sow/selectlineitemsv2",
+      "source": "db",
+      "query":"proposal.select.sow.v2",
+      "params":["proposalId","version"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/sow/selectlineitemsbasedonspacetype",
+      "source": "db",
+      "query":"proposal.select.sow.v2",
+      "params":["proposalId","version"],
       "resultfields":[],
       "default": "[]"
     }

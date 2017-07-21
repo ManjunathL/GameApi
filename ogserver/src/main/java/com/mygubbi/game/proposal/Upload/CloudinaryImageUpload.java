@@ -1,8 +1,7 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.Upload;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
