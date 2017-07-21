@@ -271,7 +271,7 @@ public class ProposalHandler extends AbstractRouteHandler
                         StringBuilder val = new StringBuilder();
                         ls1.forEach(item->val.append(item+","));
                         response.put("status","Failure");
-                        response.put("comments","There are entries in SOW, but no addons for following :: "+val.toString());
+                        response.put("comments","There are entries in SOW, but no addons for following SpaceType_Room : "+val.deleteCharAt(val.lastIndexOf(",")));
                         response.put("params",ls1);
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
@@ -279,7 +279,7 @@ public class ProposalHandler extends AbstractRouteHandler
                         StringBuilder val = new StringBuilder();
                         ls2.forEach(item->val.append(item+","));
                         response.put("status","Failure");
-                        response.put("comments","Please add the SOWs for the following records :: ");
+                        response.put("comments","Please add the SOWs for the following SpaceType_Room : "+val.deleteCharAt(val.lastIndexOf(",")));
                         response.put("params",ls2);
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
