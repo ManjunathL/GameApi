@@ -22,8 +22,8 @@
 
   "http_port" : 1445,
   "https_port" : 1446,
-  "proposal_docs_folder" : "/home/shilpa/mygubbi_files",
-  "templates_folder" : "/home/shilpa/mygubbi_files",
+  "proposal_docs_folder" : "c:/Users/Public/game_files",
+  "templates_folder" : "c:/Users/Public/game_files",
   "price_files_folder" : "c:/Users/Public/game_files/price_files",
   "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
   "quote_template_PUN" : "c:/Users/Public/game_files/quote-template-PUN.xlsx",
@@ -31,13 +31,12 @@
   "quote_template_MLR" : "c:/Users/Public/game_files/quote-template-MLR.xlsx",
   "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
-  "sow_template" : "/home/shilpa/mygubbi_files/sow_template.xlsx",
+  "sow_template" : "c:/Users/Public/game_files/sow_template.xlsx",
   "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
   "ratecard_file": "d:/tmp/ratecard.bin",
   "sow_downloaded_xls_format":"sow.xlsx",
   "sow_downloaded_pdf_fomat" : "sow.pdf",
   "merged_pdf":"merged.pdf",
-
 
   "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
 
@@ -52,6 +51,5 @@
   "amazon_s3_secret_key" : "0DOliTd4tRP+Z5CW6ngcjek948txbDUHOTqi0fmJ",
   "amazon_uploads_directory" : "c:/Users/Public/uploads",
   "sugarcrm_url" : "http://52.66.107.178/mygubbi_crm/soap.php"
-
 
 }
