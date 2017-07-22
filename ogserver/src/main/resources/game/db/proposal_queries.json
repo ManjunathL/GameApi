@@ -1572,7 +1572,7 @@
       "id": "spaces.select.fromProductAndAddon",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomCode from proposal_product where proposalId = ? and fromVersion = ? union select distinct spaceType,roomcode from proposal_addon where proposalId = ? and fromVersion = ? and categoryCode in ('Appliances','Counter Top','Services')",
+      "query": "select distinct spaceType,roomCode,'product' as type from proposal_product where proposalId = ? and fromVersion = ? union select distinct spaceType,roomcode,'addon' as type from proposal_addon where proposalId = ? and fromVersion = ? and categoryCode in ('Appliances','Counter Top','Services')",
       "params": ["proposalIdForPro","fromVerForProd","proposalIdForAddOn","fromVerForAddOn"],
       "jsonfields":[]
     },

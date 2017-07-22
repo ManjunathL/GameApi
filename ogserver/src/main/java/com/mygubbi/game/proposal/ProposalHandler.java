@@ -134,7 +134,6 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void publishVersionAfterValidation(RoutingContext context){
         JsonObject contextJson = context.getBodyAsJson();
-        LOG.info("publishVersionAfterValidation Routing context:: "+contextJson);
 
         String verFromProposal = String.valueOf(contextJson.getDouble("version"));
         String sowVersion = null ;
@@ -151,83 +150,45 @@ public class ProposalHandler extends AbstractRouteHandler
         queryParams.put("sowversion", sowVersion);
         queryParams.put("version",verFromProposal);
 
-        LOG.info("Query Params :: "+queryParams);
-        List spaceService = new ArrayList();
-        Set proposalSpaceRoomset = new HashSet();
-        List proposalSpaceRoomList =  new ArrayList();
-        JsonObject response = new JsonObject();
+        JsonObject response  = new JsonObject();
+        List sowList = new ArrayList();
+        Set spaceRoomListFromSow = new HashSet();
+        Set yesSpaceRoomListFromSow = new HashSet();
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.proposalversion", queryParams));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag )
-                    {
+                    if (resultData.errorFlag) {
                         sendError(context, "Error in getting proposals.");
                         LOG.error("Error in getting proposal. " + resultData.errorMessage, resultData.error);
-                    }
-                    else
-                    {
-                        if(resultData.rows.size() == 0) {
+                    } else {
+                        if (resultData.rows.size() == 0) {
                             LOG.info("SOW ROWS NOT THERE");
                             response.put("status","Failure");
                             response.put("comments", "No associated SOW");
                             LOG.info("Response is :: "+response);
                             sendJsonResponse(context, response.toString());
                         }else{
-                            Boolean serMadeNo = false;
-                            for(int i=0; i < resultData.rows.size();i++) {
-                                JsonObject row = resultData.rows.get(i);
-                                LOG.info("row :: " + row);
-                                LOG.info("row :: " + row.getString("spaceType") + "," + row.getString("roomcode"));
-                                spaceService.add(row);
-                                LOG.info("L1S01 = " + row.getString("L1S01"));
-                                String strL1Code = row.getString("L1S01");
-                                if (strL1Code.equalsIgnoreCase("Yes")) {
-                                    proposalSpaceRoomset.add(row.getString("spaceType") + "_" + row.getString("roomcode"));
-                                } else if (strL1Code.equalsIgnoreCase("No")) {
-                                    serMadeNo = true;
-                                }
-                            }
+                            resultData.rows.forEach(row -> {
+                                sowList.add(row);
+                                if(row.getString("L1S01").equalsIgnoreCase("Yes"))
+                                    yesSpaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+                                spaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+                            });
 
-                            if(proposalSpaceRoomset.size() ==  0 && serMadeNo){
-                                proposalSpaceRoomList.addAll(proposalSpaceRoomset);
-                                checkifAddonsAreThere(context,spaceService,proposalSpaceRoomList,queryParams);
-
-                            }else {
-                                spaceService.forEach(item -> LOG.info(item));
-                                proposalSpaceRoomList.addAll(proposalSpaceRoomset);
-                                getListOfDistintSpaces(context, spaceService, proposalSpaceRoomList, queryParams);
-                            }
+                            List spaceRoomList = new ArrayList();
+                            spaceRoomList.addAll(spaceRoomListFromSow);
+                            List spaceRoomListWithYes = new ArrayList();
+                            spaceRoomListWithYes.addAll(yesSpaceRoomListFromSow);
+                            getListOfAddonAndProduct(context, sowList,spaceRoomList,spaceRoomListWithYes, queryParams);
                         }
+
                     }
                 });
+
     }
 
-    private void checkifAddonsAreThere(RoutingContext routingContext,List spaceService,List proposalSpaceRoomList,JsonObject params) {
-        JsonObject queryParams =  new JsonObject();
-        Integer proposalId = routingContext.getBodyAsJson().getInteger("proposalId");
-        Double version = routingContext.getBodyAsJson().getDouble("version");
-        queryParams.put("proposalId", proposalId);
-        queryParams.put("fromVersion", version);
-
-        Integer id = LocalCache.getInstance().store(new QueryData("select.proposalAddOns.sow", queryParams));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
-            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if (resultData.errorFlag) {
-                sendError(routingContext, "Error in getting spaces.");
-                LOG.error("Error in getting spaces. " + resultData.errorMessage, resultData.error);
-            } else {
-                if (resultData.rows.size() == 0) {
-                    publishTheProposal(routingContext);
-                }else{
-                    getListOfDistintSpaces(routingContext, spaceService, proposalSpaceRoomList, queryParams);
-                }
-            }
-
-        });
-    }
-
-    private void getListOfDistintSpaces(RoutingContext routingContext,List spaceService,List proposalSpaceRoomList,JsonObject params) {
+    private void getListOfAddonAndProduct(RoutingContext routingContext,List sowList,List spaceRoomListFromSow,List yesSpaceRoomListFromSow,JsonObject params) {
         JsonObject queryParams =  new JsonObject();
         Integer proposalId = routingContext.getBodyAsJson().getInteger("proposalId");
         Double version = routingContext.getBodyAsJson().getDouble("version");
@@ -237,188 +198,142 @@ public class ProposalHandler extends AbstractRouteHandler
         queryParams.put("fromVerForAddOn", version);
 
         JsonObject response = new JsonObject();
-        List distinctSpacesList = new ArrayList();
+        List spaceRoomListFromProduct= new ArrayList();
+        List spaceRoomListFromAddon = new ArrayList();
 
         Integer id = LocalCache.getInstance().store(new QueryData("spaces.select.fromProductAndAddon", queryParams));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
             QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if (resultData.errorFlag )
+            if ((resultData.errorFlag )||(resultData.rows.size() == 0))
             {
-                sendError(routingContext, "Error in getting spaces.");
-                LOG.error("Error in getting spaces. " + resultData.errorMessage, resultData.error);
+                sendError(routingContext, "Error in getting Products and Addons.");
+                LOG.error("Error in getting Products and Addons. " + resultData.errorMessage, resultData.error);
             }
             else
             {
-                if(resultData.rows.size() == 0) {
-                    LOG.info("NO SPACES ADDED FOR PRODUCT/ADDON");
-                    response.put("status","Failure");
-                    response.put("comments", "No associated Spaces");
-                    LOG.info("Response is :: "+response);
-                    sendJsonResponse(routingContext, response.toString());
-                }else{
-                    resultData.rows.forEach(row ->{
-                                distinctSpacesList.add(row.getString("spaceType")+"_"+row.getString("roomCode"));
-                        });
+                 resultData.rows.forEach(row ->{
+                     if(row.getString("type").equalsIgnoreCase("Product"))
+                        spaceRoomListFromProduct.add(row.getString("spaceType")+"_"+row.getString("roomCode"));
+                     else
+                         spaceRoomListFromAddon.add(row.getString("spaceType")+"_"+row.getString("roomCode"));
+                    });
 
-                    LOG.info("proposalSpaceRoomList = ");
-                    proposalSpaceRoomList.forEach(item->LOG.info(item));
-                    LOG.info("distinctSpacesList = ");
-                    distinctSpacesList.forEach(item->LOG.info(item));
-                    List ls1 = compareLists(new ArrayList<>(proposalSpaceRoomList),new ArrayList<>(distinctSpacesList));
-                    List ls2 = compareLists(new ArrayList<>(distinctSpacesList),new ArrayList<>(proposalSpaceRoomList));
+                 LOG.info("yesSpaceRoomListFromSow size = "+yesSpaceRoomListFromSow.size());
+                 LOG.info("spaceRoomListFromAddon size = "+spaceRoomListFromAddon.size());
 
-                    if(ls1.size() > 0 ){
-                        StringBuilder val = new StringBuilder();
-                        ls1.forEach(item->val.append(item+","));
-                        response.put("status","Failure");
-                        response.put("comments","There are entries in SOW, but no addons for following SpaceType_Room : "+val.deleteCharAt(val.lastIndexOf(",")));
-                        response.put("params",ls1);
-                        LOG.info("Response is :: "+response);
-                        sendJsonResponse(routingContext, response.toString());
-                    }else if(ls2.size() > 0 ){
-                        StringBuilder val = new StringBuilder();
-                        ls2.forEach(item->val.append(item+","));
-                        response.put("status","Failure");
-                        response.put("comments","Please add the SOWs for the following SpaceType_Room : "+val.deleteCharAt(val.lastIndexOf(",")));
-                        response.put("params",ls2);
-                        LOG.info("Response is :: "+response);
-                        sendJsonResponse(routingContext, response.toString());
-                    }else{
-                       getListOfAddonCodesFromSowServiceMap(routingContext,spaceService,params);
-                    }
-                }
+                 if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0){
+                     publishTheProposal(routingContext);
+                 }else {
+
+                     List ls1 = compareLists(new ArrayList<>(yesSpaceRoomListFromSow), new ArrayList<>(spaceRoomListFromAddon));
+                     List ls2 = compareLists(new ArrayList<>(spaceRoomListFromAddon), new ArrayList<>(spaceRoomListFromSow));
+
+                     if (ls1.size() == 0) {
+                         getListOfProposalAddons(routingContext, sowList, params);
+                     } else if (ls1.size() > 0) {
+                         StringBuilder val = new StringBuilder();
+                         ls1.forEach(item -> val.append(item + ","));
+                         response.put("status", "Failure");
+                         response.put("comments", "Please add the Addons for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("params", ls1);
+                         LOG.info("Response is :: " + response);
+                         sendJsonResponse(routingContext, response.toString());
+                     } else if (ls2.size() > 0) {
+                         StringBuilder val = new StringBuilder();
+                         ls2.forEach(item -> val.append(item + ","));
+                         response.put("status", "Failure");
+                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("params", ls2);
+                         LOG.info("Response is :: " + response);
+                         sendJsonResponse(routingContext, response.toString());
+                     } else {
+                         getListOfProposalAddons(routingContext, sowList, params);
+                     }
+                 }
             }
         });
 
     }
-    private void getListOfAddonCodesFromSowServiceMap(RoutingContext routingContext,List
-            <JsonObject>spaceServiceFromSow,JsonObject params) {
-        JsonObject response = new JsonObject();
-        List addOnsFromsowServiceMp = new ArrayList();
-        Integer id = LocalCache.getInstance().store(new QueryData("select.sowservicemap", params));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
-            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if (resultData.errorFlag) {
-                sendError(routingContext, "Error in getting addon codes.");
-                LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
-            } else {
-                if (resultData.rows.size() == 0) {
-                    LOG.info("NO ADDONS ARE SELECTED IN SOW SHEET");
-                    response.put("status","Failure");
-                    response.put("comments", "No addons are there for SOW");
-                    sendJsonResponse(routingContext, response.toString());
-                } else {
-//                    resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row.getString("addonCode")));
-                    resultData.rows.forEach(row->addOnsFromsowServiceMp.add(row));
-                    //get the service code also and add to diff list
-                    getListOfAddOnCodesFromProductAddons(routingContext,spaceServiceFromSow,addOnsFromsowServiceMp);
 
-                }
-            }
-            });
-
-    }
-
-    private void getListOfAddOnCodesFromProductAddons(RoutingContext routingContext,List
-            <JsonObject>spaceServiceFromSow,List addOnsFromsowServiceMp) {
+    private void getListOfProposalAddons(RoutingContext routingContext,List
+            <JsonObject>sowList,JsonObject params) {
         JsonObject queryParams =  new JsonObject();
         queryParams.put("proposalId", routingContext.getBodyAsJson().getInteger("proposalId"));
         queryParams.put("fromVersion", routingContext.getBodyAsJson().getDouble("version"));
 
         JsonObject response = new JsonObject();
-        List addOnsFromProductAddons = new ArrayList();
+        List addOnsFromProductAddonsWithcode = new ArrayList();
+        List addOnFromProduct = new ArrayList();
+        List addOnCodeFromSow = new ArrayList();
+        List addOnCodeFromSowwithNo = new ArrayList();
+        List addOnCodeFromSowwithYes = new ArrayList();
         Integer id = LocalCache.getInstance().store(new QueryData("select.proposalAddOns", queryParams));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
             QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if (resultData.errorFlag) {
+            if ((resultData.errorFlag)||(resultData.rows.size() == 0) ) {
                 sendError(routingContext, "Error in getting addon codes.");
                 LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
-            } else {
-                if (resultData.rows.size() == 0) {
-                    LOG.info("NO ADDONS ARE THERE FOR SERVICE IN PRODUCTS" );
-                    // get services which don't have
-                    response.put("status","Failure");
-                    response.put("comments", "No addons are there for service " );
-                    sendJsonResponse(routingContext, response.toString());
-                } else {
-//                    resultData.rows.forEach(row->addOnsFromProductAddons.add(row.getString("code")));
+            } else
+                {
+                    resultData.rows.forEach(row->addOnsFromProductAddonsWithcode.add(row));
+                    resultData.rows.forEach(row-> addOnFromProduct.add(row.getString("spaceType")+"_"+row.getString("L1S01Code")));
+                    sowList.forEach(sow-> {
+                        if(sow.getString("L1S01").equalsIgnoreCase("Yes") || sow.getString("L1S01").equalsIgnoreCase("No"))
+                            addOnCodeFromSow.add(sow.getString("spaceType") + "_" + sow.getString("L1S01Code"));
 
-                    resultData.rows.forEach(row->addOnsFromProductAddons.add(row));
-                    LOG.info("addOnsFromsowServiceMp ::");
-                    addOnsFromsowServiceMp.forEach(item->LOG.info(item));
+                        if(sow.getString("L1S01").equalsIgnoreCase("No"))
+                            addOnCodeFromSowwithNo.add(sow.getString("spaceType") + "_" + sow.getString("L1S01Code"));
 
-                    LOG.info("addOnsFromProductAddons ::");
-                    addOnsFromProductAddons.forEach(item->LOG.info(item));
+                        if(sow.getString("L1S01").equalsIgnoreCase("Yes"))
+                            addOnCodeFromSowwithYes.add(sow.getString("spaceType") + "_" + sow.getString("L1S01Code"));
+                    });
 
-                    Set serviceSetFromSowNotInProdAddOn  = new HashSet();
-                    boolean found = false;
+                    List l1 = compareLists(new ArrayList<>(addOnCodeFromSow),new ArrayList<>(addOnFromProduct));
+                    List l3 =compareLists(new ArrayList<>(l1),new ArrayList<>(addOnCodeFromSowwithNo));
+                    List l2 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSow));
+                    List l4 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSowwithYes));
 
-                    for(Object object1 : addOnsFromsowServiceMp){
-                        String key = ((JsonObject)object1).getString("addonCode");
-                        for(Object object2: addOnsFromProductAddons){
-                            LOG.info("Obj1 = "+object1+", Obj2 = "+object2);
-                            String addOnFromSow = ((JsonObject)object2).getString("code");
-
-                            if(addOnFromSow.equalsIgnoreCase(key)){
-                                found = true;
-                                break;
-                            }else{
-                                serviceSetFromSowNotInProdAddOn.add(object1);
-                            }
-                        }
-                    }
-
-
-                    Set prodSetFromProdAddOnNotInSow  = new HashSet();
-                    boolean prodFound = false;
-
-                    for(Object object1 : addOnsFromProductAddons){
-                        String key = ((JsonObject)object1).getString("code");
-                        for(Object object2: addOnsFromsowServiceMp){
-                            LOG.info("Obj1 = "+object1+", Obj2 = "+object2);
-                            String addOnFromProd = ((JsonObject)object2).getString("addonCode");
-
-                            if(addOnFromProd.equalsIgnoreCase(key)){
-                                prodFound = true;
-//                                break;
-                            }else{
-                                prodSetFromProdAddOnNotInSow.add(object1);
-                            }
-                        }
-                    }
-
-                    if(!found){
-                        LOG.info("No Addons are there for the added SOW" );
-                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+                    //check l3 and l2 values and ssend error message.....
+                    if(l3.size() > 0){
+                        //there is sow, no adon for that
+                        StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                        response.put("comments", "Please add Addons for following SOW - "
-                                +getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
-                        LOG.info("Response is:: "+response );
+                        response.put("comments","Add the addon for the following : "+getL1SO1Value(l3));
+                        LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
-                    }else if(!prodFound){
-                        LOG.info("No SOWs are there for the Addons added" );
-                        LOG.info(getL1SO1Value(new ArrayList<JsonObject>(serviceSetFromSowNotInProdAddOn)));
+
+                    }else if (l2.size() > 0){
+                        StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                            response.put("comments", "Please add SOWs for following addons - "
-                                +getL1SO1Value(new ArrayList<JsonObject>(prodSetFromProdAddOnNotInSow)));
+                        response.put("comments","Add the SOW  for the following : "+getL1SO1Value(l2));
+                        LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
-                    }
-                    else{
+
+                    }else if(l4.size() > 0){StringBuilder val = new StringBuilder();
+                        response.put("status","Failure");
+                        response.put("comments","Make SOW response as 'Yes' for the following : "+getL1SO1Value(l4));
+                        LOG.info("Response is :: "+response);
+                        sendJsonResponse(routingContext, response.toString());
+
+                    }else{
                         publishTheProposal(routingContext);
                     }
-
                 }
-            }
+
         });
     }
-    private String getL1SO1Value(List<JsonObject> paramObj){
+
+    private String getL1SO1Value(List<String> paramObj){
         StringBuilder sbServiceName = new StringBuilder();
         paramObj.forEach(item->{
-            String spaceType = item.getString("spaceType");
+            String space_L1Code = item;
+            String[] spaceAndCode = space_L1Code.split("_");
+
+            String spaceType = spaceAndCode[0];
             Collection<SOWMaster> sowMasterList = ModuleDataService.getInstance().getSOWMaster(spaceType);
             Object[] masterSOWs = (Object[])sowMasterList.toArray();
 
-            String strL1S01Code = item.getString("L1S01Code");
+            String strL1S01Code = spaceAndCode[1];
             int noOfRows = masterSOWs.length;
             for(int i =0 ;i< noOfRows;i++){
                 SOWMaster sow = (SOWMaster) masterSOWs[i];
