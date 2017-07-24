@@ -19,7 +19,6 @@ import com.mygubbi.game.proposal.price.RateCardService;
 import com.mygubbi.game.proposal.quote.MergePdfsRequest;
 import com.mygubbi.game.proposal.quote.PdfMerger;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
-import com.mygubbi.game.proposal.sow.SOWWriteToDatabase;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.game.proposal.quote.SowPdfRequest;
 import com.mygubbi.route.AbstractRouteHandler;
@@ -51,7 +50,7 @@ public class ProposalHandler extends AbstractRouteHandler
     private String proposalDocsFolder = null;
 
     public DriveServiceProvider serviceProvider;
-    public SOWWriteToDatabase sowWriteToDatabase;
+
     public BOQWriteToDatabase boqWriteToDatabase;
 
     public ProposalHandler(Vertx vertx)
@@ -74,7 +73,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/createsowsheet").handler(this::createSowSheet);
         //this.post("/createboqsheet").handler(this::createBoqSheet);
-        this.post("/savesowfile").handler(this::saveSowFile);
+
         this.post("/discardsowfile").handler(this::discardSowFile);
         this.post("/copysowlineitems").handler(this::copySowLineItems);
         this.post("/createboqlineitems").handler(this::createBoqLineItems);
@@ -680,25 +679,7 @@ public class ProposalHandler extends AbstractRouteHandler
                 });
     }
 
-    private void saveSowFile(RoutingContext routingContext)
-    {
-       JsonObject jsonObject = routingContext.getBodyAsJson();
-        LOG.debug("Json object :0 " + jsonObject);
-        String file_id = jsonObject.getString("id");
-        int proposalId = jsonObject.getInteger("proposalId");
-        String version = jsonObject.getString("version");
-        String path = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal")+
-                "/"+proposalId+"/"+ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");//"D:/Mygubbi GAME/sow_downloaded.xlsx";
-        try {
-            this.serviceProvider = new DriveServiceProvider();
-        } catch (Exception e) {
-            this.serviceProvider = new DriveServiceProvider(true);
-        }
-        this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
-        this.sowWriteToDatabase = new SOWWriteToDatabase();
-        this.sowWriteToDatabase.writeToDB(path,proposalId,version);
-        sendJsonResponse(routingContext,jsonObject.toString());
-    }
+
 
     private void discardSowFile(RoutingContext routingContext)
     {

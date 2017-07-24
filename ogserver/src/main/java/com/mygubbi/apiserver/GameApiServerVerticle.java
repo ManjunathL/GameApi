@@ -6,6 +6,7 @@ import com.mygubbi.config.StaticConfigHandler;
 import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.Upload.CloudinaryFileUploadHandler;
 import com.mygubbi.game.proposal.Upload.FileUploadHandler;
+import com.mygubbi.game.proposal.sow.SOWWriteToDatabaseHandler;
 import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import com.mygubbi.si.crm.CrmApiHandler;
@@ -114,6 +115,8 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/user.reg", new GameUserRegistrationHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/user.change_pwd", new GameUserChangePwdHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/sow", new SOWWriteToDatabaseHandler(VertxInstance.get()));
+//        router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/product", new ProposalProductHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/addon", new ProposalAddonHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/module", new ProposalModuleHandler(VertxInstance.get()));
