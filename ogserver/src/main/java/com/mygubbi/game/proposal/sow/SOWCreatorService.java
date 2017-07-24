@@ -67,10 +67,20 @@ public class SOWCreatorService extends AbstractVerticle {
         JsonObject jsonObject = new JsonObject().put("proposalId", quoteRequest.getInteger("proposalId"))
                 .put("userId",quoteRequest.getString("userId")).put("readOnlyFlag",quoteRequest.getString("readOnlyFlag"));
 
+        String verFromProposal = String.valueOf(version);
+        String sowversion = null;
+        if(verFromProposal.contains("0.")){
+            sowversion = "1.0";
+        }else if(verFromProposal.contains("1.")){
+            sowversion = "2.0";
+        }else{
+            LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
+        }
+
         if (version==1.0 || version==2.0) {
             String versiontobeconsidered = String.valueOf(version);
             jsonObject.put("versiontobeconsidered" , versiontobeconsidered);
-            jsonObject.put("sowversion" , version == 1.0 ? "1.0" : "2.0");
+            jsonObject.put("sowversion" , sowversion);
             db_query_product = "proposal.product.specificversion";
             db_query_addon = "proposal.addon.specificversion";
         }
@@ -78,7 +88,7 @@ public class SOWCreatorService extends AbstractVerticle {
         {
             db_query_product = "proposal.product.sow.till1";
             db_query_addon = "proposal.addon.sow.till1";
-            jsonObject.put("sowversion" , "1.0");
+            jsonObject.put("sowversion" , sowversion);
         }
         else
         {

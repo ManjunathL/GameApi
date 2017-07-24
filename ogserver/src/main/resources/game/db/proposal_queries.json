@@ -1623,7 +1623,7 @@
       "id": "select.proposalAddOns",
       "type": "select",
       "table": "proposal_addon",
-      "query": "select addon.spaceType, mp.L1S01Code as L1S01Code ,addon.code as code from (select * from proposal_addon   where proposalId = ?  and fromVersion = ? and categoryCode in ('Appliances','Counter Top','Services'))addon left outer join sow_service_map mp on mp.addOnCode = addon.code",
+      "query": "select addon.spaceType, mp.L1S01Code as L1S01Code ,addon.code as code from (select * from proposal_addon   where proposalId = ?  and fromVersion = ? and categoryCode in ('Appliances','Counter Top','Services'))addon left outer join sow_service_map mp on mp.addOnCode = addon.code and mp.spaceType = addon.spaceType",
       "params": ["proposalId","fromVersion"],
       "jsonfields":[]
     },{

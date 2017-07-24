@@ -303,6 +303,8 @@ public class ProposalHandler extends AbstractRouteHandler
                         sendJsonResponse(routingContext, response.toString());
 
                     }else if (l2.size() > 0){
+                        LOG.info("L2 is :: ");
+                        l2.forEach(item -> LOG.info(item));
                         StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
                         response.put("comments","Add the SOW  for the following : "+getL1SO1Value(l2));
