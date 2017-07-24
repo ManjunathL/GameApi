@@ -144,7 +144,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         LOG.info(res.toString());
                         sendJsonResponse(context, res.toString());
                     }else {
-                        LOG.info("Inserted sow Record to DB ");
+                        LOG.info("Inserted sow Record to DB Successfully.");
                         JsonObject res = new JsonObject();
                         res.put("status", "Success");
                         res.put("comments", "Successfully uploaded SOW ");
@@ -204,11 +204,20 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                             if (!(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
                                 for (Integer services_cell : cell_Services) {
                                     XSSFCell xssfCell = xssfRow.getCell(services_cell);
-
+                                    String first_level_service = xssfRow.getCell(3).getStringCellValue();
+                                    LOG.info("first_level_service = "+first_level_service);
                                     if (!(xssfRow.getCell(0).getStringCellValue().equals("")) || xssfRow.getCell(0).getStringCellValue().isEmpty()) {
                                         spaceType = xssfRow.getCell(16).getStringCellValue();
                                         room = xssfRow.getCell(17).getStringCellValue();
                                         L1s01code = xssfRow.getCell(18).getStringCellValue();
+                                    }
+
+                                    if(first_level_service.length() == 0){
+                                        JsonObject res = new JsonObject();
+                                        res.put("status", "Failure");
+                                        res.put("comments", "It is manadatory to fill first level services.");
+                                        LOG.info(res.toString());
+                                        sendJsonResponse(context, res.toString());
                                     }
 
 

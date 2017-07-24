@@ -69,7 +69,7 @@ public class SOWCreatorService extends AbstractVerticle {
 
         String verFromProposal = String.valueOf(version);
         String sowversion = null;
-        if(verFromProposal.contains("0.")){
+        if(verFromProposal.contains("0.") || verFromProposal.equals("1.0")){
             sowversion = "1.0";
         }else if(verFromProposal.contains("1.")){
             sowversion = "2.0";
@@ -78,6 +78,7 @@ public class SOWCreatorService extends AbstractVerticle {
         }
 
         if (version==1.0 || version==2.0) {
+            LOG.info("version==1.0 || version==2.0 ");
             String versiontobeconsidered = String.valueOf(version);
             jsonObject.put("versiontobeconsidered" , versiontobeconsidered);
             jsonObject.put("sowversion" , sowversion);
@@ -86,12 +87,14 @@ public class SOWCreatorService extends AbstractVerticle {
         }
         else if (version<1.0)
         {
+            LOG.info("version<1.0 ");
             db_query_product = "proposal.product.sow.till1";
             db_query_addon = "proposal.addon.sow.till1";
             jsonObject.put("sowversion" , sowversion);
         }
         else
         {
+            LOG.info("ELSE");
             db_query_product = "proposal.product.sow.till2";
             db_query_addon = "proposal.addon.sow.till2";
             jsonObject.put("sowversion" , "2.0");

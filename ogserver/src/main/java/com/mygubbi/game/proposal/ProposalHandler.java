@@ -223,11 +223,21 @@ public class ProposalHandler extends AbstractRouteHandler
                  if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0){
                      publishTheProposal(routingContext);
                  }else {
+                     List ls0 = compareLists(new ArrayList<>(spaceRoomListFromProduct), new ArrayList<>(spaceRoomListFromSow));
 
                      List ls1 = compareLists(new ArrayList<>(yesSpaceRoomListFromSow), new ArrayList<>(spaceRoomListFromAddon));
                      List ls2 = compareLists(new ArrayList<>(spaceRoomListFromAddon), new ArrayList<>(spaceRoomListFromSow));
 
-                     if (ls1.size() == 0) {
+                     if(ls0.size() > 0){
+                         StringBuilder val = new StringBuilder();
+                         ls0.forEach(item -> val.append(item + ","));
+                         response.put("status", "Failure");
+                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("params", ls1);
+                         LOG.info("Response is :: " + response);
+                         sendJsonResponse(routingContext, response.toString());
+                     }
+                     else if (ls1.size() == 0) {
                          getListOfProposalAddons(routingContext, sowList, params);
                      } else if (ls1.size() > 0) {
                          StringBuilder val = new StringBuilder();
