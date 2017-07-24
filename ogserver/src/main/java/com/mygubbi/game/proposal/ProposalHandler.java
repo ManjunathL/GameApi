@@ -689,7 +689,11 @@ public class ProposalHandler extends AbstractRouteHandler
         String version = jsonObject.getString("version");
         String path = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal")+
                 "/"+proposalId+"/"+ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");//"D:/Mygubbi GAME/sow_downloaded.xlsx";
-        this.serviceProvider = new DriveServiceProvider();
+        try {
+            this.serviceProvider = new DriveServiceProvider();
+        } catch (Exception e) {
+            this.serviceProvider = new DriveServiceProvider(true);
+        }
         this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
         this.sowWriteToDatabase = new SOWWriteToDatabase();
         this.sowWriteToDatabase.writeToDB(path,proposalId,version);

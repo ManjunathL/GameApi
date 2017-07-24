@@ -37,6 +37,13 @@ public class DriveServiceProvider
         this.initMimeTypes();
     }
 
+    public DriveServiceProvider(boolean flag)
+    {
+        this.serviceManager = new DriveServiceManager();
+        this.serviceManager.init(flag);
+        this.initMimeTypes();
+    }
+
     private void initMimeTypes()
     {
         this.mimeTypes = new HashMap<>();

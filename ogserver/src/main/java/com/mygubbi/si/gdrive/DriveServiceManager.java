@@ -81,6 +81,22 @@ public class DriveServiceManager
         }
     }
 
+    public void init(boolean flag)
+    {
+        LOG.info("Google drive initialized at start:" + initalized);
+
+        try
+        {
+            HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+            DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
+            this.drive = initDriveService();
+        }
+        catch (Throwable t)
+        {
+            throw new IllegalStateException("Could not initialize http transport and data store factory", t);
+        }
+    }
+
     /**
      * Creates an authorized Credential object.
      */
