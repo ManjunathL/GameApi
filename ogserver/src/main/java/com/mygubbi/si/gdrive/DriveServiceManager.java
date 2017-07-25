@@ -28,7 +28,7 @@ public class DriveServiceManager
 {
     private final static Logger LOG = LogManager.getLogger(DriveServiceManager.class);
 
-    private static volatile boolean initalized = false;
+    static volatile boolean initalized = false;
 
     private String credentialsJson;
     private String APPLICATION_NAME;

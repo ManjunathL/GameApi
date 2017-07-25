@@ -180,7 +180,17 @@ public class DriveServiceProvider
         }
         catch (IOException e)
         {
-            throw new RuntimeException("Unable to make user " + email + " to edit file " + id,e);
+            try {
+//            e.printStackTrace();
+//                throw new RuntimeException("Unable to make user " + email + " to edit file " + id, e);
+                DriveServiceManager.initalized = true;
+                this.serviceManager.getDrive().permissions().create(id, userPermission).setSendNotificationEmail(false)
+                        .setFields("id").execute();
+            }catch(IOException e2){
+                e2.printStackTrace();
+                throw new RuntimeException("Unable to make user " + email + " to edit file " + id, e);
+            }
+
         }
     }
 
