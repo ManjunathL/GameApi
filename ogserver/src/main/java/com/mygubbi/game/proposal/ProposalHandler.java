@@ -238,6 +238,7 @@ public class ProposalHandler extends AbstractRouteHandler
                          sendJsonResponse(routingContext, response.toString());
                      }
                      else if (ls1.size() == 0) {
+                         LOG.info("Saving From here !!!");
                          getListOfProposalAddons(routingContext, sowList, params);
                      } else if (ls1.size() > 0) {
                          StringBuilder val = new StringBuilder();
@@ -285,29 +286,35 @@ public class ProposalHandler extends AbstractRouteHandler
             } else
                 {
                     resultData.rows.forEach(row->addOnsFromProductAddonsWithcode.add(row));
-                    resultData.rows.forEach(row-> addOnFromProduct.add(row.getString("spaceType")+"_"+row.getString("L1S01Code")));
-                    sowList.forEach(sow-> {
-                        if(sow.getString("L1S01").equalsIgnoreCase("Yes") || sow.getString("L1S01").equalsIgnoreCase("No"))
-                            addOnCodeFromSow.add(sow.getString("spaceType") + "_" + sow.getString("L1S01Code"));
 
+                    resultData.rows.forEach(row->{
+                        LOG.info("row.getString(\"roomCode\") = "+row.getString("roomCode"));
+                        addOnFromProduct.add(row.getString("spaceType")+"_"+row.getString("roomcode")
+                            +"_"+row.getString("L1S01Code"));});
+                    sowList.forEach(sow-> {
+                        if(sow.getString("L1S01").equalsIgnoreCase("Yes") || sow.getString("L1S01").equalsIgnoreCase("No")) {
+                            addOnCodeFromSow.add(sow.getString("spaceType") + "_" + sow.getString("roomcode") + "_" + sow.getString("L1S01Code"));
+                        }
                         if(sow.getString("L1S01").equalsIgnoreCase("No"))
-                            addOnCodeFromSowwithNo.add(sow.getString("spaceType") + "_" + sow.getString("L1S01Code"));
+                            addOnCodeFromSowwithNo.add(sow.getString("spaceType")+"_"+sow.getString("roomcode") + "_" + sow.getString("L1S01Code"));
 
                         if(sow.getString("L1S01").equalsIgnoreCase("Yes"))
-                            addOnCodeFromSowwithYes.add(sow.getString("spaceType") + "_" + sow.getString("L1S01Code"));
+                            addOnCodeFromSowwithYes.add(sow.getString("spaceType")+"_"+sow.getString("roomcode") + "_" + sow.getString("L1S01Code"));
                     });
 
-                    List l1 = compareLists(new ArrayList<>(addOnCodeFromSow),new ArrayList<>(addOnFromProduct));
-                    List l3 =compareLists(new ArrayList<>(l1),new ArrayList<>(addOnCodeFromSowwithNo));
-                    List l2 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSow));
-                    List l4 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSowwithYes));
+                    List<String> l1 = compareLists(new ArrayList<>(addOnCodeFromSow),new ArrayList<>(addOnFromProduct));
+                    List<String> l3 =compareLists(new ArrayList<>(l1),new ArrayList<>(addOnCodeFromSowwithNo));
+                    List<String> l2 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSow));
+                    List<String> l4 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSowwithYes));
 
                     //check l3 and l2 values and ssend error message.....
                     if(l3.size() > 0){
                         //there is sow, no adon for that
+
                         StringBuilder val = new StringBuilder();
+
                         response.put("status","Failure");
-                        response.put("comments","Add the addon for the following : "+getL1SO1Value(l3));
+                        response.put("comments","Add the addon for the following - "+getParamValues(l3));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 
@@ -316,13 +323,13 @@ public class ProposalHandler extends AbstractRouteHandler
                         l2.forEach(item -> LOG.info(item));
                         StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                        response.put("comments","Add the SOW  for the following : "+getL1SO1Value(l2));
+                        response.put("comments","Add the SOW  for the following - "+getParamValues(l2));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 
                     }else if(l4.size() > 0){StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                        response.put("comments","Make SOW response as 'Yes' for the following : "+getL1SO1Value(l4));
+                        response.put("comments","Make SOW response as 'Yes' for the following - "+getParamValues(l4));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 
@@ -334,6 +341,22 @@ public class ProposalHandler extends AbstractRouteHandler
         });
     }
 
+    private String getParamValues(List<String> paramObj){
+
+        String l1s01Code = getL1SO1Value (paramObj);
+        StringBuilder sbSpaceAndRoom = new StringBuilder();
+        paramObj.forEach(item-> {
+            String space_L1Code = item;
+            LOG.info("space_L1Code = "+space_L1Code);
+            String[] spaceAndCode = space_L1Code.split("_");
+
+            LOG.info("space, Room = "+spaceAndCode[0]+", "+spaceAndCode[1]);
+            sbSpaceAndRoom.append(spaceAndCode[0]+"_");
+            sbSpaceAndRoom.append(spaceAndCode[1]+",");
+        });
+        return l1s01Code +"in SpaceType_Room "+sbSpaceAndRoom.deleteCharAt(sbSpaceAndRoom.lastIndexOf(","));
+    }
+
     private String getL1SO1Value(List<String> paramObj){
         StringBuilder sbServiceName = new StringBuilder();
         paramObj.forEach(item->{
@@ -343,21 +366,20 @@ public class ProposalHandler extends AbstractRouteHandler
             String spaceType = spaceAndCode[0];
             Collection<SOWMaster> sowMasterList = ModuleDataService.getInstance().getSOWMaster(spaceType);
             Object[] masterSOWs = (Object[])sowMasterList.toArray();
-
-            String strL1S01Code = spaceAndCode[1];
+//indesx 1 is room code
+            String strL1S01Code = spaceAndCode[2];
             int noOfRows = masterSOWs.length;
             for(int i =0 ;i< noOfRows;i++){
                 SOWMaster sow = (SOWMaster) masterSOWs[i];
 
                 if(sow.getL1S01Code().equalsIgnoreCase(strL1S01Code)){
                     sbServiceName.append(sow.getL1S01());
-                    if((i+1) > noOfRows){
-                        sbServiceName.append(", ");
-                    }
+                    sbServiceName.append(", ");
+
                 }
             }
         });
-      return sbServiceName.toString();
+      return  sbServiceName.deleteCharAt(sbServiceName.lastIndexOf(",")).toString();
     }
     private void publishTheProposal(RoutingContext routingContext) {
         JsonObject queryParams = new JsonObject();
