@@ -71,7 +71,7 @@ public class SOWCreatorService extends AbstractVerticle {
         String sowversion = null;
         if(verFromProposal.contains("0.") || verFromProposal.equals("1.0")){
             sowversion = "1.0";
-        }else if(verFromProposal.contains("1.")){
+        }else if(verFromProposal.contains("1.") || verFromProposal.contains("2.")){
             sowversion = "2.0";
         }else{
             LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
@@ -268,8 +268,15 @@ public class SOWCreatorService extends AbstractVerticle {
 
         String outputFile = new SOWTemplateCreator(proposalHeader,proposalSOWs,sowrequest.getString("sowversion")).create();
 
-        DriveFile driveFile = this.driveServiceProvider.uploadFileForUser(outputFile,sowrequest.getString("userId"), proposalHeader.getQuoteNumNew() + "_SOW", proposalHeader.getSalesEmail(), sowrequest.getString("readOnlyFlag"));
-        sendResponse(message, new JsonObject().put("driveWebViewLink",driveFile.getWebViewLink()).put("id",driveFile.getId()).put("outputFile",outputFile).put("version",sowrequest.getString("sowversion")));
+        DriveFile driveFile = null;
+        try {
+            driveFile = this.driveServiceProvider.uploadFileForUser(outputFile,sowrequest.getString("userId"), proposalHeader.getQuoteNumNew() + "_SOW", proposalHeader.getSalesEmail(), sowrequest.getString("readOnlyFlag"));
+            sendResponse(message, new JsonObject().put("status","success").put("driveWebViewLink",driveFile.getWebViewLink()).put("id",driveFile.getId()).put("outputFile",outputFile).put("version",sowrequest.getString("sowversion")));
+
+        } catch (Exception e) {
+            sendResponse(message, new JsonObject().put("status","failure").put("driveWebViewLink",driveFile.getWebViewLink()).put("id",driveFile.getId()).put("outputFile",outputFile).put("version",sowrequest.getString("sowversion")));
+            e.printStackTrace();
+        }
     }
 
     private void sendResponse(Message message, JsonObject response)
