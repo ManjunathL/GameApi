@@ -733,7 +733,7 @@ public class ModulePriceHolder
                 }
                 else
                 {
-                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) )
+                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory()))
                     {
                         LOG.info("shoerack value 1 " +rate);
                         this.addToShutterCost(panel.getCost() * rate);
@@ -771,7 +771,7 @@ public class ModulePriceHolder
                 }
                 else
                 {
-                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) )
+                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory()) )
                     {
                         LOG.info("Shoerack value in else 2 " +rate);
                         this.addToCarcassCost(panel.getCost() * rate);
