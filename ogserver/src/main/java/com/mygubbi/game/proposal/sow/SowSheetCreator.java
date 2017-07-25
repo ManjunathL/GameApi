@@ -430,7 +430,7 @@ public class SowSheetCreator implements ExcelCellProcessor
                 return this.proposalHeader.getQuoteNumNew();
             case "clientdetails":
                 return this.proposalHeader.getName() + " , " + this.proposalHeader.getCrmId();
-            case "version":
+            case "sowversion":
                 return this.version;
             case "remarks":
                 if (this.version.equals("1.0"))
