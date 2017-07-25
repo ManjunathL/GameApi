@@ -132,6 +132,7 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void publishVersionAfterValidation(RoutingContext context){
+        LOG.info("Hitting  publishVersionAfterValidation");
         JsonObject contextJson = context.getBodyAsJson();
 
         String verFromProposal = String.valueOf(contextJson.getDouble("version"));
@@ -153,6 +154,7 @@ public class ProposalHandler extends AbstractRouteHandler
         List sowList = new ArrayList();
         Set spaceRoomListFromSow = new HashSet();
         Set yesSpaceRoomListFromSow = new HashSet();
+        Set noSpaceRoomListFromSow = new HashSet();
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.proposalversion", queryParams));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -172,6 +174,8 @@ public class ProposalHandler extends AbstractRouteHandler
                                 sowList.add(row);
                                 if(row.getString("L1S01").equalsIgnoreCase("Yes"))
                                     yesSpaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+                                if(row.getString("L1S01").equalsIgnoreCase("No"))
+                                    noSpaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
                                 spaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
                             });
 
@@ -179,7 +183,9 @@ public class ProposalHandler extends AbstractRouteHandler
                             spaceRoomList.addAll(spaceRoomListFromSow);
                             List spaceRoomListWithYes = new ArrayList();
                             spaceRoomListWithYes.addAll(yesSpaceRoomListFromSow);
-                            getListOfAddonAndProduct(context, sowList,spaceRoomList,spaceRoomListWithYes, queryParams);
+                            List spaceRoomListWithNo = new ArrayList();
+                            spaceRoomListWithNo.addAll(noSpaceRoomListFromSow);
+                            getListOfAddonAndProduct(context, sowList,spaceRoomList,spaceRoomListWithYes,spaceRoomListWithNo, queryParams);
                         }
 
                     }
@@ -187,7 +193,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     }
 
-    private void getListOfAddonAndProduct(RoutingContext routingContext,List sowList,List spaceRoomListFromSow,List yesSpaceRoomListFromSow,JsonObject params) {
+    private void getListOfAddonAndProduct(RoutingContext routingContext,List sowList,List spaceRoomListFromSow,List yesSpaceRoomListFromSow,List spaceRoomListWithNo,JsonObject params) {
         JsonObject queryParams =  new JsonObject();
         Integer proposalId = routingContext.getBodyAsJson().getInteger("proposalId");
         Double version = routingContext.getBodyAsJson().getDouble("version");
@@ -218,11 +224,23 @@ public class ProposalHandler extends AbstractRouteHandler
                     });
 
                  LOG.info("yesSpaceRoomListFromSow size = "+yesSpaceRoomListFromSow.size());
+                LOG.info("spaceRoomListWithNo size = "+spaceRoomListWithNo.size());
                  LOG.info("spaceRoomListFromAddon size = "+spaceRoomListFromAddon.size());
 
-                 if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0){
+                 if((yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0)
+                     && (spaceRoomListWithNo.size() != 0))
+                {
                      publishTheProposal(routingContext);
                  }else {
+
+                     if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListWithNo.size() == 0){
+                         LOG.info("SOW ROWS NOT THERE");
+                         response.put("status","Failure");
+                         response.put("comments", "No associated SOW");
+                         LOG.info("Response is :: "+response);
+                         sendJsonResponse(routingContext, response.toString());
+                     }
+
                      List ls0 = compareLists(new ArrayList<>(spaceRoomListFromProduct), new ArrayList<>(spaceRoomListFromSow));
 
                      List ls1 = compareLists(new ArrayList<>(yesSpaceRoomListFromSow), new ArrayList<>(spaceRoomListFromAddon));
