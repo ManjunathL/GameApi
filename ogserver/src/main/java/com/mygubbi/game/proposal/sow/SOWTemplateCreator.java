@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Sunil on 22-05-2016.
@@ -43,7 +45,10 @@ public class SOWTemplateCreator
 
     public String getOutputFilename()
     {
-        return "/sow.xlsx";
+
+
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 1000 + 1);
+        return "/sow.xlsx" + randomNum;
     }
 
 
