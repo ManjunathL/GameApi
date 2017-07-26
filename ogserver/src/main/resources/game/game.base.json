@@ -54,7 +54,7 @@
 
   "driveAppName" : "GAME Drive App",
   "driveCredentials" : "/game/gamedrive.json",
-  "localDriveFolder" : "D:/data/gdrive/"
+  "localDriveFolder" : "E:/data/gdrive/"
 
 
 }

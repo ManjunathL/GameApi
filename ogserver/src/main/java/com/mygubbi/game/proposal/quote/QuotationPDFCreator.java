@@ -571,7 +571,7 @@ public class QuotationPDFCreator
             tab.addCell(new Paragraph("1. The quote rate is inclusive of Applicable taxes." + ", Taxes are subject to changes, due to Govt. policies & changes in the rate if any, - the same will be chared at the time of submission of bill.\n"
                     +"2. The images depicted in the drawings and presentations are representative only. The final design - drawings provided and approved by the client will be conceived and executed at the site.\n"
                     +"3. The above quoted rate is as per a Typical Apartment and there will be variation in rates as per the final site conditions / Measurements / Specifications / Design.\n"
-                    +"4. Quote is valid for 15 Days only",fsize));
+                    +"4. Quote is valid for 30 Days only",fsize));
         document.add(tab);
 
         PdfPTable table3=new PdfPTable(2);
@@ -584,7 +584,7 @@ public class QuotationPDFCreator
 
         PdfPTable table4=new PdfPTable(1);
         table4.setWidthPercentage(100);
-            table4.addCell(new Paragraph("6. Design Sign up fees amounting to Rs.15000/- or 10% of the Budgetary quote is non-refundable. This amount will be adjusted against the final order value. Booking confirmation shall be acknowledged in the copy of this budgetary proposal.\n"
+            table4.addCell(new Paragraph("6. Design Sign up fees amounting to 10% of the Budgetary quote is non-refundable. This amount will be adjusted against the final order value. Booking confirmation shall be acknowledged in the copy of this budgetary proposal.\n"
                     +"7. The 50% advance paid post approval of the design and quote cannot be refunded as the production would have be commenced.\n"
                     +"8. Warranty : 5 years of warranty against any manufacturing defect. The material specifications and brands specified are as per the approved standards of Gubbi Technologies Private Limited and covered under warranty.\n"
                     +"9. Any modifications/alterations to the proposed design will have an impact on the techno commercials of this quote and hence new drawings as well as associated commercials will be provided for by MyGubbi if the same occurs.\n"
