@@ -243,15 +243,35 @@ public class ProposalHandler extends AbstractRouteHandler
 
                      List ls0 = compareLists(new ArrayList<>(spaceRoomListFromProduct), new ArrayList<>(spaceRoomListFromSow));
 
+                     LOG.info("spaceRoomListFromAddon is :: " );
+                     spaceRoomListFromAddon.forEach(item -> LOG.info(item + ","));
+
+                     LOG.info("spaceRoomListFromSow is :: " );
+                     spaceRoomListFromSow.forEach(item -> LOG.info(item + ","));
+
+
+
+                     List ls00 = compareLists(new ArrayList<>(spaceRoomListFromAddon), new ArrayList<>(spaceRoomListFromSow));
+
                      List ls1 = compareLists(new ArrayList<>(yesSpaceRoomListFromSow), new ArrayList<>(spaceRoomListFromAddon));
                      List ls2 = compareLists(new ArrayList<>(spaceRoomListFromAddon), new ArrayList<>(spaceRoomListFromSow));
 
-                     if(ls0.size() > 0){
+                     if(ls0.size() > 0 ){
+                         LOG.info("LS0 is :: " + ls0.size());
                          StringBuilder val = new StringBuilder();
                          ls0.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
                          response.put("comments", "Please add the SOWs for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
-                         response.put("params", ls1);
+                         response.put("params", ls0);
+                         LOG.info("Response is :: " + response);
+                         sendJsonResponse(routingContext, response.toString());
+                     }else if(ls00.size() > 0 ){
+                         LOG.info("LS00 is :: " + ls00.size());
+                         StringBuilder val = new StringBuilder();
+                         ls00.forEach(item -> val.append(item + ","));
+                         response.put("status", "Failure");
+                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("params", ls00);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
                      }
@@ -298,7 +318,7 @@ public class ProposalHandler extends AbstractRouteHandler
         Integer id = LocalCache.getInstance().store(new QueryData("select.proposalAddOns", queryParams));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
             QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if ((resultData.errorFlag)||(resultData.rows.size() == 0) ) {
+            if ((resultData.errorFlag)) {
                 sendError(routingContext, "Error in getting addon codes.");
                 LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
             } else
