@@ -35,6 +35,9 @@ public class HardwareComponent
         this.city = city;
     }
 
+    public HardwareComponent() {
+    }
+
     public AccHwComponent getComponent()
     {
         return component;
@@ -63,7 +66,7 @@ public class HardwareComponent
         return moduleComponent.getQuantity();
     }
 
-    private double calculateQuantityUsingFormula(ProductModule productModule, IModuleComponent moduleComponent)
+    public double calculateQuantityUsingFormula(ProductModule productModule, IModuleComponent moduleComponent)
     {
         switch (moduleComponent.getQuantityFormula())
         {

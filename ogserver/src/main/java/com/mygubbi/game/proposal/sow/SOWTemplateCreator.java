@@ -55,7 +55,7 @@ public class SOWTemplateCreator
     public String create()
     {
         this.openWorkbook();
-        new SowSheetCreator((XSSFSheet) this.workbookManager.getSheetByName("sow"),this.workbookManager.getStyles(),this.proposalHeader,proposal_sows, sowVersion).prepare();
+        new SowSheetCreator((XSSFSheet) this.workbookManager.getSheetByName("Scope Of Services"),this.workbookManager.getStyles(),this.proposalHeader,proposal_sows, sowVersion).prepare();
         this.closeWorkbook();
         return outputFile;
     }

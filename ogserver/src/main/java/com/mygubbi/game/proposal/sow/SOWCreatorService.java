@@ -146,7 +146,7 @@ public class SOWCreatorService extends AbstractVerticle {
         for (JsonObject proposalSpace : proposalSpaces)
         {
             String space = proposalSpace.getString("spaceType");
-            String room = proposalSpace.getString("roomcode");
+            String room = proposalSpace.getString("roomcode").toLowerCase();
             LOG.debug("Add to spaces to sow :" + space + " | room" + room);
 
             if (spaceNotExistinProposalSow(space,room,proposalSows))
@@ -190,7 +190,7 @@ public class SOWCreatorService extends AbstractVerticle {
         for (JsonObject proposalSpace : proposalSows)
         {
             String sowSpace = proposalSpace.getString("spaceType");
-            String sowroom = proposalSpace.getString("roomcode");
+            String sowroom = proposalSpace.getString("roomcode").toLowerCase();
             LOG.debug("Space Type : " + sowSpace + " | roomcode :" + sowroom);
 
           if (space.equals(sowSpace) && room.equals(sowroom))
