@@ -166,7 +166,7 @@ public class ProposalHandler extends AbstractRouteHandler
                         if (resultData.rows.size() == 0) {
                             LOG.info("SOW ROWS NOT THERE");
                             response.put("status","Failure");
-                            response.put("comments", "No associated SOW");
+                            response.put("comments", "No associated Scope of Services");
                             LOG.info("Response is :: "+response);
                             sendJsonResponse(context, response.toString());
                         }else{
@@ -236,7 +236,7 @@ public class ProposalHandler extends AbstractRouteHandler
                      if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListWithNo.size() == 0){
                          LOG.info("SOW ROWS NOT THERE");
                          response.put("status","Failure");
-                         response.put("comments", "No associated SOW");
+                         response.put("comments", "No associated Scope of Services");
                          LOG.info("Response is :: "+response);
                          sendJsonResponse(routingContext, response.toString());
                      }
@@ -261,7 +261,7 @@ public class ProposalHandler extends AbstractRouteHandler
                          StringBuilder val = new StringBuilder();
                          ls0.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
-                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("comments", "Please add the Scope of Services for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
                          response.put("params", ls0);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
@@ -270,7 +270,7 @@ public class ProposalHandler extends AbstractRouteHandler
                          StringBuilder val = new StringBuilder();
                          ls00.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
-                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("comments", "Please add the Scope of Services for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
                          response.put("params", ls00);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
@@ -290,7 +290,7 @@ public class ProposalHandler extends AbstractRouteHandler
                          StringBuilder val = new StringBuilder();
                          ls2.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
-                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("comments", "Please add the Scope of Services for the following SpaceType_Room : " + val.deleteCharAt(val.lastIndexOf(",")));
                          response.put("params", ls2);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
@@ -361,13 +361,13 @@ public class ProposalHandler extends AbstractRouteHandler
                         l2.forEach(item -> LOG.info(item));
                         StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                        response.put("comments","Add the SOW  for the following - "+getParamValues(l2));
+                        response.put("comments","Add the Scope of Services for the following - "+getParamValues(l2));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 
                     }else if(l4.size() > 0){StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                        response.put("comments","Make SOW response as 'Yes' for the following - "+getParamValues(l4));
+                        response.put("comments","Make Scope of Services response as 'Yes' for the following - "+getParamValues(l4));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 

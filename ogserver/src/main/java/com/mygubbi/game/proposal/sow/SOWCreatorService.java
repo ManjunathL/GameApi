@@ -220,7 +220,7 @@ public class SOWCreatorService extends AbstractVerticle {
     private void sendError(Message message) {
         JsonObject res = new JsonObject();
         res.put("status", "Failure");
-        res.put("comments", "Error in creating sow");
+        res.put("comments", "Error in creating scope of services");
         message.reply(res);
     }
 
