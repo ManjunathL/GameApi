@@ -57,6 +57,15 @@ public class AssembledProductInQuote
         this.prepare();
     }
 
+    public Date getPriceDate()
+    {
+        return this.priceDate;
+    }
+    public String getCity()
+    {
+        return this.city;
+    }
+
     public String getTitle()
     {
         return this.product.getTitle();

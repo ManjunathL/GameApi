@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
@@ -9,7 +10,9 @@ import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.rmi.runtime.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -501,10 +504,14 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-        p=new Paragraph("Please refer Appendix-1 for detailed Scope of Services",fsize1);
-        p.setAlignment(Element.ALIGN_LEFT);
-        document.add(p);
+            String fileToUpload = ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");
+            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
+        if(fileSowFileExists(proposalFolder+"/"+this.quoteData.getProposalHeader().getId()+"/"+fileToUpload)){
 
+            p = new Paragraph("Please refer Appendix-1 for detailed Scope of Services", fsize1);
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
+        }
             p = new Paragraph("      ");
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
@@ -606,6 +613,16 @@ public class QuotationPDFCreator
         {
             LOG.info(e.getMessage());
         }
+    }
+    private boolean fileSowFileExists(String fileName){
+
+        File f = new File(fileName);
+        if(f.exists() && !f.isDirectory()) {
+            LOG.info("FileName :: "+fileName +" Exists");
+            return true;
+        }
+        LOG.info("FileName :: "+fileName +" Not     Exists");
+        return false;
     }
 
     public void fillAssembledProducts(PdfPTable tabname)

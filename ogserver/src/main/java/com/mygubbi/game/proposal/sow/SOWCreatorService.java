@@ -146,7 +146,7 @@ public class SOWCreatorService extends AbstractVerticle {
         for (JsonObject proposalSpace : proposalSpaces)
         {
             String space = proposalSpace.getString("spaceType");
-            String room = proposalSpace.getString("roomcode");
+            String room = proposalSpace.getString("roomcode").toLowerCase();
             LOG.debug("Add to spaces to sow :" + space + " | room" + room);
 
             if (spaceNotExistinProposalSow(space,room,proposalSows))
@@ -190,7 +190,7 @@ public class SOWCreatorService extends AbstractVerticle {
         for (JsonObject proposalSpace : proposalSows)
         {
             String sowSpace = proposalSpace.getString("spaceType");
-            String sowroom = proposalSpace.getString("roomcode");
+            String sowroom = proposalSpace.getString("roomcode").toLowerCase();
             LOG.debug("Space Type : " + sowSpace + " | roomcode :" + sowroom);
 
           if (space.equals(sowSpace) && room.equals(sowroom))
@@ -218,7 +218,10 @@ public class SOWCreatorService extends AbstractVerticle {
     }
 
     private void sendError(Message message) {
-        message.reply(new JsonObject().put("error","Error in creating sow"));
+        JsonObject res = new JsonObject();
+        res.put("status", "Failure");
+        res.put("comments", "Error in creating sow");
+        message.reply(res);
     }
 
     private void createSowinDrive(JsonObject sowrequest, Message message) {
@@ -261,21 +264,32 @@ public class SOWCreatorService extends AbstractVerticle {
 
     private void createSowAndUploadToDrive(JsonObject sowrequest,Message message, ProposalHeader proposalHeader, List<ProposalSOW> proposalSOWs) {
 
-        LOG.info("proposalSOWs are ::"+proposalSOWs.listIterator().toString());
-        proposalSOWs.forEach(item->LOG.info(item));
+        LOG.info("proposalSOWs size = "+proposalSOWs);
+        if(proposalSOWs.size()  == 0){
+            JsonObject res = new JsonObject();
+            res.put("status", "Failure");
+            res.put("comments", "Please add the products/addons before creating Scope of services");
+            LOG.info(res.toString());
+            sendResponse(message, res);
 
-        LOG.debug("SOW Version in sow crearor service : " + sowrequest.getString("sowversion") );
+        }else {
+            DriveFile driveFile = null;
+            try {
+                String outputFile = new SOWTemplateCreator(proposalHeader,proposalSOWs,sowrequest.getString("sowversion")).create();
+                driveFile = this.driveServiceProvider.uploadFileForUser(outputFile, sowrequest.getString("userId"), proposalHeader.getQuoteNumNew() + "_SOW", proposalHeader.getSalesEmail(), sowrequest.getString("readOnlyFlag"));
+                JsonObject res = new JsonObject();
+                res.put("status", "Success");
+                res.put("driveWebViewLink", driveFile.getWebViewLink());
+                res.put("id", driveFile.getId());
+                res.put("outputFile", outputFile);
+                res.put("version", sowrequest.getString("sowversion"));
+                LOG.info(res.toString());
 
-        String outputFile = new SOWTemplateCreator(proposalHeader,proposalSOWs,sowrequest.getString("sowversion")).create();
-
-        DriveFile driveFile = null;
-        try {
-            driveFile = this.driveServiceProvider.uploadFileForUser(outputFile,sowrequest.getString("userId"), proposalHeader.getQuoteNumNew() + "_SOW", proposalHeader.getSalesEmail(), sowrequest.getString("readOnlyFlag"));
-            sendResponse(message, new JsonObject().put("status","success").put("driveWebViewLink",driveFile.getWebViewLink()).put("id",driveFile.getId()).put("outputFile",outputFile).put("version",sowrequest.getString("sowversion")));
-
-        } catch (Exception e) {
-            sendResponse(message, new JsonObject().put("status","failure").put("driveWebViewLink",driveFile.getWebViewLink()).put("id",driveFile.getId()).put("outputFile",outputFile).put("version",sowrequest.getString("sowversion")));
-            e.printStackTrace();
+                sendResponse(message, res);
+            } catch (Exception e) {
+                sendResponse(message, new JsonObject().put("status","failure").put("driveWebViewLink","").put("id","").put("outputFile","").put("version",sowrequest.getString("sowversion")));
+                e.printStackTrace();
+            }
         }
     }
 

@@ -423,13 +423,13 @@ public class SowSheetCreator implements ExcelCellProcessor
         {
             case "date":
                 return DateFormatUtils.format(new Date(), "dd-MMM-yyyy");
-            case "qno":
-                String vnum=this.proposalHeader.getQuoteNumNew();
+            case "crm_id":
+                String vnum=this.proposalHeader.getCrmId();
                 return vnum;
-            case "clientno":
+            case "quotation_number":
                 return this.proposalHeader.getQuoteNumNew();
-            case "clientdetails":
-                return this.proposalHeader.getName() + " , " + this.proposalHeader.getCrmId();
+            case "client_name":
+                return this.proposalHeader.getName();
             case "sowversion":
                 return this.version;
             case "remarks":

@@ -24,11 +24,12 @@ public class Proposal_BOQ extends JsonObject {
     public static final String DSO_RATE ="DSORate";
     public static final String DSO_QTY ="DSOQty";
     public static final String DSO_PRICE ="DSOPrice";
-    public static final String PLANNER_ERP_ITEM_CODE = "PlannerErpItemCode";
-    public static final String PLANNER_UOM ="PlannerUom";
-    public static final String PLANNER_RATE ="PlannerRate";
-    public static final String PLANNER_QTY ="PlannerQty";
-    public static final String PLANNER_PRICE ="PlannerPrice";
+    public static final String PLANNER_ERP_ITEM_CODE = "plannerErpItemCode";
+    public static final String PLANNER_REFERENCE_PART_NO ="plannerReferencePartNo";
+    public static final String PLANNER_UOM ="plannerUom";
+    public static final String PLANNER_RATE ="plannerRate";
+    public static final String PLANNER_QTY ="plannerQty";
+    public static final String PLANNER_PRICE ="plannerPrice";
 
     public Proposal_BOQ() {}
 
@@ -185,7 +186,7 @@ public class Proposal_BOQ extends JsonObject {
         return this;
     }
 
-    public Proposal_BOQ setReferencePartNo(String referencePartNo)
+    public Proposal_BOQ setDSOReferencePartNo(String referencePartNo)
     {
         put(DSO_REFERENCE_PART_NO,referencePartNo);
         return this;
@@ -218,6 +219,12 @@ public class Proposal_BOQ extends JsonObject {
     public Proposal_BOQ setPlannerErpCode(String plannerErpCode)
     {
         put(PLANNER_ERP_ITEM_CODE,plannerErpCode);
+        return this;
+    }
+
+    public Proposal_BOQ setPlannerReferencePartNo(String plannerReferencePartNo)
+    {
+        put(PLANNER_REFERENCE_PART_NO,plannerReferencePartNo);
         return this;
     }
 

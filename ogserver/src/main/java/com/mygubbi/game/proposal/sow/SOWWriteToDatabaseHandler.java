@@ -278,12 +278,23 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                     proposal_sow.setSpaceType(spaceType);
                                     proposal_sow.setRoom(room);
                                     proposal_sow.setL1S01(services_value.get(0));
-                                    proposal_sow.setL2S01(services_value.get(1));
-                                    proposal_sow.setL2S02(services_value.get(2));
-                                    proposal_sow.setL2S03(services_value.get(3));
-                                    proposal_sow.setL2S04(services_value.get(4));
-                                    proposal_sow.setL2S05(services_value.get(5));
-                                    proposal_sow.setL2S06(services_value.get(6));
+                                    if (proposal_sow.getL1S01().equals("No"))
+                                    {
+                                        proposal_sow.setL2S01("");
+                                        proposal_sow.setL2S02("");
+                                        proposal_sow.setL2S03("");
+                                        proposal_sow.setL2S04("");
+                                        proposal_sow.setL2S05("");
+                                        proposal_sow.setL2S06("");
+                                    }
+                                    else {
+                                        proposal_sow.setL2S01(services_value.get(1));
+                                        proposal_sow.setL2S02(services_value.get(2));
+                                        proposal_sow.setL2S03(services_value.get(3));
+                                        proposal_sow.setL2S04(services_value.get(4));
+                                        proposal_sow.setL2S05(services_value.get(5));
+                                        proposal_sow.setL2S06(services_value.get(6));
+                                    }
                                     proposal_sow.setL1S01Code(L1s01code);
 
 
