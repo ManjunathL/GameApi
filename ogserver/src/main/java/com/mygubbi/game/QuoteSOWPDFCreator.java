@@ -230,10 +230,10 @@ public class QuoteSOWPDFCreator
         }
         LOG.info("version" +sowversion);
 
-        jsonObject.put("version",1.0);
-        jsonObject.put("proposalId",4910);
+        jsonObject.put("version",sowversion);
+        jsonObject.put("proposalId",proposalHeader.getId());
 
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.proposalversion", jsonObject));
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.forpdfDownload", jsonObject));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<io.vertx.core.eventbus.Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());

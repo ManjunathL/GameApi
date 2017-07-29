@@ -1569,6 +1569,14 @@
       "jsonfields":[]
     },
     {
+      "id": "proposal.sow.select.forpdfDownload",
+      "type": "select",
+      "table": "proposal_sow",
+      "query": "select master.spaceType,sow.roomCode, master.L1S01,sow.L1S01,master.L2S01,sow.L2S01, master.L2S02,sow.L2S02,master.L2S03,sow.L2S03, master.L2S04,sow.L2S03, master.L2S05, sow.L2S05,master.L2S06,sow.L2S06 from sow_master master inner join (select * from proposal_sow where proposalId = 5131 and version = 2.0)sow on sow.spaceType = master.spaceType and sow.L1S01Code  = master.L1S01Code order by sow.spaceType,sow.roomCode,sow.L1S01Code",
+      "params": ["proposalId","version"],
+      "jsonfields":[]
+    },
+    {
       "id": "spaces.select.fromProductAndAddon",
       "type": "select",
       "table": "proposal_product",
