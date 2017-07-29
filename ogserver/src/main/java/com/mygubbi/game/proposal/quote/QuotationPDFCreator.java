@@ -3,6 +3,7 @@ package com.mygubbi.game.proposal.quote;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.mygubbi.config.ConfigHolder;
+import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
@@ -10,7 +11,6 @@ import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.rmi.runtime.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -608,6 +608,11 @@ public class QuotationPDFCreator
 
         document.close();
 
+            QuoteSOWPDFCreator  quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData);
+            quoteSOWPDFCreator.createSOWPDf("E:\\sowpdf.pdf");
+            /*SOWdata soWdata=new SOWdata();
+            java.util.List<ProposalSOW> ll=soWdata.sowList(proposalHeader,quoteData);
+            LOG.info("size in pdf " +ll.size());*/
         }
         catch(Exception e)
         {

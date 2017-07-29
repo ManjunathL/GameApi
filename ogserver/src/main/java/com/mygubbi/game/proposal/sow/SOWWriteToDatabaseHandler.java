@@ -147,7 +147,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         LOG.info("Inserted sow Record to DB Successfully.");
                         JsonObject res = new JsonObject();
                         res.put("status", "Success");
-                        res.put("comments", "Successfully uploaded SOW ");
+                        res.put("comments", "Successfully uploaded scope of services.");
                         LOG.info(res.toString());
                         sendJsonResponse(context, res.toString());
                     }
@@ -215,7 +215,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                     if(first_level_service.length() == 0){
                                         JsonObject res = new JsonObject();
                                         res.put("status", "Failure");
-                                        res.put("comments", "It is manadatory to fill first level services.");
+                                        res.put("comments", "Its mandatory to answer all the basic (level 1) questions.");
                                         LOG.info(res.toString());
                                         sendJsonResponse(context, res.toString());
                                     }
@@ -242,7 +242,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                                 if(services_value.get(count).length() > 0) {
                                                     JsonObject res = new JsonObject();
                                                     res.put("status", "Failure");
-                                                    res.put("comments", "Please Select Level2 services for " + xssfRow.getCell(2).getStringCellValue());
+                                                    res.put("comments", "Please answer level 2 questions for the selected level 1 question -" + xssfRow.getCell(2).getStringCellValue());
                                                     LOG.info(res.toString());
                                                     sendJsonResponse(context, res.toString());
                                                 }
@@ -268,7 +268,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                 if (!isGubbi && (services_value.get(0).equalsIgnoreCase("Yes"))) {
                                     JsonObject res = new JsonObject();
                                     res.put("status", "Failure");
-                                    res.put("comments", "Please select atleast one Level2 service by Mygubbi for " + xssfRow.getCell(2).getStringCellValue());
+                                    res.put("comments", "Atleast one of the level 2 questions should have Mygubbi as the scope for the chosen level 1 question - " + xssfRow.getCell(2).getStringCellValue());
                                     LOG.info(res.toString());
                                     sendJsonResponse(context, res.toString());
                                 }else {
