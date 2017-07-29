@@ -1565,7 +1565,7 @@
       "type": "select",
       "table": "proposal_sow",
       "query": "select * from proposal_sow where proposalId = ? and version = ?",
-      "params": ["proposalId","sowversion"],
+      "params": ["proposalId","version"],
       "jsonfields":[]
     },
     {
