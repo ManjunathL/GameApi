@@ -53,6 +53,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     public BOQWriteToDatabase boqWriteToDatabase;
 
+    private  final static String COLON_DELIMITER = ":";
     public ProposalHandler(Vertx vertx)
     {
         super(vertx);
@@ -142,7 +143,8 @@ public class ProposalHandler extends AbstractRouteHandler
         }else if(verFromProposal.contains("1.")){
             sowVersion = "2.0";
         }else{
-            LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
+            LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);
+            return;
         }
 
         JsonObject queryParams =  new JsonObject();
@@ -166,17 +168,17 @@ public class ProposalHandler extends AbstractRouteHandler
                         if (resultData.rows.size() == 0) {
                             LOG.info("SOW ROWS NOT THERE");
                             response.put("status","Failure");
-                            response.put("comments", "No associated SOW");
+                            response.put("comments", "There is no scope of service/s.   ");
                             LOG.info("Response is :: "+response);
                             sendJsonResponse(context, response.toString());
                         }else{
                             resultData.rows.forEach(row -> {
                                 sowList.add(row);
                                 if(row.getString("L1S01").equalsIgnoreCase("Yes"))
-                                    yesSpaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+                                    yesSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode"));
                                 if(row.getString("L1S01").equalsIgnoreCase("No"))
-                                    noSpaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
-                                spaceRoomListFromSow.add(row.getString("spaceType")+"_"+row.getString("roomcode"));
+                                    noSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode"));
+                                spaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode"));
                             });
 
                             List spaceRoomList = new ArrayList();
@@ -218,36 +220,41 @@ public class ProposalHandler extends AbstractRouteHandler
             {
                  resultData.rows.forEach(row ->{
                      if(row.getString("type").equalsIgnoreCase("Product"))
-                        spaceRoomListFromProduct.add(row.getString("spaceType")+"_"+row.getString("roomCode"));
+                        spaceRoomListFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode"));
                      else
-                         spaceRoomListFromAddon.add(row.getString("spaceType")+"_"+row.getString("roomCode"));
+                         spaceRoomListFromAddon.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode"));
                     });
+
+                LOG.info("spaceRoomListFromProduct size = "+spaceRoomListFromProduct.size());
+
+                spaceRoomListFromProduct.forEach(item -> LOG.info(item + ","));
 
                  LOG.info("yesSpaceRoomListFromSow size = "+yesSpaceRoomListFromSow.size());
                 LOG.info("spaceRoomListWithNo size = "+spaceRoomListWithNo.size());
                  LOG.info("spaceRoomListFromAddon size = "+spaceRoomListFromAddon.size());
 
-                 if((yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0)
+                 if((yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0 && spaceRoomListFromProduct.size()    == 0)
                      && (spaceRoomListWithNo.size() != 0))
                 {
+                    LOG.info("Saving from Different Route");
                      publishTheProposal(routingContext);
                  }else {
 
                      if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListWithNo.size() == 0){
                          LOG.info("SOW ROWS NOT THERE");
                          response.put("status","Failure");
-                         response.put("comments", "No associated SOW");
+                         response.put("comments", "There is no scope of service/s.");
                          LOG.info("Response is :: "+response);
                          sendJsonResponse(routingContext, response.toString());
                      }
 
                      List ls0 = compareLists(new ArrayList<>(spaceRoomListFromProduct), new ArrayList<>(spaceRoomListFromSow));
 
-                     LOG.info("spaceRoomListFromAddon is :: " );
-                     spaceRoomListFromAddon.forEach(item -> LOG.info(item + ","));
+                     LOG.info("spaceRoomListFromProduct is :: " );
 
-                     LOG.info("spaceRoomListFromSow is :: " );
-                     spaceRoomListFromSow.forEach(item -> LOG.info(item + ","));
+
+                     LOG.info("ls0 is :: " );
+                     ls0.forEach(item -> LOG.info(item + ","));
 
 
 
@@ -256,21 +263,34 @@ public class ProposalHandler extends AbstractRouteHandler
                      List ls1 = compareLists(new ArrayList<>(yesSpaceRoomListFromSow), new ArrayList<>(spaceRoomListFromAddon));
                      List ls2 = compareLists(new ArrayList<>(spaceRoomListFromAddon), new ArrayList<>(spaceRoomListFromSow));
 
+                     List list1 = compareLists(new ArrayList<>(spaceRoomListFromProduct),new ArrayList<>(yesSpaceRoomListFromSow));
+                     List list2 = compareLists(list1,new ArrayList<>(spaceRoomListWithNo));
+
                      if(ls0.size() > 0 ){
                          LOG.info("LS0 is :: " + ls0.size());
                          StringBuilder val = new StringBuilder();
                          ls0.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
-                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
                          response.put("params", ls0);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
-                     }else if(ls00.size() > 0 ){
+                     }else if(list2.size() > 0){
+                         LOG.info("list2 is :: " + list2.size());
+                         StringBuilder val = new StringBuilder();
+                         list2.forEach(item -> val.append(item + ","));
+                         response.put("status", "Failure");
+                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("params", list2);
+                         LOG.info("Response is :: " + response);
+                         sendJsonResponse(routingContext, response.toString());
+                     }
+                     else if(ls00.size() > 0 ){
                          LOG.info("LS00 is :: " + ls00.size());
                          StringBuilder val = new StringBuilder();
                          ls00.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
-                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
                          response.put("params", ls00);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
@@ -282,7 +302,7 @@ public class ProposalHandler extends AbstractRouteHandler
                          StringBuilder val = new StringBuilder();
                          ls1.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
-                         response.put("comments", "Please add the Addons for the following SpaceType_Room : : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("comments", "Add the addon/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
                          response.put("params", ls1);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
@@ -290,7 +310,7 @@ public class ProposalHandler extends AbstractRouteHandler
                          StringBuilder val = new StringBuilder();
                          ls2.forEach(item -> val.append(item + ","));
                          response.put("status", "Failure");
-                         response.put("comments", "Please add the SOWs for the following SpaceType_Room : " + val.deleteCharAt(val.lastIndexOf(",")));
+                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
                          response.put("params", ls2);
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
@@ -318,7 +338,7 @@ public class ProposalHandler extends AbstractRouteHandler
         Integer id = LocalCache.getInstance().store(new QueryData("select.proposalAddOns", queryParams));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
             QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if ((resultData.errorFlag)) {
+            if ((resultData.errorFlag) ) {
                 sendError(routingContext, "Error in getting addon codes.");
                 LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
             } else
@@ -327,23 +347,40 @@ public class ProposalHandler extends AbstractRouteHandler
 
                     resultData.rows.forEach(row->{
                         LOG.info("row.getString(\"roomCode\") = "+row.getString("roomCode"));
-                        addOnFromProduct.add(row.getString("spaceType")+"_"+row.getString("roomcode")
-                            +"_"+row.getString("L1S01Code"));});
+                        addOnFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode")
+                            +COLON_DELIMITER+row.getString("L1S01Code"));});
                     sowList.forEach(sow-> {
                         if(sow.getString("L1S01").equalsIgnoreCase("Yes") || sow.getString("L1S01").equalsIgnoreCase("No")) {
-                            addOnCodeFromSow.add(sow.getString("spaceType") + "_" + sow.getString("roomcode") + "_" + sow.getString("L1S01Code"));
+                            addOnCodeFromSow.add(sow.getString("spaceType") + COLON_DELIMITER + sow.getString("roomcode") + COLON_DELIMITER + sow.getString("L1S01Code"));
                         }
                         if(sow.getString("L1S01").equalsIgnoreCase("No"))
-                            addOnCodeFromSowwithNo.add(sow.getString("spaceType")+"_"+sow.getString("roomcode") + "_" + sow.getString("L1S01Code"));
+                            addOnCodeFromSowwithNo.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode") + COLON_DELIMITER + sow.getString("L1S01Code"));
 
                         if(sow.getString("L1S01").equalsIgnoreCase("Yes"))
-                            addOnCodeFromSowwithYes.add(sow.getString("spaceType")+"_"+sow.getString("roomcode") + "_" + sow.getString("L1S01Code"));
+                            addOnCodeFromSowwithYes.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode") + COLON_DELIMITER + sow.getString("L1S01Code"));
                     });
 
                     List<String> l1 = compareLists(new ArrayList<>(addOnCodeFromSow),new ArrayList<>(addOnFromProduct));
                     List<String> l3 =compareLists(new ArrayList<>(l1),new ArrayList<>(addOnCodeFromSowwithNo));
                     List<String> l2 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSow));
                     List<String> l4 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSowwithYes));
+
+                    //if l2,l4 contains any row that has null as L1S01Code then jusrt remove that line from list...
+                    List l2Dup = new ArrayList();
+                    l2Dup.addAll(l2);
+                    l2.forEach(item ->{
+                        if(getL1S01ValFromString(item).length() == 0){
+                            l2Dup.remove(item);
+                        }
+                    });
+
+                    List l4Dup = new ArrayList();
+                    l4Dup.addAll(l4);
+                    l4.forEach(item ->{
+                        if(getL1S01ValFromString(item).length() == 0){
+                            l4Dup.remove(item);
+                        }
+                    });
 
                     //check l3 and l2 values and ssend error message.....
                     if(l3.size() > 0){
@@ -352,22 +389,22 @@ public class ProposalHandler extends AbstractRouteHandler
                         StringBuilder val = new StringBuilder();
 
                         response.put("status","Failure");
-                        response.put("comments","Add the addon for the following - "+getParamValues(l3));
+                        response.put("comments","Add the addon/s for the following - "+getParamValues(l3));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 
-                    }else if (l2.size() > 0){
-                        LOG.info("L2 is :: ");
-                        l2.forEach(item -> LOG.info(item));
+                    }else if (l2Dup.size() > 0){
+                        LOG.info("L2Dup is :: ");
+                        l2Dup.forEach(item -> LOG.info(item));
                         StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                        response.put("comments","Add the SOW  for the following - "+getParamValues(l2));
+                        response.put("comments","Add the scope of service/s  for the following - "+getParamValues(l2Dup));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 
-                    }else if(l4.size() > 0){StringBuilder val = new StringBuilder();
+                    }else if(l4Dup.size() > 0){StringBuilder val = new StringBuilder();
                         response.put("status","Failure");
-                        response.put("comments","Make SOW response as 'Yes' for the following - "+getParamValues(l4));
+                        response.put("comments","Make scope of service/s response as 'yes' for the following - "+getParamValues(l4Dup));
                         LOG.info("Response is :: "+response);
                         sendJsonResponse(routingContext, response.toString());
 
@@ -386,20 +423,39 @@ public class ProposalHandler extends AbstractRouteHandler
         paramObj.forEach(item-> {
             String space_L1Code = item;
             LOG.info("space_L1Code = "+space_L1Code);
-            String[] spaceAndCode = space_L1Code.split("_");
+            String[] spaceAndCode = space_L1Code.split(COLON_DELIMITER);
 
             LOG.info("space, Room = "+spaceAndCode[0]+", "+spaceAndCode[1]);
-            sbSpaceAndRoom.append(spaceAndCode[0]+"_");
+            sbSpaceAndRoom.append(spaceAndCode[0]+COLON_DELIMITER);
             sbSpaceAndRoom.append(spaceAndCode[1]+",");
         });
         return l1s01Code +"in SpaceType_Room "+sbSpaceAndRoom.deleteCharAt(sbSpaceAndRoom.lastIndexOf(","));
     }
 
+    private String getL1S01ValFromString(String item){
+        String space_L1Code = item;
+        String[] spaceAndCode = space_L1Code.split(COLON_DELIMITER);
+
+        String spaceType = spaceAndCode[0];
+        Collection<SOWMaster> sowMasterList = ModuleDataService.getInstance().getSOWMaster(spaceType);
+        Object[] masterSOWs = (Object[])sowMasterList.toArray();
+//indesx 1 is room code
+        String strL1S01Code = spaceAndCode[2];
+        int noOfRows = masterSOWs.length;
+        for(int i =0 ;i< noOfRows;i++){
+            SOWMaster sow = (SOWMaster) masterSOWs[i];
+
+            if(sow.getL1S01Code().equalsIgnoreCase(strL1S01Code)){
+                return(sow.getL1S01());
+            }
+        }
+        return "";
+    }
     private String getL1SO1Value(List<String> paramObj){
         StringBuilder sbServiceName = new StringBuilder();
         paramObj.forEach(item->{
             String space_L1Code = item;
-            String[] spaceAndCode = space_L1Code.split("_");
+            String[] spaceAndCode = space_L1Code.split(COLON_DELIMITER);
 
             String spaceType = spaceAndCode[0];
             Collection<SOWMaster> sowMasterList = ModuleDataService.getInstance().getSOWMaster(spaceType);
@@ -444,7 +500,7 @@ public class ProposalHandler extends AbstractRouteHandler
                 LOG.info("Response is :: SUCCESS");
                 JsonObject response = new JsonObject();
                 response.put("status","success");
-                response.put("comments","Successfully Published Version/Proposal");
+                response.put("comments","Successfully published version/proposal");
                 sendJsonResponse(routingContext,response.toString());
             }
         });
@@ -693,7 +749,7 @@ public class ProposalHandler extends AbstractRouteHandler
                         JsonObject inputJson = new JsonObject();
                         inputJson.put("xlsFileLocation",proposalFolder+ "/" + proposalId+"/");
                         inputJson.put("fileNameToUpload",fileToUpload);
-                        inputJson.put("xlsFileNameInDrive",proposalHeader.getString("quoteNoNew")+"_"+fileToUpload);
+                        inputJson.put("xlsFileNameInDrive",proposalHeader.getString("quoteNoNew")+COLON_DELIMITER+fileToUpload);
                         inputJson.put("userId",context.getBodyAsJson().getString("userId"));
                         createSOWPdfOutput(context,quotePDfResponse,inputJson);
                     }
