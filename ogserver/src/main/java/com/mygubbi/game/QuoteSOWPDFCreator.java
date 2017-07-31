@@ -12,6 +12,7 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalSOW;
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.json.JsonObject;
@@ -52,7 +53,7 @@ public class QuoteSOWPDFCreator
 
     private ProposalHeader proposalHeader;
     private QuoteData quoteData;
-    java.util.List<ProposalSOW> proposalSOWs = new ArrayList<ProposalSOW>();
+    java.util.List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
     Document document = new Document(PageSize.A4.rotate());
     public QuoteSOWPDFCreator(ProposalHeader proposalHeader, QuoteData quoteData)
     {
@@ -228,10 +229,12 @@ public class QuoteSOWPDFCreator
         {
             sowversion = "2.0";
         }
-        LOG.info("version" +sowversion);
+        //LOG.info("version" +sowversion);
 
         jsonObject.put("version",sowversion);
+        //jsonObject.put("version",1.0);
         jsonObject.put("proposalId",proposalHeader.getId());
+        //jsonObject.put("proposalId",4952);
 
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.forpdfDownload", jsonObject));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -244,23 +247,48 @@ public class QuoteSOWPDFCreator
                     else
                     {
                         java.util.List<JsonObject> sow_jsons = resultData.rows;
-                        LOG.info("sow_jsons size" +sow_jsons.size());
+                        //LOG.info("sow_jsons size" +sow_jsons.size());
                         for (JsonObject proposalSOW : sow_jsons)
                         {
-                            LOG.info("data added");
-                            proposalSOWs.add(new ProposalSOW(proposalSOW));
-                            LOG.info("after adding in the list size " +proposalSOWs.size());
+                          //  LOG.info("data added");
+                            proposalSOWs.add(new SOWPdf(proposalSOW));
+                            //LOG.info("after adding in the list size " +proposalSOWs.size());
                             /*createRowAndFillData(sowitemsTable,proposalSOws);*/
                         }
-                        LOG.info("after for loop" +proposalSOWs.size());
-                        for(ProposalSOW proposalSOW:proposalSOWs)
+                        //LOG.info("after for loop" +proposalSOWs.size());
+                        String currentroom=null;
+                        String currentspaceType=null;
+                        String prevroom=null;
+                        String prevspaceType=null;
+                        for(SOWPdf proposalSOW:proposalSOWs)
                         {
-                            LOG.info("inside method " );
-                            createRowAndFillData(sowitemsTable,proposalSOW.getSpaceType(),proposalSOW.getROOM(),proposalSOW.getL1S01Code(),proposalSOW.getL1S01(),proposalSOW.getL2S01(),proposalSOW.getL2S03(),proposalSOW.getL2S03(),proposalSOW.getL2S04(),proposalSOW.getL2S05(),proposalSOW.getL2S06(),"Yes ","Yes ","Yes","Yes","Yes","Yes");
+                            currentroom=proposalSOW.getROOM();
+                            currentspaceType=proposalSOW.getSpaceType();
+                            if(currentroom.equals(prevroom) && currentspaceType.equals(prevspaceType))
+                            {
+                                createRowAndFillData(sowitemsTable, "", "", proposalSOW.getSERVICE(), proposalSOW.getServiceValue(), proposalSOW.getRelatedService1(), proposalSOW.getRelatedServicevalue1(), proposalSOW.getRelatedService2(), proposalSOW.getRelatedServicevalue2(), proposalSOW.getRelatedService3(), proposalSOW.getRelatedServicevalue3(), proposalSOW.getRelatedService4(), proposalSOW.getRelatedServicevalue4(), proposalSOW.getRelatedService5(), proposalSOW.getRelatedServicevalue5(), proposalSOW.getRelatedService6(), proposalSOW.getRelatedServicevalue6());
+                            }
+                            else {
+                                createRowAndFillData(sowitemsTable, proposalSOW.getSpaceType(), proposalSOW.getROOM(), proposalSOW.getSERVICE(), proposalSOW.getServiceValue(), proposalSOW.getRelatedService1(), proposalSOW.getRelatedServicevalue1(), proposalSOW.getRelatedService2(), proposalSOW.getRelatedServicevalue2(), proposalSOW.getRelatedService3(), proposalSOW.getRelatedServicevalue3(), proposalSOW.getRelatedService4(), proposalSOW.getRelatedServicevalue4(), proposalSOW.getRelatedService5(), proposalSOW.getRelatedServicevalue5(), proposalSOW.getRelatedService6(), proposalSOW.getRelatedServicevalue6());
+                            }
+                            prevroom=currentroom;
+                            prevspaceType=currentspaceType;
                         }
                         try
                         {
                             document.add(sowitemsTable);
+
+                            Paragraph p = new Paragraph("      ");
+                            p.setAlignment(Element.ALIGN_LEFT);
+                            document.add(p);
+
+                            p = new Paragraph("      ");
+                            p.setAlignment(Element.ALIGN_LEFT);
+                            document.add(p);
+
+                            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                                                                                                                                                                   " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
+                            document.add(p);
+
                             document.close();
                         }
                         catch (Exception e)
@@ -274,7 +302,7 @@ public class QuoteSOWPDFCreator
 
     private void createRowAndFillData(PdfPTable tabname,String spaceType, String room, String service, String serviceValue, String  relatedService1,String  relatedService1value,String  relatedService2,String  relatedService2value,String  relatedService3,String  relatedService3value,String  relatedService4,String  relatedService4value,String  relatedService5,String  relatedService5value,String  relatedService6,String  relatedService6value)
     {
-        LOG.info("inside create row n fill data");
+        //LOG.info("inside create row n fill data");
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -284,6 +312,7 @@ public class QuoteSOWPDFCreator
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell1.addElement(Pindex);
         tabname.addCell(cell1);
+        cell1.setRowspan(9);
 
         cell=new PdfPCell();
         Pindex=new Paragraph(room,size1);
