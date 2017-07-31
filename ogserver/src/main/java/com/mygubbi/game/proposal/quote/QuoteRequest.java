@@ -17,6 +17,7 @@ public class QuoteRequest
     private static final String DISCOUNT_AMOUNT = "discountAmount";
     private static final String ADDON_IDS = "addonIds";
     private static final String VERSION_IDS = "versionIds";
+    private static final String IS_VALID_SOW = "validSow";
 
     private int proposalId;
     private String fromVersion;
@@ -24,7 +25,17 @@ public class QuoteRequest
     private List<Integer> addonIds;
     private List<Integer> versionIds;
     private double discountAmount = 0.0;
+
+    public boolean isValidSowRows() {
+        return isValidSowRows;
+    }
+
+    public void setValidSowRows(boolean validSowRows) {
+        isValidSowRows = validSowRows;
+    }
+
     private ProposalOutputCreator.OutputType outputType;
+    private boolean isValidSowRows;
     
     public QuoteRequest(int proposalId)
     {
@@ -54,6 +65,9 @@ public class QuoteRequest
         if (jsonData.containsKey(DISCOUNT_AMOUNT))
         {
             this.discountAmount = jsonData.getDouble(DISCOUNT_AMOUNT);
+        }
+        if(jsonData.containsKey(IS_VALID_SOW)){
+            this.isValidSowRows = jsonData.getBoolean(IS_VALID_SOW);
         }
     }
 

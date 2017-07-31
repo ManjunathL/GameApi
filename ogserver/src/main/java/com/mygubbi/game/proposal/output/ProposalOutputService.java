@@ -184,16 +184,17 @@ public class ProposalOutputService extends AbstractVerticle
         try
         {
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader);
+            boolean isValidSow = quoteRequest.isValidSowRows();
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow);
             outputCreator.create();
 
             LOG.debug("created Quotation.pdf");
-            QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData);
-            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
-            String sowDestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
-                    ConfigHolder.getInstance().getStringValue("sow_pdf_fomat","sow.pdf");
-            quoteSOWPDFCreator.createSOWPDf(sowDestinationFile);
-            LOG.debug("created SOW.pdf");
+//            QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData);
+//            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
+//            String sowDestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
+//                    ConfigHolder.getInstance().getStringValue("sow_pdf_fomat","sow.pdf");
+//            quoteSOWPDFCreator.createSOWPDf(sowDestinationFile);
+//            LOG.debug("created SOW.pdf");
             sendResponse(message, new JsonObject().put(outputCreator.getOutputKey(), outputCreator.getOutputFile()));
             LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
         }

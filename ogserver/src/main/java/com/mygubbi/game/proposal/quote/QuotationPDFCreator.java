@@ -2,8 +2,6 @@ package com.mygubbi.game.proposal.quote;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import com.mygubbi.config.ConfigHolder;
-import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
@@ -12,7 +10,6 @@ import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +59,7 @@ public class QuotationPDFCreator
         this.proposalHeader=proposalHeader;
     }
 
-    public void  createpdf(String destination)
+    public void  createpdf(String destination, boolean isValid_Sow)
     {
         try {
 
@@ -505,9 +502,11 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-        p = new Paragraph("Please refer Appendix-1 for detailed Scope of Services", fsize1);
-        p.setAlignment(Element.ALIGN_LEFT);
-        document.add(p);
+        if(isValid_Sow) {
+            p = new Paragraph("Please refer Appendix-1 for detailed Scope of Services", fsize1);
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
+        }
 
             p = new Paragraph("      ");
             p.setAlignment(Element.ALIGN_LEFT);

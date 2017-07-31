@@ -20,7 +20,7 @@ public interface ProposalOutputCreator
 
     public String getOutputKey();
 
-    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader) {
+    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader,Boolean isValidSow) {
 
         switch (outputType) {
             case QUOTATION:
@@ -33,7 +33,7 @@ public interface ProposalOutputCreator
                 return new ExcelSalesOrderCreator(quoteData, proposalHeader);
 
             case QUOTEPDF:
-                return new PdfQuoteCreator(quoteData, proposalHeader);
+                return new PdfQuoteCreator(quoteData, proposalHeader,isValidSow);
             case SOWPDF:
                 return new PdfSowCreator(quoteData, proposalHeader);
 
