@@ -91,6 +91,7 @@ public class SOWCreatorService extends AbstractVerticle {
             db_query_product = "proposal.product.sow.till1";
             db_query_addon = "proposal.addon.sow.till1";
             jsonObject.put("sowversion" , sowversion);
+
         }
         else
         {
@@ -99,6 +100,7 @@ public class SOWCreatorService extends AbstractVerticle {
             db_query_addon = "proposal.addon.sow.till2";
             jsonObject.put("sowversion" , "2.0");
         }
+        jsonObject.put("version" , sowversion);
 
         queryDatas.add(new QueryData(db_query_product,jsonObject));
         queryDatas.add(new QueryData(db_query_addon,jsonObject));
@@ -253,8 +255,10 @@ public class SOWCreatorService extends AbstractVerticle {
                         List<ProposalSOW> proposalSOWs = new ArrayList<ProposalSOW>();
                         for (JsonObject proposalSOW : sow_jsons)
                         {
+                            LOG.info("proposalSOW = "+proposalSOW);
                             proposalSOWs.add(new ProposalSOW(proposalSOW));
                         }
+                        proposalSOWs.forEach(item -> {LOG.info(item);});
                         createSowAndUploadToDrive(sowrequest,message,proposalHeader, proposalSOWs);
                     }
 
@@ -264,7 +268,7 @@ public class SOWCreatorService extends AbstractVerticle {
 
     private void createSowAndUploadToDrive(JsonObject sowrequest,Message message, ProposalHeader proposalHeader, List<ProposalSOW> proposalSOWs) {
 
-        LOG.info("proposalSOWs size = "+proposalSOWs);
+        LOG.info("proposalSOWs size = "+proposalSOWs.size());
         if(proposalSOWs.size()  == 0){
             JsonObject res = new JsonObject();
             res.put("status", "Failure");

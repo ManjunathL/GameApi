@@ -44,6 +44,7 @@ public class QuotationPDFCreator
     NumberToWord word=new NumberToWord();
     List<QuotationPDFCreator.customeclass> li,li2;
 
+
     private static final String[] ALPHABET_SEQUENCE = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"};
     private static final String[] ROMAN_SEQUENCE = new String[]{"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv"};
 
@@ -504,14 +505,10 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-            String fileToUpload = ConfigHolder.getInstance().getStringValue("sow_downloaded_xls_format","sow.xlsx");
-            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
-        if(fileSowFileExists(proposalFolder+"/"+this.quoteData.getProposalHeader().getId()+"/"+fileToUpload)){
+        p = new Paragraph("Please refer Appendix-1 for detailed Scope of Services", fsize1);
+        p.setAlignment(Element.ALIGN_LEFT);
+        document.add(p);
 
-            p = new Paragraph("Please refer Appendix-1 for detailed Scope of Services", fsize1);
-            p.setAlignment(Element.ALIGN_LEFT);
-            document.add(p);
-        }
             p = new Paragraph("      ");
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
@@ -605,30 +602,21 @@ public class QuotationPDFCreator
 
             p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
         document.add(p);
-
         document.close();
 
-            QuoteSOWPDFCreator  quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData);
-            quoteSOWPDFCreator.createSOWPDf("E:\\sowpdf.pdf");
+
             /*SOWdata soWdata=new SOWdata();
             java.util.List<ProposalSOW> ll=soWdata.sowList(proposalHeader,quoteData);
             LOG.info("size in pdf " +ll.size());*/
+
+
         }
         catch(Exception e)
         {
             LOG.info(e.getMessage());
         }
     }
-    private boolean fileSowFileExists(String fileName){
 
-        File f = new File(fileName);
-        if(f.exists() && !f.isDirectory()) {
-            LOG.info("FileName :: "+fileName +" Exists");
-            return true;
-        }
-        LOG.info("FileName :: "+fileName +" Not     Exists");
-        return false;
-    }
 
     public void fillAssembledProducts(PdfPTable tabname)
     {

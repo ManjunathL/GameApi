@@ -2,8 +2,10 @@ package com.mygubbi.game.proposal.output;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
+import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
@@ -53,7 +55,9 @@ public class ProposalOutputService extends AbstractVerticle
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());
         });
+
     }
+
 
     private void getProposalHeader(QuoteRequest quoteRequest, Message message)
     {
@@ -182,6 +186,14 @@ public class ProposalOutputService extends AbstractVerticle
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader);
             outputCreator.create();
+
+            LOG.debug("created Quotation.pdf");
+            QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData);
+            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
+            String sowDestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
+                    ConfigHolder.getInstance().getStringValue("sow_pdf_fomat","sow.pdf");
+            quoteSOWPDFCreator.createSOWPDf(sowDestinationFile);
+            LOG.debug("created SOW.pdf");
             sendResponse(message, new JsonObject().put(outputCreator.getOutputKey(), outputCreator.getOutputFile()));
             LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
         }

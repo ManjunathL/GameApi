@@ -12,7 +12,7 @@ import com.mygubbi.game.proposal.quote.*;
  */
 public interface ProposalOutputCreator
 {
-    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF, SOW};
+    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF, SOW,SOWPDF};
 
     public void create();
 
@@ -34,6 +34,8 @@ public interface ProposalOutputCreator
 
             case QUOTEPDF:
                 return new PdfQuoteCreator(quoteData, proposalHeader);
+            case SOWPDF:
+                return new PdfSowCreator(quoteData, proposalHeader);
 
             default:
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
