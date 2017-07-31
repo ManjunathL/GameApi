@@ -48,7 +48,7 @@ public class SOWTemplateCreator
 
 
         int randomNum = ThreadLocalRandom.current().nextInt(1, 1000 + 1);
-        return "/sow.xlsx" + randomNum;
+        return  randomNum + "/sow.xlsx" ;
     }
 
 
