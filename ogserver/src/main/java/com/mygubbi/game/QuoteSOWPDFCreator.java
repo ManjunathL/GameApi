@@ -277,6 +277,18 @@ public class QuoteSOWPDFCreator
                         try
                         {
                             document.add(sowitemsTable);
+
+                            Paragraph p = new Paragraph("      ");
+                            p.setAlignment(Element.ALIGN_LEFT);
+                            document.add(p);
+
+                            p = new Paragraph("      ");
+                            p.setAlignment(Element.ALIGN_LEFT);
+                            document.add(p);
+
+                            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                                                                                                                                                                   " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
+                            document.add(p);
+
                             document.close();
                         }
                         catch (Exception e)
