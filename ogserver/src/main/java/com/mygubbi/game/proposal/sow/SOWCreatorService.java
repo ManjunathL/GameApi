@@ -153,7 +153,7 @@ public class SOWCreatorService extends AbstractVerticle {
 
             if (spaceNotExistinProposalSow(space,room,proposalSows))
             {
-                LOG.info("spaceNotExistinProposalSow Returning TRUE");
+                LOG.info("Spaces not present in proposal sow");
                 proposalSpace.put("proposalId",quoteRequest.getInteger("proposalId"));
                 proposalSpace.put("version",quoteRequest.getString("sowversion"));
                 QueryData queryData = new QueryData("proposal.sow.create",proposalSpace);
@@ -167,10 +167,10 @@ public class SOWCreatorService extends AbstractVerticle {
         LOG.debug("delete spaces");
         for (JsonObject sowSpace : sowSpaces)
         {
-            LOG.debug("Json object in add spaces :" + sowSpaces.toString());
+            LOG.debug("Json object in delete spaces :" + sowSpaces.toString());
 
-            String space = sowSpace.getString("spaceType");
-            String room = sowSpace.getString("roomcode");
+            String space = sowSpace.getString("spaceType").toLowerCase();
+            String room = sowSpace.getString("roomcode").toLowerCase();
 
 
             if (spaceNotExistinProposalSow(space,room,proposalSpaces))
@@ -193,7 +193,7 @@ public class SOWCreatorService extends AbstractVerticle {
         {
             String sowSpace = proposalSpace.getString("spaceType");
             String sowroom = proposalSpace.getString("roomcode").toLowerCase();
-            LOG.debug("Space Type : " + sowSpace + " | roomcode :" + sowroom);
+            LOG.debug("Space Type : " + sowSpace + " | roomcode :" + sowroom + " | space :");
 
           if (space.equals(sowSpace) && room.equals(sowroom))
               return false;

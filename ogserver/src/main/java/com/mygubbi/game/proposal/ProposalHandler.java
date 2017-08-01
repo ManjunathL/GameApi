@@ -175,10 +175,10 @@ public class ProposalHandler extends AbstractRouteHandler
                             resultData.rows.forEach(row -> {
                                 sowList.add(row);
                                 if(row.getString("L1S01").equalsIgnoreCase("Yes"))
-                                    yesSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode"));
+                                    yesSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
                                 if(row.getString("L1S01").equalsIgnoreCase("No"))
-                                    noSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode"));
-                                spaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode"));
+                                    noSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
+                                spaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
                             });
 
                             List spaceRoomList = new ArrayList();
@@ -220,9 +220,9 @@ public class ProposalHandler extends AbstractRouteHandler
             {
                  resultData.rows.forEach(row ->{
                      if(row.getString("type").equalsIgnoreCase("Product"))
-                        spaceRoomListFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode"));
+                        spaceRoomListFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode").toLowerCase());
                      else
-                         spaceRoomListFromAddon.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode"));
+                         spaceRoomListFromAddon.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode").toLowerCase());
                     });
 
                 LOG.info("spaceRoomListFromProduct size = "+spaceRoomListFromProduct.size());
@@ -346,18 +346,18 @@ public class ProposalHandler extends AbstractRouteHandler
                     resultData.rows.forEach(row->addOnsFromProductAddonsWithcode.add(row));
 
                     resultData.rows.forEach(row->{
-                        LOG.info("row.getString(\"roomCode\") = "+row.getString("roomCode"));
-                        addOnFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode")
+//                        LOG.info("row.getString(\"roomCode\") = "+row.getString("roomCode").toLowerCase());
+                        addOnFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase()
                             +COLON_DELIMITER+row.getString("L1S01Code"));});
                     sowList.forEach(sow-> {
                         if(sow.getString("L1S01").equalsIgnoreCase("Yes") || sow.getString("L1S01").equalsIgnoreCase("No")) {
-                            addOnCodeFromSow.add(sow.getString("spaceType") + COLON_DELIMITER + sow.getString("roomcode") + COLON_DELIMITER + sow.getString("L1S01Code"));
+                            addOnCodeFromSow.add(sow.getString("spaceType") + COLON_DELIMITER + sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
                         }
                         if(sow.getString("L1S01").equalsIgnoreCase("No"))
-                            addOnCodeFromSowwithNo.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode") + COLON_DELIMITER + sow.getString("L1S01Code"));
+                            addOnCodeFromSowwithNo.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
 
                         if(sow.getString("L1S01").equalsIgnoreCase("Yes"))
-                            addOnCodeFromSowwithYes.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode") + COLON_DELIMITER + sow.getString("L1S01Code"));
+                            addOnCodeFromSowwithYes.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
                     });
 
                     List<String> l1 = compareLists(new ArrayList<>(addOnCodeFromSow),new ArrayList<>(addOnFromProduct));
