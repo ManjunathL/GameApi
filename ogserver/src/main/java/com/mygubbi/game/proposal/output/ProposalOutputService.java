@@ -94,6 +94,7 @@ public class ProposalOutputService extends AbstractVerticle
 //            queryData = new QueryData("proposal.product.all.detail", paramsJson);
 //        }
         queryData = new QueryData("proposal.product.all.detail", paramsJson);
+        List<ProductLineItem> products = new ArrayList<ProductLineItem>();
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -101,14 +102,13 @@ public class ProposalOutputService extends AbstractVerticle
                     LOG.info("Parameter Values" +resultData.paramsObject);
                     if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
                     {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
+                        //message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
                         LOG.error("Proposal products not found for id:" + proposalHeader.getId());
                         //return;
-                        this.getProposalAddons(quoteRequest, proposalHeader, null, message);
+                        this.getProposalAddons(quoteRequest, proposalHeader,products, message);
                     }
                     else
                     {
-                        List<ProductLineItem> products = new ArrayList<ProductLineItem>();
                         for (JsonObject json : resultData.rows)
                         {
                             if (quoteRequest.hasProductIds())
