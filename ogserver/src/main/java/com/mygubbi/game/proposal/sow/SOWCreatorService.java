@@ -169,7 +169,7 @@ public class SOWCreatorService extends AbstractVerticle {
         {
             LOG.debug("Json object in delete spaces :" + sowSpaces.toString());
 
-            String space = sowSpace.getString("spaceType").toLowerCase();
+            String space = sowSpace.getString("spaceType");
             String room = sowSpace.getString("roomcode").toLowerCase();
 
 
@@ -189,11 +189,13 @@ public class SOWCreatorService extends AbstractVerticle {
     private boolean spaceNotExistinProposalSow(String space, String room, List<JsonObject> proposalSows) {
         LOG.debug("Inside spaceNotExistinProposalSow");
         LOG.debug("Space :: "+space+", Room::"+room);
+        LOG.debug("Space size : " + proposalSows.size());
         for (JsonObject proposalSpace : proposalSows)
         {
+            LOG.debug("Proposal space object :" + proposalSpace);
             String sowSpace = proposalSpace.getString("spaceType");
             String sowroom = proposalSpace.getString("roomcode").toLowerCase();
-            LOG.debug("Space Type : " + sowSpace + " | roomcode :" + sowroom + " | space :");
+            LOG.debug("Space Type : " + sowSpace + " | roomcode :" + sowroom + " | space : " + space + " | room :" + room);
 
           if (space.equals(sowSpace) && room.equals(sowroom))
               return false;
