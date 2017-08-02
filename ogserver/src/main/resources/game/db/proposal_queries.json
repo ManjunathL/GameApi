@@ -1480,23 +1480,25 @@
       "id": "blog.insert",
       "type": "insert",
       "table": "blog",
-      "query": "insert into blog(blogId, tags, blog_categories, blogJson ) values (?, ?, ?, ?)",
+      "query": "insert into blog(blogId, tags, blog_categories, blogJson, status ) values (?, ?, ?, ?, ?)",
       "params": [
         "blogId",
         "tags",
         "blog_categories",
-        "blogJson"
+        "blogJson",
+        "status"
       ]
     },
     {
       "id": "blog.update",
       "type": "update",
       "table": "blog",
-      "query": "update blog set tags = ?, blog_categories = ?, blogJson = ? where blogId = ?",
+      "query": "update blog set tags = ?, blog_categories = ?, blogJson = ?, status = ? where blogId = ?",
       "params": [
         "tags",
         "blog_categories",
         "blogJson",
+        "status",
         "blogId"
       ]
     },
@@ -1521,23 +1523,25 @@
       "id": "diy.insert",
       "type": "insert",
       "table": "diy",
-      "query": "insert into diy(diyId, tags, diy_categories, diyJson ) values (?, ?, ?, ?)",
+      "query": "insert into diy(diyId, tags, diy_categories, diyJson, status ) values (?, ?, ?, ?, ?)",
       "params": [
         "diyId",
         "tags",
         "diy_categories",
-        "diyJson"
+        "diyJson",
+        "status"
       ]
     },
     {
       "id": "diy.update",
       "type": "update",
       "table": "diy",
-      "query": "update diy set tags = ?, diy_categories = ?, diyJson = ? where diyId = ?",
+      "query": "update diy set tags = ?, diy_categories = ?, diyJson = ?, status = ? where diyId = ?",
       "params": [
         "tags",
         "diy_categories",
         "diyJson",
+        "status",
         "diyId"
       ]
     },

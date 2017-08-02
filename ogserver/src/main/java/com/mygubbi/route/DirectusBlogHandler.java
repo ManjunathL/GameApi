@@ -31,6 +31,7 @@ public class DirectusBlogHandler extends AbstractRouteHandler
     {
         super(vertx);
         this.route().handler(BodyHandler.create());
+
         this.post("/insertBlog").handler(this::addBlogItem); //Category, Sub-Category
         this.post("/deleteBlog").handler(this::deleteBlogItem); //Category, Sub-Category
         this.post("/insertDiy").handler(this::addDiyItem); //Category, Sub-Category
@@ -40,7 +41,7 @@ public class DirectusBlogHandler extends AbstractRouteHandler
 
     private void addBlogItem(RoutingContext context) {
 
-    LOG.info("i am in insert :)");
+        LOG.info("i am in insert :)");
         LOG.info(context);
         JsonObject blogJson = context.getBodyAsJson();
         LOG.debug("JSON :" + blogJson.encodePrettily());
@@ -51,6 +52,7 @@ public class DirectusBlogHandler extends AbstractRouteHandler
                 .put("blog_content", blogJson.getString("blog_content"))
                 .put("tags", blogJson.getString("tags"))
                 .put("author", blogJson.getString("author"))
+                .put("status", blogJson.getString("status"))
                 .put("date_of_publish", blogJson.getString("date"));
 
         String keyVal = blogJson.getString("tags");
@@ -60,9 +62,9 @@ public class DirectusBlogHandler extends AbstractRouteHandler
         ArrayList<String> list = new ArrayList<String>();
         for (int j =0; j< arr.length; j++) {
 
-                list.add(arr[j]);
+            list.add(arr[j]);
 
-                LOG.info(arr[j]);
+            LOG.info(arr[j]);
 
         }
 
@@ -116,7 +118,7 @@ public class DirectusBlogHandler extends AbstractRouteHandler
                     {
                         LOG.info("no blogs in results");
                         insertBlogs(context,blog);
-                         }
+                    }
                     else
                     {
                         updateBlogs(context,blog);
@@ -133,8 +135,8 @@ public class DirectusBlogHandler extends AbstractRouteHandler
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     LOG.info("Check query (ms):" + selectData.responseTimeInMillis);
 
-                        LOG.info("blogs inserted successfully");
-                        sendJsonResponse(context,blogJson.encodePrettily());
+                    LOG.info("blogs inserted successfully");
+                    sendJsonResponse(context,blogJson.encodePrettily());
 
                 });
     }
@@ -217,6 +219,7 @@ public class DirectusBlogHandler extends AbstractRouteHandler
                 .put("diy_content", diyJson.getString("diy_content"))
                 .put("tags", diyJson.getString("tags"))
                 .put("author", diyJson.getString("author"))
+                .put("status", diyJson.getString("status"))
                 .put("date_of_publish", diyJson.getString("date"));
 
         String keyVal = diyJson.getString("tags");
