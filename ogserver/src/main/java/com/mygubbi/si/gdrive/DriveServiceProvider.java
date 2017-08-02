@@ -154,12 +154,12 @@ public class DriveServiceProvider
         if (readOnlyFlag.equals("yes"))
         {
             this.allowUserToReadFile(driveFile.getId(), email);
-            this.allowUserToReadFile(driveFile.getId(), "shilpa.g@mygubbi.com");
+            this.allowUserToReadFile(driveFile.getId(), salesEmail);
         }
         else
         {
             this.allowUserToEditFile(driveFile.getId(), email);
-            this.allowUserToEditFile(driveFile.getId(), "shilpa.g@mygubbi.com");
+            this.allowUserToEditFile(driveFile.getId(), salesEmail);
         }
 
 

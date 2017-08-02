@@ -174,7 +174,15 @@ public class ProposalHandler extends AbstractRouteHandler
                         }else{
                             resultData.rows.forEach(row -> {
                                 sowList.add(row);
-                                if(row.getString("L1S01").equalsIgnoreCase("Yes"))
+                                if (row.getString("L1S01").isEmpty() || row.getString("L1S01").equals(""))
+                                {
+                                    response.put("status","Failure");
+                                    response.put("comments", "It is mandatory to fill all the first level of services ");
+                                    LOG.info("Response is :: "+response);
+                                    sendJsonResponse(context, response.toString());
+                                }
+
+                                    if(row.getString("L1S01").equalsIgnoreCase("Yes"))
                                     yesSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
                                 if(row.getString("L1S01").equalsIgnoreCase("No"))
                                     noSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());

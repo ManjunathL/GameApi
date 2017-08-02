@@ -13,6 +13,9 @@
         "name": "com.mygubbi.db.QueryPrepareService"
       },
       {
+        "name": "com.mygubbi.si.email.EmailService"
+      },
+      {
         "name": "com.mygubbi.si.firebase.FirebaseDataService"
       },
 
@@ -57,6 +60,14 @@
 
       {
         "name": "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService"
+      },
+
+      {
+        "name":"com.mygubbi.game.proposal.output.SOWPdfOutputService"
+      },
+
+      {
+        "name":"com.mygubbi.game.proposal.sow.SOWCreatorService"
       }
     ]
   }
