@@ -47,6 +47,8 @@ public class QuoteSOWPDFCreator
     private static final String[] ROMAN_SEQUENCE = new String[]{"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv"};
 
     PdfPTable sowitemsTable,B1Table;
+    private String sowversion;
+    private String remarks;
 
     Font fsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
     Font fsize1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -85,7 +87,7 @@ public class QuoteSOWPDFCreator
     private void sowList(String dest)
     {
         JsonObject jsonObject=new JsonObject();
-        String sowversion = "1.0";
+        sowversion = "1.0";
         String version = quoteData.fromVersion; //get the proposalVersion
 
         if (version.contains("1.") || version.contains("2."))
@@ -93,6 +95,18 @@ public class QuoteSOWPDFCreator
             sowversion = "2.0";
         }
         //LOG.info("version" +sowversion);
+
+        if (sowversion.equals("1.0"))
+        {
+            remarks = this.proposalHeader.getSowRemarksV1();
+        }
+        else
+        {
+            remarks = this.proposalHeader.getSowRemarksV2();
+
+        }
+
+        if (remarks == null) remarks = "";
 
         jsonObject.put("version",sowversion);
         //jsonObject.put("version",1.0);
@@ -154,7 +168,7 @@ public class QuoteSOWPDFCreator
 
         Phrase phrase3 = new Phrase();
         phrase3.add(new Chunk("Version: ", fsize1));
-        phrase3.add(new Chunk(quoteData.fromVersion, fsize));
+        phrase3.add(new Chunk(sowversion, fsize));
 
         Phrase phrase4 = new Phrase();
         phrase4.add(new Chunk("Date: ", fsize1));
@@ -162,7 +176,7 @@ public class QuoteSOWPDFCreator
 
         Phrase phrase5 = new Phrase();
         phrase5.add(new Chunk("Remarks ", fsize1));
-        phrase5.add(new Chunk("Remarks Vlaue", fsize));
+        phrase5.add(new Chunk(remarks, fsize));
 
         table.addCell(phrase);
         table.addCell(phrase1);
