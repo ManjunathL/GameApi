@@ -235,6 +235,15 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
 
                                             LOG.info("COUNT = "+count+",services_value.get(count) == "+services_value.get(count));
 
+                                            if (services_value.get(count).equals(""))
+                                            {
+                                                JsonObject res = new JsonObject();
+                                                res.put("status", "Failure");
+                                                res.put("comments", "Please answer all the related services -" + xssfRow.getCell(2).getStringCellValue());
+                                                LOG.info(res.toString());
+                                                sendJsonResponse(context, res.toString());
+                                            }
+
                                             if (service_Combo_val.contains(services_value.get(count))) {
                                                 System.out.println("Services string value :" + count + " : " + services_value.get(count));
 
