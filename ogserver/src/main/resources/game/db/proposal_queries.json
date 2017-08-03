@@ -187,8 +187,8 @@
       "id": "proposal.update",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?,maxDiscountPercentage = ?,packageFlag = ? where id = ?",
-      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version","maxDiscountPercentage" ,"packageFlag", "id"]
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?,maxDiscountPercentage = ?,packageFlag = ?,adminPackageFlag = ?, offerType=?  where id = ?",
+      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version","maxDiscountPercentage" ,"packageFlag","adminPackageFlag","offerType","id"]
     },
 
     {
