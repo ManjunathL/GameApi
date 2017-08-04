@@ -15,6 +15,12 @@ public class SpaceRoom {
         this.room = sow.getROOM();
     }
 
+    public SpaceRoom(String spaceType, String room)
+    {
+        this.space = spaceType;
+        this.room = room;
+    }
+
     public String getSpace() {
         return space;
     }
@@ -40,5 +46,13 @@ public class SpaceRoom {
         int result = space != null ? space.hashCode() : 0;
         result = 31 * result + (room != null ? room.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SpaceRoom{" +
+                "space='" + space + '\'' +
+                ", room='" + room + '\'' +
+                '}';
     }
 }

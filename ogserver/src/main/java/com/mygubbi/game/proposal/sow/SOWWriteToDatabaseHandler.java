@@ -27,8 +27,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by User on 10-07-2017.
@@ -36,6 +35,9 @@ import java.util.List;
 public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
 
     private static int[] cell_Services = {3,5,7,9,11,13,15};
+    private static int[] cell_Services_titleText = {2,4,7,9,11,13,15};
+    private List<Integer> cell_Services_title = new ArrayList<Integer>();
+
 
     private final static Logger LOG = LogManager.getLogger(SOWWriteToDatabaseHandler.class);
 
@@ -79,6 +81,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         LOG.error("Error in getting  proposal header. " + resultData.errorMessage, resultData.error);
                         LOG.info(res.toString());
                         sendJsonResponse(context,res.toString());
+                        return;
 
                     }
                     else {
@@ -143,6 +146,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         res.put("comments", "Error in inserting line item in the audit table.");
                         LOG.info(res.toString());
                         sendJsonResponse(context, res.toString());
+                        return;
                     }else {
                         LOG.info("Inserted sow Record to DB Successfully.");
                         JsonObject res = new JsonObject();
@@ -183,6 +187,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         res.put("comments","Error in updating remarks in the proposal table "+ resultData.errorMessage);
                         LOG.info(res.toString());
                         sendJsonResponse(context,res.toString());
+                        return;
                     } else
                     {
                         String spaceType = null;
@@ -200,7 +205,13 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                             int count = 0;
                             Boolean isServiceMadeTrue = false;
                             List<String> services_value = new ArrayList<>();
-
+                            cell_Services_title.add(2);
+                            cell_Services_title.add(4);
+                            cell_Services_title.add(6);
+                            cell_Services_title.add(8);
+                            cell_Services_title.add(10);
+                            cell_Services_title.add(12);
+                            cell_Services_title.add(14);
 
 
                             if (!(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
@@ -220,6 +231,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                         res.put("comments", "Its mandatory to answer all the basic (level 1) questions.");
                                         LOG.info(res.toString());
                                         sendJsonResponse(context, res.toString());
+                                        return;
                                     }
 
 
@@ -237,15 +249,18 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
 
                                             LOG.info("COUNT = "+count+",services_value.get(count) == "+services_value.get(count));
 
+                                            XSSFCell xssfCell1Text = xssfRow.getCell(cell_Services_title.get(count));
 
 
-                                         /*   if (services_value.get(count).equals("") && !Arrays.asList(cell_Services_title).indexOf(count).equals("")) {
+
+                                            if (services_value.get(count).equals("") && !xssfCell1Text.getStringCellValue().equals("")) {
                                                 JsonObject res = new JsonObject();
                                                 res.put("status", "Failure");
                                                 res.put("comments", "Please answer all the related services -" + xssfRow.getCell(2).getStringCellValue());
                                                 LOG.info(res.toString());
                                                 sendJsonResponse(context, res.toString());
-                                            }*/
+                                                return;
+                                            }
                                             if (service_Combo_val.contains(services_value.get(count))) {
                                                 System.out.println("Services string value :" + count + " : " + services_value.get(count));
 
@@ -256,6 +271,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                                     res.put("comments", "Please answer level 2 questions for the selected level 1 question -" + xssfRow.getCell(2).getStringCellValue());
                                                     LOG.info(res.toString());
                                                     sendJsonResponse(context, res.toString());
+                                                    return;
                                                 }
                                             }
 
@@ -282,6 +298,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                     res.put("comments", "Atleast one of the level 2 questions should have Mygubbi as the scope for the chosen level 1 question - " + xssfRow.getCell(2).getStringCellValue());
                                     LOG.info(res.toString());
                                     sendJsonResponse(context, res.toString());
+                                    return;
                                 }else {
                                     ProposalSOW proposal_sow = new ProposalSOW();
                                     proposal_sow.setProposalId(proposalId);

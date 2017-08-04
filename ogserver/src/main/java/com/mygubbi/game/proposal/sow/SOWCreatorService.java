@@ -17,8 +17,7 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by User on 13-07-2017.
@@ -122,16 +121,49 @@ public class SOWCreatorService extends AbstractVerticle {
                         List<JsonObject> proposal__product_spaces = resultData.get(0).rows;
                         List<JsonObject> proposal__addon_spaces = resultData.get(1).rows;
                         List<JsonObject> proposal_sows = resultData.get(2).rows;
-                        List<JsonObject> proposal_spaces = new ArrayList<JsonObject>();
-                        proposal_spaces.addAll(proposal__product_spaces);
-                        proposal_spaces.addAll(proposal__addon_spaces);
                         LOG.debug("Products : " + proposal__product_spaces.toString());
                         LOG.debug("Addons : " + proposal__addon_spaces.toString());
-                        LOG.debug("Proposal : " + proposal_spaces.toString());
-                        syncSowWIthProposalData(jsonObject,message,proposal_spaces,proposal_sows);
+                        List<JsonObject> distinctSpaceRooms = getDistinctSpaceRooms(proposal__product_spaces, proposal__addon_spaces);
+                        syncSowWIthProposalData(jsonObject,message,distinctSpaceRooms,proposal_sows);
                     }
 
                 });
+    }
+
+    private List<JsonObject> getDistinctSpaceRooms(List<JsonObject> proposal__product_spaces, List<JsonObject> proposal__addon_spaces)
+    {
+        List<JsonObject> allSpaces = new ArrayList<>();
+        /*allSpaces.addAll(proposal__product_spaces);*/
+
+        LOG.debug("All spaces size before : " + allSpaces.size());
+
+        Set<SpaceRoom> spaceRooms = new HashSet<>();
+        for (JsonObject spaceRoomJson : proposal__product_spaces)
+        {
+            SpaceRoom spaceRoom = new SpaceRoom(spaceRoomJson.getString("spaceType"),spaceRoomJson.getString("roomcode"));
+            LOG.debug("Space room : " + spaceRoom.toString());
+            LOG.debug("Space room Json: " + spaceRoomJson);
+            if (!spaceRooms.contains(spaceRoom))
+            {
+                spaceRooms.add(spaceRoom);
+                allSpaces.add(spaceRoomJson);
+                LOG.debug("Adding space room json :" + spaceRoomJson.toString());
+            }
+        }
+        for (JsonObject spaceRoomJson : proposal__addon_spaces)
+        {
+            SpaceRoom spaceRoom = new SpaceRoom(spaceRoomJson.getString("spaceType"),spaceRoomJson.getString("roomcode"));
+            LOG.debug("Space room : " + spaceRoom.toString());
+            LOG.debug("Space room Json: " + spaceRoomJson);
+            if (!spaceRooms.contains(spaceRoom))
+            {
+                spaceRooms.add(spaceRoom);
+                allSpaces.add(spaceRoomJson);
+                LOG.debug("Adding space room json :" + spaceRoomJson.toString());
+            }
+        }
+        LOG.debug("All spaces size after : " + allSpaces.size());
+        return allSpaces;
     }
 
     private void syncSowWIthProposalData(JsonObject quoteRequest, Message message, List<JsonObject> proposalSpaces, List<JsonObject> proposalSows)
