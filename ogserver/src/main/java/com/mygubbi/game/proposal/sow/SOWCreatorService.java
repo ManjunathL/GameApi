@@ -140,29 +140,22 @@ public class SOWCreatorService extends AbstractVerticle {
         Set<SpaceRoom> spaceRooms = new HashSet<>();
         for (JsonObject spaceRoomJson : proposal__product_spaces)
         {
-            SpaceRoom spaceRoom = new SpaceRoom(spaceRoomJson.getString("spaceType"),spaceRoomJson.getString("roomcode"));
-            LOG.debug("Space room : " + spaceRoom.toString());
-            LOG.debug("Space room Json: " + spaceRoomJson);
+            SpaceRoom spaceRoom = new SpaceRoom(spaceRoomJson.getString("spaceType"),spaceRoomJson.getString("roomcode").toLowerCase());
             if (!spaceRooms.contains(spaceRoom))
             {
                 spaceRooms.add(spaceRoom);
                 allSpaces.add(spaceRoomJson);
-                LOG.debug("Adding space room json :" + spaceRoomJson.toString());
             }
         }
         for (JsonObject spaceRoomJson : proposal__addon_spaces)
         {
-            SpaceRoom spaceRoom = new SpaceRoom(spaceRoomJson.getString("spaceType"),spaceRoomJson.getString("roomcode"));
-            LOG.debug("Space room : " + spaceRoom.toString());
-            LOG.debug("Space room Json: " + spaceRoomJson);
+            SpaceRoom spaceRoom = new SpaceRoom(spaceRoomJson.getString("spaceType"),spaceRoomJson.getString("roomcode").toLowerCase());
             if (!spaceRooms.contains(spaceRoom))
             {
                 spaceRooms.add(spaceRoom);
                 allSpaces.add(spaceRoomJson);
-                LOG.debug("Adding space room json :" + spaceRoomJson.toString());
             }
         }
-        LOG.debug("All spaces size after : " + allSpaces.size());
         return allSpaces;
     }
 
@@ -181,7 +174,6 @@ public class SOWCreatorService extends AbstractVerticle {
         {
             String space = proposalSpace.getString("spaceType");
             String room = proposalSpace.getString("roomcode").toLowerCase();
-            LOG.debug("Add to spaces to sow :" + space + " | room" + room);
 
             if (spaceNotExistinProposalSow(space,room,proposalSows))
             {
