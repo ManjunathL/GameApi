@@ -232,20 +232,27 @@ public class QuoteSOWPDFCreator
         {
             currentroom=proposalSOW.getROOM();
             currentspaceType=proposalSOW.getSpaceType();
-            //if (str == null | str.length() == 0) {
-            if (currentroom==null | currentroom.length()==0 |currentspaceType==null | currentspaceType.length()==0)
+            if (currentroom==null)
             {
-                LOG.debug("null pointer exception");
+                currentroom = "NA";
+                LOG.info("Room code is null");
+            }
+            if (currentspaceType==null)
+            {
+                currentspaceType = "NA";
+                LOG.info("Space Type is null");
+            }
+
+
+           if(currentroom.equals(prevroom) && currentspaceType.equals(prevspaceType))
+            {
+                createRowAndFillData(sowitemsTable, "", "", proposalSOW.getSERVICE(), proposalSOW.getServiceValue(), proposalSOW.getRelatedService1(), proposalSOW.getRelatedServicevalue1(), proposalSOW.getRelatedService2(), proposalSOW.getRelatedServicevalue2(), proposalSOW.getRelatedService3(), proposalSOW.getRelatedServicevalue3(), proposalSOW.getRelatedService4(), proposalSOW.getRelatedServicevalue4(), proposalSOW.getRelatedService5(), proposalSOW.getRelatedServicevalue5(), proposalSOW.getRelatedService6(), proposalSOW.getRelatedServicevalue6());
             }
             else {
-                if (currentroom.equals(prevroom) && currentspaceType.equals(prevspaceType)) {
-                    createRowAndFillData(sowitemsTable, "", "", proposalSOW.getSERVICE(), proposalSOW.getServiceValue(), proposalSOW.getRelatedService1(), proposalSOW.getRelatedServicevalue1(), proposalSOW.getRelatedService2(), proposalSOW.getRelatedServicevalue2(), proposalSOW.getRelatedService3(), proposalSOW.getRelatedServicevalue3(), proposalSOW.getRelatedService4(), proposalSOW.getRelatedServicevalue4(), proposalSOW.getRelatedService5(), proposalSOW.getRelatedServicevalue5(), proposalSOW.getRelatedService6(), proposalSOW.getRelatedServicevalue6());
-                } else {
-                    createRowAndFillData(sowitemsTable, proposalSOW.getSpaceType(), proposalSOW.getROOM(), proposalSOW.getSERVICE(), proposalSOW.getServiceValue(), proposalSOW.getRelatedService1(), proposalSOW.getRelatedServicevalue1(), proposalSOW.getRelatedService2(), proposalSOW.getRelatedServicevalue2(), proposalSOW.getRelatedService3(), proposalSOW.getRelatedServicevalue3(), proposalSOW.getRelatedService4(), proposalSOW.getRelatedServicevalue4(), proposalSOW.getRelatedService5(), proposalSOW.getRelatedServicevalue5(), proposalSOW.getRelatedService6(), proposalSOW.getRelatedServicevalue6());
-                }
-                prevroom = currentroom;
-                prevspaceType = currentspaceType;
+                createRowAndFillData(sowitemsTable, proposalSOW.getSpaceType(), proposalSOW.getROOM(), proposalSOW.getSERVICE(), proposalSOW.getServiceValue(), proposalSOW.getRelatedService1(), proposalSOW.getRelatedServicevalue1(), proposalSOW.getRelatedService2(), proposalSOW.getRelatedServicevalue2(), proposalSOW.getRelatedService3(), proposalSOW.getRelatedServicevalue3(), proposalSOW.getRelatedService4(), proposalSOW.getRelatedServicevalue4(), proposalSOW.getRelatedService5(), proposalSOW.getRelatedServicevalue5(), proposalSOW.getRelatedService6(), proposalSOW.getRelatedServicevalue6());
             }
+            prevroom=currentroom;
+            prevspaceType=currentspaceType;
         }
         try
         {

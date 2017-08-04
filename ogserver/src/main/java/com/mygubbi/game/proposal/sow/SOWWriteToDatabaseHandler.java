@@ -201,18 +201,20 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                             Boolean isServiceMadeTrue = false;
                             List<String> services_value = new ArrayList<>();
 
+
+
                             if (!(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
                                 for (Integer services_cell : cell_Services) {
                                     XSSFCell xssfCell = xssfRow.getCell(services_cell);
                                     String first_level_service = xssfRow.getCell(3).getStringCellValue();
-                                    LOG.info("first_level_service = "+first_level_service);
+                                    LOG.info("first_level_service = " + first_level_service);
                                     if (!(xssfRow.getCell(0).getStringCellValue().equals("")) || xssfRow.getCell(0).getStringCellValue().isEmpty()) {
                                         spaceType = xssfRow.getCell(16).getStringCellValue();
                                         room = xssfRow.getCell(17).getStringCellValue();
                                         L1s01code = xssfRow.getCell(18).getStringCellValue();
                                     }
 
-                                    if(first_level_service.length() == 0){
+                                    if (first_level_service.length() == 0) {
                                         JsonObject res = new JsonObject();
                                         res.put("status", "Failure");
                                         res.put("comments", "Its mandatory to answer all the basic (level 1) questions.");
@@ -235,15 +237,15 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
 
                                             LOG.info("COUNT = "+count+",services_value.get(count) == "+services_value.get(count));
 
-                                            if (services_value.get(count).equals(""))
-                                            {
+
+
+                                         /*   if (services_value.get(count).equals("") && !Arrays.asList(cell_Services_title).indexOf(count).equals("")) {
                                                 JsonObject res = new JsonObject();
                                                 res.put("status", "Failure");
                                                 res.put("comments", "Please answer all the related services -" + xssfRow.getCell(2).getStringCellValue());
                                                 LOG.info(res.toString());
                                                 sendJsonResponse(context, res.toString());
-                                            }
-
+                                            }*/
                                             if (service_Combo_val.contains(services_value.get(count))) {
                                                 System.out.println("Services string value :" + count + " : " + services_value.get(count));
 
