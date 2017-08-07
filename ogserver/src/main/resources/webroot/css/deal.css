@@ -92,6 +92,11 @@ strong{
 .deal-nav a{
     color: #ffffff;
 }
+.deal-nav a:hover,
+.deal-nav a:active,
+.deal-nav a:focus{
+    color: #fff200;
+}
 
 .navbar-ddeal{
     margin-bottom: 0px;
@@ -149,9 +154,7 @@ strong{
    padding: 30px 0px 10px;
    font-size: 32px;
    min-height: 95px;
-   background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1501842486/landing_page/steal-deal/form-strip_03.png");
-   background-repeat: no-repeat;
-   background-position: center 100%;
+   background-color: #fff200;
 }
 
 .ddeal-form .form-control{
@@ -164,6 +167,9 @@ strong{
     margin: 15px 0px;
 }
 
+.ddeal-form .form-group {
+    margin-bottom: 32px;
+}
 .btn-ddeal {
    background: #43004a;
    background-image: -webkit-linear-gradient(top,  #43004a, #07074e);
@@ -442,7 +448,7 @@ strong{
 .owl-carousel .owl-item .img-profile{
     width: 130px;
     padding: 15px 0px;
-    margin-top: -60px;
+    margin-top: -52px;
 }
 
 .img-centered {
@@ -488,7 +494,7 @@ strong{
    -webkit-border-radius: 28;
    -moz-border-radius: 28;
    border-radius: 28px;
-   color: #43004;
+   color: #43004a;
    font-size: 18px;
    padding: 10px 50px;
    text-decoration: none;
@@ -500,10 +506,10 @@ strong{
 .btn-book-now:hover,
 .btn-book-now:active,
 .btn-book-now:focus{
-    color: #43004;
-    background: #fff200;
+    color: #fff200;
+    background: #43004a;
     text-decoration: none;
-    border: 1px solid #333;
+    border: 1px solid #fff200;
  }
 
 @media (max-width: 1300px) {
@@ -530,6 +536,22 @@ strong{
     }
     .prn{
         padding-right: 0px;
+    }
+    .sdeal-col-md-1 .col-md-1{
+        width: 11.333333%;
+    }
+    .btn-ddeal {
+        padding: 5px 90px 5px 90px;
+    }
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+    .ddeal-container-mob {
+        background-color: #43004a;
+        padding-bottom: 15px;
     }
 }
 
@@ -564,9 +586,11 @@ strong{
 }
 @media (max-width: 767px) {
     .ddeal-container-mob {
-        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/Hero-image-BG_01.jpg");
-            background-repeat: no-repeat;
-            background-position: center 100%;
+        background-color: #43004a;
+        padding-bottom: 15px;
+    }
+    .ddeal-form .form-group {
+        margin-bottom: 15px;
     }
     .navbar-ddeal .navbar-brand {
         padding: 0px;
@@ -606,7 +630,7 @@ strong{
     }
     .ddeal-gallery-head {
         position: absolute;
-        bottom: 30px;
+        bottom: 19.5px;
         background: rgba(0, 0, 0, 0.5);
         color: #fff;
         width: 100%;
@@ -659,6 +683,12 @@ strong{
     }
 }
 @media (max-width: 420px) {
+    .ddeal-container-mob {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/Hero-image-BG_01.jpg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        padding-bottom: 15px;
+    }
     .navbar-ddeal .navbar-brand {
         padding: 0px;
         margin: 0px auto;
