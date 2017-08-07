@@ -1,11 +1,14 @@
 package com.mygubbi.game.proposal.output;
 
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.sow.SOWTemplateCreator;
 //import com.mygubbi.game.proposal.erp.BOQTemplateCreator;
 import com.mygubbi.game.proposal.erp.ExcelSalesOrderCreator;
 import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.quote.*;
+
+import java.util.List;
 
 /**
  * Created by Sunil on 22-07-2016.
@@ -20,7 +23,7 @@ public interface ProposalOutputCreator
 
     public String getOutputKey();
 
-    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader,Boolean isValidSow) {
+    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader,Boolean isValidSow,List<SOWPdf> proposalSOWs) {
 
         switch (outputType) {
             case QUOTATION:
@@ -35,7 +38,7 @@ public interface ProposalOutputCreator
             case QUOTEPDF:
                 return new PdfQuoteCreator(quoteData, proposalHeader,isValidSow);
             case SOWPDF:
-                return new PdfSowCreator(quoteData, proposalHeader);
+                return new PdfSowCreator(quoteData, proposalHeader,proposalSOWs);
 
             default:
                 throw new RuntimeException("Output creator not defined for type:" + outputType);

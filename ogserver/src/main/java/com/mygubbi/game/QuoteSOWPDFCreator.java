@@ -59,16 +59,34 @@ public class QuoteSOWPDFCreator
     List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
     Document document = new Document(PageSize.A4.rotate());
     FileOutputStream fout ;
-    public QuoteSOWPDFCreator(ProposalHeader proposalHeader, QuoteData quoteData)
+    public QuoteSOWPDFCreator(ProposalHeader proposalHeader, QuoteData quoteData,List<SOWPdf> proposalSOWs)
     {
         this.proposalHeader=proposalHeader;
         this.quoteData=quoteData;
+        this.proposalSOWs = proposalSOWs;
     }
     public void createSOWPDf(String destination)
     {
-         try
+        sowversion = "1.0";
+        String version = quoteData.fromVersion;
+
+        if (version.contains("1.") || version.contains("2.")){
+            sowversion = "2.0";
+        }
+
+        if (sowversion.equals("1.0")){
+            remarks = proposalHeader.getSowRemarksV1();
+        }
+        else{
+            remarks = proposalHeader.getSowRemarksV2();
+
+        }
+
+        if (remarks == null) remarks = "";
+
+        try
             {
-                sowList(destination);
+                readAndFillSowTable(proposalSOWs, destination);
             }
             catch (Exception e)
             {
@@ -84,54 +102,6 @@ public class QuoteSOWPDFCreator
             }
     }
 
-    private void sowList(String dest)
-    {
-        JsonObject jsonObject=new JsonObject();
-        sowversion = "1.0";
-        String version = quoteData.fromVersion; //get the proposalVersion
-
-        if (version.contains("1.") || version.contains("2."))
-        {
-            sowversion = "2.0";
-        }
-        //LOG.info("version" +sowversion);
-
-        if (sowversion.equals("1.0"))
-        {
-            remarks = this.proposalHeader.getSowRemarksV1();
-        }
-        else
-        {
-            remarks = this.proposalHeader.getSowRemarksV2();
-
-        }
-
-        if (remarks == null) remarks = "";
-
-        jsonObject.put("version",sowversion);
-        //jsonObject.put("version",1.0);
-        jsonObject.put("proposalId",proposalHeader.getId());
-        //jsonObject.put("proposalId",4952);
-
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.forpdfDownload", jsonObject));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<io.vertx.core.eventbus.Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows.size() == 0)
-                    {
-                        LOG.error("Error in updating product line item in the proposal. " + resultData.errorMessage, resultData.error);
-                    }
-                    else
-                    {
-                        resultData.rows.forEach(item->{proposalSOWs.add(new SOWPdf(item));});
-                        try {
-                            readAndFillSowTable(proposalSOWs, dest);
-                        }catch (Exception e){
-                            e.printStackTrace();;
-                        }
-                    }
-    });
-    }
 
     private void readAndFillSowTable(List<SOWPdf> proposalSOWs,String destination ) throws Exception{
 
