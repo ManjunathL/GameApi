@@ -194,6 +194,7 @@ public class QuoteSOWPDFCreator
         sowitemsTable.addCell(itemsCell3);
         sowitemsTable.addCell(itemsCell4);
 
+        sowitemsTable.setHeaderRows(1);
         String currentroom=null;
         String currentspaceType=null;
         String prevroom=null;
