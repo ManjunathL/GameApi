@@ -731,6 +731,9 @@ and (orientation : portrait) {
         text-transform: capitalize;
         text-align: center;
     }
+    .text-right {
+            text-align: center;
+        }
 }
 @media (max-width: 420px) {
     .ddeal-container-mob {
@@ -769,10 +772,10 @@ and (orientation : portrait) {
         text-transform: capitalize;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .ddeal-form {
+    /*.ddeal-form {
         margin: 0px 15px 15px 0px;
         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
-    }
+    }*/
     #owl-testimonial p{
         font-size: 14px;
         text-align: center;
