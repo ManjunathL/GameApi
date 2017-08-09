@@ -6,7 +6,31 @@
 <% console.log(page) %>
 <% console.log( page[0].categories) %>
 <% console.log( page[0].Related_Categories) %>
-<section class="seo-lp-banner">
+<section class="border-bottom-grey bg-color-white" id="services">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="position-relative text-center">
+                <img src="<%= page[0].Banner_Image_mobile %>" class="cld-responsive img-centered width100 hidden-xs hidden-sm" alt="mygubbi kitchen design" />
+                <a class="mob-c-btn hidden-md hidden-lg">
+                    <div class="mt30">
+                        <h2 class="home-img-head"> <%= page[0].banner_text_mobile %> </h2>
+                    </div>
+                </a>
+                <img src="<%= page[0].Banner_Image_Desktop %>" class="cld-responsive img-centered width100 hidden-md hidden-lg" alt="mygubbi kitchen design" />
+
+                <div class="txt-over-kitchen-image hidden-xs hidden-sm">
+                    <div class="width100">
+                        <p class="font-size35 txt-color-orange txt-over-head"><%= page[0].banner_text_desktop %></p>
+                    </div>
+                    <!--
+                    <div class="width0 explore-space"><button class="btn btn-explore">EXPLORE</button></div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--<section class="seo-lp-banner">
     <div class="hidden-xs hidden-sm">
         <img class="img-responsive width100" src="<%= page[0].Banner_Image_Desktop %>" alt="Seo Banner">
     </div>
@@ -20,7 +44,7 @@
         <div class="container-fluid">
             <div class="seo-mob-process">
                 <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1499318256/seo-page/proposition_icons-01.png" alt="Seo Banner">
-                <!--<div class="row">
+                &lt;!&ndash;<div class="row">
                     <div class="col-md-10 col-md-offset-1 margin-bottom20 text-center">
                         <div class="row">
                             <div class="col-md-1"></div>
@@ -50,11 +74,11 @@
                             </div>
                         </div>
                     </div>
-                </div>-->
+                </div>&ndash;&gt;
             </div>
         </div>
     </div>
-</section>
+</section>-->
 
 <section class="seo-about">
     <div class="container">
