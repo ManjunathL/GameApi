@@ -160,7 +160,7 @@ define([
                 mode: 'fade',
                 auto: 'true',
                 pause: 8000,
-                speed: 1000,
+                speed: 2000,
                 nextSelector: '.slider_right',
                 prevSelector: '.slider_left'
             });

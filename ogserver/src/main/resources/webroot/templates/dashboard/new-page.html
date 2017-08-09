@@ -5,19 +5,25 @@
             <div class="slider_container position-relative">
                 <ul class="bxslider padding0">
                     <li>
-                        <a class="slider-move" href="#" data-number="1">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490102915/home/v2/Home_page_banner.jpg" class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi bedroom design" />
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490102914/home/v2/Home_page_Mobil_banner.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design" />
+                        <a id="kitchen-slide" class="slider-move" href="#" data-number="0">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1502264526/home/v2/k.jpg" class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi bedroom design" />
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1502264525/home/v2/K1.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design" />
+                        </a>
+                    </li>
+                    <li>
+                        <a id="wardrobe-slide" class="slider-move" href="#" data-number="1">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1502264526/home/v2/w.jpg" class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi bedroom design" />
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1502264525/home/v2/w1.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design" />
                         </a>
                     </li>
                 </ul>
                 <!-- Controls -->
-                <!--<a class="slider_left" role="button" data-slide="prev">
+                <a class="slider_left" role="button" data-slide="prev">
                     <img src="<%= imgBase + 'arr-left-thick.png'%>" class="arr_left" alt="...">
                 </a>
                 <a class="slider_right" role="button" data-slide="next">
                     <img src="<%= imgBase + 'arr-right-thick.png'%>" class="arr_right" alt="...">
-                </a>-->
+                </a>
             </div>
         </div>
     </div>
@@ -756,8 +762,16 @@
 
     });
     $(document).ready(function(){
-    $("#cucumber").click(function(){
+        $("#cucumber").click(function(){
             window.location.href="https://www.mygubbi.com/cucumber-sale.html"
+        });
+
+        $("#kitchen-slide").click(function(){
+            window.location.href="https://www.mygubbi.com/kitchen-deal.html"
+        });
+
+        $("#wardrobe-slide").click(function(){
+            window.location.href="https://www.mygubbi.com/wardrobes-deal.html"
         });
     });
 </script>
