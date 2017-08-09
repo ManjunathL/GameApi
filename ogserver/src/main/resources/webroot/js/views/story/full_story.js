@@ -47,6 +47,7 @@ define([
             var stories = that.stories;
             stories = stories.toJSON();
             var full_story = {};
+            var full_recent_story = {};
 
             delete stories.id;
                         console.log("=-=-=-=-item=-=-=");
@@ -58,21 +59,39 @@ define([
 
                     full_story = item;
 
-                }
-                                                    console.log(full_story);
+                }                              // console.log(full_story);
 
             });
+
+           /* _.find(stories, function(item, index) {
+                                        console.log("=-ITEMS=-");
+
+                if(item.status != 'draft'){
+                                            console.log(item);
+
+                    full_recent_story.push(item);
+                }
+            });*/
+
+            stories = _(stories).filter(function(story) {
+                return story.status != 'draft';
+            });
+
 
             //console.log(_(stories).pluck('date_of_publish'));
             stories = _(stories).sortBy(function(story) {
                 return Date.parse(story.date_of_publish);
             }).reverse();
-            console.log(full_story);
+
 
             var rec_stories = [];
             $.each(stories.slice(1,4), function(i, data) {
+
                 rec_stories.push(data);
+
+
             });
+
 
             var fullTemp = _.template(fullStoryTemplate);
 

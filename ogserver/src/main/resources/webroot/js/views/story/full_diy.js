@@ -52,7 +52,9 @@ define([
                     full_diy = item;
                 }
             });
-
+            diys = _(diys).filter(function(diy) {
+                return diy.status != 'draft';
+            });
             diys = _(diys).sortBy(function(diy) {
                 return Date.parse(diy.date_of_publish);
             }).reverse();
