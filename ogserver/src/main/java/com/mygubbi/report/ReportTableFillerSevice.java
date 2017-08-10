@@ -50,6 +50,7 @@ public class ReportTableFillerSevice extends AbstractVerticle{
         });
         eb.localConsumer(RUN_FOR_SINGLE_PROPOSAL, (Message<Integer> message) -> {
             JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
+            LOG.info("Json Obj = "+obj);
             this.getVersionObjForProposal(obj.getInteger("proposalId"),message);
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());
@@ -133,6 +134,7 @@ public class ReportTableFillerSevice extends AbstractVerticle{
                                   (AsyncResult<Message<Integer>> result) -> {
                                       JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                                       LOG.info("Quote Res :: " + response);
+                                      message.reply(response);
                                   });
 
                         });

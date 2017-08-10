@@ -91,6 +91,7 @@ public class VersionReportingService extends AbstractVerticle {
     }
 
 private void insertRowToTable(JsonObject obj,String queryId,Message message){
+    LOG.info("Inserting row");
     Integer id = LocalCache.getInstance().store(new QueryData(queryId, obj));
     VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
             (AsyncResult<Message<Integer>> selectResult) -> {
@@ -108,6 +109,7 @@ private void insertRowToTable(JsonObject obj,String queryId,Message message){
             });
 }
 private void insertRowsToTable(List<QueryData> queryDatas,Message message){
+    LOG.info("Inserting rowssss");
     Integer id = LocalCache.getInstance().store(queryDatas);
     VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
             (AsyncResult<Message<Integer>> selectResult) -> {
