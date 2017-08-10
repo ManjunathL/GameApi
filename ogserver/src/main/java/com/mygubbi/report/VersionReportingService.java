@@ -33,7 +33,7 @@ import java.util.List;
 public class VersionReportingService extends AbstractVerticle {
 
     private final static Logger LOG = LogManager.getLogger(VersionReportingService.class);
-    public static final String RECORD_PRODUCT_PRICE = "update.proposal.version.price";
+    public static final String RECORD_VERSION_PRICE = "update.proposal.version.price";
 
     List<QueryData> queryDatasForModule = new ArrayList<>();
     List<QueryData> queryDatasForProduct = new ArrayList<>();
@@ -56,7 +56,7 @@ public class VersionReportingService extends AbstractVerticle {
 
     private void setupPriceUpdater() {
         EventBus eb = VertxInstance.get().eventBus();
-        eb.localConsumer(RECORD_PRODUCT_PRICE, (Message<Integer> message) ->
+        eb.localConsumer(RECORD_VERSION_PRICE, (Message<Integer> message) ->
         {
             ProposalVersion proposalVersion = (ProposalVersion) LocalCache.getInstance().remove(message.body());
             this.getProposalHeader(message, proposalVersion);
@@ -87,11 +87,43 @@ public class VersionReportingService extends AbstractVerticle {
 
         VersionPriceHolder versionPriceHolder = new VersionPriceHolder(proposalHeader,versionProductPriceHolders,versionAddonPriceHolders,proposalVersion);
         DwProposal dwProposal = setVersionAttributes(proposalHeader,proposalVersion,versionPriceHolder);
-
+        insertRowToTable(dwProposal,"dw_proposal.insert",message);
     }
 
-
-
+private void insertRowToTable(JsonObject obj,String queryId,Message message){
+    Integer id = LocalCache.getInstance().store(new QueryData(queryId, obj));
+    VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+            (AsyncResult<Message<Integer>> selectResult) -> {
+                QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                {
+                    message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Error in Executing")));
+                    LOG.error("Error in Executing");
+                }
+                else
+                {
+                    message.reply(LocalCache.getInstance().store(new JsonObject().put("success", "Successfully inserted")));
+                    LOG.info("Successfully inserted");
+                }
+            });
+}
+private void insertRowsToTable(List<QueryData> queryDatas,Message message){
+    Integer id = LocalCache.getInstance().store(queryDatas);
+    VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
+            (AsyncResult<Message<Integer>> selectResult) -> {
+                QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                {
+                    message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Error in Executing")));
+                    LOG.error("Error in Executing");
+                }
+                else
+                {
+                    message.reply(LocalCache.getInstance().store(new JsonObject().put("success", "Successfully inserted")));
+                    LOG.info("Successfully inserted");
+                }
+            });
+}
     private void updatePriceForProduct(Message message, ProposalHeader proposalHeader, ProposalVersion proposalVersion) {
         List<ProductLineItem> productLineItems = new ArrayList<>();
         String query = "proposal.product.versionlist";
@@ -160,8 +192,10 @@ public class VersionReportingService extends AbstractVerticle {
                     modulePriceHolders.add(modulePriceHolder);
 
                     dwProductModule = setModuleAttributes(modulePriceHolder,proposalHeader,productLineItem,proposalVersion,productModule);
-                    queryDatasForModule.add(new QueryData("dw.productmodule.create",dwProductModule));
+                    queryDatasForModule.add(new QueryData("dw_product_module.insert",dwProductModule));
+                    insertRowsToTable(queryDatasForModule,message);
                 }
+
                 catch (Exception e)
                 {
                     message.reply(e.getMessage());
@@ -171,7 +205,9 @@ public class VersionReportingService extends AbstractVerticle {
                 this.versionProductPriceHolders.add(productPriceHolder);
 
                 DWProposalProduct dwProposalProduct = setProductAttributes(productPriceHolder,proposalHeader,proposalVersion,productLineItem);
-                queryDatasForProduct.add(new QueryData("dw.proposalproduct.create",dwProposalProduct));
+                queryDatasForProduct.add(new QueryData("dw_proposal_product.insert",dwProposalProduct));
+
+                insertRowsToTable(queryDatasForProduct,message);
 
             }
         }
@@ -199,8 +235,8 @@ public class VersionReportingService extends AbstractVerticle {
             this.versionAddonPriceHolders.add(addonPriceHolder);
 
             DWProposalAddon dwProposalAddon = setAddonLevelAttributes(proposalHeader,proposalVersion,productAddon,addonPriceHolder);
-            queryDatasForAddon.add(new QueryData("dw.proposaladdon.create",dwProposalAddon));
-
+            queryDatasForAddon.add(new QueryData("dw_proposal_addon.insert",dwProposalAddon));
+            insertRowsToTable(queryDatasForAddon,message);
         }
 
     }
