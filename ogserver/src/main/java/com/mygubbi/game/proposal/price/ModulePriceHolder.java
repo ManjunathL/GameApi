@@ -1245,5 +1245,7 @@ public class ModulePriceHolder
     }
 
 
-
+    public int getNoOfAccPacks() {
+        return this.noOfAccPacks;
+    }
 }
