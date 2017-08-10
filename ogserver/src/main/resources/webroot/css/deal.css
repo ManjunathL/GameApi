@@ -384,6 +384,10 @@ strong{
     color: #43004a;
 }
 
+.ddeal-nwfooter h6{
+    text-transform:none;
+}
+
 .ddeal-footer img{
     margin-right: 5px;
 }
