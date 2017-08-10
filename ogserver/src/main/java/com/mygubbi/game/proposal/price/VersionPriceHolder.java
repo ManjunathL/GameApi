@@ -211,6 +211,11 @@ public class VersionPriceHolder {
             addToLabourPriceWoTax(productPriceHolder.getProductLabourPriceWoTax());
             addToLabourSourceCost(productPriceHolder.getProductLabourSourceCost());
 
+            addToLConnectorPrice(productPriceHolder.getLConnectorPrice());
+            addToLConnectorPriceAfterDiscount(productPriceHolder.getLConnectorPriceAfterDiscount());
+            addToLConnectorPriceWoTax(productPriceHolder.getLConnectorWoTax());
+            addToLConnectorSourceCost(productPriceHolder.getLConnectorSourceCost());
+
         }
     }
 
@@ -418,6 +423,12 @@ public class VersionPriceHolder {
     {
         if (price == 0) return;
         this.lcPrice += price;
+    }
+
+    private void addToLConnectorPriceAfterDiscount(double priceAfterDiscount)
+    {
+        if (priceAfterDiscount == 0) return;
+        this.lcPriceAfterDiscount += priceAfterDiscount;
     }
 
     private void addToLConnectorPriceWoTax(double priceWoTax)

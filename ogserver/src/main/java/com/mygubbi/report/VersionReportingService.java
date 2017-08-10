@@ -391,11 +391,11 @@ public class VersionReportingService extends AbstractVerticle {
         dwProposalProduct.setLaSourceCost(productPriceHolder.getProductLabourSourceCost());
         dwProposalProduct.setLaProfit(productPriceHolder.getProductLabourProfit());
         dwProposalProduct.setLaMargin(productPriceHolder.getProductLabourMargin());
-        dwProposalProduct.setLCPrice(2);
-        dwProposalProduct.setLcPriceWoTax(2);
-        dwProposalProduct.setLcSourceCost(2);
-        dwProposalProduct.setLcProfit(2);
-        dwProposalProduct.setLcMargin(2);
+        dwProposalProduct.setLCPrice(productPriceHolder.getLConnectorPrice());
+        dwProposalProduct.setLcPriceWoTax(productPriceHolder.getLConnectorWoTax());
+        dwProposalProduct.setLcSourceCost(productPriceHolder.getLConnectorSourceCost());
+        dwProposalProduct.setLcProfit(productPriceHolder.getLConnectorProfit());
+        dwProposalProduct.setLcMargin(productPriceHolder.getLConnectorMargin());
         dwProposalProduct.setStdModuleCount(productPriceHolder.getStdModuleCount());
         dwProposalProduct.setStdModulePrice(productPriceHolder.getStdModulePrice());
         dwProposalProduct.setNStdModuleCount(productPriceHolder.getNStdModuleCount());

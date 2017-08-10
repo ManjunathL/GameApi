@@ -5,6 +5,7 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.RateCard;
@@ -73,6 +74,7 @@ public class ProductPriceHolder {
     private double woodWorkMargin = 0.0;
     private double productLConnectorSourceCost = 0.0;
     private double productLConnectorPriceWoTax = 0.0;
+    private double productLConnectorPriceAfterDiscount = 0.0;
     private double productLConnectorPrice = 0.0;
     private double productLConnectorProfit = 0.0;
     private double productLConnectorMargin = 0.0;
@@ -106,6 +108,11 @@ public class ProductPriceHolder {
 
     private void calculateProductLevelPricing() {
 
+        double lConnectorPrice = 0;
+        PriceMaster lConnectorRate=RateCardService.getInstance().getHardwareRate("H074",this.priceDate,this.city);
+        PriceMaster lConnectorFactor=RateCardService.getInstance().getFactorRate(RateCard.ADDON_WO_TAX_FACTOR,this.priceDate,this.city);
+
+
         for (ModulePriceHolder modulePriceHolder : modulePriceHolders)
         {
             ProductModule productModule = modulePriceHolder.getProductModule();
@@ -133,11 +140,6 @@ public class ProductPriceHolder {
             addToLabourPriceWoTax(modulePriceHolder.getLabourCostWoTax());
             addToLabourSourceCost(modulePriceHolder.getLabourSourceCost());
 
-          /*  addToLConnectorPrice(modulePriceHolder.());
-            addToLConnectorPriceWoTax(modulePriceHolder.getLabourCostWoTax());
-            addToLConnectorSourceCost(modulePriceHolder.getLabourSourceCost());*/
-
-
             addToHardwarePrice(modulePriceHolder.getHardwareCost());
             addToHardwarePriceWoTax(modulePriceHolder.getHardwareCostWoTax());
             addToHardwareSourceCost(modulePriceHolder.getHardwareSourceCost());
@@ -163,6 +165,13 @@ public class ProductPriceHolder {
 
         }
 
+        double rateForLconnectorPrice=lConnectorRate.getPrice();
+        double sourcePriceForLconnectorPrice = lConnectorRate.getSourcePrice();
+        addToLConnectorPrice(this.productLineItem.getNoOfLengths() * rateForLconnectorPrice);
+        addToLConnectorPriceWoTax(this.productLConnectorPrice * lConnectorFactor.getSourcePrice());
+        addToLConnectorSourceCost(this.productLineItem.getNoOfLengths() * sourcePriceForLconnectorPrice );
+
+
     }
 
     private void addToAreaInSqft(double areaOfModuleInSft) {
@@ -181,122 +190,122 @@ public class ProductPriceHolder {
 
     private void addToTalProductSourceCost(double totalSourceCost) {
         if (totalSourceCost == 0) return;
-        productSourceCost += totalSourceCost;
+        this.productSourceCost += totalSourceCost;
     }
 
     private void addToTotalProductPriceWoTax(double totalCostWoTax) {
         if (totalCostWoTax == 0) return;
-        productPriceWoTax += totalCostWoTax;
+        this.productPriceWoTax += totalCostWoTax;
     }
 
     private void addToTotalProductPrice(double totalCost) {
         if (totalCost == 0) return;
-        productPrice += totalCost;
+        this.productPrice += totalCost;
     }
 
     private void addToHingeSourceCost(double hingeSourceCost) {
         if (hingeSourceCost == 0) return;
-        productHingeSourceCost += hingeSourceCost;
+        this.productHingeSourceCost += hingeSourceCost;
     }
 
     private void addToHingePriceWoTax(double hingeCostWoTax) {
         if (hingeCostWoTax == 0) return;
-        productHingePriceWoTax += hingeCostWoTax;
+        this.productHingePriceWoTax += hingeCostWoTax;
     }
 
     private void addToHingePrice(double hingeCost) {
         if (hingeCost == 0) return;
-        productHingePrice += hingeCost;
+        this.productHingePrice += hingeCost;
     }
 
     private void addToHandleAndKnobSourceCost(double handleandKnobSourceCost) {
         if (handleandKnobSourceCost == 0) return;
-        productHandleAndKnobSourceCost += handleandKnobSourceCost;
+        this.productHandleAndKnobSourceCost += handleandKnobSourceCost;
     }
 
     private void addToHandleAndKnobPriceWoTax(double handleandKnobCostWoTax) {
         if (handleandKnobCostWoTax == 0) return;
-        productHandleAndKnobPriceWoTax += handleandKnobCostWoTax;
+        this.productHandleAndKnobPriceWoTax += handleandKnobCostWoTax;
     }
 
     private void addToHandleAndKnobPrice(double handleandKnobCost) {
         if (handleandKnobCost == 0) return;
-        productHandleAndKnobPrice += handleandKnobCost;
+        this.productHandleAndKnobPrice += handleandKnobCost;
     }
 
     private void addToAccessorySourceCost(double accessorySourceCost) {
         if (accessorySourceCost == 0) return;
-        productAccessorySourceCost += accessorySourceCost;
+        this.productAccessorySourceCost += accessorySourceCost;
     }
 
     private void addToAccessoryPriceWoTax(double accessoryCostWoTax) {
         if (accessoryCostWoTax == 0) return;
-        productAccessoryPriceWoTax += accessoryCostWoTax;
+        this.productAccessoryPriceWoTax += accessoryCostWoTax;
     }
 
     private void addToAccessoryPrice(double accessoryCost) {
         if (accessoryCost == 0) return;
-        productAccessoryPrice += accessoryCost;
+        this.productAccessoryPrice += accessoryCost;
     }
 
     private void addToHardwareSourceCost(double hardwareSourceCost) {
         if (hardwareSourceCost == 0) return;
-        productHardwareSourceCost += hardwareSourceCost;
+        this.productHardwareSourceCost += hardwareSourceCost;
     }
 
     private void addToHardwarePriceWoTax(double hardwareCostWoTax) {
         if (hardwareCostWoTax == 0) return;
-        productHardwarePriceWoTax += hardwareCostWoTax;
+        this.productHardwarePriceWoTax += hardwareCostWoTax;
     }
 
     private void addToHardwarePrice(double hardwareCost) {
         if (hardwareCost == 0) return;
-        productHardwarePrice += hardwareCost;
+        this.productHardwarePrice += hardwareCost;
     }
 
     private void addToLabourSourceCost(double labourSourceCost) {
         if (labourSourceCost == 0) return;
-        productLabourSourceCost += labourSourceCost;
+        this.productLabourSourceCost += labourSourceCost;
     }
 
     private void addToLabourPriceWoTax(double labourCostWoTax) {
         if (labourCostWoTax == 0) return;
-        productLabourPriceWoTax += labourCostWoTax;
+        this.productLabourPriceWoTax += labourCostWoTax;
     }
 
     private void addToLabourPrice(double labourCost) {
         if (labourCost == 0) return;
-        productLabourPrice += labourCost;
+        this.productLabourPrice += labourCost;
     }
 
-   /* private void addToLConnectorSourceCost(double lConnectorSourceCost) {
+    private void addToLConnectorSourceCost(double lConnectorSourceCost) {
         if (lConnectorSourceCost == 0) return;
-        productLConnectorSourceCost += lConnectorSourceCost;
+        this.productLConnectorSourceCost += lConnectorSourceCost;
     }
 
     private void addToLConnectorPriceWoTax(double lConnectorCostWoTax) {
         if (lConnectorCostWoTax == 0) return;
-        productLConnectorPriceWoTax += lConnectorCostWoTax;
+        this.productLConnectorPriceWoTax += lConnectorCostWoTax;
     }
 
     private void addToLConnectorPrice(double lConnectorPrice) {
         if (lConnectorPrice == 0) return;
-        productLConnectorPrice += lConnectorPrice;
-    }*/
+        this.productLConnectorPrice += lConnectorPrice;
+    }
 
     private void addToProductShutterCost(double shutterSourceCost) {
         if (shutterSourceCost == 0 ) return;
-        productShutterSourceCost += shutterSourceCost;
+        this.productShutterSourceCost += shutterSourceCost;
     }
 
     private void addToProductShutterPriceWoTax(double shutterCostWoTax) {
         if (shutterCostWoTax == 0) return;
-        productShutterCostWoTax += shutterCostWoTax;
+        this.productShutterCostWoTax += shutterCostWoTax;
     }
 
     private void addToProductShutterPrice(double shutterCost) {
         if (shutterCost == 0) return;
-        productShutterPrice += shutterCost;
+        this.productShutterPrice += shutterCost;
     }
 
     private void addToProductCarcassCost(double carcassSourceCost) {
@@ -587,4 +596,35 @@ public class ProductPriceHolder {
     public double getHikeModulePrice() {
         return hikeModulePrice;
     }
+
+    public double getLConnectorPrice() {
+        return this.productLConnectorPrice;
+    }
+
+    public double getLConnectorWoTax() {
+        return this.productLConnectorPriceWoTax;
+    }
+
+    public double getLConnectorSourceCost() {
+        return this.productLConnectorSourceCost;
+    }
+
+    public double getLConnectorPriceAfterDiscount()
+    {
+        this.productLConnectorPriceAfterDiscount = this.productLConnectorPrice - (this.productLConnectorPrice * this.discountPercentage);
+        return this.productLConnectorPriceAfterDiscount;    }
+
+    public double getLConnectorProfit() {
+
+        this.productLConnectorProfit = this.productLConnectorPriceWoTax - this.productLConnectorSourceCost;
+        return this.productLConnectorProfit;
+    }
+
+    public double getLConnectorMargin() {
+
+        this.productLConnectorMargin = this.productLConnectorProfit / this.productLConnectorPriceWoTax;
+        return this.productLConnectorMargin;
+    }
+
+
 }
