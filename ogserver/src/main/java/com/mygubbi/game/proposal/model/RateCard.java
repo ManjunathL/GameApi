@@ -99,6 +99,17 @@ public class RateCard
         return this.rateUsed;
     }
 
+    public double getSourcePrice()
+    {
+        this.rateUsed = 0;
+        PriceMaster factorRate = RateCardService.getInstance().getFactorRate(this.code,this.priceDate, this.city);
+
+        if (factorRate != null) {
+            this.rateUsed = factorRate.getSourcePrice();
+        }
+        return this.rateUsed;
+    }
+
     public double getRateBasedOnProduct()
     {
         this.rateUsed = 0;
@@ -109,6 +120,19 @@ public class RateCard
         }
         return this.rateUsed;
     }
+
+    public double getSourcePriceBasedOnProduct()
+    {
+        this.rateUsed = 0;
+        PriceMaster factorRate = RateCardService.getInstance().getFactorRate(this.code,this.priceDate, this.city, this.productCategory);
+
+        if (factorRate != null) {
+            this.rateUsed = factorRate.getSourcePrice();
+        }
+        return this.rateUsed;
+    }
+
+
 
     public String getKey()
     {

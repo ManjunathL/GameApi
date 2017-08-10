@@ -458,7 +458,7 @@
       "id": "proposal.addon.list",
       "type": "select",
       "table": "proposal_addon",
-      "query": "select *from proposal_addon where proposalId=? and fromVersion=?",
+      "query": "select * from proposal_addon where proposalId=? and fromVersion=?",
       "params":["proposalId", "fromVersion"]
     },
 

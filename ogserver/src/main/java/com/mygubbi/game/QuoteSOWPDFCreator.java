@@ -96,9 +96,6 @@ public class QuoteSOWPDFCreator
             finally {
                 LOG.info("In finally");
 //                document.close();;
-
-
-
             }
     }
 

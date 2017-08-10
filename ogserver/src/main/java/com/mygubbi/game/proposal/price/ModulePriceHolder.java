@@ -40,12 +40,18 @@ public class ModulePriceHolder
     private RateCard carcassMaterialRateCard;
     private RateCard carcassFinishRateCard;
     private RateCard shutterFinishRateCard;
+    private RateCard stdManufacturingCost;
+    private RateCard nStdManufacturingCost;
     private RateCard carcassDoubleExposedRateCard;
     private RateCard shutterDoubleExposedRateCard;
     private RateCard loadingFactorCard;
     private RateCard labourRateCard;
+    private RateCard labourManufacturingRateCard;
     private RateCard nonStandardloadingFactorCard;
     private RateCard loadingFactorBasedOnProduct;
+    private RateCard stdLoadingSourceFactorBasedOnProduct;
+    private RateCard nStdLoadingSourceFactorBasedOnProduct;
+    private RateCard prodWoTaxFactor;
 
     private PriceMaster lWidthRate;
     private PriceMaster cWidthRate;
@@ -59,16 +65,48 @@ public class ModulePriceHolder
     private Boolean finishValue =false;
 
     private double shutterCost = 0;
+    private double shutterCostWoTax = 0;
+    private double shutterSourceCost = 0;
+    private double shutterProfit = 0;
+    private double shutterMargin = 0;
     private double carcassCost = 0;
+    private double carcassCostWoTax = 0;
+    private double carcassSourceCost = 0;
+    private double carcassProfit = 0;
+    private double carcassMargin = 0;
     private double accessoryCost = 0;
+    private double accessoryCostWoTax = 0;
+    private double accessorySourceCost = 0;
+    private double accessoryProfit = 0;
+    private double accessoryMargin = 0;
     private double handleandKnobCost = 0;
+    private double handleandKnobCostWoTax = 0;
     private double handleandKnobSourceCost = 0;
+    private double handleandKnobProfit = 0;
+    private double handleandKnobMargin = 0;
     private double hingeCost = 0;
+    private double hingeCostWoTax = 0;
+    private double hingeSourceCost = 0;
+    private double hingeProfit = 0;
+    private double hingeMargin = 0;
     private double hardwareCost = 0;
+    private double hardwareCostWoTax = 0;
+    private double hardwareSourceCost = 0;
+    private double hardwareProfit = 0;
+    private double hardwareMargin = 0;
     private double labourCost = 0;
+    private double labourCostWoTax = 0;
+    private double labourSourceCost = 0;
+    private double labourProfit = 0;
+    private double labourMargin = 0;
     private double totalCost = 0;
+    private double totalCostWoTax = 0;
+    private double totalSourceCost = 0;
+    private double totalProfit = 0;
+    private double totalMargin = 0;
     private double woodworkCost = 0;
     private double moduleArea;
+    private int noOfAccPacks;
 
     private String moduleCode;
     private String moduleType;
@@ -153,6 +191,8 @@ public class ModulePriceHolder
         {
             this.addComponent(component, null);
         }
+
+        this.noOfAccPacks = this.getProductModule().getAccessoryPacks().size();
 
         for (ModuleAccessoryPack moduleAccessoryPack : this.getProductModule().getAccessoryPacks())
         {
@@ -512,6 +552,7 @@ public class ModulePriceHolder
 
               PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(code, this.priceDate, this.city);
               hingeCost += hingeCostPriceMaster.getPrice() * quantity;
+              hingeSourceCost += hingeCostPriceMaster.getSourcePrice() * quantity;
 
           } else {
 
@@ -525,11 +566,13 @@ public class ModulePriceHolder
               }
               PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(hingePack.getHingeCode(), this.priceDate, this.city);
               hingeCost += hingeCostPriceMaster.getPrice() * quantity;
+              hingeSourceCost += hingeCostPriceMaster.getSourcePrice() * quantity;
           }
       }
         else {
             PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(hingePack.getHingeCode(),this.priceDate,this.city);
             hingeCost += hingeCostPriceMaster.getPrice() * quantity;
+            hingeSourceCost += hingeCostPriceMaster.getSourcePrice() * quantity;
         }
     }
 
@@ -585,6 +628,11 @@ public class ModulePriceHolder
 
         this.carcassFinishRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
         this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
+        this.stdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR,RateCard.FACTOR_TYPE ,this.priceDate, this.city);
+        this.nStdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+//        this.nStdManufacturingCostWardrobe = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_WARDROBE, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+//        this.nStdManufacturingCostShoeRack = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_SHOERACK, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+//        this.nStdManufacturingCostStudyTable = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_STUDYTABLE, RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
         this.carcassDoubleExposedRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getDoubleExposedCostCode(),
                 RateCard.SHUTTER_TYPE,this.priceDate, this.city);
@@ -593,11 +641,18 @@ public class ModulePriceHolder
 
         this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.labourManufacturingRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
         LOG.debug("this.nonstandard" + this.nonStandardloadingFactorCard.getRate());
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
+        this.stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
+        this.nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
+        this.prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
         //Profile Handles
 
@@ -664,13 +719,19 @@ public class ModulePriceHolder
                 return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
                         .put("moduleArea", this.moduleArea)
                         .put("carcassCost", this.round(this.carcassCost, 2))
+                        .put("carcassSourceCost", this.round(this.carcassSourceCost, 2))
                         .put("shutterCost", this.round(this.shutterCost, 2))
+                        .put("shutterSourceCost", this.round(this.shutterSourceCost, 2))
                         .put("accessoryCost", this.round(this.accessoryCost, 2))
+                        .put("accessorySourceCost", this.round(this.accessorySourceCost, 2))
                         .put("handleAndKnobCost", this.round(this.handleandKnobCost, 2))
                         .put("handleAndKnobSourceCost", this.round(this.handleandKnobSourceCost, 2))
                         .put("hingeCost", this.round(this.hingeCost, 2))
+                        .put("hingeSourceCost", this.round(this.hingeSourceCost, 2))
                         .put("labourCost", this.round(this.labourCost, 2))
+                        .put("labourSourceCost", this.round(this.labourSourceCost, 2))
                         .put("hardwareCost", this.round(this.hardwareCost, 2))
+                        .put("hardwareSourceCost", this.round(this.hardwareSourceCost, 2))
                         .put("totalCost", this.round(this.totalCost, 2));
 
 
@@ -678,7 +739,13 @@ public class ModulePriceHolder
 
     public void addToCarcassCost(double cost)
     {
+        if (cost == 0) return;
         this.carcassCost += cost;
+    }
+    public void addToCarcassSourceCost(double sourceCost)
+    {
+        if (sourceCost == 0) return;
+        this.carcassSourceCost += sourceCost;
     }
 
     public void addToShutterCost(double cost)
@@ -687,9 +754,20 @@ public class ModulePriceHolder
         this.shutterCost += cost;
     }
 
+    public void addToShutterSourceCost(double sourceCost)
+    {
+        if (sourceCost == 0) return;
+        this.shutterSourceCost += sourceCost;
+    }
+
     public void addToAccessoryCost(double cost)
     {
         this.accessoryCost += cost;
+    }
+
+    public void addToAccessorySourcePrice(double sourceCost)
+    {
+        this.accessorySourceCost += sourceCost;
     }
 
     public void addToHardwareCost(double cost)
@@ -697,13 +775,20 @@ public class ModulePriceHolder
         this.hardwareCost += cost;
     }
 
+    public void addToHardwareSourceCost(double hardwareSourceCost)
+    {
+        this.hardwareSourceCost += hardwareSourceCost;
+    }
+
     public void calculateTotalCost()
     {
         this.shutterCost = 0;
         this.carcassCost = 0;
         this.accessoryCost = 0;
-        this.hardwareCost = 0;
+        this.accessorySourceCost = 0;
+        this.hardwareSourceCost = 0;
         this.labourCost = 0;
+        this.labourSourceCost = 0;
         this.totalCost = 0;
         this.woodworkCost = 0;
         this.moduleArea = 0;
@@ -711,6 +796,8 @@ public class ModulePriceHolder
         for (PanelComponent panel : this.getPanelComponents())
         {
             double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
+            double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
+            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
             if (panel.isExposed())
             {
                 if ("Standard".equals(moduleType))
@@ -720,9 +807,12 @@ public class ModulePriceHolder
                         LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
                         LOG.debug("Rate : " + rate);
                         this.addToShutterCost(panel.getCost() * rate);
+                        this.addToShutterSourceCost(panel.getCost() / stdSourceRate);
+
                     }
                     else {
                         this.addToShutterCost(panel.getCost());
+                        this.addToShutterSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
                     }
                     if(panel.getCost()==0.0)
                     {
@@ -737,10 +827,12 @@ public class ModulePriceHolder
                     {
                         LOG.info("shoerack value 1 " +rate);
                         this.addToShutterCost(panel.getCost() * rate);
+                        this.addToShutterSourceCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
                     }
                     else
                     {
                         this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                        this.addToShutterSourceCost(panel.getCost() / nStdSourceRate);
                     }
                     if(panel.getCost()==0.0)
                     {
@@ -760,14 +852,17 @@ public class ModulePriceHolder
                         LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
 
                         this.addToCarcassCost(panel.getCost() * rate);
+                        this.addToCarcassSourceCost(panel.getCost() / stdSourceRate);
                     }
                     else {
                         this.addToCarcassCost(panel.getCost());
+                        this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
                     }
                 }
                 else if ("hike".equals(moduleType))
                 {
                     this.addToCarcassCost(panel.getCost());
+                    this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
                 }
                 else
                 {
@@ -775,10 +870,12 @@ public class ModulePriceHolder
                     {
                         LOG.info("Shoerack value in else 2 " +rate);
                         this.addToCarcassCost(panel.getCost() * rate);
+                        this.addToCarcassSourceCost(panel.getCost() / nStdSourceRate);
                     }
                     else
                     {
                         this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                        this.addToCarcassCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
                     }
                 }
             }
@@ -787,11 +884,13 @@ public class ModulePriceHolder
         for (AccessoryComponent accessory : this.accessoryComponents)
         {
             this.addToAccessoryCost(accessory.getCost());
+            this.addToAccessorySourcePrice(accessory.getTotalSourcePrice());
         }
 
         for (HardwareComponent hardware : this.hardwareComponents)
         {
             this.addToHardwareCost(hardware.getCost());
+            this.addToHardwareSourceCost(hardware.getTotalSourcePrice());
         }
 
         if (this.productModule.isAccessoryUnit())
@@ -819,13 +918,46 @@ public class ModulePriceHolder
 
     private void calculateTotalCost(RateCard labourRateCard, RateCard loadingFactorCard, String code)
     {
+
+
         if(true==equals(finishValue))
         {
             this.totalCost=0.0;
         }else {
+            this.carcassCostWoTax = this.carcassCost * this.prodWoTaxFactor.getSourcePrice();
+            this.shutterCostWoTax = this.shutterCost * this.prodWoTaxFactor.getSourcePrice();
+            this.labourCostWoTax = this.labourCost * this.prodWoTaxFactor.getSourcePrice();
+            this.hardwareCostWoTax = this.hardwareCost * this.prodWoTaxFactor.getSourcePrice();
+            this.handleandKnobCostWoTax = this.handleandKnobCost * this.prodWoTaxFactor.getSourcePrice();
+            this.hingeCostWoTax = this.hingeCost * this.prodWoTaxFactor.getSourcePrice();
+            this.accessoryCostWoTax = this.accessoryCost * this.prodWoTaxFactor.getSourcePrice();
+
+            this.carcassProfit = this.carcassCostWoTax - this.carcassSourceCost;
+            this.shutterProfit = this.shutterCostWoTax - this.shutterSourceCost;
+            this.labourProfit = this.labourCostWoTax - this.labourSourceCost;
+            this.hardwareProfit = this.hardwareCostWoTax - this.hardwareSourceCost;
+            this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
+            this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
+
+            this.carcassMargin = this.carcassProfit / this.carcassCostWoTax;
+            this.shutterMargin = this.shutterProfit / this.shutterCostWoTax;
+            this.labourMargin = this.labourProfit / this.labourCostWoTax;
+            this.hardwareMargin = this.hardwareProfit / this.hardwareCostWoTax;
+            this.handleandKnobMargin = this.handleandKnobProfit - this.handleandKnobCostWoTax;
+            this.hingeMargin = this.hingeProfit - this.hingeCostWoTax;
+
+
+
             this.labourCost = this.moduleArea * labourRateCard.getRate();
+            this.labourSourceCost = this.moduleArea * labourManufacturingRateCard.getSourcePrice();
             this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.handleandKnobCost + this.hingeCost + this.hardwareCost;
             this.totalCost = this.woodworkCost + this.accessoryCost ;
+            this.totalCostWoTax = this.totalCost * this.prodWoTaxFactor.getSourcePrice();
+            this.totalSourceCost = this.carcassSourceCost + this.shutterSourceCost + this.labourSourceCost + this.handleandKnobSourceCost + this.hingeSourceCost + this.hardwareSourceCost + this.accessorySourceCost;
+            this.totalProfit = this.totalCostWoTax - this.totalSourceCost;
+            this.totalMargin = this.totalProfit - this.totalCostWoTax;
+
+
         }
     }
 
@@ -914,4 +1046,204 @@ public class ModulePriceHolder
     {
         return totalCost-accessoryCost;
     }
+
+    public double getShutterCost()
+    {
+        return shutterCost;
+    }
+
+    public double getShutterCostWoTax()
+    {
+        return shutterCostWoTax;
+    }
+
+    public double getShutterSourceCost()
+    {
+        return shutterSourceCost;
+    }
+
+    public double getShutterProfit()
+    {
+        return shutterProfit;
+    }
+
+    public double getShutterMargin()
+    {
+        return shutterMargin;
+    }
+
+
+     public double getCarcassCost()
+    {
+        return carcassCost;
+    }
+
+    public double getCarcassCostWoTax()
+    {
+        return carcassCostWoTax;
+    }
+
+    public double getCarcassSourceCost()
+    {
+        return carcassSourceCost;
+    }
+
+    public double getCarcassProfit()
+    {
+        return carcassProfit;
+    }
+
+    public double getCarcassMargin()
+    {
+        return carcassMargin;
+    }
+
+    public double getHandleandKnobCost()
+    {
+        return handleandKnobCost;
+    }
+
+    public double getHandleandKnobCostWoTax()
+    {
+        return handleandKnobCostWoTax;
+    }
+
+    public double getHandleandKnobSourceCost()
+    {
+        return handleandKnobSourceCost;
+    }
+
+    public double getHandleandKnobProfit()
+    {
+        return handleandKnobProfit;
+    }
+
+    public double getHandleandKnobMargin()
+    {
+        return handleandKnobMargin;
+    }
+
+    public double getHingeCost()
+    {
+        return hingeCost;
+    }
+
+    public double getHingeCostWoTax()
+    {
+        return hingeCostWoTax;
+    }
+
+    public double getHingeSourceCost()
+    {
+        return hingeSourceCost;
+    }
+
+    public double getHingeProfit()
+    {
+        return hingeProfit;
+    }
+
+    public double getHingeMargin()
+    {
+        return hingeMargin;
+    }
+
+    public double getHardwareCost()
+    {
+        return hardwareCost;
+    }
+
+    public double getHardwareCostWoTax()
+    {
+        return hardwareCostWoTax;
+    }
+
+    public double getHardwareSourceCost()
+    {
+        return hardwareSourceCost;
+    }
+
+    public double getHardwareProfit()
+    {
+        return hardwareProfit;
+    }
+
+    public double getHardwareMargin()
+    {
+        return hardwareMargin;
+    }
+
+    public double getAccessoryCost()
+    {
+        return accessoryCost;
+    }
+
+    public double getAccessoryCostWoTax()
+    {
+        return accessoryCostWoTax;
+    }
+
+    public double getAccessorySourceCost()
+    {
+        return accessorySourceCost;
+    }
+
+    public double getAccessoryProfit()
+    {
+        return accessoryProfit;
+    }
+
+    public double getAccessoryMargin()
+    {
+        return accessoryMargin;
+    }
+
+    public double getLabourCost()
+    {
+        return labourCost;
+    }
+
+    public double getLabourCostWoTax()
+    {
+        return labourCostWoTax;
+    }
+
+    public double getLabourSourceCost()
+    {
+        return labourSourceCost;
+    }
+
+    public double getLabourProfit()
+    {
+        return labourProfit;
+    }
+
+    public double getLabourMargin()
+    {
+        return labourMargin;
+    }
+
+
+    public double getTotalCostWoTax()
+    {
+        return totalCostWoTax;
+    }
+
+    public double getTotalSourceCost()
+    {
+        return totalSourceCost;
+    }
+
+    public double getTotalProfit()
+    {
+        return totalProfit;
+    }
+
+    public double getTotalMargin()
+    {
+        return totalMargin;
+    }
+
+
+
 }

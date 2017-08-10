@@ -2,6 +2,9 @@ package com.mygubbi.game.proposal.model;
 
 import io.vertx.core.json.JsonObject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by Chirag on 08-03-2017.
  */
@@ -10,9 +13,13 @@ public class ProposalVersion extends JsonObject{
     public static final String ID = "id";
     public static final String VERSION = "version";
     public static final String PROPOSAL_ID = "proposalId";
+    public static final String DATE = "date";
     public static final String FINAL_AMOUNT = "finalAmount";
     public static final String DISCOUNT_AMOUNT = "discountAmount";
     public static final String DISCOUNT_PERCENTAGE = "discountPercentage";
+    public static final String CREATED_BY= "amount";
+    public static final String UPDATED_ON= "amount";
+    public static final String UPDATED_BY= "amount";
     public static final String AMOUNT= "amount";
 
     public ProposalVersion() {}
@@ -45,6 +52,19 @@ public class ProposalVersion extends JsonObject{
 
     public ProposalVersion setVersion(String version) {
         this.put(VERSION, version);
+        return this;
+    }
+
+    public Date getDate() {
+        return (Date) this.getValue(DATE);
+    }
+
+
+    public ProposalVersion setDate(Date date)
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String format = formatter.format(date);
+        this.put(DATE, format);
         return this;
     }
 
@@ -82,5 +102,20 @@ public class ProposalVersion extends JsonObject{
     public ProposalVersion setDiscountPercenatge(double discountPercentage) {
         this.put(DISCOUNT_PERCENTAGE, discountPercentage);
         return this;
+    }
+
+    public String getCreatedBy() {
+        return this.getString(CREATED_BY);
+    }
+
+
+    public String getUpdatedBy()
+    {
+        return this.getString(UPDATED_BY);
+    }
+
+    public Date getUpdatedOn()
+    {
+        return (Date) this.getValue(UPDATED_ON);
     }
 }

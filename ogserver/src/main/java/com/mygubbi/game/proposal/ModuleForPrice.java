@@ -21,7 +21,6 @@ public class ModuleForPrice extends JsonObject
     private static final String PRICE_DATE = "priceDate";
     private static final String CITY = "city";
     private static final String MODULE = "module";
-    private static final String HANDLE_TYPE = "handleType";
     private static final String PRODUCT = "product";
 
     public ModuleForPrice(JsonObject json)
@@ -42,9 +41,6 @@ public class ModuleForPrice extends JsonObject
         return this.getString(CITY);
     }
 
-    public String getHandleType() {
-        return this.getString(HANDLE_TYPE);
-    }
 
     public ModuleForPrice setCreateDate(Date createDate)
     {
