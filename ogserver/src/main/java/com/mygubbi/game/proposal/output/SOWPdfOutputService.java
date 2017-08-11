@@ -201,7 +201,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         JsonObject jsonObject=new JsonObject();
         List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
 
-        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion());
+        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
         String sowversion = "1.0";
         String version = quoteData.fromVersion;
 
@@ -256,7 +256,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             LOG.debug("created SOW.pdf");
             sendResponse(message, new JsonObject().put("sowPdfFile", outputCreator.getOutputFile()));
             LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
-            this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,message);
+            this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,proposalSOWs,message);
         }
         catch (Exception e)
         {
@@ -266,12 +266,12 @@ public class SOWPdfOutputService extends AbstractVerticle {
         }
     }
     private void createOfficeUseOnlyPdf(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
-                                        List<ProductAddon> addons, Message  message)
+                                        List<ProductAddon> addons,List<SOWPdf> proposalSOWs, Message  message)
     {
         try
         {
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,proposalSOWs);
             outputCreator.create();
             OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
             String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");

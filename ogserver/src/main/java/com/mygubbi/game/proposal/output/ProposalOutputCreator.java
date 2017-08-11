@@ -40,8 +40,7 @@ public interface ProposalOutputCreator
             case SOWPDF:
                 return new PdfSowCreator(quoteData, proposalHeader,proposalSOWs);
             case BOOKING_FORM:
-                return new PdfOfficeUseCreator(quoteData,proposalHeader)
-
+                return new PdfOfficeUseCreator(quoteData,proposalHeader);
             default:
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
         }
