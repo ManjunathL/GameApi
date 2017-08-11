@@ -308,28 +308,28 @@ public class ProductModule extends JsonObject
         return this.getString(HANDLE_THICKNESS);
     }
 
-    public String getLeftExposed() {
-        return this.getString(LEFT_EXPOSED);
+    public Boolean getLeftExposed() {
+        return this.getBoolean(LEFT_EXPOSED);
     }
 
-    public String getRightExposed() {
-        return this.getString(RIGHT_EXPOSED);
+    public Boolean getRightExposed() {
+        return this.getBoolean(RIGHT_EXPOSED);
     }
 
-    public String getTopExposed() {
-        return this.getString(TOP_EXPOSED);
+    public Boolean getTopExposed() {
+        return this.getBoolean(TOP_EXPOSED);
     }
 
-    public String getBottomExposed() {
-        return this.getString(BOTTOM_EXPOSED);
+    public Boolean getBottomExposed() {
+        return this.getBoolean(BOTTOM_EXPOSED);
     }
 
-    public String getBackExposed() {
-        return this.getString(BACK_EXPOSED);
+    public Boolean getBackExposed() {
+        return this.getBoolean(BACK_EXPOSED);
     }
 
-    public String getOpenUnit() {
-        return this.getString(OPEN_UNIT);
+    public Boolean getOpenUnit() {
+        return this.getBoolean(OPEN_UNIT);
     }
 
     public ProductModule setHandleThickness(String handleThickness)

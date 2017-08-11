@@ -1,5 +1,10 @@
 package com.mygubbi.game.proposal.model.dw;
 
+import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
@@ -87,6 +92,86 @@ public class DWProductModule extends JsonObject {
 
     public DWProductModule(JsonObject jsonObject){
         super(jsonObject.getMap());
+    }
+
+    public DWProductModule setDwModuleObjects(ModulePriceHolder modulePriceHolder, ProposalHeader proposalHeader, ProductLineItem productLineItem, ProposalVersion proposalVersion, ProductModule productModule)
+    {
+        DWProductModule dwProductModule = new DWProductModule();
+
+        dwProductModule.setProposalId(proposalHeader.getId());
+        dwProductModule.setVersion(Double.parseDouble(proposalVersion.getVersion()));
+        dwProductModule.setProposalTitle(proposalHeader.getQuotationFor());
+        dwProductModule.setPriceDate(proposalHeader.getPriceDate());
+        dwProductModule.setBusinessDate(proposalVersion.getDate());
+        dwProductModule.setRegion(proposalHeader.getProjectCity());
+        dwProductModule.setSpaceType(productLineItem.getSpaceType());
+        dwProductModule.setRoom(productLineItem.getRoomCode());
+        dwProductModule.setPrId(productLineItem.getId());
+        dwProductModule.setPrTitle(productLineItem.getTitle());
+        dwProductModule.setModuleSeq(productModule.getModuleSequence());
+        dwProductModule.setModuleCode(productModule.getMGCode());
+        dwProductModule.setDescription(productModule.getDescription());
+        dwProductModule.setWidth(productModule.getWidth());
+        dwProductModule.setHeight(productModule.getHeight());
+        dwProductModule.setDepth(productModule.getDepth());
+        dwProductModule.setModuleCategory(productModule.getModuleCategory());
+        dwProductModule.setHandleSize(Double.parseDouble(productModule.getHandleThickness()));
+        dwProductModule.setHandleQty(productModule.getHandleQuantity());
+        dwProductModule.setCarcass(productModule.getCarcassCode());
+        dwProductModule.setFinish(productModule.getFinishCode());
+        dwProductModule.setFinishMaterial(productModule.getFinishType());
+        dwProductModule.setColor(productModule.getColorCode());
+        dwProductModule.setExposedLeft(productModule.getBottomExposed() ? "Yes" : "No");
+        dwProductModule.setExposedRight(productModule.getRightExposed() ? "Yes" : "No");
+        dwProductModule.setExposedBottom(productModule.getBottomExposed() ? "Yes" : "No");
+        dwProductModule.setExposedTop(productModule.getTopExposed() ? "Yes" : "No");
+        dwProductModule.setExposedBack(productModule.getBackExposed() ? "Yes" : "No");
+        dwProductModule.setExposedOpen(productModule.getOpenUnit() ? "Yes" : "No");
+        dwProductModule.setNoOfAccPacks(modulePriceHolder.getNoOfAccPacks());
+        dwProductModule.setModuleArea(productModule.getAreaOfModuleInSft());
+        dwProductModule.setCarcassPrice(modulePriceHolder.getCarcassCost());
+        dwProductModule.setCarcassWoTax(modulePriceHolder.getCarcassCostWoTax());
+        dwProductModule.setCarcassCost(modulePriceHolder.getCarcassSourceCost());
+        dwProductModule.setCarcassProfit(modulePriceHolder.getCarcassProfit());
+        dwProductModule.setCarcassMargin(modulePriceHolder.getCarcassMargin());
+        dwProductModule.setShutterPrice(modulePriceHolder.getShutterCost());
+        dwProductModule.setShutterWOTax(modulePriceHolder.getShutterCostWoTax());
+        dwProductModule.setShutterCost(modulePriceHolder.getShutterSourceCost());
+        dwProductModule.setShutterProfit(modulePriceHolder.getShutterProfit());
+        dwProductModule.setShutterMargin(modulePriceHolder.getShutterMargin());
+        dwProductModule.setLabourPrice(modulePriceHolder.getLabourCost());
+        dwProductModule.setLabourPriceWoTax(modulePriceHolder.getLabourCostWoTax());
+        dwProductModule.setLabourCost(modulePriceHolder.getLabourSourceCost());
+        dwProductModule.setLabourProfit(modulePriceHolder.getLabourProfit());
+        dwProductModule.setLabourMargin(modulePriceHolder.getLabourMargin());
+        dwProductModule.setHandlePrice(modulePriceHolder.getHandleandKnobCost());
+        dwProductModule.setHandlePriceWoTax(modulePriceHolder.getHandleandKnobCostWoTax());
+        dwProductModule.setHandleCost(modulePriceHolder.getHandleandKnobSourceCost());
+        dwProductModule.setHandleProfit(modulePriceHolder.getHandleandKnobProfit());
+        dwProductModule.setHandleMargin(modulePriceHolder.getHandleandKnobMargin());
+        dwProductModule.setHingePrice(modulePriceHolder.getHingeCost());
+        dwProductModule.setHingeWoTax(modulePriceHolder.getHingeCostWoTax());
+        dwProductModule.setHingeCost(modulePriceHolder.getHingeSourceCost());
+        dwProductModule.setHingeProfit(modulePriceHolder.getHingeProfit());
+        dwProductModule.setHingeMargin(modulePriceHolder.getHingeMargin());
+        dwProductModule.setHardwarePrice(modulePriceHolder.getHardwareCost());
+        dwProductModule.setHardwareWoTax(modulePriceHolder.getHardwareCostWoTax());
+        dwProductModule.setHardwareCost(modulePriceHolder.getHardwareSourceCost());
+        dwProductModule.setHardwareProfit(modulePriceHolder.getHardwareProfit());
+        dwProductModule.setHardwareMargin(modulePriceHolder.getHardwareMargin());
+        dwProductModule.setAccessoryPrice(modulePriceHolder.getAccessoryCost());
+        dwProductModule.setAccessoryPriceWoTax(modulePriceHolder.getAccessoryCostWoTax());
+        dwProductModule.setAccessoryCost(modulePriceHolder.getAccessorySourceCost());
+        dwProductModule.setAccessoryProfit(modulePriceHolder.getAccessoryProfit());
+        dwProductModule.setAccessoryMargin(modulePriceHolder.getAccessoryMargin());
+        dwProductModule.setModulePrice(modulePriceHolder.getTotalCost());
+        dwProductModule.setModulePriceWoTax(modulePriceHolder.getTotalCostWoTax());
+        dwProductModule.setModuleCost(modulePriceHolder.getTotalSourceCost());
+        dwProductModule.setModuleProfit(modulePriceHolder.getTotalProfit());
+        dwProductModule.setModuleMargin(modulePriceHolder.getTotalMargin());
+
+
+        return dwProductModule;
     }
 
 

@@ -4,11 +4,17 @@ import com.mygubbi.common.StringUtils;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.UpdateResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class QueryData
 {
+
+	private final static Logger LOG = LogManager.getLogger(QueryData.class);
+
 	public String queryId;
 	public QueryDef queryDef;
 	

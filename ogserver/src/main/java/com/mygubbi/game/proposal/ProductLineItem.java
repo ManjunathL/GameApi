@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -198,11 +199,11 @@ public class ProductLineItem extends JsonObject
     }
 
     public Date getCreatedOn() {
-        return (Date) this.getValue(CREATED_ON);
+        return DateUtil.convertDate(this.getString(CREATED_ON));
     }
 
     public Date getUpdatedOn() {
-        return (Date) this.getValue(UPDATED_ON);
+        return DateUtil.convertDate(this.getString(UPDATED_ON));
     }
 
     public String getUpdatedBy() {

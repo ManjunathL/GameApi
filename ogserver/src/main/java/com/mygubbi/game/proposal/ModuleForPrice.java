@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import static org.apache.poi.ss.formula.functions.NumericFunction.LOG;
 
@@ -22,6 +23,7 @@ public class ModuleForPrice extends JsonObject
     private static final String CITY = "city";
     private static final String MODULE = "module";
     private static final String PRODUCT = "product";
+    private Date priceDate;
 
     public ModuleForPrice(JsonObject json)
     {
@@ -29,6 +31,9 @@ public class ModuleForPrice extends JsonObject
         LOG.info("JSON object for product" +json.encodePrettily());
         this.setModule();
         this.setProduct();
+    }
+
+    public ModuleForPrice() {
     }
 
     public Date getPriceDate()
@@ -55,7 +60,7 @@ public class ModuleForPrice extends JsonObject
     }
 
 
-    private void setModule()
+    public void setModule()
     {
         if (this.containsKey(MODULE))
         {
@@ -63,13 +68,26 @@ public class ModuleForPrice extends JsonObject
         }
     }
 
-    private void setProduct()
+    public void setModule(ProductModule productModule)
+    {
+
+            this.put(MODULE,productModule);
+    }
+
+    public void setProduct()
     {
         if (this.containsKey(PRODUCT))
         {
             this.put(PRODUCT, new ProductLineItem(this.getJsonObject(PRODUCT)));
         }
     }
+
+    public void setProduct(ProductLineItem productLineItem)
+    {
+
+        this.put(PRODUCT,productLineItem);
+    }
+
 
     public ProductLineItem getProduct()
     {
@@ -84,5 +102,10 @@ public class ModuleForPrice extends JsonObject
     }
 
 
-
+    public ModuleForPrice setPriceDate(Date priceDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String format = formatter.format(priceDate);
+        this.put(PRICE_DATE, format);
+        return this;
+    }
 }

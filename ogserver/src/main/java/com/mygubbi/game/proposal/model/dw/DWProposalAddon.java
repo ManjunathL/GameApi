@@ -1,5 +1,9 @@
 package com.mygubbi.game.proposal.model.dw;
 
+import com.mygubbi.game.proposal.ProductAddon;
+import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.price.AddonPriceHolder;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
@@ -40,6 +44,44 @@ public class DWProposalAddon extends JsonObject {
     private static String SOURCE_COST = "sourceCost";
     private static String PROFIT = "addonProfit";
     private static String MARGIN = "addonMargin";
+
+    public DWProposalAddon()
+    {}
+
+    public DWProposalAddon setDwAddonObjects(ProposalHeader proposalHeader,ProposalVersion proposalVersion,  ProductAddon productAddon,  AddonPriceHolder addonPriceHolder)
+    {
+        DWProposalAddon dwProposalAddon = new DWProposalAddon();
+
+        dwProposalAddon.setProposalID(proposalHeader.getId());
+        dwProposalAddon.setVersion(Double.parseDouble(proposalVersion.getVersion()));
+        dwProposalAddon.setProposalTitle(proposalHeader.getQuotationFor());
+        dwProposalAddon.setPriceDate(proposalHeader.getPriceDate());
+        dwProposalAddon.setBusinessDate(proposalVersion.getDate());
+        dwProposalAddon.setRegion(proposalHeader.getProjectCity());
+        dwProposalAddon.setSpaceType(productAddon.getSpaceType());
+        dwProposalAddon.setRoom(productAddon.getRoomCode());
+        dwProposalAddon.setAddonId(productAddon.getId());
+        dwProposalAddon.setCode(productAddon.getCode());
+        dwProposalAddon.setCategory("BP");
+        dwProposalAddon.setSubCategory(productAddon.getCategoryCode());
+        dwProposalAddon.setProductTypeCode(productAddon.getProductTypeCode());
+        dwProposalAddon.setProductSubTypeCode(productAddon.getProductSubtypeCode());
+        dwProposalAddon.setProduct(productAddon.getProduct());
+        dwProposalAddon.setBrandCode(productAddon.getBrandCode());
+        dwProposalAddon.setCatalogueCode(productAddon.getCatalogueCode());
+        dwProposalAddon.setUom(productAddon.getUom());
+        dwProposalAddon.setQuantity(productAddon.getQuantity());
+        dwProposalAddon.setUpdatedBy(productAddon.getUpdatedBy());
+        dwProposalAddon.setUnitPrice(addonPriceHolder.getUnitPrice());
+        dwProposalAddon.setUnitSourceCost(addonPriceHolder.getUnitSourceCost());
+        dwProposalAddon.setPrice(addonPriceHolder.getPrice());
+        dwProposalAddon.setPriceWoTax(addonPriceHolder.getPriceWoTax());
+        dwProposalAddon.setSourceCost(addonPriceHolder.getSourceCost());
+        dwProposalAddon.setProfit(addonPriceHolder.getProfit());
+        dwProposalAddon.setMargin(addonPriceHolder.getMargin());
+
+        return dwProposalAddon;
+    }
 
 
     public int getID() {

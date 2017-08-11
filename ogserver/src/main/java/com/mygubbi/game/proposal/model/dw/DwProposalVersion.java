@@ -1,5 +1,8 @@
 package com.mygubbi.game.proposal.model.dw;
 
+import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.price.VersionPriceHolder;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
@@ -8,7 +11,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by shilpa on 9/8/17.
  */
-public class DwProposal extends JsonObject {
+public class DwProposalVersion extends JsonObject {
     private static final String ID = "id";
     private static String PROPOSAL_ID = "proposalId";
     private static String VERSION = "version";
@@ -105,10 +108,10 @@ public class DwProposal extends JsonObject {
     private static String SV_COUNT = "svCount ";
 
 
-    public DwProposal() {
+    public DwProposalVersion() {
     }
 
-    public DwProposal(JsonObject data) {
+    public DwProposalVersion(JsonObject data) {
         super(data.getMap());
     }
 
@@ -489,479 +492,579 @@ public class DwProposal extends JsonObject {
         return this.getDouble(LA_PRICE_AFTER_DISCOUNT);
     }
 
-    public DwProposal setId(int id) {
+    public DwProposalVersion setId(int id) {
         this.put(ID, id);
         return this;
     }
 
-    public DwProposal setProposalId(int id) {
+    public DwProposalVersion setProposalId(int id) {
         this.put(ID, id);
         return this;
     }
 
-    public DwProposal setVersion(double version) {
+    public DwProposalVersion setVersion(double version) {
         this.put(VERSION, version);
         return this;
     }
 
-    public DwProposal setProposalTitle(String title) {
+    public DwProposalVersion setProposalTitle(String title) {
         this.put(PROPOSAL_TITLE, title);
         return this;
     }
 
-    public DwProposal setRegion(String region) {
+    public DwProposalVersion setRegion(String region) {
         this.put(REGION, region);
         return this;
     }
 
-    public DwProposal setProjectName(String pname) {
+    public DwProposalVersion setProjectName(String pname) {
         this.put(PROJECT_NAME, pname);
         return this;
     }
 
-    public DwProposal setDesignerName(String dname) {
+    public DwProposalVersion setDesignerName(String dname) {
         this.put(DESIGNER_NAME, dname);
         return this;
     }
 
-    public DwProposal setSalesName(String sname) {
+    public DwProposalVersion setSalesName(String sname) {
         this.put(SALES_NAME, sname);
         return this;
     }
 
-    public DwProposal setDesignPartnerName(String dname) {
+    public DwProposalVersion setDesignPartnerName(String dname) {
         this.put(DESIGNER_NAME, dname);
         return this;
     }
 
-    public DwProposal setProposalUpdatedBy(String updatedBy) {
+    public DwProposalVersion setProposalUpdatedBy(String updatedBy) {
         this.put(PROPOSAL_UPDATED_BY, updatedBy);
         return this;
     }
 
-    public DwProposal setProposalCreateDate(Date dt) {
+    public DwProposalVersion setProposalCreateDate(Date dt) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = formatter.format(dt);
         this.put(PROPOSAL_CREATE_DATE, format);
         return  this;
     }
 
-    public DwProposal setProposalPriceDate(Date dt) {
+    public DwProposalVersion setProposalPriceDate(Date dt) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = formatter.format(dt);
         this.put(PROPOSAL_PRICE_DATE, format);
         return  this;
     }
 
-    public DwProposal setBusinessDate(Date dt) {
+    public DwProposalVersion setBusinessDate(Date dt) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = formatter.format(dt);
         this.put(BUSINESS_DATE, format);
         return  this;
     }
 
-    public DwProposal setVersionCreatedBy(String createdBy) {
+    public DwProposalVersion setVersionCreatedBy(String createdBy) {
         this.put(VERSION_CREATED_BY, createdBy);
         return this;
     }
 
-    public DwProposal setVersionCreatedOn(Date dt) {
+    public DwProposalVersion setVersionCreatedOn(Date dt) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = formatter.format(dt);
         this.put(VERSION_CREATED_ON, format);
         return  this;
     }
 
-    public DwProposal setVersionUpdatedBy(String updatedBy) {
+    public DwProposalVersion setVersionUpdatedBy(String updatedBy) {
         this.put(VERSION_UPDATED_BY, updatedBy);
         return this;
     }
 
-    public DwProposal setVersionUpdatedOn(Date dt) {
+    public DwProposalVersion setVersionUpdatedOn(Date dt) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = formatter.format(dt);
         this.put(VERSION_UPDATED_ON, format);
         return  this;
     }
 
-    public DwProposal setStdModuleCount(int nCount) {
+    public DwProposalVersion setStdModuleCount(int nCount) {
         this.put(STD_MODULE_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setnStdModuleCount(int nCount) {
+    public DwProposalVersion setnStdModuleCount(int nCount) {
         this.put(N_STD_MODULE_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setHikeModuleCount(int nCount) {
+    public DwProposalVersion setHikeModuleCount(int nCount) {
         this.put(HIKE_MODULE_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setStdModulePrice(double price) {
+    public DwProposalVersion setStdModulePrice(double price) {
         this.put(STD_MODULE_PRICE, price);
         return this;
     }
 
-    public DwProposal setnStdModulePrice(double price) {
+    public DwProposalVersion setnStdModulePrice(double price) {
         this.put(N_STD_MODULE_PRICE, price);
         return this;
     }
 
-    public DwProposal setHikeModulePrice(double price) {
+    public DwProposalVersion setHikeModulePrice(double price) {
         this.put(HIKE_MODULE_PRICE, price);
         return this;
     }
 
-    public DwProposal setVersionPrice(double price) {
+    public DwProposalVersion setVersionPrice(double price) {
         this.put(VR_PRICE, price);
         return this;
     }
 
-    public DwProposal setVersionPriceAfterDiscount(double price) {
+    public DwProposalVersion setVersionPriceAfterDiscount(double price) {
         this.put(VR_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
 
-    public DwProposal setVersionPriceAfterTax(double price) {
+    public DwProposalVersion setVersionPriceAfterTax(double price) {
         this.put(VR_PRICE_AFTER_TAX, price);
         return this;
     }
 
-    public DwProposal setVersionCost(double price) {
+    public DwProposalVersion setVersionCost(double price) {
         this.put(VR_COST, price);
         return this;
     }
 
-    public DwProposal setVersionProfit(double price) {
+    public DwProposalVersion setVersionProfit(double price) {
         this.put(VR_PROFIT, price);
         return this;
     }
 
-    public DwProposal setVersionMargin(double price) {
+    public DwProposalVersion setVersionMargin(double price) {
         this.put(VR_MARGIN, price);
         return this;
     }
 
-    public DwProposal setProductPrice(double price) {
+    public DwProposalVersion setProductPrice(double price) {
         this.put(PR_PRICE, price);
         return this;
     }
 
-    public DwProposal setProductPriceAfterDiscount(double price) {
+    public DwProposalVersion setProductPriceAfterDiscount(double price) {
         this.put(PR_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
 
-    public DwProposal setProductPriceAfterTax(double price) {
+    public DwProposalVersion setProductPriceAfterTax(double price) {
         this.put(PR_PRICE_AFTER_TAX, price);
         return this;
     }
 
-    public DwProposal setProductCost(double price) {
+    public DwProposalVersion setProductCost(double price) {
         this.put(PR_COST, price);
         return this;
     }
 
-    public DwProposal setProductProfit(double price) {
+    public DwProposalVersion setProductProfit(double price) {
         this.put(PR_PROFIT, price);
         return this;
     }
 
-    public DwProposal setProductMargin(double price) {
+    public DwProposalVersion setProductMargin(double price) {
         this.put(PR_MARGIN, price);
         return this;
     }
 
-    public DwProposal setWoodWorkPrice(double price) {
+    public DwProposalVersion setWoodWorkPrice(double price) {
         this.put(WW_PRICE, price);
         return this;
     }
 
-    public DwProposal setWoodWorkPriceAfterDiscount(double price) {
+    public DwProposalVersion setWoodWorkPriceAfterDiscount(double price) {
         this.put(WW_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
 
-    public DwProposal setWoodWorkPriceAfterTax(double price) {
+    public DwProposalVersion setWoodWorkPriceAfterTax(double price) {
         this.put(WW_PRICE_AFTER_TAX, price);
         return this;
     }
 
-    public DwProposal setWoodWorkCost(double price) {
+    public DwProposalVersion setWoodWorkCost(double price) {
         this.put(WW_COST, price);
         return this;
     }
 
-    public DwProposal setWoodWorkProfit(double price) {
+    public DwProposalVersion setWoodWorkProfit(double price) {
         this.put(WW_PROFIT, price);
         return this;
     }
 
-    public DwProposal setWoodWorkMargin(double price) {
+    public DwProposalVersion setWoodWorkMargin(double price) {
         this.put(WW_MARGIN, price);
         return this;
     }
 
-    public DwProposal setHardwarePrice(double price) {
+    public DwProposalVersion setHardwarePrice(double price) {
         this.put(WW_PRICE, price);
         return this;
     }
 
-    public DwProposal setHardwarePriceAfterTax(double price) {
+    public DwProposalVersion setHardwarePriceAfterTax(double price) {
         this.put(HW_PRICEAFTERTAX, price);
         return this;
     }
 
-    public DwProposal setHardwareCost(double price) {
+    public DwProposalVersion setHardwareCost(double price) {
         this.put(HW_COST, price);
         return this;
     }
 
-    public DwProposal setHardwareProfit(double price) {
+    public DwProposalVersion setHardwareProfit(double price) {
         this.put(HW_PROFIT, price);
         return this;
     }
 
-    public DwProposal setHardwareMargin(double price) {
+    public DwProposalVersion setHardwareMargin(double price) {
         this.put(HW_MARGIN, price);
         return this;
     }
 
-    public DwProposal setAccessoryPrice(double price) {
+    public DwProposalVersion setAccessoryPrice(double price) {
         this.put(ACC_PRICE, price);
         return this;
     }
 
-    public DwProposal setAccessoryPriceAfterTax(double price) {
+    public DwProposalVersion setAccessoryPriceAfterTax(double price) {
         this.put(ACC_PRICEAFTERTAX, price);
         return this;
     }
 
-    public DwProposal setAccessoryCost(double price) {
+    public DwProposalVersion setAccessoryCost(double price) {
         this.put(ACC_COST, price);
         return this;
     }
 
-    public DwProposal setAccessoryProfit(double price) {
+    public DwProposalVersion setAccessoryProfit(double price) {
         this.put(ACC_PROFIT, price);
         return this;
     }
 
-    public DwProposal setAccessoryMargin(double price) {
+    public DwProposalVersion setAccessoryMargin(double price) {
         this.put(ACC_MARGIN, price);
         return this;
     }
 
-    public DwProposal setHandleKnobPrice(double price) {
+    public DwProposalVersion setHandleKnobPrice(double price) {
         this.put(HK_PRICE, price);
         return this;
     }
 
-    public DwProposal setHandleKnobPriceAfterTax(double price) {
+    public DwProposalVersion setHandleKnobPriceAfterTax(double price) {
         this.put(HK_PRICEAFTERTAX, price);
         return this;
     }
 
-    public DwProposal setHandleKnobCost(double price) {
+    public DwProposalVersion setHandleKnobCost(double price) {
         this.put(HK_COST, price);
         return this;
     }
 
-    public DwProposal setHandleKnobProfit(double price) {
+    public DwProposalVersion setHandleKnobProfit(double price) {
         this.put(HK_PROFIT, price);
         return this;
     }
 
-    public DwProposal setHandleKnobMargin(double price) {
+    public DwProposalVersion setHandleKnobMargin(double price) {
         this.put(HK_MARGIN, price);
         return this;
     }
 
-    public DwProposal setHingePrice(double price) {
+    public DwProposalVersion setHingePrice(double price) {
         this.put(HINGE_PRICE, price);
         return this;
     }
 
-    public DwProposal setHingePriceAfterTax(double price) {
+    public DwProposalVersion setHingePriceAfterTax(double price) {
         this.put(HINGE_PRICEAFTERTAX, price);
         return this;
     }
 
-    public DwProposal setHingeCost(double price) {
+    public DwProposalVersion setHingeCost(double price) {
         this.put(HINGE_COST, price);
         return this;
     }
 
-    public DwProposal setHingeProfit(double price) {
+    public DwProposalVersion setHingeProfit(double price) {
         this.put(HINGE_COST, price);
         return this;
     }
 
-    public DwProposal setHingeMargin(double price) {
+    public DwProposalVersion setHingeMargin(double price) {
         this.put(HINGE_MARGIN, price);
         return this;
     }
 
-    public DwProposal setLConnectorPrice(double price) {
+    public DwProposalVersion setLConnectorPrice(double price) {
         this.put(LC_PRICE, price);
         return this;
     }
 
-    public DwProposal setLConnectorPriceAfterTax(double price) {
+    public DwProposalVersion setLConnectorPriceAfterTax(double price) {
         this.put(LC_PRICEAFTERTAX, price);
         return this;
     }
 
-    public DwProposal setLConnectorCost(double price) {
+    public DwProposalVersion setLConnectorCost(double price) {
         this.put(LC_COST, price);
         return this;
     }
 
-    public DwProposal setLConnectorProfit(double price) {
+    public DwProposalVersion setLConnectorProfit(double price) {
         this.put(LC_PROFIT, price);
         return this;
     }
 
-    public DwProposal setLConnectorMargin(double price) {
+    public DwProposalVersion setLConnectorMargin(double price) {
         this.put(LC_MARGIN, price);
         return this;
     }
 
-    public DwProposal setLabourPrice(double price) {
+    public DwProposalVersion setLabourPrice(double price) {
         this.put(LA_PRICE, price);
         return this;
     }
 
-    public DwProposal setLabourPriceAfterTax(double price) {
+    public DwProposalVersion setLabourPriceAfterTax(double price) {
         this.put(LA_PRICEAFTERTAX, price);
         return this;
     }
 
-    public DwProposal setLabourCost(double price) {
+    public DwProposalVersion setLabourCost(double price) {
         this.put(LA_COST, price);
         return this;
     }
 
-    public DwProposal setLabourProfit(double price) {
+    public DwProposalVersion setLabourProfit(double price) {
         this.put(LA_PROFIT, price);
         return this;
     }
 
-    public DwProposal setLabourMargin(double price) {
+    public DwProposalVersion setLabourMargin(double price) {
         this.put(LA_MARGIN, price);
         return this;
     }
 
-    public DwProposal setBroughtoutProductPrice(double price) {
+    public DwProposalVersion setBroughtoutProductPrice(double price) {
         this.put(BP_PRICE, price);
         return this;
     }
 
-    public DwProposal setBroughtoutProductPriceAfterDiscount(double price) {
+    public DwProposalVersion setBroughtoutProductPriceAfterDiscount(double price) {
         this.put(BP_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
 
-    public DwProposal setBroughtoutProductPriceAfterTax(double price) {
+    public DwProposalVersion setBroughtoutProductPriceAfterTax(double price) {
         this.put(BP_PRICE_AFTER_TAX, price);
         return this;
     }
 
-    public DwProposal setBroughtoutProductCost(double price) {
+    public DwProposalVersion setBroughtoutProductCost(double price) {
         this.put(BP_COST, price);
         return this;
     }
 
-    public DwProposal setBroughtoutProductProfit(double price) {
+    public DwProposalVersion setBroughtoutProductProfit(double price) {
         this.put(BP_PROFIT, price);
         return this;
     }
 
-    public DwProposal setBroughtoutProductMargin(double price) {
+    public DwProposalVersion setBroughtoutProductMargin(double price) {
         this.put(BP_MARGIN, price);
         return this;
     }
 
-    public DwProposal setServicesPrice(double price) {
+    public DwProposalVersion setServicesPrice(double price) {
         this.put(SV_PRICE, price);
         return this;
     }
 
-    public DwProposal setServicesPriceAfterDiscount(double price) {
+    public DwProposalVersion setServicesPriceAfterDiscount(double price) {
         this.put(SV_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
 
-    public DwProposal setServicesPriceAfterTax(double price) {
+    public DwProposalVersion setServicesPriceAfterTax(double price) {
         this.put(SV_PRICE_AFTER_TAX, price);
         return this;
     }
 
-    public DwProposal setServicesCost(double price) {
+    public DwProposalVersion setServicesCost(double price) {
         this.put(SV_COST, price);
         return this;
     }
 
-    public DwProposal setServicesProfit(double price) {
+    public DwProposalVersion setServicesProfit(double price) {
         this.put(SV_PROFIT, price);
         return this;
     }
 
-    public DwProposal setServicesMargin(double price) {
+    public DwProposalVersion setServicesMargin(double price) {
         this.put(SV_MARGIN, price);
         return this;
     }
 
-    public DwProposal setKitchenCount(int nCount) {
+    public DwProposalVersion setKitchenCount(int nCount) {
         this.put(KITCHEN_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setWardrobeCount(int nCount) {
+    public DwProposalVersion setWardrobeCount(int nCount) {
         this.put(WARDROBE_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setNSproductCount(int nCount) {
+    public DwProposalVersion setNSproductCount(int nCount) {
         this.put(NS_PRODUCT_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setBroughtoutProductCount(int nCount) {
+    public DwProposalVersion setBroughtoutProductCount(int nCount) {
         this.put(BP_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setServicesCount(int nCount) {
+    public DwProposalVersion setServicesCount(int nCount) {
         this.put(SV_COUNT, nCount);
         return this;
     }
 
-    public DwProposal setHardwarePriceAfterDiscount(double price) {
+    public DwProposalVersion setHardwarePriceAfterDiscount(double price) {
         this.put(HW_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
-    public DwProposal setAccessoryPriceAfterDiscount(double price) {
+    public DwProposalVersion setAccessoryPriceAfterDiscount(double price) {
         this.put(ACC_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
-    public DwProposal setHandleKnobPriceAfterDiscount(double price) {
+    public DwProposalVersion setHandleKnobPriceAfterDiscount(double price) {
         this.put(HK_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
-    public DwProposal setHingePriceAfterDiscount(double price) {
+    public DwProposalVersion setHingePriceAfterDiscount(double price) {
         this.put(HINGE_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
-    public DwProposal setLConnectorPriceAfterDiscount(double price) {
+    public DwProposalVersion setLConnectorPriceAfterDiscount(double price) {
         this.put(LC_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
-    public DwProposal setLabourPriceAfterDiscount(double price) {
+    public DwProposalVersion setLabourPriceAfterDiscount(double price) {
         this.put(LA_PRICE_AFTER_DISCOUNT, price);
         return this;
     }
 
+    public DwProposalVersion setDwVersionObjects(ProposalHeader proposalHeader, ProposalVersion proposalVersion, VersionPriceHolder versionPriceHolder) {
+        DwProposalVersion dwProposalVersion = new DwProposalVersion();
+
+        dwProposalVersion.setProposalId(proposalHeader.getId());
+        dwProposalVersion.setVersion(Double.parseDouble(proposalVersion.getVersion()));
+        dwProposalVersion.setProposalTitle(proposalHeader.getQuotationFor());
+        dwProposalVersion.setRegion(proposalHeader.getProjectCity());
+        dwProposalVersion.setProjectName(proposalHeader.getProjectName());
+        dwProposalVersion.setDesignerName(proposalHeader.getDesignerName());
+        dwProposalVersion.setSalesName(proposalHeader.getSalespersonName());
+        dwProposalVersion.setDesignPartnerName(proposalHeader.getDesignPartnerName());
+        dwProposalVersion.setProposalCreateDate(proposalHeader.getCreatedOn());
+        dwProposalVersion.setProposalUpdatedBy(proposalHeader.getUpdatedBy());
+        dwProposalVersion.setProposalPriceDate(proposalHeader.getPriceDate());
+        dwProposalVersion.setBusinessDate(proposalVersion.getDate());
+        dwProposalVersion.setVersionCreatedBy(proposalVersion.getCreatedBy());
+        dwProposalVersion.setVersionCreatedOn(proposalVersion.getDate());
+        dwProposalVersion.setVersionUpdatedBy(proposalVersion.getUpdatedBy());
+        dwProposalVersion.setVersionUpdatedOn(proposalVersion.getUpdatedOn());
+        dwProposalVersion.setStdModuleCount(versionPriceHolder.getStdModuleCount());
+        dwProposalVersion.setStdModulePrice(versionPriceHolder.getStdModulePrice());
+        dwProposalVersion.setnStdModuleCount(versionPriceHolder.getNStdModuleCount());
+        dwProposalVersion.setnStdModulePrice(versionPriceHolder.getNStdModulePrice());
+        dwProposalVersion.setHikeModuleCount(versionPriceHolder.getHikeModuleCount());
+        dwProposalVersion.setHikeModulePrice(versionPriceHolder.getHikeModulePrice());
+        dwProposalVersion.setVersionPrice(versionPriceHolder.getPrice());
+        dwProposalVersion.setVersionPriceAfterDiscount(versionPriceHolder.getPriceAfterDiscount());
+        dwProposalVersion.setVersionPriceAfterTax(versionPriceHolder.getPriceWotax());
+        dwProposalVersion.setVersionCost(versionPriceHolder.getSourceCost());
+        dwProposalVersion.setVersionProfit(versionPriceHolder.getProfit());
+        dwProposalVersion.setVersionMargin(versionPriceHolder.getMargin());
+        dwProposalVersion.setProductPrice(versionPriceHolder.getProductPrice());
+        dwProposalVersion.setProductPriceAfterDiscount(versionPriceHolder.getProductPriceAfterDiscount());
+        dwProposalVersion.setProductPriceAfterTax(versionPriceHolder.getProductPriceWotax());
+        dwProposalVersion.setProductCost(versionPriceHolder.getProductSourceCost());
+        dwProposalVersion.setProductProfit(versionPriceHolder.getProductProfit());
+        dwProposalVersion.setProductMargin(versionPriceHolder.getProductMargin());
+        dwProposalVersion.setWoodWorkPrice(versionPriceHolder.getWoodworkPrice());
+        dwProposalVersion.setWoodWorkPriceAfterDiscount(versionPriceHolder.getWoodworkPriceAfterDiscount());
+        dwProposalVersion.setWoodWorkPriceAfterTax(versionPriceHolder.getWoodworkPriceWotax());
+        dwProposalVersion.setWoodWorkCost(versionPriceHolder.getWoodworkSourceCost());
+        dwProposalVersion.setWoodWorkProfit(versionPriceHolder.getWoodworkProfit());
+        dwProposalVersion.setWoodWorkMargin(versionPriceHolder.getWoodworkMargin());
+        dwProposalVersion.setHardwarePrice(versionPriceHolder.getHardwarePrice());
+        dwProposalVersion.setHardwarePriceAfterDiscount(versionPriceHolder.getHardwarePriceAfterDiscount());
+        dwProposalVersion.setHardwarePriceAfterTax(versionPriceHolder.getHardwarePriceWotax());
+        dwProposalVersion.setHardwareCost(versionPriceHolder.getHardwareSourceCost());
+        dwProposalVersion.setHardwareProfit(versionPriceHolder.getHardwareProfit());
+        dwProposalVersion.setHardwareMargin(versionPriceHolder.getHardwareMargin());
+        dwProposalVersion.setAccessoryPrice(versionPriceHolder.getAccessoryPrice());
+        dwProposalVersion.setAccessoryPriceAfterDiscount(versionPriceHolder.getAccessoryPriceAfterDiscount());
+        dwProposalVersion.setAccessoryPriceAfterTax(versionPriceHolder.getAccessoryPriceWotax());
+        dwProposalVersion.setAccessoryCost(versionPriceHolder.getAccessorySourceCost());
+        dwProposalVersion.setAccessoryProfit(versionPriceHolder.getAcccessoryProfit());
+        dwProposalVersion.setAccessoryMargin(versionPriceHolder.getAccessoryMargin());
+        dwProposalVersion.setHandleKnobPrice(versionPriceHolder.getHKPrice());
+        dwProposalVersion.setHandleKnobPriceAfterDiscount(versionPriceHolder.getHKPriceAfterDiscount());
+        dwProposalVersion.setHandleKnobPriceAfterTax(versionPriceHolder.getHKPriceWotax());
+        dwProposalVersion.setHandleKnobCost(versionPriceHolder.getHKSourceCost());
+        dwProposalVersion.setHandleKnobProfit(versionPriceHolder.getHKProfit());
+        dwProposalVersion.setHandleKnobMargin(versionPriceHolder.getHKMargin());
+        dwProposalVersion.setHingePrice(versionPriceHolder.getHingePrice());
+        dwProposalVersion.setHingePriceAfterDiscount(versionPriceHolder.getHingePriceAfterDiscount());
+        dwProposalVersion.setHingePriceAfterTax(versionPriceHolder.getHingePriceWotax());
+        dwProposalVersion.setHingeCost(versionPriceHolder.getHingeSourceCost());
+        dwProposalVersion.setHingeProfit(versionPriceHolder.getHingeProfit());
+        dwProposalVersion.setVersionMargin(versionPriceHolder.getHingeMargin());
+        dwProposalVersion.setLabourPrice(versionPriceHolder.getLabourPrice());
+        dwProposalVersion.setLabourPriceAfterDiscount(versionPriceHolder.getLabourPriceAfterDiscount());
+        dwProposalVersion.setLabourPriceAfterTax(versionPriceHolder.getLabourPriceWotax());
+        dwProposalVersion.setLabourCost(versionPriceHolder.getLabourSourceCost());
+        dwProposalVersion.setLabourProfit(versionPriceHolder.getLabourProfit());
+        dwProposalVersion.setLabourMargin(versionPriceHolder.getLabourMargin());
+        dwProposalVersion.setLConnectorPrice(versionPriceHolder.getLCPrice());
+        dwProposalVersion.setLConnectorPriceAfterDiscount(versionPriceHolder.getLCPriceAfterDiscount());
+        dwProposalVersion.setLConnectorPriceAfterTax(versionPriceHolder.getLCPriceWotax());
+        dwProposalVersion.setLConnectorCost(versionPriceHolder.getLCSourceCost());
+        dwProposalVersion.setLConnectorProfit(versionPriceHolder.getLCProfit());
+        dwProposalVersion.setLConnectorMargin(versionPriceHolder.getLCMargin());
+        dwProposalVersion.setBroughtoutProductPrice(versionPriceHolder.getBPPrice());
+        dwProposalVersion.setBroughtoutProductPriceAfterDiscount(versionPriceHolder.getBPPriceAfterDiscount());
+        dwProposalVersion.setBroughtoutProductPriceAfterTax(versionPriceHolder.getBPPriceWotax());
+        dwProposalVersion.setBroughtoutProductCost(versionPriceHolder.getBPSourceCost());
+        dwProposalVersion.setBroughtoutProductProfit(versionPriceHolder.getBPProfit());
+        dwProposalVersion.setBroughtoutProductMargin(versionPriceHolder.getBPMargin());
+        dwProposalVersion.setServicesPrice(versionPriceHolder.getSVPrice());
+        dwProposalVersion.setServicesPriceAfterDiscount(versionPriceHolder.getSVPriceAfterDiscount());
+        dwProposalVersion.setServicesPriceAfterTax(versionPriceHolder.getSVPriceWotax());
+        dwProposalVersion.setServicesCost(versionPriceHolder.getSVSourceCost());
+        dwProposalVersion.setServicesProfit(versionPriceHolder.getSVProfit());
+        dwProposalVersion.setServicesMargin(versionPriceHolder.getSVMargin());
+        dwProposalVersion.setKitchenCount(versionPriceHolder.getKitchenCount());
+        dwProposalVersion.setWardrobeCount(versionPriceHolder.getWardrobeCount());
+        dwProposalVersion.setNSproductCount(versionPriceHolder.getNSProductCount());
+        dwProposalVersion.setBroughtoutProductCount(versionPriceHolder.getBPCount());
+        dwProposalVersion.setServicesCount(versionPriceHolder.getServicesCount());
+
+
+        return dwProposalVersion;
+    }
 }

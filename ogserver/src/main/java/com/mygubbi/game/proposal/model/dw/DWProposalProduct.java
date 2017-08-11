@@ -1,5 +1,9 @@
 package com.mygubbi.game.proposal.model.dw;
 
+import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.price.ProductPriceHolder;
 import io.vertx.core.json.JsonObject;
 import org.elasticsearch.common.recycler.Recycler;
 
@@ -930,5 +934,95 @@ public class DWProposalProduct extends JsonObject {
     {
         put(HIKEMC,hikeModulePrice);
         return this;
+    }
+
+    public DWProposalProduct setDwProductObjects(ProductPriceHolder productPriceHolder, ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem) {
+        DWProposalProduct dwProposalProduct = new DWProposalProduct();
+
+
+        dwProposalProduct.setProposalId(proposalHeader.getId());
+        dwProposalProduct.setVersion(Double.parseDouble(proposalVersion.getVersion()));
+        dwProposalProduct.setProposalTitle(proposalHeader.getQuotationFor());
+        dwProposalProduct.setPriceDate(proposalHeader.getPriceDate());
+        dwProposalProduct.setBusinessDate(proposalVersion.getDate());
+        dwProposalProduct.setRegion(proposalHeader.getProjectCity());
+        dwProposalProduct.setCategory("Modular Products");
+        dwProposalProduct.setSubCategory(productLineItem.getProductCategory());
+        dwProposalProduct.setProductId(productLineItem.getId());
+        dwProposalProduct.setProductTitle(productLineItem.getTitle());
+        dwProposalProduct.setSpaceType(productLineItem.getSpaceType());
+        dwProposalProduct.setRoom(productLineItem.getRoomCode());
+        dwProposalProduct.setBaseCarcass(productLineItem.getBaseCarcassCode());
+        dwProposalProduct.setWallCarcass(productLineItem.getWallCarcassCode());
+        dwProposalProduct.setFinish(productLineItem.getFinishCode());
+        dwProposalProduct.setFinishMaterial(productLineItem.getFinishType());
+        dwProposalProduct.setShutterDesign(productLineItem.getShutterDesignCode());
+        dwProposalProduct.setHinge(productLineItem.getHingeType());
+        dwProposalProduct.setGlass(productLineItem.getGlass());
+        dwProposalProduct.setHandleSelection(productLineItem.getHandletypeSelection());
+        dwProposalProduct.setNoOfLengths(productLineItem.getNoOfLengths());
+        dwProposalProduct.setHandleType(productLineItem.getHandleType());
+        dwProposalProduct.setHandleFinish(productLineItem.getHandleFinish());
+        dwProposalProduct.setHandleSize(productLineItem.getHandleThickness());
+        dwProposalProduct.setKnobType(productLineItem.getKnobType());
+        dwProposalProduct.setKnobFinish(productLineItem.getKnobFinish());
+        dwProposalProduct.setProductArea(productPriceHolder.getProductAreainSqft());
+        dwProposalProduct.setProductCreatedBy(productLineItem.getCreatedBy());
+        dwProposalProduct.setProductCreatedOn(productLineItem.getCreatedOn());
+        dwProposalProduct.setProductUpdatedBy(productLineItem.getUpdatedBy());
+        dwProposalProduct.setProductUpdatedOn(productLineItem.getUpdatedOn());
+        dwProposalProduct.setProductPrice(productPriceHolder.getProductPrice());
+        dwProposalProduct.setProductPriceAfterDiscount(productPriceHolder.getPriceAfterDiscount());
+        dwProposalProduct.setProductPriceAfterTax(productPriceHolder.getProductPriceWoTax());
+        dwProposalProduct.setProductSourceCost(productPriceHolder.getProductSourceCost());
+        dwProposalProduct.setProductProfit(productPriceHolder.getProductProfit());
+        dwProposalProduct.setProductMargin(productPriceHolder.getProductMargin());
+        dwProposalProduct.setWoodWorkPrice(productPriceHolder.getWoodWorkPrice());
+        dwProposalProduct.setWoodWorkPriceWoTax(productPriceHolder.getWoodWorkPriceWoTax());
+        dwProposalProduct.setWoodWorkCost(productPriceHolder.getWoodWorkSourceCost());
+        dwProposalProduct.setWoodWorkProfit(productPriceHolder.getWoodWorkProfit());
+        dwProposalProduct.setWoodWorkMargin(productPriceHolder.getWoodWorkMargin());
+        dwProposalProduct.setHwPrice(productPriceHolder.getHardwarePrice());
+        dwProposalProduct.setHWPriceWoTax(productPriceHolder.getProductHardwarePriceWoTax());
+        dwProposalProduct.setHwSourceCost(productPriceHolder.getProductHardwareSourceCost());
+        dwProposalProduct.setHwProfit(productPriceHolder.getProductHardwareProfit());
+        dwProposalProduct.setHwMargin(productPriceHolder.getProductHardwareMargin());
+        dwProposalProduct.setAccPrice(productPriceHolder.getProductAccessoryPrice());
+        dwProposalProduct.setAccPriceWoTax(productPriceHolder.getProductAccessoryPriceWoTax());
+        dwProposalProduct.setAccSourceCost(productPriceHolder.getProductAccessorySourceCost());
+        dwProposalProduct.setAccProfit(productPriceHolder.getProductAccessoryProfit());
+        dwProposalProduct.setAccMargin(productPriceHolder.getProductAccessoryMargin());
+        dwProposalProduct.setHkPrice(productPriceHolder.getProductHandleAndKnobPrice());
+        dwProposalProduct.setHkPriceWoTax(productPriceHolder.getProductHandleAndKnobPriceWoTax());
+        dwProposalProduct.setHkSourceCost(productPriceHolder.getProductHandleAndKnobSourceCost());
+        dwProposalProduct.setHkProfit(productPriceHolder.getProductHandleAndKnobProfit());
+        dwProposalProduct.setHkMargin(productPriceHolder.getProductHandleAndKnobMargin());
+        dwProposalProduct.setHingePrice(productPriceHolder.getProductHingePrice());
+        dwProposalProduct.setHingePriceWoTax(productPriceHolder.getProductHingePriceWoTax());
+        dwProposalProduct.setHingeSourceCost(productPriceHolder.getProductHingeSourceCost());
+        dwProposalProduct.setHingeProfit(productPriceHolder.getProductHingeProfit());
+        dwProposalProduct.setHingeMargin(productPriceHolder.getProductHingeMargin());
+        dwProposalProduct.setLaPrice(productPriceHolder.getProductLabourPrice());
+        dwProposalProduct.setLaPriceWoTax(productPriceHolder.getProductLabourPriceWoTax());
+        dwProposalProduct.setLaSourceCost(productPriceHolder.getProductLabourSourceCost());
+        dwProposalProduct.setLaProfit(productPriceHolder.getProductLabourProfit());
+        dwProposalProduct.setLaMargin(productPriceHolder.getProductLabourMargin());
+        dwProposalProduct.setLCPrice(productPriceHolder.getLConnectorPrice());
+        dwProposalProduct.setLcPriceWoTax(productPriceHolder.getLConnectorWoTax());
+        dwProposalProduct.setLcSourceCost(productPriceHolder.getLConnectorSourceCost());
+        dwProposalProduct.setLcProfit(productPriceHolder.getLConnectorProfit());
+        dwProposalProduct.setLcMargin(productPriceHolder.getLConnectorMargin());
+        dwProposalProduct.setStdModuleCount(productPriceHolder.getStdModuleCount());
+        dwProposalProduct.setStdModulePrice(productPriceHolder.getStdModulePrice());
+        dwProposalProduct.setNStdModuleCount(productPriceHolder.getNStdModuleCount());
+        dwProposalProduct.setNStdModulePrice(productPriceHolder.getNStdModulePrice());
+        dwProposalProduct.setHikeModuleCount(productPriceHolder.getHikeModuleCount());
+        dwProposalProduct.setHikeModulePrice(productPriceHolder.getHikeModulePrice());
+        dwProposalProduct.setInstallationCost(0);
+        dwProposalProduct.setTransportationCost(0);
+
+
+
+        return dwProposalProduct;
     }
 }

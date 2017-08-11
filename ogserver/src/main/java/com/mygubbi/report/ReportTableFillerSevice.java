@@ -5,8 +5,6 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.output.ProposalOutputService;
-import com.mygubbi.game.proposal.quote.QuoteRequest;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -130,7 +128,8 @@ public class ReportTableFillerSevice extends AbstractVerticle{
 
                       resultData.rows.forEach(item ->{
                           Integer id1 = LocalCache.getInstance().store(new ProposalVersion(item));
-                          VertxInstance.get().eventBus().send(VersionReportingService.RECORD_VERSION_PRICE, id1,
+                          LOG.debug("Item :" + item.encodePrettily());
+                          VertxInstance.get().eventBus().send(DwReportingService.RECORD_VERSION_PRICE, id1,
                                   (AsyncResult<Message<Integer>> result) -> {
                                       JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                                       LOG.info("Quote Res :: " + response);

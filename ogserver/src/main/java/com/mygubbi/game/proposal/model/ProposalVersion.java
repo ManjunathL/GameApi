@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.model;
 
+import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
@@ -17,9 +18,9 @@ public class ProposalVersion extends JsonObject{
     public static final String FINAL_AMOUNT = "finalAmount";
     public static final String DISCOUNT_AMOUNT = "discountAmount";
     public static final String DISCOUNT_PERCENTAGE = "discountPercentage";
-    public static final String CREATED_BY= "amount";
-    public static final String UPDATED_ON= "amount";
-    public static final String UPDATED_BY= "amount";
+    public static final String CREATED_BY= "createdBy";
+    public static final String UPDATED_ON= "updatedOn";
+    public static final String UPDATED_BY= "updatedBy";
     public static final String AMOUNT= "amount";
 
     public ProposalVersion() {}
@@ -56,7 +57,7 @@ public class ProposalVersion extends JsonObject{
     }
 
     public Date getDate() {
-        return (Date) this.getValue(DATE);
+        return DateUtil.convertDate(this.getString(DATE));
     }
 
 
@@ -116,6 +117,6 @@ public class ProposalVersion extends JsonObject{
 
     public Date getUpdatedOn()
     {
-        return (Date) this.getValue(UPDATED_ON);
+        return DateUtil.convertDate(this.getString(UPDATED_ON));
     }
 }

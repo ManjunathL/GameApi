@@ -332,7 +332,7 @@ public class ProductPriceHolder {
 
     public double getProductMargin()
     {
-        productMargin = this.productProfit / this.productPriceWoTax;
+        this.productMargin = this.productProfit / this.productPriceWoTax;
         return this.productMargin;
     }
 

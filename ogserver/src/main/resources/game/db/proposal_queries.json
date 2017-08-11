@@ -461,6 +461,13 @@
       "query": "select * from proposal_addon where proposalId=? and fromVersion=?",
       "params":["proposalId", "fromVersion"]
     },
+    {
+      "id": "proposal.addon.selectversion",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select * from proposal_addon where proposalId=? and fromVersion=?",
+      "params":["id", "version"]
+    },
 
     {
       "id": "proposal.addon.update",
@@ -728,6 +735,15 @@
       "params": ["proposalId","fromVersion"],
       "jsonfields":["modules", "addons"]
     },
+    {
+      "id": "proposal.product.selectversion",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product where proposalId = ? and fromVersion = ? and active = 'A' order by seq",
+      "params": ["id","version"],
+      "jsonfields":["modules", "addons"]
+    },
+
 
 
     // Module costing queries

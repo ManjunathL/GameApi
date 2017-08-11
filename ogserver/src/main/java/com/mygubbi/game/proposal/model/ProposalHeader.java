@@ -4,6 +4,7 @@ import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by test on 21-05-2016.
@@ -133,6 +134,7 @@ public class ProposalHeader extends JsonObject
         this.priceDate = priceDate;
     }
 
+
     public String getCrmId()
     {
         return this.getString(CRMID);
@@ -162,8 +164,9 @@ public class ProposalHeader extends JsonObject
 
 
     public Date getCreatedOn() {
-        return (Date) this.getValue(CREATED_ON);
+        return DateUtil.convertDate(this.getString(CREATED_ON));
     }
+
 
     public String getCreatedBy()
     {
@@ -175,9 +178,11 @@ public class ProposalHeader extends JsonObject
         return this.getString(UPDATED_BY);
     }
 
-    public Date getUpdatedOn() {
-        return (Date) this.getValue(UPDATED_ON);
+    public String getUpdatedOn() {
+        return this.getString(UPDATED_ON);
     }
+
+
 }
 
 
