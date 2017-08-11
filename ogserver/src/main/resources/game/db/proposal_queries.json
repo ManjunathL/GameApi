@@ -626,10 +626,10 @@
       "jsonfields":[]
     },
     {
-      "id": "proposal.updatedProposals.select",
+      "id": "proposal_version.updatedProposals.select",
       "type": "select",
-      "table": "proposal",
-      "query": "select * from proposal where status != 'deleted' and date(updatedOn) > DATE_FORMAT(DATE(NOW() - INTERVAL 1 DAY),'%Y-%m-%d %H:%i:%s')",
+      "table": "version_master",
+      "query": "select *  from version_master vm where vm.updatedOn > (select lastRun from dw.reports_schedular where status = 'success' order by lastRun limit 1) order by proposalId asc,version asc",
       "params": [],
       "jsonfields":[]
     },
