@@ -649,9 +649,9 @@ public class ModulePriceHolder
         LOG.debug("this.nonstandard" + this.nonStandardloadingFactorCard.getRate());
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
-        this.stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
+        this.stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
-        this.nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
+        this.nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
         this.prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
@@ -796,8 +796,8 @@ public class ModulePriceHolder
         for (PanelComponent panel : this.getPanelComponents())
         {
             double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
-            double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
-            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
+            double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice();
+            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
             if (panel.isExposed())
             {
                 if ("Standard".equals(moduleType))
