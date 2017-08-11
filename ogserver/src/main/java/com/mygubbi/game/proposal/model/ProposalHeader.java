@@ -35,8 +35,14 @@ public class ProposalHeader extends JsonObject
     public static final String PACKAGE_FLAG="packageFlag";
     public static final String SOW_REMARKS_V1="sowremarksv1";
     public static final String SOW_REMARKS_V2="sowremarksv2";
+    public static final String CREATED_ON="createdOn";
+    public static final String CREATED_BY="createdBy";
+    public static final String UPDATED_ON="updatedBy";
+    public static final String UPDATED_BY="updatedBy";
 
     private Date priceDate;
+    private String designerName;
+    private Date createDate;
 
 
     public ProposalHeader(JsonObject json)
@@ -51,6 +57,10 @@ public class ProposalHeader extends JsonObject
     public String getSalesPhone()
     {
         return this.getString(SALESPHONE);
+    }
+    public String getProjectName()
+    {
+        return this.getString(PROJECT_NAME);
     }
     public String getDesignPartnerName()
     {
@@ -139,6 +149,33 @@ public class ProposalHeader extends JsonObject
             return this.getDouble(AMOUNT);
         else
             return 0.0;
+    }
+
+    public String getDesignerName() {
+        return this.getString(DESIGNER_NAME);
+    }
+
+    public String getSalespersonName() {
+        return this.getString(SALESPERSON_NAME);
+    }
+
+
+    public Date getCreatedOn() {
+        return (Date) this.getValue(CREATED_ON);
+    }
+
+    public String getCreatedBy()
+    {
+        return this.getString(CREATED_BY);
+    }
+
+    public String getUpdatedBy()
+    {
+        return this.getString(UPDATED_BY);
+    }
+
+    public Date getUpdatedOn() {
+        return (Date) this.getValue(UPDATED_ON);
     }
 }
 

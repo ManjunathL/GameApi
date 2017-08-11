@@ -75,6 +75,7 @@ public class ProductModule extends JsonObject
     private static final String SQFT_CALCULATION = "sqftCalculation";
     private static final String HANDLE_TYPE = "handleType";
     private static final String HANDLE_FINISH = "handleFinish";
+    private static final String HANDLE_SIZE = "handleThickness";
     private static final String KNOB_TYPE = "konbType";
     private static final String KNOB_FINISH = "knobFinish";
     private static final String SHUTTER_DESIGN_CODE = "shutterDesignCode";
@@ -290,6 +291,7 @@ public class ProductModule extends JsonObject
         return this.getString(HANDLE_FINISH);
     }
 
+
     public String getKnobType() {
         return this.getString(KNOB_TYPE);
     }
@@ -304,6 +306,30 @@ public class ProductModule extends JsonObject
 
     public  String getHandleThickness() {
         return this.getString(HANDLE_THICKNESS);
+    }
+
+    public String getLeftExposed() {
+        return this.getString(LEFT_EXPOSED);
+    }
+
+    public String getRightExposed() {
+        return this.getString(RIGHT_EXPOSED);
+    }
+
+    public String getTopExposed() {
+        return this.getString(TOP_EXPOSED);
+    }
+
+    public String getBottomExposed() {
+        return this.getString(BOTTOM_EXPOSED);
+    }
+
+    public String getBackExposed() {
+        return this.getString(BACK_EXPOSED);
+    }
+
+    public String getOpenUnit() {
+        return this.getString(OPEN_UNIT);
     }
 
     public ProductModule setHandleThickness(String handleThickness)

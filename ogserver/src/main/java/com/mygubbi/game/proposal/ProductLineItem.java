@@ -3,6 +3,7 @@ package com.mygubbi.game.proposal;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -52,6 +53,8 @@ public class ProductLineItem extends JsonObject
     public static final String HANDLE_THICKNESS="handleThickness";
     public static final String HINGE_TYPE="hingeType";
     public static final String SPACE_TYPE="spaceType";
+    public static final String SHUTTER_DESIGN_CODE="shutterDesignCode";
+    public static final String NO_OF_LENGTHS="noOfLengths";
 
 
 
@@ -174,16 +177,40 @@ public class ProductLineItem extends JsonObject
     public String getHandleThickness() { return this.getString(HANDLE_THICKNESS);}
     public String getSpaceType() { return this.getString(SPACE_TYPE);}
 
+    public String getShutterDesignCode() {
+        return this.getString(SHUTTER_DESIGN_CODE);
+    }
 
 
     public String getHandletypeSelection() {
         return this.getString(HANDLETYPE_SELECTION);
     }
-
-   /* public String getNoOfLengths() {
-        return this.getString(NO_OF_LENGTHS);
+    public String getHingeType() {
+        return this.getString(HINGE_TYPE);
     }
-*/
+
+      public int getNoOfLengths() {
+        return this.getInteger(NO_OF_LENGTHS);
+    }
+
+    public String getCreatedBy() {
+        return this.getString(CREATED_BY);
+    }
+
+    public Date getCreatedOn() {
+        return (Date) this.getValue(CREATED_ON);
+    }
+
+    public Date getUpdatedOn() {
+        return (Date) this.getValue(UPDATED_ON);
+    }
+
+    public String getUpdatedBy() {
+        return this.getString(UPDATED_BY);
+    }
+
+
+
 
     public ProductLineItem setAmount(double amount) {
         this.put(AMOUNT, amount);

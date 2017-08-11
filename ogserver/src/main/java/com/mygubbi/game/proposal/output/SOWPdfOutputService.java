@@ -9,6 +9,7 @@ import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.*;
 
 import com.mygubbi.si.gdrive.DriveFile;
@@ -187,30 +188,75 @@ public class SOWPdfOutputService extends AbstractVerticle {
                                 addons.add(new ProductAddon(json));
                             }
                         }
-                        this.createSow(quoteRequest, proposalHeader, products, addons, message);
+                        this.getSowRows(quoteRequest,proposalHeader,products,addons,message);
+
+                    }
+                });
+
+    }
+
+    private void getSowRows(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
+                            List<ProductAddon> addons, Message  message)
+    {
+        JsonObject jsonObject=new JsonObject();
+        List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
+
+        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion());
+        String sowversion = "1.0";
+        String version = quoteData.fromVersion;
+
+        if (version.contains("1.") || version.contains("2.")){
+            sowversion = "2.0";
+        }
+
+        String remarks;
+        if (sowversion.equals("1.0")){
+            remarks = proposalHeader.getSowRemarksV1();
+        }
+        else{
+            remarks = proposalHeader.getSowRemarksV2();
+
+        }
+
+        if (remarks == null) remarks = "";
+
+        jsonObject.put("version",sowversion);
+        jsonObject.put("proposalId",proposalHeader.getId());
+
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.forpdfDownload", jsonObject));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<io.vertx.core.eventbus.Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.rows.size() == 0)
+                    {
+                        LOG.error("Error in updating product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        resultData.rows.forEach(item->{proposalSOWs.add(new SOWPdf(item));});
+                        this.createSow(quoteRequest, proposalHeader, products, addons, proposalSOWs,quoteData,message);
                     }
                 });
 
     }
 
     private void createSow(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
-                             List<ProductAddon> addons, Message  message)
+                           List<ProductAddon> addons, List<SOWPdf> proposalSOWs,QuoteData quoteData,Message  message)
     {
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,proposalSOWs);
             outputCreator.create();
-            LOG.debug("created Quotation.pdf");
-            QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData);
+
+            QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData,proposalSOWs);
             String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
             String sowDestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
                     ConfigHolder.getInstance().getStringValue("sow_downloaded_pdf_fomat","sow.pdf");
             quoteSOWPDFCreator.createSOWPDf(sowDestinationFile);
-           /* LOG.debug("created SOW.pdf");
+            LOG.debug("created SOW.pdf");
             sendResponse(message, new JsonObject().put("sowPdfFile", outputCreator.getOutputFile()));
-            LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());*/
-           this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,message);
+            LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
+            this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,message);
         }
         catch (Exception e)
         {
@@ -219,9 +265,8 @@ public class SOWPdfOutputService extends AbstractVerticle {
             LOG.error(errorMessage, e);
         }
     }
-
     private void createOfficeUseOnlyPdf(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
-                           List<ProductAddon> addons, Message  message)
+                                        List<ProductAddon> addons, Message  message)
     {
         try
         {

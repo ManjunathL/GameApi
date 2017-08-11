@@ -14,8 +14,12 @@ public class ProductAddon extends JsonObject
     public static final String LOOSE_FURNITURE_TYPE = "Loose Furniture";
     public static final String CUSTOM_ADDON_TYPE = "Custom Addon";
 
+    private static final String ID = "id";
+
     private static final String SEQ = "seq";
     private static final String CODE = "code";
+    private static final String SPACE_TYPE = "spaceType";
+    private static final String ROOMCODE = "roomcode";
     private static final String FROM_VERSION = "fromVersion";
     private static final String PROPOSAL_ID = "proposalId";
     private static final String ADDON_CATEGORY_CODE = "categoryCode";
@@ -29,6 +33,7 @@ public class ProductAddon extends JsonObject
     private static String AMOUNT = "amount";
     private static String RATE = "rate";
     private static String REMARKS = "remarks";
+    private static String UPDATED_BY = "updatedBy";
 
 
     public ProductAddon()
@@ -61,6 +66,11 @@ public class ProductAddon extends JsonObject
         return this.getInteger(PROPOSAL_ID);
     }
 
+    public int getId()
+    {
+        return this.getInteger(ID);
+    }
+
     public String getCategoryCode()
     {
         return this.getString(ADDON_CATEGORY_CODE);
@@ -85,6 +95,18 @@ public class ProductAddon extends JsonObject
     {
         return this.getString(FROM_VERSION);
     }
+
+    public String getSpaceType()
+    {
+        return this.getString(SPACE_TYPE);
+    }
+
+
+    public String getRoomCode()
+    {
+        return this.getString(ROOMCODE);
+    }
+
 
     public String getUom()
     {
@@ -160,6 +182,10 @@ public class ProductAddon extends JsonObject
 
     public static void setREMARKS(String REMARKS) {
         ProductAddon.REMARKS = REMARKS;
+    }
+
+    public String getUpdatedBy() {
+        return this.getString(UPDATED_BY);
     }
 }
 

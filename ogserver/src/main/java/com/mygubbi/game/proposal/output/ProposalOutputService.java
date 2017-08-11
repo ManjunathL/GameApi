@@ -9,6 +9,7 @@ import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import io.vertx.core.AbstractVerticle;
@@ -185,7 +186,7 @@ public class ProposalOutputService extends AbstractVerticle
         {
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
             boolean isValidSow = quoteRequest.isValidSowRows();
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow, new ArrayList<SOWPdf>());
             outputCreator.create();
 
             LOG.debug("created Quotation.pdf");

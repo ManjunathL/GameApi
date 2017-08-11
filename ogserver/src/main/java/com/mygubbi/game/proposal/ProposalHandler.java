@@ -11,6 +11,7 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
 import com.mygubbi.game.proposal.model.PriceMaster;
+import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
@@ -21,6 +22,8 @@ import com.mygubbi.game.proposal.quote.PdfMerger;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.game.proposal.quote.SowPdfRequest;
+import com.mygubbi.report.ReportTableFillerSevice;
+import com.mygubbi.report.VersionReportingService;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.game.proposal.output.SOWPdfOutputService;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
@@ -73,6 +76,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/createsowsheet").handler(this::createSowSheet);
+        this.post("/runReportFiller").handler(this::runReportFiller);
         //this.post("/createboqsheet").handler(this::createBoqSheet);
 
         this.post("/discardsowfile").handler(this::discardSowFile);
@@ -132,6 +136,19 @@ public class ProposalHandler extends AbstractRouteHandler
                 });
     }
 
+    private void runReportFiller(RoutingContext context){
+        JsonObject contextJson = context.getBodyAsJson();
+        LOG.info("contextJson = "+contextJson);
+        Integer id1 = LocalCache.getInstance().store(contextJson);
+        VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, id1,
+                (AsyncResult<Message<Integer>> result) -> {
+                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                    LOG.info("2222. Quote Res :: " + response);
+                    sendJsonResponse(context,response.toString());
+                });
+
+
+    }
     private void publishVersionAfterValidation(RoutingContext context){
         LOG.info("Hitting  publishVersionAfterValidation");
         JsonObject contextJson = context.getBodyAsJson();
