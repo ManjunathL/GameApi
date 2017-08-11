@@ -653,7 +653,10 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void downloadQuoteAndSow(RoutingContext routingContext){
         LOG.info("Routing Context :: "+routingContext);
+
+        //LOG.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +quoteRequestJson.getJsonObject("proposalId"));
         LOG.info("Quote  and SOW");
+        LOG.info("****************************" +routingContext.getBodyAsJson().getString("city"));
 //        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION);
         checkValidRowsInDB(routingContext);
     }
@@ -699,10 +702,11 @@ public class ProposalHandler extends AbstractRouteHandler
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type,boolean ValidSows)
     {
         LOG.info("ValidSows = "+ValidSows);
-        LOG.debug("");
+        LOG.debug("Json **** " +routingContext.getBodyAsJson());
         LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         quoteRequestJson.put("validSow",ValidSows);
+       // LOG.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +quoteRequestJson.getJsonObject("proposalId"));
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
         VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
@@ -713,7 +717,7 @@ public class ProposalHandler extends AbstractRouteHandler
                     }else{
                         sendJsonResponse(routingContext, response.toString());
                     }
-
+                    createBookingFormInPdf(routingContext,response,response);
                    });
     }
 
@@ -746,20 +750,68 @@ public class ProposalHandler extends AbstractRouteHandler
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.SOWPDF));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-            createMergedPdf(context,quoteReponse,response);
-
+            createBookingFormInPdf(context,quoteReponse,response);
         });
     }
 
-    private void createMergedPdf(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject sowResponse){
+    private void createBookingFormInPdf(RoutingContext context,JsonObject quoteResponse,JsonObject sowresponse){
+        JsonObject quoteRequestJson = context.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.BOOKING_FORM));
+        VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
+            JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+            createMergedPdf(context,quoteResponse,sowresponse,response);
+        });
+    }
+
+    private void createMergedPdf(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject sowResponse,JsonObject bookingformresponse){
         LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());
+        String city=routingContext.getBodyAsJson().getString("city");
+        String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
+        LOG.debug("city " +city);
+        LOG.debug("booking Form Flag " +bookingFormFlag);
         Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
 
         inputPdfList.put(quotePDfResponse.getString("quoteFile"),PdfPage.PORTRAIT);
-        if(sowResponse.size() > 0) {
+        LOG.info("create Merged PDf ");
+        if(bookingFormFlag.equals("Yes"))
+        {
+            LOG.info("inside city");
+            if(city.equals("Bangalore"))
+            {
+                LOG.info("banglore");
+                inputPdfList.put("C:/Users/Public/game_files/BookingFormBanglore.pdf",PdfPage.PORTRAIT);
+            }else if(city.equals("Manglore"))
+            {
+                LOG.info("Manglore");
+                inputPdfList.put("C:/Users/Public/game_files/BookingFormManglore.pdf",PdfPage.PORTRAIT);
+            }else if(city.equals("Chennai"))
+            {
+                LOG.info("Chennai");
+                inputPdfList.put("C:/Users/Public/game_files/BookingFormChennai.pdf",PdfPage.PORTRAIT);
+            }else if(city.equals("Pune"))
+            {
+                LOG.info("Pune");
+                inputPdfList.put("C:/Users/Public/game_files/BookingFormPune.pdf",PdfPage.PORTRAIT);
+            }
+        }
+        /*if(sowResponse.size() > 0) {
             inputPdfList.put(sowResponse.getString("sowPdfFile"), PdfPage.PORTRAIT);
         }
 
+        if(bookingFormFlag.equals("Yes"))
+        {
+            inputPdfList.put("BookingFormpdf",PdfPage.PORTRAIT);
+            inputPdfList.put(bookingformresponse.getString("bookingFormPDFFile"),PdfPage.PORTRAIT);
+        }*/
+
+        LOG.info("list size " +inputPdfList.size());
+        Set set=inputPdfList.entrySet();
+        Iterator i=set.iterator();
+        while(i.hasNext())
+        {
+            Map.Entry me = (Map.Entry)i.next();
+            LOG.debug("list values key " +me.getKey()+ " list values " +me.getValue());
+        }
         inputPdfList.keySet().forEach(in -> LOG.info(in));
 
         String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" )+"/"+routingContext.getBodyAsJson().getInteger("proposalId");
@@ -767,6 +819,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
         String outputFileName = location_folder+"/"+merged_pdf;
         LOG.info("outputFileName = "+outputFileName);
+
         Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfList, outputFileName));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {

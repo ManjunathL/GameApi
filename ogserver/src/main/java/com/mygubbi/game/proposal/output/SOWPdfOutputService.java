@@ -9,10 +9,7 @@ import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
-import com.mygubbi.game.proposal.quote.MergePdfsRequest;
-import com.mygubbi.game.proposal.quote.QuoteData;
-import com.mygubbi.game.proposal.quote.QuoteRequest;
-import com.mygubbi.game.proposal.quote.SowPdfRequest;
+import com.mygubbi.game.proposal.quote.*;
 
 import com.mygubbi.si.gdrive.DriveFile;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
@@ -201,7 +198,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
     {
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false);
             outputCreator.create();
             LOG.debug("created Quotation.pdf");
@@ -210,9 +207,35 @@ public class SOWPdfOutputService extends AbstractVerticle {
             String sowDestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
                     ConfigHolder.getInstance().getStringValue("sow_downloaded_pdf_fomat","sow.pdf");
             quoteSOWPDFCreator.createSOWPDf(sowDestinationFile);
-            LOG.debug("created SOW.pdf");
+           /* LOG.debug("created SOW.pdf");
             sendResponse(message, new JsonObject().put("sowPdfFile", outputCreator.getOutputFile()));
-            LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
+            LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());*/
+           this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,message);
+        }
+        catch (Exception e)
+        {
+            String errorMessage = "Error in preparing file for :" + proposalHeader.getId() + ". " + e.getMessage();
+            sendResponse(message, new JsonObject().put("error", errorMessage));
+            LOG.error(errorMessage, e);
+        }
+    }
+
+    private void createOfficeUseOnlyPdf(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
+                           List<ProductAddon> addons, Message  message)
+    {
+        try
+        {
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false);
+            outputCreator.create();
+            OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
+            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
+            String DestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
+                    ConfigHolder.getInstance().getStringValue("bookingform_downloaded_pdf_fomat","BookingFormOfficeUse.pdf");
+            officeUseOnlyPdf.cretePdf(DestinationFile);
+            sendResponse(message,new JsonObject().put("bookingFormPDFfile",outputCreator.getOutputFile()));
+            LOG.debug("Response: " +outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
+
         }
         catch (Exception e)
         {

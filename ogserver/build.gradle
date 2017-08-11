@@ -103,6 +103,7 @@ dependencies {
     compile group: 'org.jooq', name: 'jool', version: '0.9.11'
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.3.4'
     compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.104'
+    compile group: 'com.itextpdf', name: 'forms', version: '7.0.2'
 
     //Google Drive Libraries
     compile 'com.google.api-client:google-api-client:1.22.0'

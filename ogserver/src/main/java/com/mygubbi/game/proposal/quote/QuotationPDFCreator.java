@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.quote;
 
+import com.itextpdf.forms.fields.PdfButtonFormField;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.mygubbi.game.proposal.ModuleDataService;
@@ -45,13 +46,21 @@ public class QuotationPDFCreator
     private static final String[] ALPHABET_SEQUENCE = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"};
     private static final String[] ROMAN_SEQUENCE = new String[]{"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv"};
 
+    public static final String DEST = "results/fonts/math_symbols.pdf";
+    public static final String FONT = "src/main/resources/webroot/fonts/FreeSans.ttf";
+    public static final String TEXT = "this string contains special characters like this  \u2208, \u2229, \u2211, \u222b, \u2206";
+
+
     PdfPTable itemsTable,B1Table;
     QuoteData quoteData;
 
     Font fsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
+    Font bookingformfsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
+    Font bookingformfsize1=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.NORMAL,BaseColor.ORANGE);
     Font fsize1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
     Font fsize3=new Font(Font.FontFamily.TIMES_ROMAN,9,Font.BOLD);
-
+    Font headingSize=new com.itextpdf.text.Font(Font.FontFamily.TIMES_ROMAN,10, com.itextpdf.text.Font.BOLD);
+    Font zapfdingbats = new Font(Font.FontFamily.ZAPFDINGBATS, 16);
     private ProposalHeader proposalHeader;
     QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader)
     {
@@ -61,7 +70,9 @@ public class QuotationPDFCreator
 
     public void  createpdf(String destination, boolean isValid_Sow)
     {
-        try {
+
+                try {
+        //PdfDocument pdfDocument=new PdfDocument(new PdfWriter(destination));
 
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(destination));
@@ -69,12 +80,273 @@ public class QuotationPDFCreator
         writer.createXmpMetadata();
             document.open();
             writer.setPageEvent(new CustomBorder());
-            Image img = Image.getInstance("myGubbi_Logo.png");
-            img.setWidthPercentage(50);
-            document.add(img);
             Paragraph p;
 
-            //LOG.info("City: " +proposalHeader.getProjectCity());
+            char checked='\u00FE';
+            char unchecked='\u00A8';
+
+            if(quoteData.getBookingFormFlag().equals("Yes")) {
+                Image img = Image.getInstance("myGubbi_Logo.png");
+                img.setAlignment(Image.MIDDLE);
+                img.setWidthPercentage(30);
+                document.add(img);
+
+                Phrase pph1=new Phrase();
+                pph1.add(new Chunk("Mygubbi.com ",bookingformfsize1));
+                pph1.add(new Chunk("#38, Maini Sadan, 7th cross, Lavelle Road, Bangalore 560 001 Phone number: 080 22555789",bookingformfsize));
+                p=new Paragraph();
+                p.setAlignment(Element.ALIGN_CENTER);
+                p.add(pph1);
+                document.add(p);
+
+
+               /* p = new Paragraph("Mygubbi.com #38, Maini Sadan, 7th cross, Lavelle Road, Bangalore 560 001 Phone number: 080 22555789", fsize);
+                p.setAlignment(Element.ALIGN_CENTER);
+                document.add(p);*/
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph(" BOOKING FORM ", headingSize);
+                p.setAlignment(Element.ALIGN_CENTER);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Date:_________________", bookingformfsize);
+                p.setAlignment(Element.ALIGN_RIGHT);
+                document.add(p);
+
+                //p=new Paragraph("Name:Mr/Mrs/Ms/Dr_____________________________________________________________________________",bookingformfsize);
+                p = new Paragraph("Name : Mr/Mrs/Ms/Dr : " + " " + proposalHeader.getName(), bookingformfsize);
+                document.add(p);
+
+                /*p = new Paragraph(" ");
+                document.add(p);*/
+
+                //p=new Paragraph("Quotation Id:__________________________________________________________________________________",bookingformfsize);
+                p = new Paragraph("Quotation ID: " + proposalHeader.getQuoteNumNew(), bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                PdfPTable Appdetails = new PdfPTable(1);
+                Appdetails.setWidthPercentage(100);
+                p=new Paragraph("APPLICANT'S DETAILS",headingSize);
+                p.setAlignment(Element.ALIGN_CENTER);
+                PdfPCell scell1 = new PdfPCell();
+                scell1.addElement(p);
+                scell1.setBackgroundColor(BaseColor.ORANGE);
+                Appdetails.addCell(scell1);
+                document.add(Appdetails);
+
+               /* p = new Paragraph("Application Details", headingSize);
+                p.setAlignment(Element.ALIGN_CENTER);
+                document.add(p);*/
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                //p=new Paragraph("Project Name:________________________________Apartment No:____________Floor No: __________",bookingformfsize);
+                p = new Paragraph("Project Name : " + proposalHeader.getProjectName() + "                                                                                                              " +" Apartment No : __________         Floor No : __________ ", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                //p=new Paragraph("Project Address:___________________________________________________________________________",bookingformfsize);
+                p = new Paragraph("Project Address:" + proposalHeader.getProjectAddress1(), bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                Phrase ph1=new Phrase();
+                ph1.add(new Chunk("Project/Apartment Possession :     ",bookingformfsize));
+                ph1.add(new Chunk("  Less than 60 days*  ",bookingformfsize));
+                ph1.add(new Chunk("  o  ", zapfdingbats));
+                ph1.add(new Chunk("     ", zapfdingbats));
+                ph1.add(new Chunk("  More than 60 days*  ",bookingformfsize));
+                ph1.add(new Chunk("  o  ", zapfdingbats));
+                ph1.add(new Chunk("     ", bookingformfsize));
+                ph1.add(new Chunk("*(Mandatory to be filled)",bookingformfsize ));
+                p=new Paragraph();
+                p.add(ph1);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                Phrase ph2=new Phrase();
+                ph2.add(new Chunk("Profession:    ",bookingformfsize));
+                ph2.add(new Chunk("  Salaried  ",bookingformfsize));
+                ph2.add(new Chunk("  o  ", zapfdingbats));
+                ph2.add(new Chunk("  Bussiness  ",bookingformfsize));
+                ph2.add(new Chunk("  o  ", zapfdingbats));
+                ph2.add(new Chunk("  Others  ",bookingformfsize));
+                ph2.add(new Chunk("  o  ", zapfdingbats));
+                p=new Paragraph();
+                p.add(ph2);
+                //p = new Paragraph("Profession:  " + "Salarised ____ " + " " + "Business_____ " + " " + "Others____", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Post/Designation : ______________________________________________________" + "             " + "Company's Name : _________________________________", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                Phrase ph3=new Phrase();
+                ph3.add(new Chunk("Professional Details:   ",bookingformfsize));
+                ph3.add(new Chunk("  IT  ",bookingformfsize));
+                ph3.add(new Chunk("  o  ", zapfdingbats));
+                ph3.add(new Chunk("  ITES/BPO  ",bookingformfsize));
+                ph3.add(new Chunk("  o  ", zapfdingbats));
+                ph3.add(new Chunk("  Doctor  ",bookingformfsize));
+                ph3.add(new Chunk("  o  ", zapfdingbats));
+                ph3.add(new Chunk("  Govt. Services/PSU  ",bookingformfsize));
+                ph3.add(new Chunk("  o  ", zapfdingbats));
+                p=new Paragraph();
+                p.add(ph3);
+               // p = new Paragraph("Professional Details: IT____" + "  " + "ITES/BPO______ " + " " + "Doctor_____ " + " " + "Govt. Services/PSU___", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                Phrase ph4=new Phrase();
+                ph4.add(new Chunk("Banking & Finance  ",bookingformfsize));
+                ph4.add(new Chunk("  o  ", zapfdingbats));
+                ph4.add(new Chunk("  Manufacturing/Distribution  ",bookingformfsize));
+                ph4.add(new Chunk("  o  ", zapfdingbats));
+                ph4.add(new Chunk("  Others,please specify  ",bookingformfsize));
+                ph4.add(new Chunk("  o  ", zapfdingbats));
+                p=new Paragraph();
+                p.add(ph4);
+                //p = new Paragraph("Banking & Finance_____ " + " " + "Manufacturing/Distribution______ " + " " + "Others,please specify:________", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                Phrase ph5=new Phrase();
+                ph5.add(new Chunk("Annual Income (in RS. Lacs) ",bookingformfsize));
+                ph5.add(new Chunk("  Less than 15  ",bookingformfsize));
+                ph5.add(new Chunk("  o  ", zapfdingbats));
+                ph5.add(new Chunk("  16-25  ",bookingformfsize));
+                ph5.add(new Chunk("  o  ", zapfdingbats));
+                ph5.add(new Chunk("  26-35  ",bookingformfsize));
+                ph5.add(new Chunk("  o  ", zapfdingbats));
+                ph5.add(new Chunk("  36-50  ",bookingformfsize));
+                ph5.add(new Chunk("  o  ", zapfdingbats));
+                ph5.add(new Chunk("  51 & above  ",bookingformfsize));
+                ph5.add(new Chunk("  o  ", zapfdingbats));
+                p=new Paragraph();
+                p.add(ph5);
+                //p = new Paragraph("Annual Income (in RS. Lacs) Less than 15 __" + "16-25__" + " " + "26-35___" + "36-50___" + "51 & above__", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Landline : ___________________________________" + "                     " +  " Mobile(1)   : " + proposalHeader.getContact() + "                       " +"   Mobile(2) : _________________________ ", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Email ID(1) : ____________________________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Email ID(2) : ____________________________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Address of communication : ________________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Office Address:(if applicable) _______________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("_________________________________________________________________________________________________" + "  PAN Number:__________________", bookingformfsize);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                /*p = new Paragraph("Order Details", headingSize);
+                p.setAlignment(Element.ALIGN_CENTER);
+                document.add(p);*/
+
+                PdfPTable orderdetails = new PdfPTable(1);
+                orderdetails.setWidthPercentage(100);
+                p=new Paragraph("ORDER DETAILS",headingSize);
+                p.setAlignment(Element.ALIGN_CENTER);
+                scell1 = new PdfPCell();
+                scell1.addElement(p);
+                scell1.setBackgroundColor(BaseColor.ORANGE);
+                orderdetails.addCell(scell1);
+                document.add(orderdetails);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                p = new Paragraph("Order Value : ____________________________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);
+
+                /*p = new Paragraph(" ");
+                document.add(p);*/
+
+                //p=new Paragraph("Sales Order ID:_________________________________________________________________________________",bookingformfsize);
+                p = new Paragraph("Sales Order ID : " + proposalHeader.getCrmId(), bookingformfsize);
+                document.add(p);
+
+                /*p = new Paragraph(" ");
+                document.add(p);*/
+
+                p = new Paragraph("Order Date : ____________________________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);
+
+               /* p = new Paragraph(" ");
+                document.add(p);*/
+
+                p = new Paragraph("Remarks : ______________________________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);
+
+               /* p = new Paragraph(" ");
+                document.add(p);*/
+                //p=new Paragraph("Total Quotation Value:___________________________________________________________________________",bookingformfsize);
+                p = new Paragraph("Total Quotation Value Rs. " + quoteData.getAmountafterdiscount(), bookingformfsize);
+                document.add(p);
+
+               /* p = new Paragraph(" ");
+                document.add(p);*/
+            }
+
+            document.newPage(); //new page
+
+            Image img1 = Image.getInstance("myGubbi_Logo.png");
+            img1.setWidthPercentage(50);
+            document.add(img1);
+            //Paragraph p;
+            LOG.info("quoteData.getBookingFormFlag()" +quoteData.getBookingFormFlag());
+
             if(proposalHeader.getProjectCity().equals("Chennai"))
             {
                 p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor", fsize);
@@ -513,7 +785,7 @@ public class QuotationPDFCreator
             document.add(p);
 
             PdfPTable tab1=new PdfPTable(1);
-        tab1.setWidthPercentage(100);
+            tab1.setWidthPercentage(100);
 
             PdfPCell cel6=new PdfPCell();
             p = new Paragraph("Material Specification",fsize1);
@@ -560,8 +832,9 @@ public class QuotationPDFCreator
 
         document.add(tab2);
 
-        PdfPTable tab=new PdfPTable(1);
-        tab.setWidthPercentage(100);
+        if(!quoteData.getBookingFormFlag().equals("Yes")) {
+            PdfPTable tab=new PdfPTable(1);
+            tab.setWidthPercentage(100);
 
             Font size2=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
             p = new Paragraph("Terms and Conditions:\n",size2);
@@ -575,44 +848,40 @@ public class QuotationPDFCreator
                     +"2. The images depicted in the drawings and presentations are representative only. The final design - drawings provided and approved by the client will be conceived and executed at the site.\n"
                     +"3. The above quoted rate is as per a Typical Apartment and there will be variation in rates as per the final site conditions / Measurements / Specifications / Design.\n"
                     +"4. Quote is valid for 30 Days only",fsize));
-        document.add(tab);
+            document.add(tab);
 
-        PdfPTable table3=new PdfPTable(2);
-        table3.setWidthPercentage(100);
+            PdfPTable table3=new PdfPTable(2);
+            table3.setWidthPercentage(100);
             table3.addCell(new Paragraph("5. Payment terms:\n" +
-                "\n" +
+                    "\n" +
                     "\n",fsize));
             table3.addCell(new Paragraph("10% for finalization of the Design\n"+ "40% advance for order confirmation\n" + "50% before the Delivery of materials \n",fsize));
-        document.add(table3);
+            document.add(table3);
 
-        PdfPTable table4=new PdfPTable(1);
-        table4.setWidthPercentage(100);
+            PdfPTable table4=new PdfPTable(1);
+            table4.setWidthPercentage(100);
             table4.addCell(new Paragraph("6. Design Sign up fees amounting to 10% of the Budgetary quote is non-refundable. This amount will be adjusted against the final order value. Booking confirmation shall be acknowledged in the copy of this budgetary proposal.\n"
                     +"7. The 50% advance paid post approval of the design and quote cannot be refunded as the production would have be commenced.\n"
                     +"8. Warranty : 5 years of warranty against any manufacturing defect. The material specifications and brands specified are as per the approved standards of Gubbi Technologies Private Limited and covered under warranty.\n"
                     +"9. Any modifications/alterations to the proposed design will have an impact on the techno commercials of this quote and hence new drawings as well as associated commercials will be provided for by MyGubbi if the same occurs.\n"
                     +"10. Delivery shall be within 45 days from order Final Confirmation.\n"
                     +"11. Cheque / Demant Draft should be in favour of \"GUBBI TECHNOLOGIES PRIVATE LIMITED.\n",fsize));
-        document.add(table4);
+            document.add(table4);
+        }
+                    p = new Paragraph("      ");
+                    p.setAlignment(Element.ALIGN_LEFT);
+                    document.add(p);
 
-        p = new Paragraph("      ");
-        p.setAlignment(Element.ALIGN_LEFT);
-        document.add(p);
-
-            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
-        document.add(p);
-        document.close();
-
-
-            /*SOWdata soWdata=new SOWdata();
-            java.util.List<ProposalSOW> ll=soWdata.sowList(proposalHeader,quoteData);
-            LOG.info("size in pdf " +ll.size());*/
-
-
+                    p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
+                    document.add(p);
+       /* BookingFormPdf bookingFormPdf=new BookingFormPdf();
+        bookingFormPdf.createBookingForm();*/
+                    document.close();
         }
         catch(Exception e)
         {
-            LOG.info(e.getMessage());
+            LOG.info("error" +e.getMessage());
+            e.printStackTrace();
         }
     }
 
