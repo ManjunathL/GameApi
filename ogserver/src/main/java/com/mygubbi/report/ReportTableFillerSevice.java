@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 public class ReportTableFillerSevice extends AbstractVerticle
 {
     private final static Logger LOG = LogManager.getLogger(ReportTableFillerSevice.class);
-    public static final String RUN_FOR_ALL_PROPOSALS = "reporting.table.filler.forAll";
     public static final String RUN_FOR_SINGLE_PROPOSAL = "reporting.table.filler.forOneProposal";
     public static final String RUN_FOR_UPDATED_PROPOSALS = "reporting.table.filler.forUpdatedProposal";
 
@@ -46,12 +45,7 @@ public class ReportTableFillerSevice extends AbstractVerticle
     private void runReportingTableFillingLogic()
     {
         EventBus eb = VertxInstance.get().eventBus();
-        eb.localConsumer(RUN_FOR_ALL_PROPOSALS, (Message<Integer> message) -> {
-            this.getAllProposals(message);
-        }).completionHandler(res -> {
-            LOG.info("Proposal output service started." + res.succeeded());
-        });
-        eb.localConsumer(RUN_FOR_SINGLE_PROPOSAL, (Message<Integer> message) -> {
+       eb.localConsumer(RUN_FOR_SINGLE_PROPOSAL, (Message<Integer> message) -> {
             JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
             LOG.info("Json Obj = " + obj);
             this.getVersionObjForProposal(obj.getInteger("proposalId"), message);
@@ -65,106 +59,11 @@ public class ReportTableFillerSevice extends AbstractVerticle
         });
     }
 
-    private void getAllUpdatedProposalsOld(Message message)
-    {
-
-//        List<Integer> proposalIds = new ArrayList<>();
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.updatedProposals.select", new JsonObject()));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
-                    {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal table is empty")));
-                        LOG.error("Proposal table is empty");
-                    }
-                    else
-                    {
-
-//                        ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
-                        resultData.rows.forEach(item -> {
-//                            proposalIds.add(item.getInteger("id"));
-                            getVersionObjForProposal(item.getInteger("id"), message);
-                        });
-
-                    }
-                });
-
-    }
-
     private void getAllUpdatedProposals(Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.updatedProposals.select", new JsonObject()));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
-                    {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal table is empty")));
-                        LOG.error("Proposal table is empty");
-                    }
-                    else
-                    {
-                        resultData.rows.forEach(item -> {
-                            getVersionObjForProposal(item.getInteger("id"), message);
-                        });
-
-                    }
-                });
-
-    }
-
-    private void getAllProposals(Message message)
-    {
-
-//        List<Integer> proposalIds = new ArrayList<>();
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.all.select", new JsonObject()));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
-                    {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal table is empty")));
-                        LOG.error("Proposal table is empty");
-                    }
-                    else
-                    {
-                        resultData.rows.forEach(item -> {
-                            getVersionObjForProposal(item.getInteger("id"), message);
-                        });
-
-                    }
-                });
-
-    }
-
-    private void getVersionObjForProposalOld(Integer proposalId, Message message)
-    {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.versions.list", new JsonObject().put("proposalId", proposalId)));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
-                    {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal " + proposalId + " doesn't have any versions")));
-                        LOG.error("Proposal " + proposalId + " doesn't have any versions");
-                    }
-                    else
-                    {
-                        resultData.rows.forEach(item -> {
-                            Integer id1 = LocalCache.getInstance().store(new ProposalVersion(item));
-                            LOG.debug("Item :" + item.encodePrettily());
-                            VertxInstance.get().eventBus().send(DwReportingService.RECORD_VERSION_PRICE, id1,
-                                    (AsyncResult<Message<Integer>> result) -> {
-                                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                                        LOG.info("Quote Res :: " + response);
-                                        message.reply(response);
-                                    });
-
-                        });
-
-                    }
-                });
+        QueryData requestData = new QueryData("proposal_version.updatedProposals.select", new JsonObject());
+        MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
+        new PipelineExecutor().execute(dataHolder, new ProposalVersionsRetriever(message));
     }
 
     private void getVersionObjForProposal(Integer proposalId, Message message)
@@ -178,6 +77,12 @@ public class ReportTableFillerSevice extends AbstractVerticle
     {
         private Message message;
         private Integer proposalId;
+
+        public ProposalVersionsRetriever(Message message)
+        {
+            this.message = message;
+
+        }
 
         public ProposalVersionsRetriever(Message message, Integer proposalId)
         {
