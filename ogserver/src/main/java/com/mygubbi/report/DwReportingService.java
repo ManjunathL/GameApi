@@ -13,7 +13,10 @@ import com.mygubbi.game.proposal.model.dw.DWProductModule;
 import com.mygubbi.game.proposal.model.dw.DWProposalAddon;
 import com.mygubbi.game.proposal.model.dw.DWProposalProduct;
 import com.mygubbi.game.proposal.model.dw.DwProposalVersion;
-import com.mygubbi.game.proposal.price.*;
+import com.mygubbi.game.proposal.price.AddonPriceHolder;
+import com.mygubbi.game.proposal.price.ModulePriceHolder;
+import com.mygubbi.game.proposal.price.ProductPriceHolder;
+import com.mygubbi.game.proposal.price.VersionPriceHolder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -71,45 +74,54 @@ public class DwReportingService extends AbstractVerticle {
         queryDatas.add(new QueryData("proposal.product.selectversion", new JsonObject().put("id", proposalVersion.getProposalId()).put("version",proposalVersion.getVersion())));
         queryDatas.add(new QueryData("proposal.addon.selectversion", new JsonObject().put("id", proposalVersion.getProposalId()).put("version",proposalVersion.getVersion())));
 
-        Integer id = LocalCache.getInstance().store(queryDatas);
-        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
+/*
+        List<QueryData> resultData = (List<QueryData>)new SingleMessageRequestExecutor().execute(DatabaseService.MULTI_DB_QUERY, queryDatas);
+        handleResult(message, proposalVersion, resultData);
+*/
+
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, LocalCache.getInstance().store(queryDatas),
                 (AsyncResult<Message<Integer>> selectResult) -> {
-                    List<QueryData> resultData = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.get(0).errorFlag || resultData.get(0).rows == null || resultData.get(0).rows.isEmpty()) {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal not found for id:" + proposalVersion.getProposalId())));
-                        LOG.error("Proposal not found for id:" + proposalVersion.getProposalId());
-                    } else {
-                        ProposalHeader proposalHeader = new ProposalHeader(resultData.get(0).rows.get(0));
-                        List<ProductLineItem> productLineItems = new ArrayList<>();
-                        List<JsonObject> jsonObjects = resultData.get(1).rows;
-                        for (JsonObject jsonObject : jsonObjects)
-                        {
-                            LOG.debug("product jsin object :" + jsonObject) ;
-                            ProductLineItem productLineItem = new ProductLineItem(jsonObject);
-                            productLineItems.add(productLineItem);
-                        }
-                        LOG.debug("Products :" + productLineItems.size());
-
-                        List<ProductAddon> addonLineItems = new ArrayList<>();
-                        List<JsonObject> addonjsonObjects = resultData.get(2).rows;
-                        for (JsonObject jsonObject : addonjsonObjects)
-                        {
-                            ProductAddon productAddon = new ProductAddon(jsonObject);
-                            addonLineItems.add(productAddon);
-                        }
-
-                        LOG.debug("Addons :" + addonLineItems.size());
-
-
-                        calculateProductLevelPricing(message, proposalHeader, productLineItems, proposalVersion, addonLineItems);
-
-                    }
+                    List<QueryData> resultDataAsync = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+                    handleResult(message, proposalVersion, resultDataAsync);
                 });
 
     }
 
+    private void handleResult(Message message, ProposalVersion proposalVersion, List<QueryData> resultData)
+    {
+        if (resultData.get(0).errorFlag || resultData.get(0).rows == null || resultData.get(0).rows.isEmpty()) {
+            message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal not found for id:" + proposalVersion.getProposalId())));
+            LOG.error("Proposal not found for id:" + proposalVersion.getProposalId());
+        } else {
+            ProposalHeader proposalHeader = new ProposalHeader(resultData.get(0).rows.get(0));
+            List<ProductLineItem> productLineItems = new ArrayList<>();
+            List<JsonObject> jsonObjects = resultData.get(1).rows;
+            for (JsonObject jsonObject : jsonObjects)
+            {
+                LOG.debug("product jsin object :" + jsonObject) ;
+                ProductLineItem productLineItem = new ProductLineItem(jsonObject);
+                productLineItems.add(productLineItem);
+            }
+            LOG.debug("Products :" + productLineItems.size());
 
-private void insertRowsToTable(List<QueryData> queryDatas,Message message){
+            List<ProductAddon> addonLineItems = new ArrayList<>();
+            List<JsonObject> addonjsonObjects = resultData.get(2).rows;
+            for (JsonObject jsonObject : addonjsonObjects)
+            {
+                ProductAddon productAddon = new ProductAddon(jsonObject);
+                addonLineItems.add(productAddon);
+            }
+
+            LOG.debug("Addons :" + addonLineItems.size());
+
+
+            calculateProductLevelPricing(message, proposalHeader, productLineItems, proposalVersion, addonLineItems);
+
+        }
+    }
+
+
+    private void insertRowsToTable(List<QueryData> queryDatas,Message message){
     LOG.info("Inserting rowssss");
     Integer id = LocalCache.getInstance().store(queryDatas);
     VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
