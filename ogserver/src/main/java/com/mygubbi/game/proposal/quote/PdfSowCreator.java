@@ -17,8 +17,6 @@ import java.util.Objects;
  */
 public class PdfSowCreator implements ProposalOutputCreator {
     private final static Logger LOG = LogManager.getLogger(PdfQuoteCreator.class);
-
-
     private QuoteData quoteData;
     private ProposalHeader proposalHeader;
     private String targetFile;

@@ -43,8 +43,8 @@ public class QuoteData
     private String city;
     private String title;
     private java.sql.Date priceDate;
-
-    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion)
+    private String bookingFormFlag;
+    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion,String bookingFormFlag)
     {
         this.city = proposalHeader.getProjectCity();
         this.priceDate = proposalHeader.getPriceDate();
@@ -61,6 +61,7 @@ public class QuoteData
         if (addons != null) this.headerLevelAddons = addons;
         this.discountAmount = discountAmount;
         this.fromVersion=fromVersion;
+        this.bookingFormFlag=bookingFormFlag;
         this.prepare();
     }
 
@@ -246,6 +247,9 @@ public class QuoteData
         return discountAmount;
     }
 
+    public String getBookingFormFlag(){
+        return bookingFormFlag;
+    }
 
     public double getTotalCost()
     {

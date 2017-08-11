@@ -18,6 +18,7 @@ public class QuoteRequest
     private static final String ADDON_IDS = "addonIds";
     private static final String VERSION_IDS = "versionIds";
     private static final String IS_VALID_SOW = "validSow";
+    private static final String  BOOKING_FORMFLAG= "bookingFormFlag";
 
     private int proposalId;
     private String fromVersion;
@@ -25,6 +26,7 @@ public class QuoteRequest
     private List<Integer> addonIds;
     private List<Integer> versionIds;
     private double discountAmount = 0.0;
+    private String bookingFormFlag;
 
     public boolean isValidSowRows() {
         return isValidSowRows;
@@ -68,6 +70,9 @@ public class QuoteRequest
         }
         if(jsonData.containsKey(IS_VALID_SOW)){
             this.isValidSowRows = jsonData.getBoolean(IS_VALID_SOW);
+        }
+        if(jsonData.containsKey(BOOKING_FORMFLAG)){
+            this.bookingFormFlag=jsonData.getString(BOOKING_FORMFLAG);
         }
     }
 
@@ -148,6 +153,14 @@ public class QuoteRequest
     public double getDiscountAmount()
     {
         return this.discountAmount;
+    }
+
+    public String getBookingFormFlag() {
+        return this.bookingFormFlag;
+    }
+
+    public void setBookingFormFlag(String bookingFormFlag) {
+        this.bookingFormFlag = bookingFormFlag;
     }
 
     @Override

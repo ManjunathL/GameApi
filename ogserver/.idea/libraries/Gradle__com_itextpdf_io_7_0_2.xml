@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.itextpdf:io:7.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.itextpdf/io/7.0.2/4b141e5d66b703c99edf1c0927a3196080e58f5f/io-7.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.itextpdf/io/7.0.2/bb0d94871048d161e192c5859188104ddb87006e/io-7.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

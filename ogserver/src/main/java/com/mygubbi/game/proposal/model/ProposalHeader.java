@@ -59,10 +59,6 @@ public class ProposalHeader extends JsonObject
     {
         return this.getString(SALESPHONE);
     }
-    public String getProjectName()
-    {
-        return this.getString(PROJECT_NAME);
-    }
     public String getDesignPartnerName()
     {
         return this.getString(DESIGN_PARTNER_NAME);
@@ -104,15 +100,14 @@ public class ProposalHeader extends JsonObject
         return this.getString(PROJECT_CITY);
     }
     public String getPackageFlag() { return this.getString(PACKAGE_FLAG);}
-
+    public String getProjectName() { return  this.getString(PROJECT_NAME);}
     public String getSowRemarksV1() {
         return this.getString(SOW_REMARKS_V1);
     }
-
+    public String getProjectAddress1() {return this.getString(PROJECT_ADDRESS1);}
     public String getSowRemarksV2() {
         return this.getString(SOW_REMARKS_V2);
     }
-
     public ProposalHeader setSowRemarksV1(String remarksV1)
     {
         put(remarksV1,SOW_REMARKS_V1);
