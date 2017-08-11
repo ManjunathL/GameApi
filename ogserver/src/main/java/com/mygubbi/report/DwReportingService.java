@@ -126,8 +126,8 @@ public class DwReportingService extends AbstractVerticle {
     Integer id = LocalCache.getInstance().store(queryDatas);
     VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
             (AsyncResult<Message<Integer>> selectResult) -> {
-                QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                List<QueryData> resultDatas = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+                if (resultDatas.get(0).errorFlag || resultDatas.get(0).updateResult.getUpdated() == 0)
                 {
                     message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Error in Executing")));
                     LOG.error("Error in Executing");
@@ -253,7 +253,7 @@ public class DwReportingService extends AbstractVerticle {
         List<QueryData> queryDatas = new ArrayList<>();
         queryDatas.add(new QueryData("dw_proposal.delete",proposalVersion));
         queryDatas.add(new QueryData("dw_proposal_product.delete",proposalVersion));
-        queryDatas.add(new QueryData("dw_proposal.addon.delete",proposalVersion));
+        queryDatas.add(new QueryData("dw_proposal_addon.delete",proposalVersion));
         queryDatas.add(new QueryData("dw_product_module.delete",proposalVersion));
         queryDatas.addAll(queryDatasForModule);
         queryDatas.addAll(queryDatasForProduct);
