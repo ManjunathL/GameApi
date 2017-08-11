@@ -6,7 +6,8 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.pipeline.MessageDataHolder;
-import com.mygubbi.pipeline.MultiMessageRequestExecutor;
+import com.mygubbi.pipeline.PipelineExecutor;
+import com.mygubbi.pipeline.PipelineResponseHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -168,23 +169,55 @@ public class ReportTableFillerSevice extends AbstractVerticle
 
     private void getVersionObjForProposal(Integer proposalId, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.versions.list", new JsonObject().put("proposalId", proposalId)));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
-                    {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal " + proposalId + " doesn't have any versions")));
-                        LOG.error("Proposal " + proposalId + " doesn't have any versions");
-                    }
-                    else
-                    {
-                        List<MessageDataHolder> messageDataHolders = resultData.rows.stream()
-                                .map(row -> new MessageDataHolder(DwReportingService.RECORD_VERSION_PRICE, new ProposalVersion(row)))
-                                .collect(Collectors.toList());
-                        List<MessageDataHolder> responseDataHolders = new MultiMessageRequestExecutor().execute(messageDataHolders);
-                        message.reply("Done");
-                    }
-                });
+        QueryData requestData = new QueryData("proposal.versions.list", new JsonObject().put("proposalId", proposalId));
+        MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
+        new PipelineExecutor().execute(dataHolder, new ProposalVersionsRetriever(message, proposalId));
+    }
+
+    private static class ProposalVersionsRetriever implements PipelineResponseHandler
+    {
+        private Message message;
+        private Integer proposalId;
+
+        public ProposalVersionsRetriever(Message message, Integer proposalId)
+        {
+            this.message = message;
+            this.proposalId = proposalId;
+        }
+
+        @Override
+        public void handleResponse(List<MessageDataHolder> messageDataHolders)
+        {
+            QueryData resultData = (QueryData) messageDataHolders.get(0).getResponseData();
+            if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
+            {
+                message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal " + proposalId + " doesn't have any versions")));
+                LOG.error("Proposal " + proposalId + " doesn't have any versions");
+            }
+            else
+            {
+                List<MessageDataHolder> steps = resultData.rows.stream()
+                        .map(row -> new MessageDataHolder(DwReportingService.RECORD_VERSION_PRICE, new ProposalVersion(row)))
+                        .collect(Collectors.toList());
+                new PipelineExecutor().execute(steps, new ReportingServiceResponseHandler(message));
+            }
+        }
+    }
+
+    private static class ReportingServiceResponseHandler implements PipelineResponseHandler
+    {
+        private Message message;
+
+        public ReportingServiceResponseHandler(Message message)
+        {
+            this.message = message;
+        }
+
+        @Override
+        public void handleResponse(List<MessageDataHolder> messageDataHolders)
+        {
+            LOG.debug("Reporting service returned");
+            message.reply("Done");
+        }
     }
 }
