@@ -166,15 +166,13 @@ private void insertRowsToTable(List<QueryData> queryDatas,Message message){
                 }
 
 
-                ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem,modulePriceHolders,proposalHeader,proposalVersion);
-                setProductAttributes(productPriceHolder,proposalHeader,proposalVersion,productLineItem);
-                this.versionProductPriceHolders.add(productPriceHolder);
-
             }
+            ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem,modulePriceHolders,proposalHeader,proposalVersion);
+            productPriceHolder.prepare();
+            setProductAttributes(productPriceHolder,proposalHeader,proposalVersion,productLineItem);
+            this.versionProductPriceHolders.add(productPriceHolder);
         }
-
         calculateAddonLevelPricing(message,proposalHeader,productAddons,proposalVersion);
-
     }
 
     private void calculateAddonLevelPricing(Message message,ProposalHeader proposalHeader, List<ProductAddon> productAddons, ProposalVersion proposalVersion) {
@@ -201,6 +199,7 @@ private void insertRowsToTable(List<QueryData> queryDatas,Message message){
         }
 
         VersionPriceHolder versionPriceHolder = new VersionPriceHolder(proposalHeader,versionProductPriceHolders,versionAddonPriceHolders,proposalVersion);
+        versionPriceHolder.prepare();
         setVersionAttributes(proposalHeader,proposalVersion,versionPriceHolder,message);
 
     }
@@ -237,13 +236,16 @@ private void insertRowsToTable(List<QueryData> queryDatas,Message message){
 
         DwProposalVersion dwProposalVersion = new DwProposalVersion();
         dwProposalVersion = dwProposalVersion.setDwVersionObjects(proposalHeader,proposalVersion,versionPriceHolder);
-
-        queryDataVersion = new QueryData("dw.proposal.insert",dwProposalVersion);
+        queryDataVersion = new QueryData("dw_proposal.insert",dwProposalVersion);
 
         List<QueryData> queryDatas = new ArrayList<>();
-        queryDatas.addAll(queryDatasForAddon);
-        queryDatas.addAll(queryDatasForProduct);
+        queryDatas.add(new QueryData("dw_proposal.delete",proposalVersion));
+        queryDatas.add(new QueryData("dw_proposal_product.delete",proposalVersion));
+        queryDatas.add(new QueryData("dw_proposal.addon.delete",proposalVersion));
+        queryDatas.add(new QueryData("dw_product_module.delete",proposalVersion));
         queryDatas.addAll(queryDatasForModule);
+        queryDatas.addAll(queryDatasForProduct);
+        queryDatas.addAll(queryDatasForAddon);
         queryDatas.add(queryDataVersion);
 
         insertRowsToTable(queryDatas,message);

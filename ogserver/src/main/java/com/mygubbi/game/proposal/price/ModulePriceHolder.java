@@ -925,7 +925,7 @@ public class ModulePriceHolder
             this.totalCost=0.0;
         }else {
             this.labourCost = this.moduleArea * labourRateCard.getRate();
-            this.labourSourceCost = this.moduleArea * labourManufacturingRateCard.getSourcePrice();
+            this.labourSourceCost = this.labourCost / labourManufacturingRateCard.getSourcePrice();
 
             this.carcassCostWoTax = this.carcassCost * this.prodWoTaxFactor.getSourcePrice();
             this.shutterCostWoTax = this.shutterCost * this.prodWoTaxFactor.getSourcePrice();
@@ -943,12 +943,12 @@ public class ModulePriceHolder
             this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
             this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
 
-            this.carcassMargin = this.carcassProfit / this.carcassCostWoTax;
-            this.shutterMargin = this.shutterProfit / this.shutterCostWoTax;
-            if (!(this.labourProfit == 0 || this.labourCostWoTax == 0))this.labourMargin = this.labourProfit / this.labourCostWoTax;
-            this.hardwareMargin = this.hardwareProfit / this.hardwareCostWoTax;
-            this.handleandKnobMargin = this.handleandKnobProfit / this.handleandKnobCostWoTax;
-            this.hingeMargin = this.hingeProfit / this.hingeCostWoTax;
+            this.carcassMargin = (this.carcassProfit / this.carcassCostWoTax)*100;
+            this.shutterMargin = (this.shutterProfit / this.shutterCostWoTax)*100;
+            if (!(this.labourProfit == 0 || this.labourCostWoTax == 0))this.labourMargin = (this.labourProfit / this.labourCostWoTax)*100;
+            this.hardwareMargin = (this.hardwareProfit / this.hardwareCostWoTax)*100;
+            this.handleandKnobMargin = (this.handleandKnobProfit / this.handleandKnobCostWoTax)*100;
+            this.hingeMargin = (this.hingeProfit / this.hingeCostWoTax)*100;
 
 
 
@@ -958,7 +958,7 @@ public class ModulePriceHolder
             this.totalCostWoTax = this.totalCost * this.prodWoTaxFactor.getSourcePrice();
             this.totalSourceCost = this.carcassSourceCost + this.shutterSourceCost + this.labourSourceCost + this.handleandKnobSourceCost + this.hingeSourceCost + this.hardwareSourceCost + this.accessorySourceCost;
             this.totalProfit = this.totalCostWoTax - this.totalSourceCost;
-            this.totalMargin = this.totalProfit / this.totalCostWoTax;
+            this.totalMargin = (this.totalProfit / this.totalCostWoTax)*100;
 
 
         }

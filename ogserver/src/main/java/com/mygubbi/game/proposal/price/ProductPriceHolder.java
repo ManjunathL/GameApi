@@ -10,6 +10,8 @@ import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.RateCard;
 import io.vertx.core.json.JsonArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ import java.util.List;
  * Created by User on 08-08-2017.
  */
 public class ProductPriceHolder {
+
+    private final static Logger LOG = LogManager.getLogger(ProductPriceHolder.class);
+
 
     private List<ModulePriceHolder> modulePriceHolders ;
     private ProductLineItem productLineItem ;
@@ -89,7 +94,6 @@ public class ProductPriceHolder {
     private java.sql.Date priceDate;
     private String city;
     private double discountPercentage;
-    private double NStdModuleCount;
 
     public ProductPriceHolder(ProductLineItem productLineItem, List<ModulePriceHolder> modulePriceHolders, ProposalHeader proposalHeader, ProposalVersion proposalVersion) {
         this.modulePriceHolders = modulePriceHolders;
@@ -333,7 +337,7 @@ public class ProductPriceHolder {
     public double getProductMargin()
     {
         this.productMargin = this.productProfit / this.productPriceWoTax;
-        return this.productMargin;
+        return this.productMargin * 100;
     }
 
     public double getProductPrice()
@@ -395,7 +399,7 @@ public class ProductPriceHolder {
     public double getWoodWorkMargin()
     {
         this.woodWorkMargin = this.woodWorkProfit / this.woodWorkPriceWoTax;
-        return this.woodWorkMargin;
+        return this.woodWorkMargin*100;
     }
 
     public double getHardwarePrice()
@@ -428,7 +432,7 @@ public class ProductPriceHolder {
     public double getProductHardwareMargin()
     {
         this.productHardwareMargin = this.productHardwareProfit / this.productHardwarePriceWoTax;
-        return this.productHardwareMargin;
+        return this.productHardwareMargin*100;
     }
 
     public double getProductAccessoryPrice()
@@ -461,7 +465,7 @@ public class ProductPriceHolder {
     public double getProductAccessoryMargin()
     {
         this.productAccessoryMargin = this.productAccessoryMargin / this.productAccessoryPriceWoTax;
-        return this.productHardwareMargin;
+        return this.productHardwareMargin*100;
     }
 
 
@@ -495,7 +499,7 @@ public class ProductPriceHolder {
     public double getProductHandleAndKnobMargin()
     {
         this.productHandleAndKnobMargin = this.productHandleAndKnobProfit / this.productHandleAndKnobPriceWoTax;
-        return this.productHandleAndKnobMargin;
+        return this.productHandleAndKnobMargin*100;
     }
 
     public double getProductHingePrice()
@@ -521,14 +525,14 @@ public class ProductPriceHolder {
 
     public double getProductHingeProfit()
     {
-        this.productHingeProfit = this.productHingePriceWoTax - this.productHandleAndKnobSourceCost;
+        this.productHingeProfit = this.productHingePriceWoTax - this.productHingeSourceCost;
         return this.productHingeProfit;
     }
 
     public double getProductHingeMargin()
     {
         this.productHingeMargin = this.productHingeProfit / this.productHingePriceWoTax;
-        return this.productHingeMargin;
+        return this.productHingeMargin*100;
     }
 
     public double getProductLabourPrice()
@@ -560,7 +564,7 @@ public class ProductPriceHolder {
     public double getProductLabourMargin()
     {
         this.productLabourMargin = this.productLabourProfit / this.productLabourPriceWoTax;
-        return this.productLabourMargin;
+        return this.productLabourMargin*100;
     }
 
     public double getProductAreainSqft()
@@ -574,27 +578,28 @@ public class ProductPriceHolder {
     }
 
     public int getStdModuleCount() {
-        return stdModuleCount;
+        return this.stdModuleCount;
     }
 
     public double getStdModulePrice() {
-        return stdModulePrice;
+        return this.stdModulePrice;
     }
 
-    public double getNStdModuleCount() {
-        return nStdModuleCount;
+    public int getNStdModuleCount() {
+        return this.nStdModuleCount;
     }
 
     public double getNStdModulePrice() {
-        return nStdModulePrice;
+        return this.nStdModulePrice;
     }
 
     public int getHikeModuleCount() {
-        return hikeModuleCount;
+        return this.hikeModuleCount;
     }
 
-    public double getHikeModulePrice() {
-        return hikeModulePrice;
+    public double getHikeModulePrice()
+    {
+        return this.hikeModulePrice;
     }
 
     public double getLConnectorPrice() {
@@ -622,8 +627,15 @@ public class ProductPriceHolder {
 
     public double getLConnectorMargin() {
 
-        this.productLConnectorMargin = this.productLConnectorProfit / this.productLConnectorPriceWoTax;
-        return this.productLConnectorMargin;
+        if (this.productLConnectorProfit == 0 || this.productLConnectorPriceWoTax == 0)
+        {
+            return this.productLConnectorMargin;
+        }
+        else
+        {
+            this.productLConnectorMargin = this.productLConnectorProfit / this.productLConnectorPriceWoTax;
+            return this.productLConnectorMargin*100;
+        }
     }
 
 

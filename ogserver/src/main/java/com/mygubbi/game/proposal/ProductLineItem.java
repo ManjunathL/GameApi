@@ -44,7 +44,7 @@ public class ProductLineItem extends JsonObject
     private static final String UPDATED_BY = "updatedBy";
     private static final String HANDLE_TYPE = "handleType";
     private static final String HANDLE_FINISH = "handleFinish";
-    private static final String KNOB_TYPE = "konbType";
+    private static final String KNOB_TYPE = "knobType";
     private static final String KNOB_FINISH = "knobFinish";
     //public static final String NO_OF_LENGTHS="noOfLengths";
     public static final String HANDLETYPE_SELECTION="handleTypeSelection";
@@ -52,7 +52,7 @@ public class ProductLineItem extends JsonObject
     public static final String HANDLE_CODE="handleCode";
     public static final String KNOB_CODE="knobCode";
     public static final String HANDLE_THICKNESS="handleThickness";
-    public static final String HINGE_TYPE="hingeType";
+    public static final String HINGE_TYPE="hinge";
     public static final String SPACE_TYPE="spaceType";
     public static final String SHUTTER_DESIGN_CODE="shutterDesignCode";
     public static final String NO_OF_LENGTHS="noOfLengths";

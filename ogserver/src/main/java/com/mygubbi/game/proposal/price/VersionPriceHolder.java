@@ -5,6 +5,8 @@ import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.Proposal;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ import java.util.List;
  * Created by User on 09-08-2017.
  */
 public class VersionPriceHolder {
+
+    private final static Logger LOG = LogManager.getLogger(ModulePriceHolder.class);
 
     private List<ProductPriceHolder> productPriceHolders ;
     private List<AddonPriceHolder> addonPriceHolders ;
@@ -533,11 +537,13 @@ public class VersionPriceHolder {
     }
 
     public double getProfit() {
+        this.vrProfit = this.vrPriceAfterTax - this.vrCost;
         return this.vrProfit;
     }
 
     public double getMargin() {
-        return this.vrMargin;
+        this.vrMargin = this.vrProfit / this.vrPriceAfterTax;
+        return this.vrMargin*100;
     }
 
     public double getProductPrice() {
@@ -557,11 +563,20 @@ public class VersionPriceHolder {
     }
 
     public double getProductProfit() {
+        this.prProfit = this.prPriceAfterTax - this.prCost;
         return this.prProfit;
     }
 
     public double getProductMargin() {
-        return this.prMargin;
+        if (this.prProfit == 0 || this.prPriceAfterTax ==0)
+        {
+            return this.prMargin;
+        }
+        else
+        {
+            this.prMargin = this.prProfit / this.prPriceAfterTax;
+            return this.prMargin*100;
+        }
     }
 
     public double getWoodworkPrice() {
@@ -581,11 +596,20 @@ public class VersionPriceHolder {
     }
 
     public double getWoodworkProfit() {
+        this.wwProfit = this.wwPriceAfterTax - this.wwCost;
         return this.wwProfit;
     }
 
     public double getWoodworkMargin() {
-        return this.wwMargin;
+        if (this.wwProfit == 0 || this.wwPriceAfterTax ==0)
+        {
+            return this.wwMargin;
+        }
+        else
+        {
+            this.wwMargin = this.wwProfit / this.wwPriceAfterTax;
+            return this.wwMargin*100;
+        }
     }
 
     public double getHardwarePrice() {
@@ -605,11 +629,19 @@ public class VersionPriceHolder {
     }
 
     public double getHardwareProfit() {
+        this.hwProfit = this.hwPriceAfterTax - this.hwCost;
         return this.hwProfit;
     }
 
     public double getHardwareMargin() {
-        return this.hwMargin;
+        if (this.hwProfit == 0 || this.hwPriceAfterTax ==0)
+        {
+            return this.hwMargin;
+        }
+        else{
+            this.hwMargin = this.hwProfit / this.hwPriceAfterTax;
+            return this.hwMargin*100;
+        }
     }
 
     public double getAccessoryPrice() {
@@ -628,12 +660,20 @@ public class VersionPriceHolder {
         return this.accCost;
     }
 
-    public double getAcccessoryProfit() {
+    public double getAccessoryProfit() {
+        this.accProfit = this.accPriceAfterTax - this.accCost;
         return this.accProfit;
     }
 
     public double getAccessoryMargin() {
-        return this.accMargin;
+        if (this.accProfit == 0 || this.accPriceAfterTax ==0)
+        {
+            return this.accMargin;
+        }
+        else {
+            this.accMargin = this.accProfit / this.accPriceAfterTax;
+            return this.accMargin*100;
+        }
     }
 
     public double getHKPrice() {
@@ -653,11 +693,20 @@ public class VersionPriceHolder {
     }
 
     public double getHKProfit() {
+        this.hkProfit = this.hkPriceAfterTax - this.hkCost;
         return this.hkProfit;
     }
 
     public double getHKMargin() {
-        return this.hkMargin;
+        if (this.hkProfit == 0 || this.hkPriceAfterTax ==0)
+        {
+            return this.hkMargin;
+        }
+        else
+        {
+            this.hkMargin = this.hkProfit / this.hkCost;
+            return this.hkMargin*100;
+        }
     }
 
     public double getHingePrice() {
@@ -677,11 +726,20 @@ public class VersionPriceHolder {
     }
 
     public double getHingeProfit() {
+        this.hingeProfit = this.hingePriceAfterTax - this.hingeCost;
         return this.hingeProfit;
     }
 
     public double getHingeMargin() {
-        return this.hingeMargin;
+        if (this.hingeProfit == 0 || this.hingePriceAfterTax ==0)
+        {
+            return this.hingeMargin;
+        }
+        else {
+            this.hingeMargin = this.hingeProfit / this.hingePriceAfterTax;
+            return this.hingeMargin*100;
+        }
+
     }
 
     public double getLabourPrice() {
@@ -701,11 +759,20 @@ public class VersionPriceHolder {
     }
 
     public double getLabourProfit() {
+        this.laProfit = this.laPriceAfterTax - this.laCost;
         return this.laProfit;
     }
 
     public double getLabourMargin() {
-        return this.laMargin;
+        if (this.laProfit == 0 || this.laPriceAfterTax ==0)
+        {
+            return this.laMargin;
+        }
+        else
+        {
+            this.laMargin = this.laProfit / this.laPriceAfterTax;
+            return this.laMargin*100;
+        }
     }
 
     public double getLCPrice() {
@@ -724,12 +791,22 @@ public class VersionPriceHolder {
         return this.lcCost;
     }
 
-    public double getLCProfit() {
+    public double getLCProfit()
+    {
+        this.lcProfit = this.lcPriceAfterTax - this.lcCost;
         return this.lcProfit;
     }
 
     public double getLCMargin() {
-        return this.lcMargin;
+        if (this.lcProfit == 0 || this.lcPriceAfterTax ==0)
+        {
+            return this.lcMargin;
+        }
+        else
+        {
+            this.lcMargin = this.lcProfit / this.lcPriceAfterTax;
+            return this.lcMargin*100;
+        }
     }
 
     public double getBPPrice() {
@@ -749,11 +826,20 @@ public class VersionPriceHolder {
     }
 
     public double getBPProfit() {
+        this.bpProfit = this.bpPriceAfterTax - this.bpCost;
         return this.bpProfit;
     }
 
     public double getBPMargin() {
-        return this.bpMargin;
+        if (this.bpProfit == 0 || this.bpPriceAfterTax ==0)
+        {
+            return this.bpMargin;
+        }
+        else
+        {
+            this.bpMargin = this.bpProfit / this.bpPriceAfterTax;
+            return this.bpMargin*100;
+        }
     }
 
     public double getSVPrice() {
@@ -773,11 +859,20 @@ public class VersionPriceHolder {
     }
 
     public double getSVProfit() {
+        this.svProfit = this.svPriceAfterTax - this.svCost;
         return this.svProfit;
     }
 
     public double getSVMargin() {
-        return this.svMargin;
+        if (this.svProfit == 0 || this.svPriceAfterTax ==0)
+        {
+            return this.svMargin;
+        }
+        else
+        {
+            this.svMargin = this.svProfit / this.svPriceAfterTax;
+            return this.svMargin*100;
+        }
     }
 
     public int getKitchenCount() {

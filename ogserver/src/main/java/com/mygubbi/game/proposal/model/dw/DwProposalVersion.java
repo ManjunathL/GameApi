@@ -2,8 +2,11 @@ package com.mygubbi.game.proposal.model.dw;
 
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import com.mygubbi.game.proposal.price.VersionPriceHolder;
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -12,100 +15,103 @@ import java.text.SimpleDateFormat;
  * Created by shilpa on 9/8/17.
  */
 public class DwProposalVersion extends JsonObject {
+    private final static Logger LOG = LogManager.getLogger(DwProposalVersion.class);
+
+
     private static final String ID = "id";
-    private static String PROPOSAL_ID = "proposalId";
-    private static String VERSION = "version";
-    private static String PROPOSAL_TITLE = "proposalTitle";
-    private static String REGION = "region";
-    private static String PROJECT_NAME = "projectName";
-    private static String DESIGNER_NAME = "designerName";
-    private static String SALES_NAME = "salesName";
-    private static String DESIGN_PARTNER_NAME = "designPartnerName";
-    private static String PROPOSAL_UPDATED_BY = "proposalUpdatedBy";
-    private static String PROPOSAL_CREATE_DATE = "proposalCreateDate";
-    private static String PROPOSAL_PRICE_DATE = "proposalPriceDate";
-    private static String BUSINESS_DATE = "businessDate";
-    private static String VERSION_CREATED_BY = "versionCreatedBy";
-    private static String VERSION_CREATED_ON = "versionCreatedOn";
-    private static String VERSION_UPDATED_BY = "versionUpdatedBy";
-    private static String VERSION_UPDATED_ON = "versionUpdatedOn";
-    private static String STD_MODULE_COUNT = "stdModuleCount";
-    private static String N_STD_MODULE_COUNT = "nStdModuleCount";
-    private static String HIKE_MODULE_COUNT = "hikeModuleCount";
-    private static String STD_MODULE_PRICE = "stdModulePrice";
-    private static String N_STD_MODULE_PRICE = "nStdModulePrice";
-    private static String HIKE_MODULE_PRICE = "hikeModulePrice";
-    private static String VR_PRICE = "vrPrice";
-    private static String VR_PRICE_AFTER_DISCOUNT = "vrPriceAfterDiscount";
-    private static String VR_PRICE_AFTER_TAX = "vrPriceAfterTax";
-    private static String VR_COST = "vrCost";
-    private static String VR_PROFIT = "vrProfit";
-    private static String VR_MARGIN = "vrMargin";
-    private static String PR_PRICE = "prPrice";
-    private static String PR_PRICE_AFTER_DISCOUNT = "prPriceAfterDiscount";
-    private static String PR_PRICE_AFTER_TAX = "prPriceAfterTax";
-    private static String PR_COST = "prCost";
-    private static String PR_PROFIT = "prProfit";
-    private static String PR_MARGIN = "prMargin";
-    private static String WW_PRICE = "wwPrice";
-    private static String WW_PRICE_AFTER_DISCOUNT = "wwPriceAfterDiscount";
-    private static String WW_PRICE_AFTER_TAX = "wwPriceAfterTax";
-    private static String WW_COST = "wwCost";
-    private static String WW_PROFIT = "wwProfit";
-    private static String WW_MARGIN = "wwMargin";
+    private static final String PROPOSAL_ID = "proposalId";
+    private static final String VERSION = "version";
+    private static final String PROPOSAL_TITLE = "proposalTitle";
+    private static final String REGION = "region";
+    private static final String PROJECT_NAME = "projectName";
+    private static final String DESIGNER_NAME = "designerName";
+    private static final String SALES_NAME = "salesName";
+    private static final String DESIGN_PARTNER_NAME = "designPartnerName";
+    private static final String PROPOSAL_UPDATED_BY = "proposalUpdatedBy";
+    private static final String PROPOSAL_CREATE_DATE = "proposalCreateDate";
+    private static final String PROPOSAL_PRICE_DATE = "proposalPriceDate";
+    private static final String BUSINESS_DATE = "businessDate";
+    private static final String VERSION_CREATED_BY = "versionCreatedBy";
+    private static final String VERSION_CREATED_ON = "versionCreatedOn";
+    private static final String VERSION_UPDATED_BY = "versionUpdatedBy";
+    private static final String VERSION_UPDATED_ON = "versionUpdatedOn";
+    private static final String STD_MODULE_COUNT = "stdModuleCount";
+    private static final String N_STD_MODULE_COUNT = "nStdModuleCount";
+    private static final String HIKE_MODULE_COUNT = "hikeModuleCount";
+    private static final String STD_MODULE_PRICE = "stdModulePrice";
+    private static final String N_STD_MODULE_PRICE = "nStdModulePrice";
+    private static final String HIKE_MODULE_PRICE = "hikeModulePrice";
+    private static final String VR_PRICE = "vrPrice";
+    private static final String VR_PRICE_AFTER_DISCOUNT = "vrPriceAfterDiscount";
+    private static final String VR_PRICE_AFTER_TAX = "vrPriceAfterTax";
+    private static final String VR_COST = "vrCost";
+    private static final String VR_PROFIT = "vrProfit";
+    private static final String VR_MARGIN = "vrMargin";
+    private static final String PR_PRICE = "prPrice";
+    private static final String PR_PRICE_AFTER_DISCOUNT = "prPriceAfterDiscount";
+    private static final String PR_PRICE_AFTER_TAX = "prPriceAfterTax";
+    private static final String PR_COST = "prCost";
+    private static final String PR_PROFIT = "prProfit";
+    private static final String PR_MARGIN = "prMargin";
+    private static final String WW_PRICE = "wwPrice";
+    private static final String WW_PRICE_AFTER_DISCOUNT = "wwPriceAfterDiscount";
+    private static final String WW_PRICE_AFTER_TAX = "wwPriceAfterTax";
+    private static final String WW_COST = "wwCost";
+    private static final String WW_PROFIT = "wwProfit";
+    private static final String WW_MARGIN = "wwMargin";
     public static final String HW_PRICE = "hwPrice";
     public static final String HW_PRICEAFTERTAX = "hwPriceAfterTax";
-    private static String HW_PRICE_AFTER_DISCOUNT = "hwPriceAfterDiscount";
+    private static final String HW_PRICE_AFTER_DISCOUNT = "hwPriceAfterDiscount";
     public static final String HW_COST = "hwCost";
     public static final String HW_PROFIT = "hwProfit";
     public static final String HW_MARGIN = "hwMargin";
     public static final String ACC_PRICE = "accPrice";
     public static final String ACC_PRICEAFTERTAX = "accPriceAfterTax";
-    private static String ACC_PRICE_AFTER_DISCOUNT = "accPriceAfterDiscount";
+    private static final String ACC_PRICE_AFTER_DISCOUNT = "accPriceAfterDiscount";
     public static final String ACC_COST = "accCost";
     public static final String ACC_PROFIT = "accProfit";
     public static final String ACC_MARGIN = "accMargin";
     public static final String HK_PRICE = "hkPrice";
     public static final String HK_PRICEAFTERTAX = "hkPriceAfterTax";
-    private static String HK_PRICE_AFTER_DISCOUNT = "hkPriceAfterDiscount";
+    private static final String HK_PRICE_AFTER_DISCOUNT = "hkPriceAfterDiscount";
     public static final String HK_COST = "hkCost";
     public static final String HK_PROFIT = "hkProfit";
     public static final String HK_MARGIN = "hkMargin";
     public static final String HINGE_PRICE = "hingePrice";
     public static final String HINGE_PRICEAFTERTAX = "hingePriceAfterTax";
-    private static String HINGE_PRICE_AFTER_DISCOUNT = "hingePriceAfterDiscount";
+    private static final String HINGE_PRICE_AFTER_DISCOUNT = "hingePriceAfterDiscount";
     public static final String HINGE_COST = "hingeCost";
     public static final String HINGE_PROFIT = "hingeProfit";
     public static final String HINGE_MARGIN = "hingeMargin";
     public static final String LC_PRICE = "lcPrice";
     public static final String LC_PRICEAFTERTAX = "lcPriceAfterTax";
-    private static String LC_PRICE_AFTER_DISCOUNT = "lcPriceAfterDiscount";
+    private static final String LC_PRICE_AFTER_DISCOUNT = "lcPriceAfterDiscount";
     public static final String LC_COST = "lcCost";
     public static final String LC_PROFIT = "lcProfit";
     public static final String LC_MARGIN = "lcMargin";
     public static final String LA_PRICE = "laPrice";
     public static final String LA_PRICEAFTERTAX = "laPriceAfterTax";
-    private static String LA_PRICE_AFTER_DISCOUNT = "laPriceAfterDiscount";
+    private static final String LA_PRICE_AFTER_DISCOUNT = "laPriceAfterDiscount";
     public static final String LA_COST = "laCost";
     public static final String LA_PROFIT = "laProfit";
     public static final String LA_MARGIN = "laMargin";
-    private static String BP_PRICE = "bpPrice";
-    private static String BP_PRICE_AFTER_DISCOUNT = "bpPriceAfterDiscount";
-    private static String BP_PRICE_AFTER_TAX = "bpPriceAfterTax";
-    private static String BP_COST = "bpCost";
-    private static String BP_PROFIT = "bpProfit";
-    private static String BP_MARGIN = "bpMargin";
-    private static String SV_PRICE = "svPrice";
-    private static String SV_PRICE_AFTER_DISCOUNT = "svPriceAfterDiscount";
-    private static String SV_PRICE_AFTER_TAX = "svPriceAfterTax";
-    private static String SV_COST = "svCost";
-    private static String SV_PROFIT = "svProfit";
-    private static String SV_MARGIN = "svMargin";
-    private static String KITCHEN_COUNT = "kitchenCount";
-    private static String WARDROBE_COUNT = "wardrobeCount";
-    private static String NS_PRODUCT_COUNT = "NSproductCount";
-    private static String BP_COUNT = "bpCount";
-    private static String SV_COUNT = "svCount ";
+    private static final String BP_PRICE = "bpPrice";
+    private static final String BP_PRICE_AFTER_DISCOUNT = "bpPriceAfterDiscount";
+    private static final String BP_PRICE_AFTER_TAX = "bpPriceAfterTax";
+    private static final String BP_COST = "bpCost";
+    private static final String BP_PROFIT = "bpProfit";
+    private static final String BP_MARGIN = "bpMargin";
+    private static final String SV_PRICE = "svPrice";
+    private static final String SV_PRICE_AFTER_DISCOUNT = "svPriceAfterDiscount";
+    private static final String SV_PRICE_AFTER_TAX = "svPriceAfterTax";
+    private static final String SV_COST = "svCost";
+    private static final String SV_PROFIT = "svProfit";
+    private static final String SV_MARGIN = "svMargin";
+    private static final String KITCHEN_COUNT = "kitchenCount";
+    private static final String WARDROBE_COUNT = "wardrobeCount";
+    private static final String NS_PRODUCT_COUNT = "NSproductCount";
+    private static final String BP_COUNT = "bpCount";
+    private static final String SV_COUNT = "svCount";
 
 
     public DwProposalVersion() {
@@ -498,7 +504,7 @@ public class DwProposalVersion extends JsonObject {
     }
 
     public DwProposalVersion setProposalId(int id) {
-        this.put(ID, id);
+        this.put(PROPOSAL_ID, id);
         return this;
     }
 
@@ -708,7 +714,7 @@ public class DwProposalVersion extends JsonObject {
     }
 
     public DwProposalVersion setHardwarePrice(double price) {
-        this.put(WW_PRICE, price);
+        this.put(HW_PRICE, price);
         return this;
     }
 
@@ -798,7 +804,7 @@ public class DwProposalVersion extends JsonObject {
     }
 
     public DwProposalVersion setHingeProfit(double price) {
-        this.put(HINGE_COST, price);
+        this.put(HINGE_PROFIT, price);
         return this;
     }
 
@@ -938,6 +944,8 @@ public class DwProposalVersion extends JsonObject {
     }
 
     public DwProposalVersion setServicesCount(int nCount) {
+        LOG.debug("Set services count :" + nCount);
+
         this.put(SV_COUNT, nCount);
         return this;
     }
@@ -1020,7 +1028,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setAccessoryPriceAfterDiscount(versionPriceHolder.getAccessoryPriceAfterDiscount());
         dwProposalVersion.setAccessoryPriceAfterTax(versionPriceHolder.getAccessoryPriceWotax());
         dwProposalVersion.setAccessoryCost(versionPriceHolder.getAccessorySourceCost());
-        dwProposalVersion.setAccessoryProfit(versionPriceHolder.getAcccessoryProfit());
+        dwProposalVersion.setAccessoryProfit(versionPriceHolder.getAccessoryProfit());
         dwProposalVersion.setAccessoryMargin(versionPriceHolder.getAccessoryMargin());
         dwProposalVersion.setHandleKnobPrice(versionPriceHolder.getHKPrice());
         dwProposalVersion.setHandleKnobPriceAfterDiscount(versionPriceHolder.getHKPriceAfterDiscount());
@@ -1033,7 +1041,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setHingePriceAfterTax(versionPriceHolder.getHingePriceWotax());
         dwProposalVersion.setHingeCost(versionPriceHolder.getHingeSourceCost());
         dwProposalVersion.setHingeProfit(versionPriceHolder.getHingeProfit());
-        dwProposalVersion.setVersionMargin(versionPriceHolder.getHingeMargin());
+        dwProposalVersion.setHingeMargin(versionPriceHolder.getHingeMargin());
         dwProposalVersion.setLabourPrice(versionPriceHolder.getLabourPrice());
         dwProposalVersion.setLabourPriceAfterDiscount(versionPriceHolder.getLabourPriceAfterDiscount());
         dwProposalVersion.setLabourPriceAfterTax(versionPriceHolder.getLabourPriceWotax());

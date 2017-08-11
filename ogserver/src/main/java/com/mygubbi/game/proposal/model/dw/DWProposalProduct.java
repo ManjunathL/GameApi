@@ -93,11 +93,11 @@ public class DWProposalProduct extends JsonObject {
 
     public static final String INSTALLATIONCOST="installationCost";
     public static final String TRANSPORTATIONCOST="transportationCost";
-    public static final String STDMC="stdMC";
+    public static final String STDMC="stdModuleCount";
     public static final String STDMPRICE="stdMPrice";
-    public static final String NSTDMC="nStdMC";
+    public static final String NSTDMC="nStdModuleCount";
     public static final String NSTDMPRICE="nStdMPrice";
-    public static final String HIKEMC="hikeMC";
+    public static final String HIKEMC="hikeModuleCount";
     public static final String HIKEMPRICE="hikeMPrice";
 
     public DWProposalProduct() {}
@@ -357,7 +357,7 @@ public class DWProposalProduct extends JsonObject {
 
     public DWProposalProduct setHandleSize(String handleFinish)
     {
-        put(HANDLEFINISH,handleFinish);
+        put(HANDLESIZE,handleFinish);
         return this;
     }
 
@@ -676,7 +676,7 @@ public class DWProposalProduct extends JsonObject {
 
     public DWProposalProduct setHkSourceCost(double hkSourceCost)
     {
-        put(HW_COST,hkSourceCost);
+        put(HK_COST,hkSourceCost);
         return this;
     }
 
@@ -932,7 +932,7 @@ public class DWProposalProduct extends JsonObject {
 
     public DWProposalProduct setHikeModulePrice(double hikeModulePrice)
     {
-        put(HIKEMC,hikeModulePrice);
+        put(HIKEMPRICE,hikeModulePrice);
         return this;
     }
 
