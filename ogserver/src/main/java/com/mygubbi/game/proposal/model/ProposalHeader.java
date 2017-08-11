@@ -58,10 +58,6 @@ public class ProposalHeader extends JsonObject
     {
         return this.getString(SALESPHONE);
     }
-    public String getProjectName()
-    {
-        return this.getString(PROJECT_NAME);
-    }
     public String getDesignPartnerName()
     {
         return this.getString(DESIGN_PARTNER_NAME);

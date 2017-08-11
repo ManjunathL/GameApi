@@ -729,12 +729,12 @@ public class ProposalHandler extends AbstractRouteHandler
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     LOG.info("Quote Res :: "+response);
+                    createBookingFormInPdf(routingContext,response,response);
                     if(ValidSows){
                         createSowOutputInPdf(routingContext,response);
                     }else{
                         sendJsonResponse(routingContext, response.toString());
                     }
-                    createBookingFormInPdf(routingContext,response,response);
                    });
     }
 
@@ -772,11 +772,15 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void createBookingFormInPdf(RoutingContext context,JsonObject quoteResponse,JsonObject sowresponse){
+        LOG.info("create booking form in  pdf " ) ;
         JsonObject quoteRequestJson = context.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.BOOKING_FORM));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+            LOG.info("response of booking form pdf " +response);
             createMergedPdf(context,quoteResponse,sowresponse,response);
+            LOG.info("after calling merge");
+
         });
     }
 
@@ -811,15 +815,15 @@ public class ProposalHandler extends AbstractRouteHandler
                 inputPdfList.put("C:/Users/Public/game_files/BookingFormPune.pdf",PdfPage.PORTRAIT);
             }
         }
-        /*if(sowResponse.size() > 0) {
+        if(sowResponse.size() > 0) {
             inputPdfList.put(sowResponse.getString("sowPdfFile"), PdfPage.PORTRAIT);
         }
 
         if(bookingFormFlag.equals("Yes"))
         {
             inputPdfList.put("BookingFormpdf",PdfPage.PORTRAIT);
-            inputPdfList.put(bookingformresponse.getString("bookingFormPDFFile"),PdfPage.PORTRAIT);
-        }*/
+            inputPdfList.put(bookingformresponse.getString("bookingFormPDFfile"),PdfPage.PORTRAIT);
+        }
 
         LOG.info("list size " +inputPdfList.size());
         Set set=inputPdfList.entrySet();

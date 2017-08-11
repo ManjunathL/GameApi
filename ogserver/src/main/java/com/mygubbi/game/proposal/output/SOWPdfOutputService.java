@@ -236,6 +236,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                         resultData.rows.forEach(item->{proposalSOWs.add(new SOWPdf(item));});
                         this.createSow(quoteRequest, proposalHeader, products, addons, proposalSOWs,quoteData,message);
                     }
+                    this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,proposalSOWs,message);
                 });
 
     }
@@ -256,7 +257,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             LOG.debug("created SOW.pdf");
             sendResponse(message, new JsonObject().put("sowPdfFile", outputCreator.getOutputFile()));
             LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
-            this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,proposalSOWs,message);
+
         }
         catch (Exception e)
         {
@@ -268,6 +269,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
     private void createOfficeUseOnlyPdf(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
                                         List<ProductAddon> addons,List<SOWPdf> proposalSOWs, Message  message)
     {
+        LOG.info("office only pdf ");
         try
         {
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
