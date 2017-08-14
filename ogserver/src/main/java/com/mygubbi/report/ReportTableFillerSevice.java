@@ -122,7 +122,8 @@ public class ReportTableFillerSevice extends AbstractVerticle
         public void handleResponse(List<MessageDataHolder> messageDataHolders)
         {
             LOG.debug("Reporting service returned");
-            message.reply("Done");
+            message.reply(LocalCache.getInstance().store(new JsonObject().put("status","success")));
+            
         }
     }
 }
