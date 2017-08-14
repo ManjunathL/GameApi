@@ -190,12 +190,6 @@ public class ProposalOutputService extends AbstractVerticle
             outputCreator.create();
 
             LOG.debug("created Quotation.pdf");
-//            QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData);
-//            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
-//            String sowDestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
-//                    ConfigHolder.getInstance().getStringValue("sow_pdf_fomat","sow.pdf");
-//            quoteSOWPDFCreator.createSOWPDf(sowDestinationFile);
-//            LOG.debug("created SOW.pdf");
             sendResponse(message, new JsonObject().put(outputCreator.getOutputKey(), outputCreator.getOutputFile()));
             LOG.debug("Response:" + outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
         }

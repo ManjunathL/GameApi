@@ -132,14 +132,24 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void runReportFiller(RoutingContext context){
         JsonObject contextJson = context.getBodyAsJson();
+
         LOG.info("contextJson = "+contextJson);
         Integer id1 = LocalCache.getInstance().store(contextJson);
-        VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, id1,
-                (AsyncResult<Message<Integer>> result) -> {
-                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    LOG.info("2222. Quote Res :: " + response);
-                    sendJsonResponse(context,response.toString());
-                });
+        if(contextJson.containsKey("proposalId")) {
+            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, id1,
+                    (AsyncResult<Message<Integer>> result) -> {
+                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        LOG.info("2222. Quote Res :: " + response);
+                        sendJsonResponse(context, response.toString());
+                    });
+        }else {
+            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, id1,
+                    (AsyncResult<Message<Integer>> result) -> {
+                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        LOG.info("2222. Quote Res :: " + response);
+                        sendJsonResponse(context, response.toString());
+                    });
+        }
 
 
     }
@@ -712,6 +722,8 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type,boolean ValidSows)
     {
+        Boolean IsBookingFormFlag=(routingContext.getBodyAsJson().
+                getString("bookingFormFlag").equalsIgnoreCase("yes"))?true:false ;
         LOG.info("ValidSows = "+ValidSows);
         LOG.debug("Json **** " +routingContext.getBodyAsJson());
         LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
@@ -723,9 +735,11 @@ public class ProposalHandler extends AbstractRouteHandler
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     LOG.info("Quote Res :: "+response);
-                    createBookingFormInPdf(routingContext,response,response);
                     if(ValidSows){
-                        createSowOutputInPdf(routingContext,response);
+                        createSowOutputInPdf(routingContext,response,IsBookingFormFlag);
+                    }else if(IsBookingFormFlag){
+                        createBookingFormInPdf(routingContext,response,new JsonObject());
+//                        sendJsonResponse(routingContext, response.toString());
                     }else{
                         sendJsonResponse(routingContext, response.toString());
                     }
@@ -739,7 +753,7 @@ public class ProposalHandler extends AbstractRouteHandler
         params.put("sowversion","1.0");
 
         vertx.eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance()
-                        .store(new QueryData("proposal.sow.select.proposalversion",
+                        .store(new QueryData("proposal.sow.select.proposalversion.forPdf",
                                 params)),
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
@@ -756,12 +770,16 @@ public class ProposalHandler extends AbstractRouteHandler
         });
 
     }
-    private void createSowOutputInPdf(RoutingContext context, JsonObject quoteReponse){
+    private void createSowOutputInPdf(RoutingContext context, JsonObject quoteReponse,Boolean IsBookingFormFlag){
         JsonObject quoteRequestJson = context.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.SOWPDF));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-            //createBookingFormInPdf(context,quoteReponse,response);
+            if(IsBookingFormFlag) {
+                createBookingFormInPdf(context, quoteReponse, response);
+            }else{
+                createMergedPdf(context,quoteReponse,response,new JsonObject());
+            }
         });
     }
 
@@ -769,7 +787,7 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.info("create booking form in  pdf " ) ;
         JsonObject quoteRequestJson = context.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.BOOKING_FORM));
-        VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
+        VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_BOOKING_FORM_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
             LOG.info("response of booking form pdf " +response);
             createMergedPdf(context,quoteResponse,sowresponse,response);
@@ -783,6 +801,8 @@ public class ProposalHandler extends AbstractRouteHandler
         String city=routingContext.getBodyAsJson().getString("city");
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
         LOG.debug("city " +city);
+
+        LOG.info("Booking form PDf :: "+bookingformresponse);
         LOG.debug("booking Form Flag " +bookingFormFlag);
         Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
 
@@ -811,9 +831,9 @@ public class ProposalHandler extends AbstractRouteHandler
             inputPdfList.put(sowResponse.getString("sowPdfFile"), PdfPage.PORTRAIT);
         }
 
-        if(bookingFormFlag.equals("Yes"))
+        if(bookingFormFlag.equalsIgnoreCase("Yes"))
         {
-            inputPdfList.put(bookingformresponse.getString("sowPdfFile"),PdfPage.PORTRAIT);
+            inputPdfList.put(bookingformresponse.getString("bookingFormPDFfile"),PdfPage.PORTRAIT);
         }
 
         inputPdfList.keySet().forEach(in -> LOG.info(in));

@@ -35,7 +35,12 @@ public class SOWPdfOutputService extends AbstractVerticle {
     private final static Logger LOG = LogManager.getLogger(ProposalOutputService.class);
 
     public static final String CREATE_SOW_PDF_OUTPUT = "create.sowpdf.output";
+    public static final String CREATE_BOOKING_FORM_PDF_OUTPUT = "create.bookingform.pdf.output";
     public static final String CREATE_MERGED_PDF_OUTPUT = "create.merged.output";
+
+    public static final String SOW_PDF = "sow.pdf";
+    public static final String BOOKING_FORM = "booking.form.pdf";
+
     public DriveServiceProvider serviceProvider;
 
 
@@ -59,7 +64,16 @@ public class SOWPdfOutputService extends AbstractVerticle {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(CREATE_SOW_PDF_OUTPUT, (Message<Integer> message) -> {
             QuoteRequest quoteRequest =(QuoteRequest) LocalCache.getInstance().remove(message.body());
-            this.getProposalHeader(quoteRequest, message);
+            this.getProposalHeader(quoteRequest, message,SOW_PDF);
+
+        }).completionHandler(res -> {
+            LOG.info("setupSowPdfOutput started." + res.succeeded());
+        });
+
+
+        eb.localConsumer(CREATE_BOOKING_FORM_PDF_OUTPUT, (Message<Integer> message) -> {
+            QuoteRequest quoteRequest =(QuoteRequest) LocalCache.getInstance().remove(message.body());
+            this.getProposalHeader(quoteRequest, message,BOOKING_FORM);
 
         }).completionHandler(res -> {
             LOG.info("setupSowPdfOutput started." + res.succeeded());
@@ -67,6 +81,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
 
         eb.localConsumer(CREATE_MERGED_PDF_OUTPUT, (Message<Integer> message) -> {
             LOG.debug("Inside service: CREATE_MERGED_PDF_OUTPUT");
+
             MergePdfsRequest mergePdfReq = (MergePdfsRequest) LocalCache.getInstance().remove(message.body());
             mergePdfReq.mergePdfFiles();
 
@@ -75,7 +90,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             LOG.info("setup PDf Merger Output started." + res.succeeded());
         });
     }
-    private void getProposalHeader(QuoteRequest quoteRequest, Message message)
+    private void getProposalHeader(QuoteRequest quoteRequest, Message message,String pdf_name)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id", quoteRequest.getProposalId())));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -89,26 +104,17 @@ public class SOWPdfOutputService extends AbstractVerticle {
                     else
                     {
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
-                        this.getProposalProducts(proposalHeader, quoteRequest, message);
+                        this.getProposalProducts(proposalHeader, quoteRequest, message,pdf_name);
                     }
                 });
 
     }
 
-    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message)
+    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message,String pdf_name)
     {
         QueryData queryData = null;
         JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
 
-//        if (quoteRequest.hasProductIds())
-//        {
-//            queryData = new QueryData("proposal.product.selected.detail", paramsJson.put("productIds", quoteRequest.getProductIdsAsText()));
-//            LOG.debug("paramsJson :" + paramsJson.encodePrettily());
-//        }
-//        else
-//        {
-//            queryData = new QueryData("proposal.product.all.detail", paramsJson);
-//        }
         queryData = new QueryData("proposal.product.all.detail", paramsJson);
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -120,7 +126,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                         message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
                         LOG.error("Proposal products not found for id:" + proposalHeader.getId());
                         //return;
-                        this.getProposalAddons(quoteRequest, proposalHeader, null, message);
+                        this.getProposalAddons(quoteRequest, proposalHeader, null, message,pdf_name);
                     }
                     else
                     {
@@ -139,27 +145,17 @@ public class SOWPdfOutputService extends AbstractVerticle {
                                 products.add(new ProductLineItem(json));
                             }
                         }
-                        this.getProposalAddons(quoteRequest, proposalHeader, products, message);
+                        this.getProposalAddons(quoteRequest, proposalHeader, products, message,pdf_name);
                     }
                 });
     }
 
-    private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message)
+    private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message,String pdf_name)
     {
 
         QueryData queryData = null;
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
         LOG.debug("Proposal product addon :" + paramsJson.toString());
-        /*JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
-        LOG.info("get proposal products from Version" +quoteRequest.getFromVersion());*/
-//        if (quoteRequest.hasAddonIds())
-//        {
-//            queryData = new QueryData("proposal.addon.selected.detail", paramsJson.put("addonIds", quoteRequest.getAddonIdsAsText()));
-//        }
-//        else
-//        {
-//            queryData = new QueryData("proposal.addon.list", paramsJson);
-//        }
         queryData = new QueryData("proposal.version.addon.list", paramsJson);
 
         Integer id = LocalCache.getInstance().store(queryData);
@@ -188,8 +184,15 @@ public class SOWPdfOutputService extends AbstractVerticle {
                                 addons.add(new ProductAddon(json));
                             }
                         }
-                        this.getSowRows(quoteRequest,proposalHeader,products,addons,message);
 
+                        if(pdf_name.equalsIgnoreCase(SOW_PDF)) {
+                            LOG.info("GETTING SOW ROWS");
+                            this.getSowRows(quoteRequest, proposalHeader, products, addons, message);
+                        }
+                        else{
+                            LOG.info("GETTING BOOKING FORM");
+                            this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,message);
+                        }
                     }
                 });
 
@@ -236,7 +239,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                         resultData.rows.forEach(item->{proposalSOWs.add(new SOWPdf(item));});
                         this.createSow(quoteRequest, proposalHeader, products, addons, proposalSOWs,quoteData,message);
                     }
-                    this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,proposalSOWs,message);
+
                 });
 
     }
@@ -267,13 +270,13 @@ public class SOWPdfOutputService extends AbstractVerticle {
         }
     }
     private void createOfficeUseOnlyPdf(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
-                                        List<ProductAddon> addons,List<SOWPdf> proposalSOWs, Message  message)
+                                        List<ProductAddon> addons,Message  message)
     {
         LOG.info("office only pdf ");
         try
         {
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,proposalSOWs);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
             outputCreator.create();
             OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
             String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");

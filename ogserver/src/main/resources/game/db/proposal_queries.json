@@ -1605,6 +1605,14 @@
       "jsonfields":[]
     },
     {
+      "id": "proposal.sow.select.proposalversion.forPdf",
+      "type": "select",
+      "table": "proposal_sow",
+      "query": "select * from proposal_sow where proposalId = ? and version = ? and L1S01 = 'Yes'",
+      "params": ["proposalId","sowversion"],
+      "jsonfields":[]
+    },
+    {
       "id": "proposal.sow.select.forpdfDownload",
       "type": "select",
       "table": "proposal_sow",
