@@ -230,7 +230,7 @@
     {
       "id": "product.select.blogTags",
       "type": "select",
-      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags)",
+      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags) and status = 'publish'",
       "params": [
         "tags"
       ]
