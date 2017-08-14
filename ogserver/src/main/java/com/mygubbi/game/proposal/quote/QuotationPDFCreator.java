@@ -56,7 +56,7 @@ public class QuotationPDFCreator
 
     Font fsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
     Font bookingformfsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
-    Font bookingformfsize1=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.NORMAL,BaseColor.ORANGE);
+    Font bookingformfsize1=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.BOLD,BaseColor.ORANGE);
     Font fsize1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
     Font fsize3=new Font(Font.FontFamily.TIMES_ROMAN,9,Font.BOLD);
     Font headingSize=new com.itextpdf.text.Font(Font.FontFamily.TIMES_ROMAN,10, com.itextpdf.text.Font.BOLD);
@@ -86,19 +86,61 @@ public class QuotationPDFCreator
             char unchecked='\u00A8';
 
             if(quoteData.getBookingFormFlag().equals("Yes")) {
-                Image img = Image.getInstance("myGubbi_Logo.png");
+                Image img = Image.getInstance("logo.png");
                 img.setAlignment(Image.MIDDLE);
-                img.setWidthPercentage(30);
+                img.scaleAbsolute(100,50);
+                //img.setWidthPercentage(5);
                 document.add(img);
 
-                Phrase pph1=new Phrase();
+                /*Phrase pph1=new Phrase();
                 pph1.add(new Chunk("Mygubbi.com ",bookingformfsize1));
                 pph1.add(new Chunk("#38, Maini Sadan, 7th cross, Lavelle Road, Bangalore 560 001 Phone number: 080 22555789",bookingformfsize));
                 p=new Paragraph();
                 p.setAlignment(Element.ALIGN_CENTER);
                 p.add(pph1);
-                document.add(p);
+                document.add(p);*/
 
+                if(proposalHeader.getProjectCity().equals("Chennai"))
+                {
+                    p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", bookingformfsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                    p = new Paragraph("Chennai 600 096, India Phone +91 80888 60860", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                }else if(proposalHeader.getProjectCity().equals("Pune"))
+                {
+                    p = new Paragraph("Swastika, S-3 & S-3A, Pallod Farm, Phase2, Lane 2, Baner Road", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                    p = new Paragraph("Pune 411045, India Phone +91 80888 60860", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                }else if(proposalHeader.getProjectCity().equals("Mangalore"))
+                {
+                    p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                    p = new Paragraph("Hampankatta Mangalore Pincode :575001, India Phone +91 80888 60860", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                }
+                else
+                {
+                    p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                    p = new Paragraph("Bangalore 560 102, India Phone +91 80888 60860", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+                }
 
                /* p = new Paragraph("Mygubbi.com #38, Maini Sadan, 7th cross, Lavelle Road, Bangalore 560 001 Phone number: 080 22555789", fsize);
                 p.setAlignment(Element.ALIGN_CENTER);
@@ -150,14 +192,19 @@ public class QuotationPDFCreator
                 document.add(p);
 
                 //p=new Paragraph("Project Name:________________________________Apartment No:____________Floor No: __________",bookingformfsize);
-                p = new Paragraph("Project Name : " + proposalHeader.getProjectName() + "                                                                                                              " +" Apartment No : __________         Floor No : __________ ", bookingformfsize);
+                p = new Paragraph("Project Name : " + proposalHeader.getProjectName() + "                                                                                    " +" Apartment No : __________         Floor No : __________ ", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
                 document.add(p);
 
-                //p=new Paragraph("Project Address:___________________________________________________________________________",bookingformfsize);
-                p = new Paragraph("Project Address:" + proposalHeader.getProjectAddress1(), bookingformfsize);
+                LOG.info("proposalHeader.getProjectAddress1() "+proposalHeader.getProjectAddress1());
+                if(proposalHeader.getProjectAddress1()== "null" || proposalHeader.getProjectAddress1().length() == 0 )
+                {
+                    p=new Paragraph("Project Address : __________________________________________________________________________________________________",bookingformfsize);
+                }else {
+                    p = new Paragraph("Project Address:" + proposalHeader.getProjectAddress1(), bookingformfsize);
+                }
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -225,7 +272,7 @@ public class QuotationPDFCreator
                 ph4.add(new Chunk("  Manufacturing/Distribution  ",bookingformfsize));
                 ph4.add(new Chunk("  o  ", zapfdingbats));
                 ph4.add(new Chunk("  Others,please specify  ",bookingformfsize));
-                ph4.add(new Chunk("  o  ", zapfdingbats));
+                ph4.add(new Chunk("  ______________________  ", bookingformfsize));
                 p=new Paragraph();
                 p.add(ph4);
                 //p = new Paragraph("Banking & Finance_____ " + " " + "Manufacturing/Distribution______ " + " " + "Others,please specify:________", bookingformfsize);
@@ -235,7 +282,7 @@ public class QuotationPDFCreator
                 document.add(p);
 
                 Phrase ph5=new Phrase();
-                ph5.add(new Chunk("Annual Income (in RS. Lacs) ",bookingformfsize));
+                ph5.add(new Chunk("Annual Income (in Rs. Lacs) ",bookingformfsize));
                 ph5.add(new Chunk("  Less than 15  ",bookingformfsize));
                 ph5.add(new Chunk("  o  ", zapfdingbats));
                 ph5.add(new Chunk("  16-25  ",bookingformfsize));
@@ -254,7 +301,7 @@ public class QuotationPDFCreator
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("Landline : ___________________________________" + "                     " +  " Mobile(1)   : " + proposalHeader.getContact() + "                       " +"   Mobile(2) : _________________________ ", bookingformfsize);
+                p = new Paragraph("Landline : ___________________________________" + "                     " +  " Mobile(1) : " + proposalHeader.getContact() + "                       " +"   Mobile(2) : _________________________ ", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -272,7 +319,7 @@ public class QuotationPDFCreator
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("Address of communication : ________________________________________________________________________________________________________", bookingformfsize);
+                p = new Paragraph("Address for Communication : ________________________________________________________________________________________________________", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -307,8 +354,8 @@ public class QuotationPDFCreator
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("Order Value : ____________________________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);
+               /* p = new Paragraph("Order Value : ____________________________________________________________________________________________________________________", bookingformfsize);
+                document.add(p);*/
 
                 /*p = new Paragraph(" ");
                 document.add(p);*/
@@ -875,6 +922,7 @@ public class QuotationPDFCreator
 
             p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
             document.add(p);
+
         }else
         {
             p = new Paragraph("      ");

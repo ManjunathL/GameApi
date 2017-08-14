@@ -78,12 +78,12 @@ public class BookingFormPdf
                     +"     (c.) All prevailing taxes (Inter-city and Intrastate); any new taxes, duties and levies that may be applicable from time to time, announced by the Government. \n"
                     +"     (d.) Travel, boarding  and lodging of the installation  team will be charged  on actual  to be borne by the client. \n"
                     +"4.  Payment: \n"
-                    +"     (a.) All payments  will be in Indian Rupees payable  through any of the following instruments:  Wire transfer, Demand Draft or cheque payable at Bangalore to \n"
-                    +"          be drawn  in favour of Gubbi  Technologies Pvt. Ltd.; Credit Card payments  will attract an additional transaction fee of 2%.\n "
+                    +"     (a.) All payments will be in Indian Rupees payable through any of the following instruments: Wire transfer,Demand Draft or cheque payable \n"
+                    +"          to be drawn in favour of Gubbi Technologies Pvt. Ltd.; Credit Card payments will attract an additional transaction fee of 2%.\n"
                     +"     (b.) Payments under INR 10,000/- may be made in cash, though  cheque / DD / Bank Transfer (NEFT/RTGS) are the preferred modes. \n"
                     +"5.  Payment Terms: \n"
-                    +"     For Customized Orders: Payment of 10% with the Order booking, 40% with finalization of the Design \n "
-                    +"     Services/products, 50% will be expected once items are completely manufactured and ready for shipment to client’s site..\n "
+                    +"     For Customized Orders: Payment of 10% with the Order booking, 40% with finalization of the Design/Services/products,  \n "
+                    +"     50% will be expected once items are completely manufactured and ready for shipment to client’s site..\n "
                     +"6.  Guidelines, Inclusions and exceptions: \n"
                     +"     (a.) All dimensions are in millimeters  (unless otherwise  specified). \n"
                     +"     (b.) Installation  and transportation will not be charged  for our clients within Chennai city limits only.\n"
@@ -99,7 +99,7 @@ public class BookingFormPdf
                     +"7.  Storage \n"
                     +"     (a.) In the event of the site not being ready by the installation  date; all products  will be stored in our transit ware- house which is designed \n"
                     +"          for short term storage only.\n"
-                    +"     (b.) The storage facilities will be provided  free of charge for the first 2 weeks and thereafter  INR 6,500  will be charged  per kitchen per month and INR 3,250/ \n"
+                    +"     (b.) The storage facilities will be provided  free of charge for the first 2 weeks and thereafter  INR 6,500  will be charged  per kitchen per month and INR 3,250/\n"
                     +"          will be charged  per bedroom set per month.  The maximum period of storage shall not exceed  three months.\n "
                     +"8.  Risk \n"
                     +"     In the event that the goods delivered  to the installation  site are handled by people  outside My Gubbi’s authorized personnel or in the event that the goods\n"
@@ -155,6 +155,10 @@ public class BookingFormPdf
                     +"          NEGLIGENCE), BREACH OF STATUTORY DUTY OR OTHERWISE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH LOSSES. \n"
                     +"     (b.) AT ALL TIMES AND UNDER ALL CIRCUMSTANCES, MYGUBBI’S LIABILITY SHALL BE LIMITED UP TO THE REFUND OF CLIENT’S\n"
                     +"          ENTIRE AMOUNT ACTUALLY PAID TO MYGUBBI. \n"
+                    +" \n"
+                    +"We thank you for considering MyGubbi!\n"
+                    +" \n"
+                    +"Regards, Accepted by\n"
                     ,fsize);
             //);
             //document.add(table1);
@@ -164,8 +168,8 @@ public class BookingFormPdf
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
 
-            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
-            document.add(p);
+            /*p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
+            document.add(p);*/
 
             document.close();
         }

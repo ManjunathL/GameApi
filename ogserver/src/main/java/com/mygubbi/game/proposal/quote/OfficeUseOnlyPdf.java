@@ -103,7 +103,7 @@ public class OfficeUseOnlyPdf
             p = new Paragraph(" ");
             document.add(p);
 
-            p = new Paragraph("Name, Seal and Signature of the Sales person : " + proposalHeader.getDesignerName() , bookingformfsize);
+            p = new Paragraph("Name, Seal and Signature of the Sales person : " + proposalHeader.getSalespersonName() , bookingformfsize);
             document.add(p);
 
             p = new Paragraph(" ");

@@ -800,10 +800,6 @@ public class ProposalHandler extends AbstractRouteHandler
         /*LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());*/
         String city=routingContext.getBodyAsJson().getString("city");
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
-        LOG.debug("city " +city);
-
-        LOG.info("Booking form PDf :: "+bookingformresponse);
-        LOG.debug("booking Form Flag " +bookingFormFlag);
         Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
 
         inputPdfList.put(quotePDfResponse.getString("quoteFile"),PdfPage.PORTRAIT);

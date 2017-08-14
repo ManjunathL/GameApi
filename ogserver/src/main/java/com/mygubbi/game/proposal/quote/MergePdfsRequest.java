@@ -59,7 +59,6 @@ public class MergePdfsRequest {
             while (pdfIterator.hasNext()) {
 
                 String inputFile = pdfIterator.next();
-                LOG.info("input file $$$$ " +inputFile);
                 PdfReader pdfReader = new PdfReader(new FileInputStream(inputFile));
                 readers.put(pdfReader, inputPdfMap.get(inputFile));
 
