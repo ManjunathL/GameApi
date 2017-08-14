@@ -125,7 +125,7 @@
     {
       "id": "product.select.blogTagsLatest",
       "type": "select",
-      "query": "select id, blogId, blog_categories, blogJson from blog where NOT FIND_IN_SET(?,tags)",
+      "query": "select id, blogId, blog_categories, blogJson from blog where NOT FIND_IN_SET(?,tags) and status = 'publish'",
       "params": [
         "tags"
       ]
@@ -173,7 +173,7 @@
     {
       "id": "product.select.blogTags",
       "type": "select",
-      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags)",
+      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags) and status = 'publish'",
       "params": [
         "tags"
       ]
