@@ -64,7 +64,7 @@ public class MergePdfsRequest {
                 readers.put(pdfReader, inputPdfMap.get(inputFile));
 
                 totalPages = totalPages + pdfReader.getNumberOfPages();
-                LOG.info("total pages " +pdfReader.getNumberOfPages());
+               /* LOG.info("total pages " +pdfReader.getNumberOfPages());*/
             }
 
             // Create writer for the outputStream
@@ -84,8 +84,9 @@ public class MergePdfsRequest {
             // Iterate and process the reader list.
             while (iteratorPDFReader.hasNext()) {
                 PdfReader pdfReader = iteratorPDFReader.next();
-
-                //Create page and add content.
+               /* LOG.info("loop 1");*/
+                //Create page and add content
+               // LOG.info("currentPDFreaderpage " +currentPdfReaderPage + "pdfReader.getNumberOfPages() " +pdfReader.getNumberOfPages());
                 while (currentPdfReaderPage <= pdfReader.getNumberOfPages()) {
                     document.newPage();
 

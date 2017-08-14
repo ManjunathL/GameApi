@@ -523,6 +523,7 @@ public class QuotationPDFCreator
             stable.addCell(scell3);
 
             Font ffsize=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
+            LOG.info("ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME " +ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME);
             PdfPCell scell4 = new PdfPCell(new Paragraph(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/"),ffsize));
             ffsize.setColor(BaseColor.BLUE);
             PdfPCell scell5 = new PdfPCell(new Paragraph(proposalHeader.getSalesPhone(),ffsize));
@@ -867,13 +868,23 @@ public class QuotationPDFCreator
                     +"10. Delivery shall be within 45 days from order Final Confirmation.\n"
                     +"11. Cheque / Demant Draft should be in favour of \"GUBBI TECHNOLOGIES PRIVATE LIMITED.\n",fsize));
             document.add(table4);
-        }
-                    p = new Paragraph("      ");
-                    p.setAlignment(Element.ALIGN_LEFT);
-                    document.add(p);
 
-                    p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
-                    document.add(p);
+            p = new Paragraph("      ");
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
+
+            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
+            document.add(p);
+        }else
+        {
+            p = new Paragraph("      ");
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
+
+            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
+            document.add(p);
+        }
+
        /* BookingFormPdf bookingFormPdf=new BookingFormPdf();
         bookingFormPdf.createBookingForm();*/
                     document.close();

@@ -761,7 +761,7 @@ public class ProposalHandler extends AbstractRouteHandler
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.SOWPDF));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-            createBookingFormInPdf(context,quoteReponse,response);
+            //createBookingFormInPdf(context,quoteReponse,response);
         });
     }
 
@@ -779,7 +779,7 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void createMergedPdf(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject sowResponse,JsonObject bookingformresponse){
-        LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());
+        /*LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());*/
         String city=routingContext.getBodyAsJson().getString("city");
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
         LOG.debug("city " +city);
@@ -787,26 +787,24 @@ public class ProposalHandler extends AbstractRouteHandler
         Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
 
         inputPdfList.put(quotePDfResponse.getString("quoteFile"),PdfPage.PORTRAIT);
-        LOG.info("create Merged PDf ");
         if(bookingFormFlag.equals("Yes"))
         {
-            LOG.info("inside city");
             if(city.equals("Bangalore"))
             {
-                LOG.info("banglore");
-                inputPdfList.put("C:/Users/Public/game_files/BookingFormBanglore.pdf",PdfPage.PORTRAIT);
-            }else if(city.equals("Manglore"))
+                String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_banglore","/mnt/game/proposal/templates/BookingFormBanglore.pdf");
+                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+            }else if(city.equals("Mangalore"))
             {
-                LOG.info("Manglore");
-                inputPdfList.put("C:/Users/Public/game_files/BookingFormManglore.pdf",PdfPage.PORTRAIT);
+                String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_manglore","/mnt/game/proposal/templates/BookingFormManglore.pdf");
+                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
             }else if(city.equals("Chennai"))
             {
-                LOG.info("Chennai");
-                inputPdfList.put("C:/Users/Public/game_files/BookingFormChennai.pdf",PdfPage.PORTRAIT);
+                String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_chennai","/mnt/game/proposal/templates/BookingFormChennai.pdf");
+                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
             }else if(city.equals("Pune"))
             {
-                LOG.info("Pune");
-                inputPdfList.put("C:/Users/Public/game_files/BookingFormPune.pdf",PdfPage.PORTRAIT);
+                String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_pune","/mnt/game/proposal/templates/BookingFormPune.pdf");
+                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
             }
         }
         if(sowResponse.size() > 0) {
@@ -815,18 +813,9 @@ public class ProposalHandler extends AbstractRouteHandler
 
         if(bookingFormFlag.equals("Yes"))
         {
-            inputPdfList.put("BookingFormpdf",PdfPage.PORTRAIT);
-            inputPdfList.put(bookingformresponse.getString("bookingFormPDFfile"),PdfPage.PORTRAIT);
+            inputPdfList.put(bookingformresponse.getString("sowPdfFile"),PdfPage.PORTRAIT);
         }
 
-        LOG.info("list size " +inputPdfList.size());
-        Set set=inputPdfList.entrySet();
-        Iterator i=set.iterator();
-        while(i.hasNext())
-        {
-            Map.Entry me = (Map.Entry)i.next();
-            LOG.debug("list values key " +me.getKey()+ " list values " +me.getValue());
-        }
         inputPdfList.keySet().forEach(in -> LOG.info(in));
 
         String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" )+"/"+routingContext.getBodyAsJson().getInteger("proposalId");

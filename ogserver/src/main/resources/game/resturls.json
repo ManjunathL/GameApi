@@ -993,7 +993,14 @@
       "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/productlibrarydelete",
+      "source": "db",
+      "query":"proposal.product.productlibraydelete",
+      "params":["id"],
+      "resultfields":[],
+      "default": "[]"
     }
-
   ]
 }

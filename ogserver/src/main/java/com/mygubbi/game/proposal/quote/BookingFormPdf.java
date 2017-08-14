@@ -26,7 +26,7 @@ class CustomBorderforBookingForm extends PdfPageEventHelper{
 public class BookingFormPdf
 {
     private final static Logger LOG = LogManager.getLogger(BookingFormPdf.class);
-    com.itextpdf.text.Font fsize=new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN,11, com.itextpdf.text.Font.NORMAL);
+    com.itextpdf.text.Font fsize=new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN,8, com.itextpdf.text.Font.NORMAL);
     com.itextpdf.text.Font headingSize=new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN,15, com.itextpdf.text.Font.BOLD);
     BookingFormPdf()
     {
@@ -158,6 +158,13 @@ public class BookingFormPdf
                     ,fsize);
             //);
             //document.add(table1);
+            document.add(p);
+
+            p = new Paragraph("      ");
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
+
+            p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
             document.add(p);
 
             document.close();

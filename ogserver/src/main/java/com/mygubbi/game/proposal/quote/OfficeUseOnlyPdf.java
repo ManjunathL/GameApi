@@ -103,13 +103,13 @@ public class OfficeUseOnlyPdf
             p = new Paragraph(" ");
             document.add(p);
 
-            p = new Paragraph("Name, Seal and Signature of the Sales person : " + ProposalHeader.SALESPERSON_NAME , bookingformfsize);
+            p = new Paragraph("Name, Seal and Signature of the Sales person : " + proposalHeader.getDesignerName() , bookingformfsize);
             document.add(p);
 
             p = new Paragraph(" ");
             document.add(p);
 
-            p = new Paragraph("Alloted Designer : " +ProposalHeader.DESIGNER_NAME , bookingformfsize);
+            p = new Paragraph("Alloted Designer : " +proposalHeader.getDesignerName() , bookingformfsize);
             document.add(p);
 
             p = new Paragraph(" ");
@@ -137,6 +137,9 @@ public class OfficeUseOnlyPdf
             remarksdetails.addCell(scell1);
             document.add(remarksdetails);
             document.close();
+
+            BookingFormPdf bookingFormPdf=new BookingFormPdf();
+            bookingFormPdf.createBookingForm();
         }
         catch (Exception e)
         {
