@@ -133,6 +133,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             totalProductCost = ((int) totalProductCost);
 
                             productLineItem.setAmount(totalProductCost);
+
                             updateProductPrice(productLineItem);
                             totalProposalVersionProductCost += totalProductCost;
                         }
@@ -230,6 +231,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
     private void updateProductPrice(ProductLineItem productLineItem)
     {
+        LOG.info("update product " +productLineItem.toString());
         String query = "proposal.product.update";
         Integer id = LocalCache.getInstance().store(new QueryData(query, productLineItem));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,

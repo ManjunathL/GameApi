@@ -56,7 +56,7 @@ public class ProductLineItem extends JsonObject
     public static final String SPACE_TYPE="spaceType";
     public static final String SHUTTER_DESIGN_CODE="shutterDesignCode";
     public static final String NO_OF_LENGTHS="noOfLengths";
-
+    public static final String FROM_PRODUCT="fromProduct";
 
 
     public static final String BASE_UNIT_TYPE = "Base unit";
@@ -77,6 +77,7 @@ public class ProductLineItem extends JsonObject
         this.setAddons();
     }
 
+    public int getFromProduct(){ return this.getInteger(FROM_PRODUCT);}
     public String getTitle()
     {
         return this.getString(TITLE);
