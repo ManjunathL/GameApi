@@ -379,7 +379,10 @@ public class QuotationPDFCreator
                /* p = new Paragraph(" ");
                 document.add(p);*/
                 //p=new Paragraph("Total Quotation Value:___________________________________________________________________________",bookingformfsize);
-                p = new Paragraph("Total Quotation Value Rs. " + quoteData.getAmountafterdiscount(), bookingformfsize);
+                Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
+
+                Double res = val - val % 10;
+                p = new Paragraph("Total Quotation Value Rs. " + this.getRoundOffValue(String.valueOf(res.intValue())), bookingformfsize);
                 document.add(p);
 
                /* p = new Paragraph(" ");
