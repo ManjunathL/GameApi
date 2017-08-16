@@ -722,8 +722,14 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type,boolean ValidSows)
     {
-        Boolean IsBookingFormFlag=(routingContext.getBodyAsJson().
-                getString("bookingFormFlag").equalsIgnoreCase("yes"))?true:false ;
+        JsonObject jsonObj = routingContext.getBodyAsJson();
+        LOG.info("jsonObj.containsKey(\"bookingFormFlag\") = "+jsonObj.containsKey("bookingFormFlag"));
+        Boolean bookingFormFlag = false;
+        if(jsonObj.containsKey("bookingFormFlag") && (jsonObj.getValue("bookingFormFlag") != null)){
+            bookingFormFlag = jsonObj.getString("bookingFormFlag").equalsIgnoreCase("yes")?true:false;
+        }
+        Boolean IsBookingFormFlag = new Boolean(bookingFormFlag);
+
         LOG.info("ValidSows = "+ValidSows);
         LOG.debug("Json **** " +routingContext.getBodyAsJson());
         LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
