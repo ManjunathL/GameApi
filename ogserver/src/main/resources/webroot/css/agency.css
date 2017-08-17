@@ -469,6 +469,15 @@
     line-height: 140%;
 }
 
+.txt-over-kitchen-image h1{
+    font-weight: 300;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 140%;
+    text-transform: capitalize;
+}
+
 .explore-space{
     margin-left: 207px !important;
 }
