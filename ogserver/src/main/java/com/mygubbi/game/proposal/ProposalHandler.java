@@ -755,8 +755,20 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void checkValidRowsInDB(RoutingContext routingContext){
         JsonObject params = new JsonObject();
+        LOG.info("routingContext.getBodyAsJson() == "+routingContext.getBodyAsJson().encodePrettily());
         params.put("proposalId",routingContext.getBodyAsJson().getInteger("proposalId"));
-        params.put("sowversion","1.0");
+
+        String verFromProposal =routingContext.getBodyAsJson().getString("fromVersion");
+        String sowVersion = null ;
+        if(verFromProposal.contains("0.")){
+            sowVersion = "1.0";
+        }else if(verFromProposal.contains("1.")){
+            sowVersion = "2.0";
+        }else{
+            LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);
+            return;
+        }
+        params.put("sowversion",sowVersion);
 
         vertx.eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance()
                         .store(new QueryData("proposal.sow.select.proposalversion.forPdf",
@@ -773,7 +785,7 @@ public class ProposalHandler extends AbstractRouteHandler
 //                        createSowOutputInPdf(routingContext,res);
 
                     }
-        });
+                });
 
     }
     private void createSowOutputInPdf(RoutingContext context, JsonObject quoteReponse,Boolean IsBookingFormFlag){

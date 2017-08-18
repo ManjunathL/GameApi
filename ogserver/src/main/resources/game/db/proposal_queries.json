@@ -1603,12 +1603,11 @@
       "query": "select * from proposal_sow where proposalId = ? and version = ?",
       "params": ["proposalId","sowversion"],
       "jsonfields":[]
-    },
-    {
+    },{
       "id": "proposal.sow.select.proposalversion.forPdf",
       "type": "select",
       "table": "proposal_sow",
-      "query": "select * from proposal_sow where proposalId = ? and version = ? and L1S01 = 'Yes'",
+      "query": "select * from proposal_sow where proposalId = ? and version = ? and ( L1S01 = 'Yes' or L1S01 ='No')",
       "params": ["proposalId","sowversion"],
       "jsonfields":[]
     },
