@@ -187,8 +187,8 @@
       "id": "proposal.update",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?,maxDiscountPercentage = ?,packageFlag = ?,adminPackageFlag = ?, offerType=?,fromProposal = ?  where id = ?",
-      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version","maxDiscountPercentage" ,"packageFlag","adminPackageFlag","offerType","fromProposal","id"]
+      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?,maxDiscountPercentage = ?,packageFlag = ?,adminPackageFlag = ?, offerType=?,fromProposal = ?,fromVersion=?  where id = ?",
+      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version","maxDiscountPercentage" ,"packageFlag","adminPackageFlag","offerType","fromProposal","fromVersion","id"]
     },
 
     {
@@ -1818,6 +1818,13 @@
       "table": "product_library",
       "query": "update product_library set active='N' where id=?",
       "params": ["id"]
+    },
+    {
+      "id": "proposal.offer.offername",
+      "type": "select",
+      "table": "OfferMaster",
+      "query": "select * from OfferMaster where fromDate <= ? and toDate >= ?",
+      "params": ["fromDate","toDate"]
     }
   ]
 }

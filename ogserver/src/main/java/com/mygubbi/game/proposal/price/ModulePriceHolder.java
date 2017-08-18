@@ -875,7 +875,7 @@ public class ModulePriceHolder
                     else
                     {
                         this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                        this.addToCarcassCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
+                        this.addToCarcassSourceCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
                     }
                 }
             }
