@@ -760,13 +760,12 @@ public class ProposalHandler extends AbstractRouteHandler
 
         String verFromProposal =routingContext.getBodyAsJson().getString("fromVersion");
         String sowVersion = null ;
-        if(verFromProposal.contains("0.")){
+        if(verFromProposal.contains("0.") || verFromProposal.equals("1.0")){
             sowVersion = "1.0";
-        }else if(verFromProposal.contains("1.")){
+        }else if(verFromProposal.contains("1.") || verFromProposal.contains("2.")){
             sowVersion = "2.0";
         }else{
-            LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);
-            return;
+            LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
         }
         params.put("sowversion",sowVersion);
 
