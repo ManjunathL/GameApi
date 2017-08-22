@@ -23,6 +23,8 @@ public class DWProposalProduct extends JsonObject {
     public static final String PRICEDATE="priceDate";
     public static final String BUSINESSDATE="businessDate";
     public static final String REGION="region";
+    public static final String CRMID="crmId";
+    public static final String QUOTENO="quoteNo";
     public static final String CATEGORY="category";
     public static final String SUBCATEGORY="subCategory";
     public static final String PRID="prId";
@@ -104,6 +106,25 @@ public class DWProposalProduct extends JsonObject {
 
     public DWProposalProduct(JsonObject jsonObject){
         super(jsonObject.getMap());
+    }
+    public String getCrmid() {
+        return this.getString(CRMID);
+    }
+
+    public DWProposalProduct setCrmId(String crm)
+    {
+        put(CRMID,crm);
+        return this;
+    }
+
+    public String getQuotenoo() {
+        return this.getString(QUOTENO);
+    }
+
+    public DWProposalProduct setQuoteNo(String quote)
+    {
+        put(QUOTENO,quote);
+        return this;
     }
 
     public int getID() {
@@ -946,6 +967,8 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setPriceDate(proposalHeader.getPriceDate());
         dwProposalProduct.setBusinessDate(proposalVersion.getDate());
         dwProposalProduct.setRegion(proposalHeader.getProjectCity());
+        dwProposalProduct.setCrmId(proposalHeader.getCrmId());
+        dwProposalProduct.setQuoteNo(proposalHeader.getQuoteNum());
         dwProposalProduct.setCategory("Modular Products");
         dwProposalProduct.setSubCategory(productLineItem.getProductCategory());
         dwProposalProduct.setProductId(productLineItem.getId());
@@ -1025,4 +1048,5 @@ public class DWProposalProduct extends JsonObject {
 
         return dwProposalProduct;
     }
+
 }

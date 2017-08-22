@@ -107,7 +107,7 @@ public class ProductModule extends JsonObject
         }
         if (this.containsKey(EXPOSED_BOTTOM)){
             if (!this.containsKey(BOTTOM_EXPOSED))
-                this.put(BOTTOM_EXPOSED,this.getBoolean(EXPOSED_BOTTOM,false));
+                this.put(BOTTOM_EXPOSED,BOTTOM_EXPOSED.equals(this.getBottomExposed()));
         }
     }
 
@@ -169,7 +169,10 @@ public class ProductModule extends JsonObject
 
     public String getModuleCategory()
     {
-        return this.getString(MODULE_CATEGORY);
+        if(!isValueNull(MODULE_CATEGORY))
+         return this.getString(MODULE_CATEGORY);
+        else
+            return "";
     }
 
     public String getImagePath()
@@ -256,11 +259,16 @@ public class ProductModule extends JsonObject
     }
 
     public double getHandleQuantity() {
-        return this.getDouble(HANDLE_QUANTITY);
+        if(!isValueNull(HANDLE_QUANTITY))
+            return this.getDouble(HANDLE_QUANTITY);
+        else
+            return 0.0;
     }
 
     public double getKnobQuantity() {
+        if(!isValueNull(KNOB_QUANTITY))
         return this.getDouble(KNOB_QUANTITY);
+        return 0.0;
     }
 
     public String getProductCategory() {
@@ -305,7 +313,14 @@ public class ProductModule extends JsonObject
     }
 
     public  String getHandleThickness() {
-        return this.getString(HANDLE_THICKNESS);
+        if(!isValueNull(HANDLE_THICKNESS))
+         return this.getString(HANDLE_THICKNESS);
+        else
+            return "0.0";
+    }
+    private boolean isValueNull(String key){
+        if(this.getValue(key) == null ) return true;
+        return  false;
     }
 
     public Boolean getLeftExposed() {
@@ -317,7 +332,9 @@ public class ProductModule extends JsonObject
     }
 
     public Boolean getTopExposed() {
+        if(!isValueNull(TOP_EXPOSED))
         return this.getBoolean(TOP_EXPOSED);
+        return false;
     }
 
     public Boolean getBottomExposed() {

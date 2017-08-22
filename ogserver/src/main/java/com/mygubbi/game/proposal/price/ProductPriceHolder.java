@@ -106,19 +106,84 @@ public class ProductPriceHolder {
 
     public void prepare()
     {
+
         this.calculateProductLevelPricing();
     }
 
+private void initializeValues(){
+    this.productSourceCost = 0.0;
+    this.productPriceWoTax = 0.0;
+    this.productPrice = 0.0;
+    this.productPriceAfterDiscount = 0.0;
+    this.productProfit = 0.0;
+    this.productMargin = 0.0;
+    this.productHingeSourceCost = 0.0;
+    this.productHingePriceWoTax = 0.0;
+    this.productHingePriceAfterDiscount = 0.0;
+    this.productHingePrice = 0.0;
+    this.productHingeProfit = 0.0;
+    this.productHingeMargin = 0.0;
+    this.productHandleAndKnobSourceCost = 0.0;
+    this.productHandleAndKnobPriceWoTax = 0.0;
+    this.productHandleAndKnobPrice = 0.0;
+    this.productHandleAndKnobPriceAfterDiscount = 0.0;
+    this.productHandleAndKnobProfit = 0.0;
+    this.productHandleAndKnobMargin = 0.0;
+    this.productAccessorySourceCost = 0.0;
+    this.productAccessoryPriceWoTax = 0.0;
+    this.productAccessoryProfit = 0.0;
+    this.productAccessoryMargin = 0.0;
+    this.productAccessoryPrice = 0.0;
+    this.productAccessoryPriceAfterDiscount = 0.0;
+    this.productHardwareSourceCost = 0.0;
+    this.productHardwarePriceWoTax = 0.0;
+    this.hardwarePriceAfterDiscount = 0.0;
+    this.productHardwarePrice = 0.0;
+    this.productHardwareProfit = 0.0;
+    this.productHardwareMargin = 0.0;
+    this.productLabourSourceCost = 0.0;
+    this.productLabourPriceWoTax = 0.0;
+    this.productLabourPrice = 0.0;
+    this.productLabourPriceAfterDiscount = 0.0;
+    this.productLabourProfit = 0.0;
+    this.productLabourMargin = 0.0;
+    this.productShutterSourceCost = 0.0;
+    this.productShutterCostWoTax = 0.0;
+    this.productShutterPrice = 0.0;
+    this.productCarcassSourceCost = 0.0;
+    this.productCarcassPriceWoTax = 0.0;
+    this.productCarcassPrice = 0.0;
+    this.woodWorkPrice = 0.0;
+    this.woodWorkPriceAfterDiscount = 0.0;
+    this.woodWorkPriceWoTax = 0.0;
+    this.woodWorkSourceCost = 0.0;
+    this.woodWorkProfit = 0.0;
+    this.woodWorkMargin = 0.0;
+    this.productLConnectorSourceCost = 0.0;
+    this.productLConnectorPriceWoTax = 0.0;
+    this.productLConnectorPriceAfterDiscount = 0.0;
+    this.productLConnectorPrice = 0.0;
+    this.productLConnectorProfit = 0.0;
+    this.productLConnectorMargin = 0.0;
+    this.productAreainSqft = 0.0;
+    this.stdModuleCount = 0;
+    this.nStdModuleCount = 0;
+    this.hikeModuleCount = 0;
+    this.stdModulePrice = 0.0;
+    this.nStdModulePrice = 0.0;
+    this.hikeModulePrice = 0.0;
 
+}
     private void calculateProductLevelPricing() {
 
+//        this.initializeValues();
         double lConnectorPrice = 0;
         PriceMaster lConnectorRate=RateCardService.getInstance().getHardwareRate("H074",this.priceDate,this.city);
         PriceMaster lConnectorFactor=RateCardService.getInstance().getFactorRate(RateCard.ADDON_WO_TAX_FACTOR,this.priceDate,this.city);
 
-
         for (ModulePriceHolder modulePriceHolder : modulePriceHolders)
         {
+
             ProductModule productModule = modulePriceHolder.getProductModule();
 
             if (productModule.getModuleCategory().startsWith("S")) {
@@ -205,7 +270,7 @@ public class ProductPriceHolder {
     private void addToTotalProductPrice(double totalCost) {
         if (totalCost == 0) return;
         this.productPrice += totalCost;
-    }
+       }
 
     private void addToHingeSourceCost(double hingeSourceCost) {
         if (hingeSourceCost == 0) return;
@@ -336,8 +401,14 @@ public class ProductPriceHolder {
 
     public double getProductMargin()
     {
-        this.productMargin = this.productProfit / this.productPriceWoTax;
-        return this.productMargin * 100;
+        if (this.productProfit == 0 || this.productPriceWoTax == 0)
+        {
+            return this.productMargin;
+        }
+        else {
+            this.productMargin = this.productProfit / this.productPriceWoTax;
+            return this.productMargin * 100;
+        }
     }
 
     public double getProductPrice()
@@ -398,8 +469,15 @@ public class ProductPriceHolder {
 
     public double getWoodWorkMargin()
     {
-        this.woodWorkMargin = this.woodWorkProfit / this.woodWorkPriceWoTax;
-        return this.woodWorkMargin*100;
+        if (this.woodWorkProfit == 0 || this.woodWorkPriceWoTax == 0)
+        {
+            return this.woodWorkMargin;
+        }
+        else {
+
+            this.woodWorkMargin = this.woodWorkProfit / this.woodWorkPriceWoTax;
+            return this.woodWorkMargin * 100;
+        }
     }
 
     public double getHardwarePrice()
@@ -431,8 +509,14 @@ public class ProductPriceHolder {
 
     public double getProductHardwareMargin()
     {
-        this.productHardwareMargin = this.productHardwareProfit / this.productHardwarePriceWoTax;
-        return this.productHardwareMargin*100;
+        if (this.productHardwareProfit == 0 || this.productHardwarePriceWoTax == 0)
+        {
+            return this.productHardwareMargin;
+        }
+        else {
+            this.productHardwareMargin = this.productHardwareProfit / this.productHardwarePriceWoTax;
+            return this.productHardwareMargin * 100;
+        }
     }
 
     public double getProductAccessoryPrice()
@@ -464,8 +548,14 @@ public class ProductPriceHolder {
 
     public double getProductAccessoryMargin()
     {
-        this.productAccessoryMargin = this.productAccessoryMargin / this.productAccessoryPriceWoTax;
-        return this.productHardwareMargin*100;
+        if (this.productAccessoryProfit == 0 || this.productAccessoryPriceWoTax == 0)
+        {
+            return this.productAccessoryMargin;
+        }
+        else {
+            this.productAccessoryMargin = this.productAccessoryProfit / this.productAccessoryPriceWoTax;
+            return this.productHardwareMargin * 100;
+        }
     }
 
 
@@ -498,8 +588,14 @@ public class ProductPriceHolder {
 
     public double getProductHandleAndKnobMargin()
     {
-        this.productHandleAndKnobMargin = this.productHandleAndKnobProfit / this.productHandleAndKnobPriceWoTax;
-        return this.productHandleAndKnobMargin*100;
+        if (this.productHandleAndKnobProfit == 0 || this.productHandleAndKnobPriceWoTax == 0)
+        {
+            return this.productHandleAndKnobMargin;
+        }
+        else {
+            this.productHandleAndKnobMargin = this.productHandleAndKnobProfit / this.productHandleAndKnobPriceWoTax;
+            return this.productHandleAndKnobMargin * 100;
+        }
     }
 
     public double getProductHingePrice()
@@ -531,8 +627,14 @@ public class ProductPriceHolder {
 
     public double getProductHingeMargin()
     {
-        this.productHingeMargin = this.productHingeProfit / this.productHingePriceWoTax;
-        return this.productHingeMargin*100;
+        if (this.productHingeProfit == 0 || this.productHingePriceWoTax == 0)
+        {
+            return this.productHingeMargin;
+        }
+        else {
+            this.productHingeMargin = this.productHingeProfit / this.productHingePriceWoTax;
+            return this.productHingeMargin * 100;
+        }
     }
 
     public double getProductLabourPrice()
@@ -563,8 +665,15 @@ public class ProductPriceHolder {
 
     public double getProductLabourMargin()
     {
-        this.productLabourMargin = this.productLabourProfit / this.productLabourPriceWoTax;
-        return this.productLabourMargin*100;
+        if (this.productLabourProfit == 0 || this.productLabourPriceWoTax == 0)
+        {
+            return this.productLabourMargin;
+        }
+        else {
+
+            this.productLabourMargin = this.productLabourProfit / this.productLabourPriceWoTax;
+            return this.productLabourMargin * 100;
+        }
     }
 
     public double getProductAreainSqft()
@@ -638,5 +747,77 @@ public class ProductPriceHolder {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "ProductPriceHolder{" +
+                "modulePriceHolders=" + modulePriceHolders +
+                ", productLineItem=" + productLineItem +
+                ", proposalVersion=" + proposalVersion +
+                ", errors=" + errors +
+                ", productSourceCost=" + productSourceCost +
+                ", productPriceWoTax=" + productPriceWoTax +
+                ", productPrice=" + productPrice +
+                ", productPriceAfterDiscount=" + productPriceAfterDiscount +
+                ", productProfit=" + productProfit +
+                ", productMargin=" + productMargin +
+                ", productHingeSourceCost=" + productHingeSourceCost +
+                ", productHingePriceWoTax=" + productHingePriceWoTax +
+                ", productHingePriceAfterDiscount=" + productHingePriceAfterDiscount +
+                ", productHingePrice=" + productHingePrice +
+                ", productHingeProfit=" + productHingeProfit +
+                ", productHingeMargin=" + productHingeMargin +
+                ", productHandleAndKnobSourceCost=" + productHandleAndKnobSourceCost +
+                ", productHandleAndKnobPriceWoTax=" + productHandleAndKnobPriceWoTax +
+                ", productHandleAndKnobPrice=" + productHandleAndKnobPrice +
+                ", productHandleAndKnobPriceAfterDiscount=" + productHandleAndKnobPriceAfterDiscount +
+                ", productHandleAndKnobProfit=" + productHandleAndKnobProfit +
+                ", productHandleAndKnobMargin=" + productHandleAndKnobMargin +
+                ", productAccessorySourceCost=" + productAccessorySourceCost +
+                ", productAccessoryPriceWoTax=" + productAccessoryPriceWoTax +
+                ", productAccessoryProfit=" + productAccessoryProfit +
+                ", productAccessoryMargin=" + productAccessoryMargin +
+                ", productAccessoryPrice=" + productAccessoryPrice +
+                ", productAccessoryPriceAfterDiscount=" + productAccessoryPriceAfterDiscount +
+                ", productHardwareSourceCost=" + productHardwareSourceCost +
+                ", productHardwarePriceWoTax=" + productHardwarePriceWoTax +
+                ", hardwarePriceAfterDiscount=" + hardwarePriceAfterDiscount +
+                ", productHardwarePrice=" + productHardwarePrice +
+                ", productHardwareProfit=" + productHardwareProfit +
+                ", productHardwareMargin=" + productHardwareMargin +
+                ", productLabourSourceCost=" + productLabourSourceCost +
+                ", productLabourPriceWoTax=" + productLabourPriceWoTax +
+                ", productLabourPrice=" + productLabourPrice +
+                ", productLabourPriceAfterDiscount=" + productLabourPriceAfterDiscount +
+                ", productLabourProfit=" + productLabourProfit +
+                ", productLabourMargin=" + productLabourMargin +
+                ", productShutterSourceCost=" + productShutterSourceCost +
+                ", productShutterCostWoTax=" + productShutterCostWoTax +
+                ", productShutterPrice=" + productShutterPrice +
+                ", productCarcassSourceCost=" + productCarcassSourceCost +
+                ", productCarcassPriceWoTax=" + productCarcassPriceWoTax +
+                ", productCarcassPrice=" + productCarcassPrice +
+                ", woodWorkPrice=" + woodWorkPrice +
+                ", woodWorkPriceAfterDiscount=" + woodWorkPriceAfterDiscount +
+                ", woodWorkPriceWoTax=" + woodWorkPriceWoTax +
+                ", woodWorkSourceCost=" + woodWorkSourceCost +
+                ", woodWorkProfit=" + woodWorkProfit +
+                ", woodWorkMargin=" + woodWorkMargin +
+                ", productLConnectorSourceCost=" + productLConnectorSourceCost +
+                ", productLConnectorPriceWoTax=" + productLConnectorPriceWoTax +
+                ", productLConnectorPriceAfterDiscount=" + productLConnectorPriceAfterDiscount +
+                ", productLConnectorPrice=" + productLConnectorPrice +
+                ", productLConnectorProfit=" + productLConnectorProfit +
+                ", productLConnectorMargin=" + productLConnectorMargin +
+                ", productAreainSqft=" + productAreainSqft +
+                ", stdModuleCount=" + stdModuleCount +
+                ", nStdModuleCount=" + nStdModuleCount +
+                ", hikeModuleCount=" + hikeModuleCount +
+                ", stdModulePrice=" + stdModulePrice +
+                ", nStdModulePrice=" + nStdModulePrice +
+                ", hikeModulePrice=" + hikeModulePrice +
+                ", priceDate=" + priceDate +
+                ", city='" + city + '\'' +
+                ", discountPercentage=" + discountPercentage +
+                '}';
+    }
 }

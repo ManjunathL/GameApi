@@ -48,7 +48,11 @@ public class ProductAddon extends JsonObject
 
     public double getQuantity()
     {
-        return this.getDouble(QUANTITY);
+        return (isValueNull(QUANTITY)?0.0:this.getDouble(QUANTITY));
+    }
+    private boolean isValueNull(String key){
+        if(this.getValue(key) == null ) return true;
+        return  false;
     }
 
     public double getRate()
@@ -187,5 +191,6 @@ public class ProductAddon extends JsonObject
     public String getUpdatedBy() {
         return this.getString(UPDATED_BY);
     }
+
 }
 

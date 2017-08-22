@@ -125,6 +125,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 totalProductCost += totalCost;
                             }
 
+                            LOG.info("priceDate[0] = "+priceDate[0]);
                             for (ProductAddon productAddon : productLineItem.getAddons()) {
                                 PriceMaster addonRate = RateCardService.getInstance().getAddonRate(productAddon.getCode(), priceDate[0], proposalHeader.getPcity());
                                 productAddon.setRate(addonRate.getPrice());

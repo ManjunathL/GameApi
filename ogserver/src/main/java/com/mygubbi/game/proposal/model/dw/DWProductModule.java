@@ -22,6 +22,8 @@ public class DWProductModule extends JsonObject {
     public static final String PRICEDATE="priceDate";
     public static final String BUSINESSDATE="businessDate";
     public static final String REGION="region";
+    public static final String CRMID="crmId";
+    public static final String QUOTENO="quoteNo";
     public static final String SPACETYPE="spaceType";
     public static final String ROOM="room";
     public static final String PRID="prId";
@@ -104,6 +106,8 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setPriceDate(proposalHeader.getPriceDate());
         dwProductModule.setBusinessDate(proposalVersion.getDate());
         dwProductModule.setRegion(proposalHeader.getProjectCity());
+        dwProductModule.setCrmId(proposalHeader.getCrmId());
+        dwProductModule.setQuoteNo(proposalHeader.getQuoteNum());
         dwProductModule.setSpaceType(productLineItem.getSpaceType());
         dwProductModule.setRoom(productLineItem.getRoomCode());
         dwProductModule.setPrId(productLineItem.getId());
@@ -182,6 +186,26 @@ public class DWProductModule extends JsonObject {
     public DWProductModule setID(int id)
     {
         put(ID,id);
+        return this;
+    }
+
+    public String getCrmid() {
+        return this.getString(CRMID);
+    }
+
+    public DWProductModule setCrmId(String crm)
+    {
+        put(CRMID,crm);
+        return this;
+    }
+
+    public String getQuotenoo() {
+        return this.getString(QUOTENO);
+    }
+
+    public DWProductModule setQuoteNo(String quote)
+    {
+        put(QUOTENO,quote);
         return this;
     }
 

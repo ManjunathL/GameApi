@@ -145,6 +145,8 @@ public class ProposalHandler extends AbstractRouteHandler
         }else {
             VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, id1,
                     (AsyncResult<Message<Integer>> result) -> {
+
+                LOG.info("shilpa result.result().body() = "+result.result().body());
                         JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                         LOG.info("2222. Quote Res :: " + response);
                         sendJsonResponse(context, response.toString());
@@ -161,7 +163,7 @@ public class ProposalHandler extends AbstractRouteHandler
         String sowVersion = null ;
         if(verFromProposal.contains("0.")){
             sowVersion = "1.0";
-        }else if(verFromProposal.contains("1.")){
+        }else if(verFromProposal.contains("1.") || verFromProposal.contains("2.")){
             sowVersion = "2.0";
         }else{
             LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);

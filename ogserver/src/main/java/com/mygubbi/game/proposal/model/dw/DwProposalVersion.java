@@ -23,6 +23,8 @@ public class DwProposalVersion extends JsonObject {
     private static final String VERSION = "version";
     private static final String PROPOSAL_TITLE = "proposalTitle";
     private static final String REGION = "region";
+    public static final String CRMID="crmId";
+    public static final String QUOTENO="quoteNo";
     private static final String PROJECT_NAME = "projectName";
     private static final String DESIGNER_NAME = "designerName";
     private static final String SALES_NAME = "salesName";
@@ -121,7 +123,25 @@ public class DwProposalVersion extends JsonObject {
         super(data.getMap());
     }
 
+    public String getCrmid() {
+        return this.getString(CRMID);
+    }
 
+    public DwProposalVersion setCrmId(String crm)
+    {
+        put(CRMID,crm);
+        return this;
+    }
+
+    public String getQuotenoo() {
+        return this.getString(QUOTENO);
+    }
+
+    public DwProposalVersion setQuoteNo(String quote)
+    {
+        put(QUOTENO,quote);
+        return this;
+    }
     public double getId() {
         return this.getDouble(ID);
     }
@@ -982,6 +1002,8 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setVersion(Double.parseDouble(proposalVersion.getVersion()));
         dwProposalVersion.setProposalTitle(proposalHeader.getQuotationFor());
         dwProposalVersion.setRegion(proposalHeader.getProjectCity());
+        dwProposalVersion.setCrmId(proposalHeader.getCrmId());
+        dwProposalVersion.setQuoteNo(proposalHeader.getQuoteNum());
         dwProposalVersion.setProjectName(proposalHeader.getProjectName());
         dwProposalVersion.setDesignerName(proposalHeader.getDesignerName());
         dwProposalVersion.setSalesName(proposalHeader.getSalespersonName());

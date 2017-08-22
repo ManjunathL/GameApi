@@ -542,8 +542,13 @@ public class VersionPriceHolder {
     }
 
     public double getMargin() {
-        this.vrMargin = this.vrProfit / this.vrPriceAfterTax;
-        return this.vrMargin*100;
+        if (this.vrProfit == 0 || this.vrPriceAfterTax ==0)
+        {
+            return this.vrMargin;
+        }else {
+            this.vrMargin = this.vrProfit / this.vrPriceAfterTax;
+            return this.vrMargin * 100;
+        }
     }
 
     public double getProductPrice() {

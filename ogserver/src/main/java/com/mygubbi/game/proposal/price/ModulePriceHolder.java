@@ -943,12 +943,49 @@ public class ModulePriceHolder
             this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
             this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
 
-            this.carcassMargin = (this.carcassProfit / this.carcassCostWoTax)*100;
-            this.shutterMargin = (this.shutterProfit / this.shutterCostWoTax)*100;
+            if (this.carcassProfit == 0 || this.carcassCostWoTax == 0)
+            {
+                this.carcassMargin = 0;
+            }
+            else {
+
+                this.carcassMargin = (this.carcassProfit / this.carcassCostWoTax) * 100;
+            }
+            if (this.shutterProfit == 0 || this.shutterCostWoTax == 0)
+            {
+                this.shutterMargin = 0;
+            }
+            else {
+
+                this.shutterMargin = (this.shutterProfit / this.shutterCostWoTax) * 100;
+            }
             if (!(this.labourProfit == 0 || this.labourCostWoTax == 0))this.labourMargin = (this.labourProfit / this.labourCostWoTax)*100;
-            this.hardwareMargin = (this.hardwareProfit / this.hardwareCostWoTax)*100;
-            this.handleandKnobMargin = (this.handleandKnobProfit / this.handleandKnobCostWoTax)*100;
-            this.hingeMargin = (this.hingeProfit / this.hingeCostWoTax)*100;
+            if (this.hardwareProfit == 0 || this.hardwareCostWoTax == 0)
+            {
+                this.hardwareMargin = 0;
+            }
+            else {
+
+                this.hardwareMargin = (this.hardwareProfit / this.hardwareCostWoTax) * 100;
+            }
+
+            if (this.handleandKnobProfit == 0 || this.handleandKnobCostWoTax == 0)
+            {
+                this.handleandKnobMargin = 0;
+            }
+            else
+            {
+                this.handleandKnobMargin = (this.handleandKnobProfit / this.handleandKnobCostWoTax)*100;
+            }
+
+            if (this.hingeProfit == 0 || this.hingeCostWoTax == 0)
+            {
+                this.hingeMargin = 0;
+            }
+            else
+            {
+                this.hingeMargin = (this.hingeProfit / this.hingeCostWoTax)*100;
+            }
 
 
 
@@ -1250,5 +1287,92 @@ public class ModulePriceHolder
 
     public int getNoOfAccPacks() {
         return this.noOfAccPacks;
+    }
+
+    @Override
+    public String toString() {
+        return "ModulePriceHolder{" +
+                "productModule=" + productModule +
+                ", productLineItem=" + productLineItem +
+                ", mgModule=" + mgModule +
+                ", moduleComponents=" + moduleComponents +
+                ", panelComponents=" + panelComponents +
+                ", accessoryComponents=" + accessoryComponents +
+                ", hardwareComponents=" + hardwareComponents +
+                ", shutterFinish=" + shutterFinish +
+                ", carcassFinish=" + carcassFinish +
+                ", carcassMaterialRateCard=" + carcassMaterialRateCard +
+                ", carcassFinishRateCard=" + carcassFinishRateCard +
+                ", shutterFinishRateCard=" + shutterFinishRateCard +
+                ", stdManufacturingCost=" + stdManufacturingCost +
+                ", nStdManufacturingCost=" + nStdManufacturingCost +
+                ", carcassDoubleExposedRateCard=" + carcassDoubleExposedRateCard +
+                ", shutterDoubleExposedRateCard=" + shutterDoubleExposedRateCard +
+                ", loadingFactorCard=" + loadingFactorCard +
+                ", labourRateCard=" + labourRateCard +
+                ", labourManufacturingRateCard=" + labourManufacturingRateCard +
+                ", nonStandardloadingFactorCard=" + nonStandardloadingFactorCard +
+                ", loadingFactorBasedOnProduct=" + loadingFactorBasedOnProduct +
+                ", stdLoadingSourceFactorBasedOnProduct=" + stdLoadingSourceFactorBasedOnProduct +
+                ", nStdLoadingSourceFactorBasedOnProduct=" + nStdLoadingSourceFactorBasedOnProduct +
+                ", prodWoTaxFactor=" + prodWoTaxFactor +
+                ", lWidthRate=" + lWidthRate +
+                ", cWidthRate=" + cWidthRate +
+                ", wWidthRate=" + wWidthRate +
+                ", bracketRate=" + bracketRate +
+                ", cConnectorRate=" + cConnectorRate +
+                ", lConnectorRate=" + lConnectorRate +
+                ", gProfileRate=" + gProfileRate +
+                ", jProfileRate=" + jProfileRate +
+                ", finishValue=" + finishValue +
+                ", shutterCost=" + shutterCost +
+                ", shutterCostWoTax=" + shutterCostWoTax +
+                ", shutterSourceCost=" + shutterSourceCost +
+                ", shutterProfit=" + shutterProfit +
+                ", shutterMargin=" + shutterMargin +
+                ", carcassCost=" + carcassCost +
+                ", carcassCostWoTax=" + carcassCostWoTax +
+                ", carcassSourceCost=" + carcassSourceCost +
+                ", carcassProfit=" + carcassProfit +
+                ", carcassMargin=" + carcassMargin +
+                ", accessoryCost=" + accessoryCost +
+                ", accessoryCostWoTax=" + accessoryCostWoTax +
+                ", accessorySourceCost=" + accessorySourceCost +
+                ", accessoryProfit=" + accessoryProfit +
+                ", accessoryMargin=" + accessoryMargin +
+                ", handleandKnobCost=" + handleandKnobCost +
+                ", handleandKnobCostWoTax=" + handleandKnobCostWoTax +
+                ", handleandKnobSourceCost=" + handleandKnobSourceCost +
+                ", handleandKnobProfit=" + handleandKnobProfit +
+                ", handleandKnobMargin=" + handleandKnobMargin +
+                ", hingeCost=" + hingeCost +
+                ", hingeCostWoTax=" + hingeCostWoTax +
+                ", hingeSourceCost=" + hingeSourceCost +
+                ", hingeProfit=" + hingeProfit +
+                ", hingeMargin=" + hingeMargin +
+                ", hardwareCost=" + hardwareCost +
+                ", hardwareCostWoTax=" + hardwareCostWoTax +
+                ", hardwareSourceCost=" + hardwareSourceCost +
+                ", hardwareProfit=" + hardwareProfit +
+                ", hardwareMargin=" + hardwareMargin +
+                ", labourCost=" + labourCost +
+                ", labourCostWoTax=" + labourCostWoTax +
+                ", labourSourceCost=" + labourSourceCost +
+                ", labourProfit=" + labourProfit +
+                ", labourMargin=" + labourMargin +
+                ", totalCost=" + totalCost +
+                ", totalCostWoTax=" + totalCostWoTax +
+                ", totalSourceCost=" + totalSourceCost +
+                ", totalProfit=" + totalProfit +
+                ", totalMargin=" + totalMargin +
+                ", woodworkCost=" + woodworkCost +
+                ", moduleArea=" + moduleArea +
+                ", noOfAccPacks=" + noOfAccPacks +
+                ", moduleCode='" + moduleCode + '\'' +
+                ", moduleType='" + moduleType + '\'' +
+                ", priceDate=" + priceDate +
+                ", city='" + city + '\'' +
+                ", errors=" + errors +
+                '}';
     }
 }

@@ -1,10 +1,13 @@
 package com.mygubbi.game.proposal.model.dw;
 
 import com.mygubbi.game.proposal.ProductAddon;
+import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.price.AddonPriceHolder;
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -14,7 +17,7 @@ import java.text.SimpleDateFormat;
  */
 public class DWProposalAddon extends JsonObject {
 
-
+    private final static Logger LOG = LogManager.getLogger(DWProposalAddon.class);
     public static final String ID="id";
     public static final String PROPOSALID="proposalId";
     public static final String VERSION="version";
@@ -22,6 +25,8 @@ public class DWProposalAddon extends JsonObject {
     public static final String PRICEDATE="priceDate";
     public static final String BUSINESSDATE="businessDate";
     public static final String REGION="region";
+    public static final String CRMID="crmId";
+    public static final String QUOTENO="quoteNo";
     public static final String CATEGORY="category";
     public static final String SUBCATEGORY="subCategory";
     public static final String SPACETYPE="spaceType";
@@ -58,6 +63,8 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setPriceDate(proposalHeader.getPriceDate());
         dwProposalAddon.setBusinessDate(proposalVersion.getDate());
         dwProposalAddon.setRegion(proposalHeader.getProjectCity());
+        dwProposalAddon.setCrmId(proposalHeader.getCrmId());
+        dwProposalAddon.setQuoteNo(proposalHeader.getQuoteNum());
         dwProposalAddon.setSpaceType(productAddon.getSpaceType());
         dwProposalAddon.setRoom(productAddon.getRoomCode());
         dwProposalAddon.setAddonId(productAddon.getId());
@@ -83,7 +90,25 @@ public class DWProposalAddon extends JsonObject {
         return dwProposalAddon;
     }
 
+    public String getCrmid() {
+        return this.getString(CRMID);
+    }
 
+    public DWProposalAddon setCrmId(String crm)
+    {
+        put(CRMID,crm);
+        return this;
+    }
+
+    public String getQuotenoo() {
+        return this.getString(QUOTENO);
+    }
+
+    public DWProposalAddon setQuoteNo(String quote)
+    {
+        put(QUOTENO,quote);
+        return this;
+    }
     public int getID() {
         return this.getInteger(ID);
     }

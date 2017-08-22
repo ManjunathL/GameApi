@@ -1,10 +1,14 @@
 package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.DateUtil;
+import com.mygubbi.report.ReportTableFillerSevice;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +16,7 @@ import java.util.List;
  */
 public class ProductLineItem extends JsonObject
 {
+    private final static Logger LOG = LogManager.getLogger(ProductLineItem.class);
     public static final String CUSTOMIZED_PRODUCT = "CUSTOMIZED";
     public static final String CATALOGUE_PRODUCT = "CATALOGUE";
 
@@ -192,9 +197,21 @@ public class ProductLineItem extends JsonObject
     }
 
       public int getNoOfLengths() {
-        return this.getInteger(NO_OF_LENGTHS);
+        /*LOG.info("VALUE == "+this.getValue(NO_OF_LENGTHS)+" - "+isValueNull(NO_OF_LENGTHS));
+        return (isValueNull(NO_OF_LENGTHS) ?  0: Integer.parseInt(NO_OF_LENGTHS));*/
+       if(!isValueNull(NO_OF_LENGTHS)) {
+           Double nooflengths = Double.parseDouble(this.getString(NO_OF_LENGTHS));
+
+           if (nooflengths == null || nooflengths.equals("") || nooflengths == 0.0) return 0;
+           else return nooflengths.intValue();
+       }else
+           return 0;
     }
 
+    private boolean isValueNull(String key){
+            if(this.getValue(key) == null || this.getValue(key) == "") return true;
+            return  false;
+    }
     public String getCreatedBy() {
         return this.getString(CREATED_BY);
     }
@@ -301,7 +318,9 @@ public class ProductLineItem extends JsonObject
 
     public List<ProductModule> getModules()
     {
-        return this.getJsonArray(MODULES).getList();
+        if(this.containsKey(MODULES)) {
+            return this.getJsonArray(MODULES).getList();
+        }return new ArrayList<>();
     }
 
     public Double getRate()

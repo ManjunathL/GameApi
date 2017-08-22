@@ -116,6 +116,7 @@ public class PriceMaster {
     }
 
     public boolean isValidForDate(Date inputDate) {
+        LOG.info("inputDate,fromDate :: "+inputDate+", "+this.getFromDate());
         int before = inputDate.compareTo(this.getFromDate());
         int after = inputDate.compareTo(this.getToDate());
         LOG.debug("Input date:" + inputDate + " from date: " + this.getFromDate() + " to date:" + this.getToDate()

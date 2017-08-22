@@ -1,16 +1,19 @@
 package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.game.proposal.ProductAddon;
+import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.RateCard;
 import io.vertx.core.json.JsonArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by User on 09-08-2017.
  */
 public class AddonPriceHolder {
-
+    private final static Logger LOG = LogManager.getLogger(AddonPriceHolder.class);
     private ProductAddon productAddon;
     private java.sql.Date priceDate;
     private String city;
@@ -25,14 +28,18 @@ public class AddonPriceHolder {
 
     private JsonArray errors = null;
 
-    PriceMaster addonFactor = RateCardService.getInstance().getFactorRate(RateCard.ADDON_WO_TAX_FACTOR, this.priceDate, this.city);
+    PriceMaster addonFactor;
     private double profit;
     private double margin;
 
     public AddonPriceHolder(ProductAddon productAddon, ProposalHeader proposalHeader) {
+        LOG.info("In AddonPriceHolder "+productAddon+", :"+proposalHeader);
         this.productAddon = productAddon;
+        LOG.info("AddonPriceHolder productAddon = "+productAddon);
+        LOG.info("AddonPriceHolder priceDate = "+proposalHeader.getPriceDate());
         this.priceDate = proposalHeader.getPriceDate();
         this.city = proposalHeader.getProjectCity();
+        this.addonFactor = RateCardService.getInstance().getFactorRate(RateCard.ADDON_WO_TAX_FACTOR, this.priceDate, this.city);
     }
 
     public void prepare()
@@ -91,5 +98,25 @@ public class AddonPriceHolder {
     public ProductAddon getProductAddon()
     {
         return this.productAddon;
+    }
+
+    @Override
+    public String toString() {
+        return "AddonPriceHolder{" +
+                "productAddon=" + productAddon +
+                ", priceDate=" + priceDate +
+                ", city='" + city + '\'' +
+                ", unitPrice=" + unitPrice +
+                ", unitSourceCost=" + unitSourceCost +
+                ", price=" + price +
+                ", priceWoTax=" + priceWoTax +
+                ", sourceCost=" + sourceCost +
+                ", addonProfit=" + addonProfit +
+                ", addonMargin=" + addonMargin +
+                ", errors=" + errors +
+                ", addonFactor=" + addonFactor +
+                ", profit=" + profit +
+                ", margin=" + margin +
+                '}';
     }
 }
