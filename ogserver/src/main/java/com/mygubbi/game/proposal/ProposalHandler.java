@@ -203,8 +203,13 @@ public class ProposalHandler extends AbstractRouteHandler
                                     sendJsonResponse(context, response.toString());
                                 }
 
-                                    if(row.getString("L1S01").equalsIgnoreCase("Yes"))
-                                    yesSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
+                                    if(row.getString("L1S01").equalsIgnoreCase("Yes")) {
+                                        if(isRowContainsMygubbiScope(row)) {
+                                            yesSpaceRoomListFromSow.add(row.getString("spaceType") + COLON_DELIMITER + row.getString("roomcode").toLowerCase());
+                                        }else{
+                                            LOG.info("Yes, but has client or NA as Scope");
+                                        }
+                                    }
                                 if(row.getString("L1S01").equalsIgnoreCase("No"))
                                     noSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
                                 spaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
@@ -221,6 +226,23 @@ public class ProposalHandler extends AbstractRouteHandler
 
                     }
                 });
+
+    }
+    private boolean isRowContainsMygubbiScope(JsonObject rowObj){
+        List<String> level2ServiceList = new ArrayList<>();
+        level2ServiceList.add(rowObj.getString("L2S01"));
+        level2ServiceList.add(rowObj.getString("L2S02"));
+        level2ServiceList.add(rowObj.getString("L2S03"));
+        level2ServiceList.add(rowObj.getString("L2S04"));
+        level2ServiceList.add(rowObj.getString("L2S05"));
+        level2ServiceList.add(rowObj.getString("L2S06"));
+
+        if(level2ServiceList.contains(new String("Mygubbi"))){
+            LOG.info("Mygubbi Scope");
+            return true;
+        }
+        LOG.info("Client/NA SCope");
+        return  false;
 
     }
 
@@ -379,13 +401,13 @@ public class ProposalHandler extends AbstractRouteHandler
                         addOnFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase()
                             +COLON_DELIMITER+row.getString("L1S01Code"));});
                     sowList.forEach(sow-> {
-                        if(sow.getString("L1S01").equalsIgnoreCase("Yes") || sow.getString("L1S01").equalsIgnoreCase("No")) {
+                        if((sow.getString("L1S01").equalsIgnoreCase("Yes") && isRowContainsMygubbiScope(sow) )|| sow.getString("L1S01").equalsIgnoreCase("No")) {
                             addOnCodeFromSow.add(sow.getString("spaceType") + COLON_DELIMITER + sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
                         }
                         if(sow.getString("L1S01").equalsIgnoreCase("No"))
                             addOnCodeFromSowwithNo.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
 
-                        if(sow.getString("L1S01").equalsIgnoreCase("Yes"))
+                        if(sow.getString("L1S01").equalsIgnoreCase("Yes") && isRowContainsMygubbiScope(sow))
                             addOnCodeFromSowwithYes.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
                     });
 
@@ -755,8 +777,19 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void checkValidRowsInDB(RoutingContext routingContext){
         JsonObject params = new JsonObject();
+        LOG.info("routingContext.getBodyAsJson() == "+routingContext.getBodyAsJson().encodePrettily());
         params.put("proposalId",routingContext.getBodyAsJson().getInteger("proposalId"));
-        params.put("sowversion","1.0");
+
+        String verFromProposal =routingContext.getBodyAsJson().getString("fromVersion");
+        String sowVersion = null ;
+        if(verFromProposal.contains("0.") || verFromProposal.equals("1.0")){
+            sowVersion = "1.0";
+        }else if(verFromProposal.contains("1.") || verFromProposal.contains("2.")){
+            sowVersion = "2.0";
+        }else{
+            LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
+        }
+        params.put("sowversion",sowVersion);
 
         vertx.eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance()
                         .store(new QueryData("proposal.sow.select.proposalversion.forPdf",
@@ -773,7 +806,7 @@ public class ProposalHandler extends AbstractRouteHandler
 //                        createSowOutputInPdf(routingContext,res);
 
                     }
-        });
+                });
 
     }
     private void createSowOutputInPdf(RoutingContext context, JsonObject quoteReponse,Boolean IsBookingFormFlag){

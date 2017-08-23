@@ -282,20 +282,23 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                 }
 
                                 //check any of the level 2 services selected is mygubbi
-                                boolean isGubbi = false;
+                                boolean isGubbiOrClient = false;
                                 LOG.info("services_value.size() = "+services_value.size());
                                 for (int index = 0; index < services_value.size(); index++) {
                                     LOG.info("In services_value[index] = "+services_value.get(index)+", "+service_Combo_val.get(0));
                                     if ((services_value.get(index).equalsIgnoreCase(service_Combo_val.get(0)))&&
                                             (services_value.get(0).equalsIgnoreCase("Yes"))) {
-                                        isGubbi = true;
+                                        isGubbiOrClient = true;
+                                    }else if((services_value.get(index).equalsIgnoreCase(service_Combo_val.get(1)))&&
+                                            (services_value.get(0).equalsIgnoreCase("Yes"))){
+                                        isGubbiOrClient = true;
                                     }
                                 }
-                                LOG.info("isGubbi - "+isGubbi);
-                                if (!isGubbi && (services_value.get(0).equalsIgnoreCase("Yes"))) {
+                                LOG.info("isGubbiOrClient - "+isGubbiOrClient);
+                                if (!isGubbiOrClient && (services_value.get(0).equalsIgnoreCase("Yes"))) {
                                     JsonObject res = new JsonObject();
                                     res.put("status", "Failure");
-                                    res.put("comments", "Atleast one of the level 2 questions should have Mygubbi as the scope for the chosen level 1 question - " + xssfRow.getCell(2).getStringCellValue());
+                                    res.put("comments", "Atleast one of the level 2 questions should have Mygubbi/Client as the scope for the chosen level 1 question - " + xssfRow.getCell(2).getStringCellValue());
                                     LOG.info(res.toString());
                                     sendJsonResponse(context, res.toString());
                                     return;
