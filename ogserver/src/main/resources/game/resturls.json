@@ -1009,6 +1009,22 @@
       "params":["fromDate","toDate"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/discount/discountAmount",
+      "source": "db",
+      "query":"proposal.discount.discountAmount",
+      "params":["fromDate","toDate"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/versiondiscount",
+      "source": "db",
+      "query":"proposal.versiondiscount",
+      "params":["discountPercentage","proposalId","version"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }

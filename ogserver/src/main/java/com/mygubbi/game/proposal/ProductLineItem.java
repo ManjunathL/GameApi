@@ -57,10 +57,8 @@ public class ProductLineItem extends JsonObject
     public static final String SHUTTER_DESIGN_CODE="shutterDesignCode";
     public static final String NO_OF_LENGTHS="noOfLengths";
     public static final String FROM_PRODUCT="fromProduct";
-
-
     public static final String BASE_UNIT_TYPE = "Base unit";
-
+    public static final String LCONNECTOR_PRICE="lConnectorPrice";
     public ProductLineItem()
     {
 
@@ -211,8 +209,10 @@ public class ProductLineItem extends JsonObject
         return this.getString(UPDATED_BY);
     }
 
-
-
+    public double getLconnectorPrice()
+    {
+        return this.getDouble(LCONNECTOR_PRICE);
+    }
 
     public ProductLineItem setAmount(double amount) {
         this.put(AMOUNT, amount);

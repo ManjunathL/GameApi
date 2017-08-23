@@ -1826,6 +1826,20 @@
       "table": "OfferMaster",
       "query": "select * from OfferMaster where fromDate <= ? and toDate >= ?",
       "params": ["fromDate","toDate"]
+    },
+    {
+      "id": "proposal.discount.discountAmount",
+      "type": "select",
+      "table": "price_master",
+      "query": "select * from price_master where rateId='F:DP' and fromDate <= ? and toDate >= ?",
+      "params": ["fromDate","toDate"]
+    },
+    {
+      "id": "proposal.versiondiscount",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set discountPercentage = ? where proposalId=? and version= ?",
+      "params": ["discountPercentage","proposalId","version"]
     }
   ]
 }

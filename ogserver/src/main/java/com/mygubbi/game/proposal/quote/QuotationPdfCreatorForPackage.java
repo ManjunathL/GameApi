@@ -1300,15 +1300,18 @@ public class QuotationPdfCreatorForPackage
                 }
                 else if(cname.equals("Storage Modules"))
                 {
-                    caption4="Storage Modules";
+                    //caption4="Storage Modules";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("wallpanelling"))
                 {
-                    caption4="Wall Panelling";
+                    //caption4="Wall Panelling";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("oswalls"))
                 {
-                    caption4="Open Shelves";
+                    //caption4="Open Shelves";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("Wardrobe"))
                 {
@@ -1316,43 +1319,53 @@ public class QuotationPdfCreatorForPackage
                 }
                 else if(cname.equals("sidetables"))
                 {
-                    caption4="Side Tables";
+                    //caption4="Side Tables";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("shoerack"))
                 {
-                    caption4=" Shoe Rack";
+                    //caption4=" Shoe Rack";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("Bathroom Vanity"))
                 {
-                    caption4="Bathroom Vanity";
+                    //caption4="Bathroom Vanity";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("tvunit"))
                 {
-                    caption4="TV unit";
+                    //caption4="TV unit";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("barunit") )
                 {
-                    caption4="Bar Unit";
+                    //caption4="Bar Unit";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("bookshelf"))
                 {
-                    caption4="Book Shelf";
+                    //caption4="Book Shelf";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("crunit") )
                 {
-                    caption4="Crockery Unit";
+                    //caption4="Crockery Unit";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("wallunits"))
                 {
-                    caption4="Wall Unit";
+                    //caption4="Wall Unit";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("codrawers"))
                 {
-                    caption4="Chest of Drawers";
+                    //caption4="Chest of Drawers";
+                    caption4=product.getRoom();
                 }
                 else if(cname.equals("usstorage"))
                 {
-                    caption4="Under Staircase Storage";
+                    //caption4="Under Staircase Storage";
+                    caption4=product.getRoom();
                 }
             }
             /*else
