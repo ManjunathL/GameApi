@@ -995,7 +995,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setProductUpdatedBy(productLineItem.getUpdatedBy());
         dwProposalProduct.setProductUpdatedOn(productLineItem.getUpdatedOn());
         dwProposalProduct.setProductPrice(productPriceHolder.getProductPrice());
-        dwProposalProduct.setProductPriceAfterDiscount(productPriceHolder.getPriceAfterDiscount());
+        dwProposalProduct.setProductPriceAfterDiscount(productPriceHolder.getProductPriceAfterDiscount());
         dwProposalProduct.setProductPriceAfterTax(productPriceHolder.getProductPriceWoTax());
         dwProposalProduct.setProductSourceCost(productPriceHolder.getProductSourceCost());
         dwProposalProduct.setProductProfit(productPriceHolder.getProductProfit());

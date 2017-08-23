@@ -424,16 +424,13 @@ private void initializeValues(){
 
     public double getProductSourceCost()
     {
+        this.productSourceCost = this.productSourceCost - (this.productSourceCost * this.discountPercentage);
         return this.productSourceCost;
-    }
-
-    public double getPriceAfterDiscount()
-    {
-        return productPrice;
     }
 
     public double getProductPriceWoTax()
     {
+        this.productPriceWoTax = this.productPriceWoTax - (this.productPriceWoTax * this.discountPercentage);
         return productPriceWoTax;
     }
 
@@ -452,12 +449,14 @@ private void initializeValues(){
     public double getWoodWorkPriceWoTax()
     {
         this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
+        this.woodWorkPriceWoTax = this.woodWorkPriceWoTax - (woodWorkPriceWoTax * this.discountPercentage);
         return this.woodWorkPriceWoTax;
     }
 
     public double getWoodWorkSourceCost()
     {
         this.woodWorkSourceCost = productCarcassSourceCost + productShutterSourceCost;
+        this.woodWorkSourceCost = this.woodWorkSourceCost - (woodWorkSourceCost * this.discountPercentage);
         return this.woodWorkSourceCost;
     }
 
@@ -493,11 +492,13 @@ private void initializeValues(){
 
     public double getProductHardwarePriceWoTax()
     {
+        this.productHardwarePriceWoTax = this.productHardwarePriceWoTax - (productHardwarePriceWoTax * this.discountPercentage);
         return this.productHardwarePriceWoTax;
     }
 
     public double getProductHardwareSourceCost()
     {
+        this.productHardwareSourceCost = this.productHardwareSourceCost - (productHardwareSourceCost * this.discountPercentage);
         return this.productHardwareSourceCost;
     }
 
@@ -532,11 +533,13 @@ private void initializeValues(){
 
     public double getProductAccessoryPriceWoTax()
     {
+        this.productAccessoryPriceWoTax = this.productAccessoryPriceWoTax - (productAccessoryPriceWoTax * this.discountPercentage);
         return this.productAccessoryPriceWoTax;
     }
 
     public double getProductAccessorySourceCost()
     {
+        this.productAccessorySourceCost = this.productAccessorySourceCost - (productAccessorySourceCost * this.discountPercentage);
         return this.productAccessorySourceCost;
     }
 
@@ -572,11 +575,13 @@ private void initializeValues(){
 
     public double getProductHandleAndKnobPriceWoTax()
     {
+        this.productHandleAndKnobPriceWoTax = this.productHandleAndKnobPriceWoTax - (productHandleAndKnobPriceWoTax * this.discountPercentage);
         return this.productHandleAndKnobPriceWoTax;
     }
 
     public double getProductHandleAndKnobSourceCost()
     {
+        this.productHandleAndKnobSourceCost = this.productHandleAndKnobSourceCost - (productHandleAndKnobSourceCost * this.discountPercentage);
         return this.productHandleAndKnobSourceCost;
     }
 
@@ -611,11 +616,13 @@ private void initializeValues(){
 
     public double getProductHingePriceWoTax()
     {
+        this.productHingePriceWoTax = this.productHingePriceWoTax - (productHingePriceWoTax * this.discountPercentage);
         return this.productHingePriceWoTax;
     }
 
     public double getProductHingeSourceCost()
     {
+        this.productHingeSourceCost = this.productHingeSourceCost - (productHingeSourceCost * this.discountPercentage);
         return this.productHingeSourceCost;
     }
 
@@ -649,11 +656,13 @@ private void initializeValues(){
 
     public double getProductLabourPriceWoTax()
     {
+        this.productLabourPriceWoTax = this.productLabourPriceWoTax - (productLabourPriceWoTax * this.discountPercentage);
         return this.productLabourPriceWoTax;
     }
 
     public double getProductLabourSourceCost()
     {
+        this.productLabourSourceCost = this.productLabourSourceCost - (productLabourSourceCost * this.discountPercentage);
         return this.productLabourSourceCost;
     }
 
