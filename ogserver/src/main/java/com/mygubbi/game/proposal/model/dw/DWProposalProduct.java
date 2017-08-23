@@ -968,7 +968,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setBusinessDate(proposalVersion.getDate());
         dwProposalProduct.setRegion(proposalHeader.getProjectCity());
         dwProposalProduct.setCrmId(proposalHeader.getCrmId());
-        dwProposalProduct.setQuoteNo(proposalHeader.getQuoteNum());
+        dwProposalProduct.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalProduct.setCategory("Modular Products");
         dwProposalProduct.setSubCategory(productLineItem.getProductCategory());
         dwProposalProduct.setProductId(productLineItem.getId());

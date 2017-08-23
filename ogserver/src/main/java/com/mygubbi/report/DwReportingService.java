@@ -70,6 +70,8 @@ public class DwReportingService extends AbstractVerticle {
             ProposalVersion proposalVersion = (ProposalVersion) LocalCache.getInstance().remove(message.body());
             this.proposalId = proposalVersion.getProposalId();
             this.version = proposalVersion.getVersion();
+
+
             this.getProposalData(message, proposalVersion);
         }).completionHandler(res -> {
             LOG.info("Proposal version price update service started." + res.succeeded());

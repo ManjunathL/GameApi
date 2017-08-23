@@ -25,6 +25,9 @@ public class DwProposalVersion extends JsonObject {
     private static final String REGION = "region";
     public static final String CRMID="crmId";
     public static final String QUOTENO="quoteNo";
+    public static final String STATUS="status";
+    public static final String DISCOUNT_AMOUNT="discountAmount";
+    public static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
     private static final String PROJECT_NAME = "projectName";
     private static final String DESIGNER_NAME = "designerName";
     private static final String SALES_NAME = "salesName";
@@ -142,6 +145,33 @@ public class DwProposalVersion extends JsonObject {
         put(QUOTENO,quote);
         return this;
     }
+    public String getStatus() {
+        return this.getString(STATUS);
+    }
+
+    public DwProposalVersion setStatus(String status)
+    {
+        put(STATUS,status);
+        return this;
+    }
+    public double getDiscountAmount() {
+        return this.getDouble(DISCOUNT_AMOUNT);
+    }
+
+    public DwProposalVersion setDiscountAmount(double price) {
+        this.put(DISCOUNT_AMOUNT, price);
+        return this;
+    }
+    public double getDiscountAmountPerc() {
+        return this.getDouble(DISCOUNT_AMOUNT_PERC);
+    }
+
+    public DwProposalVersion setDiscountAmountPerc(double price) {
+        this.put(DISCOUNT_AMOUNT_PERC, price);
+        return this;
+    }
+
+
     public double getId() {
         return this.getDouble(ID);
     }
@@ -1003,7 +1033,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setProposalTitle(proposalHeader.getQuotationFor());
         dwProposalVersion.setRegion(proposalHeader.getProjectCity());
         dwProposalVersion.setCrmId(proposalHeader.getCrmId());
-        dwProposalVersion.setQuoteNo(proposalHeader.getQuoteNum());
+        dwProposalVersion.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalVersion.setProjectName(proposalHeader.getProjectName());
         dwProposalVersion.setDesignerName(proposalHeader.getDesignerName());
         dwProposalVersion.setSalesName(proposalHeader.getSalespersonName());
@@ -1016,6 +1046,15 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setVersionCreatedOn(proposalVersion.getDate());
         dwProposalVersion.setVersionUpdatedBy(proposalVersion.getUpdatedBy());
         dwProposalVersion.setVersionUpdatedOn(proposalVersion.getUpdatedOn());
+
+        LOG.info("proposalVersion.getDiscountAmount() = "+proposalVersion.getDiscountAmount());
+        LOG.info("proposalVersion.getDiscountPercentage() = "+proposalVersion.getDiscountPercentage());
+        LOG.info("proposalVersion.getProposalStatus() = "+proposalVersion.getProposalStatus());
+
+        dwProposalVersion.setDiscountAmount(proposalVersion.getDiscountAmount());
+        dwProposalVersion.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());
+        dwProposalVersion.setStatus(proposalVersion.getProposalStatus());
+
         dwProposalVersion.setStdModuleCount(versionPriceHolder.getStdModuleCount());
         dwProposalVersion.setStdModulePrice(versionPriceHolder.getStdModulePrice());
         dwProposalVersion.setnStdModuleCount(versionPriceHolder.getNStdModuleCount());
