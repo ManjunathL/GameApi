@@ -18,6 +18,7 @@ public class ProposalVersion extends JsonObject{
     public static final String FINAL_AMOUNT = "finalAmount";
     public static final String DISCOUNT_AMOUNT = "discountAmount";
     public static final String DISCOUNT_PERCENTAGE = "discountPercentage";
+    public static final String STATUS = "status";
     public static final String CREATED_BY= "createdBy";
     public static final String UPDATED_ON= "updatedOn";
     public static final String UPDATED_BY= "updatedBy";
@@ -47,6 +48,14 @@ public class ProposalVersion extends JsonObject{
         return this;
     }
 
+    public String getProposalStatus() {
+        return this.getString(STATUS);
+    }
+
+    public ProposalVersion setProposalStatus(String status) {
+        this.put(STATUS, status);
+        return this;
+    }
     public String getVersion() {
         return this.getString(VERSION);
     }

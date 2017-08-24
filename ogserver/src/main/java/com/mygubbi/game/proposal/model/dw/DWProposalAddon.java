@@ -64,7 +64,7 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setBusinessDate(proposalVersion.getDate());
         dwProposalAddon.setRegion(proposalHeader.getProjectCity());
         dwProposalAddon.setCrmId(proposalHeader.getCrmId());
-        dwProposalAddon.setQuoteNo(proposalHeader.getQuoteNum());
+        dwProposalAddon.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalAddon.setSpaceType(productAddon.getSpaceType());
         dwProposalAddon.setRoom(productAddon.getRoomCode());
         dwProposalAddon.setAddonId(productAddon.getId());
