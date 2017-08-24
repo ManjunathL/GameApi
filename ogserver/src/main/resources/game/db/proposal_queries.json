@@ -1597,6 +1597,15 @@
     },
 
     {
+      "id": "report.schedular.insert",
+      "type": "insert",
+      "table": "reports_schedular",
+      "query": "insert into reports_schedular(reportsRunDate, status,lastRun,comments) values (?,?,?,?)",
+      "params": ["reportsRunDate", "status","lastRun","comments"],
+      "jsonfields":[]
+    },
+
+    {
       "id": "proposal.sow.select.proposalversion",
       "type": "select",
       "table": "proposal_sow",

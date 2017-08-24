@@ -11,6 +11,7 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
 import com.mygubbi.game.proposal.model.PriceMaster;
+import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
@@ -19,6 +20,10 @@ import com.mygubbi.game.proposal.price.RateCardService;
 import com.mygubbi.game.proposal.quote.MergePdfsRequest;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
+import com.mygubbi.pipeline.MessageDataHolder;
+import com.mygubbi.pipeline.PipelineExecutor;
+import com.mygubbi.pipeline.PipelineResponseHandler;
+import com.mygubbi.report.DwReportingService;
 import com.mygubbi.report.ReportTableFillerSevice;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.game.proposal.output.SOWPdfOutputService;
@@ -36,6 +41,7 @@ import java.sql.Date;
 import java.util.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -136,21 +142,32 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.info("contextJson = "+contextJson);
         Integer id1 = LocalCache.getInstance().store(contextJson);
         if(contextJson.containsKey("proposalId")) {
-            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, id1,
-                    (AsyncResult<Message<Integer>> result) -> {
-                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                        LOG.info("2222. Quote Res :: " + response);
-                        sendJsonResponse(context, response.toString());
-                    });
-        }else {
-            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, id1,
-                    (AsyncResult<Message<Integer>> result) -> {
+            LOG.info("Running for updated proposals");
+            MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, contextJson);
+            new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
 
-                LOG.info("shilpa result.result().body() = "+result.result().body());
-                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                        LOG.info("2222. Quote Res :: " + response);
-                        sendJsonResponse(context, response.toString());
-                    });
+//            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, id1,
+//                    (AsyncResult<Message<Integer>> result) -> {
+//                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+//                        LOG.info("2222. Quote Res :: " + response);
+//                        sendJsonResponse(context, response.toString());
+//                    });
+        }else {
+
+            LOG.info("Running for updated proposals");
+            MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, contextJson);
+            new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+
+
+
+//            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, id1,
+//                    (AsyncResult<Message<Integer>> result) -> {
+//
+//                LOG.info("shilpa result.result().body() = "+result.result().body());
+//                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+//                        LOG.info("2222. Quote Res :: " + response);
+//                        sendJsonResponse(context, response.toString());
+//                    });
         }
 
 
@@ -1094,7 +1111,25 @@ public class ProposalHandler extends AbstractRouteHandler
                 });
 
     }
+    private class ReportTablefillerResponseHandler implements PipelineResponseHandler
+    {
+        private RoutingContext context;
 
+        public ReportTablefillerResponseHandler(RoutingContext context)
+        {
+            this.context = context;
+        }
+
+        @Override
+        public void handleResponse(List<MessageDataHolder> messageDataHolders)
+        {
+            LOG.debug("From proposalHandler service ");
+//            message.reply(LocalCache.getInstance().store(new JsonObject().put("status","success")));
+            sendJsonResponse(context,new JsonObject().put("status","success").toString());
+
+
+        }
+    }
 }
 
 

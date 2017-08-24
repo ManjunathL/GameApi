@@ -100,7 +100,7 @@ public class DwReportingService extends AbstractVerticle {
 
     private void handleResult(Message message, ProposalVersion proposalVersion, List<QueryData> resultData) {
         if (resultData.get(0).errorFlag || resultData.get(0).rows == null || resultData.get(0).rows.isEmpty()) {
-            message.reply(LocalCache.getInstance().store(new JsonObject().put("failure", "Proposal not found for proposalId:" + this.proposalId +" and version:"+this.version)));
+            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,resultData.get(0).errorMessage)));
             LOG.error("Proposal not found for id:" + proposalVersion.getProposalId());
         } else {
             ProposalHeader proposalHeader = new ProposalHeader(resultData.get(0).rows.get(0));
@@ -130,7 +130,8 @@ public class DwReportingService extends AbstractVerticle {
                     int i = 0;
                     for (; i < resultDatas.size(); i++) {
                         if (resultDatas.get(i).errorFlag ) {
-                            message.reply(LocalCache.getInstance().store(new JsonObject().put("failure", "Error in executing for proposalId:" + this.proposalId +" and version:"+this.version)));
+
+                            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,resultDatas.get(i).errorMessage)));
                             LOG.error("Error in Executing Query : "+resultDatas.get(i).queryId +" and error is::"+resultDatas.get(i).errorMessage);
                             return;
                         }
@@ -140,12 +141,19 @@ public class DwReportingService extends AbstractVerticle {
                         queryDatasForProduct.clear();
                         queryDatasForModule.clear();
                         queryDatasForAddon.clear();
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("success", "Successfully inserted for proposalId:" + this.proposalId +" and version:"+this.version)));
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Success",this.proposalId,this.version,"Successfully inserted")));
 
                     }
                 });
     }
-
+    private JsonObject getResponseJson(String status,int proposalId,String version,String comments){
+        JsonObject response = new JsonObject();
+        response.put("status",status);
+        response.put("proposalId",proposalId);
+        response.put("version",version);
+        response.put("comments",comments);
+        return response;
+    }
 
     private void calculateProductLevelPricing(Message message, ProposalHeader proposalHeader, List<ProductLineItem> productLineItems, ProposalVersion proposalVersion, List<ProductAddon> productAddons) {
 
@@ -168,7 +176,7 @@ public class DwReportingService extends AbstractVerticle {
                     if (modulePriceHolder.hasErrors()) {
                         LOG.debug("Has errors");
                         LOG.info("Error is :: "+modulePriceHolder.getErrors());
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("failure", "ModulePriceHolder has some errors for proposalId:" + this.proposalId +" and version:"+this.version)));
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,"Module Price Holder has errors")));
                         return;
                     }
 
@@ -179,7 +187,7 @@ public class DwReportingService extends AbstractVerticle {
                 } catch (Exception e) {
                     e.printStackTrace();
                     LOG.info("Error is :: "+modulePriceHolder.getErrors());
-                    message.reply(LocalCache.getInstance().store(new JsonObject().put("failure", "ModulePriceHolder has some errors for proposalId:" + this.proposalId +" and version:"+this.version)));
+                    message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,"Module Price Holder has errors")));
                 }
 
 

@@ -20,6 +20,9 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +36,7 @@ public class ReportTableFillerSevice extends AbstractVerticle
     public static final String RUN_FOR_SINGLE_PROPOSAL = "reporting.table.filler.forOneProposal";
     public static final String RUN_FOR_UPDATED_PROPOSALS = "reporting.table.filler.forUpdatedProposal";
 
+    LocalDateTime servicecallTime;
     @Override
     public void start(Future<Void> startFuture) throws Exception
     {
@@ -68,6 +72,9 @@ public class ReportTableFillerSevice extends AbstractVerticle
 
     private void getAllUpdatedProposals(Message message)
     {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        servicecallTime = LocalDateTime.now();
+
         LOG.info("Running for updated proposals");
         QueryData requestData = new QueryData("proposal_version.updatedProposals.select", new JsonObject());
         MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
@@ -76,6 +83,9 @@ public class ReportTableFillerSevice extends AbstractVerticle
 
     private void getVersionObjForProposal(Integer proposalId, Message message)
     {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        servicecallTime = LocalDateTime.now();
+
         long start = System.currentTimeMillis();
 
         QueryData requestData = new QueryData("proposal.versions.list", new JsonObject().put("proposalId", proposalId));
@@ -84,7 +94,7 @@ public class ReportTableFillerSevice extends AbstractVerticle
         LOG.info("Time taken = "+(System.currentTimeMillis()-start));
     }
 
-    private static class ProposalVersionsRetriever implements PipelineResponseHandler
+    private class ProposalVersionsRetriever implements PipelineResponseHandler
     {
         private Message message;
         private Integer proposalId;
@@ -122,7 +132,7 @@ public class ReportTableFillerSevice extends AbstractVerticle
 
     }
 
-    private static class ReportingServiceResponseHandler implements PipelineResponseHandler
+    private class ReportingServiceResponseHandler implements PipelineResponseHandler
     {
         private Message message;
 
@@ -134,10 +144,48 @@ public class ReportTableFillerSevice extends AbstractVerticle
         @Override
         public void handleResponse(List<MessageDataHolder> messageDataHolders)
         {
-            LOG.debug("Reporting service returned");
+            StringBuilder comments = new StringBuilder();
+            for(int i=0;i<messageDataHolders.size();i++){
+
+                JsonObject response = (JsonObject) messageDataHolders.get(i).getResponseData();
+                if(response.containsKey("status")){
+                    if(response.getString("status").equalsIgnoreCase("FAILURE")){
+                        comments.append(response.getInteger("proposalId")+"-"+response.getString("version")+", ");
+                    }
+                }
+            }
+            if(comments.toString().length() == 0){
+                comments.append("Successfully ran for all proposals");
+            }
+            LOG.debug("Reporting service returned :: "+messageDataHolders.get(0).getResponseData());
+            //update the table
+            updateReportSchedularTable("success",message,comments.toString());
             message.reply(LocalCache.getInstance().store(new JsonObject().put("status","success")));
 
             
         }
+    }
+
+    private  void  updateReportSchedularTable(String strMsg,Message message,String comments){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));
+        JsonObject obj = new JsonObject();
+        obj.put("reportsRunDate",dtf.format(this.servicecallTime));
+        obj.put("status",strMsg);
+        obj.put("lastRun",dtf.format(now));
+        obj.put("comments",comments);
+        Integer id = LocalCache.getInstance().store(new QueryData("report.schedular.insert", obj));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0) {
+                        message.reply(LocalCache.getInstance().store(new JsonObject().put("status", "failure")));
+                        LOG.info("Error in inserting into report_schedular. " + resultData.errorMessage, resultData.error);
+                    } else {
+                        message.reply(LocalCache.getInstance().store(new JsonObject().put("status", "failure")));
+                        LOG.info("Successfully inserted into report_schedular. ");
+                    }
+                });
     }
 }

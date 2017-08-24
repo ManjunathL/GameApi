@@ -4,6 +4,7 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.QueryData;
 import io.vertx.core.AsyncResult;
+import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +30,6 @@ public class PipelineExecutor
     public void execute(MessageDataHolder step, PipelineResponseHandler responseHandler)
     {
         LOG.info("In step");
-        LOG.info("Step :: "+((QueryData)step.getRequestData()).queryId);
         List<MessageDataHolder> steps = new ArrayList<>();
         steps.add(step);
         handleStepInPipeline(steps, 0, responseHandler);
@@ -49,20 +49,21 @@ public class PipelineExecutor
         Integer id = LocalCache.getInstance().store(messageDataHolder.getRequestData());
         VertxInstance.get().eventBus().send(messageDataHolder.getMessageId(), id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
-//                    LOG.info("selectResult.result().body()
-                 if(selectResult.result().body() != null) {
-                    LOG.info("selectResult.result().body() = " + selectResult.result().body());
-                    messageDataHolder.setResponseData(LocalCache.getInstance().remove(selectResult.result().body()));
-                    //Call step response handler
+                    LOG.info("selectResult.result().body() = "+selectResult.result().body());
+                    if(selectResult.result().body() != null) {
+                        LOG.info("selectResult.result().body() = " + selectResult.result().body());
+                        messageDataHolder.setResponseData(LocalCache.getInstance().remove(selectResult.result().body()));
+                        //Call step response handler
 
 
-                    int nextIndex = index + 1;
-                    LOG.info("Calling next index :: " + nextIndex);
-                    handleStepInPipeline(steps, nextIndex, responseHandler);
-                }else{
-                     LOG.info("selectResult.result().body() IS NULL");
-                 }
+                        int nextIndex = index + 1;
+                        LOG.info("Calling next index :: " + nextIndex);
+                        handleStepInPipeline(steps, nextIndex, responseHandler);
+                    }else{
+                        LOG.info("selectResult.result().body() IS NULL");
+                    }
                 });
+
 
     }
 
