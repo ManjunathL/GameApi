@@ -707,7 +707,7 @@
       "id": "proposal.product.specificversion",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomcode from proposal_product where proposalId = ?  and fromVersion = ?",
+      "query": "select distinct spaceType,roomcode from proposal_product where proposalId = ?  and fromVersion = ? and active = 'A'",
       "params": ["proposalId","versiontobeconsidered"],
       "jsonfields":[]
     },
@@ -1623,7 +1623,7 @@
       "id": "spaces.select.fromProductAndAddon",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomCode,'product' as type from proposal_product where proposalId = ? and fromVersion = ? union select distinct spaceType,roomcode,'addon' as type from proposal_addon where proposalId = ? and fromVersion = ? ",
+      "query": "select distinct spaceType,roomCode,'product' as type from proposal_product where proposalId = ? and fromVersion = ? union select distinct spaceType,roomcode,'addon' as type from proposal_addon where proposalId = ? and fromVersion = ? and active='A'",
       "params": ["proposalIdForPro","fromVerForProd","proposalIdForAddOn","fromVerForAddOn"],
       "jsonfields":[]
     },
