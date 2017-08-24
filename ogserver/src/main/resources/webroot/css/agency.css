@@ -475,7 +475,7 @@
     color: #fff;
     font-family: 'Lato', sans-serif;
     line-height: 140%;
-    text-transform: capitalize;
+    text-transform: initial;
 }
 
 .explore-space{
