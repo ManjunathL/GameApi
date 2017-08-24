@@ -214,7 +214,6 @@ private void initializeValues(){
             addToHardwareSourceCost(modulePriceHolder.getHardwareSourceCost());
 
             addToAccessoryPrice(modulePriceHolder.getAccessoryCost());
-            addToAccessoryPrice(modulePriceHolder.getAccessoryCost());
             addToAccessoryPriceWoTax(modulePriceHolder.getAccessoryCostWoTax());
             addToAccessorySourceCost(modulePriceHolder.getAccessorySourceCost());
 
