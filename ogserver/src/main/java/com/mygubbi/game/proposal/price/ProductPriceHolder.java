@@ -528,8 +528,17 @@ private void initializeValues(){
 
     public double getProductAccessoryPriceAfterDiscount()
     {
-        this.productAccessoryPriceAfterDiscount = this.productAccessoryPrice - (this.productAccessoryPrice * this.discountPercentage);
-        return this.productAccessoryPriceAfterDiscount;
+        java.util.Date date = proposalHeader.getCreatedOn();
+        java.util.Date currentDate = new Date(117, 3, 20, 0, 0, 00);
+        if (date.after(currentDate)) {
+
+           return this.productAccessoryPriceAfterDiscount = this.productAccessoryPrice - (this.productAccessoryPrice * this.discountPercentage);
+        }
+        else
+        {
+            return this.productAccessoryPrice;
+        }
+
     }
 
     public double getProductAccessoryPriceWoTax()
