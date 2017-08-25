@@ -13,6 +13,7 @@ import io.vertx.core.json.JsonArray;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -95,6 +96,8 @@ public class ProductPriceHolder {
     private String city;
     private double discountPercentage;
 
+    private ProposalHeader proposalHeader;
+
     public ProductPriceHolder(ProductLineItem productLineItem, List<ModulePriceHolder> modulePriceHolders, ProposalHeader proposalHeader, ProposalVersion proposalVersion) {
         this.modulePriceHolders = modulePriceHolders;
         this.productLineItem = productLineItem;
@@ -102,6 +105,7 @@ public class ProductPriceHolder {
         this.city = proposalHeader.getProjectCity();
         this.discountPercentage = proposalVersion.getDiscountPercentage() / 100;
         this.proposalVersion = proposalVersion;
+        this.proposalHeader = proposalHeader;
     }
 
     public void prepare()
@@ -455,7 +459,6 @@ private void initializeValues(){
     public double getWoodWorkSourceCost()
     {
         this.woodWorkSourceCost = productCarcassSourceCost + productShutterSourceCost;
-        this.woodWorkSourceCost = this.woodWorkSourceCost - (woodWorkSourceCost * this.discountPercentage);
         return this.woodWorkSourceCost;
     }
 
@@ -497,7 +500,6 @@ private void initializeValues(){
 
     public double getProductHardwareSourceCost()
     {
-        this.productHardwareSourceCost = this.productHardwareSourceCost - (productHardwareSourceCost * this.discountPercentage);
         return this.productHardwareSourceCost;
     }
 
@@ -532,13 +534,20 @@ private void initializeValues(){
 
     public double getProductAccessoryPriceWoTax()
     {
-        this.productAccessoryPriceWoTax = this.productAccessoryPriceWoTax - (productAccessoryPriceWoTax * this.discountPercentage);
-        return this.productAccessoryPriceWoTax;
+        java.util.Date date = proposalHeader.getCreatedOn();
+        java.util.Date currentDate = new Date(117, 3, 20, 0, 0, 00);
+        if (date.after(currentDate)) {
+
+           return this.productAccessoryPriceWoTax = this.productAccessoryPriceWoTax - (productAccessoryPriceWoTax * this.discountPercentage);
+        }
+        else
+        {
+            return this.productAccessoryPriceWoTax;
+        }
     }
 
     public double getProductAccessorySourceCost()
     {
-        this.productAccessorySourceCost = this.productAccessorySourceCost - (productAccessorySourceCost * this.discountPercentage);
         return this.productAccessorySourceCost;
     }
 
@@ -580,7 +589,6 @@ private void initializeValues(){
 
     public double getProductHandleAndKnobSourceCost()
     {
-        this.productHandleAndKnobSourceCost = this.productHandleAndKnobSourceCost - (productHandleAndKnobSourceCost * this.discountPercentage);
         return this.productHandleAndKnobSourceCost;
     }
 
@@ -621,7 +629,6 @@ private void initializeValues(){
 
     public double getProductHingeSourceCost()
     {
-        this.productHingeSourceCost = this.productHingeSourceCost - (productHingeSourceCost * this.discountPercentage);
         return this.productHingeSourceCost;
     }
 
@@ -661,7 +668,6 @@ private void initializeValues(){
 
     public double getProductLabourSourceCost()
     {
-        this.productLabourSourceCost = this.productLabourSourceCost - (productLabourSourceCost * this.discountPercentage);
         return this.productLabourSourceCost;
     }
 
