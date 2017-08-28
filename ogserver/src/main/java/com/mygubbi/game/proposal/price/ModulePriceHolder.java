@@ -832,7 +832,7 @@ public class ModulePriceHolder
                     else
                     {
                         this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                        this.addToShutterSourceCost(panel.getCost() / nStdSourceRate);
+                        this.addToShutterSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate())/ nStdSourceRate);
                     }
                     if(panel.getCost()==0.0)
                     {
@@ -875,7 +875,7 @@ public class ModulePriceHolder
                     else
                     {
                         this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                        this.addToCarcassSourceCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
+                        this.addToCarcassSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate()) / nStdManufacturingCost.getSourcePrice());
                     }
                 }
             }
@@ -995,7 +995,7 @@ public class ModulePriceHolder
             this.totalCostWoTax = this.totalCost * this.prodWoTaxFactor.getSourcePrice();
             if (mgModule.getModuleCategory().startsWith("H"))
             {
-                this.totalSourceCost = this.totalCost * 0.8;
+                this.totalSourceCost = this.totalCost * 0.6;
             }
             else
             {
