@@ -49,7 +49,7 @@ public class AddonPriceHolder {
 
     private void calculateAddonLevelPricing() {
 
-        PriceMaster addonRate = RateCardService.getInstance().getFactorRate(productAddon.getCode(), this.priceDate, this.city);
+        PriceMaster addonRate = RateCardService.getInstance().getAddonRate(productAddon.getCode(), this.priceDate, this.city);
 
         this.unitPrice = addonRate.getPrice();
         this.unitSourceCost = addonRate.getSourcePrice();
