@@ -993,7 +993,14 @@ public class ModulePriceHolder
             this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.handleandKnobCost + this.hingeCost + this.hardwareCost;
             this.totalCost = this.woodworkCost + this.accessoryCost ;
             this.totalCostWoTax = this.totalCost * this.prodWoTaxFactor.getSourcePrice();
-            this.totalSourceCost = this.carcassSourceCost + this.shutterSourceCost + this.labourSourceCost + this.handleandKnobSourceCost + this.hingeSourceCost + this.hardwareSourceCost + this.accessorySourceCost;
+            if (mgModule.getModuleCategory().startsWith("H"))
+            {
+                this.totalSourceCost = this.totalCost * 0.8;
+            }
+            else
+            {
+                this.totalSourceCost = this.carcassSourceCost + this.shutterSourceCost + this.labourSourceCost + this.handleandKnobSourceCost + this.hingeSourceCost + this.hardwareSourceCost + this.accessorySourceCost;
+            }
             this.totalProfit = this.totalCostWoTax - this.totalSourceCost;
             this.totalMargin = (this.totalProfit / this.totalCostWoTax)*100;
 
