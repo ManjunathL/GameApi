@@ -23,6 +23,9 @@ public class DWProposalProduct extends JsonObject {
     public static final String PRICEDATE="priceDate";
     public static final String BUSINESSDATE="businessDate";
     public static final String REGION="region";
+    public static final String STATUS="status";
+    public static final String DISCOUNT_AMOUNT="discountAmount";
+    public static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
     public static final String CRMID="crmId";
     public static final String QUOTENO="quoteNo";
     public static final String CATEGORY="category";
@@ -201,6 +204,34 @@ public class DWProposalProduct extends JsonObject {
         put(REGION,region);
         return this;
     }
+    public String getStatus() {
+        return this.getString(STATUS);
+    }
+
+    public DWProposalProduct setStatus(String description)
+    {
+        put(STATUS,description);
+        return this;
+    }
+
+    public String getDiscountAmount() {
+        return this.getString(DISCOUNT_AMOUNT);
+    }
+
+    public DWProposalProduct setDiscountAmount(double price) {
+        this.put(DISCOUNT_AMOUNT, price);
+        return this;
+    }
+
+    public double getDiscountAmountPerc() {
+        return this.getDouble(DISCOUNT_AMOUNT_PERC);
+    }
+
+    public DWProposalProduct setDiscountAmountPerc(double price) {
+        this.put(DISCOUNT_AMOUNT_PERC, price);
+        return this;
+    }
+
 
     public String getCategory() {
         return this.getString(CATEGORY);
@@ -967,6 +998,9 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setPriceDate(proposalHeader.getPriceDate());
         dwProposalProduct.setBusinessDate(proposalVersion.getDate());
         dwProposalProduct.setRegion(proposalHeader.getProjectCity());
+        dwProposalProduct.setDiscountAmount(proposalVersion.getDiscountAmount());
+        dwProposalProduct.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());
+        dwProposalProduct.setStatus(proposalVersion.getProposalStatus());
         dwProposalProduct.setCrmId(proposalHeader.getCrmId());
         dwProposalProduct.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalProduct.setCategory("Modular Products");

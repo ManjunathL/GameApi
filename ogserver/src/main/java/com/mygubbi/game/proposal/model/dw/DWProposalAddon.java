@@ -25,6 +25,9 @@ public class DWProposalAddon extends JsonObject {
     public static final String PRICEDATE="priceDate";
     public static final String BUSINESSDATE="businessDate";
     public static final String REGION="region";
+    public static final String STATUS="status";
+    public static final String DISCOUNT_AMOUNT="discountAmount";
+    public static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
     public static final String CRMID="crmId";
     public static final String QUOTENO="quoteNo";
     public static final String CATEGORY="category";
@@ -63,6 +66,9 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setPriceDate(proposalHeader.getPriceDate());
         dwProposalAddon.setBusinessDate(proposalVersion.getDate());
         dwProposalAddon.setRegion(proposalHeader.getProjectCity());
+        dwProposalAddon.setDiscountAmount(proposalVersion.getDiscountAmount());
+        dwProposalAddon.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());
+        dwProposalAddon.setStatus(proposalVersion.getProposalStatus());
         dwProposalAddon.setCrmId(proposalHeader.getCrmId());
         dwProposalAddon.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalAddon.setSpaceType(productAddon.getSpaceType());
@@ -184,6 +190,34 @@ public class DWProposalAddon extends JsonObject {
         put(REGION,region);
         return this;
     }
+    public String getStatus() {
+        return this.getString(STATUS);
+    }
+
+    public DWProposalAddon setStatus(String description)
+    {
+        put(STATUS,description);
+        return this;
+    }
+
+    public String getDiscountAmount() {
+        return this.getString(DISCOUNT_AMOUNT);
+    }
+
+    public DWProposalAddon setDiscountAmount(double price) {
+        this.put(DISCOUNT_AMOUNT, price);
+        return this;
+    }
+
+    public double getDiscountAmountPerc() {
+        return this.getDouble(DISCOUNT_AMOUNT_PERC);
+    }
+
+    public DWProposalAddon setDiscountAmountPerc(double price) {
+        this.put(DISCOUNT_AMOUNT_PERC, price);
+        return this;
+    }
+
 
     public String getCategory() {
         return this.getString(CATEGORY);
