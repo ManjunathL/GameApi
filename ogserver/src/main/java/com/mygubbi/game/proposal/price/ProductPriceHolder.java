@@ -112,76 +112,11 @@ public class ProductPriceHolder {
     {
 
         this.calculateProductLevelPricing();
+        this.setAmountsAccordingToDiscount();
     }
 
-private void initializeValues(){
-    this.productSourceCost = 0.0;
-    this.productPriceWoTax = 0.0;
-    this.productPrice = 0.0;
-    this.productPriceAfterDiscount = 0.0;
-    this.productProfit = 0.0;
-    this.productMargin = 0.0;
-    this.productHingeSourceCost = 0.0;
-    this.productHingePriceWoTax = 0.0;
-    this.productHingePriceAfterDiscount = 0.0;
-    this.productHingePrice = 0.0;
-    this.productHingeProfit = 0.0;
-    this.productHingeMargin = 0.0;
-    this.productHandleAndKnobSourceCost = 0.0;
-    this.productHandleAndKnobPriceWoTax = 0.0;
-    this.productHandleAndKnobPrice = 0.0;
-    this.productHandleAndKnobPriceAfterDiscount = 0.0;
-    this.productHandleAndKnobProfit = 0.0;
-    this.productHandleAndKnobMargin = 0.0;
-    this.productAccessorySourceCost = 0.0;
-    this.productAccessoryPriceWoTax = 0.0;
-    this.productAccessoryProfit = 0.0;
-    this.productAccessoryMargin = 0.0;
-    this.productAccessoryPrice = 0.0;
-    this.productAccessoryPriceAfterDiscount = 0.0;
-    this.productHardwareSourceCost = 0.0;
-    this.productHardwarePriceWoTax = 0.0;
-    this.hardwarePriceAfterDiscount = 0.0;
-    this.productHardwarePrice = 0.0;
-    this.productHardwareProfit = 0.0;
-    this.productHardwareMargin = 0.0;
-    this.productLabourSourceCost = 0.0;
-    this.productLabourPriceWoTax = 0.0;
-    this.productLabourPrice = 0.0;
-    this.productLabourPriceAfterDiscount = 0.0;
-    this.productLabourProfit = 0.0;
-    this.productLabourMargin = 0.0;
-    this.productShutterSourceCost = 0.0;
-    this.productShutterCostWoTax = 0.0;
-    this.productShutterPrice = 0.0;
-    this.productCarcassSourceCost = 0.0;
-    this.productCarcassPriceWoTax = 0.0;
-    this.productCarcassPrice = 0.0;
-    this.woodWorkPrice = 0.0;
-    this.woodWorkPriceAfterDiscount = 0.0;
-    this.woodWorkPriceWoTax = 0.0;
-    this.woodWorkSourceCost = 0.0;
-    this.woodWorkProfit = 0.0;
-    this.woodWorkMargin = 0.0;
-    this.productLConnectorSourceCost = 0.0;
-    this.productLConnectorPriceWoTax = 0.0;
-    this.productLConnectorPriceAfterDiscount = 0.0;
-    this.productLConnectorPrice = 0.0;
-    this.productLConnectorProfit = 0.0;
-    this.productLConnectorMargin = 0.0;
-    this.productAreainSqft = 0.0;
-    this.stdModuleCount = 0;
-    this.nStdModuleCount = 0;
-    this.hikeModuleCount = 0;
-    this.stdModulePrice = 0.0;
-    this.nStdModulePrice = 0.0;
-    this.hikeModulePrice = 0.0;
-
-}
     private void calculateProductLevelPricing() {
 
-//        this.initializeValues();
-        double lConnectorPrice = 0;
         PriceMaster lConnectorRate=RateCardService.getInstance().getHardwareRate("H074",this.priceDate,this.city);
         PriceMaster lConnectorFactor=RateCardService.getInstance().getFactorRate(RateCard.ADDON_WO_TAX_FACTOR,this.priceDate,this.city);
 
@@ -396,6 +331,31 @@ private void initializeValues(){
         productCarcassPrice += carcassCost;
     }
 
+    public void setAmountsAccordingToDiscount()
+    {
+        this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
+        this.productPriceWoTax = this.productPriceWoTax - (this.productPriceWoTax * this.discountPercentage);
+
+        this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
+        this.woodWorkPriceWoTax = this.woodWorkPriceWoTax - (woodWorkPriceWoTax * this.discountPercentage);
+        this.woodWorkPriceAfterDiscount = this.woodWorkPrice - (woodWorkPrice * this.discountPercentage);
+
+        this.hardwarePriceAfterDiscount = this.productHardwarePrice - (this.productHardwarePrice * this.discountPercentage);
+        this.productHardwarePriceWoTax = this.productHardwarePriceWoTax - (productHardwarePriceWoTax * this.discountPercentage);
+
+        this.productHandleAndKnobPriceAfterDiscount = this.productHandleAndKnobPrice - (this.productHandleAndKnobPrice * this.discountPercentage);
+        this.productHandleAndKnobPriceWoTax = this.productHandleAndKnobPriceWoTax - (productHandleAndKnobPriceWoTax * this.discountPercentage);
+
+        this.productHingePriceAfterDiscount = this.productHingePrice - (this.productHingePrice * this.discountPercentage);
+        this.productHingePriceWoTax = this.productHingePriceWoTax - (productHingePriceWoTax * this.discountPercentage);
+
+        this.productLabourPriceAfterDiscount = this.productLabourPrice - (this.productLabourPrice * this.discountPercentage);
+        this.productLabourPriceWoTax = this.productLabourPriceWoTax - (productLabourPriceWoTax * this.discountPercentage);
+
+        this.productLConnectorPriceAfterDiscount = this.productLConnectorPrice - (this.productLConnectorPrice * this.discountPercentage);
+
+    }
+
     public double getProductProfit()
     {
         productProfit = this.productPriceWoTax - this.productSourceCost;
@@ -421,7 +381,6 @@ private void initializeValues(){
 
     public double getProductPriceAfterDiscount()
     {
-        this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
         return this.productPriceAfterDiscount;
     }
 
@@ -432,8 +391,7 @@ private void initializeValues(){
 
     public double getProductPriceWoTax()
     {
-        this.productPriceWoTax = this.productPriceWoTax - (this.productPriceWoTax * this.discountPercentage);
-        return productPriceWoTax;
+        return this.productPriceWoTax;
     }
 
     public double getWoodWorkPrice()
@@ -444,14 +402,11 @@ private void initializeValues(){
 
     public double getWoodWorkPriceAfterDiscount()
     {
-        this.woodWorkPriceAfterDiscount = this.woodWorkPrice - (woodWorkPrice * this.discountPercentage);
         return this.woodWorkPriceAfterDiscount;
     }
 
     public double getWoodWorkPriceWoTax()
     {
-        this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
-        this.woodWorkPriceWoTax = this.woodWorkPriceWoTax - (woodWorkPriceWoTax * this.discountPercentage);
         return this.woodWorkPriceWoTax;
     }
 
@@ -487,13 +442,11 @@ private void initializeValues(){
 
     public double getHardwarePriceAfterDiscount()
     {
-        this.hardwarePriceAfterDiscount = this.productHardwarePrice - (this.productHardwarePrice * this.discountPercentage);
         return this.hardwarePriceAfterDiscount;
     }
 
     public double getProductHardwarePriceWoTax()
     {
-        this.productHardwarePriceWoTax = this.productHardwarePriceWoTax - (productHardwarePriceWoTax * this.discountPercentage);
         return this.productHardwarePriceWoTax;
     }
 
@@ -585,13 +538,11 @@ private void initializeValues(){
 
     public double getProductHandleAndKnobPriceAfterDiscount()
     {
-        this.productHandleAndKnobPriceAfterDiscount = this.productHandleAndKnobPrice - (this.productHandleAndKnobPrice * this.discountPercentage);
         return this.productHandleAndKnobPriceAfterDiscount;
     }
 
     public double getProductHandleAndKnobPriceWoTax()
     {
-        this.productHandleAndKnobPriceWoTax = this.productHandleAndKnobPriceWoTax - (productHandleAndKnobPriceWoTax * this.discountPercentage);
         return this.productHandleAndKnobPriceWoTax;
     }
 
@@ -625,13 +576,11 @@ private void initializeValues(){
 
     public double getProductHingePriceAfterDiscount()
     {
-        this.productHingePriceAfterDiscount = this.productHingePrice - (this.productHingePrice * this.discountPercentage);
         return this.productHingePriceAfterDiscount;
     }
 
     public double getProductHingePriceWoTax()
     {
-        this.productHingePriceWoTax = this.productHingePriceWoTax - (productHingePriceWoTax * this.discountPercentage);
         return this.productHingePriceWoTax;
     }
 
@@ -665,12 +614,10 @@ private void initializeValues(){
 
     public double getProductLabourPriceAfterDiscount()
     {
-        this.productLabourPriceAfterDiscount = this.productLabourPrice - (this.productHingePrice * this.discountPercentage);
         return this.productLabourPriceAfterDiscount;    }
 
     public double getProductLabourPriceWoTax()
     {
-        this.productLabourPriceWoTax = this.productLabourPriceWoTax - (productLabourPriceWoTax * this.discountPercentage);
         return this.productLabourPriceWoTax;
     }
 
@@ -747,7 +694,6 @@ private void initializeValues(){
 
     public double getLConnectorPriceAfterDiscount()
     {
-        this.productLConnectorPriceAfterDiscount = this.productLConnectorPrice - (this.productLConnectorPrice * this.discountPercentage);
         return this.productLConnectorPriceAfterDiscount;    }
 
     public double getLConnectorProfit() {

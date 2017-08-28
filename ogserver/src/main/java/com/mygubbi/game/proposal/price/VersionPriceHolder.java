@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class VersionPriceHolder {
 
-    private final static Logger LOG = LogManager.getLogger(ModulePriceHolder.class);
+    private final static Logger LOG = LogManager.getLogger(VersionPriceHolder.class);
 
     private List<ProductPriceHolder> productPriceHolders ;
     private List<AddonPriceHolder> addonPriceHolders ;

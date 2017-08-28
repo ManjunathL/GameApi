@@ -55,7 +55,7 @@ public class AddonPriceHolder {
         this.priceWoTax = this.price * addonFactor.getSourcePrice();
         this.sourceCost = this.productAddon.getQuantity() * this.unitSourceCost;
         this.addonProfit = this.priceWoTax - this.sourceCost;
-        this.addonMargin = this.addonProfit / this.priceWoTax;
+        this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
 
     }
 
