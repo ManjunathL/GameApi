@@ -427,7 +427,6 @@ private void initializeValues(){
 
     public double getProductSourceCost()
     {
-        this.productSourceCost = this.productSourceCost - (this.productSourceCost * this.discountPercentage);
         return this.productSourceCost;
     }
 
