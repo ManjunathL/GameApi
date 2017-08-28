@@ -29,8 +29,6 @@ public class AddonPriceHolder {
     private JsonArray errors = null;
 
     PriceMaster addonFactor;
-    private double profit;
-    private double margin;
 
     public AddonPriceHolder(ProductAddon productAddon, ProposalHeader proposalHeader) {
         LOG.info("In AddonPriceHolder "+productAddon+", :"+proposalHeader);
@@ -88,11 +86,11 @@ public class AddonPriceHolder {
     }
 
     public double getProfit() {
-        return profit;
+        return addonProfit;
     }
 
     public double getMargin() {
-        return margin;
+        return addonMargin;
     }
 
     public ProductAddon getProductAddon()
@@ -115,8 +113,8 @@ public class AddonPriceHolder {
                 ", addonMargin=" + addonMargin +
                 ", errors=" + errors +
                 ", addonFactor=" + addonFactor +
-                ", profit=" + profit +
-                ", margin=" + margin +
+                ", profit=" + addonProfit +
+                ", margin=" + addonMargin +
                 '}';
     }
 }
