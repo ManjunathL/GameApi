@@ -827,7 +827,7 @@ public class ModulePriceHolder
                     {
                         LOG.info("shoerack value 1 " +rate);
                         this.addToShutterCost(panel.getCost() * rate);
-                        this.addToShutterSourceCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
+                        this.addToShutterSourceCost((panel.getCost() * rate) / nStdManufacturingCost.getSourcePrice());
                     }
                     else
                     {
@@ -870,7 +870,7 @@ public class ModulePriceHolder
                     {
                         LOG.info("Shoerack value in else 2 " +rate);
                         this.addToCarcassCost(panel.getCost() * rate);
-                        this.addToCarcassSourceCost(panel.getCost() / nStdSourceRate);
+                        this.addToCarcassSourceCost((panel.getCost() * rate) / nStdSourceRate);
                     }
                     else
                     {
