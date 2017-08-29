@@ -649,10 +649,13 @@ public class ModulePriceHolder
         LOG.debug("this.nonstandard" + this.nonStandardloadingFactorCard.getRate());
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
+        LOG.debug("loadingFactorBasedOnProduct :" + this.loadingFactorBasedOnProduct.getSourcePriceBasedOnProduct() + " : " + this.loadingFactorBasedOnProduct.getSourcePrice());
         this.stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
+        LOG.debug("stdLoadingSourceFactorBasedOnProduct :" + this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct() + " : " + this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice());
         this.nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
+        LOG.debug("nStdLoadingSourceFactorBasedOnProduct :" + this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct() + " : " + this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice());
         this.prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
@@ -797,7 +800,8 @@ public class ModulePriceHolder
         {
             double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
             double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice();
-            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
+            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
+            LOG.debug("NON std source rate : " + nStdSourceRate);
             if (panel.isExposed())
             {
                 if ("Standard".equals(moduleType))
@@ -827,7 +831,7 @@ public class ModulePriceHolder
                     {
                         LOG.info("shoerack value 1 " +rate);
                         this.addToShutterCost(panel.getCost() * rate);
-                        this.addToShutterSourceCost((panel.getCost() * rate) / nStdManufacturingCost.getSourcePrice());
+                        this.addToShutterSourceCost((panel.getCost() * rate) / nStdSourceRate);
                     }
                     else
                     {
