@@ -800,7 +800,7 @@ public class ModulePriceHolder
         {
             double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
             double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice();
-            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
+            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
             LOG.debug("NON std source rate : " + nStdSourceRate);
             if (panel.isExposed())
             {
@@ -831,7 +831,7 @@ public class ModulePriceHolder
                     {
                         LOG.info("shoerack value 1 " +rate);
                         this.addToShutterCost(panel.getCost() * rate);
-                        this.addToShutterSourceCost((panel.getCost() * rate) / nStdSourceRate);
+                        this.addToShutterSourceCost((panel.getCost() * rate) /  this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
                     }
                     else
                     {
@@ -874,7 +874,7 @@ public class ModulePriceHolder
                     {
                         LOG.info("Shoerack value in else 2 " +rate);
                         this.addToCarcassCost(panel.getCost() * rate);
-                        this.addToCarcassSourceCost((panel.getCost() * rate) / nStdSourceRate);
+                        this.addToCarcassSourceCost((panel.getCost() * rate) /  this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
                     }
                     else
                     {
