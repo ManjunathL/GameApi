@@ -211,7 +211,7 @@ public class ModulePriceHolder
         }
         for (HingePack hingePack : this.productModule.getHingePacks())
         {
-            Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+            Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
             this.getHingeRateBasedOnQty(hingePack);
          //   this.productionSpecificationComponents.add(new Handle(hinge.getType(),hinge.getCode(),hinge.getMgCode(),hinge.getThickness(),hinge.getTitle()));
         }
@@ -236,14 +236,14 @@ public class ModulePriceHolder
                 if (!(this.productLineItem.getHandleCode() == null))
                 {
                     this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
-                    // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                    // Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getHandleCode());
                     //  this.productionSpecificationComponents.add(new Handle(handle));
                 }
             }
             else if (this.productModule.getHandleOverrideFlag().equals("Yes")) {
                 {
                     this.getHandleOrKnobRate(this.productModule.getHandleCode(), this.productModule.getHandleQuantity());
-                    // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                    // Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getHandleCode());
                     //  this.productionSpecificationComponents.add(new Handle(handle));
                 }
             }
@@ -252,7 +252,7 @@ public class ModulePriceHolder
 
             if (!(this.productLineItem.getKnobCode() == null)){
                 this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
-                // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
+                // Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getKnobCode());
                 //  this.productionSpecificationComponents.add(new Handle(knob));
             }
         }
@@ -268,12 +268,12 @@ public class ModulePriceHolder
             if (!(this.productModule.getHandleCode() == null))
             {
                 this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
-                // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
+                // Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getHandleCode());
                 //  this.productionSpecificationComponents.add(new Handle(handle));
             }
             if (!(this.productModule.getKnobCode() == null)){
                 this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
-                // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
+                // Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getKnobCode());
                 //  this.productionSpecificationComponents.add(new Handle(knob));
             }
             int moduleCount = 0;

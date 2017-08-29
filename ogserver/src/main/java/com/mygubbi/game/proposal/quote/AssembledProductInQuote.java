@@ -327,17 +327,6 @@ public class AssembledProductInQuote
 
             LOG.debug("Inside gola profile");
 
-            /*if (!(module.getHandleCode() == null))
-            {
-                this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
-                // Handle handle = ModuleDataService.getInstance().getHandleTitle(this.productModule.getHandleCode());
-                //  this.productionSpecificationComponents.add(new Handle(handle));
-            }
-            if (!(this.productModule.getKnobCode() == null)){
-                this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
-                // Handle knob = ModuleDataService.getInstance().getHandleTitle(this.productModule.getKnobCode());
-                //  this.productionSpecificationComponents.add(new Handle(knob));
-            }*/
             int moduleCount = 0;
             int drawerModuleCount= 0;
             double wallProfileWidth = 0.0;
@@ -390,24 +379,24 @@ public class AssembledProductInQuote
             wProfilePrice = wallProfileWidth/1000*wWidthRate.getPrice();
 
             AccHwComponent hardware = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            this.addToModuleHardware(hardware, 0.0 , module.getUnit(), module.getSequence());
+            this.addToModuleHardware(hardware, 1 , module.getUnit(), module.getSequence());
 
             lProfilePrice = lProfileWidth/1000*lWidthRate.getPrice();
             AccHwComponent hardware1 = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
-            this.addToModuleHardware(hardware1, 0.0 , module.getUnit(), module.getSequence());
+            this.addToModuleHardware(hardware1, 1 , module.getUnit(), module.getSequence());
 
             cProfilePrice = cProfileWidth/1000*cWidthRate.getPrice();
             AccHwComponent hardware2 = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            this.addToModuleHardware(hardware2, 0.0 , module.getUnit(), module.getSequence());
+            this.addToModuleHardware(hardware2, 1 , module.getUnit(), module.getSequence());
 
             profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
             bracketPrice = (moduleCount * 2) * bracketRate.getPrice();
             AccHwComponent hardware3 = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
-            this.addToModuleHardware(hardware3, 0.0 , module.getUnit(), module.getSequence());
+            this.addToModuleHardware(hardware3, 1 , module.getUnit(), module.getSequence());
 //                lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
             cConnectorPrice = drawerModuleCount * cConnectorRate.getPrice();
             AccHwComponent hardware4 = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
-            this.addToModuleHardware(hardware4, 0.0 , module.getUnit(), module.getSequence());
+            this.addToModuleHardware(hardware4, 1 , module.getUnit(), module.getSequence());
 
 
             wProfileSourceCost = wallProfileWidth/1000 * wWidthRate.getSourcePrice();
@@ -514,7 +503,7 @@ public class AssembledProductInQuote
         {
             return;
         }
-        Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getHandleCode());
+        Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
         this.addToModuleHandle(handle,module.getHandleQuantity());
     }
     private void collectModuleKnob(ProductModule module)
@@ -523,7 +512,7 @@ public class AssembledProductInQuote
         {
             return;
         }
-        Handle handle = ModuleDataService.getInstance().getHandleTitle(module.getKnobCode());
+        Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
         this.addToModuleHandle(handle,module.getKnobQuantity());
     }
 

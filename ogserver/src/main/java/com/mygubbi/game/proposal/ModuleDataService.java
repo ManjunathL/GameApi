@@ -43,6 +43,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, AccessoryPack> accessoryPackMap = Collections.EMPTY_MAP;
     private Map<String, Handle> handleMap = Collections.EMPTY_MAP;
     private Map<String, HingePack> hingePackMap = Collections.EMPTY_MAP;
+    private Map<String, ERPMaster> erpMasterMap = Collections.EMPTY_MAP;
 
 
 	public static ModuleDataService getInstance()
@@ -273,6 +274,29 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
+    private void cacheERPMasterMap()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("erpmaster.select.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("ERP master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.erpMasterMap = new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            ERPMaster erpMaster = new ERPMaster(record);
+                            this.erpMasterMap.put(erpMaster.getItemCode(),erpMaster);
+                        }
+                        markResult("ERP master is loaded.", true);
+                    }
+                });
+    }
+
     private void cacheAccessoryPackMaster()
     {
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
@@ -468,7 +492,7 @@ public class ModuleDataService extends AbstractVerticle
         return this.finishCodeMap.get(finishCode);
     }
 
-    public Handle getHandleTitle(String handleCode)
+    public Handle getHandleKnobHingeDetails(String handleCode)
     {
         return this.handleMap.get(handleCode);
     }

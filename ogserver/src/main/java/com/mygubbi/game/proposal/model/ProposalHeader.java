@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
  */
 public class ProposalHeader extends JsonObject
 {
-
     public static final String ID = "id";
 
     public static final String CRMID = "crmId";

@@ -53,6 +53,59 @@ public class DriveServiceProvider
         this.mimeTypes.put(TYPE_PDF,"application/pdf");
     }
 
+    public DriveFile createFolder(List<String> filePaths, String folderName, String userId)
+    {
+        this.serviceManager.getDrive();
+        File folderMetadata = new File();
+        folderMetadata.setName(folderName);
+        folderMetadata.setMimeType("application/vnd.google-apps.folder");
+        String folderId = null;
+
+        LOG.debug("FOlder created");
+
+        File folder = null;
+        try {
+            folder = this.serviceManager.getDrive().files().create(folderMetadata)
+                    .setFields("id,name,webContentLink,webViewLink")
+                    .execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (!(folder == null))
+        {
+            folderId = folder.getId();
+        }
+
+        LOG.debug("After folder creation :" + folder.getId());
+
+        allowUserToReadFile(folderId,userId);
+
+        for (String fileNames : filePaths)
+        {
+            File fileExcel = new File();
+            fileExcel.setName("SO Extract");
+            fileExcel.setMimeType("application/vnd.google-apps.spreadsheet");
+            fileExcel.setParents(Collections.singletonList(folderId));
+            java.io.File filePath = new java.io.File(fileNames);
+            FileContent mediaContent = new FileContent("application/vnd.ms-excel", filePath);
+            try {
+                LOG.debug("Creating file:" + fileNames);
+
+                File file = this.serviceManager.getDrive().files().create(fileExcel, mediaContent)
+                        .setFields("id, parents,webViewLink")
+                        .execute();
+                allowUserToReadFile(file.getId(),userId);
+                LOG.debug("File created:" + fileNames + " with web link: " + file.getWebViewLink());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return new DriveFile(folder);
+    }
+
     public DriveFile uploadFile(String filePath, String filename)
     {
         LOG.debug("File Path :" + filePath + "fileName :" + filename);
@@ -106,7 +159,7 @@ public class DriveServiceProvider
             {
                 LOG.debug("inisde if file");
                 this.serviceManager.getDrive().files().export(id, this.mimeTypes.get(mimeType))
-                        .executeMediaAndDownloadTo(outputStream);
+                        .set("portrait", false).set("size","A4").set("fitw",true).set("gridlines",false).executeMediaAndDownloadTo(outputStream);
             }
             else
             {
@@ -151,7 +204,7 @@ public class DriveServiceProvider
     {
         LOG.debug("filePath :" + filePath + ":" + email + ":" +fileName + " : " + readOnlyFlag);
         DriveFile driveFile = this.uploadFile(filePath, fileName);
-        if (readOnlyFlag.equals("yes"))
+        if (readOnlyFlag.equalsIgnoreCase("yes"))
         {
             this.allowUserToReadFile(driveFile.getId(), email);
             this.allowUserToReadFile(driveFile.getId(), salesEmail);
@@ -186,7 +239,7 @@ public class DriveServiceProvider
 
     public void allowUserToReadFile(String id, String email)
     {
-        LOG.debug("Allow user to read file :" + email);
+        LOG.debug("Allow user to read file :" + email + "| folderid:" + id);
 
         Permission userPermission = new Permission()
                 .setType("user")

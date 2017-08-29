@@ -72,6 +72,9 @@
       },
       {
         "name":"com.mygubbi.report.DwReportingService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.erp.BoqCreatorService"
       }
 
     ]

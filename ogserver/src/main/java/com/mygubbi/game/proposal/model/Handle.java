@@ -15,6 +15,8 @@ public class Handle {
     public static final String SOURCE_PRICE = "sourcePrice";
     public static final String MSP = "msp";
     public static final String IMAGE_PATH = "imagePath";
+    public static final String ERP_CODE = "erpCode";
+    public static final String ARTICLE_NO = "articleNo";
     //public static final String QUANTITY="quantity";
 
     private String code;
@@ -26,6 +28,8 @@ public class Handle {
     private int sourcePrice;
     private int msp;
     private String imagePath;
+    private String erpCode;
+    private String articleNo;
 
     public Handle() {
     }
@@ -33,7 +37,7 @@ public class Handle {
     public Handle(JsonObject json) {
         this.setCode(json.getString(CODE)).setType(json.getString(TYPE)).setTitle(json.getString(TITLE)).setFinish(json.getString(FINISH))
                 .setMgCode(json.getString(MG_CODE)).setThickness(json.getString(THICKNESS)).setSourcePrice(json.getInteger(SOURCE_PRICE))
-                .setMsp(json.getInteger(MSP)).setImagePath(json.getString(IMAGE_PATH));
+                .setMsp(json.getInteger(MSP)).setImagePath(json.getString(IMAGE_PATH)).setErpCode(json.getString(ERP_CODE)).setArticleNo(json.getString(ARTICLE_NO));
     }
 
     public String getCode() {
@@ -118,6 +122,26 @@ public class Handle {
         return this;
     }
 
+    public String getErpCode() {
+        return erpCode;
+    }
+
+    public Handle setErpCode(String erpCode) {
+        this.erpCode = erpCode;
+        return this;
+    }
+
+    public String getArticleNo(){
+        return articleNo;
+    }
+
+    public Handle setArticleNo(String articleNo){
+        this.articleNo = articleNo;
+        return this;
+    }
+
+
+
     @Override
     public String toString() {
         return "Handle{" +
@@ -130,6 +154,8 @@ public class Handle {
                 ", sourcePrice=" + sourcePrice +
                 ", msp=" + msp +
                 ", imagePath='" + imagePath + '\'' +
+                ", erpCode='" + erpCode + '\'' +
+                ", articleNo='" + articleNo + '\'' +
                 '}';
     }
 
