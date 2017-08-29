@@ -164,7 +164,9 @@ public class ProductModule extends JsonObject
 
     public String getMGCode()
     {
+        if(!isValueNull(MGCODE))
         return this.getString(MGCODE);
+        return "";
     }
 
     public String getModuleCategory()
@@ -266,8 +268,11 @@ public class ProductModule extends JsonObject
     }
 
     public double getKnobQuantity() {
-        if(!isValueNull(KNOB_QUANTITY))
-        return this.getDouble(KNOB_QUANTITY);
+        if(!isValueNull(KNOB_QUANTITY)) {
+            System.out.println("KNOB_QUANTITY = " + this.getString(KNOB_QUANTITY));
+
+            return (double) Double.parseDouble(this.getString(KNOB_QUANTITY));
+        }
         return 0.0;
     }
 
@@ -324,11 +329,15 @@ public class ProductModule extends JsonObject
     }
 
     public Boolean getLeftExposed() {
+        if(!isValueNull(LEFT_EXPOSED))
         return this.getBoolean(LEFT_EXPOSED);
+        return false;
     }
 
     public Boolean getRightExposed() {
+        if(!isValueNull(RIGHT_EXPOSED))
         return this.getBoolean(RIGHT_EXPOSED);
+        return false;
     }
 
     public Boolean getTopExposed() {
@@ -338,15 +347,24 @@ public class ProductModule extends JsonObject
     }
 
     public Boolean getBottomExposed() {
-        return this.getBoolean(BOTTOM_EXPOSED);
+        if(!isValueNull(BOTTOM_EXPOSED))
+            return this.getBoolean(BOTTOM_EXPOSED);
+        return false;
+
     }
 
     public Boolean getBackExposed() {
-        return this.getBoolean(BACK_EXPOSED);
+        if(!isValueNull(BACK_EXPOSED))
+            return this.getBoolean(BACK_EXPOSED);
+        return false;
+
     }
 
     public Boolean getOpenUnit() {
-        return this.getBoolean(OPEN_UNIT);
+        if(!isValueNull(OPEN_UNIT))
+            return this.getBoolean(OPEN_UNIT);
+        return false;
+
     }
 
     public ProductModule setHandleThickness(String handleThickness)

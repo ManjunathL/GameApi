@@ -131,7 +131,7 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setFinish(productModule.getFinishCode());
         dwProductModule.setFinishMaterial(productModule.getFinishType());
         dwProductModule.setColor(productModule.getColorCode());
-        dwProductModule.setExposedLeft(productModule.getBottomExposed() ? "Yes" : "No");
+        dwProductModule.setExposedLeft(productModule.getLeftExposed() ? "Yes" : "No");
         dwProductModule.setExposedRight(productModule.getRightExposed() ? "Yes" : "No");
         dwProductModule.setExposedBottom(productModule.getBottomExposed() ? "Yes" : "No");
         dwProductModule.setExposedTop(productModule.getTopExposed() ? "Yes" : "No");
