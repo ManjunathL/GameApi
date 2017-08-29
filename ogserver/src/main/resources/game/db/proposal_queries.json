@@ -707,7 +707,7 @@
       "id": "proposal.product.specificversion",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomcode from proposal_product where proposalId = ?  and fromVersion = ?",
+      "query": "select distinct spaceType,roomcode from proposal_product where proposalId = ?  and fromVersion = ? and active = 'A'",
       "params": ["proposalId","versiontobeconsidered"],
       "jsonfields":[]
     },
@@ -1623,7 +1623,7 @@
       "id": "spaces.select.fromProductAndAddon",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomCode,'product' as type from proposal_product where proposalId = ? and fromVersion = ? union select distinct spaceType,roomcode,'addon' as type from proposal_addon where proposalId = ? and fromVersion = ? ",
+      "query": "select distinct spaceType,roomCode,'product' as type from proposal_product where proposalId = ? and fromVersion = ? and active='A' union select distinct spaceType,roomcode,'addon' as type from proposal_addon where proposalId = ? and fromVersion = ? ",
       "params": ["proposalIdForPro","fromVerForProd","proposalIdForAddOn","fromVerForAddOn"],
       "jsonfields":[]
     },
@@ -1825,6 +1825,20 @@
       "table": "OfferMaster",
       "query": "select * from OfferMaster where fromDate <= ? and toDate >= ?",
       "params": ["fromDate","toDate"]
+    },
+    {
+      "id": "proposal.discount.discountAmount",
+      "type": "select",
+      "table": "price_master",
+      "query": "select * from price_master where rateId='F:DP' and fromDate <= ? and toDate >= ?",
+      "params": ["fromDate","toDate"]
+    },
+    {
+      "id": "proposal.versiondiscount",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set discountPercentage = ? where proposalId=? and version= ?",
+      "params": ["discountPercentage","proposalId","version"]
     }
   ]
 }

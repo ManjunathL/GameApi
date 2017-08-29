@@ -70,7 +70,9 @@ public class AssembledProductInQuote
     {
         return this.product.getTitle();
     }
-
+    public String getHandleTypeSelection() { return this.product.getHandletypeSelection();}
+    public int getNoOfLengths() {return this.product.getNoOfLengths();}
+    public double getLconnectorPrice() {return this.product.getLconnectorPrice();}
     public String getSpaceType()
     {
         return this.product.getSpaceType();
