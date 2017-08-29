@@ -629,7 +629,7 @@
       "id": "proposal_version.updatedProposals.select",
       "type": "select",
       "table": "version_master",
-          "query": "select *  from version_master vm inner join proposal p on p.id = vm.proposalId and p.version =vm.version where p.status != 'Deleted' and vm.updatedOn  > (select lastRun from reports_schedular where status = 'success' order by lastRun desc limit 1) order by vm.proposalId desc,vm.version asc",
+          "query": "select *  from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.updatedOn  > (select lastRun from reports_schedular where status = 'success' order by lastRun desc limit 1) order by vm.proposalId desc,vm.version asc",
         "params": [],
       "jsonfields":[]
     },
