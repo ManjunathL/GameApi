@@ -29,15 +29,14 @@ public class AddonPriceHolder {
     private JsonArray errors = null;
 
     PriceMaster addonFactor;
+    PriceMaster customAddonSourcePrice;
 
     public AddonPriceHolder(ProductAddon productAddon, ProposalHeader proposalHeader) {
-        LOG.info("In AddonPriceHolder "+productAddon+", :"+proposalHeader);
         this.productAddon = productAddon;
-        LOG.info("AddonPriceHolder productAddon = "+productAddon);
-        LOG.info("AddonPriceHolder priceDate = "+proposalHeader.getPriceDate());
         this.priceDate = proposalHeader.getPriceDate();
         this.city = proposalHeader.getProjectCity();
         this.addonFactor = RateCardService.getInstance().getFactorRate(RateCard.ADDON_WO_TAX_FACTOR, this.priceDate, this.city);
+        this.customAddonSourcePrice = RateCardService.getInstance().getFactorRate(RateCard.CUSTOM_ADDON_SALES_PRICE_FACTOR, this.priceDate, this.city);
     }
 
     public void prepare()
@@ -49,6 +48,15 @@ public class AddonPriceHolder {
 
         PriceMaster addonRate = RateCardService.getInstance().getAddonRate(productAddon.getCode(), this.priceDate, this.city);
 
+        if (productAddon.isCustomAddon()) {
+            calculatePricingForCustomAddons(addonRate);
+        } else {
+            calculatePricingForStdAddons(addonRate);
+        }
+
+    }
+
+    private void calculatePricingForStdAddons(PriceMaster addonRate) {
         this.unitPrice = addonRate.getPrice();
         this.unitSourceCost = addonRate.getSourcePrice();
         this.price = this.productAddon.getAmount();
@@ -56,7 +64,16 @@ public class AddonPriceHolder {
         this.sourceCost = this.productAddon.getQuantity() * this.unitSourceCost;
         this.addonProfit = this.priceWoTax - this.sourceCost;
         this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
+    }
 
+    private void calculatePricingForCustomAddons(PriceMaster addonRate) {
+        this.unitPrice = productAddon.getAmount();
+        this.unitSourceCost = this.unitPrice * customAddonSourcePrice.getSourcePrice();
+        this.price = this.productAddon.getAmount();
+        this.priceWoTax = this.price * addonFactor.getSourcePrice();
+        this.sourceCost = this.productAddon.getQuantity() * this.unitSourceCost;
+        this.addonProfit = this.priceWoTax - this.sourceCost;
+        this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
     }
 
     public boolean hasErrors()
