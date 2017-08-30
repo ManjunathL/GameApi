@@ -15,23 +15,23 @@
       {
         "name": "com.mygubbi.si.email.EmailService"
       },
-      /*{
+      {
         "name": "com.mygubbi.si.firebase.FirebaseDataService"
       },
       {
         "name": "com.mygubbi.si.firebase.FirebaseService"
-      }*/
+      }
     ],
     "parallel": [
       {
         "name": "com.mygubbi.apiserver.GameApiServerVerticle",
         "instances": 20,
         "worker": false
-      }
-     /* {
+      },
+      {
         "name": "com.mygubbi.game.proposal.ModuleDataService"
-      },*/
-      /*{
+      },
+      {
         "name": "com.mygubbi.game.proposal.price.RateCardService"
       },
       {
@@ -65,7 +65,6 @@
       {
         "name":"com.mygubbi.game.proposal.sow.SOWCreatorService"
       }
-*/
     ]
   }
 }
