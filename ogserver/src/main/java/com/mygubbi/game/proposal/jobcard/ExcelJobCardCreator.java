@@ -41,10 +41,10 @@ public class ExcelJobCardCreator extends AbstractProposalOutputCreator
         AssembledProductInQuote product = this.quoteData.getAssembledProducts().get(0);
         new JobCardSheetCreator(workbookManager.getSheetByName("JOB Card"), this.quoteData, product, workbookManager.getStyles()).prepare();
         new HardwareSheetCreator(workbookManager.getSheetByName("Hardwares"), this.quoteData, product, workbookManager.getStyles()).prepare();
-        new AddonsSheetCreator(workbookManager.getSheetByName("Appliances and Services"), this.quoteData, product, workbookManager.getStyles()).prepare();
+        //new AddonsSheetCreator(workbookManager.getSheetByName("Appliances and Services"), this.quoteData, product, workbookManager.getStyles()).prepare();
         new PanelSheetCreator(workbookManager.getSheetByName("Panel Summary"), this.quoteData, product, workbookManager.getStyles()).prepare();
         new ModuleSheetCreator(workbookManager.getSheetByName("Module Summary"), this.quoteData, product, workbookManager.getStyles()).prepare();
-
+        new AccessorySheetCreator(workbookManager.getSheetByName("Accessory"), this.quoteData, product, workbookManager.getStyles()).prepare();
         this.closeWorkbook();
     }
 

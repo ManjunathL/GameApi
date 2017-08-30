@@ -156,9 +156,11 @@ public class ExcelSheetProcessor
     {
         Cell cell = dataRow.createCell(cellNum, Cell.CELL_TYPE_NUMERIC);
         cell.setCellValue(numberValue);
+        cell.setCellStyle(this.styles.getSpecificationStyle());
         if (isTitle)
         {
             cell.setCellStyle(this.styles.getBoldStyle());
+
         }
     }
 
@@ -169,6 +171,7 @@ public class ExcelSheetProcessor
         {
             Cell cell = dataRow.createCell(cellNum, Cell.CELL_TYPE_STRING);
             cell.setCellValue(textValue);
+            cell.setCellStyle(this.styles.getSpecificationStyle());
             if (isTitle)
             {
                 cell.setCellStyle(this.styles.getBoldStyle());

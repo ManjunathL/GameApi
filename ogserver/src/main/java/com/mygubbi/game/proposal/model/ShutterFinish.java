@@ -19,6 +19,7 @@ public class ShutterFinish
     private static final String CUTTING_OFFSET = "cuttingOffset";
     private static final String TITLE = "title";
     private static final String EDGE_BINDING = "edgeBinding";
+    private static final String FINISH_CATEGORY="finishCategory";
 
     private String costCode;
     private String doubleExposedCostCode;
@@ -31,6 +32,7 @@ public class ShutterFinish
     private String title;
     private int cuttingOffset;
     private String edgeBinding;
+    private String finishCategory;
 
     public ShutterFinish()
     {
@@ -42,7 +44,7 @@ public class ShutterFinish
         this.setFinishCode(json.getString(FINISH_CODE)).setCostCode(json.getString(COST_CODE)).setFinishType(json.getString(FINISH_TYPE))
                 .setFinishMaterial(json.getString(FINISH_MATERIAL)).setDesign(json.getString(DESIGN)).setShutterMaterial(json.getString(SHUTTER_MATERIAL))
                 .setColorGroupCode(json.getString(COLOR_GROUP_CODE)).setTitle(json.getString(TITLE)).setCuttingOffset(json.getInteger(CUTTING_OFFSET))
-                .setEdgeBinding(json.getString(EDGE_BINDING)).setDoubleExposedCostCode(json.getString(DOUBLE_EXPOSED_COST_CODE));
+                .setEdgeBinding(json.getString(EDGE_BINDING)).setDoubleExposedCostCode(json.getString(DOUBLE_EXPOSED_COST_CODE)).setFinishCategory(json.getString(FINISH_CATEGORY));
     }
 
     public String getCostCode()
@@ -161,6 +163,15 @@ public class ShutterFinish
     public ShutterFinish setDoubleExposedCostCode(String doubleExposedCostCode)
     {
         this.doubleExposedCostCode = doubleExposedCostCode;
+        return this;
+    }
+
+    public String getFinishCategory() {
+        return finishCategory;
+    }
+
+    public ShutterFinish setFinishCategory(String finishCategory) {
+        this.finishCategory = finishCategory;
         return this;
     }
 }

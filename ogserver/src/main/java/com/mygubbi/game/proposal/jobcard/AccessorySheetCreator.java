@@ -16,25 +16,23 @@ import org.apache.poi.ss.usermodel.Sheet;
 import java.util.List;
 
 /**
- * Created by Sunil on 22-05-2016.
+ * Created by Shruthi on 8/30/2017.
  */
-public class HardwareSheetCreator implements ExcelCellProcessor
+public class AccessorySheetCreator implements ExcelCellProcessor
 {
-    private final static Logger LOG = LogManager.getLogger(HardwareSheetCreator.class);
-
+    private final static Logger LOG = LogManager.getLogger(AccessorySheetCreator.class);
     private final AssembledProductInQuote product;
     private QuoteData quoteData;
     private Sheet hardwareSheet;
     private ExcelStyles styles;
 
-    public HardwareSheetCreator(Sheet hardwareSheet, QuoteData quoteData, AssembledProductInQuote product, ExcelStyles styles)
+    public AccessorySheetCreator(Sheet hardwareSheet, QuoteData quoteData, AssembledProductInQuote product, ExcelStyles styles)
     {
         this.hardwareSheet = hardwareSheet;
         this.quoteData = quoteData;
         this.styles = styles;
         this.product = product;
     }
-
     public void prepare()
     {
         new ExcelSheetProcessor(this.hardwareSheet, this.styles, this).process();
@@ -56,13 +54,9 @@ public class HardwareSheetCreator implements ExcelCellProcessor
     {
         switch (cellValue)
         {
-            case "Hardwares":
-                this.fillComponents(this.quoteData.getAllModuleHardware(), cell.getRow().getRowNum() + 1, "No hardware.");
-                break;
-
-            /*case "Accessories":
+            case "Accessories":
                 this.fillComponents(this.quoteData.getAllModuleAcessories(), cell.getRow().getRowNum() + 1, "No accessories.");
-                break;*/
+                break;
 
             default:
                 break;
@@ -91,7 +85,6 @@ public class HardwareSheetCreator implements ExcelCellProcessor
         }
         return currentRow;
     }
-
     private void createDataRowInDataSheet(int rowNum, String [] data, CellStyle style)
     {
         this.createRowInDataSheet(rowNum, data, false, style);
