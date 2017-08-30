@@ -269,9 +269,7 @@ public class ProductModule extends JsonObject
 
     public double getKnobQuantity() {
         if(!isValueNull(KNOB_QUANTITY)) {
-            System.out.println("KNOB_QUANTITY = " + this.getString(KNOB_QUANTITY));
-
-            return (double) Double.parseDouble(this.getString(KNOB_QUANTITY));
+            return this.getDouble(KNOB_QUANTITY);
         }
         return 0.0;
     }
