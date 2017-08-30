@@ -491,7 +491,7 @@ public class ModulePriceHolder
         ModulePanel modulePanel = this.getModulePanel(component);
         if (modulePanel != null)
         {
-            this.panelComponents.add(new PanelComponent(this, modulePanel, component, accPackCode));
+            this.panelComponents.add(new PanelComponent(this, modulePanel, component, accPackCode,priceDate,city));
         }
     }
 
