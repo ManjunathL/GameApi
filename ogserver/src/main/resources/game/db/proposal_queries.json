@@ -1076,9 +1076,9 @@
       "id": "workbench.designmaster.update",
       "type": "update",
       "table": "design_master",
-      "query": "update design_master set spaceName = ?, webDisplayName = ?, dFileLocation = ?, primaryImageLocation = ? , secondaryImageLocationJson = ? where id = ? ",
-      "params": ["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","id"],
-      "jsonfields":["secondaryImageLocationJson"]
+      "query": "update design_master set spaceName = ?, webDisplayName = ?, dFileLocation = ?, primaryImageLocation = ? , secondaryImageLocationJson = ? , l0Location = ?, moodBoardLocation = ? ,conceptNote = ? ,spaceType = ? ,spaceLayout = ? ,spaceSize = ? ,propertyType = ? ,spaceDesignStyle = ? ,spaceColorStyle = ? ,spaceFeature = ? ,furnitureJson = ? ,decorJson = ? , wallTreatmentType = ? , wallMaterial = ? , wallFinishMaterial = ?, wallFinishSwatch = ? , ceilingType = ?, ceilingMaterial = ?, ceilingFinishMaterial = ?, ceilingFinishSwatch = ?, flooringMaterial = ?,flooringFinish = ?, flooringFinishSwatch = ?, lighting = ?, designElement = ?, user1 = ?, hobby1 = ?, profession1 = ?, user2 = ?, hobby2 = ?, profession2 = ?, ageGroup = ?, religion = ?, community = ?, designerstory = ?  where id = ? ",
+      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceLayout","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","spaceFeature", "furnitureJson","decorJson", "wallTreatmentType", "wallMaterial", "wallFinishMaterial", "wallFinishSwatch", "ceilingType", "ceilingMaterial", "ceilingFinishMaterial", "ceilingFinishSwatch", "flooringMaterial", "flooringFinish", "flooringFinishSwatch", "lighting", "designElement", "user1", "hobby1", "profession1", "user2", "hobby2", "profession2", "ageGroup", "religion", "community", "designerstory","id"],
+      "jsonfields":["secondaryImageLocationJson", "conceptNote","spaceLayout","spaceFeature", "furnitureJson","decorJson", "wallTreatmentType", "wallMaterial", "wallFinishMaterial", "wallFinishSwatch", "ceilingType", "ceilingMaterial", "ceilingFinishMaterial", "ceilingFinishSwatch", "flooringMaterial", "flooringFinish", "flooringFinishSwatch"]
     },
     {
       "id": "workbench.designmaster.select",
