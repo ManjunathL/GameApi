@@ -2,7 +2,7 @@
   "version": "0.0.0a",
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/prod_check",
+    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mg_warehouse",
     "max_pool_size": 20,
     "user": "admin",
     "password": "OG$#gubi32"
@@ -10,8 +10,8 @@
   "urlwithssl": "",
   "ssl_keystore": "ssl/mygubbiprod.jks",
   "ssl_password": "0r@nge123$",
-  "http_port": 1445,
-  "https_port": 1446,
+  "http_port": 1447,
+  "https_port": 1448,
   "websiteHost": "52.74.136.198:8685",
   "proposal_docs_folder": "/mnt/game/proposal",
   "quote_template": "/mnt/game/proposal/templates/quote-template.xlsx",
