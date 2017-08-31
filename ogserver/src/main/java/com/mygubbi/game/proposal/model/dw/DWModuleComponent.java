@@ -581,7 +581,12 @@ public class DWModuleComponent extends JsonObject {
         panelPriceAfterDiscount = panelPrice - (panelPrice * (proposalVersion.getDiscountPercentage()/100));
         panelPriceWoTax = panelPriceAfterDiscount / prodWoTaxFactor.getSourcePrice();
         panelProfit = panelPriceWoTax - panelCost;
-        panelMargin = (panelProfit / panelPriceWoTax) * 100;
+
+        if(panelPriceWoTax ==0 ||panelProfit == 0 ){
+            panelMargin = 0.0;
+        }else {
+            panelMargin = (panelProfit / panelPriceWoTax) * 100;
+        }
 
         dwModuleComponent.setComponentPrice(panelPrice);
         dwModuleComponent.setComponentPriceAfterDiscount(panelPriceAfterDiscount);
