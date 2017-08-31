@@ -39,6 +39,7 @@ public class PanelComponent
     private PanelExposed exposed;
     private ModulePanel underlyingPanel;
     private String accPackCode;
+    private IModuleComponent moduleComponent;
 
     private enum PanelExposed{NONE, SINGLE, DOUBLE};
 
@@ -54,6 +55,7 @@ public class PanelComponent
         this.doIntegrityCheck(priceHolder);
         this.underlyingPanel = modulePanel;
         this.accPackCode = accPackCode;
+        this.moduleComponent = component;
     }
 
     private void doIntegrityCheck(ModulePriceHolder priceHolder)
@@ -80,6 +82,7 @@ public class PanelComponent
                 .setType(modulePanel.getType()).setSide(modulePanel.getSide())
                 .setQuantity(component.getQuantity());
     }
+
 
     private void setRateCards(ModulePriceHolder priceHolder)
     {
@@ -443,5 +446,29 @@ public class PanelComponent
     public String getDimesions()
     {
         return this.getLength() + " X " + this.getBreadth() + " X " + this.thickness;
+    }
+
+    public String getAccPackCode()
+    {
+        return this.accPackCode;
+    }
+
+    @Override
+    public String toString() {
+        return "PanelComponent{" +
+                "quantity=" + quantity +
+                ", materialRateCard=" + materialRateCard +
+                ", finishRateCard=" + finishRateCard +
+                ", finish=" + finish +
+                ", code='" + code + '\'' +
+                ", type='" + type + '\'' +
+                ", side='" + side + '\'' +
+                ", length=" + length +
+                ", breadth=" + breadth +
+                ", thickness=" + thickness +
+                ", exposed=" + exposed +
+                ", underlyingPanel=" + underlyingPanel +
+                ", accPackCode='" + accPackCode + '\'' +
+                '}';
     }
 }

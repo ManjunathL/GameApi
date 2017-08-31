@@ -1748,14 +1748,6 @@
       "params": ["proposalId"],
       "jsonfields":[]
     },
-    {
-      "id": "dw_module_component.insert",
-      "type": "insert",
-      "table": "dw_module_component",
-      "query": "insert into dw_module_component (proposalId, version, priceDate, businessDate, region,crmId,quoteNo, spaceType, room, prId, prTitle, moduleType, moduleSeq, moduleCode, compType, compCode, compTitle, compPrice, compWoTax, compCost, compProfit, compMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      "params": ["proposalId","version","priceDate","businessDate","region","crmId","quoteNo","spaceType","room","prId","prTitle","moduleType","moduleSeq","moduleCode","compType","compCode","compTitle","compPrice","compWoTax","compCost","compProfit","compMargin"],
-      "jsonfields":[]
-    },
 
     {
       "id": "dw_product_module.insert",
@@ -1763,6 +1755,15 @@
       "table": "dw_product_module",
       "query": "insert into dw_product_module (proposalId, version, proposalTitle, priceDate, businessDate, region,crmId,quoteNo, spaceType, room, prId, prTitle, moduleSeq, moduleCode, description, status,discountAmount,discountPercentage,width, depth, height, moduleCategory, handleSize, handleQty, carcass, finish, finishMaterial, color, exposedLeft, exposedRight, exposedBottom, exposedTop, exposedBack, exposedOpen, noOfAccPacks, moduleArea, ccPrice, ccWoTax, ccCost, ccProfit, ccMargin, shPrice, shWoTax, shCost, shProfit, shMargin, hwPrice, hwWoTax, hwCost, hwProfit, hwMargin, accPrice, accWoTax, accCost, accProfit, accMargin, handlePrice, handleWoTax, handleCost, handleProfit, handleMargin, hingePrice, hingeWoTax, hingeCost, hingeProfit, hingeMargin, lrPrice, lrWoTax, lrCost, lrProfit, lrMargin, modulePrice, moduleWoTax, moduleCost, moduleProfit, moduleMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","crmId","quoteNo","spaceType","room","prId","prTitle","moduleSeq","moduleCode","description","status","discountAmount","discountPercentage","width","depth","height","moduleCategory","handleSize","handleQty","carcass","finish","finishMaterial","color","exposedLeft","exposedRight","exposedBottom","exposedTop","exposedBack","exposedOpen","noOfAccPacks","moduleArea","ccPrice","ccWoTax","ccCost","ccProfit","ccMargin","shPrice","shWoTax","shCost","shProfit","shMargin","hwPrice","hwWoTax","hwCost","hwProfit","hwMargin","accPrice","accWoTax","accCost","accProfit","accMargin","handlePrice","handleWoTax","handleCost","handleProfit","handleMargin","hingePrice","hingeWoTax","hingeCost","hingeProfit","hingeMargin","lrPrice","lrWoTax","lrCost","lrProfit","lrMargin","modulePrice","moduleWoTax","moduleCost","moduleProfit","moduleMargin"],
+      "jsonfields":[]
+    },
+
+    {
+      "id": "dw_module_component.insert",
+      "type": "insert",
+      "table": "dw_module_component",
+      "query": "insert into dw_module_component (proposalId,crmId,quoteNo,proposalTitle, version, priceDate, businessDate, region,status,discountAmount,discountPercentage, spaceType, room, prId, prTitle,prCategory, moduleType, moduleSeq, moduleCode,moduleCategory,accPackCode, carcass, finish, finishMaterial,width, depth, height,panelArea,compType, compCode,compQty, compTitle, compPrice,compPriceAfterDiscount, compWoTax, compCost, compProfit, compMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "params": ["proposalId","crmId","quoteNo","proposalTitle","version","priceDate","businessDate","region","status","discountAmount","discountPercentage","spaceType","room","prId","prTitle","prCategory","moduleType","moduleSeq","moduleCode","moduleCategory","accPackCode","carcass","finish","finishMaterial","width","depth","height","panelArea","compType","compCode","compQty","compTitle","compPrice","compPriceAfterDiscount","compWoTax","compCost","compProfit","compMargin"],
       "jsonfields":[]
     },
     {
@@ -1818,6 +1819,14 @@
       "type": "delete",
       "table": "dw_product_module",
       "query": "delete from dw_product_module where proposalId = ? and version = ?",
+      "params": ["proposalId","version"],
+      "jsonfields":[]
+    },
+    {
+      "id": "dw_module_component.delete",
+      "type": "delete",
+      "table": "dw_module_component",
+      "query": "delete from dw_module_component where proposalId = ? and version = ?",
       "params": ["proposalId","version"],
       "jsonfields":[]
     },

@@ -646,16 +646,12 @@ public class ModulePriceHolder
         this.labourManufacturingRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
-        LOG.debug("this.nonstandard" + this.nonStandardloadingFactorCard.getRate());
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
-        LOG.debug("loadingFactorBasedOnProduct :" + this.loadingFactorBasedOnProduct.getSourcePriceBasedOnProduct() + " : " + this.loadingFactorBasedOnProduct.getSourcePrice());
         this.stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
-        LOG.debug("stdLoadingSourceFactorBasedOnProduct :" + this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct() + " : " + this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice());
         this.nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
-        LOG.debug("nStdLoadingSourceFactorBasedOnProduct :" + this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct() + " : " + this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice());
         this.prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
 

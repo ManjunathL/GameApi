@@ -4,19 +4,13 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.ProposalHeader;
-import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.model.dw.DWProductModule;
-import com.mygubbi.game.proposal.model.dw.DWProposalAddon;
-import com.mygubbi.game.proposal.model.dw.DWProposalProduct;
-import com.mygubbi.game.proposal.model.dw.DwProposalVersion;
-import com.mygubbi.game.proposal.price.AddonPriceHolder;
-import com.mygubbi.game.proposal.price.ModulePriceHolder;
-import com.mygubbi.game.proposal.price.ProductPriceHolder;
-import com.mygubbi.game.proposal.price.VersionPriceHolder;
+import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.game.proposal.model.dw.*;
+import com.mygubbi.game.proposal.price.*;
 import com.mygubbi.pipeline.MessageDataHolder;
 import com.mygubbi.pipeline.PipelineResponseHandler;
 import io.vertx.core.AbstractVerticle;
@@ -28,8 +22,7 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by User on 04-08-2017.
@@ -41,10 +34,18 @@ public class DwReportingService extends AbstractVerticle {
     private int proposalId;
     private String version;
 
+
     List<QueryData> queryDatasForModule = new ArrayList<>();
+    List<QueryData> queryDatasForComponent = new ArrayList<>();
     List<QueryData> queryDatasForProduct = new ArrayList<>();
     List<QueryData> queryDatasForAddon = new ArrayList<>();
     QueryData queryDataVersion = null;
+
+
+
+    private Collection<ModuleComponent> moduleComponents;
+    private List<AccessoryComponent> accessoryComponents = Collections.EMPTY_LIST;
+    private List<HardwareComponent> hardwareComponents = Collections.EMPTY_LIST;
 
     /*List<ProductPriceHolder> versionProductPriceHolders = new ArrayList<>();*/
 /*
@@ -140,6 +141,7 @@ public class DwReportingService extends AbstractVerticle {
                     if (i == resultDatas.size()) {
                         queryDatasForProduct.clear();
                         queryDatasForModule.clear();
+                        queryDatasForComponent.clear();
                         queryDatasForAddon.clear();
                         message.reply(LocalCache.getInstance().store(getResponseJson("Success",this.proposalId,this.version,"Successfully inserted")));
 
@@ -184,10 +186,23 @@ public class DwReportingService extends AbstractVerticle {
                     modulePriceHolders.add(modulePriceHolder);
 
                     setModuleAttributes(modulePriceHolder, proposalHeader, productLineItem, proposalVersion, productModule);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     LOG.info("Error is :: "+modulePriceHolder.getErrors());
                     message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,"Module Price Holder has errors")));
+                }
+
+                accessoryComponents = modulePriceHolder.getAccessoryComponents();
+                hardwareComponents = modulePriceHolder.getHardwareComponents();
+                List<PanelComponent> panelComponents = modulePriceHolder.getPanelComponents();
+
+                for (PanelComponent panelComponent : panelComponents )
+                {
+                    if (panelComponent.isCarcass() || panelComponent.isShutter())
+                    {
+                        setComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
+                    }
                 }
 
 
@@ -239,6 +254,15 @@ public class DwReportingService extends AbstractVerticle {
         return dwProposalAddon;
     }
 
+    private void setComponentAttributes(ProposalHeader proposalHeader,ProposalVersion proposalVersion,ProductLineItem productLineItem,ProductModule productModule,PanelComponent panelComponent) {
+        DWModuleComponent dwModuleComponent = new DWModuleComponent();
+        dwModuleComponent = dwModuleComponent.setDwComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
+
+
+        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
+
+    }
+
 
     private void setModuleAttributes(ModulePriceHolder modulePriceHolder, ProposalHeader proposalHeader, ProductLineItem productLineItem, ProposalVersion proposalVersion, ProductModule productModule) {
         DWProductModule dwProductModule = new DWProductModule();
@@ -267,6 +291,8 @@ public class DwReportingService extends AbstractVerticle {
         queryDatas.add(new QueryData("dw_proposal_product.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion));
+        queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion));
+        queryDatas.addAll(queryDatasForComponent);
         queryDatas.addAll(queryDatasForModule);
         queryDatas.addAll(queryDatasForProduct);
         queryDatas.addAll(queryDatasForAddon);
