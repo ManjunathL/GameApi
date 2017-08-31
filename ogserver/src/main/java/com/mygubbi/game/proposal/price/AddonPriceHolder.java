@@ -71,9 +71,19 @@ public class AddonPriceHolder {
         this.unitSourceCost = this.unitPrice * customAddonSourcePrice.getSourcePrice();
         this.price = this.productAddon.getAmount();
         this.priceWoTax = this.price * addonFactor.getSourcePrice();
-        this.sourceCost = this.productAddon.getQuantity() * this.unitSourceCost;
+        this.sourceCost = this.unitSourceCost;
         this.addonProfit = this.priceWoTax - this.sourceCost;
         this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
+
+        LOG.debug("Calulate pricing for custom addons :");
+        LOG.debug("unitPrice :" + this.unitPrice);
+        LOG.debug("unitPrice :" + this.unitSourceCost);
+        LOG.debug("unitPrice :" + this.price);
+        LOG.debug("unitPrice :" + this.priceWoTax);
+        LOG.debug("unitPrice :" + this.sourceCost);
+        LOG.debug("unitPrice :" + this.addonProfit);
+        LOG.debug("unitPrice :" + this.addonMargin);
+
     }
 
     public boolean hasErrors()
