@@ -376,22 +376,22 @@ public class ProductPriceHolder {
 
     public double getProductPrice()
     {
-        return this.productPrice;
+        return this.productPrice + this.productLConnectorPrice;
     }
 
     public double getProductPriceAfterDiscount()
     {
-        return this.productPriceAfterDiscount;
+        return this.productPriceAfterDiscount + this.productLConnectorPriceAfterDiscount;
     }
 
     public double getProductSourceCost()
     {
-        return this.productSourceCost;
+        return this.productSourceCost + this.productLConnectorSourceCost;
     }
 
     public double getProductPriceWoTax()
     {
-        return this.productPriceWoTax;
+        return this.productPriceWoTax + this.productLConnectorPriceWoTax;
     }
 
     public double getWoodWorkPrice()
