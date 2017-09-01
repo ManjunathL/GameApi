@@ -220,9 +220,8 @@ public class PanelComponent
 
     public double getFinishCost()
     {
-        PriceMaster factorRate = RateCardService.getInstance().getFactorRate(finish.getFinishCategory(),priceDate,city);
         if (this.finishRateCard == null) return 0;
-        return this.getArea() * this.finishRateCard.getRateByThickness(this.getThickness())*((factorRate.getPrice()/100) +1);
+        return this.getArea() * this.finishRateCard.getRateByThickness(this.getThickness());
     }
 
     public double getArea()

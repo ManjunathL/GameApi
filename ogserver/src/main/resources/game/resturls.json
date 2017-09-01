@@ -243,7 +243,7 @@
       "uri": "/gapi/proposal/addon.update",
       "source": "db",
       "query":"proposal.addon.update",
-      "params":["code", "categoryCode", "seq","fromVersion", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id","product","profit","margin","sourcePrice","amountWOTax"],
+      "params":["code", "categoryCode", "seq","fromVersion", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id","product","spaceType", "roomcode"],
       "resultfields":[],
       "default": "[]"
     },
