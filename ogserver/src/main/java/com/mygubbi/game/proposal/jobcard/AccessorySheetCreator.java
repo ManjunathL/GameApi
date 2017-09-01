@@ -1,6 +1,11 @@
 package com.mygubbi.game.proposal.jobcard;
 
 import com.mygubbi.common.StringUtils;
+import com.mygubbi.game.proposal.ModuleAccessoryPack;
+import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.model.AccHwComponent;
+import com.mygubbi.game.proposal.model.AccessoryPackComponent;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -13,6 +18,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -55,7 +61,8 @@ public class AccessorySheetCreator implements ExcelCellProcessor
         switch (cellValue)
         {
             case "Accessories":
-                this.fillComponents(this.quoteData.getAllModuleAcessories(), cell.getRow().getRowNum() + 1, "No accessories.");
+                //this.fillComponents(this.quoteData.getAllModuleAcessories(), cell.getRow().getRowNum() + 1, "No accessories.");
+                this.fillComponents(this.product.getModules(), cell.getRow().getRowNum() + 1, "No accessories.");
                 break;
 
             default:
@@ -64,7 +71,7 @@ public class AccessorySheetCreator implements ExcelCellProcessor
 
     }
 
-    private int fillComponents(List<AssembledProductInQuote.ModulePart> components, int currentRow, String defaultMessage)
+    private int fillComponents(List<ProductModule> components, int currentRow, String defaultMessage)
     {
         CellStyle style = this.hardwareSheet.getRow(currentRow + 1).getRowStyle();
 
@@ -76,12 +83,27 @@ public class AccessorySheetCreator implements ExcelCellProcessor
         }
 
         int seq = 1;
-        for (AssembledProductInQuote.ModulePart component : components)
+        for (ProductModule component : components)
         {
-            currentRow++;
-            this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(seq), component.title, component.make,
-                    component.code, component.uom, String.valueOf(component.quantity) }, style);
-            seq++;
+            for(ModuleAccessoryPack moduleAccessoryPack:component.getAccessoryPacks())
+            {
+                Collection<AccessoryPackComponent> accessoryPackComponents= ModuleDataService.getInstance().getAccessoryPackComponents(moduleAccessoryPack.getAccessoryPackCode());
+                if (accessoryPackComponents == null) continue;
+                for (AccessoryPackComponent accessoryPackComponent : accessoryPackComponents)
+                {
+                    if (accessoryPackComponent.isAccessory()) {
+                        AccHwComponent accHwComponent = ModuleDataService.getInstance().getAccessory(accessoryPackComponent.getComponentCode());
+                        if (accHwComponent == null) continue;
+                        if(accHwComponent.getCategory().equals("Primary")) {
+                            currentRow++;
+                            this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(seq), component.getMGCode(), accHwComponent.getTitle(), accHwComponent.getERPCode(), accHwComponent.getMake()}, style);
+                            seq++;
+                        }
+                    }
+                }
+            }
+
+
         }
         return currentRow;
     }
