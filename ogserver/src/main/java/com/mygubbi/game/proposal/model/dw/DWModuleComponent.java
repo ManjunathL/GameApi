@@ -507,7 +507,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
         dwModuleComponent.setVersion(proposalVersion.getVersion());
         dwModuleComponent.setPriceDate(proposalHeader.getPriceDate());
-        dwModuleComponent.setBusinessDate(proposalVersion.getDate());
+        dwModuleComponent.setBusinessDate(proposalVersion.getUpdatedOn());
         dwModuleComponent.setRegion(proposalHeader.getProjectCity());
         dwModuleComponent.setStatus(proposalVersion.getProposalStatus());
         dwModuleComponent.setDiscountAmount(proposalVersion.getDiscountAmount());

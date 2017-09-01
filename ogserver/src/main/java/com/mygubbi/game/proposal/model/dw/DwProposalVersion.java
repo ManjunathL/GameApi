@@ -1035,13 +1035,12 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setCrmId(proposalHeader.getCrmId());
         dwProposalVersion.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalVersion.setProjectName(proposalHeader.getProjectName());
-        dwProposalVersion.setDesignerName(proposalHeader.getDesignerName());
         dwProposalVersion.setSalesName(proposalHeader.getSalespersonName());
         dwProposalVersion.setDesignPartnerName(proposalHeader.getDesignPartnerName());
         dwProposalVersion.setProposalCreateDate(proposalHeader.getCreatedOn());
         dwProposalVersion.setProposalUpdatedBy(proposalHeader.getUpdatedBy());
         dwProposalVersion.setProposalPriceDate(proposalHeader.getPriceDate());
-        dwProposalVersion.setBusinessDate(proposalVersion.getDate());
+        dwProposalVersion.setBusinessDate(proposalVersion.getUpdatedOn());
         dwProposalVersion.setVersionCreatedBy(proposalVersion.getCreatedBy());
         dwProposalVersion.setVersionCreatedOn(proposalVersion.getDate());
         dwProposalVersion.setVersionUpdatedBy(proposalVersion.getUpdatedBy());
@@ -1132,6 +1131,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setNSproductCount(versionPriceHolder.getNSProductCount());
         dwProposalVersion.setBroughtoutProductCount(versionPriceHolder.getBPCount());
         dwProposalVersion.setServicesCount(versionPriceHolder.getServicesCount());
+        dwProposalVersion.setDesignerName(proposalHeader.getDesignerName());
 
 
         return dwProposalVersion;
