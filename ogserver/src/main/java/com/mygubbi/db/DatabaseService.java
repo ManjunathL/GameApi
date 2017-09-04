@@ -231,7 +231,7 @@ public class DatabaseService extends AbstractVerticle
 		}
 
 		qData.startQuery();
-		LOG.debug("running query :" + qData.queryId + " : " + qData.paramsObject);
+//		LOG.debug("running query :" + qData.queryId + " : " + qData.paramsObject);
 
 		this.client.getConnection(res -> {
 			if (res.succeeded())

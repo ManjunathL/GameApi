@@ -54,7 +54,7 @@ public class SequenceIdGenerator extends AbstractVerticle
 		for (String table : tables)
 		{
 			QueryDef qDef = new QueryDef("select max(id) as maxid from " + table, QueryDef.SELECT_QUERY_TYPE);
-			QueryData qData = new QueryData("max." + table, null);
+			QueryData qData = new QueryData("max." + table, new JsonObject());
 			qData.queryDef = qDef;
 			Integer qDataId = LocalCache.getInstance().store(qData);
 			

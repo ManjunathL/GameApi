@@ -55,10 +55,12 @@ public class ReportTableFillerSevice extends AbstractVerticle
 
         EventBus eb = VertxInstance.get().eventBus();
        eb.localConsumer(RUN_FOR_SINGLE_PROPOSAL, (Message<Integer> message) -> {
+          long start = System.currentTimeMillis();
             JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
             LOG.info("Json Obj = " + obj);
             this.getVersionObjForProposal(obj.getInteger("proposalId"), message);
-
+long end = System.currentTimeMillis();
+           LOG.info("Time taken :: "+(end-start));
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());
         });

@@ -18,6 +18,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,10 +36,10 @@ public class DwReportingService extends AbstractVerticle {
     private String version;
 
 
-    List<QueryData> queryDatasForModule = new ArrayList<>();
-    List<QueryData> queryDatasForComponent = new ArrayList<>();
-    List<QueryData> queryDatasForProduct = new ArrayList<>();
-    List<QueryData> queryDatasForAddon = new ArrayList<>();
+    List<JsonObject> queryDatasForModule = new ArrayList<>();
+    List<JsonObject> queryDatasForComponent = new ArrayList<>();
+    List<JsonObject> queryDatasForProduct = new ArrayList<>();
+    List<JsonObject> queryDatasForAddon = new ArrayList<>();
     QueryData queryDataVersion = null;
 
 
@@ -236,7 +237,8 @@ public class DwReportingService extends AbstractVerticle {
             versionAddonPriceHolders.add(addonPriceHolder);
 
             DWProposalAddon dwProposalAddon = setAddonLevelAttributes(proposalHeader, proposalVersion, productAddon, addonPriceHolder);
-            queryDatasForAddon.add(new QueryData("dw_proposal_addon.insert", dwProposalAddon));
+//            queryDatasForAddon.add(new QueryData("dw_proposal_addon.insert", dwProposalAddon));
+            queryDatasForAddon.add( dwProposalAddon);
         }
 
         VersionPriceHolder versionPriceHolder = new VersionPriceHolder(proposalHeader, versionProductPriceHolders, versionAddonPriceHolders, proposalVersion);
@@ -259,7 +261,8 @@ public class DwReportingService extends AbstractVerticle {
         dwModuleComponent = dwModuleComponent.setDwComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
 
 
-        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
+//        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
+        queryDatasForComponent.add(dwModuleComponent);
 
     }
 
@@ -268,7 +271,7 @@ public class DwReportingService extends AbstractVerticle {
         DWProductModule dwProductModule = new DWProductModule();
         dwProductModule = dwProductModule.setDwModuleObjects(modulePriceHolder, proposalHeader, productLineItem, proposalVersion, productModule);
 
-        queryDatasForModule.add(new QueryData("dw_product_module.insert", dwProductModule));
+        queryDatasForModule.add( dwProductModule);
 
     }
 
@@ -276,7 +279,7 @@ public class DwReportingService extends AbstractVerticle {
         DWProposalProduct dwProposalProduct = new DWProposalProduct();
 
         dwProposalProduct = dwProposalProduct.setDwProductObjects(productPriceHolder, proposalHeader, proposalVersion, productLineItem);
-        queryDatasForProduct.add(new QueryData("dw_proposal_product.insert", dwProposalProduct));
+        queryDatasForProduct.add( dwProposalProduct);
     }
 
     private void setVersionAttributes(ProposalHeader proposalHeader, ProposalVersion proposalVersion, VersionPriceHolder versionPriceHolder, Message message) {
@@ -292,10 +295,10 @@ public class DwReportingService extends AbstractVerticle {
         queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion));
-        queryDatas.addAll(queryDatasForComponent);
-        queryDatas.addAll(queryDatasForModule);
-        queryDatas.addAll(queryDatasForProduct);
-        queryDatas.addAll(queryDatasForAddon);
+        if (!(queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",queryDatasForComponent));
+        if (!(queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",queryDatasForModule));
+        if (!(queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",queryDatasForProduct));
+        if (!(queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",queryDatasForAddon));
         queryDatas.add(queryDataVersion);
         insertRowsToTable(queryDatas, message);
     }

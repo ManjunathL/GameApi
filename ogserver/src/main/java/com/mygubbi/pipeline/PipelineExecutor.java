@@ -49,7 +49,7 @@ public class PipelineExecutor
         Integer id = LocalCache.getInstance().store(messageDataHolder.getRequestData());
         VertxInstance.get().eventBus().send(messageDataHolder.getMessageId(), id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
-                    LOG.info("selectResult.result().body() = "+selectResult.result().body());
+//                    LOG.info("selectResult.result().body() = "+selectResult.result().body());
                     if(selectResult.result().body() != null) {
                         LOG.info("selectResult.result().body() = " + selectResult.result().body());
                         messageDataHolder.setResponseData(LocalCache.getInstance().remove(selectResult.result().body()));
