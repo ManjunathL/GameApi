@@ -276,20 +276,60 @@ public class DatabaseService extends AbstractVerticle
 
 	private void runUpdateQueryInGroup(Message message, QueryData qData, SQLConnection connection, List<QueryData> qDataList, int index)
 	{
-		LOG.info("Query:" + qData.queryDef.query + ". Params:" + qData.getParams());
-		connection.updateWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
-			if (res2.succeeded())
-			{
-				qData.setResult(res2.result());
-			}
-			else
-			{
-				qData.setError(res2.cause());
-				LOG.error("Error:", res2.cause());
-			}
-			connection.close();
-            handleQueryInGroup(message, qDataList, index + 1);
-		});
+		if (qData.isBatchMode())
+		{
+			List<JsonArray> paramsForBatch = qData.getParamsForBatch();
+			LOG.info("Query in batch mode:" + qData.queryDef.query + ". Params for records:" + paramsForBatch.size());
+			connection.setAutoCommit(false, autoCommitResponse -> {
+				if (autoCommitResponse.failed())
+				{
+					qData.setError(autoCommitResponse.cause());
+					LOG.error("Error in setting auto commit:", autoCommitResponse.cause());
+					connection.setAutoCommit(true, null);
+					connection.close();
+					handleQueryInGroup(message, qDataList, index + 1);
+					return;
+				}
+				connection.batchWithParams(qData.queryDef.query, paramsForBatch, res2 -> {
+					if (res2.failed())
+					{
+						qData.setError(res2.cause());
+						LOG.error("Error in batch execution:", res2.cause());
+						connection.setAutoCommit(true, null);
+						connection.close();
+						handleQueryInGroup(message, qDataList, index + 1);
+						return;
+					}
+					connection.commit(commitResult -> {
+						if (commitResult.failed())
+						{
+							qData.setError(res2.cause());
+							LOG.error("Error in commit:", res2.cause());
+						}
+						connection.setAutoCommit(true, null);
+						connection.close();
+						handleQueryInGroup(message, qDataList, index + 1);
+					});
+				});
+			});
+		}
+		else
+		{
+			LOG.info("Query:" + qData.queryDef.query + ". Params:" + qData.getParams());
+			connection.updateWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
+				if (res2.succeeded())
+				{
+					qData.setResult(res2.result());
+				}
+				else
+				{
+					qData.setError(res2.cause());
+					LOG.error("Error:", res2.cause());
+				}
+				connection.close();
+				handleQueryInGroup(message, qDataList, index + 1);
+			});
+		}
 	}
 
 	public static void main(String[] args) throws Exception
