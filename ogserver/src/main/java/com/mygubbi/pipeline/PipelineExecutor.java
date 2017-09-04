@@ -5,6 +5,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.QueryData;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,21 +48,24 @@ public class PipelineExecutor
 
         MessageDataHolder messageDataHolder = steps.get(index);
         Integer id = LocalCache.getInstance().store(messageDataHolder.getRequestData());
-        VertxInstance.get().eventBus().send(messageDataHolder.getMessageId(), id,
+        VertxInstance.get().eventBus().send(messageDataHolder.getMessageId(), id, new DeliveryOptions().setSendTimeout(120000),
                 (AsyncResult<Message<Integer>> selectResult) -> {
-//                    LOG.info("selectResult.result().body() = "+selectResult.result().body());
-                    if(selectResult.result().body() != null) {
+                    LOG.info("selectResult.result().body() = "+selectResult);
+                    if (selectResult != null && selectResult.result() != null && selectResult.result().body() != null)
+                     {
                         LOG.info("selectResult.result().body() = " + selectResult.result().body());
                         messageDataHolder.setResponseData(LocalCache.getInstance().remove(selectResult.result().body()));
                         //Call step response handler
 
 
-                        int nextIndex = index + 1;
-                        LOG.info("Calling next index :: " + nextIndex);
-                        handleStepInPipeline(steps, nextIndex, responseHandler);
+
                     }else{
                         LOG.info("selectResult.result().body() IS NULL");
                     }
+                    int nextIndex = index + 1;
+                    LOG.info("Calling next index :: " + nextIndex);
+                    handleStepInPipeline(steps, nextIndex, responseHandler);
+
                 });
 
 

@@ -16,6 +16,7 @@ import com.mygubbi.pipeline.PipelineResponseHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.Json;
@@ -32,26 +33,7 @@ public class DwReportingService extends AbstractVerticle {
 
     private final static Logger LOG = LogManager.getLogger(DwReportingService.class);
     public static final String RECORD_VERSION_PRICE = "update.proposal.dw.version.price";
-    private int proposalId;
-    private String version;
 
-
-    List<JsonObject> queryDatasForModule = new ArrayList<>();
-    List<JsonObject> queryDatasForComponent = new ArrayList<>();
-    List<JsonObject> queryDatasForProduct = new ArrayList<>();
-    List<JsonObject> queryDatasForAddon = new ArrayList<>();
-    QueryData queryDataVersion = null;
-
-
-
-    private Collection<ModuleComponent> moduleComponents;
-    private List<AccessoryComponent> accessoryComponents = Collections.EMPTY_LIST;
-    private List<HardwareComponent> hardwareComponents = Collections.EMPTY_LIST;
-
-    /*List<ProductPriceHolder> versionProductPriceHolders = new ArrayList<>();*/
-/*
-    List<AddonPriceHolder> versionAddonPriceHolders = new ArrayList<>();
-*/
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
@@ -68,19 +50,19 @@ public class DwReportingService extends AbstractVerticle {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(RECORD_VERSION_PRICE, (Message<Integer> message) ->
         {
-            LOG.info("Handling (proposalId,version) = "+"("+proposalId+","+version+")");
             ProposalVersion proposalVersion = (ProposalVersion) LocalCache.getInstance().remove(message.body());
-            this.proposalId = proposalVersion.getProposalId();
-            this.version = proposalVersion.getVersion();
+            ReportingObjects reportingObjects = new ReportingObjects();
+            reportingObjects.proposalId = proposalVersion.getProposalId();
+            reportingObjects.version = proposalVersion.getVersion();
+            LOG.info("Handling (proposalId,version) = "+"("+reportingObjects.proposalId+","+reportingObjects.version+")");
 
-
-            this.getProposalData(message, proposalVersion);
+            this.getProposalData(message, proposalVersion,reportingObjects);
         }).completionHandler(res -> {
             LOG.info("Proposal version price update service started." + res.succeeded());
         });
     }
 
-    private void getProposalData(Message message, ProposalVersion proposalVersion) {
+    private void getProposalData(Message message, ProposalVersion proposalVersion, ReportingObjects reportingObjects) {
         List<QueryData> queryDatas = new ArrayList<>();
 
         queryDatas.add(new QueryData("proposal.header", new JsonObject().put("id", proposalVersion.getProposalId())));
@@ -95,14 +77,14 @@ public class DwReportingService extends AbstractVerticle {
         VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, LocalCache.getInstance().store(queryDatas),
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     List<QueryData> resultDataAsync = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
-                    handleResult(message, proposalVersion, resultDataAsync);
+                    handleResult(message, proposalVersion, resultDataAsync,reportingObjects);
                 });
 
     }
 
-    private void handleResult(Message message, ProposalVersion proposalVersion, List<QueryData> resultData) {
+    private void handleResult(Message message, ProposalVersion proposalVersion, List<QueryData> resultData, ReportingObjects reportingObjects) {
         if (resultData.get(0).errorFlag || resultData.get(0).rows == null || resultData.get(0).rows.isEmpty()) {
-            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,resultData.get(0).errorMessage)));
+            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",reportingObjects.proposalId,reportingObjects.version,resultData.get(0).errorMessage)));
             LOG.error("Proposal not found for id:" + proposalVersion.getProposalId());
         } else {
             ProposalHeader proposalHeader = new ProposalHeader(resultData.get(0).rows.get(0));
@@ -118,33 +100,29 @@ public class DwReportingService extends AbstractVerticle {
                 ProductAddon productAddon = new ProductAddon(jsonObject);
                 addonLineItems.add(productAddon);
             }
-            calculateProductLevelPricing(message, proposalHeader, productLineItems, proposalVersion, addonLineItems);
+            calculateProductLevelPricing(message, proposalHeader, productLineItems, proposalVersion, addonLineItems,reportingObjects);
 
         }
     }
 
 
-    private void insertRowsToTable(List<QueryData> queryDatas, Message message) {
+    private void insertRowsToTable(List<QueryData> queryDatas, Message message, ReportingObjects reportingObjects) {
         Integer id = LocalCache.getInstance().store(queryDatas);
-        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id, new DeliveryOptions().setSendTimeout(120000),
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     List<QueryData> resultDatas = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
                     int i = 0;
                     for (; i < resultDatas.size(); i++) {
                         if (resultDatas.get(i).errorFlag ) {
 
-                            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,resultDatas.get(i).errorMessage)));
+                            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",reportingObjects.proposalId,reportingObjects.version,resultDatas.get(i).errorMessage)));
                             LOG.error("Error in Executing Query : "+resultDatas.get(i).queryId +" and error is::"+resultDatas.get(i).errorMessage);
                             return;
                         }
                     }
 
                     if (i == resultDatas.size()) {
-                        queryDatasForProduct.clear();
-                        queryDatasForModule.clear();
-                        queryDatasForComponent.clear();
-                        queryDatasForAddon.clear();
-                        message.reply(LocalCache.getInstance().store(getResponseJson("Success",this.proposalId,this.version,"Successfully inserted")));
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Success",reportingObjects.proposalId,reportingObjects.version,"Successfully inserted")));
 
                     }
                 });
@@ -158,7 +136,7 @@ public class DwReportingService extends AbstractVerticle {
         return response;
     }
 
-    private void calculateProductLevelPricing(Message message, ProposalHeader proposalHeader, List<ProductLineItem> productLineItems, ProposalVersion proposalVersion, List<ProductAddon> productAddons) {
+    private void calculateProductLevelPricing(Message message, ProposalHeader proposalHeader, List<ProductLineItem> productLineItems, ProposalVersion proposalVersion, List<ProductAddon> productAddons, ReportingObjects reportingObjects) {
 
         List<ModulePriceHolder> modulePriceHolders = new ArrayList<>();
         List<ProductPriceHolder> versionProductPriceHolders = new ArrayList<>();
@@ -179,30 +157,30 @@ public class DwReportingService extends AbstractVerticle {
                     if (modulePriceHolder.hasErrors()) {
                         LOG.debug("Has errors");
                         LOG.info("Error is :: "+modulePriceHolder.getErrors());
-                        message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,"Module Price Holder has errors")));
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Failure",reportingObjects.proposalId,reportingObjects.version,"Module Price Holder has errors")));
                         return;
                     }
 
                     modulePriceHolder.calculateTotalCost();
                     modulePriceHolders.add(modulePriceHolder);
 
-                    setModuleAttributes(modulePriceHolder, proposalHeader, productLineItem, proposalVersion, productModule);
+                    setModuleAttributes(modulePriceHolder, proposalHeader, productLineItem, proposalVersion, productModule,reportingObjects);
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     LOG.info("Error is :: "+modulePriceHolder.getErrors());
-                    message.reply(LocalCache.getInstance().store(getResponseJson("Failure",this.proposalId,this.version,"Module Price Holder has errors")));
+                    message.reply(LocalCache.getInstance().store(getResponseJson("Failure",reportingObjects.proposalId,reportingObjects.version,"Module Price Holder has errors")));
                 }
 
-                accessoryComponents = modulePriceHolder.getAccessoryComponents();
-                hardwareComponents = modulePriceHolder.getHardwareComponents();
+                List<AccessoryComponent> accessoryComponents = modulePriceHolder.getAccessoryComponents();
+                List<HardwareComponent> hardwareComponents = modulePriceHolder.getHardwareComponents();
                 List<PanelComponent> panelComponents = modulePriceHolder.getPanelComponents();
 
                 for (PanelComponent panelComponent : panelComponents )
                 {
                     if (panelComponent.isCarcass() || panelComponent.isShutter())
                     {
-                        setComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
+                        setComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent,reportingObjects);
                     }
                 }
 
@@ -210,13 +188,13 @@ public class DwReportingService extends AbstractVerticle {
             }
             ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem, modulePriceHolders, proposalHeader, proposalVersion);
             productPriceHolder.prepare();
-            setProductAttributes(productPriceHolder, proposalHeader, proposalVersion, productLineItem);
+            setProductAttributes(productPriceHolder, proposalHeader, proposalVersion, productLineItem,reportingObjects);
             versionProductPriceHolders.add(productPriceHolder);
         }
-        calculateAddonLevelPricing(message, proposalHeader, productAddons, proposalVersion, versionProductPriceHolders);
+        calculateAddonLevelPricing(message, proposalHeader, productAddons, proposalVersion, versionProductPriceHolders,reportingObjects);
     }
 
-    private void calculateAddonLevelPricing(Message message, ProposalHeader proposalHeader, List<ProductAddon> productAddons, ProposalVersion proposalVersion,List<ProductPriceHolder> versionProductPriceHolders) {
+    private void calculateAddonLevelPricing(Message message, ProposalHeader proposalHeader, List<ProductAddon> productAddons, ProposalVersion proposalVersion, List<ProductPriceHolder> versionProductPriceHolders, ReportingObjects reportingObjects) {
 
         List<AddonPriceHolder> versionAddonPriceHolders = new ArrayList<>();
 
@@ -238,12 +216,12 @@ public class DwReportingService extends AbstractVerticle {
 
             DWProposalAddon dwProposalAddon = setAddonLevelAttributes(proposalHeader, proposalVersion, productAddon, addonPriceHolder);
 //            queryDatasForAddon.add(new QueryData("dw_proposal_addon.insert", dwProposalAddon));
-            queryDatasForAddon.add( dwProposalAddon);
+            reportingObjects.queryDatasForAddon.add( dwProposalAddon);
         }
 
         VersionPriceHolder versionPriceHolder = new VersionPriceHolder(proposalHeader, versionProductPriceHolders, versionAddonPriceHolders, proposalVersion);
         versionPriceHolder.prepare();
-        setVersionAttributes(proposalHeader, proposalVersion, versionPriceHolder, message);
+        setVersionAttributes(proposalHeader, proposalVersion, versionPriceHolder, message,reportingObjects);
 
     }
 
@@ -256,37 +234,37 @@ public class DwReportingService extends AbstractVerticle {
         return dwProposalAddon;
     }
 
-    private void setComponentAttributes(ProposalHeader proposalHeader,ProposalVersion proposalVersion,ProductLineItem productLineItem,ProductModule productModule,PanelComponent panelComponent) {
+    private void setComponentAttributes(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, PanelComponent panelComponent, ReportingObjects reportingObjects) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
         dwModuleComponent = dwModuleComponent.setDwComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
 
 
 //        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
-        queryDatasForComponent.add(dwModuleComponent);
+        reportingObjects.queryDatasForComponent.add(dwModuleComponent);
 
     }
 
 
-    private void setModuleAttributes(ModulePriceHolder modulePriceHolder, ProposalHeader proposalHeader, ProductLineItem productLineItem, ProposalVersion proposalVersion, ProductModule productModule) {
+    private void setModuleAttributes(ModulePriceHolder modulePriceHolder, ProposalHeader proposalHeader, ProductLineItem productLineItem, ProposalVersion proposalVersion, ProductModule productModule, ReportingObjects reportingObjects) {
         DWProductModule dwProductModule = new DWProductModule();
         dwProductModule = dwProductModule.setDwModuleObjects(modulePriceHolder, proposalHeader, productLineItem, proposalVersion, productModule);
 
-        queryDatasForModule.add( dwProductModule);
+        reportingObjects.queryDatasForModule.add( dwProductModule);
 
     }
 
-    private void setProductAttributes(ProductPriceHolder productPriceHolder, ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem) {
+    private void setProductAttributes(ProductPriceHolder productPriceHolder, ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ReportingObjects reportingObjects) {
         DWProposalProduct dwProposalProduct = new DWProposalProduct();
 
         dwProposalProduct = dwProposalProduct.setDwProductObjects(productPriceHolder, proposalHeader, proposalVersion, productLineItem);
-        queryDatasForProduct.add( dwProposalProduct);
+        reportingObjects.queryDatasForProduct.add( dwProposalProduct);
     }
 
-    private void setVersionAttributes(ProposalHeader proposalHeader, ProposalVersion proposalVersion, VersionPriceHolder versionPriceHolder, Message message) {
+    private void setVersionAttributes(ProposalHeader proposalHeader, ProposalVersion proposalVersion, VersionPriceHolder versionPriceHolder, Message message, ReportingObjects reportingObjects) {
 
         DwProposalVersion dwProposalVersion = new DwProposalVersion();
         dwProposalVersion = dwProposalVersion.setDwVersionObjects(proposalHeader, proposalVersion, versionPriceHolder);
-        queryDataVersion = new QueryData("dw_proposal.insert", dwProposalVersion);
+        QueryData queryDataVersion = new QueryData("dw_proposal.insert", dwProposalVersion);
 
 
         List<QueryData> queryDatas = new ArrayList<>();
@@ -295,12 +273,12 @@ public class DwReportingService extends AbstractVerticle {
         queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion));
-        if (!(queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",queryDatasForComponent));
-        if (!(queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",queryDatasForModule));
-        if (!(queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",queryDatasForProduct));
-        if (!(queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",queryDatasForAddon));
+        if (!(reportingObjects.queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",reportingObjects.queryDatasForComponent));
+        if (!(reportingObjects.queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",reportingObjects.queryDatasForModule));
+        if (!(reportingObjects.queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",reportingObjects.queryDatasForProduct));
+        if (!(reportingObjects.queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",reportingObjects.queryDatasForAddon));
         queryDatas.add(queryDataVersion);
-        insertRowsToTable(queryDatas, message);
+        insertRowsToTable(queryDatas, message,reportingObjects);
     }
 
 }
