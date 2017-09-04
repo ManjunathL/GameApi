@@ -7,7 +7,7 @@ import io.vertx.ext.sql.UpdateResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class QueryData
@@ -19,6 +19,7 @@ public class QueryData
 	public QueryDef queryDef;
 	
 	public JsonObject paramsObject;
+	public List<JsonObject> paramsList;
 	public List<JsonObject> rows;
 	public UpdateResult updateResult;
 
@@ -39,14 +40,39 @@ public class QueryData
 		this.paramsObject = paramsObject;
 	}
 
+	public QueryData(String queryId, List<JsonObject> paramsList)
+	{
+		this.queryId = queryId;
+		this.paramsList = paramsList;
+	}
+
+	public boolean isBatchMode()
+	{
+		return this.paramsList != null && !paramsList.isEmpty();
+	}
+
+	public List<JsonArray> getParamsForBatch()
+	{
+		List<JsonArray> paramsForBatch = new ArrayList<>(this.paramsList.size());
+		for (JsonObject jsonObject : this.paramsList)
+		{
+			paramsForBatch.add(this.prepareParams(jsonObject));
+		}
+		return paramsForBatch;
+	}
+
 	public JsonArray getParams()
 	{
 		if (this.paramsObject == null || this.queryDef == null || this.queryDef.paramList == null) return null;
-		
+		return prepareParams(this.paramsObject);
+	}
+
+	private JsonArray prepareParams(JsonObject paramsObject)
+	{
 		JsonArray params = new JsonArray();
 		for (String paramKey : this.queryDef.paramList)
 		{
-			Object value = this.paramsObject.getValue(paramKey);
+			Object value = paramsObject.getValue(paramKey);
 			if (value == null)
 			{
 				params.add("");

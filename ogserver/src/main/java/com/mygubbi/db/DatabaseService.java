@@ -7,6 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.SQLConnection;
@@ -20,6 +21,7 @@ public class DatabaseService extends AbstractVerticle
 	private final static Logger LOG = LogManager.getLogger(DatabaseService.class);
 	public static final String DB_QUERY = "db.query";
 	public static final String MULTI_DB_QUERY = "multi.db.query";
+	public static final String BATCH_DB_QUERY = "batch.db.query";
 	private JDBCClient client;
 	
 	@Override
@@ -51,6 +53,7 @@ public class DatabaseService extends AbstractVerticle
 				handler.result().close();
 				setupQueryMessageHandler();
 				setupMultiQueryMessageHandler();
+				setupBatchQueryMessageHandler();
 				startFuture.complete();
 				LOG.info("Database service started.");
 			}
@@ -58,6 +61,24 @@ public class DatabaseService extends AbstractVerticle
 			{
 				throw new RuntimeException(handler.cause());
 			}
+		});
+	}
+
+	private void setupBatchQueryMessageHandler()
+	{
+		EventBus eb = vertx.eventBus();
+		eb.localConsumer(BATCH_DB_QUERY, (Message<Integer> message) -> {
+
+			QueryData queryData = (QueryData) LocalCache.getInstance().remove(message.body());
+			QueryPrepareService.getInstance().prepareQueryData(queryData);
+			if (queryData.errorFlag)
+			{
+				message.reply(LocalCache.getInstance().store(queryData));
+				return;
+			}
+			handleQuery(message, queryData);
+		}).completionHandler(res -> {
+			LOG.info("Database Multi Query Service handler registered." + res.succeeded());
 		});
 	}
 
@@ -142,20 +163,54 @@ public class DatabaseService extends AbstractVerticle
 	
 	private void runUpdateQuery(Message message, QueryData qData, SQLConnection connection)
 	{
-		LOG.info("Query:" + qData.queryDef.query + ". Params:" + qData.getParams());
-		connection.updateWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
-		  if (res2.succeeded()) 
-		  {
-			  qData.setResult(res2.result());
-		  }
-		  else
-		  {
-		      qData.setError(res2.cause());
-			  LOG.error("Error:", res2.cause());
-		  }
-		  connection.close();
-		  message.reply(LocalCache.getInstance().store(qData));
-		});
+		if (qData.isBatchMode())
+		{
+			List<JsonArray> paramsForBatch = qData.getParamsForBatch();
+			LOG.info("Query in batch mode:" + qData.queryDef.query + ". Params for records:" + paramsForBatch.size());
+			connection.setAutoCommit(false, autoCommitResponse -> {
+				if (autoCommitResponse.failed())
+				{
+					qData.setError(autoCommitResponse.cause());
+					LOG.error("Error in setting auto commit:", autoCommitResponse.cause());
+					message.reply(LocalCache.getInstance().store(qData));
+					return;
+				}
+				connection.batchWithParams(qData.queryDef.query, paramsForBatch, res2 -> {
+					if (res2.failed())
+					{
+						qData.setError(res2.cause());
+						LOG.error("Error in batch execution:", res2.cause());
+					}
+					connection.commit(commitResult -> {
+						if (commitResult.failed())
+						{
+							qData.setError(res2.cause());
+							LOG.error("Error in commit:", res2.cause());
+						}
+						connection.setAutoCommit(true, null);
+						connection.close();
+						message.reply(LocalCache.getInstance().store(qData));
+					});
+				});
+			});
+		}
+		else
+		{
+			LOG.info("Query:" + qData.queryDef.query + ". Params:" + qData.getParams());
+			connection.updateWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
+				if (res2.succeeded())
+				{
+					qData.setResult(res2.result());
+				}
+				else
+				{
+					qData.setError(res2.cause());
+					LOG.error("Error:", res2.cause());
+				}
+				connection.close();
+				message.reply(LocalCache.getInstance().store(qData));
+			});
+		}
 	}
 
 	private void handleQueryInGroup(Message message, List<QueryData> qDataList, int index)
