@@ -83,13 +83,13 @@ public class JobCardSheetCreator implements ExcelCellProcessor
         for (ModulePriceHolder holder : this.product.getPriceHolders())
         {
             currentRow++;
-            this.sheetProcessor.createTitleRowInDataSheet(currentRow, new Object[]{"SL NO", "Description", "Width", "Depth", "Height/Thickness",
-                    "Qty", "Remarks & Edge Binding", "Area",	"Finish", "Dimension",	"Box"});
+            this.sheetProcessor.createTitleRowInDataSheet(currentRow, new Object[]{"SL NO", "Description", "Width", "Depth", "Height/Thickness","Finish",
+                    "Qty", "Remarks & Edge Binding", "Area", "Dimension",	"Box"});
 
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq,
                     holder.getProductModule().getMGCode() + " - " + holder.getProductModule().getDescription(),
-                    holder.getProductModule().getWidth(), holder.getProductModule().getDepth(), holder.getProductModule().getHeight(), 1});
+                    holder.getProductModule().getWidth(), holder.getProductModule().getDepth(), holder.getProductModule().getHeight(),holder.getProductModule().getFinishType(),1});
 
             currentRow = this.fillPanels(currentRow, holder);
 
@@ -112,8 +112,8 @@ public class JobCardSheetCreator implements ExcelCellProcessor
             if (seq == ALPHABET_SEQUENCE.length) seq = 0;
             currentRow++;
             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{ALPHABET_SEQUENCE[seq], panel.getTitle(),
-                    panel.getLength(), panel.getBreadth(), panel.getThickness(), panel.getQuantity(), panel.getEdgeBinding(),
-                    panel.getArea(), null, panel.getDimesions()});
+                    panel.getLength(), panel.getBreadth(), panel.getThickness(),holder.getProductModule().getFinishType(), panel.getQuantity(), panel.getEdgeBinding(),
+                    panel.getArea(), panel.getDimesions()});
             seq++;
         }
 
