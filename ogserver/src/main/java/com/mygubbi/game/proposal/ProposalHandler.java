@@ -142,17 +142,18 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.info("contextJson = "+contextJson);
         Integer id1 = LocalCache.getInstance().store(contextJson);
         if(contextJson.containsKey("proposalId")) {
-            LOG.info("Running for updated proposals");
-            MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, contextJson);
-            new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
 
-//            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, id1,
-//                    (AsyncResult<Message<Integer>> result) -> {
-//                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-//                        LOG.info("2222. Quote Res :: " + response);
-//                        sendJsonResponse(context, response.toString());
-//                    });
-        }else {
+            if(contextJson.containsKey("version")){
+
+                MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL_VERSION, contextJson);
+                new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+            }else {
+
+                MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, contextJson);
+                new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+            }
+
+       }else {
 
             LOG.info("Running for updated proposals");
             MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, contextJson);

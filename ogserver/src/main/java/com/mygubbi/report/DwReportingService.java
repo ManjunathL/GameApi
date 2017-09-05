@@ -4,26 +4,24 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.model.dw.*;
 import com.mygubbi.game.proposal.price.*;
-import com.mygubbi.pipeline.MessageDataHolder;
-import com.mygubbi.pipeline.PipelineResponseHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -278,7 +276,18 @@ public class DwReportingService extends AbstractVerticle {
         if (!(reportingObjects.queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",reportingObjects.queryDatasForProduct));
         if (!(reportingObjects.queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",reportingObjects.queryDatasForAddon));
         queryDatas.add(queryDataVersion);
+        JsonObject params = new JsonObject();
+        params.put("proposalId",reportingObjects.proposalId);
+        params.put("version",reportingObjects.version);
+        params.put("status","Yes");
+        params.put("dataLoadedOn",getCurrentDate());
+        queryDatas.add(new QueryData("update.version_master.dataLoadStatus",params));
         insertRowsToTable(queryDatas, message,reportingObjects);
+    }
+    private String getCurrentDate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+        LocalDateTime localDate = LocalDateTime.now();
+        return dtf.format(localDate);
     }
 
 }

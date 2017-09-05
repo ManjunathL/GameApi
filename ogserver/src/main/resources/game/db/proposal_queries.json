@@ -607,8 +607,13 @@
       "table": "version_master",
       "query": "select * from version_master where proposalId = ? ",
       "params": ["proposalId"]
+    },{
+      "id":"update.version_master.dataLoadStatus",
+      "type":"update",
+      "table": "version_master",
+      "query":"update version_master set isDataLoadedToReport=?, dataLoadedOn =?  where proposalId = ? and version = ?",
+      "params":[ "status","dataLoadedOn","proposalId","version" ]
     },
-
     {
       "id": "proposal.product.all.detail",
       "type": "select",

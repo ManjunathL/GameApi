@@ -5,9 +5,6 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.output.ProposalOutputCreator;
-import com.mygubbi.game.proposal.output.SOWPdfOutputService;
-import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.pipeline.MessageDataHolder;
 import com.mygubbi.pipeline.PipelineExecutor;
 import com.mygubbi.pipeline.PipelineResponseHandler;
@@ -20,10 +17,9 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Date;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +30,7 @@ public class ReportTableFillerSevice extends AbstractVerticle
 {
     private final static Logger LOG = LogManager.getLogger(ReportTableFillerSevice.class);
     public static final String RUN_FOR_SINGLE_PROPOSAL = "reporting.table.filler.forOneProposal";
+    public static final String RUN_FOR_SINGLE_PROPOSAL_VERSION = "reporting.table.filler.forOneProposal.forOneVersion";
     public static final String RUN_FOR_UPDATED_PROPOSALS = "reporting.table.filler.forUpdatedProposal";
 
     LocalDateTime servicecallTime;
@@ -55,12 +52,9 @@ public class ReportTableFillerSevice extends AbstractVerticle
 
         EventBus eb = VertxInstance.get().eventBus();
        eb.localConsumer(RUN_FOR_SINGLE_PROPOSAL, (Message<Integer> message) -> {
-          long start = System.currentTimeMillis();
             JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
-            LOG.info("Json Obj = " + obj);
             this.getVersionObjForProposal(obj.getInteger("proposalId"), message);
-long end = System.currentTimeMillis();
-           LOG.info("Time taken :: "+(end-start));
+            long end = System.currentTimeMillis();
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());
         });
@@ -70,6 +64,14 @@ long end = System.currentTimeMillis();
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());
         });
+        eb.localConsumer(RUN_FOR_SINGLE_PROPOSAL_VERSION, (Message<Integer> message) -> {
+            JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
+            this.getVersionObjForProposal(obj.getInteger("proposalId"),obj.getString("version"), message);
+            long end = System.currentTimeMillis();
+        }).completionHandler(res -> {
+            LOG.info("Proposal output service started." + res.succeeded());
+        });
+
     }
 
     private void getAllUpdatedProposals(Message message)
@@ -91,6 +93,19 @@ long end = System.currentTimeMillis();
         long start = System.currentTimeMillis();
 
         QueryData requestData = new QueryData("proposal.versions.list", new JsonObject().put("proposalId", proposalId));
+        MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
+        new PipelineExecutor().execute(dataHolder, new ProposalVersionsRetriever(message, proposalId));
+        LOG.info("Time taken = "+(System.currentTimeMillis()-start));
+    }
+
+    private void getVersionObjForProposal(Integer proposalId,String version, Message message)
+    {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        servicecallTime = LocalDateTime.now();
+
+        long start = System.currentTimeMillis();
+
+        QueryData requestData = new QueryData("version.getversiondetails", new JsonObject().put("proposalId", proposalId).put("version",version));
         MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
         new PipelineExecutor().execute(dataHolder, new ProposalVersionsRetriever(message, proposalId));
         LOG.info("Time taken = "+(System.currentTimeMillis()-start));
@@ -152,7 +167,9 @@ long end = System.currentTimeMillis();
                 JsonObject response = (JsonObject) messageDataHolders.get(i).getResponseData();
                 if(response.containsKey("status")){
                     if(response.getString("status").equalsIgnoreCase("FAILURE")){
-                        comments.append(response.getInteger("proposalId")+"-"+response.getString("version")+", ");
+                        int proposalId = response.getInteger("proposalId");
+                        String version = response.getString("version");
+                        comments.append(proposalId+"-"+version+", ");
                     }
                 }
             }
