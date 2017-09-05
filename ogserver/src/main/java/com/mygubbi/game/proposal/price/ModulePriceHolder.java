@@ -125,14 +125,14 @@ public class ModulePriceHolder
 
     public ModulePriceHolder(ModuleForPrice moduleForPrice)
     {
-        LOG.debug("Module For price :" + moduleForPrice);
+//        LOG.debug("Module For price :" + moduleForPrice);
         this.productModule = moduleForPrice.getModule();
-        LOG.debug("This productModule : " + this.productModule);
+//        LOG.debug("This productModule : " + this.productModule);
         this.priceDate = moduleForPrice.getPriceDate();
         this.city = moduleForPrice.getCity();
         //this.handleType = moduleForPrice.getProduct().getHandletypeSelection();
         this.productLineItem = moduleForPrice.getProduct();
-        LOG.debug("This City : " + this.city);
+//        LOG.debug("This City : " + this.city);
     }
 
 
@@ -142,7 +142,7 @@ public class ModulePriceHolder
         this.city = city;
         this.priceDate = date;
         this.productLineItem = productLineItem;
-        LOG.debug("Inside 2nd Module price holder");
+//        LOG.debug("Inside 2nd Module price holder");
 
 
     }
