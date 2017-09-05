@@ -557,6 +557,7 @@ public class ProposalHandler extends AbstractRouteHandler
         queryParams.put("id",routingContext.getBodyAsJson().getInteger("proposalId"));
         queryParams.put("version",routingContext.getBodyAsJson().getDouble("version"));
         queryParams.put("proposalId",routingContext.getBodyAsJson().getInteger("proposalId"));
+        queryParams.put("businessDate",routingContext.getBodyAsJson().getString("businessDate"));
 
         List<QueryData> queryDatas = new ArrayList<>();
         queryDatas.add(new QueryData("version.publish",queryParams));

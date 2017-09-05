@@ -211,32 +211,32 @@
       "id": "version.publish",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'Published', internalStatus = 'Published' where version = ? and proposalId = ?",
-      "params": ["version","proposalId"]
+      "query": "update version_master set status = 'Published', internalStatus = 'Published',businessDate=? where version = ? and proposalId = ?",
+      "params": ["businessDate","version","proposalId"]
     },
 
     {
       "id": "version.confirm",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'Confirmed', internalStatus = 'Confirmed', version = ?, fromVersion = ? where version = ? and proposalId = ?",
-      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+      "query": "update version_master set status = 'Confirmed', internalStatus = 'Confirmed', version = ?, fromVersion = ?,businessDate=? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion","businessDate", "toVersion", "proposalId"]
     },
 
     {
       "id": "version.designsignoff",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'DSO', internalStatus = 'DSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
-      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+      "query": "update version_master set status = 'DSO', internalStatus = 'DSO', version = ?, fromVersion = ?,businessDate=? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion","businessDate" ,"toVersion", "proposalId"]
     },
 
     {
       "id": "version.productionsignoff",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'PSO', internalStatus = 'Locked', version = ?, fromVersion = ? where version = ? and proposalId = ?",
-      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+      "query": "update version_master set status = 'PSO', internalStatus = 'Locked', version = ?, fromVersion = ?,businessDate=? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion","businessDate", "toVersion", "proposalId"]
     },
 
     {
@@ -1845,8 +1845,8 @@
       "id": "proposal.versiondiscount",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set discountPercentage = ? where proposalId=? and version= ?",
-      "params": ["discountPercentage","proposalId","version"]
+      "query": "update version_master set discountPercentage = ?,businessDate=? where proposalId=? and version= ? ",
+      "params": ["discountPercentage","businessDate","proposalId","version"]
     }
   ]
 }

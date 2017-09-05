@@ -45,7 +45,7 @@
       "uri": "/gapi/proposal/version/confirm",
       "source": "db",
       "query":"version.confirm",
-      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "params":["version","fromVersion","businessDate","toVersion", "proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -53,7 +53,7 @@
       "uri": "/gapi/proposal/version/designsignoff",
       "source": "db",
       "query":"version.designsignoff",
-      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "params":["version","fromVersion","businessDate" ,"toVersion", "proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -61,7 +61,7 @@
       "uri": "/gapi/proposal/version/productionsignoff",
       "source": "db",
       "query":"version.productionsignoff",
-      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "params":["version","fromVersion","businessDate","toVersion", "proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -1022,7 +1022,7 @@
       "uri": "/gapi/proposal/versiondiscount",
       "source": "db",
       "query":"proposal.versiondiscount",
-      "params":["discountPercentage","proposalId","version"],
+      "params":["discountPercentage","businessDate","proposalId","version"],
       "resultfields":[],
       "default": "[]"
     }
