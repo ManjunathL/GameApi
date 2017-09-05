@@ -64,6 +64,11 @@ public class DWModuleComponent extends JsonObject {
     public static final String COMPONENT_PROFIT="compProfit";
     public static final String COMPONENT_MARGIN="compMargin";
 
+    public static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
+    public static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
+    public static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
+    public static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
+
 
     public DWModuleComponent(JsonObject json) {
         super(json.getMap());
@@ -523,7 +528,16 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setModuleSeq(productModule.getModuleSequence());
         dwModuleComponent.setAccPackCode(panelComponent.getAccPackCode());
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
-        dwModuleComponent.setFinish(finish.getFinishType());
+
+        String finishCode = finish.getFinishType();
+        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+            finishCode = NEW_MATT_SOLID_FINISH;
+        }
+        if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
+            finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
+        }
+
+        dwModuleComponent.setFinish(finishCode);
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(panelComponent.getLength());
         dwModuleComponent.setWidth(panelComponent.getBreadth());

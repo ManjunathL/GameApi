@@ -93,6 +93,11 @@ public class DWProductModule extends JsonObject {
     public static final String MODULEPROFIT="moduleProfit";
     public static final String MODULEMARGIN="moduleMargin";
 
+    public static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
+    public static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
+    public static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
+    public static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
+
     public DWProductModule() {}
 
     public DWProductModule(JsonObject jsonObject){
@@ -128,7 +133,16 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setHandleSize(Double.parseDouble(productModule.getHandleThickness()));
         dwProductModule.setHandleQty(productModule.getHandleQuantity());
         dwProductModule.setCarcass(productModule.getCarcassCode());
-        dwProductModule.setFinish(productModule.getFinishCode());
+
+        String finishCode = productModule.getFinishType();
+        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+            finishCode = NEW_MATT_SOLID_FINISH;
+        }
+        if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
+            finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
+        }
+
+        dwProductModule.setFinish(finishCode);
         dwProductModule.setFinishMaterial(productModule.getFinishType());
         dwProductModule.setColor(productModule.getColorCode());
         dwProductModule.setExposedLeft(productModule.getLeftExposed() ? "Yes" : "No");

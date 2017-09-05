@@ -105,6 +105,11 @@ public class DWProposalProduct extends JsonObject {
     public static final String HIKEMC="hikeModuleCount";
     public static final String HIKEMPRICE="hikeMPrice";
 
+    public static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
+    public static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
+    public static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
+    public static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
+
     public DWProposalProduct() {}
 
     public DWProposalProduct(JsonObject jsonObject){
@@ -150,11 +155,11 @@ public class DWProposalProduct extends JsonObject {
         return this;
     }
 
-    public double getVersion() {
-        return this.getDouble(VERSION);
+    public String getVersion() {
+        return this.getString(VERSION);
     }
 
-    public DWProposalProduct setVersion(double version)
+    public DWProposalProduct setVersion(String version)
     {
         put(VERSION,version);
         return this;
@@ -993,7 +998,7 @@ public class DWProposalProduct extends JsonObject {
 
 
         dwProposalProduct.setProposalId(proposalHeader.getId());
-        dwProposalProduct.setVersion(Double.parseDouble(proposalVersion.getVersion()));
+        dwProposalProduct.setVersion(proposalVersion.getVersion());
         dwProposalProduct.setProposalTitle(proposalHeader.getQuotationFor());
         dwProposalProduct.setPriceDate(proposalHeader.getPriceDate());
         dwProposalProduct.setBusinessDate(proposalVersion.getUpdatedOn());
@@ -1011,7 +1016,16 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setRoom(productLineItem.getRoomCode());
         dwProposalProduct.setBaseCarcass(productLineItem.getBaseCarcassCode());
         dwProposalProduct.setWallCarcass(productLineItem.getWallCarcassCode());
-        dwProposalProduct.setFinish(productLineItem.getFinishCode());
+
+        String finishCode = productLineItem.getFinishCode();
+        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+            finishCode = NEW_MATT_SOLID_FINISH;
+        }
+        if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
+            finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
+        }
+
+        dwProposalProduct.setFinish(finishCode);
         dwProposalProduct.setFinishMaterial(productLineItem.getFinishType());
         dwProposalProduct.setShutterDesign(productLineItem.getShutterDesignCode());
         dwProposalProduct.setHinge(productLineItem.getHingeType());
