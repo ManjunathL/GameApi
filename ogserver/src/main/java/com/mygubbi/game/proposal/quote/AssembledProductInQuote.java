@@ -590,11 +590,19 @@ public class AssembledProductInQuote
 
     private void addToModuleHinge(HingePack hingeCode, double quantity)
     {
-        LOG.debug("Hinge Pack /; " + hingePack.toString());
+        LOG.debug("Hinge Pack /; " + hingeCode.toString());
         if (!(hingeCode == null || hingeCode.isEmpty()))
         {
-            Handle handle=ModuleDataService.getInstance().getHandleTitle(hingeCode.getHingeCode());
-            ModulePart part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),handle.getArticleNo(),handle.getErpCode());
+            ModulePart part;
+            if (hingeCode.getHingeCode().equals("DRAWER-HINGE"))
+            {
+               part =new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),"NA","NA");
+            }
+            else
+            {
+                Handle handle=ModuleDataService.getInstance().getHandleTitle(hingeCode.getHingeCode());
+                part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),handle.getArticleNo(),handle.getErpCode());
+            }
             if(!(quantity==0.0))
             {
                 this.hingePack.add(part);
