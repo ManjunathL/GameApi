@@ -108,11 +108,11 @@ public class RateCardService extends AbstractVerticle
 
 	public RateCard getRateCardBasedOnProduct(String code, String type, Date priceDate, String city, String productCategory)
 	{
-		LOG.debug("Rate card based on product");
+//		LOG.debug("Rate card based on product");
 		RateCardMasterKey key = new RateCardMasterKey(code, type,"all");
 		Collection<RateCardMaster> rateCardMaster = this.rateCardMap.get(key);
-		LOG.debug("Rate card map :" + rateCardMap.values().toString() );
-		LOG.debug("Rate card found on product");
+//		LOG.debug("Rate card map :" + rateCardMap.values().toString() );
+//		LOG.debug("Rate card found on product");
 		if (rateCardMaster == null)
         {
             LOG.info("Rate card not found for " + type + ":" + code + ":" + productCategory);
@@ -176,23 +176,23 @@ public class RateCardService extends AbstractVerticle
 
 	public PriceMaster getShutterRate(String code, int thickness, Date priceDate, String city)
 	{
-		LOG.debug("get shutter rate : " + code + ":" + thickness + ":" + priceDate + ":" + city);
+//		LOG.debug("get shutter rate : " + code + ":" + thickness + ":" + priceDate + ":" + city);
 		String rateCardID = RateCard.makeKey(RateCard.SHUTTER_TYPE,code,thickness);
 		return getPriceMaster(priceDate, city, rateCardID, PriceMasterKey.RATECARD_TYPE);
 	}
 
 	public PriceMaster getCarcassRate(String code, int thickness, Date priceDate, String city)
 	{
-		LOG.debug("get Carcass rate : " + code + ":" + thickness + ":" + priceDate + ":" + city);
+//		LOG.debug("get Carcass rate : " + code + ":" + thickness + ":" + priceDate + ":" + city);
 		String rateCardID = RateCard.makeKey(RateCard.CARCASS_TYPE,code,thickness);
 		return getPriceMaster(priceDate, city, rateCardID, PriceMasterKey.RATECARD_TYPE);
 	}
 
 	private PriceMaster checkPriceMasterForCity(Date priceDate, String city, String rateCardID, String ratecardType) {
 		PriceMasterKey key = new PriceMasterKey(ratecardType, rateCardID, city);
-		LOG.debug("price Master key : " + key.toString());
+//		LOG.debug("price Master key : " + key.toString());
 		Collection<PriceMaster> priceList = this.priceMasterMap.get(key);
-		LOG.debug("Check price master for " + key.toString() + " result:" + priceList.size());
+//		LOG.debug("Check price master for " + key.toString() + " result:" + priceList.size());
 		for (PriceMaster priceMaster : priceList)
 		{
 			if (priceMaster.isValidForDate(priceDate)) {

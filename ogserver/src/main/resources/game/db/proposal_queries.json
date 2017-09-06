@@ -869,7 +869,7 @@
       "id": "handle.master.all",
       "type": "select",
       "table": "handle_master",
-      "query": "select code,type,title,finish,mgCode,thickness,sourcePrice,msp,imagePath from handle_master",
+      "query": "select code,type,title,finish,mgCode,thickness,sourcePrice,msp,imagePath,erpCode,articleNo from handle_master",
       "params": []
     },
     {
@@ -1847,6 +1847,13 @@
       "table": "version_master",
       "query": "update version_master set discountPercentage = ?,businessDate=? where proposalId=? and version= ? ",
       "params": ["discountPercentage","businessDate","proposalId","version"]
+    },
+    {
+      "id": "proposal.finishType",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select distinct(finishMaterial) from finish_master where fromDate <= ? and toDate >= ?",
+      "params": ["fromDate","toDate"]
     }
   ]
 }

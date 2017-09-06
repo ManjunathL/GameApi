@@ -1025,6 +1025,15 @@
       "params":["discountPercentage","businessDate","proposalId","version"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/finish",
+      "source": "db",
+      "query":"proposal.finishType",
+      "params":["fromDate","toDate"],
+      "resultfields":[],
+      "default": "[]"
     }
+
   ]
 }
