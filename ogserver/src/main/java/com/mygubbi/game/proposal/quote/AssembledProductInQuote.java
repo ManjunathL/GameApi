@@ -591,11 +591,14 @@ public class AssembledProductInQuote
     private void addToModuleHinge(HingePack hingeCode, double quantity)
     {
         LOG.debug("Hinge Pack /; " + hingePack.toString());
-        Handle handle=ModuleDataService.getInstance().getHandleTitle(hingeCode.getHingeCode());
-        ModulePart part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),handle.getArticleNo(),handle.getErpCode());
-        if(!(quantity==0.0))
+        if (!(hingePack == null || hingePack.isEmpty()))
         {
-            this.hingePack.add(part);
+            Handle handle=ModuleDataService.getInstance().getHandleTitle(hingeCode.getHingeCode());
+            ModulePart part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),handle.getArticleNo(),handle.getErpCode());
+            if(!(quantity==0.0))
+            {
+                this.hingePack.add(part);
+            }
         }
     }
 
