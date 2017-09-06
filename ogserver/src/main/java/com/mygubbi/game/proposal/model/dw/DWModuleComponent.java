@@ -3,16 +3,14 @@ package com.mygubbi.game.proposal.model.dw;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.ProposalHeader;
-import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.model.RateCard;
-import com.mygubbi.game.proposal.model.ShutterFinish;
+import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.PanelComponent;
 import com.mygubbi.game.proposal.price.RateCardService;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -38,6 +36,9 @@ public class DWModuleComponent extends JsonObject {
     public static final String ROOM="room";
     public static final String PRID="prId";
     public static final String PRTITLE="prTitle";
+    public static final String PRPRICE="prPrice";
+    public static final String PRPRICEAFTERDISCOUNT="prPriceAfterDiscount";
+    public static final String PRAREA="prArea";
     public static final String PRCATEGORY="prCategory";
     public static final String MODULE_TYPE="moduleType";
     public static final String MODULESEQ="moduleSeq";
@@ -220,6 +221,34 @@ public class DWModuleComponent extends JsonObject {
     public DWModuleComponent setPrTitle(String prTitle)
     {
         put(PRTITLE,prTitle);
+        return this;
+    }
+
+    public double getPrPrice() {
+        return this.getDouble(PRPRICE);
+    }
+
+    public DWModuleComponent setPrPrice(double prPrice)
+    {
+        put(PRPRICE,prPrice);
+        return this;
+    }
+    public double getPrPriceAfterDiscount() {
+        return this.getDouble(PRPRICEAFTERDISCOUNT);
+    }
+
+    public DWModuleComponent setPrPriceAfterDiscount(double prPriceAfterDiscount)
+    {
+        put(PRPRICEAFTERDISCOUNT,prPriceAfterDiscount);
+        return this;
+    }
+    public double getPrArea() {
+        return this.getDouble(PRAREA);
+    }
+
+    public DWModuleComponent setPrArea(double prArea)
+    {
+        put(PRAREA,prArea);
         return this;
     }
 
@@ -506,6 +535,17 @@ public class DWModuleComponent extends JsonObject {
             moduleType = "Standard";
         }
 
+        double productAreaInSqft = 0.0;
+
+        List<ProductModule> modules = productLineItem.getModules();
+        for (ProductModule module : modules)
+        {
+            if (module.getAreaOfModuleInSft() != 0)
+            {
+                productAreaInSqft += module.getAreaOfModuleInSft();
+            }
+        }
+
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwModuleComponent.setCrmId(proposalHeader.getCrmId());
@@ -521,6 +561,9 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setRoom(productLineItem.getRoomCode());
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
+        dwModuleComponent.setPrPrice(productLineItem.getAmount());
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
         dwModuleComponent.setModuleCode(productModule.getMGCode());

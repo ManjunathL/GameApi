@@ -634,8 +634,16 @@
       "id": "proposal_version.updatedProposals.select",
       "type": "select",
       "table": "version_master",
-          "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount  from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted'  and vm.updatedOn  > (select lastRun from reports_schedular where status = 'success' order by lastRun desc limit 1) order by vm.proposalId desc,vm.version asc ",
+          "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount,vm.isDataLoadedToReport,vm.dataLoadedOn,vm.businessDate from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.businessDate ) order by vm.proposalId desc,vm.version asc ",
         "params": [],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal_version.updatedProposals.select.onDate",
+      "type": "select",
+      "table": "version_master",
+      "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount,vm.isDataLoadedToReport,vm.dataLoadedOn,vm.businessDate from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.businessDate ) and date(vm.businessDate) >= date(?) and  date(vm.businessDate) <= date(?) and businessDate order by vm.proposalId desc,vm.version asc ;",
+      "params": ["startDate","endDate"],
       "jsonfields":[]
     },
 
@@ -1609,7 +1617,22 @@
       "params": ["reportsRunDate", "status","lastRun","comments"],
       "jsonfields":[]
     },
-
+    {
+      "id": "version_master.dataLOadStatus.update",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set isDataLoadedToReport = 'No'",
+      "params": [],
+      "jsonfields":[]
+    },
+    {
+      "id":"version_master.dataLOadStatus.update.OnDate",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set isDataLoadedToReport = 'No' where date(dataLoadedOn) >= date(?) and date(dataLoadedOn) <= date(?)",
+      "params": ["startDate","endDate"],
+      "jsonfields":[]
+    },
     {
       "id": "proposal.sow.select.proposalversion",
       "type": "select",
@@ -1767,8 +1790,8 @@
       "id": "dw_module_component.insert",
       "type": "insert",
       "table": "dw_module_component",
-      "query": "insert into dw_module_component (proposalId,crmId,quoteNo,proposalTitle, version, priceDate, businessDate, region,status,discountAmount,discountPercentage, spaceType, room, prId, prTitle,prCategory, moduleType, moduleSeq, moduleCode,moduleCategory,accPackCode, carcass, finish, finishMaterial,width, depth, height,panelArea,compType, compCode,compQty, compTitle, compPrice,compPriceAfterDiscount, compWoTax, compCost, compProfit, compMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      "params": ["proposalId","crmId","quoteNo","proposalTitle","version","priceDate","businessDate","region","status","discountAmount","discountPercentage","spaceType","room","prId","prTitle","prCategory","moduleType","moduleSeq","moduleCode","moduleCategory","accPackCode","carcass","finish","finishMaterial","width","depth","height","panelArea","compType","compCode","compQty","compTitle","compPrice","compPriceAfterDiscount","compWoTax","compCost","compProfit","compMargin"],
+      "query": "insert into dw_module_component (proposalId,crmId,quoteNo,proposalTitle, version, priceDate, businessDate, region,status,discountAmount,discountPercentage, spaceType, room, prId, prTitle,prPrice,prPriceAfterDiscount,prArea,prCategory, moduleType, moduleSeq, moduleCode,moduleCategory,accPackCode, carcass, finish, finishMaterial,width, depth, height,panelArea,compType, compCode,compQty, compTitle, compPrice,compPriceAfterDiscount, compWoTax, compCost, compProfit, compMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "params": ["proposalId","crmId","quoteNo","proposalTitle","version","priceDate","businessDate","region","status","discountAmount","discountPercentage","spaceType","room","prId","prTitle","prPrice","prPriceAfterDiscount","prArea","prCategory","moduleType","moduleSeq","moduleCode","moduleCategory","accPackCode","carcass","finish","finishMaterial","width","depth","height","panelArea","compType","compCode","compQty","compTitle","compPrice","compPriceAfterDiscount","compWoTax","compCost","compProfit","compMargin"],
       "jsonfields":[]
     },
     {

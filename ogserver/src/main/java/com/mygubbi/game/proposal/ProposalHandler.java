@@ -153,23 +153,28 @@ public class ProposalHandler extends AbstractRouteHandler
                 new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
             }
 
-       }else {
+       }if(contextJson.containsKey("reports")) {//"reports":"update"
 
-            LOG.info("Running for updated proposals");
-            MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, contextJson);
-            new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+            String val = contextJson.getString("reports");
+            if(val.equalsIgnoreCase("UPDATE")) {
+                if (contextJson.containsKey("startDate") && contextJson.containsKey("endDate")){
+                    MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FROM_STARTDATE_TO_ENDDATE_PROPOSALS, contextJson);
+                    new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+                } else{
+                    MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, contextJson);
+                    new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+                }
+            }else if(val.equalsIgnoreCase("FORCE")){
+                MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.FORCE_UPDATE_PROPOSALS, contextJson);
+                new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
 
-
-
-//            VertxInstance.get().eventBus().send(ReportTableFillerSevice.RUN_FOR_UPDATED_PROPOSALS, id1,
-//                    (AsyncResult<Message<Integer>> result) -> {
-//
-//                LOG.info("shilpa result.result().body() = "+result.result().body());
-//                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-//                        LOG.info("2222. Quote Res :: " + response);
-//                        sendJsonResponse(context, response.toString());
-//                    });
+            }else{
+                sendJsonResponse(context,"Please specify one of option - update/force");
+            }
         }
+
+
+
 
 
     }
