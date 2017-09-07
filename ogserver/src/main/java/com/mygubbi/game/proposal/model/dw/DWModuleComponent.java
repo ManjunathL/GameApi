@@ -552,7 +552,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
         dwModuleComponent.setVersion(proposalVersion.getVersion());
         dwModuleComponent.setPriceDate(proposalHeader.getPriceDate());
-        dwModuleComponent.setBusinessDate(proposalVersion.getUpdatedOn());
+        dwModuleComponent.setBusinessDate(proposalVersion.getBusinessDate());
         dwModuleComponent.setRegion(proposalHeader.getProjectCity());
         dwModuleComponent.setStatus(proposalVersion.getProposalStatus());
         dwModuleComponent.setDiscountAmount(proposalVersion.getDiscountAmount());
@@ -562,7 +562,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * (proposalVersion.getDiscountPercentage()/100)));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);

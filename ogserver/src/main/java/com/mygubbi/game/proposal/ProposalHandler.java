@@ -137,24 +137,20 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void runReportFiller(RoutingContext context){
-        JsonObject contextJson = context.getBodyAsJson();
 
-        LOG.info("contextJson = "+contextJson);
+        JsonObject contextJson = context.getBodyAsJson();
         Integer id1 = LocalCache.getInstance().store(contextJson);
         if(contextJson.containsKey("proposalId")) {
-
+            LOG.info("For ProposalID");
             if(contextJson.containsKey("version")){
-
                 MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL_VERSION, contextJson);
                 new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
             }else {
-
                 MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_SINGLE_PROPOSAL, contextJson);
                 new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
             }
-
-       }if(contextJson.containsKey("reports")) {//"reports":"update"
-
+       }else if(contextJson.containsKey("reports")) {
+            //"reports":"update"
             String val = contextJson.getString("reports");
             if(val.equalsIgnoreCase("UPDATE")) {
                 if (contextJson.containsKey("startDate") && contextJson.containsKey("endDate")){
@@ -167,15 +163,16 @@ public class ProposalHandler extends AbstractRouteHandler
             }else if(val.equalsIgnoreCase("FORCE")){
                 MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.FORCE_UPDATE_PROPOSALS, contextJson);
                 new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
-
             }else{
                 sendJsonResponse(context,"Please specify one of option - update/force");
             }
+        }else if(contextJson.containsKey("proposals")){
+            MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_LIST_OF_PROPOSALS, contextJson);
+            new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+        }else{
+
+            sendJsonResponse(context,"Please specify Valid option to run Report");
         }
-
-
-
-
 
     }
     private void publishVersionAfterValidation(RoutingContext context){

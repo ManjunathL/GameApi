@@ -23,6 +23,7 @@ public class ProductAddon extends JsonObject
     private static final String FROM_VERSION = "fromVersion";
     private static final String PROPOSAL_ID = "proposalId";
     private static final String ADDON_CATEGORY_CODE = "categoryCode";
+    private static final String CUSTOM_ADDON_CATEGORY = "customAddonCategory";
     private static final String PRODUCT_TYPE_CODE = "productTypeCode";
     private static final String PRODUCT_SUBTYPE_CODE = "productSubtypeCode";
     private static final String PRODUCT = "product";

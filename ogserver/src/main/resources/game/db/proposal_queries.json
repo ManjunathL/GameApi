@@ -639,6 +639,14 @@
       "jsonfields":[]
     },
     {
+      "id": "proposal_version.updatedProposals.select.ForListOfProposals",
+      "type": "select",
+      "table": "version_master",
+      "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount,vm.isDataLoadedToReport,vm.dataLoadedOn,vm.businessDate from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.businessDate ) and vm.proposalId in (?) order by vm.proposalId desc,vm.version asc",
+      "params": ["proposalIds"],
+      "jsonfields":[]
+    },
+    {
       "id": "proposal_version.updatedProposals.select.onDate",
       "type": "select",
       "table": "version_master",
@@ -1623,6 +1631,13 @@
       "table": "version_master",
       "query": "update version_master set isDataLoadedToReport = 'No'",
       "params": [],
+      "jsonfields":[]
+    },{
+      "id": "version_master.dataLOadStatus.update.forProposalIds",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set isDataLoadedToReport = 'No' where proposalId in (?)",
+      "params": ["proposalIds"],
       "jsonfields":[]
     },
     {

@@ -21,6 +21,7 @@ public class ProposalVersion extends JsonObject{
     public static final String STATUS = "status";
     public static final String CREATED_BY= "createdBy";
     public static final String UPDATED_ON= "updatedOn";
+    public static final String BUSINESS_DATE= "businessDate";
     public static final String UPDATED_BY= "updatedBy";
     public static final String AMOUNT= "amount";
 
@@ -128,4 +129,10 @@ public class ProposalVersion extends JsonObject{
     {
         return DateUtil.convertDate(this.getString(UPDATED_ON));
     }
+    public Date getBusinessDate()
+    {
+        return DateUtil.convertDate(this.getString(BUSINESS_DATE));
+    }
+
+
 }

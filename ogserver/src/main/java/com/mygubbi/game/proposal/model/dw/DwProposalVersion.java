@@ -1040,7 +1040,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setProposalCreateDate(proposalHeader.getCreatedOn());
         dwProposalVersion.setProposalUpdatedBy(proposalHeader.getUpdatedBy());
         dwProposalVersion.setProposalPriceDate(proposalHeader.getPriceDate());
-        dwProposalVersion.setBusinessDate(proposalVersion.getUpdatedOn());
+        dwProposalVersion.setBusinessDate(proposalVersion.getBusinessDate());
         dwProposalVersion.setVersionCreatedBy(proposalVersion.getCreatedBy());
         dwProposalVersion.setVersionCreatedOn(proposalVersion.getDate());
         dwProposalVersion.setVersionUpdatedBy(proposalVersion.getUpdatedBy());
