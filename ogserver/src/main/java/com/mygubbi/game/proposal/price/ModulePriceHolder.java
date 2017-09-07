@@ -502,7 +502,7 @@ public class ModulePriceHolder
         {
             handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
             handleandKnobSourceCost += handleAndKnobCost.getSourcePrice() * quantity;
-            LOG.debug("Handle and Knob Cost : " + handleAndKnobCost.getPrice() + ":" + quantity);
+//            LOG.debug("Handle and Knob Cost : " + handleAndKnobCost.getPrice() + ":" + quantity);
         }
 
 
@@ -797,7 +797,7 @@ public class ModulePriceHolder
             double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
             double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice();
             double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
-            LOG.debug("NON std source rate : " + nStdSourceRate);
+//            LOG.debug("NON std source rate : " + nStdSourceRate);
             if (panel.isExposed())
             {
                 if ("Standard".equals(moduleType))

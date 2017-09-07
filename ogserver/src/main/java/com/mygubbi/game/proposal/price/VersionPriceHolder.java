@@ -122,7 +122,7 @@ public class VersionPriceHolder {
         {
             ProductAddon productAddon = addonPriceHolder.getProductAddon();
 
-            if (productAddon.getCategoryCode().equals("Services"))
+            if (productAddon.getCategoryCode().equals("Services") || productAddon.getCategoryCode().equals("Counter top"))
             {
                 addToServicesPrice(addonPriceHolder.getPrice());
                 addToServicesPriceWithDiscount(addonPriceHolder.getPrice());

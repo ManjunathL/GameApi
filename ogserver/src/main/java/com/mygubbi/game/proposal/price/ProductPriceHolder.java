@@ -95,6 +95,7 @@ public class ProductPriceHolder {
     private java.sql.Date priceDate;
     private String city;
     private double discountPercentage;
+    private double discountAmount;
 
     private ProposalHeader proposalHeader;
 
@@ -104,6 +105,7 @@ public class ProductPriceHolder {
         this.priceDate = proposalHeader.getPriceDate();
         this.city = proposalHeader.getProjectCity();
         this.discountPercentage = proposalVersion.getDiscountPercentage() / 100;
+        this.discountAmount = proposalVersion.getDiscountAmount();
         this.proposalVersion = proposalVersion;
         this.proposalHeader = proposalHeader;
     }
@@ -174,10 +176,13 @@ public class ProductPriceHolder {
 
         double rateForLconnectorPrice=lConnectorRate.getPrice();
         double sourcePriceForLconnectorPrice = lConnectorRate.getSourcePrice();
-        addToLConnectorPrice(this.productLineItem.getNoOfLengths() * rateForLconnectorPrice);
-        addToLConnectorPriceWoTax(this.productLConnectorPrice * lConnectorFactor.getSourcePrice());
-        addToLConnectorSourceCost(this.productLineItem.getNoOfLengths() * sourcePriceForLconnectorPrice );
 
+        if (this.productLineItem.getHandletypeSelection().equals("Gola Profile") && this.productLineItem.getNoOfLengths() != 0)
+        {
+            addToLConnectorPrice(this.productLineItem.getNoOfLengths() * rateForLconnectorPrice);
+            addToLConnectorPriceWoTax(this.productLConnectorPrice * lConnectorFactor.getSourcePrice());
+            addToLConnectorSourceCost(this.productLineItem.getNoOfLengths() * sourcePriceForLconnectorPrice );
+        }
 
     }
 
@@ -333,8 +338,19 @@ public class ProductPriceHolder {
 
     public void setAmountsAccordingToDiscount()
     {
-        this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
-        this.productPriceWoTax = this.productPriceWoTax - (this.productPriceWoTax * this.discountPercentage);
+
+        java.util.Date date = proposalHeader.getCreatedOn();
+        java.util.Date currentDate = new Date(117, 3, 20, 0, 0, 00);
+        if (date.after(currentDate)) {
+
+            this.productPriceAfterDiscount = this.productPrice - (this.productLineItem.getCostWoAcc() * this.discountPercentage);
+            this.productPriceWoTax = this.productPriceWoTax - (this.productLineItem.getCostWoAcc() * this.discountPercentage);
+        }
+        else
+        {
+            this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
+            this.productPriceWoTax = this.productPriceWoTax - (this.productPriceWoTax * this.discountPercentage);
+        }
 
         this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
         this.woodWorkPriceWoTax = this.woodWorkPriceWoTax - (woodWorkPriceWoTax * this.discountPercentage);
