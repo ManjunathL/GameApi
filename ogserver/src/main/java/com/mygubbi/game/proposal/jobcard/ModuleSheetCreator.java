@@ -326,10 +326,10 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                 } catch (Exception e) {
                     LOG.info(e.getStackTrace());
                 }
-                if(module.getMGCode().startsWith("MG-NS") && custom.equals("Yes"))
+                if(custom.equals("Yes"))
                 {
                     currentRow++;
-                    LOG.info("Non standard Module code " +module.getMGCode());
+                    LOG.info("Non standard Module code33 " +module.getMGCode());
                     for (HingePack hingePack : module.getHingePacks()) {
                         hingeTitle = hingePack.getTYPE();
                     }
