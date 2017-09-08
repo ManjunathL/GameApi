@@ -1103,6 +1103,14 @@
       "params": ["productName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale","designerstory"],
       "jsonfields":["secondaryImageLocationJson", "spaceJSon","furnitureComponentMaterialJson","designerDetailsJson"]
     },
+    {
+      "id": "workbench.productmaster.update",
+      "type": "update",
+      "table": "product_master",
+      "query": "update product_master set productName = ?, webDisplayName = ?, dFileLocation = ?, primaryImageLocation = ? , secondaryImageLocationJson = ?, category = ? , subcategory = ? , usp = ? , designAttribute = ? , spaceJSon = ? , productStyle = ? , otherDesignStyle = ? , productColor = ? , productCompatibilityColor = ? , furnitureComponentMaterialJson = ? , designerDetailsJson = ? , sourcingScale = ? , designerstory = ? where id = ? ",
+      "params": ["productName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale","designerstory","id"],
+      "jsonfields":["secondaryImageLocationJson", "spaceJSon","otherDesignStyle","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson"]
+    },
 
     {
       "id": "workbench.productmaster.select",
