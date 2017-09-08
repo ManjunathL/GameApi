@@ -64,7 +64,7 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setVersion(Double.parseDouble(proposalVersion.getVersion()));
         dwProposalAddon.setProposalTitle(proposalHeader.getQuotationFor());
         dwProposalAddon.setPriceDate(proposalHeader.getPriceDate());
-        dwProposalAddon.setBusinessDate(proposalVersion.getUpdatedOn());
+        dwProposalAddon.setBusinessDate(proposalVersion.getBusinessDate());
         dwProposalAddon.setRegion(proposalHeader.getProjectCity());
         dwProposalAddon.setDiscountAmount(proposalVersion.getDiscountAmount());
         dwProposalAddon.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());

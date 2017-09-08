@@ -13,6 +13,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,6 +35,7 @@ public class ReportTableFillerSevice extends AbstractVerticle
     public static final String RUN_FOR_UPDATED_PROPOSALS = "reporting.table.filler.forUpdatedProposal";
     public static final String FORCE_UPDATE_PROPOSALS = "reporting.table.filler.forForceUpdate";
     public static final String RUN_FROM_STARTDATE_TO_ENDDATE_PROPOSALS = "reporting.table.filler.ForRangeOfDates";
+    public static final String RUN_FOR_LIST_OF_PROPOSALS = "reporting.table.filler.forListOfProposals";
 
     LocalDateTime servicecallTime;
     @Override
@@ -82,6 +84,17 @@ public class ReportTableFillerSevice extends AbstractVerticle
         });
         eb.localConsumer(FORCE_UPDATE_PROPOSALS, (Message<Integer> message) -> {
             updateDataLoadStatusToNo(message);
+
+        }).completionHandler(res -> {
+            LOG.info("Proposal output service started." + res.succeeded());
+        });
+        eb.localConsumer(RUN_FOR_LIST_OF_PROPOSALS, (Message<Integer> message) -> {
+            JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
+            JsonArray proposalIds =  obj.getJsonArray("proposals");
+            for(int i=0;i< proposalIds.size();i++) {
+                JsonObject obj1 = proposalIds.getJsonObject(i);
+                this.getVersionObjForProposal(obj1.getInteger("proposalId"), obj1.getString("version"), message);
+            }
 
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());

@@ -1001,7 +1001,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setVersion(proposalVersion.getVersion());
         dwProposalProduct.setProposalTitle(proposalHeader.getQuotationFor());
         dwProposalProduct.setPriceDate(proposalHeader.getPriceDate());
-        dwProposalProduct.setBusinessDate(proposalVersion.getUpdatedOn());
+        dwProposalProduct.setBusinessDate(proposalVersion.getBusinessDate());
         dwProposalProduct.setRegion(proposalHeader.getProjectCity());
         dwProposalProduct.setDiscountAmount(proposalVersion.getDiscountAmount());
         dwProposalProduct.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());
