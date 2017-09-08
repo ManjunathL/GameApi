@@ -344,12 +344,12 @@ public class ProductPriceHolder {
         if (date.before(currentDate)) {
 
             this.productPriceAfterDiscount = this.productPrice - (this.productLineItem.getCostWoAcc() * this.discountPercentage);
-            this.productPriceWoTax = this.productPriceWoTax - (this.productLineItem.getCostWoAcc() * this.discountPercentage);
+            this.productPriceWoTax = this.productPriceAfterDiscount * 0.8558;
         }
         else
         {
             this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
-            this.productPriceWoTax = this.productPriceWoTax - (this.productPriceWoTax * this.discountPercentage);
+            this.productPriceWoTax = this.productPriceAfterDiscount * 0.8558;
         }
 
         this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
