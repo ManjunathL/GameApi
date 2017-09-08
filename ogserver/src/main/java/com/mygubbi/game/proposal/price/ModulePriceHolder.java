@@ -443,7 +443,7 @@ public class ModulePriceHolder
         }
         else if (component.isHardware())
         {
-            LOG.debug("hardware Components : " + component.toString());
+//            LOG.debug("hardware Components : " + component.toString());
             this.addHardwareComponent(component, accPackCode);
         }
         else if (component.isAccessory())

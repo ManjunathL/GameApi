@@ -729,23 +729,32 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setComponentType("H");
         dwModuleComponent.setComponentCode(hardwareComponent.getComponent().getCode());
         dwModuleComponent.setComponentTitle(hardwareComponent.getComponent().getTitle());
-        if (hardwareComponent.getQuantityFormula() != null)
-        {
-            quantity = hardwareComponent.calculateQuantityUsingFormula(productModule,hardwareComponent.getQuantityFormula());
-        }
-        else
+        if (hardwareComponent.getQuantityFormula().equals("Fixed Quantity"))
         {
             quantity = hardwareComponent.getQuantity();
         }
+        else
+        {
+            quantity = hardwareComponent.calculateQuantityUsingFormula(productModule,hardwareComponent.getQuantityFormula());
+        }
         dwModuleComponent.setComponentQty(quantity);
 
-        double componentPrice = hardwareComponent.getPrice() * quantity;
-        double componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
-        double componentPriceWoTax = componentPrice * prodWoTaxFactor.getSourcePrice();
-        double componentCost = hardwareComponent.getSourcePrice() * quantity;
-        double componentProfit = componentPriceWoTax - componentCost;
-        double componentMargin = componentProfit / componentPriceWoTax;
+        double componentPrice = 0;
+        double componentPriceAfterDiscount = 0;
+        double componentPriceWoTax = 0;
+        double componentCost = 0;
+        double componentProfit = 0;
+        double componentMargin = 0;
 
+        if (hardwareComponent.getPrice() != 0)
+        {
+            componentPrice = hardwareComponent.getPrice() * quantity;
+            componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
+            componentPriceWoTax = componentPrice * prodWoTaxFactor.getSourcePrice();
+            componentCost = hardwareComponent.getSourcePrice() * quantity;
+            componentProfit = componentPriceWoTax - componentCost;
+            componentMargin = componentProfit / componentPriceWoTax;
+        }
 
         dwModuleComponent.setComponentPrice(componentPrice);
         dwModuleComponent.setComponentPriceAfterDiscount(componentPriceAfterDiscount);

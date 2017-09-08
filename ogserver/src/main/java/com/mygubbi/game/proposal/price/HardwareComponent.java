@@ -207,4 +207,15 @@ public class HardwareComponent
         return hardwareRate.getPrice();
     }
 
+    @Override
+    public String toString() {
+        return "HardwareComponent{" +
+                "component=" + component +
+                ", quantity=" + quantity +
+                ", quantityFormula='" + quantityFormula + '\'' +
+                ", accPackCode='" + accPackCode + '\'' +
+                ", priceDate=" + priceDate +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }
