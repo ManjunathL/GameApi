@@ -341,7 +341,7 @@ public class ProductPriceHolder {
 
         java.util.Date date = proposalHeader.getCreatedOn();
         java.util.Date currentDate = new Date(117, 3, 20, 0, 0, 00);
-        if (date.after(currentDate)) {
+        if (date.before(currentDate)) {
 
             this.productPriceAfterDiscount = this.productPrice - (this.productLineItem.getCostWoAcc() * this.discountPercentage);
             this.productPriceWoTax = this.productPriceWoTax - (this.productLineItem.getCostWoAcc() * this.discountPercentage);
