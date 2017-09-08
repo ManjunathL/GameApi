@@ -182,6 +182,10 @@ public class DwReportingService extends AbstractVerticle {
                     }
                 }
 
+                for (HardwareComponent hardwareComponent : hardwareComponents)
+                {
+                    setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardwareComponent,reportingObjects);
+                }
 
             }
             ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem, modulePriceHolders, proposalHeader, proposalVersion);
@@ -235,6 +239,16 @@ public class DwReportingService extends AbstractVerticle {
     private void setComponentAttributes(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, PanelComponent panelComponent, ReportingObjects reportingObjects) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
         dwModuleComponent = dwModuleComponent.setDwComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
+
+
+//        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
+        reportingObjects.queryDatasForComponent.add(dwModuleComponent);
+
+    }
+
+    private void setComponentAttributesForHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, HardwareComponent hardwareComponent, ReportingObjects reportingObjects) {
+        DWModuleComponent dwModuleComponent = new DWModuleComponent();
+        dwModuleComponent = dwModuleComponent.setDwComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardwareComponent);
 
 
 //        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
