@@ -177,11 +177,12 @@ public class ProductPriceHolder {
         double rateForLconnectorPrice=lConnectorRate.getPrice();
         double sourcePriceForLconnectorPrice = lConnectorRate.getSourcePrice();
 
-        if (this.productLineItem.getHandletypeSelection().equals("Gola Profile") && this.productLineItem.getNoOfLengths() != 0)
-        {
-            addToLConnectorPrice(this.productLineItem.getNoOfLengths() * rateForLconnectorPrice);
-            addToLConnectorPriceWoTax(this.productLConnectorPrice * lConnectorFactor.getSourcePrice());
-            addToLConnectorSourceCost(this.productLineItem.getNoOfLengths() * sourcePriceForLconnectorPrice );
+        if(this.productLineItem.getHandletypeSelection() != null) {
+            if (this.productLineItem.getHandletypeSelection().equals("Gola Profile") && this.productLineItem.getNoOfLengths() != 0) {
+                addToLConnectorPrice(this.productLineItem.getNoOfLengths() * rateForLconnectorPrice);
+                addToLConnectorPriceWoTax(this.productLConnectorPrice * lConnectorFactor.getSourcePrice());
+                addToLConnectorSourceCost(this.productLineItem.getNoOfLengths() * sourcePriceForLconnectorPrice);
+            }
         }
 
     }

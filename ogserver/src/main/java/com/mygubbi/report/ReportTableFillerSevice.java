@@ -77,7 +77,7 @@ public class ReportTableFillerSevice extends AbstractVerticle
         });
         eb.localConsumer(RUN_FROM_STARTDATE_TO_ENDDATE_PROPOSALS, (Message<Integer> message) -> {
             JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
-            updateDataLoadStatusToNo(message,obj.getString("startDate"),obj.getString("endDate"));
+            this.getAllUpdatedProposalsOnDate(message,obj.getString("startDate"),obj.getString("endDate"));
 
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());
@@ -116,23 +116,6 @@ public class ReportTableFillerSevice extends AbstractVerticle
                 });
     }
 
-    private void updateDataLoadStatusToNo(Message message,String strDate,String strEndDate)
-    {
-        JsonObject params = new JsonObject();
-        params.put("startDate",strDate);
-        params.put("endDate",strEndDate);
-        Integer id = LocalCache.getInstance().store(new QueryData("version_master.dataLOadStatus.update.OnDate",params));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag ) {
-                        message.reply(LocalCache.getInstance().store(new JsonObject().put("status", "failure")));
-                        LOG.info("Updating version_master, isDataLoadedToReport column to No. " + resultData.errorMessage, resultData.error);
-                    } else {
-                        this.getAllUpdatedProposalsOnDate(message,strDate,strEndDate);
-                    }
-                });
-    }
     private void getAllUpdatedProposals(Message message)
     {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
