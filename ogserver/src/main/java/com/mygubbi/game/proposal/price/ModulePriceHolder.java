@@ -795,9 +795,8 @@ public class ModulePriceHolder
         for (PanelComponent panel : this.getPanelComponents())
         {
             double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
-            double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice();
+            double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
             double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
-//            LOG.debug("NON std source rate : " + nStdSourceRate);
             if (panel.isExposed())
             {
                 if ("Standard".equals(moduleType))
