@@ -21,8 +21,8 @@
 
   "robots.txt": "User-agent: *\nDisallow: /",
 
-  "http_port" : 1447,
-  "https_port" : 1448,
+  "http_port" : 1442,
+  "https_port" : 1443,
   "proposal_docs_folder" : "/mnt/game/proposal/",
   "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
   "templates_folder" : "c:/Users/Public/game_files",
