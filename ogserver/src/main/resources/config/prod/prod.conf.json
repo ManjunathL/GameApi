@@ -24,7 +24,8 @@
   "apicache" : true,
   "shopifyredirect": true,
   "oldurlredirect": true,
-  "enquirymailto" : "reach@mygubbi.com",
+  //"enquirymailto" : "reach@mygubbi.com",
+  "enquirymailto" : "wecare@mygubbi.com",
 
   "staticConfigPath": "config/prod/prod.config.js",
   "importsPath": "config/prod/prod.imports.css",
