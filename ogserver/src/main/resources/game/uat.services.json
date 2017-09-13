@@ -69,8 +69,11 @@
         "name":"com.mygubbi.report.ReportTableFillerSevice"
       },
       {
-        "name":"com.mygubbi.report.DwReportingService",
-        "instances": 10
+        "name":"com.mygubbi.report.DwReportingService"
+      },
+      {
+        "name": "com.mygubbi.apiserver.GameReportsVerticle",
+        "worker": false
       }
 
     ]

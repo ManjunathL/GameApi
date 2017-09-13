@@ -2,7 +2,7 @@
   "version": "0.0.0a",
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/prod_check",
+    "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/Report",
     "max_pool_size": 20,
     "user": "admin",
     "password": "OG$#gubi32"
@@ -30,6 +30,8 @@
   "termsandcondition_manglore":"/mnt/game/proposal/templates/BookingFormManglore.pdf",
   "termsandcondition_pune":"/mnt/game/proposal/templates/BookingFormPune.pdf",
   "termsandcondition_chennai":"/mnt/game/proposal/templates/BookingFormChennai.pdf",
+  "reports_cronText":"0 51 17 1/1 * ? *",
+  "reports_time_zone_name":"Asia/Calcutta",
 
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
   "queryfiles": [

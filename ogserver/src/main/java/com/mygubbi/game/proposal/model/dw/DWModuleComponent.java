@@ -758,7 +758,10 @@ public class DWModuleComponent extends JsonObject {
             componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
             componentCost = hardwareComponent.getSourcePrice() * quantity;
             componentProfit = componentPriceWoTax - componentCost;
-            componentMargin = componentProfit / componentPriceWoTax;
+            if(componentProfit == 0.0 || componentPriceWoTax == 0.0){
+                componentMargin = 0.0;
+            }else
+                  componentMargin = componentProfit / componentPriceWoTax;
         }
 
         dwModuleComponent.setComponentPrice(componentPrice);
