@@ -847,7 +847,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setWidth(0);
         dwModuleComponent.setDepth(0);
         dwModuleComponent.setPanelArea(0);
-        dwModuleComponent.setComponentType("H");
+        dwModuleComponent.setComponentType("A");
         dwModuleComponent.setComponentCode(accessoryComponent.getComponent().getCode());
         dwModuleComponent.setComponentTitle(accessoryComponent.getComponent().getTitle());
 
