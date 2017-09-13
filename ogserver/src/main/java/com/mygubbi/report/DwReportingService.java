@@ -187,6 +187,11 @@ public class DwReportingService extends AbstractVerticle {
                     setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardwareComponent,reportingObjects);
                 }
 
+                for (AccessoryComponent accessoryComponent: accessoryComponents)
+                {
+                    setComponentAttributesForAccessory(proposalHeader,proposalVersion,productLineItem,productModule,accessoryComponent,reportingObjects);
+                }
+
             }
             ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem, modulePriceHolders, proposalHeader, proposalVersion);
             productPriceHolder.prepare();
@@ -249,6 +254,16 @@ public class DwReportingService extends AbstractVerticle {
     private void setComponentAttributesForHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, HardwareComponent hardwareComponent, ReportingObjects reportingObjects) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
         dwModuleComponent = dwModuleComponent.setDwComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardwareComponent);
+
+
+//        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
+        reportingObjects.queryDatasForComponent.add(dwModuleComponent);
+
+    }
+
+    private void setComponentAttributesForAccessory(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccessoryComponent accessoryComponent, ReportingObjects reportingObjects) {
+        DWModuleComponent dwModuleComponent = new DWModuleComponent();
+        dwModuleComponent = dwModuleComponent.setDwComponentAttributesForAccessories(proposalHeader,proposalVersion,productLineItem,productModule,accessoryComponent);
 
 
 //        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
