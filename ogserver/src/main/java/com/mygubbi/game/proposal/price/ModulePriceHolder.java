@@ -806,7 +806,7 @@ public class ModulePriceHolder
                         LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
                         LOG.debug("Rate : " + rate);
                         this.addToShutterCost(panel.getCost() * rate);
-                        this.addToShutterSourceCost(panel.getCost() / stdSourceRate);
+                        this.addToShutterSourceCost(panel.getCost()*rate / stdSourceRate);
 
                     }
                     else {
@@ -851,7 +851,7 @@ public class ModulePriceHolder
                         LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
 
                         this.addToCarcassCost(panel.getCost() * rate);
-                        this.addToCarcassSourceCost(panel.getCost() / stdSourceRate);
+                        this.addToCarcassSourceCost(panel.getCost()*rate / stdSourceRate);
                     }
                     else {
                         this.addToCarcassCost(panel.getCost());

@@ -370,6 +370,8 @@ public class ProductPriceHolder {
         this.productLabourPriceWoTax = this.productLabourPriceWoTax - (productLabourPriceWoTax * this.discountPercentage);
 
         this.productLConnectorPriceAfterDiscount = this.productLConnectorPrice - (this.productLConnectorPrice * this.discountPercentage);
+        this.productLConnectorPriceWoTax = this.productLConnectorPriceWoTax - (productLConnectorPriceWoTax * this.discountPercentage);
+
 
     }
 
