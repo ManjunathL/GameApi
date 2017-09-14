@@ -122,7 +122,7 @@ public class RateCardService extends AbstractVerticle
 
 	public PriceMaster getAddonRate(String code, Date priceDate, String city)
 	{
-		LOG.info("priceDate = "+priceDate);
+//		LOG.info("priceDate = "+priceDate);
 		return getPriceMaster(priceDate, city, code, PriceMasterKey.ADDON_TYPE);
 
 	}

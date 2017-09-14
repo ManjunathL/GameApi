@@ -142,7 +142,7 @@ public class ModulePriceHolder
         this.city = city;
         this.priceDate = date;
         this.productLineItem = productLineItem;
-        LOG.debug("Inside 2nd Module price holder");
+//        LOG.debug("Inside 2nd Module price holder");
 
 
     }
@@ -225,7 +225,7 @@ public class ModulePriceHolder
     {
         String handletypeSelection = this.productLineItem.getHandletypeSelection();
 
-        LOG.debug("Inisde resolve handles module :" + this.productModule.encodePrettily());
+//        LOG.debug("Inisde resolve handles module :" + this.productModule.encodePrettily());
 
         if (handletypeSelection == null) return;
 
@@ -262,7 +262,7 @@ public class ModulePriceHolder
         if (Objects.equals(handletypeSelection,GOLA_PROFILE ))
         {
 
-            LOG.debug("Inside gola profile");
+//            LOG.debug("Inside gola profile");
 
 
             if (!(this.productModule.getHandleCode() == null))
@@ -350,12 +350,12 @@ public class ModulePriceHolder
                 golaProfilePrice = profilePrice + bracketPrice  + cConnectorPrice;
                 handleandKnobCost += golaProfilePrice;
 
-                LOG.debug("Gola Profile Price: " + golaProfilePrice);
+//                LOG.debug("Gola Profile Price: " + golaProfilePrice);
 
         }
         else if (Objects.equals(handletypeSelection, "G Profile")){
 
-            LOG.debug("G Profile : ");
+//            LOG.debug("G Profile : ");
 
             double lWidth = 0;
             double gOrJProfileSourceCost;
@@ -363,7 +363,7 @@ public class ModulePriceHolder
             double quantity = 0;
            // for (ProductModule module : this.productLineItem.getModules())
            // {
-                LOG.debug("Module : " + this.productModule.toString());
+//                LOG.debug("Module : " + this.productModule.toString());
                 Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(this.productModule.getMGCode());
                 for (AccessoryPackComponent accessoryPackComponent : handles)
                 {
@@ -381,13 +381,13 @@ public class ModulePriceHolder
                 }
            // }
                 gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
-            LOG.debug("G profile rate : " +  gProfileRate.getPrice());
+//            LOG.debug("G profile rate : " +  gProfileRate.getPrice());
 
 
             gOrJProfileSourceCost = lWidth/1000 * gProfileRate.getSourcePrice();
             handleandKnobSourceCost +=  gOrJProfileSourceCost;
 
-            LOG.debug("Inside G profile : "+ gOrJProfilePrice);
+//            LOG.debug("Inside G profile : "+ gOrJProfilePrice);
                 //LOG.debug("L width Rate :" + gProfileRate.getPrice());
                 handleandKnobCost += gOrJProfilePrice;
 
@@ -395,7 +395,7 @@ public class ModulePriceHolder
         }
         else if (Objects.equals(handletypeSelection, "J Profile"))
         {
-            LOG.debug("J profile : ");
+//            LOG.debug("J profile : ");
 
             double lWidth = 0;
             double gOrJProfileSourceCost;
@@ -403,7 +403,7 @@ public class ModulePriceHolder
             double quantity = 0;
           //  for (ProductModule module : this.productLineItem.getModules())
           //  {
-                LOG.debug("Module : " + this.productModule.toString());
+//                LOG.debug("Module : " + this.productModule.toString());
                 Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(this.productModule.getMGCode());
                 for (AccessoryPackComponent accessoryPackComponent : handles)
                 {
@@ -414,17 +414,17 @@ public class ModulePriceHolder
                     if (this.productModule.getModuleCategory().contains("Drawer"))
                     {
                         lWidth = lWidth + (quantity * this.productModule.getWidth());
-                        LOG.debug("Inside if :" + lWidth);
+//                        LOG.debug("Inside if :" + lWidth);
                     }
                     else {
                         lWidth = lWidth + this.productModule.getWidth();
-                        LOG.debug("Inside else :" + lWidth);
+//                        LOG.debug("Inside else :" + lWidth);
                     }
                 }
            // }
             gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
-            LOG.debug("J profile rate : " +  jProfileRate.getPrice());
-            LOG.debug("Inside J profile : "+ gOrJProfilePrice);
+//            LOG.debug("J profile rate : " +  jProfileRate.getPrice());
+//            LOG.debug("Inside J profile : "+ gOrJProfilePrice);
 
             gOrJProfileSourceCost = lWidth/1000 * jProfileRate.getSourcePrice();
             handleandKnobSourceCost +=  gOrJProfileSourceCost;
@@ -510,18 +510,18 @@ public class ModulePriceHolder
 
     private void getHingeRateBasedOnQty(HingePack hingePack)
     {
-        LOG.debug("Hinge Pack inside QTY : " + hingePack);
+//        LOG.debug("Hinge Pack inside QTY : " + hingePack);
 
         double quantity = hingePack.getQUANTITY();
 
       if (Objects.equals(hingePack.getQtyFlag(), "C")) {
-          LOG.debug("inisde 1st if" + hingePack);
+//          LOG.debug("inisde 1st if" + hingePack);
           if (Objects.equals(hingePack.getQtyFormula(), "") || hingePack.getQtyFormula().isEmpty()) {
-              LOG.debug("inisde 2nd if" + hingePack);
+//              LOG.debug("inisde 2nd if" + hingePack);
               String code = null;
               if (Objects.equals(hingePack.getTYPE(), "Soft Close"))
               {
-                  LOG.debug("inisde soft close" + hingePack);
+//                  LOG.debug("inisde soft close" + hingePack);
                   if (productModule.getDepth() < 350)
                       code = "HINGE05";
                   else if (productModule.getDepth() < 400)
@@ -535,7 +535,7 @@ public class ModulePriceHolder
               }
               else
               {
-                  LOG.debug("inisde non soft close" + hingePack);
+//                  LOG.debug("inisde non soft close" + hingePack);
 
                   if (productModule.getDepth() < 350)
                       code = "HINGE11";
@@ -550,7 +550,7 @@ public class ModulePriceHolder
               }
 
 
-              LOG.debug("code" + code);
+//              LOG.debug("code" + code);
 
               PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(code, this.priceDate, this.city);
               hingeCost += hingeCostPriceMaster.getPrice() * quantity;
@@ -558,7 +558,7 @@ public class ModulePriceHolder
 
           } else {
 
-              LOG.debug("Hinge Pack inside C : " + hingePack);
+//              LOG.debug("Hinge Pack inside C : " + hingePack);
               if (Objects.equals(hingePack.getQtyFormula(), "F6")) {
                   int value1 = (productModule.getHeight() > 2100) ? 5 : 4;
                   int value2 = (productModule.getWidth() > 600) ? 2 : 1;
@@ -664,9 +664,9 @@ public class ModulePriceHolder
         this.lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
         this.cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
         this.gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
-        LOG.debug("G profile Rate : " + this.gProfileRate);
+//        LOG.debug("G profile Rate : " + this.gProfileRate);
         this.jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
-        LOG.debug("J profile Rate : " + this.jProfileRate);
+//        LOG.debug("J profile Rate : " + this.jProfileRate);
 
 
 
@@ -803,8 +803,8 @@ public class ModulePriceHolder
                 {
                     if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory()))
                     {
-                        LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
-                        LOG.debug("Rate : " + rate);
+//                        LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
+//                        LOG.debug("Rate : " + rate);
                         this.addToShutterCost(panel.getCost() * rate);
                         this.addToShutterSourceCost(panel.getCost()*rate / stdSourceRate);
 
@@ -824,7 +824,7 @@ public class ModulePriceHolder
                 {
                     if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory()))
                     {
-                        LOG.info("shoerack value 1 " +rate);
+//                        LOG.info("shoerack value 1 " +rate);
                         this.addToShutterCost(panel.getCost() * rate);
                         this.addToShutterSourceCost((panel.getCost() * rate) /  this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
                     }
@@ -848,7 +848,7 @@ public class ModulePriceHolder
                 {
                     if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory()))
                     {
-                        LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
+//                        LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
 
                         this.addToCarcassCost(panel.getCost() * rate);
                         this.addToCarcassSourceCost(panel.getCost()*rate / stdSourceRate);
@@ -867,7 +867,7 @@ public class ModulePriceHolder
                 {
                     if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory()) )
                     {
-                        LOG.info("Shoerack value in else 2 " +rate);
+//                        LOG.info("Shoerack value in else 2 " +rate);
                         this.addToCarcassCost(panel.getCost() * rate);
                         this.addToCarcassSourceCost((panel.getCost() * rate) /  this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
                     }
@@ -928,7 +928,7 @@ public class ModulePriceHolder
 
             this.carcassCostWoTax = this.carcassCost * this.prodWoTaxFactor.getSourcePrice();
             this.shutterCostWoTax = this.shutterCost * this.prodWoTaxFactor.getSourcePrice();
-            LOG.debug("Module Price Holder :" + labourCost + " : " + this.prodWoTaxFactor.getSourcePrice());
+//            LOG.debug("Module Price Holder :" + labourCost + " : " + this.prodWoTaxFactor.getSourcePrice());
             this.labourCostWoTax = labourCost * this.prodWoTaxFactor.getSourcePrice();
             this.hardwareCostWoTax = this.hardwareCost * this.prodWoTaxFactor.getSourcePrice();
             this.handleandKnobCostWoTax = this.handleandKnobCost * this.prodWoTaxFactor.getSourcePrice();

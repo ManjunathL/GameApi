@@ -4,6 +4,7 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
@@ -192,6 +193,10 @@ public class DwReportingService extends AbstractVerticle {
                     setComponentAttributesForAccessory(proposalHeader,proposalVersion,productLineItem,productModule,accessoryComponent,reportingObjects);
                 }
 
+                this.collectModuleHandles(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
+                this.collectModuleKnob(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
+                this.collectModuleHinge(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
+
             }
             ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem, modulePriceHolders, proposalHeader, proposalVersion);
             productPriceHolder.prepare();
@@ -243,7 +248,7 @@ public class DwReportingService extends AbstractVerticle {
 
     private void setComponentAttributes(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, PanelComponent panelComponent, ReportingObjects reportingObjects) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
-        dwModuleComponent = dwModuleComponent.setDwComponentAttributes(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
+        dwModuleComponent = dwModuleComponent.setDwComponentAttributesForPanel(proposalHeader,proposalVersion,productLineItem,productModule,panelComponent);
 
 
 //        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
@@ -255,10 +260,14 @@ public class DwReportingService extends AbstractVerticle {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
         dwModuleComponent = dwModuleComponent.setDwComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardwareComponent);
 
-
-//        queryDatasForComponent.add(new QueryData("dw_module_component.insert", dwModuleComponent));
         reportingObjects.queryDatasForComponent.add(dwModuleComponent);
+    }
 
+    private void setComponentAttributesForHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent,double quantity, ReportingObjects reportingObjects) {
+        DWModuleComponent dwModuleComponent = new DWModuleComponent();
+        dwModuleComponent = dwModuleComponent.setDwComponentAttributesForGolaProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,accHwComponent,quantity);
+
+        reportingObjects.queryDatasForComponent.add(dwModuleComponent);
     }
 
     private void setComponentAttributesForAccessory(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccessoryComponent accessoryComponent, ReportingObjects reportingObjects) {
@@ -313,10 +322,168 @@ public class DwReportingService extends AbstractVerticle {
         queryDatas.add(new QueryData("update.version_master.dataLoadStatus",params));
         insertRowsToTable(queryDatas, message,reportingObjects);
     }
+
     private String getCurrentDate(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
         LocalDateTime localDate = LocalDateTime.now();
         return dtf.format(localDate);
     }
+
+    private void collectModuleHandles(ProposalHeader proposalHeader, ProposalVersion proposalVersion,ProductLineItem productLineItem,ProductModule productModule,ReportingObjects reportingObjects) {
+
+        String GOLA_PROFILE = "Gola Profile";
+
+        java.sql.Date priceDate = proposalHeader.getPriceDate();
+        String city = proposalHeader.getProjectCity();
+
+        PriceMaster lWidthRate = RateCardService.getInstance().getHardwareRate("H073", priceDate, city);
+        PriceMaster cWidthRate = RateCardService.getInstance().getHardwareRate("H071", priceDate, city);
+        PriceMaster wWidthRate = RateCardService.getInstance().getHardwareRate("H076", priceDate, city);
+        PriceMaster bracketRate = RateCardService.getInstance().getHardwareRate("H075", priceDate, city);
+        PriceMaster lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
+        PriceMaster cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
+        PriceMaster gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
+        PriceMaster jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
+
+        if (Objects.equals(productLineItem.getHandletypeSelection(), GOLA_PROFILE)) {
+
+            AccHwComponent hardware = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware,1,reportingObjects);
+
+            AccHwComponent hardware1 = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware1,1,reportingObjects);
+
+            AccHwComponent hardware2 = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware2,1,reportingObjects);
+
+            AccHwComponent hardware3 = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware3,1,reportingObjects);
+
+            AccHwComponent hardware4 = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware4,1,reportingObjects);
+
+        }
+        if (Objects.equals(productLineItem.getHandletypeSelection(), "G Profile")) {
+
+            double quantity = 0;
+            double lwidth = 0;
+            double moduleWidth = productModule.getWidth();
+            double factor = moduleWidth /1000;
+
+
+            Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(productModule.getMGCode());
+            for (AccessoryPackComponent accessoryPackComponent : handles) {
+                if (accessoryPackComponent.getType().equals("HL"))
+                {
+                    quantity = accessoryPackComponent.getQuantity();
+                }
+            }
+
+            if (Objects.equals(productModule.getHandleMandatory(), "Yes"))
+            {
+                if (productModule.getModuleCategory().contains("Drawer"))
+                {
+                    lwidth = lwidth + (quantity * factor);
+                }
+                else {
+                    lwidth = lwidth + factor;
+                }
+            }
+
+            AccHwComponent hardware5 = ModuleDataService.getInstance().getHardware(gProfileRate.getRateId());
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware5,lwidth,reportingObjects);
+
+        }
+        if (Objects.equals(productLineItem.getHandletypeSelection(), "J Profile")) {
+
+            double quantity = 0;
+            double lWidth = 0;
+            double moduleWidth = productModule.getWidth();
+            double factor = moduleWidth /1000;
+
+            Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(productModule.getMGCode());
+            for (AccessoryPackComponent accessoryPackComponent : handles)
+            {
+                if (accessoryPackComponent.getType().equals("HL"))
+                {
+                    quantity = accessoryPackComponent.getQuantity();
+                }
+            }
+            if (Objects.equals(productModule.getHandleMandatory(), "Yes"))
+            {
+                if (productModule.getModuleCategory().contains("Drawer"))
+                {
+                    lWidth = lWidth + (quantity * factor);
+                }
+                else {
+                    lWidth = lWidth + factor;
+                }
+            }
+
+            AccHwComponent hardware6 = ModuleDataService.getInstance().getHardware(jProfileRate.getRateId());
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware6,lWidth,reportingObjects);
+        }
+        if (productModule.getHandleCode() == null) {
+
+        }
+        if (productLineItem.getHandletypeSelection().equals("Normal"))
+        {
+            if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
+            {
+//                LOG.debug("Collect handle : " + productModule.getHandleQuantity() + " : " + productModule.getMGCode());
+                Handle handle = ModuleDataService.getInstance().getHandleTitle(productModule.getHandleCode());
+                setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
+            }
+
+        }
+
+    }
+
+    private void collectModuleKnob(ProposalHeader proposalHeader, ProposalVersion proposalVersion,ProductLineItem productLineItem,ProductModule productModule,ReportingObjects reportingObjects) {
+        if (productModule.getKnobCode() == null) {
+            return;
+        }
+        if (productModule.getKnobMandatory().equalsIgnoreCase("yes"))
+        {
+//            LOG.debug("Collect knob : " + productModule.getKnobQuantity() + " : " + productModule.getMGCode());
+
+            Handle knob = ModuleDataService.getInstance().getHandleTitle(productModule.getKnobCode());
+            setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,knob,reportingObjects,productModule.getKnobQuantity());
+        }
+
+    }
+
+    private void collectModuleHinge(ProposalHeader proposalHeader, ProposalVersion proposalVersion,ProductLineItem productLineItem,ProductModule productModule,ReportingObjects reportingObjects) {
+
+        for (HingePack hingePack : productModule.getHingePacks()) {
+            Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+            double quantity = getHingeRateBasedOnQty(hingePack,productModule);
+            setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
+        }
+    }
+
+    private void setComponentAttributesForHandle(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, Handle handle, ReportingObjects reportingObjects, double quantity) {
+        DWModuleComponent dwModuleComponent = new DWModuleComponent();
+        dwModuleComponent = dwModuleComponent.setDwComponentAttributesForHandleKnobOrHinge(proposalHeader,proposalVersion,productLineItem,productModule,handle,quantity);
+
+        reportingObjects.queryDatasForComponent.add(dwModuleComponent);
+    }
+
+    private double getHingeRateBasedOnQty(HingePack hingePack, ProductModule productModule) {
+
+        double quantity = hingePack.getQUANTITY();
+
+        if (Objects.equals(hingePack.getQtyFlag(), "C")) {
+            if (Objects.equals(hingePack.getQtyFormula(), "F6")) {
+                int value1 = (productModule.getHeight() > 2100) ? 5 : 4;
+                int value2 = (productModule.getWidth() > 600) ? 2 : 1;
+                quantity = value1 * value2;
+            } else if (Objects.equals(hingePack.getQtyFormula(), "F12")) {
+                quantity = (productModule.getWidth() >= 601) ? 4 : 2;
+            }
+        }
+        return quantity;
+    }
+
 
 }

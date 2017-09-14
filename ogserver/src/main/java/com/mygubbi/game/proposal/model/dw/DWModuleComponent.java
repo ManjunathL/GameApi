@@ -9,6 +9,8 @@ import com.mygubbi.game.proposal.price.HardwareComponent;
 import com.mygubbi.game.proposal.price.PanelComponent;
 import com.mygubbi.game.proposal.price.RateCardService;
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -20,6 +22,9 @@ import java.util.Objects;
  * Created by User on 30-08-2017.
  */
 public class DWModuleComponent extends JsonObject {
+
+    private final static Logger LOG = LogManager.getLogger(DWModuleComponent.class);
+
 
     private static final String WARDROBE = "Wardrobe";
 
@@ -58,6 +63,7 @@ public class DWModuleComponent extends JsonObject {
     public static final String PANEL_AREA="panelArea";
     public static final String COMPONENT_TYPE="compType";
     public static final String COMPONENT_CODE="compCode";
+    public static final String COMPONENT_UOM="compUom";
     public static final String COMPONENT_QTY="compQty";
     public static final String COMPONENT_TITLE="compTitle";
     public static final String COMPONENT_PRICE="compPrice";
@@ -424,6 +430,15 @@ public class DWModuleComponent extends JsonObject {
         return this;
     }
 
+    public String getComponentUom() {
+        return this.getString(COMPONENT_UOM);
+    }
+
+    public DWModuleComponent setComponentUom(String componentUom) {
+        this.put(COMPONENT_UOM,componentUom);
+        return this;
+    }
+
     public double getComponentQty() {
         return this.getDouble(COMPONENT_QTY);
     }
@@ -496,7 +511,7 @@ public class DWModuleComponent extends JsonObject {
         return this;
     }
 
-    public DWModuleComponent setDwComponentAttributes(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, PanelComponent panelComponent) {
+    public DWModuleComponent setDwComponentAttributesForPanel(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, PanelComponent panelComponent) {
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
@@ -587,9 +602,10 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setHeight(panelComponent.getLength());
         dwModuleComponent.setWidth(panelComponent.getBreadth());
         dwModuleComponent.setDepth(panelComponent.getThickness());
-        dwModuleComponent.setPanelArea(panelComponent.getArea());
+        dwModuleComponent.setPanelArea(panelComponent.getArea() * panelComponent.getQuantity());
         dwModuleComponent.setComponentType(panelComponent.getType());
         dwModuleComponent.setComponentCode(panelComponent.getCode());
+        dwModuleComponent.setComponentUom("Qty");
         dwModuleComponent.setComponentTitle(panelComponent.getTitle());
         dwModuleComponent.setComponentQty(panelComponent.getQuantity());
 
@@ -733,6 +749,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPanelArea(0);
         dwModuleComponent.setComponentType("H");
         dwModuleComponent.setComponentCode(hardwareComponent.getComponent().getCode());
+        dwModuleComponent.setComponentUom(hardwareComponent.getComponent().getUom());
         dwModuleComponent.setComponentTitle(hardwareComponent.getComponent().getTitle());
         if (hardwareComponent.getQuantityFormula().equals("Fixed Quantity"))
         {
@@ -849,6 +866,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPanelArea(0);
         dwModuleComponent.setComponentType("A");
         dwModuleComponent.setComponentCode(accessoryComponent.getComponent().getCode());
+        dwModuleComponent.setComponentUom(accessoryComponent.getComponent().getUom());
         dwModuleComponent.setComponentTitle(accessoryComponent.getComponent().getTitle());
 
         dwModuleComponent.setComponentQty(accessoryComponent.getQuantity());
@@ -883,4 +901,243 @@ public class DWModuleComponent extends JsonObject {
         return dwModuleComponent;
     }
 
+
+    public DWModuleComponent setDwComponentAttributesForGolaProfileHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent, double quantity) {
+        DWModuleComponent dwModuleComponent = new DWModuleComponent();
+
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+
+        PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(accHwComponent.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+
+        ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
+
+        String moduleType;
+
+        if (productModule.getMGCode().startsWith("MG-NS")) {
+            moduleType = "nonStandard";
+        } else if (productModule.getMGCode().startsWith("MG-NS-H")) {
+            moduleType = "hike";
+        } else {
+            moduleType = "Standard";
+        }
+
+        double productAreaInSqft = 0.0;
+
+        List<ProductModule> modules = productLineItem.getModules();
+        for (ProductModule module : modules)
+        {
+            if (module.getAreaOfModuleInSft() != 0)
+            {
+                productAreaInSqft += module.getAreaOfModuleInSft();
+            }
+        }
+
+        dwModuleComponent.setProposalId(proposalHeader.getId());
+        dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwModuleComponent.setCrmId(proposalHeader.getCrmId());
+        dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
+        dwModuleComponent.setVersion(proposalVersion.getVersion());
+        dwModuleComponent.setPriceDate(proposalHeader.getPriceDate());
+        dwModuleComponent.setBusinessDate(proposalVersion.getUpdatedOn());
+        dwModuleComponent.setRegion(proposalHeader.getProjectCity());
+        dwModuleComponent.setStatus(proposalVersion.getProposalStatus());
+        dwModuleComponent.setDiscountAmount(proposalVersion.getDiscountAmount());
+        dwModuleComponent.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());
+        dwModuleComponent.setSpaceType(productLineItem.getSpaceType());
+        dwModuleComponent.setRoom(productLineItem.getRoomCode());
+        dwModuleComponent.setPrId(productLineItem.getId());
+        dwModuleComponent.setPrTitle(productLineItem.getTitle());
+        dwModuleComponent.setPrPrice(productLineItem.getAmount());
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrArea(productAreaInSqft);
+        dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
+        dwModuleComponent.setModuleType(moduleType);
+        dwModuleComponent.setModuleCode(productModule.getMGCode());
+        dwModuleComponent.setModuleCategory(productModule.getModuleCategory());
+        dwModuleComponent.setModuleSeq(productModule.getModuleSequence());
+        dwModuleComponent.setAccPackCode("NA");
+        dwModuleComponent.setCarcass(productModule.getCarcassCode());
+
+        String finishCode = finish.getFinishType();
+        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+            finishCode = NEW_MATT_SOLID_FINISH;
+        }
+        if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
+            finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
+        }
+
+        dwModuleComponent.setFinish(finishCode);
+        dwModuleComponent.setFinishMaterial(productModule.getFinishType());
+        dwModuleComponent.setHeight(0);
+        dwModuleComponent.setWidth(0);
+        dwModuleComponent.setDepth(0);
+        dwModuleComponent.setPanelArea(0);
+        dwModuleComponent.setComponentType("H");
+        dwModuleComponent.setComponentCode(accHwComponent.getCode());
+        dwModuleComponent.setComponentUom(accHwComponent.getUom());
+        dwModuleComponent.setComponentTitle(accHwComponent.getTitle());
+        dwModuleComponent.setComponentQty(quantity);
+
+        double componentPrice = 0;
+        double componentPriceAfterDiscount = 0;
+        double componentPriceWoTax = 0;
+        double componentCost = 0;
+        double componentProfit = 0;
+        double componentMargin = 0;
+
+        if (hardwareRate.getPrice() != 0)
+        {
+            componentPrice = hardwareRate.getPrice() * quantity;
+            componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
+            componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
+            componentCost = hardwareRate.getSourcePrice() * quantity;
+            componentProfit = componentPriceWoTax - componentCost;
+            if(componentProfit == 0.0 || componentPriceWoTax == 0.0){
+                componentMargin = 0.0;
+            }else
+                componentMargin = componentProfit / componentPriceWoTax;
+        }
+
+        dwModuleComponent.setComponentPrice(componentPrice);
+        dwModuleComponent.setComponentPriceAfterDiscount(componentPriceAfterDiscount);
+        dwModuleComponent.setComponentPriceWoTax(componentPriceWoTax);
+        dwModuleComponent.setComponentCost(componentCost);
+        dwModuleComponent.setComponentProfit(componentProfit);
+        dwModuleComponent.setComponentMargin(componentMargin);
+
+        return dwModuleComponent;
     }
+
+    public DWModuleComponent setDwComponentAttributesForHandleKnobOrHinge(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, Handle handle, double quantity) {
+
+//        LOG.debug("Qty :" + quantity + " : " + handle.getCode() + " :" + productModule.getMGCode());
+
+        DWModuleComponent dwModuleComponent = new DWModuleComponent();
+
+        String compType = null;
+        PriceMaster handleOrKnobRate = null;
+
+
+        if (handle.getCode().startsWith("HANDLE"))
+        {
+            compType = "HL";
+            handleOrKnobRate = RateCardService.getInstance().getHandleOrKnobRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+        }
+        else if(handle.getCode().startsWith("KNOB")){
+            compType = "K";
+            handleOrKnobRate = RateCardService.getInstance().getHandleOrKnobRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+        }
+        else
+        {
+            compType = "HI";
+            handleOrKnobRate = RateCardService.getInstance().getHingeRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+        }
+
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+
+
+        ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
+
+        String moduleType;
+
+        if (productModule.getMGCode().startsWith("MG-NS")) {
+            moduleType = "nonStandard";
+        } else if (productModule.getMGCode().startsWith("MG-NS-H")) {
+            moduleType = "hike";
+        } else {
+            moduleType = "Standard";
+        }
+
+        double productAreaInSqft = 0.0;
+
+        List<ProductModule> modules = productLineItem.getModules();
+        for (ProductModule module : modules)
+        {
+            if (module.getAreaOfModuleInSft() != 0)
+            {
+                productAreaInSqft += module.getAreaOfModuleInSft();
+            }
+        }
+
+        dwModuleComponent.setProposalId(proposalHeader.getId());
+        dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwModuleComponent.setCrmId(proposalHeader.getCrmId());
+        dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
+        dwModuleComponent.setVersion(proposalVersion.getVersion());
+        dwModuleComponent.setPriceDate(proposalHeader.getPriceDate());
+        dwModuleComponent.setBusinessDate(proposalVersion.getUpdatedOn());
+        dwModuleComponent.setRegion(proposalHeader.getProjectCity());
+        dwModuleComponent.setStatus(proposalVersion.getProposalStatus());
+        dwModuleComponent.setDiscountAmount(proposalVersion.getDiscountAmount());
+        dwModuleComponent.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());
+        dwModuleComponent.setSpaceType(productLineItem.getSpaceType());
+        dwModuleComponent.setRoom(productLineItem.getRoomCode());
+        dwModuleComponent.setPrId(productLineItem.getId());
+        dwModuleComponent.setPrTitle(productLineItem.getTitle());
+        dwModuleComponent.setPrPrice(productLineItem.getAmount());
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrArea(productAreaInSqft);
+        dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
+        dwModuleComponent.setModuleType(moduleType);
+        dwModuleComponent.setModuleCode(productModule.getMGCode());
+        dwModuleComponent.setModuleCategory(productModule.getModuleCategory());
+        dwModuleComponent.setModuleSeq(productModule.getModuleSequence());
+        dwModuleComponent.setAccPackCode("NA");
+        dwModuleComponent.setCarcass(productModule.getCarcassCode());
+
+        String finishCode = finish.getFinishType();
+        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+            finishCode = NEW_MATT_SOLID_FINISH;
+        }
+        if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
+            finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
+        }
+
+        dwModuleComponent.setFinish(finishCode);
+        dwModuleComponent.setFinishMaterial(productModule.getFinishType());
+        dwModuleComponent.setHeight(productModule.getHeight());
+        dwModuleComponent.setWidth(productModule.getWidth());
+        dwModuleComponent.setDepth(productModule.getDepth());
+        dwModuleComponent.setPanelArea(0);
+        dwModuleComponent.setComponentCode(handle.getCode());
+        dwModuleComponent.setComponentTitle(handle.getTitle());
+        dwModuleComponent.setComponentUom("Qty");
+        dwModuleComponent.setComponentType(compType);
+        dwModuleComponent.setComponentQty(quantity);
+
+        double componentPrice = 0;
+        double componentPriceAfterDiscount = 0;
+        double componentPriceWoTax = 0;
+        double componentCost = 0;
+        double componentProfit = 0;
+        double componentMargin = 0;
+
+
+
+        if (handleOrKnobRate.getPrice() != 0)
+        {
+            componentPrice = handleOrKnobRate.getPrice() * quantity;
+            componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
+            componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
+            componentCost = handleOrKnobRate.getSourcePrice() * quantity;
+            componentProfit = componentPriceWoTax - componentCost;
+            if(componentProfit == 0.0 || componentPriceWoTax == 0.0){
+                componentMargin = 0.0;
+            }else
+                componentMargin = componentProfit / componentPriceWoTax;
+        }
+
+        dwModuleComponent.setComponentPrice(componentPrice);
+        dwModuleComponent.setComponentPriceAfterDiscount(componentPriceAfterDiscount);
+        dwModuleComponent.setComponentPriceWoTax(componentPriceWoTax);
+        dwModuleComponent.setComponentCost(componentCost);
+        dwModuleComponent.setComponentProfit(componentProfit);
+        dwModuleComponent.setComponentMargin(componentMargin);
+
+        return dwModuleComponent;
+    }
+
+
+}
