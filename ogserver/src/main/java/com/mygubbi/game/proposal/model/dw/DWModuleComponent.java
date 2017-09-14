@@ -1011,7 +1011,7 @@ public class DWModuleComponent extends JsonObject {
 
     public DWModuleComponent setDwComponentAttributesForHandleKnobOrHinge(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, Handle handle, double quantity) {
 
-//        LOG.debug("Qty :" + quantity + " : " + handle.getCode() + " :" + productModule.getMGCode());
+        LOG.debug("Qty :" + quantity + " : " /*+ handle.getCode() + " :"*/ + productModule.getMGCode() + " :" + productLineItem.getHandletypeSelection());
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 

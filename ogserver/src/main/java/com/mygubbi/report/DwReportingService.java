@@ -195,7 +195,7 @@ public class DwReportingService extends AbstractVerticle {
 
                 this.collectModuleHandles(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
                 this.collectModuleKnob(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
-                this.collectModuleHinge(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
+              if (!(productModule.getHingePacks().size() == 0) || productModule.getHingePacks() == null) this.collectModuleHinge(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
 
             }
             ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem, modulePriceHolders, proposalHeader, proposalVersion);
@@ -426,16 +426,38 @@ public class DwReportingService extends AbstractVerticle {
         if (productModule.getHandleCode() == null) {
 
         }
-        if (productLineItem.getHandletypeSelection().equals("Normal"))
+
+        if (Objects.equals(productLineItem.getHandletypeSelection(),"Normal" ))
         {
-            if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
+            if (productModule.getHandleOverrideFlag()== null)
+            {
+                if (!(productLineItem.getHandleCode() == null))
+                {
+                    if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
+                    {
+                        Handle handle = ModuleDataService.getInstance().getHandleTitle(productLineItem.getHandleCode());
+                        setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
+
+                    }
+                }
+            }
+            else if (productModule.getHandleOverrideFlag().equals("Yes")) {
+                {
+                    Handle handle = ModuleDataService.getInstance().getHandleTitle(productModule.getHandleCode());
+                    setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
+                }
+            }
+
+        }
+
+
+           /* if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
             {
 //                LOG.debug("Collect handle : " + productModule.getHandleQuantity() + " : " + productModule.getMGCode());
                 Handle handle = ModuleDataService.getInstance().getHandleTitle(productModule.getHandleCode());
                 setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
-            }
+            }*/
 
-        }
 
     }
 
@@ -455,11 +477,62 @@ public class DwReportingService extends AbstractVerticle {
 
     private void collectModuleHinge(ProposalHeader proposalHeader, ProposalVersion proposalVersion,ProductLineItem productLineItem,ProductModule productModule,ReportingObjects reportingObjects) {
 
+
         for (HingePack hingePack : productModule.getHingePacks()) {
-            Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
-            double quantity = getHingeRateBasedOnQty(hingePack,productModule);
-            setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
-        }
+            double quantity = hingePack.getQUANTITY();
+
+
+            if (Objects.equals(hingePack.getQtyFlag(), "C")) {
+                if (Objects.equals(hingePack.getQtyFormula(), "") || hingePack.getQtyFormula().isEmpty()) {
+                    String code = null;
+                    if (Objects.equals(hingePack.getTYPE(), "Soft Close"))
+                    {
+                        if (productModule.getDepth() < 350)
+                            code = "HINGE05";
+                        else if (productModule.getDepth() < 400)
+                            code = "HINGE04";
+                        else if (productModule.getDepth() < 450)
+                            code = "HINGE02";
+                        else if (productModule.getDepth() < 500)
+                            code = "HINGE03";
+                        else if (productModule.getDepth() < 650)
+                            code = "HINGE06";
+                    }
+                    else
+                    {
+
+                        if (productModule.getDepth() < 350)
+                            code = "HINGE11";
+                        else if (productModule.getDepth() < 400)
+                            code = "HINGE10";
+                        else if (productModule.getDepth() < 450)
+                            code = "HINGE08";
+                        else if (productModule.getDepth() < 500)
+                            code = "HINGE09";
+                        else if (productModule.getDepth() < 650)
+                            code = "HINGE12";
+                    }
+
+
+                    Handle hinge = ModuleDataService.getInstance().getHandleTitle(code);
+
+                    setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
+
+
+                } else {
+                    quantity = getHingeRateBasedOnQty(hingePack,productModule);
+                    Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+
+                    setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
+
+                }
+            }
+            else {
+                Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+
+                setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
+            }
+            }
     }
 
     private void setComponentAttributesForHandle(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, Handle handle, ReportingObjects reportingObjects, double quantity) {

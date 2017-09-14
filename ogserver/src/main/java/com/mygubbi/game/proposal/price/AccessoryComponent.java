@@ -43,12 +43,12 @@ public class AccessoryComponent
     {
         if (component.getCode().contains("ADDON"))
         {
-            LOG.debug("inside addon");
+//            LOG.debug("inside addon");
             PriceMaster addonRate = RateCardService.getInstance().getAddonRate(component.getCode(), this.priceDate, this.city);
             return addonRate.getPrice() * this.quantity;
         }
         else {
-            LOG.debug("inside accessory");
+//            LOG.debug("inside accessory");
             PriceMaster accessoryRate = RateCardService.getInstance().getAccessoryRate(component.getCode(), this.priceDate, this.city);
             return accessoryRate.getPrice() * this.quantity;
         }
@@ -58,12 +58,12 @@ public class AccessoryComponent
     {
         if (component.getCode().contains("ADDON"))
         {
-            LOG.debug("inside addon");
+//            LOG.debug("inside addon");
             PriceMaster addonRate = RateCardService.getInstance().getAddonRate(component.getCode(), this.priceDate, this.city);
             return addonRate.getSourcePrice() * this.quantity;
         }
         else {
-            LOG.debug("inside accessory");
+//            LOG.debug("inside accessory");
             PriceMaster accessoryRate = RateCardService.getInstance().getAccessoryRate(component.getCode(), this.priceDate, this.city);
             return accessoryRate.getSourcePrice() * this.quantity;
         }
@@ -72,12 +72,12 @@ public class AccessoryComponent
     {
         if (component.getCode().contains("ADDON"))
         {
-            LOG.debug("inside addon");
+//            LOG.debug("inside addon");
             PriceMaster addonRate = RateCardService.getInstance().getAddonRate(component.getCode(), this.priceDate, this.city);
             return addonRate.getPrice();
         }
         else {
-            LOG.debug("inside accessory");
+//            LOG.debug("inside accessory");
             PriceMaster accessoryRate = RateCardService.getInstance().getAccessoryRate(component.getCode(), this.priceDate, this.city);
             return accessoryRate.getPrice();
         }
@@ -86,12 +86,12 @@ public class AccessoryComponent
     {
         if (component.getCode().contains("ADDON"))
         {
-            LOG.debug("inside addon");
+//            LOG.debug("inside addon");
             PriceMaster addonRate = RateCardService.getInstance().getAddonRate(component.getCode(), this.priceDate, this.city);
             return addonRate.getSourcePrice();
         }
         else {
-            LOG.debug("inside accessory");
+//            LOG.debug("inside accessory");
             PriceMaster accessoryRate = RateCardService.getInstance().getAccessoryRate(component.getCode(), this.priceDate, this.city);
             return accessoryRate.getSourcePrice();
         }
