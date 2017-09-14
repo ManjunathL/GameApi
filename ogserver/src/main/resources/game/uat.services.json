@@ -70,10 +70,6 @@
       },
       {
         "name":"com.mygubbi.report.DwReportingService"
-      },
-      {
-        "name": "com.mygubbi.apiserver.GameReportsVerticle",
-        "worker": false
       }
 
     ]
