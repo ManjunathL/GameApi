@@ -22,7 +22,7 @@ public class HardwareComponent
     private Date priceDate;
     private String city;
 
-    private final static Logger LOG = LogManager.getLogger(PriceMaster.class);
+    private final static Logger LOG = LogManager.getLogger(HardwareComponent.class);
 
 
     public HardwareComponent(AccHwComponent component, ProductModule productModule, IModuleComponent moduleComponent, String accPackCode, String city, Date priceDate)
@@ -55,7 +55,7 @@ public class HardwareComponent
 
     public double getCost()
     {
-        LOG.debug("hardware component : " + component.toString());
+//        LOG.debug("hardware component : " + component.toString());
         PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(component.getCode(), this.priceDate, this.city);
         return hardwareRate.getPrice() * this.quantity;
     }
@@ -192,7 +192,7 @@ public class HardwareComponent
 
     public double getTotalSourcePrice()
     {
-        LOG.debug("hardware component : " + component.toString());
+//        LOG.debug("hardware component : " + component.toString());
         PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(component.getCode(), this.priceDate, this.city);
         return hardwareRate.getSourcePrice() * this.quantity;
     }

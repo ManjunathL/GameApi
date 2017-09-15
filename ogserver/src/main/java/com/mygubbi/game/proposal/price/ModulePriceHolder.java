@@ -716,7 +716,6 @@ public class ModulePriceHolder
 
 */
 
-
                 return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
                         .put("moduleArea", this.moduleArea)
                         .put("carcassCost", this.round(this.carcassCost, 2))
