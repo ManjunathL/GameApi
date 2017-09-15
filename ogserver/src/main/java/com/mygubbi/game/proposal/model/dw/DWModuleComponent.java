@@ -79,6 +79,8 @@ public class DWModuleComponent extends JsonObject {
     public static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
 
 
+
+
     public DWModuleComponent(JsonObject json) {
         super(json.getMap());
     }
@@ -101,6 +103,7 @@ public class DWModuleComponent extends JsonObject {
 
     public DWModuleComponent setProposalId(int proposalId)
     {
+        LOG.debug("LOG to be removed");
         put(PROPOSALID,proposalId);
         return this;
     }
