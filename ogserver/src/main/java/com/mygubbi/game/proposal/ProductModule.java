@@ -83,7 +83,7 @@ public class ProductModule extends JsonObject
     private static final String CUSTOM_CHECK = "customCheck";
     private static final String HANDLE_OVERRIDE_FLAG = "handleOverrideFlag";
     private static final String HANDLE_THICKNESS = "handleThickness";
-
+    private static final String FINISH_SET_ID="finishSetId";
 
     public ProductModule()
     {
@@ -111,6 +111,7 @@ public class ProductModule extends JsonObject
         }
     }
 
+    public String getFinishSetId() {return  this.getString(FINISH_SET_ID);}
     public int getModuleSequence() {
         return this.getInteger(MODULE_SEQUENCE);
     }
@@ -381,7 +382,11 @@ public class ProductModule extends JsonObject
         this.put(UNIT, unit);
         return this;
     }
-
+    public ProductModule setFinishSetID(String finishSetID)
+    {
+        this.put(FINISH_SET_ID,finishSetID);
+        return this;
+    }
     public ProductModule setExternalCode(String code)
     {
         this.put(EXTCODE, code);

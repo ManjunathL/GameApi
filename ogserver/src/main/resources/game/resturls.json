@@ -451,7 +451,7 @@
       "uri": "/gapi/finishcodes",
       "source": "db",
       "query":"finish.codes",
-      "params":[],
+      "params":["fromDate","toDate"],
       "resultfields":[],
       "default": "[]"
     },
@@ -460,7 +460,7 @@
       "uri": "/gapi/colorcodes",
       "source": "db",
       "query":"color.codes",
-      "params":["colorGroupCode"],
+      "params":["colorGroupCode","colorGroupCode","fromDate","toDate"],
       "resultfields":[],
       "default": "[]"
     },
@@ -1033,7 +1033,14 @@
       "params":["fromDate","toDate"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/getfinishmap",
+      "source": "db",
+      "query":"proposal.getnewfinishmap",
+      "params":["oldCode"],
+      "resultfields":[],
+      "default": "[]"
     }
-
   ]
 }

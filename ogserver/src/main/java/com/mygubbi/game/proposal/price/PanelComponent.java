@@ -1,6 +1,7 @@
 package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.common.StringUtils;
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
 import org.apache.logging.log4j.LogManager;
@@ -48,7 +49,7 @@ public class PanelComponent
     private final static Logger LOG = LogManager.getLogger(PanelComponent.class);
 
 
-    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode,Date priceDate,String city)
+    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode,Date priceDate,String city, String finishOverrideFlag)
     {
         this.setBaseAttributes(modulePanel, component);
         this.setDimensions(priceHolder.getProductModule(), priceHolder.getMgModule(), modulePanel);

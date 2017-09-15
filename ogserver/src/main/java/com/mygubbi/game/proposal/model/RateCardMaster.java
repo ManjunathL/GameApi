@@ -23,7 +23,7 @@ public class RateCardMaster {
     private String code;
     private String type;
     private String productCategory;
-
+    private String setId;
 
 
 
@@ -55,7 +55,15 @@ public class RateCardMaster {
         this.code = code;
         return this;
     }
-
+    public RateCardMaster setSetId(String setId)
+    {
+        this.setId=setId;
+        return this;
+    }
+    public String getSetId()
+    {
+        return setId;
+    }
     public String getType() {
         return type;
     }
@@ -106,6 +114,7 @@ public class RateCardMaster {
                 ", code='" + code + '\'' +
                 ", type='" + type + '\'' +
                 ", productCategory='" + productCategory + '\'' +
+                ", setId='" + setId + '\'' +
                 '}';
     }
 }

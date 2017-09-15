@@ -37,16 +37,17 @@ public class RateCard
     private String city;
     private String productCategory;
     private Date priceDate;
+    private String setId;
     private double rateUsed;
     private Map<Integer, Double> ratesUsed = Collections.EMPTY_MAP;
 
-    public RateCard(String code, String type, Date priceDate, String city) {
+   /* public RateCard(String code, String type, Date priceDate, String city) {
         this.code = code;
         this.type = type;
         this.priceDate = priceDate;
         this.city = city;
         this.ratesUsed = new HashMap<>();
-    }
+    }*/
 
     public RateCard(String code, String type, Date priceDate, String city, String productCategory) {
         this.code = code;
@@ -54,6 +55,16 @@ public class RateCard
         this.priceDate = priceDate;
         this.city = city;
         this.productCategory = productCategory;
+        this.ratesUsed = new HashMap<>();
+    }
+
+    public RateCard(String code, String type, Date priceDate, String city, String productCategory,String setId) {
+        this.code = code;
+        this.type = type;
+        this.priceDate = priceDate;
+        this.city = city;
+        this.productCategory = productCategory;
+        this.setId=setId;
         this.ratesUsed = new HashMap<>();
     }
 
@@ -169,5 +180,13 @@ public class RateCard
             sb.append(entry.getKey() + "=" + entry.getValue()).append(";");
         }
         return sb.toString();
+    }
+
+    public String getSetId() {
+        return setId;
+    }
+
+    public void setSetId(String setId) {
+        this.setId = setId;
     }
 }

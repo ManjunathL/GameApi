@@ -218,6 +218,11 @@ public class ProductLineItem extends JsonObject
         this.put(AMOUNT, amount);
         return this;
     }
+    public ProductLineItem setFinishCode(String finishCode)
+    {
+        this.put(FINISH_CODE,finishCode);
+        return this;
+    }
 
     public ProductLineItem addModule(ProductModule module)
     {

@@ -1,6 +1,9 @@
 package com.mygubbi.game.proposal.model;
 
+import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonObject;
+
+import java.sql.Date;
 
 /**
  * Created by test on 17-05-2016.
@@ -19,6 +22,9 @@ public class ShutterFinish
     private static final String CUTTING_OFFSET = "cuttingOffset";
     private static final String TITLE = "title";
     private static final String EDGE_BINDING = "edgeBinding";
+    private static final String FROM_DATE="fromDate";
+    private static final String TO_DATE="toDate";
+
 
     private String costCode;
     private String doubleExposedCostCode;
@@ -31,6 +37,8 @@ public class ShutterFinish
     private String title;
     private int cuttingOffset;
     private String edgeBinding;
+    private Date fromDate;
+    private Date toDate;
 
     public ShutterFinish()
     {
@@ -38,10 +46,13 @@ public class ShutterFinish
 
     public ShutterFinish(JsonObject json)
     {
+        Date fromDateInSql = DateUtil.convertDate(json.getString(FROM_DATE));
+        Date toDateInSql = DateUtil.convertDate(json.getString(TO_DATE));;
+
         this.setFinishCode(json.getString(FINISH_CODE)).setCostCode(json.getString(COST_CODE)).setFinishType(json.getString(FINISH_TYPE))
                 .setFinishMaterial(json.getString(FINISH_MATERIAL)).setDesign(json.getString(DESIGN)).setShutterMaterial(json.getString(SHUTTER_MATERIAL))
                 .setColorGroupCode(json.getString(COLOR_GROUP_CODE)).setTitle(json.getString(TITLE)).setCuttingOffset(json.getInteger(CUTTING_OFFSET))
-                .setEdgeBinding(json.getString(EDGE_BINDING)).setDoubleExposedCostCode(json.getString(DOUBLE_EXPOSED_COST_CODE));
+                .setEdgeBinding(json.getString(EDGE_BINDING)).setDoubleExposedCostCode(json.getString(DOUBLE_EXPOSED_COST_CODE)).setFromDate(fromDateInSql).setToDate(toDateInSql);
     }
 
     public String getCostCode()
@@ -163,4 +174,40 @@ public class ShutterFinish
         return this;
     }
 
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public ShutterFinish setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+        return this;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public ShutterFinish setToDate(Date toDate) {
+        this.toDate = toDate;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ShutterFinish{" +
+                "costCode='" + costCode + '\'' +
+                ", doubleExposedCostCode='" + doubleExposedCostCode + '\'' +
+                ", finishCode='" + finishCode + '\'' +
+                ", finishType='" + finishType + '\'' +
+                ", finishMaterial='" + finishMaterial + '\'' +
+                ", design='" + design + '\'' +
+                ", shutterMaterial='" + shutterMaterial + '\'' +
+                ", colorGroupCode='" + colorGroupCode + '\'' +
+                ", title='" + title + '\'' +
+                ", cuttingOffset=" + cuttingOffset +
+                ", edgeBinding='" + edgeBinding + '\'' +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                '}';
+    }
 }
