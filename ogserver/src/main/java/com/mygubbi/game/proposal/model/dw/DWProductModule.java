@@ -15,94 +15,120 @@ import java.text.SimpleDateFormat;
  */
 public class DWProductModule extends JsonObject {
 
-    public static final String ID="id";
-    public static final String PROPOSALID="proposalId";
-    public static final String VERSION="version";
-    public static final String PROPOSAL_TITLE="proposalTitle";
-    public static final String PRICEDATE="priceDate";
-    public static final String BUSINESSDATE="businessDate";
-    public static final String REGION="region";
-    public static final String CRMID="crmId";
-    public static final String QUOTENO="quoteNo";
-    public static final String SPACETYPE="spaceType";
-    public static final String ROOM="room";
-    public static final String PRID="prId";
-    public static final String PRTITLE="prTitle";
-    public static final String MODULESEQ="moduleSeq";
-    public static final String MODULECODE="moduleCode";
-    public static final String DESCRIPTION="description";
-    public static final String STATUS="status";
-    public static final String DISCOUNT_AMOUNT="discountAmount";
-    public static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
-    public static final String WIDTH="width";
-    public static final String DEPTH="depth";
-    public static final String HEIGHT="height";
-    public static final String MODULECATEGORY="moduleCategory";
-    public static final String HANDLESIZE="handleSize";
-    public static final String HANDLEQTY="handleQty";
-    public static final String CARCASS="carcass";
-    public static final String FINISH="finish";
-    public static final String FINISHMATERIAL="finishMaterial";
-    public static final String COLOR="color";
-    public static final String EXPOSEDLEFT="exposedLeft";
-    public static final String EXPOSEDRIGHT="exposedRight";
-    public static final String EXPOSEDBOTTOM="exposedBottom";
-    public static final String EXPOSEDTOP="exposedTop";
-    public static final String EXPOSEDBACK="exposedBack";
-    public static final String EXPOSEDOPEN="exposedOpen";
-    public static final String NOOFACCPACKS="noOfAccPacks";
-    public static final String MODULEAREA="moduleArea";
-    public static final String CCPRICE="ccPrice";
-    public static final String CCWOTAX="ccWoTax";
-    public static final String CCCOST="ccCost";
-    public static final String CCPROFIT="ccProfit";
-    public static final String CCMARGIN="ccMargin";
-    public static final String SHPRICE="shPrice";
-    public static final String SHWOTAX="shWoTax";
-    public static final String SHCOST="shCost";
-    public static final String SHPROFIT="shProfit";
-    public static final String SHMARGIN="shMargin";
-    public static final String HWPRICE="hwPrice";
-    public static final String HWWOTAX="hwWoTax";
-    public static final String HWCOST="hwCost";
-    public static final String HWPROFIT="hwProfit";
-    public static final String HWMARGIN="hwMargin";
-    public static final String ACCPRICE="accPrice";
-    public static final String ACCWOTAX="accWoTax";
-    public static final String ACCCOST="accCost";
-    public static final String ACCPROFIT="accProfit";
-    public static final String ACCMARGIN="accMargin";
-    public static final String HANDLEPRICE="handlePrice";
-    public static final String HANDLEWOTAX="handleWoTax";
-    public static final String HANDLECOST="handleCost";
-    public static final String HANDLEPROFIT="handleProfit";
-    public static final String HANDLEMARGIN="handleMargin";
-    public static final String HINGEPRICE="hingePrice";
-    public static final String HINGEWOTAX="hingeWoTax";
-    public static final String HINGECOST="hingeCost";
-    public static final String HINGEPROFIT="hingeProfit";
-    public static final String HINGEMARGIN="hingeMargin";
-    public static final String LRPRICE="lrPrice";
-    public static final String LRWOTAX="lrWoTax";
-    public static final String LRCOST="lrCost";
-    public static final String LRPROFIT="lrProfit";
-    public static final String LRMARGIN="lrMargin";
-    public static final String MODULEPRICE="modulePrice";
-    public static final String MODULEWOTAX="moduleWoTax";
-    public static final String MODULECOST="moduleCost";
-    public static final String MODULEPROFIT="moduleProfit";
-    public static final String MODULEMARGIN="moduleMargin";
+    private static final String ID="id";
+    private static final String PROPOSALID="proposalId";
+    private static final String VERSION="version";
+    private static final String PROPOSAL_TITLE="proposalTitle";
+    private static final String PRICEDATE="priceDate";
+    private static final String BUSINESSDATE="businessDate";
+    private static final String REGION="region";
+    private static final String CRMID="crmId";
+    private static final String QUOTENO="quoteNo";
+    private static final String DESIGNER_NAME = "designerName";
+    private static final String SALES_NAME = "salesName";
+    private static final String SOURCE ="source";
+    private static final String FROM_PRODUCT="fromProduct";
+    private static final String BEF_PROD_SPEC = "beforeProductionSpecification";
+    private static final String FROM_PROPOSAL = "fromProposal";
+    private static final String OFFER_TYPE = "offerType";
+    private static final String PACKAGE_FLAG = "packageFlag";
+    private static final String SPACETYPE="spaceType";
+    private static final String ROOM="room";
+    private static final String PRID="prId";
+    private static final String PRTITLE="prTitle";
+    private static final String MODULESEQ="moduleSeq";
+    private static final String MODULECODE="moduleCode";
+    private static final String DESCRIPTION="description";
+    private static final String STATUS="status";
+    private static final String DISCOUNT_AMOUNT="discountAmount";
+    private static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
+    private static final String WIDTH="width";
+    private static final String DEPTH="depth";
+    private static final String HEIGHT="height";
+    private static final String MODULECATEGORY="moduleCategory";
+    private static final String HANDLESIZE="handleSize";
+    private static final String HANDLEQTY="handleQty";
+    private static final String CARCASS="carcass";
+    private static final String FINISH="finish";
+    private static final String FINISHMATERIAL="finishMaterial";
+    private static final String COLOR="color";
+    private static final String EXPOSEDLEFT="exposedLeft";
+    private static final String EXPOSEDRIGHT="exposedRight";
+    private static final String EXPOSEDBOTTOM="exposedBottom";
+    private static final String EXPOSEDTOP="exposedTop";
+    private static final String EXPOSEDBACK="exposedBack";
+    private static final String EXPOSEDOPEN="exposedOpen";
+    private static final String NOOFACCPACKS="noOfAccPacks";
+    private static final String MODULEAREA="moduleArea";
+    private static final String CCPRICE="ccPrice";
+    private static final String CCWOTAX="ccWoTax";
+    private static final String CCCOST="ccCost";
+    private static final String CCPROFIT="ccProfit";
+    private static final String CCMARGIN="ccMargin";
+    private static final String SHPRICE="shPrice";
+    private static final String SHWOTAX="shWoTax";
+    private static final String SHCOST="shCost";
+    private static final String SHPROFIT="shProfit";
+    private static final String SHMARGIN="shMargin";
+    private static final String HWPRICE="hwPrice";
+    private static final String HWWOTAX="hwWoTax";
+    private static final String HWCOST="hwCost";
+    private static final String HWPROFIT="hwProfit";
+    private static final String HWMARGIN="hwMargin";
+    private static final String ACCPRICE="accPrice";
+    private static final String ACCWOTAX="accWoTax";
+    private static final String ACCCOST="accCost";
+    private static final String ACCPROFIT="accProfit";
+    private static final String ACCMARGIN="accMargin";
+    private static final String HANDLEPRICE="handlePrice";
+    private static final String HANDLEWOTAX="handleWoTax";
+    private static final String HANDLECOST="handleCost";
+    private static final String HANDLEPROFIT="handleProfit";
+    private static final String HANDLEMARGIN="handleMargin";
+    private static final String HINGEPRICE="hingePrice";
+    private static final String HINGEWOTAX="hingeWoTax";
+    private static final String HINGECOST="hingeCost";
+    private static final String HINGEPROFIT="hingeProfit";
+    private static final String HINGEMARGIN="hingeMargin";
+    private static final String LRPRICE="lrPrice";
+    private static final String LRWOTAX="lrWoTax";
+    private static final String LRCOST="lrCost";
+    private static final String LRPROFIT="lrProfit";
+    private static final String LRMARGIN="lrMargin";
+    private static final String MODULEPRICE="modulePrice";
+    private static final String MODULEWOTAX="moduleWoTax";
+    private static final String MODULECOST="moduleCost";
+    private static final String MODULEPROFIT="moduleProfit";
+    private static final String MODULEMARGIN="moduleMargin";
 
-    public static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
-    public static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
-    public static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
-    public static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
+    private static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
+    private static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
+    private static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
+    private static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
 
     public DWProductModule() {}
 
     public DWProductModule(JsonObject jsonObject){
         super(jsonObject.getMap());
     }
+
+    public String getDesignerName() {return this.getString(DESIGNER_NAME);}
+    public String getSalesName() {return this.getString(SALES_NAME);}
+    public String getSource() {return this.getString(SOURCE);}
+    public String getFromProduct() {return this.getString(FROM_PRODUCT);}
+    public String getBefProdSpec() {return this.getString(BEF_PROD_SPEC);}
+    public Integer getFromProposal() {return this.getInteger(FROM_PROPOSAL);}
+    public String getOfferType() {return this.getString(OFFER_TYPE);}
+    public String getPackageFlag() {return this.getString(PACKAGE_FLAG);}
+    public DWProductModule setDesignerName(String dname) {this.put(DESIGNER_NAME, dname);return this;}
+    public DWProductModule setSalesName(String sname) {this.put(SALES_NAME, sname);return this;}
+    public DWProductModule setSource(String sname) {this.put(SOURCE, sname);return this;}
+    public DWProductModule setFromProduct(Integer val) {this.put(FROM_PRODUCT, val);return this;}
+    public DWProductModule setBefProdSpec(String val){put(BEF_PROD_SPEC,val);return this;}
+    public DWProductModule setFromProposal(Integer val){put(FROM_PROPOSAL,val);return this;}
+    public DWProductModule setOfferType(String val){put(OFFER_TYPE,val);return this;}
+    public DWProductModule setPackageFlag(String val){put(PACKAGE_FLAG,val);return this;}
+
 
     public DWProductModule setDwModuleObjects(ModulePriceHolder modulePriceHolder, ProposalHeader proposalHeader, ProductLineItem productLineItem, ProposalVersion proposalVersion, ProductModule productModule)
     {
@@ -116,6 +142,14 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setRegion(proposalHeader.getProjectCity());
         dwProductModule.setCrmId(proposalHeader.getCrmId());
         dwProductModule.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwProductModule.setSalesName(proposalHeader.getSalespersonName());
+        dwProductModule.setSource(productLineItem.getSource());
+        dwProductModule.setFromProduct(productLineItem.getFromProduct());
+        dwProductModule.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwProductModule.setFromProposal(proposalHeader.getFromProposal());
+        dwProductModule.setOfferType(proposalHeader.getOfferType());
+        dwProductModule.setPackageFlag(proposalHeader.getPackageFlag());
+        dwProductModule.setDesignerName(proposalHeader.getDesignerName());
         dwProductModule.setSpaceType(productLineItem.getSpaceType());
         dwProductModule.setRoom(productLineItem.getRoomCode());
         dwProductModule.setPrId(productLineItem.getId());

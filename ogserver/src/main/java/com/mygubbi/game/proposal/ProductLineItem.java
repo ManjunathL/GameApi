@@ -49,6 +49,7 @@ public class ProductLineItem extends JsonObject
     private static final String UPDATED_BY = "updatedBy";
     private static final String HANDLE_TYPE = "handleType";
     private static final String HANDLE_FINISH = "handleFinish";
+    private static final String SOURCE = "source";
     private static final String KNOB_TYPE = "knobType";
     private static final String KNOB_FINISH = "knobFinish";
     //public static final String NO_OF_LENGTHS="noOfLengths";
@@ -83,7 +84,10 @@ public class ProductLineItem extends JsonObject
         this.setAddons();
     }
 
-    public int getFromProduct(){ return this.getInteger(FROM_PRODUCT);}
+    public int getFromProduct(){
+        if (this.getInteger(FROM_PRODUCT) == null || this.getInteger(FROM_PRODUCT).equals("")) return 0;
+        else return this.getInteger(FROM_PRODUCT); }
+
     public String getTitle()
     {
         return this.getString(TITLE);
@@ -122,6 +126,8 @@ public class ProductLineItem extends JsonObject
     {
         return this.getString(FINISH_TYPE);
     }
+
+    public  String getSource(){return this.getString(SOURCE);}
 
     public String getMakeType()
     {

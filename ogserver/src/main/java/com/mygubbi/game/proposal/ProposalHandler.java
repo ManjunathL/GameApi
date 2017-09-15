@@ -169,6 +169,10 @@ public class ProposalHandler extends AbstractRouteHandler
         }else if(contextJson.containsKey("proposals")){
             MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_LIST_OF_PROPOSALS, contextJson);
             new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
+        }else if(contextJson.containsKey("props")){
+            LOG.info("props = "+contextJson);
+            MessageDataHolder dataHolder = new MessageDataHolder(ReportTableFillerSevice.RUN_FOR_PROPOSALS_LIST, contextJson);
+            new PipelineExecutor().execute(dataHolder, new ProposalHandler.ReportTablefillerResponseHandler(context));
         }else{
 
             sendJsonResponse(context,"Please specify Valid option to run Report");

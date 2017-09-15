@@ -36,6 +36,8 @@ public class ReportTableFillerSevice extends AbstractVerticle
     public static final String FORCE_UPDATE_PROPOSALS = "reporting.table.filler.forForceUpdate";
     public static final String RUN_FROM_STARTDATE_TO_ENDDATE_PROPOSALS = "reporting.table.filler.ForRangeOfDates";
     public static final String RUN_FOR_LIST_OF_PROPOSALS = "reporting.table.filler.forListOfProposals";
+    public static final String RUN_FOR_PROPOSALS_LIST = "reporting.table.filler";
+
 
     LocalDateTime servicecallTime;
     @Override
@@ -99,6 +101,15 @@ public class ReportTableFillerSevice extends AbstractVerticle
         }).completionHandler(res -> {
             LOG.info("Proposal output service started." + res.succeeded());
         });
+        eb.localConsumer(RUN_FOR_PROPOSALS_LIST,(Message<Integer> message) -> {
+            JsonObject obj = (JsonObject) LocalCache.getInstance().remove(message.body());
+            String proposalIds =  obj.getString("props");
+            LOG.info("JSON OBJECT :: "+proposalIds.toString());
+            this.getVersionObjForProposalList(proposalIds.toString(), message);
+
+        }).completionHandler(res -> {
+            LOG.info("Proposal output service started." + res.succeeded());
+        });
 
     }
     private void updateDataLoadStatusToNo(Message message)
@@ -150,6 +161,19 @@ public class ReportTableFillerSevice extends AbstractVerticle
         QueryData requestData = new QueryData("proposal.versions.list", new JsonObject().put("proposalId", proposalId));
         MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
         new PipelineExecutor().execute(dataHolder, new ProposalVersionsRetriever(message, proposalId));
+        LOG.info("Time taken = "+(System.currentTimeMillis()-start));
+    }
+    private void getVersionObjForProposalList(String proposals, Message message)
+    {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        servicecallTime = LocalDateTime.now();
+
+        long start = System.currentTimeMillis();
+        LOG.info("proposals = "+proposals);
+
+        QueryData requestData = new QueryData("proposal.versions.list.test", new JsonObject().put("proposalId", proposals.toString()));
+        MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
+        new PipelineExecutor().execute(dataHolder, new ProposalVersionsRetriever(message));
         LOG.info("Time taken = "+(System.currentTimeMillis()-start));
     }
 

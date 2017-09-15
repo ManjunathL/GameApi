@@ -18,23 +18,29 @@ import java.text.SimpleDateFormat;
 public class DWProposalAddon extends JsonObject {
 
     private final static Logger LOG = LogManager.getLogger(DWProposalAddon.class);
-    public static final String ID="id";
-    public static final String PROPOSALID="proposalId";
-    public static final String VERSION="version";
-    public static final String PROPOSALTITLE="proposalTitle";
-    public static final String PRICEDATE="priceDate";
-    public static final String BUSINESSDATE="businessDate";
-    public static final String REGION="region";
-    public static final String STATUS="status";
-    public static final String DISCOUNT_AMOUNT="discountAmount";
-    public static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
-    public static final String CRMID="crmId";
-    public static final String QUOTENO="quoteNo";
-    public static final String CATEGORY="category";
-    public static final String SUBCATEGORY="subCategory";
-    public static final String SPACETYPE="spaceType";
-    public static final String ROOM="room";
-    public static final String ADDON_ID="addonId";
+    private static final String ID="id";
+    private static final String PROPOSALID="proposalId";
+    private static final String VERSION="version";
+    private static final String PROPOSALTITLE="proposalTitle";
+    private static final String PRICEDATE="priceDate";
+    private static final String BUSINESSDATE="businessDate";
+    private static final String REGION="region";
+    private static final String STATUS="status";
+    private static final String DISCOUNT_AMOUNT="discountAmount";
+    private static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
+    private static final String CRMID="crmId";
+    private static final String QUOTENO="quoteNo";
+    private static final String DESIGNER_NAME = "designerName";
+    private static final String SALES_NAME = "salesName";
+    private static final String BEF_PROD_SPEC = "beforeProductionSpecification";
+    private static final String FROM_PROPOSAL = "fromProposal";
+    private static final String OFFER_TYPE = "offerType";
+    private static final String PACKAGE_FLAG = "packageFlag";
+    private static final String CATEGORY="category";
+    private static final String SUBCATEGORY="subCategory";
+    private static final String SPACETYPE="spaceType";
+    private static final String ROOM="room";
+    private static final String ADDON_ID="addonId";
     private static final String CODE = "code";
     private static final String ADDON_CATEGORY_CODE = "categoryCode";
     private static final String PRODUCT_TYPE_CODE = "productTypeCode";
@@ -42,16 +48,16 @@ public class DWProposalAddon extends JsonObject {
     private static final String PRODUCT = "product";
     private static final String BRAND_CODE = "brandCode";
     private static final String CATALOGUE_CODE = "catalogueCode";
-    private static String QUANTITY = "quantity";
-    private static String UOM = "uom";
-    private static String UPDATED_BY = "updatedBy";
-    private static String UNIT_PRICE = "unitPrice";
-    private static String UNIT_SOURCECOST = "unitSourceCost";
-    private static String PRICE = "price";
-    private static String PRICEWOTAX = "priceWoTax";
-    private static String SOURCE_COST = "sourceCost";
-    private static String PROFIT = "addonProfit";
-    private static String MARGIN = "addonMargin";
+    private static final String QUANTITY = "quantity";
+    private static final String UOM = "uom";
+    private static final String UPDATED_BY = "updatedBy";
+    private static final String UNIT_PRICE = "unitPrice";
+    private static final String UNIT_SOURCECOST = "unitSourceCost";
+    private static final String PRICE = "price";
+    private static final String PRICEWOTAX = "priceWoTax";
+    private static final String SOURCE_COST = "sourceCost";
+    private static final String PROFIT = "addonProfit";
+    private static final String MARGIN = "addonMargin";
 
     public DWProposalAddon()
     {}
@@ -71,6 +77,12 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setStatus(proposalVersion.getProposalStatus());
         dwProposalAddon.setCrmId(proposalHeader.getCrmId());
         dwProposalAddon.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwProposalAddon.setSalesName(proposalHeader.getSalespersonName());
+        dwProposalAddon.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwProposalAddon.setFromProposal(proposalHeader.getFromProposal());
+        dwProposalAddon.setOfferType(proposalHeader.getOfferType());
+        dwProposalAddon.setPackageFlag(proposalHeader.getPackageFlag());
+        dwProposalAddon.setDesignerName(proposalHeader.getDesignerName());
         dwProposalAddon.setSpaceType(productAddon.getSpaceType());
         dwProposalAddon.setRoom(productAddon.getRoomCode());
         dwProposalAddon.setAddonId(productAddon.getId());
@@ -115,6 +127,21 @@ public class DWProposalAddon extends JsonObject {
         put(QUOTENO,quote);
         return this;
     }
+    public String getDesignerName() {return this.getString(DESIGNER_NAME);}
+    public String getSalesName() {return this.getString(SALES_NAME);}
+    public String getBefProdSpec() {return this.getString(BEF_PROD_SPEC);}
+    public Integer getFromProposal() {return this.getInteger(FROM_PROPOSAL);}
+    public String getOfferType() {return this.getString(OFFER_TYPE);}
+    public String getPackageFlag() {return this.getString(PACKAGE_FLAG);}
+    public DWProposalAddon setDesignerName(String dname) {this.put(DESIGNER_NAME, dname);return this;}
+    public DWProposalAddon setSalesName(String sname) {this.put(SALES_NAME, sname);return this;}
+    public DWProposalAddon setBefProdSpec(String val){put(BEF_PROD_SPEC,val);return this;}
+    public DWProposalAddon setFromProposal(Integer val){put(FROM_PROPOSAL,val);return this;}
+    public DWProposalAddon setOfferType(String val){put(OFFER_TYPE,val);return this;}
+    public DWProposalAddon setPackageFlag(String val){put(PACKAGE_FLAG,val);return this;}
+
+
+
     public int getID() {
         return this.getInteger(ID);
     }

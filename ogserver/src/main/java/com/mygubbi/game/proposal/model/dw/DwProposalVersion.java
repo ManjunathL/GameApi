@@ -31,6 +31,11 @@ public class DwProposalVersion extends JsonObject {
     private static final String PROJECT_NAME = "projectName";
     private static final String DESIGNER_NAME = "designerName";
     private static final String SALES_NAME = "salesName";
+    private static final String BEF_PROD_SPEC = "beforeProductionSpecification";
+    private static final String FROM_PROPOSAL = "fromProposal";
+    private static final String OFFER_TYPE = "offerType";
+    private static final String PACKAGE_FLAG = "packageFlag";
+
     private static final String DESIGN_PARTNER_NAME = "designPartnerName";
     private static final String PROPOSAL_UPDATED_BY = "proposalUpdatedBy";
     private static final String PROPOSAL_CREATE_DATE = "proposalCreateDate";
@@ -125,6 +130,45 @@ public class DwProposalVersion extends JsonObject {
     public DwProposalVersion(JsonObject data) {
         super(data.getMap());
     }
+
+    public String getBefProdSpec() {
+         return this.getString(BEF_PROD_SPEC);
+    }
+
+    public Integer getFromProposal() {
+        return this.getInteger(FROM_PROPOSAL);
+    }
+
+    public  String getOfferType() {
+        return this.getString(OFFER_TYPE);
+    }
+
+    public String getPackageFlag() {
+        return this.getString(PACKAGE_FLAG);
+    }
+
+    public DwProposalVersion setBefProdSpec(String val)
+    {
+        put(BEF_PROD_SPEC,val);
+        return this;
+    }
+    public DwProposalVersion setFromProposal(Integer val)
+    {
+        put(FROM_PROPOSAL,val);
+        return this;
+    }
+    public DwProposalVersion setOfferType(String val)
+    {
+        put(OFFER_TYPE,val);
+        return this;
+    }
+    public DwProposalVersion setPackageFlag(String val)
+    {
+        put(PACKAGE_FLAG,val);
+        return this;
+    }
+
+
 
     public String getCrmid() {
         return this.getString(CRMID);
@@ -994,8 +1038,6 @@ public class DwProposalVersion extends JsonObject {
     }
 
     public DwProposalVersion setServicesCount(int nCount) {
-        LOG.debug("Set services count :" + nCount);
-
         this.put(SV_COUNT, nCount);
         return this;
     }
@@ -1036,6 +1078,10 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalVersion.setProjectName(proposalHeader.getProjectName());
         dwProposalVersion.setSalesName(proposalHeader.getSalespersonName());
+        dwProposalVersion.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwProposalVersion.setFromProposal(proposalHeader.getFromProposal());
+        dwProposalVersion.setOfferType(proposalHeader.getOfferType());
+        dwProposalVersion.setPackageFlag(proposalHeader.getPackageFlag());
         dwProposalVersion.setDesignPartnerName(proposalHeader.getDesignPartnerName());
         dwProposalVersion.setProposalCreateDate(proposalHeader.getCreatedOn());
         dwProposalVersion.setProposalUpdatedBy(proposalHeader.getUpdatedBy());
@@ -1045,10 +1091,6 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setVersionCreatedOn(proposalVersion.getDate());
         dwProposalVersion.setVersionUpdatedBy(proposalVersion.getUpdatedBy());
         dwProposalVersion.setVersionUpdatedOn(proposalVersion.getUpdatedOn());
-
-        LOG.info("proposalVersion.getDiscountAmount() = "+proposalVersion.getDiscountAmount());
-        LOG.info("proposalVersion.getDiscountPercentage() = "+proposalVersion.getDiscountPercentage());
-        LOG.info("proposalVersion.getProposalStatus() = "+proposalVersion.getProposalStatus());
 
         dwProposalVersion.setDiscountAmount(proposalVersion.getDiscountAmount());
         dwProposalVersion.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());

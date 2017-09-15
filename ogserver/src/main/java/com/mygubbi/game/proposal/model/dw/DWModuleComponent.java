@@ -9,8 +9,6 @@ import com.mygubbi.game.proposal.price.HardwareComponent;
 import com.mygubbi.game.proposal.price.PanelComponent;
 import com.mygubbi.game.proposal.price.RateCardService;
 import io.vertx.core.json.JsonObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -23,60 +21,65 @@ import java.util.Objects;
  */
 public class DWModuleComponent extends JsonObject {
 
-    private final static Logger LOG = LogManager.getLogger(DWModuleComponent.class);
-
-
     private static final String WARDROBE = "Wardrobe";
 
 
-    public static final String ID="id";
-    public static final String PROPOSALID="proposalId";
-    public static final String QUOTENO="quoteNo";
-    public static final String CRMID="crmId";
-    public static final String PROPOSAL_TITLE="proposalTitle";
-    public static final String VERSION="version";
-    public static final String PRICEDATE="priceDate";
-    public static final String BUSINESSDATE="businessDate";
-    public static final String REGION="region";
-    public static final String STATUS="status";
-    public static final String SPACETYPE="spaceType";
-    public static final String ROOM="room";
-    public static final String PRID="prId";
-    public static final String PRTITLE="prTitle";
-    public static final String PRPRICE="prPrice";
-    public static final String PRPRICEAFTERDISCOUNT="prPriceAfterDiscount";
-    public static final String PRAREA="prArea";
-    public static final String PRCATEGORY="prCategory";
-    public static final String MODULE_TYPE="moduleType";
-    public static final String MODULESEQ="moduleSeq";
-    public static final String MODULECODE="moduleCode";
-    public static final String MODULECATEGORY="moduleCategory";
-    public static final String ACC_PACK_CODE="accPackCode";
-    public static final String CARCASS="carcass";
-    public static final String FINISH="finish";
-    public static final String FINISH_MATERIAL="finishMaterial";
-    public static final String DISCOUNT_AMOUNT="discountAmount";
-    public static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
-    public static final String WIDTH="width";
-    public static final String DEPTH="depth";
-    public static final String HEIGHT="height";
-    public static final String PANEL_AREA="panelArea";
-    public static final String COMPONENT_TYPE="compType";
-    public static final String COMPONENT_CODE="compCode";
-    public static final String COMPONENT_UOM="compUom";
-    public static final String COMPONENT_QTY="compQty";
-    public static final String COMPONENT_TITLE="compTitle";
-    public static final String COMPONENT_PRICE="compPrice";
-    public static final String COMPONENT_PRICE_AFTER_DISCOUNT="compPriceAfterDiscount";
-    public static final String COMPONENT_PRICE_WO_TAX="compWoTax";
-    public static final String COMPONENT_COST="compCost";
-    public static final String COMPONENT_PROFIT="compProfit";
-    public static final String COMPONENT_MARGIN="compMargin";
+    private static final String ID="id";
+    private static final String PROPOSALID="proposalId";
+    private static final String QUOTENO="quoteNo";
+    private static final String DESIGNER_NAME = "designerName";
+    private static final String SALES_NAME = "salesName";
+    private static final String SOURCE ="source";
+    private static final String FROM_PRODUCT="fromProduct";
+    private static final String BEF_PROD_SPEC = "beforeProductionSpecification";
+    private static final String FROM_PROPOSAL = "fromProposal";
+    private static final String OFFER_TYPE = "offerType";
+    private static final String PACKAGE_FLAG = "packageFlag";
+    private static final String CRMID="crmId";
+    private static final String PROPOSAL_TITLE="proposalTitle";
+    private static final String VERSION="version";
+    private static final String PRICEDATE="priceDate";
+    private static final String BUSINESSDATE="businessDate";
+    private static final String REGION="region";
+    private static final String STATUS="status";
+    private static final String SPACETYPE="spaceType";
+    private static final String ROOM="room";
+    private static final String PRID="prId";
+    private static final String PRTITLE="prTitle";
+    private static final String PRPRICE="prPrice";
+    private static final String PRPRICEAFTERDISCOUNT="prPriceAfterDiscount";
+    private static final String PRAREA="prArea";
+    private static final String PRCATEGORY="prCategory";
+    private static final String MODULE_TYPE="moduleType";
+    private static final String MODULESEQ="moduleSeq";
+    private static final String MODULECODE="moduleCode";
+    private static final String MODULECATEGORY="moduleCategory";
+    private static final String ACC_PACK_CODE="accPackCode";
+    private static final String CARCASS="carcass";
+    private static final String FINISH="finish";
+    private static final String FINISH_MATERIAL="finishMaterial";
+    private static final String DISCOUNT_AMOUNT="discountAmount";
+    private static final String DISCOUNT_AMOUNT_PERC="discountPercentage";
+    private static final String WIDTH="width";
+    private static final String DEPTH="depth";
+    private static final String HEIGHT="height";
+    private static final String PANEL_AREA="panelArea";
+    private static final String COMPONENT_TYPE="compType";
+    private static final String COMPONENT_CODE="compCode";
+    private static final String COMPONENT_UOM="compUom";
+    private static final String COMPONENT_QTY="compQty";
+    private static final String COMPONENT_TITLE="compTitle";
+    private static final String COMPONENT_PRICE="compPrice";
+    private static final String COMPONENT_PRICE_AFTER_DISCOUNT="compPriceAfterDiscount";
+    private static final String COMPONENT_PRICE_WO_TAX="compWoTax";
+    private static final String COMPONENT_COST="compCost";
+    private static final String COMPONENT_PROFIT="compProfit";
+    private static final String COMPONENT_MARGIN="compMargin";
 
-    public static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
-    public static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
-    public static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
-    public static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
+    private static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
+    private static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
+    private static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
+    private static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
 
 
 
@@ -103,7 +106,6 @@ public class DWModuleComponent extends JsonObject {
 
     public DWModuleComponent setProposalId(int proposalId)
     {
-        LOG.debug("LOG to be removed");
         put(PROPOSALID,proposalId);
         return this;
     }
@@ -513,6 +515,22 @@ public class DWModuleComponent extends JsonObject {
         this.put(COMPONENT_MARGIN, componentMargin);
         return this;
     }
+    public String getDesignerName() {return this.getString(DESIGNER_NAME);}
+    public String getSalesName() {return this.getString(SALES_NAME);}
+    public String getSource() {return this.getString(SOURCE);}
+    public Integer getFromProduct() { if(this.containsKey(FROM_PRODUCT))return this.getInteger(FROM_PRODUCT); return 0;}
+    public String getBefProdSpec() {return this.getString(BEF_PROD_SPEC);}
+    public Integer getFromProposal() {return this.getInteger(FROM_PROPOSAL);}
+    public String getOfferType() {return this.getString(OFFER_TYPE);}
+    public String getPackageFlag() {return this.getString(PACKAGE_FLAG);}
+    public DWModuleComponent setDesignerName(String dname) {this.put(DESIGNER_NAME, dname);return this;}
+    public DWModuleComponent setSalesName(String sname) {this.put(SALES_NAME, sname);return this;}
+    public DWModuleComponent setSource(String sname) {this.put(SOURCE, sname);return this;}
+    public DWModuleComponent setFromProduct(Integer val) {this.put(FROM_PRODUCT, val);return this;}
+    public DWModuleComponent setBefProdSpec(String val){this.put(BEF_PROD_SPEC,val);return this;}
+    public DWModuleComponent setFromProposal(Integer val){this.put(FROM_PROPOSAL,val);return this;}
+    public DWModuleComponent setOfferType(String val){this.put(OFFER_TYPE,val);return this;}
+    public DWModuleComponent setPackageFlag(String val){this.put(PACKAGE_FLAG,val);return this;}
 
     public DWModuleComponent setDwComponentAttributesForPanel(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, PanelComponent panelComponent) {
 
@@ -568,6 +586,14 @@ public class DWModuleComponent extends JsonObject {
 
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
+        dwModuleComponent.setSource(productLineItem.getSource());
+        dwModuleComponent.setFromProduct(productLineItem.getFromProduct());
+        dwModuleComponent.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwModuleComponent.setFromProposal(proposalHeader.getFromProposal());
+        dwModuleComponent.setOfferType(proposalHeader.getOfferType());
+        dwModuleComponent.setPackageFlag(proposalHeader.getPackageFlag());
+        dwModuleComponent.setDesignerName(proposalHeader.getDesignerName());
         dwModuleComponent.setCrmId(proposalHeader.getCrmId());
         dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
         dwModuleComponent.setVersion(proposalVersion.getVersion());
@@ -712,6 +738,14 @@ public class DWModuleComponent extends JsonObject {
 
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
+        dwModuleComponent.setSource(productLineItem.getSource());
+        dwModuleComponent.setFromProduct(productLineItem.getFromProduct());
+        dwModuleComponent.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwModuleComponent.setFromProposal(proposalHeader.getFromProposal());
+        dwModuleComponent.setOfferType(proposalHeader.getOfferType());
+        dwModuleComponent.setPackageFlag(proposalHeader.getPackageFlag());
+        dwModuleComponent.setDesignerName(proposalHeader.getDesignerName());
         dwModuleComponent.setCrmId(proposalHeader.getCrmId());
         dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
         dwModuleComponent.setVersion(proposalVersion.getVersion());
@@ -829,6 +863,14 @@ public class DWModuleComponent extends JsonObject {
 
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
+        dwModuleComponent.setSource(productLineItem.getSource());
+        dwModuleComponent.setFromProduct(productLineItem.getFromProduct());
+        dwModuleComponent.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwModuleComponent.setFromProposal(proposalHeader.getFromProposal());
+        dwModuleComponent.setOfferType(proposalHeader.getOfferType());
+        dwModuleComponent.setPackageFlag(proposalHeader.getPackageFlag());
+        dwModuleComponent.setDesignerName(proposalHeader.getDesignerName());
         dwModuleComponent.setCrmId(proposalHeader.getCrmId());
         dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
         dwModuleComponent.setVersion(proposalVersion.getVersion());
@@ -938,6 +980,14 @@ public class DWModuleComponent extends JsonObject {
 
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
+        dwModuleComponent.setSource(productLineItem.getSource());
+        dwModuleComponent.setFromProduct(productLineItem.getFromProduct());
+        dwModuleComponent.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwModuleComponent.setFromProposal(proposalHeader.getFromProposal());
+        dwModuleComponent.setOfferType(proposalHeader.getOfferType());
+        dwModuleComponent.setPackageFlag(proposalHeader.getPackageFlag());
+        dwModuleComponent.setDesignerName(proposalHeader.getDesignerName());
         dwModuleComponent.setCrmId(proposalHeader.getCrmId());
         dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
         dwModuleComponent.setVersion(proposalVersion.getVersion());
@@ -1014,7 +1064,6 @@ public class DWModuleComponent extends JsonObject {
 
     public DWModuleComponent setDwComponentAttributesForHandleKnobOrHinge(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, Handle handle, double quantity) {
 
-        LOG.debug("Qty :" + quantity + " : " /*+ handle.getCode() + " :"*/ + productModule.getMGCode() + " :" + productLineItem.getHandletypeSelection());
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
@@ -1066,6 +1115,14 @@ public class DWModuleComponent extends JsonObject {
 
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
+        dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
+        dwModuleComponent.setSource(productLineItem.getSource());
+        dwModuleComponent.setFromProduct(productLineItem.getFromProduct());
+        dwModuleComponent.setBefProdSpec(proposalHeader.getBefProdSpec());
+        dwModuleComponent.setFromProposal(proposalHeader.getFromProposal());
+        dwModuleComponent.setOfferType(proposalHeader.getOfferType());
+        dwModuleComponent.setPackageFlag(proposalHeader.getPackageFlag());
+        dwModuleComponent.setDesignerName(proposalHeader.getDesignerName());
         dwModuleComponent.setCrmId(proposalHeader.getCrmId());
         dwModuleComponent.setProposalTitle(proposalHeader.getQuotationFor());
         dwModuleComponent.setVersion(proposalVersion.getVersion());

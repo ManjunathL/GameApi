@@ -121,11 +121,27 @@ public class DwReportingService extends AbstractVerticle {
                     }
 
                     if (i == resultDatas.size()) {
-                        message.reply(LocalCache.getInstance().store(getResponseJson("Success",reportingObjects.proposalId,reportingObjects.version,"Successfully inserted")));
-
+                        JsonObject params = new JsonObject();
+                        params.put("proposalId", reportingObjects.proposalId);
+                        params.put("version", reportingObjects.version);
+                        params.put("status", "Yes");
+                        params.put("dataLoadedOn", getCurrentDate());
+                        Integer id2 = LocalCache.getInstance().store(new QueryData("update.version_master.dataLoadStatus", params));
+                        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id2,
+                                (AsyncResult<Message<Integer>> res) -> {
+                                    QueryData resData = (QueryData) LocalCache.getInstance().remove(res.result().body());
+                                    if ((resData.errorFlag) || resData.updateResult.getUpdated() == 0) {
+                                        message.reply(LocalCache.getInstance().store(getResponseJson("Failure",reportingObjects.proposalId,reportingObjects.version,resData.errorMessage)));
+                                        LOG.error("Error in Executing Query : "+resData.queryId +" and error is::"+resData.errorMessage);
+                                        return;
+                                    } else {
+                                        message.reply(LocalCache.getInstance().store(getResponseJson("Success", reportingObjects.proposalId, reportingObjects.version, "Successfully inserted")));
+                                    }
+                                });
                     }
                 });
     }
+
     private JsonObject getResponseJson(String status,int proposalId,String version,String comments){
         JsonObject response = new JsonObject();
         response.put("status",status);
@@ -309,17 +325,12 @@ public class DwReportingService extends AbstractVerticle {
         queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion));
         queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion));
+
         if (!(reportingObjects.queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",reportingObjects.queryDatasForComponent));
         if (!(reportingObjects.queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",reportingObjects.queryDatasForModule));
         if (!(reportingObjects.queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",reportingObjects.queryDatasForProduct));
         if (!(reportingObjects.queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",reportingObjects.queryDatasForAddon));
         queryDatas.add(queryDataVersion);
-        JsonObject params = new JsonObject();
-        params.put("proposalId",reportingObjects.proposalId);
-        params.put("version",reportingObjects.version);
-        params.put("status","Yes");
-        params.put("dataLoadedOn",getCurrentDate());
-        queryDatas.add(new QueryData("update.version_master.dataLoadStatus",params));
         insertRowsToTable(queryDatas, message,reportingObjects);
     }
 

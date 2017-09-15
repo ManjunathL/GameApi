@@ -1,6 +1,7 @@
 package com.mygubbi.game.proposal.model;
 
 import com.mygubbi.common.DateUtil;
+import com.mygubbi.game.proposal.model.dw.DwProposalVersion;
 import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
@@ -21,6 +22,9 @@ public class ProposalHeader extends JsonObject
     public static final String PROJECT_CITY = "pcity";
     public static final String SALESPERSON_NAME = "salesName";
     public static final String DESIGNER_NAME = "designerName";
+    private static final String BEF_PROD_SPEC = "beforeProductionSpecification";
+    private static final String FROM_PROPOSAL = "fromProposal";
+    private static final String OFFER_TYPE = "offerType";
     public static final String DESIGN_PARTNER_NAME = "designPartnerName";
     public static final String AMOUNT = "amount";
     public static final String FOLDER_PATH = "folderPath";
@@ -176,6 +180,15 @@ public class ProposalHeader extends JsonObject
     public String getUpdatedOn() {
         return this.getString(UPDATED_ON);
     }
+
+    public String getBefProdSpec() {if(this.containsKey(BEF_PROD_SPEC) )return this.getString(BEF_PROD_SPEC);return "";}
+
+    public Integer getFromProposal() {
+        if (this.getInteger(FROM_PROPOSAL) == null || this.getInteger(FROM_PROPOSAL).equals("")) return 0;
+        else return this.getInteger(FROM_PROPOSAL); }
+
+    public  String getOfferType() {if(this.containsKey(OFFER_TYPE) )return this.getString(OFFER_TYPE);return "";}
+
 
 
 }
