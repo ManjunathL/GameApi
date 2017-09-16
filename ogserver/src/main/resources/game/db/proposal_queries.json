@@ -243,16 +243,16 @@
       "id": "version.createversion",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?)",
-      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,businessDate) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?,?)",
+      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount","businessDate"]
     },
 
     {
       "id": "version.copyversion",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?)",
-      "params": ["version","fromVersion","toVersion", "discountAmount","discountPercentage"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,businessDate) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?,?)",
+      "params": ["version","fromVersion","toVersion", "discountAmount","discountPercentage","businessDate"]
     },
 
     {
@@ -1867,7 +1867,7 @@
       "id": "proposal.oldnewfinishmapping",
       "type": "select",
       "table": "oldnew_finishmap",
-      "query": "select newCode,oldCode,flag from oldnew_finishmap",
+      "query": "select newCode,oldCode,flag,title from oldnew_finishmap",
       "params": []
     },
     {

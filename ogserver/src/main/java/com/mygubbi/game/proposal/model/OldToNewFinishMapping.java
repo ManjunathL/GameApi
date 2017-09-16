@@ -11,6 +11,7 @@ public class OldToNewFinishMapping extends JSONObject
     private static final String OLD_CODE = "oldCode";
     private static final String NEW_CODE = "newCode";
     private static final String FLAG = "flag";
+    private static final String TITLE = "title";
 
     public OldToNewFinishMapping(JsonObject jsonObject)
     {
@@ -20,7 +21,7 @@ public class OldToNewFinishMapping extends JSONObject
     public  String getOldCode() {
         return this.getString(OLD_CODE);
     }
-
+    public String getTitle() { return this.getString(TITLE);}
     public  String getNewCode() {
         return this.getString(NEW_CODE);
     }
@@ -43,5 +44,9 @@ public class OldToNewFinishMapping extends JSONObject
         put(FLAG,flag);
         return this;
     }
-
+    public OldToNewFinishMapping setTitle(String title)
+    {
+        put(TITLE,title);
+        return this;
+    }
 }

@@ -37,6 +37,7 @@ public class ProductModule extends JsonObject
     private static final String IMAGE_PATH = "imagePath";
 
     private static final String CARCASS_CODE = "carcassCode";
+    private static final String FINISH="finish";
     private static final String FINISH_CODE = "finishCode";
     private static final String FINISH_TYPE = "finishTypeCode";
     private static final String COLOR_CODE = "colorCode";
@@ -134,6 +135,11 @@ public class ProductModule extends JsonObject
     public String getFinishCode()
     {
         return this.getString(FINISH_CODE);
+    }
+
+    public String getFinish()
+    {
+        return this.getString(FINISH);
     }
 
     public String getShutterDesignCode()
@@ -338,6 +344,11 @@ public class ProductModule extends JsonObject
         this.put(HANDLE_THICKNESS,handleThickness);
         return this;
 
+    }
+    public ProductModule setFinish(String finish)
+    {
+        this.put(FINISH,finish);
+        return  this;
     }
     public ProductModule setHandleOverrideFlag(String handleOverrideFlag)
     {
