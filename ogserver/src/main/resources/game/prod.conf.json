@@ -3,7 +3,7 @@
 
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://mgprddb1.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/mgprod1",
+    "url": "jdbc:mysql://mgprddb1.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/mgprod1",
     "max_pool_size": 20,
     "user": "MygubbiAdmin",
     "password": "myGubb!$$"
