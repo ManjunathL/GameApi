@@ -30,6 +30,7 @@ public class ProductAddon extends JsonObject
     private static final String BRAND_CODE = "brandCode";
     private static final String CATALOGUE_CODE = "catalogueCode";
     private static final String TITLE = "title";
+    private static final String UOM = "uom";
     private static String QUANTITY = "quantity";
     private static String AMOUNT = "amount";
     private static String RATE = "rate";
@@ -115,7 +116,7 @@ public class ProductAddon extends JsonObject
 
     public String getUom()
     {
-        return "uom";
+        return this.getString(UOM);
     }
 
     public boolean isAccessory()
@@ -163,6 +164,11 @@ public class ProductAddon extends JsonObject
     public String getExtendedTitle() { return this.getProductTypeCode() + "-" + this.getProductSubtypeCode() + "-" +this.getProduct();}
     public String getCustomTitle() { return this.getProduct();}
 
+    public ProductAddon setUom(String uom)
+    {
+        this.put(UOM, uom);
+        return this;
+    }
     public ProductAddon setRate(double rate)
     {
         this.put(RATE, rate);
@@ -172,6 +178,12 @@ public class ProductAddon extends JsonObject
     public ProductAddon setAmount(double amount)
     {
         this.put(AMOUNT, amount);
+        return this;
+    }
+
+    public ProductAddon setRoomcode(String room)
+    {
+        this.put(ROOMCODE, room);
         return this;
     }
 

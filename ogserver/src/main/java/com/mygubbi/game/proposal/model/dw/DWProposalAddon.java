@@ -87,7 +87,10 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setRoom(productAddon.getRoomCode());
         dwProposalAddon.setAddonId(productAddon.getId());
         dwProposalAddon.setCode(productAddon.getCode());
-        dwProposalAddon.setCategory("BP");
+        if (productAddon.getCategoryCode().equals("Services") || productAddon.getCategoryCode().equals("Counter Top"))
+             dwProposalAddon.setCategory("Services");
+        else
+            dwProposalAddon.setCategory("BP");
         dwProposalAddon.setSubCategory(productAddon.getCategoryCode());
         dwProposalAddon.setProductTypeCode(productAddon.getProductTypeCode());
         dwProposalAddon.setProductSubTypeCode(productAddon.getProductSubtypeCode());

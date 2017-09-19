@@ -76,6 +76,10 @@ public class DWModuleComponent extends JsonObject {
     private static final String COMPONENT_PROFIT="compProfit";
     private static final String COMPONENT_MARGIN="compMargin";
 
+
+    private static final String COMPONENT_ERPCODE="erpCode";
+    private static final String COMPONENT_ARTICLE_ID="articleId";
+
     private static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
     private static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
     private static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
@@ -110,6 +114,24 @@ public class DWModuleComponent extends JsonObject {
         return this;
     }
 
+    public static String getComponentErpcode() {
+        return COMPONENT_ERPCODE;
+    }
+
+    public DWModuleComponent setComponentErpcode(String erpcode)
+    {
+        put(COMPONENT_ERPCODE,erpcode);
+        return this;
+    }
+    public static String getComponentArticleId() {
+        return COMPONENT_ARTICLE_ID;
+    }
+
+    public DWModuleComponent setComponentArticleId(String articleId)
+    {
+        put(COMPONENT_ARTICLE_ID,articleId);
+        return this;
+    }
     public String getQuoteno() {
         return this.getString(QUOTENO);
     }
@@ -788,6 +810,8 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setComponentCode(hardwareComponent.getComponent().getCode());
         dwModuleComponent.setComponentUom(hardwareComponent.getComponent().getUom());
         dwModuleComponent.setComponentTitle(hardwareComponent.getComponent().getTitle());
+        dwModuleComponent.setComponentErpcode(hardwareComponent.getComponent().getERPCode());
+        dwModuleComponent.setComponentArticleId(hardwareComponent.getComponent().getCatalogCode());
         if (hardwareComponent.getQuantityFormula().equals("Fixed Quantity"))
         {
             quantity = hardwareComponent.getQuantity();
@@ -1143,6 +1167,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setModuleType(moduleType);
         dwModuleComponent.setModuleCode(productModule.getMGCode());
         dwModuleComponent.setModuleCategory(productModule.getModuleCategory());
+
         dwModuleComponent.setModuleSeq(productModule.getModuleSequence());
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
@@ -1166,6 +1191,8 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setComponentUom("Qty");
         dwModuleComponent.setComponentType(compType);
         dwModuleComponent.setComponentQty(quantity);
+        dwModuleComponent.setComponentErpcode(handle.getErpCode());
+        dwModuleComponent.setComponentArticleId(handle.getArticleNo());
 
         double componentPrice = 0;
         double componentPriceAfterDiscount = 0;
