@@ -14,14 +14,16 @@ public class BoqItem extends JsonObject {
     private String code;
     private String erpCode;
     private String catalogueCode;
+    private String title;
     private String uom;
     private double rate;
     private double unitRate;
     private double quantity;
     private double price;
     private double unitPrice;
+    private int boqDisplayOrder;
 
-    public BoqItem(String code, String catalogueCode, String erpCode, String uom, double quantity, Date priceDate, String city)
+    public BoqItem(String code, String catalogueCode, String title, String erpCode, String uom, double quantity, Date priceDate, String city, int boqDisplayOrder)
     {
         PriceMaster priceMaster = null;
         if (code.startsWith("HANDLE") || code.startsWith("KNOB"))
@@ -37,6 +39,7 @@ public class BoqItem extends JsonObject {
         }
         this.code = code;
         this.catalogueCode = catalogueCode;
+        this.title = title;
         this.erpCode = erpCode;
         this.rate = priceMaster.getPrice();
         this.unitRate = priceMaster.getSourcePrice();
@@ -44,6 +47,7 @@ public class BoqItem extends JsonObject {
         this.uom = uom;
         this.price = this.rate * this.quantity;
         this.unitPrice = this.unitRate * this.quantity;
+        this.boqDisplayOrder = boqDisplayOrder;
 
     }
 
@@ -117,5 +121,21 @@ public class BoqItem extends JsonObject {
 
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getBoqDisplayOrder() {
+        return boqDisplayOrder;
+    }
+
+    public void setBoqDisplayOrder(int boqDisplayOrder) {
+        this.boqDisplayOrder = boqDisplayOrder;
     }
 }

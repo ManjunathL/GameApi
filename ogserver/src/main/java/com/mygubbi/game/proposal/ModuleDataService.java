@@ -170,6 +170,7 @@ public class ModuleDataService extends AbstractVerticle
                         {
                             AccHwComponent component = AccHwComponent.fromJson(record);
                             components.put(component.getCode(), component);
+                            LOG.debug("Acc hw comp :" + component);
                         }
                         if ("A".equals(type))
                         {

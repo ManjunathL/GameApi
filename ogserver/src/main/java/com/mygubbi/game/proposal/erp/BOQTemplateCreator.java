@@ -33,7 +33,7 @@ public class BOQTemplateCreator
         this.proposalBoqsForProduct = proposalBoqsForProduct;
         this.proposalBoqsForAddon = proposalBoqsForAddon;
         this.erpMasters = erpMasters;
-        LOG.debug("ERP Master size in BOQ template creator");
+        LOG.debug("ERP Master size in BOQ template creator" + erpMasters.size());
     }
 
     public String getTemplateName()

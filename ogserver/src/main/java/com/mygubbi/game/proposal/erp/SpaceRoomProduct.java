@@ -9,13 +9,13 @@ public class SpaceRoomProduct {
 
     private String space;
     private String room;
-    private String product;
+    private int productId;
 
     public SpaceRoomProduct(ProposalBOQ proposal_boq)
     {
         this.space = proposal_boq.getSpaceType();
         this.room = proposal_boq.getROOM();
-        this.product = proposal_boq.getProductService();
+        this.productId = proposal_boq.getProductId();
     }
 
     public String getSpace() {
@@ -34,12 +34,12 @@ public class SpaceRoomProduct {
         this.room = room;
     }
 
-    public String getProduct() {
-        return product;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -49,17 +49,17 @@ public class SpaceRoomProduct {
 
         SpaceRoomProduct that = (SpaceRoomProduct) o;
 
-        if (!space.equals(that.space)) return false;
-        if (!room.equals(that.room)) return false;
-        return product.equals(that.product);
+        if (productId != that.productId) return false;
+        if (space != null ? !space.equals(that.space) : that.space != null) return false;
+        return !(room != null ? !room.equals(that.room) : that.room != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = space.hashCode();
-        result = 31 * result + room.hashCode();
-        result = 31 * result + product.hashCode();
+        int result = space != null ? space.hashCode() : 0;
+        result = 31 * result + (room != null ? room.hashCode() : 0);
+        result = 31 * result + productId;
         return result;
     }
 }

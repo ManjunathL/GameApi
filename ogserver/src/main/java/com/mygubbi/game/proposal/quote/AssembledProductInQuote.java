@@ -325,7 +325,7 @@ public class AssembledProductInQuote
         if (Objects.equals(this.product.getHandletypeSelection(),GOLA_PROFILE ))
         {
 
-            LOG.debug("Inside gola profile");
+//            LOG.debug("Inside gola profile");
 
             int moduleCount = 0;
             int drawerModuleCount= 0;
@@ -414,12 +414,12 @@ public class AssembledProductInQuote
             golaProfilePrice = profilePrice + bracketPrice  + cConnectorPrice;
             //handleandKnobCost += golaProfilePrice;
 
-            LOG.debug("Gola Profile Price: " + golaProfilePrice);
+//            LOG.debug("Gola Profile Price: " + golaProfilePrice);
 
         }
         if (Objects.equals(this.product.getHandletypeSelection(), "G Profile")){
 
-            LOG.debug("G Profile : ");
+//            LOG.debug("G Profile : ");
 
             double lWidth = 0;
             double gOrJProfileSourceCost;
@@ -446,7 +446,7 @@ public class AssembledProductInQuote
             gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
             AccHwComponent hardware5 = ModuleDataService.getInstance().getHardware(gProfileRate.getRateId());
             this.addToModuleHardware(hardware5, quantity , module.getUnit(), module.getSequence());
-            LOG.debug("G profile rate : " +  gProfileRate.getPrice());
+//            LOG.debug("G profile rate : " +  gProfileRate.getPrice());
 
 
             gOrJProfileSourceCost = lWidth/1000 * gProfileRate.getSourcePrice();
@@ -460,7 +460,7 @@ public class AssembledProductInQuote
         }
         if (Objects.equals(this.product.getHandletypeSelection(), "J Profile"))
         {
-            LOG.debug("J profile : ");
+//            LOG.debug("J profile : ");
 
             double lWidth = 0;
             double gOrJProfileSourceCost;
@@ -479,19 +479,19 @@ public class AssembledProductInQuote
                 if (module.getModuleCategory().contains("Drawer"))
                 {
                     lWidth = lWidth + (quantity * module.getWidth());
-                    LOG.debug("Inside if :" + lWidth);
+//                    LOG.debug("Inside if :" + lWidth);
                 }
                 else {
                     lWidth = lWidth + module.getWidth();
-                    LOG.debug("Inside else :" + lWidth);
+//                    LOG.debug("Inside else :" + lWidth);
                 }
             }
             // }
             gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
             AccHwComponent hardware6 = ModuleDataService.getInstance().getHardware(jProfileRate.getRateId());
             this.addToModuleHardware(hardware6, quantity , module.getUnit(), module.getSequence());
-            LOG.debug("J profile rate : " +  jProfileRate.getPrice());
-            LOG.debug("Inside J profile : "+ gOrJProfilePrice);
+//            LOG.debug("J profile rate : " +  jProfileRate.getPrice());
+//            LOG.debug("Inside J profile : "+ gOrJProfilePrice);
 
             gOrJProfileSourceCost = lWidth/1000 * jProfileRate.getSourcePrice();
             /*handleandKnobSourceCost +=  gOrJProfileSourceCost;
@@ -524,7 +524,7 @@ public class AssembledProductInQuote
         }
         else{
          for (HingePack hingePack : module.getHingePacks()) {
-            LOG.info("hingePack " +hingePack.toString());
+//            LOG.info("hingePack " +hingePack.toString());
             this.addToModuleHinge(hingePack, hingePack.getQUANTITY());
         }}
     }
@@ -551,7 +551,7 @@ public class AssembledProductInQuote
     {
         ModulePart part = this.createModulePart(component, quantity, unit, seq );
         PriceMaster addonRate = RateCardService.getInstance().getHardwareRate(component.getCode(),this.priceDate,this.city);
-        LOG.info("rate for hardware " +addonRate.getPrice());
+//        LOG.info("rate for hardware " +addonRate.getPrice());
         if(!(addonRate.getPrice()==0))
         {
             this.moduleHardware.add(part);
@@ -566,7 +566,7 @@ public class AssembledProductInQuote
 
     private void addToModuleHandle(Handle handleCode, double quantity)
     {
-        LOG.info("handle code " +handleCode +"quantity " +quantity);
+//        LOG.info("handle code " +handleCode +"quantity " +quantity);
         ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),"Catalogue code","ERP code");
         if(!(quantity==0.0))
         {
@@ -576,7 +576,7 @@ public class AssembledProductInQuote
 
     private void addToModuleHinge(HingePack hingeCode, double quantity)
     {
-        LOG.debug("Hinge Pack /; " + hingePack.toString());
+//        LOG.debug("Hinge Pack /; " + hingePack.toString());
         ModulePart part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),"Catalogue code","ERP code");
         if(!(quantity==0.0))
         {
@@ -586,7 +586,7 @@ public class AssembledProductInQuote
 
     private ModulePart createModulePart(AccHwComponent component, double quantity, String unit, int seq)
     {
-        LOG.info("component" +component);
+//        LOG.info("component" +component);
         return new ModulePart(unit, seq, component.getCode(), component.getTitle(), quantity, component.getMake(), component.getUom(),component.getCatalogCode(),component.getCategory(),component.getERPCode());
     }
 

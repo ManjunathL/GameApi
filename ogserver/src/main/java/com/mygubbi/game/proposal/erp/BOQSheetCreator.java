@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.erp;
 
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.si.excel.ExcelCellProcessor;
 import com.mygubbi.si.excel.ExcelSheetProcessor;
@@ -32,22 +33,29 @@ public class BOQSheetCreator implements ExcelCellProcessor
     private static final int COMPONENT_CATEGORY = 7;
     private static final int DSO_ERP_ITEM_CODE = 8;
     private static final int DSO_REFERENCE_PART_NO = 9;
-    private static final int DSO_UOM = 10;
-    private static final int DSO_RATE = 11;
-    private static final int DSO_QTY = 12;
-    private static final int DSO_PRICE = 13;
-    private static final int PLANNER_ERP_ITEM_CODE = 14;
-    private static final int PLANNER_REFERENCE_PART_NO = 15;
-    private static final int PLANNER_UOM = 16;
-    private static final int PLANNER_RATE = 17;
-    private static final int PLANNER_QTY = 18;
-    private static final int PLANNER_PRICE = 19;
-    private static final int SPACE_TYPE_HIDDEN = 20;
-    private static final int ROOM_HIDDEN = 21;
-    private static final int CATEGORY_HIDDEN = 22;
-    private static final int PRODUCT_HIDDEN = 23;
-    private static final int MODULE_HIDDEN = 24;
-    private static final int MYGUBBI_ERPCODE_HIDDEN = 25;
+    private static final int DSO_DESCRIPTION = 10;
+    private static final int DSO_UOM = 11;
+    private static final int DSO_RATE = 12;
+    private static final int DSO_QTY = 13;
+    private static final int DSO_PRICE = 14;
+    private static final int PLANNER_ERP_ITEM_CODE = 15;
+    private static final int PLANNER_REFERENCE_PART_NO = 16;
+    private static final int PLANNER_DESCRIPTION = 17;
+    private static final int PLANNER_UOM = 18;
+    private static final int PLANNER_RATE = 19;
+    private static final int PLANNER_QTY = 20;
+    private static final int PLANNER_PRICE = 21;
+
+    //Hidden fields for saving to the database
+    private static final int SPACE_TYPE_HIDDEN = 22;
+    private static final int ROOM_HIDDEN = 23;
+    private static final int CATEGORY_HIDDEN = 24;
+    private static final int PRODUCT_HIDDEN = 25;
+    private static final int PRODUCT_ID_HIDDEN = 26;
+    private static final int MODULE_SEQ_HIDDEN = 27;
+    private static final int MODULE_HIDDEN = 28;
+    private static final int MYGUBBI_ERPCODE_HIDDEN = 29;
+    private static final int DISPLAY_ORDER = 30;
 
     private ProposalHeader proposalHeader;
     private XSSFSheet quoteSheet;
@@ -68,7 +76,9 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.city = proposalHeader.getProjectCity();
         this.proposalBoqsForProduct = proposalBoqsForProduct;
         this.proposalBoqsForAddon = proposalBoqsForAddon;
-        LOG.debug("Inside Bow sheet creator");
+        LOG.debug("Proposal boq for product : " + proposalBoqsForProduct.size());
+        LOG.debug("Proposal boq for addon : " + proposalBoqsForAddon.size());
+//        LOG.debug("Inside Bow sheet creator");
     }
 
     public void prepare()
@@ -94,7 +104,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
                 this.fillModules(cell.getRow().getRowNum() + 1);
                 break;
 
-            case "Addons":
+            case "ADDONS":
                 this.fillAddons(cell.getRow().getRowNum() + 2);
                 break;
 
@@ -108,34 +118,49 @@ public class BOQSheetCreator implements ExcelCellProcessor
             return currentRow;
         }
 
-        List<ProposalBOQ> sameProduct = new ArrayList<>();
+        Map<DistinctModule,List<ProposalBOQ>> spaceRoomProducts = getDistinctModules(proposalBoqsForProduct);
 
-        for (ProposalBOQ proposalBoqLineItem : proposalBoqsForProduct) {
-            LOG.debug("Inside Bow sheet creator fill modules");
 
-            String oldProduct = proposalBoqsForProduct.get(0).getProductService();
-            String oldModule = proposalBoqsForProduct.get(0).getMgCode();
-            String newProduct = proposalBoqLineItem.getProductService();
-            String newModule = proposalBoqLineItem.getMgCode();
+        for (DistinctModule distinctModule : spaceRoomProducts.keySet()) {
 
-            if ((oldProduct.equals(newProduct)) && oldModule.equals(newModule)) {
-                sameProduct.add(proposalBoqLineItem);
-            }
+            List<ProposalBOQ> proposalBoqAsPerProduct = spaceRoomProducts.get(distinctModule);
+
+            fillHardwareAndAccPerModule(currentRow, proposalBoqAsPerProduct);
 
         }
-        fillHardwareAndAccPerModule(currentRow, sameProduct);
+
         return currentRow;
+
+    }
+
+
+
+    private Map<DistinctModule,List<ProposalBOQ>> getDistinctModules(List<ProposalBOQ> proposalBoqs)
+    {
+        Map<DistinctModule, List<ProposalBOQ>> distinctModuleMap = new HashMap<>();
+        for (ProposalBOQ boq : proposalBoqs)
+        {
+            DistinctModule distinctModule = new DistinctModule(boq);
+            if (!distinctModuleMap.containsKey(distinctModule))
+            {
+                distinctModuleMap.put(distinctModule,new ArrayList<>());
+            }
+            distinctModuleMap.get(distinctModule).add(boq);
+        }
+        return distinctModuleMap;
     }
 
     public int fillAddons(int currentRow) {
+
+        LOG.debug("Inisde fill addons size :" + this.proposalBoqsForAddon.size());
         if (this.proposalBoqsForAddon.isEmpty()) {
             return currentRow;
         }
 
-        List<ProposalBOQ> addonsBoq = new ArrayList<>();
-        addonsBoq.addAll(proposalBoqsForAddon);
+        LOG.debug("Inisde fill addons size  2:" + this.proposalBoqsForAddon.size());
 
-        fillAddonsForBoq(currentRow, addonsBoq);
+
+        fillAddonsForBoq(currentRow, proposalBoqsForAddon);
 
         return currentRow;
     }
@@ -145,12 +170,17 @@ public class BOQSheetCreator implements ExcelCellProcessor
     private int fillHardwareAndAccPerModule(int startRow, List<ProposalBOQ> proposalBoqs)
     {
         int currentRow = startRow;
+        proposalBoqs.sort(Comparator.comparing(ProposalBOQ::getDsoItemSeq));
+
+//        proposalBoqs.forEach(System.out::println);
+//        LOG.debug("SIZE INSIDE :" + proposalBoqs.size() + " : " +proposalBoqs.get(0));
 
         createBoqLineItemHeadingRow(currentRow,proposalBoqs.get(0));
         currentRow++;
 
         for (int i =1; i<proposalBoqs.size() ; i++)
         {
+//            LOG.debug("Creating data row :" +  i + " : " + proposalBoqs.get(i) );
             createBoqLineItemDataRow(currentRow,proposalBoqs.get(i));
             currentRow++;
         }
@@ -161,10 +191,12 @@ public class BOQSheetCreator implements ExcelCellProcessor
     private int fillAddonsForBoq(int startRow, List<ProposalBOQ> proposalBoqs)
     {
         int currentRow = startRow;
+        LOG.debug("Proposal boqs for addon: " + proposalBoqs.size());
 
         for (int i =0; i<proposalBoqs.size() ; i++)
         {
-            createBoqLineItemDataRow(currentRow,proposalBoqs.get(i));
+            LOG.debug("Creating row for addon :" + proposalBoqs.get(i));
+            createBoqLineItemHeadingRowForAddon(currentRow,proposalBoqs.get(i));
             currentRow++;
         }
 
@@ -175,8 +207,8 @@ public class BOQSheetCreator implements ExcelCellProcessor
 
     private void createBoqLineItemDataRow(int rowNum, ProposalBOQ proposalBoq)
     {
-        LOG.debug("Create Module Component data row" + rowNum);
-        LOG.debug("Proposal BOQ :" + proposalBoq);
+        /*LOG.debug("Create Module Component data row" + rowNum);
+        LOG.debug("Proposal BOQ :" + proposalBoq);*/
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
 
 
@@ -192,6 +224,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
 
         this.createCellWithData(dataRow, DSO_ERP_ITEM_CODE, Cell.CELL_TYPE_STRING, proposalBoq.getDsoErpItemCode()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_REFERENCE_PART_NO, Cell.CELL_TYPE_STRING, proposalBoq.getDsoReferencePartNo()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_DESCRIPTION, Cell.CELL_TYPE_STRING, proposalBoq.getDsoDescription()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getDsoUom()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getDsoRate()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getDsoQty()).setCellStyle(this.styles.getColoredCellStyle());
@@ -200,6 +233,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
         //Inserting Cell data for Planner version
         this.createCellWithData(dataRow, PLANNER_ERP_ITEM_CODE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerErpItemCode()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_REFERENCE_PART_NO, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerReferencePartNo()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_DESCRIPTION, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerDescription()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerUom()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerRate()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerQty()).setCellStyle(this.styles.getTextStyle());
@@ -210,16 +244,74 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, ROOM_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, CATEGORY_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getcategory()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PRODUCT_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getProductService()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PRODUCT_ID_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getProductId()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MODULE_SEQ_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getModuleSeq()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, MODULE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getMgCode()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, MYGUBBI_ERPCODE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getDsoErpItemCode()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, DISPLAY_ORDER, Cell.CELL_TYPE_STRING, proposalBoq.getDsoItemSeq()).setCellStyle(this.styles.getTextStyle());
 
     }
 
     private void createBoqLineItemHeadingRow(int rowNum, ProposalBOQ proposalBoq)
     {
-        LOG.debug("Create Module Component Heading row" + rowNum);
-        LOG.debug("Proposal BOQ :" + proposalBoq);
+    /*    LOG.debug("Create Module Component Heading row" + rowNum);
+        LOG.debug("Proposal BOQ :" + proposalBoq);*/
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
+
+        Module module = ModuleDataService.getInstance().getModule(proposalBoq.getMgCode());
+
+
+        this.createCellWithData(dataRow, SPACE_TYPE_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, ROOM_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, CATEGORY_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getcategory()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PRODUCT_OR_SERVICE, Cell.CELL_TYPE_STRING, proposalBoq.getProductService()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MODULE_CODE, Cell.CELL_TYPE_STRING, module.getDescription()+ ":" + proposalBoq.getMgCode()).setCellStyle(this.styles.getTextStyle());
+
+        this.createCellWithData(dataRow, CUSTOM_CHECK, Cell.CELL_TYPE_STRING, proposalBoq.getCustomCheck()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, CUSTOM_REMARKS, Cell.CELL_TYPE_STRING, proposalBoq.getCustomRemarks()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, COMPONENT_CATEGORY, Cell.CELL_TYPE_STRING, proposalBoq.getItemCategory()).setCellStyle(this.styles.getColoredCellStyle());
+
+
+//       dataRow.setHeight(new Double(dataRow.getHeight() * 1.5).shortValue());
+        //Inserting Cell data for DSO version
+        this.createCellWithData(dataRow, DSO_ERP_ITEM_CODE, Cell.CELL_TYPE_STRING, proposalBoq.getDsoErpItemCode()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_REFERENCE_PART_NO, Cell.CELL_TYPE_STRING, proposalBoq.getDsoReferencePartNo()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_DESCRIPTION, Cell.CELL_TYPE_STRING, proposalBoq.getDsoDescription()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getDsoUom()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getDsoRate()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getDsoQty()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_PRICE, Cell.CELL_TYPE_STRING, proposalBoq.getDsoPrice()).setCellStyle(this.styles.getColoredCellStyle());
+
+        //Inserting Cell data for Planner version
+        this.createCellWithData(dataRow, PLANNER_ERP_ITEM_CODE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerErpItemCode()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_REFERENCE_PART_NO, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerReferencePartNo()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_DESCRIPTION, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerDescription()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerUom()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerRate()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerQty()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_PRICE, 1, proposalBoq.getPlannerPrice()).setCellStyle(this.styles.getTextStyle());
+
+        this.createCellWithData(dataRow, SPACE_TYPE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, ROOM_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, CATEGORY_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getcategory()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PRODUCT_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getProductService()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PRODUCT_ID_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getProductId()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MODULE_SEQ_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getModuleSeq()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MODULE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getMgCode()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MYGUBBI_ERPCODE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getDsoErpItemCode()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, DISPLAY_ORDER, Cell.CELL_TYPE_STRING, proposalBoq.getDsoItemSeq()).setCellStyle(this.styles.getTextStyle());
+
+
+    }
+
+    private void createBoqLineItemHeadingRowForAddon(int rowNum, ProposalBOQ proposalBoq)
+    {
+    /*    LOG.debug("Create Module Component Heading row" + rowNum);
+        LOG.debug("Proposal BOQ :" + proposalBoq);*/
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
+
+        Module module = ModuleDataService.getInstance().getModule(proposalBoq.getMgCode());
+
 
         this.createCellWithData(dataRow, SPACE_TYPE_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, ROOM_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
@@ -236,6 +328,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
         //Inserting Cell data for DSO version
         this.createCellWithData(dataRow, DSO_ERP_ITEM_CODE, Cell.CELL_TYPE_STRING, proposalBoq.getDsoErpItemCode()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_REFERENCE_PART_NO, Cell.CELL_TYPE_STRING, proposalBoq.getDsoReferencePartNo()).setCellStyle(this.styles.getColoredCellStyle());
+        this.createCellWithData(dataRow, DSO_DESCRIPTION, Cell.CELL_TYPE_STRING, proposalBoq.getDsoDescription()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getDsoUom()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getDsoRate()).setCellStyle(this.styles.getColoredCellStyle());
         this.createCellWithData(dataRow, DSO_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getDsoQty()).setCellStyle(this.styles.getColoredCellStyle());
@@ -244,6 +337,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
         //Inserting Cell data for Planner version
         this.createCellWithData(dataRow, PLANNER_ERP_ITEM_CODE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerErpItemCode()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_REFERENCE_PART_NO, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerReferencePartNo()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_DESCRIPTION, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerDescription()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerUom()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerRate()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerQty()).setCellStyle(this.styles.getTextStyle());
@@ -253,8 +347,12 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, ROOM_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, CATEGORY_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getcategory()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PRODUCT_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getProductService()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PRODUCT_ID_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getProductId()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MODULE_SEQ_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getModuleSeq()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, MODULE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getMgCode()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, MYGUBBI_ERPCODE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getDsoErpItemCode()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, DISPLAY_ORDER, Cell.CELL_TYPE_STRING, proposalBoq.getDsoItemSeq()).setCellStyle(this.styles.getTextStyle());
+
 
     }
 

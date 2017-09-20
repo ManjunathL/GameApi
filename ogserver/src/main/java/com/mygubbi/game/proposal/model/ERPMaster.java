@@ -15,6 +15,8 @@ public class ERPMaster extends JsonObject {
     private static final String IS_ACTIVE = "isActive";
     private static final String ITEM_CODE = "itemCode";
     private static final String ITEM_REFERENCE_CODE = "itemRefCode";
+    private static final String PRICE = "price";
+    private static final String SOURCE_PRICE = "sourcePrice";
 
     public ERPMaster()
     {
@@ -95,6 +97,26 @@ public class ERPMaster extends JsonObject {
     public ERPMaster setItemReferencePartNo(String itemReferencePartNo)
     {
         put(ITEM_REFERENCE_CODE, itemReferencePartNo);
+        return this;
+    }
+
+    public double getPrice() {
+        return this.getDouble(PRICE);
+    }
+
+    public ERPMaster setPrice(double price)
+    {
+        put(PRICE, price);
+        return this;
+    }
+
+    public double getSourcePrice() {
+        return this.getDouble(SOURCE_PRICE);
+    }
+
+    public ERPMaster setSourcePrice(double sourcePrice)
+    {
+        put(SOURCE_PRICE, sourcePrice);
         return this;
     }
 }

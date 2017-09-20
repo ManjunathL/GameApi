@@ -31,6 +31,7 @@ import com.mygubbi.game.proposal.output.SOWPdfOutputService;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -922,10 +923,11 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createBoqOutput(RoutingContext routingContext)
     {
+        int count = 0;
+    LOG.debug("Inside create boq output : " + ++count);
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        quoteRequestJson.put("validSow",false);
         Integer id = LocalCache.getInstance().store(quoteRequestJson);
-        VertxInstance.get().eventBus().send(BoqCreatorService.CREATE_BOQ_OUTPUT, id,
+        VertxInstance.get().eventBus().send(BoqCreatorService.CREATE_BOQ_OUTPUT, id,  new DeliveryOptions().setSendTimeout(120000),
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());
@@ -940,7 +942,6 @@ public class ProposalHandler extends AbstractRouteHandler
         String file_id = jsonObject.getString("id");
         this.serviceProvider.deleteFile(file_id);
     }
-
 
     private void discardBoqFile(RoutingContext routingContext)
     {

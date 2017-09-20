@@ -35,13 +35,11 @@ public class ERPMasterSheetCreator implements ExcelCellProcessor {
 
 
 
-    private static final int ITEM_NAME_CELL = 0;
+    private static final int ERP_ITEM_CODE = 0;
     private static final int REFERENCE_PART_NO_CELL = 1;
-    private static final int INVENTORY_CATEGORY_CELL = 2;
+    private static final int ITEM_DESCRIPTION = 2;
     private static final int UOM_CELL = 3;
-    private static final int IS_ACTIVE_CELL = 4;
-    private static final int ITEM_CODE = 5;
-    private static final int ITEM_REFERENCE_CODE_CELL = 6;
+    private static final int RATE_CELL = 4;
 
 
     public ERPMasterSheetCreator(XSSFWorkbook xssfWorkbook, XSSFSheet quoteSheet, ExcelStyles styles, List<ERPMaster> erpMasters,ProposalHeader proposalHeader)
@@ -52,11 +50,6 @@ public class ERPMasterSheetCreator implements ExcelCellProcessor {
         this.priceDate = proposalHeader.getPriceDate();
         this.city = proposalHeader.getProjectCity();
         this.erpMasters = erpMasters;
-        LOG.debug("Inside ERP master sheet creator");
-        LOG.debug("ERP Master size :" + erpMasters.size());
-        LOG.debug("QUote sheet in erp sheet creator : " + this.quoteSheet.getSheetName());
-        LOG.debug("QUote sheet in erp sheet creator : " + this.quoteSheet.getLastRowNum());
-
 
     }
 
@@ -78,7 +71,7 @@ public class ERPMasterSheetCreator implements ExcelCellProcessor {
 
         switch (cellValue)
         {
-            case "Item Name":
+            case "myGubbi ERP Item Code":
                 //int currentRow = this.fillAssembledProducts(cell.getRow().getRowNum());
                 this.fillERPMasterSheet(cell.getRow().getRowNum() + 1);
                 break;
@@ -123,20 +116,13 @@ public class ERPMasterSheetCreator implements ExcelCellProcessor {
     private void createDataRow(int rowNum, ERPMaster erpMaster)
     {
 
-        LOG.debug("Creatring row in erp sheet :" + rowNum);
-
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
 
-        LOG.debug("Creating rows for ERP Master :" + erpMaster);
-
-
-        this.createCellWithData(dataRow, ITEM_NAME_CELL, Cell.CELL_TYPE_STRING, erpMaster.getItemName()).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, ERP_ITEM_CODE, Cell.CELL_TYPE_STRING, erpMaster.getItemReferenceCode()).setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, REFERENCE_PART_NO_CELL, Cell.CELL_TYPE_STRING, erpMaster.getReferencePartNo()).setCellStyle(this.styles.getIndexStyle());
-        this.createCellWithData(dataRow, INVENTORY_CATEGORY_CELL, Cell.CELL_TYPE_STRING, erpMaster.getInvCategory()).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, ITEM_DESCRIPTION, Cell.CELL_TYPE_STRING, erpMaster.getItemName()).setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, UOM_CELL, Cell.CELL_TYPE_STRING, erpMaster.getUOM()).setCellStyle(this.styles.getIndexStyle());
-        this.createCellWithData(dataRow, IS_ACTIVE_CELL, Cell.CELL_TYPE_STRING, erpMaster.getIsActive()).setCellStyle(this.styles.getIndexStyle());
-        this.createCellWithData(dataRow, ITEM_CODE, Cell.CELL_TYPE_STRING, erpMaster.getItemCode()).setCellStyle(this.styles.getIndexStyle());
-        this.createCellWithData(dataRow, ITEM_REFERENCE_CODE_CELL, Cell.CELL_TYPE_STRING, erpMaster.getItemReferenceCode()).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_NUMERIC, erpMaster.getSourcePrice()).setCellStyle(this.styles.getIndexStyle());
 
     }
 
@@ -144,8 +130,6 @@ public class ERPMasterSheetCreator implements ExcelCellProcessor {
 
     private Row createRow(int currentRow, Sheet sheet)
     {
-        LOG.debug("Current row :" + currentRow + " | sheet. last row :" + sheet.getLastRowNum() );
-
         sheet.shiftRows(currentRow, 100000, 1);
         return sheet.createRow(currentRow);
     }

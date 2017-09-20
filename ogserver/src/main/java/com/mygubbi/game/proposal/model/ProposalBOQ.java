@@ -15,6 +15,7 @@ public class ProposalBOQ extends JsonObject {
     private static final String HINGE_CODE = "HINGE";
     private static final String HANDLE_CODE = "HANDLE";
     private static final String KNOB_CODE = "KNOB";
+    private static final String HARDWARE_CODE = "HW";
 
 
     public static final String ID = "id";
@@ -23,18 +24,23 @@ public class ProposalBOQ extends JsonObject {
     public static final String ROOM = "roomcode";
     public static final String CATEGORY = "category";
     public static final String PRODUCT_SERVICE = "productService";
+    public static final String PRODUCT_ID = "productId";
     public static final String MG_CODE = "mgCode";
+    public static final String MODULE_SEQ = "moduleSeq";
     public static final String CUSTOM_CHECK = "customCheck";
     public static final String CUSTOM_REMARKS = "customRemarks";
     public static final String ITEM_CATEGORY = "itemCategory";
     public static final String DSO_ERP_ITEM_CODE = "DSOErpItemCode";
+    public static final String DSO_ITEM_SEQ = "DSOItemSeq";
     public static final String DSO_REFERENCE_PART_NO ="DSOReferencePartNo";
+    public static final String DSO_DESCRIPTION ="DSODescription";
     public static final String DSO_UOM ="DSOUom";
     public static final String DSO_RATE ="DSORate";
     public static final String DSO_QTY ="DSOQty";
     public static final String DSO_PRICE ="DSOPrice";
     public static final String PLANNER_ERP_ITEM_CODE = "plannerErpItemCode";
     public static final String PLANNER_REFERENCE_PART_NO ="plannerReferencePartNo";
+    public static final String PLANNER_DESCRIPTION ="plannerDescription";
     public static final String PLANNER_UOM ="plannerUom";
     public static final String PLANNER_RATE ="plannerRate";
     public static final String PLANNER_QTY ="plannerQty";
@@ -69,9 +75,16 @@ public class ProposalBOQ extends JsonObject {
     public String getProductService() {
         return this.getString(PRODUCT_SERVICE);
     }
+    public int getProductId() {
+        return this.getInteger(PRODUCT_ID);
+    }
 
     public String getMgCode() {
         return this.getString(MG_CODE);
+    }
+
+    public int getModuleSeq() {
+        return this.getInteger(MODULE_SEQ);
     }
 
     public String getCustomCheck() {
@@ -90,8 +103,16 @@ public class ProposalBOQ extends JsonObject {
         return this.getString(DSO_ERP_ITEM_CODE);
     }
 
+    public int getDsoItemSeq() {
+        return this.getInteger(DSO_ITEM_SEQ);
+    }
+
     public String getDsoReferencePartNo() {
         return this.getString(DSO_REFERENCE_PART_NO);
+    }
+
+    public String getDsoDescription() {
+        return this.getString(DSO_DESCRIPTION);
     }
 
     public String getDsoUom() {
@@ -119,6 +140,10 @@ public class ProposalBOQ extends JsonObject {
         return this.getString(PLANNER_REFERENCE_PART_NO);
     }
 
+    public String getPlannerDescription() {
+        return this.getString(PLANNER_DESCRIPTION);
+    }
+
     public String getPlannerUom() {
         return this.getString(PLANNER_UOM);
     }
@@ -134,6 +159,7 @@ public class ProposalBOQ extends JsonObject {
     public double getPlannerPrice() {
         return this.getDouble(PLANNER_PRICE);
     }
+
 
     public ProposalBOQ setId(int id)
     {
@@ -170,9 +196,21 @@ public class ProposalBOQ extends JsonObject {
         return this;
     }
 
+    public ProposalBOQ setProductId(int productId)
+    {
+        put(PRODUCT_ID,productId);
+        return this;
+    }
+
     public ProposalBOQ setMgCode(String mgCode)
     {
         put(MG_CODE,mgCode);
+        return this;
+    }
+
+    public ProposalBOQ setModuleSeq(int moduleSeq)
+    {
+        put(MODULE_SEQ,moduleSeq);
         return this;
     }
 
@@ -200,9 +238,21 @@ public class ProposalBOQ extends JsonObject {
         return this;
     }
 
+    public ProposalBOQ setDSOItemSeq(int dsoItemSeq)
+    {
+        put(DSO_ITEM_SEQ,dsoItemSeq);
+        return this;
+    }
+
     public ProposalBOQ setDSOReferencePartNo(String referencePartNo)
     {
         put(DSO_REFERENCE_PART_NO,referencePartNo);
+        return this;
+    }
+
+    public ProposalBOQ setDSODescription(String dsoDescription)
+    {
+        put(DSO_DESCRIPTION,dsoDescription);
         return this;
     }
 
@@ -242,6 +292,12 @@ public class ProposalBOQ extends JsonObject {
         return this;
     }
 
+    public ProposalBOQ setPlannerDescription(String plannerDescription)
+    {
+        put(PLANNER_DESCRIPTION,plannerDescription);
+        return this;
+    }
+
     public ProposalBOQ setPlannerUom(String plannerUom)
     {
         put(PLANNER_UOM,plannerUom);
@@ -273,7 +329,9 @@ public class ProposalBOQ extends JsonObject {
         this.setRoom(productInQuote.getRoom());
         this.setCategory("Modular Products");
         this.setProductService(product);
+        this.setProductId(productInQuote.getProduct().getId());
         this.setMgCode(module.getMGCode());
+        this.setModuleSeq(module.getModuleSequence());
         this.setCustomCheck(module.getCustomCheck());
        /* if (module.getCustomCheck().equals("yes"))
         {
@@ -281,17 +339,21 @@ public class ProposalBOQ extends JsonObject {
         }
         else
         {*/
+
             this.setCustomRemarks("");
 //        }
-        this.setItemCategory("HW");
+        this.setItemCategory(HARDWARE_CODE);
         this.setDSOErpItemCode(accHwComponent.getERPCode());
         this.setDSOReferencePartNo(accHwComponent.getCatalogCode());
+        this.setDSODescription(accHwComponent.getTitle());
         this.setDSOUom(accHwComponent.getUom());
         this.setDSORate(addonRate.getSourcePrice());
         this.setDSOQty(quantity);
         this.setDSOPrice(addonRate.getSourcePrice() * quantity);
         this.setPlannerErpCode(accHwComponent.getERPCode());
+        this.setDSOItemSeq(accHwComponent.getBoqDisplayOrder());
         this.setPlannerReferencePartNo(accHwComponent.getCatalogCode());
+        this.setPlannerDescription(accHwComponent.getTitle());
         this.setPlannerUom(accHwComponent.getUom());
         this.setPlannerUom(accHwComponent.getUom());
         this.setPlannerRate(addonRate.getSourcePrice());
@@ -305,22 +367,33 @@ public class ProposalBOQ extends JsonObject {
         this.setRoom(productInQuote.getRoom());
         this.setCategory("Modular Products");
         this.setProductService(productInQuote.getProduct().getProductCategory());
+        this.setProductId(productInQuote.getProduct().getId());
         this.setMgCode(module.getMGCode());
+        this.setModuleSeq(module.getModuleSequence());
         this.setCustomCheck(module.getCustomCheck());
         if (module.getCustomCheck().equals("yes")) {
             this.setCustomRemarks(module.getRemarks());
         } else {
             this.setCustomRemarks("");
         }
-        this.setCategory(ACC_CODE);
+        if (accHwComponent.getCode().startsWith("A"))
+        {
+            this.setItemCategory(ACC_CODE);
+        }
+        else {
+            this.setItemCategory(HARDWARE_CODE);
+        }
         this.setDSOErpItemCode(accHwComponent.getERPCode());
+        this.setDSOItemSeq(accHwComponent.getBoqDisplayOrder());
         this.setDSOReferencePartNo(accHwComponent.getCatalogCode());
+        this.setDSODescription(accHwComponent.getTitle());
         this.setDSOUom(accHwComponent.getUom());
         this.setDSORate(addonRate.getSourcePrice());
         this.setDSOQty(quantity);
         this.setDSOPrice(addonRate.getSourcePrice() * quantity);
         this.setPlannerErpCode(accHwComponent.getERPCode());
-        this.setPlannerUom(accHwComponent.getCatalogCode());
+        this.setPlannerReferencePartNo(accHwComponent.getCatalogCode());
+        this.setPlannerDescription(accHwComponent.getTitle());
         this.setPlannerUom(accHwComponent.getUom());
         this.setPlannerRate(addonRate.getSourcePrice());
         this.setPlannerQty(quantity);
@@ -333,18 +406,23 @@ public class ProposalBOQ extends JsonObject {
         this.setRoom(productAddon.getRoomCode());
         this.setCategory("Addons");
         this.setProductService(productAddon.getCategoryCode());
+        this.setProductId(0);
         this.setMgCode(productAddon.getCode());
+        this.setModuleSeq(0);
         this.setCustomCheck("No");
         this.setCustomRemarks("");
         this.setCategory(ADDON_CODE);
         this.setDSOErpItemCode("NA");
+        this.setDSOItemSeq(0);
         this.setDSOReferencePartNo(productAddon.getCatalogueCode());
+        this.setDSODescription(productAddon.getProduct());
         this.setDSOUom(productAddon.getUom());
         this.setDSORate(addonPrice.getSourcePrice());
         this.setDSOQty(productAddon.getQuantity());
         this.setDSOPrice(addonPrice.getSourcePrice() * productAddon.getQuantity());
         this.setPlannerErpCode("NA");
         this.setPlannerUom(productAddon.getCatalogueCode());
+        this.setPlannerDescription(productAddon.getTitle());
         this.setPlannerUom(productAddon.getUom());
         this.setPlannerRate(addonPrice.getSourcePrice());
         this.setPlannerQty(productAddon.getQuantity());
@@ -358,7 +436,9 @@ public class ProposalBOQ extends JsonObject {
         this.setRoom(productInQuote.getRoom());
         this.setCategory("Modular Products");
         this.setProductService(productInQuote.getProduct().getProductCategory());
+        this.setProductId(productInQuote.getProduct().getId());
         this.setMgCode(module.getMGCode());
+        this.setModuleSeq(module.getModuleSequence());
         this.setCustomCheck(module.getCustomCheck());
 //        if (module.getCustomCheck().equals("yes"))
 //        {
@@ -368,9 +448,9 @@ public class ProposalBOQ extends JsonObject {
 //        {
             this.setCustomRemarks("");
  //       }
-        if (boqItem.getCode().startsWith(HINGE_CODE))
+        if (boqItem.getCode().startsWith(HANDLE_CODE))
         {
-            this.setItemCategory(HINGE_CODE);
+            this.setItemCategory(HANDLE_CODE);
         }
         else if (boqItem.getCode().startsWith(KNOB_CODE))
         {
@@ -385,13 +465,17 @@ public class ProposalBOQ extends JsonObject {
             this.setItemCategory("HW");
         }
         this.setDSOErpItemCode(boqItem.getErpCode());
+        this.setDSOItemSeq(boqItem.getBoqDisplayOrder());
+
         this.setDSOReferencePartNo(boqItem.getCatalogueCode());
+        this.setDSODescription(boqItem.getTitle());
         this.setDSOUom(boqItem.getUom());
         this.setDSORate(boqItem.getUnitRate());
         this.setDSOQty(boqItem.getQuantity());
         this.setDSOPrice(boqItem.getUnitRate() * boqItem.getQuantity());
         this.setPlannerErpCode(boqItem.getErpCode());
         this.setPlannerReferencePartNo(boqItem.getCatalogueCode());
+        this.setPlannerDescription(boqItem.getTitle());
         this.setPlannerUom(boqItem.getUom());
         this.setPlannerRate(boqItem.getUnitRate());
         this.setPlannerQty(boqItem.getQuantity());

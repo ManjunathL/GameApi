@@ -23,14 +23,14 @@ public class SOExtractTemplateCreator
     private List<SOPart> proposalBoqs;
     protected ExcelWorkbookManager workbookManager;
     private String outputFile;
-    private String product;
+    private int productId;
     private int proposalId;
 
 
-    public SOExtractTemplateCreator(List<SOPart> proposalBoqs, String product, int proposalId)
+    public SOExtractTemplateCreator(List<SOPart> proposalBoqs, int productId, int proposalId)
     {
         this.proposalBoqs = proposalBoqs;
-        this.product = product;
+        this.productId = productId;
         this.proposalId = proposalId;
     }
 
@@ -41,7 +41,7 @@ public class SOExtractTemplateCreator
 
     public String getOutputFilename()
     {
-        return  product+"/so.xlsx" ;
+        return  productId+"/so.xlsx" ;
     }
 
     public String create()

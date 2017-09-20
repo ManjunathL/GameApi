@@ -17,6 +17,7 @@ public class AccHwComponent
     private String catalogCode;
     private String category;
     private String ERPCode;
+    private int boqDisplayOrder;
 
     public static AccHwComponent fromJson(JsonObject json)
     {
@@ -25,7 +26,7 @@ public class AccHwComponent
                 .setImageUrl(json.getString("imagePath")).setPrice(json.getDouble("price")).setUom(json.getString("uom"))
                 .setCatalogCode(json.getString("catalogCode"))
                 .setCategory(json.getString("category"))
-                .setERPCode(json.getString("ERPCode"));
+                .setERPCode(json.getString("ERPCode")).setBoqDisplayOrder(json.getInteger("boqDisplayOrder"));
     }
 
     public String getMake()
@@ -133,6 +134,15 @@ public class AccHwComponent
         return this;
     }
 
+    public int getBoqDisplayOrder() {
+        return boqDisplayOrder;
+    }
+
+    public AccHwComponent setBoqDisplayOrder(int boqDisplayOrder) {
+        this.boqDisplayOrder = boqDisplayOrder;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "AccHwComponent{" +
@@ -146,6 +156,7 @@ public class AccHwComponent
                 ", uom='" + uom + '\'' +
                 ", category='" + category + '\'' +
                 ", ERPCode='" + ERPCode + '\'' +
+                ", boqDisplayOrder='" + boqDisplayOrder + '\'' +
                 '}';
     }
 }

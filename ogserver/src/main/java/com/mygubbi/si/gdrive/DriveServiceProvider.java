@@ -125,7 +125,8 @@ public class DriveServiceProvider
         }
         catch (IOException e)
         {
-            throw new RuntimeException("Couldn't create drive file for " + filePath, e);
+            LOG.debug("Exception found : " + e.getMessage() + " : " + e.getStackTrace().toString());
+            throw new RuntimeException("Couldn't create drive file for " + filePath, e.getCause());
         }
         return new DriveFile(file);
     }
@@ -168,7 +169,7 @@ public class DriveServiceProvider
         }
         catch (IOException e)
         {
-            throw new RuntimeException("Could not download file " + id + " to " + path, e);
+            throw new RuntimeException("Could not download file " + id + " to " + path, e.getCause());
         }
     }
 
@@ -204,15 +205,20 @@ public class DriveServiceProvider
     {
         LOG.debug("filePath :" + filePath + ":" + email + ":" +fileName + " : " + readOnlyFlag);
         DriveFile driveFile = this.uploadFile(filePath, fileName);
-        if (readOnlyFlag.equalsIgnoreCase("yes"))
-        {
-            this.allowUserToReadFile(driveFile.getId(), email);
-            this.allowUserToReadFile(driveFile.getId(), salesEmail);
-        }
-        else
-        {
-            this.allowUserToEditFile(driveFile.getId(), email);
-            this.allowUserToEditFile(driveFile.getId(), salesEmail);
+        try {
+            Thread.sleep(10*1000);
+            if (readOnlyFlag.equalsIgnoreCase("yes"))
+            {
+                this.allowUserToReadFile(driveFile.getId(), email);
+                this.allowUserToReadFile(driveFile.getId(), salesEmail);
+            }
+            else
+            {
+                this.allowUserToEditFile(driveFile.getId(), email);
+                this.allowUserToEditFile(driveFile.getId(), salesEmail);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
 

@@ -12,6 +12,7 @@ import com.mygubbi.si.gdrive.DriveFile;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -38,7 +39,7 @@ import static org.jooq.lambda.tuple.Tuple.tuple;
 
 public class BOQHandler extends AbstractRouteHandler {
 
-    public static int[] planner_input = {14,15,16,17,18,19};
+    public static int[] planner_input = {15,16,17,18,19,20};
     public static int[] details = {20, 21 ,22, 23, 24, 25};
 
     private List<QueryData> updateQueries = new ArrayList<>();
@@ -107,10 +108,11 @@ public class BOQHandler extends AbstractRouteHandler {
 
                     proposal_boq.setPlannerErpCode(xssfRow.getCell(planner_input[0]).getStringCellValue());
                     proposal_boq.setPlannerReferencePartNo(xssfRow.getCell(planner_input[1]).getStringCellValue());
-                    proposal_boq.setPlannerUom(xssfRow.getCell(planner_input[2]).getStringCellValue());
-                    proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[3]).getStringCellValue()));
-                    proposal_boq.setPlannerQty(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
-                    proposal_boq.setPlannerPrice(/*Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue())*/ 0);
+                    proposal_boq.setPlannerDescription(xssfRow.getCell(planner_input[2]).getStringCellValue());
+                    proposal_boq.setPlannerUom(xssfRow.getCell(planner_input[3]).getStringCellValue());
+                    proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
+                    proposal_boq.setPlannerQty(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
+                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
 
                     proposal_boq.put("proposalId",proposalId);
 
@@ -166,7 +168,7 @@ public class BOQHandler extends AbstractRouteHandler {
         int proposalId = jsonObject.getInteger("proposalId");
         userId = jsonObject.getString("userId");
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.boq.select.products.all",jsonObject));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,  new DeliveryOptions().setSendTimeout(120000),
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag || resultData.rows.size() == 0) {
@@ -267,7 +269,7 @@ public class BOQHandler extends AbstractRouteHandler {
             List<SOPart> soPartsList = new ArrayList<>();
 
             for (ProposalBOQ proposalBOQ : proposalBoqAsPerProduct) {
-                SOPart soPart = new SOPart(proposalBOQ.getPlannerErpItemCode(), proposalBOQ.getPlannerReferencePartNo(), proposalBOQ.getPlannerUom(), "title", proposalBOQ.getPlannerQty());
+                SOPart soPart = new SOPart(proposalBOQ.getPlannerErpItemCode(), proposalBOQ.getPlannerReferencePartNo(), proposalBOQ.getPlannerUom(), proposalBOQ.getPlannerDescription(), proposalBOQ.getPlannerQty());
                 soPartsList.add(soPart);
             }
 
@@ -281,7 +283,7 @@ public class BOQHandler extends AbstractRouteHandler {
                     mergedList.add(p);
                 }
 
-                String outputFile = new SOExtractTemplateCreator(soPartsList, spaceRoomProduct.getProduct(), proposalBoqAsPerProduct.get(0).getProposalId()).create();
+                String outputFile = new SOExtractTemplateCreator(soPartsList, spaceRoomProduct.getProductId(), proposalBoqAsPerProduct.get(0).getProposalId()).create();
                 outputFiles.add(outputFile);
             }
         }
