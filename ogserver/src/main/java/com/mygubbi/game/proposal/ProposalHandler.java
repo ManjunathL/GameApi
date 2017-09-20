@@ -20,6 +20,7 @@ import com.mygubbi.game.proposal.price.RateCardService;
 import com.mygubbi.game.proposal.quote.MergePdfsRequest;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
+import com.mygubbi.game.proposal.sow.SowValidatorService;
 import com.mygubbi.pipeline.MessageDataHolder;
 import com.mygubbi.pipeline.PipelineExecutor;
 import com.mygubbi.pipeline.PipelineResponseHandler;
@@ -180,14 +181,13 @@ public class ProposalHandler extends AbstractRouteHandler
 
     }
     private void publishVersionAfterValidation(RoutingContext context){
-        LOG.info("Hitting  publishVersionAfterValidation");
         JsonObject contextJson = context.getBodyAsJson();
 
         String verFromProposal = String.valueOf(contextJson.getDouble("version"));
         String sowVersion = null ;
         if(verFromProposal.contains("0.")){
             sowVersion = "1.0";
-        }else if(verFromProposal.contains("1.") || verFromProposal.contains("2.")){
+        }else if(verFromProposal.contains("1.")){
             sowVersion = "2.0";
         }else{
             LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);
@@ -197,386 +197,18 @@ public class ProposalHandler extends AbstractRouteHandler
         JsonObject queryParams =  new JsonObject();
         queryParams.put("proposalId", contextJson.getInteger("proposalId"));
         queryParams.put("sowversion", sowVersion);
-        queryParams.put("version",verFromProposal);
+        queryParams.put("version",contextJson.getDouble("version"));
+        queryParams.put("businessDate",contextJson.getString("businessDate"));
 
-        JsonObject response  = new JsonObject();
-        List sowList = new ArrayList();
-        Set spaceRoomListFromSow = new HashSet();
-        Set yesSpaceRoomListFromSow = new HashSet();
-        Set noSpaceRoomListFromSow = new HashSet();
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.sow.select.proposalversion", queryParams));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag) {
-                        sendError(context, "Error in getting proposals.");
-                        LOG.error("Error in getting proposal. " + resultData.errorMessage, resultData.error);
-                    } else {
-                        if (resultData.rows.size() == 0) {
-                            LOG.info("SOW ROWS NOT THERE");
-                            response.put("status","Failure");
-                            response.put("comments", "There is no scope of service/s.   ");
-                            LOG.info("Response is :: "+response);
-                            sendJsonResponse(context, response.toString());
-                        }else{
-                            resultData.rows.forEach(row -> {
-                                sowList.add(row);
-                                if (row.getString("L1S01").isEmpty() || row.getString("L1S01").equals(""))
-                                {
-                                    response.put("status","Failure");
-                                    response.put("comments", "It is mandatory to fill all the first level of services ");
-                                    LOG.info("Response is :: "+response);
-                                    sendJsonResponse(context, response.toString());
-                                }
+        Integer id1 = LocalCache.getInstance().store(queryParams);
 
-                                    if(row.getString("L1S01").equalsIgnoreCase("Yes")) {
-                                        if(isRowContainsMygubbiScope(row)) {
-                                            yesSpaceRoomListFromSow.add(row.getString("spaceType") + COLON_DELIMITER + row.getString("roomcode").toLowerCase());
-                                        }else{
-                                            LOG.info("Yes, but has client or NA as Scope");
-                                        }
-                                    }
-                                if(row.getString("L1S01").equalsIgnoreCase("No"))
-                                    noSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
-                                spaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
-                            });
-
-                            List spaceRoomList = new ArrayList();
-                            spaceRoomList.addAll(spaceRoomListFromSow);
-                            List spaceRoomListWithYes = new ArrayList();
-                            spaceRoomListWithYes.addAll(yesSpaceRoomListFromSow);
-                            List spaceRoomListWithNo = new ArrayList();
-                            spaceRoomListWithNo.addAll(noSpaceRoomListFromSow);
-                            getListOfAddonAndProduct(context, sowList,spaceRoomList,spaceRoomListWithYes,spaceRoomListWithNo, queryParams);
-                        }
-
-                    }
+        VertxInstance.get().eventBus().send(SowValidatorService.VALIDATE_PROPOSAL_SOW, id1,
+                (AsyncResult<Message<Integer>> result) -> {
+                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                    sendJsonResponse(context, response.toString());
                 });
 
-    }
-    private boolean isRowContainsMygubbiScope(JsonObject rowObj){
-        List<String> level2ServiceList = new ArrayList<>();
-        level2ServiceList.add(rowObj.getString("L2S01"));
-        level2ServiceList.add(rowObj.getString("L2S02"));
-        level2ServiceList.add(rowObj.getString("L2S03"));
-        level2ServiceList.add(rowObj.getString("L2S04"));
-        level2ServiceList.add(rowObj.getString("L2S05"));
-        level2ServiceList.add(rowObj.getString("L2S06"));
 
-        if(level2ServiceList.contains(new String("Mygubbi"))){
-            LOG.info("Mygubbi Scope");
-            return true;
-        }
-        LOG.info("Client/NA SCope");
-        return  false;
-
-    }
-
-    private void getListOfAddonAndProduct(RoutingContext routingContext,List sowList,List spaceRoomListFromSow,List yesSpaceRoomListFromSow,List spaceRoomListWithNo,JsonObject params) {
-        JsonObject queryParams =  new JsonObject();
-        Integer proposalId = routingContext.getBodyAsJson().getInteger("proposalId");
-        Double version = routingContext.getBodyAsJson().getDouble("version");
-        queryParams.put("proposalIdForPro", proposalId);
-        queryParams.put("fromVerForProd", version);
-        queryParams.put("proposalIdForAddOn", proposalId);
-        queryParams.put("fromVerForAddOn", version);
-
-        JsonObject response = new JsonObject();
-        List spaceRoomListFromProduct= new ArrayList();
-        List spaceRoomListFromAddon = new ArrayList();
-
-        Integer id = LocalCache.getInstance().store(new QueryData("spaces.select.fromProductAndAddon", queryParams));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
-            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if ((resultData.errorFlag )||(resultData.rows.size() == 0))
-            {
-                sendError(routingContext, "Error in getting Products and Addons.");
-                LOG.error("Error in getting Products and Addons. " + resultData.errorMessage, resultData.error);
-            }
-            else
-            {
-                 resultData.rows.forEach(row ->{
-                     if(row.getString("type").equalsIgnoreCase("Product"))
-                        spaceRoomListFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode").toLowerCase());
-                     else
-                         spaceRoomListFromAddon.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomCode").toLowerCase());
-                    });
-
-                LOG.info("spaceRoomListFromProduct size = "+spaceRoomListFromProduct.size());
-
-                spaceRoomListFromProduct.forEach(item -> LOG.info(item + ","));
-
-                 LOG.info("yesSpaceRoomListFromSow size = "+yesSpaceRoomListFromSow.size());
-                LOG.info("spaceRoomListWithNo size = "+spaceRoomListWithNo.size());
-                 LOG.info("spaceRoomListFromAddon size = "+spaceRoomListFromAddon.size());
-
-                 if((yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0 && spaceRoomListFromProduct.size()    == 0)
-                     && (spaceRoomListWithNo.size() != 0))
-                {
-                    LOG.info("Saving from Different Route");
-                     publishTheProposal(routingContext);
-                 }else {
-
-                     if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListWithNo.size() == 0){
-                         LOG.info("SOW ROWS NOT THERE");
-                         response.put("status","Failure");
-                         response.put("comments", "There is no scope of service/s.");
-                         LOG.info("Response is :: "+response);
-                         sendJsonResponse(routingContext, response.toString());
-                     }
-
-                     List ls0 = compareLists(new ArrayList<>(spaceRoomListFromProduct), new ArrayList<>(spaceRoomListFromSow));
-
-                     LOG.info("spaceRoomListFromProduct is :: " );
-
-
-                     LOG.info("ls0 is :: " );
-                     ls0.forEach(item -> LOG.info(item + ","));
-
-
-
-                     List ls00 = compareLists(new ArrayList<>(spaceRoomListFromAddon), new ArrayList<>(spaceRoomListFromSow));
-
-                     List ls1 = compareLists(new ArrayList<>(yesSpaceRoomListFromSow), new ArrayList<>(spaceRoomListFromAddon));
-                     List ls2 = compareLists(new ArrayList<>(spaceRoomListFromAddon), new ArrayList<>(spaceRoomListFromSow));
-
-                     List list1 = compareLists(new ArrayList<>(spaceRoomListFromProduct),new ArrayList<>(yesSpaceRoomListFromSow));
-                     List list2 = compareLists(list1,new ArrayList<>(spaceRoomListWithNo));
-
-                     if(ls0.size() > 0 ){
-                         LOG.info("LS0 is :: " + ls0.size());
-                         StringBuilder val = new StringBuilder();
-                         ls0.forEach(item -> val.append(item + ","));
-                         response.put("status", "Failure");
-                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
-                         response.put("params", ls0);
-                         LOG.info("Response is :: " + response);
-                         sendJsonResponse(routingContext, response.toString());
-                     }else if(list2.size() > 0){
-                         LOG.info("list2 is :: " + list2.size());
-                         StringBuilder val = new StringBuilder();
-                         list2.forEach(item -> val.append(item + ","));
-                         response.put("status", "Failure");
-                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
-                         response.put("params", list2);
-                         LOG.info("Response is :: " + response);
-                         sendJsonResponse(routingContext, response.toString());
-                     }
-                     else if(ls00.size() > 0 ){
-                         LOG.info("LS00 is :: " + ls00.size());
-                         StringBuilder val = new StringBuilder();
-                         ls00.forEach(item -> val.append(item + ","));
-                         response.put("status", "Failure");
-                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
-                         response.put("params", ls00);
-                         LOG.info("Response is :: " + response);
-                         sendJsonResponse(routingContext, response.toString());
-                     }
-                     else if (ls1.size() == 0) {
-                         LOG.info("Saving From here !!!");
-                         getListOfCustomAddons(routingContext, sowList, params);
-                     } else if (ls1.size() > 0) {
-                         StringBuilder val = new StringBuilder();
-                         ls1.forEach(item -> val.append(item + ","));
-                         response.put("status", "Failure");
-                         response.put("comments", "Add the addon/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
-                         response.put("params", ls1);
-                         LOG.info("Response is :: " + response);
-                         sendJsonResponse(routingContext, response.toString());
-                     } else if (ls2.size() > 0) {
-                         StringBuilder val = new StringBuilder();
-                         ls2.forEach(item -> val.append(item + ","));
-                         response.put("status", "Failure");
-                         response.put("comments", "Add the scope of service/s for the following space type : room - " + val.deleteCharAt(val.lastIndexOf(",")));
-                         response.put("params", ls2);
-                         LOG.info("Response is :: " + response);
-                         sendJsonResponse(routingContext, response.toString());
-                     } else {
-                         getListOfCustomAddons(routingContext,sowList,params);
-
-                     }
-                 }
-            }
-        });
-
-    }
-
-    private void getListOfCustomAddons(RoutingContext routingContext,List
-            <JsonObject>sowList,JsonObject params) {
-        JsonObject queryParams = new JsonObject();
-        queryParams.put("proposalId", routingContext.getBodyAsJson().getInteger("proposalId"));
-        queryParams.put("fromVersion", routingContext.getBodyAsJson().getDouble("version"));
-        List addOnsFromCustomAddons = new ArrayList();
-
-        Integer id = LocalCache.getInstance().store(new QueryData("select.customAddons", queryParams));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id, (AsyncResult<Message<Integer>> selectResult) -> {
-            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if ((resultData.errorFlag)) {
-                sendError(routingContext, "Error in getting custom addon.");
-                LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
-            } else {
-                resultData.rows.forEach(row -> addOnsFromCustomAddons.add(row));
-                getListOfProposalAddons(routingContext, sowList, params,addOnsFromCustomAddons);
-
-            }
-        });
-    }
-    private void getListOfProposalAddons(RoutingContext routingContext,List
-            <JsonObject>sowList,JsonObject params,List<JsonObject> addOnsFromCustomAddons) {
-        JsonObject queryParams =  new JsonObject();
-        queryParams.put("proposalId", routingContext.getBodyAsJson().getInteger("proposalId"));
-        queryParams.put("fromVersion", routingContext.getBodyAsJson().getDouble("version"));
-
-        JsonObject response = new JsonObject();
-        List addOnsFromProductAddonsWithcode = new ArrayList();
-        List addOnFromProduct = new ArrayList();
-        List addOnCodeFromSow = new ArrayList();
-        List addOnCodeFromSowwithNo = new ArrayList();
-        List addOnCodeFromSowwithYes = new ArrayList();
-        Integer id = LocalCache.getInstance().store(new QueryData("select.proposalAddOns", queryParams));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> selectResult) -> {
-            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-            if ((resultData.errorFlag) ) {
-                sendError(routingContext, "Error in getting addon codes.");
-                LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
-            } else
-                {
-                    resultData.rows.forEach(row->addOnsFromProductAddonsWithcode.add(row));
-
-                    resultData.rows.forEach(row->{
-//                        LOG.info("row.getString(\"roomCode\") = "+row.getString("roomCode").toLowerCase());
-                        addOnFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase()
-                            +COLON_DELIMITER+row.getString("L1S01Code"));});
-
-                    addOnsFromCustomAddons.forEach(customAddon ->{
-                        addOnFromProduct.add(customAddon.getString("spaceType")+COLON_DELIMITER+customAddon.getString("roomcode").toLowerCase()
-                                +COLON_DELIMITER+customAddon.getString("L1S01Code"));});
-
-                    sowList.forEach(sow-> {
-                        if((sow.getString("L1S01").equalsIgnoreCase("Yes") && isRowContainsMygubbiScope(sow) )|| sow.getString("L1S01").equalsIgnoreCase("No")) {
-                            addOnCodeFromSow.add(sow.getString("spaceType") + COLON_DELIMITER + sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
-                        }
-                        if(sow.getString("L1S01").equalsIgnoreCase("No"))
-                            addOnCodeFromSowwithNo.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
-
-                        if(sow.getString("L1S01").equalsIgnoreCase("Yes") && isRowContainsMygubbiScope(sow))
-                            addOnCodeFromSowwithYes.add(sow.getString("spaceType")+COLON_DELIMITER+sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
-                    });
-
-                    List<String> l1 = compareLists(new ArrayList<>(addOnCodeFromSow),new ArrayList<>(addOnFromProduct));
-                    List<String> l3 =compareLists(new ArrayList<>(l1),new ArrayList<>(addOnCodeFromSowwithNo));
-                    List<String> l2 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSow));
-                    List<String> l4 = compareLists(new ArrayList<>(addOnFromProduct),new ArrayList<>(addOnCodeFromSowwithYes));
-
-                    //if l2,l4 contains any row that has null as L1S01Code then jusrt remove that line from list...
-                    List l2Dup = new ArrayList();
-                    l2Dup.addAll(l2);
-                    l2.forEach(item ->{
-                        if(getL1S01ValFromString(item).length() == 0){
-                            l2Dup.remove(item);
-                        }
-                    });
-
-                    List l4Dup = new ArrayList();
-                    l4Dup.addAll(l4);
-                    l4.forEach(item ->{
-                        if(getL1S01ValFromString(item).length() == 0){
-                            l4Dup.remove(item);
-                        }
-                    });
-
-                    //check l3 and l2 values and ssend error message.....
-                    if(l3.size() > 0){
-                        //there is sow, no adon for that
-
-                        StringBuilder val = new StringBuilder();
-
-                        response.put("status","Failure");
-                        response.put("comments","Add the addon/s for the following - "+getParamValues(l3));
-                        LOG.info("Response is :: "+response);
-                        sendJsonResponse(routingContext, response.toString());
-
-                    }else if (l2Dup.size() > 0){
-                        LOG.info("L2Dup is :: ");
-                        l2Dup.forEach(item -> LOG.info(item));
-                        StringBuilder val = new StringBuilder();
-                        response.put("status","Failure");
-                        response.put("comments","Add the scope of service/s  for the following - "+getParamValues(l2Dup));
-                        LOG.info("Response is :: "+response);
-                        sendJsonResponse(routingContext, response.toString());
-
-                    }else if(l4Dup.size() > 0){StringBuilder val = new StringBuilder();
-                        response.put("status","Failure");
-                        response.put("comments","Make scope of service/s response as 'yes' for the following - "+getParamValues(l4Dup));
-                        LOG.info("Response is :: "+response);
-                        sendJsonResponse(routingContext, response.toString());
-
-                    }else{
-                        publishTheProposal(routingContext);
-                    }
-                }
-
-        });
-    }
-
-    private String getParamValues(List<String> paramObj){
-
-        String l1s01Code = getL1SO1Value (paramObj);
-        StringBuilder sbSpaceAndRoom = new StringBuilder();
-        paramObj.forEach(item-> {
-            String space_L1Code = item;
-            LOG.info("space_L1Code = "+space_L1Code);
-            String[] spaceAndCode = space_L1Code.split(COLON_DELIMITER);
-
-            LOG.info("space, Room = "+spaceAndCode[0]+", "+spaceAndCode[1]);
-            sbSpaceAndRoom.append(spaceAndCode[0]+COLON_DELIMITER);
-            sbSpaceAndRoom.append(spaceAndCode[1]+",");
-        });
-        return l1s01Code +"in SpaceType_Room "+sbSpaceAndRoom.deleteCharAt(sbSpaceAndRoom.lastIndexOf(","));
-    }
-
-    private String getL1S01ValFromString(String item){
-        String space_L1Code = item;
-        String[] spaceAndCode = space_L1Code.split(COLON_DELIMITER);
-
-        String spaceType = spaceAndCode[0];
-        Collection<SOWMaster> sowMasterList = ModuleDataService.getInstance().getSOWMaster(spaceType);
-        Object[] masterSOWs = (Object[])sowMasterList.toArray();
-//indesx 1 is room code
-        String strL1S01Code = spaceAndCode[2];
-        int noOfRows = masterSOWs.length;
-        for(int i =0 ;i< noOfRows;i++){
-            SOWMaster sow = (SOWMaster) masterSOWs[i];
-
-            if(sow.getL1S01Code().equalsIgnoreCase(strL1S01Code)){
-                return(sow.getL1S01());
-            }
-        }
-        return "";
-    }
-    private String getL1SO1Value(List<String> paramObj){
-        StringBuilder sbServiceName = new StringBuilder();
-        paramObj.forEach(item->{
-            String space_L1Code = item;
-            String[] spaceAndCode = space_L1Code.split(COLON_DELIMITER);
-
-            String spaceType = spaceAndCode[0];
-            Collection<SOWMaster> sowMasterList = ModuleDataService.getInstance().getSOWMaster(spaceType);
-            Object[] masterSOWs = (Object[])sowMasterList.toArray();
-//indesx 1 is room code
-            String strL1S01Code = spaceAndCode[2];
-            int noOfRows = masterSOWs.length;
-            for(int i =0 ;i< noOfRows;i++){
-                SOWMaster sow = (SOWMaster) masterSOWs[i];
-
-                if(sow.getL1S01Code().equalsIgnoreCase(strL1S01Code)){
-                    sbServiceName.append(sow.getL1S01());
-                    sbServiceName.append(", ");
-
-                }
-            }
-        });
-      return  sbServiceName.deleteCharAt(sbServiceName.lastIndexOf(",")).toString();
     }
     private void publishTheProposal(RoutingContext routingContext) {
         JsonObject queryParams = new JsonObject();
@@ -611,11 +243,6 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
 
-    public  static List compareLists(List<String> sourceList, List<String> destinationList){
-
-        sourceList.removeAll( destinationList );
-        return sourceList;
-    }
     private void createPostSalesInitial(RoutingContext routingContext) {
         JsonObject versionData = routingContext.getBodyAsJson();
         LOG.debug("routing context :" + versionData.encodePrettily());
