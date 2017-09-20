@@ -2,10 +2,10 @@
   "version": "0.0.0a",
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/mygubbi",
+    "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/prod_check",
     "max_pool_size": 20,
-    "user": "root",
-    "password": ""
+    "user": "admin",
+    "password": "OG$#gubi32"
   },
   "urlwithssl": "",
 
