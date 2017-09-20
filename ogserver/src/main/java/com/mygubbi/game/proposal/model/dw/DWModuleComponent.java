@@ -934,6 +934,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setDepth(0);
         dwModuleComponent.setPanelArea(0);
         dwModuleComponent.setComponentType("A");
+        dwModuleComponent.setComponentErpcode(accessoryComponent.getComponent().getERPCode());
         dwModuleComponent.setComponentCode(accessoryComponent.getComponent().getCode());
         dwModuleComponent.setComponentUom(accessoryComponent.getComponent().getUom());
         dwModuleComponent.setComponentTitle(accessoryComponent.getComponent().getTitle());
@@ -1051,6 +1052,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setDepth(0);
         dwModuleComponent.setPanelArea(0);
         dwModuleComponent.setComponentType("H");
+        dwModuleComponent.setComponentErpcode(accHwComponent.getERPCode());
         dwModuleComponent.setComponentCode(accHwComponent.getCode());
         dwModuleComponent.setComponentUom(accHwComponent.getUom());
         dwModuleComponent.setComponentTitle(accHwComponent.getTitle());
