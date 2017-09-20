@@ -1,11 +1,13 @@
 package com.mygubbi.game.proposal.price;
 
 import com.mygubbi.common.StringUtils;
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -40,13 +42,15 @@ public class PanelComponent
     private ModulePanel underlyingPanel;
     private String accPackCode;
     private IModuleComponent moduleComponent;
+    private Date priceDate;
+    private String city;
 
     private enum PanelExposed{NONE, SINGLE, DOUBLE};
 
     private final static Logger LOG = LogManager.getLogger(PanelComponent.class);
 
 
-    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode)
+    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode,Date priceDate,String city, String finishOverrideFlag)
     {
         this.setBaseAttributes(modulePanel, component);
         this.setDimensions(priceHolder.getProductModule(), priceHolder.getMgModule(), modulePanel);
@@ -56,6 +60,8 @@ public class PanelComponent
         this.underlyingPanel = modulePanel;
         this.accPackCode = accPackCode;
         this.moduleComponent = component;
+        this.priceDate=priceDate;
+        this.city=city;
     }
 
     private void doIntegrityCheck(ModulePriceHolder priceHolder)
@@ -213,14 +219,13 @@ public class PanelComponent
     public double getMaterialCost()
     {
         if (this.materialRateCard == null) return 0;
-        return this.getArea() * this.materialRateCard.getRateByThickness(this.getThickness());
+        return this.getArea() * this.materialRateCard.getRateByThickness(this.getThickness())/** ((factorRate.getPrice()/100) +1)*/;
     }
 
     public double getFinishCost()
     {
         if (this.finishRateCard == null) return 0;
         return this.getArea() * this.finishRateCard.getRateByThickness(this.getThickness());
-
     }
 
     public double getArea()

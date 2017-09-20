@@ -95,7 +95,7 @@ public class RateCardService extends AbstractVerticle
 				});
 	}
 
-	public RateCard getRateCard(String code, String type, Date priceDate, String city)
+	/*public RateCard getRateCard(String code, String type, Date priceDate, String city)
 	{
 		RateCardMasterKey key = new RateCardMasterKey(code, type,"all");
 		Collection<RateCardMaster> rateCardMaster = this.rateCardMap.get(key);
@@ -104,6 +104,26 @@ public class RateCardService extends AbstractVerticle
             LOG.info("Rate card not found for " + type + ":" + code);
         }
         return new RateCard(code,type,priceDate, city);
+	}*/
+	/*public RateCard getRateCardBasedOnSet(String code, String type, Date priceDate, String city,String setId)
+	{
+		RateCardMasterKey key = new RateCardMasterKey(code, type,"all");
+		Collection<RateCardMaster> rateCardMaster = this.rateCardMap.get(key);
+		if (rateCardMaster == null)
+		{
+			LOG.info("Rate card not found for " + type + ":" + code);
+		}
+		return new RateCard(code,type,priceDate, city,"all",setId);
+	}
+*/
+	public RateCard getRateCardBasedOnProductSet(String code, String type, Date priceDate, String city, String productCategory, String setId){
+		RateCardMasterKey key = new RateCardMasterKey(code, type,"all");
+		Collection<RateCardMaster> rateCardMaster = this.rateCardMap.get(key);
+		if (rateCardMaster == null)
+		{
+			LOG.info("Rate card not found for " + type + ":" + code);
+		}
+		return new RateCard(code,type,priceDate, city,productCategory,setId);
 	}
 
 	public RateCard getRateCardBasedOnProduct(String code, String type, Date priceDate, String city, String productCategory)

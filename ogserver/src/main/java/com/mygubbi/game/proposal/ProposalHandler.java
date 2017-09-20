@@ -374,7 +374,7 @@ public class ProposalHandler extends AbstractRouteHandler
                      }
                      else if (ls1.size() == 0) {
                          LOG.info("Saving From here !!!");
-                         getListOfProposalAddons(routingContext, sowList, params);
+                         getListOfCustomAddons(routingContext, sowList, params);
                      } else if (ls1.size() > 0) {
                          StringBuilder val = new StringBuilder();
                          ls1.forEach(item -> val.append(item + ","));
@@ -392,7 +392,8 @@ public class ProposalHandler extends AbstractRouteHandler
                          LOG.info("Response is :: " + response);
                          sendJsonResponse(routingContext, response.toString());
                      } else {
-                         getListOfProposalAddons(routingContext, sowList, params);
+                         getListOfCustomAddons(routingContext,sowList,params);
+
                      }
                  }
             }
@@ -400,8 +401,28 @@ public class ProposalHandler extends AbstractRouteHandler
 
     }
 
-    private void getListOfProposalAddons(RoutingContext routingContext,List
+    private void getListOfCustomAddons(RoutingContext routingContext,List
             <JsonObject>sowList,JsonObject params) {
+        JsonObject queryParams = new JsonObject();
+        queryParams.put("proposalId", routingContext.getBodyAsJson().getInteger("proposalId"));
+        queryParams.put("fromVersion", routingContext.getBodyAsJson().getDouble("version"));
+        List addOnsFromCustomAddons = new ArrayList();
+
+        Integer id = LocalCache.getInstance().store(new QueryData("select.customAddons", queryParams));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id, (AsyncResult<Message<Integer>> selectResult) -> {
+            QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+            if ((resultData.errorFlag)) {
+                sendError(routingContext, "Error in getting custom addon.");
+                LOG.error("Error in getting addon codes. " + resultData.errorMessage, resultData.error);
+            } else {
+                resultData.rows.forEach(row -> addOnsFromCustomAddons.add(row));
+                getListOfProposalAddons(routingContext, sowList, params,addOnsFromCustomAddons);
+
+            }
+        });
+    }
+    private void getListOfProposalAddons(RoutingContext routingContext,List
+            <JsonObject>sowList,JsonObject params,List<JsonObject> addOnsFromCustomAddons) {
         JsonObject queryParams =  new JsonObject();
         queryParams.put("proposalId", routingContext.getBodyAsJson().getInteger("proposalId"));
         queryParams.put("fromVersion", routingContext.getBodyAsJson().getDouble("version"));
@@ -426,6 +447,11 @@ public class ProposalHandler extends AbstractRouteHandler
 //                        LOG.info("row.getString(\"roomCode\") = "+row.getString("roomCode").toLowerCase());
                         addOnFromProduct.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase()
                             +COLON_DELIMITER+row.getString("L1S01Code"));});
+
+                    addOnsFromCustomAddons.forEach(customAddon ->{
+                        addOnFromProduct.add(customAddon.getString("spaceType")+COLON_DELIMITER+customAddon.getString("roomcode").toLowerCase()
+                                +COLON_DELIMITER+customAddon.getString("L1S01Code"));});
+
                     sowList.forEach(sow-> {
                         if((sow.getString("L1S01").equalsIgnoreCase("Yes") && isRowContainsMygubbiScope(sow) )|| sow.getString("L1S01").equalsIgnoreCase("No")) {
                             addOnCodeFromSow.add(sow.getString("spaceType") + COLON_DELIMITER + sow.getString("roomcode").toLowerCase() + COLON_DELIMITER + sow.getString("L1S01Code"));
@@ -557,6 +583,7 @@ public class ProposalHandler extends AbstractRouteHandler
         queryParams.put("id",routingContext.getBodyAsJson().getInteger("proposalId"));
         queryParams.put("version",routingContext.getBodyAsJson().getDouble("version"));
         queryParams.put("proposalId",routingContext.getBodyAsJson().getInteger("proposalId"));
+        queryParams.put("businessDate",routingContext.getBodyAsJson().getString("businessDate"));
 
         List<QueryData> queryDatas = new ArrayList<>();
         queryDatas.add(new QueryData("version.publish",queryParams));

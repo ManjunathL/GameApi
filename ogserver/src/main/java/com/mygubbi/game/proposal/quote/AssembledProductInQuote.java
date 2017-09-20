@@ -70,7 +70,9 @@ public class AssembledProductInQuote
     {
         return this.product.getTitle();
     }
-
+    public String getHandleTypeSelection() { return this.product.getHandletypeSelection();}
+    public int getNoOfLengths() {return this.product.getNoOfLengths();}
+    public double getLconnectorPrice() {return this.product.getLconnectorPrice();}
     public String getSpaceType()
     {
         return this.product.getSpaceType();
@@ -578,7 +580,8 @@ public class AssembledProductInQuote
     private void addToModuleHandle(Handle handleCode, double quantity)
     {
         LOG.info("handle code " +handleCode +"quantity " +quantity);
-        ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),"Catalogue code","ERP code");
+        //ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),"Catalogue code","ERP code");
+        ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),handleCode.getArticleNo(),handleCode.getErpCode());
         if(!(quantity==0.0))
         {
             this.handleandKnob.add(part);
@@ -587,11 +590,23 @@ public class AssembledProductInQuote
 
     private void addToModuleHinge(HingePack hingeCode, double quantity)
     {
-        LOG.debug("Hinge Pack /; " + hingePack.toString());
-        ModulePart part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),"Catalogue code","ERP code");
-        if(!(quantity==0.0))
+        LOG.debug("Hinge Pack /; " + hingeCode.toString());
+        if (!(hingeCode == null || hingeCode.isEmpty()))
         {
-            this.hingePack.add(part);
+            ModulePart part;
+            if (hingeCode.getHingeCode().equals("DRAWER-HINGE"))
+            {
+               part =new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),"NA","NA");
+            }
+            else
+            {
+                Handle handle=ModuleDataService.getInstance().getHandleTitle(hingeCode.getHingeCode());
+                part=new ModulePart(hingeCode.getHingeCode(), "UOM", quantity, hingeCode.getTYPE(),handle.getArticleNo(),handle.getErpCode());
+            }
+            if(!(quantity==0.0))
+            {
+                this.hingePack.add(part);
+            }
         }
     }
 

@@ -155,7 +155,8 @@ public class Handle {
                 ", sourcePrice=" + sourcePrice +
                 ", msp=" + msp +
                 ", imagePath='" + imagePath + '\'' +
+                ", articleNo='" + articleNo + '\'' +
+                ", erpCode='" + erpCode + '\'' +
                 '}';
     }
-
 }

@@ -45,7 +45,7 @@
       "uri": "/gapi/proposal/version/confirm",
       "source": "db",
       "query":"version.confirm",
-      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "params":["version","fromVersion","businessDate","toVersion", "proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -53,7 +53,7 @@
       "uri": "/gapi/proposal/version/designsignoff",
       "source": "db",
       "query":"version.designsignoff",
-      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "params":["version","fromVersion","businessDate" ,"toVersion", "proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -61,7 +61,7 @@
       "uri": "/gapi/proposal/version/productionsignoff",
       "source": "db",
       "query":"version.productionsignoff",
-      "params":["version","fromVersion", "toVersion", "proposalId"],
+      "params":["version","fromVersion","businessDate","toVersion", "proposalId"],
       "resultfields":[],
       "default": "[]"
     },
@@ -243,7 +243,7 @@
       "uri": "/gapi/proposal/addon.update",
       "source": "db",
       "query":"proposal.addon.update",
-      "params":["code", "categoryCode", "seq","fromVersion", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id","product","profit","margin","sourcePrice","amountWOTax"],
+      "params":["code", "categoryCode", "seq","fromVersion", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy", "id","product","spaceType", "roomcode"],
       "resultfields":[],
       "default": "[]"
     },
@@ -451,7 +451,7 @@
       "uri": "/gapi/finishcodes",
       "source": "db",
       "query":"finish.codes",
-      "params":[],
+      "params":["fromDate","toDate"],
       "resultfields":[],
       "default": "[]"
     },
@@ -460,7 +460,7 @@
       "uri": "/gapi/colorcodes",
       "source": "db",
       "query":"color.codes",
-      "params":["colorGroupCode"],
+      "params":["colorGroupCode","colorGroupCode","fromDate","toDate"],
       "resultfields":[],
       "default": "[]"
     },
@@ -598,7 +598,7 @@
       "uri": "/gapi/workbench/designmaster/update",
       "source": "db",
       "query":"workbench.designmaster.update",
-      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","id"],
+      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceLayout","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","spaceFeature", "furnitureJson","decorJson", "wallTreatmentType", "wallMaterial", "wallFinishMaterial", "wallFinishSwatch", "ceilingType", "ceilingMaterial", "ceilingFinishMaterial", "ceilingFinishSwatch", "flooringMaterial", "flooringFinish", "flooringFinishSwatch", "lighting", "designElement", "user1", "hobby1", "profession1", "user2", "hobby2", "profession2", "ageGroup", "religion", "community", "designerstory","id"],
       "resultfields":[],
       "default": "[]"
     },
@@ -1007,6 +1007,38 @@
       "source": "db",
       "query":"proposal.offer.offername",
       "params":["fromDate","toDate"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/discount/discountAmount",
+      "source": "db",
+      "query":"proposal.discount.discountAmount",
+      "params":["fromDate","toDate"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/versiondiscount",
+      "source": "db",
+      "query":"proposal.versiondiscount",
+      "params":["discountPercentage","businessDate","proposalId","version"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/finish",
+      "source": "db",
+      "query":"proposal.finishType",
+      "params":["fromDate","toDate"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/getfinishmap",
+      "source": "db",
+      "query":"proposal.getnewfinishmap",
+      "params":["oldCode"],
       "resultfields":[],
       "default": "[]"
     }

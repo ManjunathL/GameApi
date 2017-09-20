@@ -3,7 +3,7 @@
 
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://ogdemodb.cyn8wqrk6sdc.ap-southeast-1.rds.amazonaws.com/prod_check",
+    "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/mg_warehouse",
     "max_pool_size": 20,
     "user": "admin",
     "password": "OG$#gubi32"
@@ -21,8 +21,8 @@
 
   "robots.txt": "User-agent: *\nDisallow: /",
 
-  "http_port" : 1443,
-  "https_port" : 1444,
+  "http_port" : 1442,
+  "https_port" : 1443,
   "proposal_docs_folder" : "/mnt/game/proposal/",
   "quote_template" : "/mnt/game/proposal/templates/quote-template.xlsx",
   "templates_folder" : "c:/Users/Public/game_files",

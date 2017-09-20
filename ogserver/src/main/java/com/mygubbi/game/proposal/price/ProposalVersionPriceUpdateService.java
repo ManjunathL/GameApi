@@ -5,13 +5,11 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.AuditMaster;
-import com.mygubbi.game.proposal.model.PriceMaster;
-import com.mygubbi.game.proposal.model.Proposal;
-import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.model.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -108,6 +106,8 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         {
                             double totalProductCost = 0;
                             ProductLineItem productLineItem = new ProductLineItem(record);
+                            OldToNewFinishMapping oldToNewFinishMapping = ModuleDataService.getInstance().getOldToNewMapping(productLineItem.getFinishCode());
+                            productLineItem.setFinishCode(oldToNewFinishMapping.getNewCode());
                             auditMaster.setProposalId(proposalHeader.getId());
                             auditMaster.setPriceDate(priceDate[0]);
                             auditMaster.setVersion(proposalVersion.getVersion());
@@ -115,8 +115,10 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
 
                             for (ProductModule productModule : productLineItem.getModules()) {
+                                productModule.setFinishCode(oldToNewFinishMapping.getNewCode());
+                                productModule.setFinish(oldToNewFinishMapping.getTitle());
                                 ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
-                                        proposalHeader.getPcity(), priceDate[0],productLineItem);
+                                        proposalHeader.getPcity(), priceDate[0],productLineItem,"C");
                                 priceHolder.prepare();
                                 priceHolder.calculateTotalCost();
                                 double totalCost = priceHolder.getTotalCost();

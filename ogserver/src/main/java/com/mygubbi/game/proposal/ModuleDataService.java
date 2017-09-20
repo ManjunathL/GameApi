@@ -15,6 +15,7 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Date;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,6 +44,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, AccessoryPack> accessoryPackMap = Collections.EMPTY_MAP;
     private Map<String, Handle> handleMap = Collections.EMPTY_MAP;
     private Map<String, HingePack> hingePackMap = Collections.EMPTY_MAP;
+    private Map<String, OldToNewFinishMapping> oldnewfinishMap = Collections.EMPTY_MAP;
 
 
 	public static ModuleDataService getInstance()
@@ -71,7 +73,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheHandleData();
         this.cacheHingePackData();
        this.cacheSowMasterData();
-
+       this.cacheOldNewFinishMappingData();
 	}
 
     private void cacheAccessories()
@@ -85,7 +87,29 @@ public class ModuleDataService extends AbstractVerticle
         this.hardwareMap = new HashMap<>();
         this.cacheAccHw("H", this.hardwareMap);
     }
+    private void cacheOldNewFinishMappingData()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("proposal.oldnewfinishmapping", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("oldnew finsh mapping master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.oldnewfinishMap= new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            OldToNewFinishMapping oldToNewFinishMapping = new OldToNewFinishMapping(record);
+                            LOG.info("old new finish mapping " +oldToNewFinishMapping);
+                            this.oldnewfinishMap.put(oldToNewFinishMapping.getOldCode(), oldToNewFinishMapping);
+                        }
+                        markResult("oldnew finsh mapping master done.", true);
+                    }
+                });
 
+    }
     private void cacheModuleComponents()
     {
         this.moduleComponentsMap = ArrayListMultimap.create();
@@ -478,14 +502,19 @@ public class ModuleDataService extends AbstractVerticle
         return this.hingePackMap.get(hingeType);
     }
 
-    public ShutterFinish getFinish(String carcassCode, String finishCode)
+    public ShutterFinish getFinish(String carcassCode, String finishCode,Date priceDate)
     {
         ShutterFinish shutterFinish = this.getFinish(finishCode);
         if (shutterFinish == null) return null;
 
         for (ShutterFinish finish : this.finishCodeMap.values())
         {
-            if (finish.getFinishType().equals(shutterFinish.getFinishType()) && finish.getShutterMaterial().equals(carcassCode))
+            int before = priceDate.compareTo(finish.getFromDate());
+            int after = priceDate.compareTo(finish.getToDate());
+            LOG.info("Boolean value " +(before >= 0 && after <= 0));
+            Boolean value=before >= 0 && after <= 0;
+
+            if (finish.getFinishType().equals(shutterFinish.getFinishCode()) && finish.getShutterMaterial().equals(carcassCode) && value.equals(true) )
             {
                 return finish;
             }
@@ -506,6 +535,11 @@ public class ModuleDataService extends AbstractVerticle
     public AccHwComponent getHardware(String code)
     {
         return this.hardwareMap.get(code);
+    }
+
+    public OldToNewFinishMapping getOldToNewMapping(String code)
+    {
+        return this.oldnewfinishMap.get(code);
     }
 
     public void setMapping(ProductModule module, ProductLineItem  productLineItem)

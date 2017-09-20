@@ -211,48 +211,48 @@
       "id": "version.publish",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'Published', internalStatus = 'Published' where version = ? and proposalId = ?",
-      "params": ["version","proposalId"]
+      "query": "update version_master set status = 'Published', internalStatus = 'Published',businessDate=? where version = ? and proposalId = ?",
+      "params": ["businessDate","version","proposalId"]
     },
 
     {
       "id": "version.confirm",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'Confirmed', internalStatus = 'Confirmed', version = ?, fromVersion = ? where version = ? and proposalId = ?",
-      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+      "query": "update version_master set status = 'Confirmed', internalStatus = 'Confirmed', version = ?, fromVersion = ?,businessDate=? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion","businessDate", "toVersion", "proposalId"]
     },
 
     {
       "id": "version.designsignoff",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'DSO', internalStatus = 'DSO', version = ?, fromVersion = ? where version = ? and proposalId = ?",
-      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+      "query": "update version_master set status = 'DSO', internalStatus = 'DSO', version = ?, fromVersion = ?,businessDate=? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion","businessDate" ,"toVersion", "proposalId"]
     },
 
     {
       "id": "version.productionsignoff",
       "type": "update",
       "table": "proposal",
-      "query": "update version_master set status = 'PSO', internalStatus = 'Locked', version = ?, fromVersion = ? where version = ? and proposalId = ?",
-      "params": ["version", "fromVersion", "toVersion", "proposalId"]
+      "query": "update version_master set status = 'PSO', internalStatus = 'Locked', version = ?, fromVersion = ?,businessDate=? where version = ? and proposalId = ?",
+      "params": ["version", "fromVersion","businessDate", "toVersion", "proposalId"]
     },
 
     {
       "id": "version.createversion",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?)",
-      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,businessDate) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?,?)",
+      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount","businessDate"]
     },
 
     {
       "id": "version.copyversion",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?)",
-      "params": ["version","fromVersion","toVersion", "discountAmount","discountPercentage"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,businessDate) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?,?)",
+      "params": ["version","fromVersion","toVersion", "discountAmount","discountPercentage","businessDate"]
     },
 
     {
@@ -450,8 +450,8 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax, spaceType, roomcode) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?)",
-      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks","profit","margin","sourcePrice","amountWOTax", "spaceType", "roomcode"]
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?)",
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "customAddonCategory","productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks", "spaceType", "roomcode"]
     },
 
     {
@@ -473,8 +473,8 @@
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?,profit = ?,margin = ?,sourcePrice = ?,amountWOTax = ? , productSubtypeCode = ?, remarks =?, spaceType = ?, roomcode = ? where id = ?",
-      "params": ["seq","product","code", "categoryCode", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","profit","margin","sourcePrice","amountWOTax","productSubtypeCode","remarks", "spaceType", "roomcode", "id"]
+      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?,customAddonCategory=?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?, productSubtypeCode = ?, remarks =?, spaceType = ?, roomcode = ? where id = ?",
+      "params": ["seq","product","code", "categoryCode","customAddonCategory", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","productSubtypeCode","remarks", "spaceType", "roomcode", "id"]
     },
 
     {
@@ -499,10 +499,10 @@
       "id": "proposal.product.create",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice, spaceType,productCategoryLocked) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?)",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice, spaceType,productCategoryLocked,colorGroupCode,finishSetId) values (?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?)",
       "params": ["proposalId","fromVersion", "title", "seq","manualSeq","type", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
         "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "shutterDesignCode", "dimension", "quantity", "amount", "quoteFilePath",
-        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","hinge","glass","handleType","handleFinish","knobType","knobFinish","handleImage","knobImage","handleTypeSelection","shutterImage","noOfLengths","handleThickness","handleCode","knobCode","lConnectorPrice", "spaceType","productCategoryLocked"]
+        "modules", "addons", "createdBy", "costWoAccessories","source","hinge","glass","handleType","handleFinish","knobType","knobFinish","handleImage","knobImage","handleTypeSelection","shutterImage","noOfLengths","handleThickness","handleCode","knobCode","lConnectorPrice", "spaceType","productCategoryLocked","colorGroupCode","finishSetId"]
     },
 
     {
@@ -517,7 +517,7 @@
       "id": "proposal.product.createnew",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,spaceType,productCategoryLocked) select proposalId, ?, title, seq, manualSeq,type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,spaceType,productCategoryLocked from proposal_product where proposalId= ? and fromVersion = ? and active = 'A'",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,spaceType,productCategoryLocked,colorGroupCode,finishSetId, fromProduct) select proposalId, ?, title, seq, manualSeq,type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,spaceType,productCategoryLocked,colorGroupCode,finishSetId,fromProduct from proposal_product where proposalId= ? and fromVersion = ? and active = 'A'",
       "params": ["toVersion","proposalId","fromVersion"]
     },
 
@@ -525,7 +525,7 @@
       "id": "proposal.addon.createnew",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax, spaceType, roomcode) select proposalId, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax, spaceType, roomcode from proposal_addon where proposalId= ? and fromVersion = ? ",
+      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode) select proposalId, ?, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode from proposal_addon where proposalId= ? and fromVersion = ? ",
       "params": ["toVersion","proposalId","fromVersion"]
     },
 
@@ -533,7 +533,7 @@
       "id": "proposal.product.createnewfromoldproposal",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,shutterImage,handleTypeSelection,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice, spaceType,productCategoryLocked) select ?,?, title, seq, manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,shutterImage,handleTypeSelection,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,spaceType,productCategoryLocked from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,shutterImage,handleTypeSelection,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice, spaceType,productCategoryLocked,fromProduct,colorGroupCode,finishSetId) select ?,?, title, seq, manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,shutterImage,handleTypeSelection,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,spaceType,productCategoryLocked,fromProduct,colorGroupCode,finishSetId from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
       "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
@@ -541,7 +541,7 @@
       "id": "proposal.product.createnewbeforeproductionspecification",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,shutterImage,handleTypeSelection,handleThickness,handleCode,knobCode,lConnectorPrice, spaceType,productCategoryLocked) select ?,?, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,'Soft Close','Plain','Tunes/CH 713','Chrome Plated (CP)','Tunes/KN 05','Chrome Plated (CP)','https://res.cloudinary.com/mygubbi/image/upload/v1494911663/handle/HANDLE536.jpg','https://res.cloudinary.com/mygubbi/image/upload/v1494911668/handle/KNOB34.jpg','','Normal','160','HANDLE537','KNOB34',lConnectorPrice, spaceType,productCategoryLocked from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleImage,knobImage,shutterImage,handleTypeSelection,handleThickness,handleCode,knobCode,lConnectorPrice, spaceType,productCategoryLocked,colorGroupCode,finishSetId) select ?,?, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy,profit,margin,manufactureAmount,amountWOTax,costWoAccessories,source,'Soft Close','Plain','Tunes/CH 713','Chrome Plated (CP)','Tunes/KN 05','Chrome Plated (CP)','https://res.cloudinary.com/mygubbi/image/upload/v1494911663/handle/HANDLE536.jpg','https://res.cloudinary.com/mygubbi/image/upload/v1494911668/handle/KNOB34.jpg','','Normal','160','HANDLE537','KNOB34',lConnectorPrice, spaceType,productCategoryLocked,colorGroupCode,finishSetId from proposal_product where proposalId = ? and fromVersion = ? and active = 'A'",
       "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
@@ -549,7 +549,7 @@
       "id": "proposal.addon.createnewfromoldproposal",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon  (proposalId,fromVersion, title, seq, code, categoryCode,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity,amount, uom, updatedBy,remarks,profit,margin,sourcePrice,amountWOTax,spaceType, roomcode) select ?, ?, title, seq, code, categoryCode, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks,profit, margin,sourcePrice,amountWOTax, spaceType, roomcode from proposal_addon where proposalId = ? and fromVersion = ?",
+      "query": "insert into proposal_addon  (proposalId,fromVersion, title, seq, code, categoryCode,customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity,amount, uom, updatedBy,remarks,spaceType, roomcode) select ?, ?, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode from proposal_addon where proposalId = ? and fromVersion = ?",
       "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
@@ -565,8 +565,8 @@
       "id": "proposal.product.update",
       "type": "update",
       "table": "proposal_product",
-      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, shutterDesignCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?,source = ?,hinge=?,glass=?,handleType= ? ,handleFinish = ?,knobType = ?,knobFinish = ?,handleImage = ?,knobImage = ?,handleTypeSelection=?,shutterImage=?,noOfLengths=?,handleThickness=?,handleCode=?,knobCode=?,lConnectorPrice=?, spaceType = ?,fromProduct = ? where fromVersion = ? and id = ?",
-      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "shutterDesignCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories","source","hinge","glass","handleType","handleFinish","knobType","knobFinish","handleImage","knobImage","handleTypeSelection","shutterImage","noOfLengths","handleThickness","handleCode","knobCode","lConnectorPrice","spaceType","fromProduct","fromVersion", "id"]
+      "query": "update proposal_product set seq = ?, title = ?, roomCode = ?, productCategoryCode = ?, catalogueId = ?, catalogueName = ?, makeTypeCode = ?, baseCarcassCode = ?, wallCarcassCode = ?, finishTypeCode = ?, finishCode = ?, shutterDesignCode = ?, dimension = ?, quantity = ?, amount = ?, quoteFilePath = ?, modules = ?, addons = ?, updatedBy = ?, costWoAccessories = ?,source = ?,hinge=?,glass=?,handleType= ? ,handleFinish = ?,knobType = ?,knobFinish = ?,handleImage = ?,knobImage = ?,handleTypeSelection=?,shutterImage=?,noOfLengths=?,handleThickness=?,handleCode=?,knobCode=?,lConnectorPrice=?, spaceType = ?,fromProduct = ?,colorGroupCode = ?,finishSetId=? where fromVersion = ? and id = ?",
+      "params": ["seq", "title", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode", "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "shutterDesignCode", "dimension", "quantity", "amount", "quoteFilePath", "modules", "addons", "updatedBy", "costWoAccessories","source","hinge","glass","handleType","handleFinish","knobType","knobFinish","handleImage","knobImage","handleTypeSelection","shutterImage","noOfLengths","handleThickness","handleCode","knobCode","lConnectorPrice","spaceType","fromProduct","colorGroupCode","finishSetId","fromVersion", "id"]
     },
 
     {
@@ -734,7 +734,7 @@
       "id": "proposal.product.specificversion",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomcode from proposal_product where proposalId = ?  and fromVersion = ?",
+      "query": "select distinct spaceType,roomcode from proposal_product where proposalId = ?  and fromVersion = ? and active = 'A'",
       "params": ["proposalId","versiontobeconsidered"],
       "jsonfields":[]
     },
@@ -750,7 +750,7 @@
       "id": "proposal.product.select.between.bcanddso",
       "type": "select",
       "table": "proposal_product",
-      "query": "select select distinct proposalId,spaceType,roomcode,title,type,amount,makeTypeCode,baseCarcassCode,wallCarcassCode,finishCode,finishtypeCode,productCategoryCode,modules from proposal_product where proposalId = 2686  and fromVersion like '1.%' and fromVersion != '1.0'",
+      "query": "select distinct proposalId,spaceType,roomcode,title,type,amount,makeTypeCode,baseCarcassCode,wallCarcassCode,finishCode,finishtypeCode,productCategoryCode,modules from proposal_product where proposalId = 2686  and fromVersion like '1.%' and fromVersion != '1.0'",
       "params": ["proposalId","fromVersion"],
       "jsonfields":["modules"]
     },
@@ -835,7 +835,7 @@
       "id": "ratecard.distinct.select.all",
       "type": "select",
       "table": "ratecard_master",
-      "query": "select distinct rateCardId, code,type,productCategory from ratecard_master",
+      "query": "select distinct rateCardId, code,type,productCategory,setId from ratecard_master",
       "params": []
     },
 
@@ -888,7 +888,7 @@
       "id": "finish.master.all",
       "type": "select",
       "table": "finish_master",
-      "query": "select costCode, finishCode, finishType, finishMaterial, design, shutterMaterial, colorGroupCode, cuttingOffset, title, edgeBinding, doubleExposedCostCode from finish_master",
+      "query": "select costCode, finishCode, finishType, finishMaterial, design, shutterMaterial, colorGroupCode, cuttingOffset, title, edgeBinding, doubleExposedCostCode,fromDate,toDate,setCode from finish_master",
       "params": []
     },
 
@@ -957,16 +957,16 @@
       "id": "finish.codes",
       "type": "select",
       "table": "finish_master",
-      "query": "select finishMaterial, finishCode, colorGroupCode, title from finish_master",
-      "params": []
+      "query": "select finishMaterial, finishCode,colorGroupCode,title,setCode from finish_master where fromDate <= ? and toDate >=? order by sequence",
+      "params": ["fromDate","toDate"]
     },
 
     {
       "id": "color.codes",
       "type": "select",
       "table": "color_master",
-      "query": "select code as code, code as name, imagePath from color_master where colorGroupCode = ? or 'ALL' = ? order by code",
-      "params": ["colorGroupCode", "colorGroupCode"]
+      "query": "select code as code, code as name, imagePath from color_master where (colorGroupCode = ? or 'ALL' = ?) and  fromDate <= ? and toDate >=? order by code",
+      "params": ["colorGroupCode", "colorGroupCode","fromDate","toDate"]
     },
 
     {
@@ -1103,9 +1103,9 @@
       "id": "workbench.designmaster.update",
       "type": "update",
       "table": "design_master",
-      "query": "update design_master set spaceName = ?, webDisplayName = ?, dFileLocation = ?, primaryImageLocation = ? , secondaryImageLocationJson = ? where id = ? ",
-      "params": ["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","id"],
-      "jsonfields":["secondaryImageLocationJson"]
+      "query": "update design_master set spaceName = ?, webDisplayName = ?, dFileLocation = ?, primaryImageLocation = ? , secondaryImageLocationJson = ? , l0Location = ?, moodBoardLocation = ? ,conceptNote = ? ,spaceType = ? ,spaceLayout = ? ,spaceSize = ? ,propertyType = ? ,spaceDesignStyle = ? ,spaceColorStyle = ? ,spaceFeature = ? ,furnitureJson = ? ,decorJson = ? , wallTreatmentType = ? , wallMaterial = ? , wallFinishMaterial = ?, wallFinishSwatch = ? , ceilingType = ?, ceilingMaterial = ?, ceilingFinishMaterial = ?, ceilingFinishSwatch = ?, flooringMaterial = ?,flooringFinish = ?, flooringFinishSwatch = ?, lighting = ?, designElement = ?, user1 = ?, hobby1 = ?, profession1 = ?, user2 = ?, hobby2 = ?, profession2 = ?, ageGroup = ?, religion = ?, community = ?, designerstory = ?  where id = ? ",
+      "params":["spaceName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","l0Location","moodBoardLocation","conceptNote","spaceType","spaceLayout","spaceSize","propertyType","spaceDesignStyle","spaceColorStyle","spaceFeature", "furnitureJson","decorJson", "wallTreatmentType", "wallMaterial", "wallFinishMaterial", "wallFinishSwatch", "ceilingType", "ceilingMaterial", "ceilingFinishMaterial", "ceilingFinishSwatch", "flooringMaterial", "flooringFinish", "flooringFinishSwatch", "lighting", "designElement", "user1", "hobby1", "profession1", "user2", "hobby2", "profession2", "ageGroup", "religion", "community", "designerstory","id"],
+      "jsonfields":["secondaryImageLocationJson", "conceptNote","spaceLayout","spaceFeature", "furnitureJson","decorJson", "wallTreatmentType", "wallMaterial", "wallFinishMaterial", "wallFinishSwatch", "ceilingType", "ceilingMaterial", "ceilingFinishMaterial", "ceilingFinishSwatch", "flooringMaterial", "flooringFinish", "flooringFinishSwatch"]
     },
     {
       "id": "workbench.designmaster.select",
@@ -1129,6 +1129,14 @@
       "query": "insert into product_master (productName, webDisplayName, dFileLocation, primaryImageLocation, secondaryImageLocationJson, category, subcategory, usp, designAttribute, spaceJSon, productStyle, otherDesignStyle, productColor, productCompatibilityColor, furnitureComponentMaterialJson, designerDetailsJson, sourcingScale, designerstory) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ",
       "params": ["productName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale","designerstory"],
       "jsonfields":["secondaryImageLocationJson", "spaceJSon","furnitureComponentMaterialJson","designerDetailsJson"]
+    },
+    {
+      "id": "workbench.productmaster.update",
+      "type": "update",
+      "table": "product_master",
+      "query": "update product_master set productName = ?, webDisplayName = ?, dFileLocation = ?, primaryImageLocation = ? , secondaryImageLocationJson = ?, category = ? , subcategory = ? , usp = ? , designAttribute = ? , spaceJSon = ? , productStyle = ? , otherDesignStyle = ? , productColor = ? , productCompatibilityColor = ? , furnitureComponentMaterialJson = ? , designerDetailsJson = ? , sourcingScale = ? , designerstory = ? where id = ? ",
+      "params": ["productName","webDisplayName","dFileLocation","primaryImageLocation","secondaryImageLocationJson","category","subcategory","usp","designAttribute","spaceJSon","productStyle","otherDesignStyle","productColor","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson","sourcingScale","designerstory","id"],
+      "jsonfields":["secondaryImageLocationJson", "spaceJSon","otherDesignStyle","productCompatibilityColor","furnitureComponentMaterialJson","designerDetailsJson"]
     },
 
     {
@@ -1332,19 +1340,19 @@
       "id": "proposal.product.insertproductlibray",
       "type": "insert",
       "table": "product_library",
-      "query": "insert into product_library ( title, seq,manualSeq, type,spaceType, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source,subCategory,productDescription,collection,variantDescription,imageurl,productTitle,hinge,glass,handleType,handleFinish,handleImage,knobType,knobFinish,knobImage,size, productLocation,handleTypeSelection,shutterDesign,shutterImageUrl,handleThickness,handleCode,knobCode,lConnectorPrice,noOfLengths,designer) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?,?,?,?,?,?,?,?,?, ?)",
+      "query": "insert into product_library ( title, seq,manualSeq, type,spaceType, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,source,subCategory,productDescription,collection,variantDescription,imageurl,productTitle,hinge,glass,handleType,handleFinish,handleImage,knobType,knobFinish,knobImage,size, productLocation,handleTypeSelection,shutterDesign,shutterImageUrl,handleThickness,handleCode,knobCode,lConnectorPrice,noOfLengths,designer,colorGroupCode) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?,?,?,?,?,?,?,?,?, ?,?)",
       "params": ["title", "seq","manualSeq","type", "spaceType","roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
         "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "shutterDesignCode", "dimension", "quantity", "amount", "quoteFilePath",
-        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle","hinge","glass","handleType","handleFinish","handleImage","knobType","knobFinish","knobImage","size", "productLocation","handleTypeSelection","shutterDesign","shutterImageUrl","handleThickness","handleCode","knobCode","lConnectorPrice","noOfLengths", "designer"]
+        "modules", "addons", "createdBy", "costWoAccessories","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle","hinge","glass","handleType","handleFinish","handleImage","knobType","knobFinish","knobImage","size", "productLocation","handleTypeSelection","shutterDesign","shutterImageUrl","handleThickness","handleCode","knobCode","lConnectorPrice","noOfLengths", "designer","colorGroupCode"]
     },
     {
       "id": "proposal.product.updateproductlibray",
       "type": "update",
       "table": "product_library",
-      "query": "update product_library set title=?, seq=?,manualSeq=?, type=?, spaceType= ? , roomCode=?, productCategoryCode=?, catalogueId=?, catalogueName=?, makeTypeCode=?, baseCarcassCode=?, wallCarcassCode=?, finishTypeCode=?, finishCode=?, shutterDesignCode=?, dimension=?, quantity=?, amount=?, quoteFilePath=?, modules=?, addons=?, createdBy=?, costWoAccessories=?,profit=?,margin=?,amountWoTax=?,manufactureAmount=?,source=?,subCategory=?,productDescription=?,collection=?,variantDescription=?,imageurl=?,productTitle=?,hinge=?,glass=?,handleType=?,handleFinish=?,handleImage=?,knobType=?,knobFinish=?,knobImage=?, size=?,productLocation=?,handleTypeSelection=?,shutterDesign=?,shutterImageUrl=?,handleThickness=?,handleCode=?,knobCode=?,lConnectorPrice=?,noOfLengths=?,designer=?",
+      "query": "update product_library set title=?, seq=?,manualSeq=?, type=?, spaceType= ? , roomCode=?, productCategoryCode=?, catalogueId=?, catalogueName=?, makeTypeCode=?, baseCarcassCode=?, wallCarcassCode=?, finishTypeCode=?, finishCode=?, shutterDesignCode=?, dimension=?, quantity=?, amount=?, quoteFilePath=?, modules=?, addons=?, createdBy=?, costWoAccessories=?,source=?,subCategory=?,productDescription=?,collection=?,variantDescription=?,imageurl=?,productTitle=?,hinge=?,glass=?,handleType=?,handleFinish=?,handleImage=?,knobType=?,knobFinish=?,knobImage=?, size=?,productLocation=?,handleTypeSelection=?,shutterDesign=?,shutterImageUrl=?,handleThickness=?,handleCode=?,knobCode=?,lConnectorPrice=?,noOfLengths=?,designer=?,colorGroupCode=?",
       "params": ["title", "seq","manualSeq","type", "spaceType", "roomCode", "productCategoryCode", "catalogueId", "catalogueName", "makeTypeCode",
         "baseCarcassCode", "wallCarcassCode", "finishTypeCode", "finishCode", "shutterDesignCode", "dimension", "quantity", "amount", "quoteFilePath",
-        "modules", "addons", "createdBy", "costWoAccessories","profit","margin","amountWoTax","manufactureAmount","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle","proposalId","hinge","glass","handleType","handleFinish","handleImage","knobType","knobFinish","knobImage","size", "productLocation","handleTypeSelection","shutterDesign","shutterImageUrl","handleThickness","handleCode","knobCode","lConnectorPrice","noOfLengths","designer"]
+        "modules", "addons", "createdBy", "costWoAccessories","source","subCategory","productDescription","collection","variantDescription","imageurl","productTitle","proposalId","hinge","glass","handleType","handleFinish","handleImage","knobType","knobFinish","knobImage","size", "productLocation","handleTypeSelection","shutterDesign","shutterImageUrl","handleThickness","handleCode","knobCode","lConnectorPrice","noOfLengths","designer","colorGroupCode"]
     },
     {
       "id": "proposal.searchproductlibray",
@@ -1366,7 +1374,7 @@
       "id": "proposal.product.addtoproposalproduct",
       "type": "insert",
       "table": "proposal_product",
-      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,noOfLengths,productCategoryLocked) select ?,?, title,?,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,profit,margin,amountWoTax,manufactureAmount,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,noOfLengths,designer from product_library where id=?",
+      "query": "insert into proposal_product (proposalId,fromVersion, title, seq,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,noOfLengths,productCategoryLocked,colorGroupCode) select ?,?, title,?,manualSeq, type, roomCode, productCategoryCode, catalogueId, catalogueName, makeTypeCode, baseCarcassCode, wallCarcassCode, finishTypeCode, finishCode, shutterDesignCode, dimension, quantity, amount, quoteFilePath, modules, addons, createdBy, costWoAccessories,source,hinge,glass,handleType,handleFinish,knobType,knobFinish,handleTypeSelection,shutterImage,noOfLengths,handleThickness,handleCode,knobCode,lConnectorPrice,noOfLengths,designer,colorGroupCode from product_library where id=?",
       "params": ["proposalId","fromVersion","seq","id"]
     },
     {
@@ -1681,7 +1689,7 @@
       "id": "spaces.select.fromProductAndAddon",
       "type": "select",
       "table": "proposal_product",
-      "query": "select distinct spaceType,roomCode,'product' as type from proposal_product where proposalId = ? and fromVersion = ? union select distinct spaceType,roomcode,'addon' as type from proposal_addon where proposalId = ? and fromVersion = ? ",
+      "query": "select distinct spaceType,roomCode,'product' as type from proposal_product where proposalId = ? and fromVersion = ? and active='A' union select distinct spaceType,roomcode,'addon' as type from proposal_addon where proposalId = ? and fromVersion = ? ",
       "params": ["proposalIdForPro","fromVerForProd","proposalIdForAddOn","fromVerForAddOn"],
       "jsonfields":[]
     },
@@ -1734,6 +1742,14 @@
       "table": "proposal_addon",
       "query": "select addon.spaceType,addon.roomCode as roomcode, mp.L1S01Code as L1S01Code ,addon.code as code from (select * from proposal_addon   where proposalId = ?  and fromVersion = ? and categoryCode in ('Appliances','Counter Top','Services'))addon left outer join sow_service_map mp on mp.addOnCode = addon.code and mp.spaceType = addon.spaceType",
       "params": ["proposalId","fromVersion"],
+      "jsonfields":[]
+    },
+    {
+      "id":"select.customAddons",
+      "type":"select",
+      "table":"proposal_addon",
+      "query":"select addon.spaceType,addon.roomCode as roomcode, sow.L1S01Code as L1S01Code ,addon.customAddonCategory from (select * from proposal_addon   where proposalId = ?  and fromVersion =? and categoryCode in ('Custom Addon'))addon left outer join categorySpaceMap custom on custom.category = addon.customAddonCategory and custom.spaceType = addon.spaceType inner join sow_master sow on sow.spaceType = custom.spaceType and sow.L1S01 = custom.category",
+      "params":["proposalId","fromVersion"],
       "jsonfields":[]
     },{
       "id": "select.proposalAddOns.sow",
@@ -1892,6 +1908,41 @@
       "table": "OfferMaster",
       "query": "select * from OfferMaster where fromDate <= ? and toDate >= ?",
       "params": ["fromDate","toDate"]
+    },
+    {
+      "id": "proposal.discount.discountAmount",
+      "type": "select",
+      "table": "price_master",
+      "query": "select * from price_master where rateId='F:DP' and fromDate <= ? and toDate >= ?",
+      "params": ["fromDate","toDate"]
+    },
+    {
+      "id": "proposal.versiondiscount",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set discountPercentage = ?,businessDate=? where proposalId=? and version= ? ",
+      "params": ["discountPercentage","businessDate","proposalId","version"]
+    },
+    {
+      "id": "proposal.finishType",
+      "type": "select",
+      "table": "finish_master",
+      "query": "select distinct(finishMaterial) from finish_master where fromDate <= ? and toDate >= ? order by sequence",
+      "params": ["fromDate","toDate"]
+    },
+    {
+      "id": "proposal.oldnewfinishmapping",
+      "type": "select",
+      "table": "oldnew_finishmap",
+      "query": "select newCode,oldCode,flag,title from oldnew_finishmap",
+      "params": []
+    },
+    {
+      "id": "proposal.getnewfinishmap",
+      "type": "select",
+      "table": "oldnew_finishmap",
+      "query": "select * from oldnew_finishmap where oldCode = ?",
+      "params": ["oldCode"]
     }
   ]
 }

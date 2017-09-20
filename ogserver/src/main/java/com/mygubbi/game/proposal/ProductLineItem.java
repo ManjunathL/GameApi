@@ -67,7 +67,7 @@ public class ProductLineItem extends JsonObject
 
 
     public static final String BASE_UNIT_TYPE = "Base unit";
-
+    public static final String LCONNECTOR_PRICE="lConnectorPrice";
     public ProductLineItem()
     {
 
@@ -238,9 +238,18 @@ public class ProductLineItem extends JsonObject
     public double getCostWoAcc() {
         return this.getDouble(COST_WO_ACC);
     }
+    public double getLconnectorPrice()
+    {
+        return this.getDouble(LCONNECTOR_PRICE);
+    }
 
     public ProductLineItem setAmount(double amount) {
         this.put(AMOUNT, amount);
+        return this;
+    }
+    public ProductLineItem setFinishCode(String finishCode)
+    {
+        this.put(FINISH_CODE,finishCode);
         return this;
     }
 

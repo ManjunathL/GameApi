@@ -37,6 +37,7 @@ public class ProductModule extends JsonObject
     private static final String IMAGE_PATH = "imagePath";
 
     private static final String CARCASS_CODE = "carcassCode";
+    private static final String FINISH="finish";
     private static final String FINISH_CODE = "finishCode";
     private static final String FINISH_TYPE = "finishTypeCode";
     private static final String COLOR_CODE = "colorCode";
@@ -83,7 +84,7 @@ public class ProductModule extends JsonObject
     private static final String CUSTOM_CHECK = "customCheck";
     private static final String HANDLE_OVERRIDE_FLAG = "handleOverrideFlag";
     private static final String HANDLE_THICKNESS = "handleThickness";
-
+    private static final String FINISH_SET_ID="finishSetId";
 
     public ProductModule()
     {
@@ -111,6 +112,7 @@ public class ProductModule extends JsonObject
         }
     }
 
+    public String getFinishSetId() {return  this.getString(FINISH_SET_ID);}
     public int getModuleSequence() {
         return this.getInteger(MODULE_SEQUENCE);
     }
@@ -133,6 +135,11 @@ public class ProductModule extends JsonObject
     public String getFinishCode()
     {
         return this.getString(FINISH_CODE);
+    }
+
+    public String getFinish()
+    {
+        return this.getString(FINISH);
     }
 
     public String getShutterDesignCode()
@@ -372,6 +379,11 @@ public class ProductModule extends JsonObject
         return this;
 
     }
+    public ProductModule setFinish(String finish)
+    {
+        this.put(FINISH,finish);
+        return  this;
+    }
     public ProductModule setHandleOverrideFlag(String handleOverrideFlag)
     {
         this.put(HANDLE_OVERRIDE_FLAG,handleOverrideFlag);
@@ -415,7 +427,11 @@ public class ProductModule extends JsonObject
         this.put(UNIT, unit);
         return this;
     }
-
+    public ProductModule setFinishSetID(String finishSetID)
+    {
+        this.put(FINISH_SET_ID,finishSetID);
+        return this;
+    }
     public ProductModule setExternalCode(String code)
     {
         this.put(EXTCODE, code);
