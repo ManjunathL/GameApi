@@ -43,9 +43,7 @@ public class BOQHandler extends AbstractRouteHandler {
     public static int[] details = {20, 21 ,22, 23, 24, 25};
 
     private List<QueryData> updateQueries = new ArrayList<>();
-    List<ProposalBOQ> proposal_boqs_products = new ArrayList<>();
-    List<ProposalBOQ> proposal_boqs_addons = new ArrayList<>();
-    List<ProposalBOQ> proposal_boqs_services = new ArrayList<>();
+
 
 
     private String userId = null;
@@ -180,6 +178,10 @@ public class BOQHandler extends AbstractRouteHandler {
                         sendError(routingContext, res.toString());
                         return;
                     } else {
+                        List<ProposalBOQ> proposal_boqs_products = new ArrayList<>();
+                        List<ProposalBOQ> proposal_boqs_addons = new ArrayList<>();
+                        List<ProposalBOQ> proposal_boqs_services = new ArrayList<>();
+
                         List<JsonObject> jsonObjects = resultData.rows;
                         for (JsonObject jsonObject1 : jsonObjects)
                         {
@@ -199,6 +201,10 @@ public class BOQHandler extends AbstractRouteHandler {
 
                         }
 
+                       /* LOG.debug("Modular products size :" + proposal_boqs_products.size());
+                        LOG.debug("Services size :" + proposal_boqs_services.size());
+                        LOG.debug("Addons size :" + proposal_boqs_addons.size());*/
+
                         generateSo(routingContext, proposal_boqs_products,proposal_boqs_addons,proposal_boqs_services);
 
                     }
@@ -212,9 +218,10 @@ public class BOQHandler extends AbstractRouteHandler {
 
         if (!(boqProductObjects.size() == 0))
         {
+//            LOG.debug("generateSo:" + boqProductObjects.size());
             outputFiles = generateSoForProduct(boqProductObjects);
         }
-        LOG.debug("Output files size :" + outputFiles.size());
+//        LOG.debug("Output files size :" + outputFiles.size());
 /*
         if (!(boqAddonObjects.size() == 0))
         {
@@ -241,7 +248,7 @@ public class BOQHandler extends AbstractRouteHandler {
         res.put("driveWebViewLink", driveFile.getWebViewLink());
         res.put("id", driveFile.getId());
         res.put("boqStatus","Yes");
-        res.put("proposalId", proposal_boqs_products.get(0).getProposalId());
+        res.put("proposalId", boqProductObjects.get(0).getProposalId());
         LOG.info(res.toString());
 
         updateProposalHeader(routingContext,res);
@@ -259,13 +266,18 @@ public class BOQHandler extends AbstractRouteHandler {
     }*/
 
     private List<String> generateSoForProduct(List<ProposalBOQ> boqProductObjects) {
+
+//        LOG.debug("generateSoForProduct:" + boqProductObjects.size());
         Map<SpaceRoomProduct,List<ProposalBOQ>> spaceRoomProducts = getDistinctSpaceRoomProducts(boqProductObjects);
+
+//        LOG.debug("Distinct space room product :" + spaceRoomProducts.size());
 
         List<String> outputFiles = new ArrayList<>();
 
         for (SpaceRoomProduct spaceRoomProduct : spaceRoomProducts.keySet()) {
 
             List<ProposalBOQ> proposalBoqAsPerProduct = spaceRoomProducts.get(spaceRoomProduct);
+//            LOG.debug("Proposal BOQ as per product size : " + proposalBoqAsPerProduct.size() + " :" + proposalBoqAsPerProduct.get(0).getProductId());
             List<SOPart> soPartsList = new ArrayList<>();
 
             for (ProposalBOQ proposalBOQ : proposalBoqAsPerProduct) {
@@ -273,27 +285,35 @@ public class BOQHandler extends AbstractRouteHandler {
                 soPartsList.add(soPart);
             }
 
-            List<SOPart> mergedList = new ArrayList<>();
 
-            for (SOPart p : soPartsList) {
-                int index = mergedList.indexOf(p);
-                if (index != -1) {
-                    mergedList.set(index, mergedList.get(index).merge(p));
-                } else {
-                    mergedList.add(p);
+            Map<String,SOPart> soPartMap = new HashMap<>();
+
+            for (SOPart soPart : soPartsList) {
+
+                if (soPartMap.containsKey(soPart.getErpCode()))
+                {
+                    SOPart soPart1 = soPartMap.get(soPart.getErpCode());
+                    double qty = soPart1.getQty() + soPart.getQty();
+                    soPart.setQty(qty);
+                    soPartMap.put(soPart.getErpCode(),soPart);
+                }
+                else {
+                    soPartMap.put(soPart.getErpCode(),soPart);
                 }
 
-                String outputFile = new SOExtractTemplateCreator(soPartsList, spaceRoomProduct.getProductId(), proposalBoqAsPerProduct.get(0).getProposalId()).create();
-                outputFiles.add(outputFile);
             }
+
+
+
+            String outputFile = new SOExtractTemplateCreator(soPartsList, spaceRoomProduct.getProductId(), proposalBoqAsPerProduct.get(0).getProposalId()).create();
+            outputFiles.add(outputFile);
         }
         return outputFiles;
     }
 
-
     private void updateProposalHeader(RoutingContext routingContext, JsonObject res) {
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.header.boqupdate", res));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id, new DeliveryOptions().setSendTimeout(120000),
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)

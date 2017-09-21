@@ -299,7 +299,9 @@ public class BoqCreatorService extends AbstractVerticle {
 
 //                        LOG.debug("Count of adding hardware :" + count);
                             ProposalBOQ proposalBOQ = new ProposalBOQ(productInQuote, proposalHeader, product, module, quantity, accHwComponent, addonRate);
-                            boqDataList.queryDataListProduct.add(proposalBOQ);
+                            ProposalBOQ proposalBoqAggregated = checkForDuplicateItemsInModule(boqDataList,proposalBOQ);
+                            if (proposalBoqAggregated != null) boqDataList.queryDataListProduct.add(proposalBoqAggregated);
+                            else boqDataList.queryDataListProduct.add(proposalBOQ);
                     }
 
                 }
@@ -317,7 +319,12 @@ public class BoqCreatorService extends AbstractVerticle {
             if (boqItem.getQuantity() != 0 && boqItem.getUnitRate() != 0)
             {
                 proposal_boq = new ProposalBOQ(proposalHeader,productInQuote,module,boqItem);
-                if (proposal_boq.getDsoPrice() !=0 ) boqDataList.queryDataListProduct.add(proposal_boq);
+                if (proposal_boq.getDsoPrice() !=0 )
+                {
+                    ProposalBOQ proposalBoqAggregated = checkForDuplicateItemsInModule(boqDataList,proposal_boq);
+                    if (proposalBoqAggregated != null) boqDataList.queryDataListProduct.add(proposalBoqAggregated);
+                    else boqDataList.queryDataListProduct.add(proposal_boq);
+                }
             }
         }
     }
@@ -329,7 +336,7 @@ public class BoqCreatorService extends AbstractVerticle {
         double quantity = 0;
 
         for (ModuleAccessoryPack modAccessoryPack : module.getAccessoryPacks()) {
-            LOG.debug("Module : " + module.getMGCode() + " :" +  module.getAccessoryPacks().size());
+//            LOG.debug("Module : " + module.getMGCode() + " :" +  module.getAccessoryPacks().size());
             Collection<AccessoryPackComponent> accessoryPackComponents =
                     ModuleDataService.getInstance().getAccessoryPackComponents(modAccessoryPack.getAccessoryPackCode());
             if (accessoryPackComponents == null) continue;
@@ -350,7 +357,12 @@ public class BoqCreatorService extends AbstractVerticle {
                     if (accHwComponent == null) continue;
                     if (quantity != 0 && compRate.getSourcePrice() !=0) {
                         proposal_boq = new ProposalBOQ(productInQuote, module, proposalHeader, quantity, compRate, accHwComponent);
-                        if (proposal_boq.getDsoPrice() !=0 ) boqDataList.queryDataListProduct.add(proposal_boq);
+                        if (proposal_boq.getDsoPrice() !=0 )
+                        {
+                            ProposalBOQ proposalBoqAggregated = checkForDuplicateItemsInModule(boqDataList,proposal_boq);
+                            if (proposalBoqAggregated != null) boqDataList.queryDataListProduct.add(proposalBoqAggregated);
+                            else boqDataList.queryDataListProduct.add(proposal_boq);
+                        }
                     }
                 } else if (accessoryPackComponent.isHardware()) {
 //                    LOG.debug("Is hardware");
@@ -358,7 +370,12 @@ public class BoqCreatorService extends AbstractVerticle {
                     if (accHwComponent == null) continue;
                     if (quantity != 0 && compRate.getSourcePrice() != 0) {
                         proposal_boq = new ProposalBOQ(productInQuote, module, proposalHeader, quantity, compRate, accHwComponent);
-                        if (proposal_boq.getDsoPrice() !=0 ) boqDataList.queryDataListProduct.add(proposal_boq);
+                        if (proposal_boq.getDsoPrice() !=0 )
+                        {
+                            ProposalBOQ proposalBoqAggregated = checkForDuplicateItemsInModule(boqDataList,proposal_boq);
+                            if (proposalBoqAggregated != null) boqDataList.queryDataListProduct.add(proposalBoqAggregated);
+                            else boqDataList.queryDataListProduct.add(proposal_boq);
+                        }
                     }
                 }
             }
@@ -372,7 +389,12 @@ public class BoqCreatorService extends AbstractVerticle {
 //                        LOG.debug("Acc hw comp :" + accHwComponent);
                         if (accHwComponent == null) continue;
                             proposal_boq = new ProposalBOQ(productInQuote, module, proposalHeader, quantity, compRate, accHwComponent);
-                        if (compRate.getSourcePrice() != 0 ) boqDataList.queryDataListProduct.add(proposal_boq);
+                        if (compRate.getSourcePrice() != 0 )
+                        {
+                            ProposalBOQ proposalBoqAggregated = checkForDuplicateItemsInModule(boqDataList,proposal_boq);
+                            if (proposalBoqAggregated != null) boqDataList.queryDataListProduct.add(proposalBoqAggregated);
+                            else boqDataList.queryDataListProduct.add(proposal_boq);
+                        }
                     }
         }
 
@@ -383,30 +405,44 @@ public class BoqCreatorService extends AbstractVerticle {
         List<ProposalBOQ> proposalBOQs = new ArrayList<>();
         ProposalBOQ aggregatedProposalBOQ = null;
 
-        for (JsonObject jsonObject : boqDataList.queryDataListProduct)
+        if (boqDataList.queryDataListProduct != null && boqDataList.queryDataListProduct.size() !=0)
         {
-            ProposalBOQ proposalBOQ = new ProposalBOQ(jsonObject);
-            proposalBOQs.add(proposalBOQ);
-        }
 
-        for (ProposalBOQ proposalBOQ : proposalBOQs)
-        {
-            if (proposalBOQ.getDsoErpItemCode().equals(newProposalBoq.getDsoErpItemCode()))
+//            LOG.debug("Query data list size : " + boqDataList.queryDataListProduct.size() + " :" + newProposalBoq);
+            for (JsonObject jsonObject : boqDataList.queryDataListProduct)
             {
-                double dsoRate = proposalBOQ.getDsoRate() + newProposalBoq.getDsoRate();
-                double dsoQty = proposalBOQ.getDsoQty() + newProposalBoq.getDsoQty();
-                double dsoPrice = proposalBOQ.getDsoPrice() + newProposalBoq.getDsoPrice();
-                proposalBOQ.setDSORate(dsoRate);
-                proposalBOQ.setDSOQty(dsoQty);
-                proposalBOQ.setDSOPrice(dsoPrice);
+                ProposalBOQ proposalBOQ = new ProposalBOQ(jsonObject);
+                if (proposalBOQ.getDsoErpItemCode() != null) proposalBOQs.add(proposalBOQ);
+            }
 
-                aggregatedProposalBOQ = proposalBOQ;
+            for (ProposalBOQ proposalBOQ : proposalBOQs)
+            {
+//                LOG.debug("Proposal BOQ :" + proposalBOQ);
+                if (proposalBOQ.getDsoErpItemCode().equals(newProposalBoq.getDsoErpItemCode()) &&
+                        proposalBOQ.getProductId() == newProposalBoq.getProductId() &&
+                        proposalBOQ.getModuleSeq() == newProposalBoq.getModuleSeq())
+                {
+
+
+                    double dsoRate = proposalBOQ.getDsoRate() + newProposalBoq.getDsoRate();
+                    double dsoQty = proposalBOQ.getDsoQty() + newProposalBoq.getDsoQty();
+                    double dsoPrice = proposalBOQ.getDsoPrice() + newProposalBoq.getDsoPrice();
+                    proposalBOQ.setDSORate(dsoRate);
+                    proposalBOQ.setDSOQty(dsoQty);
+                    proposalBOQ.setDSOPrice(dsoPrice);
+
+                    proposalBOQ.setPlannerRate(dsoRate);
+                    proposalBOQ.setPlannerQty(dsoQty);
+                    proposalBOQ.setPlannerPrice(dsoPrice);
+
+                    aggregatedProposalBOQ = proposalBOQ;
+
+                    boqDataList.queryDataListProduct.remove(proposalBOQ);
+                }
             }
         }
 
         return aggregatedProposalBOQ;
-
-
     }
 
     private void fillAllAddonsintoDb(List<ProductAddon> productAddons, ProposalHeader proposalHeader, BoqDataList boqDataList) {

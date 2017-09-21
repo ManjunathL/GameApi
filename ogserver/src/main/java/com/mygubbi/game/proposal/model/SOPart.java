@@ -39,6 +39,26 @@ public class SOPart {
         return qty;
     }
 
+    public void setErpCode(String erpCode) {
+        this.erpCode = erpCode;
+    }
+
+    public void setReferencePartNo(String referencePartNo) {
+        this.referencePartNo = referencePartNo;
+    }
+
+    public void setUom(String uom) {
+        this.uom = uom;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setQty(double qty) {
+        this.qty = qty;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

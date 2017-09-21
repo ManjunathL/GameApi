@@ -41,7 +41,7 @@ public class SOExtractTemplateCreator
 
     public String getOutputFilename()
     {
-        return  productId+"/so.xlsx" ;
+        return  productId+"_so.xlsx" ;
     }
 
     public String create()
@@ -67,7 +67,7 @@ public class SOExtractTemplateCreator
     private String copyTemplateFile()
     {
         String templateName = this.getTemplateName();
-        LOG.info("&&&&" +templateName);
+//        LOG.info("&&&&" +templateName);
         String templateFile = ConfigHolder.getInstance().getStringValue(templateName, "/tmp/" + this.getTemplateName() + ".xlsx");
         String targetFile = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/") + "/"+ proposalId + "/" + this.getOutputFilename();
         try
