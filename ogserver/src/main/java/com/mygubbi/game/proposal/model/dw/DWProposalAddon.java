@@ -39,7 +39,7 @@ public class DWProposalAddon extends JsonObject {
     private static final String CATEGORY="category";
     private static final String SUBCATEGORY="subCategory";
     private static final String SPACETYPE="spaceType";
-    private static final String ROOM="room";
+    private static final String ROOM="roomcode";
     private static final String ADDON_ID="addonId";
     private static final String CODE = "code";
     private static final String ADDON_CATEGORY_CODE = "categoryCode";
