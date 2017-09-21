@@ -68,7 +68,7 @@ public class ProductLineItem extends JsonObject
 
     public static final String BASE_UNIT_TYPE = "Base unit";
     public static final String LCONNECTOR_PRICE="lConnectorPrice";
-    public static final String COLORGROUP_CODE="colorGroupCode";
+    public static final String COLOR_CODE="colorGroupCode";
     public ProductLineItem()
     {
 
@@ -94,7 +94,7 @@ public class ProductLineItem extends JsonObject
         return this.getString(TITLE);
     }
 
-    public String getColorgroupCode() { return  this.getString(COLORGROUP_CODE);}
+    public String getColorgroupCode() { return  this.getString(COLOR_CODE);}
     public String getType()
     {
         return this.getString(TYPE);
@@ -257,7 +257,7 @@ public class ProductLineItem extends JsonObject
 
     public ProductLineItem setColorGroupCode(String colorGroupCode)
     {
-        this.put(COLORGROUP_CODE,colorGroupCode);
+        this.put(COLOR_CODE,colorGroupCode);
         return this;
     }
     public ProductLineItem addModule(ProductModule module)

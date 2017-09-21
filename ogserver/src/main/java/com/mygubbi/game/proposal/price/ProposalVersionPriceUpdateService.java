@@ -18,6 +18,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.elasticsearch.common.recycler.Recycler;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -111,13 +112,19 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             productLineItem.setFinishCode(oldToNewFinishMapping.getNewCode());
                             ShutterFinish shutterFinish=ModuleDataService.getInstance().getFinish(oldToNewFinishMapping.getNewCode());
                             Collection<ColorMaster> colorMaster=ModuleDataService.getInstance().getColours(shutterFinish.getColorGroupCode());
+                            String colourValue=productLineItem.getColorgroupCode();
+                            String newColorValue="";
+                            String Value=" ";
                             for(ColorMaster colorMaster1:colorMaster)
                             {
-                                String colourValue=productLineItem.getColorgroupCode();
-                                if(colourValue != colorMaster1.getCode())
+                                if(colourValue.equals(colorMaster1.getCode()))
                                 {
-                                    productLineItem.setColorGroupCode("");
+                                    Value="P";
                                 }
+                            }
+                           if(!Value.equals("P"))
+                            {
+                                productLineItem.setColorGroupCode("");
                             }
 
                             auditMaster.setProposalId(proposalHeader.getId());
