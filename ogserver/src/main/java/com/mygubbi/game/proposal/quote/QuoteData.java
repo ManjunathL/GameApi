@@ -48,9 +48,10 @@ public class QuoteData
     {
         this.city = proposalHeader.getProjectCity();
         this.priceDate = proposalHeader.getPriceDate();
-        for(ProductLineItem productLineItem: products)
-        {
-            this.title=productLineItem.getTitle();
+        if(products != null) {
+            for (ProductLineItem productLineItem : products) {
+                this.title = productLineItem.getTitle();
+            }
         }
         if (this.priceDate == null)
         {
@@ -85,22 +86,19 @@ public class QuoteData
         this.assembledProducts = new ArrayList<>();
         this.catalogueProducts = new ArrayList<>();
 
-        for (ProductLineItem product : this.products)
-        {
-            if (product.getType().equals(ProductLineItem.CATALOGUE_PRODUCT))
-            {
-                this.catalogueProducts.add(product);
-                this.productsCost += product.getAmount();
-            }
-            else
-            {
-                AssembledProductInQuote assembledProduct = new AssembledProductInQuote(product,this.city,this.priceDate);
-                this.assembledProducts.add(assembledProduct);
-                this.productsCost += assembledProduct.getAmountWithoutAddons();
-                this.addonsCost += assembledProduct.getAddonsAmount();
+        if(this.products != null) {
+            for (ProductLineItem product : this.products) {
+                if (product.getType().equals(ProductLineItem.CATALOGUE_PRODUCT)) {
+                    this.catalogueProducts.add(product);
+                    this.productsCost += product.getAmount();
+                } else {
+                    AssembledProductInQuote assembledProduct = new AssembledProductInQuote(product, this.city, this.priceDate);
+                    this.assembledProducts.add(assembledProduct);
+                    this.productsCost += assembledProduct.getAmountWithoutAddons();
+                    this.addonsCost += assembledProduct.getAddonsAmount();
+                }
             }
         }
-
         for (ProductAddon addon : this.headerLevelAddons)
         {
             this.addonsCost += addon.getAmount();
