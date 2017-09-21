@@ -20,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+import java.util.Collection;
 
 /**
  * Created by Chirag on 08-01-2016.
@@ -108,6 +109,17 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             ProductLineItem productLineItem = new ProductLineItem(record);
                             OldToNewFinishMapping oldToNewFinishMapping = ModuleDataService.getInstance().getOldToNewMapping(productLineItem.getFinishCode());
                             productLineItem.setFinishCode(oldToNewFinishMapping.getNewCode());
+                            ShutterFinish shutterFinish=ModuleDataService.getInstance().getFinish(oldToNewFinishMapping.getNewCode());
+                            Collection<ColorMaster> colorMaster=ModuleDataService.getInstance().getColours(shutterFinish.getColorGroupCode());
+                            for(ColorMaster colorMaster1:colorMaster)
+                            {
+                                String colourValue=productLineItem.getColorgroupCode();
+                                if(colourValue != colorMaster1.getCode())
+                                {
+                                    productLineItem.setColorGroupCode("");
+                                }
+                            }
+
                             auditMaster.setProposalId(proposalHeader.getId());
                             auditMaster.setPriceDate(priceDate[0]);
                             auditMaster.setVersion(proposalVersion.getVersion());
@@ -116,6 +128,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
                             for (ProductModule productModule : productLineItem.getModules()) {
                                 productModule.setFinishCode(oldToNewFinishMapping.getNewCode());
+                                productModule.setColorCode(productLineItem.getColorgroupCode());
                                 productModule.setFinish(oldToNewFinishMapping.getTitle());
                                 ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
                                         proposalHeader.getPcity(), priceDate[0],productLineItem,"C");

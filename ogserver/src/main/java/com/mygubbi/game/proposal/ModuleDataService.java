@@ -45,6 +45,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, Handle> handleMap = Collections.EMPTY_MAP;
     private Map<String, HingePack> hingePackMap = Collections.EMPTY_MAP;
     private Map<String, OldToNewFinishMapping> oldnewfinishMap = Collections.EMPTY_MAP;
+    private Multimap<String, ColorMaster> colorMap;
 
 
 	public static ModuleDataService getInstance()
@@ -74,6 +75,7 @@ public class ModuleDataService extends AbstractVerticle
         this.cacheHingePackData();
        this.cacheSowMasterData();
        this.cacheOldNewFinishMappingData();
+       this.cacheColours();
 	}
 
     private void cacheAccessories()
@@ -110,6 +112,30 @@ public class ModuleDataService extends AbstractVerticle
                 });
 
     }
+    private void cacheColours()
+    {
+        this.colorMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("proposal.getcolor", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("color master table is empty.", false);
+                    }
+                    else
+                    {
+                        //this.colorMap= new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            ColorMaster colorMaster=new ColorMaster(record);
+                            LOG.info("color mapping " +colorMaster);
+                            this.colorMap.put(colorMaster.getColorgroupCode(), colorMaster);
+                        }
+                        markResult("color master done.", true);
+                    }
+                });
+    }
+
     private void cacheModuleComponents()
     {
         this.moduleComponentsMap = ArrayListMultimap.create();
@@ -135,6 +161,27 @@ public class ModuleDataService extends AbstractVerticle
     private void cacheSowMasterData()
     {
         this.sowMasterMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("sow.master.select.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("SOW master table is empty.", false);
+                    }
+                    else
+                    {
+                        for (JsonObject record : selectData.rows)
+                        {
+                            SOWMaster component = new SOWMaster(record);
+                            this.sowMasterMap.put(component.getSpaceType(), component);
+                        }
+                        markResult("SOW master loaded.", true);
+                    }
+                });
+    }
+    private void cacheColours1()
+    {
+        this.colorMap = ArrayListMultimap.create();
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("sow.master.select.all", new JsonObject())),
                 (AsyncResult<Message<Integer>> dataResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
@@ -447,6 +494,11 @@ public class ModuleDataService extends AbstractVerticle
     public Collection<ModuleComponent> getModuleComponents(String mgCode)
     {
         return this.moduleComponentsMap.get(mgCode);
+    }
+
+    public Collection<ColorMaster> getColours(String code)
+    {
+        return this.colorMap.get(code);
     }
 
     public Collection<SOWMaster> getSOWMaster(String spaceType)

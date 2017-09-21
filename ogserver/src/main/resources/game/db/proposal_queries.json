@@ -1943,6 +1943,13 @@
       "table": "oldnew_finishmap",
       "query": "select * from oldnew_finishmap where oldCode = ?",
       "params": ["oldCode"]
+    },
+    {
+      "id": "proposal.getcolor",
+      "type": "select",
+      "table": "color_master",
+      "query": "select * from color_master",
+      "params": []
     }
   ]
 }
