@@ -88,4 +88,15 @@ public class SOPart {
         assert(this.equals(other));
         return new SOPart(this.erpCode, this.referencePartNo, this.uom, this.title, this.qty + other.qty);
     }
+
+    @Override
+    public String toString() {
+        return "SOPart{" +
+                "erpCode='" + erpCode + '\'' +
+                ", referencePartNo='" + referencePartNo + '\'' +
+                ", uom='" + uom + '\'' +
+                ", title='" + title + '\'' +
+                ", qty=" + qty +
+                '}';
+    }
 }

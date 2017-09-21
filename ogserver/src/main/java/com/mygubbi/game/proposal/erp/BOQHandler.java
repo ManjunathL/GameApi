@@ -28,10 +28,7 @@ import org.jooq.lambda.tuple.Tuple;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.jooq.lambda.tuple.Tuple.tuple;
@@ -294,8 +291,8 @@ public class BOQHandler extends AbstractRouteHandler {
                 {
                     SOPart soPart1 = soPartMap.get(soPart.getErpCode());
                     double qty = soPart1.getQty() + soPart.getQty();
-                    soPart.setQty(qty);
-                    soPartMap.put(soPart.getErpCode(),soPart);
+                    soPart1.setQty(qty);
+                    soPartMap.put(soPart.getErpCode(),soPart1);
                 }
                 else {
                     soPartMap.put(soPart.getErpCode(),soPart);
@@ -303,7 +300,8 @@ public class BOQHandler extends AbstractRouteHandler {
 
             }
 
-
+            soPartsList.clear();
+            soPartsList = soPartMap.values().stream().collect(Collectors.toList());
 
             String outputFile = new SOExtractTemplateCreator(soPartsList, spaceRoomProduct.getProductId(), proposalBoqAsPerProduct.get(0).getProposalId()).create();
             outputFiles.add(outputFile);
