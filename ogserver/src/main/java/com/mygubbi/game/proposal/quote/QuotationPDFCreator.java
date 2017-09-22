@@ -112,7 +112,7 @@ public class QuotationPDFCreator
 
                 }else if(proposalHeader.getProjectCity().equals("Pune"))
                 {
-                    p = new Paragraph("Swastika, S-3 & S-3A, Pallod Farm, Phase2, Lane 2, Baner Road", fsize);
+                    p = new Paragraph("101, 1st floor, The Mint building, Behind K factory, Opp. Kapil Malhar Society, Baner", fsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
@@ -425,7 +425,7 @@ public class QuotationPDFCreator
 
             }else if(proposalHeader.getProjectCity().equals("Pune"))
             {
-                p = new Paragraph("Swastika, S-3 & S-3A, Pallod Farm, Phase2, Lane 2, Baner Road", fsize);
+                p = new Paragraph("101, 1st floor, The Mint building, Behind K factory, Opp. Kapil Malhar Society, Baner", fsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
