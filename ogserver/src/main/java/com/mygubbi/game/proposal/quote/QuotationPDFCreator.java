@@ -112,11 +112,15 @@ public class QuotationPDFCreator
 
                 }else if(proposalHeader.getProjectCity().equals("Pune"))
                 {
-                    p = new Paragraph("101, 1st floor, The Mint building, Behind K factory, Opp. Kapil Malhar Society, Baner", fsize);
+                    p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", fsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
-                    p = new Paragraph("Pune 411045, India Phone +91 80888 60860", fsize);
+                    p = new Paragraph("Nr.Kapil Malhar Society, Baner", fsize);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                    p = new Paragraph("Pune:411045", fsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
@@ -425,11 +429,15 @@ public class QuotationPDFCreator
 
             }else if(proposalHeader.getProjectCity().equals("Pune"))
             {
-                p = new Paragraph("101, 1st floor, The Mint building, Behind K factory, Opp. Kapil Malhar Society, Baner", fsize);
+                p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", fsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Pune 411045, India", fsize);
+                p = new Paragraph("Nr.Kapil Malhar Society, Baner", fsize);
+                p.setAlignment(Element.ALIGN_LEFT);
+                document.add(p);
+
+                p = new Paragraph("Pune:411045", fsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
