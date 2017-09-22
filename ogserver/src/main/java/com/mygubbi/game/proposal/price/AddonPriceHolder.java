@@ -63,7 +63,11 @@ public class AddonPriceHolder {
         this.priceWoTax = this.price * addonFactor.getSourcePrice();
         this.sourceCost = this.productAddon.getQuantity() * this.unitSourceCost;
         this.addonProfit = this.priceWoTax - this.sourceCost;
-        this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
+        if(this.addonProfit == 0 || this.priceWoTax == 0){
+            this.addonMargin = 0;
+        }else {
+            this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
+        }
     }
 
     private void calculatePricingForCustomAddons(PriceMaster addonRate) {
@@ -73,8 +77,11 @@ public class AddonPriceHolder {
         this.priceWoTax = this.price * addonFactor.getSourcePrice();
         this.sourceCost = this.unitSourceCost;
         this.addonProfit = this.priceWoTax - this.sourceCost;
-        this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
-
+        if(this.addonProfit == 0 || this.priceWoTax == 0){
+            this.addonMargin = 0;
+        }else {
+            this.addonMargin = (this.addonProfit / this.priceWoTax) * 100;
+        }
     }
 
     public boolean hasErrors()
