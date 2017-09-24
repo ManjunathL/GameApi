@@ -655,41 +655,34 @@ public class ModulePriceHolder
         this.carcassFinish = ModuleDataService.getInstance().getFinish(productModule.getCarcassCode(), productModule.getFinishCode(),this.priceDate);
 
         String carcassCode = StringUtils.isEmpty(this.mgModule.getMaterial()) ? productModule.getCarcassCode() : this.mgModule.getMaterial();
-        this.carcassMaterialRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(carcassCode, RateCard.CARCASS_TYPE,this.priceDate, this.city,ALL);
+        this.carcassMaterialRateCard = RateCardService.getInstance().getRateCard(carcassCode, RateCard.CARCASS_TYPE,this.priceDate, this.city);
 
-        this.carcassFinishRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city,ALL);
-        this.shutterFinishRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city,ALL);
-        this.stdManufacturingCost = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,RateCard.FACTOR_TYPE ,this.priceDate, this.city,ALL);
-        this.nStdManufacturingCost = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city,ALL);
-        this.stdManufacturingCostBasedOnFinish = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,RateCard.FACTOR_TYPE ,this.priceDate, this.city,ALL);
-        this.nStdManufacturingCostBasedOnFinish = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city,ALL);
+        this.carcassFinishRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
+        this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
+        this.stdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR,RateCard.FACTOR_TYPE ,this.priceDate, this.city);
+        this.nStdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
 //        this.nStdManufacturingCostWardrobe = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_WARDROBE, RateCard.FACTOR_TYPE,this.priceDate, this.city);
 //        this.nStdManufacturingCostShoeRack = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_SHOERACK, RateCard.FACTOR_TYPE,this.priceDate, this.city);
 //        this.nStdManufacturingCostStudyTable = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_STUDYTABLE, RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
-        this.carcassDoubleExposedRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(carcassFinish.getDoubleExposedCostCode(),
-                RateCard.SHUTTER_TYPE,this.priceDate, this.city,ALL);
-        this.shutterDoubleExposedRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(shutterFinish.getDoubleExposedCostCode(),
-                RateCard.SHUTTER_TYPE,this.priceDate, this.city,ALL);
+        this.carcassDoubleExposedRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getDoubleExposedCostCode(),
+                RateCard.SHUTTER_TYPE,this.priceDate, this.city);
+        this.shutterDoubleExposedRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getDoubleExposedCostCode(),
+                RateCard.SHUTTER_TYPE,this.priceDate, this.city);
 
-        this.loadingFactorCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city,ALL);
-        this.labourRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city,ALL);
-        this.labourManufacturingRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city,ALL);
-        this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR_NONSTANDARD,
-                RateCard.FACTOR_TYPE,this.priceDate, this.city,ALL);
-        LOG.debug("this.nonstandard" + this.nonStandardloadingFactorCard.getRate());
+        this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.labourManufacturingRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
         this.stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
         this.nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
-        this.stdLoadingSourceFactorBasedOnProductFinishset = RateCardService.getInstance().getRateCardBasedOnProductSet(RateCard.STD_MANUFACTURING_COST_FACTOR,
-                RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory(),productModule.getFinishSetId());
-        this.nStdLoadingSourceFactorBasedOnProductFinishset = RateCardService.getInstance().getRateCardBasedOnProductSet(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
-                RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory(),productModule.getFinishSetId());
-        this.prodWoTaxFactor = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE,this.priceDate, this.city,ALL);
+        this.prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
         //Profile Handles
 
@@ -830,24 +823,8 @@ public class ModulePriceHolder
         for (PanelComponent panel : this.getPanelComponents())
         {
             double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
-            double nonStandardloadingFactor = this.nonStandardloadingFactorCard.getRate();
-            double stdManufacturingSourceCost,nstdManufacturingSourceCost,stdSourceRate,nStdSourceRate;
-            /*if(productModule.getFinishSetId() != null)
-            {*/
-                stdManufacturingSourceCost=stdManufacturingCost.getSourcePrice();
-                nstdManufacturingSourceCost=nStdManufacturingCost.getSourcePrice();
-                stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePrice();
-                nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
-            /*}
-            else
-            {
-                stdManufacturingSourceCost=stdManufacturingCostBasedOnFinish.getSourcePrice();
-                nstdManufacturingSourceCost=nStdManufacturingCostBasedOnFinish.getSourcePrice();
-                stdSourceRate = this.stdLoadingSourceFactorBasedOnProductFinishset.getSourcePrice();
-                nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProductFinishset.getSourcePrice();
-            }*/
-
-
+            double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
+            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
             if (panel.isExposed())
             {
                 if ("Standard".equals(moduleType))
@@ -862,8 +839,7 @@ public class ModulePriceHolder
                     }
                     else {
                         this.addToShutterCost(panel.getCost());
-                        //this.addToShutterSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                        this.addToShutterSourceCost(panel.getCost() / stdManufacturingSourceCost);
+                        this.addToShutterSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
                     }
                     if(panel.getCost()==0.0)
                     {
@@ -878,13 +854,12 @@ public class ModulePriceHolder
                     {
 //                        LOG.info("shoerack value 1 " +rate);
                         this.addToShutterCost(panel.getCost() * rate);
-                        //this.addToShutterSourceCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
-                        this.addToShutterSourceCost(panel.getCost() / nstdManufacturingSourceCost);
+                        this.addToShutterSourceCost((panel.getCost() * rate) /  this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
                     }
                     else
                     {
-                        this.addToShutterCost(panel.getCost() * nonStandardloadingFactor);
-                        this.addToShutterSourceCost(panel.getCost() / nStdSourceRate);
+                        this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                        this.addToShutterSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate())/ nStdSourceRate);
                     }
                     if(panel.getCost()==0.0)
                     {
@@ -908,15 +883,13 @@ public class ModulePriceHolder
                     }
                     else {
                         this.addToCarcassCost(panel.getCost());
-                        //this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                        this.addToCarcassSourceCost(panel.getCost() / stdManufacturingSourceCost);
+                        this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
                     }
                 }
                 else if ("hike".equals(moduleType))
                 {
                     this.addToCarcassCost(panel.getCost());
-                    //this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                    this.addToCarcassSourceCost(panel.getCost() / stdManufacturingSourceCost);
+                    this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
                 }
                 else
                 {
@@ -928,9 +901,8 @@ public class ModulePriceHolder
                     }
                     else
                     {
-                        this.addToCarcassCost(panel.getCost() * nonStandardloadingFactor);
-                        //this.addToCarcassSourceCost(panel.getCost() / nStdManufacturingCost.getSourcePrice());
-                        this.addToCarcassSourceCost(panel.getCost() / nstdManufacturingSourceCost);
+                        this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                        this.addToCarcassSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate()) / nStdManufacturingCost.getSourcePrice());
                     }
                 }
             }

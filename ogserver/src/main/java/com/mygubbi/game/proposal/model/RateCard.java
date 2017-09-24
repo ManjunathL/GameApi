@@ -41,13 +41,13 @@ public class RateCard
     private double rateUsed;
     private Map<Integer, Double> ratesUsed = Collections.EMPTY_MAP;
 
-   /* public RateCard(String code, String type, Date priceDate, String city) {
+    public RateCard(String code, String type, Date priceDate, String city) {
         this.code = code;
         this.type = type;
         this.priceDate = priceDate;
         this.city = city;
         this.ratesUsed = new HashMap<>();
-    }*/
+    }
 
     public RateCard(String code, String type, Date priceDate, String city, String productCategory) {
         this.code = code;
