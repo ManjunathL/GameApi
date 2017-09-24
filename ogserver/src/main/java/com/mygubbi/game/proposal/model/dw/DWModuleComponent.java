@@ -861,7 +861,6 @@ public class DWModuleComponent extends JsonObject {
 
         RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
                 RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
-        double quantity = 0;
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
 
@@ -951,10 +950,10 @@ public class DWModuleComponent extends JsonObject {
 
         if (accessoryComponent.getPrice() != 0)
         {
-            componentPrice = accessoryComponent.getPrice() * quantity;
+            componentPrice = accessoryComponent.getPrice() * accessoryComponent.getQuantity();
             componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
             componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
-            componentCost = accessoryComponent.getSourcePrice() * quantity;
+            componentCost = accessoryComponent.getSourcePrice() * accessoryComponent.getQuantity();
             componentProfit = componentPriceWoTax - componentCost;
             if(componentProfit == 0 || componentPriceWoTax == 0){
                 componentMargin = 0.0;

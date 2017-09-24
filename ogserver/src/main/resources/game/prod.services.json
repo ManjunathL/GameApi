@@ -68,6 +68,15 @@
 
       {
         "name":"com.mygubbi.game.proposal.sow.SOWCreatorService"
+      },
+      {
+        "name":"com.mygubbi.report.ReportTableFillerSevice"
+      },
+      {
+        "name":"com.mygubbi.report.DwReportingService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.sow.SowValidatorService"
       }
     ]
   }
