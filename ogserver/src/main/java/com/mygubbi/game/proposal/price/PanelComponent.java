@@ -326,11 +326,11 @@ public class PanelComponent
 
         if (productModule.isOpenUnit())
         {
-            LOG.debug("Product module is an open unit");
+//            LOG.debug("Product module is an open unit");
 
             if (this.isShutter())
             {
-                LOG.debug("This is a shutter panel");
+//                LOG.debug("This is a shutter panel");
                 this.exposed = PanelExposed.DOUBLE;
             }
 

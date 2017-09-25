@@ -954,21 +954,21 @@ public class ModulePriceHolder
             this.labourCost = this.moduleArea * labourRateCard.getRate();
             this.labourSourceCost = this.labourCost / labourManufacturingRateCard.getSourcePrice();
 
-            this.carcassCostWoTax = this.carcassCost * this.prodWoTaxFactor.getSourcePrice();
-            this.shutterCostWoTax = this.shutterCost * this.prodWoTaxFactor.getSourcePrice();
-//            LOG.debug("Module Price Holder :" + labourCost + " : " + this.prodWoTaxFactor.getSourcePrice());
-            this.labourCostWoTax = labourCost * this.prodWoTaxFactor.getSourcePrice();
-            this.hardwareCostWoTax = this.hardwareCost * this.prodWoTaxFactor.getSourcePrice();
-            this.handleandKnobCostWoTax = this.handleandKnobCost * this.prodWoTaxFactor.getSourcePrice();
-            this.hingeCostWoTax = this.hingeCost * this.prodWoTaxFactor.getSourcePrice();
-            this.accessoryCostWoTax = this.accessoryCost * this.prodWoTaxFactor.getSourcePrice();
+                this.carcassCostWoTax = this.carcassCost * this.prodWoTaxFactor.getSourcePrice();
+                this.shutterCostWoTax = this.shutterCost * this.prodWoTaxFactor.getSourcePrice();
+                this.labourCostWoTax = labourCost * this.prodWoTaxFactor.getSourcePrice();
+                this.hardwareCostWoTax = this.hardwareCost * this.prodWoTaxFactor.getSourcePrice();
+                this.handleandKnobCostWoTax = this.handleandKnobCost * this.prodWoTaxFactor.getSourcePrice();
+                this.hingeCostWoTax = this.hingeCost * this.prodWoTaxFactor.getSourcePrice();
+                this.accessoryCostWoTax = this.accessoryCost * this.prodWoTaxFactor.getSourcePrice();
 
-            this.carcassProfit = this.carcassCostWoTax - this.carcassSourceCost;
-            this.shutterProfit = this.shutterCostWoTax - this.shutterSourceCost;
-            this.labourProfit = this.labourCostWoTax - this.labourSourceCost;
-            this.hardwareProfit = this.hardwareCostWoTax - this.hardwareSourceCost;
-            this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
-            this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
+                this.carcassProfit = this.carcassCostWoTax - this.carcassSourceCost;
+                this.shutterProfit = this.shutterCostWoTax - this.shutterSourceCost;
+                this.labourProfit = this.labourCostWoTax - this.labourSourceCost;
+                this.hardwareProfit = this.hardwareCostWoTax - this.hardwareSourceCost;
+                this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
+                this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
+
 
             if (this.carcassProfit == 0 || this.carcassCostWoTax == 0)
             {
@@ -1014,9 +1014,6 @@ public class ModulePriceHolder
                 this.hingeMargin = (this.hingeProfit / this.hingeCostWoTax)*100;
             }
 
-
-
-
             this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.handleandKnobCost + this.hingeCost + this.hardwareCost;
             this.totalCost = this.woodworkCost + this.accessoryCost ;
             this.totalCostWoTax = this.totalCost * this.prodWoTaxFactor.getSourcePrice();
@@ -1031,8 +1028,47 @@ public class ModulePriceHolder
             this.totalProfit = this.totalCostWoTax - this.totalSourceCost;
             this.totalMargin = (this.totalProfit / this.totalCostWoTax)*100;
 
+            if (mgModule.getModuleCategory().startsWith("H"))
+            {
+                setAllComponentsPriceToZero();
+
+            }
+
 
         }
+    }
+
+    private void setAllComponentsPriceToZero() {
+        this.carcassSourceCost = 0;
+        this.shutterSourceCost = 0;
+        this.labourSourceCost = 0;
+        this.hardwareSourceCost = 0;
+        this.handleandKnobSourceCost = 0;
+        this.hingeSourceCost = 0;
+        this.accessorySourceCost = 0;
+
+        this.carcassCost = 0;
+        this.shutterCost = 0;
+        this.labourCost = 0;
+        this.hardwareCost = 0;
+        this.handleandKnobCost = 0;
+        this.hingeCost = 0;
+        this.accessoryCost = 0;
+
+        this.carcassCostWoTax = 0;
+        this.shutterCostWoTax = 0;
+        this.labourCostWoTax = 0;
+        this.hardwareCostWoTax = 0;
+        this.handleandKnobCostWoTax = 0;
+        this.hingeCostWoTax = 0;
+        this.accessoryCostWoTax = 0;
+
+        this.carcassProfit = 0;
+        this.shutterProfit = 0;
+        this.labourProfit = 0;
+        this.hardwareProfit = 0;
+        this.handleandKnobProfit = 0;
+        this.hingeProfit = 0;
     }
 
     private double round(double value, int places)
