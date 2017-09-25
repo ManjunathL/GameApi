@@ -45,8 +45,6 @@ public class SOWTemplateCreator
 
     public String getOutputFilename()
     {
-
-
         int randomNum = ThreadLocalRandom.current().nextInt(1, 1000 + 1);
         return  "/" + randomNum + "sow.xlsx" ;
     }

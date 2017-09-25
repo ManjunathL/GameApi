@@ -4,6 +4,7 @@ import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import com.google.api.services.drive.model.Permission;
+import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,7 +54,7 @@ public class DriveServiceProvider
         this.mimeTypes.put(TYPE_PDF,"application/pdf");
     }
 
-    public DriveFile createFolder(List<String> filePaths, String folderName, String userId)
+    public DriveFile createFolder(List<UploadToDrive> filePaths, String folderName, String userId)
     {
         this.serviceManager.getDrive();
         File folderMetadata = new File();
@@ -79,24 +80,23 @@ public class DriveServiceProvider
 
         LOG.debug("After folder creation :" + folder.getId());
 
-        allowUserToReadFile(folderId,userId);
+        allowUserToEditFile(folderId,userId);
 
-        for (String fileNames : filePaths)
+        for (UploadToDrive fileNames : filePaths)
         {
             File fileExcel = new File();
-            fileExcel.setName("SO Extract");
+            fileExcel.setName(fileNames.getFileName());
             fileExcel.setMimeType("application/vnd.google-apps.spreadsheet");
             fileExcel.setParents(Collections.singletonList(folderId));
-            java.io.File filePath = new java.io.File(fileNames);
+            java.io.File filePath = new java.io.File(fileNames.getFilePath());
             FileContent mediaContent = new FileContent("application/vnd.ms-excel", filePath);
             try {
-                LOG.debug("Creating file:" + fileNames);
 
                 File file = this.serviceManager.getDrive().files().create(fileExcel, mediaContent)
                         .setFields("id, parents,webViewLink")
                         .execute();
-                allowUserToReadFile(file.getId(),userId);
-                LOG.debug("File created:" + fileNames + " with web link: " + file.getWebViewLink());
+                allowUserToEditFile(file.getId(),userId);
+                LOG.debug("File created:" + fileNames.getFilePath() + " with web link: " + file.getWebViewLink());
 
             } catch (IOException e) {
                 e.printStackTrace();

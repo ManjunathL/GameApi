@@ -269,15 +269,20 @@ public class BoqCreatorService extends AbstractVerticle {
 
         List<ProductModule> modules = productInQuote.getModules();
 
+
         for (ProductModule module : modules) {
             Collection<ModuleComponent> moduleComponents = ModuleDataService.getInstance().getModuleComponents(module.getMGCode());
 
             List<BoqItem> boqItemListMaster = new ArrayList<>();
-            boqItemListMaster.addAll(collectModuleHandles(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productInQuote));
-            boqItemListMaster.add(collectModuleKnob(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity()));
-            if (!(module.getHingePacks().size() == 0)) {
-                List<BoqItem> c = collectModuleHinge(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
-                boqItemListMaster.addAll(c);
+
+            if (proposalHeader.getBeforeProductionSpecification().equalsIgnoreCase("yes"))
+            {
+                if (productInQuote.getProduct().getHandletypeSelection() != null) boqItemListMaster.addAll(collectModuleHandles(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productInQuote));
+                if (productInQuote.getProduct().getKnobType() != null) boqItemListMaster.add(collectModuleKnob(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity()));
+                if (!(module.getHingePacks().size() == 0)) {
+                    List<BoqItem> c = collectModuleHinge(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+                    boqItemListMaster.addAll(c);
+                }
             }
 
             for (ModuleComponent moduleComponent : moduleComponents) {

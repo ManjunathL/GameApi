@@ -11,7 +11,7 @@ public class GoogleDriveTest
     public static void main(String[] args)
     {
         long timer = System.currentTimeMillis();
-        new GoogleDriveTest().testUploadFileIntoDrive();
+        /*new GoogleDriveTest().testUploadFileIntoDrive();*/
         System.out.println("timer" + (System.currentTimeMillis() - timer));
     }
 
@@ -56,7 +56,7 @@ public class GoogleDriveTest
 
     }
 
-    private void testUploadFileIntoDrive()
+   /* private void testUploadFileIntoDrive()
     {
         List<String> filepaths = new ArrayList<>();
         filepaths.add("C:\\Users\\Public\\game_files\\5010\\sow.xlsx");
@@ -65,5 +65,5 @@ public class GoogleDriveTest
         DriveFile file = this.serviceProvider.createFolder(filepaths,"chiragtest","chiragsharath@gmail.com");
         System.out.print("WEBviewLink :" + file.getWebContentLink() + " : " + file.getWebViewLink());
 
-    }
+    }*/
 }

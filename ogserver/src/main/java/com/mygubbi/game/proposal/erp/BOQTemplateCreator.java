@@ -26,7 +26,6 @@ public class BOQTemplateCreator
     private String outputFile;
     private List<ERPMaster> erpMasters;
 
-
     public BOQTemplateCreator(ProposalHeader proposalHeader, List<ProposalBOQ> proposalBoqsForProduct,List<ProposalBOQ> proposalBoqsForAddon, List<ERPMaster> erpMasters)
     {
         this.proposalHeader = proposalHeader;

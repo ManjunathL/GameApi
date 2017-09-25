@@ -36,8 +36,8 @@ import static org.jooq.lambda.tuple.Tuple.tuple;
 
 public class BOQHandler extends AbstractRouteHandler {
 
-    public static int[] planner_input = {15,16,17,18,19,20};
-    public static int[] details = {20, 21 ,22, 23, 24, 25};
+    public static int[] planner_input = {17,18,19,20,21,22};
+    public static int[] details = {22, 23 ,24, 25, 26, 27};
 
     private List<QueryData> updateQueries = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class BOQHandler extends AbstractRouteHandler {
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/saveboqfile").handler(this::saveBoqFile);
-        this.post("/createsoextract").handler(this::createsoextract);
+        this.post("/createsoextract").handler(this::generateSo);
     }
 
     private void saveBoqFile(RoutingContext routingContext)
@@ -157,7 +157,7 @@ public class BOQHandler extends AbstractRouteHandler {
                 });
     }
 
-    private void createsoextract(RoutingContext routingContext)
+    /*private void createsoextract(RoutingContext routingContext)
     {
         JsonObject jsonObject = routingContext.getBodyAsJson();
         int proposalId = jsonObject.getInteger("proposalId");
@@ -198,17 +198,31 @@ public class BOQHandler extends AbstractRouteHandler {
 
                         }
 
-                       /* LOG.debug("Modular products size :" + proposal_boqs_products.size());
+                       *//* LOG.debug("Modular products size :" + proposal_boqs_products.size());
                         LOG.debug("Services size :" + proposal_boqs_services.size());
-                        LOG.debug("Addons size :" + proposal_boqs_addons.size());*/
+                        LOG.debug("Addons size :" + proposal_boqs_addons.size());*//*
 
-                        generateSo(routingContext, proposal_boqs_products,proposal_boqs_addons,proposal_boqs_services);
+                        generateSoOld(routingContext, proposal_boqs_products,proposal_boqs_addons,proposal_boqs_services);
 
                     }
                 });
+    }*/
+
+    private void generateSo(RoutingContext routingContext)
+    {
+            int count = 0;
+            LOG.debug("Inside create boq output : " + ++count);
+            JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+            Integer id = LocalCache.getInstance().store(quoteRequestJson);
+            VertxInstance.get().eventBus().send(SOCreatorService.CREATE_SO_OUTPUT, id,  new DeliveryOptions().setSendTimeout(120000),
+                    (AsyncResult<Message<Integer>> result) -> {
+                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        LOG.debug("Response after creating so extract :" + response);
+                        sendJsonResponse(routingContext, response.toString());
+                    });
     }
 
-    private void generateSo(RoutingContext routingContext, List<ProposalBOQ> boqProductObjects, List<ProposalBOQ> boqAddonObjects, List<ProposalBOQ> boqServiceObjects) {
+   /* private void generateSoOld(RoutingContext routingContext, List<ProposalBOQ> boqProductObjects, List<ProposalBOQ> boqAddonObjects, List<ProposalBOQ> boqServiceObjects) {
 
         DriveFile driveFile = null;
         List<String> outputFiles = new ArrayList<>();
@@ -219,7 +233,7 @@ public class BOQHandler extends AbstractRouteHandler {
             outputFiles = generateSoForProduct(boqProductObjects);
         }
 //        LOG.debug("Output files size :" + outputFiles.size());
-/*
+*//*
         if (!(boqAddonObjects.size() == 0))
         {
             String outputFileForAddon = generateSoForAddon(routingContext,boqAddonObjects);
@@ -229,7 +243,7 @@ public class BOQHandler extends AbstractRouteHandler {
         {
             String outputFileForService = generateSoForServices(routingContext,boqServiceObjects);
             outputFiles.add(outputFileForService);
-        }*/
+        }*//*
 
         try {
             LOG.debug("Before calling method :" + userId);
@@ -250,7 +264,7 @@ public class BOQHandler extends AbstractRouteHandler {
 
         updateProposalHeader(routingContext,res);
 
-    }
+    }*/
 
    /* private String generateSoForAddon(RoutingContext routingContext, List<ProposalBOQ> proposal_boqs_addons) {
 
@@ -261,7 +275,7 @@ public class BOQHandler extends AbstractRouteHandler {
 
         return new SOExtractTemplateCreator(proposal_boqs_addons).create();
     }*/
-
+/*
     private List<String> generateSoForProduct(List<ProposalBOQ> boqProductObjects) {
 
 //        LOG.debug("generateSoForProduct:" + boqProductObjects.size());
@@ -307,9 +321,9 @@ public class BOQHandler extends AbstractRouteHandler {
             outputFiles.add(outputFile);
         }
         return outputFiles;
-    }
+    }*/
 
-    private void updateProposalHeader(RoutingContext routingContext, JsonObject res) {
+   /* private void updateProposalHeader(RoutingContext routingContext, JsonObject res) {
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.header.boqupdate", res));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id, new DeliveryOptions().setSendTimeout(120000),
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -325,10 +339,10 @@ public class BOQHandler extends AbstractRouteHandler {
                     }
                 });
 
-    }
+    }*/
 
 
-    private Map<SpaceRoomProduct,List<ProposalBOQ>> getDistinctSpaceRoomProducts(List<ProposalBOQ> proposalBoqs)
+  /*  private Map<SpaceRoomProduct,List<ProposalBOQ>> getDistinctSpaceRoomProducts(List<ProposalBOQ> proposalBoqs)
     {
         Map<SpaceRoomProduct, List<ProposalBOQ>> spaceRoomProductMap = new HashMap<>();
         for (ProposalBOQ boq : proposalBoqs)
@@ -342,7 +356,7 @@ public class BOQHandler extends AbstractRouteHandler {
         }
         return spaceRoomProductMap;
     }
-
+*/
 
 
 }

@@ -26,36 +26,38 @@ public class BOQSheetCreator implements ExcelCellProcessor
     private static final int SPACE_TYPE_CELL = 0;
     private static final int ROOM_CELL = 1;
     private static final int CATEGORY_CELL = 2;
-    private static final int PRODUCT_OR_SERVICE = 3;
-    private static final int MODULE_CODE = 4;
-    private static final int CUSTOM_CHECK = 5;
-    private static final int CUSTOM_REMARKS = 6;
-    private static final int COMPONENT_CATEGORY = 7;
-    private static final int DSO_ERP_ITEM_CODE = 8;
-    private static final int DSO_REFERENCE_PART_NO = 9;
-    private static final int DSO_DESCRIPTION = 10;
-    private static final int DSO_UOM = 11;
-    private static final int DSO_RATE = 12;
-    private static final int DSO_QTY = 13;
-    private static final int DSO_PRICE = 14;
-    private static final int PLANNER_ERP_ITEM_CODE = 15;
-    private static final int PLANNER_REFERENCE_PART_NO = 16;
-    private static final int PLANNER_DESCRIPTION = 17;
-    private static final int PLANNER_UOM = 18;
-    private static final int PLANNER_RATE = 19;
-    private static final int PLANNER_QTY = 20;
-    private static final int PLANNER_PRICE = 21;
+    private static final int PRODUCT_ID = 3;
+    private static final int PRODUCT_OR_SERVICE = 4;
+    private static final int MODULE_SEQ = 5;
+    private static final int MODULE_CODE = 6;
+    private static final int CUSTOM_CHECK = 7;
+    private static final int CUSTOM_REMARKS = 8;
+    private static final int COMPONENT_CATEGORY = 9;
+    private static final int DSO_ERP_ITEM_CODE = 10;
+    private static final int DSO_REFERENCE_PART_NO = 11;
+    private static final int DSO_DESCRIPTION = 12;
+    private static final int DSO_UOM = 13;
+    private static final int DSO_RATE = 14;
+    private static final int DSO_QTY = 15;
+    private static final int DSO_PRICE = 16;
+    private static final int PLANNER_ERP_ITEM_CODE = 17;
+    private static final int PLANNER_REFERENCE_PART_NO = 18;
+    private static final int PLANNER_DESCRIPTION = 19;
+    private static final int PLANNER_UOM = 20;
+    private static final int PLANNER_RATE = 21;
+    private static final int PLANNER_QTY = 22;
+    private static final int PLANNER_PRICE = 23;
 
     //Hidden fields for saving to the database
-    private static final int SPACE_TYPE_HIDDEN = 22;
-    private static final int ROOM_HIDDEN = 23;
-    private static final int CATEGORY_HIDDEN = 24;
-    private static final int PRODUCT_HIDDEN = 25;
-    private static final int PRODUCT_ID_HIDDEN = 26;
-    private static final int MODULE_SEQ_HIDDEN = 27;
-    private static final int MODULE_HIDDEN = 28;
-    private static final int MYGUBBI_ERPCODE_HIDDEN = 29;
-    private static final int DISPLAY_ORDER = 30;
+    private static final int SPACE_TYPE_HIDDEN = 24;
+    private static final int ROOM_HIDDEN = 25;
+    private static final int CATEGORY_HIDDEN = 26;
+    private static final int PRODUCT_HIDDEN = 27;
+    private static final int PRODUCT_ID_HIDDEN = 28;
+    private static final int MODULE_SEQ_HIDDEN = 29;
+    private static final int MODULE_HIDDEN = 30;
+    private static final int MYGUBBI_ERPCODE_HIDDEN = 31;
+    private static final int DISPLAY_ORDER = 32;
 
     private ProposalHeader proposalHeader;
     private XSSFSheet quoteSheet;
@@ -215,7 +217,9 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, SPACE_TYPE_CELL, Cell.CELL_TYPE_BLANK, "").setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, ROOM_CELL, Cell.CELL_TYPE_BLANK, "").setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, CATEGORY_CELL, Cell.CELL_TYPE_BLANK, "").setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, PRODUCT_ID, Cell.CELL_TYPE_BLANK, "").setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, PRODUCT_OR_SERVICE, Cell.CELL_TYPE_BLANK, "").setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, MODULE_SEQ, Cell.CELL_TYPE_BLANK, "").setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, MODULE_CODE, Cell.CELL_TYPE_BLANK,"").setCellStyle(this.styles.getIndexStyle());
 
         this.createCellWithData(dataRow, CUSTOM_CHECK, Cell.CELL_TYPE_BLANK, "").setCellStyle(this.styles.getIndexStyle());
@@ -264,7 +268,9 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, SPACE_TYPE_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, ROOM_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, CATEGORY_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getcategory()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PRODUCT_ID, Cell.CELL_TYPE_STRING, proposalBoq.getProductId()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PRODUCT_OR_SERVICE, Cell.CELL_TYPE_STRING, proposalBoq.getProductService()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MODULE_SEQ, Cell.CELL_TYPE_STRING, proposalBoq.getModuleSeq()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, MODULE_CODE, Cell.CELL_TYPE_STRING, module.getDescription()+ ":" + proposalBoq.getMgCode()).setCellStyle(this.styles.getTextStyle());
 
         this.createCellWithData(dataRow, CUSTOM_CHECK, Cell.CELL_TYPE_STRING, proposalBoq.getCustomCheck()).setCellStyle(this.styles.getTextStyle());
@@ -316,7 +322,9 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, SPACE_TYPE_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, ROOM_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, CATEGORY_CELL, Cell.CELL_TYPE_STRING, proposalBoq.getcategory()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PRODUCT_ID, Cell.CELL_TYPE_STRING, proposalBoq.getProductId()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PRODUCT_OR_SERVICE, Cell.CELL_TYPE_STRING, proposalBoq.getProductService()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, MODULE_SEQ, Cell.CELL_TYPE_STRING, proposalBoq.getModuleSeq()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, MODULE_CODE, Cell.CELL_TYPE_STRING, proposalBoq.getMgCode()).setCellStyle(this.styles.getTextStyle());
 
         this.createCellWithData(dataRow, CUSTOM_CHECK, Cell.CELL_TYPE_STRING, proposalBoq.getCustomCheck()).setCellStyle(this.styles.getTextStyle());
