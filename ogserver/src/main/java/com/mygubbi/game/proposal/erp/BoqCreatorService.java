@@ -163,62 +163,8 @@ public class BoqCreatorService extends AbstractVerticle {
         }
         fillProposalAddons(quoteRequest,message,quoteData,proposalHeader, boqDataList);
 
-//        if (boqDataList.queryDataListProduct != null && boqDataList.queryDataListProduct.size() != 0) aggregateBoqLineItemsPerModule(boqDataList);
-
         insertBoqLineItemsForProductAndAddons(quoteRequest, boqDataList, message);
 
-    }
-
-   /* private void aggregateBoqLineItemsPerModule(BoqDataList boqDataList) {
-
-        List<ProposalBOQ> proposalBOQs = new ArrayList<>();
-
-        for (JsonObject jsonObject : boqDataList.queryDataListProduct)
-        {
-            ProposalBOQ proposalBOQ = new ProposalBOQ(jsonObject);
-            proposalBOQs.add(proposalBOQ);
-        }
-
-        Map<DistinctModule,List<ProposalBOQ>> distinctModulesMap = getDistinctModules(proposalBOQs);
-
-        for (DistinctModule distinctModule : distinctModulesMap.keySet()) {
-
-            List<ProposalBOQ> proposalBoqAsPerModule = distinctModulesMap.get(distinctModule);
-            List<SOPart> soPartsList = new ArrayList<>();
-
-            for (ProposalBOQ proposalBOQ : proposalBoqAsPerModule) {
-                SOPart soPart = new SOPart(proposalBOQ.getDsoErpItemCode(), proposalBOQ.getDsoReferencePartNo(), proposalBOQ.getDsoUom(), proposalBOQ.getDsoDescription(), proposalBOQ.getDsoQty());
-                soPartsList.add(soPart);
-            }
-
-            List<SOPart> mergedList = new ArrayList<>();
-
-            for (SOPart p : soPartsList) {
-                int index = mergedList.indexOf(p);
-                if (index != -1) {
-                    mergedList.set(index, mergedList.get(index).merge(p));
-                } else {
-                    mergedList.add(p);
-                }
-            }
-        }
-
-
-    }
-*/
-    private Map<DistinctModule,List<ProposalBOQ>> getDistinctModules(List<ProposalBOQ> proposalBoqs)
-    {
-        Map<DistinctModule, List<ProposalBOQ>> distinctModuleMap = new HashMap<>();
-        for (ProposalBOQ boq : proposalBoqs)
-        {
-            DistinctModule distinctModule = new DistinctModule(boq);
-            if (!distinctModuleMap.containsKey(distinctModule))
-            {
-                distinctModuleMap.put(distinctModule,new ArrayList<>());
-            }
-            distinctModuleMap.get(distinctModule).add(boq);
-        }
-        return distinctModuleMap;
     }
 
 
@@ -228,6 +174,7 @@ public class BoqCreatorService extends AbstractVerticle {
         List<ProductAddon> counter_tops = quoteData.getCounterTops();
         List<ProductAddon> loose_furniture = quoteData.getLooseFurniture();
         List<ProductAddon> services = quoteData.getServices();
+        List<ProductAddon> custom_addons = quoteData.getCustomAddons();
         List<ProductAddon> master_addons = new ArrayList<>();
 
         if (addon_accessories.size() != 0) {
@@ -256,6 +203,11 @@ public class BoqCreatorService extends AbstractVerticle {
 
         if (services.size() != 0) {
             for (ProductAddon productAddon : services) {
+                master_addons.add(productAddon);
+            }
+        }
+        if (custom_addons.size() != 0) {
+            for (ProductAddon productAddon : custom_addons) {
                 master_addons.add(productAddon);
             }
         }
@@ -453,10 +405,20 @@ public class BoqCreatorService extends AbstractVerticle {
     private void fillAllAddonsintoDb(List<ProductAddon> productAddons, ProposalHeader proposalHeader, BoqDataList boqDataList) {
 
         for (ProductAddon productAddon : productAddons) {
-            PriceMaster addonPrice = RateCardService.getInstance().getAddonRate(productAddon.getCode(), proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
-            proposal_boq = new ProposalBOQ(productAddon, addonPrice);
+            if (productAddon.isCustomAddon())
+            {
+                PriceMaster customAddonFactor = RateCardService.getInstance().getFactorRate(RateCard.CUSTOM_ADDON_SALES_PRICE_FACTOR,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+                proposal_boq = new ProposalBOQ(productAddon, productAddon.getRate() * customAddonFactor.getSourcePrice(), productAddon.getAmount() * customAddonFactor.getSourcePrice());
 
-            if (addonPrice.getSourcePrice() != 0 ) boqDataList.queryDataListProduct.add(proposal_boq);
+            }
+            else
+            {
+                PriceMaster addonPrice = RateCardService.getInstance().getAddonRate(productAddon.getCode(), proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+                proposal_boq = new ProposalBOQ(productAddon, addonPrice.getSourcePrice(), addonPrice.getSourcePrice() * productAddon.getQuantity());
+
+            }
+
+            boqDataList.queryDataListProduct.add(proposal_boq);
 
         }
     }
@@ -705,11 +667,57 @@ public class BoqCreatorService extends AbstractVerticle {
         List<BoqItem> boqItems = new ArrayList<>();
 
         for (HingePack hingePack : module.getHingePacks()) {
-            Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
+            LOG.debug("Hinge Pack :" + hingePack);
+            Handle hinge ;
+            String hingeCode;
+            if (hingePack.getHingeCode().equals("DRAWER-HINGE"))
+            {
+                hingeCode = getHingeCode(hingePack,module);
+                hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingeCode);
+            }
+            else
+            {
+                hingeCode = hingePack.getHingeCode();
+                hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
+            }
+
             double quantity = getHingeRateBasedOnQty(hingePack, module);
-            boqItems.add(new BoqItem(hingePack.getHingeCode(), hinge.getArticleNo(),hinge.getTitle(), hinge.getErpCode(), "Nos", quantity, priceDate, city, hinge.getBoqDisplayOrder()));
+            boqItems.add(new BoqItem(hingeCode, hinge.getArticleNo(),hinge.getTitle(), hinge.getErpCode(), "Nos", quantity, priceDate, city, hinge.getBoqDisplayOrder()));
         }
         return boqItems;
+    }
+
+    private String getHingeCode(HingePack hingePack, ProductModule productModule) {
+
+        String code = null;
+
+                if (Objects.equals(hingePack.getTYPE(), "Soft Close")) {
+//                  LOG.debug("inisde soft close" + hingePack);
+                    if (productModule.getDepth() < 350)
+                        code = "HINGE05";
+                    else if (productModule.getDepth() < 400)
+                        code = "HINGE04";
+                    else if (productModule.getDepth() < 450)
+                        code = "HINGE02";
+                    else if (productModule.getDepth() < 500)
+                        code = "HINGE03";
+                    else if (productModule.getDepth() < 650)
+                        code = "HINGE06";
+                } else {
+//                  LOG.debug("inisde non soft close" + hingePack);
+
+                    if (productModule.getDepth() < 350)
+                        code = "HINGE11";
+                    else if (productModule.getDepth() < 400)
+                        code = "HINGE10";
+                    else if (productModule.getDepth() < 450)
+                        code = "HINGE08";
+                    else if (productModule.getDepth() < 500)
+                        code = "HINGE09";
+                    else if (productModule.getDepth() < 650)
+                        code = "HINGE12";
+                }
+        return code;
     }
 
     private double getHingeRateBasedOnQty(HingePack hingePack, ProductModule productModule) {

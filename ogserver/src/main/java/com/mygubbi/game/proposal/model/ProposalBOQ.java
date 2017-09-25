@@ -400,7 +400,7 @@ public class ProposalBOQ extends JsonObject {
         this.setPlannerPrice(addonRate.getSourcePrice() * quantity);
     }
 
-    public ProposalBOQ(ProductAddon productAddon, PriceMaster addonPrice) {
+    public ProposalBOQ(ProductAddon productAddon, double dsoRate, double DSOPrice) {
         this.setProposalId(productAddon.getProposalId());
         this.setSpaceType(productAddon.getSpaceType());
         this.setRoom(productAddon.getRoomCode());
@@ -417,16 +417,16 @@ public class ProposalBOQ extends JsonObject {
         this.setDSOReferencePartNo(productAddon.getCatalogueCode());
         this.setDSODescription(productAddon.getProduct());
         this.setDSOUom(productAddon.getUom());
-        this.setDSORate(addonPrice.getSourcePrice());
+        this.setDSORate(dsoRate);
         this.setDSOQty(productAddon.getQuantity());
-        this.setDSOPrice(addonPrice.getSourcePrice() * productAddon.getQuantity());
+        this.setDSOPrice(DSOPrice);
         this.setPlannerErpCode("NA");
         this.setPlannerUom(productAddon.getCatalogueCode());
-        this.setPlannerDescription(productAddon.getTitle());
+        this.setPlannerDescription(productAddon.getProduct());
         this.setPlannerUom(productAddon.getUom());
-        this.setPlannerRate(addonPrice.getSourcePrice());
+        this.setPlannerRate(dsoRate);
         this.setPlannerQty(productAddon.getQuantity());
-        this.setPlannerPrice(addonPrice.getSourcePrice() * productAddon.getQuantity());
+        this.setPlannerPrice(DSOPrice);
     }
 
     public ProposalBOQ(ProposalHeader proposalHeader, AssembledProductInQuote productInQuote, ProductModule module, BoqItem boqItem)

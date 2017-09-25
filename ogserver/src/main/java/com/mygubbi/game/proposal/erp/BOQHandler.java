@@ -211,7 +211,6 @@ public class BOQHandler extends AbstractRouteHandler {
     private void generateSo(RoutingContext routingContext)
     {
             int count = 0;
-            LOG.debug("Inside create boq output : " + ++count);
             JsonObject quoteRequestJson = routingContext.getBodyAsJson();
             Integer id = LocalCache.getInstance().store(quoteRequestJson);
             VertxInstance.get().eventBus().send(SOCreatorService.CREATE_SO_OUTPUT, id,  new DeliveryOptions().setSendTimeout(120000),

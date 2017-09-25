@@ -78,8 +78,8 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.city = proposalHeader.getProjectCity();
         this.proposalBoqsForProduct = proposalBoqsForProduct;
         this.proposalBoqsForAddon = proposalBoqsForAddon;
-        LOG.debug("Proposal boq for product : " + proposalBoqsForProduct.size());
-        LOG.debug("Proposal boq for addon : " + proposalBoqsForAddon.size());
+//        LOG.debug("Proposal boq for product : " + proposalBoqsForProduct.size());
+//        LOG.debug("Proposal boq for addon : " + proposalBoqsForAddon.size());
 //        LOG.debug("Inside Bow sheet creator");
     }
 
@@ -154,12 +154,12 @@ public class BOQSheetCreator implements ExcelCellProcessor
 
     public int fillAddons(int currentRow) {
 
-        LOG.debug("Inisde fill addons size :" + this.proposalBoqsForAddon.size());
+//        LOG.debug("Inisde fill addons size :" + this.proposalBoqsForAddon.size());
         if (this.proposalBoqsForAddon.isEmpty()) {
             return currentRow;
         }
 
-        LOG.debug("Inisde fill addons size  2:" + this.proposalBoqsForAddon.size());
+//        LOG.debug("Inisde fill addons size  2:" + this.proposalBoqsForAddon.size());
 
 
         fillAddonsForBoq(currentRow, proposalBoqsForAddon);

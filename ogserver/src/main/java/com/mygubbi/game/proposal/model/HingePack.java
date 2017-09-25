@@ -51,4 +51,6 @@ public class HingePack extends JsonObject {
     public String getErpCode() {
         return this.getString(ERP_CODE);
     }
+
+
 }

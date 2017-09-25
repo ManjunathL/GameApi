@@ -4,9 +4,7 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.model.BoqDataList;
-import com.mygubbi.game.proposal.model.ProposalBOQ;
-import com.mygubbi.game.proposal.model.SOPart;
+import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.si.gdrive.DriveFile;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
@@ -93,16 +91,13 @@ public class SOCreatorService extends AbstractVerticle {
                             {
                                 proposal_boqs_products.add(proposal_boq);
                             }
-                            else if (proposal_boq.getcategory().equals("Services"))
-                            {
-                                proposal_boqs_services.add(proposal_boq);
-                            }
                             else
                             {
                                 proposal_boqs_addons.add(proposal_boq);
                             }
 
                         }
+                        LOG.debug("Proposal boq addons size : " + proposal_boqs_addons.size());
 
                        /* LOG.debug("Modular products size :" + proposal_boqs_products.size());
                         LOG.debug("Services size :" + proposal_boqs_services.size());
@@ -127,17 +122,11 @@ public class SOCreatorService extends AbstractVerticle {
             outputFiles = generateSoForProduct(boqProductObjects);
         }
 //        LOG.debug("Output files size :" + outputFiles.size());
-/*
         if (!(boqAddonObjects.size() == 0))
         {
-            String outputFileForAddon = generateSoForAddon(routingContext,boqAddonObjects);
-            outputFiles.add(outputFileForAddon);
+            UploadToDrive outputFileForAddon = generateSoForAddon(boqAddonObjects);
+            if (outputFileForAddon != null) outputFiles.add(outputFileForAddon);
         }
-        if (!(boqServiceObjects.size() == 0))
-        {
-            String outputFileForService = generateSoForServices(routingContext,boqServiceObjects);
-            outputFiles.add(outputFileForService);
-        }*/
 
         try {
             LOG.debug("Before calling method :" + userId);
@@ -221,6 +210,35 @@ public class SOCreatorService extends AbstractVerticle {
             spaceRoomProductMap.get(spaceRoom).add(boq);
         }
         return spaceRoomProductMap;
+    }
+
+    private UploadToDrive generateSoForAddon(List<ProposalBOQ> boqAddonObjects) {
+
+        UploadToDrive uploadToDrive = null;
+
+        if (boqAddonObjects.size() == 0)
+        {
+            return null;
+        }
+        else
+        {
+            List<SOPartForAddon> soPartForAddonList = new ArrayList<>();
+            for (ProposalBOQ proposalBOQs : boqAddonObjects)
+            {
+                    SOPartForAddon soPart = new SOPartForAddon(proposalBOQs.getProductService(),proposalBOQs.getDsoDescription(),proposalBOQs.getDsoUom(),proposalBOQs.getDsoQty(),proposalBOQs.getROOM());
+                    soPartForAddonList.add(soPart);
+            }
+
+            String outputFile = new SOExtractTemplateCreatorForAddons(soPartForAddonList, boqAddonObjects.get(0).getProposalId()).create();
+            uploadToDrive = new UploadToDrive();
+            uploadToDrive.setFileName("Addons");
+            uploadToDrive.setFilePath(outputFile);
+
+        }
+
+
+
+        return uploadToDrive;
     }
 
     private void updateProposalHeader(JsonObject quoteRequest, Message message,JsonObject result) {
