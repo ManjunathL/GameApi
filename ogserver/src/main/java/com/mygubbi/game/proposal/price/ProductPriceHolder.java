@@ -91,6 +91,7 @@ public class ProductPriceHolder {
     private double stdModulePrice = 0.0;
     private double nStdModulePrice = 0.0;
     private double hikeModulePrice = 0.0;
+    private double hikeModuleCost = 0.0;
 
     private java.sql.Date priceDate;
     private String city;
@@ -127,6 +128,8 @@ public class ProductPriceHolder {
 
             ProductModule productModule = modulePriceHolder.getProductModule();
 
+            PriceMaster hikeModuleCostFactor  = RateCardService.getInstance().getFactorRate(RateCard.CUSTOM_ADDON_SALES_PRICE_FACTOR,this.priceDate,this.city);
+
             if (productModule.getModuleCategory().startsWith("S")) {
                 this.stdModuleCount = this.stdModuleCount + 1;
                 this.stdModulePrice = this.stdModulePrice + modulePriceHolder.getTotalCost();
@@ -136,6 +139,7 @@ public class ProductPriceHolder {
             } else if (productModule.getModuleCategory().startsWith("H")) {
                 this.hikeModuleCount = this.hikeModuleCount + 1;
                 this.hikeModulePrice = this.hikeModulePrice + modulePriceHolder.getTotalCost();
+                this.hikeModuleCost = this.hikeModuleCost + modulePriceHolder.getTotalSourceCost();
             }
 
             addToProductCarcassPrice(modulePriceHolder.getCarcassCost());
@@ -697,6 +701,11 @@ public class ProductPriceHolder {
     public double getHikeModulePrice()
     {
         return this.hikeModulePrice;
+    }
+
+    public double getHikeModuleCost()
+    {
+        return this.hikeModuleCost;
     }
 
     public double getLConnectorPrice() {
