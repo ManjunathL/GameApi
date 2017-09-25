@@ -36,6 +36,7 @@ public class DWProductModule extends JsonObject {
     private static final String ROOM="room";
     private static final String PRID="prId";
     private static final String PRTITLE="prTitle";
+    private static final String PR_CATEGORY_CODE="prCategoryCode";
     private static final String MODULESEQ="moduleSeq";
     private static final String MODULECODE="moduleCode";
     private static final String DESCRIPTION="description";
@@ -154,6 +155,7 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setRoom(productLineItem.getRoomCode());
         dwProductModule.setPrId(productLineItem.getId());
         dwProductModule.setPrTitle(productLineItem.getTitle());
+        dwProductModule.setPrCategoryCode(productLineItem.getProductCategory());
         dwProductModule.setModuleSeq(productModule.getModuleSequence());
         dwProductModule.setModuleCode(productModule.getMGCode());
         dwProductModule.setDescription(productModule.getDescription());
@@ -370,6 +372,15 @@ public class DWProductModule extends JsonObject {
         return this;
     }
 
+    public String getPrCatergoryCode() {
+        return this.getString(PR_CATEGORY_CODE);
+    }
+
+    public DWProductModule setPrCategoryCode(String prCode)
+    {
+        put(PR_CATEGORY_CODE,prCode);
+        return this;
+    }
 
 
     public int getModuleSeq() {
