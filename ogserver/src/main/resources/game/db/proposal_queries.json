@@ -1865,7 +1865,7 @@
       "id": "erp.master.select",
       "type": "select",
       "table": "ERP_master",
-      "query": "select * from ERP_master",
+      "query": "select * from erp_master",
       "params": [],
       "jsonfields":[]
     },

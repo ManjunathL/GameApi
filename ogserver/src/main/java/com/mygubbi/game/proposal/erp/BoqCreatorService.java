@@ -229,8 +229,20 @@ public class BoqCreatorService extends AbstractVerticle {
 
             if (proposalHeader.getBeforeProductionSpecification().equalsIgnoreCase("yes"))
             {
-                if (productInQuote.getProduct().getHandletypeSelection() != null) boqItemListMaster.addAll(collectModuleHandles(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productInQuote));
-                if (productInQuote.getProduct().getKnobType() != null) boqItemListMaster.add(collectModuleKnob(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity()));
+                if (productInQuote.getProduct().getHandletypeSelection() != null)
+                {
+                    if (module.getHandleMandatory().equalsIgnoreCase("yes"))
+                    {
+                        boqItemListMaster.addAll(collectModuleHandles(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productInQuote));
+                    }
+                }
+                if (productInQuote.getProduct().getKnobType() != null)
+                {
+                    if (module.getKnobMandatory().equalsIgnoreCase("yes"))
+                    {
+                        boqItemListMaster.add(collectModuleKnob(productInQuote,module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity()));
+                    }
+                }
                 if (!(module.getHingePacks().size() == 0)) {
                     List<BoqItem> c = collectModuleHinge(module, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
                     boqItemListMaster.addAll(c);
@@ -643,22 +655,27 @@ public class BoqCreatorService extends AbstractVerticle {
             AccHwComponent hardware6 = ModuleDataService.getInstance().getHardware(jProfileRate.getRateId());
             boqItems.add(new BoqItem(hardware6.getCode(), hardware6.getCatalogCode(),hardware6.getTitle(), hardware6.getERPCode(), hardware6.getUom(), lWidth, priceDate, city, hardware6.getBoqDisplayOrder()));
         }
-        if (module.getHandleCode() == null) {
+        else
+        {
+            Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(assembledProductInQuote.getProduct().getHandleCode());
+            boqItems.add(new BoqItem(handle.getCode(), handle.getArticleNo(),handle.getTitle(), handle.getErpCode(), "Nos", module.getHandleQuantity(), priceDate, city, handle.getBoqDisplayOrder()));
+
+        }
+
+        if (assembledProductInQuote.getProduct().getHandleCode() == null) {
             return null;
         }
-        Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
-        boqItems.add(new BoqItem(handle.getCode(), handle.getArticleNo(),handle.getTitle(), handle.getErpCode(), "Nos", module.getHandleQuantity(), priceDate, city, handle.getBoqDisplayOrder()));
 
         return boqItems;
 
     }
 
 
-    private BoqItem collectModuleKnob(ProductModule module, Date priceDate, String city) {
-        if (module.getKnobCode() == null) {
+    private BoqItem collectModuleKnob(AssembledProductInQuote assembledProductInQuote,ProductModule module, Date priceDate, String city) {
+        if (assembledProductInQuote.getProduct().getKnobCode() == null) {
             return null;
         }
-        Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
+        Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(assembledProductInQuote.getProduct().getKnobCode());
         return new BoqItem(knob.getCode(), knob.getArticleNo(),knob.getTitle(), knob.getErpCode(), "Nos", module.getKnobQuantity(), priceDate, city, knob.getBoqDisplayOrder());
 
     }
@@ -667,7 +684,7 @@ public class BoqCreatorService extends AbstractVerticle {
         List<BoqItem> boqItems = new ArrayList<>();
 
         for (HingePack hingePack : module.getHingePacks()) {
-            LOG.debug("Hinge Pack :" + hingePack);
+//            LOG.debug("Hinge Pack :" + hingePack);
             Handle hinge ;
             String hingeCode;
             if (hingePack.getHingeCode().equals("DRAWER-HINGE"))
