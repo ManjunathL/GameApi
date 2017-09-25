@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.erp;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
+import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.*;
@@ -62,8 +63,8 @@ public class BOQHandler extends AbstractRouteHandler {
         String file_id = jsonObject.getString("id");
         int proposalId = jsonObject.getInteger("proposalId");
         userId = jsonObject.getString("userId");
-        LOG.debug("Save boq file :" + userId);
-        String path = "D:/Mygubbi GAME/boq_downloaded.xlsx";
+        String path = ConfigHolder.getInstance().getStringValue("boq_dir","/mnt/game/proposal/");
+        path = path + proposalId +"/boq_downloaded.xslx";
         this.driveServiceProvider = new DriveServiceProvider();
         this.driveServiceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
         writeToDB(routingContext,path,proposalId);

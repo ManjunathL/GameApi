@@ -34,6 +34,7 @@
   "sow_template" : "c:/Users/Public/game_files/sow_template.xlsx",
   "boq_template" : "c:/Users/Public/game_files/boq_template.xlsx",
   "so_template" : "c:/Users/Public/game_files/so-template.xlsx",
+  "boq_dir" : "c:/Users/Public/game_files/",
   "so_addon_template" : "c:/Users/Public/game_files/so_addon_template.xlsx",
   "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
   "ratecard_file": "d:/tmp/ratecard.bin",

@@ -927,7 +927,7 @@ public class ProposalHandler extends AbstractRouteHandler
     LOG.debug("Inside create boq output : " + ++count);
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(quoteRequestJson);
-        VertxInstance.get().eventBus().send(BoqCreatorService.CREATE_BOQ_OUTPUT, id,  new DeliveryOptions().setSendTimeout(120000),
+        VertxInstance.get().eventBus().send(BoqCreatorService.CREATE_BOQ_OUTPUT, id,  new DeliveryOptions().setSendTimeout(1200000),
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());

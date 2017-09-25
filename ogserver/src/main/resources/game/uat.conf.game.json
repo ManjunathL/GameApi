@@ -26,6 +26,7 @@
   "boq_template" : "/mnt/game/proposal/templates/boq_template.xlsx",
   "so_template" : "/mnt/game/proposal/templates/so-template.xlsx",
   "so_addon_template" : "/mnt/game/proposal/templates/so_addon_template.xlsx",
+  "boq_dir" : "/mnt/game/proposal/",
   "sow_downloaded_xls_format":"sow.xlsx",
   "sow_downloaded_pdf_fomat" : "sow.pdf",
   "merged_pdf":"merged.pdf",
