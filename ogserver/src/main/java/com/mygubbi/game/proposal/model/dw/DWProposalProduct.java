@@ -112,6 +112,7 @@ public class DWProposalProduct extends JsonObject {
      private static final String NSTDMPRICE="nStdMPrice";
      private static final String HIKEMC="hikeModuleCount";
      private static final String HIKEMPRICE="hikeMPrice";
+     private static final String HIKEMCOST="hikeMCost";
 
      private static final String OLD_MATT_SOLID_FINISH = "Matt -solid";
      private static final String OLD_MATT_WOOD_GRAIN_FINISH = "Matt- Wood grain";
@@ -1018,6 +1019,16 @@ public class DWProposalProduct extends JsonObject {
         return this;
     }
 
+    public double getHikeModuleCost() {
+        return this.getDouble(HIKEMCOST);
+    }
+
+    public DWProposalProduct setHikeModuleCost(double hikeModuleCost)
+    {
+        put(HIKEMCOST,hikeModuleCost);
+        return this;
+    }
+
     public DWProposalProduct setDwProductObjects(ProductPriceHolder productPriceHolder, ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem) {
         DWProposalProduct dwProposalProduct = new DWProposalProduct();
 
@@ -1122,6 +1133,8 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setNStdModulePrice(productPriceHolder.getNStdModulePrice());
         dwProposalProduct.setHikeModuleCount(productPriceHolder.getHikeModuleCount());
         dwProposalProduct.setHikeModulePrice(productPriceHolder.getHikeModulePrice());
+        dwProposalProduct.setHikeModulePrice(productPriceHolder.getHikeModulePrice());
+        dwProposalProduct.setHikeModuleCost(productPriceHolder.getHikeModuleCost());
         dwProposalProduct.setInstallationCost(0);
         dwProposalProduct.setTransportationCost(0);
 

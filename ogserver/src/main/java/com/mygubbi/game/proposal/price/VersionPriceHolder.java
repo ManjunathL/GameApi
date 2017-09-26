@@ -99,6 +99,7 @@ public class VersionPriceHolder {
     private double stdModulePrice = 0;
     private double nStdModulePrice = 0;
     private double hikeModulePrice = 0;
+    private double hikeModuleCost = 0;
 
 
 
@@ -175,6 +176,7 @@ public class VersionPriceHolder {
             addToStdModulePrice(productPriceHolder.getStdModulePrice());
             addToNStdModulePrice(productPriceHolder.getNStdModulePrice());
             addToHikeModulePrice(productPriceHolder.getHikeModulePrice());
+            addToHikeModuleCost(productPriceHolder.getHikeModuleCost());
 
             addToVersionPrice(productPriceHolder.getProductPrice());
             addToVersionPriceAfterDiscount(productPriceHolder.getProductPriceAfterDiscount());
@@ -227,6 +229,11 @@ public class VersionPriceHolder {
     private void addToHikeModulePrice(double hikeModulePrice) {
         if (hikeModulePrice == 0) return;
         this.hikeModulePrice += hikeModulePrice;
+    }
+
+    private void addToHikeModuleCost(double hikeModuleCost) {
+        if (hikeModuleCost == 0) return;
+        this.hikeModuleCost += hikeModuleCost;
     }
 
     private void addToNStdModulePrice(double nStdModulePrice) {
@@ -923,5 +930,9 @@ public class VersionPriceHolder {
 
     public double getHikeModulePrice() {
         return this.hikeModulePrice;
+    }
+
+    public double getHikeModuleCost() {
+        return this.hikeModuleCost;
     }
 }

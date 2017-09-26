@@ -85,7 +85,6 @@ public class DWModuleComponent extends JsonObject {
     private static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
     private static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
 
-    private static final String ALL="all";
 
 
 
@@ -569,18 +568,18 @@ public class DWModuleComponent extends JsonObject {
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productModule.getFinishCode());
 
-        RateCard nonStandardloadingFactorCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR_NONSTANDARD,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
+        RateCard nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
         RateCard loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productModule.getProductCategory());
         RateCard stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productModule.getProductCategory());
         RateCard nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productModule.getProductCategory());
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
-        RateCard stdManufacturingCost = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
-        RateCard nStdManufacturingCost = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        RateCard stdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        RateCard nStdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
 
 
         double rate = loadingFactorBasedOnProduct.getRateBasedOnProduct();
@@ -733,8 +732,8 @@ public class DWModuleComponent extends JsonObject {
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
         double quantity = 0;
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
@@ -860,8 +859,8 @@ public class DWModuleComponent extends JsonObject {
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
 
@@ -976,8 +975,8 @@ public class DWModuleComponent extends JsonObject {
     public DWModuleComponent setDwComponentAttributesForGolaProfileHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent, double quantity) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
 
         PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(accHwComponent.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
 
@@ -1113,8 +1112,8 @@ public class DWModuleComponent extends JsonObject {
             handleOrKnobRate = RateCardService.getInstance().getHingeRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         }
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
 
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());

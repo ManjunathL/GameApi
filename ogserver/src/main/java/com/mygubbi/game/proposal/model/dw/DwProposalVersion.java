@@ -51,6 +51,7 @@ public class DwProposalVersion extends JsonObject {
     private static final String STD_MODULE_PRICE = "stdModulePrice";
     private static final String N_STD_MODULE_PRICE = "nStdModulePrice";
     private static final String HIKE_MODULE_PRICE = "hikeModulePrice";
+    private static final String HIKE_MODULE_COST = "hikeModuleCost";
     private static final String VR_PRICE = "vrPrice";
     private static final String VR_PRICE_AFTER_DISCOUNT = "vrPriceAfterDiscount";
     private static final String VR_PRICE_AFTER_TAX = "vrPriceAfterTax";
@@ -307,6 +308,8 @@ public class DwProposalVersion extends JsonObject {
     public double getHikeModulePrice() {
         return this.getDouble(HIKE_MODULE_PRICE);
     }
+
+    public double getHikeModuleCost(){return this.getDouble(HIKE_MODULE_COST);}
 
     public double getVersionPrice() {
         return this.getDouble(VR_PRICE);
@@ -1067,6 +1070,10 @@ public class DwProposalVersion extends JsonObject {
         return this;
     }
 
+    public DwProposalVersion setHikeModuleCost(double cost){
+        this.put(HIKE_MODULE_COST,cost);
+        return this;
+    }
     public DwProposalVersion setDwVersionObjects(ProposalHeader proposalHeader, ProposalVersion proposalVersion, VersionPriceHolder versionPriceHolder) {
         DwProposalVersion dwProposalVersion = new DwProposalVersion();
 
@@ -1102,6 +1109,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setnStdModulePrice(versionPriceHolder.getNStdModulePrice());
         dwProposalVersion.setHikeModuleCount(versionPriceHolder.getHikeModuleCount());
         dwProposalVersion.setHikeModulePrice(versionPriceHolder.getHikeModulePrice());
+        dwProposalVersion.setHikeModuleCost(versionPriceHolder.getHikeModuleCost());
         dwProposalVersion.setVersionPrice(versionPriceHolder.getPrice());
         dwProposalVersion.setVersionPriceAfterDiscount(versionPriceHolder.getPriceAfterDiscount());
         dwProposalVersion.setVersionPriceAfterTax(versionPriceHolder.getPriceWotax());

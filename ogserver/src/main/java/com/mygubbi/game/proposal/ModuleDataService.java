@@ -563,7 +563,7 @@ public class ModuleDataService extends AbstractVerticle
         {
             int before = priceDate.compareTo(finish.getFromDate());
             int after = priceDate.compareTo(finish.getToDate());
-            LOG.info("Boolean value " +(before >= 0 && after <= 0));
+//            LOG.info("Boolean value " +(before >= 0 && after <= 0));
             Boolean value=before >= 0 && after <= 0;
 
             if (finish.getFinishType().equals(shutterFinish.getFinishCode()) && finish.getShutterMaterial().equals(carcassCode) && value.equals(true) )
