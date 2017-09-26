@@ -567,7 +567,7 @@ public class DWModuleComponent extends JsonObject {
         double panelProfit = 0;
         double panelMargin = 0;
 
-        ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
+        ShutterFinish finish = ModuleDataService.getInstance().getFinish(productModule.getFinishCode());
 
         RateCard nonStandardloadingFactorCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR_NONSTANDARD,
                 RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(),ALL);
