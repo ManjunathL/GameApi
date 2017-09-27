@@ -40,7 +40,7 @@ import static org.jooq.lambda.tuple.Tuple.tuple;
 
 public class BOQHandler extends AbstractRouteHandler{
 
-    public static int[] planner_input = {17,18,19,20,21,22};
+    public static int[] planner_input = {17,18,19,20,21,22,23};
     public static int[] details = {24, 25 ,26, 27, 28, 29, 30, 31};
 
     private List<QueryData> updateQueries = new ArrayList<>();
@@ -129,8 +129,8 @@ public class BOQHandler extends AbstractRouteHandler{
                     proposal_boq.setPlannerDescription(xssfRow.getCell(planner_input[2]).getStringCellValue());
                     proposal_boq.setPlannerUom(xssfRow.getCell(planner_input[3]).getStringCellValue());
                     proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
-                    proposal_boq.setPlannerQty(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
-                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
+                    proposal_boq.setPlannerQty(Double.parseDouble((xssfRow.getCell(planner_input[5]).getStringCellValue())));
+                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getStringCellValue()));
 
                     proposal_boq.put("proposalId",proposalId);
 
@@ -222,7 +222,7 @@ public class BOQHandler extends AbstractRouteHandler{
                     proposal_boq.setPlannerUom(xssfRow.getCell(planner_input[3]).getStringCellValue());
                     proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
                     proposal_boq.setPlannerQty(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
-                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
+                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getStringCellValue()));
 
 
                     insertQueries.add(new QueryData("proposal.boq.create", proposal_boq));

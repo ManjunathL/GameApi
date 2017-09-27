@@ -29,6 +29,7 @@ public class ProductAddon extends JsonObject
     private static final String BRAND_CODE = "brandCode";
     private static final String CATALOGUE_CODE = "catalogueCode";
     private static final String TITLE = "title";
+    private static final String UOM = "uom";
     private static String QUANTITY = "quantity";
     private static String AMOUNT = "amount";
     private static String RATE = "rate";
@@ -114,7 +115,7 @@ public class ProductAddon extends JsonObject
 
     public String getUom()
     {
-        return "uom";
+        return this.getString(UOM);
     }
 
     public boolean isAccessory()

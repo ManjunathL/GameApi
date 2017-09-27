@@ -242,7 +242,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, PLANNER_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerUom()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerRate()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerQty()).setCellStyle(this.styles.getTextStyle());
-        this.createCellWithData(dataRow, PLANNER_PRICE, 1, proposalBoq.getPlannerPrice()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_PRICE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerPrice()).setCellStyle(this.styles.getTextStyle());
 
         //hidden rows used for querying while updating the data
         this.createCellWithData(dataRow, SPACE_TYPE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
@@ -296,7 +296,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, PLANNER_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerUom()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerRate()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerQty()).setCellStyle(this.styles.getTextStyle());
-        this.createCellWithData(dataRow, PLANNER_PRICE, 1, proposalBoq.getPlannerPrice()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_PRICE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerPrice()).setCellStyle(this.styles.getTextStyle());
 
         this.createCellWithData(dataRow, SPACE_TYPE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, ROOM_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
@@ -350,7 +350,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, PLANNER_UOM, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerUom()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_RATE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerRate()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, PLANNER_QTY, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerQty()).setCellStyle(this.styles.getTextStyle());
-        this.createCellWithData(dataRow, PLANNER_PRICE, 1, proposalBoq.getPlannerPrice()).setCellStyle(this.styles.getTextStyle());
+        this.createCellWithData(dataRow, PLANNER_PRICE, Cell.CELL_TYPE_STRING, proposalBoq.getPlannerPrice()).setCellStyle(this.styles.getTextStyle());
 
         this.createCellWithData(dataRow, SPACE_TYPE_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getSpaceType()).setCellStyle(this.styles.getTextStyle());
         this.createCellWithData(dataRow, ROOM_HIDDEN, Cell.CELL_TYPE_STRING, proposalBoq.getROOM()).setCellStyle(this.styles.getTextStyle());
