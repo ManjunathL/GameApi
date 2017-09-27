@@ -128,9 +128,9 @@ public class BOQHandler extends AbstractRouteHandler{
                     proposal_boq.setPlannerReferencePartNo(xssfRow.getCell(planner_input[1]).getStringCellValue());
                     proposal_boq.setPlannerDescription(xssfRow.getCell(planner_input[2]).getStringCellValue());
                     proposal_boq.setPlannerUom(xssfRow.getCell(planner_input[3]).getStringCellValue());
-                    proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
-                    proposal_boq.setPlannerQty(Double.parseDouble((xssfRow.getCell(planner_input[5]).getStringCellValue())));
-                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getStringCellValue()));
+                    proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getRawValue()));
+                    proposal_boq.setPlannerQty(Double.parseDouble((xssfRow.getCell(planner_input[5]).getRawValue())));
+                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getRawValue()));
 
                     proposal_boq.put("proposalId",proposalId);
 
