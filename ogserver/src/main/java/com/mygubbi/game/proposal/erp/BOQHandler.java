@@ -128,9 +128,31 @@ public class BOQHandler extends AbstractRouteHandler{
                     proposal_boq.setPlannerReferencePartNo(xssfRow.getCell(planner_input[1]).getStringCellValue());
                     proposal_boq.setPlannerDescription(xssfRow.getCell(planner_input[2]).getStringCellValue());
                     proposal_boq.setPlannerUom(xssfRow.getCell(planner_input[3]).getStringCellValue());
-                    proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getRawValue()));
-                    proposal_boq.setPlannerQty(Double.parseDouble((xssfRow.getCell(planner_input[5]).getRawValue())));
-                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getRawValue()));
+                    if (xssfRow.getCell(planner_input[4]).getCellType() == 0)
+                    {
+                        proposal_boq.setPlannerRate((xssfRow.getCell(planner_input[4]).getNumericCellValue()));
+                    }
+                    else
+                    {
+                        proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
+                    }
+                    if (xssfRow.getCell(planner_input[5]).getCellType() == 0)
+                    {
+                        proposal_boq.setPlannerQty((xssfRow.getCell(planner_input[5]).getNumericCellValue()));
+                    }
+                    else
+                    {
+                        proposal_boq.setPlannerQty(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
+                    }
+                    if (xssfRow.getCell(planner_input[6]).getCellType() == 0)
+                    {
+                        proposal_boq.setPlannerPrice((xssfRow.getCell(planner_input[6]).getNumericCellValue()));
+                    }
+                    else
+                    {
+                        proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getStringCellValue()));
+                    }
+
 
                     proposal_boq.put("proposalId",proposalId);
 
@@ -172,14 +194,14 @@ public class BOQHandler extends AbstractRouteHandler{
             XSSFRow xssfRowTest = sheet.getRow(e);
             if (xssfRowTest.getCell(0).getStringCellValue().equals("ADDITIONAL ITEMS"))
             {
-                LOG.debug("Setting current row : " + e+1);
+//                LOG.debug("Setting current row : " + e+1);
                 currentRow = e +1;
 
             }
 
         }
 
-        LOG.debug("Current row : " + currentRow);
+//        LOG.debug("Current row : " + currentRow);
 
             for (int j = currentRow;j < sheet.getPhysicalNumberOfRows() ; j++) {
                 XSSFRow xssfRow = sheet.getRow(j);
@@ -187,9 +209,9 @@ public class BOQHandler extends AbstractRouteHandler{
 
                 if (xssfRow.getCell(0).getStringCellValue().equals("") || xssfRow.getCell(0).getStringCellValue().equals("") ) {
 //                    LOG.debug("returning :" + xssfRow.getRowNum());
-                    LOG.debug("Returning for row : " + j);
+//                    LOG.debug("Returning for row : " + j);
                 } else {
-                    LOG.debug("Additional items");
+//                    LOG.debug("Additional items");
                     ProposalBOQ proposal_boq = new ProposalBOQ();
 
                     proposal_boq.setProposalId(proposalId);
@@ -207,22 +229,52 @@ public class BOQHandler extends AbstractRouteHandler{
                     proposal_boq.setCustomRemarks("");
                     proposal_boq.setItemCategory("");
 
-                    proposal_boq.setDSOErpItemCode("");
                     proposal_boq.setDSOItemSeq(0);
-                    proposal_boq.setDSOReferencePartNo("");
-                    proposal_boq.setDSODescription("");
-                    proposal_boq.setDSOUom("");
-                    proposal_boq.setDSORate(0);
-                    proposal_boq.setDSOQty(0);
-                    proposal_boq.setDSOPrice(0);
+//                    proposal_boq.setDSOReferencePartNo("");
+//                    proposal_boq.setDSODescription("");
+//                    proposal_boq.setDSOUom("");
+//                    proposal_boq.setDSORate(0);
+//                    proposal_boq.setDSOQty(0);
+//                    proposal_boq.setDSOPrice(0);
 
                     proposal_boq.setPlannerErpCode(xssfRow.getCell(planner_input[0]).getStringCellValue());
+                    proposal_boq.setDSOErpItemCode(xssfRow.getCell(planner_input[0]).getStringCellValue());
                     proposal_boq.setPlannerReferencePartNo(xssfRow.getCell(planner_input[1]).getStringCellValue());
+                    proposal_boq.setDSOReferencePartNo(xssfRow.getCell(planner_input[1]).getStringCellValue());
                     proposal_boq.setPlannerDescription(xssfRow.getCell(planner_input[2]).getStringCellValue());
+                    proposal_boq.setDSODescription(xssfRow.getCell(planner_input[2]).getStringCellValue());
                     proposal_boq.setPlannerUom(xssfRow.getCell(planner_input[3]).getStringCellValue());
-                    proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
-                    proposal_boq.setPlannerQty(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
-                    proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getStringCellValue()));
+                    proposal_boq.setDSOUom(xssfRow.getCell(planner_input[3]).getStringCellValue());
+                    if (xssfRow.getCell(planner_input[4]).getCellType() == 0)
+                    {
+                        proposal_boq.setPlannerRate((xssfRow.getCell(planner_input[4]).getNumericCellValue()));
+                        proposal_boq.setDSORate((xssfRow.getCell(planner_input[4]).getNumericCellValue()));
+                    }
+                    else
+                    {
+                        proposal_boq.setPlannerRate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
+                        proposal_boq.setDSORate(Double.parseDouble(xssfRow.getCell(planner_input[4]).getStringCellValue()));
+                    }
+                    if (xssfRow.getCell(planner_input[5]).getCellType() == 0)
+                    {
+                        proposal_boq.setPlannerQty((xssfRow.getCell(planner_input[5]).getNumericCellValue()));
+                        proposal_boq.setDSOQty((xssfRow.getCell(planner_input[5]).getNumericCellValue()));
+                    }
+                    else
+                    {
+                        proposal_boq.setPlannerQty(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
+                        proposal_boq.setDSOQty(Double.parseDouble(xssfRow.getCell(planner_input[5]).getStringCellValue()));
+                    }
+                    if (xssfRow.getCell(planner_input[6]).getCellType() == 0)
+                    {
+                        proposal_boq.setPlannerPrice((xssfRow.getCell(planner_input[6]).getNumericCellValue()));
+                        proposal_boq.setDSOPrice((xssfRow.getCell(planner_input[6]).getNumericCellValue()));
+                    }
+                    else
+                    {
+                        proposal_boq.setPlannerPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getStringCellValue()));
+                        proposal_boq.setDSOPrice(Double.parseDouble(xssfRow.getCell(planner_input[6]).getStringCellValue()));
+                    }
 
 
                     insertQueries.add(new QueryData("proposal.boq.create", proposal_boq));
