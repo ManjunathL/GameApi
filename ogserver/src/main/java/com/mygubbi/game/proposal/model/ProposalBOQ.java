@@ -371,10 +371,13 @@ public class ProposalBOQ extends JsonObject {
         this.setMgCode(module.getMGCode());
         this.setModuleSeq(module.getModuleSequence());
         this.setCustomCheck(module.getCustomCheck());
-        if (module.getCustomCheck().equals("yes")) {
-            this.setCustomRemarks(module.getRemarks());
-        } else {
-            this.setCustomRemarks("");
+        if (module.getCustomCheck() != null)
+        {
+            if (module.getCustomCheck().equals("yes")) {
+                this.setCustomRemarks(module.getRemarks());
+            } else {
+                this.setCustomRemarks("");
+            }
         }
         if (accHwComponent.getCode().startsWith("A"))
         {
