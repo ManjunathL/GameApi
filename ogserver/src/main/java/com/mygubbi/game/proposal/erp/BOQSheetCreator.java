@@ -140,7 +140,7 @@ public class BOQSheetCreator implements ExcelCellProcessor
 
     private Map<DistinctModule,List<ProposalBOQ>> getDistinctModules(List<ProposalBOQ> proposalBoqs)
     {
-        Map<DistinctModule, List<ProposalBOQ>> distinctModuleMap = new HashMap<>();
+        Map<DistinctModule, List<ProposalBOQ>> distinctModuleMap = new LinkedHashMap<>();
         for (ProposalBOQ boq : proposalBoqs)
         {
             DistinctModule distinctModule = new DistinctModule(boq);
