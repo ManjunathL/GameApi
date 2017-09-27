@@ -116,6 +116,9 @@ public class SOCreatorService extends AbstractVerticle {
         DriveFile driveFile = null;
         List<UploadToDrive> outputFiles = new ArrayList<>();
 
+        LOG.debug("proposal boq products size : " + boqProductObjects.size());
+        LOG.debug("proposal boq addons size : " + boqAddonObjects.size());
+
         if (!(boqProductObjects.size() == 0))
         {
 //            LOG.debug("generateSo:" + boqProductObjects.size());
@@ -163,6 +166,8 @@ public class SOCreatorService extends AbstractVerticle {
 //            LOG.debug("Proposal BOQ as per product size : " + proposalBoqAsPerProduct.size() + " :" + proposalBoqAsPerProduct.get(0).getProductId());
             List<SOPart> soPartsList = new ArrayList<>();
 
+            LOG.debug("Proposal boq per product size : " + proposalBoqAsPerProduct.size() + " : " + proposalBoqAsPerProduct.get(0).getProductId());
+
             for (ProposalBOQ proposalBOQ : proposalBoqAsPerProduct) {
                 SOPart soPart = new SOPart(proposalBOQ.getPlannerErpItemCode(), proposalBOQ.getPlannerReferencePartNo(), proposalBOQ.getPlannerUom(), proposalBOQ.getPlannerDescription(), proposalBOQ.getPlannerQty());
                 soPartsList.add(soPart);
@@ -189,7 +194,7 @@ public class SOCreatorService extends AbstractVerticle {
             soPartsList = soPartMap.values().stream().collect(Collectors.toList());
 
             String outputFile = new SOExtractTemplateCreator(soPartsList, spaceRoomProduct.getProductId(), proposalBoqAsPerProduct.get(0).getProposalId()).create();
-            uploadToDrive.setFileName(proposalBoqAsPerProduct.get(0).getProductService());
+            uploadToDrive.setFileName(proposalBoqAsPerProduct.get(0).getProductService() + "_" + proposalBoqAsPerProduct.get(0).getProductId());
             uploadToDrive.setFilePath(outputFile);
 
             outputFiles.add(uploadToDrive);

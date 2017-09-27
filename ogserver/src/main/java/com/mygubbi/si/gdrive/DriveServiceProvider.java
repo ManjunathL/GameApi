@@ -78,7 +78,7 @@ public class DriveServiceProvider
             folderId = folder.getId();
         }
 
-        LOG.debug("After folder creation :" + folder.getId());
+//        LOG.debug("After folder creation :" + folder.getId());
 
         allowUserToEditFile(folderId,userId);
 
@@ -151,14 +151,14 @@ public class DriveServiceProvider
 
     public void downloadFile(String id, String path, String mimeType)
     {
-        LOG.debug("Inisde download file :" + id + " : " + path + " : " + mimeType) ;
+//        LOG.debug("Inisde download file :" + id + " : " + path + " : " + mimeType) ;
         try
         {
-            LOG.debug("inisde download file");
+//            LOG.debug("inisde download file");
             FileOutputStream outputStream = new FileOutputStream(path);
             if (this.mimeTypes.containsKey(mimeType))
             {
-                LOG.debug("inisde if file");
+//                LOG.debug("inisde if file");
                 this.serviceManager.getDrive().files().export(id, this.mimeTypes.get(mimeType))
                         .set("portrait", false).set("size","A4").set("fitw",true).set("gridlines",false).executeMediaAndDownloadTo(outputStream);
             }

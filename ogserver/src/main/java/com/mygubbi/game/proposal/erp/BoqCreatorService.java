@@ -52,7 +52,6 @@ public class BoqCreatorService extends AbstractVerticle {
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(CREATE_BOQ_OUTPUT, (Message<Integer> message) -> {
             int count = 0;
-            LOG.info("INSIDE boq creator :" + ++count);
             JsonObject quoteRequest = (JsonObject) LocalCache.getInstance().remove(message.body());
             BoqDataList boqDataList = new BoqDataList();
             this.getProposalHeader(quoteRequest, message,boqDataList);
@@ -521,7 +520,10 @@ public class BoqCreatorService extends AbstractVerticle {
             }
             else
             {
-                proposalBOQsForProduct.add(proposalBOQ);
+                /*if (!(proposalBOQ.getDsoErpItemCode().equals("")))
+                {*/
+                    proposalBOQsForProduct.add(proposalBOQ);
+//                }
             }
         }
 

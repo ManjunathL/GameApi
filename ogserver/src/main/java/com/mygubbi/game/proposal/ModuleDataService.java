@@ -291,7 +291,7 @@ public class ModuleDataService extends AbstractVerticle
                         for (JsonObject record : selectData.rows)
                         {
                             ERPMaster erpMaster = new ERPMaster(record);
-                            this.erpMasterMap.put(erpMaster.getItemCode(),erpMaster);
+                            this.erpMasterMap.put(erpMaster.getItemReferenceCode(),erpMaster);
                         }
                         markResult("ERP master is loaded.", true);
                     }
@@ -501,6 +501,11 @@ public class ModuleDataService extends AbstractVerticle
     public HingePack getHingePackType(String hingeType)
     {
         return this.hingePackMap.get(hingeType);
+    }
+
+    public ERPMaster getErpMaster(String itemRefCode)
+    {
+        return this.erpMasterMap.get(itemRefCode);
     }
 
     public ShutterFinish getFinish(String carcassCode, String finishCode)

@@ -120,14 +120,15 @@ public class BOQSheetCreator implements ExcelCellProcessor
             return currentRow;
         }
 
-        Map<DistinctModule,List<ProposalBOQ>> spaceRoomProducts = getDistinctModules(proposalBoqsForProduct);
+
+        Map<DistinctModule,List<ProposalBOQ>> distinctModules = getDistinctModules(proposalBoqsForProduct);
 
 
-        for (DistinctModule distinctModule : spaceRoomProducts.keySet()) {
+        for (DistinctModule distinctModule : distinctModules.keySet()) {
 
-            List<ProposalBOQ> proposalBoqAsPerProduct = spaceRoomProducts.get(distinctModule);
+            List<ProposalBOQ> proposalBoqAsPerModule = distinctModules.get(distinctModule);
 
-            fillHardwareAndAccPerModule(currentRow, proposalBoqAsPerProduct);
+            fillHardwareAndAccPerModule(currentRow, proposalBoqAsPerModule);
 
         }
 
@@ -193,11 +194,11 @@ public class BOQSheetCreator implements ExcelCellProcessor
     private int fillAddonsForBoq(int startRow, List<ProposalBOQ> proposalBoqs)
     {
         int currentRow = startRow;
-        LOG.debug("Proposal boqs for addon: " + proposalBoqs.size());
+//        LOG.debug("Proposal boqs for addon: " + proposalBoqs.size());
 
         for (int i =0; i<proposalBoqs.size() ; i++)
         {
-            LOG.debug("Creating row for addon :" + proposalBoqs.get(i));
+//            LOG.debug("Creating row for addon :" + proposalBoqs.get(i));
             createBoqLineItemHeadingRowForAddon(currentRow,proposalBoqs.get(i));
             currentRow++;
         }

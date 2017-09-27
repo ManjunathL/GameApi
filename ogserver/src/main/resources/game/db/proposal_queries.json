@@ -1840,7 +1840,7 @@
       "id": "proposal.boq.proposalversion",
       "type": "select",
       "table": "proposal_boq",
-      "query": "select * from proposal_boq where proposalId = ?",
+      "query": "select * from proposal_boq where proposalId = ? order by productId,moduleSeq",
       "params": ["proposalId"],
       "jsonfields":[]
     },
