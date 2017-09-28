@@ -117,7 +117,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             String Value=" ";
                             for(ColorMaster colorMaster1:colorMaster)
                             {
-                                if(colourValue.equals(colorMaster1.getCode()))
+                                if(colourValue!= null && colourValue.equals(colorMaster1.getCode()))
                                 {
                                     Value="P";
                                 }
