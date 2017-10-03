@@ -37,6 +37,8 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
     private static int[] cell_Services = {3,5,7,9,11,13,15};
     private static int[] cell_Services_titleText = {2,4,7,9,11,13,15};
     private List<Integer> cell_Services_title = new ArrayList<Integer>();
+    private int MAX_NO_OF_COLS = 18;
+    private int CONTENT_ROW_NUM = 7;
 
 
     private final static Logger LOG = LogManager.getLogger(SOWWriteToDatabaseHandler.class);
@@ -198,7 +200,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         List<QueryData> queryDatas =new ArrayList<>();
                         String db_query = "proposal.sow.update";
 
-                        for (int i = 3; i < noOfRows; i++) {
+                        for (int i = 3; i < noOfRows && isRowExists(sheet,i,MAX_NO_OF_COLS); i++) {
                             XSSFRow xssfRow = sheet.getRow(i);
 
 
@@ -214,15 +216,19 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                             cell_Services_title.add(14);
 
 
-                            if (!(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
+                            if ( xssfRow.getCell(2) != null && !(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
                                 for (Integer services_cell : cell_Services) {
                                     XSSFCell xssfCell = xssfRow.getCell(services_cell);
                                     String first_level_service = xssfRow.getCell(3).getStringCellValue();
                                     LOG.info("first_level_service = " + first_level_service);
+
                                     if (!(xssfRow.getCell(0).getStringCellValue().equals("")) || xssfRow.getCell(0).getStringCellValue().isEmpty()) {
-                                        spaceType = xssfRow.getCell(16).getStringCellValue();
-                                        room = xssfRow.getCell(17).getStringCellValue();
-                                        L1s01code = xssfRow.getCell(18).getStringCellValue();
+
+                                        if(xssfRow.getRowNum() > CONTENT_ROW_NUM && (!(xssfRow.getCell(16).getStringCellValue().equals("")) || xssfRow.getCell(16).getStringCellValue().isEmpty())) {
+                                            spaceType = xssfRow.getCell(16).getStringCellValue();
+                                            room = xssfRow.getCell(17).getStringCellValue();
+                                            L1s01code = xssfRow.getCell(18).getStringCellValue();
+                                        }
                                     }
 
                                     if (first_level_service.length() == 0) {
@@ -281,6 +287,13 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                     }
                                 }
 
+                                int ser_index = services_value.size();
+                                if(ser_index < 7){
+                                    for(int k = ser_index;k < 7;k++){
+                                        services_value.add(k,"NA");
+                                    }
+                                }
+                                services_value.forEach(s -> {LOG.info(s);});
                                 //check any of the level 2 services selected is mygubbi
                                 boolean isGubbiOrClient = false;
                                 LOG.info("services_value.size() = "+services_value.size());
@@ -319,6 +332,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                         proposal_sow.setL2S06("");
                                     }
                                     else {
+                                        services_value.forEach(s -> { LOG.info("services_value = "+s);});
                                         proposal_sow.setL2S01(services_value.get(1));
                                         proposal_sow.setL2S02(services_value.get(2));
                                         proposal_sow.setL2S03(services_value.get(3));
@@ -341,6 +355,15 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                     }
 
                 });
+
+    }
+    private boolean isRowExists(XSSFSheet sheet, int rowNum,int noOfColumn ){
+        for(int i=0;i<noOfColumn;i++){
+            if(sheet.getRow(rowNum).getCell(i) != null){
+                return true;
+            }
+        }
+        return false;
 
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ProposalOutputCreator
 {
-    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF, SOW, SOWPDF , BOOKING_FORM };
+    public enum OutputType {QUOTATION, JOBCARD, SALESORDER, QUOTEPDF, SOW, SOWPDF , BOOKING_FORM,WORKSCONTRACT };
 
     public void create();
 
@@ -41,13 +41,15 @@ public interface ProposalOutputCreator
                 return new PdfSowCreator(quoteData, proposalHeader,proposalSOWs);
             case BOOKING_FORM:
                 return new PdfOfficeUseCreator(quoteData,proposalHeader);
+            case WORKSCONTRACT:
+                return new WorksContractCreator(quoteData,proposalHeader);
             default:
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
         }
     }
 
         public static ProposalOutputCreator getCreator(OutputType outputType, ProposalHeader proposalHeader)
-    {
+        {
 
         switch (outputType)
         {
@@ -57,8 +59,8 @@ public interface ProposalOutputCreator
 
             default:
                 throw new RuntimeException("Output creator not defined for type:" + outputType);
+            }
         }
-    }
 
 
 

@@ -19,6 +19,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
     private QuoteData quoteData;
     private ProposalHeader proposalHeader;
     private String targetFile;
+    private String targetFileForWorksContract;
     private boolean isValid_Sow;
 
     public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader,boolean isValid_Sow){
@@ -26,6 +27,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
         this.proposalHeader = proposalHeader;
         String targetFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal");
         this.targetFile = targetFolder+"/"+quoteData.getProposalHeader().getId() + "/quotation.pdf";
+        this.targetFileForWorksContract=targetFolder+"/"+quoteData.getProposalHeader().getId() + "/workscontract.pdf";
         this.isValid_Sow = isValid_Sow;
 
     }
@@ -42,6 +44,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
         }else {
             LOG.info("else");
             new QuotationPDFCreator(quoteData, proposalHeader).createpdf(targetFile,isValid_Sow);
+
         }
     }
 

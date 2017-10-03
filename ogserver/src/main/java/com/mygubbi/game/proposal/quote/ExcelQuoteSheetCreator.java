@@ -151,7 +151,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         LOG.info("unit sequence for acc " +unitSequenceLetter);
         currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
 
-        this.createRowAndFillData(currentRow,"Total Cost",product.getAmountWithoutAddons());
+        //this.createRowAndFillData(currentRow,"Total Cost",product.getAmountWithoutAddons());
 
         /*this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
         this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));*/
@@ -171,7 +171,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         //this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
         //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));
 
-        currentRow++;
+       // currentRow++;
         /*this.createRow(currentRow, this.quoteSheet);*/
         return currentRow;
     }
@@ -696,10 +696,10 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         this.createRowAndFillData(currentRow,"WoodWork Cost",product.getAmountWithoutAddons());*/
 
         currentRow++;
-        this.createRowAndFillData(currentRow,"Accessory Cost",amount);
+        /*this.createRowAndFillData(currentRow,"Accessory Cost",amount);
         currentRow++;
         this.createRowAndFillData(currentRow,"WoodWork Cost",amt-amount);
-        currentRow++;
+        currentRow++;*/
         return currentRow;
     }
 
@@ -727,7 +727,8 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 cr++;
                 }
 
-                this.createRowAndFillDataNew(cr, null, "Unit consists of " + li.get(index).getModulecount() + " modules as per design provided.",1.0,li.get(index).getAmount(),li.get(index).getAmount());
+                //this.createRowAndFillDataNew(cr, null, "Unit consists of " + li.get(index).getModulecount() + " modules as per design provided.",1.0,li.get(index).getAmount(),li.get(index).getAmount());
+                this.createRowAndFillDataNew(cr, null, "Unit consists of " + li.get(index).getModulecount() + " modules as per design provided.",1.0,null,null);
                 cr++;
                 if(li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit")) {
                     this.createRowAndFillData(cr, null, "Carcass : " + li.get(index).getBasecarcass());
@@ -757,7 +758,8 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 cr++;
                 }
 
-                this.createRowAndFillDataNew(cr, null, "Carcass : " + li.get(index).getBasecarcass() ,1.0,li.get(index).getAmount(),li.get(index).getAmount());
+                //this.createRowAndFillDataNew(cr, null, "Carcass : " + li.get(index).getBasecarcass() ,1.0,li.get(index).getAmount(),li.get(index).getAmount());
+                this.createRowAndFillDataNew(cr, null, "Carcass : " + li.get(index).getBasecarcass() ,1.0,null,null);
                 cr++;
 
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
@@ -832,14 +834,14 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
     }
     private void createRowAndFillDataNew(int rowNum, String index, String title, Double quantity, Double amount, Double total)
     {
-        String amt=this.getRoundOffValue(String.valueOf(amount.intValue()));
-        String Total=this.getRoundOffValue(String.valueOf(total.intValue()));
+/*        String amt=this.getRoundOffValue(String.valueOf(amount.intValue()));
+        String Total=this.getRoundOffValue(String.valueOf(total.intValue()));*/
         Row dataRow = this.createRow(rowNum, this.quoteSheet);
         this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
         this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
-        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_STRING, amt).setCellStyle(this.styles.getTextStyle());
-        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_STRING, Total).setCellStyle(this.styles.getTextStyle());
+        //this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_STRING, amt).setCellStyle(this.styles.getTextStyle());
+        //this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_STRING, Total).setCellStyle(this.styles.getTextStyle());
     }
 
     /*private void createSubHeadingRowNew(int rowNum, String index, String title,Double quantity, Double amount, Double total)
@@ -919,19 +921,23 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         for (ProductAddon addon : addOns)
         {
             if(("Custom Addon").equals (addon.getCategoryCode())) {
-                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+                //this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(),null, null);
             }else if(("Appliances").equals(addon.getCategoryCode()))
             {
                 this.createProductTitleRow(currentRow,String.valueOf(index), addon.getExtendedTitle());
                 currentRow++;
-                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
+                //this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
+                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),null, null);
                 currentRow++;
             }
             else
             {
                 this.createProductTitleRow(currentRow,String.valueOf(index), addon.getExtendedTitle());
                 currentRow++;
-                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
+                //this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
+                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(), null,null);
+
                 currentRow++;
                 this.createRowAndFillData(currentRow,null,"Location: " +addon.getREMARKS());
             }

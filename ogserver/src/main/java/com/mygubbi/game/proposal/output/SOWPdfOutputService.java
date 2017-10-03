@@ -36,10 +36,12 @@ public class SOWPdfOutputService extends AbstractVerticle {
 
     public static final String CREATE_SOW_PDF_OUTPUT = "create.sowpdf.output";
     public static final String CREATE_BOOKING_FORM_PDF_OUTPUT = "create.bookingform.pdf.output";
+    public static final String CREATE_WORK_CONTRACT_PDF_OUTPUT = "create.workscontract.pdf.output";
     public static final String CREATE_MERGED_PDF_OUTPUT = "create.merged.output";
 
     public static final String SOW_PDF = "sow.pdf";
     public static final String BOOKING_FORM = "booking.form.pdf";
+    public static final String WORKS_CONTRACT="workscontrcat.pdf";
 
     public DriveServiceProvider serviceProvider;
 
@@ -79,6 +81,15 @@ public class SOWPdfOutputService extends AbstractVerticle {
             LOG.info("setupSowPdfOutput started." + res.succeeded());
         });
 
+        eb.localConsumer(CREATE_WORK_CONTRACT_PDF_OUTPUT, (Message<Integer> message) -> {
+            QuoteRequest quoteRequest =(QuoteRequest) LocalCache.getInstance().remove(message.body());
+            this.getProposalHeader(quoteRequest, message,WORKS_CONTRACT);
+
+        }).completionHandler(res -> {
+            LOG.info("setupSowPdfOutput started." + res.succeeded());
+        });
+
+
         eb.localConsumer(CREATE_MERGED_PDF_OUTPUT, (Message<Integer> message) -> {
             LOG.debug("Inside service: CREATE_MERGED_PDF_OUTPUT");
 
@@ -105,6 +116,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                     {
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
                         this.getProposalProducts(proposalHeader, quoteRequest, message,pdf_name);
+//                        this.getProposalAddons(quoteRequest, proposalHeader, null, message,pdf_name);
                     }
                 });
 
@@ -125,7 +137,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                     {
                         message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
                         LOG.error("Proposal products not found for id:" + proposalHeader.getId());
-                        //return;
+                        return;
 //                        this.getProposalAddons(quoteRequest, proposalHeader, null, message,pdf_name);
                     }
                     else
@@ -188,6 +200,10 @@ public class SOWPdfOutputService extends AbstractVerticle {
                         if(pdf_name.equalsIgnoreCase(SOW_PDF)) {
                             LOG.info("GETTING SOW ROWS");
                             this.getSowRows(quoteRequest, proposalHeader, products, addons, message);
+
+                        }else if (pdf_name.equalsIgnoreCase(WORKS_CONTRACT)){
+                            LOG.info("GETTING WORK CONTRACT");
+                            this.createWorksContract(quoteRequest,proposalHeader,products,addons,message);
                         }
                         else{
                             LOG.info("GETTING BOOKING FORM");
@@ -238,6 +254,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                     {
                         resultData.rows.forEach(item->{proposalSOWs.add(new SOWPdf(item));});
                         this.createSow(quoteRequest, proposalHeader, products, addons, proposalSOWs,quoteData,message);
+
                     }
 
                 });
@@ -283,6 +300,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             String DestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
                     ConfigHolder.getInstance().getStringValue("bookingform_downloaded_pdf_fomat","BookingFormOfficeUse.pdf");
             officeUseOnlyPdf.cretePdf(DestinationFile);
+
             sendResponse(message,new JsonObject().put("bookingFormPDFfile",outputCreator.getOutputFile()));
             LOG.debug("Response: " +outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
 
@@ -295,8 +313,35 @@ public class SOWPdfOutputService extends AbstractVerticle {
         }
     }
 
+    private void createWorksContract(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
+                           List<ProductAddon> addons, Message  message)
+    {
+        try
+        {
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
+            outputCreator.create();
+
+            WorksContractPDFCreator worksContractPDFCreator=new WorksContractPDFCreator(quoteData,proposalHeader);
+            String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
+            String DestinationFile = proposalFolder+"/"+proposalHeader.getId()+"/"+
+                    ConfigHolder.getInstance().getStringValue("works_contract_pdf_fomat","WorksContract.pdf");
+            worksContractPDFCreator.createPdf(DestinationFile);
+            sendResponse(message,new JsonObject().put("worksContractPDFfile",outputCreator.getOutputFile()));
+            LOG.debug("Works contract Response: " +outputCreator.getOutputKey() + " |file: " + outputCreator.getOutputFile());
+        }
+        catch (Exception e)
+        {
+            String errorMessage = "Error in preparing file for :" + proposalHeader.getId() + ". " + e.getMessage();
+            sendResponse(message, new JsonObject().put("error", errorMessage));
+            LOG.error(errorMessage, e);
+        }
+    }
     private void sendResponse(Message message, JsonObject response)
     {
         message.reply(LocalCache.getInstance().store(response));
     }
 }
+
+
+
