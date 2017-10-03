@@ -93,24 +93,17 @@ public class BOQHandler extends AbstractRouteHandler{
 //                LOG.debug("XSSF row num :" + xssfRow.getRowNum());
 
                 String plannerErpCode = xssfRow.getCell(planner_input[0]).getStringCellValue();
-                /*ERPMaster erpMaster = ModuleDataService.getInstance().getErpMaster(plannerErpCode);
-                if (erpMaster == null)
-                {
-                    JsonObject res = new JsonObject();
-                    res.put("status", "Failure");
-                    res.put("comments", "Could not update ");
-                    LOG.info(res.toString());
-                    sendError(routingContext, res.toString());
-                }
-*/
 
-                if (xssfRow.getCell(details[0]).getStringCellValue().equals("") || xssfRow.getCell(details[1]).getStringCellValue().equals("") )
+
+
+                if ((xssfRow.getCell(details[0]).getCellType() == 3
+                        || xssfRow.getCell(details[1]).getCellType() == 3))
                 {
-//                    LOG.debug("returning :" + xssfRow.getRowNum());
+                    break;
 
                 }
                 else {
-
+                    LOG.debug("ROW num : " + xssfRow.getRowNum() + ": " + xssfRow.getCell(details[0]).getCellType());
 
                     ProposalBOQ proposal_boq = new ProposalBOQ();
 
@@ -160,7 +153,7 @@ public class BOQHandler extends AbstractRouteHandler{
 
                     updateQueries.add(new QueryData("proposal.boq.update",proposal_boq));
                 }
-                LOG.debug("first row value : " + xssfRow.getCell(0).getStringCellValue());
+//                LOG.debug("first row value : " + xssfRow.getCell(0).getStringCellValue());
 
 
             }
@@ -189,6 +182,7 @@ public class BOQHandler extends AbstractRouteHandler{
 
         int currentRow = 0;
 
+
         for (int e = 0; e < sheet.getPhysicalNumberOfRows() ; e ++)
         {
             XSSFRow xssfRowTest = sheet.getRow(e);
@@ -207,9 +201,9 @@ public class BOQHandler extends AbstractRouteHandler{
                 XSSFRow xssfRow = sheet.getRow(j);
 
 
-                if (xssfRow.getCell(0).getStringCellValue().equals("") || xssfRow.getCell(0).getStringCellValue().equals("") ) {
-//                    LOG.debug("returning :" + xssfRow.getRowNum());
-//                    LOG.debug("Returning for row : " + j);
+                if (xssfRow.getCell(details[0]).getCellType() == 3 ||
+                        xssfRow.getCell(details[0]).getCellType() == 3 ) {
+                    break;
                 } else {
 //                    LOG.debug("Additional items");
                     ProposalBOQ proposal_boq = new ProposalBOQ();
