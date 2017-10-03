@@ -77,6 +77,12 @@
       },
       {
         "name":"com.mygubbi.game.proposal.sow.SowValidatorService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.erp.BoqCreatorService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.erp.SOCreatorService"
       }
     ]
   }

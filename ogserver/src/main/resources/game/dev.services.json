@@ -29,15 +29,17 @@
         "instances": 20,
         "worker": false
       },
+
       {
         "name": "com.mygubbi.game.proposal.ModuleDataService"
       },
+
       {
         "name": "com.mygubbi.game.proposal.price.RateCardService"
-      },
+        },
+
       {
-        "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService",
-        "instances": 5
+        "name": "com.mygubbi.game.proposal.price.ComprehensiveModulePricingService"
       },
       {
         "name": "com.mygubbi.game.proposal.price.PriceRecorderService"
@@ -74,7 +76,14 @@
       },
       {
         "name":"com.mygubbi.game.proposal.sow.SowValidatorService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.erp.BoqCreatorService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.erp.SOCreatorService"
       }
+
 
     ]
   }

@@ -1,43 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e68c2c5-4694-42bf-88c0-cd9b930ffff9" name="Default" comment="-margin queries 28thfeb">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/AccessorySheetCreator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/OldToNewFinishMapping.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.conf.warehouse.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.services.warehouse.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules/ogserver_main.iml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+    <list default="true" id="7e68c2c5-4694-42bf-88c0-cd9b930ffff9" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules/ogserver.iml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ogserver.iml" afterPath="$PROJECT_DIR$/.idea/modules/ogserver.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductLineItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductLineItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductModule.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ExcelJobCardCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ExcelJobCardCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/HardwareSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/HardwareSheetCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/JobCardSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/JobCardSheetCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Handle.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Handle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCard.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCardMaster.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCardMaster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ShutterFinish.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ShutterFinish.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/PanelComponent.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/PanelComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ProposalVersionPriceUpdateService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ProposalVersionPriceUpdateService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/RateCardService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/RateCardService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPDFCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPDFCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPdfCreatorForPackage.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPdfCreatorForPackage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/excel/ExcelSheetProcessor.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/excel/ExcelSheetProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" afterPath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/prod.conf.json" afterPath="$PROJECT_DIR$/src/main/resources/game/prod.conf.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/resturls.json" afterPath="$PROJECT_DIR$/src/main/resources/game/resturls.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/uat.conf.json" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.conf.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/uat.services.json" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.services.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ogserver.iml" afterPath="$PROJECT_DIR$/ogserver.iml" />
     </list>
     <list id="d1c8cd9a-1633-405e-852e-aa524b0854f2" name="New changelist" comment="" />
+    <list id="e4aece55-dfff-413b-b221-8664bd0128a8" name="Failed commit: Default" comment="Merge remote-tracking branch 'remotes/origin/game_boq' into gameuat_merge&#10;&#10;# Conflicts:&#10;#&#9;ogserver/src/main/java/com/mygubbi/db/QueryData.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/model/Handle.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java&#10;#&#9;ogserver/src/main/resources/game/db/proposal_queries.json&#10;#&#9;ogserver/src/main/resources/game/dev.services.json&#10;#&#9;ogserver/src/main/resources/game/game.base.json&#10;#&#9;ogserver/src/main/resources/game/prod.services.json&#10;#&#9;ogserver/src/main/resources/game/uat.services.json&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BoqCreatorService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/ERPMasterSheetCreator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOCreatorService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOExtractTemplateCreator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOExtractTemplateCreatorForAddons.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOSheetCreator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOSheetCreatorForAddons.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SaveBoqLineItems.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SpaceRoomProduct.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/BoqDataList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/BoqItem.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/BoqPart.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/DistinctModule.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ERPMaster.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ProposalBOQ.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/SOPart.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/SOPartForAddon.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/UploadToDrive.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQWriteToDatabase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Proposal_BOQ.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/db/QueryData.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/db/QueryData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQSheetCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQTemplateCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQTemplateCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccHwComponent.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccHwComponent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccessoryPackComponent.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccessoryPackComponent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Handle.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Handle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/HingePack.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/HingePack.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ProposalHeader.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ProposalHeader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/RateCardService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/RateCardService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/sow/SOWTemplateCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/sow/SOWTemplateCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/excel/ExcelStyles.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/excel/ExcelStyles.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceProvider.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" afterPath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/dev.services.json" afterPath="$PROJECT_DIR$/src/main/resources/game/dev.services.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/game.base.json" afterPath="$PROJECT_DIR$/src/main/resources/game/game.base.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/prod.conf.json" afterPath="$PROJECT_DIR$/src/main/resources/game/prod.conf.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/prod.services.json" afterPath="$PROJECT_DIR$/src/main/resources/game/prod.services.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/uat.services.json" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.services.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/mygubbi/si/gdrive/GoogleDriveTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/mygubbi/si/gdrive/GoogleDriveTest.java" />
+    </list>
     <ignored path="ogserver.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -120,12 +141,126 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ModulePriceHolder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.base.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/game/game.base.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.6153846">
+              <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DriveServiceProvider.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-42.793102">
+              <caret line="161" column="58" selection-start-line="161" selection-start-column="58" selection-end-line="161" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModulePriceHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.2037036">
-              <caret line="784" column="5" selection-start-line="784" selection-start-column="5" selection-end-line="784" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="81" selection-start-line="36" selection-start-column="81" selection-end-line="36" selection-end-column="81" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModuleDataService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.0689654">
+              <caret line="570" column="43" selection-start-line="570" selection-start-column="18" selection-end-line="570" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SOWWriteToDatabaseHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/sow/SOWWriteToDatabaseHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DwReportingService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6928839">
+              <caret line="461" column="7" selection-start-line="461" selection-start-column="7" selection-end-line="461" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="uat.conf.game.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.9230769">
+              <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssembledProductInQuote.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.9122808">
+              <caret line="591" column="76" selection-start-line="591" selection-start-column="76" selection-end-line="591" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModuleSheetCreator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-42.91228">
+              <caret line="390" column="99" selection-start-line="390" selection-start-column="99" selection-end-line="390" selection-end-column="99" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="proposal_queries.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1341" column="33" selection-start-line="1341" selection-start-column="33" selection-end-line="1341" selection-end-column="33" />
+              <folding>
+                <marker date="1507029361696" expanded="true" signature="15:102844" placeholder="[...]" />
+                <marker date="1507029361696" expanded="true" signature="1944:2127" placeholder="{&quot;id&quot;: &quot;proposal.list.crmid&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="2135:2839" placeholder="{&quot;id&quot;: &quot;proposal.updateversion&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="2846:3070" placeholder="{&quot;id&quot;: &quot;proposal.summary&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="3076:3242" placeholder="{&quot;id&quot;: &quot;proposal.header&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="3249:3501" placeholder="{&quot;id&quot;: &quot;proposal.create&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="3508:3873" placeholder="{&quot;id&quot;: &quot;proposal.create.crm&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="3880:4130" placeholder="{&quot;id&quot;: &quot;proposal.select.updateprice&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="4137:4466" placeholder="{&quot;id&quot;: &quot;proposal.version.select.updateprice&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="4473:4676" placeholder="{&quot;id&quot;: &quot;proposal.version.getdraftversion&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="4683:4989" placeholder="{&quot;id&quot;: &quot;proposal.version.products.select&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="4996:5236" placeholder="{&quot;id&quot;: &quot;proposal.version.addons.select&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="5243:5518" placeholder="{&quot;id&quot;: &quot;proposal.version.price.update&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="5524:5720" placeholder="{&quot;id&quot;: &quot;proposalproduct.updateprice.select&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="5727:5921" placeholder="{&quot;id&quot;: &quot;proposaladdon.updateprice.select&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="5928:6249" placeholder="{&quot;id&quot;: &quot;proposal.audit.insert&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="6256:6554" placeholder="{&quot;id&quot;: &quot;proposal.audit.addon.update&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="6561:7009" placeholder="{&quot;id&quot;: &quot;version.createdraft&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="7016:7502" placeholder="{&quot;id&quot;: &quot;version.createPostSalesInitial&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="7509:8700" placeholder="{&quot;id&quot;: &quot;proposal.update&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="8707:9809" placeholder="{&quot;id&quot;: &quot;proposal.update.onconfirm&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="9816:10015" placeholder="{&quot;id&quot;: &quot;proposal.folder.update&quot;...}" />
+                <marker date="1507029361696" expanded="true" signature="10022:10198" placeholder="{&quot;id&quot;: &quot;version.publish&quot;...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,13 +268,7 @@
     </leaf>
   </component>
   <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$/.." value="game_backup_07042017" />
-      </map>
-    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -313,7 +442,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2992431065942" />
+        <entry key="$PROJECT_DIR$" value="2993559626643" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -724,37 +853,6 @@
         </entry>
       </map>
     </option>
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ComponentResolver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccHwComponent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/PdfQuoteCreator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/ExcelQuoteSheetCreator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/AbstractProposalOutputCreator.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/game/game.base.json" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/ExcelQuoteCreator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/AccessoryComponent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteData.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPDFCreator.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalAddonHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalModuleHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/PriceMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/RateCardService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCard.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/game/resturls.json" />
-        <option value="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java" />
-      </list>
-    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -766,7 +864,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1378" />
+    <option name="width" value="1370" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -813,115 +911,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ogserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ogserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="Module&#9;FILE&#9;file://D:/Mygubbi GAME/GAME/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;ModulePriceHolder&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;modulePrice&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;Ra&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/model/RateCard.java&#10;Proposal&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/ProposalModuleHandler.java&#10;Propo&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java&#10;game&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/game.base.json&#10;propo&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/db/proposal_queries.json&#10;Proposa&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java&#10;Rate&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/model/RateCard.java&#10;Price&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/model/PriceMaster.java&#10;proposal&#9;PSI&#9;JAVA://com.mygubbi.game.proposal.ProposalHandler&#10;res&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/resturls.json&#10;Product&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/ProductModule.java&#10;Prod&#9;PSI&#9;JAVA://com.mygubbi.route.ProductHandler&#10;Pri&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/model/PriceMaster.java&#10;uat.&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/uat.conf.json&#10;uat.con&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/uat.conf.game.json&#10;pdf&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/quote/PdfQuoteCreator.java&#10;Quo&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/quote/ExcelQuoteCreator.java&#10;uat&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/uat.conf.game.json&#10;ga&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/game.base.json&#10;re&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/resturls.json&#10;P&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/db/proposal_queries.json&#10;Q&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/quote/QuotationPDFCreator.java&#10;ModulePri&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;ass&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java&#10;rest&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/resturls.json&#10;gam&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/resources/game/game.base.json&#10;ProposalA&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/ProposalAddonHandler.java&#10;Pro&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/ProposalProductHandler.java&#10;price&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;PriceMaster&#9;FILE&#9;file://C:/Users/user/IdeaProjects/gameServer/apidevelopment/ogserver/src/main/java/com/mygubbi/game/proposal/model/PriceMaster.java&#10;Prop&#9;PSI&#9;JAVA://com.mygubbi.game.proposal.ProposalAddonHandler" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/shruthi/ogserver/proposal_queries.json" />
-    <property name="two.files.diff.last.used.file" value="$USER_HOME$/Desktop/shruthi/ogserver/proposal_queries.json" />
-  </component>
-  <component name="RunManager" selected="Application.GAME - ServerVerticle">
-    <configuration default="false" name="ogserver [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="shadowJar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -947,22 +947,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -982,61 +966,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="SCRATCH_FILE_ID" value="0" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="ogserver" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -1075,117 +1004,43 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="GAME - ServerVerticle" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="com.mygubbi.ServerVerticle" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="game/game.base.json,game/dev.services.json,game/resturls.json" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="ogserver" />
-      <envs />
-      <method />
-    </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.GAME - ServerVerticle" />
-      <item index="1" class="java.lang.String" itemvalue="Gradle.ogserver [shadowJar]" />
-    </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.ogserver [shadowJar]" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="7e68c2c5-4694-42bf-88c0-cd9b930ffff9" name="Default" comment="-margin queries 28thfeb" />
-      <created>1488261511232</created>
-      <option name="number" value="Default" />
-      <updated>1488261511232</updated>
-    </task>
-    <task id="LOCAL-00001" summary="-price for accessory and hardware,excel and pdf changes">
-      <created>1488537555852</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1488537555852</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32807016" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33846155" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33846155" sideWeight="0.4969651" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33846155" sideWeight="0.5030349" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3982906" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5631579" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4991453" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5623932" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25265554" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852808" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24885496" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32671756" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24961714" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5392491" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44273505" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1196,12 +1051,9 @@
       <collection />
     </option>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-price for accessory and hardware,excel and pdf changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="-price for accessory and hardware,excel and pdf changes" />
+    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/game_boq' into gameuat_merge&#10;&#10;# Conflicts:&#10;#&#9;ogserver/src/main/java/com/mygubbi/db/QueryData.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/model/Handle.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java&#10;#&#9;ogserver/src/main/resources/game/db/proposal_queries.json&#10;#&#9;ogserver/src/main/resources/game/dev.services.json&#10;#&#9;ogserver/src/main/resources/game/game.base.json&#10;#&#9;ogserver/src/main/resources/game/prod.services.json&#10;#&#9;ogserver/src/main/resources/game/uat.services.json&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'remotes/origin/game_boq' into gameuat_merge&#10;&#10;# Conflicts:&#10;#&#9;ogserver/src/main/java/com/mygubbi/db/QueryData.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/model/Handle.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java&#10;#&#9;ogserver/src/main/resources/game/db/proposal_queries.json&#10;#&#9;ogserver/src/main/resources/game/dev.services.json&#10;#&#9;ogserver/src/main/resources/game/game.base.json&#10;#&#9;ogserver/src/main/resources/game/prod.services.json&#10;#&#9;ogserver/src/main/resources/game/uat.services.json&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1214,331 +1066,287 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/RateCardService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/PriceMasterKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/datasetup/KDMaxMappingHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/game/game.base.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/datasetup/KDMaxMappingHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SalesOrderSheetCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="9" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccessoryPackComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccessoryPack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleAccessoryPack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductLineItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="94" column="33" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductAddon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/excel/ExcelSheetProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ComponentResolver.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="363" column="5" selection-start-line="363" selection-start-column="5" selection-end-line="363" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/DataSheetCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="66" selection-start-line="67" selection-start-column="66" selection-end-line="67" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ExcelJobCardCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/AbstractProposalOutputCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/AccHwComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/PanelComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/ExcelQuoteSheetCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/HardwareComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/AccessoryComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="284" column="186" selection-start-line="284" selection-start-column="186" selection-end-line="284" selection-end-column="186" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleForPrice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/ProposalOutputService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/ExcelQuoteCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ProposalHeader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPDFCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="26" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="39" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/PdfQuoteCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/game/uat.conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/route/ProductHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/mygubbi/game/proposal/model/PriceMasterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalProductHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="32" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalAddonHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/ProposalOutputCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/game/game.base.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/PriceMaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="63" selection-start-line="108" selection-start-column="63" selection-end-line="108" selection-end-column="63" />
+          <caret line="1824" column="23" selection-start-line="1824" selection-start-column="23" selection-end-line="1824" selection-end-column="23" />
+          <folding>
+            <marker date="1507029361696" expanded="true" signature="15:102844" placeholder="[...]" />
+            <marker date="1507029361696" expanded="true" signature="1944:2127" placeholder="{&quot;id&quot;: &quot;proposal.list.crmid&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="2135:2839" placeholder="{&quot;id&quot;: &quot;proposal.updateversion&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="2846:3070" placeholder="{&quot;id&quot;: &quot;proposal.summary&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3076:3242" placeholder="{&quot;id&quot;: &quot;proposal.header&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3249:3501" placeholder="{&quot;id&quot;: &quot;proposal.create&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3508:3873" placeholder="{&quot;id&quot;: &quot;proposal.create.crm&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3880:4130" placeholder="{&quot;id&quot;: &quot;proposal.select.updateprice&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4137:4466" placeholder="{&quot;id&quot;: &quot;proposal.version.select.updateprice&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4473:4676" placeholder="{&quot;id&quot;: &quot;proposal.version.getdraftversion&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4683:4989" placeholder="{&quot;id&quot;: &quot;proposal.version.products.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4996:5236" placeholder="{&quot;id&quot;: &quot;proposal.version.addons.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5243:5518" placeholder="{&quot;id&quot;: &quot;proposal.version.price.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5524:5720" placeholder="{&quot;id&quot;: &quot;proposalproduct.updateprice.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5727:5921" placeholder="{&quot;id&quot;: &quot;proposaladdon.updateprice.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5928:6249" placeholder="{&quot;id&quot;: &quot;proposal.audit.insert&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="6256:6554" placeholder="{&quot;id&quot;: &quot;proposal.audit.addon.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="6561:7009" placeholder="{&quot;id&quot;: &quot;version.createdraft&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="7016:7502" placeholder="{&quot;id&quot;: &quot;version.createPostSalesInitial&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="7509:8700" placeholder="{&quot;id&quot;: &quot;proposal.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="8707:9809" placeholder="{&quot;id&quot;: &quot;proposal.update.onconfirm&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="9816:10015" placeholder="{&quot;id&quot;: &quot;proposal.folder.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="10022:10198" placeholder="{&quot;id&quot;: &quot;version.publish&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/pipeline/PipelineResponseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/pipeline/PipelineExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/report/ReportTableFillerSevice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="115" column="26" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/game/dev.services.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/sow/SOWTemplateCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/PriceMasterKey.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21364452">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/mygubbi/si/gdrive/GoogleDriveTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWProductModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="15.620689">
+          <caret line="114" column="49" selection-start-line="114" selection-start-column="49" selection-end-line="114" selection-end-column="49" />
+          <folding>
+            <element signature="e#14628#14629#0" expanded="false" />
+            <element signature="e#14776#14777#0" expanded="false" />
+            <element signature="e#14826#14827#0" expanded="false" />
+            <element signature="e#14987#14988#0" expanded="false" />
+            <element signature="e#15033#15034#0" expanded="false" />
+            <element signature="e#15191#15192#0" expanded="false" />
+            <element signature="e#15244#15245#0" expanded="false" />
+            <element signature="e#15421#15422#0" expanded="false" />
+            <element signature="e#15475#15476#0" expanded="false" />
+            <element signature="e#15775#15776#0" expanded="false" />
+            <element signature="e#15829#15830#0" expanded="false" />
+            <element signature="e#16136#16137#0" expanded="false" />
+            <element signature="e#16181#16182#0" expanded="false" />
+            <element signature="e#16331#16332#0" expanded="false" />
+            <element signature="e#16579#16580#0" expanded="false" />
+            <element signature="e#17157#17158#0" expanded="false" />
+            <element signature="e#18669#18670#0" expanded="false" />
+            <element signature="e#18855#18856#0" expanded="false" />
+            <element signature="e#20529#20530#0" expanded="false" />
+            <element signature="e#24712#24713#0" expanded="false" />
+            <element signature="e#24934#24935#0" expanded="false" />
+            <element signature="e#25154#25155#0" expanded="false" />
+            <element signature="e#25374#25375#0" expanded="false" />
+            <element signature="e#25602#25603#0" expanded="false" />
+            <element signature="e#25830#25831#0" expanded="false" />
+            <element signature="e#26304#26305#0" expanded="false" />
+            <element signature="e#26530#26531#0" expanded="false" />
+            <element signature="e#26764#26765#0" expanded="false" />
+            <marker date="1507027649127" expanded="true" signature="18385:19212" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWProposalAddon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.724138">
+          <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
+          <folding>
+            <marker date="1507027649141" expanded="true" signature="491:532" placeholder="/**...*/" />
+            <marker date="1507027649141" expanded="false" signature="7562:7573" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="7600:7606" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="7653:7701" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="7733:7744" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="7779:7785" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="7848:7912" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="7945:7956" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="7987:7993" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="9969:10027" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10065:10076" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10113:10119" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10191:10261" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10294:10305" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10344:10350" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10412:10612" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10647:10658" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10700:10706" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10774:10980" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11011:11022" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11052:11058" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11116:11172" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11202:11213" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11243:11249" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11312:11373" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11412:11423" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11462:11468" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11529:11599" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11642:11653" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11697:11703" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11768:11843" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="9961:9972" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10004:10010" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10072:10132" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10168:10179" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10214:10220" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10288:10354" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10388:10399" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10432:10438" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10502:10564" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10593:10604" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10632:10638" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10692:10744" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10773:10784" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="10817:10823" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="10880:10939" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="10968:10979" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11007:11013" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11067:11119" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11161:11172" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11215:11221" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11301:11370" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11411:11422" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11463:11469" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11545:11621" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11664:11675" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11719:11725" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="11807:11889" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="11921:11932" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="11963:11969" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="12029:12087" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="12121:12132" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="12166:12172" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="12236:12299" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="12337:12348" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="12386:12392" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="12464:12535" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="12568:12579" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="12611:12617" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="12679:12739" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="12805:12811" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="12859:12909" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="12943:12954" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="12988:12994" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="13058:13121" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="13156:13167" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="13201:13207" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="13271:13334" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="13373:13384" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="13423:13429" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="13503:13576" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="13606:13617" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="13646:13652" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="13708:13762" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="13797:13808" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="13842:13848" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="13914:13978" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="14013:14024" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="14059:14065" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="14131:14196" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="14227:14238" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="14268:14274" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="14332:14388" placeholder="{...}" />
+            <marker date="1507027649141" expanded="false" signature="14419:14430" placeholder=" { " />
+            <marker date="1507027649141" expanded="false" signature="14460:14466" placeholder=" }" />
+            <marker date="1507027649141" expanded="true" signature="14524:14580" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWProposalProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9655172">
+          <caret line="197" column="22" selection-start-line="197" selection-start-column="22" selection-end-line="197" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalModuleHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DwProposalVersion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3500898">
-          <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
+        <state vertical-scroll-proportion="3.310345">
+          <caret line="190" column="22" selection-start-line="190" selection-start-column="22" selection-end-line="190" selection-end-column="22" />
+          <folding>
+            <marker date="1507027649171" expanded="true" signature="454:493" placeholder="/**...*/" />
+            <marker date="1507027649171" expanded="true" signature="40494:40540" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/AddonPriceHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <marker date="1507027649243" expanded="true" signature="3296:3302" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/VersionPriceHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="188" column="75" selection-start-line="188" selection-start-column="75" selection-end-line="188" selection-end-column="75" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/RateCardService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.97666067">
-          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="153" column="23" selection-start-line="153" selection-start-column="23" selection-end-line="153" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1546,15 +1354,202 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/PanelComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="325" column="46" selection-start-line="325" selection-start-column="46" selection-end-line="325" selection-end-column="46" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Handle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="158" column="18" selection-start-line="158" selection-start-column="18" selection-end-line="158" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-core/3.4.2/caf2eb4411bf36a5520636087836796e8141e350/vertx-core-3.4.2-sources.jar!/io/vertx/core/json/JsonObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="860" column="16" selection-start-line="860" selection-start-column="16" selection-end-line="860" selection-end-column="16" />
+          <folding>
+            <element signature="e#25792#25793#0" expanded="false" />
+            <element signature="e#25817#25818#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/HingePack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/game/uat.conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/catalog/FileCatalogManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="179" column="22" selection-start-line="179" selection-start-column="22" selection-end-line="179" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/PanelSheetCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/HardwareComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="39" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/mygubbi/game/proposal/SOWReaderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQTemplateCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7755835">
+          <caret line="2420" column="20" selection-start-line="2420" selection-start-column="20" selection-end-line="2420" selection-end-column="20" />
+          <folding>
+            <element signature="e#94598#94599#0" expanded="false" />
+            <element signature="e#94636#94637#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/excel/ExcelSheetProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ProductPriceHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="515" column="0" selection-start-line="515" selection-start-column="0" selection-end-line="515" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductAddon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="181" column="5" selection-start-line="181" selection-start-column="5" selection-end-line="181" selection-end-column="5" />
+          <folding>
+            <element signature="e#1902#1903#0" expanded="false" />
+            <element signature="e#1938#1939#0" expanded="false" />
+            <element signature="e#1977#1978#0" expanded="false" />
+            <element signature="e#2052#2053#0" expanded="false" />
+            <element signature="e#2214#2215#0" expanded="false" />
+            <element signature="e#2257#2258#0" expanded="false" />
+            <element signature="e#2294#2295#0" expanded="false" />
+            <element signature="e#2339#2340#0" expanded="false" />
+            <element signature="e#2377#2378#0" expanded="false" />
+            <element signature="e#2428#2429#0" expanded="false" />
+            <element signature="e#2458#2459#0" expanded="false" />
+            <element signature="e#2500#2501#0" expanded="false" />
+            <element signature="e#2543#2544#0" expanded="false" />
+            <element signature="e#2601#2602#0" expanded="false" />
+            <element signature="e#2641#2642#0" expanded="false" />
+            <element signature="e#2690#2691#0" expanded="false" />
+            <element signature="e#2734#2735#0" expanded="false" />
+            <element signature="e#2787#2788#0" expanded="false" />
+            <element signature="e#2822#2823#0" expanded="false" />
+            <element signature="e#2865#2866#0" expanded="false" />
+            <element signature="e#2907#2908#0" expanded="false" />
+            <element signature="e#2958#2959#0" expanded="false" />
+            <element signature="e#2998#2999#0" expanded="false" />
+            <element signature="e#3047#3048#0" expanded="false" />
+            <element signature="e#3087#3088#0" expanded="false" />
+            <element signature="e#3134#3135#0" expanded="false" />
+            <element signature="e#3169#3170#0" expanded="false" />
+            <element signature="e#3211#3212#0" expanded="false" />
+            <element signature="e#3251#3252#0" expanded="false" />
+            <element signature="e#3319#3320#0" expanded="false" />
+            <element signature="e#3359#3360#0" expanded="false" />
+            <element signature="e#3427#3428#0" expanded="false" />
+            <element signature="e#3471#3472#0" expanded="false" />
+            <element signature="e#3545#3546#0" expanded="false" />
+            <element signature="e#3586#3587#0" expanded="false" />
+            <element signature="e#3655#3656#0" expanded="false" />
+            <element signature="e#3801#3802#0" expanded="false" />
+            <element signature="e#3872#3873#0" expanded="false" />
+            <element signature="e#3908#3909#0" expanded="false" />
+            <element signature="e#3952#3953#0" expanded="false" />
+            <element signature="e#4208#4209#0" expanded="false" />
+            <element signature="e#5021#5022#0" expanded="false" />
+            <element signature="e#5067#5068#0" expanded="false" />
+            <element signature="e#5120#5121#0" expanded="false" />
+            <element signature="e#5166#5167#0" expanded="false" />
+            <element signature="e#5202#5203#0" expanded="false" />
+            <element signature="e#5251#5252#0" expanded="false" />
+            <marker date="1507028582213" expanded="true" signature="4828:4857" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/mygubbi/FirebaseServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQSheetCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="13" selection-start-line="152" selection-start-column="13" selection-end-line="152" selection-end-column="13" />
+          <folding>
+            <marker date="1507028581231" expanded="false" signature="47:79" placeholder="..." />
+            <marker date="1507028581231" expanded="true" signature="23674:23680" placeholder="{...}" />
+            <marker date="1507028581231" expanded="true" signature="23741:23855" placeholder="{...}" />
+            <marker date="1507028581231" expanded="true" signature="23950:24272" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="309" column="0" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
+          <caret line="591" column="93" selection-start-line="591" selection-start-column="93" selection-end-line="591" selection-end-column="93" />
           <folding />
         </state>
       </provider>
@@ -1562,23 +1557,147 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/game/resturls.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="601" column="24" selection-start-line="601" selection-start-column="24" selection-end-line="601" selection-end-column="24" />
-          <folding />
+          <caret line="840" column="15" selection-start-line="840" selection-start-column="15" selection-end-line="840" selection-end-column="15" />
+          <folding>
+            <marker date="1507028322235" expanded="true" signature="28580:28636" placeholder="{&quot;uri&quot;: &quot;/gapi/proposal/getfinishmap&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="896" column="17" selection-start-line="896" selection-start-column="17" selection-end-line="896" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1341" column="33" selection-start-line="1341" selection-start-column="33" selection-end-line="1341" selection-end-column="33" />
+          <folding>
+            <marker date="1507029361696" expanded="true" signature="15:102844" placeholder="[...]" />
+            <marker date="1507029361696" expanded="true" signature="1944:2127" placeholder="{&quot;id&quot;: &quot;proposal.list.crmid&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="2135:2839" placeholder="{&quot;id&quot;: &quot;proposal.updateversion&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="2846:3070" placeholder="{&quot;id&quot;: &quot;proposal.summary&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3076:3242" placeholder="{&quot;id&quot;: &quot;proposal.header&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3249:3501" placeholder="{&quot;id&quot;: &quot;proposal.create&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3508:3873" placeholder="{&quot;id&quot;: &quot;proposal.create.crm&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="3880:4130" placeholder="{&quot;id&quot;: &quot;proposal.select.updateprice&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4137:4466" placeholder="{&quot;id&quot;: &quot;proposal.version.select.updateprice&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4473:4676" placeholder="{&quot;id&quot;: &quot;proposal.version.getdraftversion&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4683:4989" placeholder="{&quot;id&quot;: &quot;proposal.version.products.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="4996:5236" placeholder="{&quot;id&quot;: &quot;proposal.version.addons.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5243:5518" placeholder="{&quot;id&quot;: &quot;proposal.version.price.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5524:5720" placeholder="{&quot;id&quot;: &quot;proposalproduct.updateprice.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5727:5921" placeholder="{&quot;id&quot;: &quot;proposaladdon.updateprice.select&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="5928:6249" placeholder="{&quot;id&quot;: &quot;proposal.audit.insert&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="6256:6554" placeholder="{&quot;id&quot;: &quot;proposal.audit.addon.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="6561:7009" placeholder="{&quot;id&quot;: &quot;version.createdraft&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="7016:7502" placeholder="{&quot;id&quot;: &quot;version.createPostSalesInitial&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="7509:8700" placeholder="{&quot;id&quot;: &quot;proposal.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="8707:9809" placeholder="{&quot;id&quot;: &quot;proposal.update.onconfirm&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="9816:10015" placeholder="{&quot;id&quot;: &quot;proposal.folder.update&quot;...}" />
+            <marker date="1507029361696" expanded="true" signature="10022:10198" placeholder="{&quot;id&quot;: &quot;version.publish&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/sow/SOWWriteToDatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/mygubbi/game/proposal/model/QuickStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.poi/poi/3.12/1b74a7892dc6ecb89b8b953bab1a656bf86f4051/poi-3.12-sources.jar!/org/apache/poi/ss/usermodel/Cell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.poi/poi-ooxml/3.12/6e4a2f0a7de617f5f8cf76f3ccfb62c86856ea14/poi-ooxml-3.12-sources.jar!/org/apache/poi/xssf/usermodel/XSSFCell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="554" column="27" selection-start-line="554" selection-start-column="27" selection-end-line="554" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8168761">
+          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-42.793102">
+          <caret line="161" column="58" selection-start-line="161" selection-start-column="58" selection-end-line="161" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2037036">
-          <caret line="784" column="5" selection-start-line="784" selection-start-column="5" selection-end-line="784" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="81" selection-start-line="36" selection-start-column="81" selection-end-line="36" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0689654">
+          <caret line="570" column="43" selection-start-line="570" selection-start-column="18" selection-end-line="570" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.9122808">
+          <caret line="591" column="76" selection-start-line="591" selection-start-column="76" selection-end-line="591" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-42.91228">
+          <caret line="390" column="99" selection-start-line="390" selection-start-column="99" selection-end-line="390" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/game/game.base.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9230769">
+          <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6928839">
+          <caret line="461" column="7" selection-start-line="461" selection-start-column="7" selection-end-line="461" selection-end-column="7" />
           <folding />
         </state>
       </provider>

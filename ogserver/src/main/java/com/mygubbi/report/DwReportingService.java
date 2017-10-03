@@ -446,7 +446,7 @@ public class DwReportingService extends AbstractVerticle {
                 {
                     if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
                     {
-                        Handle handle = ModuleDataService.getInstance().getHandleTitle(productLineItem.getHandleCode());
+                        Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(productLineItem.getHandleCode());
                         setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
 
                     }
@@ -454,7 +454,7 @@ public class DwReportingService extends AbstractVerticle {
             }
             else if (productModule.getHandleOverrideFlag().equals("Yes")) {
                 {
-                    Handle handle = ModuleDataService.getInstance().getHandleTitle(productModule.getHandleCode());
+                    Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(productModule.getHandleCode());
                     setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
                 }
             }
@@ -465,7 +465,7 @@ public class DwReportingService extends AbstractVerticle {
            /* if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
             {
 //                LOG.debug("Collect handle : " + productModule.getHandleQuantity() + " : " + productModule.getMGCode());
-                Handle handle = ModuleDataService.getInstance().getHandleTitle(productModule.getHandleCode());
+                Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(productModule.getHandleCode());
                 setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
             }*/
 
@@ -480,7 +480,7 @@ public class DwReportingService extends AbstractVerticle {
         {
 //            LOG.debug("Collect knob : " + productModule.getKnobQuantity() + " : " + productModule.getMGCode());
 
-            Handle knob = ModuleDataService.getInstance().getHandleTitle(productModule.getKnobCode());
+            Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(productModule.getKnobCode());
             setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,knob,reportingObjects,productModule.getKnobQuantity());
         }
 
@@ -525,21 +525,21 @@ public class DwReportingService extends AbstractVerticle {
                     }
 
 
-                    Handle hinge = ModuleDataService.getInstance().getHandleTitle(code);
+                    Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(code);
 
                     setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
 
 
                 } else {
                     quantity = getHingeRateBasedOnQty(hingePack,productModule);
-                    Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+                    Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
 
                     setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
 
                 }
             }
             else {
-                Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+                Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
 
                 setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
             }

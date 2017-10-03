@@ -4,6 +4,7 @@ import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import com.google.api.services.drive.model.Permission;
+import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,6 +54,58 @@ public class DriveServiceProvider
         this.mimeTypes.put(TYPE_PDF,"application/pdf");
     }
 
+    public DriveFile createFolder(List<UploadToDrive> filePaths, String folderName, String userId)
+    {
+        this.serviceManager.getDrive();
+        File folderMetadata = new File();
+        folderMetadata.setName(folderName);
+        folderMetadata.setMimeType("application/vnd.google-apps.folder");
+        String folderId = null;
+
+        LOG.debug("FOlder created");
+
+        File folder = null;
+        try {
+            folder = this.serviceManager.getDrive().files().create(folderMetadata)
+                    .setFields("id,name,webContentLink,webViewLink")
+                    .execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (!(folder == null))
+        {
+            folderId = folder.getId();
+        }
+
+//        LOG.debug("After folder creation :" + folder.getId());
+
+        allowUserToEditFile(folderId,userId);
+
+        for (UploadToDrive fileNames : filePaths)
+        {
+            File fileExcel = new File();
+            fileExcel.setName(fileNames.getFileName());
+            fileExcel.setMimeType("application/vnd.google-apps.spreadsheet");
+            fileExcel.setParents(Collections.singletonList(folderId));
+            java.io.File filePath = new java.io.File(fileNames.getFilePath());
+            FileContent mediaContent = new FileContent("application/vnd.ms-excel", filePath);
+            try {
+
+                File file = this.serviceManager.getDrive().files().create(fileExcel, mediaContent)
+                        .setFields("id, parents,webViewLink")
+                        .execute();
+                allowUserToEditFile(file.getId(),userId);
+                LOG.debug("File created:" + fileNames.getFilePath() + " with web link: " + file.getWebViewLink());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return new DriveFile(folder);
+    }
+
     public DriveFile uploadFile(String filePath, String filename)
     {
         LOG.debug("File Path :" + filePath + "fileName :" + filename);
@@ -72,7 +125,8 @@ public class DriveServiceProvider
         }
         catch (IOException e)
         {
-            throw new RuntimeException("Couldn't create drive file for " + filePath, e);
+            LOG.debug("Exception found : " + e.getMessage() + " : " + e.getStackTrace().toString());
+            throw new RuntimeException("Couldn't create drive file for " + filePath, e.getCause());
         }
         return new DriveFile(file);
     }
@@ -97,16 +151,16 @@ public class DriveServiceProvider
 
     public void downloadFile(String id, String path, String mimeType)
     {
-        LOG.debug("Inisde download file :" + id + " : " + path + " : " + mimeType) ;
+//        LOG.debug("Inisde download file :" + id + " : " + path + " : " + mimeType) ;
         try
         {
-            LOG.debug("inisde download file");
+//            LOG.debug("inisde download file");
             FileOutputStream outputStream = new FileOutputStream(path);
             if (this.mimeTypes.containsKey(mimeType))
             {
-                LOG.debug("inisde if file");
+//                LOG.debug("inisde if file");
                 this.serviceManager.getDrive().files().export(id, this.mimeTypes.get(mimeType))
-                        .executeMediaAndDownloadTo(outputStream);
+                        .set("portrait", false).set("size","A4").set("fitw",true).set("gridlines",false).executeMediaAndDownloadTo(outputStream);
             }
             else
             {
@@ -115,7 +169,7 @@ public class DriveServiceProvider
         }
         catch (IOException e)
         {
-            throw new RuntimeException("Could not download file " + id + " to " + path, e);
+            throw new RuntimeException("Could not download file " + id + " to " + path, e.getCause());
         }
     }
 
@@ -151,15 +205,20 @@ public class DriveServiceProvider
     {
         LOG.debug("filePath :" + filePath + ":" + email + ":" +fileName + " : " + readOnlyFlag);
         DriveFile driveFile = this.uploadFile(filePath, fileName);
-        if (readOnlyFlag.equals("yes"))
-        {
-            this.allowUserToReadFile(driveFile.getId(), email);
-            this.allowUserToReadFile(driveFile.getId(), salesEmail);
-        }
-        else
-        {
-            this.allowUserToEditFile(driveFile.getId(), email);
-            this.allowUserToEditFile(driveFile.getId(), salesEmail);
+        try {
+            Thread.sleep(10*1000);
+            if (readOnlyFlag.equalsIgnoreCase("yes"))
+            {
+                this.allowUserToReadFile(driveFile.getId(), email);
+                this.allowUserToReadFile(driveFile.getId(), salesEmail);
+            }
+            else
+            {
+                this.allowUserToEditFile(driveFile.getId(), email);
+                this.allowUserToEditFile(driveFile.getId(), salesEmail);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
 
@@ -186,7 +245,7 @@ public class DriveServiceProvider
 
     public void allowUserToReadFile(String id, String email)
     {
-        LOG.debug("Allow user to read file :" + email);
+        LOG.debug("Allow user to read file :" + email + "| folderid:" + id);
 
         Permission userPermission = new Permission()
                 .setType("user")

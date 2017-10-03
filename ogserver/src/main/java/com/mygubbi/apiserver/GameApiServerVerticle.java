@@ -6,15 +6,13 @@ import com.mygubbi.config.StaticConfigHandler;
 import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.Upload.CloudinaryFileUploadHandler;
 import com.mygubbi.game.proposal.Upload.FileUploadHandler;
+import com.mygubbi.game.proposal.erp.BOQHandler;
 import com.mygubbi.game.proposal.sow.SOWWriteToDatabaseHandler;
 import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
 import com.mygubbi.si.crm.CrmApiHandler;
 import com.mygubbi.si.crm.CrmOutboundApiHandler;
-import io.vertx.core.AbstractVerticle;
-import io.vertx.core.DeploymentOptions;
-import io.vertx.core.Future;
-import io.vertx.core.Vertx;
+import io.vertx.core.*;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.net.JksOptions;
@@ -33,6 +31,7 @@ public class GameApiServerVerticle extends AbstractVerticle
     {
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(GameApiServerVerticle.class.getCanonicalName(), new DeploymentOptions().setInstances(4));
+
     }
 
     @Override
@@ -116,6 +115,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/user.change_pwd", new GameUserChangePwdHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/sow", new SOWWriteToDatabaseHandler(VertxInstance.get()));
+        router.mountSubRouter("/gapi/boq", new BOQHandler(VertxInstance.get()));
 //        router.mountSubRouter("/gapi/proposal", new ProposalHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/product", new ProposalProductHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/addon", new ProposalAddonHandler(VertxInstance.get()));

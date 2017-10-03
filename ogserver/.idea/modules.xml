@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogserver.iml" filepath="$PROJECT_DIR$/.idea/modules/ogserver.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogserver_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ogserver_test.iml" group="ogserver" />
+      <module fileurl="file://$PROJECT_DIR$/ogserver.iml" filepath="$PROJECT_DIR$/ogserver.iml" />
     </modules>
   </component>
 </project>

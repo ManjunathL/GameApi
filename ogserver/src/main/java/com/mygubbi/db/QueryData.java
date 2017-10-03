@@ -37,7 +37,7 @@ public class QueryData
 	{
 		this.queryId = queryId;
 	}
-	
+
 	public QueryData(String queryId, JsonObject paramsObject)
 	{
 		this.queryId = queryId;

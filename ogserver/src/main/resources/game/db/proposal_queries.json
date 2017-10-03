@@ -851,14 +851,14 @@
       "id": "accessory.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom, category,ERPCode from acc_hw_master where type = 'A'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom, category,ERPCode,boqDisplayOrder from acc_hw_master where type = 'A'",
       "params": []
     },
     {
       "id": "hardware.select.all",
       "type": "select",
       "table": "acc_hw_master",
-      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category,ERPCode from acc_hw_master where type = 'H'",
+      "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category,ERPCode,boqDisplayOrder from acc_hw_master where type = 'H'",
       "params": []
     },
 
@@ -896,7 +896,7 @@
       "id": "handle.master.all",
       "type": "select",
       "table": "handle_master",
-      "query": "select code,type,title,finish,mgCode,thickness,sourcePrice,msp,imagePath,erpCode,articleNo from handle_master",
+      "query": "select code,erpCode,type,title,finish,mgCode,thickness,sourcePrice,msp,imagePath,articleNo,boqDisplayOrder from handle_master",
       "params": []
     },
     {
@@ -1887,12 +1887,60 @@
       "params": ["proposalId","version"],
       "jsonfields":[]
     },
+
     {
       "id": "dw_product_module.delete",
       "type": "delete",
       "table": "dw_product_module",
       "query": "delete from dw_product_module where proposalId = ? and version = ?",
       "params": ["proposalId","version"],
+      "jsonfields":[]
+    },
+
+
+
+    //BOQ related queries
+
+    {
+      "id": "proposal.boq.create",
+      "type": "insert",
+      "table": "proposal_boq",
+      "query": "insert into proposal_boq(proposalId, spaceType, roomcode, category, productService,productId, mgCode, moduleSeq, customCheckFlag, customRemarks, itemCategory, DSOErpItemCode,DSOItemSeq, DSOReferencePartNo,DSODescription, DSOUom, DSORate, DSOQty, DSOPrice, plannerErpItemCode, plannerReferencePartNo,plannerDescription, plannerUom, plannerRate, plannerQty, plannerPrice) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params": ["proposalId", "spaceType", "roomcode", "category", "productService","productId", "mgCode", "moduleSeq", "customCheckFlag", "customRemarks", "itemCategory", "DSOErpItemCode","DSOItemSeq", "DSOReferencePartNo","DSODescription", "DSOUom", "DSORate", "DSOQty", "DSOPrice", "plannerErpItemCode", "plannerReferencePartNo","plannerDescription", "plannerUom", "plannerRate", "plannerQty", "plannerPrice"],
+      "jsonfields":[]
+    },
+
+    {
+      "id": "proposal.boq.proposalversion",
+      "type": "select",
+      "table": "proposal_boq",
+      "query": "select * from proposal_boq where proposalId = ? order by productId,moduleSeq",
+      "params": ["proposalId"],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal.boq.select.products.all",
+      "type": "select",
+      "table": "proposal_boq",
+      "query": "select * from proposal_boq where proposalId = ?",
+      "params": ["proposalId"],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal.boq.update",
+      "type": "update",
+      "table": "proposal_boq",
+      "query": "update proposal_boq set plannerErpItemCode = ?, plannerReferencePartNo = ?, plannerUom = ?, plannerRate = ?, plannerQty = ?, plannerPrice = ? where proposalId = ? and spaceType = ? and roomcode = ? and productService = ? and productId = ? and moduleSeq = ? and mgCode = ? and DSOErpItemCode = ?",
+      "params": ["plannerErpItemCode", "plannerReferencePartNo", "plannerUom", "plannerRate", "plannerQty", "plannerPrice", "proposalId", "spaceType", "roomcode", "productService", "productId", "moduleSeq", "mgCode","DSOErpItemCode"],
+      "jsonfields":[]
+    },
+
+    {
+      "id": "erp.master.select",
+      "type": "select",
+      "table": "ERP_master",
+      "query": "select * from erp_master",
+      "params": [],
       "jsonfields":[]
     },
     {
@@ -1972,6 +2020,21 @@
       "table": "template_test",
       "query": "select * from template_test where id=?",
       "params": ["id"]
+    },
+
+    {
+      "id": "proposal.header.boqupdate",
+      "type": "update",
+      "table": "proposal",
+      "query": "update proposal set boqDriveLink = ?, boqStatus = ? where id = ?",
+      "params": ["driveWebViewLink","boqStatus","proposalId"],
+      "jsonfields":[]
     }
+
+
+
+
+
+
   ]
 }
