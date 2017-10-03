@@ -687,10 +687,26 @@
       "jsonfields":[]
     },
     {
+      "id": "proposal.product.sow.till3",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select distinct spaceType,roomCode as roomcode from proposal_product where proposalId = ? and fromVersion like '2.%' and active = 'A' order by seq;",
+      "params": ["proposalId"],
+      "jsonfields":[]
+    },
+    {
       "id": "proposal.addon.sow.till2",
       "type": "select",
       "table": "proposal_addon",
       "query": "select distinct spaceType,roomCode as roomcode from proposal_addon where proposalId = ? and fromVersion like '1.%'",
+      "params": ["proposalId"],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal.addon.sow.till3",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select distinct spaceType,roomCode as roomcode from proposal_addon where proposalId = ? and fromVersion like '2.%'",
       "params": ["proposalId"],
       "jsonfields":[]
     },
