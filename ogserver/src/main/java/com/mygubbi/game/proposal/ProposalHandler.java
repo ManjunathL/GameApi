@@ -476,6 +476,7 @@ public class ProposalHandler extends AbstractRouteHandler
         }
         params.put("sowversion",sowVersion);
 
+        LOG.info("params == "+params);
         vertx.eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance()
                         .store(new QueryData("proposal.sow.select.proposalversion.forPdf",
                                 params)),
