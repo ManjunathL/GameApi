@@ -201,8 +201,8 @@ public class BOQHandler extends AbstractRouteHandler{
                 XSSFRow xssfRow = sheet.getRow(j);
 
 
-                if (xssfRow.getCell(details[0]).getCellType() == 3 ||
-                        xssfRow.getCell(details[0]).getCellType() == 3 ) {
+                if (xssfRow.getCell(0).getCellType() == 3 ||
+                        xssfRow.getCell(1).getCellType() == 3 ) {
                     break;
                 } else {
 //                    LOG.debug("Additional items");

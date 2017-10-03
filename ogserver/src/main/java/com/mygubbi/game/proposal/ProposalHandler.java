@@ -469,6 +469,8 @@ public class ProposalHandler extends AbstractRouteHandler
             sowVersion = "1.0";
         }else if(verFromProposal.contains("1.") || verFromProposal.contains("2.")){
             sowVersion = "2.0";
+        }else if(verFromProposal.contains("2.") || verFromProposal.contains("3.")){
+            sowVersion = "3.0";
         }else{
             LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
         }
@@ -494,14 +496,18 @@ public class ProposalHandler extends AbstractRouteHandler
     }
     private void createSowOutputInPdf(RoutingContext context, JsonObject quoteReponse,Boolean IsBookingFormFlag){
         JsonObject quoteRequestJson = context.getBodyAsJson();
+        String version = quoteRequestJson.getString("fromVersion");
+        LOG.info("Version :: "+version);
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.SOWPDF));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
             if(IsBookingFormFlag) {
                 createBookingFormInPdf(context, quoteReponse, response);
-            }else{
+            }else if(version == "2.0"){
                 this.createWorksContractinPdf(context,quoteReponse,response);
                 //createMergedPdf(context,quoteReponse,response,new JsonObject());
+            }else{
+                createMergedPdf(context,quoteReponse,response,new JsonObject());
             }
         });
     }
