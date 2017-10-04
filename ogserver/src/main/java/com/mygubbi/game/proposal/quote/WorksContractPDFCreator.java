@@ -175,7 +175,7 @@ public class WorksContractPDFCreator
 
                     p=new Paragraph("         (a. ) Exactness with respect to the appearance of the final installed product compared with any previous diagrams, drawings, laminate colour samples,\n " +
                     "                 computer or 3-D rendition, et cetera is not guaranteed.\n"
-                    + "         (b. ) The products delivered under the Service carry a limited warranty of 05 years for its 'joinery’, effective from the date of invoice.\n"
+                    + "         (b. ) The products delivered under the Service carry a limited warranty of 05 years for its \'joinery\', effective from the date of invoice.\n"
                     + "         (c. ) The warranty for all third-party fittings like water taps, kitchen-sink, white goods and electrical/electronic appliances, etc. procured for and on behalf of\n " +
                     "                 the Client shall be applicable as per the norms specified by the particular brand/manufacturer. Please note that all such appliances shall be procured on\n" +
                     "                 your behalf and in your name and you shall alone be the sole owner thereof.\n"
@@ -205,16 +205,16 @@ public class WorksContractPDFCreator
 
                     p=new Paragraph("         (a. ) Orders/works-contracts once signed are expected to be non-cancellable.\n"
                     + "         (b. ) However, if client cancels his order for any reason whatsoever once the work has commenced, then the monies already paid by the client shall stand\n "
-                    + "               forfeited and will not be refunded, and client shall be additionally liable to pay for MyGubbi’s service charges (as determined by it), and\n"
+                    + "               forfeited and will not be refunded, and client shall be additionally liable to pay for MyGubbi\'s service charges (as determined by it), and\n"
                     + "                for all costs borne for materials ordered under the relevant work-contract. \n"
-                    + "         (c. ) If MyGubbi cancels this contract unilaterally with or without any reason, then MyGubbi’s liability shall be limited up to the refund of client’s\n"
+                    + "         (c. ) If MyGubbi cancels this contract unilaterally with or without any reason, then MyGubbi\'s liability shall be limited up to the refund of client\'s\n"
                     +"                entire amount actually paid to MyGubbi.\n",fsize);
                     document.add(p);
 
                     p=new Paragraph("7. RISK\n",fsizebold);
                     document.add(p);
-                    p=new Paragraph("         (a. ) In the event that the goods delivered to the installation site are handled by people outside MyGubbi’s authorized personnel or in the event that the goods\n"
-                    + "               delivered to the installation site are mishandled by site personnel outside authorized MyGubbi’s personnel or the site is not secure or the duration\n"
+                    p=new Paragraph("         (a. ) In the event that the goods delivered to the installation site are handled by people outside MyGubbi\'s authorized personnel or in the event that the\n"
+                    + "               goods delivered to the installation site are mishandled by site personnel outside authorized MyGubbi\'s personnel or the site is not secure or the duration\n"
                     + "               between delivery and installation surpasses 05 working days due to reasons not attributable to MyGubbi, risk of loss of the products in such cases\n"
                     + "               shall pass to customer.\n"
                     + "         (b. ) If MyGubbi is unable to complete installation of the Services with the time period mentioned under Clause 3, a grace period of 20 (twenty) Working\n"
@@ -229,14 +229,14 @@ public class WorksContractPDFCreator
                     + "               INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL LOSSES HOWSOEVER ARISING WHETHER UNDER THIS CONTRACT,\n"
                     + "               TORT (INCLUDING NEGLIGENCE), BREACH OF STATUTORY DUTY OR OTHERWISE, EVEN IF ADVISED OF THE POSSIBILITY\n"
                     + "               OF SUCH LOSSES.\n"
-                    + "         (b. ) AT ALL TIMES AND UNDER ALL CIRCUMSTANCES, MYGUBBI’S LIABILITY SHALL BE LIMITED UP TO THE REFUND OF\n"
-                    + "               CLIENT’S ENTIRE AMOUNT ACTUALLY PAID TO MYGUBBI\n",fsize);
+                    + "         (b. ) AT ALL TIMES AND UNDER ALL CIRCUMSTANCES, MYGUBBI\'S LIABILITY SHALL BE LIMITED UP TO THE REFUND OF\n"
+                    + "               CLIENT\'S ENTIRE AMOUNT ACTUALLY PAID TO MYGUBBI\n",fsize);
                     document.add(p);
 
                     p=new Paragraph( "9. FORCE MAJEURE\n",fsizebold);
                     document.add(p);
-                    p=new Paragraph("         (a. ) MyGubbi shall not be held in breach or liable due to any delay caused by break down or damage of MyGubbi’s machinery, shortages or non-availability\n"
-                    + "               of raw materials, components or consumables etc., strikes, lock-out, war, riot, civil commotion, commercial disturbances or acts of God or other\n"
+                    p=new Paragraph("         (a. ) MyGubbi shall not be held in breach or liable due to any delay caused by break down or damage of MyGubbi\'s machinery, shortages or non-\n"
+                    + "               availability of raw materials, components or consumables etc., strikes, lock-out, war, riot, civil commotion, commercial disturbances or acts of God or other\n"
                     + "               causes beyond the control of the MyGubbi.\n"
                     +"\n",fsize);
                     document.add(p);
