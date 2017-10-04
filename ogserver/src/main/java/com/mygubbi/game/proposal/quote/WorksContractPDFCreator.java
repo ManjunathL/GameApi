@@ -166,7 +166,7 @@ public class WorksContractPDFCreator
                     + "         (a. ) The Final design, specifications and Quote of the Services has been duly signed by both parties\n"
                     + "         (b. ) The requisite advance for the services has been paid by the Client, and \n"
                     + "         (c. ) There have been no changes to the scope of work pursuant to the design and specifications of the Services having been duly signed off by both parties.\n"
-                    + "         (d. ) Readiness of Client’s site in all aspects to do installation of product as per final design.\n",fsize);
+                    + "         (d. ) Readiness of Client\'s site in all aspects to do installation of product as per final design.\n",fsize);
             document.add(p);
 
                     phrase=new Phrase(new Chunk("5. WARRANTY (MOST IMPORTANT TERMS)\n",fsizebold));
@@ -179,7 +179,7 @@ public class WorksContractPDFCreator
                     + "         (c. ) The warranty for all third-party fittings like water taps, kitchen-sink, white goods and electrical/electronic appliances, etc. procured for and on behalf of\n " +
                     "                 the Client shall be applicable as per the norms specified by the particular brand/manufacturer. Please note that all such appliances shall be procured on\n" +
                     "                 your behalf and in your name and you shall alone be the sole owner thereof.\n"
-                    + "         (d. ) If during the 05 years’ warranty period the delivered product fail to operate due to defect in manufacturing, MyGubbi at its option, will either repair\n " +
+                    + "         (d. ) If during the 05 years warranty period the delivered product fail to operate due to defect in manufacturing, MyGubbi at its option, will either repair\n " +
                     "                 or replace the product or part therein in accordance with the terms and conditions below.\n"
                     + "                 (i. ) All the accessories which are procured by MyGubbi carry a lifetime warranty (on a back to back basis, as assured by the\n " +
                     "                         respective reputed accessory manufacturer).\n"
@@ -236,8 +236,8 @@ public class WorksContractPDFCreator
                     p=new Paragraph( "9. FORCE MAJEURE\n",fsizebold);
                     document.add(p);
                     p=new Paragraph("         (a. ) MyGubbi shall not be held in breach or liable due to any delay caused by break down or damage of MyGubbi\'s machinery, shortages or non-\n"
-                    + "               availability of raw materials, components or consumables etc., strikes, lock-out, war, riot, civil commotion, commercial disturbances or acts of God or other\n"
-                    + "               causes beyond the control of the MyGubbi.\n"
+                    + "               availability of raw materials, components or consumables etc., strikes, lock-out, war, riot, civil commotion, commercial disturbances or acts of God\n"
+                    + "               or other causes beyond the control of the MyGubbi.\n"
                     +"\n",fsize);
                     document.add(p);
 
