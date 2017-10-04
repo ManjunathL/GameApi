@@ -476,6 +476,7 @@ public class ProposalHandler extends AbstractRouteHandler
         }
         params.put("sowversion",sowVersion);
 
+        LOG.info("params == "+params);
         vertx.eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance()
                         .store(new QueryData("proposal.sow.select.proposalversion.forPdf",
                                 params)),
@@ -503,7 +504,7 @@ public class ProposalHandler extends AbstractRouteHandler
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
             if(IsBookingFormFlag) {
                 createBookingFormInPdf(context, quoteReponse, response);
-            }else if(version == "2.0"){
+            }else if(version.equalsIgnoreCase("2.0")){
                 this.createWorksContractinPdf(context,quoteReponse,response);
                 //createMergedPdf(context,quoteReponse,response,new JsonObject());
             }else{

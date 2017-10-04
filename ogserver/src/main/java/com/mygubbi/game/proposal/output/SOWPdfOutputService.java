@@ -224,8 +224,10 @@ public class SOWPdfOutputService extends AbstractVerticle {
         String sowversion = "1.0";
         String version = quoteData.fromVersion;
 
-        if (version.contains("1.") || version.contains("2.")){
+        if (version.contains("1.") || version.contains("2.0")){
             sowversion = "2.0";
+        }else if (version.contains("2.") || version.contains("3.")){
+            sowversion = "3.0";
         }
 
         String remarks;
@@ -239,6 +241,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
 
         if (remarks == null) remarks = "";
 
+        LOG.info ("Version here :: "+sowversion);
         jsonObject.put("version",sowversion);
         jsonObject.put("proposalId",proposalHeader.getId());
 
