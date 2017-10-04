@@ -35,35 +35,27 @@ define([
                     var client_project_status_c = mynestitems.paymentDetails[0].client_project_status_c;
 
                     switch (project_status) {
-                        case "PROSPECT":case "FLOOR_PLAN_UPLOADED":case "INITIAL_PROPOSAL_UPLOADED":case "INITIAL_PROPOSAL_SENT":
-                            project_statusArr = ["initiated"];
+                        case "PROSPECT":case "FLOOR_PLAN_UPLOADED":case "INITIAL_PROPOSAL_UPLOADED":case "INITIAL_PROPOSAL_SENT":case "COLLECT_BOOKING_AMOUNT":case "On_Hold":
+                            project_statusArr = ["Proposal"];
                             break;
-                        case "COLLECT_BOOKING_AMOUNT":case "COLLECTED_BOOKING_AMOUNT":case "SITE_MEASUREMENT_UPLOADED":case "DETAILED_DESIGN_APPROVED":case "FINAL_PROPOSAL_UPLOADED":case "FINAL_PROPOSAL_SENT":case "COLLECT_ORDER_AMOUNT":
-                            project_statusArr = ["initiated","proposal approved"];
+                        case "COLLECTED_BOOKING_AMOUNT":case "SITE_MEASUREMENT_UPLOADED":case "DETAILED_DESIGN_APPROVED":case "FINAL_PROPOSAL_UPLOADED":case "FINAL_PROPOSAL_SENT":case "COLLECT_ORDER_AMOUNT":case "PRODUCTION_DRAWING":
+                            project_statusArr = ["Proposal","Booked"];
                             break;
                         case "Closed_Won":
-                            project_statusArr = ["initiated","proposal approved","order placed"];
+                            project_statusArr = ["Proposal","Booked","Confirmed"];
                             break;
-                        case "Closed_Lost":case "On_Hold":
-                            project_statusArr = ["initiated","proposal approved","order placed"];
+                        case "Closed_Lost":
+                            project_statusArr = ["Proposal","Booked","Confirmed","Production","Installation","Closed"];
                             break;
-                    }
-                    if(typeof(client_project_status_c) != 'undefined' && client_project_status_c != null){
-
-                        switch (client_project_status_c) {
-                            case "Project Initiated":case "Upload Scope Document - Conduct 'Kick off' meeting --Completed":case "Upload Workshop Drawing --Completed":case "Upload Prod drawing signed-off by customer --Completed":case "Upload Pre-Installation checklist & list site work --Completed":case "Complete Preinstallation site work --Completed":case "Generate SO extract & update ERP --Completed":
-                                project_statusArr = ["initiated","proposal approved","order placed"];
-                                break;
-                            case "Generate PO extract & update ERP --Completed":case "Update PO details in CRM & Confirm delivery dates --Completed":case "Update Product readiness for inspection  --Completed":case "Upload the QC report post vendor site inspection  --Completed":case "Final Payment Collection - completed":case "Update GRNs against the POs --Completed":case "Upload product photos to confirm readiness for Delivery --Completed":case "Update DO completion status --Completed":case "Upload Invoices --Completed":case "Upload Packing list and Accessories list --Completed":case "Update Site delivery status --Completed":
-                                  project_statusArr = ["initiated","proposal approved","order placed","production started"];
-                                  break;
-                            case "Update Site Installation status --Completed":case "Upload Snaglist and confirm QC completion  --Completed":
-                                  project_statusArr = ["initiated","proposal approved","order placed","production started","installation"];
-                                  break;
-                            case "Upload Handover document and update Project Closure status --Completed":case "Project Completed":
-                                  project_statusArr = ["initiated","proposal approved","order placed","production started","installation","handed over"];
-                                  break;
-                        }
+                        case "PLANNING":case "PRODUCTION":
+                            project_statusArr = ["Proposal","Booked","Confirmed","Production"];
+                            break;
+                        case "INSTALLATION":case "SNAGS":case "PROJECT_HANDOVER":
+                            project_statusArr = ["Proposal","Booked","Confirmed","Production","Installation"];
+                            break;
+                        case "WARRANTY_HANDOVER":case "Closed":
+                            project_statusArr = ["Proposal","Booked","Confirmed","Production","Installation","Closed"];
+                            break;
                     }
                 }
             }

@@ -108,7 +108,7 @@
                 <div class="portfolio-box pb-cep bg-white mb20 project-sts">
                     <div class="row bs-wizard hidden-xs hidden-sm" style="border-bottom:0;">
                         <% var defaultArr = new Array(); %>
-                        <% defaultArr = ["initiated","proposal approved","order placed","production started","installation","handed over"]; %>
+                        <% defaultArr = ["Proposal","Booked","Confirmed","Production","Installation","Closed"]; %>
                         <% _.each(defaultArr, function(value) { %>
                         <div class="col-xs-2 bs-wizard-step
                             <% _.each(projectStatusArr, function(comment){ %>
@@ -149,7 +149,7 @@
                     <div class="row margin-top40 hidden-lg hidden-md">
                         <ul class="timeline my-nest-timeline">
                             <% var defaultArr = new Array(); %>
-                            <% defaultArr = ["initiated","proposal approved","order placed","production started","installation","handed over"]; %>
+                            <% defaultArr = ["Proposal","Booked","Confirmed","Production","Installation","Closed"]; %>
                             <% _.each(defaultArr, function(value) { %>
                             <li class="timeline-inverted">
                                 <div class="timeline-badge" style=" <% _.each(projectStatusArr, function(comment){ %>
@@ -418,7 +418,8 @@
                 <%= console.log(myNest.paymentDetails[0].sales_stage) %>
 
                 <% var dfdocArr = new Array(); %>
-                <% dfdocArr = ["Floor Plan","Initial Proposal","Final Proposal","Booking Form","Works Contract"]; %>
+                <% //dfdocArr = ["Floor Plan","Initial Proposal","Final Proposal","Booking Form","Works Contract"]; %>
+                <% dfdocArr = ["Floor Plan","Booking Form","Contract & Signoff"]; %>
                 <% _.each(dfdocArr, function(dfdoc) { %>
                 <div class="col-md-12 col-sm-12 col-xs-12" >
                     <span class="pull-left txt-color-orange mr10">
@@ -426,7 +427,7 @@
                     </span>
                     <% var docUrl = ""; %>
                     <% var dcarr= new Array(); %>
-                    <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal","BOOKING_FORM":"Booking Form","WORKS_CONTRACT":"Works Contract"}; %>
+                    <% dcarr= {"FLOOR_PLAN": "Floor Plan", "INITIAL_PROPOSAL": "Initial Proposal", "FINAL_PROPOSAL": "Final Proposal","BOOKING_FORM":"Booking Form","WORKS_CONTRACT":"Contract & Signoff"}; %>
 
 
                         <a <% _.each(myNest.documentDetails, function(mdoc){ %>
