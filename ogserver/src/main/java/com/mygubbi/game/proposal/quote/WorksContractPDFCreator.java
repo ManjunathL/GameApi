@@ -251,9 +251,7 @@ public class WorksContractPDFCreator
                     phrase=new Phrase();
                     phrase.add(new Chunk("11. GOVERNING LAW AND JURISDICTION\n",fsizebold));
                     phrase.add(new Chunk("         (a. ) This Contract and any matters arising out of or in connection with it shall be governed by, and shall be construed in accordance with, the laws of India.\n",fsize));
-                    phrase.add(new Chunk("               The Courts at ",fsize));
-                    phrase.add(new Chunk(proposalHeader.getProjectCity(),fsize));
-                    phrase.add(new Chunk(", India shall have exclusive jurisdiction\n",fsize));
+                    phrase.add(new Chunk("               The Courts at Bangalore, India shall have exclusive jurisdiction\n ",fsize));
                     phrase.add(new Chunk("In witness of their agreement to the terms above, the parties or their authorized agents hereby affix their signatures:\n",fsizebold));
                     p=new Paragraph(phrase);
                     document.add(p);
