@@ -196,14 +196,11 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         String L1s01code = null;
                         String room = null;
                         int noOfRows = sheet.getLastRowNum();
-                        LOG.debug("No of rows :" + noOfRows);
                         List<QueryData> queryDatas =new ArrayList<>();
                         String db_query = "proposal.sow.update";
 
-                        for (int i = 3; i < noOfRows && isRowExists(sheet,i,MAX_NO_OF_COLS); i++) {
+                        for (int i = 3; i < noOfRows; i++) {
                             XSSFRow xssfRow = sheet.getRow(i);
-
-
                             int count = 0;
                             Boolean isServiceMadeTrue = false;
                             List<String> services_value = new ArrayList<>();
@@ -215,13 +212,10 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                             cell_Services_title.add(12);
                             cell_Services_title.add(14);
 
-
                             if ( xssfRow.getCell(2) != null && !(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
                                 for (Integer services_cell : cell_Services) {
                                     XSSFCell xssfCell = xssfRow.getCell(services_cell);
                                     String first_level_service = xssfRow.getCell(3).getStringCellValue();
-                                    LOG.info("first_level_service = " + first_level_service);
-
                                     if (!(xssfRow.getCell(0).getStringCellValue().equals("")) || xssfRow.getCell(0).getStringCellValue().isEmpty()) {
 
                                         if(xssfRow.getRowNum() > CONTENT_ROW_NUM && (!(xssfRow.getCell(16).getStringCellValue().equals("")) || xssfRow.getCell(16).getStringCellValue().isEmpty())) {
@@ -243,22 +237,13 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
 
                                     if (!(xssfCell == null)) {
                                         services_value.add(count,xssfCell.getStringCellValue());
-
-
-                                        LOG.info("IS service is True ?? = " + isServiceMadeTrue);
                                         if ((count == 0) && (services_value.get(count).equalsIgnoreCase("Yes"))) {
                                             //set service flag to true
                                             isServiceMadeTrue = true;
 
                                         }
                                         if (isServiceMadeTrue && count > 0) {
-
-                                            LOG.info("COUNT = "+count+",services_value.get(count) == "+services_value.get(count));
-
-                                            XSSFCell xssfCell1Text = xssfRow.getCell(cell_Services_title.get(count));
-
-
-
+                                           XSSFCell xssfCell1Text = xssfRow.getCell(cell_Services_title.get(count));
                                             if (services_value.get(count).equals("") && !xssfCell1Text.getStringCellValue().equals("")) {
                                                 JsonObject res = new JsonObject();
                                                 res.put("status", "Failure");
@@ -294,11 +279,8 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                     }
                                 }
                                 services_value.forEach(s -> {LOG.info(s);});
-                                //check any of the level 2 services selected is mygubbi
                                 boolean isGubbiOrClient = false;
-                                LOG.info("services_value.size() = "+services_value.size());
                                 for (int index = 0; index < services_value.size(); index++) {
-                                    LOG.info("In services_value[index] = "+services_value.get(index)+", "+service_Combo_val.get(0));
                                     if ((services_value.get(index).equalsIgnoreCase(service_Combo_val.get(0)))&&
                                             (services_value.get(0).equalsIgnoreCase("Yes"))) {
                                         isGubbiOrClient = true;
@@ -307,7 +289,6 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                         isGubbiOrClient = true;
                                     }
                                 }
-                                LOG.info("isGubbiOrClient - "+isGubbiOrClient);
                                 if (!isGubbiOrClient && (services_value.get(0).equalsIgnoreCase("Yes"))) {
                                     JsonObject res = new JsonObject();
                                     res.put("status", "Failure");
@@ -332,7 +313,6 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                         proposal_sow.setL2S06("");
                                     }
                                     else {
-                                        services_value.forEach(s -> { LOG.info("services_value = "+s);});
                                         proposal_sow.setL2S01(services_value.get(1));
                                         proposal_sow.setL2S02(services_value.get(2));
                                         proposal_sow.setL2S03(services_value.get(3));
@@ -341,11 +321,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                         proposal_sow.setL2S06(services_value.get(6));
                                     }
                                     proposal_sow.setL1S01Code(L1s01code);
-
-
-                    /*updateSOwRecord(proposal_sow);*/
                                     System.out.println("Proposal_sow :" + proposal_sow.toString());
-
                                     queryDatas.add(new QueryData(db_query,proposal_sow));
                                 }
                             }
