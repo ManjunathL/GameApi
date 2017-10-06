@@ -105,7 +105,7 @@ public class ModuleDataService extends AbstractVerticle
                         for (JsonObject record : selectData.rows)
                         {
                             OldToNewFinishMapping oldToNewFinishMapping = new OldToNewFinishMapping(record);
-                            LOG.info("old new finish mapping " +oldToNewFinishMapping);
+//                            LOG.info("old new finish mapping " +oldToNewFinishMapping);
                             this.oldnewfinishMap.put(oldToNewFinishMapping.getOldCode(), oldToNewFinishMapping);
                         }
                         markResult("oldnew finsh mapping master done.", true);
@@ -129,7 +129,7 @@ public class ModuleDataService extends AbstractVerticle
                         for (JsonObject record : selectData.rows)
                         {
                             ColorMaster colorMaster=new ColorMaster(record);
-                            LOG.info("color mapping " +colorMaster);
+//                            LOG.info("color mapping " +colorMaster);
                             this.colorMap.put(colorMaster.getColorgroupCode(), colorMaster);
                         }
                         markResult("color master done.", true);
@@ -506,7 +506,6 @@ public class ModuleDataService extends AbstractVerticle
             LOG.error(message);
             return;
         }
-
         int counter = this.cachingCounter.decrementAndGet();
         if (counter == 0)
         {
