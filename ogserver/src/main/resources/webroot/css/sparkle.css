@@ -632,6 +632,17 @@ strong{
         margin: 15px auto;
         text-align: center;
     }
+    .sparkle-form .form-control{
+        margin:10px 0px;
+    }
+    .sparkle-form h3{
+        font-size: 24px;
+    }
+    .interior-need h1 {
+        font-weight: bold;
+        margin: 0px;
+        font-size: 40px;
+    }
     .interior-need h2{
         font-size:30px;
     }
