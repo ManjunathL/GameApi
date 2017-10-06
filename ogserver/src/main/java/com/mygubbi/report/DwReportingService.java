@@ -219,7 +219,7 @@ public class DwReportingService extends AbstractVerticle {
             AccHwComponent lConnector = ModuleDataService.getInstance().getHardware(lConnectorRate.getRateId());
             if(productLineItem.getHandletypeSelection() != null) {
                 if (productLineItem.getHandletypeSelection().equals("Gola Profile") && productLineItem.getNoOfLengths() != 0) {
-                    setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModules.get(0),lConnector,productLineItem.getNoOfLengths(),reportingObjects);
+                    setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModules.get(0),lConnector,productLineItem.getNoOfLengths(),reportingObjects);
 
                 }
             }
@@ -290,7 +290,7 @@ public class DwReportingService extends AbstractVerticle {
         reportingObjects.queryDatasForComponent.add(dwModuleComponent);
     }
 
-    private void setComponentAttributesForHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent,double quantity, ReportingObjects reportingObjects) {
+    private void setComponentAttributesForProfileHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent, double quantity, ReportingObjects reportingObjects) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
         dwModuleComponent = dwModuleComponent.setDwComponentAttributesForGolaProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,accHwComponent,quantity);
 
@@ -369,20 +369,26 @@ public class DwReportingService extends AbstractVerticle {
 
         if (Objects.equals(productLineItem.getHandletypeSelection(), GOLA_PROFILE)) {
 
-            AccHwComponent hardware = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware,(productModule.getWidth()/1000),reportingObjects);
+            AccHwComponent wProfile = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
+            double wProfileWidth = productModule.getWidth();
+            wProfileWidth = (wProfileWidth /1000);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,wProfile,wProfileWidth,reportingObjects);
 
-            AccHwComponent hardware1 = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware1,(productModule.getWidth()/1000),reportingObjects);
+            AccHwComponent lProfile = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
+            double lProfileWidth = productModule.getWidth();
+            lProfileWidth = (lProfileWidth /1000);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,lProfile,lProfileWidth,reportingObjects);
 
-            AccHwComponent hardware2 = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware2,(productModule.getWidth()/1000),reportingObjects);
+            AccHwComponent cProfile = ModuleDataService.getInstance().getHardware(cWidthRate.getRateId());
+            double cProfileWidth = productModule.getWidth();
+            cProfileWidth = (lProfileWidth /1000);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,cProfile,cProfileWidth,reportingObjects);
 
-            AccHwComponent hardware3 = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware3,2,reportingObjects);
+            AccHwComponent bracket = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,bracket,2,reportingObjects);
 
-            AccHwComponent hardware4 = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware4,1,reportingObjects);
+            AccHwComponent cConnector = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,cConnector,1,reportingObjects);
 
         }
         if (Objects.equals(productLineItem.getHandletypeSelection(), "G Profile")) {
@@ -413,7 +419,7 @@ public class DwReportingService extends AbstractVerticle {
             }
 
             AccHwComponent hardware5 = ModuleDataService.getInstance().getHardware(gProfileRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware5,lwidth,reportingObjects);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware5,lwidth,reportingObjects);
 
         }
         if (Objects.equals(productLineItem.getHandletypeSelection(), "J Profile")) {
@@ -443,7 +449,7 @@ public class DwReportingService extends AbstractVerticle {
             }
 
             AccHwComponent hardware6 = ModuleDataService.getInstance().getHardware(jProfileRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware6,lWidth,reportingObjects);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware6,lWidth,reportingObjects);
         }
         if (productModule.getHandleCode() == null) {
 
