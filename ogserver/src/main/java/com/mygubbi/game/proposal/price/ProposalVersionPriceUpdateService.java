@@ -73,7 +73,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     }
                     else
                     {
-                            Proposal proposalHeader = new Proposal(selectData.rows.get(0));
+                            ProposalHeader proposalHeader = new ProposalHeader(selectData.rows.get(0));
                             calculatePriceForModules(message, proposalVersion,proposalHeader);
                             calculatePriceForAddons(message, proposalVersion,proposalHeader);
                     }
@@ -81,10 +81,10 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
     }
 
 
-    private void calculatePriceForModules(Message<Integer> message, ProposalVersion proposalVersion, Proposal proposalHeader)
+    private void calculatePriceForModules(Message<Integer> message, ProposalVersion proposalVersion, ProposalHeader proposalHeader)
     {
         QueryData value = new QueryData("proposal.version.products.select", proposalVersion);
-        final Date[] priceDate = {new Date(System.currentTimeMillis())};
+        Date priceDate = new Date(System.currentTimeMillis());
         Integer id = LocalCache.getInstance().store(value);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> dataResult) ->
@@ -101,8 +101,8 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         double oldProductCost = 0;
 
                         if (proposalHeader.getPriceDate() != null) {
-                            String priceDate1 = proposalHeader.getPriceDate();
-                            priceDate[0] = DateUtil.convertDate(priceDate1);
+                            proposalHeader.setPriceDate(priceDate);
+
                         }
                         for (JsonObject record : selectData.rows)
                         {
@@ -128,7 +128,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             }
 
                             auditMaster.setProposalId(proposalHeader.getId());
-                            auditMaster.setPriceDate(priceDate[0]);
+                            auditMaster.setPriceDate(proposalHeader.getPriceDate());
                             auditMaster.setVersion(proposalVersion.getVersion());
                             oldProductCost += productLineItem.getAmount();
 
@@ -138,7 +138,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 productModule.setColorCode(productLineItem.getColorgroupCode());
                                 productModule.setFinish(oldToNewFinishMapping.getTitle());
                                 ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
-                                        proposalHeader.getPcity(), priceDate[0],productLineItem,"C");
+                                        proposalHeader.getProjectCity(), proposalHeader.getPriceDate(),productLineItem,"C");
                                 priceHolder.prepare();
                                 priceHolder.calculateTotalCost();
                                 double totalCost = priceHolder.getTotalCost();
@@ -147,9 +147,9 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 totalProductCost += totalCost;
                             }
 
-                            LOG.info("priceDate[0] = "+priceDate[0]);
+//                            LOG.info("priceDate[0] = "+priceDate[0]);
                             for (ProductAddon productAddon : productLineItem.getAddons()) {
-                                PriceMaster addonRate = RateCardService.getInstance().getAddonRate(productAddon.getCode(), priceDate[0], proposalHeader.getPcity());
+                                PriceMaster addonRate = RateCardService.getInstance().getAddonRate(productAddon.getCode(), proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
                                 productAddon.setRate(addonRate.getPrice());
                                 totalProductCost += productAddon.getAmount();
                             }
@@ -178,20 +178,20 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                 });
     }
 
-    private void calculatePriceForAddons(Message<Integer> message, ProposalVersion proposalVersion, Proposal proposalHeader) {
+    private void calculatePriceForAddons(Message<Integer> message, ProposalVersion proposalVersion, ProposalHeader proposalHeader) {
         QueryData value = new QueryData("proposal.version.addons.select", proposalVersion);
         Date priceDate = new Date(System.currentTimeMillis());
         Integer id = LocalCache.getInstance().store(value);
         AuditMaster auditMaster = new AuditMaster();
-        if (proposalHeader.getPriceDate() != null) {
-            String priceDate1 = proposalHeader.getPriceDate();
-            priceDate = DateUtil.convertDate(priceDate1);
+        if (proposalHeader.getPriceDate() == null) {
+            proposalHeader.setPriceDate(priceDate);
+
         }
-        LOG.debug("Price Date : " + priceDate);
-        LOG.debug("Price Date from proposal header : " + proposalHeader.getPriceDate());
+//        LOG.debug("Price Date : " + priceDate);
+//        LOG.debug("Price Date from proposal header : " + proposalHeader.getPriceDate());
 
 
-        final Date finalPriceDate = priceDate;
+//        final Date finalPriceDate = priceDate;
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> dataResult) ->
                 {
@@ -205,7 +205,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     }
                     else
                     {
-                        LOG.debug("hi");
+//                        LOG.debug("hi");
 
                         for (JsonObject record : selectData.rows)
                         {
@@ -222,7 +222,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 newTotalVersionAddonCost += addonLineItem.getAmount();
                                 continue;
                             }
-                            PriceMaster addonRate = RateCardService.getInstance().getAddonRate(addonLineItem.getCode(), finalPriceDate, proposalHeader.getPcity());
+                            PriceMaster addonRate = RateCardService.getInstance().getAddonRate(addonLineItem.getCode(), proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
                             newTotalVersionAddonCost += addonRate.getPrice();
                             addonLineItem.setRate(addonRate.getPrice());
                             addonLineItem.setAmount(addonRate.getPrice() * addonLineItem.getQuantity());
@@ -235,12 +235,12 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         finalAmount = finalAmount - finalAmount%10;
                         proposalVersion.setFinalAmount(finalAmount);
 
-                        LOG.debug("Update version price before :" + proposalVersion.toString());
+//                        LOG.debug("Update version price before :" + proposalVersion.toString());
 
 
                         auditMaster.setProposalId(proposalHeader.getId());
                         auditMaster.setVersion(proposalVersion.getVersion());
-                        auditMaster.setPriceDate(finalPriceDate);
+                        auditMaster.setPriceDate(proposalHeader.getPriceDate());
                         auditMaster.setNewAmountAddon(newTotalVersionAddonCost);
 
                         updateVersionPrice(message,proposalVersion,auditMaster,false);
