@@ -172,8 +172,8 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setModuleCategory(productModule.getModuleCategory());
         dwProductModule.setHandleSize(Double.parseDouble(productModule.getHandleThickness()));
         dwProductModule.setHandleQty(productModule.getHandleQuantity());
-        dwProductModule.setKnobType(productModule.getKnobType());
-        dwProductModule.setKnobFinish(productModule.getKnobFinish());
+        dwProductModule.setKnobType(productLineItem.getKnobType());
+        dwProductModule.setKnobFinish(productLineItem.getKnobFinish());
         dwProductModule.setCarcass(productModule.getCarcassCode());
 
         String finishCode = productModule.getFinishCode();
