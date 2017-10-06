@@ -53,6 +53,10 @@ public class DWProductModule extends JsonObject {
     private static final String HANDLEQTY="handleQty";
     private static final String KNOBTYPE="knobType";
     private static final String KNOBFINISH="knobFinish";
+    private static final String KNOBQUANTITY="knobQty";
+    private static final String HANDLETYPE="handleType";
+    private static final String HANDLEFINISH="handleFinish";
+    private static final String HANDLETYPESELECTION="handleTypeSelection";
     private static final String CARCASS="carcass";
     private static final String FINISH="finish";
     private static final String FINISHMATERIAL="finishMaterial";
@@ -174,6 +178,10 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setHandleQty(productModule.getHandleQuantity());
         dwProductModule.setKnobType(productLineItem.getKnobType());
         dwProductModule.setKnobFinish(productLineItem.getKnobFinish());
+        dwProductModule.setKnobQty(productModule.getKnobQuantity());
+        dwProductModule.setHandleType(productLineItem.getHandleType());
+        dwProductModule.setHandleFinish(productLineItem.getHandleFinish());
+        dwProductModule.setHandleTypeSelection(productLineItem.getHandletypeSelection());
         dwProductModule.setCarcass(productModule.getCarcassCode());
 
         String finishCode = productModule.getFinishCode();
@@ -528,6 +536,46 @@ public class DWProductModule extends JsonObject {
     public DWProductModule setKnobFinish(String knobFinish)
     {
         put(KNOBFINISH,knobFinish);
+        return this;
+    }
+
+    public String getKnobQuantity() {
+        return this.getString(KNOBQUANTITY);
+    }
+
+    public DWProductModule setKnobQty(double knobQty)
+    {
+        put(KNOBQUANTITY,knobQty);
+        return this;
+    }
+
+    public String getHandleType() {
+        return this.getString(HANDLETYPE);
+    }
+
+    public DWProductModule setHandleType(String handleType)
+    {
+        put(HANDLETYPE,handleType);
+        return this;
+    }
+
+    public String getHandleFinish() {
+        return this.getString(HANDLEFINISH);
+    }
+
+    public DWProductModule setHandleFinish(String handleFinish)
+    {
+        put(HANDLEFINISH,handleFinish);
+        return this;
+    }
+
+    public String getHandleTypeSelection() {
+        return this.getString(HANDLETYPESELECTION);
+    }
+
+    public DWProductModule setHandleTypeSelection(String handleTypeSelection)
+    {
+        put(HANDLETYPESELECTION,handleTypeSelection);
         return this;
     }
 

@@ -52,6 +52,7 @@ public class DWProposalProduct extends JsonObject {
      private static final String HINGE="hinge";
      private static final String GLASS="glass";
      private static final String HANDLESELECTION="handleSelection";
+     private static final String COLOR="color";
      private static final String NOOFLENGTHS="noOfLengths";
      private static final String HANDLETYPE="handleType";
      private static final String HANDLEFINISH="handleFinish";
@@ -403,6 +404,16 @@ public class DWProposalProduct extends JsonObject {
     public DWProposalProduct setHandleSelection(String handleSelection)
     {
         put(HANDLESELECTION,handleSelection);
+        return this;
+    }
+
+    public String getColorCode() {
+        return this.getString(COLOR);
+    }
+
+    public DWProposalProduct setColorCode(String colorCode)
+    {
+        put(COLOR,colorCode);
         return this;
     }
 
@@ -1079,6 +1090,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setHinge(productLineItem.getHingeType());
         dwProposalProduct.setGlass(productLineItem.getGlass());
         dwProposalProduct.setHandleSelection(productLineItem.getHandletypeSelection());
+        dwProposalProduct.setColorCode(productLineItem.getColorgroupCode());
         dwProposalProduct.setNoOfLengths(productLineItem.getNoOfLengths());
         dwProposalProduct.setHandleType(productLineItem.getHandleType());
         dwProposalProduct.setHandleFinish(productLineItem.getHandleFinish());
