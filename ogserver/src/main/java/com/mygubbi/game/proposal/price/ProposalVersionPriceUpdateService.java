@@ -73,22 +73,25 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     }
                     else
                     {
+                        double versionAmount = 0;
                             ProposalHeader proposalHeader = new ProposalHeader(selectData.rows.get(0));
-                            calculatePriceForModules(message, proposalVersion,proposalHeader);
-                            calculatePriceForAddons(message, proposalVersion,proposalHeader);
+                            calculatePriceForModules(message, proposalVersion,proposalHeader, versionAmount);
                     }
                  });
     }
 
 
-    private void calculatePriceForModules(Message<Integer> message, ProposalVersion proposalVersion, ProposalHeader proposalHeader)
+    private void calculatePriceForModules(Message<Integer> message, ProposalVersion proposalVersion, ProposalHeader proposalHeader, double versionAmount)
     {
+
         QueryData value = new QueryData("proposal.version.products.select", proposalVersion);
         Date priceDate = new Date(System.currentTimeMillis());
         Integer id = LocalCache.getInstance().store(value);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> dataResult) ->
                 {
+                    proposalVersion.setAmount(0);
+                    proposalVersion.setFinalAmount(0);
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
                     if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
                     {
@@ -97,8 +100,9 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     else
                     {
                         AuditMaster auditMaster = new AuditMaster();
-                        double totalProposalVersionProductCost = 0;
+
                         double oldProductCost = 0;
+                        double totalProposalVersionProductCost = 0;
 
                         if (proposalHeader.getPriceDate() != null) {
                             proposalHeader.setPriceDate(priceDate);
@@ -175,7 +179,10 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
                         LOG.info("Updated...");
                     }
+                    calculatePriceForAddons(message, proposalVersion,proposalHeader);
                 });
+
+
     }
 
     private void calculatePriceForAddons(Message<Integer> message, ProposalVersion proposalVersion, ProposalHeader proposalHeader) {
@@ -210,7 +217,6 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         for (JsonObject record : selectData.rows)
                         {
                             ProductAddon addonLineItem = new ProductAddon(record);
-                            totalVersionAddonCost += addonLineItem.getAmount();
                         }
                         auditMaster.setOldAmountAddon(totalVersionAddonCost);
 
@@ -227,7 +233,14 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             addonLineItem.setRate(addonRate.getPrice());
                             addonLineItem.setAmount(addonRate.getPrice() * addonLineItem.getQuantity());
                             addonLineItem.setFromVersion(proposalVersion.getVersion());
-                            updateAddonPrice(addonLineItem);
+                            if (addonLineItem.getRate() == 0)
+                            {
+                                deleteAddonFromNewQuotation(addonLineItem);
+                            }
+                            else {
+                                totalVersionAddonCost += addonLineItem.getAmount();
+                                updateAddonPrice(addonLineItem);
+                            }
                         }
                         double totalVersionAmount = proposalVersion.getAmount() + newTotalVersionAddonCost;
                         proposalVersion.setAmount(totalVersionAmount);
@@ -235,8 +248,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         finalAmount = finalAmount - finalAmount%10;
                         proposalVersion.setFinalAmount(finalAmount);
 
-//                        LOG.debug("Update version price before :" + proposalVersion.toString());
-
+//                      LOG.debug("Update version price before :" + proposalVersion.toString());
 
                         auditMaster.setProposalId(proposalHeader.getId());
                         auditMaster.setVersion(proposalVersion.getVersion());
@@ -244,8 +256,6 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                         auditMaster.setNewAmountAddon(newTotalVersionAddonCost);
 
                         updateVersionPrice(message,proposalVersion,auditMaster,false);
-
-
 
                     }
 
@@ -285,6 +295,24 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                     else
                     {
                         LOG.info("Updated Proposal Addon " + addonLineItem.getProposalId());
+                    }
+                });
+    }
+
+    private void deleteAddonFromNewQuotation(ProductAddon addonLineItem)
+    {
+        String query = "proposal.addon.remove";
+        Integer id = LocalCache.getInstance().store(new QueryData(query, addonLineItem));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag)
+                    {
+                        LOG.error("Error in deleting addon line item in the proposal. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        LOG.info("Deleted Proposal Addon " + addonLineItem.getProposalId());
                     }
                 });
     }
