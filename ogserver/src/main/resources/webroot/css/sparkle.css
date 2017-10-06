@@ -279,7 +279,7 @@ strong{
 
 .why-us-fluid h1{
     font-size: 42px;
-    letter-spacing: 25px;
+    letter-spacing: 15px;
     color: #fff79d;
 }
 
@@ -292,15 +292,17 @@ strong{
 
 .assurance-fluid h1{
     font-size: 42px;
-    letter-spacing: 25px;
+    letter-spacing: 15px;
     color: #fff79d;
 }
 
 .assurance-fluid h4{
-    font-size: 20px;
+    font-size: 16px;
     color: #fff79d;
     text-transform: inherit;
     word-spacing: 5px;
+    font-weight: 400;
+    font-family: 'Raleway', sans-serif;
 }
 
 .assurance-fluid .de_count {
@@ -308,7 +310,7 @@ strong{
 }
 
 .assurance-fluid  .de_count img{
-    width: 250px;
+    width: 155px;
 }
 
 
@@ -558,7 +560,7 @@ strong{
 @media (max-width: 1024px) {
     .assurance-fluid h1,
     .why-us-fluid h1{
-        letter-spacing: 20px;
+        letter-spacing: 15px;
     }
 }
 @media (max-width: 768px) {
@@ -791,6 +793,13 @@ strong{
         text-transform: capitalize;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
+
+    .assurance-fluid h1,
+    .why-us-fluid h1 {
+        letter-spacing: 2px;
+        font-size: 16px;
+    }
+
     .sparkle-form {
         margin: 15px 0px;
         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
