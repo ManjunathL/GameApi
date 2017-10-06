@@ -130,10 +130,10 @@ public class VersionPricingService extends AbstractVerticle
                     LOG.error("Error in pricing", e);
                 }
             }
-            ProductPriceHolder productPriceHolder = null;
+            ProductPriceHolder productPriceHolder;
 
             productPriceHolder = new ProductPriceHolder(productLineItem,modulePriceHolders,proposalHeader,proposalVersion);
-            if (productPriceHolder != null) productPriceHolders.add(productPriceHolder);
+            productPriceHolders.add(productPriceHolder);
         }
 
         for (ProductAddon productAddon : productAddons)

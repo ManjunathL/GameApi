@@ -1,9 +1,11 @@
 package com.mygubbi.game.proposal.model.dw;
 
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.model.ShutterFinish;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import io.vertx.core.json.JsonObject;
 
@@ -49,6 +51,8 @@ public class DWProductModule extends JsonObject {
     private static final String MODULECATEGORY="moduleCategory";
     private static final String HANDLESIZE="handleSize";
     private static final String HANDLEQTY="handleQty";
+    private static final String KNOBTYPE="knobType";
+    private static final String KNOBFINISH="knobFinish";
     private static final String CARCASS="carcass";
     private static final String FINISH="finish";
     private static final String FINISHMATERIAL="finishMaterial";
@@ -168,17 +172,22 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setModuleCategory(productModule.getModuleCategory());
         dwProductModule.setHandleSize(Double.parseDouble(productModule.getHandleThickness()));
         dwProductModule.setHandleQty(productModule.getHandleQuantity());
+        dwProductModule.setKnobType(productModule.getKnobType());
+        dwProductModule.setKnobFinish(productModule.getKnobFinish());
         dwProductModule.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = productModule.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = productModule.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwProductModule.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+        dwProductModule.setFinish(shutterFinish.getTitle());
         dwProductModule.setFinishMaterial(productModule.getFinishType());
         dwProductModule.setColor(productModule.getColorCode());
         dwProductModule.setExposedLeft(productModule.getLeftExposed() ? "Yes" : "No");
@@ -499,6 +508,26 @@ public class DWProductModule extends JsonObject {
     public DWProductModule setHandleQty(double handleQty)
     {
         put(HANDLEQTY,handleQty);
+        return this;
+    }
+
+    public String getKnobType() {
+        return this.getString(KNOBTYPE);
+    }
+
+    public DWProductModule setKnobType(String knobType)
+    {
+        put(KNOBTYPE,knobType);
+        return this;
+    }
+
+    public String getKnobFinish() {
+        return this.getString(KNOBFINISH);
+    }
+
+    public DWProductModule setKnobFinish(String knobFinish)
+    {
+        put(KNOBFINISH,knobFinish);
         return this;
     }
 

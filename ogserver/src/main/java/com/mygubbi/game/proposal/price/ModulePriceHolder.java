@@ -969,6 +969,8 @@ public class ModulePriceHolder
                 this.hardwareProfit = this.hardwareCostWoTax - this.hardwareSourceCost;
                 this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
                 this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
+            this.accessoryProfit = this.accessoryCostWoTax - this.accessorySourceCost;
+
 
 
             if (this.carcassProfit == 0 || this.carcassCostWoTax == 0)
@@ -1013,6 +1015,15 @@ public class ModulePriceHolder
             else
             {
                 this.hingeMargin = (this.hingeProfit / this.hingeCostWoTax)*100;
+            }
+
+            if (this.accessoryProfit == 0 || this.accessoryCostWoTax == 0)
+            {
+                this.accessoryMargin = 0;
+            }
+            else
+            {
+                this.accessoryMargin = (this.accessoryProfit / this.accessoryCostWoTax)*100;
             }
 
             this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.handleandKnobCost + this.hingeCost + this.hardwareCost;

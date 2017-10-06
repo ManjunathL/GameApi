@@ -1,8 +1,10 @@
 package com.mygubbi.game.proposal.model.dw;
 
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.model.ShutterFinish;
 import com.mygubbi.game.proposal.price.ProductPriceHolder;
 import io.vertx.core.json.JsonObject;
 import org.elasticsearch.common.recycler.Recycler;
@@ -1062,14 +1064,16 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setWallCarcass(productLineItem.getWallCarcassCode());
 
         String finishCode = productLineItem.getFinishCode();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+       /* if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwProposalProduct.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+        dwProposalProduct.setFinish(shutterFinish.getTitle());
         dwProposalProduct.setFinishMaterial(productLineItem.getFinishType());
         dwProposalProduct.setShutterDesign(productLineItem.getShutterDesignCode());
         dwProposalProduct.setHinge(productLineItem.getHingeType());
