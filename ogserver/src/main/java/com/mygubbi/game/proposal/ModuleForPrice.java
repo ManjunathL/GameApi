@@ -36,6 +36,15 @@ public class ModuleForPrice extends JsonObject
     public ModuleForPrice() {
     }
 
+    public ModuleForPrice(ProductModule productModule,ProductLineItem productLineItem, Date priceDate, String city) {
+        this.setProduct(productLineItem);
+        this.setModule(productModule);
+        this.setCity(city);
+        this.setPriceDate(priceDate);
+    }
+
+
+
     public Date getPriceDate()
     {
         return Date.valueOf(this.getString(PRICE_DATE));

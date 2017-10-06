@@ -214,6 +214,17 @@ public class DwReportingService extends AbstractVerticle {
               if (!(productModule.getHingePacks().size() == 0) || productModule.getHingePacks() == null) this.collectModuleHinge(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
 
             }
+
+            PriceMaster lConnectorRate=RateCardService.getInstance().getHardwareRate("H074",proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+            AccHwComponent lConnector = ModuleDataService.getInstance().getHardware(lConnectorRate.getRateId());
+            if(productLineItem.getHandletypeSelection() != null) {
+                if (productLineItem.getHandletypeSelection().equals("Gola Profile") && productLineItem.getNoOfLengths() != 0) {
+                    setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModules.get(0),lConnector,productLineItem.getNoOfLengths(),reportingObjects);
+
+                }
+            }
+
+
             ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem, modulePriceHolders, proposalHeader, proposalVersion);
             productPriceHolder.prepare();
             setProductAttributes(productPriceHolder, proposalHeader, proposalVersion, productLineItem,reportingObjects);
@@ -359,16 +370,16 @@ public class DwReportingService extends AbstractVerticle {
         if (Objects.equals(productLineItem.getHandletypeSelection(), GOLA_PROFILE)) {
 
             AccHwComponent hardware = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware,1,reportingObjects);
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware,(productModule.getWidth()/1000),reportingObjects);
 
             AccHwComponent hardware1 = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware1,1,reportingObjects);
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware1,(productModule.getWidth()/1000),reportingObjects);
 
             AccHwComponent hardware2 = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware2,1,reportingObjects);
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware2,(productModule.getWidth()/1000),reportingObjects);
 
             AccHwComponent hardware3 = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware3,1,reportingObjects);
+            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware3,2,reportingObjects);
 
             AccHwComponent hardware4 = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
             setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware4,1,reportingObjects);

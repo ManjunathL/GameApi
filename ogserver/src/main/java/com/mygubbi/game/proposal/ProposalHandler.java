@@ -16,8 +16,7 @@ import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWMaster;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
-import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
-import com.mygubbi.game.proposal.price.RateCardService;
+import com.mygubbi.game.proposal.price.*;
 import com.mygubbi.game.proposal.quote.MergePdfsRequest;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
@@ -92,8 +91,23 @@ public class ProposalHandler extends AbstractRouteHandler
         this.get("/hingedetails").handler(this::getHingeDetails);
         this.post("/updatepricefordraftproposals").handler(this::updatePriceForDraftProposals);
         this.get("/ratefactordetailsfromhandler").handler(this::getRateFactor);
+        this.post("/version/price").handler(this::getPriceV2);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
+    }
+
+    private void getPriceV2(RoutingContext routingContext)
+    {
+
+        JsonObject modulePriceHolderJson = routingContext.getBodyAsJson();
+//        LOG.debug("Module Json : " + modulePriceHolderJson.encodePrettily());
+        ModuleForPrice moduleForPrice = new ModuleForPrice(modulePriceHolderJson);
+        Integer id = LocalCache.getInstance().store(moduleForPrice);
+        VertxInstance.get().eventBus().send(VersionPricingService.CALCULATE_VERSION_PRICE, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    VersionPriceHolder versionPriceHolder = (VersionPriceHolder) LocalCache.getInstance().remove(selectResult.result().body());
+                    sendJsonResponse(routingContext, String.valueOf(versionPriceHolder.getPriceJson()));
+                });
     }
 
     private void updatePriceForDraftProposals(RoutingContext context) {

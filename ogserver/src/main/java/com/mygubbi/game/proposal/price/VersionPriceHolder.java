@@ -5,9 +5,13 @@ import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.Proposal;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -21,6 +25,8 @@ public class VersionPriceHolder {
     private List<AddonPriceHolder> addonPriceHolders ;
     private ProposalHeader proposalHeader;
     private ProposalVersion proposalVersion;
+
+    private JsonArray errors = null;
 
     private double vrPrice = 0.0;
     private double vrPriceAfterDiscount = 0.0;
@@ -224,6 +230,15 @@ public class VersionPriceHolder {
             addToLConnectorSourceCost(productPriceHolder.getLConnectorSourceCost());
 
         }
+    }
+
+    public void addError(String error)
+    {
+        if (errors == null)
+        {
+            this.errors = new JsonArray();
+        }
+        this.errors.add(error);
     }
 
     private void addToHikeModulePrice(double hikeModulePrice) {
@@ -934,5 +949,41 @@ public class VersionPriceHolder {
 
     public double getHikeModuleCost() {
         return this.hikeModuleCost;
+    }
+
+    public JsonObject getPriceJson()
+    {
+
+        return new JsonObject().put("vrPrice", this.round(this.vrPrice, 2))
+                .put("vrPriceAfterDiscount", this.vrPriceAfterDiscount)
+                .put("vrPriceWoTax", this.round(this.vrPriceAfterTax, 2))
+                .put("vrCost", this.round(this.vrCost, 2))
+                .put("vrProfit", this.round(this.vrProfit, 2))
+                .put("vrMargin", this.round(this.vrMargin, 2))
+                .put("hikePrice", this.round(this.hikeModulePrice, 2))
+                .put("prPrice", this.round(this.prPrice, 2))
+                .put("prPriceAfterDiscount", this.round(this.prPriceAfterDiscount, 2))
+                .put("prPriceWoTax", this.round(this.prPriceAfterTax, 2))
+                .put("prCost", this.round(this.prCost, 2))
+                .put("prProfit", this.round(this.prProfit, 2))
+                .put("prMargin", this.round(this.prMargin, 2))
+                .put("addonPrice", this.round(this.bpPrice + this.svPrice, 2))
+                .put("addonPriceAfterDiscount", this.round(this.bpPriceAfterDiscount + this.svPriceAfterDiscount, 2))
+                .put("addonPriceWoTax", this.round(this.bpPriceAfterTax + this.svPriceAfterTax, 2))
+                .put("addonCost", this.round(this.bpCost + this.svCost, 2))
+                .put("addonProfit", this.round((this.bpProfit + this.svProfit)/2, 2))
+                .put("addonMargin", this.round((this.bpMargin + this.svMargin)/2, 2));
+
+    }
+
+    private double round(double value, int places)
+    {
+        if (places < 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
