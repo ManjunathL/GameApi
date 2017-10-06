@@ -6,6 +6,8 @@ import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.AccHwComponent;
 import com.mygubbi.game.proposal.model.AccessoryPackComponent;
+import com.mygubbi.game.proposal.model.IModuleComponent;
+import com.mygubbi.game.proposal.model.ModuleComponent;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelCellProcessor;
@@ -71,11 +73,11 @@ public class AccessorySheetCreator implements ExcelCellProcessor
 
     }
 
-    private int fillComponents(List<ProductModule> components, int currentRow, String defaultMessage)
+    private int fillComponents(List<ProductModule> productModules, int currentRow, String defaultMessage)
     {
         CellStyle style = this.hardwareSheet.getRow(currentRow + 1).getRowStyle();
 
-        if (components == null || components.isEmpty())
+        if (productModules == null || productModules.isEmpty())
         {
             currentRow++;
             this.createDataRowInDataSheet(currentRow, new String[]{defaultMessage}, style);
@@ -83,7 +85,7 @@ public class AccessorySheetCreator implements ExcelCellProcessor
         }
 
         int seq = 1;
-        for (ProductModule component : components)
+        for (ProductModule component : productModules)
         {
             for(ModuleAccessoryPack moduleAccessoryPack:component.getAccessoryPacks())
             {
@@ -94,15 +96,24 @@ public class AccessorySheetCreator implements ExcelCellProcessor
                     if (accessoryPackComponent.isAccessory()) {
                         AccHwComponent accHwComponent = ModuleDataService.getInstance().getAccessory(accessoryPackComponent.getComponentCode());
                         if (accHwComponent == null) continue;
-                        if(accHwComponent.getCategory().equals("Primary")) {
+                        if(accHwComponent.getCategory().equals("Primary") || accHwComponent.getCategory().equals("Add on") || accHwComponent.getCategory().equals("Standalone add on") ) {
                             currentRow++;
                             this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(seq), component.getMGCode(), accHwComponent.getTitle(), accHwComponent.getERPCode(), accHwComponent.getMake()}, style);
                             seq++;
                         }
                     }
                 }
+                for(String moduleAccessoryPackaddon:moduleAccessoryPack.getAddons())
+                {
+                    AccHwComponent accHwComponent = ModuleDataService.getInstance().getAccessory(moduleAccessoryPackaddon);
+                    if (accHwComponent == null) continue;
+                    if(accHwComponent.getCategory().equals("Primary") || accHwComponent.getCategory().equals("Add on") || accHwComponent.getCategory().equals("Standalone add on") ) {
+                        currentRow++;
+                        this.createDataRowInDataSheet(currentRow, new String[]{String.valueOf(seq), component.getMGCode(), accHwComponent.getTitle(), accHwComponent.getERPCode(), accHwComponent.getMake()}, style);
+                        seq++;
+                    }
+                }
             }
-
 
         }
         return currentRow;
