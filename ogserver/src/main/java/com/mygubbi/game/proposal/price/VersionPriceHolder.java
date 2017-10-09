@@ -960,6 +960,7 @@ public class VersionPriceHolder {
                 .put("vrCost", this.round(this.vrCost, 2))
                 .put("vrProfit", this.round(this.vrProfit, 2))
                 .put("vrMargin", this.round(this.vrMargin * 100, 2))
+                .put("costWoAccessories", this.round(this.prPrice - accPrice, 2))
                 .put("hikePrice", this.round(this.hikeModulePrice, 2))
                 .put("prPrice", this.round(this.prPrice, 2))
                 .put("prPriceAfterDiscount", this.round(this.prPriceAfterDiscount, 2))
