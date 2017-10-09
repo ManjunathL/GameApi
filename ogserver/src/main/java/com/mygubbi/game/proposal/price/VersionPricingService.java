@@ -134,7 +134,6 @@ public class VersionPricingService extends AbstractVerticle
 
             productPriceHolder = new ProductPriceHolder(productLineItem,modulePriceHolders,proposalHeader,proposalVersion);
             productPriceHolder.prepare();
-            LOG.debug("Product Price holder values : " + productPriceHolder.getProductPrice() + " : " + productPriceHolder.getProductPriceAfterDiscount() + " : " + productPriceHolder.getProductPriceWoTax() + " : " + productPriceHolder.getProductSourceCost() + " : " + productPriceHolder.getProductProfit() + " : " + productPriceHolder.getProductMargin());
             productPriceHolders.add(productPriceHolder);
         }
 

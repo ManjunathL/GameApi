@@ -958,22 +958,22 @@ public class VersionPriceHolder {
                 .put("vrPriceAfterDiscount", this.round(this.vrPriceAfterDiscount,2))
                 .put("vrPriceWoTax", this.round(this.vrPriceAfterTax, 2))
                 .put("vrCost", this.round(this.vrCost, 2))
-                .put("vrProfit", this.round(this.vrProfit, 2))
-                .put("vrMargin", this.round(this.vrMargin * 100, 2))
+                .put("vrProfit", this.round(this.getProfit(), 2))
+                .put("vrMargin", this.round(this.getMargin() , 2))
                 .put("costWoAccessories", this.round(this.prPrice - accPrice, 2))
                 .put("hikePrice", this.round(this.hikeModulePrice, 2))
                 .put("prPrice", this.round(this.prPrice, 2))
                 .put("prPriceAfterDiscount", this.round(this.prPriceAfterDiscount, 2))
                 .put("prPriceWoTax", this.round(this.prPriceAfterTax, 2))
                 .put("prCost", this.round(this.prCost, 2))
-                .put("prProfit", this.round(this.prProfit, 2))
-                .put("prMargin", this.round(this.prMargin, 2))
+                .put("prProfit", this.round(this.getProductProfit(), 2))
+                .put("prMargin", this.round(this.getProductMargin() , 2))
                 .put("addonPrice", this.round(this.bpPrice + this.svPrice, 2))
                 .put("addonPriceAfterDiscount", this.round(this.bpPriceAfterDiscount + this.svPriceAfterDiscount, 2))
                 .put("addonPriceWoTax", this.round(this.bpPriceAfterTax + this.svPriceAfterTax, 2))
                 .put("addonCost", this.round(this.bpCost + this.svCost, 2))
-                .put("addonProfit", this.round((this.bpProfit + this.svProfit)/2, 2))
-                .put("addonMargin", this.round((this.bpMargin + this.svMargin)/2, 2));
+                .put("addonProfit", this.round(this.getBPProfit() + this.getSVProfit(), 2))
+                .put("addonMargin", this.round(((this.getBPProfit() + this.getSVProfit())/(this.bpPriceAfterTax + this.svPriceAfterTax)) * 100, 2));
 
     }
 
