@@ -105,6 +105,7 @@ public class DatabaseService extends AbstractVerticle
 
 	private void runSelectQuery(Message message, QueryData qData, SQLConnection connection)
 	{
+		LOG.info("Query :: "+qData.queryDef.query +"Params : "+qData.getParams());
 		connection.queryWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
 		  if (res2.succeeded()) 
 		  {

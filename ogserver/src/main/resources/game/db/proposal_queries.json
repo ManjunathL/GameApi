@@ -79,6 +79,13 @@
       "query": "select crmId from proposal where status != 'deleted'",
       "params": []
     },
+    {
+      "id": "proposal.list.dlist",
+      "type": "select",
+      "table": "proposal",
+      "query": "select * from proposal where status != 'deleted'",
+      "params": []
+    },
 
 
     {

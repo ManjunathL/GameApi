@@ -24,6 +24,13 @@
       "params":["designPartnerEmail"],
       "resultfields":[],
       "default": "{}"
+    },{
+      "uri":"/gapi/proposal/dlist",
+      "source": "db",
+      "query":"proposal.list.dlist",
+      "params":[],
+      "resultfields":[],
+      "default": "{}"
     },
     {
       "uri": "/gapi/proposal/listcrmid",
