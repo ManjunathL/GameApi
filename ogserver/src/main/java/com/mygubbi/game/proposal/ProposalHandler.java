@@ -99,13 +99,14 @@ public class ProposalHandler extends AbstractRouteHandler
     private void getPriceV2(RoutingContext routingContext)
     {
 
-        JsonObject modulePriceHolderJson = routingContext.getBodyAsJson();
-//        LOG.debug("Module Json : " + modulePriceHolderJson.encodePrettily());
-        ModuleForPrice moduleForPrice = new ModuleForPrice(modulePriceHolderJson);
-        Integer id = LocalCache.getInstance().store(moduleForPrice);
+        JsonObject versionJson = routingContext.getBodyAsJson();
+        LOG.debug("Module Json : " + versionJson.encodePrettily());
+        ProposalVersion proposalVersion = new ProposalVersion(versionJson);
+        Integer id = LocalCache.getInstance().store(proposalVersion);
         VertxInstance.get().eventBus().send(VersionPricingService.CALCULATE_VERSION_PRICE, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     VersionPriceHolder versionPriceHolder = (VersionPriceHolder) LocalCache.getInstance().remove(selectResult.result().body());
+                    LOG.debug("Version Price holder json :" + versionPriceHolder.getPriceJson());
                     sendJsonResponse(routingContext, String.valueOf(versionPriceHolder.getPriceJson()));
                 });
     }

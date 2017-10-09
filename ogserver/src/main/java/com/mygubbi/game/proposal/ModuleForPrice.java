@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal;
 
+import com.mygubbi.common.DateUtil;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
@@ -37,6 +38,7 @@ public class ModuleForPrice extends JsonObject
     }
 
     public ModuleForPrice(ProductModule productModule,ProductLineItem productLineItem, Date priceDate, String city) {
+        LOG.debug("Inside module for price : " + priceDate + " : " + city);
         this.setProduct(productLineItem);
         this.setModule(productModule);
         this.setCity(city);
@@ -47,7 +49,7 @@ public class ModuleForPrice extends JsonObject
 
     public Date getPriceDate()
     {
-        return Date.valueOf(this.getString(PRICE_DATE));
+        return DateUtil.convertDate(this.getString(PRICE_DATE));
     }
 
     public String getCity()

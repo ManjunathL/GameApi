@@ -955,11 +955,11 @@ public class VersionPriceHolder {
     {
 
         return new JsonObject().put("vrPrice", this.round(this.vrPrice, 2))
-                .put("vrPriceAfterDiscount", this.vrPriceAfterDiscount)
+                .put("vrPriceAfterDiscount", this.round(this.vrPriceAfterDiscount,2))
                 .put("vrPriceWoTax", this.round(this.vrPriceAfterTax, 2))
                 .put("vrCost", this.round(this.vrCost, 2))
                 .put("vrProfit", this.round(this.vrProfit, 2))
-                .put("vrMargin", this.round(this.vrMargin, 2))
+                .put("vrMargin", this.round(this.vrMargin * 100, 2))
                 .put("hikePrice", this.round(this.hikeModulePrice, 2))
                 .put("prPrice", this.round(this.prPrice, 2))
                 .put("prPriceAfterDiscount", this.round(this.prPriceAfterDiscount, 2))

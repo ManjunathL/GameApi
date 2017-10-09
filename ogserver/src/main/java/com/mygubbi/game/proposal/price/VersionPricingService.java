@@ -130,10 +130,12 @@ public class VersionPricingService extends AbstractVerticle
                     LOG.error("Error in pricing", e);
                 }
             }
-            ProductPriceHolder productPriceHolder = null;
+            ProductPriceHolder productPriceHolder;
 
             productPriceHolder = new ProductPriceHolder(productLineItem,modulePriceHolders,proposalHeader,proposalVersion);
-            if (productPriceHolder != null) productPriceHolders.add(productPriceHolder);
+            productPriceHolder.prepare();
+            LOG.debug("Product Price holder values : " + productPriceHolder.getProductPrice() + " : " + productPriceHolder.getProductPriceAfterDiscount() + " : " + productPriceHolder.getProductPriceWoTax() + " : " + productPriceHolder.getProductSourceCost() + " : " + productPriceHolder.getProductProfit() + " : " + productPriceHolder.getProductMargin());
+            productPriceHolders.add(productPriceHolder);
         }
 
         for (ProductAddon productAddon : productAddons)
