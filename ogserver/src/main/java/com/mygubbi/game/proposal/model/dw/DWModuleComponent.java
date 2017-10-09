@@ -650,15 +650,17 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode(panelComponent.getAccPackCode());
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(panelComponent.getLength());
         dwModuleComponent.setWidth(panelComponent.getBreadth());
@@ -791,7 +793,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -801,15 +803,18 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(0);
         dwModuleComponent.setWidth(0);
@@ -918,7 +923,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -928,15 +933,18 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+      /*  if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(0);
         dwModuleComponent.setWidth(0);
@@ -1037,7 +1045,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -1047,15 +1055,19 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(0);
         dwModuleComponent.setWidth(0);
@@ -1173,7 +1185,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -1184,15 +1196,18 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(productModule.getHeight());
         dwModuleComponent.setWidth(productModule.getWidth());
