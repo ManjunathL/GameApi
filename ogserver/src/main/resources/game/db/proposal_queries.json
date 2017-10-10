@@ -71,6 +71,13 @@
       "query": "select * from proposal where id = ?",
       "params": ["id"]
     },
+    {
+      "id": "proposal.detail.bycrmid",
+      "type": "select",
+      "table": "proposal",
+      "query": "SELECT * FROM proposal where crmId = ? ORDER BY createdOn DESC LIMIT 1",
+      "params": ["crmId"]
+    },
 
     {
       "id": "proposal.create",
@@ -109,6 +116,13 @@
       "type": "select",
       "table": "version_master",
       "query": "select * from version_master where proposalId = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.version.recentpublishedversion",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where proposalId = ? and status in ('Confirmed','DSO','PSO','Published') order by businessDate DESC LIMIT 1",
       "params": ["id"]
     },
      {
