@@ -5,7 +5,6 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.model.FFSow;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
@@ -53,7 +52,7 @@ public class FFApiHandler extends AbstractRouteHandler {
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty()) {
-                       sendError(routingContext, "Proposal not found for id:" );
+                       sendError(routingContext, "Proposal not found" );
                         LOG.error("Proposal not found for id:" + jsonObject.getString("quoteNo"));
                     } else {
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
@@ -66,21 +65,20 @@ public class FFApiHandler extends AbstractRouteHandler {
     private void getLatestVersion(ProposalHeader proposalHeader,RoutingContext routingContext)
     {
 
+        JsonObject jsonObject = routingContext.getBodyAsJson();
+        LOG.debug("Json object :" + routingContext.request().getParam("quoteNo"));
+//        LOG.debug("Json object :" + jsonObject.encodePrettily());
         Integer id = LocalCache.getInstance().store(new QueryData("proposal.version.recentpublishedversion",proposalHeader));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-
-                    if (resultData.errorFlag)
-                    {
-                        sendError(routingContext, "error in retrieving versions:" );
-                        LOG.error("error in retrieving product and addons for id:" + proposalHeader.getId());
-                    }
-                    else
-                    {
+                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty()) {
+                        sendError(routingContext, "Proposal doesnt have any published or confirmed versions:" );
+//                        LOG.error("Proposal not found for id:" + jsonObject.getString("quoteNo"));
+                    } else {
                         ProposalVersion proposalVersion = new ProposalVersion(resultData.rows.get(0));
-
                         getProductAndAddons(proposalHeader,routingContext,proposalVersion);
+
                     }
                 });
     }
@@ -125,13 +123,12 @@ public class FFApiHandler extends AbstractRouteHandler {
     private void collectObjects(RoutingContext routingContext, ProposalHeader proposalHeader, List<ProductLineItem> productLineItems,List<ProductAddon> productAddons)
     {
 
-        List<FFSow> listOfServices = new ArrayList<>();
+
         List<JsonObject> listOfServicesTest = new ArrayList<>();
 
         for (ProductLineItem productLineItem : productLineItems)
         {
             LOG.debug("Product Line item : " + productLineItem);
-            listOfServices.add(new FFSow(productLineItem.getRoomCode(),PRODUCT,productLineItem.getTitle()));
             listOfServicesTest.add(new JsonObject().put("room",productLineItem.getRoomCode()).put("type",PRODUCT).put("title",productLineItem.getTitle()));
         }
 
@@ -143,7 +140,7 @@ public class FFApiHandler extends AbstractRouteHandler {
 
         LOG.debug("List of servieces size : " + listOfServicesTest.size());
 
-        if (listOfServices.size() != 0)
+        if (listOfServicesTest.size() != 0)
         {
             sendJsonResponse(routingContext,listOfServicesTest.toString());
         }
