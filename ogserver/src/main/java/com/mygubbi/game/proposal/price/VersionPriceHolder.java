@@ -953,6 +953,15 @@ public class VersionPriceHolder {
 
     public JsonObject getPriceJson()
     {
+        LOG.info("vrProfit " +vrProfit);
+
+        double addonMargin = 0;
+
+        double addonProfit = this.getBPProfit() + this.getSVProfit();
+        if (addonProfit != 0) addonMargin = ((addonProfit) / (this.bpPriceAfterTax + this.svPriceAfterTax)) * 100;
+
+        LOG.debug("addonProfit :" + addonProfit);
+        LOG.debug("addonMargin :" + addonMargin);
 
         return new JsonObject().put("vrPrice", this.round(this.vrPrice, 2))
                 .put("vrPriceAfterDiscount", this.round(this.vrPriceAfterDiscount,2))
@@ -972,8 +981,8 @@ public class VersionPriceHolder {
                 .put("addonPriceAfterDiscount", this.round(this.bpPriceAfterDiscount + this.svPriceAfterDiscount, 2))
                 .put("addonPriceWoTax", this.round(this.bpPriceAfterTax + this.svPriceAfterTax, 2))
                 .put("addonCost", this.round(this.bpCost + this.svCost, 2))
-                .put("addonProfit", this.round(this.getBPProfit() + this.getSVProfit(), 2))
-                .put("addonMargin", this.round(((this.getBPProfit() + this.getSVProfit())/(this.bpPriceAfterTax + this.svPriceAfterTax)) * 100, 2));
+                .put("addonProfit", this.round(addonProfit, 2))
+                .put("addonMargin", this.round(addonMargin, 2));
 
     }
 
