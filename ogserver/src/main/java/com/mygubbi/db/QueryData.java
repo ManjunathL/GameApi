@@ -28,6 +28,7 @@ public class QueryData
 	public Throwable error;
 	public String errorMessage;
 	private long startTime;
+	public String poolName = "";
 	
 	public QueryData()
 	{
@@ -43,12 +44,26 @@ public class QueryData
 		this.queryId = queryId;
 		this.paramsObject = paramsObject;
 	}
+	public QueryData(String queryId, JsonObject paramsObject,String poolName)
+	{
+		this.queryId = queryId;
+		this.paramsObject = paramsObject;
+		this.poolName = poolName;
+
+	}
 
 	public QueryData(String queryId, List<JsonObject> paramsList)
 	{
 		this.queryId = queryId;
 		this.paramsList = paramsList;
 	}
+	public QueryData(String queryId, List<JsonObject> paramsList,String poolName)
+	{
+		this.queryId = queryId;
+		this.paramsList = paramsList;
+		this.poolName = poolName;
+	}
+
 
 	public boolean isBatchMode()
 	{
