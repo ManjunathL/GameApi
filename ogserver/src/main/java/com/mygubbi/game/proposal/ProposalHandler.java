@@ -497,6 +497,14 @@ public class ProposalHandler extends AbstractRouteHandler
     }
     private void createSowOutputInPdf(RoutingContext context, JsonObject quoteReponse,Boolean IsBookingFormFlag){
         JsonObject quoteRequestJson = context.getBodyAsJson();
+
+        Boolean workContractFlag = false;
+        if(quoteRequestJson.containsKey("worksContractFlag") && (quoteRequestJson.getValue("worksContractFlag") != null)){
+            workContractFlag = quoteRequestJson.getString("worksContractFlag").equalsIgnoreCase("yes")?true:false;
+        }
+        Boolean IsWorkingContract = new Boolean(workContractFlag);
+
+
         String version = quoteRequestJson.getString("fromVersion");
         LOG.info("Version :: "+version);
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.SOWPDF));
@@ -504,7 +512,7 @@ public class ProposalHandler extends AbstractRouteHandler
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
             if(IsBookingFormFlag) {
                 createBookingFormInPdf(context, quoteReponse, response);
-            }else if(version.equalsIgnoreCase("2.0")){
+            }else if(IsWorkingContract){
                 this.createWorksContractinPdf(context,quoteReponse,response);
                 //createMergedPdf(context,quoteReponse,response,new JsonObject());
             }else{
@@ -539,14 +547,22 @@ public class ProposalHandler extends AbstractRouteHandler
 
     }
     private void createMergedPdf(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject sowResponse,JsonObject bookingformresponse){
-        /*LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());*/
+        LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());
+        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         String city=routingContext.getBodyAsJson().getString("city");
         String version=routingContext.getBodyAsJson().getString("fromVersion");
         LOG.info("version value in merged pdf" +version);
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
         Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
 
-        if(bookingformresponse.containsKey("worksContractPDFfile"))
+        Boolean workContractFlag = false;
+        if(quoteRequestJson.containsKey("worksContractFlag") && (quoteRequestJson.getValue("worksContractFlag") != null)){
+            workContractFlag = quoteRequestJson.getString("worksContractFlag").equalsIgnoreCase("yes")?true:false;
+        }
+        Boolean IsWorkingContract = new Boolean(workContractFlag);
+
+
+        if(workContractFlag && bookingformresponse.containsKey("worksContractPDFfile"))
             inputPdfList.put(bookingformresponse.getString("worksContractPDFfile"),PdfPage.PORTRAIT);
 
         inputPdfList.put(quotePDfResponse.getString("quoteFile"),PdfPage.PORTRAIT);
@@ -574,7 +590,7 @@ public class ProposalHandler extends AbstractRouteHandler
             inputPdfList.put(sowResponse.getString("sowPdfFile"), PdfPage.PORTRAIT);
         }
 
-        if(bookingformresponse.containsKey("bookingFormPDFfile"))
+        if(bookingFormFlag.equalsIgnoreCase("yes") && bookingformresponse.containsKey("bookingFormPDFfile"))
             inputPdfList.put(bookingformresponse.getString("bookingFormPDFfile"),PdfPage.PORTRAIT);
 
         inputPdfList.keySet().forEach(in -> LOG.info(in));
