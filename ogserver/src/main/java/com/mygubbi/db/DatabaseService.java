@@ -261,6 +261,7 @@ public class DatabaseService extends AbstractVerticle
 		connection.queryWithParams(qData.queryDef.query, qData.getParams(), res2 -> {
 			if (res2.succeeded())
 			{
+				LOG.info("Query:" + qData.queryDef.query + ". Params:" + qData.getParams());
 				qData.setResult(res2.result().getRows());
 			}
 			else
