@@ -14,7 +14,9 @@ import io.vertx.ext.sql.SQLConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseService extends AbstractVerticle
 {
@@ -22,8 +24,9 @@ public class DatabaseService extends AbstractVerticle
 	public static final String DB_QUERY = "db.query";
 	public static final String MULTI_DB_QUERY = "multi.db.query";
 	public static final String BATCH_DB_QUERY = "batch.db.query";
-	private JDBCClient client;
-	
+	private Map<String,JDBCClient> clients;
+	public static final String DEFAULT_POOL_NAME = "mygubbi";
+
 	@Override
 	public void start(Future<Void> startFuture) throws Exception
 	{
@@ -40,22 +43,27 @@ public class DatabaseService extends AbstractVerticle
 
 	private void initClient(Future<Void> startFuture) throws Exception
 	{
-		JsonObject config = (JsonObject) ConfigHolder.getInstance().getConfigValue("jdbc");
-		if (config == null) 
-		{
-			throw new RuntimeException("Could not find config with key 'jdbc'");
-		}
-		this.client = JDBCClient.createShared(vertx, config);
-		this.client.getConnection(handler -> {
+		this.clients = new HashMap<>();
+		JsonArray config_array =  (JsonArray) ConfigHolder.getInstance().getConfigValue("jdbc");
+		config_array.forEach(config ->{
+			if ((JsonObject)config == null)
+			{
+				throw new RuntimeException("Could not find config with key 'jdbc'");
+			}
+			String pool_name = ((JsonObject) config).getString("pool_Name");
+			this.clients.put(pool_name,JDBCClient.createNonShared(vertx, (JsonObject)config));
+
+		});
+		this.clients.get(DEFAULT_POOL_NAME).getConnection(handler -> {
 			if (handler.succeeded())
 			{
-				LOG.info("Connection to DB established.");
+				LOG.info("Connection to DB established for "+DEFAULT_POOL_NAME);
 				handler.result().close();
 				setupQueryMessageHandler();
 				setupMultiQueryMessageHandler();
 				setupBatchQueryMessageHandler();
 				startFuture.complete();
-				LOG.info("Database service started.");
+				LOG.info("Database service started "+DEFAULT_POOL_NAME);
 			}
 			else
 			{
@@ -119,9 +127,16 @@ public class DatabaseService extends AbstractVerticle
 	private void handleQuery(Message message, QueryData qData)
 	{
 		qData.startQuery();
+
+		String poolName = qData.poolName;
+		if(poolName.equals("")){
+			poolName = DEFAULT_POOL_NAME;
+		}
+
+//		LOG.info("POOL NAME in handleQuery = "+poolName);
 		
-		this.client.getConnection(res -> {
-		  if (res.succeeded()) 
+		this.clients.get(poolName).getConnection(res -> {
+		  if (res.succeeded())
 		  {
 		    SQLConnection connection = res.result();
 
@@ -223,6 +238,12 @@ public class DatabaseService extends AbstractVerticle
 		}
 
 		QueryData qData = qDataList.get(index);
+		String poolName = qData.poolName;
+		if(poolName.equals("") || poolName.length() == 0){
+			poolName = DEFAULT_POOL_NAME;
+			qData.poolName = poolName;
+		}
+
 		if (qData.errorFlag)
 		{
 			LOG.debug("Skipping query :" + qData.queryId + " : " + qData.errorMessage);
@@ -231,9 +252,8 @@ public class DatabaseService extends AbstractVerticle
 		}
 
 		qData.startQuery();
-//		LOG.debug("running query :" + qData.queryId + " : " + qData.paramsObject);
-
-		this.client.getConnection(res -> {
+//		LOG.debug("running query :" + qData.queryId + " : " + qData.paramsObject+", and poolName = "+qData.poolName);
+		this.clients.get(poolName).getConnection(res -> {
 			if (res.succeeded())
 			{
 				SQLConnection connection = res.result();

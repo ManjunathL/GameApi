@@ -32,6 +32,7 @@ public class DwReportingService extends AbstractVerticle {
 
     private final static Logger LOG = LogManager.getLogger(DwReportingService.class);
     public static final String RECORD_VERSION_PRICE = "update.proposal.dw.version.price";
+    public static final String ODS_POOL_NAME = "ods";
 
 
     @Override
@@ -327,20 +328,20 @@ public class DwReportingService extends AbstractVerticle {
 
         DwProposalVersion dwProposalVersion = new DwProposalVersion();
         dwProposalVersion = dwProposalVersion.setDwVersionObjects(proposalHeader, proposalVersion, versionPriceHolder);
-        QueryData queryDataVersion = new QueryData("dw_proposal.insert", dwProposalVersion);
+        QueryData queryDataVersion = new QueryData("dw_proposal.insert", dwProposalVersion,ODS_POOL_NAME);
 
 
         List<QueryData> queryDatas = new ArrayList<>();
-        queryDatas.add(new QueryData("dw_proposal.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_proposal_product.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion));
+        queryDatas.add(new QueryData("dw_proposal.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_proposal_product.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion, ODS_POOL_NAME));
 
-        if (!(reportingObjects.queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",reportingObjects.queryDatasForComponent));
-        if (!(reportingObjects.queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",reportingObjects.queryDatasForModule));
-        if (!(reportingObjects.queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",reportingObjects.queryDatasForProduct));
-        if (!(reportingObjects.queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",reportingObjects.queryDatasForAddon));
+        if (!(reportingObjects.queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",reportingObjects.queryDatasForComponent,ODS_POOL_NAME));
+        if (!(reportingObjects.queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",reportingObjects.queryDatasForModule,ODS_POOL_NAME));
+        if (!(reportingObjects.queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",reportingObjects.queryDatasForProduct,ODS_POOL_NAME));
+        if (!(reportingObjects.queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",reportingObjects.queryDatasForAddon,ODS_POOL_NAME));
         queryDatas.add(queryDataVersion);
         insertRowsToTable(queryDatas, message,reportingObjects);
     }
