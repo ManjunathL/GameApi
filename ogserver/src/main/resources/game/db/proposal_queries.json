@@ -76,7 +76,7 @@
       "type": "select",
       "table": "proposal",
       "query": "SELECT * FROM proposal where crmId = ? ORDER BY createdOn DESC LIMIT 1",
-      "params": ["crmId"]
+      "params": ["quoteNo"]
     },
 
     {
@@ -889,6 +889,14 @@
       "type": "select",
       "table": "acc_hw_master",
       "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category,ERPCode,boqDisplayOrder from acc_hw_master where type = 'H'",
+      "params": []
+    },
+
+    {
+      "id": "product.categorymap.select.all",
+      "type": "select",
+      "table": "product_category_map",
+      "query": "select * from product_category_map",
       "params": []
     },
 

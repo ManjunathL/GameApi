@@ -46,6 +46,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, HingePack> hingePackMap = Collections.EMPTY_MAP;
     private Map<String, OldToNewFinishMapping> oldnewfinishMap = Collections.EMPTY_MAP;
     private Multimap<String, ColorMaster> colorMap;
+    private Multimap<String, ProductCategoryMap> productCategoryMap;
     private Map<String, ERPMaster> erpMasterMap = Collections.EMPTY_MAP;
 
 
@@ -77,6 +78,7 @@ public class ModuleDataService extends AbstractVerticle
        this.cacheSowMasterData();
        this.cacheOldNewFinishMappingData();
        this.cacheColours();
+       this.cacheProductCategoryMap();
 	}
 
     private void cacheAccessories()
@@ -133,6 +135,34 @@ public class ModuleDataService extends AbstractVerticle
                             this.colorMap.put(colorMaster.getColorgroupCode(), colorMaster);
                         }
                         markResult("color master done.", true);
+                    }
+                });
+    }
+    private void cacheProductCategoryMap()
+    {
+        this.productCategoryMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("product.categorymap.select.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Product category map table is empty.", false);
+                    }
+                    else
+                    {
+                        //this.colorMap= new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            ProductCategoryMap productCategoryMap=new ProductCategoryMap(record);
+//                            LOG.info("color mapping " +colorMaster);
+                            this.productCategoryMap.put(productCategoryMap.getProductCategory(),productCategoryMap);
+
+                        }
+                        for (ProductCategoryMap productCategoryMap : this.productCategoryMap.values())
+                        {
+                            LOG.debug("VALUE :" + productCategoryMap);
+                        }
+                        markResult("Product category map done.", true);
                     }
                 });
     }
@@ -581,6 +611,27 @@ public class ModuleDataService extends AbstractVerticle
     {
         return this.erpMasterMap.get(itemRefCode);
     }
+
+    public ProductCategoryMap getProductCategoryMap(String productCategory, Date priceDate)
+    {
+
+        Collection<ProductCategoryMap> productCategoryMaps =  this.productCategoryMap.get(productCategory);
+        LOG.debug("Product category Map size : " + productCategoryMaps.toArray().length + " : " + productCategory);
+        ProductCategoryMap getProductType = null;
+        for (ProductCategoryMap productCategoryMap : productCategoryMaps)
+        {
+            LOG.debug("compare dates : " + priceDate + " :" + productCategoryMap.getFromDate() + " : " + productCategoryMap.getToDate());
+            int before = priceDate.compareTo(productCategoryMap.getFromDate());
+            int after = priceDate.compareTo(productCategoryMap.getToDate());
+            if (before >= 0 && after <= 0)
+            {
+                LOG.debug("Setting product category map : " + productCategoryMap);
+                getProductType = productCategoryMap;
+            }
+        }
+        return getProductType;
+    }
+
 
     public ShutterFinish getFinish(String carcassCode, String finishCode,Date priceDate)
     {

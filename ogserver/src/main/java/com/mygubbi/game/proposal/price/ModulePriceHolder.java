@@ -41,6 +41,9 @@ public class ModulePriceHolder
     private ShutterFinish carcassFinish;
     private RateCard carcassMaterialRateCard;
     private RateCard carcassFinishRateCard;
+    private RateCard movableFurnitureRateCard;
+    private RateCard nonMovableFurnitureRateCard;
+    private RateCard servicesRateCard;
     private RateCard shutterFinishRateCard;
     private RateCard stdManufacturingCost;
     private RateCard nStdManufacturingCost;
@@ -116,6 +119,7 @@ public class ModulePriceHolder
 
     private String moduleCode;
     private String moduleType;
+    private String productType;
    // private String handleType;
 
     private java.sql.Date priceDate;
@@ -131,14 +135,10 @@ public class ModulePriceHolder
 
     public ModulePriceHolder(ModuleForPrice moduleForPrice)
     {
-//        LOG.debug("Module For price :" + moduleForPrice);
         this.productModule = moduleForPrice.getModule();
-//        LOG.debug("This productModule : " + this.productModule);
         this.priceDate = moduleForPrice.getPriceDate();
         this.city = moduleForPrice.getCity();
-        //this.handleType = moduleForPrice.getProduct().getHandletypeSelection();
         this.productLineItem = moduleForPrice.getProduct();
-//        LOG.debug("This City : " + this.city);
     }
 
 
@@ -148,8 +148,6 @@ public class ModulePriceHolder
         this.city = city;
         this.priceDate = date;
         this.productLineItem = productLineItem;
-//        LOG.debug("Inside 2nd Module price holder");
-
     }
 
     public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date,ProductLineItem productLineItem,String flag )
@@ -181,6 +179,7 @@ public class ModulePriceHolder
     }
 
     private void standardOrNonStandardModule() {
+        LOG.debug("Product Line item : " + this.productLineItem);
         this.moduleCode =  ModuleDataService.getInstance().getModule(productModule.getMGCode()).getCode();
 
         if (moduleCode.startsWith("MG-NS"))
@@ -195,6 +194,10 @@ public class ModulePriceHolder
         {
             moduleType = "Standard";
         }
+
+        ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(this.productModule.getProductCategory(),this.priceDate);
+        this.productType = productCategoryMap.getType();
+
     }
 
     private void resolveComponents()
@@ -684,6 +687,12 @@ public class ModulePriceHolder
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
         this.prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.movableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.nonMovableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.NON_MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.servicesRateCard = RateCardService.getInstance().getRateCard(RateCard.SERVICES_CIVIL_WORK,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
         //Profile Handles
 
@@ -762,7 +771,8 @@ public class ModulePriceHolder
                         .put("labourSourceCost", this.round(this.labourSourceCost, 2))
                         .put("hardwareCost", this.round(this.hardwareCost, 2))
                         .put("hardwareSourceCost", this.round(this.hardwareSourceCost, 2))
-                        .put("totalCost", this.round(this.totalCost, 2));
+                        .put("totalCost", this.round(this.totalCost, 2))
+                        .put("totalCostWoTax", this.round(this.totalCostWoTax, 2));
 
 
     }
@@ -955,13 +965,29 @@ public class ModulePriceHolder
             this.labourCost = this.moduleArea * labourRateCard.getRate();
             this.labourSourceCost = this.labourCost / labourManufacturingRateCard.getSourcePrice();
 
-                this.carcassCostWoTax = this.carcassCost * this.prodWoTaxFactor.getSourcePrice();
-                this.shutterCostWoTax = this.shutterCost * this.prodWoTaxFactor.getSourcePrice();
-                this.labourCostWoTax = labourCost * this.prodWoTaxFactor.getSourcePrice();
-                this.hardwareCostWoTax = this.hardwareCost * this.prodWoTaxFactor.getSourcePrice();
-                this.handleandKnobCostWoTax = this.handleandKnobCost * this.prodWoTaxFactor.getSourcePrice();
-                this.hingeCostWoTax = this.hingeCost * this.prodWoTaxFactor.getSourcePrice();
-                this.accessoryCostWoTax = this.accessoryCost * this.prodWoTaxFactor.getSourcePrice();
+            double woTaxFactor = 0;
+
+            switch (this.productType) {
+                case RateCard.MOVABLE_FURNITURE:
+                    woTaxFactor = this.movableFurnitureRateCard.getSourcePrice();
+                    break;
+                case RateCard.NON_MOVABLE_FURNITURE:
+                    woTaxFactor = this.nonMovableFurnitureRateCard.getSourcePrice();
+                    break;
+                default:
+                    woTaxFactor = this.prodWoTaxFactor.getSourcePrice();
+                    break;
+            }
+
+            LOG.debug("Wo tax factor : " + woTaxFactor);
+
+            this.carcassCostWoTax = this.carcassCost * woTaxFactor;
+            this.shutterCostWoTax = this.shutterCost * woTaxFactor;
+            this.labourCostWoTax = this.labourCost * woTaxFactor;
+            this.hardwareCostWoTax = this.hardwareCost * woTaxFactor;
+            this.handleandKnobCostWoTax = this.handleandKnobCost * woTaxFactor;
+            this.hingeCostWoTax = this.hingeCost * woTaxFactor;
+            this.accessoryCostWoTax = this.accessoryCost * woTaxFactor;
 
                 this.carcassProfit = this.carcassCostWoTax - this.carcassSourceCost;
                 this.shutterProfit = this.shutterCostWoTax - this.shutterSourceCost;
@@ -1028,7 +1054,7 @@ public class ModulePriceHolder
 
             this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.handleandKnobCost + this.hingeCost + this.hardwareCost;
             this.totalCost = this.woodworkCost + this.accessoryCost ;
-            this.totalCostWoTax = this.totalCost * this.prodWoTaxFactor.getSourcePrice();
+            this.totalCostWoTax = this.totalCost * woTaxFactor;
             if (mgModule.getModuleCategory().startsWith("H"))
             {
                 this.totalSourceCost = this.totalCost * 0.6;
@@ -1049,6 +1075,7 @@ public class ModulePriceHolder
 
         }
     }
+
 
     private void setAllComponentsPriceToZero() {
         this.carcassSourceCost = 0;
