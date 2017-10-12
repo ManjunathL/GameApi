@@ -61,6 +61,7 @@ public class QuoteSOWPDFCreator
     FileOutputStream fout ;
     public QuoteSOWPDFCreator(ProposalHeader proposalHeader, QuoteData quoteData,List<SOWPdf> proposalSOWs)
     {
+        LOG.info("proposal Sow " +proposalSOWs.size());
         this.proposalHeader=proposalHeader;
         this.quoteData=quoteData;
         this.proposalSOWs = proposalSOWs;

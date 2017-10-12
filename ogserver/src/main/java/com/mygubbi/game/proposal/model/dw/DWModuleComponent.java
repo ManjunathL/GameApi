@@ -75,8 +75,7 @@ public class DWModuleComponent extends JsonObject {
     private static final String COMPONENT_COST="compCost";
     private static final String COMPONENT_PROFIT="compProfit";
     private static final String COMPONENT_MARGIN="compMargin";
-
-
+    private static final String COLOR="color";
     private static final String COMPONENT_ERPCODE="erpCode";
     private static final String COMPONENT_ARTICLE_ID="articleId";
 
@@ -94,6 +93,16 @@ public class DWModuleComponent extends JsonObject {
     }
 
     public DWModuleComponent() {}
+
+    public String getColor() {
+        return this.getString(COLOR);
+    }
+
+    public DWModuleComponent setColor(String color)
+    {
+        put(COLOR,color);
+        return this;
+    }
 
     public int getID() {
         return this.getInteger(ID);
@@ -654,6 +663,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setHeight(panelComponent.getLength());
         dwModuleComponent.setWidth(panelComponent.getBreadth());
         dwModuleComponent.setDepth(panelComponent.getThickness());
+        dwModuleComponent.setColor(productModule.getColorCode());
         dwModuleComponent.setPanelArea(panelComponent.getArea() * panelComponent.getQuantity());
 //        dwModuleComponent.setComponentType(panelComponent.getType());
         dwModuleComponent.setComponentCode(panelComponent.getCode());
@@ -807,6 +817,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setWidth(0);
         dwModuleComponent.setDepth(0);
         dwModuleComponent.setPanelArea(0);
+        dwModuleComponent.setColor("");
         dwModuleComponent.setComponentType("H");
         dwModuleComponent.setComponentCode(hardwareComponent.getComponent().getCode());
         dwModuleComponent.setComponentUom(hardwareComponent.getComponent().getUom());
@@ -933,6 +944,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setWidth(0);
         dwModuleComponent.setDepth(0);
         dwModuleComponent.setPanelArea(0);
+        dwModuleComponent.setColor("");
         dwModuleComponent.setComponentType("A");
         dwModuleComponent.setComponentErpcode(accessoryComponent.getComponent().getERPCode());
         dwModuleComponent.setComponentCode(accessoryComponent.getComponent().getCode());
@@ -1191,6 +1203,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setComponentCode(handle.getCode());
         dwModuleComponent.setComponentTitle(handle.getTitle());
         dwModuleComponent.setComponentUom("Qty");
+        dwModuleComponent.setColor("");
         dwModuleComponent.setComponentType(compType);
         dwModuleComponent.setComponentQty(quantity);
         dwModuleComponent.setComponentErpcode(handle.getErpCode());

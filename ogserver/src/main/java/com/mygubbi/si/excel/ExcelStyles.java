@@ -71,10 +71,10 @@ public class ExcelStyles
     {
         CellStyle style = wb.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-        style.setBorderBottom(CellStyle.BORDER_MEDIUM);
-        style.setBorderTop(CellStyle.BORDER_MEDIUM);
-        style.setBorderLeft(CellStyle.BORDER_MEDIUM);
-        style.setBorderRight(CellStyle.BORDER_MEDIUM);
+        style.setBorderBottom(CellStyle.BORDER_THIN);
+        style.setBorderTop(CellStyle.BORDER_THIN);
+        style.setBorderLeft(CellStyle.BORDER_THIN);
+        style.setBorderRight(CellStyle.BORDER_THIN);
         style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         style.setAlignment(CellStyle.ALIGN_LEFT);
         style.setWrapText(true);
@@ -114,10 +114,10 @@ public class ExcelStyles
     {
         CellStyle style = wb.createCellStyle();
         style.setAlignment(CellStyle.ALIGN_LEFT);
-        style.setBorderBottom(CellStyle.BORDER_MEDIUM);
-        style.setBorderTop(CellStyle.BORDER_MEDIUM);
-        style.setBorderLeft(CellStyle.BORDER_MEDIUM);
-        style.setBorderRight(CellStyle.BORDER_MEDIUM);
+        style.setBorderBottom(CellStyle.BORDER_THIN);
+        style.setBorderTop(CellStyle.BORDER_THIN);
+        style.setBorderLeft(CellStyle.BORDER_THIN);
+        style.setBorderRight(CellStyle.BORDER_THIN);
         style.setWrapText(true);
         return style;
     }

@@ -60,7 +60,7 @@ public class RateCardService extends AbstractVerticle
 						{
 							RateCardMaster rateCardMaster = new RateCardMaster(record);;
 							this.rateCardMap.put(rateCardMaster.getKey(), rateCardMaster);
-							LOG.debug("Setting rate card master for :" + rateCardMaster.toString());
+//							LOG.debug("Setting rate card master for :" + rateCardMaster.toString());
 
 						}
 						LOG.debug("Rate Card master done.", true);
@@ -87,7 +87,7 @@ public class RateCardService extends AbstractVerticle
 						{
 							PriceMaster priceMaster = new PriceMaster(record);
 							this.priceMasterMap.put(priceMaster.getKey(), priceMaster);
-							LOG.debug("Setting price master for :" + priceMaster.getKey().toString());
+//							LOG.debug("Setting price master for :" + priceMaster.getKey().toString());
 						}
 						LOG.debug("Price master done.", true);
 						startFuture.complete();

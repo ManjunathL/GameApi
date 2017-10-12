@@ -28,7 +28,7 @@ public class ModuleForPrice extends JsonObject
     public ModuleForPrice(JsonObject json)
     {
         super(json.getMap());
-        LOG.info("JSON object for product" +json.encodePrettily());
+//        LOG.info("JSON object for product" +json.encodePrettily());
         this.setModule();
         this.setProduct();
     }

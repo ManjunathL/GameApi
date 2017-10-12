@@ -9,7 +9,8 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.erp.BOQWriteToDatabase;
+import com.mygubbi.game.proposal.erp.BOQHandler;
+import com.mygubbi.game.proposal.erp.BoqCreatorService;
 import com.mygubbi.game.proposal.model.PriceMaster;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWMaster;
@@ -31,6 +32,7 @@ import com.mygubbi.game.proposal.output.SOWPdfOutputService;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -55,7 +57,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     public DriveServiceProvider serviceProvider;
 
-    public BOQWriteToDatabase boqWriteToDatabase;
+    public BOQHandler boqHandler;
 
     private  final static String COLON_DELIMITER = ":";
     public ProposalHandler(Vertx vertx)
@@ -78,12 +80,9 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/createsowsheet").handler(this::createSowSheet);
         this.post("/runReportFiller").handler(this::runReportFiller);
-        //this.post("/createboqsheet").handler(this::createBoqSheet);
-
+        this.post("/createboqsheet").handler(this::createBoqSheet);
         this.post("/discardsowfile").handler(this::discardSowFile);
         this.post("/copysowlineitems").handler(this::copySowLineItems);
-        this.post("/createboqlineitems").handler(this::createBoqLineItems);
-        this.post("/saveboqfile").handler(this::saveBoqFile);
         this.post("/discardboqfile").handler(this::discardBoqFile);
         //this.post("/downloadprodspecfile").handler(this::downloadProdSpec);
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
@@ -187,9 +186,12 @@ public class ProposalHandler extends AbstractRouteHandler
         String sowVersion = null ;
         if(verFromProposal.contains("0.")){
             sowVersion = "1.0";
-        }else if(verFromProposal.contains("1.")){
+        }else if(verFromProposal.contains("1.") ){
             sowVersion = "2.0";
+        }else if(verFromProposal.contains("2.") || verFromProposal.contains("3.")){
+            sowVersion = "3.0";
         }else{
+
             LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);
             return;
         }
@@ -401,10 +403,11 @@ public class ProposalHandler extends AbstractRouteHandler
         this.createSOWOutput(routingContext);
     }
 
-    /*private void createBoqSheet(RoutingContext routingContext)
+
+    private void createBoqSheet(RoutingContext routingContext)
     {
-        this.createBoqSheet(routingContext, ProposalOutputCreator.OutputType.BOQ);
-    }*/
+        this.createBoqOutput(routingContext);
+    }
 
     private void downloadJobCard(RoutingContext routingContext)
     {
@@ -466,11 +469,14 @@ public class ProposalHandler extends AbstractRouteHandler
             sowVersion = "1.0";
         }else if(verFromProposal.contains("1.") || verFromProposal.contains("2.")){
             sowVersion = "2.0";
+        }else if(verFromProposal.contains("2.") || verFromProposal.contains("3.")){
+            sowVersion = "3.0";
         }else{
             LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
         }
         params.put("sowversion",sowVersion);
 
+        LOG.info("params == "+params);
         vertx.eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance()
                         .store(new QueryData("proposal.sow.select.proposalversion.forPdf",
                                 params)),
@@ -491,11 +497,24 @@ public class ProposalHandler extends AbstractRouteHandler
     }
     private void createSowOutputInPdf(RoutingContext context, JsonObject quoteReponse,Boolean IsBookingFormFlag){
         JsonObject quoteRequestJson = context.getBodyAsJson();
+
+        Boolean workContractFlag = false;
+        if(quoteRequestJson.containsKey("worksContractFlag") && (quoteRequestJson.getValue("worksContractFlag") != null)){
+            workContractFlag = quoteRequestJson.getString("worksContractFlag").equalsIgnoreCase("yes")?true:false;
+        }
+        Boolean IsWorkingContract = new Boolean(workContractFlag);
+
+
+        String version = quoteRequestJson.getString("fromVersion");
+        LOG.info("Version :: "+version);
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.SOWPDF));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
             if(IsBookingFormFlag) {
                 createBookingFormInPdf(context, quoteReponse, response);
+            }else if(IsWorkingContract){
+                this.createWorksContractinPdf(context,quoteReponse,response);
+                //createMergedPdf(context,quoteReponse,response,new JsonObject());
             }else{
                 createMergedPdf(context,quoteReponse,response,new JsonObject());
             }
@@ -514,12 +533,37 @@ public class ProposalHandler extends AbstractRouteHandler
 
         });
     }
+    private void createWorksContractinPdf(RoutingContext context,JsonObject quoteResponse,JsonObject sowresponse)
+    {
+        JsonObject quoteRequestJson = context.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.WORKSCONTRACT));
+        VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_WORK_CONTRACT_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
+            JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+            LOG.info("response of workscontract" +response);
+            createMergedPdf(context,quoteResponse,sowresponse,response);
+            LOG.info("after calling merge");
 
+        });
+
+    }
     private void createMergedPdf(RoutingContext routingContext,JsonObject quotePDfResponse,JsonObject sowResponse,JsonObject bookingformresponse){
-        /*LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());*/
+        LOG.debug("createMergedPdf :" + routingContext.getBodyAsJson().toString());
+        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         String city=routingContext.getBodyAsJson().getString("city");
+        String version=routingContext.getBodyAsJson().getString("fromVersion");
+        LOG.info("version value in merged pdf" +version);
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
         Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
+
+        Boolean workContractFlag = false;
+        if(quoteRequestJson.containsKey("worksContractFlag") && (quoteRequestJson.getValue("worksContractFlag") != null)){
+            workContractFlag = quoteRequestJson.getString("worksContractFlag").equalsIgnoreCase("yes")?true:false;
+        }
+        Boolean IsWorkingContract = new Boolean(workContractFlag);
+
+
+        if(workContractFlag && bookingformresponse.containsKey("worksContractPDFfile"))
+            inputPdfList.put(bookingformresponse.getString("worksContractPDFfile"),PdfPage.PORTRAIT);
 
         inputPdfList.put(quotePDfResponse.getString("quoteFile"),PdfPage.PORTRAIT);
         if(bookingFormFlag.equals("Yes"))
@@ -546,10 +590,8 @@ public class ProposalHandler extends AbstractRouteHandler
             inputPdfList.put(sowResponse.getString("sowPdfFile"), PdfPage.PORTRAIT);
         }
 
-        if(bookingFormFlag.equalsIgnoreCase("Yes"))
-        {
+        if(bookingFormFlag.equalsIgnoreCase("yes") && bookingformresponse.containsKey("bookingFormPDFfile"))
             inputPdfList.put(bookingformresponse.getString("bookingFormPDFfile"),PdfPage.PORTRAIT);
-        }
 
         inputPdfList.keySet().forEach(in -> LOG.info(in));
 
@@ -572,24 +614,23 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createSOWOutput(RoutingContext routingContext)
     {
+        LOG.debug("Routing context in boq op : " + routingContext.getBodyAsJson().encodePrettily());
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        LOG.debug("RequestJson :" + routingContext.getBodyAsJson());
         Integer id = LocalCache.getInstance().store(quoteRequestJson);
-        LOG.info("Integer id = "+id);
         VertxInstance.get().eventBus().send(SOWCreatorService.CREATE_SOW_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    LOG.debug("Json object response sending to client :" + response.toString());
                     sendJsonResponse(routingContext, response.toString());
                 });
     }
 
-    private void createBoqSheet(RoutingContext routingContext, ProposalOutputCreator.OutputType type)
+    private void createBoqOutput(RoutingContext routingContext)
     {
+        int count = 0;
+    LOG.debug("Inside create boq output : " + ++count);
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        quoteRequestJson.put("validSow",false);
-        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
-        VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
+        Integer id = LocalCache.getInstance().store(quoteRequestJson);
+        VertxInstance.get().eventBus().send(BoqCreatorService.CREATE_BOQ_OUTPUT, id,  new DeliveryOptions().setSendTimeout(120000),
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
                     sendJsonResponse(routingContext, response.toString());
@@ -603,24 +644,6 @@ public class ProposalHandler extends AbstractRouteHandler
        JsonObject jsonObject = routingContext.getBodyAsJson();
         String file_id = jsonObject.getString("id");
         this.serviceProvider.deleteFile(file_id);
-    }
-
-    private void createBoqLineItems(RoutingContext routingContext)
-    {
-        JsonObject jsonObject = routingContext.getBodyAsJson();
-    }
-
-    private void saveBoqFile(RoutingContext routingContext)
-    {
-       JsonObject jsonObject = routingContext.getBodyAsJson();
-        String file_id = jsonObject.getString("id");
-        int proposalId = jsonObject.getInteger("proposalId");
-        String path = "D:/Mygubbi GAME/boq_downloaded.xlsx";
-        this.serviceProvider = new DriveServiceProvider();
-        this.serviceProvider.downloadFile(file_id, path, DriveServiceProvider.TYPE_XLS);
-        this.boqWriteToDatabase = new BOQWriteToDatabase();
-        //this.boqWriteToDatabase.writeToDB(path,proposalId);
-        sendJsonResponse(routingContext,jsonObject.toString());
     }
 
     private void discardBoqFile(RoutingContext routingContext)
@@ -753,8 +776,14 @@ public class ProposalHandler extends AbstractRouteHandler
     private void copySowLineItems(RoutingContext routingContext)
     {
         JsonObject jsonObject = routingContext.getBodyAsJson();
+        LOG.info("jsonObj :: "+jsonObject);
 
-        String queryId = "proposal.sow.version.copy";
+        String queryId ;
+        if(jsonObject.getDouble("version") == 1.0){
+            queryId = "proposal.sow.version.copy";
+        }else{
+            queryId = "proposal.sow.version.copy.from2.0";
+        }
 
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, jsonObject));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,

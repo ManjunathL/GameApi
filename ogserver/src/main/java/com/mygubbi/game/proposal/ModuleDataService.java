@@ -46,6 +46,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, HingePack> hingePackMap = Collections.EMPTY_MAP;
     private Map<String, OldToNewFinishMapping> oldnewfinishMap = Collections.EMPTY_MAP;
     private Multimap<String, ColorMaster> colorMap;
+    private Map<String, ERPMaster> erpMasterMap = Collections.EMPTY_MAP;
 
 
 	public static ModuleDataService getInstance()
@@ -104,7 +105,7 @@ public class ModuleDataService extends AbstractVerticle
                         for (JsonObject record : selectData.rows)
                         {
                             OldToNewFinishMapping oldToNewFinishMapping = new OldToNewFinishMapping(record);
-                            LOG.info("old new finish mapping " +oldToNewFinishMapping);
+//                            LOG.info("old new finish mapping " +oldToNewFinishMapping);
                             this.oldnewfinishMap.put(oldToNewFinishMapping.getOldCode(), oldToNewFinishMapping);
                         }
                         markResult("oldnew finsh mapping master done.", true);
@@ -128,7 +129,7 @@ public class ModuleDataService extends AbstractVerticle
                         for (JsonObject record : selectData.rows)
                         {
                             ColorMaster colorMaster=new ColorMaster(record);
-                            LOG.info("color mapping " +colorMaster);
+//                            LOG.info("color mapping " +colorMaster);
                             this.colorMap.put(colorMaster.getColorgroupCode(), colorMaster);
                         }
                         markResult("color master done.", true);
@@ -344,6 +345,29 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
+    private void cacheERPMasterMap()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(new QueryData("erpmaster.select.all", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("ERP master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.erpMasterMap = new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            ERPMaster erpMaster = new ERPMaster(record);
+                            this.erpMasterMap.put(erpMaster.getItemReferenceCode(),erpMaster);
+                        }
+                        markResult("ERP master is loaded.", true);
+                    }
+                });
+    }
+
     private void cacheAccessoryPackMaster()
     {
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
@@ -482,7 +506,6 @@ public class ModuleDataService extends AbstractVerticle
             LOG.error(message);
             return;
         }
-
         int counter = this.cachingCounter.decrementAndGet();
         if (counter == 0)
         {
@@ -544,7 +567,7 @@ public class ModuleDataService extends AbstractVerticle
         return this.finishCodeMap.get(finishCode);
     }
 
-    public Handle getHandleTitle(String handleCode)
+    public Handle getHandleKnobHingeDetails(String handleCode)
     {
         return this.handleMap.get(handleCode);
     }
@@ -552,6 +575,11 @@ public class ModuleDataService extends AbstractVerticle
     public HingePack getHingePackType(String hingeType)
     {
         return this.hingePackMap.get(hingeType);
+    }
+
+    public ERPMaster getErpMaster(String itemRefCode)
+    {
+        return this.erpMasterMap.get(itemRefCode);
     }
 
     public ShutterFinish getFinish(String carcassCode, String finishCode,Date priceDate)

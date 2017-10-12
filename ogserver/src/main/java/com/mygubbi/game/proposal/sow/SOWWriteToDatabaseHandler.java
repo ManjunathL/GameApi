@@ -37,6 +37,8 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
     private static int[] cell_Services = {3,5,7,9,11,13,15};
     private static int[] cell_Services_titleText = {2,4,7,9,11,13,15};
     private List<Integer> cell_Services_title = new ArrayList<Integer>();
+    private int MAX_NO_OF_COLS = 18;
+    private int CONTENT_ROW_NUM = 7;
 
 
     private final static Logger LOG = LogManager.getLogger(SOWWriteToDatabaseHandler.class);
@@ -194,14 +196,11 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                         String L1s01code = null;
                         String room = null;
                         int noOfRows = sheet.getLastRowNum();
-                        LOG.debug("No of rows :" + noOfRows);
                         List<QueryData> queryDatas =new ArrayList<>();
                         String db_query = "proposal.sow.update";
 
                         for (int i = 3; i < noOfRows; i++) {
                             XSSFRow xssfRow = sheet.getRow(i);
-
-
                             int count = 0;
                             Boolean isServiceMadeTrue = false;
                             List<String> services_value = new ArrayList<>();
@@ -213,16 +212,17 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                             cell_Services_title.add(12);
                             cell_Services_title.add(14);
 
-
-                            if (!(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
+                            if ( xssfRow.getCell(2) != null && !(xssfRow.getCell(2).getStringCellValue().equals("") || xssfRow.getCell(2).getStringCellValue().isEmpty())) {
                                 for (Integer services_cell : cell_Services) {
                                     XSSFCell xssfCell = xssfRow.getCell(services_cell);
                                     String first_level_service = xssfRow.getCell(3).getStringCellValue();
-                                    LOG.info("first_level_service = " + first_level_service);
                                     if (!(xssfRow.getCell(0).getStringCellValue().equals("")) || xssfRow.getCell(0).getStringCellValue().isEmpty()) {
-                                        spaceType = xssfRow.getCell(16).getStringCellValue();
-                                        room = xssfRow.getCell(17).getStringCellValue();
-                                        L1s01code = xssfRow.getCell(18).getStringCellValue();
+
+                                        if(xssfRow.getRowNum() > CONTENT_ROW_NUM && (!(xssfRow.getCell(16).getStringCellValue().equals("")) || xssfRow.getCell(16).getStringCellValue().isEmpty())) {
+                                            spaceType = xssfRow.getCell(16).getStringCellValue();
+                                            room = xssfRow.getCell(17).getStringCellValue();
+                                            L1s01code = xssfRow.getCell(18).getStringCellValue();
+                                        }
                                     }
 
                                     if (first_level_service.length() == 0) {
@@ -237,22 +237,13 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
 
                                     if (!(xssfCell == null)) {
                                         services_value.add(count,xssfCell.getStringCellValue());
-
-
-                                        LOG.info("IS service is True ?? = " + isServiceMadeTrue);
                                         if ((count == 0) && (services_value.get(count).equalsIgnoreCase("Yes"))) {
                                             //set service flag to true
                                             isServiceMadeTrue = true;
 
                                         }
                                         if (isServiceMadeTrue && count > 0) {
-
-                                            LOG.info("COUNT = "+count+",services_value.get(count) == "+services_value.get(count));
-
-                                            XSSFCell xssfCell1Text = xssfRow.getCell(cell_Services_title.get(count));
-
-
-
+                                           XSSFCell xssfCell1Text = xssfRow.getCell(cell_Services_title.get(count));
                                             if (services_value.get(count).equals("") && !xssfCell1Text.getStringCellValue().equals("")) {
                                                 JsonObject res = new JsonObject();
                                                 res.put("status", "Failure");
@@ -281,11 +272,15 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                     }
                                 }
 
-                                //check any of the level 2 services selected is mygubbi
+                                int ser_index = services_value.size();
+                                if(ser_index < 7){
+                                    for(int k = ser_index;k < 7;k++){
+                                        services_value.add(k,"NA");
+                                    }
+                                }
+                                services_value.forEach(s -> {LOG.info(s);});
                                 boolean isGubbiOrClient = false;
-                                LOG.info("services_value.size() = "+services_value.size());
                                 for (int index = 0; index < services_value.size(); index++) {
-                                    LOG.info("In services_value[index] = "+services_value.get(index)+", "+service_Combo_val.get(0));
                                     if ((services_value.get(index).equalsIgnoreCase(service_Combo_val.get(0)))&&
                                             (services_value.get(0).equalsIgnoreCase("Yes"))) {
                                         isGubbiOrClient = true;
@@ -294,7 +289,6 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                         isGubbiOrClient = true;
                                     }
                                 }
-                                LOG.info("isGubbiOrClient - "+isGubbiOrClient);
                                 if (!isGubbiOrClient && (services_value.get(0).equalsIgnoreCase("Yes"))) {
                                     JsonObject res = new JsonObject();
                                     res.put("status", "Failure");
@@ -327,11 +321,7 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                                         proposal_sow.setL2S06(services_value.get(6));
                                     }
                                     proposal_sow.setL1S01Code(L1s01code);
-
-
-                    /*updateSOwRecord(proposal_sow);*/
                                     System.out.println("Proposal_sow :" + proposal_sow.toString());
-
                                     queryDatas.add(new QueryData(db_query,proposal_sow));
                                 }
                             }
@@ -341,6 +331,15 @@ public class SOWWriteToDatabaseHandler  extends AbstractRouteHandler {
                     }
 
                 });
+
+    }
+    private boolean isRowExists(XSSFSheet sheet, int rowNum,int noOfColumn ){
+        for(int i=0;i<noOfColumn;i++){
+            if(sheet.getRow(rowNum).getCell(i) != null){
+                return true;
+            }
+        }
+        return false;
 
     }
 }

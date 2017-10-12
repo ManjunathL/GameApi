@@ -48,10 +48,9 @@ public class DriveServiceManager
         this.credentialsJson = ConfigHolder.getInstance().getStringValue("driveCredentials", "/game/gamedrive.json");
         this.localDriveFolder = ConfigHolder.getInstance().getStringValue("localDriveFolder", "E:/data/gdrive/");
 
-
-       /* this.APPLICATION_NAME = "GAME Drive App";
+        /*this.APPLICATION_NAME = "GAME Drive App";
         this.credentialsJson = "/game/gamedrive.json";
-        this.localDriveFolder = "D:/data/gdrive/";*/
+        this.localDriveFolder = "E:/data/gdrive/";*/
         this.DATA_STORE_DIR = new File(localDriveFolder);
 
     }

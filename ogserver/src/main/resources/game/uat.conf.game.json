@@ -1,12 +1,20 @@
 {
   "version": "0.0.0a",
-  "jdbc": {
+  "jdbc": [{
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/prod_check",
     "max_pool_size": 20,
     "user": "admin",
-    "password": "OG$#gubi32"
-  },
+    "password": "OG$#gubi32",
+    "pool_Name":"mygubbi"
+  },{
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://suite.mygubbi.com/gubbi_ods",
+    "max_pool_size": 20,
+    "user": "rwuser",
+    "password": "6npp!_mb6npp!_mb",
+    "pool_Name":"ods"
+  }],
   "urlwithssl": "",
   "ssl_keystore": "ssl/mygubbiprod.jks",
   "ssl_password": "0r@nge123$",
@@ -23,6 +31,10 @@
   "jobcard_template": "/mnt/game/proposal/templates/jobcard-template.xlsx",
   "salesorder_template": "/mnt/game/proposal/templates/salesorder-template.xlsx",
   "sow_template" : "/mnt/game/proposal/templates/sow_template.xlsx",
+  "boq_template" : "/mnt/game/proposal/templates/boq_template.xlsx",
+  "so_template" : "/mnt/game/proposal/templates/so-template.xlsx",
+  "so_addon_template" : "/mnt/game/proposal/templates/so_addon_template.xlsx",
+  "boq_dir" : "/mnt/game/proposal/",
   "sow_downloaded_xls_format":"sow.xlsx",
   "sow_downloaded_pdf_fomat" : "sow.pdf",
   "merged_pdf":"merged.pdf",
@@ -30,9 +42,9 @@
   "termsandcondition_manglore":"/mnt/game/proposal/templates/BookingFormManglore.pdf",
   "termsandcondition_pune":"/mnt/game/proposal/templates/BookingFormPune.pdf",
   "termsandcondition_chennai":"/mnt/game/proposal/templates/BookingFormChennai.pdf",
+  "workscontract_template":"/mnt/game/proposal/templates/WorkscontractTemplate.pdf",
   "reports_cronText":"0 51 17 1/1 * ? *",
   "reports_time_zone_name":"Asia/Calcutta",
-
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",
   "queryfiles": [
     "game/db/proposal_queries.json",

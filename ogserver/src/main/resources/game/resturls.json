@@ -1041,6 +1041,22 @@
       "params":["oldCode"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/afterproduction",
+      "source": "db",
+      "query":"proposal.version.afterproduction",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/pdf/gettemplatetext",
+      "source": "db",
+      "query":"proposal.version.pdftemplatetext",
+      "params":["proposalId"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }

@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
  */
 public class ProposalHeader extends JsonObject
 {
-
     public static final String ID = "id";
 
     public static final String CRMID = "crmId";
@@ -44,6 +43,7 @@ public class ProposalHeader extends JsonObject
     public static final String CREATED_BY="createdBy";
     public static final String UPDATED_ON="updatedBy";
     public static final String UPDATED_BY="updatedBy";
+    public static final String BEFORE_PRODUCTION_SPECIFICATION="beforeProductionSpecification";
 
     private Date priceDate;
     private String designerName;
@@ -111,6 +111,9 @@ public class ProposalHeader extends JsonObject
     public String getProjectAddress1() {return this.getString(PROJECT_ADDRESS1);}
     public String getSowRemarksV2() {
         return this.getString(SOW_REMARKS_V2);
+    }
+    public String getBeforeProductionSpecification() {
+        return this.getString(BEFORE_PRODUCTION_SPECIFICATION);
     }
     public ProposalHeader setSowRemarksV1(String remarksV1)
     {

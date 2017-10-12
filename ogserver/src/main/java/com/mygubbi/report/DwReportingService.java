@@ -32,6 +32,7 @@ public class DwReportingService extends AbstractVerticle {
 
     private final static Logger LOG = LogManager.getLogger(DwReportingService.class);
     public static final String RECORD_VERSION_PRICE = "update.proposal.dw.version.price";
+    public static final String ODS_POOL_NAME = "ods";
 
 
     @Override
@@ -211,9 +212,20 @@ public class DwReportingService extends AbstractVerticle {
 
                 this.collectModuleHandles(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
                 this.collectModuleKnob(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
-              if (!(productModule.getHingePacks().size() == 0) || productModule.getHingePacks() == null) this.collectModuleHinge(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
+                if (!(productModule.getHingePacks().size() == 0) || productModule.getHingePacks() == null) this.collectModuleHinge(proposalHeader,proposalVersion,productLineItem,productModule,reportingObjects);
 
             }
+
+            PriceMaster lConnectorRate=RateCardService.getInstance().getHardwareRate("H074",proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+            AccHwComponent lConnector = ModuleDataService.getInstance().getHardware(lConnectorRate.getRateId());
+            if(productLineItem.getHandletypeSelection() != null) {
+                if (productLineItem.getHandletypeSelection().equals("Gola Profile") && productLineItem.getNoOfLengths() != 0) {
+                    setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModules.get(0),lConnector,productLineItem.getNoOfLengths(),reportingObjects);
+
+                }
+            }
+
+
             ProductPriceHolder productPriceHolder = new ProductPriceHolder(productLineItem, modulePriceHolders, proposalHeader, proposalVersion);
             productPriceHolder.prepare();
             setProductAttributes(productPriceHolder, proposalHeader, proposalVersion, productLineItem,reportingObjects);
@@ -279,7 +291,7 @@ public class DwReportingService extends AbstractVerticle {
         reportingObjects.queryDatasForComponent.add(dwModuleComponent);
     }
 
-    private void setComponentAttributesForHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent,double quantity, ReportingObjects reportingObjects) {
+    private void setComponentAttributesForProfileHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent, double quantity, ReportingObjects reportingObjects) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
         dwModuleComponent = dwModuleComponent.setDwComponentAttributesForGolaProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,accHwComponent,quantity);
 
@@ -316,20 +328,20 @@ public class DwReportingService extends AbstractVerticle {
 
         DwProposalVersion dwProposalVersion = new DwProposalVersion();
         dwProposalVersion = dwProposalVersion.setDwVersionObjects(proposalHeader, proposalVersion, versionPriceHolder);
-        QueryData queryDataVersion = new QueryData("dw_proposal.insert", dwProposalVersion);
+        QueryData queryDataVersion = new QueryData("dw_proposal.insert", dwProposalVersion,ODS_POOL_NAME);
 
 
         List<QueryData> queryDatas = new ArrayList<>();
-        queryDatas.add(new QueryData("dw_proposal.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_proposal_product.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion));
-        queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion));
+        queryDatas.add(new QueryData("dw_proposal.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_proposal_product.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_proposal_addon.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_product_module.delete", proposalVersion,ODS_POOL_NAME));
+        queryDatas.add(new QueryData("dw_module_component.delete", proposalVersion, ODS_POOL_NAME));
 
-        if (!(reportingObjects.queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",reportingObjects.queryDatasForComponent));
-        if (!(reportingObjects.queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",reportingObjects.queryDatasForModule));
-        if (!(reportingObjects.queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",reportingObjects.queryDatasForProduct));
-        if (!(reportingObjects.queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",reportingObjects.queryDatasForAddon));
+        if (!(reportingObjects.queryDatasForComponent.isEmpty())) queryDatas.add(new QueryData("dw_module_component.insert",reportingObjects.queryDatasForComponent,ODS_POOL_NAME));
+        if (!(reportingObjects.queryDatasForModule.isEmpty())) queryDatas.add(new QueryData("dw_product_module.insert",reportingObjects.queryDatasForModule,ODS_POOL_NAME));
+        if (!(reportingObjects.queryDatasForProduct.isEmpty())) queryDatas.add(new QueryData("dw_proposal_product.insert",reportingObjects.queryDatasForProduct,ODS_POOL_NAME));
+        if (!(reportingObjects.queryDatasForAddon.isEmpty())) queryDatas.add(new QueryData("dw_proposal_addon.insert",reportingObjects.queryDatasForAddon,ODS_POOL_NAME));
         queryDatas.add(queryDataVersion);
         insertRowsToTable(queryDatas, message,reportingObjects);
     }
@@ -358,20 +370,26 @@ public class DwReportingService extends AbstractVerticle {
 
         if (Objects.equals(productLineItem.getHandletypeSelection(), GOLA_PROFILE)) {
 
-            AccHwComponent hardware = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware,1,reportingObjects);
+            AccHwComponent wProfile = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
+            double wProfileWidth = productModule.getWidth();
+            wProfileWidth = (wProfileWidth /1000);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,wProfile,wProfileWidth,reportingObjects);
 
-            AccHwComponent hardware1 = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware1,1,reportingObjects);
+            AccHwComponent lProfile = ModuleDataService.getInstance().getHardware(lWidthRate.getRateId());
+            double lProfileWidth = productModule.getWidth();
+            lProfileWidth = (lProfileWidth /1000);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,lProfile,lProfileWidth,reportingObjects);
 
-            AccHwComponent hardware2 = ModuleDataService.getInstance().getHardware(wWidthRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware2,1,reportingObjects);
+            AccHwComponent cProfile = ModuleDataService.getInstance().getHardware(cWidthRate.getRateId());
+            double cProfileWidth = productModule.getWidth();
+            cProfileWidth = (lProfileWidth /1000);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,cProfile,cProfileWidth,reportingObjects);
 
-            AccHwComponent hardware3 = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware3,1,reportingObjects);
+            AccHwComponent bracket = ModuleDataService.getInstance().getHardware(bracketRate.getRateId());
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,bracket,2,reportingObjects);
 
-            AccHwComponent hardware4 = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware4,1,reportingObjects);
+            AccHwComponent cConnector = ModuleDataService.getInstance().getHardware(cConnectorRate.getRateId());
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,cConnector,1,reportingObjects);
 
         }
         if (Objects.equals(productLineItem.getHandletypeSelection(), "G Profile")) {
@@ -402,7 +420,7 @@ public class DwReportingService extends AbstractVerticle {
             }
 
             AccHwComponent hardware5 = ModuleDataService.getInstance().getHardware(gProfileRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware5,lwidth,reportingObjects);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware5,lwidth,reportingObjects);
 
         }
         if (Objects.equals(productLineItem.getHandletypeSelection(), "J Profile")) {
@@ -432,7 +450,7 @@ public class DwReportingService extends AbstractVerticle {
             }
 
             AccHwComponent hardware6 = ModuleDataService.getInstance().getHardware(jProfileRate.getRateId());
-            setComponentAttributesForHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware6,lWidth,reportingObjects);
+            setComponentAttributesForProfileHardware(proposalHeader,proposalVersion,productLineItem,productModule,hardware6,lWidth,reportingObjects);
         }
         if (productModule.getHandleCode() == null) {
 
@@ -446,7 +464,7 @@ public class DwReportingService extends AbstractVerticle {
                 {
                     if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
                     {
-                        Handle handle = ModuleDataService.getInstance().getHandleTitle(productLineItem.getHandleCode());
+                        Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(productLineItem.getHandleCode());
                         setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
 
                     }
@@ -454,7 +472,7 @@ public class DwReportingService extends AbstractVerticle {
             }
             else if (productModule.getHandleOverrideFlag().equals("Yes")) {
                 {
-                    Handle handle = ModuleDataService.getInstance().getHandleTitle(productModule.getHandleCode());
+                    Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(productModule.getHandleCode());
                     setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
                 }
             }
@@ -465,7 +483,7 @@ public class DwReportingService extends AbstractVerticle {
            /* if (productModule.getHandleMandatory().equalsIgnoreCase("yes"))
             {
 //                LOG.debug("Collect handle : " + productModule.getHandleQuantity() + " : " + productModule.getMGCode());
-                Handle handle = ModuleDataService.getInstance().getHandleTitle(productModule.getHandleCode());
+                Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(productModule.getHandleCode());
                 setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,handle,reportingObjects,productModule.getHandleQuantity());
             }*/
 
@@ -480,7 +498,7 @@ public class DwReportingService extends AbstractVerticle {
         {
 //            LOG.debug("Collect knob : " + productModule.getKnobQuantity() + " : " + productModule.getMGCode());
 
-            Handle knob = ModuleDataService.getInstance().getHandleTitle(productModule.getKnobCode());
+            Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(productModule.getKnobCode());
             setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,knob,reportingObjects,productModule.getKnobQuantity());
         }
 
@@ -525,25 +543,25 @@ public class DwReportingService extends AbstractVerticle {
                     }
 
 
-                    Handle hinge = ModuleDataService.getInstance().getHandleTitle(code);
+                    Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(code);
 
                     setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
 
 
                 } else {
                     quantity = getHingeRateBasedOnQty(hingePack,productModule);
-                    Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+                    Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
 
                     setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
 
                 }
             }
             else {
-                Handle hinge = ModuleDataService.getInstance().getHandleTitle(hingePack.getHingeCode());
+                Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
 
                 setComponentAttributesForHandle(proposalHeader,proposalVersion,productLineItem,productModule,hinge,reportingObjects,quantity);
             }
-            }
+        }
     }
 
     private void setComponentAttributesForHandle(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, Handle handle, ReportingObjects reportingObjects, double quantity) {

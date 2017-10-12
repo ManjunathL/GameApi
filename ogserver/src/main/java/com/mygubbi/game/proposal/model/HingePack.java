@@ -13,6 +13,7 @@ public class HingePack extends JsonObject {
     private static final String TYPE = "type";
     private static final String QTY_FORMULA = "qtyFormula";
     private static final String QTY_FLAG = "qtyFlag";
+    private static final String ERP_CODE = "erpCode";
 
     public HingePack()
     {
@@ -47,4 +48,9 @@ public class HingePack extends JsonObject {
     public String getQtyFlag() {
         return this.getString(QTY_FLAG);
     }
+    public String getErpCode() {
+        return this.getString(ERP_CODE);
+    }
+
+
 }
