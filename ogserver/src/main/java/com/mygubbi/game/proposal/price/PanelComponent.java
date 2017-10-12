@@ -15,8 +15,8 @@ import java.util.Objects;
  */
 public class PanelComponent
 {
-    private static final String CARCASS_TYPE = "C";
-    private static final String SHUTTER_TYPE = "S";
+    public static final String CARCASS_TYPE = "C";
+    public static final String SHUTTER_TYPE = "S";
 
     private static final double SQMM2SQFT = 0.0000107639;
     private static final String TYPE_LEFT = "L";

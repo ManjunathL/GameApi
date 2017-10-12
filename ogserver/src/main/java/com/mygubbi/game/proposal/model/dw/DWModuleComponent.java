@@ -655,7 +655,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setWidth(panelComponent.getBreadth());
         dwModuleComponent.setDepth(panelComponent.getThickness());
         dwModuleComponent.setPanelArea(panelComponent.getArea() * panelComponent.getQuantity());
-        dwModuleComponent.setComponentType(panelComponent.getType());
+//        dwModuleComponent.setComponentType(panelComponent.getType());
         dwModuleComponent.setComponentCode(panelComponent.getCode());
         dwModuleComponent.setComponentUom("Qty");
         dwModuleComponent.setComponentTitle(panelComponent.getTitle());
@@ -664,6 +664,7 @@ public class DWModuleComponent extends JsonObject {
         //calculatePanelPriceAndCost(productModule, panelComponent, nonStandardloadingFactorCard, nStdLoadingSourceFactorBasedOnProduct, stdManufacturingCost, nStdManufacturingCost, rate, stdSourceRate, nStdSourceRate, moduleType);
 
         if (panelComponent.isExposed()) {
+            dwModuleComponent.setComponentType(PanelComponent.SHUTTER_TYPE);
             if ("Standard".equals(moduleType)) {
                 if (Objects.equals(WARDROBE, productModule.getProductCategory()) || Objects.equals("W", productModule.getProductCategory())) {
                     panelPrice = panelComponent.getCost() * rate;
@@ -684,6 +685,7 @@ public class DWModuleComponent extends JsonObject {
             }
         } else {
             if ("Standard".equals(moduleType)) {
+                dwModuleComponent.setComponentType(PanelComponent.CARCASS_TYPE);
                 if (Objects.equals(WARDROBE, productModule.getProductCategory()) || Objects.equals("W", productModule.getProductCategory())) {
                     panelPrice = (panelComponent.getCost() * rate);
                     panelCost = (panelComponent.getCost() / stdSourceRate);
