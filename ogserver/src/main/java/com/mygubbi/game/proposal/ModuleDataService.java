@@ -616,16 +616,16 @@ public class ModuleDataService extends AbstractVerticle
     {
 
         Collection<ProductCategoryMap> productCategoryMaps =  this.productCategoryMap.get(productCategory);
-        LOG.debug("Product category Map size : " + productCategoryMaps.toArray().length + " : " + productCategory);
+//        LOG.debug("Product category Map size : " + productCategoryMaps.toArray().length + " : " + productCategory);
         ProductCategoryMap getProductType = null;
         for (ProductCategoryMap productCategoryMap : productCategoryMaps)
         {
-            LOG.debug("compare dates : " + priceDate + " :" + productCategoryMap.getFromDate() + " : " + productCategoryMap.getToDate());
+//            LOG.debug("compare dates : " + priceDate + " :" + productCategoryMap.getFromDate() + " : " + productCategoryMap.getToDate());
             int before = priceDate.compareTo(productCategoryMap.getFromDate());
             int after = priceDate.compareTo(productCategoryMap.getToDate());
             if (before >= 0 && after <= 0)
             {
-                LOG.debug("Setting product category map : " + productCategoryMap);
+//                LOG.debug("Setting product category map : " + productCategoryMap);
                 getProductType = productCategoryMap;
             }
         }

@@ -1,15 +1,13 @@
 package com.mygubbi.game.proposal;
 
 import com.mygubbi.common.LocalCache;
-import com.mygubbi.common.StringUtils;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
-import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.route.AbstractRouteHandler;
+import com.mygubbi.si.crm.CrmApiHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -18,9 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 /**
@@ -31,7 +27,7 @@ public class FFApiHandler extends AbstractRouteHandler {
     private final static Logger LOG = LogManager.getLogger(FFApiHandler.class);
 
     private static final String PRODUCT = "Product";
-    private static final String ADDON = "Addon";
+    private static final String SERVICE = "Service";
 
     public FFApiHandler(Vertx vertx) {
         super(vertx);
@@ -39,7 +35,9 @@ public class FFApiHandler extends AbstractRouteHandler {
     }
 
     private void getScopeOfWorkDetails(RoutingContext routingContext) {
-        if (!isRequestAuthenticated(routingContext)) return;
+        CrmApiHandler crmApiHandler = new CrmApiHandler(vertx);
+        boolean requestAuthenticated = crmApiHandler.isRequestAuthenticated(routingContext);
+        if (!requestAuthenticated) return;
         getProposalHeader(routingContext);
     }
 
@@ -112,9 +110,6 @@ public class FFApiHandler extends AbstractRouteHandler {
                             addons.add(new ProductAddon(json));
                         }
 
-                        LOG.debug("Product size : " + products.size());
-                        LOG.debug("Addon size : " + addons.size());
-
                         collectObjects(routingContext,proposalHeader,products,addons);
                     }
                 });
@@ -128,17 +123,16 @@ public class FFApiHandler extends AbstractRouteHandler {
 
         for (ProductLineItem productLineItem : productLineItems)
         {
-            LOG.debug("Product Line item : " + productLineItem);
+//            LOG.debug("Product Line item : " + productLineItem);
             listOfServicesTest.add(new JsonObject().put("room",productLineItem.getRoomCode()).put("type",PRODUCT).put("title",productLineItem.getTitle()));
         }
 
         for (ProductAddon productAddon : productAddons)
         {
-            if (productAddon.isAccessory()) return;
-            listOfServicesTest.add(new JsonObject().put("room",productAddon.getRoomCode()).put("type",ADDON).put("title",productAddon.getProductTypeCode() + " :" + productAddon.getProductSubtypeCode() + " :" + productAddon.getProduct()));
+            if (!(productAddon.isAccessory())); listOfServicesTest.add(new JsonObject().put("room",productAddon.getRoomCode()).put("type", SERVICE).put("title",productAddon.getProductTypeCode() + " :" + productAddon.getProductSubtypeCode() + " :" + productAddon.getProduct()));
         }
 
-        LOG.debug("List of servieces size : " + listOfServicesTest.size());
+//        LOG.debug("List of servieces size : " + listOfServicesTest.size());
 
         if (listOfServicesTest.size() != 0)
         {
@@ -153,7 +147,7 @@ public class FFApiHandler extends AbstractRouteHandler {
     }
 
 
-    private boolean isRequestAuthenticated(RoutingContext routingContext){
+   /* private boolean isRequestAuthenticated(RoutingContext routingContext){
         final String authorization = routingContext.request().getHeader("Authorization");
         LOG.debug("values :" + authorization);
         if (authorization != null && authorization.startsWith("Basic")) {
@@ -171,5 +165,5 @@ public class FFApiHandler extends AbstractRouteHandler {
         }
         sendError(routingContext.response(), "Credentials not valid");
         return false;
-    }
+    }*/
 }

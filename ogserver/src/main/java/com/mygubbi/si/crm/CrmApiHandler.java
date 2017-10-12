@@ -506,7 +506,7 @@ public class CrmApiHandler extends AbstractRouteHandler
         return 0;
     }
 
-    private boolean isRequestAuthenticated(RoutingContext routingContext){
+    public boolean isRequestAuthenticated(RoutingContext routingContext){
         final String authorization = routingContext.request().getHeader("Authorization");
         LOG.debug("values :" + authorization);
         if (authorization != null && authorization.startsWith("Basic")) {
