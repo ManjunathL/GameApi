@@ -220,7 +220,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         JsonObject jsonObject=new JsonObject();
         List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
 
-        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage());
         String sowversion = "1.0";
         String version = quoteData.fromVersion;
 
@@ -295,7 +295,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         LOG.info("office only pdf ");
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
             outputCreator.create();
             OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
@@ -321,7 +321,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
     {
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
             outputCreator.create();
 
