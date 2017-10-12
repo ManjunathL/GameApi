@@ -2259,28 +2259,33 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillDataForGST(PdfPTable tabname,String GSTCategory, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
     {
+        LOG.info("GST Category " +GSTCategory);
         //LOG.info("inside create row n fill data");
         double tax_amount=round(DesignpriceAfterDsicount-currentpriceAfterTax,2);
 
-        totalproductPrice+=PriceAfterDiscount;
-        totalDAP+=DesignpriceAfterDsicount;
-        totalTaxAmt+=currentpriceAfterTax;
-        totalPriceAfterTax+=tax_amount;
-
-        if(tax.equals("18%"))
+        if(!GSTCategory.equals("Design Services"))
         {
-            set1totalproductPrice+=PriceAfterDiscount;
-            set1totalDAP+=DesignpriceAfterDsicount;
-            set1totalTaxAmt+=currentpriceAfterTax;
-            set1totalPriceAfterTax+=tax_amount;
-
-        }else
-        {
-            set2totalproductPrice+=PriceAfterDiscount;
-            set2totalDAP+=DesignpriceAfterDsicount;
-            set2totalTaxAmt+=currentpriceAfterTax;
-            set2totalPriceAfterTax+=tax_amount;
+            totalproductPrice+=PriceAfterDiscount;
+            totalDAP+=DesignpriceAfterDsicount;
+            totalTaxAmt+=currentpriceAfterTax;
+            totalPriceAfterTax+=tax_amount;
         }
+            if(tax.equals("18%"))
+            {
+                set1totalproductPrice+=PriceAfterDiscount;
+                set1totalDAP+=DesignpriceAfterDsicount;
+                set1totalTaxAmt+=currentpriceAfterTax;
+                set1totalPriceAfterTax+=tax_amount;
+
+            }else
+            {
+                set2totalproductPrice+=PriceAfterDiscount;
+                set2totalDAP+=DesignpriceAfterDsicount;
+                set2totalTaxAmt+=currentpriceAfterTax;
+                set2totalPriceAfterTax+=tax_amount;
+            }
+
+
 
         PdfPCell cell;
         Paragraph Pindex;
