@@ -1105,22 +1105,24 @@ public class DWModuleComponent extends JsonObject {
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
-        String compType = null;
         PriceMaster handleOrKnobRate = null;
+
+        String moduleType;
+        String title;
 
 
         if (handle.getCode().startsWith("HANDLE"))
         {
-            compType = "HL";
+            title = handle.getTitle() + " : " + handle.getFinish() +" :" + handle.getThickness();
             handleOrKnobRate = RateCardService.getInstance().getHandleOrKnobRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         }
         else if(handle.getCode().startsWith("KNOB")){
-            compType = "K";
+            title = handle.getTitle() + " : " + handle.getFinish();
             handleOrKnobRate = RateCardService.getInstance().getHandleOrKnobRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         }
         else
         {
-            compType = "HI";
+            title = handle.getTitle();
             handleOrKnobRate = RateCardService.getInstance().getHingeRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         }
 
@@ -1130,7 +1132,6 @@ public class DWModuleComponent extends JsonObject {
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
 
-        String moduleType;
 
         if (productModule.getMGCode().startsWith("MG-NS")) {
             moduleType = "nonStandard";
@@ -1201,10 +1202,10 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setDepth(productModule.getDepth());
         dwModuleComponent.setPanelArea(0);
         dwModuleComponent.setComponentCode(handle.getCode());
-        dwModuleComponent.setComponentTitle(handle.getTitle());
+        dwModuleComponent.setComponentTitle(title);
         dwModuleComponent.setComponentUom("Qty");
         dwModuleComponent.setColor("");
-        dwModuleComponent.setComponentType(compType);
+        dwModuleComponent.setComponentType("H");
         dwModuleComponent.setComponentQty(quantity);
         dwModuleComponent.setComponentErpcode(handle.getErpCode());
         dwModuleComponent.setComponentArticleId(handle.getArticleNo());
