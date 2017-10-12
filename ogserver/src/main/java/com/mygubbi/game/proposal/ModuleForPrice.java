@@ -38,7 +38,7 @@ public class ModuleForPrice extends JsonObject
     }
 
     public ModuleForPrice(ProductModule productModule,ProductLineItem productLineItem, Date priceDate, String city) {
-        LOG.debug("Inside module for price : " + priceDate + " : " + city);
+//        LOG.debug("Inside module for price : " + priceDate + " : " + city);
         this.setProduct(productLineItem);
         this.setModule(productModule);
         this.setCity(city);
