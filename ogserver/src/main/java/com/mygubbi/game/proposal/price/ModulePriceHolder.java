@@ -179,7 +179,7 @@ public class ModulePriceHolder
     }
 
     private void standardOrNonStandardModule() {
-        LOG.debug("Product Line item : " + this.productLineItem);
+//        LOG.debug("Product Line item : " + this.productLineItem);
         this.moduleCode =  ModuleDataService.getInstance().getModule(productModule.getMGCode()).getCode();
 
         if (moduleCode.startsWith("MG-NS"))
@@ -979,7 +979,7 @@ public class ModulePriceHolder
                     break;
             }
 
-            LOG.debug("Wo tax factor : " + woTaxFactor);
+//            LOG.debug("Wo tax factor : " + woTaxFactor);
 
             this.carcassCostWoTax = this.carcassCost * woTaxFactor;
             this.shutterCostWoTax = this.shutterCost * woTaxFactor;
