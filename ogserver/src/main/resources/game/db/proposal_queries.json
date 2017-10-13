@@ -503,7 +503,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select code, width, depth, height, description, imagePath, moduleType, moduleCategory, productCategory, material, unitType, accessoryPackDefault, remarks, handleMandatory, knobMandatory, hingeMandatory, sqftCalculation from module_master",
+      "query": "select code, width, depth, height, description, imagePath, moduleType, moduleCategory, productCategory, material, unitType, accessoryPackDefault, remarks, handleMandatory, knobMandatory, hingeMandatory, sqftCalculation,glassMandatory from module_master",
       "params": []
     },
 
