@@ -85,14 +85,22 @@ public class QuotationPDFCreator
     List<GSTForProducts> finalMovableList=new ArrayList<>();
     List<GSTForProducts> finalmovableList=new ArrayList<>();
     List<GSTForProducts> finalscwList=new ArrayList<>();
+    java.util.Date date;
+    java.util.Date currentDate = new java.util.Date(117 ,9,10,0,0,00);
 
     PriceMaster designServicePrice, nonMovablePrice, movablePrice, nonMovablePriceTax, movablePriceTax,scwTax,designServiceTax;
 
     QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader)
     {
+        this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
-        getProducts();
+        if(date.after(currentDate))
+        {
+            LOG.info("inside if of current date");
+            getProducts();
+        }
+
     }
 
     public void  createpdf(String destination, boolean isValid_Sow)
@@ -970,76 +978,76 @@ public class QuotationPDFCreator
             p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
             document.add(p);
         }
-
-        p=new Paragraph("\n");
+        if(date.after(currentDate)) {
+                LOG.info("main method inside if");
+            p = new Paragraph("\n");
             document.add(p);
 
-                    p=new Paragraph("\n");
-                    document.add(p);
+            p = new Paragraph("\n");
+            document.add(p);
 
 
-                    float[] gstcolumnWidths1 = {1,1,1,1,1,1,1};
-        PdfPTable gstTable=new PdfPTable(gstcolumnWidths1);
-        gstTable.setWidthPercentage(100);
-        PdfPCell gstCell1 = new PdfPCell(new Paragraph("SI",fsize1));
-        PdfPCell gstCell2 = new PdfPCell(new Paragraph("GST Category",fsize1));
-        PdfPCell gstCell3 = new PdfPCell(new Paragraph("Products Price",fsize1));
-        PdfPCell gstCell4 = new PdfPCell(new Paragraph("Design Adjusted Price",fsize1));
-        PdfPCell gstCell5 = new PdfPCell(new Paragraph("TAX %",fsize1));
-        PdfPCell gstCell7 = new PdfPCell(new Paragraph("TAX Amount",fsize1));
-        PdfPCell gstCell6 = new PdfPCell(new Paragraph("Price After Tax",fsize1));
-        //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
-        gstTable.addCell(gstCell1);
-        gstTable.addCell(gstCell2);
-        gstTable.addCell(gstCell3);
-        gstTable.addCell(gstCell4);
-        gstTable.addCell(gstCell5);
-        gstTable.addCell(gstCell7);
-        gstTable.addCell(gstCell6);
+            float[] gstcolumnWidths1 = {1, 1, 1, 1, 1, 1, 1};
+            PdfPTable gstTable = new PdfPTable(gstcolumnWidths1);
+            gstTable.setWidthPercentage(100);
+            PdfPCell gstCell1 = new PdfPCell(new Paragraph("SI", fsize1));
+            PdfPCell gstCell2 = new PdfPCell(new Paragraph("GST Category", fsize1));
+            PdfPCell gstCell3 = new PdfPCell(new Paragraph("Products Price", fsize1));
+            PdfPCell gstCell4 = new PdfPCell(new Paragraph("Design Adjusted Price", fsize1));
+            PdfPCell gstCell5 = new PdfPCell(new Paragraph("TAX %", fsize1));
+            PdfPCell gstCell7 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
+            PdfPCell gstCell6 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
+            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
+            gstTable.addCell(gstCell1);
+            gstTable.addCell(gstCell2);
+            gstTable.addCell(gstCell3);
+            gstTable.addCell(gstCell4);
+            gstTable.addCell(gstCell5);
+            gstTable.addCell(gstCell7);
+            gstTable.addCell(gstCell6);
 
-        this.getfinalGSTList(designServiceList,"Design Services");
-        this.getfinalGSTList(movableList,"MF");
-        this.getfinalGSTList(nonMovableList,"NMF");
-        this.getfinalGSTList(scwList,"SCW");
-        for(GSTForProducts finalList: finalmovableList)
-        {
-            this.createRowAndFillDataForGST(gstTable,finalList.getCategory(),finalList.getPriceAfterDiscount(),finalList.getPrice(),finalList.getPriceAfterTax(),finalList.getTax());
+            this.getfinalGSTList(designServiceList, "Design Services");
+            this.getfinalGSTList(movableList, "MF");
+            this.getfinalGSTList(nonMovableList, "NMF");
+            this.getfinalGSTList(scwList, "SCW");
+            for (GSTForProducts finalList : finalmovableList) {
+                this.createRowAndFillDataForGST(gstTable, finalList.getCategory(), finalList.getPriceAfterDiscount(), finalList.getPrice(), finalList.getPriceAfterTax(), finalList.getTax());
+            }
+            document.add(gstTable);
+            float[] gsttotalcolumnWidths1 = {1, 1, 1, 1, 1, 1, 1};
+            PdfPTable gsttotalTable = new PdfPTable(gsttotalcolumnWidths1);
+            gsttotalTable.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotal(gsttotalTable, "Total", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
+            document.add(gsttotalTable);
+
+            p = new Paragraph("\nQuotation Summary", fsize1);
+            document.add(p);
+
+            p = new Paragraph(" ");
+            document.add(p);
+
+            float[] gstfinalcolumnWidths1 = {1, 4, 1, 1, 1, 1, 1};
+            PdfPTable finalTable = new PdfPTable(gstfinalcolumnWidths1);
+            finalTable.setWidthPercentage(100);
+            PdfPCell gstfinalCell1 = new PdfPCell(new Paragraph("SI", fsize1));
+            PdfPCell gstfinalCell2 = new PdfPCell(new Paragraph("Title", fsize1));
+            PdfPCell gstfinalCell3 = new PdfPCell(new Paragraph("Products Price", fsize1));
+            PdfPCell gstfinalCell4 = new PdfPCell(new Paragraph("Design Adjusted Price", fsize1));
+            PdfPCell gstfinalCell5 = new PdfPCell(new Paragraph("TAX %", fsize1));
+            PdfPCell gstfinalCell7 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
+            PdfPCell gstfinalCell6 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
+            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
+            finalTable.addCell(gstfinalCell1);
+            finalTable.addCell(gstfinalCell2);
+            finalTable.addCell(gstfinalCell3);
+            finalTable.addCell(gstfinalCell4);
+            finalTable.addCell(gstfinalCell5);
+            finalTable.addCell(gstfinalCell7);
+            finalTable.addCell(gstfinalCell6);
+            this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set1totalproductPrice, set1totalDAP, "18%", set1totalTaxAmt, set1totalPriceAfterTax);
+            this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set2totalproductPrice, set2totalDAP, "28%", set2totalTaxAmt, set2totalPriceAfterTax);
+            document.add(finalTable);
         }
-        document.add(gstTable);
-        float[] gsttotalcolumnWidths1 = {1,1,1,1,1,1,1};
-        PdfPTable gsttotalTable=new PdfPTable(gsttotalcolumnWidths1);
-        gsttotalTable.setWidthPercentage(100);
-        this.createRowAndFillDataForGSTtotal(gsttotalTable,"Total",totalproductPrice,totalDAP,totalTaxAmt,String.valueOf(round(totalPriceAfterTax,2)));
-        document.add(gsttotalTable);
-
-        p=new Paragraph("\nQuotation Summary",fsize1);
-        document.add(p);
-
-        p=new Paragraph(" ");
-        document.add(p);
-
-        float[] gstfinalcolumnWidths1 = {1,4,1,1,1,1,1};
-        PdfPTable finalTable=new PdfPTable(gstfinalcolumnWidths1);
-        finalTable.setWidthPercentage(100);
-                    PdfPCell gstfinalCell1 = new PdfPCell(new Paragraph("SI",fsize1));
-                    PdfPCell gstfinalCell2 = new PdfPCell(new Paragraph("Title",fsize1));
-                    PdfPCell gstfinalCell3 = new PdfPCell(new Paragraph("Products Price",fsize1));
-                    PdfPCell gstfinalCell4 = new PdfPCell(new Paragraph("Design Adjusted Price",fsize1));
-                    PdfPCell gstfinalCell5 = new PdfPCell(new Paragraph("TAX %",fsize1));
-                    PdfPCell gstfinalCell7 = new PdfPCell(new Paragraph("TAX Amount",fsize1));
-                    PdfPCell gstfinalCell6 = new PdfPCell(new Paragraph("Price After Tax",fsize1));
-                    //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
-                    finalTable.addCell(gstfinalCell1);
-                    finalTable.addCell(gstfinalCell2);
-                    finalTable.addCell(gstfinalCell3);
-                    finalTable.addCell(gstfinalCell4);
-                    finalTable.addCell(gstfinalCell5);
-                    finalTable.addCell(gstfinalCell7);
-                    finalTable.addCell(gstfinalCell6);
-        this.createRowAndFillDataForGSTforFinal(finalTable,"Sum of Products and Service Billed @" ,set1totalproductPrice,set1totalDAP,"18%",set1totalTaxAmt,set1totalPriceAfterTax);
-        this.createRowAndFillDataForGSTforFinal(finalTable,"Sum of Products and Service Billed @" ,set2totalproductPrice,set2totalDAP,"28%",set2totalTaxAmt,set2totalPriceAfterTax);
-        document.add(finalTable);
-
         document.close();
         }
         catch(Exception e)
