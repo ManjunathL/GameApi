@@ -15,6 +15,10 @@
     "password": "6npp!_mb6npp!_mb",
     "pool_Name":"ods"
   }],
+  "SENDGRID_KEY":"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",
+  "FROM_EMAIL":"game@mygubbi.com",
+  "App_url_for_proposal":"http://gameuat.mygubbi.com:8080/#!New%20Quotation/",
+  "sendEmail":"Yes",
   "urlwithssl": "",
   "ssl_keystore": "ssl/mygubbiprod.jks",
   "ssl_password": "0r@nge123$",

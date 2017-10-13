@@ -31,6 +31,7 @@
   "SENDGRID_KEY":"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",
   "FROM_EMAIL":"game@mygubbi.com",
   "App_url_for_proposal":"http://192.168.104.156:8080/#!New%20Quotation/",
+  "sendEmail":"Yes",
   "http_port" : 1445,
   "https_port" : 1446,
   "proposal_docs_folder" : "/home/shilpa/mygubbi_files",

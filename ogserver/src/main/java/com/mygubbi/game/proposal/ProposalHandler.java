@@ -410,7 +410,10 @@ public class ProposalHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                        sendEmails(routingContext);
+                        String sendEmails =  ConfigHolder.getInstance().getStringValue("sendEmail","No");
+                       if(sendEmails.equalsIgnoreCase("yes")) {
+                           sendEmails(routingContext);
+                       }
                         sendJsonResponse(routingContext, proposalData.toString());
                     }
                 });
