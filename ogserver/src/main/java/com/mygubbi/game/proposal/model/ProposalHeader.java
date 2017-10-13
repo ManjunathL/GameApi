@@ -33,6 +33,7 @@ public class ProposalHeader extends JsonObject
     public static final String QUOTENO="quoteNo";
     public static final String CID="customerId";
     public static final String SALESPHONE="salesPhone";
+    public static final String DESIGNEREMAIL="designerEmail";
     public static final String SALESEMAIL="salesEmail";
     public static final String QUOTE_NO_NEW="quoteNoNew";
     public static final String PRICE_DATE="priceDate";
@@ -67,6 +68,7 @@ public class ProposalHeader extends JsonObject
     {
         return this.getString(DESIGN_PARTNER_NAME);
     }
+    public String getDesignerEmail() {   return this.getString(DESIGNEREMAIL); }
     public String getSalesEmail()
     {
         return this.getString(SALESEMAIL);

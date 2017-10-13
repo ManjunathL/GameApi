@@ -12,6 +12,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.handler.UserSessionHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,6 +48,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, OldToNewFinishMapping> oldnewfinishMap = Collections.EMPTY_MAP;
     private Multimap<String, ColorMaster> colorMap;
     private Map<String, ERPMaster> erpMasterMap = Collections.EMPTY_MAP;
+    private Multimap<String,UsersForEmail> usersForEmailMap;
 
 
 	public static ModuleDataService getInstance()
@@ -77,6 +79,7 @@ public class ModuleDataService extends AbstractVerticle
        this.cacheSowMasterData();
        this.cacheOldNewFinishMappingData();
        this.cacheColours();
+       this.cacheUsersData();
 	}
 
     private void cacheAccessories()
@@ -137,6 +140,29 @@ public class ModuleDataService extends AbstractVerticle
                 });
     }
 
+    private void cacheUsersData(){
+	    LOG.info("Inside cacheUsersData");
+	    this.usersForEmailMap = ArrayListMultimap.create();
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("game.user.select.allForEmail", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    LOG.info("selectData inside cacheUsersData = "+selectData);
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Users For Email is empty.", false);
+                    }
+                    else
+                    {
+                        for (JsonObject record : selectData.rows)
+                        {
+                            UsersForEmail usersEmail = new UsersForEmail(record);
+                            this.usersForEmailMap.put(usersEmail.getRoleForEmail(), usersEmail);
+                        }
+
+                        markResult("Users For Email Loaded.", true);
+                    }
+                });
+    }
     private void cacheModuleComponents()
     {
         this.moduleComponentsMap = ArrayListMultimap.create();
@@ -621,6 +647,8 @@ public class ModuleDataService extends AbstractVerticle
     {
         return this.oldnewfinishMap.get(code);
     }
+
+    public Collection<UsersForEmail> getUserForEmail(String roleForEmail) {return this.usersForEmailMap.get(roleForEmail);}
 
     public void setMapping(ProductModule module, ProductLineItem  productLineItem)
     {

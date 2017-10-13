@@ -805,6 +805,13 @@
       "params": []
     },
     {
+      "id": "game.user.select.allForEmail",
+      "type": "select",
+      "table": "game_user",
+      "query": "select name,email,roleForEmail,region from game_user where isSendEmail = 'Yes' and roleForEmail != 'null' ",
+      "params": []
+    },
+    {
       "id": "module.carcass.cost",
       "type": "select",
       "table": "module_components",
@@ -1349,7 +1356,6 @@
       "query": "select * from proposal_product",
       "params": []
     },
-
 
     //Product Library
     {

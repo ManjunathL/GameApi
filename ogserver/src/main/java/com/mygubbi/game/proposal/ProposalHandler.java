@@ -11,9 +11,7 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.erp.BOQHandler;
 import com.mygubbi.game.proposal.erp.BoqCreatorService;
-import com.mygubbi.game.proposal.model.PriceMaster;
-import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.model.SOWMaster;
+import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
 import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
@@ -29,11 +27,15 @@ import com.mygubbi.report.DwReportingService;
 import com.mygubbi.report.ReportTableFillerSevice;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.game.proposal.output.SOWPdfOutputService;
+import com.mygubbi.si.email.EmailData;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
+import com.sendgrid.SendGrid;
+import com.sendgrid.SendGridException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -72,6 +74,9 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
         this.post("/version/createversion").handler(this::createProposalVersion);
         this.post("/version/copyversion").handler(this::copyVersion);
+        this.post("/version/confirm").handler(this::confirmVersion);
+        this.post("/version/designsignoff").handler(this::dsoVersion);
+        this.post("/version/productionsignoff").handler(this::psoVersion);
         this.post("/update").handler(this::updateProposal);
         this.post("/updateonconfirm").handler(this::updateProposalOnConfirm);
         this.post("/downloadquote").handler(this::downloadQuote);
@@ -346,9 +351,281 @@ public class ProposalHandler extends AbstractRouteHandler
         this.updateProposal(routingContext, proposalData, "proposal.update");
     }
 
+    private void dsoVersion(RoutingContext routingContext){
+        LOG.info("DSO HERE Shilpa");
+        String queryId = "version.designsignoff";
+        JsonObject proposalData = routingContext.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in updating version.");
+                        LOG.error("Error in updating version. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendEmails(routingContext);
+                        sendJsonResponse(routingContext, proposalData.toString());
+                    }
+                });
+    }
+
+    private void psoVersion(RoutingContext routingContext){
+        LOG.info("PSO HERE Shilpa");
+        String queryId = "version.productionsignoff";
+        JsonObject proposalData = routingContext.getBodyAsJson();
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in updating version.");
+                        LOG.error("Error in updating version. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendEmails(routingContext);
+                        sendJsonResponse(routingContext, proposalData.toString());
+                    }
+                });
+    }
+
+    private void confirmVersion(RoutingContext routingContext)
+    {
+        LOG.info("Confirming HERE Shilpa");
+        String queryId = "version.confirm";
+        JsonObject proposalData = routingContext.getBodyAsJson();
+        LOG.info("proposalData = "+proposalData);
+        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in updating version.");
+                        LOG.error("Error in updating version. " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        sendEmails(routingContext);
+                        sendJsonResponse(routingContext, proposalData.toString());
+                    }
+                });
+    }
+
+    private void sendEmails(RoutingContext context){
+        JsonObject contextJson = context.getBodyAsJson();
+        LOG.info("contextJson = "+contextJson);
+        JsonObject paramsForEmail = new JsonObject();
+        Integer proposalId = contextJson.getInteger("proposalId");
+        String toVersion = contextJson.getDouble("version")+"";
+        paramsForEmail.put("fromEmail",ConfigHolder.getInstance().getStringValue("FROM_EMAIL","game@mygubbi.com"));
+
+        LOG.info("toVersion = "+toVersion);
+        if(toVersion.equals("1.0")){
+//            Send a mail to Sales, Design, Design Head and Region Head
+            paramsForEmail.put("subject","Booking confirmation is done");
+            paramsForEmail.put("subjectTemplate","email/confirmation.1_0.subject.vm");
+            paramsForEmail.put("bodyTemplate", "email/confirmation.1_0.body.vm");
+            getVersionRecord(paramsForEmail,proposalId,toVersion);
+            //fill to emails and params object properly from database
+
+        }else if(toVersion.equals("2.0")){
+            paramsForEmail.put("subject","Booking confirmation is done");
+            paramsForEmail.put("subjectTemplate","email/confirmation.2_0.subject.vm");
+            paramsForEmail.put("bodyTemplate", "email/confirmation.2_0.body.vm");
+            getVersionRecord(paramsForEmail,proposalId,toVersion);
+//send a mail to Finance team (Jyoti, Sudarshan) and  Planning team (Suresh, Prabhu)
+        }else if(toVersion.equals("3.0")){
+            paramsForEmail.put("subject","Booking confirmation is done");
+            paramsForEmail.put("subjectTemplate","email/confirmation.3_0.subject.vm");
+            paramsForEmail.put("bodyTemplate", "email/confirmation.3_0.body.vm");
+            getVersionRecord(paramsForEmail,proposalId,toVersion);
+//send a mail to Design team(Indicating that Design is frozen and Production starting), Purchase team, Factory team
+        }else{
+            LOG.error("Invalid toVersion");
+        }
+    }
+
+    private void getVersionRecord(JsonObject paramsForEmail,Integer proposalId,String toVersion){
+        JsonObject params = new JsonObject();
+        params.put("proposalId",proposalId);
+        params.put("version",toVersion);
+        Integer id = LocalCache.getInstance().store(new QueryData("version.getversiondetails",params));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty()) {
+                        LOG.error("Proposal not found for id:" + proposalId);
+                    } else {
+                        ProposalVersion proposalVer = new ProposalVersion(resultData.rows.get(0));
+                        getProposalHeaderAndCallSendEmail(proposalVer,paramsForEmail,proposalId,toVersion);
+                    }
+                });
+    }
+
+    private void getProposalHeaderAndCallSendEmail(ProposalVersion proposalVersion,JsonObject paramsForEmail,Integer proposalId,String toVersion ) {
+        Vector<String> emailIds = new Vector<String>();
+        JsonObject bodyDetails = new JsonObject();
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id", proposalId)));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty()) {
+                        LOG.error("Proposal not found for id:" + proposalId);
+                    } else {
+                        ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
+                        String projectCity = proposalHeader.getProjectCity();
+                        if(toVersion.equalsIgnoreCase("1.0")){
+                            emailIds.add(proposalHeader.getDesignerEmail()); //designer
+                            emailIds.add(proposalHeader.getSalesEmail()); //sales person
+
+                            Collection<UsersForEmail> designHeads = ModuleDataService.getInstance().getUserForEmail("designHead");
+                            designHeads.forEach(dhead -> {
+                                emailIds.add(dhead.getEmail()); //design head
+                            });
+                            Collection<UsersForEmail> regionalHeads = ModuleDataService.getInstance().getUserForEmail("regionHead");
+                            regionalHeads.forEach(rhead -> {
+                                if (rhead.getRegion().contains(projectCity)) {
+                                    emailIds.add(rhead.getEmail());//regional head
+                                }
+                            });
+                            Collection<UsersForEmail> financeTeam = ModuleDataService.getInstance().getUserForEmail("finance");
+                            financeTeam.forEach(finace -> {
+                                emailIds.add(finace.getEmail());//finance
+                            });
+                        }else if(toVersion.equalsIgnoreCase("2.0")){
+                            emailIds.add(proposalHeader.getDesignerEmail()); //designer
+                            emailIds.add(proposalHeader.getSalesEmail()); //sales person
+
+                            Collection<UsersForEmail> designHeads = ModuleDataService.getInstance().getUserForEmail("designHead");
+                            designHeads.forEach(dhead -> {
+                                emailIds.add(dhead.getEmail()); //design head
+                            });
+
+                            Collection<UsersForEmail> regionalHeads = ModuleDataService.getInstance().getUserForEmail("regionHead");
+                            regionalHeads.forEach(rhead -> {
+                                if (rhead.getRegion().contains(projectCity)) {
+                                    emailIds.add(rhead.getEmail());//regional head
+                                }
+                            });
+
+                            Collection<UsersForEmail> financeTeam = ModuleDataService.getInstance().getUserForEmail("finance");
+                            financeTeam.forEach(finace -> {
+                                emailIds.add(finace.getEmail());//finance
+                            });
+
+                            Collection<UsersForEmail> planningTeam = ModuleDataService.getInstance().getUserForEmail("planning");
+                            planningTeam.forEach(planning -> {
+                                emailIds.add(planning.getEmail());//planning
+                            });
+
+                            Collection<UsersForEmail> operationsHead = ModuleDataService.getInstance().getUserForEmail("operationsHead");
+                            operationsHead.forEach(opHead -> {
+                                emailIds.add(opHead.getEmail());//operations Head
+                            });
+                        }else if(toVersion.equalsIgnoreCase("3.0")){
+                            emailIds.add(proposalHeader.getDesignerEmail()); //designer
+
+                            Collection<UsersForEmail> designHeads = ModuleDataService.getInstance().getUserForEmail("designHead");
+                            designHeads.forEach(dhead -> {
+                                emailIds.add(dhead.getEmail()); //design head
+                            });
+
+                            Collection<UsersForEmail> planningTeam = ModuleDataService.getInstance().getUserForEmail("planning");
+                            planningTeam.forEach(planning -> {
+                                emailIds.add(planning.getEmail());//planning
+                            });
+
+                            Collection<UsersForEmail> purchase = ModuleDataService.getInstance().getUserForEmail("purchaseHead");
+                            purchase.forEach(purTeam -> {
+                                emailIds.add(purTeam.getEmail());//purchase
+                            });
+
+                            Collection<UsersForEmail> factoryTeam = ModuleDataService.getInstance().getUserForEmail("factoryHead");
+                            factoryTeam.forEach(factory -> {
+                                emailIds.add(factory.getEmail());//factory team
+                            });
+
+                            Collection<UsersForEmail> operationsHead = ModuleDataService.getInstance().getUserForEmail("operationsHead");
+                            operationsHead.forEach(opHead -> {
+                                emailIds.add(opHead.getEmail());//operations Head
+                            });
+
+                            Collection<UsersForEmail> crmTeam = ModuleDataService.getInstance().getUserForEmail("crm");
+                            crmTeam.forEach(crm -> {
+                                emailIds.add(crm.getEmail());//crm team
+                            });
+
+                        }
+                        bodyDetails.put("clientName",proposalHeader.getName());
+                        bodyDetails.put("opportunityId",proposalHeader.getCrmId());
+                        bodyDetails.put("quoteNo",proposalHeader.getQuoteNumNew());
+                        bodyDetails.put("price",proposalVersion.getAmount());
+                        bodyDetails.put("priceAfterDiscount",proposalVersion.getFinalAmount());
+                        bodyDetails.put("discountAmountPerc",proposalVersion.getDiscountPercentage());
+                        String url = ConfigHolder.getInstance().getStringValue("App_url_for_proposal","https://game.mygubbi.com/#!New%20Quotation/");
+                        bodyDetails.put("url",url+proposalId);
+
+                        StringBuilder sb = new StringBuilder();
+                        for(int i=0;i<emailIds.size();i++){
+                            sb.append(emailIds.get(i));
+                            if(i+1 != emailIds.size()){
+                                sb.append(",");
+                            }
+                        }
+                        paramsForEmail.put("toEmails",sb.toString());
+                        paramsForEmail.put("paramsObj",bodyDetails);
+
+                        sendEmailToOnConfirm(paramsForEmail);
+                    }
+                });
+
+    }
+    private void sendEmailToOnConfirm(JsonObject emailParams){
+
+        String fromEmail = emailParams.getString("fromEmail");
+        String[] toemails = emailParams.getString("toEmails").split(",");
+        JsonObject params = emailParams.getJsonObject("paramsObj");
+        String subject = emailParams.getString("subject");
+        String subjectTemplate = emailParams.getString("subjectTemplate");
+        String bodyTemplate = emailParams.getString("bodyTemplate");
+
+        String sendGridApiKey = ConfigHolder.getInstance().getStringValue("SENDGRID_KEY","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");
+        EmailData emailData = new EmailData().setFromEmail(fromEmail).setToEmails(toemails)
+                .setHtmlBody(true).setParams(params.getMap())
+                .setSubject(subject).setBodyTemplate(bodyTemplate)
+                .setSubjectTemplate(subjectTemplate);
+
+        SendGrid sendgrid = new SendGrid(sendGridApiKey);
+        SendGrid.Email email = new SendGrid.Email();
+        email.addTo(emailData.getToEmails());
+        email.setFrom(emailData.getFromEmail());
+        email.setSubject(emailData.getSubject());
+        email.setHtml(emailData.getMessageBody());
+        email.setText("Trying again ...");
+
+        LOG.info("Email is :: "+emailData.toString());
+
+        try
+        {
+            SendGrid.Response response = sendgrid.send(email);
+            LOG.info("Message sent status: " + response.getMessage());
+        }
+        catch (SendGridException e)
+        {
+            LOG.error("Error in sending email.", e);
+        }
+    }
     private void updateProposalOnConfirm(RoutingContext routingContext)
     {
+
         JsonObject proposalData = routingContext.getBodyAsJson();
+        //send Emai and then publish
+//        sendemailAndUpdateProposal(routingContext);
         LOG.info("Proposal:" + proposalData.encodePrettily());
         this.updateProposal(routingContext, proposalData, "proposal.update.onconfirm");
     }
