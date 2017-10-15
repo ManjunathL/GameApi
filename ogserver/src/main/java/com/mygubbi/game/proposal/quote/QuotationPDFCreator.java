@@ -1047,6 +1047,15 @@ public class QuotationPDFCreator
             this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set1totalproductPrice, set1totalDAP, "18%", set1totalTaxAmt, set1totalPriceAfterTax);
             this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set2totalproductPrice, set2totalDAP, "28%", set2totalTaxAmt, set2totalPriceAfterTax);
             document.add(finalTable);
+
+            float[] gtcolumnWidths1 = {1, 1, 1, 1, 1, 1};
+            PdfPTable gstTable1 = new PdfPTable(gtcolumnWidths1);
+            gstTable1.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotal(gstTable1, "Total", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
+            document.add(gstTable1);
+
+            document.add(gsttotalTable);
+
         }
         document.close();
         }
@@ -2247,13 +2256,13 @@ public class QuotationPDFCreator
         if(productType.equals("MF"))
         {
             title="Movable Furniture";
-            tax="18%";
+            tax="28%";
 
         }
         else if(productType.equals("NMF"))
         {
             title="Non Movable Furniture";
-            tax="28%";
+            tax="18%";
         }else if(productType.equals("SCW"))
         {
             title="SCW";
