@@ -75,8 +75,8 @@
       "id": "proposal.detail.bycrmid",
       "type": "select",
       "table": "proposal",
-      "query": "SELECT * FROM proposal where crmId = ? ORDER BY createdOn DESC LIMIT 1",
-      "params": ["quoteNo"]
+      "query": "SELECT * FROM proposal where crmId = ? ORDER BY createdOn",
+      "params": ["crmId"]
     },
 
     {
@@ -2066,6 +2066,25 @@
       "table": "proposal",
       "query": "update proposal set boqDriveLink = ?, boqStatus = ? where id = ?",
       "params": ["driveWebViewLink","boqStatus","proposalId"],
+      "jsonfields":[]
+    },
+
+    //CRM related queries
+
+    {
+      "id": "proposal.product.scopeofwork",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product p inner join ( select max(version) as version,proposalId from version_master v where status in ('Confirmed','DSO','PSO','Published') and proposalId in (select id from proposal p where crmId = ?) group by proposalId order by version asc) q on p.proposalId = q.proposalId and p.fromVersion = q.version ",
+      "params": ["crmId"],
+      "jsonfields":["modules","addons"]
+    },
+    {
+      "id": "proposal.addon.scopeofwork",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": " select * from proposal_addon p inner join ( select max(version) as version,proposalId from version_master v where status in ('Confirmed','DSO','PSO','Published')and proposalId in (select id from proposal p where crmId = ?) group by proposalId order by version asc) q on p.proposalId = q.proposalId and p.fromVersion = q.version ",
+      "params": ["crmId"],
       "jsonfields":[]
     }
 

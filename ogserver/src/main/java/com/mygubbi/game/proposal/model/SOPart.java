@@ -10,13 +10,15 @@ public class SOPart {
     private String uom ;
     private String title;
     private double qty;
+    private double displayOrder;
 
-    public SOPart(String erpCode, String referencePartNo, String uom, String title, double qty) {
+    public SOPart(String erpCode, String referencePartNo, String uom, String title, double qty, double displayOrder) {
         this.erpCode = erpCode;
         this.referencePartNo = referencePartNo;
         this.uom = uom;
         this.title = title;
         this.qty = qty;
+        this.displayOrder = displayOrder;
     }
 
     public String getErpCode() {
@@ -59,6 +61,14 @@ public class SOPart {
         this.qty = qty;
     }
 
+    public double getDisplayOrder() {
+        return displayOrder;
+    }
+
+    public void setDisplayOrder(double displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +76,7 @@ public class SOPart {
 
         SOPart soPart = (SOPart) o;
 
+        if (Double.compare(soPart.displayOrder, displayOrder) != 0) return false;
         if (erpCode != null ? !erpCode.equals(soPart.erpCode) : soPart.erpCode != null) return false;
         if (referencePartNo != null ? !referencePartNo.equals(soPart.referencePartNo) : soPart.referencePartNo != null)
             return false;
@@ -76,17 +87,20 @@ public class SOPart {
 
     @Override
     public int hashCode() {
-        int result = erpCode != null ? erpCode.hashCode() : 0;
+        int result;
+        long temp;
+        result = erpCode != null ? erpCode.hashCode() : 0;
         result = 31 * result + (referencePartNo != null ? referencePartNo.hashCode() : 0);
         result = 31 * result + (uom != null ? uom.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
+        temp = Double.doubleToLongBits(displayOrder);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 
-
     public SOPart merge(SOPart other) {
         assert(this.equals(other));
-        return new SOPart(this.erpCode, this.referencePartNo, this.uom, this.title, this.qty + other.qty);
+        return new SOPart(this.erpCode, this.referencePartNo, this.uom, this.title, this.qty + other.qty, this.displayOrder);
     }
 
     @Override
@@ -96,6 +110,7 @@ public class SOPart {
                 ", referencePartNo='" + referencePartNo + '\'' +
                 ", uom='" + uom + '\'' +
                 ", title='" + title + '\'' +
+                ", displayOrder='" + displayOrder + '\'' +
                 ", qty=" + qty +
                 '}';
     }
