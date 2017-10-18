@@ -1160,12 +1160,14 @@ public class QuotationPDFCreator
                         unit.moduleCategory.contains("S - Wardrobe Panels") ||
                         unit.moduleCategory.contains("S - Bathroom Vanity") ||
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
+                        unit.moduleCategory.contains("S - Kitchen Wall Sliding Units") ||
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2400") )
                 {
                     if(     unit.moduleCategory.contains("N - Base Units") ||
                             unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
                             unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
                             unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
+                            unit.moduleCategory.contains("S - Kitchen Wall Sliding Units") ||
                             unit.moduleCategory.contains("S - Storage Module Base Unit")) {
 
                         //LOG.info("Module count " +unit.moduleCount);
@@ -1178,6 +1180,7 @@ public class QuotationPDFCreator
                                 unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
                                 unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
                                 unit.moduleCategory.contains("S - Storage Module Base Unit") ||
+                                unit.moduleCategory.contains("S - Kitchen Wall Sliding Units") ||
                                 unit.moduleCategory.contains("Base unit") )
                         {
                             kbwidthSum = kbwidthSum + unit.getWidth();
