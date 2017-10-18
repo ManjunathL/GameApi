@@ -41,6 +41,10 @@
   "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
   "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
   "sow_template" : "c:/Users/Public/game_files/sow_template.xlsx",
+  "boq_template" : "c:/Users/Public/game_files/boq_template.xlsx",
+  "so_template" : "c:/Users/Public/game_files/so-template.xlsx",
+  "so_addon_template" : "c:/Users/Public/game_files/so_addon_template.xlsx",
+  "boq_dir" : "c:/Users/Public/game_files",
   "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
   "ratecard_file": "d:/tmp/ratecard.bin",
   "sow_downloaded_xls_format":"sow.xlsx",
@@ -68,6 +72,7 @@
   "driveAppName" : "GAME Drive App",
   "driveCredentials" : "/game/gamedrive.json",
   "localDriveFolder" : "E:/data/gdrive/"
+
 
 
 }
