@@ -697,8 +697,8 @@ public class DWModuleComponent extends JsonObject {
                 }
             }
         } else {
+            dwModuleComponent.setComponentType(PanelComponent.CARCASS_TYPE);
             if ("Standard".equals(moduleType)) {
-                dwModuleComponent.setComponentType(PanelComponent.CARCASS_TYPE);
                 if (Objects.equals(WARDROBE, productModule.getProductCategory()) || Objects.equals("W", productModule.getProductCategory())) {
                     panelPrice = (panelComponent.getCost() * rate);
                     panelCost = (panelComponent.getCost() / stdSourceRate);
