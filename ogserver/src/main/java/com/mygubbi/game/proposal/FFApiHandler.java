@@ -90,7 +90,7 @@ public class FFApiHandler extends AbstractRouteHandler {
 
         for (ProductLineItem productLineItem : productLineItems)
         {
-            listOfServices.add(new JsonObject().put("room",productLineItem.getRoomCode()).put("type",PRODUCT).put("title",productLineItem.getTitle()));
+            listOfServices.add(new JsonObject().put("room",productLineItem.getRoomCode()).put("type",PRODUCT).put("title",productLineItem.getTitle() + " : " + productLineItem.getRoomCode()));
         }
 
         for (ProductAddon productAddon : productAddons)
