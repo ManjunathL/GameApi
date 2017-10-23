@@ -169,7 +169,7 @@ public class SOCreatorService extends AbstractVerticle {
             LOG.debug("Proposal boq per product size : " + proposalBoqAsPerProduct.size() + " : " + proposalBoqAsPerProduct.get(0).getProductId());
 
             for (ProposalBOQ proposalBOQ : proposalBoqAsPerProduct) {
-                SOPart soPart = new SOPart(proposalBOQ.getPlannerErpItemCode(), proposalBOQ.getPlannerReferencePartNo(), proposalBOQ.getPlannerUom(), proposalBOQ.getPlannerDescription(), proposalBOQ.getPlannerQty());
+                SOPart soPart = new SOPart(proposalBOQ.getPlannerErpItemCode(), proposalBOQ.getPlannerReferencePartNo(), proposalBOQ.getPlannerUom(), proposalBOQ.getPlannerDescription(), proposalBOQ.getPlannerQty(),proposalBOQ.getDsoItemSeq());
                 soPartsList.add(soPart);
             }
 

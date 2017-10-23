@@ -71,6 +71,13 @@
       "query": "select * from proposal where id = ?",
       "params": ["id"]
     },
+    {
+      "id": "proposal.detail.bycrmid",
+      "type": "select",
+      "table": "proposal",
+      "query": "SELECT * FROM proposal where crmId = ? ORDER BY createdOn",
+      "params": ["crmId"]
+    },
 
     {
       "id": "proposal.create",
@@ -109,6 +116,13 @@
       "type": "select",
       "table": "version_master",
       "query": "select * from version_master where proposalId = ?",
+      "params": ["id"]
+    },
+    {
+      "id": "proposal.version.recentpublishedversion",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master where proposalId = ? and status in ('Confirmed','DSO','PSO','Published') order by businessDate DESC LIMIT 1",
       "params": ["id"]
     },
      {
@@ -489,7 +503,7 @@
       "id": "module.select.all",
       "type": "select",
       "table": "module_master",
-      "query": "select code, width, depth, height, description, imagePath, moduleType, moduleCategory, productCategory, material, unitType, accessoryPackDefault, remarks, handleMandatory, knobMandatory, hingeMandatory, sqftCalculation from module_master",
+      "query": "select code, width, depth, height, description, imagePath, moduleType, moduleCategory, productCategory, material, unitType, accessoryPackDefault, remarks, handleMandatory, knobMandatory, hingeMandatory, sqftCalculation,glassMandatory from module_master",
       "params": []
     },
 
@@ -882,6 +896,14 @@
       "type": "select",
       "table": "acc_hw_master",
       "query": "select code, title, catalogCode, make, imagePath, msp as price, uom,category,ERPCode,boqDisplayOrder from acc_hw_master where type = 'H'",
+      "params": []
+    },
+
+    {
+      "id": "product.categorymap.select.all",
+      "type": "select",
+      "table": "product_category_map",
+      "query": "select * from product_category_map",
       "params": []
     },
 
@@ -1848,8 +1870,8 @@
       "id": "dw_product_module.insert",
       "type": "insert",
       "table": "dw_product_module",
-      "query": "insert into dw_product_module (proposalId, version, proposalTitle, priceDate, businessDate, region,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag, spaceType, room, prId, prTitle,prCategoryCode, moduleSeq, moduleCode, description, status,discountAmount,discountPercentage,width, depth, height, moduleCategory, handleSize, handleQty, carcass, finish, finishMaterial, color, exposedLeft, exposedRight, exposedBottom, exposedTop, exposedBack, exposedOpen, noOfAccPacks, moduleArea, ccPrice, ccWoTax, ccCost, ccProfit, ccMargin, shPrice, shWoTax, shCost, shProfit, shMargin, hwPrice, hwWoTax, hwCost, hwProfit, hwMargin, accPrice, accWoTax, accCost, accProfit, accMargin, handlePrice, handleWoTax, handleCost, handleProfit, handleMargin, hingePrice, hingeWoTax, hingeCost, hingeProfit, hingeMargin, lrPrice, lrWoTax, lrCost, lrProfit, lrMargin, modulePrice, moduleWoTax, moduleCost, moduleProfit, moduleMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","crmId","quoteNo","designerName","salesName","source","fromProduct","beforeProductionSpecification","fromProposal","offerType","packageFlag","spaceType","room","prId","prTitle","prCategoryCode","moduleSeq","moduleCode","description","status","discountAmount","discountPercentage","width","depth","height","moduleCategory","handleSize","handleQty","carcass","finish","finishMaterial","color","exposedLeft","exposedRight","exposedBottom","exposedTop","exposedBack","exposedOpen","noOfAccPacks","moduleArea","ccPrice","ccWoTax","ccCost","ccProfit","ccMargin","shPrice","shWoTax","shCost","shProfit","shMargin","hwPrice","hwWoTax","hwCost","hwProfit","hwMargin","accPrice","accWoTax","accCost","accProfit","accMargin","handlePrice","handleWoTax","handleCost","handleProfit","handleMargin","hingePrice","hingeWoTax","hingeCost","hingeProfit","hingeMargin","lrPrice","lrWoTax","lrCost","lrProfit","lrMargin","modulePrice","moduleWoTax","moduleCost","moduleProfit","moduleMargin"],
+      "query": "insert into dw_product_module (proposalId, version, proposalTitle, priceDate, businessDate, region,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag, spaceType, room, prId, prTitle,prCategoryCode, moduleSeq, moduleCode, description, status,discountAmount,discountPercentage,width, depth, height, moduleCategory, handleSize, handleQty, carcass, finish, finishMaterial, color, exposedLeft, exposedRight, exposedBottom, exposedTop, exposedBack, exposedOpen, noOfAccPacks, moduleArea, ccPrice, ccWoTax, ccCost, ccProfit, ccMargin, shPrice, shWoTax, shCost, shProfit, shMargin, hwPrice, hwWoTax, hwCost, hwProfit, hwMargin, accPrice, accWoTax, accCost, accProfit, accMargin, handlePrice, handleWoTax, handleCost, handleProfit, handleMargin, hingePrice, hingeWoTax, hingeCost, hingeProfit, hingeMargin, lrPrice, lrWoTax, lrCost, lrProfit, lrMargin, modulePrice, moduleWoTax, moduleCost, moduleProfit, moduleMargin, knobType, knobFinish, handleType, handleFinish, knobQty, handleTypeSelection) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","crmId","quoteNo","designerName","salesName","source","fromProduct","beforeProductionSpecification","fromProposal","offerType","packageFlag","spaceType","room","prId","prTitle","prCategoryCode","moduleSeq","moduleCode","description","status","discountAmount","discountPercentage","width","depth","height","moduleCategory","handleSize","handleQty","carcass","finish","finishMaterial","color","exposedLeft","exposedRight","exposedBottom","exposedTop","exposedBack","exposedOpen","noOfAccPacks","moduleArea","ccPrice","ccWoTax","ccCost","ccProfit","ccMargin","shPrice","shWoTax","shCost","shProfit","shMargin","hwPrice","hwWoTax","hwCost","hwProfit","hwMargin","accPrice","accWoTax","accCost","accProfit","accMargin","handlePrice","handleWoTax","handleCost","handleProfit","handleMargin","hingePrice","hingeWoTax","hingeCost","hingeProfit","hingeMargin","lrPrice","lrWoTax","lrCost","lrProfit","lrMargin","modulePrice","moduleWoTax","moduleCost","moduleProfit","moduleMargin","knobType", "knobFinish", "handleType", "handleFinish", "knobQty", "handleTypeSelection"],
       "jsonfields":[]
     },
 
@@ -1881,8 +1903,8 @@
       "id": "dw_proposal_product.insert",
       "type": "insert",
       "table": "dw_proposal_product",
-      "query": "insert into dw_proposal_product(proposalId, version, proposalTitle, priceDate, businessDate, region,status,discountAmount,discountPercentage,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag,category, subCategory, prId, prTitle, spaceType, room, baseCarcass, wallCarcass, finishMaterial, finish, shutterDesign, hinge, glass, handleSelection, noOfLengths, handleType, handleFinish, handleSize, knobType, knobFinish, prArea, prCreatedBy, prCreatedOn, prUpdatedBy, prUpdatedOn, prPrice, prPriceAfterDiscount, prPriceAfterTax, prCost, prProfit, prMargin, wwPrice, wwPriceAfterTax, wwCost, wwProfit, wwMargin, hwPrice, hwPriceAfterTax, hwCost, hwProfit, hwMargin, accPrice, accPriceAfterTax, accCost, accProfit, accMargin, laPrice, laPriceAfterTax, laCost, laProfit, laMargin, hkPrice, hkPriceAfterTax, hkCost, hkProfit, hkMargin, hingePrice, hingePriceAfterTax, hingeCost, hingeProfit, hingeMargin, lcPrice, lcPriceAfterTax, lcCost, lcProfit, lcMargin, installationCost, transportationCost, stdModuleCount, stdMPrice, nStdModuleCount, nStdMPrice, hikeModuleCount, hikeMPrice,hikeMCost) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","status","discountAmount","discountPercentage","crmId","quoteNo","designerName","salesName","source","fromProduct","beforeProductionSpecification","fromProposal","offerType","packageFlag","category","subCategory","prId","prTitle","spaceType","room","baseCarcass","wallCarcass","finishMaterial","finish","shutterDesign","hinge","glass","handleSelection","noOfLengths","handleType","handleFinish","handleSize","knobType","knobFinish","prArea","prCreatedBy","prCreatedOn","prUpdatedBy","prUpdatedOn","prPrice","prPriceAfterDiscount","prPriceAfterTax","prCost","prProfit","prMargin","wwPrice","wwPriceAfterTax","wwCost","wwProfit","wwMargin","hwPrice","hwPriceAfterTax","hwCost","hwProfit","hwMargin","accPrice","accPriceAfterTax","accCost","accProfit","accMargin","laPrice","laPriceAfterTax","laCost","laProfit","laMargin","hkPrice","hkPriceAfterTax","hkCost","hkProfit","hkMargin","hingePrice","hingePriceAfterTax","hingeCost","hingeProfit","hingeMargin","lcPrice","lcPriceAfterTax","lcCost","lcProfit","lcMargin","installationCost","transportationCost","stdModuleCount","stdMPrice","nStdModuleCount","nStdMPrice","hikeModuleCount","hikeMPrice","hikeMCost"],
+      "query": "insert into dw_proposal_product(proposalId, version, proposalTitle, priceDate, businessDate, region,status,discountAmount,discountPercentage,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag,category, subCategory, prId, prTitle, spaceType, room, baseCarcass, wallCarcass, finishMaterial, finish, shutterDesign, hinge, glass, handleSelection, noOfLengths, handleType, handleFinish, handleSize, knobType, knobFinish, prArea, prCreatedBy, prCreatedOn, prUpdatedBy, prUpdatedOn, prPrice, prPriceAfterDiscount, prPriceAfterTax, prCost, prProfit, prMargin, wwPrice, wwPriceAfterTax, wwCost, wwProfit, wwMargin, hwPrice, hwPriceAfterTax, hwCost, hwProfit, hwMargin, accPrice, accPriceAfterTax, accCost, accProfit, accMargin, laPrice, laPriceAfterTax, laCost, laProfit, laMargin, hkPrice, hkPriceAfterTax, hkCost, hkProfit, hkMargin, hingePrice, hingePriceAfterTax, hingeCost, hingeProfit, hingeMargin, lcPrice, lcPriceAfterTax, lcCost, lcProfit, lcMargin, installationCost, transportationCost, stdModuleCount, stdMPrice, nStdModuleCount, nStdMPrice, hikeModuleCount, hikeMPrice,hikeMCost, color) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","status","discountAmount","discountPercentage","crmId","quoteNo","designerName","salesName","source","fromProduct","beforeProductionSpecification","fromProposal","offerType","packageFlag","category","subCategory","prId","prTitle","spaceType","room","baseCarcass","wallCarcass","finishMaterial","finish","shutterDesign","hinge","glass","handleSelection","noOfLengths","handleType","handleFinish","handleSize","knobType","knobFinish","prArea","prCreatedBy","prCreatedOn","prUpdatedBy","prUpdatedOn","prPrice","prPriceAfterDiscount","prPriceAfterTax","prCost","prProfit","prMargin","wwPrice","wwPriceAfterTax","wwCost","wwProfit","wwMargin","hwPrice","hwPriceAfterTax","hwCost","hwProfit","hwMargin","accPrice","accPriceAfterTax","accCost","accProfit","accMargin","laPrice","laPriceAfterTax","laCost","laProfit","laMargin","hkPrice","hkPriceAfterTax","hkCost","hkProfit","hkMargin","hingePrice","hingePriceAfterTax","hingeCost","hingeProfit","hingeMargin","lcPrice","lcPriceAfterTax","lcCost","lcProfit","lcMargin","installationCost","transportationCost","stdModuleCount","stdMPrice","nStdModuleCount","nStdMPrice","hikeModuleCount","hikeMPrice","hikeMCost", "color"],
       "jsonfields":[]
     },
     {
@@ -1936,7 +1958,7 @@
       "id": "proposal.boq.proposalversion",
       "type": "select",
       "table": "proposal_boq",
-      "query": "select * from proposal_boq where proposalId = ? order by productId,moduleSeq",
+      "query": "select * from proposal_boq where proposalId = ? order by productId,moduleSeq ASC",
       "params": ["proposalId"],
       "jsonfields":[]
     },
@@ -2050,6 +2072,25 @@
       "table": "proposal",
       "query": "update proposal set boqDriveLink = ?, boqStatus = ? where id = ?",
       "params": ["driveWebViewLink","boqStatus","proposalId"],
+      "jsonfields":[]
+    },
+
+    //CRM related queries
+
+    {
+      "id": "proposal.product.scopeofwork",
+      "type": "select",
+      "table": "proposal_product",
+      "query": "select * from proposal_product p inner join ( select max(version) as version,proposalId from version_master v where status in ('Confirmed','DSO','PSO','Published') and proposalId in (select id from proposal p where crmId = ?) group by proposalId order by version asc) q on p.proposalId = q.proposalId and p.fromVersion = q.version ",
+      "params": ["crmId"],
+      "jsonfields":["modules","addons"]
+    },
+    {
+      "id": "proposal.addon.scopeofwork",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": " select * from proposal_addon p inner join ( select max(version) as version,proposalId from version_master v where status in ('Confirmed','DSO','PSO','Published')and proposalId in (select id from proposal p where crmId = ?) group by proposalId order by version asc) q on p.proposalId = q.proposalId and p.fromVersion = q.version ",
+      "params": ["crmId"],
       "jsonfields":[]
     }
 

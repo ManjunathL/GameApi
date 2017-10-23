@@ -121,16 +121,32 @@ public class BOQSheetCreator implements ExcelCellProcessor
         }
 
 
-        Map<DistinctModule,List<ProposalBOQ>> distinctModules = getDistinctModules(proposalBoqsForProduct);
+        LinkedHashMap<DistinctModule,List<ProposalBOQ>> distinctModules = getDistinctModules(proposalBoqsForProduct);
+
+        // Get a set of the entries
+        Set set = distinctModules.entrySet();
+
+        // Get an iterator
+        Iterator i = set.iterator();
 
 
-        for (DistinctModule distinctModule : distinctModules.keySet()) {
 
-            List<ProposalBOQ> proposalBoqAsPerModule = distinctModules.get(distinctModule);
+        while(i.hasNext()) {
+            Map.Entry me = (Map.Entry)i.next();
+            Object key = me.getKey();
+//            LOG.debug("Key : " + key.toString());
+            List<ProposalBOQ> proposalBoqAsPerModule = new ArrayList<>();
+            proposalBoqAsPerModule.addAll(distinctModules.get(key));
 
-            fillHardwareAndAccPerModule(currentRow, proposalBoqAsPerModule);
-
+            currentRow = fillHardwareAndAccPerModule(currentRow, proposalBoqAsPerModule);
         }
+//        for (DistinctModule distinctModule : distinctModules.entrySet()) {
+//
+//            List<ProposalBOQ> proposalBoqAsPerModule = distinctModules.get(distinctModule);
+//
+//            fillHardwareAndAccPerModule(currentRow, proposalBoqAsPerModule);
+//
+//        }
 
         return currentRow;
 
@@ -138,9 +154,9 @@ public class BOQSheetCreator implements ExcelCellProcessor
 
 
 
-    private Map<DistinctModule,List<ProposalBOQ>> getDistinctModules(List<ProposalBOQ> proposalBoqs)
+    private LinkedHashMap<DistinctModule,List<ProposalBOQ>> getDistinctModules(List<ProposalBOQ> proposalBoqs)
     {
-        Map<DistinctModule, List<ProposalBOQ>> distinctModuleMap = new LinkedHashMap<>();
+        LinkedHashMap<DistinctModule, List<ProposalBOQ>> distinctModuleMap = new LinkedHashMap<>();
         for (ProposalBOQ boq : proposalBoqs)
         {
             DistinctModule distinctModule = new DistinctModule(boq);

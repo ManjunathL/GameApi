@@ -74,9 +74,7 @@ public class ProductLineItem extends JsonObject
 
     }
 
-    public  String getProductCategory() {
-        return this.getString(PRODUCT_CATEGORY);
-    }
+
 
     public ProductLineItem(JsonObject data)
     {
@@ -88,6 +86,15 @@ public class ProductLineItem extends JsonObject
     public int getFromProduct(){
         if (this.getInteger(FROM_PRODUCT) == null || this.getInteger(FROM_PRODUCT).equals("")) return 0;
         else return this.getInteger(FROM_PRODUCT); }
+
+    public  String getProductCategory() {
+        return this.getString(PRODUCT_CATEGORY);
+    }
+
+    public ProductLineItem setProductCategory(String productCategory) {
+        put(PRODUCT_CATEGORY,productCategory);
+        return this;
+    }
 
     public String getTitle()
     {

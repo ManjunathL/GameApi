@@ -1,21 +1,21 @@
 {
   "version": "0.0.0a",
-  "jdbc": [{
+  "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/oct9Data",
+    "url": "jdbc:mysql://localhost/prod_check",
     "max_pool_size": 20,
     "user": "root",
-    "password": "root",
+    "password": "",
     "pool_Name":"mygubbi"
   },
-    {
-      "driver_class": "com.mysql.jdbc.Driver",
-      "url": "jdbc:mysql://suite.mygubbi.com/gubbi_ods",
-      "max_pool_size": 20,
-      "user": "rwuser",
-      "password": "6npp!_mb6npp!_mb",
-      "pool_Name":"ods"
-    }],
+   {
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://suite.mygubbi.com/gubbi_ods",
+    "max_pool_size": 20,
+    "user": "rwuser",
+    "password": "6npp!_mb6npp!_mb",
+     "pool_Name":"ods"
+  }],
   "urlwithssl": "",
 
   "ssl_keystore": "ssl/mygubbiprod.jks",
@@ -34,31 +34,34 @@
   "sendEmail":"Yes",
   "http_port" : 1445,
   "https_port" : 1446,
-  "proposal_docs_folder" : "/home/shilpa/mygubbi_files",
-  "templates_folder" : "/home/shilpa/mygubbi_files",
-  "price_files_folder" : "/home/shilpa/mygubbi_files/price_files",
-  "quote_template" : "/home/shilpa/mygubbi_files/quote-template.xlsx",
-  "quote_template_PUN" : "/home/shilpa/mygubbi_files/quote-template-PUN.xlsx",
-  "quote_template_CHN" : "/home/shilpa/mygubbi_files/quote-template-CHN.xlsx",
-  "quote_template_MLR" : "/home/shilpa/mygubbi_files/quote-template-MLR.xlsx",
-  "jobcard_template" : "/home/shilpa/mygubbi_files/jobcard-template.xlsx",
-  "salesorder_template" : "/home/shilpa/mygubbi_files/salesorder-template.xlsx",
-  "sow_template" : "/home/shilpa/mygubbi_files/sow_template.xlsx",
-  "boq_template" : "/home/shilpa/mygubbi_files/boq_template.xlsx",
-  "so_template" : "/home/shilpa/mygubbi_files/so-template.xlsx",
-  "boq_dir" : "/home/shilpa/mygubbi_files/",
-  "so_addon_template" : "/home/shilpa/mygubbi_files/so_addon_template.xlsx",
-  "margin-template" : "/home/shilpa/mygubbi_files/margin-template.xlsx",
+  "proposal_docs_folder" : "c:/Users/Public/game_files",
+  "templates_folder" : "c:/Users/Public/game_files",
+  "price_files_folder" : "c:/Users/Public/game_files/price_files",
+  "quote_template" : "c:/Users/Public/game_files/quote-template.xlsx",
+  "quote_template_PUN" : "c:/Users/Public/game_files/quote-template-PUN.xlsx",
+  "quote_template_CHN" : "c:/Users/Public/game_files/quote-template-CHN.xlsx",
+  "quote_template_MLR" : "c:/Users/Public/game_files/quote-template-MLR.xlsx",
+  "jobcard_template" : "c:/Users/Public/game_files/jobcard-template.xlsx",
+  "salesorder_template" : "c:/Users/Public/game_files/salesorder-template.xlsx",
+  "sow_template" : "c:/Users/Public/game_files/sow_template.xlsx",
+  "boq_template" : "c:/Users/Public/game_files/boq_template.xlsx",
+  "so_template" : "c:/Users/Public/game_files/so-template.xlsx",
+  "boq_dir" : "c:/Users/Public/game_files/",
+  "so_addon_template" : "c:/Users/Public/game_files/so_addon_template.xlsx",
+  "margin-template" : "c:/Users/Public/game_files/margin-template.xlsx",
   "ratecard_file": "d:/tmp/ratecard.bin",
   "sow_downloaded_xls_format":"sow.xlsx",
   "sow_downloaded_pdf_fomat" : "sow.pdf",
   "merged_pdf":"merged.pdf",
-  "termsandcondition_banglore":"/home/shilpa/mygubbi_files/BookingFormBanglore.pdf",
-  "termsandcondition_manglore":"/home/shilpa/mygubbi_files/BookingFormManglore.pdf",
-  "termsandcondition_pune":"/home/shilpa/mygubbi_files/BookingFormPune.pdf",
-  "termsandcondition_chennai":"/home/shilpa/mygubbi_files/BookingFormChennai.pdf",
+  "termsandcondition_banglore":"c:/Users/Public/game_files/BookingFormBanglore.pdf",
+  "termsandcondition_manglore":"c:/Users/Public/game_files/BookingFormManglore.pdf",
+  "termsandcondition_pune":"c:/Users/Public/game_files/BookingFormPune.pdf",
+  "termsandcondition_chennai":"c:/Users/Public/game_files/BookingFormChennai.pdf",
   "workscontract_template":"/home/shilpa/mygubbi_files/WorkscontractTemplate.pdf",
-  "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
+
+
+"queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
+
   "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
   "fbUrl": "https://mygubbi.firebaseio.com",
   "processfbEvents": true,
@@ -74,6 +77,7 @@
   "driveAppName" : "GAME Drive App",
   "driveCredentials" : "/game/gamedrive.json",
   "localDriveFolder" : "E:/data/gdrive/"
+
 
 
 }

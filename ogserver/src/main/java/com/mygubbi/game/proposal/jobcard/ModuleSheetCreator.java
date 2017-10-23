@@ -96,7 +96,18 @@ public class ModuleSheetCreator implements ExcelCellProcessor
             this.sheetProcessor.createTitleRowInDataSheet(currentRow, new String[]{"Standard Modules"});
             for (ProductModule module : modules) {
                 Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
+                LOG.info("module in module sheet creator " +mgModule.toString());
                 ShutterFinish finish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
+                String glassMandatory=mgModule.getGlassMandatory();
+                String glassValue="";
+                if(glassMandatory.equals("Yes"))
+                {
+                    glassValue=this.product.getGlass();
+                }
+                else
+                {
+                    glassValue="NA";
+                }
                 String custom = " ";
                 try {
                     if (module.getCustomCheck() == null || module.getCustomCheck().length() == 0 || module.getCustomCheck().equals("General Remarks")) {
@@ -136,13 +147,13 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), "NA", "NA", "NA", module.getAccessoryFlag()});
                             seq++;
                         } else if ((module.getHandleQuantity() == 0) && (module.getKnobQuantity() != 0)) {
                             Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle,glassValue, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else if ((module.getHandleQuantity() != 0) && (module.getKnobQuantity() != 0)) {
                             Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
@@ -150,12 +161,12 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             // LOG.info("&&&" + handle.getTitle() + "" + knob.getTitle());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else {
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
 
                             seq++;
                         }
@@ -165,12 +176,12 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle,glassValue, handleType, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else {
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle,glassValue, handleType, "NA", "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
                             seq++;
 
                         }
@@ -201,6 +212,16 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                 Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
                 ShutterFinish finish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
                 String custom = " ";
+                String glassMandatory=mgModule.getGlassMandatory();
+                String glassValue="";
+                if(glassMandatory.equals("Yes"))
+                {
+                    glassValue=this.product.getGlass();
+                }
+                else
+                {
+                    glassValue="NA";
+                }
                 try {
                     if (module.getCustomCheck() == null || module.getCustomCheck().length() == 0 || module.getCustomCheck().equals("General Remarks")) {
                         // if(module.getCustomCheck().equals("Custom Remarks"))
@@ -249,13 +270,13 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), "NA", "NA", "NA", module.getAccessoryFlag()});
                             seq++;
                         } else if ((module.getHandleQuantity() == 0) && (module.getKnobQuantity() != 0)) {
                             Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else if ((module.getHandleQuantity() != 0) && (module.getKnobQuantity() != 0)) {
                             Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
@@ -263,12 +284,12 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             // LOG.info("&&&" + handle.getTitle() + "" + knob.getTitle());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else {
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
 
                             seq++;
                         }
@@ -278,12 +299,12 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else {
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, "NA", "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
                             seq++;
 
                         }
@@ -314,6 +335,16 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                 Module mgModule = ModuleDataService.getInstance().getModule(module.getMGCode());
                 ShutterFinish finish = ModuleDataService.getInstance().getFinish(module.getFinishCode());
                 String custom = " ";
+                String glassMandatory=mgModule.getGlassMandatory();
+                String glassValue="";
+                if(glassMandatory.equals("Yes"))
+                {
+                    glassValue=this.product.getGlass();
+                }
+                else
+                {
+                    glassValue="NA";
+                }
                 try {
                     if (module.getCustomCheck() == null || module.getCustomCheck().length() == 0 || module.getCustomCheck().equals("General Remarks")) {
                         // if(module.getCustomCheck().equals("Custom Remarks"))
@@ -362,13 +393,13 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), "NA", "NA", "NA", module.getAccessoryFlag()});
                             seq++;
                         } else if ((module.getHandleQuantity() == 0) && (module.getKnobQuantity() != 0)) {
                             Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else if ((module.getHandleQuantity() != 0) && (module.getKnobQuantity() != 0)) {
                             Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getHandleCode());
@@ -376,12 +407,12 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             // LOG.info("&&&" + handle.getTitle() + "" + knob.getTitle());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, handle.getTitle(), handle.getFinish(), handle.getThickness(), module.getHandleQuantity(), knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else {
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
 
                             seq++;
                         }
@@ -391,12 +422,12 @@ public class ModuleSheetCreator implements ExcelCellProcessor
                             Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(module.getKnobCode());
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, "NA", "NA", "NA", "NA", knob.getTitle(), knob.getFinish(), module.getKnobQuantity(), module.getAccessoryFlag()});
                             seq++;
                         } else {
                             this.sheetProcessor.createDataRowInDataSheet(currentRow, new Object[]{seq, module.getUnit(), mgModule.getCode(), mgModule.getDescription(),
                                     module.getWidth(), module.getDepth(), module.getHeight(), custom, module.getRemarks(), module.getCarcassCode(), finish.getFinishMaterial(), finish.getTitle(), module.getColorCode(), "", exposedSides(module),
-                                    hingeTitle, this.product.getGlass(), handleType, "NA", "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
+                                    hingeTitle, glassValue, handleType, "NA", "NA", "NA", "NA", "NA", "NA", "NA", module.getAccessoryFlag()});
                             seq++;
 
                         }

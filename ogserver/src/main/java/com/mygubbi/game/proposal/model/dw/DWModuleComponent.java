@@ -585,8 +585,6 @@ public class DWModuleComponent extends JsonObject {
                 RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productModule.getProductCategory());
         RateCard nStdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.NONSTD_MANUFACTURING_COST_FACTOR,
                 RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity(), productModule.getProductCategory());
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
         RateCard stdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
         RateCard nStdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
 
@@ -594,6 +592,9 @@ public class DWModuleComponent extends JsonObject {
         double rate = loadingFactorBasedOnProduct.getRateBasedOnProduct();
         double stdSourceRate = stdLoadingSourceFactorBasedOnProduct.getSourcePrice();
         double nStdSourceRate = nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
+
+        double afterTaxFactor = getAfterTaxFactor(proposalHeader, productModule);
+
 
         String moduleType;
 
@@ -650,15 +651,17 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode(panelComponent.getAccPackCode());
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(panelComponent.getLength());
         dwModuleComponent.setWidth(panelComponent.getBreadth());
@@ -718,7 +721,7 @@ public class DWModuleComponent extends JsonObject {
         }
 
         panelPriceAfterDiscount = panelPrice - (panelPrice * (proposalVersion.getDiscountPercentage()/100));
-        panelPriceWoTax = panelPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
+        panelPriceWoTax = panelPriceAfterDiscount * afterTaxFactor;
         panelProfit = panelPriceWoTax - panelCost;
 
         if(panelPriceWoTax ==0 ||panelProfit == 0 ){
@@ -742,8 +745,8 @@ public class DWModuleComponent extends JsonObject {
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        double afterTaxFactor = getAfterTaxFactor(proposalHeader, productModule);
+
         double quantity = 0;
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
@@ -793,7 +796,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -803,15 +806,18 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(0);
         dwModuleComponent.setWidth(0);
@@ -845,7 +851,7 @@ public class DWModuleComponent extends JsonObject {
         {
             componentPrice = hardwareComponent.getPrice() * quantity;
             componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
-            componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
+            componentPriceWoTax = componentPriceAfterDiscount * afterTaxFactor;
             componentCost = hardwareComponent.getSourcePrice() * quantity;
             componentProfit = componentPriceWoTax - componentCost;
             if(componentProfit == 0.0 || componentPriceWoTax == 0.0){
@@ -870,8 +876,8 @@ public class DWModuleComponent extends JsonObject {
 
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        double afterTaxFactor = getAfterTaxFactor(proposalHeader, productModule);
+
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
 
@@ -920,7 +926,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -930,15 +936,18 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+      /*  if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(0);
         dwModuleComponent.setWidth(0);
@@ -964,7 +973,7 @@ public class DWModuleComponent extends JsonObject {
         {
             componentPrice = accessoryComponent.getPrice() * accessoryComponent.getQuantity();
             componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
-            componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
+            componentPriceWoTax = componentPriceAfterDiscount * afterTaxFactor;
             componentCost = accessoryComponent.getSourcePrice() * accessoryComponent.getQuantity();
             componentProfit = componentPriceWoTax - componentCost;
             if(componentProfit == 0 || componentPriceWoTax == 0){
@@ -987,8 +996,7 @@ public class DWModuleComponent extends JsonObject {
     public DWModuleComponent setDwComponentAttributesForGolaProfileHardware(ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem, ProductModule productModule, AccHwComponent accHwComponent, double quantity) {
         DWModuleComponent dwModuleComponent = new DWModuleComponent();
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        double afterTaxFactor = getAfterTaxFactor(proposalHeader, productModule);
 
         PriceMaster hardwareRate = RateCardService.getInstance().getHardwareRate(accHwComponent.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
 
@@ -1039,7 +1047,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -1049,15 +1057,19 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(0);
         dwModuleComponent.setWidth(0);
@@ -1081,7 +1093,7 @@ public class DWModuleComponent extends JsonObject {
         {
             componentPrice = hardwareRate.getPrice() * quantity;
             componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
-            componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
+            componentPriceWoTax = componentPriceAfterDiscount * afterTaxFactor;
             componentCost = hardwareRate.getSourcePrice() * quantity;
             componentProfit = componentPriceWoTax - componentCost;
             if(componentProfit == 0.0 || componentPriceWoTax == 0.0){
@@ -1126,8 +1138,7 @@ public class DWModuleComponent extends JsonObject {
             handleOrKnobRate = RateCardService.getInstance().getHingeRate(handle.getCode(),proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         }
 
-        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
-                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        double afterTaxFactor = getAfterTaxFactor(proposalHeader, productModule);
 
 
         ShutterFinish finish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
@@ -1176,7 +1187,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setPrId(productLineItem.getId());
         dwModuleComponent.setPrTitle(productLineItem.getTitle());
         dwModuleComponent.setPrPrice(productLineItem.getAmount());
-        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()));
+        dwModuleComponent.setPrPriceAfterDiscount(productLineItem.getAmount() - (productLineItem.getAmount() * proposalVersion.getDiscountPercentage()/100));
         dwModuleComponent.setPrArea(productAreaInSqft);
         dwModuleComponent.setProductCategory(productLineItem.getProductCategory());
         dwModuleComponent.setModuleType(moduleType);
@@ -1187,15 +1198,18 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
-        String finishCode = finish.getFinishType();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+        String finishCode = finish.getFinishCode();
+        /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwModuleComponent.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+
+        dwModuleComponent.setFinish(shutterFinish.getTitle());
         dwModuleComponent.setFinishMaterial(productModule.getFinishType());
         dwModuleComponent.setHeight(productModule.getHeight());
         dwModuleComponent.setWidth(productModule.getWidth());
@@ -1223,7 +1237,7 @@ public class DWModuleComponent extends JsonObject {
         {
             componentPrice = handleOrKnobRate.getPrice() * quantity;
             componentPriceAfterDiscount = componentPrice - (componentPrice * (proposalVersion.getDiscountPercentage()/100));
-            componentPriceWoTax = componentPriceAfterDiscount * prodWoTaxFactor.getSourcePrice();
+            componentPriceWoTax = componentPriceAfterDiscount * afterTaxFactor;
             componentCost = handleOrKnobRate.getSourcePrice() * quantity;
             componentProfit = componentPriceWoTax - componentCost;
             if(componentProfit == 0.0 || componentPriceWoTax == 0.0){
@@ -1240,6 +1254,35 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setComponentMargin(componentMargin);
 
         return dwModuleComponent;
+    }
+
+    private double getAfterTaxFactor(ProposalHeader proposalHeader, ProductModule productModule) {
+
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        double woTaxFactor = 0;
+
+        ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productModule.getProductCategory(),proposalHeader.getPriceDate());
+        String productType = productCategoryMap.getType();
+
+        RateCard movableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        RateCard nonMovableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.NON_MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+
+
+        switch (productType) {
+            case RateCard.MOVABLE_FURNITURE:
+                woTaxFactor = movableFurnitureRateCard.getSourcePrice();
+                break;
+            case RateCard.NON_MOVABLE_FURNITURE:
+                woTaxFactor = nonMovableFurnitureRateCard.getSourcePrice();
+                break;
+            default:
+                woTaxFactor = prodWoTaxFactor.getSourcePrice();
+                break;
+        }
+        return woTaxFactor;
     }
 
 

@@ -25,6 +25,7 @@ public class Module
     private static final String HANDLE_MANDATORY = "handleMandatory";
     private static final String KNOB_MANDATORY = "knobMandatory";
     private static final String HINGE_MANDATORY = "hingeMandatory";
+    private static final String GLASS_MANDATORY = "glassMandatory";
     private static final String SQFT_CALCULATION = "sqftCalculation";
 
 
@@ -48,6 +49,7 @@ public class Module
     private String knobMandatory;
     private String hingeMandatory;
     private String sqftCalculation;
+    private String glassMandatory;
 
     public Module()
     {
@@ -73,6 +75,7 @@ public class Module
         this.setKnobMandatory(json.getString(KNOB_MANDATORY));
         this.setHingeMandatory(json.getString(HINGE_MANDATORY));
         this.setSqftCalculation(json.getString(SQFT_CALCULATION));
+        this.setGlassMandatory(json.getString(GLASS_MANDATORY));
 
     }
 
@@ -230,6 +233,14 @@ public class Module
 
     public void setHandleMandatory(String handleMandatory) {
         this.handleMandatory = handleMandatory;
+    }
+
+    public String getGlassMandatory() {
+        return glassMandatory;
+    }
+
+    public void setGlassMandatory(String glassMandatory) {
+        this.glassMandatory = glassMandatory;
     }
 
     public String getKnobMandatory() {

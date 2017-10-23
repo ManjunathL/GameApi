@@ -14,8 +14,7 @@ import com.mygubbi.game.proposal.erp.BoqCreatorService;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
-import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
-import com.mygubbi.game.proposal.price.RateCardService;
+import com.mygubbi.game.proposal.price.*;
 import com.mygubbi.game.proposal.quote.MergePdfsRequest;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
@@ -97,8 +96,24 @@ public class ProposalHandler extends AbstractRouteHandler
         this.get("/hingedetails").handler(this::getHingeDetails);
         this.post("/updatepricefordraftproposals").handler(this::updatePriceForDraftProposals);
         this.get("/ratefactordetailsfromhandler").handler(this::getRateFactor);
+        this.post("/version/price").handler(this::getPriceV2);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
+    }
+
+    private void getPriceV2(RoutingContext routingContext)
+    {
+
+        JsonObject versionJson = routingContext.getBodyAsJson();
+        LOG.debug("Module Json : " + versionJson.encodePrettily());
+        ProposalVersion proposalVersion = new ProposalVersion(versionJson);
+        Integer id = LocalCache.getInstance().store(proposalVersion);
+        VertxInstance.get().eventBus().send(VersionPricingService.CALCULATE_VERSION_PRICE, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    VersionPriceHolder versionPriceHolder = (VersionPriceHolder) LocalCache.getInstance().remove(selectResult.result().body());
+                    LOG.debug("Version Price holder json :" + versionPriceHolder.getPriceJson());
+                    sendJsonResponse(routingContext, String.valueOf(versionPriceHolder.getPriceJson()));
+                });
     }
 
     private void updatePriceForDraftProposals(RoutingContext context) {
