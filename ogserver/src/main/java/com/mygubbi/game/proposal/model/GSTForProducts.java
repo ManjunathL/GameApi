@@ -14,6 +14,8 @@ public class GSTForProducts
     public double price;
     public double priceAfterTax;
     public String tax;
+    public String productFlag;
+    public String categoryType;
 
     public GSTForProducts(String category, String producttitle,double priceAfterDiscount, double price, double priceAfterTax) {
         this.category = category;
@@ -31,6 +33,32 @@ public class GSTForProducts
         this.tax=tax;
     }
 
+    public GSTForProducts(String category, String producttitle,double priceAfterDiscount, double price, double priceAfterTax,String tax,String productFlag,String CategoryType) {
+        this.category = category;
+        this.producttitle = producttitle;
+        this.priceAfterDiscount=priceAfterDiscount;
+        this.price = price;
+        this.priceAfterTax = priceAfterTax;
+        this.tax=tax;
+        this.productFlag=productFlag;
+        this.categoryType=CategoryType;
+    }
+
+    public String getCategoryType() {
+        return categoryType;
+    }
+
+    public void setCategoryType(String categoryType) {
+        this.categoryType = categoryType;
+    }
+
+    public String getProductFlag() {
+        return productFlag;
+    }
+
+    public void setProductFlag(String productFlag) {
+        this.productFlag = productFlag;
+    }
 
     public String getCategory() {
         return category;
@@ -89,6 +117,8 @@ public class GSTForProducts
                 ", price=" + price +
                 ", priceAfterTax=" + priceAfterTax +
                 ", tax='" + tax + '\'' +
+                ", productFlag='" + productFlag + '\'' +
+                ", categoryType='" + categoryType + '\'' +
                 '}';
     }
 

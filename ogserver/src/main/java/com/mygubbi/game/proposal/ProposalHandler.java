@@ -987,13 +987,17 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void getAccessoryRate(RoutingContext routingContext, String code, Date priceDate, String city) {
-        PriceMaster addonRate = RateCardService.getInstance().getAccessoryRate(code, priceDate, city);
+        PriceMaster addonRate = getAccessoryPriceMaster(code, priceDate, city);
         if (addonRate == null ) {
             LOG.error("Error in retrieving addon price");
             sendError(routingContext, "Error in retrieving addon price.");
         } else {
             sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
+    }
+
+    public PriceMaster getAccessoryPriceMaster(String code, Date priceDate, String city) {
+        return RateCardService.getInstance().getAccessoryRate(code, priceDate, city);
     }
 
     private void getHardwareRate(RoutingContext context) {
