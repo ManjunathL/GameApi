@@ -256,7 +256,7 @@ public class BoqCreatorService extends AbstractVerticle {
                     double quantity = moduleComponent.getQuantity();
                     if (!(moduleComponent.getQuantityFlag() == null || moduleComponent.getQuantityFlag().isEmpty())) {
                         if (moduleComponent.getQuantityFlag().equals("C")) {
-                            quantity = hardwareComponent.calculateQuantityUsingFormula(module, moduleComponent);
+                            quantity = hardwareComponent.calculateQuantityUsingFormula(module, moduleComponent.getQuantityFormula());
                         }
                     }
 
