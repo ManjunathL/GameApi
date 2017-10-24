@@ -692,6 +692,12 @@
       "table": "module_components",
       "query": "select * from module_components ",
       "params": []
+    },{
+      "id": "select.all.users",
+      "type": "select",
+      "table": "proposal",
+      "query": "select crmId,pcity as projectCity,title as displayName,cphone1 as phone,caddress1 as address,projectName as projectName, paddress1 as projectAddress,designerName as designerName,designerEmail as designerEmail,designerPhone as designerPhone,salesName as salesExecName,salesEmail as salesExecEmail,salesPhone as salesExecPhone,'' as profileImage, cemail as email from proposal order by id desc limit 2",
+      "params": []
     },
     {
       "id": "module.carcass.cost",

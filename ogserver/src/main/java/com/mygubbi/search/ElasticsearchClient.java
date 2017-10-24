@@ -9,7 +9,19 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.mygubbi.common.FileReaderUtil;
+import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.VertxInstance;
+import com.mygubbi.db.DatabaseService;
+import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.model.ModuleComponent;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.eventbus.Message;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.ListenableActionFuture;
+import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.suggest.SuggestRequestBuilder;
@@ -36,8 +48,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 
-public class ElasticsearchClient 
+public class ElasticsearchClient
 {
+	private final static Logger LOG = LogManager.getLogger(ElasticsearchClient.class);
 	private static final String EMPTY_JSON = "{}";
 	
 	private Node node = null;
@@ -90,8 +103,12 @@ public class ElasticsearchClient
 
 	public boolean indexDocument(IndexData iData) throws ElasticsearchException
 	{
-		IndexResponse indexResponse = this.client.prepareIndex(iData.getIndex(), iData.getType(), iData.getId())
-		        .setSource(iData.getDocument().toString()).execute().actionGet();
+		LOG.info("this.client = "+this.client);
+		LOG.info("iData.getDocument() = "+iData.getDocument());
+		IndexRequestBuilder builder = this.client.prepareIndex(iData.getIndex(), iData.getType(), iData.getId())
+				.setSource(iData.getDocument().toString());
+		ListenableActionFuture res = builder.execute();
+		IndexResponse indexResponse = (IndexResponse) res.actionGet();
 		return indexResponse.isCreated();
 	}
 	
@@ -429,26 +446,44 @@ public class ElasticsearchClient
 
 	private static void indexDocs(ElasticsearchClient elasticsearchClient, String index, String type, String filepath, boolean isJar)
 	{
-		System.out.println("Indexing documents from " + filepath + " into " + index + ":" + isJar);
-		String content = (isJar) ? FileReaderUtil.toStringFromJar(filepath) : FileReaderUtil.toString(filepath);
-		try
-		{
-			System.out.println(content);
-			JsonObject json = new JsonObject(content);
-			JsonArray list = json.getJsonArray("values");
-			AtomicInteger id = new AtomicInteger(1);
-			list.forEach(row ->
-			{
-				System.out.println("Indexing >> " + row.toString());
-				elasticsearchClient.indexDocument( new IndexData(String.valueOf(id.getAndIncrement()), index, type, new JsonObject(row.toString())));
-			});
-			
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error in loading documents");
-			e.printStackTrace(System.out);
-		}
+		VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("select.all.users", new JsonObject())),
+				(AsyncResult<Message<Integer>> dataResult) -> {
+					QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+					if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+					{
+						LOG.error("No users to index");
+					}
+					else
+					{
+						AtomicInteger id = new AtomicInteger(1);
+						selectData.rows.forEach(row ->{
+							System.out.println("Indexing >> " + row.toString());
+							elasticsearchClient.indexDocument( new IndexData(String.valueOf(id.getAndIncrement()), index, type, new JsonObject(row.toString())));
+						});
+					}
+				});
+
+//		System.out.println("Indexing documents from " + filepath + " into " + index + ":" + isJar);
+//		String content = (isJar) ? FileReaderUtil.toStringFromJar(filepath) : FileReaderUtil.toString(filepath);
+//		//Execute the query select * from game_user and form json array of values
+//		try
+//		{
+//			System.out.println(content);
+//			JsonObject json = new JsonObject(content);
+//			JsonArray list = json.getJsonArray("values");
+//
+//			list.forEach(row ->
+//			{
+//				System.out.println("Indexing >> " + row.toString());
+//				elasticsearchClient.indexDocument( new IndexData(String.valueOf(id.getAndIncrement()), index, type, new JsonObject(row.toString())));
+//			});
+//
+//		}
+//		catch(Exception e)
+//		{
+//			System.out.println("Error in loading documents");
+//			e.printStackTrace(System.out);
+//		}
 	}
 	
 	/*

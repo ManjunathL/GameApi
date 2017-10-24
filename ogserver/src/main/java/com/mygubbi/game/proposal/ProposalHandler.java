@@ -14,6 +14,8 @@ import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
 import com.mygubbi.game.proposal.price.RateCardService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
 import com.mygubbi.route.AbstractRouteHandler;
+import com.mygubbi.search.ElasticsearchClient;
+import com.mygubbi.search.IndexData;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -22,8 +24,11 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.index.IndexResponse;
 
 import java.sql.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by sunil on 25-04-2016.
@@ -51,6 +56,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/downloadjobcard").handler(this::downloadJobCard);
         this.post("/downloadsalesorder").handler(this::downloadSalesOrder);
         this.post("/downloadquotePdf").handler(this::downloadQuotePdf);
+        this.post("/indexUsers").handler(this::indexUsers);
         this.get("/hardwareratedetails").handler(this::getHardwareRate);
         this.get("/accratedetails").handler(this::getAccessoryRate);
         this.post("/updatepricefordraftproposals").handler(this::updatePriceForDraftProposals);
@@ -334,6 +340,32 @@ public class ProposalHandler extends AbstractRouteHandler
         } else {
             sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
+    }
+    private void indexUsers(RoutingContext context) {
+        JsonObject contextJson = context.getBodyAsJson();
+        String nodeName = contextJson.getString("node");
+        ElasticsearchClient elasticsearchClient = new ElasticsearchClient(nodeName);
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("select.all.users", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        LOG.error("No users to index");
+                    }
+                    else
+                    {
+                        AtomicInteger id = new AtomicInteger(1);
+                        selectData.rows.forEach(row ->{
+                            System.out.println("Indexing >> " + row.toString());
+                            IndexData data = new IndexData(String.valueOf(id.getAndIncrement()), "user_index", "users", row);
+                            LOG.info("Index data = "+data);
+                            LOG.info("elasticsearchClient = "+elasticsearchClient);
+                            elasticsearchClient.indexDocument(data);
+                        });
+
+
+                    }
+                });
     }
 
     private void getHardwareRate(RoutingContext context) {
