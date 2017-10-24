@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.*;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.ProposalHandler;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.RateCardService;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -38,6 +39,8 @@ public class QuotationPDFCreator
 {
     private final static Logger LOG = LogManager.getLogger(QuotationPDFCreator.class);
     int count=0;
+    int individualcountforProduct=1;
+    int individualcountforAddon=1;
     int finalcount=1;
     String series;
     double amt;
@@ -73,9 +76,15 @@ public class QuotationPDFCreator
     Font headingSize=new com.itextpdf.text.Font(Font.FontFamily.TIMES_ROMAN,10, com.itextpdf.text.Font.BOLD);
     Font zapfdingbats = new Font(Font.FontFamily.ZAPFDINGBATS, 16);
     private ProposalHeader proposalHeader;
-
+    private ProposalHandler proposalHandler;
     double totalproductPrice=0,totalDAP=0,totalTaxAmt=0,totalPriceAfterTax=0;
     double set1totalproductPrice=0,set1totalDAP=0,set1totalTaxAmt=0,set1totalPriceAfterTax=0;
+    double movabletotalproductPrice=0,movabletotalDAP=0,movabletotalTaxAmt=0,movabletotalPriceAfterTax=0;
+    double nonmovabletotalproductPrice=0,nonmovabletotalDAP=0,nonmovabletotalTaxAmt=0,nonmovabletotalPriceAfterTax=0;
+    double scwtotalproductPrice=0,scwtotalDAP=0,scwtotalTaxAmt=0,scwtotalPriceAfterTax=0;
+    double designtotalproductPrice=0,designtotalDAP=0,designtotalTaxAmt=0,designtotalPriceAfterTax=0;
+    double producttotalPrice=0,producttotalDAP=0,producttotalTaxAmt=0,producttotalPriceAfterTax=0;
+    double addontotalproductPrice=0,addontotalDAP=0,addontotalTaxAmt=0,addontotalPriceAfterTax=0;
     double set2totalproductPrice=0,set2totalDAP=0,set2totalTaxAmt=0,set2totalPriceAfterTax=0;
 
     List<GSTForProducts> nonMovableList=new ArrayList<>();
@@ -570,7 +579,7 @@ public class QuotationPDFCreator
             String strqnum= quoteData.fromVersion;
             String qnum="";
             strqnum=strqnum.replace(".","");
-
+            LOG.info("quoteData fromVersion " +quoteData.fromVersion);
             Phrase phrase5 = new Phrase();
             phrase5.add(new Chunk("Quotation #: ",fsize1));
 
@@ -979,15 +988,199 @@ public class QuotationPDFCreator
             p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
             document.add(p);
         }
+
         if(date.after(currentDate)) {
-            LOG.info("main method inside if");
             p = new Paragraph("\n");
             document.add(p);
 
             p = new Paragraph("\n");
+            document.add(p);
+
+            document.newPage();
+
+            p = new Paragraph("TAX BREAKUP",fsize3);
+            p.setAlignment(Element.ALIGN_CENTER);
+            //fsize3.setColor(BaseColor.GRAY);
             document.add(p);
 
             float[] gstcolumnWidths1 = {1, 1, 1, 1, 1, 1};
+            float[] gstProductCategory = {1, 1, 1, 1, 1, 1,1};
+
+
+
+            PdfPTable designTable= new PdfPTable(gstcolumnWidths1);
+            designTable.setWidthPercentage(100);
+            PdfPCell designCell1 = new PdfPCell(new Paragraph("SI", fsize1));
+            PdfPCell designCell2 = new PdfPCell(new Paragraph("Product Category", fsize1));
+            PdfPCell designCell5 = new PdfPCell(new Paragraph("TAX %", fsize1));
+            PdfPCell designCell6 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
+            PdfPCell designCell7 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
+            PdfPCell designCell4 = new PdfPCell(new Paragraph("Price After discount", fsize1));
+            designTable.addCell(designCell1);
+            designTable.addCell(designCell2);
+            designTable.addCell(designCell5);
+            designTable.addCell(designCell6);
+            designTable.addCell(designCell7);
+            designTable.addCell(designCell4);
+            this.createRowAndFillForDesign(designTable, "Total"," ",this.round(designtotalproductPrice,2),this.round(designtotalDAP,2),designtotalTaxAmt, String.valueOf(round(designtotalPriceAfterTax, 2)));
+            //document.add(designTable);
+
+
+
+            PdfPTable individualTable= new PdfPTable(gstcolumnWidths1);
+            individualTable.setWidthPercentage(100);
+            PdfPCell tablecell1 = new PdfPCell(new Paragraph("SI", fsize1));
+            PdfPCell tablecell7 = new PdfPCell(new Paragraph("Product Category", fsize1));
+            PdfPCell tablecell4 = new PdfPCell(new Paragraph("TAX %", fsize1));
+            PdfPCell tablecell5 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
+            PdfPCell tablecell6 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
+            PdfPCell tablecell3 = new PdfPCell(new Paragraph("Price After discount", fsize1));
+            individualTable.addCell(tablecell1);
+            individualTable.addCell(tablecell7);
+            individualTable.addCell(tablecell4);
+            individualTable.addCell(tablecell5);
+            individualTable.addCell(tablecell6);
+            individualTable.addCell(tablecell3);
+
+            int count=1;
+            for (GSTForProducts movableindivisualList : movableList) {
+                this.createRowAndFillDataForIndividualForProducts(individualTable,count, movableindivisualList.getCategory(),movableindivisualList.getCategoryType(),movableindivisualList.getPriceAfterDiscount(), movableindivisualList.getPrice(), movableindivisualList.getPriceAfterTax(), movableindivisualList.getTax());
+                count++;
+            }
+            //document.add(individualTable);
+
+            PdfPTable gsttotalTableFormovable = new PdfPTable(gstcolumnWidths1);
+            gsttotalTableFormovable.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableFormovable, "Total"," ",movabletotalproductPrice,movabletotalDAP,movabletotalTaxAmt, String.valueOf(round(movabletotalPriceAfterTax, 2)));
+//            document.add(gsttotalTableFormovable);
+
+           /* p=new Paragraph( "\nNon Movable Furniture\n",fsize1);
+            document.add(p);
+
+            p=new Paragraph(" \n");
+            document.add(p);*/
+
+            PdfPTable nonMovableTable= new PdfPTable(gstcolumnWidths1);
+            nonMovableTable.setWidthPercentage(100);
+            PdfPCell nonMovableCell1 = new PdfPCell(new Paragraph("SI", fsize1));
+            PdfPCell nonMovableCell2 = new PdfPCell(new Paragraph("Product Category", fsize1));
+            PdfPCell nonMovableCell5 = new PdfPCell(new Paragraph("TAX %", fsize1));
+            PdfPCell nonMovableCell6 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
+            PdfPCell nonMovableCell7 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
+            PdfPCell nonMovableCell4 = new PdfPCell(new Paragraph("Price After discount", fsize1));
+            nonMovableTable.addCell(nonMovableCell1);
+            nonMovableTable.addCell(nonMovableCell2);
+            nonMovableTable.addCell(nonMovableCell5);
+            nonMovableTable.addCell(nonMovableCell6);
+            nonMovableTable.addCell(nonMovableCell7);
+            nonMovableTable.addCell(nonMovableCell4);
+            count=1;
+            for (GSTForProducts nonmovableindivisualList: nonMovableList)
+            {
+                this.createRowAndFillDataForIndividualForProducts(nonMovableTable,count, nonmovableindivisualList.getCategory(),nonmovableindivisualList.getCategoryType(),this.round(nonmovableindivisualList.getPriceAfterDiscount(),2), nonmovableindivisualList.getPrice(), nonmovableindivisualList.getPriceAfterTax(), nonmovableindivisualList.getTax());
+                count++;
+            }
+            //document.add(nonMovableTable);
+
+            PdfPTable gsttotalTableFornonmovable = new PdfPTable(gstcolumnWidths1);
+            gsttotalTableFornonmovable.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableFornonmovable, "Total"," ",this.round(nonmovabletotalproductPrice,2),this.round(nonmovabletotalDAP,2),nonmovabletotalTaxAmt, String.valueOf(round(nonmovabletotalPriceAfterTax, 2)));
+            //document.add(gsttotalTableFornonmovable);
+
+
+
+            count=0;
+            PdfPTable scwTable= new PdfPTable(gstcolumnWidths1);
+            scwTable.setWidthPercentage(100);
+            PdfPCell scwCell1 = new PdfPCell(new Paragraph("SI", fsize1));
+            PdfPCell scwCell2 = new PdfPCell(new Paragraph("Product Category", fsize1));
+            //PdfPCell scwCell3 = new PdfPCell(new Paragraph("Annexure", fsize1));
+            PdfPCell scwCell5 = new PdfPCell(new Paragraph("TAX %", fsize1));
+            PdfPCell scwCell6 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
+            PdfPCell scwCell7 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
+            PdfPCell scwCell4 = new PdfPCell(new Paragraph("Price After discount", fsize1));
+            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
+            scwTable.addCell(scwCell1);
+            scwTable.addCell(scwCell2);
+            //scwTable.addCell(scwCell3);
+            //gstTable.addCell(gstCell3)
+            scwTable.addCell(scwCell5);
+            scwTable.addCell(scwCell6);
+            scwTable.addCell(scwCell7);
+            scwTable.addCell(scwCell4);
+            count=1;
+            for(GSTForProducts scwList: scwList)
+            {
+                this.createRowAndFillDataForIndividualForProducts(scwTable,count, scwList.getCategory(),scwList.getCategoryType(), scwList.getPriceAfterDiscount(), scwList.getPrice(), scwList.getPriceAfterTax(), scwList.getTax());
+                count++;
+            }
+            //document.add(scwTable);
+
+            PdfPTable gsttotalTableForscw = new PdfPTable(gstcolumnWidths1);
+            gsttotalTableForscw.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableForscw, "Total"," ",scwtotalproductPrice,scwtotalDAP,scwtotalTaxAmt, String.valueOf(round(scwtotalPriceAfterTax, 2)));
+            //document.add(gsttotalTableForscw);
+
+            /*float[] gsttotalcolumnWidths1 = {1, 1, 1, 1, 1, 1};
+            PdfPTable gsttotalTable = new PdfPTable(gsttotalcolumnWidths1);
+            gsttotalTable.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotal(gsttotalTable, "Total", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
+            document.add(gsttotalTable);*/
+
+            /*PdfPTable gsttotalTableForAddon = new PdfPTable(gstProductCategory);
+            gsttotalTableForAddon.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableForAddon, "Total"," ", producttotalPrice, producttotalDAP, producttotalTaxAmt, String.valueOf(round(producttotalPriceAfterTax, 2)));
+            document.add(gsttotalTableForAddon);
+
+            p=new Paragraph(" ");
+            document.add(p);
+
+            p=new Paragraph( "ADDONS\n",fsize1);
+            document.add(p);
+
+            p=new Paragraph(" ");
+            document.add(p);
+
+            PdfPTable individualTableforAddon= new PdfPTable(gstProductCategory);
+            individualTableforAddon.setWidthPercentage(100);
+            PdfPCell tableAddoncell1 = new PdfPCell(new Paragraph("SI", fsize1));
+            PdfPCell tableAddoncell2 = new PdfPCell(new Paragraph("Product Category", fsize1));
+            PdfPCell tableAddoncell3 = new PdfPCell(new Paragraph("Annexure", fsize1));
+            PdfPCell tableAddoncell4 = new PdfPCell(new Paragraph("Price After discount", fsize1));
+            PdfPCell tableAddoncell5 = new PdfPCell(new Paragraph("TAX %", fsize1));
+            PdfPCell tableAddoncell6 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
+            PdfPCell tableAddoncell7 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
+            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
+            individualTableforAddon.addCell(tableAddoncell1);
+            individualTableforAddon.addCell(tableAddoncell2);
+            individualTableforAddon.addCell(tableAddoncell3);
+            //gstTable.addCell(gstCell3);
+            individualTableforAddon.addCell(tableAddoncell4);
+            individualTableforAddon.addCell(tableAddoncell5);
+            individualTableforAddon.addCell(tableAddoncell6);
+            individualTableforAddon.addCell(tableAddoncell7);
+
+            for (GSTForProducts movableindivisualList : movableList) {
+                this.createRowAndFillDataForIndividualForAddon(individualTableforAddon,movableindivisualList.getProductFlag(), movableindivisualList.getCategory(),movableindivisualList.getCategoryType(), movableindivisualList.getPriceAfterDiscount(), movableindivisualList.getPrice(), movableindivisualList.getPriceAfterTax(), movableindivisualList.getTax());
+            }
+            for (GSTForProducts nonmovableindivisualList: nonMovableList)
+            {
+                this.createRowAndFillDataForIndividualForAddon(individualTableforAddon,nonmovableindivisualList.getProductFlag(), nonmovableindivisualList.getCategory(),nonmovableindivisualList.getCategoryType(), nonmovableindivisualList.getPriceAfterDiscount(), nonmovableindivisualList.getPrice(), nonmovableindivisualList.getPriceAfterTax(), nonmovableindivisualList.getTax());
+            }
+            for(GSTForProducts scwList: scwList)
+            {
+                this.createRowAndFillDataForIndividualForAddon(individualTableforAddon,scwList.getProductFlag(), scwList.getCategory(),scwList.getCategoryType(), scwList.getPriceAfterDiscount(), scwList.getPrice(), scwList.getPriceAfterTax(), scwList.getTax());
+            }
+
+            document.add(individualTableforAddon);
+
+
+            PdfPTable gsttotalTableForProduct = new PdfPTable(gstProductCategory);
+            gsttotalTableForProduct.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableForProduct, "Total","" ,addontotalproductPrice, addontotalDAP, addontotalTaxAmt, String.valueOf(round(addontotalPriceAfterTax, 2)));
+            document.add(gsttotalTableForProduct);*/
+
+
             PdfPTable gstTable = new PdfPTable(gstcolumnWidths1);
             gstTable.setWidthPercentage(100);
             PdfPCell gstCell1 = new PdfPCell(new Paragraph("SI", fsize1));
@@ -1007,24 +1200,30 @@ public class QuotationPDFCreator
             gstTable.addCell(gstCell6);
 
             this.getfinalGSTList(designServiceList, "Design Services");
+            /*for(GSTForProducts movableobjects :movableList)
+            {
+                this.createRowAndFillDataForGST(gstTable, movableobjects.getCategory(), movableobjects.getPriceAfterDiscount(), movableobjects.getPrice(), movableobjects.getPriceAfterTax(), movableobjects.getTax());
+            }*/
             this.getfinalGSTList(movableList, "MF");
+            /*for(GSTForProducts movableobjects :nonMovableList)
+            {
+                this.createRowAndFillDataForGST(gstTable, movableobjects.getCategory(), movableobjects.getPriceAfterDiscount(), movableobjects.getPrice(), movableobjects.getPriceAfterTax(), movableobjects.getTax());
+            }*/
             this.getfinalGSTList(nonMovableList, "NMF");
             this.getfinalGSTList(scwList, "SCW");
+
             for (GSTForProducts finalList : finalmovableList) {
                 this.createRowAndFillDataForGST(gstTable, finalList.getCategory(), finalList.getPriceAfterDiscount(), finalList.getPrice(), finalList.getPriceAfterTax(), finalList.getTax());
             }
-            document.add(gstTable);
+            //document.add(gstTable);
+
             float[] gsttotalcolumnWidths1 = {1, 1, 1, 1, 1, 1};
             PdfPTable gsttotalTable = new PdfPTable(gsttotalcolumnWidths1);
             gsttotalTable.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotal(gsttotalTable, "Total", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
-            document.add(gsttotalTable);
+           // document.add(gsttotalTable);
 
-            p = new Paragraph("\nQuotation Summary", fsize1);
-            document.add(p);
 
-            p = new Paragraph(" ");
-            document.add(p);
 
             float[] gstfinalcolumnWidths1 = {1, 4, 1, 1, 1, 1};
             PdfPTable finalTable = new PdfPTable(gstfinalcolumnWidths1);
@@ -1046,15 +1245,72 @@ public class QuotationPDFCreator
             finalTable.addCell(gstfinalCell6);
             this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set1totalproductPrice, set1totalDAP, "18%", set1totalTaxAmt, set1totalPriceAfterTax);
             this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set2totalproductPrice, set2totalDAP, "28%", set2totalTaxAmt, set2totalPriceAfterTax);
-            document.add(finalTable);
+            //document.add(finalTable);
 
-            float[] gtcolumnWidths1 = {1, 1, 1, 1, 1, 1};
+            float[] gtcolumnWidths1 = {1,4 , 1, 1, 1, 1};
             PdfPTable gstTable1 = new PdfPTable(gtcolumnWidths1);
             gstTable1.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotal(gstTable1, "Total", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
-            document.add(gstTable1);
+            //document.add(gstTable1);
 
-            document.add(gsttotalTable);
+            if(quoteData.fromVersion.equals("1.0") || quoteData.fromVersion.startsWith("0."))
+            {
+                p = new Paragraph("\nQuotation Summary", fsize1);
+                document.add(p);
+
+                p = new Paragraph(" ");
+                document.add(p);
+
+                document.add(finalTable);
+                document.add(gstTable1);
+
+            }
+            else {
+               // Make scope of service/s response as 'yes' for the following - Electrical in SpaceType_Room Living Room:electrical laboure
+
+                p=new Paragraph("Consultation Services\n",fsize1);
+                document.add(p);
+                p=new Paragraph(" ");
+                document.add(p);
+                document.add(designTable);
+
+                p=new Paragraph( "Movable Furniture\n",fsize1);
+                document.add(p);
+
+                p=new Paragraph(" \n");
+                document.add(p);
+
+                document.add(individualTable);
+                document.add(gsttotalTableFormovable);
+
+                p=new Paragraph( "\nNon Movable Furniture\n",fsize1);
+                document.add(p);
+
+                p=new Paragraph(" \n");
+                document.add(p);
+                document.add(nonMovableTable);
+                document.add(gsttotalTableFornonmovable);
+
+
+                p=new Paragraph( "\nServices & Civil Works\n",fsize1);
+                document.add(p);
+
+                p=new Paragraph(" \n");
+                document.add(p);
+                document.add(scwTable);
+                document.add(gsttotalTableForscw);
+
+                p=new Paragraph(" ");
+                document.add(p);
+
+                p=new Paragraph("Works Contract Summary",fsize1);
+                document.add(p);
+
+                p=new Paragraph(" ");
+                document.add(p);
+                document.add(gstTable);
+                document.add(gsttotalTable);
+            }
 
         }
         document.close();
@@ -1784,6 +2040,7 @@ public class QuotationPDFCreator
         double amount=0.0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
+            LOG.info("Accesoory " +accessory);
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
                // LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
@@ -1791,7 +2048,11 @@ public class QuotationPDFCreator
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
             }
-            amount=amount+(accessory.quantity*accessory.msp);
+            LOG.info("accessory code " +accessory.code+ " priceDate " +proposalHeader.getPriceDate()+ " city " +proposalHeader.getProjectCity());
+            PriceMaster accessoryPrice=RateCardService.getInstance().getAccessoryRate(accessory.code,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+            LOG.info("Accessory Price " +accessoryPrice);
+            amount=amount+(accessory.quantity*accessoryPrice.getPrice());
+            //amount=amount+(accessory.quantity*accessory.msp);
         }
 
         this.createCellWithData(tabname,"Accessory Cost",amount);
@@ -2062,7 +2323,7 @@ public class QuotationPDFCreator
         List<AssembledProductInQuote> assembledProducts = this.quoteData.getAssembledProducts();
         for (AssembledProductInQuote product : assembledProducts)
         {
-
+            String ProductType="P";
             LOG.info("design service price " +DESIGN_SERVICE_PRICE+ "price Date " + proposalHeader.getPriceDate()+ " city " +proposalHeader.getProjectCity());
             LOG.info("Design service " +designServicePrice);
             LOG.info("Design Service tax " +designServiceTax);
@@ -2081,11 +2342,11 @@ public class QuotationPDFCreator
                 pricewithTax=price*nonMovablePriceTax.getSourcePrice();
                 dsPrice=(product.getTotalAmount()-discountAmount)*(designServicePrice.getPrice()/100);
                 dsWithTax=dsPrice*designServiceTax.getSourcePrice();
-
+                String tax="18%";
                 LOG.info("discount percentage " +quoteData.getDiscountPercentage());
-                GSTForProducts nonmovable=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),price,pricewithTax);
+                GSTForProducts nonmovable=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),price,pricewithTax,tax,"P",productType);
                 nonMovableList.add(nonmovable);
-                GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax);
+                GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax,tax,"P",productType);
                 designServiceList.add(designservice);
 
                 LOG.info("non movable furniture " +productType+ " " +product.getTitle());
@@ -2098,9 +2359,10 @@ public class QuotationPDFCreator
                 pricewithTax=price*movablePriceTax.getSourcePrice();
                 dsPrice=(product.getTotalAmount()-discountAmount)*(designServicePrice.getPrice()/100);
                 dsWithTax=dsPrice*designServiceTax.getSourcePrice();
-                GSTForProducts movable=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),price,pricewithTax);
+                String tax="28%";
+                GSTForProducts movable=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),price,pricewithTax,tax,"P",productType);
                 movableList.add(movable);
-                GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax);
+                GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax,tax,"P",productType);
                 designServiceList.add(designservice);
                 LOG.info("movable furniture " +productType+ " " +product.getTitle());
             }
@@ -2112,26 +2374,28 @@ public class QuotationPDFCreator
                 pricewithTax=dsPrice*scwTax.getSourcePrice();
                 dsPrice=(product.getTotalAmount()-discountAmount)*(designServicePrice.getPrice()/100);
                 dsWithTax=dsPrice*designServiceTax.getSourcePrice();
-                GSTForProducts scw=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),price,pricewithTax);
+                String tax="18%";
+                GSTForProducts scw=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),price,pricewithTax,tax,"P",productType);
                 scwList.add(scw);
-                GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax);
+                GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax,tax,"P",productType);
                 designServiceList.add(designservice);
                 LOG.info("SCW " +productType+ " " +product.getTitle());
             }
         }
         List<ProductAddon> productAddonsforAccessories=this.quoteData.getAccessories();
         LOG.info("Addon size " +productAddonsforAccessories.size());
+        String AddonType="A";
         for(ProductAddon productAddon:productAddonsforAccessories)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
             LOG.info("Addon type " +productType);
-
+            String tax="28%";
             if(productType.equals("MF"))
             {
                 double pricewithTax=0;
                 pricewithTax=productAddon.getAmount()*movablePriceTax.getSourcePrice();
-                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax);
+                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 movableList.add(movable);
             }
 
@@ -2143,12 +2407,12 @@ public class QuotationPDFCreator
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
             LOG.info("Addon type " +productType);
-
+            String tax="28%";
             if(productType.equals("MF"))
             {
                 double pricewithTax=0;
                 pricewithTax=productAddon.getAmount()*movablePriceTax.getSourcePrice();
-                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax);
+                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 movableList.add(movable);
             }
 
@@ -2160,13 +2424,14 @@ public class QuotationPDFCreator
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
+            String tax="18%";
             LOG.info("Addon type " +productType);
 
             if(productType.equals("SCW"))
             {
                 double pricewithTax=0;
                 pricewithTax=productAddon.getAmount()*scwTax.getSourcePrice();
-                GSTForProducts scw=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax);
+                GSTForProducts scw=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 scwList.add(scw);
             }
         }
@@ -2178,12 +2443,12 @@ public class QuotationPDFCreator
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
             LOG.info("Addon type " +productType);
-
+            String tax="18%";
             if(productType.equals("SCW"))
             {
                 double pricewithTax=0;
                 pricewithTax=productAddon.getAmount()*scwTax.getSourcePrice();
-                GSTForProducts scw=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax);
+                GSTForProducts scw=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 scwList.add(scw);
             }
         }
@@ -2195,12 +2460,12 @@ public class QuotationPDFCreator
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
             LOG.info("Addon type " +productType);
-
+            String tax="28%";
             if(productType.equals("MF"))
             {
                 double pricewithTax=0;
                 pricewithTax=productAddon.getAmount()*movablePriceTax.getSourcePrice();
-                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax);
+                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 movableList.add(movable);
             }
 
@@ -2213,12 +2478,12 @@ public class QuotationPDFCreator
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
             LOG.info("Addon type " +productType);
-
+            String tax="18%";
             if(productType.equals("SCW"))
             {
                 double pricewithTax=0;
                 pricewithTax=productAddon.getAmount()*scwTax.getSourcePrice();
-                GSTForProducts scw=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax);
+                GSTForProducts scw=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 scwList.add(scw);
             }
         }
@@ -2227,20 +2492,42 @@ public class QuotationPDFCreator
         GSTForProducts movableProducts;
         for(GSTForProducts movable:movableList)
         {
+            double tax_amount=movable.getPrice()-movable.getPriceAfterTax();
             LOG.info("movable list " +movable.toString());
+            movabletotalproductPrice+=movable.getPriceAfterDiscount();
+            movabletotalDAP+=movable.getPrice();
+            movabletotalTaxAmt+=movable.getPriceAfterTax();
+            movabletotalPriceAfterTax+=this.round(tax_amount,2);
         }
         //movableProducts=new GSTForProducts("Movable Furniture","",priceAfterDiscount,)
-        for(GSTForProducts non : nonMovableList)
+        for(GSTForProducts nonmovable : nonMovableList)
         {
-            LOG.info("non movable " +non.toString());
+            LOG.info("non movable " +nonmovable.toString());
+            double tax_amount=nonmovable.getPrice()-nonmovable.getPriceAfterTax();
+            nonmovabletotalproductPrice+=nonmovable.getPriceAfterDiscount();
+            nonmovabletotalDAP+=nonmovable.getPrice();
+            nonmovabletotalTaxAmt+=nonmovable.getPriceAfterTax();
+            nonmovabletotalPriceAfterTax+=this.round(tax_amount,2);
         }
         for(GSTForProducts scw : scwList)
         {
             LOG.info("scw " +scw.toString());
+
+            LOG.info("non movable " +scw.toString());
+            double tax_amount=scw.getPrice()-scw.getPriceAfterTax();
+            scwtotalproductPrice+=scw.getPriceAfterDiscount();
+            scwtotalDAP+=scw.getPrice();
+            scwtotalTaxAmt+=scw.getPriceAfterTax();
+            scwtotalPriceAfterTax+=this.round(tax_amount,2);
         }
-        for(GSTForProducts ds: designServiceList)
+        for(GSTForProducts design: designServiceList)
         {
-            LOG.info("Design services " +ds.toString());
+            LOG.info("Design services " +design.toString());
+            double tax_amount=design.getPrice()-design.getPriceAfterTax();
+            designtotalproductPrice+=design.getPriceAfterDiscount();
+            designtotalDAP+=design.getPrice();
+            designtotalTaxAmt+=design.getPriceAfterTax();
+            designtotalPriceAfterTax+=this.round(tax_amount,2);
         }
     }
 
@@ -2268,7 +2555,7 @@ public class QuotationPDFCreator
             tax="18%";
         }else if(productType.equals("SCW"))
         {
-            title="SCW";
+            title="Services and Civil Work";
             tax="18%";
         }else
         {
@@ -2332,12 +2619,6 @@ public class QuotationPDFCreator
         cell2.addElement(Pindex);
         tabname.addCell(cell2);*/
 
-        PdfPCell cell4=new PdfPCell();
-        Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell4.addElement(Pindex);
-        tabname.addCell(cell4);
-
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
@@ -2355,6 +2636,13 @@ public class QuotationPDFCreator
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
         tabname.addCell(cell7);
+
+        PdfPCell cell4=new PdfPCell();
+        Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
         count++;
     }
 
@@ -2393,11 +2681,7 @@ public class QuotationPDFCreator
         cell2.addElement(Pindex);
         tabname.addCell(cell2);*/
 
-        PdfPCell cell4=new PdfPCell();
-        Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell4.addElement(Pindex);
-        tabname.addCell(cell4);
+
 
         PdfPCell cell6=new PdfPCell();
         Pindex=new Paragraph();
@@ -2416,7 +2700,13 @@ public class QuotationPDFCreator
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
         tabname.addCell(cell7);
-        count++;
+
+        PdfPCell cell4=new PdfPCell();
+        Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+        //count++;
 
     }
 
@@ -2456,12 +2746,6 @@ public class QuotationPDFCreator
         cell2.addElement(Pindex);
         tabname.addCell(cell2);*/
 
-        PdfPCell cell4=new PdfPCell();
-        Pindex=new Paragraph(Double.toString(round(DAP,2)),fsize);
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell4.addElement(Pindex);
-        tabname.addCell(cell4);
-
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(taxPercentage,fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
@@ -2479,6 +2763,324 @@ public class QuotationPDFCreator
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
         tabname.addCell(cell7);
+
+        PdfPCell cell4=new PdfPCell();
+        Pindex=new Paragraph(Double.toString(round(DAP,2)),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
         finalcount++;
+    }
+
+
+    private void createRowAndFillDataForIndividualForProducts(PdfPTable tabname,int count,String GSTCategory,String categoryType, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
+    {
+            String title="";
+            LOG.info("GST Category in products " + GSTCategory);
+            if(categoryType.equals("MF"))
+            {
+                title="Movable Furniture";
+            }
+            else if(categoryType.equals("NMF"))
+            {
+                title="Non Movable Furniture";
+
+            }else if(categoryType.equals("SCW"))
+            {
+                title="Services and Civil Work";
+
+            }
+
+            double tax_amount = round(DesignpriceAfterDsicount - currentpriceAfterTax, 2);
+
+            producttotalPrice+=PriceAfterDiscount;
+            producttotalDAP+=DesignpriceAfterDsicount;
+            producttotalTaxAmt+=currentpriceAfterTax;
+            producttotalPriceAfterTax+=tax_amount;
+
+        /*totalproductPrice+=PriceAfterDiscount;
+        totalDAP+=DesignpriceAfterDsicount;
+        totalTaxAmt+=currentpriceAfterTax;
+        totalPriceAfterTax+=tax_amount;
+        //}
+        if(tax.equals("18%"))
+        {
+            set1totalproductPrice+=PriceAfterDiscount;
+            set1totalDAP+=DesignpriceAfterDsicount;
+            set1totalTaxAmt+=currentpriceAfterTax;
+            set1totalPriceAfterTax+=tax_amount;
+
+        }else
+        {
+            set2totalproductPrice+=PriceAfterDiscount;
+            set2totalDAP+=DesignpriceAfterDsicount;
+            set2totalTaxAmt+=currentpriceAfterTax;
+            set2totalPriceAfterTax+=tax_amount;
+        }*/
+
+
+            PdfPCell cell;
+            Paragraph Pindex;
+            Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+
+            PdfPCell cell1 = new PdfPCell();
+            Pindex = new Paragraph(Integer.valueOf(count).toString(), size1);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell1.addElement(Pindex);
+            tabname.addCell(cell1);
+
+            PdfPCell cell2 = new PdfPCell();
+            Pindex = new Paragraph(GSTCategory, fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell2.addElement(Pindex);
+            tabname.addCell(cell2);
+
+           /* cell = new PdfPCell();
+            Pindex = new Paragraph(title, fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell.addElement(Pindex);
+            tabname.addCell(cell);*/
+
+
+            PdfPCell cell5 = new PdfPCell();
+            Pindex = new Paragraph(tax, fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell5.addElement(Pindex);
+            tabname.addCell(cell5);
+
+            PdfPCell cell6 = new PdfPCell();
+            Pindex = new Paragraph(Double.toString(tax_amount), fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell6.addElement(Pindex);
+            tabname.addCell(cell6);
+
+            PdfPCell cell7 = new PdfPCell();
+            Pindex = new Paragraph(Double.toString(currentpriceAfterTax), fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell7.addElement(Pindex);
+            tabname.addCell(cell7);
+          //  individualcountforProduct++;
+
+        PdfPCell cell4 = new PdfPCell();
+        Pindex = new Paragraph(Double.toString(DesignpriceAfterDsicount), fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+        //count++;
+    }
+    private void createRowAndFillDataForIndividualForAddon(PdfPTable tabname,String Productcategory,String GSTCategory,String category, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
+    {
+        String title="";
+        if(Productcategory.equals("A")) {
+
+            if(category.equals("MF"))
+            {
+                title="Movable Furniture";
+
+
+            }
+            else if(category.equals("NMF"))
+            {
+                title="Non Movable Furniture";
+
+            }else if(category.equals("SCW"))
+            {
+                title="Services and Civil Work";
+
+            }
+
+            LOG.info("GST Category " + GSTCategory);
+            //String sequence=BOLD_ALPHABET_SEQUENCE[count];
+
+            double tax_amount = round(DesignpriceAfterDsicount - currentpriceAfterTax, 2);
+
+            addontotalproductPrice+=PriceAfterDiscount;
+            addontotalDAP+=DesignpriceAfterDsicount;
+            addontotalTaxAmt+=currentpriceAfterTax;
+            addontotalPriceAfterTax+=tax_amount;
+
+            if(GSTCategory.equals("MF"))
+            {
+                title="Movable Furniture";
+
+
+            }
+            else if(GSTCategory.equals("NMF"))
+            {
+                title="Non Movable Furniture";
+
+            }else if(GSTCategory.equals("SCW"))
+            {
+                title="Services and Civil Work";
+
+            }
+            PdfPCell cell;
+            Paragraph Pindex;
+            Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+
+            PdfPCell cell1 = new PdfPCell();
+            Pindex = new Paragraph(Integer.valueOf(individualcountforAddon).toString(), size1);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell1.addElement(Pindex);
+            tabname.addCell(cell1);
+
+            PdfPCell cell2 = new PdfPCell();
+            Pindex = new Paragraph(GSTCategory, fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell2.addElement(Pindex);
+            tabname.addCell(cell2);
+
+            cell = new PdfPCell();
+            Pindex = new Paragraph(title, fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell.addElement(Pindex);
+            tabname.addCell(cell);
+
+
+            PdfPCell cell4 = new PdfPCell();
+            Pindex = new Paragraph(Double.toString(DesignpriceAfterDsicount), fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell4.addElement(Pindex);
+            tabname.addCell(cell4);
+
+            PdfPCell cell5 = new PdfPCell();
+            Pindex = new Paragraph(tax, fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell5.addElement(Pindex);
+            tabname.addCell(cell5);
+
+            PdfPCell cell6 = new PdfPCell();
+            Pindex = new Paragraph(Double.toString(tax_amount), fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell6.addElement(Pindex);
+            tabname.addCell(cell6);
+
+            PdfPCell cell7 = new PdfPCell();
+            Pindex = new Paragraph(Double.toString(currentpriceAfterTax), fsize);
+            Pindex.setAlignment(Element.ALIGN_LEFT);
+            cell7.addElement(Pindex);
+            tabname.addCell(cell7);
+            //count++;
+            individualcountforAddon++;
+        }
+    }
+
+    private void createRowAndFillDataForGSTtotalProductAndAddon(PdfPTable tabname,String GSTCategory,String category, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
+    {
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph();
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+        cell1.setRowspan(2);
+
+
+        cell=new PdfPCell();
+        Pindex=new Paragraph(GSTCategory,size1);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell.addElement(Pindex);
+        tabname.addCell(cell);
+
+        /*PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph();
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);*/
+
+        PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph();
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+       /* PdfPCell cell6=new PdfPCell();
+        Pindex=new Paragraph();
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell6.addElement(Pindex);
+        tabname.addCell(cell6);*/
+
+        PdfPCell cell5=new PdfPCell();
+        Pindex=new Paragraph(tax,fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell5.addElement(Pindex);
+        tabname.addCell(cell5);
+
+        PdfPCell cell7=new PdfPCell();
+        Pindex=new Paragraph(Double.toString(round(currentpriceAfterTax,2)),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell7.addElement(Pindex);
+        tabname.addCell(cell7);
+        //count++;
+
+        PdfPCell cell4=new PdfPCell();
+        Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
+    }
+
+    private void createRowAndFillForDesign(PdfPTable tabname,String GSTCategory,String category, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
+    {
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph();
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+        cell1.setRowspan(2);
+
+
+        cell=new PdfPCell();
+        Pindex=new Paragraph(GSTCategory,size1);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell.addElement(Pindex);
+        tabname.addCell(cell);
+
+        /*PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph();
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);*/
+
+        PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph("18%",fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+       /* PdfPCell cell6=new PdfPCell();
+        Pindex=new Paragraph();
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell6.addElement(Pindex);
+        tabname.addCell(cell6);*/
+
+        PdfPCell cell5=new PdfPCell();
+        Pindex=new Paragraph(tax,fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell5.addElement(Pindex);
+        tabname.addCell(cell5);
+
+        PdfPCell cell7=new PdfPCell();
+        Pindex=new Paragraph(Double.toString(round(currentpriceAfterTax,2)),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell7.addElement(Pindex);
+        tabname.addCell(cell7);
+        //count++;
+
+        PdfPCell cell4=new PdfPCell();
+        Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
     }
 }
