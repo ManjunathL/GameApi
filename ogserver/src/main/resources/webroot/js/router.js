@@ -106,16 +106,16 @@ define([
             'thankyou-:page(/)':'thankyou',
             'lp(/)':'landingpage',
             'oglp(/)':'newlandingpage',
-            'fblp(/)':'fblandingpage',
+            /*'fblp(/)':'fblandingpage',*/
             'mangalore-lp(/)':'mangalorelandingpage',
-            'email-lp(/)':'emaillandingpage',
+            /*'email-lp(/)':'emaillandingpage',*/
             'nri-services-:cityName(/)' : 'nripage',
             'media(/)': 'mediapage',
             'kitchen-slp(/)': 'kitchenslppage',
-            'shobha-lp(/)': 'shobhalandingpage',
+            /*'shobha-lp(/)': 'shobhalandingpage',*/
             'pune-lp(/)': 'punelandingpage',
             'kitchen-lp(/)': 'kitchenlandingpage',
-            'holiday-lp(/)': 'holidaylandingpage',
+            /*'holiday-lp(/)': 'holidaylandingpage',*/
             'e-book(/)': 'ebook',
             'completed-projects(/)': 'completedprojectspage',
             //'newproduct-details-:id(/)': 'newdetailspage',
