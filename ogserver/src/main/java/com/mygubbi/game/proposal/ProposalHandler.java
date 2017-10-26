@@ -848,7 +848,7 @@ public class ProposalHandler extends AbstractRouteHandler
         String version=routingContext.getBodyAsJson().getString("fromVersion");
         LOG.info("version value in merged pdf" +version);
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
-        Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
+        List<String> inputPdfs = new ArrayList<>();
 
         Boolean workContractFlag = false;
         if(quoteRequestJson.containsKey("worksContractFlag") && (quoteRequestJson.getValue("worksContractFlag") != null)){
@@ -858,37 +858,36 @@ public class ProposalHandler extends AbstractRouteHandler
 
 
         if(workContractFlag && bookingformresponse.containsKey("worksContractPDFfile"))
-            inputPdfList.put(bookingformresponse.getString("worksContractPDFfile"),PdfPage.PORTRAIT);
+            inputPdfs.add(bookingformresponse.getString("worksContractPDFfile"));
 
-        inputPdfList.put(quotePDfResponse.getString("quoteFile"),PdfPage.PORTRAIT);
+        inputPdfs.add(quotePDfResponse.getString("quoteFile"));
         if(bookingFormFlag.equals("Yes"))
         {
             if(city.equals("Bangalore"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_banglore","/mnt/game/proposal/templates/BookingFormBanglore.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }else if(city.equals("Mangalore"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_manglore","/mnt/game/proposal/templates/BookingFormManglore.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }else if(city.equals("Chennai"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_chennai","/mnt/game/proposal/templates/BookingFormChennai.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }else if(city.equals("Pune"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_pune","/mnt/game/proposal/templates/BookingFormPune.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }
         }
         if(sowResponse.size() > 0) {
-            inputPdfList.put(sowResponse.getString("sowPdfFile"), PdfPage.PORTRAIT);
+            inputPdfs.add(sowResponse.getString("sowPdfFile"));
         }
 
         if(bookingFormFlag.equalsIgnoreCase("yes") && bookingformresponse.containsKey("bookingFormPDFfile"))
-            inputPdfList.put(bookingformresponse.getString("bookingFormPDFfile"),PdfPage.PORTRAIT);
+            inputPdfs.add(bookingformresponse.getString("bookingFormPDFfile"));
 
-        inputPdfList.keySet().forEach(in -> LOG.info(in));
 
         String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" )+"/"+routingContext.getBodyAsJson().getInteger("proposalId");
         String merged_pdf = ConfigHolder.getInstance().getStringValue("merged_pdf","merged.pdf" );
@@ -896,7 +895,9 @@ public class ProposalHandler extends AbstractRouteHandler
         String outputFileName = location_folder+"/"+merged_pdf;
         LOG.info("outputFileName = "+outputFileName);
 
-        Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfList, outputFileName));
+        inputPdfs.forEach(f->{LOG.info("File Name :: "+f);});
+
+        Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
