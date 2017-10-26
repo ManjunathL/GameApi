@@ -10,30 +10,25 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by shilpa on 14/7/17.
  */
 public class MergePdfsRequest {
-    private Map<String,PdfNumber> inputPdfMap;
+
+    private List<String> inputPdfs;
     private String mergedFileName;
     private final static Logger LOG = LogManager.getLogger(MergePdfsRequest.class);
-    public MergePdfsRequest(Map<String, PdfNumber> inputPdfMap, String mergedFileName) {
-        this.inputPdfMap = inputPdfMap;
+    public MergePdfsRequest(List<String> pdfs,String mergedFileName){
+        this.inputPdfs = pdfs;
         this.mergedFileName = mergedFileName;
     }
 
-    public Map<String, PdfNumber> getInputPdfMap() {
-        return inputPdfMap;
-    }
 
     public String getMergedFileName() {
         return mergedFileName;
-    }
-
-    public void setInputPdfMap(Map<String, PdfNumber> inputPdfMap) {
-        this.inputPdfMap = inputPdfMap;
     }
 
     public void setMergedFileName(String mergedFileName) {
@@ -41,73 +36,25 @@ public class MergePdfsRequest {
     }
 
     public void mergePdfFiles(){
-
-        Document document = new Document();
-        Map<PdfReader,PdfNumber> readers =  new LinkedHashMap<>();
-        int totalPages = 0;
-
-        //Create pdf Iterator object using inputPdfList.
-        Iterator<String> pdfIterator = inputPdfMap.keySet().iterator();
-     /*   while (pdfIterator.hasNext())
-        {
-            String inputFile = pdfIterator.next();
-            LOG.info("Shruthi  $$$$ " +inputFile);
-        }
-*/
         try {
-            // Create reader list for the input pdf files.
-            while (pdfIterator.hasNext()) {
-
-                String inputFile = pdfIterator.next();
-                PdfReader pdfReader = new PdfReader(new FileInputStream(inputFile));
-                readers.put(pdfReader, inputPdfMap.get(inputFile));
-
-                totalPages = totalPages + pdfReader.getNumberOfPages();
-               /* LOG.info("total pages " +pdfReader.getNumberOfPages());*/
-            }
-
-            // Create writer for the outputStream
-            OutputStream outputStream = new FileOutputStream(mergedFileName);
-            PdfWriter writer = PdfWriter.getInstance(document, outputStream);
-
-            //Open document.
-            document.open();
-
-            //Contain the pdf data.
-            PdfContentByte pageContentByte = writer.getDirectContent();
-
-            PdfImportedPage pdfImportedPage;
-            int currentPdfReaderPage = 1;
-            Iterator<PdfReader> iteratorPDFReader = readers.keySet().iterator();
-
-            // Iterate and process the reader list.
-            while (iteratorPDFReader.hasNext()) {
-                PdfReader pdfReader = iteratorPDFReader.next();
-               /* LOG.info("loop 1");*/
-                //Create page and add content
-               // LOG.info("currentPDFreaderpage " +currentPdfReaderPage + "pdfReader.getNumberOfPages() " +pdfReader.getNumberOfPages());
-                while (currentPdfReaderPage <= pdfReader.getNumberOfPages()) {
-                    document.newPage();
-
-//                    writer.addPageDictEntry(PdfName.ROTATE, readers.get(pdfReader));
-                    pdfImportedPage = writer.getImportedPage(pdfReader, currentPdfReaderPage);
-                    pageContentByte.addTemplate(pdfImportedPage, 0, 0);
-                    currentPdfReaderPage++;
-//                    document.setPageSize(PageSize.A4.rotate());
+            Document PDFCombineUsingJava = new Document();
+            PdfCopy copy = new PdfCopy(PDFCombineUsingJava, new FileOutputStream(mergedFileName));
+            PDFCombineUsingJava.open();
+            PdfReader ReadInputPDF;
+            int number_of_pages;
+            for (int i = 0; i < inputPdfs.size(); i++) {
+                ReadInputPDF = new PdfReader(inputPdfs.get(i));
+                number_of_pages = ReadInputPDF.getNumberOfPages();
+                for (int page = 0; page < number_of_pages; ) {
+                    copy.addPage(copy.getImportedPage(ReadInputPDF, ++page));
                 }
-                currentPdfReaderPage = 1;
-                pdfReader.close();
             }
-
-
-            //Close document and outputStream.
-            outputStream.flush();
-            document.close();
-            outputStream.close();
-
-            System.out.println("Pdf files merged successfully.");
-        }catch(Exception e){
+            PDFCombineUsingJava.close();
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
+            System.out.println(e);
         }
     }
 

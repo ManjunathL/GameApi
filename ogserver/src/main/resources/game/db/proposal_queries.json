@@ -1869,8 +1869,8 @@
     {
       "id": "dw_product_module.insert",
       "type": "insert",
-      "table": "dw_product_module",
-      "query": "insert into dw_product_module (proposalId, version, proposalTitle, priceDate, businessDate, region,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag, spaceType, room, prId, prTitle,prCategoryCode, moduleSeq, moduleCode, description, status,discountAmount,discountPercentage,width, depth, height, moduleCategory, handleSize, handleQty, carcass, finish, finishMaterial, color, exposedLeft, exposedRight, exposedBottom, exposedTop, exposedBack, exposedOpen, noOfAccPacks, moduleArea, ccPrice, ccWoTax, ccCost, ccProfit, ccMargin, shPrice, shWoTax, shCost, shProfit, shMargin, hwPrice, hwWoTax, hwCost, hwProfit, hwMargin, accPrice, accWoTax, accCost, accProfit, accMargin, handlePrice, handleWoTax, handleCost, handleProfit, handleMargin, hingePrice, hingeWoTax, hingeCost, hingeProfit, hingeMargin, lrPrice, lrWoTax, lrCost, lrProfit, lrMargin, modulePrice, moduleWoTax, moduleCost, moduleProfit, moduleMargin, knobType, knobFinish, handleType, handleFinish, knobQty, handleTypeSelection) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "table": "game_product_module",
+      "query": "insert into game_product_module (proposalId, version, proposalTitle, priceDate, businessDate, region,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag, spaceType, room, prId, prTitle,prCategoryCode, moduleSeq, moduleCode, description, status,discountAmount,discountPercentage,width, depth, height, moduleCategory, handleSize, handleQty, carcass, finish, finishMaterial, color, exposedLeft, exposedRight, exposedBottom, exposedTop, exposedBack, exposedOpen, noOfAccPacks, moduleArea, ccPrice, ccWoTax, ccCost, ccProfit, ccMargin, shPrice, shWoTax, shCost, shProfit, shMargin, hwPrice, hwWoTax, hwCost, hwProfit, hwMargin, accPrice, accWoTax, accCost, accProfit, accMargin, handlePrice, handleWoTax, handleCost, handleProfit, handleMargin, hingePrice, hingeWoTax, hingeCost, hingeProfit, hingeMargin, lrPrice, lrWoTax, lrCost, lrProfit, lrMargin, modulePrice, moduleWoTax, moduleCost, moduleProfit, moduleMargin, knobType, knobFinish, handleType, handleFinish, knobQty, handleTypeSelection) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","crmId","quoteNo","designerName","salesName","source","fromProduct","beforeProductionSpecification","fromProposal","offerType","packageFlag","spaceType","room","prId","prTitle","prCategoryCode","moduleSeq","moduleCode","description","status","discountAmount","discountPercentage","width","depth","height","moduleCategory","handleSize","handleQty","carcass","finish","finishMaterial","color","exposedLeft","exposedRight","exposedBottom","exposedTop","exposedBack","exposedOpen","noOfAccPacks","moduleArea","ccPrice","ccWoTax","ccCost","ccProfit","ccMargin","shPrice","shWoTax","shCost","shProfit","shMargin","hwPrice","hwWoTax","hwCost","hwProfit","hwMargin","accPrice","accWoTax","accCost","accProfit","accMargin","handlePrice","handleWoTax","handleCost","handleProfit","handleMargin","hingePrice","hingeWoTax","hingeCost","hingeProfit","hingeMargin","lrPrice","lrWoTax","lrCost","lrProfit","lrMargin","modulePrice","moduleWoTax","moduleCost","moduleProfit","moduleMargin","knobType", "knobFinish", "handleType", "handleFinish", "knobQty", "handleTypeSelection"],
       "jsonfields":[]
     },
@@ -1878,56 +1878,56 @@
     {
       "id": "dw_module_component.insert",
       "type": "insert",
-      "table": "dw_module_component",
-      "query":"insert into dw_module_component (proposalId,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag,proposalTitle, version, priceDate, businessDate, region,status,discountAmount,discountPercentage, spaceType, room, prId, prTitle,prPrice,prPriceAfterDiscount,prArea,prCategory, moduleType, moduleSeq, moduleCode,moduleCategory,accPackCode, carcass, finish, finishMaterial,color,width, depth, height,panelArea,compType, compUom, compCode,compQty, compTitle, compPrice,compPriceAfterDiscount, compWoTax, compCost, compProfit, compMargin,erpCode,articleId) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "table": "game_module_component",
+      "query":"insert into game_module_component (proposalId,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag,proposalTitle, version, priceDate, businessDate, region,status,discountAmount,discountPercentage, spaceType, room, prId, prTitle,prPrice,prPriceAfterDiscount,prArea,prCategory, moduleType, moduleSeq, moduleCode,moduleCategory,accPackCode, carcass, finish, finishMaterial,color,width, depth, height,panelArea,compType, compUom, compCode,compQty, compTitle, compPrice,compPriceAfterDiscount, compWoTax, compCost, compProfit, compMargin,erpCode,articleId) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       "params": ["proposalId","crmId","quoteNo","designerName","salesName","source","fromProduct","beforeProductionSpecification","fromProposal","offerType","packageFlag","proposalTitle","version","priceDate","businessDate","region","status","discountAmount","discountPercentage","spaceType","room","prId","prTitle","prPrice","prPriceAfterDiscount","prArea","prCategory","moduleType","moduleSeq","moduleCode","moduleCategory","accPackCode","carcass","finish","finishMaterial","color","width","depth","height","panelArea","compType","compUom","compCode","compQty","compTitle","compPrice","compPriceAfterDiscount","compWoTax","compCost","compProfit","compMargin","erpCode","articleId"],
       "jsonfields":[]
     },
     {
       "id": "dw_proposal.insert",
       "type": "insert",
-      "table": "dw_proposal",
-      "query": "insert into dw_proposal (proposalId, version, proposalTitle, region,crmId,quoteNo,projectName, designerName, salesName,beforeProductionSpecification,fromProposal,offerType,packageFlag, designPartnerName, proposalUpdatedBy, proposalCreateDate, proposalPriceDate, businessDate, versionCreatedBy, versionCreatedOn, versionUpdatedBy, versionUpdatedOn, stdModuleCount, nStdModuleCount, hikeModuleCount, vrPrice, vrPriceAfterDiscount, vrPriceAfterTax, vrCost, vrProfit, vrMargin,status,discountAmount,discountPercentage, prPrice, prPriceAfterDiscount, prPriceAfterTax, prCost, prProfit, prMargin, wwPrice, wwPriceAfterDiscount, wwPriceAfterTax, wwCost, wwProfit, wwMargin, bpPrice, bpPriceAfterDiscount, bpPriceAfterTax, bpCost, bpProfit, bpMargin, svPrice, svPriceAfterDiscount, svPriceAfterTax, svCost, svProfit, svMargin, kitchenCount, wardrobeCount, NSproductCount, bpCount, svCount, stdModulePrice, nStdModulePrice, hikeModulePrice,hikeModuleCost, hwPrice, hwPriceAfterTax, hwPriceAfterDiscount, hwCost, hwProfit, hwMargin, accPrice, accPriceAfterTax, accPriceAfterDiscount, accCost, accProfit, accMargin, hkPrice, hkPriceAfterTax, hkPriceAfterDiscount, hkCost, hkProfit, hkMargin, hingePrice, hingePriceAfterTax, hingePriceAfterDiscount, hingeCost, hingeProfit, hingeMargin, lcPrice, lcPriceAfterTax, lcPriceAfterDiscount, lcCost, lcProfit, lcMargin, laPrice, laPriceAfterTax, laPriceAfterDiscount, laCost, laProfit, laMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "table": "game_proposal",
+      "query": "insert into game_proposal (proposalId, version, proposalTitle, region,crmId,quoteNo,projectName, designerName, salesName,beforeProductionSpecification,fromProposal,offerType,packageFlag, designPartnerName, proposalUpdatedBy, proposalCreateDate, proposalPriceDate, businessDate, versionCreatedBy, versionCreatedOn, versionUpdatedBy, versionUpdatedOn, stdModuleCount, nStdModuleCount, hikeModuleCount, vrPrice, vrPriceAfterDiscount, vrPriceAfterTax, vrCost, vrProfit, vrMargin,status,discountAmount,discountPercentage, prPrice, prPriceAfterDiscount, prPriceAfterTax, prCost, prProfit, prMargin, wwPrice, wwPriceAfterDiscount, wwPriceAfterTax, wwCost, wwProfit, wwMargin, bpPrice, bpPriceAfterDiscount, bpPriceAfterTax, bpCost, bpProfit, bpMargin, svPrice, svPriceAfterDiscount, svPriceAfterTax, svCost, svProfit, svMargin, kitchenCount, wardrobeCount, NSproductCount, bpCount, svCount, stdModulePrice, nStdModulePrice, hikeModulePrice,hikeModuleCost, hwPrice, hwPriceAfterTax, hwPriceAfterDiscount, hwCost, hwProfit, hwMargin, accPrice, accPriceAfterTax, accPriceAfterDiscount, accCost, accProfit, accMargin, hkPrice, hkPriceAfterTax, hkPriceAfterDiscount, hkCost, hkProfit, hkMargin, hingePrice, hingePriceAfterTax, hingePriceAfterDiscount, hingeCost, hingeProfit, hingeMargin, lcPrice, lcPriceAfterTax, lcPriceAfterDiscount, lcCost, lcProfit, lcMargin, laPrice, laPriceAfterTax, laPriceAfterDiscount, laCost, laProfit, laMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       "params":["proposalId","version","proposalTitle","region","crmId","quoteNo","projectName","designerName","salesName","beforeProductionSpecification","fromProposal","offerType","packageFlag","designPartnerName","proposalUpdatedBy","proposalCreateDate","proposalPriceDate","businessDate","versionCreatedBy","versionCreatedOn","versionUpdatedBy","versionUpdatedOn","stdModuleCount","nStdModuleCount","hikeModuleCount","vrPrice","vrPriceAfterDiscount","vrPriceAfterTax","vrCost","vrProfit","vrMargin","status","discountAmount","discountPercentage","prPrice","prPriceAfterDiscount","prPriceAfterTax","prCost","prProfit","prMargin","wwPrice","wwPriceAfterDiscount","wwPriceAfterTax","wwCost","wwProfit","wwMargin","bpPrice","bpPriceAfterDiscount","bpPriceAfterTax","bpCost","bpProfit","bpMargin","svPrice","svPriceAfterDiscount","svPriceAfterTax","svCost","svProfit","svMargin","kitchenCount","wardrobeCount","NSproductCount","bpCount","svCount","stdModulePrice","nStdModulePrice","hikeModulePrice","hikeModuleCost","hwPrice","hwPriceAfterTax","hwPriceAfterDiscount","hwCost","hwProfit","hwMargin","accPrice","accPriceAfterTax","accPriceAfterDiscount","accCost","accProfit","accMargin","hkPrice","hkPriceAfterTax","hkPriceAfterDiscount","hkCost","hkProfit","hkMargin","hingePrice","hingePriceAfterTax","hingePriceAfterDiscount","hingeCost","hingeProfit","hingeMargin","lcPrice","lcPriceAfterTax","lcPriceAfterDiscount","lcCost","lcProfit","lcMargin","laPrice","laPriceAfterTax","laPriceAfterDiscount","laCost","laProfit","laMargin"],
       "jsonfields":[]
     },
     {
       "id": "dw_proposal_addon.insert",
       "type": "insert",
-      "table": "dw_proposal_addon",
-      "query": "insert into dw_proposal_addon (proposalId, version, proposalTitle, priceDate, businessDate, region,status,discountAmount,discountPercentage,crmId,quoteNo,designerName,salesName,beforeProductionSpecification,fromProposal,offerType,packageFlag, category, subCategory, addonId, spaceType, roomcode, code, productTypeCode, productSubtypeCode, product, brandCode, catalogueCode, quantity, uom, updatedBy, unitPrice, unitSourceCost, price, priceWoTax, sourceCost, addonProfit, addonMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "table": "game_proposal_addon",
+      "query": "insert into game_proposal_addon (proposalId, version, proposalTitle, priceDate, businessDate, region,status,discountAmount,discountPercentage,crmId,quoteNo,designerName,salesName,beforeProductionSpecification,fromProposal,offerType,packageFlag, category, subCategory, addonId, spaceType, roomcode, code, productTypeCode, productSubtypeCode, product, brandCode, catalogueCode, quantity, uom, updatedBy, unitPrice, unitSourceCost, price, priceWoTax, sourceCost, addonProfit, addonMargin) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","status","discountAmount","discountPercentage","crmId","quoteNo","designerName","salesName","beforeProductionSpecification","fromProposal","offerType","packageFlag","category","subCategory","addonId","spaceType","roomcode","code","productTypeCode","productSubtypeCode","product","brandCode","catalogueCode","quantity","uom","updatedBy","unitPrice","unitSourceCost","price","priceWoTax","sourceCost","addonProfit","addonMargin"],
       "jsonfields":[]
     },
     {
       "id": "dw_proposal_product.insert",
       "type": "insert",
-      "table": "dw_proposal_product",
-      "query": "insert into dw_proposal_product(proposalId, version, proposalTitle, priceDate, businessDate, region,status,discountAmount,discountPercentage,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag,category, subCategory, prId, prTitle, spaceType, room, baseCarcass, wallCarcass, finishMaterial, finish, shutterDesign, hinge, glass, handleSelection, noOfLengths, handleType, handleFinish, handleSize, knobType, knobFinish, prArea, prCreatedBy, prCreatedOn, prUpdatedBy, prUpdatedOn, prPrice, prPriceAfterDiscount, prPriceAfterTax, prCost, prProfit, prMargin, wwPrice, wwPriceAfterTax, wwCost, wwProfit, wwMargin, hwPrice, hwPriceAfterTax, hwCost, hwProfit, hwMargin, accPrice, accPriceAfterTax, accCost, accProfit, accMargin, laPrice, laPriceAfterTax, laCost, laProfit, laMargin, hkPrice, hkPriceAfterTax, hkCost, hkProfit, hkMargin, hingePrice, hingePriceAfterTax, hingeCost, hingeProfit, hingeMargin, lcPrice, lcPriceAfterTax, lcCost, lcProfit, lcMargin, installationCost, transportationCost, stdModuleCount, stdMPrice, nStdModuleCount, nStdMPrice, hikeModuleCount, hikeMPrice,hikeMCost, color) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "table": "game_proposal_product",
+      "query": "insert into game_proposal_product(proposalId, version, proposalTitle, priceDate, businessDate, region,status,discountAmount,discountPercentage,crmId,quoteNo,designerName,salesName,source,fromProduct,beforeProductionSpecification,fromProposal,offerType,packageFlag,category, subCategory, prId, prTitle, spaceType, room, baseCarcass, wallCarcass, finishMaterial, finish, shutterDesign, hinge, glass, handleSelection, noOfLengths, handleType, handleFinish, handleSize, knobType, knobFinish, prArea, prCreatedBy, prCreatedOn, prUpdatedBy, prUpdatedOn, prPrice, prPriceAfterDiscount, prPriceAfterTax, prCost, prProfit, prMargin, wwPrice, wwPriceAfterTax, wwCost, wwProfit, wwMargin, hwPrice, hwPriceAfterTax, hwCost, hwProfit, hwMargin, accPrice, accPriceAfterTax, accCost, accProfit, accMargin, laPrice, laPriceAfterTax, laCost, laProfit, laMargin, hkPrice, hkPriceAfterTax, hkCost, hkProfit, hkMargin, hingePrice, hingePriceAfterTax, hingeCost, hingeProfit, hingeMargin, lcPrice, lcPriceAfterTax, lcCost, lcProfit, lcMargin, installationCost, transportationCost, stdModuleCount, stdMPrice, nStdModuleCount, nStdMPrice, hikeModuleCount, hikeMPrice,hikeMCost, color) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       "params": ["proposalId","version","proposalTitle","priceDate","businessDate","region","status","discountAmount","discountPercentage","crmId","quoteNo","designerName","salesName","source","fromProduct","beforeProductionSpecification","fromProposal","offerType","packageFlag","category","subCategory","prId","prTitle","spaceType","room","baseCarcass","wallCarcass","finishMaterial","finish","shutterDesign","hinge","glass","handleSelection","noOfLengths","handleType","handleFinish","handleSize","knobType","knobFinish","prArea","prCreatedBy","prCreatedOn","prUpdatedBy","prUpdatedOn","prPrice","prPriceAfterDiscount","prPriceAfterTax","prCost","prProfit","prMargin","wwPrice","wwPriceAfterTax","wwCost","wwProfit","wwMargin","hwPrice","hwPriceAfterTax","hwCost","hwProfit","hwMargin","accPrice","accPriceAfterTax","accCost","accProfit","accMargin","laPrice","laPriceAfterTax","laCost","laProfit","laMargin","hkPrice","hkPriceAfterTax","hkCost","hkProfit","hkMargin","hingePrice","hingePriceAfterTax","hingeCost","hingeProfit","hingeMargin","lcPrice","lcPriceAfterTax","lcCost","lcProfit","lcMargin","installationCost","transportationCost","stdModuleCount","stdMPrice","nStdModuleCount","nStdMPrice","hikeModuleCount","hikeMPrice","hikeMCost", "color"],
       "jsonfields":[]
     },
     {
       "id": "dw_proposal.delete",
       "type": "delete",
-      "table": "dw_proposal",
-      "query": "delete from dw_proposal where proposalId = ? and version = ?",
+      "table": "game_proposal",
+      "query": "delete from game_proposal where proposalId = ? and version = ?",
       "params": ["proposalId","version"],
       "jsonfields":[]
     },
     {
       "id": "dw_proposal_product.delete",
       "type": "delete",
-      "table": "dw_proposal_product",
-      "query": "delete from dw_proposal_product where proposalId = ? and version = ?",
+      "table": "game_proposal_product",
+      "query": "delete from game_proposal_product where proposalId = ? and version = ?",
       "params": ["proposalId","version"],
       "jsonfields":[]
     },
     {
       "id": "dw_proposal_addon.delete",
       "type": "delete",
-      "table": "dw_proposal_addon",
-      "query": "delete from dw_proposal_addon where proposalId = ? and version = ?",
+      "table": "game_proposal_addon",
+      "query": "delete from game_proposal_addon where proposalId = ? and version = ?",
       "params": ["proposalId","version"],
       "jsonfields":[]
     },
@@ -1935,8 +1935,8 @@
     {
       "id": "dw_product_module.delete",
       "type": "delete",
-      "table": "dw_product_module",
-      "query": "delete from dw_product_module where proposalId = ? and version = ?",
+      "table": "game_product_module",
+      "query": "delete from game_product_module where proposalId = ? and version = ?",
       "params": ["proposalId","version"],
       "jsonfields":[]
     },
@@ -1990,8 +1990,8 @@
     {
       "id": "dw_module_component.delete",
       "type": "delete",
-      "table": "dw_module_component",
-      "query": "delete from dw_module_component where proposalId = ? and version = ?",
+      "table": "game_module_component",
+      "query": "delete from game_module_component where proposalId = ? and version = ?",
       "params": ["proposalId","version"],
       "jsonfields":[]
     },
