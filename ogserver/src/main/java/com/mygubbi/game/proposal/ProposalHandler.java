@@ -858,7 +858,12 @@ public class ProposalHandler extends AbstractRouteHandler
 
 
         if(workContractFlag && bookingformresponse.containsKey("worksContractPDFfile"))
-            inputPdfs.add(bookingformresponse.getString("worksContractPDFfile"));
+        {
+            String location_folder =ConfigHolder.getInstance().getStringValue("workscontract_template","/mnt/game/proposal/templates/WorkscontractTemplate.pdf");
+            inputPdfs.add(location_folder);
+            //inputPdfs.add(bookingformresponse.getString("worksContractPDFfile"));
+        }
+
 
         inputPdfs.add(quotePDfResponse.getString("quoteFile"));
         if(bookingFormFlag.equals("Yes"))
