@@ -29,7 +29,8 @@ public class WorksContractBookletView
         // Creating a reader
         PdfReader reader = new PdfReader(src);
         // step 1
-        Document document = new Document(PageSize.A3.rotate());
+//        Document document = new Document(PageSize.A3.rotate());
+        Document document = new Document(PageSize.A4.rotate());
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(DEST));
         // step 2
 
@@ -38,15 +39,18 @@ public class WorksContractBookletView
         // step 4
         PdfContentByte canvas = writer.getDirectContent();
         float a4_width = PageSize.A4.getWidth();
+        System.out.println("page width = " +a4_width);
         int n = reader.getNumberOfPages();
         int p = 0;
         PdfImportedPage page;
         while (p++ < n) {
             page = writer.getImportedPage(reader, p);
             if (p % 2 == 1) {
+                System.out.println("inside if = " +p);
                 canvas.addTemplate(page, 0, 0);
             }
             else {
+                System.out.println("inside else" +p);
                 canvas.addTemplate(page, a4_width, 0);
                 document.newPage();
             }

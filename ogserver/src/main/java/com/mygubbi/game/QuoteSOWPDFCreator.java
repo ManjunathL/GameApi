@@ -114,7 +114,7 @@ public class QuoteSOWPDFCreator
         PdfPTable table = new PdfPTable(columnWidths2);
         table.setWidthPercentage(100);
 
-        Paragraph p = new Paragraph("Appendix - B Scope Of Services",fsize3);
+        Paragraph p = new Paragraph("Scope Of Services",fsize3);
         p.setAlignment(Element.ALIGN_CENTER);
         fsize3.setColor(BaseColor.GRAY);
         document.add(p);

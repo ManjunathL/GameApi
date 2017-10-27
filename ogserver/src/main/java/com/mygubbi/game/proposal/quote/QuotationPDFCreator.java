@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.quote;
 
+import com.codahale.metrics.MetricRegistryListener;
 import com.itextpdf.forms.fields.PdfButtonFormField;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
@@ -9,6 +10,7 @@ import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProposalHandler;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.RateCardService;
+import com.shaded.fasterxml.jackson.databind.ser.Serializers;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -444,7 +446,7 @@ public class QuotationPDFCreator
             img1.setWidthPercentage(50);
             document.add(img1);
             //Paragraph p;
-            LOG.info("quoteData.getBookingFormFlag()" +quoteData.getBookingFormFlag());
+            LOG.info("quoteData.getBookingFormFlag()" +quoteData.getBookingFormFlag()+ " || quotedata.getworksContractFlag" +quoteData.getWorksContractFlag());
 
             if(proposalHeader.getProjectCity().equals("Chennai"))
             {
@@ -463,7 +465,7 @@ public class QuotationPDFCreator
                 p = new Paragraph("Phone +91 80888 60860", fsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
-                p = new Paragraph("Annexure - A QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -490,7 +492,7 @@ public class QuotationPDFCreator
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Annexure - A QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -513,7 +515,7 @@ public class QuotationPDFCreator
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Annexure - A QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -537,7 +539,7 @@ public class QuotationPDFCreator
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Annexure - A QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -879,7 +881,7 @@ public class QuotationPDFCreator
         document.add(p);
 
         if(isValid_Sow) {
-            p = new Paragraph("Please refer Appendix - B for detailed Scope of Services", fsize1);
+            p = new Paragraph("Please refer \"Scope of Services\" section at the end for more details of the services scope ", fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
 
@@ -941,8 +943,9 @@ public class QuotationPDFCreator
 
             document.add(tab2);
 
-            if(!quoteData.getBookingFormFlag().equals("Yes")) {
-            /*PdfPTable tab=new PdfPTable(1);
+            LOG.info("quoteData .get bookingform flag " +quoteData.getBookingFormFlag()+ " quoteDate get worksContract " +quoteData.getWorksContractFlag());
+            if(quoteData.getBookingFormFlag().equals("No") && quoteData.getWorksContractFlag().equals("No")) {
+            PdfPTable tab=new PdfPTable(1);
             tab.setWidthPercentage(100);
 
             Font size2=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
@@ -982,7 +985,7 @@ public class QuotationPDFCreator
             document.add(p);
 
             p = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                     " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
-            document.add(p);*/
+            document.add(p);
 
         }else
         {
@@ -1003,11 +1006,11 @@ public class QuotationPDFCreator
             PdfPTable designTable= new PdfPTable(gstcolumnWidths1);
             designTable.setWidthPercentage(100);
             PdfPCell designCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
-            PdfPCell designCell2 = new PdfPCell(new Paragraph("PRODUCT CATEGORY", fsize1));
+            PdfPCell designCell2 = new PdfPCell(new Paragraph("ITEM", fsize1));
             PdfPCell designCell5 = new PdfPCell(new Paragraph("GST RATE", fsize1));
             PdfPCell designCell6 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell designCell7 = new PdfPCell(new Paragraph("PRODUCT PRICE", fsize1));
-            PdfPCell designCell4 = new PdfPCell(new Paragraph("PRICE AFTER DISCOUNT", fsize1));
+            PdfPCell designCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             designTable.addCell(designCell1);
             designTable.addCell(designCell2);
             designTable.addCell(designCell5);
@@ -1022,11 +1025,11 @@ public class QuotationPDFCreator
             PdfPTable individualTable= new PdfPTable(gstcolumnWidths1);
             individualTable.setWidthPercentage(100);
             PdfPCell tablecell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
-            PdfPCell tablecell7 = new PdfPCell(new Paragraph("PRODUCT CATEGORY", fsize1));
+            PdfPCell tablecell7 = new PdfPCell(new Paragraph("ITEM", fsize1));
             PdfPCell tablecell4 = new PdfPCell(new Paragraph("GST RATE", fsize1));
             PdfPCell tablecell5 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell tablecell6 = new PdfPCell(new Paragraph("PRODUCT PRICE", fsize1));
-            PdfPCell tablecell3 = new PdfPCell(new Paragraph("PRICE AFTER DISCOUNT", fsize1));
+            PdfPCell tablecell3 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             individualTable.addCell(tablecell1);
             individualTable.addCell(tablecell7);
             individualTable.addCell(tablecell4);
@@ -1056,11 +1059,11 @@ public class QuotationPDFCreator
             PdfPTable nonMovableTable= new PdfPTable(gstcolumnWidths1);
             nonMovableTable.setWidthPercentage(100);
             PdfPCell nonMovableCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
-            PdfPCell nonMovableCell2 = new PdfPCell(new Paragraph("PRODUCT CATEORY", fsize1));
+            PdfPCell nonMovableCell2 = new PdfPCell(new Paragraph("ITEM", fsize1));
             PdfPCell nonMovableCell5 = new PdfPCell(new Paragraph("GST RATE", fsize1));
             PdfPCell nonMovableCell6 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell nonMovableCell7 = new PdfPCell(new Paragraph("PRODUCT PRICE", fsize1));
-            PdfPCell nonMovableCell4 = new PdfPCell(new Paragraph("PRICE AFTER DISCOUNT", fsize1));
+            PdfPCell nonMovableCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             nonMovableTable.addCell(nonMovableCell1);
             nonMovableTable.addCell(nonMovableCell2);
             nonMovableTable.addCell(nonMovableCell5);
@@ -1070,7 +1073,7 @@ public class QuotationPDFCreator
             count=1;
             for (GSTForProducts nonmovableindivisualList: nonMovableList)
             {
-                this.createRowAndFillDataForIndividualForProducts(nonMovableTable,count, nonmovableindivisualList.getProducttitle() + " - Interior",nonmovableindivisualList.getCategoryType(),this.round(nonmovableindivisualList.getPriceAfterDiscount(),2), nonmovableindivisualList.getPrice(), nonmovableindivisualList.getPriceAfterTax(), nonmovableindivisualList.getTax());
+                this.createRowAndFillDataForIndividualForProducts(nonMovableTable,count, nonmovableindivisualList.getProducttitle() + " Interiors",nonmovableindivisualList.getCategoryType(),this.round(nonmovableindivisualList.getPriceAfterDiscount(),2), nonmovableindivisualList.getPrice(), nonmovableindivisualList.getPriceAfterTax(), nonmovableindivisualList.getTax());
                 count++;
             }
             //document.add(nonMovableTable);
@@ -1086,12 +1089,12 @@ public class QuotationPDFCreator
             PdfPTable scwTable= new PdfPTable(gstcolumnWidths1);
             scwTable.setWidthPercentage(100);
             PdfPCell scwCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
-            PdfPCell scwCell2 = new PdfPCell(new Paragraph("PRODUCT CATEGORY", fsize1));
+            PdfPCell scwCell2 = new PdfPCell(new Paragraph("ITEM", fsize1));
             //PdfPCell scwCell3 = new PdfPCell(new Paragraph("Annexure", fsize1));
             PdfPCell scwCell5 = new PdfPCell(new Paragraph("GST RATE", fsize1));
             PdfPCell scwCell6 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell scwCell7 = new PdfPCell(new Paragraph("PRODUCT PRICE", fsize1));
-            PdfPCell scwCell4 = new PdfPCell(new Paragraph("PRICE AFTER DISCOUNT", fsize1));
+            PdfPCell scwCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
             scwTable.addCell(scwCell1);
             scwTable.addCell(scwCell2);
@@ -1179,7 +1182,7 @@ public class QuotationPDFCreator
             PdfPCell gstCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
             PdfPCell gstCell2 = new PdfPCell(new Paragraph("Annexure", fsize1));
             //PdfPCell gstCell3 = new PdfPCell(new Paragraph("Products Price", fsize1));
-            PdfPCell gstCell4 = new PdfPCell(new Paragraph("Price After discount", fsize1));
+            PdfPCell gstCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             PdfPCell gstCell5 = new PdfPCell(new Paragraph("GST rate", fsize1));
             PdfPCell gstCell7 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell gstCell6 = new PdfPCell(new Paragraph("Product Price", fsize1));
@@ -1224,7 +1227,7 @@ public class QuotationPDFCreator
             PdfPCell gstfinalCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
             PdfPCell gstfinalCell2 = new PdfPCell(new Paragraph("Title", fsize1));
             /*PdfPCell gstfinalCell3 = new PdfPCell(new Paragraph("Products Price", fsize1));*/
-            PdfPCell gstfinalCell4 = new PdfPCell(new Paragraph("Price After Discount", fsize1));
+            PdfPCell gstfinalCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             PdfPCell gstfinalCell5 = new PdfPCell(new Paragraph("GST rate", fsize1));
             PdfPCell gstfinalCell7 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell gstfinalCell6 = new PdfPCell(new Paragraph("Product Price", fsize1));
@@ -1312,7 +1315,7 @@ public class QuotationPDFCreator
                 p=new Paragraph(" ");
                 document.add(p);
 
-                p=new Paragraph("\nE. Works Contract Summary\n",fsize1);
+                p=new Paragraph("\nE. Summary\n",fsize1);
                 document.add(p);
 
                 p=new Paragraph(" ");
@@ -2672,6 +2675,7 @@ public class QuotationPDFCreator
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
+        cell1.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph("A+B+C+D",fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell1.addElement(Pindex);
@@ -2680,6 +2684,7 @@ public class QuotationPDFCreator
 
 
         cell=new PdfPCell();
+        cell.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(GSTCategory,size1);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(Pindex);
@@ -2694,24 +2699,28 @@ public class QuotationPDFCreator
 
 
         PdfPCell cell6=new PdfPCell();
+        cell6.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph();
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell6.addElement(Pindex);
         tabname.addCell(cell6);
 
         PdfPCell cell5=new PdfPCell();
+        cell5.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(tax,fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell5.addElement(Pindex);
         tabname.addCell(cell5);
 
         PdfPCell cell7=new PdfPCell();
+        cell7.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(Double.toString(round(currentpriceAfterTax,2)),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
         tabname.addCell(cell7);
 
         PdfPCell cell4=new PdfPCell();
+        cell4.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell4.addElement(Pindex);
@@ -2985,6 +2994,7 @@ public class QuotationPDFCreator
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph();
+        cell1.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell1.addElement(Pindex);
         tabname.addCell(cell1);
@@ -2993,6 +3003,7 @@ public class QuotationPDFCreator
 
         cell=new PdfPCell();
         Pindex=new Paragraph(GSTCategory,fsize);
+        cell.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(Pindex);
         tabname.addCell(cell);
@@ -3005,6 +3016,7 @@ public class QuotationPDFCreator
 
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph();
+        cell2.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
@@ -3017,11 +3029,13 @@ public class QuotationPDFCreator
 
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
+        cell5.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell5.addElement(Pindex);
         tabname.addCell(cell5);
 
         PdfPCell cell7=new PdfPCell();
+        cell7.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(Double.toString(round(currentpriceAfterTax,2)),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
@@ -3029,6 +3043,7 @@ public class QuotationPDFCreator
         //count++;
 
         PdfPCell cell4=new PdfPCell();
+        cell4.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell4.addElement(Pindex);
@@ -3044,6 +3059,7 @@ public class QuotationPDFCreator
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph();
+        cell1.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell1.addElement(Pindex);
         tabname.addCell(cell1);
@@ -3052,6 +3068,7 @@ public class QuotationPDFCreator
 
         cell=new PdfPCell();
         Pindex=new Paragraph(GSTCategory,fsize);
+        cell.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(Pindex);
         tabname.addCell(cell);
@@ -3064,6 +3081,7 @@ public class QuotationPDFCreator
 
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph("18%",fsize);
+        cell2.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
@@ -3076,11 +3094,13 @@ public class QuotationPDFCreator
 
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
+        cell5.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell5.addElement(Pindex);
         tabname.addCell(cell5);
 
         PdfPCell cell7=new PdfPCell();
+        cell7.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(Double.toString(round(currentpriceAfterTax,2)),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
@@ -3088,6 +3108,7 @@ public class QuotationPDFCreator
         //count++;
 
         PdfPCell cell4=new PdfPCell();
+        cell4.setBackgroundColor(BaseColor.ORANGE);
         Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell4.addElement(Pindex);

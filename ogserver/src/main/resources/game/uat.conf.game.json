@@ -43,7 +43,7 @@
   "termsandcondition_manglore":"/mnt/game/proposal/templates/BookingFormManglore.pdf",
   "termsandcondition_pune":"/mnt/game/proposal/templates/BookingFormPune.pdf",
   "termsandcondition_chennai":"/mnt/game/proposal/templates/BookingFormChennai.pdf",
-  "workscontract_template":"/mnt/game/proposal/templates/WorkscontractTemplate.pdf",
+  "workscontract_template":"/mnt/game/proposal/templates/WorksContract.pdf",
   "reports_cronText":"0 51 17 1/1 * ? *",
   "reports_time_zone_name":"Asia/Calcutta",
   "ratecard_file": "/mnt/game/proposal/templates/ratecard.bin",

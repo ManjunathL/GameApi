@@ -1,11 +1,17 @@
 package com.mygubbi.game.proposal.quote;
 
+import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.layout.Style;
+import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.text.StyleConstants;
 import java.io.FileOutputStream;
 
 /**
@@ -43,7 +49,9 @@ public class WorksContractTermsandCondition
             //writer.setPageEvent(new CustomBorder());
             Paragraph p;
             Phrase phrase;
-
+            PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+            Style style=new Style()
+                    .setFont(font).setFontSize(12).setTextAlignment(TextAlignment.JUSTIFIED);
             p=new Paragraph("TERMS OF ORDER CONFIRMATION",fsize3);
             p.setAlignment(Element.ALIGN_CENTER);
             document.add(p);
@@ -52,9 +60,11 @@ public class WorksContractTermsandCondition
             document.add(p);
 
             p=new Paragraph("This TERMS OF ORDER CONFIRMATION (hereinafter referred to as “Confirmation”) is made between M/s Gubbi Technologies Pvt. Ltd. (hereinafter referred to as “MyGubbi”, which expression, shall wherever the context permits, be deemed to include its successors and permitted assigns) and You (hereinafter referred to as the “Client”)  MyGubbi and Client are collectively referred to as the “Parties”. For the purpose of this Confirmation, “Effective Date” shall mean the date on which this Confirmation is signed by the Client.",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("By signing this Confirmation, the Client expressly agrees to and consents to be bound by all of the terms of this Confirmation. This Confirmation governs the terms of service between MyGubbi and the Client.",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph(" ");
@@ -65,19 +75,26 @@ public class WorksContractTermsandCondition
 
             p=new Paragraph("a) MyGubbi is a consumer tech company offering interior design solutions and home merchandise across various categories for\n"
                             +"    decorating homes and ensuring premium quality finished interiors;  ",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
+
 
             p=new Paragraph("b) The Client is desirous of engaging the services of MyGubbi for his/her home (hereinafter referred to as “Site”)which are\n"
                             +"    morefully described in Annexure – A hereto (hereinafter referred to as “Works”) ",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("c) MyGubbi hereby agrees to carry out such Works in consideration for the payment mutually agreed to by the Parties and set out\n"
                             +"    in Clause 2.1 of this Confirmation; and",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
+
 
             p=new Paragraph("d) The Parties are entering into this Confirmation to set out the mutual rights and obligations governing the scope of Works under\n"
                             +"    this Agreement.",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
+
 
             p=new Paragraph(" ");
             document.add(p);
@@ -92,10 +109,12 @@ public class WorksContractTermsandCondition
             document.add(p);
 
             p=new Paragraph("1.1. The Client hereby appoints and MyGubbi hereby accepts such appointment and undertakes to provide and execute the Works.",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("1.2. The designs, price quotations and specifications for the Works mutually discussed and finalized between the Parties earlier\n"
                     +"    are contained in Annexure – A to this Confirmation. ",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph(" ");
@@ -106,31 +125,37 @@ public class WorksContractTermsandCondition
 
             p=new Paragraph("2.1. In consideration for the Works to be executed by MyGubbi, the Client hereby agrees to pay MyGubbi a total sum\n"
                     +"    as specified in Annexure ___ (“Fees”).",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("2.2. The Fees quoted herein shall exclude all applicable taxes. Taxes on each independent service shall be levied as specified\n"
                     +"    in Annexure ___. However, any increase in the prevailing GST rates in connection with the execution oof Works under this\n"
                     +"    Confirmation shall be borne and paid for by the Client.",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("2.3. The Client shall pay 50% (fifty percent) of the Fees in advance, on the Effective Date (“Advance Fee Date”).",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("2.4. With respect to civil works carried out by MyGubbi to complement the Works under the Confirmation, the cost estimate for\n"
                     +"    such civil works included in the Fees is only a rough estimate. Actual cost may vary depending on the nature and magnitude\n"
                     +"    of civil works completed.  ",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("2.5. Upon the Client and MyGubbi agreeing to the designs, specifications and other details in respect of the Works to be executed\n"
                     +"    on the Site and signed off by both parties (“Design Finalization Date”), MyGubbi shall procure all necessary materials required,\n"
                     +"    including but not limited to wood, laminates, hardware, glass/mirrors, appliances, sanitary fittings, civil materials and such\n"
                     +"    other items to be installed at the Site within the period specified in Annexure __. ",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("2.6. Upon procurement of the items, MyGubbi shall intimate to the Client confirming that the items are procured and ready\n"
                     +"    for shipment to the Site (“Intimation”). The remaining 50% of the Fees shall be paid within Three (03) days from the date\n"
                     +"    of the Intimation (“Final Payment Date”). MyGubbi shall not be liable or responsible to deliver or install the items for\n"
                     +"    execution of the Works unless and until it has received the full and final payment of the Fees. ",fsize);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(p);
 
             p=new Paragraph("2.7. Payment of Fees to MyGubbi shall be made either through cheque, Demand Draft, Bank Transfer (NEFT/RTGS) or credit\n"
