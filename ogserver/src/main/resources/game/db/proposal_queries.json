@@ -464,8 +464,8 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?)",
-      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "customAddonCategory","productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks", "spaceType", "roomcode"]
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?)",
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "customAddonCategory","productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks", "spaceType", "roomcode","scopeDisplayFlag"]
     },
 
     {
