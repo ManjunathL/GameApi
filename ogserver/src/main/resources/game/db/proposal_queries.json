@@ -2081,7 +2081,7 @@
       "id": "proposal.product.scopeofwork",
       "type": "select",
       "table": "proposal_product",
-      "query": "select * from proposal_product p inner join ( select max(version) as version,proposalId from version_master v where status in ('Confirmed','DSO','PSO','Published') and proposalId in (select id from proposal p where crmId = ?) group by proposalId order by version asc) q on p.proposalId = q.proposalId and p.fromVersion = q.version ",
+      "query": "select * from proposal_product p inner join ( select max(version) as version,proposalId from version_master v where status in ('Confirmed','DSO','PSO','Published') and proposalId in (select id from proposal p where crmId = ?) group by proposalId order by version asc) q on p.proposalId = q.proposalId and p.fromVersion = q.version and p.active = 'A' ",
       "params": ["crmId"],
       "jsonfields":["modules","addons"]
     },
