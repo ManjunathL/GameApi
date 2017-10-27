@@ -70,7 +70,7 @@
 
   "SENDGRID_KEY":"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",
   "FROM_EMAIL":"game@mygubbi.com",
-  "App_url_for_proposal":"http://game.mygubbi.com/#!New%20Quotation/",
+  "App_url_for_proposal":"http://gameuat.mygubbi.com/#!New%20Quotation/",
   "sendEmail":"No"
 
 }
