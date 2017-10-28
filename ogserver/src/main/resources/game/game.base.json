@@ -57,7 +57,7 @@
   "termsandcondition_manglore":"c:/Users/Public/game_files/BookingFormManglore.pdf",
   "termsandcondition_pune":"c:/Users/Public/game_files/BookingFormPune.pdf",
   "termsandcondition_chennai":"c:/Users/Public/game_files/BookingFormChennai.pdf",
-  "workscontract_template":"c:/Users/Public/game_files/WorksContract.pdf",
+  "workscontract_template":"c:/Users/Public/game_files/WorksContractTemplate.pdf",
 
 
 "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],

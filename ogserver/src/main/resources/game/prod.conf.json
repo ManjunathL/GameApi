@@ -48,7 +48,7 @@
   "termsandcondition_manglore":"/mnt/game/proposal/templates/BookingFormManglore.pdf",
   "termsandcondition_pune":"/mnt/game/proposal/templates/BookingFormPune.pdf",
   "termsandcondition_chennai":"/mnt/game/proposal/templates/BookingFormChennai.pdf",
-  "workscontract_template":"/mnt/game/proposal/templates/WorksContract.pdf",
+  "workscontract_template":"/mnt/game/proposal/templates/WorksContractTemplate.pdf",
   "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
   "fbUrl": "https://mygubbi.firebaseio.com",
   "websiteHost": "www.mygubbi.com:8685",

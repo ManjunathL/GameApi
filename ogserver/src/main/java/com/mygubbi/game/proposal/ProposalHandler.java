@@ -915,14 +915,22 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createSOWOutput(RoutingContext routingContext)
     {
-        LOG.debug("Routing context in sow op : " + routingContext.getBodyAsJson().encodePrettily());
-        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        Integer id = LocalCache.getInstance().store(quoteRequestJson);
-        VertxInstance.get().eventBus().send(SOWCreatorService.CREATE_SOW_OUTPUT, id,
-                (AsyncResult<Message<Integer>> result) -> {
-                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    sendJsonResponse(routingContext, response.toString());
-                });
+        try
+        {
+            LOG.debug("Routing context in sow op : " + routingContext.getBodyAsJson().encodePrettily());
+            JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+            Integer id = LocalCache.getInstance().store(quoteRequestJson);
+            VertxInstance.get().eventBus().send(SOWCreatorService.CREATE_SOW_OUTPUT, id,
+                    (AsyncResult<Message<Integer>> result) -> {
+                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        sendJsonResponse(routingContext, response.toString());
+                    });
+        }
+        catch(Exception e)
+        {
+            LOG.info(e);
+        }
+
     }
 
     private void createBoqOutput(RoutingContext routingContext)
