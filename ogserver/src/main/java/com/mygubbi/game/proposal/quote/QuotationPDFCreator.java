@@ -98,7 +98,7 @@ public class QuotationPDFCreator
     List<GSTForProducts> finalmovableList=new ArrayList<>();
     List<GSTForProducts> finalscwList=new ArrayList<>();
     java.util.Date date;
-    java.util.Date currentDate = new java.util.Date(117 ,9,29,0,0,00);
+    java.util.Date currentDate = new java.util.Date(117 ,9,28,0,0,00);
 
     PriceMaster designServicePrice, nonMovablePrice, movablePrice, nonMovablePriceTax, movablePriceTax,scwTax,designServiceTax;
 
