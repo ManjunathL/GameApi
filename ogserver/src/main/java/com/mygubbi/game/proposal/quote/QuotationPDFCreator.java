@@ -107,7 +107,7 @@ public class QuotationPDFCreator
         this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
-        LOG.info("curremt date " +currentDate);
+        LOG.info("curremt date " +currentDate +" priceDate " +date);
         LOG.info("date.agfter(currentDate)" +date.after(currentDate));
         if(date.after(currentDate))
         {
