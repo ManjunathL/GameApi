@@ -996,7 +996,7 @@ public class QuotationPDFCreator
             document.add(p);
         }
 
-        if(date.after(currentDate)) {
+        if(date.after(currentDate) && quoteData.getWorksContractFlag().equals("Yes")) {
             float[] gstcolumnWidths1 = {1, 4, 1, 1, 1, 1};
             float[] gstProductCategory = {1, 1, 1, 1, 1, 1,1};
 
