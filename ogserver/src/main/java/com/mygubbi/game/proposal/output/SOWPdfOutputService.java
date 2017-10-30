@@ -96,7 +96,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             MergePdfsRequest mergePdfReq = (MergePdfsRequest) LocalCache.getInstance().remove(message.body());
             mergePdfReq.mergePdfFiles();
 
-            sendResponse(message, new JsonObject().put("quoteFile",mergePdfReq.getMergedFileName() ));
+            sendResponse(message, new JsonObject().put("quoteFile",mergePdfReq.getMergedAndPageNumberedFileName() ));
         }).completionHandler(res -> {
             LOG.info("setup PDf Merger Output started." + res.succeeded());
         });
@@ -200,11 +200,11 @@ public class SOWPdfOutputService extends AbstractVerticle {
                         if(pdf_name.equalsIgnoreCase(SOW_PDF)) {
                             LOG.info("GETTING SOW ROWS");
                             this.getSowRows(quoteRequest, proposalHeader, products, addons, message);
-
-                        }else if (pdf_name.equalsIgnoreCase(WORKS_CONTRACT)){
-                            LOG.info("GETTING WORK CONTRACT");
-                            this.createWorksContract(quoteRequest,proposalHeader,products,addons,message);
                         }
+//                        }else if (pdf_name.equalsIgnoreCase(WORKS_CONTRACT)){
+//                            LOG.info("GETTING WORK CONTRACT");
+//                            this.createWorksContract(quoteRequest,proposalHeader,products,addons,message);
+//                        }
                         else{
                             LOG.info("GETTING BOOKING FORM");
                             this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,message);

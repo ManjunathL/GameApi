@@ -807,9 +807,9 @@ public class ProposalHandler extends AbstractRouteHandler
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
             if(IsBookingFormFlag) {
                 createBookingFormInPdf(context, quoteReponse, response);
-            }else if(IsWorkingContract){
-                this.createWorksContractinPdf(context,quoteReponse,response);
-                //createMergedPdf(context,quoteReponse,response,new JsonObject());
+//            }else if(IsWorkingContract){
+//                this.createWorksContractinPdf(context,quoteReponse,response);
+//                //createMergedPdf(context,quoteReponse,response,new JsonObject());
             }else{
                 createMergedPdf(context,quoteReponse,response,new JsonObject());
             }
@@ -856,14 +856,13 @@ public class ProposalHandler extends AbstractRouteHandler
         }
         Boolean IsWorkingContract = new Boolean(workContractFlag);
 
+        LOG.info("workContractFlag = "+workContractFlag);
 
-        if(workContractFlag && bookingformresponse.containsKey("worksContractPDFfile"))
+        if(workContractFlag)
         {
             String location_folder =ConfigHolder.getInstance().getStringValue("workscontract_template","/mnt/game/proposal/templates/WorkscontractTemplate.pdf");
             inputPdfs.add(location_folder);
-            //inputPdfs.add(bookingformresponse.getString("worksContractPDFfile"));
         }
-
 
         inputPdfs.add(quotePDfResponse.getString("quoteFile"));
         if(bookingFormFlag.equals("Yes"))
@@ -897,12 +896,15 @@ public class ProposalHandler extends AbstractRouteHandler
         String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" )+"/"+routingContext.getBodyAsJson().getInteger("proposalId");
         String merged_pdf = ConfigHolder.getInstance().getStringValue("merged_pdf","merged.pdf" );
 
-        String outputFileName = location_folder+"/"+merged_pdf;
+
+        String outputFileName = location_folder+"/"+"ver1_"+merged_pdf;
         LOG.info("outputFileName = "+outputFileName);
+
+        String outputFileNameAfterPageNum = location_folder+"/"+merged_pdf;
 
         inputPdfs.forEach(f->{LOG.info("File Name :: "+f);});
 
-        Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName));
+        Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
