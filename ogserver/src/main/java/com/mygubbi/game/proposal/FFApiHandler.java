@@ -4,6 +4,7 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.model.AccHwComponent;
 import com.mygubbi.game.proposal.model.Proposal;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
@@ -17,8 +18,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by User on 09-10-2017.
@@ -86,18 +86,24 @@ public class FFApiHandler extends AbstractRouteHandler {
     private void collectObjects(RoutingContext routingContext, List<ProductLineItem> productLineItems,List<ProductAddon> productAddons)
     {
 
-        List<JsonObject> listOfServices = new ArrayList<>();
+
+        Map<String, JsonObject> servicesMap = new LinkedHashMap<>();
 
         for (ProductLineItem productLineItem : productLineItems)
         {
-            listOfServices.add(new JsonObject().put("room",productLineItem.getRoomCode()).put("type",PRODUCT).put("title",productLineItem.getTitle()));
+            String concat = productLineItem.getRoomCode() + " :" + productLineItem.getTitle();
+            JsonObject put = new JsonObject().put("room", productLineItem.getRoomCode()).put("type", PRODUCT).put("title", productLineItem.getTitle());
+            servicesMap.put(concat,put);
+
         }
 
         for (ProductAddon productAddon : productAddons)
         {
             if (productAddon.isCustomAddon())
             {
-                listOfServices.add(new JsonObject().put("room",productAddon.getRoomCode()).put("type", SERVICE).put("title",productAddon.getCustomAddonCategory() + " :" + productAddon.getProduct()));
+                String concat = productAddon.getRoomCode() + " :" + productAddon.getCustomAddonCategory() + " :" + productAddon.getProduct();
+                JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getCustomAddonCategory() + " :" + productAddon.getProduct());
+                servicesMap.put(concat,put);
             }
             else if (productAddon.isCounterTop() && productAddon.getProductTypeCode().equals(FALSE_CEILING))
             {
@@ -105,7 +111,22 @@ public class FFApiHandler extends AbstractRouteHandler {
             }
             else if (!(productAddon.isAccessory()))
             {
-                if (!(productAddon.getScopeDisplayFlag().equalsIgnoreCase("no"))) listOfServices.add(new JsonObject().put("room",productAddon.getRoomCode()).put("type", SERVICE).put("title",productAddon.getProductTypeCode() + " :" + productAddon.getProductSubtypeCode() + " :" + productAddon.getProduct()));
+                String concat = productAddon.getRoomCode() + " :" + productAddon.getProductTypeCode() + " :" + productAddon.getProductSubtypeCode() + " :" + productAddon.getProduct();
+                String product = stringCompare(productAddon.getProductSubtypeCode(),productAddon.getProduct());
+
+
+                if (!(productAddon.getScopeDisplayFlag().equalsIgnoreCase("no"))) {
+                if (servicesMap.containsKey(concat))
+                {
+                    concat = productAddon.getProductTypeCode() + " :" + product + " :" + productAddon.getREMARKS();
+                    JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getProductTypeCode() + " :" + productAddon.getProductSubtypeCode() + " :" + productAddon.getProduct() + " :" + productAddon.getREMARKS());
+                    servicesMap.put(concat,put);
+                }
+                else {
+                        JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", product + " :" + productAddon.getProduct());
+                        servicesMap.put(concat,put);
+                    }
+                }
             }
         }
         List<ProductAddon> counterTops = new ArrayList<>();
@@ -117,17 +138,33 @@ public class FFApiHandler extends AbstractRouteHandler {
                 counterTops.add(productAddon);
             }
         }
-        if (counterTops.size() != 0) listOfServices.add(new JsonObject().put("room",counterTops.get(0).getRoomCode()).put("type", SERVICE).put("title", counterTops.get(0).getProductTypeCode() + " :" + counterTops.get(0).getProductSubtypeCode() + " :" + counterTops.get(0).getProduct()));
+        if (counterTops.size() != 0)
+        {
+            String product = stringCompare(counterTops.get(0).getProductSubtypeCode(),counterTops.get(0).getProduct());
+            String concat =  counterTops.get(0).getRoomCode() + " :" + counterTops.get(0).getProductTypeCode() + " :" + product;
+            JsonObject put = new JsonObject().put("room", counterTops.get(0).getRoomCode()).put("type", SERVICE).put("title", counterTops.get(0).getProductTypeCode() + " :" +product);
+            servicesMap.put(concat,put);
+        }
 
-        if (listOfServices.size() == 0)
+        List<JsonObject> list = new ArrayList<JsonObject>(servicesMap.values());
+
+        LOG.info("Scope of Services size for CRM : " + routingContext.request().getParam("crmId") + " :" + list.size());
+
+        if (list.size() == 0)
         {
             LOG.debug("Error");
             sendError(routingContext,"error in retrieving product and addons:");
         }
         else {
             LOG.debug("Success");
-            sendJsonResponse(routingContext,listOfServices.toString());
+            sendJsonResponse(routingContext,list.toString());
         }
+    }
+
+    private String stringCompare(String s1, String s2)
+    {
+        if (s1.equals(s2)) return s1;
+        else return s1 + " :" + s2;
     }
 
 
