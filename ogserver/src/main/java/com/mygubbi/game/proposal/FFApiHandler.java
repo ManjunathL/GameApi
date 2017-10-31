@@ -48,7 +48,7 @@ public class FFApiHandler extends AbstractRouteHandler {
 
         List<QueryData> queryDatas = new ArrayList<>();
         String crmId = routingContext.request().getParam("crmId");
-        LOG.debug("CRM ID : " + crmId);
+        LOG.info("CRM ID : " + crmId);
         if (crmId == null || crmId.isEmpty())
         {
             sendError(routingContext, "error in retrieving product and addons for SAL NO :" + crmId );
@@ -152,11 +152,11 @@ public class FFApiHandler extends AbstractRouteHandler {
 
         if (list.size() == 0)
         {
-            LOG.debug("Error");
+            LOG.error("Error");
             sendError(routingContext,"error in retrieving product and addons:");
         }
         else {
-            LOG.debug("Success");
+            LOG.info("Success");
             sendJsonResponse(routingContext,list.toString());
         }
     }
