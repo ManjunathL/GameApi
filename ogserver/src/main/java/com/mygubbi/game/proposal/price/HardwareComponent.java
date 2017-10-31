@@ -121,6 +121,20 @@ public class HardwareComponent
             case "F23":
                 int value = (productModule.getWidth() > 600) ? 2 : 1;
                 return value * 5;
+            case "F24":
+                return  (productModule.getWidth() >= 1000) ? 3 : 2;
+            case "F25":
+                return (productModule.getWidth() > 600)? 2 : 1;
+            case "F26":
+                return ((productModule.getWidth() > 600)?4 : 2)*5;
+            case "F27":
+                return new Double((productModule.getWidth() * productModule.getDepth() * 1.5) / (1000 * 1000));
+            case "F28":
+               return new Double((productModule.getHeight() * productModule.getWidth() * 1.5) / (1000 * 1000));
+            case "F29":
+                int f29value1 = (productModule.getHeight() > 2100) ? 5 : 4;
+                int f29value2 = (productModule.getWidth() > 600) ? 2 : 1;
+                return f29value1 * f29value2 * 5;
             default:
                 return 0;
         }

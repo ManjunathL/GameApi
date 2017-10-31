@@ -881,12 +881,15 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
 
-        if(isValid_Sow) {
-            p = new Paragraph("Please refer \"Scope of Services\" section at the end for more details of the services scope ", fsize1);
-            p.setAlignment(Element.ALIGN_LEFT);
-            document.add(p);
+        p=new Paragraph("* The quoted price is an all inclusive price including design, consultancy and GST charges.",fsize);
+        p.setAlignment(Element.ALIGN_LEFT);
+        document.add(p);
 
-            p = new Paragraph("The interiors and services will be delivered within 60 days of the design sign off and payment ", fsize);
+        p=new Paragraph(" ");
+        document.add(p);
+
+        if(isValid_Sow) {
+            p = new Paragraph("* The interiors and services will be delivered within 60 days of the design sign off, 50% payment or site readiness whichever is later. ", fsize);
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
 
@@ -900,7 +903,7 @@ public class QuotationPDFCreator
             tab1.setWidthPercentage(100);
 
             PdfPCell cel6=new PdfPCell();
-            p = new Paragraph("Material Specification",fsize1);
+            p = new Paragraph("Material Specification: ",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             cel6.addElement(p);
             cel6.setBorder(Rectangle.NO_BORDER);
@@ -908,8 +911,8 @@ public class QuotationPDFCreator
 
 
             tab1.addCell(new Paragraph
-                    ("1. \tPly: \tIS 303- BWR grade for kitchen, MR Grade for wardrobe and other units\n" +
-                            "2. \tMdf: \tInterior Grade mdf\n" +
+                    ("1. \tPly: \tIS 303 grade\n" +
+                            "2. \tMdf: \tInterior Grade Mdf\n" +
                             "3. \tEdge Banding: \tRehau\n" +
                             "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
                             "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
@@ -917,7 +920,7 @@ public class QuotationPDFCreator
                             "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
                             "8. \tLacquered Glass: \tSaint Gobain\n" +
                             "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
-                            "10.\tSink: \tCarisyl/Franke/Nirali\n",fsize));
+                            "10.\tSink: \tCarisyl/Franke/Nirali/Futura\n",fsize));
 
             PdfPCell cel7=new PdfPCell();
             p = new Paragraph(new Paragraph("Other Finishes offered are Acrylic, Foil, PU paint, UV laminated panels,Hardwood of mygubbi make.\t\t\t\t\n",fsize));
@@ -931,15 +934,15 @@ public class QuotationPDFCreator
             tab2.setWidthPercentage(100);
 
             PdfPCell cel8=new PdfPCell();
-            p = new Paragraph("Note:\n",fsize);
+            p = new Paragraph("Note:\n",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             cel8.addElement(p);
             cel8.setBorder(Rectangle.NO_BORDER);
             tab2.addCell(cel8);
 
-            tab2.addCell(new Paragraph("1. \t All 25 mm shelves will be in MDF with both side finish\n"
-                    +"2. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered kitchen quote. These items will be quoted seperately if needed.\n"
-                    +"3. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
+            tab2.addCell(new Paragraph("1. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered in kitchen quote. These items are quoted seperately if needed.\n"
+                    +"2. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
+                    +"3. \t Please refer \"Scope of Services\" section at the end for more details of the services scope"
                     ,fsize));
 
             document.add(tab2);
@@ -1282,14 +1285,12 @@ public class QuotationPDFCreator
                 //fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
 
-               /* p=new Paragraph(" ");
-                document.add(p);
-
-                p=new Paragraph("A. Design/Consultation Services\n",fsize1);
-                document.add(p);
                 p=new Paragraph(" ");
                 document.add(p);
-                document.add(designTable);*/
+
+                p=new Paragraph("The detailed price break-up(post Discount) with the split-up of design, consultancy and GST charges are as follows: ",fsize);
+                document.add(p);
+
 
                 p=new Paragraph( "\n A. Furniture And Appliances\n",fsize1);
                 document.add(p);
@@ -1385,7 +1386,7 @@ public class QuotationPDFCreator
             }
         }
 
-        //this.fillAssembledProductAccessories(tabname,product.getAccessories(), unitSequenceLetter);
+        this.fillAssembledProductAccessories(tabname,product.getAccessories(), unitSequenceLetter);
         this.createCellWithData(tabname,"Total Cost",product.getAmountWithoutAddons());
 
     }
@@ -2074,8 +2075,8 @@ public class QuotationPDFCreator
             //amount=amount+(accessory.quantity*accessory.msp);
         }
 
-        this.createCellWithData(tabname,"Accessory Cost",amount);
-        this.createCellWithData(tabname,"WoodWork Cost",amt-amount);
+        /*this.createCellWithData(tabname,"Accessory Cost",amount);
+        this.createCellWithData(tabname,"WoodWork Cost",amt-amount);*/
     }
 
     private void createCellWithData(PdfPTable tabname,String str,double data)
