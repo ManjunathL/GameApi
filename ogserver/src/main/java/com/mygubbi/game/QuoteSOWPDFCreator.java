@@ -58,6 +58,7 @@ public class QuoteSOWPDFCreator
     private QuoteData quoteData;
     List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
     Document document = new Document(PageSize.A4.rotate());
+
     FileOutputStream fout ;
     public QuoteSOWPDFCreator(ProposalHeader proposalHeader, QuoteData quoteData,List<SOWPdf> proposalSOWs)
     {

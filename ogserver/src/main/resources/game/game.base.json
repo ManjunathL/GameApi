@@ -9,12 +9,12 @@
     "pool_Name":"mygubbi"
   },
    {
-    "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://suite.mygubbi.com/gubbi_ods",
-    "max_pool_size": 20,
-    "user": "rwuser",
-    "password": "6npp!_mb6npp!_mb",
-     "pool_Name":"ods"
+     "driver_class": "com.mysql.jdbc.Driver",
+     "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/prod_check",
+     "max_pool_size": 20,
+     "user": "admin",
+     "password": "OG$#gubi32",
+     "pool_Name":"mygubbi"
   }],
   "urlwithssl": "",
 
@@ -57,7 +57,7 @@
   "termsandcondition_manglore":"c:/Users/Public/game_files/BookingFormManglore.pdf",
   "termsandcondition_pune":"c:/Users/Public/game_files/BookingFormPune.pdf",
   "termsandcondition_chennai":"c:/Users/Public/game_files/BookingFormChennai.pdf",
-  "workscontract_template":"c:/Users/Public/game_files/WorksContract.pdf",
+  "workscontract_template":"c:/Users/Public/game_files/WorksContractTemplate.pdf",
 
 
 "queryfiles": ["game/db/proposal_queries.json", "game/db/user_queries.json","config/queries.json"],
