@@ -119,11 +119,11 @@ public class FFApiHandler extends AbstractRouteHandler {
                 if (servicesMap.containsKey(concat))
                 {
                     concat = productAddon.getProductTypeCode() + " :" + product + " :" + productAddon.getREMARKS();
-                    JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getProductTypeCode() + " :" + productAddon.getProductSubtypeCode() + " :" + productAddon.getProduct() + " :" + productAddon.getREMARKS());
+                    JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getProductTypeCode() + " :" + product + " :" + productAddon.getREMARKS());
                     servicesMap.put(concat,put);
                 }
                 else {
-                        JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", product + " :" + productAddon.getProduct());
+                        JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getProductTypeCode() + " :" + product);
                         servicesMap.put(concat,put);
                     }
                 }
