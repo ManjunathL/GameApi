@@ -92,15 +92,18 @@ public class FFApiHandler extends AbstractRouteHandler {
         for (ProductLineItem productLineItem : productLineItems)
         {
             String concat;
+            String title;
             if (productLineItem.getRoomCode().equalsIgnoreCase(productLineItem.getTitle()))
             {
               concat  = productLineItem.getRoomCode() + " :" + productLineItem.getProductCategory();
+                title = productLineItem.getProductCategory();
             }
             else
             {
-                concat  = productLineItem.getRoomCode() + " :" + productLineItem.getProductCategory() + " :" + productLineItem.getProductCategory();
+                concat  = productLineItem.getRoomCode() + " :" + productLineItem.getProductCategory() + " :" + productLineItem.getTitle();
+                title = productLineItem.getProductCategory() + " :" + productLineItem.getTitle();
             }
-            JsonObject put = new JsonObject().put("room", productLineItem.getRoomCode()).put("type", PRODUCT).put("title", productLineItem.getTitle());
+            JsonObject put = new JsonObject().put("room", productLineItem.getRoomCode()).put("type", PRODUCT).put("title",title);
             servicesMap.put(concat,put);
 
         }
