@@ -2052,6 +2052,13 @@
       "params": []
     },
     {
+      "id": "proposal.getcodes",
+      "type": "select",
+      "table": "color_master",
+      "query": "select * from code_master where lookupType = 'category'",
+      "params": []
+    },
+    {
       "id": "proposal.version.afterproduction",
       "type": "select",
       "table": "version_master",

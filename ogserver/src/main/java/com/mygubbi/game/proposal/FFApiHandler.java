@@ -4,10 +4,7 @@ import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.proposal.model.AccHwComponent;
-import com.mygubbi.game.proposal.model.Proposal;
-import com.mygubbi.game.proposal.model.ProposalHeader;
-import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.crm.CrmApiHandler;
 import io.vertx.core.AsyncResult;
@@ -91,17 +88,20 @@ public class FFApiHandler extends AbstractRouteHandler {
 
         for (ProductLineItem productLineItem : productLineItems)
         {
+            LOG.debug("PC :" + productLineItem.getProductCategory());
+            CodeMaster codeMaster = ModuleDataService.getInstance().getCodes(productLineItem.getProductCategory());
+            LOG.debug("Code master : " + codeMaster);
             String concat;
             String title;
             if (productLineItem.getRoomCode().equalsIgnoreCase(productLineItem.getTitle()))
             {
-              concat  = productLineItem.getRoomCode() + " :" + productLineItem.getProductCategory();
-                title = productLineItem.getProductCategory();
+              concat  = productLineItem.getRoomCode() + " :" + codeMaster.getTitle();
+                title = codeMaster.getTitle();
             }
             else
             {
-                concat  = productLineItem.getRoomCode() + " :" + productLineItem.getProductCategory() + " :" + productLineItem.getTitle();
-                title = productLineItem.getProductCategory() + " :" + productLineItem.getTitle();
+                concat  = productLineItem.getRoomCode() + " :" + codeMaster.getTitle() + " :" + productLineItem.getTitle();
+                title = codeMaster.getTitle() + " :" + productLineItem.getTitle();
             }
             JsonObject put = new JsonObject().put("room", productLineItem.getRoomCode()).put("type", PRODUCT).put("title",title);
             servicesMap.put(concat,put);

@@ -50,6 +50,7 @@ public class ModuleDataService extends AbstractVerticle
     private Multimap<String, ProductCategoryMap> productCategoryMap;
     private Map<String, ERPMaster> erpMasterMap = Collections.EMPTY_MAP;
     private Multimap<String,UsersForEmail> usersForEmailMap;
+    private Map<String,CodeMaster> codeMasterMap = Collections.EMPTY_MAP;
 
 
 	public static ModuleDataService getInstance()
@@ -82,6 +83,7 @@ public class ModuleDataService extends AbstractVerticle
        this.cacheColours();
        this.cacheUsersData();
        this.cacheProductCategoryMap();
+       this.cacheCodeMaster();
 	}
 
     private void cacheAccessories()
@@ -141,6 +143,32 @@ public class ModuleDataService extends AbstractVerticle
                     }
                 });
     }
+
+    private void cacheCodeMaster()
+    {
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("proposal.getcodes", new JsonObject())),
+                (AsyncResult<Message<Integer>> dataResult) -> {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (selectData == null || selectData.rows == null || selectData.rows.isEmpty())
+                    {
+                        markResult("Code master table is empty.", false);
+                    }
+                    else
+                    {
+                        this.codeMasterMap = new HashMap(selectData.rows.size());
+                        //this.colorMap= new HashMap(selectData.rows.size());
+                        for (JsonObject record : selectData.rows)
+                        {
+                            CodeMaster codeMaster=new CodeMaster(record);
+//                            LOG.info("color mapping " +codeMaster);
+                            this.codeMasterMap.put(codeMaster.getCode(), codeMaster);
+                        }
+                        markResult("Code master done.", true);
+                    }
+                });
+    }
+
+
     private void cacheProductCategoryMap()
     {
         this.productCategoryMap = ArrayListMultimap.create();
@@ -578,6 +606,10 @@ public class ModuleDataService extends AbstractVerticle
     public Collection<ColorMaster> getColours(String code)
     {
         return this.colorMap.get(code);
+    }
+    public CodeMaster getCodes(String code)
+    {
+        return this.codeMasterMap.get(code);
     }
 
     public Collection<SOWMaster> getSOWMaster(String spaceType)
