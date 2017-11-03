@@ -88,9 +88,9 @@ public class FFApiHandler extends AbstractRouteHandler {
 
         for (ProductLineItem productLineItem : productLineItems)
         {
-            LOG.debug("PC :" + productLineItem.getProductCategory());
+//            LOG.debug("PC :" + productLineItem.getProductCategory());
             CodeMaster codeMaster = ModuleDataService.getInstance().getCodes(productLineItem.getProductCategory());
-            LOG.debug("Code master : " + codeMaster);
+//            LOG.debug("Code master : " + codeMaster);
             String concat;
             String title;
             if (productLineItem.getRoomCode().equalsIgnoreCase(productLineItem.getTitle()))
