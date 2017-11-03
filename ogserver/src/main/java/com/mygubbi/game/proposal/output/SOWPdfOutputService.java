@@ -251,7 +251,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag || resultData.rows.size() == 0)
                     {
-                        LOG.error("Error in updating product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                        LOG.error("Error in fetching data from proposal_sow table " + resultData.errorMessage, resultData.error);
                     }
                     else
                     {

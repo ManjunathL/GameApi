@@ -1355,7 +1355,7 @@ public class QuotationPDFCreator
         int sequenceNumber = 1;
         for (AssembledProductInQuote product : assembledProducts)
         {
-            LOG.info("product color code " +product.getColorGroupCode());
+            LOG.info("product color code " +product.getColorGroupCode() + "hinges in quote " +product.getHingeTitle());
             this.fillAssembledProductInfo(tabname,sequenceNumber, product);
             sequenceNumber++;
         }
@@ -1464,10 +1464,10 @@ public class QuotationPDFCreator
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
                 //LOG.info("finish material " +li.get(index).getFinishtype()  +"finish type" +fmaterial);
                 if(li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit")) {
-                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode(), 1.0, li.get(index).getAmount(), 0.0);
+                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" + "Hinge : " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
 
                 }else {
-                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" +  "Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode(), 1.0, li.get(index).getAmount(), 0.0);
+                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" +  "Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" +"Hinge : " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
                 }
 
                 unitSequence++;
@@ -1485,7 +1485,7 @@ public class QuotationPDFCreator
                 }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
 
-                this.createRowAndFillData(li.get(index).getTabName(), null, "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " +fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode(), 1.0, li.get(index).getAmount(), 0.0);
+                this.createRowAndFillData(li.get(index).getTabName(), null, "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " +fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" +"Hinge: " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
                 unitSequence++;
                 if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
             }
@@ -1498,13 +1498,14 @@ public class QuotationPDFCreator
         wunitSequence = 0;
         String caption="",caption1="",caption2="",caption3="",caption4="",captionLoft="",captionWardrobe="";
         String cname=product.getCatagoryName();
-
+        String Wcaption="";
         String baseDimesion="",WallDimesion="",TallDimesion="",loftDimesion="",wardrobeDimesion="";
         int KBmodulecount=0,KWmoduleCount=0,KTmoduleCount=0,KLmoduleCount=0,SW1modulecount=0,WWmodulecount=0,WW1modulecount=0;
         String KBbasecarcass="",KWbasecarcass="",KTbasecarcass="",KLbasecarcass="",SW1basecarcass="",WWbasecarcass="",WW1basecarcass="";
         String KBWallcarcass="",KWwallcarcass="",KTwallcarcass="",KLwallcarcass="",SW1wallcarcass="",WWwallcarcass="",WW1wallcarcass="";
         String KBfinishmaterial="",KWfinishmaterial="",KTfinishmaterial="",KLfinishmaterial="",SW1finishmaterial="",WWfinishmaterial="",WW1finishmaterial="";
         String KBcolorgroupCode="",KWcolorGroupCode="",KTcolorGroupCode="",KLcolorGroupCode="",SW1colorGroupcode="",WWcolorGroupCode="",WW1colorGroupcode="";
+        String KBhinge="",KWhinge="",KThinge="",KLhinge="",SW1hinge="",WWhinge="",WW1hinge="";
         String KBfinishtype="",KWfinishtype="",KTfinishtype="",KLfinishtype="",SW1finishtype="",WWfinishtype="",WW1finishtype="";
         double KBamount=0,KWamount=0,KTamount=0,KLamount=0,SW1amount=0,WWamount=0,WW1amount=0;
 
@@ -1522,11 +1523,17 @@ public class QuotationPDFCreator
         List<String> klList=new ArrayList<String>();
         List<String> kwaList=new ArrayList<String>();
 
-        for(AssembledProductInQuote.Unit unit1: product.getUnits())
+        for(AssembledProductInQuote.Unit unit:product.getUnits())
         {
-            //LOG.info("unit module category" +unit1.toString());
+            if(cname.equals("Wardrobe"))
+            {
+                if(unit.moduleCategory.contains("S - Sliding Mechanism"))
+                {
+                    Wcaption="Sliding Wardrobe";
+                }
+            }
         }
-
+        LOG.info("Wcaption " +Wcaption);
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
             if(cname.equals("Kitchen") )
@@ -1584,6 +1591,7 @@ public class QuotationPDFCreator
                     KBfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     KBfinishtype = product.getProduct().getFinishType();
                     KBcolorgroupCode=product.getProduct().getColorgroupCode();
+                    KBhinge=product.getProduct().getHingeType();
                    // LOG.info("title" +unit.moduleCategory + "amount" +unit.amount);
                     KBamount += unit.amount;
 
@@ -1608,6 +1616,7 @@ public class QuotationPDFCreator
                     KWfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     KWfinishtype = product.getProduct().getFinishType();
                     KWcolorGroupCode=product.getProduct().getColorgroupCode();
+                    KWhinge=product.getProduct().getHingeType();
                     KWamount += unit.amount;
 
                     if(!unit.moduleCategory.contains ("N - Wall Units")) {
@@ -1635,6 +1644,7 @@ public class QuotationPDFCreator
                     KTfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     KTfinishtype = product.getProduct().getFinishType();
                     KTcolorGroupCode=product.getProduct().getColorgroupCode();
+                    KThinge=product.getProduct().getHingeType();
                     KTamount += unit.amount;
 
                     if(cname.equals("Kitchen"))
@@ -1667,6 +1677,7 @@ public class QuotationPDFCreator
                     KLfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     KLfinishtype = product.getProduct().getFinishType();
                     KLcolorGroupCode=product.getProduct().getColorgroupCode();
+                    KLhinge=product.getHingeTitle();
                     KLamount += unit.amount;
                     if(cname.equals("Kitchen"))
                     {
@@ -1705,7 +1716,7 @@ public class QuotationPDFCreator
                             unit.moduleCategory.contains("S - Storage Module Wall Unit") ||
                             unit.moduleCategory.contains("S - Storage Module Base Unit") ||
                             unit.moduleCategory.contains("S - Wardrobe Panels") ||
-                unit.moduleCategory.contains("S - Sliding Wardrobe with Loft"))
+                            unit.moduleCategory.contains("S - Sliding Wardrobe with Loft"))
                 {
                     WWmodulecount += unit.moduleCount;
                     WWbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -1713,8 +1724,18 @@ public class QuotationPDFCreator
                     WWfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     WWfinishtype = product.getProduct().getFinishType();
                     WWcolorGroupCode=product.getProduct().getColorgroupCode();
+                    WWhinge=product.getProduct().getHingeType();
                     WWamount += unit.amount;
-                    captionWardrobe="Wardrobe";
+
+                    if(Wcaption.equals("Sliding Wardrobe"))
+                    {
+                        captionWardrobe = "Sliding Wardrobe";
+                    }else
+                    {
+                        captionWardrobe="Hinged Wardrobe";
+                    }
+
+
                     if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels") || unit.moduleCategory.contains ("H - Panel"))) {
 
                         String width = unit.getDimensions();
@@ -1730,6 +1751,7 @@ public class QuotationPDFCreator
                     WW1finishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                     WW1finishtype = product.getProduct().getFinishType();
                     WW1colorGroupcode=product.getProduct().getColorgroupCode();
+                    WW1hinge=product.getProduct().getHingeType();
                     WW1amount += unit.amount;
                     captionLoft="Wardrobe Loft";
                     String width = unit.getDimensions();
@@ -1745,6 +1767,7 @@ public class QuotationPDFCreator
                 SW1finishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
                 SW1finishtype = product.getProduct().getFinishType();
                 SW1colorGroupcode=product.getProduct().getColorgroupCode();
+                SW1hinge=product.getProduct().getHingeType();
                 SW1amount += unit.amount;
 
                 if(cname.equals("Wardrobe"))
@@ -1902,7 +1925,7 @@ public class QuotationPDFCreator
         //int num=customFunction(li);*/
 
         if(KBamount!=0) {
-            obj = new customeclass(tabname, caption, KBmodulecount, KBbasecarcass, KBWallcarcass, KBfinishmaterial, KBfinishtype, KBamount, baseDimesion,KBcolorgroupCode);
+            obj = new customeclass(tabname, caption, KBmodulecount, KBbasecarcass, KBWallcarcass, KBfinishmaterial, KBfinishtype, KBamount, baseDimesion,KBcolorgroupCode,KBhinge);
             li.add(obj);
             customFunction(li,unitSequence);
             unitSequence++;
@@ -1910,7 +1933,7 @@ public class QuotationPDFCreator
         }
 
         if(KWamount!=0) {
-            obj = new customeclass(tabname, caption1, KWmoduleCount, KWbasecarcass, KWwallcarcass, KWfinishmaterial, KWfinishtype, KWamount, WallDimesion,KWcolorGroupCode);
+            obj = new customeclass(tabname, caption1, KWmoduleCount, KWbasecarcass, KWwallcarcass, KWfinishmaterial, KWfinishtype, KWamount, WallDimesion,KWcolorGroupCode,KWhinge);
             li.add(obj);
             customFunction(li,unitSequence);
             //rowValue++;
@@ -1919,7 +1942,7 @@ public class QuotationPDFCreator
         }
 
         if(KTamount!=0) {
-            obj = new customeclass(tabname, caption2, KTmoduleCount, KTbasecarcass, KTwallcarcass, KTfinishmaterial, KTfinishtype, KTamount, TallDimesion,KTcolorGroupCode);
+            obj = new customeclass(tabname, caption2, KTmoduleCount, KTbasecarcass, KTwallcarcass, KTfinishmaterial, KTfinishtype, KTamount, TallDimesion,KTcolorGroupCode,KThinge);
             li.add(obj);
             customFunction(li,unitSequence);
             //rowValue++;
@@ -1928,7 +1951,7 @@ public class QuotationPDFCreator
         }
 
         if(KLamount!=0) {
-            obj = new customeclass(tabname, caption3, KLmoduleCount, KLbasecarcass, KLwallcarcass, KLfinishmaterial, KLfinishtype, KLamount, loftDimesion,KLcolorGroupCode);
+            obj = new customeclass(tabname, caption3, KLmoduleCount, KLbasecarcass, KLwallcarcass, KLfinishmaterial, KLfinishtype, KLamount, loftDimesion,KLcolorGroupCode,KLhinge);
             li.add(obj);
             customFunction(li,unitSequence);
             //rowValue++;
@@ -1939,7 +1962,7 @@ public class QuotationPDFCreator
         if(WWamount!=0)
         {
 
-            obj = new customeclass(tabname,captionWardrobe,WWmodulecount,WWbasecarcass,WWwallcarcass,WWfinishmaterial,WWfinishtype,WWamount,wardrobewidth,WWcolorGroupCode);
+            obj = new customeclass(tabname,captionWardrobe,WWmodulecount,WWbasecarcass,WWwallcarcass,WWfinishmaterial,WWfinishtype,WWamount,wardrobewidth,WWcolorGroupCode,WWhinge);
             li.add(obj);
             customFunction(li,wunitSequence);
             //rowValue++;
@@ -1949,7 +1972,7 @@ public class QuotationPDFCreator
 
         if(WW1amount!=0)
         {
-            obj = new customeclass(tabname,captionLoft,WW1modulecount,WW1basecarcass,WW1wallcarcass,WW1finishmaterial,WW1finishtype,WW1amount,wardrobeLoftwidth,WW1colorGroupcode);
+            obj = new customeclass(tabname,captionLoft,WW1modulecount,WW1basecarcass,WW1wallcarcass,WW1finishmaterial,WW1finishtype,WW1amount,wardrobeLoftwidth,WW1colorGroupcode,WW1hinge);
             li.add(obj);
             customFunction(li,wunitSequence);
             //rowValue++;
@@ -1960,7 +1983,7 @@ public class QuotationPDFCreator
         li2=new ArrayList<QuotationPDFCreator.customeclass>();
         QuotationPDFCreator.customeclass ob2;
 
-        ob2=new QuotationPDFCreator.customeclass(tabname,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,wardrobewidth,SW1colorGroupcode);
+        ob2=new QuotationPDFCreator.customeclass(tabname,caption4,SW1modulecount,SW1basecarcass,SW1wallcarcass,SW1finishmaterial,SW1finishtype,SW1amount,wardrobewidth,SW1colorGroupcode,SW1hinge);
         li2.add(ob2);
 
         customFunction(li2,unitSequence);
@@ -2064,7 +2087,7 @@ public class QuotationPDFCreator
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
                // LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
-                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title);
+                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title + " - " +Double.valueOf(accessory.quantity).intValue());
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
             }
@@ -2232,11 +2255,11 @@ public class QuotationPDFCreator
     class customeclass
     {
         PdfPTable tabName;
-        String title,basecarcass,wallcarcass,finishmaterial,finishtype,dimension,colorGroupCode;
+        String title,basecarcass,wallcarcass,finishmaterial,finishtype,dimension,colorGroupCode,hingeType;
         int modulecount;
         double amount;
 
-        public customeclass(PdfPTable tabName, String title,int modulecount, String basecarcass, String wallcarcass, String finishmaterial, String finishtype, double amount,String dimension,String colorGroupCode ) {
+        public customeclass(PdfPTable tabName, String title,int modulecount, String basecarcass, String wallcarcass, String finishmaterial, String finishtype, double amount,String dimension,String colorGroupCode,String hingeType ) {
             this.tabName = tabName;
             this.title = title;
             this.basecarcass = basecarcass;
@@ -2247,6 +2270,15 @@ public class QuotationPDFCreator
             this.modulecount = modulecount;
             this.dimension=dimension;
             this.colorGroupCode=colorGroupCode;
+            this.hingeType=hingeType;
+        }
+
+        public String getHingeType() {
+            return hingeType;
+        }
+
+        public void setHingeType(String hingeType) {
+            this.hingeType = hingeType;
         }
 
         public String getDimension() {
