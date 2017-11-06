@@ -11,6 +11,10 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Sunil on 08-01-2016.
  */
@@ -82,14 +86,17 @@ public class EmailService extends AbstractVerticle
 
     public static void main(String[] args)
     {
-        EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmail("debashis.s@mygubbi.com")
-                .setHtmlBody(true).setParams(new JsonObject().put("name", "Debashis").getMap())
-                .setSubject("Welcome to mygubbi!").setBodyTemplate("email/welcome.user.vm")
-                .setSubjectTemplate("email/welcome.user.subject.vm");
+        String[] toemails = {"shilpa.g@mygubbi.com","shilpa.sorab@gmail.com"};
+        EmailData emailData = new EmailData().setFromEmail("team@mygubbi.com").setToEmails(toemails)
+
+                .setHtmlBody(true).setParams(new JsonObject().put("displayName", "Shilpa").getMap())
+                .setSubject("Welcome to mygubbi!").setBodyTemplate("/email/welcome.user.vm")
+                .setSubjectTemplate("/email/welcome.user.subject.vm");
 
         SendGrid sendgrid = new SendGrid(SENDGRID_APIKEY);
         SendGrid.Email email = new SendGrid.Email();
-        email.addTo(emailData.getToEmail());
+        email.addTo(emailData.getToEmails());
+//        email.addTo(emailData.getToEmails());
         email.setFrom(emailData.getFromEmail());
         email.setSubject(emailData.getSubject());
         email.setHtml(emailData.getMessageBody());

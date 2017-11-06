@@ -17,7 +17,7 @@ public class QueryData
 
 	public String queryId;
 	public QueryDef queryDef;
-	
+
 	public JsonObject paramsObject;
 	public List<JsonObject> paramsList;
 	public List<JsonObject> rows;
@@ -28,10 +28,11 @@ public class QueryData
 	public Throwable error;
 	public String errorMessage;
 	private long startTime;
-	
+	public String poolName = "";
+
 	public QueryData()
 	{
-		
+
 	}
 	public QueryData(String queryId)
 	{
@@ -43,12 +44,26 @@ public class QueryData
 		this.queryId = queryId;
 		this.paramsObject = paramsObject;
 	}
+	public QueryData(String queryId, JsonObject paramsObject,String poolName)
+	{
+		this.queryId = queryId;
+		this.paramsObject = paramsObject;
+		this.poolName = poolName;
+
+	}
 
 	public QueryData(String queryId, List<JsonObject> paramsList)
 	{
 		this.queryId = queryId;
 		this.paramsList = paramsList;
 	}
+	public QueryData(String queryId, List<JsonObject> paramsList,String poolName)
+	{
+		this.queryId = queryId;
+		this.paramsList = paramsList;
+		this.poolName = poolName;
+	}
+
 
 	public boolean isBatchMode()
 	{
@@ -96,7 +111,7 @@ public class QueryData
 		}
 		return params;
 	}
-	
+
 	public QueryData setError(String error)
 	{
 		this.errorFlag = true;
@@ -104,13 +119,13 @@ public class QueryData
 		this.endQuery();
 		return this;
 	}
-	
+
 	public QueryData setError(Throwable cause)
 	{
 		this.error = cause;
 		return this.setError(cause.getMessage());
 	}
-	
+
 	public QueryData  startQuery()
 	{
 		this.startTime = System.currentTimeMillis();
@@ -148,15 +163,15 @@ public class QueryData
 			{
 				for (String jsonfield : this.queryDef.jsonFields)
 				{
-                    String data = row.getString(jsonfield);
-                    if (StringUtils.isNonEmpty(data))
-                    {
+					String data = row.getString(jsonfield);
+					if (StringUtils.isNonEmpty(data))
+					{
 						if (data.charAt(0) == '[')
-                        	row.put(jsonfield, new JsonArray(data));
+							row.put(jsonfield, new JsonArray(data));
 						else
 							row.put(jsonfield, new JsonObject(data));
 
-                    }
+					}
 				}
 			}
 		}

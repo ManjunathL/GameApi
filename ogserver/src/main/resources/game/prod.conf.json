@@ -1,14 +1,26 @@
 {
   "version": "0.0.0a",
 
-  "jdbc": {
+  "jdbc": [{
     "driver_class": "com.mysql.jdbc.Driver",
     "url": "jdbc:mysql://mgprddb1.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/mgprod1",
     "max_pool_size": 20,
     "user": "MygubbiAdmin",
-    "password": "myGubb!$$"
-  },
+    "password": "myGubb!$$",
+    "pool_Name":"mygubbi"
+  },{
+    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://suite.mygubbi.com/gubbi_ods",
+    "max_pool_size": 20,
+    "user": "rwuser",
+    "password": "6npp!_mb6npp!_mb",
+    "pool_Name":"ods"
+  }],
 
+  "SENDGRID_KEY":"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",
+  "FROM_EMAIL":"game@mygubbi.com",
+  "App_url_for_proposal":"http://game.mygubbi.com/#!New%20Quotation/",
+  "sendEmail":"Yes",
   "ssl_keystore": "ssl/mygubbiprod.jks",
   "ssl_password": "0r@nge123$",
 
@@ -36,7 +48,7 @@
   "termsandcondition_manglore":"/mnt/game/proposal/templates/BookingFormManglore.pdf",
   "termsandcondition_pune":"/mnt/game/proposal/templates/BookingFormPune.pdf",
   "termsandcondition_chennai":"/mnt/game/proposal/templates/BookingFormChennai.pdf",
-  "workscontract_template":"/mnt/game/proposal/templates/WorkscontractTemplate.pdf",
+  "workscontract_template":"/mnt/game/proposal/templates/WorksContractTemplate.pdf",
   "fbServicesJson": "config/prod/mygubbi-cep-live-firebase.json",
   "fbUrl": "https://mygubbi.firebaseio.com",
   "websiteHost": "www.mygubbi.com:8685",

@@ -39,11 +39,13 @@ public class QuoteData
     public double addonsCost;
 
     public double discountAmount;
+    public  double discountPercentage;
     public String fromVersion;
     private String city;
     private String title;
     private java.sql.Date priceDate;
     private String bookingFormFlag;
+    private String worksContractFlag;
     public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion,String bookingFormFlag)
     {
         this.city = proposalHeader.getProjectCity();
@@ -63,6 +65,30 @@ public class QuoteData
         this.discountAmount = discountAmount;
         this.fromVersion=fromVersion;
         this.bookingFormFlag=bookingFormFlag;
+        //this.worksContractFlag
+        this.prepare();
+    }
+    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion,String bookingFormFlag,double discountPercentage,String worksContractFlag)
+    {
+        this.city = proposalHeader.getProjectCity();
+        this.priceDate = proposalHeader.getPriceDate();
+        this.discountPercentage=discountPercentage;
+        if(products != null) {
+            for (ProductLineItem productLineItem : products) {
+                this.title = productLineItem.getTitle();
+            }
+        }
+        if (this.priceDate == null)
+        {
+            this.priceDate = new java.sql.Date(System.currentTimeMillis());
+        }
+        this.proposalHeader = proposalHeader;
+        this.products = products;
+        if (addons != null) this.headerLevelAddons = addons;
+        this.discountAmount = discountAmount;
+        this.fromVersion=fromVersion;
+        this.bookingFormFlag=bookingFormFlag;
+        this.worksContractFlag=worksContractFlag;
         this.prepare();
     }
 
@@ -245,10 +271,11 @@ public class QuoteData
         return discountAmount;
     }
 
+    public double getDiscountPercentage() { return discountPercentage; }
     public String getBookingFormFlag(){
         return bookingFormFlag;
     }
-
+    public String getWorksContractFlag() { return worksContractFlag; }
     public double getTotalCost()
     {
         return round(this.productsCost + this.addonsCost);

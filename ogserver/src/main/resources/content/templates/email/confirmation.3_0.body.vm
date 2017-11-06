@@ -1,0 +1,19 @@
+<html>
+<body>
+<p>Hi, <br /> <br />Please note that&nbsp;<strong>Planning</strong>&nbsp;has been&nbsp;<strong>Signed-Off</strong>;</p>
+<ul>
+<li>Client Name : $vdata.clientName</li>
+<li>Opportunity ID : $vdata.opportunityId</li>
+<li>Quotation # : $vdata.quoteNo&nbsp;</li>
+</ul>
+<p><strong><u>Financials:</u></strong></p>
+<ul>
+<li>&nbsp;Price : $vdata.price</li>
+<li>&nbsp;Price After Discount : $vdata.priceAfterDiscount</li>
+<li>&nbsp;Discount Amount (%) : $vdata.discountAmountPerc</li>
+</ul>
+<p>Here is the link - <a href="$vdata.url">link to quotation</a></p>
+<p>&nbsp;</p>
+<p>Best Regards, <br /> MyGubbi GAME Team.</p>
+</body>
+</html>

@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class SOSheetCreator implements ExcelCellProcessor {
     private static final int QTY_CELL = 3;
     private static final int REFERENCE_PART_NO_CELL = 4;
     private static final int TITLE_CELL = 5;
+    private static final int DISPLAY_ORDER = 6;
 
 
     private XSSFSheet quoteSheet;
@@ -92,7 +94,7 @@ public class SOSheetCreator implements ExcelCellProcessor {
     {
         int currentRow = startRow;
 
-        LOG.debug("Start row :" + startRow);
+        proposalBoqs.sort(Comparator.comparing(SOPart::getDisplayOrder));
 
 
         for (SOPart proposal_boq : proposalBoqs) {
@@ -120,6 +122,7 @@ public class SOSheetCreator implements ExcelCellProcessor {
         this.createCellWithData(dataRow, QTY_CELL, Cell.CELL_TYPE_STRING, proposal_boq.getQty()).setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, REFERENCE_PART_NO_CELL, Cell.CELL_TYPE_STRING, proposal_boq.getReferencePartNo()).setCellStyle(this.styles.getIndexStyle());
         this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, proposal_boq.getTitle()).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, DISPLAY_ORDER, Cell.CELL_TYPE_STRING, proposal_boq.getDisplayOrder()).setCellStyle(this.styles.getIndexStyle());
 
     }
 

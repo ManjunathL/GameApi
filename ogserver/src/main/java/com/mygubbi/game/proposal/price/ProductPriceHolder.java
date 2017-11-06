@@ -5,10 +5,7 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
-import com.mygubbi.game.proposal.model.PriceMaster;
-import com.mygubbi.game.proposal.model.ProposalHeader;
-import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.model.RateCard;
+import com.mygubbi.game.proposal.model.*;
 import io.vertx.core.json.JsonArray;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -346,15 +343,16 @@ public class ProductPriceHolder {
 
         java.util.Date date = proposalHeader.getCreatedOn();
         java.util.Date currentDate = new Date(117, 3, 20, 0, 0, 00);
+        double woTaxFactor = getAfterTaxFactor(proposalHeader,productLineItem);
         if (date.before(currentDate)) {
 
             this.productPriceAfterDiscount = this.productPrice - (this.productLineItem.getCostWoAcc() * this.discountPercentage);
-            this.productPriceWoTax = this.productPriceAfterDiscount * 0.8558;
+            this.productPriceWoTax = this.productPriceAfterDiscount * woTaxFactor;
         }
         else
         {
             this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
-            this.productPriceWoTax = this.productPriceAfterDiscount * 0.8558;
+            this.productPriceWoTax = this.productPriceAfterDiscount * woTaxFactor;
         }
 
         this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
@@ -741,6 +739,35 @@ public class ProductPriceHolder {
             this.productLConnectorMargin = this.productLConnectorProfit / this.productLConnectorPriceWoTax;
             return this.productLConnectorMargin*100;
         }
+    }
+
+    private double getAfterTaxFactor(ProposalHeader proposalHeader, ProductLineItem productLineItem) {
+
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        double woTaxFactor = 0;
+
+        ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productLineItem.getProductCategory(),proposalHeader.getPriceDate());
+        String productType = productCategoryMap.getType();
+
+        RateCard movableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        RateCard nonMovableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.NON_MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+
+
+        switch (productType) {
+            case RateCard.MOVABLE_FURNITURE:
+                woTaxFactor = movableFurnitureRateCard.getSourcePrice();
+                break;
+            case RateCard.NON_MOVABLE_FURNITURE:
+                woTaxFactor = nonMovableFurnitureRateCard.getSourcePrice();
+                break;
+            default:
+                woTaxFactor = prodWoTaxFactor.getSourcePrice();
+                break;
+        }
+        return woTaxFactor;
     }
 
     @Override

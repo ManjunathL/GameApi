@@ -70,6 +70,16 @@ public class AssembledProductInQuote
     {
         return this.product.getTitle();
     }
+
+    public String getColorGroupCode()
+    {
+        return  this.product.getColorgroupCode();
+    }
+
+    public String getHingeTitle()
+    {
+        return this.product.getHingeType();
+    }
     public String getHandleTypeSelection() { return this.product.getHandletypeSelection();}
     public int getNoOfLengths() {return this.product.getNoOfLengths();}
     public double getLconnectorPrice() {return this.product.getLconnectorPrice();}

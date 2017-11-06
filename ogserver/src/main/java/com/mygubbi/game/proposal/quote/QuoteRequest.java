@@ -18,7 +18,9 @@ public class QuoteRequest
     private static final String ADDON_IDS = "addonIds";
     private static final String VERSION_IDS = "versionIds";
     private static final String IS_VALID_SOW = "validSow";
-    private static final String  BOOKING_FORMFLAG= "bookingFormFlag";
+    private static final String BOOKING_FORMFLAG= "bookingFormFlag";
+    private static final String WORKSCONTRACT_FLAG= "worksContractFlag";
+    private static final String DISCOUNT_PERCENTAGE = "discountPercentage";
 
     private int proposalId;
     private String fromVersion;
@@ -27,6 +29,8 @@ public class QuoteRequest
     private List<Integer> versionIds;
     private double discountAmount = 0.0;
     private String bookingFormFlag;
+    private String worksContractFlag;
+    private double discountPercentage;
 
     public boolean isValidSowRows() {
         return isValidSowRows;
@@ -73,6 +77,13 @@ public class QuoteRequest
         }
         if(jsonData.containsKey(BOOKING_FORMFLAG)){
             this.bookingFormFlag=jsonData.getString(BOOKING_FORMFLAG);
+        }
+        if(jsonData.containsKey(DISCOUNT_PERCENTAGE))
+        {
+            this.discountPercentage=jsonData.getDouble(DISCOUNT_PERCENTAGE);
+        }
+        if(jsonData.containsKey(WORKSCONTRACT_FLAG)){
+            this.worksContractFlag=jsonData.getString(WORKSCONTRACT_FLAG);
         }
     }
 
@@ -158,21 +169,35 @@ public class QuoteRequest
     public String getBookingFormFlag() {
         return this.bookingFormFlag;
     }
+    public String getWorkscontractFlag() {
+        return this.worksContractFlag;
+    }
 
     public void setBookingFormFlag(String bookingFormFlag) {
         this.bookingFormFlag = bookingFormFlag;
+    }
+    public void setWorkscontractFlag(String workscontractFlag) {
+        this.worksContractFlag = workscontractFlag;
+    }
+
+    public double getDiscountPercentage() {
+        return this.discountPercentage;
     }
 
     @Override
     public String toString() {
         return "QuoteRequest{" +
-                "addonIds=" + addonIds +
-                ", proposalId=" + proposalId +
+                "proposalId=" + proposalId +
                 ", fromVersion='" + fromVersion + '\'' +
                 ", productsIds=" + productsIds +
+                ", addonIds=" + addonIds +
                 ", versionIds=" + versionIds +
                 ", discountAmount=" + discountAmount +
+                ", bookingFormFlag='" + bookingFormFlag + '\'' +
+                ", worksContractFlag='" + worksContractFlag + '\'' +
+                ", discountPercentage=" + discountPercentage +
                 ", outputType=" + outputType +
+                ", isValidSowRows=" + isValidSowRows +
                 '}';
     }
 }

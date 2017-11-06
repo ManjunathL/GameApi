@@ -83,6 +83,9 @@
       },
       {
         "name":"com.mygubbi.game.proposal.erp.SOCreatorService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.price.VersionPricingService"
       }
     ]
   }

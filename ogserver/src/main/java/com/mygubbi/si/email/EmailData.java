@@ -3,6 +3,9 @@ package com.mygubbi.si.email;
 import com.mygubbi.common.StringUtils;
 import com.mygubbi.template.VelocityTemplateProcessor;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by test on 24-01-2016.
  */
@@ -10,6 +13,7 @@ public class EmailData
 {
     private String toEmail;
     private String fromEmail;
+    private String[] toEmails;
     private String subject;
     private String textMessage;
     private String bodyTemplate;
@@ -27,6 +31,14 @@ public class EmailData
         {
             return this.textMessage;
         }
+    }
+    public String[] getToEmails() {
+        return toEmails;
+    }
+
+    public EmailData setToEmails(String[] toEmails) {
+        this.toEmails = toEmails;
+        return  this;
     }
 
     public boolean isHtmlBody()
@@ -119,5 +131,20 @@ public class EmailData
     {
         this.params = params;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "EmailData{" +
+                "toEmail='" + toEmail + '\'' +
+                ", fromEmail='" + fromEmail + '\'' +
+                ", toEmails=" + Arrays.toString(toEmails) +
+                ", subject='" + subject + '\'' +
+                ", textMessage='" + textMessage + '\'' +
+                ", bodyTemplate='" + bodyTemplate + '\'' +
+                ", subjectemplate='" + subjectemplate + '\'' +
+                ", params=" + params +
+                ", isHtmlBody=" + isHtmlBody +
+                '}';
     }
 }

@@ -1,8 +1,10 @@
 package com.mygubbi.game.proposal.model.dw;
 
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.model.ShutterFinish;
 import com.mygubbi.game.proposal.price.ProductPriceHolder;
 import io.vertx.core.json.JsonObject;
 import org.elasticsearch.common.recycler.Recycler;
@@ -50,6 +52,7 @@ public class DWProposalProduct extends JsonObject {
      private static final String HINGE="hinge";
      private static final String GLASS="glass";
      private static final String HANDLESELECTION="handleSelection";
+     private static final String COLOR="color";
      private static final String NOOFLENGTHS="noOfLengths";
      private static final String HANDLETYPE="handleType";
      private static final String HANDLEFINISH="handleFinish";
@@ -401,6 +404,16 @@ public class DWProposalProduct extends JsonObject {
     public DWProposalProduct setHandleSelection(String handleSelection)
     {
         put(HANDLESELECTION,handleSelection);
+        return this;
+    }
+
+    public String getColorCode() {
+        return this.getString(COLOR);
+    }
+
+    public DWProposalProduct setColorCode(String colorCode)
+    {
+        put(COLOR,colorCode);
         return this;
     }
 
@@ -1062,19 +1075,22 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setWallCarcass(productLineItem.getWallCarcassCode());
 
         String finishCode = productLineItem.getFinishCode();
-        if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
+       /* if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
         }
         if(finishCode.equalsIgnoreCase(OLD_MATT_WOOD_GRAIN_FINISH)){
             finishCode = NEW_MATT_WOOD_GRAIN_FINISH;
-        }
+        }*/
 
-        dwProposalProduct.setFinish(finishCode);
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(finishCode);
+
+        dwProposalProduct.setFinish(shutterFinish.getTitle());
         dwProposalProduct.setFinishMaterial(productLineItem.getFinishType());
         dwProposalProduct.setShutterDesign(productLineItem.getShutterDesignCode());
         dwProposalProduct.setHinge(productLineItem.getHingeType());
         dwProposalProduct.setGlass(productLineItem.getGlass());
         dwProposalProduct.setHandleSelection(productLineItem.getHandletypeSelection());
+        dwProposalProduct.setColorCode(productLineItem.getColorgroupCode());
         dwProposalProduct.setNoOfLengths(productLineItem.getNoOfLengths());
         dwProposalProduct.setHandleType(productLineItem.getHandleType());
         dwProposalProduct.setHandleFinish(productLineItem.getHandleFinish());
