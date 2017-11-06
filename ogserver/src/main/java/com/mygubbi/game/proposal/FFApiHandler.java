@@ -100,8 +100,17 @@ public class FFApiHandler extends AbstractRouteHandler {
             }
             else
             {
-                concat  = productLineItem.getRoomCode() + " :" + codeMaster.getTitle() + " :" + productLineItem.getTitle();
-                title = codeMaster.getTitle() + " :" + productLineItem.getTitle();
+                if(codeMaster.getTitle().equalsIgnoreCase(productLineItem.getTitle()))
+                {
+                    concat  = productLineItem.getRoomCode() + " :" + codeMaster.getTitle() + " :" + productLineItem.getTitle();
+                    title = codeMaster.getTitle() + " :" + productLineItem.getTitle();
+                }
+                else
+                {
+                    concat  = productLineItem.getRoomCode() + " :" + codeMaster.getTitle();
+                    title = codeMaster.getTitle();
+                }
+
             }
             JsonObject put = new JsonObject().put("room", productLineItem.getRoomCode()).put("type", PRODUCT).put("title",title);
             servicesMap.put(concat,put);
