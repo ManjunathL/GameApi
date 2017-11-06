@@ -1464,10 +1464,10 @@ public class QuotationPDFCreator
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
                 //LOG.info("finish material " +li.get(index).getFinishtype()  +"finish type" +fmaterial);
                 if(li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit")) {
-                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() /*+ "\n" + "Hinge : " +li.get(index).getHingeType()*/, 1.0, li.get(index).getAmount(), 0.0);
+                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" + "Hinge : " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
 
                 }else {
-                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" +  "Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() /*+ "\n" +"Hinge : " +li.get(index).getHingeType()*/, 1.0, li.get(index).getAmount(), 0.0);
+                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" +  "Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" +"Hinge : " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
                 }
 
                 unitSequence++;
@@ -1485,7 +1485,7 @@ public class QuotationPDFCreator
                 }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
 
-                this.createRowAndFillData(li.get(index).getTabName(), null, "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " +fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() /*+ "\n" +"Hinge: " +li.get(index).getHingeType()*/, 1.0, li.get(index).getAmount(), 0.0);
+                this.createRowAndFillData(li.get(index).getTabName(), null, "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " +fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" +"Hinge: " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
                 unitSequence++;
                 if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
             }
@@ -1523,6 +1523,9 @@ public class QuotationPDFCreator
         List<String> klList=new ArrayList<String>();
         List<String> kwaList=new ArrayList<String>();
 
+        String finish=product.getProduct().getFinishType();
+        LOG.info("Finish " +finish);
+
         for(AssembledProductInQuote.Unit unit:product.getUnits())
         {
             if(cname.equals("Wardrobe"))
@@ -1531,6 +1534,10 @@ public class QuotationPDFCreator
                 {
                     Wcaption="Sliding Wardrobe";
                 }
+            }
+            if(finish.contains("Aristo"))
+            {
+                Wcaption="Aristo Wardrobe";
             }
         }
         LOG.info("Wcaption " +Wcaption);
@@ -1728,13 +1735,16 @@ public class QuotationPDFCreator
                     WWamount += unit.amount;
                     captionWardrobe="Wardrobe";
 
-                   /* if(Wcaption.equals("Sliding Wardrobe"))
+                    if(Wcaption.equals("Sliding Wardrobe"))
                     {
                         captionWardrobe = "Sliding Wardrobe";
+                    }else if (Wcaption.equals("Aristo Wardrobe"))
+                    {
+                        captionWardrobe="Aristo Wardrobe";
                     }else
                     {
                         captionWardrobe="Hinged Wardrobe";
-                    }*/
+                    }
 
 
                     if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels") || unit.moduleCategory.contains ("H - Panel"))) {
@@ -2088,7 +2098,7 @@ public class QuotationPDFCreator
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
                // LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
-                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title /*+ " - " +Double.valueOf(accessory.quantity).intValue()*/);
+                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title + " - " +Double.valueOf(accessory.quantity).intValue());
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
             }
