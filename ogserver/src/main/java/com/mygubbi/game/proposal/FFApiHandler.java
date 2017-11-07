@@ -103,12 +103,12 @@ public class FFApiHandler extends AbstractRouteHandler {
                 if(codeMaster.getTitle().equalsIgnoreCase(productLineItem.getTitle()))
                 {
                     concat  = productLineItem.getRoomCode() + " :" + codeMaster.getTitle() + " :" + productLineItem.getTitle();
-                    title = codeMaster.getTitle() + " :" + productLineItem.getTitle();
+                    title = codeMaster.getTitle();
                 }
                 else
                 {
                     concat  = productLineItem.getRoomCode() + " :" + codeMaster.getTitle();
-                    title = codeMaster.getTitle();
+                    title = codeMaster.getTitle() + " :" + productLineItem.getTitle();
                 }
 
             }
