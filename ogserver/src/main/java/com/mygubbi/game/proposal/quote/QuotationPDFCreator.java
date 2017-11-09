@@ -1,7 +1,5 @@
 package com.mygubbi.game.proposal.quote;
 
-import com.codahale.metrics.MetricRegistryListener;
-import com.itextpdf.forms.fields.PdfButtonFormField;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.mygubbi.game.proposal.ModuleDataService;
@@ -10,7 +8,6 @@ import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProposalHandler;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.RateCardService;
-import com.shaded.fasterxml.jackson.databind.ser.Serializers;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -1441,6 +1438,12 @@ public class QuotationPDFCreator
         tabname.addCell(cell);
 
     }
+    private boolean isNotNullorEmpty(String s){
+        if ((s == null )||( s.length() == 0)){
+            return false;
+        }else
+            return true;
+    }
     private int customFunction(List<QuotationPDFCreator.customeclass> li,int unitSequence)
     {
         //int unitSequence = 0;
@@ -1464,11 +1467,12 @@ public class QuotationPDFCreator
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
                 //LOG.info("finish material " +li.get(index).getFinishtype()  +"finish type" +fmaterial);
                 if(li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit")) {
-                   String text ="unit consists of " + li.get(index).getModulecount() +
+
+                    String text ="unit consists of " + li.get(index).getModulecount() +
                            " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" +
                            "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial+
-                           ((li.get(index).getColorGroupCode() != null) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
-                           ((li.get(index).getHingeType() != null) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
+                           ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
+                           ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
                     this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
 
@@ -1476,8 +1480,8 @@ public class QuotationPDFCreator
                     String text = "unit consists of " + li.get(index).getModulecount() +
                             " modules as per design provided.\n" +  "Carcass: " + li.get(index).getWallcarcass() + "\n" +
                             "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " + fmaterial +
-                            ((li.get(index).getColorGroupCode() != null) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
-                            ((li.get(index).getHingeType()!= null ) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
+                            ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
+                            ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
                     this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
                 }
@@ -1499,8 +1503,8 @@ public class QuotationPDFCreator
 
                 String text = "Carcass: " + li.get(index).getBasecarcass() + "\n" +
                         "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " +fmaterial +
-                        ((li.get(index).getColorGroupCode() != null) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
-                        ((li.get(index).getHingeType()!= null) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
+                        ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
+                        ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
                 this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
                 unitSequence++;
@@ -2071,18 +2075,55 @@ public class QuotationPDFCreator
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
 
-        PdfPCell cell4=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(amount.intValue())),fsize);
+
+            PdfPCell cell4 = new PdfPCell();
+            Pindex = new Paragraph(this.getRoundOffValue(String.valueOf(amount.intValue())), fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell4.addElement(Pindex);
+            tabname.addCell(cell4);
+
+            PdfPCell cell3 = new PdfPCell();
+            double amt = quantity * amount;
+            Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf((int) amt)), fsize);
+            Pamt.setAlignment(Element.ALIGN_RIGHT);
+            cell3.addElement(Pamt);
+            tabname.addCell(cell3);
+
+    }
+
+    private void createRowAndFillDataForAccessories(PdfPTable tabname,String index, String title, Double quantity)
+    {
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        cell=new PdfPCell(new Paragraph(title,fsize));
+        tabname.addCell(cell);
+
+        PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+        PdfPCell cell4 = new PdfPCell();
+        Pindex = new Paragraph();
         Pindex.setAlignment(Element.ALIGN_RIGHT);
         cell4.addElement(Pindex);
         tabname.addCell(cell4);
 
-        PdfPCell cell3=new PdfPCell();
-        double amt=quantity*amount;
-        Paragraph Pamt=new Paragraph(this.getRoundOffValue(String.valueOf((int)amt)),fsize);
+        PdfPCell cell3 = new PdfPCell();
+        Paragraph Pamt = new Paragraph();
         Pamt.setAlignment(Element.ALIGN_RIGHT);
         cell3.addElement(Pamt);
         tabname.addCell(cell3);
+
     }
 
     private void createRowAndFillData(PdfPTable tabname,String index, String title)
@@ -2114,10 +2155,8 @@ public class QuotationPDFCreator
             LOG.info("Accesoory " +accessory);
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
-               // LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
-                PriceMaster accessoryPrice=RateCardService.getInstance().getAccessoryRate(accessory.code,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
-
-                this.createRowAndFillData(tabname,ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, accessoryPrice.getPrice(),accessory.quantity*accessoryPrice.getPrice());
+                LOG.info("Inserting new accessory row");
+                this.createRowAndFillDataForAccessories(tabname,ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity);
 
 //                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title + " - " +Double.valueOf(accessory.quantity).intValue());
                 acSequence++;
