@@ -30,6 +30,9 @@ public class RateCard
     public static final String NONSTD_MANUFACTURING_COST_FACTOR = "NSTDMC";
     public static final String STD_MANUFACTURING_COST_FACTOR = "STDMC";
     public static final String PRODUCT_WO_TAX = "PRODWOTAX";
+    public static final String MOVABLE_FURNITURE = "MF";
+    public static final String NON_MOVABLE_FURNITURE = "NMF";
+    public static final String SERVICES_CIVIL_WORK = "SCW";
     public static final String DISCOUNT_PERCENTAGE = "DP";
 
     private String code;

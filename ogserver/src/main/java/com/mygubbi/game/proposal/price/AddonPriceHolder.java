@@ -1,8 +1,11 @@
 package com.mygubbi.game.proposal.price;
 
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.PriceMaster;
+import com.mygubbi.game.proposal.model.ProductCategoryMap;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.RateCard;
 import io.vertx.core.json.JsonArray;
@@ -28,16 +31,51 @@ public class AddonPriceHolder {
 
     private JsonArray errors = null;
 
-    PriceMaster addonFactor;
+    double addonFactor;
     PriceMaster customAddonSourcePrice;
 
     public AddonPriceHolder(ProductAddon productAddon, ProposalHeader proposalHeader) {
         this.productAddon = productAddon;
         this.priceDate = proposalHeader.getPriceDate();
         this.city = proposalHeader.getProjectCity();
-        this.addonFactor = RateCardService.getInstance().getFactorRate(RateCard.ADDON_WO_TAX_FACTOR, this.priceDate, this.city);
+        this.addonFactor = getAfterTaxFactor(proposalHeader,this.productAddon);
         this.customAddonSourcePrice = RateCardService.getInstance().getFactorRate(RateCard.CUSTOM_ADDON_SALES_PRICE_FACTOR, this.priceDate, this.city);
     }
+
+    private double getAfterTaxFactor(ProposalHeader proposalHeader, ProductAddon productAddon) {
+
+        RateCard prodWoTaxFactor = RateCardService.getInstance().getRateCard(RateCard.PRODUCT_WO_TAX,
+                RateCard.FACTOR_TYPE, proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        double woTaxFactor = 0;
+
+        ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
+        String productType = productCategoryMap.getType();
+
+        RateCard movableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        RateCard nonMovableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.NON_MOVABLE_FURNITURE,
+                RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+        RateCard servicesCivilWork = RateCardService.getInstance().getRateCard(RateCard.SERVICES_CIVIL_WORK,
+                RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
+
+
+        switch (productType) {
+            case RateCard.MOVABLE_FURNITURE:
+                woTaxFactor = movableFurnitureRateCard.getSourcePrice();
+                break;
+            case RateCard.NON_MOVABLE_FURNITURE:
+                woTaxFactor = nonMovableFurnitureRateCard.getSourcePrice();
+                break;
+            case RateCard.SERVICES_CIVIL_WORK:
+                woTaxFactor = servicesCivilWork.getSourcePrice();
+                break;
+            default:
+                woTaxFactor = servicesCivilWork.getSourcePrice();
+                break;
+        }
+        return woTaxFactor;
+    }
+
 
     public void prepare()
     {
@@ -49,7 +87,7 @@ public class AddonPriceHolder {
         PriceMaster addonRate = RateCardService.getInstance().getAddonRate(productAddon.getCode(), this.priceDate, this.city);
 
         if (productAddon.isCustomAddon()) {
-            calculatePricingForCustomAddons(addonRate);
+            calculatePricingForCustomAddons();
         } else {
             calculatePricingForStdAddons(addonRate);
         }
@@ -60,7 +98,7 @@ public class AddonPriceHolder {
         this.unitPrice = addonRate.getPrice();
         this.unitSourceCost = addonRate.getSourcePrice();
         this.price = this.productAddon.getAmount();
-        this.priceWoTax = this.price * addonFactor.getSourcePrice();
+        this.priceWoTax = this.price * this.addonFactor;
         this.sourceCost = this.productAddon.getQuantity() * this.unitSourceCost;
         this.addonProfit = this.priceWoTax - this.sourceCost;
         if(this.addonProfit == 0 || this.priceWoTax == 0){
@@ -70,11 +108,11 @@ public class AddonPriceHolder {
         }
     }
 
-    private void calculatePricingForCustomAddons(PriceMaster addonRate) {
+    private void calculatePricingForCustomAddons() {
         this.unitPrice = productAddon.getAmount();
         this.unitSourceCost = this.unitPrice * customAddonSourcePrice.getSourcePrice();
         this.price = this.productAddon.getAmount();
-        this.priceWoTax = this.price * addonFactor.getSourcePrice();
+        this.priceWoTax = this.price * this.addonFactor;
         this.sourceCost = this.unitSourceCost;
         this.addonProfit = this.priceWoTax - this.sourceCost;
         if(this.addonProfit == 0 || this.priceWoTax == 0){

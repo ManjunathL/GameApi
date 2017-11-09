@@ -184,7 +184,7 @@ public class ProposalOutputService extends AbstractVerticle
     {
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
             boolean isValidSow = quoteRequest.isValidSowRows();
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow, new ArrayList<SOWPdf>());
             outputCreator.create();

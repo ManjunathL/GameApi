@@ -14,8 +14,7 @@ import com.mygubbi.game.proposal.erp.BoqCreatorService;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import com.mygubbi.game.proposal.output.ProposalOutputService;
-import com.mygubbi.game.proposal.price.ProposalPricingUpdateService;
-import com.mygubbi.game.proposal.price.RateCardService;
+import com.mygubbi.game.proposal.price.*;
 import com.mygubbi.game.proposal.quote.MergePdfsRequest;
 import com.mygubbi.game.proposal.sow.SOWCreatorService;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
@@ -97,8 +96,24 @@ public class ProposalHandler extends AbstractRouteHandler
         this.get("/hingedetails").handler(this::getHingeDetails);
         this.post("/updatepricefordraftproposals").handler(this::updatePriceForDraftProposals);
         this.get("/ratefactordetailsfromhandler").handler(this::getRateFactor);
+        this.post("/version/price").handler(this::getPriceV2);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
+    }
+
+    private void getPriceV2(RoutingContext routingContext)
+    {
+
+        JsonObject versionJson = routingContext.getBodyAsJson();
+        LOG.debug("Module Json : " + versionJson.encodePrettily());
+        ProposalVersion proposalVersion = new ProposalVersion(versionJson);
+        Integer id = LocalCache.getInstance().store(proposalVersion);
+        VertxInstance.get().eventBus().send(VersionPricingService.CALCULATE_VERSION_PRICE, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    VersionPriceHolder versionPriceHolder = (VersionPriceHolder) LocalCache.getInstance().remove(selectResult.result().body());
+                    LOG.debug("Version Price holder json :" + versionPriceHolder.getPriceJson());
+                    sendJsonResponse(routingContext, String.valueOf(versionPriceHolder.getPriceJson()));
+                });
     }
 
     private void updatePriceForDraftProposals(RoutingContext context) {
@@ -792,9 +807,9 @@ public class ProposalHandler extends AbstractRouteHandler
             JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
             if(IsBookingFormFlag) {
                 createBookingFormInPdf(context, quoteReponse, response);
-            }else if(IsWorkingContract){
-                this.createWorksContractinPdf(context,quoteReponse,response);
-                //createMergedPdf(context,quoteReponse,response,new JsonObject());
+//            }else if(IsWorkingContract){
+//                this.createWorksContractinPdf(context,quoteReponse,response);
+//                //createMergedPdf(context,quoteReponse,response,new JsonObject());
             }else{
                 createMergedPdf(context,quoteReponse,response,new JsonObject());
             }
@@ -833,7 +848,7 @@ public class ProposalHandler extends AbstractRouteHandler
         String version=routingContext.getBodyAsJson().getString("fromVersion");
         LOG.info("version value in merged pdf" +version);
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
-        Map<String,PdfNumber> inputPdfList = new LinkedHashMap<>();
+        List<String> inputPdfs = new ArrayList<>();
 
         Boolean workContractFlag = false;
         if(quoteRequestJson.containsKey("worksContractFlag") && (quoteRequestJson.getValue("worksContractFlag") != null)){
@@ -841,47 +856,55 @@ public class ProposalHandler extends AbstractRouteHandler
         }
         Boolean IsWorkingContract = new Boolean(workContractFlag);
 
+        LOG.info("workContractFlag = "+workContractFlag);
 
-        if(workContractFlag && bookingformresponse.containsKey("worksContractPDFfile"))
-            inputPdfList.put(bookingformresponse.getString("worksContractPDFfile"),PdfPage.PORTRAIT);
+        if(workContractFlag)
+        {
+            String location_folder =ConfigHolder.getInstance().getStringValue("workscontract_template","/mnt/game/proposal/templates/WorkscontractTemplate.pdf");
+            inputPdfs.add(location_folder);
+        }
 
-        inputPdfList.put(quotePDfResponse.getString("quoteFile"),PdfPage.PORTRAIT);
+        inputPdfs.add(quotePDfResponse.getString("quoteFile"));
         if(bookingFormFlag.equals("Yes"))
         {
             if(city.equals("Bangalore"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_banglore","/mnt/game/proposal/templates/BookingFormBanglore.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }else if(city.equals("Mangalore"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_manglore","/mnt/game/proposal/templates/BookingFormManglore.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }else if(city.equals("Chennai"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_chennai","/mnt/game/proposal/templates/BookingFormChennai.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }else if(city.equals("Pune"))
             {
                 String location_folder =ConfigHolder.getInstance().getStringValue("termsandcondition_pune","/mnt/game/proposal/templates/BookingFormPune.pdf");
-                inputPdfList.put(location_folder,PdfPage.PORTRAIT);
+                inputPdfs.add(location_folder);
             }
         }
         if(sowResponse.size() > 0) {
-            inputPdfList.put(sowResponse.getString("sowPdfFile"), PdfPage.PORTRAIT);
+            inputPdfs.add(sowResponse.getString("sowPdfFile"));
         }
 
         if(bookingFormFlag.equalsIgnoreCase("yes") && bookingformresponse.containsKey("bookingFormPDFfile"))
-            inputPdfList.put(bookingformresponse.getString("bookingFormPDFfile"),PdfPage.PORTRAIT);
+            inputPdfs.add(bookingformresponse.getString("bookingFormPDFfile"));
 
-        inputPdfList.keySet().forEach(in -> LOG.info(in));
 
         String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" )+"/"+routingContext.getBodyAsJson().getInteger("proposalId");
         String merged_pdf = ConfigHolder.getInstance().getStringValue("merged_pdf","merged.pdf" );
 
-        String outputFileName = location_folder+"/"+merged_pdf;
+
+        String outputFileName = location_folder+"/"+"ver1_"+merged_pdf;
         LOG.info("outputFileName = "+outputFileName);
 
-        Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfList, outputFileName));
+        String outputFileNameAfterPageNum = location_folder+"/"+merged_pdf;
+
+        inputPdfs.forEach(f->{LOG.info("File Name :: "+f);});
+
+        Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                 (AsyncResult<Message<Integer>> result) -> {
                     JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
@@ -894,14 +917,22 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createSOWOutput(RoutingContext routingContext)
     {
-        LOG.debug("Routing context in sow op : " + routingContext.getBodyAsJson().encodePrettily());
-        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        Integer id = LocalCache.getInstance().store(quoteRequestJson);
-        VertxInstance.get().eventBus().send(SOWCreatorService.CREATE_SOW_OUTPUT, id,
-                (AsyncResult<Message<Integer>> result) -> {
-                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    sendJsonResponse(routingContext, response.toString());
-                });
+        try
+        {
+            LOG.debug("Routing context in sow op : " + routingContext.getBodyAsJson().encodePrettily());
+            JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+            Integer id = LocalCache.getInstance().store(quoteRequestJson);
+            VertxInstance.get().eventBus().send(SOWCreatorService.CREATE_SOW_OUTPUT, id,
+                    (AsyncResult<Message<Integer>> result) -> {
+                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        sendJsonResponse(routingContext, response.toString());
+                    });
+        }
+        catch(Exception e)
+        {
+            LOG.info(e);
+        }
+
     }
 
     private void createBoqOutput(RoutingContext routingContext)
@@ -972,13 +1003,17 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void getAccessoryRate(RoutingContext routingContext, String code, Date priceDate, String city) {
-        PriceMaster addonRate = RateCardService.getInstance().getAccessoryRate(code, priceDate, city);
+        PriceMaster addonRate = getAccessoryPriceMaster(code, priceDate, city);
         if (addonRate == null ) {
             LOG.error("Error in retrieving addon price");
             sendError(routingContext, "Error in retrieving addon price.");
         } else {
             sendJsonResponse(routingContext, addonRate.toJson().toString());
         }
+    }
+
+    public PriceMaster getAccessoryPriceMaster(String code, Date priceDate, String city) {
+        return RateCardService.getInstance().getAccessoryRate(code, priceDate, city);
     }
 
     private void getHardwareRate(RoutingContext context) {

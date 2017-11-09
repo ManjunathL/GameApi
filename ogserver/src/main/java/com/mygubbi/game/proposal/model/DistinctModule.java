@@ -98,6 +98,18 @@ public class DistinctModule {
         result = 31 * result + (module != null ? module.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "DistinctModule{" +
+                "space='" + space + '\'' +
+                ", room='" + room + '\'' +
+                ", product='" + product + '\'' +
+                ", productId=" + productId +
+                ", moduleSeq=" + moduleSeq +
+                ", module='" + module + '\'' +
+                '}';
+    }
 }
 
 

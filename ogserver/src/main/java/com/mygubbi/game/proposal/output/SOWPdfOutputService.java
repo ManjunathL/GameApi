@@ -96,7 +96,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             MergePdfsRequest mergePdfReq = (MergePdfsRequest) LocalCache.getInstance().remove(message.body());
             mergePdfReq.mergePdfFiles();
 
-            sendResponse(message, new JsonObject().put("quoteFile",mergePdfReq.getMergedFileName() ));
+            sendResponse(message, new JsonObject().put("quoteFile",mergePdfReq.getMergedAndPageNumberedFileName() ));
         }).completionHandler(res -> {
             LOG.info("setup PDf Merger Output started." + res.succeeded());
         });
@@ -200,11 +200,11 @@ public class SOWPdfOutputService extends AbstractVerticle {
                         if(pdf_name.equalsIgnoreCase(SOW_PDF)) {
                             LOG.info("GETTING SOW ROWS");
                             this.getSowRows(quoteRequest, proposalHeader, products, addons, message);
-
-                        }else if (pdf_name.equalsIgnoreCase(WORKS_CONTRACT)){
-                            LOG.info("GETTING WORK CONTRACT");
-                            this.createWorksContract(quoteRequest,proposalHeader,products,addons,message);
                         }
+//                        }else if (pdf_name.equalsIgnoreCase(WORKS_CONTRACT)){
+//                            LOG.info("GETTING WORK CONTRACT");
+//                            this.createWorksContract(quoteRequest,proposalHeader,products,addons,message);
+//                        }
                         else{
                             LOG.info("GETTING BOOKING FORM");
                             this.createOfficeUseOnlyPdf(quoteRequest,proposalHeader,products,addons,message);
@@ -220,7 +220,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         JsonObject jsonObject=new JsonObject();
         List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
 
-        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
         String sowversion = "1.0";
         String version = quoteData.fromVersion;
 
@@ -251,7 +251,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                     QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
                     if (resultData.errorFlag || resultData.rows.size() == 0)
                     {
-                        LOG.error("Error in updating product line item in the proposal. " + resultData.errorMessage, resultData.error);
+                        LOG.error("Error in fetching data from proposal_sow table " + resultData.errorMessage, resultData.error);
                     }
                     else
                     {
@@ -295,7 +295,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         LOG.info("office only pdf ");
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
             outputCreator.create();
             OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
@@ -321,7 +321,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
     {
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
             outputCreator.create();
 

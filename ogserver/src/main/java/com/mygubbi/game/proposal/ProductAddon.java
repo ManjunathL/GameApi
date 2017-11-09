@@ -31,6 +31,7 @@ public class ProductAddon extends JsonObject
     private static final String CATALOGUE_CODE = "catalogueCode";
     private static final String TITLE = "title";
     private static final String UOM = "uom";
+    private static final String SCOPE_DISPLAY_FLAG = "scopeDisplayFlag";
     private static String QUANTITY = "quantity";
     private static String AMOUNT = "amount";
     private static String RATE = "rate";
@@ -193,6 +194,12 @@ public class ProductAddon extends JsonObject
         return this;
     }
 
+    public ProductAddon setCustomAddonCategory(String customAddonCategory)
+    {
+        this.put(CUSTOM_ADDON_CATEGORY,customAddonCategory);
+        return this;
+    }
+
     public  String getREMARKS() {
         return this.getString(REMARKS);
     }
@@ -204,6 +211,16 @@ public class ProductAddon extends JsonObject
     public String getUpdatedBy() {
         return this.getString(UPDATED_BY);
     }
+
+    public String getCustomAddonCategory() {
+        return this.getString(CUSTOM_ADDON_CATEGORY);
+    }
+
+    public String getScopeDisplayFlag() {
+        return this.getString(SCOPE_DISPLAY_FLAG);
+    }
+
+
 
 }
 
