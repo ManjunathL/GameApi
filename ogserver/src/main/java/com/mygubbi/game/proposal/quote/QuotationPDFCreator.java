@@ -1464,10 +1464,22 @@ public class QuotationPDFCreator
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
                 //LOG.info("finish material " +li.get(index).getFinishtype()  +"finish type" +fmaterial);
                 if(li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit")) {
-                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" + "Hinge : " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
+                   String text ="unit consists of " + li.get(index).getModulecount() +
+                           " modules as per design provided.\n" + "Carcass: " + li.get(index).getBasecarcass() + "\n" +
+                           "Finish Material: " +li.get(index).getFinishtype() + " , Finish Type : " + fmaterial+
+                           ((li.get(index).getColorGroupCode() != null) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
+                           ((li.get(index).getHingeType() != null) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
+
+                    this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
 
                 }else {
-                    this.createRowAndFillData(li.get(index).getTabName(), null, "unit consists of " + li.get(index).getModulecount() + " modules as per design provided.\n" +  "Carcass: " + li.get(index).getWallcarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " + fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" +"Hinge : " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
+                    String text = "unit consists of " + li.get(index).getModulecount() +
+                            " modules as per design provided.\n" +  "Carcass: " + li.get(index).getWallcarcass() + "\n" +
+                            "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " + fmaterial +
+                            ((li.get(index).getColorGroupCode() != null) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
+                            ((li.get(index).getHingeType()!= null ) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
+
+                    this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
                 }
 
                 unitSequence++;
@@ -1485,7 +1497,12 @@ public class QuotationPDFCreator
                 }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
 
-                this.createRowAndFillData(li.get(index).getTabName(), null, "Carcass: " + li.get(index).getBasecarcass() + "\n" + "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " +fmaterial + "\n" + "Color : " +li.get(index).getColorGroupCode() + "\n" +"Hinge: " +li.get(index).getHingeType(), 1.0, li.get(index).getAmount(), 0.0);
+                String text = "Carcass: " + li.get(index).getBasecarcass() + "\n" +
+                        "Finish Material: " + li.get(index).getFinishtype() + " , Finish Type : " +fmaterial +
+                        ((li.get(index).getColorGroupCode() != null) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
+                        ((li.get(index).getHingeType()!= null) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
+
+                this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
                 unitSequence++;
                 if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
             }
@@ -2098,7 +2115,11 @@ public class QuotationPDFCreator
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
                // LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
-                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title + " - " +Double.valueOf(accessory.quantity).intValue());
+                PriceMaster accessoryPrice=RateCardService.getInstance().getAccessoryRate(accessory.code,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+
+                this.createRowAndFillData(tabname,ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, accessoryPrice.getPrice(),accessory.quantity*accessoryPrice.getPrice());
+
+//                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title + " - " +Double.valueOf(accessory.quantity).intValue());
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
             }
