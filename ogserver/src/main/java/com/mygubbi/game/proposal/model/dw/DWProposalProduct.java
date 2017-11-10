@@ -75,16 +75,19 @@ public class DWProposalProduct extends JsonObject {
      private static final String WWCOST="wwCost";
      private static final String WWPROFIT="wwProfit";
      private static final String WWMARGIN="wwMargin";
+     private static final String WWPRICEAFTERDISCOUNT="wwPriceAfterDiscount";
      private static final String HW_PRICE="hwPrice";
      private static final String HW_PRICEAFTERTAX="hwPriceAfterTax";
      private static final String HW_COST="hwCost";
      private static final String HW_PROFIT="hwProfit";
      private static final String HW_MARGIN="hwMargin";
+     private static final String HWPRICEAFTERDISCOUNT="hwPriceAfterDiscount";
      private static final String ACC_PRICE="accPrice";
      private static final String ACC_PRICEAFTERTAX="accPriceAfterTax";
      private static final String ACC_COST="accCost";
      private static final String ACC_PROFIT="accProfit";
      private static final String ACC_MARGIN="accMargin";
+     private static final String ACC_PRICEAFTERDISCOUNT="accPriceAfterDiscount";
      private static final String HK_PRICE="hkPrice";
      private static final String HK_PRICEAFTERTAX="hkPriceAfterTax";
      private static final String HK_COST="hkCost";
@@ -106,7 +109,7 @@ public class DWProposalProduct extends JsonObject {
      private static final String LA_COST="laCost";
      private static final String LA_PROFIT="laProfit";
      private static final String LA_MARGIN="laMargin";
-
+     private static final String LA_PRICEAFTERDISCOUNT="laPriceAfterDiscount";
      private static final String INSTALLATIONCOST="installationCost";
      private static final String TRANSPORTATIONCOST="transportationCost";
      private static final String STDMC="stdModuleCount";
@@ -151,6 +154,45 @@ public class DWProposalProduct extends JsonObject {
     public DWProposalProduct setCrmId(String crm)
     {
         put(CRMID,crm);
+        return this;
+    }
+
+    public static String getWWPRICEAFTERDISCOUNT() {
+        return WWPRICEAFTERDISCOUNT;
+    }
+    public DWProposalProduct setWoodWorkPriceAfterDiscount(double woodWorkPriceAfterDiscount)
+    {
+        put(WWPRICEAFTERDISCOUNT,woodWorkPriceAfterDiscount);
+        return this;
+    }
+
+
+    public static String getHWPRICEAFTERDISCOUNT() {
+        return HWPRICEAFTERDISCOUNT;
+    }
+    public DWProposalProduct setHwPriceAfterDiscount(double hwPriceAfterDiscount)
+    {
+        put(HWPRICEAFTERDISCOUNT,hwPriceAfterDiscount);
+        return this;
+    }
+
+    public static String getAccPriceafterdiscount() {
+        return ACC_PRICEAFTERDISCOUNT;
+    }
+
+    public DWProposalProduct setAccPriceAfterDiscount(double accPriceAfterDiscount)
+    {
+        put(ACC_PRICEAFTERDISCOUNT,accPriceAfterDiscount);
+        return this;
+    }
+
+    public static String getLaPriceafterdiscount() {
+        return LA_PRICEAFTERDISCOUNT;
+    }
+
+    public DWProposalProduct setLAPriceAfterDiscount(double laPriceAfterDiscount)
+    {
+        put(LA_PRICEAFTERDISCOUNT,laPriceAfterDiscount);
         return this;
     }
 
@@ -1113,16 +1155,19 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setWoodWorkCost(productPriceHolder.getWoodWorkSourceCost());
         dwProposalProduct.setWoodWorkProfit(productPriceHolder.getWoodWorkProfit());
         dwProposalProduct.setWoodWorkMargin(productPriceHolder.getWoodWorkMargin());
+        dwProposalProduct.setWoodWorkPriceAfterDiscount(productPriceHolder.getWoodWorkPriceAfterDiscount());
         dwProposalProduct.setHwPrice(productPriceHolder.getHardwarePrice());
         dwProposalProduct.setHWPriceWoTax(productPriceHolder.getProductHardwarePriceWoTax());
         dwProposalProduct.setHwSourceCost(productPriceHolder.getProductHardwareSourceCost());
         dwProposalProduct.setHwProfit(productPriceHolder.getProductHardwareProfit());
         dwProposalProduct.setHwMargin(productPriceHolder.getProductHardwareMargin());
+        dwProposalProduct.setHwPriceAfterDiscount(productPriceHolder.getHardwarePriceAfterDiscount());
         dwProposalProduct.setAccPrice(productPriceHolder.getProductAccessoryPrice());
         dwProposalProduct.setAccPriceWoTax(productPriceHolder.getProductAccessoryPriceWoTax());
         dwProposalProduct.setAccSourceCost(productPriceHolder.getProductAccessorySourceCost());
         dwProposalProduct.setAccProfit(productPriceHolder.getProductAccessoryProfit());
         dwProposalProduct.setAccMargin(productPriceHolder.getProductAccessoryMargin());
+        dwProposalProduct.setAccPriceAfterDiscount(productPriceHolder.getProductAccessoryPriceAfterDiscount());
         dwProposalProduct.setHkPrice(productPriceHolder.getProductHandleAndKnobPrice());
         dwProposalProduct.setHkPriceWoTax(productPriceHolder.getProductHandleAndKnobPriceWoTax());
         dwProposalProduct.setHkSourceCost(productPriceHolder.getProductHandleAndKnobSourceCost());
@@ -1138,6 +1183,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setLaSourceCost(productPriceHolder.getProductLabourSourceCost());
         dwProposalProduct.setLaProfit(productPriceHolder.getProductLabourProfit());
         dwProposalProduct.setLaMargin(productPriceHolder.getProductLabourMargin());
+        dwProposalProduct.setLAPriceAfterDiscount(productPriceHolder.getProductLabourPriceAfterDiscount());
         dwProposalProduct.setLCPrice(productPriceHolder.getLConnectorPrice());
         dwProposalProduct.setLcPriceWoTax(productPriceHolder.getLConnectorWoTax());
         dwProposalProduct.setLcSourceCost(productPriceHolder.getLConnectorSourceCost());

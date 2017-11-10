@@ -356,8 +356,9 @@ public class ProductPriceHolder {
         }
 
         this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
-        this.woodWorkPriceWoTax = this.woodWorkPriceWoTax - (woodWorkPriceWoTax * this.discountPercentage);
-        this.woodWorkPriceAfterDiscount = this.woodWorkPrice - (woodWorkPrice * this.discountPercentage);
+        this.woodWorkPrice = productCarcassPrice + productShutterPrice;
+        this.woodWorkPriceWoTax = this.woodWorkPriceWoTax - (this.woodWorkPriceWoTax * this.discountPercentage);
+        this.woodWorkPriceAfterDiscount = this.woodWorkPrice - (this.woodWorkPrice * this.discountPercentage);
 
         this.hardwarePriceAfterDiscount = this.productHardwarePrice - (this.productHardwarePrice * this.discountPercentage);
         this.productHardwarePriceWoTax = this.productHardwarePriceWoTax - (productHardwarePriceWoTax * this.discountPercentage);
