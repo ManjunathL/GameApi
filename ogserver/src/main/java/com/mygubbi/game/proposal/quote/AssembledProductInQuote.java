@@ -638,7 +638,7 @@ public class AssembledProductInQuote
 
     private void addModuleToUnit(ProductModule module)
     {
-        Unit unit = this.getUnit(module.getUnit(),module.getModuleCategory());
+        Unit unit = this.getUnit(module.getUnit(),module.getModuleCategory(),module.getMGCode());
         unit.addModule(module);
     }
 
@@ -657,7 +657,7 @@ public class AssembledProductInQuote
         this.units.add(unit);
         return unit;
     }*/
-    private Unit getUnit(String unitTitle,String moduleCategory)
+    private Unit getUnit(String unitTitle,String moduleCategory,String Mgcode)
     {
         if (StringUtils.isEmpty(moduleCategory)) moduleCategory = "Default";
         for (Unit unit : this.units)
@@ -668,7 +668,7 @@ public class AssembledProductInQuote
             }
         }
 
-        Unit unit = new Unit(this.units.size() + 1, unitTitle,moduleCategory);
+        Unit unit = new Unit(this.units.size() + 1, unitTitle,moduleCategory,Mgcode);
         this.units.add(unit);
         return unit;
     }
@@ -765,28 +765,20 @@ public class AssembledProductInQuote
         public short moduleCount;
         public String title;
         public String moduleCategory;
+        public String mgCode;
         public List<ModuleDimension> moduleDimensions;
         public double amount=0;
 
-        public Unit(int sequence, String title,String moduleCategory)
+        public Unit(int sequence, String title,String moduleCategory,String mgCode)
         {
             this.sequence = sequence;
             this.title = title;
             this.moduleCategory=moduleCategory;
+            this.mgCode=mgCode;
             this.moduleDimensions = new ArrayList<>();
         }
 
-        @Override
-        public String toString() {
-            return "Unit{" +
-                    "amount=" + amount +
-                    ", sequence=" + sequence +
-                    ", moduleCount=" + moduleCount +
-                    ", title='" + title + '\'' +
-                    ", moduleCategory='" + moduleCategory + '\'' +
-                    ", moduleDimensions=" + moduleDimensions +
-                    '}';
-        }
+
 
         public void addModule(ProductModule module)
         {
@@ -851,6 +843,19 @@ public class AssembledProductInQuote
                 return dimension.height;
             }
             return 0;
+        }
+
+        @Override
+        public String toString() {
+            return "Unit{" +
+                    "sequence=" + sequence +
+                    ", moduleCount=" + moduleCount +
+                    ", title='" + title + '\'' +
+                    ", moduleCategory='" + moduleCategory + '\'' +
+                    ", mgCode='" + mgCode + '\'' +
+                    ", moduleDimensions=" + moduleDimensions +
+                    ", amount=" + amount +
+                    '}';
         }
     }
 

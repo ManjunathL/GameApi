@@ -1553,7 +1553,19 @@ public class QuotationPDFCreator
             {
                 if(unit.moduleCategory.contains("S - Sliding Mechanism"))
                 {
-                    Wcaption="Sliding Wardrobe";
+                    if(unit.mgCode.equals("MG-SF2D-22"))
+                    {
+                        Wcaption="Sliding Wardrobe - TopLine 22 Sliding fitting 2 Door";
+                    }else if(unit.mgCode.equals("MG-SF3D-22"))
+                    {
+                        Wcaption="Sliding Wardrobe - TopLine 22 Sliding fitting 3 Door";
+                    }else if(unit.mgCode.equals("MG-SF2D-XL"))
+                    {
+                        Wcaption="Sliding Wardrobe - TopLine XL 2 Door";
+                    }else
+                    {
+                        Wcaption="Sliding Wardrobe - TopLine XL 3 Door";
+                    }
                 }
             }
             if(finish.contains("Aristo"))
@@ -1756,9 +1768,9 @@ public class QuotationPDFCreator
                     WWamount += unit.amount;
                     captionWardrobe="Wardrobe";
 
-                    if(Wcaption.equals("Sliding Wardrobe"))
+                    if(Wcaption.contains("Sliding Wardrobe"))
                     {
-                        captionWardrobe = "Sliding Wardrobe";
+                        captionWardrobe = Wcaption;
                     }else if (Wcaption.equals("Aristo Wardrobe"))
                     {
                         captionWardrobe="Aristo Wardrobe";

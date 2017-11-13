@@ -722,34 +722,42 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type,boolean ValidSows)
     {
-        JsonObject jsonObj = routingContext.getBodyAsJson();
-        LOG.info("jsonObj.containsKey(\"bookingFormFlag\") = "+jsonObj.containsKey("bookingFormFlag"));
-        Boolean bookingFormFlag = false;
-        if(jsonObj.containsKey("bookingFormFlag") && (jsonObj.getValue("bookingFormFlag") != null)){
-            bookingFormFlag = jsonObj.getString("bookingFormFlag").equalsIgnoreCase("yes")?true:false;
-        }
-        Boolean IsBookingFormFlag = new Boolean(bookingFormFlag);
+        try
+        {
+            JsonObject jsonObj = routingContext.getBodyAsJson();
+            LOG.info("jsonObj.containsKey(\"bookingFormFlag\") = "+jsonObj.containsKey("bookingFormFlag"));
+            Boolean bookingFormFlag = false;
+            if(jsonObj.containsKey("bookingFormFlag") && (jsonObj.getValue("bookingFormFlag") != null)){
+                bookingFormFlag = jsonObj.getString("bookingFormFlag").equalsIgnoreCase("yes")?true:false;
+            }
+            Boolean IsBookingFormFlag = new Boolean(bookingFormFlag);
 
-        LOG.info("ValidSows = "+ValidSows);
-        LOG.debug("Json **** " +routingContext.getBodyAsJson());
-        LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
-        JsonObject quoteRequestJson = routingContext.getBodyAsJson();
-        quoteRequestJson.put("validSow",ValidSows);
-       // LOG.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +quoteRequestJson.getJsonObject("proposalId"));
-        Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
-        VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
-                (AsyncResult<Message<Integer>> result) -> {
-                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    LOG.info("Quote Res :: "+response);
-                    if(ValidSows){
-                        createSowOutputInPdf(routingContext,response,IsBookingFormFlag);
-                    }else if(IsBookingFormFlag){
-                        createBookingFormInPdf(routingContext,response,new JsonObject());
+            LOG.info("ValidSows = "+ValidSows);
+            LOG.debug("Json **** " +routingContext.getBodyAsJson());
+            LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
+            JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+            quoteRequestJson.put("validSow",ValidSows);
+            // LOG.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +quoteRequestJson.getJsonObject("proposalId"));
+            Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
+            VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
+                    (AsyncResult<Message<Integer>> result) -> {
+                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        LOG.info("Quote Res :: "+response);
+                        if(ValidSows){
+                            createSowOutputInPdf(routingContext,response,IsBookingFormFlag);
+                        }else if(IsBookingFormFlag){
+                            createBookingFormInPdf(routingContext,response,new JsonObject());
 //                        sendJsonResponse(routingContext, response.toString());
-                    }else{
-                        sendJsonResponse(routingContext, response.toString());
-                    }
-                   });
+                        }else{
+                            sendJsonResponse(routingContext, response.toString());
+                        }
+                    });
+        }
+        catch (Exception e)
+        {
+            LOG.info("Exception " +e);
+        }
+
     }
 
 
