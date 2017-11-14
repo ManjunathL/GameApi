@@ -1106,7 +1106,7 @@ public class QuotationPDFCreator
             scwTable.addCell(scwCell7);
             scwTable.addCell(scwCell4);
             count=1;
-            for(GSTForProducts scwList: scwList)
+            for(GSTForProducts scwList: this.scwList)
             {
                 this.createRowAndFillDataForIndividualForProducts(scwTable,count, scwList.getProducttitle(),scwList.getCategoryType(), scwList.getPriceAfterDiscount(), scwList.getPrice(), scwList.getPriceAfterTax(), scwList.getTax());
                 count++;
