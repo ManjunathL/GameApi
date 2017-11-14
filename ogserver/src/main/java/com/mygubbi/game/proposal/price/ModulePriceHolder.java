@@ -195,9 +195,15 @@ public class ModulePriceHolder
             moduleType = "Standard";
         }
 
-        ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(this.productModule.getProductCategory(),this.priceDate);
-        this.productType = productCategoryMap.getType();
-
+        if (this.productModule.getProductCategory()!= null)
+        {
+            ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(this.productModule.getProductCategory(),this.priceDate);
+            this.productType = productCategoryMap.getType();
+        }
+        else
+        {
+            this.productType = "NA";
+        }
     }
 
     private void resolveComponents()
@@ -966,6 +972,8 @@ public class ModulePriceHolder
             this.labourSourceCost = this.labourCost / labourManufacturingRateCard.getSourcePrice();
 
             double woTaxFactor = 0;
+
+
 
             switch (this.productType) {
                 case RateCard.MOVABLE_FURNITURE:
