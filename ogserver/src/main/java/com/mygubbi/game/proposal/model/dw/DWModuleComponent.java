@@ -1263,7 +1263,15 @@ public class DWModuleComponent extends JsonObject {
         double woTaxFactor = 0;
 
         ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productModule.getProductCategory(),proposalHeader.getPriceDate());
-        String productType = productCategoryMap.getType();
+        String productType ;
+        if (productCategoryMap!= null)
+        {
+            productType = productCategoryMap.getType();
+        }
+        else
+        {
+            productType = "NA";
+        }
 
         RateCard movableFurnitureRateCard = RateCardService.getInstance().getRateCard(RateCard.MOVABLE_FURNITURE,
                 RateCard.FACTOR_TYPE,proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
