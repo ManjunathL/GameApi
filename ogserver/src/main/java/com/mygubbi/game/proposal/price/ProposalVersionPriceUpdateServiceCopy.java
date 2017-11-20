@@ -18,6 +18,8 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -166,6 +168,8 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
 
                             productLineItem.setAmount(totalProductCost);
 
+                            totalProductCost = this.round(totalProductCost,0);
+
 //                            updateProductPrice(productLineItem);
                             String query = "proposal.product.update";
                             queryDataList.add(new QueryData(query, productLineItem));
@@ -174,6 +178,8 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                         }
 
 //                        LOG.debug("Total Product COst : " + totalProposalVersionProductCost);
+
+                        totalProposalVersionProductCost = this.round(totalProposalVersionProductCost,0);
 
                         proposalVersion.setAmount(totalProposalVersionProductCost);
 
@@ -237,6 +243,7 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                         }
 //                        LOG.debug("Total Addon cost : " + newTotalVersionAddonCost);
                         double totalVersionAmount = proposalVersion.getAmount() + newTotalVersionAddonCost + totalVersionAddonCost;
+                        totalVersionAmount = this.round(totalVersionAmount,0);
 //                        LOG.debug("Total Version cost : " + totalVersionAmount);
                         proposalVersion.setAmount(totalVersionAmount);
                         double finalAmount = proposalVersion.getAmount() - proposalVersion.getDiscountAmount();
@@ -285,6 +292,17 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                     }
 
                 });
+    }
+
+    private double round(double value, int places)
+    {
+        if (places < 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 
