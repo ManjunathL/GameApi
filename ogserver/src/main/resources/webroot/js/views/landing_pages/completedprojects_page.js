@@ -6,7 +6,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/landing_pages/completedprojects_page.html',
+    'text!templates/landing_pages/recentprojects_page.html',
     'cloudinary_jquery',
     'mgfirebase',
     'consultutil',

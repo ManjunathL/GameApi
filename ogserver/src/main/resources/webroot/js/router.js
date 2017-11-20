@@ -117,7 +117,8 @@ define([
             'kitchen-lp(/)': 'kitchenlandingpage',
             /*'holiday-lp(/)': 'holidaylandingpage',*/
             'e-book(/)': 'ebook',
-            'completed-projects(/)': 'completedprojectspage',
+            //'completed-projects(/)': 'completedprojectspage',
+            'recent-projects(/)': 'completedprojectspage',
             //'newproduct-details-:id(/)': 'newdetailspage',
             //'product-:id(/)': 'newdetailspage',
             ':id/p/:seoId(/)':'newdetailspage',
