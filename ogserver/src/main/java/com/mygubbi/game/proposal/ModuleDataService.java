@@ -45,7 +45,7 @@ public class ModuleDataService extends AbstractVerticle
     private Map<String, AccessoryPack> accessoryPackMap = Collections.EMPTY_MAP;
     private Map<String, Handle> handleMap = Collections.EMPTY_MAP;
     private Map<String, HingePack> hingePackMap = Collections.EMPTY_MAP;
-    private Map<String, OldToNewFinishMapping> oldnewfinishMap = Collections.EMPTY_MAP;
+    private Multimap<String, OldToNewFinishMapping> oldnewfinishMap;
     private Multimap<String, ColorMaster> colorMap;
     private Multimap<String, ProductCategoryMap> productCategoryMap;
     private Map<String, ERPMaster> erpMasterMap = Collections.EMPTY_MAP;
@@ -99,6 +99,7 @@ public class ModuleDataService extends AbstractVerticle
     }
     private void cacheOldNewFinishMappingData()
     {
+        this.oldnewfinishMap = ArrayListMultimap.create();
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, LocalCache.getInstance().store(new QueryData("proposal.oldnewfinishmapping", new JsonObject())),
                 (AsyncResult<Message<Integer>> dataResult) -> {
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
@@ -108,11 +109,9 @@ public class ModuleDataService extends AbstractVerticle
                     }
                     else
                     {
-                        this.oldnewfinishMap= new HashMap(selectData.rows.size());
                         for (JsonObject record : selectData.rows)
                         {
                             OldToNewFinishMapping oldToNewFinishMapping = new OldToNewFinishMapping(record);
-//                            LOG.info("old new finish mapping " +oldToNewFinishMapping);
                             this.oldnewfinishMap.put(oldToNewFinishMapping.getOldCode(), oldToNewFinishMapping);
                         }
                         markResult("oldnew finsh mapping master done.", true);
@@ -726,9 +725,24 @@ public class ModuleDataService extends AbstractVerticle
         return this.hardwareMap.get(code);
     }
 
-    public OldToNewFinishMapping getOldToNewMapping(String code)
+    public OldToNewFinishMapping getOldToNewMapping(String code, Date priceDate)
     {
-        return this.oldnewfinishMap.get(code);
+//        LOG.debug("Code : " + code);
+        Collection<OldToNewFinishMapping> oldToNewFinishMappings = this.oldnewfinishMap.get(code);
+        OldToNewFinishMapping oldToNewFinishMappingReturn = null;
+        for (OldToNewFinishMapping oldToNewFinishMapping : oldToNewFinishMappings)
+        {
+            int before = priceDate.compareTo(oldToNewFinishMapping.getFromDate());
+            int after = priceDate.compareTo(oldToNewFinishMapping.getToDate());
+//            LOG.info("Boolean value " +(before >= 0 && after <= 0));
+
+            if (before >= 0 && after <= 0)
+            {
+//                LOG.debug("Setting product category map : " + productCategoryMap);
+                oldToNewFinishMappingReturn = oldToNewFinishMapping;
+            }
+        }
+        return oldToNewFinishMappingReturn;
     }
 
     public Collection<UsersForEmail> getUserForEmail(String roleForEmail) {return this.usersForEmailMap.get(roleForEmail);}

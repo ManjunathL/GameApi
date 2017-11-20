@@ -70,7 +70,7 @@ public class ProposalPricingUpdateService extends AbstractVerticle
                         {
                             ProposalVersion proposalVersion = new ProposalVersion(record);
                             Integer pvId = LocalCache.getInstance().store(proposalVersion);
-                            VertxInstance.get().eventBus().send(ProposalVersionPriceUpdateService.UPDATE_VERSION_PRICE, pvId,
+                            VertxInstance.get().eventBus().send(ProposalVersionPriceUpdateServiceCopy.UPDATE_VERSION_PRICE_COPY, pvId,
                                     (AsyncResult<Message<Integer>> selectResult) ->
                                     {
                                         ProposalVersion result = (ProposalVersion) LocalCache.getInstance().remove(selectResult.result().body());

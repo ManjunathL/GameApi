@@ -2034,7 +2034,7 @@
       "id": "proposal.oldnewfinishmapping",
       "type": "select",
       "table": "oldnew_finishmap",
-      "query": "select newCode,oldCode,flag,title from oldnew_finishmap",
+      "query": "select * from oldnew_finishmap",
       "params": []
     },
     {

@@ -1,7 +1,10 @@
 package com.mygubbi.game.proposal.model;
 
+import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonObject;
 import org.json.JSONObject;
+
+import java.sql.Date;
 
 /**
  * Created by Shruthi on 9/13/2017.
@@ -12,6 +15,8 @@ public class OldToNewFinishMapping extends JSONObject
     private static final String NEW_CODE = "newCode";
     private static final String FLAG = "flag";
     private static final String TITLE = "title";
+    private static final String FROM_DATE = "fromDate";
+    private static final String TO_DATE = "toDate";
 
     public OldToNewFinishMapping(JsonObject jsonObject)
     {
@@ -47,6 +52,27 @@ public class OldToNewFinishMapping extends JSONObject
     public OldToNewFinishMapping setTitle(String title)
     {
         put(TITLE,title);
+        return this;
+    }
+
+
+    public Date getFromDate() {
+        return DateUtil.convertDate(this.getString(FROM_DATE));
+    }
+
+    public OldToNewFinishMapping setFromDate(Date fromDate)
+    {
+        put(FROM_DATE,fromDate);
+        return this;
+    }
+
+    public Date getToDate() {
+        return DateUtil.convertDate(this.getString(TO_DATE));
+    }
+
+    public OldToNewFinishMapping setToDate(Date toDate)
+    {
+        put(TO_DATE,toDate);
         return this;
     }
 }
