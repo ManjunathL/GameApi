@@ -654,7 +654,7 @@
       "id": "proposal.versions.list.forPriceUpdate.select",
       "type": "select",
       "table": "version_master",
-      "query": "select * from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > ? and vm.version ='2.0'  order by vm.businessDate desc,vm.proposalId desc, vm.version",
+      "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > ?  order by vm.businessDate desc,vm.proposalId desc, vm.version",
       "params": [
         "proposalRange"
       ]
