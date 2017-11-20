@@ -6,6 +6,7 @@ import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService;
+import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateServiceCopy;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
@@ -29,7 +30,27 @@ public class VersionPriceUpdateHandler extends AbstractRouteHandler {
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/updatepricefornewproposal").handler(this::updatePriceForNewProposal);
+        this.post("/updatepriceforproposals").handler(this::updatePriceForProposals);
 
+    }
+
+    private void updatePriceForProposals(RoutingContext routingContext){
+        LOG.info("routingContext = "+routingContext.getBodyAsJson());
+        Integer id1 = LocalCache.getInstance().store(routingContext.getBodyAsJson());
+        VertxInstance.get().eventBus().send(ProposalVersionPriceUpdateServiceCopy.UPDATE_VERSION_PRICE_COPY_FOR_PROPOSALS, id1,
+                (AsyncResult<Message<Integer>> dataresult) ->
+                {
+//                    JsonObject result = (JsonObject) LocalCache.getInstance().remove(dataresult.result().body());
+//                    if (result == null)
+//                    {
+//                        sendError(routingContext,"Error in running price update service");
+//                    }
+//                    else
+//                    {
+//                        sendJsonResponse(routingContext, result.toString());
+//                    }
+                    sendJsonResponse(routingContext,new JsonObject().put("status","Successfully Started Updater").toString());
+                });
     }
 
     private void updatePriceForNewProposal(RoutingContext routingContext)

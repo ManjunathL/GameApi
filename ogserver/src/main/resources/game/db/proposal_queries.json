@@ -115,7 +115,7 @@
       "id": "proposal.version.getdraftversion",
       "type": "select",
       "table": "version_master",
-      "query": "select * from version_master where proposalId = ?",
+      "query": "select * from version_master where proposalId = ? and version ='2.0'",
       "params": ["id"]
     },
     {
@@ -649,6 +649,15 @@
       "query": "select id,title from proposal where status != 'deleted'",
       "params": [],
       "jsonfields":[]
+    },
+    {
+      "id": "proposal.versions.list.forPriceUpdate.select",
+      "type": "select",
+      "table": "version_master",
+      "query": "select * from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > ? and vm.version ='2.0'  order by vm.businessDate desc,vm.proposalId desc, vm.version",
+      "params": [
+        "proposalRange"
+      ]
     },
     {
       "id": "proposal_version.updatedProposals.select",

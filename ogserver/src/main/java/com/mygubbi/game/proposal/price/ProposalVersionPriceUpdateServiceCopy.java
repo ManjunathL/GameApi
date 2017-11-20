@@ -9,6 +9,9 @@ import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.pipeline.MessageDataHolder;
+import com.mygubbi.pipeline.PipelineExecutor;
+import com.mygubbi.pipeline.PipelineResponseHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -24,6 +27,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Chirag on 08-01-2016.
@@ -33,6 +37,7 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
 {
     private final static Logger LOG = LogManager.getLogger(ProposalVersionPriceUpdateServiceCopy.class);
     public static final String UPDATE_VERSION_PRICE_COPY = "update.proposal.version.copy";
+    public static final String UPDATE_VERSION_PRICE_COPY_FOR_PROPOSALS = "update.proposals.version.copy";
 
 
 
@@ -60,6 +65,24 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
         }).completionHandler(res -> {
             LOG.info("Proposal version price update service started." + res.succeeded());
         });
+        eb.localConsumer(UPDATE_VERSION_PRICE_COPY_FOR_PROPOSALS, (Message<Integer> message) ->
+        {
+            JsonObject paramsObj = (JsonObject) LocalCache.getInstance().remove(message.body());
+            LOG.info("Params Obj = "+paramsObj);
+            QueryData requestData = new QueryData("proposal.versions.list.forPriceUpdate.select", paramsObj);
+            MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
+            new PipelineExecutor().execute(dataHolder, new ProposalVersionPriceUpdateServiceCopy.ProposalVersionsRetriever(message));
+        }).completionHandler(res -> {
+            LOG.info("Proposal version price update service started." + res.succeeded());
+        });
+    }
+    private JsonObject getResponseJson(String status,int proposalId,String version,String comments){
+        JsonObject response = new JsonObject();
+        response.put("status",status);
+        response.put("proposalId",proposalId);
+        response.put("version",version);
+        response.put("comments",comments);
+        return response;
     }
 
     private void updatePriceForProposal(Message<Integer> message, ProposalVersion proposalVersion)
@@ -71,8 +94,9 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                     QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
                     if ( selectData.rows == null || selectData.rows.isEmpty())
                         {
-                        message.reply(LocalCache.getInstance().store(proposalVersion));
-                    }
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Failure",proposalVersion.getProposalId(),proposalVersion.getVersion(),"Empty rows")));
+
+                        }
                     else
                     {
                         double versionAmount = 0;
@@ -201,7 +225,6 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
     }
 
     private void calculatePriceForAddons(Message<Integer> message, ProposalVersion proposalVersion, ProposalHeader proposalHeader, List<QueryData> queryDataList, List<JsonObject> addon_jsons) {
-//        LOG.debug("FOr addons : " + proposalVersion);
         Date priceDate = new Date(System.currentTimeMillis());
         if (proposalHeader.getPriceDate() == null) {
             proposalHeader.setPriceDate(priceDate);
@@ -289,9 +312,85 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                     else
                     {
 //                        message.reply(LocalCache.getInstance().store(proposalVersion));
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Success",proposalVersion.getProposalId(),proposalVersion.getVersion(),"Success")));
+
                     }
 
                 });
+    }
+
+    private class ProposalVersionsRetriever implements PipelineResponseHandler
+    {
+        private Message message;
+        private Integer proposalId;
+        private String version;
+
+        public ProposalVersionsRetriever(Message message)
+        {
+            LOG.info("Message :: "+message);
+            this.message = message;
+
+        }
+
+        public ProposalVersionsRetriever(Message message, Integer proposalId,String version)
+        {
+            this.message = message;
+            this.proposalId = proposalId;
+            this.version = version;
+        }
+
+        @Override
+        public void handleResponse(List<MessageDataHolder> messageDataHolders)
+        {
+            QueryData resultData = (QueryData) messageDataHolders.get(0).getResponseData();
+            if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
+            {
+//                message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal " + proposalId + " doesn't have any versions")));
+                LOG.error("Proposal " + proposalId + " doesn't have any versions");
+            }
+            else
+            {
+                List<MessageDataHolder> steps = resultData.rows.stream()
+                        .map(row -> new MessageDataHolder(ProposalVersionPriceUpdateServiceCopy.UPDATE_VERSION_PRICE_COPY, new ProposalVersion(row)))
+                        .collect(Collectors.toList());
+                new PipelineExecutor().execute(steps, new ProposalVersionPriceUpdateServiceCopy.ReportingServiceResponseHandler(message));
+            }
+        }
+
+    }
+
+    private class ReportingServiceResponseHandler implements PipelineResponseHandler
+    {
+        private Message message;
+
+        public ReportingServiceResponseHandler(Message message)
+        {
+            this.message = message;
+        }
+
+        @Override
+        public void handleResponse(List<MessageDataHolder> messageDataHolders)
+        {
+            StringBuilder comments = new StringBuilder();
+            for(int i=0;i<messageDataHolders.size();i++){
+
+                JsonObject response = (JsonObject) messageDataHolders.get(i).getResponseData();
+                if(response.containsKey("status")){
+                    if(response.getString("status").equalsIgnoreCase("FAILURE")){
+                        int proposalId = response.getInteger("proposalId");
+                        String version = response.getString("version");
+                        comments.append(proposalId+"-"+version+", ");
+                    }
+                }
+            }
+            if(comments.toString().length() == 0){
+                comments.append("Successfully ran for all proposals");
+            }
+            LOG.debug("Reporting service returned :: "+messageDataHolders.get(0).getResponseData());
+            message.reply(LocalCache.getInstance().store(new JsonObject().put("status","success")));
+
+
+        }
     }
 
     private double round(double value, int places)
