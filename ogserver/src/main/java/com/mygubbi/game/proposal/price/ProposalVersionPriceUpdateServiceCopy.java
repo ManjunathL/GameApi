@@ -128,6 +128,8 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                             (selectData.get(1) == null || selectData.get(1).rows == null || selectData.get(1).rows.isEmpty()))
                     {
                         LOG.info("No products and addons to be updated.");
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Success",proposalVersion.getProposalId(),proposalVersion.getVersion(),"Success")));
+
                     }
                     else
                     {
