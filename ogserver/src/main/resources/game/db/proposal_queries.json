@@ -115,7 +115,7 @@
       "id": "proposal.version.getdraftversion",
       "type": "select",
       "table": "version_master",
-      "query": "select * from version_master where proposalId = ? and version ='2.0'",
+      "query": "select * from version_master where proposalId = ?",
       "params": ["id"]
     },
     {
@@ -145,7 +145,7 @@
     {
       "id": "proposal.version.price.update",
       "type": "update",
-      "table": "proposal",
+      "table": "version_master",
       "query": "update version_master set amount = ?, finalAmount = ?, discountAmount = ? where id = ?",
       "params": ["amount", "finalAmount", "discountAmount", "id" ]
     },
@@ -654,7 +654,7 @@
       "id": "proposal.versions.list.forPriceUpdate.select",
       "type": "select",
       "table": "version_master",
-      "query": "select * from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > ? and vm.version ='2.0'  order by vm.businessDate desc,vm.proposalId desc, vm.version",
+      "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > ?  order by vm.businessDate desc,vm.proposalId desc, vm.version",
       "params": [
         "proposalRange"
       ]
@@ -663,7 +663,7 @@
       "id": "proposal_version.updatedProposals.select",
       "type": "select",
       "table": "version_master",
-          "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount,vm.isDataLoadedToReport,vm.dataLoadedOn,vm.businessDate from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.businessDate ) order by vm.businessDate desc, vm.proposalId desc,vm.version asc ",
+          "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > 0 order by vm.proposalId desc, vm.version limit 5",
         "params": [],
       "jsonfields":[]
     },
