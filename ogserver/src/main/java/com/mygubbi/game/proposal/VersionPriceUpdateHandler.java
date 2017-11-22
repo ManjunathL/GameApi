@@ -5,7 +5,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.ProposalVersion;
-import com.mygubbi.game.proposal.price.ProposalVersionDiscountUpdateService;
+import com.mygubbi.game.proposal.price.AddOrSubtractHikePriceService;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateServiceCopy;
 import com.mygubbi.route.AbstractRouteHandler;
@@ -40,7 +40,7 @@ public class VersionPriceUpdateHandler extends AbstractRouteHandler {
         LOG.info("routingContext = "+context.getBodyAsJson());
         //pass proposalID and version
         Integer id1 = LocalCache.getInstance().store(context.getBodyAsJson());
-        VertxInstance.get().eventBus().send(ProposalVersionDiscountUpdateService.UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS, id1,
+        VertxInstance.get().eventBus().send(AddOrSubtractHikePriceService.UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS, id1,
                 (AsyncResult<Message<Integer>> dataresult) ->
                 {
                     sendJsonResponse(context,new JsonObject().put("status","Successfully Started Updater").toString());

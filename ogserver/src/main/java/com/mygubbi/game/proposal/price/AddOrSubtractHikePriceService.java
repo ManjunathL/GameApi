@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProposalVersionDiscountUpdateService extends AbstractVerticle
+public class AddOrSubtractHikePriceService extends AbstractVerticle
 {
     private final static String HIKE_MODULE_CODE = "MG-NS-H-003";
-    private final static Logger LOG = LogManager.getLogger(ProposalVersionDiscountUpdateService.class);
+    private final static Logger LOG = LogManager.getLogger(AddOrSubtractHikePriceService.class);
     public static final String UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS = "update.proposal.version.discount.orAddHike";
 
 
@@ -138,7 +138,7 @@ public class ProposalVersionDiscountUpdateService extends AbstractVerticle
                 .put(  "carcassCode" , productLineItem.getBaseCarcassCode())
                 .put(  "fixedCarcassCode" , "null")
                 .put(  "finishType" , productLineItem.getFinishType())
-                .put(  "finishTypeCode" , productLineItem.getFinishType())
+                .put(  "finishTypeCode" , "default("+productLineItem.getFinishType()+")")
                 .put(  "finish" , productLineItem.getFinishType())
                 .put(  "finishCode" , productLineItem.getFinishCode())
                 .put(  "colorCode" , productLineItem.getColorgroupCode())
