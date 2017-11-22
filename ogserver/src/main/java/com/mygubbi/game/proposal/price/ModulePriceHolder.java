@@ -167,14 +167,24 @@ public class ModulePriceHolder
 
     public void prepare()
     {
-        this.mgModule = ModuleDataService.getInstance().getModule(productModule.getMGCode());
+        if (this.productModule.getMGCode().equals("MG-NS-H-003"))
+        {
+            this.moduleCode = "MG-NS-H-003";
+            moduleType = "hike";
+        }
+        else
+        {
+            this.mgModule = ModuleDataService.getInstance().getModule(productModule.getMGCode());
 
-        standardOrNonStandardModule();
+            standardOrNonStandardModule();
 
-        this.getModuleAndComponents();
-        this.prepareRateCards();
-        this.resolveComponents();
-        this.resolveHandles();
+            this.getModuleAndComponents();
+            this.prepareRateCards();
+            this.resolveComponents();
+            this.resolveHandles();
+        }
+
+
 
     }
 
@@ -828,122 +838,104 @@ public class ModulePriceHolder
 
     public void calculateTotalCost()
     {
-        this.shutterCost = 0;
-        this.carcassCost = 0;
-        this.accessoryCost = 0;
-        this.accessorySourceCost = 0;
-        this.hardwareSourceCost = 0;
-        this.totalCost = 0;
-        this.woodworkCost = 0;
-        this.moduleArea = 0;
-
-        for (PanelComponent panel : this.getPanelComponents())
+        if (this.moduleCode.equals("MG-NS-H-003"))
         {
-            double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
-            double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
-            double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
-            if (panel.isExposed())
-            {
-                if ("Standard".equals(moduleType))
-                {
-                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory()))
-                    {
+            int i = this.productModule.getWidth() * this.productModule.getDepth();
+            double price = (double) i;
+            price = price * 0.1;
+            this.totalCost = price;
+        }
+        else {
+
+            this.shutterCost = 0;
+            this.carcassCost = 0;
+            this.accessoryCost = 0;
+            this.accessorySourceCost = 0;
+            this.hardwareSourceCost = 0;
+            this.totalCost = 0;
+            this.woodworkCost = 0;
+            this.moduleArea = 0;
+
+            for (PanelComponent panel : this.getPanelComponents()) {
+                double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
+                double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
+                double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
+                if (panel.isExposed()) {
+                    if ("Standard".equals(moduleType)) {
+                        if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory())) {
 //                        LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
 //                        LOG.debug("Rate : " + rate);
-                        this.addToShutterCost(panel.getCost() * rate);
-                        this.addToShutterSourceCost(panel.getCost()*rate / stdSourceRate);
+                            this.addToShutterCost(panel.getCost() * rate);
+                            this.addToShutterSourceCost(panel.getCost() * rate / stdSourceRate);
 
-                    }
-                    else {
-                        this.addToShutterCost(panel.getCost());
-                        this.addToShutterSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                    }
-                    if(panel.getCost()==0.0)
-                    {
-                        //this.addToShutterCost(0.0);
-                        finishValue =true;
-                        return;
-                    }
-                }
-                else
-                {
-                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory()))
-                    {
+                        } else {
+                            this.addToShutterCost(panel.getCost());
+                            this.addToShutterSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
+                        }
+                        if (panel.getCost() == 0.0) {
+                            //this.addToShutterCost(0.0);
+                            finishValue = true;
+                            return;
+                        }
+                    } else {
+                        if (Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory())) {
 //                        LOG.info("shoerack value 1 " +rate);
-                        this.addToShutterCost(panel.getCost() * rate);
-                        this.addToShutterSourceCost((panel.getCost() * rate) /  this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
-                    }
-                    else
-                    {
-                        this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                        this.addToShutterSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate())/ nStdSourceRate);
-                    }
-                    if(panel.getCost()==0.0)
-                    {
-                        //this.addToShutterCost(0.0);
-                        finishValue =true;
-                        return;
-                    }
+                            this.addToShutterCost(panel.getCost() * rate);
+                            this.addToShutterSourceCost((panel.getCost() * rate) / this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
+                        } else {
+                            this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                            this.addToShutterSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate()) / nStdSourceRate);
+                        }
+                        if (panel.getCost() == 0.0) {
+                            //this.addToShutterCost(0.0);
+                            finishValue = true;
+                            return;
+                        }
 
-                }
-            }
-            else
-            {
-                if ("Standard".equals(moduleType))
-                {
-                    if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory()))
-                    {
+                    }
+                } else {
+                    if ("Standard".equals(moduleType)) {
+                        if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory())) {
 //                        LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
 
-                        this.addToCarcassCost(panel.getCost() * rate);
-                        this.addToCarcassSourceCost(panel.getCost()*rate / stdSourceRate);
-                    }
-                    else {
+                            this.addToCarcassCost(panel.getCost() * rate);
+                            this.addToCarcassSourceCost(panel.getCost() * rate / stdSourceRate);
+                        } else {
+                            this.addToCarcassCost(panel.getCost());
+                            this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
+                        }
+                    } else if ("hike".equals(moduleType)) {
                         this.addToCarcassCost(panel.getCost());
                         this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                    }
-                }
-                else if ("hike".equals(moduleType))
-                {
-                    this.addToCarcassCost(panel.getCost());
-                    this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                }
-                else
-                {
-                    if(Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory()) )
-                    {
+                    } else {
+                        if (Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory())) {
 //                        LOG.info("Shoerack value in else 2 " +rate);
-                        this.addToCarcassCost(panel.getCost() * rate);
-                        this.addToCarcassSourceCost((panel.getCost() * rate) /  this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
-                    }
-                    else
-                    {
-                        this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                        this.addToCarcassSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate()) / nStdManufacturingCost.getSourcePrice());
+                            this.addToCarcassCost(panel.getCost() * rate);
+                            this.addToCarcassSourceCost((panel.getCost() * rate) / this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
+                        } else {
+                            this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
+                            this.addToCarcassSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate()) / nStdManufacturingCost.getSourcePrice());
+                        }
                     }
                 }
+
             }
-        }
 
-        for (AccessoryComponent accessory : this.accessoryComponents)
-        {
-            this.addToAccessoryCost(accessory.getCost());
-            this.addToAccessorySourcePrice(accessory.getTotalSourcePrice());
-        }
+            for (AccessoryComponent accessory : this.accessoryComponents) {
+                this.addToAccessoryCost(accessory.getCost());
+                this.addToAccessorySourcePrice(accessory.getTotalSourcePrice());
+            }
 
-        for (HardwareComponent hardware : this.hardwareComponents)
-        {
-            this.addToHardwareCost(hardware.getCost());
-            this.addToHardwareSourceCost(hardware.getTotalSourcePrice());
-        }
+            for (HardwareComponent hardware : this.hardwareComponents) {
+                this.addToHardwareCost(hardware.getCost());
+                this.addToHardwareSourceCost(hardware.getTotalSourcePrice());
+            }
 
-        if (this.productModule.isAccessoryUnit())
-        {
-            this.calculateTotalCost(productModule.getMGCode(), productModule.getWidth(), productModule.getDepth(), labourRateCard, loadingFactorCard);
-        }
-        else
-        {
-            this.calculateTotalCost(mgModule, labourRateCard, loadingFactorCard);
+            if (this.productModule.isAccessoryUnit()) {
+                this.calculateTotalCost(productModule.getMGCode(), productModule.getWidth(), productModule.getDepth(), labourRateCard, loadingFactorCard);
+            } else {
+                this.calculateTotalCost(mgModule, labourRateCard, loadingFactorCard);
+            }
         }
 
     }

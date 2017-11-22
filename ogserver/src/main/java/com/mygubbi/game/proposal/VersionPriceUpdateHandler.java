@@ -5,6 +5,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.price.ProposalVersionDiscountUpdateService;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateServiceCopy;
 import com.mygubbi.route.AbstractRouteHandler;
@@ -31,24 +32,26 @@ public class VersionPriceUpdateHandler extends AbstractRouteHandler {
         this.route().handler(BodyHandler.create());
         this.post("/updatepricefornewproposal").handler(this::updatePriceForNewProposal);
         this.post("/updatepriceforproposals").handler(this::updatePriceForProposals);
+        this.post("/updatediscountproposal").handler(this::updateDiscountOrAddHikeProposal);
 
     }
 
+    private void updateDiscountOrAddHikeProposal(RoutingContext context){
+        LOG.info("routingContext = "+context.getBodyAsJson());
+        //pass proposalID and version
+        Integer id1 = LocalCache.getInstance().store(context.getBodyAsJson());
+        VertxInstance.get().eventBus().send(ProposalVersionDiscountUpdateService.UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS, id1,
+                (AsyncResult<Message<Integer>> dataresult) ->
+                {
+                    sendJsonResponse(context,new JsonObject().put("status","Successfully Started Updater").toString());
+                });
+    }
     private void updatePriceForProposals(RoutingContext routingContext){
         LOG.info("routingContext = "+routingContext.getBodyAsJson());
         Integer id1 = LocalCache.getInstance().store(routingContext.getBodyAsJson());
         VertxInstance.get().eventBus().send(ProposalVersionPriceUpdateServiceCopy.UPDATE_VERSION_PRICE_COPY_FOR_PROPOSALS, id1,
                 (AsyncResult<Message<Integer>> dataresult) ->
                 {
-//                    JsonObject result = (JsonObject) LocalCache.getInstance().remove(dataresult.result().body());
-//                    if (result == null)
-//                    {
-//                        sendError(routingContext,"Error in running price update service");
-//                    }
-//                    else
-//                    {
-//                        sendJsonResponse(routingContext, result.toString());
-//                    }
                     sendJsonResponse(routingContext,new JsonObject().put("status","Successfully Started Updater").toString());
                 });
     }

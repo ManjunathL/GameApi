@@ -191,10 +191,11 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                                     totalProductCost += (productLineItem.getNoOfLengths() * rateForLconnectorPrice);
                                 }
                             }
+                            totalProductCost = this.round(totalProductCost,0);
 
                             productLineItem.setAmount(totalProductCost);
 
-                            totalProductCost = this.round(totalProductCost,0);
+
 
 //                            updateProductPrice(productLineItem);
                             String query = "proposal.product.update";

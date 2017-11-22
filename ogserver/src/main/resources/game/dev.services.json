@@ -88,8 +88,10 @@
       },
       {
         "name":"com.mygubbi.game.proposal.price.VersionPricingService"
+      },
+      {
+        "name":"com.mygubbi.game.proposal.price.ProposalVersionDiscountUpdateService"
       }
-
 
     ]
   }

@@ -1,0 +1,264 @@
+package com.mygubbi.game.proposal.price;
+
+import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.VertxInstance;
+import com.mygubbi.db.DatabaseService;
+import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.ProductModule;
+import com.mygubbi.game.proposal.model.*;
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ProposalVersionDiscountUpdateService extends AbstractVerticle
+{
+    private final static String HIKE_MODULE_CODE = "MG-NS-H-003";
+    private final static Logger LOG = LogManager.getLogger(ProposalVersionDiscountUpdateService.class);
+    public static final String UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS = "update.proposal.version.discount.orAddHike";
+
+
+    @Override
+    public void start(Future<Void> startFuture) throws Exception
+    {
+        this.setupPriceUpdater();
+        startFuture.complete();
+    }
+
+    @Override
+    public void stop() throws Exception
+    {
+        super.stop();
+    }
+
+    private void setupPriceUpdater()
+    {
+        EventBus eb = VertxInstance.get().eventBus();
+        eb.localConsumer(UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS, (Message<Integer> message) ->
+        {
+            JsonObject paramsObj = (JsonObject) LocalCache.getInstance().remove(message.body());
+            this.pickDifferenceAmount(message, paramsObj);
+        }).completionHandler(res -> {
+            LOG.info("Proposal version price update service started." + res.succeeded());
+        });
+
+    }
+    private JsonObject getResponseJson(String status,int proposalId,String version,String comments){
+        JsonObject response = new JsonObject();
+        response.put("status",status);
+        response.put("proposalId",proposalId);
+        response.put("version",version);
+        response.put("comments",comments);
+        return response;
+    }
+
+    private void pickDifferenceAmount(Message<Integer> message, JsonObject paramsObj)
+    {
+        QueryData toBeChangedPrice = new QueryData("proposal.select.newPriceMaster", paramsObj);
+        QueryData header = new QueryData("proposal.header", new JsonObject().put("id",paramsObj.getInteger("proposalId")));
+        QueryData version_json = new QueryData("proposal.version.selectversion", new JsonObject().put("proposalId",paramsObj.getInteger("proposalId")).put("version",paramsObj.getString("version")));
+        List<QueryData> queryDataList = new ArrayList<>();
+        queryDataList.add(toBeChangedPrice);
+        queryDataList.add(header);
+        queryDataList.add(version_json);
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY,
+                LocalCache.getInstance().store(queryDataList),
+                (AsyncResult<Message<Integer>> dataResult) ->
+                {
+                    List<QueryData> selectData = (List<QueryData>) LocalCache.getInstance().remove(dataResult.result().body());
+                    if ( (selectData.get(0).rows == null || selectData.get(0).rows.isEmpty()) || (selectData.get(1).rows == null || selectData.get(1).rows.isEmpty()))
+                        {
+                            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",paramsObj.getInteger("proposalId"),paramsObj.getString("version"),"Empty rows")));
+
+                        }
+                    else
+                    {
+                        ProposalHeader proposalHeader = new ProposalHeader(selectData.get(1).rows.get(0));
+
+                        ProposalVersion proposalVersion = new ProposalVersion(selectData.get(2).rows.get(0));
+
+                        NewPriceMaster newPriceMaster = new NewPriceMaster(selectData.get(0).rows.get(0));
+                        Double differenceAmt = newPriceMaster.getDifferenceAmount();
+                        if(differenceAmt == 0.0){
+                            LOG.info("No updates Needed");
+                            message.reply(LocalCache.getInstance().store(getResponseJson("Success",paramsObj.getInteger("proposalId"),paramsObj.getString("version"),"Discount updation is not needed")));
+                        }
+                        else
+                        {
+                            retrieveFirstProduct(message,proposalHeader,newPriceMaster,proposalVersion);
+                        }
+                    }
+                 });
+    }
+
+    private void retrieveFirstProduct(Message<Integer> message, ProposalHeader proposalHeader, NewPriceMaster newPriceMaster, ProposalVersion proposalVersion) {
+//        LOG.debug("Retrieve first product :");
+//        LOG.debug("Proposal version : " + proposalVersion);
+        QueryData toBeChangedPrice = new QueryData("proposal.selectfirst.product", proposalVersion);
+
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
+                LocalCache.getInstance().store(toBeChangedPrice),
+                (AsyncResult<Message<Integer>> dataResult) ->
+                {
+                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+//                    LOG.debug("Select data :" + selectData.rows.size());
+                    if (selectData.rows == null || selectData.rows.isEmpty()) {
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Failure", proposalVersion.getProposalId(), proposalVersion.getVersion(), "NO products found")));
+
+                    } else {
+                     ProductLineItem productLineItem = new ProductLineItem(selectData.rows.get(0));
+                        addHikeModule(message,proposalHeader,newPriceMaster,productLineItem,proposalVersion);
+                    }
+                });
+
+    }
+
+    private void addHikeModule(Message<Integer> message, ProposalHeader proposalHeader, NewPriceMaster newPriceMaster, ProductLineItem productLineItem, ProposalVersion proposalVersion) {
+//        LOG.debug("Add hike module");
+
+        Module module = ModuleDataService.getInstance().getModule(HIKE_MODULE_CODE);
+
+        JsonObject jsonObject = new JsonObject()
+                .put(  "seq" , 0).put(  "moduleSequence" , 100)
+                .put(  "unitType" , module.getUnitType())
+                .put(  "extCode" , "null").put(  "extText" , "null")
+                .put(  "mgCode" ,module.getCode())
+                .put(  "carcass" , productLineItem.getBaseCarcassCode())
+                .put(  "wallcasscode" , productLineItem.getWallCarcassCode())
+                .put(  "carcassCode" , productLineItem.getBaseCarcassCode())
+                .put(  "fixedCarcassCode" , "null")
+                .put(  "finishType" , productLineItem.getFinishType())
+                .put(  "finishTypeCode" , productLineItem.getFinishType())
+                .put(  "finish" , productLineItem.getFinishType())
+                .put(  "finishCode" , productLineItem.getFinishCode())
+                .put(  "colorCode" , productLineItem.getColorgroupCode())
+                .put(  "colorName" , "null")
+                .put(  "colorImagePath" , "null")
+                .put(  "amount" , 0.0)
+                .put(  "remarks" , "")
+                .put(  "importStatus" , "m")
+                .put(  "description" , module.getDescription())
+                .put(  "dimension" , module.getDimension())
+                .put(  "imagePath" , "image.jpg")
+                .put(  "exposedRight" , false)
+                .put(  "exposedLeft" , false)
+                .put(  "exposedTop" , false)
+                .put(  "exposedBottom" , false)
+                .put(  "exposedBack" , false)
+                .put(  "exposedOpen" , false)
+                .put(  "area" , 0.0)
+                .put(  "amountWOAccessories" , 0.0)
+                .put(  "width" , newPriceMaster.getDifferenceAmount())
+                .put(  "depth" , module.getDepth())
+                .put(  "height" , module.getHeight())
+                .put(  "moduleCategory" , module.getModuleCategory())
+                .put(  "moduleType" , module.getModuleType())
+                .put(  "productCategory" , productLineItem.getProductCategory())
+                .put(  "moduleSource" , "button")
+                .put(  "expSides" , "null")
+                .put(  "expBottom" , "null")
+                .put(  "accessoryPackDefault" , "No")
+                .put(  "woodworkCost" , 0.0)
+                .put(  "hardwareCost" , 0.0)
+                .put(  "shutterCost" , 0.0)
+                .put(  "carcassCost" , 0.0)
+                .put(  "accessoryCost" , 0.0)
+                .put(  "labourCost" , 0.0)
+                .put(  "accessoryflag" , "N")
+                .put(  "shutterDesign" , productLineItem.getShutterDesignCode())
+                .put(  "handleType" , productLineItem.getHandleType())
+                .put(  "handleFinish" , productLineItem.getHandleFinish())
+                .put(  "handleThickness" , productLineItem.getHandleThickness())
+                .put(  "knobType" , productLineItem.getKnobType())
+                .put(  "knobFinish" , productLineItem.getKnobFinish())
+                .put(  "knobThickness" , "null")
+                .put(  "handlePresent" , module.getHandleMandatory())
+                .put(  "knobPresent" , module.getKnobMandatory())
+                .put(  "handleCode" , productLineItem.getHandleCode())
+                .put(  "knobCode" , productLineItem.getKnobCode())
+                .put(  "customText" , "null")
+                .put(  "customCheck" , "null")
+                .put(  "handleQuantity" , 0)
+                .put(  "knobQuantity" , 0)
+                .put(  "newModuleFlag" , "null")
+                .put(  "glassType" , productLineItem.getGlass())
+                .put(  "hingeType" , productLineItem.getHingeType())
+                .put(  "hingePresent" , "null")
+                .put(  "hingeCode" , "null")
+                .put(  "hingeQuantity" , 0)
+                .put(  "handleTypeSelection" , "null")
+                .put(  "handleChangedFlag" , false)
+                .put(  "knobChangedFlag" , false)
+                .put(  "golaProfileFlag" , "null")
+                .put(  "handleOverrideFlag" , "null")
+                .put(  "finishSetId" , "null");
+
+        ProductModule productModule = new ProductModule(jsonObject);
+
+        ModulePriceHolder modulePriceHolder = new ModulePriceHolder(productModule,proposalHeader.getProjectCity(),proposalHeader.getPriceDate(),productLineItem);
+        modulePriceHolder.prepare();
+        modulePriceHolder.calculateTotalCost();
+
+        ProductModule updatedProductModule = new ProductModule(modulePriceHolder.getProductModule());
+        updatedProductModule.setAmount(modulePriceHolder.getTotalCost());
+
+//        LOG.debug("update product module : " + updatedProductModule);
+
+        List<ProductModule> productModules = productLineItem.getModules();
+
+        productModules.add(updatedProductModule);
+
+        productLineItem.setModules(productModules);
+
+        double totalProductPrice = productLineItem.getAmount() + modulePriceHolder.getTotalCost();
+        productLineItem.setAmount(totalProductPrice);
+
+        double totalVersionPrice = proposalVersion.getAmount() + modulePriceHolder.getTotalCost();
+        proposalVersion.setAmount(totalVersionPrice);
+
+        double discountAmountNew = (int)proposalVersion.getAmount() * (proposalVersion.getDiscountPercentage()/100);
+        double finalAmount = proposalVersion.getAmount() - discountAmountNew;
+        proposalVersion.setDiscountAmount(discountAmountNew);
+        finalAmount = finalAmount - finalAmount%10;
+        proposalVersion.setFinalAmount(finalAmount);
+
+        updateProduct(message,productLineItem,proposalHeader,proposalVersion);
+
+    }
+
+    private void updateProduct(Message<Integer> message, ProductLineItem productLineItem, ProposalHeader proposalHeader, ProposalVersion proposalVersion) {
+
+//        LOG.debug("Update product");
+
+        QueryData toBeUpdatedProduct = new QueryData("proposal.product.update", productLineItem);
+        QueryData toBeUpdatedVersion = new QueryData("proposal.version.price.update", proposalVersion);
+        List<QueryData> queryDataList = new ArrayList<>();
+        queryDataList.add(toBeUpdatedProduct);
+        queryDataList.add(toBeUpdatedVersion);
+
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY,
+                LocalCache.getInstance().store(queryDataList),
+                (AsyncResult<Message<Integer>> dataResult) ->
+                {
+                    List<QueryData> resultData = (List<QueryData>) LocalCache.getInstance().remove(dataResult.result().body());
+                    if (resultData.get(0).updateResult.getUpdated() == 0 || resultData.get(1).updateResult.getUpdated() == 0) {
+                        message.reply(LocalCache.getInstance().store(getResponseJson("Failure", proposalHeader.getId(), proposalVersion.getVersion(), "Could not update")));
+
+                    } else {
+                       message.reply(LocalCache.getInstance().store(getResponseJson("Success", proposalHeader.getId(), proposalVersion.getVersion(), "Updated")));
+                    }
+                });
+    }
+
+
+}

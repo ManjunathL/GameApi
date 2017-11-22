@@ -699,6 +699,7 @@ public class ProductModule extends JsonObject
                 ", hingeMandatory='" + this.getHingeMandatory() + '\'' +
                 ", sqftCalculation='" + this.getSqftCalculation() + '\'' +
                 ", customCheck='" + this.getCustomCheck() + '\'' +
+                ", amount='" + this.getAmount() + '\'' +
                 '}';
 
     }

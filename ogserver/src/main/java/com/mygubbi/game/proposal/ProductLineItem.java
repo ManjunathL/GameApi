@@ -309,7 +309,7 @@ public class ProductLineItem extends JsonObject
         }
     }
 
-    private void setModules()
+    public void setModules()
     {
         if (this.containsKey(MODULES))
         {
@@ -321,6 +321,11 @@ public class ProductLineItem extends JsonObject
             }
             this.put(MODULES, modules);
         }
+    }
+
+     public void setModules(List<ProductModule> productModules)
+    {
+        this.put(MODULES, productModules);
     }
 
     private void setAddons()
