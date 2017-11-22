@@ -39,7 +39,8 @@ public class ProductModule extends JsonObject
     private static final String CARCASS_CODE = "carcassCode";
     private static final String FINISH="finish";
     private static final String FINISH_CODE = "finishCode";
-    private static final String FINISH_TYPE = "finishTypeCode";
+    private static final String FINISH_TYPE = "finishType";
+    private static final String FINISH_TYPE_CODE = "finishTypeCode";
     private static final String COLOR_CODE = "colorCode";
     private static final String AMOUNT = "amount";
     private static final String EXPOSED_SIDES = "expSides"; //None, Left, Right, Both
@@ -150,6 +151,10 @@ public class ProductModule extends JsonObject
     public String getFinishType()
     {
         return this.getString(FINISH_TYPE);
+    }
+    public String getFinishTypeCode()
+    {
+        return this.getString(FINISH_TYPE_CODE);
     }
 
     public String getColorCode()
@@ -517,6 +522,11 @@ public class ProductModule extends JsonObject
         return this;
     }
 
+    public ProductModule setFinishTypeCode(String code)
+    {
+        this.put(FINISH_TYPE_CODE,code);
+        return  this;
+    }
     public ProductModule setImagePath(String path)
     {
         this.put(IMAGE_PATH, path);

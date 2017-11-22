@@ -148,6 +148,7 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                             OldToNewFinishMapping oldToNewFinishMapping = ModuleDataService.getInstance().getOldToNewMapping(productLineItem.getFinishCode(),proposalHeader.getPriceDate());
                             String newCode = oldToNewFinishMapping.getNewCode();
 //                            LOG.debug("New code : " + newCode);
+
                             productLineItem.setFinishCode(newCode);
                             ShutterFinish shutterFinish=ModuleDataService.getInstance().getFinish(newCode);
                             Collection<ColorMaster> colorMaster=ModuleDataService.getInstance().getColours(shutterFinish.getColorGroupCode());
@@ -170,6 +171,8 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
 
 
                             for (ProductModule productModule : productLineItem.getModules()) {
+                                productModule.setFinishType("default("+productLineItem.getFinishType()+")");
+                                productModule.setFinishTypeCode(productLineItem.getFinishType());
                                 productModule.setFinishCode(newCode);
                                 productModule.setColorCode(productLineItem.getColorgroupCode());
                                 productModule.setFinish("default("+ oldToNewFinishMapping.getTitle() +")");
