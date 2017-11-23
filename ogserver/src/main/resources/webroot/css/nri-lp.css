@@ -661,10 +661,10 @@ ul, ol{
 /* ----- End Festive Page CSS ------ */
 /* NRI LP Page CSS */
 .nri_banner_bg {
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1497532162/nri_lp/Banner_03.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1511413827/nri_lp/LandingPage_Desktop_Unit-01.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 580px;
+    min-height: 680px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -679,11 +679,9 @@ ul, ol{
     color: #ffffff;
 }
 .nri-headingtxt{
-    background: #333;
-    color: #ffffff;
-    padding: 20px 0px;
-    text-align:center;
-    border: 3px solid #ddd;
+    padding: 15px;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.7);
     font-family: 'Raleway', sans-serif;
 }
 .nri-headingtxt h1{
