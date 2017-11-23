@@ -100,8 +100,15 @@
 
 #storeLnk a{
     border-bottom: 2px dotted #f1591f !important;
+    width: 100%;
 }
 
+@media (max-width: 992px) {
+    #storeLnk a{
+        border-bottom: 2px dotted #f1591f !important;
+        width: 22% !important;
+    }
+}
 /******************************** Home Page ************************************/
 
 /* Start Home Page Banner Section */
