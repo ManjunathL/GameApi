@@ -8,6 +8,9 @@ import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.*;
+import com.mygubbi.pipeline.MessageDataHolder;
+import com.mygubbi.pipeline.PipelineExecutor;
+import com.mygubbi.pipeline.PipelineResponseHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -19,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class AddOrSubtractHikePriceService extends AbstractVerticle
@@ -26,6 +30,7 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
     private final static String HIKE_MODULE_CODE = "MG-NS-H-003";
     private final static Logger LOG = LogManager.getLogger(AddOrSubtractHikePriceService.class);
     public static final String UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS = "update.proposal.version.discount.orAddHike";
+    public static final String UPDATE_DISCOUNT_OR_HIKE_FOR_ALL_PROPOSALS = "update.all.proposal.version.discount.orAddHike";
 
 
     @Override
@@ -46,8 +51,16 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
         EventBus eb = VertxInstance.get().eventBus();
         eb.localConsumer(UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS, (Message<Integer> message) ->
         {
-            JsonObject paramsObj = (JsonObject) LocalCache.getInstance().remove(message.body());
-            this.pickDifferenceAmount(message, paramsObj);
+            NewPriceMaster newPriceMasterObj = (NewPriceMaster) LocalCache.getInstance().remove(message.body());
+            this.pickDifferenceAmount(message, newPriceMasterObj);
+        }).completionHandler(res -> {
+            LOG.info("Proposal version price update service started." + res.succeeded());
+        });
+        eb.localConsumer(UPDATE_DISCOUNT_OR_HIKE_FOR_ALL_PROPOSALS, (Message<Integer> message) ->
+        {
+            QueryData requestData = new QueryData("proposal.select.all.newPriceMaster", new JsonObject());
+            MessageDataHolder dataHolder = new MessageDataHolder(DatabaseService.DB_QUERY, requestData);
+            new PipelineExecutor().execute(dataHolder, new AddOrSubtractHikePriceService.ProposalVersionsRetriever(message));
         }).completionHandler(res -> {
             LOG.info("Proposal version price update service started." + res.succeeded());
         });
@@ -62,13 +75,11 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
         return response;
     }
 
-    private void pickDifferenceAmount(Message<Integer> message, JsonObject paramsObj)
+    private void pickDifferenceAmount(Message<Integer> message, NewPriceMaster newPriceMasterObj)
     {
-        QueryData toBeChangedPrice = new QueryData("proposal.select.newPriceMaster", paramsObj);
-        QueryData header = new QueryData("proposal.header", new JsonObject().put("id",paramsObj.getInteger("proposalId")));
-        QueryData version_json = new QueryData("proposal.version.selectversion", new JsonObject().put("proposalId",paramsObj.getInteger("proposalId")).put("version",paramsObj.getString("version")));
+        QueryData header = new QueryData("proposal.header", new JsonObject().put("id",newPriceMasterObj.getProposalId()));
+        QueryData version_json = new QueryData("proposal.version.selectversion", new JsonObject().put("proposalId",newPriceMasterObj.getProposalId()).put("version",newPriceMasterObj.getVersion()));
         List<QueryData> queryDataList = new ArrayList<>();
-        queryDataList.add(toBeChangedPrice);
         queryDataList.add(header);
         queryDataList.add(version_json);
         VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY,
@@ -78,24 +89,23 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
                     List<QueryData> selectData = (List<QueryData>) LocalCache.getInstance().remove(dataResult.result().body());
                     if ( (selectData.get(0).rows == null || selectData.get(0).rows.isEmpty()) || (selectData.get(1).rows == null || selectData.get(1).rows.isEmpty()))
                         {
-                            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",paramsObj.getInteger("proposalId"),paramsObj.getString("version"),"Empty rows")));
+                            message.reply(LocalCache.getInstance().store(getResponseJson("Failure",newPriceMasterObj.getProposalId(),newPriceMasterObj.getVersion(),"Empty rows")));
 
                         }
                     else
                     {
-                        ProposalHeader proposalHeader = new ProposalHeader(selectData.get(1).rows.get(0));
+                        ProposalHeader proposalHeader = new ProposalHeader(selectData.get(0).rows.get(0));
 
-                        ProposalVersion proposalVersion = new ProposalVersion(selectData.get(2).rows.get(0));
+                        ProposalVersion proposalVersion = new ProposalVersion(selectData.get(1).rows.get(0));
 
-                        NewPriceMaster newPriceMaster = new NewPriceMaster(selectData.get(0).rows.get(0));
-                        Double differenceAmt = newPriceMaster.getDifferenceAmount();
+                        Double differenceAmt = newPriceMasterObj.getDifferenceAmount();
                         if(differenceAmt == 0.0){
                             LOG.info("No updates Needed");
-                            message.reply(LocalCache.getInstance().store(getResponseJson("Success",paramsObj.getInteger("proposalId"),paramsObj.getString("version"),"Discount updation is not needed")));
+                            message.reply(LocalCache.getInstance().store(getResponseJson("Success",newPriceMasterObj.getProposalId(),newPriceMasterObj.getVersion(),"Discount updation is not needed")));
                         }
                         else
                         {
-                            retrieveFirstProduct(message,proposalHeader,newPriceMaster,proposalVersion);
+                            retrieveFirstProduct(message,proposalHeader,newPriceMasterObj,proposalVersion);
                         }
                     }
                  });
@@ -259,6 +269,72 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
                     }
                 });
     }
+
+    private class ProposalVersionsRetriever implements PipelineResponseHandler {
+        private Message message;
+        private Integer proposalId;
+        private String version;
+
+        public ProposalVersionsRetriever(Message message) {
+            LOG.info("Message :: " + message);
+            this.message = message;
+
+        }
+
+        public ProposalVersionsRetriever(Message message, Integer proposalId, String version) {
+            this.message = message;
+            this.proposalId = proposalId;
+            this.version = version;
+        }
+
+        @Override
+        public void handleResponse(List<MessageDataHolder> messageDataHolders) {
+            QueryData resultData = (QueryData) messageDataHolders.get(0).getResponseData();
+            if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty()) {
+//                message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal " + proposalId + " doesn't have any versions")));
+                LOG.error("Proposal " + proposalId + " doesn't have any versions");
+            } else {
+                List<MessageDataHolder> steps = resultData.rows.stream()
+                        .map(row -> new MessageDataHolder(AddOrSubtractHikePriceService.UPDATE_DISCOUNT_OR_HIKE_FOR_PROPOSALS,new NewPriceMaster(row)))
+                        .collect(Collectors.toList());
+                new PipelineExecutor().execute(steps, new AddOrSubtractHikePriceService.ReportingServiceResponseHandler(message));
+            }
+        }
+    }
+        private class ReportingServiceResponseHandler implements PipelineResponseHandler
+        {
+            private Message message;
+
+            public ReportingServiceResponseHandler(Message message)
+            {
+                this.message = message;
+            }
+
+            @Override
+            public void handleResponse(List<MessageDataHolder> messageDataHolders)
+            {
+                StringBuilder comments = new StringBuilder();
+                for(int i=0;i<messageDataHolders.size();i++){
+
+                    JsonObject response = (JsonObject) messageDataHolders.get(i).getResponseData();
+                    if(response.containsKey("status")){
+                        if(response.getString("status").equalsIgnoreCase("FAILURE")){
+                            int proposalId = response.getInteger("proposalId");
+                            String version = response.getString("version");
+                            comments.append(proposalId+"-"+version+", ");
+                        }
+                    }
+                }
+                if(comments.toString().length() == 0){
+                    comments.append("Successfully ran for all proposals");
+                }
+                LOG.debug("Reporting service returned :: "+messageDataHolders.get(0).getResponseData());
+                message.reply(LocalCache.getInstance().store(new JsonObject().put("status","success")));
+
+
+            }
+        }
+
 
 
 }

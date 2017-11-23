@@ -171,7 +171,8 @@ public class ProductPriceHolder {
             addToTotalProductPriceWoTax(modulePriceHolder.getTotalCostWoTax());
             addToTalProductSourceCost(modulePriceHolder.getTotalSourceCost());
 
-            addToAreaInSqft(modulePriceHolder.getMgModule().getAreaOfModuleInSft());
+            Module mgModule = modulePriceHolder.getMgModule();
+            addToAreaInSqft(mgModule.getAreaOfModuleInSft());
 
         }
 

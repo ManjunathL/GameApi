@@ -169,6 +169,8 @@ public class ModulePriceHolder
     {
         if (this.productModule.getMGCode().equals("MG-NS-H-003"))
         {
+            this.mgModule = ModuleDataService.getInstance().getModule("MG-NS-H-003");
+
             this.moduleCode = "MG-NS-H-003";
             moduleType = "hike";
         }
