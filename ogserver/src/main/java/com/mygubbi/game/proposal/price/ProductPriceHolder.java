@@ -175,9 +175,9 @@ public class ProductPriceHolder {
             Module mgModule = modulePriceHolder.getMgModule();
             addToAreaInSqft(mgModule.getAreaOfModuleInSft());
 
-            if (mgModule.getSqftCalculation().equalsIgnoreCase("yes"))
+            if (mgModule.getSqftCalculation().equalsIgnoreCase("Yes"))
             {
-                addToNetAreaInSqft(mgModule.getAreaOfModuleInSft());
+                addToNetAreaInSqft(modulePriceHolder.getProductModule().getAreaOfModuleInSft());
 
             }
 
