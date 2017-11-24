@@ -60,6 +60,7 @@ public class DWProposalProduct extends JsonObject {
      private static final String KNOBTYPE="knobType";
      private static final String KNOBFINISH="knobFinish";
      private static final String PRAREA="prArea";
+     private static final String PR_NET_AREA="prNetArea";
      private static final String PRCREATEDBY="prCreatedBy";
      private static final String PRCREATEDON="prCreatedOn";
      private static final String PRUPDATEDBY="prUpdatedBy";
@@ -93,17 +94,19 @@ public class DWProposalProduct extends JsonObject {
      private static final String HK_COST="hkCost";
      private static final String HK_PROFIT="hkProfit";
      private static final String HK_MARGIN="hkMargin";
+     private static final String HK_PRICE_AFTER_DISCOUNT="hkPriceAfterDiscount";
      private static final String HINGE_PRICE="hingePrice";
      private static final String HINGE_PRICEAFTERTAX="hingePriceAfterTax";
      private static final String HINGE_COST="hingeCost";
      private static final String HINGE_PROFIT="hingeProfit";
      private static final String HINGE_MARGIN="hingeMargin";
+     private static final String HINGE_PRICE_AFTER_DISCOUNT="hingePriceAfterDiscount";
      private static final String LC_PRICE="lcPrice";
      private static final String LC_PRICEAFTERTAX="lcPriceAfterTax";
      private static final String LC_COST="lcCost";
      private static final String LC_PROFIT="lcProfit";
-    private static final String LC_MARGIN="lcMargin";
-
+     private static final String LC_MARGIN="lcMargin";
+     private static final String LC_PRICE_AFTER_DISCOUNT="lcPriceAfterDiscount";
      private static final String LA_PRICE="laPrice";
      private static final String LA_PRICEAFTERTAX="laPriceAfterTax";
      private static final String LA_COST="laCost";
@@ -125,6 +128,177 @@ public class DWProposalProduct extends JsonObject {
      private static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
      private static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
 
+    private static final String CUSTOMER_ID =   "customerId" ;
+    private static final String CNAME =         "cname" ;
+    private static final String CADDRESS1 =     "caddress1" ;
+    private static final String CADDRESS2 =     "caddress2" ;
+    private static final String CADDRESS3 =     "caddress3" ;
+    private static final String CCITY =         "ccity" ;
+    private static final String CEMAIL =        "cemail" ;
+    private static final String CPHONE1 =       "cphone1" ;
+    private static final String CPHONE2 =       "cphone2" ;
+    private static final String PADDRESS1 =     "paddress1" ;
+    private static final String PADDRESS2 =     "paddress2" ;
+    private static final String PCITY =         "pcity" ;
+    private static final String SALES_EMAIL =   "salesEmail" ;
+    private static final String SALES_PHONE =   "salesPhone" ;
+    private static final String DESIGNER_EMAIL ="designerEmail" ;
+    private static final String DESIGNER_PHONE ="designerPhone" ;
+    private static final String PROJECT_NAME = "projectName";
+
+
+
+    public static String getCustomerId() {
+        return CUSTOMER_ID;
+    }
+    public DWProposalProduct setCustomerId(String customerId)
+    {
+        put(CUSTOMER_ID,customerId);
+        return this;
+    }
+
+    public static String getCName() {
+        return CNAME;
+    }
+    public DWProposalProduct setCName(String cName)
+    {
+        put(CNAME,cName);
+        return this;
+    }
+
+    public static String getcAddress1() {
+        return CADDRESS1;
+    }
+    public DWProposalProduct setcAddress1(String add1)
+    {
+        put(CADDRESS1,add1);
+        return this;
+    }
+    public static String getcAddress2() {
+        return CADDRESS2;
+    }
+    public DWProposalProduct setcAddress2(String add1)
+    {
+        put(CADDRESS2,add1);
+        return this;
+    }
+    public static String getcAddress3() {
+        return CADDRESS3;
+    }
+    public DWProposalProduct setcAddress3(String add1)
+    {
+        put(CADDRESS3,add1);
+        return this;
+    }
+
+
+    public static String getcCity() {
+        return CCITY;
+    }
+    public DWProposalProduct setcCity(String city)
+    {
+        put(CCITY,city);
+        return this;
+    }
+
+    public static String getCEmail() {
+        return CEMAIL;
+    }
+    public DWProposalProduct setCEmail(String email)
+    {
+        put(CEMAIL,email);
+        return this;
+    }
+
+    public static String getCPhone1() {
+        return CPHONE1;
+    }
+    public DWProposalProduct setCPhone1(String cPhone)
+    {
+        put(CPHONE1,cPhone);
+        return this;
+    }
+
+    public static String getCPhone2() {
+        return CPHONE2;
+    }
+    public DWProposalProduct setCPhone2(String cPhone)
+    {
+        put(CPHONE2,cPhone);
+        return this;
+    }
+
+    public static String getPAddress1() {
+        return PADDRESS1;
+    }
+    public DWProposalProduct setPAddress1(String address)
+    {
+        put(PADDRESS1,address);
+        return this;
+    }
+
+    public static String getPAddress2() {
+        return PADDRESS2;
+    }
+    public DWProposalProduct setPAddress2(String address)
+    {
+        put(PADDRESS2,address);
+        return this;
+    }
+
+    public static String getCity() {
+        return PCITY;
+    }
+    public DWProposalProduct setPCity(String city)
+    {
+        put(PCITY,city);
+        return this;
+    }
+
+
+    public static String getSalesEmail() {
+        return SALES_EMAIL;
+    }
+    public DWProposalProduct setSalesEmail(String salesEmail)
+    {
+        put(SALES_EMAIL,salesEmail);
+        return this;
+    }
+
+    public static String getSalesPhone() {
+        return SALES_PHONE;
+    }
+    public DWProposalProduct setSalesPhone(String phone)
+    {
+        put(SALES_PHONE,phone);
+        return this;
+    }
+
+    public static String getDesignerEmail() {
+        return DESIGNER_EMAIL;
+    }
+    public DWProposalProduct setDesignerEmail(String email)
+    {
+        put(DESIGNER_EMAIL,email);
+        return this;
+    }
+
+    public static String getDesignerPhone() {
+        return DESIGNER_PHONE;
+    }
+    public DWProposalProduct setDesignerPhone(String phone)
+    {
+        put(DESIGNER_PHONE,phone);
+        return this;
+    }
+
+    public String getProjectName() {
+        return this.getString(PROJECT_NAME);
+    }
+    public DWProposalProduct setProjectName(String pname) {
+        this.put(PROJECT_NAME, pname);
+        return this;
+    }
     public DWProposalProduct() {}
 
     public DWProposalProduct(JsonObject jsonObject){
@@ -176,6 +350,33 @@ public class DWProposalProduct extends JsonObject {
         return this;
     }
 
+    public static String getHKPriceafterDiscount() {
+        return HK_PRICE_AFTER_DISCOUNT;
+    }
+
+    public DWProposalProduct setHKPriceAfterDiscount(double hkPriceAfterDiscount)
+    {
+        put(HK_PRICE_AFTER_DISCOUNT,hkPriceAfterDiscount);
+        return this;
+    }
+    public static String getHingePriceafterdiscount() {
+        return HINGE_PRICE_AFTER_DISCOUNT;
+    }
+
+    public DWProposalProduct setHingePriceAfterDiscount(double hingePriceAfterDiscount)
+    {
+        put(HINGE_PRICE_AFTER_DISCOUNT,hingePriceAfterDiscount);
+        return this;
+    }
+    public static String getLCPriceafterdiscount() {
+        return LC_PRICE_AFTER_DISCOUNT;
+    }
+
+    public DWProposalProduct setLCPriceAfterDiscount(double lcPriceAfterDiscount)
+    {
+        put(LC_PRICE_AFTER_DISCOUNT,lcPriceAfterDiscount);
+        return this;
+    }
     public static String getAccPriceafterdiscount() {
         return ACC_PRICEAFTERDISCOUNT;
     }
@@ -528,6 +729,18 @@ public class DWProposalProduct extends JsonObject {
         put(PRAREA,productArea);
         return this;
     }
+
+
+    public double getProductNetArea() {
+        return this.getDouble(PR_NET_AREA);
+    }
+
+    public DWProposalProduct setProductNetArea(double productNetArea)
+    {
+        put(PR_NET_AREA,productNetArea);
+        return this;
+    }
+
 
     public String getProductCreatedBy() {
         return this.getString(PRCREATEDBY);
@@ -1098,6 +1311,25 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());
         dwProposalProduct.setStatus(proposalVersion.getProposalStatus());
         dwProposalProduct.setCrmId(proposalHeader.getCrmId());
+        dwProposalProduct.setCustomerId(proposalHeader.getCustomerId());
+
+        dwProposalProduct.setProjectName(proposalHeader.getProjectName());
+        dwProposalProduct.setCName(proposalHeader.getName());
+        dwProposalProduct.setcAddress1(proposalHeader.getcAddress1());
+        dwProposalProduct.setcAddress2(proposalHeader.getcAddress2());
+        dwProposalProduct.setcAddress3(proposalHeader.getcAddress3());
+        dwProposalProduct.setcCity(proposalHeader.getcCity());
+        dwProposalProduct.setCEmail(proposalHeader.getCEmail());
+        dwProposalProduct.setCPhone1(proposalHeader.getContact());
+        dwProposalProduct.setCPhone2(proposalHeader.getCPhone2());
+        dwProposalProduct.setPAddress1(proposalHeader.getProjectAddress1());
+        dwProposalProduct.setPAddress2(proposalHeader.getProjectAddress2());
+        dwProposalProduct.setPCity(proposalHeader.getProjectCity());
+        dwProposalProduct.setSalesEmail(proposalHeader.getSalesEmail());
+        dwProposalProduct.setSalesPhone(proposalHeader.getSalesPhone());
+        dwProposalProduct.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwProposalProduct.setDesignerPhone(proposalHeader.getDesignerPhone());
+
         dwProposalProduct.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalProduct.setSalesName(proposalHeader.getSalespersonName());
         dwProposalProduct.setSource(productLineItem.getSource());
@@ -1139,6 +1371,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setHandleSize(productLineItem.getHandleThickness());
         dwProposalProduct.setKnobType(productLineItem.getKnobType());
         dwProposalProduct.setKnobFinish(productLineItem.getKnobFinish());
+//        dwProposalProduct.setProductNetArea(productLineItem.get //do necessary changes in game_product_module,game_module_component
         dwProposalProduct.setProductArea(productPriceHolder.getProductAreainSqft());
         dwProposalProduct.setProductCreatedBy(productLineItem.getCreatedBy());
         dwProposalProduct.setProductCreatedOn(productLineItem.getCreatedOn());
@@ -1173,11 +1406,13 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setHkSourceCost(productPriceHolder.getProductHandleAndKnobSourceCost());
         dwProposalProduct.setHkProfit(productPriceHolder.getProductHandleAndKnobProfit());
         dwProposalProduct.setHkMargin(productPriceHolder.getProductHandleAndKnobMargin());
+        dwProposalProduct.setHKPriceAfterDiscount(productPriceHolder.getProductHandleAndKnobPriceAfterDiscount());
         dwProposalProduct.setHingePrice(productPriceHolder.getProductHingePrice());
         dwProposalProduct.setHingePriceWoTax(productPriceHolder.getProductHingePriceWoTax());
         dwProposalProduct.setHingeSourceCost(productPriceHolder.getProductHingeSourceCost());
         dwProposalProduct.setHingeProfit(productPriceHolder.getProductHingeProfit());
         dwProposalProduct.setHingeMargin(productPriceHolder.getProductHingeMargin());
+        dwProposalProduct.setHingePriceAfterDiscount(productPriceHolder.getProductHingePriceAfterDiscount());
         dwProposalProduct.setLaPrice(productPriceHolder.getProductLabourPrice());
         dwProposalProduct.setLaPriceWoTax(productPriceHolder.getProductLabourPriceWoTax());
         dwProposalProduct.setLaSourceCost(productPriceHolder.getProductLabourSourceCost());
@@ -1189,6 +1424,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setLcSourceCost(productPriceHolder.getLConnectorSourceCost());
         dwProposalProduct.setLcProfit(productPriceHolder.getLConnectorProfit());
         dwProposalProduct.setLcMargin(productPriceHolder.getLConnectorMargin());
+        dwProposalProduct.setLCPriceAfterDiscount(productPriceHolder.getLConnectorPriceAfterDiscount());
         dwProposalProduct.setStdModuleCount(productPriceHolder.getStdModuleCount());
         dwProposalProduct.setStdModulePrice(productPriceHolder.getStdModulePrice());
         dwProposalProduct.setNStdModuleCount(productPriceHolder.getNStdModuleCount());

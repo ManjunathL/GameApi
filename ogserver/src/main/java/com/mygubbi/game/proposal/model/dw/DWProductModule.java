@@ -115,6 +115,23 @@ public class DWProductModule extends JsonObject {
     private static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
     private static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
 
+    private static final String CUSTOMER_ID =   "customerId" ;
+    private static final String CNAME =         "cname" ;
+    private static final String CADDRESS1 =     "caddress1" ;
+    private static final String CADDRESS2 =     "caddress2" ;
+    private static final String CADDRESS3 =     "caddress3" ;
+    private static final String CCITY =         "ccity" ;
+    private static final String CEMAIL =        "cemail" ;
+    private static final String CPHONE1 =       "cphone1" ;
+    private static final String CPHONE2 =       "cphone2" ;
+    private static final String PADDRESS1 =     "paddress1" ;
+    private static final String PADDRESS2 =     "paddress2" ;
+    private static final String PCITY =         "pcity" ;
+    private static final String SALES_EMAIL =   "salesEmail" ;
+    private static final String SALES_PHONE =   "salesPhone" ;
+    private static final String DESIGNER_EMAIL ="designerEmail" ;
+    private static final String DESIGNER_PHONE ="designerPhone" ;
+
     public DWProductModule() {}
 
     public DWProductModule(JsonObject jsonObject){
@@ -184,6 +201,23 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setHandleTypeSelection(productLineItem.getHandletypeSelection());
         dwProductModule.setCarcass(productModule.getCarcassCode());
 
+
+        dwProductModule.setCName(proposalHeader.getName());
+        dwProductModule.setcAddress1(proposalHeader.getcAddress1());
+        dwProductModule.setcAddress2(proposalHeader.getcAddress2());
+        dwProductModule.setcAddress3(proposalHeader.getcAddress3());
+        dwProductModule.setcCity(proposalHeader.getcCity());
+        dwProductModule.setCEmail(proposalHeader.getCEmail());
+        dwProductModule.setCPhone1(proposalHeader.getContact());
+        dwProductModule.setCPhone2(proposalHeader.getCPhone2());
+        dwProductModule.setPAddress1(proposalHeader.getProjectAddress1());
+        dwProductModule.setPAddress2(proposalHeader.getProjectAddress2());
+        dwProductModule.setPCity(proposalHeader.getProjectCity());
+        dwProductModule.setSalesEmail(proposalHeader.getSalesEmail());
+        dwProductModule.setSalesPhone(proposalHeader.getSalesPhone());
+        dwProductModule.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwProductModule.setDesignerPhone(proposalHeader.getDesignerPhone());
+
         String finishCode = productModule.getFinishCode();
         /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
@@ -251,6 +285,149 @@ public class DWProductModule extends JsonObject {
         return dwProductModule;
     }
 
+    public static String getCustomerId() {
+        return CUSTOMER_ID;
+    }
+    public DWProductModule setCustomerId(String customerId)
+    {
+        put(CUSTOMER_ID,customerId);
+        return this;
+    }
+
+    public static String getCName() {
+        return CNAME;
+    }
+    public DWProductModule setCName(String cName)
+    {
+        put(CNAME,cName);
+        return this;
+    }
+
+    public static String getcAddress1() {
+        return CADDRESS1;
+    }
+    public DWProductModule setcAddress1(String add1)
+    {
+        put(CADDRESS1,add1);
+        return this;
+    }
+    public static String getcAddress2() {
+        return CADDRESS2;
+    }
+    public DWProductModule setcAddress2(String add1)
+    {
+        put(CADDRESS2,add1);
+        return this;
+    }
+    public static String getcAddress3() {
+        return CADDRESS3;
+    }
+    public DWProductModule setcAddress3(String add1)
+    {
+        put(CADDRESS3,add1);
+        return this;
+    }
+
+
+    public static String getcCity() {
+        return CCITY;
+    }
+    public DWProductModule setcCity(String city)
+    {
+        put(CCITY,city);
+        return this;
+    }
+
+    public static String getCEmail() {
+        return CEMAIL;
+    }
+    public DWProductModule setCEmail(String email)
+    {
+        put(CEMAIL,email);
+        return this;
+    }
+
+    public static String getCPhone1() {
+        return CPHONE1;
+    }
+    public DWProductModule setCPhone1(String cPhone)
+    {
+        put(CPHONE1,cPhone);
+        return this;
+    }
+
+    public static String getCPhone2() {
+        return CPHONE2;
+    }
+    public DWProductModule setCPhone2(String cPhone)
+    {
+        put(CPHONE2,cPhone);
+        return this;
+    }
+
+    public static String getPAddress1() {
+        return PADDRESS1;
+    }
+    public DWProductModule setPAddress1(String address)
+    {
+        put(PADDRESS1,address);
+        return this;
+    }
+
+    public static String getPAddress2() {
+        return PADDRESS2;
+    }
+    public DWProductModule setPAddress2(String address)
+    {
+        put(PADDRESS2,address);
+        return this;
+    }
+
+    public static String getCity() {
+        return PCITY;
+    }
+    public DWProductModule setPCity(String city)
+    {
+        put(PCITY,city);
+        return this;
+    }
+
+
+    public static String getSalesEmail() {
+        return SALES_EMAIL;
+    }
+    public DWProductModule setSalesEmail(String salesEmail)
+    {
+        put(SALES_EMAIL,salesEmail);
+        return this;
+    }
+
+    public static String getSalesPhone() {
+        return SALES_PHONE;
+    }
+    public DWProductModule setSalesPhone(String phone)
+    {
+        put(SALES_PHONE,phone);
+        return this;
+    }
+
+    public static String getDesignerEmail() {
+        return DESIGNER_EMAIL;
+    }
+    public DWProductModule setDesignerEmail(String email)
+    {
+        put(DESIGNER_EMAIL,email);
+        return this;
+    }
+
+    public static String getDesignerPhone() {
+        return DESIGNER_PHONE;
+    }
+    public DWProductModule setDesignerPhone(String phone)
+    {
+        put(DESIGNER_PHONE,phone);
+        return this;
+    }
 
     public int getID() {
         return this.getInteger(ID);

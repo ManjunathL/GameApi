@@ -69,6 +69,7 @@ public class ProductLineItem extends JsonObject
     public static final String BASE_UNIT_TYPE = "Base unit";
     public static final String LCONNECTOR_PRICE="lConnectorPrice";
     public static final String COLOR_CODE="colorGroupCode";
+    public static final String PR_AREA="prArea";
     public ProductLineItem()
     {
 

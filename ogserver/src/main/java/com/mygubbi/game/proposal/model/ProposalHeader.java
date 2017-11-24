@@ -1,6 +1,7 @@
 package com.mygubbi.game.proposal.model;
 
 import com.mygubbi.common.DateUtil;
+import com.mygubbi.game.proposal.model.dw.DWProposalProduct;
 import com.mygubbi.game.proposal.model.dw.DwProposalVersion;
 import io.vertx.core.json.JsonObject;
 
@@ -45,6 +46,16 @@ public class ProposalHeader extends JsonObject
     public static final String UPDATED_ON="updatedBy";
     public static final String UPDATED_BY="updatedBy";
     public static final String BEFORE_PRODUCTION_SPECIFICATION="beforeProductionSpecification";
+
+    private static final String CADDRESS1 =     "caddress1" ;
+    private static final String CADDRESS2 =     "caddress2" ;
+    private static final String CADDRESS3 =     "caddress3" ;
+    private static final String CCITY =         "ccity" ;
+    private static final String CEMAIL =        "cemail" ;
+    private static final String CPHONE2 =       "cphone2" ;
+    private static final String DESIGNER_PHONE ="designerPhone" ;
+
+
 
     private Date priceDate;
     private String designerName;
@@ -111,6 +122,7 @@ public class ProposalHeader extends JsonObject
         return this.getString(SOW_REMARKS_V1);
     }
     public String getProjectAddress1() {return this.getString(PROJECT_ADDRESS1);}
+    public String getProjectAddress2() {return this.getString(PROJECT_ADDRESS2);}
     public String getSowRemarksV2() {
         return this.getString(SOW_REMARKS_V2);
     }
@@ -127,6 +139,33 @@ public class ProposalHeader extends JsonObject
     {
         put(remarksV2,SOW_REMARKS_V2);
         return this;
+    }
+
+    public String getcAddress1() {
+        return this.getString(CADDRESS1);
+    }
+
+    public  String getcAddress2() {
+        return this.getString(CADDRESS2);
+    }
+    public  String getcAddress3() {
+        return this.getString(CADDRESS3);
+    }
+
+    public  String getcCity() {
+        return this.getString(CCITY);
+    }
+
+    public  String getCEmail() {
+        return this.getString(CEMAIL);
+    }
+
+    public  String getCPhone2() {
+        return this.getString(CPHONE2);
+    }
+
+    public  String getDesignerPhone() {
+        return this.getString(DESIGNER_PHONE);
     }
 
 

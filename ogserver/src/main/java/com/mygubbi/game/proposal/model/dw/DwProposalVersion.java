@@ -124,6 +124,23 @@ public class DwProposalVersion extends JsonObject {
     private static final String BP_COUNT = "bpCount";
     private static final String SV_COUNT = "svCount";
 
+    private static final String CUSTOMER_ID =   "customerId" ;
+    private static final String CNAME =         "cname" ;
+    private static final String CADDRESS1 =     "caddress1" ;
+    private static final String CADDRESS2 =     "caddress2" ;
+    private static final String CADDRESS3 =     "caddress3" ;
+    private static final String CCITY =         "ccity" ;
+    private static final String CEMAIL =        "cemail" ;
+    private static final String CPHONE1 =       "cphone1" ;
+    private static final String CPHONE2 =       "cphone2" ;
+    private static final String PADDRESS1 =     "paddress1" ;
+    private static final String PADDRESS2 =     "paddress2" ;
+    private static final String PCITY =         "pcity" ;
+    private static final String SALES_EMAIL =   "salesEmail" ;
+    private static final String SALES_PHONE =   "salesPhone" ;
+    private static final String DESIGNER_EMAIL ="designerEmail" ;
+    private static final String DESIGNER_PHONE ="designerPhone" ;
+
 
     public DwProposalVersion() {
     }
@@ -216,6 +233,149 @@ public class DwProposalVersion extends JsonObject {
         return this;
     }
 
+    public static String getCustomerId() {
+        return CUSTOMER_ID;
+    }
+    public DwProposalVersion setCustomerId(String customerId)
+    {
+        put(CUSTOMER_ID,customerId);
+        return this;
+    }
+
+    public static String getCName() {
+        return CNAME;
+    }
+    public DwProposalVersion setCName(String cName)
+    {
+        put(CNAME,cName);
+        return this;
+    }
+
+    public static String getcAddress1() {
+        return CADDRESS1;
+    }
+    public DwProposalVersion setcAddress1(String add1)
+    {
+        put(CADDRESS1,add1);
+        return this;
+    }
+    public static String getcAddress2() {
+        return CADDRESS2;
+    }
+    public DwProposalVersion setcAddress2(String add1)
+    {
+        put(CADDRESS2,add1);
+        return this;
+    }
+    public static String getcAddress3() {
+        return CADDRESS3;
+    }
+    public DwProposalVersion setcAddress3(String add1)
+    {
+        put(CADDRESS3,add1);
+        return this;
+    }
+
+
+    public static String getcCity() {
+        return CCITY;
+    }
+    public DwProposalVersion setcCity(String city)
+    {
+        put(CCITY,city);
+        return this;
+    }
+
+    public static String getCEmail() {
+        return CEMAIL;
+    }
+    public DwProposalVersion setCEmail(String email)
+    {
+        put(CEMAIL,email);
+        return this;
+    }
+
+    public static String getCPhone1() {
+        return CPHONE1;
+    }
+    public DwProposalVersion setCPhone1(String cPhone)
+    {
+        put(CPHONE1,cPhone);
+        return this;
+    }
+
+    public static String getCPhone2() {
+        return CPHONE2;
+    }
+    public DwProposalVersion setCPhone2(String cPhone)
+    {
+        put(CPHONE2,cPhone);
+        return this;
+    }
+
+    public static String getPAddress1() {
+        return PADDRESS1;
+    }
+    public DwProposalVersion setPAddress1(String address)
+    {
+        put(PADDRESS1,address);
+        return this;
+    }
+
+    public static String getPAddress2() {
+        return PADDRESS2;
+    }
+    public DwProposalVersion setPAddress2(String address)
+    {
+        put(PADDRESS2,address);
+        return this;
+    }
+
+    public static String getCity() {
+        return PCITY;
+    }
+    public DwProposalVersion setPCity(String city)
+    {
+        put(PCITY,city);
+        return this;
+    }
+
+
+    public static String getSalesEmail() {
+        return SALES_EMAIL;
+    }
+    public DwProposalVersion setSalesEmail(String salesEmail)
+    {
+        put(SALES_EMAIL,salesEmail);
+        return this;
+    }
+
+    public static String getSalesPhone() {
+        return SALES_PHONE;
+    }
+    public DwProposalVersion setSalesPhone(String phone)
+    {
+        put(SALES_PHONE,phone);
+        return this;
+    }
+
+    public static String getDesignerEmail() {
+        return DESIGNER_EMAIL;
+    }
+    public DwProposalVersion setDesignerEmail(String email)
+    {
+        put(DESIGNER_EMAIL,email);
+        return this;
+    }
+
+    public static String getDesignerPhone() {
+        return DESIGNER_PHONE;
+    }
+    public DwProposalVersion setDesignerPhone(String phone)
+    {
+        put(DESIGNER_PHONE,phone);
+        return this;
+    }
 
     public double getId() {
         return this.getDouble(ID);
@@ -1098,6 +1258,22 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setVersionCreatedOn(proposalVersion.getDate());
         dwProposalVersion.setVersionUpdatedBy(proposalVersion.getUpdatedBy());
         dwProposalVersion.setVersionUpdatedOn(proposalVersion.getUpdatedOn());
+
+        dwProposalVersion.setCName(proposalHeader.getName());
+        dwProposalVersion.setcAddress1(proposalHeader.getcAddress1());
+        dwProposalVersion.setcAddress2(proposalHeader.getcAddress2());
+        dwProposalVersion.setcAddress3(proposalHeader.getcAddress3());
+        dwProposalVersion.setcCity(proposalHeader.getcCity());
+        dwProposalVersion.setCEmail(proposalHeader.getCEmail());
+        dwProposalVersion.setCPhone1(proposalHeader.getContact());
+        dwProposalVersion.setCPhone2(proposalHeader.getCPhone2());
+        dwProposalVersion.setPAddress1(proposalHeader.getProjectAddress1());
+        dwProposalVersion.setPAddress2(proposalHeader.getProjectAddress2());
+        dwProposalVersion.setPCity(proposalHeader.getProjectCity());
+        dwProposalVersion.setSalesEmail(proposalHeader.getSalesEmail());
+        dwProposalVersion.setSalesPhone(proposalHeader.getSalesPhone());
+        dwProposalVersion.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwProposalVersion.setDesignerPhone(proposalHeader.getDesignerPhone());
 
         dwProposalVersion.setDiscountAmount(proposalVersion.getDiscountAmount());
         dwProposalVersion.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());

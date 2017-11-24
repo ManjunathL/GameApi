@@ -84,15 +84,180 @@ public class DWModuleComponent extends JsonObject {
     private static final String NEW_MATT_SOLID_FINISH = "MATT-SOLID";
     private static final String NEW_MATT_WOOD_GRAIN_FINISH = "MATT-WG";
 
-
-
-
+    private static final String CUSTOMER_ID =   "customerId" ;
+    private static final String CNAME =         "cname" ;
+    private static final String CADDRESS1 =     "caddress1" ;
+    private static final String CADDRESS2 =     "caddress2" ;
+    private static final String CADDRESS3 =     "caddress3" ;
+    private static final String CCITY =         "ccity" ;
+    private static final String CEMAIL =        "cemail" ;
+    private static final String CPHONE1 =       "cphone1" ;
+    private static final String CPHONE2 =       "cphone2" ;
+    private static final String PADDRESS1 =     "paddress1" ;
+    private static final String PADDRESS2 =     "paddress2" ;
+    private static final String PCITY =         "pcity" ;
+    private static final String SALES_EMAIL =   "salesEmail" ;
+    private static final String SALES_PHONE =   "salesPhone" ;
+    private static final String DESIGNER_EMAIL ="designerEmail" ;
+    private static final String DESIGNER_PHONE ="designerPhone" ;
+    private static final String PROJECT_NAME = "projectName";
 
     public DWModuleComponent(JsonObject json) {
         super(json.getMap());
     }
 
     public DWModuleComponent() {}
+    public static String getCustomerId() {
+        return CUSTOMER_ID;
+    }
+    public DWModuleComponent setCustomerId(String customerId)
+    {
+        put(CUSTOMER_ID,customerId);
+        return this;
+    }
+
+    public static String getCName() {
+        return CNAME;
+    }
+    public DWModuleComponent setCName(String cName)
+    {
+        put(CNAME,cName);
+        return this;
+    }
+
+    public String getProjectName() {
+        return this.getString(PROJECT_NAME);
+    }
+    public DWModuleComponent setProjectName(String pname) {
+        this.put(PROJECT_NAME, pname);
+        return this;
+    }
+
+    public static String getcAddress1() {
+        return CADDRESS1;
+    }
+    public DWModuleComponent setcAddress1(String add1)
+    {
+        put(CADDRESS1,add1);
+        return this;
+    }
+    public static String getcAddress2() {
+        return CADDRESS2;
+    }
+    public DWModuleComponent setcAddress2(String add1)
+    {
+        put(CADDRESS2,add1);
+        return this;
+    }
+    public static String getcAddress3() {
+        return CADDRESS3;
+    }
+    public DWModuleComponent setcAddress3(String add1)
+    {
+        put(CADDRESS3,add1);
+        return this;
+    }
+
+
+    public static String getcCity() {
+        return CCITY;
+    }
+    public DWModuleComponent setcCity(String city)
+    {
+        put(CCITY,city);
+        return this;
+    }
+
+    public static String getCEmail() {
+        return CEMAIL;
+    }
+    public DWModuleComponent setCEmail(String email)
+    {
+        put(CEMAIL,email);
+        return this;
+    }
+
+    public static String getCPhone1() {
+        return CPHONE1;
+    }
+    public DWModuleComponent setCPhone1(String cPhone)
+    {
+        put(CPHONE1,cPhone);
+        return this;
+    }
+
+    public static String getCPhone2() {
+        return CPHONE2;
+    }
+    public DWModuleComponent setCPhone2(String cPhone)
+    {
+        put(CPHONE2,cPhone);
+        return this;
+    }
+
+    public static String getPAddress1() {
+        return PADDRESS1;
+    }
+    public DWModuleComponent setPAddress1(String address)
+    {
+        put(PADDRESS1,address);
+        return this;
+    }
+
+    public static String getPAddress2() {
+        return PADDRESS2;
+    }
+    public DWModuleComponent setPAddress2(String address)
+    {
+        put(PADDRESS2,address);
+        return this;
+    }
+
+    public static String getCity() {
+        return PCITY;
+    }
+    public DWModuleComponent setPCity(String city)
+    {
+        put(PCITY,city);
+        return this;
+    }
+
+
+    public static String getSalesEmail() {
+        return SALES_EMAIL;
+    }
+    public DWModuleComponent setSalesEmail(String salesEmail)
+    {
+        put(SALES_EMAIL,salesEmail);
+        return this;
+    }
+
+    public static String getSalesPhone() {
+        return SALES_PHONE;
+    }
+    public DWModuleComponent setSalesPhone(String phone)
+    {
+        put(SALES_PHONE,phone);
+        return this;
+    }
+
+    public static String getDesignerEmail() {
+        return DESIGNER_EMAIL;
+    }
+    public DWModuleComponent setDesignerEmail(String email)
+    {
+        put(DESIGNER_EMAIL,email);
+        return this;
+    }
+
+    public static String getDesignerPhone() {
+        return DESIGNER_PHONE;
+    }
+    public DWModuleComponent setDesignerPhone(String phone)
+    {
+        put(DESIGNER_PHONE,phone);
+        return this;
+    }
 
     public String getColor() {
         return this.getString(COLOR);
@@ -650,6 +815,23 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setModuleSeq(productModule.getModuleSequence());
         dwModuleComponent.setAccPackCode(panelComponent.getAccPackCode());
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
+
+        dwModuleComponent.setProjectName(proposalHeader.getProjectName());
+        dwModuleComponent.setCName(proposalHeader.getName());
+        dwModuleComponent.setcAddress1(proposalHeader.getcAddress1());
+        dwModuleComponent.setcAddress2(proposalHeader.getcAddress2());
+        dwModuleComponent.setcAddress3(proposalHeader.getcAddress3());
+        dwModuleComponent.setcCity(proposalHeader.getcCity());
+        dwModuleComponent.setCEmail(proposalHeader.getCEmail());
+        dwModuleComponent.setCPhone1(proposalHeader.getContact());
+        dwModuleComponent.setCPhone2(proposalHeader.getCPhone2());
+        dwModuleComponent.setPAddress1(proposalHeader.getProjectAddress1());
+        dwModuleComponent.setPAddress2(proposalHeader.getProjectAddress2());
+        dwModuleComponent.setPCity(proposalHeader.getProjectCity());
+        dwModuleComponent.setSalesEmail(proposalHeader.getSalesEmail());
+        dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
+        dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
 
         String finishCode = finish.getFinishCode();
         /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
