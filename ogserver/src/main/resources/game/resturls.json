@@ -1014,7 +1014,7 @@
       "uri": "/gapi/proposal/getfinishmap",
       "source": "db",
       "query":"proposal.getnewfinishmap",
-      "params":["oldCode"],
+      "params":["oldCode","fromDate","toDate"],
       "resultfields":[],
       "default": "[]"
     },

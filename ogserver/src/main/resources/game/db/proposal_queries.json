@@ -2065,8 +2065,8 @@
       "id": "proposal.getnewfinishmap",
       "type": "select",
       "table": "oldnew_finishmap",
-      "query": "select * from oldnew_finishmap where oldCode = ?",
-      "params": ["oldCode"]
+      "query": "select * from oldnew_finishmap where oldCode = ? and fromDate <= ? and toDate >=? ",
+      "params": ["oldCode","fromDate","toDate"]
     },
     {
       "id": "proposal.getcolor",
