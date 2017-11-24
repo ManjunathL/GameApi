@@ -215,7 +215,9 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
 
         ProductModule productModule = new ProductModule(jsonObject);
 
-        ModulePriceHolder modulePriceHolder = new ModulePriceHolder(productModule,proposalHeader.getProjectCity(),proposalHeader.getPriceDate(),productLineItem);
+        String adminOverrideFlag = "Yes";
+
+        ModulePriceHolder modulePriceHolder = new ModulePriceHolder(productModule,proposalHeader.getProjectCity(),proposalHeader.getPriceDate(),productLineItem,adminOverrideFlag);
         modulePriceHolder.prepare();
         modulePriceHolder.calculateTotalCost();
 

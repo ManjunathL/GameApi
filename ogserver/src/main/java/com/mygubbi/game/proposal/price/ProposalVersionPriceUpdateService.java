@@ -138,11 +138,27 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
 
                             for (ProductModule productModule : productLineItem.getModules()) {
-                                productModule.setFinishType("default("+productLineItem.getFinishType()+")");
-                                productModule.setFinishTypeCode(productLineItem.getFinishType());
-                                productModule.setFinishCode(oldToNewFinishMapping.getNewCode());
-                                productModule.setColorCode(productLineItem.getColorgroupCode());
-                                productModule.setFinish("default("+ oldToNewFinishMapping.getTitle() +")");
+
+                                OldToNewFinishMapping oldToNewFinishMappingForModule = ModuleDataService.getInstance().getOldToNewMapping(productModule.getFinishCode(),proposalHeader.getPriceDate());
+                                String newCodeForModule = oldToNewFinishMappingForModule.getNewCode();
+                                productModule.setFinishCode(newCodeForModule);
+
+                                if (productLineItem.getFinishCode().equals(productModule.getFinishCode()))
+                                {
+                                    productModule.setFinishType(productModule.getFinishType());
+                                    productModule.setFinishTypeCode(productLineItem.getFinishType());
+                                    productModule.setFinish(oldToNewFinishMappingForModule.getTitle());
+                                }
+                                else
+                                {
+                                    productModule.setFinishType(productModule.getFinishType());
+                                    productModule.setFinishTypeCode(productLineItem.getFinishType());
+                                    productModule.setFinish( oldToNewFinishMappingForModule.getTitle());
+                                }
+
+                                productModule.setColorCode(productModule.getColorCode());
+
+
                                 ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
                                         proposalHeader.getProjectCity(), proposalHeader.getPriceDate(),productLineItem,"C");
                                 priceHolder.prepare();

@@ -50,7 +50,7 @@ public class PanelComponent
     private final static Logger LOG = LogManager.getLogger(PanelComponent.class);
 
 
-    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode,Date priceDate,String city, String finishOverrideFlag)
+    public PanelComponent(ModulePriceHolder priceHolder, ModulePanel modulePanel, IModuleComponent component, String accPackCode,Date priceDate,String city)
     {
         this.setBaseAttributes(modulePanel, component);
         this.setDimensions(priceHolder.getProductModule(), priceHolder.getMgModule(), modulePanel);

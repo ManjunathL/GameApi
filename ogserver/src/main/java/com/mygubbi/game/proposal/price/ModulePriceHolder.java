@@ -30,7 +30,7 @@ public class ModulePriceHolder
 
     private ProductModule productModule;
     private ProductLineItem productLineItem;
-    private String flag;
+    private String adminOverrideFlag;
     private Module mgModule;
     private Collection<ModuleComponent> moduleComponents;
     private List<PanelComponent> panelComponents = Collections.EMPTY_LIST;
@@ -150,13 +150,13 @@ public class ModulePriceHolder
         this.productLineItem = productLineItem;
     }
 
-    public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date,ProductLineItem productLineItem,String flag )
+    public ModulePriceHolder(ProductModule productModule, String city, java.sql.Date date,ProductLineItem productLineItem,String adminOverrideFlag )
     {
         this.productModule = productModule;
         this.city = city;
         this.priceDate = date;
         this.productLineItem = productLineItem;
-        this.flag=flag;
+        this.adminOverrideFlag =adminOverrideFlag;
     }
 
     public Collection<ModuleComponent> getModuleComponents()
@@ -541,7 +541,7 @@ public class ModulePriceHolder
         ModulePanel modulePanel = this.getModulePanel(component);
         if (modulePanel != null)
         {
-            this.panelComponents.add(new PanelComponent(this, modulePanel, component, accPackCode,priceDate,city,flag));
+            this.panelComponents.add(new PanelComponent(this, modulePanel, component, accPackCode,priceDate,city));
         }
     }
 
@@ -957,6 +957,10 @@ public class ModulePriceHolder
     private void calculateTotalCost(RateCard labourRateCard, RateCard loadingFactorCard, String code)
     {
 
+        if (adminOverrideFlag.equals("Yes") && this.totalCost < 0)
+        {
+            this.totalCost=0.0;
+        }
 
         if(true==equals(finishValue))
         {
