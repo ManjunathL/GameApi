@@ -82,6 +82,7 @@ public class ProductPriceHolder {
     private double productLConnectorProfit = 0.0;
     private double productLConnectorMargin = 0.0;
     private double productAreainSqft = 0.0;
+    private double productNetAreainSqft = 0.0;
     private int stdModuleCount = 0;
     private int nStdModuleCount = 0;
     private int hikeModuleCount = 0;
@@ -174,6 +175,12 @@ public class ProductPriceHolder {
             Module mgModule = modulePriceHolder.getMgModule();
             addToAreaInSqft(mgModule.getAreaOfModuleInSft());
 
+            if (mgModule.getSqftCalculation().equalsIgnoreCase("yes"))
+            {
+                addToNetAreaInSqft(mgModule.getAreaOfModuleInSft());
+
+            }
+
         }
 
         double rateForLconnectorPrice=lConnectorRate.getPrice();
@@ -216,6 +223,11 @@ public class ProductPriceHolder {
     private void addToTotalProductPrice(double totalCost) {
         if (totalCost == 0) return;
         this.productPrice += totalCost;
+       }
+
+    private void addToNetAreaInSqft(double netArea) {
+        if (netArea == 0) return;
+        this.productNetAreainSqft += netArea;
        }
 
     private void addToHingeSourceCost(double hingeSourceCost) {
@@ -616,6 +628,11 @@ public class ProductPriceHolder {
     {
         this.productHingeProfit = this.productHingePriceWoTax - this.productHingeSourceCost;
         return this.productHingeProfit;
+    }
+
+    public double getProductNetAreaInSqft()
+    {
+        return this.productNetAreainSqft;
     }
 
     public double getProductHingeMargin()
