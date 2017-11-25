@@ -8,14 +8,14 @@
     "password": "",
     "pool_Name":"mygubbi"
   },
-   {
-     "driver_class": "com.mysql.jdbc.Driver",
-     "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/prod_check",
-     "max_pool_size": 20,
-     "user": "admin",
-     "password": "OG$#gubi32",
-     "pool_Name":"mygubbi"
-  }],
+    {
+      "driver_class": "com.mysql.jdbc.Driver",
+      "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/prod_check?autoReconnect=true",
+      "max_pool_size": 20,
+      "user": "admin",
+      "password": "OG$#gubi32",
+      "pool_Name":"ods"
+    }],
   "urlwithssl": "",
 
   "ssl_keystore": "ssl/mygubbiprod.jks",

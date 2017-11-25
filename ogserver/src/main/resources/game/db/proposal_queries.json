@@ -2136,7 +2136,7 @@
       "id": "proposal.select.all.newPriceMaster",
       "type": "select",
       "table": "new_price_master",
-      "query": "select proposalId, version, newTxnAmount, discountPercentage, discountAmount, oldTxnAmount,differenceAmount, date_format(priceDate,'%Y-%m-%d') as priceDate  from new_price_master order by proposalId desc,version desc",
+      "query": "select proposalId, version, newTxnAmount, discountPercentage, discountAmount, oldTxnAmount,differenceAmount, date_format(priceDate,'%Y-%m-%d') as priceDate  from new_price_master where version in ('1.0','2.0') order by proposalId desc,version desc",
       "params": []
     }
 
