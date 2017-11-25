@@ -1371,7 +1371,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setHandleSize(productLineItem.getHandleThickness());
         dwProposalProduct.setKnobType(productLineItem.getKnobType());
         dwProposalProduct.setKnobFinish(productLineItem.getKnobFinish());
-//        dwProposalProduct.setProductNetArea(productLineItem.get //do necessary changes in game_product_module,game_module_component
+        dwProposalProduct.setProductNetArea(productPriceHolder.getProductNetAreaInSqft());
         dwProposalProduct.setProductArea(productPriceHolder.getProductAreainSqft());
         dwProposalProduct.setProductCreatedBy(productLineItem.getCreatedBy());
         dwProposalProduct.setProductCreatedOn(productLineItem.getCreatedOn());

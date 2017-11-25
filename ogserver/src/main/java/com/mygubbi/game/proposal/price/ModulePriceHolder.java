@@ -30,7 +30,7 @@ public class ModulePriceHolder
 
     private ProductModule productModule;
     private ProductLineItem productLineItem;
-    private String adminOverrideFlag;
+    private String adminOverrideFlag = "No";
     private Module mgModule;
     private Collection<ModuleComponent> moduleComponents;
     private List<PanelComponent> panelComponents = Collections.EMPTY_LIST;
