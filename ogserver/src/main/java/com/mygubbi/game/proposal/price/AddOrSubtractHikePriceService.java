@@ -115,30 +115,49 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
 //        LOG.debug("Retrieve first product :");
 //        LOG.debug("Proposal version : " + proposalVersion);
         QueryData toBeChangedPrice = new QueryData("proposal.selectfirst.product", proposalVersion);
+        QueryData products = new QueryData("proposal.product.selectversion", proposalVersion);
 
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY,
-                LocalCache.getInstance().store(toBeChangedPrice),
+        List<QueryData> queryDataList = new ArrayList<>();
+        queryDataList.add(toBeChangedPrice);
+        queryDataList.add(products);
+
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY,
+                LocalCache.getInstance().store(queryDataList),
                 (AsyncResult<Message<Integer>> dataResult) ->
                 {
-                    QueryData selectData = (QueryData) LocalCache.getInstance().remove(dataResult.result().body());
+                    List<QueryData> selectData = (List<QueryData>) LocalCache.getInstance().remove(dataResult.result().body());
 //                    LOG.debug("Select data :" + selectData.rows.size());
-                    if (selectData.rows == null || selectData.rows.isEmpty()) {
+                    if (selectData.get(0).rows == null || selectData.get(0).rows.isEmpty()) {
                         message.reply(LocalCache.getInstance().store(getResponseJson("Failure", proposalVersion.getProposalId(), proposalVersion.getVersion(), "NO products found")));
 
                     } else {
-                     ProductLineItem productLineItem = new ProductLineItem(selectData.rows.get(0));
-                        addHikeModule(message,proposalHeader,newPriceMaster,productLineItem,proposalVersion);
+                     ProductLineItem productLineItem = new ProductLineItem(selectData.get(0).rows.get(0));
+                        List<ProductLineItem> productLineItemList = new ArrayList<ProductLineItem>();
+                        for (JsonObject jsonObject: selectData.get(1).rows)
+                        {
+                            ProductLineItem productLineItems = new ProductLineItem(jsonObject);
+                            productLineItemList.add(productLineItems);
+                        }
+
+                        addHikeModule(message,proposalHeader,newPriceMaster,productLineItem,proposalVersion,productLineItemList);
                     }
                 });
 
     }
 
-    private void addHikeModule(Message<Integer> message, ProposalHeader proposalHeader, NewPriceMaster newPriceMaster, ProductLineItem productLineItem, ProposalVersion proposalVersion) {
+    private void addHikeModule(Message<Integer> message, ProposalHeader proposalHeader, NewPriceMaster newPriceMaster, ProductLineItem productLineItem, ProposalVersion proposalVersion, List<ProductLineItem> productLineItemList) {
 //        LOG.debug("Add hike module");
 
         Module module = ModuleDataService.getInstance().getModule(HIKE_MODULE_CODE);
 
         ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
+
+        double versionCostWoAccessory = 0.0;
+
+        for (ProductLineItem productLineItem1 : productLineItemList)
+        {
+            versionCostWoAccessory += productLineItem1.getCostWoAcc();
+        }
 
         JsonObject jsonObject = new JsonObject()
                 .put(  "seq" , 0).put(  "moduleSequence" , 100)
@@ -236,15 +255,32 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
 
         double totalProductPrice = productLineItem.getAmount() + modulePriceHolder.getTotalCost();
         productLineItem.setAmount(totalProductPrice);
+        productLineItem.setCostWoAccessories(productLineItem.getCostWoAcc() + modulePriceHolder.getTotalCost());
+        versionCostWoAccessory += modulePriceHolder.getTotalCost();
 
         double totalVersionPrice = proposalVersion.getAmount() + modulePriceHolder.getTotalCost();
         proposalVersion.setAmount(totalVersionPrice);
 
-        double discountAmountNew = (int)proposalVersion.getAmount() * (proposalVersion.getDiscountPercentage()/100);
-        double finalAmount = proposalVersion.getAmount() - discountAmountNew;
-        proposalVersion.setDiscountAmount(discountAmountNew);
-        finalAmount = finalAmount - finalAmount%10;
-        proposalVersion.setFinalAmount(finalAmount);
+        java.util.Date date = proposalHeader.getCreatedOn();
+        java.util.Date currentDate = new java.util.Date(117, 3, 20, 0, 0, 00);
+        if (date.after(currentDate)) {
+            double discountAmountNew = (int)proposalVersion.getAmount() * (proposalVersion.getDiscountPercentage()/100);
+            double finalAmount = proposalVersion.getAmount() - discountAmountNew;
+            proposalVersion.setDiscountAmount(discountAmountNew);
+            finalAmount = finalAmount - finalAmount%10;
+            proposalVersion.setFinalAmount(finalAmount);
+        }
+        else
+        {
+            double discountAmountNew = (int)versionCostWoAccessory * (proposalVersion.getDiscountPercentage()/100);
+            double finalAmount = proposalVersion.getAmount() - discountAmountNew;
+            proposalVersion.setDiscountAmount(discountAmountNew);
+            finalAmount = finalAmount - finalAmount%10;
+            proposalVersion.setFinalAmount(finalAmount);
+
+        }
+
+
 
         updateProduct(message,productLineItem,proposalHeader,proposalVersion);
 
