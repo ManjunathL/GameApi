@@ -257,6 +257,11 @@ public class ProductLineItem extends JsonObject
         this.put(AMOUNT, amount);
         return this;
     }
+
+    public ProductLineItem setCostWoAccessories(double costWoAccessories) {
+        this.put(COST_WO_ACC,costWoAccessories);
+        return this;
+    }
     public ProductLineItem setFinishCode(String finishCode)
     {
         this.put(FINISH_CODE,finishCode);

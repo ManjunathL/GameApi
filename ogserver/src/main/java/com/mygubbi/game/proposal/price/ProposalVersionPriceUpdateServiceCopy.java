@@ -136,6 +136,7 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
 
                         double oldProductCost = 0;
                         double totalProposalVersionProductCost = 0;
+                        double totalProposalVersionProductCostWoAccessories = 0;
 
                         if (proposalHeader.getPriceDate() != null) {
                             proposalHeader.setPriceDate(priceDate);
@@ -144,6 +145,7 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                         for (JsonObject record : selectData.get(0).rows)
                         {
                             double totalProductCost = 0;
+                            double productCostWoAccessories = 0;
                             ProductLineItem productLineItem = new ProductLineItem(record);
                             String finishCode = productLineItem.getFinishCode();
                             OldToNewFinishMapping oldToNewFinishMapping = ModuleDataService.getInstance().getOldToNewMapping(finishCode,proposalHeader.getPriceDate());
@@ -199,6 +201,7 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                                 productModule.setAmount(totalCost);
                                 productModule.setCostWoAccessories(priceHolder.getCostWoAccessories());
                                 totalProductCost += totalCost;
+                                productCostWoAccessories += priceHolder.getCostWoAccessories();
                             }
 
                             PriceMaster lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, proposalHeader.getProjectCity());
@@ -207,32 +210,45 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                             if (productLineItem.getHandletypeSelection() != null) {
                                 if (productLineItem.getHandletypeSelection().equals("Gola Profile") && productLineItem.getNoOfLengths() != 0) {
                                     totalProductCost += (productLineItem.getNoOfLengths() * rateForLconnectorPrice);
+                                    productCostWoAccessories += (productLineItem.getNoOfLengths() * rateForLconnectorPrice);
                                 }
                             }
                             totalProductCost = this.round(totalProductCost,0);
 
                             productLineItem.setAmount(totalProductCost);
+                            productLineItem.setCostWoAccessories(productCostWoAccessories);
 
 
-
-//                            updateProductPrice(productLineItem);
                             String query = "proposal.product.update";
                             queryDataList.add(new QueryData(query, productLineItem));
                             totalProposalVersionProductCost += totalProductCost;
-//                            LOG.debug("Product COst : " + totalProductCost);
+                            totalProposalVersionProductCostWoAccessories += productCostWoAccessories;
                         }
 
-//                        LOG.debug("Total Product COst : " + totalProposalVersionProductCost);
-
                         totalProposalVersionProductCost = this.round(totalProposalVersionProductCost,0);
+                        totalProposalVersionProductCostWoAccessories = this.round(totalProposalVersionProductCostWoAccessories,0);
 
                         proposalVersion.setAmount(totalProposalVersionProductCost);
 
-                        double discountAmountNew = (int)proposalVersion.getAmount() * (proposalVersion.getDiscountPercentage()/100);
-                        double finalAmount = proposalVersion.getAmount() - discountAmountNew;
-                        proposalVersion.setDiscountAmount(discountAmountNew);
-                        finalAmount = finalAmount - finalAmount%10;
-                        proposalVersion.setFinalAmount(finalAmount);
+                        java.util.Date date = proposalHeader.getCreatedOn();
+                        java.util.Date currentDate = new java.util.Date(117, 3, 20, 0, 0, 00);
+                        if (date.after(currentDate)) {
+                            double discountAmountNew = (int)proposalVersion.getAmount() * (proposalVersion.getDiscountPercentage()/100);
+                            double finalAmount = proposalVersion.getAmount() - discountAmountNew;
+                            proposalVersion.setDiscountAmount(discountAmountNew);
+                            finalAmount = finalAmount - finalAmount%10;
+                            proposalVersion.setFinalAmount(finalAmount);
+                        }
+                        else
+                        {
+
+                            double discountAmountNew = (int)totalProposalVersionProductCostWoAccessories * (proposalVersion.getDiscountPercentage()/100);
+                            double finalAmount = proposalVersion.getAmount() - discountAmountNew;
+                            proposalVersion.setDiscountAmount(discountAmountNew);
+                            finalAmount = finalAmount - finalAmount%10;
+                            proposalVersion.setFinalAmount(finalAmount);
+                        }
+
 
                         List<JsonObject> addon_jsons = selectData.get(1).rows;
                         calculatePriceForAddons(message, proposalVersion,proposalHeader,queryDataList, addon_jsons);
