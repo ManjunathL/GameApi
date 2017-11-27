@@ -181,14 +181,14 @@ public class ProposalVersionPriceUpdateServiceCopy extends AbstractVerticle
                                 if (productLineItem.getFinishCode().equals(productModule.getFinishCode()))
                                 {
                                     productModule.setFinishType(productModule.getFinishType());
-                                    productModule.setFinishTypeCode(productLineItem.getFinishType());
-                                    productModule.setFinish(oldToNewFinishMappingForModule.getTitle());
+                                    productModule.setFinishTypeCode(productModule.getFinishType());
+                                    productModule.setFinish(productModule.getFinish());
                                 }
                                 else
                                 {
                                     productModule.setFinishType(productModule.getFinishType());
                                     productModule.setFinishTypeCode(productLineItem.getFinishType());
-                                    productModule.setFinish( oldToNewFinishMappingForModule.getTitle());
+                                    productModule.setFinish(oldToNewFinishMappingForModule.getTitle());
                                 }
 
                                 productModule.setColorCode(productModule.getColorCode());

@@ -845,6 +845,10 @@ public class ModulePriceHolder
             int i = this.productModule.getWidth() * this.productModule.getDepth();
             double price = (double) i;
             price = price * 0.1;
+            if (adminOverrideFlag.equals("Yes") && price < 0)
+            {
+                this.totalCost=0.0;
+            }
             this.totalCost = price;
         }
         else {

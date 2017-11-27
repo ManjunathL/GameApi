@@ -138,6 +138,8 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
 
         Module module = ModuleDataService.getInstance().getModule(HIKE_MODULE_CODE);
 
+        ShutterFinish shutterFinish = ModuleDataService.getInstance().getFinish(productLineItem.getFinishCode());
+
         JsonObject jsonObject = new JsonObject()
                 .put(  "seq" , 0).put(  "moduleSequence" , 100)
                 .put(  "unitType" , module.getUnitType())
@@ -149,7 +151,7 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
                 .put(  "fixedCarcassCode" , "null")
                 .put(  "finishType" , productLineItem.getFinishType())
                 .put(  "finishTypeCode" , "default("+productLineItem.getFinishType()+")")
-                .put(  "finish" , productLineItem.getFinishType())
+                .put(  "finish" , "default (" +shutterFinish+")")
                 .put(  "finishCode" , productLineItem.getFinishCode())
                 .put(  "colorCode" , productLineItem.getColorgroupCode())
                 .put(  "colorName" , "null")

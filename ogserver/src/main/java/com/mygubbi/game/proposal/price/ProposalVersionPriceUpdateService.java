@@ -160,7 +160,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
 
                                 ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
-                                        proposalHeader.getProjectCity(), proposalHeader.getPriceDate(),productLineItem,"C");
+                                        proposalHeader.getProjectCity(), proposalHeader.getPriceDate(),productLineItem);
                                 priceHolder.prepare();
                                 priceHolder.calculateTotalCost();
                                 double totalCost = priceHolder.getTotalCost();
