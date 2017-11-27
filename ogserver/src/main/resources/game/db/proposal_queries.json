@@ -99,7 +99,7 @@
       "id": "proposal.select.updateprice",
       "type": "select",
       "table": "proposal",
-      "query": "select id,status,version,crmId,pcity,quoteNo,title,quoteNoNew,priceDate from proposal where id = ?",
+      "query": "select id,status,version,crmId,pcity,quoteNo,title,quoteNoNew,priceDate,createdOn from proposal where id = ?",
       "params": ["proposalId" ]
     },
 
