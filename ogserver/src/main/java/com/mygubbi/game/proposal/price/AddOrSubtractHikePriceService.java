@@ -19,6 +19,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.poi.ss.formula.functions.Code;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,9 +169,9 @@ public class AddOrSubtractHikePriceService extends AbstractVerticle
                 .put(  "wallcasscode" , productLineItem.getWallCarcassCode())
                 .put(  "carcassCode" , productLineItem.getBaseCarcassCode())
                 .put(  "fixedCarcassCode" , "null")
-                .put(  "finishType" , productLineItem.getFinishType())
-                .put(  "finishTypeCode" , "default("+productLineItem.getFinishType()+")")
-                .put(  "finish" , "default (" +shutterFinish+")")
+                .put(  "finishType" , "default("+productLineItem.getFinishType()+")")
+                .put(  "finishTypeCode" , productLineItem.getFinishType())
+                .put(  "finish" , "default (" +shutterFinish.getTitle()+")")
                 .put(  "finishCode" , productLineItem.getFinishCode())
                 .put(  "colorCode" , productLineItem.getColorgroupCode())
                 .put(  "colorName" , "null")
