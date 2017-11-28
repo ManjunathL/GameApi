@@ -430,7 +430,7 @@ public class FinishChangeService extends AbstractVerticle
             else
             {
                 List<MessageDataHolder> steps = resultData.rows.stream()
-                        .map(row -> new MessageDataHolder(FinishChangeService.UPDATE_FINISH_COPY_FOR_PROPOSALS, new ProposalVersion(row)))
+                        .map(row -> new MessageDataHolder(FinishChangeService.UPDATE_FINISH_COPY, new ProposalVersion(row)))
                         .collect(Collectors.toList());
                 new PipelineExecutor().execute(steps, new FinishChangeService.ReportingServiceResponseHandler(message));
             }
