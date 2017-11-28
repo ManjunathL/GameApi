@@ -197,6 +197,7 @@ public class FinishChangeService extends AbstractVerticle
 
                                 if (priceDate.before(currentDt2))
                                 {
+                                    LOG.info("Big IFF");
                                     productModule.setFinishType(productModule.getFinishType());
                                     productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                     productModule.setFinish(productModule.getFinish());
@@ -205,7 +206,8 @@ public class FinishChangeService extends AbstractVerticle
                                     productModule.setColorCode(productModule.getColorCode());
                                 }
                                 else {
-                                    if (productModule.getFinishCode().equals(newCodeModule)) {
+                                    if (productModule.getFinishCode().equals(newCodeModule) || !productModule.getFinishCode().equals(productLineItem.getFinishCode())) {
+                                        LOG.info("Inside IFF");
                                         productModule.setFinishType(productModule.getFinishType());
                                         productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                         productModule.setFinish(productModule.getFinish());
@@ -215,6 +217,7 @@ public class FinishChangeService extends AbstractVerticle
 
 
                                     } else {
+                                        LOG.info("Inside Else");
                                         productModule.setFinishType(productModule.getFinishType());
                                         productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                         productModule.setFinish("default (" + shutterFinishModule.getTitle() + ")");
@@ -229,7 +232,9 @@ public class FinishChangeService extends AbstractVerticle
                                             productLineItem.setColorGroupCode("");
                                         }
                                     }
+
                                 }
+                                LOG.info("AFTER :: "+productModule.getMGCode()+", "+productModule.getFinishCode()+", "+productModule.getFinish()+", "+productModule.getFinishType()+", "+productModule.getFinishTypeCode());
 
 
 
