@@ -7,6 +7,7 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.game.proposal.model.NewPriceMaster;
 import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.price.AddOrSubtractHikePriceService;
+import com.mygubbi.game.proposal.price.FinishChangeService;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateServiceCopy;
 import com.mygubbi.route.AbstractRouteHandler;
@@ -32,14 +33,14 @@ public class VersionPriceUpdateHandler extends AbstractRouteHandler {
         super(vertx);
         this.route().handler(BodyHandler.create());
         this.post("/updatepricefornewproposal").handler(this::updatePriceForNewProposal);
-        this.post("/updatepriceforproposals").handler(this::updatePriceForProposals);
+        this.post("/updatefinishandpriceforproposals").handler(this::updateFinishAndPriceForProposals);
         this.post("/addorsubtracthikeforproposal").handler(this::addOrSubtractHikeForProposal);
-        this.post("/updatepriceforproposal").handler(this::updatePriceForOneProposal);
+        this.post("/updatefinishandpriceforproposal").handler(this::updateFinishAndPricePriceForOneProposal);
         this.post("/addorsubtracthikeforallproposal").handler(this::addOrSubtractHikeForAllProposals);
 
     }
 
-    private void updatePriceForOneProposal(RoutingContext context){
+    private void updateFinishAndPricePriceForOneProposal(RoutingContext context){
         JsonObject productJson = context.getBodyAsJson();
         LOG.debug("Proposal Json :" + productJson);
         updatePriceProposal(context,productJson);
@@ -61,7 +62,7 @@ public class VersionPriceUpdateHandler extends AbstractRouteHandler {
                     {
                         ProposalVersion proposalVersion = new ProposalVersion(resultData.rows.get(0));
                         Integer pvId = LocalCache.getInstance().store(proposalVersion);
-                        VertxInstance.get().eventBus().send(ProposalVersionPriceUpdateServiceCopy.UPDATE_VERSION_PRICE_COPY, pvId,
+                        VertxInstance.get().eventBus().send(FinishChangeService.UPDATE_FINISH_COPY, pvId,
                                 (AsyncResult<Message<Integer>> dataresult) ->
                                 {
                                     sendJsonResponse(context,new JsonObject().put("status","Successfully Started Updater").toString());
@@ -100,10 +101,10 @@ public class VersionPriceUpdateHandler extends AbstractRouteHandler {
                 });
     }
 
-    private void updatePriceForProposals(RoutingContext routingContext){
+    private void updateFinishAndPriceForProposals(RoutingContext routingContext){
         LOG.info("routingContext = "+routingContext.getBodyAsJson());
         Integer id1 = LocalCache.getInstance().store(routingContext.getBodyAsJson());
-        VertxInstance.get().eventBus().send(ProposalVersionPriceUpdateServiceCopy.UPDATE_VERSION_PRICE_COPY_FOR_PROPOSALS, id1,
+        VertxInstance.get().eventBus().send(FinishChangeService.UPDATE_FINISH_COPY_FOR_PROPOSALS, id1,
                 (AsyncResult<Message<Integer>> dataresult) ->
                 {
                     sendJsonResponse(routingContext,new JsonObject().put("status","Successfully Started Updater").toString());

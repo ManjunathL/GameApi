@@ -58,7 +58,7 @@
         "name": "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService"
       },
       {
-        "name": "com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateServiceCopy"
+        "name": "com.mygubbi.game.proposal.price.FinishChangeService"
       },
 
       {

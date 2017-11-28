@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.price;
 
+import com.mygubbi.common.DateUtil;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
@@ -24,6 +25,7 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -116,7 +118,7 @@ public class FinishChangeService extends AbstractVerticle
         select_QueryData.add(products);
         select_QueryData.add(addons);
         List<QueryData> queryDataList = new ArrayList<>();
-        Date priceDate = new Date(System.currentTimeMillis());
+        Date priceDate = proposalHeader.getPriceDate();
         Integer id = LocalCache.getInstance().store(select_QueryData);
         VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
                 (AsyncResult<Message<Integer>> dataResult) ->
@@ -184,9 +186,16 @@ public class FinishChangeService extends AbstractVerticle
                                 String colourValueModule=productLineItem.getColorgroupCode();
                                 String ValueModule=" ";
 
+
                                 java.util.Date currentDate = new java.util.Date(117, 8, 18, 0, 0, 00);
 
-                                if (priceDate.before(currentDate))
+
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                String strDate= formatter.format(currentDate);
+
+                                Date currentDt2 = DateUtil.convertDate(strDate);
+
+                                if (priceDate.before(currentDt2))
                                 {
                                     productModule.setFinishType(productModule.getFinishType());
                                     productModule.setFinishTypeCode(productModule.getFinishTypeCode());
