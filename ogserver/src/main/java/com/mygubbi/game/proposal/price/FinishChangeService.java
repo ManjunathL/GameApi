@@ -184,9 +184,19 @@ public class FinishChangeService extends AbstractVerticle
                                 String colourValueModule=productLineItem.getColorgroupCode();
                                 String ValueModule=" ";
 
+                                java.util.Date currentDate = new java.util.Date(117, 8, 18, 0, 0, 00);
 
-                                    if (productModule.getFinishCode().equals(newCodeModule))
-                                    {
+                                if (priceDate.before(currentDate))
+                                {
+                                    productModule.setFinishType(productModule.getFinishType());
+                                    productModule.setFinishTypeCode(productModule.getFinishTypeCode());
+                                    productModule.setFinish(productModule.getFinish());
+                                    productModule.setFinishCode(productModule.getFinishCode());
+
+                                    productModule.setColorCode(productModule.getColorCode());
+                                }
+                                else {
+                                    if (productModule.getFinishCode().equals(newCodeModule)) {
                                         productModule.setFinishType(productModule.getFinishType());
                                         productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                         productModule.setFinish(productModule.getFinish());
@@ -195,25 +205,25 @@ public class FinishChangeService extends AbstractVerticle
                                         productModule.setColorCode(productModule.getColorCode());
 
 
-                                    }
-                                else {
+                                    } else {
                                         productModule.setFinishType(productModule.getFinishType());
                                         productModule.setFinishTypeCode(productModule.getFinishTypeCode());
-                                        productModule.setFinish("default ("+shutterFinishModule.getTitle()+")");
+                                        productModule.setFinish("default (" + shutterFinishModule.getTitle() + ")");
                                         productModule.setFinishCode(newCodeModule);
 
-                                        for(ColorMaster colorMaster1:colorMasterModule)
-                                        {
-                                            if(colourValueModule ==  null || colourValueModule.equals(colorMaster1.getCode()))
-                                            {
-                                                ValueModule="P";
+                                        for (ColorMaster colorMaster1 : colorMasterModule) {
+                                            if (colourValueModule == null || colourValueModule.equals(colorMaster1.getCode())) {
+                                                ValueModule = "P";
                                             }
                                         }
-                                        if(!ValueModule.equals("P"))
-                                        {
+                                        if (!ValueModule.equals("P")) {
                                             productLineItem.setColorGroupCode("");
                                         }
                                     }
+                                }
+
+
+
 
 
                                 ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
