@@ -199,7 +199,7 @@ public class FinishChangeService extends AbstractVerticle
                                 else {
                                         productModule.setFinishType(productModule.getFinishType());
                                         productModule.setFinishTypeCode(productModule.getFinishTypeCode());
-                                        productModule.setFinish(shutterFinishModule.getTitle());
+                                        productModule.setFinish("default ("+shutterFinishModule.getTitle()+")");
                                         productModule.setFinishCode(newCodeModule);
 
                                         for(ColorMaster colorMaster1:colorMasterModule)
