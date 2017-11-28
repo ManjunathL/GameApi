@@ -176,7 +176,7 @@ public class FinishChangeService extends AbstractVerticle
 
                             for (ProductModule productModule : productLineItem.getModules()) {
 
-                                String finishCodeModule = productLineItem.getFinishCode();
+                                String finishCodeModule = productModule.getFinishCode();
                                 OldToNewFinishMapping oldToNewFinishMappingModule = ModuleDataService.getInstance().getOldToNewMapping(finishCodeModule,proposalHeader.getPriceDate());
                                 String newCodeModule = oldToNewFinishMappingModule.getNewCode();
 
@@ -206,8 +206,42 @@ public class FinishChangeService extends AbstractVerticle
                                     productModule.setColorCode(productModule.getColorCode());
                                 }
                                 else {
-                                    if (productModule.getFinishCode().equals(newCodeModule) || !productModule.getFinishCode().equals(productLineItem.getFinishCode())) {
-                                        LOG.info("Inside IFF");
+                                    LOG.info("productLineItem.getFinishCode() = "+productLineItem.getFinishCode());
+                                    LOG.info("productModule.getFinishCode() = "+productModule.getFinishCode());
+                                    LOG.info("newCodeModule = "+newCodeModule);
+
+
+                                    if (!productLineItem.getFinishCode().equals(productModule.getFinishCode()) && productLineItem.getFinishCode().equals(newCodeModule)) {
+
+                                        if (productLineItem.getFinishCode().equals(newCodeModule)){
+                                            LOG.info("STEP 1");
+                                            productModule.setFinishType(productModule.getFinishType());
+                                            productModule.setFinishTypeCode(productModule.getFinishTypeCode());
+                                            productModule.setFinish("default (" + shutterFinishModule.getTitle() + ")");
+                                            productModule.setFinishCode(newCodeModule);
+
+                                            for (ColorMaster colorMaster1 : colorMasterModule) {
+                                                if (colourValueModule == null || colourValueModule.equals(colorMaster1.getCode())) {
+                                                    ValueModule = "P";
+                                                }
+                                            }
+                                            if (!ValueModule.equals("P")) {
+                                                productLineItem.setColorGroupCode("");
+                                            }
+                                        }
+                                        else {
+                                            LOG.info("STEP 1.1");
+                                            productModule.setFinishType(productModule.getFinishType());
+                                            productModule.setFinishTypeCode(productModule.getFinishTypeCode());
+                                            productModule.setFinish(productModule.getFinish());
+                                            productModule.setFinishCode(productModule.getFinishCode());
+
+                                            productModule.setColorCode(productModule.getColorCode());
+                                        }
+
+
+                                    } else {
+                                        LOG.info("STEP 2");
                                         productModule.setFinishType(productModule.getFinishType());
                                         productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                         productModule.setFinish(productModule.getFinish());
@@ -215,22 +249,29 @@ public class FinishChangeService extends AbstractVerticle
 
                                         productModule.setColorCode(productModule.getColorCode());
 
+                                    }
+                                }
+
+
+
+
+/*
+
+
+                                    if (productModule.getFinishCode().equals(newCodeModule)) {
+                                        LOG.info("Inside IFF");
+                                        if (!productModule.getFinishCode().equals(productLineItem.getFinishCode()))
+                                        {
+
+                                        }
+                                        else {
+
+                                        }
+
 
                                     } else {
                                         LOG.info("Inside Else");
-                                        productModule.setFinishType(productModule.getFinishType());
-                                        productModule.setFinishTypeCode(productModule.getFinishTypeCode());
-                                        productModule.setFinish("default (" + shutterFinishModule.getTitle() + ")");
-                                        productModule.setFinishCode(newCodeModule);
 
-                                        for (ColorMaster colorMaster1 : colorMasterModule) {
-                                            if (colourValueModule == null || colourValueModule.equals(colorMaster1.getCode())) {
-                                                ValueModule = "P";
-                                            }
-                                        }
-                                        if (!ValueModule.equals("P")) {
-                                            productLineItem.setColorGroupCode("");
-                                        }
                                     }
 
                                 }
@@ -239,6 +280,7 @@ public class FinishChangeService extends AbstractVerticle
 
 
 
+*/
 
                                 ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
                                         proposalHeader.getProjectCity(), proposalHeader.getPriceDate(),productLineItem,"C");
