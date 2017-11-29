@@ -153,8 +153,8 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 else
                                 {
                                     productModule.setFinishType(productModule.getFinishType());
-                                    productModule.setFinishTypeCode(productLineItem.getFinishType());
-                                    productModule.setFinish( oldToNewFinishMappingForModule.getTitle());
+                                    productModule.setFinishTypeCode(productModule.getFinishTypeCode());
+                                    productModule.setFinish(oldToNewFinishMappingForModule.getTitle());
                                 }
 
                                 productModule.setColorCode(productModule.getColorCode());
