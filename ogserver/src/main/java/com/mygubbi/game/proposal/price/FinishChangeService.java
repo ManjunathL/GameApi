@@ -197,7 +197,6 @@ public class FinishChangeService extends AbstractVerticle
 
                                 if (priceDate.before(currentDt2))
                                 {
-                                    LOG.info("Big IFF");
                                     productModule.setFinishType(productModule.getFinishType());
                                     productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                     productModule.setFinish(productModule.getFinish());
@@ -206,15 +205,9 @@ public class FinishChangeService extends AbstractVerticle
                                     productModule.setColorCode(productModule.getColorCode());
                                 }
                                 else {
-                                    LOG.info("productLineItem.getFinishCode() = "+productLineItem.getFinishCode());
-                                    LOG.info("productModule.getFinishCode() = "+productModule.getFinishCode());
-                                    LOG.info("newCodeModule = "+newCodeModule);
-
-
                                     if (!productLineItem.getFinishCode().equals(productModule.getFinishCode()) && productLineItem.getFinishCode().equals(newCodeModule)) {
 
                                         if (productLineItem.getFinishCode().equals(newCodeModule)){
-                                            LOG.info("STEP 1");
                                             productModule.setFinishType(productModule.getFinishType());
                                             productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                             productModule.setFinish("default (" + shutterFinishModule.getTitle() + ")");
@@ -230,7 +223,6 @@ public class FinishChangeService extends AbstractVerticle
                                             }
                                         }
                                         else {
-                                            LOG.info("STEP 1.1");
                                             productModule.setFinishType(productModule.getFinishType());
                                             productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                             productModule.setFinish(productModule.getFinish());
@@ -241,7 +233,6 @@ public class FinishChangeService extends AbstractVerticle
 
 
                                     } else {
-                                        LOG.info("STEP 2");
                                         productModule.setFinishType(productModule.getFinishType());
                                         productModule.setFinishTypeCode(productModule.getFinishTypeCode());
                                         productModule.setFinish(productModule.getFinish());
@@ -252,37 +243,7 @@ public class FinishChangeService extends AbstractVerticle
                                     }
                                 }
 
-
-
-
-/*
-
-
-                                    if (productModule.getFinishCode().equals(newCodeModule)) {
-                                        LOG.info("Inside IFF");
-                                        if (!productModule.getFinishCode().equals(productLineItem.getFinishCode()))
-                                        {
-
-                                        }
-                                        else {
-
-                                        }
-
-
-                                    } else {
-                                        LOG.info("Inside Else");
-
-                                    }
-
-                                }
-                                LOG.info("AFTER :: "+productModule.getMGCode()+", "+productModule.getFinishCode()+", "+productModule.getFinish()+", "+productModule.getFinishType()+", "+productModule.getFinishTypeCode());
-
-
-
-
-*/
-
-                                ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
+                             ModulePriceHolder priceHolder = new ModulePriceHolder(productModule,
                                         proposalHeader.getProjectCity(), proposalHeader.getPriceDate(),productLineItem,"C");
                                 priceHolder.prepare();
                                 priceHolder.calculateTotalCost();
