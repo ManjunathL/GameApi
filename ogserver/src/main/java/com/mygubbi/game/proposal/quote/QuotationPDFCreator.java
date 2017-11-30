@@ -683,24 +683,36 @@ public class QuotationPDFCreator
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
-            B1Table = new PdfPTable(columnWidths1);
+            p=new Paragraph(" ");
+            document.add(p);
+
+            float[] addonsWidths1 = {1,7,1,1,1,1};
+            B1Table = new PdfPTable(addonsWidths1);
             B1Table.setWidthPercentage(100);
 
             PdfPCell cel1=new PdfPCell();
             p = new Paragraph("APPLIANCES,SERVICES,OTHERS \n ADD ON ACCESSORIES  ",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             cel1.addElement(p);
-            cel1.setColspan(5);
+            cel1.setColspan(6);
             cel1.setBorder(Rectangle.NO_BORDER);
             B1Table.addCell(cel1);
 
-            PdfPCell B1Cell1 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B1Cell2 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B1Cell3 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B1Cell4 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B1Cell5 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B1Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
+            B1Cell1.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B1Cell2 = new PdfPCell(new Paragraph("Description",fsize1));
+                    B1Cell2.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B1Cell6 = new PdfPCell(new Paragraph("UOM",fsize1));
+                    B1Cell6.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B1Cell3 = new PdfPCell(new Paragraph("QTY",fsize1));
+                    B1Cell3.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B1Cell4 = new PdfPCell(new Paragraph("PRICE",fsize1));
+                    B1Cell4.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B1Cell5 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
+                    B1Cell5.setBackgroundColor(BaseColor.ORANGE);
             B1Table.addCell(B1Cell1);
             B1Table.addCell(B1Cell2);
+            B1Table.addCell(B1Cell6);
             B1Table.addCell(B1Cell3);
             B1Table.addCell(B1Cell4);
             B1Table.addCell(B1Cell5);
@@ -708,107 +720,139 @@ public class QuotationPDFCreator
             this.fillAddons(B1Table, this.quoteData.getAccessories(), "No additional accessories.");
             document.add(B1Table);
 
-            PdfPTable B2Table = new PdfPTable(columnWidths1);
+            PdfPTable B2Table = new PdfPTable(addonsWidths1);
             B2Table.setWidthPercentage(100);
 
             PdfPCell cel2=new PdfPCell();
             p = new Paragraph("APPLIANCES",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             cel2.addElement(p);
-            cel2.setColspan(5);
+            cel2.setColspan(6);
             cel2.setBorder(Rectangle.NO_BORDER);
             B2Table.addCell(cel2);
 
-            PdfPCell B2Cell1 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B2Cell2 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B2Cell3 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B2Cell4 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B2Cell5 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B2Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
+                    B2Cell1.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B2Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
+            PdfPCell B2Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
+            PdfPCell B2Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
+            PdfPCell B2Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
+            PdfPCell B2Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
+                    B2Cell2.setBackgroundColor(BaseColor.ORANGE);
+                    B2Cell3.setBackgroundColor(BaseColor.ORANGE);
+                    B2Cell4.setBackgroundColor(BaseColor.ORANGE);
+                    B2Cell5.setBackgroundColor(BaseColor.ORANGE);
+                    B2Cell6.setBackgroundColor(BaseColor.ORANGE);
             B2Table.addCell(B2Cell1);
             B2Table.addCell(B2Cell2);
             B2Table.addCell(B2Cell3);
             B2Table.addCell(B2Cell4);
             B2Table.addCell(B2Cell5);
+            B2Table.addCell(B2Cell6);
 
             this.fillAddons(B2Table, this.quoteData.getAppliances(), "No additional appliances.");
             document.add(B2Table);
 
-            PdfPTable B3Table = new PdfPTable(columnWidths1);
+            PdfPTable B3Table = new PdfPTable(addonsWidths1);
             B3Table.setWidthPercentage(100);
 
             PdfPCell cel3=new PdfPCell();
             p = new Paragraph("COUNTER TOP",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             cel3.addElement(p);
-            cel3.setColspan(5);
+            cel3.setColspan(6);
             cel3.setBorder(Rectangle.NO_BORDER);
             B3Table.addCell(cel3);
 
-            PdfPCell B3Cell1 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B3Cell2 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B3Cell3 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B3Cell4 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B3Cell5 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B3Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
+            PdfPCell B3Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
+            PdfPCell B3Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
+            PdfPCell B3Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
+            PdfPCell B3Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
+            PdfPCell B3Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
+                    B3Cell1.setBackgroundColor(BaseColor.ORANGE);
+                    B3Cell2.setBackgroundColor(BaseColor.ORANGE);
+                    B3Cell3.setBackgroundColor(BaseColor.ORANGE);
+                    B3Cell4.setBackgroundColor(BaseColor.ORANGE);
+                    B3Cell5.setBackgroundColor(BaseColor.ORANGE);
+                    B3Cell6.setBackgroundColor(BaseColor.ORANGE);
             B3Table.addCell(B3Cell1);
         B3Table.addCell(B3Cell2);
         B3Table.addCell(B3Cell3);
         B3Table.addCell(B3Cell4);
         B3Table.addCell(B3Cell5);
+        B3Table.addCell(B3Cell6);
 
         this.fillAddons(B3Table, this.quoteData.getCounterTops(), "No countertops.");
         document.add(B3Table);
 
-            PdfPTable B4Table = new PdfPTable(columnWidths1);
+            PdfPTable B4Table = new PdfPTable(addonsWidths1);
         B4Table.setWidthPercentage(100);
 
             PdfPCell cel4=new PdfPCell();
             p = new Paragraph("SERVICES",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             cel4.addElement(p);
-            cel4.setColspan(5);
+            cel4.setColspan(6);
             cel4.setBorder(Rectangle.NO_BORDER);
             B4Table.addCell(cel4);
 
-            PdfPCell B4Cell1 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B4Cell2 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B4Cell3 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B4Cell4 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B4Cell5 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B4Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
+            PdfPCell B4Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
+            PdfPCell B4Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
+            PdfPCell B4Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
+            PdfPCell B4Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
+            PdfPCell B4Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
+                    B4Cell1.setBackgroundColor(BaseColor.ORANGE);
+                    B4Cell2.setBackgroundColor(BaseColor.ORANGE);
+                    B4Cell3.setBackgroundColor(BaseColor.ORANGE);
+                    B4Cell4.setBackgroundColor(BaseColor.ORANGE);
+                    B4Cell5.setBackgroundColor(BaseColor.ORANGE);
+                    B4Cell6.setBackgroundColor(BaseColor.ORANGE);
         B4Table.addCell(B4Cell1);
         B4Table.addCell(B4Cell2);
         B4Table.addCell(B4Cell3);
         B4Table.addCell(B4Cell4);
         B4Table.addCell(B4Cell5);
+        B4Table.addCell(B4Cell6);
 
         this.fillAddons(B4Table, this.quoteData.getServices(), "No additional services.");
         document.add(B4Table);
 
-            PdfPTable B5Table = new PdfPTable(columnWidths1);
+            PdfPTable B5Table = new PdfPTable(addonsWidths1);
             B5Table.setWidthPercentage(100);
 
             PdfPCell cel5=new PdfPCell();
             p = new Paragraph("LOOSE FURNITURE",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
             cel5.addElement(p);
-            cel5.setColspan(5);
+            cel5.setColspan(6);
             cel5.setBorder(Rectangle.NO_BORDER);
             B5Table.addCell(cel5);
 
-            PdfPCell B5Cell1 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B5Cell2 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B5Cell3 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B5Cell4 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B5Cell5 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B5Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
+            PdfPCell B5Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
+            PdfPCell B5Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
+            PdfPCell B5Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
+            PdfPCell B5Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
+            PdfPCell B5Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
+                    B5Cell1.setBackgroundColor(BaseColor.ORANGE);
+                    B5Cell2.setBackgroundColor(BaseColor.ORANGE);
+                    B5Cell3.setBackgroundColor(BaseColor.ORANGE);
+                    B5Cell4.setBackgroundColor(BaseColor.ORANGE);
+                    B5Cell5.setBackgroundColor(BaseColor.ORANGE);
+                    B5Cell6.setBackgroundColor(BaseColor.ORANGE);
             B5Table.addCell(B5Cell1);
             B5Table.addCell(B5Cell2);
             B5Table.addCell(B5Cell3);
             B5Table.addCell(B5Cell4);
             B5Table.addCell(B5Cell5);
+            B5Table.addCell(B5Cell6);
 
             this.fillAddons(B5Table, this.quoteData.getLooseFurniture(), "No additional Loose Furniture.");
             document.add(B5Table);
 
-            PdfPTable B6Table = new PdfPTable(columnWidths1);
+            PdfPTable B6Table = new PdfPTable(addonsWidths1);
             B6Table.setWidthPercentage(100);
 
             PdfPCell cell6=new PdfPCell();
@@ -816,21 +860,29 @@ public class QuotationPDFCreator
                     p.setAlignment(Element.ALIGN_LEFT);
             p.setAlignment(Element.ALIGN_LEFT);
             cell6.addElement(p);
-            cell6.setColspan(5);
-            cell6.setColspan(5);
+            cell6.setColspan(6);
+            cell6.setColspan(6);
             cell6.setBorder(Rectangle.NO_BORDER);
             B6Table.addCell(cell6);
 
-            PdfPCell B6Cell1 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B6Cell2 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B6Cell3 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B6Cell4 = new PdfPCell(new Paragraph("",fsize));
-            PdfPCell B6Cell5 = new PdfPCell(new Paragraph("",fsize));
+            PdfPCell B6Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
+            PdfPCell B6Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
+            PdfPCell B6Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
+            PdfPCell B6Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
+            PdfPCell B6Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
+            PdfPCell B6Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
+                    B6Cell1.setBackgroundColor(BaseColor.ORANGE);
+                    B6Cell2.setBackgroundColor(BaseColor.ORANGE);
+                    B6Cell3.setBackgroundColor(BaseColor.ORANGE);
+                    B6Cell4.setBackgroundColor(BaseColor.ORANGE);
+                    B6Cell5.setBackgroundColor(BaseColor.ORANGE);
+                    B6Cell6.setBackgroundColor(BaseColor.ORANGE);
             B6Table.addCell(B6Cell1);
             B6Table.addCell(B6Cell2);
             B6Table.addCell(B6Cell3);
             B6Table.addCell(B6Cell4);
             B6Table.addCell(B6Cell5);
+            B6Table.addCell(B6Cell6);
 
             this.fillAddons(B6Table, this.quoteData.getCustomAddons(), "No additional Custom Addon.");
             document.add(B6Table);
@@ -1410,6 +1462,31 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_RIGHT);
         cell.addElement(p);
         cell.setColspan(3);
+        tabname.addCell(cell);
+    }
+
+    private void createProductTitleRowForAddon(PdfPTable tabname,String index, String title)
+    {
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+
+        PdfPCell cell1=new PdfPCell();
+        Paragraph Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        PdfPCell cell2=new PdfPCell();
+        Paragraph paragraph=new Paragraph(title,size1);
+        cell2.addElement(paragraph);
+        tabname.addCell(cell2);
+
+
+        PdfPCell cell = new PdfPCell();
+        Paragraph p=new Paragraph("");
+        p.setAlignment(Element.ALIGN_RIGHT);
+        cell.addElement(p);
+        cell.setColspan(4);
         tabname.addCell(cell);
     }
 
@@ -2066,6 +2143,47 @@ public class QuotationPDFCreator
         cell=new PdfPCell(new Paragraph(title,fsize));
         tabname.addCell(cell);
     }
+    private void createRowAndFillDataForAddon(PdfPTable tabname,String index, String title,String UOM, Double quantity, Double amount, Double total)
+    {
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        cell=new PdfPCell(new Paragraph(title,fsize));
+        tabname.addCell(cell);
+
+        PdfPCell cell5=new PdfPCell();
+        Pindex=new Paragraph(UOM,fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell5.addElement(Pindex);
+        tabname.addCell(cell5);
+
+        PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+
+        PdfPCell cell4 = new PdfPCell();
+        Pindex = new Paragraph(this.getRoundOffValue(String.valueOf(amount.intValue())), fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
+        PdfPCell cell3 = new PdfPCell();
+        double amt = quantity * amount;
+        Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf((int) amt)), fsize);
+        Pamt.setAlignment(Element.ALIGN_RIGHT);
+        cell3.addElement(Pamt);
+        tabname.addCell(cell3);
+    }
     private void createRowAndFillData(PdfPTable tabname,String index, String title, Double quantity, Double amount, Double total)
     {
         PdfPCell cell;
@@ -2285,22 +2403,16 @@ public class QuotationPDFCreator
         {
             //LOG.info("category " +addon.getCategoryCode());
             if(("Custom Addon").equals (addon.getCategoryCode()))
-                this.createRowAndFillData(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
+                this.createRowAndFillDataForAddon(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getUom(),addon.getQuantity(), addon.getRate(), addon.getAmount());
             else if(("Appliances").equals(addon.getCategoryCode()))
             {
-                this.createProductTitleRow(tabname,String.valueOf(index),addon.getExtendedTitle());
-                this.createRowAndFillData(tabname, null,"Specification: " +addon.getTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-               // LOG.info("addon remarks " +addon.getREMARKS());
+                this.createProductTitleRowForAddon(tabname,String.valueOf(index),addon.getExtendedTitle());
+                this.createRowAndFillDataForAddon(tabname, null,"Specification: " +addon.getTitle(),addon.getUom(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             }
             else
             {
-                this.createProductTitleRow(tabname,String.valueOf(index),addon.getExtendedTitle());
-                this.createRowAndFillData(tabname, null,"Specification: " +addon.getTitle()+ "\nLocation: " +addon.getREMARKS() , addon.getQuantity(), addon.getRate(), addon.getAmount());
-                //LOG.info("addon remarks " +addon.getREMARKS());
-                //this.createRowAndFillData(tabname, String.valueOf(index), addon.getExtendedTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-                /*LOG.info("addon title " +addon.getTitle());
-                this.specificationRow(tabname, "", addon.getTitle());
-                this.specificationRow(tabname,"","");*/
+                this.createProductTitleRowForAddon(tabname,String.valueOf(index),addon.getExtendedTitle());
+                this.createRowAndFillDataForAddon(tabname, null,"Specification: " +addon.getTitle()+ "\nLocation: " +addon.getREMARKS() ,addon.getUom(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             }
             index++;
         }
