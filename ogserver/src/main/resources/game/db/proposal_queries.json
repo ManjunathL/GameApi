@@ -661,14 +661,14 @@
       "id": "proposal.versions.list.forPriceUpdate.select",
       "type": "select",
       "table": "version_master",
-      "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' order by vm.businessDate desc,vm.proposalId desc, vm.version",
+      "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted'  and vm.version < '2.0' and vm.version not in ('1.0','2.0') and vm.proposalId > 140 group by vm.proposalId,vm.version,vm.amount,vm.discountPercentage,vm.discountAmount,vm.finalAmount order by vm.businessDate desc,vm.proposalId desc, vm.version",
       "params": []
     },
     {
       "id": "proposal_version.updatedProposals.select",
       "type": "select",
       "table": "version_master",
-          "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > 0 order by vm.proposalId desc, vm.version limit 5",
+          "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and vm.proposalId > 0 order by vm.proposalId desc, vm.version",
         "params": [],
       "jsonfields":[]
     },
