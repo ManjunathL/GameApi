@@ -1050,6 +1050,28 @@ public class QuotationPDFCreator
             document.add(p);
         }
 
+                    p=new Paragraph(" ");
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    p=new Paragraph(" ");
+                    document.add(p);
+
+                    Image img = Image.getInstance("MailFooter-04.jpg");
+                    img.setAlignment(Image.MIDDLE);
+                    //img.scaleAbsolute(100,50);
+                    //img.setWidthPercentage(5);
+                    img.scaleToFit(500f, 500f);
+                    document.add(img);
+
         if(date.after(currentDate) && quoteData.getWorksContractFlag().equals("Yes")) {
             float[] gstcolumnWidths1 = {1, 4, 1, 1, 1, 1};
             float[] gstProductCategory = {1, 1, 1, 1, 1, 1,1};
