@@ -2445,9 +2445,10 @@ public class QuotationPDFCreator
         PdfPCell cell = new PdfPCell();
         cell.addElement(new Paragraph(message,fsize));
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        cell.setColspan(5);
+        cell.setColspan(6);
         tabname.addCell(cell);
     }
+
 
     public static String getRoundOffValue(String value)
     {
