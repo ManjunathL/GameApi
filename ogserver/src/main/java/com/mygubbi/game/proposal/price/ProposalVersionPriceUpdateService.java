@@ -103,6 +103,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
 
                         double oldProductCost = 0;
                         double totalProposalVersionProductCost = 0;
+                        double productCostWoAccessories = 0;
 
                         if (proposalHeader.getPriceDate() != null) {
                             proposalHeader.setPriceDate(priceDate);
@@ -177,6 +178,17 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 totalProductCost += productAddon.getAmount();
                             }
                             totalProductCost = ((int) totalProductCost);
+
+
+                            PriceMaster lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, proposalHeader.getProjectCity());
+                            double rateForLconnectorPrice = lConnectorRate.getPrice();
+
+                            if (productLineItem.getHandletypeSelection() != null) {
+                                if (productLineItem.getHandletypeSelection().equals("Gola Profile") && productLineItem.getNoOfLengths() != 0) {
+                                    totalProductCost += (productLineItem.getNoOfLengths() * rateForLconnectorPrice);
+                                    productCostWoAccessories += (productLineItem.getNoOfLengths() * rateForLconnectorPrice);
+                                }
+                            }
 
                             productLineItem.setAmount(totalProductCost);
 
@@ -261,6 +273,9 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 updateAddonPrice(addonLineItem);
                             }
                         }
+
+
+
                         double totalVersionAmount = proposalVersion.getAmount() + newTotalVersionAddonCost;
                         proposalVersion.setAmount(totalVersionAmount);
                         double finalAmount = proposalVersion.getAmount() - proposalVersion.getDiscountAmount();
