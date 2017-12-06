@@ -946,6 +946,10 @@ public class ModulePriceHolder
 
     }
 
+    public double getModuleArea() {
+        return this.moduleArea;
+    }
+
     public void calculateTotalCost(Module mgModule, RateCard labourRateCard, RateCard loadingFactorCard)
     {
         this.moduleArea = productModule.getAreaOfModuleInSft();
