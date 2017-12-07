@@ -131,7 +131,6 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
         series="A." +String.valueOf(sequenceNumber) + ".";
         currentRow = this.fillAssembledProductUnits(product, currentRow,series);
-        //currentRow++;
 
         amt=product.getAmountWithoutAddons();
         String unitSequenceLetter="";
@@ -148,31 +147,8 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 unitSequenceLetter = ALPHABET_SEQUENCE[wunitSequence];
             }
         }
-        LOG.info("unit sequence for acc " +unitSequenceLetter);
         currentRow = this.fillAssembledProductAccessories(product.getAccessories(), currentRow, unitSequenceLetter);
 
-        //this.createRowAndFillData(currentRow,"Total Cost",product.getAmountWithoutAddons());
-
-        /*this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
-        this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));*/
-
-        /*currentRow++;
-        LOG.info("After Merge2 " +currentRow);
-        //LOG.info("merge 3 " +this.quoteSheet.getRow(currentRow + 1));
-        this.createRowAndFillData(currentRow,"Accsory Cost",product.getAmountWithoutAddons());
-
-        currentRow++;
-        this.createRowAndFillData(currentRow,"WoodWork Cost",product.getAmountWithoutAddons());*/
-
-        //this.createCellWithData(this.quoteSheet.getRow(currentRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
-        //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));
-        //currentRow++;
-
-        //this.createCellWithData(this.quoteSheet.getRow(startRow + 1), AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, product.getAmountWithoutAddons());
-        //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow + 1, currentRow, AMOUNT_CELL, AMOUNT_CELL));
-
-       // currentRow++;
-        /*this.createRow(currentRow, this.quoteSheet);*/
         return currentRow;
     }
 
@@ -185,6 +161,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
 
 
         int rowValue=currentRow;
+        String Wcaption="";
         String baseDimesion="",WallDimesion="",TallDimesion="",loftDimesion="",wardrobeDimesion="";
         int KBmodulecount=0,KWmoduleCount=0,KTmoduleCount=0,KLmoduleCount=0,SW1modulecount=0,WWmodulecount=0,WW1modulecount=0;
         String KBbasecarcass="",KWbasecarcass="",KTbasecarcass="",KLbasecarcass="",SW1basecarcass="",WWbasecarcass="",WW1basecarcass="";
@@ -374,7 +351,17 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                         WWfinishtype = product.getProduct().getFinishType();
                         WWamount += unit.amount;
                         captionWardrobe="Wardrobe";
-                        if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels"))) {
+                        if(Wcaption.contains("Sliding Wardrobe"))
+                        {
+                            captionWardrobe = Wcaption;
+                        }else if (Wcaption.equals("Aristo Wardrobe"))
+                        {
+                            captionWardrobe="Aristo Wardrobe";
+                        }else
+                        {
+                            captionWardrobe="Hinged Wardrobe";
+                        }
+                        if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels") || unit.moduleCategory.contains ("H - Panel"))) {
                             String width = unit.getDimensions();
                             wardrobewidth = wardrobewidth + " , " + width;
                             kwaList.add(new String(width));
@@ -680,7 +667,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 LOG.debug("Accessory :" + accessory.toString());
                 currentRow++;
                 LOG.info("Acc" +accessory.category + "ACC title" +accessory.title);
-                this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, null, null, null);
+                this.createRowAndFillData(currentRow, ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity, null, null);
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
             }
@@ -815,6 +802,16 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
     }
 
+    private void createRowAndFillDataForAddons(int rowNum, String index, String title, Double quantity, String uom, Double total)
+    {
+        Row dataRow = this.createRow(rowNum, this.quoteSheet);
+        this.createCellWithData(dataRow, INDEX_CELL, Cell.CELL_TYPE_STRING, index).setCellStyle(this.styles.getIndexStyle());
+        this.createCellWithData(dataRow, TITLE_CELL, Cell.CELL_TYPE_STRING, title);
+        this.createCellWithData(dataRow, QUANTITY_CELL, Cell.CELL_TYPE_NUMERIC, quantity);
+        this.createCellWithData(dataRow, RATE_CELL, Cell.CELL_TYPE_STRING, uom);
+        this.createCellWithData(dataRow, AMOUNT_CELL, Cell.CELL_TYPE_NUMERIC, total);
+    }
+
     private void createRowAndFillData(int rowNum,String title,Double amount)
     {
         String amt=this.getRoundOffValue(String.valueOf(amount.intValue()));
@@ -922,13 +919,13 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
         {
             if(("Custom Addon").equals (addon.getCategoryCode())) {
                 //this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(), addon.getRate(), addon.getAmount());
-                this.createRowAndFillData(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(),null, null);
+                this.createRowAndFillDataForAddons(currentRow, String.valueOf(index), addon.getCustomTitle(), addon.getQuantity(),addon.getUom(), null);
             }else if(("Appliances").equals(addon.getCategoryCode()))
             {
                 this.createProductTitleRow(currentRow,String.valueOf(index), addon.getExtendedTitle());
                 currentRow++;
                 //this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
-                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),null, null);
+                this.createRowAndFillDataForAddons(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getUom(), null);
                 currentRow++;
             }
             else
@@ -936,7 +933,7 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
                 this.createProductTitleRow(currentRow,String.valueOf(index), addon.getExtendedTitle());
                 currentRow++;
                 //this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(),addon.getRate(), addon.getAmount());
-                this.createRowAndFillDataNew(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(), null,null);
+                this.createRowAndFillDataForAddons(currentRow,null,"Specification: " +addon.getTitle(),addon.getQuantity(), addon.getUom(),null);
 
                 currentRow++;
                 this.createRowAndFillData(currentRow,null,"Location: " +addon.getREMARKS());

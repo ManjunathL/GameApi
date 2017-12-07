@@ -54,7 +54,7 @@ public class ProposalHeader extends JsonObject
     private static final String CEMAIL =        "cemail" ;
     private static final String CPHONE2 =       "cphone2" ;
     private static final String DESIGNER_PHONE ="designerPhone" ;
-
+    private static final String  NO_OF_DAYSFORWORKCOMPLETION="noOfDaysForWorkCompletion";
 
 
     private Date priceDate;
@@ -129,6 +129,7 @@ public class ProposalHeader extends JsonObject
     public String getBeforeProductionSpecification() {
         return this.getString(BEFORE_PRODUCTION_SPECIFICATION);
     }
+    public int getNoOfDaysforworkcompletion() {return this.getInteger(NO_OF_DAYSFORWORKCOMPLETION);}
     public ProposalHeader setSowRemarksV1(String remarksV1)
     {
         put(remarksV1,SOW_REMARKS_V1);
@@ -141,6 +142,11 @@ public class ProposalHeader extends JsonObject
         return this;
     }
 
+    public ProposalHeader setNoOfDaysforworkcompletion(String noOfDaysforworkcompletion)
+    {
+        put(noOfDaysforworkcompletion,NO_OF_DAYSFORWORKCOMPLETION);
+        return this;
+    }
     public String getcAddress1() {
         return this.getString(CADDRESS1);
     }
@@ -232,8 +238,6 @@ public class ProposalHeader extends JsonObject
         else return this.getInteger(FROM_PROPOSAL); }
 
     public  String getOfferType() {if(this.containsKey(OFFER_TYPE) )return this.getString(OFFER_TYPE);return "";}
-
-
 
 }
 

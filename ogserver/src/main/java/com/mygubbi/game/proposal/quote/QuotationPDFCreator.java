@@ -64,6 +64,7 @@ public class QuotationPDFCreator
     public static final String TEXT = "this string contains special characters like this  \u2208, \u2229, \u2211, \u222b, \u2206";
 
 
+
     PdfPTable itemsTable,B1Table;
     QuoteData quoteData;
 
@@ -85,7 +86,7 @@ public class QuotationPDFCreator
     double producttotalPrice=0,producttotalDAP=0,producttotalTaxAmt=0,producttotalPriceAfterTax=0;
     double addontotalproductPrice=0,addontotalDAP=0,addontotalTaxAmt=0,addontotalPriceAfterTax=0;
     double set2totalproductPrice=0,set2totalDAP=0,set2totalTaxAmt=0,set2totalPriceAfterTax=0;
-
+    int noOfDaysWorkCompletion;
     List<GSTForProducts> nonMovableList=new ArrayList<>();
     List<GSTForProducts> movableList=new ArrayList<>();
     List<GSTForProducts> scwList=new ArrayList<>();
@@ -104,29 +105,24 @@ public class QuotationPDFCreator
         this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
-        LOG.info("curremt date " +currentDate +" priceDate " +date);
-        LOG.info("date.agfter(currentDate)" +date.after(currentDate));
+        this.noOfDaysWorkCompletion=proposalHeader.getNoOfDaysforworkcompletion();
         if(date.after(currentDate))
         {
-            LOG.info("inside if of current date");
             getProducts();
         }
-
     }
 
     public void  createpdf(String destination, boolean isValid_Sow)
     {
 
                 try {
-        //PdfDocument pdfDocument=new PdfDocument(new PdfWriter(destination));
-
-        Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(destination));
-        writer.setPdfVersion(PdfWriter.VERSION_1_7);
-        writer.createXmpMetadata();
-            document.open();
-            writer.setPageEvent(new CustomBorder());
-            Paragraph p;
+                    Document document = new Document();
+                    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(destination));
+                    writer.setPdfVersion(PdfWriter.VERSION_1_7);
+                    writer.createXmpMetadata();
+                    document.open();
+                    writer.setPageEvent(new CustomBorder());
+                    Paragraph p;
 
             char checked='\u00FE';
             char unchecked='\u00A8';
@@ -135,16 +131,7 @@ public class QuotationPDFCreator
                 Image img = Image.getInstance("logo.png");
                 img.setAlignment(Image.MIDDLE);
                 img.scaleAbsolute(100,50);
-                //img.setWidthPercentage(5);
                 document.add(img);
-
-                /*Phrase pph1=new Phrase();
-                pph1.add(new Chunk("Mygubbi.com ",bookingformfsize1));
-                pph1.add(new Chunk("#38, Maini Sadan, 7th cross, Lavelle Road, Bangalore 560 001 Phone number: 080 22555789",bookingformfsize));
-                p=new Paragraph();
-                p.setAlignment(Element.ALIGN_CENTER);
-                p.add(pph1);
-                document.add(p);*/
 
                 if(proposalHeader.getProjectCity().equals("Chennai"))
                 {
@@ -192,10 +179,6 @@ public class QuotationPDFCreator
                     document.add(p);
                 }
 
-               /* p = new Paragraph("Mygubbi.com #38, Maini Sadan, 7th cross, Lavelle Road, Bangalore 560 001 Phone number: 080 22555789", fsize);
-                p.setAlignment(Element.ALIGN_CENTER);
-                document.add(p);*/
-
                 p = new Paragraph(" ");
                 document.add(p);
 
@@ -210,14 +193,9 @@ public class QuotationPDFCreator
                 p.setAlignment(Element.ALIGN_RIGHT);
                 document.add(p);
 
-                //p=new Paragraph("Name:Mr/Mrs/Ms/Dr_____________________________________________________________________________",bookingformfsize);
                 p = new Paragraph("Name : Mr/Mrs/Ms/Dr : " + " " + proposalHeader.getName(), bookingformfsize);
                 document.add(p);
 
-                /*p = new Paragraph(" ");
-                document.add(p);*/
-
-                //p=new Paragraph("Quotation Id:__________________________________________________________________________________",bookingformfsize);
                 p = new Paragraph("Quotation ID: " + proposalHeader.getQuoteNumNew(), bookingformfsize);
                 document.add(p);
 
@@ -234,21 +212,16 @@ public class QuotationPDFCreator
                 Appdetails.addCell(scell1);
                 document.add(Appdetails);
 
-               /* p = new Paragraph("Application Details", headingSize);
-                p.setAlignment(Element.ALIGN_CENTER);
-                document.add(p);*/
 
                 p = new Paragraph(" ");
                 document.add(p);
 
-                //p=new Paragraph("Project Name:________________________________Apartment No:____________Floor No: __________",bookingformfsize);
                 p = new Paragraph("Project Name : " + proposalHeader.getProjectName() + "                                                                                    " +" Apartment No : __________         Floor No : __________ ", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
                 document.add(p);
 
-                LOG.info("proposalHeader.getProjectAddress1() "+proposalHeader.getProjectAddress1());
                 if(proposalHeader.getProjectAddress1()== "null" || proposalHeader.getProjectAddress1().length() == 0 )
                 {
                     p=new Paragraph("Project Address : __________________________________________________________________________________________________",bookingformfsize);
@@ -286,7 +259,6 @@ public class QuotationPDFCreator
                 ph2.add(new Chunk("  o  ", zapfdingbats));
                 p=new Paragraph();
                 p.add(ph2);
-                //p = new Paragraph("Profession:  " + "Salarised ____ " + " " + "Business_____ " + " " + "Others____", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -310,7 +282,6 @@ public class QuotationPDFCreator
                 ph3.add(new Chunk("  o  ", zapfdingbats));
                 p=new Paragraph();
                 p.add(ph3);
-               // p = new Paragraph("Professional Details: IT____" + "  " + "ITES/BPO______ " + " " + "Doctor_____ " + " " + "Govt. Services/PSU___", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -325,7 +296,6 @@ public class QuotationPDFCreator
                 ph4.add(new Chunk("  ______________________  ", bookingformfsize));
                 p=new Paragraph();
                 p.add(ph4);
-                //p = new Paragraph("Banking & Finance_____ " + " " + "Manufacturing/Distribution______ " + " " + "Others,please specify:________", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -345,7 +315,6 @@ public class QuotationPDFCreator
                 ph5.add(new Chunk("  o  ", zapfdingbats));
                 p=new Paragraph();
                 p.add(ph5);
-                //p = new Paragraph("Annual Income (in RS. Lacs) Less than 15 __" + "16-25__" + " " + "26-35___" + "36-50___" + "51 & above__", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -387,10 +356,6 @@ public class QuotationPDFCreator
                 p = new Paragraph(" ");
                 document.add(p);
 
-                /*p = new Paragraph("Order Details", headingSize);
-                p.setAlignment(Element.ALIGN_CENTER);
-                document.add(p);*/
-
                 PdfPTable orderdetails = new PdfPTable(1);
                 orderdetails.setWidthPercentage(100);
                 p=new Paragraph("ORDER DETAILS",headingSize);
@@ -404,48 +369,27 @@ public class QuotationPDFCreator
                 p = new Paragraph(" ");
                 document.add(p);
 
-               /* p = new Paragraph("Order Value : ____________________________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);*/
-
-                /*p = new Paragraph(" ");
-                document.add(p);*/
-
-                //p=new Paragraph("Sales Order ID:_________________________________________________________________________________",bookingformfsize);
                 p = new Paragraph("Sales Order ID : " + proposalHeader.getCrmId(), bookingformfsize);
                 document.add(p);
-
-                /*p = new Paragraph(" ");
-                document.add(p);*/
 
                 p = new Paragraph("Order Date : ____________________________________________________________________________________________________________________", bookingformfsize);
                 document.add(p);
 
-               /* p = new Paragraph(" ");
-                document.add(p);*/
-
                 p = new Paragraph("Remarks : ______________________________________________________________________________________________________________________", bookingformfsize);
                 document.add(p);
 
-               /* p = new Paragraph(" ");
-                document.add(p);*/
-                //p=new Paragraph("Total Quotation Value:___________________________________________________________________________",bookingformfsize);
                 Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
 
                 Double res = val - val % 10;
                 p = new Paragraph("Total Quotation Value Rs. " + this.getRoundOffValue(String.valueOf(res.intValue())), bookingformfsize);
                 document.add(p);
-
-               /* p = new Paragraph(" ");
-                document.add(p);*/
             }
 
-            document.newPage(); //new page
+            document.newPage();
 
             Image img1 = Image.getInstance("myGubbi_Logo.png");
             img1.setWidthPercentage(50);
             document.add(img1);
-            //Paragraph p;
-            LOG.info("quoteData.getBookingFormFlag()" +quoteData.getBookingFormFlag()+ " || quotedata.getworksContractFlag" +quoteData.getWorksContractFlag());
 
             if(proposalHeader.getProjectCity().equals("Chennai"))
             {
@@ -550,7 +494,6 @@ public class QuotationPDFCreator
             }
             if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
             {
-               // LOG.info("packge value " +proposalHeader.getPackageFlag());
                 return;
             }
             float[] columnWidths2 = {4,2};
@@ -598,16 +541,7 @@ public class QuotationPDFCreator
             table.addCell(phrase3);
             table.addCell(phrase5);
             table.addCell(phrase4);
-
-            /*PdfPTable pdfPTable=new PdfPTable(1);
-            pdfPTable.setWidthPercentage(100);
-            Phrase phrase6 = new Phrase();
-            phrase6.add(new Chunk("Project Address: ",fsize1));
-            phrase6.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
-            pdfPTable.addCell(phrase6);*/
-
             document.add(table);
-            //document.add(pdfPTable);
 
             p = new Paragraph("      ");
             p.setAlignment(Element.ALIGN_LEFT);
@@ -626,7 +560,6 @@ public class QuotationPDFCreator
             stable.addCell(scell3);
 
             Font ffsize=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
-            LOG.info("ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME " +ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME);
             PdfPCell scell4 = new PdfPCell(new Paragraph(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/"),ffsize));
             ffsize.setColor(BaseColor.BLUE);
             PdfPCell scell5 = new PdfPCell(new Paragraph(proposalHeader.getSalesPhone(),ffsize));
@@ -644,7 +577,6 @@ public class QuotationPDFCreator
 
             if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
             {
-               // LOG.info("packge value " +proposalHeader.getPackageFlag());
                 return;
             }
 
@@ -898,10 +830,6 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
-
-           // LOG.info("Quote data" +quoteData);
-            //LOG.info("discount amount" +quoteData.discountAmount);
-            //LOG.info("is value" +(!(quoteData.discountAmount==0.0)));
             if(!(quoteData.discountAmount==0.0))
             {
                 p = new Paragraph("Discount(C):" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
@@ -938,7 +866,7 @@ public class QuotationPDFCreator
         document.add(p);
 
         if(isValid_Sow) {
-            p = new Paragraph("* The interiors and services will be delivered within 60 days of the design sign off, 50% payment or site readiness whichever is later. ", fsize);
+            p = new Paragraph("* The interiors and services will be delivered within " +noOfDaysWorkCompletion +" days of the design sign off, 50% payment or site readiness whichever is later. ", fsize);
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
 
@@ -991,7 +919,8 @@ public class QuotationPDFCreator
 
             tab2.addCell(new Paragraph("1. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered in kitchen quote. These items are quoted seperately if needed.\n"
                     +"2. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
-                    +"3. \t Please refer \"Scope of Services\" section at the end for more details of the services scope"
+                    +"3. \t Please refer \"Scope of Services\" section at the end for more details of the services scope\n"
+                    +"4. \t Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n"
                     ,fsize));
 
             document.add(tab2);
@@ -1030,7 +959,8 @@ public class QuotationPDFCreator
                     +"8. Warranty : 5 years of warranty against any manufacturing defect. The material specifications and brands specified are as per the approved standards of Gubbi Technologies Private Limited and covered under warranty.\n"
                     +"9. Any modifications/alterations to the proposed design will have an impact on the techno commercials of this quote and hence new drawings as well as associated commercials will be provided for by MyGubbi if the same occurs.\n"
                     +"10. Delivery shall be within 45 days from order Final Confirmation.\n"
-                    +"11. Cheque / Demant Draft should be in favour of \"GUBBI TECHNOLOGIES PRIVATE LIMITED.\n",fsize));
+                    +"11. Cheque / Demant Draft should be in favour of \"GUBBI TECHNOLOGIES PRIVATE LIMITED.\n"
+                    +"12. Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n",fsize));
             document.add(table4);
 
             p = new Paragraph("      ");
@@ -1050,8 +980,8 @@ public class QuotationPDFCreator
             document.add(p);
         }
 
-                    p=new Paragraph(" ");
-                    document.add(p);
+        p=new Paragraph(" ");
+            document.add(p);
 
                     p=new Paragraph(" ");
                     document.add(p);
@@ -1067,16 +997,12 @@ public class QuotationPDFCreator
 
                     Image img = Image.getInstance("MailFooter-04.jpg");
                     img.setAlignment(Image.MIDDLE);
-                    //img.scaleAbsolute(100,50);
-                    //img.setWidthPercentage(5);
                     img.scaleToFit(500f, 500f);
                     document.add(img);
 
         if(date.after(currentDate) && quoteData.getWorksContractFlag().equals("Yes")) {
             float[] gstcolumnWidths1 = {1, 4, 1, 1, 1, 1};
             float[] gstProductCategory = {1, 1, 1, 1, 1, 1,1};
-
-
 
             PdfPTable designTable= new PdfPTable(gstcolumnWidths1);
             designTable.setWidthPercentage(100);
@@ -1092,10 +1018,6 @@ public class QuotationPDFCreator
             designTable.addCell(designCell6);
             designTable.addCell(designCell7);
             designTable.addCell(designCell4);
-
-            //document.add(designTable);
-
-
 
             PdfPTable individualTable= new PdfPTable(gstcolumnWidths1);
             individualTable.setWidthPercentage(100);
@@ -1118,18 +1040,10 @@ public class QuotationPDFCreator
                 this.createRowAndFillDataForIndividualForProducts(individualTable,count, movableindivisualList.getProducttitle(),movableindivisualList.getCategoryType(),movableindivisualList.getPriceAfterDiscount(), movableindivisualList.getPrice(), movableindivisualList.getPriceAfterTax(), movableindivisualList.getTax());
                 count++;
             }
-            //document.add(individualTable);
 
             PdfPTable gsttotalTableFormovable = new PdfPTable(gstcolumnWidths1);
             gsttotalTableFormovable.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableFormovable, "TOTAL"," ",movabletotalproductPrice,movabletotalDAP,movabletotalTaxAmt, String.valueOf(round(movabletotalPriceAfterTax, 2)));
-//            document.add(gsttotalTableFormovable);
-
-           /* p=new Paragraph( "\nNon Movable Furniture\n",fsize1);
-            document.add(p);
-
-            p=new Paragraph(" \n");
-            document.add(p);*/
 
             PdfPTable nonMovableTable= new PdfPTable(gstcolumnWidths1);
             nonMovableTable.setWidthPercentage(100);
@@ -1151,30 +1065,22 @@ public class QuotationPDFCreator
                 this.createRowAndFillDataForIndividualForProducts(nonMovableTable,count, nonmovableindivisualList.getProducttitle() + " Interiors",nonmovableindivisualList.getCategoryType(),this.round(nonmovableindivisualList.getPriceAfterDiscount(),2), nonmovableindivisualList.getPrice(), nonmovableindivisualList.getPriceAfterTax(), nonmovableindivisualList.getTax());
                 count++;
             }
-            //document.add(nonMovableTable);
 
             PdfPTable gsttotalTableFornonmovable = new PdfPTable(gstcolumnWidths1);
             gsttotalTableFornonmovable.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableFornonmovable, "TOTAL"," ",this.round(nonmovabletotalproductPrice,2),this.round(nonmovabletotalDAP,2),nonmovabletotalTaxAmt, String.valueOf(round(nonmovabletotalPriceAfterTax, 2)));
-            //document.add(gsttotalTableFornonmovable);
-
-
 
             count=0;
             PdfPTable scwTable= new PdfPTable(gstcolumnWidths1);
             scwTable.setWidthPercentage(100);
             PdfPCell scwCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
             PdfPCell scwCell2 = new PdfPCell(new Paragraph("ITEM", fsize1));
-            //PdfPCell scwCell3 = new PdfPCell(new Paragraph("Annexure", fsize1));
             PdfPCell scwCell5 = new PdfPCell(new Paragraph("GST RATE", fsize1));
             PdfPCell scwCell6 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell scwCell7 = new PdfPCell(new Paragraph("ITEM PRICE", fsize1));
             PdfPCell scwCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
-            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
             scwTable.addCell(scwCell1);
             scwTable.addCell(scwCell2);
-            //scwTable.addCell(scwCell3);
-            //gstTable.addCell(gstCell3)
             scwTable.addCell(scwCell5);
             scwTable.addCell(scwCell6);
             scwTable.addCell(scwCell7);
@@ -1185,109 +1091,34 @@ public class QuotationPDFCreator
                 this.createRowAndFillDataForIndividualForProducts(scwTable,count, scwList.getProducttitle(),scwList.getCategoryType(), scwList.getPriceAfterDiscount(), scwList.getPrice(), scwList.getPriceAfterTax(), scwList.getTax());
                 count++;
             }
-            //document.add(scwTable);
 
             PdfPTable gsttotalTableForscw = new PdfPTable(gstcolumnWidths1);
             gsttotalTableForscw.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableForscw, "TOTAL"," ",scwtotalproductPrice,scwtotalDAP,scwtotalTaxAmt, String.valueOf(round(scwtotalPriceAfterTax, 2)));
-            //document.add(gsttotalTableForscw);
-
-            /*float[] gsttotalcolumnWidths1 = {1, 1, 1, 1, 1, 1};
-            PdfPTable gsttotalTable = new PdfPTable(gsttotalcolumnWidths1);
-            gsttotalTable.setWidthPercentage(100);
-            this.createRowAndFillDataForGSTtotal(gsttotalTable, "Total", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
-            document.add(gsttotalTable);*/
-
-            /*PdfPTable gsttotalTableForAddon = new PdfPTable(gstProductCategory);
-            gsttotalTableForAddon.setWidthPercentage(100);
-            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableForAddon, "Total"," ", producttotalPrice, producttotalDAP, producttotalTaxAmt, String.valueOf(round(producttotalPriceAfterTax, 2)));
-            document.add(gsttotalTableForAddon);
-
-            p=new Paragraph(" ");
-            document.add(p);
-
-            p=new Paragraph( "ADDONS\n",fsize1);
-            document.add(p);
-
-            p=new Paragraph(" ");
-            document.add(p);
-
-            PdfPTable individualTableforAddon= new PdfPTable(gstProductCategory);
-            individualTableforAddon.setWidthPercentage(100);
-            PdfPCell tableAddoncell1 = new PdfPCell(new Paragraph("SI", fsize1));
-            PdfPCell tableAddoncell2 = new PdfPCell(new Paragraph("Product Category", fsize1));
-            PdfPCell tableAddoncell3 = new PdfPCell(new Paragraph("Annexure", fsize1));
-            PdfPCell tableAddoncell4 = new PdfPCell(new Paragraph("Price After discount", fsize1));
-            PdfPCell tableAddoncell5 = new PdfPCell(new Paragraph("TAX %", fsize1));
-            PdfPCell tableAddoncell6 = new PdfPCell(new Paragraph("TAX Amount", fsize1));
-            PdfPCell tableAddoncell7 = new PdfPCell(new Paragraph("Price After Tax", fsize1));
-            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
-            individualTableforAddon.addCell(tableAddoncell1);
-            individualTableforAddon.addCell(tableAddoncell2);
-            individualTableforAddon.addCell(tableAddoncell3);
-            //gstTable.addCell(gstCell3);
-            individualTableforAddon.addCell(tableAddoncell4);
-            individualTableforAddon.addCell(tableAddoncell5);
-            individualTableforAddon.addCell(tableAddoncell6);
-            individualTableforAddon.addCell(tableAddoncell7);
-
-            for (GSTForProducts movableindivisualList : movableList) {
-                this.createRowAndFillDataForIndividualForAddon(individualTableforAddon,movableindivisualList.getProductFlag(), movableindivisualList.getCategory(),movableindivisualList.getCategoryType(), movableindivisualList.getPriceAfterDiscount(), movableindivisualList.getPrice(), movableindivisualList.getPriceAfterTax(), movableindivisualList.getTax());
-            }
-            for (GSTForProducts nonmovableindivisualList: nonMovableList)
-            {
-                this.createRowAndFillDataForIndividualForAddon(individualTableforAddon,nonmovableindivisualList.getProductFlag(), nonmovableindivisualList.getCategory(),nonmovableindivisualList.getCategoryType(), nonmovableindivisualList.getPriceAfterDiscount(), nonmovableindivisualList.getPrice(), nonmovableindivisualList.getPriceAfterTax(), nonmovableindivisualList.getTax());
-            }
-            for(GSTForProducts scwList: scwList)
-            {
-                this.createRowAndFillDataForIndividualForAddon(individualTableforAddon,scwList.getProductFlag(), scwList.getCategory(),scwList.getCategoryType(), scwList.getPriceAfterDiscount(), scwList.getPrice(), scwList.getPriceAfterTax(), scwList.getTax());
-            }
-
-            document.add(individualTableforAddon);
-
-
-            PdfPTable gsttotalTableForProduct = new PdfPTable(gstProductCategory);
-            gsttotalTableForProduct.setWidthPercentage(100);
-            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableForProduct, "Total","" ,addontotalproductPrice, addontotalDAP, addontotalTaxAmt, String.valueOf(round(addontotalPriceAfterTax, 2)));
-            document.add(gsttotalTableForProduct);*/
-
 
             PdfPTable gstTable = new PdfPTable(gstcolumnWidths1);
             gstTable.setWidthPercentage(100);
             PdfPCell gstCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
             PdfPCell gstCell2 = new PdfPCell(new Paragraph("Annexure", fsize1));
-            //PdfPCell gstCell3 = new PdfPCell(new Paragraph("Products Price", fsize1));
             PdfPCell gstCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             PdfPCell gstCell5 = new PdfPCell(new Paragraph("GST rate", fsize1));
             PdfPCell gstCell7 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell gstCell6 = new PdfPCell(new Paragraph("ITEM PRICE", fsize1));
-            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
             gstTable.addCell(gstCell1);
             gstTable.addCell(gstCell2);
-            //gstTable.addCell(gstCell3);
             gstTable.addCell(gstCell4);
             gstTable.addCell(gstCell5);
             gstTable.addCell(gstCell7);
             gstTable.addCell(gstCell6);
 
             this.getfinalGSTList(designServiceList, "Design Services");
-            /*for(GSTForProducts movableobjects :movableList)
-            {
-                this.createRowAndFillDataForGST(gstTable, movableobjects.getCategory(), movableobjects.getPriceAfterDiscount(), movableobjects.getPrice(), movableobjects.getPriceAfterTax(), movableobjects.getTax());
-            }*/
             this.getfinalGSTList(movableList, "MF");
-            /*for(GSTForProducts movableobjects :nonMovableList)
-            {
-                this.createRowAndFillDataForGST(gstTable, movableobjects.getCategory(), movableobjects.getPriceAfterDiscount(), movableobjects.getPrice(), movableobjects.getPriceAfterTax(), movableobjects.getTax());
-            }*/
             this.getfinalGSTList(nonMovableList, "NMF");
             this.getfinalGSTList(scwList, "SCW");
 
             for (GSTForProducts finalList : finalmovableList) {
                 this.createRowAndFillDataForGST(gstTable, finalList.getCategory(), finalList.getPriceAfterDiscount(), finalList.getPrice(), finalList.getPriceAfterTax(), finalList.getTax());
             }
-            //document.add(gstTable);
-
             float[] gsttotalcolumnWidths1 = {1, 4, 1, 1, 1, 1};
             PdfPTable gsttotalTable = new PdfPTable(gsttotalcolumnWidths1);
             gsttotalTable.setWidthPercentage(100);
@@ -1295,32 +1126,23 @@ public class QuotationPDFCreator
             this.createRowAndFillForDesign(designTable, "Design/Consultation Services"," ",this.round(designtotalproductPrice,2),this.round(designtotalDAP,2),designtotalTaxAmt, String.valueOf(round(designtotalPriceAfterTax, 2)));
             this.createRowAndFillDataForGSTtotalProductAndAddon(designTable, "TOTAL"," ",this.round(totalproductPrice+designtotalproductPrice,2),this.round(totalDAP+designtotalDAP,2),this.round(totalTaxAmt+designtotalTaxAmt,2), String.valueOf(this.round(totalPriceAfterTax+designtotalPriceAfterTax,2)));
 
-
-           // document.add(gsttotalTable);
-
-
-
             float[] gstfinalcolumnWidths1 = {1, 4, 1, 1, 1, 1};
             PdfPTable finalTable = new PdfPTable(gstfinalcolumnWidths1);
             finalTable.setWidthPercentage(100);
             PdfPCell gstfinalCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
             PdfPCell gstfinalCell2 = new PdfPCell(new Paragraph("Title", fsize1));
-            /*PdfPCell gstfinalCell3 = new PdfPCell(new Paragraph("Products Price", fsize1));*/
             PdfPCell gstfinalCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
             PdfPCell gstfinalCell5 = new PdfPCell(new Paragraph("GST rate", fsize1));
             PdfPCell gstfinalCell7 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell gstfinalCell6 = new PdfPCell(new Paragraph("ITEM PRICE", fsize1));
-            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
             finalTable.addCell(gstfinalCell1);
             finalTable.addCell(gstfinalCell2);
-            //finalTable.addCell(gstfinalCell3);
             finalTable.addCell(gstfinalCell4);
             finalTable.addCell(gstfinalCell5);
             finalTable.addCell(gstfinalCell7);
             finalTable.addCell(gstfinalCell6);
             this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set1totalproductPrice, set1totalDAP, "18%", set1totalTaxAmt, set1totalPriceAfterTax);
             this.createRowAndFillDataForGSTforFinal(finalTable, "Sum of Products and Service Billed @", set2totalproductPrice, set2totalDAP, "28%", set2totalTaxAmt, set2totalPriceAfterTax);
-            //document.add(finalTable);
 
             float[] gtcolumnWidths1 = {1,4 , 1, 1, 1, 1};
             PdfPTable gstTable1 = new PdfPTable(gtcolumnWidths1);
@@ -1330,18 +1152,9 @@ public class QuotationPDFCreator
 
             if(quoteData.fromVersion.equals("1.0") || quoteData.fromVersion.startsWith("0."))
             {
-                /*p = new Paragraph("\nQuotation Summary", fsize1);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                document.add(finalTable);
-                document.add(gstTable1);*/
 
             }
             else {
-               // Make scope of service/s response as 'yes' for the following - Electrical in SpaceType_Room Living Room:electrical laboure
 
                 p = new Paragraph("\n");
                 document.add(p);
@@ -1353,7 +1166,6 @@ public class QuotationPDFCreator
 
                 p = new Paragraph("PRICE BREAKUP",fsize3);
                 p.setAlignment(Element.ALIGN_CENTER);
-                //fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
 
                 p=new Paragraph(" ");
@@ -1363,7 +1175,7 @@ public class QuotationPDFCreator
                 document.add(p);
 
 
-                p=new Paragraph( "\n A. Furniture And Appliances\n",fsize1);
+                p=new Paragraph( "\n A. Appliances\n",fsize1);
                 document.add(p);
 
                 p=new Paragraph("  ");
@@ -1372,7 +1184,7 @@ public class QuotationPDFCreator
                 document.add(individualTable);
                 document.add(gsttotalTableFormovable);
 
-                p=new Paragraph( "\nB. Interior Works\n",fsize1);
+                p=new Paragraph( "\nB. Interior Works And Furniture\n",fsize1);
                 document.add(p);
 
                 p=new Paragraph(" ");
@@ -1426,7 +1238,6 @@ public class QuotationPDFCreator
         int sequenceNumber = 1;
         for (AssembledProductInQuote product : assembledProducts)
         {
-            LOG.info("product color code " +product.getColorGroupCode() + "hinges in quote " +product.getHingeTitle());
             this.fillAssembledProductInfo(tabname,sequenceNumber, product);
             sequenceNumber++;
         }
@@ -1564,7 +1375,6 @@ public class QuotationPDFCreator
                 this.createSubHeadingRow(li.get(index).getTabName(), series + ALPHABET_SEQUENCE[unitSequence], li.get(index).getTitle() + " - " +li.get(index).getDimension());
                 }
                 String fmaterial = li.get(index).getFinishmaterial().replaceAll("\n", "");
-                //LOG.info("finish material " +li.get(index).getFinishtype()  +"finish type" +fmaterial);
                 if(li.get(index).getTitle().contains("Kitchen Base Unit") || li.get(index).getTitle().contains("Kitchen Tall Unit")) {
 
                     String text ="unit consists of " + li.get(index).getModulecount() +
@@ -1925,108 +1735,81 @@ public class QuotationPDFCreator
                 else if(cname.equals("Kitchen"))
                 {
                     caption4="Kitchen Lofts";
-                    //caption4=product.getRoom();
                 }
                 else if(cname.equals("Storage Modules"))
                 {
-                    //caption4="Storage Modules";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("wallpanelling"))
                 {
-                    //caption4="Wall Panelling";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("oswalls"))
                 {
-                    //caption4="Open Shelves";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("Wardrobe"))
                 {
                     caption4="Wardrobe Lofts";
-
                 }
                 else if(cname.equals("sidetables"))
                 {
-                    //caption4="Side Tables";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("shoerack"))
                 {
-                    //caption4=" Shoe Rack";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("Bathroom Vanity"))
                 {
-                    //caption4="Bathroom Vanity";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("tvunit"))
                 {
-                    //caption4="TV unit";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("barunit") )
                 {
-                    //caption4="Bar Unit";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("bookshelf"))
                 {
-                    //caption4="Book Shelf";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("crunit") )
                 {
-                    //caption4="Crockery Unit";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("wallunits"))
                 {
-                    //caption4="Wall Unit";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("codrawers"))
                 {
-                    //caption4="Chest of Drawers";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("usstorage"))
                 {
-                    //caption4="Under Staircase Storage";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("poojaunit"))
                 {
-                 //   caption4="Pooja Unit";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("studytable"))
                 {
-                    //caption4="Study Table";
                     caption4=product.getRoom();
                 }
                 else if(cname.equals("others"))
                 {
-                    //caption4="Others";
                     caption4=product.getRoom();
                 }
             }
-            /*else
-            {
-                this.createSubHeadingRow(tabname, series + ALPHABET_SEQUENCE[unitSequence], unit.title + " - " + unit.getDimensions());
-                String S = "Unit consists of " + unit.moduleCount + " modules as per design provided.\n" + "Base Carcass : " + product.getProduct().getBaseCarcassCode() + " , Wall Carcass : " + product.getProduct().getWallCarcassCode() + "\n" + "Finish Material : " + ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle() + " , Finish Type : " + product.getProduct().getFinishType();
-                this.createRowAndFillData(tabname, null, S, 1.0, unit.amount, 0.0);
-            unitSequence++;
-            if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
-        }*/
         }
         li=new ArrayList<QuotationPDFCreator.customeclass>();
         QuotationPDFCreator.customeclass obj;
         if(basewidth!="") {
             basewidth =basewidth.substring(2) ;
-                    //this.changeCharInPosition(basewidth.length() - 2, ' ', basewidth);
         }
         if(wallwidth!="") {
             wallwidth =wallwidth.substring(2);
@@ -2048,25 +1831,6 @@ public class QuotationPDFCreator
             wardrobeLoftwidth=wardrobeLoftwidth.substring(2);
         }
 
-        /*obj=new QuotationPDFCreator.customeclass(tabname,caption,KBmodulecount,KBbasecarcass,KBWallcarcass,KBfinishmaterial,KBfinishtype,KBamount,basewidth);
-        li.add(obj);
-        customFunction(li);
-
-        obj=new QuotationPDFCreator.customeclass(tabname,caption1,KWmoduleCount,KWbasecarcass,KWwallcarcass,KWfinishmaterial,KWfinishtype,KWamount,wallwidth);
-        li.add(obj);
-        customFunction(li);
-
-        obj=new QuotationPDFCreator.customeclass(tabname,caption2,KTmoduleCount,KTbasecarcass,KTwallcarcass,KTfinishmaterial,KTfinishtype,KTamount,tallwidth);
-        li.add(obj);
-        customFunction(li);
-
-        obj=new QuotationPDFCreator.customeclass(tabname,caption3,KLmoduleCount,KLbasecarcass,KLwallcarcass,KLfinishmaterial,KLfinishtype,KLamount,loftwidth);
-        li.add(obj);
-        LOG.info("caption3" +obj.getTitle());
-        LOG.info("Module count" +KLmoduleCount);
-        int num=customFunction(li);
-        //int num=customFunction(li);*/
-
         if(KBamount!=0) {
             obj = new customeclass(tabname, caption, KBmodulecount, KBbasecarcass, KBWallcarcass, KBfinishmaterial, KBfinishtype, KBamount, baseDimesion,KBcolorgroupCode,KBhinge);
             li.add(obj);
@@ -2079,7 +1843,6 @@ public class QuotationPDFCreator
             obj = new customeclass(tabname, caption1, KWmoduleCount, KWbasecarcass, KWwallcarcass, KWfinishmaterial, KWfinishtype, KWamount, WallDimesion,KWcolorGroupCode,KWhinge);
             li.add(obj);
             customFunction(li,unitSequence);
-            //rowValue++;
             unitSequence++;
             li.clear();
         }
@@ -2088,7 +1851,6 @@ public class QuotationPDFCreator
             obj = new customeclass(tabname, caption2, KTmoduleCount, KTbasecarcass, KTwallcarcass, KTfinishmaterial, KTfinishtype, KTamount, TallDimesion,KTcolorGroupCode,KThinge);
             li.add(obj);
             customFunction(li,unitSequence);
-            //rowValue++;
             unitSequence++;
             li.clear();
         }
@@ -2097,7 +1859,6 @@ public class QuotationPDFCreator
             obj = new customeclass(tabname, caption3, KLmoduleCount, KLbasecarcass, KLwallcarcass, KLfinishmaterial, KLfinishtype, KLamount, loftDimesion,KLcolorGroupCode,KLhinge);
             li.add(obj);
             customFunction(li,unitSequence);
-            //rowValue++;
             unitSequence++;
             li.clear();
         }
@@ -2108,7 +1869,6 @@ public class QuotationPDFCreator
             obj = new customeclass(tabname,captionWardrobe,WWmodulecount,WWbasecarcass,WWwallcarcass,WWfinishmaterial,WWfinishtype,WWamount,wardrobewidth,WWcolorGroupCode,WWhinge);
             li.add(obj);
             customFunction(li,wunitSequence);
-            //rowValue++;
             wunitSequence++;
             li.clear();
         }
@@ -2118,7 +1878,6 @@ public class QuotationPDFCreator
             obj = new customeclass(tabname,captionLoft,WW1modulecount,WW1basecarcass,WW1wallcarcass,WW1finishmaterial,WW1finishtype,WW1amount,wardrobeLoftwidth,WW1colorGroupcode,WW1hinge);
             li.add(obj);
             customFunction(li,wunitSequence);
-            //rowValue++;
             wunitSequence++;
             li.clear();
         }
@@ -2304,25 +2063,16 @@ public class QuotationPDFCreator
         double amount=0.0;
         for (AssembledProductInQuote.Accessory accessory : accessories)
         {
-            LOG.info("Accesoory " +accessory);
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
-                LOG.info("Inserting new accessory row");
                 this.createRowAndFillDataForAccessories(tabname,ROMAN_SEQUENCE[acSequence], accessory.title, accessory.quantity);
-
-//                this.createProductTitleRow(tabname, ROMAN_SEQUENCE[acSequence], accessory.title + " - " +Double.valueOf(accessory.quantity).intValue());
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
             }
-            LOG.info("accessory code " +accessory.code+ " priceDate " +proposalHeader.getPriceDate()+ " city " +proposalHeader.getProjectCity());
             PriceMaster accessoryPrice=RateCardService.getInstance().getAccessoryRate(accessory.code,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
-            LOG.info("Accessory Price " +accessoryPrice);
             amount=amount+(accessory.quantity*accessoryPrice.getPrice());
-            //amount=amount+(accessory.quantity*accessory.msp);
         }
-
-        /*this.createCellWithData(tabname,"Accessory Cost",amount);
-        this.createCellWithData(tabname,"WoodWork Cost",amt-amount);*/
+        this.createCellWithData(tabname,"WoodWork Cost",amt-amount);
     }
 
     private void createCellWithData(PdfPTable tabname,String str,double data)
@@ -2363,12 +2113,7 @@ public class QuotationPDFCreator
         series="A." +String.valueOf(sequenceNumber) + ".";
         this.createSubHeadingRow(tabname,series+ "a",product.getRoomCode());
         this.createRowAndFillData(tabname, null, "Material : " + product.getBaseCarcassCode() + "\n" +"Finish : " + product.getFinishCode(),1.0,product.getAmount(),product.getAmount());
-        //this.createRowAndFillData(tabname, null, "Finish : " + product.getFinishCode());
         this.createCellWithData(tabname,"Total Cost",product.getAmount());
-        //this.quoteSheet.addMergedRegion(new CellRangeAddress(startRow, currentRow, AMOUNT_CELL, AMOUNT_CELL));
-
-        //currentRow++;
-        //this.createRow(currentRow, this.quoteSheet);
     }
 
     private void createSubHeadingRowForCatalog(PdfPTable tabname, String index, String title,Double quantity, Double amount, Double total)
@@ -2391,25 +2136,6 @@ public class QuotationPDFCreator
         p.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(p);
         tabname.addCell(cell);
-
-        /*cell=new PdfPCell();
-        p=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
-        p.setAlignment(Element.ALIGN_RIGHT);
-        cell.addElement(p);
-        tabname.addCell(cell);
-
-        PdfPCell cell1=new PdfPCell();
-        p=new Paragraph(this.getRoundOffValue(String.valueOf(amount.intValue())),fsize);
-        p.setAlignment(Element.ALIGN_RIGHT);
-        cell1.addElement(p);
-        tabname.addCell(cell1);
-
-        PdfPCell cell2=new PdfPCell();
-        double amt=quantity*amount;
-        Paragraph Pamt=new Paragraph(this.getRoundOffValue(String.valueOf(total.intValue())),fsize);
-        Pamt.setAlignment(Element.ALIGN_RIGHT);
-        cell2.addElement(Pamt);
-        tabname.addCell(cell2);*/
     }
 
     private void fillAddons(PdfPTable tabname,List<ProductAddon> addOns, String emptyMessage)
@@ -2423,7 +2149,6 @@ public class QuotationPDFCreator
 
         for (ProductAddon addon : addOns)
         {
-            //LOG.info("category " +addon.getCategoryCode());
             if(("Custom Addon").equals (addon.getCategoryCode()))
                 this.createRowAndFillDataForAddon(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getUom(),addon.getQuantity(), addon.getRate(), addon.getAmount());
             else if(("Appliances").equals(addon.getCategoryCode()))
@@ -2583,6 +2308,7 @@ public class QuotationPDFCreator
 
     public void getProducts()
     {
+        LOG.info("price Date " +proposalHeader.getPriceDate()+ " project city " +proposalHeader.getProjectCity());
         designServicePrice=RateCardService.getInstance().getFactorRate(DESIGN_SERVICE_PRICE,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         designServiceTax=RateCardService.getInstance().getFactorRate(DESIGN_SERVICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         nonMovablePrice=RateCardService.getInstance().getFactorRate(NON_MOVABLE_PRICE,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
@@ -2593,17 +2319,8 @@ public class QuotationPDFCreator
         List<AssembledProductInQuote> assembledProducts = this.quoteData.getAssembledProducts();
         for (AssembledProductInQuote product : assembledProducts)
         {
-            String ProductType="P";
-            LOG.info("design service price " +DESIGN_SERVICE_PRICE+ "price Date " + proposalHeader.getPriceDate()+ " city " +proposalHeader.getProjectCity());
-            LOG.info("Design service " +designServicePrice);
-            LOG.info("Design Service tax " +designServiceTax);
-            LOG.info("non movable price" +nonMovablePrice);
-            LOG.info("movable" +movablePrice);
-
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(product.getCatagoryName(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
-            LOG.info("Product type " +productType);
-
             if(productType.equals("NMF"))
             {
                 double discountAmount = product.getTotalAmount() * (quoteData.getDiscountPercentage() / 100.0);
@@ -2613,15 +2330,10 @@ public class QuotationPDFCreator
                 dsPrice=(product.getTotalAmount()-discountAmount)*(designServicePrice.getPrice()/100);
                 dsWithTax=dsPrice*designServiceTax.getSourcePrice();
                 String tax="18%";
-                LOG.info("discount percentage " +quoteData.getDiscountPercentage());
-                LOG.info("log.info" +product.getTitle());
                 GSTForProducts nonmovable=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),price,pricewithTax,tax,"P",productType);
                 nonMovableList.add(nonmovable);
                 GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax,tax,"P",productType);
                 designServiceList.add(designservice);
-
-                LOG.info("non movable furniture " +productType+ " " +product.getTitle());
-
             }else if(productType.equals("MF"))
             {
                 double discountAmount = product.getTotalAmount() * (quoteData.getDiscountPercentage() / 100.0);
@@ -2635,7 +2347,6 @@ public class QuotationPDFCreator
                 movableList.add(movable);
                 GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax,tax,"P",productType);
                 designServiceList.add(designservice);
-                LOG.info("movable furniture " +productType+ " " +product.getTitle());
             }
             else if(productType.equals("SCW"))
             {
@@ -2650,17 +2361,13 @@ public class QuotationPDFCreator
                 scwList.add(scw);
                 GSTForProducts designservice=new GSTForProducts(product.getCatagoryName(),product.getTitle(),(product.getTotalAmount()-discountAmount),dsPrice,dsWithTax,tax,"P",productType);
                 designServiceList.add(designservice);
-                LOG.info("SCW " +productType+ " " +product.getTitle());
             }
         }
         List<ProductAddon> productAddonsforAccessories=this.quoteData.getAccessories();
-        LOG.info("Addon size " +productAddonsforAccessories.size());
-        String AddonType="A";
         for(ProductAddon productAddon:productAddonsforAccessories)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
-            LOG.info("Addon type " +productType);
             String tax="28%";
             if(productType.equals("MF"))
             {
@@ -2668,16 +2375,20 @@ public class QuotationPDFCreator
                 pricewithTax=productAddon.getAmount()*movablePriceTax.getSourcePrice();
                 GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getExtendedTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 movableList.add(movable);
+            }else if(productType.equalsIgnoreCase("NMF"))
+            {
+                double pricewithTax=0;
+                pricewithTax=productAddon.getAmount()*nonMovablePriceTax.getSourcePrice();
+                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getExtendedTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,"18%","A",productType);
+                nonMovableList.add(movable);
             }
 
         }
         List<ProductAddon> productAddonsforAppliances=this.quoteData.getAppliances();
-        LOG.info("Addon size " +productAddonsforAppliances.size());
         for(ProductAddon productAddon:productAddonsforAppliances)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
-            LOG.info("Addon type " +productType);
             String tax="28%";
             if(productType.equals("MF"))
             {
@@ -2690,14 +2401,11 @@ public class QuotationPDFCreator
         }
 
         List<ProductAddon> productAddonsforcounterTop=this.quoteData.getCounterTops();
-        LOG.info("Addon size " +productAddonsforcounterTop.size());
         for(ProductAddon productAddon:productAddonsforcounterTop)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
             String tax="18%";
-            LOG.info("Addon type " +productType);
-
             if(productType.equals("SCW"))
             {
                 double pricewithTax=0;
@@ -2708,12 +2416,10 @@ public class QuotationPDFCreator
         }
 
         List<ProductAddon> productAddonsforservices=this.quoteData.getServices();
-        LOG.info("Addon size " +productAddonsforservices.size());
         for(ProductAddon productAddon:productAddonsforservices)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
-            LOG.info("Addon type " +productType);
             String tax="18%";
             if(productType.equals("SCW"))
             {
@@ -2725,12 +2431,10 @@ public class QuotationPDFCreator
         }
 
         List<ProductAddon> productAddonsforLooseFurniture=this.quoteData.getLooseFurniture();
-        LOG.info("Addon size " +productAddonsforLooseFurniture.size());
         for(ProductAddon productAddon:productAddonsforLooseFurniture)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
-            LOG.info("Addon type " +productType);
             String tax="28%";
             if(productType.equals("MF"))
             {
@@ -2739,16 +2443,21 @@ public class QuotationPDFCreator
                 GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getExtendedTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,tax,"A",productType);
                 movableList.add(movable);
             }
+            else if(productType.equalsIgnoreCase("NMF"))
+            {
+                double pricewithTax=0;
+                pricewithTax=productAddon.getAmount()*nonMovablePriceTax.getSourcePrice();
+                GSTForProducts movable=new GSTForProducts(productAddon.getCategoryCode(),productAddon.getExtendedTitle(),productAddon.getAmount(),productAddon.getAmount(),pricewithTax,"18%","A",productType);
+                nonMovableList.add(movable);
+            }
 
         }
 
         List<ProductAddon> productAddonsforcustomAddon=this.quoteData.getCustomAddons();
-        LOG.info("Addon size " +productAddonsforcustomAddon.size());
         for(ProductAddon productAddon:productAddonsforcustomAddon)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(productAddon.getCategoryCode(),proposalHeader.getPriceDate());
             String productType = productCategoryMap.getType();
-            LOG.info("Addon type " +productType);
             String tax="18%";
             if(productType.equals("SCW"))
             {
@@ -2758,22 +2467,17 @@ public class QuotationPDFCreator
                 scwList.add(scw);
             }
         }
-
-        LOG.info("movable " +movableList.size() + " non movable " +nonMovableList.size() + "scw size " +scwList.size());
         GSTForProducts movableProducts;
         for(GSTForProducts movable:movableList)
         {
             double tax_amount=movable.getPrice()-movable.getPriceAfterTax();
-            LOG.info("movable list " +movable.toString());
             movabletotalproductPrice+=movable.getPriceAfterDiscount();
             movabletotalDAP+=movable.getPrice();
             movabletotalTaxAmt+=movable.getPriceAfterTax();
             movabletotalPriceAfterTax+=this.round(tax_amount,2);
         }
-        //movableProducts=new GSTForProducts("Movable Furniture","",priceAfterDiscount,)
         for(GSTForProducts nonmovable : nonMovableList)
         {
-            LOG.info("non movable " +nonmovable.toString());
             double tax_amount=nonmovable.getPrice()-nonmovable.getPriceAfterTax();
             nonmovabletotalproductPrice+=nonmovable.getPriceAfterDiscount();
             nonmovabletotalDAP+=nonmovable.getPrice();
@@ -2782,9 +2486,6 @@ public class QuotationPDFCreator
         }
         for(GSTForProducts scw : scwList)
         {
-            LOG.info("scw " +scw.toString());
-
-            LOG.info("non movable " +scw.toString());
             double tax_amount=scw.getPrice()-scw.getPriceAfterTax();
             scwtotalproductPrice+=scw.getPriceAfterDiscount();
             scwtotalDAP+=scw.getPrice();
@@ -2793,7 +2494,6 @@ public class QuotationPDFCreator
         }
         for(GSTForProducts design: designServiceList)
         {
-            LOG.info("Design services " +design.toString());
             double tax_amount=design.getPrice()-design.getPriceAfterTax();
             designtotalproductPrice+=design.getPriceAfterDiscount();
             designtotalDAP+=design.getPrice();
@@ -2838,9 +2538,7 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillDataForGST(PdfPTable tabname,String GSTCategory, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
     {
-        LOG.info("GST Category " +GSTCategory);
         String sequence=BOLD_ALPHABET_SEQUENCE[count];
-        //LOG.info("inside create row n fill data");
         double tax_amount=round(DesignpriceAfterDsicount-currentpriceAfterTax,2);
 
         if(!GSTCategory.equals("Design Services"))
@@ -2884,12 +2582,6 @@ public class QuotationPDFCreator
         cell.addElement(Pindex);
         tabname.addCell(cell);
 
-        /*PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph(Double.toString(PriceAfterDiscount),fsize);
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell2.addElement(Pindex);
-        tabname.addCell(cell2);*/
-
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
@@ -2919,15 +2611,6 @@ public class QuotationPDFCreator
 
     private void createRowAndFillDataForGSTtotal(PdfPTable tabname,String GSTCategory, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
     {
-
-       /* //LOG.info("inside create row n fill data");
-        double tax_amount=round(DesignpriceAfterDsicount-currentpriceAfterTax,2);
-
-        totalproductPrice+=PriceAfterDiscount;
-        totalDAP+=DesignpriceAfterDsicount;
-        totalTaxAmt+=currentpriceAfterTax;
-        totalPriceAfterTax+=tax_amount;
-*/
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2941,18 +2624,10 @@ public class QuotationPDFCreator
 
 
         cell=new PdfPCell();
-        Pindex=new Paragraph("A+B+C",fsize);
+        Pindex=new Paragraph("Product And Services (A+B+C) ",fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(Pindex);
         tabname.addCell(cell);
-
-        /*PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph(Double.toString(PriceAfterDiscount),fsize);
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell2.addElement(Pindex);
-        tabname.addCell(cell2);*/
-
-
 
         PdfPCell cell6=new PdfPCell();
         Pindex=new Paragraph();
@@ -2977,8 +2652,6 @@ public class QuotationPDFCreator
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell4.addElement(Pindex);
         tabname.addCell(cell4);
-        //count++;
-
     }
 
     private double round(double value, int places) {
@@ -3011,12 +2684,6 @@ public class QuotationPDFCreator
         cell.addElement(Pindex);
         tabname.addCell(cell);
 
-        /*PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph(Double.toString(round(productPrice,2)),fsize);
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell2.addElement(Pindex);
-        tabname.addCell(cell2);*/
-
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(taxPercentage,fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
@@ -3047,9 +2714,7 @@ public class QuotationPDFCreator
 
     private void createRowAndFillDataForIndividualForProducts(PdfPTable tabname,int count,String GSTCategory,String categoryType, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
     {
-        LOG.info("$$$1111 " +GSTCategory+ " categoryType " +categoryType);
             String title="";
-            LOG.info("GST Category in products " + GSTCategory);
             if(categoryType.equals("MF"))
             {
                 title="Movable Furniture";
@@ -3071,27 +2736,6 @@ public class QuotationPDFCreator
             producttotalTaxAmt+=currentpriceAfterTax;
             producttotalPriceAfterTax+=tax_amount;
 
-        /*totalproductPrice+=PriceAfterDiscount;
-        totalDAP+=DesignpriceAfterDsicount;
-        totalTaxAmt+=currentpriceAfterTax;
-        totalPriceAfterTax+=tax_amount;
-        //}
-        if(tax.equals("18%"))
-        {
-            set1totalproductPrice+=PriceAfterDiscount;
-            set1totalDAP+=DesignpriceAfterDsicount;
-            set1totalTaxAmt+=currentpriceAfterTax;
-            set1totalPriceAfterTax+=tax_amount;
-
-        }else
-        {
-            set2totalproductPrice+=PriceAfterDiscount;
-            set2totalDAP+=DesignpriceAfterDsicount;
-            set2totalTaxAmt+=currentpriceAfterTax;
-            set2totalPriceAfterTax+=tax_amount;
-        }*/
-
-
             PdfPCell cell;
             Paragraph Pindex;
             Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
@@ -3107,13 +2751,6 @@ public class QuotationPDFCreator
             Pindex.setAlignment(Element.ALIGN_LEFT);
             cell2.addElement(Pindex);
             tabname.addCell(cell2);
-
-           /* cell = new PdfPCell();
-            Pindex = new Paragraph(title, fsize);
-            Pindex.setAlignment(Element.ALIGN_LEFT);
-            cell.addElement(Pindex);
-            tabname.addCell(cell);*/
-
 
             PdfPCell cell5 = new PdfPCell();
             Pindex = new Paragraph(tax, fsize);
@@ -3132,14 +2769,12 @@ public class QuotationPDFCreator
             Pindex.setAlignment(Element.ALIGN_LEFT);
             cell7.addElement(Pindex);
             tabname.addCell(cell7);
-          //  individualcountforProduct++;
 
         PdfPCell cell4 = new PdfPCell();
         Pindex = new Paragraph(Double.toString(DesignpriceAfterDsicount), fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell4.addElement(Pindex);
         tabname.addCell(cell4);
-        //count++;
     }
     private void createRowAndFillDataForIndividualForAddon(PdfPTable tabname,String Productcategory,String GSTCategory,String category, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
     {
@@ -3260,24 +2895,12 @@ public class QuotationPDFCreator
         cell.addElement(Pindex);
         tabname.addCell(cell);
 
-        /*PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph();
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell2.addElement(Pindex);
-        tabname.addCell(cell2);*/
-
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph();
         cell2.setBackgroundColor(BaseColor.ORANGE);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
-
-       /* PdfPCell cell6=new PdfPCell();
-        Pindex=new Paragraph();
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell6.addElement(Pindex);
-        tabname.addCell(cell6);*/
 
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
@@ -3323,11 +2946,6 @@ public class QuotationPDFCreator
         cell.addElement(Pindex);
         tabname.addCell(cell);
 
-        /*PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph();
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell2.addElement(Pindex);
-        tabname.addCell(cell2);*/
 
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph("18%",fsize);
@@ -3335,11 +2953,6 @@ public class QuotationPDFCreator
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
 
-       /* PdfPCell cell6=new PdfPCell();
-        Pindex=new Paragraph();
-        Pindex.setAlignment(Element.ALIGN_LEFT);
-        cell6.addElement(Pindex);
-        tabname.addCell(cell6);*/
 
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
@@ -3352,7 +2965,6 @@ public class QuotationPDFCreator
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
         tabname.addCell(cell7);
-        //count++;
 
         PdfPCell cell4=new PdfPCell();
         Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
