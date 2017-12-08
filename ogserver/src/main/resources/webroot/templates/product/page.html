@@ -1,53 +1,197 @@
+
 <section class="menu-spacer bg-light-gray">
 
-    <div class="container-fluid category-banner">
+<div class="container-fluid category-banner">
         <div class="row">
             <% if(typeof(filter.selectedCategoryName) !== 'undefined' && filter.selectedCategoryName != null){ %>
             <% if(filter.selectedCategoryName == 'kitchen'){ %>
             <div class="k-banner">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
+                        <!-- <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
                             <h4 class="k-ban-h4">Reliving a chef's fantasy</h4>
                             <h2 class="k-ban-h2">In exuberant styles</h2>
                             <h1 class="k-ban-h1">kitchen</h1>
+                        </div> -->
+                        <div class="col-sm-12 col-md-offset-2 col-md-10">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8 col-lg-4 col-lg-offset-8">
+                                    <div class="nri-banner-form">
+
+                                        <form method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx" class="width90 margin_auto paddingtop10">
+                                            <h4 class="text-center"> Consultation Form </h4>
+                                            <div class="margin-bottom10 form-group">
+                                                <input type='text' class="form-control" id='FirstName' name='FirstName' placeholder="Name" maxlength='100' value="" autocomplete='off' required='required'/>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <input type='text' class="form-control" id='EmailAddress' name='EmailAddress' placeholder="Email ID" maxlength='100' value="" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom10 form-group">
+                                                    <input type='text' class="form-control" id='mx_countrycode' placeholder="ISD Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
+                                                </div>
+                                                <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom10 form-group padding-left0">
+                                                    <input type='text' class="form-control" id='Phone' name='Phone' placeholder="Phone" maxlength='20' value="" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
+                                                </div>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                                    <option value='cityName'>City Name</option>
+                                                    <option value='Bangalore'> Bangalore </option>
+                                                    <option value='Pune'> Pune </option>
+                                                    <option value='Mangalore'> Mangalore </option>
+                                                    <option value='Chennai'> Chennai </option>
+                                                    <option value='Chennai'> Hyderabad </option>
+                                                    <option value='Other' >Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <button class="btn btn-block btn-nri margin-top0" id="form-submit-button" type="submit"> CONTACT ME  </button>
+                                                <input type="hidden" name="MXHOrgCode" value="9814"/>
+                                                <input type="hidden" name="MXHLandingPageId" value="2c522800-5286-11e7-b3fa-22000aa220ce"/>
+                                                <input type="hidden" name="MXHFormBehaviour" value="1"/>
+                                                <input type="hidden" name="MXHFormDataTransfer" value="0"/>
+                                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page"/>
+                                                <input type="hidden" name="MXHAsc" value="5"/>
+                                                <input type="hidden" name="MXHPageTitle" value="Email"/>
+                                                <input type="hidden" name="MXHOutputMessagePosition" value="0"/>
+                                                <input type="hidden" name="MXHIsExternallyUsed" value="1"/>
+                                            </div>
+                                        </form>
+                                        <script type="text/javascript"> var MXLandingPageId = '2c522800-5286-11e7-b3fa-22000aa220ce'; </script>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-            <!--<img src="https://res.cloudinary.com/mygubbi/image/upload/v1492746492/home/optimize_img/kitchen_2.jpg" class="img-responsive hidden-xs" alt="Kitchen">
-            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492766151/home/optimize_img/kitchen_N.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Kitchen">-->
             <% }else if(filter.selectedCategoryName == 'bedroom'){ %>
             <div class="w-banner">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
+                        <!-- <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
                             <h4 class="w-ban-h4">Add sophistication to</h4>
                             <h1 class="w-ban-h1">BEDROOM</h1>
                             <h2 class="w-ban-h2">with posh yet practical finds</h2>
+                        </div> -->
+                        <div class="col-sm-12 col-md-offset-2 col-md-10">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8 col-lg-4 col-lg-offset-8">
+                                    <div class="nri-banner-form">
+
+                                        <form method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx" class="width90 margin_auto paddingtop10">
+                                            <h4 class="text-center"> Consultation Form </h4>
+                                            <div class="margin-bottom10 form-group">
+                                                <input type='text' class="form-control" id='FirstName' name='FirstName' placeholder="Name" maxlength='100' value="" autocomplete='off' required='required'/>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <input type='text' class="form-control" id='EmailAddress' name='EmailAddress' placeholder="Email ID" maxlength='100' value="" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom10 form-group">
+                                                    <input type='text' class="form-control" id='mx_countrycode' placeholder="ISD Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
+                                                </div>
+                                                <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom10 form-group padding-left0">
+                                                    <input type='text' class="form-control" id='Phone' name='Phone' placeholder="Phone" maxlength='20' value="" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
+                                                </div>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                                    <option value='cityName'>City Name</option>
+                                                    <option value='Bangalore'> Bangalore </option>
+                                                    <option value='Pune'> Pune </option>
+                                                    <option value='Mangalore'> Mangalore </option>
+                                                    <option value='Chennai'> Chennai </option>
+                                                    <option value='Chennai'> Hyderabad </option>
+                                                    <option value='Other' >Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <button class="btn btn-block btn-nri margin-top0" id="form-submit-button" type="submit"> CONTACT ME  </button>
+                                                <input type="hidden" name="MXHOrgCode" value="9814"/>
+                                                <input type="hidden" name="MXHLandingPageId" value="2c522800-5286-11e7-b3fa-22000aa220ce"/>
+                                                <input type="hidden" name="MXHFormBehaviour" value="1"/>
+                                                <input type="hidden" name="MXHFormDataTransfer" value="0"/>
+                                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page"/>
+                                                <input type="hidden" name="MXHAsc" value="5"/>
+                                                <input type="hidden" name="MXHPageTitle" value="Email"/>
+                                                <input type="hidden" name="MXHOutputMessagePosition" value="0"/>
+                                                <input type="hidden" name="MXHIsExternallyUsed" value="1"/>
+                                            </div>
+                                        </form>
+                                        <script type="text/javascript"> var MXLandingPageId = '2c522800-5286-11e7-b3fa-22000aa220ce'; </script>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--<img src="https://res.cloudinary.com/mygubbi/image/upload/v1492746492/home/optimize_img/wardrobe_2.jpg" class="img-responsive hidden-xs" alt="Bedroom">
-            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492766151/home/optimize_img/wardrobe_n.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Bedroom">
-            -->
             <% }else if(filter.selectedCategoryName == 'living & dining'){ %>
             <div class="s-banner">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
+                        <!-- <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
                             <h1 class="s-ban-h1">Living room</h1>
                             <h2 class="s-ban-h2">Keep the guesswork out of</h2>
                             <h4 class="s-ban-h4">room decoration</h4>
 
+                        </div> -->
+                        <div class="col-sm-12 col-md-offset-2 col-md-10">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8 col-lg-4 col-lg-offset-8">
+                                    <div class="nri-banner-form">
+
+                                        <form method="post" enctype="multipart/form-data" action="https://web.mxradon.com/t/FormTracker.aspx" class="width90 margin_auto paddingtop10">
+                                            <h4 class="text-center"> Consultation Form </h4>
+                                            <div class="margin-bottom10 form-group">
+                                                <input type='text' class="form-control" id='FirstName' name='FirstName' placeholder="Name" maxlength='100' value="" autocomplete='off' required='required'/>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <input type='text' class="form-control" id='EmailAddress' name='EmailAddress' placeholder="Email ID" maxlength='100' value="" autocomplete='off' required='required' pattern=".+@.+\..+" title="<abc>@<xyz>.<com>"/>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-5 col-md-5 col-lg-5  margin-bottom10 form-group">
+                                                    <input type='text' class="form-control" id='mx_countrycode' placeholder="ISD Code" name='mx_countrycode' maxlength='20' value='' autocomplete='off'/>
+                                                </div>
+                                                <div class="col-sm-7 col-md-7 col-lg-7 margin-bottom10 form-group padding-left0">
+                                                    <input type='text' class="form-control" id='Phone' name='Phone' placeholder="Phone" maxlength='20' value="" autocomplete='off' required='required' pattern="\d{10}" title="e.g. 9876543210"/>
+                                                </div>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                                    <option value='cityName'>City Name</option>
+                                                    <option value='Bangalore'> Bangalore </option>
+                                                    <option value='Pune'> Pune </option>
+                                                    <option value='Mangalore'> Mangalore </option>
+                                                    <option value='Chennai'> Chennai </option>
+                                                    <option value='Chennai'> Hyderabad </option>
+                                                    <option value='Other' >Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="margin-bottom10 form-group">
+                                                <button class="btn btn-block btn-nri margin-top0" id="form-submit-button" type="submit"> CONTACT ME  </button>
+                                                <input type="hidden" name="MXHOrgCode" value="9814"/>
+                                                <input type="hidden" name="MXHLandingPageId" value="2c522800-5286-11e7-b3fa-22000aa220ce"/>
+                                                <input type="hidden" name="MXHFormBehaviour" value="1"/>
+                                                <input type="hidden" name="MXHFormDataTransfer" value="0"/>
+                                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page"/>
+                                                <input type="hidden" name="MXHAsc" value="5"/>
+                                                <input type="hidden" name="MXHPageTitle" value="Email"/>
+                                                <input type="hidden" name="MXHOutputMessagePosition" value="0"/>
+                                                <input type="hidden" name="MXHIsExternallyUsed" value="1"/>
+                                            </div>
+                                        </form>
+                                        <script type="text/javascript"> var MXLandingPageId = '2c522800-5286-11e7-b3fa-22000aa220ce'; </script>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--<img src="https://res.cloudinary.com/mygubbi/image/upload/v1492746491/home/optimize_img/Storage.jpg" class="img-responsive hidden-xs" alt="Living & Dining">
-            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492766152/home/optimize_img/mobile_storage.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Living & Dining">
-            --><% } %>
+            </div><% } %>
             <% }else{ %>
             <img src="<%= imgBase + 'KitchenFinal1.jpg'%>" class="img-responsive hidden-xs" alt="Kitchen">
             <img src="https://res.cloudinary.com/mygubbi/image/upload/v1481197718/project_details/KitchenFinal_mob.jpg" class="img-responsive hidden-sm hidden-md hidden-lg" alt="Kitchen">
