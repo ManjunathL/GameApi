@@ -105,7 +105,7 @@ public class ProposalHandler extends AbstractRouteHandler
     {
 
         JsonObject versionJson = routingContext.getBodyAsJson();
-        LOG.debug("Module Json : " + versionJson.encodePrettily());
+        LOG.debug("Version Json : " + versionJson.encodePrettily());
         ProposalVersion proposalVersion = new ProposalVersion(versionJson);
         Integer id = LocalCache.getInstance().store(proposalVersion);
         VertxInstance.get().eventBus().send(VersionPricingService.CALCULATE_VERSION_PRICE, id,

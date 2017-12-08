@@ -180,7 +180,6 @@ public class ProductPriceHolder {
             if (mgModule.getSqftCalculation().equalsIgnoreCase("Yes"))
             {
                 addToNetAreaInSqft(modulePriceHolder.getProductModule().getAreaOfModuleInSft());
-
             }
 
         }
@@ -188,10 +187,15 @@ public class ProductPriceHolder {
         double rateForLconnectorPrice=lConnectorRate.getPrice();
         double sourcePriceForLconnectorPrice = lConnectorRate.getSourcePrice();
 
+        double woTaxFactor = getAfterTaxFactor(proposalHeader,productLineItem);
+
         if(this.productLineItem.getHandletypeSelection() != null) {
+
+
             if (this.productLineItem.getHandletypeSelection().equals("Gola Profile") && this.productLineItem.getNoOfLengths() != 0) {
                 addToLConnectorPrice(this.productLineItem.getNoOfLengths() * rateForLconnectorPrice);
-                addToLConnectorPriceWoTax(this.productLConnectorPrice * lConnectorFactor.getSourcePrice());
+                addToLConnectorPriceWoTax(this.productLConnectorPrice * woTaxFactor);
+                LOG.debug("L connector values : " + this.productLConnectorPrice + " : " + woTaxFactor + " :" + this.productLConnectorPrice * woTaxFactor);
                 addToLConnectorSourceCost(this.productLineItem.getNoOfLengths() * sourcePriceForLconnectorPrice);
             }
         }
@@ -368,6 +372,8 @@ public class ProductPriceHolder {
         {
             this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
             this.productPriceWoTax = this.productPriceAfterDiscount * woTaxFactor;
+            LOG.debug("MSC round tax factor product : " + productPriceAfterDiscount +" :" + woTaxFactor + " :" + productPriceWoTax);
+
         }
 
         this.woodWorkPriceWoTax = productCarcassPriceWoTax + productShutterCostWoTax;
