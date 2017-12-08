@@ -97,6 +97,8 @@ public class QuotationPDFCreator
     List<GSTForProducts> finalscwList=new ArrayList<>();
     java.util.Date date;
     java.util.Date currentDate = new java.util.Date(117 ,9,28,0,0,00);
+    java.util.Date gstTextChangeDate = new java.util.Date(117 ,10,15,0,0,00);
+    Boolean gstTextChangeDateValue;
 
     PriceMaster designServicePrice, nonMovablePrice, movablePrice, nonMovablePriceTax, movablePriceTax,scwTax,designServiceTax;
 
@@ -109,6 +111,13 @@ public class QuotationPDFCreator
         if(date.after(currentDate))
         {
             getProducts();
+        }
+        if(date.after(gstTextChangeDate))
+        {
+            gstTextChangeDateValue=new Boolean(true);
+        }
+        else {
+            gstTextChangeDateValue=new Boolean(false);
         }
     }
 
@@ -1155,62 +1164,123 @@ public class QuotationPDFCreator
 
             }
             else {
+                //LOG.info("gstTextChangeDateValue" +gstTextChangeDateValue);
+                if(!gstTextChangeDateValue)
+                {
+                    p = new Paragraph("\n");
+                    document.add(p);
 
-                p = new Paragraph("\n");
-                document.add(p);
+                    p = new Paragraph("\n");
+                    document.add(p);
 
-                p = new Paragraph("\n");
-                document.add(p);
+                    document.newPage();
 
-                document.newPage();
+                    p = new Paragraph("PRICE BREAKUP",fsize3);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
 
-                p = new Paragraph("PRICE BREAKUP",fsize3);
-                p.setAlignment(Element.ALIGN_CENTER);
-                document.add(p);
+                    p=new Paragraph(" ");
+                    document.add(p);
 
-                p=new Paragraph(" ");
-                document.add(p);
-
-                p=new Paragraph("The detailed price break-up(post Discount) with the split-up of design, consultancy and GST charges are as follows: ",fsize);
-                document.add(p);
-
-
-                p=new Paragraph( "\n A. Appliances\n",fsize1);
-                document.add(p);
-
-                p=new Paragraph("  ");
-                document.add(p);
-
-                document.add(individualTable);
-                document.add(gsttotalTableFormovable);
-
-                p=new Paragraph( "\nB. Interior Works And Furniture\n",fsize1);
-                document.add(p);
-
-                p=new Paragraph(" ");
-                document.add(p);
-                document.add(nonMovableTable);
-                document.add(gsttotalTableFornonmovable);
+                    p=new Paragraph("The detailed price break-up(post Discount) with the split-up of design, consultancy and GST charges are as follows: ",fsize);
+                    document.add(p);
 
 
-                p=new Paragraph( "\n C. Services And Civil Works\n",fsize1);
-                document.add(p);
+                    p=new Paragraph( "\n A. Furniture And Appliances\n",fsize1);
+                    document.add(p);
 
-                p=new Paragraph(" ");
-                document.add(p);
-                document.add(scwTable);
-                document.add(gsttotalTableForscw);
+                    p=new Paragraph("  ");
+                    document.add(p);
 
-                p=new Paragraph(" ");
-                document.add(p);
+                    document.add(individualTable);
+                    document.add(gsttotalTableFormovable);
 
-                p=new Paragraph("\nD. Summary\n",fsize1);
-                document.add(p);
+                    p=new Paragraph( "\nB. Interior Works\n",fsize1);
+                    document.add(p);
 
-                p=new Paragraph(" ");
-                document.add(p);
-                document.add(gsttotalTable);
-                document.add(designTable);
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    document.add(nonMovableTable);
+                    document.add(gsttotalTableFornonmovable);
+
+
+                    p=new Paragraph( "\n C. Services And Civil Works\n",fsize1);
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    document.add(scwTable);
+                    document.add(gsttotalTableForscw);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+
+                    p=new Paragraph("\nD. Summary\n",fsize1);
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    document.add(gsttotalTable);
+                    document.add(designTable);
+                }else
+                {
+                    p = new Paragraph("\n");
+                    document.add(p);
+
+                    p = new Paragraph("\n");
+                    document.add(p);
+
+                    document.newPage();
+
+                    p = new Paragraph("PRICE BREAKUP",fsize3);
+                    p.setAlignment(Element.ALIGN_CENTER);
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+
+                    p=new Paragraph("The detailed price break-up(post Discount) with the split-up of design, consultancy and GST charges are as follows: ",fsize);
+                    document.add(p);
+
+
+                    p=new Paragraph( "\n A. Appliances\n",fsize1);
+                    document.add(p);
+
+                    p=new Paragraph("  ");
+                    document.add(p);
+
+                    document.add(individualTable);
+                    document.add(gsttotalTableFormovable);
+
+                    p=new Paragraph( "\nB. Interior Works And Furniture\n",fsize1);
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    document.add(nonMovableTable);
+                    document.add(gsttotalTableFornonmovable);
+
+
+                    p=new Paragraph( "\n C. Services And Civil Works\n",fsize1);
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    document.add(scwTable);
+                    document.add(gsttotalTableForscw);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+
+                    p=new Paragraph("\nD. Summary\n",fsize1);
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    document.add(gsttotalTable);
+                    document.add(designTable);
+                }
+
 
 
             }
