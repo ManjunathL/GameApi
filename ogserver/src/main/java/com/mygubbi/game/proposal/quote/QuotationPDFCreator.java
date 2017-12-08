@@ -958,9 +958,9 @@ public class QuotationPDFCreator
                     +"7. The 50% advance paid post approval of the design and quote cannot be refunded as the production would have be commenced.\n"
                     +"8. Warranty : 5 years of warranty against any manufacturing defect. The material specifications and brands specified are as per the approved standards of Gubbi Technologies Private Limited and covered under warranty.\n"
                     +"9. Any modifications/alterations to the proposed design will have an impact on the techno commercials of this quote and hence new drawings as well as associated commercials will be provided for by MyGubbi if the same occurs.\n"
-                    +"10. Delivery shall be within 45 days from order Final Confirmation.\n"
-                    +"11. Cheque / Demant Draft should be in favour of \"GUBBI TECHNOLOGIES PRIVATE LIMITED.\n"
-                    +"12. Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n",fsize));
+                    /*+"10. Delivery shall be within 45 days from order Final Confirmation.\n"*/
+                    +"10. Cheque / Demant Draft should be in favour of \"GUBBI TECHNOLOGIES PRIVATE LIMITED.\n"
+                    +"11. Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n",fsize));
             document.add(table4);
 
             p = new Paragraph("      ");
@@ -2072,7 +2072,7 @@ public class QuotationPDFCreator
             PriceMaster accessoryPrice=RateCardService.getInstance().getAccessoryRate(accessory.code,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
             amount=amount+(accessory.quantity*accessoryPrice.getPrice());
         }
-        this.createCellWithData(tabname,"WoodWork Cost",amt-amount);
+        //this.createCellWithData(tabname,"WoodWork Cost",amt-amount);
     }
 
     private void createCellWithData(PdfPTable tabname,String str,double data)
