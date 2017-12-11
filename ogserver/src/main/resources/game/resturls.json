@@ -1033,6 +1033,14 @@
       "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/user/getisviewonly",
+      "source": "db",
+      "query":"gameuser.isViewonly",
+      "params":["email"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }
