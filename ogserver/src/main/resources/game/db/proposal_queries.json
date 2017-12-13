@@ -2152,8 +2152,13 @@
       "table": "game_user",
       "query": "select * from game_user where email=?",
       "params": ["email"]
+    },
+    {
+      "id": "proposal.version.miscellaneouslist",
+      "type": "select",
+      "table": "proposal_services",
+      "query": "select * from proposal_services where proposalId= ? and fromVersion=?",
+      "params": ["proposalId","fromVersion"]
     }
-
-
   ]
 }
