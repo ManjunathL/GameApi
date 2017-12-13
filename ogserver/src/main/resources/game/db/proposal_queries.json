@@ -2145,8 +2145,27 @@
       "table": "new_price_master",
       "query": "select proposalId, version, newTxnAmount, discountPercentage, discountAmount, oldTxnAmount,differenceAmount from new_price_master where version in ('1.0','2.0') order by proposalId desc,version desc",
       "params": []
+    },
+    {
+      "id": "proposal.select.all.newPriceMaster",
+      "type": "select",
+      "table": "new_price_master",
+      "query": "select proposalId, version, newTxnAmount, discountPercentage, discountAmount, oldTxnAmount,differenceAmount from new_price_master where version in ('1.0','2.0') order by proposalId desc,version desc",
+      "params": []
+    },
+    {
+      "id": "gameuser.isViewonly",
+      "type": "select",
+      "table": "game_user",
+      "query": "select * from game_user where email=?",
+      "params": ["email"]
+    },
+    {
+      "id": "proposal.version.miscellaneouslist",
+      "type": "select",
+      "table": "proposal_services",
+      "query": "select * from proposal_services where proposalId= ? and fromVersion=?",
+      "params": ["proposalId","fromVersion"]
     }
-
-
   ]
 }

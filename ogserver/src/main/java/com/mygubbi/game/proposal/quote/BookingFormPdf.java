@@ -32,9 +32,14 @@ public class BookingFormPdf
     {
 
     }
+    public static void main(String args[])
+    {
+        BookingFormPdf bookingFormPdf=new BookingFormPdf();
+        bookingFormPdf.createBookingForm();
+    }
     public void createBookingForm()
     {
-        String destination="E:/BookingForm.pdf";
+        String destination="E:/BookingFormPune.pdf";
         Paragraph p;
         try
         {
@@ -63,17 +68,17 @@ public class BookingFormPdf
                     +"     (c.) Once  the quote  and drawings are finalized,  no alterations  / modifications shall be accommodated. \n"
                     +"     (d.) All finalized drawings and associated commercials will be signed by the client, MyGubbi will retain the original signed documents and a copy of the same \n"
                     +"          will be provided  to the client. \n"
-                    +"     (e.) Delivery shall be within 60 working days of placement of order, subject  to the following:\n "
+                    +"     (e.) Works Completion shall be within 60 working days of placement of order or as per quotation, whichever is latest, subject  to the following:\n "
                     +"          (i)   The design and specifications of the Services has been duly signed by both parties. \n"
                     +"          (ii)  The requisite advance for the services has been paid by the Client, and \n"
                     +"          (iii) There have been no changes  to the scope of work pursuant  to the design and specifications of the Services having been duly signed off by both parties,\n"
                     +"                i.e. MyGubbi and client.\n"
-                    +"     (f.) If MyGubbi is unable  to complete installation  of the Services with the time period conveyed to the Client, a grace period of 20 (twenty) working days  \n"
+                    +"     (f.) If MyGubbi is unable  to complete installation  of the Services with the time period conveyed to the Client, a grace period of 30 (thirty) working days  \n"
                     +"          shall be available  with MyGubbi beyond  the committed  time period to complete the installation.  Intimation for any delay in installation  of Services \n"
                     +"          within the time period shall be communicated to the Clients during the tenure  of their engagement with MyGubbi \n"
                     +"3.  Prices: \n"
                     +"     (a.) The prices quoted  above are inclusive of Applicable  Taxes & Statutory Levy. \n"
-                    +"     (b.) The following are extra chargeable, to be borne by the client (the below are not applicable to orders executed within Chennai city limits): Packaging,  \n"
+                    +"     (b.) The following are extra chargeable, to be borne by the client (the below are not applicable to orders executed within Pune city limits): Packaging,  \n"
                     +"          Freight, Insurance,  Transportation  and handling  charges from Ware house to destination. \n"
                     +"     (c.) All prevailing taxes (Inter-city and Intrastate); any new taxes, duties and levies that may be applicable from time to time, announced by the Government. \n"
                     +"     (d.) Travel, boarding  and lodging of the installation  team will be charged  on actual  to be borne by the client. \n"
@@ -86,7 +91,7 @@ public class BookingFormPdf
                     +"     50% will be expected once items are completely manufactured and ready for shipment to client’s site..\n "
                     +"6.  Guidelines, Inclusions and exceptions: \n"
                     +"     (a.) All dimensions are in millimeters  (unless otherwise  specified). \n"
-                    +"     (b.) Installation  and transportation will not be charged  for our clients within Chennai city limits only.\n"
+                    +"     (b.) Installation  and transportation will not be charged  for our clients within Pune city limits only.\n"
                     +"     (c.) In the case of kitchens,  this Quote  does not include  Electro domestic  appliances, Granite,  Dado Tiling and Plumbing fixtures (unless specified). \n"
                     +"     (d.) While the team at MyGubbi will provide all the necessary  help to guide the client on modifications that will be required  on existing electrical, plumbing   \n"
                     +"          and civil works to accommodate the design finalized with the client, the team at MyGubbi will not be responsible for Electrical, plumbing  and \n"

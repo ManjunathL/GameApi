@@ -1033,6 +1033,22 @@
       "params":["proposalId"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/user/getisviewonly",
+      "source": "db",
+      "query":"gameuser.isViewonly",
+      "params":["email"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/miscellaneouslist",
+      "source": "db",
+      "query":"proposal.version.miscellaneouslist",
+      "params":["proposalId","fromVersion"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }

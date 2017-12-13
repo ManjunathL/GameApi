@@ -81,6 +81,8 @@ public class AssembledProductInQuote
         return this.product.getHingeType();
     }
     public String getHandleTypeSelection() { return this.product.getHandletypeSelection();}
+    public String getHandleCode() { return this.product.getHandleCode();}
+    public String getKnobCode() { return this.product.getKnobCode();}
     public int getNoOfLengths() {return this.product.getNoOfLengths();}
     public double getLconnectorPrice() {return this.product.getLconnectorPrice();}
     public String getSpaceType()
