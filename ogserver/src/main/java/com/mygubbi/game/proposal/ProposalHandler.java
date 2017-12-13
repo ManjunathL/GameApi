@@ -110,22 +110,34 @@ public class ProposalHandler extends AbstractRouteHandler
 
         JsonArray paramsArray = parmsJson.getJsonArray("services");
         LOG.info("Array.size = "+paramsArray.size());
+
+        List<QueryData> queryDatas = new ArrayList<>();
+        queryDatas.add(new QueryData("proposal_service.insert",paramsArray.getJsonObject(0)));
+        queryDatas.add(new QueryData("proposal_service.insert",paramsArray.getJsonObject(1)));
+        queryDatas.add(new QueryData("proposal_service.insert",paramsArray.getJsonObject(2)));
+
         // remove this looping after u know about batch insert/update
-        for(int i = 0;i<paramsArray.size();i++) {
-            LOG.info("Each json = "+paramsArray.getJsonObject(i));
-            Integer id = LocalCache.getInstance().store(new QueryData("proposal_service.insert", paramsArray.getJsonObject(i)));
-            VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+//        for(int i = 0;i<paramsArray.size();i++) {
+            Integer id = LocalCache.getInstance().store(queryDatas);
+            VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
                     (AsyncResult<Message<Integer>> selectResult) -> {
-                        QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                        if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0) {
-                            sendError(routingContext, "Error in inserting into Miscellaneous services.");
+                        List<QueryData> resultDatas = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+                        int i = 0;
+                        for (; i < resultDatas.size(); i++) {
+                            if (resultDatas.get(i).errorFlag ) {
+
+                                sendError(routingContext, "Error in inserting into Miscellaneous services.");
+                            }
                         }
 
+                        if (i == resultDatas.size()) {
+                            sendJsonResponse(routingContext, new JsonObject().put("status","success").toString());
+                        }
                     });
 
-            sendJsonResponse(routingContext, "Successfully inserted into Miscellaneous services.");
 
-        }
+
+//        }
 
     }
     private void getPriceV2(RoutingContext routingContext)
