@@ -203,6 +203,13 @@
       "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount,profit,margin,amountWotax,manufactureAmount) values (1.0, ?, ?, ? , 'Draft', 'Draft', 0.0, 'Provide Option Description',0.0,0.0,0.0,0.0,0.0,0.0,0.0)",
       "params": ["fromVersion", "proposalId", "title"]
     },
+    {
+      "id": "proposal_service.insert",
+      "type": "insert",
+      "table": "proposal_services",
+      "query": "insert into proposal_services(proposalId, fromVersion, serviceTitle, quantity, amount, updatedBy) values (?,?,?,?,?,?)",
+      "params": ["proposalId","fromVersion","serviceTitle","quantity","amount","updatedBy"]
+    },
 
     {
       "id": "proposal.update",

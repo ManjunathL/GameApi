@@ -372,7 +372,7 @@ public class ProductPriceHolder {
         {
             this.productPriceAfterDiscount = this.productPrice - (this.productPrice * this.discountPercentage);
             this.productPriceWoTax = this.productPriceAfterDiscount * woTaxFactor;
-            LOG.debug("MSC round tax factor product : " + productPriceAfterDiscount +" :" + woTaxFactor + " :" + productPriceWoTax);
+//            LOG.debug("MSC round tax factor product : " + productPriceAfterDiscount +" :" + woTaxFactor + " :" + productPriceWoTax);
 
         }
 

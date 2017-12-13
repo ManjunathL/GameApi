@@ -67,6 +67,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.route().handler(BodyHandler.create());
         this.get("/list").handler(this::getProposals);
         this.post("/create").handler(this::createProposal);
+        this.post("/version/saveService").handler(this::saveServiceFortheProposal);
         this.post("/version/publishoverride").handler(this::publishTheProposal);
         this.post("/version/publish").handler(this::publishVersionAfterValidation);
         this.post("/version/createdraft").handler(this::createInitialDraftProposal);
@@ -101,6 +102,32 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
 
+    private void saveServiceFortheProposal(RoutingContext routingContext){
+//        String sampleJson = "[{\\\"proposalId\\\":7969,\\\"fromVersion\\\":0.1,\\\"serviceTitle\\\":\\\"Project Handling Charges\\\",\\\"quantity\\\":25690,\\\"amount\\\":1541.3999999999999,\\\"updatedBy\\\":\\\"shruthi.r@mygubbi.com\\\"},{\\\"proposalId\\\":7969,\\\"fromVersion\\\":0.1,\\\"serviceTitle\\\":\\\"Deep Clearing Charges\\\",\\\"quantity\\\":1,\\\"amount\\\":26,\\\"updatedBy\\\":\\\"shruthi.r@mygubbi.com\\\"},{\\\"proposalId\\\":7969,\\\"fromVersion\\\":0.1,\\\"serviceTitle\\\":\\\"Floor Protection Charges\\\",\\\"quantity\\\":1,\\\"amount\\\":30,\\\"updatedBy\\\":\\\"shruthi.r@mygubbi.com\\\"}]" ;
+        LOG.info("routingContext.getBodyAsJson() = "+routingContext.getBodyAsJson());
+        JsonObject parmsJson = routingContext.getBodyAsJson();
+
+
+        JsonArray paramsArray = parmsJson.getJsonArray("services");
+        LOG.info("Array.size = "+paramsArray.size());
+        // remove this looping after u know about batch insert/update
+        for(int i = 0;i<paramsArray.size();i++) {
+            LOG.info("Each json = "+paramsArray.getJsonObject(i));
+            Integer id = LocalCache.getInstance().store(new QueryData("proposal_service.insert", paramsArray.getJsonObject(i)));
+            VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                    (AsyncResult<Message<Integer>> selectResult) -> {
+                        QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                        if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0) {
+                            sendError(routingContext, "Error in inserting into Miscellaneous services.");
+                        }
+
+                    });
+
+            sendJsonResponse(routingContext, "Successfully inserted into Miscellaneous services.");
+
+        }
+
+    }
     private void getPriceV2(RoutingContext routingContext)
     {
 
