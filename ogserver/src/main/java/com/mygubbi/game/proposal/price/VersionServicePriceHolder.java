@@ -57,11 +57,9 @@ public class VersionServicePriceHolder {
     {
         this.deepClearingQuantity = this.proposalVersion.getDeepClearingQty();
         this.floorProtectionSqft = this.proposalVersion.getFloorProtectionSqft();
-        if (this.projectHandlingRateCard.getRate() == 0 || this.deepClearingQuantity == 0 || this.floorProtectionSqft == 0)
+        if (this.projectHandlingRateCard.getRate() == 0 || this.totalProductPriceAfterDiscount == 0)
         {
             this.projectHandlingPrice = 0;
-            this.deepClearingPrice = 0;
-            this.floorProtectionPrice = 0;
         }
         else {
             this.projectHandlingPrice = this.totalProductPriceAfterDiscount * (this.projectHandlingRateCard.getRate() / 100);
