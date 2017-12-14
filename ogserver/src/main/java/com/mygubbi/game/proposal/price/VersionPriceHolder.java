@@ -139,6 +139,9 @@ public class VersionPriceHolder {
             deepClearingPrice = versionServicePriceHolder.getDeepClearingPrice();
             floorProtectionPrice = versionServicePriceHolder.getFloorProtectionPrice();
 
+            vrPrice = vrPrice + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
+            vrPriceAfterDiscount = vrPriceAfterDiscount + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
+
         }
     }
 
