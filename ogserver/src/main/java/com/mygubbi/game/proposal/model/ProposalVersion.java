@@ -24,6 +24,11 @@ public class ProposalVersion extends JsonObject{
     public static final String BUSINESS_DATE= "businessDate";
     public static final String UPDATED_BY= "updatedBy";
     public static final String AMOUNT= "amount";
+    public static final String DEEP_CLEARING_QTY = "deepClearingQty";
+    public static final String FLOOR_PROTECTION_SQFT = "floorProtectionSqft";
+    public static final String DEEP_CLEARING_AMT = "floorProtectionAmount";
+    public static final String FLOOR_PROTECTION_AMT = "floorProtectionAmount";
+    public static final String PROJECT_HANDLING_AMT = "projectHandlingAmount";
 
     public ProposalVersion() {}
 
@@ -114,6 +119,53 @@ public class ProposalVersion extends JsonObject{
         this.put(DISCOUNT_PERCENTAGE, discountPercentage);
         return this;
     }
+
+    public double getDeepClearingQty() {
+        return this.getDouble(DEEP_CLEARING_QTY);
+    }
+
+    public ProposalVersion setDeepClearingQty(double deepClearingQty) {
+        this.put(DEEP_CLEARING_QTY, deepClearingQty);
+        return this;
+    }
+
+    public double getDeepClearingAmount() {
+        return this.getDouble(DEEP_CLEARING_AMT);
+    }
+
+    public ProposalVersion setDeepClearingAmount(double deepClearingAmount) {
+        this.put(DEEP_CLEARING_AMT, deepClearingAmount);
+        return this;
+    }
+
+    public double getFloorProtectionSqft() {
+        return this.getDouble(FLOOR_PROTECTION_SQFT);
+    }
+
+    public ProposalVersion setFloorProtectionSqft(double floorProtectionSqft) {
+        this.put(FLOOR_PROTECTION_SQFT, floorProtectionSqft);
+        return this;
+    }
+
+    public double getFloorProtectionAmount() {
+        return this.getDouble(FLOOR_PROTECTION_AMT);
+    }
+
+    public ProposalVersion setFloorProtectionAmount(double floorProtectionAmount) {
+        this.put(FLOOR_PROTECTION_AMT, floorProtectionAmount);
+        return this;
+    }
+
+    public double getProjectHandlingAmount() {
+        return this.getDouble(PROJECT_HANDLING_AMT);
+    }
+
+    public ProposalVersion setProjectHandlingAmount(double projectHandlingAmount) {
+        this.put(PROJECT_HANDLING_AMT, projectHandlingAmount);
+        return this;
+    }
+
+
 
     public String getCreatedBy() {
         return this.getString(CREATED_BY);

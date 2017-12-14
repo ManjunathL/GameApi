@@ -34,6 +34,9 @@ public class RateCard
     public static final String NON_MOVABLE_FURNITURE = "NMF";
     public static final String SERVICES_CIVIL_WORK = "SCW";
     public static final String DISCOUNT_PERCENTAGE = "DP";
+    public static final String PROJECT_HANDLING_FACTOR = "PHC";
+    public static final String DEEP_CLEARING_FACTOR = "DCC";
+    public static final String FLOOR_PROTECTION_FACTOR = "FPC";
 
     private String code;
     private String type;

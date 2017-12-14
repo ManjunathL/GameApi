@@ -106,9 +106,9 @@ public class VersionPriceHolder {
     private double nStdModulePrice = 0;
     private double hikeModulePrice = 0;
     private double hikeModuleCost = 0;
-
-
-
+    private double projectHandlingPrice = 0;
+    private double deepClearingPrice = 0;
+    private double floorProtectionPrice = 0;
 
 
     public VersionPriceHolder(ProposalHeader proposalHeader, List<ProductPriceHolder> productPriceHolders, List<AddonPriceHolder> addonPriceHolders, ProposalVersion proposalVersion) {
@@ -122,6 +122,24 @@ public class VersionPriceHolder {
     {
         this.setupPriceForProduct();
         this.setupPriceForAddon();
+        this.setupPriceForMiscServices();
+    }
+
+    private void setupPriceForMiscServices() {
+
+        VersionServicePriceHolder versionServicePriceHolder = new VersionServicePriceHolder(this.proposalVersion,this.prPriceAfterDiscount,this.proposalHeader);
+        versionServicePriceHolder.prepare();
+        if (versionServicePriceHolder.hasErrors())
+        {
+            addError(String.valueOf(versionServicePriceHolder.getErrors()));
+        }
+        else {
+            versionServicePriceHolder.calculateTotalServiceCost();
+            projectHandlingPrice = versionServicePriceHolder.getProjectHandlingPrice();
+            deepClearingPrice = versionServicePriceHolder.getDeepClearingPrice();
+            floorProtectionPrice = versionServicePriceHolder.getFloorProtectionPrice();
+
+        }
     }
 
     private void setupPriceForAddon() {
@@ -951,17 +969,17 @@ public class VersionPriceHolder {
         return this.hikeModuleCost;
     }
 
+    public ProposalHeader getProposalHeader()
+    {
+        return this.proposalHeader;
+    }
+
     public JsonObject getPriceJson()
     {
-        LOG.info("vrProfit " +vrProfit);
-
         double addonMargin = 0;
 
         double addonProfit = this.getBPProfit() + this.getSVProfit();
         if (addonProfit != 0) addonMargin = ((addonProfit) / (this.bpPriceAfterTax + this.svPriceAfterTax)) * 100;
-
-        LOG.debug("addonProfit :" + addonProfit);
-        LOG.debug("addonMargin :" + addonMargin);
 
         return new JsonObject().put("vrPrice", this.round(this.vrPrice, 2))
                 .put("vrPriceAfterDiscount", this.round(this.vrPriceAfterDiscount,2))
@@ -982,7 +1000,10 @@ public class VersionPriceHolder {
                 .put("addonPriceWoTax", this.round(this.bpPriceAfterTax + this.svPriceAfterTax, 2))
                 .put("addonCost", this.round(this.bpCost + this.svCost, 2))
                 .put("addonProfit", this.round(addonProfit, 2))
-                .put("addonMargin", this.round(addonMargin, 2));
+                .put("addonMargin", this.round(addonMargin, 2))
+                .put("projectHandlingAmount", this.round(projectHandlingPrice, 2))
+                .put("deepClearingAmount", this.round(deepClearingPrice, 2))
+                .put("floorProtectionAmount", this.round(floorProtectionPrice, 2));
 
     }
 
