@@ -87,7 +87,7 @@
       "uri": "/gapi/proposal/updateversion",
       "source": "db",
       "query":"proposal.updateversion",
-      "params":["title","finalAmount","status","internalStatus","remarks","version","discountAmount","discountPercentage","amount","proposalId","fromVersion","ignoreAndPublishFlag","remarksIgnore"],
+      "params":["title","finalAmount","status","internalStatus","remarks","version","discountAmount","discountPercentage","amount","proposalId","fromVersion","ignoreAndPublishFlag","remarksIgnore","projectHandlingAmount","deepClearingQty","deepClearingAmount","floorProtectionSqft","floorProtectionAmount"],
       "resultfields":[],
       "default": "[]"
     },

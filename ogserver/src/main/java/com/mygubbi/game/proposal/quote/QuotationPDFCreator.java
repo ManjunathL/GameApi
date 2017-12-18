@@ -874,12 +874,12 @@ public class QuotationPDFCreator
         p=new Paragraph(" ");
         document.add(p);
 
-        if(isValid_Sow) {
+       /* if(isValid_Sow) {*/
             p = new Paragraph("* The interiors and services will be delivered within " +noOfDaysWorkCompletion +" days of the design sign off, 50% payment or site readiness whichever is later. ", fsize);
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
 
-        }
+        //}
 
             p = new Paragraph("      ");
             p.setAlignment(Element.ALIGN_LEFT);

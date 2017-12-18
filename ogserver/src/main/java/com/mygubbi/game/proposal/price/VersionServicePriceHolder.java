@@ -41,9 +41,9 @@ public class VersionServicePriceHolder {
     }
 
     private void collectFactors() {
-        this.projectHandlingRateCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.proposalHeader.getPriceDate(), this.proposalHeader.getProjectCity());
-        this.deepClearingRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.proposalHeader.getPriceDate(), this.proposalHeader.getProjectCity());
-        this.floorProtectionRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.proposalHeader.getPriceDate(), this.proposalHeader.getProjectCity());
+        this.projectHandlingRateCard = RateCardService.getInstance().getRateCard(RateCard.PROJECT_HANDLING_FACTOR, RateCard.FACTOR_TYPE,this.proposalHeader.getPriceDate(), this.proposalHeader.getProjectCity());
+        this.deepClearingRateCard = RateCardService.getInstance().getRateCard(RateCard.DEEP_CLEARING_FACTOR, RateCard.FACTOR_TYPE,this.proposalHeader.getPriceDate(), this.proposalHeader.getProjectCity());
+        this.floorProtectionRateCard = RateCardService.getInstance().getRateCard(RateCard.FLOOR_PROTECTION_FACTOR, RateCard.FACTOR_TYPE,this.proposalHeader.getPriceDate(), this.proposalHeader.getProjectCity());
 
 
         if (this.projectHandlingRateCard == null || this.deepClearingRateCard == null || this.floorProtectionRateCard == null)
@@ -57,6 +57,8 @@ public class VersionServicePriceHolder {
     {
         this.deepClearingQuantity = this.proposalVersion.getDeepClearingQty();
         this.floorProtectionSqft = this.proposalVersion.getFloorProtectionSqft();
+        if(this.deepClearingPrice == 0 && this.deepClearingQuantity == 0) this.deepClearingQuantity =1;
+        if(this.floorProtectionSqft == 0 && this.floorProtectionPrice == 0) this.floorProtectionSqft =1;
         if (this.projectHandlingRateCard.getRate() == 0 || this.totalProductPriceAfterDiscount == 0)
         {
             this.projectHandlingPrice = 0;

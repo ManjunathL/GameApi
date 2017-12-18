@@ -1091,6 +1091,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void getRateFactor(RoutingContext routingContext, String code, Date priceDate, String city) {
         PriceMaster factorRate = RateCardService.getInstance().getFactorRate(code, priceDate, city);
+        LOG.info("factor rate " +code + "priceDate " +priceDate+ " city " +city );
         if (factorRate == null ) {
             LOG.error("Error in retrieving factor rate");
             sendError(routingContext, "Error in retrieving factor rate.");
