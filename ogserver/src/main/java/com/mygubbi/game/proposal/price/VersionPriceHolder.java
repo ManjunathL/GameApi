@@ -109,6 +109,8 @@ public class VersionPriceHolder {
     private double projectHandlingPrice = 0;
     private double deepClearingPrice = 0;
     private double floorProtectionPrice = 0;
+    private double deepClearingQty = 0;
+    private double floorProtectionSqft = 0;
 
 
     public VersionPriceHolder(ProposalHeader proposalHeader, List<ProductPriceHolder> productPriceHolders, List<AddonPriceHolder> addonPriceHolders, ProposalVersion proposalVersion) {
@@ -138,6 +140,8 @@ public class VersionPriceHolder {
             projectHandlingPrice = versionServicePriceHolder.getProjectHandlingPrice();
             deepClearingPrice = versionServicePriceHolder.getDeepClearingPrice();
             floorProtectionPrice = versionServicePriceHolder.getFloorProtectionPrice();
+            deepClearingQty = versionServicePriceHolder.getDeepClearingQuantity();
+            floorProtectionSqft=versionServicePriceHolder.getFloorProtectionSqft();
 
             vrPrice = vrPrice + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
             vrPriceAfterDiscount = vrPriceAfterDiscount + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
@@ -975,6 +979,26 @@ public class VersionPriceHolder {
     public ProposalHeader getProposalHeader()
     {
         return this.proposalHeader;
+    }
+
+    public double getProjectHandlingPrice() {
+        return projectHandlingPrice;
+    }
+
+    public double getDeepClearingPrice() {
+        return deepClearingPrice;
+    }
+
+    public double getFloorProtectionPrice() {
+        return floorProtectionPrice;
+    }
+
+    public double getDeepClearingQty() {
+        return deepClearingQty;
+    }
+
+    public double getFloorProtectionSqft() {
+        return floorProtectionSqft;
     }
 
     public JsonObject getPriceJson()

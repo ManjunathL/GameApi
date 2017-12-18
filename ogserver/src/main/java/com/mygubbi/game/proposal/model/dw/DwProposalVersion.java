@@ -141,6 +141,11 @@ public class DwProposalVersion extends JsonObject {
     private static final String DESIGNER_EMAIL ="designerEmail" ;
     private static final String DESIGNER_PHONE ="designerPhone" ;
 
+    private static final String DEEP_CLEARING_QTY ="deepClearingQty" ;
+    private static final String FLOOR_PROTECTION_SQFT ="floorProtectionSqft" ;
+    private static final String DEEP_CLEARING_AMT ="deepClearingAmount" ;
+    private static final String FLOOR_PROTECTION_AMT ="floorProtectionAmount" ;
+    private static final String PROJECT_HANDLING_AMT ="projectHandlingAmount" ;
 
     public DwProposalVersion() {
     }
@@ -186,7 +191,49 @@ public class DwProposalVersion extends JsonObject {
         return this;
     }
 
+    public static String getDeepClearingQty() {
+        return DEEP_CLEARING_QTY;
+    }
+    public DwProposalVersion setDeepClearingQty(Double qty)
+    {
+        put(DEEP_CLEARING_QTY,qty);
+        return this;
+    }
+    public static String getFloorProtectionSqft() {
+        return FLOOR_PROTECTION_SQFT;
+    }
+    public DwProposalVersion setFloorProtectionInSqft(Double sqft)
+    {
+        put(FLOOR_PROTECTION_SQFT,sqft);
+        return this;
+    }
+    public static String getDeepClearingAmt() {
+        return DEEP_CLEARING_AMT;
+    }
+    public DwProposalVersion setDeepClearingAmt(Double amount)
+    {
+        put(DEEP_CLEARING_AMT,amount);
+        return this;
+    }
 
+    public static String getFloorProtectionAmt() {
+        return FLOOR_PROTECTION_AMT;
+    }
+    public DwProposalVersion setFloorProtectionAmt(Double amount)
+    {
+        put(FLOOR_PROTECTION_AMT,amount);
+        return this;
+    }
+
+    public static String getProjectHandlingAmt() {
+        return PROJECT_HANDLING_AMT;
+    }
+
+    public DwProposalVersion setProjectHandlingAmt(Double amount)
+    {
+        put(PROJECT_HANDLING_AMT,amount);
+        return this;
+    }
 
     public String getCrmid() {
         return this.getString(CRMID);
@@ -1358,6 +1405,12 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setBroughtoutProductCount(versionPriceHolder.getBPCount());
         dwProposalVersion.setServicesCount(versionPriceHolder.getServicesCount());
         dwProposalVersion.setDesignerName(proposalHeader.getDesignerName());
+
+        dwProposalVersion.setDeepClearingQty(versionPriceHolder.getDeepClearingQty());
+        dwProposalVersion.setDeepClearingAmt(versionPriceHolder.getDeepClearingPrice());
+        dwProposalVersion.setFloorProtectionInSqft(versionPriceHolder.getFloorProtectionSqft());
+        dwProposalVersion.setFloorProtectionAmt(versionPriceHolder.getFloorProtectionPrice());
+        dwProposalVersion.setProjectHandlingAmt(versionPriceHolder.getProjectHandlingPrice());
 
 
         return dwProposalVersion;
