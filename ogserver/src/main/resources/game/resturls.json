@@ -1046,7 +1046,7 @@
       "uri": "/gapi/proposal/version/miscellaneouslist",
       "source": "db",
       "query":"proposal.version.miscellaneouslist",
-      "params":["proposalId","fromVersion"],
+      "params":["proposalId","version"],
       "resultfields":[],
       "default": "[]"
     }

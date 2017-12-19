@@ -21,6 +21,9 @@ public class QuoteRequest
     private static final String BOOKING_FORMFLAG= "bookingFormFlag";
     private static final String WORKSCONTRACT_FLAG= "worksContractFlag";
     private static final String DISCOUNT_PERCENTAGE = "discountPercentage";
+    private static final String PROJECT_HANDLING_AMOUNT="projectHandlingAmount";
+    private static final String DEEP_CLEARING_AMOUNT="deepClearingAmount";
+    private static final String FLOOR_PROTECTION_AMOUNT="floorProtectionAmount";
 
     private int proposalId;
     private String fromVersion;
@@ -31,6 +34,9 @@ public class QuoteRequest
     private String bookingFormFlag;
     private String worksContractFlag;
     private double discountPercentage;
+    private double projectHandlingAmount;
+    private double deepClearingAmount;
+    private double floorProtectionAmount;
 
     public boolean isValidSowRows() {
         return isValidSowRows;
@@ -84,6 +90,15 @@ public class QuoteRequest
         }
         if(jsonData.containsKey(WORKSCONTRACT_FLAG)){
             this.worksContractFlag=jsonData.getString(WORKSCONTRACT_FLAG);
+        }
+        if(jsonData.containsKey(PROJECT_HANDLING_AMOUNT)){
+            this.projectHandlingAmount=jsonData.getDouble(PROJECT_HANDLING_AMOUNT);
+        }
+        if(jsonData.containsKey(FLOOR_PROTECTION_AMOUNT)){
+            this.floorProtectionAmount=jsonData.getDouble(FLOOR_PROTECTION_AMOUNT);
+        }
+        if(jsonData.containsKey(DEEP_CLEARING_AMOUNT)){
+            this.deepClearingAmount=jsonData.getDouble(DEEP_CLEARING_AMOUNT);
         }
     }
 
@@ -184,6 +199,30 @@ public class QuoteRequest
         return this.discountPercentage;
     }
 
+    public double getProjectHandlingAmount() {
+        return projectHandlingAmount;
+    }
+
+    public void setProjectHandlingAmount(double projectHandlingAmount) {
+        this.projectHandlingAmount = projectHandlingAmount;
+    }
+
+    public double getDeepClearingAmount() {
+        return deepClearingAmount;
+    }
+
+    public void setDeepClearingAmount(double deepClearingAmount) {
+        this.deepClearingAmount = deepClearingAmount;
+    }
+
+    public double getFloorProtectionAmount() {
+        return floorProtectionAmount;
+    }
+
+    public void setFloorProtectionAmount(double floorProtectionAmount) {
+        this.floorProtectionAmount = floorProtectionAmount;
+    }
+
     @Override
     public String toString() {
         return "QuoteRequest{" +
@@ -196,6 +235,9 @@ public class QuoteRequest
                 ", bookingFormFlag='" + bookingFormFlag + '\'' +
                 ", worksContractFlag='" + worksContractFlag + '\'' +
                 ", discountPercentage=" + discountPercentage +
+                ", projectHandlingAmount=" + projectHandlingAmount +
+                ", deepClearingAmount=" + deepClearingAmount +
+                ", floorProtectionAmount=" + floorProtectionAmount +
                 ", outputType=" + outputType +
                 ", isValidSowRows=" + isValidSowRows +
                 '}';

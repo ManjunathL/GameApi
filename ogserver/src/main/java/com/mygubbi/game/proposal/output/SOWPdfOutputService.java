@@ -8,7 +8,9 @@ import com.mygubbi.db.QueryData;
 import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.model.Proposal;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.*;
 
@@ -269,7 +271,8 @@ public class SOWPdfOutputService extends AbstractVerticle {
     {
         try
         {
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,proposalSOWs);
+            ProposalVersion proposalVersion=new ProposalVersion();
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,proposalSOWs,proposalVersion);
             outputCreator.create();
 
             QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData,proposalSOWs);
@@ -295,8 +298,9 @@ public class SOWPdfOutputService extends AbstractVerticle {
         LOG.info("office only pdf ");
         try
         {
+            ProposalVersion proposalVersion=new ProposalVersion();
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion);
             outputCreator.create();
             OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
             String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
@@ -321,8 +325,9 @@ public class SOWPdfOutputService extends AbstractVerticle {
     {
         try
         {
+            ProposalVersion proposalVersion=new ProposalVersion();
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>());
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion);
             outputCreator.create();
 
             WorksContractPDFCreator worksContractPDFCreator=new WorksContractPDFCreator(quoteData,proposalHeader);

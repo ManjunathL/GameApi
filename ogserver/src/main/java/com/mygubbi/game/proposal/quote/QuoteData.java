@@ -4,6 +4,7 @@ import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,7 +69,7 @@ public class QuoteData
         //this.worksContractFlag
         this.prepare();
     }
-    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount,String fromVersion,String bookingFormFlag,double discountPercentage,String worksContractFlag)
+    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount, ProposalVersion proposalVersion, String bookingFormFlag, double discountPercentage, String worksContractFlag)
     {
         this.city = proposalHeader.getProjectCity();
         this.priceDate = proposalHeader.getPriceDate();
@@ -86,11 +87,35 @@ public class QuoteData
         this.products = products;
         if (addons != null) this.headerLevelAddons = addons;
         this.discountAmount = discountAmount;
-        this.fromVersion=fromVersion;
+        this.fromVersion=proposalVersion.getVersion();
         this.bookingFormFlag=bookingFormFlag;
         this.worksContractFlag=worksContractFlag;
         this.prepare();
     }
+
+     public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount, String proposalVersion, String bookingFormFlag, double discountPercentage, String worksContractFlag)
+{
+    this.city = proposalHeader.getProjectCity();
+    this.priceDate = proposalHeader.getPriceDate();
+    this.discountPercentage=discountPercentage;
+    if(products != null) {
+        for (ProductLineItem productLineItem : products) {
+            this.title = productLineItem.getTitle();
+        }
+    }
+    if (this.priceDate == null)
+    {
+        this.priceDate = new java.sql.Date(System.currentTimeMillis());
+    }
+    this.proposalHeader = proposalHeader;
+    this.products = products;
+    if (addons != null) this.headerLevelAddons = addons;
+    this.discountAmount = discountAmount;
+    this.fromVersion=proposalVersion;
+    this.bookingFormFlag=bookingFormFlag;
+    this.worksContractFlag=worksContractFlag;
+    this.prepare();
+}
 
     public QuoteData(ProposalHeader proposalHeader,String fromVersion)
     {

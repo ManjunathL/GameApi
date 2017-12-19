@@ -54,6 +54,9 @@ public class QuotationPDFCreator
     public static final String NON_MOVABLE_PRICE_TAX = "NMF";
     public static final String MOVABLE_PRICE_TAX = "MF";
     public static final String SCW_PRICE_TAX = "SCW";
+    public static final String PROJECT_HANDLING_TAX = "PHT";
+    public static final String DEEP_CLEARING_TAX = "DCT";
+    public static final String FLOOR_PROTECTION_TAX = "FPT";
 
     private static final String[] ALPHABET_SEQUENCE = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"};
     private static final String[] BOLD_ALPHABET_SEQUENCE = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"};
@@ -76,7 +79,7 @@ public class QuotationPDFCreator
     Font headingSize=new com.itextpdf.text.Font(Font.FontFamily.TIMES_ROMAN,10, com.itextpdf.text.Font.BOLD);
     Font zapfdingbats = new Font(Font.FontFamily.ZAPFDINGBATS, 16);
     private ProposalHeader proposalHeader;
-    private ProposalHandler proposalHandler;
+    private ProposalVersion proposalVersion;
     double totalproductPrice=0,totalDAP=0,totalTaxAmt=0,totalPriceAfterTax=0;
     double set1totalproductPrice=0,set1totalDAP=0,set1totalTaxAmt=0,set1totalPriceAfterTax=0;
     double movabletotalproductPrice=0,movabletotalDAP=0,movabletotalTaxAmt=0,movabletotalPriceAfterTax=0;
@@ -88,9 +91,11 @@ public class QuotationPDFCreator
     double set2totalproductPrice=0,set2totalDAP=0,set2totalTaxAmt=0,set2totalPriceAfterTax=0;
     int noOfDaysWorkCompletion;
     List<GSTForProducts> nonMovableList=new ArrayList<>();
+    List<GSTForProducts> proposalservicesList=new ArrayList<>();
     List<GSTForProducts> movableList=new ArrayList<>();
     List<GSTForProducts> scwList=new ArrayList<>();
     List<GSTForProducts> designServiceList=new ArrayList<>();
+    String MSCtaxPercentage="18%";
 
     List<GSTForProducts> finalMovableList=new ArrayList<>();
     List<GSTForProducts> finalmovableList=new ArrayList<>();
@@ -100,14 +105,17 @@ public class QuotationPDFCreator
     java.util.Date gstTextChangeDate = new java.util.Date(117 ,10,15,0,0,00);
     Boolean gstTextChangeDateValue;
 
-    PriceMaster designServicePrice, nonMovablePrice, movablePrice, nonMovablePriceTax, movablePriceTax,scwTax,designServiceTax;
+    PriceMaster designServicePrice, nonMovablePrice, movablePrice, nonMovablePriceTax, movablePriceTax,scwTax,designServiceTax,projectHandlingTax,floorProtectionTax,deepClearingTax;
 
-    QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader)
+    QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader,ProposalVersion proposalVersion)
     {
+        LOG.info("Quote data " +quoteData);
+        LOG.info("proposal Version " +proposalVersion);
         this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
         this.noOfDaysWorkCompletion=proposalHeader.getNoOfDaysforworkcompletion();
+        this.proposalVersion=proposalVersion;
         if(date.after(currentDate))
         {
             getProducts();
@@ -1105,6 +1113,41 @@ public class QuotationPDFCreator
             gsttotalTableForscw.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableForscw, "TOTAL"," ",scwtotalproductPrice,scwtotalDAP,scwtotalTaxAmt, String.valueOf(round(scwtotalPriceAfterTax, 2)));
 
+            PdfPTable mscTable= new PdfPTable(gstcolumnWidths1);
+            mscTable.setWidthPercentage(100);
+            PdfPCell mscCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
+            PdfPCell mscCell2 = new PdfPCell(new Paragraph("ITEM", fsize1));
+            //PdfPCell scwCell3 = new PdfPCell(new Paragraph("Annexure", fsize1));
+            PdfPCell mscCell5 = new PdfPCell(new Paragraph("GST RATE", fsize1));
+            PdfPCell mscCell6 = new PdfPCell(new Paragraph("GST", fsize1));
+            PdfPCell mscCell7 = new PdfPCell(new Paragraph("ITEM PRICE", fsize1));
+            PdfPCell mscCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
+            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
+            mscTable.addCell(mscCell1);
+            mscTable.addCell(mscCell2);
+            //scwTable.addCell(scwCell3);
+            //gstTable.addCell(gstCell3)
+            mscTable.addCell(mscCell5);
+            mscTable.addCell(mscCell6);
+            mscTable.addCell(mscCell7);
+            mscTable.addCell(mscCell4);
+
+            count=1;
+            for(GSTForProducts proposalServiceList:proposalservicesList)
+            {
+                LOG.info("propsal Service List " +proposalServiceList);
+                this.createRowAndFillDataForIndividualForProducts(nonMovableTable,count, proposalServiceList.getProducttitle(),proposalServiceList.getCategoryType(),this.round(proposalServiceList.getPriceAfterDiscount(),2), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax(), proposalServiceList.getTax());
+                //this.createRowAndFillDataTemp(mscTable,count,proposalServiceList.getProducttitle(),proposalServiceList.getTax(),proposalServiceList.getPriceAfterDiscount(), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax());
+            }
+            /*this.createRowAndFillDataTemp(mscTable,"1"," Project Handling Charges","18%","15.25","84.75","100");
+            this.createRowAndFillDataTemp(mscTable,"2"," Transportation Charges","18%","15.25","84.75","100");
+            this.createRowAndFillDataTemp(mscTable,"3"," Deep Clearing Charges","18%","15.25","84.75","100");
+            this.createRowAndFillDataTemp(mscTable,"4"," Floor Protection Charges","18%","15.25","84.75","100");
+*/
+            PdfPTable gsttotalTableFormsc = new PdfPTable(gstcolumnWidths1);
+            gsttotalTableFormsc.setWidthPercentage(100);
+            this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableFormsc, "TOTAL"," ",0.0,400,339, "61");
+
             PdfPTable gstTable = new PdfPTable(gstcolumnWidths1);
             gstTable.setWidthPercentage(100);
             PdfPCell gstCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
@@ -1215,6 +1258,9 @@ public class QuotationPDFCreator
                     p=new Paragraph(" ");
                     document.add(p);
 
+                    p=new Paragraph(" ");
+                    document.add(p);
+
                     p=new Paragraph("\nD. Summary\n",fsize1);
                     document.add(p);
 
@@ -1268,6 +1314,14 @@ public class QuotationPDFCreator
                     document.add(p);
                     document.add(scwTable);
                     document.add(gsttotalTableForscw);
+
+                    p=new Paragraph( "\n D. Miscellaneous:\n",fsize1);
+                    document.add(p);
+
+                    p=new Paragraph(" ");
+                    document.add(p);
+                    document.add(mscTable);
+                    document.add(gsttotalTableFormsc);
 
                     p=new Paragraph(" ");
                     document.add(p);
@@ -2375,7 +2429,20 @@ public class QuotationPDFCreator
             this.colorGroupCode = colorGroupCode;
         }
     }
-
+    public void getProposalServices()
+    {
+        LOG.info("project handling tax " +projectHandlingTax);
+        LOG.info("project handling Amount " +proposalVersion.getProjectHandlingAmount() + "project handling tax " +projectHandlingTax.getSourcePrice());
+        double projectHandlingwithTax=proposalVersion.getProjectHandlingAmount()*projectHandlingTax.getSourcePrice();
+        double deepClearingwithTax=proposalVersion.getDeepClearingAmount()*deepClearingTax.getSourcePrice();
+        double floorProtectionwithTax=proposalVersion.getFloorProtectionAmount()*floorProtectionTax.getSourcePrice();
+        GSTForProducts gstPHC=new GSTForProducts("Proposal Services","Project Handling Charges",proposalVersion.getProjectHandlingAmount(),proposalVersion.getProjectHandlingAmount(),projectHandlingwithTax,"18%","A","NA");
+        GSTForProducts gstDCC=new GSTForProducts("Proposal Services","Deep Clearing Charges",proposalVersion.getDeepClearingAmount(),proposalVersion.getDeepClearingAmount(),deepClearingwithTax,"18%","A","NA");
+        GSTForProducts gstFPC=new GSTForProducts("Proposal Services","Floor Protection Charges",proposalVersion.getFloorProtectionAmount(),proposalVersion.getFloorProtectionAmount(),floorProtectionwithTax,"18%","A","NA");
+        proposalservicesList.add(gstPHC);
+        proposalservicesList.add(gstDCC);
+        proposalservicesList.add(gstFPC);
+    }
     public void getProducts()
     {
         LOG.info("price Date " +proposalHeader.getPriceDate()+ " project city " +proposalHeader.getProjectCity());
@@ -2386,7 +2453,14 @@ public class QuotationPDFCreator
         nonMovablePriceTax=RateCardService.getInstance().getFactorRate(NON_MOVABLE_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         movablePriceTax=RateCardService.getInstance().getFactorRate(MOVABLE_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         scwTax=RateCardService.getInstance().getFactorRate(SCW_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+        LOG.info("project handling tax " +PROJECT_HANDLING_TAX + "priceDate " +proposalHeader.getPriceDate()+ " project city " +proposalHeader.getProjectCity());
+        projectHandlingTax=RateCardService.getInstance().getFactorRate(PROJECT_HANDLING_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+        LOG.info("tax rate" +projectHandlingTax);
+        floorProtectionTax=RateCardService.getInstance().getFactorRate(FLOOR_PROTECTION_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+        deepClearingTax=RateCardService.getInstance().getFactorRate(DEEP_CLEARING_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
+
         List<AssembledProductInQuote> assembledProducts = this.quoteData.getAssembledProducts();
+        getProposalServices();
         for (AssembledProductInQuote product : assembledProducts)
         {
             ProductCategoryMap productCategoryMap = ModuleDataService.getInstance().getProductCategoryMap(product.getCatagoryName(),proposalHeader.getPriceDate());
@@ -2780,7 +2854,55 @@ public class QuotationPDFCreator
 
         finalcount++;
     }
+    private void createRowForDataForProposalServices(PdfPTable tabname,int count,String GSTCategory,String categoryType, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
+    {
+        double tax_amount = round(DesignpriceAfterDsicount - currentpriceAfterTax, 2);
+        producttotalPrice+=PriceAfterDiscount;
+        producttotalDAP+=DesignpriceAfterDsicount;
+        producttotalTaxAmt+=currentpriceAfterTax;
+        producttotalPriceAfterTax+=tax_amount;
 
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+
+        PdfPCell cell1 = new PdfPCell();
+        Pindex = new Paragraph(Integer.valueOf(count).toString(), size1);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        PdfPCell cell2 = new PdfPCell();
+        Pindex = new Paragraph(GSTCategory, fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+        PdfPCell cell5 = new PdfPCell();
+        Pindex = new Paragraph(tax, fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell5.addElement(Pindex);
+        tabname.addCell(cell5);
+
+        PdfPCell cell6 = new PdfPCell();
+        Pindex = new Paragraph(Double.toString(tax_amount), fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell6.addElement(Pindex);
+        tabname.addCell(cell6);
+
+        PdfPCell cell7 = new PdfPCell();
+        Pindex = new Paragraph(Double.toString(currentpriceAfterTax), fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell7.addElement(Pindex);
+        tabname.addCell(cell7);
+
+        PdfPCell cell4 = new PdfPCell();
+        Pindex = new Paragraph(Double.toString(DesignpriceAfterDsicount), fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
+    }
 
     private void createRowAndFillDataForIndividualForProducts(PdfPTable tabname,int count,String GSTCategory,String categoryType, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
     {
@@ -3043,4 +3165,46 @@ public class QuotationPDFCreator
         tabname.addCell(cell4);
 
     }
+
+    private void createRowAndFillDataTemp(PdfPTable tabname,int index, String title, String quantity, double amount, double total,double value1)
+    {
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph(String.valueOf(index),size1);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        cell=new PdfPCell(new Paragraph(title,fsize));
+        tabname.addCell(cell);
+
+        PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph(this.getRoundOffValue(quantity),fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+
+        PdfPCell cell4 = new PdfPCell();
+        Pindex = new Paragraph(String.valueOf(amount), fsize);
+        Pindex.setAlignment(Element.ALIGN_LEFT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
+        PdfPCell cell3 = new PdfPCell();
+        Paragraph Pamt = new Paragraph(String.valueOf(total), fsize);
+        Pamt.setAlignment(Element.ALIGN_LEFT);
+        cell3.addElement(Pamt);
+        tabname.addCell(cell3);
+
+        PdfPCell cell5 = new PdfPCell();
+        Paragraph Pamt1 = new Paragraph(String.valueOf(value1), fsize);
+        Pamt.setAlignment(Element.ALIGN_LEFT);
+        cell5.addElement(Pamt1);
+        tabname.addCell(cell5);
+    }
+
 }

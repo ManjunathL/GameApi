@@ -1,5 +1,6 @@
 package com.mygubbi.game.proposal.output;
 
+import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.sow.SOWTemplateCreator;
 //import com.mygubbi.game.proposal.erp.BOQTemplateCreator;
@@ -23,7 +24,7 @@ public interface ProposalOutputCreator
 
     public String getOutputKey();
 
-    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader,Boolean isValidSow,List<SOWPdf> proposalSOWs) {
+    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader, Boolean isValidSow, List<SOWPdf> proposalSOWs, ProposalVersion proposalVersion) {
 
         switch (outputType) {
             case QUOTATION:
@@ -36,7 +37,7 @@ public interface ProposalOutputCreator
                 return new ExcelSalesOrderCreator(quoteData, proposalHeader);
 
             case QUOTEPDF:
-                return new PdfQuoteCreator(quoteData, proposalHeader,isValidSow);
+                return new PdfQuoteCreator(quoteData, proposalHeader,isValidSow,proposalVersion);
             case SOWPDF:
                 return new PdfSowCreator(quoteData, proposalHeader,proposalSOWs);
             case BOOKING_FORM:

@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.output.ProposalOutputCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,18 +19,19 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
 
     private QuoteData quoteData;
     private ProposalHeader proposalHeader;
+    private ProposalVersion proposalVersion;
     private String targetFile;
     private String targetFileForWorksContract;
     private boolean isValid_Sow;
 
-    public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader,boolean isValid_Sow){
+    public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader, boolean isValid_Sow, ProposalVersion proposalVersion){
         this.quoteData = quoteData;
         this.proposalHeader = proposalHeader;
         String targetFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal");
         this.targetFile = targetFolder+"/"+quoteData.getProposalHeader().getId() + "/quotation.pdf";
         this.targetFileForWorksContract=targetFolder+"/"+quoteData.getProposalHeader().getId() + "/workscontract.pdf";
         this.isValid_Sow = isValid_Sow;
-
+        this.proposalVersion=proposalVersion;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
             //here take target file as input
         }else {
             LOG.info("else");
-            new QuotationPDFCreator(quoteData, proposalHeader).createpdf(targetFile,isValid_Sow);
+            new QuotationPDFCreator(quoteData, proposalHeader,proposalVersion).createpdf(targetFile,isValid_Sow);
 
         }
     }

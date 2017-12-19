@@ -2,13 +2,12 @@ package com.mygubbi.game.proposal.output;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
-import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
-import com.mygubbi.game.QuoteSOWPDFCreator;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
@@ -62,25 +61,29 @@ public class ProposalOutputService extends AbstractVerticle
 
     private void getProposalHeader(QuoteRequest quoteRequest, Message message)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("proposal.header", new JsonObject().put("id", quoteRequest.getProposalId())));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+        List<QueryData> queryDataList = new ArrayList<>();
+        queryDataList.add(new QueryData("proposal.header", new JsonObject().put("id", quoteRequest.getProposalId())));
+        queryDataList.add(new QueryData("proposal.version.selectversion", new JsonObject().put("proposalId", quoteRequest.getProposalId()).put("version",quoteRequest.getFromVersion())));
+        Integer id = LocalCache.getInstance().store(queryDataList);
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty())
+                    List<QueryData> resultData = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.get(0).errorFlag || resultData.get(1).errorFlag)
                     {
                         message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal not found for id:" + quoteRequest.getProposalId())));
                         LOG.error("Proposal not found for id:" + quoteRequest.getProposalId());
                     }
                     else
                     {
-                        ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
-                        this.getProposalProducts(proposalHeader, quoteRequest, message);
+                        ProposalHeader proposalHeader = new ProposalHeader(resultData.get(0).rows.get(0));
+                        ProposalVersion proposalVersion = new ProposalVersion(resultData.get(1).rows.get(0));
+                        this.getProposalProducts(proposalHeader, quoteRequest, message,proposalVersion);
                     }
                 });
 
     }
 
-    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message)
+    private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message, ProposalVersion proposalVersion)
     {
         QueryData queryData = null;
         JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
@@ -106,7 +109,7 @@ public class ProposalOutputService extends AbstractVerticle
                         //message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal products not found for id:" + proposalHeader.getId())));
                         LOG.error("Proposal products not found for id:" + proposalHeader.getId());
                         //return;
-                        this.getProposalAddons(quoteRequest, proposalHeader,products, message);
+                        this.getProposalAddons(quoteRequest, proposalHeader,products, message, proposalVersion);
                     }
                     else
                     {
@@ -124,12 +127,12 @@ public class ProposalOutputService extends AbstractVerticle
                                 products.add(new ProductLineItem(json));
                             }
                         }
-                        this.getProposalAddons(quoteRequest, proposalHeader, products, message);
+                        this.getProposalAddons(quoteRequest, proposalHeader, products, message,proposalVersion);
                     }
                 });
     }
 
-    private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message)
+    private void getProposalAddons(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products, Message message, ProposalVersion proposalVersion)
     {
 
         QueryData queryData = null;
@@ -173,20 +176,20 @@ public class ProposalOutputService extends AbstractVerticle
                                 addons.add(new ProductAddon(json));
                             }
                         }
-                        this.createQuote(quoteRequest, proposalHeader, products, addons, message);
+                        this.createQuote(quoteRequest, proposalHeader, products, addons, message, proposalVersion);
                     }
                 });
 
     }
 
     private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
-                             List<ProductAddon> addons, Message  message)
+                             List<ProductAddon> addons, Message message, ProposalVersion proposalVersion)
     {
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),proposalVersion,quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
             boolean isValidSow = quoteRequest.isValidSowRows();
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow, new ArrayList<SOWPdf>());
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow, new ArrayList<SOWPdf>(),proposalVersion);
             outputCreator.create();
 
             LOG.debug("created Quotation.pdf");
