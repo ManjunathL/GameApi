@@ -271,8 +271,8 @@
       "id": "version.createversion",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,businessDate,deepClearingQty,projectHandlingAmount,deepClearingAmount,floorProtectionSqft,floorProtectionAmount) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?,?,?,?,?,?,?)",
-      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount","businessDate","deepClearingQty","projectHandlingAmount","deepClearingAmount","floorProtectionSqft","floorProtectionAmount"]
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountPercentage,discountAmount,amount,businessDate,deepClearingQty,projectHandlingAmount,deepClearingAmount,floorProtectionSqft,floorProtectionAmount,projectHandlingChargesApplied,deepClearingChargesApplied,floorProtectionChargesApplied) values (?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ?,?,?,?,?,?,?,?,?,?)",
+      "params": ["version","fromVersion","proposalId", "title","status","internalStatus","finalAmount","remarks","discountPercentage","discountAmount","amount","businessDate","deepClearingQty","projectHandlingAmount","deepClearingAmount","floorProtectionSqft","floorProtectionAmount","projectHandlingChargesApplied","deepClearingChargesApplied","floorProtectionChargesApplied"]
     },
 
     {
