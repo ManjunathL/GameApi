@@ -146,6 +146,8 @@ public class VersionPriceHolder {
             vrPrice = vrPrice + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
             vrPriceAfterDiscount = vrPriceAfterDiscount + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
 
+            System.out.println("Shilpa vrPRice = "+vrPrice);
+            System.out.println("Shilpa vrPriceAfterDiscount = "+vrPriceAfterDiscount);
         }
     }
 

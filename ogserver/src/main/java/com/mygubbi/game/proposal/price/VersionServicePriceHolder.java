@@ -18,8 +18,8 @@ public class VersionServicePriceHolder {
     private RateCard floorProtectionRateCard;
 
 
-    private double deepClearingQuantity = 1;
-    private double floorProtectionSqft = 1;
+    private double deepClearingQuantity = 0;//shilpa made it zero,previously it was 1
+    private double floorProtectionSqft = 0;//shilpa made it zero,previously it was 1
 
     private double projectHandlingPrice = 0;
     private double deepClearingPrice = 0;
@@ -57,13 +57,17 @@ public class VersionServicePriceHolder {
     {
         this.deepClearingQuantity = this.proposalVersion.getDeepClearingQty();
         this.floorProtectionSqft = this.proposalVersion.getFloorProtectionSqft();
-        if(this.deepClearingPrice == 0 && this.deepClearingQuantity == 0) this.deepClearingQuantity =1;
-        if(this.floorProtectionSqft == 0 && this.floorProtectionPrice == 0) this.floorProtectionSqft =1;
+//        if(this.deepClearingPrice == 0 && this.deepClearingQuantity == 0) this.deepClearingQuantity =1;
+//        if(this.floorProtectionSqft == 0 && this.floorProtectionPrice == 0) this.floorProtectionSqft =1;
+        //shilpa commented top lines
         if (this.projectHandlingRateCard.getRate() == 0 || this.totalProductPriceAfterDiscount == 0)
         {
             this.projectHandlingPrice = 0;
         }
         else {
+            System.out.println("Shilpa:: this.totalProductPriceAfterDiscount = "+this.totalProductPriceAfterDiscount);
+            System.out.println("Shilpa:: this.projectHandlingRateCard = "+this.projectHandlingRateCard.getRate());
+
             this.projectHandlingPrice = this.totalProductPriceAfterDiscount * (this.projectHandlingRateCard.getRate() / 100);
             this.deepClearingPrice = this.deepClearingRateCard.getRate() * this.deepClearingQuantity;
             this.floorProtectionPrice = this.floorProtectionRateCard.getRate() * this.floorProtectionSqft;

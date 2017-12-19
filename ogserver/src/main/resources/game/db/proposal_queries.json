@@ -53,7 +53,7 @@
       "id": "proposal.updateversion",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set title = ?,finalAmount = ? , status = ? , internalStatus = ?, remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , amount = ?, profit = ? , margin = ?, amountWotax = ?, manufactureAmount = ?, ignoreAndPublishFlag = ?, remarksIgnore = ?,projectHandlingAmount = ?,deepClearingQty = ?,deepClearingAmount=?,floorProtectionSqft=?,floorProtectionAmount=? where version = ? and proposalId = ? ",
+      "query": "update version_master set title = ?,finalAmount = ? , status = ? , internalStatus = ?, remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , amount = ?, profit = ? , margin = ?, amountWotax = ?, manufactureAmount = ?, ignoreAndPublishFlag = ?, remarksIgnore = ?,projectHandlingAmount = ?,deepClearingQty = ?,deepClearingAmt=?,floorProtectionSqft=?,floorProtectionAmount=? where version = ? and proposalId = ? ",
       "params": ["title","finalAmount", "status", "internalStatus", "remarks","fromVersion" , "discountAmount" , "discountPercentage","amount","profit","margin", "amountWotax", "manufactureAmount","ignoreAndPublishFlag","remarksIgnore","projectHandlingAmount","deepClearingQty","deepClearingAmount","floorProtectionSqft","floorProtectionAmount","version","proposalId"]
     },
 
@@ -2164,7 +2164,7 @@
       "id": "proposal.version.miscellaneouslist",
       "type": "select",
       "table": "proposal_services",
-      "query": "select 'Project Handling Charges' as title,round(projectHandlingAmount,2) as 'Amount' from  version_master where proposalId= ? and version=? union all select 'Deep Clearing Charges' as title,deepClearingAmount as 'Amount' from  version_master where proposalId=? and version=? union all select 'Floor Protection Charges' as title,floorProtectionAmount as 'Amount' from  version_master where proposalId= ? and version=?",
+      "query": "select 'Project Handling Charges' as title,round(projectHandlingAmount,2) as 'Amount' from  version_master where proposalId= ? and version=? union all select 'Deep Clearing Charges' as title,deepClearingAmt as 'Amount' from  version_master where proposalId=? and version=? union all select 'Floor Protection Charges' as title,floorProtectionAmount as 'Amount' from  version_master where proposalId= ? and version=?",
       "params": ["proposalId","version","proposalId","version","proposalId","version"]
     }
   ]
