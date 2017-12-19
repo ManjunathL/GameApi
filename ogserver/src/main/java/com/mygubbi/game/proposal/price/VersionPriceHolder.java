@@ -1032,7 +1032,9 @@ public class VersionPriceHolder {
                 .put("addonMargin", this.round(addonMargin, 2))
                 .put("projectHandlingAmount", this.round(projectHandlingPrice, 2))
                 .put("deepClearingAmount", this.round(deepClearingPrice, 2))
-                .put("floorProtectionAmount", this.round(floorProtectionPrice, 2));
+                .put("floorProtectionAmount", this.round(floorProtectionPrice, 2))
+                .put("deepClearingQty", this.round(deepClearingQty, 2))
+                .put("floorProtectionSqft", this.round(floorProtectionSqft, 2));
 
     }
 
