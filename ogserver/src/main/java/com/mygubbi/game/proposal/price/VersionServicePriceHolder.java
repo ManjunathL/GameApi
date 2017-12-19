@@ -68,9 +68,9 @@ public class VersionServicePriceHolder {
             System.out.println("Shilpa:: this.totalProductPriceAfterDiscount = "+this.totalProductPriceAfterDiscount);
             System.out.println("Shilpa:: this.projectHandlingRateCard = "+this.projectHandlingRateCard.getRate());
 
-           this.projectHandlingPrice = this.projectHandlingPrice;
-            this.deepClearingPrice = this.deepClearingPrice;
-            this.floorProtectionPrice = this.floorProtectionPrice;
+            this.projectHandlingPrice = this.totalProductPriceAfterDiscount * (this.projectHandlingRateCard.getRate() / 100);
+            this.deepClearingPrice = this.deepClearingRateCard.getRate() * this.deepClearingQuantity;
+            this.floorProtectionPrice = this.floorProtectionRateCard.getRate() * this.floorProtectionSqft;
         }
 
     }
