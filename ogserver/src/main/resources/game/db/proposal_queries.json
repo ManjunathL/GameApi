@@ -2164,7 +2164,7 @@
       "id": "proposal.version.miscellaneouslist",
       "type": "select",
       "table": "proposal_services",
-      "query": "select 'Project Handling Charges' as title,round(projectHandlingAmount,2) as 'Amount' from  version_master where proposalId= ? and version=? union all select 'Deep Clearing Charges' as title,deepClearingAmount as 'Amount' from  version_master where proposalId=? and version=? union all select 'Floor Protection Charges' as title,floorProtectionAmount as 'Amount' from  version_master where proposalId= ? and version=?",
+      "query": "select 'Project Handling Charges' as title,round(projectHandlingAmount,2) as 'amount' from  version_master where proposalId= ? and version=? union all select 'Deep Clearing Charges' as title,deepClearingAmount as 'Amount' from  version_master where proposalId=? and version=? union all select 'Floor Protection Charges' as title,floorProtectionAmount as 'Amount' from  version_master where proposalId= ? and version=?",
       "params": ["proposalId","version","proposalId","version","proposalId","version"]
     }
   ]

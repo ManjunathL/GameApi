@@ -26,7 +26,7 @@ public class ProposalVersion extends JsonObject{
     public static final String AMOUNT= "amount";
     public static final String DEEP_CLEARING_QTY = "deepClearingQty";
     public static final String FLOOR_PROTECTION_SQFT = "floorProtectionSqft";
-    public static final String DEEP_CLEARING_AMT = "floorProtectionAmount";
+    public static final String DEEP_CLEARING_AMT = "deepClearingAmount";
     public static final String FLOOR_PROTECTION_AMT = "floorProtectionAmount";
     public static final String PROJECT_HANDLING_AMT = "projectHandlingAmount";
 

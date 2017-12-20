@@ -101,6 +101,7 @@ public class QuotationPDFCreator
     List<GSTForProducts> scwList=new ArrayList<>();
     List<GSTForProducts> designServiceList=new ArrayList<>();
     String MSCtaxPercentage="18%";
+    double miscCharges=0.0;
 
     List<GSTForProducts> finalMovableList=new ArrayList<>();
     List<GSTForProducts> finalmovableList=new ArrayList<>();
@@ -883,55 +884,93 @@ public class QuotationPDFCreator
                     miscellaneousTable.addCell(Cell4);
                     miscellaneousTable.addCell(Cell5);
 
+                    double val2=quoteData.getTotalCost();
+                    double val3=val2-val2%10;
+
                     if(mscTextChangeDateValue)
                     {
-                        LOG.info("project handling charges " +proposalVersion.getProjectHandlingAmount());
+                        LOG.info("project handling charges " +proposalVersion.getProjectHandlingAmount() + proposalVersion.getDeepClearingAmount()+ " proposal version Floor protection " +proposalVersion.getFloorProtectionAmount());
                         this.createRowAndFillData(miscellaneousTable,"1"," Project Handling Charges",0.0,projectHandlingAmount.getPrice(),proposalVersion.getProjectHandlingAmount());
                         this.createRowAndFillData(miscellaneousTable,"2"," Deep Clearing Charges",proposalVersion.getDeepClearingQty(),deepClearingAmount.getPrice(),proposalVersion.getDeepClearingAmount());
                         this.createRowAndFillData(miscellaneousTable,"3"," Floor Protection Charges",proposalVersion.getFloorProtectionSqft(),floorProtectionAmount.getPrice(),proposalVersion.getFloorProtectionAmount());
                         document.add(miscellaneousTable);
 
-                        double miscCharges=proposalVersion.getProjectHandlingAmount()+proposalVersion.getDeepClearingAmount()+proposalVersion.getFloorProtectionAmount();
+                        miscCharges=proposalVersion.getProjectHandlingAmount()+proposalVersion.getDeepClearingAmount()+proposalVersion.getFloorProtectionAmount();
                         p = new Paragraph("Estimated Cost(C):" +miscCharges,fsize1);
                         p.setAlignment(Element.ALIGN_RIGHT);
                         document.add(p);
 
+                        p = new Paragraph("Estimated Cost(A+B+C):" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() + miscCharges  )) ,fsize1);
+                        p.setAlignment(Element.ALIGN_RIGHT);
+                        document.add(p);
+
+                        if(!(quoteData.discountAmount==0.0))
+                        {
+                            p = new Paragraph("Discount(D):" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
+                            p.setAlignment(Element.ALIGN_RIGHT);
+                            document.add(p);
+                        }
+                        Double val = (quoteData.getTotalCost() + miscCharges) - quoteData.getDiscountAmount();
+
+                        Double res = val - val % 10;
+                        p = new Paragraph("Estimated Cost After Discount (A+B+C-D): " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
+                        p.setAlignment(Element.ALIGN_RIGHT);
+                        document.add(p);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        PdfPTable table2=new PdfPTable(1);
+                        table2.setWidthPercentage(100);
+
+                        p=new Paragraph("In words: " +word.convertNumberToWords(res.intValue()) + " Rupees Only" ,fsize1);
+                        table2.addCell(new Paragraph(p));
+                        document.add(table2);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+
+                    }else
+                    {
+                        p = new Paragraph("Estimated Cost(A+B):" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() + miscCharges  )) ,fsize1);
+                        p.setAlignment(Element.ALIGN_RIGHT);
+                        document.add(p);
+
+                        if(!(quoteData.discountAmount==0.0))
+                        {
+                            p = new Paragraph("Discount(C):" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
+                            p.setAlignment(Element.ALIGN_RIGHT);
+                            document.add(p);
+                        }
+                        Double val = (quoteData.getTotalCost() + miscCharges) - quoteData.getDiscountAmount();
+
+                        Double res = val - val % 10;
+                        p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
+                        p.setAlignment(Element.ALIGN_RIGHT);
+                        document.add(p);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        PdfPTable table2=new PdfPTable(1);
+                        table2.setWidthPercentage(100);
+
+                        p=new Paragraph("In words: " +word.convertNumberToWords(res.intValue()) + " Rupees Only" ,fsize1);
+                        table2.addCell(new Paragraph(p));
+                        document.add(table2);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
                     }
 
-                    double val2=quoteData.getTotalCost();
-                    double val3=val2-val2%10;
 
-        p = new Paragraph("Estimated Cost(A+B):" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() )) ,fsize1);
-        p.setAlignment(Element.ALIGN_RIGHT);
-        document.add(p);
 
-            if(!(quoteData.discountAmount==0.0))
-            {
-                p = new Paragraph("Discount(C):" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
-                p.setAlignment(Element.ALIGN_RIGHT);
-                document.add(p);
-            }
-            Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
-
-            Double res = val - val % 10;
-            p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
-            p.setAlignment(Element.ALIGN_RIGHT);
-            document.add(p);
-
-        p = new Paragraph("      ");
-        p.setAlignment(Element.ALIGN_LEFT);
-        document.add(p);
-
-        PdfPTable table2=new PdfPTable(1);
-        table2.setWidthPercentage(100);
-
-            p=new Paragraph("In words: " +word.convertNumberToWords(res.intValue()) + " Rupees Only" ,fsize1);
-            table2.addCell(new Paragraph(p));
-        document.add(table2);
-
-        p = new Paragraph("      ");
-        p.setAlignment(Element.ALIGN_LEFT);
-        document.add(p);
 
         p=new Paragraph("* The quoted price is an all inclusive price including design, consultancy and GST charges.",fsize);
         p.setAlignment(Element.ALIGN_LEFT);
@@ -2180,7 +2219,7 @@ public class QuotationPDFCreator
 
             PdfPCell cell3 = new PdfPCell();
 
-            Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(total)), fsize);
+            Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(round(total,2))), fsize);
             Pamt.setAlignment(Element.ALIGN_RIGHT);
             cell3.addElement(Pamt);
             tabname.addCell(cell3);
