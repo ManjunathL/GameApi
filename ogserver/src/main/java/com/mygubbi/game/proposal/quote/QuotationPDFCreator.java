@@ -889,10 +889,13 @@ public class QuotationPDFCreator
 
                     if(mscTextChangeDateValue)
                     {
+                        String projectHandling="";
+                        projectHandling=projectHandlingAmount.getPrice()+"%";
+                        LOG.info("Value for project handling Amount " +projectHandling);
                         LOG.info("project handling charges " +proposalVersion.getProjectHandlingAmount() + proposalVersion.getDeepClearingAmount()+ " proposal version Floor protection " +proposalVersion.getFloorProtectionAmount());
-                        this.createRowAndFillData(miscellaneousTable,"1"," Project Handling Charges",0.0,projectHandlingAmount.getPrice(),proposalVersion.getProjectHandlingAmount());
-                        this.createRowAndFillData(miscellaneousTable,"2"," Deep Clearing Charges",proposalVersion.getDeepClearingQty(),deepClearingAmount.getPrice(),proposalVersion.getDeepClearingAmount());
-                        this.createRowAndFillData(miscellaneousTable,"3"," Floor Protection Charges",proposalVersion.getFloorProtectionSqft(),floorProtectionAmount.getPrice(),proposalVersion.getFloorProtectionAmount());
+                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"1"," Project Handling Charges",proposalVersion.getProjectHandlingQty(),projectHandling,proposalVersion.getProjectHandlingAmount());
+                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," Deep Clearing Charges",proposalVersion.getDeepClearingQty(),String.valueOf(deepClearingAmount.getPrice()),proposalVersion.getDeepClearingAmount());
+                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"3"," Floor Protection Charges",proposalVersion.getFloorProtectionSqft(),String.valueOf(floorProtectionAmount.getPrice()),proposalVersion.getFloorProtectionAmount());
                         document.add(miscellaneousTable);
 
                         miscCharges=proposalVersion.getProjectHandlingAmount()+proposalVersion.getDeepClearingAmount()+proposalVersion.getFloorProtectionAmount();
@@ -2223,6 +2226,43 @@ public class QuotationPDFCreator
             Pamt.setAlignment(Element.ALIGN_RIGHT);
             cell3.addElement(Pamt);
             tabname.addCell(cell3);
+
+    }
+    private void createRowAndFillDataForMiscellaneous(PdfPTable tabname,String index, String title, Double quantity, String amount, Double total)
+    {
+        LOG.info("create row and fill data " +total);
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        cell=new PdfPCell(new Paragraph(title,fsize));
+        tabname.addCell(cell);
+
+        PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+
+        PdfPCell cell4 = new PdfPCell();
+        Pindex = new Paragraph(this.getRoundOffValue(amount), fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
+        PdfPCell cell3 = new PdfPCell();
+
+        Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(round(total,0))), fsize);
+        Pamt.setAlignment(Element.ALIGN_RIGHT);
+        cell3.addElement(Pamt);
+        tabname.addCell(cell3);
 
     }
 

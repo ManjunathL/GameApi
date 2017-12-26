@@ -29,6 +29,7 @@ public class ProposalVersion extends JsonObject{
     public static final String DEEP_CLEARING_AMT = "deepClearingAmount";
     public static final String FLOOR_PROTECTION_AMT = "floorProtectionAmount";
     public static final String PROJECT_HANDLING_AMT = "projectHandlingAmount";
+    public static final String PROJECT_HANDLING_QTY = "projectHandlingQty";
 
     public ProposalVersion() {}
 
@@ -102,6 +103,13 @@ public class ProposalVersion extends JsonObject{
         return this;
     }
 
+    public double getProjectHandlingQty() { return  this.getDouble(PROJECT_HANDLING_QTY);}
+
+    public  ProposalVersion setProjectHAndlingQty(double projectHandlingQty)
+    {
+        this.put(PROJECT_HANDLING_QTY,projectHandlingQty);
+        return this;
+    }
     public double getDiscountAmount() {
         return this.getDouble(DISCOUNT_AMOUNT);
     }
@@ -119,6 +127,7 @@ public class ProposalVersion extends JsonObject{
         this.put(DISCOUNT_PERCENTAGE, discountPercentage);
         return this;
     }
+
 
     public double getDeepClearingQty() {
         return this.getDouble(DEEP_CLEARING_QTY);
