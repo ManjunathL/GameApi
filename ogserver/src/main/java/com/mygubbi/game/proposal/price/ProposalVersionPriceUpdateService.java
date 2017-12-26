@@ -196,6 +196,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             totalProposalVersionProductCost += totalProductCost;
                         }
 
+                        totalProposalVersionProductCost = proposalVersion.getDeepClearingAmount() + proposalVersion.getFloorProtectionAmount() + proposalVersion.getProjectHandlingAmount();
                         proposalVersion.setAmount(totalProposalVersionProductCost);
 
                         double discountAmountNew = (int)proposalVersion.getAmount() * (proposalVersion.getDiscountPercentage()/100);
