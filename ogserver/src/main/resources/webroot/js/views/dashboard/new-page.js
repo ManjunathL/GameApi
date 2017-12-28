@@ -156,14 +156,14 @@ define([
                 SlyUtil.create($brand_wrap, '#brand-frame', '.brand-next', '.brand-prev').init();
             }
 
-            /*var gallerySlider = $('.bxslider').bxSlider({
+            var gallerySlider = $('.bxslider').bxSlider({
                 mode: 'fade',
                 auto: 'true',
-                pause: 8000,
+                pause: 5000,
                 speed: 2000,
                 nextSelector: '.slider_right',
                 prevSelector: '.slider_left'
-            });*/
+            });
             $('.slider-move').click(function (e) {
                 e.preventDefault();
                 var number = $(this).data('number');
